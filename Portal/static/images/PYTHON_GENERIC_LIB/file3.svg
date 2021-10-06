@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="844" height="540" viewBox="0 0 844 540">
+    <defs>
+        <style>
+            .cls-1, .cls-13 {
+                fill: #e8e8e8;
+            }
+
+            .cls-1 {
+                stroke: #cacace;
+                stroke-linejoin: round;
+                stroke-width: 1px;
+            }
+
+            .cls-14, .cls-2, .cls-9 {
+                fill: #fff;
+            }
+
+            .cls-3 {
+                fill: #acacac;
+            }
+
+            .cls-4 {
+                fill: #c5cede;
+            }
+
+            .cls-5 {
+                fill: #3875d6;
+            }
+
+            .cls-14, .cls-15, .cls-16, .cls-6, .cls-7 {
+                font-size: 24px;
+            }
+
+            .cls-7 {
+                fill: #4d4a55;
+            }
+
+            .cls-14, .cls-15, .cls-16, .cls-7 {
+                font-family: "Myriad Pro";
+            }
+
+            .cls-8 {
+                fill: #a0a0a0;
+            }
+
+            .cls-12, .cls-17, .cls-8, .cls-9 {
+                fill-rule: evenodd;
+            }
+
+            .cls-10, .cls-11 {
+                font-size: 23px;
+            }
+
+            .cls-11 {
+                fill: #bebdbd;
+                font-family: "Open Sans";
+            }
+
+            .cls-12 {
+                fill: #bd9662;
+            }
+
+            .cls-15 {
+                fill: #747474;
+            }
+
+            .cls-16 {
+                fill: #52639b;
+            }
+
+            .cls-17 {
+                fill: #919191;
+            }
+        </style>
+    </defs>
+    <rect width="843" height="540" class="cls-1" />
+    <rect x="1" y="94" width="365" height="445" class="cls-2" />
+    <rect x="366" y="65" width="477" height="474" class="cls-3" />
+    <rect x="1" y="65" width="365" height="28" class="cls-4" />
+    <rect x="1" y="94" width="365" height="26" class="cls-5" />
+    <text transform="translate(31 53) scale(0.5 0.5)" class="cls-6"><tspan class="cls-7">Tspublicrest...</tspan></text>
+    <text transform="translate(39 83) scale(0.5 0.5)" class="cls-6"><tspan class="cls-7">project</tspan></text>
+    <path d="M97.694,83.000 L94.771,77.937 L100.617,77.937 L97.694,83.000 Z" class="cls-8" />
+    <path d="M10.694,111.000 L7.771,105.937 L13.617,105.937 L10.694,111.000 Z" class="cls-9" />
+    <path d="M36.000,129.009 L31.000,132.010 L31.000,126.008 L36.000,129.009 Z" class="cls-8" />
+    <path d="M14.000,215.009 L9.000,218.010 L9.000,212.008 L14.000,215.009 Z" class="cls-8" />
+    <text transform="translate(195 22) scale(0.5 0.5)" class="cls-10"><tspan class="cls-11">Code</tspan></text>
+    <text transform="translate(11 22) scale(0.5 0.5)" class="cls-10"><tspan class="cls-11">File</tspan></text>
+    <text transform="translate(395 22) scale(0.5 0.5)" class="cls-10"><tspan class="cls-11">VCS</tspan></text>
+    <text transform="translate(434 22) scale(0.5 0.5)" class="cls-10"><tspan class="cls-11">Window</tspan></text>
+    <text transform="translate(497 22) scale(0.5 0.5)" class="cls-10"><tspan class="cls-11">Help</tspan></text>
+    <text transform="translate(351 22) scale(0.5 0.5)" class="cls-10"><tspan class="cls-11">Tools</tspan></text>
+    <text transform="translate(307 22) scale(0.5 0.5)" class="cls-10"><tspan class="cls-11">Run</tspan></text>
+    <text transform="translate(44 22) scale(0.5 0.5)" class="cls-10"><tspan class="cls-11">Edit</tspan></text>
+    <text transform="translate(82 22) scale(0.5 0.5)" class="cls-10"><tspan class="cls-11">View</tspan></text>
+    <text transform="translate(128 22) scale(0.5 0.5)" class="cls-10"><tspan class="cls-11">Navigate</tspan></text>
+    <text transform="translate(241 22) scale(0.5 0.5)" class="cls-10"><tspan class="cls-11">Refactor</tspan></text>
+    <path d="M26.000,54.000 L12.000,54.000 L12.000,42.000 L18.000,42.000 L20.000,44.000 L26.000,44.000 L26.000,54.000 Z" class="cls-12" />
+    <rect x="14" y="46" width="10" height="6" class="cls-13" />
+    <text transform="translate(39 113) scale(0.5 0.5)" class="cls-6"><tspan class="cls-14">Tspublicrest...</tspan></text>
+    <text transform="translate(142 113) scale(0.5 0.5)" class="cls-6"><tspan class="cls-14">C:\Users\Username\Desktop\Tspublicrest...</tspan></text>
+    <path d="M34.000,114.000 L20.000,114.000 L20.000,102.000 L26.000,102.000 L28.000,104.000 L34.000,104.000 L34.000,114.000 Z" class="cls-12" />
+    <rect x="22" y="106" width="10" height="6" class="cls-5" />
+    <text transform="translate(64 133) scale(0.5 0.5)" class="cls-6"><tspan class="cls-7">tspublicrestapi</tspan></text>
+    <path d="M59.000,135.000 L45.000,135.000 L45.000,123.000 L51.000,123.000 L53.000,125.000 L59.000,125.000 L59.000,135.000 Z" class="cls-12" />
+    <rect x="47" y="127" width="10" height="6" class="cls-2" />
+    <text transform="translate(64 155) scale(0.5 0.5)" class="cls-6"><tspan class="cls-7">LICENSE</tspan></text>
+    <text transform="translate(64 178) scale(0.5 0.5)" class="cls-6"><tspan class="cls-7">README.md</tspan></text>
+    <text transform="translate(64 198) scale(0.5 0.5)" class="cls-6"><tspan class="cls-7">requirements.txt</tspan></text>
+    <text transform="translate(44 219) scale(0.5 0.5)" class="cls-6"><tspan class="cls-7">External Libraries</tspan></text>
+    <text transform="translate(623 383) scale(0.5 0.5)" class="cls-6"><tspan class="cls-15">Search Everywhere</tspan></text>
+    <text transform="translate(623 412) scale(0.5 0.5)" class="cls-6"><tspan class="cls-15">Go to File</tspan></text>
+    <text transform="translate(623 439) scale(0.5 0.5)" class="cls-6"><tspan class="cls-15">recent Files</tspan></text>
+    <text transform="translate(623 466) scale(0.5 0.5)" class="cls-6"><tspan class="cls-15">Navigation Bar</tspan></text>
+    <text transform="translate(623 493) scale(0.5 0.5)" class="cls-6"><tspan class="cls-15">Drop files here to open</tspan></text>
+    <text transform="translate(725 383) scale(0.5 0.5)" class="cls-6"><tspan class="cls-16">Double Shift</tspan></text>
+    <text transform="translate(678 412) scale(0.5 0.5)" class="cls-6"><tspan class="cls-16">Ctrl+Shift+N</tspan></text>
+    <text transform="translate(685 439) scale(0.5 0.5)" class="cls-6"><tspan class="cls-16">Ctrl+E</tspan></text>
+    <text transform="translate(702 466) scale(0.5 0.5)" class="cls-6"><tspan class="cls-16">Alt+Home</tspan></text>
+    <path d="M58.000,147.727 L58.000,160.000 L47.000,160.000 L47.000,145.000 L55.250,145.000 L58.000,147.727 Z" class="cls-17" />
+    <path d="M56.625,149.091 L53.875,149.091 L53.875,146.364 L48.375,146.364 L48.375,158.636 L56.625,158.636 L56.625,149.091 Z" class="cls-9" />
+    <path d="M58.000,167.727 L58.000,180.000 L47.000,180.000 L47.000,165.000 L55.250,165.000 L58.000,167.727 Z" class="cls-17" />
+    <path d="M56.625,169.091 L53.875,169.091 L53.875,166.364 L48.375,166.364 L48.375,178.636 L56.625,178.636 L56.625,169.091 Z" class="cls-9" />
+    <path d="M58.000,187.727 L58.000,200.000 L47.000,200.000 L47.000,185.000 L55.250,185.000 L58.000,187.727 Z" class="cls-17" />
+    <path d="M56.625,189.091 L53.875,189.091 L53.875,186.364 L48.375,186.364 L48.375,198.636 L56.625,198.636 L56.625,189.091 Z" class="cls-9" />
+    <path d="M0.000,33.000 L0.000,32.000 L851.000,32.000 L851.000,33.000 L0.000,33.000 Z" class="cls-8" />
+    <path d="M0.000,65.000 L0.000,64.000 L851.000,64.000 L851.000,65.000 L0.000,65.000 Z" class="cls-8" />
+    <path d="M0.000,94.000 L0.000,93.000 L366.000,93.000 L366.000,94.000 L0.000,94.000 Z" class="cls-8" />
+    <path d="M365.000,64.000 L366.000,64.000 L366.000,539.000 L365.000,539.000 L365.000,64.000 Z" class="cls-8" />
+    <path d="M129.553,37.224 L130.447,36.776 L136.447,48.776 L135.553,49.224 L129.553,37.224 Z" class="cls-8" />
+    <path d="M135.578,48.732 L136.422,49.268 L129.422,60.268 L128.578,59.732 L135.578,48.732 Z" class="cls-8" />
+    <path d="M115.000,64.000 L116.000,64.000 L116.000,93.000 L115.000,93.000 L115.000,64.000 Z" class="cls-8" />
+</svg>

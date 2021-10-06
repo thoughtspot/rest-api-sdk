@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="349" height="152" viewBox="0 0 349 152">
+    <defs>
+        <style>
+            .cls-1 {
+                fill: #e8e8e8;
+                stroke: #cacace;
+            }
+
+            .cls-1, .cls-4, .cls-5, .cls-7, .cls-8 {
+                stroke-linejoin: round;
+                stroke-width: 1px;
+            }
+
+            .cls-10, .cls-14, .cls-2, .cls-4, .cls-5 {
+                fill: #fff;
+            }
+
+            .cls-3 {
+                fill: #3a3935;
+            }
+
+            .cls-14, .cls-3, .cls-6 {
+                fill-rule: evenodd;
+            }
+
+            .cls-4 {
+                stroke: #437ad3;
+            }
+
+            .cls-5, .cls-7, .cls-8 {
+                stroke: #8b8b8b;
+            }
+
+            .cls-6, .cls-7 {
+                fill: #447cd6;
+            }
+
+            .cls-8 {
+                fill: #e5e5e5;
+            }
+
+            .cls-10, .cls-11, .cls-9 {
+                font-size: 13.333px;
+            }
+
+            .cls-10, .cls-11, .cls-13 {
+                font-family: "Myriad Pro";
+            }
+
+            .cls-11 {
+                fill: #1c1c1c;
+            }
+
+            .cls-12, .cls-13 {
+                font-size: 24px;
+            }
+
+            .cls-13 {
+                fill: #4d4a55;
+            }
+        </style>
+    </defs>
+    <rect width="349" height="152" class="cls-1" />
+    <rect x="1" y="1" width="347" height="30" class="cls-2" />
+    <path d="M340.582,11.806 L337.726,14.701 L340.582,17.596 L340.582,17.596 C340.712,17.728 340.793,17.911 340.793,18.113 C340.793,18.516 340.470,18.844 340.072,18.844 C339.872,18.844 339.692,18.762 339.562,18.629 L339.562,18.629 L336.706,15.735 L333.851,18.629 L333.851,18.629 C333.720,18.762 333.540,18.844 333.341,18.844 C332.943,18.844 332.620,18.516 332.620,18.113 C332.620,17.911 332.700,17.728 332.831,17.596 L332.831,17.596 L335.686,14.701 L332.831,11.806 L332.831,11.806 C332.700,11.674 332.620,11.491 332.620,11.289 C332.620,10.885 332.943,10.558 333.341,10.558 C333.540,10.558 333.720,10.640 333.851,10.772 L333.851,10.772 L336.706,13.667 L339.562,10.772 L339.562,10.772 C339.692,10.640 339.872,10.558 340.072,10.558 C340.470,10.558 340.793,10.885 340.793,11.289 C340.793,11.491 340.712,11.674 340.582,11.806 L340.582,11.806 Z" class="cls-3" />
+    <rect x="58" y="40" width="250" height="25" rx="3" ry="3" class="cls-4" />
+    <rect x="58" y="70" width="274" height="25" rx="3" ry="3" class="cls-5" />
+    <path d="M314.000,70.000 C314.000,70.000 324.888,70.000 329.728,70.000 C331.516,70.000 332.000,70.537 332.000,72.123 C332.000,76.787 332.000,87.896 332.000,92.710 C332.000,94.359 331.402,95.000 329.526,95.000 C324.593,95.000 314.000,95.000 314.000,95.000 L314.000,70.000 Z" class="cls-6" />
+    <rect x="200" y="115" width="59" height="25" rx="3" ry="3" class="cls-7" />
+    <rect x="272" y="115" width="59" height="25" rx="3" ry="3" class="cls-8" />
+    <text x="221" y="132" class="cls-9"><tspan class="cls-10">OK</tspan></text>
+    <text x="283" y="132" class="cls-9"><tspan class="cls-11">Cancel</tspan></text>
+    <text transform="translate(11 21) scale(0.5 0.5)" class="cls-12"><tspan class="cls-13">New Python file</tspan></text>
+    <text transform="translate(14 57) scale(0.5 0.5)" class="cls-12"><tspan class="cls-13">Name:</tspan></text>
+    <text transform="translate(66 57) scale(0.5 0.5)" class="cls-12"><tspan class="cls-13">testsdk</tspan></text>
+    <text transform="translate(66 87) scale(0.5 0.5)" class="cls-12"><tspan class="cls-13">Python file</tspan></text>
+    <text transform="translate(14 87) scale(0.5 0.5)" class="cls-12"><tspan class="cls-13">Kind</tspan></text>
+    <path d="M323.694,85.000 L320.771,79.937 L326.617,79.937 L323.694,85.000 Z" class="cls-14" />
+</svg>

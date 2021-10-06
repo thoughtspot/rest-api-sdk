@@ -1,0 +1,238 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="1020" height="690" viewBox="0 0 850 575">
+  <defs>
+    <style>
+      .cls-1, .cls-13, .cls-7, .cls-9 {
+        fill: #f0f0f0;
+      }
+
+      .cls-1, .cls-13, .cls-7, .cls-8 {
+        stroke: #dcdcdc;
+      }
+
+      .cls-1, .cls-12, .cls-13, .cls-15, .cls-18, .cls-25, .cls-27, .cls-7, .cls-8 {
+        stroke-linejoin: round;
+      }
+
+      .cls-1 {
+        stroke-width: 2px;
+      }
+
+      .cls-12, .cls-15, .cls-2, .cls-27, .cls-8 {
+        fill: #fff;
+      }
+
+      .cls-11, .cls-12, .cls-15, .cls-16, .cls-18, .cls-2, .cls-22, .cls-24, .cls-25, .cls-26, .cls-27, .cls-28, .cls-29, .cls-3, .cls-7, .cls-8, .cls-9 {
+        fill-rule: evenodd;
+      }
+
+      .cls-3 {
+        fill: #cde8ff;
+      }
+
+      .cls-10, .cls-4, .cls-5, .cls-6 {
+        font-size: 19px;
+      }
+
+      .cls-21, .cls-5 {
+        fill: #1f1f1f;
+      }
+
+      .cls-10, .cls-5, .cls-6 {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      .cls-6 {
+        fill: #e1e1e1;
+      }
+
+      .cls-12, .cls-13, .cls-15, .cls-18, .cls-25, .cls-27, .cls-7, .cls-8 {
+        stroke-width: 1px;
+      }
+
+      .cls-10, .cls-24 {
+        fill: #cacace;
+      }
+
+      .cls-11 {
+        fill: #141414;
+      }
+
+      .cls-12 {
+        stroke: #141414;
+      }
+
+      .cls-14 {
+        fill: #fdfdff;
+      }
+
+      .cls-15 {
+        stroke: #d8d8d8;
+      }
+
+      .cls-16 {
+        fill: #dcdcdc;
+      }
+
+      .cls-17 {
+        fill: #ddd;
+      }
+
+      .cls-18, .cls-25 {
+        fill: #f6f6f6;
+      }
+
+      .cls-18 {
+        stroke: #d1d2de;
+        filter: url(#drop-shadow-1);
+      }
+
+      .cls-19, .cls-29 {
+        fill: #c9def5;
+      }
+
+      .cls-20, .cls-21, .cls-23 {
+        font-size: 32.869px;
+      }
+
+      .cls-21, .cls-23 {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      .cls-22 {
+        fill: #5c5c5c;
+      }
+
+      .cls-23, .cls-26 {
+        fill: #cdcdd1;
+      }
+
+      .cls-25 {
+        stroke: #cdcdd1;
+      }
+
+      .cls-27 {
+        stroke: #cacace;
+      }
+
+      .cls-28 {
+        fill: #3aa3e0;
+      }
+    </style>
+
+    <filter id="drop-shadow-1" filterUnits="userSpaceOnUse">
+      <feOffset dy="2" in="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="1.414" result="dropBlur"/>
+      <feFlood flood-opacity="0.27"/>
+      <feComposite operator="in" in2="dropBlur" result="dropShadowComp"/>
+      <feComposite in="SourceGraphic" result="shadowed"/>
+    </filter>
+  </defs>
+  <rect width="850" height="575" class="cls-1"/>
+  <path d="M1.133,1.134 L848.867,1.134 L848.867,41.962 L1.133,41.962 L1.133,1.134 Z" class="cls-2"/>
+  <path d="M671.011,44.709 L712.006,44.709 L712.006,60.693 L671.011,60.693 L671.011,44.709 Z" class="cls-3"/>
+  <text transform="translate(682 56) scale(0.53 0.53)" class="cls-4"><tspan class="cls-5">Java</tspan></text>
+  <text transform="translate(724 56) scale(0.53 0.53)" class="cls-4"><tspan class="cls-6">Debug</tspan></text>
+  <path d="M215.032,62.288 L657.847,62.288 L657.847,455.226 L215.032,455.226 L215.032,62.288 Z" class="cls-7"/>
+  <path d="M1.133,25.518 L29.467,25.518 L29.467,39.694 L1.133,39.694 L1.133,25.518 Z" class="cls-3"/>
+  <path d="M0.532,60.162 L83.658,60.162 L83.753,75.069 L212.899,75.069 L212.899,557.963 L0.532,557.963 L0.532,60.162 Z" class="cls-8"/>
+  <path d="M660.520,25.556 L660.520,25.023 L850.000,25.023 L850.000,25.556 L660.520,25.556 Z" class="cls-9"/>
+  <text transform="translate(8 70) scale(0.53 0.53)" class="cls-4"><tspan class="cls-5">Package Explorer</tspan></text>
+  <text transform="translate(8 36) scale(0.53 0.53)" class="cls-4"><tspan class="cls-5">File</tspan></text>
+  <text transform="translate(35 36) scale(0.53 0.53)" class="cls-4"><tspan class="cls-10">Edit</tspan></text>
+  <text transform="translate(63 36) scale(0.53 0.53)" class="cls-4"><tspan class="cls-10">Source</tspan></text>
+  <text transform="translate(103 36) scale(0.53 0.53)" class="cls-4"><tspan class="cls-10">Refactor</tspan></text>
+  <text transform="translate(19 14) scale(0.53 0.53)" class="cls-4"><tspan class="cls-5">Java - Eclipse</tspan></text>
+  <text transform="translate(150 36) scale(0.53 0.53)" class="cls-4"><tspan class="cls-10">Navigate</tspan></text>
+  <text transform="translate(198 36) scale(0.53 0.53)" class="cls-4"><tspan class="cls-10">Search</tspan></text>
+  <text transform="translate(238 36) scale(0.53 0.53)" class="cls-4"><tspan class="cls-10">Project</tspan></text>
+  <text transform="translate(278 36) scale(0.53 0.53)" class="cls-4"><tspan class="cls-10">Run</tspan></text>
+  <text transform="translate(306 36) scale(0.53 0.53)" class="cls-4"><tspan class="cls-10">Window</tspan></text>
+  <text transform="translate(355 36) scale(0.53 0.53)" class="cls-4"><tspan class="cls-10">Help</tspan></text>
+  <path d="M744.635,12.777 L753.667,12.777 L753.667,13.840 L744.635,13.840 L744.635,12.777 Z" class="cls-11"/>
+  <path d="M823.425,17.611 L832.153,8.281 L832.930,9.009 L824.202,18.339 L823.425,17.611 Z" class="cls-11"/>
+  <path d="M832.964,17.906 L824.175,8.514 L823.392,9.247 L832.181,18.638 L832.964,17.906 Z" class="cls-11"/>
+  <path d="M784.532,9.587 L791.987,9.587 L791.987,16.498 L784.532,16.498 L784.532,9.587 Z" class="cls-12"/>
+  <path d="M659.990,62.288 L849.469,62.288 L849.469,455.226 L659.990,455.226 L659.990,62.288 Z" class="cls-7"/>
+  <rect x="215.031" y="490.875" width="634.438" height="67.094" class="cls-13"/>
+  <path d="M215.032,473.301 L849.469,473.301 L849.469,490.880 L215.032,490.880 L215.032,473.301 Z" class="cls-7"/>
+  <path d="M215.032,456.821 L849.469,456.821 L849.469,474.364 L215.032,474.364 L215.032,456.821 Z" class="cls-7"/>
+  <rect x="401" y="458" width="54" height="17" class="cls-14"/>
+  <path d="M575.178,44.178 L642.771,44.178 L642.771,60.693 L575.178,60.693 L575.178,44.178 Z" class="cls-15"/>
+  <text transform="translate(673 77) scale(0.53 0.53)" class="cls-4"><tspan class="cls-10">Outline</tspan></text>
+  <text transform="translate(673 95) scale(0.53 0.53)" class="cls-4"><tspan class="cls-10">An Outline is not available</tspan></text>
+  <text transform="translate(221 469) scale(0.53 0.53)" class="cls-4"><tspan class="cls-10">Problems</tspan></text>
+  <text transform="translate(227 486) scale(0.53 0.53)" class="cls-4"><tspan class="cls-10">No Consoles to display at this time.</tspan></text>
+  <text transform="translate(280 469) scale(0.53 0.53)" class="cls-4"><tspan class="cls-10">Javadoc</tspan></text>
+  <text transform="translate(338 469) scale(0.53 0.53)" class="cls-4"><tspan class="cls-10">Declaration</tspan></text>
+  <text transform="translate(411 469) scale(0.53 0.53)" class="cls-4"><tspan class="cls-10">Console</tspan></text>
+  <path d="M267.721,457.338 L268.253,457.338 L268.253,473.843 L267.721,473.843 L267.721,457.338 Z" class="cls-16"/>
+  <path d="M325.736,457.338 L326.268,457.338 L326.268,473.843 L325.736,473.843 L325.736,457.338 Z" class="cls-16"/>
+  <path d="M400.445,457.338 L400.977,457.338 L400.977,473.843 L400.445,473.843 L400.445,457.338 Z" class="cls-16"/>
+  <path d="M455.264,457.338 L455.796,457.338 L455.796,473.843 L455.264,473.843 L455.264,457.338 Z" class="cls-16"/>
+  <text transform="translate(718 77) scale(0.53 0.53)" class="cls-4"><tspan class="cls-10">Task List</tspan></text>
+  <circle cx="10.203" cy="54.703" r="0.578" class="cls-17"/>
+  <g>
+    <g style="fill: #f6f6f6; filter: url(#drop-shadow-1)">
+      <path d="M237.000,43.998 L237.000,318.990 L0.993,318.990 L0.993,44.096 L237.000,43.998 Z" id="path-1" style="stroke: inherit; filter: none; fill: inherit" class="cls-18"/>
+    </g>
+    <use xlink:href="#path-1" style="stroke: #d1d2de; filter: none; fill: none"/>
+    <rect x="2" y="45" width="233" height="19" class="cls-19"/>
+    <text transform="translate(17 58) scale(0.34 0.34)" class="cls-20"><tspan class="cls-21">New</tspan></text>
+    <text transform="translate(159 58) scale(0.34 0.34)" class="cls-20"><tspan class="cls-21">Alt+Shift+N</tspan></text>
+    <path d="M227.334,50.007 L232.007,54.000 L227.334,57.994 L226.008,56.861 L229.355,54.000 L226.008,51.140 L227.334,50.007 Z" class="cls-22"/>
+    <text transform="translate(17 76) scale(0.34 0.34)" class="cls-20"><tspan class="cls-23">Open File...</tspan></text>
+    <text transform="translate(17 97) scale(0.34 0.34)" class="cls-20"><tspan class="cls-23">Close</tspan></text>
+    <text transform="translate(183 97) scale(0.34 0.34)" class="cls-20"><tspan class="cls-23">Ctrl+W</tspan></text>
+    <text transform="translate(17 116) scale(0.34 0.34)" class="cls-20"><tspan class="cls-23">Save</tspan></text>
+    <text transform="translate(188 116) scale(0.34 0.34)" class="cls-20"><tspan class="cls-23">Ctrl+S</tspan></text>
+    <text transform="translate(17 135) scale(0.34 0.34)" class="cls-20"><tspan class="cls-23">Revert</tspan></text>
+    <text transform="translate(17 154) scale(0.34 0.34)" class="cls-20"><tspan class="cls-23">Move</tspan></text>
+    <text transform="translate(17 173) scale(0.34 0.34)" class="cls-20"><tspan class="cls-23">Rename</tspan></text>
+    <text transform="translate(208 173) scale(0.34 0.34)" class="cls-20"><tspan class="cls-23">F2</tspan></text>
+    <text transform="translate(17 192) scale(0.34 0.34)" class="cls-20"><tspan class="cls-23">Convert Line Delimiters To</tspan></text>
+    <text transform="translate(17 212) scale(0.34 0.34)" class="cls-20"><tspan class="cls-23">Print...</tspan></text>
+    <text transform="translate(187 212) scale(0.34 0.34)" class="cls-20"><tspan class="cls-23">Ctrl+P</tspan></text>
+    <text transform="translate(17 232) scale(0.34 0.34)" class="cls-20"><tspan class="cls-23">Switch Workspace</tspan></text>
+    <text transform="translate(17 251) scale(0.34 0.34)" class="cls-20"><tspan class="cls-23">Restart</tspan></text>
+    <text transform="translate(17 270) scale(0.34 0.34)" class="cls-20"><tspan class="cls-23">Import...</tspan></text>
+    <text transform="translate(17 291) scale(0.34 0.34)" class="cls-20"><tspan class="cls-23">Export...</tspan></text>
+    <text transform="translate(17 312) scale(0.34 0.34)" class="cls-20"><tspan class="cls-23">Exit</tspan></text>
+    <path d="M11.528,210.458 L10.289,210.458 L10.289,210.086 L10.289,209.962 L10.289,209.341 L10.289,208.969 L10.289,208.597 L5.578,208.597 L5.578,208.969 L5.578,209.341 L5.578,209.962 L5.578,210.086 L5.578,210.458 L4.339,210.458 C4.133,210.458 3.967,210.291 3.967,210.086 L3.967,206.612 C3.967,206.407 4.133,206.240 4.339,206.240 L11.528,206.240 C11.733,206.240 11.900,206.407 11.900,206.612 L11.900,210.086 C11.900,210.291 11.733,210.458 11.528,210.458 ZM5.082,206.985 C4.877,206.985 4.710,207.151 4.710,207.357 C4.710,207.562 4.877,207.729 5.082,207.729 C5.288,207.729 5.454,207.562 5.454,207.357 C5.454,207.151 5.288,206.985 5.082,206.985 ZM9.917,205.868 L5.950,205.868 L5.950,205.868 L5.950,205.496 L5.950,205.496 L5.950,204.752 C5.950,204.700 5.960,204.652 5.979,204.607 C6.036,204.473 6.168,204.380 6.322,204.380 L9.545,204.380 C9.552,204.380 9.559,204.381 9.567,204.382 C9.584,204.383 9.602,204.384 9.619,204.387 C9.619,204.387 9.619,204.387 9.619,204.387 C9.661,204.396 9.699,204.412 9.735,204.434 C9.735,204.434 9.735,204.434 9.735,204.434 C9.735,204.434 9.736,204.434 9.736,204.434 C9.761,204.449 9.785,204.466 9.805,204.487 C9.806,204.487 9.806,204.487 9.806,204.487 L9.806,204.488 C9.822,204.503 9.837,204.521 9.850,204.540 C9.850,204.540 9.851,204.541 9.852,204.542 C9.892,204.601 9.915,204.671 9.916,204.748 C9.916,204.748 9.916,204.748 9.916,204.748 L9.917,204.748 L9.917,205.868 L9.917,205.868 L9.917,205.868 ZM9.917,209.714 L9.917,211.574 L9.917,211.698 L9.917,211.946 C9.917,212.152 9.750,212.319 9.545,212.319 L6.322,212.319 C6.116,212.319 5.950,212.152 5.950,211.946 L5.950,211.698 L5.950,211.574 L5.950,209.714 L5.950,208.969 L9.917,208.969 L9.917,209.714 ZM9.173,209.714 L6.694,209.714 L6.694,210.086 L9.173,210.086 L9.173,209.714 ZM9.173,210.458 L6.694,210.458 L6.694,210.830 L9.173,210.830 L9.173,210.458 ZM9.173,211.202 L6.694,211.202 L6.694,211.574 L9.173,211.574 L9.173,211.202 Z" class="cls-24"/>
+    <path d="M11.900,114.997 C11.900,115.210 11.733,115.382 11.528,115.382 L4.339,115.382 C4.133,115.382 3.967,115.210 3.967,114.997 L3.967,107.827 C3.967,107.615 4.133,107.443 4.339,107.443 L4.710,107.443 L5.082,107.443 L5.454,107.443 L5.454,107.827 L5.454,107.955 L5.454,107.955 L5.454,109.364 L5.454,109.364 L5.454,109.746 L5.454,110.516 C5.454,110.935 5.778,111.274 6.180,111.284 L9.439,111.284 C9.841,111.274 10.165,110.935 10.165,110.516 L10.165,109.746 L10.165,109.364 L10.165,109.364 L10.165,108.211 L10.165,107.955 L10.165,107.955 L10.165,107.827 L10.165,107.443 L10.289,107.443 L10.412,107.443 L10.412,107.443 C10.515,107.443 10.608,107.486 10.675,107.555 L10.675,107.555 L11.791,108.708 L11.791,108.708 C11.858,108.777 11.900,108.873 11.900,108.979 L11.900,114.997 ZM9.793,110.516 C9.793,110.729 9.626,110.901 9.421,110.901 L8.925,110.901 L8.925,110.900 L6.694,110.900 L6.694,110.901 L6.198,110.901 C5.993,110.901 5.826,110.729 5.826,110.516 L5.826,109.748 L5.826,109.748 L5.826,107.443 L9.793,107.443 L9.793,109.748 L9.793,109.748 L9.793,110.516 ZM9.049,107.955 L7.933,107.955 L7.933,110.388 L9.049,110.388 L9.049,107.955 Z" class="cls-25"/>
+    <path d="M12.342,166.709 L11.460,167.589 L10.285,166.415 L11.166,165.535 C11.329,165.373 11.592,165.373 11.754,165.535 L12.342,166.122 C12.504,166.284 12.504,166.547 12.342,166.709 ZM6.167,170.525 L7.343,171.699 L5.776,172.090 L6.167,170.525 ZM11.166,167.883 L7.639,171.406 L6.464,170.231 L9.991,166.709 L11.166,167.883 ZM4.802,166.680 L4.802,173.087 L11.205,173.087 L11.205,168.464 L12.040,167.629 L12.040,173.505 C12.040,173.736 11.853,173.923 11.623,173.923 L4.384,173.923 C4.154,173.923 3.967,173.736 3.967,173.505 L3.967,166.262 C3.967,166.031 4.154,165.844 4.384,165.844 L10.280,165.844 L9.445,166.680 L4.802,166.680 Z" class="cls-26"/>
+    <path d="M12.090,270.159 L3.761,270.159 L3.761,266.189 L5.100,266.189 L5.100,269.025 L10.767,269.025 L10.767,266.189 L12.090,266.189 L12.090,270.159 Z" class="cls-27"/>
+    <path d="M10.200,265.622 L10.200,268.458 L7.367,268.458 L8.500,267.323 L4.533,263.354 L5.100,262.787 L9.067,266.756 L10.200,265.622 Z" class="cls-28"/>
+    <path d="M12.090,290.573 L3.761,290.573 L3.761,286.604 L5.100,286.604 L5.100,289.439 L10.767,289.439 L10.767,286.604 L12.090,286.604 L12.090,290.573 Z" class="cls-24"/>
+    <path d="M4.533,286.036 L4.533,283.201 L7.367,283.201 L6.233,284.335 L10.200,288.305 L9.633,288.872 L5.667,284.902 L4.533,286.036 Z" class="cls-28"/>
+    <path d="M233.551,257.322 L233.551,257.836 L12.271,257.836 L12.271,257.322 L233.551,257.322 Z" class="cls-24"/>
+    <path d="M233.551,276.875 L233.551,277.389 L12.271,277.389 L12.271,276.875 L233.551,276.875 Z" class="cls-24"/>
+    <path d="M233.551,197.745 L233.551,198.259 L12.271,198.259 L12.271,197.745 L233.551,197.745 Z" class="cls-24"/>
+    <path d="M233.551,217.784 L233.551,218.298 L12.271,218.298 L12.271,217.784 L233.551,217.784 Z" class="cls-24"/>
+    <path d="M233.551,297.785 L233.551,298.298 L12.271,298.298 L12.271,297.785 L233.551,297.785 Z" class="cls-24"/>
+    <g style="fill: #f6f6f6; filter: url(#drop-shadow-1)">
+      <path d="M382.000,43.998 L382.000,276.991 L233.996,276.991 L233.996,44.082 L382.000,43.998 Z" id="path-2" style="stroke: inherit; filter: none; fill: inherit" class="cls-18"/>
+    </g>
+    <use xlink:href="#path-2" style="stroke: #d1d2de; filter: none; fill: none"/>
+    <path d="M235.213,60.990 L380.787,60.990 L380.787,76.766 L235.213,76.766 L235.213,60.990 Z" class="cls-29"/>
+    <text transform="translate(248 71) scale(0.29 0.29)" class="cls-20"><tspan class="cls-21">Project...</tspan></text>
+    <text transform="translate(248 56) scale(0.29 0.29)" class="cls-20"><tspan class="cls-23">Java Project</tspan></text>
+    <text transform="translate(248 89) scale(0.29 0.29)" class="cls-20"><tspan class="cls-23">Package</tspan></text>
+    <text transform="translate(248 105) scale(0.29 0.29)" class="cls-20"><tspan class="cls-23">Class</tspan></text>
+    <text transform="translate(248 121) scale(0.29 0.29)" class="cls-20"><tspan class="cls-23">Interface</tspan></text>
+    <text transform="translate(248 137) scale(0.29 0.29)" class="cls-20"><tspan class="cls-23">Enum</tspan></text>
+    <text transform="translate(248 153) scale(0.29 0.29)" class="cls-20"><tspan class="cls-23">Annotation</tspan></text>
+    <text transform="translate(248 169) scale(0.29 0.29)" class="cls-20"><tspan class="cls-23">Source Folder</tspan></text>
+    <text transform="translate(248 186) scale(0.29 0.29)" class="cls-20"><tspan class="cls-23">Java Working Set</tspan></text>
+    <text transform="translate(248 203) scale(0.29 0.29)" class="cls-20"><tspan class="cls-23">Folder</tspan></text>
+    <text transform="translate(248 219) scale(0.29 0.29)" class="cls-20"><tspan class="cls-23">File</tspan></text>
+    <text transform="translate(248 236) scale(0.29 0.29)" class="cls-20"><tspan class="cls-23">JUnit Test Case</tspan></text>
+    <text transform="translate(248 253) scale(0.29 0.29)" class="cls-20"><tspan class="cls-23">Example...</tspan></text>
+    <text transform="translate(248 271) scale(0.29 0.29)" class="cls-20"><tspan class="cls-23">Other</tspan></text>
+    <text transform="translate(341 271) scale(0.29 0.29)" class="cls-20"><tspan class="cls-23">Ctrl+N</tspan></text>
+    <path d="M379.837,224.742 L379.837,225.177 L241.068,225.177 L241.068,224.742 L379.837,224.742 Z" class="cls-24"/>
+    <path d="M379.837,241.308 L379.837,241.744 L241.068,241.744 L241.068,241.308 L379.837,241.308 Z" class="cls-24"/>
+    <path d="M379.837,60.191 L379.837,60.626 L241.068,60.626 L241.068,60.191 L379.837,60.191 Z" class="cls-24"/>
+    <path d="M379.837,77.170 L379.837,77.605 L241.068,77.605 L241.068,77.170 L379.837,77.170 Z" class="cls-24"/>
+    <path d="M379.837,259.025 L379.837,259.460 L241.068,259.460 L241.068,259.025 L379.837,259.025 Z" class="cls-24"/>
+  </g>
+</svg>

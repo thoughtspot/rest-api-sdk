@@ -1,0 +1,157 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="550" height="427" viewBox="0 0 740 575">
+  <defs>
+    <style>
+      .bold {
+        font-weight:700;
+      }
+
+      .cls-1, .cls-21 {
+        fill: #f0f0f0;
+      }
+
+      .cls-1 {
+        stroke: #dcdcdc;
+      }
+
+      .cls-1, .cls-10, .cls-11, .cls-14, .cls-18, .cls-7 {
+        stroke-linejoin: round;
+      }
+
+      .cls-1, .cls-18 {
+        stroke-width: 2px;
+      }
+
+      .cls-18, .cls-2 {
+        fill: #fff;
+      }
+
+      .cls-19, .cls-3, .cls-4 {
+        font-size: 33.809px;
+      }
+
+      .cls-17, .cls-4 {
+        fill: #1f1f1f;
+      }
+
+      .cls-19, .cls-4 {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      .cls-5, .cls-6 {
+        fill: #141414;
+      }
+
+      .cls-10, .cls-11, .cls-14, .cls-15, .cls-17, .cls-22, .cls-6, .cls-8, .cls-9 {
+        fill-rule: evenodd;
+      }
+
+      .cls-7 {
+        fill: #f9f9f9;
+        stroke: #141414;
+      }
+
+      .cls-10, .cls-11, .cls-14, .cls-7 {
+        stroke-width: 1px;
+      }
+
+      .cls-8 {
+        fill: #e2e2e2;
+      }
+
+      .cls-9 {
+        fill: #afaeae;
+      }
+
+      .cls-10 {
+        fill: #ddd;
+      }
+
+      .cls-10, .cls-14 {
+        stroke: #7f7f7f;
+      }
+
+      .cls-11 {
+        fill: #c4e5f6;
+        stroke: #4d84aa;
+      }
+
+      .cls-12, .cls-13, .cls-16 {
+        font-size: 32.869px;
+      }
+
+      .cls-13 {
+        fill: #404040;
+      }
+
+      .cls-13, .cls-16 {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      .cls-14, .cls-15 {
+        fill: #dfdddd;
+      }
+
+      .cls-16 {
+        fill: #ceced1;
+      }
+
+      .cls-18 {
+        stroke: #444;
+      }
+
+      .cls-19 {
+        fill: #b2b2b2;
+      }
+
+      .cls-20 {
+        fill: #d4d3d3;
+      }
+
+      .cls-22 {
+        fill: #656565;
+      }
+    </style>
+  </defs>
+  <rect width="740" height="575" class="cls-1"/>
+  <rect x="2" y="2" width="736" height="97" class="cls-2"/>
+  <text transform="translate(14 20) scale(0.53 0.53)" class="cls-3"><tspan class="cls-4">New Maven Project</tspan></text>
+  <rect x="634.625" y="14.781" width="9.031" height="1.063" class="cls-5"/>
+  <path d="M713.425,19.611 L722.153,10.281 L722.930,11.009 L714.202,20.339 L713.425,19.611 Z" class="cls-6"/>
+  <path d="M722.964,19.906 L714.175,10.514 L713.392,11.247 L722.181,20.638 L722.964,19.906 Z" class="cls-6"/>
+  <rect x="674.531" y="11.594" width="7.469" height="6.906" class="cls-7"/>
+  <path d="M2.000,99.000 L2.000,98.000 L738.000,98.000 L738.000,99.000 L2.000,99.000 Z" class="cls-8"/>
+  <path d="M2.000,528.000 L2.000,527.000 L738.000,527.000 L738.000,528.000 L2.000,528.000 Z" class="cls-8"/>
+  <path d="M2.000,28.000 L2.000,27.000 L738.000,27.000 L738.000,28.000 L2.000,28.000 Z" class="cls-8"/>
+  <path d="M229.569,558.643 L232.046,560.915 L229.569,563.187 L228.867,562.542 L230.641,560.915 L228.867,559.288 L229.569,558.643 Z" class="cls-9"/>
+  <path d="M598.911,536.983 L717.497,536.983 L717.497,566.000 L598.911,566.000 L598.911,536.983 Z" class="cls-10"/>
+  <path d="M340.411,536.983 L458.997,536.983 L458.997,566.000 L340.411,566.000 L340.411,536.983 Z" class="cls-11"/>
+  <text transform="translate(377 557) scale(0.44 0.44)" class="cls-12"><tspan class="cls-13">Next &gt;</tspan></text>
+  <path d="M215.000,536.983 L333.586,536.983 L333.586,566.000 L215.000,566.000 L215.000,536.983 Z" class="cls-14"/>
+  <text transform="translate(252 557) scale(0.44 0.44)" class="cls-12"><tspan class="cls-13">&lt; Back</tspan></text>
+  <text transform="translate(637 557) scale(0.44 0.44)" class="cls-12"><tspan class="cls-13">Cancel</tspan></text>
+  <path d="M637.390,175.000 L730.000,175.000 L730.000,203.872 L637.390,203.872 L637.390,175.000 Z" class="cls-10"/>
+  <text transform="translate(652 194) scale(0.44 0.44)" class="cls-12"><tspan class="cls-13">Browse...</tspan></text>
+  <path d="M473.500,536.983 L592.086,536.983 L592.086,566.000 L473.500,566.000 L473.500,536.983 Z" class="cls-15"/>
+  <text transform="translate(511 557) scale(0.44 0.44)" class="cls-12"><tspan class="cls-16">Finish</tspan></text>
+  <text transform="translate(13 51) scale(0.53 0.53)" class="cls-3"><tspan class="cls-4 bold">New Maven Project</tspan></text>
+  <text transform="translate(20 82) scale(0.53 0.53)" class="cls-3"><tspan class="cls-4">Select project name and location</tspan></text>
+  <text transform="translate(48 136) scale(0.53 0.53)" class="cls-3"><tspan class="cls-4">Create a simple project (skip archetype selection)</tspan></text>
+  <text transform="translate(48 165) scale(0.53 0.53)" class="cls-3"><tspan class="cls-4">Use default Workspace location</tspan></text>
+  <text transform="translate(38 301) scale(0.53 0.53)" class="cls-3"><tspan class="cls-4">Advanced</tspan></text>
+  <path d="M33.033,294.380 L27.689,297.465 L27.689,291.295 L33.033,294.380 Z" class="cls-17"/>
+  <rect x="25" y="119" width="20" height="20" class="cls-18"/>
+  <text transform="translate(48 237) scale(0.53 0.53)" class="cls-3"><tspan class="cls-4">Add project(s) to working set</tspan></text>
+  <text transform="translate(22 195) scale(0.53 0.53)" class="cls-3"><tspan class="cls-19">Location:</tspan></text>
+  <text transform="translate(24 267) scale(0.53 0.53)" class="cls-3"><tspan class="cls-19">Working sets:</tspan></text>
+  <rect x="25" y="220" width="20" height="20" class="cls-18"/>
+  <rect x="25" y="148" width="20" height="20" class="cls-18"/>
+  <rect x="133" y="247" width="498" height="29" class="cls-20"/>
+  <path d="M637.000,247.096 L729.610,247.096 L729.610,276.000 L637.000,276.000 L637.000,247.096 Z" class="cls-15"/>
+  <text transform="translate(660 267) scale(0.44 0.44)" class="cls-12"><tspan class="cls-16">More...</tspan></text>
+  <path d="M616.993,259.788 L613.000,264.632 L609.006,259.788 L610.139,258.414 L613.000,261.884 L615.860,258.414 L616.993,259.788 Z" class="cls-9"/>
+  <rect x="133" y="174" width="498" height="29" class="cls-2"/>
+  <rect x="134" y="175" width="462" height="27" class="cls-21"/>
+  <path d="M616.993,186.788 L613.000,191.632 L609.006,186.788 L610.139,185.414 L613.000,188.884 L615.860,185.414 L616.993,186.788 Z" class="cls-9"/>
+  <text transform="translate(138 195) scale(0.53 0.53)" class="cls-3"><tspan class="cls-19">X:\...\</tspan></text>
+  <path d="M41.728,155.589 L41.728,155.589 L34.609,162.727 L34.609,162.727 C34.441,162.896 34.209,163.000 33.952,163.000 C33.696,163.000 33.464,162.896 33.296,162.727 L33.296,162.727 L29.272,158.693 L29.272,158.693 C29.104,158.524 29.000,158.292 29.000,158.034 C29.000,157.520 29.416,157.103 29.929,157.103 C30.185,157.103 30.417,157.208 30.585,157.376 L30.585,157.376 L33.952,160.752 L40.415,154.273 L40.415,154.273 C40.583,154.104 40.815,154.000 41.071,154.000 C41.584,154.000 42.000,154.417 42.000,154.931 C42.000,155.188 41.896,155.421 41.728,155.589 Z" class="cls-22"/>
+</svg>

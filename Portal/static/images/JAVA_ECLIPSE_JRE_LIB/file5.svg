@@ -1,0 +1,199 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="550" height="427" viewBox="0 0 740 575">
+  <defs>
+    <style>
+      .bold {
+        font-weight:700;
+      }
+
+      .cls-1, .cls-11 {
+        fill: #f0f0f0;
+      }
+
+      .cls-1 {
+        stroke: #dcdcdc;
+        stroke-width: 2px;
+      }
+
+      .cls-1, .cls-13, .cls-14, .cls-20, .cls-21, .cls-24, .cls-26, .cls-5, .cls-8 {
+        stroke-linejoin: round;
+      }
+
+      .cls-2, .cls-5 {
+        fill: #fff;
+      }
+
+      .cls-19, .cls-25, .cls-3, .cls-4 {
+        font-size: 33.809px;
+      }
+
+      .cls-4 {
+        fill: #1f1f1f;
+      }
+
+      .cls-19, .cls-25, .cls-4 {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      .cls-5 {
+        stroke: #e2e2e2;
+      }
+
+      .cls-13, .cls-14, .cls-20, .cls-21, .cls-24, .cls-26, .cls-5, .cls-8 {
+        stroke-width: 1px;
+      }
+
+      .cls-6, .cls-7 {
+        fill: #141414;
+      }
+
+      .cls-10, .cls-20, .cls-21, .cls-22, .cls-24, .cls-26, .cls-7, .cls-9 {
+        fill-rule: evenodd;
+      }
+
+      .cls-8 {
+        fill: #f9f9f9;
+        stroke: #141414;
+      }
+
+      .cls-9 {
+        fill: #e2e2e2;
+      }
+
+      .cls-10 {
+        fill: #afaeae;
+      }
+
+      .cls-12 {
+        fill: #dbdbdb;
+      }
+
+      .cls-13 {
+        fill: #ddd;
+        stroke: #7f7f7f;
+      }
+
+      .cls-14, .cls-23 {
+        fill: #c4e5f6;
+      }
+
+      .cls-14 {
+        stroke: #4d84aa;
+      }
+
+      .cls-15, .cls-16, .cls-18 {
+        font-size: 32.869px;
+      }
+
+      .cls-16 {
+        fill: #404040;
+      }
+
+      .cls-16, .cls-18 {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      .cls-17 {
+        fill: #dfdddd;
+      }
+
+      .cls-18 {
+        fill: #cacace;
+      }
+
+      .cls-19 {
+        fill: #a0a0a0;
+      }
+
+      .cls-20, .cls-24 {
+        fill: #f7e5ae;
+      }
+
+      .cls-20, .cls-21 {
+        stroke: #a3661b;
+      }
+
+      .cls-21 {
+        fill: #f5d487;
+      }
+
+      .cls-22 {
+        fill: #7f7f7f;
+      }
+
+      .cls-24 {
+        stroke: #ce954e;
+      }
+
+      .cls-25 {
+        fill: #185d84;
+      }
+
+      .cls-26 {
+        fill: #4eb2eb;
+        stroke: #165a81;
+      }
+    </style>
+  </defs>
+  <rect width="740" height="575" class="cls-1"/>
+  <rect x="2" y="2" width="736" height="96" class="cls-2"/>
+  <text transform="translate(14 20) scale(0.53 0.53)" class="cls-3"><tspan class="cls-4">New Project</tspan></text>
+  <rect x="12" y="157" width="714" height="232" class="cls-5"/>
+  <rect x="12" y="130" width="714" height="23" class="cls-5"/>
+  <rect x="634.625" y="12.781" width="9.031" height="1.063" class="cls-6"/>
+  <path d="M713.425,17.611 L722.153,8.281 L722.930,9.009 L714.202,18.339 L713.425,17.611 Z" class="cls-7"/>
+  <path d="M722.964,17.906 L714.175,8.514 L713.392,9.247 L722.181,18.638 L722.964,17.906 Z" class="cls-7"/>
+  <rect x="674.531" y="9.594" width="7.469" height="6.906" class="cls-8"/>
+  <path d="M2.000,98.000 L2.000,97.000 L738.000,97.000 L738.000,98.000 L2.000,98.000 Z" class="cls-9"/>
+  <path d="M137.077,548.380 L139.980,551.042 L137.077,553.704 L136.254,552.949 L138.333,551.042 L136.254,549.135 L137.077,548.380 Z" class="cls-10"/>
+  <rect x="702" y="157" width="24" height="232" class="cls-11"/>
+  <rect x="702" y="184" width="24" height="82" class="cls-12"/>
+  <rect x="570" y="523" width="139" height="34" class="cls-13"/>
+  <rect x="267" y="523" width="139" height="34" class="cls-14"/>
+  <text transform="translate(310 546) scale(0.52 0.52)" class="cls-15"><tspan class="cls-16">Next &gt;</tspan></text>
+  <rect x="120" y="523" width="139" height="34" class="cls-17"/>
+  <text transform="translate(163 546) scale(0.52 0.52)" class="cls-15"><tspan class="cls-18">&lt; Back</tspan></text>
+  <text transform="translate(615 546) scale(0.52 0.52)" class="cls-15"><tspan class="cls-16">Cancel</tspan></text>
+  <rect x="423" y="523" width="139" height="34" class="cls-17"/>
+  <text transform="translate(468 546) scale(0.52 0.52)" class="cls-15"><tspan class="cls-18">Finish</tspan></text>
+  <text transform="translate(13 54) scale(0.53 0.53)" class="cls-3"><tspan class="cls-4 bold">Select a wizard</tspan></text>
+  <text transform="translate(20 80) scale(0.53 0.53)" class="cls-3"><tspan class="cls-4">Create Maven Project</tspan></text>
+  <text transform="translate(12 122) scale(0.53 0.53)" class="cls-3"><tspan class="cls-4">Wizards:</tspan></text>
+  <text transform="translate(17 147) scale(0.53 0.53)" class="cls-3"><tspan class="cls-19">type filter text</tspan></text>
+  <text transform="translate(53 179) scale(0.53 0.53)" class="cls-3"><tspan class="cls-4">JAXB</tspan></text>
+  <text transform="translate(53 329) scale(0.53 0.53)" class="cls-3"><tspan class="cls-4">Plug-in Development</tspan></text>
+  <text transform="translate(53 354) scale(0.53 0.53)" class="cls-3"><tspan class="cls-4">Web</tspan></text>
+  <text transform="translate(53 379) scale(0.53 0.53)" class="cls-3"><tspan class="cls-4">Examples</tspan></text>
+  <path d="M33.999,169.785 L33.999,176.004 L43.869,176.004 L43.869,169.785 L39.383,169.785 L39.383,168.008 L34.897,168.008 L34.897,169.785 L33.999,169.785 Z" class="cls-20"/>
+  <path d="M47.991,172.281 L39.916,172.281 L36.327,175.834 L44.402,175.834 L47.991,172.281 Z" class="cls-21"/>
+  <path d="M33.999,319.785 L33.999,326.004 L43.869,326.004 L43.869,319.785 L39.383,319.785 L39.383,318.008 L34.897,318.008 L34.897,319.785 L33.999,319.785 Z" class="cls-20"/>
+  <path d="M47.991,322.281 L39.916,322.281 L36.327,325.834 L44.402,325.834 L47.991,322.281 Z" class="cls-21"/>
+  <path d="M33.999,344.785 L33.999,351.004 L43.869,351.004 L43.869,344.785 L39.383,344.785 L39.383,343.008 L34.897,343.008 L34.897,344.785 L33.999,344.785 Z" class="cls-20"/>
+  <path d="M47.991,347.281 L39.916,347.281 L36.327,350.834 L44.402,350.834 L47.991,347.281 Z" class="cls-21"/>
+  <path d="M33.999,369.785 L33.999,376.004 L43.869,376.004 L43.869,369.785 L39.383,369.785 L39.383,368.008 L34.897,368.008 L34.897,369.785 L33.999,369.785 Z" class="cls-20"/>
+  <path d="M47.991,372.281 L39.916,372.281 L36.327,375.834 L44.402,375.834 L47.991,372.281 Z" class="cls-21"/>
+  <path d="M22.096,318.170 L26.993,322.582 L22.096,326.994 L20.707,325.743 L24.215,322.582 L20.707,319.421 L22.096,318.170 Z" class="cls-10"/>
+  <path d="M22.096,343.170 L26.993,347.582 L22.096,351.994 L20.707,350.743 L24.215,347.582 L20.707,344.421 L22.096,343.170 Z" class="cls-10"/>
+  <path d="M22.096,368.170 L26.993,372.582 L22.096,376.994 L20.707,375.742 L24.215,372.582 L20.707,369.421 L22.096,368.170 Z" class="cls-10"/>
+  <path d="M22.322,167.993 L27.012,172.499 L22.322,177.005 L20.992,175.727 L24.351,172.499 L20.992,169.271 L22.322,167.993 Z" class="cls-22"/>
+  <text transform="translate(53 204) scale(0.53 0.53)" class="cls-3"><tspan class="cls-4">JPA</tspan></text>
+  <path d="M33.999,194.785 L33.999,201.004 L43.869,201.004 L43.869,194.785 L39.383,194.785 L39.383,193.008 L34.897,193.008 L34.897,194.785 L33.999,194.785 Z" class="cls-20"/>
+  <path d="M47.991,197.281 L39.916,197.281 L36.327,200.834 L44.402,200.834 L47.991,197.281 Z" class="cls-21"/>
+  <path d="M22.322,192.993 L27.012,197.499 L22.322,202.005 L20.992,200.726 L24.351,197.499 L20.992,194.271 L22.322,192.993 Z" class="cls-22"/>
+  <text transform="translate(53 229) scale(0.53 0.53)" class="cls-3"><tspan class="cls-4">Maven</tspan></text>
+  <path d="M33.999,219.785 L33.999,226.004 L43.869,226.004 L43.869,219.785 L39.383,219.785 L39.383,218.008 L34.897,218.008 L34.897,219.785 L33.999,219.785 Z" class="cls-20"/>
+  <path d="M47.991,222.281 L39.916,222.281 L36.327,225.834 L44.402,225.834 L47.991,222.281 Z" class="cls-21"/>
+  <path d="M28.976,221.356 L24.485,226.168 L19.995,221.356 L21.269,219.991 L24.485,223.438 L27.702,219.991 L28.976,221.356 Z" class="cls-22"/>
+  <path d="M709.993,175.678 L714.499,170.988 L719.005,175.678 L717.726,177.008 L714.499,173.649 L711.271,177.008 L709.993,175.678 Z" class="cls-22"/>
+  <rect x="39" y="285" width="142" height="24" class="cls-23"/>
+  <path d="M1.000,28.000 L1.000,27.000 L739.000,27.000 L739.000,28.000 L1.000,28.000 Z" class="cls-9"/>
+  <path d="M709.993,375.322 L714.499,380.012 L719.005,375.322 L717.726,373.992 L714.499,377.351 L711.271,373.992 L709.993,375.322 Z" class="cls-22"/>
+  <path d="M45.999,270.785 L45.999,277.004 L55.869,277.004 L55.869,270.785 L51.383,270.785 L51.383,269.008 L46.897,269.008 L46.897,270.785 L45.999,270.785 Z" class="cls-24"/>
+  <text transform="translate(45 273) scale(0.25 0.25)" class="cls-3"><tspan class="cls-25">M</tspan></text>
+  <path d="M59.991,273.281 L51.916,273.281 L48.327,276.834 L56.402,276.834 L59.991,273.281 Z" class="cls-26"/>
+  <path d="M45.999,294.785 L45.999,301.004 L55.869,301.004 L55.869,294.785 L51.383,294.785 L51.383,293.008 L46.897,293.008 L46.897,294.785 L45.999,294.785 Z" class="cls-24"/>
+  <text transform="translate(45 297) scale(0.25 0.25)" class="cls-3"><tspan class="cls-25">M</tspan></text>
+  <path d="M59.991,297.281 L51.916,297.281 L48.327,300.834 L56.402,300.834 L59.991,297.281 Z" class="cls-26"/>
+  <text transform="translate(68 254) scale(0.53 0.53)" class="cls-3"><tspan class="cls-4">Check out Maven Projects from SCM</tspan></text>
+  <text transform="translate(68 278) scale(0.53 0.53)" class="cls-3"><tspan class="cls-4">Maven Module</tspan></text>
+  <text transform="translate(68 303) scale(0.53 0.53)" class="cls-3"><tspan class="cls-4">Maven Project</tspan></text>
+</svg>
