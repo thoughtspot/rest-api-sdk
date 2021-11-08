@@ -15,7 +15,7 @@ import {
 } from './notifyOnShareEnum';
 import { PrivilegeEnum, privilegeEnumSchema } from './privilegeEnum';
 import { ShowWalkMeEnum, showWalkMeEnumSchema } from './showWalkMeEnum';
-import { State2Enum, state2EnumSchema } from './state2Enum';
+import { StateEnum, stateEnumSchema } from './stateEnum';
 import { TypeEnum, typeEnumSchema } from './typeEnum';
 import { Visibility2Enum, visibility2EnumSchema } from './visibility2Enum';
 
@@ -35,7 +35,7 @@ export interface ApiRestV2UserSearchRequest {
   /** A JSON array of privileges assigned to the user */
   privileges?: PrivilegeEnum[];
   /** Status of user account. acitve or inactive. */
-  state?: State2Enum;
+  state?: StateEnum;
   /** User preference for receiving email notifications when another ThoughtSpot user shares answers or pinboards. */
   notifyOnShare?: NotifyOnShareEnum;
   /** The user preference for revisiting the onboarding experience. */
@@ -55,7 +55,7 @@ export const apiRestV2UserSearchRequestSchema: Schema<ApiRestV2UserSearchRequest
     mail: ['mail', optional(string())],
     groupNames: ['groupNames', optional(array(string()))],
     privileges: ['privileges', optional(array(privilegeEnumSchema))],
-    state: ['state', optional(state2EnumSchema)],
+    state: ['state', optional(stateEnumSchema)],
     notifyOnShare: ['notifyOnShare', optional(notifyOnShareEnumSchema)],
     showWalkMe: ['showWalkMe', optional(showWalkMeEnumSchema)],
     analystOnboardingComplete: [

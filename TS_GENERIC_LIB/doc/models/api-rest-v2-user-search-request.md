@@ -16,7 +16,7 @@
 | `mail` | `string \| undefined` | Optional | email of the user account |
 | `groupNames` | `string[] \| undefined` | Optional | A JSON array of group names |
 | `privileges` | [`PrivilegeEnum[] \| undefined`](/doc/models/privilege-enum.md) | Optional | A JSON array of privileges assigned to the user |
-| `state` | [`State2Enum \| undefined`](/doc/models/state-2-enum.md) | Optional | Status of user account. acitve or inactive. |
+| `state` | [`StateEnum \| undefined`](/doc/models/state-enum.md) | Optional | Status of user account. acitve or inactive. |
 | `notifyOnShare` | [`NotifyOnShareEnum \| undefined`](/doc/models/notify-on-share-enum.md) | Optional | User preference for receiving email notifications when another ThoughtSpot user shares answers or pinboards. |
 | `showWalkMe` | [`ShowWalkMeEnum \| undefined`](/doc/models/show-walk-me-enum.md) | Optional | The user preference for revisiting the onboarding experience. |
 | `analystOnboardingComplete` | [`AnalystOnboardingCompleteEnum \| undefined`](/doc/models/analyst-onboarding-complete-enum.md) | Optional | ThoughtSpot provides an interactive guided walkthrough to onboard new users. The onboarding experience leads users through a set of actions to help users get started and accomplish their tasks quickly. The users can turn off the Onboarding experience and access it again when they need assistance with the ThoughtSpot UI. |

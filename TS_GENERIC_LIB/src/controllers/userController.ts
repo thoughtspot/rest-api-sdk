@@ -33,7 +33,7 @@ import { BaseController } from './baseController';
 export class UserController extends BaseController {
   /**
    * To get the details of a specific user account by username or user id, use this endpoint. At Least
-   * one value is needed. When both are given, user id will be considered to fetch user information
+   * one value is needed. When both are given,then user id will be considered to fetch user information
    *
    * @param name Username of the user that you want to query
    * @param id   The GUID of the user account to query

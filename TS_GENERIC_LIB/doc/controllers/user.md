@@ -21,7 +21,7 @@ const userController = new UserController(client);
 
 # Get User
 
-To get the details of a specific user account by username or user id, use this endpoint. At Least one value is needed. When both are given, user id will be considered to fetch user information
+To get the details of a specific user account by username or user id, use this endpoint. At Least one value is needed. When both are given,then user id will be considered to fetch user information
 
 ```ts
 async getUser(

@@ -25,7 +25,7 @@ const groupController = new GroupController(client);
 
 # Get Group
 
-To get the details of a specific group by name or id, use this endpoint. At Least one value needed. When both are given id will be considered to fetch user information.
+To get the details of a specific group by name or id, use this endpoint. At Least one value needed. When both are given,then id will be considered to fetch user information.
 
 ```ts
 async getGroup(
@@ -166,7 +166,7 @@ try {
 
 # Delete Group
 
-To remove a group from the ThoughtSpot system, send a DELETE request to this endpoint. At Least one value needed.  When both are given user id will be considered to fetch user information.
+To remove a group from the ThoughtSpot system, send a DELETE request to this endpoint. At Least one value needed.  When both are given,then user id will be considered to fetch user information.
 
 ```ts
 async deleteGroup(
@@ -212,7 +212,7 @@ try {
 
 # Add Privileges to Group
 
-To programmatically add privileges to an existing group, use API endpoint. When you assign privileges to a group,  all the users under to this group inherits the privileges assigned to that group. At least one of id or name of group is required. When both are given user id will be considered.
+To programmatically add privileges to an existing group, use API endpoint. When you assign privileges to a group,  all the users under to this group inherits the privileges assigned to that group. At least one of id or name of group is required. When both are given,then user id will be considered.
 
 ```ts
 async addPrivilegesToGroup(
@@ -258,7 +258,7 @@ try {
 
 # Remove Privileges From Group
 
-To programmatically remove privileges from a group, use API endpoint. The API removes only the privilege association. It does not delete the privilege or group from the Thoughtspot system. At least one of id or name of group is required. When both are given user id will be considered.
+To programmatically remove privileges from a group, use API endpoint. The API removes only the privilege association. It does not delete the privilege or group from the Thoughtspot system. At least one of id or name of group is required. When both are given,then user id will be considered.
 
 ```ts
 async removePrivilegesFromGroup(
@@ -304,7 +304,7 @@ try {
 
 # Add Users to Group
 
-To programmatically add existing ThoughtSpot users to a group, use this API endpoint. When you assign users to a group, the users inherits the privileges assigned to that group. At least one of id or name of the group is required. When both are given user id will be considered.
+To programmatically add existing ThoughtSpot users to a group, use this API endpoint. When you assign users to a group, the users inherits the privileges assigned to that group. At least one of id or name of the group is required. When both are given,then user id will be considered.
 
 ```ts
 async addUsersToGroup(
@@ -350,7 +350,7 @@ try {
 
 # Remove Users From Group
 
-To programmatically remove users from a group, use API endpoint.The API removes only the user association. It does not delete the users or group from the Thoughtspot system. At least one of id or name of group is required. When both are given user id will be considered.
+To programmatically remove users from a group, use API endpoint.The API removes only the user association. It does not delete the users or group from the Thoughtspot system. At least one of id or name of group is required. When both are given,then user id will be considered.
 
 ```ts
 async removeUsersFromGroup(
@@ -396,7 +396,7 @@ try {
 
 # Add Groups to Group
 
-To programmatically add existing groups to a group, use API endpoint. When you assign groups to a group, the group inherits the privileges assigned to those groups. At least one of id or name of group is required. When both are given user id will be considered.
+To programmatically add existing groups to a group, use API endpoint. When you assign groups to a group, the group inherits the privileges assigned to those groups. At least one of id or name of group is required. When both are given,then user id will be considered.
 
 ```ts
 async addGroupsToGroup(
@@ -442,7 +442,7 @@ try {
 
 # Remove Groups From Group
 
-To programmatically remove groups from a group, use API endpoint.The API removes only the group association. It does not delete the group from the Thoughtspot system. At least one of id or name of group is required. When both are given user id will be considered.
+To programmatically remove groups from a group, use API endpoint.The API removes only the group association. It does not delete the group from the Thoughtspot system. At least one of id or name of group is required. When both are given,then user id will be considered.
 
 ```ts
 async removeGroupsFromGroup(

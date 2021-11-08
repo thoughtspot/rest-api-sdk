@@ -87,8 +87,8 @@ async login(
 
 ```ts
 const body: ApiRestV2SessionLoginRequest = {
-  userName: 'abc',
-  password: 'abc',
+  userName: 'userName8',
+  password: 'password0',
 };
 
 try {

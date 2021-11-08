@@ -49,7 +49,6 @@ export { SessionInfoResponse } from './models/sessionInfoResponse';
 export { SessionLoginResponse } from './models/sessionLoginResponse';
 export { SessionUserProperties } from './models/sessionUserProperties';
 export { ShowWalkMeEnum } from './models/showWalkMeEnum';
-export { State2Enum } from './models/state2Enum';
 export { StateEnum } from './models/stateEnum';
 export { Type3Enum } from './models/type3Enum';
 export { TypeEnum } from './models/typeEnum';
