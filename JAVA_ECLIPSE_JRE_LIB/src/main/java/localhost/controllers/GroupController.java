@@ -24,15 +24,11 @@ import localhost.http.client.HttpContext;
 import localhost.http.request.HttpRequest;
 import localhost.http.response.HttpResponse;
 import localhost.http.response.HttpStringResponse;
-import localhost.models.ApiRestV2GroupAddgroupRequest;
 import localhost.models.ApiRestV2GroupAddprivilegeRequest;
 import localhost.models.ApiRestV2GroupAdduserRequest;
 import localhost.models.ApiRestV2GroupCreateRequest;
-import localhost.models.ApiRestV2GroupRemovegroupRequest;
-import localhost.models.ApiRestV2GroupRemoveprivilegeRequest;
 import localhost.models.ApiRestV2GroupRemoveuserRequest;
 import localhost.models.ApiRestV2GroupSearchRequest;
-import localhost.models.ApiRestV2GroupUpdateRequest;
 import localhost.models.GroupResponse;
 
 /**
@@ -67,7 +63,7 @@ public final class GroupController extends BaseController {
      * To get the details of a specific group by name or id, use this endpoint. At Least one value
      * needed. When both are given id will be considered to fetch user information.
      * @param  name  Optional parameter: Name of the group
-     * @param  id  Optional parameter: The GUID of the group
+     * @param  id  Optional parameter: The GUID of the group to query
      * @return    Returns the GroupResponse response from the API call
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
@@ -88,7 +84,7 @@ public final class GroupController extends BaseController {
      * To get the details of a specific group by name or id, use this endpoint. At Least one value
      * needed. When both are given id will be considered to fetch user information.
      * @param  name  Optional parameter: Name of the group
-     * @param  id  Optional parameter: The GUID of the group
+     * @param  id  Optional parameter: The GUID of the group to query
      * @return    Returns the GroupResponse response from the API call
      */
     public CompletableFuture<GroupResponse> getGroupAsync(
@@ -169,7 +165,7 @@ public final class GroupController extends BaseController {
     }
 
     /**
-     * To programmatically create a group in the ThoughtSpot system, use this API endpoint. Using
+     * To programmatically create a group in the ThoughtSpot system use this API endpoint. Using
      * this API, you can create a group and assign privileges and users. For ease of user management
      * and access control, ThoughtSpot administrators can create groups and assign privileges to
      * these groups. The privileges determine the actions that the users belonging to a group are
@@ -193,7 +189,7 @@ public final class GroupController extends BaseController {
     }
 
     /**
-     * To programmatically create a group in the ThoughtSpot system, use this API endpoint. Using
+     * To programmatically create a group in the ThoughtSpot system use this API endpoint. Using
      * this API, you can create a group and assign privileges and users. For ease of user management
      * and access control, ThoughtSpot administrators can create groups and assign privileges to
      * these groups. The privileges determine the actions that the users belonging to a group are
@@ -275,107 +271,10 @@ public final class GroupController extends BaseController {
     }
 
     /**
-     * You can use this endpoint to programmatically modify an existing group. To modify a group,
-     * you require admin user privileges.At least one of id or name is required to update the group.
-     * When both are given, then id will be considered and group name will be updated.
-     * @param  body  Required parameter: Example:
-     * @return    Returns the Boolean response from the API call
-     * @throws    ApiException    Represents error response from the server.
-     * @throws    IOException    Signals that an I/O exception of some sort has occurred.
-     */
-    public Boolean updateGroup(
-            final ApiRestV2GroupUpdateRequest body) throws ApiException, IOException {
-        HttpRequest request = buildUpdateGroupRequest(body);
-        authManagers.get("global").apply(request);
-
-        HttpResponse response = getClientInstance().execute(request, false);
-        HttpContext context = new HttpContext(request, response);
-
-        return handleUpdateGroupResponse(context);
-    }
-
-    /**
-     * You can use this endpoint to programmatically modify an existing group. To modify a group,
-     * you require admin user privileges.At least one of id or name is required to update the group.
-     * When both are given, then id will be considered and group name will be updated.
-     * @param  body  Required parameter: Example:
-     * @return    Returns the Boolean response from the API call
-     */
-    public CompletableFuture<Boolean> updateGroupAsync(
-            final ApiRestV2GroupUpdateRequest body) {
-        return makeHttpCallAsync(() -> buildUpdateGroupRequest(body),
-            req -> authManagers.get("global").applyAsync(req)
-                .thenCompose(request -> getClientInstance()
-                        .executeAsync(request, false)),
-            context -> handleUpdateGroupResponse(context));
-    }
-
-    /**
-     * Builds the HttpRequest object for updateGroup.
-     */
-    private HttpRequest buildUpdateGroupRequest(
-            final ApiRestV2GroupUpdateRequest body) throws JsonProcessingException {
-        //the base uri for api requests
-        String baseUri = config.getBaseUri();
-
-        //prepare query string for API call
-        final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/group/update");
-
-        //load all headers for the outgoing API request
-        Headers headers = new Headers();
-        headers.add("Content-Type", config.getContentType());
-        headers.add("Accept-Language", config.getAcceptLanguage());
-        headers.add("user-agent", BaseController.userAgent);
-        headers.add("content-type", "application/json");
-
-        //prepare and invoke the API call request to fetch the response
-        String bodyJson = ApiHelper.serialize(body);
-        HttpRequest request = getClientInstance().putBody(queryBuilder, headers, null, bodyJson);
-
-        // Invoke the callback before request if its not null
-        if (getHttpCallback() != null) {
-            getHttpCallback().onBeforeRequest(request);
-        }
-
-        return request;
-    }
-
-    /**
-     * Processes the response for updateGroup.
-     * @return An object of type boolean
-     */
-    private Boolean handleUpdateGroupResponse(
-            HttpContext context) throws ApiException, IOException {
-        HttpResponse response = context.getResponse();
-
-        //invoke the callback after response if its not null
-        if (getHttpCallback() != null) {
-            getHttpCallback().onAfterResponse(context);
-        }
-
-        //Error handling using HTTP status codes
-        int responseCode = response.getStatusCode();
-
-        if (responseCode == 500) {
-            throw new ErrorResponseException("Operation failed or unauthorized request", context);
-        }
-        //handle errors defined at the API level
-        validateResponse(response, context);
-
-        //extract result from the http response
-        String responseBody = ((HttpStringResponse) response).getBody();
-        boolean result = Boolean.parseBoolean(responseBody);
-
-        return result;
-    }
-
-    /**
-     * To remove a group from the ThoughtSpot system, send a DELETE request to this endpoint. At
-     * Least one value needed. When both are given user id will be considered to fetch user
-     * information.
-     * @param  name  Optional parameter: Name of the group.
-     * @param  id  Optional parameter: The GUID of the group
+     * To remove a group from the ThoughtSpot system, use this endpoint. At least one value of name
+     * or id is needed. When both are given group id will be considered to delete.
+     * @param  name  Optional parameter: Name of the group that you want to delete.
+     * @param  id  Optional parameter: The GUID of the group to delete.
      * @return    Returns the Boolean response from the API call
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
@@ -393,11 +292,10 @@ public final class GroupController extends BaseController {
     }
 
     /**
-     * To remove a group from the ThoughtSpot system, send a DELETE request to this endpoint. At
-     * Least one value needed. When both are given user id will be considered to fetch user
-     * information.
-     * @param  name  Optional parameter: Name of the group.
-     * @param  id  Optional parameter: The GUID of the group
+     * To remove a group from the ThoughtSpot system, use this endpoint. At least one value of name
+     * or id is needed. When both are given group id will be considered to delete.
+     * @param  name  Optional parameter: Name of the group that you want to delete.
+     * @param  id  Optional parameter: The GUID of the group to delete.
      * @return    Returns the Boolean response from the API call
      */
     public CompletableFuture<Boolean> deleteGroupAsync(
@@ -476,9 +374,201 @@ public final class GroupController extends BaseController {
     }
 
     /**
+     * To programmatically add existing ThoughtSpot users to a group use API endpoint. When you
+     * assign users to a group, the users inherits the privileges assigned to that group. At least
+     * one of id or name of group is required. When both are given user id will be considered.
+     * @param  body  Required parameter: Example:
+     * @return    Returns the Boolean response from the API call
+     * @throws    ApiException    Represents error response from the server.
+     * @throws    IOException    Signals that an I/O exception of some sort has occurred.
+     */
+    public Boolean addUsersToGroup(
+            final ApiRestV2GroupAdduserRequest body) throws ApiException, IOException {
+        HttpRequest request = buildAddUsersToGroupRequest(body);
+        authManagers.get("global").apply(request);
+
+        HttpResponse response = getClientInstance().execute(request, false);
+        HttpContext context = new HttpContext(request, response);
+
+        return handleAddUsersToGroupResponse(context);
+    }
+
+    /**
+     * To programmatically add existing ThoughtSpot users to a group use API endpoint. When you
+     * assign users to a group, the users inherits the privileges assigned to that group. At least
+     * one of id or name of group is required. When both are given user id will be considered.
+     * @param  body  Required parameter: Example:
+     * @return    Returns the Boolean response from the API call
+     */
+    public CompletableFuture<Boolean> addUsersToGroupAsync(
+            final ApiRestV2GroupAdduserRequest body) {
+        return makeHttpCallAsync(() -> buildAddUsersToGroupRequest(body),
+            req -> authManagers.get("global").applyAsync(req)
+                .thenCompose(request -> getClientInstance()
+                        .executeAsync(request, false)),
+            context -> handleAddUsersToGroupResponse(context));
+    }
+
+    /**
+     * Builds the HttpRequest object for addUsersToGroup.
+     */
+    private HttpRequest buildAddUsersToGroupRequest(
+            final ApiRestV2GroupAdduserRequest body) throws JsonProcessingException {
+        //the base uri for api requests
+        String baseUri = config.getBaseUri();
+
+        //prepare query string for API call
+        final StringBuilder queryBuilder = new StringBuilder(baseUri
+                + "/api/rest/v2/group/adduser");
+
+        //load all headers for the outgoing API request
+        Headers headers = new Headers();
+        headers.add("Content-Type", config.getContentType());
+        headers.add("Accept-Language", config.getAcceptLanguage());
+        headers.add("user-agent", BaseController.userAgent);
+        headers.add("content-type", "application/json");
+
+        //prepare and invoke the API call request to fetch the response
+        String bodyJson = ApiHelper.serialize(body);
+        HttpRequest request = getClientInstance().putBody(queryBuilder, headers, null, bodyJson);
+
+        // Invoke the callback before request if its not null
+        if (getHttpCallback() != null) {
+            getHttpCallback().onBeforeRequest(request);
+        }
+
+        return request;
+    }
+
+    /**
+     * Processes the response for addUsersToGroup.
+     * @return An object of type boolean
+     */
+    private Boolean handleAddUsersToGroupResponse(
+            HttpContext context) throws ApiException, IOException {
+        HttpResponse response = context.getResponse();
+
+        //invoke the callback after response if its not null
+        if (getHttpCallback() != null) {
+            getHttpCallback().onAfterResponse(context);
+        }
+
+        //Error handling using HTTP status codes
+        int responseCode = response.getStatusCode();
+
+        if (responseCode == 500) {
+            throw new ErrorResponseException("Operation failed or unauthorized request", context);
+        }
+        //handle errors defined at the API level
+        validateResponse(response, context);
+
+        //extract result from the http response
+        String responseBody = ((HttpStringResponse) response).getBody();
+        boolean result = Boolean.parseBoolean(responseBody);
+
+        return result;
+    }
+
+    /**
+     * To programmatically remove users from a group, use this API endpoint. The API removes only
+     * the user association. It does not delete the users or group from the Thoughtspot system. At
+     * least one of id or name of group is required. When both are given, id will be considered.
+     * @param  body  Required parameter: Example:
+     * @return    Returns the Boolean response from the API call
+     * @throws    ApiException    Represents error response from the server.
+     * @throws    IOException    Signals that an I/O exception of some sort has occurred.
+     */
+    public Boolean removeUsersFromGroup(
+            final ApiRestV2GroupRemoveuserRequest body) throws ApiException, IOException {
+        HttpRequest request = buildRemoveUsersFromGroupRequest(body);
+        authManagers.get("global").apply(request);
+
+        HttpResponse response = getClientInstance().execute(request, false);
+        HttpContext context = new HttpContext(request, response);
+
+        return handleRemoveUsersFromGroupResponse(context);
+    }
+
+    /**
+     * To programmatically remove users from a group, use this API endpoint. The API removes only
+     * the user association. It does not delete the users or group from the Thoughtspot system. At
+     * least one of id or name of group is required. When both are given, id will be considered.
+     * @param  body  Required parameter: Example:
+     * @return    Returns the Boolean response from the API call
+     */
+    public CompletableFuture<Boolean> removeUsersFromGroupAsync(
+            final ApiRestV2GroupRemoveuserRequest body) {
+        return makeHttpCallAsync(() -> buildRemoveUsersFromGroupRequest(body),
+            req -> authManagers.get("global").applyAsync(req)
+                .thenCompose(request -> getClientInstance()
+                        .executeAsync(request, false)),
+            context -> handleRemoveUsersFromGroupResponse(context));
+    }
+
+    /**
+     * Builds the HttpRequest object for removeUsersFromGroup.
+     */
+    private HttpRequest buildRemoveUsersFromGroupRequest(
+            final ApiRestV2GroupRemoveuserRequest body) throws JsonProcessingException {
+        //the base uri for api requests
+        String baseUri = config.getBaseUri();
+
+        //prepare query string for API call
+        final StringBuilder queryBuilder = new StringBuilder(baseUri
+                + "/api/rest/v2/group/removeuser");
+
+        //load all headers for the outgoing API request
+        Headers headers = new Headers();
+        headers.add("Content-Type", config.getContentType());
+        headers.add("Accept-Language", config.getAcceptLanguage());
+        headers.add("user-agent", BaseController.userAgent);
+        headers.add("content-type", "application/json");
+
+        //prepare and invoke the API call request to fetch the response
+        String bodyJson = ApiHelper.serialize(body);
+        HttpRequest request = getClientInstance().putBody(queryBuilder, headers, null, bodyJson);
+
+        // Invoke the callback before request if its not null
+        if (getHttpCallback() != null) {
+            getHttpCallback().onBeforeRequest(request);
+        }
+
+        return request;
+    }
+
+    /**
+     * Processes the response for removeUsersFromGroup.
+     * @return An object of type boolean
+     */
+    private Boolean handleRemoveUsersFromGroupResponse(
+            HttpContext context) throws ApiException, IOException {
+        HttpResponse response = context.getResponse();
+
+        //invoke the callback after response if its not null
+        if (getHttpCallback() != null) {
+            getHttpCallback().onAfterResponse(context);
+        }
+
+        //Error handling using HTTP status codes
+        int responseCode = response.getStatusCode();
+
+        if (responseCode == 500) {
+            throw new ErrorResponseException("Operation failed or unauthorized request", context);
+        }
+        //handle errors defined at the API level
+        validateResponse(response, context);
+
+        //extract result from the http response
+        String responseBody = ((HttpStringResponse) response).getBody();
+        boolean result = Boolean.parseBoolean(responseBody);
+
+        return result;
+    }
+
+    /**
      * To programmatically add privileges to an existing group, use API endpoint. When you assign
-     * privileges to a group, all the users under to this group inherits the privileges assigned to
-     * that group. At least one of id or name of group is required. When both are given user id will
+     * privileges to a group, all the users under to this group inherits the privileges assigned
+     * from this group. At least one of id or name of group is required. When both are given id will
      * be considered.
      * @param  body  Required parameter: Example:
      * @return    Returns the Boolean response from the API call
@@ -498,8 +588,8 @@ public final class GroupController extends BaseController {
 
     /**
      * To programmatically add privileges to an existing group, use API endpoint. When you assign
-     * privileges to a group, all the users under to this group inherits the privileges assigned to
-     * that group. At least one of id or name of group is required. When both are given user id will
+     * privileges to a group, all the users under to this group inherits the privileges assigned
+     * from this group. At least one of id or name of group is required. When both are given id will
      * be considered.
      * @param  body  Required parameter: Example:
      * @return    Returns the Boolean response from the API call
@@ -574,492 +664,8 @@ public final class GroupController extends BaseController {
     }
 
     /**
-     * To programmatically remove privileges from a group, use API endpoint. The API removes only
-     * the privilege association. It does not delete the privilege or group from the Thoughtspot
-     * system. At least one of id or name of group is required. When both are given user id will be
-     * considered.
-     * @param  body  Required parameter: Example:
-     * @return    Returns the Boolean response from the API call
-     * @throws    ApiException    Represents error response from the server.
-     * @throws    IOException    Signals that an I/O exception of some sort has occurred.
-     */
-    public Boolean removePrivilegesFromGroup(
-            final ApiRestV2GroupRemoveprivilegeRequest body) throws ApiException, IOException {
-        HttpRequest request = buildRemovePrivilegesFromGroupRequest(body);
-        authManagers.get("global").apply(request);
-
-        HttpResponse response = getClientInstance().execute(request, false);
-        HttpContext context = new HttpContext(request, response);
-
-        return handleRemovePrivilegesFromGroupResponse(context);
-    }
-
-    /**
-     * To programmatically remove privileges from a group, use API endpoint. The API removes only
-     * the privilege association. It does not delete the privilege or group from the Thoughtspot
-     * system. At least one of id or name of group is required. When both are given user id will be
-     * considered.
-     * @param  body  Required parameter: Example:
-     * @return    Returns the Boolean response from the API call
-     */
-    public CompletableFuture<Boolean> removePrivilegesFromGroupAsync(
-            final ApiRestV2GroupRemoveprivilegeRequest body) {
-        return makeHttpCallAsync(() -> buildRemovePrivilegesFromGroupRequest(body),
-            req -> authManagers.get("global").applyAsync(req)
-                .thenCompose(request -> getClientInstance()
-                        .executeAsync(request, false)),
-            context -> handleRemovePrivilegesFromGroupResponse(context));
-    }
-
-    /**
-     * Builds the HttpRequest object for removePrivilegesFromGroup.
-     */
-    private HttpRequest buildRemovePrivilegesFromGroupRequest(
-            final ApiRestV2GroupRemoveprivilegeRequest body) throws JsonProcessingException {
-        //the base uri for api requests
-        String baseUri = config.getBaseUri();
-
-        //prepare query string for API call
-        final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/group/removeprivilege");
-
-        //load all headers for the outgoing API request
-        Headers headers = new Headers();
-        headers.add("Content-Type", config.getContentType());
-        headers.add("Accept-Language", config.getAcceptLanguage());
-        headers.add("user-agent", BaseController.userAgent);
-        headers.add("content-type", "application/json");
-
-        //prepare and invoke the API call request to fetch the response
-        String bodyJson = ApiHelper.serialize(body);
-        HttpRequest request = getClientInstance().putBody(queryBuilder, headers, null, bodyJson);
-
-        // Invoke the callback before request if its not null
-        if (getHttpCallback() != null) {
-            getHttpCallback().onBeforeRequest(request);
-        }
-
-        return request;
-    }
-
-    /**
-     * Processes the response for removePrivilegesFromGroup.
-     * @return An object of type boolean
-     */
-    private Boolean handleRemovePrivilegesFromGroupResponse(
-            HttpContext context) throws ApiException, IOException {
-        HttpResponse response = context.getResponse();
-
-        //invoke the callback after response if its not null
-        if (getHttpCallback() != null) {
-            getHttpCallback().onAfterResponse(context);
-        }
-
-        //Error handling using HTTP status codes
-        int responseCode = response.getStatusCode();
-
-        if (responseCode == 500) {
-            throw new ErrorResponseException("Operation failed or unauthorized request", context);
-        }
-        //handle errors defined at the API level
-        validateResponse(response, context);
-
-        //extract result from the http response
-        String responseBody = ((HttpStringResponse) response).getBody();
-        boolean result = Boolean.parseBoolean(responseBody);
-
-        return result;
-    }
-
-    /**
-     * To programmatically add existing ThoughtSpot users to a group, use this API endpoint. When
-     * you assign users to a group, the users inherits the privileges assigned to that group. At
-     * least one of id or name of the group is required. When both are given user id will be
-     * considered.
-     * @param  body  Required parameter: Example:
-     * @return    Returns the Boolean response from the API call
-     * @throws    ApiException    Represents error response from the server.
-     * @throws    IOException    Signals that an I/O exception of some sort has occurred.
-     */
-    public Boolean addUsersToGroup(
-            final ApiRestV2GroupAdduserRequest body) throws ApiException, IOException {
-        HttpRequest request = buildAddUsersToGroupRequest(body);
-        authManagers.get("global").apply(request);
-
-        HttpResponse response = getClientInstance().execute(request, false);
-        HttpContext context = new HttpContext(request, response);
-
-        return handleAddUsersToGroupResponse(context);
-    }
-
-    /**
-     * To programmatically add existing ThoughtSpot users to a group, use this API endpoint. When
-     * you assign users to a group, the users inherits the privileges assigned to that group. At
-     * least one of id or name of the group is required. When both are given user id will be
-     * considered.
-     * @param  body  Required parameter: Example:
-     * @return    Returns the Boolean response from the API call
-     */
-    public CompletableFuture<Boolean> addUsersToGroupAsync(
-            final ApiRestV2GroupAdduserRequest body) {
-        return makeHttpCallAsync(() -> buildAddUsersToGroupRequest(body),
-            req -> authManagers.get("global").applyAsync(req)
-                .thenCompose(request -> getClientInstance()
-                        .executeAsync(request, false)),
-            context -> handleAddUsersToGroupResponse(context));
-    }
-
-    /**
-     * Builds the HttpRequest object for addUsersToGroup.
-     */
-    private HttpRequest buildAddUsersToGroupRequest(
-            final ApiRestV2GroupAdduserRequest body) throws JsonProcessingException {
-        //the base uri for api requests
-        String baseUri = config.getBaseUri();
-
-        //prepare query string for API call
-        final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/group/adduser");
-
-        //load all headers for the outgoing API request
-        Headers headers = new Headers();
-        headers.add("Content-Type", config.getContentType());
-        headers.add("Accept-Language", config.getAcceptLanguage());
-        headers.add("user-agent", BaseController.userAgent);
-        headers.add("content-type", "application/json");
-
-        //prepare and invoke the API call request to fetch the response
-        String bodyJson = ApiHelper.serialize(body);
-        HttpRequest request = getClientInstance().putBody(queryBuilder, headers, null, bodyJson);
-
-        // Invoke the callback before request if its not null
-        if (getHttpCallback() != null) {
-            getHttpCallback().onBeforeRequest(request);
-        }
-
-        return request;
-    }
-
-    /**
-     * Processes the response for addUsersToGroup.
-     * @return An object of type boolean
-     */
-    private Boolean handleAddUsersToGroupResponse(
-            HttpContext context) throws ApiException, IOException {
-        HttpResponse response = context.getResponse();
-
-        //invoke the callback after response if its not null
-        if (getHttpCallback() != null) {
-            getHttpCallback().onAfterResponse(context);
-        }
-
-        //Error handling using HTTP status codes
-        int responseCode = response.getStatusCode();
-
-        if (responseCode == 500) {
-            throw new ErrorResponseException("Operation failed or unauthorized request", context);
-        }
-        //handle errors defined at the API level
-        validateResponse(response, context);
-
-        //extract result from the http response
-        String responseBody = ((HttpStringResponse) response).getBody();
-        boolean result = Boolean.parseBoolean(responseBody);
-
-        return result;
-    }
-
-    /**
-     * To programmatically remove users from a group, use API endpoint.The API removes only the user
-     * association. It does not delete the users or group from the Thoughtspot system. At least one
-     * of id or name of group is required. When both are given user id will be considered.
-     * @param  body  Required parameter: Example:
-     * @return    Returns the Boolean response from the API call
-     * @throws    ApiException    Represents error response from the server.
-     * @throws    IOException    Signals that an I/O exception of some sort has occurred.
-     */
-    public Boolean removeUsersFromGroup(
-            final ApiRestV2GroupRemoveuserRequest body) throws ApiException, IOException {
-        HttpRequest request = buildRemoveUsersFromGroupRequest(body);
-        authManagers.get("global").apply(request);
-
-        HttpResponse response = getClientInstance().execute(request, false);
-        HttpContext context = new HttpContext(request, response);
-
-        return handleRemoveUsersFromGroupResponse(context);
-    }
-
-    /**
-     * To programmatically remove users from a group, use API endpoint.The API removes only the user
-     * association. It does not delete the users or group from the Thoughtspot system. At least one
-     * of id or name of group is required. When both are given user id will be considered.
-     * @param  body  Required parameter: Example:
-     * @return    Returns the Boolean response from the API call
-     */
-    public CompletableFuture<Boolean> removeUsersFromGroupAsync(
-            final ApiRestV2GroupRemoveuserRequest body) {
-        return makeHttpCallAsync(() -> buildRemoveUsersFromGroupRequest(body),
-            req -> authManagers.get("global").applyAsync(req)
-                .thenCompose(request -> getClientInstance()
-                        .executeAsync(request, false)),
-            context -> handleRemoveUsersFromGroupResponse(context));
-    }
-
-    /**
-     * Builds the HttpRequest object for removeUsersFromGroup.
-     */
-    private HttpRequest buildRemoveUsersFromGroupRequest(
-            final ApiRestV2GroupRemoveuserRequest body) throws JsonProcessingException {
-        //the base uri for api requests
-        String baseUri = config.getBaseUri();
-
-        //prepare query string for API call
-        final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/group/removeuser");
-
-        //load all headers for the outgoing API request
-        Headers headers = new Headers();
-        headers.add("Content-Type", config.getContentType());
-        headers.add("Accept-Language", config.getAcceptLanguage());
-        headers.add("user-agent", BaseController.userAgent);
-        headers.add("content-type", "application/json");
-
-        //prepare and invoke the API call request to fetch the response
-        String bodyJson = ApiHelper.serialize(body);
-        HttpRequest request = getClientInstance().putBody(queryBuilder, headers, null, bodyJson);
-
-        // Invoke the callback before request if its not null
-        if (getHttpCallback() != null) {
-            getHttpCallback().onBeforeRequest(request);
-        }
-
-        return request;
-    }
-
-    /**
-     * Processes the response for removeUsersFromGroup.
-     * @return An object of type boolean
-     */
-    private Boolean handleRemoveUsersFromGroupResponse(
-            HttpContext context) throws ApiException, IOException {
-        HttpResponse response = context.getResponse();
-
-        //invoke the callback after response if its not null
-        if (getHttpCallback() != null) {
-            getHttpCallback().onAfterResponse(context);
-        }
-
-        //Error handling using HTTP status codes
-        int responseCode = response.getStatusCode();
-
-        if (responseCode == 500) {
-            throw new ErrorResponseException("Operation failed or unauthorized request", context);
-        }
-        //handle errors defined at the API level
-        validateResponse(response, context);
-
-        //extract result from the http response
-        String responseBody = ((HttpStringResponse) response).getBody();
-        boolean result = Boolean.parseBoolean(responseBody);
-
-        return result;
-    }
-
-    /**
-     * To programmatically add existing groups to a group, use API endpoint. When you assign groups
-     * to a group, the group inherits the privileges assigned to those groups. At least one of id or
-     * name of group is required. When both are given user id will be considered.
-     * @param  body  Required parameter: Example:
-     * @return    Returns the Boolean response from the API call
-     * @throws    ApiException    Represents error response from the server.
-     * @throws    IOException    Signals that an I/O exception of some sort has occurred.
-     */
-    public Boolean addGroupsToGroup(
-            final ApiRestV2GroupAddgroupRequest body) throws ApiException, IOException {
-        HttpRequest request = buildAddGroupsToGroupRequest(body);
-        authManagers.get("global").apply(request);
-
-        HttpResponse response = getClientInstance().execute(request, false);
-        HttpContext context = new HttpContext(request, response);
-
-        return handleAddGroupsToGroupResponse(context);
-    }
-
-    /**
-     * To programmatically add existing groups to a group, use API endpoint. When you assign groups
-     * to a group, the group inherits the privileges assigned to those groups. At least one of id or
-     * name of group is required. When both are given user id will be considered.
-     * @param  body  Required parameter: Example:
-     * @return    Returns the Boolean response from the API call
-     */
-    public CompletableFuture<Boolean> addGroupsToGroupAsync(
-            final ApiRestV2GroupAddgroupRequest body) {
-        return makeHttpCallAsync(() -> buildAddGroupsToGroupRequest(body),
-            req -> authManagers.get("global").applyAsync(req)
-                .thenCompose(request -> getClientInstance()
-                        .executeAsync(request, false)),
-            context -> handleAddGroupsToGroupResponse(context));
-    }
-
-    /**
-     * Builds the HttpRequest object for addGroupsToGroup.
-     */
-    private HttpRequest buildAddGroupsToGroupRequest(
-            final ApiRestV2GroupAddgroupRequest body) throws JsonProcessingException {
-        //the base uri for api requests
-        String baseUri = config.getBaseUri();
-
-        //prepare query string for API call
-        final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/group/addgroup");
-
-        //load all headers for the outgoing API request
-        Headers headers = new Headers();
-        headers.add("Content-Type", config.getContentType());
-        headers.add("Accept-Language", config.getAcceptLanguage());
-        headers.add("user-agent", BaseController.userAgent);
-        headers.add("content-type", "application/json");
-
-        //prepare and invoke the API call request to fetch the response
-        String bodyJson = ApiHelper.serialize(body);
-        HttpRequest request = getClientInstance().putBody(queryBuilder, headers, null, bodyJson);
-
-        // Invoke the callback before request if its not null
-        if (getHttpCallback() != null) {
-            getHttpCallback().onBeforeRequest(request);
-        }
-
-        return request;
-    }
-
-    /**
-     * Processes the response for addGroupsToGroup.
-     * @return An object of type boolean
-     */
-    private Boolean handleAddGroupsToGroupResponse(
-            HttpContext context) throws ApiException, IOException {
-        HttpResponse response = context.getResponse();
-
-        //invoke the callback after response if its not null
-        if (getHttpCallback() != null) {
-            getHttpCallback().onAfterResponse(context);
-        }
-
-        //Error handling using HTTP status codes
-        int responseCode = response.getStatusCode();
-
-        if (responseCode == 500) {
-            throw new ErrorResponseException("Operation failed or unauthorized request", context);
-        }
-        //handle errors defined at the API level
-        validateResponse(response, context);
-
-        //extract result from the http response
-        String responseBody = ((HttpStringResponse) response).getBody();
-        boolean result = Boolean.parseBoolean(responseBody);
-
-        return result;
-    }
-
-    /**
-     * To programmatically remove groups from a group, use API endpoint.The API removes only the
-     * group association. It does not delete the group from the Thoughtspot system. At least one of
-     * id or name of group is required. When both are given user id will be considered.
-     * @param  body  Required parameter: Example:
-     * @return    Returns the Boolean response from the API call
-     * @throws    ApiException    Represents error response from the server.
-     * @throws    IOException    Signals that an I/O exception of some sort has occurred.
-     */
-    public Boolean removeGroupsFromGroup(
-            final ApiRestV2GroupRemovegroupRequest body) throws ApiException, IOException {
-        HttpRequest request = buildRemoveGroupsFromGroupRequest(body);
-        authManagers.get("global").apply(request);
-
-        HttpResponse response = getClientInstance().execute(request, false);
-        HttpContext context = new HttpContext(request, response);
-
-        return handleRemoveGroupsFromGroupResponse(context);
-    }
-
-    /**
-     * To programmatically remove groups from a group, use API endpoint.The API removes only the
-     * group association. It does not delete the group from the Thoughtspot system. At least one of
-     * id or name of group is required. When both are given user id will be considered.
-     * @param  body  Required parameter: Example:
-     * @return    Returns the Boolean response from the API call
-     */
-    public CompletableFuture<Boolean> removeGroupsFromGroupAsync(
-            final ApiRestV2GroupRemovegroupRequest body) {
-        return makeHttpCallAsync(() -> buildRemoveGroupsFromGroupRequest(body),
-            req -> authManagers.get("global").applyAsync(req)
-                .thenCompose(request -> getClientInstance()
-                        .executeAsync(request, false)),
-            context -> handleRemoveGroupsFromGroupResponse(context));
-    }
-
-    /**
-     * Builds the HttpRequest object for removeGroupsFromGroup.
-     */
-    private HttpRequest buildRemoveGroupsFromGroupRequest(
-            final ApiRestV2GroupRemovegroupRequest body) throws JsonProcessingException {
-        //the base uri for api requests
-        String baseUri = config.getBaseUri();
-
-        //prepare query string for API call
-        final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/group/removegroup");
-
-        //load all headers for the outgoing API request
-        Headers headers = new Headers();
-        headers.add("Content-Type", config.getContentType());
-        headers.add("Accept-Language", config.getAcceptLanguage());
-        headers.add("user-agent", BaseController.userAgent);
-        headers.add("content-type", "application/json");
-
-        //prepare and invoke the API call request to fetch the response
-        String bodyJson = ApiHelper.serialize(body);
-        HttpRequest request = getClientInstance().putBody(queryBuilder, headers, null, bodyJson);
-
-        // Invoke the callback before request if its not null
-        if (getHttpCallback() != null) {
-            getHttpCallback().onBeforeRequest(request);
-        }
-
-        return request;
-    }
-
-    /**
-     * Processes the response for removeGroupsFromGroup.
-     * @return An object of type boolean
-     */
-    private Boolean handleRemoveGroupsFromGroupResponse(
-            HttpContext context) throws ApiException, IOException {
-        HttpResponse response = context.getResponse();
-
-        //invoke the callback after response if its not null
-        if (getHttpCallback() != null) {
-            getHttpCallback().onAfterResponse(context);
-        }
-
-        //Error handling using HTTP status codes
-        int responseCode = response.getStatusCode();
-
-        if (responseCode == 500) {
-            throw new ErrorResponseException("Operation failed or unauthorized request", context);
-        }
-        //handle errors defined at the API level
-        validateResponse(response, context);
-
-        //extract result from the http response
-        String responseBody = ((HttpStringResponse) response).getBody();
-        boolean result = Boolean.parseBoolean(responseBody);
-
-        return result;
-    }
-
-    /**
-     * To get the details of a specific group account or all groups in the ThoughtSpot system, use
-     * this end point.
+     * To get the details of a specific group account or all groups in the ThoughtSpot system use
+     * this end point. If no inputs are provided, then all groups are included in the response.
      * @param  body  Required parameter: Example:
      * @return    Returns the List of GroupResponse response from the API call
      * @throws    ApiException    Represents error response from the server.
@@ -1077,8 +683,8 @@ public final class GroupController extends BaseController {
     }
 
     /**
-     * To get the details of a specific group account or all groups in the ThoughtSpot system, use
-     * this end point.
+     * To get the details of a specific group account or all groups in the ThoughtSpot system use
+     * this end point. If no inputs are provided, then all groups are included in the response.
      * @param  body  Required parameter: Example:
      * @return    Returns the List of GroupResponse response from the API call
      */

@@ -7,7 +7,7 @@
 import { array, object, optional, Schema, string } from '../schema';
 
 export interface ApiRestV2UserAddgroupRequest {
-  /** Username of the user account */
+  /** User name of the user account */
   name?: string;
   /** The GUID of the user account */
   id?: string;

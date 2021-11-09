@@ -15,31 +15,26 @@ class ApiRestV2UserSearchRequest(object):
     TODO: type model description here.
 
     Attributes:
-        name (string): Name of the user.
+        name (string): Name of the user
         id (string): The GUID of the user account to query
-        display_name (string): A unique display name string for the user,
-            usually their first and last name.
-        visibility (Visibility2Enum): Visibility of the user. The visibility
+        display_name (string): A unique display name string for the user
+            account, usually their first and last name
+        visibility (VisibilityEnum): Visibility of the user. The visibility
             attribute is set to DEFAULT when creating a user. The DEFAULT
             attribute makes a user visible to other users and user groups, and
             thus allows them to share objects.
-        mail (string): email of the user account
+        mail (string): Email of the user account
         group_names (list of string): A JSON array of group names
         privileges (list of PrivilegeEnum): A JSON array of privileges
             assigned to the user
-        state (State2Enum): Status of user account. acitve or inactive.
+        state (StateEnum): Status of user account. acitve or inactive.
         notify_on_share (NotifyOnShareEnum): User preference for receiving
             email notifications when another ThoughtSpot user shares answers
             or pinboards.
         show_walk_me (ShowWalkMeEnum): The user preference for revisiting the
             onboarding experience.
-        analyst_onboarding_complete (AnalystOnboardingCompleteEnum):
-            ThoughtSpot provides an interactive guided walkthrough to onboard
-            new users. The onboarding experience leads users through a set of
-            actions to help users get started and accomplish their tasks
-            quickly. The users can turn off the Onboarding experience and
-            access it again when they need assistance with the ThoughtSpot
-            UI.
+        analyst_onboarding_complete (AnalystOnboardingCompleteEnum): Status of
+            the Onboarding experience in ThoughtSpot UI.
         mtype (TypeEnum): Type of user. LOCAL_USER indicates that the user is
             created locally in the ThoughtSpot system.
 

@@ -10,8 +10,8 @@ import { Schema, stringEnum } from '../schema';
  * Enum for ShowWalkMeEnum
  */
 export enum ShowWalkMeEnum {
-  True = 'True',
-  False = 'False',
+  True = 'true',
+  False = 'false',
 }
 
 /**

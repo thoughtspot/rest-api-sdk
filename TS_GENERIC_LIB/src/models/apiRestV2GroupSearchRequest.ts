@@ -5,29 +5,29 @@
  */
 
 import { array, object, optional, Schema, string } from '../schema';
-import { Privilege1Enum, privilege1EnumSchema } from './privilege1Enum';
-import { Type3Enum, type3EnumSchema } from './type3Enum';
-import { VisibilityEnum, visibilityEnumSchema } from './visibilityEnum';
+import { PrivilegeEnum, privilegeEnumSchema } from './privilegeEnum';
+import { Type4Enum, type4EnumSchema } from './type4Enum';
+import { Visibility4Enum, visibility4EnumSchema } from './visibility4Enum';
 
 export interface ApiRestV2GroupSearchRequest {
   /** Name of the user group */
   name?: string;
-  /** GUID of the group to update */
+  /** GUID of the group */
   id?: string;
-  /** A unique display name string for the user group, for example, Developer group. */
+  /** A display name string for the user group, for example, Developer group. */
   displayName?: string;
-  /** Visibility of the user. The visibility attribute is set to DEFAULT when creating a user. Setting this to DEFAULT makes a user visible to other users and user groups, and thus allows them to share objects */
-  visibility?: VisibilityEnum;
-  /** Description text for the group. */
+  /** Visibility of the group. The visibility attribute is set to DEFAULT when creating a group. Setting this to DEFAULT makes a group visible to other users and user groups, and thus allows them to share objects */
+  visibility?: Visibility4Enum;
+  /** Description text for the group */
   description?: string;
-  /** A JSON array of privileges assigned to the group */
-  privileges?: Privilege1Enum[];
+  /** Privileges assigned to the group */
+  privileges?: PrivilegeEnum[];
   /** A JSON array of group names */
   groupNames?: string[];
   /** A JSON array of user names */
   userNames?: string[];
   /** Type of user group. LOCAL_GROUP indicates that the user is created locally in the ThoughtSpot system. */
-  type?: Type3Enum;
+  type?: Type4Enum;
 }
 
 export const apiRestV2GroupSearchRequestSchema: Schema<ApiRestV2GroupSearchRequest> = object(
@@ -35,11 +35,11 @@ export const apiRestV2GroupSearchRequestSchema: Schema<ApiRestV2GroupSearchReque
     name: ['name', optional(string())],
     id: ['id', optional(string())],
     displayName: ['displayName', optional(string())],
-    visibility: ['visibility', optional(visibilityEnumSchema)],
+    visibility: ['visibility', optional(visibility4EnumSchema)],
     description: ['description', optional(string())],
-    privileges: ['privileges', optional(array(privilege1EnumSchema))],
+    privileges: ['privileges', optional(array(privilegeEnumSchema))],
     groupNames: ['groupNames', optional(array(string()))],
     userNames: ['userNames', optional(array(string()))],
-    type: ['type', optional(type3EnumSchema)],
+    type: ['type', optional(type4EnumSchema)],
   }
 );

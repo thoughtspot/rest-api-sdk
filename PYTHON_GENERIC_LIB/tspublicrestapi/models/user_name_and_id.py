@@ -15,8 +15,8 @@ class UserNameAndID(object):
     TODO: type model description here.
 
     Attributes:
-        name (string): Username of the group
-        id (string): GUID of the group
+        name (string): Username of the user account
+        id (string): GUID of the user account
 
     """
 

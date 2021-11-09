@@ -20,7 +20,7 @@ public class ApiRestV2GroupAddprivilegeRequest {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String id;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private List<Privilege1Enum> privileges;
+    private List<PrivilegeEnum> privileges;
 
     /**
      * Default constructor.
@@ -32,12 +32,12 @@ public class ApiRestV2GroupAddprivilegeRequest {
      * Initialization constructor.
      * @param  name  String value for name.
      * @param  id  String value for id.
-     * @param  privileges  List of Privilege1Enum value for privileges.
+     * @param  privileges  List of PrivilegeEnum value for privileges.
      */
     public ApiRestV2GroupAddprivilegeRequest(
             String name,
             String id,
-            List<Privilege1Enum> privileges) {
+            List<PrivilegeEnum> privileges) {
         this.name = name;
         this.id = id;
         this.privileges = privileges;
@@ -65,7 +65,7 @@ public class ApiRestV2GroupAddprivilegeRequest {
 
     /**
      * Getter for Id.
-     * The GUID of the group to query.
+     * The GUID of the group.
      * @return Returns the String
      */
     @JsonGetter("id")
@@ -75,7 +75,7 @@ public class ApiRestV2GroupAddprivilegeRequest {
 
     /**
      * Setter for Id.
-     * The GUID of the group to query.
+     * The GUID of the group.
      * @param id Value for String
      */
     @JsonSetter("id")
@@ -85,21 +85,21 @@ public class ApiRestV2GroupAddprivilegeRequest {
 
     /**
      * Getter for Privileges.
-     * List of privileges
-     * @return Returns the List of Privilege1Enum
+     * A JSON array of privileges to be assigned to the group
+     * @return Returns the List of PrivilegeEnum
      */
     @JsonGetter("privileges")
-    public List<Privilege1Enum> getPrivileges() {
+    public List<PrivilegeEnum> getPrivileges() {
         return privileges;
     }
 
     /**
      * Setter for Privileges.
-     * List of privileges
-     * @param privileges Value for List of Privilege1Enum
+     * A JSON array of privileges to be assigned to the group
+     * @param privileges Value for List of PrivilegeEnum
      */
     @JsonSetter("privileges")
-    public void setPrivileges(List<Privilege1Enum> privileges) {
+    public void setPrivileges(List<PrivilegeEnum> privileges) {
         this.privileges = privileges;
     }
 
@@ -132,7 +132,7 @@ public class ApiRestV2GroupAddprivilegeRequest {
     public static class Builder {
         private String name;
         private String id;
-        private List<Privilege1Enum> privileges;
+        private List<PrivilegeEnum> privileges;
 
 
 
@@ -158,10 +158,10 @@ public class ApiRestV2GroupAddprivilegeRequest {
 
         /**
          * Setter for privileges.
-         * @param  privileges  List of Privilege1Enum value for privileges.
+         * @param  privileges  List of PrivilegeEnum value for privileges.
          * @return Builder
          */
-        public Builder privileges(List<Privilege1Enum> privileges) {
+        public Builder privileges(List<PrivilegeEnum> privileges) {
             this.privileges = privileges;
             return this;
         }

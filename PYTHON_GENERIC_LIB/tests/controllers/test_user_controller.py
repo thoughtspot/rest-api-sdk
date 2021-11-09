@@ -25,7 +25,7 @@ class UserControllerTests(ControllerTestBase):
         cls.response_catcher = HttpResponseCatcher()
         cls.controller = UserController(cls.config, cls.response_catcher)
 
-    # To get the details of a specific user account by username or user id, use this endpoint. At Least one value is needed. When both are given, user id will be considered to fetch user information
+    # To get the details of a specific user account by username or user id, use this endpoint.  At Least one value is needed.  When both are given, user id will be considered to fetch user information
     def test_get_user(self):
         # Parameters for the API call
         name = None
@@ -44,7 +44,7 @@ class UserControllerTests(ControllerTestBase):
         self.assertTrue(TestHelper.match_headers(expected_headers, self.response_catcher.response.headers))
 
 
-    # To remove a user from the ThoughtSpot system, use this endpoint. At least one value is needed. When both are given, then user id will be considered to delete user.
+    # To remove a user from the ThoughtSpot system, use this endpoint.  At Least one value needed.  When both are given user id will be considered to delete user.
     def test_delete_user(self):
         # Parameters for the API call
         name = None

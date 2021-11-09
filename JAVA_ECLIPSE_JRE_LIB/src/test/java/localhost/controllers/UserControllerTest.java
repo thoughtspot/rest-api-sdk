@@ -85,8 +85,8 @@ public class UserControllerTest extends BaseControllerTest {
     }
 
     /**
-     * To remove a user from the ThoughtSpot system, use this endpoint. At least one value is
-     * needed. When both are given, then user id will be considered to delete user.
+     * To remove a user from the ThoughtSpot system, use this endpoint. At Least one value needed.
+     * When both are given user id will be considered to delete user.
      * @throws Throwable exception if occurs.
      */
     @Test

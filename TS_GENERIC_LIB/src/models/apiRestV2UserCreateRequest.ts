@@ -10,13 +10,13 @@ import { TypeEnum, typeEnumSchema } from './typeEnum';
 import { VisibilityEnum, visibilityEnumSchema } from './visibilityEnum';
 
 export interface ApiRestV2UserCreateRequest {
-  /** Name of the user account. The username string must be unique. */
+  /** Name of the user. The username string must be unique. */
   name: string;
-  /** A display name string for the user, usually their first and last name. */
+  /** A unique display name string for the user, usually their first and last name. */
   displayName: string;
-  /** Visibility of the user. The visibility attribute is set to DEFAULT when creating a user. Setting this to DEFAULT makes a user visible to other users and user groups, and thus allows them to share objects */
+  /** Visibility of the user. The visibility attribute is set to DEFAULT when creating a user. The DEFAULT attribute makes a user visible to other users and user groups, and thus allows them to share objects. */
   visibility?: VisibilityEnum;
-  /** Email id associated with the user account */
+  /** email of the user */
   mail?: string;
   /** Password for the user account. */
   password: string;

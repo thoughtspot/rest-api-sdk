@@ -28,8 +28,8 @@ class UserController(BaseController):
         """Does a GET request to /api/rest/v2/user.
 
         To get the details of a specific user account by username or user id,
-        use this endpoint. At Least one value is needed. When both are given,
-        user id will be considered to fetch user information
+        use this endpoint.  At Least one value is needed.  When both are
+        given, user id will be considered to fetch user information
 
         Args:
             name (string, optional): Username of the user that you want to
@@ -84,8 +84,8 @@ class UserController(BaseController):
                     body):
         """Does a POST request to /api/rest/v2/user/create.
 
-        To programmatically create a user account in the ThoughtSpot system,
-        use this API endpoint. Using this API, you can create a user and
+        To programmatically create a user account in the ThoughtSpot system
+        use this API endpoint.  Using this API, you can create a user and
         assign groups. To create a user, you require admin user privileges.
         All users created in the ThoughtSpot system are added to ALL_GROUP
 
@@ -133,9 +133,9 @@ class UserController(BaseController):
         """Does a PUT request to /api/rest/v2/user/update.
 
         You can use this endpoint to programmatically modify an existing user
-        account. To modify a user, you require admin user privileges. At least
-        one of User Id or username is mandatory. When both are given, then
-        user id will be considered and username will be updated
+        account.   To modify a user, you require admin user privileges. At
+        least one of User Id or username is mandatory. When both are given,
+        then user id will be considered and username will be updated
 
         Args:
             body (ApiRestV2UserUpdateRequest): TODO: type description here.
@@ -176,13 +176,14 @@ class UserController(BaseController):
                     id=None):
         """Does a DELETE request to /api/rest/v2/user/delete.
 
-        To remove a user from the ThoughtSpot system, use this endpoint. At
-        least one value is needed. When both are given, then user id will be
+        To remove a user from the ThoughtSpot system, use this endpoint.  At
+        Least one value needed.  When both are given user id will be
         considered to delete user.
 
         Args:
-            name (string, optional): Username of the user account
-            id (string, optional): The GUID of the user account
+            name (string, optional): Username of the user that you want to
+                query.
+            id (string, optional): The GUID of the user account to query.
 
         Returns:
             bool: Response from the API. User successfully deleted
@@ -227,9 +228,9 @@ class UserController(BaseController):
                            body):
         """Does a PUT request to /api/rest/v2/user/addgroup.
 
-        To programmatically add groups to an existing ThoughtSpot user, use
+        To programmatically add groups to an existing ThoughtSpot user use
         this endpoint. When you assign groups to a user, the user inherits the
-        privileges assigned to those groups. At least one of user Id or
+        privileges assigned to those groups. At least one of User Id or
         username is mandatory. When both are given, then user id will be
         considered.
 
@@ -274,9 +275,9 @@ class UserController(BaseController):
 
         To programmatically remove groups from an existing ThoughtSpot user,
         use this API endpoint. The API removes only the user association. It
-        does not delete the user or group from the Thoughtspot system. At
-        least one of user id or username is mandatory. When both are given,
-        then user id will be considered.
+        does not delete the user or group from the Thoughtspot system At least
+        one of User Id or username is mandatory. When both are given, then
+        user id will be considered.
 
         Args:
             body (ApiRestV2UserRemovegroupRequest): TODO: type description
@@ -319,8 +320,8 @@ class UserController(BaseController):
         """Does a POST request to /api/rest/v2/user/search.
 
         To get the details of a specific user account or all users in the
-        ThoughtSpot system, use this endpoint. If no input is provided, then
-        all user are included in the response.
+        ThoughtSpot system use this end point.  If no inputs are provided,
+        then all user are included in the response.
 
         Args:
             body (ApiRestV2UserSearchRequest): TODO: type description here.

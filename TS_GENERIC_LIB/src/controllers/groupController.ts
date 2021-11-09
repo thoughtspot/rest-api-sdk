@@ -7,10 +7,6 @@
 import { ApiResponse, RequestOptions } from '../core';
 import { ErrorResponseError } from '../errors/errorResponseError';
 import {
-  ApiRestV2GroupAddgroupRequest,
-  apiRestV2GroupAddgroupRequestSchema,
-} from '../models/apiRestV2GroupAddgroupRequest';
-import {
   ApiRestV2GroupAddprivilegeRequest,
   apiRestV2GroupAddprivilegeRequestSchema,
 } from '../models/apiRestV2GroupAddprivilegeRequest';
@@ -23,14 +19,6 @@ import {
   apiRestV2GroupCreateRequestSchema,
 } from '../models/apiRestV2GroupCreateRequest';
 import {
-  ApiRestV2GroupRemovegroupRequest,
-  apiRestV2GroupRemovegroupRequestSchema,
-} from '../models/apiRestV2GroupRemovegroupRequest';
-import {
-  ApiRestV2GroupRemoveprivilegeRequest,
-  apiRestV2GroupRemoveprivilegeRequestSchema,
-} from '../models/apiRestV2GroupRemoveprivilegeRequest';
-import {
   ApiRestV2GroupRemoveuserRequest,
   apiRestV2GroupRemoveuserRequestSchema,
 } from '../models/apiRestV2GroupRemoveuserRequest';
@@ -38,10 +26,6 @@ import {
   ApiRestV2GroupSearchRequest,
   apiRestV2GroupSearchRequestSchema,
 } from '../models/apiRestV2GroupSearchRequest';
-import {
-  ApiRestV2GroupUpdateRequest,
-  apiRestV2GroupUpdateRequestSchema,
-} from '../models/apiRestV2GroupUpdateRequest';
 import { GroupResponse, groupResponseSchema } from '../models/groupResponse';
 import { array, boolean, optional, string } from '../schema';
 import { BaseController } from './baseController';
@@ -49,10 +33,10 @@ import { BaseController } from './baseController';
 export class GroupController extends BaseController {
   /**
    * To get the details of a specific group by name or id, use this endpoint. At Least one value needed.
-   * When both are given,then id will be considered to fetch user information.
+   * When both are given id will be considered to fetch user information.
    *
    * @param name Name of the group
-   * @param id   The GUID of the group
+   * @param id   The GUID of the group to query
    * @return Response from the API call
    */
   async getGroup(
@@ -72,11 +56,11 @@ export class GroupController extends BaseController {
   }
 
   /**
-   * To programmatically create a group in the ThoughtSpot system, use this API endpoint. Using this API,
+   * To programmatically create a group in the ThoughtSpot system use this API endpoint.  Using this API,
    * you can create a group and assign privileges and users. For ease of user management and access
-   * control, ThoughtSpot administrators can create groups and assign privileges to these groups. The
+   * control, ThoughtSpot administrators can create groups and assign privileges to these groups.  The
    * privileges determine the actions that the users belonging to a group are allowed to do. ThoughtSpot
-   * also has a default group called ALL_GROUP. When you create new group in ThoughtSpot, they are
+   * also has a default group called ALL_GROUP.  When you create new group in ThoughtSpot, they are
    * automatically added to ALL_GROUP. You cannot delete the ALL_GROUP or remove members from it.
    *
    * @param body
@@ -96,32 +80,11 @@ export class GroupController extends BaseController {
   }
 
   /**
-   * You can use this endpoint to programmatically modify an existing group.  To modify a group, you
-   * require admin user privileges.At least one of id or name is required to update the group. When both
-   * are given, then id will be considered and group name will be updated.
+   * To remove a group from the ThoughtSpot system, use this endpoint.  At least one value of name or id
+   * is needed.  When both are given group id will be considered to delete.
    *
-   * @param body
-   * @return Response from the API call
-   */
-  async updateGroup(
-    body: ApiRestV2GroupUpdateRequest,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<boolean>> {
-    const req = this.createRequest('PUT', '/api/rest/v2/group/update');
-    const mapped = req.prepareArgs({
-      body: [body, apiRestV2GroupUpdateRequestSchema],
-    });
-    req.json(mapped.body);
-    req.throwOn(500, ErrorResponseError, 'Operation failed or unauthorized request');
-    return req.callAsJson(boolean(), requestOptions);
-  }
-
-  /**
-   * To remove a group from the ThoughtSpot system, send a DELETE request to this endpoint. At Least one
-   * value needed.  When both are given,then user id will be considered to fetch user information.
-   *
-   * @param name Name of the group.
-   * @param id   The GUID of the group
+   * @param name Name of the group that you want to delete.
+   * @param id   The GUID of the group to delete.
    * @return Response from the API call
    */
   async deleteGroup(
@@ -141,52 +104,9 @@ export class GroupController extends BaseController {
   }
 
   /**
-   * To programmatically add privileges to an existing group, use API endpoint. When you assign
-   * privileges to a group,  all the users under to this group inherits the privileges assigned to that
-   * group. At least one of id or name of group is required. When both are given,then user id will be
-   * considered.
-   *
-   * @param body
-   * @return Response from the API call
-   */
-  async addPrivilegesToGroup(
-    body: ApiRestV2GroupAddprivilegeRequest,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<boolean>> {
-    const req = this.createRequest('PUT', '/api/rest/v2/group/addprivilege');
-    const mapped = req.prepareArgs({
-      body: [body, apiRestV2GroupAddprivilegeRequestSchema],
-    });
-    req.json(mapped.body);
-    req.throwOn(500, ErrorResponseError, 'Operation failed or unauthorized request');
-    return req.callAsJson(boolean(), requestOptions);
-  }
-
-  /**
-   * To programmatically remove privileges from a group, use API endpoint. The API removes only the
-   * privilege association. It does not delete the privilege or group from the Thoughtspot system. At
-   * least one of id or name of group is required. When both are given,then user id will be considered.
-   *
-   * @param body
-   * @return Response from the API call
-   */
-  async removePrivilegesFromGroup(
-    body: ApiRestV2GroupRemoveprivilegeRequest,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<boolean>> {
-    const req = this.createRequest('PUT', '/api/rest/v2/group/removeprivilege');
-    const mapped = req.prepareArgs({
-      body: [body, apiRestV2GroupRemoveprivilegeRequestSchema],
-    });
-    req.json(mapped.body);
-    req.throwOn(500, ErrorResponseError, 'Operation failed or unauthorized request');
-    return req.callAsJson(boolean(), requestOptions);
-  }
-
-  /**
-   * To programmatically add existing ThoughtSpot users to a group, use this API endpoint. When you
-   * assign users to a group, the users inherits the privileges assigned to that group. At least one of
-   * id or name of the group is required. When both are given,then user id will be considered.
+   * To programmatically add existing ThoughtSpot users to a group use API endpoint. When you assign
+   * users to a group, the users inherits the privileges assigned to that group. At least one of id or
+   * name of group is required. When both are given user id will be considered.
    *
    * @param body
    * @return Response from the API call
@@ -205,9 +125,9 @@ export class GroupController extends BaseController {
   }
 
   /**
-   * To programmatically remove users from a group, use API endpoint.The API removes only the user
-   * association. It does not delete the users or group from the Thoughtspot system. At least one of id
-   * or name of group is required. When both are given,then user id will be considered.
+   * To programmatically remove users from a group, use this API endpoint.  The API removes only the user
+   * association. It does not delete the users or group from the Thoughtspot system.  At least one of id
+   * or name of group is required. When both are given, id will be considered.
    *
    * @param body
    * @return Response from the API call
@@ -226,20 +146,20 @@ export class GroupController extends BaseController {
   }
 
   /**
-   * To programmatically add existing groups to a group, use API endpoint. When you assign groups to a
-   * group, the group inherits the privileges assigned to those groups. At least one of id or name of
-   * group is required. When both are given,then user id will be considered.
+   * To programmatically add privileges to an existing group, use API endpoint.  When you assign
+   * privileges to a group,  all the users under to this group inherits the privileges assigned from this
+   * group.  At least one of id or name of group is required. When both are given id will be considered.
    *
    * @param body
    * @return Response from the API call
    */
-  async addGroupsToGroup(
-    body: ApiRestV2GroupAddgroupRequest,
+  async addPrivilegesToGroup(
+    body: ApiRestV2GroupAddprivilegeRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<boolean>> {
-    const req = this.createRequest('PUT', '/api/rest/v2/group/addgroup');
+    const req = this.createRequest('PUT', '/api/rest/v2/group/addprivilege');
     const mapped = req.prepareArgs({
-      body: [body, apiRestV2GroupAddgroupRequestSchema],
+      body: [body, apiRestV2GroupAddprivilegeRequestSchema],
     });
     req.json(mapped.body);
     req.throwOn(500, ErrorResponseError, 'Operation failed or unauthorized request');
@@ -247,29 +167,8 @@ export class GroupController extends BaseController {
   }
 
   /**
-   * To programmatically remove groups from a group, use API endpoint.The API removes only the group
-   * association. It does not delete the group from the Thoughtspot system. At least one of id or name of
-   * group is required. When both are given,then user id will be considered.
-   *
-   * @param body
-   * @return Response from the API call
-   */
-  async removeGroupsFromGroup(
-    body: ApiRestV2GroupRemovegroupRequest,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<boolean>> {
-    const req = this.createRequest('PUT', '/api/rest/v2/group/removegroup');
-    const mapped = req.prepareArgs({
-      body: [body, apiRestV2GroupRemovegroupRequestSchema],
-    });
-    req.json(mapped.body);
-    req.throwOn(500, ErrorResponseError, 'Operation failed or unauthorized request');
-    return req.callAsJson(boolean(), requestOptions);
-  }
-
-  /**
-   * To get the details of a specific group account or all groups in the ThoughtSpot system, use this end
-   * point.
+   * To get the details of a specific group account or all groups in the ThoughtSpot system use this end
+   * point. If no inputs are provided, then all groups are included in the response.
    *
    * @param body
    * @return Response from the API call

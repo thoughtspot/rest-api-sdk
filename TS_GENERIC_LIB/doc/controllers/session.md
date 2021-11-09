@@ -12,14 +12,14 @@ const sessionController = new SessionController(client);
 
 * [Session Info](/doc/controllers/session.md#session-info)
 * [Login](/doc/controllers/session.md#login)
-* [Gettoken](/doc/controllers/session.md#gettoken)
+* [Get Token](/doc/controllers/session.md#get-token)
 * [Logout](/doc/controllers/session.md#logout)
-* [Revoketoken](/doc/controllers/session.md#revoketoken)
+* [Revoke Token](/doc/controllers/session.md#revoke-token)
 
 
 # Session Info
 
-To get session object information, use this endpoint
+Get Session object information
 
 ```ts
 async sessionInfo(
@@ -61,7 +61,7 @@ try {
 
 # Login
 
-To programmatically login a user to ThoughtSpot, use this endpoint
+You can programmatically login a user to ThoughtSpot
 
 :information_source: **Note** This endpoint does not require authentication.
 
@@ -110,12 +110,14 @@ try {
 | 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
 
 
-# Gettoken
+# Get Token
 
-To programmatically create token for a user in ThoughtSpot, use this endpoint
+You can programmatically create token for a user in ThoughtSpot
+
+:information_source: **Note** This endpoint does not require authentication.
 
 ```ts
-async gettoken(
+async getToken(
   body: ApiRestV2SessionGettokenRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<SessionLoginResponse>>
@@ -141,7 +143,7 @@ const body: ApiRestV2SessionGettokenRequest = {
 };
 
 try {
-  const { result, ...httpResponse } = await sessionController.gettoken(body);
+  const { result, ...httpResponse } = await sessionController.getToken(body);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch(error) {
@@ -203,12 +205,12 @@ try {
 | 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
 
 
-# Revoketoken
+# Revoke Token
 
 To expire or revoke a token for a user, use this endpoint
 
 ```ts
-async revoketoken(
+async revokeToken(
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<boolean>>
 ```
@@ -227,7 +229,7 @@ async revoketoken(
 
 ```ts
 try {
-  const { result, ...httpResponse } = await sessionController.revoketoken();
+  const { result, ...httpResponse } = await sessionController.revokeToken();
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch(error) {

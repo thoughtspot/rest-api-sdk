@@ -9,8 +9,8 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `name` | `string \| undefined` | Optional | Name of the group to which group  is added |
-| `id` | `string \| undefined` | Optional | GUID of the group to which group  is added |
+| `name` | `string \| undefined` | Optional | Name of the group |
+| `id` | `string \| undefined` | Optional | GUID of the group |
 
 ## Example (as JSON)
 

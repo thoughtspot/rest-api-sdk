@@ -25,7 +25,7 @@ class SessionControllerTests(ControllerTestBase):
         cls.response_catcher = HttpResponseCatcher()
         cls.controller = SessionController(cls.config, cls.response_catcher)
 
-    # To get session object information, use this endpoint
+    # Get Session object information
     def test_session_info(self):
 
         # Perform the API call through the SDK function
@@ -58,10 +58,10 @@ class SessionControllerTests(ControllerTestBase):
 
 
     # To expire or revoke a token for a user, use this endpoint
-    def test_revoketoken(self):
+    def test_revoke_token(self):
 
         # Perform the API call through the SDK function
-        result = self.controller.revoketoken()
+        result = self.controller.revoke_token()
 
         # Test response code
         self.assertEquals(self.response_catcher.response.status_code, 200)

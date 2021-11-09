@@ -16,8 +16,9 @@ class ApiRestV2GroupAddprivilegeRequest(object):
 
     Attributes:
         name (string): Name of the group
-        id (string): The GUID of the group to query.
-        privileges (list of Privilege1Enum): List of privileges
+        id (string): The GUID of the group.
+        privileges (list of PrivilegeEnum): A JSON array of privileges to be
+            assigned to the group
 
     """
 

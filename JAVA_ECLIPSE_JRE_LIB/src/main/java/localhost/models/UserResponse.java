@@ -285,7 +285,7 @@ public class UserResponse {
 
     /**
      * Getter for Groups.
-     * Name of the group to which user account is added
+     * The groups to which user account is added
      * @return Returns the List of GroupNameAndID
      */
     @JsonGetter("groups")
@@ -295,7 +295,7 @@ public class UserResponse {
 
     /**
      * Setter for Groups.
-     * Name of the group to which user account is added
+     * The groups to which user account is added
      * @param groups Value for List of GroupNameAndID
      */
     @JsonSetter("groups")
@@ -505,7 +505,7 @@ public class UserResponse {
 
     /**
      * Getter for IsExternal.
-     * Indicates if the user account is from external system isDeprecated
+     * Indicates if the user account is from external system
      * @return Returns the Boolean
      */
     @JsonGetter("isExternal")
@@ -515,7 +515,7 @@ public class UserResponse {
 
     /**
      * Setter for IsExternal.
-     * Indicates if the user account is from external system isDeprecated
+     * Indicates if the user account is from external system
      * @param isExternal Value for Boolean
      */
     @JsonSetter("isExternal")

@@ -167,7 +167,7 @@ public final class UserController extends BaseController {
     }
 
     /**
-     * To programmatically create a user account in the ThoughtSpot system, use this API endpoint.
+     * To programmatically create a user account in the ThoughtSpot system use this API endpoint.
      * Using this API, you can create a user and assign groups. To create a user, you require admin
      * user privileges. All users created in the ThoughtSpot system are added to ALL_GROUP.
      * @param  body  Required parameter: Example:
@@ -187,7 +187,7 @@ public final class UserController extends BaseController {
     }
 
     /**
-     * To programmatically create a user account in the ThoughtSpot system, use this API endpoint.
+     * To programmatically create a user account in the ThoughtSpot system use this API endpoint.
      * Using this API, you can create a user and assign groups. To create a user, you require admin
      * user privileges. All users created in the ThoughtSpot system are added to ALL_GROUP.
      * @param  body  Required parameter: Example:
@@ -361,10 +361,10 @@ public final class UserController extends BaseController {
     }
 
     /**
-     * To remove a user from the ThoughtSpot system, use this endpoint. At least one value is
-     * needed. When both are given, then user id will be considered to delete user.
-     * @param  name  Optional parameter: Username of the user account
-     * @param  id  Optional parameter: The GUID of the user account
+     * To remove a user from the ThoughtSpot system, use this endpoint. At Least one value needed.
+     * When both are given user id will be considered to delete user.
+     * @param  name  Optional parameter: Username of the user that you want to query.
+     * @param  id  Optional parameter: The GUID of the user account to query.
      * @return    Returns the Boolean response from the API call
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
@@ -382,10 +382,10 @@ public final class UserController extends BaseController {
     }
 
     /**
-     * To remove a user from the ThoughtSpot system, use this endpoint. At least one value is
-     * needed. When both are given, then user id will be considered to delete user.
-     * @param  name  Optional parameter: Username of the user account
-     * @param  id  Optional parameter: The GUID of the user account
+     * To remove a user from the ThoughtSpot system, use this endpoint. At Least one value needed.
+     * When both are given user id will be considered to delete user.
+     * @param  name  Optional parameter: Username of the user that you want to query.
+     * @param  id  Optional parameter: The GUID of the user account to query.
      * @return    Returns the Boolean response from the API call
      */
     public CompletableFuture<Boolean> deleteUserAsync(
@@ -464,9 +464,9 @@ public final class UserController extends BaseController {
     }
 
     /**
-     * To programmatically add groups to an existing ThoughtSpot user, use this endpoint. When you
+     * To programmatically add groups to an existing ThoughtSpot user use this endpoint. When you
      * assign groups to a user, the user inherits the privileges assigned to those groups. At least
-     * one of user Id or username is mandatory. When both are given, then user id will be
+     * one of User Id or username is mandatory. When both are given, then user id will be
      * considered.
      * @param  body  Required parameter: Example:
      * @return    Returns the Boolean response from the API call
@@ -485,9 +485,9 @@ public final class UserController extends BaseController {
     }
 
     /**
-     * To programmatically add groups to an existing ThoughtSpot user, use this endpoint. When you
+     * To programmatically add groups to an existing ThoughtSpot user use this endpoint. When you
      * assign groups to a user, the user inherits the privileges assigned to those groups. At least
-     * one of user Id or username is mandatory. When both are given, then user id will be
+     * one of User Id or username is mandatory. When both are given, then user id will be
      * considered.
      * @param  body  Required parameter: Example:
      * @return    Returns the Boolean response from the API call
@@ -564,7 +564,7 @@ public final class UserController extends BaseController {
     /**
      * To programmatically remove groups from an existing ThoughtSpot user, use this API endpoint.
      * The API removes only the user association. It does not delete the user or group from the
-     * Thoughtspot system. At least one of user id or username is mandatory. When both are given,
+     * Thoughtspot system At least one of User Id or username is mandatory. When both are given,
      * then user id will be considered.
      * @param  body  Required parameter: Example:
      * @return    Returns the Boolean response from the API call
@@ -585,7 +585,7 @@ public final class UserController extends BaseController {
     /**
      * To programmatically remove groups from an existing ThoughtSpot user, use this API endpoint.
      * The API removes only the user association. It does not delete the user or group from the
-     * Thoughtspot system. At least one of user id or username is mandatory. When both are given,
+     * Thoughtspot system At least one of User Id or username is mandatory. When both are given,
      * then user id will be considered.
      * @param  body  Required parameter: Example:
      * @return    Returns the Boolean response from the API call
@@ -660,8 +660,8 @@ public final class UserController extends BaseController {
     }
 
     /**
-     * To get the details of a specific user account or all users in the ThoughtSpot system, use
-     * this endpoint. If no input is provided, then all user are included in the response.
+     * To get the details of a specific user account or all users in the ThoughtSpot system use this
+     * end point. If no inputs are provided, then all user are included in the response.
      * @param  body  Required parameter: Example:
      * @return    Returns the List of UserResponse response from the API call
      * @throws    ApiException    Represents error response from the server.
@@ -679,8 +679,8 @@ public final class UserController extends BaseController {
     }
 
     /**
-     * To get the details of a specific user account or all users in the ThoughtSpot system, use
-     * this endpoint. If no input is provided, then all user are included in the response.
+     * To get the details of a specific user account or all users in the ThoughtSpot system use this
+     * end point. If no inputs are provided, then all user are included in the response.
      * @param  body  Required parameter: Example:
      * @return    Returns the List of UserResponse response from the API call
      */

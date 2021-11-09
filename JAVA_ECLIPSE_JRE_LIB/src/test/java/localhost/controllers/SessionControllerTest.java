@@ -49,7 +49,7 @@ public class SessionControllerTest extends BaseControllerTest {
     }
 
     /**
-     * To get session object information, use this endpoint.
+     * Get Session object information.
      * @throws Throwable exception if occurs.
      */
     @Test
@@ -113,11 +113,11 @@ public class SessionControllerTest extends BaseControllerTest {
      * @throws Throwable exception if occurs.
      */
     @Test
-    public void testTestRevoketoken() throws Exception {
+    public void testTestRevokeToken() throws Exception {
 
         // Set callback and perform API call
         try {
-            controller.revoketoken();
+            controller.revokeToken();
         } catch (ApiException e) {
             // Empty block
         }

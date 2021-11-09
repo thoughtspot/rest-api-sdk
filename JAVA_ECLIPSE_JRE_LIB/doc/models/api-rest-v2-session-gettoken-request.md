@@ -11,7 +11,7 @@
 |  --- | --- | --- | --- | --- | --- |
 | `UserName` | `String` | Required | Username of the user account | String getUserName() | setUserName(String userName) |
 | `Password` | `String` | Required | The password of the user account | String getPassword() | setPassword(String password) |
-| `TokenExpiryDuration` | `Integer` | Optional | Provide duration in seconds after which the token should expire | Integer getTokenExpiryDuration() | setTokenExpiryDuration(Integer tokenExpiryDuration) |
+| `ExpiryTimeMs` | `String` | Optional | Provide the time duration in milliseconds to expire the token. If no input is provided then the value set at cluster level will be considered | String getExpiryTimeMs() | setExpiryTimeMs(String expiryTimeMs) |
 
 ## Example (as JSON)
 
@@ -19,7 +19,7 @@
 {
   "userName": "userName2",
   "password": "password4",
-  "tokenExpiryDuration": null
+  "expiryTimeMs": null
 }
 ```
 

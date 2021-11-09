@@ -12,8 +12,8 @@ class Type3Enum(object):
 
     """Implementation of the 'Type3' enum.
 
-    Type of user group. LOCAL_GROUP indicates that the user is created locally
-    in the ThoughtSpot system.
+    Type of user group. LOCAL_GROUP indicates that the group is created
+    locally in the ThoughtSpot system.
 
     Attributes:
         LOCAL_GROUP: TODO: type description here.

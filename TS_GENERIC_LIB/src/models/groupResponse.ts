@@ -13,7 +13,6 @@ import {
   optional,
   Schema,
   string,
-  unknown,
 } from '../schema';
 import { GroupNameAndID, groupNameAndIDSchema } from './groupNameAndID';
 import {
@@ -23,52 +22,52 @@ import {
 import { UserNameAndID, userNameAndIDSchema } from './userNameAndID';
 
 export interface GroupResponse {
-  /** Name of the group */
+  /** Username of the user account */
   name?: string;
-  /** A unique display name string for the user group */
+  /** Display name of the user account */
   displayName?: string;
-  /** GUID of the group */
+  /** GUID of the user account */
   id?: string;
-  /** Visibility of the group */
+  /** Visibility of the user account */
   visibility?: string;
   /** Description of the group */
   description?: string;
   /** Privileges assigned to the group */
   privileges?: string[];
-  /** Name of the group to which is added */
+  /** Groups to which usergroup is added */
   groups?: GroupNameAndID[];
   /** Pinboards assigned to the group */
   assignedPinboards?: PinboardNameAndID[];
-  userGroupContent?: unknown;
-  /** Tags assigned to the group */
+  userGroupContent?: string;
+  /** Tags assigned to the usergroup */
   tags?: string[];
-  /** Indicates if the group is deleted */
+  /** Indicates if the user account is deleted */
   isDeleted?: boolean;
-  /** Indicates if the group is hidden */
+  /** Indicates if the user account is hidden */
   isHidden?: boolean;
-  /** Indicates if the group is from external system */
+  /** Indicates if the user account is from external system */
   isExternal?: boolean;
   isDeprecated?: boolean;
   /** Indicates if the all the properties of group is provided */
   complete?: boolean;
-  /** Indicates if the group is system principal */
+  /** Indicates if the user account is system principal */
   isSystemPrincipal?: boolean;
-  /** Indicates the type of group */
+  /** Indicates the type of user account */
   type?: string;
   /** Indicates the type of parent object */
   parenttype?: string;
   groupIdx?: number;
-  metadataVersion?: number;
-  /** Tenant id associated with the group */
+  metadataVersion?: string;
+  /** Tenant id associated with the user account */
   tenantId?: string;
+  generationNum?: string;
   indexVersion?: number;
-  generationNum?: number;
-  /** Date and time when group was created */
+  /** Date and time when usergroup was created */
   created?: number;
-  /** Date and time of last modification of the group */
+  /** Date and time of last modification of usergroup */
   modified?: number;
-  modifiedBy?: UserNameAndID;
   author?: UserNameAndID;
+  modifiedBy?: UserNameAndID;
   owner?: UserNameAndID;
 }
 
@@ -84,7 +83,7 @@ export const groupResponseSchema: Schema<GroupResponse> = object({
     'assignedPinboards',
     optional(array(lazy(() => pinboardNameAndIDSchema))),
   ],
-  userGroupContent: ['userGroupContent', optional(unknown())],
+  userGroupContent: ['userGroupContent', optional(string())],
   tags: ['tags', optional(array(string()))],
   isDeleted: ['isDeleted', optional(boolean())],
   isHidden: ['isHidden', optional(boolean())],
@@ -95,13 +94,13 @@ export const groupResponseSchema: Schema<GroupResponse> = object({
   type: ['type', optional(string())],
   parenttype: ['parenttype', optional(string())],
   groupIdx: ['groupIdx', optional(number())],
-  metadataVersion: ['metadataVersion', optional(number())],
+  metadataVersion: ['metadataVersion', optional(string())],
   tenantId: ['tenantId', optional(string())],
+  generationNum: ['generationNum', optional(string())],
   indexVersion: ['indexVersion', optional(number())],
-  generationNum: ['generationNum', optional(number())],
   created: ['created', optional(number())],
   modified: ['modified', optional(number())],
-  modifiedBy: ['modifiedBy', optional(lazy(() => userNameAndIDSchema))],
   author: ['author', optional(lazy(() => userNameAndIDSchema))],
+  modifiedBy: ['modifiedBy', optional(lazy(() => userNameAndIDSchema))],
   owner: ['owner', optional(lazy(() => userNameAndIDSchema))],
 });

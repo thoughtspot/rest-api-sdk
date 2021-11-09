@@ -11,6 +11,6 @@ The user preference for revisiting the onboarding experience.
 
 | Name |
 |  --- |
-| `ENUM_TRUE` |
-| `ENUM_FALSE` |
+| `TRUE` |
+| `FALSE` |
 

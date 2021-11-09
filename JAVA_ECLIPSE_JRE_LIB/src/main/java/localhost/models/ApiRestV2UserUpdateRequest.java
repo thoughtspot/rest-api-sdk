@@ -96,7 +96,7 @@ public class ApiRestV2UserUpdateRequest {
 
     /**
      * Getter for Name.
-     * Name of the user account. The username string must be unique.
+     * Name of the user. The username string must be unique.
      * @return Returns the String
      */
     @JsonGetter("name")
@@ -106,7 +106,7 @@ public class ApiRestV2UserUpdateRequest {
 
     /**
      * Setter for Name.
-     * Name of the user account. The username string must be unique.
+     * Name of the user. The username string must be unique.
      * @param name Value for String
      */
     @JsonSetter("name")
@@ -116,7 +116,7 @@ public class ApiRestV2UserUpdateRequest {
 
     /**
      * Getter for Id.
-     * The GUID of the user account
+     * The GUID of the user account to query.
      * @return Returns the String
      */
     @JsonGetter("id")
@@ -126,7 +126,7 @@ public class ApiRestV2UserUpdateRequest {
 
     /**
      * Setter for Id.
-     * The GUID of the user account
+     * The GUID of the user account to query.
      * @param id Value for String
      */
     @JsonSetter("id")
@@ -136,7 +136,7 @@ public class ApiRestV2UserUpdateRequest {
 
     /**
      * Getter for DisplayName.
-     * A display name string for the user, usually their first and last name.
+     * A unique display name string for the user, usually their first and last name.
      * @return Returns the String
      */
     @JsonGetter("displayName")
@@ -146,7 +146,7 @@ public class ApiRestV2UserUpdateRequest {
 
     /**
      * Setter for DisplayName.
-     * A display name string for the user, usually their first and last name.
+     * A unique display name string for the user, usually their first and last name.
      * @param displayName Value for String
      */
     @JsonSetter("displayName")
@@ -156,9 +156,9 @@ public class ApiRestV2UserUpdateRequest {
 
     /**
      * Getter for Visibility.
-     * Visibility of the user. The visibility attribute is set to DEFAULT when creating a user.
-     * Setting this to DEFAULT makes a user visible to other users and user groups, and thus allows
-     * them to share objects
+     * Visibility of the user. The visibility attribute is set to DEFAULT when creating a user. The
+     * DEFAULT attribute makes a user visible to other users and user groups, and thus allows them
+     * to share objects.
      * @return Returns the VisibilityEnum
      */
     @JsonGetter("visibility")
@@ -168,9 +168,9 @@ public class ApiRestV2UserUpdateRequest {
 
     /**
      * Setter for Visibility.
-     * Visibility of the user. The visibility attribute is set to DEFAULT when creating a user.
-     * Setting this to DEFAULT makes a user visible to other users and user groups, and thus allows
-     * them to share objects
+     * Visibility of the user. The visibility attribute is set to DEFAULT when creating a user. The
+     * DEFAULT attribute makes a user visible to other users and user groups, and thus allows them
+     * to share objects.
      * @param visibility Value for VisibilityEnum
      */
     @JsonSetter("visibility")
@@ -180,7 +180,7 @@ public class ApiRestV2UserUpdateRequest {
 
     /**
      * Getter for Mail.
-     * Email id associated with the user account
+     * email of the user
      * @return Returns the String
      */
     @JsonGetter("mail")
@@ -190,7 +190,7 @@ public class ApiRestV2UserUpdateRequest {
 
     /**
      * Setter for Mail.
-     * Email id associated with the user account
+     * email of the user
      * @param mail Value for String
      */
     @JsonSetter("mail")

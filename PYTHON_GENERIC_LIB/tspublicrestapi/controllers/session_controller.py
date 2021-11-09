@@ -26,7 +26,7 @@ class SessionController(BaseController):
     def session_info(self):
         """Does a GET request to /api/rest/v2/session.
 
-        To get session object information, use this endpoint
+        Get Session object information
 
         Returns:
             SessionInfoResponse: Response from the API. Session object
@@ -69,7 +69,7 @@ class SessionController(BaseController):
               body):
         """Does a POST request to /api/rest/v2/session/login.
 
-        To programmatically login a user to ThoughtSpot, use this endpoint
+        You can programmatically login a user to ThoughtSpot
 
         Args:
             body (ApiRestV2SessionLoginRequest): TODO: type description here.
@@ -110,12 +110,11 @@ class SessionController(BaseController):
 
         return decoded
 
-    def gettoken(self,
-                 body):
+    def get_token(self,
+                  body):
         """Does a POST request to /api/rest/v2/session/gettoken.
 
-        To programmatically create token for a user in ThoughtSpot, use this
-        endpoint
+        You can programmatically create token for a user in ThoughtSpot
 
         Args:
             body (ApiRestV2SessionGettokenRequest): TODO: type description
@@ -146,7 +145,6 @@ class SessionController(BaseController):
 
         # Prepare and execute request
         _request = self.config.http_client.post(_query_url, headers=_headers, parameters=APIHelper.json_serialize(body))
-        OAuth2.apply(self.config, _request)
         _response = self.execute_request(_request)
 
         # Endpoint and global error handling using HTTP status codes.
@@ -194,7 +192,7 @@ class SessionController(BaseController):
 
         return decoded
 
-    def revoketoken(self):
+    def revoke_token(self):
         """Does a POST request to /api/rest/v2/session/revoketoken.
 
         To expire or revoke a token for a user, use this endpoint

@@ -15,15 +15,14 @@ class ApiRestV2UserCreateRequest(object):
     TODO: type model description here.
 
     Attributes:
-        name (string): Name of the user account. The username string must be
-            unique.
-        display_name (string): A display name string for the user, usually
-            their first and last name.
+        name (string): Name of the user. The username string must be unique.
+        display_name (string): A unique display name string for the user,
+            usually their first and last name.
         visibility (VisibilityEnum): Visibility of the user. The visibility
-            attribute is set to DEFAULT when creating a user. Setting this to
-            DEFAULT makes a user visible to other users and user groups, and
-            thus allows them to share objects
-        mail (string): Email id associated with the user account
+            attribute is set to DEFAULT when creating a user. The DEFAULT
+            attribute makes a user visible to other users and user groups, and
+            thus allows them to share objects.
+        mail (string): email of the user
         password (string): Password for the user account.
         group_names (list of string): A JSON array of group names
         state (StateEnum): Status of user account. acitve or inactive.

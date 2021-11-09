@@ -23,8 +23,6 @@ public class ApiRestV2SessionLoginRequest {
      * Default constructor.
      */
     public ApiRestV2SessionLoginRequest() {
-        userName = "abc";
-        password = "abc";
         rememberMe = false;
     }
 
@@ -130,8 +128,8 @@ public class ApiRestV2SessionLoginRequest {
      * Class to build instances of {@link ApiRestV2SessionLoginRequest}.
      */
     public static class Builder {
-        private String userName = "abc";
-        private String password = "abc";
+        private String userName;
+        private String password;
         private Boolean rememberMe = false;
 
         /**

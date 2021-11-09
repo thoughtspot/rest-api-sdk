@@ -56,7 +56,7 @@ public final class SessionController extends BaseController {
     }
 
     /**
-     * To get session object information, use this endpoint.
+     * Get Session object information.
      * @return    Returns the SessionInfoResponse response from the API call
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
@@ -72,7 +72,7 @@ public final class SessionController extends BaseController {
     }
 
     /**
-     * To get session object information, use this endpoint.
+     * Get Session object information.
      * @return    Returns the SessionInfoResponse response from the API call
      */
     public CompletableFuture<SessionInfoResponse> sessionInfoAsync() {
@@ -143,7 +143,7 @@ public final class SessionController extends BaseController {
     }
 
     /**
-     * To programmatically login a user to ThoughtSpot, use this endpoint.
+     * You can programmatically login a user to ThoughtSpot.
      * @param  body  Required parameter: Example:
      * @return    Returns the SessionLoginResponse response from the API call
      * @throws    ApiException    Represents error response from the server.
@@ -159,7 +159,7 @@ public final class SessionController extends BaseController {
     }
 
     /**
-     * To programmatically login a user to ThoughtSpot, use this endpoint.
+     * You can programmatically login a user to ThoughtSpot.
      * @param  body  Required parameter: Example:
      * @return    Returns the SessionLoginResponse response from the API call
      */
@@ -234,41 +234,37 @@ public final class SessionController extends BaseController {
     }
 
     /**
-     * To programmatically create token for a user in ThoughtSpot, use this endpoint.
+     * You can programmatically create token for a user in ThoughtSpot.
      * @param  body  Required parameter: Example:
      * @return    Returns the SessionLoginResponse response from the API call
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
-    public SessionLoginResponse gettoken(
+    public SessionLoginResponse getToken(
             final ApiRestV2SessionGettokenRequest body) throws ApiException, IOException {
-        HttpRequest request = buildGettokenRequest(body);
-        authManagers.get("global").apply(request);
-
+        HttpRequest request = buildGetTokenRequest(body);
         HttpResponse response = getClientInstance().execute(request, false);
         HttpContext context = new HttpContext(request, response);
 
-        return handleGettokenResponse(context);
+        return handleGetTokenResponse(context);
     }
 
     /**
-     * To programmatically create token for a user in ThoughtSpot, use this endpoint.
+     * You can programmatically create token for a user in ThoughtSpot.
      * @param  body  Required parameter: Example:
      * @return    Returns the SessionLoginResponse response from the API call
      */
-    public CompletableFuture<SessionLoginResponse> gettokenAsync(
+    public CompletableFuture<SessionLoginResponse> getTokenAsync(
             final ApiRestV2SessionGettokenRequest body) {
-        return makeHttpCallAsync(() -> buildGettokenRequest(body),
-            req -> authManagers.get("global").applyAsync(req)
-                .thenCompose(request -> getClientInstance()
-                        .executeAsync(request, false)),
-            context -> handleGettokenResponse(context));
+        return makeHttpCallAsync(() -> buildGetTokenRequest(body),
+            request -> getClientInstance().executeAsync(request, false),
+            context -> handleGetTokenResponse(context));
     }
 
     /**
-     * Builds the HttpRequest object for gettoken.
+     * Builds the HttpRequest object for getToken.
      */
-    private HttpRequest buildGettokenRequest(
+    private HttpRequest buildGetTokenRequest(
             final ApiRestV2SessionGettokenRequest body) throws JsonProcessingException {
         //the base uri for api requests
         String baseUri = config.getBaseUri();
@@ -281,6 +277,7 @@ public final class SessionController extends BaseController {
         Headers headers = new Headers();
         headers.add("Content-Type", config.getContentType());
         headers.add("Accept-Language", config.getAcceptLanguage());
+
         headers.add("user-agent", BaseController.userAgent);
         headers.add("accept", "application/json");
         headers.add("content-type", "application/json");
@@ -298,10 +295,10 @@ public final class SessionController extends BaseController {
     }
 
     /**
-     * Processes the response for gettoken.
+     * Processes the response for getToken.
      * @return An object of type SessionLoginResponse
      */
-    private SessionLoginResponse handleGettokenResponse(
+    private SessionLoginResponse handleGetTokenResponse(
             HttpContext context) throws ApiException, IOException {
         HttpResponse response = context.getResponse();
 
@@ -415,32 +412,32 @@ public final class SessionController extends BaseController {
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
-    public Boolean revoketoken() throws ApiException, IOException {
-        HttpRequest request = buildRevoketokenRequest();
+    public Boolean revokeToken() throws ApiException, IOException {
+        HttpRequest request = buildRevokeTokenRequest();
         authManagers.get("global").apply(request);
 
         HttpResponse response = getClientInstance().execute(request, false);
         HttpContext context = new HttpContext(request, response);
 
-        return handleRevoketokenResponse(context);
+        return handleRevokeTokenResponse(context);
     }
 
     /**
      * To expire or revoke a token for a user, use this endpoint.
      * @return    Returns the Boolean response from the API call
      */
-    public CompletableFuture<Boolean> revoketokenAsync() {
-        return makeHttpCallAsync(() -> buildRevoketokenRequest(),
+    public CompletableFuture<Boolean> revokeTokenAsync() {
+        return makeHttpCallAsync(() -> buildRevokeTokenRequest(),
             req -> authManagers.get("global").applyAsync(req)
                 .thenCompose(request -> getClientInstance()
                         .executeAsync(request, false)),
-            context -> handleRevoketokenResponse(context));
+            context -> handleRevokeTokenResponse(context));
     }
 
     /**
-     * Builds the HttpRequest object for revoketoken.
+     * Builds the HttpRequest object for revokeToken.
      */
-    private HttpRequest buildRevoketokenRequest() {
+    private HttpRequest buildRevokeTokenRequest() {
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 
@@ -466,10 +463,10 @@ public final class SessionController extends BaseController {
     }
 
     /**
-     * Processes the response for revoketoken.
+     * Processes the response for revokeToken.
      * @return An object of type boolean
      */
-    private Boolean handleRevoketokenResponse(
+    private Boolean handleRevokeTokenResponse(
             HttpContext context) throws ApiException, IOException {
         HttpResponse response = context.getResponse();
 

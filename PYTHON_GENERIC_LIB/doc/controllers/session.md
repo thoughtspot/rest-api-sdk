@@ -12,14 +12,14 @@ session_controller = client.session
 
 * [Session Info](/doc/controllers/session.md#session-info)
 * [Login](/doc/controllers/session.md#login)
-* [Gettoken](/doc/controllers/session.md#gettoken)
+* [Get Token](/doc/controllers/session.md#get-token)
 * [Logout](/doc/controllers/session.md#logout)
-* [Revoketoken](/doc/controllers/session.md#revoketoken)
+* [Revoke Token](/doc/controllers/session.md#revoke-token)
 
 
 # Session Info
 
-To get session object information, use this endpoint
+Get Session object information
 
 ```python
 def session_info(self)
@@ -44,7 +44,7 @@ result = session_controller.session_info()
 
 # Login
 
-To programmatically login a user to ThoughtSpot, use this endpoint
+You can programmatically login a user to ThoughtSpot
 
 :information_source: **Note** This endpoint does not require authentication.
 
@@ -67,8 +67,8 @@ def login(self,
 
 ```python
 body = ApiRestV2SessionLoginRequest()
-body.user_name = 'abc'
-body.password = 'abc'
+body.user_name = 'userName8'
+body.password = 'password0'
 
 result = session_controller.login(body)
 ```
@@ -80,13 +80,15 @@ result = session_controller.login(body)
 | 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
 
 
-# Gettoken
+# Get Token
 
-To programmatically create token for a user in ThoughtSpot, use this endpoint
+You can programmatically create token for a user in ThoughtSpot
+
+:information_source: **Note** This endpoint does not require authentication.
 
 ```python
-def gettoken(self,
-            body)
+def get_token(self,
+             body)
 ```
 
 ## Parameters
@@ -106,7 +108,7 @@ body = ApiRestV2SessionGettokenRequest()
 body.user_name = 'userName8'
 body.password = 'password0'
 
-result = session_controller.gettoken(body)
+result = session_controller.get_token(body)
 ```
 
 ## Errors
@@ -143,12 +145,12 @@ result = session_controller.logout()
 | 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
 
 
-# Revoketoken
+# Revoke Token
 
 To expire or revoke a token for a user, use this endpoint
 
 ```python
-def revoketoken(self)
+def revoke_token(self)
 ```
 
 ## Response Type
@@ -158,7 +160,7 @@ def revoketoken(self)
 ## Example Usage
 
 ```python
-result = session_controller.revoketoken()
+result = session_controller.revoke_token()
 ```
 
 ## Errors

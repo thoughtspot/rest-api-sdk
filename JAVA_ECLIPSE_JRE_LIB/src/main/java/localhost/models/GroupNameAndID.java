@@ -39,7 +39,7 @@ public class GroupNameAndID {
 
     /**
      * Getter for Name.
-     * Name of the group to which group is added
+     * Name of the group
      * @return Returns the String
      */
     @JsonGetter("name")
@@ -49,7 +49,7 @@ public class GroupNameAndID {
 
     /**
      * Setter for Name.
-     * Name of the group to which group is added
+     * Name of the group
      * @param name Value for String
      */
     @JsonSetter("name")
@@ -59,7 +59,7 @@ public class GroupNameAndID {
 
     /**
      * Getter for Id.
-     * GUID of the group to which group is added
+     * GUID of the group
      * @return Returns the String
      */
     @JsonGetter("id")
@@ -69,7 +69,7 @@ public class GroupNameAndID {
 
     /**
      * Setter for Id.
-     * GUID of the group to which group is added
+     * GUID of the group
      * @param id Value for String
      */
     @JsonSetter("id")

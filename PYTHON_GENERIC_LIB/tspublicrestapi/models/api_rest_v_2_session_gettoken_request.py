@@ -17,8 +17,9 @@ class ApiRestV2SessionGettokenRequest(object):
     Attributes:
         user_name (string): Username of the user account
         password (string): The password of the user account
-        token_expiry_duration (int): Provide duration in seconds after which
-            the token should expire
+        expiry_time_ms (string): Provide the time duration in milliseconds to
+            expire the token. If no input is provided then the value set at
+            cluster level will be considered
 
     """
 
@@ -26,19 +27,19 @@ class ApiRestV2SessionGettokenRequest(object):
     _names = {
         "user_name": 'userName',
         "password": 'password',
-        "token_expiry_duration": 'tokenExpiryDuration'
+        "expiry_time_ms": 'expiryTimeMs'
     }
 
     def __init__(self,
                  user_name=None,
                  password=None,
-                 token_expiry_duration=None):
+                 expiry_time_ms=None):
         """Constructor for the ApiRestV2SessionGettokenRequest class"""
 
         # Initialize members of the class
         self.user_name = user_name
         self.password = password
-        self.token_expiry_duration = token_expiry_duration
+        self.expiry_time_ms = expiry_time_ms
 
     @classmethod
     def from_dictionary(cls,
@@ -60,9 +61,9 @@ class ApiRestV2SessionGettokenRequest(object):
         # Extract variables from the dictionary
         user_name = dictionary.get('userName')
         password = dictionary.get('password')
-        token_expiry_duration = dictionary.get('tokenExpiryDuration')
+        expiry_time_ms = dictionary.get('expiryTimeMs')
 
         # Return an object of this model
         return cls(user_name,
                    password,
-                   token_expiry_duration)
+                   expiry_time_ms)

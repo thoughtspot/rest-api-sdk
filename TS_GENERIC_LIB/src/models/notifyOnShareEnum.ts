@@ -10,8 +10,8 @@ import { Schema, stringEnum } from '../schema';
  * Enum for NotifyOnShareEnum
  */
 export enum NotifyOnShareEnum {
-  True = 'True',
-  False = 'False',
+  True = 'true',
+  False = 'false',
 }
 
 /**

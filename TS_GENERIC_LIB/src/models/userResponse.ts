@@ -28,7 +28,7 @@ export interface UserResponse {
   visibility?: string;
   /** Email of the user account */
   mail?: string;
-  /** Name of the group to which user account is added */
+  /** The groups to which user account is added */
   groups?: GroupNameAndID[];
   /** Privileges assigned to user account */
   privileges?: string[];
@@ -50,10 +50,7 @@ export interface UserResponse {
   isDeleted?: boolean;
   /** Indicates if the user account is hidden */
   isHidden?: boolean;
-  /**
-   * Indicates if the user account is from external system
-   * isDeprecated
-   */
+  /** Indicates if the user account is from external system */
   isExternal?: boolean;
   isDeprecated?: boolean;
   /** Indicates if the all the properties of user account is provided */

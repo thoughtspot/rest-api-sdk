@@ -19,17 +19,18 @@ class ApiRestV2GroupCreateRequest(object):
             unique.
         display_name (string): A unique display name string for the user
             group, for example, Developer group.
-        visibility (VisibilityEnum): Visibility of the user. The visibility
+        visibility (Visibility3Enum): Visibility of the user. The visibility
             attribute is set to DEFAULT when creating a user. Setting this to
             DEFAULT makes a user visible to other users and user groups, and
             thus allows them to share objects
-        description (string): Description text for the group.
-        privileges (list of Privilege1Enum): A JSON array of privileges
+        description (string): Description text for the group
+        privileges (list of PrivilegeEnum): A JSON array of privileges to be
             assigned to the group
         group_names (list of string): A JSON array of group names
-        user_names (list of string): A JSON array of user names
+        user_names (list of string): A JSON array of usernames to be added to
+            the group
         mtype (Type3Enum): Type of user group. LOCAL_GROUP indicates that the
-            user is created locally in the ThoughtSpot system.
+            group is created locally in the ThoughtSpot system.
 
     """
 
@@ -52,7 +53,7 @@ class ApiRestV2GroupCreateRequest(object):
                  description=None,
                  privileges=None,
                  group_names=None,
-                 user_names=,
+                 user_names=None,
                  mtype='LOCAL_GROUP'):
         """Constructor for the ApiRestV2GroupCreateRequest class"""
 
@@ -90,7 +91,7 @@ class ApiRestV2GroupCreateRequest(object):
         description = dictionary.get('description')
         privileges = dictionary.get('privileges')
         group_names = dictionary.get('groupNames')
-        user_names = dictionary.get("userNames") if dictionary.get("userNames") else 
+        user_names = dictionary.get('userNames')
         mtype = dictionary.get("type") if dictionary.get("type") else 'LOCAL_GROUP'
 
         # Return an object of this model

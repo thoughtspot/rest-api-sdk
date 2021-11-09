@@ -20,6 +20,6 @@ class ShowWalkMeEnum(object):
 
     """
 
-    ENUM_TRUE = 'True'
+    TRUE = 'true'
 
-    ENUM_FALSE = 'False'
+    FALSE = 'false'

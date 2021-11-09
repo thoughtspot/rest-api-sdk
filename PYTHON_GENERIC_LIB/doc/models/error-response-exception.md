@@ -17,7 +17,7 @@
 {
   "error": {
     "errors": {
-      "message": "Request failed with status code 500",
+      "message": "Request failed with status code 400",
       "locations": {
         "line": 2,
         "column": 3
@@ -26,7 +26,7 @@
         "restapiV2__login"
       ],
       "extension": {
-        "service": "CALLOSUM",
+        "service": "CALLOSUM,",
         "code": "UPSTREAM_FAILURE",
         "exception": {
           "service": "CALLOSUM",

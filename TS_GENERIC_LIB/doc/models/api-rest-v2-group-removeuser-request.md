@@ -10,8 +10,8 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `name` | `string \| undefined` | Optional | Name of the group |
-| `id` | `string \| undefined` | Optional | The GUID of the group to query. |
-| `userNames` | `string[] \| undefined` | Optional | A JSON array of user names |
+| `id` | `string \| undefined` | Optional | The GUID of the group |
+| `userNames` | `string[] \| undefined` | Optional | A JSON array of name of users |
 
 ## Example (as JSON)
 

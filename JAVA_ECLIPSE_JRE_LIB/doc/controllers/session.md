@@ -12,14 +12,14 @@ SessionController sessionController = client.getSessionController();
 
 * [Session Info](/doc/controllers/session.md#session-info)
 * [Login](/doc/controllers/session.md#login)
-* [Gettoken](/doc/controllers/session.md#gettoken)
+* [Get Token](/doc/controllers/session.md#get-token)
 * [Logout](/doc/controllers/session.md#logout)
-* [Revoketoken](/doc/controllers/session.md#revoketoken)
+* [Revoke Token](/doc/controllers/session.md#revoke-token)
 
 
 # Session Info
 
-To get session object information, use this endpoint
+Get Session object information
 
 ```java
 CompletableFuture<SessionInfoResponse> sessionInfoAsync()
@@ -49,7 +49,7 @@ sessionController.sessionInfoAsync().thenAccept(result -> {
 
 # Login
 
-To programmatically login a user to ThoughtSpot, use this endpoint
+You can programmatically login a user to ThoughtSpot
 
 :information_source: **Note** This endpoint does not require authentication.
 
@@ -72,8 +72,8 @@ CompletableFuture<SessionLoginResponse> loginAsync(
 
 ```java
 ApiRestV2SessionLoginRequest body = new ApiRestV2SessionLoginRequest();
-body.setUserName("abc");
-body.setPassword("abc");
+body.setUserName("userName8");
+body.setPassword("password0");
 
 sessionController.loginAsync(body).thenAccept(result -> {
     // TODO success callback handler
@@ -90,12 +90,14 @@ sessionController.loginAsync(body).thenAccept(result -> {
 | 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
 
 
-# Gettoken
+# Get Token
 
-To programmatically create token for a user in ThoughtSpot, use this endpoint
+You can programmatically create token for a user in ThoughtSpot
+
+:information_source: **Note** This endpoint does not require authentication.
 
 ```java
-CompletableFuture<SessionLoginResponse> gettokenAsync(
+CompletableFuture<SessionLoginResponse> getTokenAsync(
     final ApiRestV2SessionGettokenRequest body)
 ```
 
@@ -116,7 +118,7 @@ ApiRestV2SessionGettokenRequest body = new ApiRestV2SessionGettokenRequest();
 body.setUserName("userName8");
 body.setPassword("password0");
 
-sessionController.gettokenAsync(body).thenAccept(result -> {
+sessionController.getTokenAsync(body).thenAccept(result -> {
     // TODO success callback handler
 }).exceptionally(exception -> {
     // TODO failure callback handler
@@ -163,12 +165,12 @@ sessionController.logoutAsync().thenAccept(result -> {
 | 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
 
 
-# Revoketoken
+# Revoke Token
 
 To expire or revoke a token for a user, use this endpoint
 
 ```java
-CompletableFuture<Boolean> revoketokenAsync()
+CompletableFuture<Boolean> revokeTokenAsync()
 ```
 
 ## Response Type
@@ -178,7 +180,7 @@ CompletableFuture<Boolean> revoketokenAsync()
 ## Example Usage
 
 ```java
-sessionController.revoketokenAsync().thenAccept(result -> {
+sessionController.revokeTokenAsync().thenAccept(result -> {
     // TODO success callback handler
 }).exceptionally(exception -> {
     // TODO failure callback handler

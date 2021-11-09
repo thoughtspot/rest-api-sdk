@@ -9,8 +9,8 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `name` | `string` | Optional | Username of the group |
-| `id` | `string` | Optional | GUID of the group |
+| `name` | `string` | Optional | Username of the user account |
+| `id` | `string` | Optional | GUID of the user account |
 
 ## Example (as JSON)
 

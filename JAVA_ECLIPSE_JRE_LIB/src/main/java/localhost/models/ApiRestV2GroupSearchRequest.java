@@ -22,17 +22,17 @@ public class ApiRestV2GroupSearchRequest {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String displayName;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private VisibilityEnum visibility;
+    private Visibility4Enum visibility;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String description;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private List<Privilege1Enum> privileges;
+    private List<PrivilegeEnum> privileges;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<String> groupNames;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<String> userNames;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private Type3Enum type;
+    private Type4Enum type;
 
     /**
      * Default constructor.
@@ -45,23 +45,23 @@ public class ApiRestV2GroupSearchRequest {
      * @param  name  String value for name.
      * @param  id  String value for id.
      * @param  displayName  String value for displayName.
-     * @param  visibility  VisibilityEnum value for visibility.
+     * @param  visibility  Visibility4Enum value for visibility.
      * @param  description  String value for description.
-     * @param  privileges  List of Privilege1Enum value for privileges.
+     * @param  privileges  List of PrivilegeEnum value for privileges.
      * @param  groupNames  List of String value for groupNames.
      * @param  userNames  List of String value for userNames.
-     * @param  type  Type3Enum value for type.
+     * @param  type  Type4Enum value for type.
      */
     public ApiRestV2GroupSearchRequest(
             String name,
             String id,
             String displayName,
-            VisibilityEnum visibility,
+            Visibility4Enum visibility,
             String description,
-            List<Privilege1Enum> privileges,
+            List<PrivilegeEnum> privileges,
             List<String> groupNames,
             List<String> userNames,
-            Type3Enum type) {
+            Type4Enum type) {
         this.name = name;
         this.id = id;
         this.displayName = displayName;
@@ -95,7 +95,7 @@ public class ApiRestV2GroupSearchRequest {
 
     /**
      * Getter for Id.
-     * GUID of the group to update
+     * GUID of the group
      * @return Returns the String
      */
     @JsonGetter("id")
@@ -105,7 +105,7 @@ public class ApiRestV2GroupSearchRequest {
 
     /**
      * Setter for Id.
-     * GUID of the group to update
+     * GUID of the group
      * @param id Value for String
      */
     @JsonSetter("id")
@@ -115,7 +115,7 @@ public class ApiRestV2GroupSearchRequest {
 
     /**
      * Getter for DisplayName.
-     * A unique display name string for the user group, for example, Developer group.
+     * A display name string for the user group, for example, Developer group.
      * @return Returns the String
      */
     @JsonGetter("displayName")
@@ -125,7 +125,7 @@ public class ApiRestV2GroupSearchRequest {
 
     /**
      * Setter for DisplayName.
-     * A unique display name string for the user group, for example, Developer group.
+     * A display name string for the user group, for example, Developer group.
      * @param displayName Value for String
      */
     @JsonSetter("displayName")
@@ -135,31 +135,31 @@ public class ApiRestV2GroupSearchRequest {
 
     /**
      * Getter for Visibility.
-     * Visibility of the user. The visibility attribute is set to DEFAULT when creating a user.
-     * Setting this to DEFAULT makes a user visible to other users and user groups, and thus allows
+     * Visibility of the group. The visibility attribute is set to DEFAULT when creating a group.
+     * Setting this to DEFAULT makes a group visible to other users and user groups, and thus allows
      * them to share objects
-     * @return Returns the VisibilityEnum
+     * @return Returns the Visibility4Enum
      */
     @JsonGetter("visibility")
-    public VisibilityEnum getVisibility() {
+    public Visibility4Enum getVisibility() {
         return visibility;
     }
 
     /**
      * Setter for Visibility.
-     * Visibility of the user. The visibility attribute is set to DEFAULT when creating a user.
-     * Setting this to DEFAULT makes a user visible to other users and user groups, and thus allows
+     * Visibility of the group. The visibility attribute is set to DEFAULT when creating a group.
+     * Setting this to DEFAULT makes a group visible to other users and user groups, and thus allows
      * them to share objects
-     * @param visibility Value for VisibilityEnum
+     * @param visibility Value for Visibility4Enum
      */
     @JsonSetter("visibility")
-    public void setVisibility(VisibilityEnum visibility) {
+    public void setVisibility(Visibility4Enum visibility) {
         this.visibility = visibility;
     }
 
     /**
      * Getter for Description.
-     * Description text for the group.
+     * Description text for the group
      * @return Returns the String
      */
     @JsonGetter("description")
@@ -169,7 +169,7 @@ public class ApiRestV2GroupSearchRequest {
 
     /**
      * Setter for Description.
-     * Description text for the group.
+     * Description text for the group
      * @param description Value for String
      */
     @JsonSetter("description")
@@ -179,21 +179,21 @@ public class ApiRestV2GroupSearchRequest {
 
     /**
      * Getter for Privileges.
-     * A JSON array of privileges assigned to the group
-     * @return Returns the List of Privilege1Enum
+     * Privileges assigned to the group
+     * @return Returns the List of PrivilegeEnum
      */
     @JsonGetter("privileges")
-    public List<Privilege1Enum> getPrivileges() {
+    public List<PrivilegeEnum> getPrivileges() {
         return privileges;
     }
 
     /**
      * Setter for Privileges.
-     * A JSON array of privileges assigned to the group
-     * @param privileges Value for List of Privilege1Enum
+     * Privileges assigned to the group
+     * @param privileges Value for List of PrivilegeEnum
      */
     @JsonSetter("privileges")
-    public void setPrivileges(List<Privilege1Enum> privileges) {
+    public void setPrivileges(List<PrivilegeEnum> privileges) {
         this.privileges = privileges;
     }
 
@@ -241,10 +241,10 @@ public class ApiRestV2GroupSearchRequest {
      * Getter for Type.
      * Type of user group. LOCAL_GROUP indicates that the user is created locally in the ThoughtSpot
      * system.
-     * @return Returns the Type3Enum
+     * @return Returns the Type4Enum
      */
     @JsonGetter("type")
-    public Type3Enum getType() {
+    public Type4Enum getType() {
         return type;
     }
 
@@ -252,10 +252,10 @@ public class ApiRestV2GroupSearchRequest {
      * Setter for Type.
      * Type of user group. LOCAL_GROUP indicates that the user is created locally in the ThoughtSpot
      * system.
-     * @param type Value for Type3Enum
+     * @param type Value for Type4Enum
      */
     @JsonSetter("type")
-    public void setType(Type3Enum type) {
+    public void setType(Type4Enum type) {
         this.type = type;
     }
 
@@ -297,12 +297,12 @@ public class ApiRestV2GroupSearchRequest {
         private String name;
         private String id;
         private String displayName;
-        private VisibilityEnum visibility;
+        private Visibility4Enum visibility;
         private String description;
-        private List<Privilege1Enum> privileges;
+        private List<PrivilegeEnum> privileges;
         private List<String> groupNames;
         private List<String> userNames;
-        private Type3Enum type;
+        private Type4Enum type;
 
 
 
@@ -338,10 +338,10 @@ public class ApiRestV2GroupSearchRequest {
 
         /**
          * Setter for visibility.
-         * @param  visibility  VisibilityEnum value for visibility.
+         * @param  visibility  Visibility4Enum value for visibility.
          * @return Builder
          */
-        public Builder visibility(VisibilityEnum visibility) {
+        public Builder visibility(Visibility4Enum visibility) {
             this.visibility = visibility;
             return this;
         }
@@ -358,10 +358,10 @@ public class ApiRestV2GroupSearchRequest {
 
         /**
          * Setter for privileges.
-         * @param  privileges  List of Privilege1Enum value for privileges.
+         * @param  privileges  List of PrivilegeEnum value for privileges.
          * @return Builder
          */
-        public Builder privileges(List<Privilege1Enum> privileges) {
+        public Builder privileges(List<PrivilegeEnum> privileges) {
             this.privileges = privileges;
             return this;
         }
@@ -388,10 +388,10 @@ public class ApiRestV2GroupSearchRequest {
 
         /**
          * Setter for type.
-         * @param  type  Type3Enum value for type.
+         * @param  type  Type4Enum value for type.
          * @return Builder
          */
-        public Builder type(Type3Enum type) {
+        public Builder type(Type4Enum type) {
             this.type = type;
             return this;
         }

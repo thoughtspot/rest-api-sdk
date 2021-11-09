@@ -14,7 +14,7 @@
 | `Id` | `String` | Optional | GUID of the user account | String getId() | setId(String id) |
 | `Visibility` | `String` | Optional | Visibility of the user account | String getVisibility() | setVisibility(String visibility) |
 | `Mail` | `String` | Optional | Email of the user account | String getMail() | setMail(String mail) |
-| `Groups` | [`List<GroupNameAndID>`](/doc/models/group-name-and-id.md) | Optional | Name of the group to which user account is added | List<GroupNameAndID> getGroups() | setGroups(List<GroupNameAndID> groups) |
+| `Groups` | [`List<GroupNameAndID>`](/doc/models/group-name-and-id.md) | Optional | The groups to which user account is added | List<GroupNameAndID> getGroups() | setGroups(List<GroupNameAndID> groups) |
 | `Privileges` | `List<String>` | Optional | Privileges assigned to user account | List<String> getPrivileges() | setPrivileges(List<String> privileges) |
 | `Tags` | `List<String>` | Optional | Tags assigned to the user | List<String> getTags() | setTags(List<String> tags) |
 | `State` | `String` | Optional | Indicates if the user account is active or inactive | String getState() | setState(String state) |
@@ -25,7 +25,7 @@
 | `WelcomeEmailSent` | `Boolean` | Optional | Indicates if the welcome email is sent to email associated with the user account | Boolean getWelcomeEmailSent() | setWelcomeEmailSent(Boolean welcomeEmailSent) |
 | `IsDeleted` | `Boolean` | Optional | Indicates if the user account is deleted | Boolean getIsDeleted() | setIsDeleted(Boolean isDeleted) |
 | `IsHidden` | `Boolean` | Optional | Indicates if the user account is hidden | Boolean getIsHidden() | setIsHidden(Boolean isHidden) |
-| `IsExternal` | `Boolean` | Optional | Indicates if the user account is from external system<br>isDeprecated | Boolean getIsExternal() | setIsExternal(Boolean isExternal) |
+| `IsExternal` | `Boolean` | Optional | Indicates if the user account is from external system | Boolean getIsExternal() | setIsExternal(Boolean isExternal) |
 | `IsDeprecated` | `Boolean` | Optional | - | Boolean getIsDeprecated() | setIsDeprecated(Boolean isDeprecated) |
 | `Complete` | `Boolean` | Optional | Indicates if the all the properties of user account is provided | Boolean getComplete() | setComplete(Boolean complete) |
 | `IsSuperUser` | `Boolean` | Optional | Indicates if the user account is super user | Boolean getIsSuperUser() | setIsSuperUser(Boolean isSuperUser) |

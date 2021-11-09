@@ -10,8 +10,8 @@
 | Name | Type | Tags | Description | Getter | Setter |
 |  --- | --- | --- | --- | --- | --- |
 | `Name` | `String` | Optional | Name of the group | String getName() | setName(String name) |
-| `Id` | `String` | Optional | The GUID of the group to query. | String getId() | setId(String id) |
-| `UserNames` | `List<String>` | Optional | A JSON array of user names | List<String> getUserNames() | setUserNames(List<String> userNames) |
+| `Id` | `String` | Optional | The GUID of the group | String getId() | setId(String id) |
+| `UserNames` | `List<String>` | Optional | A JSON array of name of users | List<String> getUserNames() | setUserNames(List<String> userNames) |
 
 ## Example (as JSON)
 

@@ -84,9 +84,8 @@ public class GroupControllerTest extends BaseControllerTest {
     }
 
     /**
-     * To remove a group from the ThoughtSpot system, send a DELETE request to this endpoint. At
-     * Least one value needed. When both are given user id will be considered to fetch user
-     * information.
+     * To remove a group from the ThoughtSpot system, use this endpoint. At least one value of name
+     * or id is needed. When both are given group id will be considered to delete.
      * @throws Throwable exception if occurs.
      */
     @Test

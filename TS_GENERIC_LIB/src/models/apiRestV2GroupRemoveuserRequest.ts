@@ -9,9 +9,9 @@ import { array, object, optional, Schema, string } from '../schema';
 export interface ApiRestV2GroupRemoveuserRequest {
   /** Name of the group */
   name?: string;
-  /** The GUID of the group to query. */
+  /** The GUID of the group */
   id?: string;
-  /** A JSON array of user names */
+  /** A JSON array of name of users */
   userNames?: string[];
 }
 

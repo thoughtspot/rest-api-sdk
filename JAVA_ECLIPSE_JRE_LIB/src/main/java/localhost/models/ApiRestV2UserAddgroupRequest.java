@@ -45,7 +45,7 @@ public class ApiRestV2UserAddgroupRequest {
 
     /**
      * Getter for Name.
-     * Username of the user account
+     * User name of the user account
      * @return Returns the String
      */
     @JsonGetter("name")
@@ -55,7 +55,7 @@ public class ApiRestV2UserAddgroupRequest {
 
     /**
      * Setter for Name.
-     * Username of the user account
+     * User name of the user account
      * @param name Value for String
      */
     @JsonSetter("name")

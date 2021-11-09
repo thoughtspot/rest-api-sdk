@@ -9,8 +9,8 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `name` | `string \| undefined` | Optional | Username of the group |
-| `id` | `string \| undefined` | Optional | GUID of the group |
+| `name` | `string \| undefined` | Optional | Username of the user account |
+| `id` | `string \| undefined` | Optional | GUID of the user account |
 
 ## Example (as JSON)
 

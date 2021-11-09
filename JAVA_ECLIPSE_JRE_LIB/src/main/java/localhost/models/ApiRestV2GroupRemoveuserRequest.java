@@ -65,7 +65,7 @@ public class ApiRestV2GroupRemoveuserRequest {
 
     /**
      * Getter for Id.
-     * The GUID of the group to query.
+     * The GUID of the group
      * @return Returns the String
      */
     @JsonGetter("id")
@@ -75,7 +75,7 @@ public class ApiRestV2GroupRemoveuserRequest {
 
     /**
      * Setter for Id.
-     * The GUID of the group to query.
+     * The GUID of the group
      * @param id Value for String
      */
     @JsonSetter("id")
@@ -85,7 +85,7 @@ public class ApiRestV2GroupRemoveuserRequest {
 
     /**
      * Getter for UserNames.
-     * A JSON array of user names
+     * A JSON array of name of users
      * @return Returns the List of String
      */
     @JsonGetter("userNames")
@@ -95,7 +95,7 @@ public class ApiRestV2GroupRemoveuserRequest {
 
     /**
      * Setter for UserNames.
-     * A JSON array of user names
+     * A JSON array of name of users
      * @param userNames Value for List of String
      */
     @JsonSetter("userNames")

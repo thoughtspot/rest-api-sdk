@@ -22,8 +22,8 @@ class UserResponse(object):
         id (string): GUID of the user account
         visibility (string): Visibility of the user account
         mail (string): Email of the user account
-        groups (list of GroupNameAndID): Name of the group to which user
-            account is added
+        groups (list of GroupNameAndID): The groups to which user account is
+            added
         privileges (list of string): Privileges assigned to user account
         tags (list of string): Tags assigned to the user
         state (string): Indicates if the user account is active or inactive
@@ -40,7 +40,7 @@ class UserResponse(object):
         is_deleted (bool): Indicates if the user account is deleted
         is_hidden (bool): Indicates if the user account is hidden
         is_external (bool): Indicates if the user account is from external
-            system isDeprecated
+            system
         is_deprecated (bool): TODO: type description here.
         complete (bool): Indicates if the all the properties of user account
             is provided

@@ -17,7 +17,7 @@ public class ApiRestV2SessionGettokenRequest {
     private String userName;
     private String password;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private Integer tokenExpiryDuration;
+    private String expiryTimeMs;
 
     /**
      * Default constructor.
@@ -29,15 +29,15 @@ public class ApiRestV2SessionGettokenRequest {
      * Initialization constructor.
      * @param  userName  String value for userName.
      * @param  password  String value for password.
-     * @param  tokenExpiryDuration  Integer value for tokenExpiryDuration.
+     * @param  expiryTimeMs  String value for expiryTimeMs.
      */
     public ApiRestV2SessionGettokenRequest(
             String userName,
             String password,
-            Integer tokenExpiryDuration) {
+            String expiryTimeMs) {
         this.userName = userName;
         this.password = password;
-        this.tokenExpiryDuration = tokenExpiryDuration;
+        this.expiryTimeMs = expiryTimeMs;
     }
 
     /**
@@ -81,23 +81,25 @@ public class ApiRestV2SessionGettokenRequest {
     }
 
     /**
-     * Getter for TokenExpiryDuration.
-     * Provide duration in seconds after which the token should expire
-     * @return Returns the Integer
+     * Getter for ExpiryTimeMs.
+     * Provide the time duration in milliseconds to expire the token. If no input is provided then
+     * the value set at cluster level will be considered
+     * @return Returns the String
      */
-    @JsonGetter("tokenExpiryDuration")
-    public Integer getTokenExpiryDuration() {
-        return tokenExpiryDuration;
+    @JsonGetter("expiryTimeMs")
+    public String getExpiryTimeMs() {
+        return expiryTimeMs;
     }
 
     /**
-     * Setter for TokenExpiryDuration.
-     * Provide duration in seconds after which the token should expire
-     * @param tokenExpiryDuration Value for Integer
+     * Setter for ExpiryTimeMs.
+     * Provide the time duration in milliseconds to expire the token. If no input is provided then
+     * the value set at cluster level will be considered
+     * @param expiryTimeMs Value for String
      */
-    @JsonSetter("tokenExpiryDuration")
-    public void setTokenExpiryDuration(Integer tokenExpiryDuration) {
-        this.tokenExpiryDuration = tokenExpiryDuration;
+    @JsonSetter("expiryTimeMs")
+    public void setExpiryTimeMs(String expiryTimeMs) {
+        this.expiryTimeMs = expiryTimeMs;
     }
 
     /**
@@ -107,7 +109,7 @@ public class ApiRestV2SessionGettokenRequest {
     @Override
     public String toString() {
         return "ApiRestV2SessionGettokenRequest [" + "userName=" + userName + ", password="
-                + password + ", tokenExpiryDuration=" + tokenExpiryDuration + "]";
+                + password + ", expiryTimeMs=" + expiryTimeMs + "]";
     }
 
     /**
@@ -117,7 +119,7 @@ public class ApiRestV2SessionGettokenRequest {
      */
     public Builder toBuilder() {
         Builder builder = new Builder(userName, password)
-                .tokenExpiryDuration(getTokenExpiryDuration());
+                .expiryTimeMs(getExpiryTimeMs());
         return builder;
     }
 
@@ -127,7 +129,7 @@ public class ApiRestV2SessionGettokenRequest {
     public static class Builder {
         private String userName;
         private String password;
-        private Integer tokenExpiryDuration;
+        private String expiryTimeMs;
 
         /**
          * Initialization constructor.
@@ -166,12 +168,12 @@ public class ApiRestV2SessionGettokenRequest {
         }
 
         /**
-         * Setter for tokenExpiryDuration.
-         * @param  tokenExpiryDuration  Integer value for tokenExpiryDuration.
+         * Setter for expiryTimeMs.
+         * @param  expiryTimeMs  String value for expiryTimeMs.
          * @return Builder
          */
-        public Builder tokenExpiryDuration(Integer tokenExpiryDuration) {
-            this.tokenExpiryDuration = tokenExpiryDuration;
+        public Builder expiryTimeMs(String expiryTimeMs) {
+            this.expiryTimeMs = expiryTimeMs;
             return this;
         }
 
@@ -180,7 +182,7 @@ public class ApiRestV2SessionGettokenRequest {
          * @return {@link ApiRestV2SessionGettokenRequest}
          */
         public ApiRestV2SessionGettokenRequest build() {
-            return new ApiRestV2SessionGettokenRequest(userName, password, tokenExpiryDuration);
+            return new ApiRestV2SessionGettokenRequest(userName, password, expiryTimeMs);
         }
     }
 }

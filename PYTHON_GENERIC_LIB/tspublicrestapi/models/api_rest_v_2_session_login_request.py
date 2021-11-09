@@ -31,8 +31,8 @@ class ApiRestV2SessionLoginRequest(object):
     }
 
     def __init__(self,
-                 user_name='abc',
-                 password='abc',
+                 user_name=None,
+                 password=None,
                  remember_me=False):
         """Constructor for the ApiRestV2SessionLoginRequest class"""
 
@@ -59,8 +59,8 @@ class ApiRestV2SessionLoginRequest(object):
             return None
 
         # Extract variables from the dictionary
-        user_name = dictionary.get("userName") if dictionary.get("userName") else 'abc'
-        password = dictionary.get("password") if dictionary.get("password") else 'abc'
+        user_name = dictionary.get('userName')
+        password = dictionary.get('password')
         remember_me = dictionary.get("rememberMe") if dictionary.get("rememberMe") else False
 
         # Return an object of this model

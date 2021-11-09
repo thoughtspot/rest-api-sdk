@@ -9,8 +9,8 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `name` | `string` | Optional | Name of the group to which group  is added |
-| `id` | `string` | Optional | GUID of the group to which group  is added |
+| `name` | `string` | Optional | Name of the group |
+| `id` | `string` | Optional | GUID of the group |
 
 ## Example (as JSON)
 

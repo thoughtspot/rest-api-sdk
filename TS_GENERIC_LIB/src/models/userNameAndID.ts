@@ -7,9 +7,9 @@
 import { object, optional, Schema, string } from '../schema';
 
 export interface UserNameAndID {
-  /** Username of the group */
+  /** Username of the user account */
   name?: string;
-  /** GUID of the group */
+  /** GUID of the user account */
   id?: string;
 }
 

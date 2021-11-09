@@ -27,7 +27,7 @@ import { BaseController } from './baseController';
 
 export class SessionController extends BaseController {
   /**
-   * To get session object information, use this endpoint
+   * Get Session object information
    *
    * @return Response from the API call
    */
@@ -40,7 +40,7 @@ export class SessionController extends BaseController {
   }
 
   /**
-   * To programmatically login a user to ThoughtSpot, use this endpoint
+   * You can programmatically login a user to ThoughtSpot
    *
    * @param body
    * @return Response from the API call
@@ -60,12 +60,12 @@ export class SessionController extends BaseController {
   }
 
   /**
-   * To programmatically create token for a user in ThoughtSpot, use this endpoint
+   * You can programmatically create token for a user in ThoughtSpot
    *
    * @param body
    * @return Response from the API call
    */
-  async gettoken(
+  async getToken(
     body: ApiRestV2SessionGettokenRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<SessionLoginResponse>> {
@@ -75,6 +75,7 @@ export class SessionController extends BaseController {
     });
     req.json(mapped.body);
     req.throwOn(500, ErrorResponseError, 'Operation failed or unauthorized request');
+    req.authenticate(false);
     return req.callAsJson(sessionLoginResponseSchema, requestOptions);
   }
 
@@ -97,7 +98,7 @@ export class SessionController extends BaseController {
    *
    * @return Response from the API call
    */
-  async revoketoken(
+  async revokeToken(
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<boolean>> {
     const req = this.createRequest('POST', '/api/rest/v2/session/revoketoken');

@@ -5,21 +5,21 @@
  */
 
 import { array, object, optional, Schema, string } from '../schema';
-import { Privilege1Enum, privilege1EnumSchema } from './privilege1Enum';
+import { PrivilegeEnum, privilegeEnumSchema } from './privilegeEnum';
 
 export interface ApiRestV2GroupAddprivilegeRequest {
   /** Name of the group */
   name?: string;
-  /** The GUID of the group to query. */
+  /** The GUID of the group. */
   id?: string;
-  /** List of privileges */
-  privileges?: Privilege1Enum[];
+  /** A JSON array of privileges to be assigned to the group */
+  privileges?: PrivilegeEnum[];
 }
 
 export const apiRestV2GroupAddprivilegeRequestSchema: Schema<ApiRestV2GroupAddprivilegeRequest> = object(
   {
     name: ['name', optional(string())],
     id: ['id', optional(string())],
-    privileges: ['privileges', optional(array(privilege1EnumSchema))],
+    privileges: ['privileges', optional(array(privilegeEnumSchema))],
   }
 );

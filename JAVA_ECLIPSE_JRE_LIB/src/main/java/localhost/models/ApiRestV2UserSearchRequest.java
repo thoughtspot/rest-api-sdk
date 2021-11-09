@@ -22,7 +22,7 @@ public class ApiRestV2UserSearchRequest {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String displayName;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private Visibility2Enum visibility;
+    private VisibilityEnum visibility;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String mail;
     @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -30,7 +30,7 @@ public class ApiRestV2UserSearchRequest {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<PrivilegeEnum> privileges;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private State2Enum state;
+    private StateEnum state;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private NotifyOnShareEnum notifyOnShare;
     @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -44,7 +44,7 @@ public class ApiRestV2UserSearchRequest {
      * Default constructor.
      */
     public ApiRestV2UserSearchRequest() {
-        visibility = Visibility2Enum.DEFAULT;
+        visibility = VisibilityEnum.DEFAULT;
     }
 
     /**
@@ -52,11 +52,11 @@ public class ApiRestV2UserSearchRequest {
      * @param  name  String value for name.
      * @param  id  String value for id.
      * @param  displayName  String value for displayName.
-     * @param  visibility  Visibility2Enum value for visibility.
+     * @param  visibility  VisibilityEnum value for visibility.
      * @param  mail  String value for mail.
      * @param  groupNames  List of String value for groupNames.
      * @param  privileges  List of PrivilegeEnum value for privileges.
-     * @param  state  State2Enum value for state.
+     * @param  state  StateEnum value for state.
      * @param  notifyOnShare  NotifyOnShareEnum value for notifyOnShare.
      * @param  showWalkMe  ShowWalkMeEnum value for showWalkMe.
      * @param  analystOnboardingComplete  AnalystOnboardingCompleteEnum value for
@@ -67,11 +67,11 @@ public class ApiRestV2UserSearchRequest {
             String name,
             String id,
             String displayName,
-            Visibility2Enum visibility,
+            VisibilityEnum visibility,
             String mail,
             List<String> groupNames,
             List<PrivilegeEnum> privileges,
-            State2Enum state,
+            StateEnum state,
             NotifyOnShareEnum notifyOnShare,
             ShowWalkMeEnum showWalkMe,
             AnalystOnboardingCompleteEnum analystOnboardingComplete,
@@ -92,7 +92,7 @@ public class ApiRestV2UserSearchRequest {
 
     /**
      * Getter for Name.
-     * Name of the user.
+     * Name of the user
      * @return Returns the String
      */
     @JsonGetter("name")
@@ -102,7 +102,7 @@ public class ApiRestV2UserSearchRequest {
 
     /**
      * Setter for Name.
-     * Name of the user.
+     * Name of the user
      * @param name Value for String
      */
     @JsonSetter("name")
@@ -132,7 +132,7 @@ public class ApiRestV2UserSearchRequest {
 
     /**
      * Getter for DisplayName.
-     * A unique display name string for the user, usually their first and last name.
+     * A unique display name string for the user account, usually their first and last name
      * @return Returns the String
      */
     @JsonGetter("displayName")
@@ -142,7 +142,7 @@ public class ApiRestV2UserSearchRequest {
 
     /**
      * Setter for DisplayName.
-     * A unique display name string for the user, usually their first and last name.
+     * A unique display name string for the user account, usually their first and last name
      * @param displayName Value for String
      */
     @JsonSetter("displayName")
@@ -155,10 +155,10 @@ public class ApiRestV2UserSearchRequest {
      * Visibility of the user. The visibility attribute is set to DEFAULT when creating a user. The
      * DEFAULT attribute makes a user visible to other users and user groups, and thus allows them
      * to share objects.
-     * @return Returns the Visibility2Enum
+     * @return Returns the VisibilityEnum
      */
     @JsonGetter("visibility")
-    public Visibility2Enum getVisibility() {
+    public VisibilityEnum getVisibility() {
         return visibility;
     }
 
@@ -167,16 +167,16 @@ public class ApiRestV2UserSearchRequest {
      * Visibility of the user. The visibility attribute is set to DEFAULT when creating a user. The
      * DEFAULT attribute makes a user visible to other users and user groups, and thus allows them
      * to share objects.
-     * @param visibility Value for Visibility2Enum
+     * @param visibility Value for VisibilityEnum
      */
     @JsonSetter("visibility")
-    public void setVisibility(Visibility2Enum visibility) {
+    public void setVisibility(VisibilityEnum visibility) {
         this.visibility = visibility;
     }
 
     /**
      * Getter for Mail.
-     * email of the user account
+     * Email of the user account
      * @return Returns the String
      */
     @JsonGetter("mail")
@@ -186,7 +186,7 @@ public class ApiRestV2UserSearchRequest {
 
     /**
      * Setter for Mail.
-     * email of the user account
+     * Email of the user account
      * @param mail Value for String
      */
     @JsonSetter("mail")
@@ -237,20 +237,20 @@ public class ApiRestV2UserSearchRequest {
     /**
      * Getter for State.
      * Status of user account. acitve or inactive.
-     * @return Returns the State2Enum
+     * @return Returns the StateEnum
      */
     @JsonGetter("state")
-    public State2Enum getState() {
+    public StateEnum getState() {
         return state;
     }
 
     /**
      * Setter for State.
      * Status of user account. acitve or inactive.
-     * @param state Value for State2Enum
+     * @param state Value for StateEnum
      */
     @JsonSetter("state")
-    public void setState(State2Enum state) {
+    public void setState(StateEnum state) {
         this.state = state;
     }
 
@@ -298,10 +298,7 @@ public class ApiRestV2UserSearchRequest {
 
     /**
      * Getter for AnalystOnboardingComplete.
-     * ThoughtSpot provides an interactive guided walkthrough to onboard new users. The onboarding
-     * experience leads users through a set of actions to help users get started and accomplish
-     * their tasks quickly. The users can turn off the Onboarding experience and access it again
-     * when they need assistance with the ThoughtSpot UI.
+     * Status of the Onboarding experience in ThoughtSpot UI.
      * @return Returns the AnalystOnboardingCompleteEnum
      */
     @JsonGetter("analystOnboardingComplete")
@@ -311,10 +308,7 @@ public class ApiRestV2UserSearchRequest {
 
     /**
      * Setter for AnalystOnboardingComplete.
-     * ThoughtSpot provides an interactive guided walkthrough to onboard new users. The onboarding
-     * experience leads users through a set of actions to help users get started and accomplish
-     * their tasks quickly. The users can turn off the Onboarding experience and access it again
-     * when they need assistance with the ThoughtSpot UI.
+     * Status of the Onboarding experience in ThoughtSpot UI.
      * @param analystOnboardingComplete Value for AnalystOnboardingCompleteEnum
      */
     @JsonSetter("analystOnboardingComplete")
@@ -387,11 +381,11 @@ public class ApiRestV2UserSearchRequest {
         private String name;
         private String id;
         private String displayName;
-        private Visibility2Enum visibility = Visibility2Enum.DEFAULT;
+        private VisibilityEnum visibility = VisibilityEnum.DEFAULT;
         private String mail;
         private List<String> groupNames;
         private List<PrivilegeEnum> privileges;
-        private State2Enum state;
+        private StateEnum state;
         private NotifyOnShareEnum notifyOnShare;
         private ShowWalkMeEnum showWalkMe;
         private AnalystOnboardingCompleteEnum analystOnboardingComplete;
@@ -431,10 +425,10 @@ public class ApiRestV2UserSearchRequest {
 
         /**
          * Setter for visibility.
-         * @param  visibility  Visibility2Enum value for visibility.
+         * @param  visibility  VisibilityEnum value for visibility.
          * @return Builder
          */
-        public Builder visibility(Visibility2Enum visibility) {
+        public Builder visibility(VisibilityEnum visibility) {
             this.visibility = visibility;
             return this;
         }
@@ -471,10 +465,10 @@ public class ApiRestV2UserSearchRequest {
 
         /**
          * Setter for state.
-         * @param  state  State2Enum value for state.
+         * @param  state  StateEnum value for state.
          * @return Builder
          */
-        public Builder state(State2Enum state) {
+        public Builder state(StateEnum state) {
             this.state = state;
             return this;
         }

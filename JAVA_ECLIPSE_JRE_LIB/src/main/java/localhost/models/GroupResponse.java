@@ -32,7 +32,7 @@ public class GroupResponse {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<PinboardNameAndID> assignedPinboards;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private Object userGroupContent;
+    private String userGroupContent;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<String> tags;
     @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -54,21 +54,21 @@ public class GroupResponse {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Integer groupIdx;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private Integer metadataVersion;
+    private String metadataVersion;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String tenantId;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private Integer indexVersion;
+    private String generationNum;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private Integer generationNum;
+    private Integer indexVersion;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Double created;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Double modified;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private UserNameAndID modifiedBy;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private UserNameAndID author;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private UserNameAndID modifiedBy;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private UserNameAndID owner;
 
@@ -88,7 +88,7 @@ public class GroupResponse {
      * @param  privileges  List of String value for privileges.
      * @param  groups  List of GroupNameAndID value for groups.
      * @param  assignedPinboards  List of PinboardNameAndID value for assignedPinboards.
-     * @param  userGroupContent  Object value for userGroupContent.
+     * @param  userGroupContent  String value for userGroupContent.
      * @param  tags  List of String value for tags.
      * @param  isDeleted  Boolean value for isDeleted.
      * @param  isHidden  Boolean value for isHidden.
@@ -99,14 +99,14 @@ public class GroupResponse {
      * @param  type  String value for type.
      * @param  parenttype  String value for parenttype.
      * @param  groupIdx  Integer value for groupIdx.
-     * @param  metadataVersion  Integer value for metadataVersion.
+     * @param  metadataVersion  String value for metadataVersion.
      * @param  tenantId  String value for tenantId.
+     * @param  generationNum  String value for generationNum.
      * @param  indexVersion  Integer value for indexVersion.
-     * @param  generationNum  Integer value for generationNum.
      * @param  created  Double value for created.
      * @param  modified  Double value for modified.
-     * @param  modifiedBy  UserNameAndID value for modifiedBy.
      * @param  author  UserNameAndID value for author.
+     * @param  modifiedBy  UserNameAndID value for modifiedBy.
      * @param  owner  UserNameAndID value for owner.
      */
     public GroupResponse(
@@ -118,7 +118,7 @@ public class GroupResponse {
             List<String> privileges,
             List<GroupNameAndID> groups,
             List<PinboardNameAndID> assignedPinboards,
-            Object userGroupContent,
+            String userGroupContent,
             List<String> tags,
             Boolean isDeleted,
             Boolean isHidden,
@@ -129,14 +129,14 @@ public class GroupResponse {
             String type,
             String parenttype,
             Integer groupIdx,
-            Integer metadataVersion,
+            String metadataVersion,
             String tenantId,
+            String generationNum,
             Integer indexVersion,
-            Integer generationNum,
             Double created,
             Double modified,
-            UserNameAndID modifiedBy,
             UserNameAndID author,
+            UserNameAndID modifiedBy,
             UserNameAndID owner) {
         this.name = name;
         this.displayName = displayName;
@@ -159,18 +159,18 @@ public class GroupResponse {
         this.groupIdx = groupIdx;
         this.metadataVersion = metadataVersion;
         this.tenantId = tenantId;
-        this.indexVersion = indexVersion;
         this.generationNum = generationNum;
+        this.indexVersion = indexVersion;
         this.created = created;
         this.modified = modified;
-        this.modifiedBy = modifiedBy;
         this.author = author;
+        this.modifiedBy = modifiedBy;
         this.owner = owner;
     }
 
     /**
      * Getter for Name.
-     * Name of the group
+     * Username of the user account
      * @return Returns the String
      */
     @JsonGetter("name")
@@ -180,7 +180,7 @@ public class GroupResponse {
 
     /**
      * Setter for Name.
-     * Name of the group
+     * Username of the user account
      * @param name Value for String
      */
     @JsonSetter("name")
@@ -190,7 +190,7 @@ public class GroupResponse {
 
     /**
      * Getter for DisplayName.
-     * A unique display name string for the user group
+     * Display name of the user account
      * @return Returns the String
      */
     @JsonGetter("displayName")
@@ -200,7 +200,7 @@ public class GroupResponse {
 
     /**
      * Setter for DisplayName.
-     * A unique display name string for the user group
+     * Display name of the user account
      * @param displayName Value for String
      */
     @JsonSetter("displayName")
@@ -210,7 +210,7 @@ public class GroupResponse {
 
     /**
      * Getter for Id.
-     * GUID of the group
+     * GUID of the user account
      * @return Returns the String
      */
     @JsonGetter("id")
@@ -220,7 +220,7 @@ public class GroupResponse {
 
     /**
      * Setter for Id.
-     * GUID of the group
+     * GUID of the user account
      * @param id Value for String
      */
     @JsonSetter("id")
@@ -230,7 +230,7 @@ public class GroupResponse {
 
     /**
      * Getter for Visibility.
-     * Visibility of the group
+     * Visibility of the user account
      * @return Returns the String
      */
     @JsonGetter("visibility")
@@ -240,7 +240,7 @@ public class GroupResponse {
 
     /**
      * Setter for Visibility.
-     * Visibility of the group
+     * Visibility of the user account
      * @param visibility Value for String
      */
     @JsonSetter("visibility")
@@ -290,7 +290,7 @@ public class GroupResponse {
 
     /**
      * Getter for Groups.
-     * Name of the group to which is added
+     * Groups to which usergroup is added
      * @return Returns the List of GroupNameAndID
      */
     @JsonGetter("groups")
@@ -300,7 +300,7 @@ public class GroupResponse {
 
     /**
      * Setter for Groups.
-     * Name of the group to which is added
+     * Groups to which usergroup is added
      * @param groups Value for List of GroupNameAndID
      */
     @JsonSetter("groups")
@@ -330,25 +330,25 @@ public class GroupResponse {
 
     /**
      * Getter for UserGroupContent.
-     * @return Returns the Object
+     * @return Returns the String
      */
     @JsonGetter("userGroupContent")
-    public Object getUserGroupContent() {
+    public String getUserGroupContent() {
         return userGroupContent;
     }
 
     /**
      * Setter for UserGroupContent.
-     * @param userGroupContent Value for Object
+     * @param userGroupContent Value for String
      */
     @JsonSetter("userGroupContent")
-    public void setUserGroupContent(Object userGroupContent) {
+    public void setUserGroupContent(String userGroupContent) {
         this.userGroupContent = userGroupContent;
     }
 
     /**
      * Getter for Tags.
-     * Tags assigned to the group
+     * Tags assigned to the usergroup
      * @return Returns the List of String
      */
     @JsonGetter("tags")
@@ -358,7 +358,7 @@ public class GroupResponse {
 
     /**
      * Setter for Tags.
-     * Tags assigned to the group
+     * Tags assigned to the usergroup
      * @param tags Value for List of String
      */
     @JsonSetter("tags")
@@ -368,7 +368,7 @@ public class GroupResponse {
 
     /**
      * Getter for IsDeleted.
-     * Indicates if the group is deleted
+     * Indicates if the user account is deleted
      * @return Returns the Boolean
      */
     @JsonGetter("isDeleted")
@@ -378,7 +378,7 @@ public class GroupResponse {
 
     /**
      * Setter for IsDeleted.
-     * Indicates if the group is deleted
+     * Indicates if the user account is deleted
      * @param isDeleted Value for Boolean
      */
     @JsonSetter("isDeleted")
@@ -388,7 +388,7 @@ public class GroupResponse {
 
     /**
      * Getter for IsHidden.
-     * Indicates if the group is hidden
+     * Indicates if the user account is hidden
      * @return Returns the Boolean
      */
     @JsonGetter("isHidden")
@@ -398,7 +398,7 @@ public class GroupResponse {
 
     /**
      * Setter for IsHidden.
-     * Indicates if the group is hidden
+     * Indicates if the user account is hidden
      * @param isHidden Value for Boolean
      */
     @JsonSetter("isHidden")
@@ -408,7 +408,7 @@ public class GroupResponse {
 
     /**
      * Getter for IsExternal.
-     * Indicates if the group is from external system
+     * Indicates if the user account is from external system
      * @return Returns the Boolean
      */
     @JsonGetter("isExternal")
@@ -418,7 +418,7 @@ public class GroupResponse {
 
     /**
      * Setter for IsExternal.
-     * Indicates if the group is from external system
+     * Indicates if the user account is from external system
      * @param isExternal Value for Boolean
      */
     @JsonSetter("isExternal")
@@ -466,7 +466,7 @@ public class GroupResponse {
 
     /**
      * Getter for IsSystemPrincipal.
-     * Indicates if the group is system principal
+     * Indicates if the user account is system principal
      * @return Returns the Boolean
      */
     @JsonGetter("isSystemPrincipal")
@@ -476,7 +476,7 @@ public class GroupResponse {
 
     /**
      * Setter for IsSystemPrincipal.
-     * Indicates if the group is system principal
+     * Indicates if the user account is system principal
      * @param isSystemPrincipal Value for Boolean
      */
     @JsonSetter("isSystemPrincipal")
@@ -486,7 +486,7 @@ public class GroupResponse {
 
     /**
      * Getter for Type.
-     * Indicates the type of group
+     * Indicates the type of user account
      * @return Returns the String
      */
     @JsonGetter("type")
@@ -496,7 +496,7 @@ public class GroupResponse {
 
     /**
      * Setter for Type.
-     * Indicates the type of group
+     * Indicates the type of user account
      * @param type Value for String
      */
     @JsonSetter("type")
@@ -544,25 +544,25 @@ public class GroupResponse {
 
     /**
      * Getter for MetadataVersion.
-     * @return Returns the Integer
+     * @return Returns the String
      */
     @JsonGetter("metadataVersion")
-    public Integer getMetadataVersion() {
+    public String getMetadataVersion() {
         return metadataVersion;
     }
 
     /**
      * Setter for MetadataVersion.
-     * @param metadataVersion Value for Integer
+     * @param metadataVersion Value for String
      */
     @JsonSetter("metadataVersion")
-    public void setMetadataVersion(Integer metadataVersion) {
+    public void setMetadataVersion(String metadataVersion) {
         this.metadataVersion = metadataVersion;
     }
 
     /**
      * Getter for TenantId.
-     * Tenant id associated with the group
+     * Tenant id associated with the user account
      * @return Returns the String
      */
     @JsonGetter("tenantId")
@@ -572,12 +572,30 @@ public class GroupResponse {
 
     /**
      * Setter for TenantId.
-     * Tenant id associated with the group
+     * Tenant id associated with the user account
      * @param tenantId Value for String
      */
     @JsonSetter("tenantId")
     public void setTenantId(String tenantId) {
         this.tenantId = tenantId;
+    }
+
+    /**
+     * Getter for GenerationNum.
+     * @return Returns the String
+     */
+    @JsonGetter("generationNum")
+    public String getGenerationNum() {
+        return generationNum;
+    }
+
+    /**
+     * Setter for GenerationNum.
+     * @param generationNum Value for String
+     */
+    @JsonSetter("generationNum")
+    public void setGenerationNum(String generationNum) {
+        this.generationNum = generationNum;
     }
 
     /**
@@ -599,26 +617,8 @@ public class GroupResponse {
     }
 
     /**
-     * Getter for GenerationNum.
-     * @return Returns the Integer
-     */
-    @JsonGetter("generationNum")
-    public Integer getGenerationNum() {
-        return generationNum;
-    }
-
-    /**
-     * Setter for GenerationNum.
-     * @param generationNum Value for Integer
-     */
-    @JsonSetter("generationNum")
-    public void setGenerationNum(Integer generationNum) {
-        this.generationNum = generationNum;
-    }
-
-    /**
      * Getter for Created.
-     * Date and time when group was created
+     * Date and time when usergroup was created
      * @return Returns the Double
      */
     @JsonGetter("created")
@@ -628,7 +628,7 @@ public class GroupResponse {
 
     /**
      * Setter for Created.
-     * Date and time when group was created
+     * Date and time when usergroup was created
      * @param created Value for Double
      */
     @JsonSetter("created")
@@ -638,7 +638,7 @@ public class GroupResponse {
 
     /**
      * Getter for Modified.
-     * Date and time of last modification of the group
+     * Date and time of last modification of usergroup
      * @return Returns the Double
      */
     @JsonGetter("modified")
@@ -648,30 +648,12 @@ public class GroupResponse {
 
     /**
      * Setter for Modified.
-     * Date and time of last modification of the group
+     * Date and time of last modification of usergroup
      * @param modified Value for Double
      */
     @JsonSetter("modified")
     public void setModified(Double modified) {
         this.modified = modified;
-    }
-
-    /**
-     * Getter for ModifiedBy.
-     * @return Returns the UserNameAndID
-     */
-    @JsonGetter("modifiedBy")
-    public UserNameAndID getModifiedBy() {
-        return modifiedBy;
-    }
-
-    /**
-     * Setter for ModifiedBy.
-     * @param modifiedBy Value for UserNameAndID
-     */
-    @JsonSetter("modifiedBy")
-    public void setModifiedBy(UserNameAndID modifiedBy) {
-        this.modifiedBy = modifiedBy;
     }
 
     /**
@@ -690,6 +672,24 @@ public class GroupResponse {
     @JsonSetter("author")
     public void setAuthor(UserNameAndID author) {
         this.author = author;
+    }
+
+    /**
+     * Getter for ModifiedBy.
+     * @return Returns the UserNameAndID
+     */
+    @JsonGetter("modifiedBy")
+    public UserNameAndID getModifiedBy() {
+        return modifiedBy;
+    }
+
+    /**
+     * Setter for ModifiedBy.
+     * @param modifiedBy Value for UserNameAndID
+     */
+    @JsonSetter("modifiedBy")
+    public void setModifiedBy(UserNameAndID modifiedBy) {
+        this.modifiedBy = modifiedBy;
     }
 
     /**
@@ -724,9 +724,9 @@ public class GroupResponse {
                 + ", isDeprecated=" + isDeprecated + ", complete=" + complete
                 + ", isSystemPrincipal=" + isSystemPrincipal + ", type=" + type + ", parenttype="
                 + parenttype + ", groupIdx=" + groupIdx + ", metadataVersion=" + metadataVersion
-                + ", tenantId=" + tenantId + ", indexVersion=" + indexVersion + ", generationNum="
-                + generationNum + ", created=" + created + ", modified=" + modified
-                + ", modifiedBy=" + modifiedBy + ", author=" + author + ", owner=" + owner + "]";
+                + ", tenantId=" + tenantId + ", generationNum=" + generationNum + ", indexVersion="
+                + indexVersion + ", created=" + created + ", modified=" + modified + ", author="
+                + author + ", modifiedBy=" + modifiedBy + ", owner=" + owner + "]";
     }
 
     /**
@@ -757,12 +757,12 @@ public class GroupResponse {
                 .groupIdx(getGroupIdx())
                 .metadataVersion(getMetadataVersion())
                 .tenantId(getTenantId())
-                .indexVersion(getIndexVersion())
                 .generationNum(getGenerationNum())
+                .indexVersion(getIndexVersion())
                 .created(getCreated())
                 .modified(getModified())
-                .modifiedBy(getModifiedBy())
                 .author(getAuthor())
+                .modifiedBy(getModifiedBy())
                 .owner(getOwner());
         return builder;
     }
@@ -779,7 +779,7 @@ public class GroupResponse {
         private List<String> privileges;
         private List<GroupNameAndID> groups;
         private List<PinboardNameAndID> assignedPinboards;
-        private Object userGroupContent;
+        private String userGroupContent;
         private List<String> tags;
         private Boolean isDeleted;
         private Boolean isHidden;
@@ -790,14 +790,14 @@ public class GroupResponse {
         private String type;
         private String parenttype;
         private Integer groupIdx;
-        private Integer metadataVersion;
+        private String metadataVersion;
         private String tenantId;
+        private String generationNum;
         private Integer indexVersion;
-        private Integer generationNum;
         private Double created;
         private Double modified;
-        private UserNameAndID modifiedBy;
         private UserNameAndID author;
+        private UserNameAndID modifiedBy;
         private UserNameAndID owner;
 
 
@@ -884,10 +884,10 @@ public class GroupResponse {
 
         /**
          * Setter for userGroupContent.
-         * @param  userGroupContent  Object value for userGroupContent.
+         * @param  userGroupContent  String value for userGroupContent.
          * @return Builder
          */
-        public Builder userGroupContent(Object userGroupContent) {
+        public Builder userGroupContent(String userGroupContent) {
             this.userGroupContent = userGroupContent;
             return this;
         }
@@ -994,10 +994,10 @@ public class GroupResponse {
 
         /**
          * Setter for metadataVersion.
-         * @param  metadataVersion  Integer value for metadataVersion.
+         * @param  metadataVersion  String value for metadataVersion.
          * @return Builder
          */
-        public Builder metadataVersion(Integer metadataVersion) {
+        public Builder metadataVersion(String metadataVersion) {
             this.metadataVersion = metadataVersion;
             return this;
         }
@@ -1013,22 +1013,22 @@ public class GroupResponse {
         }
 
         /**
+         * Setter for generationNum.
+         * @param  generationNum  String value for generationNum.
+         * @return Builder
+         */
+        public Builder generationNum(String generationNum) {
+            this.generationNum = generationNum;
+            return this;
+        }
+
+        /**
          * Setter for indexVersion.
          * @param  indexVersion  Integer value for indexVersion.
          * @return Builder
          */
         public Builder indexVersion(Integer indexVersion) {
             this.indexVersion = indexVersion;
-            return this;
-        }
-
-        /**
-         * Setter for generationNum.
-         * @param  generationNum  Integer value for generationNum.
-         * @return Builder
-         */
-        public Builder generationNum(Integer generationNum) {
-            this.generationNum = generationNum;
             return this;
         }
 
@@ -1053,22 +1053,22 @@ public class GroupResponse {
         }
 
         /**
-         * Setter for modifiedBy.
-         * @param  modifiedBy  UserNameAndID value for modifiedBy.
-         * @return Builder
-         */
-        public Builder modifiedBy(UserNameAndID modifiedBy) {
-            this.modifiedBy = modifiedBy;
-            return this;
-        }
-
-        /**
          * Setter for author.
          * @param  author  UserNameAndID value for author.
          * @return Builder
          */
         public Builder author(UserNameAndID author) {
             this.author = author;
+            return this;
+        }
+
+        /**
+         * Setter for modifiedBy.
+         * @param  modifiedBy  UserNameAndID value for modifiedBy.
+         * @return Builder
+         */
+        public Builder modifiedBy(UserNameAndID modifiedBy) {
+            this.modifiedBy = modifiedBy;
             return this;
         }
 
@@ -1090,8 +1090,8 @@ public class GroupResponse {
             return new GroupResponse(name, displayName, id, visibility, description, privileges,
                     groups, assignedPinboards, userGroupContent, tags, isDeleted, isHidden,
                     isExternal, isDeprecated, complete, isSystemPrincipal, type, parenttype,
-                    groupIdx, metadataVersion, tenantId, indexVersion, generationNum, created,
-                    modified, modifiedBy, author, owner);
+                    groupIdx, metadataVersion, tenantId, generationNum, indexVersion, created,
+                    modified, author, modifiedBy, owner);
         }
     }
 }

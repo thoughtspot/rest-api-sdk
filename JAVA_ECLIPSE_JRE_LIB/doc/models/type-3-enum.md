@@ -1,7 +1,7 @@
 
 # Type 3 Enum
 
-Type of user group. LOCAL_GROUP indicates that the user is created locally in the ThoughtSpot system.
+Type of user group. LOCAL_GROUP indicates that the group is created locally in the ThoughtSpot system.
 
 ## Enumeration
 

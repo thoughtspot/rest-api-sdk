@@ -18,37 +18,37 @@ class GroupResponse(object):
     TODO: type model description here.
 
     Attributes:
-        name (string): Name of the group
-        display_name (string): A unique display name string for the user
-            group
-        id (string): GUID of the group
-        visibility (string): Visibility of the group
+        name (string): Username of the user account
+        display_name (string): Display name of the user account
+        id (string): GUID of the user account
+        visibility (string): Visibility of the user account
         description (string): Description of the group
         privileges (list of string): Privileges assigned to the group
-        groups (list of GroupNameAndID): Name of the group to which is added
+        groups (list of GroupNameAndID): Groups to which usergroup is added
         assigned_pinboards (list of PinboardNameAndID): Pinboards assigned to
             the group
-        user_group_content (object): TODO: type description here.
-        tags (list of string): Tags assigned to the group
-        is_deleted (bool): Indicates if the group is deleted
-        is_hidden (bool): Indicates if the group is hidden
-        is_external (bool): Indicates if the group is from external system
+        user_group_content (string): TODO: type description here.
+        tags (list of string): Tags assigned to the usergroup
+        is_deleted (bool): Indicates if the user account is deleted
+        is_hidden (bool): Indicates if the user account is hidden
+        is_external (bool): Indicates if the user account is from external
+            system
         is_deprecated (bool): TODO: type description here.
         complete (bool): Indicates if the all the properties of group is
             provided
-        is_system_principal (bool): Indicates if the group is system
+        is_system_principal (bool): Indicates if the user account is system
             principal
-        mtype (string): Indicates the type of group
+        mtype (string): Indicates the type of user account
         parenttype (string): Indicates the type of parent object
         group_idx (int): TODO: type description here.
-        metadata_version (int): TODO: type description here.
-        tenant_id (string): Tenant id associated with the group
+        metadata_version (string): TODO: type description here.
+        tenant_id (string): Tenant id associated with the user account
+        generation_num (string): TODO: type description here.
         index_version (int): TODO: type description here.
-        generation_num (int): TODO: type description here.
-        created (float): Date and time when group was created
-        modified (float): Date and time of last modification of the group
-        modified_by (UserNameAndID): TODO: type description here.
+        created (float): Date and time when usergroup was created
+        modified (float): Date and time of last modification of usergroup
         author (UserNameAndID): TODO: type description here.
+        modified_by (UserNameAndID): TODO: type description here.
         owner (UserNameAndID): TODO: type description here.
 
     """
@@ -76,12 +76,12 @@ class GroupResponse(object):
         "group_idx": 'groupIdx',
         "metadata_version": 'metadataVersion',
         "tenant_id": 'tenantId',
-        "index_version": 'indexVersion',
         "generation_num": 'generationNum',
+        "index_version": 'indexVersion',
         "created": 'created',
         "modified": 'modified',
-        "modified_by": 'modifiedBy',
         "author": 'author',
+        "modified_by": 'modifiedBy',
         "owner": 'owner'
     }
 
@@ -107,12 +107,12 @@ class GroupResponse(object):
                  group_idx=None,
                  metadata_version=None,
                  tenant_id=None,
-                 index_version=None,
                  generation_num=None,
+                 index_version=None,
                  created=None,
                  modified=None,
-                 modified_by=None,
                  author=None,
+                 modified_by=None,
                  owner=None):
         """Constructor for the GroupResponse class"""
 
@@ -138,12 +138,12 @@ class GroupResponse(object):
         self.group_idx = group_idx
         self.metadata_version = metadata_version
         self.tenant_id = tenant_id
-        self.index_version = index_version
         self.generation_num = generation_num
+        self.index_version = index_version
         self.created = created
         self.modified = modified
-        self.modified_by = modified_by
         self.author = author
+        self.modified_by = modified_by
         self.owner = owner
 
     @classmethod
@@ -189,12 +189,12 @@ class GroupResponse(object):
         group_idx = dictionary.get('groupIdx')
         metadata_version = dictionary.get('metadataVersion')
         tenant_id = dictionary.get('tenantId')
-        index_version = dictionary.get('indexVersion')
         generation_num = dictionary.get('generationNum')
+        index_version = dictionary.get('indexVersion')
         created = dictionary.get('created')
         modified = dictionary.get('modified')
-        modified_by = UserNameAndID.from_dictionary(dictionary.get('modifiedBy')) if dictionary.get('modifiedBy') else None
         author = UserNameAndID.from_dictionary(dictionary.get('author')) if dictionary.get('author') else None
+        modified_by = UserNameAndID.from_dictionary(dictionary.get('modifiedBy')) if dictionary.get('modifiedBy') else None
         owner = UserNameAndID.from_dictionary(dictionary.get('owner')) if dictionary.get('owner') else None
 
         # Return an object of this model
@@ -219,10 +219,10 @@ class GroupResponse(object):
                    group_idx,
                    metadata_version,
                    tenant_id,
-                   index_version,
                    generation_num,
+                   index_version,
                    created,
                    modified,
-                   modified_by,
                    author,
+                   modified_by,
                    owner)

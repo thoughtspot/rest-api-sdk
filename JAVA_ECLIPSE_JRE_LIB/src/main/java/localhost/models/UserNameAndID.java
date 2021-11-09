@@ -39,7 +39,7 @@ public class UserNameAndID {
 
     /**
      * Getter for Name.
-     * Username of the group
+     * Username of the user account
      * @return Returns the String
      */
     @JsonGetter("name")
@@ -49,7 +49,7 @@ public class UserNameAndID {
 
     /**
      * Setter for Name.
-     * Username of the group
+     * Username of the user account
      * @param name Value for String
      */
     @JsonSetter("name")
@@ -59,7 +59,7 @@ public class UserNameAndID {
 
     /**
      * Getter for Id.
-     * GUID of the group
+     * GUID of the user account
      * @return Returns the String
      */
     @JsonGetter("id")
@@ -69,7 +69,7 @@ public class UserNameAndID {
 
     /**
      * Setter for Id.
-     * GUID of the group
+     * GUID of the user account
      * @param id Value for String
      */
     @JsonSetter("id")

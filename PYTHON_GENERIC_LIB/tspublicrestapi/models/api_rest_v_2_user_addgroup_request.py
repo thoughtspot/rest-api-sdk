@@ -15,7 +15,7 @@ class ApiRestV2UserAddgroupRequest(object):
     TODO: type model description here.
 
     Attributes:
-        name (string): Username of the user account
+        name (string): User name of the user account
         id (string): The GUID of the user account
         group_names (list of string): A JSON array of group names
 

@@ -15,8 +15,8 @@ class GroupNameAndID(object):
     TODO: type model description here.
 
     Attributes:
-        name (string): Name of the group to which group  is added
-        id (string): GUID of the group to which group  is added
+        name (string): Name of the group
+        id (string): GUID of the group
 
     """
 

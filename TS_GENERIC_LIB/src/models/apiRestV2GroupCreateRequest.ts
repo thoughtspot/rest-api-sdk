@@ -5,9 +5,9 @@
  */
 
 import { array, object, optional, Schema, string } from '../schema';
-import { Privilege1Enum, privilege1EnumSchema } from './privilege1Enum';
+import { PrivilegeEnum, privilegeEnumSchema } from './privilegeEnum';
 import { Type3Enum, type3EnumSchema } from './type3Enum';
-import { VisibilityEnum, visibilityEnumSchema } from './visibilityEnum';
+import { Visibility3Enum, visibility3EnumSchema } from './visibility3Enum';
 
 export interface ApiRestV2GroupCreateRequest {
   /** Name of the user group. The group name string must be unique. */
@@ -15,16 +15,16 @@ export interface ApiRestV2GroupCreateRequest {
   /** A unique display name string for the user group, for example, Developer group. */
   displayName: string;
   /** Visibility of the user. The visibility attribute is set to DEFAULT when creating a user. Setting this to DEFAULT makes a user visible to other users and user groups, and thus allows them to share objects */
-  visibility?: VisibilityEnum;
-  /** Description text for the group. */
+  visibility?: Visibility3Enum;
+  /** Description text for the group */
   description?: string;
-  /** A JSON array of privileges assigned to the group */
-  privileges?: Privilege1Enum[];
+  /** A JSON array of privileges to be assigned to the group */
+  privileges?: PrivilegeEnum[];
   /** A JSON array of group names */
   groupNames?: string[];
-  /** A JSON array of user names */
+  /** A JSON array of usernames to be added to the group */
   userNames?: string[];
-  /** Type of user group. LOCAL_GROUP indicates that the user is created locally in the ThoughtSpot system. */
+  /** Type of user group. LOCAL_GROUP indicates that the group is created locally in the ThoughtSpot system. */
   type?: Type3Enum;
 }
 
@@ -32,9 +32,9 @@ export const apiRestV2GroupCreateRequestSchema: Schema<ApiRestV2GroupCreateReque
   {
     name: ['name', string()],
     displayName: ['displayName', string()],
-    visibility: ['visibility', optional(visibilityEnumSchema)],
+    visibility: ['visibility', optional(visibility3EnumSchema)],
     description: ['description', optional(string())],
-    privileges: ['privileges', optional(array(privilege1EnumSchema))],
+    privileges: ['privileges', optional(array(privilegeEnumSchema))],
     groupNames: ['groupNames', optional(array(string()))],
     userNames: ['userNames', optional(array(string()))],
     type: ['type', optional(type3EnumSchema)],

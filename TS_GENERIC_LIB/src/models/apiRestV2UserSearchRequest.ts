@@ -17,18 +17,18 @@ import { PrivilegeEnum, privilegeEnumSchema } from './privilegeEnum';
 import { ShowWalkMeEnum, showWalkMeEnumSchema } from './showWalkMeEnum';
 import { StateEnum, stateEnumSchema } from './stateEnum';
 import { TypeEnum, typeEnumSchema } from './typeEnum';
-import { Visibility2Enum, visibility2EnumSchema } from './visibility2Enum';
+import { VisibilityEnum, visibilityEnumSchema } from './visibilityEnum';
 
 export interface ApiRestV2UserSearchRequest {
-  /** Name of the user. */
+  /** Name of the user */
   name?: string;
   /** The GUID of the user account to query */
   id?: string;
-  /** A unique display name string for the user, usually their first and last name. */
+  /** A unique display name string for the user account, usually their first and last name */
   displayName?: string;
   /** Visibility of the user. The visibility attribute is set to DEFAULT when creating a user. The DEFAULT attribute makes a user visible to other users and user groups, and thus allows them to share objects. */
-  visibility?: Visibility2Enum;
-  /** email of the user account */
+  visibility?: VisibilityEnum;
+  /** Email of the user account */
   mail?: string;
   /** A JSON array of group names */
   groupNames?: string[];
@@ -40,7 +40,7 @@ export interface ApiRestV2UserSearchRequest {
   notifyOnShare?: NotifyOnShareEnum;
   /** The user preference for revisiting the onboarding experience. */
   showWalkMe?: ShowWalkMeEnum;
-  /** ThoughtSpot provides an interactive guided walkthrough to onboard new users. The onboarding experience leads users through a set of actions to help users get started and accomplish their tasks quickly. The users can turn off the Onboarding experience and access it again when they need assistance with the ThoughtSpot UI. */
+  /** Status of the Onboarding experience in ThoughtSpot UI. */
   analystOnboardingComplete?: AnalystOnboardingCompleteEnum;
   /** Type of user. LOCAL_USER indicates that the user is created locally in the ThoughtSpot system. */
   type?: TypeEnum;
@@ -51,7 +51,7 @@ export const apiRestV2UserSearchRequestSchema: Schema<ApiRestV2UserSearchRequest
     name: ['name', optional(string())],
     id: ['id', optional(string())],
     displayName: ['displayName', optional(string())],
-    visibility: ['visibility', optional(visibility2EnumSchema)],
+    visibility: ['visibility', optional(visibilityEnumSchema)],
     mail: ['mail', optional(string())],
     groupNames: ['groupNames', optional(array(string()))],
     privileges: ['privileges', optional(array(privilegeEnumSchema))],

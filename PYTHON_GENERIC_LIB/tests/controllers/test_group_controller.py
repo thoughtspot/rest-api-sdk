@@ -25,7 +25,7 @@ class GroupControllerTests(ControllerTestBase):
         cls.response_catcher = HttpResponseCatcher()
         cls.controller = GroupController(cls.config, cls.response_catcher)
 
-    # To get the details of a specific group by name or id, use this endpoint. At Least one value needed. When both are given id will be considered to fetch user information.
+    # To get the details of a specific group by name or id, use this endpoint. At Least one value needed.  When both are given id will be considered to fetch user information.
     def test_get_group(self):
         # Parameters for the API call
         name = None
@@ -44,7 +44,7 @@ class GroupControllerTests(ControllerTestBase):
         self.assertTrue(TestHelper.match_headers(expected_headers, self.response_catcher.response.headers))
 
 
-    # To remove a group from the ThoughtSpot system, send a DELETE request to this endpoint. At Least one value needed.  When both are given user id will be considered to fetch user information.
+    # To remove a group from the ThoughtSpot system, use this endpoint.  At least one value of name or id is needed.  When both are given group id will be considered to delete.
     def test_delete_group(self):
         # Parameters for the API call
         name = None

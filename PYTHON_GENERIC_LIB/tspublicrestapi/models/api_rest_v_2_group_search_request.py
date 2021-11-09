@@ -16,19 +16,18 @@ class ApiRestV2GroupSearchRequest(object):
 
     Attributes:
         name (string): Name of the user group
-        id (string): GUID of the group to update
-        display_name (string): A unique display name string for the user
-            group, for example, Developer group.
-        visibility (VisibilityEnum): Visibility of the user. The visibility
-            attribute is set to DEFAULT when creating a user. Setting this to
-            DEFAULT makes a user visible to other users and user groups, and
+        id (string): GUID of the group
+        display_name (string): A display name string for the user group, for
+            example, Developer group.
+        visibility (Visibility4Enum): Visibility of the group. The visibility
+            attribute is set to DEFAULT when creating a group. Setting this to
+            DEFAULT makes a group visible to other users and user groups, and
             thus allows them to share objects
-        description (string): Description text for the group.
-        privileges (list of Privilege1Enum): A JSON array of privileges
-            assigned to the group
+        description (string): Description text for the group
+        privileges (list of PrivilegeEnum): Privileges assigned to the group
         group_names (list of string): A JSON array of group names
         user_names (list of string): A JSON array of user names
-        mtype (Type3Enum): Type of user group. LOCAL_GROUP indicates that the
+        mtype (Type4Enum): Type of user group. LOCAL_GROUP indicates that the
             user is created locally in the ThoughtSpot system.
 
     """

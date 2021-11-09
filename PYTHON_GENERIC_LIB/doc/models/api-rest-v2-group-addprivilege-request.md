@@ -10,8 +10,8 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `name` | `string` | Optional | Name of the group |
-| `id` | `string` | Optional | The GUID of the group to query. |
-| `privileges` | [`List of Privilege1Enum`](/doc/models/privilege-1-enum.md) | Optional | List of privileges |
+| `id` | `string` | Optional | The GUID of the group. |
+| `privileges` | [`List of PrivilegeEnum`](/doc/models/privilege-enum.md) | Optional | A JSON array of privileges to be assigned to the group |
 
 ## Example (as JSON)
 

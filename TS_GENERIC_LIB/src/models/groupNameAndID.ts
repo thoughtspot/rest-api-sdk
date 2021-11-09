@@ -7,9 +7,9 @@
 import { object, optional, Schema, string } from '../schema';
 
 export interface GroupNameAndID {
-  /** Name of the group to which group  is added */
+  /** Name of the group */
   name?: string;
-  /** GUID of the group to which group  is added */
+  /** GUID of the group */
   id?: string;
 }
 

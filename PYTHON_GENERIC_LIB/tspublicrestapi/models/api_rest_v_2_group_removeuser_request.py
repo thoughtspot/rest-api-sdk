@@ -16,8 +16,8 @@ class ApiRestV2GroupRemoveuserRequest(object):
 
     Attributes:
         name (string): Name of the group
-        id (string): The GUID of the group to query.
-        user_names (list of string): A JSON array of user names
+        id (string): The GUID of the group
+        user_names (list of string): A JSON array of name of users
 
     """
 

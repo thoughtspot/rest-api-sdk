@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `name` | `string \| undefined` | Optional | Username of the user account |
+| `name` | `string \| undefined` | Optional | User name of the user account |
 | `id` | `string \| undefined` | Optional | The GUID of the user account |
 | `groupNames` | `string[] \| undefined` | Optional | A JSON array of group names |
 

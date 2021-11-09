@@ -15,16 +15,15 @@ class ApiRestV2UserUpdateRequest(object):
     TODO: type model description here.
 
     Attributes:
-        name (string): Name of the user account. The username string must be
-            unique.
-        id (string): The GUID of the user account
-        display_name (string): A display name string for the user, usually
-            their first and last name.
+        name (string): Name of the user. The username string must be unique.
+        id (string): The GUID of the user account to query.
+        display_name (string): A unique display name string for the user,
+            usually their first and last name.
         visibility (VisibilityEnum): Visibility of the user. The visibility
-            attribute is set to DEFAULT when creating a user. Setting this to
-            DEFAULT makes a user visible to other users and user groups, and
-            thus allows them to share objects
-        mail (string): Email id associated with the user account
+            attribute is set to DEFAULT when creating a user. The DEFAULT
+            attribute makes a user visible to other users and user groups, and
+            thus allows them to share objects.
+        mail (string): email of the user
         password (string): Password for the user account.
         state (StateEnum): Status of user account. acitve or inactive.
         notify_on_share (bool): User preference for receiving email
