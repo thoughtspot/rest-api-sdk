@@ -16,6 +16,6 @@ Each package provides getting started guide to setup the library and use it in t
 We recommend that you browse through the [code playground](https://try-everywhere.thoughtspot.cloud/v2/#/everywhere/api/rest/playgroundV2) before you start constructing your API requests. The playground offers an interactive portal with comprehensive information about the API endpoints, request and response workflows.
 
 ## Guides
-[Developer guide](https://try-everywhere.thoughtspot.cloud/v2/#/everywhere/documentation/en/?pageid=getting-started)
+[Developer guide](https://developers.thoughtspot.com/docs)
 
 [API Reference](https://try-everywhere.thoughtspot.cloud/v2/#/everywhere/api/rest/playgroundV2)
