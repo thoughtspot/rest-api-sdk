@@ -17,4 +17,5 @@ We recommend that you browse through the [code playground](https://try-everywher
 
 ## Guides
 [Developer guide](https://try-everywhere.thoughtspot.cloud/v2/#/everywhere/documentation/en/?pageid=getting-started)
+
 [API Reference](https://try-everywhere.thoughtspot.cloud/v2/#/everywhere/api/rest/playgroundV2)
