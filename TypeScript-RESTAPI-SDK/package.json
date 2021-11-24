@@ -1,0 +1,48 @@
+{
+  "version": "1.0.0",
+  "license": "ThoughtSpot Development Tools End User License Agreement",
+  "sideEffects": false,
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "module": "dist/ts-public-restapilib.esm.js",
+  "files": ["dist", "src"],
+  "engines": {
+    "node": ">=10.4.0"
+  },
+  "scripts": {
+    "build": "tsdx build",
+    "test": "tsdx test --passWithNoTests",
+    "lint": "tsdx lint src",
+    "prepare": "tsdx build"
+  },
+  "peerDependencies": {},
+  "prettier": {
+    "printWidth": 80,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "name": "rest-api-sdk",
+  "description": "ThoughtSpot Typescript SDK",
+  "author": "ThoughtSpot",
+  "devDependencies": {
+    "stream-equal": "^2.0.1",
+    "tsdx": "^0.14.1",
+    "tslib": "^2.1.0",
+    "typescript": "^3.9.7"
+  },
+  "dependencies": {
+    "@apimatic/core": "^0.6.2",
+    "@apimatic/schema": "^0.6.0"
+  },
+  "bugs": {
+    "url": "https://github.com/thoughtspot/rest-api-sdk/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thoughtspot/rest-api-sdk.git"
+  },
+  "keywords": ["thoughtspot", "restapi", "sdk"],
+  "homepage": "https://github.com/thoughtspot/rest-api-sdk#readme",
+  "email": "support@thoughtspot.com"
+}
