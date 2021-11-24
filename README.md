@@ -1,2 +1,2 @@
 # rest-api-sdk
-ThoughtSpot REST API SDK1
+ThoughtSpot REST API SDK
