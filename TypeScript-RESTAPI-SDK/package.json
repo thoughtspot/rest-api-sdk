@@ -5,7 +5,10 @@
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "module": "dist/ts-public-restapilib.esm.js",
-  "files": ["dist", "src"],
+  "files": [
+    "dist",
+    "src"
+  ],
   "engines": {
     "node": ">=10.4.0"
   },
@@ -22,8 +25,8 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "name": "rest-api-sdk",
-  "description": "ThoughtSpot Typescript SDK",
+  "name": "@thoughtspot/rest-api-sdk",
+  "description": "ThoughtSpot Typescript Restapi SDK",
   "author": "ThoughtSpot",
   "devDependencies": {
     "stream-equal": "^2.0.1",
@@ -42,7 +45,12 @@
     "type": "git",
     "url": "git+https://github.com/thoughtspot/rest-api-sdk.git"
   },
-  "keywords": ["thoughtspot", "restapi", "sdk"],
+  "keywords": [
+    "thoughtspot",
+    "restapi",
+    "everywhere",
+    "sdk"
+  ],
   "homepage": "https://github.com/thoughtspot/rest-api-sdk#readme",
   "email": "support@thoughtspot.com"
 }
