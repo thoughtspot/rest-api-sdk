@@ -1,5 +1,4 @@
 # ThoughtSpot Restapi SDK
-[![npm version](https://badge.fury.io/js/@thoughtspot%2Frest-api-sdk.svg)](https://badge.fury.io/js/@thoughtspot%2Frest-api-sdk)
 
 These restapi SDKs allow you to natively embed ThoughtSpot admin and metadata operations into your application.
 
