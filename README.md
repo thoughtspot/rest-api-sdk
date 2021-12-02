@@ -7,9 +7,9 @@ The SDK is compatible with ThoughtSpot SW version >= 7.2 and ThoughtSpot Cloud.
 
 You can download the SDK library for a specific language from this github repository.
 
-- **[Java](https://github.com/thoughtspot/rest-api-sdk/tree/main/Java)** 
-- **[Python](https://github.com/thoughtspot/rest-api-sdk/tree/main/Python)**
-- **[Typescript/Javascript](https://github.com/thoughtspot/rest-api-sdk/tree/main/TypeScript)**
+- **[Java](Java)** 
+- **[Python](Python)**
+- **[Typescript/Javascript](TypeScript)**
 
 Each package provides getting started guide to setup the library and use it in the code.
 
