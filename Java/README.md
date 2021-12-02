@@ -112,7 +112,7 @@ This API uses `OAuth 2 Bearer token`.
 
 ## List of APIs
 
-* [Session](Java/doc/controllers/session.md)
+* [Session](/doc/controllers/session.md)
 * [User](/doc/controllers/user.md)
 * [Group](/doc/controllers/group.md)
 
