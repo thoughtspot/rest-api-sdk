@@ -46,20 +46,8 @@ client = RestapisdkClient(
 
 This API uses `OAuth 2 Bearer token`.
 
-## List of APIs
-
-* [Session](doc/controllers/session.md)
-* [User](doc/controllers/user.md)
-* [Group](doc/controllers/group.md)
-* [Metadata](doc/controllers/metadata.md)
-* [Database](doc/controllers/database.md)
-* [Dependency](doc/controllers/dependency.md)
-
-## Classes Documentation
-
-* [Utility Classes](doc/utility-classes.md)
-* [HttpResponse](doc/http-response.md)
-* [HttpRequest](doc/http-request.md)
+## Guide
+[API Reference](https://github.com/thoughtspot/rest-api-sdk/blob/main/Python/doc/README.md)
 
 ## Live Playground
 We recommend that you browse through the [code playground](https://try-everywhere.thoughtspot.cloud/v2/#/everywhere/api/rest/playgroundV2) before you start constructing your API requests. The playground offers an interactive portal with comprehensive information about the API endpoints, request and response workflows.
