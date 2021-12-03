@@ -9,7 +9,7 @@ To install the SDK, run the following command at the command line:
 
 ## Initialize the API Client
 
-**_Note:_** Documentation for the client can be found [here.](/doc/client.md)
+**_Note:_** Documentation for the client can be found [here.](doc/client.md)
 
 The following parameters are configurable for the API Client:
 

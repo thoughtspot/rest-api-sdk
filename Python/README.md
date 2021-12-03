@@ -3,15 +3,13 @@
 
 ## Install the Rest API SDK
 
-The latest version of Python SDK is available in PyPi package manager - https://pypi.org/project/thoughtspot-rest-api-sdk.
-
 To install the SDK, run the following command at the command line:
     
     pip install thoughtspot-rest-api-sdk
 
 ## Initialize the API Client
 
-**_Note:_** Documentation for the client can be found [here.](/doc/client.md)
+**_Note:_** Documentation for the client can be found [here.](doc/client.md)
 
 The following parameters are configurable for the API Client:
 

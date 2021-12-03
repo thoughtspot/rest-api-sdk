@@ -12,7 +12,7 @@ else:
 
 setup(
     name='thoughtspot-rest-api-sdk',
-    version='1.6.0',
+    version='1.6.1',
     description='Python client library for RESTAPI SDK',
     long_description=long_description,
     long_description_content_type="text/markdown",
