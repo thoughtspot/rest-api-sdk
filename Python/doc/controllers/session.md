@@ -10,29 +10,29 @@ session_controller = client.session
 
 ## Methods
 
-* [Session Info](/doc/controllers/session.md#session-info)
+* [Get Session Info](/doc/controllers/session.md#get-session-info)
 * [Login](/doc/controllers/session.md#login)
-* [Get Token](/doc/controllers/session.md#get-token)
+* [Gettoken](/doc/controllers/session.md#gettoken)
 * [Logout](/doc/controllers/session.md#logout)
-* [Revoke Token](/doc/controllers/session.md#revoke-token)
+* [Revoketoken](/doc/controllers/session.md#revoketoken)
 
 
-# Session Info
+# Get Session Info
 
-Get Session object information
+To get session object information, use this endpoint
 
 ```python
-def session_info(self)
+def get_session_info(self)
 ```
 
 ## Response Type
 
-[`SessionInfoResponse`](/doc/models/session-info-response.md)
+`object`
 
 ## Example Usage
 
 ```python
-result = session_controller.session_info()
+result = session_controller.get_session_info()
 ```
 
 ## Errors
@@ -44,7 +44,7 @@ result = session_controller.session_info()
 
 # Login
 
-You can programmatically login a user to ThoughtSpot
+To programmatically login a user to ThoughtSpot, use this endpoint
 
 :information_source: **Note** This endpoint does not require authentication.
 
@@ -80,15 +80,15 @@ result = session_controller.login(body)
 | 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
 
 
-# Get Token
+# Gettoken
 
-You can programmatically create token for a user in ThoughtSpot
+To programmatically create token for a user in ThoughtSpot, use this endpoint
 
 :information_source: **Note** This endpoint does not require authentication.
 
 ```python
-def get_token(self,
-             body)
+def gettoken(self,
+            body)
 ```
 
 ## Parameters
@@ -108,7 +108,7 @@ body = ApiRestV2SessionGettokenRequest()
 body.user_name = 'userName8'
 body.password = 'password0'
 
-result = session_controller.get_token(body)
+result = session_controller.gettoken(body)
 ```
 
 ## Errors
@@ -145,12 +145,12 @@ result = session_controller.logout()
 | 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
 
 
-# Revoke Token
+# Revoketoken
 
 To expire or revoke a token for a user, use this endpoint
 
 ```python
-def revoke_token(self)
+def revoketoken(self)
 ```
 
 ## Response Type
@@ -160,7 +160,7 @@ def revoke_token(self)
 ## Example Usage
 
 ```python
-result = session_controller.revoke_token()
+result = session_controller.revoketoken()
 ```
 
 ## Errors

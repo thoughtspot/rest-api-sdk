@@ -15,7 +15,7 @@ The following parameters are configurable for the API Client:
 The API client can be initialized as follows:
 
 ```java
-TSPublicRestAPIClient client = new TSPublicRestAPIClient.Builder()
+RESTAPISDKClient client = new RESTAPISDKClient.Builder()
     .httpClientConfig(configBuilder -> configBuilder
             .timeout(0))
     .contentType("application/json")
@@ -26,7 +26,7 @@ TSPublicRestAPIClient client = new TSPublicRestAPIClient.Builder()
     .build();
 ```
 
-## TS Public RestAPIClient Class
+## RESTAPI SDKClient Class
 
 The gateway for the SDK. This class acts as a factory for the Controllers and also holds the configuration of the SDK.
 
@@ -37,6 +37,9 @@ The gateway for the SDK. This class acts as a factory for the Controllers and al
 | `getSessionController()` | Provides access to Session controller. | `SessionController` |
 | `getUserController()` | Provides access to User controller. | `UserController` |
 | `getGroupController()` | Provides access to Group controller. | `GroupController` |
+| `getMetadataController()` | Provides access to Metadata controller. | `MetadataController` |
+| `getDatabaseController()` | Provides access to Database controller. | `DatabaseController` |
+| `getDependencyController()` | Provides access to Dependency controller. | `DependencyController` |
 
 ### Methods
 

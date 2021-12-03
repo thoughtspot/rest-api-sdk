@@ -11,7 +11,7 @@
 |  --- | --- | --- | --- |
 | `name` | `string \| undefined` | Optional | User name of the user account |
 | `id` | `string \| undefined` | Optional | The GUID of the user account |
-| `groupNames` | `string[] \| undefined` | Optional | A JSON array of group names |
+| `groups` | [`GroupNameAndIDInput[] \| undefined`](/doc/models/group-name-and-id-input.md) | Optional | A JSON array of group names or GUIDs or both. When both are given then id is considered |
 
 ## Example (as JSON)
 
@@ -19,7 +19,7 @@
 {
   "name": null,
   "id": null,
-  "groupNames": null
+  "groups": null
 }
 ```
 

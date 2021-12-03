@@ -11,14 +11,14 @@ else:
         long_description = fh.read()
 
 setup(
-    name='tspublicrestapi',
-    version='2.0.0',
-    description='Python client library for TS Public RestAPI',
+    name='thoughtspot-rest-api-sdk',
+    version='1.6.0',
+    description='Python client library for RESTAPI SDK',
     long_description=long_description,
     long_description_content_type="text/markdown",
-    author='APIMatic SDK Generator',
-    author_email='support@apimatic.io',
-    url='https://apimatic.io',
+    author='ThoughtSpot',
+    author_email='support@thoughtspot.com',
+    url='https://www.thoughtspot.com/',
     packages=find_packages(),
     install_requires=[
         'jsonpickle~=1.4, >= 1.4.1',

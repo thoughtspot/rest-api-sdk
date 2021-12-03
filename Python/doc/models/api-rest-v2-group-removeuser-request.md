@@ -10,8 +10,8 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `name` | `string` | Optional | Name of the group |
-| `id` | `string` | Optional | The GUID of the group |
-| `user_names` | `List of string` | Optional | A JSON array of name of users |
+| `id` | `string` | Optional | The GUID of the group to query. |
+| `users` | [`List of UserNameAndIDInput`](/doc/models/user-name-and-id-input.md) | Optional | A JSON array of name of users or GUIDs of users or both. When both are given then id is considered |
 
 ## Example (as JSON)
 
@@ -19,7 +19,7 @@
 {
   "name": null,
   "id": null,
-  "userNames": null
+  "users": null
 }
 ```
 

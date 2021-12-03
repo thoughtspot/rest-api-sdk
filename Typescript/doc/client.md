@@ -24,7 +24,7 @@ const client = new Client({
 })
 ```
 
-## TS Public RestAPI Client
+## RESTAPI SDK Client
 
 The gateway for the SDK. This class acts as a factory for the Controllers and also holds the configuration of the SDK.
 
@@ -35,4 +35,7 @@ The gateway for the SDK. This class acts as a factory for the Controllers and al
 | session | Gets SessionController |
 | user | Gets UserController |
 | group | Gets GroupController |
+| metadata | Gets MetadataController |
+| database | Gets DatabaseController |
+| dependency | Gets DependencyController |
 

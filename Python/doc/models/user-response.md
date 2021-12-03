@@ -14,7 +14,7 @@
 | `id` | `string` | Optional | GUID of the user account |
 | `visibility` | `string` | Optional | Visibility of the user account |
 | `mail` | `string` | Optional | Email of the user account |
-| `groups` | [`List of GroupNameAndID`](/doc/models/group-name-and-id.md) | Optional | The groups to which user account is added |
+| `groups` | [`List of GroupNameAndID`](/doc/models/group-name-and-id.md) | Optional | Name of the group to which user account is added |
 | `privileges` | `List of string` | Optional | Privileges assigned to user account |
 | `tags` | `List of string` | Optional | Tags assigned to the user |
 | `state` | `string` | Optional | Indicates if the user account is active or inactive |
@@ -25,7 +25,7 @@
 | `welcome_email_sent` | `bool` | Optional | Indicates if the welcome email is sent to email associated with the user account |
 | `is_deleted` | `bool` | Optional | Indicates if the user account is deleted |
 | `is_hidden` | `bool` | Optional | Indicates if the user account is hidden |
-| `is_external` | `bool` | Optional | Indicates if the user account is from external system |
+| `is_external` | `bool` | Optional | Indicates if the user account is from external system<br>isDeprecated |
 | `is_deprecated` | `bool` | Optional | - |
 | `complete` | `bool` | Optional | Indicates if the all the properties of user account is provided |
 | `is_super_user` | `bool` | Optional | Indicates if the user account is super user |

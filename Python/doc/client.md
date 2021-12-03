@@ -21,10 +21,10 @@ The following parameters are configurable for the API Client:
 The API client can be initialized as follows:
 
 ```python
-from tspublicrestapi.tspublicrestapi_client import TspublicrestapiClient
-from tspublicrestapi.configuration import Environment
+from restapisdk.restapisdk_client import RestapisdkClient
+from restapisdk.configuration import Environment
 
-client = TspublicrestapiClient(
+client = RestapisdkClient(
     content_type='application/json',
     accept_language='application/json',
     access_token='AccessToken',
@@ -32,7 +32,7 @@ client = TspublicrestapiClient(
     base_url = 'https://localhost:443',)
 ```
 
-## TS Public RestAPI Client
+## RESTAPI SDK Client
 
 The gateway for the SDK. This class acts as a factory for the Controllers and also holds the configuration of the SDK.
 
@@ -43,4 +43,7 @@ The gateway for the SDK. This class acts as a factory for the Controllers and al
 | session | Gets SessionController |
 | user | Gets UserController |
 | group | Gets GroupController |
+| metadata | Gets MetadataController |
+| database | Gets DatabaseController |
+| dependency | Gets DependencyController |
 

@@ -10,21 +10,21 @@ const sessionController = new SessionController(client);
 
 ## Methods
 
-* [Session Info](/doc/controllers/session.md#session-info)
+* [Get Session Info](/doc/controllers/session.md#get-session-info)
 * [Login](/doc/controllers/session.md#login)
-* [Get Token](/doc/controllers/session.md#get-token)
+* [Gettoken](/doc/controllers/session.md#gettoken)
 * [Logout](/doc/controllers/session.md#logout)
-* [Revoke Token](/doc/controllers/session.md#revoke-token)
+* [Revoketoken](/doc/controllers/session.md#revoketoken)
 
 
-# Session Info
+# Get Session Info
 
-Get Session object information
+To get session object information, use this endpoint
 
 ```ts
-async sessionInfo(
+async getSessionInfo(
   requestOptions?: RequestOptions
-): Promise<ApiResponse<SessionInfoResponse>>
+): Promise<ApiResponse<unknown>>
 ```
 
 ## Parameters
@@ -35,13 +35,13 @@ async sessionInfo(
 
 ## Response Type
 
-[`SessionInfoResponse`](/doc/models/session-info-response.md)
+`unknown`
 
 ## Example Usage
 
 ```ts
 try {
-  const { result, ...httpResponse } = await sessionController.sessionInfo();
+  const { result, ...httpResponse } = await sessionController.getSessionInfo();
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch(error) {
@@ -61,7 +61,7 @@ try {
 
 # Login
 
-You can programmatically login a user to ThoughtSpot
+To programmatically login a user to ThoughtSpot, use this endpoint
 
 :information_source: **Note** This endpoint does not require authentication.
 
@@ -86,6 +86,7 @@ async login(
 ## Example Usage
 
 ```ts
+const contentType = null;
 const body: ApiRestV2SessionLoginRequest = {
   userName: 'userName8',
   password: 'password0',
@@ -110,14 +111,14 @@ try {
 | 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
 
 
-# Get Token
+# Gettoken
 
-You can programmatically create token for a user in ThoughtSpot
+To programmatically create token for a user in ThoughtSpot, use this endpoint
 
 :information_source: **Note** This endpoint does not require authentication.
 
 ```ts
-async getToken(
+async gettoken(
   body: ApiRestV2SessionGettokenRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<SessionLoginResponse>>
@@ -137,13 +138,14 @@ async getToken(
 ## Example Usage
 
 ```ts
+const contentType = null;
 const body: ApiRestV2SessionGettokenRequest = {
   userName: 'userName8',
   password: 'password0',
 };
 
 try {
-  const { result, ...httpResponse } = await sessionController.getToken(body);
+  const { result, ...httpResponse } = await sessionController.gettoken(body);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch(error) {
@@ -205,12 +207,12 @@ try {
 | 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
 
 
-# Revoke Token
+# Revoketoken
 
 To expire or revoke a token for a user, use this endpoint
 
 ```ts
-async revokeToken(
+async revoketoken(
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<boolean>>
 ```
@@ -229,7 +231,7 @@ async revokeToken(
 
 ```ts
 try {
-  const { result, ...httpResponse } = await sessionController.revokeToken();
+  const { result, ...httpResponse } = await sessionController.revoketoken();
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch(error) {

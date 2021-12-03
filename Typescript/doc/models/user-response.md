@@ -14,7 +14,7 @@
 | `id` | `string \| undefined` | Optional | GUID of the user account |
 | `visibility` | `string \| undefined` | Optional | Visibility of the user account |
 | `mail` | `string \| undefined` | Optional | Email of the user account |
-| `groups` | [`GroupNameAndID[] \| undefined`](/doc/models/group-name-and-id.md) | Optional | The groups to which user account is added |
+| `groups` | [`GroupNameAndID[] \| undefined`](/doc/models/group-name-and-id.md) | Optional | Name of the group to which user account is added |
 | `privileges` | `string[] \| undefined` | Optional | Privileges assigned to user account |
 | `tags` | `string[] \| undefined` | Optional | Tags assigned to the user |
 | `state` | `string \| undefined` | Optional | Indicates if the user account is active or inactive |
@@ -25,7 +25,7 @@
 | `welcomeEmailSent` | `boolean \| undefined` | Optional | Indicates if the welcome email is sent to email associated with the user account |
 | `isDeleted` | `boolean \| undefined` | Optional | Indicates if the user account is deleted |
 | `isHidden` | `boolean \| undefined` | Optional | Indicates if the user account is hidden |
-| `isExternal` | `boolean \| undefined` | Optional | Indicates if the user account is from external system |
+| `isExternal` | `boolean \| undefined` | Optional | Indicates if the user account is from external system<br>isDeprecated |
 | `isDeprecated` | `boolean \| undefined` | Optional | - |
 | `complete` | `boolean \| undefined` | Optional | Indicates if the all the properties of user account is provided |
 | `isSuperUser` | `boolean \| undefined` | Optional | Indicates if the user account is super user |

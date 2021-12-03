@@ -1,7 +1,7 @@
 
 # Type Enum
 
-Type of user. LOCAL_USER indicates that the user is created locally in the ThoughtSpot system.
+Type of the metadata object
 
 ## Enumeration
 
@@ -11,12 +11,8 @@ Type of user. LOCAL_USER indicates that the user is created locally in the Thoug
 
 | Name |
 |  --- |
-| `uNKNOWN` |
-| `lDAPUSER` |
-| `sAMLUSER` |
-| `oIDCUSER` |
-| `lOCALUSER` |
-| `lDAPGROUP` |
-| `lOCALGROUP` |
-| `tENANTGROUP` |
+| `aNSWER` |
+| `lIVEBOARD` |
+| `dATAOBJECT` |
+| `cONNECTION` |
 

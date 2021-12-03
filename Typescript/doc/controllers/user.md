@@ -21,7 +21,7 @@ const userController = new UserController(client);
 
 # Get User
 
-To get the details of a specific user account by username or user id, use this endpoint.  At Least one value is needed.  When both are given, user id will be considered to fetch user information
+To get the details of a specific user account by username or user id, use this endpoint. At Least one value is needed. When both are given,then user id will be considered to fetch user information
 
 ```ts
 async getUser(
@@ -67,7 +67,7 @@ try {
 
 # Create User
 
-To programmatically create a user account in the ThoughtSpot system use this API endpoint.  Using this API, you can create a user and assign groups. To create a user, you require admin user privileges. All users created in the ThoughtSpot system are added to ALL_GROUP
+To programmatically create a user account in the ThoughtSpot system, use this API endpoint. Using this API, you can create a user and assign groups. To create a user, you require admin user privileges. All users created in the ThoughtSpot system are added to ALL_GROUP
 
 ```ts
 async createUser(
@@ -90,6 +90,7 @@ async createUser(
 ## Example Usage
 
 ```ts
+const contentType = null;
 const body: ApiRestV2UserCreateRequest = {
   name: 'name6',
   displayName: 'displayName6',
@@ -117,7 +118,7 @@ try {
 
 # Update User
 
-You can use this endpoint to programmatically modify an existing user account.   To modify a user, you require admin user privileges. At least one of User Id or username is mandatory. When both are given, then user id will be considered and username will be updated
+You can use this endpoint to programmatically modify an existing user account. To modify a user, you require admin user privileges. At least one of User Id or username is mandatory. When both are given, then user id will be considered and username will be updated
 
 ```ts
 async updateUser(
@@ -140,6 +141,7 @@ async updateUser(
 ## Example Usage
 
 ```ts
+const contentType = null;
 const body: ApiRestV2UserUpdateRequest = {};
 
 try {
@@ -163,7 +165,7 @@ try {
 
 # Delete User
 
-To remove a user from the ThoughtSpot system, use this endpoint.  At Least one value needed.  When both are given user id will be considered to delete user.
+To remove a user from the ThoughtSpot system, use this endpoint. At least one value is needed. When both are given, then user id will be considered to delete user.
 
 ```ts
 async deleteUser(
@@ -177,8 +179,8 @@ async deleteUser(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `name` | `string \| undefined` | Query, Optional | Username of the user that you want to query. |
-| `id` | `string \| undefined` | Query, Optional | The GUID of the user account to query. |
+| `name` | `string \| undefined` | Query, Optional | Username of the user account |
+| `id` | `string \| undefined` | Query, Optional | The GUID of the user account |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -209,7 +211,7 @@ try {
 
 # Add Groups to User
 
-To programmatically add groups to an existing ThoughtSpot user use this endpoint. When you assign groups to a user, the user inherits the privileges assigned to those groups. At least one of User Id or username is mandatory. When both are given, then user id will be considered.
+To programmatically add groups to an existing ThoughtSpot user, use this endpoint. When you assign groups to a user, the user inherits the privileges assigned to those groups. At least one of user Id or username is mandatory. When both are given, then user id will be considered.
 
 ```ts
 async addGroupsToUser(
@@ -232,6 +234,7 @@ async addGroupsToUser(
 ## Example Usage
 
 ```ts
+const contentType = null;
 const body: ApiRestV2UserAddgroupRequest = {};
 
 try {
@@ -255,7 +258,7 @@ try {
 
 # Remove Groups From User
 
-To programmatically remove groups from an existing ThoughtSpot user, use this API endpoint. The API removes only the user association. It does not delete the user or group from the Thoughtspot system At least one of User Id or username is mandatory. When both are given, then user id will be considered.
+To programmatically remove groups from an existing ThoughtSpot user, use this API endpoint. The API removes only the user association. It does not delete the user or group from the Thoughtspot system. At least one of user id or username is mandatory. When both are given, then user id will be considered.
 
 ```ts
 async removeGroupsFromUser(
@@ -278,6 +281,7 @@ async removeGroupsFromUser(
 ## Example Usage
 
 ```ts
+const contentType = null;
 const body: ApiRestV2UserRemovegroupRequest = {};
 
 try {
@@ -301,7 +305,7 @@ try {
 
 # Search Users
 
-To get the details of a specific user account or all users in the ThoughtSpot system use this end point.  If no inputs are provided, then all user are included in the response.
+To get the details of a specific user account or all users in the ThoughtSpot system, use this endpoint. If no input is provided, then all user are included in the response.
 
 ```ts
 async searchUsers(
@@ -324,6 +328,7 @@ async searchUsers(
 ## Example Usage
 
 ```ts
+const contentType = null;
 const body: ApiRestV2UserSearchRequest = {};
 
 try {

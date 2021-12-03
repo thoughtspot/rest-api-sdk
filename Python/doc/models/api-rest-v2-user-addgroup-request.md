@@ -9,9 +9,9 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `name` | `string` | Optional | User name of the user account |
+| `name` | `string` | Optional | Username of the user account |
 | `id` | `string` | Optional | The GUID of the user account |
-| `group_names` | `List of string` | Optional | A JSON array of group names |
+| `groups` | [`List of GroupNameAndIDInput`](/doc/models/group-name-and-id-input.md) | Optional | A JSON array of group names or GUIDs or both. When both are given then id is considered |
 
 ## Example (as JSON)
 
@@ -19,7 +19,7 @@
 {
   "name": null,
   "id": null,
-  "groupNames": null
+  "groups": null
 }
 ```
 

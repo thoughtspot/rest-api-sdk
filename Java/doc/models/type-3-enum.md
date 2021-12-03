@@ -1,8 +1,6 @@
 
 # Type 3 Enum
 
-Type of user group. LOCAL_GROUP indicates that the group is created locally in the ThoughtSpot system.
-
 ## Enumeration
 
 `Type3Enum`
@@ -11,6 +9,13 @@ Type of user group. LOCAL_GROUP indicates that the group is created locally in t
 
 | Name |
 |  --- |
-| `LOCALGROUP` |
-| `TENANTGROUP` |
+| `ANSWER` |
+| `LIVEBOARD` |
+| `DATAOBJECT` |
+| `COLUMN` |
+| `JOIN` |
+| `CONNECTION` |
+| `TAG` |
+| `USER` |
+| `USERGROUP` |
 

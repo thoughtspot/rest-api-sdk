@@ -21,7 +21,7 @@ UserController userController = client.getUserController();
 
 # Get User
 
-To get the details of a specific user account by username or user id, use this endpoint.  At Least one value is needed.  When both are given, user id will be considered to fetch user information
+To get the details of a specific user account by username or user id, use this endpoint. At Least one value is needed. When both are given,then user id will be considered to fetch user information
 
 ```java
 CompletableFuture<UserResponse> getUserAsync(
@@ -60,7 +60,7 @@ userController.getUserAsync(null, null).thenAccept(result -> {
 
 # Create User
 
-To programmatically create a user account in the ThoughtSpot system use this API endpoint.  Using this API, you can create a user and assign groups. To create a user, you require admin user privileges. All users created in the ThoughtSpot system are added to ALL_GROUP
+To programmatically create a user account in the ThoughtSpot system, use this API endpoint. Using this API, you can create a user and assign groups. To create a user, you require admin user privileges. All users created in the ThoughtSpot system are added to ALL_GROUP
 
 ```java
 CompletableFuture<UserResponse> createUserAsync(
@@ -102,7 +102,7 @@ userController.createUserAsync(body).thenAccept(result -> {
 
 # Update User
 
-You can use this endpoint to programmatically modify an existing user account.   To modify a user, you require admin user privileges. At least one of User Id or username is mandatory. When both are given, then user id will be considered and username will be updated
+You can use this endpoint to programmatically modify an existing user account. To modify a user, you require admin user privileges. At least one of User Id or username is mandatory. When both are given, then user id will be considered and username will be updated
 
 ```java
 CompletableFuture<Boolean> updateUserAsync(
@@ -141,7 +141,7 @@ userController.updateUserAsync(body).thenAccept(result -> {
 
 # Delete User
 
-To remove a user from the ThoughtSpot system, use this endpoint.  At Least one value needed.  When both are given user id will be considered to delete user.
+To remove a user from the ThoughtSpot system, use this endpoint. At least one value is needed. When both are given, then user id will be considered to delete user.
 
 ```java
 CompletableFuture<Boolean> deleteUserAsync(
@@ -153,8 +153,8 @@ CompletableFuture<Boolean> deleteUserAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `name` | `String` | Query, Optional | Username of the user that you want to query. |
-| `id` | `String` | Query, Optional | The GUID of the user account to query. |
+| `name` | `String` | Query, Optional | Username of the user account |
+| `id` | `String` | Query, Optional | The GUID of the user account |
 
 ## Response Type
 
@@ -180,7 +180,7 @@ userController.deleteUserAsync(null, null).thenAccept(result -> {
 
 # Add Groups to User
 
-To programmatically add groups to an existing ThoughtSpot user use this endpoint. When you assign groups to a user, the user inherits the privileges assigned to those groups. At least one of User Id or username is mandatory. When both are given, then user id will be considered.
+To programmatically add groups to an existing ThoughtSpot user, use this endpoint. When you assign groups to a user, the user inherits the privileges assigned to those groups. At least one of user Id or username is mandatory. When both are given, then user id will be considered.
 
 ```java
 CompletableFuture<Boolean> addGroupsToUserAsync(
@@ -219,7 +219,7 @@ userController.addGroupsToUserAsync(body).thenAccept(result -> {
 
 # Remove Groups From User
 
-To programmatically remove groups from an existing ThoughtSpot user, use this API endpoint. The API removes only the user association. It does not delete the user or group from the Thoughtspot system At least one of User Id or username is mandatory. When both are given, then user id will be considered.
+To programmatically remove groups from an existing ThoughtSpot user, use this API endpoint. The API removes only the user association. It does not delete the user or group from the Thoughtspot system. At least one of user id or username is mandatory. When both are given, then user id will be considered.
 
 ```java
 CompletableFuture<Boolean> removeGroupsFromUserAsync(
@@ -258,7 +258,7 @@ userController.removeGroupsFromUserAsync(body).thenAccept(result -> {
 
 # Search Users
 
-To get the details of a specific user account or all users in the ThoughtSpot system use this end point.  If no inputs are provided, then all user are included in the response.
+To get the details of a specific user account or all users in the ThoughtSpot system, use this endpoint. If no input is provided, then all user are included in the response.
 
 ```java
 CompletableFuture<List<UserResponse>> searchUsersAsync(

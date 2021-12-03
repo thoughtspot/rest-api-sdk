@@ -11,7 +11,7 @@
 |  --- | --- | --- | --- | --- | --- |
 | `Name` | `String` | Optional | User name of the user account | String getName() | setName(String name) |
 | `Id` | `String` | Optional | The GUID of the user account | String getId() | setId(String id) |
-| `GroupNames` | `List<String>` | Optional | A JSON array of group names | List<String> getGroupNames() | setGroupNames(List<String> groupNames) |
+| `Groups` | [`List<GroupNameAndIDInput>`](/doc/models/group-name-and-id-input.md) | Optional | A JSON array of group names or GUIDs or both. When both are given then id is considered | List<GroupNameAndIDInput> getGroups() | setGroups(List<GroupNameAndIDInput> groups) |
 
 ## Example (as JSON)
 
@@ -19,7 +19,7 @@
 {
   "name": null,
   "id": null,
-  "groupNames": null
+  "groups": null
 }
 ```
 

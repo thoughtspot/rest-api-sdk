@@ -1,0 +1,31 @@
+
+# Type 2 Enum
+
+## Enumeration
+
+`Type2Enum`
+
+## Fields
+
+| Name |
+|  --- |
+| `aNSWER` |
+| `lIVEBOARD` |
+| `dATAOBJECTALL` |
+| `dATAOBJECTWORKSHEET` |
+| `dATAOBJECTTABLE` |
+| `dATAOBJECTUSERDEFINED` |
+| `dATAOBJECTVIEW` |
+| `dATAOBJECTCALENDARTABLE` |
+| `cOLUMNALL` |
+| `cOLUMNWORKSHEET` |
+| `cOLUMNTABLE` |
+| `cOLUMNUSERDEFINED` |
+| `cOLUMNVIEW` |
+| `cOLUMNCALENDARTABLE` |
+| `jOIN` |
+| `cONNECTION` |
+| `tAG` |
+| `uSER` |
+| `uSERGROUP` |
+

@@ -11,7 +11,7 @@
 |  --- | --- | --- | --- |
 | `userName` | `string` | Required | Username of the user account |
 | `password` | `string` | Required | The password of the user account |
-| `expiryTimeMs` | `string \| undefined` | Optional | Provide the time duration in milliseconds to expire the token. If no input is provided then the value set at cluster level will be considered |
+| `tokenExpiryDuration` | `string \| undefined` | Optional | Provide duration in seconds after which the token should expire |
 
 ## Example (as JSON)
 
@@ -19,7 +19,7 @@
 {
   "userName": "userName2",
   "password": "password4",
-  "expiryTimeMs": null
+  "tokenExpiryDuration": null
 }
 ```
 

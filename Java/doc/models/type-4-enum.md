@@ -1,7 +1,7 @@
 
 # Type 4 Enum
 
-Type of user group. LOCAL_GROUP indicates that the user is created locally in the ThoughtSpot system.
+Type of user. LOCAL_USER indicates that the user is created locally in the ThoughtSpot system.
 
 ## Enumeration
 
@@ -11,6 +11,12 @@ Type of user group. LOCAL_GROUP indicates that the user is created locally in th
 
 | Name |
 |  --- |
+| `UNKNOWN` |
+| `LDAPUSER` |
+| `SAMLUSER` |
+| `OIDCUSER` |
+| `LOCALUSER` |
+| `LDAPGROUP` |
 | `LOCALGROUP` |
 | `TENANTGROUP` |
 
