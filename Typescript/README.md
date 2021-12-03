@@ -3,8 +3,6 @@
 
 ## Install the Rest API SDK
 
-The latest version of the TypeScript SDK is available in npm package manager - https://www.npmjs.com/package/@thoughtspot/rest-api-sdk.
-
 To install the SDK, run the following command at the command line:
 
     npm install @thoughtspot/rest-api-sdk
@@ -42,15 +40,17 @@ This API uses `OAuth 2 Bearer token`.
 
 ## List of APIs
 
-* [Session](/doc/controllers/session.md)
-* [User](/doc/controllers/user.md)
-* [Group](/doc/controllers/group.md)
-* [Metadata](/doc/controllers/metadata.md)
-* [Database](/doc/controllers/database.md)
-* [Dependency](/doc/controllers/dependency.md)
+* [Session](doc/controllers/session.md)
+* [User](doc/controllers/user.md)
+* [Group](doc/controllers/group.md)
+* [Metadata](doc/controllers/metadata.md)
+* [Database](doc/controllers/database.md)
+* [Dependency](doc/controllers/dependency.md)
 
 ## Classes Documentation
 
-* [ApiResponse](/doc/api-response.md)
-* [ApiError](/doc/api-error.md)
+* [ApiResponse](doc/api-response.md)
+* [ApiError](doc/api-error.md)
 
+## Live Playground
+We recommend that you browse through the [code playground](https://try-everywhere.thoughtspot.cloud/v2/#/everywhere/api/rest/playgroundV2) before you start constructing your API requests. The playground offers an interactive portal with comprehensive information about the API endpoints, request and response workflows.
