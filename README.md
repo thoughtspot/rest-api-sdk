@@ -9,7 +9,7 @@ You can download the SDK library for a specific language from this github reposi
 
 - **[Java](Java)** 
 - **[Python](Python)**
-- **[Typescript/Javascript](TypeScript)**
+- **[Typescript/Javascript](Typescript)**
 
 Each package provides getting started guide to setup the library and use it in the code.
 
