@@ -12,13 +12,13 @@ else:
 
 setup(
     name='thoughtspot-rest-api-sdk',
-    version='1.6.2',
+    version='1.6.3',
     description='Python client library for RESTAPI SDK',
     long_description=long_description,
     long_description_content_type="text/markdown",
     author='ThoughtSpot',
     author_email='support@thoughtspot.com',
-    url='https://www.thoughtspot.com/',
+    url='https://github.com/thoughtspot/rest-api-sdk/tree/main/Python',
     packages=find_packages(),
     install_requires=[
         'jsonpickle~=1.4, >= 1.4.1',
