@@ -1,6 +1,8 @@
 
 # Sort by Enum
 
+Field based on which the response needs to be ordered.
+
 ## Enumeration
 
 `SortByEnum`

@@ -18,7 +18,7 @@ import {
   groupNameAndIDInputSchema,
 } from './groupNameAndIDInput';
 import { StateEnum, stateEnumSchema } from './stateEnum';
-import { Type4Enum, type4EnumSchema } from './type4Enum';
+import { Type2Enum, type2EnumSchema } from './type2Enum';
 import { VisibilityEnum, visibilityEnumSchema } from './visibilityEnum';
 
 export interface ApiRestV2UserCreateRequest {
@@ -43,7 +43,7 @@ export interface ApiRestV2UserCreateRequest {
   /** ThoughtSpot provides an interactive guided walkthrough to onboard new users. The onboarding experience leads users through a set of actions to help users get started and accomplish their tasks quickly. The users can turn off the Onboarding experience and access it again when they need assistance with the ThoughtSpot UI. */
   analystOnboardingComplete?: boolean;
   /** Type of user. LOCAL_USER indicates that the user is created locally in the ThoughtSpot system. */
-  type?: Type4Enum;
+  type?: Type2Enum;
 }
 
 export const apiRestV2UserCreateRequestSchema: Schema<ApiRestV2UserCreateRequest> = object(
@@ -61,6 +61,6 @@ export const apiRestV2UserCreateRequestSchema: Schema<ApiRestV2UserCreateRequest
       'analystOnboardingComplete',
       optional(boolean()),
     ],
-    type: ['type', optional(type4EnumSchema)],
+    type: ['type', optional(type2EnumSchema)],
   }
 );

@@ -1,9 +1,11 @@
 
-# Type 3 Enum
+# Type 9 Enum
+
+Type of the metadata object being searched. Valid values
 
 ## Enumeration
 
-`Type3Enum`
+`Type9Enum`
 
 ## Fields
 

@@ -10,7 +10,7 @@ import {
   groupNameAndIDInputSchema,
 } from './groupNameAndIDInput';
 import { PrivilegeEnum, privilegeEnumSchema } from './privilegeEnum';
-import { Type7Enum, type7EnumSchema } from './type7Enum';
+import { Type5Enum, type5EnumSchema } from './type5Enum';
 import {
   UserNameAndIDInput,
   userNameAndIDInputSchema,
@@ -37,7 +37,7 @@ export interface ApiRestV2GroupUpdateRequest {
   /** An array of liveboard ids to be assigned to the group. */
   assignedLiveboards?: string[];
   /** Type of user group. LOCAL_GROUP indicates that the user is created locally in the ThoughtSpot system. */
-  type?: Type7Enum;
+  type?: Type5Enum;
 }
 
 export const apiRestV2GroupUpdateRequestSchema: Schema<ApiRestV2GroupUpdateRequest> = object(
@@ -51,6 +51,6 @@ export const apiRestV2GroupUpdateRequestSchema: Schema<ApiRestV2GroupUpdateReque
     groups: ['groups', optional(array(lazy(() => groupNameAndIDInputSchema)))],
     users: ['users', optional(array(lazy(() => userNameAndIDInputSchema)))],
     assignedLiveboards: ['assignedLiveboards', optional(array(string()))],
-    type: ['type', optional(type7EnumSchema)],
+    type: ['type', optional(type5EnumSchema)],
   }
 );

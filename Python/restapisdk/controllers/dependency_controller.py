@@ -31,7 +31,8 @@ class DependencyController(BaseController):
             body (ApiRestV2DependencyRequest): TODO: type description here.
 
         Returns:
-            object: Response from the API. Details of the table created
+            object: Response from the API. An object with list of dependent
+                objects grouped based on the type
 
         Raises:
             APIException: When an error occurs while fetching the data from

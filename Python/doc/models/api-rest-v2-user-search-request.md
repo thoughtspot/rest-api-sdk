@@ -20,7 +20,7 @@
 | `notify_on_share` | [`NotifyOnShareEnum`](/doc/models/notify-on-share-enum.md) | Optional | User preference for receiving email notifications when another ThoughtSpot user shares answers or pinboards. |
 | `show_walk_me` | [`ShowWalkMeEnum`](/doc/models/show-walk-me-enum.md) | Optional | The user preference for revisiting the onboarding experience. |
 | `analyst_onboarding_complete` | [`AnalystOnboardingCompleteEnum`](/doc/models/analyst-onboarding-complete-enum.md) | Optional | ThoughtSpot provides an interactive guided walkthrough to onboard new users. The onboarding experience leads users through a set of actions to help users get started and accomplish their tasks quickly. The users can turn off the Onboarding experience and access it again when they need assistance with the ThoughtSpot UI. |
-| `mtype` | [`Type4Enum`](/doc/models/type-4-enum.md) | Optional | Type of user. LOCAL_USER indicates that the user is created locally in the ThoughtSpot system. |
+| `mtype` | [`Type2Enum`](/doc/models/type-2-enum.md) | Optional | Type of user. LOCAL_USER indicates that the user is created locally in the ThoughtSpot system. |
 
 ## Example (as JSON)
 

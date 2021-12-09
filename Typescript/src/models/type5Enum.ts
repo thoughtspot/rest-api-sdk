@@ -7,14 +7,14 @@
 import { Schema, stringEnum } from '../schema';
 
 /**
- * Enum for Type7Enum
+ * Enum for Type5Enum
  */
-export enum Type7Enum {
+export enum Type5Enum {
   LOCALGROUP = 'LOCAL_GROUP',
   TENANTGROUP = 'TENANT_GROUP',
 }
 
 /**
- * Schema for Type7Enum
+ * Schema for Type5Enum
  */
-export const type7EnumSchema: Schema<Type7Enum> = stringEnum(Type7Enum);
+export const type5EnumSchema: Schema<Type5Enum> = stringEnum(Type5Enum);

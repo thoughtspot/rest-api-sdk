@@ -7,6 +7,10 @@
 import { ApiResponse, RequestOptions } from '../core';
 import { ErrorResponseError } from '../errors/errorResponseError';
 import {
+  ApiRestV2MetadataDetailsRequest,
+  apiRestV2MetadataDetailsRequestSchema,
+} from '../models/apiRestV2MetadataDetailsRequest';
+import {
   ApiRestV2MetadataFavoriteAssignRequest,
   apiRestV2MetadataFavoriteAssignRequestSchema,
 } from '../models/apiRestV2MetadataFavoriteAssignRequest';
@@ -14,6 +18,10 @@ import {
   ApiRestV2MetadataFavoriteUnassignRequest,
   apiRestV2MetadataFavoriteUnassignRequestSchema,
 } from '../models/apiRestV2MetadataFavoriteUnassignRequest';
+import {
+  ApiRestV2MetadataHeadersRequest,
+  apiRestV2MetadataHeadersRequestSchema,
+} from '../models/apiRestV2MetadataHeadersRequest';
 import {
   ApiRestV2MetadataHomeliveboardAssignRequest,
   apiRestV2MetadataHomeliveboardAssignRequestSchema,
@@ -47,10 +55,6 @@ import {
   apiRestV2MetadataTmlImportRequestSchema,
 } from '../models/apiRestV2MetadataTmlImportRequest';
 import {
-  AutoCreatedEnum,
-  autoCreatedEnumSchema,
-} from '../models/autoCreatedEnum';
-import {
   HomeLiveboardResponse,
   homeLiveboardResponseSchema,
 } from '../models/homeLiveboardResponse';
@@ -58,10 +62,6 @@ import {
   MetadataTagResponse,
   metadataTagResponseSchema,
 } from '../models/metadataTagResponse';
-import { SortByEnum, sortByEnumSchema } from '../models/sortByEnum';
-import { SortOrderEnum, sortOrderEnumSchema } from '../models/sortOrderEnum';
-import { Type2Enum, type2EnumSchema } from '../models/type2Enum';
-import { Type3Enum, type3EnumSchema } from '../models/type3Enum';
 import { array, boolean, optional, string, unknown } from '../schema';
 import { BaseController } from './baseController';
 
@@ -346,68 +346,19 @@ export class MetadataController extends BaseController {
    * To get header details for metadata objects, use this endpoint. You can provide as input selective
    * fields to get the data for.
    *
-   * @param type         Type of the metadata object being searched.
-   * @param outputFields Array of header field names that need to be included in the header
-   *                                        response
-   * @param offset       The batch offset, starting from where the records should be included in
-   *                                        the response. If no input is provided then offset starts from 0.
-   * @param batchSize    The number of records that should be included in the response starting
-   *                                        from offset position. If no input is provided then first page is included
-   *                                        in the response.
-   * @param sortBy       Field based on which the response needs to be ordered.
-   * @param sortOrder    Order in which sortBy should be applied.
-   * @param namePattern  A pattern to match the name of the metadata object. This parameter
-   *                                        supports matching case-insensitive strings. For a wildcard match, use %.
-   * @param fetchId      A JSON array containing the GUIDs of the metadata objects that you want to
-   *                                        fetch.
-   * @param skipId       A JSON array containing the GUIDs of the metadata objects that you want to
-   *                                        skip.
-   * @param showHidden   When set to true, returns details of the hidden objects, such as a column
-   *                                        in a worksheet or a table.
-   * @param autoCreated  String for UI and backend boolean- A flag to indicate whether to list only
-   *                                        the auto created objects. When no value is provided as input then all
-   *                                        objects are returned.
+   * @param body
    * @return Response from the API call
    */
   async getObjectHeader(
-    type: Type2Enum,
-    outputFields?: string[],
-    offset?: string,
-    batchSize?: string,
-    sortBy?: SortByEnum,
-    sortOrder?: SortOrderEnum,
-    namePattern?: string,
-    fetchId?: string[],
-    skipId?: string[],
-    showHidden?: boolean,
-    autoCreated?: AutoCreatedEnum,
+    body: ApiRestV2MetadataHeadersRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<unknown>> {
-    const req = this.createRequest('GET', '/api/rest/v2/metadata/headers');
+    const req = this.createRequest('POST', '/api/rest/v2/metadata/headers');
     const mapped = req.prepareArgs({
-      type: [type, type2EnumSchema],
-      outputFields: [outputFields, optional(array(string()))],
-      offset: [offset, optional(string())],
-      batchSize: [batchSize, optional(string())],
-      sortBy: [sortBy, optional(sortByEnumSchema)],
-      sortOrder: [sortOrder, optional(sortOrderEnumSchema)],
-      namePattern: [namePattern, optional(string())],
-      fetchId: [fetchId, optional(array(string()))],
-      skipId: [skipId, optional(array(string()))],
-      showHidden: [showHidden, optional(boolean())],
-      autoCreated: [autoCreated, optional(autoCreatedEnumSchema)],
+      body: [body, apiRestV2MetadataHeadersRequestSchema],
     });
-    req.query('type', mapped.type);
-    req.query('outputFields', mapped.outputFields);
-    req.query('offset', mapped.offset);
-    req.query('batchSize', mapped.batchSize);
-    req.query('sortBy', mapped.sortBy);
-    req.query('sortOrder', mapped.sortOrder);
-    req.query('namePattern', mapped.namePattern);
-    req.query('fetchId', mapped.fetchId);
-    req.query('skipId', mapped.skipId);
-    req.query('showHidden', mapped.showHidden);
-    req.query('autoCreated', mapped.autoCreated);
+    req.header('Content-Type', 'application/json');
+    req.json(mapped.body);
     req.throwOn(500, ErrorResponseError, 'Operation failed or unauthorized request');
     return req.callAsJson(unknown(), requestOptions);
   }
@@ -434,40 +385,21 @@ export class MetadataController extends BaseController {
   /**
    * Use this endpoint to get full details of metadata objects
    *
-   * @param type                Type of the metadata object being searched. Valid values
-   * @param id                  A JSON array of GUIDs of the objects.
-   * @param showHidden          When set to true, returns details of the hidden objects, such as a column
-   *                                         in a worksheet or a table.
-   * @param dropQuestionDetails When set to true, the search assist data associated with a worksheet is
-   *                                         not included in the API response. This attribute is applicable only for
-   *                                         LOGICAL_TABLE data type.
-   * @param version             Specify the version to retrieve the objects from. By default, the API
-   *                                         returns metadata for all versions of the object.
+   * @param body
    * @return Response from the API call
    */
   async getObjectDetail(
-    type: Type3Enum,
-    id: string[],
-    showHidden?: boolean,
-    dropQuestionDetails?: boolean,
-    version?: string,
+    body: ApiRestV2MetadataDetailsRequest,
     requestOptions?: RequestOptions
-  ): Promise<ApiResponse<unknown[]>> {
-    const req = this.createRequest('GET', '/api/rest/v2/metadata/details');
+  ): Promise<ApiResponse<unknown>> {
+    const req = this.createRequest('POST', '/api/rest/v2/metadata/details');
     const mapped = req.prepareArgs({
-      type: [type, type3EnumSchema],
-      id: [id, array(string())],
-      showHidden: [showHidden, optional(boolean())],
-      dropQuestionDetails: [dropQuestionDetails, optional(boolean())],
-      version: [version, optional(string())],
+      body: [body, apiRestV2MetadataDetailsRequestSchema],
     });
-    req.query('type', mapped.type);
-    req.query('id', mapped.id);
-    req.query('showHidden', mapped.showHidden);
-    req.query('dropQuestionDetails', mapped.dropQuestionDetails);
-    req.query('version', mapped.version);
+    req.header('Content-Type', 'application/json');
+    req.json(mapped.body);
     req.throwOn(500, ErrorResponseError, 'Operation failed or unauthorized request');
-    return req.callAsJson(array(unknown()), requestOptions);
+    return req.callAsJson(unknown(), requestOptions);
   }
 
   /**

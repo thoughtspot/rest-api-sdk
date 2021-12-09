@@ -32,7 +32,7 @@ class ApiRestV2GroupCreateRequest(object):
             GUIDs or both. When both are given then id is considered
         users (list of UserNameAndIDInput): A JSON array of name of users or
             GUIDs of users or both. When both are given then id is considered
-        mtype (Type7Enum): Type of user group. LOCAL_GROUP indicates that the
+        mtype (Type5Enum): Type of user group. LOCAL_GROUP indicates that the
             user is created locally in the ThoughtSpot system.
 
     """

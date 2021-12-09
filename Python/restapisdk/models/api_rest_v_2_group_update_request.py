@@ -34,7 +34,7 @@ class ApiRestV2GroupUpdateRequest(object):
             GUIDs of users or both. When both are given then id is considered
         assigned_liveboards (list of string): An array of liveboard ids to be
             assigned to the group.
-        mtype (Type7Enum): Type of user group. LOCAL_GROUP indicates that the
+        mtype (Type5Enum): Type of user group. LOCAL_GROUP indicates that the
             user is created locally in the ThoughtSpot system.
 
     """

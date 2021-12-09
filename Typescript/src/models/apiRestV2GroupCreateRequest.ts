@@ -10,7 +10,7 @@ import {
   groupNameAndIDInputSchema,
 } from './groupNameAndIDInput';
 import { PrivilegeEnum, privilegeEnumSchema } from './privilegeEnum';
-import { Type7Enum, type7EnumSchema } from './type7Enum';
+import { Type5Enum, type5EnumSchema } from './type5Enum';
 import {
   UserNameAndIDInput,
   userNameAndIDInputSchema,
@@ -33,7 +33,7 @@ export interface ApiRestV2GroupCreateRequest {
   /** A JSON array of name of users or GUIDs of users or both. When both are given then id is considered */
   users?: UserNameAndIDInput[];
   /** Type of user group. LOCAL_GROUP indicates that the user is created locally in the ThoughtSpot system. */
-  type?: Type7Enum;
+  type?: Type5Enum;
 }
 
 export const apiRestV2GroupCreateRequestSchema: Schema<ApiRestV2GroupCreateRequest> = object(
@@ -45,6 +45,6 @@ export const apiRestV2GroupCreateRequestSchema: Schema<ApiRestV2GroupCreateReque
     privileges: ['privileges', optional(array(privilegeEnumSchema))],
     groups: ['groups', optional(array(lazy(() => groupNameAndIDInputSchema)))],
     users: ['users', optional(array(lazy(() => userNameAndIDInputSchema)))],
-    type: ['type', optional(type7EnumSchema)],
+    type: ['type', optional(type5EnumSchema)],
   }
 );

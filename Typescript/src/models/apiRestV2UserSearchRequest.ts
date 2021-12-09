@@ -20,7 +20,7 @@ import {
 import { PrivilegeEnum, privilegeEnumSchema } from './privilegeEnum';
 import { ShowWalkMeEnum, showWalkMeEnumSchema } from './showWalkMeEnum';
 import { StateEnum, stateEnumSchema } from './stateEnum';
-import { Type4Enum, type4EnumSchema } from './type4Enum';
+import { Type2Enum, type2EnumSchema } from './type2Enum';
 import { Visibility2Enum, visibility2EnumSchema } from './visibility2Enum';
 
 export interface ApiRestV2UserSearchRequest {
@@ -47,7 +47,7 @@ export interface ApiRestV2UserSearchRequest {
   /** ThoughtSpot provides an interactive guided walkthrough to onboard new users. The onboarding experience leads users through a set of actions to help users get started and accomplish their tasks quickly. The users can turn off the Onboarding experience and access it again when they need assistance with the ThoughtSpot UI. */
   analystOnboardingComplete?: AnalystOnboardingCompleteEnum;
   /** Type of user. LOCAL_USER indicates that the user is created locally in the ThoughtSpot system. */
-  type?: Type4Enum;
+  type?: Type2Enum;
 }
 
 export const apiRestV2UserSearchRequestSchema: Schema<ApiRestV2UserSearchRequest> = object(
@@ -66,6 +66,6 @@ export const apiRestV2UserSearchRequestSchema: Schema<ApiRestV2UserSearchRequest
       'analystOnboardingComplete',
       optional(analystOnboardingCompleteEnumSchema),
     ],
-    type: ['type', optional(type4EnumSchema)],
+    type: ['type', optional(type2EnumSchema)],
   }
 );

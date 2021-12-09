@@ -109,6 +109,47 @@ class SessionController(BaseController):
 
         return decoded
 
+    def logout(self):
+        """Does a POST request to /api/rest/v2/session/logout.
+
+        To log a user out of the current session, use this endpoint
+
+        Returns:
+            bool: Response from the API. Successfully logged out and token
+                invalidated
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        # Prepare query URL
+        _url_path = '/api/rest/v2/session/logout'
+        _query_builder = self.config.get_base_uri()
+        _query_builder += _url_path
+        _query_url = APIHelper.clean_url(_query_builder)
+
+        # Prepare headers
+        _headers = {
+            'Content-Type': self.config.content_type
+        }
+
+        # Prepare and execute request
+        _request = self.config.http_client.post(_query_url, headers=_headers)
+        _response = self.execute_request(_request)
+
+        # Endpoint and global error handling using HTTP status codes.
+        if _response.status_code == 500:
+            raise ErrorResponseException('Operation failed or unauthorized request', _response)
+        self.validate_response(_response)
+
+        decoded = _response.text == 'true'
+
+        return decoded
+
     def gettoken(self,
                  body):
         """Does a POST request to /api/rest/v2/session/gettoken.
@@ -154,47 +195,6 @@ class SessionController(BaseController):
         self.validate_response(_response)
 
         decoded = APIHelper.json_deserialize(_response.text, SessionLoginResponse.from_dictionary)
-
-        return decoded
-
-    def logout(self):
-        """Does a POST request to /api/rest/v2/session/logout.
-
-        To log a user out of the current session, use this endpoint
-
-        Returns:
-            bool: Response from the API. Successfully logged out and token
-                invalidated
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        # Prepare query URL
-        _url_path = '/api/rest/v2/session/logout'
-        _query_builder = self.config.get_base_uri()
-        _query_builder += _url_path
-        _query_url = APIHelper.clean_url(_query_builder)
-
-        # Prepare headers
-        _headers = {
-            'Content-Type': self.config.content_type
-        }
-
-        # Prepare and execute request
-        _request = self.config.http_client.post(_query_url, headers=_headers)
-        _response = self.execute_request(_request)
-
-        # Endpoint and global error handling using HTTP status codes.
-        if _response.status_code == 500:
-            raise ErrorResponseException('Operation failed or unauthorized request', _response)
-        self.validate_response(_response)
-
-        decoded = _response.text == 'true'
 
         return decoded
 

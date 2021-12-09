@@ -7,9 +7,9 @@
 import { Schema, stringEnum } from '../schema';
 
 /**
- * Enum for Type3Enum
+ * Enum for Type9Enum
  */
-export enum Type3Enum {
+export enum Type9Enum {
   ANSWER = 'ANSWER',
   LIVEBOARD = 'LIVEBOARD',
   DATAOBJECT = 'DATAOBJECT',
@@ -22,6 +22,6 @@ export enum Type3Enum {
 }
 
 /**
- * Schema for Type3Enum
+ * Schema for Type9Enum
  */
-export const type3EnumSchema: Schema<Type3Enum> = stringEnum(Type3Enum);
+export const type9EnumSchema: Schema<Type9Enum> = stringEnum(Type9Enum);

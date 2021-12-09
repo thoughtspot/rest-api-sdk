@@ -12,8 +12,8 @@ session_controller = client.session
 
 * [Get Session Info](/doc/controllers/session.md#get-session-info)
 * [Login](/doc/controllers/session.md#login)
-* [Gettoken](/doc/controllers/session.md#gettoken)
 * [Logout](/doc/controllers/session.md#logout)
+* [Gettoken](/doc/controllers/session.md#gettoken)
 * [Revoketoken](/doc/controllers/session.md#revoketoken)
 
 
@@ -80,6 +80,33 @@ result = session_controller.login(body)
 | 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
 
 
+# Logout
+
+To log a user out of the current session, use this endpoint
+
+:information_source: **Note** This endpoint does not require authentication.
+
+```python
+def logout(self)
+```
+
+## Response Type
+
+`bool`
+
+## Example Usage
+
+```python
+result = session_controller.logout()
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+
+
 # Gettoken
 
 To programmatically create token for a user in ThoughtSpot, use this endpoint
@@ -109,33 +136,6 @@ body.user_name = 'userName8'
 body.password = 'password0'
 
 result = session_controller.gettoken(body)
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
-
-
-# Logout
-
-To log a user out of the current session, use this endpoint
-
-:information_source: **Note** This endpoint does not require authentication.
-
-```python
-def logout(self)
-```
-
-## Response Type
-
-`bool`
-
-## Example Usage
-
-```python
-result = session_controller.logout()
 ```
 
 ## Errors

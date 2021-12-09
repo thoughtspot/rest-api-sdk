@@ -18,7 +18,7 @@
 | `groups` | [`GroupNameAndIDInput[] \| undefined`](/doc/models/group-name-and-id-input.md) | Optional | A JSON array of group names or GUIDs or both. When both are given then id is considered |
 | `users` | [`UserNameAndIDInput[] \| undefined`](/doc/models/user-name-and-id-input.md) | Optional | A JSON array of name of users or GUIDs of users or both. When both are given then id is considered |
 | `assignedLiveboards` | `string[] \| undefined` | Optional | An array of liveboard ids to be assigned to the group. |
-| `type` | [`Type7Enum \| undefined`](/doc/models/type-7-enum.md) | Optional | Type of user group. LOCAL_GROUP indicates that the user is created locally in the ThoughtSpot system.<br>**Default**: `Type7Enum.LOCALGROUP` |
+| `type` | [`Type5Enum \| undefined`](/doc/models/type-5-enum.md) | Optional | Type of user group. LOCAL_GROUP indicates that the user is created locally in the ThoughtSpot system.<br>**Default**: `Type5Enum.LOCALGROUP` |
 
 ## Example (as JSON)
 

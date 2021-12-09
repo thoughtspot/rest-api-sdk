@@ -42,7 +42,7 @@ class ApiRestV2UserSearchRequest(object):
             quickly. The users can turn off the Onboarding experience and
             access it again when they need assistance with the ThoughtSpot
             UI.
-        mtype (Type4Enum): Type of user. LOCAL_USER indicates that the user is
+        mtype (Type2Enum): Type of user. LOCAL_USER indicates that the user is
             created locally in the ThoughtSpot system.
 
     """

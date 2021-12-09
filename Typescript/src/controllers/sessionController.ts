@@ -57,6 +57,20 @@ export class SessionController extends BaseController {
   }
 
   /**
+   * To log a user out of the current session, use this endpoint
+   *
+   * @return Response from the API call
+   */
+  async logout(
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<boolean>> {
+    const req = this.createRequest('POST', '/api/rest/v2/session/logout');
+    req.throwOn(500, ErrorResponseError, 'Operation failed or unauthorized request');
+    req.authenticate(false);
+    return req.callAsJson(boolean(), requestOptions);
+  }
+
+  /**
    * To programmatically create token for a user in ThoughtSpot, use this endpoint
    *
    * @param body
@@ -75,20 +89,6 @@ export class SessionController extends BaseController {
     req.throwOn(500, ErrorResponseError, 'Operation failed or unauthorized request');
     req.authenticate(false);
     return req.callAsJson(sessionLoginResponseSchema, requestOptions);
-  }
-
-  /**
-   * To log a user out of the current session, use this endpoint
-   *
-   * @return Response from the API call
-   */
-  async logout(
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<boolean>> {
-    const req = this.createRequest('POST', '/api/rest/v2/session/logout');
-    req.throwOn(500, ErrorResponseError, 'Operation failed or unauthorized request');
-    req.authenticate(false);
-    return req.callAsJson(boolean(), requestOptions);
   }
 
   /**

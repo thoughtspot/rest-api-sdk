@@ -19,7 +19,7 @@
 | `notifyOnShare` | `boolean \| undefined` | Optional | User preference for receiving email notifications when another ThoughtSpot user shares answers or pinboards.<br>**Default**: `true` |
 | `showWalkMe` | `boolean \| undefined` | Optional | The user preference for revisiting the onboarding experience.<br>**Default**: `true` |
 | `analystOnboardingComplete` | `boolean \| undefined` | Optional | ThoughtSpot provides an interactive guided walkthrough to onboard new users. The onboarding experience leads users through a set of actions to help users get started and accomplish their tasks quickly. The users can turn off the Onboarding experience and access it again when they need assistance with the ThoughtSpot UI.<br>**Default**: `true` |
-| `type` | [`Type4Enum \| undefined`](/doc/models/type-4-enum.md) | Optional | Type of user. LOCAL_USER indicates that the user is created locally in the ThoughtSpot system.<br>**Default**: `Type4Enum.LOCALUSER` |
+| `type` | [`Type2Enum \| undefined`](/doc/models/type-2-enum.md) | Optional | Type of user. LOCAL_USER indicates that the user is created locally in the ThoughtSpot system.<br>**Default**: `Type2Enum.LOCALUSER` |
 | `groups` | [`GroupNameAndIDInput[] \| undefined`](/doc/models/group-name-and-id-input.md) | Optional | A JSON array of group names or GUIDs or both. When both are given then id is considered |
 
 ## Example (as JSON)

@@ -475,34 +475,14 @@ To get header details for metadata objects, use this endpoint. You can provide a
 
 ```python
 def get_object_header(self,
-                     mtype,
-                     output_fields=None,
-                     offset=None,
-                     batch_size=None,
-                     sort_by='DEFAULT',
-                     sort_order='DEFAULT',
-                     name_pattern=None,
-                     fetch_id=None,
-                     skip_id=None,
-                     show_hidden=None,
-                     auto_created=None)
+                     body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `mtype` | [`Type2Enum`](/doc/models/type-2-enum.md) | Query, Required | Type of the metadata object being searched. |
-| `output_fields` | `List of string` | Query, Optional | Array of header field names that need to be included in the header response |
-| `offset` | `string` | Query, Optional | The batch offset, starting from where the records should be included in the response. If no input is provided then offset starts from 0. |
-| `batch_size` | `string` | Query, Optional | The number of records that should be included in the response starting from offset position. If no input is provided then first page is included in the response. |
-| `sort_by` | [`SortByEnum`](/doc/models/sort-by-enum.md) | Query, Optional | Field based on which the response needs to be ordered.<br>**Default**: `'DEFAULT'` |
-| `sort_order` | [`SortOrderEnum`](/doc/models/sort-order-enum.md) | Query, Optional | Order in which sortBy should be applied.<br>**Default**: `'DEFAULT'` |
-| `name_pattern` | `string` | Query, Optional | A pattern to match the name of the metadata object. This parameter supports matching case-insensitive strings. For a wildcard match, use %. |
-| `fetch_id` | `List of string` | Query, Optional | A JSON array containing the GUIDs of the metadata objects that you want to fetch. |
-| `skip_id` | `List of string` | Query, Optional | A JSON array containing the GUIDs of the metadata objects that you want to skip. |
-| `show_hidden` | `bool` | Query, Optional | When set to true, returns details of the hidden objects, such as a column in a worksheet or a table. |
-| `auto_created` | [`AutoCreatedEnum`](/doc/models/auto-created-enum.md) | Query, Optional | String for UI and backend boolean- A flag to indicate whether to list only the auto created objects. When no value is provided as input then all objects are returned. |
+| `body` | [`ApiRestV2MetadataHeadersRequest`](/doc/models/api-rest-v2-metadata-headers-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -511,11 +491,10 @@ def get_object_header(self,
 ## Example Usage
 
 ```python
-mtype = Type2Enum.COLUMN_ALL
-sort_by = SortByEnum.DEFAULT
-sort_order = SortOrderEnum.DEFAULT
+body = ApiRestV2MetadataHeadersRequest()
+body.mtype = Type8Enum.USER
 
-result = metadata_controller.get_object_header(mtype, None, None, None, sort_by, sort_order)
+result = metadata_controller.get_object_header(body)
 ```
 
 ## Errors
@@ -565,34 +544,27 @@ Use this endpoint to get full details of metadata objects
 
 ```python
 def get_object_detail(self,
-                     mtype,
-                     id,
-                     show_hidden=None,
-                     drop_question_details=None,
-                     version=None)
+                     body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `mtype` | [`Type3Enum`](/doc/models/type-3-enum.md) | Query, Required | Type of the metadata object being searched. Valid values |
-| `id` | `List of string` | Query, Required | A JSON array of GUIDs of the objects. |
-| `show_hidden` | `bool` | Query, Optional | When set to true, returns details of the hidden objects, such as a column in a worksheet or a table. |
-| `drop_question_details` | `bool` | Query, Optional | When set to true, the search assist data associated with a worksheet is not included in the API response. This attribute is applicable only for LOGICAL_TABLE data type. |
-| `version` | `string` | Query, Optional | Specify the version to retrieve the objects from. By default, the API returns metadata for all versions of the object. |
+| `body` | [`ApiRestV2MetadataDetailsRequest`](/doc/models/api-rest-v2-metadata-details-request.md) | Body, Required | - |
 
 ## Response Type
 
-`List of object`
+`object`
 
 ## Example Usage
 
 ```python
-mtype = Type3Enum.DATAOBJECT
-id = ['id0']
+body = ApiRestV2MetadataDetailsRequest()
+body.mtype = Type9Enum.USER
+body.id = ['id6', 'id7']
 
-result = metadata_controller.get_object_detail(mtype, id)
+result = metadata_controller.get_object_detail(body)
 ```
 
 ## Errors

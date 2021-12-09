@@ -235,8 +235,8 @@ class DatabaseController(BaseController):
                 description here.
 
         Returns:
-            list of object: Response from the API. Details of the table
-                created
+            list of object: Response from the API. TQL statements included in
+                the request and the status of each statement
 
         Raises:
             APIException: When an error occurs while fetching the data from

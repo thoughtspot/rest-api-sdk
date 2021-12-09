@@ -634,51 +634,15 @@ class MetadataController(BaseController):
         return decoded
 
     def get_object_header(self,
-                          mtype,
-                          output_fields=None,
-                          offset=None,
-                          batch_size=None,
-                          sort_by='DEFAULT',
-                          sort_order='DEFAULT',
-                          name_pattern=None,
-                          fetch_id=None,
-                          skip_id=None,
-                          show_hidden=None,
-                          auto_created=None):
-        """Does a GET request to /api/rest/v2/metadata/headers.
+                          body):
+        """Does a POST request to /api/rest/v2/metadata/headers.
 
         To get header details for metadata objects, use this endpoint. You can
         provide as input selective fields to get the data for.
 
         Args:
-            mtype (Type2Enum): Type of the metadata object being searched.
-            output_fields (list of string, optional): Array of header field
-                names that need to be included in the header response
-            offset (string, optional): The batch offset, starting from where
-                the records should be included in the response. If no input is
-                provided then offset starts from 0.
-            batch_size (string, optional): The number of records that should
-                be included in the response starting from offset position. If
-                no input is provided then first page is included in the
-                response.
-            sort_by (SortByEnum, optional): Field based on which the response
-                needs to be ordered.
-            sort_order (SortOrderEnum, optional): Order in which sortBy should
-                be applied.
-            name_pattern (string, optional): A pattern to match the name of
-                the metadata object. This parameter supports matching
-                case-insensitive strings. For a wildcard match, use %.
-            fetch_id (list of string, optional): A JSON array containing the
-                GUIDs of the metadata objects that you want to fetch.
-            skip_id (list of string, optional): A JSON array containing the
-                GUIDs of the metadata objects that you want to skip.
-            show_hidden (bool, optional): When set to true, returns details of
-                the hidden objects, such as a column in a worksheet or a
-                table.
-            auto_created (AutoCreatedEnum, optional): String for UI and
-                backend boolean- A flag to indicate whether to list only the
-                auto created objects. When no value is provided as input then
-                all objects are returned.
+            body (ApiRestV2MetadataHeadersRequest): TODO: type description
+                here.
 
         Returns:
             object: Response from the API. Header details based on the search
@@ -696,32 +660,15 @@ class MetadataController(BaseController):
         _url_path = '/api/rest/v2/metadata/headers'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
-        _query_parameters = {
-            'type': mtype,
-            'outputFields': output_fields,
-            'offset': offset,
-            'batchSize': batch_size,
-            'sortBy': sort_by,
-            'sortOrder': sort_order,
-            'namePattern': name_pattern,
-            'fetchId': fetch_id,
-            'skipId': skip_id,
-            'showHidden': show_hidden,
-            'autoCreated': auto_created
-        }
-        _query_builder = APIHelper.append_url_with_query_parameters(
-            _query_builder,
-            _query_parameters
-        )
         _query_url = APIHelper.clean_url(_query_builder)
 
         # Prepare headers
         _headers = {
-            'Content-Type': self.config.content_type
+            'Content-Type': 'application/json'
         }
 
         # Prepare and execute request
-        _request = self.config.http_client.get(_query_url, headers=_headers)
+        _request = self.config.http_client.post(_query_url, headers=_headers, parameters=APIHelper.json_serialize(body))
         OAuth2.apply(self.config, _request)
         _response = self.execute_request(_request)
 
@@ -791,33 +738,18 @@ class MetadataController(BaseController):
         return decoded
 
     def get_object_detail(self,
-                          mtype,
-                          id,
-                          show_hidden=None,
-                          drop_question_details=None,
-                          version=None):
-        """Does a GET request to /api/rest/v2/metadata/details.
+                          body):
+        """Does a POST request to /api/rest/v2/metadata/details.
 
         Use this endpoint to get full details of metadata objects
 
         Args:
-            mtype (Type3Enum): Type of the metadata object being searched.
-                Valid values
-            id (list of string): A JSON array of GUIDs of the objects.
-            show_hidden (bool, optional): When set to true, returns details of
-                the hidden objects, such as a column in a worksheet or a
-                table.
-            drop_question_details (bool, optional): When set to true, the
-                search assist data associated with a worksheet is not included
-                in the API response. This attribute is applicable only for
-                LOGICAL_TABLE data type.
-            version (string, optional): Specify the version to retrieve the
-                objects from. By default, the API returns metadata for all
-                versions of the object.
+            body (ApiRestV2MetadataDetailsRequest): TODO: type description
+                here.
 
         Returns:
-            list of object: Response from the API. Full details of metadata
-                objects searched for
+            object: Response from the API. Full details of metadata objects
+                searched for
 
         Raises:
             APIException: When an error occurs while fetching the data from
@@ -831,27 +763,15 @@ class MetadataController(BaseController):
         _url_path = '/api/rest/v2/metadata/details'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
-        _query_parameters = {
-            'type': mtype,
-            'id': id,
-            'showHidden': show_hidden,
-            'dropQuestionDetails': drop_question_details,
-            'version': version
-        }
-        _query_builder = APIHelper.append_url_with_query_parameters(
-            _query_builder,
-            _query_parameters
-        )
         _query_url = APIHelper.clean_url(_query_builder)
 
         # Prepare headers
         _headers = {
-            'accept': 'application/json',
-            'Content-Type': self.config.content_type
+            'Content-Type': 'application/json'
         }
 
         # Prepare and execute request
-        _request = self.config.http_client.get(_query_url, headers=_headers)
+        _request = self.config.http_client.post(_query_url, headers=_headers, parameters=APIHelper.json_serialize(body))
         OAuth2.apply(self.config, _request)
         _response = self.execute_request(_request)
 
@@ -860,7 +780,7 @@ class MetadataController(BaseController):
             raise ErrorResponseException('Operation failed or unauthorized request', _response)
         self.validate_response(_response)
 
-        decoded = APIHelper.json_deserialize(_response.text)
+        decoded = _response.text
 
         return decoded
 

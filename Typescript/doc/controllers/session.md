@@ -12,8 +12,8 @@ const sessionController = new SessionController(client);
 
 * [Get Session Info](/doc/controllers/session.md#get-session-info)
 * [Login](/doc/controllers/session.md#login)
-* [Gettoken](/doc/controllers/session.md#gettoken)
 * [Logout](/doc/controllers/session.md#logout)
+* [Gettoken](/doc/controllers/session.md#gettoken)
 * [Revoketoken](/doc/controllers/session.md#revoketoken)
 
 
@@ -111,6 +111,50 @@ try {
 | 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
 
 
+# Logout
+
+To log a user out of the current session, use this endpoint
+
+:information_source: **Note** This endpoint does not require authentication.
+
+```ts
+async logout(
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<boolean>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+`boolean`
+
+## Example Usage
+
+```ts
+try {
+  const { result, ...httpResponse } = await sessionController.logout();
+  // Get more response info...
+  // const { statusCode, headers } = httpResponse;
+} catch(error) {
+  if (error instanceof ApiError) {
+    const errors = error.result;
+    // const { statusCode, headers } = error;
+  }
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+
+
 # Gettoken
 
 To programmatically create token for a user in ThoughtSpot, use this endpoint
@@ -146,50 +190,6 @@ const body: ApiRestV2SessionGettokenRequest = {
 
 try {
   const { result, ...httpResponse } = await sessionController.gettoken(body);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch(error) {
-  if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
-
-
-# Logout
-
-To log a user out of the current session, use this endpoint
-
-:information_source: **Note** This endpoint does not require authentication.
-
-```ts
-async logout(
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<boolean>>
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-`boolean`
-
-## Example Usage
-
-```ts
-try {
-  const { result, ...httpResponse } = await sessionController.logout();
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch(error) {

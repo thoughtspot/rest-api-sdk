@@ -665,17 +665,7 @@ To get header details for metadata objects, use this endpoint. You can provide a
 
 ```ts
 async getObjectHeader(
-  type: Type2Enum,
-  outputFields?: string[],
-  offset?: string,
-  batchSize?: string,
-  sortBy?: SortByEnum,
-  sortOrder?: SortOrderEnum,
-  namePattern?: string,
-  fetchId?: string[],
-  skipId?: string[],
-  showHidden?: boolean,
-  autoCreated?: AutoCreatedEnum,
+  body: ApiRestV2MetadataHeadersRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<unknown>>
 ```
@@ -684,17 +674,7 @@ async getObjectHeader(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `type` | [`Type2Enum`](/doc/models/type-2-enum.md) | Query, Required | Type of the metadata object being searched. |
-| `outputFields` | `string[] \| undefined` | Query, Optional | Array of header field names that need to be included in the header response |
-| `offset` | `string \| undefined` | Query, Optional | The batch offset, starting from where the records should be included in the response. If no input is provided then offset starts from 0. |
-| `batchSize` | `string \| undefined` | Query, Optional | The number of records that should be included in the response starting from offset position. If no input is provided then first page is included in the response. |
-| `sortBy` | [`SortByEnum \| undefined`](/doc/models/sort-by-enum.md) | Query, Optional | Field based on which the response needs to be ordered.<br>**Default**: `SortByEnum.DEFAULT` |
-| `sortOrder` | [`SortOrderEnum \| undefined`](/doc/models/sort-order-enum.md) | Query, Optional | Order in which sortBy should be applied.<br>**Default**: `SortOrderEnum.DEFAULT` |
-| `namePattern` | `string \| undefined` | Query, Optional | A pattern to match the name of the metadata object. This parameter supports matching case-insensitive strings. For a wildcard match, use %. |
-| `fetchId` | `string[] \| undefined` | Query, Optional | A JSON array containing the GUIDs of the metadata objects that you want to fetch. |
-| `skipId` | `string[] \| undefined` | Query, Optional | A JSON array containing the GUIDs of the metadata objects that you want to skip. |
-| `showHidden` | `boolean \| undefined` | Query, Optional | When set to true, returns details of the hidden objects, such as a column in a worksheet or a table. |
-| `autoCreated` | [`AutoCreatedEnum \| undefined`](/doc/models/auto-created-enum.md) | Query, Optional | String for UI and backend boolean- A flag to indicate whether to list only the auto created objects. When no value is provided as input then all objects are returned. |
+| `body` | [`ApiRestV2MetadataHeadersRequest`](/doc/models/api-rest-v2-metadata-headers-request.md) | Body, Required | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -704,11 +684,13 @@ async getObjectHeader(
 ## Example Usage
 
 ```ts
-const type = 'COLUMN_ALL';
-const sortBy = 'DEFAULT';
-const sortOrder = 'DEFAULT';
+const contentType = null;
+const body: ApiRestV2MetadataHeadersRequest = {
+  type: 'USER',
+};
+
 try {
-  const { result, ...httpResponse } = await metadataController.getObjectHeader(type, None, None, None, sortBy, sortOrder);
+  const { result, ...httpResponse } = await metadataController.getObjectHeader(body);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch(error) {
@@ -777,37 +759,34 @@ Use this endpoint to get full details of metadata objects
 
 ```ts
 async getObjectDetail(
-  type: Type3Enum,
-  id: string[],
-  showHidden?: boolean,
-  dropQuestionDetails?: boolean,
-  version?: string,
+  body: ApiRestV2MetadataDetailsRequest,
   requestOptions?: RequestOptions
-): Promise<ApiResponse<unknown[]>>
+): Promise<ApiResponse<unknown>>
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `type` | [`Type3Enum`](/doc/models/type-3-enum.md) | Query, Required | Type of the metadata object being searched. Valid values |
-| `id` | `string[]` | Query, Required | A JSON array of GUIDs of the objects. |
-| `showHidden` | `boolean \| undefined` | Query, Optional | When set to true, returns details of the hidden objects, such as a column in a worksheet or a table. |
-| `dropQuestionDetails` | `boolean \| undefined` | Query, Optional | When set to true, the search assist data associated with a worksheet is not included in the API response. This attribute is applicable only for LOGICAL_TABLE data type. |
-| `version` | `string \| undefined` | Query, Optional | Specify the version to retrieve the objects from. By default, the API returns metadata for all versions of the object. |
+| `body` | [`ApiRestV2MetadataDetailsRequest`](/doc/models/api-rest-v2-metadata-details-request.md) | Body, Required | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
 
-`unknown[]`
+`unknown`
 
 ## Example Usage
 
 ```ts
-const type = 'DATAOBJECT';
-const Id: string[] = ['id0'];
+const contentType = null;
+const bodyId: string[] = ['id6', 'id7'];
+const body: ApiRestV2MetadataDetailsRequest = {
+  type: 'USER',
+  id: bodyId,
+};
+
 try {
-  const { result, ...httpResponse } = await metadataController.getObjectDetail(type, id);
+  const { result, ...httpResponse } = await metadataController.getObjectDetail(body);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch(error) {
