@@ -68,6 +68,7 @@ public class Headers {
      * @return The first value associated with the given header name.
      */
     public String value(String headerName) {
+        System.out.println("HeaderName:"+headerName);
         if (headers.containsKey(headerName)) {
             return headers.get(headerName).get(0);
         }
