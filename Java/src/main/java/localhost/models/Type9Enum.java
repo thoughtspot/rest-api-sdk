@@ -11,9 +11,9 @@ import java.util.List;
 import java.util.TreeMap;
 
 /**
- * Type3Enum to be used.
+ * Type9Enum to be used.
  */
-public enum Type3Enum {
+public enum Type9Enum {
     ANSWER,
 
     LIVEBOARD,
@@ -33,7 +33,7 @@ public enum Type3Enum {
     USER_GROUP;
 
 
-    private static TreeMap<String, Type3Enum> valueMap = new TreeMap<>();
+    private static TreeMap<String, Type9Enum> valueMap = new TreeMap<>();
     private String value;
 
     static {
@@ -64,7 +64,7 @@ public enum Type3Enum {
      * @return The enum member against the given string value.
      */
     @com.fasterxml.jackson.annotation.JsonCreator
-    public static Type3Enum fromString(String toConvert) {
+    public static Type9Enum fromString(String toConvert) {
         return valueMap.get(toConvert);
     }
 
@@ -86,16 +86,16 @@ public enum Type3Enum {
     }
 
     /**
-     * Convert list of Type3Enum values to list of string values.
-     * @param toConvert The list of Type3Enum values to convert.
+     * Convert list of Type9Enum values to list of string values.
+     * @param toConvert The list of Type9Enum values to convert.
      * @return List of representative string values.
      */
-    public static List<String> toValue(List<Type3Enum> toConvert) {
+    public static List<String> toValue(List<Type9Enum> toConvert) {
         if (toConvert == null) {
             return null;
         }
         List<String> convertedValues = new ArrayList<>();
-        for (Type3Enum enumValue : toConvert) {
+        for (Type9Enum enumValue : toConvert) {
             convertedValues.add(enumValue.value);
         }
         return convertedValues;

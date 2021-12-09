@@ -38,7 +38,7 @@ public class ApiRestV2UserSearchRequest {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private AnalystOnboardingCompleteEnum analystOnboardingComplete;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private Type4Enum type;
+    private Type2Enum type;
 
     /**
      * Default constructor.
@@ -61,7 +61,7 @@ public class ApiRestV2UserSearchRequest {
      * @param  showWalkMe  ShowWalkMeEnum value for showWalkMe.
      * @param  analystOnboardingComplete  AnalystOnboardingCompleteEnum value for
      *         analystOnboardingComplete.
-     * @param  type  Type4Enum value for type.
+     * @param  type  Type2Enum value for type.
      */
     public ApiRestV2UserSearchRequest(
             String name,
@@ -75,7 +75,7 @@ public class ApiRestV2UserSearchRequest {
             NotifyOnShareEnum notifyOnShare,
             ShowWalkMeEnum showWalkMe,
             AnalystOnboardingCompleteEnum analystOnboardingComplete,
-            Type4Enum type) {
+            Type2Enum type) {
         this.name = name;
         this.id = id;
         this.displayName = displayName;
@@ -326,10 +326,10 @@ public class ApiRestV2UserSearchRequest {
      * Getter for Type.
      * Type of user. LOCAL_USER indicates that the user is created locally in the ThoughtSpot
      * system.
-     * @return Returns the Type4Enum
+     * @return Returns the Type2Enum
      */
     @JsonGetter("type")
-    public Type4Enum getType() {
+    public Type2Enum getType() {
         return type;
     }
 
@@ -337,10 +337,10 @@ public class ApiRestV2UserSearchRequest {
      * Setter for Type.
      * Type of user. LOCAL_USER indicates that the user is created locally in the ThoughtSpot
      * system.
-     * @param type Value for Type4Enum
+     * @param type Value for Type2Enum
      */
     @JsonSetter("type")
-    public void setType(Type4Enum type) {
+    public void setType(Type2Enum type) {
         this.type = type;
     }
 
@@ -394,7 +394,7 @@ public class ApiRestV2UserSearchRequest {
         private NotifyOnShareEnum notifyOnShare;
         private ShowWalkMeEnum showWalkMe;
         private AnalystOnboardingCompleteEnum analystOnboardingComplete;
-        private Type4Enum type;
+        private Type2Enum type;
 
 
 
@@ -512,10 +512,10 @@ public class ApiRestV2UserSearchRequest {
 
         /**
          * Setter for type.
-         * @param  type  Type4Enum value for type.
+         * @param  type  Type2Enum value for type.
          * @return Builder
          */
-        public Builder type(Type4Enum type) {
+        public Builder type(Type2Enum type) {
             this.type = type;
             return this;
         }

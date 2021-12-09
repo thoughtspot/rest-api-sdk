@@ -34,14 +34,14 @@ public class ApiRestV2GroupUpdateRequest {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<String> assignedLiveboards;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private Type7Enum type;
+    private Type5Enum type;
 
     /**
      * Default constructor.
      */
     public ApiRestV2GroupUpdateRequest() {
         visibility = Visibility3Enum.DEFAULT;
-        type = Type7Enum.LOCAL_GROUP;
+        type = Type5Enum.LOCAL_GROUP;
     }
 
     /**
@@ -55,7 +55,7 @@ public class ApiRestV2GroupUpdateRequest {
      * @param  groups  List of GroupNameAndIDInput value for groups.
      * @param  users  List of UserNameAndIDInput value for users.
      * @param  assignedLiveboards  List of String value for assignedLiveboards.
-     * @param  type  Type7Enum value for type.
+     * @param  type  Type5Enum value for type.
      */
     public ApiRestV2GroupUpdateRequest(
             String name,
@@ -67,7 +67,7 @@ public class ApiRestV2GroupUpdateRequest {
             List<GroupNameAndIDInput> groups,
             List<UserNameAndIDInput> users,
             List<String> assignedLiveboards,
-            Type7Enum type) {
+            Type5Enum type) {
         this.name = name;
         this.id = id;
         this.displayName = displayName;
@@ -268,10 +268,10 @@ public class ApiRestV2GroupUpdateRequest {
      * Getter for Type.
      * Type of user group. LOCAL_GROUP indicates that the user is created locally in the ThoughtSpot
      * system.
-     * @return Returns the Type7Enum
+     * @return Returns the Type5Enum
      */
     @JsonGetter("type")
-    public Type7Enum getType() {
+    public Type5Enum getType() {
         return type;
     }
 
@@ -279,10 +279,10 @@ public class ApiRestV2GroupUpdateRequest {
      * Setter for Type.
      * Type of user group. LOCAL_GROUP indicates that the user is created locally in the ThoughtSpot
      * system.
-     * @param type Value for Type7Enum
+     * @param type Value for Type5Enum
      */
     @JsonSetter("type")
-    public void setType(Type7Enum type) {
+    public void setType(Type5Enum type) {
         this.type = type;
     }
 
@@ -331,7 +331,7 @@ public class ApiRestV2GroupUpdateRequest {
         private List<GroupNameAndIDInput> groups;
         private List<UserNameAndIDInput> users;
         private List<String> assignedLiveboards;
-        private Type7Enum type = Type7Enum.LOCAL_GROUP;
+        private Type5Enum type = Type5Enum.LOCAL_GROUP;
 
 
 
@@ -427,10 +427,10 @@ public class ApiRestV2GroupUpdateRequest {
 
         /**
          * Setter for type.
-         * @param  type  Type7Enum value for type.
+         * @param  type  Type5Enum value for type.
          * @return Builder
          */
-        public Builder type(Type7Enum type) {
+        public Builder type(Type5Enum type) {
             this.type = type;
             return this;
         }

@@ -24,8 +24,10 @@ import localhost.http.client.HttpContext;
 import localhost.http.request.HttpRequest;
 import localhost.http.response.HttpResponse;
 import localhost.http.response.HttpStringResponse;
+import localhost.models.ApiRestV2MetadataDetailsRequest;
 import localhost.models.ApiRestV2MetadataFavoriteAssignRequest;
 import localhost.models.ApiRestV2MetadataFavoriteUnassignRequest;
+import localhost.models.ApiRestV2MetadataHeadersRequest;
 import localhost.models.ApiRestV2MetadataHomeliveboardAssignRequest;
 import localhost.models.ApiRestV2MetadataHomeliveboardUnassignRequest;
 import localhost.models.ApiRestV2MetadataTagAssignRequest;
@@ -34,13 +36,8 @@ import localhost.models.ApiRestV2MetadataTagUnassignRequest;
 import localhost.models.ApiRestV2MetadataTagUpdateRequest;
 import localhost.models.ApiRestV2MetadataTmlExportRequest;
 import localhost.models.ApiRestV2MetadataTmlImportRequest;
-import localhost.models.AutoCreatedEnum;
 import localhost.models.HomeLiveboardResponse;
 import localhost.models.MetadataTagResponse;
-import localhost.models.SortByEnum;
-import localhost.models.SortOrderEnum;
-import localhost.models.Type2Enum;
-import localhost.models.Type3Enum;
 
 /**
  * This class lists all the endpoints of the groups.
@@ -1225,46 +1222,14 @@ public final class MetadataController extends BaseController {
     /**
      * To get header details for metadata objects, use this endpoint. You can provide as input
      * selective fields to get the data for.
-     * @param  type  Required parameter: Type of the metadata object being searched.
-     * @param  outputFields  Optional parameter: Array of header field names that need to be
-     *         included in the header response
-     * @param  offset  Optional parameter: The batch offset, starting from where the records should
-     *         be included in the response. If no input is provided then offset starts from 0.
-     * @param  batchSize  Optional parameter: The number of records that should be included in the
-     *         response starting from offset position. If no input is provided then first page is
-     *         included in the response.
-     * @param  sortBy  Optional parameter: Field based on which the response needs to be ordered.
-     * @param  sortOrder  Optional parameter: Order in which sortBy should be applied.
-     * @param  namePattern  Optional parameter: A pattern to match the name of the metadata object.
-     *         This parameter supports matching case-insensitive strings. For a wildcard match, use
-     *         %.
-     * @param  fetchId  Optional parameter: A JSON array containing the GUIDs of the metadata
-     *         objects that you want to fetch.
-     * @param  skipId  Optional parameter: A JSON array containing the GUIDs of the metadata objects
-     *         that you want to skip.
-     * @param  showHidden  Optional parameter: When set to true, returns details of the hidden
-     *         objects, such as a column in a worksheet or a table.
-     * @param  autoCreated  Optional parameter: String for UI and backend boolean- A flag to
-     *         indicate whether to list only the auto created objects. When no value is provided as
-     *         input then all objects are returned.
+     * @param  body  Required parameter: Example:
      * @return    Returns the Object response from the API call
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
     public Object getObjectHeader(
-            final Type2Enum type,
-            final List<String> outputFields,
-            final String offset,
-            final String batchSize,
-            final SortByEnum sortBy,
-            final SortOrderEnum sortOrder,
-            final String namePattern,
-            final List<String> fetchId,
-            final List<String> skipId,
-            final Boolean showHidden,
-            final AutoCreatedEnum autoCreated) throws ApiException, IOException {
-        HttpRequest request = buildGetObjectHeaderRequest(type, outputFields, offset, batchSize,
-                sortBy, sortOrder, namePattern, fetchId, skipId, showHidden, autoCreated);
+            final ApiRestV2MetadataHeadersRequest body) throws ApiException, IOException {
+        HttpRequest request = buildGetObjectHeaderRequest(body);
         authManagers.get("global").apply(request);
 
         HttpResponse response = getClientInstance().execute(request, false);
@@ -1276,45 +1241,12 @@ public final class MetadataController extends BaseController {
     /**
      * To get header details for metadata objects, use this endpoint. You can provide as input
      * selective fields to get the data for.
-     * @param  type  Required parameter: Type of the metadata object being searched.
-     * @param  outputFields  Optional parameter: Array of header field names that need to be
-     *         included in the header response
-     * @param  offset  Optional parameter: The batch offset, starting from where the records should
-     *         be included in the response. If no input is provided then offset starts from 0.
-     * @param  batchSize  Optional parameter: The number of records that should be included in the
-     *         response starting from offset position. If no input is provided then first page is
-     *         included in the response.
-     * @param  sortBy  Optional parameter: Field based on which the response needs to be ordered.
-     * @param  sortOrder  Optional parameter: Order in which sortBy should be applied.
-     * @param  namePattern  Optional parameter: A pattern to match the name of the metadata object.
-     *         This parameter supports matching case-insensitive strings. For a wildcard match, use
-     *         %.
-     * @param  fetchId  Optional parameter: A JSON array containing the GUIDs of the metadata
-     *         objects that you want to fetch.
-     * @param  skipId  Optional parameter: A JSON array containing the GUIDs of the metadata objects
-     *         that you want to skip.
-     * @param  showHidden  Optional parameter: When set to true, returns details of the hidden
-     *         objects, such as a column in a worksheet or a table.
-     * @param  autoCreated  Optional parameter: String for UI and backend boolean- A flag to
-     *         indicate whether to list only the auto created objects. When no value is provided as
-     *         input then all objects are returned.
+     * @param  body  Required parameter: Example:
      * @return    Returns the Object response from the API call
      */
     public CompletableFuture<Object> getObjectHeaderAsync(
-            final Type2Enum type,
-            final List<String> outputFields,
-            final String offset,
-            final String batchSize,
-            final SortByEnum sortBy,
-            final SortOrderEnum sortOrder,
-            final String namePattern,
-            final List<String> fetchId,
-            final List<String> skipId,
-            final Boolean showHidden,
-            final AutoCreatedEnum autoCreated) {
-        return makeHttpCallAsync(() -> buildGetObjectHeaderRequest(type, outputFields, offset,
-                batchSize, sortBy, sortOrder, namePattern, fetchId, skipId, showHidden,
-                autoCreated),
+            final ApiRestV2MetadataHeadersRequest body) {
+        return makeHttpCallAsync(() -> buildGetObjectHeaderRequest(body),
             req -> authManagers.get("global").applyAsync(req)
                 .thenCompose(request -> getClientInstance()
                         .executeAsync(request, false)),
@@ -1325,17 +1257,7 @@ public final class MetadataController extends BaseController {
      * Builds the HttpRequest object for getObjectHeader.
      */
     private HttpRequest buildGetObjectHeaderRequest(
-            final Type2Enum type,
-            final List<String> outputFields,
-            final String offset,
-            final String batchSize,
-            final SortByEnum sortBy,
-            final SortOrderEnum sortOrder,
-            final String namePattern,
-            final List<String> fetchId,
-            final List<String> skipId,
-            final Boolean showHidden,
-            final AutoCreatedEnum autoCreated) {
+            final ApiRestV2MetadataHeadersRequest body) throws JsonProcessingException {
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 
@@ -1343,33 +1265,15 @@ public final class MetadataController extends BaseController {
         final StringBuilder queryBuilder = new StringBuilder(baseUri
                 + "/api/rest/v2/metadata/headers");
 
-        //load all query parameters
-        Map<String, Object> queryParameters = new HashMap<>();
-        queryParameters.put("type",
-                (type != null) ? type.value() : null);
-        queryParameters.put("outputFields", outputFields);
-        queryParameters.put("offset", offset);
-        queryParameters.put("batchSize", batchSize);
-        queryParameters.put("sortBy",
-                (sortBy != null) ? sortBy.value() : "DEFAULT");
-        queryParameters.put("sortOrder",
-                (sortOrder != null) ? sortOrder.value() : "DEFAULT");
-        queryParameters.put("namePattern", namePattern);
-        queryParameters.put("fetchId", fetchId);
-        queryParameters.put("skipId", skipId);
-        queryParameters.put("showHidden", showHidden);
-        queryParameters.put("autoCreated",
-                (autoCreated != null) ? autoCreated.value() : null);
-
         //load all headers for the outgoing API request
         Headers headers = new Headers();
-        headers.add("Content-Type", config.getContentType());
+        headers.add("Content-Type", "application/json");
         headers.add("Accept-Language", config.getAcceptLanguage());
         headers.add("user-agent", BaseController.userAgent);
 
         //prepare and invoke the API call request to fetch the response
-        HttpRequest request = getClientInstance().get(queryBuilder, headers, queryParameters,
-                null);
+        String bodyJson = ApiHelper.serialize(body);
+        HttpRequest request = getClientInstance().postBody(queryBuilder, headers, null, bodyJson);
 
         // Invoke the callback before request if its not null
         if (getHttpCallback() != null) {
@@ -1511,27 +1415,14 @@ public final class MetadataController extends BaseController {
 
     /**
      * Use this endpoint to get full details of metadata objects.
-     * @param  type  Required parameter: Type of the metadata object being searched. Valid values
-     * @param  id  Required parameter: A JSON array of GUIDs of the objects.
-     * @param  showHidden  Optional parameter: When set to true, returns details of the hidden
-     *         objects, such as a column in a worksheet or a table.
-     * @param  dropQuestionDetails  Optional parameter: When set to true, the search assist data
-     *         associated with a worksheet is not included in the API response. This attribute is
-     *         applicable only for LOGICAL_TABLE data type.
-     * @param  version  Optional parameter: Specify the version to retrieve the objects from. By
-     *         default, the API returns metadata for all versions of the object.
-     * @return    Returns the List of Object response from the API call
+     * @param  body  Required parameter: Example:
+     * @return    Returns the Object response from the API call
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
-    public List<Object> getObjectDetail(
-            final Type3Enum type,
-            final List<String> id,
-            final Boolean showHidden,
-            final Boolean dropQuestionDetails,
-            final String version) throws ApiException, IOException {
-        HttpRequest request = buildGetObjectDetailRequest(type, id, showHidden, dropQuestionDetails,
-                version);
+    public Object getObjectDetail(
+            final ApiRestV2MetadataDetailsRequest body) throws ApiException, IOException {
+        HttpRequest request = buildGetObjectDetailRequest(body);
         authManagers.get("global").apply(request);
 
         HttpResponse response = getClientInstance().execute(request, false);
@@ -1542,25 +1433,12 @@ public final class MetadataController extends BaseController {
 
     /**
      * Use this endpoint to get full details of metadata objects.
-     * @param  type  Required parameter: Type of the metadata object being searched. Valid values
-     * @param  id  Required parameter: A JSON array of GUIDs of the objects.
-     * @param  showHidden  Optional parameter: When set to true, returns details of the hidden
-     *         objects, such as a column in a worksheet or a table.
-     * @param  dropQuestionDetails  Optional parameter: When set to true, the search assist data
-     *         associated with a worksheet is not included in the API response. This attribute is
-     *         applicable only for LOGICAL_TABLE data type.
-     * @param  version  Optional parameter: Specify the version to retrieve the objects from. By
-     *         default, the API returns metadata for all versions of the object.
-     * @return    Returns the List of Object response from the API call
+     * @param  body  Required parameter: Example:
+     * @return    Returns the Object response from the API call
      */
-    public CompletableFuture<List<Object>> getObjectDetailAsync(
-            final Type3Enum type,
-            final List<String> id,
-            final Boolean showHidden,
-            final Boolean dropQuestionDetails,
-            final String version) {
-        return makeHttpCallAsync(() -> buildGetObjectDetailRequest(type, id, showHidden,
-                dropQuestionDetails, version),
+    public CompletableFuture<Object> getObjectDetailAsync(
+            final ApiRestV2MetadataDetailsRequest body) {
+        return makeHttpCallAsync(() -> buildGetObjectDetailRequest(body),
             req -> authManagers.get("global").applyAsync(req)
                 .thenCompose(request -> getClientInstance()
                         .executeAsync(request, false)),
@@ -1571,11 +1449,7 @@ public final class MetadataController extends BaseController {
      * Builds the HttpRequest object for getObjectDetail.
      */
     private HttpRequest buildGetObjectDetailRequest(
-            final Type3Enum type,
-            final List<String> id,
-            final Boolean showHidden,
-            final Boolean dropQuestionDetails,
-            final String version) {
+            final ApiRestV2MetadataDetailsRequest body) throws JsonProcessingException {
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 
@@ -1583,25 +1457,15 @@ public final class MetadataController extends BaseController {
         final StringBuilder queryBuilder = new StringBuilder(baseUri
                 + "/api/rest/v2/metadata/details");
 
-        //load all query parameters
-        Map<String, Object> queryParameters = new HashMap<>();
-        queryParameters.put("type",
-                (type != null) ? type.value() : null);
-        queryParameters.put("id", id);
-        queryParameters.put("showHidden", showHidden);
-        queryParameters.put("dropQuestionDetails", dropQuestionDetails);
-        queryParameters.put("version", version);
-
         //load all headers for the outgoing API request
         Headers headers = new Headers();
-        headers.add("Content-Type", config.getContentType());
+        headers.add("Content-Type", "application/json");
         headers.add("Accept-Language", config.getAcceptLanguage());
         headers.add("user-agent", BaseController.userAgent);
-        headers.add("accept", "application/json");
 
         //prepare and invoke the API call request to fetch the response
-        HttpRequest request = getClientInstance().get(queryBuilder, headers, queryParameters,
-                null);
+        String bodyJson = ApiHelper.serialize(body);
+        HttpRequest request = getClientInstance().postBody(queryBuilder, headers, null, bodyJson);
 
         // Invoke the callback before request if its not null
         if (getHttpCallback() != null) {
@@ -1613,9 +1477,9 @@ public final class MetadataController extends BaseController {
 
     /**
      * Processes the response for getObjectDetail.
-     * @return An object of type List of Object
+     * @return An object of type Object
      */
-    private List<Object> handleGetObjectDetailResponse(
+    private Object handleGetObjectDetailResponse(
             HttpContext context) throws ApiException, IOException {
         HttpResponse response = context.getResponse();
 
@@ -1635,8 +1499,7 @@ public final class MetadataController extends BaseController {
 
         //extract result from the http response
         String responseBody = ((HttpStringResponse) response).getBody();
-        List<Object> result = ApiHelper.deserializeArray(responseBody,
-                Object[].class);
+        Object result = responseBody;
 
         return result;
     }

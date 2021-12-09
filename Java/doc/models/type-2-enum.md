@@ -1,6 +1,8 @@
 
 # Type 2 Enum
 
+Type of user. LOCAL_USER indicates that the user is created locally in the ThoughtSpot system.
+
 ## Enumeration
 
 `Type2Enum`
@@ -9,23 +11,12 @@
 
 | Name |
 |  --- |
-| `ANSWER` |
-| `LIVEBOARD` |
-| `DATAOBJECTALL` |
-| `DATAOBJECTWORKSHEET` |
-| `DATAOBJECTTABLE` |
-| `DATAOBJECTUSERDEFINED` |
-| `DATAOBJECTVIEW` |
-| `DATAOBJECTCALENDARTABLE` |
-| `COLUMNALL` |
-| `COLUMNWORKSHEET` |
-| `COLUMNTABLE` |
-| `COLUMNUSERDEFINED` |
-| `COLUMNVIEW` |
-| `COLUMNCALENDARTABLE` |
-| `JOIN` |
-| `CONNECTION` |
-| `TAG` |
-| `USER` |
-| `USERGROUP` |
+| `UNKNOWN` |
+| `LDAPUSER` |
+| `SAMLUSER` |
+| `OIDCUSER` |
+| `LOCALUSER` |
+| `LDAPGROUP` |
+| `LOCALGROUP` |
+| `TENANTGROUP` |
 

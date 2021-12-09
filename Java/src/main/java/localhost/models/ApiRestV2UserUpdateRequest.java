@@ -36,7 +36,7 @@ public class ApiRestV2UserUpdateRequest {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Boolean analystOnboardingComplete;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private Type4Enum type;
+    private Type2Enum type;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<GroupNameAndIDInput> groups;
 
@@ -49,7 +49,7 @@ public class ApiRestV2UserUpdateRequest {
         notifyOnShare = true;
         showWalkMe = true;
         analystOnboardingComplete = true;
-        type = Type4Enum.LOCAL_USER;
+        type = Type2Enum.LOCAL_USER;
     }
 
     /**
@@ -64,7 +64,7 @@ public class ApiRestV2UserUpdateRequest {
      * @param  notifyOnShare  Boolean value for notifyOnShare.
      * @param  showWalkMe  Boolean value for showWalkMe.
      * @param  analystOnboardingComplete  Boolean value for analystOnboardingComplete.
-     * @param  type  Type4Enum value for type.
+     * @param  type  Type2Enum value for type.
      * @param  groups  List of GroupNameAndIDInput value for groups.
      */
     public ApiRestV2UserUpdateRequest(
@@ -78,7 +78,7 @@ public class ApiRestV2UserUpdateRequest {
             Boolean notifyOnShare,
             Boolean showWalkMe,
             Boolean analystOnboardingComplete,
-            Type4Enum type,
+            Type2Enum type,
             List<GroupNameAndIDInput> groups) {
         this.name = name;
         this.id = id;
@@ -310,10 +310,10 @@ public class ApiRestV2UserUpdateRequest {
      * Getter for Type.
      * Type of user. LOCAL_USER indicates that the user is created locally in the ThoughtSpot
      * system.
-     * @return Returns the Type4Enum
+     * @return Returns the Type2Enum
      */
     @JsonGetter("type")
-    public Type4Enum getType() {
+    public Type2Enum getType() {
         return type;
     }
 
@@ -321,10 +321,10 @@ public class ApiRestV2UserUpdateRequest {
      * Setter for Type.
      * Type of user. LOCAL_USER indicates that the user is created locally in the ThoughtSpot
      * system.
-     * @param type Value for Type4Enum
+     * @param type Value for Type2Enum
      */
     @JsonSetter("type")
-    public void setType(Type4Enum type) {
+    public void setType(Type2Enum type) {
         this.type = type;
     }
 
@@ -397,7 +397,7 @@ public class ApiRestV2UserUpdateRequest {
         private Boolean notifyOnShare = true;
         private Boolean showWalkMe = true;
         private Boolean analystOnboardingComplete = true;
-        private Type4Enum type = Type4Enum.LOCAL_USER;
+        private Type2Enum type = Type2Enum.LOCAL_USER;
         private List<GroupNameAndIDInput> groups;
 
 
@@ -504,10 +504,10 @@ public class ApiRestV2UserUpdateRequest {
 
         /**
          * Setter for type.
-         * @param  type  Type4Enum value for type.
+         * @param  type  Type2Enum value for type.
          * @return Builder
          */
-        public Builder type(Type4Enum type) {
+        public Builder type(Type2Enum type) {
             this.type = type;
             return this;
         }

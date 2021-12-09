@@ -11,45 +11,21 @@ import java.util.List;
 import java.util.TreeMap;
 
 /**
- * Type4Enum to be used.
+ * Type5Enum to be used.
  */
-public enum Type4Enum {
-    UNKNOWN,
-
-    LDAP_USER,
-
-    SAML_USER,
-
-    OIDC_USER,
-
-    LOCAL_USER,
-
-    LDAP_GROUP,
-
+public enum Type5Enum {
     LOCAL_GROUP,
 
     TENANT_GROUP;
 
 
-    private static TreeMap<String, Type4Enum> valueMap = new TreeMap<>();
+    private static TreeMap<String, Type5Enum> valueMap = new TreeMap<>();
     private String value;
 
     static {
-        UNKNOWN.value = "UNKNOWN";
-        LDAP_USER.value = "LDAP_USER";
-        SAML_USER.value = "SAML_USER";
-        OIDC_USER.value = "OIDC_USER";
-        LOCAL_USER.value = "LOCAL_USER";
-        LDAP_GROUP.value = "LDAP_GROUP";
         LOCAL_GROUP.value = "LOCAL_GROUP";
         TENANT_GROUP.value = "TENANT_GROUP";
 
-        valueMap.put("UNKNOWN", UNKNOWN);
-        valueMap.put("LDAP_USER", LDAP_USER);
-        valueMap.put("SAML_USER", SAML_USER);
-        valueMap.put("OIDC_USER", OIDC_USER);
-        valueMap.put("LOCAL_USER", LOCAL_USER);
-        valueMap.put("LDAP_GROUP", LDAP_GROUP);
         valueMap.put("LOCAL_GROUP", LOCAL_GROUP);
         valueMap.put("TENANT_GROUP", TENANT_GROUP);
     }
@@ -60,7 +36,7 @@ public enum Type4Enum {
      * @return The enum member against the given string value.
      */
     @com.fasterxml.jackson.annotation.JsonCreator
-    public static Type4Enum fromString(String toConvert) {
+    public static Type5Enum fromString(String toConvert) {
         return valueMap.get(toConvert);
     }
 
@@ -82,16 +58,16 @@ public enum Type4Enum {
     }
 
     /**
-     * Convert list of Type4Enum values to list of string values.
-     * @param toConvert The list of Type4Enum values to convert.
+     * Convert list of Type5Enum values to list of string values.
+     * @param toConvert The list of Type5Enum values to convert.
      * @return List of representative string values.
      */
-    public static List<String> toValue(List<Type4Enum> toConvert) {
+    public static List<String> toValue(List<Type5Enum> toConvert) {
         if (toConvert == null) {
             return null;
         }
         List<String> convertedValues = new ArrayList<>();
-        for (Type4Enum enumValue : toConvert) {
+        for (Type5Enum enumValue : toConvert) {
             convertedValues.add(enumValue.value);
         }
         return convertedValues;

@@ -230,6 +230,88 @@ public final class SessionController extends BaseController {
     }
 
     /**
+     * To log a user out of the current session, use this endpoint.
+     * @return    Returns the Boolean response from the API call
+     * @throws    ApiException    Represents error response from the server.
+     * @throws    IOException    Signals that an I/O exception of some sort has occurred.
+     */
+    public Boolean logout() throws ApiException, IOException {
+        HttpRequest request = buildLogoutRequest();
+        HttpResponse response = getClientInstance().execute(request, false);
+        HttpContext context = new HttpContext(request, response);
+
+        return handleLogoutResponse(context);
+    }
+
+    /**
+     * To log a user out of the current session, use this endpoint.
+     * @return    Returns the Boolean response from the API call
+     */
+    public CompletableFuture<Boolean> logoutAsync() {
+        return makeHttpCallAsync(() -> buildLogoutRequest(),
+            request -> getClientInstance().executeAsync(request, false),
+            context -> handleLogoutResponse(context));
+    }
+
+    /**
+     * Builds the HttpRequest object for logout.
+     */
+    private HttpRequest buildLogoutRequest() {
+        //the base uri for api requests
+        String baseUri = config.getBaseUri();
+
+        //prepare query string for API call
+        final StringBuilder queryBuilder = new StringBuilder(baseUri
+                + "/api/rest/v2/session/logout");
+
+        //load all headers for the outgoing API request
+        Headers headers = new Headers();
+        headers.add("Content-Type", config.getContentType());
+        headers.add("Accept-Language", config.getAcceptLanguage());
+
+        headers.add("user-agent", BaseController.userAgent);
+
+        //prepare and invoke the API call request to fetch the response
+        HttpRequest request = getClientInstance().post(queryBuilder, headers, null, null);
+
+        // Invoke the callback before request if its not null
+        if (getHttpCallback() != null) {
+            getHttpCallback().onBeforeRequest(request);
+        }
+
+        return request;
+    }
+
+    /**
+     * Processes the response for logout.
+     * @return An object of type boolean
+     */
+    private Boolean handleLogoutResponse(
+            HttpContext context) throws ApiException, IOException {
+        HttpResponse response = context.getResponse();
+
+        //invoke the callback after response if its not null
+        if (getHttpCallback() != null) {
+            getHttpCallback().onAfterResponse(context);
+        }
+
+        //Error handling using HTTP status codes
+        int responseCode = response.getStatusCode();
+
+        if (responseCode == 500) {
+            throw new ErrorResponseException("Operation failed or unauthorized request", context);
+        }
+        //handle errors defined at the API level
+        validateResponse(response, context);
+
+        //extract result from the http response
+        String responseBody = ((HttpStringResponse) response).getBody();
+        boolean result = Boolean.parseBoolean(responseBody);
+
+        return result;
+    }
+
+    /**
      * To programmatically create token for a user in ThoughtSpot, use this endpoint.
      * @param  body  Required parameter: Example:
      * @return    Returns the SessionLoginResponse response from the API call
@@ -315,88 +397,6 @@ public final class SessionController extends BaseController {
         String responseBody = ((HttpStringResponse) response).getBody();
         SessionLoginResponse result = ApiHelper.deserialize(responseBody,
                 SessionLoginResponse.class);
-
-        return result;
-    }
-
-    /**
-     * To log a user out of the current session, use this endpoint.
-     * @return    Returns the Boolean response from the API call
-     * @throws    ApiException    Represents error response from the server.
-     * @throws    IOException    Signals that an I/O exception of some sort has occurred.
-     */
-    public Boolean logout() throws ApiException, IOException {
-        HttpRequest request = buildLogoutRequest();
-        HttpResponse response = getClientInstance().execute(request, false);
-        HttpContext context = new HttpContext(request, response);
-
-        return handleLogoutResponse(context);
-    }
-
-    /**
-     * To log a user out of the current session, use this endpoint.
-     * @return    Returns the Boolean response from the API call
-     */
-    public CompletableFuture<Boolean> logoutAsync() {
-        return makeHttpCallAsync(() -> buildLogoutRequest(),
-            request -> getClientInstance().executeAsync(request, false),
-            context -> handleLogoutResponse(context));
-    }
-
-    /**
-     * Builds the HttpRequest object for logout.
-     */
-    private HttpRequest buildLogoutRequest() {
-        //the base uri for api requests
-        String baseUri = config.getBaseUri();
-
-        //prepare query string for API call
-        final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/session/logout");
-
-        //load all headers for the outgoing API request
-        Headers headers = new Headers();
-        headers.add("Content-Type", config.getContentType());
-        headers.add("Accept-Language", config.getAcceptLanguage());
-
-        headers.add("user-agent", BaseController.userAgent);
-
-        //prepare and invoke the API call request to fetch the response
-        HttpRequest request = getClientInstance().post(queryBuilder, headers, null, null);
-
-        // Invoke the callback before request if its not null
-        if (getHttpCallback() != null) {
-            getHttpCallback().onBeforeRequest(request);
-        }
-
-        return request;
-    }
-
-    /**
-     * Processes the response for logout.
-     * @return An object of type boolean
-     */
-    private Boolean handleLogoutResponse(
-            HttpContext context) throws ApiException, IOException {
-        HttpResponse response = context.getResponse();
-
-        //invoke the callback after response if its not null
-        if (getHttpCallback() != null) {
-            getHttpCallback().onAfterResponse(context);
-        }
-
-        //Error handling using HTTP status codes
-        int responseCode = response.getStatusCode();
-
-        if (responseCode == 500) {
-            throw new ErrorResponseException("Operation failed or unauthorized request", context);
-        }
-        //handle errors defined at the API level
-        validateResponse(response, context);
-
-        //extract result from the http response
-        String responseBody = ((HttpStringResponse) response).getBody();
-        boolean result = Boolean.parseBoolean(responseBody);
 
         return result;
     }

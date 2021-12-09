@@ -543,34 +543,14 @@ To get header details for metadata objects, use this endpoint. You can provide a
 
 ```java
 CompletableFuture<Object> getObjectHeaderAsync(
-    final Type2Enum type,
-    final List<String> outputFields,
-    final String offset,
-    final String batchSize,
-    final SortByEnum sortBy,
-    final SortOrderEnum sortOrder,
-    final String namePattern,
-    final List<String> fetchId,
-    final List<String> skipId,
-    final Boolean showHidden,
-    final AutoCreatedEnum autoCreated)
+    final ApiRestV2MetadataHeadersRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `type` | [`Type2Enum`](/doc/models/type-2-enum.md) | Query, Required | Type of the metadata object being searched. |
-| `outputFields` | `List<String>` | Query, Optional | Array of header field names that need to be included in the header response |
-| `offset` | `String` | Query, Optional | The batch offset, starting from where the records should be included in the response. If no input is provided then offset starts from 0. |
-| `batchSize` | `String` | Query, Optional | The number of records that should be included in the response starting from offset position. If no input is provided then first page is included in the response. |
-| `sortBy` | [`SortByEnum`](/doc/models/sort-by-enum.md) | Query, Optional | Field based on which the response needs to be ordered.<br>**Default**: `SortByEnum.DEFAULT` |
-| `sortOrder` | [`SortOrderEnum`](/doc/models/sort-order-enum.md) | Query, Optional | Order in which sortBy should be applied.<br>**Default**: `SortOrderEnum.DEFAULT` |
-| `namePattern` | `String` | Query, Optional | A pattern to match the name of the metadata object. This parameter supports matching case-insensitive strings. For a wildcard match, use %. |
-| `fetchId` | `List<String>` | Query, Optional | A JSON array containing the GUIDs of the metadata objects that you want to fetch. |
-| `skipId` | `List<String>` | Query, Optional | A JSON array containing the GUIDs of the metadata objects that you want to skip. |
-| `showHidden` | `Boolean` | Query, Optional | When set to true, returns details of the hidden objects, such as a column in a worksheet or a table. |
-| `autoCreated` | [`AutoCreatedEnum`](/doc/models/auto-created-enum.md) | Query, Optional | String for UI and backend boolean- A flag to indicate whether to list only the auto created objects. When no value is provided as input then all objects are returned. |
+| `body` | [`ApiRestV2MetadataHeadersRequest`](/doc/models/api-rest-v2-metadata-headers-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -579,11 +559,10 @@ CompletableFuture<Object> getObjectHeaderAsync(
 ## Example Usage
 
 ```java
-Type2Enum type = Type2Enum.COLUMN_ALL;
-SortByEnum sortBy = SortByEnum.DEFAULT;
-SortOrderEnum sortOrder = SortOrderEnum.DEFAULT;
+ApiRestV2MetadataHeadersRequest body = new ApiRestV2MetadataHeadersRequest();
+body.setType(Type8Enum.USER);
 
-metadataController.getObjectHeaderAsync(type, null, null, null, sortBy, sortOrder, null, null, null, null, null).thenAccept(result -> {
+metadataController.getObjectHeaderAsync(body).thenAccept(result -> {
     // TODO success callback handler
 }).exceptionally(exception -> {
     // TODO failure callback handler
@@ -642,36 +621,30 @@ metadataController.getObjectVisualizationHeaderAsync(id).thenAccept(result -> {
 Use this endpoint to get full details of metadata objects
 
 ```java
-CompletableFuture<List<Object>> getObjectDetailAsync(
-    final Type3Enum type,
-    final List<String> id,
-    final Boolean showHidden,
-    final Boolean dropQuestionDetails,
-    final String version)
+CompletableFuture<Object> getObjectDetailAsync(
+    final ApiRestV2MetadataDetailsRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `type` | [`Type3Enum`](/doc/models/type-3-enum.md) | Query, Required | Type of the metadata object being searched. Valid values |
-| `id` | `List<String>` | Query, Required | A JSON array of GUIDs of the objects. |
-| `showHidden` | `Boolean` | Query, Optional | When set to true, returns details of the hidden objects, such as a column in a worksheet or a table. |
-| `dropQuestionDetails` | `Boolean` | Query, Optional | When set to true, the search assist data associated with a worksheet is not included in the API response. This attribute is applicable only for LOGICAL_TABLE data type. |
-| `version` | `String` | Query, Optional | Specify the version to retrieve the objects from. By default, the API returns metadata for all versions of the object. |
+| `body` | [`ApiRestV2MetadataDetailsRequest`](/doc/models/api-rest-v2-metadata-details-request.md) | Body, Required | - |
 
 ## Response Type
 
-`List<Object>`
+`Object`
 
 ## Example Usage
 
 ```java
-Type3Enum type = Type3Enum.DATAOBJECT;
-List<String> id = new LinkedList<>();
-id.add("id0");
+ApiRestV2MetadataDetailsRequest body = new ApiRestV2MetadataDetailsRequest();
+body.setType(Type9Enum.USER);
+body.setId(new LinkedList<>());
+body.getId().add("id6");
+body.getId().add("id7");
 
-metadataController.getObjectDetailAsync(type, id, null, null, null).thenAccept(result -> {
+metadataController.getObjectDetailAsync(body).thenAccept(result -> {
     // TODO success callback handler
 }).exceptionally(exception -> {
     // TODO failure callback handler

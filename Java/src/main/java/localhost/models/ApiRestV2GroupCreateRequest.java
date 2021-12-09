@@ -28,14 +28,14 @@ public class ApiRestV2GroupCreateRequest {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<UserNameAndIDInput> users;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private Type7Enum type;
+    private Type5Enum type;
 
     /**
      * Default constructor.
      */
     public ApiRestV2GroupCreateRequest() {
         visibility = Visibility3Enum.DEFAULT;
-        type = Type7Enum.LOCAL_GROUP;
+        type = Type5Enum.LOCAL_GROUP;
     }
 
     /**
@@ -47,7 +47,7 @@ public class ApiRestV2GroupCreateRequest {
      * @param  privileges  List of PrivilegeEnum value for privileges.
      * @param  groups  List of GroupNameAndIDInput value for groups.
      * @param  users  List of UserNameAndIDInput value for users.
-     * @param  type  Type7Enum value for type.
+     * @param  type  Type5Enum value for type.
      */
     public ApiRestV2GroupCreateRequest(
             String name,
@@ -57,7 +57,7 @@ public class ApiRestV2GroupCreateRequest {
             List<PrivilegeEnum> privileges,
             List<GroupNameAndIDInput> groups,
             List<UserNameAndIDInput> users,
-            Type7Enum type) {
+            Type5Enum type) {
         this.name = name;
         this.displayName = displayName;
         this.visibility = visibility;
@@ -216,10 +216,10 @@ public class ApiRestV2GroupCreateRequest {
      * Getter for Type.
      * Type of user group. LOCAL_GROUP indicates that the user is created locally in the ThoughtSpot
      * system.
-     * @return Returns the Type7Enum
+     * @return Returns the Type5Enum
      */
     @JsonGetter("type")
-    public Type7Enum getType() {
+    public Type5Enum getType() {
         return type;
     }
 
@@ -227,10 +227,10 @@ public class ApiRestV2GroupCreateRequest {
      * Setter for Type.
      * Type of user group. LOCAL_GROUP indicates that the user is created locally in the ThoughtSpot
      * system.
-     * @param type Value for Type7Enum
+     * @param type Value for Type5Enum
      */
     @JsonSetter("type")
-    public void setType(Type7Enum type) {
+    public void setType(Type5Enum type) {
         this.type = type;
     }
 
@@ -272,7 +272,7 @@ public class ApiRestV2GroupCreateRequest {
         private List<PrivilegeEnum> privileges;
         private List<GroupNameAndIDInput> groups;
         private List<UserNameAndIDInput> users;
-        private Type7Enum type = Type7Enum.LOCAL_GROUP;
+        private Type5Enum type = Type5Enum.LOCAL_GROUP;
 
         /**
          * Initialization constructor.
@@ -362,10 +362,10 @@ public class ApiRestV2GroupCreateRequest {
 
         /**
          * Setter for type.
-         * @param  type  Type7Enum value for type.
+         * @param  type  Type5Enum value for type.
          * @return Builder
          */
-        public Builder type(Type7Enum type) {
+        public Builder type(Type5Enum type) {
             this.type = type;
             return this;
         }

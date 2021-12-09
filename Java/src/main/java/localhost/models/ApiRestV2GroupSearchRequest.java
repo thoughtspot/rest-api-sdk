@@ -32,7 +32,7 @@ public class ApiRestV2GroupSearchRequest {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<UserNameAndIDInput> users;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private Type7Enum type;
+    private Type5Enum type;
 
     /**
      * Default constructor.
@@ -50,7 +50,7 @@ public class ApiRestV2GroupSearchRequest {
      * @param  privileges  List of PrivilegeEnum value for privileges.
      * @param  groups  List of GroupNameAndIDInput value for groups.
      * @param  users  List of UserNameAndIDInput value for users.
-     * @param  type  Type7Enum value for type.
+     * @param  type  Type5Enum value for type.
      */
     public ApiRestV2GroupSearchRequest(
             String name,
@@ -61,7 +61,7 @@ public class ApiRestV2GroupSearchRequest {
             List<PrivilegeEnum> privileges,
             List<GroupNameAndIDInput> groups,
             List<UserNameAndIDInput> users,
-            Type7Enum type) {
+            Type5Enum type) {
         this.name = name;
         this.id = id;
         this.displayName = displayName;
@@ -241,10 +241,10 @@ public class ApiRestV2GroupSearchRequest {
      * Getter for Type.
      * Type of user group. LOCAL_GROUP indicates that the user is created locally in the ThoughtSpot
      * system.
-     * @return Returns the Type7Enum
+     * @return Returns the Type5Enum
      */
     @JsonGetter("type")
-    public Type7Enum getType() {
+    public Type5Enum getType() {
         return type;
     }
 
@@ -252,10 +252,10 @@ public class ApiRestV2GroupSearchRequest {
      * Setter for Type.
      * Type of user group. LOCAL_GROUP indicates that the user is created locally in the ThoughtSpot
      * system.
-     * @param type Value for Type7Enum
+     * @param type Value for Type5Enum
      */
     @JsonSetter("type")
-    public void setType(Type7Enum type) {
+    public void setType(Type5Enum type) {
         this.type = type;
     }
 
@@ -302,7 +302,7 @@ public class ApiRestV2GroupSearchRequest {
         private List<PrivilegeEnum> privileges;
         private List<GroupNameAndIDInput> groups;
         private List<UserNameAndIDInput> users;
-        private Type7Enum type;
+        private Type5Enum type;
 
 
 
@@ -388,10 +388,10 @@ public class ApiRestV2GroupSearchRequest {
 
         /**
          * Setter for type.
-         * @param  type  Type7Enum value for type.
+         * @param  type  Type5Enum value for type.
          * @return Builder
          */
-        public Builder type(Type7Enum type) {
+        public Builder type(Type5Enum type) {
             this.type = type;
             return this;
         }

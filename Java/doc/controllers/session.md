@@ -12,8 +12,8 @@ SessionController sessionController = client.getSessionController();
 
 * [Get Session Info](/doc/controllers/session.md#get-session-info)
 * [Login](/doc/controllers/session.md#login)
-* [Gettoken](/doc/controllers/session.md#gettoken)
 * [Logout](/doc/controllers/session.md#logout)
+* [Gettoken](/doc/controllers/session.md#gettoken)
 * [Revoketoken](/doc/controllers/session.md#revoketoken)
 
 
@@ -90,6 +90,38 @@ sessionController.loginAsync(body).thenAccept(result -> {
 | 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
 
 
+# Logout
+
+To log a user out of the current session, use this endpoint
+
+:information_source: **Note** This endpoint does not require authentication.
+
+```java
+CompletableFuture<Boolean> logoutAsync()
+```
+
+## Response Type
+
+`boolean`
+
+## Example Usage
+
+```java
+sessionController.logoutAsync().thenAccept(result -> {
+    // TODO success callback handler
+}).exceptionally(exception -> {
+    // TODO failure callback handler
+    return null;
+});
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+
+
 # Gettoken
 
 To programmatically create token for a user in ThoughtSpot, use this endpoint
@@ -119,38 +151,6 @@ body.setUserName("userName8");
 body.setPassword("password0");
 
 sessionController.gettokenAsync(body).thenAccept(result -> {
-    // TODO success callback handler
-}).exceptionally(exception -> {
-    // TODO failure callback handler
-    return null;
-});
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
-
-
-# Logout
-
-To log a user out of the current session, use this endpoint
-
-:information_source: **Note** This endpoint does not require authentication.
-
-```java
-CompletableFuture<Boolean> logoutAsync()
-```
-
-## Response Type
-
-`boolean`
-
-## Example Usage
-
-```java
-sessionController.logoutAsync().thenAccept(result -> {
     // TODO success callback handler
 }).exceptionally(exception -> {
     // TODO failure callback handler
