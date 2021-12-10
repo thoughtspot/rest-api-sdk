@@ -39,7 +39,6 @@ The gateway for the SDK. This class acts as a factory for the Controllers and al
 | `getGroupController()` | Provides access to Group controller. | `GroupController` |
 | `getMetadataController()` | Provides access to Metadata controller. | `MetadataController` |
 | `getDatabaseController()` | Provides access to Database controller. | `DatabaseController` |
-| `getDependencyController()` | Provides access to Dependency controller. | `DependencyController` |
 
 ### Methods
 

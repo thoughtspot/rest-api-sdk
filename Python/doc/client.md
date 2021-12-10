@@ -45,5 +45,4 @@ The gateway for the SDK. This class acts as a factory for the Controllers and al
 | group | Gets GroupController |
 | metadata | Gets MetadataController |
 | database | Gets DatabaseController |
-| dependency | Gets DependencyController |
 

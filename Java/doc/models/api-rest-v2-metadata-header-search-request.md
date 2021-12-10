@@ -1,9 +1,9 @@
 
-# Api Rest V2 Metadata Headers Request
+# Api Rest V2 Metadata Header Search Request
 
 ## Structure
 
-`ApiRestV2MetadataHeadersRequest`
+`ApiRestV2MetadataHeaderSearchRequest`
 
 ## Fields
 
@@ -14,7 +14,7 @@
 | `BatchSize` | `String` | Optional | The number of records that should be included in the response starting from offset position. If no input is provided, then all records starting from the value provided in offset is included in the response. | String getBatchSize() | setBatchSize(String batchSize) |
 | `SortBy` | [`SortByEnum`](/doc/models/sort-by-enum.md) | Optional | Field based on which the response needs to be ordered.<br>**Default**: `SortByEnum.DEFAULT` | SortByEnum getSortBy() | setSortBy(SortByEnum sortBy) |
 | `SortOrder` | [`SortOrderEnum`](/doc/models/sort-order-enum.md) | Optional | Order in which sortBy should be applied.<br>**Default**: `SortOrderEnum.DEFAULT` | SortOrderEnum getSortOrder() | setSortOrder(SortOrderEnum sortOrder) |
-| `Type` | [`Type8Enum`](/doc/models/type-8-enum.md) | Required | Type of the metadata object being searched. | Type8Enum getType() | setType(Type8Enum type) |
+| `Type` | [`Type9Enum`](/doc/models/type-9-enum.md) | Required | Type of the metadata object being searched. | Type9Enum getType() | setType(Type9Enum type) |
 | `NamePattern` | `String` | Optional | A pattern to match the name of the metadata object. This parameter supports matching case-insensitive strings. For a wildcard match, use %. | String getNamePattern() | setNamePattern(String namePattern) |
 | `FetchId` | `List<String>` | Optional | A JSON array containing the GUIDs of the metadata objects that you want to fetch. | List<String> getFetchId() | setFetchId(List<String> fetchId) |
 | `SkipId` | `List<String>` | Optional | A JSON array containing the GUIDs of the metadata objects that you want to skip. | List<String> getSkipId() | setSkipId(List<String> skipId) |

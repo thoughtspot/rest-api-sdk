@@ -5,7 +5,6 @@
 * [Group](controllers/group.md)
 * [Metadata](controllers/metadata.md)
 * [Database](controllers/database.md)
-* [Dependency](controllers/dependency.md)
 
 ## Classes Documentation
 

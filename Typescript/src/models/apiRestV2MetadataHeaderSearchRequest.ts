@@ -22,9 +22,9 @@ import {
   TagNameAndIdInput,
   tagNameAndIdInputSchema,
 } from './tagNameAndIdInput';
-import { Type8Enum, type8EnumSchema } from './type8Enum';
+import { Type9Enum, type9EnumSchema } from './type9Enum';
 
-export interface ApiRestV2MetadataHeadersRequest {
+export interface ApiRestV2MetadataHeaderSearchRequest {
   /** Array of header field names that need to be included in the header response */
   outputFields?: string[];
   /** The offset point, starting from where the records should be included in the response. If no input is provided then offset starts from 0. */
@@ -36,7 +36,7 @@ export interface ApiRestV2MetadataHeadersRequest {
   /** Order in which sortBy should be applied. */
   sortOrder?: SortOrderEnum;
   /** Type of the metadata object being searched. */
-  type: Type8Enum;
+  type: Type9Enum;
   /** A pattern to match the name of the metadata object. This parameter supports matching case-insensitive strings. For a wildcard match, use %. */
   namePattern?: string;
   /** A JSON array containing the GUIDs of the metadata objects that you want to fetch. */
@@ -61,14 +61,14 @@ export interface ApiRestV2MetadataHeadersRequest {
   ownedBy?: NameAndIdInput[];
 }
 
-export const apiRestV2MetadataHeadersRequestSchema: Schema<ApiRestV2MetadataHeadersRequest> = object(
+export const apiRestV2MetadataHeaderSearchRequestSchema: Schema<ApiRestV2MetadataHeaderSearchRequest> = object(
   {
     outputFields: ['outputFields', optional(array(string()))],
     offset: ['offset', optional(string())],
     batchSize: ['batchSize', optional(string())],
     sortBy: ['sortBy', optional(sortByEnumSchema)],
     sortOrder: ['sortOrder', optional(sortOrderEnumSchema)],
-    type: ['type', type8EnumSchema],
+    type: ['type', type9EnumSchema],
     namePattern: ['namePattern', optional(string())],
     fetchId: ['fetchId', optional(array(string()))],
     skipId: ['skipId', optional(array(string()))],

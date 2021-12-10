@@ -1,7 +1,7 @@
 
 # Type 9 Enum
 
-Type of the metadata object being searched. Valid values
+Type of the metadata object being searched.
 
 ## Enumeration
 
@@ -13,8 +13,18 @@ Type of the metadata object being searched. Valid values
 |  --- |
 | `ANSWER` |
 | `LIVEBOARD` |
-| `DATAOBJECT` |
-| `COLUMN` |
+| `DATAOBJECTALL` |
+| `DATAOBJECTWORKSHEET` |
+| `DATAOBJECTTABLE` |
+| `DATAOBJECTUSERDEFINED` |
+| `DATAOBJECTVIEW` |
+| `DATAOBJECTCALENDARTABLE` |
+| `COLUMNALL` |
+| `COLUMNWORKSHEET` |
+| `COLUMNTABLE` |
+| `COLUMNUSERDEFINED` |
+| `COLUMNVIEW` |
+| `COLUMNCALENDARTABLE` |
 | `JOIN` |
 | `CONNECTION` |
 | `TAG` |

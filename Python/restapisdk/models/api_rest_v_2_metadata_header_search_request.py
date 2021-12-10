@@ -11,9 +11,9 @@ from restapisdk.models.name_and_id_input import NameAndIdInput
 from restapisdk.models.tag_name_and_id_input import TagNameAndIdInput
 
 
-class ApiRestV2MetadataHeadersRequest(object):
+class ApiRestV2MetadataHeaderSearchRequest(object):
 
-    """Implementation of the 'Api Rest V2 Metadata Headers Request' model.
+    """Implementation of the 'Api Rest V2 Metadata Header Search Request' model.
 
     TODO: type model description here.
 
@@ -30,7 +30,7 @@ class ApiRestV2MetadataHeadersRequest(object):
         sort_by (SortByEnum): Field based on which the response needs to be
             ordered.
         sort_order (SortOrderEnum): Order in which sortBy should be applied.
-        mtype (Type8Enum): Type of the metadata object being searched.
+        mtype (Type9Enum): Type of the metadata object being searched.
         name_pattern (string): A pattern to match the name of the metadata
             object. This parameter supports matching case-insensitive strings.
             For a wildcard match, use %.
@@ -111,7 +111,7 @@ class ApiRestV2MetadataHeadersRequest(object):
                  created_by=None,
                  last_modified_by=None,
                  owned_by=None):
-        """Constructor for the ApiRestV2MetadataHeadersRequest class"""
+        """Constructor for the ApiRestV2MetadataHeaderSearchRequest class"""
 
         # Initialize members of the class
         self.output_fields = output_fields

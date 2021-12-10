@@ -12,10 +12,10 @@ import com.fasterxml.jackson.annotation.JsonSetter;
 import java.util.List;
 
 /**
- * This is a model class for ApiRestV2DependencyRequest type.
+ * This is a model class for ApiRestV2MetadataDependencyRequest type.
  */
-public class ApiRestV2DependencyRequest {
-    private Type10Enum type;
+public class ApiRestV2MetadataDependencyRequest {
+    private Type8Enum type;
     private List<String> id;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Integer batchSize;
@@ -23,17 +23,17 @@ public class ApiRestV2DependencyRequest {
     /**
      * Default constructor.
      */
-    public ApiRestV2DependencyRequest() {
+    public ApiRestV2MetadataDependencyRequest() {
     }
 
     /**
      * Initialization constructor.
-     * @param  type  Type10Enum value for type.
+     * @param  type  Type8Enum value for type.
      * @param  id  List of String value for id.
      * @param  batchSize  Integer value for batchSize.
      */
-    public ApiRestV2DependencyRequest(
-            Type10Enum type,
+    public ApiRestV2MetadataDependencyRequest(
+            Type8Enum type,
             List<String> id,
             Integer batchSize) {
         this.type = type;
@@ -44,20 +44,20 @@ public class ApiRestV2DependencyRequest {
     /**
      * Getter for Type.
      * Type of the data object
-     * @return Returns the Type10Enum
+     * @return Returns the Type8Enum
      */
     @JsonGetter("type")
-    public Type10Enum getType() {
+    public Type8Enum getType() {
         return type;
     }
 
     /**
      * Setter for Type.
      * Type of the data object
-     * @param type Value for Type10Enum
+     * @param type Value for Type8Enum
      */
     @JsonSetter("type")
-    public void setType(Type10Enum type) {
+    public void setType(Type8Enum type) {
         this.type = type;
     }
 
@@ -106,19 +106,19 @@ public class ApiRestV2DependencyRequest {
     }
 
     /**
-     * Converts this ApiRestV2DependencyRequest into string format.
+     * Converts this ApiRestV2MetadataDependencyRequest into string format.
      * @return String representation of this class
      */
     @Override
     public String toString() {
-        return "ApiRestV2DependencyRequest [" + "type=" + type + ", id=" + id + ", batchSize="
-                + batchSize + "]";
+        return "ApiRestV2MetadataDependencyRequest [" + "type=" + type + ", id=" + id
+                + ", batchSize=" + batchSize + "]";
     }
 
     /**
-     * Builds a new {@link ApiRestV2DependencyRequest.Builder} object.
+     * Builds a new {@link ApiRestV2MetadataDependencyRequest.Builder} object.
      * Creates the instance with the state of the current model.
-     * @return a new {@link ApiRestV2DependencyRequest.Builder} object
+     * @return a new {@link ApiRestV2MetadataDependencyRequest.Builder} object
      */
     public Builder toBuilder() {
         Builder builder = new Builder(type, id)
@@ -127,10 +127,10 @@ public class ApiRestV2DependencyRequest {
     }
 
     /**
-     * Class to build instances of {@link ApiRestV2DependencyRequest}.
+     * Class to build instances of {@link ApiRestV2MetadataDependencyRequest}.
      */
     public static class Builder {
-        private Type10Enum type;
+        private Type8Enum type;
         private List<String> id;
         private Integer batchSize;
 
@@ -142,20 +142,20 @@ public class ApiRestV2DependencyRequest {
 
         /**
          * Initialization constructor.
-         * @param  type  Type10Enum value for type.
+         * @param  type  Type8Enum value for type.
          * @param  id  List of String value for id.
          */
-        public Builder(Type10Enum type, List<String> id) {
+        public Builder(Type8Enum type, List<String> id) {
             this.type = type;
             this.id = id;
         }
 
         /**
          * Setter for type.
-         * @param  type  Type10Enum value for type.
+         * @param  type  Type8Enum value for type.
          * @return Builder
          */
-        public Builder type(Type10Enum type) {
+        public Builder type(Type8Enum type) {
             this.type = type;
             return this;
         }
@@ -181,11 +181,11 @@ public class ApiRestV2DependencyRequest {
         }
 
         /**
-         * Builds a new {@link ApiRestV2DependencyRequest} object using the set fields.
-         * @return {@link ApiRestV2DependencyRequest}
+         * Builds a new {@link ApiRestV2MetadataDependencyRequest} object using the set fields.
+         * @return {@link ApiRestV2MetadataDependencyRequest}
          */
-        public ApiRestV2DependencyRequest build() {
-            return new ApiRestV2DependencyRequest(type, id, batchSize);
+        public ApiRestV2MetadataDependencyRequest build() {
+            return new ApiRestV2MetadataDependencyRequest(type, id, batchSize);
         }
     }
 }

@@ -5,5 +5,4 @@ __all__ = [
     'group_controller',
     'metadata_controller',
     'database_controller',
-    'dependency_controller',
 ]

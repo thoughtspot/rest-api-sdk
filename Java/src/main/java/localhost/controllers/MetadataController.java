@@ -24,10 +24,10 @@ import localhost.http.client.HttpContext;
 import localhost.http.request.HttpRequest;
 import localhost.http.response.HttpResponse;
 import localhost.http.response.HttpStringResponse;
-import localhost.models.ApiRestV2MetadataDetailsRequest;
+import localhost.models.ApiRestV2MetadataDependencyRequest;
 import localhost.models.ApiRestV2MetadataFavoriteAssignRequest;
 import localhost.models.ApiRestV2MetadataFavoriteUnassignRequest;
-import localhost.models.ApiRestV2MetadataHeadersRequest;
+import localhost.models.ApiRestV2MetadataHeaderSearchRequest;
 import localhost.models.ApiRestV2MetadataHomeliveboardAssignRequest;
 import localhost.models.ApiRestV2MetadataHomeliveboardUnassignRequest;
 import localhost.models.ApiRestV2MetadataTagAssignRequest;
@@ -38,6 +38,7 @@ import localhost.models.ApiRestV2MetadataTmlExportRequest;
 import localhost.models.ApiRestV2MetadataTmlImportRequest;
 import localhost.models.HomeLiveboardResponse;
 import localhost.models.MetadataTagResponse;
+import localhost.models.Type10Enum;
 
 /**
  * This class lists all the endpoints of the groups.
@@ -457,6 +458,117 @@ public final class MetadataController extends BaseController {
         //extract result from the http response
         String responseBody = ((HttpStringResponse) response).getBody();
         boolean result = Boolean.parseBoolean(responseBody);
+
+        return result;
+    }
+
+    /**
+     * To query the details of dependent objects and associate objects as dependents, you can use
+     * this API. Dependency is defined as relation between referenced and referencing objects. A
+     * referencing object is said to have a dependency on a referenced object, if the referenced
+     * object cannot be deleted without first deleting the referencing object. For example, consider
+     * a worksheet W1 that has a derived logical column C1 that has a reference to a base logical
+     * column C2. This can be shown diagramatically as: W1--&gt;C1--&gt;C2. W1 has a dependency on C2 i.e.
+     * W1 is a referencing object and C2 is a referenced object. It is not possible to delete C2
+     * without first deleting W1 because deletion of C2 will be prevented by the relationship
+     * between W1s column C1 and C2. Similarly C1 is said to have a dependency on C2 i.e. C1 is a
+     * referencing object and C2 is a referenced object. It is not possible to delete C2 without
+     * first deleting C1.
+     * @param  body  Required parameter: Example:
+     * @return    Returns the Object response from the API call
+     * @throws    ApiException    Represents error response from the server.
+     * @throws    IOException    Signals that an I/O exception of some sort has occurred.
+     */
+    public Object getObjectDependency(
+            final ApiRestV2MetadataDependencyRequest body) throws ApiException, IOException {
+        HttpRequest request = buildGetObjectDependencyRequest(body);
+        authManagers.get("global").apply(request);
+
+        HttpResponse response = getClientInstance().execute(request, false);
+        HttpContext context = new HttpContext(request, response);
+
+        return handleGetObjectDependencyResponse(context);
+    }
+
+    /**
+     * To query the details of dependent objects and associate objects as dependents, you can use
+     * this API. Dependency is defined as relation between referenced and referencing objects. A
+     * referencing object is said to have a dependency on a referenced object, if the referenced
+     * object cannot be deleted without first deleting the referencing object. For example, consider
+     * a worksheet W1 that has a derived logical column C1 that has a reference to a base logical
+     * column C2. This can be shown diagramatically as: W1--&gt;C1--&gt;C2. W1 has a dependency on C2 i.e.
+     * W1 is a referencing object and C2 is a referenced object. It is not possible to delete C2
+     * without first deleting W1 because deletion of C2 will be prevented by the relationship
+     * between W1s column C1 and C2. Similarly C1 is said to have a dependency on C2 i.e. C1 is a
+     * referencing object and C2 is a referenced object. It is not possible to delete C2 without
+     * first deleting C1.
+     * @param  body  Required parameter: Example:
+     * @return    Returns the Object response from the API call
+     */
+    public CompletableFuture<Object> getObjectDependencyAsync(
+            final ApiRestV2MetadataDependencyRequest body) {
+        return makeHttpCallAsync(() -> buildGetObjectDependencyRequest(body),
+            req -> authManagers.get("global").applyAsync(req)
+                .thenCompose(request -> getClientInstance()
+                        .executeAsync(request, false)),
+            context -> handleGetObjectDependencyResponse(context));
+    }
+
+    /**
+     * Builds the HttpRequest object for getObjectDependency.
+     */
+    private HttpRequest buildGetObjectDependencyRequest(
+            final ApiRestV2MetadataDependencyRequest body) throws JsonProcessingException {
+        //the base uri for api requests
+        String baseUri = config.getBaseUri();
+
+        //prepare query string for API call
+        final StringBuilder queryBuilder = new StringBuilder(baseUri
+                + "/api/rest/v2/metadata/dependency");
+
+        //load all headers for the outgoing API request
+        Headers headers = new Headers();
+        headers.add("Content-Type", "application/json");
+        headers.add("Accept-Language", config.getAcceptLanguage());
+        headers.add("user-agent", BaseController.userAgent);
+
+        //prepare and invoke the API call request to fetch the response
+        String bodyJson = ApiHelper.serialize(body);
+        HttpRequest request = getClientInstance().postBody(queryBuilder, headers, null, bodyJson);
+
+        // Invoke the callback before request if its not null
+        if (getHttpCallback() != null) {
+            getHttpCallback().onBeforeRequest(request);
+        }
+
+        return request;
+    }
+
+    /**
+     * Processes the response for getObjectDependency.
+     * @return An object of type Object
+     */
+    private Object handleGetObjectDependencyResponse(
+            HttpContext context) throws ApiException, IOException {
+        HttpResponse response = context.getResponse();
+
+        //invoke the callback after response if its not null
+        if (getHttpCallback() != null) {
+            getHttpCallback().onAfterResponse(context);
+        }
+
+        //Error handling using HTTP status codes
+        int responseCode = response.getStatusCode();
+
+        if (responseCode == 500) {
+            throw new ErrorResponseException("Operation failed or unauthorized request", context);
+        }
+        //handle errors defined at the API level
+        validateResponse(response, context);
+
+        //extract result from the http response
+        String responseBody = ((HttpStringResponse) response).getBody();
+        Object result = responseBody;
 
         return result;
     }
@@ -1228,7 +1340,7 @@ public final class MetadataController extends BaseController {
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
     public Object getObjectHeader(
-            final ApiRestV2MetadataHeadersRequest body) throws ApiException, IOException {
+            final ApiRestV2MetadataHeaderSearchRequest body) throws ApiException, IOException {
         HttpRequest request = buildGetObjectHeaderRequest(body);
         authManagers.get("global").apply(request);
 
@@ -1245,7 +1357,7 @@ public final class MetadataController extends BaseController {
      * @return    Returns the Object response from the API call
      */
     public CompletableFuture<Object> getObjectHeaderAsync(
-            final ApiRestV2MetadataHeadersRequest body) {
+            final ApiRestV2MetadataHeaderSearchRequest body) {
         return makeHttpCallAsync(() -> buildGetObjectHeaderRequest(body),
             req -> authManagers.get("global").applyAsync(req)
                 .thenCompose(request -> getClientInstance()
@@ -1257,13 +1369,13 @@ public final class MetadataController extends BaseController {
      * Builds the HttpRequest object for getObjectHeader.
      */
     private HttpRequest buildGetObjectHeaderRequest(
-            final ApiRestV2MetadataHeadersRequest body) throws JsonProcessingException {
+            final ApiRestV2MetadataHeaderSearchRequest body) throws JsonProcessingException {
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/metadata/headers");
+                + "/api/rest/v2/metadata/header/search");
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
@@ -1415,14 +1527,27 @@ public final class MetadataController extends BaseController {
 
     /**
      * Use this endpoint to get full details of metadata objects.
-     * @param  body  Required parameter: Example:
+     * @param  type  Required parameter: Type of the metadata object being searched. Valid values
+     * @param  id  Required parameter: A JSON array of GUIDs of the objects.
+     * @param  showHidden  Optional parameter: When set to true, returns details of the hidden
+     *         objects, such as a column in a worksheet or a table.
+     * @param  dropQuestionDetails  Optional parameter: When set to true, the search assist data
+     *         associated with a worksheet is not included in the API response. This attribute is
+     *         applicable only for LOGICAL_TABLE data type.
+     * @param  version  Optional parameter: Specify the version to retrieve the objects from. By
+     *         default, the API returns metadata for all versions of the object.
      * @return    Returns the Object response from the API call
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
     public Object getObjectDetail(
-            final ApiRestV2MetadataDetailsRequest body) throws ApiException, IOException {
-        HttpRequest request = buildGetObjectDetailRequest(body);
+            final Type10Enum type,
+            final List<String> id,
+            final Boolean showHidden,
+            final Boolean dropQuestionDetails,
+            final String version) throws ApiException, IOException {
+        HttpRequest request = buildGetObjectDetailRequest(type, id, showHidden, dropQuestionDetails,
+                version);
         authManagers.get("global").apply(request);
 
         HttpResponse response = getClientInstance().execute(request, false);
@@ -1433,12 +1558,25 @@ public final class MetadataController extends BaseController {
 
     /**
      * Use this endpoint to get full details of metadata objects.
-     * @param  body  Required parameter: Example:
+     * @param  type  Required parameter: Type of the metadata object being searched. Valid values
+     * @param  id  Required parameter: A JSON array of GUIDs of the objects.
+     * @param  showHidden  Optional parameter: When set to true, returns details of the hidden
+     *         objects, such as a column in a worksheet or a table.
+     * @param  dropQuestionDetails  Optional parameter: When set to true, the search assist data
+     *         associated with a worksheet is not included in the API response. This attribute is
+     *         applicable only for LOGICAL_TABLE data type.
+     * @param  version  Optional parameter: Specify the version to retrieve the objects from. By
+     *         default, the API returns metadata for all versions of the object.
      * @return    Returns the Object response from the API call
      */
     public CompletableFuture<Object> getObjectDetailAsync(
-            final ApiRestV2MetadataDetailsRequest body) {
-        return makeHttpCallAsync(() -> buildGetObjectDetailRequest(body),
+            final Type10Enum type,
+            final List<String> id,
+            final Boolean showHidden,
+            final Boolean dropQuestionDetails,
+            final String version) {
+        return makeHttpCallAsync(() -> buildGetObjectDetailRequest(type, id, showHidden,
+                dropQuestionDetails, version),
             req -> authManagers.get("global").applyAsync(req)
                 .thenCompose(request -> getClientInstance()
                         .executeAsync(request, false)),
@@ -1449,7 +1587,11 @@ public final class MetadataController extends BaseController {
      * Builds the HttpRequest object for getObjectDetail.
      */
     private HttpRequest buildGetObjectDetailRequest(
-            final ApiRestV2MetadataDetailsRequest body) throws JsonProcessingException {
+            final Type10Enum type,
+            final List<String> id,
+            final Boolean showHidden,
+            final Boolean dropQuestionDetails,
+            final String version) {
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 
@@ -1457,15 +1599,24 @@ public final class MetadataController extends BaseController {
         final StringBuilder queryBuilder = new StringBuilder(baseUri
                 + "/api/rest/v2/metadata/details");
 
+        //load all query parameters
+        Map<String, Object> queryParameters = new HashMap<>();
+        queryParameters.put("type",
+                (type != null) ? type.value() : null);
+        queryParameters.put("id", id);
+        queryParameters.put("showHidden", showHidden);
+        queryParameters.put("dropQuestionDetails", dropQuestionDetails);
+        queryParameters.put("version", version);
+
         //load all headers for the outgoing API request
         Headers headers = new Headers();
-        headers.add("Content-Type", "application/json");
+        headers.add("Content-Type", config.getContentType());
         headers.add("Accept-Language", config.getAcceptLanguage());
         headers.add("user-agent", BaseController.userAgent);
 
         //prepare and invoke the API call request to fetch the response
-        String bodyJson = ApiHelper.serialize(body);
-        HttpRequest request = getClientInstance().postBody(queryBuilder, headers, null, bodyJson);
+        HttpRequest request = getClientInstance().get(queryBuilder, headers, queryParameters,
+                null);
 
         // Invoke the callback before request if its not null
         if (getHttpCallback() != null) {

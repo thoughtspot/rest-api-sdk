@@ -12,7 +12,7 @@
 | `name` | `string \| undefined` | Optional | Name of the user. |
 | `id` | `string \| undefined` | Optional | The GUID of the user account to query |
 | `displayName` | `string \| undefined` | Optional | A unique display name string for the user, usually their first and last name. |
-| `visibility` | [`Visibility2Enum \| undefined`](/doc/models/visibility-2-enum.md) | Optional | Visibility of the user. The visibility attribute is set to DEFAULT when creating a user. The DEFAULT attribute makes a user visible to other users and user groups, and thus allows them to share objects.<br>**Default**: `Visibility2Enum.DEFAULT` |
+| `visibility` | [`VisibilityEnum \| undefined`](/doc/models/visibility-enum.md) | Optional | Visibility of the user. The visibility attribute is set to DEFAULT when creating a user. Setting this to DEFAULT makes a user visible to other users and user groups, and thus allows them to share objects<br>**Default**: `VisibilityEnum.DEFAULT` |
 | `mail` | `string \| undefined` | Optional | email of the user account |
 | `groups` | [`GroupNameAndIDInput[] \| undefined`](/doc/models/group-name-and-id-input.md) | Optional | A JSON array of group names or GUIDs or both. When both are given then id is considered |
 | `privileges` | [`PrivilegeEnum[] \| undefined`](/doc/models/privilege-enum.md) | Optional | A JSON array of privileges assigned to the user |

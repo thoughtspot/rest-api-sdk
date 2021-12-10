@@ -22,7 +22,7 @@ public class ApiRestV2UserSearchRequest {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String displayName;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private Visibility2Enum visibility;
+    private VisibilityEnum visibility;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String mail;
     @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -44,7 +44,7 @@ public class ApiRestV2UserSearchRequest {
      * Default constructor.
      */
     public ApiRestV2UserSearchRequest() {
-        visibility = Visibility2Enum.DEFAULT;
+        visibility = VisibilityEnum.DEFAULT;
     }
 
     /**
@@ -52,7 +52,7 @@ public class ApiRestV2UserSearchRequest {
      * @param  name  String value for name.
      * @param  id  String value for id.
      * @param  displayName  String value for displayName.
-     * @param  visibility  Visibility2Enum value for visibility.
+     * @param  visibility  VisibilityEnum value for visibility.
      * @param  mail  String value for mail.
      * @param  groups  List of GroupNameAndIDInput value for groups.
      * @param  privileges  List of PrivilegeEnum value for privileges.
@@ -67,7 +67,7 @@ public class ApiRestV2UserSearchRequest {
             String name,
             String id,
             String displayName,
-            Visibility2Enum visibility,
+            VisibilityEnum visibility,
             String mail,
             List<GroupNameAndIDInput> groups,
             List<PrivilegeEnum> privileges,
@@ -152,25 +152,25 @@ public class ApiRestV2UserSearchRequest {
 
     /**
      * Getter for Visibility.
-     * Visibility of the user. The visibility attribute is set to DEFAULT when creating a user. The
-     * DEFAULT attribute makes a user visible to other users and user groups, and thus allows them
-     * to share objects.
-     * @return Returns the Visibility2Enum
+     * Visibility of the user. The visibility attribute is set to DEFAULT when creating a user.
+     * Setting this to DEFAULT makes a user visible to other users and user groups, and thus allows
+     * them to share objects
+     * @return Returns the VisibilityEnum
      */
     @JsonGetter("visibility")
-    public Visibility2Enum getVisibility() {
+    public VisibilityEnum getVisibility() {
         return visibility;
     }
 
     /**
      * Setter for Visibility.
-     * Visibility of the user. The visibility attribute is set to DEFAULT when creating a user. The
-     * DEFAULT attribute makes a user visible to other users and user groups, and thus allows them
-     * to share objects.
-     * @param visibility Value for Visibility2Enum
+     * Visibility of the user. The visibility attribute is set to DEFAULT when creating a user.
+     * Setting this to DEFAULT makes a user visible to other users and user groups, and thus allows
+     * them to share objects
+     * @param visibility Value for VisibilityEnum
      */
     @JsonSetter("visibility")
-    public void setVisibility(Visibility2Enum visibility) {
+    public void setVisibility(VisibilityEnum visibility) {
         this.visibility = visibility;
     }
 
@@ -386,7 +386,7 @@ public class ApiRestV2UserSearchRequest {
         private String name;
         private String id;
         private String displayName;
-        private Visibility2Enum visibility = Visibility2Enum.DEFAULT;
+        private VisibilityEnum visibility = VisibilityEnum.DEFAULT;
         private String mail;
         private List<GroupNameAndIDInput> groups;
         private List<PrivilegeEnum> privileges;
@@ -430,10 +430,10 @@ public class ApiRestV2UserSearchRequest {
 
         /**
          * Setter for visibility.
-         * @param  visibility  Visibility2Enum value for visibility.
+         * @param  visibility  VisibilityEnum value for visibility.
          * @return Builder
          */
-        public Builder visibility(Visibility2Enum visibility) {
+        public Builder visibility(VisibilityEnum visibility) {
             this.visibility = visibility;
             return this;
         }

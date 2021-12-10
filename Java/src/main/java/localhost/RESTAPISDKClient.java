@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
 import localhost.controllers.DatabaseController;
-import localhost.controllers.DependencyController;
 import localhost.controllers.GroupController;
 import localhost.controllers.MetadataController;
 import localhost.controllers.SessionController;
@@ -37,7 +36,6 @@ public final class RESTAPISDKClient implements Configuration {
     private GroupController group;
     private MetadataController metadata;
     private DatabaseController database;
-    private DependencyController dependency;
 
     /**
      * Current API environment.
@@ -115,8 +113,6 @@ public final class RESTAPISDKClient implements Configuration {
                 this.httpCallback);
         database = new DatabaseController(this, this.httpClient, this.authManagers,
                 this.httpCallback);
-        dependency = new DependencyController(this, this.httpClient, this.authManagers,
-                this.httpCallback);
     }
 
     /**
@@ -164,14 +160,6 @@ public final class RESTAPISDKClient implements Configuration {
      */
     public DatabaseController getDatabaseController() {
         return database;
-    }
-
-    /**
-     * Get the instance of DependencyController.
-     * @return dependency
-     */
-    public DependencyController getDependencyController() {
-        return dependency;
     }
 
     /**

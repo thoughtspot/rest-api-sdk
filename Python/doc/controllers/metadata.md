@@ -14,6 +14,7 @@ metadata_controller = client.metadata
 * [Create Tag](/doc/controllers/metadata.md#create-tag)
 * [Update Tag](/doc/controllers/metadata.md#update-tag)
 * [Delete Tag](/doc/controllers/metadata.md#delete-tag)
+* [Get Object Dependency](/doc/controllers/metadata.md#get-object-dependency)
 * [Assign Tag](/doc/controllers/metadata.md#assign-tag)
 * [Unassign Tag](/doc/controllers/metadata.md#unassign-tag)
 * [Assign Favorite](/doc/controllers/metadata.md#assign-favorite)
@@ -157,6 +158,42 @@ def delete_tag(self,
 
 ```python
 result = metadata_controller.delete_tag()
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+
+
+# Get Object Dependency
+
+To query the details of dependent objects and associate objects as dependents, you can use this API. Dependency is defined as relation between referenced and referencing objects. A referencing object is said to have a dependency on a referenced object, if the referenced object cannot be deleted without first deleting the referencing object. For example, consider a worksheet W1 that has a derived logical column C1 that has a reference to a base logical column C2. This can be shown diagramatically as: W1-->C1-->C2. W1 has a dependency on C2 i.e. W1 is a referencing object and C2 is a referenced object. It is not possible to delete C2 without first deleting W1 because deletion of C2 will be prevented by the relationship between W1s column C1 and C2. Similarly C1 is said to have a dependency on C2 i.e. C1 is a referencing object and C2 is a referenced object. It is not possible to delete C2 without first deleting C1
+
+```python
+def get_object_dependency(self,
+                         body)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`ApiRestV2MetadataDependencyRequest`](/doc/models/api-rest-v2-metadata-dependency-request.md) | Body, Required | - |
+
+## Response Type
+
+`object`
+
+## Example Usage
+
+```python
+body = ApiRestV2MetadataDependencyRequest()
+body.mtype = Type8Enum.COLUMN
+body.id = ['id6', 'id7']
+
+result = metadata_controller.get_object_dependency(body)
 ```
 
 ## Errors
@@ -482,7 +519,7 @@ def get_object_header(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2MetadataHeadersRequest`](/doc/models/api-rest-v2-metadata-headers-request.md) | Body, Required | - |
+| `body` | [`ApiRestV2MetadataHeaderSearchRequest`](/doc/models/api-rest-v2-metadata-header-search-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -491,8 +528,8 @@ def get_object_header(self,
 ## Example Usage
 
 ```python
-body = ApiRestV2MetadataHeadersRequest()
-body.mtype = Type8Enum.USER
+body = ApiRestV2MetadataHeaderSearchRequest()
+body.mtype = Type9Enum.USER
 
 result = metadata_controller.get_object_header(body)
 ```
@@ -544,14 +581,22 @@ Use this endpoint to get full details of metadata objects
 
 ```python
 def get_object_detail(self,
-                     body)
+                     mtype,
+                     id,
+                     show_hidden=None,
+                     drop_question_details=None,
+                     version=None)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2MetadataDetailsRequest`](/doc/models/api-rest-v2-metadata-details-request.md) | Body, Required | - |
+| `mtype` | [`Type10Enum`](/doc/models/type-10-enum.md) | Query, Required | Type of the metadata object being searched. Valid values |
+| `id` | `List of string` | Query, Required | A JSON array of GUIDs of the objects. |
+| `show_hidden` | `bool` | Query, Optional | When set to true, returns details of the hidden objects, such as a column in a worksheet or a table. |
+| `drop_question_details` | `bool` | Query, Optional | When set to true, the search assist data associated with a worksheet is not included in the API response. This attribute is applicable only for LOGICAL_TABLE data type. |
+| `version` | `string` | Query, Optional | Specify the version to retrieve the objects from. By default, the API returns metadata for all versions of the object. |
 
 ## Response Type
 
@@ -560,11 +605,10 @@ def get_object_detail(self,
 ## Example Usage
 
 ```python
-body = ApiRestV2MetadataDetailsRequest()
-body.mtype = Type9Enum.USER
-body.id = ['id6', 'id7']
+mtype = Type10Enum.DATAOBJECT
+id = ['id0']
 
-result = metadata_controller.get_object_detail(body)
+result = metadata_controller.get_object_detail(mtype, id)
 ```
 
 ## Errors

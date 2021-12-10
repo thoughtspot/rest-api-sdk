@@ -14,6 +14,7 @@ const metadataController = new MetadataController(client);
 * [Create Tag](/doc/controllers/metadata.md#create-tag)
 * [Update Tag](/doc/controllers/metadata.md#update-tag)
 * [Delete Tag](/doc/controllers/metadata.md#delete-tag)
+* [Get Object Dependency](/doc/controllers/metadata.md#get-object-dependency)
 * [Assign Tag](/doc/controllers/metadata.md#assign-tag)
 * [Unassign Tag](/doc/controllers/metadata.md#unassign-tag)
 * [Assign Favorite](/doc/controllers/metadata.md#assign-favorite)
@@ -200,6 +201,57 @@ async deleteTag(
 ```ts
 try {
   const { result, ...httpResponse } = await metadataController.deleteTag();
+  // Get more response info...
+  // const { statusCode, headers } = httpResponse;
+} catch(error) {
+  if (error instanceof ApiError) {
+    const errors = error.result;
+    // const { statusCode, headers } = error;
+  }
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+
+
+# Get Object Dependency
+
+To query the details of dependent objects and associate objects as dependents, you can use this API. Dependency is defined as relation between referenced and referencing objects. A referencing object is said to have a dependency on a referenced object, if the referenced object cannot be deleted without first deleting the referencing object. For example, consider a worksheet W1 that has a derived logical column C1 that has a reference to a base logical column C2. This can be shown diagramatically as: W1-->C1-->C2. W1 has a dependency on C2 i.e. W1 is a referencing object and C2 is a referenced object. It is not possible to delete C2 without first deleting W1 because deletion of C2 will be prevented by the relationship between W1s column C1 and C2. Similarly C1 is said to have a dependency on C2 i.e. C1 is a referencing object and C2 is a referenced object. It is not possible to delete C2 without first deleting C1
+
+```ts
+async getObjectDependency(
+  body: ApiRestV2MetadataDependencyRequest,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<unknown>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`ApiRestV2MetadataDependencyRequest`](/doc/models/api-rest-v2-metadata-dependency-request.md) | Body, Required | - |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+`unknown`
+
+## Example Usage
+
+```ts
+const contentType = null;
+const bodyId: string[] = ['id6', 'id7'];
+const body: ApiRestV2MetadataDependencyRequest = {
+  type: 'COLUMN',
+  id: bodyId,
+};
+
+try {
+  const { result, ...httpResponse } = await metadataController.getObjectDependency(body);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch(error) {
@@ -665,7 +717,7 @@ To get header details for metadata objects, use this endpoint. You can provide a
 
 ```ts
 async getObjectHeader(
-  body: ApiRestV2MetadataHeadersRequest,
+  body: ApiRestV2MetadataHeaderSearchRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<unknown>>
 ```
@@ -674,7 +726,7 @@ async getObjectHeader(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2MetadataHeadersRequest`](/doc/models/api-rest-v2-metadata-headers-request.md) | Body, Required | - |
+| `body` | [`ApiRestV2MetadataHeaderSearchRequest`](/doc/models/api-rest-v2-metadata-header-search-request.md) | Body, Required | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -685,7 +737,7 @@ async getObjectHeader(
 
 ```ts
 const contentType = null;
-const body: ApiRestV2MetadataHeadersRequest = {
+const body: ApiRestV2MetadataHeaderSearchRequest = {
   type: 'USER',
 };
 
@@ -759,7 +811,11 @@ Use this endpoint to get full details of metadata objects
 
 ```ts
 async getObjectDetail(
-  body: ApiRestV2MetadataDetailsRequest,
+  type: Type10Enum,
+  id: string[],
+  showHidden?: boolean,
+  dropQuestionDetails?: boolean,
+  version?: string,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<unknown>>
 ```
@@ -768,7 +824,11 @@ async getObjectDetail(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2MetadataDetailsRequest`](/doc/models/api-rest-v2-metadata-details-request.md) | Body, Required | - |
+| `type` | [`Type10Enum`](/doc/models/type-10-enum.md) | Query, Required | Type of the metadata object being searched. Valid values |
+| `id` | `string[]` | Query, Required | A JSON array of GUIDs of the objects. |
+| `showHidden` | `boolean \| undefined` | Query, Optional | When set to true, returns details of the hidden objects, such as a column in a worksheet or a table. |
+| `dropQuestionDetails` | `boolean \| undefined` | Query, Optional | When set to true, the search assist data associated with a worksheet is not included in the API response. This attribute is applicable only for LOGICAL_TABLE data type. |
+| `version` | `string \| undefined` | Query, Optional | Specify the version to retrieve the objects from. By default, the API returns metadata for all versions of the object. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -778,15 +838,10 @@ async getObjectDetail(
 ## Example Usage
 
 ```ts
-const contentType = null;
-const bodyId: string[] = ['id6', 'id7'];
-const body: ApiRestV2MetadataDetailsRequest = {
-  type: 'USER',
-  id: bodyId,
-};
-
+const type = 'DATAOBJECT';
+const Id: string[] = ['id0'];
 try {
-  const { result, ...httpResponse } = await metadataController.getObjectDetail(body);
+  const { result, ...httpResponse } = await metadataController.getObjectDetail(type, id);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch(error) {

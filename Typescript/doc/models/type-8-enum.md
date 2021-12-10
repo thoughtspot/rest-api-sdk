@@ -1,7 +1,7 @@
 
 # Type 8 Enum
 
-Type of the metadata object being searched.
+Type of the data object
 
 ## Enumeration
 
@@ -11,23 +11,8 @@ Type of the metadata object being searched.
 
 | Name |
 |  --- |
-| `aNSWER` |
 | `lIVEBOARD` |
-| `dATAOBJECTALL` |
-| `dATAOBJECTWORKSHEET` |
-| `dATAOBJECTTABLE` |
-| `dATAOBJECTUSERDEFINED` |
-| `dATAOBJECTVIEW` |
-| `dATAOBJECTCALENDARTABLE` |
-| `cOLUMNALL` |
-| `cOLUMNWORKSHEET` |
-| `cOLUMNTABLE` |
-| `cOLUMNUSERDEFINED` |
-| `cOLUMNVIEW` |
-| `cOLUMNCALENDARTABLE` |
+| `dATAOBJECT` |
+| `cOLUMN` |
 | `jOIN` |
-| `cONNECTION` |
-| `tAG` |
-| `uSER` |
-| `uSERGROUP` |
 

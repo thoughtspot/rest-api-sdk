@@ -12,9 +12,9 @@ import com.fasterxml.jackson.annotation.JsonSetter;
 import java.util.List;
 
 /**
- * This is a model class for ApiRestV2MetadataHeadersRequest type.
+ * This is a model class for ApiRestV2MetadataHeaderSearchRequest type.
  */
-public class ApiRestV2MetadataHeadersRequest {
+public class ApiRestV2MetadataHeaderSearchRequest {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<String> outputFields;
     @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -25,7 +25,7 @@ public class ApiRestV2MetadataHeadersRequest {
     private SortByEnum sortBy;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private SortOrderEnum sortOrder;
-    private Type8Enum type;
+    private Type9Enum type;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String namePattern;
     @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -52,7 +52,7 @@ public class ApiRestV2MetadataHeadersRequest {
     /**
      * Default constructor.
      */
-    public ApiRestV2MetadataHeadersRequest() {
+    public ApiRestV2MetadataHeaderSearchRequest() {
         offset = "0";
         sortBy = SortByEnum.DEFAULT;
         sortOrder = SortOrderEnum.DEFAULT;
@@ -61,7 +61,7 @@ public class ApiRestV2MetadataHeadersRequest {
 
     /**
      * Initialization constructor.
-     * @param  type  Type8Enum value for type.
+     * @param  type  Type9Enum value for type.
      * @param  outputFields  List of String value for outputFields.
      * @param  offset  String value for offset.
      * @param  batchSize  String value for batchSize.
@@ -79,8 +79,8 @@ public class ApiRestV2MetadataHeadersRequest {
      * @param  lastModifiedBy  List of NameAndIdInput value for lastModifiedBy.
      * @param  ownedBy  List of NameAndIdInput value for ownedBy.
      */
-    public ApiRestV2MetadataHeadersRequest(
-            Type8Enum type,
+    public ApiRestV2MetadataHeaderSearchRequest(
+            Type9Enum type,
             List<String> outputFields,
             String offset,
             String batchSize,
@@ -225,20 +225,20 @@ public class ApiRestV2MetadataHeadersRequest {
     /**
      * Getter for Type.
      * Type of the metadata object being searched.
-     * @return Returns the Type8Enum
+     * @return Returns the Type9Enum
      */
     @JsonGetter("type")
-    public Type8Enum getType() {
+    public Type9Enum getType() {
         return type;
     }
 
     /**
      * Setter for Type.
      * Type of the metadata object being searched.
-     * @param type Value for Type8Enum
+     * @param type Value for Type9Enum
      */
     @JsonSetter("type")
-    public void setType(Type8Enum type) {
+    public void setType(Type9Enum type) {
         this.type = type;
     }
 
@@ -491,12 +491,12 @@ public class ApiRestV2MetadataHeadersRequest {
     }
 
     /**
-     * Converts this ApiRestV2MetadataHeadersRequest into string format.
+     * Converts this ApiRestV2MetadataHeaderSearchRequest into string format.
      * @return String representation of this class
      */
     @Override
     public String toString() {
-        return "ApiRestV2MetadataHeadersRequest [" + "type=" + type + ", outputFields="
+        return "ApiRestV2MetadataHeaderSearchRequest [" + "type=" + type + ", outputFields="
                 + outputFields + ", offset=" + offset + ", batchSize=" + batchSize + ", sortBy="
                 + sortBy + ", sortOrder=" + sortOrder + ", namePattern=" + namePattern
                 + ", fetchId=" + fetchId + ", skipId=" + skipId + ", showHidden=" + showHidden
@@ -506,9 +506,9 @@ public class ApiRestV2MetadataHeadersRequest {
     }
 
     /**
-     * Builds a new {@link ApiRestV2MetadataHeadersRequest.Builder} object.
+     * Builds a new {@link ApiRestV2MetadataHeaderSearchRequest.Builder} object.
      * Creates the instance with the state of the current model.
-     * @return a new {@link ApiRestV2MetadataHeadersRequest.Builder} object
+     * @return a new {@link ApiRestV2MetadataHeaderSearchRequest.Builder} object
      */
     public Builder toBuilder() {
         Builder builder = new Builder(type)
@@ -532,10 +532,10 @@ public class ApiRestV2MetadataHeadersRequest {
     }
 
     /**
-     * Class to build instances of {@link ApiRestV2MetadataHeadersRequest}.
+     * Class to build instances of {@link ApiRestV2MetadataHeaderSearchRequest}.
      */
     public static class Builder {
-        private Type8Enum type;
+        private Type9Enum type;
         private List<String> outputFields;
         private String offset = "0";
         private String batchSize;
@@ -561,18 +561,18 @@ public class ApiRestV2MetadataHeadersRequest {
 
         /**
          * Initialization constructor.
-         * @param  type  Type8Enum value for type.
+         * @param  type  Type9Enum value for type.
          */
-        public Builder(Type8Enum type) {
+        public Builder(Type9Enum type) {
             this.type = type;
         }
 
         /**
          * Setter for type.
-         * @param  type  Type8Enum value for type.
+         * @param  type  Type9Enum value for type.
          * @return Builder
          */
-        public Builder type(Type8Enum type) {
+        public Builder type(Type9Enum type) {
             this.type = type;
             return this;
         }
@@ -738,11 +738,11 @@ public class ApiRestV2MetadataHeadersRequest {
         }
 
         /**
-         * Builds a new {@link ApiRestV2MetadataHeadersRequest} object using the set fields.
-         * @return {@link ApiRestV2MetadataHeadersRequest}
+         * Builds a new {@link ApiRestV2MetadataHeaderSearchRequest} object using the set fields.
+         * @return {@link ApiRestV2MetadataHeaderSearchRequest}
          */
-        public ApiRestV2MetadataHeadersRequest build() {
-            return new ApiRestV2MetadataHeadersRequest(type, outputFields, offset, batchSize,
+        public ApiRestV2MetadataHeaderSearchRequest build() {
+            return new ApiRestV2MetadataHeaderSearchRequest(type, outputFields, offset, batchSize,
                     sortBy, sortOrder, namePattern, fetchId, skipId, showHidden, autoCreated,
                     accessLevel, tag, favoriteFor, createdBy, lastModifiedBy, ownedBy);
         }

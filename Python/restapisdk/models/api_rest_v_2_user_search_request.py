@@ -20,10 +20,10 @@ class ApiRestV2UserSearchRequest(object):
         id (string): The GUID of the user account to query
         display_name (string): A unique display name string for the user,
             usually their first and last name.
-        visibility (Visibility2Enum): Visibility of the user. The visibility
-            attribute is set to DEFAULT when creating a user. The DEFAULT
-            attribute makes a user visible to other users and user groups, and
-            thus allows them to share objects.
+        visibility (VisibilityEnum): Visibility of the user. The visibility
+            attribute is set to DEFAULT when creating a user. Setting this to
+            DEFAULT makes a user visible to other users and user groups, and
+            thus allows them to share objects
         mail (string): email of the user account
         groups (list of GroupNameAndIDInput): A JSON array of group names or
             GUIDs or both. When both are given then id is considered

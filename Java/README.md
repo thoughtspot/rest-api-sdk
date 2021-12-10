@@ -110,27 +110,9 @@ RESTAPISDKClient client = new RESTAPISDKClient.Builder()
 
 This API uses `OAuth 2 Bearer token`.
 
-## List of APIs
+## Guide
+[API Reference](https://github.com/thoughtspot/rest-api-sdk/blob/main/Java/doc/README.md)
 
-* [Session](/doc/controllers/session.md)
-* [User](/doc/controllers/user.md)
-* [Group](/doc/controllers/group.md)
-* [Metadata](/doc/controllers/metadata.md)
-* [Database](/doc/controllers/database.md)
-* [Dependency](/doc/controllers/dependency.md)
-
-## Classes Documentation
-
-* [Utility Classes](/doc/utility-classes.md)
-* [HttpRequest](/doc/http-request.md)
-* [HttpResponse](/doc/http-response.md)
-* [HttpStringResponse](/doc/http-string-response.md)
-* [HttpContext](/doc/http-context.md)
-* [HttpBodyRequest](/doc/http-body-request.md)
-* [HttpCallback Interface](/doc/http-callback-interface.md)
-* [Headers](/doc/headers.md)
-* [ApiException](/doc/api-exception.md)
-* [Configuration Interface](/doc/configuration-interface.md)
-* [HttpClientConfiguration](/doc/http-client-configuration.md)
-* [HttpClientConfiguration.Builder](/doc/http-client-configuration-builder.md)
+## Live Playground
+We recommend that you browse through the [code playground](https://try-everywhere.thoughtspot.cloud/v2/#/everywhere/api/rest/playgroundV2) before you start constructing your API requests. The playground offers an interactive portal with comprehensive information about the API endpoints, request and response workflows.
 

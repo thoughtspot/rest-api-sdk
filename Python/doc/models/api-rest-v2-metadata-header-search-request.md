@@ -1,9 +1,9 @@
 
-# Api Rest V2 Metadata Headers Request
+# Api Rest V2 Metadata Header Search Request
 
 ## Structure
 
-`ApiRestV2MetadataHeadersRequest`
+`ApiRestV2MetadataHeaderSearchRequest`
 
 ## Fields
 
@@ -14,7 +14,7 @@
 | `batch_size` | `string` | Optional | The number of records that should be included in the response starting from offset position. If no input is provided, then all records starting from the value provided in offset is included in the response. |
 | `sort_by` | [`SortByEnum`](/doc/models/sort-by-enum.md) | Optional | Field based on which the response needs to be ordered.<br>**Default**: `'DEFAULT'` |
 | `sort_order` | [`SortOrderEnum`](/doc/models/sort-order-enum.md) | Optional | Order in which sortBy should be applied.<br>**Default**: `'DEFAULT'` |
-| `mtype` | [`Type8Enum`](/doc/models/type-8-enum.md) | Required | Type of the metadata object being searched. |
+| `mtype` | [`Type9Enum`](/doc/models/type-9-enum.md) | Required | Type of the metadata object being searched. |
 | `name_pattern` | `string` | Optional | A pattern to match the name of the metadata object. This parameter supports matching case-insensitive strings. For a wildcard match, use %. |
 | `fetch_id` | `List of string` | Optional | A JSON array containing the GUIDs of the metadata objects that you want to fetch. |
 | `skip_id` | `List of string` | Optional | A JSON array containing the GUIDs of the metadata objects that you want to skip. |

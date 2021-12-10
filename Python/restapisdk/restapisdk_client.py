@@ -15,7 +15,6 @@ from restapisdk.controllers.user_controller import UserController
 from restapisdk.controllers.group_controller import GroupController
 from restapisdk.controllers.metadata_controller import MetadataController
 from restapisdk.controllers.database_controller import DatabaseController
-from restapisdk.controllers.dependency_controller import DependencyController
 
 
 class RestapisdkClient(object):
@@ -39,10 +38,6 @@ class RestapisdkClient(object):
     @lazy_property
     def database(self):
         return DatabaseController(self.config)
-
-    @lazy_property
-    def dependency(self):
-        return DependencyController(self.config)
 
     def __init__(self, http_client_instance=None,
                  override_http_client_configuration=False, timeout=60,
