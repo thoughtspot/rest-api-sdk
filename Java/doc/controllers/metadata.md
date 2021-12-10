@@ -10,7 +10,7 @@ MetadataController metadataController = client.getMetadataController();
 
 ## Methods
 
-* [Get Tag](/doc/controllers/metadata.md#get-tag)
+* [Get Tag](doc/controllers/metadata.md#get-tag)
 * [Create Tag](/doc/controllers/metadata.md#create-tag)
 * [Update Tag](/doc/controllers/metadata.md#update-tag)
 * [Delete Tag](/doc/controllers/metadata.md#delete-tag)
