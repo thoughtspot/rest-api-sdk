@@ -10,15 +10,10 @@ import { Schema, stringEnum } from '../schema';
  * Enum for Type10Enum
  */
 export enum Type10Enum {
-  ANSWER = 'ANSWER',
   LIVEBOARD = 'LIVEBOARD',
   DATAOBJECT = 'DATAOBJECT',
   COLUMN = 'COLUMN',
   JOIN = 'JOIN',
-  CONNECTION = 'CONNECTION',
-  TAG = 'TAG',
-  USER = 'USER',
-  USERGROUP = 'USER_GROUP',
 }
 
 /**

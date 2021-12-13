@@ -235,67 +235,6 @@ class MetadataController(BaseController):
 
         return decoded
 
-    def get_object_dependency(self,
-                              body):
-        """Does a POST request to /api/rest/v2/metadata/dependency.
-
-        To query the details of dependent objects and associate objects as
-        dependents, you can use this API. Dependency is defined as relation
-        between referenced and referencing objects. A referencing object is
-        said to have a dependency on a referenced object, if the referenced
-        object cannot be deleted without first deleting the referencing
-        object. For example, consider a worksheet W1 that has a derived
-        logical column C1 that has a reference to a base logical column C2.
-        This can be shown diagramatically as: W1-->C1-->C2. W1 has a
-        dependency on C2 i.e. W1 is a referencing object and C2 is a
-        referenced object. It is not possible to delete C2 without first
-        deleting W1 because deletion of C2 will be prevented by the
-        relationship between W1s column C1 and C2. Similarly C1 is said to
-        have a dependency on C2 i.e. C1 is a referencing object and C2 is a
-        referenced object. It is not possible to delete C2 without first
-        deleting C1
-
-        Args:
-            body (ApiRestV2MetadataDependencyRequest): TODO: type description
-                here.
-
-        Returns:
-            object: Response from the API. An object with list of dependent
-                objects grouped based on the type
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        # Prepare query URL
-        _url_path = '/api/rest/v2/metadata/dependency'
-        _query_builder = self.config.get_base_uri()
-        _query_builder += _url_path
-        _query_url = APIHelper.clean_url(_query_builder)
-
-        # Prepare headers
-        _headers = {
-            'Content-Type': 'application/json'
-        }
-
-        # Prepare and execute request
-        _request = self.config.http_client.post(_query_url, headers=_headers, parameters=APIHelper.json_serialize(body))
-        OAuth2.apply(self.config, _request)
-        _response = self.execute_request(_request)
-
-        # Endpoint and global error handling using HTTP status codes.
-        if _response.status_code == 500:
-            raise ErrorResponseException('Operation failed or unauthorized request', _response)
-        self.validate_response(_response)
-
-        decoded = _response.text
-
-        return decoded
-
     def assign_tag(self,
                    body):
         """Does a POST request to /api/rest/v2/metadata/tag/assign.
@@ -694,20 +633,34 @@ class MetadataController(BaseController):
 
         return decoded
 
-    def get_object_header(self,
-                          body):
-        """Does a POST request to /api/rest/v2/metadata/header/search.
+    def get_object_detail(self,
+                          mtype,
+                          id,
+                          show_hidden=None,
+                          drop_question_details=None,
+                          version=None):
+        """Does a GET request to /api/rest/v2/metadata/details.
 
-        To get header details for metadata objects, use this endpoint. You can
-        provide as input selective fields to get the data for.
+        Use this endpoint to get full details of metadata objects
 
         Args:
-            body (ApiRestV2MetadataHeaderSearchRequest): TODO: type
-                description here.
+            mtype (Type8Enum): Type of the metadata object being searched.
+                Valid values
+            id (list of string): A JSON array of GUIDs of the objects.
+            show_hidden (bool, optional): When set to true, returns details of
+                the hidden objects, such as a column in a worksheet or a
+                table.
+            drop_question_details (bool, optional): When set to true, the
+                search assist data associated with a worksheet is not included
+                in the API response. This attribute is applicable only for
+                LOGICAL_TABLE data type.
+            version (string, optional): Specify the version to retrieve the
+                objects from. By default, the API returns metadata for all
+                versions of the object.
 
         Returns:
-            object: Response from the API. Header details based on the search
-                criteria and requested output fields
+            object: Response from the API. Full details of metadata objects
+                searched for
 
         Raises:
             APIException: When an error occurs while fetching the data from
@@ -718,18 +671,29 @@ class MetadataController(BaseController):
         """
 
         # Prepare query URL
-        _url_path = '/api/rest/v2/metadata/header/search'
+        _url_path = '/api/rest/v2/metadata/details'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
+        _query_parameters = {
+            'type': mtype,
+            'id': id,
+            'showHidden': show_hidden,
+            'dropQuestionDetails': drop_question_details,
+            'version': version
+        }
+        _query_builder = APIHelper.append_url_with_query_parameters(
+            _query_builder,
+            _query_parameters
+        )
         _query_url = APIHelper.clean_url(_query_builder)
 
         # Prepare headers
         _headers = {
-            'Content-Type': 'application/json'
+            'Content-Type': self.config.content_type
         }
 
         # Prepare and execute request
-        _request = self.config.http_client.post(_query_url, headers=_headers, parameters=APIHelper.json_serialize(body))
+        _request = self.config.http_client.get(_query_url, headers=_headers)
         OAuth2.apply(self.config, _request)
         _response = self.execute_request(_request)
 
@@ -798,34 +762,20 @@ class MetadataController(BaseController):
 
         return decoded
 
-    def get_object_detail(self,
-                          mtype,
-                          id,
-                          show_hidden=None,
-                          drop_question_details=None,
-                          version=None):
-        """Does a GET request to /api/rest/v2/metadata/details.
+    def search_object_header(self,
+                             body):
+        """Does a POST request to /api/rest/v2/metadata/header/search.
 
-        Use this endpoint to get full details of metadata objects
+        To get header details for metadata objects, use this endpoint. You can
+        provide as input selective fields to get the data for.
 
         Args:
-            mtype (Type10Enum): Type of the metadata object being searched.
-                Valid values
-            id (list of string): A JSON array of GUIDs of the objects.
-            show_hidden (bool, optional): When set to true, returns details of
-                the hidden objects, such as a column in a worksheet or a
-                table.
-            drop_question_details (bool, optional): When set to true, the
-                search assist data associated with a worksheet is not included
-                in the API response. This attribute is applicable only for
-                LOGICAL_TABLE data type.
-            version (string, optional): Specify the version to retrieve the
-                objects from. By default, the API returns metadata for all
-                versions of the object.
+            body (ApiRestV2MetadataHeaderSearchRequest): TODO: type
+                description here.
 
         Returns:
-            object: Response from the API. Full details of metadata objects
-                searched for
+            object: Response from the API. Header details based on the search
+                criteria and requested output fields
 
         Raises:
             APIException: When an error occurs while fetching the data from
@@ -836,29 +786,79 @@ class MetadataController(BaseController):
         """
 
         # Prepare query URL
-        _url_path = '/api/rest/v2/metadata/details'
+        _url_path = '/api/rest/v2/metadata/header/search'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
-        _query_parameters = {
-            'type': mtype,
-            'id': id,
-            'showHidden': show_hidden,
-            'dropQuestionDetails': drop_question_details,
-            'version': version
-        }
-        _query_builder = APIHelper.append_url_with_query_parameters(
-            _query_builder,
-            _query_parameters
-        )
         _query_url = APIHelper.clean_url(_query_builder)
 
         # Prepare headers
         _headers = {
-            'Content-Type': self.config.content_type
+            'Content-Type': 'application/json'
         }
 
         # Prepare and execute request
-        _request = self.config.http_client.get(_query_url, headers=_headers)
+        _request = self.config.http_client.post(_query_url, headers=_headers, parameters=APIHelper.json_serialize(body))
+        OAuth2.apply(self.config, _request)
+        _response = self.execute_request(_request)
+
+        # Endpoint and global error handling using HTTP status codes.
+        if _response.status_code == 500:
+            raise ErrorResponseException('Operation failed or unauthorized request', _response)
+        self.validate_response(_response)
+
+        decoded = _response.text
+
+        return decoded
+
+    def get_object_dependency(self,
+                              body):
+        """Does a POST request to /api/rest/v2/metadata/dependency.
+
+        To query the details of dependent objects and associate objects as
+        dependents, you can use this API. Dependency is defined as relation
+        between referenced and referencing objects. A referencing object is
+        said to have a dependency on a referenced object, if the referenced
+        object cannot be deleted without first deleting the referencing
+        object. For example, consider a worksheet W1 that has a derived
+        logical column C1 that has a reference to a base logical column C2.
+        This can be shown diagramatically as: W1-->C1-->C2. W1 has a
+        dependency on C2 i.e. W1 is a referencing object and C2 is a
+        referenced object. It is not possible to delete C2 without first
+        deleting W1 because deletion of C2 will be prevented by the
+        relationship between W1s column C1 and C2. Similarly C1 is said to
+        have a dependency on C2 i.e. C1 is a referencing object and C2 is a
+        referenced object. It is not possible to delete C2 without first
+        deleting C1
+
+        Args:
+            body (ApiRestV2MetadataDependencyRequest): TODO: type description
+                here.
+
+        Returns:
+            object: Response from the API. An object with list of dependent
+                objects grouped based on the type
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        # Prepare query URL
+        _url_path = '/api/rest/v2/metadata/dependency'
+        _query_builder = self.config.get_base_uri()
+        _query_builder += _url_path
+        _query_url = APIHelper.clean_url(_query_builder)
+
+        # Prepare headers
+        _headers = {
+            'Content-Type': 'application/json'
+        }
+
+        # Prepare and execute request
+        _request = self.config.http_client.post(_query_url, headers=_headers, parameters=APIHelper.json_serialize(body))
         OAuth2.apply(self.config, _request)
         _response = self.execute_request(_request)
 

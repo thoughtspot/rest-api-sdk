@@ -14,48 +14,28 @@ import java.util.TreeMap;
  * Type10Enum to be used.
  */
 public enum Type10Enum {
-    ANSWER,
-
     LIVEBOARD,
 
     DATAOBJECT,
 
     COLUMN,
 
-    JOIN,
-
-    CONNECTION,
-
-    TAG,
-
-    USER,
-
-    USER_GROUP;
+    JOIN;
 
 
     private static TreeMap<String, Type10Enum> valueMap = new TreeMap<>();
     private String value;
 
     static {
-        ANSWER.value = "ANSWER";
         LIVEBOARD.value = "LIVEBOARD";
         DATAOBJECT.value = "DATAOBJECT";
         COLUMN.value = "COLUMN";
         JOIN.value = "JOIN";
-        CONNECTION.value = "CONNECTION";
-        TAG.value = "TAG";
-        USER.value = "USER";
-        USER_GROUP.value = "USER_GROUP";
 
-        valueMap.put("ANSWER", ANSWER);
         valueMap.put("LIVEBOARD", LIVEBOARD);
         valueMap.put("DATAOBJECT", DATAOBJECT);
         valueMap.put("COLUMN", COLUMN);
         valueMap.put("JOIN", JOIN);
-        valueMap.put("CONNECTION", CONNECTION);
-        valueMap.put("TAG", TAG);
-        valueMap.put("USER", USER);
-        valueMap.put("USER_GROUP", USER_GROUP);
     }
 
     /**

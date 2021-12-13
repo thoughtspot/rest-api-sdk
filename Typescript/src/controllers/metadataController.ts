@@ -62,7 +62,7 @@ import {
   MetadataTagResponse,
   metadataTagResponseSchema,
 } from '../models/metadataTagResponse';
-import { Type10Enum, type10EnumSchema } from '../models/type10Enum';
+import { Type8Enum, type8EnumSchema } from '../models/type8Enum';
 import { array, boolean, optional, string, unknown } from '../schema';
 import { BaseController } from './baseController';
 
@@ -157,35 +157,6 @@ export class MetadataController extends BaseController {
     req.query('id', mapped.id);
     req.throwOn(500, ErrorResponseError, 'Operation failed or unauthorized request');
     return req.callAsJson(boolean(), requestOptions);
-  }
-
-  /**
-   * To query the details of dependent objects and associate objects as dependents, you can use this API.
-   * Dependency is defined as relation between referenced and referencing objects. A referencing object
-   * is said to have a dependency on a referenced object, if the referenced object cannot be deleted
-   * without first deleting the referencing object. For example, consider a worksheet W1 that has a
-   * derived logical column C1 that has a reference to a base logical column C2. This can be shown
-   * diagramatically as: W1-->C1-->C2. W1 has a dependency on C2 i.e. W1 is a referencing object and C2
-   * is a referenced object. It is not possible to delete C2 without first deleting W1 because deletion
-   * of C2 will be prevented by the relationship between W1s column C1 and C2. Similarly C1 is said to
-   * have a dependency on C2 i.e. C1 is a referencing object and C2 is a referenced object. It is not
-   * possible to delete C2 without first deleting C1
-   *
-   * @param body
-   * @return Response from the API call
-   */
-  async getObjectDependency(
-    body: ApiRestV2MetadataDependencyRequest,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<unknown>> {
-    const req = this.createRequest('POST', '/api/rest/v2/metadata/dependency');
-    const mapped = req.prepareArgs({
-      body: [body, apiRestV2MetadataDependencyRequestSchema],
-    });
-    req.header('Content-Type', 'application/json');
-    req.json(mapped.body);
-    req.throwOn(500, ErrorResponseError, 'Operation failed or unauthorized request');
-    return req.callAsJson(unknown(), requestOptions);
   }
 
   /**
@@ -373,25 +344,40 @@ export class MetadataController extends BaseController {
   }
 
   /**
-   * To get header details for metadata objects, use this endpoint. You can provide as input selective
-   * fields to get the data for.
+   * Use this endpoint to get full details of metadata objects
    *
-   * @param body
+   * @param type                Type of the metadata object being searched. Valid values
+   * @param id                  A JSON array of GUIDs of the objects.
+   * @param showHidden          When set to true, returns details of the hidden objects, such as a column
+   *                                         in a worksheet or a table.
+   * @param dropQuestionDetails When set to true, the search assist data associated with a worksheet is
+   *                                         not included in the API response. This attribute is applicable only for
+   *                                         LOGICAL_TABLE data type.
+   * @param version             Specify the version to retrieve the objects from. By default, the API
+   *                                         returns metadata for all versions of the object.
    * @return Response from the API call
    */
-  async getObjectHeader(
-    body: ApiRestV2MetadataHeaderSearchRequest,
+  async getObjectDetail(
+    type: Type8Enum,
+    id: string[],
+    showHidden?: boolean,
+    dropQuestionDetails?: boolean,
+    version?: string,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<unknown>> {
-    const req = this.createRequest(
-      'POST',
-      '/api/rest/v2/metadata/header/search'
-    );
+    const req = this.createRequest('GET', '/api/rest/v2/metadata/details');
     const mapped = req.prepareArgs({
-      body: [body, apiRestV2MetadataHeaderSearchRequestSchema],
+      type: [type, type8EnumSchema],
+      id: [id, array(string())],
+      showHidden: [showHidden, optional(boolean())],
+      dropQuestionDetails: [dropQuestionDetails, optional(boolean())],
+      version: [version, optional(string())],
     });
-    req.header('Content-Type', 'application/json');
-    req.json(mapped.body);
+    req.query('type', mapped.type);
+    req.query('id', mapped.id);
+    req.query('showHidden', mapped.showHidden);
+    req.query('dropQuestionDetails', mapped.dropQuestionDetails);
+    req.query('version', mapped.version);
     req.throwOn(500, ErrorResponseError, 'Operation failed or unauthorized request');
     return req.callAsJson(unknown(), requestOptions);
   }
@@ -416,40 +402,54 @@ export class MetadataController extends BaseController {
   }
 
   /**
-   * Use this endpoint to get full details of metadata objects
+   * To get header details for metadata objects, use this endpoint. You can provide as input selective
+   * fields to get the data for.
    *
-   * @param type                Type of the metadata object being searched. Valid values
-   * @param id                  A JSON array of GUIDs of the objects.
-   * @param showHidden          When set to true, returns details of the hidden objects, such as a
-   *                                          column in a worksheet or a table.
-   * @param dropQuestionDetails When set to true, the search assist data associated with a worksheet is
-   *                                          not included in the API response. This attribute is applicable only for
-   *                                          LOGICAL_TABLE data type.
-   * @param version             Specify the version to retrieve the objects from. By default, the API
-   *                                          returns metadata for all versions of the object.
+   * @param body
    * @return Response from the API call
    */
-  async getObjectDetail(
-    type: Type10Enum,
-    id: string[],
-    showHidden?: boolean,
-    dropQuestionDetails?: boolean,
-    version?: string,
+  async searchObjectHeader(
+    body: ApiRestV2MetadataHeaderSearchRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<unknown>> {
-    const req = this.createRequest('GET', '/api/rest/v2/metadata/details');
+    const req = this.createRequest(
+      'POST',
+      '/api/rest/v2/metadata/header/search'
+    );
     const mapped = req.prepareArgs({
-      type: [type, type10EnumSchema],
-      id: [id, array(string())],
-      showHidden: [showHidden, optional(boolean())],
-      dropQuestionDetails: [dropQuestionDetails, optional(boolean())],
-      version: [version, optional(string())],
+      body: [body, apiRestV2MetadataHeaderSearchRequestSchema],
     });
-    req.query('type', mapped.type);
-    req.query('id', mapped.id);
-    req.query('showHidden', mapped.showHidden);
-    req.query('dropQuestionDetails', mapped.dropQuestionDetails);
-    req.query('version', mapped.version);
+    req.header('Content-Type', 'application/json');
+    req.json(mapped.body);
+    req.throwOn(500, ErrorResponseError, 'Operation failed or unauthorized request');
+    return req.callAsJson(unknown(), requestOptions);
+  }
+
+  /**
+   * To query the details of dependent objects and associate objects as dependents, you can use this API.
+   * Dependency is defined as relation between referenced and referencing objects. A referencing object
+   * is said to have a dependency on a referenced object, if the referenced object cannot be deleted
+   * without first deleting the referencing object. For example, consider a worksheet W1 that has a
+   * derived logical column C1 that has a reference to a base logical column C2. This can be shown
+   * diagramatically as: W1-->C1-->C2. W1 has a dependency on C2 i.e. W1 is a referencing object and C2
+   * is a referenced object. It is not possible to delete C2 without first deleting W1 because deletion
+   * of C2 will be prevented by the relationship between W1s column C1 and C2. Similarly C1 is said to
+   * have a dependency on C2 i.e. C1 is a referencing object and C2 is a referenced object. It is not
+   * possible to delete C2 without first deleting C1
+   *
+   * @param body
+   * @return Response from the API call
+   */
+  async getObjectDependency(
+    body: ApiRestV2MetadataDependencyRequest,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<unknown>> {
+    const req = this.createRequest('POST', '/api/rest/v2/metadata/dependency');
+    const mapped = req.prepareArgs({
+      body: [body, apiRestV2MetadataDependencyRequestSchema],
+    });
+    req.header('Content-Type', 'application/json');
+    req.json(mapped.body);
     req.throwOn(500, ErrorResponseError, 'Operation failed or unauthorized request');
     return req.callAsJson(unknown(), requestOptions);
   }

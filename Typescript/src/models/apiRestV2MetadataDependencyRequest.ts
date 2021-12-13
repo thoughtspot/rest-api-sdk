@@ -5,11 +5,11 @@
  */
 
 import { array, number, object, optional, Schema, string } from '../schema';
-import { Type8Enum, type8EnumSchema } from './type8Enum';
+import { Type10Enum, type10EnumSchema } from './type10Enum';
 
 export interface ApiRestV2MetadataDependencyRequest {
   /** Type of the data object */
-  type: Type8Enum;
+  type: Type10Enum;
   /** A JSON array of GUIDs of the objects */
   id: string[];
   /** he maximum number of batches to fetch in a query. If this attribute is not defined, the value specified in the cluster configuration is used. To get the list of all dependent objects in a single query, define the batch size attribute as -1 */
@@ -18,7 +18,7 @@ export interface ApiRestV2MetadataDependencyRequest {
 
 export const apiRestV2MetadataDependencyRequestSchema: Schema<ApiRestV2MetadataDependencyRequest> = object(
   {
-    type: ['type', type8EnumSchema],
+    type: ['type', type10EnumSchema],
     id: ['id', array(string())],
     batchSize: ['batchSize', optional(number())],
   }

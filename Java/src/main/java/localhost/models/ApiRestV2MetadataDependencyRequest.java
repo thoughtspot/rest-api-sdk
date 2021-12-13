@@ -15,7 +15,7 @@ import java.util.List;
  * This is a model class for ApiRestV2MetadataDependencyRequest type.
  */
 public class ApiRestV2MetadataDependencyRequest {
-    private Type8Enum type;
+    private Type10Enum type;
     private List<String> id;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Integer batchSize;
@@ -28,12 +28,12 @@ public class ApiRestV2MetadataDependencyRequest {
 
     /**
      * Initialization constructor.
-     * @param  type  Type8Enum value for type.
+     * @param  type  Type10Enum value for type.
      * @param  id  List of String value for id.
      * @param  batchSize  Integer value for batchSize.
      */
     public ApiRestV2MetadataDependencyRequest(
-            Type8Enum type,
+            Type10Enum type,
             List<String> id,
             Integer batchSize) {
         this.type = type;
@@ -44,20 +44,20 @@ public class ApiRestV2MetadataDependencyRequest {
     /**
      * Getter for Type.
      * Type of the data object
-     * @return Returns the Type8Enum
+     * @return Returns the Type10Enum
      */
     @JsonGetter("type")
-    public Type8Enum getType() {
+    public Type10Enum getType() {
         return type;
     }
 
     /**
      * Setter for Type.
      * Type of the data object
-     * @param type Value for Type8Enum
+     * @param type Value for Type10Enum
      */
     @JsonSetter("type")
-    public void setType(Type8Enum type) {
+    public void setType(Type10Enum type) {
         this.type = type;
     }
 
@@ -130,7 +130,7 @@ public class ApiRestV2MetadataDependencyRequest {
      * Class to build instances of {@link ApiRestV2MetadataDependencyRequest}.
      */
     public static class Builder {
-        private Type8Enum type;
+        private Type10Enum type;
         private List<String> id;
         private Integer batchSize;
 
@@ -142,20 +142,20 @@ public class ApiRestV2MetadataDependencyRequest {
 
         /**
          * Initialization constructor.
-         * @param  type  Type8Enum value for type.
+         * @param  type  Type10Enum value for type.
          * @param  id  List of String value for id.
          */
-        public Builder(Type8Enum type, List<String> id) {
+        public Builder(Type10Enum type, List<String> id) {
             this.type = type;
             this.id = id;
         }
 
         /**
          * Setter for type.
-         * @param  type  Type8Enum value for type.
+         * @param  type  Type10Enum value for type.
          * @return Builder
          */
-        public Builder type(Type8Enum type) {
+        public Builder type(Type10Enum type) {
             this.type = type;
             return this;
         }

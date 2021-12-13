@@ -1,6 +1,8 @@
 
 # Type 10 Enum
 
+Type of the data object
+
 ## Enumeration
 
 `Type10Enum`
@@ -9,13 +11,8 @@
 
 | Name |
 |  --- |
-| `ANSWER` |
 | `LIVEBOARD` |
 | `DATAOBJECT` |
 | `COLUMN` |
 | `JOIN` |
-| `CONNECTION` |
-| `TAG` |
-| `USER` |
-| `USERGROUP` |
 

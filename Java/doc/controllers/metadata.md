@@ -14,7 +14,6 @@ MetadataController metadataController = client.getMetadataController();
 * [Create Tag](/doc/controllers/metadata.md#create-tag)
 * [Update Tag](/doc/controllers/metadata.md#update-tag)
 * [Delete Tag](/doc/controllers/metadata.md#delete-tag)
-* [Get Object Dependency](/doc/controllers/metadata.md#get-object-dependency)
 * [Assign Tag](/doc/controllers/metadata.md#assign-tag)
 * [Unassign Tag](/doc/controllers/metadata.md#unassign-tag)
 * [Assign Favorite](/doc/controllers/metadata.md#assign-favorite)
@@ -23,9 +22,10 @@ MetadataController metadataController = client.getMetadataController();
 * [Assign Homeliveboard](/doc/controllers/metadata.md#assign-homeliveboard)
 * [Unassign Homeliveboard](/doc/controllers/metadata.md#unassign-homeliveboard)
 * [Get Incomplete Objects](/doc/controllers/metadata.md#get-incomplete-objects)
-* [Get Object Header](/doc/controllers/metadata.md#get-object-header)
-* [Get Object Visualization Header](/doc/controllers/metadata.md#get-object-visualization-header)
 * [Get Object Detail](/doc/controllers/metadata.md#get-object-detail)
+* [Get Object Visualization Header](/doc/controllers/metadata.md#get-object-visualization-header)
+* [Search Object Header](/doc/controllers/metadata.md#search-object-header)
+* [Get Object Dependency](/doc/controllers/metadata.md#get-object-dependency)
 * [Export Object TML](/doc/controllers/metadata.md#export-object-tml)
 * [Import Object TML](/doc/controllers/metadata.md#import-object-tml)
 
@@ -173,49 +173,6 @@ CompletableFuture<Boolean> deleteTagAsync(
 
 ```java
 metadataController.deleteTagAsync(null, null).thenAccept(result -> {
-    // TODO success callback handler
-}).exceptionally(exception -> {
-    // TODO failure callback handler
-    return null;
-});
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
-
-
-# Get Object Dependency
-
-To query the details of dependent objects and associate objects as dependents, you can use this API. Dependency is defined as relation between referenced and referencing objects. A referencing object is said to have a dependency on a referenced object, if the referenced object cannot be deleted without first deleting the referencing object. For example, consider a worksheet W1 that has a derived logical column C1 that has a reference to a base logical column C2. This can be shown diagramatically as: W1-->C1-->C2. W1 has a dependency on C2 i.e. W1 is a referencing object and C2 is a referenced object. It is not possible to delete C2 without first deleting W1 because deletion of C2 will be prevented by the relationship between W1s column C1 and C2. Similarly C1 is said to have a dependency on C2 i.e. C1 is a referencing object and C2 is a referenced object. It is not possible to delete C2 without first deleting C1
-
-```java
-CompletableFuture<Object> getObjectDependencyAsync(
-    final ApiRestV2MetadataDependencyRequest body)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `body` | [`ApiRestV2MetadataDependencyRequest`](/doc/models/api-rest-v2-metadata-dependency-request.md) | Body, Required | - |
-
-## Response Type
-
-`Object`
-
-## Example Usage
-
-```java
-ApiRestV2MetadataDependencyRequest body = new ApiRestV2MetadataDependencyRequest();
-body.setType(Type8Enum.COLUMN);
-body.setId(new LinkedList<>());
-body.getId().add("id6");
-body.getId().add("id7");
-
-metadataController.getObjectDependencyAsync(body).thenAccept(result -> {
     // TODO success callback handler
 }).exceptionally(exception -> {
     // TODO failure callback handler
@@ -581,20 +538,28 @@ metadataController.getIncompleteObjectsAsync().thenAccept(result -> {
 | 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
 
 
-# Get Object Header
+# Get Object Detail
 
-To get header details for metadata objects, use this endpoint. You can provide as input selective fields to get the data for.
+Use this endpoint to get full details of metadata objects
 
 ```java
-CompletableFuture<Object> getObjectHeaderAsync(
-    final ApiRestV2MetadataHeaderSearchRequest body)
+CompletableFuture<Object> getObjectDetailAsync(
+    final Type8Enum type,
+    final List<String> id,
+    final Boolean showHidden,
+    final Boolean dropQuestionDetails,
+    final String version)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2MetadataHeaderSearchRequest`](/doc/models/api-rest-v2-metadata-header-search-request.md) | Body, Required | - |
+| `type` | [`Type8Enum`](/doc/models/type-8-enum.md) | Query, Required | Type of the metadata object being searched. Valid values |
+| `id` | `List<String>` | Query, Required | A JSON array of GUIDs of the objects. |
+| `showHidden` | `Boolean` | Query, Optional | When set to true, returns details of the hidden objects, such as a column in a worksheet or a table. |
+| `dropQuestionDetails` | `Boolean` | Query, Optional | When set to true, the search assist data associated with a worksheet is not included in the API response. This attribute is applicable only for LOGICAL_TABLE data type. |
+| `version` | `String` | Query, Optional | Specify the version to retrieve the objects from. By default, the API returns metadata for all versions of the object. |
 
 ## Response Type
 
@@ -603,10 +568,11 @@ CompletableFuture<Object> getObjectHeaderAsync(
 ## Example Usage
 
 ```java
-ApiRestV2MetadataHeaderSearchRequest body = new ApiRestV2MetadataHeaderSearchRequest();
-body.setType(Type9Enum.USER);
+Type8Enum type = Type8Enum.DATAOBJECT;
+List<String> id = new LinkedList<>();
+id.add("id0");
 
-metadataController.getObjectHeaderAsync(body).thenAccept(result -> {
+metadataController.getObjectDetailAsync(type, id, null, null, null).thenAccept(result -> {
     // TODO success callback handler
 }).exceptionally(exception -> {
     // TODO failure callback handler
@@ -660,28 +626,20 @@ metadataController.getObjectVisualizationHeaderAsync(id).thenAccept(result -> {
 | 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
 
 
-# Get Object Detail
+# Search Object Header
 
-Use this endpoint to get full details of metadata objects
+To get header details for metadata objects, use this endpoint. You can provide as input selective fields to get the data for.
 
 ```java
-CompletableFuture<Object> getObjectDetailAsync(
-    final Type10Enum type,
-    final List<String> id,
-    final Boolean showHidden,
-    final Boolean dropQuestionDetails,
-    final String version)
+CompletableFuture<Object> searchObjectHeaderAsync(
+    final ApiRestV2MetadataHeaderSearchRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `type` | [`Type10Enum`](/doc/models/type-10-enum.md) | Query, Required | Type of the metadata object being searched. Valid values |
-| `id` | `List<String>` | Query, Required | A JSON array of GUIDs of the objects. |
-| `showHidden` | `Boolean` | Query, Optional | When set to true, returns details of the hidden objects, such as a column in a worksheet or a table. |
-| `dropQuestionDetails` | `Boolean` | Query, Optional | When set to true, the search assist data associated with a worksheet is not included in the API response. This attribute is applicable only for LOGICAL_TABLE data type. |
-| `version` | `String` | Query, Optional | Specify the version to retrieve the objects from. By default, the API returns metadata for all versions of the object. |
+| `body` | [`ApiRestV2MetadataHeaderSearchRequest`](/doc/models/api-rest-v2-metadata-header-search-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -690,11 +648,53 @@ CompletableFuture<Object> getObjectDetailAsync(
 ## Example Usage
 
 ```java
-Type10Enum type = Type10Enum.DATAOBJECT;
-List<String> id = new LinkedList<>();
-id.add("id0");
+ApiRestV2MetadataHeaderSearchRequest body = new ApiRestV2MetadataHeaderSearchRequest();
+body.setType(Type9Enum.USER);
 
-metadataController.getObjectDetailAsync(type, id, null, null, null).thenAccept(result -> {
+metadataController.searchObjectHeaderAsync(body).thenAccept(result -> {
+    // TODO success callback handler
+}).exceptionally(exception -> {
+    // TODO failure callback handler
+    return null;
+});
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+
+
+# Get Object Dependency
+
+To query the details of dependent objects and associate objects as dependents, you can use this API. Dependency is defined as relation between referenced and referencing objects. A referencing object is said to have a dependency on a referenced object, if the referenced object cannot be deleted without first deleting the referencing object. For example, consider a worksheet W1 that has a derived logical column C1 that has a reference to a base logical column C2. This can be shown diagramatically as: W1-->C1-->C2. W1 has a dependency on C2 i.e. W1 is a referencing object and C2 is a referenced object. It is not possible to delete C2 without first deleting W1 because deletion of C2 will be prevented by the relationship between W1s column C1 and C2. Similarly C1 is said to have a dependency on C2 i.e. C1 is a referencing object and C2 is a referenced object. It is not possible to delete C2 without first deleting C1
+
+```java
+CompletableFuture<Object> getObjectDependencyAsync(
+    final ApiRestV2MetadataDependencyRequest body)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`ApiRestV2MetadataDependencyRequest`](/doc/models/api-rest-v2-metadata-dependency-request.md) | Body, Required | - |
+
+## Response Type
+
+`Object`
+
+## Example Usage
+
+```java
+ApiRestV2MetadataDependencyRequest body = new ApiRestV2MetadataDependencyRequest();
+body.setType(Type10Enum.COLUMN);
+body.setId(new LinkedList<>());
+body.getId().add("id6");
+body.getId().add("id7");
+
+metadataController.getObjectDependencyAsync(body).thenAccept(result -> {
     // TODO success callback handler
 }).exceptionally(exception -> {
     // TODO failure callback handler

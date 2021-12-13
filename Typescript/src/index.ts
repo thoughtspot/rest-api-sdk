@@ -58,6 +58,7 @@ export { ApiRestV2UserSearchRequest } from './models/apiRestV2UserSearchRequest'
 export { ApiRestV2UserUpdateRequest } from './models/apiRestV2UserUpdateRequest';
 export { AutoCreatedEnum } from './models/autoCreatedEnum';
 export { ClientState } from './models/clientState';
+export { ColumnNameType } from './models/columnNameType';
 export { CreateTableResponse } from './models/createTableResponse';
 export { FormatTypeEnum } from './models/formatTypeEnum';
 export { GroupNameAndID } from './models/groupNameAndID';
@@ -78,6 +79,7 @@ export { ShowWalkMeEnum } from './models/showWalkMeEnum';
 export { SortByEnum } from './models/sortByEnum';
 export { SortOrderEnum } from './models/sortOrderEnum';
 export { StateEnum } from './models/stateEnum';
+export { TableTypes } from './models/tableTypes';
 export { TagNameAndID } from './models/tagNameAndID';
 export { TagNameAndIdInput } from './models/tagNameAndIdInput';
 export { Type10Enum } from './models/type10Enum';

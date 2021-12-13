@@ -1,8 +1,6 @@
 
 # Type 8 Enum
 
-Type of the data object
-
 ## Enumeration
 
 `Type8Enum`
@@ -11,8 +9,13 @@ Type of the data object
 
 | Name |
 |  --- |
+| `aNSWER` |
 | `lIVEBOARD` |
 | `dATAOBJECT` |
 | `cOLUMN` |
 | `jOIN` |
+| `cONNECTION` |
+| `tAG` |
+| `uSER` |
+| `uSERGROUP` |
 
