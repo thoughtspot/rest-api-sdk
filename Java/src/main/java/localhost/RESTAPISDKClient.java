@@ -312,7 +312,7 @@ public final class RESTAPISDKClient implements Configuration {
     public static class Builder {
 
         private Environment environment = Environment.PRODUCTION;
-        private String baseUrl = "https://localhost:443";
+        private String baseUrl = "http://172.19.146.98:8088";
         private String contentType = "application/json";
         private String acceptLanguage = "application/json";
         private HttpClient httpClient;
