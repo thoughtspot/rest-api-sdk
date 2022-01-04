@@ -51,8 +51,7 @@ public class ApiHelper {
         private static final long serialVersionUID = -174113593500315394L;
         {
             configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-            configOverride(BigDecimal.class).setFormat(
-                    JsonFormat.Value.forShape(JsonFormat.Shape.STRING));
+           // configOverride(BigDecimal.class).setFormat(JsonFormat.Value.forShape(JsonFormat.Shape.STRING));
         }
     };
 
