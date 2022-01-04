@@ -32,7 +32,7 @@
   </developers>
   <scm>
     <connection>scm:git:git://github.com/thoughtspot/rest-api-sdk.git</connection>
-    <developerConnection>scm:git@github.com:thoughtspot/rest-api-sdk.git</developerConnection>
+    <developerConnection>scm:git://github.com:thoughtspot/rest-api-sdk.git</developerConnection>
     <url>http://github.com/thoughtspot/rest-api-sdk/main</url>
     <tag>2.0.0-SNAPSHOT</tag>
   </scm>
