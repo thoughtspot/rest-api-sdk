@@ -1,8 +1,2 @@
-controllers/BaseControllerTest.class
-localhost/testing/HttpCallbackCatcher.class
 localhost/testing/TestHelper.class
-controllers/GroupControllerTest.class
-controllers/SessionControllerTest.class
-controllers/UserControllerTest.class
-controllers/DatabaseControllerTest.class
-controllers/MetadataControllerTest.class
+localhost/testing/HttpCallbackCatcher.class
