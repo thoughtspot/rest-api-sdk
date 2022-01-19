@@ -8,7 +8,7 @@
 
   <groupId>io.github.thoughtspot</groupId>
   <artifactId>rest-api-sdk-lib</artifactId>
-  <version>1.2.9-SNAPSHOT</version>
+  <version>1.2.8-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>restapisdklib</name>
@@ -34,7 +34,7 @@
     <connection>scm:git:git://github.com/thoughtspot/rest-api-sdk.git</connection>
     <developerConnection>scm:git:ssh://github.com/thoughtspot/rest-api-sdk</developerConnection>
     <url>http://github.com/thoughtspot/rest-api-sdk/main</url>
-    <tag>rest-api-sdk-lib-1.2.9</tag>
+    <tag>rest-api-sdk-lib-1.2.7</tag>
   </scm>
 
   <distributionManagement>
@@ -65,16 +65,22 @@
           </executions>
         </plugin>
         <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-gpg-plugin</artifactId>
-          <configuration>
-            <useAgent>true</useAgent>
-            <passphrase>SriJan@1986</passphrase>
-            <gpgArguments>
-              <arg>--batch</arg>
-              <arg>--pinentry-mode</arg>
-              <arg>loopback</arg>
-            </gpgArguments>
-          </configuration>
+          <version>1.5</version>
+          <executions>
+            <execution>
+              <id>sign-artifacts</id>
+              <phase>verify</phase>
+              <goals>
+                <goal>sign</goal>
+              </goals>
+              <configuration>
+                <keyname>0x3C54B03B</keyname>
+                <passphraseServerId>0x3C54B03B</passphraseServerId>
+              </configuration>
+            </execution>
+          </executions>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
