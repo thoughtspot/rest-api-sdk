@@ -237,6 +237,7 @@ public final class SessionController extends BaseController {
      */
     public Boolean logout() throws ApiException, IOException {
         HttpRequest request = buildLogoutRequest();
+        authManagers.get("global").apply(request);
         HttpResponse response = getClientInstance().execute(request, false);
         HttpContext context = new HttpContext(request, response);
 
