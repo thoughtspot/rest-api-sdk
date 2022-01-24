@@ -8,7 +8,7 @@
 
   <groupId>io.github.thoughtspot</groupId>
   <artifactId>rest-api-sdk-lib</artifactId>
-  <version>1.6.7</version>
+  <version>1.6.8-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>restapisdklib</name>
@@ -37,7 +37,7 @@
     <connection>scm:git:git://github.com/thoughtspot/rest-api-sdk.git</connection>
     <developerConnection>scm:git:ssh://github.com/thoughtspot/rest-api-sdk</developerConnection>
     <url>http://github.com/thoughtspot/rest-api-sdk/main</url>
-    <tag>1.6.7</tag>
+    <tag>HEAD</tag>
   </scm>
 
   <distributionManagement>
