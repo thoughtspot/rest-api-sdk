@@ -42,7 +42,7 @@
 
   <distributionManagement>
     <snapshotRepository>
-      <id>ossrh</id><!--http://localhost:8081/repository/maven-snapshots/-->
+      <id>ossrh</id>
       <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
     </snapshotRepository>
     <repository>

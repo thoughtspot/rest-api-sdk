@@ -8,7 +8,7 @@
 
   <groupId>io.github.thoughtspot</groupId>
   <artifactId>rest-api-sdk-lib</artifactId>
-  <version>1.6.6</version>
+  <version>1.6.6-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>restapisdklib</name>
@@ -37,12 +37,12 @@
     <connection>scm:git:git://github.com/thoughtspot/rest-api-sdk.git</connection>
     <developerConnection>scm:git:ssh://github.com/thoughtspot/rest-api-sdk</developerConnection>
     <url>http://github.com/thoughtspot/rest-api-sdk/main</url>
-    <tag>rest-api-sdk-lib-1.6.6</tag>
+    <tag>HEAD</tag>
   </scm>
 
   <distributionManagement>
     <snapshotRepository>
-      <id>ossrh</id><!--http://localhost:8081/repository/maven-snapshots/-->
+      <id>ossrh</id>
       <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
     </snapshotRepository>
     <repository>
