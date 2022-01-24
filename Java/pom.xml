@@ -8,12 +8,14 @@
 
   <groupId>io.github.thoughtspot</groupId>
   <artifactId>rest-api-sdk-lib</artifactId>
-  <version>1.6.7-SNAPSHOT</version>
+  <version>1.6.6-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>restapisdklib</name>
-  <description>This is rest v2 api playground changes</description>
-  <url>https://github.com/thoughtspot/rest-api-sdk</url>
+  <!--<description>This is rest v2 api playground changes</description>-->
+  <description>ThoughtSpot Java Restapi SDK</description>
+  <!--<url>https://github.com/thoughtspot/rest-api-sdk</url>-->
+  <url>https://github.com/thoughtspot/rest-api-sdk/tree/main/Java</url>
 
   <licenses>
     <license>
@@ -40,7 +42,7 @@
 
   <distributionManagement>
     <snapshotRepository>
-      <id>ossrh</id>
+      <id>ossrh</id><!--http://localhost:8081/repository/maven-snapshots/-->
       <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
     </snapshotRepository>
     <repository>
