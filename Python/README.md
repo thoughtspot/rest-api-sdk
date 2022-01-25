@@ -3,9 +3,13 @@
 
 ## Install the Rest API SDK
 
-To install the SDK, run the following command at the command line:
-    
-    pip install thoughtspot-rest-api-sdk
+You must have Python 3 >=3.7, <= 3.9 installed on your system to use this SDK. This SDK package depends on other Python packages like nose, jsonpickle etc. These dependencies are defined in the requirements.txt file that comes with the SDK. To resolve these dependencies, you can use the PIP Dependency manager. Install it by following steps at https://pip.pypa.io/en/stable/installing/.
+
+Python and PIP executables should be defined in your PATH. Open command prompt and type pip --version. This should display the version of the PIP Dependency Manager installed if your installation was successful and the paths are properly defined.
+
+To install the dependencies create requirements.txt with content thoughtspot-rest-api-sdk, run the command `echo thoughtspot-rest-api-sdk > requirements.txt`. Next, run the command `pip install -r requirements.txt`. This should install all the required dependencies.
+
+To install the SDK, run the command `pip install thoughtspot-rest-api-sdk` at the command line.
 
 ## Initialize the API Client
 
