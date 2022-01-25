@@ -6,10 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="rest-api-sdk-lib" />
         <module name="restapisdklib" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="rest-api-sdk-lib" target="1.8" />
       <module name="restapisdklib" target="1.8" />
     </bytecodeTargetLevel>
   </component>

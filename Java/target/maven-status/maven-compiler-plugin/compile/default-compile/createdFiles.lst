@@ -35,6 +35,7 @@ localhost/models/ApiRestV2GroupSearchRequest$Builder.class
 localhost/models/GroupResponse$Builder.class
 localhost/utilities/FileWrapper.class
 localhost/models/ApiRestV2GroupAddprivilegeRequest.class
+localhost/models/ApiRestV2MetadataAnswerExportRequest$Builder.class
 localhost/models/AccessLevelInput.class
 localhost/models/FormatTypeEnum.class
 localhost/models/MetadataTagResponse.class
@@ -94,6 +95,7 @@ localhost/models/ApiRestV2MetadataFavoriteUnassignRequest$Builder.class
 localhost/models/ApiRestV2MetadataTmlExportRequest$Builder.class
 localhost/models/MetadataTagResponse$Builder.class
 localhost/models/GroupNameAndID$Builder.class
+localhost/models/ApiRestV2MetadataAnswerExportRequest.class
 localhost/models/TagNameAndID$Builder.class
 localhost/models/SortByEnum.class
 localhost/ApiHelper$4.class
