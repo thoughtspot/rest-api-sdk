@@ -1,0 +1,27 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RESTAPISDK.Standard", "RESTAPISDK.Standard/RESTAPISDK.Standard.csproj", "{f20bb327-b0a9-4fb0-845c-6d5cabcd292a}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RESTAPISDK.Tests", "RESTAPISDK.Tests/RESTAPISDK.Tests.csproj", "{dbaab22e-9662-4bb2-85ec-972796e51b99}"
+EndProject
+Global
+    GlobalSection(SolutionConfigurationPlatforms) = preSolution
+        Debug|Any CPU = Debug|Any CPU
+        Release|Any CPU = Release|Any CPU
+    EndGlobalSection
+    GlobalSection(ProjectConfigurationPlatforms) = postSolution
+        {f20bb327-b0a9-4fb0-845c-6d5cabcd292a}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+        {f20bb327-b0a9-4fb0-845c-6d5cabcd292a}.Debug|Any CPU.Build.0 = Debug|Any CPU
+        {f20bb327-b0a9-4fb0-845c-6d5cabcd292a}.Release|Any CPU.ActiveCfg = Release|Any CPU
+        {f20bb327-b0a9-4fb0-845c-6d5cabcd292a}.Release|Any CPU.Build.0 = Release|Any CPU
+        {dbaab22e-9662-4bb2-85ec-972796e51b99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+        {dbaab22e-9662-4bb2-85ec-972796e51b99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+        {dbaab22e-9662-4bb2-85ec-972796e51b99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+        {dbaab22e-9662-4bb2-85ec-972796e51b99}.Release|Any CPU.Build.0 = Release|Any CPU
+    EndGlobalSection
+    GlobalSection(SolutionProperties) = preSolution
+        HideSolutionNode = FALSE
+    EndGlobalSection
+EndGlobal

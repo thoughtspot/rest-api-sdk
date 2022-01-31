@@ -1,3 +1,4 @@
+# Getting Started with RESTAPI SDK
 
 ## Install the Rest API SDK
 
@@ -15,7 +16,7 @@ Depending on the build tool used in your system, add this package as dependency 
 
 ## Initialize the API Client
 
-**_Note:_** Documentation for the client can be found [here.](/doc/client.md)
+**_Note:_** Documentation for the client can be found [here.](https://github.com/thoughtspot/rest-api-sdk/blob/main/Java/doc/client.md)
 
 The following parameters are configurable for the API Client:
 
