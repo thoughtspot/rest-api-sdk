@@ -21,9 +21,9 @@ class ApiRestV2UserCreateRequest(object):
         display_name (string): A display name string for the user, usually
             their first and last name.
         visibility (VisibilityEnum): Visibility of the user. The visibility
-            attribute is set to DEFAULT when creating a user. Setting this to
-            DEFAULT makes a user visible to other users and user groups, and
-            thus allows them to share objects
+            attribute is set to DEFAULT when creating a user.    The DEFAULT
+            attribute makes a user visible to other users and user groups, and
+            thus allows them to share objects.
         mail (string): Email id associated with the user account
         password (string): Password for the user account.
         groups (list of GroupNameAndIDInput): A JSON array of group names or
@@ -37,7 +37,7 @@ class ApiRestV2UserCreateRequest(object):
         analyst_onboarding_complete (bool): ThoughtSpot provides an
             interactive guided walkthrough to onboard new users. The
             onboarding experience leads users through a set of actions to help
-            users get started and accomplish their tasks quickly. The users
+            users get started and accomplish their tasks quickly.    The users
             can turn off the Onboarding experience and access it again when
             they need assistance with the ThoughtSpot UI.
         mtype (Type2Enum): Type of user. LOCAL_USER indicates that the user is
@@ -131,16 +131,3 @@ class ApiRestV2UserCreateRequest(object):
                    show_walk_me,
                    analyst_onboarding_complete,
                    mtype)
-
-    @classmethod
-    def validate(cls, val):
-        """Validates value against class schema
-
-        Args:
-            val: the value to be validated
-
-        Returns:
-            boolean : if value is valid against schema.
-
-        """
-        return SchemaValidatorWrapper.getValidator(APIHelper.get_schema_path(os.path.abspath(__file__))).is_valid(val)

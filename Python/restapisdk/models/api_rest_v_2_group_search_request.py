@@ -21,10 +21,10 @@ class ApiRestV2GroupSearchRequest(object):
         id (string): GUID of the group to update
         display_name (string): A unique display name string for the user
             group, for example, Developer group.
-        visibility (Visibility3Enum): The visibility attribute is set to
-            DEFAULT when creating a group. Setting this to DEFAULT makes a
-            group visible to other users and user groups, and thus allows them
-            to share objects
+        visibility (Visibility3Enum): Visibility of the user group.    The
+            visibility attribute is set to DEFAULT. The DEFAULT attribute
+            makes the user group visible for other user groups and allows them
+            to share objects.
         description (string): Description text for the group.
         privileges (list of PrivilegeEnum): A JSON array of privileges
             assigned to the group
@@ -115,16 +115,3 @@ class ApiRestV2GroupSearchRequest(object):
                    groups,
                    users,
                    mtype)
-
-    @classmethod
-    def validate(cls, val):
-        """Validates value against class schema
-
-        Args:
-            val: the value to be validated
-
-        Returns:
-            boolean : if value is valid against schema.
-
-        """
-        return SchemaValidatorWrapper.getValidator(APIHelper.get_schema_path(os.path.abspath(__file__))).is_valid(val)

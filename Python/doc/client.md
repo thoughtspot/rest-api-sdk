@@ -7,7 +7,6 @@ The following parameters are configurable for the API Client:
 |  --- | --- | --- |
 | `content_type` | `string` | body content type for post request<br>*Default*: `'application/json'` |
 | `accept_language` | `string` | response format<br>*Default*: `'application/json'` |
-| `access_token` | `string` | The OAuth 2.0 Access Token to use for API requests. |
 | `base_url` | `string` | *Default*: `'https://localhost:443'` |
 | `environment` | Environment | The API environment. <br> **Default: `Environment.PRODUCTION`** |
 | `http_client_instance` | `HttpClient` | The Http Client passed from the sdk user for making requests |
@@ -27,7 +26,6 @@ from restapisdk.configuration import Environment
 client = RestapisdkClient(
     content_type='application/json',
     accept_language='application/json',
-    access_token='AccessToken',
     environment=Environment.PRODUCTION,
     base_url = 'https://localhost:443',)
 ```
@@ -45,4 +43,7 @@ The gateway for the SDK. This class acts as a factory for the Controllers and al
 | group | Gets GroupController |
 | metadata | Gets MetadataController |
 | database | Gets DatabaseController |
+| connection | Gets ConnectionController |
+| data | Gets DataController |
+| admin | Gets AdminController |
 

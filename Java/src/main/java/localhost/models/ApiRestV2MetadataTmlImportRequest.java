@@ -16,9 +16,7 @@ import java.util.List;
  */
 public class ApiRestV2MetadataTmlImportRequest {
     private List<String> objectTML;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private ImportPolicyEnum importPolicy;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Boolean forceCreate;
 
     /**
@@ -48,7 +46,10 @@ public class ApiRestV2MetadataTmlImportRequest {
      * Getter for ObjectTML.
      * A JSON array of TML objects to upload, in YAML or JSON format. If in YAML format within the
      * JSON array, use escape characters for YAML quotes, and new line characters when there is a
-     * new line
+     * new line. Example: To import a single object, ["guid:
+     * 3729c085-8659-48fd-9479-a67bd7307496\npinboard:\n name: …"] To import multiple objects,
+     * ["guid: 3729c085-8659-48fd-9479-a67bd7307496\npinboard:\n name: …", "guid:
+     * 5739d025-8659-48fd-9479-a67bd7704212\npinboard:\n name: …"]
      * @return Returns the List of String
      */
     @JsonGetter("objectTML")
@@ -60,7 +61,10 @@ public class ApiRestV2MetadataTmlImportRequest {
      * Setter for ObjectTML.
      * A JSON array of TML objects to upload, in YAML or JSON format. If in YAML format within the
      * JSON array, use escape characters for YAML quotes, and new line characters when there is a
-     * new line
+     * new line. Example: To import a single object, ["guid:
+     * 3729c085-8659-48fd-9479-a67bd7307496\npinboard:\n name: …"] To import multiple objects,
+     * ["guid: 3729c085-8659-48fd-9479-a67bd7307496\npinboard:\n name: …", "guid:
+     * 5739d025-8659-48fd-9479-a67bd7704212\npinboard:\n name: …"]
      * @param objectTML Value for List of String
      */
     @JsonSetter("objectTML")
@@ -70,17 +74,22 @@ public class ApiRestV2MetadataTmlImportRequest {
 
     /**
      * Getter for ImportPolicy.
-     * Policy to follow during import
+     * Policy to follow during import. PARTIAL - Imports all objects that validate successfully, and
+     * ignores objects that do not validate successfully. ALL_OR_NONE Imports the objects that
+     * validate successfully. VALIDATE_ONLY Validates the objects but does not import them.
      * @return Returns the ImportPolicyEnum
      */
     @JsonGetter("importPolicy")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public ImportPolicyEnum getImportPolicy() {
         return importPolicy;
     }
 
     /**
      * Setter for ImportPolicy.
-     * Policy to follow during import
+     * Policy to follow during import. PARTIAL - Imports all objects that validate successfully, and
+     * ignores objects that do not validate successfully. ALL_OR_NONE Imports the objects that
+     * validate successfully. VALIDATE_ONLY Validates the objects but does not import them.
      * @param importPolicy Value for ImportPolicyEnum
      */
     @JsonSetter("importPolicy")
@@ -100,6 +109,7 @@ public class ApiRestV2MetadataTmlImportRequest {
      * @return Returns the Boolean
      */
     @JsonGetter("forceCreate")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public Boolean getForceCreate() {
         return forceCreate;
     }

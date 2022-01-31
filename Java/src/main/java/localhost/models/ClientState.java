@@ -14,7 +14,6 @@ import com.fasterxml.jackson.annotation.JsonSetter;
  * This is a model class for ClientState type.
  */
 public class ClientState {
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String color;
 
     /**
@@ -38,6 +37,7 @@ public class ClientState {
      * @return Returns the String
      */
     @JsonGetter("color")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getColor() {
         return color;
     }

@@ -67,6 +67,10 @@ class Configuration(object):
         return self._base_url
 
     @property
+    def access_token(self):
+        return self._access_token
+
+    @property
     def content_type(self):
         return self._content_type
 
@@ -74,16 +78,12 @@ class Configuration(object):
     def accept_language(self):
         return self._accept_language
 
-    @property
-    def access_token(self):
-        return self._access_token
-
     def __init__(
         self, http_client_instance=None, override_http_client_configuration=False, timeout=60, max_retries=0,
         backoff_factor=2,
         retry_statuses=[408, 413, 429, 500, 502, 503, 504, 521, 522, 524, 408, 413, 429, 500, 502, 503, 504, 521, 522, 524],
         retry_methods=['GET', 'PUT', 'GET', 'PUT'], environment=Environment.PRODUCTION, base_url='https://localhost:443',
-        content_type='application/json', accept_language='application/json', access_token=''
+        access_token='', content_type='application/json', accept_language='application/json'
     ):
         # The Http Client passed from the sdk user for making requests
         self._http_client_instance = http_client_instance
@@ -114,14 +114,14 @@ class Configuration(object):
         # base_url value
         self._base_url = base_url
 
+        # The OAuth 2.0 Access Token to use for API requests.
+        self._access_token = access_token
+
         # body content type for post request
         self._content_type = content_type
 
         # response format
         self._accept_language = accept_language
-
-        # The OAuth 2.0 Access Token to use for API requests.
-        self._access_token = access_token
 
         # The Http Client to use for making requests.
         self._http_client = self.create_http_client()
@@ -130,7 +130,7 @@ class Configuration(object):
                    override_http_client_configuration=None, timeout=None,
                    max_retries=None, backoff_factor=None, retry_statuses=None,
                    retry_methods=None, environment=None, base_url=None,
-                   content_type=None, accept_language=None, access_token=None):
+                   access_token=None, content_type=None, accept_language=None):
         http_client_instance = http_client_instance or self.http_client_instance
         override_http_client_configuration = override_http_client_configuration or self.override_http_client_configuration
         timeout = timeout or self.timeout
@@ -140,9 +140,9 @@ class Configuration(object):
         retry_methods = retry_methods or self.retry_methods
         environment = environment or self.environment
         base_url = base_url or self.base_url
+        access_token = access_token or self.access_token
         content_type = content_type or self.content_type
         accept_language = accept_language or self.accept_language
-        access_token = access_token or self.access_token
 
         return Configuration(
             http_client_instance=http_client_instance,
@@ -150,8 +150,8 @@ class Configuration(object):
             timeout=timeout, max_retries=max_retries,
             backoff_factor=backoff_factor, retry_statuses=retry_statuses,
             retry_methods=retry_methods, environment=environment,
-            base_url=base_url, content_type=content_type,
-            accept_language=accept_language, access_token=access_token
+            base_url=base_url, access_token=access_token,
+            content_type=content_type, accept_language=accept_language
         )
 
     def create_http_client(self):

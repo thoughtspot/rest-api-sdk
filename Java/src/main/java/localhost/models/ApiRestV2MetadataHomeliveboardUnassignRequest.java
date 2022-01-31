@@ -14,9 +14,7 @@ import com.fasterxml.jackson.annotation.JsonSetter;
  * This is a model class for ApiRestV2MetadataHomeliveboardUnassignRequest type.
  */
 public class ApiRestV2MetadataHomeliveboardUnassignRequest {
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String userName;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String userId;
 
     /**
@@ -43,6 +41,7 @@ public class ApiRestV2MetadataHomeliveboardUnassignRequest {
      * @return Returns the String
      */
     @JsonGetter("userName")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getUserName() {
         return userName;
     }
@@ -63,6 +62,7 @@ public class ApiRestV2MetadataHomeliveboardUnassignRequest {
      * @return Returns the String
      */
     @JsonGetter("userId")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getUserId() {
         return userId;
     }

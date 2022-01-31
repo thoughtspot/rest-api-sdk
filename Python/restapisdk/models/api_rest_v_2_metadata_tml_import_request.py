@@ -16,12 +16,20 @@ class ApiRestV2MetadataTmlImportRequest(object):
 
     Attributes:
         object_tml (list of string): A JSON array of TML objects to upload, in
-            YAML or JSON format. If in YAML format within the JSON array, use
-            escape characters for YAML quotes, and new line characters when
-            there is a new line
-        import_policy (ImportPolicyEnum): Policy to follow during import
+            YAML or JSON format.    If in YAML format within the JSON array,
+            use escape characters for YAML quotes, and new line characters
+            when there is a new line.    Example:    To import a single
+            object, ["guid: 3729c085-8659-48fd-9479-a67bd7307496\npinboard:\n
+            name: …"]    To import multiple objects, ["guid:
+            3729c085-8659-48fd-9479-a67bd7307496\npinboard:\n name: …", "guid:
+            5739d025-8659-48fd-9479-a67bd7704212\npinboard:\n name: …"]
+        import_policy (ImportPolicyEnum): Policy to follow during import.   
+            PARTIAL - Imports all objects that validate successfully, and
+            ignores objects that do not validate successfully.    ALL_OR_NONE
+            Imports the objects that validate successfully.    VALIDATE_ONLY
+            Validates the objects but does not import them.
         force_create (bool): Specifies if you are updating or creating
-            objects. To create new objects, specify true. By default,
+            objects. To create new objects, specify true.    By default,
             ThoughtSpot updates existing objects that have the same GUID as
             the objects you are importing. When set to true, the GUID property
             in the imported TML is replaced on the server, and the response
@@ -77,16 +85,3 @@ class ApiRestV2MetadataTmlImportRequest(object):
         return cls(object_tml,
                    import_policy,
                    force_create)
-
-    @classmethod
-    def validate(cls, val):
-        """Validates value against class schema
-
-        Args:
-            val: the value to be validated
-
-        Returns:
-            boolean : if value is valid against schema.
-
-        """
-        return SchemaValidatorWrapper.getValidator(APIHelper.get_schema_path(os.path.abspath(__file__))).is_valid(val)

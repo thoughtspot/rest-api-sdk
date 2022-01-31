@@ -14,9 +14,7 @@ import com.fasterxml.jackson.annotation.JsonSetter;
  * This is a model class for UserNameAndIDInput type.
  */
 public class UserNameAndIDInput {
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String name;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String id;
 
     /**
@@ -43,6 +41,7 @@ public class UserNameAndIDInput {
      * @return Returns the String
      */
     @JsonGetter("name")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getName() {
         return name;
     }
@@ -63,6 +62,7 @@ public class UserNameAndIDInput {
      * @return Returns the String
      */
     @JsonGetter("id")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getId() {
         return id;
     }

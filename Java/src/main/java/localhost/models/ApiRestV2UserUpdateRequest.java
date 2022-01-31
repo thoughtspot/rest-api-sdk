@@ -15,40 +15,28 @@ import java.util.List;
  * This is a model class for ApiRestV2UserUpdateRequest type.
  */
 public class ApiRestV2UserUpdateRequest {
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String name;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String id;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String displayName;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    private VisibilityEnum visibility;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Visibility1Enum visibility;
     private String mail;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String password;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private StateEnum state;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Boolean notifyOnShare;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Boolean showWalkMe;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Boolean analystOnboardingComplete;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Type2Enum type;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<GroupNameAndIDInput> groups;
 
     /**
      * Default constructor.
      */
     public ApiRestV2UserUpdateRequest() {
-        visibility = VisibilityEnum.DEFAULT;
+        visibility = Visibility1Enum.DEFAULT;
         state = StateEnum.ACTIVE;
         notifyOnShare = true;
         showWalkMe = true;
-        analystOnboardingComplete = true;
+        analystOnboardingComplete = false;
         type = Type2Enum.LOCAL_USER;
     }
 
@@ -57,7 +45,7 @@ public class ApiRestV2UserUpdateRequest {
      * @param  name  String value for name.
      * @param  id  String value for id.
      * @param  displayName  String value for displayName.
-     * @param  visibility  VisibilityEnum value for visibility.
+     * @param  visibility  Visibility1Enum value for visibility.
      * @param  mail  String value for mail.
      * @param  password  String value for password.
      * @param  state  StateEnum value for state.
@@ -71,7 +59,7 @@ public class ApiRestV2UserUpdateRequest {
             String name,
             String id,
             String displayName,
-            VisibilityEnum visibility,
+            Visibility1Enum visibility,
             String mail,
             String password,
             StateEnum state,
@@ -100,6 +88,7 @@ public class ApiRestV2UserUpdateRequest {
      * @return Returns the String
      */
     @JsonGetter("name")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getName() {
         return name;
     }
@@ -120,6 +109,7 @@ public class ApiRestV2UserUpdateRequest {
      * @return Returns the String
      */
     @JsonGetter("id")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getId() {
         return id;
     }
@@ -140,6 +130,7 @@ public class ApiRestV2UserUpdateRequest {
      * @return Returns the String
      */
     @JsonGetter("displayName")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getDisplayName() {
         return displayName;
     }
@@ -156,25 +147,26 @@ public class ApiRestV2UserUpdateRequest {
 
     /**
      * Getter for Visibility.
-     * Visibility of the user. The visibility attribute is set to DEFAULT when creating a user.
-     * Setting this to DEFAULT makes a user visible to other users and user groups, and thus allows
-     * them to share objects
-     * @return Returns the VisibilityEnum
+     * Visibility of the user account. The visibility attribute is set to DEFAULT when creating a
+     * user. The DEFAULT attribute makes a user visible to other users and user groups, and thus
+     * allows them to share objects.
+     * @return Returns the Visibility1Enum
      */
     @JsonGetter("visibility")
-    public VisibilityEnum getVisibility() {
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public Visibility1Enum getVisibility() {
         return visibility;
     }
 
     /**
      * Setter for Visibility.
-     * Visibility of the user. The visibility attribute is set to DEFAULT when creating a user.
-     * Setting this to DEFAULT makes a user visible to other users and user groups, and thus allows
-     * them to share objects
-     * @param visibility Value for VisibilityEnum
+     * Visibility of the user account. The visibility attribute is set to DEFAULT when creating a
+     * user. The DEFAULT attribute makes a user visible to other users and user groups, and thus
+     * allows them to share objects.
+     * @param visibility Value for Visibility1Enum
      */
     @JsonSetter("visibility")
-    public void setVisibility(VisibilityEnum visibility) {
+    public void setVisibility(Visibility1Enum visibility) {
         this.visibility = visibility;
     }
 
@@ -184,6 +176,7 @@ public class ApiRestV2UserUpdateRequest {
      * @return Returns the String
      */
     @JsonGetter("mail")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getMail() {
         return mail;
     }
@@ -204,6 +197,7 @@ public class ApiRestV2UserUpdateRequest {
      * @return Returns the String
      */
     @JsonGetter("password")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getPassword() {
         return password;
     }
@@ -224,6 +218,7 @@ public class ApiRestV2UserUpdateRequest {
      * @return Returns the StateEnum
      */
     @JsonGetter("state")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public StateEnum getState() {
         return state;
     }
@@ -245,6 +240,7 @@ public class ApiRestV2UserUpdateRequest {
      * @return Returns the Boolean
      */
     @JsonGetter("notifyOnShare")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public Boolean getNotifyOnShare() {
         return notifyOnShare;
     }
@@ -266,6 +262,7 @@ public class ApiRestV2UserUpdateRequest {
      * @return Returns the Boolean
      */
     @JsonGetter("showWalkMe")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public Boolean getShowWalkMe() {
         return showWalkMe;
     }
@@ -289,6 +286,7 @@ public class ApiRestV2UserUpdateRequest {
      * @return Returns the Boolean
      */
     @JsonGetter("analystOnboardingComplete")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public Boolean getAnalystOnboardingComplete() {
         return analystOnboardingComplete;
     }
@@ -313,6 +311,7 @@ public class ApiRestV2UserUpdateRequest {
      * @return Returns the Type2Enum
      */
     @JsonGetter("type")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public Type2Enum getType() {
         return type;
     }
@@ -334,6 +333,7 @@ public class ApiRestV2UserUpdateRequest {
      * @return Returns the List of GroupNameAndIDInput
      */
     @JsonGetter("groups")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public List<GroupNameAndIDInput> getGroups() {
         return groups;
     }
@@ -390,13 +390,13 @@ public class ApiRestV2UserUpdateRequest {
         private String name;
         private String id;
         private String displayName;
-        private VisibilityEnum visibility = VisibilityEnum.DEFAULT;
+        private Visibility1Enum visibility = Visibility1Enum.DEFAULT;
         private String mail;
         private String password;
         private StateEnum state = StateEnum.ACTIVE;
         private Boolean notifyOnShare = true;
         private Boolean showWalkMe = true;
-        private Boolean analystOnboardingComplete = true;
+        private Boolean analystOnboardingComplete = false;
         private Type2Enum type = Type2Enum.LOCAL_USER;
         private List<GroupNameAndIDInput> groups;
 
@@ -434,10 +434,10 @@ public class ApiRestV2UserUpdateRequest {
 
         /**
          * Setter for visibility.
-         * @param  visibility  VisibilityEnum value for visibility.
+         * @param  visibility  Visibility1Enum value for visibility.
          * @return Builder
          */
-        public Builder visibility(VisibilityEnum visibility) {
+        public Builder visibility(Visibility1Enum visibility) {
             this.visibility = visibility;
             return this;
         }

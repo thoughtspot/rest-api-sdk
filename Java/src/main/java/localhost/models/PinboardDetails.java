@@ -14,9 +14,7 @@ import com.fasterxml.jackson.annotation.JsonSetter;
  * This is a model class for PinboardDetails type.
  */
 public class PinboardDetails {
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String pinboardId;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String pinboardName;
 
     /**
@@ -43,6 +41,7 @@ public class PinboardDetails {
      * @return Returns the String
      */
     @JsonGetter("pinboardId")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getPinboardId() {
         return pinboardId;
     }
@@ -63,6 +62,7 @@ public class PinboardDetails {
      * @return Returns the String
      */
     @JsonGetter("pinboardName")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getPinboardName() {
         return pinboardName;
     }

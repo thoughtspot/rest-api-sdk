@@ -16,9 +16,7 @@ import java.util.List;
  */
 public class ApiRestV2MetadataTmlExportRequest {
     private List<String> id;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private FormatTypeEnum formatType;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Boolean exportAssociated;
 
     /**
@@ -70,6 +68,7 @@ public class ApiRestV2MetadataTmlExportRequest {
      * @return Returns the FormatTypeEnum
      */
     @JsonGetter("formatType")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public FormatTypeEnum getFormatType() {
         return formatType;
     }
@@ -93,6 +92,7 @@ public class ApiRestV2MetadataTmlExportRequest {
      * @return Returns the Boolean
      */
     @JsonGetter("exportAssociated")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public Boolean getExportAssociated() {
         return exportAssociated;
     }

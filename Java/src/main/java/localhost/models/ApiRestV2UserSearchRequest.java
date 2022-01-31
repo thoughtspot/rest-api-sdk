@@ -15,36 +15,24 @@ import java.util.List;
  * This is a model class for ApiRestV2UserSearchRequest type.
  */
 public class ApiRestV2UserSearchRequest {
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String name;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String id;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String displayName;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    private VisibilityEnum visibility;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Visibility2Enum visibility;
     private String mail;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<GroupNameAndIDInput> groups;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<PrivilegeEnum> privileges;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private StateEnum state;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private NotifyOnShareEnum notifyOnShare;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private ShowWalkMeEnum showWalkMe;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private AnalystOnboardingCompleteEnum analystOnboardingComplete;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Type2Enum type;
 
     /**
      * Default constructor.
      */
     public ApiRestV2UserSearchRequest() {
-        visibility = VisibilityEnum.DEFAULT;
+        visibility = Visibility2Enum.DEFAULT;
     }
 
     /**
@@ -52,7 +40,7 @@ public class ApiRestV2UserSearchRequest {
      * @param  name  String value for name.
      * @param  id  String value for id.
      * @param  displayName  String value for displayName.
-     * @param  visibility  VisibilityEnum value for visibility.
+     * @param  visibility  Visibility2Enum value for visibility.
      * @param  mail  String value for mail.
      * @param  groups  List of GroupNameAndIDInput value for groups.
      * @param  privileges  List of PrivilegeEnum value for privileges.
@@ -67,7 +55,7 @@ public class ApiRestV2UserSearchRequest {
             String name,
             String id,
             String displayName,
-            VisibilityEnum visibility,
+            Visibility2Enum visibility,
             String mail,
             List<GroupNameAndIDInput> groups,
             List<PrivilegeEnum> privileges,
@@ -96,6 +84,7 @@ public class ApiRestV2UserSearchRequest {
      * @return Returns the String
      */
     @JsonGetter("name")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getName() {
         return name;
     }
@@ -116,6 +105,7 @@ public class ApiRestV2UserSearchRequest {
      * @return Returns the String
      */
     @JsonGetter("id")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getId() {
         return id;
     }
@@ -136,6 +126,7 @@ public class ApiRestV2UserSearchRequest {
      * @return Returns the String
      */
     @JsonGetter("displayName")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getDisplayName() {
         return displayName;
     }
@@ -155,10 +146,11 @@ public class ApiRestV2UserSearchRequest {
      * Visibility of the user. The visibility attribute is set to DEFAULT when creating a user.
      * Setting this to DEFAULT makes a user visible to other users and user groups, and thus allows
      * them to share objects
-     * @return Returns the VisibilityEnum
+     * @return Returns the Visibility2Enum
      */
     @JsonGetter("visibility")
-    public VisibilityEnum getVisibility() {
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public Visibility2Enum getVisibility() {
         return visibility;
     }
 
@@ -167,10 +159,10 @@ public class ApiRestV2UserSearchRequest {
      * Visibility of the user. The visibility attribute is set to DEFAULT when creating a user.
      * Setting this to DEFAULT makes a user visible to other users and user groups, and thus allows
      * them to share objects
-     * @param visibility Value for VisibilityEnum
+     * @param visibility Value for Visibility2Enum
      */
     @JsonSetter("visibility")
-    public void setVisibility(VisibilityEnum visibility) {
+    public void setVisibility(Visibility2Enum visibility) {
         this.visibility = visibility;
     }
 
@@ -180,6 +172,7 @@ public class ApiRestV2UserSearchRequest {
      * @return Returns the String
      */
     @JsonGetter("mail")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getMail() {
         return mail;
     }
@@ -200,6 +193,7 @@ public class ApiRestV2UserSearchRequest {
      * @return Returns the List of GroupNameAndIDInput
      */
     @JsonGetter("groups")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public List<GroupNameAndIDInput> getGroups() {
         return groups;
     }
@@ -220,6 +214,7 @@ public class ApiRestV2UserSearchRequest {
      * @return Returns the List of PrivilegeEnum
      */
     @JsonGetter("privileges")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public List<PrivilegeEnum> getPrivileges() {
         return privileges;
     }
@@ -240,6 +235,7 @@ public class ApiRestV2UserSearchRequest {
      * @return Returns the StateEnum
      */
     @JsonGetter("state")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public StateEnum getState() {
         return state;
     }
@@ -261,6 +257,7 @@ public class ApiRestV2UserSearchRequest {
      * @return Returns the NotifyOnShareEnum
      */
     @JsonGetter("notifyOnShare")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public NotifyOnShareEnum getNotifyOnShare() {
         return notifyOnShare;
     }
@@ -282,6 +279,7 @@ public class ApiRestV2UserSearchRequest {
      * @return Returns the ShowWalkMeEnum
      */
     @JsonGetter("showWalkMe")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public ShowWalkMeEnum getShowWalkMe() {
         return showWalkMe;
     }
@@ -305,6 +303,7 @@ public class ApiRestV2UserSearchRequest {
      * @return Returns the AnalystOnboardingCompleteEnum
      */
     @JsonGetter("analystOnboardingComplete")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public AnalystOnboardingCompleteEnum getAnalystOnboardingComplete() {
         return analystOnboardingComplete;
     }
@@ -329,6 +328,7 @@ public class ApiRestV2UserSearchRequest {
      * @return Returns the Type2Enum
      */
     @JsonGetter("type")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public Type2Enum getType() {
         return type;
     }
@@ -386,7 +386,7 @@ public class ApiRestV2UserSearchRequest {
         private String name;
         private String id;
         private String displayName;
-        private VisibilityEnum visibility = VisibilityEnum.DEFAULT;
+        private Visibility2Enum visibility = Visibility2Enum.DEFAULT;
         private String mail;
         private List<GroupNameAndIDInput> groups;
         private List<PrivilegeEnum> privileges;
@@ -430,10 +430,10 @@ public class ApiRestV2UserSearchRequest {
 
         /**
          * Setter for visibility.
-         * @param  visibility  VisibilityEnum value for visibility.
+         * @param  visibility  Visibility2Enum value for visibility.
          * @return Builder
          */
-        public Builder visibility(VisibilityEnum visibility) {
+        public Builder visibility(Visibility2Enum visibility) {
             this.visibility = visibility;
             return this;
         }

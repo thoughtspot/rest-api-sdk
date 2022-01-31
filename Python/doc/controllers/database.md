@@ -19,6 +19,8 @@ database_controller = client.database
 
 # Get Databases
 
+Note: This endpoint is applicable only for on-prem deployments
+
 To list all the databases in Falcon, use this endpoint.
 
 ```python
@@ -43,6 +45,8 @@ result = database_controller.get_databases()
 
 
 # Get Schemas
+
+Note: This endpoint is applicable only for on-prem deployments
 
 To list all the schemas in a database in Falcon, use this endpoint.
 
@@ -78,7 +82,9 @@ result = database_controller.get_schemas(database)
 
 # Get Tables
 
-To list all the schemas in a database in Falcon, use this endpoint.
+Note: This endpoint is applicable only for on-prem deployments.
+
+To list all the tables in a schema of a database in Falcon, use this endpoint.
 
 ```python
 def get_tables(self,
@@ -115,6 +121,8 @@ result = database_controller.get_tables(database, schema)
 
 # Create Table
 
+Note: This endpoint is applicable only for on-prem deployments.
+
 To create a table in Falcon, use this endpoint.
 
 ```python
@@ -149,7 +157,11 @@ result = database_controller.create_table(body)
 
 # Run Query
 
-To create a table in Falcon, use this endpoint.
+Note: This endpoint is applicable only for on-prem deployments.
+
+To run a TQL statement in Falcon, use this endpoint.
+
+You can run only following type of statements - Table DDL alter and Table rows update and delete.
 
 ```python
 def run_query(self,

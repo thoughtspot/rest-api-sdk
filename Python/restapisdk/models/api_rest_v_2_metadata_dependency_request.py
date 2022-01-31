@@ -15,12 +15,11 @@ class ApiRestV2MetadataDependencyRequest(object):
     TODO: type model description here.
 
     Attributes:
-        mtype (Type10Enum): Type of the data object
+        mtype (Type12Enum): Type of the data object
         id (list of string): A JSON array of GUIDs of the objects
-        batch_size (int): he maximum number of batches to fetch in a query. If
-            this attribute is not defined, the value specified in the cluster
-            configuration is used. To get the list of all dependent objects in
-            a single query, define the batch size attribute as -1
+        batch_size (int): The maximum number of batches to fetch in a query.  
+            If this attribute is not defined, then the list of all dependent
+            objects is included in the response
 
     """
 
@@ -68,16 +67,3 @@ class ApiRestV2MetadataDependencyRequest(object):
         return cls(mtype,
                    id,
                    batch_size)
-
-    @classmethod
-    def validate(cls, val):
-        """Validates value against class schema
-
-        Args:
-            val: the value to be validated
-
-        Returns:
-            boolean : if value is valid against schema.
-
-        """
-        return SchemaValidatorWrapper.getValidator(APIHelper.get_schema_path(os.path.abspath(__file__))).is_valid(val)

@@ -15,45 +15,29 @@ import java.util.List;
  * This is a model class for ApiRestV2MetadataHeaderSearchRequest type.
  */
 public class ApiRestV2MetadataHeaderSearchRequest {
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<String> outputFields;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    private String offset;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    private String batchSize;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Integer offset;
+    private Integer batchSize;
     private SortByEnum sortBy;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private SortOrderEnum sortOrder;
-    private Type9Enum type;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Type10Enum type;
     private String namePattern;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<String> fetchId;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<String> skipId;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Boolean showHidden;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private AutoCreatedEnum autoCreated;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<AccessLevelInput> accessLevel;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<TagNameAndIdInput> tag;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<NameAndIdInput> favoriteFor;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<NameAndIdInput> createdBy;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<NameAndIdInput> lastModifiedBy;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<NameAndIdInput> ownedBy;
 
     /**
      * Default constructor.
      */
     public ApiRestV2MetadataHeaderSearchRequest() {
-        offset = "0";
+        offset = 0;
         sortBy = SortByEnum.DEFAULT;
         sortOrder = SortOrderEnum.DEFAULT;
         showHidden = false;
@@ -61,10 +45,10 @@ public class ApiRestV2MetadataHeaderSearchRequest {
 
     /**
      * Initialization constructor.
-     * @param  type  Type9Enum value for type.
+     * @param  type  Type10Enum value for type.
      * @param  outputFields  List of String value for outputFields.
-     * @param  offset  String value for offset.
-     * @param  batchSize  String value for batchSize.
+     * @param  offset  Integer value for offset.
+     * @param  batchSize  Integer value for batchSize.
      * @param  sortBy  SortByEnum value for sortBy.
      * @param  sortOrder  SortOrderEnum value for sortOrder.
      * @param  namePattern  String value for namePattern.
@@ -80,10 +64,10 @@ public class ApiRestV2MetadataHeaderSearchRequest {
      * @param  ownedBy  List of NameAndIdInput value for ownedBy.
      */
     public ApiRestV2MetadataHeaderSearchRequest(
-            Type9Enum type,
+            Type10Enum type,
             List<String> outputFields,
-            String offset,
-            String batchSize,
+            Integer offset,
+            Integer batchSize,
             SortByEnum sortBy,
             SortOrderEnum sortOrder,
             String namePattern,
@@ -122,6 +106,7 @@ public class ApiRestV2MetadataHeaderSearchRequest {
      * @return Returns the List of String
      */
     @JsonGetter("outputFields")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public List<String> getOutputFields() {
         return outputFields;
     }
@@ -140,10 +125,11 @@ public class ApiRestV2MetadataHeaderSearchRequest {
      * Getter for Offset.
      * The offset point, starting from where the records should be included in the response. If no
      * input is provided then offset starts from 0.
-     * @return Returns the String
+     * @return Returns the Integer
      */
     @JsonGetter("offset")
-    public String getOffset() {
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public Integer getOffset() {
         return offset;
     }
 
@@ -151,10 +137,10 @@ public class ApiRestV2MetadataHeaderSearchRequest {
      * Setter for Offset.
      * The offset point, starting from where the records should be included in the response. If no
      * input is provided then offset starts from 0.
-     * @param offset Value for String
+     * @param offset Value for Integer
      */
     @JsonSetter("offset")
-    public void setOffset(String offset) {
+    public void setOffset(Integer offset) {
         this.offset = offset;
     }
 
@@ -163,10 +149,11 @@ public class ApiRestV2MetadataHeaderSearchRequest {
      * The number of records that should be included in the response starting from offset position.
      * If no input is provided, then all records starting from the value provided in offset is
      * included in the response.
-     * @return Returns the String
+     * @return Returns the Integer
      */
     @JsonGetter("batchSize")
-    public String getBatchSize() {
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public Integer getBatchSize() {
         return batchSize;
     }
 
@@ -175,10 +162,10 @@ public class ApiRestV2MetadataHeaderSearchRequest {
      * The number of records that should be included in the response starting from offset position.
      * If no input is provided, then all records starting from the value provided in offset is
      * included in the response.
-     * @param batchSize Value for String
+     * @param batchSize Value for Integer
      */
     @JsonSetter("batchSize")
-    public void setBatchSize(String batchSize) {
+    public void setBatchSize(Integer batchSize) {
         this.batchSize = batchSize;
     }
 
@@ -188,6 +175,7 @@ public class ApiRestV2MetadataHeaderSearchRequest {
      * @return Returns the SortByEnum
      */
     @JsonGetter("sortBy")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public SortByEnum getSortBy() {
         return sortBy;
     }
@@ -208,6 +196,7 @@ public class ApiRestV2MetadataHeaderSearchRequest {
      * @return Returns the SortOrderEnum
      */
     @JsonGetter("sortOrder")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public SortOrderEnum getSortOrder() {
         return sortOrder;
     }
@@ -225,20 +214,20 @@ public class ApiRestV2MetadataHeaderSearchRequest {
     /**
      * Getter for Type.
      * Type of the metadata object being searched.
-     * @return Returns the Type9Enum
+     * @return Returns the Type10Enum
      */
     @JsonGetter("type")
-    public Type9Enum getType() {
+    public Type10Enum getType() {
         return type;
     }
 
     /**
      * Setter for Type.
      * Type of the metadata object being searched.
-     * @param type Value for Type9Enum
+     * @param type Value for Type10Enum
      */
     @JsonSetter("type")
-    public void setType(Type9Enum type) {
+    public void setType(Type10Enum type) {
         this.type = type;
     }
 
@@ -249,6 +238,7 @@ public class ApiRestV2MetadataHeaderSearchRequest {
      * @return Returns the String
      */
     @JsonGetter("namePattern")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getNamePattern() {
         return namePattern;
     }
@@ -270,6 +260,7 @@ public class ApiRestV2MetadataHeaderSearchRequest {
      * @return Returns the List of String
      */
     @JsonGetter("fetchId")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public List<String> getFetchId() {
         return fetchId;
     }
@@ -290,6 +281,7 @@ public class ApiRestV2MetadataHeaderSearchRequest {
      * @return Returns the List of String
      */
     @JsonGetter("skipId")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public List<String> getSkipId() {
         return skipId;
     }
@@ -311,6 +303,7 @@ public class ApiRestV2MetadataHeaderSearchRequest {
      * @return Returns the Boolean
      */
     @JsonGetter("showHidden")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public Boolean getShowHidden() {
         return showHidden;
     }
@@ -333,6 +326,7 @@ public class ApiRestV2MetadataHeaderSearchRequest {
      * @return Returns the AutoCreatedEnum
      */
     @JsonGetter("autoCreated")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public AutoCreatedEnum getAutoCreated() {
         return autoCreated;
     }
@@ -361,6 +355,7 @@ public class ApiRestV2MetadataHeaderSearchRequest {
      * @return Returns the List of AccessLevelInput
      */
     @JsonGetter("accessLevel")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public List<AccessLevelInput> getAccessLevel() {
         return accessLevel;
     }
@@ -388,6 +383,7 @@ public class ApiRestV2MetadataHeaderSearchRequest {
      * @return Returns the List of TagNameAndIdInput
      */
     @JsonGetter("tag")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public List<TagNameAndIdInput> getTag() {
         return tag;
     }
@@ -409,6 +405,7 @@ public class ApiRestV2MetadataHeaderSearchRequest {
      * @return Returns the List of NameAndIdInput
      */
     @JsonGetter("favoriteFor")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public List<NameAndIdInput> getFavoriteFor() {
         return favoriteFor;
     }
@@ -431,6 +428,7 @@ public class ApiRestV2MetadataHeaderSearchRequest {
      * @return Returns the List of NameAndIdInput
      */
     @JsonGetter("createdBy")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public List<NameAndIdInput> getCreatedBy() {
         return createdBy;
     }
@@ -453,6 +451,7 @@ public class ApiRestV2MetadataHeaderSearchRequest {
      * @return Returns the List of NameAndIdInput
      */
     @JsonGetter("lastModifiedBy")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public List<NameAndIdInput> getLastModifiedBy() {
         return lastModifiedBy;
     }
@@ -475,6 +474,7 @@ public class ApiRestV2MetadataHeaderSearchRequest {
      * @return Returns the List of NameAndIdInput
      */
     @JsonGetter("ownedBy")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public List<NameAndIdInput> getOwnedBy() {
         return ownedBy;
     }
@@ -535,10 +535,10 @@ public class ApiRestV2MetadataHeaderSearchRequest {
      * Class to build instances of {@link ApiRestV2MetadataHeaderSearchRequest}.
      */
     public static class Builder {
-        private Type9Enum type;
+        private Type10Enum type;
         private List<String> outputFields;
-        private String offset = "0";
-        private String batchSize;
+        private Integer offset = 0;
+        private Integer batchSize;
         private SortByEnum sortBy = SortByEnum.DEFAULT;
         private SortOrderEnum sortOrder = SortOrderEnum.DEFAULT;
         private String namePattern;
@@ -561,18 +561,18 @@ public class ApiRestV2MetadataHeaderSearchRequest {
 
         /**
          * Initialization constructor.
-         * @param  type  Type9Enum value for type.
+         * @param  type  Type10Enum value for type.
          */
-        public Builder(Type9Enum type) {
+        public Builder(Type10Enum type) {
             this.type = type;
         }
 
         /**
          * Setter for type.
-         * @param  type  Type9Enum value for type.
+         * @param  type  Type10Enum value for type.
          * @return Builder
          */
-        public Builder type(Type9Enum type) {
+        public Builder type(Type10Enum type) {
             this.type = type;
             return this;
         }
@@ -589,20 +589,20 @@ public class ApiRestV2MetadataHeaderSearchRequest {
 
         /**
          * Setter for offset.
-         * @param  offset  String value for offset.
+         * @param  offset  Integer value for offset.
          * @return Builder
          */
-        public Builder offset(String offset) {
+        public Builder offset(Integer offset) {
             this.offset = offset;
             return this;
         }
 
         /**
          * Setter for batchSize.
-         * @param  batchSize  String value for batchSize.
+         * @param  batchSize  Integer value for batchSize.
          * @return Builder
          */
-        public Builder batchSize(String batchSize) {
+        public Builder batchSize(Integer batchSize) {
             this.batchSize = batchSize;
             return this;
         }

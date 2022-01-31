@@ -48,8 +48,9 @@ import { BaseController } from './baseController';
 
 export class GroupController extends BaseController {
   /**
-   * To get the details of a specific group by name or id, use this endpoint. At Least one value needed.
-   * When both are given,then id will be considered to fetch user information.
+   * To get the details of a specific group by name or id, use this endpoint.
+   *
+   * At least one value needed. When both are given,then id will be considered to fetch user information.
    *
    * @param name Name of the group
    * @param id   The GUID of the group
@@ -72,12 +73,17 @@ export class GroupController extends BaseController {
   }
 
   /**
-   * To programmatically create a group in the ThoughtSpot system, use this API endpoint. Using this API,
-   * you can create a group and assign privileges and users. For ease of user management and access
-   * control, ThoughtSpot administrators can create groups and assign privileges to these groups. The
-   * privileges determine the actions that the users belonging to a group are allowed to do. ThoughtSpot
-   * also has a default group called ALL_GROUP. When you create new group in ThoughtSpot, they are
-   * automatically added to ALL_GROUP. You cannot delete the ALL_GROUP or remove members from it.
+   * To programmatically create a group in the ThoughtSpot system, use this API endpoint.
+   *
+   * Using this API, you can create a group and assign privileges and users.
+   *
+   * For ease of user management and access control, ThoughtSpot administrators can create groups and
+   * assign privileges to these groups.
+   *
+   * The privileges determine the actions that the users belonging to a group are allowed to do.
+   *
+   * ThoughtSpot also has a default group called ALL_GROUP. When you create new group in ThoughtSpot,
+   * they are automatically added to ALL_GROUP. You cannot delete the ALL_GROUP or remove members from it.
    *
    * @param body
    * @return Response from the API call
@@ -97,9 +103,12 @@ export class GroupController extends BaseController {
   }
 
   /**
-   * You can use this endpoint to programmatically modify an existing group.  To modify a group, you
-   * require admin user privileges.At least one of id or name is required to update the group. When both
-   * are given, then id will be considered and group name will be updated.
+   * You can use this endpoint to programmatically modify an existing group.
+   *
+   * To modify a group, you require admin user privileges.
+   *
+   * At least one of id or name is required to update the group. When both are given, then id will be
+   * considered and group name will be updated.
    *
    * @param body
    * @return Response from the API call
@@ -119,8 +128,10 @@ export class GroupController extends BaseController {
   }
 
   /**
-   * To remove a group from the ThoughtSpot system, send a DELETE request to this endpoint. At Least one
-   * value needed.  When both are given,then user id will be considered to fetch user information.
+   * To remove a group from the ThoughtSpot system, send a DELETE request to this endpoint.
+   *
+   * At least one value needed. When both are given,then user id will be considered to fetch user
+   * information.
    *
    * @param name Name of the group.
    * @param id   The GUID of the group
@@ -143,9 +154,12 @@ export class GroupController extends BaseController {
   }
 
   /**
-   * To programmatically add privileges to an existing group, use API endpoint. When you assign
-   * privileges to a group,  all the users under to this group inherits the privileges assigned to that
-   * group. At least one of id or name of group is required. When both are given,then user id will be
+   * To programmatically add privileges to an existing group, use API endpoint.
+   *
+   * When you assign privileges to a group, all the users under to this group inherits the privileges
+   * assigned to that group.
+   *
+   * At least one of id or name of group is required. When both are given,then user id will be
    * considered.
    *
    * @param body
@@ -166,9 +180,13 @@ export class GroupController extends BaseController {
   }
 
   /**
-   * To programmatically remove privileges from a group, use API endpoint. The API removes only the
-   * privilege association. It does not delete the privilege or group from the Thoughtspot system. At
-   * least one of id or name of group is required. When both are given,then user id will be considered.
+   * To programmatically remove privileges from a group, use API endpoint.
+   *
+   * The API removes only the privilege association. It does not delete the privilege or group from the
+   * Thoughtspot system.
+   *
+   * At least one of id or name of group is required. When both are given,then user id will be
+   * considered.
    *
    * @param body
    * @return Response from the API call
@@ -188,9 +206,12 @@ export class GroupController extends BaseController {
   }
 
   /**
-   * To programmatically add existing ThoughtSpot users to a group, use this API endpoint. When you
-   * assign users to a group, the users inherits the privileges assigned to that group. At least one of
-   * id or name of the group is required. When both are given,then user id will be considered.
+   * To programmatically add existing ThoughtSpot users to a group, use this API endpoint.
+   *
+   * hen you assign users to a group, the users inherits the privileges assigned to that group.
+   *
+   * At least one of id or name of the group is required. When both are given,then user id will be
+   * considered.
    *
    * @param body
    * @return Response from the API call
@@ -210,9 +231,13 @@ export class GroupController extends BaseController {
   }
 
   /**
-   * To programmatically remove users from a group, use API endpoint.The API removes only the user
-   * association. It does not delete the users or group from the Thoughtspot system. At least one of id
-   * or name of group is required. When both are given,then user id will be considered.
+   * To programmatically remove users from a group, use API endpoint.
+   *
+   * The API removes only the user association. It does not delete the users or group from the
+   * Thoughtspot system.
+   *
+   * At least one of id or name of group is required. When both are given,then user id will be
+   * considered.
    *
    * @param body
    * @return Response from the API call
@@ -232,9 +257,12 @@ export class GroupController extends BaseController {
   }
 
   /**
-   * To programmatically add existing groups to a group, use API endpoint. When you assign groups to a
-   * group, the group inherits the privileges assigned to those groups. At least one of id or name of
-   * group is required. When both are given,then user id will be considered.
+   * To programmatically add existing groups to a group, use API endpoint.
+   *
+   * When you assign groups to a group, the group inherits the privileges assigned to those groups.
+   *
+   * At least one of id or name of group is required. When both are given,then user id will be
+   * considered.
    *
    * @param body
    * @return Response from the API call
@@ -254,9 +282,13 @@ export class GroupController extends BaseController {
   }
 
   /**
-   * To programmatically remove groups from a group, use API endpoint.The API removes only the group
-   * association. It does not delete the group from the Thoughtspot system. At least one of id or name of
-   * group is required. When both are given,then user id will be considered.
+   * To programmatically remove groups from a group, use API endpoint.
+   *
+   * The API removes only the group association. It does not delete the group from the Thoughtspot
+   * system.
+   *
+   * At least one of id or name of group is required. When both are given,then user id will be
+   * considered.
    *
    * @param body
    * @return Response from the API call
@@ -276,8 +308,10 @@ export class GroupController extends BaseController {
   }
 
   /**
-   * To get the details of a specific group account or all groups in the ThoughtSpot system, use this end
+   * To get the details of a specific group account or all groups in the ThoughtSpot system use this end
    * point.
+   *
+   * If no inputs are provided, then all groups are included in the response.
    *
    * @param body
    * @return Response from the API call

@@ -14,13 +14,9 @@ import com.fasterxml.jackson.annotation.JsonSetter;
  * This is a model class for HomeLiveboardResponse type.
  */
 public class HomeLiveboardResponse {
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String userName;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String userId;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String liveboardName;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String liveboardId;
 
     /**
@@ -53,6 +49,7 @@ public class HomeLiveboardResponse {
      * @return Returns the String
      */
     @JsonGetter("userName")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getUserName() {
         return userName;
     }
@@ -73,6 +70,7 @@ public class HomeLiveboardResponse {
      * @return Returns the String
      */
     @JsonGetter("userId")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getUserId() {
         return userId;
     }
@@ -93,6 +91,7 @@ public class HomeLiveboardResponse {
      * @return Returns the String
      */
     @JsonGetter("liveboardName")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getLiveboardName() {
         return liveboardName;
     }
@@ -113,6 +112,7 @@ public class HomeLiveboardResponse {
      * @return Returns the String
      */
     @JsonGetter("liveboardId")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getLiveboardId() {
         return liveboardId;
     }

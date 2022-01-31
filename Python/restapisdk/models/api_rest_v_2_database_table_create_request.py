@@ -18,7 +18,17 @@ class ApiRestV2DatabaseTableCreateRequest(object):
         create_database (bool): Flag to indicate if the database and schema
             should be created if they do not exist in Falcon. (Valid values:
             True/False)
-        schema (string): DDL of the table to be created.
+        schema (string): DDL of the table to be created.    Example:   
+            {"database":{"name":"geo"},   
+            "schema":{"name":"falcon_default_schema"},   
+            "table":{"id":{"name":"test_table"},   
+            "primary_key":[{"name":"test_pk"}],    "column":[   
+            {"id":{"name":"test_pk"},"size":0,"data_type":"TYPE_INT32"},   
+            {"id":{"name":"test_col1"},"size":0,"data_type":"TYPE_FLOAT"},   
+            {"id":{"name":"test_col2"},"data_type":"TYPE_INT64","datetime":"TYP
+            E_DATE"},   
+            {"id":{"name":"test_col3"},"size":10,"data_type":"TYPE_VAR_CHAR"} 
+            ]    }    }
 
     """
 
@@ -61,16 +71,3 @@ class ApiRestV2DatabaseTableCreateRequest(object):
         # Return an object of this model
         return cls(create_database,
                    schema)
-
-    @classmethod
-    def validate(cls, val):
-        """Validates value against class schema
-
-        Args:
-            val: the value to be validated
-
-        Returns:
-            boolean : if value is valid against schema.
-
-        """
-        return SchemaValidatorWrapper.getValidator(APIHelper.get_schema_path(os.path.abspath(__file__))).is_valid(val)

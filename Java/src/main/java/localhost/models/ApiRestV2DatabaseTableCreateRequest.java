@@ -14,9 +14,7 @@ import com.fasterxml.jackson.annotation.JsonSetter;
  * This is a model class for ApiRestV2DatabaseTableCreateRequest type.
  */
 public class ApiRestV2DatabaseTableCreateRequest {
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Boolean createDatabase;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String schema;
 
     /**
@@ -45,6 +43,7 @@ public class ApiRestV2DatabaseTableCreateRequest {
      * @return Returns the Boolean
      */
     @JsonGetter("createDatabase")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public Boolean getCreateDatabase() {
         return createDatabase;
     }
@@ -62,17 +61,30 @@ public class ApiRestV2DatabaseTableCreateRequest {
 
     /**
      * Getter for Schema.
-     * DDL of the table to be created.
+     * DDL of the table to be created. Example: {"database":{"name":"geo"},
+     * "schema":{"name":"falcon_default_schema"}, "table":{"id":{"name":"test_table"},
+     * "primary_key":[{"name":"test_pk"}], "column":[
+     * {"id":{"name":"test_pk"},"size":0,"data_type":"TYPE_INT32"},
+     * {"id":{"name":"test_col1"},"size":0,"data_type":"TYPE_FLOAT"},
+     * {"id":{"name":"test_col2"},"data_type":"TYPE_INT64","datetime":"TYPE_DATE"},
+     * {"id":{"name":"test_col3"},"size":10,"data_type":"TYPE_VAR_CHAR"} ] } }
      * @return Returns the String
      */
     @JsonGetter("schema")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getSchema() {
         return schema;
     }
 
     /**
      * Setter for Schema.
-     * DDL of the table to be created.
+     * DDL of the table to be created. Example: {"database":{"name":"geo"},
+     * "schema":{"name":"falcon_default_schema"}, "table":{"id":{"name":"test_table"},
+     * "primary_key":[{"name":"test_pk"}], "column":[
+     * {"id":{"name":"test_pk"},"size":0,"data_type":"TYPE_INT32"},
+     * {"id":{"name":"test_col1"},"size":0,"data_type":"TYPE_FLOAT"},
+     * {"id":{"name":"test_col2"},"data_type":"TYPE_INT64","datetime":"TYPE_DATE"},
+     * {"id":{"name":"test_col3"},"size":10,"data_type":"TYPE_VAR_CHAR"} ] } }
      * @param schema Value for String
      */
     @JsonSetter("schema")

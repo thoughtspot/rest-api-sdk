@@ -12,7 +12,7 @@
 | `name` | `string \| undefined` | Optional | Name of the user group |
 | `id` | `string \| undefined` | Optional | GUID of the group to update |
 | `displayName` | `string \| undefined` | Optional | A unique display name string for the user group, for example, Developer group. |
-| `visibility` | [`Visibility3Enum \| undefined`](/doc/models/visibility-3-enum.md) | Optional | The visibility attribute is set to DEFAULT when creating a group. Setting this to DEFAULT makes a group visible to other users and user groups, and thus allows them to share objects<br>**Default**: `Visibility3Enum.DEFAULT` |
+| `visibility` | [`Visibility3Enum \| undefined`](/doc/models/visibility-3-enum.md) | Optional | Visibility of the user group.<br><br>The visibility attribute is set to DEFAULT. The DEFAULT attribute makes the user group visible for other user groups and allows them to share objects.<br>**Default**: `Visibility3Enum.DEFAULT` |
 | `description` | `string \| undefined` | Optional | Description text for the group. |
 | `privileges` | [`PrivilegeEnum[] \| undefined`](/doc/models/privilege-enum.md) | Optional | A JSON array of privileges assigned to the group |
 | `groups` | [`GroupNameAndIDInput[] \| undefined`](/doc/models/group-name-and-id-input.md) | Optional | A JSON array of group names or GUIDs or both. When both are given then id is considered |

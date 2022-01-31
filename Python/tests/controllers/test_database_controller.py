@@ -23,8 +23,10 @@ class DatabaseControllerTests(ControllerTestBase):
     def setUpClass(cls):
         super(DatabaseControllerTests, cls).setUpClass()
         cls.response_catcher = HttpResponseCatcher()
-        cls.controller = DatabaseController(cls.config, cls.response_catcher)
+        cls.controller = DatabaseController(cls.config, cls.auth_managers, cls.response_catcher)
 
+    # Note: This endpoint is applicable only for on-prem deployments 
+    #
     # To list all the databases in Falcon, use this endpoint.
     def test_get_databases(self):
 

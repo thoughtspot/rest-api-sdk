@@ -14,9 +14,7 @@ import com.fasterxml.jackson.annotation.JsonSetter;
  * This is a model class for CreateTableResponse type.
  */
 public class CreateTableResponse {
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private LogicalTableHeader logicalTableHeader;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String physicalTableId;
 
     /**
@@ -42,6 +40,7 @@ public class CreateTableResponse {
      * @return Returns the LogicalTableHeader
      */
     @JsonGetter("logicalTableHeader")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public LogicalTableHeader getLogicalTableHeader() {
         return logicalTableHeader;
     }
@@ -60,6 +59,7 @@ public class CreateTableResponse {
      * @return Returns the String
      */
     @JsonGetter("physicalTableId")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getPhysicalTableId() {
         return physicalTableId;
     }

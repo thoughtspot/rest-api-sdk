@@ -15,9 +15,7 @@ import java.util.List;
  * This is a model class for ApiRestV2MetadataFavoriteUnassignRequest type.
  */
 public class ApiRestV2MetadataFavoriteUnassignRequest {
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String userName;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String userId;
     private List<MetaObjectInput> metaObject;
 
@@ -48,6 +46,7 @@ public class ApiRestV2MetadataFavoriteUnassignRequest {
      * @return Returns the String
      */
     @JsonGetter("userName")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getUserName() {
         return userName;
     }
@@ -68,6 +67,7 @@ public class ApiRestV2MetadataFavoriteUnassignRequest {
      * @return Returns the String
      */
     @JsonGetter("userId")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getUserId() {
         return userId;
     }

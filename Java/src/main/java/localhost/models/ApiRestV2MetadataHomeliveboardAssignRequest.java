@@ -14,11 +14,8 @@ import com.fasterxml.jackson.annotation.JsonSetter;
  * This is a model class for ApiRestV2MetadataHomeliveboardAssignRequest type.
  */
 public class ApiRestV2MetadataHomeliveboardAssignRequest {
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String userName;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String userId;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String liveboardId;
 
     /**
@@ -48,6 +45,7 @@ public class ApiRestV2MetadataHomeliveboardAssignRequest {
      * @return Returns the String
      */
     @JsonGetter("userName")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getUserName() {
         return userName;
     }
@@ -68,6 +66,7 @@ public class ApiRestV2MetadataHomeliveboardAssignRequest {
      * @return Returns the String
      */
     @JsonGetter("userId")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getUserId() {
         return userId;
     }
@@ -88,6 +87,7 @@ public class ApiRestV2MetadataHomeliveboardAssignRequest {
      * @return Returns the String
      */
     @JsonGetter("liveboardId")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getLiveboardId() {
         return liveboardId;
     }

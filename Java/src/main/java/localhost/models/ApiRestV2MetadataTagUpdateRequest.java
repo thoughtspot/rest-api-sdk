@@ -14,11 +14,8 @@ import com.fasterxml.jackson.annotation.JsonSetter;
  * This is a model class for ApiRestV2MetadataTagUpdateRequest type.
  */
 public class ApiRestV2MetadataTagUpdateRequest {
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String name;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String id;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String color;
 
     /**
@@ -48,6 +45,7 @@ public class ApiRestV2MetadataTagUpdateRequest {
      * @return Returns the String
      */
     @JsonGetter("name")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getName() {
         return name;
     }
@@ -68,6 +66,7 @@ public class ApiRestV2MetadataTagUpdateRequest {
      * @return Returns the String
      */
     @JsonGetter("id")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getId() {
         return id;
     }
@@ -88,6 +87,7 @@ public class ApiRestV2MetadataTagUpdateRequest {
      * @return Returns the String
      */
     @JsonGetter("color")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getColor() {
         return color;
     }

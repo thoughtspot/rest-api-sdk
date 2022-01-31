@@ -10,11 +10,11 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `output_fields` | `List of string` | Optional | Array of header field names that need to be included in the header response |
-| `offset` | `string` | Optional | The offset point, starting from where the records should be included in the response. If no input is provided then offset starts from 0.<br>**Default**: `'0'` |
-| `batch_size` | `string` | Optional | The number of records that should be included in the response starting from offset position. If no input is provided, then all records starting from the value provided in offset is included in the response. |
+| `offset` | `int` | Optional | The offset point, starting from where the records should be included in the response.<br><br>If no input is provided then offset starts from 0.<br>**Default**: `0` |
+| `batch_size` | `int` | Optional | The number of records that should be included in the response starting from offset position.<br><br>If no input is provided, then all records starting from the value provided in offset is included in the response. |
 | `sort_by` | [`SortByEnum`](/doc/models/sort-by-enum.md) | Optional | Field based on which the response needs to be ordered.<br>**Default**: `'DEFAULT'` |
 | `sort_order` | [`SortOrderEnum`](/doc/models/sort-order-enum.md) | Optional | Order in which sortBy should be applied.<br>**Default**: `'DEFAULT'` |
-| `mtype` | [`Type9Enum`](/doc/models/type-9-enum.md) | Required | Type of the metadata object being searched. |
+| `mtype` | [`Type10Enum`](/doc/models/type-10-enum.md) | Required | Type of the metadata object being searched. |
 | `name_pattern` | `string` | Optional | A pattern to match the name of the metadata object. This parameter supports matching case-insensitive strings. For a wildcard match, use %. |
 | `fetch_id` | `List of string` | Optional | A JSON array containing the GUIDs of the metadata objects that you want to fetch. |
 | `skip_id` | `List of string` | Optional | A JSON array containing the GUIDs of the metadata objects that you want to skip. |

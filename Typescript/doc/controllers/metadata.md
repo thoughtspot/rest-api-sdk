@@ -22,9 +22,11 @@ const metadataController = new MetadataController(client);
 * [Assign Homeliveboard](/doc/controllers/metadata.md#assign-homeliveboard)
 * [Unassign Homeliveboard](/doc/controllers/metadata.md#unassign-homeliveboard)
 * [Get Incomplete Objects](/doc/controllers/metadata.md#get-incomplete-objects)
+* [Get Metadata Header](/doc/controllers/metadata.md#get-metadata-header)
 * [Get Object Detail](/doc/controllers/metadata.md#get-object-detail)
 * [Get Object Visualization Header](/doc/controllers/metadata.md#get-object-visualization-header)
 * [Search Object Header](/doc/controllers/metadata.md#search-object-header)
+* [Delete Metadata Object](/doc/controllers/metadata.md#delete-metadata-object)
 * [Get Object Dependency](/doc/controllers/metadata.md#get-object-dependency)
 * [Export Object TML](/doc/controllers/metadata.md#export-object-tml)
 * [Import Object TML](/doc/controllers/metadata.md#import-object-tml)
@@ -32,7 +34,9 @@ const metadataController = new MetadataController(client);
 
 # Get Tag
 
-To get details of a specific tag, use this endpoint. At least one of id or name of tag is required. When both are given, then id will be considered.
+To get details of a specific tag, use this endpoint.
+
+At least one of id or name of tag is required. When both are given, then id will be considered.
 
 ```ts
 async getTag(
@@ -127,7 +131,9 @@ try {
 
 # Update Tag
 
-To programmatically update tags, use this endpoint. At least one of id or name of tag is required. When both are given, then id will be considered.
+To programmatically update tags, use this endpoint.
+
+At least one of id or name of tag is required. When both are given, then id will be considered.
 
 ```ts
 async updateTag(
@@ -174,7 +180,9 @@ try {
 
 # Delete Tag
 
-To programmatically delete tags, use this endpoint. At least one of id or name of tag is required. When both are given, then id will be considered.
+To programmatically delete tags, use this endpoint.
+
+At least one of id or name of tag is required. When both are given, then id will be considered.
 
 ```ts
 async deleteTag(
@@ -220,7 +228,9 @@ try {
 
 # Assign Tag
 
-To programmatically assign tags to a metadata object, such as a liveboard, search answer, table, worksheet, or view, use this endpoint.  At least one of id or name of tag is required. When both are given, then id will be considered.
+To programmatically assign tags to a metadata object, such as a liveboard, search answer, table, worksheet, or view, use this endpoint.
+
+At least one of id or name of tag is required. When both are given, then id will be considered.
 
 ```ts
 async assignTag(
@@ -285,7 +295,9 @@ try {
 
 # Unassign Tag
 
-To programmatically unassign tags to a metadata object, such as a liveboard, search answer, table, worksheet, or view, use this endpoint. At least one of id or name of tag is required. When both are given, then id will be considered.
+To programmatically unassign tags to a metadata object, such as a liveboard, search answer, table, worksheet, or view, use this endpoint.
+
+At least one of id or name of tag is required. When both are given, then id will be considered.
 
 ```ts
 async unassignTag(
@@ -350,7 +362,9 @@ try {
 
 # Assign Favorite
 
-To programmatically assign objects to favorites for a given user account, use this endpoint. At least one of user id or username is required. When both are given, then id will be considered.
+To programmatically assign objects to favorites for a given user account, use this endpoint.
+
+At least one of user id or username is required. When both are given, then id will be considered
 
 ```ts
 async assignFavorite(
@@ -415,7 +429,9 @@ try {
 
 # Unassign Favorite
 
-To programmatically unassign objects to favorites for a given user account, use this endpoint. At least one of user id or username is required. When both are given, then id will be considered.Screen reader support enabled.
+To programmatically unassign objects to favorites for a given user account, use this endpoint.
+
+At least one of user id or username is required. When both are given, then id will be considered. Screen reader support enabled.
 
 ```ts
 async unassignFavorite(
@@ -480,7 +496,9 @@ try {
 
 # Get Homeliveboard
 
-To get the name and id of liveboard that is set as a home liveboard for a user, use this endpoint. At least one of user id or username is required. When both are given, then id will be considered.
+To get the name and id of liveboard that is set as a home liveboard for a user, use this endpoint.
+
+At least one of user id or username is required. When both are given, then id will be considered.
 
 ```ts
 async getHomeliveboard(
@@ -526,7 +544,9 @@ try {
 
 # Assign Homeliveboard
 
-To assign a specific liveboard as a home liveboard for a user, use this endpoint. At least one of user id or username is required. When both are given, then id will be considered.
+To assign a specific liveboard as a home liveboard for a user, use this endpoint.
+
+At least one of user id or username is required. When both are given, then id will be considered.
 
 ```ts
 async assignHomeliveboard(
@@ -573,7 +593,9 @@ try {
 
 # Unassign Homeliveboard
 
-To unassign the home liveboard set for a user, use this endpoint. At least one of user id or username is required. When both are given, then id will be considered.
+To unassign the home liveboard set for a user, use this endpoint.
+
+At least one of user id or username is required. When both are given, then id will be considered.
 
 ```ts
 async unassignHomeliveboard(
@@ -660,13 +682,63 @@ try {
 | 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
 
 
+# Get Metadata Header
+
+To get header detail of a metadata object, use this endpoint. You can provide as input selective fields to get the data for.
+
+```ts
+async getMetadataHeader(
+  type: Type8Enum,
+  id: string,
+  outputFields?: string[],
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<unknown>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `type` | [`Type8Enum`](/doc/models/type-8-enum.md) | Query, Required | Type of the metadata object being searched. |
+| `id` | `string` | Query, Required | GUID of the metadata object |
+| `outputFields` | `string[] \| undefined` | Query, Optional | Array of header field names that need to be included in the header response |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+`unknown`
+
+## Example Usage
+
+```ts
+const type = 'COLUMN_ALL';
+const id = 'id0';
+try {
+  const { result, ...httpResponse } = await metadataController.getMetadataHeader(type, id);
+  // Get more response info...
+  // const { statusCode, headers } = httpResponse;
+} catch(error) {
+  if (error instanceof ApiError) {
+    const errors = error.result;
+    // const { statusCode, headers } = error;
+  }
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+
+
 # Get Object Detail
 
 Use this endpoint to get full details of metadata objects
 
 ```ts
 async getObjectDetail(
-  type: Type8Enum,
+  type: Type9Enum,
   id: string[],
   showHidden?: boolean,
   dropQuestionDetails?: boolean,
@@ -679,7 +751,7 @@ async getObjectDetail(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `type` | [`Type8Enum`](/doc/models/type-8-enum.md) | Query, Required | Type of the metadata object being searched. Valid values |
+| `type` | [`Type9Enum`](/doc/models/type-9-enum.md) | Query, Required | Type of the metadata object being searched. Valid values |
 | `id` | `string[]` | Query, Required | A JSON array of GUIDs of the objects. |
 | `showHidden` | `boolean \| undefined` | Query, Optional | When set to true, returns details of the hidden objects, such as a column in a worksheet or a table. |
 | `dropQuestionDetails` | `boolean \| undefined` | Query, Optional | When set to true, the search assist data associated with a worksheet is not included in the API response. This attribute is applicable only for LOGICAL_TABLE data type. |
@@ -716,7 +788,9 @@ try {
 
 # Get Object Visualization Header
 
-Use this endpoint to get header details of visualization charts for a given liveboard or answer. At least one of id or name of liveboard or answer is required. When both are given, then id will be considered.
+Use this endpoint to get header details of visualization charts for a given liveboard or answer.
+
+At least one of id or name of liveboard or answer is required. When both are given, then id will be considered.
 
 ```ts
 async getObjectVisualizationHeader(
@@ -808,9 +882,67 @@ try {
 | 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
 
 
+# Delete Metadata Object
+
+Use this endpoint to delete the metadata objects
+
+```ts
+async deleteMetadataObject(
+  type: Type9Enum,
+  id: string[],
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<boolean>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `type` | [`Type9Enum`](/doc/models/type-9-enum.md) | Query, Required | Type of the metadata object being searched. |
+| `id` | `string[]` | Query, Required | A JSON array of GUIDs of the objects. |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+`boolean`
+
+## Example Usage
+
+```ts
+const type = 'DATAOBJECT';
+const Id: string[] = ['id0'];
+try {
+  const { result, ...httpResponse } = await metadataController.deleteMetadataObject(type, id);
+  // Get more response info...
+  // const { statusCode, headers } = httpResponse;
+} catch(error) {
+  if (error instanceof ApiError) {
+    const errors = error.result;
+    // const { statusCode, headers } = error;
+  }
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+
+
 # Get Object Dependency
 
-To query the details of dependent objects and associate objects as dependents, you can use this API. Dependency is defined as relation between referenced and referencing objects. A referencing object is said to have a dependency on a referenced object, if the referenced object cannot be deleted without first deleting the referencing object. For example, consider a worksheet W1 that has a derived logical column C1 that has a reference to a base logical column C2. This can be shown diagramatically as: W1-->C1-->C2. W1 has a dependency on C2 i.e. W1 is a referencing object and C2 is a referenced object. It is not possible to delete C2 without first deleting W1 because deletion of C2 will be prevented by the relationship between W1s column C1 and C2. Similarly C1 is said to have a dependency on C2 i.e. C1 is a referencing object and C2 is a referenced object. It is not possible to delete C2 without first deleting C1
+To query the details of dependent objects and associate objects as dependents, you can use this API.
+
+Dependency is defined as relation between referenced and referencing objects. A referencing object is said to have a dependency on a referenced object, if the referenced object cannot be deleted without first deleting the referencing object.
+
+Example:
+
+Consider a worksheet W1 that has a derived logical column C1 that has a reference to a base logical column C2. This can be shown diagramatically as: W1-->C1-->C2.
+
+W1 has a dependency on C2 i.e. W1 is a referencing object and C2 is a referenced object. It is not possible to delete C2 without first deleting W1 because deletion of C2 will be prevented by the relationship between W1s column C1 and C2.
+
+Similarly C1 is said to have a dependency on C2 i.e. C1 is a referencing object and C2 is a referenced object. It is not possible to delete C2 without first deleting C1
 
 ```ts
 async getObjectDependency(

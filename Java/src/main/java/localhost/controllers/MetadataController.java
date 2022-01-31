@@ -39,6 +39,7 @@ import localhost.models.ApiRestV2MetadataTmlImportRequest;
 import localhost.models.HomeLiveboardResponse;
 import localhost.models.MetadataTagResponse;
 import localhost.models.Type8Enum;
+import localhost.models.Type9Enum;
 
 /**
  * This class lists all the endpoints of the groups.
@@ -750,7 +751,7 @@ public final class MetadataController extends BaseController {
     /**
      * To programmatically unassign objects to favorites for a given user account, use this
      * endpoint. At least one of user id or username is required. When both are given, then id will
-     * be considered.Screen reader support enabled.
+     * be considered. Screen reader support enabled.
      * @param  body  Required parameter: Example:
      * @return    Returns the Boolean response from the API call
      * @throws    ApiException    Represents error response from the server.
@@ -770,7 +771,7 @@ public final class MetadataController extends BaseController {
     /**
      * To programmatically unassign objects to favorites for a given user account, use this
      * endpoint. At least one of user id or username is required. When both are given, then id will
-     * be considered.Screen reader support enabled.
+     * be considered. Screen reader support enabled.
      * @param  body  Required parameter: Example:
      * @return    Returns the Boolean response from the API call
      */
@@ -1221,6 +1222,118 @@ public final class MetadataController extends BaseController {
     }
 
     /**
+     * To get header detail of a metadata object, use this endpoint. You can provide as input
+     * selective fields to get the data for.
+     * @param  type  Required parameter: Type of the metadata object being searched.
+     * @param  id  Required parameter: GUID of the metadata object
+     * @param  outputFields  Optional parameter: Array of header field names that need to be
+     *         included in the header response
+     * @return    Returns the Object response from the API call
+     * @throws    ApiException    Represents error response from the server.
+     * @throws    IOException    Signals that an I/O exception of some sort has occurred.
+     */
+    public Object getMetadataHeader(
+            final Type8Enum type,
+            final String id,
+            final List<String> outputFields) throws ApiException, IOException {
+        HttpRequest request = buildGetMetadataHeaderRequest(type, id, outputFields);
+        authManagers.get("global").apply(request);
+
+        HttpResponse response = getClientInstance().execute(request, false);
+        HttpContext context = new HttpContext(request, response);
+
+        return handleGetMetadataHeaderResponse(context);
+    }
+
+    /**
+     * To get header detail of a metadata object, use this endpoint. You can provide as input
+     * selective fields to get the data for.
+     * @param  type  Required parameter: Type of the metadata object being searched.
+     * @param  id  Required parameter: GUID of the metadata object
+     * @param  outputFields  Optional parameter: Array of header field names that need to be
+     *         included in the header response
+     * @return    Returns the Object response from the API call
+     */
+    public CompletableFuture<Object> getMetadataHeaderAsync(
+            final Type8Enum type,
+            final String id,
+            final List<String> outputFields) {
+        return makeHttpCallAsync(() -> buildGetMetadataHeaderRequest(type, id, outputFields),
+            req -> authManagers.get("global").applyAsync(req)
+                .thenCompose(request -> getClientInstance()
+                        .executeAsync(request, false)),
+            context -> handleGetMetadataHeaderResponse(context));
+    }
+
+    /**
+     * Builds the HttpRequest object for getMetadataHeader.
+     */
+    private HttpRequest buildGetMetadataHeaderRequest(
+            final Type8Enum type,
+            final String id,
+            final List<String> outputFields) {
+        //the base uri for api requests
+        String baseUri = config.getBaseUri();
+
+        //prepare query string for API call
+        final StringBuilder queryBuilder = new StringBuilder(baseUri
+                + "/api/rest/v2/metadata/header");
+
+        //load all query parameters
+        Map<String, Object> queryParameters = new HashMap<>();
+        queryParameters.put("type",
+                (type != null) ? type.value() : null);
+        queryParameters.put("id", id);
+        queryParameters.put("outputFields", outputFields);
+
+        //load all headers for the outgoing API request
+        Headers headers = new Headers();
+        headers.add("Content-Type", config.getContentType());
+        headers.add("Accept-Language", config.getAcceptLanguage());
+        headers.add("user-agent", BaseController.userAgent);
+
+        //prepare and invoke the API call request to fetch the response
+        HttpRequest request = getClientInstance().get(queryBuilder, headers, queryParameters,
+                null);
+
+        // Invoke the callback before request if its not null
+        if (getHttpCallback() != null) {
+            getHttpCallback().onBeforeRequest(request);
+        }
+
+        return request;
+    }
+
+    /**
+     * Processes the response for getMetadataHeader.
+     * @return An object of type Object
+     */
+    private Object handleGetMetadataHeaderResponse(
+            HttpContext context) throws ApiException, IOException {
+        HttpResponse response = context.getResponse();
+
+        //invoke the callback after response if its not null
+        if (getHttpCallback() != null) {
+            getHttpCallback().onAfterResponse(context);
+        }
+
+        //Error handling using HTTP status codes
+        int responseCode = response.getStatusCode();
+
+        if (responseCode == 500) {
+            throw new ErrorResponseException("Operation failed or unauthorized request", context);
+        }
+        //handle errors defined at the API level
+        validateResponse(response, context);
+
+        //extract result from the http response
+        String responseBody = ((HttpStringResponse) response).getBody();
+        Object result = responseBody;
+
+        return result;
+    }
+
+    /**
      * Use this endpoint to get full details of metadata objects.
      * @param  type  Required parameter: Type of the metadata object being searched. Valid values
      * @param  id  Required parameter: A JSON array of GUIDs of the objects.
@@ -1236,7 +1349,7 @@ public final class MetadataController extends BaseController {
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
     public Object getObjectDetail(
-            final Type8Enum type,
+            final Type9Enum type,
             final List<String> id,
             final Boolean showHidden,
             final Boolean dropQuestionDetails,
@@ -1265,7 +1378,7 @@ public final class MetadataController extends BaseController {
      * @return    Returns the Object response from the API call
      */
     public CompletableFuture<Object> getObjectDetailAsync(
-            final Type8Enum type,
+            final Type9Enum type,
             final List<String> id,
             final Boolean showHidden,
             final Boolean dropQuestionDetails,
@@ -1282,7 +1395,7 @@ public final class MetadataController extends BaseController {
      * Builds the HttpRequest object for getObjectDetail.
      */
     private HttpRequest buildGetObjectDetailRequest(
-            final Type8Enum type,
+            final Type9Enum type,
             final List<String> id,
             final Boolean showHidden,
             final Boolean dropQuestionDetails,
@@ -1545,11 +1658,113 @@ public final class MetadataController extends BaseController {
     }
 
     /**
+     * Use this endpoint to delete the metadata objects.
+     * @param  type  Required parameter: Type of the metadata object being searched.
+     * @param  id  Required parameter: A JSON array of GUIDs of the objects.
+     * @return    Returns the Boolean response from the API call
+     * @throws    ApiException    Represents error response from the server.
+     * @throws    IOException    Signals that an I/O exception of some sort has occurred.
+     */
+    public Boolean deleteMetadataObject(
+            final Type9Enum type,
+            final List<String> id) throws ApiException, IOException {
+        HttpRequest request = buildDeleteMetadataObjectRequest(type, id);
+        authManagers.get("global").apply(request);
+
+        HttpResponse response = getClientInstance().execute(request, false);
+        HttpContext context = new HttpContext(request, response);
+
+        return handleDeleteMetadataObjectResponse(context);
+    }
+
+    /**
+     * Use this endpoint to delete the metadata objects.
+     * @param  type  Required parameter: Type of the metadata object being searched.
+     * @param  id  Required parameter: A JSON array of GUIDs of the objects.
+     * @return    Returns the Boolean response from the API call
+     */
+    public CompletableFuture<Boolean> deleteMetadataObjectAsync(
+            final Type9Enum type,
+            final List<String> id) {
+        return makeHttpCallAsync(() -> buildDeleteMetadataObjectRequest(type, id),
+            req -> authManagers.get("global").applyAsync(req)
+                .thenCompose(request -> getClientInstance()
+                        .executeAsync(request, false)),
+            context -> handleDeleteMetadataObjectResponse(context));
+    }
+
+    /**
+     * Builds the HttpRequest object for deleteMetadataObject.
+     */
+    private HttpRequest buildDeleteMetadataObjectRequest(
+            final Type9Enum type,
+            final List<String> id) {
+        //the base uri for api requests
+        String baseUri = config.getBaseUri();
+
+        //prepare query string for API call
+        final StringBuilder queryBuilder = new StringBuilder(baseUri
+                + "/api/rest/v2/metadata/delete");
+
+        //load all query parameters
+        Map<String, Object> queryParameters = new HashMap<>();
+        queryParameters.put("type",
+                (type != null) ? type.value() : null);
+        queryParameters.put("id", id);
+
+        //load all headers for the outgoing API request
+        Headers headers = new Headers();
+        headers.add("Content-Type", config.getContentType());
+        headers.add("Accept-Language", config.getAcceptLanguage());
+        headers.add("user-agent", BaseController.userAgent);
+
+        //prepare and invoke the API call request to fetch the response
+        HttpRequest request = getClientInstance().delete(queryBuilder, headers, queryParameters,
+                null);
+
+        // Invoke the callback before request if its not null
+        if (getHttpCallback() != null) {
+            getHttpCallback().onBeforeRequest(request);
+        }
+
+        return request;
+    }
+
+    /**
+     * Processes the response for deleteMetadataObject.
+     * @return An object of type boolean
+     */
+    private Boolean handleDeleteMetadataObjectResponse(
+            HttpContext context) throws ApiException, IOException {
+        HttpResponse response = context.getResponse();
+
+        //invoke the callback after response if its not null
+        if (getHttpCallback() != null) {
+            getHttpCallback().onAfterResponse(context);
+        }
+
+        //Error handling using HTTP status codes
+        int responseCode = response.getStatusCode();
+
+        if (responseCode == 500) {
+            throw new ErrorResponseException("Operation failed or unauthorized request", context);
+        }
+        //handle errors defined at the API level
+        validateResponse(response, context);
+
+        //extract result from the http response
+        String responseBody = ((HttpStringResponse) response).getBody();
+        boolean result = Boolean.parseBoolean(responseBody);
+
+        return result;
+    }
+
+    /**
      * To query the details of dependent objects and associate objects as dependents, you can use
      * this API. Dependency is defined as relation between referenced and referencing objects. A
      * referencing object is said to have a dependency on a referenced object, if the referenced
-     * object cannot be deleted without first deleting the referencing object. For example, consider
-     * a worksheet W1 that has a derived logical column C1 that has a reference to a base logical
+     * object cannot be deleted without first deleting the referencing object. Example: Consider a
+     * worksheet W1 that has a derived logical column C1 that has a reference to a base logical
      * column C2. This can be shown diagramatically as: W1--&gt;C1--&gt;C2. W1 has a dependency on C2 i.e.
      * W1 is a referencing object and C2 is a referenced object. It is not possible to delete C2
      * without first deleting W1 because deletion of C2 will be prevented by the relationship
@@ -1576,8 +1791,8 @@ public final class MetadataController extends BaseController {
      * To query the details of dependent objects and associate objects as dependents, you can use
      * this API. Dependency is defined as relation between referenced and referencing objects. A
      * referencing object is said to have a dependency on a referenced object, if the referenced
-     * object cannot be deleted without first deleting the referencing object. For example, consider
-     * a worksheet W1 that has a derived logical column C1 that has a reference to a base logical
+     * object cannot be deleted without first deleting the referencing object. Example: Consider a
+     * worksheet W1 that has a derived logical column C1 that has a reference to a base logical
      * column C2. This can be shown diagramatically as: W1--&gt;C1--&gt;C2. W1 has a dependency on C2 i.e.
      * W1 is a referencing object and C2 is a referenced object. It is not possible to delete C2
      * without first deleting W1 because deletion of C2 will be prevented by the relationship

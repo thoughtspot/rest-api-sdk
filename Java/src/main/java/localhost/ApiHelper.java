@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -37,6 +38,7 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 import localhost.exceptions.ApiException;
 import localhost.http.request.MultipartFileWrapper;
 import localhost.http.request.MultipartWrapper;
@@ -51,7 +53,8 @@ public class ApiHelper {
         private static final long serialVersionUID = -174113593500315394L;
         {
             configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-           // configOverride(BigDecimal.class).setFormat(JsonFormat.Value.forShape(JsonFormat.Shape.STRING));
+            configOverride(BigDecimal.class).setFormat(
+                    JsonFormat.Value.forShape(JsonFormat.Shape.STRING));
         }
     };
 
@@ -264,7 +267,7 @@ public class ApiHelper {
                         "%s%s%s", '/');
             } else {
                 if (shouldEncode) {
-                    replaceValue = tryUrlEncode(element.toString());
+                    replaceValue = tryUrlEncode(element.toString(), false);
                 } else {
                     replaceValue = element.toString();
                 }
@@ -415,7 +418,8 @@ public class ApiHelper {
                 
             hasParam = true;
             // Load element value as string
-            paramKeyValPair = String.format("%s=%s&", accessor, tryUrlEncode(value.toString()));
+            paramKeyValPair = 
+                    String.format("%s=%s&", accessor, tryUrlEncode(value.toString(), false));
             objBuilder.append(paramKeyValPair);
 
         }
@@ -448,7 +452,7 @@ public class ApiHelper {
                 elemValue = element.toString();
             }
             if (encode) {
-                elemValue = tryUrlEncode(elemValue);
+                elemValue = tryUrlEncode(elemValue, false);
             }
             builder.append(String.format(fmt, elemName, elemValue, separator));
         }
@@ -464,11 +468,16 @@ public class ApiHelper {
     /**
      * Tries URL encode using UTF-8.
      * @param value The value to URL encode.
-     * @return
+     * @param spaceAsPercentEncoded The flag get space character as percent encoded.
+     * @return Encoded url.
      */
-    private static String tryUrlEncode(String value) {
+    public static String tryUrlEncode(String value, boolean spaceAsPercentEncoded) {
         try {
-            return URLEncoder.encode(value, "UTF-8");
+            String encodedUrl = URLEncoder.encode(value, "UTF-8");
+            if (spaceAsPercentEncoded) {
+                return encodedUrl.replace("+", "%20");
+            }
+            return encodedUrl;
         } catch (UnsupportedEncodingException ex) {
             return value;
         }
@@ -478,6 +487,7 @@ public class ApiHelper {
             List<SimpleEntry<String, Object>> objectList, HashSet<Integer> processed) {
 
         Collection<?> array = obj;
+        array = sortByWrapperType(array);
         // Append all elements of the array into a string
         int index = 0;
         for (Object element : array) {
@@ -523,7 +533,8 @@ public class ApiHelper {
         }
 
         // Wrapper types are autoboxed, so reference checking is not needed
-        if (!isWrapperType(obj.getClass())) {
+        Class<?> clazz = obj.getClass();
+        if (!isWrapperType(clazz)) {
             // Avoid infinite recursion
             if (processed.contains(objName.hashCode())) {
                 return;
@@ -550,7 +561,6 @@ public class ApiHelper {
         } else {
             // Process objects
             // Invoke getter methods
-            Class<?> clazz = obj.getClass();
             while (clazz != null) {
                 for (Method method : clazz.getDeclaredMethods()) {
 
@@ -598,6 +608,20 @@ public class ApiHelper {
                 clazz = clazz.getSuperclass();
             }
         }
+    }
+
+    /**
+     * Pushes all wrapper types to the last in given list.
+     * @param array The list on which the sorting is performed.
+     * @return The sorted list.
+     */
+    private static Collection<?> sortByWrapperType(Collection<?> array) {
+        return array.stream().sorted(Comparator.comparing(element -> {
+            if (isWrapperType(element)) {
+                return 1;
+            }
+            return -1;
+        })).collect(Collectors.toList());
     }
 
     /**

@@ -20,17 +20,17 @@ class ApiRestV2MetadataHeaderSearchRequest(object):
     Attributes:
         output_fields (list of string): Array of header field names that need
             to be included in the header response
-        offset (string): The offset point, starting from where the records
-            should be included in the response. If no input is provided then
-            offset starts from 0.
-        batch_size (string): The number of records that should be included in
-            the response starting from offset position. If no input is
+        offset (int): The offset point, starting from where the records should
+            be included in the response.   If no input is provided then offset
+            starts from 0.
+        batch_size (int): The number of records that should be included in the
+            response starting from offset position.    If no input is
             provided, then all records starting from the value provided in
             offset is included in the response.
         sort_by (SortByEnum): Field based on which the response needs to be
             ordered.
         sort_order (SortOrderEnum): Order in which sortBy should be applied.
-        mtype (Type9Enum): Type of the metadata object being searched.
+        mtype (Type10Enum): Type of the metadata object being searched.
         name_pattern (string): A pattern to match the name of the metadata
             object. This parameter supports matching case-insensitive strings.
             For a wildcard match, use %.
@@ -96,7 +96,7 @@ class ApiRestV2MetadataHeaderSearchRequest(object):
     def __init__(self,
                  mtype=None,
                  output_fields=None,
-                 offset='0',
+                 offset=0,
                  batch_size=None,
                  sort_by='DEFAULT',
                  sort_order='DEFAULT',
@@ -152,7 +152,7 @@ class ApiRestV2MetadataHeaderSearchRequest(object):
         # Extract variables from the dictionary
         mtype = dictionary.get('type')
         output_fields = dictionary.get('outputFields')
-        offset = dictionary.get("offset") if dictionary.get("offset") else '0'
+        offset = dictionary.get("offset") if dictionary.get("offset") else 0
         batch_size = dictionary.get('batchSize')
         sort_by = dictionary.get("sortBy") if dictionary.get("sortBy") else 'DEFAULT'
         sort_order = dictionary.get("sortOrder") if dictionary.get("sortOrder") else 'DEFAULT'
@@ -198,16 +198,3 @@ class ApiRestV2MetadataHeaderSearchRequest(object):
                    created_by,
                    last_modified_by,
                    owned_by)
-
-    @classmethod
-    def validate(cls, val):
-        """Validates value against class schema
-
-        Args:
-            val: the value to be validated
-
-        Returns:
-            boolean : if value is valid against schema.
-
-        """
-        return SchemaValidatorWrapper.getValidator(APIHelper.get_schema_path(os.path.abspath(__file__))).is_valid(val)

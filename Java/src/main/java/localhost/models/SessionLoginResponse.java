@@ -14,15 +14,10 @@ import com.fasterxml.jackson.annotation.JsonSetter;
  * This is a model class for SessionLoginResponse type.
  */
 public class SessionLoginResponse {
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String userName;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String token;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String tokenCreatedTime;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String tokenExpiryDuration;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String tokenType;
 
     /**
@@ -58,6 +53,7 @@ public class SessionLoginResponse {
      * @return Returns the String
      */
     @JsonGetter("userName")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getUserName() {
         return userName;
     }
@@ -78,6 +74,7 @@ public class SessionLoginResponse {
      * @return Returns the String
      */
     @JsonGetter("token")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getToken() {
         return token;
     }
@@ -98,6 +95,7 @@ public class SessionLoginResponse {
      * @return Returns the String
      */
     @JsonGetter("tokenCreatedTime")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getTokenCreatedTime() {
         return tokenCreatedTime;
     }
@@ -118,6 +116,7 @@ public class SessionLoginResponse {
      * @return Returns the String
      */
     @JsonGetter("tokenExpiryDuration")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getTokenExpiryDuration() {
         return tokenExpiryDuration;
     }
@@ -138,6 +137,7 @@ public class SessionLoginResponse {
      * @return Returns the String
      */
     @JsonGetter("tokenType")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getTokenType() {
         return tokenType;
     }

@@ -16,7 +16,6 @@ import com.fasterxml.jackson.annotation.JsonSetter;
 public class ApiRestV2SessionGettokenRequest {
     private String userName;
     private String password;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String tokenExpiryDuration;
 
     /**
@@ -86,6 +85,7 @@ public class ApiRestV2SessionGettokenRequest {
      * @return Returns the String
      */
     @JsonGetter("tokenExpiryDuration")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getTokenExpiryDuration() {
         return tokenExpiryDuration;
     }

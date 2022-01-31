@@ -57,7 +57,8 @@ public final class DatabaseController extends BaseController {
     }
 
     /**
-     * To list all the databases in Falcon, use this endpoint.
+     * Note: This endpoint is applicable only for on-prem deployments To list all the databases in
+     * Falcon, use this endpoint.
      * @return    Returns the List of String response from the API call
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
@@ -73,7 +74,8 @@ public final class DatabaseController extends BaseController {
     }
 
     /**
-     * To list all the databases in Falcon, use this endpoint.
+     * Note: This endpoint is applicable only for on-prem deployments To list all the databases in
+     * Falcon, use this endpoint.
      * @return    Returns the List of String response from the API call
      */
     public CompletableFuture<List<String>> getDatabasesAsync() {
@@ -144,7 +146,8 @@ public final class DatabaseController extends BaseController {
     }
 
     /**
-     * To list all the schemas in a database in Falcon, use this endpoint.
+     * Note: This endpoint is applicable only for on-prem deployments To list all the schemas in a
+     * database in Falcon, use this endpoint.
      * @param  database  Required parameter: Name of the Falcon database
      * @return    Returns the List of String response from the API call
      * @throws    ApiException    Represents error response from the server.
@@ -162,7 +165,8 @@ public final class DatabaseController extends BaseController {
     }
 
     /**
-     * To list all the schemas in a database in Falcon, use this endpoint.
+     * Note: This endpoint is applicable only for on-prem deployments To list all the schemas in a
+     * database in Falcon, use this endpoint.
      * @param  database  Required parameter: Name of the Falcon database
      * @return    Returns the List of String response from the API call
      */
@@ -241,7 +245,8 @@ public final class DatabaseController extends BaseController {
     }
 
     /**
-     * To list all the schemas in a database in Falcon, use this endpoint.
+     * Note: This endpoint is applicable only for on-prem deployments. To list all the tables in a
+     * schema of a database in Falcon, use this endpoint.
      * @param  database  Required parameter: Name of the Falcon database
      * @param  schema  Required parameter: Name of the schema in Falcon database
      * @return    Returns the List of String response from the API call
@@ -261,7 +266,8 @@ public final class DatabaseController extends BaseController {
     }
 
     /**
-     * To list all the schemas in a database in Falcon, use this endpoint.
+     * Note: This endpoint is applicable only for on-prem deployments. To list all the tables in a
+     * schema of a database in Falcon, use this endpoint.
      * @param  database  Required parameter: Name of the Falcon database
      * @param  schema  Required parameter: Name of the schema in Falcon database
      * @return    Returns the List of String response from the API call
@@ -344,7 +350,8 @@ public final class DatabaseController extends BaseController {
     }
 
     /**
-     * To create a table in Falcon, use this endpoint.
+     * Note: This endpoint is applicable only for on-prem deployments. To create a table in Falcon,
+     * use this endpoint.
      * @param  body  Required parameter: Example:
      * @return    Returns the CreateTableResponse response from the API call
      * @throws    ApiException    Represents error response from the server.
@@ -362,7 +369,8 @@ public final class DatabaseController extends BaseController {
     }
 
     /**
-     * To create a table in Falcon, use this endpoint.
+     * Note: This endpoint is applicable only for on-prem deployments. To create a table in Falcon,
+     * use this endpoint.
      * @param  body  Required parameter: Example:
      * @return    Returns the CreateTableResponse response from the API call
      */
@@ -437,7 +445,9 @@ public final class DatabaseController extends BaseController {
     }
 
     /**
-     * To create a table in Falcon, use this endpoint.
+     * Note: This endpoint is applicable only for on-prem deployments. To run a TQL statement in
+     * Falcon, use this endpoint. You can run only following type of statements - Table DDL alter
+     * and Table rows update and delete.
      * @param  body  Required parameter: Example:
      * @return    Returns the List of Object response from the API call
      * @throws    ApiException    Represents error response from the server.
@@ -455,7 +465,9 @@ public final class DatabaseController extends BaseController {
     }
 
     /**
-     * To create a table in Falcon, use this endpoint.
+     * Note: This endpoint is applicable only for on-prem deployments. To run a TQL statement in
+     * Falcon, use this endpoint. You can run only following type of statements - Table DDL alter
+     * and Table rows update and delete.
      * @param  body  Required parameter: Example:
      * @return    Returns the List of Object response from the API call
      */

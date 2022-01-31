@@ -1,8 +1,6 @@
 
 # Type 9 Enum
 
-Type of the metadata object being searched.
-
 ## Enumeration
 
 `Type9Enum`
@@ -13,18 +11,8 @@ Type of the metadata object being searched.
 |  --- |
 | `aNSWER` |
 | `lIVEBOARD` |
-| `dATAOBJECTALL` |
-| `dATAOBJECTWORKSHEET` |
-| `dATAOBJECTTABLE` |
-| `dATAOBJECTUSERDEFINED` |
-| `dATAOBJECTVIEW` |
-| `dATAOBJECTCALENDARTABLE` |
-| `cOLUMNALL` |
-| `cOLUMNWORKSHEET` |
-| `cOLUMNTABLE` |
-| `cOLUMNUSERDEFINED` |
-| `cOLUMNVIEW` |
-| `cOLUMNCALENDARTABLE` |
+| `dATAOBJECT` |
+| `cOLUMN` |
 | `jOIN` |
 | `cONNECTION` |
 | `tAG` |

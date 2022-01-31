@@ -26,7 +26,10 @@ export interface ApiRestV2UserCreateRequest {
   name: string;
   /** A display name string for the user, usually their first and last name. */
   displayName: string;
-  /** Visibility of the user. The visibility attribute is set to DEFAULT when creating a user. Setting this to DEFAULT makes a user visible to other users and user groups, and thus allows them to share objects */
+  /**
+   * Visibility of the user. The visibility attribute is set to DEFAULT when creating a user.
+   *  The DEFAULT attribute makes a user visible to other users and user groups, and thus allows them to share objects.
+   */
   visibility?: VisibilityEnum;
   /** Email id associated with the user account */
   mail?: string;
@@ -40,7 +43,10 @@ export interface ApiRestV2UserCreateRequest {
   notifyOnShare?: boolean;
   /** The user preference for revisiting the onboarding experience. */
   showWalkMe?: boolean;
-  /** ThoughtSpot provides an interactive guided walkthrough to onboard new users. The onboarding experience leads users through a set of actions to help users get started and accomplish their tasks quickly. The users can turn off the Onboarding experience and access it again when they need assistance with the ThoughtSpot UI. */
+  /**
+   * ThoughtSpot provides an interactive guided walkthrough to onboard new users. The onboarding experience leads users through a set of actions to help users get started and accomplish their tasks quickly.
+   *  The users can turn off the Onboarding experience and access it again when they need assistance with the ThoughtSpot UI.
+   */
   analystOnboardingComplete?: boolean;
   /** Type of user. LOCAL_USER indicates that the user is created locally in the ThoughtSpot system. */
   type?: Type2Enum;

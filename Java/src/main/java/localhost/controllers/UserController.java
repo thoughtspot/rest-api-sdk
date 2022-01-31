@@ -110,7 +110,7 @@ public final class UserController extends BaseController {
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/callosum/v1/session/v2/user");
+                + "/api/rest/v2/user");
 
         //load all query parameters
         Map<String, Object> queryParameters = new HashMap<>();

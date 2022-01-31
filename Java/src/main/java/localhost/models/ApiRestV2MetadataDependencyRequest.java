@@ -15,9 +15,8 @@ import java.util.List;
  * This is a model class for ApiRestV2MetadataDependencyRequest type.
  */
 public class ApiRestV2MetadataDependencyRequest {
-    private Type10Enum type;
+    private Type12Enum type;
     private List<String> id;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Integer batchSize;
 
     /**
@@ -28,12 +27,12 @@ public class ApiRestV2MetadataDependencyRequest {
 
     /**
      * Initialization constructor.
-     * @param  type  Type10Enum value for type.
+     * @param  type  Type12Enum value for type.
      * @param  id  List of String value for id.
      * @param  batchSize  Integer value for batchSize.
      */
     public ApiRestV2MetadataDependencyRequest(
-            Type10Enum type,
+            Type12Enum type,
             List<String> id,
             Integer batchSize) {
         this.type = type;
@@ -44,20 +43,20 @@ public class ApiRestV2MetadataDependencyRequest {
     /**
      * Getter for Type.
      * Type of the data object
-     * @return Returns the Type10Enum
+     * @return Returns the Type12Enum
      */
     @JsonGetter("type")
-    public Type10Enum getType() {
+    public Type12Enum getType() {
         return type;
     }
 
     /**
      * Setter for Type.
      * Type of the data object
-     * @param type Value for Type10Enum
+     * @param type Value for Type12Enum
      */
     @JsonSetter("type")
-    public void setType(Type10Enum type) {
+    public void setType(Type12Enum type) {
         this.type = type;
     }
 
@@ -83,21 +82,20 @@ public class ApiRestV2MetadataDependencyRequest {
 
     /**
      * Getter for BatchSize.
-     * he maximum number of batches to fetch in a query. If this attribute is not defined, the value
-     * specified in the cluster configuration is used. To get the list of all dependent objects in a
-     * single query, define the batch size attribute as -1
+     * The maximum number of batches to fetch in a query. If this attribute is not defined, then the
+     * list of all dependent objects is included in the response
      * @return Returns the Integer
      */
     @JsonGetter("batchSize")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public Integer getBatchSize() {
         return batchSize;
     }
 
     /**
      * Setter for BatchSize.
-     * he maximum number of batches to fetch in a query. If this attribute is not defined, the value
-     * specified in the cluster configuration is used. To get the list of all dependent objects in a
-     * single query, define the batch size attribute as -1
+     * The maximum number of batches to fetch in a query. If this attribute is not defined, then the
+     * list of all dependent objects is included in the response
      * @param batchSize Value for Integer
      */
     @JsonSetter("batchSize")
@@ -130,7 +128,7 @@ public class ApiRestV2MetadataDependencyRequest {
      * Class to build instances of {@link ApiRestV2MetadataDependencyRequest}.
      */
     public static class Builder {
-        private Type10Enum type;
+        private Type12Enum type;
         private List<String> id;
         private Integer batchSize;
 
@@ -142,20 +140,20 @@ public class ApiRestV2MetadataDependencyRequest {
 
         /**
          * Initialization constructor.
-         * @param  type  Type10Enum value for type.
+         * @param  type  Type12Enum value for type.
          * @param  id  List of String value for id.
          */
-        public Builder(Type10Enum type, List<String> id) {
+        public Builder(Type12Enum type, List<String> id) {
             this.type = type;
             this.id = id;
         }
 
         /**
          * Setter for type.
-         * @param  type  Type10Enum value for type.
+         * @param  type  Type12Enum value for type.
          * @return Builder
          */
-        public Builder type(Type10Enum type) {
+        public Builder type(Type12Enum type) {
             this.type = type;
             return this;
         }

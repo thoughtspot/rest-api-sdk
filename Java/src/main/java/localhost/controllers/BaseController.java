@@ -23,7 +23,7 @@ import localhost.http.response.HttpResponse;
  * Base class for all Controllers.
  */
 public abstract class BaseController {
-    protected static final String userAgent = "APIMATIC 3.0";
+    protected static String userAgent = "APIMATIC 3.0";
 
     /**
      * Protected variables to hold an instance of Configuration.

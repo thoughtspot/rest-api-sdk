@@ -9,7 +9,7 @@ The following parameters are configurable for the API Client:
 | `acceptLanguage` | `String` | response format<br>*Default*: `"application/json"` |
 | `baseUrl` | `String` | *Default*: `"https://localhost:443"` |
 | `environment` | Environment | The API environment. <br> **Default: `Environment.PRODUCTION`** |
-| `httpClientConfig` | `ReadonlyHttpClientConfiguration` | Http Client Configuration instance.<br>* See available [builder methods here](/doc/http-client-configuration-builder.md). |
+| `httpClientConfig` | `ReadonlyHttpClientConfiguration` | Http Client Configuration instance. |
 | `accessToken` | `String` | The OAuth 2.0 Access Token to use for API requests. |
 
 The API client can be initialized as follows:
@@ -39,6 +39,9 @@ The gateway for the SDK. This class acts as a factory for the Controllers and al
 | `getGroupController()` | Provides access to Group controller. | `GroupController` |
 | `getMetadataController()` | Provides access to Metadata controller. | `MetadataController` |
 | `getDatabaseController()` | Provides access to Database controller. | `DatabaseController` |
+| `getConnectionController()` | Provides access to Connection controller. | `ConnectionController` |
+| `getDataController()` | Provides access to Data controller. | `DataController` |
+| `getAdminController()` | Provides access to Admin controller. | `AdminController` |
 
 ### Methods
 
@@ -51,7 +54,7 @@ The gateway for the SDK. This class acts as a factory for the Controllers and al
 | `getAcceptLanguage()` | response format. | `String` |
 | `getHttpClient()` | The HTTP Client instance to use for making HTTP requests. | `HttpClient` |
 | `getHttpClientConfig()` | Http Client Configuration instance. | `ReadonlyHttpClientConfiguration` |
-| `getAccessTokenCredentials()` | The credentials to use with AccessToken. | `AccessTokenCredentials` |
+| `getBearerAuthCredentials()` | The credentials to use with BearerAuth. | `BearerAuthCredentials` |
 | `getAccessToken()` | OAuth 2.0 Access Token. | `String` |
 | `getBaseUri(Server server)` | Get base URI by current environment | `String` |
 | `getBaseUri()` | Get base URI by current environment | `String` |

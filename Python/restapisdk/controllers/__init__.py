@@ -5,4 +5,7 @@ __all__ = [
     'group_controller',
     'metadata_controller',
     'database_controller',
+    'connection_controller',
+    'data_controller',
+    'admin_controller',
 ]

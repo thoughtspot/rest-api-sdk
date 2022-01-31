@@ -14,37 +14,21 @@ import com.fasterxml.jackson.annotation.JsonSetter;
  * This is a model class for LogicalTableHeader type.
  */
 public class LogicalTableHeader {
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String id;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String name;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String author;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String authorName;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String authorDisplayName;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Double created;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Double modified;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String modifiedBy;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Integer generationNum;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String owner;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Boolean deleted;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Boolean hidden;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String database;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String schema;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String type;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String subType;
 
     /**
@@ -112,6 +96,7 @@ public class LogicalTableHeader {
      * @return Returns the String
      */
     @JsonGetter("id")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getId() {
         return id;
     }
@@ -130,6 +115,7 @@ public class LogicalTableHeader {
      * @return Returns the String
      */
     @JsonGetter("name")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getName() {
         return name;
     }
@@ -148,6 +134,7 @@ public class LogicalTableHeader {
      * @return Returns the String
      */
     @JsonGetter("author")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getAuthor() {
         return author;
     }
@@ -166,6 +153,7 @@ public class LogicalTableHeader {
      * @return Returns the String
      */
     @JsonGetter("authorName")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getAuthorName() {
         return authorName;
     }
@@ -184,6 +172,7 @@ public class LogicalTableHeader {
      * @return Returns the String
      */
     @JsonGetter("authorDisplayName")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getAuthorDisplayName() {
         return authorDisplayName;
     }
@@ -202,6 +191,7 @@ public class LogicalTableHeader {
      * @return Returns the Double
      */
     @JsonGetter("created")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public Double getCreated() {
         return created;
     }
@@ -220,6 +210,7 @@ public class LogicalTableHeader {
      * @return Returns the Double
      */
     @JsonGetter("modified")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public Double getModified() {
         return modified;
     }
@@ -238,6 +229,7 @@ public class LogicalTableHeader {
      * @return Returns the String
      */
     @JsonGetter("modifiedBy")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getModifiedBy() {
         return modifiedBy;
     }
@@ -256,6 +248,7 @@ public class LogicalTableHeader {
      * @return Returns the Integer
      */
     @JsonGetter("generationNum")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public Integer getGenerationNum() {
         return generationNum;
     }
@@ -274,6 +267,7 @@ public class LogicalTableHeader {
      * @return Returns the String
      */
     @JsonGetter("owner")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getOwner() {
         return owner;
     }
@@ -292,6 +286,7 @@ public class LogicalTableHeader {
      * @return Returns the Boolean
      */
     @JsonGetter("deleted")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public Boolean getDeleted() {
         return deleted;
     }
@@ -310,6 +305,7 @@ public class LogicalTableHeader {
      * @return Returns the Boolean
      */
     @JsonGetter("hidden")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public Boolean getHidden() {
         return hidden;
     }
@@ -328,6 +324,7 @@ public class LogicalTableHeader {
      * @return Returns the String
      */
     @JsonGetter("database")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getDatabase() {
         return database;
     }
@@ -346,6 +343,7 @@ public class LogicalTableHeader {
      * @return Returns the String
      */
     @JsonGetter("schema")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getSchema() {
         return schema;
     }
@@ -364,6 +362,7 @@ public class LogicalTableHeader {
      * @return Returns the String
      */
     @JsonGetter("type")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getType() {
         return type;
     }
@@ -382,6 +381,7 @@ public class LogicalTableHeader {
      * @return Returns the String
      */
     @JsonGetter("subType")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getSubType() {
         return subType;
     }

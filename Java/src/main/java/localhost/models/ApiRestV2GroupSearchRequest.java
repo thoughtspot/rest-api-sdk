@@ -15,23 +15,14 @@ import java.util.List;
  * This is a model class for ApiRestV2GroupSearchRequest type.
  */
 public class ApiRestV2GroupSearchRequest {
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String name;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String id;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String displayName;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Visibility3Enum visibility;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String description;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<PrivilegeEnum> privileges;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<GroupNameAndIDInput> groups;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<UserNameAndIDInput> users;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Type5Enum type;
 
     /**
@@ -79,6 +70,7 @@ public class ApiRestV2GroupSearchRequest {
      * @return Returns the String
      */
     @JsonGetter("name")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getName() {
         return name;
     }
@@ -99,6 +91,7 @@ public class ApiRestV2GroupSearchRequest {
      * @return Returns the String
      */
     @JsonGetter("id")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getId() {
         return id;
     }
@@ -119,6 +112,7 @@ public class ApiRestV2GroupSearchRequest {
      * @return Returns the String
      */
     @JsonGetter("displayName")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getDisplayName() {
         return displayName;
     }
@@ -135,19 +129,22 @@ public class ApiRestV2GroupSearchRequest {
 
     /**
      * Getter for Visibility.
-     * The visibility attribute is set to DEFAULT when creating a group. Setting this to DEFAULT
-     * makes a group visible to other users and user groups, and thus allows them to share objects
+     * Visibility of the user group. The visibility attribute is set to DEFAULT. The DEFAULT
+     * attribute makes the user group visible for other user groups and allows them to share
+     * objects.
      * @return Returns the Visibility3Enum
      */
     @JsonGetter("visibility")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public Visibility3Enum getVisibility() {
         return visibility;
     }
 
     /**
      * Setter for Visibility.
-     * The visibility attribute is set to DEFAULT when creating a group. Setting this to DEFAULT
-     * makes a group visible to other users and user groups, and thus allows them to share objects
+     * Visibility of the user group. The visibility attribute is set to DEFAULT. The DEFAULT
+     * attribute makes the user group visible for other user groups and allows them to share
+     * objects.
      * @param visibility Value for Visibility3Enum
      */
     @JsonSetter("visibility")
@@ -161,6 +158,7 @@ public class ApiRestV2GroupSearchRequest {
      * @return Returns the String
      */
     @JsonGetter("description")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getDescription() {
         return description;
     }
@@ -181,6 +179,7 @@ public class ApiRestV2GroupSearchRequest {
      * @return Returns the List of PrivilegeEnum
      */
     @JsonGetter("privileges")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public List<PrivilegeEnum> getPrivileges() {
         return privileges;
     }
@@ -201,6 +200,7 @@ public class ApiRestV2GroupSearchRequest {
      * @return Returns the List of GroupNameAndIDInput
      */
     @JsonGetter("groups")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public List<GroupNameAndIDInput> getGroups() {
         return groups;
     }
@@ -222,6 +222,7 @@ public class ApiRestV2GroupSearchRequest {
      * @return Returns the List of UserNameAndIDInput
      */
     @JsonGetter("users")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public List<UserNameAndIDInput> getUsers() {
         return users;
     }
@@ -244,6 +245,7 @@ public class ApiRestV2GroupSearchRequest {
      * @return Returns the Type5Enum
      */
     @JsonGetter("type")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public Type5Enum getType() {
         return type;
     }

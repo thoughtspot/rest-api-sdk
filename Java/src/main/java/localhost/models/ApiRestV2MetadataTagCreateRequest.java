@@ -15,7 +15,6 @@ import com.fasterxml.jackson.annotation.JsonSetter;
  */
 public class ApiRestV2MetadataTagCreateRequest {
     private String name;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String color;
 
     /**
@@ -62,6 +61,7 @@ public class ApiRestV2MetadataTagCreateRequest {
      * @return Returns the String
      */
     @JsonGetter("color")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getColor() {
         return color;
     }

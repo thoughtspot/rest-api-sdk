@@ -10,11 +10,11 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `outputFields` | `string[] \| undefined` | Optional | Array of header field names that need to be included in the header response |
-| `offset` | `string \| undefined` | Optional | The offset point, starting from where the records should be included in the response. If no input is provided then offset starts from 0.<br>**Default**: `'0'` |
-| `batchSize` | `string \| undefined` | Optional | The number of records that should be included in the response starting from offset position. If no input is provided, then all records starting from the value provided in offset is included in the response. |
+| `offset` | `number \| undefined` | Optional | The offset point, starting from where the records should be included in the response.<br><br>If no input is provided then offset starts from 0.<br>**Default**: `0` |
+| `batchSize` | `number \| undefined` | Optional | The number of records that should be included in the response starting from offset position.<br><br>If no input is provided, then all records starting from the value provided in offset is included in the response. |
 | `sortBy` | [`SortByEnum \| undefined`](/doc/models/sort-by-enum.md) | Optional | Field based on which the response needs to be ordered.<br>**Default**: `SortByEnum.DEFAULT` |
 | `sortOrder` | [`SortOrderEnum \| undefined`](/doc/models/sort-order-enum.md) | Optional | Order in which sortBy should be applied.<br>**Default**: `SortOrderEnum.DEFAULT` |
-| `type` | [`Type9Enum`](/doc/models/type-9-enum.md) | Required | Type of the metadata object being searched. |
+| `type` | [`Type10Enum`](/doc/models/type-10-enum.md) | Required | Type of the metadata object being searched. |
 | `namePattern` | `string \| undefined` | Optional | A pattern to match the name of the metadata object. This parameter supports matching case-insensitive strings. For a wildcard match, use %. |
 | `fetchId` | `string[] \| undefined` | Optional | A JSON array containing the GUIDs of the metadata objects that you want to fetch. |
 | `skipId` | `string[] \| undefined` | Optional | A JSON array containing the GUIDs of the metadata objects that you want to skip. |

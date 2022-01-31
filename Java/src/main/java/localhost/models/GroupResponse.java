@@ -15,63 +15,34 @@ import java.util.List;
  * This is a model class for GroupResponse type.
  */
 public class GroupResponse {
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String name;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String displayName;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String id;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String visibility;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String description;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<String> privileges;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<GroupNameAndID> groups;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<UserNameAndID> users;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<LiveboardNameAndID> assignedLiveboards;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Object userGroupContent;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<String> tags;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Boolean isDeleted;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Boolean isHidden;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Boolean isExternal;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Boolean isDeprecated;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Boolean complete;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Boolean isSystemPrincipal;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String type;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String parenttype;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Integer groupIdx;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Integer metadataVersion;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String tenantId;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Integer indexVersion;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Integer generationNum;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Double created;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Double modified;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private UserNameAndID modifiedBy;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private UserNameAndID author;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private UserNameAndID owner;
 
     /**
@@ -179,6 +150,7 @@ public class GroupResponse {
      * @return Returns the String
      */
     @JsonGetter("name")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getName() {
         return name;
     }
@@ -199,6 +171,7 @@ public class GroupResponse {
      * @return Returns the String
      */
     @JsonGetter("displayName")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getDisplayName() {
         return displayName;
     }
@@ -219,6 +192,7 @@ public class GroupResponse {
      * @return Returns the String
      */
     @JsonGetter("id")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getId() {
         return id;
     }
@@ -239,6 +213,7 @@ public class GroupResponse {
      * @return Returns the String
      */
     @JsonGetter("visibility")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getVisibility() {
         return visibility;
     }
@@ -259,6 +234,7 @@ public class GroupResponse {
      * @return Returns the String
      */
     @JsonGetter("description")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getDescription() {
         return description;
     }
@@ -279,6 +255,7 @@ public class GroupResponse {
      * @return Returns the List of String
      */
     @JsonGetter("privileges")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public List<String> getPrivileges() {
         return privileges;
     }
@@ -299,6 +276,7 @@ public class GroupResponse {
      * @return Returns the List of GroupNameAndID
      */
     @JsonGetter("groups")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public List<GroupNameAndID> getGroups() {
         return groups;
     }
@@ -319,6 +297,7 @@ public class GroupResponse {
      * @return Returns the List of UserNameAndID
      */
     @JsonGetter("users")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public List<UserNameAndID> getUsers() {
         return users;
     }
@@ -339,6 +318,7 @@ public class GroupResponse {
      * @return Returns the List of LiveboardNameAndID
      */
     @JsonGetter("assignedLiveboards")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public List<LiveboardNameAndID> getAssignedLiveboards() {
         return assignedLiveboards;
     }
@@ -358,6 +338,7 @@ public class GroupResponse {
      * @return Returns the Object
      */
     @JsonGetter("userGroupContent")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public Object getUserGroupContent() {
         return userGroupContent;
     }
@@ -377,6 +358,7 @@ public class GroupResponse {
      * @return Returns the List of String
      */
     @JsonGetter("tags")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public List<String> getTags() {
         return tags;
     }
@@ -397,6 +379,7 @@ public class GroupResponse {
      * @return Returns the Boolean
      */
     @JsonGetter("isDeleted")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public Boolean getIsDeleted() {
         return isDeleted;
     }
@@ -417,6 +400,7 @@ public class GroupResponse {
      * @return Returns the Boolean
      */
     @JsonGetter("isHidden")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public Boolean getIsHidden() {
         return isHidden;
     }
@@ -437,6 +421,7 @@ public class GroupResponse {
      * @return Returns the Boolean
      */
     @JsonGetter("isExternal")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public Boolean getIsExternal() {
         return isExternal;
     }
@@ -456,6 +441,7 @@ public class GroupResponse {
      * @return Returns the Boolean
      */
     @JsonGetter("isDeprecated")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public Boolean getIsDeprecated() {
         return isDeprecated;
     }
@@ -475,6 +461,7 @@ public class GroupResponse {
      * @return Returns the Boolean
      */
     @JsonGetter("complete")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public Boolean getComplete() {
         return complete;
     }
@@ -495,6 +482,7 @@ public class GroupResponse {
      * @return Returns the Boolean
      */
     @JsonGetter("isSystemPrincipal")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public Boolean getIsSystemPrincipal() {
         return isSystemPrincipal;
     }
@@ -515,6 +503,7 @@ public class GroupResponse {
      * @return Returns the String
      */
     @JsonGetter("type")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getType() {
         return type;
     }
@@ -535,6 +524,7 @@ public class GroupResponse {
      * @return Returns the String
      */
     @JsonGetter("parenttype")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getParenttype() {
         return parenttype;
     }
@@ -554,6 +544,7 @@ public class GroupResponse {
      * @return Returns the Integer
      */
     @JsonGetter("groupIdx")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public Integer getGroupIdx() {
         return groupIdx;
     }
@@ -572,6 +563,7 @@ public class GroupResponse {
      * @return Returns the Integer
      */
     @JsonGetter("metadataVersion")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public Integer getMetadataVersion() {
         return metadataVersion;
     }
@@ -591,6 +583,7 @@ public class GroupResponse {
      * @return Returns the String
      */
     @JsonGetter("tenantId")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getTenantId() {
         return tenantId;
     }
@@ -610,6 +603,7 @@ public class GroupResponse {
      * @return Returns the Integer
      */
     @JsonGetter("indexVersion")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public Integer getIndexVersion() {
         return indexVersion;
     }
@@ -628,6 +622,7 @@ public class GroupResponse {
      * @return Returns the Integer
      */
     @JsonGetter("generationNum")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public Integer getGenerationNum() {
         return generationNum;
     }
@@ -647,6 +642,7 @@ public class GroupResponse {
      * @return Returns the Double
      */
     @JsonGetter("created")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public Double getCreated() {
         return created;
     }
@@ -667,6 +663,7 @@ public class GroupResponse {
      * @return Returns the Double
      */
     @JsonGetter("modified")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public Double getModified() {
         return modified;
     }
@@ -686,6 +683,7 @@ public class GroupResponse {
      * @return Returns the UserNameAndID
      */
     @JsonGetter("modifiedBy")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public UserNameAndID getModifiedBy() {
         return modifiedBy;
     }
@@ -704,6 +702,7 @@ public class GroupResponse {
      * @return Returns the UserNameAndID
      */
     @JsonGetter("author")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public UserNameAndID getAuthor() {
         return author;
     }
@@ -722,6 +721,7 @@ public class GroupResponse {
      * @return Returns the UserNameAndID
      */
     @JsonGetter("owner")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public UserNameAndID getOwner() {
         return owner;
     }

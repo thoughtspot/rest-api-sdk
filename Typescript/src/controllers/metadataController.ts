@@ -63,13 +63,15 @@ import {
   metadataTagResponseSchema,
 } from '../models/metadataTagResponse';
 import { Type8Enum, type8EnumSchema } from '../models/type8Enum';
+import { Type9Enum, type9EnumSchema } from '../models/type9Enum';
 import { array, boolean, optional, string, unknown } from '../schema';
 import { BaseController } from './baseController';
 
 export class MetadataController extends BaseController {
   /**
-   * To get details of a specific tag, use this endpoint. At least one of id or name of tag is required.
-   * When both are given, then id will be considered.
+   * To get details of a specific tag, use this endpoint.
+   *
+   * At least one of id or name of tag is required. When both are given, then id will be considered.
    *
    * @param name Name of the tag
    * @param id   The GUID of the tag
@@ -112,8 +114,9 @@ export class MetadataController extends BaseController {
   }
 
   /**
-   * To programmatically update tags, use this endpoint. At least one of id or name of tag is required.
-   * When both are given, then id will be considered.
+   * To programmatically update tags, use this endpoint.
+   *
+   * At least one of id or name of tag is required. When both are given, then id will be considered.
    *
    * @param body
    * @return Response from the API call
@@ -133,8 +136,9 @@ export class MetadataController extends BaseController {
   }
 
   /**
-   * To programmatically delete tags, use this endpoint. At least one of id or name of tag is required.
-   * When both are given, then id will be considered.
+   * To programmatically delete tags, use this endpoint.
+   *
+   * At least one of id or name of tag is required. When both are given, then id will be considered.
    *
    * @param name Name of the tag
    * @param id   The GUID of the tag
@@ -161,8 +165,9 @@ export class MetadataController extends BaseController {
 
   /**
    * To programmatically assign tags to a metadata object, such as a liveboard, search answer, table,
-   * worksheet, or view, use this endpoint.  At least one of id or name of tag is required. When both are
-   * given, then id will be considered.
+   * worksheet, or view, use this endpoint.
+   *
+   * At least one of id or name of tag is required. When both are given, then id will be considered.
    *
    * @param body
    * @return Response from the API call
@@ -183,8 +188,9 @@ export class MetadataController extends BaseController {
 
   /**
    * To programmatically unassign tags to a metadata object, such as a liveboard, search answer, table,
-   * worksheet, or view, use this endpoint. At least one of id or name of tag is required. When both are
-   * given, then id will be considered.
+   * worksheet, or view, use this endpoint.
+   *
+   * At least one of id or name of tag is required. When both are given, then id will be considered.
    *
    * @param body
    * @return Response from the API call
@@ -207,8 +213,9 @@ export class MetadataController extends BaseController {
   }
 
   /**
-   * To programmatically assign objects to favorites for a given user account, use this endpoint. At
-   * least one of user id or username is required. When both are given, then id will be considered.
+   * To programmatically assign objects to favorites for a given user account, use this endpoint.
+   *
+   * At least one of user id or username is required. When both are given, then id will be considered
    *
    * @param body
    * @return Response from the API call
@@ -231,9 +238,10 @@ export class MetadataController extends BaseController {
   }
 
   /**
-   * To programmatically unassign objects to favorites for a given user account, use this endpoint. At
-   * least one of user id or username is required. When both are given, then id will be considered.Screen
-   * reader support enabled.
+   * To programmatically unassign objects to favorites for a given user account, use this endpoint.
+   *
+   * At least one of user id or username is required. When both are given, then id will be considered.
+   * Screen reader support enabled.
    *
    * @param body
    * @return Response from the API call
@@ -257,6 +265,7 @@ export class MetadataController extends BaseController {
 
   /**
    * To get the name and id of liveboard that is set as a home liveboard for a user, use this endpoint.
+   *
    * At least one of user id or username is required. When both are given, then id will be considered.
    *
    * @param userName
@@ -283,8 +292,9 @@ export class MetadataController extends BaseController {
   }
 
   /**
-   * To assign a specific liveboard as a home liveboard for a user, use this endpoint. At least one of
-   * user id or username is required. When both are given, then id will be considered.
+   * To assign a specific liveboard as a home liveboard for a user, use this endpoint.
+   *
+   * At least one of user id or username is required. When both are given, then id will be considered.
    *
    * @param body
    * @return Response from the API call
@@ -307,8 +317,9 @@ export class MetadataController extends BaseController {
   }
 
   /**
-   * To unassign the home liveboard set for a user, use this endpoint. At least one of user id or
-   * username is required. When both are given, then id will be considered.
+   * To unassign the home liveboard set for a user, use this endpoint.
+   *
+   * At least one of user id or username is required. When both are given, then id will be considered.
    *
    * @param body
    * @return Response from the API call
@@ -344,6 +355,34 @@ export class MetadataController extends BaseController {
   }
 
   /**
+   * To get header detail of a metadata object, use this endpoint. You can provide as input selective
+   * fields to get the data for.
+   *
+   * @param type         Type of the metadata object being searched.
+   * @param id           GUID of the metadata object
+   * @param outputFields Array of header field names that need to be included in the header response
+   * @return Response from the API call
+   */
+  async getMetadataHeader(
+    type: Type8Enum,
+    id: string,
+    outputFields?: string[],
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<unknown>> {
+    const req = this.createRequest('GET', '/api/rest/v2/metadata/header');
+    const mapped = req.prepareArgs({
+      type: [type, type8EnumSchema],
+      id: [id, string()],
+      outputFields: [outputFields, optional(array(string()))],
+    });
+    req.query('type', mapped.type);
+    req.query('id', mapped.id);
+    req.query('outputFields', mapped.outputFields);
+    req.throwOn(500, ErrorResponseError, 'Operation failed or unauthorized request');
+    return req.callAsJson(unknown(), requestOptions);
+  }
+
+  /**
    * Use this endpoint to get full details of metadata objects
    *
    * @param type                Type of the metadata object being searched. Valid values
@@ -358,7 +397,7 @@ export class MetadataController extends BaseController {
    * @return Response from the API call
    */
   async getObjectDetail(
-    type: Type8Enum,
+    type: Type9Enum,
     id: string[],
     showHidden?: boolean,
     dropQuestionDetails?: boolean,
@@ -367,7 +406,7 @@ export class MetadataController extends BaseController {
   ): Promise<ApiResponse<unknown>> {
     const req = this.createRequest('GET', '/api/rest/v2/metadata/details');
     const mapped = req.prepareArgs({
-      type: [type, type8EnumSchema],
+      type: [type, type9EnumSchema],
       id: [id, array(string())],
       showHidden: [showHidden, optional(boolean())],
       dropQuestionDetails: [dropQuestionDetails, optional(boolean())],
@@ -383,8 +422,9 @@ export class MetadataController extends BaseController {
   }
 
   /**
-   * Use this endpoint to get header details of visualization charts for a given liveboard or answer. At
-   * least one of id or name of liveboard or answer is required. When both are given, then id will be
+   * Use this endpoint to get header details of visualization charts for a given liveboard or answer.
+   *
+   * At least one of id or name of liveboard or answer is required. When both are given, then id will be
    * considered.
    *
    * @param id The GUID of the liveboard or answer
@@ -426,16 +466,46 @@ export class MetadataController extends BaseController {
   }
 
   /**
+   * Use this endpoint to delete the metadata objects
+   *
+   * @param type Type of the metadata object being searched.
+   * @param id   A JSON array of GUIDs of the objects.
+   * @return Response from the API call
+   */
+  async deleteMetadataObject(
+    type: Type9Enum,
+    id: string[],
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<boolean>> {
+    const req = this.createRequest('DELETE', '/api/rest/v2/metadata/delete');
+    const mapped = req.prepareArgs({
+      type: [type, type9EnumSchema],
+      id: [id, array(string())],
+    });
+    req.query('type', mapped.type);
+    req.query('id', mapped.id);
+    req.throwOn(500, ErrorResponseError, 'Operation failed or unauthorized request');
+    return req.callAsJson(boolean(), requestOptions);
+  }
+
+  /**
    * To query the details of dependent objects and associate objects as dependents, you can use this API.
+   *
    * Dependency is defined as relation between referenced and referencing objects. A referencing object
    * is said to have a dependency on a referenced object, if the referenced object cannot be deleted
-   * without first deleting the referencing object. For example, consider a worksheet W1 that has a
-   * derived logical column C1 that has a reference to a base logical column C2. This can be shown
-   * diagramatically as: W1-->C1-->C2. W1 has a dependency on C2 i.e. W1 is a referencing object and C2
-   * is a referenced object. It is not possible to delete C2 without first deleting W1 because deletion
-   * of C2 will be prevented by the relationship between W1s column C1 and C2. Similarly C1 is said to
-   * have a dependency on C2 i.e. C1 is a referencing object and C2 is a referenced object. It is not
-   * possible to delete C2 without first deleting C1
+   * without first deleting the referencing object.
+   *
+   * Example:
+   *
+   * Consider a worksheet W1 that has a derived logical column C1 that has a reference to a base logical
+   * column C2. This can be shown diagramatically as: W1-->C1-->C2.
+   *
+   * W1 has a dependency on C2 i.e. W1 is a referencing object and C2 is a referenced object. It is not
+   * possible to delete C2 without first deleting W1 because deletion of C2 will be prevented by the
+   * relationship between W1s column C1 and C2.
+   *
+   * Similarly C1 is said to have a dependency on C2 i.e. C1 is a referencing object and C2 is a
+   * referenced object. It is not possible to delete C2 without first deleting C1
    *
    * @param body
    * @return Response from the API call

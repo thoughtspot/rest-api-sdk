@@ -14,33 +14,19 @@ import com.fasterxml.jackson.annotation.JsonSetter;
  * This is a model class for MetadataTagResponse type.
  */
 public class MetadataTagResponse {
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String name;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String id;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private ClientState clientState;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Integer indexVersion;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Integer generationNum;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Boolean isDeleted;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Boolean isHidden;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Boolean isExternal;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Boolean isDeprecated;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Double created;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Double modified;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private TagNameAndID modifiedBy;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private TagNameAndID author;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private TagNameAndID owner;
 
     /**
@@ -103,6 +89,7 @@ public class MetadataTagResponse {
      * @return Returns the String
      */
     @JsonGetter("name")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getName() {
         return name;
     }
@@ -123,6 +110,7 @@ public class MetadataTagResponse {
      * @return Returns the String
      */
     @JsonGetter("id")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getId() {
         return id;
     }
@@ -142,6 +130,7 @@ public class MetadataTagResponse {
      * @return Returns the ClientState
      */
     @JsonGetter("clientState")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public ClientState getClientState() {
         return clientState;
     }
@@ -160,6 +149,7 @@ public class MetadataTagResponse {
      * @return Returns the Integer
      */
     @JsonGetter("indexVersion")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public Integer getIndexVersion() {
         return indexVersion;
     }
@@ -178,6 +168,7 @@ public class MetadataTagResponse {
      * @return Returns the Integer
      */
     @JsonGetter("generationNum")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public Integer getGenerationNum() {
         return generationNum;
     }
@@ -197,6 +188,7 @@ public class MetadataTagResponse {
      * @return Returns the Boolean
      */
     @JsonGetter("isDeleted")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public Boolean getIsDeleted() {
         return isDeleted;
     }
@@ -217,6 +209,7 @@ public class MetadataTagResponse {
      * @return Returns the Boolean
      */
     @JsonGetter("isHidden")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public Boolean getIsHidden() {
         return isHidden;
     }
@@ -237,6 +230,7 @@ public class MetadataTagResponse {
      * @return Returns the Boolean
      */
     @JsonGetter("isExternal")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public Boolean getIsExternal() {
         return isExternal;
     }
@@ -256,6 +250,7 @@ public class MetadataTagResponse {
      * @return Returns the Boolean
      */
     @JsonGetter("isDeprecated")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public Boolean getIsDeprecated() {
         return isDeprecated;
     }
@@ -275,6 +270,7 @@ public class MetadataTagResponse {
      * @return Returns the Double
      */
     @JsonGetter("created")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public Double getCreated() {
         return created;
     }
@@ -295,6 +291,7 @@ public class MetadataTagResponse {
      * @return Returns the Double
      */
     @JsonGetter("modified")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public Double getModified() {
         return modified;
     }
@@ -314,6 +311,7 @@ public class MetadataTagResponse {
      * @return Returns the TagNameAndID
      */
     @JsonGetter("modifiedBy")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public TagNameAndID getModifiedBy() {
         return modifiedBy;
     }
@@ -332,6 +330,7 @@ public class MetadataTagResponse {
      * @return Returns the TagNameAndID
      */
     @JsonGetter("author")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public TagNameAndID getAuthor() {
         return author;
     }
@@ -350,6 +349,7 @@ public class MetadataTagResponse {
      * @return Returns the TagNameAndID
      */
     @JsonGetter("owner")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public TagNameAndID getOwner() {
         return owner;
     }

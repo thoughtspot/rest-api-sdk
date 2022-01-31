@@ -59,16 +59,3 @@ class ApiRestV2MetadataHomeliveboardUnassignRequest(object):
         # Return an object of this model
         return cls(user_name,
                    user_id)
-
-    @classmethod
-    def validate(cls, val):
-        """Validates value against class schema
-
-        Args:
-            val: the value to be validated
-
-        Returns:
-            boolean : if value is valid against schema.
-
-        """
-        return SchemaValidatorWrapper.getValidator(APIHelper.get_schema_path(os.path.abspath(__file__))).is_valid(val)

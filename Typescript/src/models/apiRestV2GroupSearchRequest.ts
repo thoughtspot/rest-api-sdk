@@ -24,7 +24,10 @@ export interface ApiRestV2GroupSearchRequest {
   id?: string;
   /** A unique display name string for the user group, for example, Developer group. */
   displayName?: string;
-  /** The visibility attribute is set to DEFAULT when creating a group. Setting this to DEFAULT makes a group visible to other users and user groups, and thus allows them to share objects */
+  /**
+   * Visibility of the user group.
+   *  The visibility attribute is set to DEFAULT. The DEFAULT attribute makes the user group visible for other user groups and allows them to share objects.
+   */
   visibility?: Visibility3Enum;
   /** Description text for the group. */
   description?: string;

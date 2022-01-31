@@ -10,6 +10,8 @@ The following parameters are configurable for the API Client:
 | `baseUrl` | `string` | *Default*: `'https://localhost:443'` |
 | `environment` | Environment | The API environment. <br> **Default: `Environment.Production`** |
 | `timeout` | `number` | Timeout for API calls.<br>*Default*: `0` |
+| `httpClientOptions` | `Partial<HttpClientOptions>` | Stable configurable http client options. |
+| `unstableHttpClientOptions` | `any` | Unstable configurable http client options. |
 | `accessToken` | `string` | The OAuth 2.0 Access Token to use for API requests. |
 
 The API client can be initialized as follows:
@@ -37,4 +39,7 @@ The gateway for the SDK. This class acts as a factory for the Controllers and al
 | group | Gets GroupController |
 | metadata | Gets MetadataController |
 | database | Gets DatabaseController |
+| connection | Gets ConnectionController |
+| data | Gets DataController |
+| admin | Gets AdminController |
 

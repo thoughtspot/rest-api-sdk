@@ -19,6 +19,8 @@ const databaseController = new DatabaseController(client);
 
 # Get Databases
 
+Note: This endpoint is applicable only for on-prem deployments
+
 To list all the databases in Falcon, use this endpoint.
 
 ```ts
@@ -60,6 +62,8 @@ try {
 
 
 # Get Schemas
+
+Note: This endpoint is applicable only for on-prem deployments
 
 To list all the schemas in a database in Falcon, use this endpoint.
 
@@ -106,7 +110,9 @@ try {
 
 # Get Tables
 
-To list all the schemas in a database in Falcon, use this endpoint.
+Note: This endpoint is applicable only for on-prem deployments.
+
+To list all the tables in a schema of a database in Falcon, use this endpoint.
 
 ```ts
 async getTables(
@@ -153,6 +159,8 @@ try {
 
 
 # Create Table
+
+Note: This endpoint is applicable only for on-prem deployments.
 
 To create a table in Falcon, use this endpoint.
 
@@ -201,7 +209,11 @@ try {
 
 # Run Query
 
-To create a table in Falcon, use this endpoint.
+Note: This endpoint is applicable only for on-prem deployments.
+
+To run a TQL statement in Falcon, use this endpoint.
+
+You can run only following type of statements - Table DDL alter and Table rows update and delete.
 
 ```ts
 async runQuery(

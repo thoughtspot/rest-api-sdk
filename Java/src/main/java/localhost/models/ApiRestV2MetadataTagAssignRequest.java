@@ -15,9 +15,7 @@ import java.util.List;
  * This is a model class for ApiRestV2MetadataTagAssignRequest type.
  */
 public class ApiRestV2MetadataTagAssignRequest {
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String name;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String id;
     private List<MetaObjectInput> metaObject;
 
@@ -48,6 +46,7 @@ public class ApiRestV2MetadataTagAssignRequest {
      * @return Returns the String
      */
     @JsonGetter("name")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getName() {
         return name;
     }
@@ -68,6 +67,7 @@ public class ApiRestV2MetadataTagAssignRequest {
      * @return Returns the String
      */
     @JsonGetter("id")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getId() {
         return id;
     }

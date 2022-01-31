@@ -15,11 +15,8 @@ import java.util.List;
  * This is a model class for ApiRestV2GroupAdduserRequest type.
  */
 public class ApiRestV2GroupAdduserRequest {
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String name;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String id;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<UserNameAndIDInput> users;
 
     /**
@@ -49,6 +46,7 @@ public class ApiRestV2GroupAdduserRequest {
      * @return Returns the String
      */
     @JsonGetter("name")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getName() {
         return name;
     }
@@ -69,6 +67,7 @@ public class ApiRestV2GroupAdduserRequest {
      * @return Returns the String
      */
     @JsonGetter("id")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getId() {
         return id;
     }
@@ -90,6 +89,7 @@ public class ApiRestV2GroupAdduserRequest {
      * @return Returns the List of UserNameAndIDInput
      */
     @JsonGetter("users")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public List<UserNameAndIDInput> getUsers() {
         return users;
     }

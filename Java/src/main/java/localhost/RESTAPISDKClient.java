@@ -10,6 +10,9 @@ import java.util.AbstractMap.SimpleEntry;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
+import localhost.controllers.AdminController;
+import localhost.controllers.ConnectionController;
+import localhost.controllers.DataController;
 import localhost.controllers.DatabaseController;
 import localhost.controllers.GroupController;
 import localhost.controllers.MetadataController;
@@ -36,6 +39,9 @@ public final class RESTAPISDKClient implements Configuration {
     private GroupController group;
     private MetadataController metadata;
     private DatabaseController database;
+    private ConnectionController connection;
+    private DataController data;
+    private AdminController admin;
 
     /**
      * Current API environment.
@@ -68,9 +74,9 @@ public final class RESTAPISDKClient implements Configuration {
     private final ReadonlyHttpClientConfiguration httpClientConfig;
 
     /**
-     * AccessTokenManager.
+     * BearerAuthManager.
      */
-    private AccessTokenManager accessTokenManager;
+    private BearerAuthManager bearerAuthManager;
 
     /**
      * Map of authentication Managers.
@@ -96,13 +102,13 @@ public final class RESTAPISDKClient implements Configuration {
 
         this.authManagers = (authManagers == null) ? new HashMap<>() : new HashMap<>(authManagers);
         if (this.authManagers.containsKey("global")) {
-            this.accessTokenManager = (AccessTokenManager) this.authManagers.get("global");
+            this.bearerAuthManager = (BearerAuthManager) this.authManagers.get("global");
         }
 
         if (!this.authManagers.containsKey("global")
-                || !getAccessTokenCredentials().equals(accessToken)) {
-            this.accessTokenManager = new AccessTokenManager(accessToken);
-            this.authManagers.put("global", accessTokenManager);
+                || !getBearerAuthCredentials().equals(accessToken)) {
+            this.bearerAuthManager = new BearerAuthManager(accessToken);
+            this.authManagers.put("global", bearerAuthManager);
         }
 
         session = new SessionController(this, this.httpClient, this.authManagers,
@@ -113,6 +119,10 @@ public final class RESTAPISDKClient implements Configuration {
                 this.httpCallback);
         database = new DatabaseController(this, this.httpClient, this.authManagers,
                 this.httpCallback);
+        connection = new ConnectionController(this, this.httpClient, this.authManagers,
+                this.httpCallback);
+        data = new DataController(this, this.httpClient, this.authManagers, this.httpCallback);
+        admin = new AdminController(this, this.httpClient, this.authManagers, this.httpCallback);
     }
 
     /**
@@ -160,6 +170,30 @@ public final class RESTAPISDKClient implements Configuration {
      */
     public DatabaseController getDatabaseController() {
         return database;
+    }
+
+    /**
+     * Get the instance of ConnectionController.
+     * @return connection
+     */
+    public ConnectionController getConnectionController() {
+        return connection;
+    }
+
+    /**
+     * Get the instance of DataController.
+     * @return data
+     */
+    public DataController getDataController() {
+        return data;
+    }
+
+    /**
+     * Get the instance of AdminController.
+     * @return admin
+     */
+    public AdminController getAdminController() {
+        return admin;
     }
 
     /**
@@ -211,11 +245,11 @@ public final class RESTAPISDKClient implements Configuration {
     }
 
     /**
-     * The credentials to use with AccessToken.
-     * @return accessTokenCredentials
+     * The credentials to use with BearerAuth.
+     * @return bearerAuthCredentials
      */
-    private AccessTokenCredentials getAccessTokenCredentials() {
-        return accessTokenManager;
+    private BearerAuthCredentials getBearerAuthCredentials() {
+        return bearerAuthManager;
     }
 
     /**
@@ -223,7 +257,7 @@ public final class RESTAPISDKClient implements Configuration {
      * @return accessToken
      */
     public String getAccessToken() {
-        return getAccessTokenCredentials().getAccessToken();
+        return getBearerAuthCredentials().getAccessToken();
     }
 
     /**
@@ -298,7 +332,7 @@ public final class RESTAPISDKClient implements Configuration {
         builder.contentType = getContentType();
         builder.acceptLanguage = getAcceptLanguage();
         builder.httpClient = getHttpClient();
-        builder.accessToken = getAccessTokenCredentials().getAccessToken();
+        builder.accessToken = getBearerAuthCredentials().getAccessToken();
         builder.authManagers = authManagers;
         builder.httpCallback = httpCallback;
         builder.httpClientConfig(configBldr -> configBldr =
@@ -312,7 +346,7 @@ public final class RESTAPISDKClient implements Configuration {
     public static class Builder {
 
         private Environment environment = Environment.PRODUCTION;
-        private String baseUrl = "http://172.19.146.98:8088";
+        private String baseUrl = "https://localhost:443";
         private String contentType = "application/json";
         private String acceptLanguage = "application/json";
         private HttpClient httpClient;
@@ -324,7 +358,7 @@ public final class RESTAPISDKClient implements Configuration {
 
 
         /**
-         * Credentials setter for AccessToken.
+         * Credentials setter for BearerAuth.
          * @param accessToken String value for accessToken.
          * @return Builder
          */

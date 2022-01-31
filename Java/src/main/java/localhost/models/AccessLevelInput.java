@@ -14,13 +14,9 @@ import com.fasterxml.jackson.annotation.JsonSetter;
  * This is a model class for AccessLevelInput type.
  */
 public class AccessLevelInput {
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String name;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String id;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Type1Enum type;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private AccessEnum access;
 
     /**
@@ -53,6 +49,7 @@ public class AccessLevelInput {
      * @return Returns the String
      */
     @JsonGetter("name")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getName() {
         return name;
     }
@@ -73,6 +70,7 @@ public class AccessLevelInput {
      * @return Returns the String
      */
     @JsonGetter("id")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getId() {
         return id;
     }
@@ -93,6 +91,7 @@ public class AccessLevelInput {
      * @return Returns the Type1Enum
      */
     @JsonGetter("type")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public Type1Enum getType() {
         return type;
     }
@@ -113,6 +112,7 @@ public class AccessLevelInput {
      * @return Returns the AccessEnum
      */
     @JsonGetter("access")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public AccessEnum getAccess() {
         return access;
     }

@@ -64,7 +64,7 @@ public final class GroupController extends BaseController {
     }
 
     /**
-     * To get the details of a specific group by name or id, use this endpoint. At Least one value
+     * To get the details of a specific group by name or id, use this endpoint. At least one value
      * needed. When both are given,then id will be considered to fetch user information.
      * @param  name  Optional parameter: Name of the group
      * @param  id  Optional parameter: The GUID of the group
@@ -85,7 +85,7 @@ public final class GroupController extends BaseController {
     }
 
     /**
-     * To get the details of a specific group by name or id, use this endpoint. At Least one value
+     * To get the details of a specific group by name or id, use this endpoint. At least one value
      * needed. When both are given,then id will be considered to fetch user information.
      * @param  name  Optional parameter: Name of the group
      * @param  id  Optional parameter: The GUID of the group
@@ -275,8 +275,8 @@ public final class GroupController extends BaseController {
 
     /**
      * You can use this endpoint to programmatically modify an existing group. To modify a group,
-     * you require admin user privileges.At least one of id or name is required to update the group.
-     * When both are given, then id will be considered and group name will be updated.
+     * you require admin user privileges. At least one of id or name is required to update the
+     * group. When both are given, then id will be considered and group name will be updated.
      * @param  body  Required parameter: Example:
      * @return    Returns the Boolean response from the API call
      * @throws    ApiException    Represents error response from the server.
@@ -295,8 +295,8 @@ public final class GroupController extends BaseController {
 
     /**
      * You can use this endpoint to programmatically modify an existing group. To modify a group,
-     * you require admin user privileges.At least one of id or name is required to update the group.
-     * When both are given, then id will be considered and group name will be updated.
+     * you require admin user privileges. At least one of id or name is required to update the
+     * group. When both are given, then id will be considered and group name will be updated.
      * @param  body  Required parameter: Example:
      * @return    Returns the Boolean response from the API call
      */
@@ -370,7 +370,7 @@ public final class GroupController extends BaseController {
 
     /**
      * To remove a group from the ThoughtSpot system, send a DELETE request to this endpoint. At
-     * Least one value needed. When both are given,then user id will be considered to fetch user
+     * least one value needed. When both are given,then user id will be considered to fetch user
      * information.
      * @param  name  Optional parameter: Name of the group.
      * @param  id  Optional parameter: The GUID of the group
@@ -392,7 +392,7 @@ public final class GroupController extends BaseController {
 
     /**
      * To remove a group from the ThoughtSpot system, send a DELETE request to this endpoint. At
-     * Least one value needed. When both are given,then user id will be considered to fetch user
+     * least one value needed. When both are given,then user id will be considered to fetch user
      * information.
      * @param  name  Optional parameter: Name of the group.
      * @param  id  Optional parameter: The GUID of the group
@@ -668,9 +668,9 @@ public final class GroupController extends BaseController {
     }
 
     /**
-     * To programmatically add existing ThoughtSpot users to a group, use this API endpoint. When
-     * you assign users to a group, the users inherits the privileges assigned to that group. At
-     * least one of id or name of the group is required. When both are given,then user id will be
+     * To programmatically add existing ThoughtSpot users to a group, use this API endpoint. hen you
+     * assign users to a group, the users inherits the privileges assigned to that group. At least
+     * one of id or name of the group is required. When both are given,then user id will be
      * considered.
      * @param  body  Required parameter: Example:
      * @return    Returns the Boolean response from the API call
@@ -689,9 +689,9 @@ public final class GroupController extends BaseController {
     }
 
     /**
-     * To programmatically add existing ThoughtSpot users to a group, use this API endpoint. When
-     * you assign users to a group, the users inherits the privileges assigned to that group. At
-     * least one of id or name of the group is required. When both are given,then user id will be
+     * To programmatically add existing ThoughtSpot users to a group, use this API endpoint. hen you
+     * assign users to a group, the users inherits the privileges assigned to that group. At least
+     * one of id or name of the group is required. When both are given,then user id will be
      * considered.
      * @param  body  Required parameter: Example:
      * @return    Returns the Boolean response from the API call
@@ -765,9 +765,9 @@ public final class GroupController extends BaseController {
     }
 
     /**
-     * To programmatically remove users from a group, use API endpoint.The API removes only the user
-     * association. It does not delete the users or group from the Thoughtspot system. At least one
-     * of id or name of group is required. When both are given,then user id will be considered.
+     * To programmatically remove users from a group, use API endpoint. The API removes only the
+     * user association. It does not delete the users or group from the Thoughtspot system. At least
+     * one of id or name of group is required. When both are given,then user id will be considered.
      * @param  body  Required parameter: Example:
      * @return    Returns the Boolean response from the API call
      * @throws    ApiException    Represents error response from the server.
@@ -785,9 +785,9 @@ public final class GroupController extends BaseController {
     }
 
     /**
-     * To programmatically remove users from a group, use API endpoint.The API removes only the user
-     * association. It does not delete the users or group from the Thoughtspot system. At least one
-     * of id or name of group is required. When both are given,then user id will be considered.
+     * To programmatically remove users from a group, use API endpoint. The API removes only the
+     * user association. It does not delete the users or group from the Thoughtspot system. At least
+     * one of id or name of group is required. When both are given,then user id will be considered.
      * @param  body  Required parameter: Example:
      * @return    Returns the Boolean response from the API call
      */
@@ -955,7 +955,7 @@ public final class GroupController extends BaseController {
     }
 
     /**
-     * To programmatically remove groups from a group, use API endpoint.The API removes only the
+     * To programmatically remove groups from a group, use API endpoint. The API removes only the
      * group association. It does not delete the group from the Thoughtspot system. At least one of
      * id or name of group is required. When both are given,then user id will be considered.
      * @param  body  Required parameter: Example:
@@ -975,7 +975,7 @@ public final class GroupController extends BaseController {
     }
 
     /**
-     * To programmatically remove groups from a group, use API endpoint.The API removes only the
+     * To programmatically remove groups from a group, use API endpoint. The API removes only the
      * group association. It does not delete the group from the Thoughtspot system. At least one of
      * id or name of group is required. When both are given,then user id will be considered.
      * @param  body  Required parameter: Example:
@@ -1050,8 +1050,8 @@ public final class GroupController extends BaseController {
     }
 
     /**
-     * To get the details of a specific group account or all groups in the ThoughtSpot system, use
-     * this end point.
+     * To get the details of a specific group account or all groups in the ThoughtSpot system use
+     * this end point. If no inputs are provided, then all groups are included in the response.
      * @param  body  Required parameter: Example:
      * @return    Returns the List of GroupResponse response from the API call
      * @throws    ApiException    Represents error response from the server.
@@ -1069,8 +1069,8 @@ public final class GroupController extends BaseController {
     }
 
     /**
-     * To get the details of a specific group account or all groups in the ThoughtSpot system, use
-     * this end point.
+     * To get the details of a specific group account or all groups in the ThoughtSpot system use
+     * this end point. If no inputs are provided, then all groups are included in the response.
      * @param  body  Required parameter: Example:
      * @return    Returns the List of GroupResponse response from the API call
      */

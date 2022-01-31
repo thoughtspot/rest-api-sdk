@@ -19,6 +19,8 @@ DatabaseController databaseController = client.getDatabaseController();
 
 # Get Databases
 
+Note: This endpoint is applicable only for on-prem deployments
+
 To list all the databases in Falcon, use this endpoint.
 
 ```java
@@ -48,6 +50,8 @@ databaseController.getDatabasesAsync().thenAccept(result -> {
 
 
 # Get Schemas
+
+Note: This endpoint is applicable only for on-prem deployments
 
 To list all the schemas in a database in Falcon, use this endpoint.
 
@@ -88,7 +92,9 @@ databaseController.getSchemasAsync(database).thenAccept(result -> {
 
 # Get Tables
 
-To list all the schemas in a database in Falcon, use this endpoint.
+Note: This endpoint is applicable only for on-prem deployments.
+
+To list all the tables in a schema of a database in Falcon, use this endpoint.
 
 ```java
 CompletableFuture<List<String>> getTablesAsync(
@@ -130,6 +136,8 @@ databaseController.getTablesAsync(database, schema).thenAccept(result -> {
 
 # Create Table
 
+Note: This endpoint is applicable only for on-prem deployments.
+
 To create a table in Falcon, use this endpoint.
 
 ```java
@@ -169,7 +177,11 @@ databaseController.createTableAsync(body).thenAccept(result -> {
 
 # Run Query
 
-To create a table in Falcon, use this endpoint.
+Note: This endpoint is applicable only for on-prem deployments.
+
+To run a TQL statement in Falcon, use this endpoint.
+
+You can run only following type of statements - Table DDL alter and Table rows update and delete.
 
 ```java
 CompletableFuture<List<Object>> runQueryAsync(

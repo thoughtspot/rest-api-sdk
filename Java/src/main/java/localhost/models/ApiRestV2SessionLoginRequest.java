@@ -16,7 +16,6 @@ import com.fasterxml.jackson.annotation.JsonSetter;
 public class ApiRestV2SessionLoginRequest {
     private String userName;
     private String password;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Boolean rememberMe;
 
     /**
@@ -88,6 +87,7 @@ public class ApiRestV2SessionLoginRequest {
      * @return Returns the Boolean
      */
     @JsonGetter("rememberMe")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public Boolean getRememberMe() {
         return rememberMe;
     }

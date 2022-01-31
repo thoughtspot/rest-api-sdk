@@ -23,7 +23,7 @@ class SessionControllerTests(ControllerTestBase):
     def setUpClass(cls):
         super(SessionControllerTests, cls).setUpClass()
         cls.response_catcher = HttpResponseCatcher()
-        cls.controller = SessionController(cls.config, cls.response_catcher)
+        cls.controller = SessionController(cls.config, cls.auth_managers, cls.response_catcher)
 
     # To get session object information, use this endpoint
     def test_get_session_info(self):

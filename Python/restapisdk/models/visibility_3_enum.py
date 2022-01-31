@@ -12,9 +12,10 @@ class Visibility3Enum(object):
 
     """Implementation of the 'Visibility3' enum.
 
-    The visibility attribute is set to DEFAULT when creating a group. Setting
-    this to DEFAULT makes a group visible to other users and user groups, and
-    thus allows them to share objects
+    Visibility of the user group. 
+     The visibility attribute is set to DEFAULT. The DEFAULT attribute makes
+     the user group visible for other user groups and allows them to share
+     objects.
 
     Attributes:
         DEFAULT: TODO: type description here.

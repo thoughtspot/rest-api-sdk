@@ -15,12 +15,12 @@ class ApiRestV2DatabaseTableRunqueryRequest(object):
     TODO: type model description here.
 
     Attributes:
-        statement (list of string): A JSON array of TQL statements. Each TQL
-            statement should end with semi-colon (;). The TQL operations that
-            can be run through this API are restricted to create database and
-            schema, alter table, delete and update table rows. If a TQL
-            statement fails, then the subsequent statements in the array are
-            not run. Example statement: alter table
+        statement (list of string): A JSON array of TQL statements.    Each
+            TQL statement should end with semi-colon (;).    The TQL
+            operations that can be run through this API are restricted to
+            create database and schema, alter table, delete and update table
+            rows.    If a TQL statement fails, then the subsequent statements
+            in the array are not run.    Example:    alter table
             test_db.test_schema.test_table drop contraint primary key;
 
     """
@@ -59,16 +59,3 @@ class ApiRestV2DatabaseTableRunqueryRequest(object):
 
         # Return an object of this model
         return cls(statement)
-
-    @classmethod
-    def validate(cls, val):
-        """Validates value against class schema
-
-        Args:
-            val: the value to be validated
-
-        Returns:
-            boolean : if value is valid against schema.
-
-        """
-        return SchemaValidatorWrapper.getValidator(APIHelper.get_schema_path(os.path.abspath(__file__))).is_valid(val)

@@ -23,6 +23,8 @@ import { BaseController } from './baseController';
 
 export class DatabaseController extends BaseController {
   /**
+   * Note: This endpoint is applicable only for on-prem deployments
+   *
    * To list all the databases in Falcon, use this endpoint.
    *
    * @return Response from the API call
@@ -36,6 +38,8 @@ export class DatabaseController extends BaseController {
   }
 
   /**
+   * Note: This endpoint is applicable only for on-prem deployments
+   *
    * To list all the schemas in a database in Falcon, use this endpoint.
    *
    * @param database Name of the Falcon database
@@ -53,7 +57,9 @@ export class DatabaseController extends BaseController {
   }
 
   /**
-   * To list all the schemas in a database in Falcon, use this endpoint.
+   * Note: This endpoint is applicable only for on-prem deployments.
+   *
+   * To list all the tables in a schema of a database in Falcon, use this endpoint.
    *
    * @param database Name of the Falcon database
    * @param schema   Name of the schema in Falcon database
@@ -76,6 +82,8 @@ export class DatabaseController extends BaseController {
   }
 
   /**
+   * Note: This endpoint is applicable only for on-prem deployments.
+   *
    * To create a table in Falcon, use this endpoint.
    *
    * @param body
@@ -99,7 +107,11 @@ export class DatabaseController extends BaseController {
   }
 
   /**
-   * To create a table in Falcon, use this endpoint.
+   * Note: This endpoint is applicable only for on-prem deployments.
+   *
+   * To run a TQL statement in Falcon, use this endpoint.
+   *
+   * You can run only following type of statements - Table DDL alter and Table rows update and delete.
    *
    * @param body
    * @return Response from the API call

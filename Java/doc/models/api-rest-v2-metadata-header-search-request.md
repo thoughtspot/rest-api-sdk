@@ -10,11 +10,11 @@
 | Name | Type | Tags | Description | Getter | Setter |
 |  --- | --- | --- | --- | --- | --- |
 | `OutputFields` | `List<String>` | Optional | Array of header field names that need to be included in the header response | List<String> getOutputFields() | setOutputFields(List<String> outputFields) |
-| `Offset` | `String` | Optional | The offset point, starting from where the records should be included in the response. If no input is provided then offset starts from 0.<br>**Default**: `"0"` | String getOffset() | setOffset(String offset) |
-| `BatchSize` | `String` | Optional | The number of records that should be included in the response starting from offset position. If no input is provided, then all records starting from the value provided in offset is included in the response. | String getBatchSize() | setBatchSize(String batchSize) |
+| `Offset` | `Integer` | Optional | The offset point, starting from where the records should be included in the response.<br><br>If no input is provided then offset starts from 0.<br>**Default**: `0` | Integer getOffset() | setOffset(Integer offset) |
+| `BatchSize` | `Integer` | Optional | The number of records that should be included in the response starting from offset position.<br><br>If no input is provided, then all records starting from the value provided in offset is included in the response. | Integer getBatchSize() | setBatchSize(Integer batchSize) |
 | `SortBy` | [`SortByEnum`](/doc/models/sort-by-enum.md) | Optional | Field based on which the response needs to be ordered.<br>**Default**: `SortByEnum.DEFAULT` | SortByEnum getSortBy() | setSortBy(SortByEnum sortBy) |
 | `SortOrder` | [`SortOrderEnum`](/doc/models/sort-order-enum.md) | Optional | Order in which sortBy should be applied.<br>**Default**: `SortOrderEnum.DEFAULT` | SortOrderEnum getSortOrder() | setSortOrder(SortOrderEnum sortOrder) |
-| `Type` | [`Type9Enum`](/doc/models/type-9-enum.md) | Required | Type of the metadata object being searched. | Type9Enum getType() | setType(Type9Enum type) |
+| `Type` | [`Type10Enum`](/doc/models/type-10-enum.md) | Required | Type of the metadata object being searched. | Type10Enum getType() | setType(Type10Enum type) |
 | `NamePattern` | `String` | Optional | A pattern to match the name of the metadata object. This parameter supports matching case-insensitive strings. For a wildcard match, use %. | String getNamePattern() | setNamePattern(String namePattern) |
 | `FetchId` | `List<String>` | Optional | A JSON array containing the GUIDs of the metadata objects that you want to fetch. | List<String> getFetchId() | setFetchId(List<String> fetchId) |
 | `SkipId` | `List<String>` | Optional | A JSON array containing the GUIDs of the metadata objects that you want to skip. | List<String> getSkipId() | setSkipId(List<String> skipId) |

@@ -222,7 +222,6 @@ public class HttpClientConfiguration implements ReadonlyHttpClientConfiguration 
          * Default Constructor to initiate builder with default properties.
          */
         public Builder() {
-            System.out.println("Builder class..");
             // setting default values
             httpStatusCodesToRetry.addAll(Arrays.asList(408, 413, 429, 500, 502, 503, 504, 521, 522,
                     524, 408, 413, 429, 500, 502, 503, 504, 521, 522, 524));

@@ -25,7 +25,7 @@ class ControllerTestBase(unittest.TestCase):
         cls.assert_precision = 0.01
         cls.config = ControllerTestBase.create_configuration()
         cls.client = RestapisdkClient()
-
+        cls.auth_managers = cls.client.auth_managers
     @staticmethod
     def create_configuration():
-        return Configuration()
+        return Configuration(access_token='')

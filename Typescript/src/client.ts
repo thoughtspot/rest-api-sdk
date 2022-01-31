@@ -13,7 +13,7 @@ import {
   Server,
 } from './clientInterface';
 import { Configuration, Environment } from './configuration';
-import { DEFAULT_CONFIGURATION } from './defaultConfiguration';
+import { DEFAULT_CONFIGURATION, DEFAULT_RETRY_CONFIG } from './defaultConfiguration';
 import { ApiError } from './core';
 import { pathTemplate, SkipEncode } from './core';
 import { setHeader } from './core';
@@ -22,6 +22,7 @@ import {
   createRequestBuilderFactory,
   HttpClient,
   HttpClientInterface,
+  RetryConfiguration,
   XmlSerializerInterface,
 } from './core';
 import { XmlSerialization } from './http/xmlSerialization';
@@ -30,6 +31,8 @@ const USER_AGENT = 'APIMATIC 3.0';
 
 export class Client implements ClientInterface {
   private _config: Readonly<Configuration>;
+  private _timeout: number;
+  private _retryConfig: RetryConfiguration;
   private _requestBuilderFactory: SdkRequestBuilderFactory;
 
   constructor(config?: Partial<Configuration>) {
@@ -37,12 +40,21 @@ export class Client implements ClientInterface {
       ...DEFAULT_CONFIGURATION,
       ...config,
     };
+    this._retryConfig = {
+      ...DEFAULT_RETRY_CONFIG,
+      ...this._config.httpClientOptions?.retryConfig
+    };
+    this._timeout = typeof this._config.httpClientOptions?.timeout != 'undefined' ?
+      this._config.httpClientOptions.timeout :
+      this._config.timeout;
     this._requestBuilderFactory = createRequestHandlerFactory(
       server => getBaseUri(server, this._config),
       accessTokenAuthenticationProvider(this._config),
       new HttpClient({
-        timeout: this._config.timeout,
+        timeout: this._timeout,
         clientConfigOverrides: this._config.unstable_httpClientOptions,
+        httpAgent: this._config.httpClientOptions?.httpAgent,
+        httpsAgent: this._config.httpClientOptions?.httpsAgent,
       }),
       [
         withErrorHandlers,
@@ -51,7 +63,8 @@ export class Client implements ClientInterface {
         withContentType(this._config),
         withAcceptLanguage(this._config),
       ],
-      new XmlSerialization()
+      new XmlSerialization(),
+      this._retryConfig
     );
   }
 
@@ -87,14 +100,16 @@ function createRequestHandlerFactory(
   authProvider: AuthenticatorInterface<AuthParams>,
   httpClient: HttpClient,
   addons: ((rb: SdkRequestBuilder) => void)[],
-  xmlSerializer: XmlSerializerInterface
+  xmlSerializer: XmlSerializerInterface,
+  retryConfig: RetryConfiguration
 ): SdkRequestBuilderFactory {
   const requestBuilderFactory = createRequestBuilderFactory(
     createHttpClientAdapter(httpClient),
     baseUrlProvider,
     ApiError,
     authProvider,
-    xmlSerializer
+    xmlSerializer,
+    retryConfig
   );
 
   return tap(requestBuilderFactory, ...addons);
@@ -118,6 +133,7 @@ function withErrorHandlers(rb: SdkRequestBuilder) {
 function withUserAgent(rb: SdkRequestBuilder) {
   rb.header('user-agent', USER_AGENT);
 }
+
 
 function withContentType({ contentType }: { contentType: string }) {
   return (rb: SdkRequestBuilder) => {

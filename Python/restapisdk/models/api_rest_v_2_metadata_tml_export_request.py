@@ -22,8 +22,8 @@ class ApiRestV2MetadataTmlExportRequest(object):
             associated objects. To export the objects associated with the
             objects specified in id, set the value to true. When set to true,
             the API exports any underlying worksheets, tables, or views for a
-            given object. By default, the API does not export these underlying
-            objects
+            given object.   By default, the API does not export these
+            underlying objects
 
     """
 
@@ -71,16 +71,3 @@ class ApiRestV2MetadataTmlExportRequest(object):
         return cls(id,
                    format_type,
                    export_associated)
-
-    @classmethod
-    def validate(cls, val):
-        """Validates value against class schema
-
-        Args:
-            val: the value to be validated
-
-        Returns:
-            boolean : if value is valid against schema.
-
-        """
-        return SchemaValidatorWrapper.getValidator(APIHelper.get_schema_path(os.path.abspath(__file__))).is_valid(val)

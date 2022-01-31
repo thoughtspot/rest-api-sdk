@@ -23,9 +23,11 @@ class MetadataControllerTests(ControllerTestBase):
     def setUpClass(cls):
         super(MetadataControllerTests, cls).setUpClass()
         cls.response_catcher = HttpResponseCatcher()
-        cls.controller = MetadataController(cls.config, cls.response_catcher)
+        cls.controller = MetadataController(cls.config, cls.auth_managers, cls.response_catcher)
 
-    # To get details of a specific tag, use this endpoint. At least one of id or name of tag is required. When both are given, then id will be considered.
+    # To get details of a specific tag, use this endpoint. 
+    #
+    # At least one of id or name of tag is required. When both are given, then id will be considered.
     def test_get_tag(self):
         # Parameters for the API call
         name = None
@@ -44,7 +46,9 @@ class MetadataControllerTests(ControllerTestBase):
         self.assertTrue(TestHelper.match_headers(expected_headers, self.response_catcher.response.headers))
 
 
-    # To programmatically delete tags, use this endpoint. At least one of id or name of tag is required. When both are given, then id will be considered.
+    # To programmatically delete tags, use this endpoint. 
+    #
+    # At least one of id or name of tag is required. When both are given, then id will be considered.
     def test_delete_tag(self):
         # Parameters for the API call
         name = None
@@ -63,7 +67,9 @@ class MetadataControllerTests(ControllerTestBase):
         self.assertTrue(TestHelper.match_headers(expected_headers, self.response_catcher.response.headers))
 
 
-    # To get the name and id of liveboard that is set as a home liveboard for a user, use this endpoint. At least one of user id or username is required. When both are given, then id will be considered.
+    # To get the name and id of liveboard that is set as a home liveboard for a user, use this endpoint. 
+    #
+    # At least one of user id or username is required. When both are given, then id will be considered.
     def test_get_homeliveboard(self):
         # Parameters for the API call
         user_name = None
