@@ -5,13 +5,13 @@ The latest version of SDK is available in MVN package manager - https://search.m
 
 Depending on the build tool used in your system, add this package as dependency in the project and build it. When using Apache Maven build tool, add below to the pom.xml of the project.
 
-`<dependency>
+```
+<dependency>
     <groupId>io.github.thoughtspot</groupId>
-    
     <artifactId>rest-api-sdk-lib</artifactId>
-    
     <version>1.6.6</version>
-</dependency>`
+</dependency>
+```
 
 ## Initialize the API Client
 
