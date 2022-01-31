@@ -7,7 +7,9 @@ Depending on the build tool used in your system, add this package as dependency 
 
 `<dependency>
     <groupId>io.github.thoughtspot</groupId>
+    
     <artifactId>rest-api-sdk-lib</artifactId>
+    
     <version>1.6.6</version>
 </dependency>`
 
