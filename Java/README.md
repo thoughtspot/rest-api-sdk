@@ -26,7 +26,7 @@ The following parameters are configurable for the API Client:
 | `acceptLanguage` | `String` | response format<br>*Default*: `"application/json"` |
 | `baseUrl` | `String` | *Default*: `"https://localhost:443"` |
 | `environment` | Environment | The API environment. <br> **Default: `Environment.PRODUCTION`** |
-| `httpClientConfig` | `ReadonlyHttpClientConfiguration` | Http Client Configuration instance.<br>* See available [builder methods here](doc/http-client-configuration-builder.md). |
+| `httpClientConfig` | `ReadonlyHttpClientConfiguration` | Http Client Configuration instance.<br>* See available [builder methods here](https://github.com/thoughtspot/rest-api-sdk/blob/main/Java/doc/http-client-configuration-builder.md). |
 | `accessToken` | `String` | The OAuth 2.0 Access Token to use for API requests. |
 
 The API client can be initialized as follows:
