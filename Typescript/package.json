@@ -38,6 +38,9 @@
     "@apimatic/core": "^0.7.2",
     "@apimatic/schema": "^0.6.0"
   },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
   "bugs": {
     "url": "https://github.com/thoughtspot/rest-api-sdk/issues"
   },
@@ -51,6 +54,12 @@
     "everywhere",
     "sdk"
   ],
+  "globals": {
+    "window": {}
+  },
+  "directories": {
+    "lib": "lib"
+  },
   "homepage": "https://github.com/thoughtspot/rest-api-sdk/tree/main/Typescript",
   "email": "support@thoughtspot.com"
 }
