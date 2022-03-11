@@ -9,7 +9,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>thoughtspot.rest.api.sdk</AssemblyName>
-    <Version>1.6.1-beta</Version>
+    <Version>1.8.0</Version>
     <Authors>Thoughtspot</Authors>
     <Owners>Thoughtspot</Owners>
     <Product>RESTAPISDK.Standard</Product>
