@@ -8,7 +8,7 @@
 
   <groupId>io.github.thoughtspot</groupId>
   <artifactId>rest-api-sdk-lib</artifactId>
-  <version>1.8.1-beta-SNAPSHOT</version>
+  <version>1.8.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>restapisdklib</name>
