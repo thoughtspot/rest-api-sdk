@@ -9,7 +9,6 @@ package localhost.controllers;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import localhost.ApiHelper;
@@ -24,11 +23,12 @@ import localhost.http.client.HttpContext;
 import localhost.http.request.HttpRequest;
 import localhost.http.response.HttpResponse;
 import localhost.http.response.HttpStringResponse;
-import localhost.models.ApiRestV2UserAddgroupRequest;
-import localhost.models.ApiRestV2UserCreateRequest;
-import localhost.models.ApiRestV2UserRemovegroupRequest;
-import localhost.models.ApiRestV2UserSearchRequest;
-import localhost.models.ApiRestV2UserUpdateRequest;
+import localhost.models.TspublicRestV2UserAddgroupRequest;
+import localhost.models.TspublicRestV2UserChangepasswordRequest;
+import localhost.models.TspublicRestV2UserCreateRequest;
+import localhost.models.TspublicRestV2UserRemovegroupRequest;
+import localhost.models.TspublicRestV2UserSearchRequest;
+import localhost.models.TspublicRestV2UserUpdateRequest;
 import localhost.models.UserResponse;
 
 /**
@@ -110,7 +110,7 @@ public final class UserController extends BaseController {
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/user");
+                + "/tspublic/rest/v2/user");
 
         //load all query parameters
         Map<String, Object> queryParameters = new HashMap<>();
@@ -119,8 +119,9 @@ public final class UserController extends BaseController {
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
-        headers.add("Content-Type", config.getContentType());
+        headers.add("X-Requested-By", config.getXRequestedBy());
         headers.add("Accept-Language", config.getAcceptLanguage());
+        headers.add("Content-Type", config.getContentType());
         headers.add("user-agent", BaseController.userAgent);
         headers.add("accept", "application/json");
 
@@ -176,7 +177,7 @@ public final class UserController extends BaseController {
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
     public UserResponse createUser(
-            final ApiRestV2UserCreateRequest body) throws ApiException, IOException {
+            final TspublicRestV2UserCreateRequest body) throws ApiException, IOException {
         HttpRequest request = buildCreateUserRequest(body);
         authManagers.get("global").apply(request);
 
@@ -194,7 +195,7 @@ public final class UserController extends BaseController {
      * @return    Returns the UserResponse response from the API call
      */
     public CompletableFuture<UserResponse> createUserAsync(
-            final ApiRestV2UserCreateRequest body) {
+            final TspublicRestV2UserCreateRequest body) {
         return makeHttpCallAsync(() -> buildCreateUserRequest(body),
             req -> authManagers.get("global").applyAsync(req)
                 .thenCompose(request -> getClientInstance()
@@ -206,17 +207,23 @@ public final class UserController extends BaseController {
      * Builds the HttpRequest object for createUser.
      */
     private HttpRequest buildCreateUserRequest(
-            final ApiRestV2UserCreateRequest body) throws JsonProcessingException {
+            final TspublicRestV2UserCreateRequest body) throws JsonProcessingException {
+        //validating required parameters
+        if (null == body) {
+            throw new NullPointerException("The parameter \"body\" is a required parameter and cannot be null.");
+        }
+
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/user/create");
+                + "/tspublic/rest/v2/user/create");
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
         headers.add("Content-Type", "application/json");
+        headers.add("X-Requested-By", config.getXRequestedBy());
         headers.add("Accept-Language", config.getAcceptLanguage());
         headers.add("user-agent", BaseController.userAgent);
         headers.add("accept", "application/json");
@@ -273,7 +280,7 @@ public final class UserController extends BaseController {
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
     public Boolean updateUser(
-            final ApiRestV2UserUpdateRequest body) throws ApiException, IOException {
+            final TspublicRestV2UserUpdateRequest body) throws ApiException, IOException {
         HttpRequest request = buildUpdateUserRequest(body);
         authManagers.get("global").apply(request);
 
@@ -291,7 +298,7 @@ public final class UserController extends BaseController {
      * @return    Returns the Boolean response from the API call
      */
     public CompletableFuture<Boolean> updateUserAsync(
-            final ApiRestV2UserUpdateRequest body) {
+            final TspublicRestV2UserUpdateRequest body) {
         return makeHttpCallAsync(() -> buildUpdateUserRequest(body),
             req -> authManagers.get("global").applyAsync(req)
                 .thenCompose(request -> getClientInstance()
@@ -303,17 +310,23 @@ public final class UserController extends BaseController {
      * Builds the HttpRequest object for updateUser.
      */
     private HttpRequest buildUpdateUserRequest(
-            final ApiRestV2UserUpdateRequest body) throws JsonProcessingException {
+            final TspublicRestV2UserUpdateRequest body) throws JsonProcessingException {
+        //validating required parameters
+        if (null == body) {
+            throw new NullPointerException("The parameter \"body\" is a required parameter and cannot be null.");
+        }
+
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/user/update");
+                + "/tspublic/rest/v2/user/update");
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
         headers.add("Content-Type", "application/json");
+        headers.add("X-Requested-By", config.getXRequestedBy());
         headers.add("Accept-Language", config.getAcceptLanguage());
         headers.add("user-agent", BaseController.userAgent);
 
@@ -407,7 +420,7 @@ public final class UserController extends BaseController {
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/user/delete");
+                + "/tspublic/rest/v2/user/delete");
 
         //load all query parameters
         Map<String, Object> queryParameters = new HashMap<>();
@@ -416,8 +429,9 @@ public final class UserController extends BaseController {
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
-        headers.add("Content-Type", config.getContentType());
+        headers.add("X-Requested-By", config.getXRequestedBy());
         headers.add("Accept-Language", config.getAcceptLanguage());
+        headers.add("Content-Type", config.getContentType());
         headers.add("user-agent", BaseController.userAgent);
 
         //prepare and invoke the API call request to fetch the response
@@ -472,7 +486,7 @@ public final class UserController extends BaseController {
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
     public Boolean addGroupsToUser(
-            final ApiRestV2UserAddgroupRequest body) throws ApiException, IOException {
+            final TspublicRestV2UserAddgroupRequest body) throws ApiException, IOException {
         HttpRequest request = buildAddGroupsToUserRequest(body);
         authManagers.get("global").apply(request);
 
@@ -491,7 +505,7 @@ public final class UserController extends BaseController {
      * @return    Returns the Boolean response from the API call
      */
     public CompletableFuture<Boolean> addGroupsToUserAsync(
-            final ApiRestV2UserAddgroupRequest body) {
+            final TspublicRestV2UserAddgroupRequest body) {
         return makeHttpCallAsync(() -> buildAddGroupsToUserRequest(body),
             req -> authManagers.get("global").applyAsync(req)
                 .thenCompose(request -> getClientInstance()
@@ -503,17 +517,23 @@ public final class UserController extends BaseController {
      * Builds the HttpRequest object for addGroupsToUser.
      */
     private HttpRequest buildAddGroupsToUserRequest(
-            final ApiRestV2UserAddgroupRequest body) throws JsonProcessingException {
+            final TspublicRestV2UserAddgroupRequest body) throws JsonProcessingException {
+        //validating required parameters
+        if (null == body) {
+            throw new NullPointerException("The parameter \"body\" is a required parameter and cannot be null.");
+        }
+
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/user/addgroup");
+                + "/tspublic/rest/v2/user/addgroup");
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
         headers.add("Content-Type", "application/json");
+        headers.add("X-Requested-By", config.getXRequestedBy());
         headers.add("Accept-Language", config.getAcceptLanguage());
         headers.add("user-agent", BaseController.userAgent);
 
@@ -569,7 +589,7 @@ public final class UserController extends BaseController {
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
     public Boolean removeGroupsFromUser(
-            final ApiRestV2UserRemovegroupRequest body) throws ApiException, IOException {
+            final TspublicRestV2UserRemovegroupRequest body) throws ApiException, IOException {
         HttpRequest request = buildRemoveGroupsFromUserRequest(body);
         authManagers.get("global").apply(request);
 
@@ -588,7 +608,7 @@ public final class UserController extends BaseController {
      * @return    Returns the Boolean response from the API call
      */
     public CompletableFuture<Boolean> removeGroupsFromUserAsync(
-            final ApiRestV2UserRemovegroupRequest body) {
+            final TspublicRestV2UserRemovegroupRequest body) {
         return makeHttpCallAsync(() -> buildRemoveGroupsFromUserRequest(body),
             req -> authManagers.get("global").applyAsync(req)
                 .thenCompose(request -> getClientInstance()
@@ -600,17 +620,23 @@ public final class UserController extends BaseController {
      * Builds the HttpRequest object for removeGroupsFromUser.
      */
     private HttpRequest buildRemoveGroupsFromUserRequest(
-            final ApiRestV2UserRemovegroupRequest body) throws JsonProcessingException {
+            final TspublicRestV2UserRemovegroupRequest body) throws JsonProcessingException {
+        //validating required parameters
+        if (null == body) {
+            throw new NullPointerException("The parameter \"body\" is a required parameter and cannot be null.");
+        }
+
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/user/removegroup");
+                + "/tspublic/rest/v2/user/removegroup");
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
         headers.add("Content-Type", "application/json");
+        headers.add("X-Requested-By", config.getXRequestedBy());
         headers.add("Accept-Language", config.getAcceptLanguage());
         headers.add("user-agent", BaseController.userAgent);
 
@@ -656,61 +682,66 @@ public final class UserController extends BaseController {
     }
 
     /**
-     * To get the details of a specific user account or all users in the ThoughtSpot system, use
-     * this endpoint. If no input is provided, then all user are included in the response.
+     * To change the password of a ThoughtSpot user account, use this endpoint. At least one of id
+     * or name of user is required. When both are given user id will be considered.
      * @param  body  Required parameter: Example:
-     * @return    Returns the List of UserResponse response from the API call
+     * @return    Returns the Boolean response from the API call
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
-    public List<UserResponse> searchUsers(
-            final ApiRestV2UserSearchRequest body) throws ApiException, IOException {
-        HttpRequest request = buildSearchUsersRequest(body);
+    public Boolean changePasswordOfUser(
+            final TspublicRestV2UserChangepasswordRequest body) throws ApiException, IOException {
+        HttpRequest request = buildChangePasswordOfUserRequest(body);
         authManagers.get("global").apply(request);
 
         HttpResponse response = getClientInstance().execute(request, false);
         HttpContext context = new HttpContext(request, response);
 
-        return handleSearchUsersResponse(context);
+        return handleChangePasswordOfUserResponse(context);
     }
 
     /**
-     * To get the details of a specific user account or all users in the ThoughtSpot system, use
-     * this endpoint. If no input is provided, then all user are included in the response.
+     * To change the password of a ThoughtSpot user account, use this endpoint. At least one of id
+     * or name of user is required. When both are given user id will be considered.
      * @param  body  Required parameter: Example:
-     * @return    Returns the List of UserResponse response from the API call
+     * @return    Returns the Boolean response from the API call
      */
-    public CompletableFuture<List<UserResponse>> searchUsersAsync(
-            final ApiRestV2UserSearchRequest body) {
-        return makeHttpCallAsync(() -> buildSearchUsersRequest(body),
+    public CompletableFuture<Boolean> changePasswordOfUserAsync(
+            final TspublicRestV2UserChangepasswordRequest body) {
+        return makeHttpCallAsync(() -> buildChangePasswordOfUserRequest(body),
             req -> authManagers.get("global").applyAsync(req)
                 .thenCompose(request -> getClientInstance()
                         .executeAsync(request, false)),
-            context -> handleSearchUsersResponse(context));
+            context -> handleChangePasswordOfUserResponse(context));
     }
 
     /**
-     * Builds the HttpRequest object for searchUsers.
+     * Builds the HttpRequest object for changePasswordOfUser.
      */
-    private HttpRequest buildSearchUsersRequest(
-            final ApiRestV2UserSearchRequest body) throws JsonProcessingException {
+    private HttpRequest buildChangePasswordOfUserRequest(
+            final TspublicRestV2UserChangepasswordRequest body) throws JsonProcessingException {
+        //validating required parameters
+        if (null == body) {
+            throw new NullPointerException("The parameter \"body\" is a required parameter and cannot be null.");
+        }
+
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/user/search");
+                + "/tspublic/rest/v2/user/changepassword");
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
         headers.add("Content-Type", "application/json");
+        headers.add("X-Requested-By", config.getXRequestedBy());
         headers.add("Accept-Language", config.getAcceptLanguage());
         headers.add("user-agent", BaseController.userAgent);
-        headers.add("accept", "application/json");
 
         //prepare and invoke the API call request to fetch the response
         String bodyJson = ApiHelper.serialize(body);
-        HttpRequest request = getClientInstance().postBody(queryBuilder, headers, null, bodyJson);
+        HttpRequest request = getClientInstance().putBody(queryBuilder, headers, null, bodyJson);
 
         // Invoke the callback before request if its not null
         if (getHttpCallback() != null) {
@@ -721,10 +752,10 @@ public final class UserController extends BaseController {
     }
 
     /**
-     * Processes the response for searchUsers.
-     * @return An object of type List of UserResponse
+     * Processes the response for changePasswordOfUser.
+     * @return An object of type boolean
      */
-    private List<UserResponse> handleSearchUsersResponse(
+    private Boolean handleChangePasswordOfUserResponse(
             HttpContext context) throws ApiException, IOException {
         HttpResponse response = context.getResponse();
 
@@ -744,8 +775,107 @@ public final class UserController extends BaseController {
 
         //extract result from the http response
         String responseBody = ((HttpStringResponse) response).getBody();
-        List<UserResponse> result = ApiHelper.deserializeArray(responseBody,
-                UserResponse[].class);
+        boolean result = Boolean.parseBoolean(responseBody);
+
+        return result;
+    }
+
+    /**
+     * To get the details of a specific user account or all users in the ThoughtSpot system, use
+     * this endpoint. If no input is provided, then all user are included in the response.
+     * @param  body  Required parameter: Example:
+     * @return    Returns the Object response from the API call
+     * @throws    ApiException    Represents error response from the server.
+     * @throws    IOException    Signals that an I/O exception of some sort has occurred.
+     */
+    public Object searchUsers(
+            final TspublicRestV2UserSearchRequest body) throws ApiException, IOException {
+        HttpRequest request = buildSearchUsersRequest(body);
+        authManagers.get("global").apply(request);
+
+        HttpResponse response = getClientInstance().execute(request, false);
+        HttpContext context = new HttpContext(request, response);
+
+        return handleSearchUsersResponse(context);
+    }
+
+    /**
+     * To get the details of a specific user account or all users in the ThoughtSpot system, use
+     * this endpoint. If no input is provided, then all user are included in the response.
+     * @param  body  Required parameter: Example:
+     * @return    Returns the Object response from the API call
+     */
+    public CompletableFuture<Object> searchUsersAsync(
+            final TspublicRestV2UserSearchRequest body) {
+        return makeHttpCallAsync(() -> buildSearchUsersRequest(body),
+            req -> authManagers.get("global").applyAsync(req)
+                .thenCompose(request -> getClientInstance()
+                        .executeAsync(request, false)),
+            context -> handleSearchUsersResponse(context));
+    }
+
+    /**
+     * Builds the HttpRequest object for searchUsers.
+     */
+    private HttpRequest buildSearchUsersRequest(
+            final TspublicRestV2UserSearchRequest body) throws JsonProcessingException {
+        //validating required parameters
+        if (null == body) {
+            throw new NullPointerException("The parameter \"body\" is a required parameter and cannot be null.");
+        }
+
+        //the base uri for api requests
+        String baseUri = config.getBaseUri();
+
+        //prepare query string for API call
+        final StringBuilder queryBuilder = new StringBuilder(baseUri
+                + "/tspublic/rest/v2/user/search");
+
+        //load all headers for the outgoing API request
+        Headers headers = new Headers();
+        headers.add("Content-Type", "application/json");
+        headers.add("X-Requested-By", config.getXRequestedBy());
+        headers.add("Accept-Language", config.getAcceptLanguage());
+        headers.add("user-agent", BaseController.userAgent);
+
+        //prepare and invoke the API call request to fetch the response
+        String bodyJson = ApiHelper.serialize(body);
+        HttpRequest request = getClientInstance().postBody(queryBuilder, headers, null, bodyJson);
+
+        // Invoke the callback before request if its not null
+        if (getHttpCallback() != null) {
+            getHttpCallback().onBeforeRequest(request);
+        }
+
+        return request;
+    }
+
+    /**
+     * Processes the response for searchUsers.
+     * @return An object of type Object
+     */
+    private Object handleSearchUsersResponse(
+            HttpContext context) throws ApiException, IOException {
+        HttpResponse response = context.getResponse();
+
+        //invoke the callback after response if its not null
+        if (getHttpCallback() != null) {
+            getHttpCallback().onAfterResponse(context);
+        }
+
+        //Error handling using HTTP status codes
+        int responseCode = response.getStatusCode();
+
+        if (responseCode == 500) {
+            throw new ErrorResponseException("Operation failed or unauthorized request", context);
+        }
+        //handle errors defined at the API level
+        validateResponse(response, context);
+
+        //extract result from the http response
+        String responseBody = ((HttpStringResponse) response).getBody();
+        Object result = responseBody;
+
         return result;
     }
 

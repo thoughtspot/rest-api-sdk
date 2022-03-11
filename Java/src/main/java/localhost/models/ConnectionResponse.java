@@ -27,8 +27,8 @@ public class ConnectionResponse {
     private Boolean isDeleted;
     private Boolean isHidden;
     private Boolean complete;
-    private Integer indexVersion;
-    private Integer generationNum;
+    private Double indexVersion;
+    private Double generationNum;
     private String created;
     private String modified;
     private UserNameAndID author;
@@ -57,8 +57,8 @@ public class ConnectionResponse {
      * @param  isDeleted  Boolean value for isDeleted.
      * @param  isHidden  Boolean value for isHidden.
      * @param  complete  Boolean value for complete.
-     * @param  indexVersion  Integer value for indexVersion.
-     * @param  generationNum  Integer value for generationNum.
+     * @param  indexVersion  Double value for indexVersion.
+     * @param  generationNum  Double value for generationNum.
      * @param  created  String value for created.
      * @param  modified  String value for modified.
      * @param  author  UserNameAndID value for author.
@@ -80,8 +80,8 @@ public class ConnectionResponse {
             Boolean isDeleted,
             Boolean isHidden,
             Boolean complete,
-            Integer indexVersion,
-            Integer generationNum,
+            Double indexVersion,
+            Double generationNum,
             String created,
             String modified,
             UserNameAndID author,
@@ -157,7 +157,7 @@ public class ConnectionResponse {
     /**
      * Getter for Type.
      * Type of the connection. The database associated with this type can be obtained from the
-     * response returned by the /api/rest/v2/connection/types API endpoint.
+     * response returned by the /tspublic/rest/v2/connection/types API endpoint.
      * @return Returns the String
      */
     @JsonGetter("type")
@@ -169,7 +169,7 @@ public class ConnectionResponse {
     /**
      * Setter for Type.
      * Type of the connection. The database associated with this type can be obtained from the
-     * response returned by the /api/rest/v2/connection/types API endpoint.
+     * response returned by the /tspublic/rest/v2/connection/types API endpoint.
      * @param type Value for String
      */
     @JsonSetter("type")
@@ -364,39 +364,39 @@ public class ConnectionResponse {
 
     /**
      * Getter for IndexVersion.
-     * @return Returns the Integer
+     * @return Returns the Double
      */
     @JsonGetter("indexVersion")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public Integer getIndexVersion() {
+    public Double getIndexVersion() {
         return indexVersion;
     }
 
     /**
      * Setter for IndexVersion.
-     * @param indexVersion Value for Integer
+     * @param indexVersion Value for Double
      */
     @JsonSetter("indexVersion")
-    public void setIndexVersion(Integer indexVersion) {
+    public void setIndexVersion(Double indexVersion) {
         this.indexVersion = indexVersion;
     }
 
     /**
      * Getter for GenerationNum.
-     * @return Returns the Integer
+     * @return Returns the Double
      */
     @JsonGetter("generationNum")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public Integer getGenerationNum() {
+    public Double getGenerationNum() {
         return generationNum;
     }
 
     /**
      * Setter for GenerationNum.
-     * @param generationNum Value for Integer
+     * @param generationNum Value for Double
      */
     @JsonSetter("generationNum")
-    public void setGenerationNum(Integer generationNum) {
+    public void setGenerationNum(Double generationNum) {
         this.generationNum = generationNum;
     }
 
@@ -604,8 +604,8 @@ public class ConnectionResponse {
         private Boolean isDeleted;
         private Boolean isHidden;
         private Boolean complete;
-        private Integer indexVersion;
-        private Integer generationNum;
+        private Double indexVersion;
+        private Double generationNum;
         private String created;
         private String modified;
         private UserNameAndID author;
@@ -738,20 +738,20 @@ public class ConnectionResponse {
 
         /**
          * Setter for indexVersion.
-         * @param  indexVersion  Integer value for indexVersion.
+         * @param  indexVersion  Double value for indexVersion.
          * @return Builder
          */
-        public Builder indexVersion(Integer indexVersion) {
+        public Builder indexVersion(Double indexVersion) {
             this.indexVersion = indexVersion;
             return this;
         }
 
         /**
          * Setter for generationNum.
-         * @param  generationNum  Integer value for generationNum.
+         * @param  generationNum  Double value for generationNum.
          * @return Builder
          */
-        public Builder generationNum(Integer generationNum) {
+        public Builder generationNum(Double generationNum) {
             this.generationNum = generationNum;
             return this;
         }

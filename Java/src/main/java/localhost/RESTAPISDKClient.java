@@ -12,10 +12,14 @@ import java.util.Map;
 import java.util.function.Consumer;
 import localhost.controllers.AdminController;
 import localhost.controllers.ConnectionController;
+import localhost.controllers.CustomActionsController;
 import localhost.controllers.DataController;
 import localhost.controllers.DatabaseController;
 import localhost.controllers.GroupController;
+import localhost.controllers.LogsController;
+import localhost.controllers.MaterializationController;
 import localhost.controllers.MetadataController;
+import localhost.controllers.ReportController;
 import localhost.controllers.SessionController;
 import localhost.controllers.UserController;
 import localhost.http.client.HttpCallback;
@@ -41,7 +45,11 @@ public final class RESTAPISDKClient implements Configuration {
     private DatabaseController database;
     private ConnectionController connection;
     private DataController data;
+    private ReportController report;
     private AdminController admin;
+    private LogsController logs;
+    private MaterializationController materialization;
+    private CustomActionsController customActions;
 
     /**
      * Current API environment.
@@ -54,14 +62,19 @@ public final class RESTAPISDKClient implements Configuration {
     private final String baseUrl;
 
     /**
-     * body content type for post request.
+     * Mandatory header with value Thougtspot to accept the external RestAPI requests.
      */
-    private final String contentType;
+    private final String xRequestedBy;
 
     /**
      * response format.
      */
     private final String acceptLanguage;
+
+    /**
+     * body content type for post request.
+     */
+    private final String contentType;
 
     /**
      * The HTTP Client instance to use for making HTTP requests.
@@ -88,14 +101,15 @@ public final class RESTAPISDKClient implements Configuration {
      */
     private final HttpCallback httpCallback;
 
-    private RESTAPISDKClient(Environment environment, String baseUrl, String contentType,
-            String acceptLanguage, HttpClient httpClient,
+    private RESTAPISDKClient(Environment environment, String baseUrl, String xRequestedBy,
+            String acceptLanguage, String contentType, HttpClient httpClient,
             ReadonlyHttpClientConfiguration httpClientConfig, String accessToken,
             Map<String, AuthManager> authManagers, HttpCallback httpCallback) {
         this.environment = environment;
         this.baseUrl = baseUrl;
-        this.contentType = contentType;
+        this.xRequestedBy = xRequestedBy;
         this.acceptLanguage = acceptLanguage;
+        this.contentType = contentType;
         this.httpClient = httpClient;
         this.httpClientConfig = httpClientConfig;
         this.httpCallback = httpCallback;
@@ -122,7 +136,13 @@ public final class RESTAPISDKClient implements Configuration {
         connection = new ConnectionController(this, this.httpClient, this.authManagers,
                 this.httpCallback);
         data = new DataController(this, this.httpClient, this.authManagers, this.httpCallback);
+        report = new ReportController(this, this.httpClient, this.authManagers, this.httpCallback);
         admin = new AdminController(this, this.httpClient, this.authManagers, this.httpCallback);
+        logs = new LogsController(this, this.httpClient, this.authManagers, this.httpCallback);
+        materialization = new MaterializationController(this, this.httpClient, this.authManagers,
+                this.httpCallback);
+        customActions = new CustomActionsController(this, this.httpClient, this.authManagers,
+                this.httpCallback);
     }
 
     /**
@@ -189,11 +209,43 @@ public final class RESTAPISDKClient implements Configuration {
     }
 
     /**
+     * Get the instance of ReportController.
+     * @return report
+     */
+    public ReportController getReportController() {
+        return report;
+    }
+
+    /**
      * Get the instance of AdminController.
      * @return admin
      */
     public AdminController getAdminController() {
         return admin;
+    }
+
+    /**
+     * Get the instance of LogsController.
+     * @return logs
+     */
+    public LogsController getLogsController() {
+        return logs;
+    }
+
+    /**
+     * Get the instance of MaterializationController.
+     * @return materialization
+     */
+    public MaterializationController getMaterializationController() {
+        return materialization;
+    }
+
+    /**
+     * Get the instance of CustomActionsController.
+     * @return customActions
+     */
+    public CustomActionsController getCustomActionsController() {
+        return customActions;
     }
 
     /**
@@ -213,11 +265,11 @@ public final class RESTAPISDKClient implements Configuration {
     }
 
     /**
-     * body content type for post request.
-     * @return contentType
+     * Mandatory header with value Thougtspot to accept the external RestAPI requests.
+     * @return xRequestedBy
      */
-    public String getContentType() {
-        return contentType;
+    public String getXRequestedBy() {
+        return xRequestedBy;
     }
 
     /**
@@ -226,6 +278,14 @@ public final class RESTAPISDKClient implements Configuration {
      */
     public String getAcceptLanguage() {
         return acceptLanguage;
+    }
+
+    /**
+     * body content type for post request.
+     * @return contentType
+     */
+    public String getContentType() {
+        return contentType;
     }
 
     /**
@@ -316,8 +376,9 @@ public final class RESTAPISDKClient implements Configuration {
     @Override
     public String toString() {
         return "RESTAPISDKClient [" + "environment=" + environment + ", baseUrl=" + baseUrl
-                + ", contentType=" + contentType + ", acceptLanguage=" + acceptLanguage
-                + ", httpClientConfig=" + httpClientConfig + ", authManagers=" + authManagers + "]";
+                + ", xRequestedBy=" + xRequestedBy + ", acceptLanguage=" + acceptLanguage
+                + ", contentType=" + contentType + ", httpClientConfig=" + httpClientConfig
+                + ", authManagers=" + authManagers + "]";
     }
 
     /**
@@ -329,8 +390,9 @@ public final class RESTAPISDKClient implements Configuration {
         Builder builder = new Builder();
         builder.environment = getEnvironment();
         builder.baseUrl = getBaseUrl();
-        builder.contentType = getContentType();
+        builder.xRequestedBy = getXRequestedBy();
         builder.acceptLanguage = getAcceptLanguage();
+        builder.contentType = getContentType();
         builder.httpClient = getHttpClient();
         builder.accessToken = getBearerAuthCredentials().getAccessToken();
         builder.authManagers = authManagers;
@@ -347,8 +409,9 @@ public final class RESTAPISDKClient implements Configuration {
 
         private Environment environment = Environment.PRODUCTION;
         private String baseUrl = "https://localhost:443";
-        private String contentType = "application/json";
+        private String xRequestedBy = "ThoughtSpot";
         private String acceptLanguage = "application/json";
+        private String contentType = "application/json";
         private HttpClient httpClient;
         private String accessToken = "";
         private Map<String, AuthManager> authManagers = null;
@@ -391,15 +454,15 @@ public final class RESTAPISDKClient implements Configuration {
         }
 
         /**
-         * body content type for post request.
-         * @param contentType The contentType for client.
+         * Mandatory header with value Thougtspot to accept the external RestAPI requests.
+         * @param xRequestedBy The xRequestedBy for client.
          * @return Builder
          */
-        public Builder contentType(String contentType) {
-            if (contentType == null) {
-                throw new NullPointerException("contentType cannot be null");
+        public Builder xRequestedBy(String xRequestedBy) {
+            if (xRequestedBy == null) {
+                throw new NullPointerException("xRequestedBy cannot be null");
             }
-            this.contentType = contentType;
+            this.xRequestedBy = xRequestedBy;
             return this;
         }
 
@@ -413,6 +476,19 @@ public final class RESTAPISDKClient implements Configuration {
                 throw new NullPointerException("acceptLanguage cannot be null");
             }
             this.acceptLanguage = acceptLanguage;
+            return this;
+        }
+
+        /**
+         * body content type for post request.
+         * @param contentType The contentType for client.
+         * @return Builder
+         */
+        public Builder contentType(String contentType) {
+            if (contentType == null) {
+                throw new NullPointerException("contentType cannot be null");
+            }
+            this.contentType = contentType;
             return this;
         }
 
@@ -459,8 +535,9 @@ public final class RESTAPISDKClient implements Configuration {
             HttpClientConfiguration httpClientConfig = httpClientConfigBuilder.build();
             httpClient = new OkClient(httpClientConfig);
 
-            return new RESTAPISDKClient(environment, baseUrl, contentType, acceptLanguage,
-                    httpClient, httpClientConfig, accessToken, authManagers, httpCallback);
+            return new RESTAPISDKClient(environment, baseUrl, xRequestedBy, acceptLanguage,
+                    contentType, httpClient, httpClientConfig, accessToken, authManagers,
+                    httpCallback);
         }
     }
 }

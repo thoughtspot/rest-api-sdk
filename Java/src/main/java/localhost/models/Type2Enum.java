@@ -22,13 +22,7 @@ public enum Type2Enum {
 
     OIDC_USER,
 
-    LOCAL_USER,
-
-    LDAP_GROUP,
-
-    LOCAL_GROUP,
-
-    TENANT_GROUP;
+    LOCAL_USER;
 
 
     private static TreeMap<String, Type2Enum> valueMap = new TreeMap<>();
@@ -40,18 +34,12 @@ public enum Type2Enum {
         SAML_USER.value = "SAML_USER";
         OIDC_USER.value = "OIDC_USER";
         LOCAL_USER.value = "LOCAL_USER";
-        LDAP_GROUP.value = "LDAP_GROUP";
-        LOCAL_GROUP.value = "LOCAL_GROUP";
-        TENANT_GROUP.value = "TENANT_GROUP";
 
         valueMap.put("UNKNOWN", UNKNOWN);
         valueMap.put("LDAP_USER", LDAP_USER);
         valueMap.put("SAML_USER", SAML_USER);
         valueMap.put("OIDC_USER", OIDC_USER);
         valueMap.put("LOCAL_USER", LOCAL_USER);
-        valueMap.put("LDAP_GROUP", LDAP_GROUP);
-        valueMap.put("LOCAL_GROUP", LOCAL_GROUP);
-        valueMap.put("TENANT_GROUP", TENANT_GROUP);
     }
 
     /**

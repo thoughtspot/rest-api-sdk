@@ -11,6 +11,8 @@ from restapisdk.api_helper import APIHelper
 from restapisdk.configuration import Server
 from restapisdk.controllers.base_controller import BaseController
 from restapisdk.models.connection_response import ConnectionResponse
+from restapisdk.models.connection_table_response import ConnectionTableResponse
+from restapisdk.models.connection_table_columns_response import ConnectionTableColumnsResponse
 from restapisdk.models.create_connection_response import CreateConnectionResponse
 from restapisdk.exceptions.error_response_exception import ErrorResponseException
 
@@ -18,12 +20,12 @@ from restapisdk.exceptions.error_response_exception import ErrorResponseExceptio
 class ConnectionController(BaseController):
 
     """A Controller to access Endpoints in the restapisdk API."""
-    def __init__(self, config, auth_managers, call_back=None):
-        super(ConnectionController, self).__init__(config, auth_managers, call_back)
+    def __init__(self, config, auth_managers):
+        super(ConnectionController, self).__init__(config, auth_managers)
 
     def get_connection(self,
                        id):
-        """Does a GET request to /api/rest/v2/connection.
+        """Does a GET request to /tspublic/rest/v2/connection.
 
         To get the details of a specific connection use this endpoint
 
@@ -42,8 +44,11 @@ class ConnectionController(BaseController):
 
         """
 
+        # Validate required parameters
+        self.validate_parameters(id=id)
+
         # Prepare query URL
-        _url_path = '/api/rest/v2/connection'
+        _url_path = '/tspublic/rest/v2/connection'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_parameters = {
@@ -77,16 +82,189 @@ class ConnectionController(BaseController):
 
         return decoded
 
+    def get_connection_database(self,
+                                id):
+        """Does a GET request to /tspublic/rest/v2/connection/database.
+
+        To get the list of databases for a connection, use this endpoint. 
+         The response will include databases from the data platform
+         corresponding to the connection id provided.
+
+        Args:
+            id (string): The GUID of the connection
+
+        Returns:
+            list of string: Response from the API. List of databases in the
+                data platform corresponding to the connection id provided.
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        # Validate required parameters
+        self.validate_parameters(id=id)
+
+        # Prepare query URL
+        _url_path = '/tspublic/rest/v2/connection/database'
+        _query_builder = self.config.get_base_uri()
+        _query_builder += _url_path
+        _query_parameters = {
+            'id': id
+        }
+        _query_builder = APIHelper.append_url_with_query_parameters(
+            _query_builder,
+            _query_parameters
+        )
+        _query_url = APIHelper.clean_url(_query_builder)
+
+        # Prepare headers
+        _headers = {
+            'accept': 'application/json',
+            'Content-Type': self.config.content_type
+        }
+
+        # Prepare and execute request
+        _request = self.config.http_client.get(_query_url, headers=_headers)
+        # Apply authentication scheme on request
+        self.apply_auth_schemes(_request, 'global')
+
+        _response = self.execute_request(_request)
+
+        # Endpoint and global error handling using HTTP status codes.
+        if _response.status_code == 500:
+            raise ErrorResponseException('Operation failed or unauthorized request', _response)
+        self.validate_response(_response)
+
+        decoded = APIHelper.json_deserialize(_response.text)
+
+        return decoded
+
+    def get_connection_tables(self,
+                              body):
+        """Does a POST request to /tspublic/rest/v2/connection/table.
+
+        To get the details of tables from a connection, use this endpoint. 
+         You can get the details of tables in the data platform for the
+         connection id provided.
+
+        Args:
+            body (TspublicRestV2ConnectionTableRequest): TODO: type
+                description here.
+
+        Returns:
+            ConnectionTableResponse: Response from the API. Table details in
+                the data platform corresponding to the connection id
+                provided.
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        # Validate required parameters
+        self.validate_parameters(body=body)
+
+        # Prepare query URL
+        _url_path = '/tspublic/rest/v2/connection/table'
+        _query_builder = self.config.get_base_uri()
+        _query_builder += _url_path
+        _query_url = APIHelper.clean_url(_query_builder)
+
+        # Prepare headers
+        _headers = {
+            'accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+
+        # Prepare and execute request
+        _request = self.config.http_client.post(_query_url, headers=_headers, parameters=APIHelper.json_serialize(body))
+        # Apply authentication scheme on request
+        self.apply_auth_schemes(_request, 'global')
+
+        _response = self.execute_request(_request)
+
+        # Endpoint and global error handling using HTTP status codes.
+        if _response.status_code == 500:
+            raise ErrorResponseException('Operation failed or unauthorized request', _response)
+        self.validate_response(_response)
+
+        decoded = APIHelper.json_deserialize(_response.text, ConnectionTableResponse.from_dictionary)
+
+        return decoded
+
+    def get_connection_table_columns(self,
+                                     body):
+        """Does a POST request to /tspublic/rest/v2/connection/tablecoloumn.
+
+        To get the details of columns in a table associated to a connection,
+        use this endpoint. 
+         You can get the columns of any table available in the data platform
+         for the connection id provided.
+
+        Args:
+            body (TspublicRestV2ConnectionTablecoloumnRequest): TODO: type
+                description here.
+
+        Returns:
+            ConnectionTableColumnsResponse: Response from the API. Column
+                details for the tables provided in the request
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        # Validate required parameters
+        self.validate_parameters(body=body)
+
+        # Prepare query URL
+        _url_path = '/tspublic/rest/v2/connection/tablecoloumn'
+        _query_builder = self.config.get_base_uri()
+        _query_builder += _url_path
+        _query_url = APIHelper.clean_url(_query_builder)
+
+        # Prepare headers
+        _headers = {
+            'accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+
+        # Prepare and execute request
+        _request = self.config.http_client.post(_query_url, headers=_headers, parameters=APIHelper.json_serialize(body))
+        # Apply authentication scheme on request
+        self.apply_auth_schemes(_request, 'global')
+
+        _response = self.execute_request(_request)
+
+        # Endpoint and global error handling using HTTP status codes.
+        if _response.status_code == 500:
+            raise ErrorResponseException('Operation failed or unauthorized request', _response)
+        self.validate_response(_response)
+
+        decoded = APIHelper.json_deserialize(_response.text, ConnectionTableColumnsResponse.from_dictionary)
+
+        return decoded
+
     def create_connection(self,
                           body):
-        """Does a POST request to /api/rest/v2/connection/create.
+        """Does a POST request to /tspublic/rest/v2/connection/create.
 
         To programmatically create a connection in the ThoughtSpot system use
         this API endpoint.
 
         Args:
-            body (ApiRestV2ConnectionCreateRequest): TODO: type description
-                here.
+            body (TspublicRestV2ConnectionCreateRequest): TODO: type
+                description here.
 
         Returns:
             CreateConnectionResponse: Response from the API. Details of the
@@ -100,8 +278,11 @@ class ConnectionController(BaseController):
 
         """
 
+        # Validate required parameters
+        self.validate_parameters(body=body)
+
         # Prepare query URL
-        _url_path = '/api/rest/v2/connection/create'
+        _url_path = '/tspublic/rest/v2/connection/create'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_url = APIHelper.clean_url(_query_builder)
@@ -130,14 +311,14 @@ class ConnectionController(BaseController):
 
     def update_connection(self,
                           body):
-        """Does a PUT request to /api/rest/v2/connection/update.
+        """Does a PUT request to /tspublic/rest/v2/connection/update.
 
         You can use this endpoint to programmatically modify an existing
         connection
 
         Args:
-            body (ApiRestV2ConnectionUpdateRequest): TODO: type description
-                here.
+            body (TspublicRestV2ConnectionUpdateRequest): TODO: type
+                description here.
 
         Returns:
             bool: Response from the API. Connection successfully updated
@@ -150,8 +331,11 @@ class ConnectionController(BaseController):
 
         """
 
+        # Validate required parameters
+        self.validate_parameters(body=body)
+
         # Prepare query URL
-        _url_path = '/api/rest/v2/connection/update'
+        _url_path = '/tspublic/rest/v2/connection/update'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_url = APIHelper.clean_url(_query_builder)
@@ -179,7 +363,7 @@ class ConnectionController(BaseController):
 
     def delete_connection(self,
                           id):
-        """Does a DELETE request to /api/rest/v2/connection/delete.
+        """Does a DELETE request to /tspublic/rest/v2/connection/delete.
 
         To remove a connection from the ThoughtSpot system, use this
         endpoint.
@@ -198,8 +382,11 @@ class ConnectionController(BaseController):
 
         """
 
+        # Validate required parameters
+        self.validate_parameters(id=id)
+
         # Prepare query URL
-        _url_path = '/api/rest/v2/connection/delete'
+        _url_path = '/tspublic/rest/v2/connection/delete'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_parameters = {
@@ -234,14 +421,14 @@ class ConnectionController(BaseController):
 
     def add_table_to_connection(self,
                                 body):
-        """Does a PUT request to /api/rest/v2/connection/addtable.
+        """Does a PUT request to /tspublic/rest/v2/connection/addtable.
 
         To programmatically add table to an existing connection, use this
         endpoint
 
         Args:
-            body (ApiRestV2ConnectionAddtableRequest): TODO: type description
-                here.
+            body (TspublicRestV2ConnectionAddtableRequest): TODO: type
+                description here.
 
         Returns:
             bool: Response from the API. Successfully added table(s) to the
@@ -255,8 +442,11 @@ class ConnectionController(BaseController):
 
         """
 
+        # Validate required parameters
+        self.validate_parameters(body=body)
+
         # Prepare query URL
-        _url_path = '/api/rest/v2/connection/addtable'
+        _url_path = '/tspublic/rest/v2/connection/addtable'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_url = APIHelper.clean_url(_query_builder)
@@ -284,13 +474,13 @@ class ConnectionController(BaseController):
 
     def remove_table_from_connection(self,
                                      body):
-        """Does a PUT request to /api/rest/v2/connection/removetable.
+        """Does a PUT request to /tspublic/rest/v2/connection/removetable.
 
         To programmatically remove a table from a connection, use API
         endpoint.
 
         Args:
-            body (ApiRestV2ConnectionRemovetableRequest): TODO: type
+            body (TspublicRestV2ConnectionRemovetableRequest): TODO: type
                 description here.
 
         Returns:
@@ -305,8 +495,11 @@ class ConnectionController(BaseController):
 
         """
 
+        # Validate required parameters
+        self.validate_parameters(body=body)
+
         # Prepare query URL
-        _url_path = '/api/rest/v2/connection/removetable'
+        _url_path = '/tspublic/rest/v2/connection/removetable'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_url = APIHelper.clean_url(_query_builder)
@@ -334,14 +527,14 @@ class ConnectionController(BaseController):
 
     def search_connection(self,
                           body):
-        """Does a POST request to /api/rest/v2/connection/search.
+        """Does a POST request to /tspublic/rest/v2/connection/search.
 
         To get the details of a specific connection or all connections in the
         ThoughtSpot system use this end point.
 
         Args:
-            body (ApiRestV2ConnectionSearchRequest): TODO: type description
-                here.
+            body (TspublicRestV2ConnectionSearchRequest): TODO: type
+                description here.
 
         Returns:
             list of ConnectionResponse: Response from the API. Array of
@@ -355,8 +548,11 @@ class ConnectionController(BaseController):
 
         """
 
+        # Validate required parameters
+        self.validate_parameters(body=body)
+
         # Prepare query URL
-        _url_path = '/api/rest/v2/connection/search'
+        _url_path = '/tspublic/rest/v2/connection/search'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_url = APIHelper.clean_url(_query_builder)

@@ -10,17 +10,17 @@ const groupController = new GroupController(client);
 
 ## Methods
 
-* [Get Group](/doc/controllers/group.md#get-group)
-* [Create Group](/doc/controllers/group.md#create-group)
-* [Update Group](/doc/controllers/group.md#update-group)
-* [Delete Group](/doc/controllers/group.md#delete-group)
-* [Add Privileges to Group](/doc/controllers/group.md#add-privileges-to-group)
-* [Remove Privileges From Group](/doc/controllers/group.md#remove-privileges-from-group)
-* [Add Users to Group](/doc/controllers/group.md#add-users-to-group)
-* [Remove Users From Group](/doc/controllers/group.md#remove-users-from-group)
-* [Add Groups to Group](/doc/controllers/group.md#add-groups-to-group)
-* [Remove Groups From Group](/doc/controllers/group.md#remove-groups-from-group)
-* [Search Groups](/doc/controllers/group.md#search-groups)
+* [Get Group](../../doc/controllers/group.md#get-group)
+* [Create Group](../../doc/controllers/group.md#create-group)
+* [Update Group](../../doc/controllers/group.md#update-group)
+* [Delete Group](../../doc/controllers/group.md#delete-group)
+* [Add Privileges to Group](../../doc/controllers/group.md#add-privileges-to-group)
+* [Remove Privileges From Group](../../doc/controllers/group.md#remove-privileges-from-group)
+* [Add Users to Group](../../doc/controllers/group.md#add-users-to-group)
+* [Remove Users From Group](../../doc/controllers/group.md#remove-users-from-group)
+* [Add Groups to Group](../../doc/controllers/group.md#add-groups-to-group)
+* [Remove Groups From Group](../../doc/controllers/group.md#remove-groups-from-group)
+* [Search Groups](../../doc/controllers/group.md#search-groups)
 
 
 # Get Group
@@ -47,7 +47,7 @@ async getGroup(
 
 ## Response Type
 
-[`GroupResponse`](/doc/models/group-response.md)
+[`GroupResponse`](../../doc/models/group-response.md)
 
 ## Example Usage
 
@@ -68,7 +68,7 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
 # Create Group
@@ -85,7 +85,7 @@ ThoughtSpot also has a default group called ALL_GROUP. When you create new group
 
 ```ts
 async createGroup(
-  body: ApiRestV2GroupCreateRequest,
+  body: TspublicRestV2GroupCreateRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<GroupResponse>>
 ```
@@ -94,18 +94,18 @@ async createGroup(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2GroupCreateRequest`](/doc/models/api-rest-v2-group-create-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2GroupCreateRequest`](../../doc/models/tspublic-rest-v2-group-create-request.md) | Body, Required | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
 
-[`GroupResponse`](/doc/models/group-response.md)
+[`GroupResponse`](../../doc/models/group-response.md)
 
 ## Example Usage
 
 ```ts
 const contentType = null;
-const body: ApiRestV2GroupCreateRequest = {
+const body: TspublicRestV2GroupCreateRequest = {
   name: 'name6',
   displayName: 'displayName6',
 };
@@ -126,7 +126,7 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
 # Update Group
@@ -139,7 +139,7 @@ At least one of id or name is required to update the group. When both are given,
 
 ```ts
 async updateGroup(
-  body: ApiRestV2GroupUpdateRequest,
+  body: TspublicRestV2GroupUpdateRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<boolean>>
 ```
@@ -148,7 +148,7 @@ async updateGroup(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2GroupUpdateRequest`](/doc/models/api-rest-v2-group-update-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2GroupUpdateRequest`](../../doc/models/tspublic-rest-v2-group-update-request.md) | Body, Required | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -159,7 +159,7 @@ async updateGroup(
 
 ```ts
 const contentType = null;
-const body: ApiRestV2GroupUpdateRequest = {};
+const body: TspublicRestV2GroupUpdateRequest = {};
 
 try {
   const { result, ...httpResponse } = await groupController.updateGroup(body);
@@ -177,7 +177,7 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
 # Delete Group
@@ -225,7 +225,7 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
 # Add Privileges to Group
@@ -238,7 +238,7 @@ At least one of id or name of group is required. When both are given,then user i
 
 ```ts
 async addPrivilegesToGroup(
-  body: ApiRestV2GroupAddprivilegeRequest,
+  body: TspublicRestV2GroupAddprivilegeRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<boolean>>
 ```
@@ -247,7 +247,7 @@ async addPrivilegesToGroup(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2GroupAddprivilegeRequest`](/doc/models/api-rest-v2-group-addprivilege-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2GroupAddprivilegeRequest`](../../doc/models/tspublic-rest-v2-group-addprivilege-request.md) | Body, Required | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -258,7 +258,7 @@ async addPrivilegesToGroup(
 
 ```ts
 const contentType = null;
-const body: ApiRestV2GroupAddprivilegeRequest = {};
+const body: TspublicRestV2GroupAddprivilegeRequest = {};
 
 try {
   const { result, ...httpResponse } = await groupController.addPrivilegesToGroup(body);
@@ -276,7 +276,7 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
 # Remove Privileges From Group
@@ -289,7 +289,7 @@ At least one of id or name of group is required. When both are given,then user i
 
 ```ts
 async removePrivilegesFromGroup(
-  body: ApiRestV2GroupRemoveprivilegeRequest,
+  body: TspublicRestV2GroupRemoveprivilegeRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<boolean>>
 ```
@@ -298,7 +298,7 @@ async removePrivilegesFromGroup(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2GroupRemoveprivilegeRequest`](/doc/models/api-rest-v2-group-removeprivilege-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2GroupRemoveprivilegeRequest`](../../doc/models/tspublic-rest-v2-group-removeprivilege-request.md) | Body, Required | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -309,7 +309,7 @@ async removePrivilegesFromGroup(
 
 ```ts
 const contentType = null;
-const body: ApiRestV2GroupRemoveprivilegeRequest = {};
+const body: TspublicRestV2GroupRemoveprivilegeRequest = {};
 
 try {
   const { result, ...httpResponse } = await groupController.removePrivilegesFromGroup(body);
@@ -327,7 +327,7 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
 # Add Users to Group
@@ -340,7 +340,7 @@ At least one of id or name of the group is required. When both are given,then us
 
 ```ts
 async addUsersToGroup(
-  body: ApiRestV2GroupAdduserRequest,
+  body: TspublicRestV2GroupAdduserRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<boolean>>
 ```
@@ -349,7 +349,7 @@ async addUsersToGroup(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2GroupAdduserRequest`](/doc/models/api-rest-v2-group-adduser-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2GroupAdduserRequest`](../../doc/models/tspublic-rest-v2-group-adduser-request.md) | Body, Required | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -360,7 +360,15 @@ async addUsersToGroup(
 
 ```ts
 const contentType = null;
-const body: ApiRestV2GroupAdduserRequest = {};
+const bodyUsers: UserNameAndIDInput[] = [];
+
+const bodyusers0: UserNameAndIDInput = {};
+
+bodyUsers[0] = bodyusers0;
+
+const body: TspublicRestV2GroupAdduserRequest = {
+  users: bodyUsers,
+};
 
 try {
   const { result, ...httpResponse } = await groupController.addUsersToGroup(body);
@@ -378,7 +386,7 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
 # Remove Users From Group
@@ -391,7 +399,7 @@ At least one of id or name of group is required. When both are given,then user i
 
 ```ts
 async removeUsersFromGroup(
-  body: ApiRestV2GroupRemoveuserRequest,
+  body: TspublicRestV2GroupRemoveuserRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<boolean>>
 ```
@@ -400,7 +408,7 @@ async removeUsersFromGroup(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2GroupRemoveuserRequest`](/doc/models/api-rest-v2-group-removeuser-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2GroupRemoveuserRequest`](../../doc/models/tspublic-rest-v2-group-removeuser-request.md) | Body, Required | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -411,7 +419,15 @@ async removeUsersFromGroup(
 
 ```ts
 const contentType = null;
-const body: ApiRestV2GroupRemoveuserRequest = {};
+const bodyUsers: UserNameAndIDInput[] = [];
+
+const bodyusers0: UserNameAndIDInput = {};
+
+bodyUsers[0] = bodyusers0;
+
+const body: TspublicRestV2GroupRemoveuserRequest = {
+  users: bodyUsers,
+};
 
 try {
   const { result, ...httpResponse } = await groupController.removeUsersFromGroup(body);
@@ -429,7 +445,7 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
 # Add Groups to Group
@@ -442,7 +458,7 @@ At least one of id or name of group is required. When both are given,then user i
 
 ```ts
 async addGroupsToGroup(
-  body: ApiRestV2GroupAddgroupRequest,
+  body: TspublicRestV2GroupAddgroupRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<boolean>>
 ```
@@ -451,7 +467,7 @@ async addGroupsToGroup(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2GroupAddgroupRequest`](/doc/models/api-rest-v2-group-addgroup-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2GroupAddgroupRequest`](../../doc/models/tspublic-rest-v2-group-addgroup-request.md) | Body, Required | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -462,7 +478,15 @@ async addGroupsToGroup(
 
 ```ts
 const contentType = null;
-const body: ApiRestV2GroupAddgroupRequest = {};
+const bodyGroups: GroupNameAndIDInput[] = [];
+
+const bodygroups0: GroupNameAndIDInput = {};
+
+bodyGroups[0] = bodygroups0;
+
+const body: TspublicRestV2GroupAddgroupRequest = {
+  groups: bodyGroups,
+};
 
 try {
   const { result, ...httpResponse } = await groupController.addGroupsToGroup(body);
@@ -480,7 +504,7 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
 # Remove Groups From Group
@@ -493,7 +517,7 @@ At least one of id or name of group is required. When both are given,then user i
 
 ```ts
 async removeGroupsFromGroup(
-  body: ApiRestV2GroupRemovegroupRequest,
+  body: TspublicRestV2GroupRemovegroupRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<boolean>>
 ```
@@ -502,7 +526,7 @@ async removeGroupsFromGroup(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2GroupRemovegroupRequest`](/doc/models/api-rest-v2-group-removegroup-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2GroupRemovegroupRequest`](../../doc/models/tspublic-rest-v2-group-removegroup-request.md) | Body, Required | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -513,7 +537,15 @@ async removeGroupsFromGroup(
 
 ```ts
 const contentType = null;
-const body: ApiRestV2GroupRemovegroupRequest = {};
+const bodyGroups: GroupNameAndIDInput[] = [];
+
+const bodygroups0: GroupNameAndIDInput = {};
+
+bodyGroups[0] = bodygroups0;
+
+const body: TspublicRestV2GroupRemovegroupRequest = {
+  groups: bodyGroups,
+};
 
 try {
   const { result, ...httpResponse } = await groupController.removeGroupsFromGroup(body);
@@ -531,7 +563,7 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
 # Search Groups
@@ -542,27 +574,27 @@ If no inputs are provided, then all groups are included in the response.
 
 ```ts
 async searchGroups(
-  body: ApiRestV2GroupSearchRequest,
+  body: TspublicRestV2GroupSearchRequest,
   requestOptions?: RequestOptions
-): Promise<ApiResponse<GroupResponse[]>>
+): Promise<ApiResponse<unknown>>
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2GroupSearchRequest`](/doc/models/api-rest-v2-group-search-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2GroupSearchRequest`](../../doc/models/tspublic-rest-v2-group-search-request.md) | Body, Required | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
 
-[`GroupResponse[]`](/doc/models/group-response.md)
+`unknown`
 
 ## Example Usage
 
 ```ts
 const contentType = null;
-const body: ApiRestV2GroupSearchRequest = {};
+const body: TspublicRestV2GroupSearchRequest = {};
 
 try {
   const { result, ...httpResponse } = await groupController.searchGroups(body);
@@ -580,5 +612,5 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 

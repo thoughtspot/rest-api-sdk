@@ -21,6 +21,12 @@ public interface ReadonlyHttpClientConfiguration {
     long getTimeout();
 
     /**
+     * Allow or prevent skipping SSL certificate verification.
+     * @return a copy of isSkipSslCertVerification
+     */
+    boolean isSkipSslCertVerification();
+
+    /**
      * The number of retries to make.
      * @return a copy of numberOfRetries
      */

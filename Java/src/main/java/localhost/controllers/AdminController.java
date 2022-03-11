@@ -23,10 +23,10 @@ import localhost.http.request.HttpRequest;
 import localhost.http.response.HttpResponse;
 import localhost.http.response.HttpStringResponse;
 import localhost.models.AdminsyncPrincipalResponse;
-import localhost.models.ApiRestV2AdminChangeownerRequest;
-import localhost.models.ApiRestV2AdminConfigurationUpdateRequest;
-import localhost.models.ApiRestV2AdminResetpasswordRequest;
-import localhost.models.ApiRestV2AdminSyncprincipalRequest;
+import localhost.models.TspublicRestV2AdminChangeownerRequest;
+import localhost.models.TspublicRestV2AdminConfigurationUpdateRequest;
+import localhost.models.TspublicRestV2AdminResetpasswordRequest;
+import localhost.models.TspublicRestV2AdminSyncprincipalRequest;
 
 /**
  * This class lists all the endpoints of the groups.
@@ -93,12 +93,13 @@ public final class AdminController extends BaseController {
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/admin/configuration");
+                + "/tspublic/rest/v2/admin/configuration");
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
-        headers.add("Content-Type", config.getContentType());
+        headers.add("X-Requested-By", config.getXRequestedBy());
         headers.add("Accept-Language", config.getAcceptLanguage());
+        headers.add("Content-Type", config.getContentType());
         headers.add("user-agent", BaseController.userAgent);
 
         //prepare and invoke the API call request to fetch the response
@@ -178,12 +179,13 @@ public final class AdminController extends BaseController {
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/admin/configuration/overrides");
+                + "/tspublic/rest/v2/admin/configuration/overrides");
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
-        headers.add("Content-Type", config.getContentType());
+        headers.add("X-Requested-By", config.getXRequestedBy());
         headers.add("Accept-Language", config.getAcceptLanguage());
+        headers.add("Content-Type", config.getContentType());
         headers.add("user-agent", BaseController.userAgent);
 
         //prepare and invoke the API call request to fetch the response
@@ -234,7 +236,7 @@ public final class AdminController extends BaseController {
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
     public Boolean updateClusterConfig(
-            final ApiRestV2AdminConfigurationUpdateRequest body) throws ApiException, IOException {
+            final TspublicRestV2AdminConfigurationUpdateRequest body) throws ApiException, IOException {
         HttpRequest request = buildUpdateClusterConfigRequest(body);
         authManagers.get("global").apply(request);
 
@@ -250,7 +252,7 @@ public final class AdminController extends BaseController {
      * @return    Returns the Boolean response from the API call
      */
     public CompletableFuture<Boolean> updateClusterConfigAsync(
-            final ApiRestV2AdminConfigurationUpdateRequest body) {
+            final TspublicRestV2AdminConfigurationUpdateRequest body) {
         return makeHttpCallAsync(() -> buildUpdateClusterConfigRequest(body),
             req -> authManagers.get("global").applyAsync(req)
                 .thenCompose(request -> getClientInstance()
@@ -262,17 +264,23 @@ public final class AdminController extends BaseController {
      * Builds the HttpRequest object for updateClusterConfig.
      */
     private HttpRequest buildUpdateClusterConfigRequest(
-            final ApiRestV2AdminConfigurationUpdateRequest body) throws JsonProcessingException {
+            final TspublicRestV2AdminConfigurationUpdateRequest body) throws JsonProcessingException {
+        //validating required parameters
+        if (null == body) {
+            throw new NullPointerException("The parameter \"body\" is a required parameter and cannot be null.");
+        }
+
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/admin/configuration/update");
+                + "/tspublic/rest/v2/admin/configuration/update");
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
         headers.add("Content-Type", "application/json");
+        headers.add("X-Requested-By", config.getXRequestedBy());
         headers.add("Accept-Language", config.getAcceptLanguage());
         headers.add("user-agent", BaseController.userAgent);
 
@@ -328,7 +336,7 @@ public final class AdminController extends BaseController {
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
     public Boolean resetUserPassword(
-            final ApiRestV2AdminResetpasswordRequest body) throws ApiException, IOException {
+            final TspublicRestV2AdminResetpasswordRequest body) throws ApiException, IOException {
         HttpRequest request = buildResetUserPasswordRequest(body);
         authManagers.get("global").apply(request);
 
@@ -347,7 +355,7 @@ public final class AdminController extends BaseController {
      * @return    Returns the Boolean response from the API call
      */
     public CompletableFuture<Boolean> resetUserPasswordAsync(
-            final ApiRestV2AdminResetpasswordRequest body) {
+            final TspublicRestV2AdminResetpasswordRequest body) {
         return makeHttpCallAsync(() -> buildResetUserPasswordRequest(body),
             req -> authManagers.get("global").applyAsync(req)
                 .thenCompose(request -> getClientInstance()
@@ -359,17 +367,23 @@ public final class AdminController extends BaseController {
      * Builds the HttpRequest object for resetUserPassword.
      */
     private HttpRequest buildResetUserPasswordRequest(
-            final ApiRestV2AdminResetpasswordRequest body) throws JsonProcessingException {
+            final TspublicRestV2AdminResetpasswordRequest body) throws JsonProcessingException {
+        //validating required parameters
+        if (null == body) {
+            throw new NullPointerException("The parameter \"body\" is a required parameter and cannot be null.");
+        }
+
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/admin/resetpassword");
+                + "/tspublic/rest/v2/admin/resetpassword");
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
         headers.add("Content-Type", "application/json");
+        headers.add("X-Requested-By", config.getXRequestedBy());
         headers.add("Accept-Language", config.getAcceptLanguage());
         headers.add("user-agent", BaseController.userAgent);
 
@@ -427,7 +441,7 @@ public final class AdminController extends BaseController {
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
     public AdminsyncPrincipalResponse syncPrincipal(
-            final ApiRestV2AdminSyncprincipalRequest body) throws ApiException, IOException {
+            final TspublicRestV2AdminSyncprincipalRequest body) throws ApiException, IOException {
         HttpRequest request = buildSyncPrincipalRequest(body);
         authManagers.get("global").apply(request);
 
@@ -448,7 +462,7 @@ public final class AdminController extends BaseController {
      * @return    Returns the AdminsyncPrincipalResponse response from the API call
      */
     public CompletableFuture<AdminsyncPrincipalResponse> syncPrincipalAsync(
-            final ApiRestV2AdminSyncprincipalRequest body) {
+            final TspublicRestV2AdminSyncprincipalRequest body) {
         return makeHttpCallAsync(() -> buildSyncPrincipalRequest(body),
             req -> authManagers.get("global").applyAsync(req)
                 .thenCompose(request -> getClientInstance()
@@ -460,17 +474,23 @@ public final class AdminController extends BaseController {
      * Builds the HttpRequest object for syncPrincipal.
      */
     private HttpRequest buildSyncPrincipalRequest(
-            final ApiRestV2AdminSyncprincipalRequest body) throws JsonProcessingException {
+            final TspublicRestV2AdminSyncprincipalRequest body) throws JsonProcessingException {
+        //validating required parameters
+        if (null == body) {
+            throw new NullPointerException("The parameter \"body\" is a required parameter and cannot be null.");
+        }
+
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/admin/syncprincipal");
+                + "/tspublic/rest/v2/admin/syncprincipal");
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
         headers.add("Content-Type", "application/json");
+        headers.add("X-Requested-By", config.getXRequestedBy());
         headers.add("Accept-Language", config.getAcceptLanguage());
         headers.add("user-agent", BaseController.userAgent);
         headers.add("accept", "application/json");
@@ -527,7 +547,7 @@ public final class AdminController extends BaseController {
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
     public Boolean changeOwnerOfObjects(
-            final ApiRestV2AdminChangeownerRequest body) throws ApiException, IOException {
+            final TspublicRestV2AdminChangeownerRequest body) throws ApiException, IOException {
         HttpRequest request = buildChangeOwnerOfObjectsRequest(body);
         authManagers.get("global").apply(request);
 
@@ -545,7 +565,7 @@ public final class AdminController extends BaseController {
      * @return    Returns the Boolean response from the API call
      */
     public CompletableFuture<Boolean> changeOwnerOfObjectsAsync(
-            final ApiRestV2AdminChangeownerRequest body) {
+            final TspublicRestV2AdminChangeownerRequest body) {
         return makeHttpCallAsync(() -> buildChangeOwnerOfObjectsRequest(body),
             req -> authManagers.get("global").applyAsync(req)
                 .thenCompose(request -> getClientInstance()
@@ -557,17 +577,23 @@ public final class AdminController extends BaseController {
      * Builds the HttpRequest object for changeOwnerOfObjects.
      */
     private HttpRequest buildChangeOwnerOfObjectsRequest(
-            final ApiRestV2AdminChangeownerRequest body) throws JsonProcessingException {
+            final TspublicRestV2AdminChangeownerRequest body) throws JsonProcessingException {
+        //validating required parameters
+        if (null == body) {
+            throw new NullPointerException("The parameter \"body\" is a required parameter and cannot be null.");
+        }
+
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/admin/changeowner");
+                + "/tspublic/rest/v2/admin/changeowner");
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
         headers.add("Content-Type", "application/json");
+        headers.add("X-Requested-By", config.getXRequestedBy());
         headers.add("Accept-Language", config.getAcceptLanguage());
         headers.add("user-agent", BaseController.userAgent);
 

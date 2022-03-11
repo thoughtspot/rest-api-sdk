@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `logicalTableHeader` | [`LogicalTableHeader \| undefined`](/doc/models/logical-table-header.md) | Optional | - |
+| `logicalTableHeader` | [`LogicalTableHeader \| undefined`](../../doc/models/logical-table-header.md) | Optional | - |
 | `physicalTableId` | `string \| undefined` | Optional | - |
 
 ## Example (as JSON)

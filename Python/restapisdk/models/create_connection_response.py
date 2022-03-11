@@ -19,8 +19,8 @@ class CreateConnectionResponse(object):
         name (string): Name of the connection
         description (string): Description associated with the connection
         mtype (string): Type of the connection. The database associated with
-            this type can be obtained from theI response returned by the
-            /api/rest/v2/connection/types API endpoint.
+            this type can be obtained from the response returned by the
+            /tspublic/rest/v2/connection/types API endpoint.
         id (string): GUID of the connection
         scheduled (bool): Indicates if the data sync is scheduled for this
             connection
@@ -32,8 +32,8 @@ class CreateConnectionResponse(object):
         is_hidden (bool): Indicates if the connection is hideen
         complete (bool): Indicates if the all the properties of connection is
             provided
-        index_version (int): TODO: type description here.
-        generation_num (int): TODO: type description here.
+        index_version (float): TODO: type description here.
+        generation_num (float): TODO: type description here.
         created (string): Date and time when user account was created
         modified (string): Date and time of last modification of user account
         author (UserNameAndID): TODO: type description here.

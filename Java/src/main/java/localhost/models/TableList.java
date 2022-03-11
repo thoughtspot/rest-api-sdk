@@ -24,8 +24,8 @@ public class TableList {
     private Boolean isDeprecated;
     private Boolean isDeleted;
     private Boolean isHidden;
-    private Integer indexVersion;
-    private Integer generationNum;
+    private Double indexVersion;
+    private Double generationNum;
     private String created;
     private String modified;
     private UserNameAndID author;
@@ -50,8 +50,8 @@ public class TableList {
      * @param  isDeprecated  Boolean value for isDeprecated.
      * @param  isDeleted  Boolean value for isDeleted.
      * @param  isHidden  Boolean value for isHidden.
-     * @param  indexVersion  Integer value for indexVersion.
-     * @param  generationNum  Integer value for generationNum.
+     * @param  indexVersion  Double value for indexVersion.
+     * @param  generationNum  Double value for generationNum.
      * @param  created  String value for created.
      * @param  modified  String value for modified.
      * @param  author  UserNameAndID value for author.
@@ -69,8 +69,8 @@ public class TableList {
             Boolean isDeprecated,
             Boolean isDeleted,
             Boolean isHidden,
-            Integer indexVersion,
-            Integer generationNum,
+            Double indexVersion,
+            Double generationNum,
             String created,
             String modified,
             UserNameAndID author,
@@ -285,39 +285,39 @@ public class TableList {
 
     /**
      * Getter for IndexVersion.
-     * @return Returns the Integer
+     * @return Returns the Double
      */
     @JsonGetter("indexVersion")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public Integer getIndexVersion() {
+    public Double getIndexVersion() {
         return indexVersion;
     }
 
     /**
      * Setter for IndexVersion.
-     * @param indexVersion Value for Integer
+     * @param indexVersion Value for Double
      */
     @JsonSetter("indexVersion")
-    public void setIndexVersion(Integer indexVersion) {
+    public void setIndexVersion(Double indexVersion) {
         this.indexVersion = indexVersion;
     }
 
     /**
      * Getter for GenerationNum.
-     * @return Returns the Integer
+     * @return Returns the Double
      */
     @JsonGetter("generationNum")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public Integer getGenerationNum() {
+    public Double getGenerationNum() {
         return generationNum;
     }
 
     /**
      * Setter for GenerationNum.
-     * @param generationNum Value for Integer
+     * @param generationNum Value for Double
      */
     @JsonSetter("generationNum")
-    public void setGenerationNum(Integer generationNum) {
+    public void setGenerationNum(Double generationNum) {
         this.generationNum = generationNum;
     }
 
@@ -496,8 +496,8 @@ public class TableList {
         private Boolean isDeprecated;
         private Boolean isDeleted;
         private Boolean isHidden;
-        private Integer indexVersion;
-        private Integer generationNum;
+        private Double indexVersion;
+        private Double generationNum;
         private String created;
         private String modified;
         private UserNameAndID author;
@@ -599,20 +599,20 @@ public class TableList {
 
         /**
          * Setter for indexVersion.
-         * @param  indexVersion  Integer value for indexVersion.
+         * @param  indexVersion  Double value for indexVersion.
          * @return Builder
          */
-        public Builder indexVersion(Integer indexVersion) {
+        public Builder indexVersion(Double indexVersion) {
             this.indexVersion = indexVersion;
             return this;
         }
 
         /**
          * Setter for generationNum.
-         * @param  generationNum  Integer value for generationNum.
+         * @param  generationNum  Double value for generationNum.
          * @return Builder
          */
-        public Builder generationNum(Integer generationNum) {
+        public Builder generationNum(Double generationNum) {
             this.generationNum = generationNum;
             return this;
         }

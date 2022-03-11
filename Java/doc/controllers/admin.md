@@ -10,12 +10,12 @@ AdminController adminController = client.getAdminController();
 
 ## Methods
 
-* [Get Cluster Config](/doc/controllers/admin.md#get-cluster-config)
-* [Get Cluster Config Overrides](/doc/controllers/admin.md#get-cluster-config-overrides)
-* [Update Cluster Config](/doc/controllers/admin.md#update-cluster-config)
-* [Reset User Password](/doc/controllers/admin.md#reset-user-password)
-* [Sync Principal](/doc/controllers/admin.md#sync-principal)
-* [Change Owner of Objects](/doc/controllers/admin.md#change-owner-of-objects)
+* [Get Cluster Config](../../doc/controllers/admin.md#get-cluster-config)
+* [Get Cluster Config Overrides](../../doc/controllers/admin.md#get-cluster-config-overrides)
+* [Update Cluster Config](../../doc/controllers/admin.md#update-cluster-config)
+* [Reset User Password](../../doc/controllers/admin.md#reset-user-password)
+* [Sync Principal](../../doc/controllers/admin.md#sync-principal)
+* [Change Owner of Objects](../../doc/controllers/admin.md#change-owner-of-objects)
 
 
 # Get Cluster Config
@@ -45,7 +45,7 @@ adminController.getClusterConfigAsync().thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Get Cluster Config Overrides
@@ -75,7 +75,7 @@ adminController.getClusterConfigOverridesAsync().thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Update Cluster Config
@@ -84,14 +84,14 @@ To update the Thoughtspot cluster configuration, use this endpoint.
 
 ```java
 CompletableFuture<Boolean> updateClusterConfigAsync(
-    final ApiRestV2AdminConfigurationUpdateRequest body)
+    final TspublicRestV2AdminConfigurationUpdateRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2AdminConfigurationUpdateRequest`](/doc/models/api-rest-v2-admin-configuration-update-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2AdminConfigurationUpdateRequest`](../../doc/models/tspublic-rest-v2-admin-configuration-update-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -100,7 +100,7 @@ CompletableFuture<Boolean> updateClusterConfigAsync(
 ## Example Usage
 
 ```java
-ApiRestV2AdminConfigurationUpdateRequest body = new ApiRestV2AdminConfigurationUpdateRequest();
+TspublicRestV2AdminConfigurationUpdateRequest body = new TspublicRestV2AdminConfigurationUpdateRequest();
 
 adminController.updateClusterConfigAsync(body).thenAccept(result -> {
     // TODO success callback handler
@@ -114,7 +114,7 @@ adminController.updateClusterConfigAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Reset User Password
@@ -127,14 +127,14 @@ At least one of User Id or username is mandatory. When both are given, then user
 
 ```java
 CompletableFuture<Boolean> resetUserPasswordAsync(
-    final ApiRestV2AdminResetpasswordRequest body)
+    final TspublicRestV2AdminResetpasswordRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2AdminResetpasswordRequest`](/doc/models/api-rest-v2-admin-resetpassword-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2AdminResetpasswordRequest`](../../doc/models/tspublic-rest-v2-admin-resetpassword-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -143,7 +143,7 @@ CompletableFuture<Boolean> resetUserPasswordAsync(
 ## Example Usage
 
 ```java
-ApiRestV2AdminResetpasswordRequest body = new ApiRestV2AdminResetpasswordRequest();
+TspublicRestV2AdminResetpasswordRequest body = new TspublicRestV2AdminResetpasswordRequest();
 body.setNewPassword("newPassword0");
 
 adminController.resetUserPasswordAsync(body).thenAccept(result -> {
@@ -158,7 +158,7 @@ adminController.resetUserPasswordAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Sync Principal
@@ -174,25 +174,25 @@ n You can optionally choose to delete the user and groups from the cluster, that
 
 ```java
 CompletableFuture<AdminsyncPrincipalResponse> syncPrincipalAsync(
-    final ApiRestV2AdminSyncprincipalRequest body)
+    final TspublicRestV2AdminSyncprincipalRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2AdminSyncprincipalRequest`](/doc/models/api-rest-v2-admin-syncprincipal-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2AdminSyncprincipalRequest`](../../doc/models/tspublic-rest-v2-admin-syncprincipal-request.md) | Body, Required | - |
 
 ## Response Type
 
-[`AdminsyncPrincipalResponse`](/doc/models/adminsync-principal-response.md)
+[`AdminsyncPrincipalResponse`](../../doc/models/adminsync-principal-response.md)
 
 ## Example Usage
 
 ```java
-ApiRestV2AdminSyncprincipalRequest body = new ApiRestV2AdminSyncprincipalRequest();
+TspublicRestV2AdminSyncprincipalRequest body = new TspublicRestV2AdminSyncprincipalRequest();
 body.setPrincipalObject(new LinkedList<>());
-body.getPrincipalObject().add("principalObject0");
+body.getPrincipalObject().add(localhost.ApiHelper.deserialize("{\"key1\":\"val1\",\"key2\":\"val2\"}"));
 
 adminController.syncPrincipalAsync(body).thenAccept(result -> {
     // TODO success callback handler
@@ -206,7 +206,7 @@ adminController.syncPrincipalAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Change Owner of Objects
@@ -217,14 +217,14 @@ You might want to transfer ownership of objects owned by a user to another activ
 
 ```java
 CompletableFuture<Boolean> changeOwnerOfObjectsAsync(
-    final ApiRestV2AdminChangeownerRequest body)
+    final TspublicRestV2AdminChangeownerRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2AdminChangeownerRequest`](/doc/models/api-rest-v2-admin-changeowner-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2AdminChangeownerRequest`](../../doc/models/tspublic-rest-v2-admin-changeowner-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -233,11 +233,9 @@ CompletableFuture<Boolean> changeOwnerOfObjectsAsync(
 ## Example Usage
 
 ```java
-ApiRestV2AdminChangeownerRequest body = new ApiRestV2AdminChangeownerRequest();
-body.setMetaObjectId(new LinkedList<>());
-body.getMetaObjectId().add("metaObjectId9");
-body.getMetaObjectId().add("metaObjectId0");
-body.getMetaObjectId().add("metaObjectId1");
+TspublicRestV2AdminChangeownerRequest body = new TspublicRestV2AdminChangeownerRequest();
+body.setTsObjectId(new LinkedList<>());
+body.getTsObjectId().add("tsObjectId7");
 body.setFromUser(new FromUserNameAndIDInput());
 body.setToUser(new ToUserNameAndIDInput());
 
@@ -253,5 +251,5 @@ adminController.changeOwnerOfObjectsAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 

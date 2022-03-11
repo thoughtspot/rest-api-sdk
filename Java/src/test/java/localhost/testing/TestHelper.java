@@ -58,7 +58,6 @@ public class TestHelper {
      * @return All data
      */
     public static String convertStreamToString(java.io.InputStream is) {
-        System.out.println("Hai");
         java.util.Scanner s = new java.util.Scanner(is);
         String str = s.useDelimiter("\\A").hasNext() ? s.next() : "";
         s.close();

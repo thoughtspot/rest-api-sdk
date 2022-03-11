@@ -12,9 +12,7 @@ import dateutil.parser
 
 from tests.controllers.controller_test_base import ControllerTestBase
 from tests.test_helper import TestHelper
-from tests.http_response_catcher import HttpResponseCatcher
 from restapisdk.api_helper import APIHelper
-from restapisdk.controllers.metadata_controller import MetadataController
 
 
 class MetadataControllerTests(ControllerTestBase):
@@ -22,8 +20,8 @@ class MetadataControllerTests(ControllerTestBase):
     @classmethod
     def setUpClass(cls):
         super(MetadataControllerTests, cls).setUpClass()
-        cls.response_catcher = HttpResponseCatcher()
-        cls.controller = MetadataController(cls.config, cls.auth_managers, cls.response_catcher)
+        cls.controller = cls.client.metadata
+        cls.response_catcher = cls.controller.http_call_back
 
     # To get details of a specific tag, use this endpoint. 
     #
@@ -70,13 +68,13 @@ class MetadataControllerTests(ControllerTestBase):
     # To get the name and id of liveboard that is set as a home liveboard for a user, use this endpoint. 
     #
     # At least one of user id or username is required. When both are given, then id will be considered.
-    def test_get_homeliveboard(self):
+    def test_get_home_liveboard(self):
         # Parameters for the API call
         user_name = None
         user_id = None
 
         # Perform the API call through the SDK function
-        result = self.controller.get_homeliveboard(user_name, user_id)
+        result = self.controller.get_home_liveboard(user_name, user_id)
 
         # Test response code
         self.assertEquals(self.response_catcher.response.status_code, 200)

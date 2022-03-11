@@ -18,7 +18,13 @@ from restapisdk.controllers.metadata_controller import MetadataController
 from restapisdk.controllers.database_controller import DatabaseController
 from restapisdk.controllers.connection_controller import ConnectionController
 from restapisdk.controllers.data_controller import DataController
+from restapisdk.controllers.report_controller import ReportController
 from restapisdk.controllers.admin_controller import AdminController
+from restapisdk.controllers.logs_controller import LogsController
+from restapisdk.controllers.materialization_controller\
+    import MaterializationController
+from restapisdk.controllers.custom_actions_controller\
+    import CustomActionsController
 
 
 class RestapisdkClient(object):
@@ -54,22 +60,41 @@ class RestapisdkClient(object):
         return DataController(self.config, self.auth_managers)
 
     @lazy_property
+    def report(self):
+        return ReportController(self.config, self.auth_managers)
+
+    @lazy_property
     def admin(self):
         return AdminController(self.config, self.auth_managers)
 
+    @lazy_property
+    def logs(self):
+        return LogsController(self.config, self.auth_managers)
+
+    @lazy_property
+    def materialization(self):
+        return MaterializationController(self.config, self.auth_managers)
+
+    @lazy_property
+    def custom_actions(self):
+        return CustomActionsController(self.config, self.auth_managers)
+
     def __init__(self, http_client_instance=None,
-                 override_http_client_configuration=False, timeout=60,
-                 max_retries=0, backoff_factor=2,
+                 override_http_client_configuration=False, http_call_back=None,
+                 timeout=60, max_retries=0, backoff_factor=2,
                  retry_statuses=[408, 413, 429, 500, 502, 503, 504, 521, 522, 524, 408, 413, 429, 500, 502, 503, 504, 521, 522, 524],
                  retry_methods=['GET', 'PUT', 'GET', 'PUT'],
                  environment=Environment.PRODUCTION,
                  base_url='https://localhost:443', access_token='',
+                 x_requested_by='ThoughtSpot',
+                 accept_language='application/json',
                  content_type='application/json',
-                 accept_language='application/json', config=None):
+                 skip_ssl_cert_verification=False, config=None):
         if config is None:
             self.config = Configuration(
                                          http_client_instance=http_client_instance,
                                          override_http_client_configuration=override_http_client_configuration,
+                                         http_call_back=http_call_back,
                                          timeout=timeout,
                                          max_retries=max_retries,
                                          backoff_factor=backoff_factor,
@@ -78,8 +103,10 @@ class RestapisdkClient(object):
                                          environment=environment,
                                          base_url=base_url,
                                          access_token=access_token,
+                                         x_requested_by=x_requested_by,
+                                         accept_language=accept_language,
                                          content_type=content_type,
-                                         accept_language=accept_language)
+                                         skip_ssl_cert_verification=skip_ssl_cert_verification)
         else:
             self.config = config
         self.initialize_auth_managers(self.config)

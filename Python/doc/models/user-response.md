@@ -14,7 +14,7 @@
 | `id` | `string` | Optional | GUID of the user account |
 | `visibility` | `string` | Optional | Visibility of the user account |
 | `mail` | `string` | Optional | Email of the user account |
-| `groups` | [`List of GroupNameAndID`](/doc/models/group-name-and-id.md) | Optional | Name of the group to which user account is added |
+| `groups` | [`List of GroupNameAndID`](../../doc/models/group-name-and-id.md) | Optional | Name of the group to which user account is added |
 | `privileges` | `List of string` | Optional | Privileges assigned to user account |
 | `tags` | `List of string` | Optional | Tags assigned to the user |
 | `state` | `string` | Optional | Indicates if the user account is active or inactive |
@@ -33,13 +33,13 @@
 | `mtype` | `string` | Optional | Indicates the type of user account |
 | `parenttype` | `string` | Optional | Indicates the type of parent object |
 | `tenant_id` | `string` | Optional | Tenant id associated with the user account |
-| `index_version` | `int` | Optional | - |
-| `generation_num` | `int` | Optional | - |
+| `index_version` | `float` | Optional | - |
+| `generation_num` | `float` | Optional | - |
 | `created` | `float` | Optional | Date and time when user account was created |
 | `modified` | `float` | Optional | Date and time of last modification of user account |
-| `author` | [`UserNameAndID`](/doc/models/user-name-and-id.md) | Optional | - |
-| `modified_by` | [`UserNameAndID`](/doc/models/user-name-and-id.md) | Optional | - |
-| `owner` | [`UserNameAndID`](/doc/models/user-name-and-id.md) | Optional | - |
+| `author` | [`UserNameAndID`](../../doc/models/user-name-and-id.md) | Optional | - |
+| `modified_by` | [`UserNameAndID`](../../doc/models/user-name-and-id.md) | Optional | - |
+| `owner` | [`UserNameAndID`](../../doc/models/user-name-and-id.md) | Optional | - |
 
 ## Example (as JSON)
 

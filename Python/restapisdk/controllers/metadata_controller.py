@@ -18,13 +18,13 @@ from restapisdk.exceptions.error_response_exception import ErrorResponseExceptio
 class MetadataController(BaseController):
 
     """A Controller to access Endpoints in the restapisdk API."""
-    def __init__(self, config, auth_managers, call_back=None):
-        super(MetadataController, self).__init__(config, auth_managers, call_back)
+    def __init__(self, config, auth_managers):
+        super(MetadataController, self).__init__(config, auth_managers)
 
     def get_tag(self,
                 name=None,
                 id=None):
-        """Does a GET request to /api/rest/v2/metadata/tag.
+        """Does a GET request to /tspublic/rest/v2/metadata/tag.
 
         To get details of a specific tag, use this endpoint. 
          At least one of id or name of tag is required. When both are given,
@@ -47,7 +47,7 @@ class MetadataController(BaseController):
         """
 
         # Prepare query URL
-        _url_path = '/api/rest/v2/metadata/tag'
+        _url_path = '/tspublic/rest/v2/metadata/tag'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_parameters = {
@@ -84,13 +84,13 @@ class MetadataController(BaseController):
 
     def create_tag(self,
                    body):
-        """Does a POST request to /api/rest/v2/metadata/tag/create.
+        """Does a POST request to /tspublic/rest/v2/metadata/tag/create.
 
         To programmatically create tags, use this endpoint
 
         Args:
-            body (ApiRestV2MetadataTagCreateRequest): TODO: type description
-                here.
+            body (TspublicRestV2MetadataTagCreateRequest): TODO: type
+                description here.
 
         Returns:
             MetadataTagResponse: Response from the API. Details of the tag
@@ -104,8 +104,11 @@ class MetadataController(BaseController):
 
         """
 
+        # Validate required parameters
+        self.validate_parameters(body=body)
+
         # Prepare query URL
-        _url_path = '/api/rest/v2/metadata/tag/create'
+        _url_path = '/tspublic/rest/v2/metadata/tag/create'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_url = APIHelper.clean_url(_query_builder)
@@ -134,15 +137,15 @@ class MetadataController(BaseController):
 
     def update_tag(self,
                    body):
-        """Does a PUT request to /api/rest/v2/metadata/tag/update.
+        """Does a PUT request to /tspublic/rest/v2/metadata/tag/update.
 
         To programmatically update tags, use this endpoint. 
          At least one of id or name of tag is required. When both are given,
          then id will be considered.
 
         Args:
-            body (ApiRestV2MetadataTagUpdateRequest): TODO: type description
-                here.
+            body (TspublicRestV2MetadataTagUpdateRequest): TODO: type
+                description here.
 
         Returns:
             bool: Response from the API. Successfully updated the tag
@@ -155,8 +158,11 @@ class MetadataController(BaseController):
 
         """
 
+        # Validate required parameters
+        self.validate_parameters(body=body)
+
         # Prepare query URL
-        _url_path = '/api/rest/v2/metadata/tag/update'
+        _url_path = '/tspublic/rest/v2/metadata/tag/update'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_url = APIHelper.clean_url(_query_builder)
@@ -185,7 +191,7 @@ class MetadataController(BaseController):
     def delete_tag(self,
                    name=None,
                    id=None):
-        """Does a DELETE request to /api/rest/v2/metadata/tag/delete.
+        """Does a DELETE request to /tspublic/rest/v2/metadata/tag/delete.
 
         To programmatically delete tags, use this endpoint. 
          At least one of id or name of tag is required. When both are given,
@@ -207,7 +213,7 @@ class MetadataController(BaseController):
         """
 
         # Prepare query URL
-        _url_path = '/api/rest/v2/metadata/tag/delete'
+        _url_path = '/tspublic/rest/v2/metadata/tag/delete'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_parameters = {
@@ -243,7 +249,7 @@ class MetadataController(BaseController):
 
     def assign_tag(self,
                    body):
-        """Does a POST request to /api/rest/v2/metadata/tag/assign.
+        """Does a PUT request to /tspublic/rest/v2/metadata/tag/assign.
 
         To programmatically assign tags to a metadata object, such as a
         liveboard, search answer, table, worksheet, or view, use this
@@ -252,8 +258,8 @@ class MetadataController(BaseController):
          then id will be considered.
 
         Args:
-            body (ApiRestV2MetadataTagAssignRequest): TODO: type description
-                here.
+            body (TspublicRestV2MetadataTagAssignRequest): TODO: type
+                description here.
 
         Returns:
             bool: Response from the API. Successfully assigned the tag to the
@@ -267,8 +273,11 @@ class MetadataController(BaseController):
 
         """
 
+        # Validate required parameters
+        self.validate_parameters(body=body)
+
         # Prepare query URL
-        _url_path = '/api/rest/v2/metadata/tag/assign'
+        _url_path = '/tspublic/rest/v2/metadata/tag/assign'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_url = APIHelper.clean_url(_query_builder)
@@ -279,7 +288,7 @@ class MetadataController(BaseController):
         }
 
         # Prepare and execute request
-        _request = self.config.http_client.post(_query_url, headers=_headers, parameters=APIHelper.json_serialize(body))
+        _request = self.config.http_client.put(_query_url, headers=_headers, parameters=APIHelper.json_serialize(body))
         # Apply authentication scheme on request
         self.apply_auth_schemes(_request, 'global')
 
@@ -296,7 +305,7 @@ class MetadataController(BaseController):
 
     def unassign_tag(self,
                      body):
-        """Does a POST request to /api/rest/v2/metadata/tag/unassign.
+        """Does a PUT request to /tspublic/rest/v2/metadata/tag/unassign.
 
         To programmatically unassign tags to a metadata object, such as a
         liveboard, search answer, table, worksheet, or view, use this
@@ -305,8 +314,8 @@ class MetadataController(BaseController):
          then id will be considered.
 
         Args:
-            body (ApiRestV2MetadataTagUnassignRequest): TODO: type description
-                here.
+            body (TspublicRestV2MetadataTagUnassignRequest): TODO: type
+                description here.
 
         Returns:
             bool: Response from the API. Successfully unassigned the tag to
@@ -320,8 +329,11 @@ class MetadataController(BaseController):
 
         """
 
+        # Validate required parameters
+        self.validate_parameters(body=body)
+
         # Prepare query URL
-        _url_path = '/api/rest/v2/metadata/tag/unassign'
+        _url_path = '/tspublic/rest/v2/metadata/tag/unassign'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_url = APIHelper.clean_url(_query_builder)
@@ -332,7 +344,7 @@ class MetadataController(BaseController):
         }
 
         # Prepare and execute request
-        _request = self.config.http_client.post(_query_url, headers=_headers, parameters=APIHelper.json_serialize(body))
+        _request = self.config.http_client.put(_query_url, headers=_headers, parameters=APIHelper.json_serialize(body))
         # Apply authentication scheme on request
         self.apply_auth_schemes(_request, 'global')
 
@@ -349,7 +361,7 @@ class MetadataController(BaseController):
 
     def assign_favorite(self,
                         body):
-        """Does a POST request to /api/rest/v2/metadata/favorite/assign.
+        """Does a PUT request to /tspublic/rest/v2/metadata/favorite/assign.
 
         To programmatically assign objects to favorites for a given user
         account, use this endpoint. 
@@ -357,7 +369,7 @@ class MetadataController(BaseController):
          then id will be considered
 
         Args:
-            body (ApiRestV2MetadataFavoriteAssignRequest): TODO: type
+            body (TspublicRestV2MetadataFavoriteAssignRequest): TODO: type
                 description here.
 
         Returns:
@@ -372,8 +384,11 @@ class MetadataController(BaseController):
 
         """
 
+        # Validate required parameters
+        self.validate_parameters(body=body)
+
         # Prepare query URL
-        _url_path = '/api/rest/v2/metadata/favorite/assign'
+        _url_path = '/tspublic/rest/v2/metadata/favorite/assign'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_url = APIHelper.clean_url(_query_builder)
@@ -384,7 +399,7 @@ class MetadataController(BaseController):
         }
 
         # Prepare and execute request
-        _request = self.config.http_client.post(_query_url, headers=_headers, parameters=APIHelper.json_serialize(body))
+        _request = self.config.http_client.put(_query_url, headers=_headers, parameters=APIHelper.json_serialize(body))
         # Apply authentication scheme on request
         self.apply_auth_schemes(_request, 'global')
 
@@ -401,7 +416,7 @@ class MetadataController(BaseController):
 
     def unassign_favorite(self,
                           body):
-        """Does a POST request to /api/rest/v2/metadata/favorite/unassign.
+        """Does a PUT request to /tspublic/rest/v2/metadata/favorite/unassign.
 
         To programmatically unassign objects to favorites for a given user
         account, use this endpoint. 
@@ -409,7 +424,7 @@ class MetadataController(BaseController):
          then id will be considered. Screen reader support enabled.
 
         Args:
-            body (ApiRestV2MetadataFavoriteUnassignRequest): TODO: type
+            body (TspublicRestV2MetadataFavoriteUnassignRequest): TODO: type
                 description here.
 
         Returns:
@@ -424,8 +439,11 @@ class MetadataController(BaseController):
 
         """
 
+        # Validate required parameters
+        self.validate_parameters(body=body)
+
         # Prepare query URL
-        _url_path = '/api/rest/v2/metadata/favorite/unassign'
+        _url_path = '/tspublic/rest/v2/metadata/favorite/unassign'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_url = APIHelper.clean_url(_query_builder)
@@ -436,7 +454,7 @@ class MetadataController(BaseController):
         }
 
         # Prepare and execute request
-        _request = self.config.http_client.post(_query_url, headers=_headers, parameters=APIHelper.json_serialize(body))
+        _request = self.config.http_client.put(_query_url, headers=_headers, parameters=APIHelper.json_serialize(body))
         # Apply authentication scheme on request
         self.apply_auth_schemes(_request, 'global')
 
@@ -451,10 +469,10 @@ class MetadataController(BaseController):
 
         return decoded
 
-    def get_homeliveboard(self,
-                          user_name=None,
-                          user_id=None):
-        """Does a GET request to /api/rest/v2/metadata/homeliveboard.
+    def get_home_liveboard(self,
+                           user_name=None,
+                           user_id=None):
+        """Does a GET request to /tspublic/rest/v2/metadata/homeliveboard.
 
         To get the name and id of liveboard that is set as a home liveboard
         for a user, use this endpoint. 
@@ -478,7 +496,7 @@ class MetadataController(BaseController):
         """
 
         # Prepare query URL
-        _url_path = '/api/rest/v2/metadata/homeliveboard'
+        _url_path = '/tspublic/rest/v2/metadata/homeliveboard'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_parameters = {
@@ -513,9 +531,9 @@ class MetadataController(BaseController):
 
         return decoded
 
-    def assign_homeliveboard(self,
-                             body):
-        """Does a POST request to /api/rest/v2/metadata/homeliveboard/assign.
+    def assign_home_liveboard(self,
+                              body):
+        """Does a PUT request to /tspublic/rest/v2/metadata/homeliveboard/assign.
 
         To assign a specific liveboard as a home liveboard for a user, use
         this endpoint.
@@ -523,12 +541,12 @@ class MetadataController(BaseController):
          then id will be considered.
 
         Args:
-            body (ApiRestV2MetadataHomeliveboardAssignRequest): TODO: type
-                description here.
+            body (TspublicRestV2MetadataHomeliveboardAssignRequest): TODO:
+                type description here.
 
         Returns:
-            bool: Response from the API. Successfully assigned the
-                homeliveboard to the user
+            bool: Response from the API. Successfully assigned the home
+                liveboard to the user
 
         Raises:
             APIException: When an error occurs while fetching the data from
@@ -538,8 +556,11 @@ class MetadataController(BaseController):
 
         """
 
+        # Validate required parameters
+        self.validate_parameters(body=body)
+
         # Prepare query URL
-        _url_path = '/api/rest/v2/metadata/homeliveboard/assign'
+        _url_path = '/tspublic/rest/v2/metadata/homeliveboard/assign'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_url = APIHelper.clean_url(_query_builder)
@@ -550,7 +571,7 @@ class MetadataController(BaseController):
         }
 
         # Prepare and execute request
-        _request = self.config.http_client.post(_query_url, headers=_headers, parameters=APIHelper.json_serialize(body))
+        _request = self.config.http_client.put(_query_url, headers=_headers, parameters=APIHelper.json_serialize(body))
         # Apply authentication scheme on request
         self.apply_auth_schemes(_request, 'global')
 
@@ -565,21 +586,21 @@ class MetadataController(BaseController):
 
         return decoded
 
-    def unassign_homeliveboard(self,
-                               body):
-        """Does a POST request to /api/rest/v2/metadata/homeliveboard/unassign.
+    def unassign_home_liveboard(self,
+                                body):
+        """Does a PUT request to /tspublic/rest/v2/metadata/homeliveboard/unassign.
 
         To unassign the home liveboard set for a user, use this endpoint.
          At least one of user id or username is required. When both are given,
          then id will be considered.
 
         Args:
-            body (ApiRestV2MetadataHomeliveboardUnassignRequest): TODO: type
-                description here.
+            body (TspublicRestV2MetadataHomeliveboardUnassignRequest): TODO:
+                type description here.
 
         Returns:
-            bool: Response from the API. Successfully unassigned the
-                homeliveboard to the user
+            bool: Response from the API. Successfully unassigned the home
+                liveboard to the user
 
         Raises:
             APIException: When an error occurs while fetching the data from
@@ -589,8 +610,11 @@ class MetadataController(BaseController):
 
         """
 
+        # Validate required parameters
+        self.validate_parameters(body=body)
+
         # Prepare query URL
-        _url_path = '/api/rest/v2/metadata/homeliveboard/unassign'
+        _url_path = '/tspublic/rest/v2/metadata/homeliveboard/unassign'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_url = APIHelper.clean_url(_query_builder)
@@ -601,7 +625,7 @@ class MetadataController(BaseController):
         }
 
         # Prepare and execute request
-        _request = self.config.http_client.post(_query_url, headers=_headers, parameters=APIHelper.json_serialize(body))
+        _request = self.config.http_client.put(_query_url, headers=_headers, parameters=APIHelper.json_serialize(body))
         # Apply authentication scheme on request
         self.apply_auth_schemes(_request, 'global')
 
@@ -617,7 +641,7 @@ class MetadataController(BaseController):
         return decoded
 
     def get_incomplete_objects(self):
-        """Does a GET request to /api/rest/v2/metadata/incomplete.
+        """Does a GET request to /tspublic/rest/v2/metadata/incomplete.
 
         To get a list of objects with incomplete metadata, use this endpoint
 
@@ -634,7 +658,7 @@ class MetadataController(BaseController):
         """
 
         # Prepare query URL
-        _url_path = '/api/rest/v2/metadata/incomplete'
+        _url_path = '/tspublic/rest/v2/metadata/incomplete'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_url = APIHelper.clean_url(_query_builder)
@@ -660,11 +684,11 @@ class MetadataController(BaseController):
 
         return decoded
 
-    def get_metadata_header(self,
-                            mtype,
-                            id,
-                            output_fields=None):
-        """Does a GET request to /api/rest/v2/metadata/header.
+    def get_object_header(self,
+                          mtype,
+                          id,
+                          output_fields=None):
+        """Does a GET request to /tspublic/rest/v2/metadata/header.
 
         To get header detail of a metadata object, use this endpoint. You can
         provide as input selective fields to get the data for.
@@ -687,8 +711,12 @@ class MetadataController(BaseController):
 
         """
 
+        # Validate required parameters
+        self.validate_parameters(mtype=mtype,
+                                 id=id)
+
         # Prepare query URL
-        _url_path = '/api/rest/v2/metadata/header'
+        _url_path = '/tspublic/rest/v2/metadata/header'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_parameters = {
@@ -725,11 +753,8 @@ class MetadataController(BaseController):
 
     def get_object_detail(self,
                           mtype,
-                          id,
-                          show_hidden=None,
-                          drop_question_details=None,
-                          version=None):
-        """Does a GET request to /api/rest/v2/metadata/details.
+                          id):
+        """Does a GET request to /tspublic/rest/v2/metadata/detail.
 
         Use this endpoint to get full details of metadata objects
 
@@ -737,16 +762,6 @@ class MetadataController(BaseController):
             mtype (Type9Enum): Type of the metadata object being searched.
                 Valid values
             id (list of string): A JSON array of GUIDs of the objects.
-            show_hidden (bool, optional): When set to true, returns details of
-                the hidden objects, such as a column in a worksheet or a
-                table.
-            drop_question_details (bool, optional): When set to true, the
-                search assist data associated with a worksheet is not included
-                in the API response. This attribute is applicable only for
-                LOGICAL_TABLE data type.
-            version (string, optional): Specify the version to retrieve the
-                objects from. By default, the API returns metadata for all
-                versions of the object.
 
         Returns:
             object: Response from the API. Full details of metadata objects
@@ -760,16 +775,17 @@ class MetadataController(BaseController):
 
         """
 
+        # Validate required parameters
+        self.validate_parameters(mtype=mtype,
+                                 id=id)
+
         # Prepare query URL
-        _url_path = '/api/rest/v2/metadata/details'
+        _url_path = '/tspublic/rest/v2/metadata/detail'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_parameters = {
             'type': mtype,
-            'id': id,
-            'showHidden': show_hidden,
-            'dropQuestionDetails': drop_question_details,
-            'version': version
+            'id': id
         }
         _query_builder = APIHelper.append_url_with_query_parameters(
             _query_builder,
@@ -800,7 +816,7 @@ class MetadataController(BaseController):
 
     def get_object_visualization_header(self,
                                         id):
-        """Does a GET request to /api/rest/v2/metadata/vizheaders.
+        """Does a GET request to /tspublic/rest/v2/metadata/vizheader.
 
         Use this endpoint to get header details of visualization charts for a
         given liveboard or answer. 
@@ -822,8 +838,11 @@ class MetadataController(BaseController):
 
         """
 
+        # Validate required parameters
+        self.validate_parameters(id=id)
+
         # Prepare query URL
-        _url_path = '/api/rest/v2/metadata/vizheaders'
+        _url_path = '/tspublic/rest/v2/metadata/vizheader'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_parameters = {
@@ -859,13 +878,13 @@ class MetadataController(BaseController):
 
     def search_object_header(self,
                              body):
-        """Does a POST request to /api/rest/v2/metadata/header/search.
+        """Does a POST request to /tspublic/rest/v2/metadata/header/search.
 
         To get header details for metadata objects, use this endpoint. You can
         provide as input selective fields to get the data for.
 
         Args:
-            body (ApiRestV2MetadataHeaderSearchRequest): TODO: type
+            body (TspublicRestV2MetadataHeaderSearchRequest): TODO: type
                 description here.
 
         Returns:
@@ -880,8 +899,11 @@ class MetadataController(BaseController):
 
         """
 
+        # Validate required parameters
+        self.validate_parameters(body=body)
+
         # Prepare query URL
-        _url_path = '/api/rest/v2/metadata/header/search'
+        _url_path = '/tspublic/rest/v2/metadata/header/search'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_url = APIHelper.clean_url(_query_builder)
@@ -907,10 +929,62 @@ class MetadataController(BaseController):
 
         return decoded
 
-    def delete_metadata_object(self,
-                               mtype,
-                               id):
-        """Does a DELETE request to /api/rest/v2/metadata/delete.
+    def search_object_detail(self,
+                             body):
+        """Does a POST request to /tspublic/rest/v2/metadata/detail/search.
+
+        Use this endpoint to get full details of metadata objects
+
+        Args:
+            body (TspublicRestV2MetadataDetailSearchRequest): TODO: type
+                description here.
+
+        Returns:
+            object: Response from the API. Full details of metadata objects
+                searched for
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        # Validate required parameters
+        self.validate_parameters(body=body)
+
+        # Prepare query URL
+        _url_path = '/tspublic/rest/v2/metadata/detail/search'
+        _query_builder = self.config.get_base_uri()
+        _query_builder += _url_path
+        _query_url = APIHelper.clean_url(_query_builder)
+
+        # Prepare headers
+        _headers = {
+            'Content-Type': 'application/json'
+        }
+
+        # Prepare and execute request
+        _request = self.config.http_client.post(_query_url, headers=_headers, parameters=APIHelper.json_serialize(body))
+        # Apply authentication scheme on request
+        self.apply_auth_schemes(_request, 'global')
+
+        _response = self.execute_request(_request)
+
+        # Endpoint and global error handling using HTTP status codes.
+        if _response.status_code == 500:
+            raise ErrorResponseException('Operation failed or unauthorized request', _response)
+        self.validate_response(_response)
+
+        decoded = _response.text
+
+        return decoded
+
+    def delete_object(self,
+                      mtype,
+                      id):
+        """Does a DELETE request to /tspublic/rest/v2/metadata/delete.
 
         Use this endpoint to delete the metadata objects
 
@@ -929,8 +1003,12 @@ class MetadataController(BaseController):
 
         """
 
+        # Validate required parameters
+        self.validate_parameters(mtype=mtype,
+                                 id=id)
+
         # Prepare query URL
-        _url_path = '/api/rest/v2/metadata/delete'
+        _url_path = '/tspublic/rest/v2/metadata/delete'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_parameters = {
@@ -966,7 +1044,7 @@ class MetadataController(BaseController):
 
     def get_object_dependency(self,
                               body):
-        """Does a POST request to /api/rest/v2/metadata/dependency.
+        """Does a POST request to /tspublic/rest/v2/metadata/dependency.
 
         To query the details of dependent objects and associate objects as
         dependents, you can use this API.
@@ -987,8 +1065,8 @@ class MetadataController(BaseController):
         to delete C2 without first deleting C1
 
         Args:
-            body (ApiRestV2MetadataDependencyRequest): TODO: type description
-                here.
+            body (TspublicRestV2MetadataDependencyRequest): TODO: type
+                description here.
 
         Returns:
             object: Response from the API. An object with list of dependent
@@ -1002,8 +1080,11 @@ class MetadataController(BaseController):
 
         """
 
+        # Validate required parameters
+        self.validate_parameters(body=body)
+
         # Prepare query URL
-        _url_path = '/api/rest/v2/metadata/dependency'
+        _url_path = '/tspublic/rest/v2/metadata/dependency'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_url = APIHelper.clean_url(_query_builder)
@@ -1031,14 +1112,14 @@ class MetadataController(BaseController):
 
     def export_object_tml(self,
                           body):
-        """Does a POST request to /api/rest/v2/metadata/tml/export.
+        """Does a POST request to /tspublic/rest/v2/metadata/tml/export.
 
         To export ThoughtSpot objects represented in ThoughtSpot Modeling
         Language (TML), use this endpoint
 
         Args:
-            body (ApiRestV2MetadataTmlExportRequest): TODO: type description
-                here.
+            body (TspublicRestV2MetadataTmlExportRequest): TODO: type
+                description here.
 
         Returns:
             object: Response from the API. Successfully exported the requested
@@ -1052,8 +1133,11 @@ class MetadataController(BaseController):
 
         """
 
+        # Validate required parameters
+        self.validate_parameters(body=body)
+
         # Prepare query URL
-        _url_path = '/api/rest/v2/metadata/tml/export'
+        _url_path = '/tspublic/rest/v2/metadata/tml/export'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_url = APIHelper.clean_url(_query_builder)
@@ -1081,14 +1165,14 @@ class MetadataController(BaseController):
 
     def import_object_tml(self,
                           body):
-        """Does a POST request to /api/rest/v2/metadata/tml/import.
+        """Does a POST request to /tspublic/rest/v2/metadata/tml/import.
 
         To import ThoughtSpot objects represented in ThoughtSpot Modeling
         Language (TML), use this endpoint
 
         Args:
-            body (ApiRestV2MetadataTmlImportRequest): TODO: type description
-                here.
+            body (TspublicRestV2MetadataTmlImportRequest): TODO: type
+                description here.
 
         Returns:
             object: Response from the API. Successfully imported the objects
@@ -1102,8 +1186,11 @@ class MetadataController(BaseController):
 
         """
 
+        # Validate required parameters
+        self.validate_parameters(body=body)
+
         # Prepare query URL
-        _url_path = '/api/rest/v2/metadata/tml/import'
+        _url_path = '/tspublic/rest/v2/metadata/tml/import'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_url = APIHelper.clean_url(_query_builder)

@@ -69,8 +69,8 @@ export interface GroupResponse {
   created?: number;
   /** Date and time of last modification of the group */
   modified?: number;
-  modifiedBy?: UserNameAndID;
   author?: UserNameAndID;
+  modifiedBy?: UserNameAndID;
   owner?: UserNameAndID;
 }
 
@@ -104,7 +104,7 @@ export const groupResponseSchema: Schema<GroupResponse> = object({
   generationNum: ['generationNum', optional(number())],
   created: ['created', optional(number())],
   modified: ['modified', optional(number())],
-  modifiedBy: ['modifiedBy', optional(lazy(() => userNameAndIDSchema))],
   author: ['author', optional(lazy(() => userNameAndIDSchema))],
+  modifiedBy: ['modifiedBy', optional(lazy(() => userNameAndIDSchema))],
   owner: ['owner', optional(lazy(() => userNameAndIDSchema))],
 });

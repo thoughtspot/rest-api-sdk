@@ -13,6 +13,6 @@ The users can turn off the Onboarding experience and access it again when they n
 
 | Name |
 |  --- |
-| `ENUM_TRUE` |
-| `ENUM_FALSE` |
+| `TRUE` |
+| `FALSE` |
 

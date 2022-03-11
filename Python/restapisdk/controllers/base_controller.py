@@ -32,13 +32,14 @@ class BaseController(object):
     def global_headers(self):
         return {
             'user-agent': self.get_user_agent() ,
+            'X-Requested-By': self.config.x_requested_by,
             'Accept-Language': self.config.accept_language
         }
 
-    def __init__(self, config, auth_managers, call_back=None):
+    def __init__(self, config, auth_managers):
         self._config = config
         self._auth_managers = auth_managers
-        self._http_call_back = call_back
+        self._http_call_back = config.http_call_back
 
     @property
     def config(self):
@@ -103,7 +104,7 @@ class BaseController(object):
             raise APIException('HTTP response not OK.', response)
 
     def get_user_agent(self):
-        user_agent = 'APIMATIC 3.0'
+        user_agent = 'RestAPI V2 SDK'
         parameters = {
         }
 

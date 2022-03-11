@@ -17,13 +17,13 @@ from restapisdk.exceptions.error_response_exception import ErrorResponseExceptio
 class GroupController(BaseController):
 
     """A Controller to access Endpoints in the restapisdk API."""
-    def __init__(self, config, auth_managers, call_back=None):
-        super(GroupController, self).__init__(config, auth_managers, call_back)
+    def __init__(self, config, auth_managers):
+        super(GroupController, self).__init__(config, auth_managers)
 
     def get_group(self,
                   name=None,
                   id=None):
-        """Does a GET request to /api/rest/v2/group.
+        """Does a GET request to /tspublic/rest/v2/group.
 
         To get the details of a specific group by name or id, use this
         endpoint. 
@@ -46,7 +46,7 @@ class GroupController(BaseController):
         """
 
         # Prepare query URL
-        _url_path = '/api/rest/v2/group'
+        _url_path = '/tspublic/rest/v2/group'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_parameters = {
@@ -83,7 +83,7 @@ class GroupController(BaseController):
 
     def create_group(self,
                      body):
-        """Does a POST request to /api/rest/v2/group/create.
+        """Does a POST request to /tspublic/rest/v2/group/create.
 
         To programmatically create a group in the ThoughtSpot system, use this
         API endpoint. 
@@ -100,7 +100,8 @@ class GroupController(BaseController):
          it.
 
         Args:
-            body (ApiRestV2GroupCreateRequest): TODO: type description here.
+            body (TspublicRestV2GroupCreateRequest): TODO: type description
+                here.
 
         Returns:
             GroupResponse: Response from the API. Details of the group
@@ -114,8 +115,11 @@ class GroupController(BaseController):
 
         """
 
+        # Validate required parameters
+        self.validate_parameters(body=body)
+
         # Prepare query URL
-        _url_path = '/api/rest/v2/group/create'
+        _url_path = '/tspublic/rest/v2/group/create'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_url = APIHelper.clean_url(_query_builder)
@@ -144,7 +148,7 @@ class GroupController(BaseController):
 
     def update_group(self,
                      body):
-        """Does a PUT request to /api/rest/v2/group/update.
+        """Does a PUT request to /tspublic/rest/v2/group/update.
 
         You can use this endpoint to programmatically modify an existing
         group. 
@@ -154,7 +158,8 @@ class GroupController(BaseController):
          updated.
 
         Args:
-            body (ApiRestV2GroupUpdateRequest): TODO: type description here.
+            body (TspublicRestV2GroupUpdateRequest): TODO: type description
+                here.
 
         Returns:
             bool: Response from the API. Group successfully updated
@@ -167,8 +172,11 @@ class GroupController(BaseController):
 
         """
 
+        # Validate required parameters
+        self.validate_parameters(body=body)
+
         # Prepare query URL
-        _url_path = '/api/rest/v2/group/update'
+        _url_path = '/tspublic/rest/v2/group/update'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_url = APIHelper.clean_url(_query_builder)
@@ -197,7 +205,7 @@ class GroupController(BaseController):
     def delete_group(self,
                      name=None,
                      id=None):
-        """Does a DELETE request to /api/rest/v2/group/delete.
+        """Does a DELETE request to /tspublic/rest/v2/group/delete.
 
         To remove a group from the ThoughtSpot system, send a DELETE request
         to this endpoint. 
@@ -220,7 +228,7 @@ class GroupController(BaseController):
         """
 
         # Prepare query URL
-        _url_path = '/api/rest/v2/group/delete'
+        _url_path = '/tspublic/rest/v2/group/delete'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_parameters = {
@@ -256,7 +264,7 @@ class GroupController(BaseController):
 
     def add_privileges_to_group(self,
                                 body):
-        """Does a PUT request to /api/rest/v2/group/addprivilege.
+        """Does a PUT request to /tspublic/rest/v2/group/addprivilege.
 
         To programmatically add privileges to an existing group, use API
         endpoint. 
@@ -266,8 +274,8 @@ class GroupController(BaseController):
          given,then user id will be considered.
 
         Args:
-            body (ApiRestV2GroupAddprivilegeRequest): TODO: type description
-                here.
+            body (TspublicRestV2GroupAddprivilegeRequest): TODO: type
+                description here.
 
         Returns:
             bool: Response from the API. Successfully assigned privileges to
@@ -281,8 +289,11 @@ class GroupController(BaseController):
 
         """
 
+        # Validate required parameters
+        self.validate_parameters(body=body)
+
         # Prepare query URL
-        _url_path = '/api/rest/v2/group/addprivilege'
+        _url_path = '/tspublic/rest/v2/group/addprivilege'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_url = APIHelper.clean_url(_query_builder)
@@ -310,7 +321,7 @@ class GroupController(BaseController):
 
     def remove_privileges_from_group(self,
                                      body):
-        """Does a PUT request to /api/rest/v2/group/removeprivilege.
+        """Does a PUT request to /tspublic/rest/v2/group/removeprivilege.
 
         To programmatically remove privileges from a group, use API endpoint.
                  The API removes only the privilege association. It does not delete
@@ -319,7 +330,7 @@ class GroupController(BaseController):
          given,then user id will be considered.
 
         Args:
-            body (ApiRestV2GroupRemoveprivilegeRequest): TODO: type
+            body (TspublicRestV2GroupRemoveprivilegeRequest): TODO: type
                 description here.
 
         Returns:
@@ -334,8 +345,11 @@ class GroupController(BaseController):
 
         """
 
+        # Validate required parameters
+        self.validate_parameters(body=body)
+
         # Prepare query URL
-        _url_path = '/api/rest/v2/group/removeprivilege'
+        _url_path = '/tspublic/rest/v2/group/removeprivilege'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_url = APIHelper.clean_url(_query_builder)
@@ -363,7 +377,7 @@ class GroupController(BaseController):
 
     def add_users_to_group(self,
                            body):
-        """Does a PUT request to /api/rest/v2/group/adduser.
+        """Does a PUT request to /tspublic/rest/v2/group/adduser.
 
         To programmatically add existing ThoughtSpot users to a group, use
         this API endpoint. 
@@ -373,7 +387,8 @@ class GroupController(BaseController):
          given,then user id will be considered.
 
         Args:
-            body (ApiRestV2GroupAdduserRequest): TODO: type description here.
+            body (TspublicRestV2GroupAdduserRequest): TODO: type description
+                here.
 
         Returns:
             bool: Response from the API. Successfully added user to the group
@@ -386,8 +401,11 @@ class GroupController(BaseController):
 
         """
 
+        # Validate required parameters
+        self.validate_parameters(body=body)
+
         # Prepare query URL
-        _url_path = '/api/rest/v2/group/adduser'
+        _url_path = '/tspublic/rest/v2/group/adduser'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_url = APIHelper.clean_url(_query_builder)
@@ -415,7 +433,7 @@ class GroupController(BaseController):
 
     def remove_users_from_group(self,
                                 body):
-        """Does a PUT request to /api/rest/v2/group/removeuser.
+        """Does a PUT request to /tspublic/rest/v2/group/removeuser.
 
         To programmatically remove users from a group, use API endpoint. 
          The API removes only the user association. It does not delete the
@@ -424,8 +442,8 @@ class GroupController(BaseController):
          given,then user id will be considered.
 
         Args:
-            body (ApiRestV2GroupRemoveuserRequest): TODO: type description
-                here.
+            body (TspublicRestV2GroupRemoveuserRequest): TODO: type
+                description here.
 
         Returns:
             bool: Response from the API. Successfully removed user from the
@@ -439,8 +457,11 @@ class GroupController(BaseController):
 
         """
 
+        # Validate required parameters
+        self.validate_parameters(body=body)
+
         # Prepare query URL
-        _url_path = '/api/rest/v2/group/removeuser'
+        _url_path = '/tspublic/rest/v2/group/removeuser'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_url = APIHelper.clean_url(_query_builder)
@@ -468,7 +489,7 @@ class GroupController(BaseController):
 
     def add_groups_to_group(self,
                             body):
-        """Does a PUT request to /api/rest/v2/group/addgroup.
+        """Does a PUT request to /tspublic/rest/v2/group/addgroup.
 
         To programmatically add existing groups to a group, use API endpoint.
                  When you assign groups to a group, the group inherits the privileges
@@ -477,7 +498,7 @@ class GroupController(BaseController):
          given,then user id will be considered.
 
         Args:
-            body (ApiRestV2GroupAddgroupRequest): TODO: type description
+            body (TspublicRestV2GroupAddgroupRequest): TODO: type description
                 here.
 
         Returns:
@@ -492,8 +513,11 @@ class GroupController(BaseController):
 
         """
 
+        # Validate required parameters
+        self.validate_parameters(body=body)
+
         # Prepare query URL
-        _url_path = '/api/rest/v2/group/addgroup'
+        _url_path = '/tspublic/rest/v2/group/addgroup'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_url = APIHelper.clean_url(_query_builder)
@@ -521,7 +545,7 @@ class GroupController(BaseController):
 
     def remove_groups_from_group(self,
                                  body):
-        """Does a PUT request to /api/rest/v2/group/removegroup.
+        """Does a PUT request to /tspublic/rest/v2/group/removegroup.
 
         To programmatically remove groups from a group, use API endpoint. 
          The API removes only the group association. It does not delete the
@@ -530,8 +554,8 @@ class GroupController(BaseController):
          given,then user id will be considered.
 
         Args:
-            body (ApiRestV2GroupRemovegroupRequest): TODO: type description
-                here.
+            body (TspublicRestV2GroupRemovegroupRequest): TODO: type
+                description here.
 
         Returns:
             bool: Response from the API. Successfully removed groups from
@@ -545,8 +569,11 @@ class GroupController(BaseController):
 
         """
 
+        # Validate required parameters
+        self.validate_parameters(body=body)
+
         # Prepare query URL
-        _url_path = '/api/rest/v2/group/removegroup'
+        _url_path = '/tspublic/rest/v2/group/removegroup'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_url = APIHelper.clean_url(_query_builder)
@@ -574,7 +601,7 @@ class GroupController(BaseController):
 
     def search_groups(self,
                       body):
-        """Does a POST request to /api/rest/v2/group/search.
+        """Does a POST request to /tspublic/rest/v2/group/search.
 
         To get the details of a specific group account or all groups in the
         ThoughtSpot system use this end point. 
@@ -582,11 +609,16 @@ class GroupController(BaseController):
          response.
 
         Args:
-            body (ApiRestV2GroupSearchRequest): TODO: type description here.
+            body (TspublicRestV2GroupSearchRequest): TODO: type description
+                here.
 
         Returns:
-            list of GroupResponse: Response from the API.  Array of group
-                details matching the search criteria
+            object: Response from the API. Array of group details matching the
+                search criteria and the output fields. 
+
+ If no output fields
+                are specified then the response structure will match that of
+                GET /tspublic/rest/v2/group
 
         Raises:
             APIException: When an error occurs while fetching the data from
@@ -596,15 +628,17 @@ class GroupController(BaseController):
 
         """
 
+        # Validate required parameters
+        self.validate_parameters(body=body)
+
         # Prepare query URL
-        _url_path = '/api/rest/v2/group/search'
+        _url_path = '/tspublic/rest/v2/group/search'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_url = APIHelper.clean_url(_query_builder)
 
         # Prepare headers
         _headers = {
-            'accept': 'application/json',
             'Content-Type': 'application/json'
         }
 
@@ -620,6 +654,6 @@ class GroupController(BaseController):
             raise ErrorResponseException('Operation failed or unauthorized request', _response)
         self.validate_response(_response)
 
-        decoded = APIHelper.json_deserialize(_response.text, GroupResponse.from_dictionary)
+        decoded = _response.text
 
         return decoded

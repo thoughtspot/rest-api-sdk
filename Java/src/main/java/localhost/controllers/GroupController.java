@@ -9,7 +9,6 @@ package localhost.controllers;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import localhost.ApiHelper;
@@ -24,16 +23,16 @@ import localhost.http.client.HttpContext;
 import localhost.http.request.HttpRequest;
 import localhost.http.response.HttpResponse;
 import localhost.http.response.HttpStringResponse;
-import localhost.models.ApiRestV2GroupAddgroupRequest;
-import localhost.models.ApiRestV2GroupAddprivilegeRequest;
-import localhost.models.ApiRestV2GroupAdduserRequest;
-import localhost.models.ApiRestV2GroupCreateRequest;
-import localhost.models.ApiRestV2GroupRemovegroupRequest;
-import localhost.models.ApiRestV2GroupRemoveprivilegeRequest;
-import localhost.models.ApiRestV2GroupRemoveuserRequest;
-import localhost.models.ApiRestV2GroupSearchRequest;
-import localhost.models.ApiRestV2GroupUpdateRequest;
 import localhost.models.GroupResponse;
+import localhost.models.TspublicRestV2GroupAddgroupRequest;
+import localhost.models.TspublicRestV2GroupAddprivilegeRequest;
+import localhost.models.TspublicRestV2GroupAdduserRequest;
+import localhost.models.TspublicRestV2GroupCreateRequest;
+import localhost.models.TspublicRestV2GroupRemovegroupRequest;
+import localhost.models.TspublicRestV2GroupRemoveprivilegeRequest;
+import localhost.models.TspublicRestV2GroupRemoveuserRequest;
+import localhost.models.TspublicRestV2GroupSearchRequest;
+import localhost.models.TspublicRestV2GroupUpdateRequest;
 
 /**
  * This class lists all the endpoints of the groups.
@@ -112,7 +111,7 @@ public final class GroupController extends BaseController {
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/group");
+                + "/tspublic/rest/v2/group");
 
         //load all query parameters
         Map<String, Object> queryParameters = new HashMap<>();
@@ -121,8 +120,9 @@ public final class GroupController extends BaseController {
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
-        headers.add("Content-Type", config.getContentType());
+        headers.add("X-Requested-By", config.getXRequestedBy());
         headers.add("Accept-Language", config.getAcceptLanguage());
+        headers.add("Content-Type", config.getContentType());
         headers.add("user-agent", BaseController.userAgent);
         headers.add("accept", "application/json");
 
@@ -182,7 +182,7 @@ public final class GroupController extends BaseController {
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
     public GroupResponse createGroup(
-            final ApiRestV2GroupCreateRequest body) throws ApiException, IOException {
+            final TspublicRestV2GroupCreateRequest body) throws ApiException, IOException {
         HttpRequest request = buildCreateGroupRequest(body);
         authManagers.get("global").apply(request);
 
@@ -204,7 +204,7 @@ public final class GroupController extends BaseController {
      * @return    Returns the GroupResponse response from the API call
      */
     public CompletableFuture<GroupResponse> createGroupAsync(
-            final ApiRestV2GroupCreateRequest body) {
+            final TspublicRestV2GroupCreateRequest body) {
         return makeHttpCallAsync(() -> buildCreateGroupRequest(body),
             req -> authManagers.get("global").applyAsync(req)
                 .thenCompose(request -> getClientInstance()
@@ -216,17 +216,23 @@ public final class GroupController extends BaseController {
      * Builds the HttpRequest object for createGroup.
      */
     private HttpRequest buildCreateGroupRequest(
-            final ApiRestV2GroupCreateRequest body) throws JsonProcessingException {
+            final TspublicRestV2GroupCreateRequest body) throws JsonProcessingException {
+        //validating required parameters
+        if (null == body) {
+            throw new NullPointerException("The parameter \"body\" is a required parameter and cannot be null.");
+        }
+
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/group/create");
+                + "/tspublic/rest/v2/group/create");
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
         headers.add("Content-Type", "application/json");
+        headers.add("X-Requested-By", config.getXRequestedBy());
         headers.add("Accept-Language", config.getAcceptLanguage());
         headers.add("user-agent", BaseController.userAgent);
         headers.add("accept", "application/json");
@@ -283,7 +289,7 @@ public final class GroupController extends BaseController {
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
     public Boolean updateGroup(
-            final ApiRestV2GroupUpdateRequest body) throws ApiException, IOException {
+            final TspublicRestV2GroupUpdateRequest body) throws ApiException, IOException {
         HttpRequest request = buildUpdateGroupRequest(body);
         authManagers.get("global").apply(request);
 
@@ -301,7 +307,7 @@ public final class GroupController extends BaseController {
      * @return    Returns the Boolean response from the API call
      */
     public CompletableFuture<Boolean> updateGroupAsync(
-            final ApiRestV2GroupUpdateRequest body) {
+            final TspublicRestV2GroupUpdateRequest body) {
         return makeHttpCallAsync(() -> buildUpdateGroupRequest(body),
             req -> authManagers.get("global").applyAsync(req)
                 .thenCompose(request -> getClientInstance()
@@ -313,17 +319,23 @@ public final class GroupController extends BaseController {
      * Builds the HttpRequest object for updateGroup.
      */
     private HttpRequest buildUpdateGroupRequest(
-            final ApiRestV2GroupUpdateRequest body) throws JsonProcessingException {
+            final TspublicRestV2GroupUpdateRequest body) throws JsonProcessingException {
+        //validating required parameters
+        if (null == body) {
+            throw new NullPointerException("The parameter \"body\" is a required parameter and cannot be null.");
+        }
+
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/group/update");
+                + "/tspublic/rest/v2/group/update");
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
         headers.add("Content-Type", "application/json");
+        headers.add("X-Requested-By", config.getXRequestedBy());
         headers.add("Accept-Language", config.getAcceptLanguage());
         headers.add("user-agent", BaseController.userAgent);
 
@@ -419,7 +431,7 @@ public final class GroupController extends BaseController {
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/group/delete");
+                + "/tspublic/rest/v2/group/delete");
 
         //load all query parameters
         Map<String, Object> queryParameters = new HashMap<>();
@@ -428,8 +440,9 @@ public final class GroupController extends BaseController {
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
-        headers.add("Content-Type", config.getContentType());
+        headers.add("X-Requested-By", config.getXRequestedBy());
         headers.add("Accept-Language", config.getAcceptLanguage());
+        headers.add("Content-Type", config.getContentType());
         headers.add("user-agent", BaseController.userAgent);
 
         //prepare and invoke the API call request to fetch the response
@@ -484,7 +497,7 @@ public final class GroupController extends BaseController {
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
     public Boolean addPrivilegesToGroup(
-            final ApiRestV2GroupAddprivilegeRequest body) throws ApiException, IOException {
+            final TspublicRestV2GroupAddprivilegeRequest body) throws ApiException, IOException {
         HttpRequest request = buildAddPrivilegesToGroupRequest(body);
         authManagers.get("global").apply(request);
 
@@ -503,7 +516,7 @@ public final class GroupController extends BaseController {
      * @return    Returns the Boolean response from the API call
      */
     public CompletableFuture<Boolean> addPrivilegesToGroupAsync(
-            final ApiRestV2GroupAddprivilegeRequest body) {
+            final TspublicRestV2GroupAddprivilegeRequest body) {
         return makeHttpCallAsync(() -> buildAddPrivilegesToGroupRequest(body),
             req -> authManagers.get("global").applyAsync(req)
                 .thenCompose(request -> getClientInstance()
@@ -515,17 +528,23 @@ public final class GroupController extends BaseController {
      * Builds the HttpRequest object for addPrivilegesToGroup.
      */
     private HttpRequest buildAddPrivilegesToGroupRequest(
-            final ApiRestV2GroupAddprivilegeRequest body) throws JsonProcessingException {
+            final TspublicRestV2GroupAddprivilegeRequest body) throws JsonProcessingException {
+        //validating required parameters
+        if (null == body) {
+            throw new NullPointerException("The parameter \"body\" is a required parameter and cannot be null.");
+        }
+
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/group/addprivilege");
+                + "/tspublic/rest/v2/group/addprivilege");
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
         headers.add("Content-Type", "application/json");
+        headers.add("X-Requested-By", config.getXRequestedBy());
         headers.add("Accept-Language", config.getAcceptLanguage());
         headers.add("user-agent", BaseController.userAgent);
 
@@ -581,7 +600,7 @@ public final class GroupController extends BaseController {
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
     public Boolean removePrivilegesFromGroup(
-            final ApiRestV2GroupRemoveprivilegeRequest body) throws ApiException, IOException {
+            final TspublicRestV2GroupRemoveprivilegeRequest body) throws ApiException, IOException {
         HttpRequest request = buildRemovePrivilegesFromGroupRequest(body);
         authManagers.get("global").apply(request);
 
@@ -600,7 +619,7 @@ public final class GroupController extends BaseController {
      * @return    Returns the Boolean response from the API call
      */
     public CompletableFuture<Boolean> removePrivilegesFromGroupAsync(
-            final ApiRestV2GroupRemoveprivilegeRequest body) {
+            final TspublicRestV2GroupRemoveprivilegeRequest body) {
         return makeHttpCallAsync(() -> buildRemovePrivilegesFromGroupRequest(body),
             req -> authManagers.get("global").applyAsync(req)
                 .thenCompose(request -> getClientInstance()
@@ -612,17 +631,23 @@ public final class GroupController extends BaseController {
      * Builds the HttpRequest object for removePrivilegesFromGroup.
      */
     private HttpRequest buildRemovePrivilegesFromGroupRequest(
-            final ApiRestV2GroupRemoveprivilegeRequest body) throws JsonProcessingException {
+            final TspublicRestV2GroupRemoveprivilegeRequest body) throws JsonProcessingException {
+        //validating required parameters
+        if (null == body) {
+            throw new NullPointerException("The parameter \"body\" is a required parameter and cannot be null.");
+        }
+
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/group/removeprivilege");
+                + "/tspublic/rest/v2/group/removeprivilege");
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
         headers.add("Content-Type", "application/json");
+        headers.add("X-Requested-By", config.getXRequestedBy());
         headers.add("Accept-Language", config.getAcceptLanguage());
         headers.add("user-agent", BaseController.userAgent);
 
@@ -678,7 +703,7 @@ public final class GroupController extends BaseController {
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
     public Boolean addUsersToGroup(
-            final ApiRestV2GroupAdduserRequest body) throws ApiException, IOException {
+            final TspublicRestV2GroupAdduserRequest body) throws ApiException, IOException {
         HttpRequest request = buildAddUsersToGroupRequest(body);
         authManagers.get("global").apply(request);
 
@@ -697,7 +722,7 @@ public final class GroupController extends BaseController {
      * @return    Returns the Boolean response from the API call
      */
     public CompletableFuture<Boolean> addUsersToGroupAsync(
-            final ApiRestV2GroupAdduserRequest body) {
+            final TspublicRestV2GroupAdduserRequest body) {
         return makeHttpCallAsync(() -> buildAddUsersToGroupRequest(body),
             req -> authManagers.get("global").applyAsync(req)
                 .thenCompose(request -> getClientInstance()
@@ -709,17 +734,23 @@ public final class GroupController extends BaseController {
      * Builds the HttpRequest object for addUsersToGroup.
      */
     private HttpRequest buildAddUsersToGroupRequest(
-            final ApiRestV2GroupAdduserRequest body) throws JsonProcessingException {
+            final TspublicRestV2GroupAdduserRequest body) throws JsonProcessingException {
+        //validating required parameters
+        if (null == body) {
+            throw new NullPointerException("The parameter \"body\" is a required parameter and cannot be null.");
+        }
+
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/group/adduser");
+                + "/tspublic/rest/v2/group/adduser");
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
         headers.add("Content-Type", "application/json");
+        headers.add("X-Requested-By", config.getXRequestedBy());
         headers.add("Accept-Language", config.getAcceptLanguage());
         headers.add("user-agent", BaseController.userAgent);
 
@@ -774,7 +805,7 @@ public final class GroupController extends BaseController {
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
     public Boolean removeUsersFromGroup(
-            final ApiRestV2GroupRemoveuserRequest body) throws ApiException, IOException {
+            final TspublicRestV2GroupRemoveuserRequest body) throws ApiException, IOException {
         HttpRequest request = buildRemoveUsersFromGroupRequest(body);
         authManagers.get("global").apply(request);
 
@@ -792,7 +823,7 @@ public final class GroupController extends BaseController {
      * @return    Returns the Boolean response from the API call
      */
     public CompletableFuture<Boolean> removeUsersFromGroupAsync(
-            final ApiRestV2GroupRemoveuserRequest body) {
+            final TspublicRestV2GroupRemoveuserRequest body) {
         return makeHttpCallAsync(() -> buildRemoveUsersFromGroupRequest(body),
             req -> authManagers.get("global").applyAsync(req)
                 .thenCompose(request -> getClientInstance()
@@ -804,17 +835,23 @@ public final class GroupController extends BaseController {
      * Builds the HttpRequest object for removeUsersFromGroup.
      */
     private HttpRequest buildRemoveUsersFromGroupRequest(
-            final ApiRestV2GroupRemoveuserRequest body) throws JsonProcessingException {
+            final TspublicRestV2GroupRemoveuserRequest body) throws JsonProcessingException {
+        //validating required parameters
+        if (null == body) {
+            throw new NullPointerException("The parameter \"body\" is a required parameter and cannot be null.");
+        }
+
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/group/removeuser");
+                + "/tspublic/rest/v2/group/removeuser");
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
         headers.add("Content-Type", "application/json");
+        headers.add("X-Requested-By", config.getXRequestedBy());
         headers.add("Accept-Language", config.getAcceptLanguage());
         headers.add("user-agent", BaseController.userAgent);
 
@@ -869,7 +906,7 @@ public final class GroupController extends BaseController {
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
     public Boolean addGroupsToGroup(
-            final ApiRestV2GroupAddgroupRequest body) throws ApiException, IOException {
+            final TspublicRestV2GroupAddgroupRequest body) throws ApiException, IOException {
         HttpRequest request = buildAddGroupsToGroupRequest(body);
         authManagers.get("global").apply(request);
 
@@ -887,7 +924,7 @@ public final class GroupController extends BaseController {
      * @return    Returns the Boolean response from the API call
      */
     public CompletableFuture<Boolean> addGroupsToGroupAsync(
-            final ApiRestV2GroupAddgroupRequest body) {
+            final TspublicRestV2GroupAddgroupRequest body) {
         return makeHttpCallAsync(() -> buildAddGroupsToGroupRequest(body),
             req -> authManagers.get("global").applyAsync(req)
                 .thenCompose(request -> getClientInstance()
@@ -899,17 +936,23 @@ public final class GroupController extends BaseController {
      * Builds the HttpRequest object for addGroupsToGroup.
      */
     private HttpRequest buildAddGroupsToGroupRequest(
-            final ApiRestV2GroupAddgroupRequest body) throws JsonProcessingException {
+            final TspublicRestV2GroupAddgroupRequest body) throws JsonProcessingException {
+        //validating required parameters
+        if (null == body) {
+            throw new NullPointerException("The parameter \"body\" is a required parameter and cannot be null.");
+        }
+
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/group/addgroup");
+                + "/tspublic/rest/v2/group/addgroup");
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
         headers.add("Content-Type", "application/json");
+        headers.add("X-Requested-By", config.getXRequestedBy());
         headers.add("Accept-Language", config.getAcceptLanguage());
         headers.add("user-agent", BaseController.userAgent);
 
@@ -964,7 +1007,7 @@ public final class GroupController extends BaseController {
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
     public Boolean removeGroupsFromGroup(
-            final ApiRestV2GroupRemovegroupRequest body) throws ApiException, IOException {
+            final TspublicRestV2GroupRemovegroupRequest body) throws ApiException, IOException {
         HttpRequest request = buildRemoveGroupsFromGroupRequest(body);
         authManagers.get("global").apply(request);
 
@@ -982,7 +1025,7 @@ public final class GroupController extends BaseController {
      * @return    Returns the Boolean response from the API call
      */
     public CompletableFuture<Boolean> removeGroupsFromGroupAsync(
-            final ApiRestV2GroupRemovegroupRequest body) {
+            final TspublicRestV2GroupRemovegroupRequest body) {
         return makeHttpCallAsync(() -> buildRemoveGroupsFromGroupRequest(body),
             req -> authManagers.get("global").applyAsync(req)
                 .thenCompose(request -> getClientInstance()
@@ -994,17 +1037,23 @@ public final class GroupController extends BaseController {
      * Builds the HttpRequest object for removeGroupsFromGroup.
      */
     private HttpRequest buildRemoveGroupsFromGroupRequest(
-            final ApiRestV2GroupRemovegroupRequest body) throws JsonProcessingException {
+            final TspublicRestV2GroupRemovegroupRequest body) throws JsonProcessingException {
+        //validating required parameters
+        if (null == body) {
+            throw new NullPointerException("The parameter \"body\" is a required parameter and cannot be null.");
+        }
+
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/group/removegroup");
+                + "/tspublic/rest/v2/group/removegroup");
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
         headers.add("Content-Type", "application/json");
+        headers.add("X-Requested-By", config.getXRequestedBy());
         headers.add("Accept-Language", config.getAcceptLanguage());
         headers.add("user-agent", BaseController.userAgent);
 
@@ -1053,12 +1102,12 @@ public final class GroupController extends BaseController {
      * To get the details of a specific group account or all groups in the ThoughtSpot system use
      * this end point. If no inputs are provided, then all groups are included in the response.
      * @param  body  Required parameter: Example:
-     * @return    Returns the List of GroupResponse response from the API call
+     * @return    Returns the Object response from the API call
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
-    public List<GroupResponse> searchGroups(
-            final ApiRestV2GroupSearchRequest body) throws ApiException, IOException {
+    public Object searchGroups(
+            final TspublicRestV2GroupSearchRequest body) throws ApiException, IOException {
         HttpRequest request = buildSearchGroupsRequest(body);
         authManagers.get("global").apply(request);
 
@@ -1072,10 +1121,10 @@ public final class GroupController extends BaseController {
      * To get the details of a specific group account or all groups in the ThoughtSpot system use
      * this end point. If no inputs are provided, then all groups are included in the response.
      * @param  body  Required parameter: Example:
-     * @return    Returns the List of GroupResponse response from the API call
+     * @return    Returns the Object response from the API call
      */
-    public CompletableFuture<List<GroupResponse>> searchGroupsAsync(
-            final ApiRestV2GroupSearchRequest body) {
+    public CompletableFuture<Object> searchGroupsAsync(
+            final TspublicRestV2GroupSearchRequest body) {
         return makeHttpCallAsync(() -> buildSearchGroupsRequest(body),
             req -> authManagers.get("global").applyAsync(req)
                 .thenCompose(request -> getClientInstance()
@@ -1087,20 +1136,25 @@ public final class GroupController extends BaseController {
      * Builds the HttpRequest object for searchGroups.
      */
     private HttpRequest buildSearchGroupsRequest(
-            final ApiRestV2GroupSearchRequest body) throws JsonProcessingException {
+            final TspublicRestV2GroupSearchRequest body) throws JsonProcessingException {
+        //validating required parameters
+        if (null == body) {
+            throw new NullPointerException("The parameter \"body\" is a required parameter and cannot be null.");
+        }
+
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/group/search");
+                + "/tspublic/rest/v2/group/search");
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
         headers.add("Content-Type", "application/json");
+        headers.add("X-Requested-By", config.getXRequestedBy());
         headers.add("Accept-Language", config.getAcceptLanguage());
         headers.add("user-agent", BaseController.userAgent);
-        headers.add("accept", "application/json");
 
         //prepare and invoke the API call request to fetch the response
         String bodyJson = ApiHelper.serialize(body);
@@ -1116,9 +1170,9 @@ public final class GroupController extends BaseController {
 
     /**
      * Processes the response for searchGroups.
-     * @return An object of type List of GroupResponse
+     * @return An object of type Object
      */
-    private List<GroupResponse> handleSearchGroupsResponse(
+    private Object handleSearchGroupsResponse(
             HttpContext context) throws ApiException, IOException {
         HttpResponse response = context.getResponse();
 
@@ -1138,8 +1192,8 @@ public final class GroupController extends BaseController {
 
         //extract result from the http response
         String responseBody = ((HttpStringResponse) response).getBody();
-        List<GroupResponse> result = ApiHelper.deserializeArray(responseBody,
-                GroupResponse[].class);
+        Object result = responseBody;
+
         return result;
     }
 

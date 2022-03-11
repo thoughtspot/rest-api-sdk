@@ -11,21 +11,21 @@ import {
   adminsyncPrincipalResponseSchema,
 } from '../models/adminsyncPrincipalResponse';
 import {
-  ApiRestV2AdminChangeownerRequest,
-  apiRestV2AdminChangeownerRequestSchema,
-} from '../models/apiRestV2AdminChangeownerRequest';
+  TspublicRestV2AdminChangeownerRequest,
+  tspublicRestV2AdminChangeownerRequestSchema,
+} from '../models/tspublicRestV2AdminChangeownerRequest';
 import {
-  ApiRestV2AdminConfigurationUpdateRequest,
-  apiRestV2AdminConfigurationUpdateRequestSchema,
-} from '../models/apiRestV2AdminConfigurationUpdateRequest';
+  TspublicRestV2AdminConfigurationUpdateRequest,
+  tspublicRestV2AdminConfigurationUpdateRequestSchema,
+} from '../models/tspublicRestV2AdminConfigurationUpdateRequest';
 import {
-  ApiRestV2AdminResetpasswordRequest,
-  apiRestV2AdminResetpasswordRequestSchema,
-} from '../models/apiRestV2AdminResetpasswordRequest';
+  TspublicRestV2AdminResetpasswordRequest,
+  tspublicRestV2AdminResetpasswordRequestSchema,
+} from '../models/tspublicRestV2AdminResetpasswordRequest';
 import {
-  ApiRestV2AdminSyncprincipalRequest,
-  apiRestV2AdminSyncprincipalRequestSchema,
-} from '../models/apiRestV2AdminSyncprincipalRequest';
+  TspublicRestV2AdminSyncprincipalRequest,
+  tspublicRestV2AdminSyncprincipalRequestSchema,
+} from '../models/tspublicRestV2AdminSyncprincipalRequest';
 import { boolean, unknown } from '../schema';
 import { BaseController } from './baseController';
 
@@ -38,7 +38,10 @@ export class AdminController extends BaseController {
   async getClusterConfig(
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<unknown>> {
-    const req = this.createRequest('GET', '/api/rest/v2/admin/configuration');
+    const req = this.createRequest(
+      'GET',
+      '/tspublic/rest/v2/admin/configuration'
+    );
     req.throwOn(500, ErrorResponseError, 'Operation failed or unauthorized request');
     return req.callAsJson(unknown(), requestOptions);
   }
@@ -53,7 +56,7 @@ export class AdminController extends BaseController {
   ): Promise<ApiResponse<unknown>> {
     const req = this.createRequest(
       'GET',
-      '/api/rest/v2/admin/configuration/overrides'
+      '/tspublic/rest/v2/admin/configuration/overrides'
     );
     req.throwOn(500, ErrorResponseError, 'Operation failed or unauthorized request');
     return req.callAsJson(unknown(), requestOptions);
@@ -66,15 +69,15 @@ export class AdminController extends BaseController {
    * @return Response from the API call
    */
   async updateClusterConfig(
-    body: ApiRestV2AdminConfigurationUpdateRequest,
+    body: TspublicRestV2AdminConfigurationUpdateRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<boolean>> {
     const req = this.createRequest(
       'PUT',
-      '/api/rest/v2/admin/configuration/update'
+      '/tspublic/rest/v2/admin/configuration/update'
     );
     const mapped = req.prepareArgs({
-      body: [body, apiRestV2AdminConfigurationUpdateRequestSchema],
+      body: [body, tspublicRestV2AdminConfigurationUpdateRequestSchema],
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
@@ -95,12 +98,15 @@ export class AdminController extends BaseController {
    * @return Response from the API call
    */
   async resetUserPassword(
-    body: ApiRestV2AdminResetpasswordRequest,
+    body: TspublicRestV2AdminResetpasswordRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<boolean>> {
-    const req = this.createRequest('PUT', '/api/rest/v2/admin/resetpassword');
+    const req = this.createRequest(
+      'PUT',
+      '/tspublic/rest/v2/admin/resetpassword'
+    );
     const mapped = req.prepareArgs({
-      body: [body, apiRestV2AdminResetpasswordRequestSchema],
+      body: [body, tspublicRestV2AdminResetpasswordRequestSchema],
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
@@ -125,12 +131,15 @@ export class AdminController extends BaseController {
    * @return Response from the API call
    */
   async syncPrincipal(
-    body: ApiRestV2AdminSyncprincipalRequest,
+    body: TspublicRestV2AdminSyncprincipalRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<AdminsyncPrincipalResponse>> {
-    const req = this.createRequest('PUT', '/api/rest/v2/admin/syncprincipal');
+    const req = this.createRequest(
+      'PUT',
+      '/tspublic/rest/v2/admin/syncprincipal'
+    );
     const mapped = req.prepareArgs({
-      body: [body, apiRestV2AdminSyncprincipalRequestSchema],
+      body: [body, tspublicRestV2AdminSyncprincipalRequestSchema],
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
@@ -149,12 +158,15 @@ export class AdminController extends BaseController {
    * @return Response from the API call
    */
   async changeOwnerOfObjects(
-    body: ApiRestV2AdminChangeownerRequest,
+    body: TspublicRestV2AdminChangeownerRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<boolean>> {
-    const req = this.createRequest('PUT', '/api/rest/v2/admin/changeowner');
+    const req = this.createRequest(
+      'PUT',
+      '/tspublic/rest/v2/admin/changeowner'
+    );
     const mapped = req.prepareArgs({
-      body: [body, apiRestV2AdminChangeownerRequestSchema],
+      body: [body, tspublicRestV2AdminChangeownerRequestSchema],
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);

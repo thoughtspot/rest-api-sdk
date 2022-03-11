@@ -1,7 +1,7 @@
 
 # Type 13 Enum
 
-Type of the data connection.
+Type of the data object
 
 ## Enumeration
 
@@ -11,14 +11,8 @@ Type of the data connection.
 
 | Name |
 |  --- |
-| `SNOWFLAKE` |
-| `AMAZONREDSHIFT` |
-| `GOOGLEBIGQUERY` |
-| `AZURESYNAPSE` |
-| `TERADATA` |
-| `STARBURST` |
-| `SAPHANA` |
-| `ORACLEADW` |
-| `DATABRICKS` |
-| `DENODO` |
+| `LIVEBOARD` |
+| `DATAOBJECT` |
+| `COLUMN` |
+| `JOIN` |
 

@@ -10,17 +10,17 @@ group_controller = client.group
 
 ## Methods
 
-* [Get Group](/doc/controllers/group.md#get-group)
-* [Create Group](/doc/controllers/group.md#create-group)
-* [Update Group](/doc/controllers/group.md#update-group)
-* [Delete Group](/doc/controllers/group.md#delete-group)
-* [Add Privileges to Group](/doc/controllers/group.md#add-privileges-to-group)
-* [Remove Privileges From Group](/doc/controllers/group.md#remove-privileges-from-group)
-* [Add Users to Group](/doc/controllers/group.md#add-users-to-group)
-* [Remove Users From Group](/doc/controllers/group.md#remove-users-from-group)
-* [Add Groups to Group](/doc/controllers/group.md#add-groups-to-group)
-* [Remove Groups From Group](/doc/controllers/group.md#remove-groups-from-group)
-* [Search Groups](/doc/controllers/group.md#search-groups)
+* [Get Group](../../doc/controllers/group.md#get-group)
+* [Create Group](../../doc/controllers/group.md#create-group)
+* [Update Group](../../doc/controllers/group.md#update-group)
+* [Delete Group](../../doc/controllers/group.md#delete-group)
+* [Add Privileges to Group](../../doc/controllers/group.md#add-privileges-to-group)
+* [Remove Privileges From Group](../../doc/controllers/group.md#remove-privileges-from-group)
+* [Add Users to Group](../../doc/controllers/group.md#add-users-to-group)
+* [Remove Users From Group](../../doc/controllers/group.md#remove-users-from-group)
+* [Add Groups to Group](../../doc/controllers/group.md#add-groups-to-group)
+* [Remove Groups From Group](../../doc/controllers/group.md#remove-groups-from-group)
+* [Search Groups](../../doc/controllers/group.md#search-groups)
 
 
 # Get Group
@@ -44,7 +44,7 @@ def get_group(self,
 
 ## Response Type
 
-[`GroupResponse`](/doc/models/group-response.md)
+[`GroupResponse`](../../doc/models/group-response.md)
 
 ## Example Usage
 
@@ -56,7 +56,7 @@ result = group_controller.get_group()
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Create Group
@@ -80,16 +80,16 @@ def create_group(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2GroupCreateRequest`](/doc/models/api-rest-v2-group-create-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2GroupCreateRequest`](../../doc/models/tspublic-rest-v2-group-create-request.md) | Body, Required | - |
 
 ## Response Type
 
-[`GroupResponse`](/doc/models/group-response.md)
+[`GroupResponse`](../../doc/models/group-response.md)
 
 ## Example Usage
 
 ```python
-body = ApiRestV2GroupCreateRequest()
+body = TspublicRestV2GroupCreateRequest()
 body.name = 'name6'
 body.display_name = 'displayName6'
 
@@ -100,7 +100,7 @@ result = group_controller.create_group(body)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Update Group
@@ -120,7 +120,7 @@ def update_group(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2GroupUpdateRequest`](/doc/models/api-rest-v2-group-update-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2GroupUpdateRequest`](../../doc/models/tspublic-rest-v2-group-update-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -129,7 +129,7 @@ def update_group(self,
 ## Example Usage
 
 ```python
-body = ApiRestV2GroupUpdateRequest()
+body = TspublicRestV2GroupUpdateRequest()
 
 result = group_controller.update_group(body)
 ```
@@ -138,7 +138,7 @@ result = group_controller.update_group(body)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Delete Group
@@ -174,7 +174,7 @@ result = group_controller.delete_group()
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Add Privileges to Group
@@ -194,7 +194,7 @@ def add_privileges_to_group(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2GroupAddprivilegeRequest`](/doc/models/api-rest-v2-group-addprivilege-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2GroupAddprivilegeRequest`](../../doc/models/tspublic-rest-v2-group-addprivilege-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -203,7 +203,7 @@ def add_privileges_to_group(self,
 ## Example Usage
 
 ```python
-body = ApiRestV2GroupAddprivilegeRequest()
+body = TspublicRestV2GroupAddprivilegeRequest()
 
 result = group_controller.add_privileges_to_group(body)
 ```
@@ -212,7 +212,7 @@ result = group_controller.add_privileges_to_group(body)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Remove Privileges From Group
@@ -232,7 +232,7 @@ def remove_privileges_from_group(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2GroupRemoveprivilegeRequest`](/doc/models/api-rest-v2-group-removeprivilege-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2GroupRemoveprivilegeRequest`](../../doc/models/tspublic-rest-v2-group-removeprivilege-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -241,7 +241,7 @@ def remove_privileges_from_group(self,
 ## Example Usage
 
 ```python
-body = ApiRestV2GroupRemoveprivilegeRequest()
+body = TspublicRestV2GroupRemoveprivilegeRequest()
 
 result = group_controller.remove_privileges_from_group(body)
 ```
@@ -250,7 +250,7 @@ result = group_controller.remove_privileges_from_group(body)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Add Users to Group
@@ -270,7 +270,7 @@ def add_users_to_group(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2GroupAdduserRequest`](/doc/models/api-rest-v2-group-adduser-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2GroupAdduserRequest`](../../doc/models/tspublic-rest-v2-group-adduser-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -279,7 +279,11 @@ def add_users_to_group(self,
 ## Example Usage
 
 ```python
-body = ApiRestV2GroupAdduserRequest()
+body = TspublicRestV2GroupAdduserRequest()
+body.users = []
+
+body.users.append(UserNameAndIDInput())
+
 
 result = group_controller.add_users_to_group(body)
 ```
@@ -288,7 +292,7 @@ result = group_controller.add_users_to_group(body)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Remove Users From Group
@@ -308,7 +312,7 @@ def remove_users_from_group(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2GroupRemoveuserRequest`](/doc/models/api-rest-v2-group-removeuser-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2GroupRemoveuserRequest`](../../doc/models/tspublic-rest-v2-group-removeuser-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -317,7 +321,11 @@ def remove_users_from_group(self,
 ## Example Usage
 
 ```python
-body = ApiRestV2GroupRemoveuserRequest()
+body = TspublicRestV2GroupRemoveuserRequest()
+body.users = []
+
+body.users.append(UserNameAndIDInput())
+
 
 result = group_controller.remove_users_from_group(body)
 ```
@@ -326,7 +334,7 @@ result = group_controller.remove_users_from_group(body)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Add Groups to Group
@@ -346,7 +354,7 @@ def add_groups_to_group(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2GroupAddgroupRequest`](/doc/models/api-rest-v2-group-addgroup-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2GroupAddgroupRequest`](../../doc/models/tspublic-rest-v2-group-addgroup-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -355,7 +363,11 @@ def add_groups_to_group(self,
 ## Example Usage
 
 ```python
-body = ApiRestV2GroupAddgroupRequest()
+body = TspublicRestV2GroupAddgroupRequest()
+body.groups = []
+
+body.groups.append(GroupNameAndIDInput())
+
 
 result = group_controller.add_groups_to_group(body)
 ```
@@ -364,7 +376,7 @@ result = group_controller.add_groups_to_group(body)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Remove Groups From Group
@@ -384,7 +396,7 @@ def remove_groups_from_group(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2GroupRemovegroupRequest`](/doc/models/api-rest-v2-group-removegroup-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2GroupRemovegroupRequest`](../../doc/models/tspublic-rest-v2-group-removegroup-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -393,7 +405,11 @@ def remove_groups_from_group(self,
 ## Example Usage
 
 ```python
-body = ApiRestV2GroupRemovegroupRequest()
+body = TspublicRestV2GroupRemovegroupRequest()
+body.groups = []
+
+body.groups.append(GroupNameAndIDInput())
+
 
 result = group_controller.remove_groups_from_group(body)
 ```
@@ -402,7 +418,7 @@ result = group_controller.remove_groups_from_group(body)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Search Groups
@@ -420,16 +436,16 @@ def search_groups(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2GroupSearchRequest`](/doc/models/api-rest-v2-group-search-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2GroupSearchRequest`](../../doc/models/tspublic-rest-v2-group-search-request.md) | Body, Required | - |
 
 ## Response Type
 
-[`List of GroupResponse`](/doc/models/group-response.md)
+`object`
 
 ## Example Usage
 
 ```python
-body = ApiRestV2GroupSearchRequest()
+body = TspublicRestV2GroupSearchRequest()
 
 result = group_controller.search_groups(body)
 ```
@@ -438,5 +454,5 @@ result = group_controller.search_groups(body)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 

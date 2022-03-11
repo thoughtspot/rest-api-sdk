@@ -10,13 +10,14 @@ user_controller = client.user
 
 ## Methods
 
-* [Get User](/doc/controllers/user.md#get-user)
-* [Create User](/doc/controllers/user.md#create-user)
-* [Update User](/doc/controllers/user.md#update-user)
-* [Delete User](/doc/controllers/user.md#delete-user)
-* [Add Groups to User](/doc/controllers/user.md#add-groups-to-user)
-* [Remove Groups From User](/doc/controllers/user.md#remove-groups-from-user)
-* [Search Users](/doc/controllers/user.md#search-users)
+* [Get User](../../doc/controllers/user.md#get-user)
+* [Create User](../../doc/controllers/user.md#create-user)
+* [Update User](../../doc/controllers/user.md#update-user)
+* [Delete User](../../doc/controllers/user.md#delete-user)
+* [Add Groups to User](../../doc/controllers/user.md#add-groups-to-user)
+* [Remove Groups From User](../../doc/controllers/user.md#remove-groups-from-user)
+* [Change Password of User](../../doc/controllers/user.md#change-password-of-user)
+* [Search Users](../../doc/controllers/user.md#search-users)
 
 
 # Get User
@@ -38,7 +39,7 @@ def get_user(self,
 
 ## Response Type
 
-[`UserResponse`](/doc/models/user-response.md)
+[`UserResponse`](../../doc/models/user-response.md)
 
 ## Example Usage
 
@@ -50,7 +51,7 @@ result = user_controller.get_user()
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Create User
@@ -70,16 +71,16 @@ def create_user(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2UserCreateRequest`](/doc/models/api-rest-v2-user-create-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2UserCreateRequest`](../../doc/models/tspublic-rest-v2-user-create-request.md) | Body, Required | - |
 
 ## Response Type
 
-[`UserResponse`](/doc/models/user-response.md)
+[`UserResponse`](../../doc/models/user-response.md)
 
 ## Example Usage
 
 ```python
-body = ApiRestV2UserCreateRequest()
+body = TspublicRestV2UserCreateRequest()
 body.name = 'name6'
 body.display_name = 'displayName6'
 body.password = 'password0'
@@ -91,7 +92,7 @@ result = user_controller.create_user(body)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Update User
@@ -111,7 +112,7 @@ def update_user(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2UserUpdateRequest`](/doc/models/api-rest-v2-user-update-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2UserUpdateRequest`](../../doc/models/tspublic-rest-v2-user-update-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -120,7 +121,7 @@ def update_user(self,
 ## Example Usage
 
 ```python
-body = ApiRestV2UserUpdateRequest()
+body = TspublicRestV2UserUpdateRequest()
 
 result = user_controller.update_user(body)
 ```
@@ -129,7 +130,7 @@ result = user_controller.update_user(body)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Delete User
@@ -165,7 +166,7 @@ result = user_controller.delete_user()
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Add Groups to User
@@ -185,7 +186,7 @@ def add_groups_to_user(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2UserAddgroupRequest`](/doc/models/api-rest-v2-user-addgroup-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2UserAddgroupRequest`](../../doc/models/tspublic-rest-v2-user-addgroup-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -194,7 +195,11 @@ def add_groups_to_user(self,
 ## Example Usage
 
 ```python
-body = ApiRestV2UserAddgroupRequest()
+body = TspublicRestV2UserAddgroupRequest()
+body.groups = []
+
+body.groups.append(GroupNameAndIDInput())
+
 
 result = user_controller.add_groups_to_user(body)
 ```
@@ -203,7 +208,7 @@ result = user_controller.add_groups_to_user(body)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Remove Groups From User
@@ -223,7 +228,7 @@ def remove_groups_from_user(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2UserRemovegroupRequest`](/doc/models/api-rest-v2-user-removegroup-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2UserRemovegroupRequest`](../../doc/models/tspublic-rest-v2-user-removegroup-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -232,7 +237,11 @@ def remove_groups_from_user(self,
 ## Example Usage
 
 ```python
-body = ApiRestV2UserRemovegroupRequest()
+body = TspublicRestV2UserRemovegroupRequest()
+body.groups = []
+
+body.groups.append(GroupNameAndIDInput())
+
 
 result = user_controller.remove_groups_from_user(body)
 ```
@@ -241,7 +250,45 @@ result = user_controller.remove_groups_from_user(body)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+
+
+# Change Password of User
+
+To change the password of a ThoughtSpot user account, use this endpoint.
+
+At least one of id or name of user is required. When both are given user id will be considered.
+
+```python
+def change_password_of_user(self,
+                           body)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`TspublicRestV2UserChangepasswordRequest`](../../doc/models/tspublic-rest-v2-user-changepassword-request.md) | Body, Required | - |
+
+## Response Type
+
+`bool`
+
+## Example Usage
+
+```python
+body = TspublicRestV2UserChangepasswordRequest()
+body.current_password = 'currentPassword0'
+body.new_password = 'newPassword0'
+
+result = user_controller.change_password_of_user(body)
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Search Users
@@ -257,16 +304,16 @@ def search_users(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2UserSearchRequest`](/doc/models/api-rest-v2-user-search-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2UserSearchRequest`](../../doc/models/tspublic-rest-v2-user-search-request.md) | Body, Required | - |
 
 ## Response Type
 
-[`List of UserResponse`](/doc/models/user-response.md)
+`object`
 
 ## Example Usage
 
 ```python
-body = ApiRestV2UserSearchRequest()
+body = TspublicRestV2UserSearchRequest()
 
 result = user_controller.search_users(body)
 ```
@@ -275,5 +322,5 @@ result = user_controller.search_users(body)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 

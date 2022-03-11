@@ -22,9 +22,9 @@ import localhost.http.client.HttpContext;
 import localhost.http.request.HttpRequest;
 import localhost.http.response.HttpResponse;
 import localhost.http.response.HttpStringResponse;
-import localhost.models.ApiRestV2DataAnswerRequest;
-import localhost.models.ApiRestV2DataLiveboardRequest;
-import localhost.models.ApiRestV2DataSearchRequest;
+import localhost.models.TspublicRestV2DataAnswerRequest;
+import localhost.models.TspublicRestV2DataLiveboardRequest;
+import localhost.models.TspublicRestV2DataSearchRequest;
 
 /**
  * This class lists all the endpoints of the groups.
@@ -63,7 +63,7 @@ public final class DataController extends BaseController {
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
     public Object searchQueryData(
-            final ApiRestV2DataSearchRequest body) throws ApiException, IOException {
+            final TspublicRestV2DataSearchRequest body) throws ApiException, IOException {
         HttpRequest request = buildSearchQueryDataRequest(body);
         authManagers.get("global").apply(request);
 
@@ -80,7 +80,7 @@ public final class DataController extends BaseController {
      * @return    Returns the Object response from the API call
      */
     public CompletableFuture<Object> searchQueryDataAsync(
-            final ApiRestV2DataSearchRequest body) {
+            final TspublicRestV2DataSearchRequest body) {
         return makeHttpCallAsync(() -> buildSearchQueryDataRequest(body),
             req -> authManagers.get("global").applyAsync(req)
                 .thenCompose(request -> getClientInstance()
@@ -92,17 +92,23 @@ public final class DataController extends BaseController {
      * Builds the HttpRequest object for searchQueryData.
      */
     private HttpRequest buildSearchQueryDataRequest(
-            final ApiRestV2DataSearchRequest body) throws JsonProcessingException {
+            final TspublicRestV2DataSearchRequest body) throws JsonProcessingException {
+        //validating required parameters
+        if (null == body) {
+            throw new NullPointerException("The parameter \"body\" is a required parameter and cannot be null.");
+        }
+
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/data/search");
+                + "/tspublic/rest/v2/data/search");
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
         headers.add("Content-Type", "application/json");
+        headers.add("X-Requested-By", config.getXRequestedBy());
         headers.add("Accept-Language", config.getAcceptLanguage());
         headers.add("user-agent", BaseController.userAgent);
 
@@ -155,7 +161,7 @@ public final class DataController extends BaseController {
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
     public Object answerData(
-            final ApiRestV2DataAnswerRequest body) throws ApiException, IOException {
+            final TspublicRestV2DataAnswerRequest body) throws ApiException, IOException {
         HttpRequest request = buildAnswerDataRequest(body);
         authManagers.get("global").apply(request);
 
@@ -171,7 +177,7 @@ public final class DataController extends BaseController {
      * @return    Returns the Object response from the API call
      */
     public CompletableFuture<Object> answerDataAsync(
-            final ApiRestV2DataAnswerRequest body) {
+            final TspublicRestV2DataAnswerRequest body) {
         return makeHttpCallAsync(() -> buildAnswerDataRequest(body),
             req -> authManagers.get("global").applyAsync(req)
                 .thenCompose(request -> getClientInstance()
@@ -183,17 +189,23 @@ public final class DataController extends BaseController {
      * Builds the HttpRequest object for answerData.
      */
     private HttpRequest buildAnswerDataRequest(
-            final ApiRestV2DataAnswerRequest body) throws JsonProcessingException {
+            final TspublicRestV2DataAnswerRequest body) throws JsonProcessingException {
+        //validating required parameters
+        if (null == body) {
+            throw new NullPointerException("The parameter \"body\" is a required parameter and cannot be null.");
+        }
+
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/data/answer");
+                + "/tspublic/rest/v2/data/answer");
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
         headers.add("Content-Type", "application/json");
+        headers.add("X-Requested-By", config.getXRequestedBy());
         headers.add("Accept-Language", config.getAcceptLanguage());
         headers.add("user-agent", BaseController.userAgent);
 
@@ -247,7 +259,7 @@ public final class DataController extends BaseController {
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
     public Object liveboardData(
-            final ApiRestV2DataLiveboardRequest body) throws ApiException, IOException {
+            final TspublicRestV2DataLiveboardRequest body) throws ApiException, IOException {
         HttpRequest request = buildLiveboardDataRequest(body);
         authManagers.get("global").apply(request);
 
@@ -264,7 +276,7 @@ public final class DataController extends BaseController {
      * @return    Returns the Object response from the API call
      */
     public CompletableFuture<Object> liveboardDataAsync(
-            final ApiRestV2DataLiveboardRequest body) {
+            final TspublicRestV2DataLiveboardRequest body) {
         return makeHttpCallAsync(() -> buildLiveboardDataRequest(body),
             req -> authManagers.get("global").applyAsync(req)
                 .thenCompose(request -> getClientInstance()
@@ -276,17 +288,23 @@ public final class DataController extends BaseController {
      * Builds the HttpRequest object for liveboardData.
      */
     private HttpRequest buildLiveboardDataRequest(
-            final ApiRestV2DataLiveboardRequest body) throws JsonProcessingException {
+            final TspublicRestV2DataLiveboardRequest body) throws JsonProcessingException {
+        //validating required parameters
+        if (null == body) {
+            throw new NullPointerException("The parameter \"body\" is a required parameter and cannot be null.");
+        }
+
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/data/liveboard");
+                + "/tspublic/rest/v2/data/liveboard");
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
         headers.add("Content-Type", "application/json");
+        headers.add("X-Requested-By", config.getXRequestedBy());
         headers.add("Accept-Language", config.getAcceptLanguage());
         headers.add("user-agent", BaseController.userAgent);
 

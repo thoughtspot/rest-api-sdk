@@ -7,33 +7,49 @@
 import { ApiResponse, RequestOptions } from '../core';
 import { ErrorResponseError } from '../errors/errorResponseError';
 import {
-  ApiRestV2ConnectionAddtableRequest,
-  apiRestV2ConnectionAddtableRequestSchema,
-} from '../models/apiRestV2ConnectionAddtableRequest';
-import {
-  ApiRestV2ConnectionCreateRequest,
-  apiRestV2ConnectionCreateRequestSchema,
-} from '../models/apiRestV2ConnectionCreateRequest';
-import {
-  ApiRestV2ConnectionRemovetableRequest,
-  apiRestV2ConnectionRemovetableRequestSchema,
-} from '../models/apiRestV2ConnectionRemovetableRequest';
-import {
-  ApiRestV2ConnectionSearchRequest,
-  apiRestV2ConnectionSearchRequestSchema,
-} from '../models/apiRestV2ConnectionSearchRequest';
-import {
-  ApiRestV2ConnectionUpdateRequest,
-  apiRestV2ConnectionUpdateRequestSchema,
-} from '../models/apiRestV2ConnectionUpdateRequest';
-import {
   ConnectionResponse,
   connectionResponseSchema,
 } from '../models/connectionResponse';
 import {
+  ConnectionTableColumnsResponse,
+  connectionTableColumnsResponseSchema,
+} from '../models/connectionTableColumnsResponse';
+import {
+  ConnectionTableResponse,
+  connectionTableResponseSchema,
+} from '../models/connectionTableResponse';
+import {
   CreateConnectionResponse,
   createConnectionResponseSchema,
 } from '../models/createConnectionResponse';
+import {
+  TspublicRestV2ConnectionAddtableRequest,
+  tspublicRestV2ConnectionAddtableRequestSchema,
+} from '../models/tspublicRestV2ConnectionAddtableRequest';
+import {
+  TspublicRestV2ConnectionCreateRequest,
+  tspublicRestV2ConnectionCreateRequestSchema,
+} from '../models/tspublicRestV2ConnectionCreateRequest';
+import {
+  TspublicRestV2ConnectionRemovetableRequest,
+  tspublicRestV2ConnectionRemovetableRequestSchema,
+} from '../models/tspublicRestV2ConnectionRemovetableRequest';
+import {
+  TspublicRestV2ConnectionSearchRequest,
+  tspublicRestV2ConnectionSearchRequestSchema,
+} from '../models/tspublicRestV2ConnectionSearchRequest';
+import {
+  TspublicRestV2ConnectionTablecoloumnRequest,
+  tspublicRestV2ConnectionTablecoloumnRequestSchema,
+} from '../models/tspublicRestV2ConnectionTablecoloumnRequest';
+import {
+  TspublicRestV2ConnectionTableRequest,
+  tspublicRestV2ConnectionTableRequestSchema,
+} from '../models/tspublicRestV2ConnectionTableRequest';
+import {
+  TspublicRestV2ConnectionUpdateRequest,
+  tspublicRestV2ConnectionUpdateRequestSchema,
+} from '../models/tspublicRestV2ConnectionUpdateRequest';
 import { array, boolean, string } from '../schema';
 import { BaseController } from './baseController';
 
@@ -48,11 +64,84 @@ export class ConnectionController extends BaseController {
     id: string,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ConnectionResponse>> {
-    const req = this.createRequest('GET', '/api/rest/v2/connection');
+    const req = this.createRequest('GET', '/tspublic/rest/v2/connection');
     const mapped = req.prepareArgs({ id: [id, string()] });
     req.query('id', mapped.id);
     req.throwOn(500, ErrorResponseError, 'Operation failed or unauthorized request');
     return req.callAsJson(connectionResponseSchema, requestOptions);
+  }
+
+  /**
+   * To get the list of databases for a connection, use this endpoint.
+   *
+   * The response will include databases from the data platform corresponding to the connection id
+   * provided.
+   *
+   * @param id The GUID of the connection
+   * @return Response from the API call
+   */
+  async getConnectionDatabase(
+    id: string,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<string[]>> {
+    const req = this.createRequest(
+      'GET',
+      '/tspublic/rest/v2/connection/database'
+    );
+    const mapped = req.prepareArgs({ id: [id, string()] });
+    req.query('id', mapped.id);
+    req.throwOn(500, ErrorResponseError, 'Operation failed or unauthorized request');
+    return req.callAsJson(array(string()), requestOptions);
+  }
+
+  /**
+   * To get the details of tables from a connection, use this endpoint.
+   *
+   * You can get the details of tables in the data platform for the connection id provided.
+   *
+   * @param body
+   * @return Response from the API call
+   */
+  async getConnectionTables(
+    body: TspublicRestV2ConnectionTableRequest,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<ConnectionTableResponse>> {
+    const req = this.createRequest(
+      'POST',
+      '/tspublic/rest/v2/connection/table'
+    );
+    const mapped = req.prepareArgs({
+      body: [body, tspublicRestV2ConnectionTableRequestSchema],
+    });
+    req.header('Content-Type', 'application/json');
+    req.json(mapped.body);
+    req.throwOn(500, ErrorResponseError, 'Operation failed or unauthorized request');
+    return req.callAsJson(connectionTableResponseSchema, requestOptions);
+  }
+
+  /**
+   * To get the details of columns in a table associated to a connection, use this endpoint.
+   *
+   * You can get the columns of any table available in the data platform for the connection id provided.
+   *
+   * @param body
+   * @return Response from the API call
+   */
+  async getConnectionTableColumns(
+    body: TspublicRestV2ConnectionTablecoloumnRequest,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<ConnectionTableColumnsResponse>> {
+    const req = this.createRequest(
+      'POST',
+      '/tspublic/rest/v2/connection/tablecoloumn'
+    );
+    const mapped = req.prepareArgs({
+      body: [body, tspublicRestV2ConnectionTablecoloumnRequestSchema],
+    });
+    req.header('Content-Type', 'application/json');
+    req.json(mapped.body);
+    req.throwOn(500, ErrorResponseError, 'Operation failed or unauthorized request');
+    return req.callAsJson(connectionTableColumnsResponseSchema, requestOptions);
   }
 
   /**
@@ -62,12 +151,15 @@ export class ConnectionController extends BaseController {
    * @return Response from the API call
    */
   async createConnection(
-    body: ApiRestV2ConnectionCreateRequest,
+    body: TspublicRestV2ConnectionCreateRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<CreateConnectionResponse>> {
-    const req = this.createRequest('POST', '/api/rest/v2/connection/create');
+    const req = this.createRequest(
+      'POST',
+      '/tspublic/rest/v2/connection/create'
+    );
     const mapped = req.prepareArgs({
-      body: [body, apiRestV2ConnectionCreateRequestSchema],
+      body: [body, tspublicRestV2ConnectionCreateRequestSchema],
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
@@ -82,12 +174,15 @@ export class ConnectionController extends BaseController {
    * @return Response from the API call
    */
   async updateConnection(
-    body: ApiRestV2ConnectionUpdateRequest,
+    body: TspublicRestV2ConnectionUpdateRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<boolean>> {
-    const req = this.createRequest('PUT', '/api/rest/v2/connection/update');
+    const req = this.createRequest(
+      'PUT',
+      '/tspublic/rest/v2/connection/update'
+    );
     const mapped = req.prepareArgs({
-      body: [body, apiRestV2ConnectionUpdateRequestSchema],
+      body: [body, tspublicRestV2ConnectionUpdateRequestSchema],
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
@@ -105,7 +200,10 @@ export class ConnectionController extends BaseController {
     id: string[],
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<boolean>> {
-    const req = this.createRequest('DELETE', '/api/rest/v2/connection/delete');
+    const req = this.createRequest(
+      'DELETE',
+      '/tspublic/rest/v2/connection/delete'
+    );
     const mapped = req.prepareArgs({ id: [id, array(string())] });
     req.query('id', mapped.id);
     req.throwOn(500, ErrorResponseError, 'Operation failed or unauthorized request');
@@ -119,12 +217,15 @@ export class ConnectionController extends BaseController {
    * @return Response from the API call
    */
   async addTableToConnection(
-    body: ApiRestV2ConnectionAddtableRequest,
+    body: TspublicRestV2ConnectionAddtableRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<boolean>> {
-    const req = this.createRequest('PUT', '/api/rest/v2/connection/addtable');
+    const req = this.createRequest(
+      'PUT',
+      '/tspublic/rest/v2/connection/addtable'
+    );
     const mapped = req.prepareArgs({
-      body: [body, apiRestV2ConnectionAddtableRequestSchema],
+      body: [body, tspublicRestV2ConnectionAddtableRequestSchema],
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
@@ -139,15 +240,15 @@ export class ConnectionController extends BaseController {
    * @return Response from the API call
    */
   async removeTableFromConnection(
-    body: ApiRestV2ConnectionRemovetableRequest,
+    body: TspublicRestV2ConnectionRemovetableRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<boolean>> {
     const req = this.createRequest(
       'PUT',
-      '/api/rest/v2/connection/removetable'
+      '/tspublic/rest/v2/connection/removetable'
     );
     const mapped = req.prepareArgs({
-      body: [body, apiRestV2ConnectionRemovetableRequestSchema],
+      body: [body, tspublicRestV2ConnectionRemovetableRequestSchema],
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
@@ -163,12 +264,15 @@ export class ConnectionController extends BaseController {
    * @return Response from the API call
    */
   async searchConnection(
-    body: ApiRestV2ConnectionSearchRequest,
+    body: TspublicRestV2ConnectionSearchRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ConnectionResponse[]>> {
-    const req = this.createRequest('POST', '/api/rest/v2/connection/search');
+    const req = this.createRequest(
+      'POST',
+      '/tspublic/rest/v2/connection/search'
+    );
     const mapped = req.prepareArgs({
-      body: [body, apiRestV2ConnectionSearchRequestSchema],
+      body: [body, tspublicRestV2ConnectionSearchRequestSchema],
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);

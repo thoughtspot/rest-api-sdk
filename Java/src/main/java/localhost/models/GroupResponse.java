@@ -37,12 +37,12 @@ public class GroupResponse {
     private Integer groupIdx;
     private Integer metadataVersion;
     private String tenantId;
-    private Integer indexVersion;
-    private Integer generationNum;
+    private Double indexVersion;
+    private Double generationNum;
     private Double created;
     private Double modified;
-    private UserNameAndID modifiedBy;
     private UserNameAndID author;
+    private UserNameAndID modifiedBy;
     private UserNameAndID owner;
 
     /**
@@ -75,12 +75,12 @@ public class GroupResponse {
      * @param  groupIdx  Integer value for groupIdx.
      * @param  metadataVersion  Integer value for metadataVersion.
      * @param  tenantId  String value for tenantId.
-     * @param  indexVersion  Integer value for indexVersion.
-     * @param  generationNum  Integer value for generationNum.
+     * @param  indexVersion  Double value for indexVersion.
+     * @param  generationNum  Double value for generationNum.
      * @param  created  Double value for created.
      * @param  modified  Double value for modified.
-     * @param  modifiedBy  UserNameAndID value for modifiedBy.
      * @param  author  UserNameAndID value for author.
+     * @param  modifiedBy  UserNameAndID value for modifiedBy.
      * @param  owner  UserNameAndID value for owner.
      */
     public GroupResponse(
@@ -106,12 +106,12 @@ public class GroupResponse {
             Integer groupIdx,
             Integer metadataVersion,
             String tenantId,
-            Integer indexVersion,
-            Integer generationNum,
+            Double indexVersion,
+            Double generationNum,
             Double created,
             Double modified,
-            UserNameAndID modifiedBy,
             UserNameAndID author,
+            UserNameAndID modifiedBy,
             UserNameAndID owner) {
         this.name = name;
         this.displayName = displayName;
@@ -139,8 +139,8 @@ public class GroupResponse {
         this.generationNum = generationNum;
         this.created = created;
         this.modified = modified;
-        this.modifiedBy = modifiedBy;
         this.author = author;
+        this.modifiedBy = modifiedBy;
         this.owner = owner;
     }
 
@@ -600,39 +600,39 @@ public class GroupResponse {
 
     /**
      * Getter for IndexVersion.
-     * @return Returns the Integer
+     * @return Returns the Double
      */
     @JsonGetter("indexVersion")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public Integer getIndexVersion() {
+    public Double getIndexVersion() {
         return indexVersion;
     }
 
     /**
      * Setter for IndexVersion.
-     * @param indexVersion Value for Integer
+     * @param indexVersion Value for Double
      */
     @JsonSetter("indexVersion")
-    public void setIndexVersion(Integer indexVersion) {
+    public void setIndexVersion(Double indexVersion) {
         this.indexVersion = indexVersion;
     }
 
     /**
      * Getter for GenerationNum.
-     * @return Returns the Integer
+     * @return Returns the Double
      */
     @JsonGetter("generationNum")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public Integer getGenerationNum() {
+    public Double getGenerationNum() {
         return generationNum;
     }
 
     /**
      * Setter for GenerationNum.
-     * @param generationNum Value for Integer
+     * @param generationNum Value for Double
      */
     @JsonSetter("generationNum")
-    public void setGenerationNum(Integer generationNum) {
+    public void setGenerationNum(Double generationNum) {
         this.generationNum = generationNum;
     }
 
@@ -679,25 +679,6 @@ public class GroupResponse {
     }
 
     /**
-     * Getter for ModifiedBy.
-     * @return Returns the UserNameAndID
-     */
-    @JsonGetter("modifiedBy")
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    public UserNameAndID getModifiedBy() {
-        return modifiedBy;
-    }
-
-    /**
-     * Setter for ModifiedBy.
-     * @param modifiedBy Value for UserNameAndID
-     */
-    @JsonSetter("modifiedBy")
-    public void setModifiedBy(UserNameAndID modifiedBy) {
-        this.modifiedBy = modifiedBy;
-    }
-
-    /**
      * Getter for Author.
      * @return Returns the UserNameAndID
      */
@@ -714,6 +695,25 @@ public class GroupResponse {
     @JsonSetter("author")
     public void setAuthor(UserNameAndID author) {
         this.author = author;
+    }
+
+    /**
+     * Getter for ModifiedBy.
+     * @return Returns the UserNameAndID
+     */
+    @JsonGetter("modifiedBy")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public UserNameAndID getModifiedBy() {
+        return modifiedBy;
+    }
+
+    /**
+     * Setter for ModifiedBy.
+     * @param modifiedBy Value for UserNameAndID
+     */
+    @JsonSetter("modifiedBy")
+    public void setModifiedBy(UserNameAndID modifiedBy) {
+        this.modifiedBy = modifiedBy;
     }
 
     /**
@@ -750,8 +750,8 @@ public class GroupResponse {
                 + ", isSystemPrincipal=" + isSystemPrincipal + ", type=" + type + ", parenttype="
                 + parenttype + ", groupIdx=" + groupIdx + ", metadataVersion=" + metadataVersion
                 + ", tenantId=" + tenantId + ", indexVersion=" + indexVersion + ", generationNum="
-                + generationNum + ", created=" + created + ", modified=" + modified
-                + ", modifiedBy=" + modifiedBy + ", author=" + author + ", owner=" + owner + "]";
+                + generationNum + ", created=" + created + ", modified=" + modified + ", author="
+                + author + ", modifiedBy=" + modifiedBy + ", owner=" + owner + "]";
     }
 
     /**
@@ -787,8 +787,8 @@ public class GroupResponse {
                 .generationNum(getGenerationNum())
                 .created(getCreated())
                 .modified(getModified())
-                .modifiedBy(getModifiedBy())
                 .author(getAuthor())
+                .modifiedBy(getModifiedBy())
                 .owner(getOwner());
         return builder;
     }
@@ -819,12 +819,12 @@ public class GroupResponse {
         private Integer groupIdx;
         private Integer metadataVersion;
         private String tenantId;
-        private Integer indexVersion;
-        private Integer generationNum;
+        private Double indexVersion;
+        private Double generationNum;
         private Double created;
         private Double modified;
-        private UserNameAndID modifiedBy;
         private UserNameAndID author;
+        private UserNameAndID modifiedBy;
         private UserNameAndID owner;
 
 
@@ -1051,20 +1051,20 @@ public class GroupResponse {
 
         /**
          * Setter for indexVersion.
-         * @param  indexVersion  Integer value for indexVersion.
+         * @param  indexVersion  Double value for indexVersion.
          * @return Builder
          */
-        public Builder indexVersion(Integer indexVersion) {
+        public Builder indexVersion(Double indexVersion) {
             this.indexVersion = indexVersion;
             return this;
         }
 
         /**
          * Setter for generationNum.
-         * @param  generationNum  Integer value for generationNum.
+         * @param  generationNum  Double value for generationNum.
          * @return Builder
          */
-        public Builder generationNum(Integer generationNum) {
+        public Builder generationNum(Double generationNum) {
             this.generationNum = generationNum;
             return this;
         }
@@ -1090,22 +1090,22 @@ public class GroupResponse {
         }
 
         /**
-         * Setter for modifiedBy.
-         * @param  modifiedBy  UserNameAndID value for modifiedBy.
-         * @return Builder
-         */
-        public Builder modifiedBy(UserNameAndID modifiedBy) {
-            this.modifiedBy = modifiedBy;
-            return this;
-        }
-
-        /**
          * Setter for author.
          * @param  author  UserNameAndID value for author.
          * @return Builder
          */
         public Builder author(UserNameAndID author) {
             this.author = author;
+            return this;
+        }
+
+        /**
+         * Setter for modifiedBy.
+         * @param  modifiedBy  UserNameAndID value for modifiedBy.
+         * @return Builder
+         */
+        public Builder modifiedBy(UserNameAndID modifiedBy) {
+            this.modifiedBy = modifiedBy;
             return this;
         }
 
@@ -1128,7 +1128,7 @@ public class GroupResponse {
                     groups, users, assignedLiveboards, userGroupContent, tags, isDeleted, isHidden,
                     isExternal, isDeprecated, complete, isSystemPrincipal, type, parenttype,
                     groupIdx, metadataVersion, tenantId, indexVersion, generationNum, created,
-                    modified, modifiedBy, author, owner);
+                    modified, author, modifiedBy, owner);
         }
     }
 }

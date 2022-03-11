@@ -14,52 +14,28 @@ import java.util.TreeMap;
  * Type13Enum to be used.
  */
 public enum Type13Enum {
-    SNOWFLAKE,
+    LIVEBOARD,
 
-    AMAZON_REDSHIFT,
+    DATAOBJECT,
 
-    GOOGLE_BIGQUERY,
+    COLUMN,
 
-    AZURE_SYNAPSE,
-
-    TERADATA,
-
-    STARBURST,
-
-    SAP_HANA,
-
-    ORACLE_ADW,
-
-    DATABRICKS,
-
-    DENODO;
+    JOIN;
 
 
     private static TreeMap<String, Type13Enum> valueMap = new TreeMap<>();
     private String value;
 
     static {
-        SNOWFLAKE.value = "SNOWFLAKE";
-        AMAZON_REDSHIFT.value = "AMAZON_REDSHIFT";
-        GOOGLE_BIGQUERY.value = "GOOGLE_BIGQUERY";
-        AZURE_SYNAPSE.value = "AZURE_SYNAPSE";
-        TERADATA.value = "TERADATA";
-        STARBURST.value = "STARBURST";
-        SAP_HANA.value = "SAP_HANA";
-        ORACLE_ADW.value = "ORACLE_ADW";
-        DATABRICKS.value = "DATABRICKS";
-        DENODO.value = "DENODO";
+        LIVEBOARD.value = "LIVEBOARD";
+        DATAOBJECT.value = "DATAOBJECT";
+        COLUMN.value = "COLUMN";
+        JOIN.value = "JOIN";
 
-        valueMap.put("SNOWFLAKE", SNOWFLAKE);
-        valueMap.put("AMAZON_REDSHIFT", AMAZON_REDSHIFT);
-        valueMap.put("GOOGLE_BIGQUERY", GOOGLE_BIGQUERY);
-        valueMap.put("AZURE_SYNAPSE", AZURE_SYNAPSE);
-        valueMap.put("TERADATA", TERADATA);
-        valueMap.put("STARBURST", STARBURST);
-        valueMap.put("SAP_HANA", SAP_HANA);
-        valueMap.put("ORACLE_ADW", ORACLE_ADW);
-        valueMap.put("DATABRICKS", DATABRICKS);
-        valueMap.put("DENODO", DENODO);
+        valueMap.put("LIVEBOARD", LIVEBOARD);
+        valueMap.put("DATAOBJECT", DATAOBJECT);
+        valueMap.put("COLUMN", COLUMN);
+        valueMap.put("JOIN", JOIN);
     }
 
     /**

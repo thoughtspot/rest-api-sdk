@@ -7,17 +7,17 @@
 import { ApiResponse, RequestOptions } from '../core';
 import { ErrorResponseError } from '../errors/errorResponseError';
 import {
-  ApiRestV2DataAnswerRequest,
-  apiRestV2DataAnswerRequestSchema,
-} from '../models/apiRestV2DataAnswerRequest';
+  TspublicRestV2DataAnswerRequest,
+  tspublicRestV2DataAnswerRequestSchema,
+} from '../models/tspublicRestV2DataAnswerRequest';
 import {
-  ApiRestV2DataLiveboardRequest,
-  apiRestV2DataLiveboardRequestSchema,
-} from '../models/apiRestV2DataLiveboardRequest';
+  TspublicRestV2DataLiveboardRequest,
+  tspublicRestV2DataLiveboardRequestSchema,
+} from '../models/tspublicRestV2DataLiveboardRequest';
 import {
-  ApiRestV2DataSearchRequest,
-  apiRestV2DataSearchRequestSchema,
-} from '../models/apiRestV2DataSearchRequest';
+  TspublicRestV2DataSearchRequest,
+  tspublicRestV2DataSearchRequestSchema,
+} from '../models/tspublicRestV2DataSearchRequest';
 import { unknown } from '../schema';
 import { BaseController } from './baseController';
 
@@ -29,12 +29,12 @@ export class DataController extends BaseController {
    * @return Response from the API call
    */
   async searchQueryData(
-    body: ApiRestV2DataSearchRequest,
+    body: TspublicRestV2DataSearchRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<unknown>> {
-    const req = this.createRequest('POST', '/api/rest/v2/data/search');
+    const req = this.createRequest('POST', '/tspublic/rest/v2/data/search');
     const mapped = req.prepareArgs({
-      body: [body, apiRestV2DataSearchRequestSchema],
+      body: [body, tspublicRestV2DataSearchRequestSchema],
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
@@ -49,12 +49,12 @@ export class DataController extends BaseController {
    * @return Response from the API call
    */
   async answerData(
-    body: ApiRestV2DataAnswerRequest,
+    body: TspublicRestV2DataAnswerRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<unknown>> {
-    const req = this.createRequest('POST', '/api/rest/v2/data/answer');
+    const req = this.createRequest('POST', '/tspublic/rest/v2/data/answer');
     const mapped = req.prepareArgs({
-      body: [body, apiRestV2DataAnswerRequestSchema],
+      body: [body, tspublicRestV2DataAnswerRequestSchema],
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
@@ -70,12 +70,12 @@ export class DataController extends BaseController {
    * @return Response from the API call
    */
   async liveboardData(
-    body: ApiRestV2DataLiveboardRequest,
+    body: TspublicRestV2DataLiveboardRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<unknown>> {
-    const req = this.createRequest('POST', '/api/rest/v2/data/liveboard');
+    const req = this.createRequest('POST', '/tspublic/rest/v2/data/liveboard');
     const mapped = req.prepareArgs({
-      body: [body, apiRestV2DataLiveboardRequestSchema],
+      body: [body, tspublicRestV2DataLiveboardRequestSchema],
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);

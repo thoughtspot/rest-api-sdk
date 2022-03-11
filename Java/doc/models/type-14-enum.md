@@ -1,7 +1,7 @@
 
 # Type 14 Enum
 
-Type of the connect being searched. Valid values:
+Type of the data connection.
 
 ## Enumeration
 

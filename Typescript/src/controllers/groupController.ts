@@ -6,44 +6,44 @@
 
 import { ApiResponse, RequestOptions } from '../core';
 import { ErrorResponseError } from '../errors/errorResponseError';
-import {
-  ApiRestV2GroupAddgroupRequest,
-  apiRestV2GroupAddgroupRequestSchema,
-} from '../models/apiRestV2GroupAddgroupRequest';
-import {
-  ApiRestV2GroupAddprivilegeRequest,
-  apiRestV2GroupAddprivilegeRequestSchema,
-} from '../models/apiRestV2GroupAddprivilegeRequest';
-import {
-  ApiRestV2GroupAdduserRequest,
-  apiRestV2GroupAdduserRequestSchema,
-} from '../models/apiRestV2GroupAdduserRequest';
-import {
-  ApiRestV2GroupCreateRequest,
-  apiRestV2GroupCreateRequestSchema,
-} from '../models/apiRestV2GroupCreateRequest';
-import {
-  ApiRestV2GroupRemovegroupRequest,
-  apiRestV2GroupRemovegroupRequestSchema,
-} from '../models/apiRestV2GroupRemovegroupRequest';
-import {
-  ApiRestV2GroupRemoveprivilegeRequest,
-  apiRestV2GroupRemoveprivilegeRequestSchema,
-} from '../models/apiRestV2GroupRemoveprivilegeRequest';
-import {
-  ApiRestV2GroupRemoveuserRequest,
-  apiRestV2GroupRemoveuserRequestSchema,
-} from '../models/apiRestV2GroupRemoveuserRequest';
-import {
-  ApiRestV2GroupSearchRequest,
-  apiRestV2GroupSearchRequestSchema,
-} from '../models/apiRestV2GroupSearchRequest';
-import {
-  ApiRestV2GroupUpdateRequest,
-  apiRestV2GroupUpdateRequestSchema,
-} from '../models/apiRestV2GroupUpdateRequest';
 import { GroupResponse, groupResponseSchema } from '../models/groupResponse';
-import { array, boolean, optional, string } from '../schema';
+import {
+  TspublicRestV2GroupAddgroupRequest,
+  tspublicRestV2GroupAddgroupRequestSchema,
+} from '../models/tspublicRestV2GroupAddgroupRequest';
+import {
+  TspublicRestV2GroupAddprivilegeRequest,
+  tspublicRestV2GroupAddprivilegeRequestSchema,
+} from '../models/tspublicRestV2GroupAddprivilegeRequest';
+import {
+  TspublicRestV2GroupAdduserRequest,
+  tspublicRestV2GroupAdduserRequestSchema,
+} from '../models/tspublicRestV2GroupAdduserRequest';
+import {
+  TspublicRestV2GroupCreateRequest,
+  tspublicRestV2GroupCreateRequestSchema,
+} from '../models/tspublicRestV2GroupCreateRequest';
+import {
+  TspublicRestV2GroupRemovegroupRequest,
+  tspublicRestV2GroupRemovegroupRequestSchema,
+} from '../models/tspublicRestV2GroupRemovegroupRequest';
+import {
+  TspublicRestV2GroupRemoveprivilegeRequest,
+  tspublicRestV2GroupRemoveprivilegeRequestSchema,
+} from '../models/tspublicRestV2GroupRemoveprivilegeRequest';
+import {
+  TspublicRestV2GroupRemoveuserRequest,
+  tspublicRestV2GroupRemoveuserRequestSchema,
+} from '../models/tspublicRestV2GroupRemoveuserRequest';
+import {
+  TspublicRestV2GroupSearchRequest,
+  tspublicRestV2GroupSearchRequestSchema,
+} from '../models/tspublicRestV2GroupSearchRequest';
+import {
+  TspublicRestV2GroupUpdateRequest,
+  tspublicRestV2GroupUpdateRequestSchema,
+} from '../models/tspublicRestV2GroupUpdateRequest';
+import { boolean, optional, string, unknown } from '../schema';
 import { BaseController } from './baseController';
 
 export class GroupController extends BaseController {
@@ -61,7 +61,7 @@ export class GroupController extends BaseController {
     id?: string,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<GroupResponse>> {
-    const req = this.createRequest('GET', '/api/rest/v2/group');
+    const req = this.createRequest('GET', '/tspublic/rest/v2/group');
     const mapped = req.prepareArgs({
       name: [name, optional(string())],
       id: [id, optional(string())],
@@ -89,12 +89,12 @@ export class GroupController extends BaseController {
    * @return Response from the API call
    */
   async createGroup(
-    body: ApiRestV2GroupCreateRequest,
+    body: TspublicRestV2GroupCreateRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<GroupResponse>> {
-    const req = this.createRequest('POST', '/api/rest/v2/group/create');
+    const req = this.createRequest('POST', '/tspublic/rest/v2/group/create');
     const mapped = req.prepareArgs({
-      body: [body, apiRestV2GroupCreateRequestSchema],
+      body: [body, tspublicRestV2GroupCreateRequestSchema],
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
@@ -114,12 +114,12 @@ export class GroupController extends BaseController {
    * @return Response from the API call
    */
   async updateGroup(
-    body: ApiRestV2GroupUpdateRequest,
+    body: TspublicRestV2GroupUpdateRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<boolean>> {
-    const req = this.createRequest('PUT', '/api/rest/v2/group/update');
+    const req = this.createRequest('PUT', '/tspublic/rest/v2/group/update');
     const mapped = req.prepareArgs({
-      body: [body, apiRestV2GroupUpdateRequestSchema],
+      body: [body, tspublicRestV2GroupUpdateRequestSchema],
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
@@ -142,7 +142,7 @@ export class GroupController extends BaseController {
     id?: string,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<boolean>> {
-    const req = this.createRequest('DELETE', '/api/rest/v2/group/delete');
+    const req = this.createRequest('DELETE', '/tspublic/rest/v2/group/delete');
     const mapped = req.prepareArgs({
       name: [name, optional(string())],
       id: [id, optional(string())],
@@ -166,12 +166,15 @@ export class GroupController extends BaseController {
    * @return Response from the API call
    */
   async addPrivilegesToGroup(
-    body: ApiRestV2GroupAddprivilegeRequest,
+    body: TspublicRestV2GroupAddprivilegeRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<boolean>> {
-    const req = this.createRequest('PUT', '/api/rest/v2/group/addprivilege');
+    const req = this.createRequest(
+      'PUT',
+      '/tspublic/rest/v2/group/addprivilege'
+    );
     const mapped = req.prepareArgs({
-      body: [body, apiRestV2GroupAddprivilegeRequestSchema],
+      body: [body, tspublicRestV2GroupAddprivilegeRequestSchema],
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
@@ -192,12 +195,15 @@ export class GroupController extends BaseController {
    * @return Response from the API call
    */
   async removePrivilegesFromGroup(
-    body: ApiRestV2GroupRemoveprivilegeRequest,
+    body: TspublicRestV2GroupRemoveprivilegeRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<boolean>> {
-    const req = this.createRequest('PUT', '/api/rest/v2/group/removeprivilege');
+    const req = this.createRequest(
+      'PUT',
+      '/tspublic/rest/v2/group/removeprivilege'
+    );
     const mapped = req.prepareArgs({
-      body: [body, apiRestV2GroupRemoveprivilegeRequestSchema],
+      body: [body, tspublicRestV2GroupRemoveprivilegeRequestSchema],
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
@@ -217,12 +223,12 @@ export class GroupController extends BaseController {
    * @return Response from the API call
    */
   async addUsersToGroup(
-    body: ApiRestV2GroupAdduserRequest,
+    body: TspublicRestV2GroupAdduserRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<boolean>> {
-    const req = this.createRequest('PUT', '/api/rest/v2/group/adduser');
+    const req = this.createRequest('PUT', '/tspublic/rest/v2/group/adduser');
     const mapped = req.prepareArgs({
-      body: [body, apiRestV2GroupAdduserRequestSchema],
+      body: [body, tspublicRestV2GroupAdduserRequestSchema],
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
@@ -243,12 +249,12 @@ export class GroupController extends BaseController {
    * @return Response from the API call
    */
   async removeUsersFromGroup(
-    body: ApiRestV2GroupRemoveuserRequest,
+    body: TspublicRestV2GroupRemoveuserRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<boolean>> {
-    const req = this.createRequest('PUT', '/api/rest/v2/group/removeuser');
+    const req = this.createRequest('PUT', '/tspublic/rest/v2/group/removeuser');
     const mapped = req.prepareArgs({
-      body: [body, apiRestV2GroupRemoveuserRequestSchema],
+      body: [body, tspublicRestV2GroupRemoveuserRequestSchema],
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
@@ -268,12 +274,12 @@ export class GroupController extends BaseController {
    * @return Response from the API call
    */
   async addGroupsToGroup(
-    body: ApiRestV2GroupAddgroupRequest,
+    body: TspublicRestV2GroupAddgroupRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<boolean>> {
-    const req = this.createRequest('PUT', '/api/rest/v2/group/addgroup');
+    const req = this.createRequest('PUT', '/tspublic/rest/v2/group/addgroup');
     const mapped = req.prepareArgs({
-      body: [body, apiRestV2GroupAddgroupRequestSchema],
+      body: [body, tspublicRestV2GroupAddgroupRequestSchema],
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
@@ -294,12 +300,15 @@ export class GroupController extends BaseController {
    * @return Response from the API call
    */
   async removeGroupsFromGroup(
-    body: ApiRestV2GroupRemovegroupRequest,
+    body: TspublicRestV2GroupRemovegroupRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<boolean>> {
-    const req = this.createRequest('PUT', '/api/rest/v2/group/removegroup');
+    const req = this.createRequest(
+      'PUT',
+      '/tspublic/rest/v2/group/removegroup'
+    );
     const mapped = req.prepareArgs({
-      body: [body, apiRestV2GroupRemovegroupRequestSchema],
+      body: [body, tspublicRestV2GroupRemovegroupRequestSchema],
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
@@ -317,16 +326,16 @@ export class GroupController extends BaseController {
    * @return Response from the API call
    */
   async searchGroups(
-    body: ApiRestV2GroupSearchRequest,
+    body: TspublicRestV2GroupSearchRequest,
     requestOptions?: RequestOptions
-  ): Promise<ApiResponse<GroupResponse[]>> {
-    const req = this.createRequest('POST', '/api/rest/v2/group/search');
+  ): Promise<ApiResponse<unknown>> {
+    const req = this.createRequest('POST', '/tspublic/rest/v2/group/search');
     const mapped = req.prepareArgs({
-      body: [body, apiRestV2GroupSearchRequestSchema],
+      body: [body, tspublicRestV2GroupSearchRequestSchema],
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.throwOn(500, ErrorResponseError, 'Operation failed or unauthorized request');
-    return req.callAsJson(array(groupResponseSchema), requestOptions);
+    return req.callAsJson(unknown(), requestOptions);
   }
 }

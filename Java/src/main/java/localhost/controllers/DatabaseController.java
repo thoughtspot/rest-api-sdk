@@ -24,9 +24,9 @@ import localhost.http.client.HttpContext;
 import localhost.http.request.HttpRequest;
 import localhost.http.response.HttpResponse;
 import localhost.http.response.HttpStringResponse;
-import localhost.models.ApiRestV2DatabaseTableCreateRequest;
-import localhost.models.ApiRestV2DatabaseTableRunqueryRequest;
 import localhost.models.CreateTableResponse;
+import localhost.models.TspublicRestV2DatabaseTableCreateRequest;
+import localhost.models.TspublicRestV2DatabaseTableRunqueryRequest;
 
 /**
  * This class lists all the endpoints of the groups.
@@ -95,12 +95,13 @@ public final class DatabaseController extends BaseController {
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/database");
+                + "/tspublic/rest/v2/database");
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
-        headers.add("Content-Type", config.getContentType());
+        headers.add("X-Requested-By", config.getXRequestedBy());
         headers.add("Accept-Language", config.getAcceptLanguage());
+        headers.add("Content-Type", config.getContentType());
         headers.add("user-agent", BaseController.userAgent);
         headers.add("accept", "application/json");
 
@@ -184,12 +185,17 @@ public final class DatabaseController extends BaseController {
      */
     private HttpRequest buildGetSchemasRequest(
             final String database) {
+        //validating required parameters
+        if (null == database) {
+            throw new NullPointerException("The parameter \"database\" is a required parameter and cannot be null.");
+        }
+
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/database/schema");
+                + "/tspublic/rest/v2/database/schema");
 
         //load all query parameters
         Map<String, Object> queryParameters = new HashMap<>();
@@ -197,8 +203,9 @@ public final class DatabaseController extends BaseController {
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
-        headers.add("Content-Type", config.getContentType());
+        headers.add("X-Requested-By", config.getXRequestedBy());
         headers.add("Accept-Language", config.getAcceptLanguage());
+        headers.add("Content-Type", config.getContentType());
         headers.add("user-agent", BaseController.userAgent);
         headers.add("accept", "application/json");
 
@@ -288,12 +295,21 @@ public final class DatabaseController extends BaseController {
     private HttpRequest buildGetTablesRequest(
             final String database,
             final String schema) {
+        //validating required parameters
+        if (null == database) {
+            throw new NullPointerException("The parameter \"database\" is a required parameter and cannot be null.");
+        }
+
+        if (null == schema) {
+            throw new NullPointerException("The parameter \"schema\" is a required parameter and cannot be null.");
+        }
+
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/database/table");
+                + "/tspublic/rest/v2/database/table");
 
         //load all query parameters
         Map<String, Object> queryParameters = new HashMap<>();
@@ -302,8 +318,9 @@ public final class DatabaseController extends BaseController {
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
-        headers.add("Content-Type", config.getContentType());
+        headers.add("X-Requested-By", config.getXRequestedBy());
         headers.add("Accept-Language", config.getAcceptLanguage());
+        headers.add("Content-Type", config.getContentType());
         headers.add("user-agent", BaseController.userAgent);
         headers.add("accept", "application/json");
 
@@ -358,7 +375,7 @@ public final class DatabaseController extends BaseController {
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
     public CreateTableResponse createTable(
-            final ApiRestV2DatabaseTableCreateRequest body) throws ApiException, IOException {
+            final TspublicRestV2DatabaseTableCreateRequest body) throws ApiException, IOException {
         HttpRequest request = buildCreateTableRequest(body);
         authManagers.get("global").apply(request);
 
@@ -375,7 +392,7 @@ public final class DatabaseController extends BaseController {
      * @return    Returns the CreateTableResponse response from the API call
      */
     public CompletableFuture<CreateTableResponse> createTableAsync(
-            final ApiRestV2DatabaseTableCreateRequest body) {
+            final TspublicRestV2DatabaseTableCreateRequest body) {
         return makeHttpCallAsync(() -> buildCreateTableRequest(body),
             req -> authManagers.get("global").applyAsync(req)
                 .thenCompose(request -> getClientInstance()
@@ -387,17 +404,23 @@ public final class DatabaseController extends BaseController {
      * Builds the HttpRequest object for createTable.
      */
     private HttpRequest buildCreateTableRequest(
-            final ApiRestV2DatabaseTableCreateRequest body) throws JsonProcessingException {
+            final TspublicRestV2DatabaseTableCreateRequest body) throws JsonProcessingException {
+        //validating required parameters
+        if (null == body) {
+            throw new NullPointerException("The parameter \"body\" is a required parameter and cannot be null.");
+        }
+
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/database/table/create");
+                + "/tspublic/rest/v2/database/table/create");
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
         headers.add("Content-Type", "application/json");
+        headers.add("X-Requested-By", config.getXRequestedBy());
         headers.add("Accept-Language", config.getAcceptLanguage());
         headers.add("user-agent", BaseController.userAgent);
         headers.add("accept", "application/json");
@@ -454,7 +477,7 @@ public final class DatabaseController extends BaseController {
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
     public List<Object> runQuery(
-            final ApiRestV2DatabaseTableRunqueryRequest body) throws ApiException, IOException {
+            final TspublicRestV2DatabaseTableRunqueryRequest body) throws ApiException, IOException {
         HttpRequest request = buildRunQueryRequest(body);
         authManagers.get("global").apply(request);
 
@@ -472,7 +495,7 @@ public final class DatabaseController extends BaseController {
      * @return    Returns the List of Object response from the API call
      */
     public CompletableFuture<List<Object>> runQueryAsync(
-            final ApiRestV2DatabaseTableRunqueryRequest body) {
+            final TspublicRestV2DatabaseTableRunqueryRequest body) {
         return makeHttpCallAsync(() -> buildRunQueryRequest(body),
             req -> authManagers.get("global").applyAsync(req)
                 .thenCompose(request -> getClientInstance()
@@ -484,17 +507,23 @@ public final class DatabaseController extends BaseController {
      * Builds the HttpRequest object for runQuery.
      */
     private HttpRequest buildRunQueryRequest(
-            final ApiRestV2DatabaseTableRunqueryRequest body) throws JsonProcessingException {
+            final TspublicRestV2DatabaseTableRunqueryRequest body) throws JsonProcessingException {
+        //validating required parameters
+        if (null == body) {
+            throw new NullPointerException("The parameter \"body\" is a required parameter and cannot be null.");
+        }
+
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/database/table/runquery");
+                + "/tspublic/rest/v2/database/table/runquery");
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
         headers.add("Content-Type", "application/json");
+        headers.add("X-Requested-By", config.getXRequestedBy());
         headers.add("Accept-Language", config.getAcceptLanguage());
         headers.add("user-agent", BaseController.userAgent);
         headers.add("accept", "application/json");

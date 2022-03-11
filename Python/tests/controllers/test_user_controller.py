@@ -12,9 +12,7 @@ import dateutil.parser
 
 from tests.controllers.controller_test_base import ControllerTestBase
 from tests.test_helper import TestHelper
-from tests.http_response_catcher import HttpResponseCatcher
 from restapisdk.api_helper import APIHelper
-from restapisdk.controllers.user_controller import UserController
 
 
 class UserControllerTests(ControllerTestBase):
@@ -22,8 +20,8 @@ class UserControllerTests(ControllerTestBase):
     @classmethod
     def setUpClass(cls):
         super(UserControllerTests, cls).setUpClass()
-        cls.response_catcher = HttpResponseCatcher()
-        cls.controller = UserController(cls.config, cls.auth_managers, cls.response_catcher)
+        cls.controller = cls.client.user
+        cls.response_catcher = cls.controller.http_call_back
 
     # To get the details of a specific user account by username or user id, use this endpoint. At Least one value is needed. When both are given,then user id will be considered to fetch user information
     def test_get_user(self):

@@ -22,9 +22,9 @@
 | `generationNum` | `number \| undefined` | Optional | - |
 | `created` | `string \| undefined` | Optional | Date and time when the table was created |
 | `modified` | `string \| undefined` | Optional | Date and time of last modification of the table |
-| `author` | [`UserNameAndID \| undefined`](/doc/models/user-name-and-id.md) | Optional | - |
-| `modifiedBy` | [`UserNameAndID \| undefined`](/doc/models/user-name-and-id.md) | Optional | - |
-| `owner` | [`UserNameAndID \| undefined`](/doc/models/user-name-and-id.md) | Optional | - |
+| `author` | [`UserNameAndID \| undefined`](../../doc/models/user-name-and-id.md) | Optional | - |
+| `modifiedBy` | [`UserNameAndID \| undefined`](../../doc/models/user-name-and-id.md) | Optional | - |
+| `owner` | [`UserNameAndID \| undefined`](../../doc/models/user-name-and-id.md) | Optional | - |
 | `tags` | `string[] \| undefined` | Optional | List of tags assigned to the table |
 
 ## Example (as JSON)
