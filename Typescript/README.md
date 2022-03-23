@@ -1,39 +1,33 @@
 
 # Getting Started with RESTAPI SDK
 
-## Install the Package
+## Install the Rest API SDK
 
-Run the following command from your project directory to install the package from npm:
+To install the SDK, run the following command at the command line:
 
-```ts
-npm install thoughtspot@rest-api-sdk@1.9.0
-```
+    npm install @thoughtspot/rest-api-sdk
 
 ## Initialize the API Client
 
-**_Note:_** Documentation for the client can be found [here.](doc/client.md)
+**_Note:_** Documentation for the client can be found [here.](https://github.com/thoughtspot/rest-api-sdk/blob/main/Typescript/doc/client.md)
 
 The following parameters are configurable for the API Client:
 
 | Parameter | Type | Description |
 |  --- | --- | --- |
-| `xRequestedBy` | `string` | Mandatory header with value Thougtspot to accept the external RestAPI requests<br>*Default*: `'ThoughtSpot'` |
-| `acceptLanguage` | `string` | response format<br>*Default*: `'application/json'` |
 | `contentType` | `string` | body content type for post request<br>*Default*: `'application/json'` |
+| `acceptLanguage` | `string` | response format<br>*Default*: `'application/json'` |
 | `baseUrl` | `string` | *Default*: `'https://localhost:443'` |
 | `environment` | Environment | The API environment. <br> **Default: `Environment.Production`** |
 | `timeout` | `number` | Timeout for API calls.<br>*Default*: `0` |
-| `httpClientOptions` | `Partial<HttpClientOptions>` | Stable configurable http client options. |
-| `unstableHttpClientOptions` | `any` | Unstable configurable http client options. |
 | `accessToken` | `string` | The OAuth 2.0 Access Token to use for API requests. |
 
 The API client can be initialized as follows:
 
 ```ts
 const client = new Client({
-  xRequestedBy: 'ThoughtSpot',
-  acceptLanguage: 'application/json',
   contentType: 'application/json',
+  acceptLanguage: 'application/json',
   timeout: 0,
   environment: Environment.Production,
   accessToken: 'AccessToken',
