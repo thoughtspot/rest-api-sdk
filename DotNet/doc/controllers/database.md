@@ -10,11 +10,11 @@ DatabaseController databaseController = client.DatabaseController;
 
 ## Methods
 
-* [Get Databases](/doc/controllers/database.md#get-databases)
-* [Get Schemas](/doc/controllers/database.md#get-schemas)
-* [Get Tables](/doc/controllers/database.md#get-tables)
-* [Create Table](/doc/controllers/database.md#create-table)
-* [Run Query](/doc/controllers/database.md#run-query)
+* [Get Databases](../../doc/controllers/database.md#get-databases)
+* [Get Schemas](../../doc/controllers/database.md#get-schemas)
+* [Get Tables](../../doc/controllers/database.md#get-tables)
+* [Create Table](../../doc/controllers/database.md#create-table)
+* [Run Query](../../doc/controllers/database.md#run-query)
 
 
 # Get Databases
@@ -45,7 +45,7 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Get Schemas
@@ -85,7 +85,7 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Get Tables
@@ -128,7 +128,7 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Create Table
@@ -139,23 +139,23 @@ To create a table in Falcon, use this endpoint.
 
 ```csharp
 CreateTableAsync(
-    Models.ApiRestV2DatabaseTableCreateRequest body)
+    Models.TspublicRestV2DatabaseTableCreateRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.ApiRestV2DatabaseTableCreateRequest`](/doc/models/api-rest-v2-database-table-create-request.md) | Body, Required | - |
+| `body` | [`Models.TspublicRestV2DatabaseTableCreateRequest`](../../doc/models/tspublic-rest-v2-database-table-create-request.md) | Body, Required | - |
 
 ## Response Type
 
-[`Task<Models.CreateTableResponse>`](/doc/models/create-table-response.md)
+[`Task<Models.CreateTableResponse>`](../../doc/models/create-table-response.md)
 
 ## Example Usage
 
 ```csharp
-var body = new ApiRestV2DatabaseTableCreateRequest();
+var body = new TspublicRestV2DatabaseTableCreateRequest();
 
 try
 {
@@ -168,7 +168,7 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Run Query
@@ -181,14 +181,14 @@ You can run only following type of statements - Table DDL alter and Table rows u
 
 ```csharp
 RunQueryAsync(
-    Models.ApiRestV2DatabaseTableRunqueryRequest body)
+    Models.TspublicRestV2DatabaseTableRunqueryRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.ApiRestV2DatabaseTableRunqueryRequest`](/doc/models/api-rest-v2-database-table-runquery-request.md) | Body, Required | - |
+| `body` | [`Models.TspublicRestV2DatabaseTableRunqueryRequest`](../../doc/models/tspublic-rest-v2-database-table-runquery-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -197,7 +197,7 @@ RunQueryAsync(
 ## Example Usage
 
 ```csharp
-var body = new ApiRestV2DatabaseTableRunqueryRequest();
+var body = new TspublicRestV2DatabaseTableRunqueryRequest();
 body.Statement = new List<string>();
 body.Statement.Add("statement6");
 body.Statement.Add("statement7");
@@ -213,5 +213,5 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 

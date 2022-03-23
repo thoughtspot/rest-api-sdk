@@ -43,11 +43,15 @@ namespace RESTAPISDK.Standard
         private readonly Lazy<DatabaseController> database;
         private readonly Lazy<ConnectionController> connection;
         private readonly Lazy<DataController> data;
+        private readonly Lazy<ReportController> report;
         private readonly Lazy<AdminController> admin;
+        private readonly Lazy<LogsController> logs;
+        private readonly Lazy<MaterializationController> materialization;
 
         private RESTAPISDKClient(
-            string contentType,
+            string xRequestedBy,
             string acceptLanguage,
+            string contentType,
             Environment environment,
             string baseUrl,
             string accessToken,
@@ -56,8 +60,9 @@ namespace RESTAPISDK.Standard
             HttpCallBack httpCallBack,
             IHttpClientConfiguration httpClientConfiguration)
         {
-            this.ContentType = contentType;
+            this.XRequestedBy = xRequestedBy;
             this.AcceptLanguage = acceptLanguage;
+            this.ContentType = contentType;
             this.Environment = environment;
             this.BaseUrl = baseUrl;
             this.httpCallBack = httpCallBack;
@@ -79,8 +84,14 @@ namespace RESTAPISDK.Standard
                 () => new ConnectionController(this, this.httpClient, this.authManagers, this.httpCallBack));
             this.data = new Lazy<DataController>(
                 () => new DataController(this, this.httpClient, this.authManagers, this.httpCallBack));
+            this.report = new Lazy<ReportController>(
+                () => new ReportController(this, this.httpClient, this.authManagers, this.httpCallBack));
             this.admin = new Lazy<AdminController>(
                 () => new AdminController(this, this.httpClient, this.authManagers, this.httpCallBack));
+            this.logs = new Lazy<LogsController>(
+                () => new LogsController(this, this.httpClient, this.authManagers, this.httpCallBack));
+            this.materialization = new Lazy<MaterializationController>(
+                () => new MaterializationController(this, this.httpClient, this.authManagers, this.httpCallBack));
 
             if (this.authManagers.ContainsKey("global"))
             {
@@ -131,9 +142,24 @@ namespace RESTAPISDK.Standard
         public DataController DataController => this.data.Value;
 
         /// <summary>
+        /// Gets ReportController controller.
+        /// </summary>
+        public ReportController ReportController => this.report.Value;
+
+        /// <summary>
         /// Gets AdminController controller.
         /// </summary>
         public AdminController AdminController => this.admin.Value;
+
+        /// <summary>
+        /// Gets LogsController controller.
+        /// </summary>
+        public LogsController LogsController => this.logs.Value;
+
+        /// <summary>
+        /// Gets MaterializationController controller.
+        /// </summary>
+        public MaterializationController MaterializationController => this.materialization.Value;
 
         /// <summary>
         /// Gets the configuration of the Http Client associated with this client.
@@ -141,16 +167,22 @@ namespace RESTAPISDK.Standard
         public IHttpClientConfiguration HttpClientConfiguration { get; }
 
         /// <summary>
-        /// Gets ContentType.
-        /// body content type for post request.
+        /// Gets XRequestedBy.
+        /// Mandatory header with value Thougtspot to accept the external RestAPI requests.
         /// </summary>
-        public string ContentType { get; }
+        public string XRequestedBy { get; }
 
         /// <summary>
         /// Gets AcceptLanguage.
         /// response format.
         /// </summary>
         public string AcceptLanguage { get; }
+
+        /// <summary>
+        /// Gets ContentType.
+        /// body content type for post request.
+        /// </summary>
+        public string ContentType { get; }
 
         /// <summary>
         /// Gets Environment.
@@ -210,8 +242,9 @@ namespace RESTAPISDK.Standard
         public Builder ToBuilder()
         {
             Builder builder = new Builder()
-                .ContentType(this.ContentType)
+                .XRequestedBy(this.XRequestedBy)
                 .AcceptLanguage(this.AcceptLanguage)
+                .ContentType(this.ContentType)
                 .Environment(this.Environment)
                 .BaseUrl(this.BaseUrl)
                 .AccessToken(this.BearerAuthCredentials.AccessToken)
@@ -227,8 +260,9 @@ namespace RESTAPISDK.Standard
         public override string ToString()
         {
             return
-                $"ContentType = {this.ContentType}, " +
+                $"XRequestedBy = {this.XRequestedBy}, " +
                 $"AcceptLanguage = {this.AcceptLanguage}, " +
+                $"ContentType = {this.ContentType}, " +
                 $"Environment = {this.Environment}, " +
                 $"BaseUrl = {this.BaseUrl}, " +
                 $"HttpClientConfiguration = {this.HttpClientConfiguration}, ";
@@ -242,20 +276,26 @@ namespace RESTAPISDK.Standard
         {
             var builder = new Builder();
 
-            string contentType = System.Environment.GetEnvironmentVariable("RESTAPISDK_STANDARD_CONTENT_TYPE");
+            string xRequestedBy = System.Environment.GetEnvironmentVariable("RESTAPISDK_STANDARD_X_REQUESTED_BY");
             string acceptLanguage = System.Environment.GetEnvironmentVariable("RESTAPISDK_STANDARD_ACCEPT_LANGUAGE");
+            string contentType = System.Environment.GetEnvironmentVariable("RESTAPISDK_STANDARD_CONTENT_TYPE");
             string environment = System.Environment.GetEnvironmentVariable("RESTAPISDK_STANDARD_ENVIRONMENT");
             string baseUrl = System.Environment.GetEnvironmentVariable("RESTAPISDK_STANDARD_BASE_URL");
             string accessToken = System.Environment.GetEnvironmentVariable("RESTAPISDK_STANDARD_ACCESS_TOKEN");
 
-            if (contentType != null)
+            if (xRequestedBy != null)
             {
-                builder.ContentType(contentType);
+                builder.XRequestedBy(xRequestedBy);
             }
 
             if (acceptLanguage != null)
             {
                 builder.AcceptLanguage(acceptLanguage);
+            }
+
+            if (contentType != null)
+            {
+                builder.ContentType(contentType);
             }
 
             if (environment != null)
@@ -294,8 +334,9 @@ namespace RESTAPISDK.Standard
         /// </summary>
         public class Builder
         {
-            private string contentType = "application/json";
+            private string xRequestedBy = "ThoughtSpot";
             private string acceptLanguage = "application/json";
+            private string contentType = "application/json";
             private Environment environment = RESTAPISDK.Standard.Environment.Production;
             private string baseUrl = "https://localhost:443";
             private string accessToken = "";
@@ -316,13 +357,13 @@ namespace RESTAPISDK.Standard
             }
 
             /// <summary>
-            /// Sets ContentType.
+            /// Sets XRequestedBy.
             /// </summary>
-            /// <param name="contentType"> ContentType. </param>
+            /// <param name="xRequestedBy"> XRequestedBy. </param>
             /// <returns> Builder. </returns>
-            public Builder ContentType(string contentType)
+            public Builder XRequestedBy(string xRequestedBy)
             {
-                this.contentType = contentType ?? throw new ArgumentNullException(nameof(contentType));
+                this.xRequestedBy = xRequestedBy ?? throw new ArgumentNullException(nameof(xRequestedBy));
                 return this;
             }
 
@@ -334,6 +375,17 @@ namespace RESTAPISDK.Standard
             public Builder AcceptLanguage(string acceptLanguage)
             {
                 this.acceptLanguage = acceptLanguage ?? throw new ArgumentNullException(nameof(acceptLanguage));
+                return this;
+            }
+
+            /// <summary>
+            /// Sets ContentType.
+            /// </summary>
+            /// <param name="contentType"> ContentType. </param>
+            /// <returns> Builder. </returns>
+            public Builder ContentType(string contentType)
+            {
+                this.contentType = contentType ?? throw new ArgumentNullException(nameof(contentType));
                 return this;
             }
 
@@ -417,8 +469,9 @@ namespace RESTAPISDK.Standard
                 this.httpClient = new HttpClientWrapper(this.httpClientConfig.Build());
 
                 return new RESTAPISDKClient(
-                    this.contentType,
+                    this.xRequestedBy,
                     this.acceptLanguage,
+                    this.contentType,
                     this.environment,
                     this.baseUrl,
                     this.accessToken,

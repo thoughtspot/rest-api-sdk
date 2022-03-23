@@ -61,14 +61,15 @@ namespace RESTAPISDK.Standard.Controllers
 
             // prepare query string for API call.
             StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/api/rest/v2/admin/configuration");
+            queryBuilder.Append("/tspublic/rest/v2/admin/configuration");
 
             // append request with appropriate headers and parameters
             var headers = new Dictionary<string, string>()
             {
                 { "user-agent", this.UserAgent },
-                { "Content-Type", this.Config.ContentType },
+                { "X-Requested-By", this.Config.XRequestedBy },
                 { "Accept-Language", this.Config.AcceptLanguage },
+                { "Content-Type", this.Config.ContentType },
             };
 
             // prepare the API call request to fetch the response.
@@ -123,14 +124,15 @@ namespace RESTAPISDK.Standard.Controllers
 
             // prepare query string for API call.
             StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/api/rest/v2/admin/configuration/overrides");
+            queryBuilder.Append("/tspublic/rest/v2/admin/configuration/overrides");
 
             // append request with appropriate headers and parameters
             var headers = new Dictionary<string, string>()
             {
                 { "user-agent", this.UserAgent },
-                { "Content-Type", this.Config.ContentType },
+                { "X-Requested-By", this.Config.XRequestedBy },
                 { "Accept-Language", this.Config.AcceptLanguage },
+                { "Content-Type", this.Config.ContentType },
             };
 
             // prepare the API call request to fetch the response.
@@ -168,7 +170,7 @@ namespace RESTAPISDK.Standard.Controllers
         /// <param name="body">Required parameter: Example: .</param>
         /// <returns>Returns the bool response from the API call.</returns>
         public bool UpdateClusterConfig(
-                Models.ApiRestV2AdminConfigurationUpdateRequest body)
+                Models.TspublicRestV2AdminConfigurationUpdateRequest body)
         {
             Task<bool> t = this.UpdateClusterConfigAsync(body);
             ApiHelper.RunTaskSynchronously(t);
@@ -182,21 +184,28 @@ namespace RESTAPISDK.Standard.Controllers
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the bool response from the API call.</returns>
         public async Task<bool> UpdateClusterConfigAsync(
-                Models.ApiRestV2AdminConfigurationUpdateRequest body,
+                Models.TspublicRestV2AdminConfigurationUpdateRequest body,
                 CancellationToken cancellationToken = default)
         {
+            // validating required parameters.
+            if (body == null)
+            {
+                throw new ArgumentNullException("body", "The parameter \"body\" is a required parameter and cannot be null.");
+            }
+
             // the base uri for api requests.
             string baseUri = this.Config.GetBaseUri();
 
             // prepare query string for API call.
             StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/api/rest/v2/admin/configuration/update");
+            queryBuilder.Append("/tspublic/rest/v2/admin/configuration/update");
 
             // append request with appropriate headers and parameters
             var headers = new Dictionary<string, string>()
             {
                 { "user-agent", this.UserAgent },
                 { "Content-Type", "application/json" },
+                { "X-Requested-By", this.Config.XRequestedBy },
                 { "Accept-Language", this.Config.AcceptLanguage },
             };
 
@@ -240,7 +249,7 @@ namespace RESTAPISDK.Standard.Controllers
         /// <param name="body">Required parameter: Example: .</param>
         /// <returns>Returns the bool response from the API call.</returns>
         public bool ResetUserPassword(
-                Models.ApiRestV2AdminResetpasswordRequest body)
+                Models.TspublicRestV2AdminResetpasswordRequest body)
         {
             Task<bool> t = this.ResetUserPasswordAsync(body);
             ApiHelper.RunTaskSynchronously(t);
@@ -256,21 +265,28 @@ namespace RESTAPISDK.Standard.Controllers
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the bool response from the API call.</returns>
         public async Task<bool> ResetUserPasswordAsync(
-                Models.ApiRestV2AdminResetpasswordRequest body,
+                Models.TspublicRestV2AdminResetpasswordRequest body,
                 CancellationToken cancellationToken = default)
         {
+            // validating required parameters.
+            if (body == null)
+            {
+                throw new ArgumentNullException("body", "The parameter \"body\" is a required parameter and cannot be null.");
+            }
+
             // the base uri for api requests.
             string baseUri = this.Config.GetBaseUri();
 
             // prepare query string for API call.
             StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/api/rest/v2/admin/resetpassword");
+            queryBuilder.Append("/tspublic/rest/v2/admin/resetpassword");
 
             // append request with appropriate headers and parameters
             var headers = new Dictionary<string, string>()
             {
                 { "user-agent", this.UserAgent },
                 { "Content-Type", "application/json" },
+                { "X-Requested-By", this.Config.XRequestedBy },
                 { "Accept-Language", this.Config.AcceptLanguage },
             };
 
@@ -316,7 +332,7 @@ namespace RESTAPISDK.Standard.Controllers
         /// <param name="body">Required parameter: Example: .</param>
         /// <returns>Returns the Models.AdminsyncPrincipalResponse response from the API call.</returns>
         public Models.AdminsyncPrincipalResponse SyncPrincipal(
-                Models.ApiRestV2AdminSyncprincipalRequest body)
+                Models.TspublicRestV2AdminSyncprincipalRequest body)
         {
             Task<Models.AdminsyncPrincipalResponse> t = this.SyncPrincipalAsync(body);
             ApiHelper.RunTaskSynchronously(t);
@@ -334,15 +350,21 @@ namespace RESTAPISDK.Standard.Controllers
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.AdminsyncPrincipalResponse response from the API call.</returns>
         public async Task<Models.AdminsyncPrincipalResponse> SyncPrincipalAsync(
-                Models.ApiRestV2AdminSyncprincipalRequest body,
+                Models.TspublicRestV2AdminSyncprincipalRequest body,
                 CancellationToken cancellationToken = default)
         {
+            // validating required parameters.
+            if (body == null)
+            {
+                throw new ArgumentNullException("body", "The parameter \"body\" is a required parameter and cannot be null.");
+            }
+
             // the base uri for api requests.
             string baseUri = this.Config.GetBaseUri();
 
             // prepare query string for API call.
             StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/api/rest/v2/admin/syncprincipal");
+            queryBuilder.Append("/tspublic/rest/v2/admin/syncprincipal");
 
             // append request with appropriate headers and parameters
             var headers = new Dictionary<string, string>()
@@ -350,6 +372,7 @@ namespace RESTAPISDK.Standard.Controllers
                 { "user-agent", this.UserAgent },
                 { "accept", "application/json" },
                 { "Content-Type", "application/json" },
+                { "X-Requested-By", this.Config.XRequestedBy },
                 { "Accept-Language", this.Config.AcceptLanguage },
             };
 
@@ -392,7 +415,7 @@ namespace RESTAPISDK.Standard.Controllers
         /// <param name="body">Required parameter: Example: .</param>
         /// <returns>Returns the bool response from the API call.</returns>
         public bool ChangeOwnerOfObjects(
-                Models.ApiRestV2AdminChangeownerRequest body)
+                Models.TspublicRestV2AdminChangeownerRequest body)
         {
             Task<bool> t = this.ChangeOwnerOfObjectsAsync(body);
             ApiHelper.RunTaskSynchronously(t);
@@ -407,21 +430,28 @@ namespace RESTAPISDK.Standard.Controllers
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the bool response from the API call.</returns>
         public async Task<bool> ChangeOwnerOfObjectsAsync(
-                Models.ApiRestV2AdminChangeownerRequest body,
+                Models.TspublicRestV2AdminChangeownerRequest body,
                 CancellationToken cancellationToken = default)
         {
+            // validating required parameters.
+            if (body == null)
+            {
+                throw new ArgumentNullException("body", "The parameter \"body\" is a required parameter and cannot be null.");
+            }
+
             // the base uri for api requests.
             string baseUri = this.Config.GetBaseUri();
 
             // prepare query string for API call.
             StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/api/rest/v2/admin/changeowner");
+            queryBuilder.Append("/tspublic/rest/v2/admin/changeowner");
 
             // append request with appropriate headers and parameters
             var headers = new Dictionary<string, string>()
             {
                 { "user-agent", this.UserAgent },
                 { "Content-Type", "application/json" },
+                { "X-Requested-By", this.Config.XRequestedBy },
                 { "Accept-Language", this.Config.AcceptLanguage },
             };
 

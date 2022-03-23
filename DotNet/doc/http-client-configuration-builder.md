@@ -8,6 +8,7 @@ Class to build instances of HttpClientConfiguration.
 | Name | Description | Return Type |
 |  --- | --- | --- |
 | `Timeout(TimeSpan timeout)` | Http client timeout. | `Builder` |
+| `SkipSslCertVerification(bool skipSslCertVerification)` | Whether to skip verification of SSL certificates. | `Builder` |
 | `NumberOfRetries(int numberOfRetries)` | Number of times the request is retried. | `Builder` |
 | `BackoffFactor(int backoffFactor)` | Exponential backoff factor for duration between retry calls. | `Builder` |
 | `RetryInterval(double retryInterval)` | The time interval between the endpoint calls. | `Builder` |

@@ -48,8 +48,8 @@ namespace RESTAPISDK.Standard.Models
             string name = null,
             string id = null,
             Models.ClientState clientState = null,
-            int? indexVersion = null,
-            int? generationNum = null,
+            double? indexVersion = null,
+            double? generationNum = null,
             bool? isDeleted = null,
             bool? isHidden = null,
             bool? isExternal = null,
@@ -98,13 +98,13 @@ namespace RESTAPISDK.Standard.Models
         /// Gets or sets IndexVersion.
         /// </summary>
         [JsonProperty("indexVersion", NullValueHandling = NullValueHandling.Ignore)]
-        public int? IndexVersion { get; set; }
+        public double? IndexVersion { get; set; }
 
         /// <summary>
         /// Gets or sets GenerationNum.
         /// </summary>
         [JsonProperty("generationNum", NullValueHandling = NullValueHandling.Ignore)]
-        public int? GenerationNum { get; set; }
+        public double? GenerationNum { get; set; }
 
         /// <summary>
         /// Indicates if the tag is deleted

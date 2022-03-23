@@ -72,7 +72,7 @@ namespace RESTAPISDK.Standard.Controllers
 
             // prepare query string for API call.
             StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/api/rest/v2/group");
+            queryBuilder.Append("/tspublic/rest/v2/group");
 
             // prepare specfied query parameters.
             var queryParams = new Dictionary<string, object>()
@@ -86,8 +86,9 @@ namespace RESTAPISDK.Standard.Controllers
             {
                 { "user-agent", this.UserAgent },
                 { "accept", "application/json" },
-                { "Content-Type", this.Config.ContentType },
+                { "X-Requested-By", this.Config.XRequestedBy },
                 { "Accept-Language", this.Config.AcceptLanguage },
+                { "Content-Type", this.Config.ContentType },
             };
 
             // prepare the API call request to fetch the response.
@@ -129,7 +130,7 @@ namespace RESTAPISDK.Standard.Controllers
         /// <param name="body">Required parameter: Example: .</param>
         /// <returns>Returns the Models.GroupResponse response from the API call.</returns>
         public Models.GroupResponse CreateGroup(
-                Models.ApiRestV2GroupCreateRequest body)
+                Models.TspublicRestV2GroupCreateRequest body)
         {
             Task<Models.GroupResponse> t = this.CreateGroupAsync(body);
             ApiHelper.RunTaskSynchronously(t);
@@ -147,15 +148,21 @@ namespace RESTAPISDK.Standard.Controllers
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.GroupResponse response from the API call.</returns>
         public async Task<Models.GroupResponse> CreateGroupAsync(
-                Models.ApiRestV2GroupCreateRequest body,
+                Models.TspublicRestV2GroupCreateRequest body,
                 CancellationToken cancellationToken = default)
         {
+            // validating required parameters.
+            if (body == null)
+            {
+                throw new ArgumentNullException("body", "The parameter \"body\" is a required parameter and cannot be null.");
+            }
+
             // the base uri for api requests.
             string baseUri = this.Config.GetBaseUri();
 
             // prepare query string for API call.
             StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/api/rest/v2/group/create");
+            queryBuilder.Append("/tspublic/rest/v2/group/create");
 
             // append request with appropriate headers and parameters
             var headers = new Dictionary<string, string>()
@@ -163,6 +170,7 @@ namespace RESTAPISDK.Standard.Controllers
                 { "user-agent", this.UserAgent },
                 { "accept", "application/json" },
                 { "Content-Type", "application/json" },
+                { "X-Requested-By", this.Config.XRequestedBy },
                 { "Accept-Language", this.Config.AcceptLanguage },
             };
 
@@ -206,7 +214,7 @@ namespace RESTAPISDK.Standard.Controllers
         /// <param name="body">Required parameter: Example: .</param>
         /// <returns>Returns the bool response from the API call.</returns>
         public bool UpdateGroup(
-                Models.ApiRestV2GroupUpdateRequest body)
+                Models.TspublicRestV2GroupUpdateRequest body)
         {
             Task<bool> t = this.UpdateGroupAsync(body);
             ApiHelper.RunTaskSynchronously(t);
@@ -222,21 +230,28 @@ namespace RESTAPISDK.Standard.Controllers
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the bool response from the API call.</returns>
         public async Task<bool> UpdateGroupAsync(
-                Models.ApiRestV2GroupUpdateRequest body,
+                Models.TspublicRestV2GroupUpdateRequest body,
                 CancellationToken cancellationToken = default)
         {
+            // validating required parameters.
+            if (body == null)
+            {
+                throw new ArgumentNullException("body", "The parameter \"body\" is a required parameter and cannot be null.");
+            }
+
             // the base uri for api requests.
             string baseUri = this.Config.GetBaseUri();
 
             // prepare query string for API call.
             StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/api/rest/v2/group/update");
+            queryBuilder.Append("/tspublic/rest/v2/group/update");
 
             // append request with appropriate headers and parameters
             var headers = new Dictionary<string, string>()
             {
                 { "user-agent", this.UserAgent },
                 { "Content-Type", "application/json" },
+                { "X-Requested-By", this.Config.XRequestedBy },
                 { "Accept-Language", this.Config.AcceptLanguage },
             };
 
@@ -306,7 +321,7 @@ namespace RESTAPISDK.Standard.Controllers
 
             // prepare query string for API call.
             StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/api/rest/v2/group/delete");
+            queryBuilder.Append("/tspublic/rest/v2/group/delete");
 
             // prepare specfied query parameters.
             var queryParams = new Dictionary<string, object>()
@@ -319,8 +334,9 @@ namespace RESTAPISDK.Standard.Controllers
             var headers = new Dictionary<string, string>()
             {
                 { "user-agent", this.UserAgent },
-                { "Content-Type", this.Config.ContentType },
+                { "X-Requested-By", this.Config.XRequestedBy },
                 { "Accept-Language", this.Config.AcceptLanguage },
+                { "Content-Type", this.Config.ContentType },
             };
 
             // prepare the API call request to fetch the response.
@@ -360,7 +376,7 @@ namespace RESTAPISDK.Standard.Controllers
         /// <param name="body">Required parameter: Example: .</param>
         /// <returns>Returns the bool response from the API call.</returns>
         public bool AddPrivilegesToGroup(
-                Models.ApiRestV2GroupAddprivilegeRequest body)
+                Models.TspublicRestV2GroupAddprivilegeRequest body)
         {
             Task<bool> t = this.AddPrivilegesToGroupAsync(body);
             ApiHelper.RunTaskSynchronously(t);
@@ -376,21 +392,28 @@ namespace RESTAPISDK.Standard.Controllers
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the bool response from the API call.</returns>
         public async Task<bool> AddPrivilegesToGroupAsync(
-                Models.ApiRestV2GroupAddprivilegeRequest body,
+                Models.TspublicRestV2GroupAddprivilegeRequest body,
                 CancellationToken cancellationToken = default)
         {
+            // validating required parameters.
+            if (body == null)
+            {
+                throw new ArgumentNullException("body", "The parameter \"body\" is a required parameter and cannot be null.");
+            }
+
             // the base uri for api requests.
             string baseUri = this.Config.GetBaseUri();
 
             // prepare query string for API call.
             StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/api/rest/v2/group/addprivilege");
+            queryBuilder.Append("/tspublic/rest/v2/group/addprivilege");
 
             // append request with appropriate headers and parameters
             var headers = new Dictionary<string, string>()
             {
                 { "user-agent", this.UserAgent },
                 { "Content-Type", "application/json" },
+                { "X-Requested-By", this.Config.XRequestedBy },
                 { "Accept-Language", this.Config.AcceptLanguage },
             };
 
@@ -434,7 +457,7 @@ namespace RESTAPISDK.Standard.Controllers
         /// <param name="body">Required parameter: Example: .</param>
         /// <returns>Returns the bool response from the API call.</returns>
         public bool RemovePrivilegesFromGroup(
-                Models.ApiRestV2GroupRemoveprivilegeRequest body)
+                Models.TspublicRestV2GroupRemoveprivilegeRequest body)
         {
             Task<bool> t = this.RemovePrivilegesFromGroupAsync(body);
             ApiHelper.RunTaskSynchronously(t);
@@ -450,21 +473,28 @@ namespace RESTAPISDK.Standard.Controllers
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the bool response from the API call.</returns>
         public async Task<bool> RemovePrivilegesFromGroupAsync(
-                Models.ApiRestV2GroupRemoveprivilegeRequest body,
+                Models.TspublicRestV2GroupRemoveprivilegeRequest body,
                 CancellationToken cancellationToken = default)
         {
+            // validating required parameters.
+            if (body == null)
+            {
+                throw new ArgumentNullException("body", "The parameter \"body\" is a required parameter and cannot be null.");
+            }
+
             // the base uri for api requests.
             string baseUri = this.Config.GetBaseUri();
 
             // prepare query string for API call.
             StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/api/rest/v2/group/removeprivilege");
+            queryBuilder.Append("/tspublic/rest/v2/group/removeprivilege");
 
             // append request with appropriate headers and parameters
             var headers = new Dictionary<string, string>()
             {
                 { "user-agent", this.UserAgent },
                 { "Content-Type", "application/json" },
+                { "X-Requested-By", this.Config.XRequestedBy },
                 { "Accept-Language", this.Config.AcceptLanguage },
             };
 
@@ -508,7 +538,7 @@ namespace RESTAPISDK.Standard.Controllers
         /// <param name="body">Required parameter: Example: .</param>
         /// <returns>Returns the bool response from the API call.</returns>
         public bool AddUsersToGroup(
-                Models.ApiRestV2GroupAdduserRequest body)
+                Models.TspublicRestV2GroupAdduserRequest body)
         {
             Task<bool> t = this.AddUsersToGroupAsync(body);
             ApiHelper.RunTaskSynchronously(t);
@@ -524,21 +554,28 @@ namespace RESTAPISDK.Standard.Controllers
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the bool response from the API call.</returns>
         public async Task<bool> AddUsersToGroupAsync(
-                Models.ApiRestV2GroupAdduserRequest body,
+                Models.TspublicRestV2GroupAdduserRequest body,
                 CancellationToken cancellationToken = default)
         {
+            // validating required parameters.
+            if (body == null)
+            {
+                throw new ArgumentNullException("body", "The parameter \"body\" is a required parameter and cannot be null.");
+            }
+
             // the base uri for api requests.
             string baseUri = this.Config.GetBaseUri();
 
             // prepare query string for API call.
             StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/api/rest/v2/group/adduser");
+            queryBuilder.Append("/tspublic/rest/v2/group/adduser");
 
             // append request with appropriate headers and parameters
             var headers = new Dictionary<string, string>()
             {
                 { "user-agent", this.UserAgent },
                 { "Content-Type", "application/json" },
+                { "X-Requested-By", this.Config.XRequestedBy },
                 { "Accept-Language", this.Config.AcceptLanguage },
             };
 
@@ -582,7 +619,7 @@ namespace RESTAPISDK.Standard.Controllers
         /// <param name="body">Required parameter: Example: .</param>
         /// <returns>Returns the bool response from the API call.</returns>
         public bool RemoveUsersFromGroup(
-                Models.ApiRestV2GroupRemoveuserRequest body)
+                Models.TspublicRestV2GroupRemoveuserRequest body)
         {
             Task<bool> t = this.RemoveUsersFromGroupAsync(body);
             ApiHelper.RunTaskSynchronously(t);
@@ -598,21 +635,28 @@ namespace RESTAPISDK.Standard.Controllers
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the bool response from the API call.</returns>
         public async Task<bool> RemoveUsersFromGroupAsync(
-                Models.ApiRestV2GroupRemoveuserRequest body,
+                Models.TspublicRestV2GroupRemoveuserRequest body,
                 CancellationToken cancellationToken = default)
         {
+            // validating required parameters.
+            if (body == null)
+            {
+                throw new ArgumentNullException("body", "The parameter \"body\" is a required parameter and cannot be null.");
+            }
+
             // the base uri for api requests.
             string baseUri = this.Config.GetBaseUri();
 
             // prepare query string for API call.
             StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/api/rest/v2/group/removeuser");
+            queryBuilder.Append("/tspublic/rest/v2/group/removeuser");
 
             // append request with appropriate headers and parameters
             var headers = new Dictionary<string, string>()
             {
                 { "user-agent", this.UserAgent },
                 { "Content-Type", "application/json" },
+                { "X-Requested-By", this.Config.XRequestedBy },
                 { "Accept-Language", this.Config.AcceptLanguage },
             };
 
@@ -656,7 +700,7 @@ namespace RESTAPISDK.Standard.Controllers
         /// <param name="body">Required parameter: Example: .</param>
         /// <returns>Returns the bool response from the API call.</returns>
         public bool AddGroupsToGroup(
-                Models.ApiRestV2GroupAddgroupRequest body)
+                Models.TspublicRestV2GroupAddgroupRequest body)
         {
             Task<bool> t = this.AddGroupsToGroupAsync(body);
             ApiHelper.RunTaskSynchronously(t);
@@ -672,21 +716,28 @@ namespace RESTAPISDK.Standard.Controllers
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the bool response from the API call.</returns>
         public async Task<bool> AddGroupsToGroupAsync(
-                Models.ApiRestV2GroupAddgroupRequest body,
+                Models.TspublicRestV2GroupAddgroupRequest body,
                 CancellationToken cancellationToken = default)
         {
+            // validating required parameters.
+            if (body == null)
+            {
+                throw new ArgumentNullException("body", "The parameter \"body\" is a required parameter and cannot be null.");
+            }
+
             // the base uri for api requests.
             string baseUri = this.Config.GetBaseUri();
 
             // prepare query string for API call.
             StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/api/rest/v2/group/addgroup");
+            queryBuilder.Append("/tspublic/rest/v2/group/addgroup");
 
             // append request with appropriate headers and parameters
             var headers = new Dictionary<string, string>()
             {
                 { "user-agent", this.UserAgent },
                 { "Content-Type", "application/json" },
+                { "X-Requested-By", this.Config.XRequestedBy },
                 { "Accept-Language", this.Config.AcceptLanguage },
             };
 
@@ -730,7 +781,7 @@ namespace RESTAPISDK.Standard.Controllers
         /// <param name="body">Required parameter: Example: .</param>
         /// <returns>Returns the bool response from the API call.</returns>
         public bool RemoveGroupsFromGroup(
-                Models.ApiRestV2GroupRemovegroupRequest body)
+                Models.TspublicRestV2GroupRemovegroupRequest body)
         {
             Task<bool> t = this.RemoveGroupsFromGroupAsync(body);
             ApiHelper.RunTaskSynchronously(t);
@@ -746,21 +797,28 @@ namespace RESTAPISDK.Standard.Controllers
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the bool response from the API call.</returns>
         public async Task<bool> RemoveGroupsFromGroupAsync(
-                Models.ApiRestV2GroupRemovegroupRequest body,
+                Models.TspublicRestV2GroupRemovegroupRequest body,
                 CancellationToken cancellationToken = default)
         {
+            // validating required parameters.
+            if (body == null)
+            {
+                throw new ArgumentNullException("body", "The parameter \"body\" is a required parameter and cannot be null.");
+            }
+
             // the base uri for api requests.
             string baseUri = this.Config.GetBaseUri();
 
             // prepare query string for API call.
             StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/api/rest/v2/group/removegroup");
+            queryBuilder.Append("/tspublic/rest/v2/group/removegroup");
 
             // append request with appropriate headers and parameters
             var headers = new Dictionary<string, string>()
             {
                 { "user-agent", this.UserAgent },
                 { "Content-Type", "application/json" },
+                { "X-Requested-By", this.Config.XRequestedBy },
                 { "Accept-Language", this.Config.AcceptLanguage },
             };
 
@@ -803,7 +861,7 @@ namespace RESTAPISDK.Standard.Controllers
         /// <param name="body">Required parameter: Example: .</param>
         /// <returns>Returns the List of Models.GroupResponse response from the API call.</returns>
         public List<Models.GroupResponse> SearchGroups(
-                Models.ApiRestV2GroupSearchRequest body)
+                Models.TspublicRestV2GroupSearchRequest body)
         {
             Task<List<Models.GroupResponse>> t = this.SearchGroupsAsync(body);
             ApiHelper.RunTaskSynchronously(t);
@@ -818,15 +876,21 @@ namespace RESTAPISDK.Standard.Controllers
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the List of Models.GroupResponse response from the API call.</returns>
         public async Task<List<Models.GroupResponse>> SearchGroupsAsync(
-                Models.ApiRestV2GroupSearchRequest body,
+                Models.TspublicRestV2GroupSearchRequest body,
                 CancellationToken cancellationToken = default)
         {
+            // validating required parameters.
+            if (body == null)
+            {
+                throw new ArgumentNullException("body", "The parameter \"body\" is a required parameter and cannot be null.");
+            }
+
             // the base uri for api requests.
             string baseUri = this.Config.GetBaseUri();
 
             // prepare query string for API call.
             StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/api/rest/v2/group/search");
+            queryBuilder.Append("/tspublic/rest/v2/group/search");
 
             // append request with appropriate headers and parameters
             var headers = new Dictionary<string, string>()
@@ -834,6 +898,7 @@ namespace RESTAPISDK.Standard.Controllers
                 { "user-agent", this.UserAgent },
                 { "accept", "application/json" },
                 { "Content-Type", "application/json" },
+                { "X-Requested-By", this.Config.XRequestedBy },
                 { "Accept-Language", this.Config.AcceptLanguage },
             };
 

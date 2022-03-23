@@ -10,17 +10,17 @@ GroupController groupController = client.GroupController;
 
 ## Methods
 
-* [Get Group](/doc/controllers/group.md#get-group)
-* [Create Group](/doc/controllers/group.md#create-group)
-* [Update Group](/doc/controllers/group.md#update-group)
-* [Delete Group](/doc/controllers/group.md#delete-group)
-* [Add Privileges to Group](/doc/controllers/group.md#add-privileges-to-group)
-* [Remove Privileges From Group](/doc/controllers/group.md#remove-privileges-from-group)
-* [Add Users to Group](/doc/controllers/group.md#add-users-to-group)
-* [Remove Users From Group](/doc/controllers/group.md#remove-users-from-group)
-* [Add Groups to Group](/doc/controllers/group.md#add-groups-to-group)
-* [Remove Groups From Group](/doc/controllers/group.md#remove-groups-from-group)
-* [Search Groups](/doc/controllers/group.md#search-groups)
+* [Get Group](../../doc/controllers/group.md#get-group)
+* [Create Group](../../doc/controllers/group.md#create-group)
+* [Update Group](../../doc/controllers/group.md#update-group)
+* [Delete Group](../../doc/controllers/group.md#delete-group)
+* [Add Privileges to Group](../../doc/controllers/group.md#add-privileges-to-group)
+* [Remove Privileges From Group](../../doc/controllers/group.md#remove-privileges-from-group)
+* [Add Users to Group](../../doc/controllers/group.md#add-users-to-group)
+* [Remove Users From Group](../../doc/controllers/group.md#remove-users-from-group)
+* [Add Groups to Group](../../doc/controllers/group.md#add-groups-to-group)
+* [Remove Groups From Group](../../doc/controllers/group.md#remove-groups-from-group)
+* [Search Groups](../../doc/controllers/group.md#search-groups)
 
 
 # Get Group
@@ -44,7 +44,7 @@ GetGroupAsync(
 
 ## Response Type
 
-[`Task<Models.GroupResponse>`](/doc/models/group-response.md)
+[`Task<Models.GroupResponse>`](../../doc/models/group-response.md)
 
 ## Example Usage
 
@@ -60,7 +60,7 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Create Group
@@ -77,23 +77,23 @@ ThoughtSpot also has a default group called ALL_GROUP. When you create new group
 
 ```csharp
 CreateGroupAsync(
-    Models.ApiRestV2GroupCreateRequest body)
+    Models.TspublicRestV2GroupCreateRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.ApiRestV2GroupCreateRequest`](/doc/models/api-rest-v2-group-create-request.md) | Body, Required | - |
+| `body` | [`Models.TspublicRestV2GroupCreateRequest`](../../doc/models/tspublic-rest-v2-group-create-request.md) | Body, Required | - |
 
 ## Response Type
 
-[`Task<Models.GroupResponse>`](/doc/models/group-response.md)
+[`Task<Models.GroupResponse>`](../../doc/models/group-response.md)
 
 ## Example Usage
 
 ```csharp
-var body = new ApiRestV2GroupCreateRequest();
+var body = new TspublicRestV2GroupCreateRequest();
 body.Name = "name6";
 body.DisplayName = "displayName6";
 
@@ -108,7 +108,7 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Update Group
@@ -121,14 +121,14 @@ At least one of id or name is required to update the group. When both are given,
 
 ```csharp
 UpdateGroupAsync(
-    Models.ApiRestV2GroupUpdateRequest body)
+    Models.TspublicRestV2GroupUpdateRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.ApiRestV2GroupUpdateRequest`](/doc/models/api-rest-v2-group-update-request.md) | Body, Required | - |
+| `body` | [`Models.TspublicRestV2GroupUpdateRequest`](../../doc/models/tspublic-rest-v2-group-update-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -137,7 +137,7 @@ UpdateGroupAsync(
 ## Example Usage
 
 ```csharp
-var body = new ApiRestV2GroupUpdateRequest();
+var body = new TspublicRestV2GroupUpdateRequest();
 
 try
 {
@@ -150,7 +150,7 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Delete Group
@@ -190,7 +190,7 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Add Privileges to Group
@@ -203,14 +203,14 @@ At least one of id or name of group is required. When both are given,then user i
 
 ```csharp
 AddPrivilegesToGroupAsync(
-    Models.ApiRestV2GroupAddprivilegeRequest body)
+    Models.TspublicRestV2GroupAddprivilegeRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.ApiRestV2GroupAddprivilegeRequest`](/doc/models/api-rest-v2-group-addprivilege-request.md) | Body, Required | - |
+| `body` | [`Models.TspublicRestV2GroupAddprivilegeRequest`](../../doc/models/tspublic-rest-v2-group-addprivilege-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -219,7 +219,7 @@ AddPrivilegesToGroupAsync(
 ## Example Usage
 
 ```csharp
-var body = new ApiRestV2GroupAddprivilegeRequest();
+var body = new TspublicRestV2GroupAddprivilegeRequest();
 
 try
 {
@@ -232,7 +232,7 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Remove Privileges From Group
@@ -245,14 +245,14 @@ At least one of id or name of group is required. When both are given,then user i
 
 ```csharp
 RemovePrivilegesFromGroupAsync(
-    Models.ApiRestV2GroupRemoveprivilegeRequest body)
+    Models.TspublicRestV2GroupRemoveprivilegeRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.ApiRestV2GroupRemoveprivilegeRequest`](/doc/models/api-rest-v2-group-removeprivilege-request.md) | Body, Required | - |
+| `body` | [`Models.TspublicRestV2GroupRemoveprivilegeRequest`](../../doc/models/tspublic-rest-v2-group-removeprivilege-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -261,7 +261,7 @@ RemovePrivilegesFromGroupAsync(
 ## Example Usage
 
 ```csharp
-var body = new ApiRestV2GroupRemoveprivilegeRequest();
+var body = new TspublicRestV2GroupRemoveprivilegeRequest();
 
 try
 {
@@ -274,7 +274,7 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Add Users to Group
@@ -287,14 +287,14 @@ At least one of id or name of the group is required. When both are given,then us
 
 ```csharp
 AddUsersToGroupAsync(
-    Models.ApiRestV2GroupAdduserRequest body)
+    Models.TspublicRestV2GroupAdduserRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.ApiRestV2GroupAdduserRequest`](/doc/models/api-rest-v2-group-adduser-request.md) | Body, Required | - |
+| `body` | [`Models.TspublicRestV2GroupAdduserRequest`](../../doc/models/tspublic-rest-v2-group-adduser-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -303,7 +303,12 @@ AddUsersToGroupAsync(
 ## Example Usage
 
 ```csharp
-var body = new ApiRestV2GroupAdduserRequest();
+var body = new TspublicRestV2GroupAdduserRequest();
+body.Users = new List<UserNameAndIDInput>();
+
+var bodyUsers0 = new UserNameAndIDInput();
+body.Users.Add(bodyUsers0);
+
 
 try
 {
@@ -316,7 +321,7 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Remove Users From Group
@@ -329,14 +334,14 @@ At least one of id or name of group is required. When both are given,then user i
 
 ```csharp
 RemoveUsersFromGroupAsync(
-    Models.ApiRestV2GroupRemoveuserRequest body)
+    Models.TspublicRestV2GroupRemoveuserRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.ApiRestV2GroupRemoveuserRequest`](/doc/models/api-rest-v2-group-removeuser-request.md) | Body, Required | - |
+| `body` | [`Models.TspublicRestV2GroupRemoveuserRequest`](../../doc/models/tspublic-rest-v2-group-removeuser-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -345,7 +350,12 @@ RemoveUsersFromGroupAsync(
 ## Example Usage
 
 ```csharp
-var body = new ApiRestV2GroupRemoveuserRequest();
+var body = new TspublicRestV2GroupRemoveuserRequest();
+body.Users = new List<UserNameAndIDInput>();
+
+var bodyUsers0 = new UserNameAndIDInput();
+body.Users.Add(bodyUsers0);
+
 
 try
 {
@@ -358,7 +368,7 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Add Groups to Group
@@ -371,14 +381,14 @@ At least one of id or name of group is required. When both are given,then user i
 
 ```csharp
 AddGroupsToGroupAsync(
-    Models.ApiRestV2GroupAddgroupRequest body)
+    Models.TspublicRestV2GroupAddgroupRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.ApiRestV2GroupAddgroupRequest`](/doc/models/api-rest-v2-group-addgroup-request.md) | Body, Required | - |
+| `body` | [`Models.TspublicRestV2GroupAddgroupRequest`](../../doc/models/tspublic-rest-v2-group-addgroup-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -387,7 +397,12 @@ AddGroupsToGroupAsync(
 ## Example Usage
 
 ```csharp
-var body = new ApiRestV2GroupAddgroupRequest();
+var body = new TspublicRestV2GroupAddgroupRequest();
+body.Groups = new List<GroupNameAndIDInput>();
+
+var bodyGroups0 = new GroupNameAndIDInput();
+body.Groups.Add(bodyGroups0);
+
 
 try
 {
@@ -400,7 +415,7 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Remove Groups From Group
@@ -413,14 +428,14 @@ At least one of id or name of group is required. When both are given,then user i
 
 ```csharp
 RemoveGroupsFromGroupAsync(
-    Models.ApiRestV2GroupRemovegroupRequest body)
+    Models.TspublicRestV2GroupRemovegroupRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.ApiRestV2GroupRemovegroupRequest`](/doc/models/api-rest-v2-group-removegroup-request.md) | Body, Required | - |
+| `body` | [`Models.TspublicRestV2GroupRemovegroupRequest`](../../doc/models/tspublic-rest-v2-group-removegroup-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -429,7 +444,12 @@ RemoveGroupsFromGroupAsync(
 ## Example Usage
 
 ```csharp
-var body = new ApiRestV2GroupRemovegroupRequest();
+var body = new TspublicRestV2GroupRemovegroupRequest();
+body.Groups = new List<GroupNameAndIDInput>();
+
+var bodyGroups0 = new GroupNameAndIDInput();
+body.Groups.Add(bodyGroups0);
+
 
 try
 {
@@ -442,7 +462,7 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Search Groups
@@ -453,23 +473,23 @@ If no inputs are provided, then all groups are included in the response.
 
 ```csharp
 SearchGroupsAsync(
-    Models.ApiRestV2GroupSearchRequest body)
+    Models.TspublicRestV2GroupSearchRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.ApiRestV2GroupSearchRequest`](/doc/models/api-rest-v2-group-search-request.md) | Body, Required | - |
+| `body` | [`Models.TspublicRestV2GroupSearchRequest`](../../doc/models/tspublic-rest-v2-group-search-request.md) | Body, Required | - |
 
 ## Response Type
 
-[`Task<List<Models.GroupResponse>>`](/doc/models/group-response.md)
+[`Task<List<Models.GroupResponse>>`](../../doc/models/group-response.md)
 
 ## Example Usage
 
 ```csharp
-var body = new ApiRestV2GroupSearchRequest();
+var body = new TspublicRestV2GroupSearchRequest();
 
 try
 {
@@ -482,5 +502,5 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 

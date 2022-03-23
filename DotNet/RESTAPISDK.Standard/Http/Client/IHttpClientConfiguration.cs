@@ -18,6 +18,11 @@ namespace RESTAPISDK.Standard.Http.Client
         TimeSpan Timeout { get; }
 
         /// <summary>
+        /// Whether to skip verification of SSL certificates.
+        /// </summary>
+        bool SkipSslCertVerification { get; }
+
+        /// <summary>
         /// Number of times the request is retried.
         /// </summary>
         int NumberOfRetries { get; }

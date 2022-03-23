@@ -57,8 +57,8 @@ namespace RESTAPISDK.Standard.Models
             bool? isDeprecated = null,
             bool? isDeleted = null,
             bool? isHidden = null,
-            int? indexVersion = null,
-            int? generationNum = null,
+            double? indexVersion = null,
+            double? generationNum = null,
             string created = null,
             string modified = null,
             Models.UserNameAndID author = null,
@@ -143,13 +143,13 @@ namespace RESTAPISDK.Standard.Models
         /// Gets or sets IndexVersion.
         /// </summary>
         [JsonProperty("indexVersion", NullValueHandling = NullValueHandling.Ignore)]
-        public int? IndexVersion { get; set; }
+        public double? IndexVersion { get; set; }
 
         /// <summary>
         /// Gets or sets GenerationNum.
         /// </summary>
         [JsonProperty("generationNum", NullValueHandling = NullValueHandling.Ignore)]
-        public int? GenerationNum { get; set; }
+        public double? GenerationNum { get; set; }
 
         /// <summary>
         /// Date and time when the table was created

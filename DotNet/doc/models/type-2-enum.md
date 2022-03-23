@@ -16,7 +16,4 @@ Type of user. LOCAL_USER indicates that the user is created locally in the Thoug
 | `SAMLUSER` |
 | `OIDCUSER` |
 | `LOCALUSER` |
-| `LDAPGROUP` |
-| `LOCALGROUP` |
-| `TENANTGROUP` |
 

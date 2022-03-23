@@ -10,9 +10,9 @@ DataController dataController = client.DataController;
 
 ## Methods
 
-* [Search Query Data](/doc/controllers/data.md#search-query-data)
-* [Answer Data](/doc/controllers/data.md#answer-data)
-* [Liveboard Data](/doc/controllers/data.md#liveboard-data)
+* [Search Query Data](../../doc/controllers/data.md#search-query-data)
+* [Answer Data](../../doc/controllers/data.md#answer-data)
+* [Liveboard Data](../../doc/controllers/data.md#liveboard-data)
 
 
 # Search Query Data
@@ -21,14 +21,14 @@ To programmatically retrieve data from ThoughtSpot using search query string, us
 
 ```csharp
 SearchQueryDataAsync(
-    Models.ApiRestV2DataSearchRequest body)
+    Models.TspublicRestV2DataSearchRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.ApiRestV2DataSearchRequest`](/doc/models/api-rest-v2-data-search-request.md) | Body, Required | - |
+| `body` | [`Models.TspublicRestV2DataSearchRequest`](../../doc/models/tspublic-rest-v2-data-search-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -37,7 +37,7 @@ SearchQueryDataAsync(
 ## Example Usage
 
 ```csharp
-var body = new ApiRestV2DataSearchRequest();
+var body = new TspublicRestV2DataSearchRequest();
 body.QueryString = "queryString0";
 body.DataObjectId = "dataObjectId6";
 
@@ -52,7 +52,7 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Answer Data
@@ -61,14 +61,14 @@ To retrieve data related to a Answer from the ThoughtSpot system, you can use th
 
 ```csharp
 AnswerDataAsync(
-    Models.ApiRestV2DataAnswerRequest body)
+    Models.TspublicRestV2DataAnswerRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.ApiRestV2DataAnswerRequest`](/doc/models/api-rest-v2-data-answer-request.md) | Body, Required | - |
+| `body` | [`Models.TspublicRestV2DataAnswerRequest`](../../doc/models/tspublic-rest-v2-data-answer-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -77,7 +77,7 @@ AnswerDataAsync(
 ## Example Usage
 
 ```csharp
-var body = new ApiRestV2DataAnswerRequest();
+var body = new TspublicRestV2DataAnswerRequest();
 body.Id = "id6";
 
 try
@@ -91,7 +91,7 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Liveboard Data
@@ -100,14 +100,14 @@ To retrieve data related to a Liveboard or visualization from the ThoughtSpot sy
 
 ```csharp
 LiveboardDataAsync(
-    Models.ApiRestV2DataLiveboardRequest body)
+    Models.TspublicRestV2DataLiveboardRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.ApiRestV2DataLiveboardRequest`](/doc/models/api-rest-v2-data-liveboard-request.md) | Body, Required | - |
+| `body` | [`Models.TspublicRestV2DataLiveboardRequest`](../../doc/models/tspublic-rest-v2-data-liveboard-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -116,7 +116,7 @@ LiveboardDataAsync(
 ## Example Usage
 
 ```csharp
-var body = new ApiRestV2DataLiveboardRequest();
+var body = new TspublicRestV2DataLiveboardRequest();
 body.Id = "id6";
 
 try
@@ -130,5 +130,5 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 

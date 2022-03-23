@@ -19,63 +19,27 @@ namespace RESTAPISDK.Standard.Models
     public enum Type13Enum
     {
         /// <summary>
-        /// SNOWFLAKE.
+        /// LIVEBOARD.
         /// </summary>
-        [EnumMember(Value = "SNOWFLAKE")]
-        SNOWFLAKE,
+        [EnumMember(Value = "LIVEBOARD")]
+        LIVEBOARD,
 
         /// <summary>
-        /// AMAZONREDSHIFT.
+        /// DATAOBJECT.
         /// </summary>
-        [EnumMember(Value = "AMAZON_REDSHIFT")]
-        AMAZONREDSHIFT,
+        [EnumMember(Value = "DATAOBJECT")]
+        DATAOBJECT,
 
         /// <summary>
-        /// GOOGLEBIGQUERY.
+        /// COLUMN.
         /// </summary>
-        [EnumMember(Value = "GOOGLE_BIGQUERY")]
-        GOOGLEBIGQUERY,
+        [EnumMember(Value = "COLUMN")]
+        COLUMN,
 
         /// <summary>
-        /// AZURESYNAPSE.
+        /// JOIN.
         /// </summary>
-        [EnumMember(Value = "AZURE_SYNAPSE")]
-        AZURESYNAPSE,
-
-        /// <summary>
-        /// TERADATA.
-        /// </summary>
-        [EnumMember(Value = "TERADATA")]
-        TERADATA,
-
-        /// <summary>
-        /// STARBURST.
-        /// </summary>
-        [EnumMember(Value = "STARBURST")]
-        STARBURST,
-
-        /// <summary>
-        /// SAPHANA.
-        /// </summary>
-        [EnumMember(Value = "SAP_HANA")]
-        SAPHANA,
-
-        /// <summary>
-        /// ORACLEADW.
-        /// </summary>
-        [EnumMember(Value = "ORACLE_ADW")]
-        ORACLEADW,
-
-        /// <summary>
-        /// DATABRICKS.
-        /// </summary>
-        [EnumMember(Value = "DATABRICKS")]
-        DATABRICKS,
-
-        /// <summary>
-        /// DENODO.
-        /// </summary>
-        [EnumMember(Value = "DENODO")]
-        DENODO,
+        [EnumMember(Value = "JOIN")]
+        JOIN,
     }
 }

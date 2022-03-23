@@ -11,8 +11,8 @@
 |  --- | --- | --- | --- |
 | `Name` | `string` | Optional | Username or name of the user group |
 | `Id` | `string` | Optional | GUID of the user or user group |
-| `Type` | [`Models.Type1Enum?`](/doc/models/type-1-enum.md) | Optional | Type of access detail provided |
-| `Access` | [`Models.AccessEnum?`](/doc/models/access-enum.md) | Optional | Minimum access level that the specified user or user group has. |
+| `Type` | [`Models.Type1Enum?`](../../doc/models/type-1-enum.md) | Optional | Type of access detail provided |
+| `Access` | [`Models.AccessEnum?`](../../doc/models/access-enum.md) | Optional | Minimum access level that the specified user or user group has. |
 
 ## Example (as JSON)
 

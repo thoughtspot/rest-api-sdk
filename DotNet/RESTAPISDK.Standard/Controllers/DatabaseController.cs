@@ -63,15 +63,16 @@ namespace RESTAPISDK.Standard.Controllers
 
             // prepare query string for API call.
             StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/api/rest/v2/database");
+            queryBuilder.Append("/tspublic/rest/v2/database");
 
             // append request with appropriate headers and parameters
             var headers = new Dictionary<string, string>()
             {
                 { "user-agent", this.UserAgent },
                 { "accept", "application/json" },
-                { "Content-Type", this.Config.ContentType },
+                { "X-Requested-By", this.Config.XRequestedBy },
                 { "Accept-Language", this.Config.AcceptLanguage },
+                { "Content-Type", this.Config.ContentType },
             };
 
             // prepare the API call request to fetch the response.
@@ -128,12 +129,18 @@ namespace RESTAPISDK.Standard.Controllers
                 string database,
                 CancellationToken cancellationToken = default)
         {
+            // validating required parameters.
+            if (database == null)
+            {
+                throw new ArgumentNullException("database", "The parameter \"database\" is a required parameter and cannot be null.");
+            }
+
             // the base uri for api requests.
             string baseUri = this.Config.GetBaseUri();
 
             // prepare query string for API call.
             StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/api/rest/v2/database/schema");
+            queryBuilder.Append("/tspublic/rest/v2/database/schema");
 
             // prepare specfied query parameters.
             var queryParams = new Dictionary<string, object>()
@@ -146,8 +153,9 @@ namespace RESTAPISDK.Standard.Controllers
             {
                 { "user-agent", this.UserAgent },
                 { "accept", "application/json" },
-                { "Content-Type", this.Config.ContentType },
+                { "X-Requested-By", this.Config.XRequestedBy },
                 { "Accept-Language", this.Config.AcceptLanguage },
+                { "Content-Type", this.Config.ContentType },
             };
 
             // prepare the API call request to fetch the response.
@@ -208,12 +216,23 @@ namespace RESTAPISDK.Standard.Controllers
                 string schema,
                 CancellationToken cancellationToken = default)
         {
+            // validating required parameters.
+            if (database == null)
+            {
+                throw new ArgumentNullException("database", "The parameter \"database\" is a required parameter and cannot be null.");
+            }
+
+            if (schema == null)
+            {
+                throw new ArgumentNullException("schema", "The parameter \"schema\" is a required parameter and cannot be null.");
+            }
+
             // the base uri for api requests.
             string baseUri = this.Config.GetBaseUri();
 
             // prepare query string for API call.
             StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/api/rest/v2/database/table");
+            queryBuilder.Append("/tspublic/rest/v2/database/table");
 
             // prepare specfied query parameters.
             var queryParams = new Dictionary<string, object>()
@@ -227,8 +246,9 @@ namespace RESTAPISDK.Standard.Controllers
             {
                 { "user-agent", this.UserAgent },
                 { "accept", "application/json" },
-                { "Content-Type", this.Config.ContentType },
+                { "X-Requested-By", this.Config.XRequestedBy },
                 { "Accept-Language", this.Config.AcceptLanguage },
+                { "Content-Type", this.Config.ContentType },
             };
 
             // prepare the API call request to fetch the response.
@@ -267,7 +287,7 @@ namespace RESTAPISDK.Standard.Controllers
         /// <param name="body">Required parameter: Example: .</param>
         /// <returns>Returns the Models.CreateTableResponse response from the API call.</returns>
         public Models.CreateTableResponse CreateTable(
-                Models.ApiRestV2DatabaseTableCreateRequest body)
+                Models.TspublicRestV2DatabaseTableCreateRequest body)
         {
             Task<Models.CreateTableResponse> t = this.CreateTableAsync(body);
             ApiHelper.RunTaskSynchronously(t);
@@ -282,15 +302,21 @@ namespace RESTAPISDK.Standard.Controllers
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.CreateTableResponse response from the API call.</returns>
         public async Task<Models.CreateTableResponse> CreateTableAsync(
-                Models.ApiRestV2DatabaseTableCreateRequest body,
+                Models.TspublicRestV2DatabaseTableCreateRequest body,
                 CancellationToken cancellationToken = default)
         {
+            // validating required parameters.
+            if (body == null)
+            {
+                throw new ArgumentNullException("body", "The parameter \"body\" is a required parameter and cannot be null.");
+            }
+
             // the base uri for api requests.
             string baseUri = this.Config.GetBaseUri();
 
             // prepare query string for API call.
             StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/api/rest/v2/database/table/create");
+            queryBuilder.Append("/tspublic/rest/v2/database/table/create");
 
             // append request with appropriate headers and parameters
             var headers = new Dictionary<string, string>()
@@ -298,6 +324,7 @@ namespace RESTAPISDK.Standard.Controllers
                 { "user-agent", this.UserAgent },
                 { "accept", "application/json" },
                 { "Content-Type", "application/json" },
+                { "X-Requested-By", this.Config.XRequestedBy },
                 { "Accept-Language", this.Config.AcceptLanguage },
             };
 
@@ -341,7 +368,7 @@ namespace RESTAPISDK.Standard.Controllers
         /// <param name="body">Required parameter: Example: .</param>
         /// <returns>Returns the object response from the API call.</returns>
         public object RunQuery(
-                Models.ApiRestV2DatabaseTableRunqueryRequest body)
+                Models.TspublicRestV2DatabaseTableRunqueryRequest body)
         {
             Task<object> t = this.RunQueryAsync(body);
             ApiHelper.RunTaskSynchronously(t);
@@ -357,15 +384,21 @@ namespace RESTAPISDK.Standard.Controllers
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the object response from the API call.</returns>
         public async Task<object> RunQueryAsync(
-                Models.ApiRestV2DatabaseTableRunqueryRequest body,
+                Models.TspublicRestV2DatabaseTableRunqueryRequest body,
                 CancellationToken cancellationToken = default)
         {
+            // validating required parameters.
+            if (body == null)
+            {
+                throw new ArgumentNullException("body", "The parameter \"body\" is a required parameter and cannot be null.");
+            }
+
             // the base uri for api requests.
             string baseUri = this.Config.GetBaseUri();
 
             // prepare query string for API call.
             StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/api/rest/v2/database/table/runquery");
+            queryBuilder.Append("/tspublic/rest/v2/database/table/runquery");
 
             // append request with appropriate headers and parameters
             var headers = new Dictionary<string, string>()
@@ -373,6 +406,7 @@ namespace RESTAPISDK.Standard.Controllers
                 { "user-agent", this.UserAgent },
                 { "accept", "application/json" },
                 { "Content-Type", "application/json" },
+                { "X-Requested-By", this.Config.XRequestedBy },
                 { "Accept-Language", this.Config.AcceptLanguage },
             };
 
