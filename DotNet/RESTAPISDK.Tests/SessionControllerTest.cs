@@ -105,13 +105,13 @@ namespace RESTAPISDK.Tests
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous unit test.</returns>
         [Test]
-        public async Task TestTestRevoketoken()
+        public async Task TestTestRevokeToken()
         {
             // Perform API call
             bool result = false;
             try
             {
-                result = await this.controller.RevoketokenAsync();
+                result = await this.controller.RevokeTokenAsync();
             }
             catch (ApiException)
             {

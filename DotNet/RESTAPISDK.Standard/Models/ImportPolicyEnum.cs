@@ -34,6 +34,6 @@ namespace RESTAPISDK.Standard.Models
         /// VALIDATEONLY.
         /// </summary>
         [EnumMember(Value = "VALIDATE_ONLY")]
-        VALIDATEONLY,
+        VALIDATEONLY
     }
 }

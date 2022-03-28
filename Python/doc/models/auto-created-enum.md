@@ -1,7 +1,7 @@
 
 # Auto Created Enum
 
-String for UI and backend boolean- A flag to indicate whether to list only the auto created objects. When no value is provided as input then all objects are returned.
+A flag to indicate whether to list only the auto created objects. When no value is provided as input then all objects are returned.
 
 ## Enumeration
 
@@ -11,6 +11,6 @@ String for UI and backend boolean- A flag to indicate whether to list only the a
 
 | Name |
 |  --- |
-| `ENUM_TRUE` |
-| `ENUM_FALSE` |
+| `TRUE` |
+| `FALSE` |
 

@@ -39,7 +39,8 @@ namespace RESTAPISDK.Standard.Controllers
         }
 
         /// <summary>
-        /// To get the details of a specific user account by username or user id, use this endpoint. At Least one value is needed. When both are given,then user id will be considered to fetch user information.
+        /// To get the details of a specific user account by username or user id, use this endpoint. At Least one value is needed. When both are given,then user id will be considered to fetch user information .
+        ///  Permission: Requires administration privilege.
         /// </summary>
         /// <param name="name">Optional parameter: Username of the user that you want to query.</param>
         /// <param name="id">Optional parameter: The GUID of the user account to query.</param>
@@ -54,7 +55,8 @@ namespace RESTAPISDK.Standard.Controllers
         }
 
         /// <summary>
-        /// To get the details of a specific user account by username or user id, use this endpoint. At Least one value is needed. When both are given,then user id will be considered to fetch user information.
+        /// To get the details of a specific user account by username or user id, use this endpoint. At Least one value is needed. When both are given,then user id will be considered to fetch user information .
+        ///  Permission: Requires administration privilege.
         /// </summary>
         /// <param name="name">Optional parameter: Username of the user that you want to query.</param>
         /// <param name="id">Optional parameter: The GUID of the user account to query.</param>
@@ -70,7 +72,7 @@ namespace RESTAPISDK.Standard.Controllers
 
             // prepare query string for API call.
             StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/api/rest/v2/user");
+            queryBuilder.Append("/tspublic/rest/v2/user");
 
             // prepare specfied query parameters.
             var queryParams = new Dictionary<string, object>()
@@ -84,8 +86,8 @@ namespace RESTAPISDK.Standard.Controllers
             {
                 { "user-agent", this.UserAgent },
                 { "accept", "application/json" },
-                { "Content-Type", this.Config.ContentType },
                 { "Accept-Language", this.Config.AcceptLanguage },
+                { "Content-Type", this.Config.ContentType },
             };
 
             // prepare the API call request to fetch the response.
@@ -120,12 +122,13 @@ namespace RESTAPISDK.Standard.Controllers
         /// <summary>
         /// To programmatically create a user account in the ThoughtSpot system, use this API endpoint. .
         ///  Using this API, you can create a user and assign groups. To create a user, you require admin user privileges. .
-        ///  All users created in the ThoughtSpot system are added to ALL_GROUP.
+        ///  All users created in the ThoughtSpot system are added to ALL_GROUP .
+        ///  Permission: Requires administration privilege.
         /// </summary>
         /// <param name="body">Required parameter: Example: .</param>
         /// <returns>Returns the Models.UserResponse response from the API call.</returns>
         public Models.UserResponse CreateUser(
-                Models.ApiRestV2UserCreateRequest body)
+                Models.TspublicRestV2UserCreateRequest body)
         {
             Task<Models.UserResponse> t = this.CreateUserAsync(body);
             ApiHelper.RunTaskSynchronously(t);
@@ -135,21 +138,28 @@ namespace RESTAPISDK.Standard.Controllers
         /// <summary>
         /// To programmatically create a user account in the ThoughtSpot system, use this API endpoint. .
         ///  Using this API, you can create a user and assign groups. To create a user, you require admin user privileges. .
-        ///  All users created in the ThoughtSpot system are added to ALL_GROUP.
+        ///  All users created in the ThoughtSpot system are added to ALL_GROUP .
+        ///  Permission: Requires administration privilege.
         /// </summary>
         /// <param name="body">Required parameter: Example: .</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.UserResponse response from the API call.</returns>
         public async Task<Models.UserResponse> CreateUserAsync(
-                Models.ApiRestV2UserCreateRequest body,
+                Models.TspublicRestV2UserCreateRequest body,
                 CancellationToken cancellationToken = default)
         {
+            // validating required parameters.
+            if (body == null)
+            {
+                throw new ArgumentNullException("body", "The parameter \"body\" is a required parameter and cannot be null.");
+            }
+
             // the base uri for api requests.
             string baseUri = this.Config.GetBaseUri();
 
             // prepare query string for API call.
             StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/api/rest/v2/user/create");
+            queryBuilder.Append("/tspublic/rest/v2/user/create");
 
             // append request with appropriate headers and parameters
             var headers = new Dictionary<string, string>()
@@ -195,12 +205,13 @@ namespace RESTAPISDK.Standard.Controllers
         /// <summary>
         /// You can use this endpoint to programmatically modify an existing user account. .
         ///  To modify a user, you require admin user privileges. .
-        ///  At least one of User Id or username is mandatory. When both are given, then user id will be considered and username will be updated.
+        ///  At least one of User Id or username is mandatory. When both are given, then user id will be considered and username will be updated .
+        ///  Permission: Requires administration privilege.
         /// </summary>
         /// <param name="body">Required parameter: Example: .</param>
         /// <returns>Returns the bool response from the API call.</returns>
         public bool UpdateUser(
-                Models.ApiRestV2UserUpdateRequest body)
+                Models.TspublicRestV2UserUpdateRequest body)
         {
             Task<bool> t = this.UpdateUserAsync(body);
             ApiHelper.RunTaskSynchronously(t);
@@ -210,21 +221,28 @@ namespace RESTAPISDK.Standard.Controllers
         /// <summary>
         /// You can use this endpoint to programmatically modify an existing user account. .
         ///  To modify a user, you require admin user privileges. .
-        ///  At least one of User Id or username is mandatory. When both are given, then user id will be considered and username will be updated.
+        ///  At least one of User Id or username is mandatory. When both are given, then user id will be considered and username will be updated .
+        ///  Permission: Requires administration privilege.
         /// </summary>
         /// <param name="body">Required parameter: Example: .</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the bool response from the API call.</returns>
         public async Task<bool> UpdateUserAsync(
-                Models.ApiRestV2UserUpdateRequest body,
+                Models.TspublicRestV2UserUpdateRequest body,
                 CancellationToken cancellationToken = default)
         {
+            // validating required parameters.
+            if (body == null)
+            {
+                throw new ArgumentNullException("body", "The parameter \"body\" is a required parameter and cannot be null.");
+            }
+
             // the base uri for api requests.
             string baseUri = this.Config.GetBaseUri();
 
             // prepare query string for API call.
             StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/api/rest/v2/user/update");
+            queryBuilder.Append("/tspublic/rest/v2/user/update");
 
             // append request with appropriate headers and parameters
             var headers = new Dictionary<string, string>()
@@ -268,7 +286,8 @@ namespace RESTAPISDK.Standard.Controllers
 
         /// <summary>
         /// To remove a user from the ThoughtSpot system, use this endpoint. .
-        ///  At least one value is needed. When both are given, then user id will be considered to delete user.
+        ///  At least one value is needed. When both are given, then user id will be considered to delete user. .
+        ///  Permission: Requires administration privilege.
         /// </summary>
         /// <param name="name">Optional parameter: Username of the user account.</param>
         /// <param name="id">Optional parameter: The GUID of the user account.</param>
@@ -284,7 +303,8 @@ namespace RESTAPISDK.Standard.Controllers
 
         /// <summary>
         /// To remove a user from the ThoughtSpot system, use this endpoint. .
-        ///  At least one value is needed. When both are given, then user id will be considered to delete user.
+        ///  At least one value is needed. When both are given, then user id will be considered to delete user. .
+        ///  Permission: Requires administration privilege.
         /// </summary>
         /// <param name="name">Optional parameter: Username of the user account.</param>
         /// <param name="id">Optional parameter: The GUID of the user account.</param>
@@ -300,7 +320,7 @@ namespace RESTAPISDK.Standard.Controllers
 
             // prepare query string for API call.
             StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/api/rest/v2/user/delete");
+            queryBuilder.Append("/tspublic/rest/v2/user/delete");
 
             // prepare specfied query parameters.
             var queryParams = new Dictionary<string, object>()
@@ -313,8 +333,8 @@ namespace RESTAPISDK.Standard.Controllers
             var headers = new Dictionary<string, string>()
             {
                 { "user-agent", this.UserAgent },
-                { "Content-Type", this.Config.ContentType },
                 { "Accept-Language", this.Config.AcceptLanguage },
+                { "Content-Type", this.Config.ContentType },
             };
 
             // prepare the API call request to fetch the response.
@@ -349,12 +369,13 @@ namespace RESTAPISDK.Standard.Controllers
         /// <summary>
         /// To programmatically add groups to an existing ThoughtSpot user, use this endpoint. .
         ///  When you assign groups to a user, the user inherits the privileges assigned to those groups. .
-        ///  At least one of user Id or username is mandatory. When both are given, then user id will be considered.
+        ///  At least one of user Id or username is mandatory. When both are given, then user id will be considered. .
+        ///  Permission: Requires administration privilege.
         /// </summary>
         /// <param name="body">Required parameter: Example: .</param>
         /// <returns>Returns the bool response from the API call.</returns>
         public bool AddGroupsToUser(
-                Models.ApiRestV2UserAddgroupRequest body)
+                Models.TspublicRestV2UserAddgroupRequest body)
         {
             Task<bool> t = this.AddGroupsToUserAsync(body);
             ApiHelper.RunTaskSynchronously(t);
@@ -364,21 +385,28 @@ namespace RESTAPISDK.Standard.Controllers
         /// <summary>
         /// To programmatically add groups to an existing ThoughtSpot user, use this endpoint. .
         ///  When you assign groups to a user, the user inherits the privileges assigned to those groups. .
-        ///  At least one of user Id or username is mandatory. When both are given, then user id will be considered.
+        ///  At least one of user Id or username is mandatory. When both are given, then user id will be considered. .
+        ///  Permission: Requires administration privilege.
         /// </summary>
         /// <param name="body">Required parameter: Example: .</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the bool response from the API call.</returns>
         public async Task<bool> AddGroupsToUserAsync(
-                Models.ApiRestV2UserAddgroupRequest body,
+                Models.TspublicRestV2UserAddgroupRequest body,
                 CancellationToken cancellationToken = default)
         {
+            // validating required parameters.
+            if (body == null)
+            {
+                throw new ArgumentNullException("body", "The parameter \"body\" is a required parameter and cannot be null.");
+            }
+
             // the base uri for api requests.
             string baseUri = this.Config.GetBaseUri();
 
             // prepare query string for API call.
             StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/api/rest/v2/user/addgroup");
+            queryBuilder.Append("/tspublic/rest/v2/user/addgroup");
 
             // append request with appropriate headers and parameters
             var headers = new Dictionary<string, string>()
@@ -423,12 +451,13 @@ namespace RESTAPISDK.Standard.Controllers
         /// <summary>
         /// To programmatically remove groups from an existing ThoughtSpot user, use this API endpoint. .
         ///  The API removes only the user association. It does not delete the user or group from the Thoughtspot system. .
-        ///  At least one of user id or username is mandatory. When both are given, then user id will be considered.
+        ///  At least one of user id or username is mandatory. When both are given, then user id will be considered. .
+        ///  Permission: Requires administration privilege.
         /// </summary>
         /// <param name="body">Required parameter: Example: .</param>
         /// <returns>Returns the bool response from the API call.</returns>
         public bool RemoveGroupsFromUser(
-                Models.ApiRestV2UserRemovegroupRequest body)
+                Models.TspublicRestV2UserRemovegroupRequest body)
         {
             Task<bool> t = this.RemoveGroupsFromUserAsync(body);
             ApiHelper.RunTaskSynchronously(t);
@@ -438,21 +467,28 @@ namespace RESTAPISDK.Standard.Controllers
         /// <summary>
         /// To programmatically remove groups from an existing ThoughtSpot user, use this API endpoint. .
         ///  The API removes only the user association. It does not delete the user or group from the Thoughtspot system. .
-        ///  At least one of user id or username is mandatory. When both are given, then user id will be considered.
+        ///  At least one of user id or username is mandatory. When both are given, then user id will be considered. .
+        ///  Permission: Requires administration privilege.
         /// </summary>
         /// <param name="body">Required parameter: Example: .</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the bool response from the API call.</returns>
         public async Task<bool> RemoveGroupsFromUserAsync(
-                Models.ApiRestV2UserRemovegroupRequest body,
+                Models.TspublicRestV2UserRemovegroupRequest body,
                 CancellationToken cancellationToken = default)
         {
+            // validating required parameters.
+            if (body == null)
+            {
+                throw new ArgumentNullException("body", "The parameter \"body\" is a required parameter and cannot be null.");
+            }
+
             // the base uri for api requests.
             string baseUri = this.Config.GetBaseUri();
 
             // prepare query string for API call.
             StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/api/rest/v2/user/removegroup");
+            queryBuilder.Append("/tspublic/rest/v2/user/removegroup");
 
             // append request with appropriate headers and parameters
             var headers = new Dictionary<string, string>()
@@ -495,40 +531,127 @@ namespace RESTAPISDK.Standard.Controllers
         }
 
         /// <summary>
-        /// To get the details of a specific user account or all users in the ThoughtSpot system, use this endpoint. If no input is provided, then all user are included in the response.
+        /// To change the password of a ThoughtSpot user account, use this endpoint. .
+        ///  At least one of id or name of user is required. When both are given user id will be considered. .
+        ///  Permission: Requires administration privilege.
         /// </summary>
         /// <param name="body">Required parameter: Example: .</param>
-        /// <returns>Returns the List of Models.UserResponse response from the API call.</returns>
-        public List<Models.UserResponse> SearchUsers(
-                Models.ApiRestV2UserSearchRequest body)
+        /// <returns>Returns the bool response from the API call.</returns>
+        public bool ChangePasswordOfUser(
+                Models.TspublicRestV2UserChangepasswordRequest body)
         {
-            Task<List<Models.UserResponse>> t = this.SearchUsersAsync(body);
+            Task<bool> t = this.ChangePasswordOfUserAsync(body);
             ApiHelper.RunTaskSynchronously(t);
             return t.Result;
         }
 
         /// <summary>
-        /// To get the details of a specific user account or all users in the ThoughtSpot system, use this endpoint. If no input is provided, then all user are included in the response.
+        /// To change the password of a ThoughtSpot user account, use this endpoint. .
+        ///  At least one of id or name of user is required. When both are given user id will be considered. .
+        ///  Permission: Requires administration privilege.
         /// </summary>
         /// <param name="body">Required parameter: Example: .</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
-        /// <returns>Returns the List of Models.UserResponse response from the API call.</returns>
-        public async Task<List<Models.UserResponse>> SearchUsersAsync(
-                Models.ApiRestV2UserSearchRequest body,
+        /// <returns>Returns the bool response from the API call.</returns>
+        public async Task<bool> ChangePasswordOfUserAsync(
+                Models.TspublicRestV2UserChangepasswordRequest body,
                 CancellationToken cancellationToken = default)
         {
+            // validating required parameters.
+            if (body == null)
+            {
+                throw new ArgumentNullException("body", "The parameter \"body\" is a required parameter and cannot be null.");
+            }
+
             // the base uri for api requests.
             string baseUri = this.Config.GetBaseUri();
 
             // prepare query string for API call.
             StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/api/rest/v2/user/search");
+            queryBuilder.Append("/tspublic/rest/v2/user/changepassword");
 
             // append request with appropriate headers and parameters
             var headers = new Dictionary<string, string>()
             {
                 { "user-agent", this.UserAgent },
-                { "accept", "application/json" },
+                { "Content-Type", "application/json" },
+                { "Accept-Language", this.Config.AcceptLanguage },
+            };
+
+            // append body params.
+            var bodyText = ApiHelper.JsonSerialize(body);
+
+            // prepare the API call request to fetch the response.
+            HttpRequest httpRequest = this.GetClientInstance().PutBody(queryBuilder.ToString(), headers, bodyText);
+
+            if (this.HttpCallBack != null)
+            {
+                this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
+            }
+
+            httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
+
+            // invoke request and get response.
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            HttpContext context = new HttpContext(httpRequest, response);
+            if (this.HttpCallBack != null)
+            {
+                this.HttpCallBack.OnAfterHttpResponseEventHandler(this.GetClientInstance(), response);
+            }
+
+            if (response.StatusCode == 500)
+            {
+                throw new ErrorResponseException("Operation failed or unauthorized request", context);
+            }
+
+            // handle errors defined at the API level.
+            this.ValidateResponse(response, context);
+
+            return bool.Parse(response.Body);
+        }
+
+        /// <summary>
+        /// To get the details of a specific user account or all users in the ThoughtSpot system, use this endpoint. If no input is provided, then all user are included in the response. .
+        ///  Permission: Requires administration privilege.
+        /// </summary>
+        /// <param name="body">Required parameter: Example: .</param>
+        /// <returns>Returns the object response from the API call.</returns>
+        public object SearchUsers(
+                Models.TspublicRestV2UserSearchRequest body)
+        {
+            Task<object> t = this.SearchUsersAsync(body);
+            ApiHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// To get the details of a specific user account or all users in the ThoughtSpot system, use this endpoint. If no input is provided, then all user are included in the response. .
+        ///  Permission: Requires administration privilege.
+        /// </summary>
+        /// <param name="body">Required parameter: Example: .</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the object response from the API call.</returns>
+        public async Task<object> SearchUsersAsync(
+                Models.TspublicRestV2UserSearchRequest body,
+                CancellationToken cancellationToken = default)
+        {
+            // validating required parameters.
+            if (body == null)
+            {
+                throw new ArgumentNullException("body", "The parameter \"body\" is a required parameter and cannot be null.");
+            }
+
+            // the base uri for api requests.
+            string baseUri = this.Config.GetBaseUri();
+
+            // prepare query string for API call.
+            StringBuilder queryBuilder = new StringBuilder(baseUri);
+            queryBuilder.Append("/tspublic/rest/v2/user/search");
+
+            // append request with appropriate headers and parameters
+            var headers = new Dictionary<string, string>()
+            {
+                { "user-agent", this.UserAgent },
                 { "Content-Type", "application/json" },
                 { "Accept-Language", this.Config.AcceptLanguage },
             };
@@ -562,7 +685,7 @@ namespace RESTAPISDK.Standard.Controllers
             // handle errors defined at the API level.
             this.ValidateResponse(response, context);
 
-            return ApiHelper.JsonDeserialize<List<Models.UserResponse>>(response.Body);
+            return response.Body;
         }
     }
 }

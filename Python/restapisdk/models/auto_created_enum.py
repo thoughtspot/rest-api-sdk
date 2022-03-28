@@ -12,9 +12,8 @@ class AutoCreatedEnum(object):
 
     """Implementation of the 'AutoCreated' enum.
 
-    String for UI and backend boolean- A flag to indicate whether to list only
-    the auto created objects. When no value is provided as input then all
-    objects are returned.
+    A flag to indicate whether to list only the auto created objects. When no
+    value is provided as input then all objects are returned.
 
     Attributes:
         TRUE: TODO: type description here.
@@ -22,6 +21,6 @@ class AutoCreatedEnum(object):
 
     """
 
-    ENUM_TRUE = 'True'
+    TRUE = 'true'
 
-    ENUM_FALSE = 'False'
+    FALSE = 'false'

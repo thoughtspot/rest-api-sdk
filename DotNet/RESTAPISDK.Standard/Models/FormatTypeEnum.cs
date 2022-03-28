@@ -28,6 +28,6 @@ namespace RESTAPISDK.Standard.Models
         /// JSON.
         /// </summary>
         [EnumMember(Value = "JSON")]
-        JSON,
+        JSON
     }
 }

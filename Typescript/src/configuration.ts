@@ -9,8 +9,8 @@ import { HttpClientOptions } from './core';
 /** An interface for all configuration parameters required by the SDK. */
 export interface Configuration {
   timeout: number;
-  contentType: string;
   acceptLanguage: string;
+  contentType: string;
   environment: Environment;
   baseUrl: string;
   accessToken: string;

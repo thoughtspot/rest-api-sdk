@@ -10,26 +10,27 @@ metadata_controller = client.metadata
 
 ## Methods
 
-* [Get Tag](/doc/controllers/metadata.md#get-tag)
-* [Create Tag](/doc/controllers/metadata.md#create-tag)
-* [Update Tag](/doc/controllers/metadata.md#update-tag)
-* [Delete Tag](/doc/controllers/metadata.md#delete-tag)
-* [Assign Tag](/doc/controllers/metadata.md#assign-tag)
-* [Unassign Tag](/doc/controllers/metadata.md#unassign-tag)
-* [Assign Favorite](/doc/controllers/metadata.md#assign-favorite)
-* [Unassign Favorite](/doc/controllers/metadata.md#unassign-favorite)
-* [Get Homeliveboard](/doc/controllers/metadata.md#get-homeliveboard)
-* [Assign Homeliveboard](/doc/controllers/metadata.md#assign-homeliveboard)
-* [Unassign Homeliveboard](/doc/controllers/metadata.md#unassign-homeliveboard)
-* [Get Incomplete Objects](/doc/controllers/metadata.md#get-incomplete-objects)
-* [Get Metadata Header](/doc/controllers/metadata.md#get-metadata-header)
-* [Get Object Detail](/doc/controllers/metadata.md#get-object-detail)
-* [Get Object Visualization Header](/doc/controllers/metadata.md#get-object-visualization-header)
-* [Search Object Header](/doc/controllers/metadata.md#search-object-header)
-* [Delete Metadata Object](/doc/controllers/metadata.md#delete-metadata-object)
-* [Get Object Dependency](/doc/controllers/metadata.md#get-object-dependency)
-* [Export Object TML](/doc/controllers/metadata.md#export-object-tml)
-* [Import Object TML](/doc/controllers/metadata.md#import-object-tml)
+* [Get Tag](../../doc/controllers/metadata.md#get-tag)
+* [Create Tag](../../doc/controllers/metadata.md#create-tag)
+* [Update Tag](../../doc/controllers/metadata.md#update-tag)
+* [Delete Tag](../../doc/controllers/metadata.md#delete-tag)
+* [Assign Tag](../../doc/controllers/metadata.md#assign-tag)
+* [Unassign Tag](../../doc/controllers/metadata.md#unassign-tag)
+* [Assign Favorite](../../doc/controllers/metadata.md#assign-favorite)
+* [Unassign Favorite](../../doc/controllers/metadata.md#unassign-favorite)
+* [Get Home Liveboard](../../doc/controllers/metadata.md#get-home-liveboard)
+* [Assign Home Liveboard](../../doc/controllers/metadata.md#assign-home-liveboard)
+* [Unassign Home Liveboard](../../doc/controllers/metadata.md#unassign-home-liveboard)
+* [Get Incomplete Objects](../../doc/controllers/metadata.md#get-incomplete-objects)
+* [Get Object Header](../../doc/controllers/metadata.md#get-object-header)
+* [Get Object Detail](../../doc/controllers/metadata.md#get-object-detail)
+* [Get Object Visualization Header](../../doc/controllers/metadata.md#get-object-visualization-header)
+* [Search Object Header](../../doc/controllers/metadata.md#search-object-header)
+* [Search Object Detail](../../doc/controllers/metadata.md#search-object-detail)
+* [Delete Object](../../doc/controllers/metadata.md#delete-object)
+* [Get Object Dependency](../../doc/controllers/metadata.md#get-object-dependency)
+* [Export Object TML](../../doc/controllers/metadata.md#export-object-tml)
+* [Import Object TML](../../doc/controllers/metadata.md#import-object-tml)
 
 
 # Get Tag
@@ -53,7 +54,7 @@ def get_tag(self,
 
 ## Response Type
 
-[`MetadataTagResponse`](/doc/models/metadata-tag-response.md)
+[`MetadataTagResponse`](../../doc/models/metadata-tag-response.md)
 
 ## Example Usage
 
@@ -65,12 +66,14 @@ result = metadata_controller.get_tag()
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Create Tag
 
 To programmatically create tags, use this endpoint
+
+Permission: Requires administration privilege
 
 ```python
 def create_tag(self,
@@ -81,16 +84,16 @@ def create_tag(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2MetadataTagCreateRequest`](/doc/models/api-rest-v2-metadata-tag-create-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2MetadataTagCreateRequest`](../../doc/models/tspublic-rest-v2-metadata-tag-create-request.md) | Body, Required | - |
 
 ## Response Type
 
-[`MetadataTagResponse`](/doc/models/metadata-tag-response.md)
+[`MetadataTagResponse`](../../doc/models/metadata-tag-response.md)
 
 ## Example Usage
 
 ```python
-body = ApiRestV2MetadataTagCreateRequest()
+body = TspublicRestV2MetadataTagCreateRequest()
 body.name = 'name6'
 
 result = metadata_controller.create_tag(body)
@@ -100,7 +103,7 @@ result = metadata_controller.create_tag(body)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Update Tag
@@ -108,6 +111,8 @@ result = metadata_controller.create_tag(body)
 To programmatically update tags, use this endpoint.
 
 At least one of id or name of tag is required. When both are given, then id will be considered.
+
+Permission: Requires administration privilege
 
 ```python
 def update_tag(self,
@@ -118,7 +123,7 @@ def update_tag(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2MetadataTagUpdateRequest`](/doc/models/api-rest-v2-metadata-tag-update-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2MetadataTagUpdateRequest`](../../doc/models/tspublic-rest-v2-metadata-tag-update-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -127,7 +132,7 @@ def update_tag(self,
 ## Example Usage
 
 ```python
-body = ApiRestV2MetadataTagUpdateRequest()
+body = TspublicRestV2MetadataTagUpdateRequest()
 
 result = metadata_controller.update_tag(body)
 ```
@@ -136,7 +141,7 @@ result = metadata_controller.update_tag(body)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Delete Tag
@@ -144,6 +149,8 @@ result = metadata_controller.update_tag(body)
 To programmatically delete tags, use this endpoint.
 
 At least one of id or name of tag is required. When both are given, then id will be considered.
+
+Permission: Requires administration privilege
 
 ```python
 def delete_tag(self,
@@ -172,7 +179,7 @@ result = metadata_controller.delete_tag()
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Assign Tag
@@ -180,6 +187,8 @@ result = metadata_controller.delete_tag()
 To programmatically assign tags to a metadata object, such as a liveboard, search answer, table, worksheet, or view, use this endpoint.
 
 At least one of id or name of tag is required. When both are given, then id will be considered.
+
+Permission: Requires at least view access to the object
 
 ```python
 def assign_tag(self,
@@ -190,7 +199,7 @@ def assign_tag(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2MetadataTagAssignRequest`](/doc/models/api-rest-v2-metadata-tag-assign-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2MetadataTagAssignRequest`](../../doc/models/tspublic-rest-v2-metadata-tag-assign-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -199,16 +208,20 @@ def assign_tag(self,
 ## Example Usage
 
 ```python
-body = ApiRestV2MetadataTagAssignRequest()
-body.meta_object = []
+body = TspublicRestV2MetadataTagAssignRequest()
+body.ts_object = []
 
-body.meta_object.append(MetaObjectInput())
-body.meta_object[0].id = 'id6'
-body.meta_object[0].mtype = TypeEnum.ANSWER
+body.ts_object.append(TsObjectInput())
+body.ts_object[0].id = 'id8'
+body.ts_object[0].mtype = TypeEnum.DATAOBJECT
 
-body.meta_object.append(MetaObjectInput())
-body.meta_object[1].id = 'id7'
-body.meta_object[1].mtype = TypeEnum.LIVEBOARD
+body.ts_object.append(TsObjectInput())
+body.ts_object[1].id = 'id9'
+body.ts_object[1].mtype = TypeEnum.CONNECTION
+
+body.ts_object.append(TsObjectInput())
+body.ts_object[2].id = 'id0'
+body.ts_object[2].mtype = TypeEnum.ANSWER
 
 
 result = metadata_controller.assign_tag(body)
@@ -218,7 +231,7 @@ result = metadata_controller.assign_tag(body)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Unassign Tag
@@ -226,6 +239,8 @@ result = metadata_controller.assign_tag(body)
 To programmatically unassign tags to a metadata object, such as a liveboard, search answer, table, worksheet, or view, use this endpoint.
 
 At least one of id or name of tag is required. When both are given, then id will be considered.
+
+Permission: Requires at least view access to the object
 
 ```python
 def unassign_tag(self,
@@ -236,7 +251,7 @@ def unassign_tag(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2MetadataTagUnassignRequest`](/doc/models/api-rest-v2-metadata-tag-unassign-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2MetadataTagUnassignRequest`](../../doc/models/tspublic-rest-v2-metadata-tag-unassign-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -245,16 +260,20 @@ def unassign_tag(self,
 ## Example Usage
 
 ```python
-body = ApiRestV2MetadataTagUnassignRequest()
-body.meta_object = []
+body = TspublicRestV2MetadataTagUnassignRequest()
+body.ts_object = []
 
-body.meta_object.append(MetaObjectInput())
-body.meta_object[0].id = 'id6'
-body.meta_object[0].mtype = TypeEnum.ANSWER
+body.ts_object.append(TsObjectInput())
+body.ts_object[0].id = 'id8'
+body.ts_object[0].mtype = TypeEnum.DATAOBJECT
 
-body.meta_object.append(MetaObjectInput())
-body.meta_object[1].id = 'id7'
-body.meta_object[1].mtype = TypeEnum.LIVEBOARD
+body.ts_object.append(TsObjectInput())
+body.ts_object[1].id = 'id9'
+body.ts_object[1].mtype = TypeEnum.CONNECTION
+
+body.ts_object.append(TsObjectInput())
+body.ts_object[2].id = 'id0'
+body.ts_object[2].mtype = TypeEnum.ANSWER
 
 
 result = metadata_controller.unassign_tag(body)
@@ -264,14 +283,16 @@ result = metadata_controller.unassign_tag(body)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Assign Favorite
 
 To programmatically assign objects to favorites for a given user account, use this endpoint.
 
-At least one of user id or username is required. When both are given, then id will be considered
+At least one of user id or username is required. When both are given, then id will be considered.
+
+Permission: Requires at least view access to the object
 
 ```python
 def assign_favorite(self,
@@ -282,7 +303,7 @@ def assign_favorite(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2MetadataFavoriteAssignRequest`](/doc/models/api-rest-v2-metadata-favorite-assign-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2MetadataFavoriteAssignRequest`](../../doc/models/tspublic-rest-v2-metadata-favorite-assign-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -291,16 +312,20 @@ def assign_favorite(self,
 ## Example Usage
 
 ```python
-body = ApiRestV2MetadataFavoriteAssignRequest()
-body.meta_object = []
+body = TspublicRestV2MetadataFavoriteAssignRequest()
+body.ts_object = []
 
-body.meta_object.append(MetaObjectInput())
-body.meta_object[0].id = 'id6'
-body.meta_object[0].mtype = TypeEnum.ANSWER
+body.ts_object.append(TsObjectInput())
+body.ts_object[0].id = 'id8'
+body.ts_object[0].mtype = TypeEnum.DATAOBJECT
 
-body.meta_object.append(MetaObjectInput())
-body.meta_object[1].id = 'id7'
-body.meta_object[1].mtype = TypeEnum.LIVEBOARD
+body.ts_object.append(TsObjectInput())
+body.ts_object[1].id = 'id9'
+body.ts_object[1].mtype = TypeEnum.CONNECTION
+
+body.ts_object.append(TsObjectInput())
+body.ts_object[2].id = 'id0'
+body.ts_object[2].mtype = TypeEnum.ANSWER
 
 
 result = metadata_controller.assign_favorite(body)
@@ -310,7 +335,7 @@ result = metadata_controller.assign_favorite(body)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Unassign Favorite
@@ -318,6 +343,8 @@ result = metadata_controller.assign_favorite(body)
 To programmatically unassign objects to favorites for a given user account, use this endpoint.
 
 At least one of user id or username is required. When both are given, then id will be considered. Screen reader support enabled.
+
+Permission: Requires at least view access to the object
 
 ```python
 def unassign_favorite(self,
@@ -328,7 +355,7 @@ def unassign_favorite(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2MetadataFavoriteUnassignRequest`](/doc/models/api-rest-v2-metadata-favorite-unassign-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2MetadataFavoriteUnassignRequest`](../../doc/models/tspublic-rest-v2-metadata-favorite-unassign-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -337,16 +364,20 @@ def unassign_favorite(self,
 ## Example Usage
 
 ```python
-body = ApiRestV2MetadataFavoriteUnassignRequest()
-body.meta_object = []
+body = TspublicRestV2MetadataFavoriteUnassignRequest()
+body.ts_object = []
 
-body.meta_object.append(MetaObjectInput())
-body.meta_object[0].id = 'id6'
-body.meta_object[0].mtype = TypeEnum.ANSWER
+body.ts_object.append(TsObjectInput())
+body.ts_object[0].id = 'id8'
+body.ts_object[0].mtype = TypeEnum.DATAOBJECT
 
-body.meta_object.append(MetaObjectInput())
-body.meta_object[1].id = 'id7'
-body.meta_object[1].mtype = TypeEnum.LIVEBOARD
+body.ts_object.append(TsObjectInput())
+body.ts_object[1].id = 'id9'
+body.ts_object[1].mtype = TypeEnum.CONNECTION
+
+body.ts_object.append(TsObjectInput())
+body.ts_object[2].id = 'id0'
+body.ts_object[2].mtype = TypeEnum.ANSWER
 
 
 result = metadata_controller.unassign_favorite(body)
@@ -356,19 +387,21 @@ result = metadata_controller.unassign_favorite(body)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Get Homeliveboard
+# Get Home Liveboard
 
 To get the name and id of liveboard that is set as a home liveboard for a user, use this endpoint.
 
 At least one of user id or username is required. When both are given, then id will be considered.
 
+Permission: Requires at least view access to the object
+
 ```python
-def get_homeliveboard(self,
-                     user_name=None,
-                     user_id=None)
+def get_home_liveboard(self,
+                      user_name=None,
+                      user_id=None)
 ```
 
 ## Parameters
@@ -380,37 +413,39 @@ def get_homeliveboard(self,
 
 ## Response Type
 
-[`HomeLiveboardResponse`](/doc/models/home-liveboard-response.md)
+[`HomeLiveboardResponse`](../../doc/models/home-liveboard-response.md)
 
 ## Example Usage
 
 ```python
-result = metadata_controller.get_homeliveboard()
+result = metadata_controller.get_home_liveboard()
 ```
 
 ## Errors
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Assign Homeliveboard
+# Assign Home Liveboard
 
 To assign a specific liveboard as a home liveboard for a user, use this endpoint.
 
 At least one of user id or username is required. When both are given, then id will be considered.
 
+Permission: Requires at least view access to the object
+
 ```python
-def assign_homeliveboard(self,
-                        body)
+def assign_home_liveboard(self,
+                         body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2MetadataHomeliveboardAssignRequest`](/doc/models/api-rest-v2-metadata-homeliveboard-assign-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2MetadataHomeliveboardAssignRequest`](../../doc/models/tspublic-rest-v2-metadata-homeliveboard-assign-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -419,34 +454,36 @@ def assign_homeliveboard(self,
 ## Example Usage
 
 ```python
-body = ApiRestV2MetadataHomeliveboardAssignRequest()
+body = TspublicRestV2MetadataHomeliveboardAssignRequest()
 
-result = metadata_controller.assign_homeliveboard(body)
+result = metadata_controller.assign_home_liveboard(body)
 ```
 
 ## Errors
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Unassign Homeliveboard
+# Unassign Home Liveboard
 
 To unassign the home liveboard set for a user, use this endpoint.
 
 At least one of user id or username is required. When both are given, then id will be considered.
 
+Permission: Requires at least view access to the object
+
 ```python
-def unassign_homeliveboard(self,
-                          body)
+def unassign_home_liveboard(self,
+                           body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2MetadataHomeliveboardUnassignRequest`](/doc/models/api-rest-v2-metadata-homeliveboard-unassign-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2MetadataHomeliveboardUnassignRequest`](../../doc/models/tspublic-rest-v2-metadata-homeliveboard-unassign-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -455,16 +492,16 @@ def unassign_homeliveboard(self,
 ## Example Usage
 
 ```python
-body = ApiRestV2MetadataHomeliveboardUnassignRequest()
+body = TspublicRestV2MetadataHomeliveboardUnassignRequest()
 
-result = metadata_controller.unassign_homeliveboard(body)
+result = metadata_controller.unassign_home_liveboard(body)
 ```
 
 ## Errors
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Get Incomplete Objects
@@ -489,25 +526,27 @@ result = metadata_controller.get_incomplete_objects()
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Get Metadata Header
+# Get Object Header
 
 To get header detail of a metadata object, use this endpoint. You can provide as input selective fields to get the data for.
 
+Permission: Requires administration privilege for USER and USER_GROUP type. Requires datamanagement privilege for CONNECTION type. Requires at least view access for other object types
+
 ```python
-def get_metadata_header(self,
-                       mtype,
-                       id,
-                       output_fields=None)
+def get_object_header(self,
+                     mtype,
+                     id,
+                     output_fields=None)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `mtype` | [`Type8Enum`](/doc/models/type-8-enum.md) | Query, Required | Type of the metadata object being searched. |
+| `mtype` | [`Type9Enum`](../../doc/models/type-9-enum.md) | Query, Required | Type of the metadata object being searched. |
 | `id` | `string` | Query, Required | GUID of the metadata object |
 | `output_fields` | `List of string` | Query, Optional | Array of header field names that need to be included in the header response |
 
@@ -518,41 +557,37 @@ def get_metadata_header(self,
 ## Example Usage
 
 ```python
-mtype = Type8Enum.COLUMN_ALL
+mtype = Type9Enum.COLUMN_ALL
 id = 'id0'
 
-result = metadata_controller.get_metadata_header(mtype, id)
+result = metadata_controller.get_object_header(mtype, id)
 ```
 
 ## Errors
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Get Object Detail
 
-Use this endpoint to get full details of metadata objects
+Use this endpoint to get full details of metadata objects.
+
+Permission: Requires administration privilege for USER and USER_GROUP type. Requires datamanagement privilege for CONNECTION type. Requires at least view access to other object types
 
 ```python
 def get_object_detail(self,
                      mtype,
-                     id,
-                     show_hidden=None,
-                     drop_question_details=None,
-                     version=None)
+                     id)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `mtype` | [`Type9Enum`](/doc/models/type-9-enum.md) | Query, Required | Type of the metadata object being searched. Valid values |
+| `mtype` | [`Type10Enum`](../../doc/models/type-10-enum.md) | Query, Required | Type of the metadata object being searched. Valid values |
 | `id` | `List of string` | Query, Required | A JSON array of GUIDs of the objects. |
-| `show_hidden` | `bool` | Query, Optional | When set to true, returns details of the hidden objects, such as a column in a worksheet or a table. |
-| `drop_question_details` | `bool` | Query, Optional | When set to true, the search assist data associated with a worksheet is not included in the API response. This attribute is applicable only for LOGICAL_TABLE data type. |
-| `version` | `string` | Query, Optional | Specify the version to retrieve the objects from. By default, the API returns metadata for all versions of the object. |
 
 ## Response Type
 
@@ -561,7 +596,7 @@ def get_object_detail(self,
 ## Example Usage
 
 ```python
-mtype = Type9Enum.DATAOBJECT
+mtype = Type10Enum.DATAOBJECT
 id = ['id0']
 
 result = metadata_controller.get_object_detail(mtype, id)
@@ -571,7 +606,7 @@ result = metadata_controller.get_object_detail(mtype, id)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Get Object Visualization Header
@@ -579,6 +614,8 @@ result = metadata_controller.get_object_detail(mtype, id)
 Use this endpoint to get header details of visualization charts for a given liveboard or answer.
 
 At least one of id or name of liveboard or answer is required. When both are given, then id will be considered.
+
+Permission: Requires at least view access to the object
 
 ```python
 def get_object_visualization_header(self,
@@ -607,12 +644,14 @@ result = metadata_controller.get_object_visualization_header(id)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Search Object Header
 
 To get header details for metadata objects, use this endpoint. You can provide as input selective fields to get the data for.
+
+Permission: Requires administration privilege for USER and USER_GROUP type. Requires datamanagement privilege for CONNECTION type. Requires at least view access for other object types
 
 ```python
 def search_object_header(self,
@@ -623,7 +662,7 @@ def search_object_header(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2MetadataHeaderSearchRequest`](/doc/models/api-rest-v2-metadata-header-search-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2MetadataHeaderSearchRequest`](../../doc/models/tspublic-rest-v2-metadata-header-search-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -632,8 +671,8 @@ def search_object_header(self,
 ## Example Usage
 
 ```python
-body = ApiRestV2MetadataHeaderSearchRequest()
-body.mtype = Type10Enum.USER
+body = TspublicRestV2MetadataHeaderSearchRequest()
+body.mtype = Type11Enum.USER
 
 result = metadata_controller.search_object_header(body)
 ```
@@ -642,24 +681,64 @@ result = metadata_controller.search_object_header(body)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Delete Metadata Object
+# Search Object Detail
 
-Use this endpoint to delete the metadata objects
+Use this endpoint to get full details of metadata objects.
+
+Permission: Requires administration privilege for USER and USER_GROUP type. Requires datamanagement privilege for CONNECTION type. Requires at least view access for other object types
 
 ```python
-def delete_metadata_object(self,
-                          mtype,
-                          id)
+def search_object_detail(self,
+                        body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `mtype` | [`Type9Enum`](/doc/models/type-9-enum.md) | Query, Required | Type of the metadata object being searched. |
+| `body` | [`TspublicRestV2MetadataDetailSearchRequest`](../../doc/models/tspublic-rest-v2-metadata-detail-search-request.md) | Body, Required | - |
+
+## Response Type
+
+`object`
+
+## Example Usage
+
+```python
+body = TspublicRestV2MetadataDetailSearchRequest()
+body.mtype = Type12Enum.USER
+body.id = ['id6', 'id7']
+
+result = metadata_controller.search_object_detail(body)
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+
+
+# Delete Object
+
+Use this endpoint to delete the metadata objects.
+
+Permission: Requires modify access to the object
+
+```python
+def delete_object(self,
+                 mtype,
+                 id)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `mtype` | [`Type10Enum`](../../doc/models/type-10-enum.md) | Query, Required | Type of the metadata object being searched. |
 | `id` | `List of string` | Query, Required | A JSON array of GUIDs of the objects. |
 
 ## Response Type
@@ -669,17 +748,17 @@ def delete_metadata_object(self,
 ## Example Usage
 
 ```python
-mtype = Type9Enum.DATAOBJECT
+mtype = Type10Enum.DATAOBJECT
 id = ['id0']
 
-result = metadata_controller.delete_metadata_object(mtype, id)
+result = metadata_controller.delete_object(mtype, id)
 ```
 
 ## Errors
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Get Object Dependency
@@ -696,6 +775,8 @@ W1 has a dependency on C2 i.e. W1 is a referencing object and C2 is a referenced
 
 Similarly C1 is said to have a dependency on C2 i.e. C1 is a referencing object and C2 is a referenced object. It is not possible to delete C2 without first deleting C1
 
+Permission: Requires at least view access to the object
+
 ```python
 def get_object_dependency(self,
                          body)
@@ -705,7 +786,7 @@ def get_object_dependency(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2MetadataDependencyRequest`](/doc/models/api-rest-v2-metadata-dependency-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2MetadataDependencyRequest`](../../doc/models/tspublic-rest-v2-metadata-dependency-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -714,8 +795,8 @@ def get_object_dependency(self,
 ## Example Usage
 
 ```python
-body = ApiRestV2MetadataDependencyRequest()
-body.mtype = Type12Enum.COLUMN
+body = TspublicRestV2MetadataDependencyRequest()
+body.mtype = Type14Enum.COLUMN
 body.id = ['id6', 'id7']
 
 result = metadata_controller.get_object_dependency(body)
@@ -725,12 +806,14 @@ result = metadata_controller.get_object_dependency(body)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Export Object TML
 
-To export ThoughtSpot objects represented in ThoughtSpot Modeling Language (TML), use this endpoint
+To export ThoughtSpot objects represented in ThoughtSpot Modeling Language (TML), use this endpoint.
+
+Permission: Requires at least view access to the object
 
 ```python
 def export_object_tml(self,
@@ -741,7 +824,7 @@ def export_object_tml(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2MetadataTmlExportRequest`](/doc/models/api-rest-v2-metadata-tml-export-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2MetadataTmlExportRequest`](../../doc/models/tspublic-rest-v2-metadata-tml-export-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -750,7 +833,7 @@ def export_object_tml(self,
 ## Example Usage
 
 ```python
-body = ApiRestV2MetadataTmlExportRequest()
+body = TspublicRestV2MetadataTmlExportRequest()
 body.id = ['id6', 'id7']
 
 result = metadata_controller.export_object_tml(body)
@@ -760,12 +843,14 @@ result = metadata_controller.export_object_tml(body)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Import Object TML
 
-To import ThoughtSpot objects represented in ThoughtSpot Modeling Language (TML), use this endpoint
+To import ThoughtSpot objects represented in ThoughtSpot Modeling Language (TML), use this endpoint.
+
+Permission: Requires datamanagement privilge
 
 ```python
 def import_object_tml(self,
@@ -776,7 +861,7 @@ def import_object_tml(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2MetadataTmlImportRequest`](/doc/models/api-rest-v2-metadata-tml-import-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2MetadataTmlImportRequest`](../../doc/models/tspublic-rest-v2-metadata-tml-import-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -785,7 +870,7 @@ def import_object_tml(self,
 ## Example Usage
 
 ```python
-body = ApiRestV2MetadataTmlImportRequest()
+body = TspublicRestV2MetadataTmlImportRequest()
 body.object_tml = ['objectTML5', 'objectTML6']
 
 result = metadata_controller.import_object_tml(body)
@@ -795,5 +880,5 @@ result = metadata_controller.import_object_tml(body)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 

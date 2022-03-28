@@ -1,8 +1,6 @@
 
 # Type 10 Enum
 
-Type of the metadata object being searched.
-
 ## Enumeration
 
 `Type10Enum`
@@ -13,18 +11,8 @@ Type of the metadata object being searched.
 |  --- |
 | `ANSWER` |
 | `LIVEBOARD` |
-| `DATAOBJECTALL` |
-| `DATAOBJECTWORKSHEET` |
-| `DATAOBJECTTABLE` |
-| `DATAOBJECTUSERDEFINED` |
-| `DATAOBJECTVIEW` |
-| `DATAOBJECTCALENDARTABLE` |
-| `COLUMNALL` |
-| `COLUMNWORKSHEET` |
-| `COLUMNTABLE` |
-| `COLUMNUSERDEFINED` |
-| `COLUMNVIEW` |
-| `COLUMNCALENDARTABLE` |
+| `DATAOBJECT` |
+| `COLUMN` |
 | `JOIN` |
 | `CONNECTION` |
 | `TAG` |

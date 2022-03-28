@@ -10,18 +10,21 @@ UserController userController = client.UserController;
 
 ## Methods
 
-* [Get User](/doc/controllers/user.md#get-user)
-* [Create User](/doc/controllers/user.md#create-user)
-* [Update User](/doc/controllers/user.md#update-user)
-* [Delete User](/doc/controllers/user.md#delete-user)
-* [Add Groups to User](/doc/controllers/user.md#add-groups-to-user)
-* [Remove Groups From User](/doc/controllers/user.md#remove-groups-from-user)
-* [Search Users](/doc/controllers/user.md#search-users)
+* [Get User](../../doc/controllers/user.md#get-user)
+* [Create User](../../doc/controllers/user.md#create-user)
+* [Update User](../../doc/controllers/user.md#update-user)
+* [Delete User](../../doc/controllers/user.md#delete-user)
+* [Add Groups to User](../../doc/controllers/user.md#add-groups-to-user)
+* [Remove Groups From User](../../doc/controllers/user.md#remove-groups-from-user)
+* [Change Password of User](../../doc/controllers/user.md#change-password-of-user)
+* [Search Users](../../doc/controllers/user.md#search-users)
 
 
 # Get User
 
 To get the details of a specific user account by username or user id, use this endpoint. At Least one value is needed. When both are given,then user id will be considered to fetch user information
+
+Permission: Requires administration privilege
 
 ```csharp
 GetUserAsync(
@@ -38,7 +41,7 @@ GetUserAsync(
 
 ## Response Type
 
-[`Task<Models.UserResponse>`](/doc/models/user-response.md)
+[`Task<Models.UserResponse>`](../../doc/models/user-response.md)
 
 ## Example Usage
 
@@ -54,7 +57,7 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Create User
@@ -65,25 +68,27 @@ Using this API, you can create a user and assign groups. To create a user, you r
 
 All users created in the ThoughtSpot system are added to ALL_GROUP
 
+Permission: Requires administration privilege
+
 ```csharp
 CreateUserAsync(
-    Models.ApiRestV2UserCreateRequest body)
+    Models.TspublicRestV2UserCreateRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.ApiRestV2UserCreateRequest`](/doc/models/api-rest-v2-user-create-request.md) | Body, Required | - |
+| `body` | [`Models.TspublicRestV2UserCreateRequest`](../../doc/models/tspublic-rest-v2-user-create-request.md) | Body, Required | - |
 
 ## Response Type
 
-[`Task<Models.UserResponse>`](/doc/models/user-response.md)
+[`Task<Models.UserResponse>`](../../doc/models/user-response.md)
 
 ## Example Usage
 
 ```csharp
-var body = new ApiRestV2UserCreateRequest();
+var body = new TspublicRestV2UserCreateRequest();
 body.Name = "name6";
 body.DisplayName = "displayName6";
 body.Password = "password0";
@@ -99,7 +104,7 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Update User
@@ -110,16 +115,18 @@ To modify a user, you require admin user privileges.
 
 At least one of User Id or username is mandatory. When both are given, then user id will be considered and username will be updated
 
+Permission: Requires administration privilege
+
 ```csharp
 UpdateUserAsync(
-    Models.ApiRestV2UserUpdateRequest body)
+    Models.TspublicRestV2UserUpdateRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.ApiRestV2UserUpdateRequest`](/doc/models/api-rest-v2-user-update-request.md) | Body, Required | - |
+| `body` | [`Models.TspublicRestV2UserUpdateRequest`](../../doc/models/tspublic-rest-v2-user-update-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -128,7 +135,7 @@ UpdateUserAsync(
 ## Example Usage
 
 ```csharp
-var body = new ApiRestV2UserUpdateRequest();
+var body = new TspublicRestV2UserUpdateRequest();
 
 try
 {
@@ -141,7 +148,7 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Delete User
@@ -149,6 +156,8 @@ catch (ApiException e){};
 To remove a user from the ThoughtSpot system, use this endpoint.
 
 At least one value is needed. When both are given, then user id will be considered to delete user.
+
+Permission: Requires administration privilege
 
 ```csharp
 DeleteUserAsync(
@@ -181,7 +190,7 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Add Groups to User
@@ -192,16 +201,18 @@ When you assign groups to a user, the user inherits the privileges assigned to t
 
 At least one of user Id or username is mandatory. When both are given, then user id will be considered.
 
+Permission: Requires administration privilege
+
 ```csharp
 AddGroupsToUserAsync(
-    Models.ApiRestV2UserAddgroupRequest body)
+    Models.TspublicRestV2UserAddgroupRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.ApiRestV2UserAddgroupRequest`](/doc/models/api-rest-v2-user-addgroup-request.md) | Body, Required | - |
+| `body` | [`Models.TspublicRestV2UserAddgroupRequest`](../../doc/models/tspublic-rest-v2-user-addgroup-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -210,7 +221,12 @@ AddGroupsToUserAsync(
 ## Example Usage
 
 ```csharp
-var body = new ApiRestV2UserAddgroupRequest();
+var body = new TspublicRestV2UserAddgroupRequest();
+body.Groups = new List<GroupNameAndIDInput>();
+
+var bodyGroups0 = new GroupNameAndIDInput();
+body.Groups.Add(bodyGroups0);
+
 
 try
 {
@@ -223,7 +239,7 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Remove Groups From User
@@ -234,16 +250,18 @@ The API removes only the user association. It does not delete the user or group 
 
 At least one of user id or username is mandatory. When both are given, then user id will be considered.
 
+Permission: Requires administration privilege
+
 ```csharp
 RemoveGroupsFromUserAsync(
-    Models.ApiRestV2UserRemovegroupRequest body)
+    Models.TspublicRestV2UserRemovegroupRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.ApiRestV2UserRemovegroupRequest`](/doc/models/api-rest-v2-user-removegroup-request.md) | Body, Required | - |
+| `body` | [`Models.TspublicRestV2UserRemovegroupRequest`](../../doc/models/tspublic-rest-v2-user-removegroup-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -252,7 +270,12 @@ RemoveGroupsFromUserAsync(
 ## Example Usage
 
 ```csharp
-var body = new ApiRestV2UserRemovegroupRequest();
+var body = new TspublicRestV2UserRemovegroupRequest();
+body.Groups = new List<GroupNameAndIDInput>();
+
+var bodyGroups0 = new GroupNameAndIDInput();
+body.Groups.Add(bodyGroups0);
+
 
 try
 {
@@ -265,36 +288,42 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Search Users
+# Change Password of User
 
-To get the details of a specific user account or all users in the ThoughtSpot system, use this endpoint. If no input is provided, then all user are included in the response.
+To change the password of a ThoughtSpot user account, use this endpoint.
+
+At least one of id or name of user is required. When both are given user id will be considered.
+
+Permission: Requires administration privilege
 
 ```csharp
-SearchUsersAsync(
-    Models.ApiRestV2UserSearchRequest body)
+ChangePasswordOfUserAsync(
+    Models.TspublicRestV2UserChangepasswordRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.ApiRestV2UserSearchRequest`](/doc/models/api-rest-v2-user-search-request.md) | Body, Required | - |
+| `body` | [`Models.TspublicRestV2UserChangepasswordRequest`](../../doc/models/tspublic-rest-v2-user-changepassword-request.md) | Body, Required | - |
 
 ## Response Type
 
-[`Task<List<Models.UserResponse>>`](/doc/models/user-response.md)
+`Task<bool>`
 
 ## Example Usage
 
 ```csharp
-var body = new ApiRestV2UserSearchRequest();
+var body = new TspublicRestV2UserChangepasswordRequest();
+body.CurrentPassword = "currentPassword0";
+body.NewPassword = "newPassword0";
 
 try
 {
-    List<UserResponse> result = await userController.SearchUsersAsync(body);
+    bool? result = await userController.ChangePasswordOfUserAsync(body);
 }
 catch (ApiException e){};
 ```
@@ -303,5 +332,45 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+
+
+# Search Users
+
+To get the details of a specific user account or all users in the ThoughtSpot system, use this endpoint. If no input is provided, then all user are included in the response.
+
+Permission: Requires administration privilege
+
+```csharp
+SearchUsersAsync(
+    Models.TspublicRestV2UserSearchRequest body)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`Models.TspublicRestV2UserSearchRequest`](../../doc/models/tspublic-rest-v2-user-search-request.md) | Body, Required | - |
+
+## Response Type
+
+`Task<object>`
+
+## Example Usage
+
+```csharp
+var body = new TspublicRestV2UserSearchRequest();
+
+try
+{
+    object result = await userController.SearchUsersAsync(body);
+}
+catch (ApiException e){};
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 

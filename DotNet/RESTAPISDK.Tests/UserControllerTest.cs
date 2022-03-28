@@ -39,7 +39,9 @@ namespace RESTAPISDK.Tests
         }
 
         /// <summary>
-        /// To get the details of a specific user account by username or user id, use this endpoint. At Least one value is needed. When both are given,then user id will be considered to fetch user information.
+        /// To get the details of a specific user account by username or user id, use this endpoint. At Least one value is needed. When both are given,then user id will be considered to fetch user information 
+        ///
+        /// Permission: Requires administration privilege.
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous unit test.</returns>
         [Test]
@@ -76,7 +78,9 @@ namespace RESTAPISDK.Tests
         /// <summary>
         /// To remove a user from the ThoughtSpot system, use this endpoint. 
         ///
-        /// At least one value is needed. When both are given, then user id will be considered to delete user..
+        /// At least one value is needed. When both are given, then user id will be considered to delete user. 
+        ///
+        /// Permission: Requires administration privilege.
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous unit test.</returns>
         [Test]

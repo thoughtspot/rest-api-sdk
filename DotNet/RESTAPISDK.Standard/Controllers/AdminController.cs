@@ -39,7 +39,8 @@ namespace RESTAPISDK.Standard.Controllers
         }
 
         /// <summary>
-        /// To get details of the current configuration of a Thoughtspot cluster, use this endpoint.
+        /// To get details of the current configuration of a Thoughtspot cluster, use this endpoint. .
+        ///  Permission: Requires administration privilege.
         /// </summary>
         /// <returns>Returns the object response from the API call.</returns>
         public object GetClusterConfig()
@@ -50,7 +51,8 @@ namespace RESTAPISDK.Standard.Controllers
         }
 
         /// <summary>
-        /// To get details of the current configuration of a Thoughtspot cluster, use this endpoint.
+        /// To get details of the current configuration of a Thoughtspot cluster, use this endpoint. .
+        ///  Permission: Requires administration privilege.
         /// </summary>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the object response from the API call.</returns>
@@ -61,14 +63,14 @@ namespace RESTAPISDK.Standard.Controllers
 
             // prepare query string for API call.
             StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/api/rest/v2/admin/configuration");
+            queryBuilder.Append("/tspublic/rest/v2/admin/configuration");
 
             // append request with appropriate headers and parameters
             var headers = new Dictionary<string, string>()
             {
                 { "user-agent", this.UserAgent },
-                { "Content-Type", this.Config.ContentType },
                 { "Accept-Language", this.Config.AcceptLanguage },
+                { "Content-Type", this.Config.ContentType },
             };
 
             // prepare the API call request to fetch the response.
@@ -101,7 +103,8 @@ namespace RESTAPISDK.Standard.Controllers
         }
 
         /// <summary>
-        /// To get the details of overrides to the Thoughtspot cluster configuration, use this endpoint.
+        /// To get the details of overrides to the Thoughtspot cluster configuration, use this endpoint. .
+        ///  Permission: Requires administration privilege.
         /// </summary>
         /// <returns>Returns the object response from the API call.</returns>
         public object GetClusterConfigOverrides()
@@ -112,7 +115,8 @@ namespace RESTAPISDK.Standard.Controllers
         }
 
         /// <summary>
-        /// To get the details of overrides to the Thoughtspot cluster configuration, use this endpoint.
+        /// To get the details of overrides to the Thoughtspot cluster configuration, use this endpoint. .
+        ///  Permission: Requires administration privilege.
         /// </summary>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the object response from the API call.</returns>
@@ -123,14 +127,14 @@ namespace RESTAPISDK.Standard.Controllers
 
             // prepare query string for API call.
             StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/api/rest/v2/admin/configuration/overrides");
+            queryBuilder.Append("/tspublic/rest/v2/admin/configuration/overrides");
 
             // append request with appropriate headers and parameters
             var headers = new Dictionary<string, string>()
             {
                 { "user-agent", this.UserAgent },
-                { "Content-Type", this.Config.ContentType },
                 { "Accept-Language", this.Config.AcceptLanguage },
+                { "Content-Type", this.Config.ContentType },
             };
 
             // prepare the API call request to fetch the response.
@@ -163,12 +167,13 @@ namespace RESTAPISDK.Standard.Controllers
         }
 
         /// <summary>
-        /// To update the Thoughtspot cluster configuration, use this endpoint.
+        /// To update the Thoughtspot cluster configuration, use this endpoint. .
+        ///  Permission: Requires administration privilege.
         /// </summary>
         /// <param name="body">Required parameter: Example: .</param>
         /// <returns>Returns the bool response from the API call.</returns>
         public bool UpdateClusterConfig(
-                Models.ApiRestV2AdminConfigurationUpdateRequest body)
+                Models.TspublicRestV2AdminConfigurationUpdateRequest body)
         {
             Task<bool> t = this.UpdateClusterConfigAsync(body);
             ApiHelper.RunTaskSynchronously(t);
@@ -176,21 +181,28 @@ namespace RESTAPISDK.Standard.Controllers
         }
 
         /// <summary>
-        /// To update the Thoughtspot cluster configuration, use this endpoint.
+        /// To update the Thoughtspot cluster configuration, use this endpoint. .
+        ///  Permission: Requires administration privilege.
         /// </summary>
         /// <param name="body">Required parameter: Example: .</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the bool response from the API call.</returns>
         public async Task<bool> UpdateClusterConfigAsync(
-                Models.ApiRestV2AdminConfigurationUpdateRequest body,
+                Models.TspublicRestV2AdminConfigurationUpdateRequest body,
                 CancellationToken cancellationToken = default)
         {
+            // validating required parameters.
+            if (body == null)
+            {
+                throw new ArgumentNullException("body", "The parameter \"body\" is a required parameter and cannot be null.");
+            }
+
             // the base uri for api requests.
             string baseUri = this.Config.GetBaseUri();
 
             // prepare query string for API call.
             StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/api/rest/v2/admin/configuration/update");
+            queryBuilder.Append("/tspublic/rest/v2/admin/configuration/update");
 
             // append request with appropriate headers and parameters
             var headers = new Dictionary<string, string>()
@@ -235,12 +247,13 @@ namespace RESTAPISDK.Standard.Controllers
         /// <summary>
         /// To reset the password of a ThoughtSpot user account, use this endpoint. .
         ///  It is mandatory to use Authorization header with token of a user with admin access to successfully run this endpoint. .
-        ///  At least one of User Id or username is mandatory. When both are given, then user id will be considered.
+        ///  At least one of User Id or username is mandatory. When both are given, then user id will be considered. .
+        ///  Permission: Requires administration privilege.
         /// </summary>
         /// <param name="body">Required parameter: Example: .</param>
         /// <returns>Returns the bool response from the API call.</returns>
         public bool ResetUserPassword(
-                Models.ApiRestV2AdminResetpasswordRequest body)
+                Models.TspublicRestV2AdminResetpasswordRequest body)
         {
             Task<bool> t = this.ResetUserPasswordAsync(body);
             ApiHelper.RunTaskSynchronously(t);
@@ -250,21 +263,28 @@ namespace RESTAPISDK.Standard.Controllers
         /// <summary>
         /// To reset the password of a ThoughtSpot user account, use this endpoint. .
         ///  It is mandatory to use Authorization header with token of a user with admin access to successfully run this endpoint. .
-        ///  At least one of User Id or username is mandatory. When both are given, then user id will be considered.
+        ///  At least one of User Id or username is mandatory. When both are given, then user id will be considered. .
+        ///  Permission: Requires administration privilege.
         /// </summary>
         /// <param name="body">Required parameter: Example: .</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the bool response from the API call.</returns>
         public async Task<bool> ResetUserPasswordAsync(
-                Models.ApiRestV2AdminResetpasswordRequest body,
+                Models.TspublicRestV2AdminResetpasswordRequest body,
                 CancellationToken cancellationToken = default)
         {
+            // validating required parameters.
+            if (body == null)
+            {
+                throw new ArgumentNullException("body", "The parameter \"body\" is a required parameter and cannot be null.");
+            }
+
             // the base uri for api requests.
             string baseUri = this.Config.GetBaseUri();
 
             // prepare query string for API call.
             StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/api/rest/v2/admin/resetpassword");
+            queryBuilder.Append("/tspublic/rest/v2/admin/resetpassword");
 
             // append request with appropriate headers and parameters
             var headers = new Dictionary<string, string>()
@@ -311,12 +331,13 @@ namespace RESTAPISDK.Standard.Controllers
         ///  The payload takes principals containing all users and groups present in the external system. .
         ///  The users and user groups in Thoughtspot get updated for any matching inputs. .
         ///  Any user and user group present in the input, but not present in the cluster, gets created in cluster. .
-        /// n You can optionally choose to delete the user and groups from the cluster, that are not present in the input.
+        /// n You can optionally choose to delete the user and groups from the cluster, that are not present in the input. .
+        ///  Permission: Requires administration privilege.
         /// </summary>
         /// <param name="body">Required parameter: Example: .</param>
         /// <returns>Returns the Models.AdminsyncPrincipalResponse response from the API call.</returns>
         public Models.AdminsyncPrincipalResponse SyncPrincipal(
-                Models.ApiRestV2AdminSyncprincipalRequest body)
+                Models.TspublicRestV2AdminSyncprincipalRequest body)
         {
             Task<Models.AdminsyncPrincipalResponse> t = this.SyncPrincipalAsync(body);
             ApiHelper.RunTaskSynchronously(t);
@@ -328,21 +349,28 @@ namespace RESTAPISDK.Standard.Controllers
         ///  The payload takes principals containing all users and groups present in the external system. .
         ///  The users and user groups in Thoughtspot get updated for any matching inputs. .
         ///  Any user and user group present in the input, but not present in the cluster, gets created in cluster. .
-        /// n You can optionally choose to delete the user and groups from the cluster, that are not present in the input.
+        /// n You can optionally choose to delete the user and groups from the cluster, that are not present in the input. .
+        ///  Permission: Requires administration privilege.
         /// </summary>
         /// <param name="body">Required parameter: Example: .</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.AdminsyncPrincipalResponse response from the API call.</returns>
         public async Task<Models.AdminsyncPrincipalResponse> SyncPrincipalAsync(
-                Models.ApiRestV2AdminSyncprincipalRequest body,
+                Models.TspublicRestV2AdminSyncprincipalRequest body,
                 CancellationToken cancellationToken = default)
         {
+            // validating required parameters.
+            if (body == null)
+            {
+                throw new ArgumentNullException("body", "The parameter \"body\" is a required parameter and cannot be null.");
+            }
+
             // the base uri for api requests.
             string baseUri = this.Config.GetBaseUri();
 
             // prepare query string for API call.
             StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/api/rest/v2/admin/syncprincipal");
+            queryBuilder.Append("/tspublic/rest/v2/admin/syncprincipal");
 
             // append request with appropriate headers and parameters
             var headers = new Dictionary<string, string>()
@@ -387,12 +415,13 @@ namespace RESTAPISDK.Standard.Controllers
 
         /// <summary>
         /// To programmatically change the owner of one or several objects from one user account to another, use this endpoint. .
-        ///  You might want to transfer ownership of objects owned by a user to another active user, when the account is removed from the ThoughtSpot application.
+        ///  You might want to transfer ownership of objects owned by a user to another active user, when the account is removed from the ThoughtSpot application. .
+        ///  Permission: Requires administration privilege.
         /// </summary>
         /// <param name="body">Required parameter: Example: .</param>
         /// <returns>Returns the bool response from the API call.</returns>
         public bool ChangeOwnerOfObjects(
-                Models.ApiRestV2AdminChangeownerRequest body)
+                Models.TspublicRestV2AdminChangeownerRequest body)
         {
             Task<bool> t = this.ChangeOwnerOfObjectsAsync(body);
             ApiHelper.RunTaskSynchronously(t);
@@ -401,21 +430,28 @@ namespace RESTAPISDK.Standard.Controllers
 
         /// <summary>
         /// To programmatically change the owner of one or several objects from one user account to another, use this endpoint. .
-        ///  You might want to transfer ownership of objects owned by a user to another active user, when the account is removed from the ThoughtSpot application.
+        ///  You might want to transfer ownership of objects owned by a user to another active user, when the account is removed from the ThoughtSpot application. .
+        ///  Permission: Requires administration privilege.
         /// </summary>
         /// <param name="body">Required parameter: Example: .</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the bool response from the API call.</returns>
         public async Task<bool> ChangeOwnerOfObjectsAsync(
-                Models.ApiRestV2AdminChangeownerRequest body,
+                Models.TspublicRestV2AdminChangeownerRequest body,
                 CancellationToken cancellationToken = default)
         {
+            // validating required parameters.
+            if (body == null)
+            {
+                throw new ArgumentNullException("body", "The parameter \"body\" is a required parameter and cannot be null.");
+            }
+
             // the base uri for api requests.
             string baseUri = this.Config.GetBaseUri();
 
             // prepare query string for API call.
             StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/api/rest/v2/admin/changeowner");
+            queryBuilder.Append("/tspublic/rest/v2/admin/changeowner");
 
             // append request with appropriate headers and parameters
             var headers = new Dictionary<string, string>()

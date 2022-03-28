@@ -14,20 +14,20 @@ import java.util.TreeMap;
  * NotifyOnShareEnum to be used.
  */
 public enum NotifyOnShareEnum {
-    TRUE,
+    ENUM_TRUE,
 
-    FALSE;
+    ENUM_FALSE;
 
 
     private static TreeMap<String, NotifyOnShareEnum> valueMap = new TreeMap<>();
     private String value;
 
     static {
-        TRUE.value = "True";
-        FALSE.value = "False";
+        ENUM_TRUE.value = "true";
+        ENUM_FALSE.value = "false";
 
-        valueMap.put("True", TRUE);
-        valueMap.put("False", FALSE);
+        valueMap.put("true", ENUM_TRUE);
+        valueMap.put("false", ENUM_FALSE);
     }
 
     /**

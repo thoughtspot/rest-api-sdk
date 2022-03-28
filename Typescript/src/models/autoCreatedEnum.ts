@@ -10,8 +10,8 @@ import { Schema, stringEnum } from '../schema';
  * Enum for AutoCreatedEnum
  */
 export enum AutoCreatedEnum {
-  True = 'True',
-  False = 'False',
+  True = 'true',
+  False = 'false',
 }
 
 /**

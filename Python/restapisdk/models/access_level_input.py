@@ -19,7 +19,8 @@ class AccessLevelInput(object):
         id (string): GUID of the user or user group
         mtype (Type1Enum): Type of access detail provided
         access (AccessEnum): Minimum access level that the specified user or
-            user group has.
+            user group has. If no input is provided then minimum access of
+            READ_ONLY will be considered.
 
     """
 

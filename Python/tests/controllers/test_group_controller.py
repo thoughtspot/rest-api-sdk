@@ -12,9 +12,7 @@ import dateutil.parser
 
 from tests.controllers.controller_test_base import ControllerTestBase
 from tests.test_helper import TestHelper
-from tests.http_response_catcher import HttpResponseCatcher
 from restapisdk.api_helper import APIHelper
-from restapisdk.controllers.group_controller import GroupController
 
 
 class GroupControllerTests(ControllerTestBase):
@@ -22,12 +20,14 @@ class GroupControllerTests(ControllerTestBase):
     @classmethod
     def setUpClass(cls):
         super(GroupControllerTests, cls).setUpClass()
-        cls.response_catcher = HttpResponseCatcher()
-        cls.controller = GroupController(cls.config, cls.auth_managers, cls.response_catcher)
+        cls.controller = cls.client.group
+        cls.response_catcher = cls.controller.http_call_back
 
     # To get the details of a specific group by name or id, use this endpoint. 
     #
-    # At least one value needed. When both are given,then id will be considered to fetch user information.
+    # At least one value needed. When both are given,then id will be considered to fetch user information. 
+    #
+    # Permission: Requires administration privilege
     def test_get_group(self):
         # Parameters for the API call
         name = None
@@ -48,7 +48,9 @@ class GroupControllerTests(ControllerTestBase):
 
     # To remove a group from the ThoughtSpot system, send a DELETE request to this endpoint. 
     #
-    # At least one value needed. When both are given,then user id will be considered to fetch user information.
+    # At least one value needed. When both are given,then user id will be considered to fetch user information. 
+    #
+    # Permission: Requires administration privilege
     def test_delete_group(self):
         # Parameters for the API call
         name = None

@@ -12,9 +12,7 @@ import dateutil.parser
 
 from tests.controllers.controller_test_base import ControllerTestBase
 from tests.test_helper import TestHelper
-from tests.http_response_catcher import HttpResponseCatcher
 from restapisdk.api_helper import APIHelper
-from restapisdk.controllers.admin_controller import AdminController
 
 
 class AdminControllerTests(ControllerTestBase):
@@ -22,10 +20,12 @@ class AdminControllerTests(ControllerTestBase):
     @classmethod
     def setUpClass(cls):
         super(AdminControllerTests, cls).setUpClass()
-        cls.response_catcher = HttpResponseCatcher()
-        cls.controller = AdminController(cls.config, cls.auth_managers, cls.response_catcher)
+        cls.controller = cls.client.admin
+        cls.response_catcher = cls.controller.http_call_back
 
-    # To get details of the current configuration of a Thoughtspot cluster, use this endpoint.
+    # To get details of the current configuration of a Thoughtspot cluster, use this endpoint. 
+    #
+    # Permission: Requires administration privilege
     def test_get_cluster_config(self):
 
         # Perform the API call through the SDK function
@@ -41,7 +41,9 @@ class AdminControllerTests(ControllerTestBase):
         self.assertTrue(TestHelper.match_headers(expected_headers, self.response_catcher.response.headers))
 
 
-    # To get the details of overrides to the Thoughtspot cluster configuration, use this endpoint.
+    # To get the details of overrides to the Thoughtspot cluster configuration, use this endpoint. 
+    #
+    # Permission: Requires administration privilege
     def test_get_cluster_config_overrides(self):
 
         # Perform the API call through the SDK function

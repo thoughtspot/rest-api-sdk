@@ -88,6 +88,6 @@ namespace RESTAPISDK.Standard.Models
         /// BYPASSRLS.
         /// </summary>
         [EnumMember(Value = "BYPASSRLS")]
-        BYPASSRLS,
+        BYPASSRLS
     }
 }

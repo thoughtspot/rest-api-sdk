@@ -10,8 +10,8 @@ import { Schema, stringEnum } from '../schema';
  * Enum for AnalystOnboardingCompleteEnum
  */
 export enum AnalystOnboardingCompleteEnum {
-  True = 'True',
-  False = 'False',
+  True = 'true',
+  False = 'false',
 }
 
 /**

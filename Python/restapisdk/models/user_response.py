@@ -50,8 +50,8 @@ class UserResponse(object):
         mtype (string): Indicates the type of user account
         parenttype (string): Indicates the type of parent object
         tenant_id (string): Tenant id associated with the user account
-        index_version (int): TODO: type description here.
-        generation_num (int): TODO: type description here.
+        index_version (float): TODO: type description here.
+        generation_num (float): TODO: type description here.
         created (float): Date and time when user account was created
         modified (float): Date and time of last modification of user account
         author (UserNameAndID): TODO: type description here.

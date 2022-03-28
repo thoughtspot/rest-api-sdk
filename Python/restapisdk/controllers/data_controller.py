@@ -16,18 +16,21 @@ from restapisdk.exceptions.error_response_exception import ErrorResponseExceptio
 class DataController(BaseController):
 
     """A Controller to access Endpoints in the restapisdk API."""
-    def __init__(self, config, auth_managers, call_back=None):
-        super(DataController, self).__init__(config, auth_managers, call_back)
+    def __init__(self, config, auth_managers):
+        super(DataController, self).__init__(config, auth_managers)
 
     def search_query_data(self,
                           body):
-        """Does a POST request to /api/rest/v2/data/search.
+        """Does a POST request to /tspublic/rest/v2/data/search.
 
         To programmatically retrieve data from ThoughtSpot using search query
-        string, use this endpoint
+        string, use this endpoint 
+         Permission: Requires at least view access to the dataobject and
+         datadownloading privilege
 
         Args:
-            body (ApiRestV2DataSearchRequest): TODO: type description here.
+            body (TspublicRestV2DataSearchRequest): TODO: type description
+                here.
 
         Returns:
             object: Response from the API. Data for the query string
@@ -40,8 +43,11 @@ class DataController(BaseController):
 
         """
 
+        # Validate required parameters
+        self.validate_parameters(body=body)
+
         # Prepare query URL
-        _url_path = '/api/rest/v2/data/search'
+        _url_path = '/tspublic/rest/v2/data/search'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_url = APIHelper.clean_url(_query_builder)
@@ -69,13 +75,16 @@ class DataController(BaseController):
 
     def answer_data(self,
                     body):
-        """Does a POST request to /api/rest/v2/data/answer.
+        """Does a POST request to /tspublic/rest/v2/data/answer.
 
         To retrieve data related to a Answer from the ThoughtSpot system, you
-        can use this endpoint
+        can use this endpoint. 
+         Permission: Requires at least view access to the object and
+         datadownloading privilege
 
         Args:
-            body (ApiRestV2DataAnswerRequest): TODO: type description here.
+            body (TspublicRestV2DataAnswerRequest): TODO: type description
+                here.
 
         Returns:
             object: Response from the API. Data from the saved Answer
@@ -88,8 +97,11 @@ class DataController(BaseController):
 
         """
 
+        # Validate required parameters
+        self.validate_parameters(body=body)
+
         # Prepare query URL
-        _url_path = '/api/rest/v2/data/answer'
+        _url_path = '/tspublic/rest/v2/data/answer'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_url = APIHelper.clean_url(_query_builder)
@@ -117,13 +129,15 @@ class DataController(BaseController):
 
     def liveboard_data(self,
                        body):
-        """Does a POST request to /api/rest/v2/data/liveboard.
+        """Does a POST request to /tspublic/rest/v2/data/liveboard.
 
         To retrieve data related to a Liveboard or visualization from the
-        ThoughtSpot system, you can use this endpoint
+        ThoughtSpot system, you can use this endpoint 
+         Permission: Requires at least view access to the object and
+         datadownloading privilege
 
         Args:
-            body (ApiRestV2DataLiveboardRequest): TODO: type description
+            body (TspublicRestV2DataLiveboardRequest): TODO: type description
                 here.
 
         Returns:
@@ -137,8 +151,11 @@ class DataController(BaseController):
 
         """
 
+        # Validate required parameters
+        self.validate_parameters(body=body)
+
         # Prepare query URL
-        _url_path = '/api/rest/v2/data/liveboard'
+        _url_path = '/tspublic/rest/v2/data/liveboard'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_url = APIHelper.clean_url(_query_builder)

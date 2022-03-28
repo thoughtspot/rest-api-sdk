@@ -10,18 +10,20 @@ const dataController = new DataController(client);
 
 ## Methods
 
-* [Search Query Data](/doc/controllers/data.md#search-query-data)
-* [Answer Data](/doc/controllers/data.md#answer-data)
-* [Liveboard Data](/doc/controllers/data.md#liveboard-data)
+* [Search Query Data](../../doc/controllers/data.md#search-query-data)
+* [Answer Data](../../doc/controllers/data.md#answer-data)
+* [Liveboard Data](../../doc/controllers/data.md#liveboard-data)
 
 
 # Search Query Data
 
 To programmatically retrieve data from ThoughtSpot using search query string, use this endpoint
 
+Permission: Requires at least view access to the dataobject and datadownloading privilege
+
 ```ts
 async searchQueryData(
-  body: ApiRestV2DataSearchRequest,
+  body: TspublicRestV2DataSearchRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<unknown>>
 ```
@@ -30,7 +32,7 @@ async searchQueryData(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2DataSearchRequest`](/doc/models/api-rest-v2-data-search-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2DataSearchRequest`](../../doc/models/tspublic-rest-v2-data-search-request.md) | Body, Required | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -41,7 +43,7 @@ async searchQueryData(
 
 ```ts
 const contentType = null;
-const body: ApiRestV2DataSearchRequest = {
+const body: TspublicRestV2DataSearchRequest = {
   queryString: 'queryString0',
   dataObjectId: 'dataObjectId6',
 };
@@ -62,16 +64,18 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
 # Answer Data
 
-To retrieve data related to a Answer from the ThoughtSpot system, you can use this endpoint
+To retrieve data related to a Answer from the ThoughtSpot system, you can use this endpoint.
+
+Permission: Requires at least view access to the object and datadownloading privilege
 
 ```ts
 async answerData(
-  body: ApiRestV2DataAnswerRequest,
+  body: TspublicRestV2DataAnswerRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<unknown>>
 ```
@@ -80,7 +84,7 @@ async answerData(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2DataAnswerRequest`](/doc/models/api-rest-v2-data-answer-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2DataAnswerRequest`](../../doc/models/tspublic-rest-v2-data-answer-request.md) | Body, Required | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -91,7 +95,7 @@ async answerData(
 
 ```ts
 const contentType = null;
-const body: ApiRestV2DataAnswerRequest = {
+const body: TspublicRestV2DataAnswerRequest = {
   id: 'id6',
 };
 
@@ -111,16 +115,18 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
 # Liveboard Data
 
 To retrieve data related to a Liveboard or visualization from the ThoughtSpot system, you can use this endpoint
 
+Permission: Requires at least view access to the object and datadownloading privilege
+
 ```ts
 async liveboardData(
-  body: ApiRestV2DataLiveboardRequest,
+  body: TspublicRestV2DataLiveboardRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<unknown>>
 ```
@@ -129,7 +135,7 @@ async liveboardData(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2DataLiveboardRequest`](/doc/models/api-rest-v2-data-liveboard-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2DataLiveboardRequest`](../../doc/models/tspublic-rest-v2-data-liveboard-request.md) | Body, Required | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -140,7 +146,7 @@ async liveboardData(
 
 ```ts
 const contentType = null;
-const body: ApiRestV2DataLiveboardRequest = {
+const body: TspublicRestV2DataLiveboardRequest = {
   id: 'id6',
 };
 
@@ -160,5 +166,5 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 

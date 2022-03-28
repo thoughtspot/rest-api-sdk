@@ -108,7 +108,8 @@ public class AccessLevelInput {
 
     /**
      * Getter for Access.
-     * Minimum access level that the specified user or user group has.
+     * Minimum access level that the specified user or user group has. If no input is provided then
+     * minimum access of READ_ONLY will be considered.
      * @return Returns the AccessEnum
      */
     @JsonGetter("access")
@@ -119,7 +120,8 @@ public class AccessLevelInput {
 
     /**
      * Setter for Access.
-     * Minimum access level that the specified user or user group has.
+     * Minimum access level that the specified user or user group has. If no input is provided then
+     * minimum access of READ_ONLY will be considered.
      * @param access Value for AccessEnum
      */
     @JsonSetter("access")

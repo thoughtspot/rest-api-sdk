@@ -8,6 +8,7 @@ Class for holding http client configuration.
 | Name | Description | Return Type |
 |  --- | --- | --- |
 | `getTimeout()` | The timeout in seconds to use for making HTTP requests. | `long` |
+| `isSkipSslCertVerification()` | Allow or prevent skipping SSL certificate verification. | `boolean` |
 | `getNumberOfRetries()` | The number of retries to make. | `int` |
 | `getBackOffFactor()` | To use in calculation of wait time for next request in case of failure. | `int` |
 | `getRetryInterval()` | To use in calculation of wait time for next request in case of failure. | `long` |

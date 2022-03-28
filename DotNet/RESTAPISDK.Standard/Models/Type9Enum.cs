@@ -31,16 +31,76 @@ namespace RESTAPISDK.Standard.Models
         LIVEBOARD,
 
         /// <summary>
-        /// DATAOBJECT.
+        /// DATAOBJECTALL.
         /// </summary>
-        [EnumMember(Value = "DATAOBJECT")]
-        DATAOBJECT,
+        [EnumMember(Value = "DATAOBJECT_ALL")]
+        DATAOBJECTALL,
 
         /// <summary>
-        /// COLUMN.
+        /// DATAOBJECTWORKSHEET.
         /// </summary>
-        [EnumMember(Value = "COLUMN")]
-        COLUMN,
+        [EnumMember(Value = "DATAOBJECT_WORKSHEET")]
+        DATAOBJECTWORKSHEET,
+
+        /// <summary>
+        /// DATAOBJECTTABLE.
+        /// </summary>
+        [EnumMember(Value = "DATAOBJECT_TABLE")]
+        DATAOBJECTTABLE,
+
+        /// <summary>
+        /// DATAOBJECTUSERDEFINED.
+        /// </summary>
+        [EnumMember(Value = "DATAOBJECT_USER_DEFINED")]
+        DATAOBJECTUSERDEFINED,
+
+        /// <summary>
+        /// DATAOBJECTVIEW.
+        /// </summary>
+        [EnumMember(Value = "DATAOBJECT_VIEW")]
+        DATAOBJECTVIEW,
+
+        /// <summary>
+        /// DATAOBJECTCALENDARTABLE.
+        /// </summary>
+        [EnumMember(Value = "DATAOBJECT_CALENDAR_TABLE")]
+        DATAOBJECTCALENDARTABLE,
+
+        /// <summary>
+        /// COLUMNALL.
+        /// </summary>
+        [EnumMember(Value = "COLUMN_ALL")]
+        COLUMNALL,
+
+        /// <summary>
+        /// COLUMNWORKSHEET.
+        /// </summary>
+        [EnumMember(Value = "COLUMN_WORKSHEET")]
+        COLUMNWORKSHEET,
+
+        /// <summary>
+        /// COLUMNTABLE.
+        /// </summary>
+        [EnumMember(Value = "COLUMN_TABLE")]
+        COLUMNTABLE,
+
+        /// <summary>
+        /// COLUMNUSERDEFINED.
+        /// </summary>
+        [EnumMember(Value = "COLUMN_USER_DEFINED")]
+        COLUMNUSERDEFINED,
+
+        /// <summary>
+        /// COLUMNVIEW.
+        /// </summary>
+        [EnumMember(Value = "COLUMN_VIEW")]
+        COLUMNVIEW,
+
+        /// <summary>
+        /// COLUMNCALENDARTABLE.
+        /// </summary>
+        [EnumMember(Value = "COLUMN_CALENDAR_TABLE")]
+        COLUMNCALENDARTABLE,
 
         /// <summary>
         /// JOIN.
@@ -70,6 +130,6 @@ namespace RESTAPISDK.Standard.Models
         /// USERGROUP.
         /// </summary>
         [EnumMember(Value = "USER_GROUP")]
-        USERGROUP,
+        USERGROUP
     }
 }

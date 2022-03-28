@@ -17,17 +17,18 @@ from restapisdk.exceptions.error_response_exception import ErrorResponseExceptio
 class UserController(BaseController):
 
     """A Controller to access Endpoints in the restapisdk API."""
-    def __init__(self, config, auth_managers, call_back=None):
-        super(UserController, self).__init__(config, auth_managers, call_back)
+    def __init__(self, config, auth_managers):
+        super(UserController, self).__init__(config, auth_managers)
 
     def get_user(self,
                  name=None,
                  id=None):
-        """Does a GET request to /api/rest/v2/user.
+        """Does a GET request to /tspublic/rest/v2/user.
 
         To get the details of a specific user account by username or user id,
         use this endpoint. At Least one value is needed. When both are
-        given,then user id will be considered to fetch user information
+        given,then user id will be considered to fetch user information 
+         Permission: Requires administration privilege
 
         Args:
             name (string, optional): Username of the user that you want to
@@ -46,7 +47,7 @@ class UserController(BaseController):
         """
 
         # Prepare query URL
-        _url_path = '/api/rest/v2/user'
+        _url_path = '/tspublic/rest/v2/user'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_parameters = {
@@ -83,16 +84,18 @@ class UserController(BaseController):
 
     def create_user(self,
                     body):
-        """Does a POST request to /api/rest/v2/user/create.
+        """Does a POST request to /tspublic/rest/v2/user/create.
 
         To programmatically create a user account in the ThoughtSpot system,
         use this API endpoint. 
          Using this API, you can create a user and assign groups. To create a
          user, you require admin user privileges. 
-         All users created in the ThoughtSpot system are added to ALL_GROUP
+         All users created in the ThoughtSpot system are added to ALL_GROUP 
+         Permission: Requires administration privilege
 
         Args:
-            body (ApiRestV2UserCreateRequest): TODO: type description here.
+            body (TspublicRestV2UserCreateRequest): TODO: type description
+                here.
 
         Returns:
             UserResponse: Response from the API. Details of the user created
@@ -105,8 +108,11 @@ class UserController(BaseController):
 
         """
 
+        # Validate required parameters
+        self.validate_parameters(body=body)
+
         # Prepare query URL
-        _url_path = '/api/rest/v2/user/create'
+        _url_path = '/tspublic/rest/v2/user/create'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_url = APIHelper.clean_url(_query_builder)
@@ -135,16 +141,18 @@ class UserController(BaseController):
 
     def update_user(self,
                     body):
-        """Does a PUT request to /api/rest/v2/user/update.
+        """Does a PUT request to /tspublic/rest/v2/user/update.
 
         You can use this endpoint to programmatically modify an existing user
         account. 
          To modify a user, you require admin user privileges. 
          At least one of User Id or username is mandatory. When both are
-         given, then user id will be considered and username will be updated
+         given, then user id will be considered and username will be updated 
+         Permission: Requires administration privilege
 
         Args:
-            body (ApiRestV2UserUpdateRequest): TODO: type description here.
+            body (TspublicRestV2UserUpdateRequest): TODO: type description
+                here.
 
         Returns:
             bool: Response from the API. User successfully updated
@@ -157,8 +165,11 @@ class UserController(BaseController):
 
         """
 
+        # Validate required parameters
+        self.validate_parameters(body=body)
+
         # Prepare query URL
-        _url_path = '/api/rest/v2/user/update'
+        _url_path = '/tspublic/rest/v2/user/update'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_url = APIHelper.clean_url(_query_builder)
@@ -187,11 +198,12 @@ class UserController(BaseController):
     def delete_user(self,
                     name=None,
                     id=None):
-        """Does a DELETE request to /api/rest/v2/user/delete.
+        """Does a DELETE request to /tspublic/rest/v2/user/delete.
 
         To remove a user from the ThoughtSpot system, use this endpoint. 
          At least one value is needed. When both are given, then user id will
-         be considered to delete user.
+         be considered to delete user. 
+         Permission: Requires administration privilege
 
         Args:
             name (string, optional): Username of the user account
@@ -209,7 +221,7 @@ class UserController(BaseController):
         """
 
         # Prepare query URL
-        _url_path = '/api/rest/v2/user/delete'
+        _url_path = '/tspublic/rest/v2/user/delete'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_parameters = {
@@ -245,17 +257,19 @@ class UserController(BaseController):
 
     def add_groups_to_user(self,
                            body):
-        """Does a PUT request to /api/rest/v2/user/addgroup.
+        """Does a PUT request to /tspublic/rest/v2/user/addgroup.
 
         To programmatically add groups to an existing ThoughtSpot user, use
         this endpoint. 
          When you assign groups to a user, the user inherits the privileges
          assigned to those groups. 
          At least one of user Id or username is mandatory. When both are
-         given, then user id will be considered.
+         given, then user id will be considered. 
+         Permission: Requires administration privilege
 
         Args:
-            body (ApiRestV2UserAddgroupRequest): TODO: type description here.
+            body (TspublicRestV2UserAddgroupRequest): TODO: type description
+                here.
 
         Returns:
             bool: Response from the API. Successfully assigned groups to the
@@ -269,8 +283,11 @@ class UserController(BaseController):
 
         """
 
+        # Validate required parameters
+        self.validate_parameters(body=body)
+
         # Prepare query URL
-        _url_path = '/api/rest/v2/user/addgroup'
+        _url_path = '/tspublic/rest/v2/user/addgroup'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_url = APIHelper.clean_url(_query_builder)
@@ -298,18 +315,19 @@ class UserController(BaseController):
 
     def remove_groups_from_user(self,
                                 body):
-        """Does a PUT request to /api/rest/v2/user/removegroup.
+        """Does a PUT request to /tspublic/rest/v2/user/removegroup.
 
         To programmatically remove groups from an existing ThoughtSpot user,
         use this API endpoint. 
          The API removes only the user association. It does not delete the
          user or group from the Thoughtspot system. 
          At least one of user id or username is mandatory. When both are
-         given, then user id will be considered.
+         given, then user id will be considered. 
+         Permission: Requires administration privilege
 
         Args:
-            body (ApiRestV2UserRemovegroupRequest): TODO: type description
-                here.
+            body (TspublicRestV2UserRemovegroupRequest): TODO: type
+                description here.
 
         Returns:
             bool: Response from the API. Successfully removed groups for the
@@ -323,8 +341,67 @@ class UserController(BaseController):
 
         """
 
+        # Validate required parameters
+        self.validate_parameters(body=body)
+
         # Prepare query URL
-        _url_path = '/api/rest/v2/user/removegroup'
+        _url_path = '/tspublic/rest/v2/user/removegroup'
+        _query_builder = self.config.get_base_uri()
+        _query_builder += _url_path
+        _query_url = APIHelper.clean_url(_query_builder)
+
+        # Prepare headers
+        _headers = {
+            'Content-Type': 'application/json'
+        }
+
+        # Prepare and execute request
+        _request = self.config.http_client.put(_query_url, headers=_headers, parameters=APIHelper.json_serialize(body))
+        # Apply authentication scheme on request
+        self.apply_auth_schemes(_request, 'global')
+
+        _response = self.execute_request(_request)
+
+        # Endpoint and global error handling using HTTP status codes.
+        if _response.status_code == 500:
+            raise ErrorResponseException('Operation failed or unauthorized request', _response)
+        self.validate_response(_response)
+
+        decoded = _response.text == 'true'
+
+        return decoded
+
+    def change_password_of_user(self,
+                                body):
+        """Does a PUT request to /tspublic/rest/v2/user/changepassword.
+
+        To change the password of a ThoughtSpot user account, use this
+        endpoint. 
+         At least one of id or name of user is required. When both are given
+         user id will be considered. 
+         Permission: Requires administration privilege
+
+        Args:
+            body (TspublicRestV2UserChangepasswordRequest): TODO: type
+                description here.
+
+        Returns:
+            bool: Response from the API. Successfully changed the password for
+                the user
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        # Validate required parameters
+        self.validate_parameters(body=body)
+
+        # Prepare query URL
+        _url_path = '/tspublic/rest/v2/user/changepassword'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_url = APIHelper.clean_url(_query_builder)
@@ -352,18 +429,24 @@ class UserController(BaseController):
 
     def search_users(self,
                      body):
-        """Does a POST request to /api/rest/v2/user/search.
+        """Does a POST request to /tspublic/rest/v2/user/search.
 
         To get the details of a specific user account or all users in the
         ThoughtSpot system, use this endpoint. If no input is provided, then
-        all user are included in the response.
+        all user are included in the response. 
+         Permission: Requires administration privilege
 
         Args:
-            body (ApiRestV2UserSearchRequest): TODO: type description here.
+            body (TspublicRestV2UserSearchRequest): TODO: type description
+                here.
 
         Returns:
-            list of UserResponse: Response from the API. Array of user details
-                matching the search criteria
+            object: Response from the API. Array of user details matching the
+                search criteria and the output fields. 
+
+ If no output fields
+                are specified then the response structure will match that of
+                GET /tspublic/rest/v2/user
 
         Raises:
             APIException: When an error occurs while fetching the data from
@@ -373,15 +456,17 @@ class UserController(BaseController):
 
         """
 
+        # Validate required parameters
+        self.validate_parameters(body=body)
+
         # Prepare query URL
-        _url_path = '/api/rest/v2/user/search'
+        _url_path = '/tspublic/rest/v2/user/search'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_url = APIHelper.clean_url(_query_builder)
 
         # Prepare headers
         _headers = {
-            'accept': 'application/json',
             'Content-Type': 'application/json'
         }
 
@@ -397,6 +482,6 @@ class UserController(BaseController):
             raise ErrorResponseException('Operation failed or unauthorized request', _response)
         self.validate_response(_response)
 
-        decoded = APIHelper.json_deserialize(_response.text, UserResponse.from_dictionary)
+        decoded = _response.text
 
         return decoded

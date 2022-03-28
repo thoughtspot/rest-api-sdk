@@ -12,7 +12,7 @@
 | `Name` | `String` | Required | Name of the table | String getName() | setName(String name) |
 | `DbName` | `String` | Required | Name of the database in the data platform | String getDbName() | setDbName(String dbName) |
 | `SchemaName` | `String` | Required | Name of the schema in the database | String getSchemaName() | setSchemaName(String schemaName) |
-| `Columns` | [`List<ColumnsInput>`](/doc/models/columns-input.md) | Required | A JSON array of column details | List<ColumnsInput> getColumns() | setColumns(List<ColumnsInput> columns) |
+| `Columns` | [`List<ColumnsInput>`](../../doc/models/columns-input.md) | Required | A JSON array of column details | List<ColumnsInput> getColumns() | setColumns(List<ColumnsInput> columns) |
 
 ## Example (as JSON)
 

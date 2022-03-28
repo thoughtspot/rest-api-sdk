@@ -10,17 +10,19 @@ admin_controller = client.admin
 
 ## Methods
 
-* [Get Cluster Config](/doc/controllers/admin.md#get-cluster-config)
-* [Get Cluster Config Overrides](/doc/controllers/admin.md#get-cluster-config-overrides)
-* [Update Cluster Config](/doc/controllers/admin.md#update-cluster-config)
-* [Reset User Password](/doc/controllers/admin.md#reset-user-password)
-* [Sync Principal](/doc/controllers/admin.md#sync-principal)
-* [Change Owner of Objects](/doc/controllers/admin.md#change-owner-of-objects)
+* [Get Cluster Config](../../doc/controllers/admin.md#get-cluster-config)
+* [Get Cluster Config Overrides](../../doc/controllers/admin.md#get-cluster-config-overrides)
+* [Update Cluster Config](../../doc/controllers/admin.md#update-cluster-config)
+* [Reset User Password](../../doc/controllers/admin.md#reset-user-password)
+* [Sync Principal](../../doc/controllers/admin.md#sync-principal)
+* [Change Owner of Objects](../../doc/controllers/admin.md#change-owner-of-objects)
 
 
 # Get Cluster Config
 
 To get details of the current configuration of a Thoughtspot cluster, use this endpoint.
+
+Permission: Requires administration privilege
 
 ```python
 def get_cluster_config(self)
@@ -40,12 +42,14 @@ result = admin_controller.get_cluster_config()
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Get Cluster Config Overrides
 
 To get the details of overrides to the Thoughtspot cluster configuration, use this endpoint.
+
+Permission: Requires administration privilege
 
 ```python
 def get_cluster_config_overrides(self)
@@ -65,12 +69,14 @@ result = admin_controller.get_cluster_config_overrides()
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Update Cluster Config
 
 To update the Thoughtspot cluster configuration, use this endpoint.
+
+Permission: Requires administration privilege
 
 ```python
 def update_cluster_config(self,
@@ -81,7 +87,7 @@ def update_cluster_config(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2AdminConfigurationUpdateRequest`](/doc/models/api-rest-v2-admin-configuration-update-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2AdminConfigurationUpdateRequest`](../../doc/models/tspublic-rest-v2-admin-configuration-update-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -90,7 +96,7 @@ def update_cluster_config(self,
 ## Example Usage
 
 ```python
-body = ApiRestV2AdminConfigurationUpdateRequest()
+body = TspublicRestV2AdminConfigurationUpdateRequest()
 
 result = admin_controller.update_cluster_config(body)
 ```
@@ -99,7 +105,7 @@ result = admin_controller.update_cluster_config(body)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Reset User Password
@@ -110,6 +116,8 @@ It is mandatory to use Authorization header with token of a user with admin acce
 
 At least one of User Id or username is mandatory. When both are given, then user id will be considered.
 
+Permission: Requires administration privilege
+
 ```python
 def reset_user_password(self,
                        body)
@@ -119,7 +127,7 @@ def reset_user_password(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2AdminResetpasswordRequest`](/doc/models/api-rest-v2-admin-resetpassword-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2AdminResetpasswordRequest`](../../doc/models/tspublic-rest-v2-admin-resetpassword-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -128,7 +136,7 @@ def reset_user_password(self,
 ## Example Usage
 
 ```python
-body = ApiRestV2AdminResetpasswordRequest()
+body = TspublicRestV2AdminResetpasswordRequest()
 body.new_password = 'newPassword0'
 
 result = admin_controller.reset_user_password(body)
@@ -138,7 +146,7 @@ result = admin_controller.reset_user_password(body)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Sync Principal
@@ -152,6 +160,8 @@ The users and user groups in Thoughtspot get updated for any matching inputs.
 Any user and user group present in the input, but not present in the cluster, gets created in cluster.
 n You can optionally choose to delete the user and groups from the cluster, that are not present in the input.
 
+Permission: Requires administration privilege
+
 ```python
 def sync_principal(self,
                   body)
@@ -161,17 +171,17 @@ def sync_principal(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2AdminSyncprincipalRequest`](/doc/models/api-rest-v2-admin-syncprincipal-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2AdminSyncprincipalRequest`](../../doc/models/tspublic-rest-v2-admin-syncprincipal-request.md) | Body, Required | - |
 
 ## Response Type
 
-[`AdminsyncPrincipalResponse`](/doc/models/adminsync-principal-response.md)
+[`AdminsyncPrincipalResponse`](../../doc/models/adminsync-principal-response.md)
 
 ## Example Usage
 
 ```python
-body = ApiRestV2AdminSyncprincipalRequest()
-body.principal_object = ['principalObject0']
+body = TspublicRestV2AdminSyncprincipalRequest()
+body.principal_object = [jsonpickle.decode('{"key1":"val1","key2":"val2"}')]
 
 result = admin_controller.sync_principal(body)
 ```
@@ -180,7 +190,7 @@ result = admin_controller.sync_principal(body)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Change Owner of Objects
@@ -188,6 +198,8 @@ result = admin_controller.sync_principal(body)
 To programmatically change the owner of one or several objects from one user account to another, use this endpoint.
 
 You might want to transfer ownership of objects owned by a user to another active user, when the account is removed from the ThoughtSpot application.
+
+Permission: Requires administration privilege
 
 ```python
 def change_owner_of_objects(self,
@@ -198,7 +210,7 @@ def change_owner_of_objects(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2AdminChangeownerRequest`](/doc/models/api-rest-v2-admin-changeowner-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2AdminChangeownerRequest`](../../doc/models/tspublic-rest-v2-admin-changeowner-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -207,8 +219,8 @@ def change_owner_of_objects(self,
 ## Example Usage
 
 ```python
-body = ApiRestV2AdminChangeownerRequest()
-body.meta_object_id = ['metaObjectId9', 'metaObjectId0', 'metaObjectId1']
+body = TspublicRestV2AdminChangeownerRequest()
+body.ts_object_id = ['tsObjectId7']
 body.from_user = FromUserNameAndIDInput()
 body.to_user = ToUserNameAndIDInput()
 
@@ -219,5 +231,5 @@ result = admin_controller.change_owner_of_objects(body)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 

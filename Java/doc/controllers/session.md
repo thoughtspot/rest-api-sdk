@@ -10,11 +10,11 @@ SessionController sessionController = client.getSessionController();
 
 ## Methods
 
-* [Get Session Info](/doc/controllers/session.md#get-session-info)
-* [Login](/doc/controllers/session.md#login)
-* [Logout](/doc/controllers/session.md#logout)
-* [Gettoken](/doc/controllers/session.md#gettoken)
-* [Revoketoken](/doc/controllers/session.md#revoketoken)
+* [Get Session Info](../../doc/controllers/session.md#get-session-info)
+* [Login](../../doc/controllers/session.md#login)
+* [Logout](../../doc/controllers/session.md#logout)
+* [Get Token](../../doc/controllers/session.md#get-token)
+* [Revoke Token](../../doc/controllers/session.md#revoke-token)
 
 
 # Get Session Info
@@ -44,36 +44,36 @@ sessionController.getSessionInfoAsync().thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Login
 
-To programmatically login a user to ThoughtSpot, use this endpoint
+You can programmatically create login session for a user in ThoughtSpot using this endpoint.
 
-:information_source: **Note** This endpoint does not require authentication.
+You can create session by either providing userName and password as inputs in this request body or by including "Authorization" header with the token generated through the endpoint /tspublic/rest/v2/session/getToken.
+
+userName and password input is given precedence over "Authorization" header, when both are included in the request.
 
 ```java
 CompletableFuture<SessionLoginResponse> loginAsync(
-    final ApiRestV2SessionLoginRequest body)
+    final TspublicRestV2SessionLoginRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2SessionLoginRequest`](/doc/models/api-rest-v2-session-login-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2SessionLoginRequest`](../../doc/models/tspublic-rest-v2-session-login-request.md) | Body, Required | - |
 
 ## Response Type
 
-[`SessionLoginResponse`](/doc/models/session-login-response.md)
+[`SessionLoginResponse`](../../doc/models/session-login-response.md)
 
 ## Example Usage
 
 ```java
-ApiRestV2SessionLoginRequest body = new ApiRestV2SessionLoginRequest();
-body.setUserName("userName8");
-body.setPassword("password0");
+TspublicRestV2SessionLoginRequest body = new TspublicRestV2SessionLoginRequest();
 
 sessionController.loginAsync(body).thenAccept(result -> {
     // TODO success callback handler
@@ -87,7 +87,7 @@ sessionController.loginAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Logout
@@ -119,38 +119,53 @@ sessionController.logoutAsync().thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Gettoken
+# Get Token
 
-To programmatically create token for a user in ThoughtSpot, use this endpoint
+To programmatically create session token for a user in ThoughtSpot, use this endpoint.
+
+You can generate the token for a user by providing password or secret key from the cluster.
+
+You need to enable trusted authentication to generate secret key. To generate secret key, follow below steps.
+
+1. Click the Develop tab.
+
+2. Under Customizations, click Settings.
+
+3. To enable trusted authentication, turn on the toggle.
+
+4. A secret_key for trusted authentication is generated.
+
+5. Click the clipboard icon to copy the token.
+
+Password is given precedence over secretKey input, when both are included in the request.
 
 :information_source: **Note** This endpoint does not require authentication.
 
 ```java
-CompletableFuture<SessionLoginResponse> gettokenAsync(
-    final ApiRestV2SessionGettokenRequest body)
+CompletableFuture<SessionLoginResponse> getTokenAsync(
+    final TspublicRestV2SessionGettokenRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2SessionGettokenRequest`](/doc/models/api-rest-v2-session-gettoken-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2SessionGettokenRequest`](../../doc/models/tspublic-rest-v2-session-gettoken-request.md) | Body, Required | - |
 
 ## Response Type
 
-[`SessionLoginResponse`](/doc/models/session-login-response.md)
+[`SessionLoginResponse`](../../doc/models/session-login-response.md)
 
 ## Example Usage
 
 ```java
-ApiRestV2SessionGettokenRequest body = new ApiRestV2SessionGettokenRequest();
+TspublicRestV2SessionGettokenRequest body = new TspublicRestV2SessionGettokenRequest();
 body.setUserName("userName8");
-body.setPassword("password0");
 
-sessionController.gettokenAsync(body).thenAccept(result -> {
+sessionController.getTokenAsync(body).thenAccept(result -> {
     // TODO success callback handler
 }).exceptionally(exception -> {
     // TODO failure callback handler
@@ -162,15 +177,15 @@ sessionController.gettokenAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Revoketoken
+# Revoke Token
 
 To expire or revoke a token for a user, use this endpoint
 
 ```java
-CompletableFuture<Boolean> revoketokenAsync()
+CompletableFuture<Boolean> revokeTokenAsync()
 ```
 
 ## Response Type
@@ -180,7 +195,7 @@ CompletableFuture<Boolean> revoketokenAsync()
 ## Example Usage
 
 ```java
-sessionController.revoketokenAsync().thenAccept(result -> {
+sessionController.revokeTokenAsync().thenAccept(result -> {
     // TODO success callback handler
 }).exceptionally(exception -> {
     // TODO failure callback handler
@@ -192,5 +207,5 @@ sessionController.revoketokenAsync().thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 

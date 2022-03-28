@@ -1,7 +1,7 @@
 
 # Type 14 Enum
 
-Type of the connect being searched. Valid values:
+Type of the data object
 
 ## Enumeration
 
@@ -11,14 +11,8 @@ Type of the connect being searched. Valid values:
 
 | Name |
 |  --- |
-| `SNOWFLAKE` |
-| `AMAZONREDSHIFT` |
-| `GOOGLEBIGQUERY` |
-| `AZURESYNAPSE` |
-| `TERADATA` |
-| `STARBURST` |
-| `SAPHANA` |
-| `ORACLEADW` |
-| `DATABRICKS` |
-| `DENODO` |
+| `LIVEBOARD` |
+| `DATAOBJECT` |
+| `COLUMN` |
+| `JOIN` |
 

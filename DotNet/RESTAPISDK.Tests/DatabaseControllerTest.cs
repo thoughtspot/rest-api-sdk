@@ -41,7 +41,9 @@ namespace RESTAPISDK.Tests
         /// <summary>
         /// Note: This endpoint is applicable only for on-prem deployments 
         ///
-        /// To list all the databases in Falcon, use this endpoint..
+        /// To list all the databases in Falcon, use this endpoint. 
+        ///
+        /// Permission: Requires administration privilege.
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous unit test.</returns>
         [Test]

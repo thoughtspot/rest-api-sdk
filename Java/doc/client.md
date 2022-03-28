@@ -5,8 +5,8 @@ The following parameters are configurable for the API Client:
 
 | Parameter | Type | Description |
 |  --- | --- | --- |
-| `contentType` | `String` | body content type for post request<br>*Default*: `"application/json"` |
 | `acceptLanguage` | `String` | response format<br>*Default*: `"application/json"` |
+| `contentType` | `String` | body content type for post request<br>*Default*: `"application/json"` |
 | `baseUrl` | `String` | *Default*: `"https://localhost:443"` |
 | `environment` | Environment | The API environment. <br> **Default: `Environment.PRODUCTION`** |
 | `httpClientConfig` | `ReadonlyHttpClientConfiguration` | Http Client Configuration instance. |
@@ -18,8 +18,8 @@ The API client can be initialized as follows:
 RESTAPISDKClient client = new RESTAPISDKClient.Builder()
     .httpClientConfig(configBuilder -> configBuilder
             .timeout(0))
-    .contentType("application/json")
     .acceptLanguage("application/json")
+    .contentType("application/json")
     .accessToken("AccessToken")
     .environment(Environment.PRODUCTION)
     .baseUrl("https://localhost:443")
@@ -41,7 +41,12 @@ The gateway for the SDK. This class acts as a factory for the Controllers and al
 | `getDatabaseController()` | Provides access to Database controller. | `DatabaseController` |
 | `getConnectionController()` | Provides access to Connection controller. | `ConnectionController` |
 | `getDataController()` | Provides access to Data controller. | `DataController` |
+| `getReportController()` | Provides access to Report controller. | `ReportController` |
 | `getAdminController()` | Provides access to Admin controller. | `AdminController` |
+| `getSecurityController()` | Provides access to Security controller. | `SecurityController` |
+| `getLogsController()` | Provides access to Logs controller. | `LogsController` |
+| `getMaterializationController()` | Provides access to Materialization controller. | `MaterializationController` |
+| `getCustomActionsController()` | Provides access to CustomActions controller. | `CustomActionsController` |
 
 ### Methods
 
@@ -50,8 +55,8 @@ The gateway for the SDK. This class acts as a factory for the Controllers and al
 | `shutdown()` | Shutdown the underlying HttpClient instance. | `void` |
 | `getEnvironment()` | Current API environment. | `Environment` |
 | `getBaseUrl()` | baseUrl value. | `String` |
-| `getContentType()` | body content type for post request. | `String` |
 | `getAcceptLanguage()` | response format. | `String` |
+| `getContentType()` | body content type for post request. | `String` |
 | `getHttpClient()` | The HTTP Client instance to use for making HTTP requests. | `HttpClient` |
 | `getHttpClientConfig()` | Http Client Configuration instance. | `ReadonlyHttpClientConfiguration` |
 | `getBearerAuthCredentials()` | The credentials to use with BearerAuth. | `BearerAuthCredentials` |

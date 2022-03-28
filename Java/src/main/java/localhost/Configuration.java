@@ -26,16 +26,16 @@ public interface Configuration {
     String getBaseUrl();
 
     /**
-     * body content type for post request.
-     * @return a copy of contentType
-     */
-    String getContentType();
-
-    /**
      * response format.
      * @return a copy of acceptLanguage
      */
     String getAcceptLanguage();
+
+    /**
+     * body content type for post request.
+     * @return a copy of contentType
+     */
+    String getContentType();
 
     /**
      * Http Client Configuration instance.

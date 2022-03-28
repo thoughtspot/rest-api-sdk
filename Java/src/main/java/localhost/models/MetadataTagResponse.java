@@ -17,8 +17,8 @@ public class MetadataTagResponse {
     private String name;
     private String id;
     private ClientState clientState;
-    private Integer indexVersion;
-    private Integer generationNum;
+    private Double indexVersion;
+    private Double generationNum;
     private Boolean isDeleted;
     private Boolean isHidden;
     private Boolean isExternal;
@@ -40,8 +40,8 @@ public class MetadataTagResponse {
      * @param  name  String value for name.
      * @param  id  String value for id.
      * @param  clientState  ClientState value for clientState.
-     * @param  indexVersion  Integer value for indexVersion.
-     * @param  generationNum  Integer value for generationNum.
+     * @param  indexVersion  Double value for indexVersion.
+     * @param  generationNum  Double value for generationNum.
      * @param  isDeleted  Boolean value for isDeleted.
      * @param  isHidden  Boolean value for isHidden.
      * @param  isExternal  Boolean value for isExternal.
@@ -56,8 +56,8 @@ public class MetadataTagResponse {
             String name,
             String id,
             ClientState clientState,
-            Integer indexVersion,
-            Integer generationNum,
+            Double indexVersion,
+            Double generationNum,
             Boolean isDeleted,
             Boolean isHidden,
             Boolean isExternal,
@@ -146,39 +146,39 @@ public class MetadataTagResponse {
 
     /**
      * Getter for IndexVersion.
-     * @return Returns the Integer
+     * @return Returns the Double
      */
     @JsonGetter("indexVersion")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public Integer getIndexVersion() {
+    public Double getIndexVersion() {
         return indexVersion;
     }
 
     /**
      * Setter for IndexVersion.
-     * @param indexVersion Value for Integer
+     * @param indexVersion Value for Double
      */
     @JsonSetter("indexVersion")
-    public void setIndexVersion(Integer indexVersion) {
+    public void setIndexVersion(Double indexVersion) {
         this.indexVersion = indexVersion;
     }
 
     /**
      * Getter for GenerationNum.
-     * @return Returns the Integer
+     * @return Returns the Double
      */
     @JsonGetter("generationNum")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public Integer getGenerationNum() {
+    public Double getGenerationNum() {
         return generationNum;
     }
 
     /**
      * Setter for GenerationNum.
-     * @param generationNum Value for Integer
+     * @param generationNum Value for Double
      */
     @JsonSetter("generationNum")
-    public void setGenerationNum(Integer generationNum) {
+    public void setGenerationNum(Double generationNum) {
         this.generationNum = generationNum;
     }
 
@@ -408,8 +408,8 @@ public class MetadataTagResponse {
         private String name;
         private String id;
         private ClientState clientState;
-        private Integer indexVersion;
-        private Integer generationNum;
+        private Double indexVersion;
+        private Double generationNum;
         private Boolean isDeleted;
         private Boolean isHidden;
         private Boolean isExternal;
@@ -454,20 +454,20 @@ public class MetadataTagResponse {
 
         /**
          * Setter for indexVersion.
-         * @param  indexVersion  Integer value for indexVersion.
+         * @param  indexVersion  Double value for indexVersion.
          * @return Builder
          */
-        public Builder indexVersion(Integer indexVersion) {
+        public Builder indexVersion(Double indexVersion) {
             this.indexVersion = indexVersion;
             return this;
         }
 
         /**
          * Setter for generationNum.
-         * @param  generationNum  Integer value for generationNum.
+         * @param  generationNum  Double value for generationNum.
          * @return Builder
          */
-        public Builder generationNum(Integer generationNum) {
+        public Builder generationNum(Double generationNum) {
             this.generationNum = generationNum;
             return this;
         }

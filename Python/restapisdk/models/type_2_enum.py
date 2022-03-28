@@ -12,33 +12,20 @@ class Type2Enum(object):
 
     """Implementation of the 'Type2' enum.
 
-    Type of user. LOCAL_USER indicates that the user is created locally in the
-    ThoughtSpot system.
+    Type of the metadata objec
 
     Attributes:
-        UNKNOWN: TODO: type description here.
-        LDAP_USER: TODO: type description here.
-        SAML_USER: TODO: type description here.
-        OIDC_USER: TODO: type description here.
-        LOCAL_USER: TODO: type description here.
-        LDAP_GROUP: TODO: type description here.
-        LOCAL_GROUP: TODO: type description here.
-        TENANT_GROUP: TODO: type description here.
+        LIVEBOARD: TODO: type description here.
+        ANSWER: TODO: type description here.
+        DATAOBJECT: TODO: type description here.
+        COLUMN: TODO: type description here.
 
     """
 
-    UNKNOWN = 'UNKNOWN'
+    LIVEBOARD = 'LIVEBOARD'
 
-    LDAP_USER = 'LDAP_USER'
+    ANSWER = 'ANSWER'
 
-    SAML_USER = 'SAML_USER'
+    DATAOBJECT = 'DATAOBJECT'
 
-    OIDC_USER = 'OIDC_USER'
-
-    LOCAL_USER = 'LOCAL_USER'
-
-    LDAP_GROUP = 'LDAP_GROUP'
-
-    LOCAL_GROUP = 'LOCAL_GROUP'
-
-    TENANT_GROUP = 'TENANT_GROUP'
+    COLUMN = 'COLUMN'

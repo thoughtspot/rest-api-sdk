@@ -19,6 +19,12 @@ namespace RESTAPISDK.Standard.Models
     public enum Type12Enum
     {
         /// <summary>
+        /// ANSWER.
+        /// </summary>
+        [EnumMember(Value = "ANSWER")]
+        ANSWER,
+
+        /// <summary>
         /// LIVEBOARD.
         /// </summary>
         [EnumMember(Value = "LIVEBOARD")]
@@ -41,5 +47,29 @@ namespace RESTAPISDK.Standard.Models
         /// </summary>
         [EnumMember(Value = "JOIN")]
         JOIN,
+
+        /// <summary>
+        /// CONNECTION.
+        /// </summary>
+        [EnumMember(Value = "CONNECTION")]
+        CONNECTION,
+
+        /// <summary>
+        /// TAG.
+        /// </summary>
+        [EnumMember(Value = "TAG")]
+        TAG,
+
+        /// <summary>
+        /// USER.
+        /// </summary>
+        [EnumMember(Value = "USER")]
+        USER,
+
+        /// <summary>
+        /// USERGROUP.
+        /// </summary>
+        [EnumMember(Value = "USER_GROUP")]
+        USERGROUP
     }
 }

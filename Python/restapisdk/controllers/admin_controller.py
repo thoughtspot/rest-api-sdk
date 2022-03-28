@@ -17,14 +17,15 @@ from restapisdk.exceptions.error_response_exception import ErrorResponseExceptio
 class AdminController(BaseController):
 
     """A Controller to access Endpoints in the restapisdk API."""
-    def __init__(self, config, auth_managers, call_back=None):
-        super(AdminController, self).__init__(config, auth_managers, call_back)
+    def __init__(self, config, auth_managers):
+        super(AdminController, self).__init__(config, auth_managers)
 
     def get_cluster_config(self):
-        """Does a GET request to /api/rest/v2/admin/configuration.
+        """Does a GET request to /tspublic/rest/v2/admin/configuration.
 
         To get details of the current configuration of a Thoughtspot cluster,
-        use this endpoint.
+        use this endpoint. 
+         Permission: Requires administration privilege
 
         Returns:
             object: Response from the API. Details of cluster configuration
@@ -39,7 +40,7 @@ class AdminController(BaseController):
         """
 
         # Prepare query URL
-        _url_path = '/api/rest/v2/admin/configuration'
+        _url_path = '/tspublic/rest/v2/admin/configuration'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_url = APIHelper.clean_url(_query_builder)
@@ -66,10 +67,11 @@ class AdminController(BaseController):
         return decoded
 
     def get_cluster_config_overrides(self):
-        """Does a GET request to /api/rest/v2/admin/configuration/overrides.
+        """Does a GET request to /tspublic/rest/v2/admin/configuration/overrides.
 
         To get the details of overrides to the Thoughtspot cluster
-        configuration, use this endpoint.
+        configuration, use this endpoint. 
+         Permission: Requires administration privilege
 
         Returns:
             object: Response from the API. Details of overrides of cluster
@@ -84,7 +86,7 @@ class AdminController(BaseController):
         """
 
         # Prepare query URL
-        _url_path = '/api/rest/v2/admin/configuration/overrides'
+        _url_path = '/tspublic/rest/v2/admin/configuration/overrides'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_url = APIHelper.clean_url(_query_builder)
@@ -112,12 +114,13 @@ class AdminController(BaseController):
 
     def update_cluster_config(self,
                               body):
-        """Does a PUT request to /api/rest/v2/admin/configuration/update.
+        """Does a PUT request to /tspublic/rest/v2/admin/configuration/update.
 
-        To update the Thoughtspot cluster configuration, use this endpoint.
+        To update the Thoughtspot cluster configuration, use this endpoint. 
+         Permission: Requires administration privilege
 
         Args:
-            body (ApiRestV2AdminConfigurationUpdateRequest): TODO: type
+            body (TspublicRestV2AdminConfigurationUpdateRequest): TODO: type
                 description here.
 
         Returns:
@@ -132,8 +135,11 @@ class AdminController(BaseController):
 
         """
 
+        # Validate required parameters
+        self.validate_parameters(body=body)
+
         # Prepare query URL
-        _url_path = '/api/rest/v2/admin/configuration/update'
+        _url_path = '/tspublic/rest/v2/admin/configuration/update'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_url = APIHelper.clean_url(_query_builder)
@@ -161,18 +167,19 @@ class AdminController(BaseController):
 
     def reset_user_password(self,
                             body):
-        """Does a PUT request to /api/rest/v2/admin/resetpassword.
+        """Does a PUT request to /tspublic/rest/v2/admin/resetpassword.
 
         To reset the password of a ThoughtSpot user account, use this
         endpoint. 
          It is mandatory to use Authorization header with token of a user with
          admin access to successfully run this endpoint. 
          At least one of User Id or username is mandatory. When both are
-         given, then user id will be considered.
+         given, then user id will be considered. 
+         Permission: Requires administration privilege
 
         Args:
-            body (ApiRestV2AdminResetpasswordRequest): TODO: type description
-                here.
+            body (TspublicRestV2AdminResetpasswordRequest): TODO: type
+                description here.
 
         Returns:
             bool: Response from the API. Password reset successful
@@ -185,8 +192,11 @@ class AdminController(BaseController):
 
         """
 
+        # Validate required parameters
+        self.validate_parameters(body=body)
+
         # Prepare query URL
-        _url_path = '/api/rest/v2/admin/resetpassword'
+        _url_path = '/tspublic/rest/v2/admin/resetpassword'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_url = APIHelper.clean_url(_query_builder)
@@ -214,7 +224,7 @@ class AdminController(BaseController):
 
     def sync_principal(self,
                        body):
-        """Does a PUT request to /api/rest/v2/admin/syncprincipal.
+        """Does a PUT request to /tspublic/rest/v2/admin/syncprincipal.
 
         To programmatically synchronize user accounts and user groups from
         external system with ThoughtSpot, use this endpoint. 
@@ -225,11 +235,12 @@ class AdminController(BaseController):
          Any user and user group present in the input, but not present in the
          cluster, gets created in cluster. 
         n You can optionally choose to delete the user and groups from the
-        cluster, that are not present in the input.
+        cluster, that are not present in the input. 
+         Permission: Requires administration privilege
 
         Args:
-            body (ApiRestV2AdminSyncprincipalRequest): TODO: type description
-                here.
+            body (TspublicRestV2AdminSyncprincipalRequest): TODO: type
+                description here.
 
         Returns:
             AdminsyncPrincipalResponse: Response from the API. Successfully
@@ -244,8 +255,11 @@ class AdminController(BaseController):
 
         """
 
+        # Validate required parameters
+        self.validate_parameters(body=body)
+
         # Prepare query URL
-        _url_path = '/api/rest/v2/admin/syncprincipal'
+        _url_path = '/tspublic/rest/v2/admin/syncprincipal'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_url = APIHelper.clean_url(_query_builder)
@@ -274,17 +288,18 @@ class AdminController(BaseController):
 
     def change_owner_of_objects(self,
                                 body):
-        """Does a PUT request to /api/rest/v2/admin/changeowner.
+        """Does a PUT request to /tspublic/rest/v2/admin/changeowner.
 
         To programmatically change the owner of one or several objects from
         one user account to another, use this endpoint. 
          You might want to transfer ownership of objects owned by a user to
          another active user, when the account is removed from the ThoughtSpot
-         application.
+         application. 
+         Permission: Requires administration privilege
 
         Args:
-            body (ApiRestV2AdminChangeownerRequest): TODO: type description
-                here.
+            body (TspublicRestV2AdminChangeownerRequest): TODO: type
+                description here.
 
         Returns:
             bool: Response from the API. Successfully changed the owner for
@@ -298,8 +313,11 @@ class AdminController(BaseController):
 
         """
 
+        # Validate required parameters
+        self.validate_parameters(body=body)
+
         # Prepare query URL
-        _url_path = '/api/rest/v2/admin/changeowner'
+        _url_path = '/tspublic/rest/v2/admin/changeowner'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_url = APIHelper.clean_url(_query_builder)

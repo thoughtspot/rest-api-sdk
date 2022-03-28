@@ -10,17 +10,17 @@ group_controller = client.group
 
 ## Methods
 
-* [Get Group](/doc/controllers/group.md#get-group)
-* [Create Group](/doc/controllers/group.md#create-group)
-* [Update Group](/doc/controllers/group.md#update-group)
-* [Delete Group](/doc/controllers/group.md#delete-group)
-* [Add Privileges to Group](/doc/controllers/group.md#add-privileges-to-group)
-* [Remove Privileges From Group](/doc/controllers/group.md#remove-privileges-from-group)
-* [Add Users to Group](/doc/controllers/group.md#add-users-to-group)
-* [Remove Users From Group](/doc/controllers/group.md#remove-users-from-group)
-* [Add Groups to Group](/doc/controllers/group.md#add-groups-to-group)
-* [Remove Groups From Group](/doc/controllers/group.md#remove-groups-from-group)
-* [Search Groups](/doc/controllers/group.md#search-groups)
+* [Get Group](../../doc/controllers/group.md#get-group)
+* [Create Group](../../doc/controllers/group.md#create-group)
+* [Update Group](../../doc/controllers/group.md#update-group)
+* [Delete Group](../../doc/controllers/group.md#delete-group)
+* [Add Privileges to Group](../../doc/controllers/group.md#add-privileges-to-group)
+* [Remove Privileges From Group](../../doc/controllers/group.md#remove-privileges-from-group)
+* [Add Users to Group](../../doc/controllers/group.md#add-users-to-group)
+* [Remove Users From Group](../../doc/controllers/group.md#remove-users-from-group)
+* [Add Groups to Group](../../doc/controllers/group.md#add-groups-to-group)
+* [Remove Groups From Group](../../doc/controllers/group.md#remove-groups-from-group)
+* [Search Groups](../../doc/controllers/group.md#search-groups)
 
 
 # Get Group
@@ -28,6 +28,8 @@ group_controller = client.group
 To get the details of a specific group by name or id, use this endpoint.
 
 At least one value needed. When both are given,then id will be considered to fetch user information.
+
+Permission: Requires administration privilege
 
 ```python
 def get_group(self,
@@ -44,7 +46,7 @@ def get_group(self,
 
 ## Response Type
 
-[`GroupResponse`](/doc/models/group-response.md)
+[`GroupResponse`](../../doc/models/group-response.md)
 
 ## Example Usage
 
@@ -56,7 +58,7 @@ result = group_controller.get_group()
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Create Group
@@ -65,11 +67,13 @@ To programmatically create a group in the ThoughtSpot system, use this API endpo
 
 Using this API, you can create a group and assign privileges and users.
 
-For ease of user management and access control, ThoughtSpot administrators can create groups and assign privileges to these groups.
+For ease of user management and access control, ThoughtSpot administrations can create groups and assign privileges to these groups.
 
 The privileges determine the actions that the users belonging to a group are allowed to do.
 
 ThoughtSpot also has a default group called ALL_GROUP. When you create new group in ThoughtSpot, they are automatically added to ALL_GROUP. You cannot delete the ALL_GROUP or remove members from it.
+
+Permission: Requires administration privilege
 
 ```python
 def create_group(self,
@@ -80,16 +84,16 @@ def create_group(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2GroupCreateRequest`](/doc/models/api-rest-v2-group-create-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2GroupCreateRequest`](../../doc/models/tspublic-rest-v2-group-create-request.md) | Body, Required | - |
 
 ## Response Type
 
-[`GroupResponse`](/doc/models/group-response.md)
+[`GroupResponse`](../../doc/models/group-response.md)
 
 ## Example Usage
 
 ```python
-body = ApiRestV2GroupCreateRequest()
+body = TspublicRestV2GroupCreateRequest()
 body.name = 'name6'
 body.display_name = 'displayName6'
 
@@ -100,7 +104,7 @@ result = group_controller.create_group(body)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Update Group
@@ -111,6 +115,8 @@ To modify a group, you require admin user privileges.
 
 At least one of id or name is required to update the group. When both are given, then id will be considered and group name will be updated.
 
+Permission: Requires administration privilege
+
 ```python
 def update_group(self,
                 body)
@@ -120,7 +126,7 @@ def update_group(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2GroupUpdateRequest`](/doc/models/api-rest-v2-group-update-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2GroupUpdateRequest`](../../doc/models/tspublic-rest-v2-group-update-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -129,7 +135,7 @@ def update_group(self,
 ## Example Usage
 
 ```python
-body = ApiRestV2GroupUpdateRequest()
+body = TspublicRestV2GroupUpdateRequest()
 
 result = group_controller.update_group(body)
 ```
@@ -138,7 +144,7 @@ result = group_controller.update_group(body)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Delete Group
@@ -146,6 +152,8 @@ result = group_controller.update_group(body)
 To remove a group from the ThoughtSpot system, send a DELETE request to this endpoint.
 
 At least one value needed. When both are given,then user id will be considered to fetch user information.
+
+Permission: Requires administration privilege
 
 ```python
 def delete_group(self,
@@ -174,7 +182,7 @@ result = group_controller.delete_group()
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Add Privileges to Group
@@ -185,6 +193,8 @@ When you assign privileges to a group, all the users under to this group inherit
 
 At least one of id or name of group is required. When both are given,then user id will be considered.
 
+Permission: Requires administration privilege
+
 ```python
 def add_privileges_to_group(self,
                            body)
@@ -194,7 +204,7 @@ def add_privileges_to_group(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2GroupAddprivilegeRequest`](/doc/models/api-rest-v2-group-addprivilege-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2GroupAddprivilegeRequest`](../../doc/models/tspublic-rest-v2-group-addprivilege-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -203,7 +213,7 @@ def add_privileges_to_group(self,
 ## Example Usage
 
 ```python
-body = ApiRestV2GroupAddprivilegeRequest()
+body = TspublicRestV2GroupAddprivilegeRequest()
 
 result = group_controller.add_privileges_to_group(body)
 ```
@@ -212,7 +222,7 @@ result = group_controller.add_privileges_to_group(body)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Remove Privileges From Group
@@ -223,6 +233,8 @@ The API removes only the privilege association. It does not delete the privilege
 
 At least one of id or name of group is required. When both are given,then user id will be considered.
 
+Permission: Requires administration privilege
+
 ```python
 def remove_privileges_from_group(self,
                                 body)
@@ -232,7 +244,7 @@ def remove_privileges_from_group(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2GroupRemoveprivilegeRequest`](/doc/models/api-rest-v2-group-removeprivilege-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2GroupRemoveprivilegeRequest`](../../doc/models/tspublic-rest-v2-group-removeprivilege-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -241,7 +253,7 @@ def remove_privileges_from_group(self,
 ## Example Usage
 
 ```python
-body = ApiRestV2GroupRemoveprivilegeRequest()
+body = TspublicRestV2GroupRemoveprivilegeRequest()
 
 result = group_controller.remove_privileges_from_group(body)
 ```
@@ -250,7 +262,7 @@ result = group_controller.remove_privileges_from_group(body)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Add Users to Group
@@ -261,6 +273,8 @@ hen you assign users to a group, the users inherits the privileges assigned to t
 
 At least one of id or name of the group is required. When both are given,then user id will be considered.
 
+Permission: Requires administration privilege
+
 ```python
 def add_users_to_group(self,
                       body)
@@ -270,7 +284,7 @@ def add_users_to_group(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2GroupAdduserRequest`](/doc/models/api-rest-v2-group-adduser-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2GroupAdduserRequest`](../../doc/models/tspublic-rest-v2-group-adduser-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -279,7 +293,11 @@ def add_users_to_group(self,
 ## Example Usage
 
 ```python
-body = ApiRestV2GroupAdduserRequest()
+body = TspublicRestV2GroupAdduserRequest()
+body.users = []
+
+body.users.append(UserNameAndIDInput())
+
 
 result = group_controller.add_users_to_group(body)
 ```
@@ -288,7 +306,7 @@ result = group_controller.add_users_to_group(body)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Remove Users From Group
@@ -299,6 +317,8 @@ The API removes only the user association. It does not delete the users or group
 
 At least one of id or name of group is required. When both are given,then user id will be considered.
 
+Permission: Requires administration privilege
+
 ```python
 def remove_users_from_group(self,
                            body)
@@ -308,7 +328,7 @@ def remove_users_from_group(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2GroupRemoveuserRequest`](/doc/models/api-rest-v2-group-removeuser-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2GroupRemoveuserRequest`](../../doc/models/tspublic-rest-v2-group-removeuser-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -317,7 +337,11 @@ def remove_users_from_group(self,
 ## Example Usage
 
 ```python
-body = ApiRestV2GroupRemoveuserRequest()
+body = TspublicRestV2GroupRemoveuserRequest()
+body.users = []
+
+body.users.append(UserNameAndIDInput())
+
 
 result = group_controller.remove_users_from_group(body)
 ```
@@ -326,7 +350,7 @@ result = group_controller.remove_users_from_group(body)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Add Groups to Group
@@ -337,6 +361,8 @@ When you assign groups to a group, the group inherits the privileges assigned to
 
 At least one of id or name of group is required. When both are given,then user id will be considered.
 
+Permission: Requires administration privilege
+
 ```python
 def add_groups_to_group(self,
                        body)
@@ -346,7 +372,7 @@ def add_groups_to_group(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2GroupAddgroupRequest`](/doc/models/api-rest-v2-group-addgroup-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2GroupAddgroupRequest`](../../doc/models/tspublic-rest-v2-group-addgroup-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -355,7 +381,11 @@ def add_groups_to_group(self,
 ## Example Usage
 
 ```python
-body = ApiRestV2GroupAddgroupRequest()
+body = TspublicRestV2GroupAddgroupRequest()
+body.groups = []
+
+body.groups.append(GroupNameAndIDInput())
+
 
 result = group_controller.add_groups_to_group(body)
 ```
@@ -364,7 +394,7 @@ result = group_controller.add_groups_to_group(body)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Remove Groups From Group
@@ -375,6 +405,8 @@ The API removes only the group association. It does not delete the group from th
 
 At least one of id or name of group is required. When both are given,then user id will be considered.
 
+Permission: Requires administration privilege
+
 ```python
 def remove_groups_from_group(self,
                             body)
@@ -384,7 +416,7 @@ def remove_groups_from_group(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2GroupRemovegroupRequest`](/doc/models/api-rest-v2-group-removegroup-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2GroupRemovegroupRequest`](../../doc/models/tspublic-rest-v2-group-removegroup-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -393,7 +425,11 @@ def remove_groups_from_group(self,
 ## Example Usage
 
 ```python
-body = ApiRestV2GroupRemovegroupRequest()
+body = TspublicRestV2GroupRemovegroupRequest()
+body.groups = []
+
+body.groups.append(GroupNameAndIDInput())
+
 
 result = group_controller.remove_groups_from_group(body)
 ```
@@ -402,7 +438,7 @@ result = group_controller.remove_groups_from_group(body)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Search Groups
@@ -410,6 +446,8 @@ result = group_controller.remove_groups_from_group(body)
 To get the details of a specific group account or all groups in the ThoughtSpot system use this end point.
 
 If no inputs are provided, then all groups are included in the response.
+
+Permission: Requires administration privilege
 
 ```python
 def search_groups(self,
@@ -420,16 +458,16 @@ def search_groups(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2GroupSearchRequest`](/doc/models/api-rest-v2-group-search-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2GroupSearchRequest`](../../doc/models/tspublic-rest-v2-group-search-request.md) | Body, Required | - |
 
 ## Response Type
 
-[`List of GroupResponse`](/doc/models/group-response.md)
+`object`
 
 ## Example Usage
 
 ```python
-body = ApiRestV2GroupSearchRequest()
+body = TspublicRestV2GroupSearchRequest()
 
 result = group_controller.search_groups(body)
 ```
@@ -438,5 +476,5 @@ result = group_controller.search_groups(body)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 

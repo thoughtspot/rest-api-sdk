@@ -13,10 +13,14 @@ import {
   Server,
 } from './clientInterface';
 import { Configuration, Environment } from './configuration';
-import { DEFAULT_CONFIGURATION, DEFAULT_RETRY_CONFIG } from './defaultConfiguration';
+import {
+  DEFAULT_CONFIGURATION,
+  DEFAULT_RETRY_CONFIG,
+} from './defaultConfiguration';
 import { ApiError } from './core';
 import { pathTemplate, SkipEncode } from './core';
 import { setHeader } from './core';
+import { updateUserAgent } from './core';
 import {
   AuthenticatorInterface,
   createRequestBuilderFactory,
@@ -27,13 +31,12 @@ import {
 } from './core';
 import { XmlSerialization } from './http/xmlSerialization';
 
-const USER_AGENT = 'APIMATIC 3.0';
-
 export class Client implements ClientInterface {
   private _config: Readonly<Configuration>;
   private _timeout: number;
   private _retryConfig: RetryConfiguration;
   private _requestBuilderFactory: SdkRequestBuilderFactory;
+  private _userAgent: string;
 
   constructor(config?: Partial<Configuration>) {
     this._config = {
@@ -42,11 +45,15 @@ export class Client implements ClientInterface {
     };
     this._retryConfig = {
       ...DEFAULT_RETRY_CONFIG,
-      ...this._config.httpClientOptions?.retryConfig
+      ...this._config.httpClientOptions?.retryConfig,
     };
-    this._timeout = typeof this._config.httpClientOptions?.timeout != 'undefined' ?
-      this._config.httpClientOptions.timeout :
-      this._config.timeout;
+    this._timeout =
+      typeof this._config.httpClientOptions?.timeout != 'undefined'
+        ? this._config.httpClientOptions.timeout
+        : this._config.timeout;
+    this._userAgent = updateUserAgent(
+      'RestAPI V2 SDK',
+    );
     this._requestBuilderFactory = createRequestHandlerFactory(
       server => getBaseUri(server, this._config),
       accessTokenAuthenticationProvider(this._config),
@@ -58,10 +65,10 @@ export class Client implements ClientInterface {
       }),
       [
         withErrorHandlers,
-        withUserAgent,
+        withUserAgent(this._userAgent),
         withAuthenticationByDefault,
-        withContentType(this._config),
         withAcceptLanguage(this._config),
+        withContentType(this._config),
       ],
       new XmlSerialization(),
       this._retryConfig
@@ -130,16 +137,11 @@ function withErrorHandlers(rb: SdkRequestBuilder) {
   rb.defaultToError(ApiError);
 }
 
-function withUserAgent(rb: SdkRequestBuilder) {
-  rb.header('user-agent', USER_AGENT);
-}
-
-
-function withContentType({ contentType }: { contentType: string }) {
+function withUserAgent(userAgent: string) {
   return (rb: SdkRequestBuilder) => {
     rb.interceptRequest(request => {
       const headers = request.headers ?? {};
-      setHeader(headers, 'Content-Type', contentType);
+      setHeader(headers, 'user-agent', userAgent);
       return { ...request, headers };
     });
   };
@@ -150,6 +152,16 @@ function withAcceptLanguage({ acceptLanguage }: { acceptLanguage: string }) {
     rb.interceptRequest(request => {
       const headers = request.headers ?? {};
       setHeader(headers, 'Accept-Language', acceptLanguage);
+      return { ...request, headers };
+    });
+  };
+}
+
+function withContentType({ contentType }: { contentType: string }) {
+  return (rb: SdkRequestBuilder) => {
+    rb.interceptRequest(request => {
+      const headers = request.headers ?? {};
+      setHeader(headers, 'Content-Type', contentType);
       return { ...request, headers };
     });
   };

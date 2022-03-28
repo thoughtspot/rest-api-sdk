@@ -10,11 +10,11 @@ DatabaseController databaseController = client.getDatabaseController();
 
 ## Methods
 
-* [Get Databases](/doc/controllers/database.md#get-databases)
-* [Get Schemas](/doc/controllers/database.md#get-schemas)
-* [Get Tables](/doc/controllers/database.md#get-tables)
-* [Create Table](/doc/controllers/database.md#create-table)
-* [Run Query](/doc/controllers/database.md#run-query)
+* [Get Databases](../../doc/controllers/database.md#get-databases)
+* [Get Schemas](../../doc/controllers/database.md#get-schemas)
+* [Get Tables](../../doc/controllers/database.md#get-tables)
+* [Create Table](../../doc/controllers/database.md#create-table)
+* [Run Query](../../doc/controllers/database.md#run-query)
 
 
 # Get Databases
@@ -22,6 +22,8 @@ DatabaseController databaseController = client.getDatabaseController();
 Note: This endpoint is applicable only for on-prem deployments
 
 To list all the databases in Falcon, use this endpoint.
+
+Permission: Requires administration privilege
 
 ```java
 CompletableFuture<List<String>> getDatabasesAsync()
@@ -46,7 +48,7 @@ databaseController.getDatabasesAsync().thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Get Schemas
@@ -54,6 +56,8 @@ databaseController.getDatabasesAsync().thenAccept(result -> {
 Note: This endpoint is applicable only for on-prem deployments
 
 To list all the schemas in a database in Falcon, use this endpoint.
+
+Permission: Requires administration privilege
 
 ```java
 CompletableFuture<List<String>> getSchemasAsync(
@@ -87,7 +91,7 @@ databaseController.getSchemasAsync(database).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Get Tables
@@ -95,6 +99,8 @@ databaseController.getSchemasAsync(database).thenAccept(result -> {
 Note: This endpoint is applicable only for on-prem deployments.
 
 To list all the tables in a schema of a database in Falcon, use this endpoint.
+
+Permission: Requires administration privilege
 
 ```java
 CompletableFuture<List<String>> getTablesAsync(
@@ -131,7 +137,7 @@ databaseController.getTablesAsync(database, schema).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Create Table
@@ -140,25 +146,27 @@ Note: This endpoint is applicable only for on-prem deployments.
 
 To create a table in Falcon, use this endpoint.
 
+Permission: Requires administration privilege
+
 ```java
 CompletableFuture<CreateTableResponse> createTableAsync(
-    final ApiRestV2DatabaseTableCreateRequest body)
+    final TspublicRestV2DatabaseTableCreateRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2DatabaseTableCreateRequest`](/doc/models/api-rest-v2-database-table-create-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2DatabaseTableCreateRequest`](../../doc/models/tspublic-rest-v2-database-table-create-request.md) | Body, Required | - |
 
 ## Response Type
 
-[`CreateTableResponse`](/doc/models/create-table-response.md)
+[`CreateTableResponse`](../../doc/models/create-table-response.md)
 
 ## Example Usage
 
 ```java
-ApiRestV2DatabaseTableCreateRequest body = new ApiRestV2DatabaseTableCreateRequest();
+TspublicRestV2DatabaseTableCreateRequest body = new TspublicRestV2DatabaseTableCreateRequest();
 
 databaseController.createTableAsync(body).thenAccept(result -> {
     // TODO success callback handler
@@ -172,7 +180,7 @@ databaseController.createTableAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Run Query
@@ -183,16 +191,18 @@ To run a TQL statement in Falcon, use this endpoint.
 
 You can run only following type of statements - Table DDL alter and Table rows update and delete.
 
+Permission: Requires administration privilege
+
 ```java
 CompletableFuture<List<Object>> runQueryAsync(
-    final ApiRestV2DatabaseTableRunqueryRequest body)
+    final TspublicRestV2DatabaseTableRunqueryRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2DatabaseTableRunqueryRequest`](/doc/models/api-rest-v2-database-table-runquery-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2DatabaseTableRunqueryRequest`](../../doc/models/tspublic-rest-v2-database-table-runquery-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -201,7 +211,7 @@ CompletableFuture<List<Object>> runQueryAsync(
 ## Example Usage
 
 ```java
-ApiRestV2DatabaseTableRunqueryRequest body = new ApiRestV2DatabaseTableRunqueryRequest();
+TspublicRestV2DatabaseTableRunqueryRequest body = new TspublicRestV2DatabaseTableRunqueryRequest();
 body.setStatement(new LinkedList<>());
 body.getStatement().add("statement6");
 body.getStatement().add("statement7");
@@ -218,5 +228,5 @@ databaseController.runQueryAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 

@@ -11,7 +11,7 @@
 |  --- | --- | --- | --- |
 | `Name` | `string` | Optional | Name of the connection |
 | `Description` | `string` | Optional | Description associated with the connection |
-| `Type` | `string` | Optional | Type of the connection. The database associated with this type can be obtained from theI response returned by the /api/rest/v2/connection/types API endpoint. |
+| `Type` | `string` | Optional | Type of the connection. The database associated with this type can be obtained from the response returned by the /tspublic/rest/v2/connection/types API endpoint. |
 | `Id` | `string` | Optional | GUID of the connection |
 | `Scheduled` | `bool?` | Optional | Indicates if the data sync is scheduled for this connection |
 | `ConnectionType` | `string` | Optional | - |
@@ -21,13 +21,13 @@
 | `IsDeleted` | `bool?` | Optional | Indicates if the connection is deleted |
 | `IsHidden` | `bool?` | Optional | Indicates if the connection is hideen |
 | `Complete` | `bool?` | Optional | Indicates if the all the properties of connection is provided |
-| `IndexVersion` | `int?` | Optional | - |
-| `GenerationNum` | `int?` | Optional | - |
+| `IndexVersion` | `double?` | Optional | - |
+| `GenerationNum` | `double?` | Optional | - |
 | `Created` | `string` | Optional | Date and time when user account was created |
 | `Modified` | `string` | Optional | Date and time of last modification of user account |
-| `Author` | [`Models.UserNameAndID`](/doc/models/user-name-and-id.md) | Optional | - |
-| `ModifiedBy` | [`Models.UserNameAndID`](/doc/models/user-name-and-id.md) | Optional | - |
-| `Owner` | [`Models.UserNameAndID`](/doc/models/user-name-and-id.md) | Optional | - |
+| `Author` | [`Models.UserNameAndID`](../../doc/models/user-name-and-id.md) | Optional | - |
+| `ModifiedBy` | [`Models.UserNameAndID`](../../doc/models/user-name-and-id.md) | Optional | - |
+| `Owner` | [`Models.UserNameAndID`](../../doc/models/user-name-and-id.md) | Optional | - |
 | `Tags` | `List<string>` | Optional | List of tags assigned to the connection |
 | `Tables` | `List<string>` | Optional | List of tables linked to this connection and details of the columns in the table |
 

@@ -5,8 +5,8 @@ The following parameters are configurable for the API Client:
 
 | Parameter | Type | Description |
 |  --- | --- | --- |
-| `contentType` | `string` | body content type for post request<br>*Default*: `'application/json'` |
 | `acceptLanguage` | `string` | response format<br>*Default*: `'application/json'` |
+| `contentType` | `string` | body content type for post request<br>*Default*: `'application/json'` |
 | `baseUrl` | `string` | *Default*: `'https://localhost:443'` |
 | `environment` | Environment | The API environment. <br> **Default: `Environment.Production`** |
 | `timeout` | `number` | Timeout for API calls.<br>*Default*: `0` |
@@ -18,8 +18,8 @@ The API client can be initialized as follows:
 
 ```ts
 const client = new Client({
-  contentType: 'application/json',
   acceptLanguage: 'application/json',
+  contentType: 'application/json',
   timeout: 0,
   environment: Environment.Production,
   accessToken: 'AccessToken',
@@ -41,5 +41,10 @@ The gateway for the SDK. This class acts as a factory for the Controllers and al
 | database | Gets DatabaseController |
 | connection | Gets ConnectionController |
 | data | Gets DataController |
+| report | Gets ReportController |
 | admin | Gets AdminController |
+| security | Gets SecurityController |
+| logs | Gets LogsController |
+| materialization | Gets MaterializationController |
+| customActions | Gets CustomActionsController |
 

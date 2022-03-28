@@ -18,29 +18,9 @@ public enum Type10Enum {
 
     LIVEBOARD,
 
-    DATAOBJECT_ALL,
+    DATAOBJECT,
 
-    DATAOBJECT_WORKSHEET,
-
-    DATAOBJECT_TABLE,
-
-    DATAOBJECT_USER_DEFINED,
-
-    DATAOBJECT_VIEW,
-
-    DATAOBJECT_CALENDAR_TABLE,
-
-    COLUMN_ALL,
-
-    COLUMN_WORKSHEET,
-
-    COLUMN_TABLE,
-
-    COLUMN_USER_DEFINED,
-
-    COLUMN_VIEW,
-
-    COLUMN_CALENDAR_TABLE,
+    COLUMN,
 
     JOIN,
 
@@ -59,18 +39,8 @@ public enum Type10Enum {
     static {
         ANSWER.value = "ANSWER";
         LIVEBOARD.value = "LIVEBOARD";
-        DATAOBJECT_ALL.value = "DATAOBJECT_ALL";
-        DATAOBJECT_WORKSHEET.value = "DATAOBJECT_WORKSHEET";
-        DATAOBJECT_TABLE.value = "DATAOBJECT_TABLE";
-        DATAOBJECT_USER_DEFINED.value = "DATAOBJECT_USER_DEFINED";
-        DATAOBJECT_VIEW.value = "DATAOBJECT_VIEW";
-        DATAOBJECT_CALENDAR_TABLE.value = "DATAOBJECT_CALENDAR_TABLE";
-        COLUMN_ALL.value = "COLUMN_ALL";
-        COLUMN_WORKSHEET.value = "COLUMN_WORKSHEET";
-        COLUMN_TABLE.value = "COLUMN_TABLE";
-        COLUMN_USER_DEFINED.value = "COLUMN_USER_DEFINED";
-        COLUMN_VIEW.value = "COLUMN_VIEW";
-        COLUMN_CALENDAR_TABLE.value = "COLUMN_CALENDAR_TABLE";
+        DATAOBJECT.value = "DATAOBJECT";
+        COLUMN.value = "COLUMN";
         JOIN.value = "JOIN";
         CONNECTION.value = "CONNECTION";
         TAG.value = "TAG";
@@ -79,18 +49,8 @@ public enum Type10Enum {
 
         valueMap.put("ANSWER", ANSWER);
         valueMap.put("LIVEBOARD", LIVEBOARD);
-        valueMap.put("DATAOBJECT_ALL", DATAOBJECT_ALL);
-        valueMap.put("DATAOBJECT_WORKSHEET", DATAOBJECT_WORKSHEET);
-        valueMap.put("DATAOBJECT_TABLE", DATAOBJECT_TABLE);
-        valueMap.put("DATAOBJECT_USER_DEFINED", DATAOBJECT_USER_DEFINED);
-        valueMap.put("DATAOBJECT_VIEW", DATAOBJECT_VIEW);
-        valueMap.put("DATAOBJECT_CALENDAR_TABLE", DATAOBJECT_CALENDAR_TABLE);
-        valueMap.put("COLUMN_ALL", COLUMN_ALL);
-        valueMap.put("COLUMN_WORKSHEET", COLUMN_WORKSHEET);
-        valueMap.put("COLUMN_TABLE", COLUMN_TABLE);
-        valueMap.put("COLUMN_USER_DEFINED", COLUMN_USER_DEFINED);
-        valueMap.put("COLUMN_VIEW", COLUMN_VIEW);
-        valueMap.put("COLUMN_CALENDAR_TABLE", COLUMN_CALENDAR_TABLE);
+        valueMap.put("DATAOBJECT", DATAOBJECT);
+        valueMap.put("COLUMN", COLUMN);
         valueMap.put("JOIN", JOIN);
         valueMap.put("CONNECTION", CONNECTION);
         valueMap.put("TAG", TAG);

@@ -22,6 +22,11 @@ public class HttpClientConfiguration implements ReadonlyHttpClientConfiguration 
     private final long timeout;
 
     /**
+     * Allow or prevent skipping SSL certificate verification.
+     */
+    private final boolean isSkipSslCertVerification;
+
+    /**
      * The number of retries to make.
      */
     private final int numberOfRetries;
@@ -70,12 +75,13 @@ public class HttpClientConfiguration implements ReadonlyHttpClientConfiguration 
     /**
      * Default Constructor.
      */
-    private HttpClientConfiguration(long timeout, int numberOfRetries, int backOffFactor,
-            long retryInterval, Set<Integer> httpStatusCodesToRetry,
-            Set<HttpMethod> httpMethodsToRetry, long maximumRetryWaitTime,
-            boolean shouldRetryOnTimeout, okhttp3.OkHttpClient httpClientInstance,
-            boolean overrideHttpClientConfigurations) {
+    private HttpClientConfiguration(long timeout, boolean isSkipSslCertVerification,
+            int numberOfRetries, int backOffFactor, long retryInterval,
+            Set<Integer> httpStatusCodesToRetry, Set<HttpMethod> httpMethodsToRetry,
+            long maximumRetryWaitTime, boolean shouldRetryOnTimeout,
+            okhttp3.OkHttpClient httpClientInstance, boolean overrideHttpClientConfigurations) {
         this.timeout = timeout;
+        this.isSkipSslCertVerification = isSkipSslCertVerification;
         this.numberOfRetries = numberOfRetries;
         this.backOffFactor = backOffFactor;
         this.retryInterval = retryInterval;
@@ -93,6 +99,14 @@ public class HttpClientConfiguration implements ReadonlyHttpClientConfiguration 
      */
     public long getTimeout() {
         return timeout;
+    }
+
+    /**
+     * Allow or prevent skipping SSL certificate verification.
+     * @return isSkipSslCertVerification
+     */
+    public boolean isSkipSslCertVerification() {
+        return isSkipSslCertVerification;
     }
 
     /**
@@ -174,13 +188,14 @@ public class HttpClientConfiguration implements ReadonlyHttpClientConfiguration 
      */
     @Override
     public String toString() {
-        return "HttpClientConfiguration [" + "timeout=" + timeout + ", numberOfRetries="
-                + numberOfRetries + ", backOffFactor=" + backOffFactor + ", retryInterval="
-                + retryInterval + ", httpStatusCodesToRetry=" + httpStatusCodesToRetry
-                + ", httpMethodsToRetry=" + httpMethodsToRetry + ", maximumRetryWaitTime="
-                + maximumRetryWaitTime + ", shouldRetryOnTimeout=" + shouldRetryOnTimeout
-                + ", httpClientInstance=" + httpClientInstance
-                + ", overrideHttpClientConfigurations=" + overrideHttpClientConfigurations + "]";
+        return "HttpClientConfiguration [" + "timeout=" + timeout + ", isSkipSslCertVerification="
+                + isSkipSslCertVerification + ", numberOfRetries=" + numberOfRetries
+                + ", backOffFactor=" + backOffFactor + ", retryInterval=" + retryInterval
+                + ", httpStatusCodesToRetry=" + httpStatusCodesToRetry + ", httpMethodsToRetry="
+                + httpMethodsToRetry + ", maximumRetryWaitTime=" + maximumRetryWaitTime
+                + ", shouldRetryOnTimeout=" + shouldRetryOnTimeout + ", httpClientInstance="
+                + httpClientInstance + ", overrideHttpClientConfigurations="
+                + overrideHttpClientConfigurations + "]";
     }
 
     /**
@@ -192,6 +207,7 @@ public class HttpClientConfiguration implements ReadonlyHttpClientConfiguration 
     public Builder newBuilder() {
         return new Builder()
                 .timeout(timeout)
+                .isSkipSslCertVerification(isSkipSslCertVerification)
                 .numberOfRetries(numberOfRetries)
                 .backOffFactor(backOffFactor)
                 .retryInterval(retryInterval)
@@ -208,6 +224,7 @@ public class HttpClientConfiguration implements ReadonlyHttpClientConfiguration 
     public static class Builder {
      
         private long timeout = 0;
+        private boolean isSkipSslCertVerification = false;
         private int numberOfRetries = 0;
         private int backOffFactor = 2;
         private long retryInterval = 1;
@@ -238,6 +255,16 @@ public class HttpClientConfiguration implements ReadonlyHttpClientConfiguration 
             if (timeout > 0) { 
                 this.timeout = timeout;
             }
+            return this;
+        }
+
+        /**
+         * Allow or prevent skipping SSL certificate verification.
+         * @param isSkipSslCertVerification The isSkipSslCertVerification to set
+         * @return Builder
+         */
+        public Builder isSkipSslCertVerification(boolean isSkipSslCertVerification) {
+            this.isSkipSslCertVerification = isSkipSslCertVerification;
             return this;
         }
 
@@ -353,9 +380,10 @@ public class HttpClientConfiguration implements ReadonlyHttpClientConfiguration 
          * @return {@link HttpClientConfiguration}
          */
         public HttpClientConfiguration build() {
-            return new HttpClientConfiguration(timeout, numberOfRetries, backOffFactor,
-                    retryInterval, httpStatusCodesToRetry, httpMethodsToRetry, maximumRetryWaitTime,
-                    shouldRetryOnTimeout, httpClientInstance, overrideHttpClientConfigurations);
+            return new HttpClientConfiguration(timeout, isSkipSslCertVerification, numberOfRetries,
+                    backOffFactor, retryInterval, httpStatusCodesToRetry, httpMethodsToRetry,
+                    maximumRetryWaitTime, shouldRetryOnTimeout, httpClientInstance,
+                    overrideHttpClientConfigurations);
         }
     }
 }

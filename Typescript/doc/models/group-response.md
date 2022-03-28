@@ -15,9 +15,9 @@
 | `visibility` | `string \| undefined` | Optional | Visibility of the group |
 | `description` | `string \| undefined` | Optional | Description of the group |
 | `privileges` | `string[] \| undefined` | Optional | Privileges assigned to the group |
-| `groups` | [`GroupNameAndID[] \| undefined`](/doc/models/group-name-and-id.md) | Optional | Name of the group to which is added |
-| `users` | [`UserNameAndID[] \| undefined`](/doc/models/user-name-and-id.md) | Optional | User Group Information by Id or Name. |
-| `assignedLiveboards` | [`LiveboardNameAndID[] \| undefined`](/doc/models/liveboard-name-and-id.md) | Optional | Liveboards assigned to the group |
+| `groups` | [`GroupNameAndID[] \| undefined`](../../doc/models/group-name-and-id.md) | Optional | Name of the group to which is added |
+| `users` | [`UserNameAndID[] \| undefined`](../../doc/models/user-name-and-id.md) | Optional | User Group Information by Id or Name. |
+| `assignedLiveboards` | [`LiveboardNameAndID[] \| undefined`](../../doc/models/liveboard-name-and-id.md) | Optional | Liveboards assigned to the group |
 | `userGroupContent` | `unknown \| undefined` | Optional | - |
 | `tags` | `string[] \| undefined` | Optional | Tags assigned to the group |
 | `isDeleted` | `boolean \| undefined` | Optional | Indicates if the group is deleted |
@@ -35,9 +35,9 @@
 | `generationNum` | `number \| undefined` | Optional | - |
 | `created` | `number \| undefined` | Optional | Date and time when group was created |
 | `modified` | `number \| undefined` | Optional | Date and time of last modification of the group |
-| `modifiedBy` | [`UserNameAndID \| undefined`](/doc/models/user-name-and-id.md) | Optional | - |
-| `author` | [`UserNameAndID \| undefined`](/doc/models/user-name-and-id.md) | Optional | - |
-| `owner` | [`UserNameAndID \| undefined`](/doc/models/user-name-and-id.md) | Optional | - |
+| `author` | [`UserNameAndID \| undefined`](../../doc/models/user-name-and-id.md) | Optional | - |
+| `modifiedBy` | [`UserNameAndID \| undefined`](../../doc/models/user-name-and-id.md) | Optional | - |
+| `owner` | [`UserNameAndID \| undefined`](../../doc/models/user-name-and-id.md) | Optional | - |
 
 ## Example (as JSON)
 
@@ -69,8 +69,8 @@
   "generationNum": null,
   "created": null,
   "modified": null,
-  "modifiedBy": null,
   "author": null,
+  "modifiedBy": null,
   "owner": null
 }
 ```

@@ -46,6 +46,6 @@ namespace RESTAPISDK.Standard.Models
         /// PENDING.
         /// </summary>
         [EnumMember(Value = "PENDING")]
-        PENDING,
+        PENDING
     }
 }

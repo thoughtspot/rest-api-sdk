@@ -21,13 +21,13 @@ namespace RESTAPISDK.Standard.Models
         /// <summary>
         /// True.
         /// </summary>
-        [EnumMember(Value = "True")]
+        [EnumMember(Value = "true")]
         True,
 
         /// <summary>
         /// False.
         /// </summary>
-        [EnumMember(Value = "False")]
-        False,
+        [EnumMember(Value = "false")]
+        False
     }
 }

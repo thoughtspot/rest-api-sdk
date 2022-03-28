@@ -14,14 +14,14 @@ namespace RESTAPISDK.Standard
     public interface IConfiguration
     {
         /// <summary>
-        /// Gets body content type for post request
-        /// </summary>
-        string ContentType { get; }
-
-        /// <summary>
         /// Gets response format
         /// </summary>
         string AcceptLanguage { get; }
+
+        /// <summary>
+        /// Gets body content type for post request
+        /// </summary>
+        string ContentType { get; }
 
         /// <summary>
         /// Gets Current API environment.

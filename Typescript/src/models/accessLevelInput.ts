@@ -15,7 +15,7 @@ export interface AccessLevelInput {
   id?: string;
   /** Type of access detail provided */
   type?: Type1Enum;
-  /** Minimum access level that the specified user or user group has. */
+  /** Minimum access level that the specified user or user group has. If no input is provided then minimum access of READ_ONLY will be considered. */
   access?: AccessEnum;
 }
 

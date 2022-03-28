@@ -28,6 +28,6 @@ namespace RESTAPISDK.Standard.Models
         /// MODIFY.
         /// </summary>
         [EnumMember(Value = "MODIFY")]
-        MODIFY,
+        MODIFY
     }
 }

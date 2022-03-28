@@ -40,6 +40,6 @@ namespace RESTAPISDK.Standard.Models
         /// CONNECTION.
         /// </summary>
         [EnumMember(Value = "CONNECTION")]
-        CONNECTION,
+        CONNECTION
     }
 }

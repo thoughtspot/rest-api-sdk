@@ -34,6 +34,6 @@ namespace RESTAPISDK.Standard.Models
         /// DESC.
         /// </summary>
         [EnumMember(Value = "DESC")]
-        DESC,
+        DESC
     }
 }

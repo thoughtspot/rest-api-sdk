@@ -10,14 +10,10 @@ import { Schema, stringEnum } from '../schema';
  * Enum for Type2Enum
  */
 export enum Type2Enum {
-  UNKNOWN = 'UNKNOWN',
-  LDAPUSER = 'LDAP_USER',
-  SAMLUSER = 'SAML_USER',
-  OIDCUSER = 'OIDC_USER',
-  LOCALUSER = 'LOCAL_USER',
-  LDAPGROUP = 'LDAP_GROUP',
-  LOCALGROUP = 'LOCAL_GROUP',
-  TENANTGROUP = 'TENANT_GROUP',
+  LIVEBOARD = 'LIVEBOARD',
+  ANSWER = 'ANSWER',
+  DATAOBJECT = 'DATAOBJECT',
+  COLUMN = 'COLUMN',
 }
 
 /**

@@ -12,15 +12,22 @@ class Type12Enum(object):
 
     """Implementation of the 'Type12' enum.
 
-    Type of the data object
+    Type of the metadata object being searched. Valid values
 
     Attributes:
+        ANSWER: TODO: type description here.
         LIVEBOARD: TODO: type description here.
         DATAOBJECT: TODO: type description here.
         COLUMN: TODO: type description here.
         JOIN: TODO: type description here.
+        CONNECTION: TODO: type description here.
+        TAG: TODO: type description here.
+        USER: TODO: type description here.
+        USER_GROUP: TODO: type description here.
 
     """
+
+    ANSWER = 'ANSWER'
 
     LIVEBOARD = 'LIVEBOARD'
 
@@ -29,3 +36,11 @@ class Type12Enum(object):
     COLUMN = 'COLUMN'
 
     JOIN = 'JOIN'
+
+    CONNECTION = 'CONNECTION'
+
+    TAG = 'TAG'
+
+    USER = 'USER'
+
+    USER_GROUP = 'USER_GROUP'

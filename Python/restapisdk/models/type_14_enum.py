@@ -12,38 +12,20 @@ class Type14Enum(object):
 
     """Implementation of the 'Type14' enum.
 
-    Type of the connect being searched. Valid values:
+    Type of the data object
 
     Attributes:
-        SNOWFLAKE: TODO: type description here.
-        AMAZON_REDSHIFT: TODO: type description here.
-        GOOGLE_BIGQUERY: TODO: type description here.
-        AZURE_SYNAPSE: TODO: type description here.
-        TERADATA: TODO: type description here.
-        STARBURST: TODO: type description here.
-        SAP_HANA: TODO: type description here.
-        ORACLE_ADW: TODO: type description here.
-        DATABRICKS: TODO: type description here.
-        DENODO: TODO: type description here.
+        LIVEBOARD: TODO: type description here.
+        DATAOBJECT: TODO: type description here.
+        COLUMN: TODO: type description here.
+        JOIN: TODO: type description here.
 
     """
 
-    SNOWFLAKE = 'SNOWFLAKE'
+    LIVEBOARD = 'LIVEBOARD'
 
-    AMAZON_REDSHIFT = 'AMAZON_REDSHIFT'
+    DATAOBJECT = 'DATAOBJECT'
 
-    GOOGLE_BIGQUERY = 'GOOGLE_BIGQUERY'
+    COLUMN = 'COLUMN'
 
-    AZURE_SYNAPSE = 'AZURE_SYNAPSE'
-
-    TERADATA = 'TERADATA'
-
-    STARBURST = 'STARBURST'
-
-    SAP_HANA = 'SAP_HANA'
-
-    ORACLE_ADW = 'ORACLE_ADW'
-
-    DATABRICKS = 'DATABRICKS'
-
-    DENODO = 'DENODO'
+    JOIN = 'JOIN'

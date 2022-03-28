@@ -88,6 +88,6 @@ namespace RESTAPISDK.Standard.Models
         /// ROWCOUNT.
         /// </summary>
         [EnumMember(Value = "ROW_COUNT")]
-        ROWCOUNT,
+        ROWCOUNT
     }
 }

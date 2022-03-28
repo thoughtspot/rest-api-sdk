@@ -9,12 +9,20 @@ package localhost.http.client;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 import localhost.ApiHelper;
 import localhost.http.Headers;
 import localhost.http.request.HttpBodyRequest;
@@ -22,6 +30,7 @@ import localhost.http.request.HttpMethod;
 import localhost.http.request.HttpRequest;
 import localhost.http.request.MultipartFileWrapper;
 import localhost.http.request.MultipartWrapper;
+import localhost.http.request.configuration.RetryConfiguration;
 import localhost.http.response.HttpResponse;
 import localhost.http.response.HttpStringResponse;
 import localhost.utilities.FileWrapper;
@@ -32,6 +41,7 @@ import localhost.utilities.FileWrapper;
 public class OkClient implements HttpClient {
     private static final Object syncObject = new Object();
     private static volatile okhttp3.OkHttpClient defaultOkHttpClient;
+    private static okhttp3.OkHttpClient insecureOkHttpClient;
 
     /**
      * Private instance of the okhttp3.OkHttpClient.
@@ -51,7 +61,11 @@ public class OkClient implements HttpClient {
                 this.client = httpClientInstance;
             }
         } else {
-            applyHttpClientConfigurations(getDefaultOkHttpClient(), httpClientConfig);
+            if (httpClientConfig.isSkipSslCertVerification()) {
+                applyHttpClientConfigurations(getInsecureOkHttpClient(), httpClientConfig);
+            } else {
+                applyHttpClientConfigurations(getDefaultOkHttpClient(), httpClientConfig);
+            }
         }
     }
 
@@ -64,6 +78,8 @@ public class OkClient implements HttpClient {
         clientBuilder.readTimeout(httpClientConfig.getTimeout(), TimeUnit.SECONDS)
                 .writeTimeout(httpClientConfig.getTimeout(), TimeUnit.SECONDS)
                 .connectTimeout(httpClientConfig.getTimeout(), TimeUnit.SECONDS);
+
+        clientBuilder.addInterceptor(new HttpRedirectInterceptor(true));
         // If retries are allowed then RetryInterceptor must be registered
         if (httpClientConfig.getNumberOfRetries() > 0) {
             clientBuilder.callTimeout(httpClientConfig.getMaximumRetryWaitTime(), TimeUnit.SECONDS)
@@ -72,7 +88,6 @@ public class OkClient implements HttpClient {
             clientBuilder.callTimeout(httpClientConfig.getTimeout(), TimeUnit.SECONDS);
         }
 
-        clientBuilder.addInterceptor(new HttpRedirectInterceptor(true));
         this.client = clientBuilder.build();
     }
 
@@ -94,6 +109,60 @@ public class OkClient implements HttpClient {
     }
 
     /**
+     * Getter for the default static instance of the okhttp3.OkHttpClient.
+     */
+    private okhttp3.OkHttpClient getInsecureOkHttpClient() {
+        if (insecureOkHttpClient == null) {
+            synchronized (syncObject) {
+                if (insecureOkHttpClient == null) {
+                    insecureOkHttpClient = createInsecureOkHttpClient();
+                }
+            }
+        }
+        return insecureOkHttpClient;
+    }
+
+    private static okhttp3.OkHttpClient createInsecureOkHttpClient() {
+        try {
+            // Create a trust manager that does not validate certificate chains
+            final TrustManager[] trustAllCerts = new TrustManager[] {
+                new X509TrustManager() {
+                    public void checkClientTrusted(X509Certificate[] chain,
+                            String authType) throws CertificateException {
+                    }
+
+                    public void checkServerTrusted(X509Certificate[] chain,
+                            String authType) throws CertificateException {
+                    }
+
+                    public X509Certificate[] getAcceptedIssuers() {
+                        return new X509Certificate[0];
+                    }
+                }
+            };
+
+            // Install the all-trusting trust manager
+            final SSLContext sslContext = SSLContext.getInstance("SSL");
+            sslContext.init(null, trustAllCerts, new java.security.SecureRandom());
+            // Create an ssl socket factory with our all-trusting manager
+            final SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
+
+            return new okhttp3.OkHttpClient().newBuilder()
+                    .sslSocketFactory(sslSocketFactory, (X509TrustManager) trustAllCerts[0])
+                    .hostnameVerifier(new HostnameVerifier() {
+                        public boolean verify(String hostname, SSLSession session) {
+                            return true;
+                        }
+                    }).retryOnConnectionFailure(true)
+                    .callTimeout(0, TimeUnit.SECONDS)
+                    .build();
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
      * Shutdown the underlying OkHttpClient instance. 
      */
     public static void shutdown() {
@@ -101,21 +170,27 @@ public class OkClient implements HttpClient {
             defaultOkHttpClient.dispatcher().executorService().shutdown();
             defaultOkHttpClient.connectionPool().evictAll();
         }
+
+        if (insecureOkHttpClient != null) {
+            insecureOkHttpClient.dispatcher().executorService().shutdown();
+            insecureOkHttpClient.connectionPool().evictAll();
+        }
     }
 
     /**
      * Execute a given HttpRequest to get string/binary response back.
      * @param   httpRequest        The given HttpRequest to execute.
      * @param   hasBinaryResponse  Whether the response is binary or string.
+     * @param retryConfiguration The overridden retry configuration for request.
      * @return  CompletableFuture of HttpResponse after execution.
      */
     public CompletableFuture<HttpResponse> executeAsync(final HttpRequest httpRequest,
-            boolean hasBinaryResponse) {
+            boolean hasBinaryResponse, RetryConfiguration retryConfiguration) {
         okhttp3.Request okHttpRequest = convertRequest(httpRequest);
         
         RetryInterceptor retryInterceptor = getRetryInterceptor();
         if (retryInterceptor != null) {
-            retryInterceptor.addRequestEntry(okHttpRequest);
+            retryInterceptor.addRequestEntry(okHttpRequest, retryConfiguration);
         }
 
         final CompletableFuture<HttpResponse> callBack = new CompletableFuture<>();
@@ -135,6 +210,40 @@ public class OkClient implements HttpClient {
 
     /**
      * Execute a given HttpRequest to get string/binary response back.
+     * @param httpRequest The given HttpRequest to execute.
+     * @param hasBinaryResponse Whether the response is binary or string.
+     * @return CompletableFuture of HttpResponse after execution.
+     */
+    public CompletableFuture<HttpResponse> executeAsync(final HttpRequest httpRequest,
+            boolean hasBinaryResponse) {
+        return executeAsync(httpRequest, hasBinaryResponse,
+                new RetryConfiguration.Builder().build());
+    }
+
+    /**
+     * Execute a given HttpRequest to get string/binary response back.
+     * @param   httpRequest        The given HttpRequest to execute.
+     * @param   hasBinaryResponse  Whether the response is binary or string.
+     * @param   retryConfiguration The overridden retry configuration for request.
+     * @return  The converted http response.
+     * @throws  IOException exception to be thrown while converting response.
+     */
+    public HttpResponse execute(HttpRequest httpRequest, boolean hasBinaryResponse,
+            RetryConfiguration retryConfiguration) throws IOException {
+        okhttp3.Request okHttpRequest = convertRequest(httpRequest);
+        
+        RetryInterceptor retryInterceptor = getRetryInterceptor();
+        if (retryInterceptor != null) {
+            retryInterceptor.addRequestEntry(okHttpRequest, retryConfiguration);
+        }
+
+        okhttp3.Response okHttpResponse = null;
+        okHttpResponse = client.newCall(okHttpRequest).execute();
+        return convertResponse(httpRequest, okHttpResponse, hasBinaryResponse);
+    }
+
+    /**
+     * Execute a given HttpRequest to get string/binary response back.
      * @param   httpRequest        The given HttpRequest to execute.
      * @param   hasBinaryResponse  Whether the response is binary or string.
      * @return  The converted http response.
@@ -142,16 +251,7 @@ public class OkClient implements HttpClient {
      */
     public HttpResponse execute(HttpRequest httpRequest, boolean hasBinaryResponse)
             throws IOException {
-        okhttp3.Request okHttpRequest = convertRequest(httpRequest);
-        
-        RetryInterceptor retryInterceptor = getRetryInterceptor();
-        if (retryInterceptor != null) {
-            retryInterceptor.addRequestEntry(okHttpRequest);
-        }
-
-        okhttp3.Response okHttpResponse = null;
-        okHttpResponse = client.newCall(okHttpRequest).execute();
-        return convertResponse(httpRequest, okHttpResponse, hasBinaryResponse);
+        return execute(httpRequest, hasBinaryResponse, new RetryConfiguration.Builder().build());
     }
 
     /**
@@ -343,8 +443,8 @@ public class OkClient implements HttpClient {
                             okhttp3.MediaType.parse(wrapperObj.getHeaders().value("content-type"));
                 }
 
-                okhttp3.RequestBody body = okhttp3.RequestBody.create(wrapperObj.getFileWrapper().getFile(),
-                        mediaType);
+                okhttp3.RequestBody body = okhttp3.RequestBody
+                        .create(wrapperObj.getFileWrapper().getFile(), mediaType);
                 Headers fileWrapperHeaders = new Headers(wrapperObj.getHeaders());
                 fileWrapperHeaders.remove("content-type");
                 okhttp3.Headers.Builder fileWrapperHeadersBuilder =

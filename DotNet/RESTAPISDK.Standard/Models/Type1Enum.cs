@@ -28,6 +28,6 @@ namespace RESTAPISDK.Standard.Models
         /// USERGROUP.
         /// </summary>
         [EnumMember(Value = "USER_GROUP")]
-        USERGROUP,
+        USERGROUP
     }
 }

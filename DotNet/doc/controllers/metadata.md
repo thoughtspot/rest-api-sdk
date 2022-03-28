@@ -10,26 +10,27 @@ MetadataController metadataController = client.MetadataController;
 
 ## Methods
 
-* [Get Tag](/doc/controllers/metadata.md#get-tag)
-* [Create Tag](/doc/controllers/metadata.md#create-tag)
-* [Update Tag](/doc/controllers/metadata.md#update-tag)
-* [Delete Tag](/doc/controllers/metadata.md#delete-tag)
-* [Assign Tag](/doc/controllers/metadata.md#assign-tag)
-* [Unassign Tag](/doc/controllers/metadata.md#unassign-tag)
-* [Assign Favorite](/doc/controllers/metadata.md#assign-favorite)
-* [Unassign Favorite](/doc/controllers/metadata.md#unassign-favorite)
-* [Get Homeliveboard](/doc/controllers/metadata.md#get-homeliveboard)
-* [Assign Homeliveboard](/doc/controllers/metadata.md#assign-homeliveboard)
-* [Unassign Homeliveboard](/doc/controllers/metadata.md#unassign-homeliveboard)
-* [Get Incomplete Objects](/doc/controllers/metadata.md#get-incomplete-objects)
-* [Get Metadata Header](/doc/controllers/metadata.md#get-metadata-header)
-* [Get Object Detail](/doc/controllers/metadata.md#get-object-detail)
-* [Get Object Visualization Header](/doc/controllers/metadata.md#get-object-visualization-header)
-* [Search Object Header](/doc/controllers/metadata.md#search-object-header)
-* [Delete Metadata Object](/doc/controllers/metadata.md#delete-metadata-object)
-* [Get Object Dependency](/doc/controllers/metadata.md#get-object-dependency)
-* [Export Object TML](/doc/controllers/metadata.md#export-object-tml)
-* [Import Object TML](/doc/controllers/metadata.md#import-object-tml)
+* [Get Tag](../../doc/controllers/metadata.md#get-tag)
+* [Create Tag](../../doc/controllers/metadata.md#create-tag)
+* [Update Tag](../../doc/controllers/metadata.md#update-tag)
+* [Delete Tag](../../doc/controllers/metadata.md#delete-tag)
+* [Assign Tag](../../doc/controllers/metadata.md#assign-tag)
+* [Unassign Tag](../../doc/controllers/metadata.md#unassign-tag)
+* [Assign Favorite](../../doc/controllers/metadata.md#assign-favorite)
+* [Unassign Favorite](../../doc/controllers/metadata.md#unassign-favorite)
+* [Get Home Liveboard](../../doc/controllers/metadata.md#get-home-liveboard)
+* [Assign Home Liveboard](../../doc/controllers/metadata.md#assign-home-liveboard)
+* [Unassign Home Liveboard](../../doc/controllers/metadata.md#unassign-home-liveboard)
+* [Get Incomplete Objects](../../doc/controllers/metadata.md#get-incomplete-objects)
+* [Get Object Header](../../doc/controllers/metadata.md#get-object-header)
+* [Get Object Detail](../../doc/controllers/metadata.md#get-object-detail)
+* [Get Object Visualization Header](../../doc/controllers/metadata.md#get-object-visualization-header)
+* [Search Object Header](../../doc/controllers/metadata.md#search-object-header)
+* [Search Object Detail](../../doc/controllers/metadata.md#search-object-detail)
+* [Delete Object](../../doc/controllers/metadata.md#delete-object)
+* [Get Object Dependency](../../doc/controllers/metadata.md#get-object-dependency)
+* [Export Object TML](../../doc/controllers/metadata.md#export-object-tml)
+* [Import Object TML](../../doc/controllers/metadata.md#import-object-tml)
 
 
 # Get Tag
@@ -53,7 +54,7 @@ GetTagAsync(
 
 ## Response Type
 
-[`Task<Models.MetadataTagResponse>`](/doc/models/metadata-tag-response.md)
+[`Task<Models.MetadataTagResponse>`](../../doc/models/metadata-tag-response.md)
 
 ## Example Usage
 
@@ -69,32 +70,34 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Create Tag
 
 To programmatically create tags, use this endpoint
 
+Permission: Requires administration privilege
+
 ```csharp
 CreateTagAsync(
-    Models.ApiRestV2MetadataTagCreateRequest body)
+    Models.TspublicRestV2MetadataTagCreateRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.ApiRestV2MetadataTagCreateRequest`](/doc/models/api-rest-v2-metadata-tag-create-request.md) | Body, Required | - |
+| `body` | [`Models.TspublicRestV2MetadataTagCreateRequest`](../../doc/models/tspublic-rest-v2-metadata-tag-create-request.md) | Body, Required | - |
 
 ## Response Type
 
-[`Task<Models.MetadataTagResponse>`](/doc/models/metadata-tag-response.md)
+[`Task<Models.MetadataTagResponse>`](../../doc/models/metadata-tag-response.md)
 
 ## Example Usage
 
 ```csharp
-var body = new ApiRestV2MetadataTagCreateRequest();
+var body = new TspublicRestV2MetadataTagCreateRequest();
 body.Name = "name6";
 
 try
@@ -108,7 +111,7 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Update Tag
@@ -117,16 +120,18 @@ To programmatically update tags, use this endpoint.
 
 At least one of id or name of tag is required. When both are given, then id will be considered.
 
+Permission: Requires administration privilege
+
 ```csharp
 UpdateTagAsync(
-    Models.ApiRestV2MetadataTagUpdateRequest body)
+    Models.TspublicRestV2MetadataTagUpdateRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.ApiRestV2MetadataTagUpdateRequest`](/doc/models/api-rest-v2-metadata-tag-update-request.md) | Body, Required | - |
+| `body` | [`Models.TspublicRestV2MetadataTagUpdateRequest`](../../doc/models/tspublic-rest-v2-metadata-tag-update-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -135,7 +140,7 @@ UpdateTagAsync(
 ## Example Usage
 
 ```csharp
-var body = new ApiRestV2MetadataTagUpdateRequest();
+var body = new TspublicRestV2MetadataTagUpdateRequest();
 
 try
 {
@@ -148,7 +153,7 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Delete Tag
@@ -156,6 +161,8 @@ catch (ApiException e){};
 To programmatically delete tags, use this endpoint.
 
 At least one of id or name of tag is required. When both are given, then id will be considered.
+
+Permission: Requires administration privilege
 
 ```csharp
 DeleteTagAsync(
@@ -188,7 +195,7 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Assign Tag
@@ -197,16 +204,18 @@ To programmatically assign tags to a metadata object, such as a liveboard, searc
 
 At least one of id or name of tag is required. When both are given, then id will be considered.
 
+Permission: Requires at least view access to the object
+
 ```csharp
 AssignTagAsync(
-    Models.ApiRestV2MetadataTagAssignRequest body)
+    Models.TspublicRestV2MetadataTagAssignRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.ApiRestV2MetadataTagAssignRequest`](/doc/models/api-rest-v2-metadata-tag-assign-request.md) | Body, Required | - |
+| `body` | [`Models.TspublicRestV2MetadataTagAssignRequest`](../../doc/models/tspublic-rest-v2-metadata-tag-assign-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -215,18 +224,23 @@ AssignTagAsync(
 ## Example Usage
 
 ```csharp
-var body = new ApiRestV2MetadataTagAssignRequest();
-body.MetaObject = new List<MetaObjectInput>();
+var body = new TspublicRestV2MetadataTagAssignRequest();
+body.TsObject = new List<TsObjectInput>();
 
-var bodyMetaObject0 = new MetaObjectInput();
-bodyMetaObject0.Id = "id6";
-bodyMetaObject0.Type = TypeEnum.ANSWER;
-body.MetaObject.Add(bodyMetaObject0);
+var bodyTsObject0 = new TsObjectInput();
+bodyTsObject0.Id = "id8";
+bodyTsObject0.Type = TypeEnum.DATAOBJECT;
+body.TsObject.Add(bodyTsObject0);
 
-var bodyMetaObject1 = new MetaObjectInput();
-bodyMetaObject1.Id = "id7";
-bodyMetaObject1.Type = TypeEnum.LIVEBOARD;
-body.MetaObject.Add(bodyMetaObject1);
+var bodyTsObject1 = new TsObjectInput();
+bodyTsObject1.Id = "id9";
+bodyTsObject1.Type = TypeEnum.CONNECTION;
+body.TsObject.Add(bodyTsObject1);
+
+var bodyTsObject2 = new TsObjectInput();
+bodyTsObject2.Id = "id0";
+bodyTsObject2.Type = TypeEnum.ANSWER;
+body.TsObject.Add(bodyTsObject2);
 
 
 try
@@ -240,7 +254,7 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Unassign Tag
@@ -249,16 +263,18 @@ To programmatically unassign tags to a metadata object, such as a liveboard, sea
 
 At least one of id or name of tag is required. When both are given, then id will be considered.
 
+Permission: Requires at least view access to the object
+
 ```csharp
 UnassignTagAsync(
-    Models.ApiRestV2MetadataTagUnassignRequest body)
+    Models.TspublicRestV2MetadataTagUnassignRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.ApiRestV2MetadataTagUnassignRequest`](/doc/models/api-rest-v2-metadata-tag-unassign-request.md) | Body, Required | - |
+| `body` | [`Models.TspublicRestV2MetadataTagUnassignRequest`](../../doc/models/tspublic-rest-v2-metadata-tag-unassign-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -267,18 +283,23 @@ UnassignTagAsync(
 ## Example Usage
 
 ```csharp
-var body = new ApiRestV2MetadataTagUnassignRequest();
-body.MetaObject = new List<MetaObjectInput>();
+var body = new TspublicRestV2MetadataTagUnassignRequest();
+body.TsObject = new List<TsObjectInput>();
 
-var bodyMetaObject0 = new MetaObjectInput();
-bodyMetaObject0.Id = "id6";
-bodyMetaObject0.Type = TypeEnum.ANSWER;
-body.MetaObject.Add(bodyMetaObject0);
+var bodyTsObject0 = new TsObjectInput();
+bodyTsObject0.Id = "id8";
+bodyTsObject0.Type = TypeEnum.DATAOBJECT;
+body.TsObject.Add(bodyTsObject0);
 
-var bodyMetaObject1 = new MetaObjectInput();
-bodyMetaObject1.Id = "id7";
-bodyMetaObject1.Type = TypeEnum.LIVEBOARD;
-body.MetaObject.Add(bodyMetaObject1);
+var bodyTsObject1 = new TsObjectInput();
+bodyTsObject1.Id = "id9";
+bodyTsObject1.Type = TypeEnum.CONNECTION;
+body.TsObject.Add(bodyTsObject1);
+
+var bodyTsObject2 = new TsObjectInput();
+bodyTsObject2.Id = "id0";
+bodyTsObject2.Type = TypeEnum.ANSWER;
+body.TsObject.Add(bodyTsObject2);
 
 
 try
@@ -292,25 +313,27 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Assign Favorite
 
 To programmatically assign objects to favorites for a given user account, use this endpoint.
 
-At least one of user id or username is required. When both are given, then id will be considered
+At least one of user id or username is required. When both are given, then id will be considered.
+
+Permission: Requires at least view access to the object
 
 ```csharp
 AssignFavoriteAsync(
-    Models.ApiRestV2MetadataFavoriteAssignRequest body)
+    Models.TspublicRestV2MetadataFavoriteAssignRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.ApiRestV2MetadataFavoriteAssignRequest`](/doc/models/api-rest-v2-metadata-favorite-assign-request.md) | Body, Required | - |
+| `body` | [`Models.TspublicRestV2MetadataFavoriteAssignRequest`](../../doc/models/tspublic-rest-v2-metadata-favorite-assign-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -319,18 +342,23 @@ AssignFavoriteAsync(
 ## Example Usage
 
 ```csharp
-var body = new ApiRestV2MetadataFavoriteAssignRequest();
-body.MetaObject = new List<MetaObjectInput>();
+var body = new TspublicRestV2MetadataFavoriteAssignRequest();
+body.TsObject = new List<TsObjectInput>();
 
-var bodyMetaObject0 = new MetaObjectInput();
-bodyMetaObject0.Id = "id6";
-bodyMetaObject0.Type = TypeEnum.ANSWER;
-body.MetaObject.Add(bodyMetaObject0);
+var bodyTsObject0 = new TsObjectInput();
+bodyTsObject0.Id = "id8";
+bodyTsObject0.Type = TypeEnum.DATAOBJECT;
+body.TsObject.Add(bodyTsObject0);
 
-var bodyMetaObject1 = new MetaObjectInput();
-bodyMetaObject1.Id = "id7";
-bodyMetaObject1.Type = TypeEnum.LIVEBOARD;
-body.MetaObject.Add(bodyMetaObject1);
+var bodyTsObject1 = new TsObjectInput();
+bodyTsObject1.Id = "id9";
+bodyTsObject1.Type = TypeEnum.CONNECTION;
+body.TsObject.Add(bodyTsObject1);
+
+var bodyTsObject2 = new TsObjectInput();
+bodyTsObject2.Id = "id0";
+bodyTsObject2.Type = TypeEnum.ANSWER;
+body.TsObject.Add(bodyTsObject2);
 
 
 try
@@ -344,7 +372,7 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Unassign Favorite
@@ -353,16 +381,18 @@ To programmatically unassign objects to favorites for a given user account, use 
 
 At least one of user id or username is required. When both are given, then id will be considered. Screen reader support enabled.
 
+Permission: Requires at least view access to the object
+
 ```csharp
 UnassignFavoriteAsync(
-    Models.ApiRestV2MetadataFavoriteUnassignRequest body)
+    Models.TspublicRestV2MetadataFavoriteUnassignRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.ApiRestV2MetadataFavoriteUnassignRequest`](/doc/models/api-rest-v2-metadata-favorite-unassign-request.md) | Body, Required | - |
+| `body` | [`Models.TspublicRestV2MetadataFavoriteUnassignRequest`](../../doc/models/tspublic-rest-v2-metadata-favorite-unassign-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -371,18 +401,23 @@ UnassignFavoriteAsync(
 ## Example Usage
 
 ```csharp
-var body = new ApiRestV2MetadataFavoriteUnassignRequest();
-body.MetaObject = new List<MetaObjectInput>();
+var body = new TspublicRestV2MetadataFavoriteUnassignRequest();
+body.TsObject = new List<TsObjectInput>();
 
-var bodyMetaObject0 = new MetaObjectInput();
-bodyMetaObject0.Id = "id6";
-bodyMetaObject0.Type = TypeEnum.ANSWER;
-body.MetaObject.Add(bodyMetaObject0);
+var bodyTsObject0 = new TsObjectInput();
+bodyTsObject0.Id = "id8";
+bodyTsObject0.Type = TypeEnum.DATAOBJECT;
+body.TsObject.Add(bodyTsObject0);
 
-var bodyMetaObject1 = new MetaObjectInput();
-bodyMetaObject1.Id = "id7";
-bodyMetaObject1.Type = TypeEnum.LIVEBOARD;
-body.MetaObject.Add(bodyMetaObject1);
+var bodyTsObject1 = new TsObjectInput();
+bodyTsObject1.Id = "id9";
+bodyTsObject1.Type = TypeEnum.CONNECTION;
+body.TsObject.Add(bodyTsObject1);
+
+var bodyTsObject2 = new TsObjectInput();
+bodyTsObject2.Id = "id0";
+bodyTsObject2.Type = TypeEnum.ANSWER;
+body.TsObject.Add(bodyTsObject2);
 
 
 try
@@ -396,17 +431,19 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Get Homeliveboard
+# Get Home Liveboard
 
 To get the name and id of liveboard that is set as a home liveboard for a user, use this endpoint.
 
 At least one of user id or username is required. When both are given, then id will be considered.
 
+Permission: Requires at least view access to the object
+
 ```csharp
-GetHomeliveboardAsync(
+GetHomeLiveboardAsync(
     string userName = null,
     string userId = null)
 ```
@@ -420,14 +457,14 @@ GetHomeliveboardAsync(
 
 ## Response Type
 
-[`Task<Models.HomeLiveboardResponse>`](/doc/models/home-liveboard-response.md)
+[`Task<Models.HomeLiveboardResponse>`](../../doc/models/home-liveboard-response.md)
 
 ## Example Usage
 
 ```csharp
 try
 {
-    HomeLiveboardResponse result = await metadataController.GetHomeliveboardAsync(null, null);
+    HomeLiveboardResponse result = await metadataController.GetHomeLiveboardAsync(null, null);
 }
 catch (ApiException e){};
 ```
@@ -436,25 +473,27 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Assign Homeliveboard
+# Assign Home Liveboard
 
 To assign a specific liveboard as a home liveboard for a user, use this endpoint.
 
 At least one of user id or username is required. When both are given, then id will be considered.
 
+Permission: Requires at least view access to the object
+
 ```csharp
-AssignHomeliveboardAsync(
-    Models.ApiRestV2MetadataHomeliveboardAssignRequest body)
+AssignHomeLiveboardAsync(
+    Models.TspublicRestV2MetadataHomeliveboardAssignRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.ApiRestV2MetadataHomeliveboardAssignRequest`](/doc/models/api-rest-v2-metadata-homeliveboard-assign-request.md) | Body, Required | - |
+| `body` | [`Models.TspublicRestV2MetadataHomeliveboardAssignRequest`](../../doc/models/tspublic-rest-v2-metadata-homeliveboard-assign-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -463,11 +502,11 @@ AssignHomeliveboardAsync(
 ## Example Usage
 
 ```csharp
-var body = new ApiRestV2MetadataHomeliveboardAssignRequest();
+var body = new TspublicRestV2MetadataHomeliveboardAssignRequest();
 
 try
 {
-    bool? result = await metadataController.AssignHomeliveboardAsync(body);
+    bool? result = await metadataController.AssignHomeLiveboardAsync(body);
 }
 catch (ApiException e){};
 ```
@@ -476,25 +515,27 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Unassign Homeliveboard
+# Unassign Home Liveboard
 
 To unassign the home liveboard set for a user, use this endpoint.
 
 At least one of user id or username is required. When both are given, then id will be considered.
 
+Permission: Requires at least view access to the object
+
 ```csharp
-UnassignHomeliveboardAsync(
-    Models.ApiRestV2MetadataHomeliveboardUnassignRequest body)
+UnassignHomeLiveboardAsync(
+    Models.TspublicRestV2MetadataHomeliveboardUnassignRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.ApiRestV2MetadataHomeliveboardUnassignRequest`](/doc/models/api-rest-v2-metadata-homeliveboard-unassign-request.md) | Body, Required | - |
+| `body` | [`Models.TspublicRestV2MetadataHomeliveboardUnassignRequest`](../../doc/models/tspublic-rest-v2-metadata-homeliveboard-unassign-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -503,11 +544,11 @@ UnassignHomeliveboardAsync(
 ## Example Usage
 
 ```csharp
-var body = new ApiRestV2MetadataHomeliveboardUnassignRequest();
+var body = new TspublicRestV2MetadataHomeliveboardUnassignRequest();
 
 try
 {
-    bool? result = await metadataController.UnassignHomeliveboardAsync(body);
+    bool? result = await metadataController.UnassignHomeLiveboardAsync(body);
 }
 catch (ApiException e){};
 ```
@@ -516,7 +557,7 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Get Incomplete Objects
@@ -545,16 +586,18 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Get Metadata Header
+# Get Object Header
 
 To get header detail of a metadata object, use this endpoint. You can provide as input selective fields to get the data for.
 
+Permission: Requires administration privilege for USER and USER_GROUP type. Requires datamanagement privilege for CONNECTION type. Requires at least view access for other object types
+
 ```csharp
-GetMetadataHeaderAsync(
-    Models.Type8Enum type,
+GetObjectHeaderAsync(
+    Models.Type9Enum type,
     string id,
     List<string> outputFields = null)
 ```
@@ -563,7 +606,7 @@ GetMetadataHeaderAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `type` | [`Models.Type8Enum`](/doc/models/type-8-enum.md) | Query, Required | Type of the metadata object being searched. |
+| `type` | [`Models.Type9Enum`](../../doc/models/type-9-enum.md) | Query, Required | Type of the metadata object being searched. |
 | `id` | `string` | Query, Required | GUID of the metadata object |
 | `outputFields` | `List<string>` | Query, Optional | Array of header field names that need to be included in the header response |
 
@@ -574,12 +617,12 @@ GetMetadataHeaderAsync(
 ## Example Usage
 
 ```csharp
-Type8Enum type = Type8Enum.COLUMNALL;
+Type9Enum type = Type9Enum.COLUMNALL;
 string id = "id0";
 
 try
 {
-    object result = await metadataController.GetMetadataHeaderAsync(type, id, null);
+    object result = await metadataController.GetObjectHeaderAsync(type, id, null);
 }
 catch (ApiException e){};
 ```
@@ -588,31 +631,27 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Get Object Detail
 
-Use this endpoint to get full details of metadata objects
+Use this endpoint to get full details of metadata objects.
+
+Permission: Requires administration privilege for USER and USER_GROUP type. Requires datamanagement privilege for CONNECTION type. Requires at least view access to other object types
 
 ```csharp
 GetObjectDetailAsync(
-    Models.Type9Enum type,
-    List<string> id,
-    bool? showHidden = null,
-    bool? dropQuestionDetails = null,
-    string version = null)
+    Models.Type10Enum type,
+    List<string> id)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `type` | [`Models.Type9Enum`](/doc/models/type-9-enum.md) | Query, Required | Type of the metadata object being searched. Valid values |
+| `type` | [`Models.Type10Enum`](../../doc/models/type-10-enum.md) | Query, Required | Type of the metadata object being searched. Valid values |
 | `id` | `List<string>` | Query, Required | A JSON array of GUIDs of the objects. |
-| `showHidden` | `bool?` | Query, Optional | When set to true, returns details of the hidden objects, such as a column in a worksheet or a table. |
-| `dropQuestionDetails` | `bool?` | Query, Optional | When set to true, the search assist data associated with a worksheet is not included in the API response. This attribute is applicable only for LOGICAL_TABLE data type. |
-| `version` | `string` | Query, Optional | Specify the version to retrieve the objects from. By default, the API returns metadata for all versions of the object. |
 
 ## Response Type
 
@@ -621,13 +660,13 @@ GetObjectDetailAsync(
 ## Example Usage
 
 ```csharp
-Type9Enum type = Type9Enum.DATAOBJECT;
+Type10Enum type = Type10Enum.DATAOBJECT;
 var id = new List<string>();
 id.Add("id0");
 
 try
 {
-    object result = await metadataController.GetObjectDetailAsync(type, id, null, null, null);
+    object result = await metadataController.GetObjectDetailAsync(type, id);
 }
 catch (ApiException e){};
 ```
@@ -636,7 +675,7 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Get Object Visualization Header
@@ -644,6 +683,8 @@ catch (ApiException e){};
 Use this endpoint to get header details of visualization charts for a given liveboard or answer.
 
 At least one of id or name of liveboard or answer is required. When both are given, then id will be considered.
+
+Permission: Requires at least view access to the object
 
 ```csharp
 GetObjectVisualizationHeaderAsync(
@@ -676,23 +717,25 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Search Object Header
 
 To get header details for metadata objects, use this endpoint. You can provide as input selective fields to get the data for.
 
+Permission: Requires administration privilege for USER and USER_GROUP type. Requires datamanagement privilege for CONNECTION type. Requires at least view access for other object types
+
 ```csharp
 SearchObjectHeaderAsync(
-    Models.ApiRestV2MetadataHeaderSearchRequest body)
+    Models.TspublicRestV2MetadataHeaderSearchRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.ApiRestV2MetadataHeaderSearchRequest`](/doc/models/api-rest-v2-metadata-header-search-request.md) | Body, Required | - |
+| `body` | [`Models.TspublicRestV2MetadataHeaderSearchRequest`](../../doc/models/tspublic-rest-v2-metadata-header-search-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -701,8 +744,8 @@ SearchObjectHeaderAsync(
 ## Example Usage
 
 ```csharp
-var body = new ApiRestV2MetadataHeaderSearchRequest();
-body.Type = Type10Enum.USER;
+var body = new TspublicRestV2MetadataHeaderSearchRequest();
+body.Type = Type11Enum.USER;
 
 try
 {
@@ -715,16 +758,62 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Delete Metadata Object
+# Search Object Detail
 
-Use this endpoint to delete the metadata objects
+Use this endpoint to get full details of metadata objects.
+
+Permission: Requires administration privilege for USER and USER_GROUP type. Requires datamanagement privilege for CONNECTION type. Requires at least view access for other object types
 
 ```csharp
-DeleteMetadataObjectAsync(
-    Models.Type9Enum type,
+SearchObjectDetailAsync(
+    Models.TspublicRestV2MetadataDetailSearchRequest body)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`Models.TspublicRestV2MetadataDetailSearchRequest`](../../doc/models/tspublic-rest-v2-metadata-detail-search-request.md) | Body, Required | - |
+
+## Response Type
+
+`Task<object>`
+
+## Example Usage
+
+```csharp
+var body = new TspublicRestV2MetadataDetailSearchRequest();
+body.Type = Type12Enum.USER;
+body.Id = new List<string>();
+body.Id.Add("id6");
+body.Id.Add("id7");
+
+try
+{
+    object result = await metadataController.SearchObjectDetailAsync(body);
+}
+catch (ApiException e){};
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+
+
+# Delete Object
+
+Use this endpoint to delete the metadata objects.
+
+Permission: Requires modify access to the object
+
+```csharp
+DeleteObjectAsync(
+    Models.Type10Enum type,
     List<string> id)
 ```
 
@@ -732,7 +821,7 @@ DeleteMetadataObjectAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `type` | [`Models.Type9Enum`](/doc/models/type-9-enum.md) | Query, Required | Type of the metadata object being searched. |
+| `type` | [`Models.Type10Enum`](../../doc/models/type-10-enum.md) | Query, Required | Type of the metadata object being searched. |
 | `id` | `List<string>` | Query, Required | A JSON array of GUIDs of the objects. |
 
 ## Response Type
@@ -742,13 +831,13 @@ DeleteMetadataObjectAsync(
 ## Example Usage
 
 ```csharp
-Type9Enum type = Type9Enum.DATAOBJECT;
+Type10Enum type = Type10Enum.DATAOBJECT;
 var id = new List<string>();
 id.Add("id0");
 
 try
 {
-    bool? result = await metadataController.DeleteMetadataObjectAsync(type, id);
+    bool? result = await metadataController.DeleteObjectAsync(type, id);
 }
 catch (ApiException e){};
 ```
@@ -757,7 +846,7 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Get Object Dependency
@@ -774,16 +863,18 @@ W1 has a dependency on C2 i.e. W1 is a referencing object and C2 is a referenced
 
 Similarly C1 is said to have a dependency on C2 i.e. C1 is a referencing object and C2 is a referenced object. It is not possible to delete C2 without first deleting C1
 
+Permission: Requires at least view access to the object
+
 ```csharp
 GetObjectDependencyAsync(
-    Models.ApiRestV2MetadataDependencyRequest body)
+    Models.TspublicRestV2MetadataDependencyRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.ApiRestV2MetadataDependencyRequest`](/doc/models/api-rest-v2-metadata-dependency-request.md) | Body, Required | - |
+| `body` | [`Models.TspublicRestV2MetadataDependencyRequest`](../../doc/models/tspublic-rest-v2-metadata-dependency-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -792,8 +883,8 @@ GetObjectDependencyAsync(
 ## Example Usage
 
 ```csharp
-var body = new ApiRestV2MetadataDependencyRequest();
-body.Type = Type12Enum.COLUMN;
+var body = new TspublicRestV2MetadataDependencyRequest();
+body.Type = Type14Enum.COLUMN;
 body.Id = new List<string>();
 body.Id.Add("id6");
 body.Id.Add("id7");
@@ -809,23 +900,25 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Export Object TML
 
-To export ThoughtSpot objects represented in ThoughtSpot Modeling Language (TML), use this endpoint
+To export ThoughtSpot objects represented in ThoughtSpot Modeling Language (TML), use this endpoint.
+
+Permission: Requires at least view access to the object
 
 ```csharp
 ExportObjectTMLAsync(
-    Models.ApiRestV2MetadataTmlExportRequest body)
+    Models.TspublicRestV2MetadataTmlExportRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.ApiRestV2MetadataTmlExportRequest`](/doc/models/api-rest-v2-metadata-tml-export-request.md) | Body, Required | - |
+| `body` | [`Models.TspublicRestV2MetadataTmlExportRequest`](../../doc/models/tspublic-rest-v2-metadata-tml-export-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -834,7 +927,7 @@ ExportObjectTMLAsync(
 ## Example Usage
 
 ```csharp
-var body = new ApiRestV2MetadataTmlExportRequest();
+var body = new TspublicRestV2MetadataTmlExportRequest();
 body.Id = new List<string>();
 body.Id.Add("id6");
 body.Id.Add("id7");
@@ -850,23 +943,25 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Import Object TML
 
-To import ThoughtSpot objects represented in ThoughtSpot Modeling Language (TML), use this endpoint
+To import ThoughtSpot objects represented in ThoughtSpot Modeling Language (TML), use this endpoint.
+
+Permission: Requires datamanagement privilge
 
 ```csharp
 ImportObjectTMLAsync(
-    Models.ApiRestV2MetadataTmlImportRequest body)
+    Models.TspublicRestV2MetadataTmlImportRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.ApiRestV2MetadataTmlImportRequest`](/doc/models/api-rest-v2-metadata-tml-import-request.md) | Body, Required | - |
+| `body` | [`Models.TspublicRestV2MetadataTmlImportRequest`](../../doc/models/tspublic-rest-v2-metadata-tml-import-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -875,7 +970,7 @@ ImportObjectTMLAsync(
 ## Example Usage
 
 ```csharp
-var body = new ApiRestV2MetadataTmlImportRequest();
+var body = new TspublicRestV2MetadataTmlImportRequest();
 body.ObjectTML = new List<string>();
 body.ObjectTML.Add("objectTML5");
 body.ObjectTML.Add("objectTML6");
@@ -891,5 +986,5 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 

@@ -64,8 +64,8 @@ namespace RESTAPISDK.Standard.Models
             bool? isDeleted = null,
             bool? isHidden = null,
             bool? complete = null,
-            int? indexVersion = null,
-            int? generationNum = null,
+            double? indexVersion = null,
+            double? generationNum = null,
             string created = null,
             string modified = null,
             Models.UserNameAndID author = null,
@@ -110,7 +110,7 @@ namespace RESTAPISDK.Standard.Models
         public string Description { get; set; }
 
         /// <summary>
-        /// Type of the connection. The database associated with this type can be obtained from the response returned by the /api/rest/v2/connection/types API endpoint.
+        /// Type of the connection. The database associated with this type can be obtained from the response returned by the /tspublic/rest/v2/connection/types API endpoint.
         /// </summary>
         [JsonProperty("type", NullValueHandling = NullValueHandling.Ignore)]
         public string Type { get; set; }
@@ -173,13 +173,13 @@ namespace RESTAPISDK.Standard.Models
         /// Gets or sets IndexVersion.
         /// </summary>
         [JsonProperty("indexVersion", NullValueHandling = NullValueHandling.Ignore)]
-        public int? IndexVersion { get; set; }
+        public double? IndexVersion { get; set; }
 
         /// <summary>
         /// Gets or sets GenerationNum.
         /// </summary>
         [JsonProperty("generationNum", NullValueHandling = NullValueHandling.Ignore)]
-        public int? GenerationNum { get; set; }
+        public double? GenerationNum { get; set; }
 
         /// <summary>
         /// Date and time when the connection was created

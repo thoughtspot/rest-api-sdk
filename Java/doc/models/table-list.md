@@ -18,13 +18,13 @@
 | `IsDeprecated` | `Boolean` | Optional | Indicates if the table is deprecated | Boolean getIsDeprecated() | setIsDeprecated(Boolean isDeprecated) |
 | `IsDeleted` | `Boolean` | Optional | Indicates if the table is deleted | Boolean getIsDeleted() | setIsDeleted(Boolean isDeleted) |
 | `IsHidden` | `Boolean` | Optional | Indicates if the table is hideen | Boolean getIsHidden() | setIsHidden(Boolean isHidden) |
-| `IndexVersion` | `Integer` | Optional | - | Integer getIndexVersion() | setIndexVersion(Integer indexVersion) |
-| `GenerationNum` | `Integer` | Optional | - | Integer getGenerationNum() | setGenerationNum(Integer generationNum) |
+| `IndexVersion` | `Double` | Optional | - | Double getIndexVersion() | setIndexVersion(Double indexVersion) |
+| `GenerationNum` | `Double` | Optional | - | Double getGenerationNum() | setGenerationNum(Double generationNum) |
 | `Created` | `String` | Optional | Date and time when the table was created | String getCreated() | setCreated(String created) |
 | `Modified` | `String` | Optional | Date and time of last modification of the table | String getModified() | setModified(String modified) |
-| `Author` | [`UserNameAndID`](/doc/models/user-name-and-id.md) | Optional | - | UserNameAndID getAuthor() | setAuthor(UserNameAndID author) |
-| `ModifiedBy` | [`UserNameAndID`](/doc/models/user-name-and-id.md) | Optional | - | UserNameAndID getModifiedBy() | setModifiedBy(UserNameAndID modifiedBy) |
-| `Owner` | [`UserNameAndID`](/doc/models/user-name-and-id.md) | Optional | - | UserNameAndID getOwner() | setOwner(UserNameAndID owner) |
+| `Author` | [`UserNameAndID`](../../doc/models/user-name-and-id.md) | Optional | - | UserNameAndID getAuthor() | setAuthor(UserNameAndID author) |
+| `ModifiedBy` | [`UserNameAndID`](../../doc/models/user-name-and-id.md) | Optional | - | UserNameAndID getModifiedBy() | setModifiedBy(UserNameAndID modifiedBy) |
+| `Owner` | [`UserNameAndID`](../../doc/models/user-name-and-id.md) | Optional | - | UserNameAndID getOwner() | setOwner(UserNameAndID owner) |
 | `Tags` | `List<String>` | Optional | List of tags assigned to the table | List<String> getTags() | setTags(List<String> tags) |
 
 ## Example (as JSON)

@@ -7,54 +7,6 @@
 import { ApiResponse, RequestOptions } from '../core';
 import { ErrorResponseError } from '../errors/errorResponseError';
 import {
-  ApiRestV2MetadataDependencyRequest,
-  apiRestV2MetadataDependencyRequestSchema,
-} from '../models/apiRestV2MetadataDependencyRequest';
-import {
-  ApiRestV2MetadataFavoriteAssignRequest,
-  apiRestV2MetadataFavoriteAssignRequestSchema,
-} from '../models/apiRestV2MetadataFavoriteAssignRequest';
-import {
-  ApiRestV2MetadataFavoriteUnassignRequest,
-  apiRestV2MetadataFavoriteUnassignRequestSchema,
-} from '../models/apiRestV2MetadataFavoriteUnassignRequest';
-import {
-  ApiRestV2MetadataHeaderSearchRequest,
-  apiRestV2MetadataHeaderSearchRequestSchema,
-} from '../models/apiRestV2MetadataHeaderSearchRequest';
-import {
-  ApiRestV2MetadataHomeliveboardAssignRequest,
-  apiRestV2MetadataHomeliveboardAssignRequestSchema,
-} from '../models/apiRestV2MetadataHomeliveboardAssignRequest';
-import {
-  ApiRestV2MetadataHomeliveboardUnassignRequest,
-  apiRestV2MetadataHomeliveboardUnassignRequestSchema,
-} from '../models/apiRestV2MetadataHomeliveboardUnassignRequest';
-import {
-  ApiRestV2MetadataTagAssignRequest,
-  apiRestV2MetadataTagAssignRequestSchema,
-} from '../models/apiRestV2MetadataTagAssignRequest';
-import {
-  ApiRestV2MetadataTagCreateRequest,
-  apiRestV2MetadataTagCreateRequestSchema,
-} from '../models/apiRestV2MetadataTagCreateRequest';
-import {
-  ApiRestV2MetadataTagUnassignRequest,
-  apiRestV2MetadataTagUnassignRequestSchema,
-} from '../models/apiRestV2MetadataTagUnassignRequest';
-import {
-  ApiRestV2MetadataTagUpdateRequest,
-  apiRestV2MetadataTagUpdateRequestSchema,
-} from '../models/apiRestV2MetadataTagUpdateRequest';
-import {
-  ApiRestV2MetadataTmlExportRequest,
-  apiRestV2MetadataTmlExportRequestSchema,
-} from '../models/apiRestV2MetadataTmlExportRequest';
-import {
-  ApiRestV2MetadataTmlImportRequest,
-  apiRestV2MetadataTmlImportRequestSchema,
-} from '../models/apiRestV2MetadataTmlImportRequest';
-import {
   HomeLiveboardResponse,
   homeLiveboardResponseSchema,
 } from '../models/homeLiveboardResponse';
@@ -62,7 +14,59 @@ import {
   MetadataTagResponse,
   metadataTagResponseSchema,
 } from '../models/metadataTagResponse';
-import { Type8Enum, type8EnumSchema } from '../models/type8Enum';
+import {
+  TspublicRestV2MetadataDependencyRequest,
+  tspublicRestV2MetadataDependencyRequestSchema,
+} from '../models/tspublicRestV2MetadataDependencyRequest';
+import {
+  TspublicRestV2MetadataDetailSearchRequest,
+  tspublicRestV2MetadataDetailSearchRequestSchema,
+} from '../models/tspublicRestV2MetadataDetailSearchRequest';
+import {
+  TspublicRestV2MetadataFavoriteAssignRequest,
+  tspublicRestV2MetadataFavoriteAssignRequestSchema,
+} from '../models/tspublicRestV2MetadataFavoriteAssignRequest';
+import {
+  TspublicRestV2MetadataFavoriteUnassignRequest,
+  tspublicRestV2MetadataFavoriteUnassignRequestSchema,
+} from '../models/tspublicRestV2MetadataFavoriteUnassignRequest';
+import {
+  TspublicRestV2MetadataHeaderSearchRequest,
+  tspublicRestV2MetadataHeaderSearchRequestSchema,
+} from '../models/tspublicRestV2MetadataHeaderSearchRequest';
+import {
+  TspublicRestV2MetadataHomeliveboardAssignRequest,
+  tspublicRestV2MetadataHomeliveboardAssignRequestSchema,
+} from '../models/tspublicRestV2MetadataHomeliveboardAssignRequest';
+import {
+  TspublicRestV2MetadataHomeliveboardUnassignRequest,
+  tspublicRestV2MetadataHomeliveboardUnassignRequestSchema,
+} from '../models/tspublicRestV2MetadataHomeliveboardUnassignRequest';
+import {
+  TspublicRestV2MetadataTagAssignRequest,
+  tspublicRestV2MetadataTagAssignRequestSchema,
+} from '../models/tspublicRestV2MetadataTagAssignRequest';
+import {
+  TspublicRestV2MetadataTagCreateRequest,
+  tspublicRestV2MetadataTagCreateRequestSchema,
+} from '../models/tspublicRestV2MetadataTagCreateRequest';
+import {
+  TspublicRestV2MetadataTagUnassignRequest,
+  tspublicRestV2MetadataTagUnassignRequestSchema,
+} from '../models/tspublicRestV2MetadataTagUnassignRequest';
+import {
+  TspublicRestV2MetadataTagUpdateRequest,
+  tspublicRestV2MetadataTagUpdateRequestSchema,
+} from '../models/tspublicRestV2MetadataTagUpdateRequest';
+import {
+  TspublicRestV2MetadataTmlExportRequest,
+  tspublicRestV2MetadataTmlExportRequestSchema,
+} from '../models/tspublicRestV2MetadataTmlExportRequest';
+import {
+  TspublicRestV2MetadataTmlImportRequest,
+  tspublicRestV2MetadataTmlImportRequestSchema,
+} from '../models/tspublicRestV2MetadataTmlImportRequest';
+import { Type10Enum, type10EnumSchema } from '../models/type10Enum';
 import { Type9Enum, type9EnumSchema } from '../models/type9Enum';
 import { array, boolean, optional, string, unknown } from '../schema';
 import { BaseController } from './baseController';
@@ -82,7 +86,7 @@ export class MetadataController extends BaseController {
     id?: string,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<MetadataTagResponse>> {
-    const req = this.createRequest('GET', '/api/rest/v2/metadata/tag');
+    const req = this.createRequest('GET', '/tspublic/rest/v2/metadata/tag');
     const mapped = req.prepareArgs({
       name: [name, optional(string())],
       id: [id, optional(string())],
@@ -96,16 +100,21 @@ export class MetadataController extends BaseController {
   /**
    * To programmatically create tags, use this endpoint
    *
+   * Permission: Requires administration privilege
+   *
    * @param body
    * @return Response from the API call
    */
   async createTag(
-    body: ApiRestV2MetadataTagCreateRequest,
+    body: TspublicRestV2MetadataTagCreateRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<MetadataTagResponse>> {
-    const req = this.createRequest('POST', '/api/rest/v2/metadata/tag/create');
+    const req = this.createRequest(
+      'POST',
+      '/tspublic/rest/v2/metadata/tag/create'
+    );
     const mapped = req.prepareArgs({
-      body: [body, apiRestV2MetadataTagCreateRequestSchema],
+      body: [body, tspublicRestV2MetadataTagCreateRequestSchema],
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
@@ -118,16 +127,21 @@ export class MetadataController extends BaseController {
    *
    * At least one of id or name of tag is required. When both are given, then id will be considered.
    *
+   * Permission: Requires administration privilege
+   *
    * @param body
    * @return Response from the API call
    */
   async updateTag(
-    body: ApiRestV2MetadataTagUpdateRequest,
+    body: TspublicRestV2MetadataTagUpdateRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<boolean>> {
-    const req = this.createRequest('PUT', '/api/rest/v2/metadata/tag/update');
+    const req = this.createRequest(
+      'PUT',
+      '/tspublic/rest/v2/metadata/tag/update'
+    );
     const mapped = req.prepareArgs({
-      body: [body, apiRestV2MetadataTagUpdateRequestSchema],
+      body: [body, tspublicRestV2MetadataTagUpdateRequestSchema],
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
@@ -140,6 +154,8 @@ export class MetadataController extends BaseController {
    *
    * At least one of id or name of tag is required. When both are given, then id will be considered.
    *
+   * Permission: Requires administration privilege
+   *
    * @param name Name of the tag
    * @param id   The GUID of the tag
    * @return Response from the API call
@@ -151,7 +167,7 @@ export class MetadataController extends BaseController {
   ): Promise<ApiResponse<boolean>> {
     const req = this.createRequest(
       'DELETE',
-      '/api/rest/v2/metadata/tag/delete'
+      '/tspublic/rest/v2/metadata/tag/delete'
     );
     const mapped = req.prepareArgs({
       name: [name, optional(string())],
@@ -169,16 +185,21 @@ export class MetadataController extends BaseController {
    *
    * At least one of id or name of tag is required. When both are given, then id will be considered.
    *
+   * Permission: Requires at least view access to the object
+   *
    * @param body
    * @return Response from the API call
    */
   async assignTag(
-    body: ApiRestV2MetadataTagAssignRequest,
+    body: TspublicRestV2MetadataTagAssignRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<boolean>> {
-    const req = this.createRequest('POST', '/api/rest/v2/metadata/tag/assign');
+    const req = this.createRequest(
+      'PUT',
+      '/tspublic/rest/v2/metadata/tag/assign'
+    );
     const mapped = req.prepareArgs({
-      body: [body, apiRestV2MetadataTagAssignRequestSchema],
+      body: [body, tspublicRestV2MetadataTagAssignRequestSchema],
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
@@ -192,19 +213,21 @@ export class MetadataController extends BaseController {
    *
    * At least one of id or name of tag is required. When both are given, then id will be considered.
    *
+   * Permission: Requires at least view access to the object
+   *
    * @param body
    * @return Response from the API call
    */
   async unassignTag(
-    body: ApiRestV2MetadataTagUnassignRequest,
+    body: TspublicRestV2MetadataTagUnassignRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<boolean>> {
     const req = this.createRequest(
-      'POST',
-      '/api/rest/v2/metadata/tag/unassign'
+      'PUT',
+      '/tspublic/rest/v2/metadata/tag/unassign'
     );
     const mapped = req.prepareArgs({
-      body: [body, apiRestV2MetadataTagUnassignRequestSchema],
+      body: [body, tspublicRestV2MetadataTagUnassignRequestSchema],
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
@@ -215,21 +238,23 @@ export class MetadataController extends BaseController {
   /**
    * To programmatically assign objects to favorites for a given user account, use this endpoint.
    *
-   * At least one of user id or username is required. When both are given, then id will be considered
+   * At least one of user id or username is required. When both are given, then id will be considered.
+   *
+   * Permission: Requires at least view access to the object
    *
    * @param body
    * @return Response from the API call
    */
   async assignFavorite(
-    body: ApiRestV2MetadataFavoriteAssignRequest,
+    body: TspublicRestV2MetadataFavoriteAssignRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<boolean>> {
     const req = this.createRequest(
-      'POST',
-      '/api/rest/v2/metadata/favorite/assign'
+      'PUT',
+      '/tspublic/rest/v2/metadata/favorite/assign'
     );
     const mapped = req.prepareArgs({
-      body: [body, apiRestV2MetadataFavoriteAssignRequestSchema],
+      body: [body, tspublicRestV2MetadataFavoriteAssignRequestSchema],
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
@@ -243,19 +268,21 @@ export class MetadataController extends BaseController {
    * At least one of user id or username is required. When both are given, then id will be considered.
    * Screen reader support enabled.
    *
+   * Permission: Requires at least view access to the object
+   *
    * @param body
    * @return Response from the API call
    */
   async unassignFavorite(
-    body: ApiRestV2MetadataFavoriteUnassignRequest,
+    body: TspublicRestV2MetadataFavoriteUnassignRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<boolean>> {
     const req = this.createRequest(
-      'POST',
-      '/api/rest/v2/metadata/favorite/unassign'
+      'PUT',
+      '/tspublic/rest/v2/metadata/favorite/unassign'
     );
     const mapped = req.prepareArgs({
-      body: [body, apiRestV2MetadataFavoriteUnassignRequestSchema],
+      body: [body, tspublicRestV2MetadataFavoriteUnassignRequestSchema],
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
@@ -268,18 +295,20 @@ export class MetadataController extends BaseController {
    *
    * At least one of user id or username is required. When both are given, then id will be considered.
    *
+   * Permission: Requires at least view access to the object
+   *
    * @param userName
    * @param userId   The GUID of the user
    * @return Response from the API call
    */
-  async getHomeliveboard(
+  async getHomeLiveboard(
     userName?: string,
     userId?: string,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<HomeLiveboardResponse>> {
     const req = this.createRequest(
       'GET',
-      '/api/rest/v2/metadata/homeliveboard'
+      '/tspublic/rest/v2/metadata/homeliveboard'
     );
     const mapped = req.prepareArgs({
       userName: [userName, optional(string())],
@@ -296,19 +325,21 @@ export class MetadataController extends BaseController {
    *
    * At least one of user id or username is required. When both are given, then id will be considered.
    *
+   * Permission: Requires at least view access to the object
+   *
    * @param body
    * @return Response from the API call
    */
-  async assignHomeliveboard(
-    body: ApiRestV2MetadataHomeliveboardAssignRequest,
+  async assignHomeLiveboard(
+    body: TspublicRestV2MetadataHomeliveboardAssignRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<boolean>> {
     const req = this.createRequest(
-      'POST',
-      '/api/rest/v2/metadata/homeliveboard/assign'
+      'PUT',
+      '/tspublic/rest/v2/metadata/homeliveboard/assign'
     );
     const mapped = req.prepareArgs({
-      body: [body, apiRestV2MetadataHomeliveboardAssignRequestSchema],
+      body: [body, tspublicRestV2MetadataHomeliveboardAssignRequestSchema],
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
@@ -321,19 +352,21 @@ export class MetadataController extends BaseController {
    *
    * At least one of user id or username is required. When both are given, then id will be considered.
    *
+   * Permission: Requires at least view access to the object
+   *
    * @param body
    * @return Response from the API call
    */
-  async unassignHomeliveboard(
-    body: ApiRestV2MetadataHomeliveboardUnassignRequest,
+  async unassignHomeLiveboard(
+    body: TspublicRestV2MetadataHomeliveboardUnassignRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<boolean>> {
     const req = this.createRequest(
-      'POST',
-      '/api/rest/v2/metadata/homeliveboard/unassign'
+      'PUT',
+      '/tspublic/rest/v2/metadata/homeliveboard/unassign'
     );
     const mapped = req.prepareArgs({
-      body: [body, apiRestV2MetadataHomeliveboardUnassignRequestSchema],
+      body: [body, tspublicRestV2MetadataHomeliveboardUnassignRequestSchema],
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
@@ -349,7 +382,10 @@ export class MetadataController extends BaseController {
   async getIncompleteObjects(
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<unknown>> {
-    const req = this.createRequest('GET', '/api/rest/v2/metadata/incomplete');
+    const req = this.createRequest(
+      'GET',
+      '/tspublic/rest/v2/metadata/incomplete'
+    );
     req.throwOn(500, ErrorResponseError, 'Operation failed or unauthorized request');
     return req.callAsJson(unknown(), requestOptions);
   }
@@ -358,20 +394,23 @@ export class MetadataController extends BaseController {
    * To get header detail of a metadata object, use this endpoint. You can provide as input selective
    * fields to get the data for.
    *
+   * Permission: Requires administration privilege for USER and USER_GROUP type. Requires datamanagement
+   * privilege for CONNECTION type. Requires at least view access for other object types
+   *
    * @param type         Type of the metadata object being searched.
    * @param id           GUID of the metadata object
    * @param outputFields Array of header field names that need to be included in the header response
    * @return Response from the API call
    */
-  async getMetadataHeader(
-    type: Type8Enum,
+  async getObjectHeader(
+    type: Type9Enum,
     id: string,
     outputFields?: string[],
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<unknown>> {
-    const req = this.createRequest('GET', '/api/rest/v2/metadata/header');
+    const req = this.createRequest('GET', '/tspublic/rest/v2/metadata/header');
     const mapped = req.prepareArgs({
-      type: [type, type8EnumSchema],
+      type: [type, type9EnumSchema],
       id: [id, string()],
       outputFields: [outputFields, optional(array(string()))],
     });
@@ -383,40 +422,27 @@ export class MetadataController extends BaseController {
   }
 
   /**
-   * Use this endpoint to get full details of metadata objects
+   * Use this endpoint to get full details of metadata objects.
    *
-   * @param type                Type of the metadata object being searched. Valid values
-   * @param id                  A JSON array of GUIDs of the objects.
-   * @param showHidden          When set to true, returns details of the hidden objects, such as a column
-   *                                         in a worksheet or a table.
-   * @param dropQuestionDetails When set to true, the search assist data associated with a worksheet is
-   *                                         not included in the API response. This attribute is applicable only for
-   *                                         LOGICAL_TABLE data type.
-   * @param version             Specify the version to retrieve the objects from. By default, the API
-   *                                         returns metadata for all versions of the object.
+   * Permission: Requires administration privilege for USER and USER_GROUP type. Requires datamanagement
+   * privilege for CONNECTION type. Requires at least view access to other object types
+   *
+   * @param type Type of the metadata object being searched. Valid values
+   * @param id   A JSON array of GUIDs of the objects.
    * @return Response from the API call
    */
   async getObjectDetail(
-    type: Type9Enum,
+    type: Type10Enum,
     id: string[],
-    showHidden?: boolean,
-    dropQuestionDetails?: boolean,
-    version?: string,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<unknown>> {
-    const req = this.createRequest('GET', '/api/rest/v2/metadata/details');
+    const req = this.createRequest('GET', '/tspublic/rest/v2/metadata/detail');
     const mapped = req.prepareArgs({
-      type: [type, type9EnumSchema],
+      type: [type, type10EnumSchema],
       id: [id, array(string())],
-      showHidden: [showHidden, optional(boolean())],
-      dropQuestionDetails: [dropQuestionDetails, optional(boolean())],
-      version: [version, optional(string())],
     });
     req.query('type', mapped.type);
     req.query('id', mapped.id);
-    req.query('showHidden', mapped.showHidden);
-    req.query('dropQuestionDetails', mapped.dropQuestionDetails);
-    req.query('version', mapped.version);
     req.throwOn(500, ErrorResponseError, 'Operation failed or unauthorized request');
     return req.callAsJson(unknown(), requestOptions);
   }
@@ -427,6 +453,8 @@ export class MetadataController extends BaseController {
    * At least one of id or name of liveboard or answer is required. When both are given, then id will be
    * considered.
    *
+   * Permission: Requires at least view access to the object
+   *
    * @param id The GUID of the liveboard or answer
    * @return Response from the API call
    */
@@ -434,7 +462,10 @@ export class MetadataController extends BaseController {
     id: string,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<unknown[]>> {
-    const req = this.createRequest('GET', '/api/rest/v2/metadata/vizheaders');
+    const req = this.createRequest(
+      'GET',
+      '/tspublic/rest/v2/metadata/vizheader'
+    );
     const mapped = req.prepareArgs({ id: [id, string()] });
     req.query('id', mapped.id);
     req.throwOn(500, ErrorResponseError, 'Operation failed or unauthorized request');
@@ -445,19 +476,22 @@ export class MetadataController extends BaseController {
    * To get header details for metadata objects, use this endpoint. You can provide as input selective
    * fields to get the data for.
    *
+   * Permission: Requires administration privilege for USER and USER_GROUP type. Requires datamanagement
+   * privilege for CONNECTION type. Requires at least view access for other object types
+   *
    * @param body
    * @return Response from the API call
    */
   async searchObjectHeader(
-    body: ApiRestV2MetadataHeaderSearchRequest,
+    body: TspublicRestV2MetadataHeaderSearchRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<unknown>> {
     const req = this.createRequest(
       'POST',
-      '/api/rest/v2/metadata/header/search'
+      '/tspublic/rest/v2/metadata/header/search'
     );
     const mapped = req.prepareArgs({
-      body: [body, apiRestV2MetadataHeaderSearchRequestSchema],
+      body: [body, tspublicRestV2MetadataHeaderSearchRequestSchema],
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
@@ -466,20 +500,51 @@ export class MetadataController extends BaseController {
   }
 
   /**
-   * Use this endpoint to delete the metadata objects
+   * Use this endpoint to get full details of metadata objects.
+   *
+   * Permission: Requires administration privilege for USER and USER_GROUP type. Requires datamanagement
+   * privilege for CONNECTION type. Requires at least view access for other object types
+   *
+   * @param body
+   * @return Response from the API call
+   */
+  async searchObjectDetail(
+    body: TspublicRestV2MetadataDetailSearchRequest,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<unknown>> {
+    const req = this.createRequest(
+      'POST',
+      '/tspublic/rest/v2/metadata/detail/search'
+    );
+    const mapped = req.prepareArgs({
+      body: [body, tspublicRestV2MetadataDetailSearchRequestSchema],
+    });
+    req.header('Content-Type', 'application/json');
+    req.json(mapped.body);
+    req.throwOn(500, ErrorResponseError, 'Operation failed or unauthorized request');
+    return req.callAsJson(unknown(), requestOptions);
+  }
+
+  /**
+   * Use this endpoint to delete the metadata objects.
+   *
+   * Permission: Requires modify access to the object
    *
    * @param type Type of the metadata object being searched.
    * @param id   A JSON array of GUIDs of the objects.
    * @return Response from the API call
    */
-  async deleteMetadataObject(
-    type: Type9Enum,
+  async deleteObject(
+    type: Type10Enum,
     id: string[],
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<boolean>> {
-    const req = this.createRequest('DELETE', '/api/rest/v2/metadata/delete');
+    const req = this.createRequest(
+      'DELETE',
+      '/tspublic/rest/v2/metadata/delete'
+    );
     const mapped = req.prepareArgs({
-      type: [type, type9EnumSchema],
+      type: [type, type10EnumSchema],
       id: [id, array(string())],
     });
     req.query('type', mapped.type);
@@ -507,16 +572,21 @@ export class MetadataController extends BaseController {
    * Similarly C1 is said to have a dependency on C2 i.e. C1 is a referencing object and C2 is a
    * referenced object. It is not possible to delete C2 without first deleting C1
    *
+   * Permission: Requires at least view access to the object
+   *
    * @param body
    * @return Response from the API call
    */
   async getObjectDependency(
-    body: ApiRestV2MetadataDependencyRequest,
+    body: TspublicRestV2MetadataDependencyRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<unknown>> {
-    const req = this.createRequest('POST', '/api/rest/v2/metadata/dependency');
+    const req = this.createRequest(
+      'POST',
+      '/tspublic/rest/v2/metadata/dependency'
+    );
     const mapped = req.prepareArgs({
-      body: [body, apiRestV2MetadataDependencyRequestSchema],
+      body: [body, tspublicRestV2MetadataDependencyRequestSchema],
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
@@ -525,18 +595,23 @@ export class MetadataController extends BaseController {
   }
 
   /**
-   * To export ThoughtSpot objects represented in ThoughtSpot Modeling Language (TML), use this endpoint
+   * To export ThoughtSpot objects represented in ThoughtSpot Modeling Language (TML), use this endpoint.
+   *
+   * Permission: Requires at least view access to the object
    *
    * @param body
    * @return Response from the API call
    */
   async exportObjectTML(
-    body: ApiRestV2MetadataTmlExportRequest,
+    body: TspublicRestV2MetadataTmlExportRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<unknown>> {
-    const req = this.createRequest('POST', '/api/rest/v2/metadata/tml/export');
+    const req = this.createRequest(
+      'POST',
+      '/tspublic/rest/v2/metadata/tml/export'
+    );
     const mapped = req.prepareArgs({
-      body: [body, apiRestV2MetadataTmlExportRequestSchema],
+      body: [body, tspublicRestV2MetadataTmlExportRequestSchema],
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
@@ -545,18 +620,23 @@ export class MetadataController extends BaseController {
   }
 
   /**
-   * To import ThoughtSpot objects represented in ThoughtSpot Modeling Language (TML), use this endpoint
+   * To import ThoughtSpot objects represented in ThoughtSpot Modeling Language (TML), use this endpoint.
+   *
+   * Permission: Requires datamanagement privilge
    *
    * @param body
    * @return Response from the API call
    */
   async importObjectTML(
-    body: ApiRestV2MetadataTmlImportRequest,
+    body: TspublicRestV2MetadataTmlImportRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<unknown>> {
-    const req = this.createRequest('POST', '/api/rest/v2/metadata/tml/import');
+    const req = this.createRequest(
+      'POST',
+      '/tspublic/rest/v2/metadata/tml/import'
+    );
     const mapped = req.prepareArgs({
-      body: [body, apiRestV2MetadataTmlImportRequestSchema],
+      body: [body, tspublicRestV2MetadataTmlImportRequestSchema],
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);

@@ -10,14 +10,16 @@ data_controller = client.data
 
 ## Methods
 
-* [Search Query Data](/doc/controllers/data.md#search-query-data)
-* [Answer Data](/doc/controllers/data.md#answer-data)
-* [Liveboard Data](/doc/controllers/data.md#liveboard-data)
+* [Search Query Data](../../doc/controllers/data.md#search-query-data)
+* [Answer Data](../../doc/controllers/data.md#answer-data)
+* [Liveboard Data](../../doc/controllers/data.md#liveboard-data)
 
 
 # Search Query Data
 
 To programmatically retrieve data from ThoughtSpot using search query string, use this endpoint
+
+Permission: Requires at least view access to the dataobject and datadownloading privilege
 
 ```python
 def search_query_data(self,
@@ -28,7 +30,7 @@ def search_query_data(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2DataSearchRequest`](/doc/models/api-rest-v2-data-search-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2DataSearchRequest`](../../doc/models/tspublic-rest-v2-data-search-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -37,7 +39,7 @@ def search_query_data(self,
 ## Example Usage
 
 ```python
-body = ApiRestV2DataSearchRequest()
+body = TspublicRestV2DataSearchRequest()
 body.query_string = 'queryString0'
 body.data_object_id = 'dataObjectId6'
 
@@ -48,12 +50,14 @@ result = data_controller.search_query_data(body)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Answer Data
 
-To retrieve data related to a Answer from the ThoughtSpot system, you can use this endpoint
+To retrieve data related to a Answer from the ThoughtSpot system, you can use this endpoint.
+
+Permission: Requires at least view access to the object and datadownloading privilege
 
 ```python
 def answer_data(self,
@@ -64,7 +68,7 @@ def answer_data(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2DataAnswerRequest`](/doc/models/api-rest-v2-data-answer-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2DataAnswerRequest`](../../doc/models/tspublic-rest-v2-data-answer-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -73,7 +77,7 @@ def answer_data(self,
 ## Example Usage
 
 ```python
-body = ApiRestV2DataAnswerRequest()
+body = TspublicRestV2DataAnswerRequest()
 body.id = 'id6'
 
 result = data_controller.answer_data(body)
@@ -83,12 +87,14 @@ result = data_controller.answer_data(body)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Liveboard Data
 
 To retrieve data related to a Liveboard or visualization from the ThoughtSpot system, you can use this endpoint
+
+Permission: Requires at least view access to the object and datadownloading privilege
 
 ```python
 def liveboard_data(self,
@@ -99,7 +105,7 @@ def liveboard_data(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2DataLiveboardRequest`](/doc/models/api-rest-v2-data-liveboard-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2DataLiveboardRequest`](../../doc/models/tspublic-rest-v2-data-liveboard-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -108,7 +114,7 @@ def liveboard_data(self,
 ## Example Usage
 
 ```python
-body = ApiRestV2DataLiveboardRequest()
+body = TspublicRestV2DataLiveboardRequest()
 body.id = 'id6'
 
 result = data_controller.liveboard_data(body)
@@ -118,5 +124,5 @@ result = data_controller.liveboard_data(body)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 

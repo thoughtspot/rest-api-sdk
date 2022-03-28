@@ -18,13 +18,13 @@
 | `is_deprecated` | `bool` | Optional | Indicates if the table is deprecated |
 | `is_deleted` | `bool` | Optional | Indicates if the table is deleted |
 | `is_hidden` | `bool` | Optional | Indicates if the table is hideen |
-| `index_version` | `int` | Optional | - |
-| `generation_num` | `int` | Optional | - |
+| `index_version` | `float` | Optional | - |
+| `generation_num` | `float` | Optional | - |
 | `created` | `string` | Optional | Date and time when the table was created |
 | `modified` | `string` | Optional | Date and time of last modification of the table |
-| `author` | [`UserNameAndID`](/doc/models/user-name-and-id.md) | Optional | - |
-| `modified_by` | [`UserNameAndID`](/doc/models/user-name-and-id.md) | Optional | - |
-| `owner` | [`UserNameAndID`](/doc/models/user-name-and-id.md) | Optional | - |
+| `author` | [`UserNameAndID`](../../doc/models/user-name-and-id.md) | Optional | - |
+| `modified_by` | [`UserNameAndID`](../../doc/models/user-name-and-id.md) | Optional | - |
+| `owner` | [`UserNameAndID`](../../doc/models/user-name-and-id.md) | Optional | - |
 | `tags` | `List of string` | Optional | List of tags assigned to the table |
 
 ## Example (as JSON)

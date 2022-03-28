@@ -20,8 +20,8 @@ class MetadataTagResponse(object):
         name (string): Name of the tag
         id (string): GUID of the tag
         client_state (ClientState): TODO: type description here.
-        index_version (int): TODO: type description here.
-        generation_num (int): TODO: type description here.
+        index_version (float): TODO: type description here.
+        generation_num (float): TODO: type description here.
         is_deleted (bool): Indicates if the tag is deleted
         is_hidden (bool): Indicates if the tag is hidden
         is_external (bool): Indicates if the tag is from external system

@@ -61,14 +61,14 @@ namespace RESTAPISDK.Standard.Controllers
 
             // prepare query string for API call.
             StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/api/rest/v2/session");
+            queryBuilder.Append("/tspublic/rest/v2/session");
 
             // append request with appropriate headers and parameters
             var headers = new Dictionary<string, string>()
             {
                 { "user-agent", this.UserAgent },
-                { "Content-Type", this.Config.ContentType },
                 { "Accept-Language", this.Config.AcceptLanguage },
+                { "Content-Type", this.Config.ContentType },
             };
 
             // prepare the API call request to fetch the response.
@@ -101,12 +101,14 @@ namespace RESTAPISDK.Standard.Controllers
         }
 
         /// <summary>
-        /// To programmatically login a user to ThoughtSpot, use this endpoint.
+        /// You can programmatically create login session for a user in ThoughtSpot using this endpoint. .
+        ///  You can create session by either providing userName and password as inputs in this request body or by including "Authorization" header with the token generated through the endpoint /tspublic/rest/v2/session/getToken. .
+        ///  userName and password input is given precedence over "Authorization" header, when both are included in the request.
         /// </summary>
         /// <param name="body">Required parameter: Example: .</param>
         /// <returns>Returns the Models.SessionLoginResponse response from the API call.</returns>
         public Models.SessionLoginResponse Login(
-                Models.ApiRestV2SessionLoginRequest body)
+                Models.TspublicRestV2SessionLoginRequest body)
         {
             Task<Models.SessionLoginResponse> t = this.LoginAsync(body);
             ApiHelper.RunTaskSynchronously(t);
@@ -114,21 +116,29 @@ namespace RESTAPISDK.Standard.Controllers
         }
 
         /// <summary>
-        /// To programmatically login a user to ThoughtSpot, use this endpoint.
+        /// You can programmatically create login session for a user in ThoughtSpot using this endpoint. .
+        ///  You can create session by either providing userName and password as inputs in this request body or by including "Authorization" header with the token generated through the endpoint /tspublic/rest/v2/session/getToken. .
+        ///  userName and password input is given precedence over "Authorization" header, when both are included in the request.
         /// </summary>
         /// <param name="body">Required parameter: Example: .</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.SessionLoginResponse response from the API call.</returns>
         public async Task<Models.SessionLoginResponse> LoginAsync(
-                Models.ApiRestV2SessionLoginRequest body,
+                Models.TspublicRestV2SessionLoginRequest body,
                 CancellationToken cancellationToken = default)
         {
+            // validating required parameters.
+            if (body == null)
+            {
+                throw new ArgumentNullException("body", "The parameter \"body\" is a required parameter and cannot be null.");
+            }
+
             // the base uri for api requests.
             string baseUri = this.Config.GetBaseUri();
 
             // prepare query string for API call.
             StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/api/rest/v2/session/login");
+            queryBuilder.Append("/tspublic/rest/v2/session/login");
 
             // append request with appropriate headers and parameters
             var headers = new Dictionary<string, string>()
@@ -149,6 +159,8 @@ namespace RESTAPISDK.Standard.Controllers
             {
                 this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
             }
+
+            httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
 
             // invoke request and get response.
             HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken).ConfigureAwait(false);
@@ -192,14 +204,14 @@ namespace RESTAPISDK.Standard.Controllers
 
             // prepare query string for API call.
             StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/api/rest/v2/session/logout");
+            queryBuilder.Append("/tspublic/rest/v2/session/logout");
 
             // append request with appropriate headers and parameters
             var headers = new Dictionary<string, string>()
             {
                 { "user-agent", this.UserAgent },
-                { "Content-Type", this.Config.ContentType },
                 { "Accept-Language", this.Config.AcceptLanguage },
+                { "Content-Type", this.Config.ContentType },
             };
 
             // prepare the API call request to fetch the response.
@@ -230,34 +242,58 @@ namespace RESTAPISDK.Standard.Controllers
         }
 
         /// <summary>
-        /// To programmatically create token for a user in ThoughtSpot, use this endpoint.
+        /// To programmatically create session token for a user in ThoughtSpot, use this endpoint. .
+        ///  You can generate the token for a user by providing password or secret key from the cluster. .
+        ///  You need to enable trusted authentication to generate secret key. To generate secret key, follow below steps. .
+        ///  1. Click the Develop tab. .
+        ///  2. Under Customizations, click Settings. .
+        ///  3. To enable trusted authentication, turn on the toggle. .
+        ///  4. A secret_key for trusted authentication is generated. .
+        ///  5. Click the clipboard icon to copy the token. .
+        ///  .
+        ///  Password is given precedence over secretKey input, when both are included in the request.
         /// </summary>
         /// <param name="body">Required parameter: Example: .</param>
         /// <returns>Returns the Models.SessionLoginResponse response from the API call.</returns>
-        public Models.SessionLoginResponse Gettoken(
-                Models.ApiRestV2SessionGettokenRequest body)
+        public Models.SessionLoginResponse GetToken(
+                Models.TspublicRestV2SessionGettokenRequest body)
         {
-            Task<Models.SessionLoginResponse> t = this.GettokenAsync(body);
+            Task<Models.SessionLoginResponse> t = this.GetTokenAsync(body);
             ApiHelper.RunTaskSynchronously(t);
             return t.Result;
         }
 
         /// <summary>
-        /// To programmatically create token for a user in ThoughtSpot, use this endpoint.
+        /// To programmatically create session token for a user in ThoughtSpot, use this endpoint. .
+        ///  You can generate the token for a user by providing password or secret key from the cluster. .
+        ///  You need to enable trusted authentication to generate secret key. To generate secret key, follow below steps. .
+        ///  1. Click the Develop tab. .
+        ///  2. Under Customizations, click Settings. .
+        ///  3. To enable trusted authentication, turn on the toggle. .
+        ///  4. A secret_key for trusted authentication is generated. .
+        ///  5. Click the clipboard icon to copy the token. .
+        ///  .
+        ///  Password is given precedence over secretKey input, when both are included in the request.
         /// </summary>
         /// <param name="body">Required parameter: Example: .</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.SessionLoginResponse response from the API call.</returns>
-        public async Task<Models.SessionLoginResponse> GettokenAsync(
-                Models.ApiRestV2SessionGettokenRequest body,
+        public async Task<Models.SessionLoginResponse> GetTokenAsync(
+                Models.TspublicRestV2SessionGettokenRequest body,
                 CancellationToken cancellationToken = default)
         {
+            // validating required parameters.
+            if (body == null)
+            {
+                throw new ArgumentNullException("body", "The parameter \"body\" is a required parameter and cannot be null.");
+            }
+
             // the base uri for api requests.
             string baseUri = this.Config.GetBaseUri();
 
             // prepare query string for API call.
             StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/api/rest/v2/session/gettoken");
+            queryBuilder.Append("/tspublic/rest/v2/session/gettoken");
 
             // append request with appropriate headers and parameters
             var headers = new Dictionary<string, string>()
@@ -302,9 +338,9 @@ namespace RESTAPISDK.Standard.Controllers
         /// To expire or revoke a token for a user, use this endpoint.
         /// </summary>
         /// <returns>Returns the bool response from the API call.</returns>
-        public bool Revoketoken()
+        public bool RevokeToken()
         {
-            Task<bool> t = this.RevoketokenAsync();
+            Task<bool> t = this.RevokeTokenAsync();
             ApiHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -314,21 +350,21 @@ namespace RESTAPISDK.Standard.Controllers
         /// </summary>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the bool response from the API call.</returns>
-        public async Task<bool> RevoketokenAsync(CancellationToken cancellationToken = default)
+        public async Task<bool> RevokeTokenAsync(CancellationToken cancellationToken = default)
         {
             // the base uri for api requests.
             string baseUri = this.Config.GetBaseUri();
 
             // prepare query string for API call.
             StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/api/rest/v2/session/revoketoken");
+            queryBuilder.Append("/tspublic/rest/v2/session/revoketoken");
 
             // append request with appropriate headers and parameters
             var headers = new Dictionary<string, string>()
             {
                 { "user-agent", this.UserAgent },
-                { "Content-Type", this.Config.ContentType },
                 { "Accept-Language", this.Config.AcceptLanguage },
+                { "Content-Type", this.Config.ContentType },
             };
 
             // prepare the API call request to fetch the response.

@@ -20,6 +20,7 @@ namespace RESTAPISDK.Standard.Http.Client
         /// </summary>
         private HttpClientConfiguration(
             TimeSpan timeout,
+            bool skipSslCertVerification,
             int numberOfRetries,
             int backoffFactor,
             double retryInterval,
@@ -30,6 +31,7 @@ namespace RESTAPISDK.Standard.Http.Client
             bool overrideHttpClientConfiguration)
         {
             this.Timeout = timeout;
+            this.SkipSslCertVerification = skipSslCertVerification;
             this.NumberOfRetries = numberOfRetries;
             this.BackoffFactor = backoffFactor;
             this.RetryInterval = retryInterval;
@@ -44,6 +46,11 @@ namespace RESTAPISDK.Standard.Http.Client
         /// Gets Http client timeout.
         /// </summary>
         public TimeSpan Timeout { get; }
+
+        /// <summary>
+        /// Gets Whether to skip verification of SSL certificates.
+        /// </summary>
+        public bool SkipSslCertVerification { get; }
 
         /// <summary>
         /// Gets Number of times the request is retried.
@@ -90,6 +97,7 @@ namespace RESTAPISDK.Standard.Http.Client
         {
             return "HttpClientConfiguration: " +
                 $"{this.Timeout} , " +
+                $"{this.SkipSslCertVerification} , " +
                 $"{this.NumberOfRetries} , " +
                 $"{this.BackoffFactor} , " +
                 $"{this.RetryInterval} , " +
@@ -108,6 +116,7 @@ namespace RESTAPISDK.Standard.Http.Client
         {
             Builder builder = new Builder()
                 .Timeout(this.Timeout)
+                .SkipSslCertVerification(this.SkipSslCertVerification)
                 .NumberOfRetries(this.NumberOfRetries)
                 .BackoffFactor(this.BackoffFactor)
                 .RetryInterval(this.RetryInterval)
@@ -125,6 +134,7 @@ namespace RESTAPISDK.Standard.Http.Client
         public class Builder
         {
             private TimeSpan timeout = TimeSpan.FromSeconds(100);
+            private bool skipSslCertVerification = true;
             private int numberOfRetries = 0;
             private int backoffFactor = 2;
             private double retryInterval = 1;
@@ -148,6 +158,17 @@ namespace RESTAPISDK.Standard.Http.Client
             public Builder Timeout(TimeSpan timeout)
             {
                 this.timeout = timeout.TotalSeconds <= 0 ? TimeSpan.FromSeconds(100) : timeout;
+                return this;
+            }
+
+            /// <summary>
+            /// Sets SkipSslCertVerification.
+            /// </summary>
+            /// <param name="skipSslCertVerification"> SkipSslCertVerification. </param>
+            /// <returns> Builder. </returns>
+            public Builder SkipSslCertVerification(bool skipSslCertVerification)
+            {
+                this.skipSslCertVerification = skipSslCertVerification;
                 return this;
             }
 
@@ -238,6 +259,7 @@ namespace RESTAPISDK.Standard.Http.Client
             {
                 return new HttpClientConfiguration(
                         this.timeout,
+                        this.skipSslCertVerification,
                         this.numberOfRetries,
                         this.backoffFactor,
                         this.retryInterval,

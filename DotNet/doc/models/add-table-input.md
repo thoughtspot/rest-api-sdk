@@ -12,7 +12,7 @@
 | `Name` | `string` | Required | Name of the table |
 | `DbName` | `string` | Required | Name of the database in the data platform |
 | `SchemaName` | `string` | Required | Name of the schema in the database |
-| `Columns` | [`List<Models.ColumnsInput>`](/doc/models/columns-input.md) | Required | A JSON array of column details |
+| `Columns` | [`List<Models.ColumnsInput>`](../../doc/models/columns-input.md) | Required | A JSON array of column details |
 
 ## Example (as JSON)
 

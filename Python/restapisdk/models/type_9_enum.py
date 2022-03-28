@@ -17,8 +17,18 @@ class Type9Enum(object):
     Attributes:
         ANSWER: TODO: type description here.
         LIVEBOARD: TODO: type description here.
-        DATAOBJECT: TODO: type description here.
-        COLUMN: TODO: type description here.
+        DATAOBJECT_ALL: TODO: type description here.
+        DATAOBJECT_WORKSHEET: TODO: type description here.
+        DATAOBJECT_TABLE: TODO: type description here.
+        DATAOBJECT_USER_DEFINED: TODO: type description here.
+        DATAOBJECT_VIEW: TODO: type description here.
+        DATAOBJECT_CALENDAR_TABLE: TODO: type description here.
+        COLUMN_ALL: TODO: type description here.
+        COLUMN_WORKSHEET: TODO: type description here.
+        COLUMN_TABLE: TODO: type description here.
+        COLUMN_USER_DEFINED: TODO: type description here.
+        COLUMN_VIEW: TODO: type description here.
+        COLUMN_CALENDAR_TABLE: TODO: type description here.
         JOIN: TODO: type description here.
         CONNECTION: TODO: type description here.
         TAG: TODO: type description here.
@@ -31,9 +41,29 @@ class Type9Enum(object):
 
     LIVEBOARD = 'LIVEBOARD'
 
-    DATAOBJECT = 'DATAOBJECT'
+    DATAOBJECT_ALL = 'DATAOBJECT_ALL'
 
-    COLUMN = 'COLUMN'
+    DATAOBJECT_WORKSHEET = 'DATAOBJECT_WORKSHEET'
+
+    DATAOBJECT_TABLE = 'DATAOBJECT_TABLE'
+
+    DATAOBJECT_USER_DEFINED = 'DATAOBJECT_USER_DEFINED'
+
+    DATAOBJECT_VIEW = 'DATAOBJECT_VIEW'
+
+    DATAOBJECT_CALENDAR_TABLE = 'DATAOBJECT_CALENDAR_TABLE'
+
+    COLUMN_ALL = 'COLUMN_ALL'
+
+    COLUMN_WORKSHEET = 'COLUMN_WORKSHEET'
+
+    COLUMN_TABLE = 'COLUMN_TABLE'
+
+    COLUMN_USER_DEFINED = 'COLUMN_USER_DEFINED'
+
+    COLUMN_VIEW = 'COLUMN_VIEW'
+
+    COLUMN_CALENDAR_TABLE = 'COLUMN_CALENDAR_TABLE'
 
     JOIN = 'JOIN'
 

@@ -12,7 +12,8 @@ class AccessEnum(object):
 
     """Implementation of the 'Access' enum.
 
-    Minimum access level that the specified user or user group has.
+    Minimum access level that the specified user or user group has. If no
+    input is provided then minimum access of READ_ONLY will be considered.
 
     Attributes:
         READ_ONLY: TODO: type description here.

@@ -21,7 +21,7 @@ export interface CreateConnectionResponse {
   name?: string;
   /** Description associated with the connection */
   description?: string;
-  /** Type of the connection. The database associated with this type can be obtained from theI response returned by the /api/rest/v2/connection/types API endpoint. */
+  /** Type of the connection. The database associated with this type can be obtained from the response returned by the /tspublic/rest/v2/connection/types API endpoint. */
   type?: string;
   /** GUID of the connection */
   id?: string;

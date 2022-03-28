@@ -126,7 +126,7 @@ namespace RESTAPISDK.Standard.Controllers
         /// </summary>
         private void UpdateUserAgent()
         {
-            internalUserAgent = "APIMATIC 3.0";
+            internalUserAgent = "RestAPI V2 SDK";
         }
     }
 }

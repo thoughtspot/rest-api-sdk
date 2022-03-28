@@ -7,33 +7,39 @@
 import { ApiResponse, RequestOptions } from '../core';
 import { ErrorResponseError } from '../errors/errorResponseError';
 import {
-  ApiRestV2UserAddgroupRequest,
-  apiRestV2UserAddgroupRequestSchema,
-} from '../models/apiRestV2UserAddgroupRequest';
+  TspublicRestV2UserAddgroupRequest,
+  tspublicRestV2UserAddgroupRequestSchema,
+} from '../models/tspublicRestV2UserAddgroupRequest';
 import {
-  ApiRestV2UserCreateRequest,
-  apiRestV2UserCreateRequestSchema,
-} from '../models/apiRestV2UserCreateRequest';
+  TspublicRestV2UserChangepasswordRequest,
+  tspublicRestV2UserChangepasswordRequestSchema,
+} from '../models/tspublicRestV2UserChangepasswordRequest';
 import {
-  ApiRestV2UserRemovegroupRequest,
-  apiRestV2UserRemovegroupRequestSchema,
-} from '../models/apiRestV2UserRemovegroupRequest';
+  TspublicRestV2UserCreateRequest,
+  tspublicRestV2UserCreateRequestSchema,
+} from '../models/tspublicRestV2UserCreateRequest';
 import {
-  ApiRestV2UserSearchRequest,
-  apiRestV2UserSearchRequestSchema,
-} from '../models/apiRestV2UserSearchRequest';
+  TspublicRestV2UserRemovegroupRequest,
+  tspublicRestV2UserRemovegroupRequestSchema,
+} from '../models/tspublicRestV2UserRemovegroupRequest';
 import {
-  ApiRestV2UserUpdateRequest,
-  apiRestV2UserUpdateRequestSchema,
-} from '../models/apiRestV2UserUpdateRequest';
+  TspublicRestV2UserSearchRequest,
+  tspublicRestV2UserSearchRequestSchema,
+} from '../models/tspublicRestV2UserSearchRequest';
+import {
+  TspublicRestV2UserUpdateRequest,
+  tspublicRestV2UserUpdateRequestSchema,
+} from '../models/tspublicRestV2UserUpdateRequest';
 import { UserResponse, userResponseSchema } from '../models/userResponse';
-import { array, boolean, optional, string } from '../schema';
+import { boolean, optional, string, unknown } from '../schema';
 import { BaseController } from './baseController';
 
 export class UserController extends BaseController {
   /**
    * To get the details of a specific user account by username or user id, use this endpoint. At Least
    * one value is needed. When both are given,then user id will be considered to fetch user information
+   *
+   * Permission: Requires administration privilege
    *
    * @param name Username of the user that you want to query
    * @param id   The GUID of the user account to query
@@ -44,7 +50,7 @@ export class UserController extends BaseController {
     id?: string,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<UserResponse>> {
-    const req = this.createRequest('GET', '/api/rest/v2/user');
+    const req = this.createRequest('GET', '/tspublic/rest/v2/user');
     const mapped = req.prepareArgs({
       name: [name, optional(string())],
       id: [id, optional(string())],
@@ -63,16 +69,18 @@ export class UserController extends BaseController {
    *
    * All users created in the ThoughtSpot system are added to ALL_GROUP
    *
+   * Permission: Requires administration privilege
+   *
    * @param body
    * @return Response from the API call
    */
   async createUser(
-    body: ApiRestV2UserCreateRequest,
+    body: TspublicRestV2UserCreateRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<UserResponse>> {
-    const req = this.createRequest('POST', '/api/rest/v2/user/create');
+    const req = this.createRequest('POST', '/tspublic/rest/v2/user/create');
     const mapped = req.prepareArgs({
-      body: [body, apiRestV2UserCreateRequestSchema],
+      body: [body, tspublicRestV2UserCreateRequestSchema],
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
@@ -88,16 +96,18 @@ export class UserController extends BaseController {
    * At least one of User Id or username is mandatory. When both are given, then user id will be
    * considered and username will be updated
    *
+   * Permission: Requires administration privilege
+   *
    * @param body
    * @return Response from the API call
    */
   async updateUser(
-    body: ApiRestV2UserUpdateRequest,
+    body: TspublicRestV2UserUpdateRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<boolean>> {
-    const req = this.createRequest('PUT', '/api/rest/v2/user/update');
+    const req = this.createRequest('PUT', '/tspublic/rest/v2/user/update');
     const mapped = req.prepareArgs({
-      body: [body, apiRestV2UserUpdateRequestSchema],
+      body: [body, tspublicRestV2UserUpdateRequestSchema],
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
@@ -110,6 +120,8 @@ export class UserController extends BaseController {
    *
    * At least one value is needed. When both are given, then user id will be considered to delete user.
    *
+   * Permission: Requires administration privilege
+   *
    * @param name Username of the user account
    * @param id   The GUID of the user account
    * @return Response from the API call
@@ -119,7 +131,7 @@ export class UserController extends BaseController {
     id?: string,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<boolean>> {
-    const req = this.createRequest('DELETE', '/api/rest/v2/user/delete');
+    const req = this.createRequest('DELETE', '/tspublic/rest/v2/user/delete');
     const mapped = req.prepareArgs({
       name: [name, optional(string())],
       id: [id, optional(string())],
@@ -138,16 +150,18 @@ export class UserController extends BaseController {
    * At least one of user Id or username is mandatory. When both are given, then user id will be
    * considered.
    *
+   * Permission: Requires administration privilege
+   *
    * @param body
    * @return Response from the API call
    */
   async addGroupsToUser(
-    body: ApiRestV2UserAddgroupRequest,
+    body: TspublicRestV2UserAddgroupRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<boolean>> {
-    const req = this.createRequest('PUT', '/api/rest/v2/user/addgroup');
+    const req = this.createRequest('PUT', '/tspublic/rest/v2/user/addgroup');
     const mapped = req.prepareArgs({
-      body: [body, apiRestV2UserAddgroupRequestSchema],
+      body: [body, tspublicRestV2UserAddgroupRequestSchema],
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
@@ -164,16 +178,45 @@ export class UserController extends BaseController {
    * At least one of user id or username is mandatory. When both are given, then user id will be
    * considered.
    *
+   * Permission: Requires administration privilege
+   *
    * @param body
    * @return Response from the API call
    */
   async removeGroupsFromUser(
-    body: ApiRestV2UserRemovegroupRequest,
+    body: TspublicRestV2UserRemovegroupRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<boolean>> {
-    const req = this.createRequest('PUT', '/api/rest/v2/user/removegroup');
+    const req = this.createRequest('PUT', '/tspublic/rest/v2/user/removegroup');
     const mapped = req.prepareArgs({
-      body: [body, apiRestV2UserRemovegroupRequestSchema],
+      body: [body, tspublicRestV2UserRemovegroupRequestSchema],
+    });
+    req.header('Content-Type', 'application/json');
+    req.json(mapped.body);
+    req.throwOn(500, ErrorResponseError, 'Operation failed or unauthorized request');
+    return req.callAsJson(boolean(), requestOptions);
+  }
+
+  /**
+   * To change the password of a ThoughtSpot user account, use this endpoint.
+   *
+   * At least one of id or name of user is required. When both are given user id will be considered.
+   *
+   * Permission: Requires administration privilege
+   *
+   * @param body
+   * @return Response from the API call
+   */
+  async changePasswordOfUser(
+    body: TspublicRestV2UserChangepasswordRequest,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<boolean>> {
+    const req = this.createRequest(
+      'PUT',
+      '/tspublic/rest/v2/user/changepassword'
+    );
+    const mapped = req.prepareArgs({
+      body: [body, tspublicRestV2UserChangepasswordRequestSchema],
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
@@ -185,20 +228,22 @@ export class UserController extends BaseController {
    * To get the details of a specific user account or all users in the ThoughtSpot system, use this
    * endpoint. If no input is provided, then all user are included in the response.
    *
+   * Permission: Requires administration privilege
+   *
    * @param body
    * @return Response from the API call
    */
   async searchUsers(
-    body: ApiRestV2UserSearchRequest,
+    body: TspublicRestV2UserSearchRequest,
     requestOptions?: RequestOptions
-  ): Promise<ApiResponse<UserResponse[]>> {
-    const req = this.createRequest('POST', '/api/rest/v2/user/search');
+  ): Promise<ApiResponse<unknown>> {
+    const req = this.createRequest('POST', '/tspublic/rest/v2/user/search');
     const mapped = req.prepareArgs({
-      body: [body, apiRestV2UserSearchRequestSchema],
+      body: [body, tspublicRestV2UserSearchRequestSchema],
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.throwOn(500, ErrorResponseError, 'Operation failed or unauthorized request');
-    return req.callAsJson(array(userResponseSchema), requestOptions);
+    return req.callAsJson(unknown(), requestOptions);
   }
 }

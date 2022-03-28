@@ -15,9 +15,9 @@
 | `visibility` | `string` | Optional | Visibility of the group |
 | `description` | `string` | Optional | Description of the group |
 | `privileges` | `List of string` | Optional | Privileges assigned to the group |
-| `groups` | [`List of GroupNameAndID`](/doc/models/group-name-and-id.md) | Optional | Name of the group to which is added |
-| `users` | [`List of UserNameAndID`](/doc/models/user-name-and-id.md) | Optional | User Group Information by Id or Name. |
-| `assigned_liveboards` | [`List of LiveboardNameAndID`](/doc/models/liveboard-name-and-id.md) | Optional | Liveboards assigned to the group |
+| `groups` | [`List of GroupNameAndID`](../../doc/models/group-name-and-id.md) | Optional | Name of the group to which is added |
+| `users` | [`List of UserNameAndID`](../../doc/models/user-name-and-id.md) | Optional | User Group Information by Id or Name. |
+| `assigned_liveboards` | [`List of LiveboardNameAndID`](../../doc/models/liveboard-name-and-id.md) | Optional | Liveboards assigned to the group |
 | `user_group_content` | `object` | Optional | - |
 | `tags` | `List of string` | Optional | Tags assigned to the group |
 | `is_deleted` | `bool` | Optional | Indicates if the group is deleted |
@@ -31,13 +31,13 @@
 | `group_idx` | `int` | Optional | - |
 | `metadata_version` | `int` | Optional | - |
 | `tenant_id` | `string` | Optional | Tenant id associated with the group |
-| `index_version` | `int` | Optional | - |
-| `generation_num` | `int` | Optional | - |
+| `index_version` | `float` | Optional | - |
+| `generation_num` | `float` | Optional | - |
 | `created` | `float` | Optional | Date and time when group was created |
 | `modified` | `float` | Optional | Date and time of last modification of the group |
-| `modified_by` | [`UserNameAndID`](/doc/models/user-name-and-id.md) | Optional | - |
-| `author` | [`UserNameAndID`](/doc/models/user-name-and-id.md) | Optional | - |
-| `owner` | [`UserNameAndID`](/doc/models/user-name-and-id.md) | Optional | - |
+| `author` | [`UserNameAndID`](../../doc/models/user-name-and-id.md) | Optional | - |
+| `modified_by` | [`UserNameAndID`](../../doc/models/user-name-and-id.md) | Optional | - |
+| `owner` | [`UserNameAndID`](../../doc/models/user-name-and-id.md) | Optional | - |
 
 ## Example (as JSON)
 
@@ -69,8 +69,8 @@
   "generationNum": null,
   "created": null,
   "modified": null,
-  "modifiedBy": null,
   "author": null,
+  "modifiedBy": null,
   "owner": null
 }
 ```

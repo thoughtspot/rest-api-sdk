@@ -14,7 +14,7 @@
 | `Id` | `String` | Optional | GUID of the user account | String getId() | setId(String id) |
 | `Visibility` | `String` | Optional | Visibility of the user account | String getVisibility() | setVisibility(String visibility) |
 | `Mail` | `String` | Optional | Email of the user account | String getMail() | setMail(String mail) |
-| `Groups` | [`List<GroupNameAndID>`](/doc/models/group-name-and-id.md) | Optional | Name of the group to which user account is added | List<GroupNameAndID> getGroups() | setGroups(List<GroupNameAndID> groups) |
+| `Groups` | [`List<GroupNameAndID>`](../../doc/models/group-name-and-id.md) | Optional | Name of the group to which user account is added | List<GroupNameAndID> getGroups() | setGroups(List<GroupNameAndID> groups) |
 | `Privileges` | `List<String>` | Optional | Privileges assigned to user account | List<String> getPrivileges() | setPrivileges(List<String> privileges) |
 | `Tags` | `List<String>` | Optional | Tags assigned to the user | List<String> getTags() | setTags(List<String> tags) |
 | `State` | `String` | Optional | Indicates if the user account is active or inactive | String getState() | setState(String state) |
@@ -33,13 +33,13 @@
 | `Type` | `String` | Optional | Indicates the type of user account | String getType() | setType(String type) |
 | `Parenttype` | `String` | Optional | Indicates the type of parent object | String getParenttype() | setParenttype(String parenttype) |
 | `TenantId` | `String` | Optional | Tenant id associated with the user account | String getTenantId() | setTenantId(String tenantId) |
-| `IndexVersion` | `Integer` | Optional | - | Integer getIndexVersion() | setIndexVersion(Integer indexVersion) |
-| `GenerationNum` | `Integer` | Optional | - | Integer getGenerationNum() | setGenerationNum(Integer generationNum) |
+| `IndexVersion` | `Double` | Optional | - | Double getIndexVersion() | setIndexVersion(Double indexVersion) |
+| `GenerationNum` | `Double` | Optional | - | Double getGenerationNum() | setGenerationNum(Double generationNum) |
 | `Created` | `Double` | Optional | Date and time when user account was created | Double getCreated() | setCreated(Double created) |
 | `Modified` | `Double` | Optional | Date and time of last modification of user account | Double getModified() | setModified(Double modified) |
-| `Author` | [`UserNameAndID`](/doc/models/user-name-and-id.md) | Optional | - | UserNameAndID getAuthor() | setAuthor(UserNameAndID author) |
-| `ModifiedBy` | [`UserNameAndID`](/doc/models/user-name-and-id.md) | Optional | - | UserNameAndID getModifiedBy() | setModifiedBy(UserNameAndID modifiedBy) |
-| `Owner` | [`UserNameAndID`](/doc/models/user-name-and-id.md) | Optional | - | UserNameAndID getOwner() | setOwner(UserNameAndID owner) |
+| `Author` | [`UserNameAndID`](../../doc/models/user-name-and-id.md) | Optional | - | UserNameAndID getAuthor() | setAuthor(UserNameAndID author) |
+| `ModifiedBy` | [`UserNameAndID`](../../doc/models/user-name-and-id.md) | Optional | - | UserNameAndID getModifiedBy() | setModifiedBy(UserNameAndID modifiedBy) |
+| `Owner` | [`UserNameAndID`](../../doc/models/user-name-and-id.md) | Optional | - | UserNameAndID getOwner() | setOwner(UserNameAndID owner) |
 
 ## Example (as JSON)
 

@@ -10,26 +10,27 @@ const metadataController = new MetadataController(client);
 
 ## Methods
 
-* [Get Tag](/doc/controllers/metadata.md#get-tag)
-* [Create Tag](/doc/controllers/metadata.md#create-tag)
-* [Update Tag](/doc/controllers/metadata.md#update-tag)
-* [Delete Tag](/doc/controllers/metadata.md#delete-tag)
-* [Assign Tag](/doc/controllers/metadata.md#assign-tag)
-* [Unassign Tag](/doc/controllers/metadata.md#unassign-tag)
-* [Assign Favorite](/doc/controllers/metadata.md#assign-favorite)
-* [Unassign Favorite](/doc/controllers/metadata.md#unassign-favorite)
-* [Get Homeliveboard](/doc/controllers/metadata.md#get-homeliveboard)
-* [Assign Homeliveboard](/doc/controllers/metadata.md#assign-homeliveboard)
-* [Unassign Homeliveboard](/doc/controllers/metadata.md#unassign-homeliveboard)
-* [Get Incomplete Objects](/doc/controllers/metadata.md#get-incomplete-objects)
-* [Get Metadata Header](/doc/controllers/metadata.md#get-metadata-header)
-* [Get Object Detail](/doc/controllers/metadata.md#get-object-detail)
-* [Get Object Visualization Header](/doc/controllers/metadata.md#get-object-visualization-header)
-* [Search Object Header](/doc/controllers/metadata.md#search-object-header)
-* [Delete Metadata Object](/doc/controllers/metadata.md#delete-metadata-object)
-* [Get Object Dependency](/doc/controllers/metadata.md#get-object-dependency)
-* [Export Object TML](/doc/controllers/metadata.md#export-object-tml)
-* [Import Object TML](/doc/controllers/metadata.md#import-object-tml)
+* [Get Tag](../../doc/controllers/metadata.md#get-tag)
+* [Create Tag](../../doc/controllers/metadata.md#create-tag)
+* [Update Tag](../../doc/controllers/metadata.md#update-tag)
+* [Delete Tag](../../doc/controllers/metadata.md#delete-tag)
+* [Assign Tag](../../doc/controllers/metadata.md#assign-tag)
+* [Unassign Tag](../../doc/controllers/metadata.md#unassign-tag)
+* [Assign Favorite](../../doc/controllers/metadata.md#assign-favorite)
+* [Unassign Favorite](../../doc/controllers/metadata.md#unassign-favorite)
+* [Get Home Liveboard](../../doc/controllers/metadata.md#get-home-liveboard)
+* [Assign Home Liveboard](../../doc/controllers/metadata.md#assign-home-liveboard)
+* [Unassign Home Liveboard](../../doc/controllers/metadata.md#unassign-home-liveboard)
+* [Get Incomplete Objects](../../doc/controllers/metadata.md#get-incomplete-objects)
+* [Get Object Header](../../doc/controllers/metadata.md#get-object-header)
+* [Get Object Detail](../../doc/controllers/metadata.md#get-object-detail)
+* [Get Object Visualization Header](../../doc/controllers/metadata.md#get-object-visualization-header)
+* [Search Object Header](../../doc/controllers/metadata.md#search-object-header)
+* [Search Object Detail](../../doc/controllers/metadata.md#search-object-detail)
+* [Delete Object](../../doc/controllers/metadata.md#delete-object)
+* [Get Object Dependency](../../doc/controllers/metadata.md#get-object-dependency)
+* [Export Object TML](../../doc/controllers/metadata.md#export-object-tml)
+* [Import Object TML](../../doc/controllers/metadata.md#import-object-tml)
 
 
 # Get Tag
@@ -56,7 +57,7 @@ async getTag(
 
 ## Response Type
 
-[`MetadataTagResponse`](/doc/models/metadata-tag-response.md)
+[`MetadataTagResponse`](../../doc/models/metadata-tag-response.md)
 
 ## Example Usage
 
@@ -77,16 +78,18 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
 # Create Tag
 
 To programmatically create tags, use this endpoint
 
+Permission: Requires administration privilege
+
 ```ts
 async createTag(
-  body: ApiRestV2MetadataTagCreateRequest,
+  body: TspublicRestV2MetadataTagCreateRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<MetadataTagResponse>>
 ```
@@ -95,18 +98,18 @@ async createTag(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2MetadataTagCreateRequest`](/doc/models/api-rest-v2-metadata-tag-create-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2MetadataTagCreateRequest`](../../doc/models/tspublic-rest-v2-metadata-tag-create-request.md) | Body, Required | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
 
-[`MetadataTagResponse`](/doc/models/metadata-tag-response.md)
+[`MetadataTagResponse`](../../doc/models/metadata-tag-response.md)
 
 ## Example Usage
 
 ```ts
 const contentType = null;
-const body: ApiRestV2MetadataTagCreateRequest = {
+const body: TspublicRestV2MetadataTagCreateRequest = {
   name: 'name6',
 };
 
@@ -126,7 +129,7 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
 # Update Tag
@@ -135,9 +138,11 @@ To programmatically update tags, use this endpoint.
 
 At least one of id or name of tag is required. When both are given, then id will be considered.
 
+Permission: Requires administration privilege
+
 ```ts
 async updateTag(
-  body: ApiRestV2MetadataTagUpdateRequest,
+  body: TspublicRestV2MetadataTagUpdateRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<boolean>>
 ```
@@ -146,7 +151,7 @@ async updateTag(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2MetadataTagUpdateRequest`](/doc/models/api-rest-v2-metadata-tag-update-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2MetadataTagUpdateRequest`](../../doc/models/tspublic-rest-v2-metadata-tag-update-request.md) | Body, Required | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -157,7 +162,7 @@ async updateTag(
 
 ```ts
 const contentType = null;
-const body: ApiRestV2MetadataTagUpdateRequest = {};
+const body: TspublicRestV2MetadataTagUpdateRequest = {};
 
 try {
   const { result, ...httpResponse } = await metadataController.updateTag(body);
@@ -175,7 +180,7 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
 # Delete Tag
@@ -183,6 +188,8 @@ try {
 To programmatically delete tags, use this endpoint.
 
 At least one of id or name of tag is required. When both are given, then id will be considered.
+
+Permission: Requires administration privilege
 
 ```ts
 async deleteTag(
@@ -223,7 +230,7 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
 # Assign Tag
@@ -232,9 +239,11 @@ To programmatically assign tags to a metadata object, such as a liveboard, searc
 
 At least one of id or name of tag is required. When both are given, then id will be considered.
 
+Permission: Requires at least view access to the object
+
 ```ts
 async assignTag(
-  body: ApiRestV2MetadataTagAssignRequest,
+  body: TspublicRestV2MetadataTagAssignRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<boolean>>
 ```
@@ -243,7 +252,7 @@ async assignTag(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2MetadataTagAssignRequest`](/doc/models/api-rest-v2-metadata-tag-assign-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2MetadataTagAssignRequest`](../../doc/models/tspublic-rest-v2-metadata-tag-assign-request.md) | Body, Required | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -254,24 +263,31 @@ async assignTag(
 
 ```ts
 const contentType = null;
-const bodyMetaObject: MetaObjectInput[] = [];
+const bodyTsObject: TsObjectInput[] = [];
 
-const bodymetaObject0: MetaObjectInput = {
-  id: 'id6',
+const bodytsObject0: TsObjectInput = {
+  id: 'id8',
+  type: 'DATAOBJECT',
+};
+
+bodyTsObject[0] = bodytsObject0;
+
+const bodytsObject1: TsObjectInput = {
+  id: 'id9',
+  type: 'CONNECTION',
+};
+
+bodyTsObject[1] = bodytsObject1;
+
+const bodytsObject2: TsObjectInput = {
+  id: 'id0',
   type: 'ANSWER',
 };
 
-bodyMetaObject[0] = bodymetaObject0;
+bodyTsObject[2] = bodytsObject2;
 
-const bodymetaObject1: MetaObjectInput = {
-  id: 'id7',
-  type: 'LIVEBOARD',
-};
-
-bodyMetaObject[1] = bodymetaObject1;
-
-const body: ApiRestV2MetadataTagAssignRequest = {
-  metaObject: bodyMetaObject,
+const body: TspublicRestV2MetadataTagAssignRequest = {
+  tsObject: bodyTsObject,
 };
 
 try {
@@ -290,7 +306,7 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
 # Unassign Tag
@@ -299,9 +315,11 @@ To programmatically unassign tags to a metadata object, such as a liveboard, sea
 
 At least one of id or name of tag is required. When both are given, then id will be considered.
 
+Permission: Requires at least view access to the object
+
 ```ts
 async unassignTag(
-  body: ApiRestV2MetadataTagUnassignRequest,
+  body: TspublicRestV2MetadataTagUnassignRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<boolean>>
 ```
@@ -310,7 +328,7 @@ async unassignTag(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2MetadataTagUnassignRequest`](/doc/models/api-rest-v2-metadata-tag-unassign-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2MetadataTagUnassignRequest`](../../doc/models/tspublic-rest-v2-metadata-tag-unassign-request.md) | Body, Required | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -321,24 +339,31 @@ async unassignTag(
 
 ```ts
 const contentType = null;
-const bodyMetaObject: MetaObjectInput[] = [];
+const bodyTsObject: TsObjectInput[] = [];
 
-const bodymetaObject0: MetaObjectInput = {
-  id: 'id6',
+const bodytsObject0: TsObjectInput = {
+  id: 'id8',
+  type: 'DATAOBJECT',
+};
+
+bodyTsObject[0] = bodytsObject0;
+
+const bodytsObject1: TsObjectInput = {
+  id: 'id9',
+  type: 'CONNECTION',
+};
+
+bodyTsObject[1] = bodytsObject1;
+
+const bodytsObject2: TsObjectInput = {
+  id: 'id0',
   type: 'ANSWER',
 };
 
-bodyMetaObject[0] = bodymetaObject0;
+bodyTsObject[2] = bodytsObject2;
 
-const bodymetaObject1: MetaObjectInput = {
-  id: 'id7',
-  type: 'LIVEBOARD',
-};
-
-bodyMetaObject[1] = bodymetaObject1;
-
-const body: ApiRestV2MetadataTagUnassignRequest = {
-  metaObject: bodyMetaObject,
+const body: TspublicRestV2MetadataTagUnassignRequest = {
+  tsObject: bodyTsObject,
 };
 
 try {
@@ -357,18 +382,20 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
 # Assign Favorite
 
 To programmatically assign objects to favorites for a given user account, use this endpoint.
 
-At least one of user id or username is required. When both are given, then id will be considered
+At least one of user id or username is required. When both are given, then id will be considered.
+
+Permission: Requires at least view access to the object
 
 ```ts
 async assignFavorite(
-  body: ApiRestV2MetadataFavoriteAssignRequest,
+  body: TspublicRestV2MetadataFavoriteAssignRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<boolean>>
 ```
@@ -377,7 +404,7 @@ async assignFavorite(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2MetadataFavoriteAssignRequest`](/doc/models/api-rest-v2-metadata-favorite-assign-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2MetadataFavoriteAssignRequest`](../../doc/models/tspublic-rest-v2-metadata-favorite-assign-request.md) | Body, Required | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -388,24 +415,31 @@ async assignFavorite(
 
 ```ts
 const contentType = null;
-const bodyMetaObject: MetaObjectInput[] = [];
+const bodyTsObject: TsObjectInput[] = [];
 
-const bodymetaObject0: MetaObjectInput = {
-  id: 'id6',
+const bodytsObject0: TsObjectInput = {
+  id: 'id8',
+  type: 'DATAOBJECT',
+};
+
+bodyTsObject[0] = bodytsObject0;
+
+const bodytsObject1: TsObjectInput = {
+  id: 'id9',
+  type: 'CONNECTION',
+};
+
+bodyTsObject[1] = bodytsObject1;
+
+const bodytsObject2: TsObjectInput = {
+  id: 'id0',
   type: 'ANSWER',
 };
 
-bodyMetaObject[0] = bodymetaObject0;
+bodyTsObject[2] = bodytsObject2;
 
-const bodymetaObject1: MetaObjectInput = {
-  id: 'id7',
-  type: 'LIVEBOARD',
-};
-
-bodyMetaObject[1] = bodymetaObject1;
-
-const body: ApiRestV2MetadataFavoriteAssignRequest = {
-  metaObject: bodyMetaObject,
+const body: TspublicRestV2MetadataFavoriteAssignRequest = {
+  tsObject: bodyTsObject,
 };
 
 try {
@@ -424,7 +458,7 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
 # Unassign Favorite
@@ -433,9 +467,11 @@ To programmatically unassign objects to favorites for a given user account, use 
 
 At least one of user id or username is required. When both are given, then id will be considered. Screen reader support enabled.
 
+Permission: Requires at least view access to the object
+
 ```ts
 async unassignFavorite(
-  body: ApiRestV2MetadataFavoriteUnassignRequest,
+  body: TspublicRestV2MetadataFavoriteUnassignRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<boolean>>
 ```
@@ -444,7 +480,7 @@ async unassignFavorite(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2MetadataFavoriteUnassignRequest`](/doc/models/api-rest-v2-metadata-favorite-unassign-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2MetadataFavoriteUnassignRequest`](../../doc/models/tspublic-rest-v2-metadata-favorite-unassign-request.md) | Body, Required | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -455,24 +491,31 @@ async unassignFavorite(
 
 ```ts
 const contentType = null;
-const bodyMetaObject: MetaObjectInput[] = [];
+const bodyTsObject: TsObjectInput[] = [];
 
-const bodymetaObject0: MetaObjectInput = {
-  id: 'id6',
+const bodytsObject0: TsObjectInput = {
+  id: 'id8',
+  type: 'DATAOBJECT',
+};
+
+bodyTsObject[0] = bodytsObject0;
+
+const bodytsObject1: TsObjectInput = {
+  id: 'id9',
+  type: 'CONNECTION',
+};
+
+bodyTsObject[1] = bodytsObject1;
+
+const bodytsObject2: TsObjectInput = {
+  id: 'id0',
   type: 'ANSWER',
 };
 
-bodyMetaObject[0] = bodymetaObject0;
+bodyTsObject[2] = bodytsObject2;
 
-const bodymetaObject1: MetaObjectInput = {
-  id: 'id7',
-  type: 'LIVEBOARD',
-};
-
-bodyMetaObject[1] = bodymetaObject1;
-
-const body: ApiRestV2MetadataFavoriteUnassignRequest = {
-  metaObject: bodyMetaObject,
+const body: TspublicRestV2MetadataFavoriteUnassignRequest = {
+  tsObject: bodyTsObject,
 };
 
 try {
@@ -491,17 +534,19 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
-# Get Homeliveboard
+# Get Home Liveboard
 
 To get the name and id of liveboard that is set as a home liveboard for a user, use this endpoint.
 
 At least one of user id or username is required. When both are given, then id will be considered.
 
+Permission: Requires at least view access to the object
+
 ```ts
-async getHomeliveboard(
+async getHomeLiveboard(
   userName?: string,
   userId?: string,
   requestOptions?: RequestOptions
@@ -518,13 +563,13 @@ async getHomeliveboard(
 
 ## Response Type
 
-[`HomeLiveboardResponse`](/doc/models/home-liveboard-response.md)
+[`HomeLiveboardResponse`](../../doc/models/home-liveboard-response.md)
 
 ## Example Usage
 
 ```ts
 try {
-  const { result, ...httpResponse } = await metadataController.getHomeliveboard();
+  const { result, ...httpResponse } = await metadataController.getHomeLiveboard();
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch(error) {
@@ -539,18 +584,20 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
-# Assign Homeliveboard
+# Assign Home Liveboard
 
 To assign a specific liveboard as a home liveboard for a user, use this endpoint.
 
 At least one of user id or username is required. When both are given, then id will be considered.
 
+Permission: Requires at least view access to the object
+
 ```ts
-async assignHomeliveboard(
-  body: ApiRestV2MetadataHomeliveboardAssignRequest,
+async assignHomeLiveboard(
+  body: TspublicRestV2MetadataHomeliveboardAssignRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<boolean>>
 ```
@@ -559,7 +606,7 @@ async assignHomeliveboard(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2MetadataHomeliveboardAssignRequest`](/doc/models/api-rest-v2-metadata-homeliveboard-assign-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2MetadataHomeliveboardAssignRequest`](../../doc/models/tspublic-rest-v2-metadata-homeliveboard-assign-request.md) | Body, Required | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -570,10 +617,10 @@ async assignHomeliveboard(
 
 ```ts
 const contentType = null;
-const body: ApiRestV2MetadataHomeliveboardAssignRequest = {};
+const body: TspublicRestV2MetadataHomeliveboardAssignRequest = {};
 
 try {
-  const { result, ...httpResponse } = await metadataController.assignHomeliveboard(body);
+  const { result, ...httpResponse } = await metadataController.assignHomeLiveboard(body);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch(error) {
@@ -588,18 +635,20 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
-# Unassign Homeliveboard
+# Unassign Home Liveboard
 
 To unassign the home liveboard set for a user, use this endpoint.
 
 At least one of user id or username is required. When both are given, then id will be considered.
 
+Permission: Requires at least view access to the object
+
 ```ts
-async unassignHomeliveboard(
-  body: ApiRestV2MetadataHomeliveboardUnassignRequest,
+async unassignHomeLiveboard(
+  body: TspublicRestV2MetadataHomeliveboardUnassignRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<boolean>>
 ```
@@ -608,7 +657,7 @@ async unassignHomeliveboard(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2MetadataHomeliveboardUnassignRequest`](/doc/models/api-rest-v2-metadata-homeliveboard-unassign-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2MetadataHomeliveboardUnassignRequest`](../../doc/models/tspublic-rest-v2-metadata-homeliveboard-unassign-request.md) | Body, Required | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -619,10 +668,10 @@ async unassignHomeliveboard(
 
 ```ts
 const contentType = null;
-const body: ApiRestV2MetadataHomeliveboardUnassignRequest = {};
+const body: TspublicRestV2MetadataHomeliveboardUnassignRequest = {};
 
 try {
-  const { result, ...httpResponse } = await metadataController.unassignHomeliveboard(body);
+  const { result, ...httpResponse } = await metadataController.unassignHomeLiveboard(body);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch(error) {
@@ -637,7 +686,7 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
 # Get Incomplete Objects
@@ -679,16 +728,18 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
-# Get Metadata Header
+# Get Object Header
 
 To get header detail of a metadata object, use this endpoint. You can provide as input selective fields to get the data for.
 
+Permission: Requires administration privilege for USER and USER_GROUP type. Requires datamanagement privilege for CONNECTION type. Requires at least view access for other object types
+
 ```ts
-async getMetadataHeader(
-  type: Type8Enum,
+async getObjectHeader(
+  type: Type9Enum,
   id: string,
   outputFields?: string[],
   requestOptions?: RequestOptions
@@ -699,7 +750,7 @@ async getMetadataHeader(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `type` | [`Type8Enum`](/doc/models/type-8-enum.md) | Query, Required | Type of the metadata object being searched. |
+| `type` | [`Type9Enum`](../../doc/models/type-9-enum.md) | Query, Required | Type of the metadata object being searched. |
 | `id` | `string` | Query, Required | GUID of the metadata object |
 | `outputFields` | `string[] \| undefined` | Query, Optional | Array of header field names that need to be included in the header response |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
@@ -714,7 +765,7 @@ async getMetadataHeader(
 const type = 'COLUMN_ALL';
 const id = 'id0';
 try {
-  const { result, ...httpResponse } = await metadataController.getMetadataHeader(type, id);
+  const { result, ...httpResponse } = await metadataController.getObjectHeader(type, id);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch(error) {
@@ -729,20 +780,19 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
 # Get Object Detail
 
-Use this endpoint to get full details of metadata objects
+Use this endpoint to get full details of metadata objects.
+
+Permission: Requires administration privilege for USER and USER_GROUP type. Requires datamanagement privilege for CONNECTION type. Requires at least view access to other object types
 
 ```ts
 async getObjectDetail(
-  type: Type9Enum,
+  type: Type10Enum,
   id: string[],
-  showHidden?: boolean,
-  dropQuestionDetails?: boolean,
-  version?: string,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<unknown>>
 ```
@@ -751,11 +801,8 @@ async getObjectDetail(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `type` | [`Type9Enum`](/doc/models/type-9-enum.md) | Query, Required | Type of the metadata object being searched. Valid values |
+| `type` | [`Type10Enum`](../../doc/models/type-10-enum.md) | Query, Required | Type of the metadata object being searched. Valid values |
 | `id` | `string[]` | Query, Required | A JSON array of GUIDs of the objects. |
-| `showHidden` | `boolean \| undefined` | Query, Optional | When set to true, returns details of the hidden objects, such as a column in a worksheet or a table. |
-| `dropQuestionDetails` | `boolean \| undefined` | Query, Optional | When set to true, the search assist data associated with a worksheet is not included in the API response. This attribute is applicable only for LOGICAL_TABLE data type. |
-| `version` | `string \| undefined` | Query, Optional | Specify the version to retrieve the objects from. By default, the API returns metadata for all versions of the object. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -783,7 +830,7 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
 # Get Object Visualization Header
@@ -791,6 +838,8 @@ try {
 Use this endpoint to get header details of visualization charts for a given liveboard or answer.
 
 At least one of id or name of liveboard or answer is required. When both are given, then id will be considered.
+
+Permission: Requires at least view access to the object
 
 ```ts
 async getObjectVisualizationHeader(
@@ -830,16 +879,18 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
 # Search Object Header
 
 To get header details for metadata objects, use this endpoint. You can provide as input selective fields to get the data for.
 
+Permission: Requires administration privilege for USER and USER_GROUP type. Requires datamanagement privilege for CONNECTION type. Requires at least view access for other object types
+
 ```ts
 async searchObjectHeader(
-  body: ApiRestV2MetadataHeaderSearchRequest,
+  body: TspublicRestV2MetadataHeaderSearchRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<unknown>>
 ```
@@ -848,7 +899,7 @@ async searchObjectHeader(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2MetadataHeaderSearchRequest`](/doc/models/api-rest-v2-metadata-header-search-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2MetadataHeaderSearchRequest`](../../doc/models/tspublic-rest-v2-metadata-header-search-request.md) | Body, Required | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -859,7 +910,7 @@ async searchObjectHeader(
 
 ```ts
 const contentType = null;
-const body: ApiRestV2MetadataHeaderSearchRequest = {
+const body: TspublicRestV2MetadataHeaderSearchRequest = {
   type: 'USER',
 };
 
@@ -879,40 +930,45 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
-# Delete Metadata Object
+# Search Object Detail
 
-Use this endpoint to delete the metadata objects
+Use this endpoint to get full details of metadata objects.
+
+Permission: Requires administration privilege for USER and USER_GROUP type. Requires datamanagement privilege for CONNECTION type. Requires at least view access for other object types
 
 ```ts
-async deleteMetadataObject(
-  type: Type9Enum,
-  id: string[],
+async searchObjectDetail(
+  body: TspublicRestV2MetadataDetailSearchRequest,
   requestOptions?: RequestOptions
-): Promise<ApiResponse<boolean>>
+): Promise<ApiResponse<unknown>>
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `type` | [`Type9Enum`](/doc/models/type-9-enum.md) | Query, Required | Type of the metadata object being searched. |
-| `id` | `string[]` | Query, Required | A JSON array of GUIDs of the objects. |
+| `body` | [`TspublicRestV2MetadataDetailSearchRequest`](../../doc/models/tspublic-rest-v2-metadata-detail-search-request.md) | Body, Required | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
 
-`boolean`
+`unknown`
 
 ## Example Usage
 
 ```ts
-const type = 'DATAOBJECT';
-const Id: string[] = ['id0'];
+const contentType = null;
+const bodyId: string[] = ['id6', 'id7'];
+const body: TspublicRestV2MetadataDetailSearchRequest = {
+  type: 'USER',
+  id: bodyId,
+};
+
 try {
-  const { result, ...httpResponse } = await metadataController.deleteMetadataObject(type, id);
+  const { result, ...httpResponse } = await metadataController.searchObjectDetail(body);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch(error) {
@@ -927,7 +983,57 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
+
+
+# Delete Object
+
+Use this endpoint to delete the metadata objects.
+
+Permission: Requires modify access to the object
+
+```ts
+async deleteObject(
+  type: Type10Enum,
+  id: string[],
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<boolean>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `type` | [`Type10Enum`](../../doc/models/type-10-enum.md) | Query, Required | Type of the metadata object being searched. |
+| `id` | `string[]` | Query, Required | A JSON array of GUIDs of the objects. |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+`boolean`
+
+## Example Usage
+
+```ts
+const type = 'DATAOBJECT';
+const Id: string[] = ['id0'];
+try {
+  const { result, ...httpResponse } = await metadataController.deleteObject(type, id);
+  // Get more response info...
+  // const { statusCode, headers } = httpResponse;
+} catch(error) {
+  if (error instanceof ApiError) {
+    const errors = error.result;
+    // const { statusCode, headers } = error;
+  }
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
 # Get Object Dependency
@@ -944,9 +1050,11 @@ W1 has a dependency on C2 i.e. W1 is a referencing object and C2 is a referenced
 
 Similarly C1 is said to have a dependency on C2 i.e. C1 is a referencing object and C2 is a referenced object. It is not possible to delete C2 without first deleting C1
 
+Permission: Requires at least view access to the object
+
 ```ts
 async getObjectDependency(
-  body: ApiRestV2MetadataDependencyRequest,
+  body: TspublicRestV2MetadataDependencyRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<unknown>>
 ```
@@ -955,7 +1063,7 @@ async getObjectDependency(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2MetadataDependencyRequest`](/doc/models/api-rest-v2-metadata-dependency-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2MetadataDependencyRequest`](../../doc/models/tspublic-rest-v2-metadata-dependency-request.md) | Body, Required | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -967,7 +1075,7 @@ async getObjectDependency(
 ```ts
 const contentType = null;
 const bodyId: string[] = ['id6', 'id7'];
-const body: ApiRestV2MetadataDependencyRequest = {
+const body: TspublicRestV2MetadataDependencyRequest = {
   type: 'COLUMN',
   id: bodyId,
 };
@@ -988,16 +1096,18 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
 # Export Object TML
 
-To export ThoughtSpot objects represented in ThoughtSpot Modeling Language (TML), use this endpoint
+To export ThoughtSpot objects represented in ThoughtSpot Modeling Language (TML), use this endpoint.
+
+Permission: Requires at least view access to the object
 
 ```ts
 async exportObjectTML(
-  body: ApiRestV2MetadataTmlExportRequest,
+  body: TspublicRestV2MetadataTmlExportRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<unknown>>
 ```
@@ -1006,7 +1116,7 @@ async exportObjectTML(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2MetadataTmlExportRequest`](/doc/models/api-rest-v2-metadata-tml-export-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2MetadataTmlExportRequest`](../../doc/models/tspublic-rest-v2-metadata-tml-export-request.md) | Body, Required | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -1018,7 +1128,7 @@ async exportObjectTML(
 ```ts
 const contentType = null;
 const bodyId: string[] = ['id6', 'id7'];
-const body: ApiRestV2MetadataTmlExportRequest = {
+const body: TspublicRestV2MetadataTmlExportRequest = {
   id: bodyId,
 };
 
@@ -1038,16 +1148,18 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
 # Import Object TML
 
-To import ThoughtSpot objects represented in ThoughtSpot Modeling Language (TML), use this endpoint
+To import ThoughtSpot objects represented in ThoughtSpot Modeling Language (TML), use this endpoint.
+
+Permission: Requires datamanagement privilge
 
 ```ts
 async importObjectTML(
-  body: ApiRestV2MetadataTmlImportRequest,
+  body: TspublicRestV2MetadataTmlImportRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<unknown>>
 ```
@@ -1056,7 +1168,7 @@ async importObjectTML(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2MetadataTmlImportRequest`](/doc/models/api-rest-v2-metadata-tml-import-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2MetadataTmlImportRequest`](../../doc/models/tspublic-rest-v2-metadata-tml-import-request.md) | Body, Required | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -1068,7 +1180,7 @@ async importObjectTML(
 ```ts
 const contentType = null;
 const bodyObjectTML: string[] = ['objectTML5', 'objectTML6'];
-const body: ApiRestV2MetadataTmlImportRequest = {
+const body: TspublicRestV2MetadataTmlImportRequest = {
   objectTML: bodyObjectTML,
 };
 
@@ -1088,5 +1200,5 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 

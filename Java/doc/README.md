@@ -7,7 +7,12 @@
 * [Database](controllers/database.md)
 * [Connection](controllers/connection.md)
 * [Data](controllers/data.md)
+* [Report](controllers/report.md)
 * [Admin](controllers/admin.md)
+* [Security](controllers/security.md)
+* [Logs](controllers/logs.md)
+* [Materialization](controllers/materialization.md)
+* [Custom Actions](controllers/custom-actions.md)
 
 ## Classes Documentation
 

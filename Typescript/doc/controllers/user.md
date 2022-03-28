@@ -10,18 +10,21 @@ const userController = new UserController(client);
 
 ## Methods
 
-* [Get User](/doc/controllers/user.md#get-user)
-* [Create User](/doc/controllers/user.md#create-user)
-* [Update User](/doc/controllers/user.md#update-user)
-* [Delete User](/doc/controllers/user.md#delete-user)
-* [Add Groups to User](/doc/controllers/user.md#add-groups-to-user)
-* [Remove Groups From User](/doc/controllers/user.md#remove-groups-from-user)
-* [Search Users](/doc/controllers/user.md#search-users)
+* [Get User](../../doc/controllers/user.md#get-user)
+* [Create User](../../doc/controllers/user.md#create-user)
+* [Update User](../../doc/controllers/user.md#update-user)
+* [Delete User](../../doc/controllers/user.md#delete-user)
+* [Add Groups to User](../../doc/controllers/user.md#add-groups-to-user)
+* [Remove Groups From User](../../doc/controllers/user.md#remove-groups-from-user)
+* [Change Password of User](../../doc/controllers/user.md#change-password-of-user)
+* [Search Users](../../doc/controllers/user.md#search-users)
 
 
 # Get User
 
 To get the details of a specific user account by username or user id, use this endpoint. At Least one value is needed. When both are given,then user id will be considered to fetch user information
+
+Permission: Requires administration privilege
 
 ```ts
 async getUser(
@@ -41,7 +44,7 @@ async getUser(
 
 ## Response Type
 
-[`UserResponse`](/doc/models/user-response.md)
+[`UserResponse`](../../doc/models/user-response.md)
 
 ## Example Usage
 
@@ -62,7 +65,7 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
 # Create User
@@ -73,9 +76,11 @@ Using this API, you can create a user and assign groups. To create a user, you r
 
 All users created in the ThoughtSpot system are added to ALL_GROUP
 
+Permission: Requires administration privilege
+
 ```ts
 async createUser(
-  body: ApiRestV2UserCreateRequest,
+  body: TspublicRestV2UserCreateRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<UserResponse>>
 ```
@@ -84,18 +89,18 @@ async createUser(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2UserCreateRequest`](/doc/models/api-rest-v2-user-create-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2UserCreateRequest`](../../doc/models/tspublic-rest-v2-user-create-request.md) | Body, Required | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
 
-[`UserResponse`](/doc/models/user-response.md)
+[`UserResponse`](../../doc/models/user-response.md)
 
 ## Example Usage
 
 ```ts
 const contentType = null;
-const body: ApiRestV2UserCreateRequest = {
+const body: TspublicRestV2UserCreateRequest = {
   name: 'name6',
   displayName: 'displayName6',
   password: 'password0',
@@ -117,7 +122,7 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
 # Update User
@@ -128,9 +133,11 @@ To modify a user, you require admin user privileges.
 
 At least one of User Id or username is mandatory. When both are given, then user id will be considered and username will be updated
 
+Permission: Requires administration privilege
+
 ```ts
 async updateUser(
-  body: ApiRestV2UserUpdateRequest,
+  body: TspublicRestV2UserUpdateRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<boolean>>
 ```
@@ -139,7 +146,7 @@ async updateUser(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2UserUpdateRequest`](/doc/models/api-rest-v2-user-update-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2UserUpdateRequest`](../../doc/models/tspublic-rest-v2-user-update-request.md) | Body, Required | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -150,7 +157,7 @@ async updateUser(
 
 ```ts
 const contentType = null;
-const body: ApiRestV2UserUpdateRequest = {};
+const body: TspublicRestV2UserUpdateRequest = {};
 
 try {
   const { result, ...httpResponse } = await userController.updateUser(body);
@@ -168,7 +175,7 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
 # Delete User
@@ -176,6 +183,8 @@ try {
 To remove a user from the ThoughtSpot system, use this endpoint.
 
 At least one value is needed. When both are given, then user id will be considered to delete user.
+
+Permission: Requires administration privilege
 
 ```ts
 async deleteUser(
@@ -216,7 +225,7 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
 # Add Groups to User
@@ -227,9 +236,11 @@ When you assign groups to a user, the user inherits the privileges assigned to t
 
 At least one of user Id or username is mandatory. When both are given, then user id will be considered.
 
+Permission: Requires administration privilege
+
 ```ts
 async addGroupsToUser(
-  body: ApiRestV2UserAddgroupRequest,
+  body: TspublicRestV2UserAddgroupRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<boolean>>
 ```
@@ -238,7 +249,7 @@ async addGroupsToUser(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2UserAddgroupRequest`](/doc/models/api-rest-v2-user-addgroup-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2UserAddgroupRequest`](../../doc/models/tspublic-rest-v2-user-addgroup-request.md) | Body, Required | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -249,7 +260,15 @@ async addGroupsToUser(
 
 ```ts
 const contentType = null;
-const body: ApiRestV2UserAddgroupRequest = {};
+const bodyGroups: GroupNameAndIDInput[] = [];
+
+const bodygroups0: GroupNameAndIDInput = {};
+
+bodyGroups[0] = bodygroups0;
+
+const body: TspublicRestV2UserAddgroupRequest = {
+  groups: bodyGroups,
+};
 
 try {
   const { result, ...httpResponse } = await userController.addGroupsToUser(body);
@@ -267,7 +286,7 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
 # Remove Groups From User
@@ -278,9 +297,11 @@ The API removes only the user association. It does not delete the user or group 
 
 At least one of user id or username is mandatory. When both are given, then user id will be considered.
 
+Permission: Requires administration privilege
+
 ```ts
 async removeGroupsFromUser(
-  body: ApiRestV2UserRemovegroupRequest,
+  body: TspublicRestV2UserRemovegroupRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<boolean>>
 ```
@@ -289,7 +310,7 @@ async removeGroupsFromUser(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2UserRemovegroupRequest`](/doc/models/api-rest-v2-user-removegroup-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2UserRemovegroupRequest`](../../doc/models/tspublic-rest-v2-user-removegroup-request.md) | Body, Required | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -300,7 +321,15 @@ async removeGroupsFromUser(
 
 ```ts
 const contentType = null;
-const body: ApiRestV2UserRemovegroupRequest = {};
+const bodyGroups: GroupNameAndIDInput[] = [];
+
+const bodygroups0: GroupNameAndIDInput = {};
+
+bodyGroups[0] = bodygroups0;
+
+const body: TspublicRestV2UserRemovegroupRequest = {
+  groups: bodyGroups,
+};
 
 try {
   const { result, ...httpResponse } = await userController.removeGroupsFromUser(body);
@@ -318,36 +347,92 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
-# Search Users
+# Change Password of User
 
-To get the details of a specific user account or all users in the ThoughtSpot system, use this endpoint. If no input is provided, then all user are included in the response.
+To change the password of a ThoughtSpot user account, use this endpoint.
+
+At least one of id or name of user is required. When both are given user id will be considered.
+
+Permission: Requires administration privilege
 
 ```ts
-async searchUsers(
-  body: ApiRestV2UserSearchRequest,
+async changePasswordOfUser(
+  body: TspublicRestV2UserChangepasswordRequest,
   requestOptions?: RequestOptions
-): Promise<ApiResponse<UserResponse[]>>
+): Promise<ApiResponse<boolean>>
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2UserSearchRequest`](/doc/models/api-rest-v2-user-search-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2UserChangepasswordRequest`](../../doc/models/tspublic-rest-v2-user-changepassword-request.md) | Body, Required | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
 
-[`UserResponse[]`](/doc/models/user-response.md)
+`boolean`
 
 ## Example Usage
 
 ```ts
 const contentType = null;
-const body: ApiRestV2UserSearchRequest = {};
+const body: TspublicRestV2UserChangepasswordRequest = {
+  currentPassword: 'currentPassword0',
+  newPassword: 'newPassword0',
+};
+
+try {
+  const { result, ...httpResponse } = await userController.changePasswordOfUser(body);
+  // Get more response info...
+  // const { statusCode, headers } = httpResponse;
+} catch(error) {
+  if (error instanceof ApiError) {
+    const errors = error.result;
+    // const { statusCode, headers } = error;
+  }
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
+
+
+# Search Users
+
+To get the details of a specific user account or all users in the ThoughtSpot system, use this endpoint. If no input is provided, then all user are included in the response.
+
+Permission: Requires administration privilege
+
+```ts
+async searchUsers(
+  body: TspublicRestV2UserSearchRequest,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<unknown>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`TspublicRestV2UserSearchRequest`](../../doc/models/tspublic-rest-v2-user-search-request.md) | Body, Required | - |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+`unknown`
+
+## Example Usage
+
+```ts
+const contentType = null;
+const body: TspublicRestV2UserSearchRequest = {};
 
 try {
   const { result, ...httpResponse } = await userController.searchUsers(body);
@@ -365,5 +450,5 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 

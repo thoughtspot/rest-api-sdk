@@ -28,6 +28,6 @@ namespace RESTAPISDK.Standard.Models
         /// FULL.
         /// </summary>
         [EnumMember(Value = "FULL")]
-        FULL,
+        FULL
     }
 }

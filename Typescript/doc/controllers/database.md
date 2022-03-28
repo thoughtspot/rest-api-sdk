@@ -10,11 +10,11 @@ const databaseController = new DatabaseController(client);
 
 ## Methods
 
-* [Get Databases](/doc/controllers/database.md#get-databases)
-* [Get Schemas](/doc/controllers/database.md#get-schemas)
-* [Get Tables](/doc/controllers/database.md#get-tables)
-* [Create Table](/doc/controllers/database.md#create-table)
-* [Run Query](/doc/controllers/database.md#run-query)
+* [Get Databases](../../doc/controllers/database.md#get-databases)
+* [Get Schemas](../../doc/controllers/database.md#get-schemas)
+* [Get Tables](../../doc/controllers/database.md#get-tables)
+* [Create Table](../../doc/controllers/database.md#create-table)
+* [Run Query](../../doc/controllers/database.md#run-query)
 
 
 # Get Databases
@@ -22,6 +22,8 @@ const databaseController = new DatabaseController(client);
 Note: This endpoint is applicable only for on-prem deployments
 
 To list all the databases in Falcon, use this endpoint.
+
+Permission: Requires administration privilege
 
 ```ts
 async getDatabases(
@@ -58,7 +60,7 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
 # Get Schemas
@@ -66,6 +68,8 @@ try {
 Note: This endpoint is applicable only for on-prem deployments
 
 To list all the schemas in a database in Falcon, use this endpoint.
+
+Permission: Requires administration privilege
 
 ```ts
 async getSchemas(
@@ -105,7 +109,7 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
 # Get Tables
@@ -113,6 +117,8 @@ try {
 Note: This endpoint is applicable only for on-prem deployments.
 
 To list all the tables in a schema of a database in Falcon, use this endpoint.
+
+Permission: Requires administration privilege
 
 ```ts
 async getTables(
@@ -155,7 +161,7 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
 # Create Table
@@ -164,9 +170,11 @@ Note: This endpoint is applicable only for on-prem deployments.
 
 To create a table in Falcon, use this endpoint.
 
+Permission: Requires administration privilege
+
 ```ts
 async createTable(
-  body: ApiRestV2DatabaseTableCreateRequest,
+  body: TspublicRestV2DatabaseTableCreateRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<CreateTableResponse>>
 ```
@@ -175,18 +183,18 @@ async createTable(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2DatabaseTableCreateRequest`](/doc/models/api-rest-v2-database-table-create-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2DatabaseTableCreateRequest`](../../doc/models/tspublic-rest-v2-database-table-create-request.md) | Body, Required | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
 
-[`CreateTableResponse`](/doc/models/create-table-response.md)
+[`CreateTableResponse`](../../doc/models/create-table-response.md)
 
 ## Example Usage
 
 ```ts
 const contentType = null;
-const body: ApiRestV2DatabaseTableCreateRequest = {};
+const body: TspublicRestV2DatabaseTableCreateRequest = {};
 
 try {
   const { result, ...httpResponse } = await databaseController.createTable(body);
@@ -204,7 +212,7 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
 # Run Query
@@ -215,9 +223,11 @@ To run a TQL statement in Falcon, use this endpoint.
 
 You can run only following type of statements - Table DDL alter and Table rows update and delete.
 
+Permission: Requires administration privilege
+
 ```ts
 async runQuery(
-  body: ApiRestV2DatabaseTableRunqueryRequest,
+  body: TspublicRestV2DatabaseTableRunqueryRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<unknown[]>>
 ```
@@ -226,7 +236,7 @@ async runQuery(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2DatabaseTableRunqueryRequest`](/doc/models/api-rest-v2-database-table-runquery-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2DatabaseTableRunqueryRequest`](../../doc/models/tspublic-rest-v2-database-table-runquery-request.md) | Body, Required | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -238,7 +248,7 @@ async runQuery(
 ```ts
 const contentType = null;
 const bodyStatement: string[] = ['statement6', 'statement7'];
-const body: ApiRestV2DatabaseTableRunqueryRequest = {
+const body: TspublicRestV2DatabaseTableRunqueryRequest = {
   statement: bodyStatement,
 };
 
@@ -258,5 +268,5 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 

@@ -34,6 +34,6 @@ namespace RESTAPISDK.Standard.Models
         /// SHARABLE.
         /// </summary>
         [EnumMember(Value = "SHARABLE")]
-        SHARABLE,
+        SHARABLE
     }
 }

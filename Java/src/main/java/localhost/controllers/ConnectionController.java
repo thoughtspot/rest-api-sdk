@@ -24,13 +24,17 @@ import localhost.http.client.HttpContext;
 import localhost.http.request.HttpRequest;
 import localhost.http.response.HttpResponse;
 import localhost.http.response.HttpStringResponse;
-import localhost.models.ApiRestV2ConnectionAddtableRequest;
-import localhost.models.ApiRestV2ConnectionCreateRequest;
-import localhost.models.ApiRestV2ConnectionRemovetableRequest;
-import localhost.models.ApiRestV2ConnectionSearchRequest;
-import localhost.models.ApiRestV2ConnectionUpdateRequest;
 import localhost.models.ConnectionResponse;
+import localhost.models.ConnectionTableColumnsResponse;
+import localhost.models.ConnectionTableResponse;
 import localhost.models.CreateConnectionResponse;
+import localhost.models.TspublicRestV2ConnectionAddtableRequest;
+import localhost.models.TspublicRestV2ConnectionCreateRequest;
+import localhost.models.TspublicRestV2ConnectionRemovetableRequest;
+import localhost.models.TspublicRestV2ConnectionSearchRequest;
+import localhost.models.TspublicRestV2ConnectionTableRequest;
+import localhost.models.TspublicRestV2ConnectionTablecoloumnRequest;
+import localhost.models.TspublicRestV2ConnectionUpdateRequest;
 
 /**
  * This class lists all the endpoints of the groups.
@@ -61,7 +65,8 @@ public final class ConnectionController extends BaseController {
     }
 
     /**
-     * To get the details of a specific connection use this endpoint.
+     * To get the details of a specific connection use this endpoint. Permission: Requires
+     * datamanagement privilege.
      * @param  id  Required parameter: The GUID of the connection to query
      * @return    Returns the ConnectionResponse response from the API call
      * @throws    ApiException    Represents error response from the server.
@@ -79,7 +84,8 @@ public final class ConnectionController extends BaseController {
     }
 
     /**
-     * To get the details of a specific connection use this endpoint.
+     * To get the details of a specific connection use this endpoint. Permission: Requires
+     * datamanagement privilege.
      * @param  id  Required parameter: The GUID of the connection to query
      * @return    Returns the ConnectionResponse response from the API call
      */
@@ -97,12 +103,17 @@ public final class ConnectionController extends BaseController {
      */
     private HttpRequest buildGetConnectionRequest(
             final String id) {
+        //validating required parameters
+        if (null == id) {
+            throw new NullPointerException("The parameter \"id\" is a required parameter and cannot be null.");
+        }
+
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/connection");
+                + "/tspublic/rest/v2/connection");
 
         //load all query parameters
         Map<String, Object> queryParameters = new HashMap<>();
@@ -110,8 +121,8 @@ public final class ConnectionController extends BaseController {
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
-        headers.add("Content-Type", config.getContentType());
         headers.add("Accept-Language", config.getAcceptLanguage());
+        headers.add("Content-Type", config.getContentType());
         headers.add("user-agent", BaseController.userAgent);
         headers.add("accept", "application/json");
 
@@ -158,14 +169,325 @@ public final class ConnectionController extends BaseController {
     }
 
     /**
+     * To get the list of databases for a connection, use this endpoint. The response will include
+     * databases from the data platform corresponding to the connection id provided. Permission:
+     * Requires datamanagement privilege.
+     * @param  id  Required parameter: The GUID of the connection
+     * @return    Returns the List of String response from the API call
+     * @throws    ApiException    Represents error response from the server.
+     * @throws    IOException    Signals that an I/O exception of some sort has occurred.
+     */
+    public List<String> getConnectionDatabase(
+            final String id) throws ApiException, IOException {
+        HttpRequest request = buildGetConnectionDatabaseRequest(id);
+        authManagers.get("global").apply(request);
+
+        HttpResponse response = getClientInstance().execute(request, false);
+        HttpContext context = new HttpContext(request, response);
+
+        return handleGetConnectionDatabaseResponse(context);
+    }
+
+    /**
+     * To get the list of databases for a connection, use this endpoint. The response will include
+     * databases from the data platform corresponding to the connection id provided. Permission:
+     * Requires datamanagement privilege.
+     * @param  id  Required parameter: The GUID of the connection
+     * @return    Returns the List of String response from the API call
+     */
+    public CompletableFuture<List<String>> getConnectionDatabaseAsync(
+            final String id) {
+        return makeHttpCallAsync(() -> buildGetConnectionDatabaseRequest(id),
+            req -> authManagers.get("global").applyAsync(req)
+                .thenCompose(request -> getClientInstance()
+                        .executeAsync(request, false)),
+            context -> handleGetConnectionDatabaseResponse(context));
+    }
+
+    /**
+     * Builds the HttpRequest object for getConnectionDatabase.
+     */
+    private HttpRequest buildGetConnectionDatabaseRequest(
+            final String id) {
+        //validating required parameters
+        if (null == id) {
+            throw new NullPointerException("The parameter \"id\" is a required parameter and cannot be null.");
+        }
+
+        //the base uri for api requests
+        String baseUri = config.getBaseUri();
+
+        //prepare query string for API call
+        final StringBuilder queryBuilder = new StringBuilder(baseUri
+                + "/tspublic/rest/v2/connection/database");
+
+        //load all query parameters
+        Map<String, Object> queryParameters = new HashMap<>();
+        queryParameters.put("id", id);
+
+        //load all headers for the outgoing API request
+        Headers headers = new Headers();
+        headers.add("Accept-Language", config.getAcceptLanguage());
+        headers.add("Content-Type", config.getContentType());
+        headers.add("user-agent", BaseController.userAgent);
+        headers.add("accept", "application/json");
+
+        //prepare and invoke the API call request to fetch the response
+        HttpRequest request = getClientInstance().get(queryBuilder, headers, queryParameters,
+                null);
+
+        // Invoke the callback before request if its not null
+        if (getHttpCallback() != null) {
+            getHttpCallback().onBeforeRequest(request);
+        }
+
+        return request;
+    }
+
+    /**
+     * Processes the response for getConnectionDatabase.
+     * @return An object of type List of String
+     */
+    private List<String> handleGetConnectionDatabaseResponse(
+            HttpContext context) throws ApiException, IOException {
+        HttpResponse response = context.getResponse();
+
+        //invoke the callback after response if its not null
+        if (getHttpCallback() != null) {
+            getHttpCallback().onAfterResponse(context);
+        }
+
+        //Error handling using HTTP status codes
+        int responseCode = response.getStatusCode();
+
+        if (responseCode == 500) {
+            throw new ErrorResponseException("Operation failed or unauthorized request", context);
+        }
+        //handle errors defined at the API level
+        validateResponse(response, context);
+
+        //extract result from the http response
+        String responseBody = ((HttpStringResponse) response).getBody();
+        List<String> result = ApiHelper.deserializeArray(responseBody,
+                String[].class);
+
+        return result;
+    }
+
+    /**
+     * To get the details of tables from a connection, use this endpoint. You can get the details of
+     * tables in the data platform for the connection id provided. Permission: Requires
+     * datamanagement privilege.
+     * @param  body  Required parameter: Example:
+     * @return    Returns the ConnectionTableResponse response from the API call
+     * @throws    ApiException    Represents error response from the server.
+     * @throws    IOException    Signals that an I/O exception of some sort has occurred.
+     */
+    public ConnectionTableResponse getConnectionTables(
+            final TspublicRestV2ConnectionTableRequest body) throws ApiException, IOException {
+        HttpRequest request = buildGetConnectionTablesRequest(body);
+        authManagers.get("global").apply(request);
+
+        HttpResponse response = getClientInstance().execute(request, false);
+        HttpContext context = new HttpContext(request, response);
+
+        return handleGetConnectionTablesResponse(context);
+    }
+
+    /**
+     * To get the details of tables from a connection, use this endpoint. You can get the details of
+     * tables in the data platform for the connection id provided. Permission: Requires
+     * datamanagement privilege.
+     * @param  body  Required parameter: Example:
+     * @return    Returns the ConnectionTableResponse response from the API call
+     */
+    public CompletableFuture<ConnectionTableResponse> getConnectionTablesAsync(
+            final TspublicRestV2ConnectionTableRequest body) {
+        return makeHttpCallAsync(() -> buildGetConnectionTablesRequest(body),
+            req -> authManagers.get("global").applyAsync(req)
+                .thenCompose(request -> getClientInstance()
+                        .executeAsync(request, false)),
+            context -> handleGetConnectionTablesResponse(context));
+    }
+
+    /**
+     * Builds the HttpRequest object for getConnectionTables.
+     */
+    private HttpRequest buildGetConnectionTablesRequest(
+            final TspublicRestV2ConnectionTableRequest body) throws JsonProcessingException {
+        //validating required parameters
+        if (null == body) {
+            throw new NullPointerException("The parameter \"body\" is a required parameter and cannot be null.");
+        }
+
+        //the base uri for api requests
+        String baseUri = config.getBaseUri();
+
+        //prepare query string for API call
+        final StringBuilder queryBuilder = new StringBuilder(baseUri
+                + "/tspublic/rest/v2/connection/table");
+
+        //load all headers for the outgoing API request
+        Headers headers = new Headers();
+        headers.add("Content-Type", "application/json");
+        headers.add("Accept-Language", config.getAcceptLanguage());
+        headers.add("user-agent", BaseController.userAgent);
+        headers.add("accept", "application/json");
+
+        //prepare and invoke the API call request to fetch the response
+        String bodyJson = ApiHelper.serialize(body);
+        HttpRequest request = getClientInstance().postBody(queryBuilder, headers, null, bodyJson);
+
+        // Invoke the callback before request if its not null
+        if (getHttpCallback() != null) {
+            getHttpCallback().onBeforeRequest(request);
+        }
+
+        return request;
+    }
+
+    /**
+     * Processes the response for getConnectionTables.
+     * @return An object of type ConnectionTableResponse
+     */
+    private ConnectionTableResponse handleGetConnectionTablesResponse(
+            HttpContext context) throws ApiException, IOException {
+        HttpResponse response = context.getResponse();
+
+        //invoke the callback after response if its not null
+        if (getHttpCallback() != null) {
+            getHttpCallback().onAfterResponse(context);
+        }
+
+        //Error handling using HTTP status codes
+        int responseCode = response.getStatusCode();
+
+        if (responseCode == 500) {
+            throw new ErrorResponseException("Operation failed or unauthorized request", context);
+        }
+        //handle errors defined at the API level
+        validateResponse(response, context);
+
+        //extract result from the http response
+        String responseBody = ((HttpStringResponse) response).getBody();
+        ConnectionTableResponse result = ApiHelper.deserialize(responseBody,
+                ConnectionTableResponse.class);
+
+        return result;
+    }
+
+    /**
+     * To get the details of columns in a table associated to a connection, use this endpoint. You
+     * can get the columns of any table available in the data platform for the connection id
+     * provided. Permission: Requires datamanagement privilege.
+     * @param  body  Required parameter: Example:
+     * @return    Returns the ConnectionTableColumnsResponse response from the API call
+     * @throws    ApiException    Represents error response from the server.
+     * @throws    IOException    Signals that an I/O exception of some sort has occurred.
+     */
+    public ConnectionTableColumnsResponse getConnectionTableColumns(
+            final TspublicRestV2ConnectionTablecoloumnRequest body) throws ApiException, IOException {
+        HttpRequest request = buildGetConnectionTableColumnsRequest(body);
+        authManagers.get("global").apply(request);
+
+        HttpResponse response = getClientInstance().execute(request, false);
+        HttpContext context = new HttpContext(request, response);
+
+        return handleGetConnectionTableColumnsResponse(context);
+    }
+
+    /**
+     * To get the details of columns in a table associated to a connection, use this endpoint. You
+     * can get the columns of any table available in the data platform for the connection id
+     * provided. Permission: Requires datamanagement privilege.
+     * @param  body  Required parameter: Example:
+     * @return    Returns the ConnectionTableColumnsResponse response from the API call
+     */
+    public CompletableFuture<ConnectionTableColumnsResponse> getConnectionTableColumnsAsync(
+            final TspublicRestV2ConnectionTablecoloumnRequest body) {
+        return makeHttpCallAsync(() -> buildGetConnectionTableColumnsRequest(body),
+            req -> authManagers.get("global").applyAsync(req)
+                .thenCompose(request -> getClientInstance()
+                        .executeAsync(request, false)),
+            context -> handleGetConnectionTableColumnsResponse(context));
+    }
+
+    /**
+     * Builds the HttpRequest object for getConnectionTableColumns.
+     */
+    private HttpRequest buildGetConnectionTableColumnsRequest(
+            final TspublicRestV2ConnectionTablecoloumnRequest body) throws JsonProcessingException {
+        //validating required parameters
+        if (null == body) {
+            throw new NullPointerException("The parameter \"body\" is a required parameter and cannot be null.");
+        }
+
+        //the base uri for api requests
+        String baseUri = config.getBaseUri();
+
+        //prepare query string for API call
+        final StringBuilder queryBuilder = new StringBuilder(baseUri
+                + "/tspublic/rest/v2/connection/tablecoloumn");
+
+        //load all headers for the outgoing API request
+        Headers headers = new Headers();
+        headers.add("Content-Type", "application/json");
+        headers.add("Accept-Language", config.getAcceptLanguage());
+        headers.add("user-agent", BaseController.userAgent);
+        headers.add("accept", "application/json");
+
+        //prepare and invoke the API call request to fetch the response
+        String bodyJson = ApiHelper.serialize(body);
+        HttpRequest request = getClientInstance().postBody(queryBuilder, headers, null, bodyJson);
+
+        // Invoke the callback before request if its not null
+        if (getHttpCallback() != null) {
+            getHttpCallback().onBeforeRequest(request);
+        }
+
+        return request;
+    }
+
+    /**
+     * Processes the response for getConnectionTableColumns.
+     * @return An object of type ConnectionTableColumnsResponse
+     */
+    private ConnectionTableColumnsResponse handleGetConnectionTableColumnsResponse(
+            HttpContext context) throws ApiException, IOException {
+        HttpResponse response = context.getResponse();
+
+        //invoke the callback after response if its not null
+        if (getHttpCallback() != null) {
+            getHttpCallback().onAfterResponse(context);
+        }
+
+        //Error handling using HTTP status codes
+        int responseCode = response.getStatusCode();
+
+        if (responseCode == 500) {
+            throw new ErrorResponseException("Operation failed or unauthorized request", context);
+        }
+        //handle errors defined at the API level
+        validateResponse(response, context);
+
+        //extract result from the http response
+        String responseBody = ((HttpStringResponse) response).getBody();
+        ConnectionTableColumnsResponse result = ApiHelper.deserialize(responseBody,
+                ConnectionTableColumnsResponse.class);
+
+        return result;
+    }
+
+    /**
      * To programmatically create a connection in the ThoughtSpot system use this API endpoint.
+     * Permission: Requires datamanagement privilege.
      * @param  body  Required parameter: Example:
      * @return    Returns the CreateConnectionResponse response from the API call
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
     public CreateConnectionResponse createConnection(
-            final ApiRestV2ConnectionCreateRequest body) throws ApiException, IOException {
+            final TspublicRestV2ConnectionCreateRequest body) throws ApiException, IOException {
         HttpRequest request = buildCreateConnectionRequest(body);
         authManagers.get("global").apply(request);
 
@@ -177,11 +499,12 @@ public final class ConnectionController extends BaseController {
 
     /**
      * To programmatically create a connection in the ThoughtSpot system use this API endpoint.
+     * Permission: Requires datamanagement privilege.
      * @param  body  Required parameter: Example:
      * @return    Returns the CreateConnectionResponse response from the API call
      */
     public CompletableFuture<CreateConnectionResponse> createConnectionAsync(
-            final ApiRestV2ConnectionCreateRequest body) {
+            final TspublicRestV2ConnectionCreateRequest body) {
         return makeHttpCallAsync(() -> buildCreateConnectionRequest(body),
             req -> authManagers.get("global").applyAsync(req)
                 .thenCompose(request -> getClientInstance()
@@ -193,13 +516,18 @@ public final class ConnectionController extends BaseController {
      * Builds the HttpRequest object for createConnection.
      */
     private HttpRequest buildCreateConnectionRequest(
-            final ApiRestV2ConnectionCreateRequest body) throws JsonProcessingException {
+            final TspublicRestV2ConnectionCreateRequest body) throws JsonProcessingException {
+        //validating required parameters
+        if (null == body) {
+            throw new NullPointerException("The parameter \"body\" is a required parameter and cannot be null.");
+        }
+
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/connection/create");
+                + "/tspublic/rest/v2/connection/create");
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
@@ -251,14 +579,15 @@ public final class ConnectionController extends BaseController {
     }
 
     /**
-     * You can use this endpoint to programmatically modify an existing connection.
+     * You can use this endpoint to programmatically modify an existing connection Permission:
+     * Requires datamanagement privilege.
      * @param  body  Required parameter: Example:
      * @return    Returns the Boolean response from the API call
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
     public Boolean updateConnection(
-            final ApiRestV2ConnectionUpdateRequest body) throws ApiException, IOException {
+            final TspublicRestV2ConnectionUpdateRequest body) throws ApiException, IOException {
         HttpRequest request = buildUpdateConnectionRequest(body);
         authManagers.get("global").apply(request);
 
@@ -269,12 +598,13 @@ public final class ConnectionController extends BaseController {
     }
 
     /**
-     * You can use this endpoint to programmatically modify an existing connection.
+     * You can use this endpoint to programmatically modify an existing connection Permission:
+     * Requires datamanagement privilege.
      * @param  body  Required parameter: Example:
      * @return    Returns the Boolean response from the API call
      */
     public CompletableFuture<Boolean> updateConnectionAsync(
-            final ApiRestV2ConnectionUpdateRequest body) {
+            final TspublicRestV2ConnectionUpdateRequest body) {
         return makeHttpCallAsync(() -> buildUpdateConnectionRequest(body),
             req -> authManagers.get("global").applyAsync(req)
                 .thenCompose(request -> getClientInstance()
@@ -286,13 +616,18 @@ public final class ConnectionController extends BaseController {
      * Builds the HttpRequest object for updateConnection.
      */
     private HttpRequest buildUpdateConnectionRequest(
-            final ApiRestV2ConnectionUpdateRequest body) throws JsonProcessingException {
+            final TspublicRestV2ConnectionUpdateRequest body) throws JsonProcessingException {
+        //validating required parameters
+        if (null == body) {
+            throw new NullPointerException("The parameter \"body\" is a required parameter and cannot be null.");
+        }
+
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/connection/update");
+                + "/tspublic/rest/v2/connection/update");
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
@@ -342,7 +677,8 @@ public final class ConnectionController extends BaseController {
     }
 
     /**
-     * To remove a connection from the ThoughtSpot system, use this endpoint.
+     * To remove a connection from the ThoughtSpot system, use this endpoint. Permission: Requires
+     * datamanagement privilege.
      * @param  id  Required parameter: A JSON array of GUIDs of the connection
      * @return    Returns the Boolean response from the API call
      * @throws    ApiException    Represents error response from the server.
@@ -360,7 +696,8 @@ public final class ConnectionController extends BaseController {
     }
 
     /**
-     * To remove a connection from the ThoughtSpot system, use this endpoint.
+     * To remove a connection from the ThoughtSpot system, use this endpoint. Permission: Requires
+     * datamanagement privilege.
      * @param  id  Required parameter: A JSON array of GUIDs of the connection
      * @return    Returns the Boolean response from the API call
      */
@@ -378,12 +715,17 @@ public final class ConnectionController extends BaseController {
      */
     private HttpRequest buildDeleteConnectionRequest(
             final List<String> id) {
+        //validating required parameters
+        if (null == id) {
+            throw new NullPointerException("The parameter \"id\" is a required parameter and cannot be null.");
+        }
+
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/connection/delete");
+                + "/tspublic/rest/v2/connection/delete");
 
         //load all query parameters
         Map<String, Object> queryParameters = new HashMap<>();
@@ -391,8 +733,8 @@ public final class ConnectionController extends BaseController {
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
-        headers.add("Content-Type", config.getContentType());
         headers.add("Accept-Language", config.getAcceptLanguage());
+        headers.add("Content-Type", config.getContentType());
         headers.add("user-agent", BaseController.userAgent);
 
         //prepare and invoke the API call request to fetch the response
@@ -437,14 +779,15 @@ public final class ConnectionController extends BaseController {
     }
 
     /**
-     * To programmatically add table to an existing connection, use this endpoint.
+     * To programmatically add table to an existing connection, use this endpoint Permission:
+     * Requires datamanagement privilege.
      * @param  body  Required parameter: Example:
      * @return    Returns the Boolean response from the API call
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
     public Boolean addTableToConnection(
-            final ApiRestV2ConnectionAddtableRequest body) throws ApiException, IOException {
+            final TspublicRestV2ConnectionAddtableRequest body) throws ApiException, IOException {
         HttpRequest request = buildAddTableToConnectionRequest(body);
         authManagers.get("global").apply(request);
 
@@ -455,12 +798,13 @@ public final class ConnectionController extends BaseController {
     }
 
     /**
-     * To programmatically add table to an existing connection, use this endpoint.
+     * To programmatically add table to an existing connection, use this endpoint Permission:
+     * Requires datamanagement privilege.
      * @param  body  Required parameter: Example:
      * @return    Returns the Boolean response from the API call
      */
     public CompletableFuture<Boolean> addTableToConnectionAsync(
-            final ApiRestV2ConnectionAddtableRequest body) {
+            final TspublicRestV2ConnectionAddtableRequest body) {
         return makeHttpCallAsync(() -> buildAddTableToConnectionRequest(body),
             req -> authManagers.get("global").applyAsync(req)
                 .thenCompose(request -> getClientInstance()
@@ -472,13 +816,18 @@ public final class ConnectionController extends BaseController {
      * Builds the HttpRequest object for addTableToConnection.
      */
     private HttpRequest buildAddTableToConnectionRequest(
-            final ApiRestV2ConnectionAddtableRequest body) throws JsonProcessingException {
+            final TspublicRestV2ConnectionAddtableRequest body) throws JsonProcessingException {
+        //validating required parameters
+        if (null == body) {
+            throw new NullPointerException("The parameter \"body\" is a required parameter and cannot be null.");
+        }
+
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/connection/addtable");
+                + "/tspublic/rest/v2/connection/addtable");
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
@@ -528,14 +877,15 @@ public final class ConnectionController extends BaseController {
     }
 
     /**
-     * To programmatically remove a table from a connection, use API endpoint.
+     * To programmatically remove a table from a connection, use API endpoint. Permission: Requires
+     * datamanagement privilege.
      * @param  body  Required parameter: Example:
      * @return    Returns the Boolean response from the API call
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
     public Boolean removeTableFromConnection(
-            final ApiRestV2ConnectionRemovetableRequest body) throws ApiException, IOException {
+            final TspublicRestV2ConnectionRemovetableRequest body) throws ApiException, IOException {
         HttpRequest request = buildRemoveTableFromConnectionRequest(body);
         authManagers.get("global").apply(request);
 
@@ -546,12 +896,13 @@ public final class ConnectionController extends BaseController {
     }
 
     /**
-     * To programmatically remove a table from a connection, use API endpoint.
+     * To programmatically remove a table from a connection, use API endpoint. Permission: Requires
+     * datamanagement privilege.
      * @param  body  Required parameter: Example:
      * @return    Returns the Boolean response from the API call
      */
     public CompletableFuture<Boolean> removeTableFromConnectionAsync(
-            final ApiRestV2ConnectionRemovetableRequest body) {
+            final TspublicRestV2ConnectionRemovetableRequest body) {
         return makeHttpCallAsync(() -> buildRemoveTableFromConnectionRequest(body),
             req -> authManagers.get("global").applyAsync(req)
                 .thenCompose(request -> getClientInstance()
@@ -563,13 +914,18 @@ public final class ConnectionController extends BaseController {
      * Builds the HttpRequest object for removeTableFromConnection.
      */
     private HttpRequest buildRemoveTableFromConnectionRequest(
-            final ApiRestV2ConnectionRemovetableRequest body) throws JsonProcessingException {
+            final TspublicRestV2ConnectionRemovetableRequest body) throws JsonProcessingException {
+        //validating required parameters
+        if (null == body) {
+            throw new NullPointerException("The parameter \"body\" is a required parameter and cannot be null.");
+        }
+
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/connection/removetable");
+                + "/tspublic/rest/v2/connection/removetable");
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
@@ -620,14 +976,14 @@ public final class ConnectionController extends BaseController {
 
     /**
      * To get the details of a specific connection or all connections in the ThoughtSpot system use
-     * this end point.
+     * this end point. Permission: Requires datamanagement privilege.
      * @param  body  Required parameter: Example:
      * @return    Returns the List of ConnectionResponse response from the API call
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
     public List<ConnectionResponse> searchConnection(
-            final ApiRestV2ConnectionSearchRequest body) throws ApiException, IOException {
+            final TspublicRestV2ConnectionSearchRequest body) throws ApiException, IOException {
         HttpRequest request = buildSearchConnectionRequest(body);
         authManagers.get("global").apply(request);
 
@@ -639,12 +995,12 @@ public final class ConnectionController extends BaseController {
 
     /**
      * To get the details of a specific connection or all connections in the ThoughtSpot system use
-     * this end point.
+     * this end point. Permission: Requires datamanagement privilege.
      * @param  body  Required parameter: Example:
      * @return    Returns the List of ConnectionResponse response from the API call
      */
     public CompletableFuture<List<ConnectionResponse>> searchConnectionAsync(
-            final ApiRestV2ConnectionSearchRequest body) {
+            final TspublicRestV2ConnectionSearchRequest body) {
         return makeHttpCallAsync(() -> buildSearchConnectionRequest(body),
             req -> authManagers.get("global").applyAsync(req)
                 .thenCompose(request -> getClientInstance()
@@ -656,13 +1012,18 @@ public final class ConnectionController extends BaseController {
      * Builds the HttpRequest object for searchConnection.
      */
     private HttpRequest buildSearchConnectionRequest(
-            final ApiRestV2ConnectionSearchRequest body) throws JsonProcessingException {
+            final TspublicRestV2ConnectionSearchRequest body) throws JsonProcessingException {
+        //validating required parameters
+        if (null == body) {
+            throw new NullPointerException("The parameter \"body\" is a required parameter and cannot be null.");
+        }
+
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/connection/search");
+                + "/tspublic/rest/v2/connection/search");
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();

@@ -39,7 +39,9 @@ namespace RESTAPISDK.Tests
         }
 
         /// <summary>
-        /// To get details of the current configuration of a Thoughtspot cluster, use this endpoint..
+        /// To get details of the current configuration of a Thoughtspot cluster, use this endpoint. 
+        ///
+        /// Permission: Requires administration privilege.
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous unit test.</returns>
         [Test]
@@ -70,7 +72,9 @@ namespace RESTAPISDK.Tests
         }
 
         /// <summary>
-        /// To get the details of overrides to the Thoughtspot cluster configuration, use this endpoint..
+        /// To get the details of overrides to the Thoughtspot cluster configuration, use this endpoint. 
+        ///
+        /// Permission: Requires administration privilege.
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous unit test.</returns>
         [Test]

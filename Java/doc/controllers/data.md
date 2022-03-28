@@ -10,25 +10,27 @@ DataController dataController = client.getDataController();
 
 ## Methods
 
-* [Search Query Data](/doc/controllers/data.md#search-query-data)
-* [Answer Data](/doc/controllers/data.md#answer-data)
-* [Liveboard Data](/doc/controllers/data.md#liveboard-data)
+* [Search Query Data](../../doc/controllers/data.md#search-query-data)
+* [Answer Data](../../doc/controllers/data.md#answer-data)
+* [Liveboard Data](../../doc/controllers/data.md#liveboard-data)
 
 
 # Search Query Data
 
 To programmatically retrieve data from ThoughtSpot using search query string, use this endpoint
 
+Permission: Requires at least view access to the dataobject and datadownloading privilege
+
 ```java
 CompletableFuture<Object> searchQueryDataAsync(
-    final ApiRestV2DataSearchRequest body)
+    final TspublicRestV2DataSearchRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2DataSearchRequest`](/doc/models/api-rest-v2-data-search-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2DataSearchRequest`](../../doc/models/tspublic-rest-v2-data-search-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -37,7 +39,7 @@ CompletableFuture<Object> searchQueryDataAsync(
 ## Example Usage
 
 ```java
-ApiRestV2DataSearchRequest body = new ApiRestV2DataSearchRequest();
+TspublicRestV2DataSearchRequest body = new TspublicRestV2DataSearchRequest();
 body.setQueryString("queryString0");
 body.setDataObjectId("dataObjectId6");
 
@@ -53,23 +55,25 @@ dataController.searchQueryDataAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Answer Data
 
-To retrieve data related to a Answer from the ThoughtSpot system, you can use this endpoint
+To retrieve data related to a Answer from the ThoughtSpot system, you can use this endpoint.
+
+Permission: Requires at least view access to the object and datadownloading privilege
 
 ```java
 CompletableFuture<Object> answerDataAsync(
-    final ApiRestV2DataAnswerRequest body)
+    final TspublicRestV2DataAnswerRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2DataAnswerRequest`](/doc/models/api-rest-v2-data-answer-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2DataAnswerRequest`](../../doc/models/tspublic-rest-v2-data-answer-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -78,7 +82,7 @@ CompletableFuture<Object> answerDataAsync(
 ## Example Usage
 
 ```java
-ApiRestV2DataAnswerRequest body = new ApiRestV2DataAnswerRequest();
+TspublicRestV2DataAnswerRequest body = new TspublicRestV2DataAnswerRequest();
 body.setId("id6");
 
 dataController.answerDataAsync(body).thenAccept(result -> {
@@ -93,23 +97,25 @@ dataController.answerDataAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Liveboard Data
 
 To retrieve data related to a Liveboard or visualization from the ThoughtSpot system, you can use this endpoint
 
+Permission: Requires at least view access to the object and datadownloading privilege
+
 ```java
 CompletableFuture<Object> liveboardDataAsync(
-    final ApiRestV2DataLiveboardRequest body)
+    final TspublicRestV2DataLiveboardRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2DataLiveboardRequest`](/doc/models/api-rest-v2-data-liveboard-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2DataLiveboardRequest`](../../doc/models/tspublic-rest-v2-data-liveboard-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -118,7 +124,7 @@ CompletableFuture<Object> liveboardDataAsync(
 ## Example Usage
 
 ```java
-ApiRestV2DataLiveboardRequest body = new ApiRestV2DataLiveboardRequest();
+TspublicRestV2DataLiveboardRequest body = new TspublicRestV2DataLiveboardRequest();
 body.setId("id6");
 
 dataController.liveboardDataAsync(body).thenAccept(result -> {
@@ -133,5 +139,5 @@ dataController.liveboardDataAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 

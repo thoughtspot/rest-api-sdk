@@ -65,7 +65,7 @@ namespace RESTAPISDK.Standard.Models
         public Models.Type1Enum? Type { get; set; }
 
         /// <summary>
-        /// Minimum access level that the specified user or user group has.
+        /// Minimum access level that the specified user or user group has. If no input is provided then minimum access of READ_ONLY will be considered.
         /// </summary>
         [JsonProperty("access", ItemConverterType = typeof(StringEnumConverter), NullValueHandling = NullValueHandling.Ignore)]
         public Models.AccessEnum? Access { get; set; }

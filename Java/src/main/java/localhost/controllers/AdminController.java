@@ -23,10 +23,10 @@ import localhost.http.request.HttpRequest;
 import localhost.http.response.HttpResponse;
 import localhost.http.response.HttpStringResponse;
 import localhost.models.AdminsyncPrincipalResponse;
-import localhost.models.ApiRestV2AdminChangeownerRequest;
-import localhost.models.ApiRestV2AdminConfigurationUpdateRequest;
-import localhost.models.ApiRestV2AdminResetpasswordRequest;
-import localhost.models.ApiRestV2AdminSyncprincipalRequest;
+import localhost.models.TspublicRestV2AdminChangeownerRequest;
+import localhost.models.TspublicRestV2AdminConfigurationUpdateRequest;
+import localhost.models.TspublicRestV2AdminResetpasswordRequest;
+import localhost.models.TspublicRestV2AdminSyncprincipalRequest;
 
 /**
  * This class lists all the endpoints of the groups.
@@ -58,6 +58,7 @@ public final class AdminController extends BaseController {
 
     /**
      * To get details of the current configuration of a Thoughtspot cluster, use this endpoint.
+     * Permission: Requires administration privilege.
      * @return    Returns the Object response from the API call
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
@@ -74,6 +75,7 @@ public final class AdminController extends BaseController {
 
     /**
      * To get details of the current configuration of a Thoughtspot cluster, use this endpoint.
+     * Permission: Requires administration privilege.
      * @return    Returns the Object response from the API call
      */
     public CompletableFuture<Object> getClusterConfigAsync() {
@@ -93,12 +95,12 @@ public final class AdminController extends BaseController {
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/admin/configuration");
+                + "/tspublic/rest/v2/admin/configuration");
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
-        headers.add("Content-Type", config.getContentType());
         headers.add("Accept-Language", config.getAcceptLanguage());
+        headers.add("Content-Type", config.getContentType());
         headers.add("user-agent", BaseController.userAgent);
 
         //prepare and invoke the API call request to fetch the response
@@ -143,6 +145,7 @@ public final class AdminController extends BaseController {
 
     /**
      * To get the details of overrides to the Thoughtspot cluster configuration, use this endpoint.
+     * Permission: Requires administration privilege.
      * @return    Returns the Object response from the API call
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
@@ -159,6 +162,7 @@ public final class AdminController extends BaseController {
 
     /**
      * To get the details of overrides to the Thoughtspot cluster configuration, use this endpoint.
+     * Permission: Requires administration privilege.
      * @return    Returns the Object response from the API call
      */
     public CompletableFuture<Object> getClusterConfigOverridesAsync() {
@@ -178,12 +182,12 @@ public final class AdminController extends BaseController {
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/admin/configuration/overrides");
+                + "/tspublic/rest/v2/admin/configuration/overrides");
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
-        headers.add("Content-Type", config.getContentType());
         headers.add("Accept-Language", config.getAcceptLanguage());
+        headers.add("Content-Type", config.getContentType());
         headers.add("user-agent", BaseController.userAgent);
 
         //prepare and invoke the API call request to fetch the response
@@ -227,14 +231,15 @@ public final class AdminController extends BaseController {
     }
 
     /**
-     * To update the Thoughtspot cluster configuration, use this endpoint.
+     * To update the Thoughtspot cluster configuration, use this endpoint. Permission: Requires
+     * administration privilege.
      * @param  body  Required parameter: Example:
      * @return    Returns the Boolean response from the API call
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
     public Boolean updateClusterConfig(
-            final ApiRestV2AdminConfigurationUpdateRequest body) throws ApiException, IOException {
+            final TspublicRestV2AdminConfigurationUpdateRequest body) throws ApiException, IOException {
         HttpRequest request = buildUpdateClusterConfigRequest(body);
         authManagers.get("global").apply(request);
 
@@ -245,12 +250,13 @@ public final class AdminController extends BaseController {
     }
 
     /**
-     * To update the Thoughtspot cluster configuration, use this endpoint.
+     * To update the Thoughtspot cluster configuration, use this endpoint. Permission: Requires
+     * administration privilege.
      * @param  body  Required parameter: Example:
      * @return    Returns the Boolean response from the API call
      */
     public CompletableFuture<Boolean> updateClusterConfigAsync(
-            final ApiRestV2AdminConfigurationUpdateRequest body) {
+            final TspublicRestV2AdminConfigurationUpdateRequest body) {
         return makeHttpCallAsync(() -> buildUpdateClusterConfigRequest(body),
             req -> authManagers.get("global").applyAsync(req)
                 .thenCompose(request -> getClientInstance()
@@ -262,13 +268,18 @@ public final class AdminController extends BaseController {
      * Builds the HttpRequest object for updateClusterConfig.
      */
     private HttpRequest buildUpdateClusterConfigRequest(
-            final ApiRestV2AdminConfigurationUpdateRequest body) throws JsonProcessingException {
+            final TspublicRestV2AdminConfigurationUpdateRequest body) throws JsonProcessingException {
+        //validating required parameters
+        if (null == body) {
+            throw new NullPointerException("The parameter \"body\" is a required parameter and cannot be null.");
+        }
+
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/admin/configuration/update");
+                + "/tspublic/rest/v2/admin/configuration/update");
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
@@ -321,14 +332,14 @@ public final class AdminController extends BaseController {
      * To reset the password of a ThoughtSpot user account, use this endpoint. It is mandatory to
      * use Authorization header with token of a user with admin access to successfully run this
      * endpoint. At least one of User Id or username is mandatory. When both are given, then user id
-     * will be considered.
+     * will be considered. Permission: Requires administration privilege.
      * @param  body  Required parameter: Example:
      * @return    Returns the Boolean response from the API call
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
     public Boolean resetUserPassword(
-            final ApiRestV2AdminResetpasswordRequest body) throws ApiException, IOException {
+            final TspublicRestV2AdminResetpasswordRequest body) throws ApiException, IOException {
         HttpRequest request = buildResetUserPasswordRequest(body);
         authManagers.get("global").apply(request);
 
@@ -342,12 +353,12 @@ public final class AdminController extends BaseController {
      * To reset the password of a ThoughtSpot user account, use this endpoint. It is mandatory to
      * use Authorization header with token of a user with admin access to successfully run this
      * endpoint. At least one of User Id or username is mandatory. When both are given, then user id
-     * will be considered.
+     * will be considered. Permission: Requires administration privilege.
      * @param  body  Required parameter: Example:
      * @return    Returns the Boolean response from the API call
      */
     public CompletableFuture<Boolean> resetUserPasswordAsync(
-            final ApiRestV2AdminResetpasswordRequest body) {
+            final TspublicRestV2AdminResetpasswordRequest body) {
         return makeHttpCallAsync(() -> buildResetUserPasswordRequest(body),
             req -> authManagers.get("global").applyAsync(req)
                 .thenCompose(request -> getClientInstance()
@@ -359,13 +370,18 @@ public final class AdminController extends BaseController {
      * Builds the HttpRequest object for resetUserPassword.
      */
     private HttpRequest buildResetUserPasswordRequest(
-            final ApiRestV2AdminResetpasswordRequest body) throws JsonProcessingException {
+            final TspublicRestV2AdminResetpasswordRequest body) throws JsonProcessingException {
+        //validating required parameters
+        if (null == body) {
+            throw new NullPointerException("The parameter \"body\" is a required parameter and cannot be null.");
+        }
+
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/admin/resetpassword");
+                + "/tspublic/rest/v2/admin/resetpassword");
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
@@ -420,14 +436,15 @@ public final class AdminController extends BaseController {
      * present in the external system. The users and user groups in Thoughtspot get updated for any
      * matching inputs. Any user and user group present in the input, but not present in the
      * cluster, gets created in cluster. n You can optionally choose to delete the user and groups
-     * from the cluster, that are not present in the input.
+     * from the cluster, that are not present in the input. Permission: Requires administration
+     * privilege.
      * @param  body  Required parameter: Example:
      * @return    Returns the AdminsyncPrincipalResponse response from the API call
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
     public AdminsyncPrincipalResponse syncPrincipal(
-            final ApiRestV2AdminSyncprincipalRequest body) throws ApiException, IOException {
+            final TspublicRestV2AdminSyncprincipalRequest body) throws ApiException, IOException {
         HttpRequest request = buildSyncPrincipalRequest(body);
         authManagers.get("global").apply(request);
 
@@ -443,12 +460,13 @@ public final class AdminController extends BaseController {
      * present in the external system. The users and user groups in Thoughtspot get updated for any
      * matching inputs. Any user and user group present in the input, but not present in the
      * cluster, gets created in cluster. n You can optionally choose to delete the user and groups
-     * from the cluster, that are not present in the input.
+     * from the cluster, that are not present in the input. Permission: Requires administration
+     * privilege.
      * @param  body  Required parameter: Example:
      * @return    Returns the AdminsyncPrincipalResponse response from the API call
      */
     public CompletableFuture<AdminsyncPrincipalResponse> syncPrincipalAsync(
-            final ApiRestV2AdminSyncprincipalRequest body) {
+            final TspublicRestV2AdminSyncprincipalRequest body) {
         return makeHttpCallAsync(() -> buildSyncPrincipalRequest(body),
             req -> authManagers.get("global").applyAsync(req)
                 .thenCompose(request -> getClientInstance()
@@ -460,13 +478,18 @@ public final class AdminController extends BaseController {
      * Builds the HttpRequest object for syncPrincipal.
      */
     private HttpRequest buildSyncPrincipalRequest(
-            final ApiRestV2AdminSyncprincipalRequest body) throws JsonProcessingException {
+            final TspublicRestV2AdminSyncprincipalRequest body) throws JsonProcessingException {
+        //validating required parameters
+        if (null == body) {
+            throw new NullPointerException("The parameter \"body\" is a required parameter and cannot be null.");
+        }
+
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/admin/syncprincipal");
+                + "/tspublic/rest/v2/admin/syncprincipal");
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
@@ -521,13 +544,14 @@ public final class AdminController extends BaseController {
      * To programmatically change the owner of one or several objects from one user account to
      * another, use this endpoint. You might want to transfer ownership of objects owned by a user
      * to another active user, when the account is removed from the ThoughtSpot application.
+     * Permission: Requires administration privilege.
      * @param  body  Required parameter: Example:
      * @return    Returns the Boolean response from the API call
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
     public Boolean changeOwnerOfObjects(
-            final ApiRestV2AdminChangeownerRequest body) throws ApiException, IOException {
+            final TspublicRestV2AdminChangeownerRequest body) throws ApiException, IOException {
         HttpRequest request = buildChangeOwnerOfObjectsRequest(body);
         authManagers.get("global").apply(request);
 
@@ -541,11 +565,12 @@ public final class AdminController extends BaseController {
      * To programmatically change the owner of one or several objects from one user account to
      * another, use this endpoint. You might want to transfer ownership of objects owned by a user
      * to another active user, when the account is removed from the ThoughtSpot application.
+     * Permission: Requires administration privilege.
      * @param  body  Required parameter: Example:
      * @return    Returns the Boolean response from the API call
      */
     public CompletableFuture<Boolean> changeOwnerOfObjectsAsync(
-            final ApiRestV2AdminChangeownerRequest body) {
+            final TspublicRestV2AdminChangeownerRequest body) {
         return makeHttpCallAsync(() -> buildChangeOwnerOfObjectsRequest(body),
             req -> authManagers.get("global").applyAsync(req)
                 .thenCompose(request -> getClientInstance()
@@ -557,13 +582,18 @@ public final class AdminController extends BaseController {
      * Builds the HttpRequest object for changeOwnerOfObjects.
      */
     private HttpRequest buildChangeOwnerOfObjectsRequest(
-            final ApiRestV2AdminChangeownerRequest body) throws JsonProcessingException {
+            final TspublicRestV2AdminChangeownerRequest body) throws JsonProcessingException {
+        //validating required parameters
+        if (null == body) {
+            throw new NullPointerException("The parameter \"body\" is a required parameter and cannot be null.");
+        }
+
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/admin/changeowner");
+                + "/tspublic/rest/v2/admin/changeowner");
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();

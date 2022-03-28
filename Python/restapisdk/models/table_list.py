@@ -26,8 +26,8 @@ class TableList(object):
         is_deprecated (bool): Indicates if the table is deprecated
         is_deleted (bool): Indicates if the table is deleted
         is_hidden (bool): Indicates if the table is hideen
-        index_version (int): TODO: type description here.
-        generation_num (int): TODO: type description here.
+        index_version (float): TODO: type description here.
+        generation_num (float): TODO: type description here.
         created (string): Date and time when the table was created
         modified (string): Date and time of last modification of the table
         author (UserNameAndID): TODO: type description here.

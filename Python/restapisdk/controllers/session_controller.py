@@ -17,11 +17,11 @@ from restapisdk.exceptions.error_response_exception import ErrorResponseExceptio
 class SessionController(BaseController):
 
     """A Controller to access Endpoints in the restapisdk API."""
-    def __init__(self, config, auth_managers, call_back=None):
-        super(SessionController, self).__init__(config, auth_managers, call_back)
+    def __init__(self, config, auth_managers):
+        super(SessionController, self).__init__(config, auth_managers)
 
     def get_session_info(self):
-        """Does a GET request to /api/rest/v2/session.
+        """Does a GET request to /tspublic/rest/v2/session.
 
         To get session object information, use this endpoint
 
@@ -37,7 +37,7 @@ class SessionController(BaseController):
         """
 
         # Prepare query URL
-        _url_path = '/api/rest/v2/session'
+        _url_path = '/tspublic/rest/v2/session'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_url = APIHelper.clean_url(_query_builder)
@@ -65,12 +65,20 @@ class SessionController(BaseController):
 
     def login(self,
               body):
-        """Does a POST request to /api/rest/v2/session/login.
+        """Does a POST request to /tspublic/rest/v2/session/login.
 
-        To programmatically login a user to ThoughtSpot, use this endpoint
+        You can programmatically create login session for a user in
+        ThoughtSpot using this endpoint. 
+         You can create session by either providing userName and password as
+         inputs in this request body or by including "Authorization" header
+         with the token generated through the endpoint
+         /tspublic/rest/v2/session/getToken. 
+         userName and password input is given precedence over "Authorization"
+         header, when both are included in the request.
 
         Args:
-            body (ApiRestV2SessionLoginRequest): TODO: type description here.
+            body (TspublicRestV2SessionLoginRequest): TODO: type description
+                here.
 
         Returns:
             SessionLoginResponse: Response from the API. Successful login and
@@ -84,8 +92,11 @@ class SessionController(BaseController):
 
         """
 
+        # Validate required parameters
+        self.validate_parameters(body=body)
+
         # Prepare query URL
-        _url_path = '/api/rest/v2/session/login'
+        _url_path = '/tspublic/rest/v2/session/login'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_url = APIHelper.clean_url(_query_builder)
@@ -98,6 +109,9 @@ class SessionController(BaseController):
 
         # Prepare and execute request
         _request = self.config.http_client.post(_query_url, headers=_headers, parameters=APIHelper.json_serialize(body))
+        # Apply authentication scheme on request
+        self.apply_auth_schemes(_request, 'global')
+
         _response = self.execute_request(_request)
 
         # Endpoint and global error handling using HTTP status codes.
@@ -110,7 +124,7 @@ class SessionController(BaseController):
         return decoded
 
     def logout(self):
-        """Does a POST request to /api/rest/v2/session/logout.
+        """Does a POST request to /tspublic/rest/v2/session/logout.
 
         To log a user out of the current session, use this endpoint
 
@@ -127,7 +141,7 @@ class SessionController(BaseController):
         """
 
         # Prepare query URL
-        _url_path = '/api/rest/v2/session/logout'
+        _url_path = '/tspublic/rest/v2/session/logout'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_url = APIHelper.clean_url(_query_builder)
@@ -150,16 +164,28 @@ class SessionController(BaseController):
 
         return decoded
 
-    def gettoken(self,
-                 body):
-        """Does a POST request to /api/rest/v2/session/gettoken.
+    def get_token(self,
+                  body):
+        """Does a POST request to /tspublic/rest/v2/session/gettoken.
 
-        To programmatically create token for a user in ThoughtSpot, use this
-        endpoint
+        To programmatically create session token for a user in ThoughtSpot,
+        use this endpoint. 
+         You can generate the token for a user by providing password or secret
+         key from the cluster. 
+         You need to enable trusted authentication to generate secret key. To
+         generate secret key, follow below steps. 
+         1. Click the Develop tab. 
+         2. Under Customizations, click Settings. 
+         3. To enable trusted authentication, turn on the toggle. 
+         4. A secret_key for trusted authentication is generated. 
+         5. Click the clipboard icon to copy the token. 
+         
+         Password is given precedence over secretKey input, when both are
+         included in the request.
 
         Args:
-            body (ApiRestV2SessionGettokenRequest): TODO: type description
-                here.
+            body (TspublicRestV2SessionGettokenRequest): TODO: type
+                description here.
 
         Returns:
             SessionLoginResponse: Response from the API. Token generated
@@ -173,8 +199,11 @@ class SessionController(BaseController):
 
         """
 
+        # Validate required parameters
+        self.validate_parameters(body=body)
+
         # Prepare query URL
-        _url_path = '/api/rest/v2/session/gettoken'
+        _url_path = '/tspublic/rest/v2/session/gettoken'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_url = APIHelper.clean_url(_query_builder)
@@ -198,8 +227,8 @@ class SessionController(BaseController):
 
         return decoded
 
-    def revoketoken(self):
-        """Does a POST request to /api/rest/v2/session/revoketoken.
+    def revoke_token(self):
+        """Does a POST request to /tspublic/rest/v2/session/revoketoken.
 
         To expire or revoke a token for a user, use this endpoint
 
@@ -215,7 +244,7 @@ class SessionController(BaseController):
         """
 
         # Prepare query URL
-        _url_path = '/api/rest/v2/session/revoketoken'
+        _url_path = '/tspublic/rest/v2/session/revoketoken'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_url = APIHelper.clean_url(_query_builder)

@@ -19,51 +19,27 @@ namespace RESTAPISDK.Standard.Models
     public enum Type2Enum
     {
         /// <summary>
-        /// UNKNOWN.
+        /// LIVEBOARD.
         /// </summary>
-        [EnumMember(Value = "UNKNOWN")]
-        UNKNOWN,
+        [EnumMember(Value = "LIVEBOARD")]
+        LIVEBOARD,
 
         /// <summary>
-        /// LDAPUSER.
+        /// ANSWER.
         /// </summary>
-        [EnumMember(Value = "LDAP_USER")]
-        LDAPUSER,
+        [EnumMember(Value = "ANSWER")]
+        ANSWER,
 
         /// <summary>
-        /// SAMLUSER.
+        /// DATAOBJECT.
         /// </summary>
-        [EnumMember(Value = "SAML_USER")]
-        SAMLUSER,
+        [EnumMember(Value = "DATAOBJECT")]
+        DATAOBJECT,
 
         /// <summary>
-        /// OIDCUSER.
+        /// COLUMN.
         /// </summary>
-        [EnumMember(Value = "OIDC_USER")]
-        OIDCUSER,
-
-        /// <summary>
-        /// LOCALUSER.
-        /// </summary>
-        [EnumMember(Value = "LOCAL_USER")]
-        LOCALUSER,
-
-        /// <summary>
-        /// LDAPGROUP.
-        /// </summary>
-        [EnumMember(Value = "LDAP_GROUP")]
-        LDAPGROUP,
-
-        /// <summary>
-        /// LOCALGROUP.
-        /// </summary>
-        [EnumMember(Value = "LOCAL_GROUP")]
-        LOCALGROUP,
-
-        /// <summary>
-        /// TENANTGROUP.
-        /// </summary>
-        [EnumMember(Value = "TENANT_GROUP")]
-        TENANTGROUP,
+        [EnumMember(Value = "COLUMN")]
+        COLUMN
     }
 }

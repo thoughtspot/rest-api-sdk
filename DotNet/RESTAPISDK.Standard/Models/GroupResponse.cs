@@ -56,8 +56,8 @@ namespace RESTAPISDK.Standard.Models
         /// <param name="generationNum">generationNum.</param>
         /// <param name="created">created.</param>
         /// <param name="modified">modified.</param>
-        /// <param name="modifiedBy">modifiedBy.</param>
         /// <param name="author">author.</param>
+        /// <param name="modifiedBy">modifiedBy.</param>
         /// <param name="owner">owner.</param>
         public GroupResponse(
             string name = null,
@@ -82,12 +82,12 @@ namespace RESTAPISDK.Standard.Models
             int? groupIdx = null,
             int? metadataVersion = null,
             string tenantId = null,
-            int? indexVersion = null,
-            int? generationNum = null,
+            double? indexVersion = null,
+            double? generationNum = null,
             double? created = null,
             double? modified = null,
-            Models.UserNameAndID modifiedBy = null,
             Models.UserNameAndID author = null,
+            Models.UserNameAndID modifiedBy = null,
             Models.UserNameAndID owner = null)
         {
             this.Name = name;
@@ -116,8 +116,8 @@ namespace RESTAPISDK.Standard.Models
             this.GenerationNum = generationNum;
             this.Created = created;
             this.Modified = modified;
-            this.ModifiedBy = modifiedBy;
             this.Author = author;
+            this.ModifiedBy = modifiedBy;
             this.Owner = owner;
         }
 
@@ -257,13 +257,13 @@ namespace RESTAPISDK.Standard.Models
         /// Gets or sets IndexVersion.
         /// </summary>
         [JsonProperty("indexVersion", NullValueHandling = NullValueHandling.Ignore)]
-        public int? IndexVersion { get; set; }
+        public double? IndexVersion { get; set; }
 
         /// <summary>
         /// Gets or sets GenerationNum.
         /// </summary>
         [JsonProperty("generationNum", NullValueHandling = NullValueHandling.Ignore)]
-        public int? GenerationNum { get; set; }
+        public double? GenerationNum { get; set; }
 
         /// <summary>
         /// Date and time when group was created
@@ -278,16 +278,16 @@ namespace RESTAPISDK.Standard.Models
         public double? Modified { get; set; }
 
         /// <summary>
-        /// Gets or sets ModifiedBy.
-        /// </summary>
-        [JsonProperty("modifiedBy", NullValueHandling = NullValueHandling.Ignore)]
-        public Models.UserNameAndID ModifiedBy { get; set; }
-
-        /// <summary>
         /// Gets or sets Author.
         /// </summary>
         [JsonProperty("author", NullValueHandling = NullValueHandling.Ignore)]
         public Models.UserNameAndID Author { get; set; }
+
+        /// <summary>
+        /// Gets or sets ModifiedBy.
+        /// </summary>
+        [JsonProperty("modifiedBy", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.UserNameAndID ModifiedBy { get; set; }
 
         /// <summary>
         /// Gets or sets Owner.
@@ -345,8 +345,8 @@ namespace RESTAPISDK.Standard.Models
                 ((this.GenerationNum == null && other.GenerationNum == null) || (this.GenerationNum?.Equals(other.GenerationNum) == true)) &&
                 ((this.Created == null && other.Created == null) || (this.Created?.Equals(other.Created) == true)) &&
                 ((this.Modified == null && other.Modified == null) || (this.Modified?.Equals(other.Modified) == true)) &&
-                ((this.ModifiedBy == null && other.ModifiedBy == null) || (this.ModifiedBy?.Equals(other.ModifiedBy) == true)) &&
                 ((this.Author == null && other.Author == null) || (this.Author?.Equals(other.Author) == true)) &&
+                ((this.ModifiedBy == null && other.ModifiedBy == null) || (this.ModifiedBy?.Equals(other.ModifiedBy) == true)) &&
                 ((this.Owner == null && other.Owner == null) || (this.Owner?.Equals(other.Owner) == true));
         }
         
@@ -383,8 +383,8 @@ namespace RESTAPISDK.Standard.Models
             toStringOutput.Add($"this.GenerationNum = {(this.GenerationNum == null ? "null" : this.GenerationNum.ToString())}");
             toStringOutput.Add($"this.Created = {(this.Created == null ? "null" : this.Created.ToString())}");
             toStringOutput.Add($"this.Modified = {(this.Modified == null ? "null" : this.Modified.ToString())}");
-            toStringOutput.Add($"this.ModifiedBy = {(this.ModifiedBy == null ? "null" : this.ModifiedBy.ToString())}");
             toStringOutput.Add($"this.Author = {(this.Author == null ? "null" : this.Author.ToString())}");
+            toStringOutput.Add($"this.ModifiedBy = {(this.ModifiedBy == null ? "null" : this.ModifiedBy.ToString())}");
             toStringOutput.Add($"this.Owner = {(this.Owner == null ? "null" : this.Owner.ToString())}");
         }
     }

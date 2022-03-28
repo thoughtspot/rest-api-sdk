@@ -62,6 +62,16 @@ namespace RESTAPISDK.Standard.Http.Client
                 this.maximumRetryWaitTime = httpClientConfig.MaximumRetryWaitTime;
                 this.client.Timeout = httpClientConfig.Timeout;
             }
+
+            if(httpClientConfig.SkipSslCertVerification)
+            {
+                var httpClientHandler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => { return true; }
+                };
+
+                this.client = new HttpClient(httpClientHandler, disposeHandler: true);
+            }
         }
 
         /// <summary>

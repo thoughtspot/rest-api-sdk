@@ -10,18 +10,23 @@ const connectionController = new ConnectionController(client);
 
 ## Methods
 
-* [Get Connection](/doc/controllers/connection.md#get-connection)
-* [Create Connection](/doc/controllers/connection.md#create-connection)
-* [Update Connection](/doc/controllers/connection.md#update-connection)
-* [Delete Connection](/doc/controllers/connection.md#delete-connection)
-* [Add Table to Connection](/doc/controllers/connection.md#add-table-to-connection)
-* [Remove Table From Connection](/doc/controllers/connection.md#remove-table-from-connection)
-* [Search Connection](/doc/controllers/connection.md#search-connection)
+* [Get Connection](../../doc/controllers/connection.md#get-connection)
+* [Get Connection Database](../../doc/controllers/connection.md#get-connection-database)
+* [Get Connection Tables](../../doc/controllers/connection.md#get-connection-tables)
+* [Get Connection Table Columns](../../doc/controllers/connection.md#get-connection-table-columns)
+* [Create Connection](../../doc/controllers/connection.md#create-connection)
+* [Update Connection](../../doc/controllers/connection.md#update-connection)
+* [Delete Connection](../../doc/controllers/connection.md#delete-connection)
+* [Add Table to Connection](../../doc/controllers/connection.md#add-table-to-connection)
+* [Remove Table From Connection](../../doc/controllers/connection.md#remove-table-from-connection)
+* [Search Connection](../../doc/controllers/connection.md#search-connection)
 
 
 # Get Connection
 
-To get the details of a specific connection use this endpoint
+To get the details of a specific connection use this endpoint.
+
+Permission: Requires datamanagement privilege
 
 ```ts
 async getConnection(
@@ -39,7 +44,7 @@ async getConnection(
 
 ## Response Type
 
-[`ConnectionResponse`](/doc/models/connection-response.md)
+[`ConnectionResponse`](../../doc/models/connection-response.md)
 
 ## Example Usage
 
@@ -61,16 +66,200 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
+
+
+# Get Connection Database
+
+To get the list of databases for a connection, use this endpoint.
+
+The response will include databases from the data platform corresponding to the connection id provided.
+
+Permission: Requires datamanagement privilege
+
+```ts
+async getConnectionDatabase(
+  id: string,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<string[]>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `id` | `string` | Query, Required | The GUID of the connection |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+`string[]`
+
+## Example Usage
+
+```ts
+const id = 'id0';
+try {
+  const { result, ...httpResponse } = await connectionController.getConnectionDatabase(id);
+  // Get more response info...
+  // const { statusCode, headers } = httpResponse;
+} catch(error) {
+  if (error instanceof ApiError) {
+    const errors = error.result;
+    // const { statusCode, headers } = error;
+  }
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
+
+
+# Get Connection Tables
+
+To get the details of tables from a connection, use this endpoint.
+
+You can get the details of tables in the data platform for the connection id provided.
+
+Permission: Requires datamanagement privilege
+
+```ts
+async getConnectionTables(
+  body: TspublicRestV2ConnectionTableRequest,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ConnectionTableResponse>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`TspublicRestV2ConnectionTableRequest`](../../doc/models/tspublic-rest-v2-connection-table-request.md) | Body, Required | - |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+[`ConnectionTableResponse`](../../doc/models/connection-table-response.md)
+
+## Example Usage
+
+```ts
+const contentType = null;
+const body: TspublicRestV2ConnectionTableRequest = {
+  id: 'id6',
+};
+
+try {
+  const { result, ...httpResponse } = await connectionController.getConnectionTables(body);
+  // Get more response info...
+  // const { statusCode, headers } = httpResponse;
+} catch(error) {
+  if (error instanceof ApiError) {
+    const errors = error.result;
+    // const { statusCode, headers } = error;
+  }
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
+
+
+# Get Connection Table Columns
+
+To get the details of columns in a table associated to a connection, use this endpoint.
+
+You can get the columns of any table available in the data platform for the connection id provided.
+
+Permission: Requires datamanagement privilege
+
+```ts
+async getConnectionTableColumns(
+  body: TspublicRestV2ConnectionTablecoloumnRequest,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ConnectionTableColumnsResponse>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`TspublicRestV2ConnectionTablecoloumnRequest`](../../doc/models/tspublic-rest-v2-connection-tablecoloumn-request.md) | Body, Required | - |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+[`ConnectionTableColumnsResponse`](../../doc/models/connection-table-columns-response.md)
+
+## Example Usage
+
+```ts
+const contentType = null;
+const bodyTable: ConnectionTableColumnsInput[] = [];
+
+const bodytable0: ConnectionTableColumnsInput = {
+  dbName: 'dbName8',
+  schemaName: 'schemaName4',
+  name: 'name0',
+};
+
+bodyTable[0] = bodytable0;
+
+const bodytable1: ConnectionTableColumnsInput = {
+  dbName: 'dbName9',
+  schemaName: 'schemaName5',
+  name: 'name1',
+};
+
+bodyTable[1] = bodytable1;
+
+const bodytable2: ConnectionTableColumnsInput = {
+  dbName: 'dbName0',
+  schemaName: 'schemaName6',
+  name: 'name2',
+};
+
+bodyTable[2] = bodytable2;
+
+const body: TspublicRestV2ConnectionTablecoloumnRequest = {
+  id: 'id6',
+  table: bodyTable,
+};
+
+try {
+  const { result, ...httpResponse } = await connectionController.getConnectionTableColumns(body);
+  // Get more response info...
+  // const { statusCode, headers } = httpResponse;
+} catch(error) {
+  if (error instanceof ApiError) {
+    const errors = error.result;
+    // const { statusCode, headers } = error;
+  }
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
 # Create Connection
 
 To programmatically create a connection in the ThoughtSpot system use this API endpoint.
 
+Permission: Requires datamanagement privilege
+
 ```ts
 async createConnection(
-  body: ApiRestV2ConnectionCreateRequest,
+  body: TspublicRestV2ConnectionCreateRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<CreateConnectionResponse>>
 ```
@@ -79,18 +268,18 @@ async createConnection(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2ConnectionCreateRequest`](/doc/models/api-rest-v2-connection-create-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2ConnectionCreateRequest`](../../doc/models/tspublic-rest-v2-connection-create-request.md) | Body, Required | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
 
-[`CreateConnectionResponse`](/doc/models/create-connection-response.md)
+[`CreateConnectionResponse`](../../doc/models/create-connection-response.md)
 
 ## Example Usage
 
 ```ts
 const contentType = null;
-const body: ApiRestV2ConnectionCreateRequest = {
+const body: TspublicRestV2ConnectionCreateRequest = {
   type: 'TERADATA',
   name: 'name6',
   configuration: 'configuration0',
@@ -112,16 +301,18 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
 # Update Connection
 
 You can use this endpoint to programmatically modify an existing connection
 
+Permission: Requires datamanagement privilege
+
 ```ts
 async updateConnection(
-  body: ApiRestV2ConnectionUpdateRequest,
+  body: TspublicRestV2ConnectionUpdateRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<boolean>>
 ```
@@ -130,7 +321,7 @@ async updateConnection(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2ConnectionUpdateRequest`](/doc/models/api-rest-v2-connection-update-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2ConnectionUpdateRequest`](../../doc/models/tspublic-rest-v2-connection-update-request.md) | Body, Required | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -141,7 +332,7 @@ async updateConnection(
 
 ```ts
 const contentType = null;
-const body: ApiRestV2ConnectionUpdateRequest = {
+const body: TspublicRestV2ConnectionUpdateRequest = {
   id: 'id6',
   configuration: 'configuration0',
 };
@@ -162,12 +353,14 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
 # Delete Connection
 
 To remove a connection from the ThoughtSpot system, use this endpoint.
+
+Permission: Requires datamanagement privilege
 
 ```ts
 async deleteConnection(
@@ -207,16 +400,18 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
 # Add Table to Connection
 
 To programmatically add table to an existing connection, use this endpoint
 
+Permission: Requires datamanagement privilege
+
 ```ts
 async addTableToConnection(
-  body: ApiRestV2ConnectionAddtableRequest,
+  body: TspublicRestV2ConnectionAddtableRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<boolean>>
 ```
@@ -225,7 +420,7 @@ async addTableToConnection(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2ConnectionAddtableRequest`](/doc/models/api-rest-v2-connection-addtable-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2ConnectionAddtableRequest`](../../doc/models/tspublic-rest-v2-connection-addtable-request.md) | Body, Required | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -236,43 +431,86 @@ async addTableToConnection(
 
 ```ts
 const contentType = null;
-const bodyTables: AddTableInput[] = [];
+const bodyTable: AddTableInput[] = [];
 
-const bodytables0Columns: ColumnsInput[] = [];
+const bodytable0Columns: ColumnsInput[] = [];
 
-const bodytables0columns0: ColumnsInput = {
-  name: 'name2',
-  dataType: 'dataType4',
+const bodytable0columns0: ColumnsInput = {
+  name: 'name0',
+  dataType: 'dataType2',
 };
 
-bodytables0Columns[0] = bodytables0columns0;
+bodytable0Columns[0] = bodytable0columns0;
 
-const bodytables0columns1: ColumnsInput = {
-  name: 'name3',
-  dataType: 'dataType5',
+const bodytable0columns1: ColumnsInput = {
+  name: 'name1',
+  dataType: 'dataType3',
 };
 
-bodytables0Columns[1] = bodytables0columns1;
+bodytable0Columns[1] = bodytable0columns1;
 
-const bodytables0columns2: ColumnsInput = {
-  name: 'name4',
-  dataType: 'dataType6',
+const bodytable0: AddTableInput = {
+  name: 'name0',
+  dbName: 'dbName8',
+  schemaName: 'schemaName4',
+  columns: bodytable0Columns,
 };
 
-bodytables0Columns[2] = bodytables0columns2;
+bodyTable[0] = bodytable0;
 
-const bodytables0: AddTableInput = {
+const bodytable1Columns: ColumnsInput[] = [];
+
+const bodytable1columns0: ColumnsInput = {
+  name: 'name9',
+  dataType: 'dataType1',
+};
+
+bodytable1Columns[0] = bodytable1columns0;
+
+const bodytable1: AddTableInput = {
+  name: 'name1',
+  dbName: 'dbName9',
+  schemaName: 'schemaName5',
+  columns: bodytable1Columns,
+};
+
+bodyTable[1] = bodytable1;
+
+const bodytable2Columns: ColumnsInput[] = [];
+
+const bodytable2columns0: ColumnsInput = {
   name: 'name8',
-  dbName: 'dbName6',
-  schemaName: 'schemaName2',
-  columns: bodytables0Columns,
+  dataType: 'dataType0',
 };
 
-bodyTables[0] = bodytables0;
+bodytable2Columns[0] = bodytable2columns0;
 
-const body: ApiRestV2ConnectionAddtableRequest = {
+const bodytable2columns1: ColumnsInput = {
+  name: 'name9',
+  dataType: 'dataType1',
+};
+
+bodytable2Columns[1] = bodytable2columns1;
+
+const bodytable2columns2: ColumnsInput = {
+  name: 'name0',
+  dataType: 'dataType2',
+};
+
+bodytable2Columns[2] = bodytable2columns2;
+
+const bodytable2: AddTableInput = {
+  name: 'name2',
+  dbName: 'dbName0',
+  schemaName: 'schemaName6',
+  columns: bodytable2Columns,
+};
+
+bodyTable[2] = bodytable2;
+
+const body: TspublicRestV2ConnectionAddtableRequest = {
   id: 'id6',
-  tables: bodyTables,
+  table: bodyTable,
 };
 
 try {
@@ -291,16 +529,18 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
 # Remove Table From Connection
 
 To programmatically remove a table from a connection, use API endpoint.
 
+Permission: Requires datamanagement privilege
+
 ```ts
 async removeTableFromConnection(
-  body: ApiRestV2ConnectionRemovetableRequest,
+  body: TspublicRestV2ConnectionRemovetableRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<boolean>>
 ```
@@ -309,7 +549,7 @@ async removeTableFromConnection(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2ConnectionRemovetableRequest`](/doc/models/api-rest-v2-connection-removetable-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2ConnectionRemovetableRequest`](../../doc/models/tspublic-rest-v2-connection-removetable-request.md) | Body, Required | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -320,15 +560,23 @@ async removeTableFromConnection(
 
 ```ts
 const contentType = null;
-const bodyTables: TableInput[] = [];
+const bodyTable: TableInput[] = [];
 
-const bodytables0: TableInput = {};
+const bodytable0: TableInput = {};
 
-bodyTables[0] = bodytables0;
+bodyTable[0] = bodytable0;
 
-const body: ApiRestV2ConnectionRemovetableRequest = {
+const bodytable1: TableInput = {};
+
+bodyTable[1] = bodytable1;
+
+const bodytable2: TableInput = {};
+
+bodyTable[2] = bodytable2;
+
+const body: TspublicRestV2ConnectionRemovetableRequest = {
   id: 'id6',
-  tables: bodyTables,
+  table: bodyTable,
 };
 
 try {
@@ -347,16 +595,18 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
 # Search Connection
 
 To get the details of a specific connection or all connections in the ThoughtSpot system use this end point.
 
+Permission: Requires datamanagement privilege
+
 ```ts
 async searchConnection(
-  body: ApiRestV2ConnectionSearchRequest,
+  body: TspublicRestV2ConnectionSearchRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ConnectionResponse[]>>
 ```
@@ -365,18 +615,18 @@ async searchConnection(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2ConnectionSearchRequest`](/doc/models/api-rest-v2-connection-search-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2ConnectionSearchRequest`](../../doc/models/tspublic-rest-v2-connection-search-request.md) | Body, Required | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
 
-[`ConnectionResponse[]`](/doc/models/connection-response.md)
+[`ConnectionResponse[]`](../../doc/models/connection-response.md)
 
 ## Example Usage
 
 ```ts
 const contentType = null;
-const body: ApiRestV2ConnectionSearchRequest = {
+const body: TspublicRestV2ConnectionSearchRequest = {
   type: 'TERADATA',
 };
 
@@ -396,5 +646,5 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 

@@ -41,7 +41,9 @@ namespace RESTAPISDK.Tests
         /// <summary>
         /// To get the details of a specific group by name or id, use this endpoint. 
         ///
-        /// At least one value needed. When both are given,then id will be considered to fetch user information..
+        /// At least one value needed. When both are given,then id will be considered to fetch user information. 
+        ///
+        /// Permission: Requires administration privilege.
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous unit test.</returns>
         [Test]
@@ -78,7 +80,9 @@ namespace RESTAPISDK.Tests
         /// <summary>
         /// To remove a group from the ThoughtSpot system, send a DELETE request to this endpoint. 
         ///
-        /// At least one value needed. When both are given,then user id will be considered to fetch user information..
+        /// At least one value needed. When both are given,then user id will be considered to fetch user information. 
+        ///
+        /// Permission: Requires administration privilege.
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous unit test.</returns>
         [Test]

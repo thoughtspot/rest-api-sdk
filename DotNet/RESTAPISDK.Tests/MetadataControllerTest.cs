@@ -78,7 +78,9 @@ namespace RESTAPISDK.Tests
         /// <summary>
         /// To programmatically delete tags, use this endpoint. 
         ///
-        /// At least one of id or name of tag is required. When both are given, then id will be considered..
+        /// At least one of id or name of tag is required. When both are given, then id will be considered. 
+        ///
+        /// Permission: Requires administration privilege.
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous unit test.</returns>
         [Test]
@@ -115,11 +117,13 @@ namespace RESTAPISDK.Tests
         /// <summary>
         /// To get the name and id of liveboard that is set as a home liveboard for a user, use this endpoint. 
         ///
-        /// At least one of user id or username is required. When both are given, then id will be considered..
+        /// At least one of user id or username is required. When both are given, then id will be considered. 
+        ///
+        /// Permission: Requires at least view access to the object.
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous unit test.</returns>
         [Test]
-        public async Task TestTestGetHomeliveboard()
+        public async Task TestTestGetHomeLiveboard()
         {
             // Parameters for the API call
             string userName = null;
@@ -129,7 +133,7 @@ namespace RESTAPISDK.Tests
             Standard.Models.HomeLiveboardResponse result = null;
             try
             {
-                result = await this.controller.GetHomeliveboardAsync(userName, userId);
+                result = await this.controller.GetHomeLiveboardAsync(userName, userId);
             }
             catch (ApiException)
             {

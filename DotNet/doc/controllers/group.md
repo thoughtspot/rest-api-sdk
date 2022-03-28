@@ -10,17 +10,17 @@ GroupController groupController = client.GroupController;
 
 ## Methods
 
-* [Get Group](/doc/controllers/group.md#get-group)
-* [Create Group](/doc/controllers/group.md#create-group)
-* [Update Group](/doc/controllers/group.md#update-group)
-* [Delete Group](/doc/controllers/group.md#delete-group)
-* [Add Privileges to Group](/doc/controllers/group.md#add-privileges-to-group)
-* [Remove Privileges From Group](/doc/controllers/group.md#remove-privileges-from-group)
-* [Add Users to Group](/doc/controllers/group.md#add-users-to-group)
-* [Remove Users From Group](/doc/controllers/group.md#remove-users-from-group)
-* [Add Groups to Group](/doc/controllers/group.md#add-groups-to-group)
-* [Remove Groups From Group](/doc/controllers/group.md#remove-groups-from-group)
-* [Search Groups](/doc/controllers/group.md#search-groups)
+* [Get Group](../../doc/controllers/group.md#get-group)
+* [Create Group](../../doc/controllers/group.md#create-group)
+* [Update Group](../../doc/controllers/group.md#update-group)
+* [Delete Group](../../doc/controllers/group.md#delete-group)
+* [Add Privileges to Group](../../doc/controllers/group.md#add-privileges-to-group)
+* [Remove Privileges From Group](../../doc/controllers/group.md#remove-privileges-from-group)
+* [Add Users to Group](../../doc/controllers/group.md#add-users-to-group)
+* [Remove Users From Group](../../doc/controllers/group.md#remove-users-from-group)
+* [Add Groups to Group](../../doc/controllers/group.md#add-groups-to-group)
+* [Remove Groups From Group](../../doc/controllers/group.md#remove-groups-from-group)
+* [Search Groups](../../doc/controllers/group.md#search-groups)
 
 
 # Get Group
@@ -28,6 +28,8 @@ GroupController groupController = client.GroupController;
 To get the details of a specific group by name or id, use this endpoint.
 
 At least one value needed. When both are given,then id will be considered to fetch user information.
+
+Permission: Requires administration privilege
 
 ```csharp
 GetGroupAsync(
@@ -44,7 +46,7 @@ GetGroupAsync(
 
 ## Response Type
 
-[`Task<Models.GroupResponse>`](/doc/models/group-response.md)
+[`Task<Models.GroupResponse>`](../../doc/models/group-response.md)
 
 ## Example Usage
 
@@ -60,7 +62,7 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Create Group
@@ -69,31 +71,33 @@ To programmatically create a group in the ThoughtSpot system, use this API endpo
 
 Using this API, you can create a group and assign privileges and users.
 
-For ease of user management and access control, ThoughtSpot administrators can create groups and assign privileges to these groups.
+For ease of user management and access control, ThoughtSpot administrations can create groups and assign privileges to these groups.
 
 The privileges determine the actions that the users belonging to a group are allowed to do.
 
 ThoughtSpot also has a default group called ALL_GROUP. When you create new group in ThoughtSpot, they are automatically added to ALL_GROUP. You cannot delete the ALL_GROUP or remove members from it.
 
+Permission: Requires administration privilege
+
 ```csharp
 CreateGroupAsync(
-    Models.ApiRestV2GroupCreateRequest body)
+    Models.TspublicRestV2GroupCreateRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.ApiRestV2GroupCreateRequest`](/doc/models/api-rest-v2-group-create-request.md) | Body, Required | - |
+| `body` | [`Models.TspublicRestV2GroupCreateRequest`](../../doc/models/tspublic-rest-v2-group-create-request.md) | Body, Required | - |
 
 ## Response Type
 
-[`Task<Models.GroupResponse>`](/doc/models/group-response.md)
+[`Task<Models.GroupResponse>`](../../doc/models/group-response.md)
 
 ## Example Usage
 
 ```csharp
-var body = new ApiRestV2GroupCreateRequest();
+var body = new TspublicRestV2GroupCreateRequest();
 body.Name = "name6";
 body.DisplayName = "displayName6";
 
@@ -108,7 +112,7 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Update Group
@@ -119,16 +123,18 @@ To modify a group, you require admin user privileges.
 
 At least one of id or name is required to update the group. When both are given, then id will be considered and group name will be updated.
 
+Permission: Requires administration privilege
+
 ```csharp
 UpdateGroupAsync(
-    Models.ApiRestV2GroupUpdateRequest body)
+    Models.TspublicRestV2GroupUpdateRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.ApiRestV2GroupUpdateRequest`](/doc/models/api-rest-v2-group-update-request.md) | Body, Required | - |
+| `body` | [`Models.TspublicRestV2GroupUpdateRequest`](../../doc/models/tspublic-rest-v2-group-update-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -137,7 +143,7 @@ UpdateGroupAsync(
 ## Example Usage
 
 ```csharp
-var body = new ApiRestV2GroupUpdateRequest();
+var body = new TspublicRestV2GroupUpdateRequest();
 
 try
 {
@@ -150,7 +156,7 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Delete Group
@@ -158,6 +164,8 @@ catch (ApiException e){};
 To remove a group from the ThoughtSpot system, send a DELETE request to this endpoint.
 
 At least one value needed. When both are given,then user id will be considered to fetch user information.
+
+Permission: Requires administration privilege
 
 ```csharp
 DeleteGroupAsync(
@@ -190,7 +198,7 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Add Privileges to Group
@@ -201,16 +209,18 @@ When you assign privileges to a group, all the users under to this group inherit
 
 At least one of id or name of group is required. When both are given,then user id will be considered.
 
+Permission: Requires administration privilege
+
 ```csharp
 AddPrivilegesToGroupAsync(
-    Models.ApiRestV2GroupAddprivilegeRequest body)
+    Models.TspublicRestV2GroupAddprivilegeRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.ApiRestV2GroupAddprivilegeRequest`](/doc/models/api-rest-v2-group-addprivilege-request.md) | Body, Required | - |
+| `body` | [`Models.TspublicRestV2GroupAddprivilegeRequest`](../../doc/models/tspublic-rest-v2-group-addprivilege-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -219,7 +229,7 @@ AddPrivilegesToGroupAsync(
 ## Example Usage
 
 ```csharp
-var body = new ApiRestV2GroupAddprivilegeRequest();
+var body = new TspublicRestV2GroupAddprivilegeRequest();
 
 try
 {
@@ -232,7 +242,7 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Remove Privileges From Group
@@ -243,16 +253,18 @@ The API removes only the privilege association. It does not delete the privilege
 
 At least one of id or name of group is required. When both are given,then user id will be considered.
 
+Permission: Requires administration privilege
+
 ```csharp
 RemovePrivilegesFromGroupAsync(
-    Models.ApiRestV2GroupRemoveprivilegeRequest body)
+    Models.TspublicRestV2GroupRemoveprivilegeRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.ApiRestV2GroupRemoveprivilegeRequest`](/doc/models/api-rest-v2-group-removeprivilege-request.md) | Body, Required | - |
+| `body` | [`Models.TspublicRestV2GroupRemoveprivilegeRequest`](../../doc/models/tspublic-rest-v2-group-removeprivilege-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -261,7 +273,7 @@ RemovePrivilegesFromGroupAsync(
 ## Example Usage
 
 ```csharp
-var body = new ApiRestV2GroupRemoveprivilegeRequest();
+var body = new TspublicRestV2GroupRemoveprivilegeRequest();
 
 try
 {
@@ -274,7 +286,7 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Add Users to Group
@@ -285,16 +297,18 @@ hen you assign users to a group, the users inherits the privileges assigned to t
 
 At least one of id or name of the group is required. When both are given,then user id will be considered.
 
+Permission: Requires administration privilege
+
 ```csharp
 AddUsersToGroupAsync(
-    Models.ApiRestV2GroupAdduserRequest body)
+    Models.TspublicRestV2GroupAdduserRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.ApiRestV2GroupAdduserRequest`](/doc/models/api-rest-v2-group-adduser-request.md) | Body, Required | - |
+| `body` | [`Models.TspublicRestV2GroupAdduserRequest`](../../doc/models/tspublic-rest-v2-group-adduser-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -303,7 +317,12 @@ AddUsersToGroupAsync(
 ## Example Usage
 
 ```csharp
-var body = new ApiRestV2GroupAdduserRequest();
+var body = new TspublicRestV2GroupAdduserRequest();
+body.Users = new List<UserNameAndIDInput>();
+
+var bodyUsers0 = new UserNameAndIDInput();
+body.Users.Add(bodyUsers0);
+
 
 try
 {
@@ -316,7 +335,7 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Remove Users From Group
@@ -327,16 +346,18 @@ The API removes only the user association. It does not delete the users or group
 
 At least one of id or name of group is required. When both are given,then user id will be considered.
 
+Permission: Requires administration privilege
+
 ```csharp
 RemoveUsersFromGroupAsync(
-    Models.ApiRestV2GroupRemoveuserRequest body)
+    Models.TspublicRestV2GroupRemoveuserRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.ApiRestV2GroupRemoveuserRequest`](/doc/models/api-rest-v2-group-removeuser-request.md) | Body, Required | - |
+| `body` | [`Models.TspublicRestV2GroupRemoveuserRequest`](../../doc/models/tspublic-rest-v2-group-removeuser-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -345,7 +366,12 @@ RemoveUsersFromGroupAsync(
 ## Example Usage
 
 ```csharp
-var body = new ApiRestV2GroupRemoveuserRequest();
+var body = new TspublicRestV2GroupRemoveuserRequest();
+body.Users = new List<UserNameAndIDInput>();
+
+var bodyUsers0 = new UserNameAndIDInput();
+body.Users.Add(bodyUsers0);
+
 
 try
 {
@@ -358,7 +384,7 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Add Groups to Group
@@ -369,16 +395,18 @@ When you assign groups to a group, the group inherits the privileges assigned to
 
 At least one of id or name of group is required. When both are given,then user id will be considered.
 
+Permission: Requires administration privilege
+
 ```csharp
 AddGroupsToGroupAsync(
-    Models.ApiRestV2GroupAddgroupRequest body)
+    Models.TspublicRestV2GroupAddgroupRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.ApiRestV2GroupAddgroupRequest`](/doc/models/api-rest-v2-group-addgroup-request.md) | Body, Required | - |
+| `body` | [`Models.TspublicRestV2GroupAddgroupRequest`](../../doc/models/tspublic-rest-v2-group-addgroup-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -387,7 +415,12 @@ AddGroupsToGroupAsync(
 ## Example Usage
 
 ```csharp
-var body = new ApiRestV2GroupAddgroupRequest();
+var body = new TspublicRestV2GroupAddgroupRequest();
+body.Groups = new List<GroupNameAndIDInput>();
+
+var bodyGroups0 = new GroupNameAndIDInput();
+body.Groups.Add(bodyGroups0);
+
 
 try
 {
@@ -400,7 +433,7 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Remove Groups From Group
@@ -411,16 +444,18 @@ The API removes only the group association. It does not delete the group from th
 
 At least one of id or name of group is required. When both are given,then user id will be considered.
 
+Permission: Requires administration privilege
+
 ```csharp
 RemoveGroupsFromGroupAsync(
-    Models.ApiRestV2GroupRemovegroupRequest body)
+    Models.TspublicRestV2GroupRemovegroupRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.ApiRestV2GroupRemovegroupRequest`](/doc/models/api-rest-v2-group-removegroup-request.md) | Body, Required | - |
+| `body` | [`Models.TspublicRestV2GroupRemovegroupRequest`](../../doc/models/tspublic-rest-v2-group-removegroup-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -429,7 +464,12 @@ RemoveGroupsFromGroupAsync(
 ## Example Usage
 
 ```csharp
-var body = new ApiRestV2GroupRemovegroupRequest();
+var body = new TspublicRestV2GroupRemovegroupRequest();
+body.Groups = new List<GroupNameAndIDInput>();
+
+var bodyGroups0 = new GroupNameAndIDInput();
+body.Groups.Add(bodyGroups0);
+
 
 try
 {
@@ -442,7 +482,7 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Search Groups
@@ -451,29 +491,31 @@ To get the details of a specific group account or all groups in the ThoughtSpot 
 
 If no inputs are provided, then all groups are included in the response.
 
+Permission: Requires administration privilege
+
 ```csharp
 SearchGroupsAsync(
-    Models.ApiRestV2GroupSearchRequest body)
+    Models.TspublicRestV2GroupSearchRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.ApiRestV2GroupSearchRequest`](/doc/models/api-rest-v2-group-search-request.md) | Body, Required | - |
+| `body` | [`Models.TspublicRestV2GroupSearchRequest`](../../doc/models/tspublic-rest-v2-group-search-request.md) | Body, Required | - |
 
 ## Response Type
 
-[`Task<List<Models.GroupResponse>>`](/doc/models/group-response.md)
+`Task<object>`
 
 ## Example Usage
 
 ```csharp
-var body = new ApiRestV2GroupSearchRequest();
+var body = new TspublicRestV2GroupSearchRequest();
 
 try
 {
-    List<GroupResponse> result = await groupController.SearchGroupsAsync(body);
+    object result = await groupController.SearchGroupsAsync(body);
 }
 catch (ApiException e){};
 ```
@@ -482,5 +524,5 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 

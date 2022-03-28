@@ -22,9 +22,9 @@ import localhost.http.client.HttpContext;
 import localhost.http.request.HttpRequest;
 import localhost.http.response.HttpResponse;
 import localhost.http.response.HttpStringResponse;
-import localhost.models.ApiRestV2SessionGettokenRequest;
-import localhost.models.ApiRestV2SessionLoginRequest;
 import localhost.models.SessionLoginResponse;
+import localhost.models.TspublicRestV2SessionGettokenRequest;
+import localhost.models.TspublicRestV2SessionLoginRequest;
 
 /**
  * This class lists all the endpoints of the groups.
@@ -91,12 +91,12 @@ public final class SessionController extends BaseController {
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/session");
+                + "/tspublic/rest/v2/session");
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
-        headers.add("Content-Type", config.getContentType());
         headers.add("Accept-Language", config.getAcceptLanguage());
+        headers.add("Content-Type", config.getContentType());
         headers.add("user-agent", BaseController.userAgent);
 
         //prepare and invoke the API call request to fetch the response
@@ -140,15 +140,21 @@ public final class SessionController extends BaseController {
     }
 
     /**
-     * To programmatically login a user to ThoughtSpot, use this endpoint.
+     * You can programmatically create login session for a user in ThoughtSpot using this endpoint.
+     * You can create session by either providing userName and password as inputs in this request
+     * body or by including "Authorization" header with the token generated through the endpoint
+     * /tspublic/rest/v2/session/getToken. userName and password input is given precedence over
+     * "Authorization" header, when both are included in the request.
      * @param  body  Required parameter: Example:
      * @return    Returns the SessionLoginResponse response from the API call
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
     public SessionLoginResponse login(
-            final ApiRestV2SessionLoginRequest body) throws ApiException, IOException {
+            final TspublicRestV2SessionLoginRequest body) throws ApiException, IOException {
         HttpRequest request = buildLoginRequest(body);
+        authManagers.get("global").apply(request);
+
         HttpResponse response = getClientInstance().execute(request, false);
         HttpContext context = new HttpContext(request, response);
 
@@ -156,14 +162,20 @@ public final class SessionController extends BaseController {
     }
 
     /**
-     * To programmatically login a user to ThoughtSpot, use this endpoint.
+     * You can programmatically create login session for a user in ThoughtSpot using this endpoint.
+     * You can create session by either providing userName and password as inputs in this request
+     * body or by including "Authorization" header with the token generated through the endpoint
+     * /tspublic/rest/v2/session/getToken. userName and password input is given precedence over
+     * "Authorization" header, when both are included in the request.
      * @param  body  Required parameter: Example:
      * @return    Returns the SessionLoginResponse response from the API call
      */
     public CompletableFuture<SessionLoginResponse> loginAsync(
-            final ApiRestV2SessionLoginRequest body) {
+            final TspublicRestV2SessionLoginRequest body) {
         return makeHttpCallAsync(() -> buildLoginRequest(body),
-            request -> getClientInstance().executeAsync(request, false),
+            req -> authManagers.get("global").applyAsync(req)
+                .thenCompose(request -> getClientInstance()
+                        .executeAsync(request, false)),
             context -> handleLoginResponse(context));
     }
 
@@ -171,19 +183,23 @@ public final class SessionController extends BaseController {
      * Builds the HttpRequest object for login.
      */
     private HttpRequest buildLoginRequest(
-            final ApiRestV2SessionLoginRequest body) throws JsonProcessingException {
+            final TspublicRestV2SessionLoginRequest body) throws JsonProcessingException {
+        //validating required parameters
+        if (null == body) {
+            throw new NullPointerException("The parameter \"body\" is a required parameter and cannot be null.");
+        }
+
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/session/login");
+                + "/tspublic/rest/v2/session/login");
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
         headers.add("Content-Type", "application/json");
         headers.add("Accept-Language", config.getAcceptLanguage());
-
         headers.add("user-agent", BaseController.userAgent);
         headers.add("accept", "application/json");
 
@@ -262,12 +278,12 @@ public final class SessionController extends BaseController {
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/session/logout");
+                + "/tspublic/rest/v2/session/logout");
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
-        headers.add("Content-Type", config.getContentType());
         headers.add("Accept-Language", config.getAcceptLanguage());
+        headers.add("Content-Type", config.getContentType());
 
         headers.add("user-agent", BaseController.userAgent);
 
@@ -312,44 +328,61 @@ public final class SessionController extends BaseController {
     }
 
     /**
-     * To programmatically create token for a user in ThoughtSpot, use this endpoint.
+     * To programmatically create session token for a user in ThoughtSpot, use this endpoint. You
+     * can generate the token for a user by providing password or secret key from the cluster. You
+     * need to enable trusted authentication to generate secret key. To generate secret key, follow
+     * below steps. 1. Click the Develop tab. 2. Under Customizations, click Settings. 3. To enable
+     * trusted authentication, turn on the toggle. 4. A secret_key for trusted authentication is
+     * generated. 5. Click the clipboard icon to copy the token. Password is given precedence over
+     * secretKey input, when both are included in the request.
      * @param  body  Required parameter: Example:
      * @return    Returns the SessionLoginResponse response from the API call
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
-    public SessionLoginResponse gettoken(
-            final ApiRestV2SessionGettokenRequest body) throws ApiException, IOException {
-        HttpRequest request = buildGettokenRequest(body);
+    public SessionLoginResponse getToken(
+            final TspublicRestV2SessionGettokenRequest body) throws ApiException, IOException {
+        HttpRequest request = buildGetTokenRequest(body);
         HttpResponse response = getClientInstance().execute(request, false);
         HttpContext context = new HttpContext(request, response);
 
-        return handleGettokenResponse(context);
+        return handleGetTokenResponse(context);
     }
 
     /**
-     * To programmatically create token for a user in ThoughtSpot, use this endpoint.
+     * To programmatically create session token for a user in ThoughtSpot, use this endpoint. You
+     * can generate the token for a user by providing password or secret key from the cluster. You
+     * need to enable trusted authentication to generate secret key. To generate secret key, follow
+     * below steps. 1. Click the Develop tab. 2. Under Customizations, click Settings. 3. To enable
+     * trusted authentication, turn on the toggle. 4. A secret_key for trusted authentication is
+     * generated. 5. Click the clipboard icon to copy the token. Password is given precedence over
+     * secretKey input, when both are included in the request.
      * @param  body  Required parameter: Example:
      * @return    Returns the SessionLoginResponse response from the API call
      */
-    public CompletableFuture<SessionLoginResponse> gettokenAsync(
-            final ApiRestV2SessionGettokenRequest body) {
-        return makeHttpCallAsync(() -> buildGettokenRequest(body),
+    public CompletableFuture<SessionLoginResponse> getTokenAsync(
+            final TspublicRestV2SessionGettokenRequest body) {
+        return makeHttpCallAsync(() -> buildGetTokenRequest(body),
             request -> getClientInstance().executeAsync(request, false),
-            context -> handleGettokenResponse(context));
+            context -> handleGetTokenResponse(context));
     }
 
     /**
-     * Builds the HttpRequest object for gettoken.
+     * Builds the HttpRequest object for getToken.
      */
-    private HttpRequest buildGettokenRequest(
-            final ApiRestV2SessionGettokenRequest body) throws JsonProcessingException {
+    private HttpRequest buildGetTokenRequest(
+            final TspublicRestV2SessionGettokenRequest body) throws JsonProcessingException {
+        //validating required parameters
+        if (null == body) {
+            throw new NullPointerException("The parameter \"body\" is a required parameter and cannot be null.");
+        }
+
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/session/gettoken");
+                + "/tspublic/rest/v2/session/gettoken");
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
@@ -372,10 +405,10 @@ public final class SessionController extends BaseController {
     }
 
     /**
-     * Processes the response for gettoken.
+     * Processes the response for getToken.
      * @return An object of type SessionLoginResponse
      */
-    private SessionLoginResponse handleGettokenResponse(
+    private SessionLoginResponse handleGetTokenResponse(
             HttpContext context) throws ApiException, IOException {
         HttpResponse response = context.getResponse();
 
@@ -407,43 +440,43 @@ public final class SessionController extends BaseController {
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
-    public Boolean revoketoken() throws ApiException, IOException {
-        HttpRequest request = buildRevoketokenRequest();
+    public Boolean revokeToken() throws ApiException, IOException {
+        HttpRequest request = buildRevokeTokenRequest();
         authManagers.get("global").apply(request);
 
         HttpResponse response = getClientInstance().execute(request, false);
         HttpContext context = new HttpContext(request, response);
 
-        return handleRevoketokenResponse(context);
+        return handleRevokeTokenResponse(context);
     }
 
     /**
      * To expire or revoke a token for a user, use this endpoint.
      * @return    Returns the Boolean response from the API call
      */
-    public CompletableFuture<Boolean> revoketokenAsync() {
-        return makeHttpCallAsync(() -> buildRevoketokenRequest(),
+    public CompletableFuture<Boolean> revokeTokenAsync() {
+        return makeHttpCallAsync(() -> buildRevokeTokenRequest(),
             req -> authManagers.get("global").applyAsync(req)
                 .thenCompose(request -> getClientInstance()
                         .executeAsync(request, false)),
-            context -> handleRevoketokenResponse(context));
+            context -> handleRevokeTokenResponse(context));
     }
 
     /**
-     * Builds the HttpRequest object for revoketoken.
+     * Builds the HttpRequest object for revokeToken.
      */
-    private HttpRequest buildRevoketokenRequest() {
+    private HttpRequest buildRevokeTokenRequest() {
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/session/revoketoken");
+                + "/tspublic/rest/v2/session/revoketoken");
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
-        headers.add("Content-Type", config.getContentType());
         headers.add("Accept-Language", config.getAcceptLanguage());
+        headers.add("Content-Type", config.getContentType());
         headers.add("user-agent", BaseController.userAgent);
 
         //prepare and invoke the API call request to fetch the response
@@ -458,10 +491,10 @@ public final class SessionController extends BaseController {
     }
 
     /**
-     * Processes the response for revoketoken.
+     * Processes the response for revokeToken.
      * @return An object of type boolean
      */
-    private Boolean handleRevoketokenResponse(
+    private Boolean handleRevokeTokenResponse(
             HttpContext context) throws ApiException, IOException {
         HttpResponse response = context.getResponse();
 

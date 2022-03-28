@@ -7,5 +7,10 @@ __all__ = [
     'database_controller',
     'connection_controller',
     'data_controller',
+    'report_controller',
     'admin_controller',
+    'security_controller',
+    'logs_controller',
+    'materialization_controller',
+    'custom_actions_controller',
 ]
