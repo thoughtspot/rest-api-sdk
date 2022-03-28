@@ -18,10 +18,6 @@ If you are building with .NET CLI tools then you can also use the following comm
 dotnet add package thoughtspot.rest.api.sdk --version 1.10.0
 ```
 
-## Test the SDK
-
-The generated SDK also contain one or more Tests, which are contained in the Tests project. In order to invoke these test cases, you will need `NUnit 3.0 Test Adapter Extension` for Visual Studio. Once the SDK is complied, the test cases should appear in the Test Explorer window. Here, you can click `Run All` to execute these test cases.
-
 ## Initialize the API Client
 
 **_Note:_** Documentation for the client can be found [here.](doc/client.md)
@@ -54,31 +50,7 @@ RESTAPISDK.Standard.RESTAPISDKClient client = new RESTAPISDK.Standard.RESTAPISDK
 
 This API uses `OAuth 2 Bearer token`.
 
-## List of APIs
-
-* [Session](doc/controllers/session.md)
-* [User](doc/controllers/user.md)
-* [Group](doc/controllers/group.md)
-* [Metadata](doc/controllers/metadata.md)
-* [Database](doc/controllers/database.md)
-* [Connection](doc/controllers/connection.md)
-* [Data](doc/controllers/data.md)
-* [Report](doc/controllers/report.md)
-* [Admin](doc/controllers/admin.md)
-* [Security](doc/controllers/security.md)
-* [Logs](doc/controllers/logs.md)
-* [Materialization](doc/controllers/materialization.md)
-* [Custom Actions](doc/controllers/custom-actions.md)
-
-## Classes Documentation
-
-* [Utility Classes](doc/utility-classes.md)
-* [HttpRequest](doc/http-request.md)
-* [HttpResponse](doc/http-response.md)
-* [HttpStringResponse](doc/http-string-response.md)
-* [HttpContext](doc/http-context.md)
-* [HttpClientConfiguration](doc/http-client-configuration.md)
-* [HttpClientConfiguration Builder](doc/http-client-configuration-builder.md)
-* [IAuthManager](doc/i-auth-manager.md)
-* [ApiException](doc/api-exception.md)
-
+## Guide
+[API Reference](https://github.com/thoughtspot/rest-api-sdk/blob/1.10.0/Typescript/doc/README.md)
+## Live Playground
+We recommend that you browse through the [code playground](https://try-everywhere.thoughtspot.cloud/v2/#/everywhere/api/rest/playgroundV2) before you start constructing your API requests. The playground offers an interactive portal with comprehensive information about the API endpoints, request and response workflows.
