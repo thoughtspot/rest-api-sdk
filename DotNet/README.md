@@ -51,6 +51,6 @@ RESTAPISDK.Standard.RESTAPISDKClient client = new RESTAPISDK.Standard.RESTAPISDK
 This API uses `OAuth 2 Bearer token`.
 
 ## Guide
-        [API Reference](https://github.com/thoughtspot/rest-api-sdk/blob/1.10.0/Typescript/doc/README.md)
+[API Reference](https://github.com/thoughtspot/rest-api-sdk/blob/1.10.0/Typescript/doc/README.md)
 ## Live Playground
-        We recommend that you browse through the [code playground](https://try-everywhere.thoughtspot.cloud/v2/#/everywhere/api/rest/playgroundV2) before you start constructing your API requests. The playground offers an interactive portal with comprehensive information about the API endpoints, request and response workflows.
+We recommend that you browse through the [code playground](https://try-everywhere.thoughtspot.cloud/v2/#/everywhere/api/rest/playgroundV2) before you start constructing your API requests. The playground offers an interactive portal with comprehensive information about the API endpoints, request and response workflows.
