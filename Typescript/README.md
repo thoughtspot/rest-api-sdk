@@ -6,7 +6,7 @@
 Run the following command from your project directory to install the package from npm:
 
 ```ts
-npm install thoughtspot@rest-api-sdk@1.10.0
+npm install @thoughtspot/rest-api-sdk@1.10.0
 ```
 
 ## Initialize the API Client
