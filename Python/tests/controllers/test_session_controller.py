@@ -12,9 +12,7 @@ import dateutil.parser
 
 from tests.controllers.controller_test_base import ControllerTestBase
 from tests.test_helper import TestHelper
-from tests.http_response_catcher import HttpResponseCatcher
 from restapisdk.api_helper import APIHelper
-from restapisdk.controllers.session_controller import SessionController
 
 
 class SessionControllerTests(ControllerTestBase):
@@ -22,8 +20,8 @@ class SessionControllerTests(ControllerTestBase):
     @classmethod
     def setUpClass(cls):
         super(SessionControllerTests, cls).setUpClass()
-        cls.response_catcher = HttpResponseCatcher()
-        cls.controller = SessionController(cls.config, cls.auth_managers, cls.response_catcher)
+        cls.controller = cls.client.session
+        cls.response_catcher = cls.controller.http_call_back
 
     # To get session object information, use this endpoint
     def test_get_session_info(self):
@@ -58,10 +56,10 @@ class SessionControllerTests(ControllerTestBase):
 
 
     # To expire or revoke a token for a user, use this endpoint
-    def test_revoketoken(self):
+    def test_revoke_token(self):
 
         # Perform the API call through the SDK function
-        result = self.controller.revoketoken()
+        result = self.controller.revoke_token()
 
         # Test response code
         self.assertEquals(self.response_catcher.response.status_code, 200)

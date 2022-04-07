@@ -21,9 +21,6 @@ class Type2Enum(object):
         SAML_USER: TODO: type description here.
         OIDC_USER: TODO: type description here.
         LOCAL_USER: TODO: type description here.
-        LDAP_GROUP: TODO: type description here.
-        LOCAL_GROUP: TODO: type description here.
-        TENANT_GROUP: TODO: type description here.
 
     """
 
@@ -36,9 +33,3 @@ class Type2Enum(object):
     OIDC_USER = 'OIDC_USER'
 
     LOCAL_USER = 'LOCAL_USER'
-
-    LDAP_GROUP = 'LDAP_GROUP'
-
-    LOCAL_GROUP = 'LOCAL_GROUP'
-
-    TENANT_GROUP = 'TENANT_GROUP'

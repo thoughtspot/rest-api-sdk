@@ -8,6 +8,7 @@ HttpClientConfiguration represents the current state of the Http Client.
 | Name | Description | Type |
 |  --- | --- | --- |
 | Timeout | Http client timeout. | `TimeSpan` |
+| SkipSslCertVerification | Whether to skip verification of SSL certificates. | `bool` |
 | NumberOfRetries | Number of times the request is retried. | `int` |
 | BackoffFactor | Exponential backoff factor for duration between retry calls. | `int` |
 | RetryInterval | The time interval between the endpoint calls. | `double` |

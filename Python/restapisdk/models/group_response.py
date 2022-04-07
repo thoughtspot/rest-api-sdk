@@ -44,12 +44,12 @@ class GroupResponse(object):
         group_idx (int): TODO: type description here.
         metadata_version (int): TODO: type description here.
         tenant_id (string): Tenant id associated with the group
-        index_version (int): TODO: type description here.
-        generation_num (int): TODO: type description here.
+        index_version (float): TODO: type description here.
+        generation_num (float): TODO: type description here.
         created (float): Date and time when group was created
         modified (float): Date and time of last modification of the group
-        modified_by (UserNameAndID): TODO: type description here.
         author (UserNameAndID): TODO: type description here.
+        modified_by (UserNameAndID): TODO: type description here.
         owner (UserNameAndID): TODO: type description here.
 
     """
@@ -82,8 +82,8 @@ class GroupResponse(object):
         "generation_num": 'generationNum',
         "created": 'created',
         "modified": 'modified',
-        "modified_by": 'modifiedBy',
         "author": 'author',
+        "modified_by": 'modifiedBy',
         "owner": 'owner'
     }
 
@@ -114,8 +114,8 @@ class GroupResponse(object):
                  generation_num=None,
                  created=None,
                  modified=None,
-                 modified_by=None,
                  author=None,
+                 modified_by=None,
                  owner=None):
         """Constructor for the GroupResponse class"""
 
@@ -146,8 +146,8 @@ class GroupResponse(object):
         self.generation_num = generation_num
         self.created = created
         self.modified = modified
-        self.modified_by = modified_by
         self.author = author
+        self.modified_by = modified_by
         self.owner = owner
 
     @classmethod
@@ -200,8 +200,8 @@ class GroupResponse(object):
         generation_num = dictionary.get('generationNum')
         created = dictionary.get('created')
         modified = dictionary.get('modified')
-        modified_by = UserNameAndID.from_dictionary(dictionary.get('modifiedBy')) if dictionary.get('modifiedBy') else None
         author = UserNameAndID.from_dictionary(dictionary.get('author')) if dictionary.get('author') else None
+        modified_by = UserNameAndID.from_dictionary(dictionary.get('modifiedBy')) if dictionary.get('modifiedBy') else None
         owner = UserNameAndID.from_dictionary(dictionary.get('owner')) if dictionary.get('owner') else None
 
         # Return an object of this model
@@ -231,6 +231,6 @@ class GroupResponse(object):
                    generation_num,
                    created,
                    modified,
-                   modified_by,
                    author,
+                   modified_by,
                    owner)

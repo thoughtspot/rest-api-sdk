@@ -7,17 +7,17 @@
 import { ApiResponse, RequestOptions } from '../core';
 import { ErrorResponseError } from '../errors/errorResponseError';
 import {
-  ApiRestV2DatabaseTableCreateRequest,
-  apiRestV2DatabaseTableCreateRequestSchema,
-} from '../models/apiRestV2DatabaseTableCreateRequest';
-import {
-  ApiRestV2DatabaseTableRunqueryRequest,
-  apiRestV2DatabaseTableRunqueryRequestSchema,
-} from '../models/apiRestV2DatabaseTableRunqueryRequest';
-import {
   CreateTableResponse,
   createTableResponseSchema,
 } from '../models/createTableResponse';
+import {
+  TspublicRestV2DatabaseTableCreateRequest,
+  tspublicRestV2DatabaseTableCreateRequestSchema,
+} from '../models/tspublicRestV2DatabaseTableCreateRequest';
+import {
+  TspublicRestV2DatabaseTableRunqueryRequest,
+  tspublicRestV2DatabaseTableRunqueryRequestSchema,
+} from '../models/tspublicRestV2DatabaseTableRunqueryRequest';
 import { array, string, unknown } from '../schema';
 import { BaseController } from './baseController';
 
@@ -32,7 +32,7 @@ export class DatabaseController extends BaseController {
   async getDatabases(
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<string[]>> {
-    const req = this.createRequest('GET', '/api/rest/v2/database');
+    const req = this.createRequest('GET', '/tspublic/rest/v2/database');
     req.throwOn(500, ErrorResponseError, 'Operation failed or unauthorized request');
     return req.callAsJson(array(string()), requestOptions);
   }
@@ -49,7 +49,7 @@ export class DatabaseController extends BaseController {
     database: string,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<string[]>> {
-    const req = this.createRequest('GET', '/api/rest/v2/database/schema');
+    const req = this.createRequest('GET', '/tspublic/rest/v2/database/schema');
     const mapped = req.prepareArgs({ database: [database, string()] });
     req.query('database', mapped.database);
     req.throwOn(500, ErrorResponseError, 'Operation failed or unauthorized request');
@@ -70,7 +70,7 @@ export class DatabaseController extends BaseController {
     schema: string,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<string[]>> {
-    const req = this.createRequest('GET', '/api/rest/v2/database/table');
+    const req = this.createRequest('GET', '/tspublic/rest/v2/database/table');
     const mapped = req.prepareArgs({
       database: [database, string()],
       schema: [schema, string()],
@@ -90,15 +90,15 @@ export class DatabaseController extends BaseController {
    * @return Response from the API call
    */
   async createTable(
-    body: ApiRestV2DatabaseTableCreateRequest,
+    body: TspublicRestV2DatabaseTableCreateRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<CreateTableResponse>> {
     const req = this.createRequest(
       'POST',
-      '/api/rest/v2/database/table/create'
+      '/tspublic/rest/v2/database/table/create'
     );
     const mapped = req.prepareArgs({
-      body: [body, apiRestV2DatabaseTableCreateRequestSchema],
+      body: [body, tspublicRestV2DatabaseTableCreateRequestSchema],
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
@@ -117,15 +117,15 @@ export class DatabaseController extends BaseController {
    * @return Response from the API call
    */
   async runQuery(
-    body: ApiRestV2DatabaseTableRunqueryRequest,
+    body: TspublicRestV2DatabaseTableRunqueryRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<unknown[]>> {
     const req = this.createRequest(
       'POST',
-      '/api/rest/v2/database/table/runquery'
+      '/tspublic/rest/v2/database/table/runquery'
     );
     const mapped = req.prepareArgs({
-      body: [body, apiRestV2DatabaseTableRunqueryRequestSchema],
+      body: [body, tspublicRestV2DatabaseTableRunqueryRequestSchema],
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);

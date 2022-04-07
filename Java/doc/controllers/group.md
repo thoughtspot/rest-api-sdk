@@ -10,17 +10,17 @@ GroupController groupController = client.getGroupController();
 
 ## Methods
 
-* [Get Group](/doc/controllers/group.md#get-group)
-* [Create Group](/doc/controllers/group.md#create-group)
-* [Update Group](/doc/controllers/group.md#update-group)
-* [Delete Group](/doc/controllers/group.md#delete-group)
-* [Add Privileges to Group](/doc/controllers/group.md#add-privileges-to-group)
-* [Remove Privileges From Group](/doc/controllers/group.md#remove-privileges-from-group)
-* [Add Users to Group](/doc/controllers/group.md#add-users-to-group)
-* [Remove Users From Group](/doc/controllers/group.md#remove-users-from-group)
-* [Add Groups to Group](/doc/controllers/group.md#add-groups-to-group)
-* [Remove Groups From Group](/doc/controllers/group.md#remove-groups-from-group)
-* [Search Groups](/doc/controllers/group.md#search-groups)
+* [Get Group](../../doc/controllers/group.md#get-group)
+* [Create Group](../../doc/controllers/group.md#create-group)
+* [Update Group](../../doc/controllers/group.md#update-group)
+* [Delete Group](../../doc/controllers/group.md#delete-group)
+* [Add Privileges to Group](../../doc/controllers/group.md#add-privileges-to-group)
+* [Remove Privileges From Group](../../doc/controllers/group.md#remove-privileges-from-group)
+* [Add Users to Group](../../doc/controllers/group.md#add-users-to-group)
+* [Remove Users From Group](../../doc/controllers/group.md#remove-users-from-group)
+* [Add Groups to Group](../../doc/controllers/group.md#add-groups-to-group)
+* [Remove Groups From Group](../../doc/controllers/group.md#remove-groups-from-group)
+* [Search Groups](../../doc/controllers/group.md#search-groups)
 
 
 # Get Group
@@ -44,7 +44,7 @@ CompletableFuture<GroupResponse> getGroupAsync(
 
 ## Response Type
 
-[`GroupResponse`](/doc/models/group-response.md)
+[`GroupResponse`](../../doc/models/group-response.md)
 
 ## Example Usage
 
@@ -61,7 +61,7 @@ groupController.getGroupAsync(null, null).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Create Group
@@ -78,23 +78,23 @@ ThoughtSpot also has a default group called ALL_GROUP. When you create new group
 
 ```java
 CompletableFuture<GroupResponse> createGroupAsync(
-    final ApiRestV2GroupCreateRequest body)
+    final TspublicRestV2GroupCreateRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2GroupCreateRequest`](/doc/models/api-rest-v2-group-create-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2GroupCreateRequest`](../../doc/models/tspublic-rest-v2-group-create-request.md) | Body, Required | - |
 
 ## Response Type
 
-[`GroupResponse`](/doc/models/group-response.md)
+[`GroupResponse`](../../doc/models/group-response.md)
 
 ## Example Usage
 
 ```java
-ApiRestV2GroupCreateRequest body = new ApiRestV2GroupCreateRequest();
+TspublicRestV2GroupCreateRequest body = new TspublicRestV2GroupCreateRequest();
 body.setName("name6");
 body.setDisplayName("displayName6");
 
@@ -110,7 +110,7 @@ groupController.createGroupAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Update Group
@@ -123,14 +123,14 @@ At least one of id or name is required to update the group. When both are given,
 
 ```java
 CompletableFuture<Boolean> updateGroupAsync(
-    final ApiRestV2GroupUpdateRequest body)
+    final TspublicRestV2GroupUpdateRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2GroupUpdateRequest`](/doc/models/api-rest-v2-group-update-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2GroupUpdateRequest`](../../doc/models/tspublic-rest-v2-group-update-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -139,7 +139,7 @@ CompletableFuture<Boolean> updateGroupAsync(
 ## Example Usage
 
 ```java
-ApiRestV2GroupUpdateRequest body = new ApiRestV2GroupUpdateRequest();
+TspublicRestV2GroupUpdateRequest body = new TspublicRestV2GroupUpdateRequest();
 
 groupController.updateGroupAsync(body).thenAccept(result -> {
     // TODO success callback handler
@@ -153,7 +153,7 @@ groupController.updateGroupAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Delete Group
@@ -194,7 +194,7 @@ groupController.deleteGroupAsync(null, null).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Add Privileges to Group
@@ -207,14 +207,14 @@ At least one of id or name of group is required. When both are given,then user i
 
 ```java
 CompletableFuture<Boolean> addPrivilegesToGroupAsync(
-    final ApiRestV2GroupAddprivilegeRequest body)
+    final TspublicRestV2GroupAddprivilegeRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2GroupAddprivilegeRequest`](/doc/models/api-rest-v2-group-addprivilege-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2GroupAddprivilegeRequest`](../../doc/models/tspublic-rest-v2-group-addprivilege-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -223,7 +223,7 @@ CompletableFuture<Boolean> addPrivilegesToGroupAsync(
 ## Example Usage
 
 ```java
-ApiRestV2GroupAddprivilegeRequest body = new ApiRestV2GroupAddprivilegeRequest();
+TspublicRestV2GroupAddprivilegeRequest body = new TspublicRestV2GroupAddprivilegeRequest();
 
 groupController.addPrivilegesToGroupAsync(body).thenAccept(result -> {
     // TODO success callback handler
@@ -237,7 +237,7 @@ groupController.addPrivilegesToGroupAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Remove Privileges From Group
@@ -250,14 +250,14 @@ At least one of id or name of group is required. When both are given,then user i
 
 ```java
 CompletableFuture<Boolean> removePrivilegesFromGroupAsync(
-    final ApiRestV2GroupRemoveprivilegeRequest body)
+    final TspublicRestV2GroupRemoveprivilegeRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2GroupRemoveprivilegeRequest`](/doc/models/api-rest-v2-group-removeprivilege-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2GroupRemoveprivilegeRequest`](../../doc/models/tspublic-rest-v2-group-removeprivilege-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -266,7 +266,7 @@ CompletableFuture<Boolean> removePrivilegesFromGroupAsync(
 ## Example Usage
 
 ```java
-ApiRestV2GroupRemoveprivilegeRequest body = new ApiRestV2GroupRemoveprivilegeRequest();
+TspublicRestV2GroupRemoveprivilegeRequest body = new TspublicRestV2GroupRemoveprivilegeRequest();
 
 groupController.removePrivilegesFromGroupAsync(body).thenAccept(result -> {
     // TODO success callback handler
@@ -280,7 +280,7 @@ groupController.removePrivilegesFromGroupAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Add Users to Group
@@ -293,14 +293,14 @@ At least one of id or name of the group is required. When both are given,then us
 
 ```java
 CompletableFuture<Boolean> addUsersToGroupAsync(
-    final ApiRestV2GroupAdduserRequest body)
+    final TspublicRestV2GroupAdduserRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2GroupAdduserRequest`](/doc/models/api-rest-v2-group-adduser-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2GroupAdduserRequest`](../../doc/models/tspublic-rest-v2-group-adduser-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -309,7 +309,12 @@ CompletableFuture<Boolean> addUsersToGroupAsync(
 ## Example Usage
 
 ```java
-ApiRestV2GroupAdduserRequest body = new ApiRestV2GroupAdduserRequest();
+TspublicRestV2GroupAdduserRequest body = new TspublicRestV2GroupAdduserRequest();
+body.setUsers(new LinkedList<>());
+
+UserNameAndIDInput bodyUsers0 = new UserNameAndIDInput();
+body.getUsers().add(bodyUsers0);
+
 
 groupController.addUsersToGroupAsync(body).thenAccept(result -> {
     // TODO success callback handler
@@ -323,7 +328,7 @@ groupController.addUsersToGroupAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Remove Users From Group
@@ -336,14 +341,14 @@ At least one of id or name of group is required. When both are given,then user i
 
 ```java
 CompletableFuture<Boolean> removeUsersFromGroupAsync(
-    final ApiRestV2GroupRemoveuserRequest body)
+    final TspublicRestV2GroupRemoveuserRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2GroupRemoveuserRequest`](/doc/models/api-rest-v2-group-removeuser-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2GroupRemoveuserRequest`](../../doc/models/tspublic-rest-v2-group-removeuser-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -352,7 +357,12 @@ CompletableFuture<Boolean> removeUsersFromGroupAsync(
 ## Example Usage
 
 ```java
-ApiRestV2GroupRemoveuserRequest body = new ApiRestV2GroupRemoveuserRequest();
+TspublicRestV2GroupRemoveuserRequest body = new TspublicRestV2GroupRemoveuserRequest();
+body.setUsers(new LinkedList<>());
+
+UserNameAndIDInput bodyUsers0 = new UserNameAndIDInput();
+body.getUsers().add(bodyUsers0);
+
 
 groupController.removeUsersFromGroupAsync(body).thenAccept(result -> {
     // TODO success callback handler
@@ -366,7 +376,7 @@ groupController.removeUsersFromGroupAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Add Groups to Group
@@ -379,14 +389,14 @@ At least one of id or name of group is required. When both are given,then user i
 
 ```java
 CompletableFuture<Boolean> addGroupsToGroupAsync(
-    final ApiRestV2GroupAddgroupRequest body)
+    final TspublicRestV2GroupAddgroupRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2GroupAddgroupRequest`](/doc/models/api-rest-v2-group-addgroup-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2GroupAddgroupRequest`](../../doc/models/tspublic-rest-v2-group-addgroup-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -395,7 +405,12 @@ CompletableFuture<Boolean> addGroupsToGroupAsync(
 ## Example Usage
 
 ```java
-ApiRestV2GroupAddgroupRequest body = new ApiRestV2GroupAddgroupRequest();
+TspublicRestV2GroupAddgroupRequest body = new TspublicRestV2GroupAddgroupRequest();
+body.setGroups(new LinkedList<>());
+
+GroupNameAndIDInput bodyGroups0 = new GroupNameAndIDInput();
+body.getGroups().add(bodyGroups0);
+
 
 groupController.addGroupsToGroupAsync(body).thenAccept(result -> {
     // TODO success callback handler
@@ -409,7 +424,7 @@ groupController.addGroupsToGroupAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Remove Groups From Group
@@ -422,14 +437,14 @@ At least one of id or name of group is required. When both are given,then user i
 
 ```java
 CompletableFuture<Boolean> removeGroupsFromGroupAsync(
-    final ApiRestV2GroupRemovegroupRequest body)
+    final TspublicRestV2GroupRemovegroupRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2GroupRemovegroupRequest`](/doc/models/api-rest-v2-group-removegroup-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2GroupRemovegroupRequest`](../../doc/models/tspublic-rest-v2-group-removegroup-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -438,7 +453,12 @@ CompletableFuture<Boolean> removeGroupsFromGroupAsync(
 ## Example Usage
 
 ```java
-ApiRestV2GroupRemovegroupRequest body = new ApiRestV2GroupRemovegroupRequest();
+TspublicRestV2GroupRemovegroupRequest body = new TspublicRestV2GroupRemovegroupRequest();
+body.setGroups(new LinkedList<>());
+
+GroupNameAndIDInput bodyGroups0 = new GroupNameAndIDInput();
+body.getGroups().add(bodyGroups0);
+
 
 groupController.removeGroupsFromGroupAsync(body).thenAccept(result -> {
     // TODO success callback handler
@@ -452,7 +472,7 @@ groupController.removeGroupsFromGroupAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Search Groups
@@ -462,24 +482,24 @@ To get the details of a specific group account or all groups in the ThoughtSpot 
 If no inputs are provided, then all groups are included in the response.
 
 ```java
-CompletableFuture<List<GroupResponse>> searchGroupsAsync(
-    final ApiRestV2GroupSearchRequest body)
+CompletableFuture<Object> searchGroupsAsync(
+    final TspublicRestV2GroupSearchRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2GroupSearchRequest`](/doc/models/api-rest-v2-group-search-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2GroupSearchRequest`](../../doc/models/tspublic-rest-v2-group-search-request.md) | Body, Required | - |
 
 ## Response Type
 
-[`List<GroupResponse>`](/doc/models/group-response.md)
+`Object`
 
 ## Example Usage
 
 ```java
-ApiRestV2GroupSearchRequest body = new ApiRestV2GroupSearchRequest();
+TspublicRestV2GroupSearchRequest body = new TspublicRestV2GroupSearchRequest();
 
 groupController.searchGroupsAsync(body).thenAccept(result -> {
     // TODO success callback handler
@@ -493,5 +513,5 @@ groupController.searchGroupsAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 

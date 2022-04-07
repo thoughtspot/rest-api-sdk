@@ -52,4 +52,3 @@ This API uses `OAuth 2 Bearer token`.
 
 ## Live Playground
 We recommend that you browse through the [code playground](https://try-everywhere.thoughtspot.cloud/v2/#/everywhere/api/rest/playgroundV2) before you start constructing your API requests. The playground offers an interactive portal with comprehensive information about the API endpoints, request and response workflows.
-

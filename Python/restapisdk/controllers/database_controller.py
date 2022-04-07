@@ -17,11 +17,11 @@ from restapisdk.exceptions.error_response_exception import ErrorResponseExceptio
 class DatabaseController(BaseController):
 
     """A Controller to access Endpoints in the restapisdk API."""
-    def __init__(self, config, auth_managers, call_back=None):
-        super(DatabaseController, self).__init__(config, auth_managers, call_back)
+    def __init__(self, config, auth_managers):
+        super(DatabaseController, self).__init__(config, auth_managers)
 
     def get_databases(self):
-        """Does a GET request to /api/rest/v2/database.
+        """Does a GET request to /tspublic/rest/v2/database.
 
         Note: This endpoint is applicable only for on-prem deployments 
          To list all the databases in Falcon, use this endpoint.
@@ -39,7 +39,7 @@ class DatabaseController(BaseController):
         """
 
         # Prepare query URL
-        _url_path = '/api/rest/v2/database'
+        _url_path = '/tspublic/rest/v2/database'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_url = APIHelper.clean_url(_query_builder)
@@ -68,7 +68,7 @@ class DatabaseController(BaseController):
 
     def get_schemas(self,
                     database):
-        """Does a GET request to /api/rest/v2/database/schema.
+        """Does a GET request to /tspublic/rest/v2/database/schema.
 
         Note: This endpoint is applicable only for on-prem deployments 
          To list all the schemas in a database in Falcon, use this endpoint.
@@ -88,8 +88,11 @@ class DatabaseController(BaseController):
 
         """
 
+        # Validate required parameters
+        self.validate_parameters(database=database)
+
         # Prepare query URL
-        _url_path = '/api/rest/v2/database/schema'
+        _url_path = '/tspublic/rest/v2/database/schema'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_parameters = {
@@ -126,7 +129,7 @@ class DatabaseController(BaseController):
     def get_tables(self,
                    database,
                    schema):
-        """Does a GET request to /api/rest/v2/database/table.
+        """Does a GET request to /tspublic/rest/v2/database/table.
 
         Note: This endpoint is applicable only for on-prem deployments. 
          To list all the tables in a schema of a database in Falcon, use this
@@ -148,8 +151,12 @@ class DatabaseController(BaseController):
 
         """
 
+        # Validate required parameters
+        self.validate_parameters(database=database,
+                                 schema=schema)
+
         # Prepare query URL
-        _url_path = '/api/rest/v2/database/table'
+        _url_path = '/tspublic/rest/v2/database/table'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_parameters = {
@@ -186,14 +193,14 @@ class DatabaseController(BaseController):
 
     def create_table(self,
                      body):
-        """Does a POST request to /api/rest/v2/database/table/create.
+        """Does a POST request to /tspublic/rest/v2/database/table/create.
 
         Note: This endpoint is applicable only for on-prem deployments. 
          To create a table in Falcon, use this endpoint.
 
         Args:
-            body (ApiRestV2DatabaseTableCreateRequest): TODO: type description
-                here.
+            body (TspublicRestV2DatabaseTableCreateRequest): TODO: type
+                description here.
 
         Returns:
             CreateTableResponse: Response from the API. Details of the table
@@ -207,8 +214,11 @@ class DatabaseController(BaseController):
 
         """
 
+        # Validate required parameters
+        self.validate_parameters(body=body)
+
         # Prepare query URL
-        _url_path = '/api/rest/v2/database/table/create'
+        _url_path = '/tspublic/rest/v2/database/table/create'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_url = APIHelper.clean_url(_query_builder)
@@ -237,7 +247,7 @@ class DatabaseController(BaseController):
 
     def run_query(self,
                   body):
-        """Does a POST request to /api/rest/v2/database/table/runquery.
+        """Does a POST request to /tspublic/rest/v2/database/table/runquery.
 
         Note: This endpoint is applicable only for on-prem deployments. 
          To run a TQL statement in Falcon, use this endpoint. 
@@ -245,7 +255,7 @@ class DatabaseController(BaseController):
          Table rows update and delete.
 
         Args:
-            body (ApiRestV2DatabaseTableRunqueryRequest): TODO: type
+            body (TspublicRestV2DatabaseTableRunqueryRequest): TODO: type
                 description here.
 
         Returns:
@@ -260,8 +270,11 @@ class DatabaseController(BaseController):
 
         """
 
+        # Validate required parameters
+        self.validate_parameters(body=body)
+
         # Prepare query URL
-        _url_path = '/api/rest/v2/database/table/runquery'
+        _url_path = '/tspublic/rest/v2/database/table/runquery'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_url = APIHelper.clean_url(_query_builder)

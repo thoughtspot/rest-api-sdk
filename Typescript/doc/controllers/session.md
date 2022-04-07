@@ -10,11 +10,11 @@ const sessionController = new SessionController(client);
 
 ## Methods
 
-* [Get Session Info](/doc/controllers/session.md#get-session-info)
-* [Login](/doc/controllers/session.md#login)
-* [Logout](/doc/controllers/session.md#logout)
-* [Gettoken](/doc/controllers/session.md#gettoken)
-* [Revoketoken](/doc/controllers/session.md#revoketoken)
+* [Get Session Info](../../doc/controllers/session.md#get-session-info)
+* [Login](../../doc/controllers/session.md#login)
+* [Logout](../../doc/controllers/session.md#logout)
+* [Get Token](../../doc/controllers/session.md#get-token)
+* [Revoke Token](../../doc/controllers/session.md#revoke-token)
 
 
 # Get Session Info
@@ -56,18 +56,20 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
 # Login
 
-To programmatically login a user to ThoughtSpot, use this endpoint
+You can programmatically create login session for a user in ThoughtSpot using this endpoint.
 
-:information_source: **Note** This endpoint does not require authentication.
+You can create session by either providing userName and password as inputs in this request body or by including "Authorization" header with the token generated through the endpoint /tspublic/rest/v2/session/getToken.
+
+userName and password input is given precedence over "Authorization" header, when both are included in the request.
 
 ```ts
 async login(
-  body: ApiRestV2SessionLoginRequest,
+  body: TspublicRestV2SessionLoginRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<SessionLoginResponse>>
 ```
@@ -76,21 +78,18 @@ async login(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2SessionLoginRequest`](/doc/models/api-rest-v2-session-login-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2SessionLoginRequest`](../../doc/models/tspublic-rest-v2-session-login-request.md) | Body, Required | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
 
-[`SessionLoginResponse`](/doc/models/session-login-response.md)
+[`SessionLoginResponse`](../../doc/models/session-login-response.md)
 
 ## Example Usage
 
 ```ts
 const contentType = null;
-const body: ApiRestV2SessionLoginRequest = {
-  userName: 'userName8',
-  password: 'password0',
-};
+const body: TspublicRestV2SessionLoginRequest = {};
 
 try {
   const { result, ...httpResponse } = await sessionController.login(body);
@@ -108,7 +107,7 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
 # Logout
@@ -152,18 +151,34 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
-# Gettoken
+# Get Token
 
-To programmatically create token for a user in ThoughtSpot, use this endpoint
+To programmatically create session token for a user in ThoughtSpot, use this endpoint.
+
+You can generate the token for a user by providing password or secret key from the cluster.
+
+You need to enable trusted authentication to generate secret key. To generate secret key, follow below steps.
+
+1. Click the Develop tab.
+
+2. Under Customizations, click Settings.
+
+3. To enable trusted authentication, turn on the toggle.
+
+4. A secret_key for trusted authentication is generated.
+
+5. Click the clipboard icon to copy the token.
+
+Password is given precedence over secretKey input, when both are included in the request.
 
 :information_source: **Note** This endpoint does not require authentication.
 
 ```ts
-async gettoken(
-  body: ApiRestV2SessionGettokenRequest,
+async getToken(
+  body: TspublicRestV2SessionGettokenRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<SessionLoginResponse>>
 ```
@@ -172,24 +187,23 @@ async gettoken(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2SessionGettokenRequest`](/doc/models/api-rest-v2-session-gettoken-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2SessionGettokenRequest`](../../doc/models/tspublic-rest-v2-session-gettoken-request.md) | Body, Required | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
 
-[`SessionLoginResponse`](/doc/models/session-login-response.md)
+[`SessionLoginResponse`](../../doc/models/session-login-response.md)
 
 ## Example Usage
 
 ```ts
 const contentType = null;
-const body: ApiRestV2SessionGettokenRequest = {
+const body: TspublicRestV2SessionGettokenRequest = {
   userName: 'userName8',
-  password: 'password0',
 };
 
 try {
-  const { result, ...httpResponse } = await sessionController.gettoken(body);
+  const { result, ...httpResponse } = await sessionController.getToken(body);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch(error) {
@@ -204,15 +218,15 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
-# Revoketoken
+# Revoke Token
 
 To expire or revoke a token for a user, use this endpoint
 
 ```ts
-async revoketoken(
+async revokeToken(
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<boolean>>
 ```
@@ -231,7 +245,7 @@ async revoketoken(
 
 ```ts
 try {
-  const { result, ...httpResponse } = await sessionController.revoketoken();
+  const { result, ...httpResponse } = await sessionController.revokeToken();
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch(error) {
@@ -246,5 +260,5 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 

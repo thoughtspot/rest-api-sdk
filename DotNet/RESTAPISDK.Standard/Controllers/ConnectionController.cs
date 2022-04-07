@@ -61,12 +61,18 @@ namespace RESTAPISDK.Standard.Controllers
                 string id,
                 CancellationToken cancellationToken = default)
         {
+            // validating required parameters.
+            if (id == null)
+            {
+                throw new ArgumentNullException("id", "The parameter \"id\" is a required parameter and cannot be null.");
+            }
+
             // the base uri for api requests.
             string baseUri = this.Config.GetBaseUri();
 
             // prepare query string for API call.
             StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/api/rest/v2/connection");
+            queryBuilder.Append("/tspublic/rest/v2/connection");
 
             // prepare specfied query parameters.
             var queryParams = new Dictionary<string, object>()
@@ -79,8 +85,9 @@ namespace RESTAPISDK.Standard.Controllers
             {
                 { "user-agent", this.UserAgent },
                 { "accept", "application/json" },
-                { "Content-Type", this.Config.ContentType },
+                { "X-Requested-By", this.Config.XRequestedBy },
                 { "Accept-Language", this.Config.AcceptLanguage },
+                { "Content-Type", this.Config.ContentType },
             };
 
             // prepare the API call request to fetch the response.
@@ -118,7 +125,7 @@ namespace RESTAPISDK.Standard.Controllers
         /// <param name="body">Required parameter: Example: .</param>
         /// <returns>Returns the Models.CreateConnectionResponse response from the API call.</returns>
         public Models.CreateConnectionResponse CreateConnection(
-                Models.ApiRestV2ConnectionCreateRequest body)
+                Models.TspublicRestV2ConnectionCreateRequest body)
         {
             Task<Models.CreateConnectionResponse> t = this.CreateConnectionAsync(body);
             ApiHelper.RunTaskSynchronously(t);
@@ -132,15 +139,21 @@ namespace RESTAPISDK.Standard.Controllers
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.CreateConnectionResponse response from the API call.</returns>
         public async Task<Models.CreateConnectionResponse> CreateConnectionAsync(
-                Models.ApiRestV2ConnectionCreateRequest body,
+                Models.TspublicRestV2ConnectionCreateRequest body,
                 CancellationToken cancellationToken = default)
         {
+            // validating required parameters.
+            if (body == null)
+            {
+                throw new ArgumentNullException("body", "The parameter \"body\" is a required parameter and cannot be null.");
+            }
+
             // the base uri for api requests.
             string baseUri = this.Config.GetBaseUri();
 
             // prepare query string for API call.
             StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/api/rest/v2/connection/create");
+            queryBuilder.Append("/tspublic/rest/v2/connection/create");
 
             // append request with appropriate headers and parameters
             var headers = new Dictionary<string, string>()
@@ -148,6 +161,7 @@ namespace RESTAPISDK.Standard.Controllers
                 { "user-agent", this.UserAgent },
                 { "accept", "application/json" },
                 { "Content-Type", "application/json" },
+                { "X-Requested-By", this.Config.XRequestedBy },
                 { "Accept-Language", this.Config.AcceptLanguage },
             };
 
@@ -189,7 +203,7 @@ namespace RESTAPISDK.Standard.Controllers
         /// <param name="body">Required parameter: Example: .</param>
         /// <returns>Returns the bool response from the API call.</returns>
         public bool UpdateConnection(
-                Models.ApiRestV2ConnectionUpdateRequest body)
+                Models.TspublicRestV2ConnectionUpdateRequest body)
         {
             Task<bool> t = this.UpdateConnectionAsync(body);
             ApiHelper.RunTaskSynchronously(t);
@@ -203,21 +217,28 @@ namespace RESTAPISDK.Standard.Controllers
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the bool response from the API call.</returns>
         public async Task<bool> UpdateConnectionAsync(
-                Models.ApiRestV2ConnectionUpdateRequest body,
+                Models.TspublicRestV2ConnectionUpdateRequest body,
                 CancellationToken cancellationToken = default)
         {
+            // validating required parameters.
+            if (body == null)
+            {
+                throw new ArgumentNullException("body", "The parameter \"body\" is a required parameter and cannot be null.");
+            }
+
             // the base uri for api requests.
             string baseUri = this.Config.GetBaseUri();
 
             // prepare query string for API call.
             StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/api/rest/v2/connection/update");
+            queryBuilder.Append("/tspublic/rest/v2/connection/update");
 
             // append request with appropriate headers and parameters
             var headers = new Dictionary<string, string>()
             {
                 { "user-agent", this.UserAgent },
                 { "Content-Type", "application/json" },
+                { "X-Requested-By", this.Config.XRequestedBy },
                 { "Accept-Language", this.Config.AcceptLanguage },
             };
 
@@ -276,12 +297,18 @@ namespace RESTAPISDK.Standard.Controllers
                 List<string> id,
                 CancellationToken cancellationToken = default)
         {
+            // validating required parameters.
+            if (id == null)
+            {
+                throw new ArgumentNullException("id", "The parameter \"id\" is a required parameter and cannot be null.");
+            }
+
             // the base uri for api requests.
             string baseUri = this.Config.GetBaseUri();
 
             // prepare query string for API call.
             StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/api/rest/v2/connection/delete");
+            queryBuilder.Append("/tspublic/rest/v2/connection/delete");
 
             // prepare specfied query parameters.
             var queryParams = new Dictionary<string, object>()
@@ -293,8 +320,9 @@ namespace RESTAPISDK.Standard.Controllers
             var headers = new Dictionary<string, string>()
             {
                 { "user-agent", this.UserAgent },
-                { "Content-Type", this.Config.ContentType },
+                { "X-Requested-By", this.Config.XRequestedBy },
                 { "Accept-Language", this.Config.AcceptLanguage },
+                { "Content-Type", this.Config.ContentType },
             };
 
             // prepare the API call request to fetch the response.
@@ -332,7 +360,7 @@ namespace RESTAPISDK.Standard.Controllers
         /// <param name="body">Required parameter: Example: .</param>
         /// <returns>Returns the bool response from the API call.</returns>
         public bool AddTableToConnection(
-                Models.ApiRestV2ConnectionAddtableRequest body)
+                Models.TspublicRestV2ConnectionAddtableRequest body)
         {
             Task<bool> t = this.AddTableToConnectionAsync(body);
             ApiHelper.RunTaskSynchronously(t);
@@ -346,21 +374,28 @@ namespace RESTAPISDK.Standard.Controllers
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the bool response from the API call.</returns>
         public async Task<bool> AddTableToConnectionAsync(
-                Models.ApiRestV2ConnectionAddtableRequest body,
+                Models.TspublicRestV2ConnectionAddtableRequest body,
                 CancellationToken cancellationToken = default)
         {
+            // validating required parameters.
+            if (body == null)
+            {
+                throw new ArgumentNullException("body", "The parameter \"body\" is a required parameter and cannot be null.");
+            }
+
             // the base uri for api requests.
             string baseUri = this.Config.GetBaseUri();
 
             // prepare query string for API call.
             StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/api/rest/v2/connection/addtable");
+            queryBuilder.Append("/tspublic/rest/v2/connection/addtable");
 
             // append request with appropriate headers and parameters
             var headers = new Dictionary<string, string>()
             {
                 { "user-agent", this.UserAgent },
                 { "Content-Type", "application/json" },
+                { "X-Requested-By", this.Config.XRequestedBy },
                 { "Accept-Language", this.Config.AcceptLanguage },
             };
 
@@ -402,7 +437,7 @@ namespace RESTAPISDK.Standard.Controllers
         /// <param name="body">Required parameter: Example: .</param>
         /// <returns>Returns the bool response from the API call.</returns>
         public bool RemoveTableFromConnection(
-                Models.ApiRestV2ConnectionRemovetableRequest body)
+                Models.TspublicRestV2ConnectionRemovetableRequest body)
         {
             Task<bool> t = this.RemoveTableFromConnectionAsync(body);
             ApiHelper.RunTaskSynchronously(t);
@@ -416,21 +451,28 @@ namespace RESTAPISDK.Standard.Controllers
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the bool response from the API call.</returns>
         public async Task<bool> RemoveTableFromConnectionAsync(
-                Models.ApiRestV2ConnectionRemovetableRequest body,
+                Models.TspublicRestV2ConnectionRemovetableRequest body,
                 CancellationToken cancellationToken = default)
         {
+            // validating required parameters.
+            if (body == null)
+            {
+                throw new ArgumentNullException("body", "The parameter \"body\" is a required parameter and cannot be null.");
+            }
+
             // the base uri for api requests.
             string baseUri = this.Config.GetBaseUri();
 
             // prepare query string for API call.
             StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/api/rest/v2/connection/removetable");
+            queryBuilder.Append("/tspublic/rest/v2/connection/removetable");
 
             // append request with appropriate headers and parameters
             var headers = new Dictionary<string, string>()
             {
                 { "user-agent", this.UserAgent },
                 { "Content-Type", "application/json" },
+                { "X-Requested-By", this.Config.XRequestedBy },
                 { "Accept-Language", this.Config.AcceptLanguage },
             };
 
@@ -472,7 +514,7 @@ namespace RESTAPISDK.Standard.Controllers
         /// <param name="body">Required parameter: Example: .</param>
         /// <returns>Returns the List of Models.ConnectionResponse response from the API call.</returns>
         public List<Models.ConnectionResponse> SearchConnection(
-                Models.ApiRestV2ConnectionSearchRequest body)
+                Models.TspublicRestV2ConnectionSearchRequest body)
         {
             Task<List<Models.ConnectionResponse>> t = this.SearchConnectionAsync(body);
             ApiHelper.RunTaskSynchronously(t);
@@ -486,15 +528,21 @@ namespace RESTAPISDK.Standard.Controllers
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the List of Models.ConnectionResponse response from the API call.</returns>
         public async Task<List<Models.ConnectionResponse>> SearchConnectionAsync(
-                Models.ApiRestV2ConnectionSearchRequest body,
+                Models.TspublicRestV2ConnectionSearchRequest body,
                 CancellationToken cancellationToken = default)
         {
+            // validating required parameters.
+            if (body == null)
+            {
+                throw new ArgumentNullException("body", "The parameter \"body\" is a required parameter and cannot be null.");
+            }
+
             // the base uri for api requests.
             string baseUri = this.Config.GetBaseUri();
 
             // prepare query string for API call.
             StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/api/rest/v2/connection/search");
+            queryBuilder.Append("/tspublic/rest/v2/connection/search");
 
             // append request with appropriate headers and parameters
             var headers = new Dictionary<string, string>()
@@ -502,6 +550,7 @@ namespace RESTAPISDK.Standard.Controllers
                 { "user-agent", this.UserAgent },
                 { "accept", "application/json" },
                 { "Content-Type", "application/json" },
+                { "X-Requested-By", this.Config.XRequestedBy },
                 { "Accept-Language", this.Config.AcceptLanguage },
             };
 

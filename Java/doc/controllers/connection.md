@@ -10,13 +10,16 @@ ConnectionController connectionController = client.getConnectionController();
 
 ## Methods
 
-* [Get Connection](/doc/controllers/connection.md#get-connection)
-* [Create Connection](/doc/controllers/connection.md#create-connection)
-* [Update Connection](/doc/controllers/connection.md#update-connection)
-* [Delete Connection](/doc/controllers/connection.md#delete-connection)
-* [Add Table to Connection](/doc/controllers/connection.md#add-table-to-connection)
-* [Remove Table From Connection](/doc/controllers/connection.md#remove-table-from-connection)
-* [Search Connection](/doc/controllers/connection.md#search-connection)
+* [Get Connection](../../doc/controllers/connection.md#get-connection)
+* [Get Connection Database](../../doc/controllers/connection.md#get-connection-database)
+* [Get Connection Tables](../../doc/controllers/connection.md#get-connection-tables)
+* [Get Connection Table Columns](../../doc/controllers/connection.md#get-connection-table-columns)
+* [Create Connection](../../doc/controllers/connection.md#create-connection)
+* [Update Connection](../../doc/controllers/connection.md#update-connection)
+* [Delete Connection](../../doc/controllers/connection.md#delete-connection)
+* [Add Table to Connection](../../doc/controllers/connection.md#add-table-to-connection)
+* [Remove Table From Connection](../../doc/controllers/connection.md#remove-table-from-connection)
+* [Search Connection](../../doc/controllers/connection.md#search-connection)
 
 
 # Get Connection
@@ -36,7 +39,7 @@ CompletableFuture<ConnectionResponse> getConnectionAsync(
 
 ## Response Type
 
-[`ConnectionResponse`](/doc/models/connection-response.md)
+[`ConnectionResponse`](../../doc/models/connection-response.md)
 
 ## Example Usage
 
@@ -55,7 +58,152 @@ connectionController.getConnectionAsync(id).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+
+
+# Get Connection Database
+
+To get the list of databases for a connection, use this endpoint.
+
+The response will include databases from the data platform corresponding to the connection id provided.
+
+```java
+CompletableFuture<List<String>> getConnectionDatabaseAsync(
+    final String id)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `id` | `String` | Query, Required | The GUID of the connection |
+
+## Response Type
+
+`List<String>`
+
+## Example Usage
+
+```java
+String id = "id0";
+
+connectionController.getConnectionDatabaseAsync(id).thenAccept(result -> {
+    // TODO success callback handler
+}).exceptionally(exception -> {
+    // TODO failure callback handler
+    return null;
+});
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+
+
+# Get Connection Tables
+
+To get the details of tables from a connection, use this endpoint.
+
+You can get the details of tables in the data platform for the connection id provided.
+
+```java
+CompletableFuture<ConnectionTableResponse> getConnectionTablesAsync(
+    final TspublicRestV2ConnectionTableRequest body)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`TspublicRestV2ConnectionTableRequest`](../../doc/models/tspublic-rest-v2-connection-table-request.md) | Body, Required | - |
+
+## Response Type
+
+[`ConnectionTableResponse`](../../doc/models/connection-table-response.md)
+
+## Example Usage
+
+```java
+TspublicRestV2ConnectionTableRequest body = new TspublicRestV2ConnectionTableRequest();
+body.setId("id6");
+
+connectionController.getConnectionTablesAsync(body).thenAccept(result -> {
+    // TODO success callback handler
+}).exceptionally(exception -> {
+    // TODO failure callback handler
+    return null;
+});
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+
+
+# Get Connection Table Columns
+
+To get the details of columns in a table associated to a connection, use this endpoint.
+
+You can get the columns of any table available in the data platform for the connection id provided.
+
+```java
+CompletableFuture<ConnectionTableColumnsResponse> getConnectionTableColumnsAsync(
+    final TspublicRestV2ConnectionTablecoloumnRequest body)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`TspublicRestV2ConnectionTablecoloumnRequest`](../../doc/models/tspublic-rest-v2-connection-tablecoloumn-request.md) | Body, Required | - |
+
+## Response Type
+
+[`ConnectionTableColumnsResponse`](../../doc/models/connection-table-columns-response.md)
+
+## Example Usage
+
+```java
+TspublicRestV2ConnectionTablecoloumnRequest body = new TspublicRestV2ConnectionTablecoloumnRequest();
+body.setId("id6");
+body.setTable(new LinkedList<>());
+
+ConnectionTableColumnsInput bodyTable0 = new ConnectionTableColumnsInput();
+bodyTable0.setDbName("dbName8");
+bodyTable0.setSchemaName("schemaName4");
+bodyTable0.setName("name0");
+body.getTable().add(bodyTable0);
+
+ConnectionTableColumnsInput bodyTable1 = new ConnectionTableColumnsInput();
+bodyTable1.setDbName("dbName9");
+bodyTable1.setSchemaName("schemaName5");
+bodyTable1.setName("name1");
+body.getTable().add(bodyTable1);
+
+ConnectionTableColumnsInput bodyTable2 = new ConnectionTableColumnsInput();
+bodyTable2.setDbName("dbName0");
+bodyTable2.setSchemaName("schemaName6");
+bodyTable2.setName("name2");
+body.getTable().add(bodyTable2);
+
+
+connectionController.getConnectionTableColumnsAsync(body).thenAccept(result -> {
+    // TODO success callback handler
+}).exceptionally(exception -> {
+    // TODO failure callback handler
+    return null;
+});
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Create Connection
@@ -64,24 +212,24 @@ To programmatically create a connection in the ThoughtSpot system use this API e
 
 ```java
 CompletableFuture<CreateConnectionResponse> createConnectionAsync(
-    final ApiRestV2ConnectionCreateRequest body)
+    final TspublicRestV2ConnectionCreateRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2ConnectionCreateRequest`](/doc/models/api-rest-v2-connection-create-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2ConnectionCreateRequest`](../../doc/models/tspublic-rest-v2-connection-create-request.md) | Body, Required | - |
 
 ## Response Type
 
-[`CreateConnectionResponse`](/doc/models/create-connection-response.md)
+[`CreateConnectionResponse`](../../doc/models/create-connection-response.md)
 
 ## Example Usage
 
 ```java
-ApiRestV2ConnectionCreateRequest body = new ApiRestV2ConnectionCreateRequest();
-body.setType(Type13Enum.TERADATA);
+TspublicRestV2ConnectionCreateRequest body = new TspublicRestV2ConnectionCreateRequest();
+body.setType(Type14Enum.TERADATA);
 body.setName("name6");
 body.setConfiguration("configuration0");
 
@@ -97,7 +245,7 @@ connectionController.createConnectionAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Update Connection
@@ -106,14 +254,14 @@ You can use this endpoint to programmatically modify an existing connection
 
 ```java
 CompletableFuture<Boolean> updateConnectionAsync(
-    final ApiRestV2ConnectionUpdateRequest body)
+    final TspublicRestV2ConnectionUpdateRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2ConnectionUpdateRequest`](/doc/models/api-rest-v2-connection-update-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2ConnectionUpdateRequest`](../../doc/models/tspublic-rest-v2-connection-update-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -122,7 +270,7 @@ CompletableFuture<Boolean> updateConnectionAsync(
 ## Example Usage
 
 ```java
-ApiRestV2ConnectionUpdateRequest body = new ApiRestV2ConnectionUpdateRequest();
+TspublicRestV2ConnectionUpdateRequest body = new TspublicRestV2ConnectionUpdateRequest();
 body.setId("id6");
 body.setConfiguration("configuration0");
 
@@ -138,7 +286,7 @@ connectionController.updateConnectionAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Delete Connection
@@ -178,7 +326,7 @@ connectionController.deleteConnectionAsync(id).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Add Table to Connection
@@ -187,14 +335,14 @@ To programmatically add table to an existing connection, use this endpoint
 
 ```java
 CompletableFuture<Boolean> addTableToConnectionAsync(
-    final ApiRestV2ConnectionAddtableRequest body)
+    final TspublicRestV2ConnectionAddtableRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2ConnectionAddtableRequest`](/doc/models/api-rest-v2-connection-addtable-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2ConnectionAddtableRequest`](../../doc/models/tspublic-rest-v2-connection-addtable-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -203,32 +351,63 @@ CompletableFuture<Boolean> addTableToConnectionAsync(
 ## Example Usage
 
 ```java
-ApiRestV2ConnectionAddtableRequest body = new ApiRestV2ConnectionAddtableRequest();
+TspublicRestV2ConnectionAddtableRequest body = new TspublicRestV2ConnectionAddtableRequest();
 body.setId("id6");
-body.setTables(new LinkedList<>());
+body.setTable(new LinkedList<>());
 
-AddTableInput bodyTables0 = new AddTableInput();
-bodyTables0.setName("name8");
-bodyTables0.setDbName("dbName6");
-bodyTables0.setSchemaName("schemaName2");
-bodyTables0.setColumns(new LinkedList<>());
+AddTableInput bodyTable0 = new AddTableInput();
+bodyTable0.setName("name0");
+bodyTable0.setDbName("dbName8");
+bodyTable0.setSchemaName("schemaName4");
+bodyTable0.setColumns(new LinkedList<>());
 
-ColumnsInput bodyTables0Columns0 = new ColumnsInput();
-bodyTables0Columns0.setName("name2");
-bodyTables0Columns0.setDataType("dataType4");
-bodyTables0.getColumns().add(bodyTables0Columns0);
+ColumnsInput bodyTable0Columns0 = new ColumnsInput();
+bodyTable0Columns0.setName("name0");
+bodyTable0Columns0.setDataType("dataType2");
+bodyTable0.getColumns().add(bodyTable0Columns0);
 
-ColumnsInput bodyTables0Columns1 = new ColumnsInput();
-bodyTables0Columns1.setName("name3");
-bodyTables0Columns1.setDataType("dataType5");
-bodyTables0.getColumns().add(bodyTables0Columns1);
+ColumnsInput bodyTable0Columns1 = new ColumnsInput();
+bodyTable0Columns1.setName("name1");
+bodyTable0Columns1.setDataType("dataType3");
+bodyTable0.getColumns().add(bodyTable0Columns1);
 
-ColumnsInput bodyTables0Columns2 = new ColumnsInput();
-bodyTables0Columns2.setName("name4");
-bodyTables0Columns2.setDataType("dataType6");
-bodyTables0.getColumns().add(bodyTables0Columns2);
+body.getTable().add(bodyTable0);
 
-body.getTables().add(bodyTables0);
+AddTableInput bodyTable1 = new AddTableInput();
+bodyTable1.setName("name1");
+bodyTable1.setDbName("dbName9");
+bodyTable1.setSchemaName("schemaName5");
+bodyTable1.setColumns(new LinkedList<>());
+
+ColumnsInput bodyTable1Columns0 = new ColumnsInput();
+bodyTable1Columns0.setName("name9");
+bodyTable1Columns0.setDataType("dataType1");
+bodyTable1.getColumns().add(bodyTable1Columns0);
+
+body.getTable().add(bodyTable1);
+
+AddTableInput bodyTable2 = new AddTableInput();
+bodyTable2.setName("name2");
+bodyTable2.setDbName("dbName0");
+bodyTable2.setSchemaName("schemaName6");
+bodyTable2.setColumns(new LinkedList<>());
+
+ColumnsInput bodyTable2Columns0 = new ColumnsInput();
+bodyTable2Columns0.setName("name8");
+bodyTable2Columns0.setDataType("dataType0");
+bodyTable2.getColumns().add(bodyTable2Columns0);
+
+ColumnsInput bodyTable2Columns1 = new ColumnsInput();
+bodyTable2Columns1.setName("name9");
+bodyTable2Columns1.setDataType("dataType1");
+bodyTable2.getColumns().add(bodyTable2Columns1);
+
+ColumnsInput bodyTable2Columns2 = new ColumnsInput();
+bodyTable2Columns2.setName("name0");
+bodyTable2Columns2.setDataType("dataType2");
+bodyTable2.getColumns().add(bodyTable2Columns2);
+
+body.getTable().add(bodyTable2);
 
 
 connectionController.addTableToConnectionAsync(body).thenAccept(result -> {
@@ -243,7 +422,7 @@ connectionController.addTableToConnectionAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Remove Table From Connection
@@ -252,14 +431,14 @@ To programmatically remove a table from a connection, use API endpoint.
 
 ```java
 CompletableFuture<Boolean> removeTableFromConnectionAsync(
-    final ApiRestV2ConnectionRemovetableRequest body)
+    final TspublicRestV2ConnectionRemovetableRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2ConnectionRemovetableRequest`](/doc/models/api-rest-v2-connection-removetable-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2ConnectionRemovetableRequest`](../../doc/models/tspublic-rest-v2-connection-removetable-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -268,12 +447,18 @@ CompletableFuture<Boolean> removeTableFromConnectionAsync(
 ## Example Usage
 
 ```java
-ApiRestV2ConnectionRemovetableRequest body = new ApiRestV2ConnectionRemovetableRequest();
+TspublicRestV2ConnectionRemovetableRequest body = new TspublicRestV2ConnectionRemovetableRequest();
 body.setId("id6");
-body.setTables(new LinkedList<>());
+body.setTable(new LinkedList<>());
 
-TableInput bodyTables0 = new TableInput();
-body.getTables().add(bodyTables0);
+TableInput bodyTable0 = new TableInput();
+body.getTable().add(bodyTable0);
+
+TableInput bodyTable1 = new TableInput();
+body.getTable().add(bodyTable1);
+
+TableInput bodyTable2 = new TableInput();
+body.getTable().add(bodyTable2);
 
 
 connectionController.removeTableFromConnectionAsync(body).thenAccept(result -> {
@@ -288,7 +473,7 @@ connectionController.removeTableFromConnectionAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Search Connection
@@ -297,24 +482,24 @@ To get the details of a specific connection or all connections in the ThoughtSpo
 
 ```java
 CompletableFuture<List<ConnectionResponse>> searchConnectionAsync(
-    final ApiRestV2ConnectionSearchRequest body)
+    final TspublicRestV2ConnectionSearchRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2ConnectionSearchRequest`](/doc/models/api-rest-v2-connection-search-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2ConnectionSearchRequest`](../../doc/models/tspublic-rest-v2-connection-search-request.md) | Body, Required | - |
 
 ## Response Type
 
-[`List<ConnectionResponse>`](/doc/models/connection-response.md)
+[`List<ConnectionResponse>`](../../doc/models/connection-response.md)
 
 ## Example Usage
 
 ```java
-ApiRestV2ConnectionSearchRequest body = new ApiRestV2ConnectionSearchRequest();
-body.setType(Type14Enum.TERADATA);
+TspublicRestV2ConnectionSearchRequest body = new TspublicRestV2ConnectionSearchRequest();
+body.setType(Type15Enum.TERADATA);
 
 connectionController.searchConnectionAsync(body).thenAccept(result -> {
     // TODO success callback handler
@@ -328,5 +513,5 @@ connectionController.searchConnectionAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 

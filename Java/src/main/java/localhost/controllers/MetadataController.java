@@ -24,20 +24,21 @@ import localhost.http.client.HttpContext;
 import localhost.http.request.HttpRequest;
 import localhost.http.response.HttpResponse;
 import localhost.http.response.HttpStringResponse;
-import localhost.models.ApiRestV2MetadataDependencyRequest;
-import localhost.models.ApiRestV2MetadataFavoriteAssignRequest;
-import localhost.models.ApiRestV2MetadataFavoriteUnassignRequest;
-import localhost.models.ApiRestV2MetadataHeaderSearchRequest;
-import localhost.models.ApiRestV2MetadataHomeliveboardAssignRequest;
-import localhost.models.ApiRestV2MetadataHomeliveboardUnassignRequest;
-import localhost.models.ApiRestV2MetadataTagAssignRequest;
-import localhost.models.ApiRestV2MetadataTagCreateRequest;
-import localhost.models.ApiRestV2MetadataTagUnassignRequest;
-import localhost.models.ApiRestV2MetadataTagUpdateRequest;
-import localhost.models.ApiRestV2MetadataTmlExportRequest;
-import localhost.models.ApiRestV2MetadataTmlImportRequest;
 import localhost.models.HomeLiveboardResponse;
 import localhost.models.MetadataTagResponse;
+import localhost.models.TspublicRestV2MetadataDependencyRequest;
+import localhost.models.TspublicRestV2MetadataDetailSearchRequest;
+import localhost.models.TspublicRestV2MetadataFavoriteAssignRequest;
+import localhost.models.TspublicRestV2MetadataFavoriteUnassignRequest;
+import localhost.models.TspublicRestV2MetadataHeaderSearchRequest;
+import localhost.models.TspublicRestV2MetadataHomeliveboardAssignRequest;
+import localhost.models.TspublicRestV2MetadataHomeliveboardUnassignRequest;
+import localhost.models.TspublicRestV2MetadataTagAssignRequest;
+import localhost.models.TspublicRestV2MetadataTagCreateRequest;
+import localhost.models.TspublicRestV2MetadataTagUnassignRequest;
+import localhost.models.TspublicRestV2MetadataTagUpdateRequest;
+import localhost.models.TspublicRestV2MetadataTmlExportRequest;
+import localhost.models.TspublicRestV2MetadataTmlImportRequest;
 import localhost.models.Type8Enum;
 import localhost.models.Type9Enum;
 
@@ -118,7 +119,7 @@ public final class MetadataController extends BaseController {
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/metadata/tag");
+                + "/tspublic/rest/v2/metadata/tag");
 
         //load all query parameters
         Map<String, Object> queryParameters = new HashMap<>();
@@ -127,8 +128,9 @@ public final class MetadataController extends BaseController {
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
-        headers.add("Content-Type", config.getContentType());
+        headers.add("X-Requested-By", config.getXRequestedBy());
         headers.add("Accept-Language", config.getAcceptLanguage());
+        headers.add("Content-Type", config.getContentType());
         headers.add("user-agent", BaseController.userAgent);
         headers.add("accept", "application/json");
 
@@ -182,7 +184,7 @@ public final class MetadataController extends BaseController {
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
     public MetadataTagResponse createTag(
-            final ApiRestV2MetadataTagCreateRequest body) throws ApiException, IOException {
+            final TspublicRestV2MetadataTagCreateRequest body) throws ApiException, IOException {
         HttpRequest request = buildCreateTagRequest(body);
         authManagers.get("global").apply(request);
 
@@ -198,7 +200,7 @@ public final class MetadataController extends BaseController {
      * @return    Returns the MetadataTagResponse response from the API call
      */
     public CompletableFuture<MetadataTagResponse> createTagAsync(
-            final ApiRestV2MetadataTagCreateRequest body) {
+            final TspublicRestV2MetadataTagCreateRequest body) {
         return makeHttpCallAsync(() -> buildCreateTagRequest(body),
             req -> authManagers.get("global").applyAsync(req)
                 .thenCompose(request -> getClientInstance()
@@ -210,17 +212,23 @@ public final class MetadataController extends BaseController {
      * Builds the HttpRequest object for createTag.
      */
     private HttpRequest buildCreateTagRequest(
-            final ApiRestV2MetadataTagCreateRequest body) throws JsonProcessingException {
+            final TspublicRestV2MetadataTagCreateRequest body) throws JsonProcessingException {
+        //validating required parameters
+        if (null == body) {
+            throw new NullPointerException("The parameter \"body\" is a required parameter and cannot be null.");
+        }
+
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/metadata/tag/create");
+                + "/tspublic/rest/v2/metadata/tag/create");
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
         headers.add("Content-Type", "application/json");
+        headers.add("X-Requested-By", config.getXRequestedBy());
         headers.add("Accept-Language", config.getAcceptLanguage());
         headers.add("user-agent", BaseController.userAgent);
         headers.add("accept", "application/json");
@@ -276,7 +284,7 @@ public final class MetadataController extends BaseController {
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
     public Boolean updateTag(
-            final ApiRestV2MetadataTagUpdateRequest body) throws ApiException, IOException {
+            final TspublicRestV2MetadataTagUpdateRequest body) throws ApiException, IOException {
         HttpRequest request = buildUpdateTagRequest(body);
         authManagers.get("global").apply(request);
 
@@ -293,7 +301,7 @@ public final class MetadataController extends BaseController {
      * @return    Returns the Boolean response from the API call
      */
     public CompletableFuture<Boolean> updateTagAsync(
-            final ApiRestV2MetadataTagUpdateRequest body) {
+            final TspublicRestV2MetadataTagUpdateRequest body) {
         return makeHttpCallAsync(() -> buildUpdateTagRequest(body),
             req -> authManagers.get("global").applyAsync(req)
                 .thenCompose(request -> getClientInstance()
@@ -305,17 +313,23 @@ public final class MetadataController extends BaseController {
      * Builds the HttpRequest object for updateTag.
      */
     private HttpRequest buildUpdateTagRequest(
-            final ApiRestV2MetadataTagUpdateRequest body) throws JsonProcessingException {
+            final TspublicRestV2MetadataTagUpdateRequest body) throws JsonProcessingException {
+        //validating required parameters
+        if (null == body) {
+            throw new NullPointerException("The parameter \"body\" is a required parameter and cannot be null.");
+        }
+
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/metadata/tag/update");
+                + "/tspublic/rest/v2/metadata/tag/update");
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
         headers.add("Content-Type", "application/json");
+        headers.add("X-Requested-By", config.getXRequestedBy());
         headers.add("Accept-Language", config.getAcceptLanguage());
         headers.add("user-agent", BaseController.userAgent);
 
@@ -409,7 +423,7 @@ public final class MetadataController extends BaseController {
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/metadata/tag/delete");
+                + "/tspublic/rest/v2/metadata/tag/delete");
 
         //load all query parameters
         Map<String, Object> queryParameters = new HashMap<>();
@@ -418,8 +432,9 @@ public final class MetadataController extends BaseController {
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
-        headers.add("Content-Type", config.getContentType());
+        headers.add("X-Requested-By", config.getXRequestedBy());
         headers.add("Accept-Language", config.getAcceptLanguage());
+        headers.add("Content-Type", config.getContentType());
         headers.add("user-agent", BaseController.userAgent);
 
         //prepare and invoke the API call request to fetch the response
@@ -473,7 +488,7 @@ public final class MetadataController extends BaseController {
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
     public Boolean assignTag(
-            final ApiRestV2MetadataTagAssignRequest body) throws ApiException, IOException {
+            final TspublicRestV2MetadataTagAssignRequest body) throws ApiException, IOException {
         HttpRequest request = buildAssignTagRequest(body);
         authManagers.get("global").apply(request);
 
@@ -491,7 +506,7 @@ public final class MetadataController extends BaseController {
      * @return    Returns the Boolean response from the API call
      */
     public CompletableFuture<Boolean> assignTagAsync(
-            final ApiRestV2MetadataTagAssignRequest body) {
+            final TspublicRestV2MetadataTagAssignRequest body) {
         return makeHttpCallAsync(() -> buildAssignTagRequest(body),
             req -> authManagers.get("global").applyAsync(req)
                 .thenCompose(request -> getClientInstance()
@@ -503,23 +518,29 @@ public final class MetadataController extends BaseController {
      * Builds the HttpRequest object for assignTag.
      */
     private HttpRequest buildAssignTagRequest(
-            final ApiRestV2MetadataTagAssignRequest body) throws JsonProcessingException {
+            final TspublicRestV2MetadataTagAssignRequest body) throws JsonProcessingException {
+        //validating required parameters
+        if (null == body) {
+            throw new NullPointerException("The parameter \"body\" is a required parameter and cannot be null.");
+        }
+
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/metadata/tag/assign");
+                + "/tspublic/rest/v2/metadata/tag/assign");
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
         headers.add("Content-Type", "application/json");
+        headers.add("X-Requested-By", config.getXRequestedBy());
         headers.add("Accept-Language", config.getAcceptLanguage());
         headers.add("user-agent", BaseController.userAgent);
 
         //prepare and invoke the API call request to fetch the response
         String bodyJson = ApiHelper.serialize(body);
-        HttpRequest request = getClientInstance().postBody(queryBuilder, headers, null, bodyJson);
+        HttpRequest request = getClientInstance().putBody(queryBuilder, headers, null, bodyJson);
 
         // Invoke the callback before request if its not null
         if (getHttpCallback() != null) {
@@ -568,7 +589,7 @@ public final class MetadataController extends BaseController {
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
     public Boolean unassignTag(
-            final ApiRestV2MetadataTagUnassignRequest body) throws ApiException, IOException {
+            final TspublicRestV2MetadataTagUnassignRequest body) throws ApiException, IOException {
         HttpRequest request = buildUnassignTagRequest(body);
         authManagers.get("global").apply(request);
 
@@ -586,7 +607,7 @@ public final class MetadataController extends BaseController {
      * @return    Returns the Boolean response from the API call
      */
     public CompletableFuture<Boolean> unassignTagAsync(
-            final ApiRestV2MetadataTagUnassignRequest body) {
+            final TspublicRestV2MetadataTagUnassignRequest body) {
         return makeHttpCallAsync(() -> buildUnassignTagRequest(body),
             req -> authManagers.get("global").applyAsync(req)
                 .thenCompose(request -> getClientInstance()
@@ -598,23 +619,29 @@ public final class MetadataController extends BaseController {
      * Builds the HttpRequest object for unassignTag.
      */
     private HttpRequest buildUnassignTagRequest(
-            final ApiRestV2MetadataTagUnassignRequest body) throws JsonProcessingException {
+            final TspublicRestV2MetadataTagUnassignRequest body) throws JsonProcessingException {
+        //validating required parameters
+        if (null == body) {
+            throw new NullPointerException("The parameter \"body\" is a required parameter and cannot be null.");
+        }
+
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/metadata/tag/unassign");
+                + "/tspublic/rest/v2/metadata/tag/unassign");
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
         headers.add("Content-Type", "application/json");
+        headers.add("X-Requested-By", config.getXRequestedBy());
         headers.add("Accept-Language", config.getAcceptLanguage());
         headers.add("user-agent", BaseController.userAgent);
 
         //prepare and invoke the API call request to fetch the response
         String bodyJson = ApiHelper.serialize(body);
-        HttpRequest request = getClientInstance().postBody(queryBuilder, headers, null, bodyJson);
+        HttpRequest request = getClientInstance().putBody(queryBuilder, headers, null, bodyJson);
 
         // Invoke the callback before request if its not null
         if (getHttpCallback() != null) {
@@ -663,7 +690,7 @@ public final class MetadataController extends BaseController {
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
     public Boolean assignFavorite(
-            final ApiRestV2MetadataFavoriteAssignRequest body) throws ApiException, IOException {
+            final TspublicRestV2MetadataFavoriteAssignRequest body) throws ApiException, IOException {
         HttpRequest request = buildAssignFavoriteRequest(body);
         authManagers.get("global").apply(request);
 
@@ -681,7 +708,7 @@ public final class MetadataController extends BaseController {
      * @return    Returns the Boolean response from the API call
      */
     public CompletableFuture<Boolean> assignFavoriteAsync(
-            final ApiRestV2MetadataFavoriteAssignRequest body) {
+            final TspublicRestV2MetadataFavoriteAssignRequest body) {
         return makeHttpCallAsync(() -> buildAssignFavoriteRequest(body),
             req -> authManagers.get("global").applyAsync(req)
                 .thenCompose(request -> getClientInstance()
@@ -693,23 +720,29 @@ public final class MetadataController extends BaseController {
      * Builds the HttpRequest object for assignFavorite.
      */
     private HttpRequest buildAssignFavoriteRequest(
-            final ApiRestV2MetadataFavoriteAssignRequest body) throws JsonProcessingException {
+            final TspublicRestV2MetadataFavoriteAssignRequest body) throws JsonProcessingException {
+        //validating required parameters
+        if (null == body) {
+            throw new NullPointerException("The parameter \"body\" is a required parameter and cannot be null.");
+        }
+
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/metadata/favorite/assign");
+                + "/tspublic/rest/v2/metadata/favorite/assign");
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
         headers.add("Content-Type", "application/json");
+        headers.add("X-Requested-By", config.getXRequestedBy());
         headers.add("Accept-Language", config.getAcceptLanguage());
         headers.add("user-agent", BaseController.userAgent);
 
         //prepare and invoke the API call request to fetch the response
         String bodyJson = ApiHelper.serialize(body);
-        HttpRequest request = getClientInstance().postBody(queryBuilder, headers, null, bodyJson);
+        HttpRequest request = getClientInstance().putBody(queryBuilder, headers, null, bodyJson);
 
         // Invoke the callback before request if its not null
         if (getHttpCallback() != null) {
@@ -758,7 +791,7 @@ public final class MetadataController extends BaseController {
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
     public Boolean unassignFavorite(
-            final ApiRestV2MetadataFavoriteUnassignRequest body) throws ApiException, IOException {
+            final TspublicRestV2MetadataFavoriteUnassignRequest body) throws ApiException, IOException {
         HttpRequest request = buildUnassignFavoriteRequest(body);
         authManagers.get("global").apply(request);
 
@@ -776,7 +809,7 @@ public final class MetadataController extends BaseController {
      * @return    Returns the Boolean response from the API call
      */
     public CompletableFuture<Boolean> unassignFavoriteAsync(
-            final ApiRestV2MetadataFavoriteUnassignRequest body) {
+            final TspublicRestV2MetadataFavoriteUnassignRequest body) {
         return makeHttpCallAsync(() -> buildUnassignFavoriteRequest(body),
             req -> authManagers.get("global").applyAsync(req)
                 .thenCompose(request -> getClientInstance()
@@ -788,23 +821,29 @@ public final class MetadataController extends BaseController {
      * Builds the HttpRequest object for unassignFavorite.
      */
     private HttpRequest buildUnassignFavoriteRequest(
-            final ApiRestV2MetadataFavoriteUnassignRequest body) throws JsonProcessingException {
+            final TspublicRestV2MetadataFavoriteUnassignRequest body) throws JsonProcessingException {
+        //validating required parameters
+        if (null == body) {
+            throw new NullPointerException("The parameter \"body\" is a required parameter and cannot be null.");
+        }
+
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/metadata/favorite/unassign");
+                + "/tspublic/rest/v2/metadata/favorite/unassign");
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
         headers.add("Content-Type", "application/json");
+        headers.add("X-Requested-By", config.getXRequestedBy());
         headers.add("Accept-Language", config.getAcceptLanguage());
         headers.add("user-agent", BaseController.userAgent);
 
         //prepare and invoke the API call request to fetch the response
         String bodyJson = ApiHelper.serialize(body);
-        HttpRequest request = getClientInstance().postBody(queryBuilder, headers, null, bodyJson);
+        HttpRequest request = getClientInstance().putBody(queryBuilder, headers, null, bodyJson);
 
         // Invoke the callback before request if its not null
         if (getHttpCallback() != null) {
@@ -853,16 +892,16 @@ public final class MetadataController extends BaseController {
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
-    public HomeLiveboardResponse getHomeliveboard(
+    public HomeLiveboardResponse getHomeLiveboard(
             final String userName,
             final String userId) throws ApiException, IOException {
-        HttpRequest request = buildGetHomeliveboardRequest(userName, userId);
+        HttpRequest request = buildGetHomeLiveboardRequest(userName, userId);
         authManagers.get("global").apply(request);
 
         HttpResponse response = getClientInstance().execute(request, false);
         HttpContext context = new HttpContext(request, response);
 
-        return handleGetHomeliveboardResponse(context);
+        return handleGetHomeLiveboardResponse(context);
     }
 
     /**
@@ -873,20 +912,20 @@ public final class MetadataController extends BaseController {
      * @param  userId  Optional parameter: The GUID of the user
      * @return    Returns the HomeLiveboardResponse response from the API call
      */
-    public CompletableFuture<HomeLiveboardResponse> getHomeliveboardAsync(
+    public CompletableFuture<HomeLiveboardResponse> getHomeLiveboardAsync(
             final String userName,
             final String userId) {
-        return makeHttpCallAsync(() -> buildGetHomeliveboardRequest(userName, userId),
+        return makeHttpCallAsync(() -> buildGetHomeLiveboardRequest(userName, userId),
             req -> authManagers.get("global").applyAsync(req)
                 .thenCompose(request -> getClientInstance()
                         .executeAsync(request, false)),
-            context -> handleGetHomeliveboardResponse(context));
+            context -> handleGetHomeLiveboardResponse(context));
     }
 
     /**
-     * Builds the HttpRequest object for getHomeliveboard.
+     * Builds the HttpRequest object for getHomeLiveboard.
      */
-    private HttpRequest buildGetHomeliveboardRequest(
+    private HttpRequest buildGetHomeLiveboardRequest(
             final String userName,
             final String userId) {
         //the base uri for api requests
@@ -894,7 +933,7 @@ public final class MetadataController extends BaseController {
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/metadata/homeliveboard");
+                + "/tspublic/rest/v2/metadata/homeliveboard");
 
         //load all query parameters
         Map<String, Object> queryParameters = new HashMap<>();
@@ -903,8 +942,9 @@ public final class MetadataController extends BaseController {
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
-        headers.add("Content-Type", config.getContentType());
+        headers.add("X-Requested-By", config.getXRequestedBy());
         headers.add("Accept-Language", config.getAcceptLanguage());
+        headers.add("Content-Type", config.getContentType());
         headers.add("user-agent", BaseController.userAgent);
         headers.add("accept", "application/json");
 
@@ -921,10 +961,10 @@ public final class MetadataController extends BaseController {
     }
 
     /**
-     * Processes the response for getHomeliveboard.
+     * Processes the response for getHomeLiveboard.
      * @return An object of type HomeLiveboardResponse
      */
-    private HomeLiveboardResponse handleGetHomeliveboardResponse(
+    private HomeLiveboardResponse handleGetHomeLiveboardResponse(
             HttpContext context) throws ApiException, IOException {
         HttpResponse response = context.getResponse();
 
@@ -958,15 +998,15 @@ public final class MetadataController extends BaseController {
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
-    public Boolean assignHomeliveboard(
-            final ApiRestV2MetadataHomeliveboardAssignRequest body) throws ApiException, IOException {
-        HttpRequest request = buildAssignHomeliveboardRequest(body);
+    public Boolean assignHomeLiveboard(
+            final TspublicRestV2MetadataHomeliveboardAssignRequest body) throws ApiException, IOException {
+        HttpRequest request = buildAssignHomeLiveboardRequest(body);
         authManagers.get("global").apply(request);
 
         HttpResponse response = getClientInstance().execute(request, false);
         HttpContext context = new HttpContext(request, response);
 
-        return handleAssignHomeliveboardResponse(context);
+        return handleAssignHomeLiveboardResponse(context);
     }
 
     /**
@@ -975,36 +1015,42 @@ public final class MetadataController extends BaseController {
      * @param  body  Required parameter: Example:
      * @return    Returns the Boolean response from the API call
      */
-    public CompletableFuture<Boolean> assignHomeliveboardAsync(
-            final ApiRestV2MetadataHomeliveboardAssignRequest body) {
-        return makeHttpCallAsync(() -> buildAssignHomeliveboardRequest(body),
+    public CompletableFuture<Boolean> assignHomeLiveboardAsync(
+            final TspublicRestV2MetadataHomeliveboardAssignRequest body) {
+        return makeHttpCallAsync(() -> buildAssignHomeLiveboardRequest(body),
             req -> authManagers.get("global").applyAsync(req)
                 .thenCompose(request -> getClientInstance()
                         .executeAsync(request, false)),
-            context -> handleAssignHomeliveboardResponse(context));
+            context -> handleAssignHomeLiveboardResponse(context));
     }
 
     /**
-     * Builds the HttpRequest object for assignHomeliveboard.
+     * Builds the HttpRequest object for assignHomeLiveboard.
      */
-    private HttpRequest buildAssignHomeliveboardRequest(
-            final ApiRestV2MetadataHomeliveboardAssignRequest body) throws JsonProcessingException {
+    private HttpRequest buildAssignHomeLiveboardRequest(
+            final TspublicRestV2MetadataHomeliveboardAssignRequest body) throws JsonProcessingException {
+        //validating required parameters
+        if (null == body) {
+            throw new NullPointerException("The parameter \"body\" is a required parameter and cannot be null.");
+        }
+
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/metadata/homeliveboard/assign");
+                + "/tspublic/rest/v2/metadata/homeliveboard/assign");
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
         headers.add("Content-Type", "application/json");
+        headers.add("X-Requested-By", config.getXRequestedBy());
         headers.add("Accept-Language", config.getAcceptLanguage());
         headers.add("user-agent", BaseController.userAgent);
 
         //prepare and invoke the API call request to fetch the response
         String bodyJson = ApiHelper.serialize(body);
-        HttpRequest request = getClientInstance().postBody(queryBuilder, headers, null, bodyJson);
+        HttpRequest request = getClientInstance().putBody(queryBuilder, headers, null, bodyJson);
 
         // Invoke the callback before request if its not null
         if (getHttpCallback() != null) {
@@ -1015,10 +1061,10 @@ public final class MetadataController extends BaseController {
     }
 
     /**
-     * Processes the response for assignHomeliveboard.
+     * Processes the response for assignHomeLiveboard.
      * @return An object of type boolean
      */
-    private Boolean handleAssignHomeliveboardResponse(
+    private Boolean handleAssignHomeLiveboardResponse(
             HttpContext context) throws ApiException, IOException {
         HttpResponse response = context.getResponse();
 
@@ -1051,15 +1097,15 @@ public final class MetadataController extends BaseController {
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
-    public Boolean unassignHomeliveboard(
-            final ApiRestV2MetadataHomeliveboardUnassignRequest body) throws ApiException, IOException {
-        HttpRequest request = buildUnassignHomeliveboardRequest(body);
+    public Boolean unassignHomeLiveboard(
+            final TspublicRestV2MetadataHomeliveboardUnassignRequest body) throws ApiException, IOException {
+        HttpRequest request = buildUnassignHomeLiveboardRequest(body);
         authManagers.get("global").apply(request);
 
         HttpResponse response = getClientInstance().execute(request, false);
         HttpContext context = new HttpContext(request, response);
 
-        return handleUnassignHomeliveboardResponse(context);
+        return handleUnassignHomeLiveboardResponse(context);
     }
 
     /**
@@ -1068,36 +1114,42 @@ public final class MetadataController extends BaseController {
      * @param  body  Required parameter: Example:
      * @return    Returns the Boolean response from the API call
      */
-    public CompletableFuture<Boolean> unassignHomeliveboardAsync(
-            final ApiRestV2MetadataHomeliveboardUnassignRequest body) {
-        return makeHttpCallAsync(() -> buildUnassignHomeliveboardRequest(body),
+    public CompletableFuture<Boolean> unassignHomeLiveboardAsync(
+            final TspublicRestV2MetadataHomeliveboardUnassignRequest body) {
+        return makeHttpCallAsync(() -> buildUnassignHomeLiveboardRequest(body),
             req -> authManagers.get("global").applyAsync(req)
                 .thenCompose(request -> getClientInstance()
                         .executeAsync(request, false)),
-            context -> handleUnassignHomeliveboardResponse(context));
+            context -> handleUnassignHomeLiveboardResponse(context));
     }
 
     /**
-     * Builds the HttpRequest object for unassignHomeliveboard.
+     * Builds the HttpRequest object for unassignHomeLiveboard.
      */
-    private HttpRequest buildUnassignHomeliveboardRequest(
-            final ApiRestV2MetadataHomeliveboardUnassignRequest body) throws JsonProcessingException {
+    private HttpRequest buildUnassignHomeLiveboardRequest(
+            final TspublicRestV2MetadataHomeliveboardUnassignRequest body) throws JsonProcessingException {
+        //validating required parameters
+        if (null == body) {
+            throw new NullPointerException("The parameter \"body\" is a required parameter and cannot be null.");
+        }
+
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/metadata/homeliveboard/unassign");
+                + "/tspublic/rest/v2/metadata/homeliveboard/unassign");
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
         headers.add("Content-Type", "application/json");
+        headers.add("X-Requested-By", config.getXRequestedBy());
         headers.add("Accept-Language", config.getAcceptLanguage());
         headers.add("user-agent", BaseController.userAgent);
 
         //prepare and invoke the API call request to fetch the response
         String bodyJson = ApiHelper.serialize(body);
-        HttpRequest request = getClientInstance().postBody(queryBuilder, headers, null, bodyJson);
+        HttpRequest request = getClientInstance().putBody(queryBuilder, headers, null, bodyJson);
 
         // Invoke the callback before request if its not null
         if (getHttpCallback() != null) {
@@ -1108,10 +1160,10 @@ public final class MetadataController extends BaseController {
     }
 
     /**
-     * Processes the response for unassignHomeliveboard.
+     * Processes the response for unassignHomeLiveboard.
      * @return An object of type boolean
      */
-    private Boolean handleUnassignHomeliveboardResponse(
+    private Boolean handleUnassignHomeLiveboardResponse(
             HttpContext context) throws ApiException, IOException {
         HttpResponse response = context.getResponse();
 
@@ -1173,12 +1225,13 @@ public final class MetadataController extends BaseController {
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/metadata/incomplete");
+                + "/tspublic/rest/v2/metadata/incomplete");
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
-        headers.add("Content-Type", config.getContentType());
+        headers.add("X-Requested-By", config.getXRequestedBy());
         headers.add("Accept-Language", config.getAcceptLanguage());
+        headers.add("Content-Type", config.getContentType());
         headers.add("user-agent", BaseController.userAgent);
 
         //prepare and invoke the API call request to fetch the response
@@ -1232,17 +1285,17 @@ public final class MetadataController extends BaseController {
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
-    public Object getMetadataHeader(
+    public Object getObjectHeader(
             final Type8Enum type,
             final String id,
             final List<String> outputFields) throws ApiException, IOException {
-        HttpRequest request = buildGetMetadataHeaderRequest(type, id, outputFields);
+        HttpRequest request = buildGetObjectHeaderRequest(type, id, outputFields);
         authManagers.get("global").apply(request);
 
         HttpResponse response = getClientInstance().execute(request, false);
         HttpContext context = new HttpContext(request, response);
 
-        return handleGetMetadataHeaderResponse(context);
+        return handleGetObjectHeaderResponse(context);
     }
 
     /**
@@ -1254,30 +1307,39 @@ public final class MetadataController extends BaseController {
      *         included in the header response
      * @return    Returns the Object response from the API call
      */
-    public CompletableFuture<Object> getMetadataHeaderAsync(
+    public CompletableFuture<Object> getObjectHeaderAsync(
             final Type8Enum type,
             final String id,
             final List<String> outputFields) {
-        return makeHttpCallAsync(() -> buildGetMetadataHeaderRequest(type, id, outputFields),
+        return makeHttpCallAsync(() -> buildGetObjectHeaderRequest(type, id, outputFields),
             req -> authManagers.get("global").applyAsync(req)
                 .thenCompose(request -> getClientInstance()
                         .executeAsync(request, false)),
-            context -> handleGetMetadataHeaderResponse(context));
+            context -> handleGetObjectHeaderResponse(context));
     }
 
     /**
-     * Builds the HttpRequest object for getMetadataHeader.
+     * Builds the HttpRequest object for getObjectHeader.
      */
-    private HttpRequest buildGetMetadataHeaderRequest(
+    private HttpRequest buildGetObjectHeaderRequest(
             final Type8Enum type,
             final String id,
             final List<String> outputFields) {
+        //validating required parameters
+        if (null == type) {
+            throw new NullPointerException("The parameter \"type\" is a required parameter and cannot be null.");
+        }
+
+        if (null == id) {
+            throw new NullPointerException("The parameter \"id\" is a required parameter and cannot be null.");
+        }
+
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/metadata/header");
+                + "/tspublic/rest/v2/metadata/header");
 
         //load all query parameters
         Map<String, Object> queryParameters = new HashMap<>();
@@ -1288,8 +1350,9 @@ public final class MetadataController extends BaseController {
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
-        headers.add("Content-Type", config.getContentType());
+        headers.add("X-Requested-By", config.getXRequestedBy());
         headers.add("Accept-Language", config.getAcceptLanguage());
+        headers.add("Content-Type", config.getContentType());
         headers.add("user-agent", BaseController.userAgent);
 
         //prepare and invoke the API call request to fetch the response
@@ -1305,10 +1368,10 @@ public final class MetadataController extends BaseController {
     }
 
     /**
-     * Processes the response for getMetadataHeader.
+     * Processes the response for getObjectHeader.
      * @return An object of type Object
      */
-    private Object handleGetMetadataHeaderResponse(
+    private Object handleGetObjectHeaderResponse(
             HttpContext context) throws ApiException, IOException {
         HttpResponse response = context.getResponse();
 
@@ -1337,25 +1400,14 @@ public final class MetadataController extends BaseController {
      * Use this endpoint to get full details of metadata objects.
      * @param  type  Required parameter: Type of the metadata object being searched. Valid values
      * @param  id  Required parameter: A JSON array of GUIDs of the objects.
-     * @param  showHidden  Optional parameter: When set to true, returns details of the hidden
-     *         objects, such as a column in a worksheet or a table.
-     * @param  dropQuestionDetails  Optional parameter: When set to true, the search assist data
-     *         associated with a worksheet is not included in the API response. This attribute is
-     *         applicable only for LOGICAL_TABLE data type.
-     * @param  version  Optional parameter: Specify the version to retrieve the objects from. By
-     *         default, the API returns metadata for all versions of the object.
      * @return    Returns the Object response from the API call
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
     public Object getObjectDetail(
             final Type9Enum type,
-            final List<String> id,
-            final Boolean showHidden,
-            final Boolean dropQuestionDetails,
-            final String version) throws ApiException, IOException {
-        HttpRequest request = buildGetObjectDetailRequest(type, id, showHidden, dropQuestionDetails,
-                version);
+            final List<String> id) throws ApiException, IOException {
+        HttpRequest request = buildGetObjectDetailRequest(type, id);
         authManagers.get("global").apply(request);
 
         HttpResponse response = getClientInstance().execute(request, false);
@@ -1368,23 +1420,12 @@ public final class MetadataController extends BaseController {
      * Use this endpoint to get full details of metadata objects.
      * @param  type  Required parameter: Type of the metadata object being searched. Valid values
      * @param  id  Required parameter: A JSON array of GUIDs of the objects.
-     * @param  showHidden  Optional parameter: When set to true, returns details of the hidden
-     *         objects, such as a column in a worksheet or a table.
-     * @param  dropQuestionDetails  Optional parameter: When set to true, the search assist data
-     *         associated with a worksheet is not included in the API response. This attribute is
-     *         applicable only for LOGICAL_TABLE data type.
-     * @param  version  Optional parameter: Specify the version to retrieve the objects from. By
-     *         default, the API returns metadata for all versions of the object.
      * @return    Returns the Object response from the API call
      */
     public CompletableFuture<Object> getObjectDetailAsync(
             final Type9Enum type,
-            final List<String> id,
-            final Boolean showHidden,
-            final Boolean dropQuestionDetails,
-            final String version) {
-        return makeHttpCallAsync(() -> buildGetObjectDetailRequest(type, id, showHidden,
-                dropQuestionDetails, version),
+            final List<String> id) {
+        return makeHttpCallAsync(() -> buildGetObjectDetailRequest(type, id),
             req -> authManagers.get("global").applyAsync(req)
                 .thenCompose(request -> getClientInstance()
                         .executeAsync(request, false)),
@@ -1396,30 +1437,34 @@ public final class MetadataController extends BaseController {
      */
     private HttpRequest buildGetObjectDetailRequest(
             final Type9Enum type,
-            final List<String> id,
-            final Boolean showHidden,
-            final Boolean dropQuestionDetails,
-            final String version) {
+            final List<String> id) {
+        //validating required parameters
+        if (null == type) {
+            throw new NullPointerException("The parameter \"type\" is a required parameter and cannot be null.");
+        }
+
+        if (null == id) {
+            throw new NullPointerException("The parameter \"id\" is a required parameter and cannot be null.");
+        }
+
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/metadata/details");
+                + "/tspublic/rest/v2/metadata/detail");
 
         //load all query parameters
         Map<String, Object> queryParameters = new HashMap<>();
         queryParameters.put("type",
                 (type != null) ? type.value() : null);
         queryParameters.put("id", id);
-        queryParameters.put("showHidden", showHidden);
-        queryParameters.put("dropQuestionDetails", dropQuestionDetails);
-        queryParameters.put("version", version);
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
-        headers.add("Content-Type", config.getContentType());
+        headers.add("X-Requested-By", config.getXRequestedBy());
         headers.add("Accept-Language", config.getAcceptLanguage());
+        headers.add("Content-Type", config.getContentType());
         headers.add("user-agent", BaseController.userAgent);
 
         //prepare and invoke the API call request to fetch the response
@@ -1504,12 +1549,17 @@ public final class MetadataController extends BaseController {
      */
     private HttpRequest buildGetObjectVisualizationHeaderRequest(
             final String id) {
+        //validating required parameters
+        if (null == id) {
+            throw new NullPointerException("The parameter \"id\" is a required parameter and cannot be null.");
+        }
+
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/metadata/vizheaders");
+                + "/tspublic/rest/v2/metadata/vizheader");
 
         //load all query parameters
         Map<String, Object> queryParameters = new HashMap<>();
@@ -1517,8 +1567,9 @@ public final class MetadataController extends BaseController {
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
-        headers.add("Content-Type", config.getContentType());
+        headers.add("X-Requested-By", config.getXRequestedBy());
         headers.add("Accept-Language", config.getAcceptLanguage());
+        headers.add("Content-Type", config.getContentType());
         headers.add("user-agent", BaseController.userAgent);
         headers.add("accept", "application/json");
 
@@ -1573,7 +1624,7 @@ public final class MetadataController extends BaseController {
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
     public Object searchObjectHeader(
-            final ApiRestV2MetadataHeaderSearchRequest body) throws ApiException, IOException {
+            final TspublicRestV2MetadataHeaderSearchRequest body) throws ApiException, IOException {
         HttpRequest request = buildSearchObjectHeaderRequest(body);
         authManagers.get("global").apply(request);
 
@@ -1590,7 +1641,7 @@ public final class MetadataController extends BaseController {
      * @return    Returns the Object response from the API call
      */
     public CompletableFuture<Object> searchObjectHeaderAsync(
-            final ApiRestV2MetadataHeaderSearchRequest body) {
+            final TspublicRestV2MetadataHeaderSearchRequest body) {
         return makeHttpCallAsync(() -> buildSearchObjectHeaderRequest(body),
             req -> authManagers.get("global").applyAsync(req)
                 .thenCompose(request -> getClientInstance()
@@ -1602,17 +1653,23 @@ public final class MetadataController extends BaseController {
      * Builds the HttpRequest object for searchObjectHeader.
      */
     private HttpRequest buildSearchObjectHeaderRequest(
-            final ApiRestV2MetadataHeaderSearchRequest body) throws JsonProcessingException {
+            final TspublicRestV2MetadataHeaderSearchRequest body) throws JsonProcessingException {
+        //validating required parameters
+        if (null == body) {
+            throw new NullPointerException("The parameter \"body\" is a required parameter and cannot be null.");
+        }
+
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/metadata/header/search");
+                + "/tspublic/rest/v2/metadata/header/search");
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
         headers.add("Content-Type", "application/json");
+        headers.add("X-Requested-By", config.getXRequestedBy());
         headers.add("Accept-Language", config.getAcceptLanguage());
         headers.add("user-agent", BaseController.userAgent);
 
@@ -1658,6 +1715,103 @@ public final class MetadataController extends BaseController {
     }
 
     /**
+     * Use this endpoint to get full details of metadata objects.
+     * @param  body  Required parameter: Example:
+     * @return    Returns the Object response from the API call
+     * @throws    ApiException    Represents error response from the server.
+     * @throws    IOException    Signals that an I/O exception of some sort has occurred.
+     */
+    public Object searchObjectDetail(
+            final TspublicRestV2MetadataDetailSearchRequest body) throws ApiException, IOException {
+        HttpRequest request = buildSearchObjectDetailRequest(body);
+        authManagers.get("global").apply(request);
+
+        HttpResponse response = getClientInstance().execute(request, false);
+        HttpContext context = new HttpContext(request, response);
+
+        return handleSearchObjectDetailResponse(context);
+    }
+
+    /**
+     * Use this endpoint to get full details of metadata objects.
+     * @param  body  Required parameter: Example:
+     * @return    Returns the Object response from the API call
+     */
+    public CompletableFuture<Object> searchObjectDetailAsync(
+            final TspublicRestV2MetadataDetailSearchRequest body) {
+        return makeHttpCallAsync(() -> buildSearchObjectDetailRequest(body),
+            req -> authManagers.get("global").applyAsync(req)
+                .thenCompose(request -> getClientInstance()
+                        .executeAsync(request, false)),
+            context -> handleSearchObjectDetailResponse(context));
+    }
+
+    /**
+     * Builds the HttpRequest object for searchObjectDetail.
+     */
+    private HttpRequest buildSearchObjectDetailRequest(
+            final TspublicRestV2MetadataDetailSearchRequest body) throws JsonProcessingException {
+        //validating required parameters
+        if (null == body) {
+            throw new NullPointerException("The parameter \"body\" is a required parameter and cannot be null.");
+        }
+
+        //the base uri for api requests
+        String baseUri = config.getBaseUri();
+
+        //prepare query string for API call
+        final StringBuilder queryBuilder = new StringBuilder(baseUri
+                + "/tspublic/rest/v2/metadata/detail/search");
+
+        //load all headers for the outgoing API request
+        Headers headers = new Headers();
+        headers.add("Content-Type", "application/json");
+        headers.add("X-Requested-By", config.getXRequestedBy());
+        headers.add("Accept-Language", config.getAcceptLanguage());
+        headers.add("user-agent", BaseController.userAgent);
+
+        //prepare and invoke the API call request to fetch the response
+        String bodyJson = ApiHelper.serialize(body);
+        HttpRequest request = getClientInstance().postBody(queryBuilder, headers, null, bodyJson);
+
+        // Invoke the callback before request if its not null
+        if (getHttpCallback() != null) {
+            getHttpCallback().onBeforeRequest(request);
+        }
+
+        return request;
+    }
+
+    /**
+     * Processes the response for searchObjectDetail.
+     * @return An object of type Object
+     */
+    private Object handleSearchObjectDetailResponse(
+            HttpContext context) throws ApiException, IOException {
+        HttpResponse response = context.getResponse();
+
+        //invoke the callback after response if its not null
+        if (getHttpCallback() != null) {
+            getHttpCallback().onAfterResponse(context);
+        }
+
+        //Error handling using HTTP status codes
+        int responseCode = response.getStatusCode();
+
+        if (responseCode == 500) {
+            throw new ErrorResponseException("Operation failed or unauthorized request", context);
+        }
+        //handle errors defined at the API level
+        validateResponse(response, context);
+
+        //extract result from the http response
+        String responseBody = ((HttpStringResponse) response).getBody();
+        Object result = responseBody;
+
+        return result;
+    }
+
+    /**
      * Use this endpoint to delete the metadata objects.
      * @param  type  Required parameter: Type of the metadata object being searched.
      * @param  id  Required parameter: A JSON array of GUIDs of the objects.
@@ -1665,16 +1819,16 @@ public final class MetadataController extends BaseController {
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
-    public Boolean deleteMetadataObject(
+    public Boolean deleteObject(
             final Type9Enum type,
             final List<String> id) throws ApiException, IOException {
-        HttpRequest request = buildDeleteMetadataObjectRequest(type, id);
+        HttpRequest request = buildDeleteObjectRequest(type, id);
         authManagers.get("global").apply(request);
 
         HttpResponse response = getClientInstance().execute(request, false);
         HttpContext context = new HttpContext(request, response);
 
-        return handleDeleteMetadataObjectResponse(context);
+        return handleDeleteObjectResponse(context);
     }
 
     /**
@@ -1683,28 +1837,37 @@ public final class MetadataController extends BaseController {
      * @param  id  Required parameter: A JSON array of GUIDs of the objects.
      * @return    Returns the Boolean response from the API call
      */
-    public CompletableFuture<Boolean> deleteMetadataObjectAsync(
+    public CompletableFuture<Boolean> deleteObjectAsync(
             final Type9Enum type,
             final List<String> id) {
-        return makeHttpCallAsync(() -> buildDeleteMetadataObjectRequest(type, id),
+        return makeHttpCallAsync(() -> buildDeleteObjectRequest(type, id),
             req -> authManagers.get("global").applyAsync(req)
                 .thenCompose(request -> getClientInstance()
                         .executeAsync(request, false)),
-            context -> handleDeleteMetadataObjectResponse(context));
+            context -> handleDeleteObjectResponse(context));
     }
 
     /**
-     * Builds the HttpRequest object for deleteMetadataObject.
+     * Builds the HttpRequest object for deleteObject.
      */
-    private HttpRequest buildDeleteMetadataObjectRequest(
+    private HttpRequest buildDeleteObjectRequest(
             final Type9Enum type,
             final List<String> id) {
+        //validating required parameters
+        if (null == type) {
+            throw new NullPointerException("The parameter \"type\" is a required parameter and cannot be null.");
+        }
+
+        if (null == id) {
+            throw new NullPointerException("The parameter \"id\" is a required parameter and cannot be null.");
+        }
+
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/metadata/delete");
+                + "/tspublic/rest/v2/metadata/delete");
 
         //load all query parameters
         Map<String, Object> queryParameters = new HashMap<>();
@@ -1714,8 +1877,9 @@ public final class MetadataController extends BaseController {
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
-        headers.add("Content-Type", config.getContentType());
+        headers.add("X-Requested-By", config.getXRequestedBy());
         headers.add("Accept-Language", config.getAcceptLanguage());
+        headers.add("Content-Type", config.getContentType());
         headers.add("user-agent", BaseController.userAgent);
 
         //prepare and invoke the API call request to fetch the response
@@ -1731,10 +1895,10 @@ public final class MetadataController extends BaseController {
     }
 
     /**
-     * Processes the response for deleteMetadataObject.
+     * Processes the response for deleteObject.
      * @return An object of type boolean
      */
-    private Boolean handleDeleteMetadataObjectResponse(
+    private Boolean handleDeleteObjectResponse(
             HttpContext context) throws ApiException, IOException {
         HttpResponse response = context.getResponse();
 
@@ -1777,7 +1941,7 @@ public final class MetadataController extends BaseController {
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
     public Object getObjectDependency(
-            final ApiRestV2MetadataDependencyRequest body) throws ApiException, IOException {
+            final TspublicRestV2MetadataDependencyRequest body) throws ApiException, IOException {
         HttpRequest request = buildGetObjectDependencyRequest(body);
         authManagers.get("global").apply(request);
 
@@ -1803,7 +1967,7 @@ public final class MetadataController extends BaseController {
      * @return    Returns the Object response from the API call
      */
     public CompletableFuture<Object> getObjectDependencyAsync(
-            final ApiRestV2MetadataDependencyRequest body) {
+            final TspublicRestV2MetadataDependencyRequest body) {
         return makeHttpCallAsync(() -> buildGetObjectDependencyRequest(body),
             req -> authManagers.get("global").applyAsync(req)
                 .thenCompose(request -> getClientInstance()
@@ -1815,17 +1979,23 @@ public final class MetadataController extends BaseController {
      * Builds the HttpRequest object for getObjectDependency.
      */
     private HttpRequest buildGetObjectDependencyRequest(
-            final ApiRestV2MetadataDependencyRequest body) throws JsonProcessingException {
+            final TspublicRestV2MetadataDependencyRequest body) throws JsonProcessingException {
+        //validating required parameters
+        if (null == body) {
+            throw new NullPointerException("The parameter \"body\" is a required parameter and cannot be null.");
+        }
+
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/metadata/dependency");
+                + "/tspublic/rest/v2/metadata/dependency");
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
         headers.add("Content-Type", "application/json");
+        headers.add("X-Requested-By", config.getXRequestedBy());
         headers.add("Accept-Language", config.getAcceptLanguage());
         headers.add("user-agent", BaseController.userAgent);
 
@@ -1879,7 +2049,7 @@ public final class MetadataController extends BaseController {
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
     public Object exportObjectTML(
-            final ApiRestV2MetadataTmlExportRequest body) throws ApiException, IOException {
+            final TspublicRestV2MetadataTmlExportRequest body) throws ApiException, IOException {
         HttpRequest request = buildExportObjectTMLRequest(body);
         authManagers.get("global").apply(request);
 
@@ -1896,7 +2066,7 @@ public final class MetadataController extends BaseController {
      * @return    Returns the Object response from the API call
      */
     public CompletableFuture<Object> exportObjectTMLAsync(
-            final ApiRestV2MetadataTmlExportRequest body) {
+            final TspublicRestV2MetadataTmlExportRequest body) {
         return makeHttpCallAsync(() -> buildExportObjectTMLRequest(body),
             req -> authManagers.get("global").applyAsync(req)
                 .thenCompose(request -> getClientInstance()
@@ -1908,17 +2078,23 @@ public final class MetadataController extends BaseController {
      * Builds the HttpRequest object for exportObjectTML.
      */
     private HttpRequest buildExportObjectTMLRequest(
-            final ApiRestV2MetadataTmlExportRequest body) throws JsonProcessingException {
+            final TspublicRestV2MetadataTmlExportRequest body) throws JsonProcessingException {
+        //validating required parameters
+        if (null == body) {
+            throw new NullPointerException("The parameter \"body\" is a required parameter and cannot be null.");
+        }
+
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/metadata/tml/export");
+                + "/tspublic/rest/v2/metadata/tml/export");
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
         headers.add("Content-Type", "application/json");
+        headers.add("X-Requested-By", config.getXRequestedBy());
         headers.add("Accept-Language", config.getAcceptLanguage());
         headers.add("user-agent", BaseController.userAgent);
 
@@ -1972,7 +2148,7 @@ public final class MetadataController extends BaseController {
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
     public Object importObjectTML(
-            final ApiRestV2MetadataTmlImportRequest body) throws ApiException, IOException {
+            final TspublicRestV2MetadataTmlImportRequest body) throws ApiException, IOException {
         HttpRequest request = buildImportObjectTMLRequest(body);
         authManagers.get("global").apply(request);
 
@@ -1989,7 +2165,7 @@ public final class MetadataController extends BaseController {
      * @return    Returns the Object response from the API call
      */
     public CompletableFuture<Object> importObjectTMLAsync(
-            final ApiRestV2MetadataTmlImportRequest body) {
+            final TspublicRestV2MetadataTmlImportRequest body) {
         return makeHttpCallAsync(() -> buildImportObjectTMLRequest(body),
             req -> authManagers.get("global").applyAsync(req)
                 .thenCompose(request -> getClientInstance()
@@ -2001,17 +2177,23 @@ public final class MetadataController extends BaseController {
      * Builds the HttpRequest object for importObjectTML.
      */
     private HttpRequest buildImportObjectTMLRequest(
-            final ApiRestV2MetadataTmlImportRequest body) throws JsonProcessingException {
+            final TspublicRestV2MetadataTmlImportRequest body) throws JsonProcessingException {
+        //validating required parameters
+        if (null == body) {
+            throw new NullPointerException("The parameter \"body\" is a required parameter and cannot be null.");
+        }
+
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/api/rest/v2/metadata/tml/import");
+                + "/tspublic/rest/v2/metadata/tml/import");
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
         headers.add("Content-Type", "application/json");
+        headers.add("X-Requested-By", config.getXRequestedBy());
         headers.add("Accept-Language", config.getAcceptLanguage());
         headers.add("user-agent", BaseController.userAgent);
 

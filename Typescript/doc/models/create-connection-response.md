@@ -11,7 +11,7 @@
 |  --- | --- | --- | --- |
 | `name` | `string \| undefined` | Optional | Name of the connection |
 | `description` | `string \| undefined` | Optional | Description associated with the connection |
-| `type` | `string \| undefined` | Optional | Type of the connection. The database associated with this type can be obtained from theI response returned by the /api/rest/v2/connection/types API endpoint. |
+| `type` | `string \| undefined` | Optional | Type of the connection. The database associated with this type can be obtained from the response returned by the /tspublic/rest/v2/connection/types API endpoint. |
 | `id` | `string \| undefined` | Optional | GUID of the connection |
 | `scheduled` | `boolean \| undefined` | Optional | Indicates if the data sync is scheduled for this connection |
 | `connectionType` | `string \| undefined` | Optional | - |
@@ -25,9 +25,9 @@
 | `generationNum` | `number \| undefined` | Optional | - |
 | `created` | `string \| undefined` | Optional | Date and time when user account was created |
 | `modified` | `string \| undefined` | Optional | Date and time of last modification of user account |
-| `author` | [`UserNameAndID \| undefined`](/doc/models/user-name-and-id.md) | Optional | - |
-| `modifiedBy` | [`UserNameAndID \| undefined`](/doc/models/user-name-and-id.md) | Optional | - |
-| `owner` | [`UserNameAndID \| undefined`](/doc/models/user-name-and-id.md) | Optional | - |
+| `author` | [`UserNameAndID \| undefined`](../../doc/models/user-name-and-id.md) | Optional | - |
+| `modifiedBy` | [`UserNameAndID \| undefined`](../../doc/models/user-name-and-id.md) | Optional | - |
+| `owner` | [`UserNameAndID \| undefined`](../../doc/models/user-name-and-id.md) | Optional | - |
 | `tags` | `string[] \| undefined` | Optional | List of tags assigned to the connection |
 | `tables` | `string[] \| undefined` | Optional | List of tables linked to this connection and details of the columns in the table |
 

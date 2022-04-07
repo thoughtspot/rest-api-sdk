@@ -27,6 +27,7 @@ The following parameters are configurable for the API Client:
 | `Environment` | Environment | The API environment. <br> **Default: `Environment.Production`** |
 | `Timeout` | `TimeSpan` | Http client timeout.<br>*Default*: `TimeSpan.FromSeconds(100)` |
 | `AccessToken` | `string` | The OAuth 2.0 Access Token to use for API requests. |
+| `SkipSslCertVerification` | `bool` | Specifies whether to skip SSL certificate verification.<br /> **Default: false** |
 
 The API client can be initialized as follows:
 
@@ -46,7 +47,8 @@ RESTAPISDK.Standard.RESTAPISDKClient client = new RESTAPISDK.Standard.RESTAPISDK
 This API uses `OAuth 2 Bearer token`.
 
 ## Guide
-[API Reference](https://github.com/thoughtspot/rest-api-sdk/blob/main/DotNet/doc/README.md)
+[API Reference](https://github.com/thoughtspot/rest-api-sdk/blob/main/Typescript/doc/README.md)
 
 ## Live Playground
 We recommend that you browse through the [code playground](https://try-everywhere.thoughtspot.cloud/v2/#/everywhere/api/rest/playgroundV2) before you start constructing your API requests. The playground offers an interactive portal with comprehensive information about the API endpoints, request and response workflows.
+

@@ -86,8 +86,8 @@ namespace RESTAPISDK.Standard.Models
             string type = null,
             string parenttype = null,
             string tenantId = null,
-            int? indexVersion = null,
-            int? generationNum = null,
+            double? indexVersion = null,
+            double? generationNum = null,
             double? created = null,
             double? modified = null,
             Models.UserNameAndID author = null,
@@ -276,13 +276,13 @@ namespace RESTAPISDK.Standard.Models
         /// Gets or sets IndexVersion.
         /// </summary>
         [JsonProperty("indexVersion", NullValueHandling = NullValueHandling.Ignore)]
-        public int? IndexVersion { get; set; }
+        public double? IndexVersion { get; set; }
 
         /// <summary>
         /// Gets or sets GenerationNum.
         /// </summary>
         [JsonProperty("generationNum", NullValueHandling = NullValueHandling.Ignore)]
-        public int? GenerationNum { get; set; }
+        public double? GenerationNum { get; set; }
 
         /// <summary>
         /// Date and time when user account was created

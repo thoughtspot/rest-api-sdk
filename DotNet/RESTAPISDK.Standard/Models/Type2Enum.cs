@@ -47,23 +47,5 @@ namespace RESTAPISDK.Standard.Models
         /// </summary>
         [EnumMember(Value = "LOCAL_USER")]
         LOCALUSER,
-
-        /// <summary>
-        /// LDAPGROUP.
-        /// </summary>
-        [EnumMember(Value = "LDAP_GROUP")]
-        LDAPGROUP,
-
-        /// <summary>
-        /// LOCALGROUP.
-        /// </summary>
-        [EnumMember(Value = "LOCAL_GROUP")]
-        LOCALGROUP,
-
-        /// <summary>
-        /// TENANTGROUP.
-        /// </summary>
-        [EnumMember(Value = "TENANT_GROUP")]
-        TENANTGROUP,
     }
 }

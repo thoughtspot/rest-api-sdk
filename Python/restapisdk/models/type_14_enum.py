@@ -12,7 +12,7 @@ class Type14Enum(object):
 
     """Implementation of the 'Type14' enum.
 
-    Type of the connect being searched. Valid values:
+    Type of the data connection.
 
     Attributes:
         SNOWFLAKE: TODO: type description here.

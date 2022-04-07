@@ -14,7 +14,7 @@
 | `id` | `string \| undefined` | Optional | GUID of the user account |
 | `visibility` | `string \| undefined` | Optional | Visibility of the user account |
 | `mail` | `string \| undefined` | Optional | Email of the user account |
-| `groups` | [`GroupNameAndID[] \| undefined`](/doc/models/group-name-and-id.md) | Optional | Name of the group to which user account is added |
+| `groups` | [`GroupNameAndID[] \| undefined`](../../doc/models/group-name-and-id.md) | Optional | Name of the group to which user account is added |
 | `privileges` | `string[] \| undefined` | Optional | Privileges assigned to user account |
 | `tags` | `string[] \| undefined` | Optional | Tags assigned to the user |
 | `state` | `string \| undefined` | Optional | Indicates if the user account is active or inactive |
@@ -37,9 +37,9 @@
 | `generationNum` | `number \| undefined` | Optional | - |
 | `created` | `number \| undefined` | Optional | Date and time when user account was created |
 | `modified` | `number \| undefined` | Optional | Date and time of last modification of user account |
-| `author` | [`UserNameAndID \| undefined`](/doc/models/user-name-and-id.md) | Optional | - |
-| `modifiedBy` | [`UserNameAndID \| undefined`](/doc/models/user-name-and-id.md) | Optional | - |
-| `owner` | [`UserNameAndID \| undefined`](/doc/models/user-name-and-id.md) | Optional | - |
+| `author` | [`UserNameAndID \| undefined`](../../doc/models/user-name-and-id.md) | Optional | - |
+| `modifiedBy` | [`UserNameAndID \| undefined`](../../doc/models/user-name-and-id.md) | Optional | - |
+| `owner` | [`UserNameAndID \| undefined`](../../doc/models/user-name-and-id.md) | Optional | - |
 
 ## Example (as JSON)
 

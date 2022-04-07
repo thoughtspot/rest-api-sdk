@@ -44,7 +44,7 @@ namespace RESTAPISDK.Standard.Controllers
         /// <param name="body">Required parameter: Example: .</param>
         /// <returns>Returns the object response from the API call.</returns>
         public object SearchQueryData(
-                Models.ApiRestV2DataSearchRequest body)
+                Models.TspublicRestV2DataSearchRequest body)
         {
             Task<object> t = this.SearchQueryDataAsync(body);
             ApiHelper.RunTaskSynchronously(t);
@@ -58,21 +58,28 @@ namespace RESTAPISDK.Standard.Controllers
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the object response from the API call.</returns>
         public async Task<object> SearchQueryDataAsync(
-                Models.ApiRestV2DataSearchRequest body,
+                Models.TspublicRestV2DataSearchRequest body,
                 CancellationToken cancellationToken = default)
         {
+            // validating required parameters.
+            if (body == null)
+            {
+                throw new ArgumentNullException("body", "The parameter \"body\" is a required parameter and cannot be null.");
+            }
+
             // the base uri for api requests.
             string baseUri = this.Config.GetBaseUri();
 
             // prepare query string for API call.
             StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/api/rest/v2/data/search");
+            queryBuilder.Append("/tspublic/rest/v2/data/search");
 
             // append request with appropriate headers and parameters
             var headers = new Dictionary<string, string>()
             {
                 { "user-agent", this.UserAgent },
                 { "Content-Type", "application/json" },
+                { "X-Requested-By", this.Config.XRequestedBy },
                 { "Accept-Language", this.Config.AcceptLanguage },
             };
 
@@ -114,7 +121,7 @@ namespace RESTAPISDK.Standard.Controllers
         /// <param name="body">Required parameter: Example: .</param>
         /// <returns>Returns the object response from the API call.</returns>
         public object AnswerData(
-                Models.ApiRestV2DataAnswerRequest body)
+                Models.TspublicRestV2DataAnswerRequest body)
         {
             Task<object> t = this.AnswerDataAsync(body);
             ApiHelper.RunTaskSynchronously(t);
@@ -128,21 +135,28 @@ namespace RESTAPISDK.Standard.Controllers
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the object response from the API call.</returns>
         public async Task<object> AnswerDataAsync(
-                Models.ApiRestV2DataAnswerRequest body,
+                Models.TspublicRestV2DataAnswerRequest body,
                 CancellationToken cancellationToken = default)
         {
+            // validating required parameters.
+            if (body == null)
+            {
+                throw new ArgumentNullException("body", "The parameter \"body\" is a required parameter and cannot be null.");
+            }
+
             // the base uri for api requests.
             string baseUri = this.Config.GetBaseUri();
 
             // prepare query string for API call.
             StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/api/rest/v2/data/answer");
+            queryBuilder.Append("/tspublic/rest/v2/data/answer");
 
             // append request with appropriate headers and parameters
             var headers = new Dictionary<string, string>()
             {
                 { "user-agent", this.UserAgent },
                 { "Content-Type", "application/json" },
+                { "X-Requested-By", this.Config.XRequestedBy },
                 { "Accept-Language", this.Config.AcceptLanguage },
             };
 
@@ -184,7 +198,7 @@ namespace RESTAPISDK.Standard.Controllers
         /// <param name="body">Required parameter: Example: .</param>
         /// <returns>Returns the object response from the API call.</returns>
         public object LiveboardData(
-                Models.ApiRestV2DataLiveboardRequest body)
+                Models.TspublicRestV2DataLiveboardRequest body)
         {
             Task<object> t = this.LiveboardDataAsync(body);
             ApiHelper.RunTaskSynchronously(t);
@@ -198,21 +212,28 @@ namespace RESTAPISDK.Standard.Controllers
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the object response from the API call.</returns>
         public async Task<object> LiveboardDataAsync(
-                Models.ApiRestV2DataLiveboardRequest body,
+                Models.TspublicRestV2DataLiveboardRequest body,
                 CancellationToken cancellationToken = default)
         {
+            // validating required parameters.
+            if (body == null)
+            {
+                throw new ArgumentNullException("body", "The parameter \"body\" is a required parameter and cannot be null.");
+            }
+
             // the base uri for api requests.
             string baseUri = this.Config.GetBaseUri();
 
             // prepare query string for API call.
             StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/api/rest/v2/data/liveboard");
+            queryBuilder.Append("/tspublic/rest/v2/data/liveboard");
 
             // append request with appropriate headers and parameters
             var headers = new Dictionary<string, string>()
             {
                 { "user-agent", this.UserAgent },
                 { "Content-Type", "application/json" },
+                { "X-Requested-By", this.Config.XRequestedBy },
                 { "Accept-Language", this.Config.AcceptLanguage },
             };
 

@@ -9,12 +9,20 @@ package localhost.http.client;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 import localhost.ApiHelper;
 import localhost.http.Headers;
 import localhost.http.request.HttpBodyRequest;
@@ -32,6 +40,7 @@ import localhost.utilities.FileWrapper;
 public class OkClient implements HttpClient {
     private static final Object syncObject = new Object();
     private static volatile okhttp3.OkHttpClient defaultOkHttpClient;
+    private static okhttp3.OkHttpClient insecureOkHttpClient;
 
     /**
      * Private instance of the okhttp3.OkHttpClient.
@@ -51,7 +60,11 @@ public class OkClient implements HttpClient {
                 this.client = httpClientInstance;
             }
         } else {
-            applyHttpClientConfigurations(getDefaultOkHttpClient(), httpClientConfig);
+            if (httpClientConfig.isSkipSslCertVerification()) {
+                applyHttpClientConfigurations(getInsecureOkHttpClient(), httpClientConfig);
+            } else {
+                applyHttpClientConfigurations(getDefaultOkHttpClient(), httpClientConfig);
+            }
         }
     }
 
@@ -94,12 +107,71 @@ public class OkClient implements HttpClient {
     }
 
     /**
+     * Getter for the default static instance of the okhttp3.OkHttpClient.
+     */
+    private okhttp3.OkHttpClient getInsecureOkHttpClient() {
+        if (insecureOkHttpClient == null) {
+            synchronized (syncObject) {
+                if (insecureOkHttpClient == null) {
+                    insecureOkHttpClient = createInsecureOkHttpClient();
+                }
+            }
+        }
+        return insecureOkHttpClient;
+    }
+
+    private static okhttp3.OkHttpClient createInsecureOkHttpClient() {
+        try {
+            // Create a trust manager that does not validate certificate chains
+            final TrustManager[] trustAllCerts = new TrustManager[] {
+                new X509TrustManager() {
+                    public void checkClientTrusted(X509Certificate[] chain,
+                            String authType) throws CertificateException {
+                    }
+
+                    public void checkServerTrusted(X509Certificate[] chain,
+                            String authType) throws CertificateException {
+                    }
+
+                    public X509Certificate[] getAcceptedIssuers() {
+                        return new X509Certificate[0];
+                    }
+                }
+            };
+
+            // Install the all-trusting trust manager
+            final SSLContext sslContext = SSLContext.getInstance("SSL");
+            sslContext.init(null, trustAllCerts, new java.security.SecureRandom());
+            // Create an ssl socket factory with our all-trusting manager
+            final SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
+
+            return new okhttp3.OkHttpClient().newBuilder()
+                    .sslSocketFactory(sslSocketFactory, (X509TrustManager) trustAllCerts[0])
+                    .hostnameVerifier(new HostnameVerifier() {
+                        public boolean verify(String hostname, SSLSession session) {
+                            return true;
+                        }
+                    }).retryOnConnectionFailure(true)
+                    .callTimeout(0, TimeUnit.SECONDS)
+                    .build();
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
      * Shutdown the underlying OkHttpClient instance. 
      */
     public static void shutdown() {
         if (defaultOkHttpClient != null) {
             defaultOkHttpClient.dispatcher().executorService().shutdown();
             defaultOkHttpClient.connectionPool().evictAll();
+        }
+
+        if (insecureOkHttpClient != null) {
+            insecureOkHttpClient.dispatcher().executorService().shutdown();
+            insecureOkHttpClient.connectionPool().evictAll();
         }
     }
 

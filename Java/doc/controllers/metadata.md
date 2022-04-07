@@ -10,26 +10,27 @@ MetadataController metadataController = client.getMetadataController();
 
 ## Methods
 
-* [Get Tag](/doc/controllers/metadata.md#get-tag)
-* [Create Tag](/doc/controllers/metadata.md#create-tag)
-* [Update Tag](/doc/controllers/metadata.md#update-tag)
-* [Delete Tag](/doc/controllers/metadata.md#delete-tag)
-* [Assign Tag](/doc/controllers/metadata.md#assign-tag)
-* [Unassign Tag](/doc/controllers/metadata.md#unassign-tag)
-* [Assign Favorite](/doc/controllers/metadata.md#assign-favorite)
-* [Unassign Favorite](/doc/controllers/metadata.md#unassign-favorite)
-* [Get Homeliveboard](/doc/controllers/metadata.md#get-homeliveboard)
-* [Assign Homeliveboard](/doc/controllers/metadata.md#assign-homeliveboard)
-* [Unassign Homeliveboard](/doc/controllers/metadata.md#unassign-homeliveboard)
-* [Get Incomplete Objects](/doc/controllers/metadata.md#get-incomplete-objects)
-* [Get Metadata Header](/doc/controllers/metadata.md#get-metadata-header)
-* [Get Object Detail](/doc/controllers/metadata.md#get-object-detail)
-* [Get Object Visualization Header](/doc/controllers/metadata.md#get-object-visualization-header)
-* [Search Object Header](/doc/controllers/metadata.md#search-object-header)
-* [Delete Metadata Object](/doc/controllers/metadata.md#delete-metadata-object)
-* [Get Object Dependency](/doc/controllers/metadata.md#get-object-dependency)
-* [Export Object TML](/doc/controllers/metadata.md#export-object-tml)
-* [Import Object TML](/doc/controllers/metadata.md#import-object-tml)
+* [Get Tag](../../doc/controllers/metadata.md#get-tag)
+* [Create Tag](../../doc/controllers/metadata.md#create-tag)
+* [Update Tag](../../doc/controllers/metadata.md#update-tag)
+* [Delete Tag](../../doc/controllers/metadata.md#delete-tag)
+* [Assign Tag](../../doc/controllers/metadata.md#assign-tag)
+* [Unassign Tag](../../doc/controllers/metadata.md#unassign-tag)
+* [Assign Favorite](../../doc/controllers/metadata.md#assign-favorite)
+* [Unassign Favorite](../../doc/controllers/metadata.md#unassign-favorite)
+* [Get Home Liveboard](../../doc/controllers/metadata.md#get-home-liveboard)
+* [Assign Home Liveboard](../../doc/controllers/metadata.md#assign-home-liveboard)
+* [Unassign Home Liveboard](../../doc/controllers/metadata.md#unassign-home-liveboard)
+* [Get Incomplete Objects](../../doc/controllers/metadata.md#get-incomplete-objects)
+* [Get Object Header](../../doc/controllers/metadata.md#get-object-header)
+* [Get Object Detail](../../doc/controllers/metadata.md#get-object-detail)
+* [Get Object Visualization Header](../../doc/controllers/metadata.md#get-object-visualization-header)
+* [Search Object Header](../../doc/controllers/metadata.md#search-object-header)
+* [Search Object Detail](../../doc/controllers/metadata.md#search-object-detail)
+* [Delete Object](../../doc/controllers/metadata.md#delete-object)
+* [Get Object Dependency](../../doc/controllers/metadata.md#get-object-dependency)
+* [Export Object TML](../../doc/controllers/metadata.md#export-object-tml)
+* [Import Object TML](../../doc/controllers/metadata.md#import-object-tml)
 
 
 # Get Tag
@@ -53,7 +54,7 @@ CompletableFuture<MetadataTagResponse> getTagAsync(
 
 ## Response Type
 
-[`MetadataTagResponse`](/doc/models/metadata-tag-response.md)
+[`MetadataTagResponse`](../../doc/models/metadata-tag-response.md)
 
 ## Example Usage
 
@@ -70,7 +71,7 @@ metadataController.getTagAsync(null, null).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Create Tag
@@ -79,23 +80,23 @@ To programmatically create tags, use this endpoint
 
 ```java
 CompletableFuture<MetadataTagResponse> createTagAsync(
-    final ApiRestV2MetadataTagCreateRequest body)
+    final TspublicRestV2MetadataTagCreateRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2MetadataTagCreateRequest`](/doc/models/api-rest-v2-metadata-tag-create-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2MetadataTagCreateRequest`](../../doc/models/tspublic-rest-v2-metadata-tag-create-request.md) | Body, Required | - |
 
 ## Response Type
 
-[`MetadataTagResponse`](/doc/models/metadata-tag-response.md)
+[`MetadataTagResponse`](../../doc/models/metadata-tag-response.md)
 
 ## Example Usage
 
 ```java
-ApiRestV2MetadataTagCreateRequest body = new ApiRestV2MetadataTagCreateRequest();
+TspublicRestV2MetadataTagCreateRequest body = new TspublicRestV2MetadataTagCreateRequest();
 body.setName("name6");
 
 metadataController.createTagAsync(body).thenAccept(result -> {
@@ -110,7 +111,7 @@ metadataController.createTagAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Update Tag
@@ -121,14 +122,14 @@ At least one of id or name of tag is required. When both are given, then id will
 
 ```java
 CompletableFuture<Boolean> updateTagAsync(
-    final ApiRestV2MetadataTagUpdateRequest body)
+    final TspublicRestV2MetadataTagUpdateRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2MetadataTagUpdateRequest`](/doc/models/api-rest-v2-metadata-tag-update-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2MetadataTagUpdateRequest`](../../doc/models/tspublic-rest-v2-metadata-tag-update-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -137,7 +138,7 @@ CompletableFuture<Boolean> updateTagAsync(
 ## Example Usage
 
 ```java
-ApiRestV2MetadataTagUpdateRequest body = new ApiRestV2MetadataTagUpdateRequest();
+TspublicRestV2MetadataTagUpdateRequest body = new TspublicRestV2MetadataTagUpdateRequest();
 
 metadataController.updateTagAsync(body).thenAccept(result -> {
     // TODO success callback handler
@@ -151,7 +152,7 @@ metadataController.updateTagAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Delete Tag
@@ -192,7 +193,7 @@ metadataController.deleteTagAsync(null, null).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Assign Tag
@@ -203,14 +204,14 @@ At least one of id or name of tag is required. When both are given, then id will
 
 ```java
 CompletableFuture<Boolean> assignTagAsync(
-    final ApiRestV2MetadataTagAssignRequest body)
+    final TspublicRestV2MetadataTagAssignRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2MetadataTagAssignRequest`](/doc/models/api-rest-v2-metadata-tag-assign-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2MetadataTagAssignRequest`](../../doc/models/tspublic-rest-v2-metadata-tag-assign-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -219,18 +220,23 @@ CompletableFuture<Boolean> assignTagAsync(
 ## Example Usage
 
 ```java
-ApiRestV2MetadataTagAssignRequest body = new ApiRestV2MetadataTagAssignRequest();
-body.setMetaObject(new LinkedList<>());
+TspublicRestV2MetadataTagAssignRequest body = new TspublicRestV2MetadataTagAssignRequest();
+body.setTsObject(new LinkedList<>());
 
-MetaObjectInput bodyMetaObject0 = new MetaObjectInput();
-bodyMetaObject0.setId("id6");
-bodyMetaObject0.setType(TypeEnum.ANSWER);
-body.getMetaObject().add(bodyMetaObject0);
+TsObjectInput bodyTsObject0 = new TsObjectInput();
+bodyTsObject0.setId("id8");
+bodyTsObject0.setType(TypeEnum.DATAOBJECT);
+body.getTsObject().add(bodyTsObject0);
 
-MetaObjectInput bodyMetaObject1 = new MetaObjectInput();
-bodyMetaObject1.setId("id7");
-bodyMetaObject1.setType(TypeEnum.LIVEBOARD);
-body.getMetaObject().add(bodyMetaObject1);
+TsObjectInput bodyTsObject1 = new TsObjectInput();
+bodyTsObject1.setId("id9");
+bodyTsObject1.setType(TypeEnum.CONNECTION);
+body.getTsObject().add(bodyTsObject1);
+
+TsObjectInput bodyTsObject2 = new TsObjectInput();
+bodyTsObject2.setId("id0");
+bodyTsObject2.setType(TypeEnum.ANSWER);
+body.getTsObject().add(bodyTsObject2);
 
 
 metadataController.assignTagAsync(body).thenAccept(result -> {
@@ -245,7 +251,7 @@ metadataController.assignTagAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Unassign Tag
@@ -256,14 +262,14 @@ At least one of id or name of tag is required. When both are given, then id will
 
 ```java
 CompletableFuture<Boolean> unassignTagAsync(
-    final ApiRestV2MetadataTagUnassignRequest body)
+    final TspublicRestV2MetadataTagUnassignRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2MetadataTagUnassignRequest`](/doc/models/api-rest-v2-metadata-tag-unassign-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2MetadataTagUnassignRequest`](../../doc/models/tspublic-rest-v2-metadata-tag-unassign-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -272,18 +278,23 @@ CompletableFuture<Boolean> unassignTagAsync(
 ## Example Usage
 
 ```java
-ApiRestV2MetadataTagUnassignRequest body = new ApiRestV2MetadataTagUnassignRequest();
-body.setMetaObject(new LinkedList<>());
+TspublicRestV2MetadataTagUnassignRequest body = new TspublicRestV2MetadataTagUnassignRequest();
+body.setTsObject(new LinkedList<>());
 
-MetaObjectInput bodyMetaObject0 = new MetaObjectInput();
-bodyMetaObject0.setId("id6");
-bodyMetaObject0.setType(TypeEnum.ANSWER);
-body.getMetaObject().add(bodyMetaObject0);
+TsObjectInput bodyTsObject0 = new TsObjectInput();
+bodyTsObject0.setId("id8");
+bodyTsObject0.setType(TypeEnum.DATAOBJECT);
+body.getTsObject().add(bodyTsObject0);
 
-MetaObjectInput bodyMetaObject1 = new MetaObjectInput();
-bodyMetaObject1.setId("id7");
-bodyMetaObject1.setType(TypeEnum.LIVEBOARD);
-body.getMetaObject().add(bodyMetaObject1);
+TsObjectInput bodyTsObject1 = new TsObjectInput();
+bodyTsObject1.setId("id9");
+bodyTsObject1.setType(TypeEnum.CONNECTION);
+body.getTsObject().add(bodyTsObject1);
+
+TsObjectInput bodyTsObject2 = new TsObjectInput();
+bodyTsObject2.setId("id0");
+bodyTsObject2.setType(TypeEnum.ANSWER);
+body.getTsObject().add(bodyTsObject2);
 
 
 metadataController.unassignTagAsync(body).thenAccept(result -> {
@@ -298,7 +309,7 @@ metadataController.unassignTagAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Assign Favorite
@@ -309,14 +320,14 @@ At least one of user id or username is required. When both are given, then id wi
 
 ```java
 CompletableFuture<Boolean> assignFavoriteAsync(
-    final ApiRestV2MetadataFavoriteAssignRequest body)
+    final TspublicRestV2MetadataFavoriteAssignRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2MetadataFavoriteAssignRequest`](/doc/models/api-rest-v2-metadata-favorite-assign-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2MetadataFavoriteAssignRequest`](../../doc/models/tspublic-rest-v2-metadata-favorite-assign-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -325,18 +336,23 @@ CompletableFuture<Boolean> assignFavoriteAsync(
 ## Example Usage
 
 ```java
-ApiRestV2MetadataFavoriteAssignRequest body = new ApiRestV2MetadataFavoriteAssignRequest();
-body.setMetaObject(new LinkedList<>());
+TspublicRestV2MetadataFavoriteAssignRequest body = new TspublicRestV2MetadataFavoriteAssignRequest();
+body.setTsObject(new LinkedList<>());
 
-MetaObjectInput bodyMetaObject0 = new MetaObjectInput();
-bodyMetaObject0.setId("id6");
-bodyMetaObject0.setType(TypeEnum.ANSWER);
-body.getMetaObject().add(bodyMetaObject0);
+TsObjectInput bodyTsObject0 = new TsObjectInput();
+bodyTsObject0.setId("id8");
+bodyTsObject0.setType(TypeEnum.DATAOBJECT);
+body.getTsObject().add(bodyTsObject0);
 
-MetaObjectInput bodyMetaObject1 = new MetaObjectInput();
-bodyMetaObject1.setId("id7");
-bodyMetaObject1.setType(TypeEnum.LIVEBOARD);
-body.getMetaObject().add(bodyMetaObject1);
+TsObjectInput bodyTsObject1 = new TsObjectInput();
+bodyTsObject1.setId("id9");
+bodyTsObject1.setType(TypeEnum.CONNECTION);
+body.getTsObject().add(bodyTsObject1);
+
+TsObjectInput bodyTsObject2 = new TsObjectInput();
+bodyTsObject2.setId("id0");
+bodyTsObject2.setType(TypeEnum.ANSWER);
+body.getTsObject().add(bodyTsObject2);
 
 
 metadataController.assignFavoriteAsync(body).thenAccept(result -> {
@@ -351,7 +367,7 @@ metadataController.assignFavoriteAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Unassign Favorite
@@ -362,14 +378,14 @@ At least one of user id or username is required. When both are given, then id wi
 
 ```java
 CompletableFuture<Boolean> unassignFavoriteAsync(
-    final ApiRestV2MetadataFavoriteUnassignRequest body)
+    final TspublicRestV2MetadataFavoriteUnassignRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2MetadataFavoriteUnassignRequest`](/doc/models/api-rest-v2-metadata-favorite-unassign-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2MetadataFavoriteUnassignRequest`](../../doc/models/tspublic-rest-v2-metadata-favorite-unassign-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -378,18 +394,23 @@ CompletableFuture<Boolean> unassignFavoriteAsync(
 ## Example Usage
 
 ```java
-ApiRestV2MetadataFavoriteUnassignRequest body = new ApiRestV2MetadataFavoriteUnassignRequest();
-body.setMetaObject(new LinkedList<>());
+TspublicRestV2MetadataFavoriteUnassignRequest body = new TspublicRestV2MetadataFavoriteUnassignRequest();
+body.setTsObject(new LinkedList<>());
 
-MetaObjectInput bodyMetaObject0 = new MetaObjectInput();
-bodyMetaObject0.setId("id6");
-bodyMetaObject0.setType(TypeEnum.ANSWER);
-body.getMetaObject().add(bodyMetaObject0);
+TsObjectInput bodyTsObject0 = new TsObjectInput();
+bodyTsObject0.setId("id8");
+bodyTsObject0.setType(TypeEnum.DATAOBJECT);
+body.getTsObject().add(bodyTsObject0);
 
-MetaObjectInput bodyMetaObject1 = new MetaObjectInput();
-bodyMetaObject1.setId("id7");
-bodyMetaObject1.setType(TypeEnum.LIVEBOARD);
-body.getMetaObject().add(bodyMetaObject1);
+TsObjectInput bodyTsObject1 = new TsObjectInput();
+bodyTsObject1.setId("id9");
+bodyTsObject1.setType(TypeEnum.CONNECTION);
+body.getTsObject().add(bodyTsObject1);
+
+TsObjectInput bodyTsObject2 = new TsObjectInput();
+bodyTsObject2.setId("id0");
+bodyTsObject2.setType(TypeEnum.ANSWER);
+body.getTsObject().add(bodyTsObject2);
 
 
 metadataController.unassignFavoriteAsync(body).thenAccept(result -> {
@@ -404,17 +425,17 @@ metadataController.unassignFavoriteAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Get Homeliveboard
+# Get Home Liveboard
 
 To get the name and id of liveboard that is set as a home liveboard for a user, use this endpoint.
 
 At least one of user id or username is required. When both are given, then id will be considered.
 
 ```java
-CompletableFuture<HomeLiveboardResponse> getHomeliveboardAsync(
+CompletableFuture<HomeLiveboardResponse> getHomeLiveboardAsync(
     final String userName,
     final String userId)
 ```
@@ -428,12 +449,12 @@ CompletableFuture<HomeLiveboardResponse> getHomeliveboardAsync(
 
 ## Response Type
 
-[`HomeLiveboardResponse`](/doc/models/home-liveboard-response.md)
+[`HomeLiveboardResponse`](../../doc/models/home-liveboard-response.md)
 
 ## Example Usage
 
 ```java
-metadataController.getHomeliveboardAsync(null, null).thenAccept(result -> {
+metadataController.getHomeLiveboardAsync(null, null).thenAccept(result -> {
     // TODO success callback handler
 }).exceptionally(exception -> {
     // TODO failure callback handler
@@ -445,25 +466,25 @@ metadataController.getHomeliveboardAsync(null, null).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Assign Homeliveboard
+# Assign Home Liveboard
 
 To assign a specific liveboard as a home liveboard for a user, use this endpoint.
 
 At least one of user id or username is required. When both are given, then id will be considered.
 
 ```java
-CompletableFuture<Boolean> assignHomeliveboardAsync(
-    final ApiRestV2MetadataHomeliveboardAssignRequest body)
+CompletableFuture<Boolean> assignHomeLiveboardAsync(
+    final TspublicRestV2MetadataHomeliveboardAssignRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2MetadataHomeliveboardAssignRequest`](/doc/models/api-rest-v2-metadata-homeliveboard-assign-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2MetadataHomeliveboardAssignRequest`](../../doc/models/tspublic-rest-v2-metadata-homeliveboard-assign-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -472,9 +493,9 @@ CompletableFuture<Boolean> assignHomeliveboardAsync(
 ## Example Usage
 
 ```java
-ApiRestV2MetadataHomeliveboardAssignRequest body = new ApiRestV2MetadataHomeliveboardAssignRequest();
+TspublicRestV2MetadataHomeliveboardAssignRequest body = new TspublicRestV2MetadataHomeliveboardAssignRequest();
 
-metadataController.assignHomeliveboardAsync(body).thenAccept(result -> {
+metadataController.assignHomeLiveboardAsync(body).thenAccept(result -> {
     // TODO success callback handler
 }).exceptionally(exception -> {
     // TODO failure callback handler
@@ -486,25 +507,25 @@ metadataController.assignHomeliveboardAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Unassign Homeliveboard
+# Unassign Home Liveboard
 
 To unassign the home liveboard set for a user, use this endpoint.
 
 At least one of user id or username is required. When both are given, then id will be considered.
 
 ```java
-CompletableFuture<Boolean> unassignHomeliveboardAsync(
-    final ApiRestV2MetadataHomeliveboardUnassignRequest body)
+CompletableFuture<Boolean> unassignHomeLiveboardAsync(
+    final TspublicRestV2MetadataHomeliveboardUnassignRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2MetadataHomeliveboardUnassignRequest`](/doc/models/api-rest-v2-metadata-homeliveboard-unassign-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2MetadataHomeliveboardUnassignRequest`](../../doc/models/tspublic-rest-v2-metadata-homeliveboard-unassign-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -513,9 +534,9 @@ CompletableFuture<Boolean> unassignHomeliveboardAsync(
 ## Example Usage
 
 ```java
-ApiRestV2MetadataHomeliveboardUnassignRequest body = new ApiRestV2MetadataHomeliveboardUnassignRequest();
+TspublicRestV2MetadataHomeliveboardUnassignRequest body = new TspublicRestV2MetadataHomeliveboardUnassignRequest();
 
-metadataController.unassignHomeliveboardAsync(body).thenAccept(result -> {
+metadataController.unassignHomeLiveboardAsync(body).thenAccept(result -> {
     // TODO success callback handler
 }).exceptionally(exception -> {
     // TODO failure callback handler
@@ -527,7 +548,7 @@ metadataController.unassignHomeliveboardAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Get Incomplete Objects
@@ -557,15 +578,15 @@ metadataController.getIncompleteObjectsAsync().thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Get Metadata Header
+# Get Object Header
 
 To get header detail of a metadata object, use this endpoint. You can provide as input selective fields to get the data for.
 
 ```java
-CompletableFuture<Object> getMetadataHeaderAsync(
+CompletableFuture<Object> getObjectHeaderAsync(
     final Type8Enum type,
     final String id,
     final List<String> outputFields)
@@ -575,7 +596,7 @@ CompletableFuture<Object> getMetadataHeaderAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `type` | [`Type8Enum`](/doc/models/type-8-enum.md) | Query, Required | Type of the metadata object being searched. |
+| `type` | [`Type8Enum`](../../doc/models/type-8-enum.md) | Query, Required | Type of the metadata object being searched. |
 | `id` | `String` | Query, Required | GUID of the metadata object |
 | `outputFields` | `List<String>` | Query, Optional | Array of header field names that need to be included in the header response |
 
@@ -589,7 +610,7 @@ CompletableFuture<Object> getMetadataHeaderAsync(
 Type8Enum type = Type8Enum.COLUMN_ALL;
 String id = "id0";
 
-metadataController.getMetadataHeaderAsync(type, id, null).thenAccept(result -> {
+metadataController.getObjectHeaderAsync(type, id, null).thenAccept(result -> {
     // TODO success callback handler
 }).exceptionally(exception -> {
     // TODO failure callback handler
@@ -601,7 +622,7 @@ metadataController.getMetadataHeaderAsync(type, id, null).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Get Object Detail
@@ -611,21 +632,15 @@ Use this endpoint to get full details of metadata objects
 ```java
 CompletableFuture<Object> getObjectDetailAsync(
     final Type9Enum type,
-    final List<String> id,
-    final Boolean showHidden,
-    final Boolean dropQuestionDetails,
-    final String version)
+    final List<String> id)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `type` | [`Type9Enum`](/doc/models/type-9-enum.md) | Query, Required | Type of the metadata object being searched. Valid values |
+| `type` | [`Type9Enum`](../../doc/models/type-9-enum.md) | Query, Required | Type of the metadata object being searched. Valid values |
 | `id` | `List<String>` | Query, Required | A JSON array of GUIDs of the objects. |
-| `showHidden` | `Boolean` | Query, Optional | When set to true, returns details of the hidden objects, such as a column in a worksheet or a table. |
-| `dropQuestionDetails` | `Boolean` | Query, Optional | When set to true, the search assist data associated with a worksheet is not included in the API response. This attribute is applicable only for LOGICAL_TABLE data type. |
-| `version` | `String` | Query, Optional | Specify the version to retrieve the objects from. By default, the API returns metadata for all versions of the object. |
 
 ## Response Type
 
@@ -638,7 +653,7 @@ Type9Enum type = Type9Enum.DATAOBJECT;
 List<String> id = new LinkedList<>();
 id.add("id0");
 
-metadataController.getObjectDetailAsync(type, id, null, null, null).thenAccept(result -> {
+metadataController.getObjectDetailAsync(type, id).thenAccept(result -> {
     // TODO success callback handler
 }).exceptionally(exception -> {
     // TODO failure callback handler
@@ -650,7 +665,7 @@ metadataController.getObjectDetailAsync(type, id, null, null, null).thenAccept(r
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Get Object Visualization Header
@@ -691,7 +706,7 @@ metadataController.getObjectVisualizationHeaderAsync(id).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Search Object Header
@@ -700,14 +715,14 @@ To get header details for metadata objects, use this endpoint. You can provide a
 
 ```java
 CompletableFuture<Object> searchObjectHeaderAsync(
-    final ApiRestV2MetadataHeaderSearchRequest body)
+    final TspublicRestV2MetadataHeaderSearchRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2MetadataHeaderSearchRequest`](/doc/models/api-rest-v2-metadata-header-search-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2MetadataHeaderSearchRequest`](../../doc/models/tspublic-rest-v2-metadata-header-search-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -716,7 +731,7 @@ CompletableFuture<Object> searchObjectHeaderAsync(
 ## Example Usage
 
 ```java
-ApiRestV2MetadataHeaderSearchRequest body = new ApiRestV2MetadataHeaderSearchRequest();
+TspublicRestV2MetadataHeaderSearchRequest body = new TspublicRestV2MetadataHeaderSearchRequest();
 body.setType(Type10Enum.USER);
 
 metadataController.searchObjectHeaderAsync(body).thenAccept(result -> {
@@ -731,15 +746,58 @@ metadataController.searchObjectHeaderAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Delete Metadata Object
+# Search Object Detail
+
+Use this endpoint to get full details of metadata objects
+
+```java
+CompletableFuture<Object> searchObjectDetailAsync(
+    final TspublicRestV2MetadataDetailSearchRequest body)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`TspublicRestV2MetadataDetailSearchRequest`](../../doc/models/tspublic-rest-v2-metadata-detail-search-request.md) | Body, Required | - |
+
+## Response Type
+
+`Object`
+
+## Example Usage
+
+```java
+TspublicRestV2MetadataDetailSearchRequest body = new TspublicRestV2MetadataDetailSearchRequest();
+body.setType(Type11Enum.USER);
+body.setId(new LinkedList<>());
+body.getId().add("id6");
+body.getId().add("id7");
+
+metadataController.searchObjectDetailAsync(body).thenAccept(result -> {
+    // TODO success callback handler
+}).exceptionally(exception -> {
+    // TODO failure callback handler
+    return null;
+});
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+
+
+# Delete Object
 
 Use this endpoint to delete the metadata objects
 
 ```java
-CompletableFuture<Boolean> deleteMetadataObjectAsync(
+CompletableFuture<Boolean> deleteObjectAsync(
     final Type9Enum type,
     final List<String> id)
 ```
@@ -748,7 +806,7 @@ CompletableFuture<Boolean> deleteMetadataObjectAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `type` | [`Type9Enum`](/doc/models/type-9-enum.md) | Query, Required | Type of the metadata object being searched. |
+| `type` | [`Type9Enum`](../../doc/models/type-9-enum.md) | Query, Required | Type of the metadata object being searched. |
 | `id` | `List<String>` | Query, Required | A JSON array of GUIDs of the objects. |
 
 ## Response Type
@@ -762,7 +820,7 @@ Type9Enum type = Type9Enum.DATAOBJECT;
 List<String> id = new LinkedList<>();
 id.add("id0");
 
-metadataController.deleteMetadataObjectAsync(type, id).thenAccept(result -> {
+metadataController.deleteObjectAsync(type, id).thenAccept(result -> {
     // TODO success callback handler
 }).exceptionally(exception -> {
     // TODO failure callback handler
@@ -774,7 +832,7 @@ metadataController.deleteMetadataObjectAsync(type, id).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Get Object Dependency
@@ -793,14 +851,14 @@ Similarly C1 is said to have a dependency on C2 i.e. C1 is a referencing object 
 
 ```java
 CompletableFuture<Object> getObjectDependencyAsync(
-    final ApiRestV2MetadataDependencyRequest body)
+    final TspublicRestV2MetadataDependencyRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2MetadataDependencyRequest`](/doc/models/api-rest-v2-metadata-dependency-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2MetadataDependencyRequest`](../../doc/models/tspublic-rest-v2-metadata-dependency-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -809,8 +867,8 @@ CompletableFuture<Object> getObjectDependencyAsync(
 ## Example Usage
 
 ```java
-ApiRestV2MetadataDependencyRequest body = new ApiRestV2MetadataDependencyRequest();
-body.setType(Type12Enum.COLUMN);
+TspublicRestV2MetadataDependencyRequest body = new TspublicRestV2MetadataDependencyRequest();
+body.setType(Type13Enum.COLUMN);
 body.setId(new LinkedList<>());
 body.getId().add("id6");
 body.getId().add("id7");
@@ -827,7 +885,7 @@ metadataController.getObjectDependencyAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Export Object TML
@@ -836,14 +894,14 @@ To export ThoughtSpot objects represented in ThoughtSpot Modeling Language (TML)
 
 ```java
 CompletableFuture<Object> exportObjectTMLAsync(
-    final ApiRestV2MetadataTmlExportRequest body)
+    final TspublicRestV2MetadataTmlExportRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2MetadataTmlExportRequest`](/doc/models/api-rest-v2-metadata-tml-export-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2MetadataTmlExportRequest`](../../doc/models/tspublic-rest-v2-metadata-tml-export-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -852,7 +910,7 @@ CompletableFuture<Object> exportObjectTMLAsync(
 ## Example Usage
 
 ```java
-ApiRestV2MetadataTmlExportRequest body = new ApiRestV2MetadataTmlExportRequest();
+TspublicRestV2MetadataTmlExportRequest body = new TspublicRestV2MetadataTmlExportRequest();
 body.setId(new LinkedList<>());
 body.getId().add("id6");
 body.getId().add("id7");
@@ -869,7 +927,7 @@ metadataController.exportObjectTMLAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Import Object TML
@@ -878,14 +936,14 @@ To import ThoughtSpot objects represented in ThoughtSpot Modeling Language (TML)
 
 ```java
 CompletableFuture<Object> importObjectTMLAsync(
-    final ApiRestV2MetadataTmlImportRequest body)
+    final TspublicRestV2MetadataTmlImportRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2MetadataTmlImportRequest`](/doc/models/api-rest-v2-metadata-tml-import-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2MetadataTmlImportRequest`](../../doc/models/tspublic-rest-v2-metadata-tml-import-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -894,7 +952,7 @@ CompletableFuture<Object> importObjectTMLAsync(
 ## Example Usage
 
 ```java
-ApiRestV2MetadataTmlImportRequest body = new ApiRestV2MetadataTmlImportRequest();
+TspublicRestV2MetadataTmlImportRequest body = new TspublicRestV2MetadataTmlImportRequest();
 body.setObjectTML(new LinkedList<>());
 body.getObjectTML().add("objectTML5");
 body.getObjectTML().add("objectTML6");
@@ -911,5 +969,5 @@ metadataController.importObjectTMLAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 

@@ -26,16 +26,22 @@ public interface Configuration {
     String getBaseUrl();
 
     /**
-     * body content type for post request.
-     * @return a copy of contentType
+     * Mandatory header with value Thougtspot to accept the external RestAPI requests.
+     * @return a copy of xRequestedBy
      */
-    String getContentType();
+    String getXRequestedBy();
 
     /**
      * response format.
      * @return a copy of acceptLanguage
      */
     String getAcceptLanguage();
+
+    /**
+     * body content type for post request.
+     * @return a copy of contentType
+     */
+    String getContentType();
 
     /**
      * Http Client Configuration instance.

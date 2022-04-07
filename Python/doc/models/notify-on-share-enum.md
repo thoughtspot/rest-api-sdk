@@ -11,6 +11,6 @@ User preference for receiving email notifications when another ThoughtSpot user 
 
 | Name |
 |  --- |
-| `ENUM_TRUE` |
-| `ENUM_FALSE` |
+| `TRUE` |
+| `FALSE` |
 

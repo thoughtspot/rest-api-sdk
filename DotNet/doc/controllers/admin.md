@@ -10,12 +10,12 @@ AdminController adminController = client.AdminController;
 
 ## Methods
 
-* [Get Cluster Config](/doc/controllers/admin.md#get-cluster-config)
-* [Get Cluster Config Overrides](/doc/controllers/admin.md#get-cluster-config-overrides)
-* [Update Cluster Config](/doc/controllers/admin.md#update-cluster-config)
-* [Reset User Password](/doc/controllers/admin.md#reset-user-password)
-* [Sync Principal](/doc/controllers/admin.md#sync-principal)
-* [Change Owner of Objects](/doc/controllers/admin.md#change-owner-of-objects)
+* [Get Cluster Config](../../doc/controllers/admin.md#get-cluster-config)
+* [Get Cluster Config Overrides](../../doc/controllers/admin.md#get-cluster-config-overrides)
+* [Update Cluster Config](../../doc/controllers/admin.md#update-cluster-config)
+* [Reset User Password](../../doc/controllers/admin.md#reset-user-password)
+* [Sync Principal](../../doc/controllers/admin.md#sync-principal)
+* [Change Owner of Objects](../../doc/controllers/admin.md#change-owner-of-objects)
 
 
 # Get Cluster Config
@@ -44,7 +44,7 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Get Cluster Config Overrides
@@ -73,7 +73,7 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Update Cluster Config
@@ -82,14 +82,14 @@ To update the Thoughtspot cluster configuration, use this endpoint.
 
 ```csharp
 UpdateClusterConfigAsync(
-    Models.ApiRestV2AdminConfigurationUpdateRequest body)
+    Models.TspublicRestV2AdminConfigurationUpdateRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.ApiRestV2AdminConfigurationUpdateRequest`](/doc/models/api-rest-v2-admin-configuration-update-request.md) | Body, Required | - |
+| `body` | [`Models.TspublicRestV2AdminConfigurationUpdateRequest`](../../doc/models/tspublic-rest-v2-admin-configuration-update-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -98,7 +98,7 @@ UpdateClusterConfigAsync(
 ## Example Usage
 
 ```csharp
-var body = new ApiRestV2AdminConfigurationUpdateRequest();
+var body = new TspublicRestV2AdminConfigurationUpdateRequest();
 
 try
 {
@@ -111,7 +111,7 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Reset User Password
@@ -124,14 +124,14 @@ At least one of User Id or username is mandatory. When both are given, then user
 
 ```csharp
 ResetUserPasswordAsync(
-    Models.ApiRestV2AdminResetpasswordRequest body)
+    Models.TspublicRestV2AdminResetpasswordRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.ApiRestV2AdminResetpasswordRequest`](/doc/models/api-rest-v2-admin-resetpassword-request.md) | Body, Required | - |
+| `body` | [`Models.TspublicRestV2AdminResetpasswordRequest`](../../doc/models/tspublic-rest-v2-admin-resetpassword-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -140,7 +140,7 @@ ResetUserPasswordAsync(
 ## Example Usage
 
 ```csharp
-var body = new ApiRestV2AdminResetpasswordRequest();
+var body = new TspublicRestV2AdminResetpasswordRequest();
 body.NewPassword = "newPassword0";
 
 try
@@ -154,7 +154,7 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Sync Principal
@@ -170,24 +170,24 @@ n You can optionally choose to delete the user and groups from the cluster, that
 
 ```csharp
 SyncPrincipalAsync(
-    Models.ApiRestV2AdminSyncprincipalRequest body)
+    Models.TspublicRestV2AdminSyncprincipalRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.ApiRestV2AdminSyncprincipalRequest`](/doc/models/api-rest-v2-admin-syncprincipal-request.md) | Body, Required | - |
+| `body` | [`Models.TspublicRestV2AdminSyncprincipalRequest`](../../doc/models/tspublic-rest-v2-admin-syncprincipal-request.md) | Body, Required | - |
 
 ## Response Type
 
-[`Task<Models.AdminsyncPrincipalResponse>`](/doc/models/adminsync-principal-response.md)
+[`Task<Models.AdminsyncPrincipalResponse>`](../../doc/models/adminsync-principal-response.md)
 
 ## Example Usage
 
 ```csharp
-var body = new ApiRestV2AdminSyncprincipalRequest();
-body.PrincipalObject = new List<object>();
+var body = new TspublicRestV2AdminSyncprincipalRequest();
+body.PrincipalObject = new object();
 body.PrincipalObject.Add(ApiHelper.JsonDeserialize<Object>("{\"key1\":\"val1\",\"key2\":\"val2\"}"));
 
 try
@@ -201,7 +201,7 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Change Owner of Objects
@@ -212,14 +212,14 @@ You might want to transfer ownership of objects owned by a user to another activ
 
 ```csharp
 ChangeOwnerOfObjectsAsync(
-    Models.ApiRestV2AdminChangeownerRequest body)
+    Models.TspublicRestV2AdminChangeownerRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.ApiRestV2AdminChangeownerRequest`](/doc/models/api-rest-v2-admin-changeowner-request.md) | Body, Required | - |
+| `body` | [`Models.TspublicRestV2AdminChangeownerRequest`](../../doc/models/tspublic-rest-v2-admin-changeowner-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -228,11 +228,9 @@ ChangeOwnerOfObjectsAsync(
 ## Example Usage
 
 ```csharp
-var body = new ApiRestV2AdminChangeownerRequest();
-body.MetaObjectId = new List<string>();
-body.MetaObjectId.Add("metaObjectId9");
-body.MetaObjectId.Add("metaObjectId0");
-body.MetaObjectId.Add("metaObjectId1");
+var body = new TspublicRestV2AdminChangeownerRequest();
+body.TsObjectId = new List<string>();
+body.TsObjectId.Add("tsObjectId7");
 body.FromUser = new FromUserNameAndIDInput();
 body.ToUser = new ToUserNameAndIDInput();
 
@@ -247,5 +245,5 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 

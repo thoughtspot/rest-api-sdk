@@ -10,12 +10,12 @@ const adminController = new AdminController(client);
 
 ## Methods
 
-* [Get Cluster Config](/doc/controllers/admin.md#get-cluster-config)
-* [Get Cluster Config Overrides](/doc/controllers/admin.md#get-cluster-config-overrides)
-* [Update Cluster Config](/doc/controllers/admin.md#update-cluster-config)
-* [Reset User Password](/doc/controllers/admin.md#reset-user-password)
-* [Sync Principal](/doc/controllers/admin.md#sync-principal)
-* [Change Owner of Objects](/doc/controllers/admin.md#change-owner-of-objects)
+* [Get Cluster Config](../../doc/controllers/admin.md#get-cluster-config)
+* [Get Cluster Config Overrides](../../doc/controllers/admin.md#get-cluster-config-overrides)
+* [Update Cluster Config](../../doc/controllers/admin.md#update-cluster-config)
+* [Reset User Password](../../doc/controllers/admin.md#reset-user-password)
+* [Sync Principal](../../doc/controllers/admin.md#sync-principal)
+* [Change Owner of Objects](../../doc/controllers/admin.md#change-owner-of-objects)
 
 
 # Get Cluster Config
@@ -57,7 +57,7 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
 # Get Cluster Config Overrides
@@ -99,7 +99,7 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
 # Update Cluster Config
@@ -108,7 +108,7 @@ To update the Thoughtspot cluster configuration, use this endpoint.
 
 ```ts
 async updateClusterConfig(
-  body: ApiRestV2AdminConfigurationUpdateRequest,
+  body: TspublicRestV2AdminConfigurationUpdateRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<boolean>>
 ```
@@ -117,7 +117,7 @@ async updateClusterConfig(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2AdminConfigurationUpdateRequest`](/doc/models/api-rest-v2-admin-configuration-update-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2AdminConfigurationUpdateRequest`](../../doc/models/tspublic-rest-v2-admin-configuration-update-request.md) | Body, Required | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -128,7 +128,7 @@ async updateClusterConfig(
 
 ```ts
 const contentType = null;
-const body: ApiRestV2AdminConfigurationUpdateRequest = {};
+const body: TspublicRestV2AdminConfigurationUpdateRequest = {};
 
 try {
   const { result, ...httpResponse } = await adminController.updateClusterConfig(body);
@@ -146,7 +146,7 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
 # Reset User Password
@@ -159,7 +159,7 @@ At least one of User Id or username is mandatory. When both are given, then user
 
 ```ts
 async resetUserPassword(
-  body: ApiRestV2AdminResetpasswordRequest,
+  body: TspublicRestV2AdminResetpasswordRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<boolean>>
 ```
@@ -168,7 +168,7 @@ async resetUserPassword(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2AdminResetpasswordRequest`](/doc/models/api-rest-v2-admin-resetpassword-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2AdminResetpasswordRequest`](../../doc/models/tspublic-rest-v2-admin-resetpassword-request.md) | Body, Required | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -179,7 +179,7 @@ async resetUserPassword(
 
 ```ts
 const contentType = null;
-const body: ApiRestV2AdminResetpasswordRequest = {
+const body: TspublicRestV2AdminResetpasswordRequest = {
   newPassword: 'newPassword0',
 };
 
@@ -199,7 +199,7 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
 # Sync Principal
@@ -215,7 +215,7 @@ n You can optionally choose to delete the user and groups from the cluster, that
 
 ```ts
 async syncPrincipal(
-  body: ApiRestV2AdminSyncprincipalRequest,
+  body: TspublicRestV2AdminSyncprincipalRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<AdminsyncPrincipalResponse>>
 ```
@@ -224,19 +224,19 @@ async syncPrincipal(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2AdminSyncprincipalRequest`](/doc/models/api-rest-v2-admin-syncprincipal-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2AdminSyncprincipalRequest`](../../doc/models/tspublic-rest-v2-admin-syncprincipal-request.md) | Body, Required | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
 
-[`AdminsyncPrincipalResponse`](/doc/models/adminsync-principal-response.md)
+[`AdminsyncPrincipalResponse`](../../doc/models/adminsync-principal-response.md)
 
 ## Example Usage
 
 ```ts
 const contentType = null;
-const bodyPrincipalObject: string[] = ['principalObject0'];
-const body: ApiRestV2AdminSyncprincipalRequest = {
+const bodyPrincipalObject: unknown[] = ['{"key1":"val1","key2":"val2"}'];
+const body: TspublicRestV2AdminSyncprincipalRequest = {
   principalObject: bodyPrincipalObject,
 };
 
@@ -256,7 +256,7 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
 # Change Owner of Objects
@@ -267,7 +267,7 @@ You might want to transfer ownership of objects owned by a user to another activ
 
 ```ts
 async changeOwnerOfObjects(
-  body: ApiRestV2AdminChangeownerRequest,
+  body: TspublicRestV2AdminChangeownerRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<boolean>>
 ```
@@ -276,7 +276,7 @@ async changeOwnerOfObjects(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2AdminChangeownerRequest`](/doc/models/api-rest-v2-admin-changeowner-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2AdminChangeownerRequest`](../../doc/models/tspublic-rest-v2-admin-changeowner-request.md) | Body, Required | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -287,13 +287,13 @@ async changeOwnerOfObjects(
 
 ```ts
 const contentType = null;
-const bodyMetaObjectId: string[] = ['metaObjectId9', 'metaObjectId0', 'metaObjectId1'];
+const bodyTsObjectId: string[] = ['tsObjectId7'];
 const bodyFromUser: FromUserNameAndIDInput = {};
 
 const bodyToUser: ToUserNameAndIDInput = {};
 
-const body: ApiRestV2AdminChangeownerRequest = {
-  metaObjectId: bodyMetaObjectId,
+const body: TspublicRestV2AdminChangeownerRequest = {
+  tsObjectId: bodyTsObjectId,
   fromUser: bodyFromUser,
   toUser: bodyToUser,
 };
@@ -314,5 +314,5 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](/doc/models/error-response-error.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 

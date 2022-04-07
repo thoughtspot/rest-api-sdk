@@ -12,9 +12,7 @@ import dateutil.parser
 
 from tests.controllers.controller_test_base import ControllerTestBase
 from tests.test_helper import TestHelper
-from tests.http_response_catcher import HttpResponseCatcher
 from restapisdk.api_helper import APIHelper
-from restapisdk.controllers.group_controller import GroupController
 
 
 class GroupControllerTests(ControllerTestBase):
@@ -22,8 +20,8 @@ class GroupControllerTests(ControllerTestBase):
     @classmethod
     def setUpClass(cls):
         super(GroupControllerTests, cls).setUpClass()
-        cls.response_catcher = HttpResponseCatcher()
-        cls.controller = GroupController(cls.config, cls.auth_managers, cls.response_catcher)
+        cls.controller = cls.client.group
+        cls.response_catcher = cls.controller.http_call_back
 
     # To get the details of a specific group by name or id, use this endpoint. 
     #

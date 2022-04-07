@@ -10,11 +10,11 @@ database_controller = client.database
 
 ## Methods
 
-* [Get Databases](/doc/controllers/database.md#get-databases)
-* [Get Schemas](/doc/controllers/database.md#get-schemas)
-* [Get Tables](/doc/controllers/database.md#get-tables)
-* [Create Table](/doc/controllers/database.md#create-table)
-* [Run Query](/doc/controllers/database.md#run-query)
+* [Get Databases](../../doc/controllers/database.md#get-databases)
+* [Get Schemas](../../doc/controllers/database.md#get-schemas)
+* [Get Tables](../../doc/controllers/database.md#get-tables)
+* [Create Table](../../doc/controllers/database.md#create-table)
+* [Run Query](../../doc/controllers/database.md#run-query)
 
 
 # Get Databases
@@ -41,7 +41,7 @@ result = database_controller.get_databases()
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Get Schemas
@@ -77,7 +77,7 @@ result = database_controller.get_schemas(database)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Get Tables
@@ -116,7 +116,7 @@ result = database_controller.get_tables(database, schema)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Create Table
@@ -134,16 +134,16 @@ def create_table(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2DatabaseTableCreateRequest`](/doc/models/api-rest-v2-database-table-create-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2DatabaseTableCreateRequest`](../../doc/models/tspublic-rest-v2-database-table-create-request.md) | Body, Required | - |
 
 ## Response Type
 
-[`CreateTableResponse`](/doc/models/create-table-response.md)
+[`CreateTableResponse`](../../doc/models/create-table-response.md)
 
 ## Example Usage
 
 ```python
-body = ApiRestV2DatabaseTableCreateRequest()
+body = TspublicRestV2DatabaseTableCreateRequest()
 
 result = database_controller.create_table(body)
 ```
@@ -152,7 +152,7 @@ result = database_controller.create_table(body)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
 # Run Query
@@ -172,7 +172,7 @@ def run_query(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ApiRestV2DatabaseTableRunqueryRequest`](/doc/models/api-rest-v2-database-table-runquery-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2DatabaseTableRunqueryRequest`](../../doc/models/tspublic-rest-v2-database-table-runquery-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -181,7 +181,7 @@ def run_query(self,
 ## Example Usage
 
 ```python
-body = ApiRestV2DatabaseTableRunqueryRequest()
+body = TspublicRestV2DatabaseTableRunqueryRequest()
 body.statement = ['statement6', 'statement7']
 
 result = database_controller.run_query(body)
@@ -191,5 +191,5 @@ result = database_controller.run_query(body)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](/doc/models/error-response-exception.md) |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
