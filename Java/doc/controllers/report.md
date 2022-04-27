@@ -42,7 +42,7 @@ CompletableFuture<InputStream> answerReportAsync(
 ```java
 TspublicRestV2ReportAnswerRequest body = new TspublicRestV2ReportAnswerRequest();
 body.setId("id6");
-body.setType(Type17Enum.PDF);
+body.setType(AnswerReportTypeEnum.PDF);
 
 reportController.answerReportAsync(body).thenAccept(result -> {
     // TODO success callback handler
@@ -84,7 +84,7 @@ CompletableFuture<InputStream> liveboardReportAsync(
 
 ```java
 TspublicRestV2ReportLiveboardRequest body = new TspublicRestV2ReportLiveboardRequest();
-body.setType(Type17Enum.PDF);
+body.setType(LiveboardReportTypeEnum.PDF);
 
 reportController.liveboardReportAsync(body).thenAccept(result -> {
     // TODO success callback handler

@@ -45,7 +45,7 @@ def share_object(self,
 
 ```python
 body = TspublicRestV2SecurityShareTsobjectRequest()
-body.mtype = Type19Enum.DATAOBJECT
+body.mtype = ShareObjectTypeEnum.DATAOBJECT
 body.id = ['id6', 'id7']
 body.permission = 'permission8'
 
@@ -120,7 +120,7 @@ def get_permission_on_object(self,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `id` | `string` | Query, Required | GUID of the metadata object for which the permission needs to be obtained. |
-| `mtype` | [`Type20Enum`](../../doc/models/type-20-enum.md) | Query, Required | Type of metadata object |
+| `mtype` | [`GetPermissionOnObjectTypeEnum`](../../doc/models/get-permission-on-object-type-enum.md) | Query, Required | Type of metadata object |
 | `include_dependent` | `bool` | Query, Optional | When this field is set to true, the API response includes the permission details for the dependent objects. |
 
 ## Response Type
@@ -131,7 +131,7 @@ def get_permission_on_object(self,
 
 ```python
 id = 'id0'
-mtype = Type20Enum.DATAOBJECT
+mtype = GetPermissionOnObjectTypeEnum.DATAOBJECT
 
 result = security_controller.get_permission_on_object(id, mtype)
 ```
@@ -215,15 +215,15 @@ body = TspublicRestV2SecurityPermissionTsobjectSearchRequest()
 body.ts_object = []
 
 body.ts_object.append(TsObjectSearchInput())
-body.ts_object[0].mtype = Type2Enum.DATAOBJECT
+body.ts_object[0].mtype = TsObjectSearchInputTypeEnum.DATAOBJECT
 body.ts_object[0].id = ['id8', 'id9']
 
 body.ts_object.append(TsObjectSearchInput())
-body.ts_object[1].mtype = Type2Enum.COLUMN
+body.ts_object[1].mtype = TsObjectSearchInputTypeEnum.COLUMN
 body.ts_object[1].id = ['id9', 'id0', 'id1']
 
 body.ts_object.append(TsObjectSearchInput())
-body.ts_object[2].mtype = Type2Enum.LIVEBOARD
+body.ts_object[2].mtype = TsObjectSearchInputTypeEnum.LIVEBOARD
 body.ts_object[2].id = ['id0']
 
 

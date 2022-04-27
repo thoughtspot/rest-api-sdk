@@ -25,7 +25,7 @@ Permission: Requires administration privilege
 
 ```csharp
 GetLogEventsAsync(
-    Models.TopicEnum topic,
+    Models.GetLogEventsTopicEnum topic,
     string fromEpoch = null,
     string toEpoch = null)
 ```
@@ -34,7 +34,7 @@ GetLogEventsAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `topic` | [`Models.TopicEnum`](../../doc/models/topic-enum.md) | Query, Required | Type of the log. |
+| `topic` | [`Models.GetLogEventsTopicEnum`](../../doc/models/get-log-events-topic-enum.md) | Query, Required | Type of the log. |
 | `fromEpoch` | `string` | Query, Optional | The EPOCH time in milliseconds to set the start time for streaming logs.<br><br>Example: To set the timestamp as June 1, 2021 8 am, specify 1622534400000. |
 | `toEpoch` | `string` | Query, Optional | The EPOCH time in milliseconds to set the end time for streaming logs.<br><br>Example: To set the timestamp as July 1, 2021, 8 am, specify 1625126400000. |
 
@@ -45,7 +45,7 @@ GetLogEventsAsync(
 ## Example Usage
 
 ```csharp
-TopicEnum topic = TopicEnum.SecurityLogs;
+GetLogEventsTopicEnum topic = GetLogEventsTopicEnum.SecurityLogs;
 
 try
 {

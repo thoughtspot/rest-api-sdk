@@ -56,7 +56,7 @@ namespace RESTAPISDK.Tests
         public async Task TestTestGetLogEvents()
         {
             // Parameters for the API call
-            Standard.Models.TopicEnum topic = ApiHelper.JsonDeserialize<Standard.Models.TopicEnum>("\"security_logs\"");
+            Standard.Models.GetLogEventsTopicEnum topic = ApiHelper.JsonDeserialize<Standard.Models.GetLogEventsTopicEnum>("\"security_logs\"");
             string fromEpoch = null;
             string toEpoch = null;
 

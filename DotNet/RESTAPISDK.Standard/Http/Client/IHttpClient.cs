@@ -8,6 +8,7 @@ namespace RESTAPISDK.Standard.Http.Client
     using System.Threading;
     using System.Threading.Tasks;
     using RESTAPISDK.Standard.Http.Request;
+    using RESTAPISDK.Standard.Http.Request.Configuration;
     using RESTAPISDK.Standard.Http.Response;
 
     /// <summary>
@@ -33,31 +34,35 @@ namespace RESTAPISDK.Standard.Http.Client
         /// Execute a given HttpRequest to get string response back.
         /// </summary>
         /// <param name="request">The given HttpRequest to execute.</param>
+        /// <param name="retryConfiguration">The <see cref="RetryConfiguration"/> for request.</param>
         /// <returns> HttpResponse containing raw information.</returns>
-        HttpStringResponse ExecuteAsString(HttpRequest request);
+        HttpStringResponse ExecuteAsString(HttpRequest request, RetryConfiguration retryConfiguration = null);
 
         /// <summary>
         /// Execute a given HttpRequest to get binary response back.
         /// </summary>
         /// <param name="request">The given HttpRequest to execute.</param>
+        /// <param name="retryConfiguration">The <see cref="RetryConfiguration"/> for request.</param>
         /// <returns> HttpResponse containing raw information.</returns>
-        HttpResponse ExecuteAsBinary(HttpRequest request);
+        HttpResponse ExecuteAsBinary(HttpRequest request, RetryConfiguration retryConfiguration = null);
 
         /// <summary>
         /// Execute a given HttpRequest to get async string response back.
         /// </summary>
         /// <param name="request">The given HttpRequest to execute.</param>
         /// <param name="cancellationToken">CancellationToken.</param>
+        /// <param name="retryConfiguration">The <see cref="RetryConfiguration"/> for request.</param>
         /// <returns> HttpResponse containing raw information.</returns>
-        Task<HttpStringResponse> ExecuteAsStringAsync(HttpRequest request, CancellationToken cancellationToken = default);
+        Task<HttpStringResponse> ExecuteAsStringAsync(HttpRequest request, RetryConfiguration retryConfiguration = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Execute a given HttpRequest to get async binary response back.
         /// </summary>
         /// <param name="request">The given HttpRequest to execute.</param>
         /// <param name="cancellationToken">CancellationToken.</param>
+        /// <param name="retryConfiguration">The <see cref="RetryConfiguration"/> for request.</param>
         /// <returns> HttpResponse containing raw information.</returns>
-        Task<HttpResponse> ExecuteAsBinaryAsync(HttpRequest request, CancellationToken cancellationToken = default);
+        Task<HttpResponse> ExecuteAsBinaryAsync(HttpRequest request, RetryConfiguration retryConfiguration = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Create a simple HTTP GET request given the URL.

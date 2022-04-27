@@ -24,13 +24,13 @@ import localhost.http.client.HttpContext;
 import localhost.http.request.HttpRequest;
 import localhost.http.response.HttpResponse;
 import localhost.http.response.HttpStringResponse;
+import localhost.models.GetPermissionOnObjectTypeEnum;
 import localhost.models.PrincipalSearchResponse;
 import localhost.models.SecurityPermissionResponse;
 import localhost.models.TspublicRestV2SecurityPermissionPrincipalSearchRequest;
 import localhost.models.TspublicRestV2SecurityPermissionTsobjectSearchRequest;
 import localhost.models.TspublicRestV2SecurityShareTsobjectRequest;
 import localhost.models.TspublicRestV2SecurityShareVisualizationRequest;
-import localhost.models.Type20Enum;
 
 /**
  * This class lists all the endpoints of the groups.
@@ -280,7 +280,7 @@ public final class SecurityController extends BaseController {
      */
     public SecurityPermissionResponse getPermissionOnObject(
             final String id,
-            final Type20Enum type,
+            final GetPermissionOnObjectTypeEnum type,
             final Boolean includeDependent) throws ApiException, IOException {
         HttpRequest request = buildGetPermissionOnObjectRequest(id, type, includeDependent);
         authManagers.get("global").apply(request);
@@ -305,7 +305,7 @@ public final class SecurityController extends BaseController {
      */
     public CompletableFuture<SecurityPermissionResponse> getPermissionOnObjectAsync(
             final String id,
-            final Type20Enum type,
+            final GetPermissionOnObjectTypeEnum type,
             final Boolean includeDependent) {
         return makeHttpCallAsync(() -> buildGetPermissionOnObjectRequest(id, type,
                 includeDependent),
@@ -320,7 +320,7 @@ public final class SecurityController extends BaseController {
      */
     private HttpRequest buildGetPermissionOnObjectRequest(
             final String id,
-            final Type20Enum type,
+            final GetPermissionOnObjectTypeEnum type,
             final Boolean includeDependent) {
         //validating required parameters
         if (null == id) {

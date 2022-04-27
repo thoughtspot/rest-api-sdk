@@ -25,7 +25,7 @@ Permission: Requires administration privilege
 
 ```ts
 async getLogEvents(
-  topic: TopicEnum,
+  topic: GetLogEventsTopicEnum,
   fromEpoch?: string,
   toEpoch?: string,
   requestOptions?: RequestOptions
@@ -36,7 +36,7 @@ async getLogEvents(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `topic` | [`TopicEnum`](../../doc/models/topic-enum.md) | Query, Required | Type of the log. |
+| `topic` | [`GetLogEventsTopicEnum`](../../doc/models/get-log-events-topic-enum.md) | Query, Required | Type of the log. |
 | `fromEpoch` | `string \| undefined` | Query, Optional | The EPOCH time in milliseconds to set the start time for streaming logs.<br><br>Example: To set the timestamp as June 1, 2021 8 am, specify 1622534400000. |
 | `toEpoch` | `string \| undefined` | Query, Optional | The EPOCH time in milliseconds to set the end time for streaming logs.<br><br>Example: To set the timestamp as July 1, 2021, 8 am, specify 1625126400000. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |

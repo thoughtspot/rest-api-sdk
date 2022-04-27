@@ -42,7 +42,7 @@ AnswerReportAsync(
 ```csharp
 var body = new TspublicRestV2ReportAnswerRequest();
 body.Id = "id6";
-body.Type = Type17Enum.PDF;
+body.Type = AnswerReportTypeEnum.PDF;
 
 try
 {
@@ -83,7 +83,7 @@ LiveboardReportAsync(
 
 ```csharp
 var body = new TspublicRestV2ReportLiveboardRequest();
-body.Type = Type17Enum.PDF;
+body.Type = LiveboardReportTypeEnum.PDF;
 
 try
 {

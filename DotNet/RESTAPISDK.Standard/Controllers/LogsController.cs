@@ -18,6 +18,7 @@ namespace RESTAPISDK.Standard.Controllers
     using RESTAPISDK.Standard.Exceptions;
     using RESTAPISDK.Standard.Http.Client;
     using RESTAPISDK.Standard.Http.Request;
+    using RESTAPISDK.Standard.Http.Request.Configuration;
     using RESTAPISDK.Standard.Http.Response;
     using RESTAPISDK.Standard.Utilities;
 
@@ -51,7 +52,7 @@ namespace RESTAPISDK.Standard.Controllers
         /// <param name="toEpoch">Optional parameter: The EPOCH time in milliseconds to set the end time for streaming logs.    Example: To set the timestamp as July 1, 2021, 8 am, specify 1625126400000..</param>
         /// <returns>Returns the Models.LogsResponse response from the API call.</returns>
         public Models.LogsResponse GetLogEvents(
-                Models.TopicEnum topic,
+                Models.GetLogEventsTopicEnum topic,
                 string fromEpoch = null,
                 string toEpoch = null)
         {
@@ -74,7 +75,7 @@ namespace RESTAPISDK.Standard.Controllers
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.LogsResponse response from the API call.</returns>
         public async Task<Models.LogsResponse> GetLogEventsAsync(
-                Models.TopicEnum topic,
+                Models.GetLogEventsTopicEnum topic,
                 string fromEpoch = null,
                 string toEpoch = null,
                 CancellationToken cancellationToken = default)
@@ -114,7 +115,7 @@ namespace RESTAPISDK.Standard.Controllers
             httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
 
             // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
             HttpContext context = new HttpContext(httpRequest, response);
             if (this.HttpCallBack != null)
             {

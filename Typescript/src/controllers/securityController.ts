@@ -7,6 +7,10 @@
 import { ApiResponse, RequestOptions } from '../core';
 import { ErrorResponseError } from '../errors/errorResponseError';
 import {
+  GetPermissionOnObjectTypeEnum,
+  getPermissionOnObjectTypeEnumSchema,
+} from '../models/getPermissionOnObjectTypeEnum';
+import {
   PrincipalSearchResponse,
   principalSearchResponseSchema,
 } from '../models/principalSearchResponse';
@@ -30,7 +34,6 @@ import {
   TspublicRestV2SecurityShareVisualizationRequest,
   tspublicRestV2SecurityShareVisualizationRequestSchema,
 } from '../models/tspublicRestV2SecurityShareVisualizationRequest';
-import { Type20Enum, type20EnumSchema } from '../models/type20Enum';
 import { array, boolean, optional, string } from '../schema';
 import { BaseController } from './baseController';
 
@@ -101,15 +104,16 @@ export class SecurityController extends BaseController {
    *
    * Requires administration privilege
    *
-   * @param id               GUID of the metadata object for which the permission needs to be obtained.
+   * @param id               GUID of the metadata object for which the permission
+   *                                                          needs to be obtained.
    * @param type             Type of metadata object
-   * @param includeDependent When this field is set to true, the API response includes the permission
-   *                                       details for the dependent objects.
+   * @param includeDependent When this field is set to true, the API response
+   *                                                          includes the permission details for the dependent objects.
    * @return Response from the API call
    */
   async getPermissionOnObject(
     id: string,
-    type: Type20Enum,
+    type: GetPermissionOnObjectTypeEnum,
     includeDependent?: boolean,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<SecurityPermissionResponse>> {
@@ -119,7 +123,7 @@ export class SecurityController extends BaseController {
     );
     const mapped = req.prepareArgs({
       id: [id, string()],
-      type: [type, type20EnumSchema],
+      type: [type, getPermissionOnObjectTypeEnumSchema],
       includeDependent: [includeDependent, optional(boolean())],
     });
     req.query('id', mapped.id);

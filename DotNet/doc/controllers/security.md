@@ -45,7 +45,7 @@ ShareObjectAsync(
 
 ```csharp
 var body = new TspublicRestV2SecurityShareTsobjectRequest();
-body.Type = Type19Enum.DATAOBJECT;
+body.Type = ShareObjectTypeEnum.DATAOBJECT;
 body.Id = new List<string>();
 body.Id.Add("id6");
 body.Id.Add("id7");
@@ -123,7 +123,7 @@ Requires administration privilege
 ```csharp
 GetPermissionOnObjectAsync(
     string id,
-    Models.Type20Enum type,
+    Models.GetPermissionOnObjectTypeEnum type,
     bool? includeDependent = null)
 ```
 
@@ -132,7 +132,7 @@ GetPermissionOnObjectAsync(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `id` | `string` | Query, Required | GUID of the metadata object for which the permission needs to be obtained. |
-| `type` | [`Models.Type20Enum`](../../doc/models/type-20-enum.md) | Query, Required | Type of metadata object |
+| `type` | [`Models.GetPermissionOnObjectTypeEnum`](../../doc/models/get-permission-on-object-type-enum.md) | Query, Required | Type of metadata object |
 | `includeDependent` | `bool?` | Query, Optional | When this field is set to true, the API response includes the permission details for the dependent objects. |
 
 ## Response Type
@@ -143,7 +143,7 @@ GetPermissionOnObjectAsync(
 
 ```csharp
 string id = "id0";
-Type20Enum type = Type20Enum.DATAOBJECT;
+GetPermissionOnObjectTypeEnum type = GetPermissionOnObjectTypeEnum.DATAOBJECT;
 
 try
 {
@@ -235,14 +235,14 @@ var body = new TspublicRestV2SecurityPermissionTsobjectSearchRequest();
 body.TsObject = new List<TsObjectSearchInput>();
 
 var bodyTsObject0 = new TsObjectSearchInput();
-bodyTsObject0.Type = Type2Enum.DATAOBJECT;
+bodyTsObject0.Type = TsObjectSearchInputTypeEnum.DATAOBJECT;
 bodyTsObject0.Id = new List<string>();
 bodyTsObject0.Id.Add("id8");
 bodyTsObject0.Id.Add("id9");
 body.TsObject.Add(bodyTsObject0);
 
 var bodyTsObject1 = new TsObjectSearchInput();
-bodyTsObject1.Type = Type2Enum.COLUMN;
+bodyTsObject1.Type = TsObjectSearchInputTypeEnum.COLUMN;
 bodyTsObject1.Id = new List<string>();
 bodyTsObject1.Id.Add("id9");
 bodyTsObject1.Id.Add("id0");
@@ -250,7 +250,7 @@ bodyTsObject1.Id.Add("id1");
 body.TsObject.Add(bodyTsObject1);
 
 var bodyTsObject2 = new TsObjectSearchInput();
-bodyTsObject2.Type = Type2Enum.LIVEBOARD;
+bodyTsObject2.Type = TsObjectSearchInputTypeEnum.LIVEBOARD;
 bodyTsObject2.Id = new List<string>();
 bodyTsObject2.Id.Add("id0");
 body.TsObject.Add(bodyTsObject2);

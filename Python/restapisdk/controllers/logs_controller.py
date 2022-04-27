@@ -40,7 +40,7 @@ class LogsController(BaseController):
          Permission: Requires administration privilege
 
         Args:
-            topic (TopicEnum): Type of the log.
+            topic (GetLogEventsTopicEnum): Type of the log.
             from_epoch (string, optional): The EPOCH time in milliseconds to
                 set the start time for streaming logs.    Example: To set the
                 timestamp as June 1, 2021 8 am, specify 1622534400000.

@@ -239,7 +239,7 @@ CompletableFuture<CreateConnectionResponse> createConnectionAsync(
 
 ```java
 TspublicRestV2ConnectionCreateRequest body = new TspublicRestV2ConnectionCreateRequest();
-body.setType(Type15Enum.TERADATA);
+body.setType(CreateConnectionTypeEnum.TERADATA);
 body.setName("name6");
 body.setConfiguration("configuration0");
 
@@ -519,7 +519,7 @@ CompletableFuture<List<ConnectionResponse>> searchConnectionAsync(
 
 ```java
 TspublicRestV2ConnectionSearchRequest body = new TspublicRestV2ConnectionSearchRequest();
-body.setType(Type16Enum.TERADATA);
+body.setType(SearchConnectionTypeEnum.TERADATA);
 
 connectionController.searchConnectionAsync(body).thenAccept(result -> {
     // TODO success callback handler

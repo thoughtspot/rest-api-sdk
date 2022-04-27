@@ -18,6 +18,7 @@ namespace RESTAPISDK.Standard.Controllers
     using RESTAPISDK.Standard.Exceptions;
     using RESTAPISDK.Standard.Http.Client;
     using RESTAPISDK.Standard.Http.Request;
+    using RESTAPISDK.Standard.Http.Request.Configuration;
     using RESTAPISDK.Standard.Http.Response;
     using RESTAPISDK.Standard.Utilities;
 
@@ -101,7 +102,7 @@ namespace RESTAPISDK.Standard.Controllers
             httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
 
             // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
             HttpContext context = new HttpContext(httpRequest, response);
             if (this.HttpCallBack != null)
             {
@@ -180,7 +181,7 @@ namespace RESTAPISDK.Standard.Controllers
             httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
 
             // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
             HttpContext context = new HttpContext(httpRequest, response);
             if (this.HttpCallBack != null)
             {
@@ -260,7 +261,7 @@ namespace RESTAPISDK.Standard.Controllers
             httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
 
             // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
             HttpContext context = new HttpContext(httpRequest, response);
             if (this.HttpCallBack != null)
             {
@@ -342,7 +343,7 @@ namespace RESTAPISDK.Standard.Controllers
             httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
 
             // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
             HttpContext context = new HttpContext(httpRequest, response);
             if (this.HttpCallBack != null)
             {
@@ -422,7 +423,7 @@ namespace RESTAPISDK.Standard.Controllers
             httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
 
             // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
             HttpContext context = new HttpContext(httpRequest, response);
             if (this.HttpCallBack != null)
             {
@@ -502,7 +503,7 @@ namespace RESTAPISDK.Standard.Controllers
             httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
 
             // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
             HttpContext context = new HttpContext(httpRequest, response);
             if (this.HttpCallBack != null)
             {
@@ -582,7 +583,7 @@ namespace RESTAPISDK.Standard.Controllers
             httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
 
             // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
             HttpContext context = new HttpContext(httpRequest, response);
             if (this.HttpCallBack != null)
             {
@@ -662,7 +663,7 @@ namespace RESTAPISDK.Standard.Controllers
             httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
 
             // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
             HttpContext context = new HttpContext(httpRequest, response);
             if (this.HttpCallBack != null)
             {
@@ -745,7 +746,7 @@ namespace RESTAPISDK.Standard.Controllers
             httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
 
             // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
             HttpContext context = new HttpContext(httpRequest, response);
             if (this.HttpCallBack != null)
             {
@@ -825,7 +826,7 @@ namespace RESTAPISDK.Standard.Controllers
             httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
 
             // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
             HttpContext context = new HttpContext(httpRequest, response);
             if (this.HttpCallBack != null)
             {
@@ -905,7 +906,7 @@ namespace RESTAPISDK.Standard.Controllers
             httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
 
             // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
             HttpContext context = new HttpContext(httpRequest, response);
             if (this.HttpCallBack != null)
             {
@@ -967,7 +968,7 @@ namespace RESTAPISDK.Standard.Controllers
             httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
 
             // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
             HttpContext context = new HttpContext(httpRequest, response);
             if (this.HttpCallBack != null)
             {
@@ -994,7 +995,7 @@ namespace RESTAPISDK.Standard.Controllers
         /// <param name="outputFields">Optional parameter: Array of header field names that need to be included in the header response.</param>
         /// <returns>Returns the object response from the API call.</returns>
         public object GetObjectHeader(
-                Models.Type9Enum type,
+                Models.GetObjectHeaderTypeEnum type,
                 string id,
                 List<string> outputFields = null)
         {
@@ -1013,7 +1014,7 @@ namespace RESTAPISDK.Standard.Controllers
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the object response from the API call.</returns>
         public async Task<object> GetObjectHeaderAsync(
-                Models.Type9Enum type,
+                Models.GetObjectHeaderTypeEnum type,
                 string id,
                 List<string> outputFields = null,
                 CancellationToken cancellationToken = default)
@@ -1058,7 +1059,7 @@ namespace RESTAPISDK.Standard.Controllers
             httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
 
             // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
             HttpContext context = new HttpContext(httpRequest, response);
             if (this.HttpCallBack != null)
             {
@@ -1084,7 +1085,7 @@ namespace RESTAPISDK.Standard.Controllers
         /// <param name="id">Required parameter: A JSON array of GUIDs of the objects..</param>
         /// <returns>Returns the object response from the API call.</returns>
         public object GetObjectDetail(
-                Models.Type10Enum type,
+                Models.GetObjectDetailTypeEnum type,
                 List<string> id)
         {
             Task<object> t = this.GetObjectDetailAsync(type, id);
@@ -1101,7 +1102,7 @@ namespace RESTAPISDK.Standard.Controllers
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the object response from the API call.</returns>
         public async Task<object> GetObjectDetailAsync(
-                Models.Type10Enum type,
+                Models.GetObjectDetailTypeEnum type,
                 List<string> id,
                 CancellationToken cancellationToken = default)
         {
@@ -1144,7 +1145,7 @@ namespace RESTAPISDK.Standard.Controllers
             httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
 
             // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
             HttpContext context = new HttpContext(httpRequest, response);
             if (this.HttpCallBack != null)
             {
@@ -1228,7 +1229,7 @@ namespace RESTAPISDK.Standard.Controllers
             httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
 
             // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
             HttpContext context = new HttpContext(httpRequest, response);
             if (this.HttpCallBack != null)
             {
@@ -1306,7 +1307,7 @@ namespace RESTAPISDK.Standard.Controllers
             httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
 
             // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
             HttpContext context = new HttpContext(httpRequest, response);
             if (this.HttpCallBack != null)
             {
@@ -1384,7 +1385,7 @@ namespace RESTAPISDK.Standard.Controllers
             httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
 
             // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
             HttpContext context = new HttpContext(httpRequest, response);
             if (this.HttpCallBack != null)
             {
@@ -1410,7 +1411,7 @@ namespace RESTAPISDK.Standard.Controllers
         /// <param name="id">Required parameter: A JSON array of GUIDs of the objects..</param>
         /// <returns>Returns the bool response from the API call.</returns>
         public bool DeleteObject(
-                Models.Type10Enum type,
+                Models.DeleteObjectTypeEnum type,
                 List<string> id)
         {
             Task<bool> t = this.DeleteObjectAsync(type, id);
@@ -1427,7 +1428,7 @@ namespace RESTAPISDK.Standard.Controllers
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the bool response from the API call.</returns>
         public async Task<bool> DeleteObjectAsync(
-                Models.Type10Enum type,
+                Models.DeleteObjectTypeEnum type,
                 List<string> id,
                 CancellationToken cancellationToken = default)
         {
@@ -1470,7 +1471,7 @@ namespace RESTAPISDK.Standard.Controllers
             httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
 
             // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
             HttpContext context = new HttpContext(httpRequest, response);
             if (this.HttpCallBack != null)
             {
@@ -1558,7 +1559,7 @@ namespace RESTAPISDK.Standard.Controllers
             httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
 
             // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
             HttpContext context = new HttpContext(httpRequest, response);
             if (this.HttpCallBack != null)
             {
@@ -1636,7 +1637,7 @@ namespace RESTAPISDK.Standard.Controllers
             httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
 
             // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
             HttpContext context = new HttpContext(httpRequest, response);
             if (this.HttpCallBack != null)
             {
@@ -1714,7 +1715,7 @@ namespace RESTAPISDK.Standard.Controllers
             httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
 
             // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
             HttpContext context = new HttpContext(httpRequest, response);
             if (this.HttpCallBack != null)
             {

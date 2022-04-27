@@ -233,17 +233,17 @@ body.setTsObject(new LinkedList<>());
 
 TsObjectInput bodyTsObject0 = new TsObjectInput();
 bodyTsObject0.setId("id8");
-bodyTsObject0.setType(TypeEnum.DATAOBJECT);
+bodyTsObject0.setType(TsObjectInputTypeEnum.DATAOBJECT);
 body.getTsObject().add(bodyTsObject0);
 
 TsObjectInput bodyTsObject1 = new TsObjectInput();
 bodyTsObject1.setId("id9");
-bodyTsObject1.setType(TypeEnum.CONNECTION);
+bodyTsObject1.setType(TsObjectInputTypeEnum.CONNECTION);
 body.getTsObject().add(bodyTsObject1);
 
 TsObjectInput bodyTsObject2 = new TsObjectInput();
 bodyTsObject2.setId("id0");
-bodyTsObject2.setType(TypeEnum.ANSWER);
+bodyTsObject2.setType(TsObjectInputTypeEnum.ANSWER);
 body.getTsObject().add(bodyTsObject2);
 
 
@@ -293,17 +293,17 @@ body.setTsObject(new LinkedList<>());
 
 TsObjectInput bodyTsObject0 = new TsObjectInput();
 bodyTsObject0.setId("id8");
-bodyTsObject0.setType(TypeEnum.DATAOBJECT);
+bodyTsObject0.setType(TsObjectInputTypeEnum.DATAOBJECT);
 body.getTsObject().add(bodyTsObject0);
 
 TsObjectInput bodyTsObject1 = new TsObjectInput();
 bodyTsObject1.setId("id9");
-bodyTsObject1.setType(TypeEnum.CONNECTION);
+bodyTsObject1.setType(TsObjectInputTypeEnum.CONNECTION);
 body.getTsObject().add(bodyTsObject1);
 
 TsObjectInput bodyTsObject2 = new TsObjectInput();
 bodyTsObject2.setId("id0");
-bodyTsObject2.setType(TypeEnum.ANSWER);
+bodyTsObject2.setType(TsObjectInputTypeEnum.ANSWER);
 body.getTsObject().add(bodyTsObject2);
 
 
@@ -353,17 +353,17 @@ body.setTsObject(new LinkedList<>());
 
 TsObjectInput bodyTsObject0 = new TsObjectInput();
 bodyTsObject0.setId("id8");
-bodyTsObject0.setType(TypeEnum.DATAOBJECT);
+bodyTsObject0.setType(TsObjectInputTypeEnum.DATAOBJECT);
 body.getTsObject().add(bodyTsObject0);
 
 TsObjectInput bodyTsObject1 = new TsObjectInput();
 bodyTsObject1.setId("id9");
-bodyTsObject1.setType(TypeEnum.CONNECTION);
+bodyTsObject1.setType(TsObjectInputTypeEnum.CONNECTION);
 body.getTsObject().add(bodyTsObject1);
 
 TsObjectInput bodyTsObject2 = new TsObjectInput();
 bodyTsObject2.setId("id0");
-bodyTsObject2.setType(TypeEnum.ANSWER);
+bodyTsObject2.setType(TsObjectInputTypeEnum.ANSWER);
 body.getTsObject().add(bodyTsObject2);
 
 
@@ -413,17 +413,17 @@ body.setTsObject(new LinkedList<>());
 
 TsObjectInput bodyTsObject0 = new TsObjectInput();
 bodyTsObject0.setId("id8");
-bodyTsObject0.setType(TypeEnum.DATAOBJECT);
+bodyTsObject0.setType(TsObjectInputTypeEnum.DATAOBJECT);
 body.getTsObject().add(bodyTsObject0);
 
 TsObjectInput bodyTsObject1 = new TsObjectInput();
 bodyTsObject1.setId("id9");
-bodyTsObject1.setType(TypeEnum.CONNECTION);
+bodyTsObject1.setType(TsObjectInputTypeEnum.CONNECTION);
 body.getTsObject().add(bodyTsObject1);
 
 TsObjectInput bodyTsObject2 = new TsObjectInput();
 bodyTsObject2.setId("id0");
-bodyTsObject2.setType(TypeEnum.ANSWER);
+bodyTsObject2.setType(TsObjectInputTypeEnum.ANSWER);
 body.getTsObject().add(bodyTsObject2);
 
 
@@ -609,7 +609,7 @@ Permission: Requires administration privilege for USER and USER_GROUP type. Requ
 
 ```java
 CompletableFuture<Object> getObjectHeaderAsync(
-    final Type9Enum type,
+    final GetObjectHeaderTypeEnum type,
     final String id,
     final List<String> outputFields)
 ```
@@ -618,7 +618,7 @@ CompletableFuture<Object> getObjectHeaderAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `type` | [`Type9Enum`](../../doc/models/type-9-enum.md) | Query, Required | Type of the metadata object being searched. |
+| `type` | [`GetObjectHeaderTypeEnum`](../../doc/models/get-object-header-type-enum.md) | Query, Required | Type of the metadata object being searched. |
 | `id` | `String` | Query, Required | GUID of the metadata object |
 | `outputFields` | `List<String>` | Query, Optional | Array of header field names that need to be included in the header response |
 
@@ -629,7 +629,7 @@ CompletableFuture<Object> getObjectHeaderAsync(
 ## Example Usage
 
 ```java
-Type9Enum type = Type9Enum.COLUMN_ALL;
+GetObjectHeaderTypeEnum type = GetObjectHeaderTypeEnum.COLUMN_ALL;
 String id = "id0";
 
 metadataController.getObjectHeaderAsync(type, id, null).thenAccept(result -> {
@@ -655,7 +655,7 @@ Permission: Requires administration privilege for USER and USER_GROUP type. Requ
 
 ```java
 CompletableFuture<Object> getObjectDetailAsync(
-    final Type10Enum type,
+    final GetObjectDetailTypeEnum type,
     final List<String> id)
 ```
 
@@ -663,7 +663,7 @@ CompletableFuture<Object> getObjectDetailAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `type` | [`Type10Enum`](../../doc/models/type-10-enum.md) | Query, Required | Type of the metadata object being searched. Valid values |
+| `type` | [`GetObjectDetailTypeEnum`](../../doc/models/get-object-detail-type-enum.md) | Query, Required | Type of the metadata object being searched. Valid values |
 | `id` | `List<String>` | Query, Required | A JSON array of GUIDs of the objects. |
 
 ## Response Type
@@ -673,7 +673,7 @@ CompletableFuture<Object> getObjectDetailAsync(
 ## Example Usage
 
 ```java
-Type10Enum type = Type10Enum.DATAOBJECT;
+GetObjectDetailTypeEnum type = GetObjectDetailTypeEnum.DATAOBJECT;
 List<String> id = new LinkedList<>();
 id.add("id0");
 
@@ -760,7 +760,7 @@ CompletableFuture<Object> searchObjectHeaderAsync(
 
 ```java
 TspublicRestV2MetadataHeaderSearchRequest body = new TspublicRestV2MetadataHeaderSearchRequest();
-body.setType(Type11Enum.USER);
+body.setType(SearchObjectHeaderTypeEnum.USER);
 
 metadataController.searchObjectHeaderAsync(body).thenAccept(result -> {
     // TODO success callback handler
@@ -802,7 +802,7 @@ CompletableFuture<Object> searchObjectDetailAsync(
 
 ```java
 TspublicRestV2MetadataDetailSearchRequest body = new TspublicRestV2MetadataDetailSearchRequest();
-body.setType(Type12Enum.USER);
+body.setType(SearchObjectDetailTypeEnum.USER);
 body.setId(new LinkedList<>());
 body.getId().add("id6");
 body.getId().add("id7");
@@ -830,7 +830,7 @@ Permission: Requires modify access to the object
 
 ```java
 CompletableFuture<Boolean> deleteObjectAsync(
-    final Type10Enum type,
+    final DeleteObjectTypeEnum type,
     final List<String> id)
 ```
 
@@ -838,7 +838,7 @@ CompletableFuture<Boolean> deleteObjectAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `type` | [`Type10Enum`](../../doc/models/type-10-enum.md) | Query, Required | Type of the metadata object being searched. |
+| `type` | [`DeleteObjectTypeEnum`](../../doc/models/delete-object-type-enum.md) | Query, Required | Type of the metadata object being searched. |
 | `id` | `List<String>` | Query, Required | A JSON array of GUIDs of the objects. |
 
 ## Response Type
@@ -848,7 +848,7 @@ CompletableFuture<Boolean> deleteObjectAsync(
 ## Example Usage
 
 ```java
-Type10Enum type = Type10Enum.DATAOBJECT;
+DeleteObjectTypeEnum type = DeleteObjectTypeEnum.DATAOBJECT;
 List<String> id = new LinkedList<>();
 id.add("id0");
 
@@ -902,7 +902,7 @@ CompletableFuture<Object> getObjectDependencyAsync(
 
 ```java
 TspublicRestV2MetadataDependencyRequest body = new TspublicRestV2MetadataDependencyRequest();
-body.setType(Type14Enum.COLUMN);
+body.setType(GetObjectDependencyTypeEnum.COLUMN);
 body.setId(new LinkedList<>());
 body.getId().add("id6");
 body.getId().add("id7");

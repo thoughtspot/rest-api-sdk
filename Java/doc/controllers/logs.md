@@ -25,7 +25,7 @@ Permission: Requires administration privilege
 
 ```java
 CompletableFuture<LogsResponse> getLogEventsAsync(
-    final TopicEnum topic,
+    final GetLogEventsTopicEnum topic,
     final String fromEpoch,
     final String toEpoch)
 ```
@@ -34,7 +34,7 @@ CompletableFuture<LogsResponse> getLogEventsAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `topic` | [`TopicEnum`](../../doc/models/topic-enum.md) | Query, Required | Type of the log. |
+| `topic` | [`GetLogEventsTopicEnum`](../../doc/models/get-log-events-topic-enum.md) | Query, Required | Type of the log. |
 | `fromEpoch` | `String` | Query, Optional | The EPOCH time in milliseconds to set the start time for streaming logs.<br><br>Example: To set the timestamp as June 1, 2021 8 am, specify 1622534400000. |
 | `toEpoch` | `String` | Query, Optional | The EPOCH time in milliseconds to set the end time for streaming logs.<br><br>Example: To set the timestamp as July 1, 2021, 8 am, specify 1625126400000. |
 
@@ -45,7 +45,7 @@ CompletableFuture<LogsResponse> getLogEventsAsync(
 ## Example Usage
 
 ```java
-TopicEnum topic = TopicEnum.SECURITY_LOGS;
+GetLogEventsTopicEnum topic = GetLogEventsTopicEnum.SECURITY_LOGS;
 
 logsController.getLogEventsAsync(topic, null, null).thenAccept(result -> {
     // TODO success callback handler

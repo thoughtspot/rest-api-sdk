@@ -22,8 +22,8 @@ import localhost.http.client.HttpContext;
 import localhost.http.request.HttpRequest;
 import localhost.http.response.HttpResponse;
 import localhost.http.response.HttpStringResponse;
+import localhost.models.GetLogEventsTopicEnum;
 import localhost.models.LogsResponse;
-import localhost.models.TopicEnum;
 
 /**
  * This class lists all the endpoints of the groups.
@@ -73,7 +73,7 @@ public final class LogsController extends BaseController {
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
     public LogsResponse getLogEvents(
-            final TopicEnum topic,
+            final GetLogEventsTopicEnum topic,
             final String fromEpoch,
             final String toEpoch) throws ApiException, IOException {
         HttpRequest request = buildGetLogEventsRequest(topic, fromEpoch, toEpoch);
@@ -103,7 +103,7 @@ public final class LogsController extends BaseController {
      * @return    Returns the LogsResponse response from the API call
      */
     public CompletableFuture<LogsResponse> getLogEventsAsync(
-            final TopicEnum topic,
+            final GetLogEventsTopicEnum topic,
             final String fromEpoch,
             final String toEpoch) {
         return makeHttpCallAsync(() -> buildGetLogEventsRequest(topic, fromEpoch, toEpoch),
@@ -117,7 +117,7 @@ public final class LogsController extends BaseController {
      * Builds the HttpRequest object for getLogEvents.
      */
     private HttpRequest buildGetLogEventsRequest(
-            final TopicEnum topic,
+            final GetLogEventsTopicEnum topic,
             final String fromEpoch,
             final String toEpoch) {
         //validating required parameters

@@ -42,7 +42,7 @@ def answer_report(self,
 ```python
 body = TspublicRestV2ReportAnswerRequest()
 body.id = 'id6'
-body.mtype = Type17Enum.PDF
+body.mtype = AnswerReportTypeEnum.PDF
 
 result = report_controller.answer_report(body)
 ```
@@ -79,7 +79,7 @@ def liveboard_report(self,
 
 ```python
 body = TspublicRestV2ReportLiveboardRequest()
-body.mtype = Type17Enum.PDF
+body.mtype = LiveboardReportTypeEnum.PDF
 
 result = report_controller.liveboard_report(body)
 ```

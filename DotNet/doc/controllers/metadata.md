@@ -229,17 +229,17 @@ body.TsObject = new List<TsObjectInput>();
 
 var bodyTsObject0 = new TsObjectInput();
 bodyTsObject0.Id = "id8";
-bodyTsObject0.Type = TypeEnum.DATAOBJECT;
+bodyTsObject0.Type = TsObjectInputTypeEnum.DATAOBJECT;
 body.TsObject.Add(bodyTsObject0);
 
 var bodyTsObject1 = new TsObjectInput();
 bodyTsObject1.Id = "id9";
-bodyTsObject1.Type = TypeEnum.CONNECTION;
+bodyTsObject1.Type = TsObjectInputTypeEnum.CONNECTION;
 body.TsObject.Add(bodyTsObject1);
 
 var bodyTsObject2 = new TsObjectInput();
 bodyTsObject2.Id = "id0";
-bodyTsObject2.Type = TypeEnum.ANSWER;
+bodyTsObject2.Type = TsObjectInputTypeEnum.ANSWER;
 body.TsObject.Add(bodyTsObject2);
 
 
@@ -288,17 +288,17 @@ body.TsObject = new List<TsObjectInput>();
 
 var bodyTsObject0 = new TsObjectInput();
 bodyTsObject0.Id = "id8";
-bodyTsObject0.Type = TypeEnum.DATAOBJECT;
+bodyTsObject0.Type = TsObjectInputTypeEnum.DATAOBJECT;
 body.TsObject.Add(bodyTsObject0);
 
 var bodyTsObject1 = new TsObjectInput();
 bodyTsObject1.Id = "id9";
-bodyTsObject1.Type = TypeEnum.CONNECTION;
+bodyTsObject1.Type = TsObjectInputTypeEnum.CONNECTION;
 body.TsObject.Add(bodyTsObject1);
 
 var bodyTsObject2 = new TsObjectInput();
 bodyTsObject2.Id = "id0";
-bodyTsObject2.Type = TypeEnum.ANSWER;
+bodyTsObject2.Type = TsObjectInputTypeEnum.ANSWER;
 body.TsObject.Add(bodyTsObject2);
 
 
@@ -347,17 +347,17 @@ body.TsObject = new List<TsObjectInput>();
 
 var bodyTsObject0 = new TsObjectInput();
 bodyTsObject0.Id = "id8";
-bodyTsObject0.Type = TypeEnum.DATAOBJECT;
+bodyTsObject0.Type = TsObjectInputTypeEnum.DATAOBJECT;
 body.TsObject.Add(bodyTsObject0);
 
 var bodyTsObject1 = new TsObjectInput();
 bodyTsObject1.Id = "id9";
-bodyTsObject1.Type = TypeEnum.CONNECTION;
+bodyTsObject1.Type = TsObjectInputTypeEnum.CONNECTION;
 body.TsObject.Add(bodyTsObject1);
 
 var bodyTsObject2 = new TsObjectInput();
 bodyTsObject2.Id = "id0";
-bodyTsObject2.Type = TypeEnum.ANSWER;
+bodyTsObject2.Type = TsObjectInputTypeEnum.ANSWER;
 body.TsObject.Add(bodyTsObject2);
 
 
@@ -406,17 +406,17 @@ body.TsObject = new List<TsObjectInput>();
 
 var bodyTsObject0 = new TsObjectInput();
 bodyTsObject0.Id = "id8";
-bodyTsObject0.Type = TypeEnum.DATAOBJECT;
+bodyTsObject0.Type = TsObjectInputTypeEnum.DATAOBJECT;
 body.TsObject.Add(bodyTsObject0);
 
 var bodyTsObject1 = new TsObjectInput();
 bodyTsObject1.Id = "id9";
-bodyTsObject1.Type = TypeEnum.CONNECTION;
+bodyTsObject1.Type = TsObjectInputTypeEnum.CONNECTION;
 body.TsObject.Add(bodyTsObject1);
 
 var bodyTsObject2 = new TsObjectInput();
 bodyTsObject2.Id = "id0";
-bodyTsObject2.Type = TypeEnum.ANSWER;
+bodyTsObject2.Type = TsObjectInputTypeEnum.ANSWER;
 body.TsObject.Add(bodyTsObject2);
 
 
@@ -597,7 +597,7 @@ Permission: Requires administration privilege for USER and USER_GROUP type. Requ
 
 ```csharp
 GetObjectHeaderAsync(
-    Models.Type9Enum type,
+    Models.GetObjectHeaderTypeEnum type,
     string id,
     List<string> outputFields = null)
 ```
@@ -606,7 +606,7 @@ GetObjectHeaderAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `type` | [`Models.Type9Enum`](../../doc/models/type-9-enum.md) | Query, Required | Type of the metadata object being searched. |
+| `type` | [`Models.GetObjectHeaderTypeEnum`](../../doc/models/get-object-header-type-enum.md) | Query, Required | Type of the metadata object being searched. |
 | `id` | `string` | Query, Required | GUID of the metadata object |
 | `outputFields` | `List<string>` | Query, Optional | Array of header field names that need to be included in the header response |
 
@@ -617,7 +617,7 @@ GetObjectHeaderAsync(
 ## Example Usage
 
 ```csharp
-Type9Enum type = Type9Enum.COLUMNALL;
+GetObjectHeaderTypeEnum type = GetObjectHeaderTypeEnum.COLUMNALL;
 string id = "id0";
 
 try
@@ -642,7 +642,7 @@ Permission: Requires administration privilege for USER and USER_GROUP type. Requ
 
 ```csharp
 GetObjectDetailAsync(
-    Models.Type10Enum type,
+    Models.GetObjectDetailTypeEnum type,
     List<string> id)
 ```
 
@@ -650,7 +650,7 @@ GetObjectDetailAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `type` | [`Models.Type10Enum`](../../doc/models/type-10-enum.md) | Query, Required | Type of the metadata object being searched. Valid values |
+| `type` | [`Models.GetObjectDetailTypeEnum`](../../doc/models/get-object-detail-type-enum.md) | Query, Required | Type of the metadata object being searched. Valid values |
 | `id` | `List<string>` | Query, Required | A JSON array of GUIDs of the objects. |
 
 ## Response Type
@@ -660,7 +660,7 @@ GetObjectDetailAsync(
 ## Example Usage
 
 ```csharp
-Type10Enum type = Type10Enum.DATAOBJECT;
+GetObjectDetailTypeEnum type = GetObjectDetailTypeEnum.DATAOBJECT;
 var id = new List<string>();
 id.Add("id0");
 
@@ -745,7 +745,7 @@ SearchObjectHeaderAsync(
 
 ```csharp
 var body = new TspublicRestV2MetadataHeaderSearchRequest();
-body.Type = Type11Enum.USER;
+body.Type = SearchObjectHeaderTypeEnum.USER;
 
 try
 {
@@ -786,7 +786,7 @@ SearchObjectDetailAsync(
 
 ```csharp
 var body = new TspublicRestV2MetadataDetailSearchRequest();
-body.Type = Type12Enum.USER;
+body.Type = SearchObjectDetailTypeEnum.USER;
 body.Id = new List<string>();
 body.Id.Add("id6");
 body.Id.Add("id7");
@@ -813,7 +813,7 @@ Permission: Requires modify access to the object
 
 ```csharp
 DeleteObjectAsync(
-    Models.Type10Enum type,
+    Models.DeleteObjectTypeEnum type,
     List<string> id)
 ```
 
@@ -821,7 +821,7 @@ DeleteObjectAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `type` | [`Models.Type10Enum`](../../doc/models/type-10-enum.md) | Query, Required | Type of the metadata object being searched. |
+| `type` | [`Models.DeleteObjectTypeEnum`](../../doc/models/delete-object-type-enum.md) | Query, Required | Type of the metadata object being searched. |
 | `id` | `List<string>` | Query, Required | A JSON array of GUIDs of the objects. |
 
 ## Response Type
@@ -831,7 +831,7 @@ DeleteObjectAsync(
 ## Example Usage
 
 ```csharp
-Type10Enum type = Type10Enum.DATAOBJECT;
+DeleteObjectTypeEnum type = DeleteObjectTypeEnum.DATAOBJECT;
 var id = new List<string>();
 id.Add("id0");
 
@@ -884,7 +884,7 @@ GetObjectDependencyAsync(
 
 ```csharp
 var body = new TspublicRestV2MetadataDependencyRequest();
-body.Type = Type14Enum.COLUMN;
+body.Type = GetObjectDependencyTypeEnum.COLUMN;
 body.Id = new List<string>();
 body.Id.Add("id6");
 body.Id.Add("id7");

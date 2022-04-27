@@ -45,7 +45,7 @@ CompletableFuture<Boolean> shareObjectAsync(
 
 ```java
 TspublicRestV2SecurityShareTsobjectRequest body = new TspublicRestV2SecurityShareTsobjectRequest();
-body.setType(Type19Enum.DATAOBJECT);
+body.setType(ShareObjectTypeEnum.DATAOBJECT);
 body.setId(new LinkedList<>());
 body.getId().add("id6");
 body.getId().add("id7");
@@ -125,7 +125,7 @@ Requires administration privilege
 ```java
 CompletableFuture<SecurityPermissionResponse> getPermissionOnObjectAsync(
     final String id,
-    final Type20Enum type,
+    final GetPermissionOnObjectTypeEnum type,
     final Boolean includeDependent)
 ```
 
@@ -134,7 +134,7 @@ CompletableFuture<SecurityPermissionResponse> getPermissionOnObjectAsync(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `id` | `String` | Query, Required | GUID of the metadata object for which the permission needs to be obtained. |
-| `type` | [`Type20Enum`](../../doc/models/type-20-enum.md) | Query, Required | Type of metadata object |
+| `type` | [`GetPermissionOnObjectTypeEnum`](../../doc/models/get-permission-on-object-type-enum.md) | Query, Required | Type of metadata object |
 | `includeDependent` | `Boolean` | Query, Optional | When this field is set to true, the API response includes the permission details for the dependent objects. |
 
 ## Response Type
@@ -145,7 +145,7 @@ CompletableFuture<SecurityPermissionResponse> getPermissionOnObjectAsync(
 
 ```java
 String id = "id0";
-Type20Enum type = Type20Enum.DATAOBJECT;
+GetPermissionOnObjectTypeEnum type = GetPermissionOnObjectTypeEnum.DATAOBJECT;
 
 securityController.getPermissionOnObjectAsync(id, type, null).thenAccept(result -> {
     // TODO success callback handler
@@ -239,14 +239,14 @@ TspublicRestV2SecurityPermissionTsobjectSearchRequest body = new TspublicRestV2S
 body.setTsObject(new LinkedList<>());
 
 TsObjectSearchInput bodyTsObject0 = new TsObjectSearchInput();
-bodyTsObject0.setType(Type2Enum.DATAOBJECT);
+bodyTsObject0.setType(TsObjectSearchInputTypeEnum.DATAOBJECT);
 bodyTsObject0.setId(new LinkedList<>());
 bodyTsObject0.getId().add("id8");
 bodyTsObject0.getId().add("id9");
 body.getTsObject().add(bodyTsObject0);
 
 TsObjectSearchInput bodyTsObject1 = new TsObjectSearchInput();
-bodyTsObject1.setType(Type2Enum.COLUMN);
+bodyTsObject1.setType(TsObjectSearchInputTypeEnum.COLUMN);
 bodyTsObject1.setId(new LinkedList<>());
 bodyTsObject1.getId().add("id9");
 bodyTsObject1.getId().add("id0");
@@ -254,7 +254,7 @@ bodyTsObject1.getId().add("id1");
 body.getTsObject().add(bodyTsObject1);
 
 TsObjectSearchInput bodyTsObject2 = new TsObjectSearchInput();
-bodyTsObject2.setType(Type2Enum.LIVEBOARD);
+bodyTsObject2.setType(TsObjectSearchInputTypeEnum.LIVEBOARD);
 bodyTsObject2.setId(new LinkedList<>());
 bodyTsObject2.getId().add("id0");
 body.getTsObject().add(bodyTsObject2);

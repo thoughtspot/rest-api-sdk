@@ -141,7 +141,7 @@ Requires administration privilege
 ```ts
 async getPermissionOnObject(
   id: string,
-  type: Type20Enum,
+  type: GetPermissionOnObjectTypeEnum,
   includeDependent?: boolean,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<SecurityPermissionResponse>>
@@ -152,7 +152,7 @@ async getPermissionOnObject(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `id` | `string` | Query, Required | GUID of the metadata object for which the permission needs to be obtained. |
-| `type` | [`Type20Enum`](../../doc/models/type-20-enum.md) | Query, Required | Type of metadata object |
+| `type` | [`GetPermissionOnObjectTypeEnum`](../../doc/models/get-permission-on-object-type-enum.md) | Query, Required | Type of metadata object |
 | `includeDependent` | `boolean \| undefined` | Query, Optional | When this field is set to true, the API response includes the permission details for the dependent objects. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
