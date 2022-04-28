@@ -235,7 +235,7 @@ CreateConnectionAsync(
 
 ```csharp
 var body = new TspublicRestV2ConnectionCreateRequest();
-body.Type = Type15Enum.TERADATA;
+body.Type = CreateConnectionTypeEnum.TERADATA;
 body.Name = "name6";
 body.Configuration = "configuration0";
 
@@ -510,7 +510,7 @@ SearchConnectionAsync(
 
 ```csharp
 var body = new TspublicRestV2ConnectionSearchRequest();
-body.Type = Type16Enum.TERADATA;
+body.Type = SearchConnectionTypeEnum.TERADATA;
 
 try
 {

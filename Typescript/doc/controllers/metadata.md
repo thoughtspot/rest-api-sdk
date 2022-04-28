@@ -739,7 +739,7 @@ Permission: Requires administration privilege for USER and USER_GROUP type. Requ
 
 ```ts
 async getObjectHeader(
-  type: Type9Enum,
+  type: GetObjectHeaderTypeEnum,
   id: string,
   outputFields?: string[],
   requestOptions?: RequestOptions
@@ -750,7 +750,7 @@ async getObjectHeader(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `type` | [`Type9Enum`](../../doc/models/type-9-enum.md) | Query, Required | Type of the metadata object being searched. |
+| `type` | [`GetObjectHeaderTypeEnum`](../../doc/models/get-object-header-type-enum.md) | Query, Required | Type of the metadata object being searched. |
 | `id` | `string` | Query, Required | GUID of the metadata object |
 | `outputFields` | `string[] \| undefined` | Query, Optional | Array of header field names that need to be included in the header response |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
@@ -791,7 +791,7 @@ Permission: Requires administration privilege for USER and USER_GROUP type. Requ
 
 ```ts
 async getObjectDetail(
-  type: Type10Enum,
+  type: GetObjectDetailTypeEnum,
   id: string[],
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<unknown>>
@@ -801,7 +801,7 @@ async getObjectDetail(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `type` | [`Type10Enum`](../../doc/models/type-10-enum.md) | Query, Required | Type of the metadata object being searched. Valid values |
+| `type` | [`GetObjectDetailTypeEnum`](../../doc/models/get-object-detail-type-enum.md) | Query, Required | Type of the metadata object being searched. Valid values |
 | `id` | `string[]` | Query, Required | A JSON array of GUIDs of the objects. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -994,7 +994,7 @@ Permission: Requires modify access to the object
 
 ```ts
 async deleteObject(
-  type: Type10Enum,
+  type: DeleteObjectTypeEnum,
   id: string[],
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<boolean>>
@@ -1004,7 +1004,7 @@ async deleteObject(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `type` | [`Type10Enum`](../../doc/models/type-10-enum.md) | Query, Required | Type of the metadata object being searched. |
+| `type` | [`DeleteObjectTypeEnum`](../../doc/models/delete-object-type-enum.md) | Query, Required | Type of the metadata object being searched. |
 | `id` | `string[]` | Query, Required | A JSON array of GUIDs of the objects. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 

@@ -7,6 +7,14 @@
 import { ApiResponse, RequestOptions } from '../core';
 import { ErrorResponseError } from '../errors/errorResponseError';
 import {
+  AnswerQueryResponse,
+  answerQueryResponseSchema,
+} from '../models/answerQueryResponse';
+import {
+  LiveboardQueryResponse,
+  liveboardQueryResponseSchema,
+} from '../models/liveboardQueryResponse';
+import {
   TspublicRestV2DataAnswerRequest,
   tspublicRestV2DataAnswerRequestSchema,
 } from '../models/tspublicRestV2DataAnswerRequest';
@@ -18,7 +26,7 @@ import {
   TspublicRestV2DataSearchRequest,
   tspublicRestV2DataSearchRequestSchema,
 } from '../models/tspublicRestV2DataSearchRequest';
-import { unknown } from '../schema';
+import { array, optional, string, unknown } from '../schema';
 import { BaseController } from './baseController';
 
 export class DataController extends BaseController {
@@ -87,5 +95,57 @@ export class DataController extends BaseController {
     req.json(mapped.body);
     req.throwOn(500, ErrorResponseError, 'Operation failed or unauthorized request');
     return req.callAsJson(unknown(), requestOptions);
+  }
+
+  /**
+   * To retrieve the query SQL related to an Answer that is run on the data platform, you can use this
+   * endpoint.
+   *
+   * Permission: Requires at least view access to the object
+   *
+   * @param id The GUID of the Answer
+   * @return Response from the API call
+   */
+  async answerQuerySql(
+    id: string,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<AnswerQueryResponse>> {
+    const req = this.createRequest(
+      'GET',
+      '/tspublic/rest/v2/data/answer/querysql'
+    );
+    const mapped = req.prepareArgs({ id: [id, string()] });
+    req.query('id', mapped.id);
+    req.throwOn(500, ErrorResponseError, 'Operation failed or unauthorized request');
+    return req.callAsJson(answerQueryResponseSchema, requestOptions);
+  }
+
+  /**
+   * To retrieve the query SQL related to a Visualization in a Liveboard that is run on the data platform,
+   * you can use this endpoint.
+   *
+   * Permission: Requires at least view access to the object
+   *
+   * @param id    The GUID of the Liveboard
+   * @param vizId A JSON array of GUIDs of the visualizations in the Liveboard.
+   * @return Response from the API call
+   */
+  async liveboardQuerySql(
+    id: string,
+    vizId?: string[],
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<LiveboardQueryResponse>> {
+    const req = this.createRequest(
+      'GET',
+      '/tspublic/rest/v2/data/liveboard/querysql'
+    );
+    const mapped = req.prepareArgs({
+      id: [id, string()],
+      vizId: [vizId, optional(array(string()))],
+    });
+    req.query('id', mapped.id);
+    req.query('vizId', mapped.vizId);
+    req.throwOn(500, ErrorResponseError, 'Operation failed or unauthorized request');
+    return req.callAsJson(liveboardQueryResponseSchema, requestOptions);
   }
 }

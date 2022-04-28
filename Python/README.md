@@ -7,7 +7,7 @@ The package is compatible with Python versions `3 >=3.7, <= 3.9`.
 Install the package from PyPi using the following pip command:
 
 ```python
-pip install thoughtspot-rest-api-sdk==1.10.0
+pip install thoughtspot-rest-api-sdk==1.11.0
 ```
 
 You can also view the package at:
@@ -55,6 +55,6 @@ client = RestapisdkClient(
 This API uses `OAuth 2 Bearer token`.
 
 ## Guide
-[API Reference](https://github.com/thoughtspot/rest-api-sdk/blob/1.10.0/Typescript/doc/README.md)
+[API Reference](https://github.com/thoughtspot/rest-api-sdk/blob/1.11.0/Typescript/doc/README.md)
 ## Live Playground
 We recommend that you browse through the [code playground](https://try-everywhere.thoughtspot.cloud/v2/#/everywhere/api/rest/playgroundV2) before you start constructing your API requests. The playground offers an interactive portal with comprehensive information about the API endpoints, request and response workflows.

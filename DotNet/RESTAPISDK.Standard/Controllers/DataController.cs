@@ -18,6 +18,7 @@ namespace RESTAPISDK.Standard.Controllers
     using RESTAPISDK.Standard.Exceptions;
     using RESTAPISDK.Standard.Http.Client;
     using RESTAPISDK.Standard.Http.Request;
+    using RESTAPISDK.Standard.Http.Request.Configuration;
     using RESTAPISDK.Standard.Http.Response;
     using RESTAPISDK.Standard.Utilities;
 
@@ -98,7 +99,7 @@ namespace RESTAPISDK.Standard.Controllers
             httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
 
             // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
             HttpContext context = new HttpContext(httpRequest, response);
             if (this.HttpCallBack != null)
             {
@@ -176,7 +177,7 @@ namespace RESTAPISDK.Standard.Controllers
             httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
 
             // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
             HttpContext context = new HttpContext(httpRequest, response);
             if (this.HttpCallBack != null)
             {
@@ -254,7 +255,7 @@ namespace RESTAPISDK.Standard.Controllers
             httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
 
             // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
             HttpContext context = new HttpContext(httpRequest, response);
             if (this.HttpCallBack != null)
             {
@@ -270,6 +271,175 @@ namespace RESTAPISDK.Standard.Controllers
             this.ValidateResponse(response, context);
 
             return response.Body;
+        }
+
+        /// <summary>
+        /// To retrieve the query SQL related to an Answer that is run on the data platform, you can use this endpoint. .
+        ///  Permission: Requires at least view access to the object.
+        /// </summary>
+        /// <param name="id">Required parameter: The GUID of the Answer.</param>
+        /// <returns>Returns the Models.AnswerQueryResponse response from the API call.</returns>
+        public Models.AnswerQueryResponse AnswerQuerySql(
+                string id)
+        {
+            Task<Models.AnswerQueryResponse> t = this.AnswerQuerySqlAsync(id);
+            ApiHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// To retrieve the query SQL related to an Answer that is run on the data platform, you can use this endpoint. .
+        ///  Permission: Requires at least view access to the object.
+        /// </summary>
+        /// <param name="id">Required parameter: The GUID of the Answer.</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.AnswerQueryResponse response from the API call.</returns>
+        public async Task<Models.AnswerQueryResponse> AnswerQuerySqlAsync(
+                string id,
+                CancellationToken cancellationToken = default)
+        {
+            // validating required parameters.
+            if (id == null)
+            {
+                throw new ArgumentNullException("id", "The parameter \"id\" is a required parameter and cannot be null.");
+            }
+
+            // the base uri for api requests.
+            string baseUri = this.Config.GetBaseUri();
+
+            // prepare query string for API call.
+            StringBuilder queryBuilder = new StringBuilder(baseUri);
+            queryBuilder.Append("/tspublic/rest/v2/data/answer/querysql");
+
+            // prepare specfied query parameters.
+            var queryParams = new Dictionary<string, object>()
+            {
+                { "id", id },
+            };
+
+            // append request with appropriate headers and parameters
+            var headers = new Dictionary<string, string>()
+            {
+                { "user-agent", this.UserAgent },
+                { "accept", "application/json" },
+                { "Accept-Language", this.Config.AcceptLanguage },
+                { "Content-Type", this.Config.ContentType },
+            };
+
+            // prepare the API call request to fetch the response.
+            HttpRequest httpRequest = this.GetClientInstance().Get(queryBuilder.ToString(), headers, queryParameters: queryParams);
+
+            if (this.HttpCallBack != null)
+            {
+                this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
+            }
+
+            httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
+
+            // invoke request and get response.
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
+            HttpContext context = new HttpContext(httpRequest, response);
+            if (this.HttpCallBack != null)
+            {
+                this.HttpCallBack.OnAfterHttpResponseEventHandler(this.GetClientInstance(), response);
+            }
+
+            if (response.StatusCode == 500)
+            {
+                throw new ErrorResponseException("Operation failed or unauthorized request", context);
+            }
+
+            // handle errors defined at the API level.
+            this.ValidateResponse(response, context);
+
+            return ApiHelper.JsonDeserialize<Models.AnswerQueryResponse>(response.Body);
+        }
+
+        /// <summary>
+        /// To retrieve the query SQL related to a Visualization in a Liveboard that is run on the data platform, you can use this endpoint. .
+        ///  Permission: Requires at least view access to the object.
+        /// </summary>
+        /// <param name="id">Required parameter: The GUID of the Liveboard.</param>
+        /// <param name="vizId">Optional parameter: A JSON array of GUIDs of the visualizations in the Liveboard..</param>
+        /// <returns>Returns the Models.LiveboardQueryResponse response from the API call.</returns>
+        public Models.LiveboardQueryResponse LiveboardQuerySql(
+                string id,
+                List<string> vizId = null)
+        {
+            Task<Models.LiveboardQueryResponse> t = this.LiveboardQuerySqlAsync(id, vizId);
+            ApiHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// To retrieve the query SQL related to a Visualization in a Liveboard that is run on the data platform, you can use this endpoint. .
+        ///  Permission: Requires at least view access to the object.
+        /// </summary>
+        /// <param name="id">Required parameter: The GUID of the Liveboard.</param>
+        /// <param name="vizId">Optional parameter: A JSON array of GUIDs of the visualizations in the Liveboard..</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.LiveboardQueryResponse response from the API call.</returns>
+        public async Task<Models.LiveboardQueryResponse> LiveboardQuerySqlAsync(
+                string id,
+                List<string> vizId = null,
+                CancellationToken cancellationToken = default)
+        {
+            // validating required parameters.
+            if (id == null)
+            {
+                throw new ArgumentNullException("id", "The parameter \"id\" is a required parameter and cannot be null.");
+            }
+
+            // the base uri for api requests.
+            string baseUri = this.Config.GetBaseUri();
+
+            // prepare query string for API call.
+            StringBuilder queryBuilder = new StringBuilder(baseUri);
+            queryBuilder.Append("/tspublic/rest/v2/data/liveboard/querysql");
+
+            // prepare specfied query parameters.
+            var queryParams = new Dictionary<string, object>()
+            {
+                { "id", id },
+                { "vizId", vizId },
+            };
+
+            // append request with appropriate headers and parameters
+            var headers = new Dictionary<string, string>()
+            {
+                { "user-agent", this.UserAgent },
+                { "accept", "application/json" },
+                { "Accept-Language", this.Config.AcceptLanguage },
+                { "Content-Type", this.Config.ContentType },
+            };
+
+            // prepare the API call request to fetch the response.
+            HttpRequest httpRequest = this.GetClientInstance().Get(queryBuilder.ToString(), headers, queryParameters: queryParams);
+
+            if (this.HttpCallBack != null)
+            {
+                this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
+            }
+
+            httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
+
+            // invoke request and get response.
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
+            HttpContext context = new HttpContext(httpRequest, response);
+            if (this.HttpCallBack != null)
+            {
+                this.HttpCallBack.OnAfterHttpResponseEventHandler(this.GetClientInstance(), response);
+            }
+
+            if (response.StatusCode == 500)
+            {
+                throw new ErrorResponseException("Operation failed or unauthorized request", context);
+            }
+
+            // handle errors defined at the API level.
+            this.ValidateResponse(response, context);
+
+            return ApiHelper.JsonDeserialize<Models.LiveboardQueryResponse>(response.Body);
         }
     }
 }

@@ -14,8 +14,8 @@ UserController userController = client.UserController;
 * [Create User](../../doc/controllers/user.md#create-user)
 * [Update User](../../doc/controllers/user.md#update-user)
 * [Delete User](../../doc/controllers/user.md#delete-user)
-* [Add Groups to User](../../doc/controllers/user.md#add-groups-to-user)
-* [Remove Groups From User](../../doc/controllers/user.md#remove-groups-from-user)
+* [Add User to Groups](../../doc/controllers/user.md#add-user-to-groups)
+* [Remove User From Groups](../../doc/controllers/user.md#remove-user-from-groups)
 * [Change Password of User](../../doc/controllers/user.md#change-password-of-user)
 * [Search Users](../../doc/controllers/user.md#search-users)
 
@@ -66,7 +66,7 @@ To programmatically create a user account in the ThoughtSpot system, use this AP
 
 Using this API, you can create a user and assign groups. To create a user, you require admin user privileges.
 
-All users created in the ThoughtSpot system are added to ALL_GROUP
+All users created in the ThoughtSpot system are added to ALL user group.
 
 Permission: Requires administration privilege
 
@@ -193,7 +193,7 @@ catch (ApiException e){};
 | 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Add Groups to User
+# Add User to Groups
 
 To programmatically add groups to an existing ThoughtSpot user, use this endpoint.
 
@@ -204,7 +204,7 @@ At least one of user Id or username is mandatory. When both are given, then user
 Permission: Requires administration privilege
 
 ```csharp
-AddGroupsToUserAsync(
+AddUserToGroupsAsync(
     Models.TspublicRestV2UserAddgroupRequest body)
 ```
 
@@ -230,7 +230,7 @@ body.Groups.Add(bodyGroups0);
 
 try
 {
-    bool? result = await userController.AddGroupsToUserAsync(body);
+    bool? result = await userController.AddUserToGroupsAsync(body);
 }
 catch (ApiException e){};
 ```
@@ -242,7 +242,7 @@ catch (ApiException e){};
 | 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Remove Groups From User
+# Remove User From Groups
 
 To programmatically remove groups from an existing ThoughtSpot user, use this API endpoint.
 
@@ -253,7 +253,7 @@ At least one of user id or username is mandatory. When both are given, then user
 Permission: Requires administration privilege
 
 ```csharp
-RemoveGroupsFromUserAsync(
+RemoveUserFromGroupsAsync(
     Models.TspublicRestV2UserRemovegroupRequest body)
 ```
 
@@ -279,7 +279,7 @@ body.Groups.Add(bodyGroups0);
 
 try
 {
-    bool? result = await userController.RemoveGroupsFromUserAsync(body);
+    bool? result = await userController.RemoveUserFromGroupsAsync(body);
 }
 catch (ApiException e){};
 ```

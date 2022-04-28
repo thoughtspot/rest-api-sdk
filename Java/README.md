@@ -9,12 +9,12 @@ Install the SDK by adding the following dependency in your project's pom.xml fil
 <dependency>
   <groupId>io.github.thoughtspot</groupId>
   <artifactId>rest-api-sdk-lib</artifactId>
-  <version>1.10.0</version>
+  <version>1.11.0</version>
 </dependency>
 ```
 
 You can also view the package at:
-https://mvnrepository.com/artifact/io.github.thoughtspot/rest-api-sdk-lib/1.10.0
+https://mvnrepository.com/artifact/io.github.thoughtspot/rest-api-sdk-lib/1.11.0
 
 ## Initialize the API Client
 
@@ -50,6 +50,6 @@ RESTAPISDKClient client = new RESTAPISDKClient.Builder()
 This API uses `OAuth 2 Bearer token`.
 
 ## Guide
-[API Reference](https://github.com/thoughtspot/rest-api-sdk/blob/1.10.0/Typescript/doc/README.md)
+[API Reference](https://github.com/thoughtspot/rest-api-sdk/blob/1.11.0/Typescript/doc/README.md)
 ## Live Playground
 We recommend that you browse through the [code playground](https://try-everywhere.thoughtspot.cloud/v2/#/everywhere/api/rest/playgroundV2) before you start constructing your API requests. The playground offers an interactive portal with comprehensive information about the API endpoints, request and response workflows.

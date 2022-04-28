@@ -24,6 +24,9 @@ import localhost.http.client.HttpContext;
 import localhost.http.request.HttpRequest;
 import localhost.http.response.HttpResponse;
 import localhost.http.response.HttpStringResponse;
+import localhost.models.DeleteObjectTypeEnum;
+import localhost.models.GetObjectDetailTypeEnum;
+import localhost.models.GetObjectHeaderTypeEnum;
 import localhost.models.HomeLiveboardResponse;
 import localhost.models.MetadataTagResponse;
 import localhost.models.TspublicRestV2MetadataDependencyRequest;
@@ -39,8 +42,6 @@ import localhost.models.TspublicRestV2MetadataTagUnassignRequest;
 import localhost.models.TspublicRestV2MetadataTagUpdateRequest;
 import localhost.models.TspublicRestV2MetadataTmlExportRequest;
 import localhost.models.TspublicRestV2MetadataTmlImportRequest;
-import localhost.models.Type10Enum;
-import localhost.models.Type9Enum;
 
 /**
  * This class lists all the endpoints of the groups.
@@ -1292,7 +1293,7 @@ public final class MetadataController extends BaseController {
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
     public Object getObjectHeader(
-            final Type9Enum type,
+            final GetObjectHeaderTypeEnum type,
             final String id,
             final List<String> outputFields) throws ApiException, IOException {
         HttpRequest request = buildGetObjectHeaderRequest(type, id, outputFields);
@@ -1316,7 +1317,7 @@ public final class MetadataController extends BaseController {
      * @return    Returns the Object response from the API call
      */
     public CompletableFuture<Object> getObjectHeaderAsync(
-            final Type9Enum type,
+            final GetObjectHeaderTypeEnum type,
             final String id,
             final List<String> outputFields) {
         return makeHttpCallAsync(() -> buildGetObjectHeaderRequest(type, id, outputFields),
@@ -1330,7 +1331,7 @@ public final class MetadataController extends BaseController {
      * Builds the HttpRequest object for getObjectHeader.
      */
     private HttpRequest buildGetObjectHeaderRequest(
-            final Type9Enum type,
+            final GetObjectHeaderTypeEnum type,
             final String id,
             final List<String> outputFields) {
         //validating required parameters
@@ -1414,7 +1415,7 @@ public final class MetadataController extends BaseController {
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
     public Object getObjectDetail(
-            final Type10Enum type,
+            final GetObjectDetailTypeEnum type,
             final List<String> id) throws ApiException, IOException {
         HttpRequest request = buildGetObjectDetailRequest(type, id);
         authManagers.get("global").apply(request);
@@ -1434,7 +1435,7 @@ public final class MetadataController extends BaseController {
      * @return    Returns the Object response from the API call
      */
     public CompletableFuture<Object> getObjectDetailAsync(
-            final Type10Enum type,
+            final GetObjectDetailTypeEnum type,
             final List<String> id) {
         return makeHttpCallAsync(() -> buildGetObjectDetailRequest(type, id),
             req -> authManagers.get("global").applyAsync(req)
@@ -1447,7 +1448,7 @@ public final class MetadataController extends BaseController {
      * Builds the HttpRequest object for getObjectDetail.
      */
     private HttpRequest buildGetObjectDetailRequest(
-            final Type10Enum type,
+            final GetObjectDetailTypeEnum type,
             final List<String> id) {
         //validating required parameters
         if (null == type) {
@@ -1836,7 +1837,7 @@ public final class MetadataController extends BaseController {
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
     public Boolean deleteObject(
-            final Type10Enum type,
+            final DeleteObjectTypeEnum type,
             final List<String> id) throws ApiException, IOException {
         HttpRequest request = buildDeleteObjectRequest(type, id);
         authManagers.get("global").apply(request);
@@ -1855,7 +1856,7 @@ public final class MetadataController extends BaseController {
      * @return    Returns the Boolean response from the API call
      */
     public CompletableFuture<Boolean> deleteObjectAsync(
-            final Type10Enum type,
+            final DeleteObjectTypeEnum type,
             final List<String> id) {
         return makeHttpCallAsync(() -> buildDeleteObjectRequest(type, id),
             req -> authManagers.get("global").applyAsync(req)
@@ -1868,7 +1869,7 @@ public final class MetadataController extends BaseController {
      * Builds the HttpRequest object for deleteObject.
      */
     private HttpRequest buildDeleteObjectRequest(
-            final Type10Enum type,
+            final DeleteObjectTypeEnum type,
             final List<String> id) {
         //validating required parameters
         if (null == type) {

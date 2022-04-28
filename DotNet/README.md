@@ -6,16 +6,16 @@
 The SDK is available as a NuGet that you can search for and install using the NuGet GUI. You can also use the following command on the Package Manager Console:
 
 ```csharp
-Install-Package thoughtspot.rest.api.sdk -Version 1.10.0
+Install-Package thoughtspot.rest.api.sdk -Version 1.11.0
 ```
 
 You can also view the NuGet at:
-https://www.nuget.org/packages/thoughtspot.rest.api.sdk/1.10.0
+https://www.nuget.org/packages/thoughtspot.rest.api.sdk/1.11.0
 
 If you are building with .NET CLI tools then you can also use the following command:
 
 ```bash
-dotnet add package thoughtspot.rest.api.sdk --version 1.10.0
+dotnet add package thoughtspot.rest.api.sdk --version 1.11.0
 ```
 
 ## Initialize the API Client
@@ -51,6 +51,6 @@ RESTAPISDK.Standard.RESTAPISDKClient client = new RESTAPISDK.Standard.RESTAPISDK
 This API uses `OAuth 2 Bearer token`.
 
 ## Guide
-[API Reference](https://github.com/thoughtspot/rest-api-sdk/blob/1.10.0/Typescript/doc/README.md)
+[API Reference](https://github.com/thoughtspot/rest-api-sdk/blob/1.11.0/Typescript/doc/README.md)
 ## Live Playground
 We recommend that you browse through the [code playground](https://try-everywhere.thoughtspot.cloud/v2/#/everywhere/api/rest/playgroundV2) before you start constructing your API requests. The playground offers an interactive portal with comprehensive information about the API endpoints, request and response workflows.

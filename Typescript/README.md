@@ -6,7 +6,7 @@
 Run the following command from your project directory to install the package from npm:
 
 ```ts
-npm install @thoughtspot/rest-api-sdk@1.10.0
+npm install thoughtspot@rest-api-sdk@1.11.0
 ```
 
 ## Initialize the API Client
@@ -43,6 +43,6 @@ const client = new Client({
 This API uses `OAuth 2 Bearer token`.
 
 ## Guide
-[API Reference](https://github.com/thoughtspot/rest-api-sdk/blob/1.10.0/Typescript/doc/README.md)
+[API Reference](https://github.com/thoughtspot/rest-api-sdk/blob/1.11.0/Typescript/doc/README.md)
 ## Live Playground
 We recommend that you browse through the [code playground](https://try-everywhere.thoughtspot.cloud/v2/#/everywhere/api/rest/playgroundV2) before you start constructing your API requests. The playground offers an interactive portal with comprehensive information about the API endpoints, request and response workflows.

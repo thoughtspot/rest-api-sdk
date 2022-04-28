@@ -34,7 +34,7 @@ def get_log_events(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `topic` | [`TopicEnum`](../../doc/models/topic-enum.md) | Query, Required | Type of the log. |
+| `topic` | [`GetLogEventsTopicEnum`](../../doc/models/get-log-events-topic-enum.md) | Query, Required | Type of the log. |
 | `from_epoch` | `string` | Query, Optional | The EPOCH time in milliseconds to set the start time for streaming logs.<br><br>Example: To set the timestamp as June 1, 2021 8 am, specify 1622534400000. |
 | `to_epoch` | `string` | Query, Optional | The EPOCH time in milliseconds to set the end time for streaming logs.<br><br>Example: To set the timestamp as July 1, 2021, 8 am, specify 1625126400000. |
 
@@ -45,7 +45,7 @@ def get_log_events(self,
 ## Example Usage
 
 ```python
-topic = TopicEnum.SECURITY_LOGS
+topic = GetLogEventsTopicEnum.SECURITY_LOGS
 
 result = logs_controller.get_log_events(topic)
 ```

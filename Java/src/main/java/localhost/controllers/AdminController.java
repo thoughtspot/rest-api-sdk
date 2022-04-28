@@ -23,7 +23,8 @@ import localhost.http.request.HttpRequest;
 import localhost.http.response.HttpResponse;
 import localhost.http.response.HttpStringResponse;
 import localhost.models.AdminsyncPrincipalResponse;
-import localhost.models.TspublicRestV2AdminChangeownerRequest;
+import localhost.models.TspublicRestV2AdminAssignauthorRequest;
+import localhost.models.TspublicRestV2AdminChangeauthorRequest;
 import localhost.models.TspublicRestV2AdminConfigurationUpdateRequest;
 import localhost.models.TspublicRestV2AdminResetpasswordRequest;
 import localhost.models.TspublicRestV2AdminSyncprincipalRequest;
@@ -541,48 +542,48 @@ public final class AdminController extends BaseController {
     }
 
     /**
-     * To programmatically change the owner of one or several objects from one user account to
-     * another, use this endpoint. You might want to transfer ownership of objects owned by a user
-     * to another active user, when the account is removed from the ThoughtSpot application.
+     * To programmatically change the author of one or several objects from one user account to
+     * another, use this endpoint. You might want to change the author of objects from one user to
+     * another active user, when the account is removed from the ThoughtSpot application.
      * Permission: Requires administration privilege.
      * @param  body  Required parameter: Example:
      * @return    Returns the Boolean response from the API call
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
-    public Boolean changeOwnerOfObjects(
-            final TspublicRestV2AdminChangeownerRequest body) throws ApiException, IOException {
-        HttpRequest request = buildChangeOwnerOfObjectsRequest(body);
+    public Boolean changeAuthorOfObjects(
+            final TspublicRestV2AdminChangeauthorRequest body) throws ApiException, IOException {
+        HttpRequest request = buildChangeAuthorOfObjectsRequest(body);
         authManagers.get("global").apply(request);
 
         HttpResponse response = getClientInstance().execute(request, false);
         HttpContext context = new HttpContext(request, response);
 
-        return handleChangeOwnerOfObjectsResponse(context);
+        return handleChangeAuthorOfObjectsResponse(context);
     }
 
     /**
-     * To programmatically change the owner of one or several objects from one user account to
-     * another, use this endpoint. You might want to transfer ownership of objects owned by a user
-     * to another active user, when the account is removed from the ThoughtSpot application.
+     * To programmatically change the author of one or several objects from one user account to
+     * another, use this endpoint. You might want to change the author of objects from one user to
+     * another active user, when the account is removed from the ThoughtSpot application.
      * Permission: Requires administration privilege.
      * @param  body  Required parameter: Example:
      * @return    Returns the Boolean response from the API call
      */
-    public CompletableFuture<Boolean> changeOwnerOfObjectsAsync(
-            final TspublicRestV2AdminChangeownerRequest body) {
-        return makeHttpCallAsync(() -> buildChangeOwnerOfObjectsRequest(body),
+    public CompletableFuture<Boolean> changeAuthorOfObjectsAsync(
+            final TspublicRestV2AdminChangeauthorRequest body) {
+        return makeHttpCallAsync(() -> buildChangeAuthorOfObjectsRequest(body),
             req -> authManagers.get("global").applyAsync(req)
                 .thenCompose(request -> getClientInstance()
                         .executeAsync(request, false)),
-            context -> handleChangeOwnerOfObjectsResponse(context));
+            context -> handleChangeAuthorOfObjectsResponse(context));
     }
 
     /**
-     * Builds the HttpRequest object for changeOwnerOfObjects.
+     * Builds the HttpRequest object for changeAuthorOfObjects.
      */
-    private HttpRequest buildChangeOwnerOfObjectsRequest(
-            final TspublicRestV2AdminChangeownerRequest body) throws JsonProcessingException {
+    private HttpRequest buildChangeAuthorOfObjectsRequest(
+            final TspublicRestV2AdminChangeauthorRequest body) throws JsonProcessingException {
         //validating required parameters
         if (null == body) {
             throw new NullPointerException("The parameter \"body\" is a required parameter and cannot be null.");
@@ -593,7 +594,7 @@ public final class AdminController extends BaseController {
 
         //prepare query string for API call
         final StringBuilder queryBuilder = new StringBuilder(baseUri
-                + "/tspublic/rest/v2/admin/changeowner");
+                + "/tspublic/rest/v2/admin/changeauthor");
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
@@ -614,10 +615,110 @@ public final class AdminController extends BaseController {
     }
 
     /**
-     * Processes the response for changeOwnerOfObjects.
+     * Processes the response for changeAuthorOfObjects.
      * @return An object of type boolean
      */
-    private Boolean handleChangeOwnerOfObjectsResponse(
+    private Boolean handleChangeAuthorOfObjectsResponse(
+            HttpContext context) throws ApiException, IOException {
+        HttpResponse response = context.getResponse();
+
+        //invoke the callback after response if its not null
+        if (getHttpCallback() != null) {
+            getHttpCallback().onAfterResponse(context);
+        }
+
+        //Error handling using HTTP status codes
+        int responseCode = response.getStatusCode();
+
+        if (responseCode == 500) {
+            throw new ErrorResponseException("Operation failed or unauthorized request", context);
+        }
+        //handle errors defined at the API level
+        validateResponse(response, context);
+
+        //extract result from the http response
+        String responseBody = ((HttpStringResponse) response).getBody();
+        boolean result = Boolean.parseBoolean(responseBody);
+
+        return result;
+    }
+
+    /**
+     * To programmatically assign an author to one or several objects, use this endpoint. Provide
+     * either user name or id as input. When both are given user id will be considered. Requires
+     * administration privilege.
+     * @param  body  Required parameter: Example:
+     * @return    Returns the Boolean response from the API call
+     * @throws    ApiException    Represents error response from the server.
+     * @throws    IOException    Signals that an I/O exception of some sort has occurred.
+     */
+    public Boolean assignAuthorToObjects(
+            final TspublicRestV2AdminAssignauthorRequest body) throws ApiException, IOException {
+        HttpRequest request = buildAssignAuthorToObjectsRequest(body);
+        authManagers.get("global").apply(request);
+
+        HttpResponse response = getClientInstance().execute(request, false);
+        HttpContext context = new HttpContext(request, response);
+
+        return handleAssignAuthorToObjectsResponse(context);
+    }
+
+    /**
+     * To programmatically assign an author to one or several objects, use this endpoint. Provide
+     * either user name or id as input. When both are given user id will be considered. Requires
+     * administration privilege.
+     * @param  body  Required parameter: Example:
+     * @return    Returns the Boolean response from the API call
+     */
+    public CompletableFuture<Boolean> assignAuthorToObjectsAsync(
+            final TspublicRestV2AdminAssignauthorRequest body) {
+        return makeHttpCallAsync(() -> buildAssignAuthorToObjectsRequest(body),
+            req -> authManagers.get("global").applyAsync(req)
+                .thenCompose(request -> getClientInstance()
+                        .executeAsync(request, false)),
+            context -> handleAssignAuthorToObjectsResponse(context));
+    }
+
+    /**
+     * Builds the HttpRequest object for assignAuthorToObjects.
+     */
+    private HttpRequest buildAssignAuthorToObjectsRequest(
+            final TspublicRestV2AdminAssignauthorRequest body) throws JsonProcessingException {
+        //validating required parameters
+        if (null == body) {
+            throw new NullPointerException("The parameter \"body\" is a required parameter and cannot be null.");
+        }
+
+        //the base uri for api requests
+        String baseUri = config.getBaseUri();
+
+        //prepare query string for API call
+        final StringBuilder queryBuilder = new StringBuilder(baseUri
+                + "/tspublic/rest/v2/admin/assignauthor");
+
+        //load all headers for the outgoing API request
+        Headers headers = new Headers();
+        headers.add("Content-Type", "application/json");
+        headers.add("Accept-Language", config.getAcceptLanguage());
+        headers.add("user-agent", BaseController.userAgent);
+
+        //prepare and invoke the API call request to fetch the response
+        String bodyJson = ApiHelper.serialize(body);
+        HttpRequest request = getClientInstance().putBody(queryBuilder, headers, null, bodyJson);
+
+        // Invoke the callback before request if its not null
+        if (getHttpCallback() != null) {
+            getHttpCallback().onBeforeRequest(request);
+        }
+
+        return request;
+    }
+
+    /**
+     * Processes the response for assignAuthorToObjects.
+     * @return An object of type boolean
+     */
+    private Boolean handleAssignAuthorToObjectsResponse(
             HttpContext context) throws ApiException, IOException {
         HttpResponse response = context.getResponse();
 

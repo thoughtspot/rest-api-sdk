@@ -153,7 +153,7 @@ class SecurityController(BaseController):
         Args:
             id (string): GUID of the metadata object for which the permission
                 needs to be obtained.
-            mtype (Type20Enum): Type of metadata object
+            mtype (GetPermissionOnObjectTypeEnum): Type of metadata object
             include_dependent (bool, optional): When this field is set to
                 true, the API response includes the permission details for the
                 dependent objects.

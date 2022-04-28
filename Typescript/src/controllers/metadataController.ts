@@ -7,6 +7,18 @@
 import { ApiResponse, RequestOptions } from '../core';
 import { ErrorResponseError } from '../errors/errorResponseError';
 import {
+  DeleteObjectTypeEnum,
+  deleteObjectTypeEnumSchema,
+} from '../models/deleteObjectTypeEnum';
+import {
+  GetObjectDetailTypeEnum,
+  getObjectDetailTypeEnumSchema,
+} from '../models/getObjectDetailTypeEnum';
+import {
+  GetObjectHeaderTypeEnum,
+  getObjectHeaderTypeEnumSchema,
+} from '../models/getObjectHeaderTypeEnum';
+import {
   HomeLiveboardResponse,
   homeLiveboardResponseSchema,
 } from '../models/homeLiveboardResponse';
@@ -66,8 +78,6 @@ import {
   TspublicRestV2MetadataTmlImportRequest,
   tspublicRestV2MetadataTmlImportRequestSchema,
 } from '../models/tspublicRestV2MetadataTmlImportRequest';
-import { Type10Enum, type10EnumSchema } from '../models/type10Enum';
-import { Type9Enum, type9EnumSchema } from '../models/type9Enum';
 import { array, boolean, optional, string, unknown } from '../schema';
 import { BaseController } from './baseController';
 
@@ -399,18 +409,19 @@ export class MetadataController extends BaseController {
    *
    * @param type         Type of the metadata object being searched.
    * @param id           GUID of the metadata object
-   * @param outputFields Array of header field names that need to be included in the header response
+   * @param outputFields Array of header field names that need to be included in the header
+   *                                                response
    * @return Response from the API call
    */
   async getObjectHeader(
-    type: Type9Enum,
+    type: GetObjectHeaderTypeEnum,
     id: string,
     outputFields?: string[],
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<unknown>> {
     const req = this.createRequest('GET', '/tspublic/rest/v2/metadata/header');
     const mapped = req.prepareArgs({
-      type: [type, type9EnumSchema],
+      type: [type, getObjectHeaderTypeEnumSchema],
       id: [id, string()],
       outputFields: [outputFields, optional(array(string()))],
     });
@@ -432,13 +443,13 @@ export class MetadataController extends BaseController {
    * @return Response from the API call
    */
   async getObjectDetail(
-    type: Type10Enum,
+    type: GetObjectDetailTypeEnum,
     id: string[],
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<unknown>> {
     const req = this.createRequest('GET', '/tspublic/rest/v2/metadata/detail');
     const mapped = req.prepareArgs({
-      type: [type, type10EnumSchema],
+      type: [type, getObjectDetailTypeEnumSchema],
       id: [id, array(string())],
     });
     req.query('type', mapped.type);
@@ -535,7 +546,7 @@ export class MetadataController extends BaseController {
    * @return Response from the API call
    */
   async deleteObject(
-    type: Type10Enum,
+    type: DeleteObjectTypeEnum,
     id: string[],
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<boolean>> {
@@ -544,7 +555,7 @@ export class MetadataController extends BaseController {
       '/tspublic/rest/v2/metadata/delete'
     );
     const mapped = req.prepareArgs({
-      type: [type, type10EnumSchema],
+      type: [type, deleteObjectTypeEnumSchema],
       id: [id, array(string())],
     });
     req.query('type', mapped.type);

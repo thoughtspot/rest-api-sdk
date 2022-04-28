@@ -90,7 +90,8 @@ class UserController(BaseController):
         use this API endpoint. 
          Using this API, you can create a user and assign groups. To create a
          user, you require admin user privileges. 
-         All users created in the ThoughtSpot system are added to ALL_GROUP 
+         All users created in the ThoughtSpot system are added to ALL user
+         group. 
          Permission: Requires administration privilege
 
         Args:
@@ -255,7 +256,7 @@ class UserController(BaseController):
 
         return decoded
 
-    def add_groups_to_user(self,
+    def add_user_to_groups(self,
                            body):
         """Does a PUT request to /tspublic/rest/v2/user/addgroup.
 
@@ -313,7 +314,7 @@ class UserController(BaseController):
 
         return decoded
 
-    def remove_groups_from_user(self,
+    def remove_user_from_groups(self,
                                 body):
         """Does a PUT request to /tspublic/rest/v2/user/removegroup.
 

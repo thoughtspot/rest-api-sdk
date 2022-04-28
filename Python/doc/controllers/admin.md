@@ -15,7 +15,8 @@ admin_controller = client.admin
 * [Update Cluster Config](../../doc/controllers/admin.md#update-cluster-config)
 * [Reset User Password](../../doc/controllers/admin.md#reset-user-password)
 * [Sync Principal](../../doc/controllers/admin.md#sync-principal)
-* [Change Owner of Objects](../../doc/controllers/admin.md#change-owner-of-objects)
+* [Change Author of Objects](../../doc/controllers/admin.md#change-author-of-objects)
+* [Assign Author to Objects](../../doc/controllers/admin.md#assign-author-to-objects)
 
 
 # Get Cluster Config
@@ -193,24 +194,24 @@ result = admin_controller.sync_principal(body)
 | 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Change Owner of Objects
+# Change Author of Objects
 
-To programmatically change the owner of one or several objects from one user account to another, use this endpoint.
+To programmatically change the author of one or several objects from one user account to another, use this endpoint.
 
-You might want to transfer ownership of objects owned by a user to another active user, when the account is removed from the ThoughtSpot application.
+You might want to change the author of objects from one user to another active user, when the account is removed from the ThoughtSpot application.
 
 Permission: Requires administration privilege
 
 ```python
-def change_owner_of_objects(self,
-                           body)
+def change_author_of_objects(self,
+                            body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`TspublicRestV2AdminChangeownerRequest`](../../doc/models/tspublic-rest-v2-admin-changeowner-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2AdminChangeauthorRequest`](../../doc/models/tspublic-rest-v2-admin-changeauthor-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -219,12 +220,51 @@ def change_owner_of_objects(self,
 ## Example Usage
 
 ```python
-body = TspublicRestV2AdminChangeownerRequest()
+body = TspublicRestV2AdminChangeauthorRequest()
 body.ts_object_id = ['tsObjectId7']
 body.from_user = FromUserNameAndIDInput()
 body.to_user = ToUserNameAndIDInput()
 
-result = admin_controller.change_owner_of_objects(body)
+result = admin_controller.change_author_of_objects(body)
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+
+
+# Assign Author to Objects
+
+To programmatically assign an author to one or several objects, use this endpoint.
+
+Provide either user name or id as input. When both are given user id will be considered.
+
+Requires administration privilege.
+
+```python
+def assign_author_to_objects(self,
+                            body)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`TspublicRestV2AdminAssignauthorRequest`](../../doc/models/tspublic-rest-v2-admin-assignauthor-request.md) | Body, Required | - |
+
+## Response Type
+
+`bool`
+
+## Example Usage
+
+```python
+body = TspublicRestV2AdminAssignauthorRequest()
+body.ts_object_id = ['tsObjectId7']
+
+result = admin_controller.assign_author_to_objects(body)
 ```
 
 ## Errors

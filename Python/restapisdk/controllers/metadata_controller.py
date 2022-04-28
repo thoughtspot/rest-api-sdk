@@ -707,7 +707,8 @@ class MetadataController(BaseController):
          at least view access for other object types
 
         Args:
-            mtype (Type9Enum): Type of the metadata object being searched.
+            mtype (GetObjectHeaderTypeEnum): Type of the metadata object being
+                searched.
             id (string): GUID of the metadata object
             output_fields (list of string, optional): Array of header field
                 names that need to be included in the header response
@@ -775,8 +776,8 @@ class MetadataController(BaseController):
          at least view access to other object types
 
         Args:
-            mtype (Type10Enum): Type of the metadata object being searched.
-                Valid values
+            mtype (GetObjectDetailTypeEnum): Type of the metadata object being
+                searched. Valid values
             id (list of string): A JSON array of GUIDs of the objects.
 
         Returns:
@@ -1013,7 +1014,8 @@ class MetadataController(BaseController):
          Permission: Requires modify access to the object
 
         Args:
-            mtype (Type10Enum): Type of the metadata object being searched.
+            mtype (DeleteObjectTypeEnum): Type of the metadata object being
+                searched.
             id (list of string): A JSON array of GUIDs of the objects.
 
         Returns:

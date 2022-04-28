@@ -67,7 +67,7 @@ export class UserController extends BaseController {
    * Using this API, you can create a user and assign groups. To create a user, you require admin user
    * privileges.
    *
-   * All users created in the ThoughtSpot system are added to ALL_GROUP
+   * All users created in the ThoughtSpot system are added to ALL user group.
    *
    * Permission: Requires administration privilege
    *
@@ -155,7 +155,7 @@ export class UserController extends BaseController {
    * @param body
    * @return Response from the API call
    */
-  async addGroupsToUser(
+  async addUserToGroups(
     body: TspublicRestV2UserAddgroupRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<boolean>> {
@@ -183,7 +183,7 @@ export class UserController extends BaseController {
    * @param body
    * @return Response from the API call
    */
-  async removeGroupsFromUser(
+  async removeUserFromGroups(
     body: TspublicRestV2UserRemovegroupRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<boolean>> {

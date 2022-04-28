@@ -6,8 +6,11 @@
 
 import { ApiResponse, RequestOptions } from '../core';
 import { ErrorResponseError } from '../errors/errorResponseError';
+import {
+  GetLogEventsTopicEnum,
+  getLogEventsTopicEnumSchema,
+} from '../models/getLogEventsTopicEnum';
 import { LogsResponse, logsResponseSchema } from '../models/logsResponse';
-import { TopicEnum, topicEnumSchema } from '../models/topicEnum';
 import { optional, string } from '../schema';
 import { BaseController } from './baseController';
 
@@ -29,21 +32,23 @@ export class LogsController extends BaseController {
    * Permission: Requires administration privilege
    *
    * @param topic     Type of the log.
-   * @param fromEpoch The EPOCH time in milliseconds to set the start time for streaming logs.    Example:
-   *                               To set the timestamp as June 1, 2021 8 am, specify 1622534400000.
-   * @param toEpoch   The EPOCH time in milliseconds to set the end time for streaming logs.    Example:
-   *                               To set the timestamp as July 1, 2021, 8 am, specify 1625126400000.
+   * @param fromEpoch The EPOCH time in milliseconds to set the start time for streaming logs.
+   *                                           Example: To set the timestamp as June 1, 2021 8 am, specify
+   *                                           1622534400000.
+   * @param toEpoch   The EPOCH time in milliseconds to set the end time for streaming logs.
+   *                                           Example: To set the timestamp as July 1, 2021, 8 am, specify
+   *                                           1625126400000.
    * @return Response from the API call
    */
   async getLogEvents(
-    topic: TopicEnum,
+    topic: GetLogEventsTopicEnum,
     fromEpoch?: string,
     toEpoch?: string,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<LogsResponse>> {
     const req = this.createRequest('GET', '/tspublic/rest/v2/logs/events');
     const mapped = req.prepareArgs({
-      topic: [topic, topicEnumSchema],
+      topic: [topic, getLogEventsTopicEnumSchema],
       fromEpoch: [fromEpoch, optional(string())],
       toEpoch: [toEpoch, optional(string())],
     });

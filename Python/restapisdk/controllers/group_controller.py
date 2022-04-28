@@ -95,10 +95,10 @@ class GroupController(BaseController):
          groups. 
          The privileges determine the actions that the users belonging to a
          group are allowed to do. 
-         ThoughtSpot also has a default group called ALL_GROUP. When you
-         create new group in ThoughtSpot, they are automatically added to
-         ALL_GROUP. You cannot delete the ALL_GROUP or remove members from it.
-                  Permission: Requires administration privilege
+         ThoughtSpot also has a default group called ALL. When you create new
+         group in ThoughtSpot, they are automatically added to ALL user group.
+         You cannot delete the ALL user group or remove members from it. 
+         Permission: Requires administration privilege
 
         Args:
             body (TspublicRestV2GroupCreateRequest): TODO: type description

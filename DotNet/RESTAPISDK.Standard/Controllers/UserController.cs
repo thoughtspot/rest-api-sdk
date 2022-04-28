@@ -18,6 +18,7 @@ namespace RESTAPISDK.Standard.Controllers
     using RESTAPISDK.Standard.Exceptions;
     using RESTAPISDK.Standard.Http.Client;
     using RESTAPISDK.Standard.Http.Request;
+    using RESTAPISDK.Standard.Http.Request.Configuration;
     using RESTAPISDK.Standard.Http.Response;
     using RESTAPISDK.Standard.Utilities;
 
@@ -101,7 +102,7 @@ namespace RESTAPISDK.Standard.Controllers
             httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
 
             // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
             HttpContext context = new HttpContext(httpRequest, response);
             if (this.HttpCallBack != null)
             {
@@ -122,7 +123,7 @@ namespace RESTAPISDK.Standard.Controllers
         /// <summary>
         /// To programmatically create a user account in the ThoughtSpot system, use this API endpoint. .
         ///  Using this API, you can create a user and assign groups. To create a user, you require admin user privileges. .
-        ///  All users created in the ThoughtSpot system are added to ALL_GROUP .
+        ///  All users created in the ThoughtSpot system are added to ALL user group. .
         ///  Permission: Requires administration privilege.
         /// </summary>
         /// <param name="body">Required parameter: Example: .</param>
@@ -138,7 +139,7 @@ namespace RESTAPISDK.Standard.Controllers
         /// <summary>
         /// To programmatically create a user account in the ThoughtSpot system, use this API endpoint. .
         ///  Using this API, you can create a user and assign groups. To create a user, you require admin user privileges. .
-        ///  All users created in the ThoughtSpot system are added to ALL_GROUP .
+        ///  All users created in the ThoughtSpot system are added to ALL user group. .
         ///  Permission: Requires administration privilege.
         /// </summary>
         /// <param name="body">Required parameter: Example: .</param>
@@ -184,7 +185,7 @@ namespace RESTAPISDK.Standard.Controllers
             httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
 
             // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
             HttpContext context = new HttpContext(httpRequest, response);
             if (this.HttpCallBack != null)
             {
@@ -266,7 +267,7 @@ namespace RESTAPISDK.Standard.Controllers
             httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
 
             // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
             HttpContext context = new HttpContext(httpRequest, response);
             if (this.HttpCallBack != null)
             {
@@ -348,7 +349,7 @@ namespace RESTAPISDK.Standard.Controllers
             httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
 
             // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
             HttpContext context = new HttpContext(httpRequest, response);
             if (this.HttpCallBack != null)
             {
@@ -374,10 +375,10 @@ namespace RESTAPISDK.Standard.Controllers
         /// </summary>
         /// <param name="body">Required parameter: Example: .</param>
         /// <returns>Returns the bool response from the API call.</returns>
-        public bool AddGroupsToUser(
+        public bool AddUserToGroups(
                 Models.TspublicRestV2UserAddgroupRequest body)
         {
-            Task<bool> t = this.AddGroupsToUserAsync(body);
+            Task<bool> t = this.AddUserToGroupsAsync(body);
             ApiHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -391,7 +392,7 @@ namespace RESTAPISDK.Standard.Controllers
         /// <param name="body">Required parameter: Example: .</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the bool response from the API call.</returns>
-        public async Task<bool> AddGroupsToUserAsync(
+        public async Task<bool> AddUserToGroupsAsync(
                 Models.TspublicRestV2UserAddgroupRequest body,
                 CancellationToken cancellationToken = default)
         {
@@ -430,7 +431,7 @@ namespace RESTAPISDK.Standard.Controllers
             httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
 
             // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
             HttpContext context = new HttpContext(httpRequest, response);
             if (this.HttpCallBack != null)
             {
@@ -456,10 +457,10 @@ namespace RESTAPISDK.Standard.Controllers
         /// </summary>
         /// <param name="body">Required parameter: Example: .</param>
         /// <returns>Returns the bool response from the API call.</returns>
-        public bool RemoveGroupsFromUser(
+        public bool RemoveUserFromGroups(
                 Models.TspublicRestV2UserRemovegroupRequest body)
         {
-            Task<bool> t = this.RemoveGroupsFromUserAsync(body);
+            Task<bool> t = this.RemoveUserFromGroupsAsync(body);
             ApiHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -473,7 +474,7 @@ namespace RESTAPISDK.Standard.Controllers
         /// <param name="body">Required parameter: Example: .</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the bool response from the API call.</returns>
-        public async Task<bool> RemoveGroupsFromUserAsync(
+        public async Task<bool> RemoveUserFromGroupsAsync(
                 Models.TspublicRestV2UserRemovegroupRequest body,
                 CancellationToken cancellationToken = default)
         {
@@ -512,7 +513,7 @@ namespace RESTAPISDK.Standard.Controllers
             httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
 
             // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
             HttpContext context = new HttpContext(httpRequest, response);
             if (this.HttpCallBack != null)
             {
@@ -592,7 +593,7 @@ namespace RESTAPISDK.Standard.Controllers
             httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
 
             // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
             HttpContext context = new HttpContext(httpRequest, response);
             if (this.HttpCallBack != null)
             {
@@ -670,7 +671,7 @@ namespace RESTAPISDK.Standard.Controllers
             httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
 
             // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
             HttpContext context = new HttpContext(httpRequest, response);
             if (this.HttpCallBack != null)
             {

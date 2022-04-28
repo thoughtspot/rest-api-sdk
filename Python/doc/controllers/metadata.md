@@ -213,15 +213,15 @@ body.ts_object = []
 
 body.ts_object.append(TsObjectInput())
 body.ts_object[0].id = 'id8'
-body.ts_object[0].mtype = TypeEnum.DATAOBJECT
+body.ts_object[0].mtype = TsObjectInputTypeEnum.DATAOBJECT
 
 body.ts_object.append(TsObjectInput())
 body.ts_object[1].id = 'id9'
-body.ts_object[1].mtype = TypeEnum.CONNECTION
+body.ts_object[1].mtype = TsObjectInputTypeEnum.CONNECTION
 
 body.ts_object.append(TsObjectInput())
 body.ts_object[2].id = 'id0'
-body.ts_object[2].mtype = TypeEnum.ANSWER
+body.ts_object[2].mtype = TsObjectInputTypeEnum.ANSWER
 
 
 result = metadata_controller.assign_tag(body)
@@ -265,15 +265,15 @@ body.ts_object = []
 
 body.ts_object.append(TsObjectInput())
 body.ts_object[0].id = 'id8'
-body.ts_object[0].mtype = TypeEnum.DATAOBJECT
+body.ts_object[0].mtype = TsObjectInputTypeEnum.DATAOBJECT
 
 body.ts_object.append(TsObjectInput())
 body.ts_object[1].id = 'id9'
-body.ts_object[1].mtype = TypeEnum.CONNECTION
+body.ts_object[1].mtype = TsObjectInputTypeEnum.CONNECTION
 
 body.ts_object.append(TsObjectInput())
 body.ts_object[2].id = 'id0'
-body.ts_object[2].mtype = TypeEnum.ANSWER
+body.ts_object[2].mtype = TsObjectInputTypeEnum.ANSWER
 
 
 result = metadata_controller.unassign_tag(body)
@@ -317,15 +317,15 @@ body.ts_object = []
 
 body.ts_object.append(TsObjectInput())
 body.ts_object[0].id = 'id8'
-body.ts_object[0].mtype = TypeEnum.DATAOBJECT
+body.ts_object[0].mtype = TsObjectInputTypeEnum.DATAOBJECT
 
 body.ts_object.append(TsObjectInput())
 body.ts_object[1].id = 'id9'
-body.ts_object[1].mtype = TypeEnum.CONNECTION
+body.ts_object[1].mtype = TsObjectInputTypeEnum.CONNECTION
 
 body.ts_object.append(TsObjectInput())
 body.ts_object[2].id = 'id0'
-body.ts_object[2].mtype = TypeEnum.ANSWER
+body.ts_object[2].mtype = TsObjectInputTypeEnum.ANSWER
 
 
 result = metadata_controller.assign_favorite(body)
@@ -369,15 +369,15 @@ body.ts_object = []
 
 body.ts_object.append(TsObjectInput())
 body.ts_object[0].id = 'id8'
-body.ts_object[0].mtype = TypeEnum.DATAOBJECT
+body.ts_object[0].mtype = TsObjectInputTypeEnum.DATAOBJECT
 
 body.ts_object.append(TsObjectInput())
 body.ts_object[1].id = 'id9'
-body.ts_object[1].mtype = TypeEnum.CONNECTION
+body.ts_object[1].mtype = TsObjectInputTypeEnum.CONNECTION
 
 body.ts_object.append(TsObjectInput())
 body.ts_object[2].id = 'id0'
-body.ts_object[2].mtype = TypeEnum.ANSWER
+body.ts_object[2].mtype = TsObjectInputTypeEnum.ANSWER
 
 
 result = metadata_controller.unassign_favorite(body)
@@ -546,7 +546,7 @@ def get_object_header(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `mtype` | [`Type9Enum`](../../doc/models/type-9-enum.md) | Query, Required | Type of the metadata object being searched. |
+| `mtype` | [`GetObjectHeaderTypeEnum`](../../doc/models/get-object-header-type-enum.md) | Query, Required | Type of the metadata object being searched. |
 | `id` | `string` | Query, Required | GUID of the metadata object |
 | `output_fields` | `List of string` | Query, Optional | Array of header field names that need to be included in the header response |
 
@@ -557,7 +557,7 @@ def get_object_header(self,
 ## Example Usage
 
 ```python
-mtype = Type9Enum.COLUMN_ALL
+mtype = GetObjectHeaderTypeEnum.COLUMN_ALL
 id = 'id0'
 
 result = metadata_controller.get_object_header(mtype, id)
@@ -586,7 +586,7 @@ def get_object_detail(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `mtype` | [`Type10Enum`](../../doc/models/type-10-enum.md) | Query, Required | Type of the metadata object being searched. Valid values |
+| `mtype` | [`GetObjectDetailTypeEnum`](../../doc/models/get-object-detail-type-enum.md) | Query, Required | Type of the metadata object being searched. Valid values |
 | `id` | `List of string` | Query, Required | A JSON array of GUIDs of the objects. |
 
 ## Response Type
@@ -596,7 +596,7 @@ def get_object_detail(self,
 ## Example Usage
 
 ```python
-mtype = Type10Enum.DATAOBJECT
+mtype = GetObjectDetailTypeEnum.DATAOBJECT
 id = ['id0']
 
 result = metadata_controller.get_object_detail(mtype, id)
@@ -672,7 +672,7 @@ def search_object_header(self,
 
 ```python
 body = TspublicRestV2MetadataHeaderSearchRequest()
-body.mtype = Type11Enum.USER
+body.mtype = SearchObjectHeaderTypeEnum.USER
 
 result = metadata_controller.search_object_header(body)
 ```
@@ -709,7 +709,7 @@ def search_object_detail(self,
 
 ```python
 body = TspublicRestV2MetadataDetailSearchRequest()
-body.mtype = Type12Enum.USER
+body.mtype = SearchObjectDetailTypeEnum.USER
 body.id = ['id6', 'id7']
 
 result = metadata_controller.search_object_detail(body)
@@ -738,7 +738,7 @@ def delete_object(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `mtype` | [`Type10Enum`](../../doc/models/type-10-enum.md) | Query, Required | Type of the metadata object being searched. |
+| `mtype` | [`DeleteObjectTypeEnum`](../../doc/models/delete-object-type-enum.md) | Query, Required | Type of the metadata object being searched. |
 | `id` | `List of string` | Query, Required | A JSON array of GUIDs of the objects. |
 
 ## Response Type
@@ -748,7 +748,7 @@ def delete_object(self,
 ## Example Usage
 
 ```python
-mtype = Type10Enum.DATAOBJECT
+mtype = DeleteObjectTypeEnum.DATAOBJECT
 id = ['id0']
 
 result = metadata_controller.delete_object(mtype, id)
@@ -796,7 +796,7 @@ def get_object_dependency(self,
 
 ```python
 body = TspublicRestV2MetadataDependencyRequest()
-body.mtype = Type14Enum.COLUMN
+body.mtype = GetObjectDependencyTypeEnum.COLUMN
 body.id = ['id6', 'id7']
 
 result = metadata_controller.get_object_dependency(body)
