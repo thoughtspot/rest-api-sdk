@@ -1,6 +1,7 @@
 
 # Getting Started with RESTAPI SDK
 
+SDK for ThoughtSpot's v2 [Rest APIs](https://developers.thoughtspot.com/docs/?pageid=rest-api-v2) (Beta)
 ## Install the Package
 
 Run the following command from your project directory to install the package from npm:
