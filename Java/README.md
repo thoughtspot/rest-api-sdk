@@ -1,6 +1,7 @@
 
 # Getting Started with RESTAPI SDK
 
+SDK for ThoughtSpot's v2 [Rest APIs](https://developers.thoughtspot.com/docs/?pageid=rest-api-v2) (Beta)
 ## Install the Package
 
 Install the SDK by adding the following dependency in your project's pom.xml file:

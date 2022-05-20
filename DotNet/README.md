@@ -1,6 +1,8 @@
 
 # Getting Started with RESTAPI SDK
 
+SDK for ThoughtSpot's v2 [Rest APIs](https://developers.thoughtspot.com/docs/?pageid=rest-api-v2) (Beta)
+
 ## Install the Package
 
 The SDK is available as a NuGet that you can search for and install using the NuGet GUI. You can also use the following command on the Package Manager Console:

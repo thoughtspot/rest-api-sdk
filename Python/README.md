@@ -1,6 +1,7 @@
 
 # Getting Started with RESTAPI SDK
 
+SDK for ThoughtSpot's v2 [Rest APIs](https://developers.thoughtspot.com/docs/?pageid=rest-api-v2) (Beta)
 ## Install the Package
 
 The package is compatible with Python versions `3 >=3.7, <= 3.9`.
