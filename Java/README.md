@@ -1,0 +1,56 @@
+
+# Getting Started with RESTAPI SDK
+
+SDK for ThoughtSpot's v2 [Rest APIs](https://developers.thoughtspot.com/docs/?pageid=rest-api-v2) (Beta)
+## Install the Package
+
+Install the SDK by adding the following dependency in your project's pom.xml file:
+
+```xml
+<dependency>
+  <groupId>io.github.thoughtspot</groupId>
+  <artifactId>rest-api-sdk-lib</artifactId>
+  <version>1.10.0</version>
+</dependency>
+```
+
+You can also view the package at:
+https://mvnrepository.com/artifact/io.github.thoughtspot/rest-api-sdk-lib/1.10.0
+
+## Initialize the API Client
+
+**_Note:_** Documentation for the client can be found [here.](doc/client.md)
+
+The following parameters are configurable for the API Client:
+
+| Parameter | Type | Description |
+|  --- | --- | --- |
+| `acceptLanguage` | `String` | response format<br>*Default*: `"application/json"` |
+| `contentType` | `String` | body content type for post request<br>*Default*: `"application/json"` |
+| `baseUrl` | `String` | *Default*: `"https://localhost:443"` |
+| `environment` | Environment | The API environment. <br> **Default: `Environment.PRODUCTION`** |
+| `httpClientConfig` | `ReadonlyHttpClientConfiguration` | Http Client Configuration instance. |
+| `accessToken` | `String` | The OAuth 2.0 Access Token to use for API requests. |
+
+The API client can be initialized as follows:
+
+```java
+RESTAPISDKClient client = new RESTAPISDKClient.Builder()
+    .httpClientConfig(configBuilder -> configBuilder
+            .timeout(0))
+    .acceptLanguage("application/json")
+    .contentType("application/json")
+    .accessToken("AccessToken")
+    .environment(Environment.PRODUCTION)
+    .baseUrl("https://localhost:443")
+    .build();
+```
+
+## Authorization
+
+This API uses `OAuth 2 Bearer token`.
+
+## Guide
+[API Reference](https://github.com/thoughtspot/rest-api-sdk/blob/1.10.0/Typescript/doc/README.md)
+## Live Playground
+We recommend that you browse through the [code playground](https://try-everywhere.thoughtspot.cloud/v2/#/everywhere/api/rest/playgroundV2) before you start constructing your API requests. The playground offers an interactive portal with comprehensive information about the API endpoints, request and response workflows.
