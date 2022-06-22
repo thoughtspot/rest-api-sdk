@@ -33,6 +33,7 @@
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.class.version" value="52.0"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="maven.repo.local" value="/Users/sandeep.yadav/.m2/repository"/>
     <property name="os.version" value="10.16"/>
     <property name="library.jansi.path" value="/usr/local/Cellar/maven/3.8.5/libexec/lib/jansi-native"/>
     <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
@@ -46,7 +47,7 @@
     <property name="java.vm.specification.version" value="1.8"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.home" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_311.jdk/Contents/Home/jre"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher clean deploy -P release"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -D maven.repo.local=/Users/sandeep.yadav/.m2/repository -s /private/var/folders/zs/lf731yvd6w12x0lpncy021940000gq/T/release-settings4192099962004649615.xml clean verify"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
     <property name="user.language" value="en"/>
     <property name="awt.toolkit" value="sun.lwawt.macosx.LWCToolkit"/>
