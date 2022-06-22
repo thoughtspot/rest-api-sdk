@@ -34,7 +34,7 @@
     <connection>scm:git:git://github.com/thoughtspot/rest-api-sdk.git</connection>
     <developerConnection>scm:git:ssh://github.com/thoughtspot/rest-api-sdk</developerConnection>
     <url>http://github.com/thoughtspot/rest-api-sdk/main</url>
-    <tag>rest-api-sdk-lib-1.11.0</tag>
+    <tag>HEAD</tag>
   </scm>
 
   <distributionManagement>
