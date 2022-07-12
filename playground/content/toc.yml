@@ -1,0 +1,11 @@
+toc:
+  - group: Getting Started
+    items:
+      - page: Introduction
+        file: Introduction.md
+      - generate: Setup and Usage 
+        from: getting-started
+  - generate: Resources
+    from: endpoints
+  - generate: Models
+    from: models
