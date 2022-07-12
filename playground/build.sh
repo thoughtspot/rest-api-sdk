@@ -1,10 +1,11 @@
 #!/bin/bash
 
-# cleanup generated portal
-rm -rf static-portal
+# cleanup generated portal and build archives
+rm -rf build
+mkdir build
 
-zip -qq -r portal-input.zip .
+npx bestzip $PWD/build/portal-input.zip .
 
-curl -X POST --url 'https://www.apimatic.io/api/portal' -H "Authorization:X-Auth-Key "$APIMATIC_API_KEY"" -F 'file=@portal-input.zip' -o portal-output.zip
+curl -X POST --url 'https://www.apimatic.io/api/portal' -H "Authorization:X-Auth-Key "$APIMATIC_API_KEY"" -F 'file=@./build/portal-input.zip' -o ./build/portal-output.zip
 
-unzip -qq portal-output.zip -d static-portal
+npx extract-zip $PWD/build/portal-output.zip $PWD/build/static-portal
