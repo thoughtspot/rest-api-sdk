@@ -9,8 +9,8 @@
         "languageConfig": {
             "http": {}
         },
-        "headIncludes": "<link rel=\"icon\" type=\"image/svg+xml\" href='static/images/favicon.svg' /><link rel=\"stylesheet\" href=\".\/static\/styles\/overrides.css\">",
-        "tailIncludes": "<script id=\"ts-playground-snippet\" src=\".\/static\/js\/embedded.js\"><\/<script>",
+        "headIncludes": "<link rel=\"icon\" type=\"image/svg+xml\" href='static/images/favicon.svg' /><link rel=\"stylesheet\" href=\"static\/css\/overrides.css\">",
+        "tailIncludes": "<script id=\"ts-playground-snippet\" src=\".\/static\/js\/embedded.js\"><\/script>",
         "portalSettings": {
             "themeOverrides": {
                 "themeType": "cool",

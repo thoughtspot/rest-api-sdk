@@ -14,9 +14,22 @@
     font-display: swap;
 }
 
+.embedded .portal-header {
+    display: none;
+}
+
+.embedded #apimatic-widget>div {
+    border-top: 0;
+}
+
+.embedded .hosted-api-docs {
+    height: 100vh;
+}
+
 .portal-header {
     background: #323946
 }
+
 .branding-container .logo p {
     color: #eaedf2
 }
