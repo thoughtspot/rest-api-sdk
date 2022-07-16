@@ -33,3 +33,11 @@
 .branding-container .logo p {
     color: #eaedf2
 }
+
+#app-layout-docs-container {
+    border-radius: 0;
+}
+
+.code-with-copy {
+    background-color: #f6f8fa;
+}
