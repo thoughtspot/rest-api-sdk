@@ -39,5 +39,10 @@
 }
 
 .code-with-copy {
-    background-color: #f6f8fa;
+    background-color: #f6f8fa !important;
+}
+
+.rc-menu .rc-menu-item-group .rc-menu-item-selected>a>div:not([color]) {
+    color: #2770ef !important;
+    font-weight: 300 !important;
 }

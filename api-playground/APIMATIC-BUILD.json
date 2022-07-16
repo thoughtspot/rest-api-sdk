@@ -76,6 +76,20 @@
                             "fontWeight": "300",
                             "fontStyle": "normal",
                             "lineHeight": "1.6rem"
+                        },
+                        "text2": {
+                            "fontFamily": "Optimo-Plain",
+                            "fontSize": "14.5px",
+                            "fontWeight": "300",
+                            "fontStyle": "normal",
+                            "lineHeight": "1.6rem"
+                        },
+                        "text3": {
+                            "fontFamily": "Optimo-Plain",
+                            "fontSize": "14.5px",
+                            "fontWeight": "300",
+                            "fontStyle": "normal",
+                            "lineHeight": "1.6rem"
                         }
                     },
                     "code": {
