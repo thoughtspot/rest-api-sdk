@@ -13,3 +13,6 @@ npx bestzip $PWD/build/portal-input.zip .
 curl -X POST --url 'https://www.apimatic.io/api/portal' -H "Authorization:X-Auth-Key "$APIMATIC_API_KEY"" -F 'file=@./build/portal-input.zip' -o ./build/portal-output.zip
 
 npx extract-zip $PWD/build/portal-output.zip $PWD/build/static-portal
+
+# copy the service worker to the root dir
+cp $PWD/build/static-portal/static/js/embedded-worker.js $PWD/build/static-portal/
