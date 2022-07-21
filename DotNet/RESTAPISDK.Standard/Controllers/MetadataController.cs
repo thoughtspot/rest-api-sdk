@@ -953,6 +953,7 @@ namespace RESTAPISDK.Standard.Controllers
             var headers = new Dictionary<string, string>()
             {
                 { "user-agent", this.UserAgent },
+                { "accept", "application/json" },
                 { "Accept-Language", this.Config.AcceptLanguage },
                 { "Content-Type", this.Config.ContentType },
             };
@@ -1044,6 +1045,7 @@ namespace RESTAPISDK.Standard.Controllers
             var headers = new Dictionary<string, string>()
             {
                 { "user-agent", this.UserAgent },
+                { "accept", "application/json" },
                 { "Accept-Language", this.Config.AcceptLanguage },
                 { "Content-Type", this.Config.ContentType },
             };
@@ -1130,6 +1132,7 @@ namespace RESTAPISDK.Standard.Controllers
             var headers = new Dictionary<string, string>()
             {
                 { "user-agent", this.UserAgent },
+                { "accept", "application/json" },
                 { "Accept-Language", this.Config.AcceptLanguage },
                 { "Content-Type", this.Config.ContentType },
             };
@@ -1289,6 +1292,7 @@ namespace RESTAPISDK.Standard.Controllers
             var headers = new Dictionary<string, string>()
             {
                 { "user-agent", this.UserAgent },
+                { "accept", "application/json" },
                 { "Content-Type", "application/json" },
                 { "Accept-Language", this.Config.AcceptLanguage },
             };
@@ -1367,6 +1371,7 @@ namespace RESTAPISDK.Standard.Controllers
             var headers = new Dictionary<string, string>()
             {
                 { "user-agent", this.UserAgent },
+                { "accept", "application/json" },
                 { "Content-Type", "application/json" },
                 { "Accept-Language", this.Config.AcceptLanguage },
             };
@@ -1541,6 +1546,7 @@ namespace RESTAPISDK.Standard.Controllers
             var headers = new Dictionary<string, string>()
             {
                 { "user-agent", this.UserAgent },
+                { "accept", "application/json" },
                 { "Content-Type", "application/json" },
                 { "Accept-Language", this.Config.AcceptLanguage },
             };
@@ -1619,6 +1625,7 @@ namespace RESTAPISDK.Standard.Controllers
             var headers = new Dictionary<string, string>()
             {
                 { "user-agent", this.UserAgent },
+                { "accept", "application/json" },
                 { "Content-Type", "application/json" },
                 { "Accept-Language", this.Config.AcceptLanguage },
             };
@@ -1697,6 +1704,7 @@ namespace RESTAPISDK.Standard.Controllers
             var headers = new Dictionary<string, string>()
             {
                 { "user-agent", this.UserAgent },
+                { "accept", "application/json" },
                 { "Content-Type", "application/json" },
                 { "Accept-Language", this.Config.AcceptLanguage },
             };

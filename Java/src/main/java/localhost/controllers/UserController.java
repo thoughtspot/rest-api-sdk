@@ -23,7 +23,9 @@ import localhost.http.client.HttpContext;
 import localhost.http.request.HttpRequest;
 import localhost.http.response.HttpResponse;
 import localhost.http.response.HttpStringResponse;
+import localhost.models.OrgInput;
 import localhost.models.TspublicRestV2UserAddgroupRequest;
+import localhost.models.TspublicRestV2UserAddorgRequest;
 import localhost.models.TspublicRestV2UserChangepasswordRequest;
 import localhost.models.TspublicRestV2UserCreateRequest;
 import localhost.models.TspublicRestV2UserRemovegroupRequest;
@@ -169,7 +171,7 @@ public final class UserController extends BaseController {
     /**
      * To programmatically create a user account in the ThoughtSpot system, use this API endpoint.
      * Using this API, you can create a user and assign groups. To create a user, you require admin
-     * user privileges. All users created in the ThoughtSpot system are added to ALL_GROUP
+     * user privileges. All users created in the ThoughtSpot system are added to ALL user group.
      * Permission: Requires administration privilege.
      * @param  body  Required parameter: Example:
      * @return    Returns the UserResponse response from the API call
@@ -190,7 +192,7 @@ public final class UserController extends BaseController {
     /**
      * To programmatically create a user account in the ThoughtSpot system, use this API endpoint.
      * Using this API, you can create a user and assign groups. To create a user, you require admin
-     * user privileges. All users created in the ThoughtSpot system are added to ALL_GROUP
+     * user privileges. All users created in the ThoughtSpot system are added to ALL user group.
      * Permission: Requires administration privilege.
      * @param  body  Required parameter: Example:
      * @return    Returns the UserResponse response from the API call
@@ -378,14 +380,19 @@ public final class UserController extends BaseController {
      * Requires administration privilege.
      * @param  name  Optional parameter: Username of the user account
      * @param  id  Optional parameter: The GUID of the user account
+     * @param  org  Optional parameter: This is applicable only if organization feature is enabled
+     *         in the cluster. A JSON object of organization name, id or both, from which the user
+     *         should be deleted. When both are given then id is considered. If no value is provided
+     *         then the organization associated with the login session will be considered.
      * @return    Returns the Boolean response from the API call
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
     public Boolean deleteUser(
             final String name,
-            final String id) throws ApiException, IOException {
-        HttpRequest request = buildDeleteUserRequest(name, id);
+            final String id,
+            final OrgInput org) throws ApiException, IOException {
+        HttpRequest request = buildDeleteUserRequest(name, id, org);
         authManagers.get("global").apply(request);
 
         HttpResponse response = getClientInstance().execute(request, false);
@@ -400,12 +407,17 @@ public final class UserController extends BaseController {
      * Requires administration privilege.
      * @param  name  Optional parameter: Username of the user account
      * @param  id  Optional parameter: The GUID of the user account
+     * @param  org  Optional parameter: This is applicable only if organization feature is enabled
+     *         in the cluster. A JSON object of organization name, id or both, from which the user
+     *         should be deleted. When both are given then id is considered. If no value is provided
+     *         then the organization associated with the login session will be considered.
      * @return    Returns the Boolean response from the API call
      */
     public CompletableFuture<Boolean> deleteUserAsync(
             final String name,
-            final String id) {
-        return makeHttpCallAsync(() -> buildDeleteUserRequest(name, id),
+            final String id,
+            final OrgInput org) {
+        return makeHttpCallAsync(() -> buildDeleteUserRequest(name, id, org),
             req -> authManagers.get("global").applyAsync(req)
                 .thenCompose(request -> getClientInstance()
                         .executeAsync(request, false)),
@@ -417,7 +429,8 @@ public final class UserController extends BaseController {
      */
     private HttpRequest buildDeleteUserRequest(
             final String name,
-            final String id) {
+            final String id,
+            final OrgInput org) {
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 
@@ -429,6 +442,7 @@ public final class UserController extends BaseController {
         Map<String, Object> queryParameters = new HashMap<>();
         queryParameters.put("name", name);
         queryParameters.put("id", id);
+        queryParameters.put("org", org);
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
@@ -487,15 +501,15 @@ public final class UserController extends BaseController {
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
-    public Boolean addGroupsToUser(
+    public Boolean addUserToGroups(
             final TspublicRestV2UserAddgroupRequest body) throws ApiException, IOException {
-        HttpRequest request = buildAddGroupsToUserRequest(body);
+        HttpRequest request = buildAddUserToGroupsRequest(body);
         authManagers.get("global").apply(request);
 
         HttpResponse response = getClientInstance().execute(request, false);
         HttpContext context = new HttpContext(request, response);
 
-        return handleAddGroupsToUserResponse(context);
+        return handleAddUserToGroupsResponse(context);
     }
 
     /**
@@ -506,19 +520,19 @@ public final class UserController extends BaseController {
      * @param  body  Required parameter: Example:
      * @return    Returns the Boolean response from the API call
      */
-    public CompletableFuture<Boolean> addGroupsToUserAsync(
+    public CompletableFuture<Boolean> addUserToGroupsAsync(
             final TspublicRestV2UserAddgroupRequest body) {
-        return makeHttpCallAsync(() -> buildAddGroupsToUserRequest(body),
+        return makeHttpCallAsync(() -> buildAddUserToGroupsRequest(body),
             req -> authManagers.get("global").applyAsync(req)
                 .thenCompose(request -> getClientInstance()
                         .executeAsync(request, false)),
-            context -> handleAddGroupsToUserResponse(context));
+            context -> handleAddUserToGroupsResponse(context));
     }
 
     /**
-     * Builds the HttpRequest object for addGroupsToUser.
+     * Builds the HttpRequest object for addUserToGroups.
      */
-    private HttpRequest buildAddGroupsToUserRequest(
+    private HttpRequest buildAddUserToGroupsRequest(
             final TspublicRestV2UserAddgroupRequest body) throws JsonProcessingException {
         //validating required parameters
         if (null == body) {
@@ -551,10 +565,10 @@ public final class UserController extends BaseController {
     }
 
     /**
-     * Processes the response for addGroupsToUser.
+     * Processes the response for addUserToGroups.
      * @return An object of type boolean
      */
-    private Boolean handleAddGroupsToUserResponse(
+    private Boolean handleAddUserToGroupsResponse(
             HttpContext context) throws ApiException, IOException {
         HttpResponse response = context.getResponse();
 
@@ -589,15 +603,15 @@ public final class UserController extends BaseController {
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
-    public Boolean removeGroupsFromUser(
+    public Boolean removeUserFromGroups(
             final TspublicRestV2UserRemovegroupRequest body) throws ApiException, IOException {
-        HttpRequest request = buildRemoveGroupsFromUserRequest(body);
+        HttpRequest request = buildRemoveUserFromGroupsRequest(body);
         authManagers.get("global").apply(request);
 
         HttpResponse response = getClientInstance().execute(request, false);
         HttpContext context = new HttpContext(request, response);
 
-        return handleRemoveGroupsFromUserResponse(context);
+        return handleRemoveUserFromGroupsResponse(context);
     }
 
     /**
@@ -608,19 +622,19 @@ public final class UserController extends BaseController {
      * @param  body  Required parameter: Example:
      * @return    Returns the Boolean response from the API call
      */
-    public CompletableFuture<Boolean> removeGroupsFromUserAsync(
+    public CompletableFuture<Boolean> removeUserFromGroupsAsync(
             final TspublicRestV2UserRemovegroupRequest body) {
-        return makeHttpCallAsync(() -> buildRemoveGroupsFromUserRequest(body),
+        return makeHttpCallAsync(() -> buildRemoveUserFromGroupsRequest(body),
             req -> authManagers.get("global").applyAsync(req)
                 .thenCompose(request -> getClientInstance()
                         .executeAsync(request, false)),
-            context -> handleRemoveGroupsFromUserResponse(context));
+            context -> handleRemoveUserFromGroupsResponse(context));
     }
 
     /**
-     * Builds the HttpRequest object for removeGroupsFromUser.
+     * Builds the HttpRequest object for removeUserFromGroups.
      */
-    private HttpRequest buildRemoveGroupsFromUserRequest(
+    private HttpRequest buildRemoveUserFromGroupsRequest(
             final TspublicRestV2UserRemovegroupRequest body) throws JsonProcessingException {
         //validating required parameters
         if (null == body) {
@@ -653,10 +667,114 @@ public final class UserController extends BaseController {
     }
 
     /**
-     * Processes the response for removeGroupsFromUser.
+     * Processes the response for removeUserFromGroups.
      * @return An object of type boolean
      */
-    private Boolean handleRemoveGroupsFromUserResponse(
+    private Boolean handleRemoveUserFromGroupsResponse(
+            HttpContext context) throws ApiException, IOException {
+        HttpResponse response = context.getResponse();
+
+        //invoke the callback after response if its not null
+        if (getHttpCallback() != null) {
+            getHttpCallback().onAfterResponse(context);
+        }
+
+        //Error handling using HTTP status codes
+        int responseCode = response.getStatusCode();
+
+        if (responseCode == 500) {
+            throw new ErrorResponseException("Operation failed or unauthorized request", context);
+        }
+        //handle errors defined at the API level
+        validateResponse(response, context);
+
+        //extract result from the http response
+        String responseBody = ((HttpStringResponse) response).getBody();
+        boolean result = Boolean.parseBoolean(responseBody);
+
+        return result;
+    }
+
+    /**
+     * This is endpoint is applicable only if organization feature is enabled in the cluster. To
+     * programmatically add existing ThoughtSpot users to an organization, use this API endpoint. At
+     * least one of id or name of the organization is required. When both are given, then
+     * organization id will be considered. Requires Administration access for the organization to
+     * which users need to be added.
+     * @param  body  Required parameter: Example:
+     * @return    Returns the Boolean response from the API call
+     * @throws    ApiException    Represents error response from the server.
+     * @throws    IOException    Signals that an I/O exception of some sort has occurred.
+     */
+    public Boolean addUserToOrgs(
+            final TspublicRestV2UserAddorgRequest body) throws ApiException, IOException {
+        HttpRequest request = buildAddUserToOrgsRequest(body);
+        authManagers.get("global").apply(request);
+
+        HttpResponse response = getClientInstance().execute(request, false);
+        HttpContext context = new HttpContext(request, response);
+
+        return handleAddUserToOrgsResponse(context);
+    }
+
+    /**
+     * This is endpoint is applicable only if organization feature is enabled in the cluster. To
+     * programmatically add existing ThoughtSpot users to an organization, use this API endpoint. At
+     * least one of id or name of the organization is required. When both are given, then
+     * organization id will be considered. Requires Administration access for the organization to
+     * which users need to be added.
+     * @param  body  Required parameter: Example:
+     * @return    Returns the Boolean response from the API call
+     */
+    public CompletableFuture<Boolean> addUserToOrgsAsync(
+            final TspublicRestV2UserAddorgRequest body) {
+        return makeHttpCallAsync(() -> buildAddUserToOrgsRequest(body),
+            req -> authManagers.get("global").applyAsync(req)
+                .thenCompose(request -> getClientInstance()
+                        .executeAsync(request, false)),
+            context -> handleAddUserToOrgsResponse(context));
+    }
+
+    /**
+     * Builds the HttpRequest object for addUserToOrgs.
+     */
+    private HttpRequest buildAddUserToOrgsRequest(
+            final TspublicRestV2UserAddorgRequest body) throws JsonProcessingException {
+        //validating required parameters
+        if (null == body) {
+            throw new NullPointerException("The parameter \"body\" is a required parameter and cannot be null.");
+        }
+
+        //the base uri for api requests
+        String baseUri = config.getBaseUri();
+
+        //prepare query string for API call
+        final StringBuilder queryBuilder = new StringBuilder(baseUri
+                + "/tspublic/rest/v2/user/addorg");
+
+        //load all headers for the outgoing API request
+        Headers headers = new Headers();
+        headers.add("Content-Type", "application/json");
+        headers.add("Accept-Language", config.getAcceptLanguage());
+        headers.add("user-agent", BaseController.userAgent);
+
+        //prepare and invoke the API call request to fetch the response
+        String bodyJson = ApiHelper.serialize(body);
+        HttpRequest request = getClientInstance().putBody(queryBuilder, headers, null, bodyJson);
+
+        // Invoke the callback before request if its not null
+        if (getHttpCallback() != null) {
+            getHttpCallback().onBeforeRequest(request);
+        }
+
+        return request;
+    }
+
+    /**
+     * Processes the response for addUserToOrgs.
+     * @return An object of type boolean
+     */
+    private Boolean handleAddUserToOrgsResponse(
             HttpContext context) throws ApiException, IOException {
         HttpResponse response = context.getResponse();
 
@@ -839,6 +957,7 @@ public final class UserController extends BaseController {
         headers.add("Content-Type", "application/json");
         headers.add("Accept-Language", config.getAcceptLanguage());
         headers.add("user-agent", BaseController.userAgent);
+        headers.add("accept", "application/json");
 
         //prepare and invoke the API call request to fetch the response
         String bodyJson = ApiHelper.serialize(body);

@@ -42,8 +42,8 @@ class TspublicRestV2CustomactionAssociationUpdateRequest(object):
         """Constructor for the TspublicRestV2CustomactionAssociationUpdateRequest class"""
 
         # Initialize members of the class
-        self.id = id
-        self.association = association
+        self.id = id 
+        self.association = association 
 
     @classmethod
     def from_dictionary(cls,
@@ -64,8 +64,8 @@ class TspublicRestV2CustomactionAssociationUpdateRequest(object):
 
         # Extract variables from the dictionary
 
-        id = dictionary.get('id')
-        association = dictionary.get('association')
+        id = dictionary.get("id") if dictionary.get("id") else None
+        association = dictionary.get("association") if dictionary.get("association") else None
         # Return an object of this model
         return cls(id,
                    association)

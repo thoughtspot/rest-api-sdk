@@ -286,6 +286,103 @@ namespace RESTAPISDK.Standard.Controllers
 
         /// <summary>
         /// Note: This endpoint is applicable only for on-prem deployments. .
+        ///  To provide details of a table in a schema of a database in Falcon, use this endpoint.
+        /// </summary>
+        /// <param name="database">Required parameter: Name of the Falcon database.</param>
+        /// <param name="table">Required parameter: Name of the table in Falcon database.</param>
+        /// <param name="schema">Optional parameter: Name of the schema in Falcon database.</param>
+        /// <returns>Returns the object response from the API call.</returns>
+        public object GetTableDetails(
+                string database,
+                string table,
+                string schema = null)
+        {
+            Task<object> t = this.GetTableDetailsAsync(database, table, schema);
+            ApiHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// Note: This endpoint is applicable only for on-prem deployments. .
+        ///  To provide details of a table in a schema of a database in Falcon, use this endpoint.
+        /// </summary>
+        /// <param name="database">Required parameter: Name of the Falcon database.</param>
+        /// <param name="table">Required parameter: Name of the table in Falcon database.</param>
+        /// <param name="schema">Optional parameter: Name of the schema in Falcon database.</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the object response from the API call.</returns>
+        public async Task<object> GetTableDetailsAsync(
+                string database,
+                string table,
+                string schema = null,
+                CancellationToken cancellationToken = default)
+        {
+            // validating required parameters.
+            if (database == null)
+            {
+                throw new ArgumentNullException("database", "The parameter \"database\" is a required parameter and cannot be null.");
+            }
+
+            if (table == null)
+            {
+                throw new ArgumentNullException("table", "The parameter \"table\" is a required parameter and cannot be null.");
+            }
+
+            // the base uri for api requests.
+            string baseUri = this.Config.GetBaseUri();
+
+            // prepare query string for API call.
+            StringBuilder queryBuilder = new StringBuilder(baseUri);
+            queryBuilder.Append("/tspublic/rest/v2/database/table/detail");
+
+            // prepare specfied query parameters.
+            var queryParams = new Dictionary<string, object>()
+            {
+                { "database", database },
+                { "table", table },
+                { "schema", schema },
+            };
+
+            // append request with appropriate headers and parameters
+            var headers = new Dictionary<string, string>()
+            {
+                { "user-agent", this.UserAgent },
+                { "accept", "application/json" },
+                { "Accept-Language", this.Config.AcceptLanguage },
+                { "Content-Type", this.Config.ContentType },
+            };
+
+            // prepare the API call request to fetch the response.
+            HttpRequest httpRequest = this.GetClientInstance().Get(queryBuilder.ToString(), headers, queryParameters: queryParams);
+
+            if (this.HttpCallBack != null)
+            {
+                this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
+            }
+
+            httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
+
+            // invoke request and get response.
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
+            HttpContext context = new HttpContext(httpRequest, response);
+            if (this.HttpCallBack != null)
+            {
+                this.HttpCallBack.OnAfterHttpResponseEventHandler(this.GetClientInstance(), response);
+            }
+
+            if (response.StatusCode == 500)
+            {
+                throw new ErrorResponseException("Operation failed or unauthorized request", context);
+            }
+
+            // handle errors defined at the API level.
+            this.ValidateResponse(response, context);
+
+            return response.Body;
+        }
+
+        /// <summary>
+        /// Note: This endpoint is applicable only for on-prem deployments. .
         ///  To create a table in Falcon, use this endpoint. .
         ///  Permission: Requires administration privilege.
         /// </summary>

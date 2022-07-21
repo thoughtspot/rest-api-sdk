@@ -33,8 +33,8 @@ class TspublicRestV2ConnectionRemovetableRequest(object):
         """Constructor for the TspublicRestV2ConnectionRemovetableRequest class"""
 
         # Initialize members of the class
-        self.id = id
-        self.table = table
+        self.id = id 
+        self.table = table 
 
     @classmethod
     def from_dictionary(cls,
@@ -55,7 +55,7 @@ class TspublicRestV2ConnectionRemovetableRequest(object):
 
         # Extract variables from the dictionary
 
-        id = dictionary.get('id')
+        id = dictionary.get("id") if dictionary.get("id") else None
         table = None
         if dictionary.get('table') is not None:
             table = [TableInput.from_dictionary(x) for x in dictionary.get('table')]

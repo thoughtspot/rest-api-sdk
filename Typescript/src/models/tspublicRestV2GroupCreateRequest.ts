@@ -21,6 +21,7 @@ import {
   GroupNameAndIDInput,
   groupNameAndIDInputSchema,
 } from './groupNameAndIDInput';
+import { OrgInput, orgInputSchema } from './orgInput';
 import {
   UserNameAndIDInput,
   userNameAndIDInputSchema,
@@ -40,6 +41,11 @@ export interface TspublicRestV2GroupCreateRequest {
   description?: string;
   /** A JSON array of privileges assigned to the group */
   privileges?: CreateGroupPrivilegesEnum[];
+  /**
+   * This is applicable only if organization feature is enabled in the cluster.
+   * A JSON object of organization name, id or both, in which the object should be created. When both are given then id is considered. If no value is provided then object will be created in the organization associated with the login session.
+   */
+  org?: OrgInput;
   /** A JSON array of group names or GUIDs or both. When both are given then id is considered */
   groups?: GroupNameAndIDInput[];
   /** A JSON array of name of users or GUIDs of users or both. When both are given then id is considered */
@@ -58,6 +64,7 @@ export const tspublicRestV2GroupCreateRequestSchema: Schema<TspublicRestV2GroupC
       'privileges',
       optional(array(createGroupPrivilegesEnumSchema)),
     ],
+    org: ['org', optional(lazy(() => orgInputSchema))],
     groups: ['groups', optional(array(lazy(() => groupNameAndIDInputSchema)))],
     users: ['users', optional(array(lazy(() => userNameAndIDInputSchema)))],
     type: ['type', optional(createGroupTypeEnumSchema)],

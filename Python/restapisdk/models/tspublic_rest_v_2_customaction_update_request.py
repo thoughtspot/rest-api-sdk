@@ -44,8 +44,8 @@ class TspublicRestV2CustomactionUpdateRequest(object):
         """Constructor for the TspublicRestV2CustomactionUpdateRequest class"""
 
         # Initialize members of the class
-        self.id = id
-        self.configuration = configuration
+        self.id = id 
+        self.configuration = configuration 
 
     @classmethod
     def from_dictionary(cls,
@@ -66,8 +66,8 @@ class TspublicRestV2CustomactionUpdateRequest(object):
 
         # Extract variables from the dictionary
 
-        id = dictionary.get('id')
-        configuration = dictionary.get('configuration')
+        id = dictionary.get("id") if dictionary.get("id") else None
+        configuration = dictionary.get("configuration") if dictionary.get("configuration") else None
         # Return an object of this model
         return cls(id,
                    configuration)

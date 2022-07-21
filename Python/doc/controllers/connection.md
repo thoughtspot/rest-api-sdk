@@ -216,7 +216,7 @@ def create_connection(self,
 
 ```python
 body = TspublicRestV2ConnectionCreateRequest()
-body.mtype = CreateConnectionTypeEnum.TERADATA
+body.mtype = CreateConnectionTypeEnum.ORACLE_ADW
 body.name = 'name6'
 body.configuration = 'configuration0'
 
@@ -458,7 +458,7 @@ def search_connection(self,
 
 ```python
 body = TspublicRestV2ConnectionSearchRequest()
-body.mtype = SearchConnectionTypeEnum.TERADATA
+body.mtype = SearchConnectionTypeEnum.ORACLE_ADW
 
 result = connection_controller.search_connection(body)
 ```

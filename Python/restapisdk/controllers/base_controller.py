@@ -82,7 +82,7 @@ class BaseController(object):
 
         # Add global headers to request
         prepared_headers = {key: str(value) for key, value in request.headers.items()}
-        request.headers = APIHelper.merge_dicts(self.global_headers(), prepared_headers)
+        request.headers = {**self.global_headers(), **prepared_headers}
 
         # Invoke the API call to fetch the response.
         func = self.config.http_client.execute_as_binary if binary else self.config.http_client.execute_as_string

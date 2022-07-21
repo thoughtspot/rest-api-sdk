@@ -41,8 +41,7 @@ namespace RESTAPISDK.Standard.Controllers
 
         /// <summary>
         /// Note: This endpoint is applicable only for SAAS deployments. .
-        ///  The ThoughtSpot log streaming service API allows you to programmatically get a security audit event log from the ThoughtSpot system. .
-        ///  To use this API, make sure you have admin user privileges. .
+        ///  The ThoughtSpot log streaming service API allows you to programmatically get a security audit event log from the ThoughtSpot system.  .
         ///  ThoughtSpot cloud deployments allow you to collect security audit events and send them to your Security information and event management (SIEM) application in real-time. .
         ///  These events can help your security operations personnel to detect potential security threats or compromised user accounts in your organization. .
         ///  Permission: Requires administration privilege.
@@ -63,8 +62,7 @@ namespace RESTAPISDK.Standard.Controllers
 
         /// <summary>
         /// Note: This endpoint is applicable only for SAAS deployments. .
-        ///  The ThoughtSpot log streaming service API allows you to programmatically get a security audit event log from the ThoughtSpot system. .
-        ///  To use this API, make sure you have admin user privileges. .
+        ///  The ThoughtSpot log streaming service API allows you to programmatically get a security audit event log from the ThoughtSpot system.  .
         ///  ThoughtSpot cloud deployments allow you to collect security audit events and send them to your Security information and event management (SIEM) application in real-time. .
         ///  These events can help your security operations personnel to detect potential security threats or compromised user accounts in your organization. .
         ///  Permission: Requires administration privilege.

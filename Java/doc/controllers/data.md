@@ -13,6 +13,8 @@ DataController dataController = client.getDataController();
 * [Search Query Data](../../doc/controllers/data.md#search-query-data)
 * [Answer Data](../../doc/controllers/data.md#answer-data)
 * [Liveboard Data](../../doc/controllers/data.md#liveboard-data)
+* [Answer Query Sql](../../doc/controllers/data.md#answer-query-sql)
+* [Liveboard Query Sql](../../doc/controllers/data.md#liveboard-query-sql)
 
 
 # Search Query Data
@@ -125,9 +127,92 @@ CompletableFuture<Object> liveboardDataAsync(
 
 ```java
 TspublicRestV2DataLiveboardRequest body = new TspublicRestV2DataLiveboardRequest();
-body.setId("id6");
 
 dataController.liveboardDataAsync(body).thenAccept(result -> {
+    // TODO success callback handler
+}).exceptionally(exception -> {
+    // TODO failure callback handler
+    return null;
+});
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+
+
+# Answer Query Sql
+
+To retrieve the query SQL related to an Answer that is run on the data platform, you can use this endpoint.
+
+Permission: Requires at least view access to the object
+
+```java
+CompletableFuture<AnswerQueryResponse> answerQuerySqlAsync(
+    final String id)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `id` | `String` | Query, Required | The GUID of the Answer |
+
+## Response Type
+
+[`AnswerQueryResponse`](../../doc/models/answer-query-response.md)
+
+## Example Usage
+
+```java
+String id = "id0";
+
+dataController.answerQuerySqlAsync(id).thenAccept(result -> {
+    // TODO success callback handler
+}).exceptionally(exception -> {
+    // TODO failure callback handler
+    return null;
+});
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+
+
+# Liveboard Query Sql
+
+To retrieve the query SQL related to a Visualization in a Liveboard that is run on the data platform, you can use this endpoint.
+
+Permission: Requires at least view access to the object
+
+```java
+CompletableFuture<LiveboardQueryResponse> liveboardQuerySqlAsync(
+    final String id,
+    final List<String> vizId)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `id` | `String` | Query, Required | The GUID of the Liveboard |
+| `vizId` | `List<String>` | Query, Optional | A JSON array of GUIDs of the visualizations in the Liveboard. |
+
+## Response Type
+
+[`LiveboardQueryResponse`](../../doc/models/liveboard-query-response.md)
+
+## Example Usage
+
+```java
+String id = "id0";
+
+dataController.liveboardQuerySqlAsync(id, null).thenAccept(result -> {
     // TODO success callback handler
 }).exceptionally(exception -> {
     // TODO failure callback handler

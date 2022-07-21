@@ -68,6 +68,7 @@ namespace RESTAPISDK.Standard.Controllers
             var headers = new Dictionary<string, string>()
             {
                 { "user-agent", this.UserAgent },
+                { "accept", "application/json" },
                 { "Accept-Language", this.Config.AcceptLanguage },
                 { "Content-Type", this.Config.ContentType },
             };
@@ -370,6 +371,90 @@ namespace RESTAPISDK.Standard.Controllers
 
             // prepare the API call request to fetch the response.
             HttpRequest httpRequest = this.GetClientInstance().Post(queryBuilder.ToString(), headers, null);
+
+            if (this.HttpCallBack != null)
+            {
+                this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
+            }
+
+            httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
+
+            // invoke request and get response.
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
+            HttpContext context = new HttpContext(httpRequest, response);
+            if (this.HttpCallBack != null)
+            {
+                this.HttpCallBack.OnAfterHttpResponseEventHandler(this.GetClientInstance(), response);
+            }
+
+            if (response.StatusCode == 500)
+            {
+                throw new ErrorResponseException("Operation failed or unauthorized request", context);
+            }
+
+            // handle errors defined at the API level.
+            this.ValidateResponse(response, context);
+
+            return bool.Parse(response.Body);
+        }
+
+        /// <summary>
+        /// This is endpoint is applicable only if organization feature is enabled in the cluster. .
+        ///  To programmatically switch the organization context for the logged in session, use this endpoint. .
+        ///  The original session is reused even after changing the organization. .
+        ///  The logged in user should have access to the organization being switched to. .
+        ///  This endpoint can be used to switch organization only when using session cookies for authentication.
+        /// </summary>
+        /// <param name="body">Required parameter: Example: .</param>
+        /// <returns>Returns the bool response from the API call.</returns>
+        public bool SwitchOrg(
+                Models.TspublicRestV2SessionOrgRequest body)
+        {
+            Task<bool> t = this.SwitchOrgAsync(body);
+            ApiHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// This is endpoint is applicable only if organization feature is enabled in the cluster. .
+        ///  To programmatically switch the organization context for the logged in session, use this endpoint. .
+        ///  The original session is reused even after changing the organization. .
+        ///  The logged in user should have access to the organization being switched to. .
+        ///  This endpoint can be used to switch organization only when using session cookies for authentication.
+        /// </summary>
+        /// <param name="body">Required parameter: Example: .</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the bool response from the API call.</returns>
+        public async Task<bool> SwitchOrgAsync(
+                Models.TspublicRestV2SessionOrgRequest body,
+                CancellationToken cancellationToken = default)
+        {
+            // validating required parameters.
+            if (body == null)
+            {
+                throw new ArgumentNullException("body", "The parameter \"body\" is a required parameter and cannot be null.");
+            }
+
+            // the base uri for api requests.
+            string baseUri = this.Config.GetBaseUri();
+
+            // prepare query string for API call.
+            StringBuilder queryBuilder = new StringBuilder(baseUri);
+            queryBuilder.Append("/tspublic/rest/v2/session/org");
+
+            // append request with appropriate headers and parameters
+            var headers = new Dictionary<string, string>()
+            {
+                { "user-agent", this.UserAgent },
+                { "Content-Type", "application/json" },
+                { "Accept-Language", this.Config.AcceptLanguage },
+            };
+
+            // append body params.
+            var bodyText = ApiHelper.JsonSerialize(body);
+
+            // prepare the API call request to fetch the response.
+            HttpRequest httpRequest = this.GetClientInstance().PutBody(queryBuilder.ToString(), headers, bodyText);
 
             if (this.HttpCallBack != null)
             {

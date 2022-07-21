@@ -41,8 +41,9 @@ namespace RESTAPISDK.Tests
         [OneTimeSetUp]
         public void SetUp()
         {
+            RESTAPISDKClient config = RESTAPISDKClient.CreateFromEnvironment();
             this.HttpCallBackHandler = new HttpCallBack();
-            this.Client = RESTAPISDKClient.CreateFromEnvironment().ToBuilder()
+            this.Client = config.ToBuilder()
                 .HttpCallBack(this.HttpCallBackHandler)
                 .Build();
         }

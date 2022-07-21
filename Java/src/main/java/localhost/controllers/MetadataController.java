@@ -1238,6 +1238,7 @@ public final class MetadataController extends BaseController {
         headers.add("Accept-Language", config.getAcceptLanguage());
         headers.add("Content-Type", config.getContentType());
         headers.add("user-agent", BaseController.userAgent);
+        headers.add("accept", "application/json");
 
         //prepare and invoke the API call request to fetch the response
         HttpRequest request = getClientInstance().get(queryBuilder, headers, null, null);
@@ -1362,6 +1363,7 @@ public final class MetadataController extends BaseController {
         headers.add("Accept-Language", config.getAcceptLanguage());
         headers.add("Content-Type", config.getContentType());
         headers.add("user-agent", BaseController.userAgent);
+        headers.add("accept", "application/json");
 
         //prepare and invoke the API call request to fetch the response
         HttpRequest request = getClientInstance().get(queryBuilder, headers, queryParameters,
@@ -1477,6 +1479,7 @@ public final class MetadataController extends BaseController {
         headers.add("Accept-Language", config.getAcceptLanguage());
         headers.add("Content-Type", config.getContentType());
         headers.add("user-agent", BaseController.userAgent);
+        headers.add("accept", "application/json");
 
         //prepare and invoke the API call request to fetch the response
         HttpRequest request = getClientInstance().get(queryBuilder, headers, queryParameters,
@@ -1685,6 +1688,7 @@ public final class MetadataController extends BaseController {
         headers.add("Content-Type", "application/json");
         headers.add("Accept-Language", config.getAcceptLanguage());
         headers.add("user-agent", BaseController.userAgent);
+        headers.add("accept", "application/json");
 
         //prepare and invoke the API call request to fetch the response
         String bodyJson = ApiHelper.serialize(body);
@@ -1785,6 +1789,7 @@ public final class MetadataController extends BaseController {
         headers.add("Content-Type", "application/json");
         headers.add("Accept-Language", config.getAcceptLanguage());
         headers.add("user-agent", BaseController.userAgent);
+        headers.add("accept", "application/json");
 
         //prepare and invoke the API call request to fetch the response
         String bodyJson = ApiHelper.serialize(body);
@@ -2014,6 +2019,7 @@ public final class MetadataController extends BaseController {
         headers.add("Content-Type", "application/json");
         headers.add("Accept-Language", config.getAcceptLanguage());
         headers.add("user-agent", BaseController.userAgent);
+        headers.add("accept", "application/json");
 
         //prepare and invoke the API call request to fetch the response
         String bodyJson = ApiHelper.serialize(body);
@@ -2112,6 +2118,7 @@ public final class MetadataController extends BaseController {
         headers.add("Content-Type", "application/json");
         headers.add("Accept-Language", config.getAcceptLanguage());
         headers.add("user-agent", BaseController.userAgent);
+        headers.add("accept", "application/json");
 
         //prepare and invoke the API call request to fetch the response
         String bodyJson = ApiHelper.serialize(body);
@@ -2210,6 +2217,7 @@ public final class MetadataController extends BaseController {
         headers.add("Content-Type", "application/json");
         headers.add("Accept-Language", config.getAcceptLanguage());
         headers.add("user-agent", BaseController.userAgent);
+        headers.add("accept", "application/json");
 
         //prepare and invoke the API call request to fetch the response
         String bodyJson = ApiHelper.serialize(body);

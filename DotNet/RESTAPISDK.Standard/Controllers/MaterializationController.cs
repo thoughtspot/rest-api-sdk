@@ -79,6 +79,7 @@ namespace RESTAPISDK.Standard.Controllers
             var headers = new Dictionary<string, string>()
             {
                 { "user-agent", this.UserAgent },
+                { "accept", "application/json" },
                 { "Content-Type", "application/json" },
                 { "Accept-Language", this.Config.AcceptLanguage },
             };

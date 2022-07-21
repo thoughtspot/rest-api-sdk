@@ -30,7 +30,7 @@ export interface TspublicRestV2SecurityShareTsobjectRequest {
    *  {"permissions": {"e7040a64-7ff1-4ab9-a1b0-f1acac596866": {"shareMode": "READ_ONLY"}, "f7b8f511-317c-485d-8131-26cf084ef47b": {"shareMode": "MODIFY"}, "7a9a6715-e154-431b-baaf-7b58246c13dd":{"shareMode":"NO_ACCESS"}}}
    */
   permission: string;
-  /** The email addresses that should ne notified when the objects are shared. */
+  /** The email addresses that should be notified when the objects are shared. */
   emailId?: string[];
   /** When set to true, a notification is sent to the users after an object is shared. */
   notify?: ShareObjectNotifyEnum;

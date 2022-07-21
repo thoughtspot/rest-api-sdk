@@ -133,7 +133,7 @@ public class TspublicRestV2SecurityShareTsobjectRequest {
 
     /**
      * Getter for EmailId.
-     * The email addresses that should ne notified when the objects are shared.
+     * The email addresses that should be notified when the objects are shared.
      * @return Returns the List of String
      */
     @JsonGetter("emailId")
@@ -144,7 +144,7 @@ public class TspublicRestV2SecurityShareTsobjectRequest {
 
     /**
      * Setter for EmailId.
-     * The email addresses that should ne notified when the objects are shared.
+     * The email addresses that should be notified when the objects are shared.
      * @param emailId Value for List of String
      */
     @JsonSetter("emailId")

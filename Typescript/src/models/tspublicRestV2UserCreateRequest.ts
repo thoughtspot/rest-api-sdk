@@ -33,6 +33,7 @@ import {
   GroupNameAndIDInput,
   groupNameAndIDInputSchema,
 } from './groupNameAndIDInput';
+import { OrgInput, orgInputSchema } from './orgInput';
 
 export interface TspublicRestV2UserCreateRequest {
   /** Name of the user account. The username string must be unique. */
@@ -48,6 +49,11 @@ export interface TspublicRestV2UserCreateRequest {
   mail?: string;
   /** Password for the user account. */
   password: string;
+  /**
+   * This is applicable only if organization feature is enabled in the cluster.
+   * A JSON object of organization name, id or both, in which the object should be created. When both are given then id is considered. If no value is provided then object will be created in the organization associated with the login session.
+   */
+  org?: OrgInput;
   /** A JSON array of group names or GUIDs or both. When both are given then id is considered */
   groups?: GroupNameAndIDInput[];
   /** Status of user account. acitve or inactive. */
@@ -72,6 +78,7 @@ export const tspublicRestV2UserCreateRequestSchema: Schema<TspublicRestV2UserCre
     visibility: ['visibility', optional(createUserVisibilityEnumSchema)],
     mail: ['mail', optional(string())],
     password: ['password', string()],
+    org: ['org', optional(lazy(() => orgInputSchema))],
     groups: ['groups', optional(array(lazy(() => groupNameAndIDInputSchema)))],
     state: ['state', optional(createUserStateEnumSchema)],
     notifyOnShare: [

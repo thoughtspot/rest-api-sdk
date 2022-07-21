@@ -36,6 +36,7 @@ namespace RESTAPISDK.Standard.Models
         /// <param name="visibility">visibility.</param>
         /// <param name="description">description.</param>
         /// <param name="privileges">privileges.</param>
+        /// <param name="orgs">orgs.</param>
         /// <param name="groups">groups.</param>
         /// <param name="users">users.</param>
         /// <param name="assignedLiveboards">assignedLiveboards.</param>
@@ -66,6 +67,7 @@ namespace RESTAPISDK.Standard.Models
             string visibility = null,
             string description = null,
             List<string> privileges = null,
+            List<Models.OrgType> orgs = null,
             List<Models.GroupNameAndID> groups = null,
             List<Models.UserNameAndID> users = null,
             List<Models.LiveboardNameAndID> assignedLiveboards = null,
@@ -96,6 +98,7 @@ namespace RESTAPISDK.Standard.Models
             this.Visibility = visibility;
             this.Description = description;
             this.Privileges = privileges;
+            this.Orgs = orgs;
             this.Groups = groups;
             this.Users = users;
             this.AssignedLiveboards = assignedLiveboards;
@@ -156,6 +159,12 @@ namespace RESTAPISDK.Standard.Models
         /// </summary>
         [JsonProperty("privileges", NullValueHandling = NullValueHandling.Ignore)]
         public List<string> Privileges { get; set; }
+
+        /// <summary>
+        /// The organizations that user belongs to
+        /// </summary>
+        [JsonProperty("orgs", NullValueHandling = NullValueHandling.Ignore)]
+        public List<Models.OrgType> Orgs { get; set; }
 
         /// <summary>
         /// Name of the group to which is added
@@ -325,6 +334,7 @@ namespace RESTAPISDK.Standard.Models
                 ((this.Visibility == null && other.Visibility == null) || (this.Visibility?.Equals(other.Visibility) == true)) &&
                 ((this.Description == null && other.Description == null) || (this.Description?.Equals(other.Description) == true)) &&
                 ((this.Privileges == null && other.Privileges == null) || (this.Privileges?.Equals(other.Privileges) == true)) &&
+                ((this.Orgs == null && other.Orgs == null) || (this.Orgs?.Equals(other.Orgs) == true)) &&
                 ((this.Groups == null && other.Groups == null) || (this.Groups?.Equals(other.Groups) == true)) &&
                 ((this.Users == null && other.Users == null) || (this.Users?.Equals(other.Users) == true)) &&
                 ((this.AssignedLiveboards == null && other.AssignedLiveboards == null) || (this.AssignedLiveboards?.Equals(other.AssignedLiveboards) == true)) &&
@@ -363,6 +373,7 @@ namespace RESTAPISDK.Standard.Models
             toStringOutput.Add($"this.Visibility = {(this.Visibility == null ? "null" : this.Visibility == string.Empty ? "" : this.Visibility)}");
             toStringOutput.Add($"this.Description = {(this.Description == null ? "null" : this.Description == string.Empty ? "" : this.Description)}");
             toStringOutput.Add($"this.Privileges = {(this.Privileges == null ? "null" : $"[{string.Join(", ", this.Privileges)} ]")}");
+            toStringOutput.Add($"this.Orgs = {(this.Orgs == null ? "null" : $"[{string.Join(", ", this.Orgs)} ]")}");
             toStringOutput.Add($"this.Groups = {(this.Groups == null ? "null" : $"[{string.Join(", ", this.Groups)} ]")}");
             toStringOutput.Add($"this.Users = {(this.Users == null ? "null" : $"[{string.Join(", ", this.Users)} ]")}");
             toStringOutput.Add($"this.AssignedLiveboards = {(this.AssignedLiveboards == null ? "null" : $"[{string.Join(", ", this.AssignedLiveboards)} ]")}");

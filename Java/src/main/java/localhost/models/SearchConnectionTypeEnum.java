@@ -32,7 +32,9 @@ public enum SearchConnectionTypeEnum {
 
     DATABRICKS,
 
-    DENODO;
+    DENODO,
+
+    DREMIO;
 
 
     private static TreeMap<String, SearchConnectionTypeEnum> valueMap = new TreeMap<>();
@@ -49,6 +51,7 @@ public enum SearchConnectionTypeEnum {
         ORACLE_ADW.value = "ORACLE_ADW";
         DATABRICKS.value = "DATABRICKS";
         DENODO.value = "DENODO";
+        DREMIO.value = "DREMIO";
 
         valueMap.put("SNOWFLAKE", SNOWFLAKE);
         valueMap.put("AMAZON_REDSHIFT", AMAZON_REDSHIFT);
@@ -60,6 +63,7 @@ public enum SearchConnectionTypeEnum {
         valueMap.put("ORACLE_ADW", ORACLE_ADW);
         valueMap.put("DATABRICKS", DATABRICKS);
         valueMap.put("DENODO", DENODO);
+        valueMap.put("DREMIO", DREMIO);
     }
 
     /**

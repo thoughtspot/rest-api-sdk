@@ -15,6 +15,7 @@ import {
   string,
 } from '../schema';
 import { GroupNameAndID, groupNameAndIDSchema } from './groupNameAndID';
+import { OrgType, orgTypeSchema } from './orgType';
 import { UserNameAndID, userNameAndIDSchema } from './userNameAndID';
 
 export interface UserResponse {
@@ -32,6 +33,8 @@ export interface UserResponse {
   groups?: GroupNameAndID[];
   /** Privileges assigned to user account */
   privileges?: string[];
+  /** The organizations that user belongs to */
+  orgs?: OrgType[];
   /** Tags assigned to the user */
   tags?: string[];
   /** Indicates if the user account is active or inactive */
@@ -87,6 +90,7 @@ export const userResponseSchema: Schema<UserResponse> = object({
   mail: ['mail', optional(string())],
   groups: ['groups', optional(array(lazy(() => groupNameAndIDSchema)))],
   privileges: ['privileges', optional(array(string()))],
+  orgs: ['orgs', optional(array(lazy(() => orgTypeSchema)))],
   tags: ['tags', optional(array(string()))],
   state: ['state', optional(string())],
   notifyOnShare: ['notifyOnShare', optional(boolean())],

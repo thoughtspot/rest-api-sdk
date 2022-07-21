@@ -31,8 +31,13 @@ export interface TspublicRestV2DataLiveboardRequest {
    */
   batchSize?: number;
   /** The GUID of the Liveboard */
-  id: string;
-  /** A JSON array of GUIDs of the visualizations in the Liveboard. */
+  id?: string;
+  /** If you have embedded ThoughtSpot in your host application, and you want to download Liveboard data with unsaved changes then, pass the transient content from the browser fetch request, using the getExportRequestForCurrentPinboard method. For more information, see https://developers.thoughtspot.com/docs/?pageid=liveboard-export-api#transient-pinboard . If value for this field is provided, then id will not be considered. */
+  transientContent?: string;
+  /**
+   * A JSON array of GUIDs of the visualizations in the Liveboard.
+   *  The vizId field will not be considered when transientContent input is provided.
+   */
   vizId?: string[];
   /**
    * JSON object which contains filter condition to filter the data at the time of data retrieval.
@@ -59,7 +64,8 @@ export const tspublicRestV2DataLiveboardRequestSchema: Schema<TspublicRestV2Data
     offset: ['offset', optional(number())],
     batchNumber: ['batchNumber', optional(number())],
     batchSize: ['batchSize', optional(number())],
-    id: ['id', string()],
+    id: ['id', optional(string())],
+    transientContent: ['transientContent', optional(string())],
     vizId: ['vizId', optional(array(string()))],
     runtimeFilter: ['runtimeFilter', optional(string())],
     runtimeSort: ['runtimeSort', optional(string())],

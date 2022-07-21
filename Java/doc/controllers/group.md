@@ -76,7 +76,7 @@ For ease of user management and access control, ThoughtSpot administrations can 
 
 The privileges determine the actions that the users belonging to a group are allowed to do.
 
-ThoughtSpot also has a default group called ALL_GROUP. When you create new group in ThoughtSpot, they are automatically added to ALL_GROUP. You cannot delete the ALL_GROUP or remove members from it.
+ThoughtSpot also has a default group called ALL. When you create new group in ThoughtSpot, they are automatically added to ALL user group. You cannot delete the ALL user group or remove members from it.
 
 Permission: Requires administration privilege
 

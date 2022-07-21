@@ -16,6 +16,7 @@
 | `mail` | `string \| undefined` | Optional | Email of the user account |
 | `groups` | [`GroupNameAndID[] \| undefined`](../../doc/models/group-name-and-id.md) | Optional | Name of the group to which user account is added |
 | `privileges` | `string[] \| undefined` | Optional | Privileges assigned to user account |
+| `orgs` | [`OrgType[] \| undefined`](../../doc/models/org-type.md) | Optional | The organizations that user belongs to |
 | `tags` | `string[] \| undefined` | Optional | Tags assigned to the user |
 | `state` | `string \| undefined` | Optional | Indicates if the user account is active or inactive |
 | `notifyOnShare` | `boolean \| undefined` | Optional | Indicates if the email should be sent when object is shared with the user |
@@ -52,6 +53,7 @@
   "mail": null,
   "groups": null,
   "privileges": null,
+  "orgs": null,
   "tags": null,
   "state": null,
   "notifyOnShare": null,

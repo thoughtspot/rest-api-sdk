@@ -15,7 +15,9 @@ const adminController = new AdminController(client);
 * [Update Cluster Config](../../doc/controllers/admin.md#update-cluster-config)
 * [Reset User Password](../../doc/controllers/admin.md#reset-user-password)
 * [Sync Principal](../../doc/controllers/admin.md#sync-principal)
-* [Change Owner of Objects](../../doc/controllers/admin.md#change-owner-of-objects)
+* [Change Author of Objects](../../doc/controllers/admin.md#change-author-of-objects)
+* [Assign Author to Objects](../../doc/controllers/admin.md#assign-author-to-objects)
+* [Force Logout Users](../../doc/controllers/admin.md#force-logout-users)
 
 
 # Get Cluster Config
@@ -269,17 +271,17 @@ try {
 | 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
-# Change Owner of Objects
+# Change Author of Objects
 
-To programmatically change the owner of one or several objects from one user account to another, use this endpoint.
+To programmatically change the author of one or several objects from one user account to another, use this endpoint.
 
-You might want to transfer ownership of objects owned by a user to another active user, when the account is removed from the ThoughtSpot application.
+You might want to change the author of objects from one user to another active user, when the account is removed from the ThoughtSpot application.
 
 Permission: Requires administration privilege
 
 ```ts
-async changeOwnerOfObjects(
-  body: TspublicRestV2AdminChangeownerRequest,
+async changeAuthorOfObjects(
+  body: TspublicRestV2AdminChangeauthorRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<boolean>>
 ```
@@ -288,7 +290,7 @@ async changeOwnerOfObjects(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`TspublicRestV2AdminChangeownerRequest`](../../doc/models/tspublic-rest-v2-admin-changeowner-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2AdminChangeauthorRequest`](../../doc/models/tspublic-rest-v2-admin-changeauthor-request.md) | Body, Required | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -304,14 +306,117 @@ const bodyFromUser: FromUserNameAndIDInput = {};
 
 const bodyToUser: ToUserNameAndIDInput = {};
 
-const body: TspublicRestV2AdminChangeownerRequest = {
+const body: TspublicRestV2AdminChangeauthorRequest = {
   tsObjectId: bodyTsObjectId,
   fromUser: bodyFromUser,
   toUser: bodyToUser,
 };
 
 try {
-  const { result, ...httpResponse } = await adminController.changeOwnerOfObjects(body);
+  const { result, ...httpResponse } = await adminController.changeAuthorOfObjects(body);
+  // Get more response info...
+  // const { statusCode, headers } = httpResponse;
+} catch(error) {
+  if (error instanceof ApiError) {
+    const errors = error.result;
+    // const { statusCode, headers } = error;
+  }
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
+
+
+# Assign Author to Objects
+
+To programmatically assign an author to one or several objects, use this endpoint.
+
+Provide either user name or id as input. When both are given user id will be considered.
+
+Requires administration privilege.
+
+```ts
+async assignAuthorToObjects(
+  body: TspublicRestV2AdminAssignauthorRequest,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<boolean>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`TspublicRestV2AdminAssignauthorRequest`](../../doc/models/tspublic-rest-v2-admin-assignauthor-request.md) | Body, Required | - |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+`boolean`
+
+## Example Usage
+
+```ts
+const contentType = null;
+const bodyTsObjectId: string[] = ['tsObjectId7'];
+const body: TspublicRestV2AdminAssignauthorRequest = {
+  tsObjectId: bodyTsObjectId,
+};
+
+try {
+  const { result, ...httpResponse } = await adminController.assignAuthorToObjects(body);
+  // Get more response info...
+  // const { statusCode, headers } = httpResponse;
+} catch(error) {
+  if (error instanceof ApiError) {
+    const errors = error.result;
+    // const { statusCode, headers } = error;
+  }
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
+
+
+# Force Logout Users
+
+To logout one or more users from logged in session, use this endpoint. If no input is provided then all logged in users are force logged out.
+
+Requires administration privilege
+
+```ts
+async forceLogoutUsers(
+  body: TspublicRestV2AdminForcelogoutRequest,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<boolean>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`TspublicRestV2AdminForcelogoutRequest`](../../doc/models/tspublic-rest-v2-admin-forcelogout-request.md) | Body, Required | - |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+`boolean`
+
+## Example Usage
+
+```ts
+const contentType = null;
+const body: TspublicRestV2AdminForcelogoutRequest = {};
+
+try {
+  const { result, ...httpResponse } = await adminController.forceLogoutUsers(body);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch(error) {

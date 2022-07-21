@@ -21,4 +21,5 @@ Type of the data connection.
 | `oRACLEADW` |
 | `dATABRICKS` |
 | `dENODO` |
+| `dREMIO` |
 

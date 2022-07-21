@@ -11,6 +11,10 @@ import {
   tspublicRestV2UserAddgroupRequestSchema,
 } from '../models/tspublicRestV2UserAddgroupRequest';
 import {
+  TspublicRestV2UserAddorgRequest,
+  tspublicRestV2UserAddorgRequestSchema,
+} from '../models/tspublicRestV2UserAddorgRequest';
+import {
   TspublicRestV2UserChangepasswordRequest,
   tspublicRestV2UserChangepasswordRequestSchema,
 } from '../models/tspublicRestV2UserChangepasswordRequest';
@@ -67,7 +71,7 @@ export class UserController extends BaseController {
    * Using this API, you can create a user and assign groups. To create a user, you require admin user
    * privileges.
    *
-   * All users created in the ThoughtSpot system are added to ALL_GROUP
+   * All users created in the ThoughtSpot system are added to ALL user group.
    *
    * Permission: Requires administration privilege
    *
@@ -155,7 +159,7 @@ export class UserController extends BaseController {
    * @param body
    * @return Response from the API call
    */
-  async addGroupsToUser(
+  async addUserToGroups(
     body: TspublicRestV2UserAddgroupRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<boolean>> {
@@ -183,13 +187,40 @@ export class UserController extends BaseController {
    * @param body
    * @return Response from the API call
    */
-  async removeGroupsFromUser(
+  async removeUserFromGroups(
     body: TspublicRestV2UserRemovegroupRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<boolean>> {
     const req = this.createRequest('PUT', '/tspublic/rest/v2/user/removegroup');
     const mapped = req.prepareArgs({
       body: [body, tspublicRestV2UserRemovegroupRequestSchema],
+    });
+    req.header('Content-Type', 'application/json');
+    req.json(mapped.body);
+    req.throwOn(500, ErrorResponseError, 'Operation failed or unauthorized request');
+    return req.callAsJson(boolean(), requestOptions);
+  }
+
+  /**
+   * This is endpoint is applicable only if organization feature is enabled in the cluster.
+   *
+   * To programmatically add existing ThoughtSpot users to an organization, use this API endpoint.
+   *
+   * At least one of id or name of the organization is required. When both are given, then organization
+   * id will be considered.
+   *
+   * Requires Administration access for the organization to which users need to be added.
+   *
+   * @param body
+   * @return Response from the API call
+   */
+  async addUserToOrgs(
+    body: TspublicRestV2UserAddorgRequest,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<boolean>> {
+    const req = this.createRequest('PUT', '/tspublic/rest/v2/user/addorg');
+    const mapped = req.prepareArgs({
+      body: [body, tspublicRestV2UserAddorgRequestSchema],
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);

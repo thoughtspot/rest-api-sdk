@@ -19,6 +19,7 @@ import localhost.controllers.GroupController;
 import localhost.controllers.LogsController;
 import localhost.controllers.MaterializationController;
 import localhost.controllers.MetadataController;
+import localhost.controllers.OrgController;
 import localhost.controllers.ReportController;
 import localhost.controllers.SecurityController;
 import localhost.controllers.SessionController;
@@ -42,6 +43,7 @@ public final class RESTAPISDKClient implements Configuration {
     private SessionController session;
     private UserController user;
     private GroupController group;
+    private OrgController org;
     private MetadataController metadata;
     private DatabaseController database;
     private ConnectionController connection;
@@ -125,6 +127,7 @@ public final class RESTAPISDKClient implements Configuration {
                 this.httpCallback);
         user = new UserController(this, this.httpClient, this.authManagers, this.httpCallback);
         group = new GroupController(this, this.httpClient, this.authManagers, this.httpCallback);
+        org = new OrgController(this, this.httpClient, this.authManagers, this.httpCallback);
         metadata = new MetadataController(this, this.httpClient, this.authManagers,
                 this.httpCallback);
         database = new DatabaseController(this, this.httpClient, this.authManagers,
@@ -172,6 +175,14 @@ public final class RESTAPISDKClient implements Configuration {
      */
     public GroupController getGroupController() {
         return group;
+    }
+
+    /**
+     * Get the instance of OrgController.
+     * @return org
+     */
+    public OrgController getOrgController() {
+        return org;
     }
 
     /**

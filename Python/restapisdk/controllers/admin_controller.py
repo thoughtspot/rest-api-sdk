@@ -47,6 +47,7 @@ class AdminController(BaseController):
 
         # Prepare headers
         _headers = {
+            'accept': 'application/json',
             'Content-Type': self.config.content_type
         }
 
@@ -93,6 +94,7 @@ class AdminController(BaseController):
 
         # Prepare headers
         _headers = {
+            'accept': 'application/json',
             'Content-Type': self.config.content_type
         }
 
@@ -286,23 +288,23 @@ class AdminController(BaseController):
 
         return decoded
 
-    def change_owner_of_objects(self,
-                                body):
-        """Does a PUT request to /tspublic/rest/v2/admin/changeowner.
+    def change_author_of_objects(self,
+                                 body):
+        """Does a PUT request to /tspublic/rest/v2/admin/changeauthor.
 
-        To programmatically change the owner of one or several objects from
+        To programmatically change the author of one or several objects from
         one user account to another, use this endpoint. 
-         You might want to transfer ownership of objects owned by a user to
+         You might want to change the author of objects from one user to
          another active user, when the account is removed from the ThoughtSpot
          application. 
          Permission: Requires administration privilege
 
         Args:
-            body (TspublicRestV2AdminChangeownerRequest): TODO: type
+            body (TspublicRestV2AdminChangeauthorRequest): TODO: type
                 description here.
 
         Returns:
-            bool: Response from the API. Successfully changed the owner for
+            bool: Response from the API. Successfully changed the author for
                 the objects provided in the request
 
         Raises:
@@ -317,7 +319,7 @@ class AdminController(BaseController):
         self.validate_parameters(body=body)
 
         # Prepare query URL
-        _url_path = '/tspublic/rest/v2/admin/changeowner'
+        _url_path = '/tspublic/rest/v2/admin/changeauthor'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_url = APIHelper.clean_url(_query_builder)
@@ -329,6 +331,116 @@ class AdminController(BaseController):
 
         # Prepare and execute request
         _request = self.config.http_client.put(_query_url, headers=_headers, parameters=APIHelper.json_serialize(body))
+        # Apply authentication scheme on request
+        self.apply_auth_schemes(_request, 'global')
+
+        _response = self.execute_request(_request)
+
+        # Endpoint and global error handling using HTTP status codes.
+        if _response.status_code == 500:
+            raise ErrorResponseException('Operation failed or unauthorized request', _response)
+        self.validate_response(_response)
+
+        decoded = _response.text == 'true'
+
+        return decoded
+
+    def assign_author_to_objects(self,
+                                 body):
+        """Does a PUT request to /tspublic/rest/v2/admin/assignauthor.
+
+        To programmatically assign an author to one or several objects, use
+        this endpoint. 
+         Provide either user name or id as input. When both are given user id
+         will be considered. 
+         Requires administration privilege.
+
+        Args:
+            body (TspublicRestV2AdminAssignauthorRequest): TODO: type
+                description here.
+
+        Returns:
+            bool: Response from the API. Successfully assigned the author to
+                the objects provided in the request
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        # Validate required parameters
+        self.validate_parameters(body=body)
+
+        # Prepare query URL
+        _url_path = '/tspublic/rest/v2/admin/assignauthor'
+        _query_builder = self.config.get_base_uri()
+        _query_builder += _url_path
+        _query_url = APIHelper.clean_url(_query_builder)
+
+        # Prepare headers
+        _headers = {
+            'Content-Type': 'application/json'
+        }
+
+        # Prepare and execute request
+        _request = self.config.http_client.put(_query_url, headers=_headers, parameters=APIHelper.json_serialize(body))
+        # Apply authentication scheme on request
+        self.apply_auth_schemes(_request, 'global')
+
+        _response = self.execute_request(_request)
+
+        # Endpoint and global error handling using HTTP status codes.
+        if _response.status_code == 500:
+            raise ErrorResponseException('Operation failed or unauthorized request', _response)
+        self.validate_response(_response)
+
+        decoded = _response.text == 'true'
+
+        return decoded
+
+    def force_logout_users(self,
+                           body):
+        """Does a POST request to /tspublic/rest/v2/admin/forcelogout.
+
+        To logout one or more users from logged in session, use this endpoint.
+        If no input is provided then all logged in users are force logged out.
+                 Requires administration privilege
+
+        Args:
+            body (TspublicRestV2AdminForcelogoutRequest): TODO: type
+                description here.
+
+        Returns:
+            bool: Response from the API. Successfully logged out the users
+                included in the request
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        # Validate required parameters
+        self.validate_parameters(body=body)
+
+        # Prepare query URL
+        _url_path = '/tspublic/rest/v2/admin/forcelogout'
+        _query_builder = self.config.get_base_uri()
+        _query_builder += _url_path
+        _query_url = APIHelper.clean_url(_query_builder)
+
+        # Prepare headers
+        _headers = {
+            'Content-Type': 'application/json'
+        }
+
+        # Prepare and execute request
+        _request = self.config.http_client.post(_query_url, headers=_headers, parameters=APIHelper.json_serialize(body))
         # Apply authentication scheme on request
         self.apply_auth_schemes(_request, 'global')
 

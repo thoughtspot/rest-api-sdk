@@ -15,7 +15,9 @@ AdminController adminController = client.AdminController;
 * [Update Cluster Config](../../doc/controllers/admin.md#update-cluster-config)
 * [Reset User Password](../../doc/controllers/admin.md#reset-user-password)
 * [Sync Principal](../../doc/controllers/admin.md#sync-principal)
-* [Change Owner of Objects](../../doc/controllers/admin.md#change-owner-of-objects)
+* [Change Author of Objects](../../doc/controllers/admin.md#change-author-of-objects)
+* [Assign Author to Objects](../../doc/controllers/admin.md#assign-author-to-objects)
+* [Force Logout Users](../../doc/controllers/admin.md#force-logout-users)
 
 
 # Get Cluster Config
@@ -214,24 +216,24 @@ catch (ApiException e){};
 | 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Change Owner of Objects
+# Change Author of Objects
 
-To programmatically change the owner of one or several objects from one user account to another, use this endpoint.
+To programmatically change the author of one or several objects from one user account to another, use this endpoint.
 
-You might want to transfer ownership of objects owned by a user to another active user, when the account is removed from the ThoughtSpot application.
+You might want to change the author of objects from one user to another active user, when the account is removed from the ThoughtSpot application.
 
 Permission: Requires administration privilege
 
 ```csharp
-ChangeOwnerOfObjectsAsync(
-    Models.TspublicRestV2AdminChangeownerRequest body)
+ChangeAuthorOfObjectsAsync(
+    Models.TspublicRestV2AdminChangeauthorRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.TspublicRestV2AdminChangeownerRequest`](../../doc/models/tspublic-rest-v2-admin-changeowner-request.md) | Body, Required | - |
+| `body` | [`Models.TspublicRestV2AdminChangeauthorRequest`](../../doc/models/tspublic-rest-v2-admin-changeauthor-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -240,7 +242,7 @@ ChangeOwnerOfObjectsAsync(
 ## Example Usage
 
 ```csharp
-var body = new TspublicRestV2AdminChangeownerRequest();
+var body = new TspublicRestV2AdminChangeauthorRequest();
 body.TsObjectId = new List<string>();
 body.TsObjectId.Add("tsObjectId7");
 body.FromUser = new FromUserNameAndIDInput();
@@ -248,7 +250,91 @@ body.ToUser = new ToUserNameAndIDInput();
 
 try
 {
-    bool? result = await adminController.ChangeOwnerOfObjectsAsync(body);
+    bool? result = await adminController.ChangeAuthorOfObjectsAsync(body);
+}
+catch (ApiException e){};
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+
+
+# Assign Author to Objects
+
+To programmatically assign an author to one or several objects, use this endpoint.
+
+Provide either user name or id as input. When both are given user id will be considered.
+
+Requires administration privilege.
+
+```csharp
+AssignAuthorToObjectsAsync(
+    Models.TspublicRestV2AdminAssignauthorRequest body)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`Models.TspublicRestV2AdminAssignauthorRequest`](../../doc/models/tspublic-rest-v2-admin-assignauthor-request.md) | Body, Required | - |
+
+## Response Type
+
+`Task<bool>`
+
+## Example Usage
+
+```csharp
+var body = new TspublicRestV2AdminAssignauthorRequest();
+body.TsObjectId = new List<string>();
+body.TsObjectId.Add("tsObjectId7");
+
+try
+{
+    bool? result = await adminController.AssignAuthorToObjectsAsync(body);
+}
+catch (ApiException e){};
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+
+
+# Force Logout Users
+
+To logout one or more users from logged in session, use this endpoint. If no input is provided then all logged in users are force logged out.
+
+Requires administration privilege
+
+```csharp
+ForceLogoutUsersAsync(
+    Models.TspublicRestV2AdminForcelogoutRequest body)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`Models.TspublicRestV2AdminForcelogoutRequest`](../../doc/models/tspublic-rest-v2-admin-forcelogout-request.md) | Body, Required | - |
+
+## Response Type
+
+`Task<bool>`
+
+## Example Usage
+
+```csharp
+var body = new TspublicRestV2AdminForcelogoutRequest();
+
+try
+{
+    bool? result = await adminController.ForceLogoutUsersAsync(body);
 }
 catch (ApiException e){};
 ```

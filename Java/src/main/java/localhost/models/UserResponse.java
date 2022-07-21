@@ -22,6 +22,7 @@ public class UserResponse {
     private String mail;
     private List<GroupNameAndID> groups;
     private List<String> privileges;
+    private List<OrgType> orgs;
     private List<String> tags;
     private String state;
     private Boolean notifyOnShare;
@@ -62,6 +63,7 @@ public class UserResponse {
      * @param  mail  String value for mail.
      * @param  groups  List of GroupNameAndID value for groups.
      * @param  privileges  List of String value for privileges.
+     * @param  orgs  List of OrgType value for orgs.
      * @param  tags  List of String value for tags.
      * @param  state  String value for state.
      * @param  notifyOnShare  Boolean value for notifyOnShare.
@@ -95,6 +97,7 @@ public class UserResponse {
             String mail,
             List<GroupNameAndID> groups,
             List<String> privileges,
+            List<OrgType> orgs,
             List<String> tags,
             String state,
             Boolean notifyOnShare,
@@ -126,6 +129,7 @@ public class UserResponse {
         this.mail = mail;
         this.groups = groups;
         this.privileges = privileges;
+        this.orgs = orgs;
         this.tags = tags;
         this.state = state;
         this.notifyOnShare = notifyOnShare;
@@ -297,6 +301,27 @@ public class UserResponse {
     @JsonSetter("privileges")
     public void setPrivileges(List<String> privileges) {
         this.privileges = privileges;
+    }
+
+    /**
+     * Getter for Orgs.
+     * The organizations that user belongs to
+     * @return Returns the List of OrgType
+     */
+    @JsonGetter("orgs")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public List<OrgType> getOrgs() {
+        return orgs;
+    }
+
+    /**
+     * Setter for Orgs.
+     * The organizations that user belongs to
+     * @param orgs Value for List of OrgType
+     */
+    @JsonSetter("orgs")
+    public void setOrgs(List<OrgType> orgs) {
+        this.orgs = orgs;
     }
 
     /**
@@ -799,8 +824,8 @@ public class UserResponse {
     public String toString() {
         return "UserResponse [" + "name=" + name + ", displayName=" + displayName + ", id=" + id
                 + ", visibility=" + visibility + ", mail=" + mail + ", groups=" + groups
-                + ", privileges=" + privileges + ", tags=" + tags + ", state=" + state
-                + ", notifyOnShare=" + notifyOnShare + ", showWalkMe=" + showWalkMe
+                + ", privileges=" + privileges + ", orgs=" + orgs + ", tags=" + tags + ", state="
+                + state + ", notifyOnShare=" + notifyOnShare + ", showWalkMe=" + showWalkMe
                 + ", analystOnboardingComplete=" + analystOnboardingComplete + ", firstLogin="
                 + firstLogin + ", welcomeEmailSent=" + welcomeEmailSent + ", isDeleted=" + isDeleted
                 + ", isHidden=" + isHidden + ", isExternal=" + isExternal + ", isDeprecated="
@@ -826,6 +851,7 @@ public class UserResponse {
                 .mail(getMail())
                 .groups(getGroups())
                 .privileges(getPrivileges())
+                .orgs(getOrgs())
                 .tags(getTags())
                 .state(getState())
                 .notifyOnShare(getNotifyOnShare())
@@ -864,6 +890,7 @@ public class UserResponse {
         private String mail;
         private List<GroupNameAndID> groups;
         private List<String> privileges;
+        private List<OrgType> orgs;
         private List<String> tags;
         private String state;
         private Boolean notifyOnShare;
@@ -958,6 +985,16 @@ public class UserResponse {
          */
         public Builder privileges(List<String> privileges) {
             this.privileges = privileges;
+            return this;
+        }
+
+        /**
+         * Setter for orgs.
+         * @param  orgs  List of OrgType value for orgs.
+         * @return Builder
+         */
+        public Builder orgs(List<OrgType> orgs) {
+            this.orgs = orgs;
             return this;
         }
 
@@ -1207,10 +1244,10 @@ public class UserResponse {
          */
         public UserResponse build() {
             return new UserResponse(name, displayName, id, visibility, mail, groups, privileges,
-                    tags, state, notifyOnShare, showWalkMe, analystOnboardingComplete, firstLogin,
-                    welcomeEmailSent, isDeleted, isHidden, isExternal, isDeprecated, complete,
-                    isSuperUser, isSystemPrincipal, type, parenttype, tenantId, indexVersion,
-                    generationNum, created, modified, author, modifiedBy, owner);
+                    orgs, tags, state, notifyOnShare, showWalkMe, analystOnboardingComplete,
+                    firstLogin, welcomeEmailSent, isDeleted, isHidden, isExternal, isDeprecated,
+                    complete, isSuperUser, isSystemPrincipal, type, parenttype, tenantId,
+                    indexVersion, generationNum, created, modified, author, modifiedBy, owner);
         }
     }
 }

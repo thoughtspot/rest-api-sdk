@@ -675,6 +675,7 @@ class MetadataController(BaseController):
 
         # Prepare headers
         _headers = {
+            'accept': 'application/json',
             'Content-Type': self.config.content_type
         }
 
@@ -746,6 +747,7 @@ class MetadataController(BaseController):
 
         # Prepare headers
         _headers = {
+            'accept': 'application/json',
             'Content-Type': self.config.content_type
         }
 
@@ -812,6 +814,7 @@ class MetadataController(BaseController):
 
         # Prepare headers
         _headers = {
+            'accept': 'application/json',
             'Content-Type': self.config.content_type
         }
 
@@ -931,6 +934,7 @@ class MetadataController(BaseController):
 
         # Prepare headers
         _headers = {
+            'accept': 'application/json',
             'Content-Type': 'application/json'
         }
 
@@ -986,6 +990,7 @@ class MetadataController(BaseController):
 
         # Prepare headers
         _headers = {
+            'accept': 'application/json',
             'Content-Type': 'application/json'
         }
 
@@ -1118,6 +1123,7 @@ class MetadataController(BaseController):
 
         # Prepare headers
         _headers = {
+            'accept': 'application/json',
             'Content-Type': 'application/json'
         }
 
@@ -1172,6 +1178,7 @@ class MetadataController(BaseController):
 
         # Prepare headers
         _headers = {
+            'accept': 'application/json',
             'Content-Type': 'application/json'
         }
 
@@ -1226,6 +1233,7 @@ class MetadataController(BaseController):
 
         # Prepare headers
         _headers = {
+            'accept': 'application/json',
             'Content-Type': 'application/json'
         }
 

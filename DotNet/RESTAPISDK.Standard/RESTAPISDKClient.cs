@@ -39,6 +39,7 @@ namespace RESTAPISDK.Standard
         private readonly Lazy<SessionController> session;
         private readonly Lazy<UserController> user;
         private readonly Lazy<GroupController> mGroup;
+        private readonly Lazy<OrgController> org;
         private readonly Lazy<MetadataController> metadata;
         private readonly Lazy<DatabaseController> database;
         private readonly Lazy<ConnectionController> connection;
@@ -76,6 +77,8 @@ namespace RESTAPISDK.Standard
                 () => new UserController(this, this.httpClient, this.authManagers, this.httpCallBack));
             this.mGroup = new Lazy<GroupController>(
                 () => new GroupController(this, this.httpClient, this.authManagers, this.httpCallBack));
+            this.org = new Lazy<OrgController>(
+                () => new OrgController(this, this.httpClient, this.authManagers, this.httpCallBack));
             this.metadata = new Lazy<MetadataController>(
                 () => new MetadataController(this, this.httpClient, this.authManagers, this.httpCallBack));
             this.database = new Lazy<DatabaseController>(
@@ -124,6 +127,11 @@ namespace RESTAPISDK.Standard
         /// Gets GroupController controller.
         /// </summary>
         public GroupController GroupController => this.mGroup.Value;
+
+        /// <summary>
+        /// Gets OrgController controller.
+        /// </summary>
+        public OrgController OrgController => this.org.Value;
 
         /// <summary>
         /// Gets MetadataController controller.

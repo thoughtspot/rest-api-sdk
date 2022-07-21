@@ -20,6 +20,7 @@ public class TspublicRestV2GroupCreateRequest {
     private CreateGroupVisibilityEnum visibility;
     private String description;
     private List<CreateGroupPrivilegesEnum> privileges;
+    private OrgInput org;
     private List<GroupNameAndIDInput> groups;
     private List<UserNameAndIDInput> users;
     private CreateGroupTypeEnum type;
@@ -39,6 +40,7 @@ public class TspublicRestV2GroupCreateRequest {
      * @param  visibility  CreateGroupVisibilityEnum value for visibility.
      * @param  description  String value for description.
      * @param  privileges  List of CreateGroupPrivilegesEnum value for privileges.
+     * @param  org  OrgInput value for org.
      * @param  groups  List of GroupNameAndIDInput value for groups.
      * @param  users  List of UserNameAndIDInput value for users.
      * @param  type  CreateGroupTypeEnum value for type.
@@ -49,6 +51,7 @@ public class TspublicRestV2GroupCreateRequest {
             CreateGroupVisibilityEnum visibility,
             String description,
             List<CreateGroupPrivilegesEnum> privileges,
+            OrgInput org,
             List<GroupNameAndIDInput> groups,
             List<UserNameAndIDInput> users,
             CreateGroupTypeEnum type) {
@@ -57,6 +60,7 @@ public class TspublicRestV2GroupCreateRequest {
         this.visibility = visibility;
         this.description = description;
         this.privileges = privileges;
+        this.org = org;
         this.groups = groups;
         this.users = users;
         this.type = type;
@@ -170,6 +174,33 @@ public class TspublicRestV2GroupCreateRequest {
     }
 
     /**
+     * Getter for Org.
+     * This is applicable only if organization feature is enabled in the cluster. A JSON object of
+     * organization name, id or both, in which the object should be created. When both are given
+     * then id is considered. If no value is provided then object will be created in the
+     * organization associated with the login session.
+     * @return Returns the OrgInput
+     */
+    @JsonGetter("org")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public OrgInput getOrg() {
+        return org;
+    }
+
+    /**
+     * Setter for Org.
+     * This is applicable only if organization feature is enabled in the cluster. A JSON object of
+     * organization name, id or both, in which the object should be created. When both are given
+     * then id is considered. If no value is provided then object will be created in the
+     * organization associated with the login session.
+     * @param org Value for OrgInput
+     */
+    @JsonSetter("org")
+    public void setOrg(OrgInput org) {
+        this.org = org;
+    }
+
+    /**
      * Getter for Groups.
      * A JSON array of group names or GUIDs or both. When both are given then id is considered
      * @return Returns the List of GroupNameAndIDInput
@@ -244,8 +275,8 @@ public class TspublicRestV2GroupCreateRequest {
     public String toString() {
         return "TspublicRestV2GroupCreateRequest [" + "name=" + name + ", displayName="
                 + displayName + ", visibility=" + visibility + ", description=" + description
-                + ", privileges=" + privileges + ", groups=" + groups + ", users=" + users
-                + ", type=" + type + "]";
+                + ", privileges=" + privileges + ", org=" + org + ", groups=" + groups + ", users="
+                + users + ", type=" + type + "]";
     }
 
     /**
@@ -258,6 +289,7 @@ public class TspublicRestV2GroupCreateRequest {
                 .visibility(getVisibility())
                 .description(getDescription())
                 .privileges(getPrivileges())
+                .org(getOrg())
                 .groups(getGroups())
                 .users(getUsers())
                 .type(getType());
@@ -273,6 +305,7 @@ public class TspublicRestV2GroupCreateRequest {
         private CreateGroupVisibilityEnum visibility = CreateGroupVisibilityEnum.DEFAULT;
         private String description;
         private List<CreateGroupPrivilegesEnum> privileges;
+        private OrgInput org;
         private List<GroupNameAndIDInput> groups;
         private List<UserNameAndIDInput> users;
         private CreateGroupTypeEnum type = CreateGroupTypeEnum.LOCAL_GROUP;
@@ -344,6 +377,16 @@ public class TspublicRestV2GroupCreateRequest {
         }
 
         /**
+         * Setter for org.
+         * @param  org  OrgInput value for org.
+         * @return Builder
+         */
+        public Builder org(OrgInput org) {
+            this.org = org;
+            return this;
+        }
+
+        /**
          * Setter for groups.
          * @param  groups  List of GroupNameAndIDInput value for groups.
          * @return Builder
@@ -379,7 +422,7 @@ public class TspublicRestV2GroupCreateRequest {
          */
         public TspublicRestV2GroupCreateRequest build() {
             return new TspublicRestV2GroupCreateRequest(name, displayName, visibility, description,
-                    privileges, groups, users, type);
+                    privileges, org, groups, users, type);
         }
     }
 }

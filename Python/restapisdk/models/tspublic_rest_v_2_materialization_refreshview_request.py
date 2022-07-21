@@ -29,7 +29,7 @@ class TspublicRestV2MaterializationRefreshviewRequest(object):
         """Constructor for the TspublicRestV2MaterializationRefreshviewRequest class"""
 
         # Initialize members of the class
-        self.id = id
+        self.id = id 
 
     @classmethod
     def from_dictionary(cls,
@@ -50,6 +50,6 @@ class TspublicRestV2MaterializationRefreshviewRequest(object):
 
         # Extract variables from the dictionary
 
-        id = dictionary.get('id')
+        id = dictionary.get("id") if dictionary.get("id") else None
         # Return an object of this model
         return cls(id)

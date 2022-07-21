@@ -77,7 +77,7 @@ namespace RESTAPISDK.Standard.Models
         public string Permission { get; set; }
 
         /// <summary>
-        /// The email addresses that should ne notified when the objects are shared.
+        /// The email addresses that should be notified when the objects are shared.
         /// </summary>
         [JsonProperty("emailId", NullValueHandling = NullValueHandling.Ignore)]
         public List<string> EmailId { get; set; }

@@ -32,8 +32,8 @@ class TspublicRestV2ReportAnswerRequest(object):
         """Constructor for the TspublicRestV2ReportAnswerRequest class"""
 
         # Initialize members of the class
-        self.id = id
-        self.mtype = mtype
+        self.id = id 
+        self.mtype = mtype 
 
     @classmethod
     def from_dictionary(cls,
@@ -54,7 +54,7 @@ class TspublicRestV2ReportAnswerRequest(object):
 
         # Extract variables from the dictionary
 
-        id = dictionary.get('id')
+        id = dictionary.get("id") if dictionary.get("id") else None
         mtype = dictionary.get("type") if dictionary.get("type") else 'PDF'
         # Return an object of this model
         return cls(id,

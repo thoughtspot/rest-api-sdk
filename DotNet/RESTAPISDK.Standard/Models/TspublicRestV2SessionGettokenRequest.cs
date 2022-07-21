@@ -36,13 +36,15 @@ namespace RESTAPISDK.Standard.Models
         /// <param name="accessLevel">accessLevel.</param>
         /// <param name="tsObjectId">tsObjectId.</param>
         /// <param name="tokenExpiryDuration">tokenExpiryDuration.</param>
+        /// <param name="orgId">orgId.</param>
         public TspublicRestV2SessionGettokenRequest(
             string userName,
             string password = null,
             string secretKey = null,
             Models.GetTokenAccessLevelEnum? accessLevel = Models.GetTokenAccessLevelEnum.FULL,
             string tsObjectId = null,
-            string tokenExpiryDuration = null)
+            string tokenExpiryDuration = null,
+            string orgId = null)
         {
             this.UserName = userName;
             this.Password = password;
@@ -50,6 +52,7 @@ namespace RESTAPISDK.Standard.Models
             this.AccessLevel = accessLevel;
             this.TsObjectId = tsObjectId;
             this.TokenExpiryDuration = tokenExpiryDuration;
+            this.OrgId = orgId;
         }
 
         /// <summary>
@@ -90,6 +93,13 @@ namespace RESTAPISDK.Standard.Models
         [JsonProperty("tokenExpiryDuration", NullValueHandling = NullValueHandling.Ignore)]
         public string TokenExpiryDuration { get; set; }
 
+        /// <summary>
+        /// This is applicable only if organization feature is enabled in the cluster.
+        ///  Id of the organization to be associated with the user login. If no input is provided then last logged in organization will be considered.
+        /// </summary>
+        [JsonProperty("orgId", NullValueHandling = NullValueHandling.Ignore)]
+        public string OrgId { get; set; }
+
         /// <inheritdoc/>
         public override string ToString()
         {
@@ -119,7 +129,8 @@ namespace RESTAPISDK.Standard.Models
                 ((this.SecretKey == null && other.SecretKey == null) || (this.SecretKey?.Equals(other.SecretKey) == true)) &&
                 ((this.AccessLevel == null && other.AccessLevel == null) || (this.AccessLevel?.Equals(other.AccessLevel) == true)) &&
                 ((this.TsObjectId == null && other.TsObjectId == null) || (this.TsObjectId?.Equals(other.TsObjectId) == true)) &&
-                ((this.TokenExpiryDuration == null && other.TokenExpiryDuration == null) || (this.TokenExpiryDuration?.Equals(other.TokenExpiryDuration) == true));
+                ((this.TokenExpiryDuration == null && other.TokenExpiryDuration == null) || (this.TokenExpiryDuration?.Equals(other.TokenExpiryDuration) == true)) &&
+                ((this.OrgId == null && other.OrgId == null) || (this.OrgId?.Equals(other.OrgId) == true));
         }
         
 
@@ -135,6 +146,7 @@ namespace RESTAPISDK.Standard.Models
             toStringOutput.Add($"this.AccessLevel = {(this.AccessLevel == null ? "null" : this.AccessLevel.ToString())}");
             toStringOutput.Add($"this.TsObjectId = {(this.TsObjectId == null ? "null" : this.TsObjectId == string.Empty ? "" : this.TsObjectId)}");
             toStringOutput.Add($"this.TokenExpiryDuration = {(this.TokenExpiryDuration == null ? "null" : this.TokenExpiryDuration == string.Empty ? "" : this.TokenExpiryDuration)}");
+            toStringOutput.Add($"this.OrgId = {(this.OrgId == null ? "null" : this.OrgId == string.Empty ? "" : this.OrgId)}");
         }
     }
 }

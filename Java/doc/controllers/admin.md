@@ -15,7 +15,9 @@ AdminController adminController = client.getAdminController();
 * [Update Cluster Config](../../doc/controllers/admin.md#update-cluster-config)
 * [Reset User Password](../../doc/controllers/admin.md#reset-user-password)
 * [Sync Principal](../../doc/controllers/admin.md#sync-principal)
-* [Change Owner of Objects](../../doc/controllers/admin.md#change-owner-of-objects)
+* [Change Author of Objects](../../doc/controllers/admin.md#change-author-of-objects)
+* [Assign Author to Objects](../../doc/controllers/admin.md#assign-author-to-objects)
+* [Force Logout Users](../../doc/controllers/admin.md#force-logout-users)
 
 
 # Get Cluster Config
@@ -219,24 +221,24 @@ adminController.syncPrincipalAsync(body).thenAccept(result -> {
 | 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Change Owner of Objects
+# Change Author of Objects
 
-To programmatically change the owner of one or several objects from one user account to another, use this endpoint.
+To programmatically change the author of one or several objects from one user account to another, use this endpoint.
 
-You might want to transfer ownership of objects owned by a user to another active user, when the account is removed from the ThoughtSpot application.
+You might want to change the author of objects from one user to another active user, when the account is removed from the ThoughtSpot application.
 
 Permission: Requires administration privilege
 
 ```java
-CompletableFuture<Boolean> changeOwnerOfObjectsAsync(
-    final TspublicRestV2AdminChangeownerRequest body)
+CompletableFuture<Boolean> changeAuthorOfObjectsAsync(
+    final TspublicRestV2AdminChangeauthorRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`TspublicRestV2AdminChangeownerRequest`](../../doc/models/tspublic-rest-v2-admin-changeowner-request.md) | Body, Required | - |
+| `body` | [`TspublicRestV2AdminChangeauthorRequest`](../../doc/models/tspublic-rest-v2-admin-changeauthor-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -245,13 +247,99 @@ CompletableFuture<Boolean> changeOwnerOfObjectsAsync(
 ## Example Usage
 
 ```java
-TspublicRestV2AdminChangeownerRequest body = new TspublicRestV2AdminChangeownerRequest();
+TspublicRestV2AdminChangeauthorRequest body = new TspublicRestV2AdminChangeauthorRequest();
 body.setTsObjectId(new LinkedList<>());
 body.getTsObjectId().add("tsObjectId7");
 body.setFromUser(new FromUserNameAndIDInput());
 body.setToUser(new ToUserNameAndIDInput());
 
-adminController.changeOwnerOfObjectsAsync(body).thenAccept(result -> {
+adminController.changeAuthorOfObjectsAsync(body).thenAccept(result -> {
+    // TODO success callback handler
+}).exceptionally(exception -> {
+    // TODO failure callback handler
+    return null;
+});
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+
+
+# Assign Author to Objects
+
+To programmatically assign an author to one or several objects, use this endpoint.
+
+Provide either user name or id as input. When both are given user id will be considered.
+
+Requires administration privilege.
+
+```java
+CompletableFuture<Boolean> assignAuthorToObjectsAsync(
+    final TspublicRestV2AdminAssignauthorRequest body)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`TspublicRestV2AdminAssignauthorRequest`](../../doc/models/tspublic-rest-v2-admin-assignauthor-request.md) | Body, Required | - |
+
+## Response Type
+
+`boolean`
+
+## Example Usage
+
+```java
+TspublicRestV2AdminAssignauthorRequest body = new TspublicRestV2AdminAssignauthorRequest();
+body.setTsObjectId(new LinkedList<>());
+body.getTsObjectId().add("tsObjectId7");
+
+adminController.assignAuthorToObjectsAsync(body).thenAccept(result -> {
+    // TODO success callback handler
+}).exceptionally(exception -> {
+    // TODO failure callback handler
+    return null;
+});
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+
+
+# Force Logout Users
+
+To logout one or more users from logged in session, use this endpoint. If no input is provided then all logged in users are force logged out.
+
+Requires administration privilege
+
+```java
+CompletableFuture<Boolean> forceLogoutUsersAsync(
+    final TspublicRestV2AdminForcelogoutRequest body)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`TspublicRestV2AdminForcelogoutRequest`](../../doc/models/tspublic-rest-v2-admin-forcelogout-request.md) | Body, Required | - |
+
+## Response Type
+
+`boolean`
+
+## Example Usage
+
+```java
+TspublicRestV2AdminForcelogoutRequest body = new TspublicRestV2AdminForcelogoutRequest();
+
+adminController.forceLogoutUsersAsync(body).thenAccept(result -> {
     // TODO success callback handler
 }).exceptionally(exception -> {
     // TODO failure callback handler

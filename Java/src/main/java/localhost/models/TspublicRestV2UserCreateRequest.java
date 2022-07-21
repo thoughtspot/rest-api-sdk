@@ -20,6 +20,7 @@ public class TspublicRestV2UserCreateRequest {
     private CreateUserVisibilityEnum visibility;
     private String mail;
     private String password;
+    private OrgInput org;
     private List<GroupNameAndIDInput> groups;
     private CreateUserStateEnum state;
     private CreateUserNotifyOnShareEnum notifyOnShare;
@@ -46,6 +47,7 @@ public class TspublicRestV2UserCreateRequest {
      * @param  password  String value for password.
      * @param  visibility  CreateUserVisibilityEnum value for visibility.
      * @param  mail  String value for mail.
+     * @param  org  OrgInput value for org.
      * @param  groups  List of GroupNameAndIDInput value for groups.
      * @param  state  CreateUserStateEnum value for state.
      * @param  notifyOnShare  CreateUserNotifyOnShareEnum value for notifyOnShare.
@@ -60,6 +62,7 @@ public class TspublicRestV2UserCreateRequest {
             String password,
             CreateUserVisibilityEnum visibility,
             String mail,
+            OrgInput org,
             List<GroupNameAndIDInput> groups,
             CreateUserStateEnum state,
             CreateUserNotifyOnShareEnum notifyOnShare,
@@ -71,6 +74,7 @@ public class TspublicRestV2UserCreateRequest {
         this.visibility = visibility;
         this.mail = mail;
         this.password = password;
+        this.org = org;
         this.groups = groups;
         this.state = state;
         this.notifyOnShare = notifyOnShare;
@@ -183,6 +187,33 @@ public class TspublicRestV2UserCreateRequest {
     @JsonSetter("password")
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    /**
+     * Getter for Org.
+     * This is applicable only if organization feature is enabled in the cluster. A JSON object of
+     * organization name, id or both, in which the object should be created. When both are given
+     * then id is considered. If no value is provided then object will be created in the
+     * organization associated with the login session.
+     * @return Returns the OrgInput
+     */
+    @JsonGetter("org")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public OrgInput getOrg() {
+        return org;
+    }
+
+    /**
+     * Setter for Org.
+     * This is applicable only if organization feature is enabled in the cluster. A JSON object of
+     * organization name, id or both, in which the object should be created. When both are given
+     * then id is considered. If no value is provided then object will be created in the
+     * organization associated with the login session.
+     * @param org Value for OrgInput
+     */
+    @JsonSetter("org")
+    public void setOrg(OrgInput org) {
+        this.org = org;
     }
 
     /**
@@ -329,8 +360,8 @@ public class TspublicRestV2UserCreateRequest {
     public String toString() {
         return "TspublicRestV2UserCreateRequest [" + "name=" + name + ", displayName=" + displayName
                 + ", password=" + password + ", visibility=" + visibility + ", mail=" + mail
-                + ", groups=" + groups + ", state=" + state + ", notifyOnShare=" + notifyOnShare
-                + ", showWalkMe=" + showWalkMe + ", analystOnboardingComplete="
+                + ", org=" + org + ", groups=" + groups + ", state=" + state + ", notifyOnShare="
+                + notifyOnShare + ", showWalkMe=" + showWalkMe + ", analystOnboardingComplete="
                 + analystOnboardingComplete + ", type=" + type + "]";
     }
 
@@ -343,6 +374,7 @@ public class TspublicRestV2UserCreateRequest {
         Builder builder = new Builder(name, displayName, password)
                 .visibility(getVisibility())
                 .mail(getMail())
+                .org(getOrg())
                 .groups(getGroups())
                 .state(getState())
                 .notifyOnShare(getNotifyOnShare())
@@ -361,6 +393,7 @@ public class TspublicRestV2UserCreateRequest {
         private String password;
         private CreateUserVisibilityEnum visibility = CreateUserVisibilityEnum.DEFAULT;
         private String mail;
+        private OrgInput org;
         private List<GroupNameAndIDInput> groups;
         private CreateUserStateEnum state = CreateUserStateEnum.ACTIVE;
         private CreateUserNotifyOnShareEnum notifyOnShare = CreateUserNotifyOnShareEnum.ENUM_TRUE;
@@ -438,6 +471,16 @@ public class TspublicRestV2UserCreateRequest {
         }
 
         /**
+         * Setter for org.
+         * @param  org  OrgInput value for org.
+         * @return Builder
+         */
+        public Builder org(OrgInput org) {
+            this.org = org;
+            return this;
+        }
+
+        /**
          * Setter for groups.
          * @param  groups  List of GroupNameAndIDInput value for groups.
          * @return Builder
@@ -505,7 +548,7 @@ public class TspublicRestV2UserCreateRequest {
          */
         public TspublicRestV2UserCreateRequest build() {
             return new TspublicRestV2UserCreateRequest(name, displayName, password, visibility,
-                    mail, groups, state, notifyOnShare, showWalkMe, analystOnboardingComplete,
+                    mail, org, groups, state, notifyOnShare, showWalkMe, analystOnboardingComplete,
                     type);
         }
     }

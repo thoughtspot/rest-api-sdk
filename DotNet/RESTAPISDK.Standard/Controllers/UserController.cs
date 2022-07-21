@@ -123,7 +123,7 @@ namespace RESTAPISDK.Standard.Controllers
         /// <summary>
         /// To programmatically create a user account in the ThoughtSpot system, use this API endpoint. .
         ///  Using this API, you can create a user and assign groups. To create a user, you require admin user privileges. .
-        ///  All users created in the ThoughtSpot system are added to ALL_GROUP .
+        ///  All users created in the ThoughtSpot system are added to ALL user group. .
         ///  Permission: Requires administration privilege.
         /// </summary>
         /// <param name="body">Required parameter: Example: .</param>
@@ -139,7 +139,7 @@ namespace RESTAPISDK.Standard.Controllers
         /// <summary>
         /// To programmatically create a user account in the ThoughtSpot system, use this API endpoint. .
         ///  Using this API, you can create a user and assign groups. To create a user, you require admin user privileges. .
-        ///  All users created in the ThoughtSpot system are added to ALL_GROUP .
+        ///  All users created in the ThoughtSpot system are added to ALL user group. .
         ///  Permission: Requires administration privilege.
         /// </summary>
         /// <param name="body">Required parameter: Example: .</param>
@@ -292,12 +292,14 @@ namespace RESTAPISDK.Standard.Controllers
         /// </summary>
         /// <param name="name">Optional parameter: Username of the user account.</param>
         /// <param name="id">Optional parameter: The GUID of the user account.</param>
+        /// <param name="org">Optional parameter: This is applicable only if organization feature is enabled in the cluster.    A JSON object of organization name, id or both, from which the user should be deleted. When both are given then id is considered. If no value is provided then the organization associated with the login session will be considered..</param>
         /// <returns>Returns the bool response from the API call.</returns>
         public bool DeleteUser(
                 string name = null,
-                string id = null)
+                string id = null,
+                Models.OrgInput org = null)
         {
-            Task<bool> t = this.DeleteUserAsync(name, id);
+            Task<bool> t = this.DeleteUserAsync(name, id, org);
             ApiHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -309,11 +311,13 @@ namespace RESTAPISDK.Standard.Controllers
         /// </summary>
         /// <param name="name">Optional parameter: Username of the user account.</param>
         /// <param name="id">Optional parameter: The GUID of the user account.</param>
+        /// <param name="org">Optional parameter: This is applicable only if organization feature is enabled in the cluster.    A JSON object of organization name, id or both, from which the user should be deleted. When both are given then id is considered. If no value is provided then the organization associated with the login session will be considered..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the bool response from the API call.</returns>
         public async Task<bool> DeleteUserAsync(
                 string name = null,
                 string id = null,
+                Models.OrgInput org = null,
                 CancellationToken cancellationToken = default)
         {
             // the base uri for api requests.
@@ -328,6 +332,7 @@ namespace RESTAPISDK.Standard.Controllers
             {
                 { "name", name },
                 { "id", id },
+                { "org", org },
             };
 
             // append request with appropriate headers and parameters
@@ -375,10 +380,10 @@ namespace RESTAPISDK.Standard.Controllers
         /// </summary>
         /// <param name="body">Required parameter: Example: .</param>
         /// <returns>Returns the bool response from the API call.</returns>
-        public bool AddGroupsToUser(
+        public bool AddUserToGroups(
                 Models.TspublicRestV2UserAddgroupRequest body)
         {
-            Task<bool> t = this.AddGroupsToUserAsync(body);
+            Task<bool> t = this.AddUserToGroupsAsync(body);
             ApiHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -392,7 +397,7 @@ namespace RESTAPISDK.Standard.Controllers
         /// <param name="body">Required parameter: Example: .</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the bool response from the API call.</returns>
-        public async Task<bool> AddGroupsToUserAsync(
+        public async Task<bool> AddUserToGroupsAsync(
                 Models.TspublicRestV2UserAddgroupRequest body,
                 CancellationToken cancellationToken = default)
         {
@@ -457,10 +462,10 @@ namespace RESTAPISDK.Standard.Controllers
         /// </summary>
         /// <param name="body">Required parameter: Example: .</param>
         /// <returns>Returns the bool response from the API call.</returns>
-        public bool RemoveGroupsFromUser(
+        public bool RemoveUserFromGroups(
                 Models.TspublicRestV2UserRemovegroupRequest body)
         {
-            Task<bool> t = this.RemoveGroupsFromUserAsync(body);
+            Task<bool> t = this.RemoveUserFromGroupsAsync(body);
             ApiHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -474,7 +479,7 @@ namespace RESTAPISDK.Standard.Controllers
         /// <param name="body">Required parameter: Example: .</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the bool response from the API call.</returns>
-        public async Task<bool> RemoveGroupsFromUserAsync(
+        public async Task<bool> RemoveUserFromGroupsAsync(
                 Models.TspublicRestV2UserRemovegroupRequest body,
                 CancellationToken cancellationToken = default)
         {
@@ -490,6 +495,88 @@ namespace RESTAPISDK.Standard.Controllers
             // prepare query string for API call.
             StringBuilder queryBuilder = new StringBuilder(baseUri);
             queryBuilder.Append("/tspublic/rest/v2/user/removegroup");
+
+            // append request with appropriate headers and parameters
+            var headers = new Dictionary<string, string>()
+            {
+                { "user-agent", this.UserAgent },
+                { "Content-Type", "application/json" },
+                { "Accept-Language", this.Config.AcceptLanguage },
+            };
+
+            // append body params.
+            var bodyText = ApiHelper.JsonSerialize(body);
+
+            // prepare the API call request to fetch the response.
+            HttpRequest httpRequest = this.GetClientInstance().PutBody(queryBuilder.ToString(), headers, bodyText);
+
+            if (this.HttpCallBack != null)
+            {
+                this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
+            }
+
+            httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
+
+            // invoke request and get response.
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
+            HttpContext context = new HttpContext(httpRequest, response);
+            if (this.HttpCallBack != null)
+            {
+                this.HttpCallBack.OnAfterHttpResponseEventHandler(this.GetClientInstance(), response);
+            }
+
+            if (response.StatusCode == 500)
+            {
+                throw new ErrorResponseException("Operation failed or unauthorized request", context);
+            }
+
+            // handle errors defined at the API level.
+            this.ValidateResponse(response, context);
+
+            return bool.Parse(response.Body);
+        }
+
+        /// <summary>
+        /// This is endpoint is applicable only if organization feature is enabled in the cluster. .
+        ///  To programmatically add existing ThoughtSpot users to an organization, use this API endpoint. .
+        ///  At least one of id or name of the organization is required. When both are given, then organization id will be considered. .
+        ///  Requires Administration access for the organization to which users need to be added.
+        /// </summary>
+        /// <param name="body">Required parameter: Example: .</param>
+        /// <returns>Returns the bool response from the API call.</returns>
+        public bool AddUserToOrgs(
+                Models.TspublicRestV2UserAddorgRequest body)
+        {
+            Task<bool> t = this.AddUserToOrgsAsync(body);
+            ApiHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// This is endpoint is applicable only if organization feature is enabled in the cluster. .
+        ///  To programmatically add existing ThoughtSpot users to an organization, use this API endpoint. .
+        ///  At least one of id or name of the organization is required. When both are given, then organization id will be considered. .
+        ///  Requires Administration access for the organization to which users need to be added.
+        /// </summary>
+        /// <param name="body">Required parameter: Example: .</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the bool response from the API call.</returns>
+        public async Task<bool> AddUserToOrgsAsync(
+                Models.TspublicRestV2UserAddorgRequest body,
+                CancellationToken cancellationToken = default)
+        {
+            // validating required parameters.
+            if (body == null)
+            {
+                throw new ArgumentNullException("body", "The parameter \"body\" is a required parameter and cannot be null.");
+            }
+
+            // the base uri for api requests.
+            string baseUri = this.Config.GetBaseUri();
+
+            // prepare query string for API call.
+            StringBuilder queryBuilder = new StringBuilder(baseUri);
+            queryBuilder.Append("/tspublic/rest/v2/user/addorg");
 
             // append request with appropriate headers and parameters
             var headers = new Dictionary<string, string>()
@@ -653,6 +740,7 @@ namespace RESTAPISDK.Standard.Controllers
             var headers = new Dictionary<string, string>()
             {
                 { "user-agent", this.UserAgent },
+                { "accept", "application/json" },
                 { "Content-Type", "application/json" },
                 { "Accept-Language", this.Config.AcceptLanguage },
             };

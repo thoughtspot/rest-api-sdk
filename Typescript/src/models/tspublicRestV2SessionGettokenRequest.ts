@@ -27,6 +27,11 @@ export interface TspublicRestV2SessionGettokenRequest {
   tsObjectId?: string;
   /** Provide duration in seconds after which the token should expire */
   tokenExpiryDuration?: string;
+  /**
+   * This is applicable only if organization feature is enabled in the cluster.
+   *  Id of the organization to be associated with the user login. If no input is provided then last logged in organization will be considered.
+   */
+  orgId?: string;
 }
 
 export const tspublicRestV2SessionGettokenRequestSchema: Schema<TspublicRestV2SessionGettokenRequest> = object(
@@ -37,5 +42,6 @@ export const tspublicRestV2SessionGettokenRequestSchema: Schema<TspublicRestV2Se
     accessLevel: ['accessLevel', optional(getTokenAccessLevelEnumSchema)],
     tsObjectId: ['tsObjectId', optional(string())],
     tokenExpiryDuration: ['tokenExpiryDuration', optional(string())],
+    orgId: ['orgId', optional(string())],
   }
 );

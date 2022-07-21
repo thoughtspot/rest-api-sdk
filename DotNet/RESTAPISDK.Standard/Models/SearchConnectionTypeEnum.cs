@@ -76,6 +76,12 @@ namespace RESTAPISDK.Standard.Models
         /// DENODO.
         /// </summary>
         [EnumMember(Value = "DENODO")]
-        DENODO
+        DENODO,
+
+        /// <summary>
+        /// DREMIO.
+        /// </summary>
+        [EnumMember(Value = "DREMIO")]
+        DREMIO
     }
 }

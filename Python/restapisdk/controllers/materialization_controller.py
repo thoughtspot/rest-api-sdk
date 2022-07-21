@@ -53,6 +53,7 @@ class MaterializationController(BaseController):
 
         # Prepare headers
         _headers = {
+            'accept': 'application/json',
             'Content-Type': 'application/json'
         }
 

@@ -32,8 +32,8 @@ class ColumnsInput(object):
         """Constructor for the ColumnsInput class"""
 
         # Initialize members of the class
-        self.name = name
-        self.data_type = data_type
+        self.name = name 
+        self.data_type = data_type 
 
     @classmethod
     def from_dictionary(cls,
@@ -54,8 +54,8 @@ class ColumnsInput(object):
 
         # Extract variables from the dictionary
 
-        name = dictionary.get('name')
-        data_type = dictionary.get('dataType')
+        name = dictionary.get("name") if dictionary.get("name") else None
+        data_type = dictionary.get("dataType") if dictionary.get("dataType") else None
         # Return an object of this model
         return cls(name,
                    data_type)

@@ -20,6 +20,7 @@ export enum CreateConnectionTypeEnum {
   ORACLEADW = 'ORACLE_ADW',
   DATABRICKS = 'DATABRICKS',
   DENODO = 'DENODO',
+  DREMIO = 'DREMIO',
 }
 
 /**

@@ -90,7 +90,8 @@ class UserController(BaseController):
         use this API endpoint. 
          Using this API, you can create a user and assign groups. To create a
          user, you require admin user privileges. 
-         All users created in the ThoughtSpot system are added to ALL_GROUP 
+         All users created in the ThoughtSpot system are added to ALL user
+         group. 
          Permission: Requires administration privilege
 
         Args:
@@ -197,7 +198,8 @@ class UserController(BaseController):
 
     def delete_user(self,
                     name=None,
-                    id=None):
+                    id=None,
+                    org=None):
         """Does a DELETE request to /tspublic/rest/v2/user/delete.
 
         To remove a user from the ThoughtSpot system, use this endpoint. 
@@ -208,6 +210,12 @@ class UserController(BaseController):
         Args:
             name (string, optional): Username of the user account
             id (string, optional): The GUID of the user account
+            org (OrgInput, optional): This is applicable only if organization
+                feature is enabled in the cluster.    A JSON object of
+                organization name, id or both, from which the user should be
+                deleted. When both are given then id is considered. If no
+                value is provided then the organization associated with the
+                login session will be considered.
 
         Returns:
             bool: Response from the API. User successfully deleted
@@ -226,7 +234,8 @@ class UserController(BaseController):
         _query_builder += _url_path
         _query_parameters = {
             'name': name,
-            'id': id
+            'id': id,
+            'org': org
         }
         _query_builder = APIHelper.append_url_with_query_parameters(
             _query_builder,
@@ -255,7 +264,7 @@ class UserController(BaseController):
 
         return decoded
 
-    def add_groups_to_user(self,
+    def add_user_to_groups(self,
                            body):
         """Does a PUT request to /tspublic/rest/v2/user/addgroup.
 
@@ -313,7 +322,7 @@ class UserController(BaseController):
 
         return decoded
 
-    def remove_groups_from_user(self,
+    def remove_user_from_groups(self,
                                 body):
         """Does a PUT request to /tspublic/rest/v2/user/removegroup.
 
@@ -346,6 +355,64 @@ class UserController(BaseController):
 
         # Prepare query URL
         _url_path = '/tspublic/rest/v2/user/removegroup'
+        _query_builder = self.config.get_base_uri()
+        _query_builder += _url_path
+        _query_url = APIHelper.clean_url(_query_builder)
+
+        # Prepare headers
+        _headers = {
+            'Content-Type': 'application/json'
+        }
+
+        # Prepare and execute request
+        _request = self.config.http_client.put(_query_url, headers=_headers, parameters=APIHelper.json_serialize(body))
+        # Apply authentication scheme on request
+        self.apply_auth_schemes(_request, 'global')
+
+        _response = self.execute_request(_request)
+
+        # Endpoint and global error handling using HTTP status codes.
+        if _response.status_code == 500:
+            raise ErrorResponseException('Operation failed or unauthorized request', _response)
+        self.validate_response(_response)
+
+        decoded = _response.text == 'true'
+
+        return decoded
+
+    def add_user_to_orgs(self,
+                         body):
+        """Does a PUT request to /tspublic/rest/v2/user/addorg.
+
+        This is endpoint is applicable only if organization feature is enabled
+        in the cluster. 
+         To programmatically add existing ThoughtSpot users to an
+         organization, use this API endpoint. 
+         At least one of id or name of the organization is required. When both
+         are given, then organization id will be considered. 
+         Requires Administration access for the organization to which users
+         need to be added.
+
+        Args:
+            body (TspublicRestV2UserAddorgRequest): TODO: type description
+                here.
+
+        Returns:
+            bool: Response from the API. Successfully assigned users to org
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        # Validate required parameters
+        self.validate_parameters(body=body)
+
+        # Prepare query URL
+        _url_path = '/tspublic/rest/v2/user/addorg'
         _query_builder = self.config.get_base_uri()
         _query_builder += _url_path
         _query_url = APIHelper.clean_url(_query_builder)
@@ -467,6 +534,7 @@ class UserController(BaseController):
 
         # Prepare headers
         _headers = {
+            'accept': 'application/json',
             'Content-Type': 'application/json'
         }
 

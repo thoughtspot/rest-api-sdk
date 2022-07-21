@@ -35,7 +35,7 @@ class TspublicRestV2DatabaseTableRunqueryRequest(object):
         """Constructor for the TspublicRestV2DatabaseTableRunqueryRequest class"""
 
         # Initialize members of the class
-        self.statement = statement
+        self.statement = statement 
 
     @classmethod
     def from_dictionary(cls,
@@ -56,6 +56,6 @@ class TspublicRestV2DatabaseTableRunqueryRequest(object):
 
         # Extract variables from the dictionary
 
-        statement = dictionary.get('statement')
+        statement = dictionary.get("statement") if dictionary.get("statement") else None
         # Return an object of this model
         return cls(statement)

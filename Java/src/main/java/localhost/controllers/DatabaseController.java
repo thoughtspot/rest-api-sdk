@@ -366,6 +366,125 @@ public final class DatabaseController extends BaseController {
     }
 
     /**
+     * Note: This endpoint is applicable only for on-prem deployments. To provide details of a table
+     * in a schema of a database in Falcon, use this endpoint.
+     * @param  database  Required parameter: Name of the Falcon database
+     * @param  table  Required parameter: Name of the table in Falcon database
+     * @param  schema  Optional parameter: Name of the schema in Falcon database
+     * @return    Returns the Object response from the API call
+     * @throws    ApiException    Represents error response from the server.
+     * @throws    IOException    Signals that an I/O exception of some sort has occurred.
+     */
+    public Object getTableDetails(
+            final String database,
+            final String table,
+            final String schema) throws ApiException, IOException {
+        HttpRequest request = buildGetTableDetailsRequest(database, table, schema);
+        authManagers.get("global").apply(request);
+
+        HttpResponse response = getClientInstance().execute(request, false);
+        HttpContext context = new HttpContext(request, response);
+
+        return handleGetTableDetailsResponse(context);
+    }
+
+    /**
+     * Note: This endpoint is applicable only for on-prem deployments. To provide details of a table
+     * in a schema of a database in Falcon, use this endpoint.
+     * @param  database  Required parameter: Name of the Falcon database
+     * @param  table  Required parameter: Name of the table in Falcon database
+     * @param  schema  Optional parameter: Name of the schema in Falcon database
+     * @return    Returns the Object response from the API call
+     */
+    public CompletableFuture<Object> getTableDetailsAsync(
+            final String database,
+            final String table,
+            final String schema) {
+        return makeHttpCallAsync(() -> buildGetTableDetailsRequest(database, table, schema),
+            req -> authManagers.get("global").applyAsync(req)
+                .thenCompose(request -> getClientInstance()
+                        .executeAsync(request, false)),
+            context -> handleGetTableDetailsResponse(context));
+    }
+
+    /**
+     * Builds the HttpRequest object for getTableDetails.
+     */
+    private HttpRequest buildGetTableDetailsRequest(
+            final String database,
+            final String table,
+            final String schema) {
+        //validating required parameters
+        if (null == database) {
+            throw new NullPointerException("The parameter \"database\" is a required parameter and cannot be null.");
+        }
+
+        if (null == table) {
+            throw new NullPointerException("The parameter \"table\" is a required parameter and cannot be null.");
+        }
+
+        //the base uri for api requests
+        String baseUri = config.getBaseUri();
+
+        //prepare query string for API call
+        final StringBuilder queryBuilder = new StringBuilder(baseUri
+                + "/tspublic/rest/v2/database/table/detail");
+
+        //load all query parameters
+        Map<String, Object> queryParameters = new HashMap<>();
+        queryParameters.put("database", database);
+        queryParameters.put("table", table);
+        queryParameters.put("schema", schema);
+
+        //load all headers for the outgoing API request
+        Headers headers = new Headers();
+        headers.add("Accept-Language", config.getAcceptLanguage());
+        headers.add("Content-Type", config.getContentType());
+        headers.add("user-agent", BaseController.userAgent);
+        headers.add("accept", "application/json");
+
+        //prepare and invoke the API call request to fetch the response
+        HttpRequest request = getClientInstance().get(queryBuilder, headers, queryParameters,
+                null);
+
+        // Invoke the callback before request if its not null
+        if (getHttpCallback() != null) {
+            getHttpCallback().onBeforeRequest(request);
+        }
+
+        return request;
+    }
+
+    /**
+     * Processes the response for getTableDetails.
+     * @return An object of type Object
+     */
+    private Object handleGetTableDetailsResponse(
+            HttpContext context) throws ApiException, IOException {
+        HttpResponse response = context.getResponse();
+
+        //invoke the callback after response if its not null
+        if (getHttpCallback() != null) {
+            getHttpCallback().onAfterResponse(context);
+        }
+
+        //Error handling using HTTP status codes
+        int responseCode = response.getStatusCode();
+
+        if (responseCode == 500) {
+            throw new ErrorResponseException("Operation failed or unauthorized request", context);
+        }
+        //handle errors defined at the API level
+        validateResponse(response, context);
+
+        //extract result from the http response
+        String responseBody = ((HttpStringResponse) response).getBody();
+        Object result = responseBody;
+
+        return result;
+    }
+
+    /**
      * Note: This endpoint is applicable only for on-prem deployments. To create a table in Falcon,
      * use this endpoint. Permission: Requires administration privilege.
      * @param  body  Required parameter: Example:

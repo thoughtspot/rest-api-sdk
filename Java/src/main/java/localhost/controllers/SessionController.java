@@ -25,6 +25,7 @@ import localhost.http.response.HttpStringResponse;
 import localhost.models.SessionLoginResponse;
 import localhost.models.TspublicRestV2SessionGettokenRequest;
 import localhost.models.TspublicRestV2SessionLoginRequest;
+import localhost.models.TspublicRestV2SessionOrgRequest;
 
 /**
  * This class lists all the endpoints of the groups.
@@ -98,6 +99,7 @@ public final class SessionController extends BaseController {
         headers.add("Accept-Language", config.getAcceptLanguage());
         headers.add("Content-Type", config.getContentType());
         headers.add("user-agent", BaseController.userAgent);
+        headers.add("accept", "application/json");
 
         //prepare and invoke the API call request to fetch the response
         HttpRequest request = getClientInstance().get(queryBuilder, headers, null, null);
@@ -495,6 +497,110 @@ public final class SessionController extends BaseController {
      * @return An object of type boolean
      */
     private Boolean handleRevokeTokenResponse(
+            HttpContext context) throws ApiException, IOException {
+        HttpResponse response = context.getResponse();
+
+        //invoke the callback after response if its not null
+        if (getHttpCallback() != null) {
+            getHttpCallback().onAfterResponse(context);
+        }
+
+        //Error handling using HTTP status codes
+        int responseCode = response.getStatusCode();
+
+        if (responseCode == 500) {
+            throw new ErrorResponseException("Operation failed or unauthorized request", context);
+        }
+        //handle errors defined at the API level
+        validateResponse(response, context);
+
+        //extract result from the http response
+        String responseBody = ((HttpStringResponse) response).getBody();
+        boolean result = Boolean.parseBoolean(responseBody);
+
+        return result;
+    }
+
+    /**
+     * This is endpoint is applicable only if organization feature is enabled in the cluster. To
+     * programmatically switch the organization context for the logged in session, use this
+     * endpoint. The original session is reused even after changing the organization. The logged in
+     * user should have access to the organization being switched to. This endpoint can be used to
+     * switch organization only when using session cookies for authentication.
+     * @param  body  Required parameter: Example:
+     * @return    Returns the Boolean response from the API call
+     * @throws    ApiException    Represents error response from the server.
+     * @throws    IOException    Signals that an I/O exception of some sort has occurred.
+     */
+    public Boolean switchOrg(
+            final TspublicRestV2SessionOrgRequest body) throws ApiException, IOException {
+        HttpRequest request = buildSwitchOrgRequest(body);
+        authManagers.get("global").apply(request);
+
+        HttpResponse response = getClientInstance().execute(request, false);
+        HttpContext context = new HttpContext(request, response);
+
+        return handleSwitchOrgResponse(context);
+    }
+
+    /**
+     * This is endpoint is applicable only if organization feature is enabled in the cluster. To
+     * programmatically switch the organization context for the logged in session, use this
+     * endpoint. The original session is reused even after changing the organization. The logged in
+     * user should have access to the organization being switched to. This endpoint can be used to
+     * switch organization only when using session cookies for authentication.
+     * @param  body  Required parameter: Example:
+     * @return    Returns the Boolean response from the API call
+     */
+    public CompletableFuture<Boolean> switchOrgAsync(
+            final TspublicRestV2SessionOrgRequest body) {
+        return makeHttpCallAsync(() -> buildSwitchOrgRequest(body),
+            req -> authManagers.get("global").applyAsync(req)
+                .thenCompose(request -> getClientInstance()
+                        .executeAsync(request, false)),
+            context -> handleSwitchOrgResponse(context));
+    }
+
+    /**
+     * Builds the HttpRequest object for switchOrg.
+     */
+    private HttpRequest buildSwitchOrgRequest(
+            final TspublicRestV2SessionOrgRequest body) throws JsonProcessingException {
+        //validating required parameters
+        if (null == body) {
+            throw new NullPointerException("The parameter \"body\" is a required parameter and cannot be null.");
+        }
+
+        //the base uri for api requests
+        String baseUri = config.getBaseUri();
+
+        //prepare query string for API call
+        final StringBuilder queryBuilder = new StringBuilder(baseUri
+                + "/tspublic/rest/v2/session/org");
+
+        //load all headers for the outgoing API request
+        Headers headers = new Headers();
+        headers.add("Content-Type", "application/json");
+        headers.add("Accept-Language", config.getAcceptLanguage());
+        headers.add("user-agent", BaseController.userAgent);
+
+        //prepare and invoke the API call request to fetch the response
+        String bodyJson = ApiHelper.serialize(body);
+        HttpRequest request = getClientInstance().putBody(queryBuilder, headers, null, bodyJson);
+
+        // Invoke the callback before request if its not null
+        if (getHttpCallback() != null) {
+            getHttpCallback().onBeforeRequest(request);
+        }
+
+        return request;
+    }
+
+    /**
+     * Processes the response for switchOrg.
+     * @return An object of type boolean
+     */
+    private Boolean handleSwitchOrgResponse(
             HttpContext context) throws ApiException, IOException {
         HttpResponse response = context.getResponse();
 

@@ -25,6 +25,7 @@ class SearchConnectionTypeEnum(object):
         ORACLE_ADW: TODO: type description here.
         DATABRICKS: TODO: type description here.
         DENODO: TODO: type description here.
+        DREMIO: TODO: type description here.
 
     """
 
@@ -47,3 +48,5 @@ class SearchConnectionTypeEnum(object):
     DATABRICKS = 'DATABRICKS'
 
     DENODO = 'DENODO'
+
+    DREMIO = 'DREMIO'

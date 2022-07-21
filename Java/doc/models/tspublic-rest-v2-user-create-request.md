@@ -14,6 +14,7 @@
 | `Visibility` | [`CreateUserVisibilityEnum`](../../doc/models/create-user-visibility-enum.md) | Optional | Visibility of the user. The visibility attribute is set to DEFAULT when creating a user.<br><br>The DEFAULT attribute makes a user visible to other users and user groups, and thus allows them to share objects.<br>**Default**: `CreateUserVisibilityEnum.DEFAULT` | CreateUserVisibilityEnum getVisibility() | setVisibility(CreateUserVisibilityEnum visibility) |
 | `Mail` | `String` | Optional | Email id associated with the user account | String getMail() | setMail(String mail) |
 | `Password` | `String` | Required | Password for the user account. | String getPassword() | setPassword(String password) |
+| `Org` | [`OrgInput`](../../doc/models/org-input.md) | Optional | This is applicable only if organization feature is enabled in the cluster.<br><br>A JSON object of organization name, id or both, in which the object should be created. When both are given then id is considered. If no value is provided then object will be created in the organization associated with the login session. | OrgInput getOrg() | setOrg(OrgInput org) |
 | `Groups` | [`List<GroupNameAndIDInput>`](../../doc/models/group-name-and-id-input.md) | Optional | A JSON array of group names or GUIDs or both. When both are given then id is considered | List<GroupNameAndIDInput> getGroups() | setGroups(List<GroupNameAndIDInput> groups) |
 | `State` | [`CreateUserStateEnum`](../../doc/models/create-user-state-enum.md) | Optional | Status of user account. acitve or inactive.<br>**Default**: `CreateUserStateEnum.ACTIVE` | CreateUserStateEnum getState() | setState(CreateUserStateEnum state) |
 | `NotifyOnShare` | [`CreateUserNotifyOnShareEnum`](../../doc/models/create-user-notify-on-share-enum.md) | Optional | User preference for receiving email notifications when another ThoughtSpot user shares answers or pinboards.<br>**Default**: `CreateUserNotifyOnShareEnum.ENUM_TRUE` | CreateUserNotifyOnShareEnum getNotifyOnShare() | setNotifyOnShare(CreateUserNotifyOnShareEnum notifyOnShare) |
@@ -30,6 +31,7 @@
   "visibility": null,
   "mail": null,
   "password": "password4",
+  "org": null,
   "groups": null,
   "state": null,
   "notifyOnShare": null,

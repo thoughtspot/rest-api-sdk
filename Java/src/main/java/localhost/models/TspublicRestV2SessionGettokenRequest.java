@@ -20,6 +20,7 @@ public class TspublicRestV2SessionGettokenRequest {
     private GetTokenAccessLevelEnum accessLevel;
     private String tsObjectId;
     private String tokenExpiryDuration;
+    private String orgId;
 
     /**
      * Default constructor.
@@ -36,6 +37,7 @@ public class TspublicRestV2SessionGettokenRequest {
      * @param  accessLevel  GetTokenAccessLevelEnum value for accessLevel.
      * @param  tsObjectId  String value for tsObjectId.
      * @param  tokenExpiryDuration  String value for tokenExpiryDuration.
+     * @param  orgId  String value for orgId.
      */
     public TspublicRestV2SessionGettokenRequest(
             String userName,
@@ -43,13 +45,15 @@ public class TspublicRestV2SessionGettokenRequest {
             String secretKey,
             GetTokenAccessLevelEnum accessLevel,
             String tsObjectId,
-            String tokenExpiryDuration) {
+            String tokenExpiryDuration,
+            String orgId) {
         this.userName = userName;
         this.password = password;
         this.secretKey = secretKey;
         this.accessLevel = accessLevel;
         this.tsObjectId = tsObjectId;
         this.tokenExpiryDuration = tokenExpiryDuration;
+        this.orgId = orgId;
     }
 
     /**
@@ -184,6 +188,31 @@ public class TspublicRestV2SessionGettokenRequest {
     }
 
     /**
+     * Getter for OrgId.
+     * This is applicable only if organization feature is enabled in the cluster. Id of the
+     * organization to be associated with the user login. If no input is provided then last logged
+     * in organization will be considered.
+     * @return Returns the String
+     */
+    @JsonGetter("orgId")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public String getOrgId() {
+        return orgId;
+    }
+
+    /**
+     * Setter for OrgId.
+     * This is applicable only if organization feature is enabled in the cluster. Id of the
+     * organization to be associated with the user login. If no input is provided then last logged
+     * in organization will be considered.
+     * @param orgId Value for String
+     */
+    @JsonSetter("orgId")
+    public void setOrgId(String orgId) {
+        this.orgId = orgId;
+    }
+
+    /**
      * Converts this TspublicRestV2SessionGettokenRequest into string format.
      * @return String representation of this class
      */
@@ -192,7 +221,7 @@ public class TspublicRestV2SessionGettokenRequest {
         return "TspublicRestV2SessionGettokenRequest [" + "userName=" + userName + ", password="
                 + password + ", secretKey=" + secretKey + ", accessLevel=" + accessLevel
                 + ", tsObjectId=" + tsObjectId + ", tokenExpiryDuration=" + tokenExpiryDuration
-                + "]";
+                + ", orgId=" + orgId + "]";
     }
 
     /**
@@ -206,7 +235,8 @@ public class TspublicRestV2SessionGettokenRequest {
                 .secretKey(getSecretKey())
                 .accessLevel(getAccessLevel())
                 .tsObjectId(getTsObjectId())
-                .tokenExpiryDuration(getTokenExpiryDuration());
+                .tokenExpiryDuration(getTokenExpiryDuration())
+                .orgId(getOrgId());
         return builder;
     }
 
@@ -220,6 +250,7 @@ public class TspublicRestV2SessionGettokenRequest {
         private GetTokenAccessLevelEnum accessLevel = GetTokenAccessLevelEnum.FULL;
         private String tsObjectId;
         private String tokenExpiryDuration;
+        private String orgId;
 
         /**
          * Initialization constructor.
@@ -296,12 +327,22 @@ public class TspublicRestV2SessionGettokenRequest {
         }
 
         /**
+         * Setter for orgId.
+         * @param  orgId  String value for orgId.
+         * @return Builder
+         */
+        public Builder orgId(String orgId) {
+            this.orgId = orgId;
+            return this;
+        }
+
+        /**
          * Builds a new {@link TspublicRestV2SessionGettokenRequest} object using the set fields.
          * @return {@link TspublicRestV2SessionGettokenRequest}
          */
         public TspublicRestV2SessionGettokenRequest build() {
             return new TspublicRestV2SessionGettokenRequest(userName, password, secretKey,
-                    accessLevel, tsObjectId, tokenExpiryDuration);
+                    accessLevel, tsObjectId, tokenExpiryDuration, orgId);
         }
     }
 }

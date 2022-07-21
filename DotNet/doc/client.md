@@ -36,6 +36,7 @@ The gateway for the SDK. This class acts as a factory for the Controllers and al
 | SessionController | Gets SessionController controller. |
 | UserController | Gets UserController controller. |
 | GroupController | Gets GroupController controller. |
+| OrgController | Gets OrgController controller. |
 | MetadataController | Gets MetadataController controller. |
 | DatabaseController | Gets DatabaseController controller. |
 | ConnectionController | Gets ConnectionController controller. |

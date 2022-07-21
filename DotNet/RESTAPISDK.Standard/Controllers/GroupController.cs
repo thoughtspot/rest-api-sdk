@@ -127,7 +127,7 @@ namespace RESTAPISDK.Standard.Controllers
         ///  Using this API, you can create a group and assign privileges and users. .
         ///  For ease of user management and access control, ThoughtSpot administrations can create groups and assign privileges to these groups. .
         ///  The privileges determine the actions that the users belonging to a group are allowed to do. .
-        ///  ThoughtSpot also has a default group called ALL_GROUP. When you create new group in ThoughtSpot, they are automatically added to ALL_GROUP. You cannot delete the ALL_GROUP or remove members from it. .
+        ///  ThoughtSpot also has a default group called ALL. When you create new group in ThoughtSpot, they are automatically added to ALL user group. You cannot delete the ALL user group or remove members from it. .
         ///  Permission: Requires administration privilege.
         /// </summary>
         /// <param name="body">Required parameter: Example: .</param>
@@ -145,7 +145,7 @@ namespace RESTAPISDK.Standard.Controllers
         ///  Using this API, you can create a group and assign privileges and users. .
         ///  For ease of user management and access control, ThoughtSpot administrations can create groups and assign privileges to these groups. .
         ///  The privileges determine the actions that the users belonging to a group are allowed to do. .
-        ///  ThoughtSpot also has a default group called ALL_GROUP. When you create new group in ThoughtSpot, they are automatically added to ALL_GROUP. You cannot delete the ALL_GROUP or remove members from it. .
+        ///  ThoughtSpot also has a default group called ALL. When you create new group in ThoughtSpot, they are automatically added to ALL user group. You cannot delete the ALL user group or remove members from it. .
         ///  Permission: Requires administration privilege.
         /// </summary>
         /// <param name="body">Required parameter: Example: .</param>
@@ -909,6 +909,7 @@ namespace RESTAPISDK.Standard.Controllers
             var headers = new Dictionary<string, string>()
             {
                 { "user-agent", this.UserAgent },
+                { "accept", "application/json" },
                 { "Content-Type", "application/json" },
                 { "Accept-Language", this.Config.AcceptLanguage },
             };

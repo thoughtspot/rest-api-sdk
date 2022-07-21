@@ -39,10 +39,10 @@ class AddTableInput(object):
         """Constructor for the AddTableInput class"""
 
         # Initialize members of the class
-        self.name = name
-        self.db_name = db_name
-        self.schema_name = schema_name
-        self.columns = columns
+        self.name = name 
+        self.db_name = db_name 
+        self.schema_name = schema_name 
+        self.columns = columns 
 
     @classmethod
     def from_dictionary(cls,
@@ -63,9 +63,9 @@ class AddTableInput(object):
 
         # Extract variables from the dictionary
 
-        name = dictionary.get('name')
-        db_name = dictionary.get('dbName')
-        schema_name = dictionary.get('schemaName')
+        name = dictionary.get("name") if dictionary.get("name") else None
+        db_name = dictionary.get("dbName") if dictionary.get("dbName") else None
+        schema_name = dictionary.get("schemaName") if dictionary.get("schemaName") else None
         columns = None
         if dictionary.get('columns') is not None:
             columns = [ColumnsInput.from_dictionary(x) for x in dictionary.get('columns')]

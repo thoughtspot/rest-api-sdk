@@ -21,4 +21,5 @@ Type of the connect being searched. Valid values:
 | `ORACLE_ADW` |
 | `DATABRICKS` |
 | `DENODO` |
+| `DREMIO` |
 

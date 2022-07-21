@@ -1,14 +1,12 @@
 
 # Getting Started with RESTAPI SDK
 
-SDK for ThoughtSpot's v2 [Rest APIs](https://developers.thoughtspot.com/docs/?pageid=rest-api-v2) (Beta)
-
 ## Install the Package
 
 Run the following command from your project directory to install the package from npm:
 
 ```ts
-npm install @thoughtspot/rest-api-sdk@1.10.0
+npm install thoughtspot@rest-api-sdk@1.13.0
 ```
 
 ## Initialize the API Client
@@ -28,6 +26,27 @@ The following parameters are configurable for the API Client:
 | `unstableHttpClientOptions` | `any` | Unstable configurable http client options. |
 | `accessToken` | `string` | The OAuth 2.0 Access Token to use for API requests. |
 
+### HttpClientOptions
+
+| Parameter | Type | Description |
+|  --- | --- | --- |
+| `timeout` | `number` | Timeout in milliseconds. |
+| `httpAgent` | `any` | Custom http agent to be used when performing http requests. |
+| `httpsAgent` | `any` | Custom https agent to be used when performing http requests. |
+| `retryConfig` | `Partial<RetryConfiguration>` | Configurations to retry requests. |
+
+### RetryConfiguration
+
+| Parameter | Type | Description |
+|  --- | --- | --- |
+| `maxNumberOfRetries` | `number` | Maximum number of retries. <br> *Default*: `0` |
+| `retryOnTimeout` | `boolean` | Whether to retry on request timeout. <br> *Default*: `true` |
+| `retryInterval` | `number` | Interval before next retry. Used in calculation of wait time for next request in case of failure. <br> *Default*: `1` |
+| `maximumRetryWaitTime` | `number` | Overall wait time for the requests getting retried. <br> *Default*: `0` |
+| `backoffFactor` | `number` | Used in calculation of wait time for next request in case of failure. <br> *Default*: `2` |
+| `httpStatusCodesToRetry` | `number[]` | Http status codes to retry against. <br> *Default*: `[408, 413, 429, 500, 502, 503, 504, 521, 522, 524, 408, 413, 429, 500, 502, 503, 504, 521, 522, 524]` |
+| `httpMethodsToRetry` | `HttpMethod[]` | Http methods to retry against. <br> *Default*: `['GET', 'PUT', 'GET', 'PUT']` |
+
 The API client can be initialized as follows:
 
 ```ts
@@ -44,7 +63,25 @@ const client = new Client({
 
 This API uses `OAuth 2 Bearer token`.
 
-## Guide
-[API Reference](https://github.com/thoughtspot/rest-api-sdk/blob/1.10.0/Typescript/doc/README.md)
-## Live Playground
-We recommend that you browse through the [code playground](https://try-everywhere.thoughtspot.cloud/v2/#/everywhere/api/rest/playgroundV2) before you start constructing your API requests. The playground offers an interactive portal with comprehensive information about the API endpoints, request and response workflows.
+## List of APIs
+
+* [Session](doc/controllers/session.md)
+* [User](doc/controllers/user.md)
+* [Group](doc/controllers/group.md)
+* [Org](doc/controllers/org.md)
+* [Metadata](doc/controllers/metadata.md)
+* [Database](doc/controllers/database.md)
+* [Connection](doc/controllers/connection.md)
+* [Data](doc/controllers/data.md)
+* [Report](doc/controllers/report.md)
+* [Admin](doc/controllers/admin.md)
+* [Security](doc/controllers/security.md)
+* [Logs](doc/controllers/logs.md)
+* [Materialization](doc/controllers/materialization.md)
+* [Custom Actions](doc/controllers/custom-actions.md)
+
+## Classes Documentation
+
+* [ApiResponse](doc/api-response.md)
+* [ApiError](doc/api-error.md)
+

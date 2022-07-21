@@ -13,6 +13,7 @@ DatabaseController databaseController = client.DatabaseController;
 * [Get Databases](../../doc/controllers/database.md#get-databases)
 * [Get Schemas](../../doc/controllers/database.md#get-schemas)
 * [Get Tables](../../doc/controllers/database.md#get-tables)
+* [Get Table Details](../../doc/controllers/database.md#get-table-details)
 * [Create Table](../../doc/controllers/database.md#create-table)
 * [Run Query](../../doc/controllers/database.md#run-query)
 
@@ -126,6 +127,51 @@ string schema = "schema2";
 try
 {
     List<string> result = await databaseController.GetTablesAsync(database, schema);
+}
+catch (ApiException e){};
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+
+
+# Get Table Details
+
+Note: This endpoint is applicable only for on-prem deployments.
+
+To provide details of a table in a schema of a database in Falcon, use this endpoint.
+
+```csharp
+GetTableDetailsAsync(
+    string database,
+    string table,
+    string schema = null)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `database` | `string` | Query, Required | Name of the Falcon database |
+| `table` | `string` | Query, Required | Name of the table in Falcon database |
+| `schema` | `string` | Query, Optional | Name of the schema in Falcon database |
+
+## Response Type
+
+`Task<object>`
+
+## Example Usage
+
+```csharp
+string database = "database0";
+string table = "table2";
+
+try
+{
+    object result = await databaseController.GetTableDetailsAsync(database, table, null);
 }
 catch (ApiException e){};
 ```

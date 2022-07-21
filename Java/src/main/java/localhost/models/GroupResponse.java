@@ -21,6 +21,7 @@ public class GroupResponse {
     private String visibility;
     private String description;
     private List<String> privileges;
+    private List<OrgType> orgs;
     private List<GroupNameAndID> groups;
     private List<UserNameAndID> users;
     private List<LiveboardNameAndID> assignedLiveboards;
@@ -59,6 +60,7 @@ public class GroupResponse {
      * @param  visibility  String value for visibility.
      * @param  description  String value for description.
      * @param  privileges  List of String value for privileges.
+     * @param  orgs  List of OrgType value for orgs.
      * @param  groups  List of GroupNameAndID value for groups.
      * @param  users  List of UserNameAndID value for users.
      * @param  assignedLiveboards  List of LiveboardNameAndID value for assignedLiveboards.
@@ -90,6 +92,7 @@ public class GroupResponse {
             String visibility,
             String description,
             List<String> privileges,
+            List<OrgType> orgs,
             List<GroupNameAndID> groups,
             List<UserNameAndID> users,
             List<LiveboardNameAndID> assignedLiveboards,
@@ -119,6 +122,7 @@ public class GroupResponse {
         this.visibility = visibility;
         this.description = description;
         this.privileges = privileges;
+        this.orgs = orgs;
         this.groups = groups;
         this.users = users;
         this.assignedLiveboards = assignedLiveboards;
@@ -268,6 +272,27 @@ public class GroupResponse {
     @JsonSetter("privileges")
     public void setPrivileges(List<String> privileges) {
         this.privileges = privileges;
+    }
+
+    /**
+     * Getter for Orgs.
+     * The organizations that user belongs to
+     * @return Returns the List of OrgType
+     */
+    @JsonGetter("orgs")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public List<OrgType> getOrgs() {
+        return orgs;
+    }
+
+    /**
+     * Setter for Orgs.
+     * The organizations that user belongs to
+     * @param orgs Value for List of OrgType
+     */
+    @JsonSetter("orgs")
+    public void setOrgs(List<OrgType> orgs) {
+        this.orgs = orgs;
     }
 
     /**
@@ -743,15 +768,16 @@ public class GroupResponse {
     public String toString() {
         return "GroupResponse [" + "name=" + name + ", displayName=" + displayName + ", id=" + id
                 + ", visibility=" + visibility + ", description=" + description + ", privileges="
-                + privileges + ", groups=" + groups + ", users=" + users + ", assignedLiveboards="
-                + assignedLiveboards + ", userGroupContent=" + userGroupContent + ", tags=" + tags
-                + ", isDeleted=" + isDeleted + ", isHidden=" + isHidden + ", isExternal="
-                + isExternal + ", isDeprecated=" + isDeprecated + ", complete=" + complete
-                + ", isSystemPrincipal=" + isSystemPrincipal + ", type=" + type + ", parenttype="
-                + parenttype + ", groupIdx=" + groupIdx + ", metadataVersion=" + metadataVersion
-                + ", tenantId=" + tenantId + ", indexVersion=" + indexVersion + ", generationNum="
-                + generationNum + ", created=" + created + ", modified=" + modified + ", author="
-                + author + ", modifiedBy=" + modifiedBy + ", owner=" + owner + "]";
+                + privileges + ", orgs=" + orgs + ", groups=" + groups + ", users=" + users
+                + ", assignedLiveboards=" + assignedLiveboards + ", userGroupContent="
+                + userGroupContent + ", tags=" + tags + ", isDeleted=" + isDeleted + ", isHidden="
+                + isHidden + ", isExternal=" + isExternal + ", isDeprecated=" + isDeprecated
+                + ", complete=" + complete + ", isSystemPrincipal=" + isSystemPrincipal + ", type="
+                + type + ", parenttype=" + parenttype + ", groupIdx=" + groupIdx
+                + ", metadataVersion=" + metadataVersion + ", tenantId=" + tenantId
+                + ", indexVersion=" + indexVersion + ", generationNum=" + generationNum
+                + ", created=" + created + ", modified=" + modified + ", author=" + author
+                + ", modifiedBy=" + modifiedBy + ", owner=" + owner + "]";
     }
 
     /**
@@ -767,6 +793,7 @@ public class GroupResponse {
                 .visibility(getVisibility())
                 .description(getDescription())
                 .privileges(getPrivileges())
+                .orgs(getOrgs())
                 .groups(getGroups())
                 .users(getUsers())
                 .assignedLiveboards(getAssignedLiveboards())
@@ -803,6 +830,7 @@ public class GroupResponse {
         private String visibility;
         private String description;
         private List<String> privileges;
+        private List<OrgType> orgs;
         private List<GroupNameAndID> groups;
         private List<UserNameAndID> users;
         private List<LiveboardNameAndID> assignedLiveboards;
@@ -886,6 +914,16 @@ public class GroupResponse {
          */
         public Builder privileges(List<String> privileges) {
             this.privileges = privileges;
+            return this;
+        }
+
+        /**
+         * Setter for orgs.
+         * @param  orgs  List of OrgType value for orgs.
+         * @return Builder
+         */
+        public Builder orgs(List<OrgType> orgs) {
+            this.orgs = orgs;
             return this;
         }
 
@@ -1125,10 +1163,10 @@ public class GroupResponse {
          */
         public GroupResponse build() {
             return new GroupResponse(name, displayName, id, visibility, description, privileges,
-                    groups, users, assignedLiveboards, userGroupContent, tags, isDeleted, isHidden,
-                    isExternal, isDeprecated, complete, isSystemPrincipal, type, parenttype,
-                    groupIdx, metadataVersion, tenantId, indexVersion, generationNum, created,
-                    modified, author, modifiedBy, owner);
+                    orgs, groups, users, assignedLiveboards, userGroupContent, tags, isDeleted,
+                    isHidden, isExternal, isDeprecated, complete, isSystemPrincipal, type,
+                    parenttype, groupIdx, metadataVersion, tenantId, indexVersion, generationNum,
+                    created, modified, author, modifiedBy, owner);
         }
     }
 }

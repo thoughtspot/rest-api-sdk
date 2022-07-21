@@ -18,7 +18,7 @@
 
 ```json
 {
-  "type": "SNOWFLAKE",
+  "type": "DENODO",
   "name": "name0",
   "description": null,
   "configuration": "configuration6"

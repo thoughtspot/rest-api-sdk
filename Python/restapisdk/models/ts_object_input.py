@@ -32,8 +32,8 @@ class TsObjectInput(object):
         """Constructor for the TsObjectInput class"""
 
         # Initialize members of the class
-        self.id = id
-        self.mtype = mtype
+        self.id = id 
+        self.mtype = mtype 
 
     @classmethod
     def from_dictionary(cls,
@@ -54,8 +54,8 @@ class TsObjectInput(object):
 
         # Extract variables from the dictionary
 
-        id = dictionary.get('id')
-        mtype = dictionary.get('type')
+        id = dictionary.get("id") if dictionary.get("id") else None
+        mtype = dictionary.get("type") if dictionary.get("type") else None
         # Return an object of this model
         return cls(id,
                    mtype)

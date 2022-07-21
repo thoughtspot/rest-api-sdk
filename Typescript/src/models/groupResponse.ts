@@ -20,6 +20,7 @@ import {
   LiveboardNameAndID,
   liveboardNameAndIDSchema,
 } from './liveboardNameAndID';
+import { OrgType, orgTypeSchema } from './orgType';
 import { UserNameAndID, userNameAndIDSchema } from './userNameAndID';
 
 export interface GroupResponse {
@@ -35,6 +36,8 @@ export interface GroupResponse {
   description?: string;
   /** Privileges assigned to the group */
   privileges?: string[];
+  /** The organizations that user belongs to */
+  orgs?: OrgType[];
   /** Name of the group to which is added */
   groups?: GroupNameAndID[];
   /** User Group Information by Id or Name. */
@@ -81,6 +84,7 @@ export const groupResponseSchema: Schema<GroupResponse> = object({
   visibility: ['visibility', optional(string())],
   description: ['description', optional(string())],
   privileges: ['privileges', optional(array(string()))],
+  orgs: ['orgs', optional(array(lazy(() => orgTypeSchema)))],
   groups: ['groups', optional(array(lazy(() => groupNameAndIDSchema)))],
   users: ['users', optional(array(lazy(() => userNameAndIDSchema)))],
   assignedLiveboards: [

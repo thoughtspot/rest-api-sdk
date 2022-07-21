@@ -14,8 +14,9 @@ UserController userController = client.UserController;
 * [Create User](../../doc/controllers/user.md#create-user)
 * [Update User](../../doc/controllers/user.md#update-user)
 * [Delete User](../../doc/controllers/user.md#delete-user)
-* [Add Groups to User](../../doc/controllers/user.md#add-groups-to-user)
-* [Remove Groups From User](../../doc/controllers/user.md#remove-groups-from-user)
+* [Add User to Groups](../../doc/controllers/user.md#add-user-to-groups)
+* [Remove User From Groups](../../doc/controllers/user.md#remove-user-from-groups)
+* [Add User to Orgs](../../doc/controllers/user.md#add-user-to-orgs)
 * [Change Password of User](../../doc/controllers/user.md#change-password-of-user)
 * [Search Users](../../doc/controllers/user.md#search-users)
 
@@ -66,7 +67,7 @@ To programmatically create a user account in the ThoughtSpot system, use this AP
 
 Using this API, you can create a user and assign groups. To create a user, you require admin user privileges.
 
-All users created in the ThoughtSpot system are added to ALL_GROUP
+All users created in the ThoughtSpot system are added to ALL user group.
 
 Permission: Requires administration privilege
 
@@ -162,7 +163,8 @@ Permission: Requires administration privilege
 ```csharp
 DeleteUserAsync(
     string name = null,
-    string id = null)
+    string id = null,
+    Models.OrgInput org = null)
 ```
 
 ## Parameters
@@ -171,6 +173,7 @@ DeleteUserAsync(
 |  --- | --- | --- | --- |
 | `name` | `string` | Query, Optional | Username of the user account |
 | `id` | `string` | Query, Optional | The GUID of the user account |
+| `org` | [`Models.OrgInput`](../../doc/models/org-input.md) | Query, Optional | This is applicable only if organization feature is enabled in the cluster.<br><br>A JSON object of organization name, id or both, from which the user should be deleted. When both are given then id is considered. If no value is provided then the organization associated with the login session will be considered. |
 
 ## Response Type
 
@@ -181,7 +184,7 @@ DeleteUserAsync(
 ```csharp
 try
 {
-    bool? result = await userController.DeleteUserAsync(null, null);
+    bool? result = await userController.DeleteUserAsync(null, null, null);
 }
 catch (ApiException e){};
 ```
@@ -193,7 +196,7 @@ catch (ApiException e){};
 | 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Add Groups to User
+# Add User to Groups
 
 To programmatically add groups to an existing ThoughtSpot user, use this endpoint.
 
@@ -204,7 +207,7 @@ At least one of user Id or username is mandatory. When both are given, then user
 Permission: Requires administration privilege
 
 ```csharp
-AddGroupsToUserAsync(
+AddUserToGroupsAsync(
     Models.TspublicRestV2UserAddgroupRequest body)
 ```
 
@@ -230,7 +233,7 @@ body.Groups.Add(bodyGroups0);
 
 try
 {
-    bool? result = await userController.AddGroupsToUserAsync(body);
+    bool? result = await userController.AddUserToGroupsAsync(body);
 }
 catch (ApiException e){};
 ```
@@ -242,7 +245,7 @@ catch (ApiException e){};
 | 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Remove Groups From User
+# Remove User From Groups
 
 To programmatically remove groups from an existing ThoughtSpot user, use this API endpoint.
 
@@ -253,7 +256,7 @@ At least one of user id or username is mandatory. When both are given, then user
 Permission: Requires administration privilege
 
 ```csharp
-RemoveGroupsFromUserAsync(
+RemoveUserFromGroupsAsync(
     Models.TspublicRestV2UserRemovegroupRequest body)
 ```
 
@@ -279,7 +282,56 @@ body.Groups.Add(bodyGroups0);
 
 try
 {
-    bool? result = await userController.RemoveGroupsFromUserAsync(body);
+    bool? result = await userController.RemoveUserFromGroupsAsync(body);
+}
+catch (ApiException e){};
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+
+
+# Add User to Orgs
+
+This is endpoint is applicable only if organization feature is enabled in the cluster.
+
+To programmatically add existing ThoughtSpot users to an organization, use this API endpoint.
+
+At least one of id or name of the organization is required. When both are given, then organization id will be considered.
+
+Requires Administration access for the organization to which users need to be added.
+
+```csharp
+AddUserToOrgsAsync(
+    Models.TspublicRestV2UserAddorgRequest body)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`Models.TspublicRestV2UserAddorgRequest`](../../doc/models/tspublic-rest-v2-user-addorg-request.md) | Body, Required | - |
+
+## Response Type
+
+`Task<bool>`
+
+## Example Usage
+
+```csharp
+var body = new TspublicRestV2UserAddorgRequest();
+body.Users = new List<UserNameAndIDInput>();
+
+var bodyUsers0 = new UserNameAndIDInput();
+body.Users.Add(bodyUsers0);
+
+
+try
+{
+    bool? result = await userController.AddUserToOrgsAsync(body);
 }
 catch (ApiException e){};
 ```

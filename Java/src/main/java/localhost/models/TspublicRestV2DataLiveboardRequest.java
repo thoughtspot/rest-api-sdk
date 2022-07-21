@@ -19,6 +19,7 @@ public class TspublicRestV2DataLiveboardRequest {
     private Integer batchNumber;
     private Integer batchSize;
     private String id;
+    private String transientContent;
     private List<String> vizId;
     private String runtimeFilter;
     private String runtimeSort;
@@ -34,20 +35,22 @@ public class TspublicRestV2DataLiveboardRequest {
 
     /**
      * Initialization constructor.
-     * @param  id  String value for id.
      * @param  offset  Integer value for offset.
      * @param  batchNumber  Integer value for batchNumber.
      * @param  batchSize  Integer value for batchSize.
+     * @param  id  String value for id.
+     * @param  transientContent  String value for transientContent.
      * @param  vizId  List of String value for vizId.
      * @param  runtimeFilter  String value for runtimeFilter.
      * @param  runtimeSort  String value for runtimeSort.
      * @param  formatType  LiveboardDataFormatTypeEnum value for formatType.
      */
     public TspublicRestV2DataLiveboardRequest(
-            String id,
             Integer offset,
             Integer batchNumber,
             Integer batchSize,
+            String id,
+            String transientContent,
             List<String> vizId,
             String runtimeFilter,
             String runtimeSort,
@@ -56,6 +59,7 @@ public class TspublicRestV2DataLiveboardRequest {
         this.batchNumber = batchNumber;
         this.batchSize = batchSize;
         this.id = id;
+        this.transientContent = transientContent;
         this.vizId = vizId;
         this.runtimeFilter = runtimeFilter;
         this.runtimeSort = runtimeSort;
@@ -147,6 +151,7 @@ public class TspublicRestV2DataLiveboardRequest {
      * @return Returns the String
      */
     @JsonGetter("id")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getId() {
         return id;
     }
@@ -162,8 +167,38 @@ public class TspublicRestV2DataLiveboardRequest {
     }
 
     /**
+     * Getter for TransientContent.
+     * If you have embedded ThoughtSpot in your host application, and you want to download Liveboard
+     * data with unsaved changes then, pass the transient content from the browser fetch request,
+     * using the getExportRequestForCurrentPinboard method. For more information, see
+     * https://developers.thoughtspot.com/docs/?pageid=liveboard-export-api#transient-pinboard . If
+     * value for this field is provided, then id will not be considered.
+     * @return Returns the String
+     */
+    @JsonGetter("transientContent")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public String getTransientContent() {
+        return transientContent;
+    }
+
+    /**
+     * Setter for TransientContent.
+     * If you have embedded ThoughtSpot in your host application, and you want to download Liveboard
+     * data with unsaved changes then, pass the transient content from the browser fetch request,
+     * using the getExportRequestForCurrentPinboard method. For more information, see
+     * https://developers.thoughtspot.com/docs/?pageid=liveboard-export-api#transient-pinboard . If
+     * value for this field is provided, then id will not be considered.
+     * @param transientContent Value for String
+     */
+    @JsonSetter("transientContent")
+    public void setTransientContent(String transientContent) {
+        this.transientContent = transientContent;
+    }
+
+    /**
      * Getter for VizId.
-     * A JSON array of GUIDs of the visualizations in the Liveboard.
+     * A JSON array of GUIDs of the visualizations in the Liveboard. The vizId field will not be
+     * considered when transientContent input is provided.
      * @return Returns the List of String
      */
     @JsonGetter("vizId")
@@ -174,7 +209,8 @@ public class TspublicRestV2DataLiveboardRequest {
 
     /**
      * Setter for VizId.
-     * A JSON array of GUIDs of the visualizations in the Liveboard.
+     * A JSON array of GUIDs of the visualizations in the Liveboard. The vizId field will not be
+     * considered when transientContent input is provided.
      * @param vizId Value for List of String
      */
     @JsonSetter("vizId")
@@ -263,10 +299,10 @@ public class TspublicRestV2DataLiveboardRequest {
      */
     @Override
     public String toString() {
-        return "TspublicRestV2DataLiveboardRequest [" + "id=" + id + ", offset=" + offset
-                + ", batchNumber=" + batchNumber + ", batchSize=" + batchSize + ", vizId=" + vizId
-                + ", runtimeFilter=" + runtimeFilter + ", runtimeSort=" + runtimeSort
-                + ", formatType=" + formatType + "]";
+        return "TspublicRestV2DataLiveboardRequest [" + "offset=" + offset + ", batchNumber="
+                + batchNumber + ", batchSize=" + batchSize + ", id=" + id + ", transientContent="
+                + transientContent + ", vizId=" + vizId + ", runtimeFilter=" + runtimeFilter
+                + ", runtimeSort=" + runtimeSort + ", formatType=" + formatType + "]";
     }
 
     /**
@@ -275,10 +311,12 @@ public class TspublicRestV2DataLiveboardRequest {
      * @return a new {@link TspublicRestV2DataLiveboardRequest.Builder} object
      */
     public Builder toBuilder() {
-        Builder builder = new Builder(id)
+        Builder builder = new Builder()
                 .offset(getOffset())
                 .batchNumber(getBatchNumber())
                 .batchSize(getBatchSize())
+                .id(getId())
+                .transientContent(getTransientContent())
                 .vizId(getVizId())
                 .runtimeFilter(getRuntimeFilter())
                 .runtimeSort(getRuntimeSort())
@@ -290,38 +328,17 @@ public class TspublicRestV2DataLiveboardRequest {
      * Class to build instances of {@link TspublicRestV2DataLiveboardRequest}.
      */
     public static class Builder {
-        private String id;
         private Integer offset = 0;
         private Integer batchNumber;
         private Integer batchSize;
+        private String id;
+        private String transientContent;
         private List<String> vizId;
         private String runtimeFilter;
         private String runtimeSort;
         private LiveboardDataFormatTypeEnum formatType = LiveboardDataFormatTypeEnum.COMPACT;
 
-        /**
-         * Initialization constructor.
-         */
-        public Builder() {
-        }
 
-        /**
-         * Initialization constructor.
-         * @param  id  String value for id.
-         */
-        public Builder(String id) {
-            this.id = id;
-        }
-
-        /**
-         * Setter for id.
-         * @param  id  String value for id.
-         * @return Builder
-         */
-        public Builder id(String id) {
-            this.id = id;
-            return this;
-        }
 
         /**
          * Setter for offset.
@@ -350,6 +367,26 @@ public class TspublicRestV2DataLiveboardRequest {
          */
         public Builder batchSize(Integer batchSize) {
             this.batchSize = batchSize;
+            return this;
+        }
+
+        /**
+         * Setter for id.
+         * @param  id  String value for id.
+         * @return Builder
+         */
+        public Builder id(String id) {
+            this.id = id;
+            return this;
+        }
+
+        /**
+         * Setter for transientContent.
+         * @param  transientContent  String value for transientContent.
+         * @return Builder
+         */
+        public Builder transientContent(String transientContent) {
+            this.transientContent = transientContent;
             return this;
         }
 
@@ -398,8 +435,8 @@ public class TspublicRestV2DataLiveboardRequest {
          * @return {@link TspublicRestV2DataLiveboardRequest}
          */
         public TspublicRestV2DataLiveboardRequest build() {
-            return new TspublicRestV2DataLiveboardRequest(id, offset, batchNumber, batchSize, vizId,
-                    runtimeFilter, runtimeSort, formatType);
+            return new TspublicRestV2DataLiveboardRequest(offset, batchNumber, batchSize, id,
+                    transientContent, vizId, runtimeFilter, runtimeSort, formatType);
         }
     }
 }

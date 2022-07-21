@@ -30,31 +30,54 @@ class APIHelper(object):
 
     """
 
+    SKIP = '#$%^S0K1I2P3))*'
+
     @staticmethod
-    def merge_dicts(dict1, dict2):
-        """Merges two dictionaries into one as a shallow copy.
+    def get_request_parameter(value, is_wrapped=False):
+        """get the correct serialization method for a oneof/anyof parameter type.
 
         Args:
-            dict1 (dict): The first dictionary.
-            dict2 (dict): The second dictionary.
+            value: the value of the request parameter
+            is_wrapped: whether parameter are wrapped in object or not
 
         Returns:
-            dict: A dictionary containing key value pairs
-            from both the argument dictionaries. In the case
-            of a key conflict, values from dict2 are used
-            and those from dict1 are lost.
+             A correct serialized value which can be used
+             when sending a request.
 
         """
-        temp = dict1.copy()
-        temp.update(dict2)
-        return temp
+
+        if type(value) is str:
+            return value
+        if is_wrapped:
+            return APIHelper.json_serialize_wrapped_params(value)
+        return APIHelper.json_serialize(value)
 
     @staticmethod
-    def json_serialize(obj):
+    def json_serialize_wrapped_params(obj):
+        """JSON Serialization of a given wrapped object.
+
+        Args:
+            obj (object): The object to serialize.
+
+        Returns:
+            str: The JSON serialized string of the object.
+
+        """
+        if obj is None:
+            return None
+        val = dict()
+        for k,v in obj.items():
+            val[k] = APIHelper.json_serialize(v, should_encode=False)
+
+        return jsonpickle.encode(val, False)
+
+    @staticmethod
+    def json_serialize(obj, should_encode=True):
         """JSON Serialization of a given object.
 
         Args:
             obj (object): The object to serialize.
+            should_encode: whether to encode at end or not
 
         Returns:
             str: The JSON serialized string of the object.
@@ -75,7 +98,8 @@ class APIHelper(object):
         else:
             if hasattr(obj, "_names"):
                 obj = APIHelper.to_dictionary(obj)
-
+        if not should_encode:
+            return obj
         return jsonpickle.encode(obj, False)
 
     @staticmethod
@@ -131,14 +155,16 @@ class APIHelper(object):
             return 'application/json; charset=utf-8'
 
     @staticmethod
-    def get_schema_path(path):
+    def get_schema_path(path, file_name):
         """Return the Schema's path
 
         Returns:
             string : returns Correct schema path
 
         """
-        path = path.replace('\\models', '\\schemas').replace('/models', '/schemas').replace(".py", ".json")
+        pascal_name = file_name.replace("_", " ").title().replace(" ", "")
+        path = path.replace('\\models', '\\schemas').replace('/models', '/schemas') \
+            .replace(".py", ".json").replace(file_name, pascal_name)
         return path
 
     @staticmethod
@@ -358,10 +384,23 @@ class APIHelper(object):
         """
         dictionary = dict()
 
+        optional_fields = obj._optionals if hasattr(obj, "_optionals") else []
+        nullable_fields = obj._nullables if hasattr(obj, "_nullables") else []
+
         # Loop through all properties in this model
+
         for name in obj._names:
-            value = getattr(obj, name)
-            if isinstance(value, list):
+            value = getattr(obj, name, APIHelper.SKIP)
+
+            if value is APIHelper.SKIP:
+                continue
+
+            if value is None:
+                if name not in optional_fields and not name in nullable_fields:
+                    raise ValueError(f"The value for {name} can not be None for {obj}")
+                else:
+                    dictionary[obj._names[name]] = None
+            elif isinstance(value, list):
                 # Loop through each item
                 dictionary[obj._names[name]] = list()
                 for item in value:

@@ -30,19 +30,21 @@ namespace RESTAPISDK.Standard.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="TspublicRestV2DataLiveboardRequest"/> class.
         /// </summary>
-        /// <param name="id">id.</param>
         /// <param name="offset">offset.</param>
         /// <param name="batchNumber">batchNumber.</param>
         /// <param name="batchSize">batchSize.</param>
+        /// <param name="id">id.</param>
+        /// <param name="transientContent">transientContent.</param>
         /// <param name="vizId">vizId.</param>
         /// <param name="runtimeFilter">runtimeFilter.</param>
         /// <param name="runtimeSort">runtimeSort.</param>
         /// <param name="formatType">formatType.</param>
         public TspublicRestV2DataLiveboardRequest(
-            string id,
             int? offset = 0,
             int? batchNumber = null,
             int? batchSize = null,
+            string id = null,
+            string transientContent = null,
             List<string> vizId = null,
             string runtimeFilter = null,
             string runtimeSort = null,
@@ -52,6 +54,7 @@ namespace RESTAPISDK.Standard.Models
             this.BatchNumber = batchNumber;
             this.BatchSize = batchSize;
             this.Id = id;
+            this.TransientContent = transientContent;
             this.VizId = vizId;
             this.RuntimeFilter = runtimeFilter;
             this.RuntimeSort = runtimeSort;
@@ -86,11 +89,18 @@ namespace RESTAPISDK.Standard.Models
         /// <summary>
         /// The GUID of the Liveboard
         /// </summary>
-        [JsonProperty("id")]
+        [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public string Id { get; set; }
 
         /// <summary>
+        /// If you have embedded ThoughtSpot in your host application, and you want to download Liveboard data with unsaved changes then, pass the transient content from the browser fetch request, using the getExportRequestForCurrentPinboard method. For more information, see https://developers.thoughtspot.com/docs/?pageid=liveboard-export-api#transient-pinboard . If value for this field is provided, then id will not be considered.
+        /// </summary>
+        [JsonProperty("transientContent", NullValueHandling = NullValueHandling.Ignore)]
+        public string TransientContent { get; set; }
+
+        /// <summary>
         /// A JSON array of GUIDs of the visualizations in the Liveboard.
+        ///  The vizId field will not be considered when transientContent input is provided.
         /// </summary>
         [JsonProperty("vizId", NullValueHandling = NullValueHandling.Ignore)]
         public List<string> VizId { get; set; }
@@ -147,6 +157,7 @@ namespace RESTAPISDK.Standard.Models
                 ((this.BatchNumber == null && other.BatchNumber == null) || (this.BatchNumber?.Equals(other.BatchNumber) == true)) &&
                 ((this.BatchSize == null && other.BatchSize == null) || (this.BatchSize?.Equals(other.BatchSize) == true)) &&
                 ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
+                ((this.TransientContent == null && other.TransientContent == null) || (this.TransientContent?.Equals(other.TransientContent) == true)) &&
                 ((this.VizId == null && other.VizId == null) || (this.VizId?.Equals(other.VizId) == true)) &&
                 ((this.RuntimeFilter == null && other.RuntimeFilter == null) || (this.RuntimeFilter?.Equals(other.RuntimeFilter) == true)) &&
                 ((this.RuntimeSort == null && other.RuntimeSort == null) || (this.RuntimeSort?.Equals(other.RuntimeSort) == true)) &&
@@ -164,6 +175,7 @@ namespace RESTAPISDK.Standard.Models
             toStringOutput.Add($"this.BatchNumber = {(this.BatchNumber == null ? "null" : this.BatchNumber.ToString())}");
             toStringOutput.Add($"this.BatchSize = {(this.BatchSize == null ? "null" : this.BatchSize.ToString())}");
             toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id == string.Empty ? "" : this.Id)}");
+            toStringOutput.Add($"this.TransientContent = {(this.TransientContent == null ? "null" : this.TransientContent == string.Empty ? "" : this.TransientContent)}");
             toStringOutput.Add($"this.VizId = {(this.VizId == null ? "null" : $"[{string.Join(", ", this.VizId)} ]")}");
             toStringOutput.Add($"this.RuntimeFilter = {(this.RuntimeFilter == null ? "null" : this.RuntimeFilter == string.Empty ? "" : this.RuntimeFilter)}");
             toStringOutput.Add($"this.RuntimeSort = {(this.RuntimeSort == null ? "null" : this.RuntimeSort == string.Empty ? "" : this.RuntimeSort)}");

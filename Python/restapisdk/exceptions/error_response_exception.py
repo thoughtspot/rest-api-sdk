@@ -35,4 +35,4 @@ class ErrorResponseException(restapisdk.exceptions.api_exception.APIException):
             MUST match property names in the API description.
 
         """
-        self.error = dictionary.get('error')
+        self.error = dictionary.get("error") if dictionary.get("error") else APIHelper.SKIP

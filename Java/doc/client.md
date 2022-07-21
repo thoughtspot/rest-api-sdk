@@ -37,6 +37,7 @@ The gateway for the SDK. This class acts as a factory for the Controllers and al
 | `getSessionController()` | Provides access to Session controller. | `SessionController` |
 | `getUserController()` | Provides access to User controller. | `UserController` |
 | `getGroupController()` | Provides access to Group controller. | `GroupController` |
+| `getOrgController()` | Provides access to Org controller. | `OrgController` |
 | `getMetadataController()` | Provides access to Metadata controller. | `MetadataController` |
 | `getDatabaseController()` | Provides access to Database controller. | `DatabaseController` |
 | `getConnectionController()` | Provides access to Connection controller. | `ConnectionController` |

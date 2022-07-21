@@ -29,7 +29,7 @@
   "batchSize": null,
   "sortBy": null,
   "sortOrder": null,
-  "type": "SNOWFLAKE",
+  "type": "DENODO",
   "namePattern": null,
   "fetchId": null,
   "skipId": null,

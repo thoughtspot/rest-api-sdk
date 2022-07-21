@@ -37,6 +37,7 @@ namespace RESTAPISDK.Standard.Models
         /// <param name="mail">mail.</param>
         /// <param name="groups">groups.</param>
         /// <param name="privileges">privileges.</param>
+        /// <param name="orgs">orgs.</param>
         /// <param name="tags">tags.</param>
         /// <param name="state">state.</param>
         /// <param name="notifyOnShare">notifyOnShare.</param>
@@ -69,6 +70,7 @@ namespace RESTAPISDK.Standard.Models
             string mail = null,
             List<Models.GroupNameAndID> groups = null,
             List<string> privileges = null,
+            List<Models.OrgType> orgs = null,
             List<string> tags = null,
             string state = null,
             bool? notifyOnShare = null,
@@ -101,6 +103,7 @@ namespace RESTAPISDK.Standard.Models
             this.Mail = mail;
             this.Groups = groups;
             this.Privileges = privileges;
+            this.Orgs = orgs;
             this.Tags = tags;
             this.State = state;
             this.NotifyOnShare = notifyOnShare;
@@ -168,6 +171,12 @@ namespace RESTAPISDK.Standard.Models
         /// </summary>
         [JsonProperty("privileges", NullValueHandling = NullValueHandling.Ignore)]
         public List<string> Privileges { get; set; }
+
+        /// <summary>
+        /// The organizations that user belongs to
+        /// </summary>
+        [JsonProperty("orgs", NullValueHandling = NullValueHandling.Ignore)]
+        public List<Models.OrgType> Orgs { get; set; }
 
         /// <summary>
         /// Tags assigned to the user
@@ -345,6 +354,7 @@ namespace RESTAPISDK.Standard.Models
                 ((this.Mail == null && other.Mail == null) || (this.Mail?.Equals(other.Mail) == true)) &&
                 ((this.Groups == null && other.Groups == null) || (this.Groups?.Equals(other.Groups) == true)) &&
                 ((this.Privileges == null && other.Privileges == null) || (this.Privileges?.Equals(other.Privileges) == true)) &&
+                ((this.Orgs == null && other.Orgs == null) || (this.Orgs?.Equals(other.Orgs) == true)) &&
                 ((this.Tags == null && other.Tags == null) || (this.Tags?.Equals(other.Tags) == true)) &&
                 ((this.State == null && other.State == null) || (this.State?.Equals(other.State) == true)) &&
                 ((this.NotifyOnShare == null && other.NotifyOnShare == null) || (this.NotifyOnShare?.Equals(other.NotifyOnShare) == true)) &&
@@ -385,6 +395,7 @@ namespace RESTAPISDK.Standard.Models
             toStringOutput.Add($"this.Mail = {(this.Mail == null ? "null" : this.Mail == string.Empty ? "" : this.Mail)}");
             toStringOutput.Add($"this.Groups = {(this.Groups == null ? "null" : $"[{string.Join(", ", this.Groups)} ]")}");
             toStringOutput.Add($"this.Privileges = {(this.Privileges == null ? "null" : $"[{string.Join(", ", this.Privileges)} ]")}");
+            toStringOutput.Add($"this.Orgs = {(this.Orgs == null ? "null" : $"[{string.Join(", ", this.Orgs)} ]")}");
             toStringOutput.Add($"this.Tags = {(this.Tags == null ? "null" : $"[{string.Join(", ", this.Tags)} ]")}");
             toStringOutput.Add($"this.State = {(this.State == null ? "null" : this.State == string.Empty ? "" : this.State)}");
             toStringOutput.Add($"this.NotifyOnShare = {(this.NotifyOnShare == null ? "null" : this.NotifyOnShare.ToString())}");

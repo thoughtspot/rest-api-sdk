@@ -108,6 +108,7 @@ public final class MaterializationController extends BaseController {
         headers.add("Content-Type", "application/json");
         headers.add("Accept-Language", config.getAcceptLanguage());
         headers.add("user-agent", BaseController.userAgent);
+        headers.add("accept", "application/json");
 
         //prepare and invoke the API call request to fetch the response
         String bodyJson = ApiHelper.serialize(body);

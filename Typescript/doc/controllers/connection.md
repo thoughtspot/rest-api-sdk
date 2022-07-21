@@ -280,7 +280,7 @@ async createConnection(
 ```ts
 const contentType = null;
 const body: TspublicRestV2ConnectionCreateRequest = {
-  type: 'TERADATA',
+  type: 'ORACLE_ADW',
   name: 'name6',
   configuration: 'configuration0',
 };
@@ -627,7 +627,7 @@ async searchConnection(
 ```ts
 const contentType = null;
 const body: TspublicRestV2ConnectionSearchRequest = {
-  type: 'TERADATA',
+  type: 'ORACLE_ADW',
 };
 
 try {

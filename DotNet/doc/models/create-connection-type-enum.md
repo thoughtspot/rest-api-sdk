@@ -21,4 +21,5 @@ Type of the data connection.
 | `ORACLEADW` |
 | `DATABRICKS` |
 | `DENODO` |
+| `DREMIO` |
 

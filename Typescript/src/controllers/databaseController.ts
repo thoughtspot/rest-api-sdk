@@ -18,7 +18,7 @@ import {
   TspublicRestV2DatabaseTableRunqueryRequest,
   tspublicRestV2DatabaseTableRunqueryRequestSchema,
 } from '../models/tspublicRestV2DatabaseTableRunqueryRequest';
-import { array, string, unknown } from '../schema';
+import { array, optional, string, unknown } from '../schema';
 import { BaseController } from './baseController';
 
 export class DatabaseController extends BaseController {
@@ -85,6 +85,38 @@ export class DatabaseController extends BaseController {
     req.query('schema', mapped.schema);
     req.throwOn(500, ErrorResponseError, 'Operation failed or unauthorized request');
     return req.callAsJson(array(string()), requestOptions);
+  }
+
+  /**
+   * Note: This endpoint is applicable only for on-prem deployments.
+   *
+   * To provide details of a table in a schema of a database in Falcon, use this endpoint.
+   *
+   * @param database Name of the Falcon database
+   * @param table    Name of the table in Falcon database
+   * @param schema   Name of the schema in Falcon database
+   * @return Response from the API call
+   */
+  async getTableDetails(
+    database: string,
+    table: string,
+    schema?: string,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<unknown>> {
+    const req = this.createRequest(
+      'GET',
+      '/tspublic/rest/v2/database/table/detail'
+    );
+    const mapped = req.prepareArgs({
+      database: [database, string()],
+      table: [table, string()],
+      schema: [schema, optional(string())],
+    });
+    req.query('database', mapped.database);
+    req.query('table', mapped.table);
+    req.query('schema', mapped.schema);
+    req.throwOn(500, ErrorResponseError, 'Operation failed or unauthorized request');
+    return req.callAsJson(unknown(), requestOptions);
   }
 
   /**

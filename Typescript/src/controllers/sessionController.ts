@@ -18,6 +18,10 @@ import {
   TspublicRestV2SessionLoginRequest,
   tspublicRestV2SessionLoginRequestSchema,
 } from '../models/tspublicRestV2SessionLoginRequest';
+import {
+  TspublicRestV2SessionOrgRequest,
+  tspublicRestV2SessionOrgRequestSchema,
+} from '../models/tspublicRestV2SessionOrgRequest';
 import { boolean, unknown } from '../schema';
 import { BaseController } from './baseController';
 
@@ -131,6 +135,34 @@ export class SessionController extends BaseController {
       'POST',
       '/tspublic/rest/v2/session/revoketoken'
     );
+    req.throwOn(500, ErrorResponseError, 'Operation failed or unauthorized request');
+    return req.callAsJson(boolean(), requestOptions);
+  }
+
+  /**
+   * This is endpoint is applicable only if organization feature is enabled in the cluster.
+   *
+   * To programmatically switch the organization context for the logged in session, use this endpoint.
+   *
+   * The original session is reused even after changing the organization.
+   *
+   * The logged in user should have access to the organization being switched to.
+   *
+   * This endpoint can be used to switch organization only when using session cookies for authentication.
+   *
+   * @param body
+   * @return Response from the API call
+   */
+  async switchOrg(
+    body: TspublicRestV2SessionOrgRequest,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<boolean>> {
+    const req = this.createRequest('PUT', '/tspublic/rest/v2/session/org');
+    const mapped = req.prepareArgs({
+      body: [body, tspublicRestV2SessionOrgRequestSchema],
+    });
+    req.header('Content-Type', 'application/json');
+    req.json(mapped.body);
     req.throwOn(500, ErrorResponseError, 'Operation failed or unauthorized request');
     return req.callAsJson(boolean(), requestOptions);
   }

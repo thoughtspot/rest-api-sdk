@@ -13,6 +13,7 @@ database_controller = client.database
 * [Get Databases](../../doc/controllers/database.md#get-databases)
 * [Get Schemas](../../doc/controllers/database.md#get-schemas)
 * [Get Tables](../../doc/controllers/database.md#get-tables)
+* [Get Table Details](../../doc/controllers/database.md#get-table-details)
 * [Create Table](../../doc/controllers/database.md#create-table)
 * [Run Query](../../doc/controllers/database.md#run-query)
 
@@ -116,6 +117,47 @@ database = 'database0'
 schema = 'schema2'
 
 result = database_controller.get_tables(database, schema)
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+
+
+# Get Table Details
+
+Note: This endpoint is applicable only for on-prem deployments.
+
+To provide details of a table in a schema of a database in Falcon, use this endpoint.
+
+```python
+def get_table_details(self,
+                     database,
+                     table,
+                     schema=None)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `database` | `string` | Query, Required | Name of the Falcon database |
+| `table` | `string` | Query, Required | Name of the table in Falcon database |
+| `schema` | `string` | Query, Optional | Name of the schema in Falcon database |
+
+## Response Type
+
+`object`
+
+## Example Usage
+
+```python
+database = 'database0'
+table = 'table2'
+
+result = database_controller.get_table_details(database, table)
 ```
 
 ## Errors

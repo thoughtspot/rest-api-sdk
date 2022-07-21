@@ -35,9 +35,9 @@ class ConnectionTableColumnsInput(object):
         """Constructor for the ConnectionTableColumnsInput class"""
 
         # Initialize members of the class
-        self.db_name = db_name
-        self.schema_name = schema_name
-        self.name = name
+        self.db_name = db_name 
+        self.schema_name = schema_name 
+        self.name = name 
 
     @classmethod
     def from_dictionary(cls,
@@ -58,9 +58,9 @@ class ConnectionTableColumnsInput(object):
 
         # Extract variables from the dictionary
 
-        db_name = dictionary.get('dbName')
-        schema_name = dictionary.get('schemaName')
-        name = dictionary.get('name')
+        db_name = dictionary.get("dbName") if dictionary.get("dbName") else None
+        schema_name = dictionary.get("schemaName") if dictionary.get("schemaName") else None
+        name = dictionary.get("name") if dictionary.get("name") else None
         # Return an object of this model
         return cls(db_name,
                    schema_name,

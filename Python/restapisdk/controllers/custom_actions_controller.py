@@ -59,6 +59,7 @@ class CustomActionsController(BaseController):
 
         # Prepare headers
         _headers = {
+            'accept': 'application/json',
             'Content-Type': self.config.content_type
         }
 
@@ -111,6 +112,7 @@ class CustomActionsController(BaseController):
 
         # Prepare headers
         _headers = {
+            'accept': 'application/json',
             'Content-Type': 'application/json'
         }
 
@@ -163,6 +165,7 @@ class CustomActionsController(BaseController):
 
         # Prepare headers
         _headers = {
+            'accept': 'application/json',
             'Content-Type': 'application/json'
         }
 
@@ -221,6 +224,7 @@ class CustomActionsController(BaseController):
 
         # Prepare headers
         _headers = {
+            'accept': 'application/json',
             'Content-Type': self.config.content_type
         }
 
@@ -274,6 +278,7 @@ class CustomActionsController(BaseController):
 
         # Prepare headers
         _headers = {
+            'accept': 'application/json',
             'Content-Type': 'application/json'
         }
 
@@ -334,6 +339,7 @@ class CustomActionsController(BaseController):
 
         # Prepare headers
         _headers = {
+            'accept': 'application/json',
             'Content-Type': self.config.content_type
         }
 
@@ -387,6 +393,7 @@ class CustomActionsController(BaseController):
 
         # Prepare headers
         _headers = {
+            'accept': 'application/json',
             'Content-Type': 'application/json'
         }
 
@@ -461,6 +468,7 @@ class CustomActionsController(BaseController):
 
         # Prepare headers
         _headers = {
+            'accept': 'application/json',
             'Content-Type': self.config.content_type
         }
 

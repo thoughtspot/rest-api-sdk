@@ -15,6 +15,7 @@ SessionController sessionController = client.getSessionController();
 * [Logout](../../doc/controllers/session.md#logout)
 * [Get Token](../../doc/controllers/session.md#get-token)
 * [Revoke Token](../../doc/controllers/session.md#revoke-token)
+* [Switch Org](../../doc/controllers/session.md#switch-org)
 
 
 # Get Session Info
@@ -196,6 +197,53 @@ CompletableFuture<Boolean> revokeTokenAsync()
 
 ```java
 sessionController.revokeTokenAsync().thenAccept(result -> {
+    // TODO success callback handler
+}).exceptionally(exception -> {
+    // TODO failure callback handler
+    return null;
+});
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+
+
+# Switch Org
+
+This is endpoint is applicable only if organization feature is enabled in the cluster.
+
+To programmatically switch the organization context for the logged in session, use this endpoint.
+
+The original session is reused even after changing the organization.
+
+The logged in user should have access to the organization being switched to.
+
+This endpoint can be used to switch organization only when using session cookies for authentication.
+
+```java
+CompletableFuture<Boolean> switchOrgAsync(
+    final TspublicRestV2SessionOrgRequest body)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`TspublicRestV2SessionOrgRequest`](../../doc/models/tspublic-rest-v2-session-org-request.md) | Body, Required | - |
+
+## Response Type
+
+`boolean`
+
+## Example Usage
+
+```java
+TspublicRestV2SessionOrgRequest body = new TspublicRestV2SessionOrgRequest();
+
+sessionController.switchOrgAsync(body).thenAccept(result -> {
     // TODO success callback handler
 }).exceptionally(exception -> {
     // TODO failure callback handler

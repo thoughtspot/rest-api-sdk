@@ -11,13 +11,21 @@ import {
   adminsyncPrincipalResponseSchema,
 } from '../models/adminsyncPrincipalResponse';
 import {
-  TspublicRestV2AdminChangeownerRequest,
-  tspublicRestV2AdminChangeownerRequestSchema,
-} from '../models/tspublicRestV2AdminChangeownerRequest';
+  TspublicRestV2AdminAssignauthorRequest,
+  tspublicRestV2AdminAssignauthorRequestSchema,
+} from '../models/tspublicRestV2AdminAssignauthorRequest';
+import {
+  TspublicRestV2AdminChangeauthorRequest,
+  tspublicRestV2AdminChangeauthorRequestSchema,
+} from '../models/tspublicRestV2AdminChangeauthorRequest';
 import {
   TspublicRestV2AdminConfigurationUpdateRequest,
   tspublicRestV2AdminConfigurationUpdateRequestSchema,
 } from '../models/tspublicRestV2AdminConfigurationUpdateRequest';
+import {
+  TspublicRestV2AdminForcelogoutRequest,
+  tspublicRestV2AdminForcelogoutRequestSchema,
+} from '../models/tspublicRestV2AdminForcelogoutRequest';
 import {
   TspublicRestV2AdminResetpasswordRequest,
   tspublicRestV2AdminResetpasswordRequestSchema,
@@ -158,10 +166,10 @@ export class AdminController extends BaseController {
   }
 
   /**
-   * To programmatically change the owner of one or several objects from one user account to another, use
-   * this endpoint.
+   * To programmatically change the author of one or several objects from one user account to another,
+   * use this endpoint.
    *
-   * You might want to transfer ownership of objects owned by a user to another active user, when the
+   * You might want to change the author of objects from one user to another active user, when the
    * account is removed from the ThoughtSpot application.
    *
    * Permission: Requires administration privilege
@@ -169,16 +177,69 @@ export class AdminController extends BaseController {
    * @param body
    * @return Response from the API call
    */
-  async changeOwnerOfObjects(
-    body: TspublicRestV2AdminChangeownerRequest,
+  async changeAuthorOfObjects(
+    body: TspublicRestV2AdminChangeauthorRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<boolean>> {
     const req = this.createRequest(
       'PUT',
-      '/tspublic/rest/v2/admin/changeowner'
+      '/tspublic/rest/v2/admin/changeauthor'
     );
     const mapped = req.prepareArgs({
-      body: [body, tspublicRestV2AdminChangeownerRequestSchema],
+      body: [body, tspublicRestV2AdminChangeauthorRequestSchema],
+    });
+    req.header('Content-Type', 'application/json');
+    req.json(mapped.body);
+    req.throwOn(500, ErrorResponseError, 'Operation failed or unauthorized request');
+    return req.callAsJson(boolean(), requestOptions);
+  }
+
+  /**
+   * To programmatically assign an author to one or several objects, use this endpoint.
+   *
+   * Provide either user name or id as input. When both are given user id will be considered.
+   *
+   * Requires administration privilege.
+   *
+   * @param body
+   * @return Response from the API call
+   */
+  async assignAuthorToObjects(
+    body: TspublicRestV2AdminAssignauthorRequest,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<boolean>> {
+    const req = this.createRequest(
+      'PUT',
+      '/tspublic/rest/v2/admin/assignauthor'
+    );
+    const mapped = req.prepareArgs({
+      body: [body, tspublicRestV2AdminAssignauthorRequestSchema],
+    });
+    req.header('Content-Type', 'application/json');
+    req.json(mapped.body);
+    req.throwOn(500, ErrorResponseError, 'Operation failed or unauthorized request');
+    return req.callAsJson(boolean(), requestOptions);
+  }
+
+  /**
+   * To logout one or more users from logged in session, use this endpoint. If no input is provided then
+   * all logged in users are force logged out.
+   *
+   * Requires administration privilege
+   *
+   * @param body
+   * @return Response from the API call
+   */
+  async forceLogoutUsers(
+    body: TspublicRestV2AdminForcelogoutRequest,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<boolean>> {
+    const req = this.createRequest(
+      'POST',
+      '/tspublic/rest/v2/admin/forcelogout'
+    );
+    const mapped = req.prepareArgs({
+      body: [body, tspublicRestV2AdminForcelogoutRequestSchema],
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);

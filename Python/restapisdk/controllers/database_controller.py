@@ -194,6 +194,74 @@ class DatabaseController(BaseController):
 
         return decoded
 
+    def get_table_details(self,
+                          database,
+                          table,
+                          schema=None):
+        """Does a GET request to /tspublic/rest/v2/database/table/detail.
+
+        Note: This endpoint is applicable only for on-prem deployments. 
+         To provide details of a table in a schema of a database in Falcon,
+         use this endpoint.
+
+        Args:
+            database (string): Name of the Falcon database
+            table (string): Name of the table in Falcon database
+            schema (string, optional): Name of the schema in Falcon database
+
+        Returns:
+            object: Response from the API. Details of a table in the schema of
+                Falcon Database provided in the request
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        # Validate required parameters
+        self.validate_parameters(database=database,
+                                 table=table)
+
+        # Prepare query URL
+        _url_path = '/tspublic/rest/v2/database/table/detail'
+        _query_builder = self.config.get_base_uri()
+        _query_builder += _url_path
+        _query_parameters = {
+            'database': database,
+            'table': table,
+            'schema': schema
+        }
+        _query_builder = APIHelper.append_url_with_query_parameters(
+            _query_builder,
+            _query_parameters
+        )
+        _query_url = APIHelper.clean_url(_query_builder)
+
+        # Prepare headers
+        _headers = {
+            'accept': 'application/json',
+            'Content-Type': self.config.content_type
+        }
+
+        # Prepare and execute request
+        _request = self.config.http_client.get(_query_url, headers=_headers)
+        # Apply authentication scheme on request
+        self.apply_auth_schemes(_request, 'global')
+
+        _response = self.execute_request(_request)
+
+        # Endpoint and global error handling using HTTP status codes.
+        if _response.status_code == 500:
+            raise ErrorResponseException('Operation failed or unauthorized request', _response)
+        self.validate_response(_response)
+
+        decoded = _response.text
+
+        return decoded
+
     def create_table(self,
                      body):
         """Does a POST request to /tspublic/rest/v2/database/table/create.

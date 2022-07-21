@@ -13,6 +13,8 @@ DataController dataController = client.DataController;
 * [Search Query Data](../../doc/controllers/data.md#search-query-data)
 * [Answer Data](../../doc/controllers/data.md#answer-data)
 * [Liveboard Data](../../doc/controllers/data.md#liveboard-data)
+* [Answer Query Sql](../../doc/controllers/data.md#answer-query-sql)
+* [Liveboard Query Sql](../../doc/controllers/data.md#liveboard-query-sql)
 
 
 # Search Query Data
@@ -123,11 +125,92 @@ LiveboardDataAsync(
 
 ```csharp
 var body = new TspublicRestV2DataLiveboardRequest();
-body.Id = "id6";
 
 try
 {
     object result = await dataController.LiveboardDataAsync(body);
+}
+catch (ApiException e){};
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+
+
+# Answer Query Sql
+
+To retrieve the query SQL related to an Answer that is run on the data platform, you can use this endpoint.
+
+Permission: Requires at least view access to the object
+
+```csharp
+AnswerQuerySqlAsync(
+    string id)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `id` | `string` | Query, Required | The GUID of the Answer |
+
+## Response Type
+
+[`Task<Models.AnswerQueryResponse>`](../../doc/models/answer-query-response.md)
+
+## Example Usage
+
+```csharp
+string id = "id0";
+
+try
+{
+    AnswerQueryResponse result = await dataController.AnswerQuerySqlAsync(id);
+}
+catch (ApiException e){};
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+
+
+# Liveboard Query Sql
+
+To retrieve the query SQL related to a Visualization in a Liveboard that is run on the data platform, you can use this endpoint.
+
+Permission: Requires at least view access to the object
+
+```csharp
+LiveboardQuerySqlAsync(
+    string id,
+    List<string> vizId = null)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `id` | `string` | Query, Required | The GUID of the Liveboard |
+| `vizId` | `List<string>` | Query, Optional | A JSON array of GUIDs of the visualizations in the Liveboard. |
+
+## Response Type
+
+[`Task<Models.LiveboardQueryResponse>`](../../doc/models/liveboard-query-response.md)
+
+## Example Usage
+
+```csharp
+string id = "id0";
+
+try
+{
+    LiveboardQueryResponse result = await dataController.LiveboardQuerySqlAsync(id, null);
 }
 catch (ApiException e){};
 ```

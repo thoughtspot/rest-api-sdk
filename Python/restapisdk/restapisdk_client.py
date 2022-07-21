@@ -14,6 +14,7 @@ from restapisdk.http.auth.o_auth_2 import OAuth2
 from restapisdk.controllers.session_controller import SessionController
 from restapisdk.controllers.user_controller import UserController
 from restapisdk.controllers.group_controller import GroupController
+from restapisdk.controllers.org_controller import OrgController
 from restapisdk.controllers.metadata_controller import MetadataController
 from restapisdk.controllers.database_controller import DatabaseController
 from restapisdk.controllers.connection_controller import ConnectionController
@@ -30,8 +31,6 @@ from restapisdk.controllers.custom_actions_controller\
 
 class RestapisdkClient(object):
 
-    auth = OAuth2
-
     @lazy_property
     def session(self):
         return SessionController(self.config, self.auth_managers)
@@ -43,6 +42,10 @@ class RestapisdkClient(object):
     @lazy_property
     def group(self):
         return GroupController(self.config, self.auth_managers)
+
+    @lazy_property
+    def org(self):
+        return OrgController(self.config, self.auth_managers)
 
     @lazy_property
     def metadata(self):
