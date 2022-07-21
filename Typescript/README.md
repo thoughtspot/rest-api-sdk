@@ -63,25 +63,7 @@ const client = new Client({
 
 This API uses `OAuth 2 Bearer token`.
 
-## List of APIs
-
-* [Session](doc/controllers/session.md)
-* [User](doc/controllers/user.md)
-* [Group](doc/controllers/group.md)
-* [Org](doc/controllers/org.md)
-* [Metadata](doc/controllers/metadata.md)
-* [Database](doc/controllers/database.md)
-* [Connection](doc/controllers/connection.md)
-* [Data](doc/controllers/data.md)
-* [Report](doc/controllers/report.md)
-* [Admin](doc/controllers/admin.md)
-* [Security](doc/controllers/security.md)
-* [Logs](doc/controllers/logs.md)
-* [Materialization](doc/controllers/materialization.md)
-* [Custom Actions](doc/controllers/custom-actions.md)
-
-## Classes Documentation
-
-* [ApiResponse](doc/api-response.md)
-* [ApiError](doc/api-error.md)
-
+## Guide
+[API Reference](https://github.com/thoughtspot/rest-api-sdk/blob/1.13.0/Typescript/doc/README.md)
+## Live Playground
+We recommend that you browse through the [code playground](https://try-everywhere.thoughtspot.cloud/v2/#/everywhere/api/rest/playgroundV2) before you start constructing your API requests. The playground offers an interactive portal with comprehensive information about the API endpoints, request and response workflows.
