@@ -34,7 +34,7 @@ namespace RESTAPISDK.Standard.Models
         /// <param name="id">id.</param>
         public OrgType(
             string name = null,
-            string id = null)
+            int? id = null)
         {
             this.Name = name;
             this.Id = id;
@@ -50,7 +50,7 @@ namespace RESTAPISDK.Standard.Models
         /// Id of the organization
         /// </summary>
         [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
-        public string Id { get; set; }
+        public int? Id { get; set; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -88,7 +88,7 @@ namespace RESTAPISDK.Standard.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name == string.Empty ? "" : this.Name)}");
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id == string.Empty ? "" : this.Id)}");
+            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id.ToString())}");
         }
     }
 }

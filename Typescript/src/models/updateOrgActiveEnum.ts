@@ -7,14 +7,14 @@
 import { Schema, stringEnum } from '../schema';
 
 /**
- * Enum for LoginRememberMeEnum
+ * Enum for UpdateOrgActiveEnum
  */
-export enum LoginRememberMeEnum {
+export enum UpdateOrgActiveEnum {
   True = 'true',
   False = 'false',
 }
 
 /**
- * Schema for LoginRememberMeEnum
+ * Schema for UpdateOrgActiveEnum
  */
-export const loginRememberMeEnumSchema: Schema<LoginRememberMeEnum> = stringEnum(LoginRememberMeEnum);
+export const updateOrgActiveEnumSchema: Schema<UpdateOrgActiveEnum> = stringEnum(UpdateOrgActiveEnum);

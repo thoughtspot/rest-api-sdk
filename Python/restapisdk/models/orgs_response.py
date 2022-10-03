@@ -16,13 +16,13 @@ class OrgsResponse(object):
     TODO: type model description here.
 
     Attributes:
-        org_id (string): ID of the organization searched for
+        org_id (int): ID of the organization searched for
         org_name (string): Name of the organization searched for
         description (string): Description associated with the organization
         all_group_user_id (string): GUID of the ALL group in the organization
         default_admin_user_group_id (string): GUID of the admin group in the
             organization
-        enabled (bool): Indicates if the organization is enabled or not
+        active (bool): Indicates if the organization is active or not
 
     """
 
@@ -33,7 +33,7 @@ class OrgsResponse(object):
         "description": 'description',
         "all_group_user_id": 'allGroupUserId',
         "default_admin_user_group_id": 'defaultAdminUserGroupId',
-        "enabled": 'enabled'
+        "active": 'active'
     }
 
     _optionals = [
@@ -42,7 +42,7 @@ class OrgsResponse(object):
         'description',
         'all_group_user_id',
         'default_admin_user_group_id',
-        'enabled',
+        'active',
     ]
 
     def __init__(self,
@@ -51,7 +51,7 @@ class OrgsResponse(object):
                  description=APIHelper.SKIP,
                  all_group_user_id=APIHelper.SKIP,
                  default_admin_user_group_id=APIHelper.SKIP,
-                 enabled=APIHelper.SKIP):
+                 active=APIHelper.SKIP):
         """Constructor for the OrgsResponse class"""
 
         # Initialize members of the class
@@ -65,8 +65,8 @@ class OrgsResponse(object):
             self.all_group_user_id = all_group_user_id 
         if default_admin_user_group_id is not APIHelper.SKIP:
             self.default_admin_user_group_id = default_admin_user_group_id 
-        if enabled is not APIHelper.SKIP:
-            self.enabled = enabled 
+        if active is not APIHelper.SKIP:
+            self.active = active 
 
     @classmethod
     def from_dictionary(cls,
@@ -92,11 +92,11 @@ class OrgsResponse(object):
         description = dictionary.get("description") if dictionary.get("description") else APIHelper.SKIP
         all_group_user_id = dictionary.get("allGroupUserId") if dictionary.get("allGroupUserId") else APIHelper.SKIP
         default_admin_user_group_id = dictionary.get("defaultAdminUserGroupId") if dictionary.get("defaultAdminUserGroupId") else APIHelper.SKIP
-        enabled = dictionary.get("enabled") if "enabled" in dictionary.keys() else APIHelper.SKIP
+        active = dictionary.get("active") if "active" in dictionary.keys() else APIHelper.SKIP
         # Return an object of this model
         return cls(org_id,
                    org_name,
                    description,
                    all_group_user_id,
                    default_admin_user_group_id,
-                   enabled)
+                   active)

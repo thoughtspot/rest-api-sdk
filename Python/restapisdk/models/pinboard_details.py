@@ -18,23 +18,31 @@ class PinboardDetails(object):
     Attributes:
         pinboard_id (string): pinboard id of recently pinned pinboard
         pinboard_name (string): pinboard name of recently pinned pinboard
+        tab_id (string): tab id of recently pinned tab
+        tab_name (string): tab name of recently pinned tab
 
     """
 
     # Create a mapping from Model property names to API property names
     _names = {
         "pinboard_id": 'pinboardId',
-        "pinboard_name": 'pinboardName'
+        "pinboard_name": 'pinboardName',
+        "tab_id": 'tabId',
+        "tab_name": 'tabName'
     }
 
     _optionals = [
         'pinboard_id',
         'pinboard_name',
+        'tab_id',
+        'tab_name',
     ]
 
     def __init__(self,
                  pinboard_id=APIHelper.SKIP,
-                 pinboard_name=APIHelper.SKIP):
+                 pinboard_name=APIHelper.SKIP,
+                 tab_id=APIHelper.SKIP,
+                 tab_name=APIHelper.SKIP):
         """Constructor for the PinboardDetails class"""
 
         # Initialize members of the class
@@ -42,6 +50,10 @@ class PinboardDetails(object):
             self.pinboard_id = pinboard_id 
         if pinboard_name is not APIHelper.SKIP:
             self.pinboard_name = pinboard_name 
+        if tab_id is not APIHelper.SKIP:
+            self.tab_id = tab_id 
+        if tab_name is not APIHelper.SKIP:
+            self.tab_name = tab_name 
 
     @classmethod
     def from_dictionary(cls,
@@ -64,6 +76,10 @@ class PinboardDetails(object):
 
         pinboard_id = dictionary.get("pinboardId") if dictionary.get("pinboardId") else APIHelper.SKIP
         pinboard_name = dictionary.get("pinboardName") if dictionary.get("pinboardName") else APIHelper.SKIP
+        tab_id = dictionary.get("tabId") if dictionary.get("tabId") else APIHelper.SKIP
+        tab_name = dictionary.get("tabName") if dictionary.get("tabName") else APIHelper.SKIP
         # Return an object of this model
         return cls(pinboard_id,
-                   pinboard_name)
+                   pinboard_name,
+                   tab_id,
+                   tab_name)

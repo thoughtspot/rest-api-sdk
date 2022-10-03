@@ -47,7 +47,8 @@ namespace RESTAPISDK.Standard.Models
         public string Id { get; set; }
 
         /// <summary>
-        /// Gets or sets Table.
+        /// A JSON array of name or GUIDs of the table or both.
+        ///  At least one input is required. Provide either table name or id. When both are given then id is considered
         /// </summary>
         [JsonProperty("table")]
         public List<Models.TableInput> Table { get; set; }

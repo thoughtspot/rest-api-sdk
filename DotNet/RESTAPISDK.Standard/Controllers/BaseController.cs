@@ -78,6 +78,10 @@ namespace RESTAPISDK.Standard.Controllers
         /// <returns> MultipartContent. </returns>
         internal static MultipartContent CreateJsonEncodedMultipartContent(object input, Dictionary<string, IReadOnlyCollection<string>> headers)
         {
+            if (input == null)
+            {
+                return null;
+            }
             return new MultipartByteArrayContent(Encoding.ASCII.GetBytes(ApiHelper.JsonSerialize(input)), headers);
         }
 
@@ -89,14 +93,15 @@ namespace RESTAPISDK.Standard.Controllers
         /// <returns> MultipartContent. </returns>
         internal static MultipartContent CreateFileMultipartContent(FileStreamInfo input, Dictionary<string, IReadOnlyCollection<string>> headers = null)
         {
+            if (input == null)
+            {
+                return null;
+            }
             if (headers == null)
             {
                 return new MultipartFileContent(input);
             }
-            else
-            {
-                return new MultipartFileContent(input, headers);
-            }
+            return new MultipartFileContent(input, headers);
         }
 
         /// <summary>

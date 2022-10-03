@@ -14,14 +14,6 @@ import {
   TspublicRestV2SessionGettokenRequest,
   tspublicRestV2SessionGettokenRequestSchema,
 } from '../models/tspublicRestV2SessionGettokenRequest';
-import {
-  TspublicRestV2SessionLoginRequest,
-  tspublicRestV2SessionLoginRequestSchema,
-} from '../models/tspublicRestV2SessionLoginRequest';
-import {
-  TspublicRestV2SessionOrgRequest,
-  tspublicRestV2SessionOrgRequestSchema,
-} from '../models/tspublicRestV2SessionOrgRequest';
 import { boolean, unknown } from '../schema';
 import { BaseController } from './baseController';
 
@@ -37,33 +29,6 @@ export class SessionController extends BaseController {
     const req = this.createRequest('GET', '/tspublic/rest/v2/session');
     req.throwOn(500, ErrorResponseError, 'Operation failed or unauthorized request');
     return req.callAsJson(unknown(), requestOptions);
-  }
-
-  /**
-   * You can programmatically create login session for a user in ThoughtSpot using this endpoint.
-   *
-   * You can create session by either providing userName and password as inputs in this request body or
-   * by including "Authorization" header with the token generated through the endpoint
-   * /tspublic/rest/v2/session/getToken.
-   *
-   * userName and password input is given precedence over "Authorization" header, when both are included
-   * in the request.
-   *
-   * @param body
-   * @return Response from the API call
-   */
-  async login(
-    body: TspublicRestV2SessionLoginRequest,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<SessionLoginResponse>> {
-    const req = this.createRequest('POST', '/tspublic/rest/v2/session/login');
-    const mapped = req.prepareArgs({
-      body: [body, tspublicRestV2SessionLoginRequestSchema],
-    });
-    req.header('Content-Type', 'application/json');
-    req.json(mapped.body);
-    req.throwOn(500, ErrorResponseError, 'Operation failed or unauthorized request');
-    return req.callAsJson(sessionLoginResponseSchema, requestOptions);
   }
 
   /**
@@ -135,34 +100,6 @@ export class SessionController extends BaseController {
       'POST',
       '/tspublic/rest/v2/session/revoketoken'
     );
-    req.throwOn(500, ErrorResponseError, 'Operation failed or unauthorized request');
-    return req.callAsJson(boolean(), requestOptions);
-  }
-
-  /**
-   * This is endpoint is applicable only if organization feature is enabled in the cluster.
-   *
-   * To programmatically switch the organization context for the logged in session, use this endpoint.
-   *
-   * The original session is reused even after changing the organization.
-   *
-   * The logged in user should have access to the organization being switched to.
-   *
-   * This endpoint can be used to switch organization only when using session cookies for authentication.
-   *
-   * @param body
-   * @return Response from the API call
-   */
-  async switchOrg(
-    body: TspublicRestV2SessionOrgRequest,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<boolean>> {
-    const req = this.createRequest('PUT', '/tspublic/rest/v2/session/org');
-    const mapped = req.prepareArgs({
-      body: [body, tspublicRestV2SessionOrgRequestSchema],
-    });
-    req.header('Content-Type', 'application/json');
-    req.json(mapped.body);
     req.throwOn(500, ErrorResponseError, 'Operation failed or unauthorized request');
     return req.callAsJson(boolean(), requestOptions);
   }

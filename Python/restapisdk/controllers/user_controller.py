@@ -199,7 +199,7 @@ class UserController(BaseController):
     def delete_user(self,
                     name=None,
                     id=None,
-                    org=None):
+                    org_id=None):
         """Does a DELETE request to /tspublic/rest/v2/user/delete.
 
         To remove a user from the ThoughtSpot system, use this endpoint. 
@@ -210,12 +210,11 @@ class UserController(BaseController):
         Args:
             name (string, optional): Username of the user account
             id (string, optional): The GUID of the user account
-            org (OrgInput, optional): This is applicable only if organization
-                feature is enabled in the cluster.    A JSON object of
-                organization name, id or both, from which the user should be
-                deleted. When both are given then id is considered. If no
-                value is provided then the organization associated with the
-                login session will be considered.
+            org_id (int, optional): This is applicable only if organization
+                feature is enabled in the cluster.    Unique identifier of the
+                organization from which the user would be deleted. If no value
+                is provided, the organization associated with the login
+                session is considered.
 
         Returns:
             bool: Response from the API. User successfully deleted
@@ -235,7 +234,7 @@ class UserController(BaseController):
         _query_parameters = {
             'name': name,
             'id': id,
-            'org': org
+            'orgId': org_id
         }
         _query_builder = APIHelper.append_url_with_query_parameters(
             _query_builder,
@@ -388,8 +387,6 @@ class UserController(BaseController):
         in the cluster. 
          To programmatically add existing ThoughtSpot users to an
          organization, use this API endpoint. 
-         At least one of id or name of the organization is required. When both
-         are given, then organization id will be considered. 
          Requires Administration access for the organization to which users
          need to be added.
 

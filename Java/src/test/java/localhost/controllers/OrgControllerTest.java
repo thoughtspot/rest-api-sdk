@@ -60,7 +60,7 @@ public class OrgControllerTest extends BaseControllerTest {
     public void testTestGetOrg() throws Exception {
         // Parameters for the API call
         String name = null;
-        String id = null;
+        Integer id = null;
 
         // Set callback and perform API call
         try {
@@ -96,7 +96,7 @@ public class OrgControllerTest extends BaseControllerTest {
     public void testTestDeleteOrg() throws Exception {
         // Parameters for the API call
         String name = null;
-        String id = null;
+        Integer id = null;
 
         // Set callback and perform API call
         try {

@@ -5,7 +5,7 @@ The following parameters are configurable for the API Client:
 
 | Parameter | Type | Description |
 |  --- | --- | --- |
-| `accept_language` | `string` | response format<br>*Default*: `'application/json'` |
+| `accept_language` | `string` | response format<br>*Default*: `'*'` |
 | `content_type` | `string` | body content type for post request<br>*Default*: `'application/json'` |
 | `base_url` | `string` | *Default*: `'https://localhost:443'` |
 | `environment` | Environment | The API environment. <br> **Default: `Environment.PRODUCTION`** |
@@ -27,7 +27,7 @@ from restapisdk.restapisdk_client import RestapisdkClient
 from restapisdk.configuration import Environment
 
 client = RestapisdkClient(
-    accept_language='application/json',
+    accept_language='*',
     content_type='application/json',
     access_token='AccessToken',
     environment=Environment.PRODUCTION,

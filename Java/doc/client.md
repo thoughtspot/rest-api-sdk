@@ -5,7 +5,7 @@ The following parameters are configurable for the API Client:
 
 | Parameter | Type | Description |
 |  --- | --- | --- |
-| `acceptLanguage` | `String` | response format<br>*Default*: `"application/json"` |
+| `acceptLanguage` | `String` | response format<br>*Default*: `"*"` |
 | `contentType` | `String` | body content type for post request<br>*Default*: `"application/json"` |
 | `baseUrl` | `String` | *Default*: `"https://localhost:443"` |
 | `environment` | Environment | The API environment. <br> **Default: `Environment.PRODUCTION`** |
@@ -18,7 +18,7 @@ The API client can be initialized as follows:
 RESTAPISDKClient client = new RESTAPISDKClient.Builder()
     .httpClientConfig(configBuilder -> configBuilder
             .timeout(0))
-    .acceptLanguage("application/json")
+    .acceptLanguage("*")
     .contentType("application/json")
     .accessToken("AccessToken")
     .environment(Environment.PRODUCTION)

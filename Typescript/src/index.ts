@@ -90,11 +90,9 @@ export { LiveboardReportTypeEnum } from './models/liveboardReportTypeEnum';
 export { LogicalTableHeader } from './models/logicalTableHeader';
 export { LogicalTableHeaderDeletedEnum } from './models/logicalTableHeaderDeletedEnum';
 export { LogicalTableHeaderHiddenEnum } from './models/logicalTableHeaderHiddenEnum';
-export { LoginRememberMeEnum } from './models/loginRememberMeEnum';
 export { LogsResponse } from './models/logsResponse';
 export { MetadataTagResponse } from './models/metadataTagResponse';
 export { NameAndIdInput } from './models/nameAndIdInput';
-export { OrgInput } from './models/orgInput';
 export { OrgsResponse } from './models/orgsResponse';
 export { OrgType } from './models/orgType';
 export { PdfOptionsInput } from './models/pdfOptionsInput';
@@ -213,8 +211,6 @@ export { TspublicRestV2SecurityPermissionTsobjectSearchRequest } from './models/
 export { TspublicRestV2SecurityShareTsobjectRequest } from './models/tspublicRestV2SecurityShareTsobjectRequest';
 export { TspublicRestV2SecurityShareVisualizationRequest } from './models/tspublicRestV2SecurityShareVisualizationRequest';
 export { TspublicRestV2SessionGettokenRequest } from './models/tspublicRestV2SessionGettokenRequest';
-export { TspublicRestV2SessionLoginRequest } from './models/tspublicRestV2SessionLoginRequest';
-export { TspublicRestV2SessionOrgRequest } from './models/tspublicRestV2SessionOrgRequest';
 export { TspublicRestV2UserAddgroupRequest } from './models/tspublicRestV2UserAddgroupRequest';
 export { TspublicRestV2UserAddorgRequest } from './models/tspublicRestV2UserAddorgRequest';
 export { TspublicRestV2UserChangepasswordRequest } from './models/tspublicRestV2UserChangepasswordRequest';
@@ -225,6 +221,7 @@ export { TspublicRestV2UserUpdateRequest } from './models/tspublicRestV2UserUpda
 export { UpdateGroupPrivilegesEnum } from './models/updateGroupPrivilegesEnum';
 export { UpdateGroupTypeEnum } from './models/updateGroupTypeEnum';
 export { UpdateGroupVisibilityEnum } from './models/updateGroupVisibilityEnum';
+export { UpdateOrgActiveEnum } from './models/updateOrgActiveEnum';
 export { UpdateUserAnalystOnboardingCompleteEnum } from './models/updateUserAnalystOnboardingCompleteEnum';
 export { UpdateUserNotifyOnShareEnum } from './models/updateUserNotifyOnShareEnum';
 export { UpdateUserShowWalkMeEnum } from './models/updateUserShowWalkMeEnum';

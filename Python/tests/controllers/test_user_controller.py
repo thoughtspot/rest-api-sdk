@@ -13,7 +13,6 @@ import dateutil.parser
 from tests.controllers.controller_test_base import ControllerTestBase
 from tests.test_helper import TestHelper
 from restapisdk.api_helper import APIHelper
-from restapisdk.models.org_input import OrgInput
 
 
 class UserControllerTests(ControllerTestBase):
@@ -54,10 +53,10 @@ class UserControllerTests(ControllerTestBase):
         # Parameters for the API call
         name = None
         id = None
-        org = None
+        org_id = None
 
         # Perform the API call through the SDK function
-        result = self.controller.delete_user(name, id, org)
+        result = self.controller.delete_user(name, id, org_id)
 
         # Test response code
         self.assertEquals(self.response_catcher.response.status_code, 200)

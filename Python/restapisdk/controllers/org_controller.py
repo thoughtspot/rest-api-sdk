@@ -35,7 +35,7 @@ class OrgController(BaseController):
 
         Args:
             name (string, optional): Name of the organization.
-            id (string, optional): The ID of the organization.
+            id (int, optional): The ID of the organization.
 
         Returns:
             OrgsResponse: Response from the API. Details of the organization
@@ -214,7 +214,7 @@ class OrgController(BaseController):
 
         Args:
             name (string, optional): Name of the organization.
-            id (string, optional): The ID of the organization.
+            id (int, optional): The ID of the organization.
 
         Returns:
             bool: Response from the API. Organization successfully deleted

@@ -23,7 +23,6 @@ import localhost.http.client.HttpContext;
 import localhost.http.request.HttpRequest;
 import localhost.http.response.HttpResponse;
 import localhost.http.response.HttpStringResponse;
-import localhost.models.OrgInput;
 import localhost.models.TspublicRestV2UserAddgroupRequest;
 import localhost.models.TspublicRestV2UserAddorgRequest;
 import localhost.models.TspublicRestV2UserChangepasswordRequest;
@@ -380,10 +379,10 @@ public final class UserController extends BaseController {
      * Requires administration privilege.
      * @param  name  Optional parameter: Username of the user account
      * @param  id  Optional parameter: The GUID of the user account
-     * @param  org  Optional parameter: This is applicable only if organization feature is enabled
-     *         in the cluster. A JSON object of organization name, id or both, from which the user
-     *         should be deleted. When both are given then id is considered. If no value is provided
-     *         then the organization associated with the login session will be considered.
+     * @param  orgId  Optional parameter: This is applicable only if organization feature is enabled
+     *         in the cluster. Unique identifier of the organization from which the user would be
+     *         deleted. If no value is provided, the organization associated with the login session
+     *         is considered.
      * @return    Returns the Boolean response from the API call
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
@@ -391,8 +390,8 @@ public final class UserController extends BaseController {
     public Boolean deleteUser(
             final String name,
             final String id,
-            final OrgInput org) throws ApiException, IOException {
-        HttpRequest request = buildDeleteUserRequest(name, id, org);
+            final Integer orgId) throws ApiException, IOException {
+        HttpRequest request = buildDeleteUserRequest(name, id, orgId);
         authManagers.get("global").apply(request);
 
         HttpResponse response = getClientInstance().execute(request, false);
@@ -407,17 +406,17 @@ public final class UserController extends BaseController {
      * Requires administration privilege.
      * @param  name  Optional parameter: Username of the user account
      * @param  id  Optional parameter: The GUID of the user account
-     * @param  org  Optional parameter: This is applicable only if organization feature is enabled
-     *         in the cluster. A JSON object of organization name, id or both, from which the user
-     *         should be deleted. When both are given then id is considered. If no value is provided
-     *         then the organization associated with the login session will be considered.
+     * @param  orgId  Optional parameter: This is applicable only if organization feature is enabled
+     *         in the cluster. Unique identifier of the organization from which the user would be
+     *         deleted. If no value is provided, the organization associated with the login session
+     *         is considered.
      * @return    Returns the Boolean response from the API call
      */
     public CompletableFuture<Boolean> deleteUserAsync(
             final String name,
             final String id,
-            final OrgInput org) {
-        return makeHttpCallAsync(() -> buildDeleteUserRequest(name, id, org),
+            final Integer orgId) {
+        return makeHttpCallAsync(() -> buildDeleteUserRequest(name, id, orgId),
             req -> authManagers.get("global").applyAsync(req)
                 .thenCompose(request -> getClientInstance()
                         .executeAsync(request, false)),
@@ -430,7 +429,7 @@ public final class UserController extends BaseController {
     private HttpRequest buildDeleteUserRequest(
             final String name,
             final String id,
-            final OrgInput org) {
+            final Integer orgId) {
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 
@@ -442,7 +441,7 @@ public final class UserController extends BaseController {
         Map<String, Object> queryParameters = new HashMap<>();
         queryParameters.put("name", name);
         queryParameters.put("id", id);
-        queryParameters.put("org", org);
+        queryParameters.put("orgId", orgId);
 
         //load all headers for the outgoing API request
         Headers headers = new Headers();
@@ -697,10 +696,8 @@ public final class UserController extends BaseController {
 
     /**
      * This is endpoint is applicable only if organization feature is enabled in the cluster. To
-     * programmatically add existing ThoughtSpot users to an organization, use this API endpoint. At
-     * least one of id or name of the organization is required. When both are given, then
-     * organization id will be considered. Requires Administration access for the organization to
-     * which users need to be added.
+     * programmatically add existing ThoughtSpot users to an organization, use this API endpoint.
+     * Requires Administration access for the organization to which users need to be added.
      * @param  body  Required parameter: Example:
      * @return    Returns the Boolean response from the API call
      * @throws    ApiException    Represents error response from the server.
@@ -719,10 +716,8 @@ public final class UserController extends BaseController {
 
     /**
      * This is endpoint is applicable only if organization feature is enabled in the cluster. To
-     * programmatically add existing ThoughtSpot users to an organization, use this API endpoint. At
-     * least one of id or name of the organization is required. When both are given, then
-     * organization id will be considered. Requires Administration access for the organization to
-     * which users need to be added.
+     * programmatically add existing ThoughtSpot users to an organization, use this API endpoint.
+     * Requires Administration access for the organization to which users need to be added.
      * @param  body  Required parameter: Example:
      * @return    Returns the Boolean response from the API call
      */

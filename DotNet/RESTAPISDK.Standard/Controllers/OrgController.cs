@@ -50,7 +50,7 @@ namespace RESTAPISDK.Standard.Controllers
         /// <returns>Returns the Models.OrgsResponse response from the API call.</returns>
         public Models.OrgsResponse GetOrg(
                 string name = null,
-                string id = null)
+                int? id = null)
         {
             Task<Models.OrgsResponse> t = this.GetOrgAsync(name, id);
             ApiHelper.RunTaskSynchronously(t);
@@ -69,7 +69,7 @@ namespace RESTAPISDK.Standard.Controllers
         /// <returns>Returns the Models.OrgsResponse response from the API call.</returns>
         public async Task<Models.OrgsResponse> GetOrgAsync(
                 string name = null,
-                string id = null,
+                int? id = null,
                 CancellationToken cancellationToken = default)
         {
             // the base uri for api requests.
@@ -297,7 +297,7 @@ namespace RESTAPISDK.Standard.Controllers
         /// <returns>Returns the bool response from the API call.</returns>
         public bool DeleteOrg(
                 string name = null,
-                string id = null)
+                int? id = null)
         {
             Task<bool> t = this.DeleteOrgAsync(name, id);
             ApiHelper.RunTaskSynchronously(t);
@@ -316,7 +316,7 @@ namespace RESTAPISDK.Standard.Controllers
         /// <returns>Returns the bool response from the API call.</returns>
         public async Task<bool> DeleteOrgAsync(
                 string name = null,
-                string id = null,
+                int? id = null,
                 CancellationToken cancellationToken = default)
         {
             // the base uri for api requests.

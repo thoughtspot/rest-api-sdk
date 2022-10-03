@@ -10,8 +10,9 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `name` | `string \| undefined` | Optional | Name of the organization. |
-| `id` | `string \| undefined` | Optional | The ID of the organization. |
+| `id` | `number \| undefined` | Optional | The ID of the organization. |
 | `description` | `string \| undefined` | Optional | Description text for the organization. |
+| `active` | [`UpdateOrgActiveEnum \| undefined`](../../doc/models/update-org-active-enum.md) | Optional | Status of the organization. |
 
 ## Example (as JSON)
 
@@ -19,7 +20,8 @@
 {
   "name": null,
   "id": null,
-  "description": null
+  "description": null,
+  "active": null
 }
 ```
 

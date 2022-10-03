@@ -292,14 +292,14 @@ namespace RESTAPISDK.Standard.Controllers
         /// </summary>
         /// <param name="name">Optional parameter: Username of the user account.</param>
         /// <param name="id">Optional parameter: The GUID of the user account.</param>
-        /// <param name="org">Optional parameter: This is applicable only if organization feature is enabled in the cluster.    A JSON object of organization name, id or both, from which the user should be deleted. When both are given then id is considered. If no value is provided then the organization associated with the login session will be considered..</param>
+        /// <param name="orgId">Optional parameter: This is applicable only if organization feature is enabled in the cluster.    Unique identifier of the organization from which the user would be deleted. If no value is provided, the organization associated with the login session is considered..</param>
         /// <returns>Returns the bool response from the API call.</returns>
         public bool DeleteUser(
                 string name = null,
                 string id = null,
-                Models.OrgInput org = null)
+                int? orgId = null)
         {
-            Task<bool> t = this.DeleteUserAsync(name, id, org);
+            Task<bool> t = this.DeleteUserAsync(name, id, orgId);
             ApiHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -311,13 +311,13 @@ namespace RESTAPISDK.Standard.Controllers
         /// </summary>
         /// <param name="name">Optional parameter: Username of the user account.</param>
         /// <param name="id">Optional parameter: The GUID of the user account.</param>
-        /// <param name="org">Optional parameter: This is applicable only if organization feature is enabled in the cluster.    A JSON object of organization name, id or both, from which the user should be deleted. When both are given then id is considered. If no value is provided then the organization associated with the login session will be considered..</param>
+        /// <param name="orgId">Optional parameter: This is applicable only if organization feature is enabled in the cluster.    Unique identifier of the organization from which the user would be deleted. If no value is provided, the organization associated with the login session is considered..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the bool response from the API call.</returns>
         public async Task<bool> DeleteUserAsync(
                 string name = null,
                 string id = null,
-                Models.OrgInput org = null,
+                int? orgId = null,
                 CancellationToken cancellationToken = default)
         {
             // the base uri for api requests.
@@ -332,7 +332,7 @@ namespace RESTAPISDK.Standard.Controllers
             {
                 { "name", name },
                 { "id", id },
-                { "org", org },
+                { "orgId", orgId },
             };
 
             // append request with appropriate headers and parameters
@@ -539,7 +539,6 @@ namespace RESTAPISDK.Standard.Controllers
         /// <summary>
         /// This is endpoint is applicable only if organization feature is enabled in the cluster. .
         ///  To programmatically add existing ThoughtSpot users to an organization, use this API endpoint. .
-        ///  At least one of id or name of the organization is required. When both are given, then organization id will be considered. .
         ///  Requires Administration access for the organization to which users need to be added.
         /// </summary>
         /// <param name="body">Required parameter: Example: .</param>
@@ -555,7 +554,6 @@ namespace RESTAPISDK.Standard.Controllers
         /// <summary>
         /// This is endpoint is applicable only if organization feature is enabled in the cluster. .
         ///  To programmatically add existing ThoughtSpot users to an organization, use this API endpoint. .
-        ///  At least one of id or name of the organization is required. When both are given, then organization id will be considered. .
         ///  Requires Administration access for the organization to which users need to be added.
         /// </summary>
         /// <param name="body">Required parameter: Example: .</param>

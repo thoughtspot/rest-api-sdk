@@ -57,6 +57,8 @@ public class TspublicRestV2ConnectionRemovetableRequest {
 
     /**
      * Getter for Table.
+     * A JSON array of name or GUIDs of the table or both. At least one input is required. Provide
+     * either table name or id. When both are given then id is considered
      * @return Returns the List of TableInput
      */
     @JsonGetter("table")
@@ -66,6 +68,8 @@ public class TspublicRestV2ConnectionRemovetableRequest {
 
     /**
      * Setter for Table.
+     * A JSON array of name or GUIDs of the table or both. At least one input is required. Provide
+     * either table name or id. When both are given then id is considered
      * @param table Value for List of TableInput
      */
     @JsonSetter("table")

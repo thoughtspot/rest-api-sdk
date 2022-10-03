@@ -33,14 +33,17 @@ namespace RESTAPISDK.Standard.Models
         /// <param name="name">name.</param>
         /// <param name="id">id.</param>
         /// <param name="description">description.</param>
+        /// <param name="active">active.</param>
         public TspublicRestV2OrgUpdateRequest(
             string name = null,
-            string id = null,
-            string description = null)
+            int? id = null,
+            string description = null,
+            Models.UpdateOrgActiveEnum? active = null)
         {
             this.Name = name;
             this.Id = id;
             this.Description = description;
+            this.Active = active;
         }
 
         /// <summary>
@@ -53,13 +56,19 @@ namespace RESTAPISDK.Standard.Models
         /// The ID of the organization.
         /// </summary>
         [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
-        public string Id { get; set; }
+        public int? Id { get; set; }
 
         /// <summary>
         /// Description text for the organization.
         /// </summary>
         [JsonProperty("description", NullValueHandling = NullValueHandling.Ignore)]
         public string Description { get; set; }
+
+        /// <summary>
+        /// Status of the organization.
+        /// </summary>
+        [JsonProperty("active", ItemConverterType = typeof(StringEnumConverter), NullValueHandling = NullValueHandling.Ignore)]
+        public Models.UpdateOrgActiveEnum? Active { get; set; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -87,7 +96,8 @@ namespace RESTAPISDK.Standard.Models
             return obj is TspublicRestV2OrgUpdateRequest other &&
                 ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
                 ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
-                ((this.Description == null && other.Description == null) || (this.Description?.Equals(other.Description) == true));
+                ((this.Description == null && other.Description == null) || (this.Description?.Equals(other.Description) == true)) &&
+                ((this.Active == null && other.Active == null) || (this.Active?.Equals(other.Active) == true));
         }
         
 
@@ -98,8 +108,9 @@ namespace RESTAPISDK.Standard.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name == string.Empty ? "" : this.Name)}");
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id == string.Empty ? "" : this.Id)}");
+            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id.ToString())}");
             toStringOutput.Add($"this.Description = {(this.Description == null ? "null" : this.Description == string.Empty ? "" : this.Description)}");
+            toStringOutput.Add($"this.Active = {(this.Active == null ? "null" : this.Active.ToString())}");
         }
     }
 }

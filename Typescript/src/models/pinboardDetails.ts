@@ -11,9 +11,15 @@ export interface PinboardDetails {
   pinboardId?: string;
   /** pinboard name of recently pinned pinboard */
   pinboardName?: string;
+  /** tab id of recently pinned tab */
+  tabId?: string;
+  /** tab name of recently pinned tab */
+  tabName?: string;
 }
 
 export const pinboardDetailsSchema: Schema<PinboardDetails> = object({
   pinboardId: ['pinboardId', optional(string())],
   pinboardName: ['pinboardName', optional(string())],
+  tabId: ['tabId', optional(string())],
+  tabName: ['tabName', optional(string())],
 });

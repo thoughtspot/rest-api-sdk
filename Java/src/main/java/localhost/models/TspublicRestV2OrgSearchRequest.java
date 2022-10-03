@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonSetter;
  */
 public class TspublicRestV2OrgSearchRequest {
     private String name;
-    private String id;
+    private Integer id;
     private SearchOrgsShowDeletedEnum showDeleted;
 
     /**
@@ -28,12 +28,12 @@ public class TspublicRestV2OrgSearchRequest {
     /**
      * Initialization constructor.
      * @param  name  String value for name.
-     * @param  id  String value for id.
+     * @param  id  Integer value for id.
      * @param  showDeleted  SearchOrgsShowDeletedEnum value for showDeleted.
      */
     public TspublicRestV2OrgSearchRequest(
             String name,
-            String id,
+            Integer id,
             SearchOrgsShowDeletedEnum showDeleted) {
         this.name = name;
         this.id = id;
@@ -64,21 +64,21 @@ public class TspublicRestV2OrgSearchRequest {
     /**
      * Getter for Id.
      * The ID of the organization.
-     * @return Returns the String
+     * @return Returns the Integer
      */
     @JsonGetter("id")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
     /**
      * Setter for Id.
      * The ID of the organization.
-     * @param id Value for String
+     * @param id Value for Integer
      */
     @JsonSetter("id")
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -131,7 +131,7 @@ public class TspublicRestV2OrgSearchRequest {
      */
     public static class Builder {
         private String name;
-        private String id;
+        private Integer id;
         private SearchOrgsShowDeletedEnum showDeleted = SearchOrgsShowDeletedEnum.ENUM_FALSE;
 
 
@@ -148,10 +148,10 @@ public class TspublicRestV2OrgSearchRequest {
 
         /**
          * Setter for id.
-         * @param  id  String value for id.
+         * @param  id  Integer value for id.
          * @return Builder
          */
-        public Builder id(String id) {
+        public Builder id(Integer id) {
             this.id = id;
             return this;
         }

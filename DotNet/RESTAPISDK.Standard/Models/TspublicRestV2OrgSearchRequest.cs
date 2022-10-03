@@ -35,7 +35,7 @@ namespace RESTAPISDK.Standard.Models
         /// <param name="showDeleted">showDeleted.</param>
         public TspublicRestV2OrgSearchRequest(
             string name = null,
-            string id = null,
+            int? id = null,
             Models.SearchOrgsShowDeletedEnum? showDeleted = Models.SearchOrgsShowDeletedEnum.False)
         {
             this.Name = name;
@@ -53,7 +53,7 @@ namespace RESTAPISDK.Standard.Models
         /// The ID of the organization.
         /// </summary>
         [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
-        public string Id { get; set; }
+        public int? Id { get; set; }
 
         /// <summary>
         /// When set to true, the response will include the details of deleted organization also.
@@ -98,7 +98,7 @@ namespace RESTAPISDK.Standard.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name == string.Empty ? "" : this.Name)}");
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id == string.Empty ? "" : this.Id)}");
+            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id.ToString())}");
             toStringOutput.Add($"this.ShowDeleted = {(this.ShowDeleted == null ? "null" : this.ShowDeleted.ToString())}");
         }
     }

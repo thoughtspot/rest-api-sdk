@@ -5,7 +5,7 @@ The following parameters are configurable for the API Client:
 
 | Parameter | Type | Description |
 |  --- | --- | --- |
-| `acceptLanguage` | `string` | response format<br>*Default*: `'application/json'` |
+| `acceptLanguage` | `string` | response format<br>*Default*: `'*'` |
 | `contentType` | `string` | body content type for post request<br>*Default*: `'application/json'` |
 | `baseUrl` | `string` | *Default*: `'https://localhost:443'` |
 | `environment` | Environment | The API environment. <br> **Default: `Environment.Production`** |
@@ -39,7 +39,7 @@ The API client can be initialized as follows:
 
 ```ts
 const client = new Client({
-  acceptLanguage: 'application/json',
+  acceptLanguage: '*',
   contentType: 'application/json',
   timeout: 0,
   environment: Environment.Production,

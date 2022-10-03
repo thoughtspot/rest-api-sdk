@@ -15,8 +15,9 @@ import com.fasterxml.jackson.annotation.JsonSetter;
  */
 public class TspublicRestV2OrgUpdateRequest {
     private String name;
-    private String id;
+    private Integer id;
     private String description;
+    private UpdateOrgActiveEnum active;
 
     /**
      * Default constructor.
@@ -27,16 +28,19 @@ public class TspublicRestV2OrgUpdateRequest {
     /**
      * Initialization constructor.
      * @param  name  String value for name.
-     * @param  id  String value for id.
+     * @param  id  Integer value for id.
      * @param  description  String value for description.
+     * @param  active  UpdateOrgActiveEnum value for active.
      */
     public TspublicRestV2OrgUpdateRequest(
             String name,
-            String id,
-            String description) {
+            Integer id,
+            String description,
+            UpdateOrgActiveEnum active) {
         this.name = name;
         this.id = id;
         this.description = description;
+        this.active = active;
     }
 
     /**
@@ -63,21 +67,21 @@ public class TspublicRestV2OrgUpdateRequest {
     /**
      * Getter for Id.
      * The ID of the organization.
-     * @return Returns the String
+     * @return Returns the Integer
      */
     @JsonGetter("id")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
     /**
      * Setter for Id.
      * The ID of the organization.
-     * @param id Value for String
+     * @param id Value for Integer
      */
     @JsonSetter("id")
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -103,13 +107,34 @@ public class TspublicRestV2OrgUpdateRequest {
     }
 
     /**
+     * Getter for Active.
+     * Status of the organization.
+     * @return Returns the UpdateOrgActiveEnum
+     */
+    @JsonGetter("active")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public UpdateOrgActiveEnum getActive() {
+        return active;
+    }
+
+    /**
+     * Setter for Active.
+     * Status of the organization.
+     * @param active Value for UpdateOrgActiveEnum
+     */
+    @JsonSetter("active")
+    public void setActive(UpdateOrgActiveEnum active) {
+        this.active = active;
+    }
+
+    /**
      * Converts this TspublicRestV2OrgUpdateRequest into string format.
      * @return String representation of this class
      */
     @Override
     public String toString() {
         return "TspublicRestV2OrgUpdateRequest [" + "name=" + name + ", id=" + id + ", description="
-                + description + "]";
+                + description + ", active=" + active + "]";
     }
 
     /**
@@ -121,7 +146,8 @@ public class TspublicRestV2OrgUpdateRequest {
         Builder builder = new Builder()
                 .name(getName())
                 .id(getId())
-                .description(getDescription());
+                .description(getDescription())
+                .active(getActive());
         return builder;
     }
 
@@ -130,8 +156,9 @@ public class TspublicRestV2OrgUpdateRequest {
      */
     public static class Builder {
         private String name;
-        private String id;
+        private Integer id;
         private String description;
+        private UpdateOrgActiveEnum active;
 
 
 
@@ -147,10 +174,10 @@ public class TspublicRestV2OrgUpdateRequest {
 
         /**
          * Setter for id.
-         * @param  id  String value for id.
+         * @param  id  Integer value for id.
          * @return Builder
          */
-        public Builder id(String id) {
+        public Builder id(Integer id) {
             this.id = id;
             return this;
         }
@@ -166,11 +193,21 @@ public class TspublicRestV2OrgUpdateRequest {
         }
 
         /**
+         * Setter for active.
+         * @param  active  UpdateOrgActiveEnum value for active.
+         * @return Builder
+         */
+        public Builder active(UpdateOrgActiveEnum active) {
+            this.active = active;
+            return this;
+        }
+
+        /**
          * Builds a new {@link TspublicRestV2OrgUpdateRequest} object using the set fields.
          * @return {@link TspublicRestV2OrgUpdateRequest}
          */
         public TspublicRestV2OrgUpdateRequest build() {
-            return new TspublicRestV2OrgUpdateRequest(name, id, description);
+            return new TspublicRestV2OrgUpdateRequest(name, id, description, active);
         }
     }
 }

@@ -191,6 +191,7 @@ Permission: Requires administration privilege
 async deleteUser(
   name?: string,
   id?: string,
+  orgId?: number,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<boolean>>
 ```
@@ -201,6 +202,7 @@ async deleteUser(
 |  --- | --- | --- | --- |
 | `name` | `string \| undefined` | Query, Optional | Username of the user account |
 | `id` | `string \| undefined` | Query, Optional | The GUID of the user account |
+| `orgId` | `number \| undefined` | Query, Optional | This is applicable only if organization feature is enabled in the cluster.<br><br>Unique identifier of the organization from which the user would be deleted. If no value is provided, the organization associated with the login session is considered. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -356,8 +358,6 @@ try {
 This is endpoint is applicable only if organization feature is enabled in the cluster.
 
 To programmatically add existing ThoughtSpot users to an organization, use this API endpoint.
-
-At least one of id or name of the organization is required. When both are given, then organization id will be considered.
 
 Requires Administration access for the organization to which users need to be added.
 

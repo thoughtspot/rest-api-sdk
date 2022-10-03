@@ -9,7 +9,7 @@
 
   <groupId>io.github.thoughtspot</groupId>
   <artifactId>rest-api-sdk-lib</artifactId>
-  <version>1.13.0</version>
+  <version>1.15.0</version>
   <packaging>jar</packaging>
 
   <name>RESTAPISDKLib</name>

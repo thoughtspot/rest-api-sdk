@@ -15,8 +15,7 @@ import java.util.List;
  * This is a model class for TspublicRestV2UserAddorgRequest type.
  */
 public class TspublicRestV2UserAddorgRequest {
-    private String name;
-    private String id;
+    private Integer orgId;
     private List<UserNameAndIDInput> users;
 
     /**
@@ -28,58 +27,34 @@ public class TspublicRestV2UserAddorgRequest {
     /**
      * Initialization constructor.
      * @param  users  List of UserNameAndIDInput value for users.
-     * @param  name  String value for name.
-     * @param  id  String value for id.
+     * @param  orgId  Integer value for orgId.
      */
     public TspublicRestV2UserAddorgRequest(
             List<UserNameAndIDInput> users,
-            String name,
-            String id) {
-        this.name = name;
-        this.id = id;
+            Integer orgId) {
+        this.orgId = orgId;
         this.users = users;
     }
 
     /**
-     * Getter for Name.
-     * Name of the organization.
-     * @return Returns the String
+     * Getter for OrgId.
+     * Unique identifier of the organization.
+     * @return Returns the Integer
      */
-    @JsonGetter("name")
+    @JsonGetter("orgId")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public String getName() {
-        return name;
+    public Integer getOrgId() {
+        return orgId;
     }
 
     /**
-     * Setter for Name.
-     * Name of the organization.
-     * @param name Value for String
+     * Setter for OrgId.
+     * Unique identifier of the organization.
+     * @param orgId Value for Integer
      */
-    @JsonSetter("name")
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * Getter for Id.
-     * The ID of the organization.
-     * @return Returns the String
-     */
-    @JsonGetter("id")
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * Setter for Id.
-     * The ID of the organization.
-     * @param id Value for String
-     */
-    @JsonSetter("id")
-    public void setId(String id) {
-        this.id = id;
+    @JsonSetter("orgId")
+    public void setOrgId(Integer orgId) {
+        this.orgId = orgId;
     }
 
     /**
@@ -110,8 +85,7 @@ public class TspublicRestV2UserAddorgRequest {
      */
     @Override
     public String toString() {
-        return "TspublicRestV2UserAddorgRequest [" + "users=" + users + ", name=" + name + ", id="
-                + id + "]";
+        return "TspublicRestV2UserAddorgRequest [" + "users=" + users + ", orgId=" + orgId + "]";
     }
 
     /**
@@ -121,8 +95,7 @@ public class TspublicRestV2UserAddorgRequest {
      */
     public Builder toBuilder() {
         Builder builder = new Builder(users)
-                .name(getName())
-                .id(getId());
+                .orgId(getOrgId());
         return builder;
     }
 
@@ -131,8 +104,7 @@ public class TspublicRestV2UserAddorgRequest {
      */
     public static class Builder {
         private List<UserNameAndIDInput> users;
-        private String name;
-        private String id;
+        private Integer orgId;
 
         /**
          * Initialization constructor.
@@ -159,22 +131,12 @@ public class TspublicRestV2UserAddorgRequest {
         }
 
         /**
-         * Setter for name.
-         * @param  name  String value for name.
+         * Setter for orgId.
+         * @param  orgId  Integer value for orgId.
          * @return Builder
          */
-        public Builder name(String name) {
-            this.name = name;
-            return this;
-        }
-
-        /**
-         * Setter for id.
-         * @param  id  String value for id.
-         * @return Builder
-         */
-        public Builder id(String id) {
-            this.id = id;
+        public Builder orgId(Integer orgId) {
+            this.orgId = orgId;
             return this;
         }
 
@@ -183,7 +145,7 @@ public class TspublicRestV2UserAddorgRequest {
          * @return {@link TspublicRestV2UserAddorgRequest}
          */
         public TspublicRestV2UserAddorgRequest build() {
-            return new TspublicRestV2UserAddorgRequest(users, name, id);
+            return new TspublicRestV2UserAddorgRequest(users, orgId);
         }
     }
 }

@@ -10,7 +10,7 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `name` | `string` | Optional | Name of the organization |
-| `id` | `string` | Optional | Id of the organization |
+| `id` | `int` | Optional | Id of the organization |
 
 ## Example (as JSON)
 

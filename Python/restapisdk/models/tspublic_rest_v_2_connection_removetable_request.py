@@ -17,7 +17,9 @@ class TspublicRestV2ConnectionRemovetableRequest(object):
 
     Attributes:
         id (string): GUID of the connection
-        table (list of TableInput): TODO: type description here.
+        table (list of TableInput): A JSON array of name or GUIDs of the table
+            or both.    At least one input is required. Provide either table
+            name or id. When both are given then id is considered
 
     """
 

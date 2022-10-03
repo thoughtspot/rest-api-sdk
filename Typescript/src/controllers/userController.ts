@@ -35,7 +35,7 @@ import {
   tspublicRestV2UserUpdateRequestSchema,
 } from '../models/tspublicRestV2UserUpdateRequest';
 import { UserResponse, userResponseSchema } from '../models/userResponse';
-import { boolean, optional, string, unknown } from '../schema';
+import { boolean, number, optional, string, unknown } from '../schema';
 import { BaseController } from './baseController';
 
 export class UserController extends BaseController {
@@ -126,22 +126,28 @@ export class UserController extends BaseController {
    *
    * Permission: Requires administration privilege
    *
-   * @param name Username of the user account
-   * @param id   The GUID of the user account
+   * @param name  Username of the user account
+   * @param id    The GUID of the user account
+   * @param orgId This is applicable only if organization feature is enabled in the cluster.    Unique
+   *                        identifier of the organization from which the user would be deleted. If no value is
+   *                        provided, the organization associated with the login session is considered.
    * @return Response from the API call
    */
   async deleteUser(
     name?: string,
     id?: string,
+    orgId?: number,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<boolean>> {
     const req = this.createRequest('DELETE', '/tspublic/rest/v2/user/delete');
     const mapped = req.prepareArgs({
       name: [name, optional(string())],
       id: [id, optional(string())],
+      orgId: [orgId, optional(number())],
     });
     req.query('name', mapped.name);
     req.query('id', mapped.id);
+    req.query('orgId', mapped.orgId);
     req.throwOn(500, ErrorResponseError, 'Operation failed or unauthorized request');
     return req.callAsJson(boolean(), requestOptions);
   }
@@ -205,9 +211,6 @@ export class UserController extends BaseController {
    * This is endpoint is applicable only if organization feature is enabled in the cluster.
    *
    * To programmatically add existing ThoughtSpot users to an organization, use this API endpoint.
-   *
-   * At least one of id or name of the organization is required. When both are given, then organization
-   * id will be considered.
    *
    * Requires Administration access for the organization to which users need to be added.
    *

@@ -35,7 +35,7 @@ namespace RESTAPISDK.Standard.Models
         /// <param name="password">password.</param>
         /// <param name="visibility">visibility.</param>
         /// <param name="mail">mail.</param>
-        /// <param name="org">org.</param>
+        /// <param name="orgIds">orgIds.</param>
         /// <param name="groups">groups.</param>
         /// <param name="state">state.</param>
         /// <param name="notifyOnShare">notifyOnShare.</param>
@@ -48,7 +48,7 @@ namespace RESTAPISDK.Standard.Models
             string password,
             Models.CreateUserVisibilityEnum? visibility = Models.CreateUserVisibilityEnum.DEFAULT,
             string mail = null,
-            Models.OrgInput org = null,
+            List<int> orgIds = null,
             List<Models.GroupNameAndIDInput> groups = null,
             Models.CreateUserStateEnum? state = Models.CreateUserStateEnum.ACTIVE,
             Models.CreateUserNotifyOnShareEnum? notifyOnShare = Models.CreateUserNotifyOnShareEnum.True,
@@ -61,7 +61,7 @@ namespace RESTAPISDK.Standard.Models
             this.Visibility = visibility;
             this.Mail = mail;
             this.Password = password;
-            this.Org = org;
+            this.OrgIds = orgIds;
             this.Groups = groups;
             this.State = state;
             this.NotifyOnShare = notifyOnShare;
@@ -103,10 +103,10 @@ namespace RESTAPISDK.Standard.Models
 
         /// <summary>
         /// This is applicable only if organization feature is enabled in the cluster.
-        /// A JSON object of organization name, id or both, in which the object should be created. When both are given then id is considered. If no value is provided then object will be created in the organization associated with the login session.
+        ///  Array of org identifiers. If no value is provided, the organization associated with the login session is considered.
         /// </summary>
-        [JsonProperty("org", NullValueHandling = NullValueHandling.Ignore)]
-        public Models.OrgInput Org { get; set; }
+        [JsonProperty("orgIds", NullValueHandling = NullValueHandling.Ignore)]
+        public List<int> OrgIds { get; set; }
 
         /// <summary>
         /// A JSON array of group names or GUIDs or both. When both are given then id is considered
@@ -174,7 +174,7 @@ namespace RESTAPISDK.Standard.Models
                 ((this.Visibility == null && other.Visibility == null) || (this.Visibility?.Equals(other.Visibility) == true)) &&
                 ((this.Mail == null && other.Mail == null) || (this.Mail?.Equals(other.Mail) == true)) &&
                 ((this.Password == null && other.Password == null) || (this.Password?.Equals(other.Password) == true)) &&
-                ((this.Org == null && other.Org == null) || (this.Org?.Equals(other.Org) == true)) &&
+                ((this.OrgIds == null && other.OrgIds == null) || (this.OrgIds?.Equals(other.OrgIds) == true)) &&
                 ((this.Groups == null && other.Groups == null) || (this.Groups?.Equals(other.Groups) == true)) &&
                 ((this.State == null && other.State == null) || (this.State?.Equals(other.State) == true)) &&
                 ((this.NotifyOnShare == null && other.NotifyOnShare == null) || (this.NotifyOnShare?.Equals(other.NotifyOnShare) == true)) &&
@@ -195,7 +195,7 @@ namespace RESTAPISDK.Standard.Models
             toStringOutput.Add($"this.Visibility = {(this.Visibility == null ? "null" : this.Visibility.ToString())}");
             toStringOutput.Add($"this.Mail = {(this.Mail == null ? "null" : this.Mail == string.Empty ? "" : this.Mail)}");
             toStringOutput.Add($"this.Password = {(this.Password == null ? "null" : this.Password == string.Empty ? "" : this.Password)}");
-            toStringOutput.Add($"this.Org = {(this.Org == null ? "null" : this.Org.ToString())}");
+            toStringOutput.Add($"this.OrgIds = {(this.OrgIds == null ? "null" : $"[{string.Join(", ", this.OrgIds)} ]")}");
             toStringOutput.Add($"this.Groups = {(this.Groups == null ? "null" : $"[{string.Join(", ", this.Groups)} ]")}");
             toStringOutput.Add($"this.State = {(this.State == null ? "null" : this.State.ToString())}");
             toStringOutput.Add($"this.NotifyOnShare = {(this.NotifyOnShare == null ? "null" : this.NotifyOnShare.ToString())}");

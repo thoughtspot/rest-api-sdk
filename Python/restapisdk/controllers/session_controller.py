@@ -64,66 +64,6 @@ class SessionController(BaseController):
 
         return decoded
 
-    def login(self,
-              body):
-        """Does a POST request to /tspublic/rest/v2/session/login.
-
-        You can programmatically create login session for a user in
-        ThoughtSpot using this endpoint. 
-         You can create session by either providing userName and password as
-         inputs in this request body or by including "Authorization" header
-         with the token generated through the endpoint
-         /tspublic/rest/v2/session/getToken. 
-         userName and password input is given precedence over "Authorization"
-         header, when both are included in the request.
-
-        Args:
-            body (TspublicRestV2SessionLoginRequest): TODO: type description
-                here.
-
-        Returns:
-            SessionLoginResponse: Response from the API. Successful login and
-                token generated
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        # Validate required parameters
-        self.validate_parameters(body=body)
-
-        # Prepare query URL
-        _url_path = '/tspublic/rest/v2/session/login'
-        _query_builder = self.config.get_base_uri()
-        _query_builder += _url_path
-        _query_url = APIHelper.clean_url(_query_builder)
-
-        # Prepare headers
-        _headers = {
-            'accept': 'application/json',
-            'Content-Type': 'application/json'
-        }
-
-        # Prepare and execute request
-        _request = self.config.http_client.post(_query_url, headers=_headers, parameters=APIHelper.json_serialize(body))
-        # Apply authentication scheme on request
-        self.apply_auth_schemes(_request, 'global')
-
-        _response = self.execute_request(_request)
-
-        # Endpoint and global error handling using HTTP status codes.
-        if _response.status_code == 500:
-            raise ErrorResponseException('Operation failed or unauthorized request', _response)
-        self.validate_response(_response)
-
-        decoded = APIHelper.json_deserialize(_response.text, SessionLoginResponse.from_dictionary)
-
-        return decoded
-
     def logout(self):
         """Does a POST request to /tspublic/rest/v2/session/logout.
 
@@ -257,65 +197,6 @@ class SessionController(BaseController):
 
         # Prepare and execute request
         _request = self.config.http_client.post(_query_url, headers=_headers)
-        # Apply authentication scheme on request
-        self.apply_auth_schemes(_request, 'global')
-
-        _response = self.execute_request(_request)
-
-        # Endpoint and global error handling using HTTP status codes.
-        if _response.status_code == 500:
-            raise ErrorResponseException('Operation failed or unauthorized request', _response)
-        self.validate_response(_response)
-
-        decoded = _response.text == 'true'
-
-        return decoded
-
-    def switch_org(self,
-                   body):
-        """Does a PUT request to /tspublic/rest/v2/session/org.
-
-        This is endpoint is applicable only if organization feature is enabled
-        in the cluster. 
-         To programmatically switch the organization context for the logged in
-         session, use this endpoint. 
-         The original session is reused even after changing the organization.
-                  The logged in user should have access to the organization being
-         switched to. 
-         This endpoint can be used to switch organization only when using
-         session cookies for authentication.
-
-        Args:
-            body (TspublicRestV2SessionOrgRequest): TODO: type description
-                here.
-
-        Returns:
-            bool: Response from the API. Organization set successfully
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        # Validate required parameters
-        self.validate_parameters(body=body)
-
-        # Prepare query URL
-        _url_path = '/tspublic/rest/v2/session/org'
-        _query_builder = self.config.get_base_uri()
-        _query_builder += _url_path
-        _query_url = APIHelper.clean_url(_query_builder)
-
-        # Prepare headers
-        _headers = {
-            'Content-Type': 'application/json'
-        }
-
-        # Prepare and execute request
-        _request = self.config.http_client.put(_query_url, headers=_headers, parameters=APIHelper.json_serialize(body))
         # Apply authentication scheme on request
         self.apply_auth_schemes(_request, 'global')
 

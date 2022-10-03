@@ -20,7 +20,7 @@ public class TspublicRestV2UserCreateRequest {
     private CreateUserVisibilityEnum visibility;
     private String mail;
     private String password;
-    private OrgInput org;
+    private List<Integer> orgIds;
     private List<GroupNameAndIDInput> groups;
     private CreateUserStateEnum state;
     private CreateUserNotifyOnShareEnum notifyOnShare;
@@ -47,7 +47,7 @@ public class TspublicRestV2UserCreateRequest {
      * @param  password  String value for password.
      * @param  visibility  CreateUserVisibilityEnum value for visibility.
      * @param  mail  String value for mail.
-     * @param  org  OrgInput value for org.
+     * @param  orgIds  List of Integer value for orgIds.
      * @param  groups  List of GroupNameAndIDInput value for groups.
      * @param  state  CreateUserStateEnum value for state.
      * @param  notifyOnShare  CreateUserNotifyOnShareEnum value for notifyOnShare.
@@ -62,7 +62,7 @@ public class TspublicRestV2UserCreateRequest {
             String password,
             CreateUserVisibilityEnum visibility,
             String mail,
-            OrgInput org,
+            List<Integer> orgIds,
             List<GroupNameAndIDInput> groups,
             CreateUserStateEnum state,
             CreateUserNotifyOnShareEnum notifyOnShare,
@@ -74,7 +74,7 @@ public class TspublicRestV2UserCreateRequest {
         this.visibility = visibility;
         this.mail = mail;
         this.password = password;
-        this.org = org;
+        this.orgIds = orgIds;
         this.groups = groups;
         this.state = state;
         this.notifyOnShare = notifyOnShare;
@@ -190,30 +190,28 @@ public class TspublicRestV2UserCreateRequest {
     }
 
     /**
-     * Getter for Org.
-     * This is applicable only if organization feature is enabled in the cluster. A JSON object of
-     * organization name, id or both, in which the object should be created. When both are given
-     * then id is considered. If no value is provided then object will be created in the
-     * organization associated with the login session.
-     * @return Returns the OrgInput
+     * Getter for OrgIds.
+     * This is applicable only if organization feature is enabled in the cluster. Array of org
+     * identifiers. If no value is provided, the organization associated with the login session is
+     * considered.
+     * @return Returns the List of Integer
      */
-    @JsonGetter("org")
+    @JsonGetter("orgIds")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public OrgInput getOrg() {
-        return org;
+    public List<Integer> getOrgIds() {
+        return orgIds;
     }
 
     /**
-     * Setter for Org.
-     * This is applicable only if organization feature is enabled in the cluster. A JSON object of
-     * organization name, id or both, in which the object should be created. When both are given
-     * then id is considered. If no value is provided then object will be created in the
-     * organization associated with the login session.
-     * @param org Value for OrgInput
+     * Setter for OrgIds.
+     * This is applicable only if organization feature is enabled in the cluster. Array of org
+     * identifiers. If no value is provided, the organization associated with the login session is
+     * considered.
+     * @param orgIds Value for List of Integer
      */
-    @JsonSetter("org")
-    public void setOrg(OrgInput org) {
-        this.org = org;
+    @JsonSetter("orgIds")
+    public void setOrgIds(List<Integer> orgIds) {
+        this.orgIds = orgIds;
     }
 
     /**
@@ -360,9 +358,10 @@ public class TspublicRestV2UserCreateRequest {
     public String toString() {
         return "TspublicRestV2UserCreateRequest [" + "name=" + name + ", displayName=" + displayName
                 + ", password=" + password + ", visibility=" + visibility + ", mail=" + mail
-                + ", org=" + org + ", groups=" + groups + ", state=" + state + ", notifyOnShare="
-                + notifyOnShare + ", showWalkMe=" + showWalkMe + ", analystOnboardingComplete="
-                + analystOnboardingComplete + ", type=" + type + "]";
+                + ", orgIds=" + orgIds + ", groups=" + groups + ", state=" + state
+                + ", notifyOnShare=" + notifyOnShare + ", showWalkMe=" + showWalkMe
+                + ", analystOnboardingComplete=" + analystOnboardingComplete + ", type=" + type
+                + "]";
     }
 
     /**
@@ -374,7 +373,7 @@ public class TspublicRestV2UserCreateRequest {
         Builder builder = new Builder(name, displayName, password)
                 .visibility(getVisibility())
                 .mail(getMail())
-                .org(getOrg())
+                .orgIds(getOrgIds())
                 .groups(getGroups())
                 .state(getState())
                 .notifyOnShare(getNotifyOnShare())
@@ -393,7 +392,7 @@ public class TspublicRestV2UserCreateRequest {
         private String password;
         private CreateUserVisibilityEnum visibility = CreateUserVisibilityEnum.DEFAULT;
         private String mail;
-        private OrgInput org;
+        private List<Integer> orgIds;
         private List<GroupNameAndIDInput> groups;
         private CreateUserStateEnum state = CreateUserStateEnum.ACTIVE;
         private CreateUserNotifyOnShareEnum notifyOnShare = CreateUserNotifyOnShareEnum.ENUM_TRUE;
@@ -471,12 +470,12 @@ public class TspublicRestV2UserCreateRequest {
         }
 
         /**
-         * Setter for org.
-         * @param  org  OrgInput value for org.
+         * Setter for orgIds.
+         * @param  orgIds  List of Integer value for orgIds.
          * @return Builder
          */
-        public Builder org(OrgInput org) {
-            this.org = org;
+        public Builder orgIds(List<Integer> orgIds) {
+            this.orgIds = orgIds;
             return this;
         }
 
@@ -548,8 +547,8 @@ public class TspublicRestV2UserCreateRequest {
          */
         public TspublicRestV2UserCreateRequest build() {
             return new TspublicRestV2UserCreateRequest(name, displayName, password, visibility,
-                    mail, org, groups, state, notifyOnShare, showWalkMe, analystOnboardingComplete,
-                    type);
+                    mail, orgIds, groups, state, notifyOnShare, showWalkMe,
+                    analystOnboardingComplete, type);
         }
     }
 }

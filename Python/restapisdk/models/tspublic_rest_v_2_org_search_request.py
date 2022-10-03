@@ -17,7 +17,7 @@ class TspublicRestV2OrgSearchRequest(object):
 
     Attributes:
         name (string): Name of the organization.
-        id (string): The ID of the organization.
+        id (int): The ID of the organization.
         show_deleted (SearchOrgsShowDeletedEnum): When set to true, the
             response will include the details of deleted organization also.
 

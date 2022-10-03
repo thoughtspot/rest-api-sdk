@@ -152,7 +152,7 @@ Permission: Requires administration privilege
 def delete_user(self,
                name=None,
                id=None,
-               org=None)
+               org_id=None)
 ```
 
 ## Parameters
@@ -161,7 +161,7 @@ def delete_user(self,
 |  --- | --- | --- | --- |
 | `name` | `string` | Query, Optional | Username of the user account |
 | `id` | `string` | Query, Optional | The GUID of the user account |
-| `org` | [`OrgInput`](../../doc/models/org-input.md) | Query, Optional | This is applicable only if organization feature is enabled in the cluster.<br><br>A JSON object of organization name, id or both, from which the user should be deleted. When both are given then id is considered. If no value is provided then the organization associated with the login session will be considered. |
+| `org_id` | `int` | Query, Optional | This is applicable only if organization feature is enabled in the cluster.<br><br>Unique identifier of the organization from which the user would be deleted. If no value is provided, the organization associated with the login session is considered. |
 
 ## Response Type
 
@@ -273,8 +273,6 @@ result = user_controller.remove_user_from_groups(body)
 This is endpoint is applicable only if organization feature is enabled in the cluster.
 
 To programmatically add existing ThoughtSpot users to an organization, use this API endpoint.
-
-At least one of id or name of the organization is required. When both are given, then organization id will be considered.
 
 Requires Administration access for the organization to which users need to be added.
 

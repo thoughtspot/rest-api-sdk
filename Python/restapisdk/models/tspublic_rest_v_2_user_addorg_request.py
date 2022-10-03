@@ -17,8 +17,7 @@ class TspublicRestV2UserAddorgRequest(object):
     TODO: type model description here.
 
     Attributes:
-        name (string): Name of the organization.
-        id (string): The ID of the organization.
+        org_id (int): Unique identifier of the organization.
         users (list of UserNameAndIDInput): Array of objects. A JSON array of
             name of users or GUIDs of users or both. When both are given then
             id is considered
@@ -28,26 +27,21 @@ class TspublicRestV2UserAddorgRequest(object):
     # Create a mapping from Model property names to API property names
     _names = {
         "users": 'users',
-        "name": 'name',
-        "id": 'id'
+        "org_id": 'orgId'
     }
 
     _optionals = [
-        'name',
-        'id',
+        'org_id',
     ]
 
     def __init__(self,
                  users=None,
-                 name=APIHelper.SKIP,
-                 id=APIHelper.SKIP):
+                 org_id=APIHelper.SKIP):
         """Constructor for the TspublicRestV2UserAddorgRequest class"""
 
         # Initialize members of the class
-        if name is not APIHelper.SKIP:
-            self.name = name 
-        if id is not APIHelper.SKIP:
-            self.id = id 
+        if org_id is not APIHelper.SKIP:
+            self.org_id = org_id 
         self.users = users 
 
     @classmethod
@@ -72,9 +66,7 @@ class TspublicRestV2UserAddorgRequest(object):
         users = None
         if dictionary.get('users') is not None:
             users = [UserNameAndIDInput.from_dictionary(x) for x in dictionary.get('users')]
-        name = dictionary.get("name") if dictionary.get("name") else APIHelper.SKIP
-        id = dictionary.get("id") if dictionary.get("id") else APIHelper.SKIP
+        org_id = dictionary.get("orgId") if dictionary.get("orgId") else APIHelper.SKIP
         # Return an object of this model
         return cls(users,
-                   name,
-                   id)
+                   org_id)

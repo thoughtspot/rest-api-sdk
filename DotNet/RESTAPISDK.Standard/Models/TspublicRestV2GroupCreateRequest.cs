@@ -35,7 +35,7 @@ namespace RESTAPISDK.Standard.Models
         /// <param name="visibility">visibility.</param>
         /// <param name="description">description.</param>
         /// <param name="privileges">privileges.</param>
-        /// <param name="org">org.</param>
+        /// <param name="orgId">orgId.</param>
         /// <param name="groups">groups.</param>
         /// <param name="users">users.</param>
         /// <param name="type">type.</param>
@@ -45,7 +45,7 @@ namespace RESTAPISDK.Standard.Models
             Models.CreateGroupVisibilityEnum? visibility = Models.CreateGroupVisibilityEnum.DEFAULT,
             string description = null,
             List<Models.CreateGroupPrivilegesEnum> privileges = null,
-            Models.OrgInput org = null,
+            int? orgId = null,
             List<Models.GroupNameAndIDInput> groups = null,
             List<Models.UserNameAndIDInput> users = null,
             Models.CreateGroupTypeEnum? type = Models.CreateGroupTypeEnum.LOCALGROUP)
@@ -55,7 +55,7 @@ namespace RESTAPISDK.Standard.Models
             this.Visibility = visibility;
             this.Description = description;
             this.Privileges = privileges;
-            this.Org = org;
+            this.OrgId = orgId;
             this.Groups = groups;
             this.Users = users;
             this.Type = type;
@@ -94,10 +94,10 @@ namespace RESTAPISDK.Standard.Models
 
         /// <summary>
         /// This is applicable only if organization feature is enabled in the cluster.
-        /// A JSON object of organization name, id or both, in which the object should be created. When both are given then id is considered. If no value is provided then object will be created in the organization associated with the login session.
+        ///  Unique identifier of the organization. If no value is provided, the organization associated with the login session is considered.
         /// </summary>
-        [JsonProperty("org", NullValueHandling = NullValueHandling.Ignore)]
-        public Models.OrgInput Org { get; set; }
+        [JsonProperty("orgId", NullValueHandling = NullValueHandling.Ignore)]
+        public int? OrgId { get; set; }
 
         /// <summary>
         /// A JSON array of group names or GUIDs or both. When both are given then id is considered
@@ -146,7 +146,7 @@ namespace RESTAPISDK.Standard.Models
                 ((this.Visibility == null && other.Visibility == null) || (this.Visibility?.Equals(other.Visibility) == true)) &&
                 ((this.Description == null && other.Description == null) || (this.Description?.Equals(other.Description) == true)) &&
                 ((this.Privileges == null && other.Privileges == null) || (this.Privileges?.Equals(other.Privileges) == true)) &&
-                ((this.Org == null && other.Org == null) || (this.Org?.Equals(other.Org) == true)) &&
+                ((this.OrgId == null && other.OrgId == null) || (this.OrgId?.Equals(other.OrgId) == true)) &&
                 ((this.Groups == null && other.Groups == null) || (this.Groups?.Equals(other.Groups) == true)) &&
                 ((this.Users == null && other.Users == null) || (this.Users?.Equals(other.Users) == true)) &&
                 ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true));
@@ -164,7 +164,7 @@ namespace RESTAPISDK.Standard.Models
             toStringOutput.Add($"this.Visibility = {(this.Visibility == null ? "null" : this.Visibility.ToString())}");
             toStringOutput.Add($"this.Description = {(this.Description == null ? "null" : this.Description == string.Empty ? "" : this.Description)}");
             toStringOutput.Add($"this.Privileges = {(this.Privileges == null ? "null" : $"[{string.Join(", ", this.Privileges)} ]")}");
-            toStringOutput.Add($"this.Org = {(this.Org == null ? "null" : this.Org.ToString())}");
+            toStringOutput.Add($"this.OrgId = {(this.OrgId == null ? "null" : this.OrgId.ToString())}");
             toStringOutput.Add($"this.Groups = {(this.Groups == null ? "null" : $"[{string.Join(", ", this.Groups)} ]")}");
             toStringOutput.Add($"this.Users = {(this.Users == null ? "null" : $"[{string.Join(", ", this.Users)} ]")}");
             toStringOutput.Add($"this.Type = {(this.Type == null ? "null" : this.Type.ToString())}");

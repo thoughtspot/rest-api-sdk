@@ -11,15 +11,15 @@ import java.util.List;
 import java.util.TreeMap;
 
 /**
- * LoginRememberMeEnum to be used.
+ * UpdateOrgActiveEnum to be used.
  */
-public enum LoginRememberMeEnum {
+public enum UpdateOrgActiveEnum {
     ENUM_TRUE,
 
     ENUM_FALSE;
 
 
-    private static TreeMap<String, LoginRememberMeEnum> valueMap = new TreeMap<>();
+    private static TreeMap<String, UpdateOrgActiveEnum> valueMap = new TreeMap<>();
     private String value;
 
     static {
@@ -36,7 +36,7 @@ public enum LoginRememberMeEnum {
      * @return The enum member against the given string value.
      */
     @com.fasterxml.jackson.annotation.JsonCreator
-    public static LoginRememberMeEnum fromString(String toConvert) {
+    public static UpdateOrgActiveEnum fromString(String toConvert) {
         return valueMap.get(toConvert);
     }
 
@@ -58,16 +58,16 @@ public enum LoginRememberMeEnum {
     }
 
     /**
-     * Convert list of LoginRememberMeEnum values to list of string values.
-     * @param toConvert The list of LoginRememberMeEnum values to convert.
+     * Convert list of UpdateOrgActiveEnum values to list of string values.
+     * @param toConvert The list of UpdateOrgActiveEnum values to convert.
      * @return List of representative string values.
      */
-    public static List<String> toValue(List<LoginRememberMeEnum> toConvert) {
+    public static List<String> toValue(List<UpdateOrgActiveEnum> toConvert) {
         if (toConvert == null) {
             return null;
         }
         List<String> convertedValues = new ArrayList<>();
-        for (LoginRememberMeEnum enumValue : toConvert) {
+        for (UpdateOrgActiveEnum enumValue : toConvert) {
             convertedValues.add(enumValue.value);
         }
         return convertedValues;

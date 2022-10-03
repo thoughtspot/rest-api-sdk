@@ -1,4 +1,4 @@
-// <copyright file="LoginRememberMeEnum.cs" company="APIMatic">
+// <copyright file="UpdateOrgActiveEnum.cs" company="APIMatic">
 // Copyright (c) APIMatic. All rights reserved.
 // </copyright>
 namespace RESTAPISDK.Standard.Models
@@ -13,10 +13,10 @@ namespace RESTAPISDK.Standard.Models
     using RESTAPISDK.Standard.Utilities;
 
     /// <summary>
-    /// LoginRememberMeEnum.
+    /// UpdateOrgActiveEnum.
     /// </summary>
     [JsonConverter(typeof(StringEnumConverter))]
-    public enum LoginRememberMeEnum
+    public enum UpdateOrgActiveEnum
     {
         /// <summary>
         /// True.

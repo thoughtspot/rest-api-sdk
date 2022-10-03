@@ -30,7 +30,7 @@ Requires Administration privilege for tenant.
 ```csharp
 GetOrgAsync(
     string name = null,
-    string id = null)
+    int? id = null)
 ```
 
 ## Parameters
@@ -38,7 +38,7 @@ GetOrgAsync(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `name` | `string` | Query, Optional | Name of the organization. |
-| `id` | `string` | Query, Optional | The ID of the organization. |
+| `id` | `int?` | Query, Optional | The ID of the organization. |
 
 ## Response Type
 
@@ -159,7 +159,7 @@ Requires Administration privilege for tenant.
 ```csharp
 DeleteOrgAsync(
     string name = null,
-    string id = null)
+    int? id = null)
 ```
 
 ## Parameters
@@ -167,7 +167,7 @@ DeleteOrgAsync(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `name` | `string` | Query, Optional | Name of the organization. |
-| `id` | `string` | Query, Optional | The ID of the organization. |
+| `id` | `int?` | Query, Optional | The ID of the organization. |
 
 ## Response Type
 

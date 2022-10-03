@@ -38,7 +38,7 @@ def get_org(self,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `name` | `string` | Query, Optional | Name of the organization. |
-| `id` | `string` | Query, Optional | The ID of the organization. |
+| `id` | `int` | Query, Optional | The ID of the organization. |
 
 ## Response Type
 
@@ -155,7 +155,7 @@ def delete_org(self,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `name` | `string` | Query, Optional | Name of the organization. |
-| `id` | `string` | Query, Optional | The ID of the organization. |
+| `id` | `int` | Query, Optional | The ID of the organization. |
 
 ## Response Type
 

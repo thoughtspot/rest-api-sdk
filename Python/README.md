@@ -7,11 +7,22 @@ The package is compatible with Python versions `3 >=3.7, <= 3.9`.
 Install the package from PyPi using the following pip command:
 
 ```python
-pip install thoughtspot-rest-api-sdk==1.13.0
+pip install thoughtspot-rest-api-sdk==1.15.0
 ```
 
 You can also view the package at:
 https://pypi.python.org/pypi/thoughtspot-rest-api-sdk
+
+## Test the SDK
+
+You can test the generated SDK and the server with test cases. `unittest` is used as the testing framework and `nose` is used as the test runner. You can run the tests as follows:
+
+Navigate to the root directory of the SDK and run the following commands
+
+```
+pip install -r test-requirements.txt
+nosetests
+```
 
 ## Initialize the API Client
 
@@ -21,7 +32,7 @@ The following parameters are configurable for the API Client:
 
 | Parameter | Type | Description |
 |  --- | --- | --- |
-| `accept_language` | `string` | response format<br>*Default*: `'application/json'` |
+| `accept_language` | `string` | response format<br>*Default*: `'*'` |
 | `content_type` | `string` | body content type for post request<br>*Default*: `'application/json'` |
 | `base_url` | `string` | *Default*: `'https://localhost:443'` |
 | `environment` | Environment | The API environment. <br> **Default: `Environment.PRODUCTION`** |
@@ -43,7 +54,7 @@ from restapisdk.restapisdk_client import RestapisdkClient
 from restapisdk.configuration import Environment
 
 client = RestapisdkClient(
-    accept_language='application/json',
+    accept_language='*',
     content_type='application/json',
     access_token='AccessToken',
     environment=Environment.PRODUCTION,
@@ -54,7 +65,26 @@ client = RestapisdkClient(
 
 This API uses `OAuth 2 Bearer token`.
 
-## Guide
-[API Reference](https://github.com/thoughtspot/rest-api-sdk/blob/1.13.0/Typescript/doc/README.md)
-## Live Playground
-We recommend that you browse through the [code playground](https://try-everywhere.thoughtspot.cloud/v2/#/everywhere/api/rest/playgroundV2) before you start constructing your API requests. The playground offers an interactive portal with comprehensive information about the API endpoints, request and response workflows.
+## List of APIs
+
+* [Session](doc/controllers/session.md)
+* [User](doc/controllers/user.md)
+* [Group](doc/controllers/group.md)
+* [Org](doc/controllers/org.md)
+* [Metadata](doc/controllers/metadata.md)
+* [Database](doc/controllers/database.md)
+* [Connection](doc/controllers/connection.md)
+* [Data](doc/controllers/data.md)
+* [Report](doc/controllers/report.md)
+* [Admin](doc/controllers/admin.md)
+* [Security](doc/controllers/security.md)
+* [Logs](doc/controllers/logs.md)
+* [Materialization](doc/controllers/materialization.md)
+* [Custom Actions](doc/controllers/custom-actions.md)
+
+## Classes Documentation
+
+* [Utility Classes](doc/utility-classes.md)
+* [HttpResponse](doc/http-response.md)
+* [HttpRequest](doc/http-request.md)
+

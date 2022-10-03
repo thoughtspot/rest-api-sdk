@@ -30,7 +30,7 @@ Requires Administration privilege for tenant.
 ```java
 CompletableFuture<OrgsResponse> getOrgAsync(
     final String name,
-    final String id)
+    final Integer id)
 ```
 
 ## Parameters
@@ -38,7 +38,7 @@ CompletableFuture<OrgsResponse> getOrgAsync(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `name` | `String` | Query, Optional | Name of the organization. |
-| `id` | `String` | Query, Optional | The ID of the organization. |
+| `id` | `Integer` | Query, Optional | The ID of the organization. |
 
 ## Response Type
 
@@ -162,7 +162,7 @@ Requires Administration privilege for tenant.
 ```java
 CompletableFuture<Boolean> deleteOrgAsync(
     final String name,
-    final String id)
+    final Integer id)
 ```
 
 ## Parameters
@@ -170,7 +170,7 @@ CompletableFuture<Boolean> deleteOrgAsync(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `name` | `String` | Query, Optional | Name of the organization. |
-| `id` | `String` | Query, Optional | The ID of the organization. |
+| `id` | `Integer` | Query, Optional | The ID of the organization. |
 
 ## Response Type
 

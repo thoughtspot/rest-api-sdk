@@ -35,28 +35,28 @@ namespace RESTAPISDK.Standard.Models
         /// <param name="description">description.</param>
         /// <param name="allGroupUserId">allGroupUserId.</param>
         /// <param name="defaultAdminUserGroupId">defaultAdminUserGroupId.</param>
-        /// <param name="enabled">enabled.</param>
+        /// <param name="active">active.</param>
         public OrgsResponse(
-            string orgId = null,
+            int? orgId = null,
             string orgName = null,
             string description = null,
             string allGroupUserId = null,
             string defaultAdminUserGroupId = null,
-            bool? enabled = null)
+            bool? active = null)
         {
             this.OrgId = orgId;
             this.OrgName = orgName;
             this.Description = description;
             this.AllGroupUserId = allGroupUserId;
             this.DefaultAdminUserGroupId = defaultAdminUserGroupId;
-            this.Enabled = enabled;
+            this.Active = active;
         }
 
         /// <summary>
         /// ID of the organization searched for
         /// </summary>
         [JsonProperty("orgId", NullValueHandling = NullValueHandling.Ignore)]
-        public string OrgId { get; set; }
+        public int? OrgId { get; set; }
 
         /// <summary>
         /// Name of the organization searched for
@@ -83,10 +83,10 @@ namespace RESTAPISDK.Standard.Models
         public string DefaultAdminUserGroupId { get; set; }
 
         /// <summary>
-        /// Indicates if the organization is enabled or not
+        /// Indicates if the organization is active or not
         /// </summary>
-        [JsonProperty("enabled", NullValueHandling = NullValueHandling.Ignore)]
-        public bool? Enabled { get; set; }
+        [JsonProperty("active", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? Active { get; set; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -117,7 +117,7 @@ namespace RESTAPISDK.Standard.Models
                 ((this.Description == null && other.Description == null) || (this.Description?.Equals(other.Description) == true)) &&
                 ((this.AllGroupUserId == null && other.AllGroupUserId == null) || (this.AllGroupUserId?.Equals(other.AllGroupUserId) == true)) &&
                 ((this.DefaultAdminUserGroupId == null && other.DefaultAdminUserGroupId == null) || (this.DefaultAdminUserGroupId?.Equals(other.DefaultAdminUserGroupId) == true)) &&
-                ((this.Enabled == null && other.Enabled == null) || (this.Enabled?.Equals(other.Enabled) == true));
+                ((this.Active == null && other.Active == null) || (this.Active?.Equals(other.Active) == true));
         }
         
 
@@ -127,12 +127,12 @@ namespace RESTAPISDK.Standard.Models
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.OrgId = {(this.OrgId == null ? "null" : this.OrgId == string.Empty ? "" : this.OrgId)}");
+            toStringOutput.Add($"this.OrgId = {(this.OrgId == null ? "null" : this.OrgId.ToString())}");
             toStringOutput.Add($"this.OrgName = {(this.OrgName == null ? "null" : this.OrgName == string.Empty ? "" : this.OrgName)}");
             toStringOutput.Add($"this.Description = {(this.Description == null ? "null" : this.Description == string.Empty ? "" : this.Description)}");
             toStringOutput.Add($"this.AllGroupUserId = {(this.AllGroupUserId == null ? "null" : this.AllGroupUserId == string.Empty ? "" : this.AllGroupUserId)}");
             toStringOutput.Add($"this.DefaultAdminUserGroupId = {(this.DefaultAdminUserGroupId == null ? "null" : this.DefaultAdminUserGroupId == string.Empty ? "" : this.DefaultAdminUserGroupId)}");
-            toStringOutput.Add($"this.Enabled = {(this.Enabled == null ? "null" : this.Enabled.ToString())}");
+            toStringOutput.Add($"this.Active = {(this.Active == null ? "null" : this.Active.ToString())}");
         }
     }
 }

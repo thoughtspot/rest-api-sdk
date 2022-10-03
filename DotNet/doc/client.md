@@ -5,7 +5,7 @@ The following parameters are configurable for the API Client:
 
 | Parameter | Type | Description |
 |  --- | --- | --- |
-| `AcceptLanguage` | `string` | response format<br>*Default*: `"application/json"` |
+| `AcceptLanguage` | `string` | response format<br>*Default*: `"*"` |
 | `ContentType` | `string` | body content type for post request<br>*Default*: `"application/json"` |
 | `BaseUrl` | `string` | *Default*: `"https://localhost:443"` |
 | `Environment` | Environment | The API environment. <br> **Default: `Environment.Production`** |
@@ -17,8 +17,8 @@ The API client can be initialized as follows:
 ```csharp
 RESTAPISDK.Standard.RESTAPISDKClient client = new RESTAPISDK.Standard.RESTAPISDKClient.Builder()
     .AccessToken("AccessToken")
-    .AcceptLanguage(GetEnvironmentVariable("application/json"))
-    .ContentType(GetEnvironmentVariable("application/json"))
+    .AcceptLanguage("*")
+    .ContentType("application/json")
     .Environment(RESTAPISDK.Standard.Environment.Production)
     .BaseUrl("https://localhost:443")
     .HttpClientConfig(config => config.NumberOfRetries(0))

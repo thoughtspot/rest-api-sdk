@@ -91,8 +91,7 @@ class Configuration(object):
         timeout=60, max_retries=0, backoff_factor=2,
         retry_statuses=[408, 413, 429, 500, 502, 503, 504, 521, 522, 524, 408, 413, 429, 500, 502, 503, 504, 521, 522, 524],
         retry_methods=['GET', 'PUT', 'GET', 'PUT'], environment=Environment.PRODUCTION, base_url='https://localhost:443',
-        access_token='', accept_language='application/json', content_type='application/json',
-        skip_ssl_cert_verification=False
+        access_token='', accept_language='*', content_type='application/json', skip_ssl_cert_verification=False
     ):
         # The Http Client passed from the sdk user for making requests
         self._http_client_instance = http_client_instance

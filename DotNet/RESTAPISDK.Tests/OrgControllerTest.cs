@@ -53,7 +53,7 @@ namespace RESTAPISDK.Tests
         {
             // Parameters for the API call
             string name = null;
-            string id = null;
+            int? id = null;
 
             // Perform API call
             Standard.Models.OrgsResponse result = null;
@@ -94,7 +94,7 @@ namespace RESTAPISDK.Tests
         {
             // Parameters for the API call
             string name = null;
-            string id = null;
+            int? id = null;
 
             // Perform API call
             bool result = false;

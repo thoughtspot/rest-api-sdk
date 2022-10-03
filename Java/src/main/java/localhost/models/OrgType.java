@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonSetter;
  */
 public class OrgType {
     private String name;
-    private String id;
+    private Integer id;
 
     /**
      * Default constructor.
@@ -26,11 +26,11 @@ public class OrgType {
     /**
      * Initialization constructor.
      * @param  name  String value for name.
-     * @param  id  String value for id.
+     * @param  id  Integer value for id.
      */
     public OrgType(
             String name,
-            String id) {
+            Integer id) {
         this.name = name;
         this.id = id;
     }
@@ -59,21 +59,21 @@ public class OrgType {
     /**
      * Getter for Id.
      * Id of the organization
-     * @return Returns the String
+     * @return Returns the Integer
      */
     @JsonGetter("id")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
     /**
      * Setter for Id.
      * Id of the organization
-     * @param id Value for String
+     * @param id Value for Integer
      */
     @JsonSetter("id")
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -103,7 +103,7 @@ public class OrgType {
      */
     public static class Builder {
         private String name;
-        private String id;
+        private Integer id;
 
 
 
@@ -119,10 +119,10 @@ public class OrgType {
 
         /**
          * Setter for id.
-         * @param  id  String value for id.
+         * @param  id  Integer value for id.
          * @return Builder
          */
-        public Builder id(String id) {
+        public Builder id(Integer id) {
             this.id = id;
             return this;
         }

@@ -9,16 +9,14 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `name` | `string \| undefined` | Optional | Name of the organization. |
-| `id` | `string \| undefined` | Optional | The ID of the organization. |
+| `orgId` | `number \| undefined` | Optional | Unique identifier of the organization. |
 | `users` | [`UserNameAndIDInput[]`](../../doc/models/user-name-and-id-input.md) | Required | Array of objects. A JSON array of name of users or GUIDs of users or both. When both are given then id is considered |
 
 ## Example (as JSON)
 
 ```json
 {
-  "name": null,
-  "id": null,
+  "orgId": null,
   "users": [
     {
       "name": null,

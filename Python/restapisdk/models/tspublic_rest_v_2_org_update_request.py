@@ -17,8 +17,9 @@ class TspublicRestV2OrgUpdateRequest(object):
 
     Attributes:
         name (string): Name of the organization.
-        id (string): The ID of the organization.
+        id (int): The ID of the organization.
         description (string): Description text for the organization.
+        active (UpdateOrgActiveEnum): Status of the organization.
 
     """
 
@@ -26,19 +27,22 @@ class TspublicRestV2OrgUpdateRequest(object):
     _names = {
         "name": 'name',
         "id": 'id',
-        "description": 'description'
+        "description": 'description',
+        "active": 'active'
     }
 
     _optionals = [
         'name',
         'id',
         'description',
+        'active',
     ]
 
     def __init__(self,
                  name=APIHelper.SKIP,
                  id=APIHelper.SKIP,
-                 description=APIHelper.SKIP):
+                 description=APIHelper.SKIP,
+                 active=APIHelper.SKIP):
         """Constructor for the TspublicRestV2OrgUpdateRequest class"""
 
         # Initialize members of the class
@@ -48,6 +52,8 @@ class TspublicRestV2OrgUpdateRequest(object):
             self.id = id 
         if description is not APIHelper.SKIP:
             self.description = description 
+        if active is not APIHelper.SKIP:
+            self.active = active 
 
     @classmethod
     def from_dictionary(cls,
@@ -71,7 +77,9 @@ class TspublicRestV2OrgUpdateRequest(object):
         name = dictionary.get("name") if dictionary.get("name") else APIHelper.SKIP
         id = dictionary.get("id") if dictionary.get("id") else APIHelper.SKIP
         description = dictionary.get("description") if dictionary.get("description") else APIHelper.SKIP
+        active = dictionary.get("active") if dictionary.get("active") else APIHelper.SKIP
         # Return an object of this model
         return cls(name,
                    id,
-                   description)
+                   description,
+                   active)

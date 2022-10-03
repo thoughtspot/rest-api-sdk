@@ -30,7 +30,7 @@ Requires Administration privilege for tenant.
 ```ts
 async getOrg(
   name?: string,
-  id?: string,
+  id?: number,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<OrgsResponse>>
 ```
@@ -40,7 +40,7 @@ async getOrg(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `name` | `string \| undefined` | Query, Optional | Name of the organization. |
-| `id` | `string \| undefined` | Query, Optional | The ID of the organization. |
+| `id` | `number \| undefined` | Query, Optional | The ID of the organization. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -186,7 +186,7 @@ Requires Administration privilege for tenant.
 ```ts
 async deleteOrg(
   name?: string,
-  id?: string,
+  id?: number,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<boolean>>
 ```
@@ -196,7 +196,7 @@ async deleteOrg(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `name` | `string \| undefined` | Query, Optional | Name of the organization. |
-| `id` | `string \| undefined` | Query, Optional | The ID of the organization. |
+| `id` | `number \| undefined` | Query, Optional | The ID of the organization. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type

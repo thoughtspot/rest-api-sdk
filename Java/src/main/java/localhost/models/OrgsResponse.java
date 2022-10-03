@@ -14,12 +14,12 @@ import com.fasterxml.jackson.annotation.JsonSetter;
  * This is a model class for OrgsResponse type.
  */
 public class OrgsResponse {
-    private String orgId;
+    private Integer orgId;
     private String orgName;
     private String description;
     private String allGroupUserId;
     private String defaultAdminUserGroupId;
-    private Boolean enabled;
+    private Boolean active;
 
     /**
      * Default constructor.
@@ -29,46 +29,46 @@ public class OrgsResponse {
 
     /**
      * Initialization constructor.
-     * @param  orgId  String value for orgId.
+     * @param  orgId  Integer value for orgId.
      * @param  orgName  String value for orgName.
      * @param  description  String value for description.
      * @param  allGroupUserId  String value for allGroupUserId.
      * @param  defaultAdminUserGroupId  String value for defaultAdminUserGroupId.
-     * @param  enabled  Boolean value for enabled.
+     * @param  active  Boolean value for active.
      */
     public OrgsResponse(
-            String orgId,
+            Integer orgId,
             String orgName,
             String description,
             String allGroupUserId,
             String defaultAdminUserGroupId,
-            Boolean enabled) {
+            Boolean active) {
         this.orgId = orgId;
         this.orgName = orgName;
         this.description = description;
         this.allGroupUserId = allGroupUserId;
         this.defaultAdminUserGroupId = defaultAdminUserGroupId;
-        this.enabled = enabled;
+        this.active = active;
     }
 
     /**
      * Getter for OrgId.
      * ID of the organization searched for
-     * @return Returns the String
+     * @return Returns the Integer
      */
     @JsonGetter("orgId")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public String getOrgId() {
+    public Integer getOrgId() {
         return orgId;
     }
 
     /**
      * Setter for OrgId.
      * ID of the organization searched for
-     * @param orgId Value for String
+     * @param orgId Value for Integer
      */
     @JsonSetter("orgId")
-    public void setOrgId(String orgId) {
+    public void setOrgId(Integer orgId) {
         this.orgId = orgId;
     }
 
@@ -157,24 +157,24 @@ public class OrgsResponse {
     }
 
     /**
-     * Getter for Enabled.
-     * Indicates if the organization is enabled or not
+     * Getter for Active.
+     * Indicates if the organization is active or not
      * @return Returns the Boolean
      */
-    @JsonGetter("enabled")
+    @JsonGetter("active")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public Boolean getEnabled() {
-        return enabled;
+    public Boolean getActive() {
+        return active;
     }
 
     /**
-     * Setter for Enabled.
-     * Indicates if the organization is enabled or not
-     * @param enabled Value for Boolean
+     * Setter for Active.
+     * Indicates if the organization is active or not
+     * @param active Value for Boolean
      */
-    @JsonSetter("enabled")
-    public void setEnabled(Boolean enabled) {
-        this.enabled = enabled;
+    @JsonSetter("active")
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
     /**
@@ -185,7 +185,7 @@ public class OrgsResponse {
     public String toString() {
         return "OrgsResponse [" + "orgId=" + orgId + ", orgName=" + orgName + ", description="
                 + description + ", allGroupUserId=" + allGroupUserId + ", defaultAdminUserGroupId="
-                + defaultAdminUserGroupId + ", enabled=" + enabled + "]";
+                + defaultAdminUserGroupId + ", active=" + active + "]";
     }
 
     /**
@@ -200,7 +200,7 @@ public class OrgsResponse {
                 .description(getDescription())
                 .allGroupUserId(getAllGroupUserId())
                 .defaultAdminUserGroupId(getDefaultAdminUserGroupId())
-                .enabled(getEnabled());
+                .active(getActive());
         return builder;
     }
 
@@ -208,21 +208,21 @@ public class OrgsResponse {
      * Class to build instances of {@link OrgsResponse}.
      */
     public static class Builder {
-        private String orgId;
+        private Integer orgId;
         private String orgName;
         private String description;
         private String allGroupUserId;
         private String defaultAdminUserGroupId;
-        private Boolean enabled;
+        private Boolean active;
 
 
 
         /**
          * Setter for orgId.
-         * @param  orgId  String value for orgId.
+         * @param  orgId  Integer value for orgId.
          * @return Builder
          */
-        public Builder orgId(String orgId) {
+        public Builder orgId(Integer orgId) {
             this.orgId = orgId;
             return this;
         }
@@ -268,12 +268,12 @@ public class OrgsResponse {
         }
 
         /**
-         * Setter for enabled.
-         * @param  enabled  Boolean value for enabled.
+         * Setter for active.
+         * @param  active  Boolean value for active.
          * @return Builder
          */
-        public Builder enabled(Boolean enabled) {
-            this.enabled = enabled;
+        public Builder active(Boolean active) {
+            this.active = active;
             return this;
         }
 
@@ -283,7 +283,7 @@ public class OrgsResponse {
          */
         public OrgsResponse build() {
             return new OrgsResponse(orgId, orgName, description, allGroupUserId,
-                    defaultAdminUserGroupId, enabled);
+                    defaultAdminUserGroupId, active);
         }
     }
 }

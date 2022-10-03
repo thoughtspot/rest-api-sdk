@@ -11,11 +11,9 @@ session_controller = client.session
 ## Methods
 
 * [Get Session Info](../../doc/controllers/session.md#get-session-info)
-* [Login](../../doc/controllers/session.md#login)
 * [Logout](../../doc/controllers/session.md#logout)
 * [Get Token](../../doc/controllers/session.md#get-token)
 * [Revoke Token](../../doc/controllers/session.md#revoke-token)
-* [Switch Org](../../doc/controllers/session.md#switch-org)
 
 
 # Get Session Info
@@ -34,44 +32,6 @@ def get_session_info(self)
 
 ```python
 result = session_controller.get_session_info()
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
-
-
-# Login
-
-You can programmatically create login session for a user in ThoughtSpot using this endpoint.
-
-You can create session by either providing userName and password as inputs in this request body or by including "Authorization" header with the token generated through the endpoint /tspublic/rest/v2/session/getToken.
-
-userName and password input is given precedence over "Authorization" header, when both are included in the request.
-
-```python
-def login(self,
-         body)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `body` | [`TspublicRestV2SessionLoginRequest`](../../doc/models/tspublic-rest-v2-session-login-request.md) | Body, Required | - |
-
-## Response Type
-
-[`SessionLoginResponse`](../../doc/models/session-login-response.md)
-
-## Example Usage
-
-```python
-body = TspublicRestV2SessionLoginRequest()
-
-result = session_controller.login(body)
 ```
 
 ## Errors
@@ -177,48 +137,6 @@ def revoke_token(self)
 
 ```python
 result = session_controller.revoke_token()
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
-
-
-# Switch Org
-
-This is endpoint is applicable only if organization feature is enabled in the cluster.
-
-To programmatically switch the organization context for the logged in session, use this endpoint.
-
-The original session is reused even after changing the organization.
-
-The logged in user should have access to the organization being switched to.
-
-This endpoint can be used to switch organization only when using session cookies for authentication.
-
-```python
-def switch_org(self,
-              body)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `body` | [`TspublicRestV2SessionOrgRequest`](../../doc/models/tspublic-rest-v2-session-org-request.md) | Body, Required | - |
-
-## Response Type
-
-`bool`
-
-## Example Usage
-
-```python
-body = TspublicRestV2SessionOrgRequest()
-
-result = session_controller.switch_org(body)
 ```
 
 ## Errors

@@ -6,7 +6,7 @@
 Run the following command from your project directory to install the package from npm:
 
 ```ts
-npm install thoughtspot@rest-api-sdk@1.13.0
+npm install thoughtspot@rest-api-sdk@1.15.0
 ```
 
 ## Initialize the API Client
@@ -17,7 +17,7 @@ The following parameters are configurable for the API Client:
 
 | Parameter | Type | Description |
 |  --- | --- | --- |
-| `acceptLanguage` | `string` | response format<br>*Default*: `'application/json'` |
+| `acceptLanguage` | `string` | response format<br>*Default*: `'*'` |
 | `contentType` | `string` | body content type for post request<br>*Default*: `'application/json'` |
 | `baseUrl` | `string` | *Default*: `'https://localhost:443'` |
 | `environment` | Environment | The API environment. <br> **Default: `Environment.Production`** |
@@ -51,7 +51,7 @@ The API client can be initialized as follows:
 
 ```ts
 const client = new Client({
-  acceptLanguage: 'application/json',
+  acceptLanguage: '*',
   contentType: 'application/json',
   timeout: 0,
   environment: Environment.Production,
@@ -63,7 +63,25 @@ const client = new Client({
 
 This API uses `OAuth 2 Bearer token`.
 
-## Guide
-[API Reference](https://github.com/thoughtspot/rest-api-sdk/blob/1.13.0/Typescript/doc/README.md)
-## Live Playground
-We recommend that you browse through the [code playground](https://try-everywhere.thoughtspot.cloud/v2/#/everywhere/api/rest/playgroundV2) before you start constructing your API requests. The playground offers an interactive portal with comprehensive information about the API endpoints, request and response workflows.
+## List of APIs
+
+* [Session](doc/controllers/session.md)
+* [User](doc/controllers/user.md)
+* [Group](doc/controllers/group.md)
+* [Org](doc/controllers/org.md)
+* [Metadata](doc/controllers/metadata.md)
+* [Database](doc/controllers/database.md)
+* [Connection](doc/controllers/connection.md)
+* [Data](doc/controllers/data.md)
+* [Report](doc/controllers/report.md)
+* [Admin](doc/controllers/admin.md)
+* [Security](doc/controllers/security.md)
+* [Logs](doc/controllers/logs.md)
+* [Materialization](doc/controllers/materialization.md)
+* [Custom Actions](doc/controllers/custom-actions.md)
+
+## Classes Documentation
+
+* [ApiResponse](doc/api-response.md)
+* [ApiError](doc/api-error.md)
+

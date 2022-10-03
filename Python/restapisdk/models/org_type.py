@@ -17,7 +17,7 @@ class OrgType(object):
 
     Attributes:
         name (string): Name of the organization
-        id (string): Id of the organization
+        id (int): Id of the organization
 
     """
 

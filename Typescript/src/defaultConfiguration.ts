@@ -10,7 +10,7 @@ import { RetryConfiguration } from './core';
 /** Default values for the configuration parameters of the client. */
 export const DEFAULT_CONFIGURATION: Configuration = {
   timeout: 0,
-  acceptLanguage: 'application/json',
+  acceptLanguage: '*',
   contentType: 'application/json',
   environment: Environment.Production,
   baseUrl: 'https://localhost:443',

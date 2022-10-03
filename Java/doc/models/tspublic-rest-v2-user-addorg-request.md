@@ -9,16 +9,14 @@
 
 | Name | Type | Tags | Description | Getter | Setter |
 |  --- | --- | --- | --- | --- | --- |
-| `Name` | `String` | Optional | Name of the organization. | String getName() | setName(String name) |
-| `Id` | `String` | Optional | The ID of the organization. | String getId() | setId(String id) |
+| `OrgId` | `Integer` | Optional | Unique identifier of the organization. | Integer getOrgId() | setOrgId(Integer orgId) |
 | `Users` | [`List<UserNameAndIDInput>`](../../doc/models/user-name-and-id-input.md) | Required | Array of objects. A JSON array of name of users or GUIDs of users or both. When both are given then id is considered | List<UserNameAndIDInput> getUsers() | setUsers(List<UserNameAndIDInput> users) |
 
 ## Example (as JSON)
 
 ```json
 {
-  "name": null,
-  "id": null,
+  "orgId": null,
   "users": [
     {
       "name": null,

@@ -89,13 +89,13 @@ namespace RESTAPISDK.Tests
             // Parameters for the API call
             string name = null;
             string id = null;
-            Standard.Models.OrgInput org = null;
+            int? orgId = null;
 
             // Perform API call
             bool result = false;
             try
             {
-                result = await this.controller.DeleteUserAsync(name, id, org);
+                result = await this.controller.DeleteUserAsync(name, id, orgId);
             }
             catch (ApiException)
             {

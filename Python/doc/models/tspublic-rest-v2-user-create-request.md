@@ -14,7 +14,7 @@
 | `visibility` | [`CreateUserVisibilityEnum`](../../doc/models/create-user-visibility-enum.md) | Optional | Visibility of the user. The visibility attribute is set to DEFAULT when creating a user.<br><br>The DEFAULT attribute makes a user visible to other users and user groups, and thus allows them to share objects.<br>**Default**: `'DEFAULT'` |
 | `mail` | `string` | Optional | Email id associated with the user account |
 | `password` | `string` | Required | Password for the user account. |
-| `org` | [`OrgInput`](../../doc/models/org-input.md) | Optional | This is applicable only if organization feature is enabled in the cluster.<br><br>A JSON object of organization name, id or both, in which the object should be created. When both are given then id is considered. If no value is provided then object will be created in the organization associated with the login session. |
+| `org_ids` | `List of int` | Optional | This is applicable only if organization feature is enabled in the cluster.<br><br>Array of org identifiers. If no value is provided, the organization associated with the login session is considered. |
 | `groups` | [`List of GroupNameAndIDInput`](../../doc/models/group-name-and-id-input.md) | Optional | A JSON array of group names or GUIDs or both. When both are given then id is considered |
 | `state` | [`CreateUserStateEnum`](../../doc/models/create-user-state-enum.md) | Optional | Status of user account. acitve or inactive.<br>**Default**: `'ACTIVE'` |
 | `notify_on_share` | [`CreateUserNotifyOnShareEnum`](../../doc/models/create-user-notify-on-share-enum.md) | Optional | User preference for receiving email notifications when another ThoughtSpot user shares answers or pinboards.<br>**Default**: `'true'` |
@@ -31,7 +31,7 @@
   "visibility": null,
   "mail": null,
   "password": "password4",
-  "org": null,
+  "orgIds": null,
   "groups": null,
   "state": null,
   "notifyOnShare": null,

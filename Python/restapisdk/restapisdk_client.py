@@ -94,8 +94,7 @@ class RestapisdkClient(object):
                  retry_methods=['GET', 'PUT', 'GET', 'PUT'],
                  environment=Environment.PRODUCTION,
                  base_url='https://localhost:443', access_token='',
-                 accept_language='application/json',
-                 content_type='application/json',
+                 accept_language='*', content_type='application/json',
                  skip_ssl_cert_verification=False, config=None):
         if config is None:
             self.config = Configuration(

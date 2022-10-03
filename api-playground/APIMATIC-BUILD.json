@@ -1,115 +1,53 @@
 {
     "$schema": "https://titan.apimatic.io/api/build/schema",
-    "buildFileVersion": "1.0",
+    "buildFileVersion": "1",
     "generatePortal": {
-        "pageTitle": "ThoughtSpot Public Rest APIs",
-        "navTitle": "Public Rest APIs",
-        "logoUrl": "static/images/ts-logo-white.svg",
+        "debug": {
+            "publishReport": false
+        },
+        "pageTitle": "My Portal Title",
+        "navTitle": "My Navigation Title",
+        "logoUrl": "static/images/logo.png",
         "logoLink": "https://www.thoughtspot.com",
         "languageConfig": {
-            "http": {}
+            "http": {},
+            "java": {
+                "packageRepository": "Maven",
+                "packageSettings": {
+                "GroupId": "io.github.thoughtspot",
+                "PackageName": "rest-api-sdk-lib",
+                "Version": "1.15.0"
+                }
+            },
+            "typescript": {
+                "packageRepository": "Npm",
+                "packageSettings": {
+                "PackageName": "thoughtspot@rest-api-sdk",
+                "Version": "1.15.0"
+                }
+            },
+            "python": {
+                "packageRepository": "PyPI",
+                "packageSettings": {
+                "PackageName": "thoughtspot-rest-api-sdk",
+                "Version": "1.15.0"
+                }
+            },
+            "csharp": {
+                "packageRepository": "NuGet",
+                "packageSettings": {
+                "PackageName": "thoughtspot.rest.api.sdk",
+                "Version": "1.15.0"
+                }
+            }
         },
-        "headIncludes": "<link rel=\"icon\" type=\"image/svg+xml\" href='static/images/favicon.svg' /><link rel=\"stylesheet\" href=\"static\/css\/overrides.css\"><script>if ('serviceWorker' in navigator) { navigator.serviceWorker.register('embedded-worker.js')}<\/script>",
-        "tailIncludes": "<script src=\".\/static\/js\/embedded.js\"><\/script>",
+        "headIncludes": "  <link href=\"https:\\/\\/fonts.googleapis.com\\/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&display=swap\" rel=\"stylesheet\">",
         "portalSettings": {
             "themeOverrides": {
                 "themeType": "cool",
                 "palette": {
-                    "primaryColor": "#323946",
-                    "linkColor": "#2770EF",
-                    "colors": {
-                        "C000": "#FFFFFF",
-                        "C200": "#FFFFFF",
-                        "C300": "#C0C6CF",
-                        "C400": "#777e8b",
-                        "C600": "#1d232f",
-                        "C700": "#606E8A",
-                        "C800": "#1d232f",
-                        "C900": "#1C2029"
+                    "primaryColor": "#2770EF"
                     }
-                },
-                "fontSource": [],
-                "cssStyles": {
-                    "headings": {
-                        "fontFamily": "Optimo-Plain",
-                        "h1": {
-                            "fontFamily": "Optimo-Plain",
-                            "fontSize": "28px",
-                            "fontWeight": "700",
-                            "fontStyle": "normal",
-                            "lineHeight": "1"
-                        },
-                        "h2": {
-                            "fontFamily": "Optimo-Plain",
-                            "fontSize": "26px",
-                            "fontWeight": "300",
-                            "fontStyle": "normal",
-                            "lineHeight": "1"
-                        },
-                        "h3": {
-                            "fontFamily": "Optimo-Plain",
-                            "fontSize": "23px",
-                            "fontWeight": "300",
-                            "fontStyle": "normal",
-                            "lineHeight": "1"
-                        },
-                        "h4": {
-                            "fontFamily": "Optimo-Plain",
-                            "fontSize": "20px",
-                            "fontWeight": "300",
-                            "fontStyle": "normal",
-                            "lineHeight": "1"
-                        },
-                        "h5": {
-                            "fontFamily": "Optimo-Plain",
-                            "fontSize": "18px",
-                            "fontWeight": "300",
-                            "fontStyle": "normal",
-                            "lineHeight": "1"
-                        }
-                    },
-                    "body": {
-                        "fontFamily": "Optimo-Plain",
-                        "text1": {
-                            "fontFamily": "Optimo-Plain",
-                            "fontSize": "14.5px",
-                            "fontWeight": "300",
-                            "fontStyle": "normal",
-                            "lineHeight": "1.6rem"
-                        },
-                        "text2": {
-                            "fontFamily": "Optimo-Plain",
-                            "fontSize": "14.5px",
-                            "fontWeight": "300",
-                            "fontStyle": "normal",
-                            "lineHeight": "1.6rem"
-                        },
-                        "text3": {
-                            "fontFamily": "Optimo-Plain",
-                            "fontSize": "14.5px",
-                            "fontWeight": "300",
-                            "fontStyle": "normal",
-                            "lineHeight": "1.6rem"
-                        }
-                    },
-                    "code": {
-                        "fontFamily": "Roboto,Consolas,Monaco,monospace",
-                        "blockCode": {
-                            "fontFamily": "Roboto,Consolas,Monaco,monospace",
-                            "fontSize": "13.5px",
-                            "fontWeight": "400",
-                            "fontStyle": "normal",
-                            "lineHeight": "1.4rem"
-                        },
-                        "inlineCode": {
-                            "fontFamily": "Roboto,Consolas,Monaco,monospace",
-                            "fontSize": "13.5px",
-                            "fontWeight": "400",
-                            "fontStyle": "normal",
-                            "lineHeight": "1.4rem"
-                        }
-                    }
-                }
             },
             "enableExport": false,
             "enableConsoleCalls": true

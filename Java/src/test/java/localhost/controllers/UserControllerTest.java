@@ -12,10 +12,8 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
-import localhost.ApiHelper;
 import localhost.RESTAPISDKClient;
 import localhost.exceptions.ApiException;
-import localhost.models.OrgInput;
 import localhost.testing.TestHelper;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -96,11 +94,11 @@ public class UserControllerTest extends BaseControllerTest {
         // Parameters for the API call
         String name = null;
         String id = null;
-        OrgInput org = null;
+        Integer orgId = null;
 
         // Set callback and perform API call
         try {
-            controller.deleteUser(name, id, org);
+            controller.deleteUser(name, id, orgId);
         } catch (ApiException e) {
             // Empty block
         }

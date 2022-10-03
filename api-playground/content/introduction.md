@@ -25,3 +25,16 @@ If the API response indicates an error, you can view the error details by naviga
 All API requests generated from Playground are authenticated using the Bearer token included with the `Authorization` header passed along with the request. This token is generated and set each time you open the REST API Playground and navigate to an endpoint. The token is generated for the logged-in user and is valid for 24 hours.
 
 If you want to use a new token, you can generate a token using the `/tspublic/rest/v2/session/gettoken` endpoint. To update the token, click  **Configure** in the code explorer and edit the `AccessToken` field in the pop-up that appears.
+
+## Dynamic code samples
+
+ThoughtSpot APIs are supported in several languages. You can switch between different languages using the drop-down above the API code explorer.  The code explorer dynamically changes the API request code based on the language you specify. To view the complete file with bootstrap and error handling details, you can click **Configure** and then select the **Show Complete File** check box.
+
+## SDK client libraries
+To know how to get and set up the SDK libraries for a specific language, see **Setup and Usage** page. The libraries can be downloaded from following public sources.
+
+- **Github**: You can download the SDK and API libraries from the GitHub repo https://github.com/thoughtspot/rest-api-sdk
+- **npm**: The latest version of the TypeScript SDK is available in NPM package manager - https://www.npmjs.com/package/@thoughtspot/rest-api-sdk.
+- **PyPi**: The latest version of Python SDK is available in PyPi package manager - https://pypi.org/project/thoughtspot-rest-api-sdk.
+- **mvn**: The latest version of Java SDK is available in MVN package manager - https://search.maven.org/artifact/io.github.thoughtspot/rest-api-sdk-lib.
+- **nuget**: The latest version of .NET SDK is available in nuget package manager - https://www.nuget.org/packages/thoughtspot.rest.api.sdk.

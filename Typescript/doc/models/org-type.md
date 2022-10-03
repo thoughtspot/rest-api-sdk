@@ -10,7 +10,7 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `name` | `string \| undefined` | Optional | Name of the organization |
-| `id` | `string \| undefined` | Optional | Id of the organization |
+| `id` | `number \| undefined` | Optional | Id of the organization |
 
 ## Example (as JSON)
 

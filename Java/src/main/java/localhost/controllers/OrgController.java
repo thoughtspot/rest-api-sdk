@@ -70,7 +70,7 @@ public final class OrgController extends BaseController {
      */
     public OrgsResponse getOrg(
             final String name,
-            final String id) throws ApiException, IOException {
+            final Integer id) throws ApiException, IOException {
         HttpRequest request = buildGetOrgRequest(name, id);
         authManagers.get("global").apply(request);
 
@@ -91,7 +91,7 @@ public final class OrgController extends BaseController {
      */
     public CompletableFuture<OrgsResponse> getOrgAsync(
             final String name,
-            final String id) {
+            final Integer id) {
         return makeHttpCallAsync(() -> buildGetOrgRequest(name, id),
             req -> authManagers.get("global").applyAsync(req)
                 .thenCompose(request -> getClientInstance()
@@ -104,7 +104,7 @@ public final class OrgController extends BaseController {
      */
     private HttpRequest buildGetOrgRequest(
             final String name,
-            final String id) {
+            final Integer id) {
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 
@@ -385,7 +385,7 @@ public final class OrgController extends BaseController {
      */
     public Boolean deleteOrg(
             final String name,
-            final String id) throws ApiException, IOException {
+            final Integer id) throws ApiException, IOException {
         HttpRequest request = buildDeleteOrgRequest(name, id);
         authManagers.get("global").apply(request);
 
@@ -406,7 +406,7 @@ public final class OrgController extends BaseController {
      */
     public CompletableFuture<Boolean> deleteOrgAsync(
             final String name,
-            final String id) {
+            final Integer id) {
         return makeHttpCallAsync(() -> buildDeleteOrgRequest(name, id),
             req -> authManagers.get("global").applyAsync(req)
                 .thenCompose(request -> getClientInstance()
@@ -419,7 +419,7 @@ public final class OrgController extends BaseController {
      */
     private HttpRequest buildDeleteOrgRequest(
             final String name,
-            final String id) {
+            final Integer id) {
         //the base uri for api requests
         String baseUri = config.getBaseUri();
 

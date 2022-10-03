@@ -19,7 +19,7 @@ import {
   TspublicRestV2OrgUpdateRequest,
   tspublicRestV2OrgUpdateRequestSchema,
 } from '../models/tspublicRestV2OrgUpdateRequest';
-import { array, boolean, optional, string } from '../schema';
+import { array, boolean, number, optional, string } from '../schema';
 import { BaseController } from './baseController';
 
 export class OrgController extends BaseController {
@@ -39,13 +39,13 @@ export class OrgController extends BaseController {
    */
   async getOrg(
     name?: string,
-    id?: string,
+    id?: number,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<OrgsResponse>> {
     const req = this.createRequest('GET', '/tspublic/rest/v2/org');
     const mapped = req.prepareArgs({
       name: [name, optional(string())],
-      id: [id, optional(string())],
+      id: [id, optional(number())],
     });
     req.query('name', mapped.name);
     req.query('id', mapped.id);
@@ -117,13 +117,13 @@ export class OrgController extends BaseController {
    */
   async deleteOrg(
     name?: string,
-    id?: string,
+    id?: number,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<boolean>> {
     const req = this.createRequest('DELETE', '/tspublic/rest/v2/org/delete');
     const mapped = req.prepareArgs({
       name: [name, optional(string())],
-      id: [id, optional(string())],
+      id: [id, optional(number())],
     });
     req.query('name', mapped.name);
     req.query('id', mapped.id);

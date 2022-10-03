@@ -342,7 +342,7 @@ namespace RESTAPISDK.Standard
         /// </summary>
         public class Builder
         {
-            private string acceptLanguage = "application/json";
+            private string acceptLanguage = "*";
             private string contentType = "application/json";
             private Environment environment = RESTAPISDK.Standard.Environment.Production;
             private string baseUrl = "https://localhost:443";
