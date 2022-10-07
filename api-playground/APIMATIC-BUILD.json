@@ -1,53 +1,80 @@
 {
     "$schema": "https://titan.apimatic.io/api/build/schema",
-    "buildFileVersion": "1",
+    "buildFileVersion": "1.0",
     "generatePortal": {
-        "debug": {
-            "publishReport": false
-        },
-        "pageTitle": "My Portal Title",
-        "navTitle": "My Navigation Title",
-        "logoUrl": "static/images/logo.png",
+        "pageTitle": "ThoughtSpot Public Rest APIs",
+        "navTitle": "Public Rest APIs",
+        "logoUrl": "static/images/ts-logo-white.svg",
         "logoLink": "https://www.thoughtspot.com",
         "languageConfig": {
-            "http": {},
-            "java": {
-                "packageRepository": "Maven",
-                "packageSettings": {
-                "GroupId": "io.github.thoughtspot",
-                "PackageName": "rest-api-sdk-lib",
-                "Version": "1.15.0"
-                }
-            },
-            "typescript": {
-                "packageRepository": "Npm",
-                "packageSettings": {
-                "PackageName": "thoughtspot@rest-api-sdk",
-                "Version": "1.15.0"
-                }
-            },
-            "python": {
-                "packageRepository": "PyPI",
-                "packageSettings": {
-                "PackageName": "thoughtspot-rest-api-sdk",
-                "Version": "1.15.0"
-                }
-            },
-            "csharp": {
-                "packageRepository": "NuGet",
-                "packageSettings": {
-                "PackageName": "thoughtspot.rest.api.sdk",
-                "Version": "1.15.0"
-                }
-            }
+            "http": {}
         },
-        "headIncludes": "  <link href=\"https:\\/\\/fonts.googleapis.com\\/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&display=swap\" rel=\"stylesheet\">",
+        "headIncludes": "<link rel=\"icon\" type=\"image/svg+xml\" href='static/images/favicon.svg' /><link rel=\"stylesheet\" href=\".\/static\/styles\/overrides.css\">",
+        "tailIncludes": "<script id=\"ts-playground-snippet\" src=\".\/static\/js\/embedded.js\"><\/<script>",
         "portalSettings": {
             "themeOverrides": {
                 "themeType": "cool",
                 "palette": {
-                    "primaryColor": "#2770EF"
+                    "primaryColor": "#323946",
+                    "linkColor": "#2770EF",
+                    "colors": {
+                        "C000": "#FFFFFF",
+                        "C200": "#FFFFFF",
+                        "C300": "#C0C6CF",
+                        "C400": "#777e8b",
+                        "C600": "#1d232f",
+                        "C700": "#606E8A",
+                        "C800": "#1d232f",
+                        "C900": "#1C2029"
                     }
+                },
+                "fontSource": [],
+                "cssStyles": {
+                    "headings": {
+                        "fontFamily": "Optimo-Plain",
+                        "h1": {
+                            "fontFamily": "Optimo-Plain",
+                            "fontSize": "28px",
+                            "fontWeight": "700",
+                            "fontStyle": "normal",
+                            "lineHeight": "1"
+                        },
+                        "h2": {
+                            "fontFamily": "Optimo-Plain",
+                            "fontSize": "26px",
+                            "fontWeight": "300",
+                            "fontStyle": "normal",
+                            "lineHeight": "1"
+                        },
+                        "h3": {
+                            "fontFamily": "Optimo-Plain",
+                            "fontSize": "26px",
+                            "fontWeight": "300",
+                            "fontStyle": "normal",
+                            "lineHeight": "1"
+                        }
+                    },
+                    "body": {
+                        "fontFamily": "Optimo-Plain"
+                    },
+                    "code": {
+                        "fontFamily": "Roboto,Consolas,Monaco,monospace",
+                        "blockCode": {
+                            "fontFamily": "Roboto,Consolas,Monaco,monospace",
+                            "fontSize": "12px",
+                            "fontWeight": "400",
+                            "fontStyle": "normal",
+                            "lineHeight": "19.5px"
+                        },
+                        "inlineCode": {
+                            "fontFamily": "Roboto,Consolas,Monaco,monospace",
+                            "fontSize": "12px",
+                            "fontWeight": "400",
+                            "fontStyle": "normal",
+                            "lineHeight": "19.5px"
+                        }
+                    }
+                }
             },
             "enableExport": false,
             "enableConsoleCalls": true
