@@ -1,0 +1,25 @@
+<html>
+  <head>
+    <style>
+      #content {
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <iframe id="content" src="http://localhost:8088"></iframe>
+  </body>
+  <script>
+    window.addEventListener('message', function (event) {
+      console.log('Received message from iframe: ', event.data);
+      if (event.data?.type === 'api-playground-ready') {
+        const config = {
+          baseUrl: 'http://api.thoughtspot.cloud',
+          accessToken: 'bla-bla-token',
+        };
+        event.ports[0].postMessage(config);
+      }
+    });
+  </script>
+</html>
