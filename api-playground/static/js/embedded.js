@@ -77,6 +77,7 @@ window.addEventListener('hashchange', (e) => {
 
 window.addEventListener('message', (event) => {
   if (event.data?.type === 'api-playground-config') {
+    shouldPatch = true;
     playgroundConfig = event.data;
     patchURLAndPlayground(playgroundConfig);
     if (playgroundConfig.apiResourceId) {
