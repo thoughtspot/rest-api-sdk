@@ -47,14 +47,6 @@ const patchURLAndPlayground = async ({ baseUrl, accessToken }) => {
 const channel = new MessageChannel();
 let playgroundConfig = {};
 
-channel.port1.onmessage = (event) => {
-  playgroundConfig = event.data;
-  shouldPatch = true;
-  patchURLAndPlayground(event.data);
-  if (playgroundConfig.apiResourceId) {
-    navigateEndpoint(playgroundConfig.apiResourceId);
-  }
-};
 window.parent.postMessage({ type: 'api-playground-ready' }, '*', [
   channel.port2,
 ]);
@@ -81,6 +73,16 @@ window.addEventListener('hashchange', (e) => {
     return;
   }
   patchURLAndPlayground(playgroundConfig);
+});
+
+window.addEventListener('message', (event) => {
+  if (event.data?.type === 'api-playground-config') {
+    playgroundConfig = event.data;
+    patchURLAndPlayground(playgroundConfig);
+    if (playgroundConfig.apiResourceId) {
+      navigateEndpoint(playgroundConfig.apiResourceId);
+    }
+  }
 });
 
 window.test = (config) => {
