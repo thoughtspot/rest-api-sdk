@@ -10,7 +10,9 @@
       "get": {
         "operationId": "getCurrentUserInfo",
         "description": "Get Session object information",
-        "tags": ["Auth"],
+        "tags": [
+          "Auth"
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -39,7 +41,9 @@
       "post": {
         "operationId": "login",
         "description": "You can programmatically create login session for a user in ThoughtSpot using this endpoint. \n\nYou can create session by either providing userName and password as inputs in this request body or by including \"Authorization\" header with the token generated through the endpoint /tspublic/rest/v2/session/gettoken. \n\nuserName and password input is given precedence over \"Authorization\" header, when both are included in the request.",
-        "tags": ["Auth"],
+        "tags": [
+          "Auth"
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -62,10 +66,14 @@
                     "deprecated": false
                   }
                 },
-                "required": ["username", "password"]
+                "required": [
+                  "username",
+                  "password"
+                ]
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -94,7 +102,9 @@
       "post": {
         "operationId": "getObjectAccessToken",
         "description": " To programmatically create session token for a user in ThoughtSpot, use this endpoint. \n\nYou can generate the token for a user by providing password or secret key from the cluster. \n\nYou need to enable trusted authentication to generate secret key. To generate secret key, follow below steps. \n\n\n 1. Click the Develop tab. \n\n\n 2. Under Customizations, click Settings. \n\n\n 3. To enable trusted authentication, turn on the toggle. \n\n\n 4. A secret_key for trusted authentication is generated. \n\n\n 5. Click the clipboard icon to copy the token. \n\n\n \n\nPassword is given precedence over secretKey input, when both are included in the request.",
-        "tags": ["Auth"],
+        "tags": [
+          "Auth"
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -138,10 +148,14 @@
                     "deprecated": false
                   }
                 },
-                "required": ["username", "object_id"]
+                "required": [
+                  "username",
+                  "object_id"
+                ]
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -170,7 +184,9 @@
       "post": {
         "operationId": "getFullAccessToken",
         "description": " To programmatically create session token for a user in ThoughtSpot, use this endpoint. \n\nYou can generate the token for a user by providing password or secret key from the cluster. \n\nYou need to enable trusted authentication to generate secret key. To generate secret key, follow below steps. \n\n\n 1. Click the Develop tab. \n\n\n 2. Under Customizations, click Settings. \n\n\n 3. To enable trusted authentication, turn on the toggle. \n\n\n 4. A secret_key for trusted authentication is generated. \n\n\n 5. Click the clipboard icon to copy the token. \n\n\n \n\nPassword is given precedence over secretKey input, when both are included in the request.",
-        "tags": ["Auth"],
+        "tags": [
+          "Auth"
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -209,10 +225,13 @@
                     "deprecated": false
                   }
                 },
-                "required": ["username"]
+                "required": [
+                  "username"
+                ]
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -241,7 +260,9 @@
       "post": {
         "operationId": "logout",
         "description": "To log a user out of the current session, use this endpoint",
-        "tags": ["Auth"],
+        "tags": [
+          "Auth"
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -250,7 +271,8 @@
                 "properties": {}
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -279,7 +301,9 @@
       "post": {
         "operationId": "revokeToken",
         "description": "To expire or revoke a token for a user, use this endpoint",
-        "tags": ["Auth"],
+        "tags": [
+          "Auth"
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -295,10 +319,14 @@
                     "deprecated": false
                   }
                 },
-                "required": ["username", "token"]
+                "required": [
+                  "username",
+                  "token"
+                ]
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -378,12 +406,12 @@
             }
           },
           "creation_time_in_millis": {
-            "type": "integer",
-            "format": "int32"
+            "type": "number",
+            "format": "float"
           },
           "first_login_time_in_millis": {
-            "type": "integer",
-            "format": "int32"
+            "type": "number",
+            "format": "float"
           },
           "tags": {
             "type": "array",
@@ -395,7 +423,10 @@
       },
       "RiseSetter": {
         "type": "object",
-        "required": ["field", "path"],
+        "required": [
+          "field",
+          "path"
+        ],
         "properties": {
           "field": {
             "type": "string"
@@ -420,12 +451,12 @@
             "type": "string"
           },
           "creation_time_in_millis": {
-            "type": "integer",
-            "format": "int32"
+            "type": "number",
+            "format": "float"
           },
           "expiration_time_in_millis": {
-            "type": "integer",
-            "format": "int32"
+            "type": "number",
+            "format": "float"
           },
           "scope": {
             "$ref": "#/components/schemas/Scope"
@@ -440,7 +471,10 @@
       },
       "UserGroup": {
         "type": "object",
-        "required": ["name", "id"],
+        "required": [
+          "name",
+          "id"
+        ],
         "properties": {
           "name": {
             "type": "string"
@@ -452,7 +486,9 @@
       },
       "Scope": {
         "type": "object",
-        "required": ["access_type"],
+        "required": [
+          "access_type"
+        ],
         "properties": {
           "access_type": {
             "type": "string"
