@@ -10,7 +10,8 @@ const patchURLAndPlayground = async ({ baseUrl, accessToken }) => {
   if (!configButtonElement) return;
   configButtonElement.click(); // programatically click on configure button
   // Get all Form elements to control flickering the configuration form
-  const formElement = document.querySelectorAll('form')[1]?.parentElement;
+  const formElements = document.querySelectorAll('form');
+  const formElement = formElements[formElements.length - 1]?.parentElement;
   if (!formElement) return;
   formElement.style.display = 'none';
   configButtonElement.style.display = 'block';
