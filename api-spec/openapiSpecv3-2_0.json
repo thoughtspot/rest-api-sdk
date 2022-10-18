@@ -6,7 +6,7 @@
   },
   "tags": [],
   "paths": {
-    "/api/2.0/rest/auth/session/user": {
+    "/api/rest/2.0/auth/session/user": {
       "get": {
         "operationId": "getCurrentUserInfo",
         "description": "Get Session object information",
@@ -37,7 +37,7 @@
         }
       }
     },
-    "/api/2.0/rest/auth/session/login": {
+    "/api/rest/2.0/auth/session/login": {
       "post": {
         "operationId": "login",
         "description": "You can programmatically create login session for a user in ThoughtSpot using this endpoint. \n\nYou can create session by either providing userName and password as inputs in this request body or by including \"Authorization\" header with the token generated through the endpoint /tspublic/rest/v2/session/gettoken. \n\nuserName and password input is given precedence over \"Authorization\" header, when both are included in the request.",
@@ -98,7 +98,7 @@
         }
       }
     },
-    "/api/2.0/rest/v2/auth/token/object": {
+    "/api/rest/2.0/auth/token/object": {
       "post": {
         "operationId": "getObjectAccessToken",
         "description": " To programmatically create session token for a user in ThoughtSpot, use this endpoint. \n\nYou can generate the token for a user by providing password or secret key from the cluster. \n\nYou need to enable trusted authentication to generate secret key. To generate secret key, follow below steps. \n\n\n 1. Click the Develop tab. \n\n\n 2. Under Customizations, click Settings. \n\n\n 3. To enable trusted authentication, turn on the toggle. \n\n\n 4. A secret_key for trusted authentication is generated. \n\n\n 5. Click the clipboard icon to copy the token. \n\n\n \n\nPassword is given precedence over secretKey input, when both are included in the request.",
@@ -180,7 +180,7 @@
         }
       }
     },
-    "/api/2.0/rest/v2/auth/token/full": {
+    "/api/rest/2.0/auth/token/full": {
       "post": {
         "operationId": "getFullAccessToken",
         "description": " To programmatically create session token for a user in ThoughtSpot, use this endpoint. \n\nYou can generate the token for a user by providing password or secret key from the cluster. \n\nYou need to enable trusted authentication to generate secret key. To generate secret key, follow below steps. \n\n\n 1. Click the Develop tab. \n\n\n 2. Under Customizations, click Settings. \n\n\n 3. To enable trusted authentication, turn on the toggle. \n\n\n 4. A secret_key for trusted authentication is generated. \n\n\n 5. Click the clipboard icon to copy the token. \n\n\n \n\nPassword is given precedence over secretKey input, when both are included in the request.",
@@ -256,7 +256,7 @@
         }
       }
     },
-    "/api/2.0/rest/auth/session/logout": {
+    "/api/rest/2.0/auth/session/logout": {
       "post": {
         "operationId": "logout",
         "description": "To log a user out of the current session, use this endpoint",
@@ -297,7 +297,7 @@
         }
       }
     },
-    "/api/2.0/rest/v2/auth/token/revoke": {
+    "/api/rest/2.0/auth/token/revoke": {
       "post": {
         "operationId": "revokeToken",
         "description": "To expire or revoke a token for a user, use this endpoint",
