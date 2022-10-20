@@ -6,7 +6,7 @@
   },
   "tags": [],
   "paths": {
-    "/api/2.0/rest/auth/session/user": {
+    "/api/rest/2.0/auth/session/user": {
       "get": {
         "operationId": "getCurrentUserInfo",
         "description": "Get Session object information",
@@ -37,7 +37,175 @@
         }
       }
     },
-    "/api/2.0/rest/auth/session/login": {
+    "/api/rest/2.0/users/search": {
+      "post": {
+        "operationId": "searchUser",
+        "description": "To programmatically search a user account in the ThoughtSpot system use this API endpoint.\nUsing this API, you can search a user with GUID / name.",
+        "tags": [
+          "User"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "user_identifier": {
+                    "description": "GUID / name of the user to be updated",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "display_name": {
+                    "description": "A unique display name string for the user account, usually their first and last name",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "visibility": {
+                    "description": "Visibility of the user.",
+                    "type": "string",
+                    "enum": [
+                      "DEFAULT",
+                      "NON_SHARABLE"
+                    ],
+                    "deprecated": false
+                  },
+                  "email": {
+                    "description": "Email of the user account",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "user_group_identifiers": {
+                    "description": "List of user-group to be associated with",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "deprecated": false
+                  },
+                  "privileges": {
+                    "description": "List of privileges to be associated with",
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "UNKNOWN",
+                        "ADMINISTRATION",
+                        "AUTHORING",
+                        "USERDATAUPLOADING",
+                        "DATADOWNLOADING",
+                        "USERMANAGEMENT",
+                        "SECURITYMANAGEMENT",
+                        "LOGICALMODELING",
+                        "DATAMANAGEMENT",
+                        "TAGMANAGEMENT",
+                        "SHAREWITHALL",
+                        "SYSTEMMANAGEMENT",
+                        "JOBSCHEDULING",
+                        "A3ANALYSIS",
+                        "EXPERIMENTALFEATUREPRIVILEGE",
+                        "BYPASSRLS",
+                        "RANALYSIS",
+                        "DISABLE_PINBOARD_CREATION",
+                        "DEVELOPER",
+                        "APPLICATION_ADMINISTRATION",
+                        "USER_ADMINISTRATION",
+                        "GROUP_ADMINISTRATION",
+                        "BACKUP_ADMINISTRATION",
+                        "SYSTEM_INFO_ADMINISTRATION",
+                        "ENABLESPOTAPPCREATION",
+                        "SYNCMANAGEMENT"
+                      ]
+                    },
+                    "deprecated": false
+                  },
+                  "account_type": {
+                    "description": "Type of the account.",
+                    "type": "string",
+                    "enum": [
+                      "LOCAL_USER",
+                      "LDAP_USER",
+                      "SAML_USER",
+                      "OIDC_USER",
+                      "REMOTE_USER"
+                    ],
+                    "deprecated": false
+                  },
+                  "account_status": {
+                    "description": "Current status of the user account.",
+                    "type": "string",
+                    "enum": [
+                      "ACTIVE",
+                      "INACTIVE",
+                      "EXPIRED",
+                      "LOCKED",
+                      "PENDING"
+                    ],
+                    "deprecated": false
+                  },
+                  "notify_on_share": {
+                    "description": "User preference for receiving email notifications when another ThoughtSpot user shares answers or pinboards.",
+                    "type": "boolean",
+                    "deprecated": false
+                  },
+                  "show_onboarding_experience": {
+                    "description": "The user preference for revisiting the onboarding experience.",
+                    "type": "boolean",
+                    "deprecated": false
+                  },
+                  "onboarding_experience_completed": {
+                    "description": "flag to get the on-boarding experience is completed or not.",
+                    "type": "boolean",
+                    "deprecated": false
+                  },
+                  "org_identifiers": {
+                    "description": "List of Unique Organization Identifiers to be associated with",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "deprecated": false
+                  },
+                  "org_scope": {
+                    "description": "query param to handle ALL_ORG functionality.",
+                    "type": "string",
+                    "enum": [
+                      "ALL"
+                    ],
+                    "deprecated": false
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/auth/session/login": {
       "post": {
         "operationId": "login",
         "description": "You can programmatically create login session for a user in ThoughtSpot using this endpoint. \n\nYou can create session by either providing userName and password as inputs in this request body or by including \"Authorization\" header with the token generated through the endpoint /tspublic/rest/v2/session/gettoken. \n\nuserName and password input is given precedence over \"Authorization\" header, when both are included in the request.",
@@ -72,7 +240,8 @@
                 ]
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -97,7 +266,7 @@
         }
       }
     },
-    "/api/2.0/rest/v2/auth/token/object": {
+    "/api/rest/2.0/auth/token/object": {
       "post": {
         "operationId": "getObjectAccessToken",
         "description": " To programmatically create session token for a user in ThoughtSpot, use this endpoint. \n\nYou can generate the token for a user by providing password or secret key from the cluster. \n\nYou need to enable trusted authentication to generate secret key. To generate secret key, follow below steps. \n\n\n 1. Click the Develop tab. \n\n\n 2. Under Customizations, click Settings. \n\n\n 3. To enable trusted authentication, turn on the toggle. \n\n\n 4. A secret_key for trusted authentication is generated. \n\n\n 5. Click the clipboard icon to copy the token. \n\n\n \n\nPassword is given precedence over secretKey input, when both are included in the request.",
@@ -153,7 +322,8 @@
                 ]
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -178,7 +348,7 @@
         }
       }
     },
-    "/api/2.0/rest/v2/auth/token/full": {
+    "/api/rest/2.0/auth/token/full": {
       "post": {
         "operationId": "getFullAccessToken",
         "description": " To programmatically create session token for a user in ThoughtSpot, use this endpoint. \n\nYou can generate the token for a user by providing password or secret key from the cluster. \n\nYou need to enable trusted authentication to generate secret key. To generate secret key, follow below steps. \n\n\n 1. Click the Develop tab. \n\n\n 2. Under Customizations, click Settings. \n\n\n 3. To enable trusted authentication, turn on the toggle. \n\n\n 4. A secret_key for trusted authentication is generated. \n\n\n 5. Click the clipboard icon to copy the token. \n\n\n \n\nPassword is given precedence over secretKey input, when both are included in the request.",
@@ -228,7 +398,8 @@
                 ]
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -253,7 +424,7 @@
         }
       }
     },
-    "/api/2.0/rest/auth/session/logout": {
+    "/api/rest/2.0/auth/session/logout": {
       "post": {
         "operationId": "logout",
         "description": "To log a user out of the current session, use this endpoint",
@@ -268,7 +439,8 @@
                 "properties": {}
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -293,7 +465,7 @@
         }
       }
     },
-    "/api/2.0/rest/v2/auth/token/revoke": {
+    "/api/rest/2.0/auth/token/revoke": {
       "post": {
         "operationId": "revokeToken",
         "description": "To expire or revoke a token for a user, use this endpoint",
@@ -321,7 +493,8 @@
                 ]
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -346,7 +519,7 @@
         }
       }
     },
-    "/api/2.0/rest/v2/user": {
+    "/api/rest/2.0/users": {
       "post": {
         "operationId": "createUser",
         "description": "To programmatically create a user account in the ThoughtSpot system use this API endpoint. Using this API, you can create a user and assign groups.\nTo create a user, you require admin user privileges.",
@@ -374,7 +547,25 @@
                     "type": "string",
                     "deprecated": false
                   },
+                  "email": {
+                    "description": "Email of the user account",
+                    "type": "string",
+                    "deprecated": false
+                  },
                   "account_type": {
+                    "description": "Type of the account.",
+                    "default": "LOCAL_USER",
+                    "type": "string",
+                    "enum": [
+                      "LOCAL_USER",
+                      "LDAP_USER",
+                      "SAML_USER",
+                      "OIDC_USER",
+                      "REMOTE_USER"
+                    ],
+                    "deprecated": false
+                  },
+                  "account_status": {
                     "description": "Current status of the user account.",
                     "default": "ACTIVE",
                     "type": "string",
@@ -385,11 +576,6 @@
                       "LOCKED",
                       "PENDING"
                     ],
-                    "deprecated": false
-                  },
-                  "email": {
-                    "description": "Email of the user account",
-                    "type": "string",
                     "deprecated": false
                   },
                   "org_identifiers": {
@@ -414,8 +600,7 @@
                     "type": "string",
                     "enum": [
                       "DEFAULT",
-                      "NON_SHARABLE",
-                      "SHARABLE"
+                      "NON_SHARABLE"
                     ],
                     "deprecated": false
                   },
@@ -450,10 +635,12 @@
                     },
                     "deprecated": false
                   },
-                  "orgId": {
+                  "org_scope": {
                     "description": "query param to handle ALL_ORG functionality.",
-                    "type": "integer",
-                    "format": "int32",
+                    "type": "string",
+                    "enum": [
+                      "ALL"
+                    ],
                     "deprecated": false
                   }
                 },
@@ -465,7 +652,8 @@
                 ]
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -473,6 +661,236 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/users/$user_identifier": {
+      "post": {
+        "operationId": "updateUser",
+        "description": "To programmatically update a user account in the ThoughtSpot system use this API endpoint.\nUsing this API, you can update a user and assign groups.\nTo update a user, you require admin user privileges.",
+        "tags": [
+          "User"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "user_identifier": {
+                    "description": "GUID / name of the user to be updated",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "name": {
+                    "description": "Name of the user. The username string must be unique.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "display_name": {
+                    "description": "A unique display name string for the user account, usually their first and last name",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "visibility": {
+                    "description": "Visibility of the user. The visibility attribute is set to DEFAULT when creating a user. The DEFAULT attribute makes a user visible to other users and user groups, and this allows them to share objects",
+                    "default": "DEFAULT",
+                    "type": "string",
+                    "enum": [
+                      "DEFAULT",
+                      "NON_SHARABLE"
+                    ],
+                    "deprecated": false
+                  },
+                  "email": {
+                    "description": "Email of the user account",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "account_status": {
+                    "description": "Current status of the user account.",
+                    "type": "string",
+                    "enum": [
+                      "ACTIVE",
+                      "INACTIVE",
+                      "EXPIRED",
+                      "LOCKED",
+                      "PENDING"
+                    ],
+                    "deprecated": false
+                  },
+                  "notify_on_share": {
+                    "description": "User preference for receiving email notifications when another ThoughtSpot user shares answers or pinboards.",
+                    "default": true,
+                    "type": "boolean",
+                    "deprecated": false
+                  },
+                  "show_onboarding_experience": {
+                    "description": "The user preference for revisiting the onboarding experience.",
+                    "default": true,
+                    "type": "boolean",
+                    "deprecated": false
+                  },
+                  "onboarding_experience_completed": {
+                    "description": "flag to get the on-boarding experience is completed or not.",
+                    "default": false,
+                    "type": "boolean",
+                    "deprecated": false
+                  },
+                  "account_type": {
+                    "description": "Type of the account.",
+                    "type": "string",
+                    "enum": [
+                      "LOCAL_USER",
+                      "LDAP_USER",
+                      "SAML_USER",
+                      "OIDC_USER",
+                      "REMOTE_USER"
+                    ],
+                    "deprecated": false
+                  },
+                  "user_group_identifiers": {
+                    "description": "List of user-group to be associated with",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "deprecated": false
+                  },
+                  "home_liveboard_identifier": {
+                    "description": "to set GUID for home live board.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "favorite_metadata": {
+                    "description": "to set GUID for home live board.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/FavoriteMetadataInput"
+                    },
+                    "deprecated": false
+                  },
+                  "org_identifiers": {
+                    "description": "List of Unique Organization Identifiers to be associated with",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "deprecated": false
+                  },
+                  "org_scope": {
+                    "description": "query param to handle ALL_ORG functionality.",
+                    "type": "string",
+                    "enum": [
+                      "ALL"
+                    ],
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "user_identifier"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/users/import": {
+      "post": {
+        "operationId": "importUsers",
+        "description": "To programmatically import users accounts in the ThoughtSpot system use this API endpoint.\nUsing this API, you can import multiple users.",
+        "tags": [
+          "User"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "users": {
+                    "description": "List of users needs to be imported.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/ImportUser"
+                    },
+                    "deprecated": false
+                  },
+                  "default_password": {
+                    "description": "Default password to be set if password field not present in above import user like first one",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "dry_run": {
+                    "description": "If true, This will preview the impacted users, but changes won't applied into the system",
+                    "default": true,
+                    "type": "boolean",
+                    "deprecated": false
+                  },
+                  "delete_unspecified_users": {
+                    "description": "if true, this api will delete all other users specified in above users list. Some important users like tsadmin, guest, system and su will be ignored.",
+                    "default": true,
+                    "type": "boolean",
+                    "deprecated": false
+                  },
+                  "org_scope": {
+                    "description": "query param to handle ALL_ORG functionality.",
+                    "type": "string",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "users",
+                  "default_password"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
                 }
               }
             }
@@ -501,38 +919,19 @@
           }
         }
       },
-      "FavoriteMetadataInput": {
-        "type": "object",
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "LIVEBOARD",
-              "ANSWER",
-              "LOGICAL_TABLE",
-              "CONNECTION"
-            ]
-          },
-          "identifier": {
-            "type": "string"
-          }
-        }
-      },
       "User": {
         "type": "object",
+        "required": [
+          "id",
+          "name",
+          "display_name",
+          "account_type",
+          "account_status",
+          "email",
+          "creation_time_in_millis",
+          "first_login_time_in_millis"
+        ],
         "properties": {
-          "hidden": {
-            "type": "boolean"
-          },
-          "deprecated": {
-            "type": "boolean"
-          },
-          "external": {
-            "type": "boolean"
-          },
-          "deleted": {
-            "type": "boolean"
-          },
           "id": {
             "type": "string"
           },
@@ -551,6 +950,72 @@
           "email": {
             "type": "string"
           },
+          "user_groups": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserGroup"
+            }
+          },
+          "privileges": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "UNKNOWN",
+                "ADMINISTRATION",
+                "AUTHORING",
+                "USERDATAUPLOADING",
+                "DATADOWNLOADING",
+                "USERMANAGEMENT",
+                "SECURITYMANAGEMENT",
+                "LOGICALMODELING",
+                "DATAMANAGEMENT",
+                "TAGMANAGEMENT",
+                "SHAREWITHALL",
+                "SYSTEMMANAGEMENT",
+                "JOBSCHEDULING",
+                "A3ANALYSIS",
+                "EXPERIMENTALFEATUREPRIVILEGE",
+                "BYPASSRLS",
+                "RANALYSIS",
+                "DISABLE_PINBOARD_CREATION",
+                "DEVELOPER",
+                "APPLICATION_ADMINISTRATION",
+                "USER_ADMINISTRATION",
+                "GROUP_ADMINISTRATION",
+                "BACKUP_ADMINISTRATION",
+                "SYSTEM_INFO_ADMINISTRATION",
+                "ENABLESPOTAPPCREATION",
+                "SYNCMANAGEMENT"
+              ]
+            }
+          },
+          "creation_time_in_millis": {
+            "type": "number",
+            "format": "float"
+          },
+          "first_login_time_in_millis": {
+            "type": "number",
+            "format": "float"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "hidden": {
+            "type": "boolean"
+          },
+          "deprecated": {
+            "type": "boolean"
+          },
+          "external": {
+            "type": "boolean"
+          },
+          "deleted": {
+            "type": "boolean"
+          },
           "visibility": {
             "type": "string"
           },
@@ -562,10 +1027,6 @@
           },
           "onboarding_experience_completed": {
             "type": "boolean"
-          },
-          "creation_time_in_millis": {
-            "type": "number",
-            "format": "float"
           },
           "modification_time_in_millis": {
             "type": "number",
@@ -599,8 +1060,8 @@
             "type": "boolean"
           },
           "expiration_time_in_millis": {
-            "type": "integer",
-            "format": "int32"
+            "type": "number",
+            "format": "float"
           },
           "is_first_login": {
             "type": "boolean"
@@ -612,18 +1073,8 @@
           "can_change_password": {
             "type": "boolean"
           },
-          "first_login_time_in_millis": {
-            "type": "integer",
-            "format": "int32"
-          },
           "current_org": {
-            "$ref": "#/components/schemas/CurrentOrg"
-          },
-          "tags": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
+            "$ref": "#/components/schemas/Org"
           },
           "incomplete_details": {
             "type": "array",
@@ -631,49 +1082,108 @@
               "type": "string"
             }
           },
-          "privileges": {
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "RANALYSIS",
-                "DATAMANAGEMENT",
-                "APPLICATION_ADMINISTRATION",
-                "USER_ADMINISTRATION",
-                "SYSTEMMANAGEMENT",
-                "SYSTEM_INFO_ADMINISTRATION",
-                "AUTHORING",
-                "BACKUP_ADMINISTRATION",
-                "SHAREWITHALL",
-                "DEVELOPER",
-                "JOBSCHEDULING",
-                "GROUP_ADMINISTRATION",
-                "BYPASSRLS",
-                "EXPERIMENTALFEATUREPRIVILEGE",
-                "A3ANALYSIS",
-                "USERDATAUPLOADING",
-                "DATADOWNLOADING",
-                "DISABLE_PINBOARD_CREATION",
-                "ADMINISTRATION"
-              ]
-            }
-          },
           "user_inherited_groups": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/UserInheritedGroups"
-            }
-          },
-          "user_groups": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/UserGroups"
+              "$ref": "#/components/schemas/UserInheritedGroup"
             }
           },
           "orgs": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Orgs"
+              "$ref": "#/components/schemas/Org"
+            }
+          }
+        }
+      },
+      "FavoriteMetadataInput": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "LIVEBOARD",
+              "ANSWER",
+              "LOGICAL_TABLE",
+              "CONNECTION",
+              "DATA_SOURCE"
+            ]
+          },
+          "identifier": {
+            "type": "string"
+          }
+        }
+      },
+      "ImportUser": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "display_name": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "account_type": {
+            "type": "string",
+            "enum": [
+              "LOCAL_USER",
+              "LDAP_USER",
+              "SAML_USER",
+              "OIDC_USER",
+              "REMOTE_USER"
+            ]
+          },
+          "account_status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "INACTIVE",
+              "EXPIRED",
+              "LOCKED",
+              "PENDING"
+            ]
+          },
+          "email": {
+            "type": "string"
+          },
+          "org_identifiers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "group_identifiers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "visibility": {
+            "type": "string",
+            "enum": [
+              "DEFAULT",
+              "NON_SHARABLE"
+            ]
+          },
+          "notify_on_share": {
+            "type": "boolean"
+          },
+          "show_onboarding_experience": {
+            "type": "boolean"
+          },
+          "onboarding_experience_completed": {
+            "type": "boolean"
+          },
+          "home_liveboard_identifier": {
+            "type": "string"
+          },
+          "favorite_metadata": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FavoriteMetadataInput"
             }
           }
         }
@@ -708,12 +1218,12 @@
             "type": "string"
           },
           "creation_time_in_millis": {
-            "type": "integer",
-            "format": "int32"
+            "type": "number",
+            "format": "float"
           },
           "expiration_time_in_millis": {
-            "type": "integer",
-            "format": "int32"
+            "type": "number",
+            "format": "float"
           },
           "scope": {
             "$ref": "#/components/schemas/Scope"
@@ -726,7 +1236,18 @@
           }
         }
       },
-      "CurrentOrg": {
+      "UserGroup": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "Org": {
         "type": "object",
         "properties": {
           "id": {
@@ -738,34 +1259,11 @@
           }
         }
       },
-      "UserInheritedGroups": {
+      "UserInheritedGroup": {
         "type": "object",
         "properties": {
           "id": {
             "type": "string"
-          },
-          "name": {
-            "type": "string"
-          }
-        }
-      },
-      "UserGroups": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          }
-        }
-      },
-      "Orgs": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
           },
           "name": {
             "type": "string"
