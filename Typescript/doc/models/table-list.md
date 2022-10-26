@@ -14,10 +14,10 @@
 | `id` | `string \| undefined` | Optional | GUID of the table |
 | `databaseStripe` | `string \| undefined` | Optional | Name of the database to which the table belongs |
 | `schemaStripe` | `string \| undefined` | Optional | Name of the schema to which the table belongs |
-| `isExternal` | [`TableListIsExternalEnum \| undefined`](../../doc/models/table-list-is-external-enum.md) | Optional | - |
-| `isDeprecated` | [`TableListIsDeprecatedEnum \| undefined`](../../doc/models/table-list-is-deprecated-enum.md) | Optional | Indicates if the table is deprecated |
-| `isDeleted` | [`TableListIsDeletedEnum \| undefined`](../../doc/models/table-list-is-deleted-enum.md) | Optional | Indicates if the table is deleted |
-| `isHidden` | [`TableListIsHiddenEnum \| undefined`](../../doc/models/table-list-is-hidden-enum.md) | Optional | Indicates if the table is hideen |
+| `isExternal` | `boolean \| undefined` | Optional | - |
+| `isDeprecated` | `boolean \| undefined` | Optional | Indicates if the table is deprecated |
+| `isDeleted` | `boolean \| undefined` | Optional | Indicates if the table is deleted |
+| `isHidden` | `boolean \| undefined` | Optional | Indicates if the table is hideen |
 | `indexVersion` | `number \| undefined` | Optional | - |
 | `generationNum` | `number \| undefined` | Optional | - |
 | `created` | `string \| undefined` | Optional | Date and time when the table was created |

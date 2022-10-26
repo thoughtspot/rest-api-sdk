@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description | Getter | Setter |
 |  --- | --- | --- | --- | --- | --- |
-| `OrgId` | `Integer` | Optional | Unique identifier of the organization. | Integer getOrgId() | setOrgId(Integer orgId) |
+| `OrgId` | `Integer` | Optional | The ID of the organization. | Integer getOrgId() | setOrgId(Integer orgId) |
 | `Users` | [`List<UserNameAndIDInput>`](../../doc/models/user-name-and-id-input.md) | Required | Array of objects. A JSON array of name of users or GUIDs of users or both. When both are given then id is considered | List<UserNameAndIDInput> getUsers() | setUsers(List<UserNameAndIDInput> users) |
 
 ## Example (as JSON)

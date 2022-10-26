@@ -10,41 +10,40 @@ ReportController reportController = client.getReportController();
 
 ## Methods
 
-* [Answer Report](../../doc/controllers/report.md#answer-report)
-* [Liveboard Report](../../doc/controllers/report.md#liveboard-report)
+* [Restapi V2 Answer Report](../../doc/controllers/report.md#restapi-v2-answer-report)
+* [Restapi V2 Liveboard Report](../../doc/controllers/report.md#restapi-v2-liveboard-report)
 
 
-# Answer Report
+# Restapi V2 Answer Report
 
 To programmatically download Answer data as a file, use this endpoint.
 
 The PDF will download data in the tabular format even if Answer is saved as chart.
 
-Permission: Requires at least view access to the object and datadownloading privilege
-
 ```java
-CompletableFuture<InputStream> answerReportAsync(
-    final TspublicRestV2ReportAnswerRequest body)
+CompletableFuture<Object> restapiV2AnswerReportAsync(
+    final String id,
+    final Type16Enum type)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`TspublicRestV2ReportAnswerRequest`](../../doc/models/tspublic-rest-v2-report-answer-request.md) | Body, Required | - |
+| `id` | `String` | Query, Required | GUID of the Answer to download. |
+| `type` | [`Type16Enum`](../../doc/models/type-16-enum.md) | Query, Required | Type of file to be generated. |
 
 ## Response Type
 
-`InputStream`
+`Object`
 
 ## Example Usage
 
 ```java
-TspublicRestV2ReportAnswerRequest body = new TspublicRestV2ReportAnswerRequest();
-body.setId("id6");
-body.setType(AnswerReportTypeEnum.PDF);
+String id = "id0";
+Type16Enum type = Type16Enum.PDF;
 
-reportController.answerReportAsync(body).thenAccept(result -> {
+reportController.restapiV2AnswerReportAsync(id, type).thenAccept(result -> {
     // TODO success callback handler
 }).exceptionally(exception -> {
     // TODO failure callback handler
@@ -56,37 +55,46 @@ reportController.answerReportAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Liveboard Report
+# Restapi V2 Liveboard Report
 
 To programmatically download Liveboard data or specific Visualization data from Liveboard as a file, use this endpoint
 
-Permission: Requires at least view access to the object and datadownloading privilege
-
 ```java
-CompletableFuture<InputStream> liveboardReportAsync(
-    final TspublicRestV2ReportLiveboardRequest body)
+CompletableFuture<Object> restapiV2LiveboardReportAsync(
+    final Type16Enum type,
+    final String id,
+    final List<String> vizId,
+    final String transientContent,
+    final String runtimeFilter,
+    final String runtimeSort,
+    final PdfOptionsInput pdfOptions)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`TspublicRestV2ReportLiveboardRequest`](../../doc/models/tspublic-rest-v2-report-liveboard-request.md) | Body, Required | - |
+| `type` | [`Type16Enum`](../../doc/models/type-16-enum.md) | Query, Required | Type of file to be generated. Valid values: CSV/XLSX/PDF/PNG. |
+| `id` | `String` | Query, Optional | GUID of the Liveboard to download.<br><br>This field is considered only when no input is provided for transientContent field. |
+| `vizId` | `List<String>` | Query, Optional | JSON Array of GUIDs of the visualizations in the Liveboard to be included in the downloaded file.<br><br>For CSV, XLSX and PNG file download, visualization id is mandatory. CSV and XLSX is valid only for visualization of type table and PNG is valid for charts.<br><br>Only one value will be accepted for these formats. If multiple values are provided then first value in the array will be considered. |
+| `transientContent` | `String` | Query, Optional | If you have embedded ThoughtSpot in your host application, and you want to download Liveboards with unsaved changes as a file, pass the transient content from the browser fetch request, using the getExportRequestForCurrentPinboard method. For more information, see https://developers.thoughtspot.com/docs/?pageid=liveboard-export-api#transient-pinboard. |
+| `runtimeFilter` | `String` | Query, Optional | If you have embedded ThoughtSpot in your host application, and you want to download Liveboards with unsaved changes as a file, pass the transient content from the browser fetch request, using the getExportRequestForCurrentPinboard method. For more information, see https://developers.thoughtspot.com/docs/?pageid=liveboard-export-api#transient-pinboard . |
+| `runtimeSort` | `String` | Query, Optional | JSON object which provides columns to sort the data at the time of data retrieval.<br><br>Example: {"sortCol1":"region","asc1":true,"sortCol2":"date"}<br><br>For more information, see https://developers.thoughtspot.com/docs/?pageid=runtime-filters |
+| `pdfOptions` | [`PdfOptionsInput`](../../doc/models/pdf-options-input.md) | Query, Optional | Additional options that are applicable for PDF type. |
 
 ## Response Type
 
-`InputStream`
+`Object`
 
 ## Example Usage
 
 ```java
-TspublicRestV2ReportLiveboardRequest body = new TspublicRestV2ReportLiveboardRequest();
-body.setType(LiveboardReportTypeEnum.PDF);
+Type16Enum type = Type16Enum.PDF;
 
-reportController.liveboardReportAsync(body).thenAccept(result -> {
+reportController.restapiV2LiveboardReportAsync(type, null, null, null, null, null, null).thenAccept(result -> {
     // TODO success callback handler
 }).exceptionally(exception -> {
     // TODO failure callback handler
@@ -98,5 +106,5 @@ reportController.liveboardReportAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 

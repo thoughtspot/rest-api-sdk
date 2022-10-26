@@ -10,30 +10,43 @@ SessionController sessionController = client.SessionController;
 
 ## Methods
 
-* [Get Session Info](../../doc/controllers/session.md#get-session-info)
-* [Logout](../../doc/controllers/session.md#logout)
-* [Get Token](../../doc/controllers/session.md#get-token)
-* [Revoke Token](../../doc/controllers/session.md#revoke-token)
+* [Restapi V2 Login](../../doc/controllers/session.md#restapi-v2-login)
+* [Restapi V2 Get Token](../../doc/controllers/session.md#restapi-v2-get-token)
 
 
-# Get Session Info
+# Restapi V2 Login
 
-To get session object information, use this endpoint
+You can programmatically create login session for a user in ThoughtSpot using this endpoint.
+
+You can create session by either providing userName and password as inputs in this request body or by including "Authorization" header with the token generated through the endpoint /tspublic/rest/v2/session/gettoken.
+
+userName and password input is given precedence over "Authorization" header, when both are included in the request.
 
 ```csharp
-GetSessionInfoAsync()
+RestapiV2LoginAsync(
+    string userName = null,
+    string password = null,
+    bool? rememberMe = null)
 ```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `userName` | `string` | Query, Optional | Username of the user account |
+| `password` | `string` | Query, Optional | The password of the user account |
+| `rememberMe` | `bool?` | Query, Optional | A flag to remember the user session. When set to true, sets a session cookie that persists in subsequent API calls. |
 
 ## Response Type
 
-`Task<object>`
+[`Task<Models.SessionLoginResponse>`](../../doc/models/session-login-response.md)
 
 ## Example Usage
 
 ```csharp
 try
 {
-    object result = await sessionController.GetSessionInfoAsync();
+    SessionLoginResponse result = await sessionController.RestapiV2LoginAsync(null, null, null);
 }
 catch (ApiException e){};
 ```
@@ -42,41 +55,10 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Logout
-
-To log a user out of the current session, use this endpoint
-
-:information_source: **Note** This endpoint does not require authentication.
-
-```csharp
-LogoutAsync()
-```
-
-## Response Type
-
-`Task<bool>`
-
-## Example Usage
-
-```csharp
-try
-{
-    bool? result = await sessionController.LogoutAsync();
-}
-catch (ApiException e){};
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
-
-
-# Get Token
+# Restapi V2 Get Token
 
 To programmatically create session token for a user in ThoughtSpot, use this endpoint.
 
@@ -96,18 +78,28 @@ You need to enable trusted authentication to generate secret key. To generate se
 
 Password is given precedence over secretKey input, when both are included in the request.
 
-:information_source: **Note** This endpoint does not require authentication.
-
 ```csharp
-GetTokenAsync(
-    Models.TspublicRestV2SessionGettokenRequest body)
+RestapiV2GetTokenAsync(
+    string userName,
+    string password = null,
+    string secretKey = null,
+    Models.AccessLevelEnum? accessLevel = null,
+    string tsObjectId = null,
+    string tokenExpiryDuration = null,
+    string orgId = null)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.TspublicRestV2SessionGettokenRequest`](../../doc/models/tspublic-rest-v2-session-gettoken-request.md) | Body, Required | - |
+| `userName` | `string` | Query, Required | Username of the user account |
+| `password` | `string` | Query, Optional | The password of the user account |
+| `secretKey` | `string` | Query, Optional | The secret key string provided by the ThoughtSpot application server. ThoughtSpot generates this secret key when you enable trusted authentication. |
+| `accessLevel` | [`Models.AccessLevelEnum?`](../../doc/models/access-level-enum.md) | Query, Optional | User access privilege.<br><br>FULL - Creates a session with full access.<br><br>REPORT_BOOK_VIEW - Allow view access to the specified visualizations. |
+| `tsObjectId` | `string` | Query, Optional | GUID of the ThoughtSpot object. If you have set the accessLevel attribute to REPORT_BOOK_VIEW, specify the GUID of the Liveboard or visualization object. |
+| `tokenExpiryDuration` | `string` | Query, Optional | Duration in seconds after which the token expires |
+| `orgId` | `string` | Query, Optional | Id of the organization to be associated with the user login. If no input is provided then last logged in organization will be considered |
 
 ## Response Type
 
@@ -116,12 +108,11 @@ GetTokenAsync(
 ## Example Usage
 
 ```csharp
-var body = new TspublicRestV2SessionGettokenRequest();
-body.UserName = "userName8";
+string userName = "userName2";
 
 try
 {
-    SessionLoginResponse result = await sessionController.GetTokenAsync(body);
+    SessionLoginResponse result = await sessionController.RestapiV2GetTokenAsync(userName, null, null, null, null, null, null);
 }
 catch (ApiException e){};
 ```
@@ -130,34 +121,5 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
-
-
-# Revoke Token
-
-To expire or revoke a token for a user, use this endpoint
-
-```csharp
-RevokeTokenAsync()
-```
-
-## Response Type
-
-`Task<bool>`
-
-## Example Usage
-
-```csharp
-try
-{
-    bool? result = await sessionController.RevokeTokenAsync();
-}
-catch (ApiException e){};
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 

@@ -10,83 +10,91 @@ report_controller = client.report
 
 ## Methods
 
-* [Answer Report](../../doc/controllers/report.md#answer-report)
-* [Liveboard Report](../../doc/controllers/report.md#liveboard-report)
+* [Restapi V2 Answer Report](../../doc/controllers/report.md#restapi-v2-answer-report)
+* [Restapi V2 Liveboard Report](../../doc/controllers/report.md#restapi-v2-liveboard-report)
 
 
-# Answer Report
+# Restapi V2 Answer Report
 
 To programmatically download Answer data as a file, use this endpoint.
 
 The PDF will download data in the tabular format even if Answer is saved as chart.
 
-Permission: Requires at least view access to the object and datadownloading privilege
-
 ```python
-def answer_report(self,
-                 body)
+def restapi_v_2__answer_report(self,
+                              id,
+                              mtype)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`TspublicRestV2ReportAnswerRequest`](../../doc/models/tspublic-rest-v2-report-answer-request.md) | Body, Required | - |
+| `id` | `string` | Query, Required | GUID of the Answer to download. |
+| `mtype` | [`Type16Enum`](../../doc/models/type-16-enum.md) | Query, Required | Type of file to be generated. |
 
 ## Response Type
 
-`binary`
+`object`
 
 ## Example Usage
 
 ```python
-body = TspublicRestV2ReportAnswerRequest()
-body.id = 'id6'
-body.mtype = AnswerReportTypeEnum.PDF
+id = 'id0'
+mtype = Type16Enum.PDF
 
-result = report_controller.answer_report(body)
+result = report_controller.restapi_v_2__answer_report(id, mtype)
 ```
 
 ## Errors
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Liveboard Report
+# Restapi V2 Liveboard Report
 
 To programmatically download Liveboard data or specific Visualization data from Liveboard as a file, use this endpoint
 
-Permission: Requires at least view access to the object and datadownloading privilege
-
 ```python
-def liveboard_report(self,
-                    body)
+def restapi_v_2__liveboard_report(self,
+                                 mtype,
+                                 id=None,
+                                 viz_id=None,
+                                 transient_content=None,
+                                 runtime_filter=None,
+                                 runtime_sort=None,
+                                 pdf_options=None)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`TspublicRestV2ReportLiveboardRequest`](../../doc/models/tspublic-rest-v2-report-liveboard-request.md) | Body, Required | - |
+| `mtype` | [`Type16Enum`](../../doc/models/type-16-enum.md) | Query, Required | Type of file to be generated. Valid values: CSV/XLSX/PDF/PNG. |
+| `id` | `string` | Query, Optional | GUID of the Liveboard to download.<br><br>This field is considered only when no input is provided for transientContent field. |
+| `viz_id` | `List of string` | Query, Optional | JSON Array of GUIDs of the visualizations in the Liveboard to be included in the downloaded file.<br><br>For CSV, XLSX and PNG file download, visualization id is mandatory. CSV and XLSX is valid only for visualization of type table and PNG is valid for charts.<br><br>Only one value will be accepted for these formats. If multiple values are provided then first value in the array will be considered. |
+| `transient_content` | `string` | Query, Optional | If you have embedded ThoughtSpot in your host application, and you want to download Liveboards with unsaved changes as a file, pass the transient content from the browser fetch request, using the getExportRequestForCurrentPinboard method. For more information, see https://developers.thoughtspot.com/docs/?pageid=liveboard-export-api#transient-pinboard. |
+| `runtime_filter` | `string` | Query, Optional | If you have embedded ThoughtSpot in your host application, and you want to download Liveboards with unsaved changes as a file, pass the transient content from the browser fetch request, using the getExportRequestForCurrentPinboard method. For more information, see https://developers.thoughtspot.com/docs/?pageid=liveboard-export-api#transient-pinboard . |
+| `runtime_sort` | `string` | Query, Optional | JSON object which provides columns to sort the data at the time of data retrieval.<br><br>Example: {"sortCol1":"region","asc1":true,"sortCol2":"date"}<br><br>For more information, see https://developers.thoughtspot.com/docs/?pageid=runtime-filters |
+| `pdf_options` | [`PdfOptionsInput`](../../doc/models/pdf-options-input.md) | Query, Optional | Additional options that are applicable for PDF type. |
 
 ## Response Type
 
-`binary`
+`object`
 
 ## Example Usage
 
 ```python
-body = TspublicRestV2ReportLiveboardRequest()
-body.mtype = LiveboardReportTypeEnum.PDF
+mtype = Type16Enum.PDF
 
-result = report_controller.liveboard_report(body)
+result = report_controller.restapi_v_2__liveboard_report(mtype)
 ```
 
 ## Errors
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 

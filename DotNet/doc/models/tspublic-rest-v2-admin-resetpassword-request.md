@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Name` | `string` | Optional | User name of the user account. |
+| `Name` | `string` | Optional | User name of the user account |
 | `Id` | `string` | Optional | The GUID of the user account to query. |
 | `NewPassword` | `string` | Required | A new password for the user. |
 

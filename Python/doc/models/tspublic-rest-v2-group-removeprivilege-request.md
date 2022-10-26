@@ -11,7 +11,7 @@
 |  --- | --- | --- | --- |
 | `name` | `string` | Optional | Name of the group |
 | `id` | `string` | Optional | The GUID of the group to query. |
-| `privileges` | [`List of RemovePrivilegesFromGroupPrivilegesEnum`](../../doc/models/remove-privileges-from-group-privileges-enum.md) | Optional | List of privileges |
+| `privileges` | [`List of PrivilegeEnum`](../../doc/models/privilege-enum.md) | Optional | A JSON array of name of users or GUIDs of users or both. When both are given then id is considered |
 
 ## Example (as JSON)
 

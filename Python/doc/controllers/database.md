@@ -10,54 +10,20 @@ database_controller = client.database
 
 ## Methods
 
-* [Get Databases](../../doc/controllers/database.md#get-databases)
-* [Get Schemas](../../doc/controllers/database.md#get-schemas)
-* [Get Tables](../../doc/controllers/database.md#get-tables)
-* [Get Table Details](../../doc/controllers/database.md#get-table-details)
-* [Create Table](../../doc/controllers/database.md#create-table)
-* [Run Query](../../doc/controllers/database.md#run-query)
+* [Restapi V2 Get Schemas](../../doc/controllers/database.md#restapi-v2-get-schemas)
+* [Restapi V2 Get Tables](../../doc/controllers/database.md#restapi-v2-get-tables)
+* [Restapi V2 Get Table Details](../../doc/controllers/database.md#restapi-v2-get-table-details)
+* [Restapi V2 Create Table](../../doc/controllers/database.md#restapi-v2-create-table)
+* [Restapi V2 Run Query](../../doc/controllers/database.md#restapi-v2-run-query)
 
 
-# Get Databases
-
-Note: This endpoint is applicable only for on-prem deployments
-
-To list all the databases in Falcon, use this endpoint.
-
-Permission: Requires administration privilege
-
-```python
-def get_databases(self)
-```
-
-## Response Type
-
-`List of string`
-
-## Example Usage
-
-```python
-result = database_controller.get_databases()
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
-
-
-# Get Schemas
-
-Note: This endpoint is applicable only for on-prem deployments
+# Restapi V2 Get Schemas
 
 To list all the schemas in a database in Falcon, use this endpoint.
 
-Permission: Requires administration privilege
-
 ```python
-def get_schemas(self,
-               database)
+def restapi_v_2__get_schemas(self,
+                            database)
 ```
 
 ## Parameters
@@ -75,28 +41,24 @@ def get_schemas(self,
 ```python
 database = 'database0'
 
-result = database_controller.get_schemas(database)
+result = database_controller.restapi_v_2__get_schemas(database)
 ```
 
 ## Errors
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Get Tables
-
-Note: This endpoint is applicable only for on-prem deployments.
+# Restapi V2 Get Tables
 
 To list all the tables in a schema of a database in Falcon, use this endpoint.
 
-Permission: Requires administration privilege
-
 ```python
-def get_tables(self,
-              database,
-              schema)
+def restapi_v_2__get_tables(self,
+                           database,
+                           schema)
 ```
 
 ## Parameters
@@ -116,27 +78,27 @@ def get_tables(self,
 database = 'database0'
 schema = 'schema2'
 
-result = database_controller.get_tables(database, schema)
+result = database_controller.restapi_v_2__get_tables(database, schema)
 ```
 
 ## Errors
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Get Table Details
+# Restapi V2 Get Table Details
 
 Note: This endpoint is applicable only for on-prem deployments.
 
 To provide details of a table in a schema of a database in Falcon, use this endpoint.
 
 ```python
-def get_table_details(self,
-                     database,
-                     table,
-                     schema=None)
+def restapi_v_2__get_table_details(self,
+                                  database,
+                                  table,
+                                  schema=None)
 ```
 
 ## Parameters
@@ -157,27 +119,23 @@ def get_table_details(self,
 database = 'database0'
 table = 'table2'
 
-result = database_controller.get_table_details(database, table)
+result = database_controller.restapi_v_2__get_table_details(database, table)
 ```
 
 ## Errors
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Create Table
-
-Note: This endpoint is applicable only for on-prem deployments.
+# Restapi V2 Create Table
 
 To create a table in Falcon, use this endpoint.
 
-Permission: Requires administration privilege
-
 ```python
-def create_table(self,
-                body)
+def restapi_v_2__create_table(self,
+                             body)
 ```
 
 ## Parameters
@@ -195,29 +153,23 @@ def create_table(self,
 ```python
 body = TspublicRestV2DatabaseTableCreateRequest()
 
-result = database_controller.create_table(body)
+result = database_controller.restapi_v_2__create_table(body)
 ```
 
 ## Errors
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Run Query
+# Restapi V2 Run Query
 
-Note: This endpoint is applicable only for on-prem deployments.
-
-To run a TQL statement in Falcon, use this endpoint.
-
-You can run only following type of statements - Table DDL alter and Table rows update and delete.
-
-Permission: Requires administration privilege
+To run a TQL statement in Falcon, use this endpoint. You can run only following type of statements - Table DDL alter and Table rows update and delete.
 
 ```python
-def run_query(self,
-             body)
+def restapi_v_2__run_query(self,
+                          body)
 ```
 
 ## Parameters
@@ -236,12 +188,12 @@ def run_query(self,
 body = TspublicRestV2DatabaseTableRunqueryRequest()
 body.statement = ['statement6', 'statement7']
 
-result = database_controller.run_query(body)
+result = database_controller.restapi_v_2__run_query(body)
 ```
 
 ## Errors
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 

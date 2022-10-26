@@ -9,16 +9,16 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `name` | `string \| undefined` | Optional | Name of the user group |
-| `id` | `string \| undefined` | Optional | GUID of the group to update |
+| `name` | `string \| undefined` | Optional | Name of the user group. The group name string must be unique. |
+| `id` | `string \| undefined` | Optional | he GUID of the user account to query. |
 | `displayName` | `string \| undefined` | Optional | A unique display name string for the user group, for example, Developer group. |
-| `visibility` | [`UpdateGroupVisibilityEnum \| undefined`](../../doc/models/update-group-visibility-enum.md) | Optional | Visibility of the user group.<br><br>The visibility attribute is set to DEFAULT. The DEFAULT attribute makes the user group visible for other user groups and allows them to share objects.<br>**Default**: `UpdateGroupVisibilityEnum.DEFAULT` |
+| `visibility` | [`Visibility2Enum \| undefined`](../../doc/models/visibility-2-enum.md) | Optional | Visibility of the user group. The visibility attribute is set to DEFAULT. The DEFAULT attribute makes the user group visible for other user groups and allows them to share objects.<br>**Default**: `Visibility2Enum.DEFAULT` |
 | `description` | `string \| undefined` | Optional | Description text for the group. |
-| `privileges` | [`UpdateGroupPrivilegesEnum[] \| undefined`](../../doc/models/update-group-privileges-enum.md) | Optional | A JSON array of privileges assigned to the group |
-| `groups` | [`GroupNameAndIDInput[] \| undefined`](../../doc/models/group-name-and-id-input.md) | Optional | A JSON array of group names or GUIDs or both. When both are given then id is considered |
-| `users` | [`UserNameAndIDInput[] \| undefined`](../../doc/models/user-name-and-id-input.md) | Optional | A JSON array of name of users or GUIDs of users or both. When both are given then id is considered |
-| `assignedLiveboards` | `string[] \| undefined` | Optional | An array of liveboard ids to be assigned to the group. |
-| `type` | [`UpdateGroupTypeEnum \| undefined`](../../doc/models/update-group-type-enum.md) | Optional | Type of user group. LOCAL_GROUP indicates that the user is created locally in the ThoughtSpot system.<br>**Default**: `UpdateGroupTypeEnum.LOCALGROUP` |
+| `privileges` | [`PrivilegeEnum[] \| undefined`](../../doc/models/privilege-enum.md) | Optional | A JSON array of privileges assigned to the group |
+| `groups` | [`GroupNameAndIDInput[] \| undefined`](../../doc/models/group-name-and-id-input.md) | Optional | Array of objects of groups that the user belong to. |
+| `users` | [`UserNameAndIDInput[] \| undefined`](../../doc/models/user-name-and-id-input.md) | Optional | Array of object, A JSON array of name of users of users. |
+| `assignedLiveboards` | `string[] \| undefined` | Optional | Array of string. An array of liveboard ids to be assigned to the group. |
+| `type` | [`Type10Enum \| undefined`](../../doc/models/type-10-enum.md) | Optional | Type of user group. LOCAL_GROUP indicates that the user is created locally in the ThoughtSpot system.<br>**Default**: `Type10Enum.LOCALGROUP` |
 
 ## Example (as JSON)
 

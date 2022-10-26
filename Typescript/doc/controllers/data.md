@@ -10,21 +10,19 @@ const dataController = new DataController(client);
 
 ## Methods
 
-* [Search Query Data](../../doc/controllers/data.md#search-query-data)
-* [Answer Data](../../doc/controllers/data.md#answer-data)
-* [Liveboard Data](../../doc/controllers/data.md#liveboard-data)
-* [Answer Query Sql](../../doc/controllers/data.md#answer-query-sql)
-* [Liveboard Query Sql](../../doc/controllers/data.md#liveboard-query-sql)
+* [Restapi V2 Search Query Data](../../doc/controllers/data.md#restapi-v2-search-query-data)
+* [Restapi V2 Liveboard Data](../../doc/controllers/data.md#restapi-v2-liveboard-data)
+* [Restapi V2 Answer Data](../../doc/controllers/data.md#restapi-v2-answer-data)
+* [Restapi V2 Answer Query Sql](../../doc/controllers/data.md#restapi-v2-answer-query-sql)
+* [Restapi V2 Liveboard Query Sql](../../doc/controllers/data.md#restapi-v2-liveboard-query-sql)
 
 
-# Search Query Data
+# Restapi V2 Search Query Data
 
 To programmatically retrieve data from ThoughtSpot using search query string, use this endpoint
 
-Permission: Requires at least view access to the dataobject and datadownloading privilege
-
 ```ts
-async searchQueryData(
+async restapiV2SearchQueryData(
   body: TspublicRestV2DataSearchRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<unknown>>
@@ -51,7 +49,7 @@ const body: TspublicRestV2DataSearchRequest = {
 };
 
 try {
-  const { result, ...httpResponse } = await dataController.searchQueryData(body);
+  const { result, ...httpResponse } = await dataController.restapiV2SearchQueryData(body);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch(error) {
@@ -66,17 +64,62 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
+| 500 | Operation failed | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
-# Answer Data
+# Restapi V2 Liveboard Data
 
-To retrieve data related to a Answer from the ThoughtSpot system, you can use this endpoint.
-
-Permission: Requires at least view access to the object and datadownloading privilege
+To retrieve data related to a Liveboard or visualization from the ThoughtSpot system, you can use this endpoint
 
 ```ts
-async answerData(
+async restapiV2LiveboardData(
+  body: TspublicRestV2DataLiveboardRequest,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<unknown>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`TspublicRestV2DataLiveboardRequest`](../../doc/models/tspublic-rest-v2-data-liveboard-request.md) | Body, Required | - |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+`unknown`
+
+## Example Usage
+
+```ts
+const contentType = null;
+const body: TspublicRestV2DataLiveboardRequest = {};
+
+try {
+  const { result, ...httpResponse } = await dataController.restapiV2LiveboardData(body);
+  // Get more response info...
+  // const { statusCode, headers } = httpResponse;
+} catch(error) {
+  if (error instanceof ApiError) {
+    const errors = error.result;
+    // const { statusCode, headers } = error;
+  }
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 500 | Operation failed | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
+
+
+# Restapi V2 Answer Data
+
+To retrieve data related to a Answer from the ThoughtSpot system, you can use this endpoint
+
+```ts
+async restapiV2AnswerData(
   body: TspublicRestV2DataAnswerRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<unknown>>
@@ -102,7 +145,7 @@ const body: TspublicRestV2DataAnswerRequest = {
 };
 
 try {
-  const { result, ...httpResponse } = await dataController.answerData(body);
+  const { result, ...httpResponse } = await dataController.restapiV2AnswerData(body);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch(error) {
@@ -117,66 +160,15 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
+| 500 | Operation failed | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
-# Liveboard Data
+# Restapi V2 Answer Query Sql
 
-To retrieve data related to a Liveboard or visualization from the ThoughtSpot system, you can use this endpoint
-
-Permission: Requires at least view access to the object and datadownloading privilege
+To retrieve the query SQL related to an Answer that is run on the data platform, you can use this endpoint
 
 ```ts
-async liveboardData(
-  body: TspublicRestV2DataLiveboardRequest,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<unknown>>
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `body` | [`TspublicRestV2DataLiveboardRequest`](../../doc/models/tspublic-rest-v2-data-liveboard-request.md) | Body, Required | - |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-`unknown`
-
-## Example Usage
-
-```ts
-const contentType = null;
-const body: TspublicRestV2DataLiveboardRequest = {};
-
-try {
-  const { result, ...httpResponse } = await dataController.liveboardData(body);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch(error) {
-  if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
-
-
-# Answer Query Sql
-
-To retrieve the query SQL related to an Answer that is run on the data platform, you can use this endpoint.
-
-Permission: Requires at least view access to the object
-
-```ts
-async answerQuerySql(
+async restapiV2AnswerQuerySql(
   id: string,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<AnswerQueryResponse>>
@@ -198,7 +190,7 @@ async answerQuerySql(
 ```ts
 const id = 'id0';
 try {
-  const { result, ...httpResponse } = await dataController.answerQuerySql(id);
+  const { result, ...httpResponse } = await dataController.restapiV2AnswerQuerySql(id);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch(error) {
@@ -213,17 +205,15 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
+| 500 | Operation failed | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
-# Liveboard Query Sql
+# Restapi V2 Liveboard Query Sql
 
-To retrieve the query SQL related to a Visualization in a Liveboard that is run on the data platform, you can use this endpoint.
-
-Permission: Requires at least view access to the object
+To retrieve the query SQL related to a Visualization in a Liveboard that is run on the data platform, you can use this endpoint
 
 ```ts
-async liveboardQuerySql(
+async restapiV2LiveboardQuerySql(
   id: string,
   vizId?: string[],
   requestOptions?: RequestOptions
@@ -234,7 +224,7 @@ async liveboardQuerySql(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `id` | `string` | Query, Required | The GUID of the Liveboard |
+| `id` | `string` | Query, Required | The GUID of the Answer |
 | `vizId` | `string[] \| undefined` | Query, Optional | A JSON array of GUIDs of the visualizations in the Liveboard. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -247,7 +237,7 @@ async liveboardQuerySql(
 ```ts
 const id = 'id0';
 try {
-  const { result, ...httpResponse } = await dataController.liveboardQuerySql(id);
+  const { result, ...httpResponse } = await dataController.restapiV2LiveboardQuerySql(id);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch(error) {
@@ -262,5 +252,5 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
+| 500 | Operation failed | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 

@@ -1,12 +1,12 @@
 
-# Getting Started with RESTAPI SDK
+# Getting Started with ThoughtSpot Public REST API
 
 ## Install the Package
 
 If you are building with .NET CLI tools then you can also use the following command:
 
 ```bash
-dotnet add package thoughtspot.rest.api.sdk --version 1.15.0
+dotnet add package thoughtspot.rest.api.sdk --version 1.13.1
 ```
 
 ## Test the SDK
@@ -21,8 +21,6 @@ The following parameters are configurable for the API Client:
 
 | Parameter | Type | Description |
 |  --- | --- | --- |
-| `AcceptLanguage` | `string` | response format<br>*Default*: `"*"` |
-| `ContentType` | `string` | body content type for post request<br>*Default*: `"application/json"` |
 | `BaseUrl` | `string` | *Default*: `"https://localhost:443"` |
 | `Environment` | Environment | The API environment. <br> **Default: `Environment.Production`** |
 | `Timeout` | `TimeSpan` | Http client timeout.<br>*Default*: `TimeSpan.FromSeconds(100)` |
@@ -31,11 +29,9 @@ The following parameters are configurable for the API Client:
 The API client can be initialized as follows:
 
 ```csharp
-RESTAPISDK.Standard.RESTAPISDKClient client = new RESTAPISDK.Standard.RESTAPISDKClient.Builder()
+ThoughtSpotPublicRESTAPI.Standard.ThoughtSpotPublicRESTAPIClient client = new ThoughtSpotPublicRESTAPI.Standard.ThoughtSpotPublicRESTAPIClient.Builder()
     .AccessToken("AccessToken")
-    .AcceptLanguage("*")
-    .ContentType("application/json")
-    .Environment(RESTAPISDK.Standard.Environment.Production)
+    .Environment(ThoughtSpotPublicRESTAPI.Standard.Environment.Production)
     .BaseUrl("https://localhost:443")
     .HttpClientConfig(config => config.NumberOfRetries(0))
     .Build();
@@ -47,20 +43,20 @@ This API uses `OAuth 2 Bearer token`.
 
 ## List of APIs
 
-* [Session](doc/controllers/session.md)
 * [User](doc/controllers/user.md)
 * [Group](doc/controllers/group.md)
-* [Org](doc/controllers/org.md)
 * [Metadata](doc/controllers/metadata.md)
 * [Database](doc/controllers/database.md)
 * [Connection](doc/controllers/connection.md)
 * [Data](doc/controllers/data.md)
-* [Report](doc/controllers/report.md)
-* [Admin](doc/controllers/admin.md)
-* [Security](doc/controllers/security.md)
 * [Logs](doc/controllers/logs.md)
-* [Materialization](doc/controllers/materialization.md)
 * [Custom Actions](doc/controllers/custom-actions.md)
+* [Security](doc/controllers/security.md)
+* [Org](doc/controllers/org.md)
+* [Session](doc/controllers/session.md)
+* [Admin](doc/controllers/admin.md)
+* [Report](doc/controllers/report.md)
+* [Materialization](doc/controllers/materialization.md)
 
 ## Classes Documentation
 

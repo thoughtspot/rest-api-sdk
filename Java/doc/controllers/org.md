@@ -10,16 +10,14 @@ OrgController orgController = client.getOrgController();
 
 ## Methods
 
-* [Get Org](../../doc/controllers/org.md#get-org)
-* [Create Org](../../doc/controllers/org.md#create-org)
-* [Update Org](../../doc/controllers/org.md#update-org)
-* [Delete Org](../../doc/controllers/org.md#delete-org)
-* [Search Orgs](../../doc/controllers/org.md#search-orgs)
+* [Restapi V2 Get Org](../../doc/controllers/org.md#restapi-v2-get-org)
+* [Restapi V2 Create Org](../../doc/controllers/org.md#restapi-v2-create-org)
+* [Restapi V2 Update Org](../../doc/controllers/org.md#restapi-v2-update-org)
+* [Restapi V2 Delete Org](../../doc/controllers/org.md#restapi-v2-delete-org)
+* [Restapi V2 Search Orgs](../../doc/controllers/org.md#restapi-v2-search-orgs)
 
 
-# Get Org
-
-This is endpoint is applicable only if organization feature is enabled in the cluster.
+# Restapi V2 Get Org
 
 To get the details of a specific organization by name or id, use this endpoint.
 
@@ -28,7 +26,7 @@ At least one value needed. When both are given,then id will be considered to fet
 Requires Administration privilege for tenant.
 
 ```java
-CompletableFuture<OrgsResponse> getOrgAsync(
+CompletableFuture<OrgsResponse> restapiV2GetOrgAsync(
     final String name,
     final Integer id)
 ```
@@ -47,7 +45,7 @@ CompletableFuture<OrgsResponse> getOrgAsync(
 ## Example Usage
 
 ```java
-orgController.getOrgAsync(null, null).thenAccept(result -> {
+orgController.restapiV2GetOrgAsync(null, null).thenAccept(result -> {
     // TODO success callback handler
 }).exceptionally(exception -> {
     // TODO failure callback handler
@@ -59,17 +57,17 @@ orgController.getOrgAsync(null, null).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Create Org
-
-This is endpoint is applicable only if organization feature is enabled in the cluster.
+# Restapi V2 Create Org
 
 To programmatically create an organization in the ThoughtSpot system, use this API endpoint.
 
+Requires Administration privilege for tenant.
+
 ```java
-CompletableFuture<OrgsResponse> createOrgAsync(
+CompletableFuture<OrgsResponse> restapiV2CreateOrgAsync(
     final TspublicRestV2OrgCreateRequest body)
 ```
 
@@ -89,7 +87,7 @@ CompletableFuture<OrgsResponse> createOrgAsync(
 TspublicRestV2OrgCreateRequest body = new TspublicRestV2OrgCreateRequest();
 body.setName("name6");
 
-orgController.createOrgAsync(body).thenAccept(result -> {
+orgController.restapiV2CreateOrgAsync(body).thenAccept(result -> {
     // TODO success callback handler
 }).exceptionally(exception -> {
     // TODO failure callback handler
@@ -101,12 +99,10 @@ orgController.createOrgAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Update Org
-
-This is endpoint is applicable only if organization feature is enabled in the cluster.
+# Restapi V2 Update Org
 
 You can use this endpoint to programmatically modify an existing org.
 
@@ -115,7 +111,7 @@ Provide name or id of the organization to update the properties. When both id an
 Requires Administration privilege for tenant.
 
 ```java
-CompletableFuture<OrgsResponse> updateOrgAsync(
+CompletableFuture<OrgsResponse> restapiV2UpdateOrgAsync(
     final TspublicRestV2OrgUpdateRequest body)
 ```
 
@@ -134,7 +130,7 @@ CompletableFuture<OrgsResponse> updateOrgAsync(
 ```java
 TspublicRestV2OrgUpdateRequest body = new TspublicRestV2OrgUpdateRequest();
 
-orgController.updateOrgAsync(body).thenAccept(result -> {
+orgController.restapiV2UpdateOrgAsync(body).thenAccept(result -> {
     // TODO success callback handler
 }).exceptionally(exception -> {
     // TODO failure callback handler
@@ -146,12 +142,10 @@ orgController.updateOrgAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Delete Org
-
-This is endpoint is applicable only if organization feature is enabled in the cluster.
+# Restapi V2 Delete Org
 
 To remove an organization from the ThoughtSpot system, send a DELETE request to this endpoint.
 
@@ -160,7 +154,7 @@ At least one value is needed. When both id and name are given, then id will be c
 Requires Administration privilege for tenant.
 
 ```java
-CompletableFuture<Boolean> deleteOrgAsync(
+CompletableFuture<Boolean> restapiV2DeleteOrgAsync(
     final String name,
     final Integer id)
 ```
@@ -179,7 +173,7 @@ CompletableFuture<Boolean> deleteOrgAsync(
 ## Example Usage
 
 ```java
-orgController.deleteOrgAsync(null, null).thenAccept(result -> {
+orgController.restapiV2DeleteOrgAsync(null, null).thenAccept(result -> {
     // TODO success callback handler
 }).exceptionally(exception -> {
     // TODO failure callback handler
@@ -191,12 +185,10 @@ orgController.deleteOrgAsync(null, null).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Search Orgs
-
-This is endpoint is applicable only if organization feature is enabled in the cluster.
+# Restapi V2 Search Orgs
 
 To get the details of a specific organization or all organizations in the ThoughtSpot system use this end point.
 
@@ -205,7 +197,7 @@ If no input is provided, then all organizations are included in the response.
 Requires Administration privilege for tenant.
 
 ```java
-CompletableFuture<List<OrgsResponse>> searchOrgsAsync(
+CompletableFuture<List<OrgsResponse>> restapiV2SearchOrgsAsync(
     final TspublicRestV2OrgSearchRequest body)
 ```
 
@@ -224,7 +216,7 @@ CompletableFuture<List<OrgsResponse>> searchOrgsAsync(
 ```java
 TspublicRestV2OrgSearchRequest body = new TspublicRestV2OrgSearchRequest();
 
-orgController.searchOrgsAsync(body).thenAccept(result -> {
+orgController.restapiV2SearchOrgsAsync(body).thenAccept(result -> {
     // TODO success callback handler
 }).exceptionally(exception -> {
     // TODO failure callback handler
@@ -236,5 +228,5 @@ orgController.searchOrgsAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 

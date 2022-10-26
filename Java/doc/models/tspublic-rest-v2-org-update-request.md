@@ -12,7 +12,7 @@
 | `Name` | `String` | Optional | Name of the organization. | String getName() | setName(String name) |
 | `Id` | `Integer` | Optional | The ID of the organization. | Integer getId() | setId(Integer id) |
 | `Description` | `String` | Optional | Description text for the organization. | String getDescription() | setDescription(String description) |
-| `Active` | [`UpdateOrgActiveEnum`](../../doc/models/update-org-active-enum.md) | Optional | Status of the organization. | UpdateOrgActiveEnum getActive() | setActive(UpdateOrgActiveEnum active) |
+| `Active` | `Boolean` | Optional | Status of the organization. | Boolean getActive() | setActive(Boolean active) |
 
 ## Example (as JSON)
 

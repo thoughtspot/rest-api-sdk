@@ -10,21 +10,19 @@ DataController dataController = client.DataController;
 
 ## Methods
 
-* [Search Query Data](../../doc/controllers/data.md#search-query-data)
-* [Answer Data](../../doc/controllers/data.md#answer-data)
-* [Liveboard Data](../../doc/controllers/data.md#liveboard-data)
-* [Answer Query Sql](../../doc/controllers/data.md#answer-query-sql)
-* [Liveboard Query Sql](../../doc/controllers/data.md#liveboard-query-sql)
+* [Restapi V2 Search Query Data](../../doc/controllers/data.md#restapi-v2-search-query-data)
+* [Restapi V2 Liveboard Data](../../doc/controllers/data.md#restapi-v2-liveboard-data)
+* [Restapi V2 Answer Data](../../doc/controllers/data.md#restapi-v2-answer-data)
+* [Restapi V2 Answer Query Sql](../../doc/controllers/data.md#restapi-v2-answer-query-sql)
+* [Restapi V2 Liveboard Query Sql](../../doc/controllers/data.md#restapi-v2-liveboard-query-sql)
 
 
-# Search Query Data
+# Restapi V2 Search Query Data
 
 To programmatically retrieve data from ThoughtSpot using search query string, use this endpoint
 
-Permission: Requires at least view access to the dataobject and datadownloading privilege
-
 ```csharp
-SearchQueryDataAsync(
+RestapiV2SearchQueryDataAsync(
     Models.TspublicRestV2DataSearchRequest body)
 ```
 
@@ -47,7 +45,7 @@ body.DataObjectId = "dataObjectId6";
 
 try
 {
-    object result = await dataController.SearchQueryDataAsync(body);
+    object result = await dataController.RestapiV2SearchQueryDataAsync(body);
 }
 catch (ApiException e){};
 ```
@@ -56,17 +54,53 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Answer Data
+# Restapi V2 Liveboard Data
 
-To retrieve data related to a Answer from the ThoughtSpot system, you can use this endpoint.
-
-Permission: Requires at least view access to the object and datadownloading privilege
+To retrieve data related to a Liveboard or visualization from the ThoughtSpot system, you can use this endpoint
 
 ```csharp
-AnswerDataAsync(
+RestapiV2LiveboardDataAsync(
+    Models.TspublicRestV2DataLiveboardRequest body)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`Models.TspublicRestV2DataLiveboardRequest`](../../doc/models/tspublic-rest-v2-data-liveboard-request.md) | Body, Required | - |
+
+## Response Type
+
+`Task<object>`
+
+## Example Usage
+
+```csharp
+var body = new TspublicRestV2DataLiveboardRequest();
+
+try
+{
+    object result = await dataController.RestapiV2LiveboardDataAsync(body);
+}
+catch (ApiException e){};
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+
+
+# Restapi V2 Answer Data
+
+To retrieve data related to a Answer from the ThoughtSpot system, you can use this endpoint
+
+```csharp
+RestapiV2AnswerDataAsync(
     Models.TspublicRestV2DataAnswerRequest body)
 ```
 
@@ -88,7 +122,7 @@ body.Id = "id6";
 
 try
 {
-    object result = await dataController.AnswerDataAsync(body);
+    object result = await dataController.RestapiV2AnswerDataAsync(body);
 }
 catch (ApiException e){};
 ```
@@ -97,57 +131,15 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Liveboard Data
+# Restapi V2 Answer Query Sql
 
-To retrieve data related to a Liveboard or visualization from the ThoughtSpot system, you can use this endpoint
-
-Permission: Requires at least view access to the object and datadownloading privilege
+To retrieve the query SQL related to an Answer that is run on the data platform, you can use this endpoint
 
 ```csharp
-LiveboardDataAsync(
-    Models.TspublicRestV2DataLiveboardRequest body)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `body` | [`Models.TspublicRestV2DataLiveboardRequest`](../../doc/models/tspublic-rest-v2-data-liveboard-request.md) | Body, Required | - |
-
-## Response Type
-
-`Task<object>`
-
-## Example Usage
-
-```csharp
-var body = new TspublicRestV2DataLiveboardRequest();
-
-try
-{
-    object result = await dataController.LiveboardDataAsync(body);
-}
-catch (ApiException e){};
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
-
-
-# Answer Query Sql
-
-To retrieve the query SQL related to an Answer that is run on the data platform, you can use this endpoint.
-
-Permission: Requires at least view access to the object
-
-```csharp
-AnswerQuerySqlAsync(
+RestapiV2AnswerQuerySqlAsync(
     string id)
 ```
 
@@ -168,7 +160,7 @@ string id = "id0";
 
 try
 {
-    AnswerQueryResponse result = await dataController.AnswerQuerySqlAsync(id);
+    AnswerQueryResponse result = await dataController.RestapiV2AnswerQuerySqlAsync(id);
 }
 catch (ApiException e){};
 ```
@@ -177,17 +169,15 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Liveboard Query Sql
+# Restapi V2 Liveboard Query Sql
 
-To retrieve the query SQL related to a Visualization in a Liveboard that is run on the data platform, you can use this endpoint.
-
-Permission: Requires at least view access to the object
+To retrieve the query SQL related to a Visualization in a Liveboard that is run on the data platform, you can use this endpoint
 
 ```csharp
-LiveboardQuerySqlAsync(
+RestapiV2LiveboardQuerySqlAsync(
     string id,
     List<string> vizId = null)
 ```
@@ -196,7 +186,7 @@ LiveboardQuerySqlAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `id` | `string` | Query, Required | The GUID of the Liveboard |
+| `id` | `string` | Query, Required | The GUID of the Answer |
 | `vizId` | `List<string>` | Query, Optional | A JSON array of GUIDs of the visualizations in the Liveboard. |
 
 ## Response Type
@@ -210,7 +200,7 @@ string id = "id0";
 
 try
 {
-    LiveboardQueryResponse result = await dataController.LiveboardQuerySqlAsync(id, null);
+    LiveboardQueryResponse result = await dataController.RestapiV2LiveboardQuerySqlAsync(id, null);
 }
 catch (ApiException e){};
 ```
@@ -219,5 +209,5 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 

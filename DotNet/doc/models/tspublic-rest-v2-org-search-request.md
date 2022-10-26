@@ -11,7 +11,7 @@
 |  --- | --- | --- | --- |
 | `Name` | `string` | Optional | Name of the organization. |
 | `Id` | `int?` | Optional | The ID of the organization. |
-| `ShowDeleted` | [`Models.SearchOrgsShowDeletedEnum?`](../../doc/models/search-orgs-show-deleted-enum.md) | Optional | When set to true, the response will include the details of deleted organization also.<br>**Default**: `SearchOrgsShowDeletedEnum.false` |
+| `ShowDeleted` | `bool?` | Optional | When set to true, the response will include the details of deleted organization also.<br>**Default**: `false` |
 
 ## Example (as JSON)
 

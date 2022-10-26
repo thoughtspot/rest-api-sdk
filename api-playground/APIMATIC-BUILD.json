@@ -16,28 +16,28 @@
                 "packageSettings": {
                 "GroupId": "io.github.thoughtspot",
                 "PackageName": "rest-api-sdk-lib",
-                "Version": "1.15.0"
+                "Version": "1.13.1"
                 }
             },
             "typescript": {
                 "packageRepository": "Npm",
                 "packageSettings": {
                 "PackageName": "thoughtspot@rest-api-sdk",
-                "Version": "1.15.0"
+                "Version": "1.13.1"
                 }
             },
             "python": {
                 "packageRepository": "PyPI",
                 "packageSettings": {
                 "PackageName": "thoughtspot-rest-api-sdk",
-                "Version": "1.15.0"
+                "Version": "1.13.1"
                 }
             },
             "csharp": {
                 "packageRepository": "NuGet",
                 "packageSettings": {
                 "PackageName": "thoughtspot.rest.api.sdk",
-                "Version": "1.15.0"
+                "Version": "1.13.1"
                 }
             }
         },

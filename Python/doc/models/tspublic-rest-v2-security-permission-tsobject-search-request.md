@@ -11,7 +11,7 @@
 |  --- | --- | --- | --- |
 | `ts_object` | [`List of TsObjectSearchInput`](../../doc/models/ts-object-search-input.md) | Required | A JSON Array of GUIDs and type of metadata object. |
 | `principal` | [`List of UserNameAndIDInput`](../../doc/models/user-name-and-id-input.md) | Optional | A JSON array of principal names or GUIDs. When both are given then id is considered. |
-| `include_dependent` | [`SearchPermissionOnObjectsIncludeDependentEnum`](../../doc/models/search-permission-on-objects-include-dependent-enum.md) | Optional | When this field is set to true, the API response includes the permission details for the dependent objects<br>**Default**: `'false'` |
+| `include_dependent` | `bool` | Optional | When this field is set to true, the API response includes the permission details for the dependent objects.<br>**Default**: `False` |
 
 ## Example (as JSON)
 

@@ -11,7 +11,7 @@
 |  --- | --- | --- | --- |
 | `Name` | `string` | Optional | User name of the user account |
 | `Id` | `string` | Optional | The GUID of the user account |
-| `Groups` | [`List<Models.GroupNameAndIDInput>`](../../doc/models/group-name-and-id-input.md) | Required | A JSON array of group names or GUIDs or both. When both are given then id is considered |
+| `Groups` | [`List<Models.GroupNameAndIDInput>`](../../doc/models/group-name-and-id-input.md) | Required | Array of objects of groups that the user belong to. |
 
 ## Example (as JSON)
 

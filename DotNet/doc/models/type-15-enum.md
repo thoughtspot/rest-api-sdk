@@ -1,0 +1,25 @@
+
+# Type 15 Enum
+
+Type of the connect being searched. Valid values: SNOWFLAKE|AMAZON_REDSHIFT|GOOGLE_BIGQUERY|AZURE_SYNAPSE|TERADATA|STARBURST|SAP_HANA|ORACLE_ADW|DATABRICKS|DENODO
+
+## Enumeration
+
+`Type15Enum`
+
+## Fields
+
+| Name |
+|  --- |
+| `SNOWFLAKE` |
+| `AMAZONREDSHIFT` |
+| `GOOGLEBIGQUERY` |
+| `AZURESYNAPSE` |
+| `TERADATA` |
+| `STARBURST` |
+| `SAPHANA` |
+| `ORACLEADW` |
+| `DATABRICKS` |
+| `DENODO` |
+| `DREMIO` |
+
