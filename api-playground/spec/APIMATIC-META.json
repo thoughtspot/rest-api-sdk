@@ -1,9 +1,0 @@
-{
-    "CodeGenSettings": {
-        "ArraySerialization": "Plain",
-        "AllowSkippingSSLCertVerification": true,
-        "PreserveParameterOrder": true,
-        "ValidateRequiredParameters": true,
-        "UserAgent": "RestAPI V2 SDK"
-  }
-}

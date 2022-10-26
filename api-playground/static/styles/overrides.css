@@ -1,0 +1,22 @@
+@font-face {
+    font-family: 'Optimo-Plain';
+    src: url('../fonts/Plain-Medium.otf') format('opentype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Optimo-Plain';
+    src: url('../fonts/Plain-Light.otf') format('opentype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+.portal-header {
+    background: #323946
+}
+.branding-container .logo p {
+    color: #eaedf2
+}

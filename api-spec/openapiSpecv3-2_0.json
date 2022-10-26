@@ -1,0 +1,528 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "ThoughtSpot Public REST API",
+    "version": "2.0"
+  },
+  "tags": [],
+  "paths": {
+    "/api/rest/2.0/auth/session/user": {
+      "get": {
+        "operationId": "getCurrentUserInfo",
+        "description": "Get Session object information",
+        "tags": [
+          "Auth"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/auth/session/login": {
+      "post": {
+        "operationId": "login",
+        "description": "You can programmatically create login session for a user in ThoughtSpot using this endpoint. \n\nYou can create session by either providing userName and password as inputs in this request body or by including \"Authorization\" header with the token generated through the endpoint /tspublic/rest/v2/session/gettoken. \n\nuserName and password input is given precedence over \"Authorization\" header, when both are included in the request.",
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "description": "Username of the user account",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "password": {
+                    "description": "The password of the user account",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "remember_me": {
+                    "description": "A flag to remember the user session. When set to true, sets a session cookie that persists in subsequent API calls.",
+                    "type": "boolean",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "username",
+                  "password"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/auth/token/object": {
+      "post": {
+        "operationId": "getObjectAccessToken",
+        "description": " To programmatically create session token for a user in ThoughtSpot, use this endpoint. \n\nYou can generate the token for a user by providing password or secret key from the cluster. \n\nYou need to enable trusted authentication to generate secret key. To generate secret key, follow below steps. \n\n\n 1. Click the Develop tab. \n\n\n 2. Under Customizations, click Settings. \n\n\n 3. To enable trusted authentication, turn on the toggle. \n\n\n 4. A secret_key for trusted authentication is generated. \n\n\n 5. Click the clipboard icon to copy the token. \n\n\n \n\nPassword is given precedence over secretKey input, when both are included in the request.",
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "description": "Username of the user account",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "password": {
+                    "description": "The password of the user account",
+                    "default": "",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "secret_key": {
+                    "description": "The secret key string provided by the ThoughtSpot application server. ThoughtSpot generates this secret key when you enable trusted authentication.",
+                    "default": "",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "object_id": {
+                    "description": "GUID of the ThoughtSpot object. If set, the bearer will only have access to the specified Liveboard or another object.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "validity_time_in_sec": {
+                    "description": "Duration in seconds after which the token expires",
+                    "default": 300,
+                    "type": "integer",
+                    "format": "int32",
+                    "deprecated": false
+                  },
+                  "organization_id": {
+                    "description": "Id of the organization to be associated with the user login. If no input is provided then last logged in organization will be considered",
+                    "default": 0,
+                    "type": "integer",
+                    "format": "int32",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "username",
+                  "object_id"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Token"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/auth/token/full": {
+      "post": {
+        "operationId": "getFullAccessToken",
+        "description": " To programmatically create session token for a user in ThoughtSpot, use this endpoint. \n\nYou can generate the token for a user by providing password or secret key from the cluster. \n\nYou need to enable trusted authentication to generate secret key. To generate secret key, follow below steps. \n\n\n 1. Click the Develop tab. \n\n\n 2. Under Customizations, click Settings. \n\n\n 3. To enable trusted authentication, turn on the toggle. \n\n\n 4. A secret_key for trusted authentication is generated. \n\n\n 5. Click the clipboard icon to copy the token. \n\n\n \n\nPassword is given precedence over secretKey input, when both are included in the request.",
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "description": "Username of the user account",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "password": {
+                    "description": "The password of the user account",
+                    "default": "",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "secret_key": {
+                    "description": "The secret key string provided by the ThoughtSpot application server. ThoughtSpot generates this secret key when you enable trusted authentication.",
+                    "default": "",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "validity_time_in_sec": {
+                    "description": "Duration in seconds after which the token expires",
+                    "default": 300,
+                    "type": "integer",
+                    "format": "int32",
+                    "deprecated": false
+                  },
+                  "organization_id": {
+                    "description": "Id of the organization to be associated with the user login. If no input is provided then last logged in organization will be considered",
+                    "default": 0,
+                    "type": "integer",
+                    "format": "int32",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "username"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Token"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/auth/session/logout": {
+      "post": {
+        "operationId": "logout",
+        "description": "To log a user out of the current session, use this endpoint",
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/auth/token/revoke": {
+      "post": {
+        "operationId": "revokeToken",
+        "description": "To expire or revoke a token for a user, use this endpoint",
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "token": {
+                    "type": "string",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "username",
+                  "token"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "object"
+          }
+        }
+      },
+      "User": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "display_name",
+          "account_type",
+          "account_status",
+          "email",
+          "creation_time_in_millis",
+          "first_login_time_in_millis"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "display_name": {
+            "type": "string"
+          },
+          "account_type": {
+            "type": "string"
+          },
+          "account_status": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "user_groups": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserGroup"
+            }
+          },
+          "privileges": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "creation_time_in_millis": {
+            "type": "number",
+            "format": "float"
+          },
+          "first_login_time_in_millis": {
+            "type": "number",
+            "format": "float"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "RiseSetter": {
+        "type": "object",
+        "required": [
+          "field",
+          "path"
+        ],
+        "properties": {
+          "field": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string"
+          }
+        }
+      },
+      "Token": {
+        "type": "object",
+        "required": [
+          "token",
+          "creation_time_in_millis",
+          "expiration_time_in_millis",
+          "scope",
+          "valid_for_userid",
+          "valid_for_username"
+        ],
+        "properties": {
+          "token": {
+            "type": "string"
+          },
+          "creation_time_in_millis": {
+            "type": "number",
+            "format": "float"
+          },
+          "expiration_time_in_millis": {
+            "type": "number",
+            "format": "float"
+          },
+          "scope": {
+            "$ref": "#/components/schemas/Scope"
+          },
+          "valid_for_userid": {
+            "type": "string"
+          },
+          "valid_for_username": {
+            "type": "string"
+          }
+        }
+      },
+      "UserGroup": {
+        "type": "object",
+        "required": [
+          "name",
+          "id"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          }
+        }
+      },
+      "Scope": {
+        "type": "object",
+        "required": [
+          "access_type"
+        ],
+        "properties": {
+          "access_type": {
+            "type": "string"
+          },
+          "organisation_id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "metadata_id": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "servers": [
+    {
+      "url": "{base-url}",
+      "variables": {
+        "base-url": {
+          "default": "https://localhost:443"
+        }
+      }
+    }
+  ]
+}
