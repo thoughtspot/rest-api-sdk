@@ -10,8 +10,8 @@
 | Name | Type | Tags | Description | Getter | Setter |
 |  --- | --- | --- | --- | --- | --- |
 | `TsObjectId` | `List<String>` | Required | A JSON array of GUIDs of the metadata objects. | List<String> getTsObjectId() | setTsObjectId(List<String> tsObjectId) |
-| `Name` | `String` | Optional | User name of the user account. | String getName() | setName(String name) |
-| `Id` | `String` | Optional | The GUID of the user account. | String getId() | setId(String id) |
+| `Name` | `String` | Optional | User name of the user account | String getName() | setName(String name) |
+| `Id` | `String` | Optional | The GUID of the user account | String getId() | setId(String id) |
 
 ## Example (as JSON)
 

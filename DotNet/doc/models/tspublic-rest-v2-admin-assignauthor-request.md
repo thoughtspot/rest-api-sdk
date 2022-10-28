@@ -10,8 +10,8 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `TsObjectId` | `List<string>` | Required | A JSON array of GUIDs of the metadata objects. |
-| `Name` | `string` | Optional | User name of the user account. |
-| `Id` | `string` | Optional | The GUID of the user account. |
+| `Name` | `string` | Optional | User name of the user account |
+| `Id` | `string` | Optional | The GUID of the user account |
 
 ## Example (as JSON)
 

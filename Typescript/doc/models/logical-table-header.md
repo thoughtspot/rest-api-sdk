@@ -19,8 +19,8 @@
 | `modifiedBy` | `string \| undefined` | Optional | - |
 | `generationNum` | `number \| undefined` | Optional | - |
 | `owner` | `string \| undefined` | Optional | - |
-| `deleted` | [`LogicalTableHeaderDeletedEnum \| undefined`](../../doc/models/logical-table-header-deleted-enum.md) | Optional | - |
-| `hidden` | [`LogicalTableHeaderHiddenEnum \| undefined`](../../doc/models/logical-table-header-hidden-enum.md) | Optional | - |
+| `deleted` | `boolean \| undefined` | Optional | - |
+| `hidden` | `boolean \| undefined` | Optional | - |
 | `database` | `string \| undefined` | Optional | - |
 | `schema` | `string \| undefined` | Optional | - |
 | `type` | `string \| undefined` | Optional | - |

@@ -10,7 +10,7 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `id` | `string` | Required | GUID of the connection |
-| `table` | [`AddTableInput[]`](../../doc/models/add-table-input.md) | Required | - |
+| `table` | [`AddTableInput[]`](../../doc/models/add-table-input.md) | Required | A JSON array of table details |
 
 ## Example (as JSON)
 

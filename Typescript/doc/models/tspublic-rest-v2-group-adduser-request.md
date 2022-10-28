@@ -10,8 +10,8 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `name` | `string \| undefined` | Optional | Name of the group |
-| `id` | `string \| undefined` | Optional | The GUID of the group |
-| `users` | [`UserNameAndIDInput[]`](../../doc/models/user-name-and-id-input.md) | Required | A JSON array of name of users or GUIDs of users or both. When both are given then id is considered |
+| `id` | `string \| undefined` | Optional | The GUID of the group to query. |
+| `users` | [`UserNameAndIDInput[]`](../../doc/models/user-name-and-id-input.md) | Required | Array of user name that you want to update in user group. |
 
 ## Example (as JSON)
 

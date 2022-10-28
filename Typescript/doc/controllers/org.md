@@ -10,16 +10,14 @@ const orgController = new OrgController(client);
 
 ## Methods
 
-* [Get Org](../../doc/controllers/org.md#get-org)
-* [Create Org](../../doc/controllers/org.md#create-org)
-* [Update Org](../../doc/controllers/org.md#update-org)
-* [Delete Org](../../doc/controllers/org.md#delete-org)
-* [Search Orgs](../../doc/controllers/org.md#search-orgs)
+* [Restapi V2 Get Org](../../doc/controllers/org.md#restapi-v2-get-org)
+* [Restapi V2 Create Org](../../doc/controllers/org.md#restapi-v2-create-org)
+* [Restapi V2 Update Org](../../doc/controllers/org.md#restapi-v2-update-org)
+* [Restapi V2 Delete Org](../../doc/controllers/org.md#restapi-v2-delete-org)
+* [Restapi V2 Search Orgs](../../doc/controllers/org.md#restapi-v2-search-orgs)
 
 
-# Get Org
-
-This is endpoint is applicable only if organization feature is enabled in the cluster.
+# Restapi V2 Get Org
 
 To get the details of a specific organization by name or id, use this endpoint.
 
@@ -28,7 +26,7 @@ At least one value needed. When both are given,then id will be considered to fet
 Requires Administration privilege for tenant.
 
 ```ts
-async getOrg(
+async restapiV2GetOrg(
   name?: string,
   id?: number,
   requestOptions?: RequestOptions
@@ -51,7 +49,7 @@ async getOrg(
 
 ```ts
 try {
-  const { result, ...httpResponse } = await orgController.getOrg();
+  const { result, ...httpResponse } = await orgController.restapiV2GetOrg();
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch(error) {
@@ -66,17 +64,17 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
+| 500 | Operation failed | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
-# Create Org
-
-This is endpoint is applicable only if organization feature is enabled in the cluster.
+# Restapi V2 Create Org
 
 To programmatically create an organization in the ThoughtSpot system, use this API endpoint.
 
+Requires Administration privilege for tenant.
+
 ```ts
-async createOrg(
+async restapiV2CreateOrg(
   body: TspublicRestV2OrgCreateRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<OrgsResponse>>
@@ -102,7 +100,7 @@ const body: TspublicRestV2OrgCreateRequest = {
 };
 
 try {
-  const { result, ...httpResponse } = await orgController.createOrg(body);
+  const { result, ...httpResponse } = await orgController.restapiV2CreateOrg(body);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch(error) {
@@ -117,12 +115,10 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
+| 500 | Operation failed | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
-# Update Org
-
-This is endpoint is applicable only if organization feature is enabled in the cluster.
+# Restapi V2 Update Org
 
 You can use this endpoint to programmatically modify an existing org.
 
@@ -131,7 +127,7 @@ Provide name or id of the organization to update the properties. When both id an
 Requires Administration privilege for tenant.
 
 ```ts
-async updateOrg(
+async restapiV2UpdateOrg(
   body: TspublicRestV2OrgUpdateRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<OrgsResponse>>
@@ -155,7 +151,7 @@ const contentType = null;
 const body: TspublicRestV2OrgUpdateRequest = {};
 
 try {
-  const { result, ...httpResponse } = await orgController.updateOrg(body);
+  const { result, ...httpResponse } = await orgController.restapiV2UpdateOrg(body);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch(error) {
@@ -170,12 +166,10 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
+| 500 | Operation failed | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
-# Delete Org
-
-This is endpoint is applicable only if organization feature is enabled in the cluster.
+# Restapi V2 Delete Org
 
 To remove an organization from the ThoughtSpot system, send a DELETE request to this endpoint.
 
@@ -184,7 +178,7 @@ At least one value is needed. When both id and name are given, then id will be c
 Requires Administration privilege for tenant.
 
 ```ts
-async deleteOrg(
+async restapiV2DeleteOrg(
   name?: string,
   id?: number,
   requestOptions?: RequestOptions
@@ -207,7 +201,7 @@ async deleteOrg(
 
 ```ts
 try {
-  const { result, ...httpResponse } = await orgController.deleteOrg();
+  const { result, ...httpResponse } = await orgController.restapiV2DeleteOrg();
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch(error) {
@@ -222,12 +216,10 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
+| 500 | Operation failed | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
-# Search Orgs
-
-This is endpoint is applicable only if organization feature is enabled in the cluster.
+# Restapi V2 Search Orgs
 
 To get the details of a specific organization or all organizations in the ThoughtSpot system use this end point.
 
@@ -236,7 +228,7 @@ If no input is provided, then all organizations are included in the response.
 Requires Administration privilege for tenant.
 
 ```ts
-async searchOrgs(
+async restapiV2SearchOrgs(
   body: TspublicRestV2OrgSearchRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<OrgsResponse[]>>
@@ -260,7 +252,7 @@ const contentType = null;
 const body: TspublicRestV2OrgSearchRequest = {};
 
 try {
-  const { result, ...httpResponse } = await orgController.searchOrgs(body);
+  const { result, ...httpResponse } = await orgController.restapiV2SearchOrgs(body);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch(error) {
@@ -275,5 +267,5 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
+| 500 | Operation failed | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 

@@ -10,7 +10,7 @@
 | Name | Type | Tags | Description | Getter | Setter |
 |  --- | --- | --- | --- | --- | --- |
 | `Id` | `String` | Required | GUID of the connection | String getId() | setId(String id) |
-| `Table` | [`List<AddTableInput>`](../../doc/models/add-table-input.md) | Required | - | List<AddTableInput> getTable() | setTable(List<AddTableInput> table) |
+| `Table` | [`List<AddTableInput>`](../../doc/models/add-table-input.md) | Required | A JSON array of table details | List<AddTableInput> getTable() | setTable(List<AddTableInput> table) |
 
 ## Example (as JSON)
 

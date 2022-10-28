@@ -10,7 +10,7 @@
 | Name | Type | Tags | Description | Getter | Setter |
 |  --- | --- | --- | --- | --- | --- |
 | `Id` | `String` | Required | GUID of the metadata object | String getId() | setId(String id) |
-| `Type` | [`TsObjectInputTypeEnum`](../../doc/models/ts-object-input-type-enum.md) | Required | Type of the metadata object | TsObjectInputTypeEnum getType() | setType(TsObjectInputTypeEnum type) |
+| `Type` | [`TypeEnum`](../../doc/models/type-enum.md) | Required | Type of the metadata object | TypeEnum getType() | setType(TypeEnum type) |
 
 ## Example (as JSON)
 

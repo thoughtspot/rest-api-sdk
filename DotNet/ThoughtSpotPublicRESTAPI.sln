@@ -1,0 +1,27 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThoughtSpotPublicRESTAPI.Standard", "ThoughtSpotPublicRESTAPI.Standard/ThoughtSpotPublicRESTAPI.Standard.csproj", "{319244ae-9be0-4914-bb42-24389c601424}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThoughtSpotPublicRESTAPI.Tests", "ThoughtSpotPublicRESTAPI.Tests/ThoughtSpotPublicRESTAPI.Tests.csproj", "{12992bf9-07b2-4f8c-8269-9841b0e236a7}"
+EndProject
+Global
+    GlobalSection(SolutionConfigurationPlatforms) = preSolution
+        Debug|Any CPU = Debug|Any CPU
+        Release|Any CPU = Release|Any CPU
+    EndGlobalSection
+    GlobalSection(ProjectConfigurationPlatforms) = postSolution
+        {319244ae-9be0-4914-bb42-24389c601424}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+        {319244ae-9be0-4914-bb42-24389c601424}.Debug|Any CPU.Build.0 = Debug|Any CPU
+        {319244ae-9be0-4914-bb42-24389c601424}.Release|Any CPU.ActiveCfg = Release|Any CPU
+        {319244ae-9be0-4914-bb42-24389c601424}.Release|Any CPU.Build.0 = Release|Any CPU
+        {12992bf9-07b2-4f8c-8269-9841b0e236a7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+        {12992bf9-07b2-4f8c-8269-9841b0e236a7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+        {12992bf9-07b2-4f8c-8269-9841b0e236a7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+        {12992bf9-07b2-4f8c-8269-9841b0e236a7}.Release|Any CPU.Build.0 = Release|Any CPU
+    EndGlobalSection
+    GlobalSection(SolutionProperties) = preSolution
+        HideSolutionNode = FALSE
+    EndGlobalSection
+EndGlobal

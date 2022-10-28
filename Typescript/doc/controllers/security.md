@@ -10,24 +10,122 @@ const securityController = new SecurityController(client);
 
 ## Methods
 
-* [Share Object](../../doc/controllers/security.md#share-object)
-* [Share Visualization](../../doc/controllers/security.md#share-visualization)
-* [Get Permission on Object](../../doc/controllers/security.md#get-permission-on-object)
-* [Get Permission for Principal](../../doc/controllers/security.md#get-permission-for-principal)
-* [Search Permission on Objects](../../doc/controllers/security.md#search-permission-on-objects)
-* [Search Permission for Principals](../../doc/controllers/security.md#search-permission-for-principals)
+* [Restapi V2 Get Permission on Object](../../doc/controllers/security.md#restapi-v2-get-permission-on-object)
+* [Restapi V2 Get Permission for Principal](../../doc/controllers/security.md#restapi-v2-get-permission-for-principal)
+* [Restapi V2 Share Object](../../doc/controllers/security.md#restapi-v2-share-object)
+* [Restapi V2 Share Visualization](../../doc/controllers/security.md#restapi-v2-share-visualization)
+* [Restapi V2 Search Permission on Objects](../../doc/controllers/security.md#restapi-v2-search-permission-on-objects)
+* [Restapi V2 Search Permission for Principals](../../doc/controllers/security.md#restapi-v2-search-permission-for-principals)
 
 
-# Share Object
+# Restapi V2 Get Permission on Object
+
+To list the permissions for user and user groups on an object, use this endpoint. The response will include only those users and groups with have either VIEW OR MODIFY permission.
+
+You can optionally see the permission on the dependent objects as well by enabling includeDependent field.
+
+```ts
+async restapiV2GetPermissionOnObject(
+  id: string,
+  type: Type7Enum,
+  includeDependent?: boolean,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<SecurityPermissionResponse>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `id` | `string` | Query, Required | GUID of the metadata object for which the permission needs to be obtained. |
+| `type` | [`Type7Enum`](../../doc/models/type-7-enum.md) | Query, Required | Type of metadata object. Valid values: Liveboard\|Answer\|DataObject\|Column |
+| `includeDependent` | `boolean \| undefined` | Query, Optional | When this field is set to true, the API returns the permission details for the dependent objects for the the object included in the request |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+[`SecurityPermissionResponse`](../../doc/models/security-permission-response.md)
+
+## Example Usage
+
+```ts
+const id = 'id0';
+const type = 'DATAOBJECT';
+try {
+  const { result, ...httpResponse } = await securityController.restapiV2GetPermissionOnObject(id, type);
+  // Get more response info...
+  // const { statusCode, headers } = httpResponse;
+} catch(error) {
+  if (error instanceof ApiError) {
+    const errors = error.result;
+    // const { statusCode, headers } = error;
+  }
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 500 | Operation failed | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
+
+
+# Restapi V2 Get Permission for Principal
+
+Use this endpoint to list the objects on which a user or user group has permission. The response will include only those objects on which the user or user group has either VIEW OR MODIFY permission.
+
+Requires administration privilege
+
+```ts
+async restapiV2GetPermissionForPrincipal(
+  id?: string,
+  name?: string,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<PrincipalSearchResponse>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `id` | `string \| undefined` | Query, Optional | GUID of the user or user group for which the object permission needs to be obtained |
+| `name` | `string \| undefined` | Query, Optional | Name of the ser or user group for which the object permission needs to be obtained |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+[`PrincipalSearchResponse`](../../doc/models/principal-search-response.md)
+
+## Example Usage
+
+```ts
+try {
+  const { result, ...httpResponse } = await securityController.restapiV2GetPermissionForPrincipal();
+  // Get more response info...
+  // const { statusCode, headers } = httpResponse;
+} catch(error) {
+  if (error instanceof ApiError) {
+    const errors = error.result;
+    // const { statusCode, headers } = error;
+  }
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 500 | Operation failed | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
+
+
+# Restapi V2 Share Object
 
 To programmatically share ThoughtSpot objects with another user or user group, use this endpoint.
 
 When you share an object like a Liveboard or visualization, a notification with a live link is sent to the user. When the users access this object, they can view the last saved version of the object.
 
-Requires privilege to share the object
-
 ```ts
-async shareObject(
+async restapiV2ShareObject(
   body: TspublicRestV2SecurityShareTsobjectRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<boolean>>
@@ -56,7 +154,7 @@ const body: TspublicRestV2SecurityShareTsobjectRequest = {
 };
 
 try {
-  const { result, ...httpResponse } = await securityController.shareObject(body);
+  const { result, ...httpResponse } = await securityController.restapiV2ShareObject(body);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch(error) {
@@ -71,19 +169,17 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
+| 500 | Operation failed | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
-# Share Visualization
+# Restapi V2 Share Visualization
 
 If you want to share a specific visualization from a Liveboard with another user or user group, then use this endpoint.
-
-When you share a visualization, a notification with a live link is sent to the user. When the users access this Liveboard, they can view the last saved version of the visualization.
 
 Requires privilege to share the visualization
 
 ```ts
-async shareVisualization(
+async restapiV2ShareVisualization(
   body: TspublicRestV2SecurityShareVisualizationRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<boolean>>
@@ -112,7 +208,7 @@ const body: TspublicRestV2SecurityShareVisualizationRequest = {
 };
 
 try {
-  const { result, ...httpResponse } = await securityController.shareVisualization(body);
+  const { result, ...httpResponse } = await securityController.restapiV2ShareVisualization(body);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch(error) {
@@ -127,118 +223,14 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
+| 500 | Operation failed | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
-# Get Permission on Object
+# Restapi V2 Search Permission on Objects
 
-To list the permissions for user and user groups on an object, use this endpoint. The response will include only those users and groups with have either VIEW OR MODIFY permission.
+To list the permissions for user and user groups on a list of objects, use this endpoint. The response will include only those users and groups with have either VIEW OR MODIFY permission.
 
-You can optionally see the permission on the dependent objects as well by enabling includeDependent field.
-
-Requires administration privilege
-
-```ts
-async getPermissionOnObject(
-  id: string,
-  type: GetPermissionOnObjectTypeEnum,
-  includeDependent?: boolean,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<SecurityPermissionResponse>>
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `id` | `string` | Query, Required | GUID of the metadata object for which the permission needs to be obtained. |
-| `type` | [`GetPermissionOnObjectTypeEnum`](../../doc/models/get-permission-on-object-type-enum.md) | Query, Required | Type of metadata object |
-| `includeDependent` | `boolean \| undefined` | Query, Optional | When this field is set to true, the API response includes the permission details for the dependent objects. |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-[`SecurityPermissionResponse`](../../doc/models/security-permission-response.md)
-
-## Example Usage
-
-```ts
-const id = 'id0';
-const type = 'DATAOBJECT';
-try {
-  const { result, ...httpResponse } = await securityController.getPermissionOnObject(id, type);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch(error) {
-  if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
-
-
-# Get Permission for Principal
-
-Use this endpoint to list the objects on which a user or user group has permission. The response will include only those objects on which the user or user group has either VIEW OR MODIFY permission.
-
-Provide at least one of id or name. When both are given then id is considered.
-
-Requires administration privilege
-
-```ts
-async getPermissionForPrincipal(
-  id?: string,
-  name?: string,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<PrincipalSearchResponse>>
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `id` | `string \| undefined` | Query, Optional | GUID of the user or user group for which the object permission needs to be obtained |
-| `name` | `string \| undefined` | Query, Optional | Name of the user or user group for which the object permission needs to be obtained |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-[`PrincipalSearchResponse`](../../doc/models/principal-search-response.md)
-
-## Example Usage
-
-```ts
-try {
-  const { result, ...httpResponse } = await securityController.getPermissionForPrincipal();
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch(error) {
-  if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
-
-
-# Search Permission on Objects
-
-To list the permissions for user and user groups on a list of objects, use this endpoint. The response will include only those users and groups that has either VIEW OR MODIFY permission.
-
-Provide list of object ids and its type to list the permissions for.
+You can either provide list of object ids or type of objects to list the permissions for. One of these inputs is mandatory. If both are provided then only object ids will be considred.
 
 You can optionally provide users or user groups for which the persmission needs to be displayed.
 
@@ -247,7 +239,7 @@ You can optionally see the permission on the dependent objects as well by enabli
 Requires administration privilege
 
 ```ts
-async searchPermissionOnObjects(
+async restapiV2SearchPermissionOnObjects(
   body: TspublicRestV2SecurityPermissionTsobjectSearchRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<SecurityPermissionResponse[]>>
@@ -299,7 +291,7 @@ const body: TspublicRestV2SecurityPermissionTsobjectSearchRequest = {
 };
 
 try {
-  const { result, ...httpResponse } = await securityController.searchPermissionOnObjects(body);
+  const { result, ...httpResponse } = await securityController.restapiV2SearchPermissionOnObjects(body);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch(error) {
@@ -314,19 +306,23 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
+| 500 | Operation failed | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
-# Search Permission for Principals
+# Restapi V2 Search Permission for Principals
 
-Use this endpoint to list the objects on which a user or user group has permission. The response will include only those objects on which the user or user group has either VIEW OR MODIFY permission.
+To list the permissions for user and user groups on a list of objects, use this endpoint. The response will include only those users and groups with have either VIEW OR MODIFY permission.
 
-You can optionally provide list of object ids for which the persmission needs to be displayed.
+You can either provide list of object ids or type of objects to list the permissions for. One of these inputs is mandatory. If both are provided then only object ids will be considred.
+
+You can optionally provide users or user groups for which the persmission needs to be displayed.
+
+You can optionally see the permission on the dependent objects as well by enabling includeDependent field.
 
 Requires administration privilege
 
 ```ts
-async searchPermissionForPrincipals(
+async restapiV2SearchPermissionForPrincipals(
   body: TspublicRestV2SecurityPermissionPrincipalSearchRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<PrincipalSearchResponse[]>>
@@ -358,7 +354,7 @@ const body: TspublicRestV2SecurityPermissionPrincipalSearchRequest = {
 };
 
 try {
-  const { result, ...httpResponse } = await securityController.searchPermissionForPrincipals(body);
+  const { result, ...httpResponse } = await securityController.restapiV2SearchPermissionForPrincipals(body);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch(error) {
@@ -373,5 +369,5 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
+| 500 | Operation failed | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 

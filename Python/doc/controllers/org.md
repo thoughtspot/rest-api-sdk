@@ -10,16 +10,14 @@ org_controller = client.org
 
 ## Methods
 
-* [Get Org](../../doc/controllers/org.md#get-org)
-* [Create Org](../../doc/controllers/org.md#create-org)
-* [Update Org](../../doc/controllers/org.md#update-org)
-* [Delete Org](../../doc/controllers/org.md#delete-org)
-* [Search Orgs](../../doc/controllers/org.md#search-orgs)
+* [Restapi V2 Get Org](../../doc/controllers/org.md#restapi-v2-get-org)
+* [Restapi V2 Create Org](../../doc/controllers/org.md#restapi-v2-create-org)
+* [Restapi V2 Update Org](../../doc/controllers/org.md#restapi-v2-update-org)
+* [Restapi V2 Delete Org](../../doc/controllers/org.md#restapi-v2-delete-org)
+* [Restapi V2 Search Orgs](../../doc/controllers/org.md#restapi-v2-search-orgs)
 
 
-# Get Org
-
-This is endpoint is applicable only if organization feature is enabled in the cluster.
+# Restapi V2 Get Org
 
 To get the details of a specific organization by name or id, use this endpoint.
 
@@ -28,9 +26,9 @@ At least one value needed. When both are given,then id will be considered to fet
 Requires Administration privilege for tenant.
 
 ```python
-def get_org(self,
-           name=None,
-           id=None)
+def restapi_v_2__get_org(self,
+                        name=None,
+                        id=None)
 ```
 
 ## Parameters
@@ -47,25 +45,25 @@ def get_org(self,
 ## Example Usage
 
 ```python
-result = org_controller.get_org()
+result = org_controller.restapi_v_2__get_org()
 ```
 
 ## Errors
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Create Org
-
-This is endpoint is applicable only if organization feature is enabled in the cluster.
+# Restapi V2 Create Org
 
 To programmatically create an organization in the ThoughtSpot system, use this API endpoint.
 
+Requires Administration privilege for tenant.
+
 ```python
-def create_org(self,
-              body)
+def restapi_v_2__create_org(self,
+                           body)
 ```
 
 ## Parameters
@@ -84,19 +82,17 @@ def create_org(self,
 body = TspublicRestV2OrgCreateRequest()
 body.name = 'name6'
 
-result = org_controller.create_org(body)
+result = org_controller.restapi_v_2__create_org(body)
 ```
 
 ## Errors
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Update Org
-
-This is endpoint is applicable only if organization feature is enabled in the cluster.
+# Restapi V2 Update Org
 
 You can use this endpoint to programmatically modify an existing org.
 
@@ -105,8 +101,8 @@ Provide name or id of the organization to update the properties. When both id an
 Requires Administration privilege for tenant.
 
 ```python
-def update_org(self,
-              body)
+def restapi_v_2__update_org(self,
+                           body)
 ```
 
 ## Parameters
@@ -124,19 +120,17 @@ def update_org(self,
 ```python
 body = TspublicRestV2OrgUpdateRequest()
 
-result = org_controller.update_org(body)
+result = org_controller.restapi_v_2__update_org(body)
 ```
 
 ## Errors
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Delete Org
-
-This is endpoint is applicable only if organization feature is enabled in the cluster.
+# Restapi V2 Delete Org
 
 To remove an organization from the ThoughtSpot system, send a DELETE request to this endpoint.
 
@@ -145,9 +139,9 @@ At least one value is needed. When both id and name are given, then id will be c
 Requires Administration privilege for tenant.
 
 ```python
-def delete_org(self,
-              name=None,
-              id=None)
+def restapi_v_2__delete_org(self,
+                           name=None,
+                           id=None)
 ```
 
 ## Parameters
@@ -164,19 +158,17 @@ def delete_org(self,
 ## Example Usage
 
 ```python
-result = org_controller.delete_org()
+result = org_controller.restapi_v_2__delete_org()
 ```
 
 ## Errors
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Search Orgs
-
-This is endpoint is applicable only if organization feature is enabled in the cluster.
+# Restapi V2 Search Orgs
 
 To get the details of a specific organization or all organizations in the ThoughtSpot system use this end point.
 
@@ -185,8 +177,8 @@ If no input is provided, then all organizations are included in the response.
 Requires Administration privilege for tenant.
 
 ```python
-def search_orgs(self,
-               body)
+def restapi_v_2__search_orgs(self,
+                            body)
 ```
 
 ## Parameters
@@ -204,12 +196,12 @@ def search_orgs(self,
 ```python
 body = TspublicRestV2OrgSearchRequest()
 
-result = org_controller.search_orgs(body)
+result = org_controller.restapi_v_2__search_orgs(body)
 ```
 
 ## Errors
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 

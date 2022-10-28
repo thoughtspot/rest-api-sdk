@@ -9,12 +9,12 @@ MaterializationController materializationController = client.MaterializationCont
 `MaterializationController`
 
 
-# Refresh Materialized View
+# Restapi V2 Refresh Materialized View
 
 Use this endpoint to refresh data in the materialized view by running the query associated with it
 
 ```csharp
-RefreshMaterializedViewAsync(
+RestapiV2RefreshMaterializedViewAsync(
     Models.TspublicRestV2MaterializationRefreshviewRequest body)
 ```
 
@@ -36,7 +36,7 @@ body.Id = "id6";
 
 try
 {
-    object result = await materializationController.RefreshMaterializedViewAsync(body);
+    object result = await materializationController.RestapiV2RefreshMaterializedViewAsync(body);
 }
 catch (ApiException e){};
 ```
@@ -45,5 +45,5 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 

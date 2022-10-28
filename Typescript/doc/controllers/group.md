@@ -10,29 +10,26 @@ const groupController = new GroupController(client);
 
 ## Methods
 
-* [Get Group](../../doc/controllers/group.md#get-group)
-* [Create Group](../../doc/controllers/group.md#create-group)
-* [Update Group](../../doc/controllers/group.md#update-group)
-* [Delete Group](../../doc/controllers/group.md#delete-group)
-* [Add Privileges to Group](../../doc/controllers/group.md#add-privileges-to-group)
-* [Remove Privileges From Group](../../doc/controllers/group.md#remove-privileges-from-group)
-* [Add Users to Group](../../doc/controllers/group.md#add-users-to-group)
-* [Remove Users From Group](../../doc/controllers/group.md#remove-users-from-group)
-* [Add Groups to Group](../../doc/controllers/group.md#add-groups-to-group)
-* [Remove Groups From Group](../../doc/controllers/group.md#remove-groups-from-group)
-* [Search Groups](../../doc/controllers/group.md#search-groups)
+* [Restapi V2 Get Group](../../doc/controllers/group.md#restapi-v2-get-group)
+* [Restapi V2 Create Group](../../doc/controllers/group.md#restapi-v2-create-group)
+* [Restapi V2 Update Group](../../doc/controllers/group.md#restapi-v2-update-group)
+* [Restapi V2 Delete Group](../../doc/controllers/group.md#restapi-v2-delete-group)
+* [Restapi V2 Add Privileges to Group](../../doc/controllers/group.md#restapi-v2-add-privileges-to-group)
+* [Restapi V2 Remove Privileges From Group](../../doc/controllers/group.md#restapi-v2-remove-privileges-from-group)
+* [Restapi V2 Add Users to Group](../../doc/controllers/group.md#restapi-v2-add-users-to-group)
+* [Restapi V2 Remove Users From Group](../../doc/controllers/group.md#restapi-v2-remove-users-from-group)
+* [Restapi V2 Add Groups to Group](../../doc/controllers/group.md#restapi-v2-add-groups-to-group)
+* [Restapi V2 Remove Groups From Group](../../doc/controllers/group.md#restapi-v2-remove-groups-from-group)
+* [Restapi V2 Search Groups](../../doc/controllers/group.md#restapi-v2-search-groups)
 
 
-# Get Group
+# Restapi V2 Get Group
 
 To get the details of a specific group by name or id, use this endpoint.
-
-At least one value needed. When both are given,then id will be considered to fetch user information.
-
-Permission: Requires administration privilege
+At Least one value needed.  When both are given id will be considered to fetch user information.
 
 ```ts
-async getGroup(
+async restapiV2GetGroup(
   name?: string,
   id?: string,
   requestOptions?: RequestOptions
@@ -44,7 +41,7 @@ async getGroup(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `name` | `string \| undefined` | Query, Optional | Name of the group |
-| `id` | `string \| undefined` | Query, Optional | The GUID of the group |
+| `id` | `string \| undefined` | Query, Optional | The GUID of the group to query. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -55,7 +52,7 @@ async getGroup(
 
 ```ts
 try {
-  const { result, ...httpResponse } = await groupController.getGroup();
+  const { result, ...httpResponse } = await groupController.restapiV2GetGroup();
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch(error) {
@@ -70,25 +67,15 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
+| 500 | Operation failed | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
-# Create Group
+# Restapi V2 Create Group
 
-To programmatically create a group in the ThoughtSpot system, use this API endpoint.
-
-Using this API, you can create a group and assign privileges and users.
-
-For ease of user management and access control, ThoughtSpot administrations can create groups and assign privileges to these groups.
-
-The privileges determine the actions that the users belonging to a group are allowed to do.
-
-ThoughtSpot also has a default group called ALL. When you create new group in ThoughtSpot, they are automatically added to ALL user group. You cannot delete the ALL user group or remove members from it.
-
-Permission: Requires administration privilege
+To programmatically create a group in the ThoughtSpot system, use this API endpoint. Using this API, you can create a group and assign privileges and users. For ease of user management and access control, ThoughtSpot administrators can create groups and assign privileges to these groups. The privileges determine the actions that the users belonging to a group are allowed to do. ThoughtSpot also has a default group called ALL_GROUP. When you create new group in ThoughtSpot, they are automatically added to ALL_GROUP. You cannot delete the ALL_GROUP or remove members from it.
 
 ```ts
-async createGroup(
+async restapiV2CreateGroup(
   body: TspublicRestV2GroupCreateRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<GroupResponse>>
@@ -115,7 +102,7 @@ const body: TspublicRestV2GroupCreateRequest = {
 };
 
 try {
-  const { result, ...httpResponse } = await groupController.createGroup(body);
+  const { result, ...httpResponse } = await groupController.restapiV2CreateGroup(body);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch(error) {
@@ -130,21 +117,17 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
+| 500 | Operation failed | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
-# Update Group
+# Restapi V2 Update Group
 
-You can use this endpoint to programmatically modify an existing group.
-
-To modify a group, you require admin user privileges.
-
-At least one of id or name is required to update the group. When both are given, then id will be considered and group name will be updated.
-
-Permission: Requires administration privilege
+You can use this endpoint to programmatically modify an existing user account.
+To modify a user, you require admin user privileges.
+At least one of User Id or username is mandatory. When both are given, then user id will be considered and username will be updated
 
 ```ts
-async updateGroup(
+async restapiV2UpdateGroup(
   body: TspublicRestV2GroupUpdateRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<boolean>>
@@ -168,7 +151,7 @@ const contentType = null;
 const body: TspublicRestV2GroupUpdateRequest = {};
 
 try {
-  const { result, ...httpResponse } = await groupController.updateGroup(body);
+  const { result, ...httpResponse } = await groupController.restapiV2UpdateGroup(body);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch(error) {
@@ -183,19 +166,15 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
+| 500 | Operation failed | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
-# Delete Group
+# Restapi V2 Delete Group
 
-To remove a group from the ThoughtSpot system, send a DELETE request to this endpoint.
-
-At least one value needed. When both are given,then user id will be considered to fetch user information.
-
-Permission: Requires administration privilege
+To remove a group from the ThoughtSpot system, send a DELETE request to this endpoint. At Least one value needed.  When both are given user id will be considered to fetch user information.
 
 ```ts
-async deleteGroup(
+async restapiV2DeleteGroup(
   name?: string,
   id?: string,
   requestOptions?: RequestOptions
@@ -218,7 +197,7 @@ async deleteGroup(
 
 ```ts
 try {
-  const { result, ...httpResponse } = await groupController.deleteGroup();
+  const { result, ...httpResponse } = await groupController.restapiV2DeleteGroup();
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch(error) {
@@ -233,21 +212,17 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
+| 500 | Operation failed | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
-# Add Privileges to Group
+# Restapi V2 Add Privileges to Group
 
 To programmatically add privileges to an existing group, use API endpoint.
-
-When you assign privileges to a group, all the users under to this group inherits the privileges assigned to that group.
-
-At least one of id or name of group is required. When both are given,then user id will be considered.
-
-Permission: Requires administration privilege
+When you assign privileges to a group,  all the users under to this group inherits the privileges assigned to that group.
+At least one of id or name of group is required. When both are given user id will be considered.
 
 ```ts
-async addPrivilegesToGroup(
+async restapiV2AddPrivilegesToGroup(
   body: TspublicRestV2GroupAddprivilegeRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<boolean>>
@@ -271,7 +246,7 @@ const contentType = null;
 const body: TspublicRestV2GroupAddprivilegeRequest = {};
 
 try {
-  const { result, ...httpResponse } = await groupController.addPrivilegesToGroup(body);
+  const { result, ...httpResponse } = await groupController.restapiV2AddPrivilegesToGroup(body);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch(error) {
@@ -286,21 +261,15 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
+| 500 | Operation failed | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
-# Remove Privileges From Group
+# Restapi V2 Remove Privileges From Group
 
-To programmatically remove privileges from a group, use API endpoint.
-
-The API removes only the privilege association. It does not delete the privilege or group from the Thoughtspot system.
-
-At least one of id or name of group is required. When both are given,then user id will be considered.
-
-Permission: Requires administration privilege
+To programmatically remove privileges from a group, use API endpoint. The API removes only the privilege association. It does not delete the privilege or group from the Thoughtspot system. At least one of id or name of group is required. When both are given user id will be considered.
 
 ```ts
-async removePrivilegesFromGroup(
+async restapiV2RemovePrivilegesFromGroup(
   body: TspublicRestV2GroupRemoveprivilegeRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<boolean>>
@@ -324,7 +293,7 @@ const contentType = null;
 const body: TspublicRestV2GroupRemoveprivilegeRequest = {};
 
 try {
-  const { result, ...httpResponse } = await groupController.removePrivilegesFromGroup(body);
+  const { result, ...httpResponse } = await groupController.restapiV2RemovePrivilegesFromGroup(body);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch(error) {
@@ -339,21 +308,15 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
+| 500 | Operation failed | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
-# Add Users to Group
+# Restapi V2 Add Users to Group
 
-To programmatically add existing ThoughtSpot users to a group, use this API endpoint.
-
-hen you assign users to a group, the users inherits the privileges assigned to that group.
-
-At least one of id or name of the group is required. When both are given,then user id will be considered.
-
-Permission: Requires administration privilege
+To programmatically add existing ThoughtSpot users to a group, use this API endpoint. When you assign users to a group, the users inherits the privileges assigned to that group. At least one of id or name of the group is required. When both are given user id will be considered.
 
 ```ts
-async addUsersToGroup(
+async restapiV2AddUsersToGroup(
   body: TspublicRestV2GroupAdduserRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<boolean>>
@@ -385,7 +348,7 @@ const body: TspublicRestV2GroupAdduserRequest = {
 };
 
 try {
-  const { result, ...httpResponse } = await groupController.addUsersToGroup(body);
+  const { result, ...httpResponse } = await groupController.restapiV2AddUsersToGroup(body);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch(error) {
@@ -400,21 +363,15 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
+| 500 | Operation failed | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
-# Remove Users From Group
+# Restapi V2 Remove Users From Group
 
-To programmatically remove users from a group, use API endpoint.
-
-The API removes only the user association. It does not delete the users or group from the Thoughtspot system.
-
-At least one of id or name of group is required. When both are given,then user id will be considered.
-
-Permission: Requires administration privilege
+To programmatically remove users from a group, use API endpoint.The API removes only the user association. It does not delete the users or group from the Thoughtspot system. At least one of id or name of group is required. When both are given user id will be considered.
 
 ```ts
-async removeUsersFromGroup(
+async restapiV2RemoveUsersFromGroup(
   body: TspublicRestV2GroupRemoveuserRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<boolean>>
@@ -446,7 +403,7 @@ const body: TspublicRestV2GroupRemoveuserRequest = {
 };
 
 try {
-  const { result, ...httpResponse } = await groupController.removeUsersFromGroup(body);
+  const { result, ...httpResponse } = await groupController.restapiV2RemoveUsersFromGroup(body);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch(error) {
@@ -461,21 +418,15 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
+| 500 | Operation failed | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
-# Add Groups to Group
+# Restapi V2 Add Groups to Group
 
-To programmatically add existing groups to a group, use API endpoint.
-
-When you assign groups to a group, the group inherits the privileges assigned to those groups.
-
-At least one of id or name of group is required. When both are given,then user id will be considered.
-
-Permission: Requires administration privilege
+To programmatically add existing groups to a group, use API endpoint. When you assign groups to a group, the group inherits the privileges assigned to those groups. At least one of id or name of group is required. When both are given user id will be considered.
 
 ```ts
-async addGroupsToGroup(
+async restapiV2AddGroupsToGroup(
   body: TspublicRestV2GroupAddgroupRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<boolean>>
@@ -507,7 +458,7 @@ const body: TspublicRestV2GroupAddgroupRequest = {
 };
 
 try {
-  const { result, ...httpResponse } = await groupController.addGroupsToGroup(body);
+  const { result, ...httpResponse } = await groupController.restapiV2AddGroupsToGroup(body);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch(error) {
@@ -522,21 +473,15 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
+| 500 | Operation failed | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
-# Remove Groups From Group
+# Restapi V2 Remove Groups From Group
 
-To programmatically remove groups from a group, use API endpoint.
-
-The API removes only the group association. It does not delete the group from the Thoughtspot system.
-
-At least one of id or name of group is required. When both are given,then user id will be considered.
-
-Permission: Requires administration privilege
+To programmatically remove groups from a group, use API endpoint.The API removes only the group association. It does not delete the group from the Thoughtspot system. At least one of id or name of group is required. When both are given user id will be considered.
 
 ```ts
-async removeGroupsFromGroup(
+async restapiV2RemoveGroupsFromGroup(
   body: TspublicRestV2GroupRemovegroupRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<boolean>>
@@ -568,7 +513,7 @@ const body: TspublicRestV2GroupRemovegroupRequest = {
 };
 
 try {
-  const { result, ...httpResponse } = await groupController.removeGroupsFromGroup(body);
+  const { result, ...httpResponse } = await groupController.restapiV2RemoveGroupsFromGroup(body);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch(error) {
@@ -583,19 +528,15 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
+| 500 | Operation failed | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
-# Search Groups
+# Restapi V2 Search Groups
 
-To get the details of a specific group account or all groups in the ThoughtSpot system use this end point.
-
-If no inputs are provided, then all groups are included in the response.
-
-Permission: Requires administration privilege
+To get the details of a specific group account or all groups in the ThoughtSpot system, use this end point.
 
 ```ts
-async searchGroups(
+async restapiV2SearchGroups(
   body: TspublicRestV2GroupSearchRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<unknown>>
@@ -619,7 +560,7 @@ const contentType = null;
 const body: TspublicRestV2GroupSearchRequest = {};
 
 try {
-  const { result, ...httpResponse } = await groupController.searchGroups(body);
+  const { result, ...httpResponse } = await groupController.restapiV2SearchGroups(body);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch(error) {
@@ -634,5 +575,5 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
+| 500 | Operation failed | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 

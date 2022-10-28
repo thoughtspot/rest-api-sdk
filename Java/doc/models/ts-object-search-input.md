@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description | Getter | Setter |
 |  --- | --- | --- | --- | --- | --- |
-| `Type` | [`TsObjectSearchInputTypeEnum`](../../doc/models/ts-object-search-input-type-enum.md) | Required | Type of the metadata objec | TsObjectSearchInputTypeEnum getType() | setType(TsObjectSearchInputTypeEnum type) |
+| `Type` | [`Type2Enum`](../../doc/models/type-2-enum.md) | Required | Type of the metadata objec | Type2Enum getType() | setType(Type2Enum type) |
 | `Id` | `List<String>` | Required | A JSON Array of GUIDs of the metadata object | List<String> getId() | setId(List<String> id) |
 
 ## Example (as JSON)

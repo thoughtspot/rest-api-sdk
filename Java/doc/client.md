@@ -5,8 +5,6 @@ The following parameters are configurable for the API Client:
 
 | Parameter | Type | Description |
 |  --- | --- | --- |
-| `acceptLanguage` | `String` | response format<br>*Default*: `"*"` |
-| `contentType` | `String` | body content type for post request<br>*Default*: `"application/json"` |
 | `baseUrl` | `String` | *Default*: `"https://localhost:443"` |
 | `environment` | Environment | The API environment. <br> **Default: `Environment.PRODUCTION`** |
 | `httpClientConfig` | `ReadonlyHttpClientConfiguration` | Http Client Configuration instance. |
@@ -15,18 +13,16 @@ The following parameters are configurable for the API Client:
 The API client can be initialized as follows:
 
 ```java
-RESTAPISDKClient client = new RESTAPISDKClient.Builder()
+ThoughtSpotPublicRESTAPIClient client = new ThoughtSpotPublicRESTAPIClient.Builder()
     .httpClientConfig(configBuilder -> configBuilder
             .timeout(0))
-    .acceptLanguage("*")
-    .contentType("application/json")
     .accessToken("AccessToken")
     .environment(Environment.PRODUCTION)
     .baseUrl("https://localhost:443")
     .build();
 ```
 
-## RESTAPI SDKClient Class
+## ThoughtSpot Public REST APIClient Class
 
 The gateway for the SDK. This class acts as a factory for the Controllers and also holds the configuration of the SDK.
 
@@ -34,20 +30,20 @@ The gateway for the SDK. This class acts as a factory for the Controllers and al
 
 | Name | Description | Return Type |
 |  --- | --- | --- |
-| `getSessionController()` | Provides access to Session controller. | `SessionController` |
 | `getUserController()` | Provides access to User controller. | `UserController` |
 | `getGroupController()` | Provides access to Group controller. | `GroupController` |
-| `getOrgController()` | Provides access to Org controller. | `OrgController` |
 | `getMetadataController()` | Provides access to Metadata controller. | `MetadataController` |
 | `getDatabaseController()` | Provides access to Database controller. | `DatabaseController` |
 | `getConnectionController()` | Provides access to Connection controller. | `ConnectionController` |
 | `getDataController()` | Provides access to Data controller. | `DataController` |
-| `getReportController()` | Provides access to Report controller. | `ReportController` |
-| `getAdminController()` | Provides access to Admin controller. | `AdminController` |
-| `getSecurityController()` | Provides access to Security controller. | `SecurityController` |
 | `getLogsController()` | Provides access to Logs controller. | `LogsController` |
-| `getMaterializationController()` | Provides access to Materialization controller. | `MaterializationController` |
 | `getCustomActionsController()` | Provides access to CustomActions controller. | `CustomActionsController` |
+| `getSecurityController()` | Provides access to Security controller. | `SecurityController` |
+| `getOrgController()` | Provides access to Org controller. | `OrgController` |
+| `getSessionController()` | Provides access to Session controller. | `SessionController` |
+| `getAdminController()` | Provides access to Admin controller. | `AdminController` |
+| `getReportController()` | Provides access to Report controller. | `ReportController` |
+| `getMaterializationController()` | Provides access to Materialization controller. | `MaterializationController` |
 
 ### Methods
 
@@ -56,8 +52,6 @@ The gateway for the SDK. This class acts as a factory for the Controllers and al
 | `shutdown()` | Shutdown the underlying HttpClient instance. | `void` |
 | `getEnvironment()` | Current API environment. | `Environment` |
 | `getBaseUrl()` | baseUrl value. | `String` |
-| `getAcceptLanguage()` | response format. | `String` |
-| `getContentType()` | body content type for post request. | `String` |
 | `getHttpClient()` | The HTTP Client instance to use for making HTTP requests. | `HttpClient` |
 | `getHttpClientConfig()` | Http Client Configuration instance. | `ReadonlyHttpClientConfiguration` |
 | `getBearerAuthCredentials()` | The credentials to use with BearerAuth. | `BearerAuthCredentials` |

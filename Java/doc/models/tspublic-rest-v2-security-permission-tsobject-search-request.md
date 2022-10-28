@@ -11,7 +11,7 @@
 |  --- | --- | --- | --- | --- | --- |
 | `TsObject` | [`List<TsObjectSearchInput>`](../../doc/models/ts-object-search-input.md) | Required | A JSON Array of GUIDs and type of metadata object. | List<TsObjectSearchInput> getTsObject() | setTsObject(List<TsObjectSearchInput> tsObject) |
 | `Principal` | [`List<UserNameAndIDInput>`](../../doc/models/user-name-and-id-input.md) | Optional | A JSON array of principal names or GUIDs. When both are given then id is considered. | List<UserNameAndIDInput> getPrincipal() | setPrincipal(List<UserNameAndIDInput> principal) |
-| `IncludeDependent` | [`SearchPermissionOnObjectsIncludeDependentEnum`](../../doc/models/search-permission-on-objects-include-dependent-enum.md) | Optional | When this field is set to true, the API response includes the permission details for the dependent objects<br>**Default**: `SearchPermissionOnObjectsIncludeDependentEnum.ENUM_FALSE` | SearchPermissionOnObjectsIncludeDependentEnum getIncludeDependent() | setIncludeDependent(SearchPermissionOnObjectsIncludeDependentEnum includeDependent) |
+| `IncludeDependent` | `Boolean` | Optional | When this field is set to true, the API response includes the permission details for the dependent objects.<br>**Default**: `false` | Boolean getIncludeDependent() | setIncludeDependent(Boolean includeDependent) |
 
 ## Example (as JSON)
 

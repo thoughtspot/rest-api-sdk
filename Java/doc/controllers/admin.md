@@ -10,88 +10,20 @@ AdminController adminController = client.getAdminController();
 
 ## Methods
 
-* [Get Cluster Config](../../doc/controllers/admin.md#get-cluster-config)
-* [Get Cluster Config Overrides](../../doc/controllers/admin.md#get-cluster-config-overrides)
-* [Update Cluster Config](../../doc/controllers/admin.md#update-cluster-config)
-* [Reset User Password](../../doc/controllers/admin.md#reset-user-password)
-* [Sync Principal](../../doc/controllers/admin.md#sync-principal)
-* [Change Author of Objects](../../doc/controllers/admin.md#change-author-of-objects)
-* [Assign Author to Objects](../../doc/controllers/admin.md#assign-author-to-objects)
-* [Force Logout Users](../../doc/controllers/admin.md#force-logout-users)
+* [Restapi V2 Update Cluster Config](../../doc/controllers/admin.md#restapi-v2-update-cluster-config)
+* [Restapi V2 Reset User Password](../../doc/controllers/admin.md#restapi-v2-reset-user-password)
+* [Restapi V2 Sync Principal](../../doc/controllers/admin.md#restapi-v2-sync-principal)
+* [Restapi V2 Change Author of Objects](../../doc/controllers/admin.md#restapi-v2-change-author-of-objects)
+* [Restapi V2 Assign Author to Objects](../../doc/controllers/admin.md#restapi-v2-assign-author-to-objects)
+* [Restapi V2 Force Logout Users](../../doc/controllers/admin.md#restapi-v2-force-logout-users)
 
 
-# Get Cluster Config
-
-To get details of the current configuration of a Thoughtspot cluster, use this endpoint.
-
-Permission: Requires administration privilege
-
-```java
-CompletableFuture<Object> getClusterConfigAsync()
-```
-
-## Response Type
-
-`Object`
-
-## Example Usage
-
-```java
-adminController.getClusterConfigAsync().thenAccept(result -> {
-    // TODO success callback handler
-}).exceptionally(exception -> {
-    // TODO failure callback handler
-    return null;
-});
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
-
-
-# Get Cluster Config Overrides
-
-To get the details of overrides to the Thoughtspot cluster configuration, use this endpoint.
-
-Permission: Requires administration privilege
-
-```java
-CompletableFuture<Object> getClusterConfigOverridesAsync()
-```
-
-## Response Type
-
-`Object`
-
-## Example Usage
-
-```java
-adminController.getClusterConfigOverridesAsync().thenAccept(result -> {
-    // TODO success callback handler
-}).exceptionally(exception -> {
-    // TODO failure callback handler
-    return null;
-});
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
-
-
-# Update Cluster Config
+# Restapi V2 Update Cluster Config
 
 To update the Thoughtspot cluster configuration, use this endpoint.
 
-Permission: Requires administration privilege
-
 ```java
-CompletableFuture<Boolean> updateClusterConfigAsync(
+CompletableFuture<Boolean> restapiV2UpdateClusterConfigAsync(
     final TspublicRestV2AdminConfigurationUpdateRequest body)
 ```
 
@@ -110,7 +42,7 @@ CompletableFuture<Boolean> updateClusterConfigAsync(
 ```java
 TspublicRestV2AdminConfigurationUpdateRequest body = new TspublicRestV2AdminConfigurationUpdateRequest();
 
-adminController.updateClusterConfigAsync(body).thenAccept(result -> {
+adminController.restapiV2UpdateClusterConfigAsync(body).thenAccept(result -> {
     // TODO success callback handler
 }).exceptionally(exception -> {
     // TODO failure callback handler
@@ -122,10 +54,10 @@ adminController.updateClusterConfigAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Reset User Password
+# Restapi V2 Reset User Password
 
 To reset the password of a ThoughtSpot user account, use this endpoint.
 
@@ -133,10 +65,8 @@ It is mandatory to use Authorization header with token of a user with admin acce
 
 At least one of User Id or username is mandatory. When both are given, then user id will be considered.
 
-Permission: Requires administration privilege
-
 ```java
-CompletableFuture<Boolean> resetUserPasswordAsync(
+CompletableFuture<Boolean> restapiV2ResetUserPasswordAsync(
     final TspublicRestV2AdminResetpasswordRequest body)
 ```
 
@@ -156,7 +86,7 @@ CompletableFuture<Boolean> resetUserPasswordAsync(
 TspublicRestV2AdminResetpasswordRequest body = new TspublicRestV2AdminResetpasswordRequest();
 body.setNewPassword("newPassword0");
 
-adminController.resetUserPasswordAsync(body).thenAccept(result -> {
+adminController.restapiV2ResetUserPasswordAsync(body).thenAccept(result -> {
     // TODO success callback handler
 }).exceptionally(exception -> {
     // TODO failure callback handler
@@ -168,10 +98,10 @@ adminController.resetUserPasswordAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Sync Principal
+# Restapi V2 Sync Principal
 
 To programmatically synchronize user accounts and user groups from external system with ThoughtSpot, use this endpoint.
 
@@ -182,10 +112,8 @@ The users and user groups in Thoughtspot get updated for any matching inputs.
 Any user and user group present in the input, but not present in the cluster, gets created in cluster.
 n You can optionally choose to delete the user and groups from the cluster, that are not present in the input.
 
-Permission: Requires administration privilege
-
 ```java
-CompletableFuture<AdminsyncPrincipalResponse> syncPrincipalAsync(
+CompletableFuture<AdminsyncPrincipalResponse> restapiV2SyncPrincipalAsync(
     final TspublicRestV2AdminSyncprincipalRequest body)
 ```
 
@@ -206,7 +134,7 @@ TspublicRestV2AdminSyncprincipalRequest body = new TspublicRestV2AdminSyncprinci
 body.setPrincipalObject(new LinkedList<>());
 body.getPrincipalObject().add(localhost.ApiHelper.deserialize("{\"key1\":\"val1\",\"key2\":\"val2\"}"));
 
-adminController.syncPrincipalAsync(body).thenAccept(result -> {
+adminController.restapiV2SyncPrincipalAsync(body).thenAccept(result -> {
     // TODO success callback handler
 }).exceptionally(exception -> {
     // TODO failure callback handler
@@ -218,19 +146,17 @@ adminController.syncPrincipalAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Change Author of Objects
+# Restapi V2 Change Author of Objects
 
-To programmatically change the author of one or several objects from one user account to another, use this endpoint.
+To programmatically change the owner of one or several objects from one user account to another, use this endpoint.
 
-You might want to change the author of objects from one user to another active user, when the account is removed from the ThoughtSpot application.
-
-Permission: Requires administration privilege
+You might want to transfer ownership of objects owned by a user to another active user, when the account is removed from the ThoughtSpot application.
 
 ```java
-CompletableFuture<Boolean> changeAuthorOfObjectsAsync(
+CompletableFuture<Boolean> restapiV2ChangeAuthorOfObjectsAsync(
     final TspublicRestV2AdminChangeauthorRequest body)
 ```
 
@@ -253,7 +179,7 @@ body.getTsObjectId().add("tsObjectId7");
 body.setFromUser(new FromUserNameAndIDInput());
 body.setToUser(new ToUserNameAndIDInput());
 
-adminController.changeAuthorOfObjectsAsync(body).thenAccept(result -> {
+adminController.restapiV2ChangeAuthorOfObjectsAsync(body).thenAccept(result -> {
     // TODO success callback handler
 }).exceptionally(exception -> {
     // TODO failure callback handler
@@ -265,10 +191,10 @@ adminController.changeAuthorOfObjectsAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Assign Author to Objects
+# Restapi V2 Assign Author to Objects
 
 To programmatically assign an author to one or several objects, use this endpoint.
 
@@ -277,7 +203,7 @@ Provide either user name or id as input. When both are given user id will be con
 Requires administration privilege.
 
 ```java
-CompletableFuture<Boolean> assignAuthorToObjectsAsync(
+CompletableFuture<Boolean> restapiV2AssignAuthorToObjectsAsync(
     final TspublicRestV2AdminAssignauthorRequest body)
 ```
 
@@ -298,7 +224,7 @@ TspublicRestV2AdminAssignauthorRequest body = new TspublicRestV2AdminAssignautho
 body.setTsObjectId(new LinkedList<>());
 body.getTsObjectId().add("tsObjectId7");
 
-adminController.assignAuthorToObjectsAsync(body).thenAccept(result -> {
+adminController.restapiV2AssignAuthorToObjectsAsync(body).thenAccept(result -> {
     // TODO success callback handler
 }).exceptionally(exception -> {
     // TODO failure callback handler
@@ -310,17 +236,17 @@ adminController.assignAuthorToObjectsAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Force Logout Users
+# Restapi V2 Force Logout Users
 
 To logout one or more users from logged in session, use this endpoint. If no input is provided then all logged in users are force logged out.
 
 Requires administration privilege
 
 ```java
-CompletableFuture<Boolean> forceLogoutUsersAsync(
+CompletableFuture<Boolean> restapiV2ForceLogoutUsersAsync(
     final TspublicRestV2AdminForcelogoutRequest body)
 ```
 
@@ -339,7 +265,7 @@ CompletableFuture<Boolean> forceLogoutUsersAsync(
 ```java
 TspublicRestV2AdminForcelogoutRequest body = new TspublicRestV2AdminForcelogoutRequest();
 
-adminController.forceLogoutUsersAsync(body).thenAccept(result -> {
+adminController.restapiV2ForceLogoutUsersAsync(body).thenAccept(result -> {
     // TODO success callback handler
 }).exceptionally(exception -> {
     // TODO failure callback handler
@@ -351,5 +277,5 @@ adminController.forceLogoutUsersAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 

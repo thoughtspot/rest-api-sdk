@@ -10,58 +10,19 @@ DatabaseController databaseController = client.getDatabaseController();
 
 ## Methods
 
-* [Get Databases](../../doc/controllers/database.md#get-databases)
-* [Get Schemas](../../doc/controllers/database.md#get-schemas)
-* [Get Tables](../../doc/controllers/database.md#get-tables)
-* [Get Table Details](../../doc/controllers/database.md#get-table-details)
-* [Create Table](../../doc/controllers/database.md#create-table)
-* [Run Query](../../doc/controllers/database.md#run-query)
+* [Restapi V2 Get Schemas](../../doc/controllers/database.md#restapi-v2-get-schemas)
+* [Restapi V2 Get Tables](../../doc/controllers/database.md#restapi-v2-get-tables)
+* [Restapi V2 Get Table Details](../../doc/controllers/database.md#restapi-v2-get-table-details)
+* [Restapi V2 Create Table](../../doc/controllers/database.md#restapi-v2-create-table)
+* [Restapi V2 Run Query](../../doc/controllers/database.md#restapi-v2-run-query)
 
 
-# Get Databases
-
-Note: This endpoint is applicable only for on-prem deployments
-
-To list all the databases in Falcon, use this endpoint.
-
-Permission: Requires administration privilege
-
-```java
-CompletableFuture<List<String>> getDatabasesAsync()
-```
-
-## Response Type
-
-`List<String>`
-
-## Example Usage
-
-```java
-databaseController.getDatabasesAsync().thenAccept(result -> {
-    // TODO success callback handler
-}).exceptionally(exception -> {
-    // TODO failure callback handler
-    return null;
-});
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
-
-
-# Get Schemas
-
-Note: This endpoint is applicable only for on-prem deployments
+# Restapi V2 Get Schemas
 
 To list all the schemas in a database in Falcon, use this endpoint.
 
-Permission: Requires administration privilege
-
 ```java
-CompletableFuture<List<String>> getSchemasAsync(
+CompletableFuture<List<String>> restapiV2GetSchemasAsync(
     final String database)
 ```
 
@@ -80,7 +41,7 @@ CompletableFuture<List<String>> getSchemasAsync(
 ```java
 String database = "database0";
 
-databaseController.getSchemasAsync(database).thenAccept(result -> {
+databaseController.restapiV2GetSchemasAsync(database).thenAccept(result -> {
     // TODO success callback handler
 }).exceptionally(exception -> {
     // TODO failure callback handler
@@ -92,19 +53,15 @@ databaseController.getSchemasAsync(database).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Get Tables
-
-Note: This endpoint is applicable only for on-prem deployments.
+# Restapi V2 Get Tables
 
 To list all the tables in a schema of a database in Falcon, use this endpoint.
 
-Permission: Requires administration privilege
-
 ```java
-CompletableFuture<List<String>> getTablesAsync(
+CompletableFuture<List<String>> restapiV2GetTablesAsync(
     final String database,
     final String schema)
 ```
@@ -126,7 +83,7 @@ CompletableFuture<List<String>> getTablesAsync(
 String database = "database0";
 String schema = "schema2";
 
-databaseController.getTablesAsync(database, schema).thenAccept(result -> {
+databaseController.restapiV2GetTablesAsync(database, schema).thenAccept(result -> {
     // TODO success callback handler
 }).exceptionally(exception -> {
     // TODO failure callback handler
@@ -138,17 +95,17 @@ databaseController.getTablesAsync(database, schema).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Get Table Details
+# Restapi V2 Get Table Details
 
 Note: This endpoint is applicable only for on-prem deployments.
 
 To provide details of a table in a schema of a database in Falcon, use this endpoint.
 
 ```java
-CompletableFuture<Object> getTableDetailsAsync(
+CompletableFuture<Object> restapiV2GetTableDetailsAsync(
     final String database,
     final String table,
     final String schema)
@@ -172,7 +129,7 @@ CompletableFuture<Object> getTableDetailsAsync(
 String database = "database0";
 String table = "table2";
 
-databaseController.getTableDetailsAsync(database, table, null).thenAccept(result -> {
+databaseController.restapiV2GetTableDetailsAsync(database, table, null).thenAccept(result -> {
     // TODO success callback handler
 }).exceptionally(exception -> {
     // TODO failure callback handler
@@ -184,19 +141,15 @@ databaseController.getTableDetailsAsync(database, table, null).thenAccept(result
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Create Table
-
-Note: This endpoint is applicable only for on-prem deployments.
+# Restapi V2 Create Table
 
 To create a table in Falcon, use this endpoint.
 
-Permission: Requires administration privilege
-
 ```java
-CompletableFuture<CreateTableResponse> createTableAsync(
+CompletableFuture<CreateTableResponse> restapiV2CreateTableAsync(
     final TspublicRestV2DatabaseTableCreateRequest body)
 ```
 
@@ -215,7 +168,7 @@ CompletableFuture<CreateTableResponse> createTableAsync(
 ```java
 TspublicRestV2DatabaseTableCreateRequest body = new TspublicRestV2DatabaseTableCreateRequest();
 
-databaseController.createTableAsync(body).thenAccept(result -> {
+databaseController.restapiV2CreateTableAsync(body).thenAccept(result -> {
     // TODO success callback handler
 }).exceptionally(exception -> {
     // TODO failure callback handler
@@ -227,21 +180,15 @@ databaseController.createTableAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Run Query
+# Restapi V2 Run Query
 
-Note: This endpoint is applicable only for on-prem deployments.
-
-To run a TQL statement in Falcon, use this endpoint.
-
-You can run only following type of statements - Table DDL alter and Table rows update and delete.
-
-Permission: Requires administration privilege
+To run a TQL statement in Falcon, use this endpoint. You can run only following type of statements - Table DDL alter and Table rows update and delete.
 
 ```java
-CompletableFuture<List<Object>> runQueryAsync(
+CompletableFuture<List<Object>> restapiV2RunQueryAsync(
     final TspublicRestV2DatabaseTableRunqueryRequest body)
 ```
 
@@ -263,7 +210,7 @@ body.setStatement(new LinkedList<>());
 body.getStatement().add("statement6");
 body.getStatement().add("statement7");
 
-databaseController.runQueryAsync(body).thenAccept(result -> {
+databaseController.restapiV2RunQueryAsync(body).thenAccept(result -> {
     // TODO success callback handler
 }).exceptionally(exception -> {
     // TODO failure callback handler
@@ -275,5 +222,5 @@ databaseController.runQueryAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 

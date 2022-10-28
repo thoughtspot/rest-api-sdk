@@ -1,5 +1,5 @@
 
-# Getting Started with RESTAPI SDK
+# Getting Started with ThoughtSpot Public REST API
 
 ## Install the Package
 
@@ -9,12 +9,12 @@ Install the SDK by adding the following dependency in your project's pom.xml fil
 <dependency>
   <groupId>io.github.thoughtspot</groupId>
   <artifactId>rest-api-sdk-lib</artifactId>
-  <version>1.15.0</version>
+  <version>1.13.1</version>
 </dependency>
 ```
 
 You can also view the package at:
-https://mvnrepository.com/artifact/io.github.thoughtspot/rest-api-sdk-lib/1.15.0
+https://mvnrepository.com/artifact/io.github.thoughtspot/rest-api-sdk-lib/1.13.1
 
 ## Test the SDK
 
@@ -23,7 +23,7 @@ JUnit is used as the testing framework and test runner.
 
 In Eclipse, for running the tests do the following:
 
-1. Select the project RESTAPISDKLib from the package explorer.
+1. Select the project ThoughtSpotPublicRESTAPILib from the package explorer.
 2. Select `Run -> Run as -> JUnit Test` or use `Alt + Shift + X` followed by `T` to run the Tests.
 
 ## Initialize the API Client
@@ -34,8 +34,6 @@ The following parameters are configurable for the API Client:
 
 | Parameter | Type | Description |
 |  --- | --- | --- |
-| `acceptLanguage` | `String` | response format<br>*Default*: `"*"` |
-| `contentType` | `String` | body content type for post request<br>*Default*: `"application/json"` |
 | `baseUrl` | `String` | *Default*: `"https://localhost:443"` |
 | `environment` | Environment | The API environment. <br> **Default: `Environment.PRODUCTION`** |
 | `httpClientConfig` | `ReadonlyHttpClientConfiguration` | Http Client Configuration instance. |
@@ -44,11 +42,9 @@ The following parameters are configurable for the API Client:
 The API client can be initialized as follows:
 
 ```java
-RESTAPISDKClient client = new RESTAPISDKClient.Builder()
+ThoughtSpotPublicRESTAPIClient client = new ThoughtSpotPublicRESTAPIClient.Builder()
     .httpClientConfig(configBuilder -> configBuilder
             .timeout(0))
-    .acceptLanguage("*")
-    .contentType("application/json")
     .accessToken("AccessToken")
     .environment(Environment.PRODUCTION)
     .baseUrl("https://localhost:443")
@@ -61,20 +57,20 @@ This API uses `OAuth 2 Bearer token`.
 
 ## List of APIs
 
-* [Session](doc/controllers/session.md)
 * [User](doc/controllers/user.md)
 * [Group](doc/controllers/group.md)
-* [Org](doc/controllers/org.md)
 * [Metadata](doc/controllers/metadata.md)
 * [Database](doc/controllers/database.md)
 * [Connection](doc/controllers/connection.md)
 * [Data](doc/controllers/data.md)
-* [Report](doc/controllers/report.md)
-* [Admin](doc/controllers/admin.md)
-* [Security](doc/controllers/security.md)
 * [Logs](doc/controllers/logs.md)
-* [Materialization](doc/controllers/materialization.md)
 * [Custom Actions](doc/controllers/custom-actions.md)
+* [Security](doc/controllers/security.md)
+* [Org](doc/controllers/org.md)
+* [Session](doc/controllers/session.md)
+* [Admin](doc/controllers/admin.md)
+* [Report](doc/controllers/report.md)
+* [Materialization](doc/controllers/materialization.md)
 
 ## Classes Documentation
 

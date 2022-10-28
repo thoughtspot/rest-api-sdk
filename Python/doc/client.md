@@ -5,8 +5,6 @@ The following parameters are configurable for the API Client:
 
 | Parameter | Type | Description |
 |  --- | --- | --- |
-| `accept_language` | `string` | response format<br>*Default*: `'*'` |
-| `content_type` | `string` | body content type for post request<br>*Default*: `'application/json'` |
 | `base_url` | `string` | *Default*: `'https://localhost:443'` |
 | `environment` | Environment | The API environment. <br> **Default: `Environment.PRODUCTION`** |
 | `http_client_instance` | `HttpClient` | The Http Client passed from the sdk user for making requests |
@@ -23,18 +21,16 @@ The following parameters are configurable for the API Client:
 The API client can be initialized as follows:
 
 ```python
-from restapisdk.restapisdk_client import RestapisdkClient
-from restapisdk.configuration import Environment
+from thoughtspotpublicrestapi.thoughtspotpublicrestapi_client import ThoughtspotpublicrestapiClient
+from thoughtspotpublicrestapi.configuration import Environment
 
-client = RestapisdkClient(
-    accept_language='*',
-    content_type='application/json',
+client = ThoughtspotpublicrestapiClient(
     access_token='AccessToken',
     environment=Environment.PRODUCTION,
     base_url = 'https://localhost:443',)
 ```
 
-## RESTAPI SDK Client
+## ThoughtSpot Public REST API Client
 
 The gateway for the SDK. This class acts as a factory for the Controllers and also holds the configuration of the SDK.
 
@@ -42,18 +38,18 @@ The gateway for the SDK. This class acts as a factory for the Controllers and al
 
 | Name | Description |
 |  --- | --- |
-| session | Gets SessionController |
 | user | Gets UserController |
 | group | Gets GroupController |
-| org | Gets OrgController |
 | metadata | Gets MetadataController |
 | database | Gets DatabaseController |
 | connection | Gets ConnectionController |
 | data | Gets DataController |
-| report | Gets ReportController |
-| admin | Gets AdminController |
-| security | Gets SecurityController |
 | logs | Gets LogsController |
-| materialization | Gets MaterializationController |
 | custom_actions | Gets CustomActionsController |
+| security | Gets SecurityController |
+| org | Gets OrgController |
+| session | Gets SessionController |
+| admin | Gets AdminController |
+| report | Gets ReportController |
+| materialization | Gets MaterializationController |
 

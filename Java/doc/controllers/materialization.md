@@ -9,12 +9,12 @@ MaterializationController materializationController = client.getMaterializationC
 `MaterializationController`
 
 
-# Refresh Materialized View
+# Restapi V2 Refresh Materialized View
 
 Use this endpoint to refresh data in the materialized view by running the query associated with it
 
 ```java
-CompletableFuture<Object> refreshMaterializedViewAsync(
+CompletableFuture<Object> restapiV2RefreshMaterializedViewAsync(
     final TspublicRestV2MaterializationRefreshviewRequest body)
 ```
 
@@ -34,7 +34,7 @@ CompletableFuture<Object> refreshMaterializedViewAsync(
 TspublicRestV2MaterializationRefreshviewRequest body = new TspublicRestV2MaterializationRefreshviewRequest();
 body.setId("id6");
 
-materializationController.refreshMaterializedViewAsync(body).thenAccept(result -> {
+materializationController.restapiV2RefreshMaterializedViewAsync(body).thenAccept(result -> {
     // TODO success callback handler
 }).exceptionally(exception -> {
     // TODO failure callback handler
@@ -46,5 +46,5 @@ materializationController.refreshMaterializedViewAsync(body).thenAccept(result -
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 

@@ -1,13 +1,13 @@
 
-# Getting Started with RESTAPI SDK
+# Getting Started with ThoughtSpot Public REST API
 
 ## Install the Package
 
-The package is compatible with Python versions `3 >=3.7, <= 3.9`.
+The package is compatible with Python versions `3 >=3.7, <= 3.10`.
 Install the package from PyPi using the following pip command:
 
 ```python
-pip install thoughtspot-rest-api-sdk==1.15.0
+pip install thoughtspot-rest-api-sdk==1.13.1
 ```
 
 You can also view the package at:
@@ -15,13 +15,13 @@ https://pypi.python.org/pypi/thoughtspot-rest-api-sdk
 
 ## Test the SDK
 
-You can test the generated SDK and the server with test cases. `unittest` is used as the testing framework and `nose` is used as the test runner. You can run the tests as follows:
+You can test the generated SDK and the server with test cases. `unittest` is used as the testing framework and `pytest` is used as the test runner. You can run the tests as follows:
 
 Navigate to the root directory of the SDK and run the following commands
 
 ```
 pip install -r test-requirements.txt
-nosetests
+pytest
 ```
 
 ## Initialize the API Client
@@ -32,8 +32,6 @@ The following parameters are configurable for the API Client:
 
 | Parameter | Type | Description |
 |  --- | --- | --- |
-| `accept_language` | `string` | response format<br>*Default*: `'*'` |
-| `content_type` | `string` | body content type for post request<br>*Default*: `'application/json'` |
 | `base_url` | `string` | *Default*: `'https://localhost:443'` |
 | `environment` | Environment | The API environment. <br> **Default: `Environment.PRODUCTION`** |
 | `http_client_instance` | `HttpClient` | The Http Client passed from the sdk user for making requests |
@@ -50,12 +48,10 @@ The following parameters are configurable for the API Client:
 The API client can be initialized as follows:
 
 ```python
-from restapisdk.restapisdk_client import RestapisdkClient
-from restapisdk.configuration import Environment
+from thoughtspotpublicrestapi.thoughtspotpublicrestapi_client import ThoughtspotpublicrestapiClient
+from thoughtspotpublicrestapi.configuration import Environment
 
-client = RestapisdkClient(
-    accept_language='*',
-    content_type='application/json',
+client = ThoughtspotpublicrestapiClient(
     access_token='AccessToken',
     environment=Environment.PRODUCTION,
     base_url = 'https://localhost:443',)
@@ -67,20 +63,20 @@ This API uses `OAuth 2 Bearer token`.
 
 ## List of APIs
 
-* [Session](doc/controllers/session.md)
 * [User](doc/controllers/user.md)
 * [Group](doc/controllers/group.md)
-* [Org](doc/controllers/org.md)
 * [Metadata](doc/controllers/metadata.md)
 * [Database](doc/controllers/database.md)
 * [Connection](doc/controllers/connection.md)
 * [Data](doc/controllers/data.md)
-* [Report](doc/controllers/report.md)
-* [Admin](doc/controllers/admin.md)
-* [Security](doc/controllers/security.md)
 * [Logs](doc/controllers/logs.md)
-* [Materialization](doc/controllers/materialization.md)
 * [Custom Actions](doc/controllers/custom-actions.md)
+* [Security](doc/controllers/security.md)
+* [Org](doc/controllers/org.md)
+* [Session](doc/controllers/session.md)
+* [Admin](doc/controllers/admin.md)
+* [Report](doc/controllers/report.md)
+* [Materialization](doc/controllers/materialization.md)
 
 ## Classes Documentation
 
