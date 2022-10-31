@@ -42,7 +42,7 @@ public class HttpClientConfiguration implements ReadonlyHttpClientConfiguration 
      * @return isSkipSslCertVerification
      */
     public boolean isSkipSslCertVerification() {
-        return configuration.isSkipSslCertVerification();
+        return configuration.skipSslCertVerification();
     }
 
     /**
@@ -204,7 +204,7 @@ public class HttpClientConfiguration implements ReadonlyHttpClientConfiguration 
          * @return Builder
          */
         public Builder isSkipSslCertVerification(boolean isSkipSslCertVerification) {
-            configurationBuilder.isSkipSslCertVerification(isSkipSslCertVerification);
+            configurationBuilder.skipSslCertVerification(isSkipSslCertVerification);
             return this;
         }
 
