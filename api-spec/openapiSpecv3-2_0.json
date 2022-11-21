@@ -199,6 +199,7 @@
     "/api/rest/2.0/instance": {
       "get": {
         "operationId": "getInstanceInfo",
+        "description": "Get instance details",
         "tags": [
           "Instance"
         ],
@@ -208,7 +209,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ClusterInfo"
+                  "$ref": "#/components/schemas/InstanceInfo"
                 }
               }
             }
@@ -228,7 +229,8 @@
     },
     "/api/rest/2.0/instance/config": {
       "get": {
-        "operationId": "getClusterConfig",
+        "operationId": "getInstanceConfig",
+        "description": "Get instance config information",
         "tags": [
           "Instance"
         ],
@@ -238,7 +240,1162 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ClusterConfig"
+                  "$ref": "#/components/schemas/InstanceConfig"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/orgs/search": {
+      "post": {
+        "operationId": "searchOrg",
+        "description": "To programmatically search an Organization in the ThoughtSpot system use this API endpoint.",
+        "tags": [
+          "Org"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "org_identifier": {
+                    "description": "identifier for the Organization: Either unique id or unique name of the Organization.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "description": {
+                    "description": "Description of the Organization.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "visibility": {
+                    "description": "Visibility of the Organization.",
+                    "type": "string",
+                    "enum": [
+                      "SHOW",
+                      "HIDDEN"
+                    ],
+                    "deprecated": false
+                  },
+                  "status": {
+                    "description": "Status of the Organization.",
+                    "type": "string",
+                    "enum": [
+                      "ACTIVE",
+                      "IN_ACTIVE"
+                    ],
+                    "deprecated": false
+                  },
+                  "user_identifier": {
+                    "description": "User identifier for the Organization: Either unique id or unique name of the user.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "org_scope": {
+                    "description": "Organization override for the request",
+                    "type": "string",
+                    "enum": [
+                      "ALL_ORG"
+                    ],
+                    "deprecated": false
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/OrgResponse"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/tags/search": {
+      "post": {
+        "operationId": "searchTags",
+        "description": "To programmatically search tags in the ThoughtSpot system use this API endpoint.\nProvide any of tag attributes. Matching tags will be returned.",
+        "tags": [
+          "Org"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "tag_identifier": {
+                    "description": "Name or Id of the tag.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "color": {
+                    "description": "Color of the tag.",
+                    "type": "string",
+                    "deprecated": false
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Tag"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/groups/search": {
+      "post": {
+        "operationId": "searchUserGroups",
+        "description": "Search User Groups from the current organization",
+        "tags": [
+          "Group"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "default_liveboard_identifiers": {
+                    "description": "Unique ID of liveboards which will be assigned as default liveboards to the user group.",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "deprecated": false
+                  },
+                  "description": {
+                    "description": "Description for the user group.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "display_name": {
+                    "description": "Unique display name for the user group.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "group_identifier": {
+                    "description": "Unique ID or name of the user group.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "org_identifiers": {
+                    "description": "Unique ID or name of the organization where the user group will be created. If not specified then group will be created in the current logged in organization. Note that only tenant admins are allowed to create group across organization.",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "deprecated": false
+                  },
+                  "org_scope": {
+                    "description": "Supported organization scope.",
+                    "type": "string",
+                    "enum": [
+                      "ALL_ORG"
+                    ],
+                    "deprecated": false
+                  },
+                  "privileges": {
+                    "description": "Privileges which will be assigned to the user group.",
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "ADMINISTRATION",
+                        "AUTHORING",
+                        "USERDATAUPLOADING",
+                        "DATADOWNLOADING",
+                        "USERMANAGEMENT",
+                        "SECURITYMANAGEMENT",
+                        "LOGICALMODELING",
+                        "DATAMANAGEMENT",
+                        "TAGMANAGEMENT",
+                        "SHAREWITHALL",
+                        "SYSTEMMANAGEMENT",
+                        "JOBSCHEDULING",
+                        "A3ANALYSIS",
+                        "EXPERIMENTALFEATUREPRIVILEGE",
+                        "BYPASSRLS",
+                        "RANALYSIS",
+                        "DISABLE_PINBOARD_CREATION",
+                        "DEVELOPER",
+                        "APPLICATION_ADMINISTRATION",
+                        "USER_ADMINISTRATION",
+                        "GROUP_ADMINISTRATION",
+                        "BACKUP_ADMINISTRATION",
+                        "SYSTEM_INFO_ADMINISTRATION",
+                        "ENABLESPOTAPPCREATION",
+                        "SYNCMANAGEMENT"
+                      ]
+                    },
+                    "deprecated": false
+                  },
+                  "sub_group_identifiers": {
+                    "description": "Unique ID or name of the User Groups who will be part of the user group.",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "deprecated": false
+                  },
+                  "type": {
+                    "description": "Type of the user group.",
+                    "type": "string",
+                    "enum": [
+                      "LOCAL_GROUP"
+                    ],
+                    "deprecated": false
+                  },
+                  "user_identifiers": {
+                    "description": "Unique ID or name of the Users who will be part of the user group.",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "deprecated": false
+                  },
+                  "visibility": {
+                    "description": "Visibility of the user group. The SHARABLE makes a user group visible to other users and user groups, and thus allows them to share objects.",
+                    "type": "string",
+                    "enum": [
+                      "SHARABLE",
+                      "NON_SHARABLE"
+                    ],
+                    "deprecated": false
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserGroupResponse"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/metadata/liveboard/sql": {
+      "post": {
+        "operationId": "fetchLiveboardSqlQuery",
+        "description": "Fetch SQL query for Answer or Liveboard visualizations.",
+        "tags": [
+          "Metadata"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "metadata_identifier": {
+                    "description": " Unique ID or name of the metadata.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "visualization_identifiers": {
+                    "description": " Unique ID or name of visualizations.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/VisualizationIdentifiersInput"
+                    },
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "metadata_identifier",
+                  "visualization_identifiers"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SqlQueryResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/metadata/answer/sql": {
+      "post": {
+        "operationId": "fetchAnswerSqlQuery",
+        "tags": [
+          "Metadata"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "metadata_identifier": {
+                    "description": " Unique ID or name of the metadata.",
+                    "type": "string",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "metadata_identifier"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SqlQueryResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/metadata/liveboard/data": {
+      "post": {
+        "operationId": "fetchLiveboardData",
+        "description": "Fetch data of Liveboard visualizations.",
+        "tags": [
+          "Metadata"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "metadata_identifier": {
+                    "description": " Unique ID or name of the metadata.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "visualization_identifiers": {
+                    "description": " List of unique ID or name of visualizations. ",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/VisualizationIdentifiersInput"
+                    },
+                    "deprecated": false
+                  },
+                  "transient_content": {
+                    "description": " Transient content of the Liveboard. ",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "data_format": {
+                    "description": " JSON output data format. ",
+                    "type": "string",
+                    "enum": [
+                      "COMPACT",
+                      "FULL"
+                    ],
+                    "deprecated": false
+                  },
+                  "record_offset": {
+                    "description": " The starting record number from where the records should be included. ",
+                    "type": "integer",
+                    "format": "int32",
+                    "deprecated": false
+                  },
+                  "record_size": {
+                    "description": " The number of records that should be included. ",
+                    "type": "integer",
+                    "format": "int32",
+                    "deprecated": false
+                  },
+                  "runtime_filter": {
+                    "description": "JSON object representing filter condition to filter the data.",
+                    "type": "object",
+                    "deprecated": false
+                  },
+                  "runtime_sort": {
+                    "description": "JSON object representing columns to sort the data.",
+                    "type": "object",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "metadata_identifier",
+                  "visualization_identifiers"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DataResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/metadata/answer/data": {
+      "post": {
+        "operationId": "fetchAnswerData",
+        "description": "Fetch data of Answer.",
+        "tags": [
+          "Metadata"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "metadata_identifier": {
+                    "description": " Unique ID or name of the metadata.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "data_format": {
+                    "description": " JSON output data format. ",
+                    "type": "string",
+                    "enum": [
+                      "COMPACT",
+                      "FULL"
+                    ],
+                    "deprecated": false
+                  },
+                  "record_offset": {
+                    "description": " The starting record number from where the records should be included. ",
+                    "type": "integer",
+                    "format": "int32",
+                    "deprecated": false
+                  },
+                  "record_size": {
+                    "description": " The number of records that should be included. ",
+                    "type": "integer",
+                    "format": "int32",
+                    "deprecated": false
+                  },
+                  "runtime_filter": {
+                    "description": "JSON object representing filter condition to filter the data.",
+                    "type": "object",
+                    "deprecated": false
+                  },
+                  "runtime_sort": {
+                    "description": "JSON object representing columns to sort the data.",
+                    "type": "object",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "metadata_identifier"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DataResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/metadata/table/data": {
+      "post": {
+        "operationId": "fetchTableData",
+        "tags": [
+          "Metadata"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "metadata_identifier": {
+                    "description": " Unique ID or name of the metadata.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "data_format": {
+                    "description": " JSON output data format. ",
+                    "type": "string",
+                    "enum": [
+                      "COMPACT",
+                      "FULL"
+                    ],
+                    "deprecated": false
+                  },
+                  "record_offset": {
+                    "description": " The starting record number from where the records should be included. ",
+                    "type": "integer",
+                    "format": "int32",
+                    "deprecated": false
+                  },
+                  "record_size": {
+                    "description": " The number of records that should be included. ",
+                    "type": "integer",
+                    "format": "int32",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "metadata_identifier"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DataResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/metadata/column/data": {
+      "post": {
+        "operationId": "fetchColumnData",
+        "tags": [
+          "Metadata"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "metadata_identifier": {
+                    "description": " Unique ID or name of the metadata.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "data_format": {
+                    "description": " JSON output data format. ",
+                    "type": "string",
+                    "enum": [
+                      "COMPACT",
+                      "FULL"
+                    ],
+                    "deprecated": false
+                  },
+                  "record_offset": {
+                    "description": " The starting record number from where the records should be included. ",
+                    "type": "integer",
+                    "format": "int32",
+                    "deprecated": false
+                  },
+                  "record_size": {
+                    "description": " The number of records that should be included. ",
+                    "type": "integer",
+                    "format": "int32",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "metadata_identifier"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DataResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/report/liveboard": {
+      "post": {
+        "operationId": "exportLiveboardReport",
+        "description": "Export report file for Liveboard visualization data.",
+        "tags": [
+          "Report"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "metadata_identifier": {
+                    "description": " Unique ID or name of the metadata.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "visualization_identifiers": {
+                    "description": "Unique ID or name of visualizations.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/VisualizationIdentifiersInput"
+                    },
+                    "deprecated": false
+                  },
+                  "transient_content": {
+                    "description": "Transient content of the Liveboard.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "file_format": {
+                    "description": "  Export file format. ",
+                    "type": "string",
+                    "enum": [
+                      "CSV",
+                      "PDF",
+                      "PNG",
+                      "XLSX"
+                    ],
+                    "deprecated": false
+                  },
+                  "runtime_filter": {
+                    "description": "  JSON string representing runtime filter. ",
+                    "type": "object",
+                    "deprecated": false
+                  },
+                  "runtime_sort": {
+                    "description": " JSON string representing runtime sort. ",
+                    "type": "object",
+                    "deprecated": false
+                  },
+                  "pdf_options": {
+                    "description": "Options for PDF export.",
+                    "$ref": "#/components/schemas/PdfOptionsInput",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "metadata_identifier",
+                  "visualization_identifiers"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/report/answer": {
+      "post": {
+        "operationId": "exportAnswerReport",
+        "description": "Export report file for Answer data.",
+        "tags": [
+          "Report"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "metadata_identifier": {
+                    "description": " Unique ID or name of the metadata.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "file_format": {
+                    "description": "  Export file format. ",
+                    "default": "CSV",
+                    "type": "string",
+                    "enum": [
+                      "CSV",
+                      "PDF",
+                      "PNG",
+                      "XLSX"
+                    ],
+                    "deprecated": false
+                  },
+                  "runtime_filter": {
+                    "description": "  JSON string representing runtime filter. ",
+                    "type": "object",
+                    "deprecated": false
+                  },
+                  "runtime_sort": {
+                    "description": " JSON string representing runtime sort. ",
+                    "type": "object",
+                    "deprecated": false
+                  },
+                  "pdf_options": {
+                    "description": "Options for PDF export.",
+                    "$ref": "#/components/schemas/PdfOptionsInput",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "metadata_identifier"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/security/principals/fetch-permissions": {
+      "post": {
+        "operationId": "fetchPermissionsOfPrincipals",
+        "description": "Fetch permissions of principals (Users or Usergroups).",
+        "tags": [
+          "Security"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "metadata": {
+                    "description": "Metadata objects considered while fetching permission of specified principals.\nIf not provided then all applicable metadata objects are considered.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/MetadataTypeInput"
+                    },
+                    "deprecated": false
+                  },
+                  "principals": {
+                    "description": "Principal details.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/PrincipalsInput"
+                    },
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "principals"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/security/metadata/fetch-permissions": {
+      "post": {
+        "operationId": "fetchPermissionsOnMetadata",
+        "description": "Fetch permissions on metadata objects.",
+        "tags": [
+          "Security"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "metadata": {
+                    "description": "Metadata objects.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/MetadataTypeInput"
+                    },
+                    "deprecated": false
+                  },
+                  "principals": {
+                    "description": "Principal details considered while fetching permission on metadata objects.\nIf not provided then all applicable principals are considered.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/PrincipalsInput"
+                    },
+                    "deprecated": false
+                  },
+                  "include_dependent_objects": {
+                    "description": "Indicates whether to fetch permissions of depedent metadata objects.",
+                    "type": "boolean",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "metadata"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/searchdata": {
+      "post": {
+        "operationId": "searchData",
+        "tags": [
+          "Search Data"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "query_string": {
+                    "description": "Data search query string.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "logical_table_identifier": {
+                    "description": "Unique ID of data object (worksheet, view, or a table)",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "data_format": {
+                    "description": " JSON output data format. ",
+                    "type": "string",
+                    "enum": [
+                      "COMPACT",
+                      "FULL"
+                    ],
+                    "deprecated": false
+                  },
+                  "record_offset": {
+                    "description": " The starting record number from where the records should be included. ",
+                    "type": "integer",
+                    "format": "int32",
+                    "deprecated": false
+                  },
+                  "record_size": {
+                    "description": " The number of records that should be included. ",
+                    "type": "integer",
+                    "format": "int32",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "query_string",
+                  "logical_table_identifier"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DataResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/logs/fetch": {
+      "post": {
+        "operationId": "fetchLogs",
+        "description": "Fetch logs",
+        "tags": [
+          "Log"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "log_type": {
+                    "description": "Name of the log type.",
+                    "type": "string",
+                    "enum": [
+                      "SECURITY_AUDIT"
+                    ],
+                    "deprecated": false
+                  },
+                  "end_epoc_time_in_millis": {
+                    "description": "End epoc time in milli seconds.",
+                    "type": "number",
+                    "format": "float",
+                    "deprecated": false
+                  },
+                  "start_epoc_time_in_millis": {
+                    "description": "Start epoc time in milli seconds.",
+                    "type": "number",
+                    "format": "float",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "log_type"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LogResponse"
+                  }
                 }
               }
             }
@@ -365,6 +1522,19 @@
                     "type": "integer",
                     "format": "int32",
                     "deprecated": false
+                  },
+                  "auto_create": {
+                    "description": "“user_options” attribute is added as an optional attribute which will allow JIT token support",
+                    "default": false,
+                    "type": "boolean",
+                    "deprecated": false
+                  },
+                  "group_identifiers": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "deprecated": false
                   }
                 },
                 "required": [
@@ -441,6 +1611,19 @@
                     "default": 0,
                     "type": "integer",
                     "format": "int32",
+                    "deprecated": false
+                  },
+                  "auto_create": {
+                    "description": "“user_options” attribute is added as an optional attribute which will allow JIT token support",
+                    "default": false,
+                    "type": "boolean",
+                    "deprecated": false
+                  },
+                  "group_identifiers": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
                     "deprecated": false
                   }
                 },
@@ -570,7 +1753,7 @@
         }
       }
     },
-    "/api/rest/2.0/users": {
+    "/api/rest/2.0/users/create": {
       "post": {
         "operationId": "createUser",
         "description": "To programmatically create a user account in the ThoughtSpot system use this API endpoint. Using this API, you can create a user and assign groups.\nTo create a user, you require admin user privileges.",
@@ -721,7 +1904,57 @@
         }
       }
     },
-    "/api/rest/2.0/users/$user_identifier": {
+    "/api/rest/2.0/users/$user_identifier/delete": {
+      "post": {
+        "operationId": "deleteUser",
+        "description": "To programmatically delete a user account in the ThoughtSpot system use this API endpoint.\nUsing this API, you can delete by passing GUID / name of the user.\nTo delete a user, you require admin user privileges.",
+        "tags": [
+          "User"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "user_identifier": {
+                    "description": "GUID / name of the user to be deleted",
+                    "type": "string",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "user_identifier"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/users/$user_identifier/update": {
       "post": {
         "operationId": "updateUser",
         "description": "To programmatically update a user account in the ThoughtSpot system use this API endpoint.\nUsing this API, you can update a user and assign groups.\nTo update a user, you require admin user privileges.",
@@ -921,6 +2154,1525 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ImportUsersResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/users/change_password": {
+      "post": {
+        "operationId": "changeUserPassword",
+        "description": "Change user password",
+        "tags": [
+          "User"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "current_password": {
+                    "description": "Current password of the user.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "new_password": {
+                    "description": "New password for the user.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "user_identifier": {
+                    "description": "Unique ID or name of the user.",
+                    "type": "string",
+                    "deprecated": false
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/users/reset_password": {
+      "post": {
+        "operationId": "resetUserPassword",
+        "description": "Reset user password",
+        "tags": [
+          "User"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "new_password": {
+                    "description": "New password for the user.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "user_identifier": {
+                    "description": "Unique ID or name of the user.",
+                    "type": "string",
+                    "deprecated": false
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/users/force_logout": {
+      "post": {
+        "operationId": "forceLogoutUsers",
+        "description": "Force logout users session",
+        "tags": [
+          "User"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "user_identifiers": {
+                    "description": "Unique ID or name of the users for force logging out their sessions.",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "user_identifiers"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/orgs/create": {
+      "post": {
+        "operationId": "createOrg",
+        "description": "To programmatically create an Organization in the ThoughtSpot system use this API endpoint.",
+        "tags": [
+          "Org"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "description": "Name of the Organization.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "description": {
+                    "description": "Description of the Organization.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "org_scope": {
+                    "description": "Organization override for the request",
+                    "type": "string",
+                    "enum": [
+                      "ALL_ORG"
+                    ],
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrgResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/orgs/$org_identifier/update": {
+      "post": {
+        "operationId": "updateOrg",
+        "description": "To programmatically update an Organization in the ThoughtSpot system use this API endpoint.",
+        "tags": [
+          "Org"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "org_identifier": {
+                    "description": "identifier for the Organization: Either unique id or unique name of the Organization.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "name": {
+                    "description": "Name of the Organization.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "description": {
+                    "description": "Description of the Organization.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "status": {
+                    "description": "Status of the Organization.",
+                    "type": "string",
+                    "enum": [
+                      "ACTIVE",
+                      "IN_ACTIVE"
+                    ],
+                    "deprecated": false
+                  },
+                  "user_identifiers": {
+                    "description": "Add Users to an Organization.",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "deprecated": false
+                  },
+                  "org_scope": {
+                    "description": "Organization override for the request",
+                    "type": "string",
+                    "enum": [
+                      "ALL_ORG"
+                    ],
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "org_identifier"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/orgs/$org_identifier/addusers": {
+      "post": {
+        "operationId": "addUsersToOrg",
+        "description": "To programmatically update an Organization in the ThoughtSpot system use this API endpoint.",
+        "tags": [
+          "Org"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "org_identifier": {
+                    "description": "identifier for the Organization: Either unique id or unique name of the Organization.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "user_identifiers": {
+                    "description": "Add Users to an Organization.",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "deprecated": false
+                  },
+                  "org_scope": {
+                    "description": "Organization override for the request",
+                    "type": "string",
+                    "enum": [
+                      "ALL_ORG"
+                    ],
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "org_identifier"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/orgs/$org_identifier/delete": {
+      "post": {
+        "operationId": "deleteOrg",
+        "description": "To programmatically delete an Organization in the ThoughtSpot system use this API endpoint.",
+        "tags": [
+          "Org"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "org_identifier": {
+                    "description": "Organization identifier for the Organization: Either unique id or unique name of the Organization.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "org_scope": {
+                    "description": "Organization override for the request",
+                    "type": "string",
+                    "enum": [
+                      "ALL_ORG"
+                    ],
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "org_identifier"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/tags/create": {
+      "post": {
+        "operationId": "createTag",
+        "description": "To programmatically create an org in the ThoughtSpot system use this API endpoint.",
+        "tags": [
+          "Tags"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "description": "Name of the tag.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "color": {
+                    "description": "Hex color code to be assigned to the tag.Example, Input: #ff78a9.",
+                    "type": "string",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Tag"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/tags/$tag_identifier/update": {
+      "post": {
+        "operationId": "updateTag",
+        "description": "To programmatically update tags, use this endpoint. Specify either tag id or tag name",
+        "tags": [
+          "Tags"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "tag_identifier": {
+                    "description": "Name or Id of the tag.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "name": {
+                    "description": "Name of the tag.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "color": {
+                    "description": "Hex color code to be assigned to the tag.Example, Input: #ff78a9",
+                    "type": "string",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "tag_identifier"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/tags/$tag_identifier/delete": {
+      "post": {
+        "operationId": "deleteTag",
+        "description": "To programmatically delete tags, use this endpoint. Specify either tag id or tag name",
+        "tags": [
+          "Tags"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "tag_identifier": {
+                    "description": "Tag identifier Tag name or Tag id.",
+                    "type": "string",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "tag_identifier"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/tags/assign": {
+      "post": {
+        "operationId": "assignTag",
+        "description": "Assign tags to metadata objects in the ThoughtSpot system",
+        "tags": [
+          "Tags"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "metadata_type": {
+                    "description": "Types of metadata object(s): ANSWER, LIVEBOARD, LOGICAL_TABLE, LOGICAL_COLUMN\nExample: ['ANSWER', 'LIVEBOARD']",
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "LIVEBOARD",
+                        "ANSWER",
+                        "LOGICAL_TABLE",
+                        "LOGICAL_COLUMN"
+                      ]
+                    },
+                    "deprecated": false
+                  },
+                  "metadata_identifiers": {
+                    "description": "Metadata identifier(s) for the given metadata types.\nExample: ['MetadataGUID1-or-MetadataName1', 'MetadataGUID2-or-MetadataName2']\nNote: metadata_identifiers[i] corresponds to metadata_type[i]",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "deprecated": false
+                  },
+                  "tag_identifiers": {
+                    "description": "Tag identifier(s) to assign\nExample: ['TagGUID1-or-TagName1', 'TagGUID2-or-TagName2']",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "metadata_type",
+                  "metadata_identifiers",
+                  "tag_identifiers"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/tags/unassign": {
+      "post": {
+        "operationId": "unassignTag",
+        "description": "Unassign tags to metadata objects in the ThoughtSpot system",
+        "tags": [
+          "Tags"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "metadata_type": {
+                    "description": "Types of metadata object(s): ANSWER, LIVEBOARD, LOGICAL_TABLE, LOGICAL_COLUMN\nExample: ['ANSWER', 'LIVEBOARD']",
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "LIVEBOARD",
+                        "ANSWER",
+                        "LOGICAL_TABLE",
+                        "LOGICAL_COLUMN"
+                      ]
+                    },
+                    "deprecated": false
+                  },
+                  "metadata_identifiers": {
+                    "description": "Metadata identifier(s) for the given metadata types.\nExample: ['MetadataGUID1-or-MetadataName1', 'MetadataGUID2-or-MetadataName2']\nNote: metadata_identifiers[i] corresponds to metadata_type[i]",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "deprecated": false
+                  },
+                  "tag_identifiers": {
+                    "description": "Tag identifier(s) to assign\nExample: ['TagGUID1-or-TagName1', 'TagGUID2-or-TagName2']",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "metadata_type",
+                  "metadata_identifiers",
+                  "tag_identifiers"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/groups/create": {
+      "post": {
+        "operationId": "createUserGroup",
+        "description": "Create a User Group from the current organization",
+        "tags": [
+          "Group"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "description": "Name of the user group. The user group name must be unique.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "display_name": {
+                    "description": "Unique display name for the user group.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "default_liveboard_identifiers": {
+                    "description": "Unique ID of liveboards which will be assigned as default liveboards to the user group.",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "deprecated": false
+                  },
+                  "description": {
+                    "description": "Description for the user group.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "privileges": {
+                    "description": "Privileges which will be assigned to the user group.",
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "ADMINISTRATION",
+                        "AUTHORING",
+                        "USERDATAUPLOADING",
+                        "DATADOWNLOADING",
+                        "USERMANAGEMENT",
+                        "SECURITYMANAGEMENT",
+                        "LOGICALMODELING",
+                        "DATAMANAGEMENT",
+                        "TAGMANAGEMENT",
+                        "SHAREWITHALL",
+                        "SYSTEMMANAGEMENT",
+                        "JOBSCHEDULING",
+                        "A3ANALYSIS",
+                        "EXPERIMENTALFEATUREPRIVILEGE",
+                        "BYPASSRLS",
+                        "RANALYSIS",
+                        "DISABLE_PINBOARD_CREATION",
+                        "DEVELOPER",
+                        "APPLICATION_ADMINISTRATION",
+                        "USER_ADMINISTRATION",
+                        "GROUP_ADMINISTRATION",
+                        "BACKUP_ADMINISTRATION",
+                        "SYSTEM_INFO_ADMINISTRATION",
+                        "ENABLESPOTAPPCREATION",
+                        "SYNCMANAGEMENT"
+                      ]
+                    },
+                    "deprecated": false
+                  },
+                  "sub_group_identifiers": {
+                    "description": "Unique ID or name of the User Groups who will be part of the user group.",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "deprecated": false
+                  },
+                  "type": {
+                    "description": "Type of the user group.",
+                    "default": "LOCAL_GROUP",
+                    "type": "string",
+                    "enum": [
+                      "LOCAL_GROUP"
+                    ],
+                    "deprecated": false
+                  },
+                  "user_identifiers": {
+                    "description": "Unique ID or name of the Users who will be part of the user group.",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "deprecated": false
+                  },
+                  "visibility": {
+                    "description": "Visibility of the user group. The SHARABLE makes a user group visible to other users and user groups, and thus \nallows them to share objects.",
+                    "default": "SHARABLE",
+                    "type": "string",
+                    "enum": [
+                      "SHARABLE",
+                      "NON_SHARABLE"
+                    ],
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "name",
+                  "display_name"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserGroupResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/groups/$group_identifier/delete": {
+      "post": {
+        "operationId": "deleteUserGroup",
+        "description": "Deletes a user group from the current organization",
+        "tags": [
+          "Group"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "group_identifier": {
+                    "description": "Unique ID or name of the user group.",
+                    "type": "string",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "group_identifier"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/groups/$group_identifier/update": {
+      "post": {
+        "operationId": "updateUserGroup",
+        "description": "Update the user group",
+        "tags": [
+          "Group"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "group_identifier": {
+                    "description": "Unique ID or name of the user group.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "name": {
+                    "description": "Name of the user group. The user group name must be unique.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "default_liveboard_identifiers": {
+                    "description": "Unique ID of liveboards which will be assigned as default liveboards to the user group.",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "deprecated": false
+                  },
+                  "description": {
+                    "description": "Description for the user group.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "display_name": {
+                    "description": "Unique display name for the user group.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "privileges": {
+                    "description": "Privileges which will be assigned to the user group.",
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "ADMINISTRATION",
+                        "AUTHORING",
+                        "USERDATAUPLOADING",
+                        "DATADOWNLOADING",
+                        "USERMANAGEMENT",
+                        "SECURITYMANAGEMENT",
+                        "LOGICALMODELING",
+                        "DATAMANAGEMENT",
+                        "TAGMANAGEMENT",
+                        "SHAREWITHALL",
+                        "SYSTEMMANAGEMENT",
+                        "JOBSCHEDULING",
+                        "A3ANALYSIS",
+                        "EXPERIMENTALFEATUREPRIVILEGE",
+                        "BYPASSRLS",
+                        "RANALYSIS",
+                        "DISABLE_PINBOARD_CREATION",
+                        "DEVELOPER",
+                        "APPLICATION_ADMINISTRATION",
+                        "USER_ADMINISTRATION",
+                        "GROUP_ADMINISTRATION",
+                        "BACKUP_ADMINISTRATION",
+                        "SYSTEM_INFO_ADMINISTRATION",
+                        "ENABLESPOTAPPCREATION",
+                        "SYNCMANAGEMENT"
+                      ]
+                    },
+                    "deprecated": false
+                  },
+                  "sub_group_identifiers": {
+                    "description": "Unique ID or name of the User Groups who will be part of the user group.",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "deprecated": false
+                  },
+                  "type": {
+                    "description": "Type of the user group.",
+                    "type": "string",
+                    "enum": [
+                      "LOCAL_GROUP"
+                    ],
+                    "deprecated": false
+                  },
+                  "user_identifiers": {
+                    "description": "Unique ID or name of the Users who will be part of the user group.",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "deprecated": false
+                  },
+                  "visibility": {
+                    "description": "Visibility of the user group. The SHARABLE makes a user group visible to other users and user groups, and thus \nallows them to share objects.",
+                    "type": "string",
+                    "enum": [
+                      "SHARABLE",
+                      "NON_SHARABLE"
+                    ],
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "group_identifier"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/groups/import": {
+      "post": {
+        "operationId": "importUserGroups",
+        "description": "Import user groups to the current organization",
+        "tags": [
+          "Group"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "delete_unspecified_groups": {
+                    "description": "Option to remove any existing groups from system which are not specified in the input request.",
+                    "type": "boolean",
+                    "deprecated": false
+                  },
+                  "dry_run": {
+                    "description": "Option to dry or mock run of operation without importing any objects.",
+                    "type": "boolean",
+                    "deprecated": false
+                  },
+                  "groups": {
+                    "description": "Details of user groups which are to be imported",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/GroupsImportListInput"
+                    },
+                    "deprecated": false
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportUserGroupsResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/metadata/tml/import": {
+      "post": {
+        "operationId": "importMetadata",
+        "tags": [
+          "Metadata"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "metadata_tmls": {
+                    "description": " Details of metadata object TMLs.",
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    },
+                    "deprecated": false
+                  },
+                  "import_policy": {
+                    "description": " Import policy. ",
+                    "type": "string",
+                    "enum": [
+                      "PARTIAL",
+                      "ALL_OR_NONE",
+                      "VALIDATE_ONLY"
+                    ],
+                    "deprecated": false
+                  },
+                  "create_new": {
+                    "description": " Indicates whether object represented in TMLs to be newly created. ",
+                    "type": "boolean",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "metadata_tmls",
+                  "import_policy"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/metadata/tml/export": {
+      "post": {
+        "operationId": "exportMetadata",
+        "tags": [
+          "Metadata"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "metadata": {
+                    "description": " Metadata objects. ",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/MetadataTypeInput"
+                    },
+                    "deprecated": false
+                  },
+                  "edoc_format": {
+                    "description": " TML EDOC content format. ",
+                    "type": "string",
+                    "enum": [
+                      "JSON",
+                      "YAML"
+                    ],
+                    "deprecated": false
+                  },
+                  "export_associated": {
+                    "description": " Indicates whether to export associated metadata objects of specified metadata objects. ",
+                    "default": false,
+                    "type": "boolean",
+                    "deprecated": false
+                  },
+                  "export_fqn": {
+                    "description": " Indicates whether to include GUID (FQN) of specified metadata objects. ",
+                    "default": false,
+                    "type": "boolean",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "metadata"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/metadata/delete": {
+      "post": {
+        "operationId": "deleteMetadata",
+        "tags": [
+          "Metadata"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "metadata": {
+                    "description": " Metadata objects. ",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/MetadataTypeInput"
+                    },
+                    "deprecated": false
+                  },
+                  "include_disabled": {
+                    "description": " Indicates whether to delete disabled metadata objects. ",
+                    "default": false,
+                    "type": "boolean",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "metadata"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/security/metadata/assign": {
+      "post": {
+        "operationId": "assignChangeAuthor",
+        "description": "Assign new or change existing authors of metadata objects.",
+        "tags": [
+          "Security"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "metadata": {
+                    "description": "Metadata objects.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/MetadataTypeInput"
+                    },
+                    "deprecated": false
+                  },
+                  "current_owner_identifier": {
+                    "description": "Unique ID or name of the current owner of metadata objects.\nMetadata objects matching specified current owner will be considered.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "user_identifier": {
+                    "description": "Unique ID or name of the user who will be new author of the metadata objects.",
+                    "type": "string",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "metadata",
+                  "current_owner_identifier",
+                  "user_identifier"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/security/metadata/share": {
+      "post": {
+        "operationId": "shareMetadata",
+        "description": "Share metadata objects with users or user groups.",
+        "tags": [
+          "Security"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "metadata_type": {
+                    "description": "Type of metadata.",
+                    "type": "string",
+                    "enum": [
+                      "LIVEBOARD",
+                      "ANSWER",
+                      "LOGICAL_TABLE",
+                      "LOGICAL_COLUMN"
+                    ],
+                    "deprecated": false
+                  },
+                  "metadata_identifiers": {
+                    "description": "Unique ID or name of metadata objects.",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "deprecated": false
+                  },
+                  "principal": {
+                    "description": "Details of users or user groups.",
+                    "$ref": "#/components/schemas/PrincipalsInput",
+                    "deprecated": false
+                  },
+                  "share_mode": {
+                    "description": "Object share mode.",
+                    "type": "string",
+                    "enum": [
+                      "READ_ONLY",
+                      "MODIFY",
+                      "NO_ACCESS"
+                    ],
+                    "deprecated": false
+                  },
+                  "visualization_identifiers": {
+                    "description": "Options to specify details of Liveboard.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/VisualizationIdentifiersInput"
+                    },
+                    "deprecated": false
+                  },
+                  "emails": {
+                    "description": "Email IDs to which notifications will be sent.",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "deprecated": false
+                  },
+                  "message": {
+                    "description": "Message to be included in notification.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "enable_custom_url": {
+                    "description": "Indicates whether to customize the URLs in the notification content.",
+                    "default": false,
+                    "type": "boolean",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "metadata_type",
+                  "metadata_identifiers",
+                  "principal",
+                  "share_mode"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
                 }
               }
             }
@@ -1145,6 +3897,12 @@
       },
       "ImportUser": {
         "type": "object",
+        "required": [
+          "name",
+          "display_name",
+          "password",
+          "email"
+        ],
         "properties": {
           "name": {
             "type": "string"
@@ -1240,6 +3998,82 @@
           }
         }
       },
+      "UserGroup": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "VisualizationIdentifiersInput": {
+        "type": "object",
+        "properties": {
+          "identifier": {
+            "type": "string",
+            "description": "Unique ID or name of the visualization."
+          }
+        }
+      },
+      "MetadataTypeInput": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "LIVEBOARD",
+              "ANSWER",
+              "LOGICAL_TABLE",
+              "LOGICAL_COLUMN"
+            ],
+            "description": " Type of metadata. "
+          },
+          "identifier": {
+            "type": "string",
+            "description": " Unique ID or name of the metadata. "
+          }
+        }
+      },
+      "DataResponse": {
+        "type": "object",
+        "required": [
+          "metadata_id",
+          "metadata_name",
+          "metadata_type",
+          "content"
+        ],
+        "properties": {
+          "metadata_id": {
+            "type": "string",
+            "description": "The unique identifier of the object"
+          },
+          "metadata_name": {
+            "type": "string",
+            "description": "Name of the metadata."
+          },
+          "metadata_type": {
+            "type": "string",
+            "enum": [
+              "LIVEBOARD",
+              "ANSWER",
+              "LOGICAL_TABLE",
+              "LOGICAL_COLUMN"
+            ],
+            "description": "Type of the metadata."
+          },
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Content"
+            },
+            "description": "Data content of metadata objects."
+          }
+        },
+        "description": " Response format associated with fetch data api "
+      },
       "RiseSetter": {
         "type": "object",
         "required": [
@@ -1255,7 +4089,118 @@
           }
         }
       },
-      "ClusterInfo": {
+      "InstanceInfo": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique identifier of the object"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the cluster."
+          },
+          "release_version": {
+            "type": "string",
+            "description": "The release version of the cluster."
+          },
+          "time_zone": {
+            "type": "string",
+            "description": "The timezone of the cluster."
+          },
+          "locale": {
+            "type": "string",
+            "description": "The default locale of the cluster."
+          },
+          "date_format": {
+            "type": "string",
+            "description": "The default date format representation of the cluster."
+          },
+          "api_version": {
+            "type": "string",
+            "description": "The API version of the cluster."
+          },
+          "type": {
+            "type": "string",
+            "description": "The deployment type of the cluster."
+          },
+          "environment": {
+            "type": "string",
+            "description": "The deployed environment of the cluster."
+          },
+          "license": {
+            "type": "string",
+            "description": "The license applied to the cluster."
+          },
+          "date_time_format": {
+            "type": "string",
+            "description": "The default date time format representation of the cluster."
+          },
+          "time_format": {
+            "type": "string",
+            "description": "The default time format representation of the cluster."
+          },
+          "system_user_identifier": {
+            "type": "string",
+            "description": "The unique identifier of system user."
+          },
+          "super_user_identifier": {
+            "type": "string",
+            "description": "The unique identifier of super user."
+          },
+          "hidden_object_identifier": {
+            "type": "string",
+            "description": "The unique identifier of hidden object."
+          },
+          "system_group_identifier": {
+            "type": "string",
+            "description": "The unique identifier of system group."
+          },
+          "tsadmin_user_identifier": {
+            "type": "string",
+            "description": "The unique identifier of tsadmin user."
+          },
+          "admin_group_identifier": {
+            "type": "string",
+            "description": "The unique identifier of admin group."
+          },
+          "all_tables_connection_identifier": {
+            "type": "string",
+            "description": "The unique identifier of all tables connection."
+          },
+          "all_user_group_identifier": {
+            "type": "string",
+            "description": "The unique identifier of ALL user group."
+          },
+          "all_user_group_display_name": {
+            "type": "string",
+            "description": "The display name of ALL user group."
+          },
+          "all_user_group_member_user_count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The count of users of ALL user group."
+          },
+          "accept_language": {
+            "type": "string",
+            "description": "The supported accept language by the cluster."
+          },
+          "logical_model_version": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The version number of logical model of the cluster."
+          }
+        }
+      },
+      "InstanceConfig": {
+        "type": "object",
+        "properties": {
+          "getStartedLink": {
+            "type": "string"
+          }
+        }
+      },
+      "OrgResponse": {
         "type": "object",
         "properties": {
           "id": {
@@ -1264,81 +4209,371 @@
           "name": {
             "type": "string"
           },
-          "release_version": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "IN_ACTIVE"
+            ]
+          },
+          "description": {
             "type": "string"
           },
-          "time_zone": {
-            "type": "string"
-          },
-          "locale": {
-            "type": "string"
-          },
-          "date_format": {
-            "type": "string"
-          },
-          "api_version": {
-            "type": "string"
-          },
-          "type": {
-            "type": "string"
-          },
-          "environment": {
-            "type": "string"
-          },
-          "license": {
-            "type": "string"
-          },
-          "date_time_format": {
-            "type": "string"
-          },
-          "time_format": {
-            "type": "string"
-          },
-          "system_user_identifier": {
-            "type": "string"
-          },
-          "super_user_identifier": {
-            "type": "string"
-          },
-          "hidden_object_identifier": {
-            "type": "string"
-          },
-          "system_group_identifier": {
-            "type": "string"
-          },
-          "tsadmin_user_identifier": {
-            "type": "string"
-          },
-          "admin_group_identifier": {
-            "type": "string"
-          },
-          "all_tables_connection_identifier": {
-            "type": "string"
-          },
-          "all_user_group_identifier": {
-            "type": "string"
-          },
-          "all_user_group_display_name": {
-            "type": "string"
-          },
-          "all_user_group_member_user_count": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "accept_language": {
-            "type": "string"
-          },
-          "logical_model_version": {
-            "type": "integer",
-            "format": "int32"
+          "visibility": {
+            "type": "string",
+            "enum": [
+              "SHOW",
+              "HIDDEN"
+            ]
           }
         }
       },
-      "ClusterConfig": {
+      "Tag": {
+        "type": "object",
+        "required": [
+          "name",
+          "id",
+          "color"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "color": {
+            "type": "string"
+          },
+          "deleted": {
+            "type": "boolean"
+          },
+          "hidden": {
+            "type": "boolean"
+          },
+          "external": {
+            "type": "boolean"
+          },
+          "deprecated": {
+            "type": "boolean"
+          },
+          "created_time_in_millis": {
+            "type": "number",
+            "format": "float"
+          },
+          "modified_time_in_millis": {
+            "type": "number",
+            "format": "float"
+          },
+          "author_id": {
+            "type": "string"
+          },
+          "modifier_id": {
+            "type": "string"
+          },
+          "owner_id": {
+            "type": "string"
+          }
+        }
+      },
+      "UserGroupResponse": {
+        "type": "object",
+        "required": [
+          "display_name",
+          "id",
+          "name",
+          "visibility"
+        ],
+        "properties": {
+          "author_id": {
+            "type": "string",
+            "description": "The unique identifier of the object"
+          },
+          "complete_detail": {
+            "type": "boolean",
+            "description": "Indicates whether the response has complete detail of the user group."
+          },
+          "content": {
+            "type": "object",
+            "description": "Content details of the user group."
+          },
+          "creation_time_in_millis": {
+            "type": "number",
+            "format": "float",
+            "description": "Creation time of the user group in milliseconds."
+          },
+          "default_liveboards": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserGroup"
+            },
+            "description": "Liveboards which are assigned as default liveboards to the user group."
+          },
+          "deleted": {
+            "type": "boolean",
+            "description": "Indicates whether the user group is deleted."
+          },
+          "deprecated": {
+            "type": "boolean",
+            "description": "Indicates whether the user group is deprecated."
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the user group."
+          },
+          "display_name": {
+            "type": "string",
+            "description": "Display name of the user group."
+          },
+          "external": {
+            "type": "boolean",
+            "description": "Indicates whether the user group is external."
+          },
+          "generation_number": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Generation number of the user group."
+          },
+          "hidden": {
+            "type": "boolean",
+            "description": "Indicates whether the user group is hidden."
+          },
+          "id": {
+            "type": "string",
+            "description": "The unique identifier of the object"
+          },
+          "index": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Index number of the user group."
+          },
+          "index_version": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Index version number of the user group."
+          },
+          "metadata_version": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Metadata version number of the user group."
+          },
+          "modification_time_in_millis": {
+            "type": "number",
+            "format": "float",
+            "description": "Last modified time of the user group in milliseconds."
+          },
+          "modifier_id": {
+            "type": "string",
+            "description": "The unique identifier of the object"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the user group."
+          },
+          "orgs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserGroup"
+            },
+            "description": "Organizations in which user group exists."
+          },
+          "owner_id": {
+            "type": "string",
+            "description": "The unique identifier of the object"
+          },
+          "parent_type": {
+            "type": "string",
+            "enum": [
+              "USER",
+              "GROUP"
+            ],
+            "description": "Parent type of the user group."
+          },
+          "privileges": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "ADMINISTRATION",
+                "AUTHORING",
+                "USERDATAUPLOADING",
+                "DATADOWNLOADING",
+                "USERMANAGEMENT",
+                "SECURITYMANAGEMENT",
+                "LOGICALMODELING",
+                "DATAMANAGEMENT",
+                "TAGMANAGEMENT",
+                "SHAREWITHALL",
+                "SYSTEMMANAGEMENT",
+                "JOBSCHEDULING",
+                "A3ANALYSIS",
+                "EXPERIMENTALFEATUREPRIVILEGE",
+                "BYPASSRLS",
+                "RANALYSIS",
+                "DISABLE_PINBOARD_CREATION",
+                "DEVELOPER",
+                "APPLICATION_ADMINISTRATION",
+                "USER_ADMINISTRATION",
+                "GROUP_ADMINISTRATION",
+                "BACKUP_ADMINISTRATION",
+                "SYSTEM_INFO_ADMINISTRATION",
+                "ENABLESPOTAPPCREATION",
+                "SYNCMANAGEMENT"
+              ]
+            },
+            "description": "Privileges which are assigned to the user group."
+          },
+          "sub_groups": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserGroup"
+            },
+            "description": "User Groups who are part of the user group."
+          },
+          "system_group": {
+            "type": "boolean",
+            "description": "Indicates whether the user group is a system group."
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserGroup"
+            },
+            "description": "Tags associated with the user group."
+          },
+          "tenant_id": {
+            "type": "string",
+            "description": "The unique identifier of the object"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "LOCAL_GROUP"
+            ],
+            "description": "Type of the user group."
+          },
+          "users": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserGroup"
+            },
+            "description": "Users who are part of the user group."
+          },
+          "visibility": {
+            "type": "string",
+            "enum": [
+              "SHARABLE",
+              "NON_SHARABLE"
+            ],
+            "description": "Visibility of the user group. The SHARABLE makes a user group visible to other users and user groups, and thus allows them to share objects."
+          }
+        }
+      },
+      "SqlQueryResponse": {
+        "type": "object",
+        "required": [
+          "metadata_type",
+          "metadata_id",
+          "metadata_name",
+          "sql_query"
+        ],
+        "properties": {
+          "metadata_type": {
+            "type": "string",
+            "enum": [
+              "LIVEBOARD",
+              "ANSWER",
+              "LOGICAL_TABLE",
+              "LOGICAL_COLUMN"
+            ]
+          },
+          "metadata_id": {
+            "type": "string"
+          },
+          "metadata_name": {
+            "type": "string"
+          },
+          "sql_query": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SqlQuery"
+            }
+          }
+        },
+        "description": " Response format associated with fetch sql query api "
+      },
+      "PdfOptionsInput": {
         "type": "object",
         "properties": {
-          "getStartedLink": {
-            "type": "string"
+          "include_cover_page": {
+            "type": "boolean",
+            "description": " Indicates whether to include cover page with the Liveboard title. "
+          },
+          "include_custom_logo": {
+            "type": "boolean",
+            "description": "Indicates whether to include customized wide logo in the footer if available."
+          },
+          "include_filter_page": {
+            "type": "boolean",
+            "description": " Indicates whether to include a page with all applied filters. "
+          },
+          "include_page_number": {
+            "type": "boolean",
+            "description": " Indicates whether to include page number in the footer of each page "
+          },
+          "page_footer_text": {
+            "type": "string",
+            "description": " Text to include in the footer of each page. "
+          },
+          "page_orientation": {
+            "type": "string",
+            "enum": [
+              "PORTRAIT",
+              "LANDSCAPE"
+            ],
+            "description": " Page orientation of the PDF. "
+          },
+          "truncate_table": {
+            "type": "boolean",
+            "description": " Indicates whether to include only first page of the tables. "
+          }
+        }
+      },
+      "PrincipalsInput": {
+        "type": "object",
+        "required": [
+          "identifier",
+          "type"
+        ],
+        "properties": {
+          "identifier": {
+            "type": "string",
+            "description": "Unique ID or name of the principal."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "USER",
+              "USER_GROUP"
+            ],
+            "description": "Principal type."
+          }
+        }
+      },
+      "LogResponse": {
+        "type": "object",
+        "required": [
+          "date",
+          "log"
+        ],
+        "properties": {
+          "date": {
+            "type": "string",
+            "description": "Date timestamp of the log entry"
+          },
+          "log": {
+            "type": "string",
+            "description": "Log data"
           }
         }
       },
@@ -1375,14 +4610,125 @@
           }
         }
       },
-      "UserGroup": {
+      "ImportUserGroupsResponse": {
         "type": "object",
+        "required": [
+          "groups_added",
+          "groups_deleted",
+          "groups_updated"
+        ],
         "properties": {
-          "id": {
-            "type": "string"
+          "groups_added": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserGroup"
+            },
+            "description": "The user groups which are added into the system."
           },
-          "name": {
-            "type": "string"
+          "groups_deleted": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserGroup"
+            },
+            "description": "The user groups which are deleted from the system."
+          },
+          "groups_updated": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserGroup"
+            },
+            "description": "The user groups which are updated in the system."
+          }
+        }
+      },
+      "GroupsImportListInput": {
+        "type": "object",
+        "required": [
+          "display_name",
+          "group_identifier"
+        ],
+        "properties": {
+          "default_liveboard_identifiers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Unique ID of liveboards which will be assigned as default liveboards to the user group."
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the user group."
+          },
+          "display_name": {
+            "type": "string",
+            "description": "Unique display name of the user group."
+          },
+          "group_identifier": {
+            "type": "string",
+            "description": "Unique ID or name of the User Group."
+          },
+          "privileges": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "ADMINISTRATION",
+                "AUTHORING",
+                "USERDATAUPLOADING",
+                "DATADOWNLOADING",
+                "USERMANAGEMENT",
+                "SECURITYMANAGEMENT",
+                "LOGICALMODELING",
+                "DATAMANAGEMENT",
+                "TAGMANAGEMENT",
+                "SHAREWITHALL",
+                "SYSTEMMANAGEMENT",
+                "JOBSCHEDULING",
+                "A3ANALYSIS",
+                "EXPERIMENTALFEATUREPRIVILEGE",
+                "BYPASSRLS",
+                "RANALYSIS",
+                "DISABLE_PINBOARD_CREATION",
+                "DEVELOPER",
+                "APPLICATION_ADMINISTRATION",
+                "USER_ADMINISTRATION",
+                "GROUP_ADMINISTRATION",
+                "BACKUP_ADMINISTRATION",
+                "SYSTEM_INFO_ADMINISTRATION",
+                "ENABLESPOTAPPCREATION",
+                "SYNCMANAGEMENT"
+              ]
+            },
+            "description": "Privileges which will be assigned to the user group."
+          },
+          "sub_group_identifiers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Unique ID or name of the User Groups who will be part of the user group."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "LOCAL_GROUP"
+            ],
+            "description": "Type of the user group."
+          },
+          "user_identifiers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Unique ID or name of the Users who will be part of the user group."
+          },
+          "visibility": {
+            "type": "string",
+            "enum": [
+              "SHARABLE",
+              "NON_SHARABLE"
+            ],
+            "description": "Visibility of the user group. The SHARABLE makes a user group visible to other users and user groups, and thus allows them to share objects."
           }
         }
       },
@@ -1406,6 +4752,100 @@
           },
           "name": {
             "type": "string"
+          }
+        }
+      },
+      "Content": {
+        "type": "object",
+        "required": [
+          "column_data",
+          "column_names",
+          "viz_id",
+          "viz_name"
+        ],
+        "properties": {
+          "column_data": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "description": "Rows of data set."
+          },
+          "column_names": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Name of the columns."
+          },
+          "offset": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Offset number."
+          },
+          "page_size": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Page size."
+          },
+          "row_count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Data row count."
+          },
+          "sampling_ratio": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Sampling ratio."
+          },
+          "total_row_count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Total data row count."
+          },
+          "viz_id": {
+            "type": "string",
+            "description": "The unique identifier of the object"
+          },
+          "viz_name": {
+            "type": "string",
+            "description": "Name of the visualization."
+          }
+        }
+      },
+      "SqlQuery": {
+        "type": "object",
+        "required": [
+          "metadata_id",
+          "metadata_name",
+          "metadata_type",
+          "metadata_sql_query"
+        ],
+        "properties": {
+          "metadata_id": {
+            "type": "string",
+            "description": "The unique identifier of the object"
+          },
+          "metadata_name": {
+            "type": "string",
+            "description": "Name of the metadata."
+          },
+          "metadata_type": {
+            "type": "string",
+            "enum": [
+              "LIVEBOARD",
+              "ANSWER",
+              "LOGICAL_TABLE",
+              "LOGICAL_COLUMN"
+            ],
+            "description": "Type of the metadata."
+          },
+          "metadata_sql_query": {
+            "type": "string",
+            "description": "SQL query of a metadata object."
           }
         }
       },
