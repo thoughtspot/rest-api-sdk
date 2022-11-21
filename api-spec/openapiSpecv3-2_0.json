@@ -308,7 +308,7 @@
                     "description": "Organization override for the request",
                     "type": "string",
                     "enum": [
-                      "ALL_ORG"
+                      "ALL"
                     ],
                     "deprecated": false
                   }
@@ -447,7 +447,7 @@
                     "description": "Supported organization scope.",
                     "type": "string",
                     "enum": [
-                      "ALL_ORG"
+                      "ALL"
                     ],
                     "deprecated": false
                   },
@@ -579,8 +579,7 @@
                   }
                 },
                 "required": [
-                  "metadata_identifier",
-                  "visualization_identifiers"
+                  "metadata_identifier"
                 ]
               }
             }
@@ -592,7 +591,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SqlQueryResponse"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SqlQueryResponse"
+                  }
                 }
               }
             }
@@ -641,7 +643,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SqlQueryResponse"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SqlQueryResponse"
+                  }
                 }
               }
             }
@@ -692,6 +697,7 @@
                   },
                   "data_format": {
                     "description": "JSON output data format.",
+                    "default": "COMPACT",
                     "type": "string",
                     "enum": [
                       "COMPACT",
@@ -701,23 +707,27 @@
                   },
                   "record_offset": {
                     "description": "The starting record number from where the records should be included.",
+                    "default": 0,
                     "type": "integer",
                     "format": "int32",
                     "deprecated": false
                   },
                   "record_size": {
                     "description": "The number of records that should be included.",
+                    "default": -1,
                     "type": "integer",
                     "format": "int32",
                     "deprecated": false
                   },
                   "runtime_filter": {
                     "description": "JSON object representing filter condition to filter the data.",
+                    "default": "",
                     "type": "object",
                     "deprecated": false
                   },
                   "runtime_sort": {
                     "description": "JSON object representing columns to sort the data.",
+                    "default": "",
                     "type": "object",
                     "deprecated": false
                   }
@@ -773,6 +783,7 @@
                   },
                   "data_format": {
                     "description": "JSON output data format.",
+                    "default": "COMPACT",
                     "type": "string",
                     "enum": [
                       "COMPACT",
@@ -782,23 +793,27 @@
                   },
                   "record_offset": {
                     "description": "The starting record number from where the records should be included.",
+                    "default": 0,
                     "type": "integer",
                     "format": "int32",
                     "deprecated": false
                   },
                   "record_size": {
                     "description": "The number of records that should be included.",
+                    "default": -1,
                     "type": "integer",
                     "format": "int32",
                     "deprecated": false
                   },
                   "runtime_filter": {
                     "description": "JSON object representing filter condition to filter the data.",
+                    "default": "",
                     "type": "object",
                     "deprecated": false
                   },
                   "runtime_sort": {
                     "description": "JSON object representing columns to sort the data.",
+                    "default": "",
                     "type": "object",
                     "deprecated": false
                   }
@@ -853,6 +868,7 @@
                   },
                   "data_format": {
                     "description": "JSON output data format.",
+                    "default": "COMPACT",
                     "type": "string",
                     "enum": [
                       "COMPACT",
@@ -862,12 +878,14 @@
                   },
                   "record_offset": {
                     "description": "The starting record number from where the records should be included.",
+                    "default": 0,
                     "type": "integer",
                     "format": "int32",
                     "deprecated": false
                   },
                   "record_size": {
                     "description": "The number of records that should be included.",
+                    "default": -1,
                     "type": "integer",
                     "format": "int32",
                     "deprecated": false
@@ -923,6 +941,7 @@
                   },
                   "data_format": {
                     "description": "JSON output data format.",
+                    "default": "COMPACT",
                     "type": "string",
                     "enum": [
                       "COMPACT",
@@ -932,12 +951,14 @@
                   },
                   "record_offset": {
                     "description": "The starting record number from where the records should be included.",
+                    "default": 0,
                     "type": "integer",
                     "format": "int32",
                     "deprecated": false
                   },
                   "record_size": {
                     "description": "The number of records that should be included.",
+                    "default": -1,
                     "type": "integer",
                     "format": "int32",
                     "deprecated": false
@@ -1007,6 +1028,7 @@
                   },
                   "file_format": {
                     "description": "Export file format.",
+                    "default": "CSV",
                     "type": "string",
                     "enum": [
                       "CSV",
@@ -1018,16 +1040,19 @@
                   },
                   "runtime_filter": {
                     "description": "JSON string representing runtime filter.",
+                    "default": "",
                     "type": "object",
                     "deprecated": false
                   },
                   "runtime_sort": {
                     "description": "JSON string representing runtime sort.",
+                    "default": "",
                     "type": "object",
                     "deprecated": false
                   },
                   "pdf_options": {
                     "description": "Options for PDF export.",
+                    "default": {},
                     "$ref": "#/components/schemas/PdfOptionsInput",
                     "deprecated": false
                   }
@@ -1096,16 +1121,19 @@
                   },
                   "runtime_filter": {
                     "description": "JSON string representing runtime filter.",
+                    "default": "",
                     "type": "object",
                     "deprecated": false
                   },
                   "runtime_sort": {
                     "description": "JSON string representing runtime sort.",
+                    "default": "",
                     "type": "object",
                     "deprecated": false
                   },
                   "pdf_options": {
                     "description": "Options for PDF export.",
+                    "default": {},
                     "$ref": "#/components/schemas/PdfOptionsInput",
                     "deprecated": false
                   }
@@ -1291,7 +1319,8 @@
                     "deprecated": false
                   },
                   "data_format": {
-                    "description": " JSON output data format. ",
+                    "description": "JSON output data format.",
+                    "default": "COMPACT",
                     "type": "string",
                     "enum": [
                       "COMPACT",
@@ -1300,13 +1329,15 @@
                     "deprecated": false
                   },
                   "record_offset": {
-                    "description": " The starting record number from where the records should be included. ",
+                    "description": "The starting record number from where the records should be included.",
+                    "default": 0,
                     "type": "integer",
                     "format": "int32",
                     "deprecated": false
                   },
                   "record_size": {
-                    "description": " The number of records that should be included. ",
+                    "description": "The number of records that should be included.",
+                    "default": -1,
                     "type": "integer",
                     "format": "int32",
                     "deprecated": false
@@ -2359,7 +2390,7 @@
                     "description": "Organization override for the request",
                     "type": "string",
                     "enum": [
-                      "ALL_ORG"
+                      "ALL"
                     ],
                     "deprecated": false
                   }
@@ -2444,7 +2475,7 @@
                     "description": "Organization override for the request",
                     "type": "string",
                     "enum": [
-                      "ALL_ORG"
+                      "ALL"
                     ],
                     "deprecated": false
                   }
@@ -2510,7 +2541,7 @@
                     "description": "Organization override for the request",
                     "type": "string",
                     "enum": [
-                      "ALL_ORG"
+                      "ALL"
                     ],
                     "deprecated": false
                   }
@@ -2568,7 +2599,7 @@
                     "description": "Organization override for the request",
                     "type": "string",
                     "enum": [
-                      "ALL_ORG"
+                      "ALL"
                     ],
                     "deprecated": false
                   }
@@ -4039,9 +4070,6 @@
       "DataResponse": {
         "type": "object",
         "required": [
-          "metadata_id",
-          "metadata_name",
-          "metadata_type",
           "contents"
         ],
         "properties": {
@@ -4471,32 +4499,19 @@
       "SqlQueryResponse": {
         "type": "object",
         "required": [
-          "metadata_type",
-          "metadata_id",
-          "metadata_name",
-          "sql_query"
+          "id",
+          "name",
+          "sql_queries"
         ],
         "properties": {
-          "metadata_type": {
-            "type": "string",
-            "enum": [
-              "LIVEBOARD",
-              "ANSWER",
-              "LOGICAL_TABLE",
-              "LOGICAL_COLUMN"
-            ]
-          },
-          "metadata_id": {
+          "id": {
             "type": "string"
           },
-          "metadata_name": {
+          "name": {
             "type": "string"
           },
-          "sql_query": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/SqlQuery"
-            }
+          "sql_queries": {
+            "type": "string"
           }
         },
         "description": "Response format associated with fetch sql query api"
@@ -4812,39 +4827,6 @@
           "viz_name": {
             "type": "string",
             "description": "Name of the visualization."
-          }
-        }
-      },
-      "SqlQuery": {
-        "type": "object",
-        "required": [
-          "metadata_id",
-          "metadata_name",
-          "metadata_type",
-          "metadata_sql_query"
-        ],
-        "properties": {
-          "metadata_id": {
-            "type": "string",
-            "description": "The unique identifier of the object"
-          },
-          "metadata_name": {
-            "type": "string",
-            "description": "Name of the metadata."
-          },
-          "metadata_type": {
-            "type": "string",
-            "enum": [
-              "LIVEBOARD",
-              "ANSWER",
-              "LOGICAL_TABLE",
-              "LOGICAL_COLUMN"
-            ],
-            "description": "Type of the metadata."
-          },
-          "metadata_sql_query": {
-            "type": "string",
-            "description": "SQL query of a metadata object."
           }
         }
       },
