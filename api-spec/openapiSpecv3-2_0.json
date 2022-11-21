@@ -1984,7 +1984,7 @@
         }
       }
     },
-    "/api/rest/2.0/users/$user_identifier/update": {
+    "/api/rest/2.0/users/{user_identifier}/update": {
       "post": {
         "operationId": "updateUser",
         "description": "To programmatically update a user account in the ThoughtSpot system use this API endpoint.\nUsing this API, you can update a user and assign groups.\nTo update a user, you require admin user privileges.",
@@ -1997,11 +1997,6 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "user_identifier": {
-                    "description": "GUID / name of the user to be updated",
-                    "type": "string",
-                    "deprecated": false
-                  },
                   "name": {
                     "description": "Name of the user. The username string must be unique.",
                     "type": "string",
@@ -2098,10 +2093,7 @@
                     },
                     "deprecated": false
                   }
-                },
-                "required": [
-                  "user_identifier"
-                ]
+                }
               }
             }
           },
@@ -2127,7 +2119,19 @@
               }
             }
           }
-        }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "user_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "GUID / name of the user to be updated",
+            "deprecated": false
+          }
+        ]
       }
     },
     "/api/rest/2.0/users/import": {
@@ -2690,7 +2694,7 @@
         }
       }
     },
-    "/api/rest/2.0/tags/$tag_identifier/update": {
+    "/api/rest/2.0/tags/{tag_identifier}/update": {
       "post": {
         "operationId": "updateTag",
         "description": "To programmatically update tags, use this endpoint. Specify either tag id or tag name",
@@ -2703,11 +2707,6 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "tag_identifier": {
-                    "description": "Name or Id of the tag.",
-                    "type": "string",
-                    "deprecated": false
-                  },
                   "name": {
                     "description": "Name of the tag.",
                     "type": "string",
@@ -2718,10 +2717,7 @@
                     "type": "string",
                     "deprecated": false
                   }
-                },
-                "required": [
-                  "tag_identifier"
-                ]
+                }
               }
             }
           },
@@ -2747,10 +2743,22 @@
               }
             }
           }
-        }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "tag_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Name or Id of the tag.",
+            "deprecated": false
+          }
+        ]
       }
     },
-    "/api/rest/2.0/tags/$tag_identifier/delete": {
+    "/api/rest/2.0/tags/{tag_identifier}/delete": {
       "post": {
         "operationId": "deleteTag",
         "description": "To programmatically delete tags, use this endpoint. Specify either tag id or tag name",
@@ -2762,16 +2770,7 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "properties": {
-                  "tag_identifier": {
-                    "description": "Tag identifier Tag name or Tag id.",
-                    "type": "string",
-                    "deprecated": false
-                  }
-                },
-                "required": [
-                  "tag_identifier"
-                ]
+                "properties": {}
               }
             }
           },
@@ -2797,7 +2796,19 @@
               }
             }
           }
-        }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "tag_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Tag identifier Tag name or Tag id.",
+            "deprecated": false
+          }
+        ]
       }
     },
     "/api/rest/2.0/tags/assign": {
@@ -4059,18 +4070,21 @@
               "LOGICAL_TABLE",
               "LOGICAL_COLUMN"
             ],
-            "description": "Type of metadata."
+            "description": " Type of metadata. "
           },
           "identifier": {
             "type": "string",
-            "description": "Unique ID or name of the metadata."
+            "description": " Unique ID or name of the metadata. "
           }
         }
       },
       "DataResponse": {
         "type": "object",
         "required": [
-          "contents"
+          "metadata_id",
+          "metadata_name",
+          "metadata_type",
+          "content"
         ],
         "properties": {
           "metadata_id": {
@@ -4091,7 +4105,7 @@
             ],
             "description": "Type of the metadata."
           },
-          "contents": {
+          "content": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Content"
@@ -4099,7 +4113,7 @@
             "description": "Data content of metadata objects."
           }
         },
-        "description": "Response format associated with fetch data api"
+        "description": " Response format associated with fetch data api "
       },
       "RiseSetter": {
         "type": "object",
