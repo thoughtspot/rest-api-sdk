@@ -565,15 +565,15 @@
                 "type": "object",
                 "properties": {
                   "metadata_identifier": {
-                    "description": " Unique ID or name of the metadata.",
+                    "description": "Unique ID or name of the metadata.",
                     "type": "string",
                     "deprecated": false
                   },
                   "visualization_identifiers": {
-                    "description": " Unique ID or name of visualizations.",
+                    "description": "Unique ID or name of visualizations.",
                     "type": "array",
                     "items": {
-                      "$ref": "#/components/schemas/VisualizationIdentifiersInput"
+                      "type": "string"
                     },
                     "deprecated": false
                   }
@@ -623,7 +623,7 @@
                 "type": "object",
                 "properties": {
                   "metadata_identifier": {
-                    "description": " Unique ID or name of the metadata.",
+                    "description": "Unique ID or name of the metadata.",
                     "type": "string",
                     "deprecated": false
                   }
@@ -673,25 +673,25 @@
                 "type": "object",
                 "properties": {
                   "metadata_identifier": {
-                    "description": " Unique ID or name of the metadata.",
+                    "description": "Unique ID or name of the metadata.",
                     "type": "string",
                     "deprecated": false
                   },
                   "visualization_identifiers": {
-                    "description": " List of unique ID or name of visualizations. ",
+                    "description": "List of unique ID or name of visualizations.",
                     "type": "array",
                     "items": {
-                      "$ref": "#/components/schemas/VisualizationIdentifiersInput"
+                      "type": "string"
                     },
                     "deprecated": false
                   },
                   "transient_content": {
-                    "description": " Transient content of the Liveboard. ",
+                    "description": "Transient content of the Liveboard.",
                     "type": "string",
                     "deprecated": false
                   },
                   "data_format": {
-                    "description": " JSON output data format. ",
+                    "description": "JSON output data format.",
                     "type": "string",
                     "enum": [
                       "COMPACT",
@@ -700,13 +700,13 @@
                     "deprecated": false
                   },
                   "record_offset": {
-                    "description": " The starting record number from where the records should be included. ",
+                    "description": "The starting record number from where the records should be included.",
                     "type": "integer",
                     "format": "int32",
                     "deprecated": false
                   },
                   "record_size": {
-                    "description": " The number of records that should be included. ",
+                    "description": "The number of records that should be included.",
                     "type": "integer",
                     "format": "int32",
                     "deprecated": false
@@ -723,8 +723,7 @@
                   }
                 },
                 "required": [
-                  "metadata_identifier",
-                  "visualization_identifiers"
+                  "metadata_identifier"
                 ]
               }
             }
@@ -768,12 +767,12 @@
                 "type": "object",
                 "properties": {
                   "metadata_identifier": {
-                    "description": " Unique ID or name of the metadata.",
+                    "description": "Unique ID or name of the metadata.",
                     "type": "string",
                     "deprecated": false
                   },
                   "data_format": {
-                    "description": " JSON output data format. ",
+                    "description": "JSON output data format.",
                     "type": "string",
                     "enum": [
                       "COMPACT",
@@ -782,13 +781,13 @@
                     "deprecated": false
                   },
                   "record_offset": {
-                    "description": " The starting record number from where the records should be included. ",
+                    "description": "The starting record number from where the records should be included.",
                     "type": "integer",
                     "format": "int32",
                     "deprecated": false
                   },
                   "record_size": {
-                    "description": " The number of records that should be included. ",
+                    "description": "The number of records that should be included.",
                     "type": "integer",
                     "format": "int32",
                     "deprecated": false
@@ -848,12 +847,12 @@
                 "type": "object",
                 "properties": {
                   "metadata_identifier": {
-                    "description": " Unique ID or name of the metadata.",
+                    "description": "Unique ID or name of the metadata.",
                     "type": "string",
                     "deprecated": false
                   },
                   "data_format": {
-                    "description": " JSON output data format. ",
+                    "description": "JSON output data format.",
                     "type": "string",
                     "enum": [
                       "COMPACT",
@@ -862,13 +861,13 @@
                     "deprecated": false
                   },
                   "record_offset": {
-                    "description": " The starting record number from where the records should be included. ",
+                    "description": "The starting record number from where the records should be included.",
                     "type": "integer",
                     "format": "int32",
                     "deprecated": false
                   },
                   "record_size": {
-                    "description": " The number of records that should be included. ",
+                    "description": "The number of records that should be included.",
                     "type": "integer",
                     "format": "int32",
                     "deprecated": false
@@ -918,12 +917,12 @@
                 "type": "object",
                 "properties": {
                   "metadata_identifier": {
-                    "description": " Unique ID or name of the metadata.",
+                    "description": "Unique ID or name of the metadata.",
                     "type": "string",
                     "deprecated": false
                   },
                   "data_format": {
-                    "description": " JSON output data format. ",
+                    "description": "JSON output data format.",
                     "type": "string",
                     "enum": [
                       "COMPACT",
@@ -932,13 +931,13 @@
                     "deprecated": false
                   },
                   "record_offset": {
-                    "description": " The starting record number from where the records should be included. ",
+                    "description": "The starting record number from where the records should be included.",
                     "type": "integer",
                     "format": "int32",
                     "deprecated": false
                   },
                   "record_size": {
-                    "description": " The number of records that should be included. ",
+                    "description": "The number of records that should be included.",
                     "type": "integer",
                     "format": "int32",
                     "deprecated": false
@@ -989,7 +988,7 @@
                 "type": "object",
                 "properties": {
                   "metadata_identifier": {
-                    "description": " Unique ID or name of the metadata.",
+                    "description": "Unique ID or name of the metadata.",
                     "type": "string",
                     "deprecated": false
                   },
@@ -997,7 +996,7 @@
                     "description": "Unique ID or name of visualizations.",
                     "type": "array",
                     "items": {
-                      "$ref": "#/components/schemas/VisualizationIdentifiersInput"
+                      "type": "string"
                     },
                     "deprecated": false
                   },
@@ -1007,7 +1006,7 @@
                     "deprecated": false
                   },
                   "file_format": {
-                    "description": "  Export file format. ",
+                    "description": "Export file format.",
                     "type": "string",
                     "enum": [
                       "CSV",
@@ -1018,12 +1017,12 @@
                     "deprecated": false
                   },
                   "runtime_filter": {
-                    "description": "  JSON string representing runtime filter. ",
+                    "description": "JSON string representing runtime filter.",
                     "type": "object",
                     "deprecated": false
                   },
                   "runtime_sort": {
-                    "description": " JSON string representing runtime sort. ",
+                    "description": "JSON string representing runtime sort.",
                     "type": "object",
                     "deprecated": false
                   },
@@ -1079,12 +1078,12 @@
                 "type": "object",
                 "properties": {
                   "metadata_identifier": {
-                    "description": " Unique ID or name of the metadata.",
+                    "description": "Unique ID or name of the metadata.",
                     "type": "string",
                     "deprecated": false
                   },
                   "file_format": {
-                    "description": "  Export file format. ",
+                    "description": "Export file format.",
                     "default": "CSV",
                     "type": "string",
                     "enum": [
@@ -1096,12 +1095,12 @@
                     "deprecated": false
                   },
                   "runtime_filter": {
-                    "description": "  JSON string representing runtime filter. ",
+                    "description": "JSON string representing runtime filter.",
                     "type": "object",
                     "deprecated": false
                   },
                   "runtime_sort": {
-                    "description": " JSON string representing runtime sort. ",
+                    "description": "JSON string representing runtime sort.",
                     "type": "object",
                     "deprecated": false
                   },
@@ -3327,7 +3326,7 @@
                 "type": "object",
                 "properties": {
                   "metadata_tmls": {
-                    "description": " Details of metadata object TMLs.",
+                    "description": "Details of metadata object TMLs.",
                     "type": "array",
                     "items": {
                       "type": "object"
@@ -3335,7 +3334,7 @@
                     "deprecated": false
                   },
                   "import_policy": {
-                    "description": " Import policy. ",
+                    "description": "Import policy.",
                     "type": "string",
                     "enum": [
                       "PARTIAL",
@@ -3345,7 +3344,7 @@
                     "deprecated": false
                   },
                   "create_new": {
-                    "description": " Indicates whether object represented in TMLs to be newly created. ",
+                    "description": "Indicates whether object represented in TMLs to be newly created.",
                     "type": "boolean",
                     "deprecated": false
                   }
@@ -3395,7 +3394,7 @@
                 "type": "object",
                 "properties": {
                   "metadata": {
-                    "description": " Metadata objects. ",
+                    "description": "Metadata objects.",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/MetadataTypeInput"
@@ -3403,7 +3402,7 @@
                     "deprecated": false
                   },
                   "edoc_format": {
-                    "description": " TML EDOC content format. ",
+                    "description": "TML EDOC content format.",
                     "type": "string",
                     "enum": [
                       "JSON",
@@ -3412,13 +3411,13 @@
                     "deprecated": false
                   },
                   "export_associated": {
-                    "description": " Indicates whether to export associated metadata objects of specified metadata objects. ",
+                    "description": "Indicates whether to export associated metadata objects of specified metadata objects.",
                     "default": false,
                     "type": "boolean",
                     "deprecated": false
                   },
                   "export_fqn": {
-                    "description": " Indicates whether to include GUID (FQN) of specified metadata objects. ",
+                    "description": "Indicates whether to include GUID (FQN) of specified metadata objects.",
                     "default": false,
                     "type": "boolean",
                     "deprecated": false
@@ -3471,7 +3470,7 @@
                 "type": "object",
                 "properties": {
                   "metadata": {
-                    "description": " Metadata objects. ",
+                    "description": "Metadata objects.",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/MetadataTypeInput"
@@ -3479,7 +3478,7 @@
                     "deprecated": false
                   },
                   "include_disabled": {
-                    "description": " Indicates whether to delete disabled metadata objects. ",
+                    "description": "Indicates whether to delete disabled metadata objects.",
                     "default": false,
                     "type": "boolean",
                     "deprecated": false
@@ -3632,7 +3631,7 @@
                     "description": "Options to specify details of Liveboard.",
                     "type": "array",
                     "items": {
-                      "$ref": "#/components/schemas/VisualizationIdentifiersInput"
+                      "type": "string"
                     },
                     "deprecated": false
                   },
@@ -4029,11 +4028,11 @@
               "LOGICAL_TABLE",
               "LOGICAL_COLUMN"
             ],
-            "description": " Type of metadata. "
+            "description": "Type of metadata."
           },
           "identifier": {
             "type": "string",
-            "description": " Unique ID or name of the metadata. "
+            "description": "Unique ID or name of the metadata."
           }
         }
       },
@@ -4043,7 +4042,7 @@
           "metadata_id",
           "metadata_name",
           "metadata_type",
-          "content"
+          "contents"
         ],
         "properties": {
           "metadata_id": {
@@ -4064,7 +4063,7 @@
             ],
             "description": "Type of the metadata."
           },
-          "content": {
+          "contents": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Content"
@@ -4072,7 +4071,7 @@
             "description": "Data content of metadata objects."
           }
         },
-        "description": " Response format associated with fetch data api "
+        "description": "Response format associated with fetch data api"
       },
       "RiseSetter": {
         "type": "object",
@@ -4500,14 +4499,14 @@
             }
           }
         },
-        "description": " Response format associated with fetch sql query api "
+        "description": "Response format associated with fetch sql query api"
       },
       "PdfOptionsInput": {
         "type": "object",
         "properties": {
           "include_cover_page": {
             "type": "boolean",
-            "description": " Indicates whether to include cover page with the Liveboard title. "
+            "description": "Indicates whether to include cover page with the Liveboard title."
           },
           "include_custom_logo": {
             "type": "boolean",
@@ -4515,15 +4514,15 @@
           },
           "include_filter_page": {
             "type": "boolean",
-            "description": " Indicates whether to include a page with all applied filters. "
+            "description": "Indicates whether to include a page with all applied filters."
           },
           "include_page_number": {
             "type": "boolean",
-            "description": " Indicates whether to include page number in the footer of each page "
+            "description": "Indicates whether to include page number in the footer of each page"
           },
           "page_footer_text": {
             "type": "string",
-            "description": " Text to include in the footer of each page. "
+            "description": "Text to include in the footer of each page."
           },
           "page_orientation": {
             "type": "string",
@@ -4531,11 +4530,11 @@
               "PORTRAIT",
               "LANDSCAPE"
             ],
-            "description": " Page orientation of the PDF. "
+            "description": "Page orientation of the PDF."
           },
           "truncate_table": {
             "type": "boolean",
-            "description": " Indicates whether to include only first page of the tables. "
+            "description": "Indicates whether to include only first page of the tables."
           }
         }
       },
