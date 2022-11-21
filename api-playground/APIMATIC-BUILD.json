@@ -25,42 +25,6 @@
             "C900": "#1C2029"
           }
         },
-<<<<<<< HEAD
-        "pageTitle": "My Portal Title",
-        "navTitle": "My Navigation Title",
-        "logoUrl": "static/images/logo.png",
-        "logoLink": "https://www.thoughtspot.com",
-        "languageConfig": {
-            "http": {},
-            "java": {
-                "packageRepository": "Maven",
-                "packageSettings": {
-                "GroupId": "io.github.thoughtspot",
-                "PackageName": "rest-api-sdk-lib",
-                "Version": "1.13.1"
-                }
-            },
-            "typescript": {
-                "packageRepository": "Npm",
-                "packageSettings": {
-                "PackageName": "thoughtspot@rest-api-sdk",
-                "Version": "1.13.1"
-                }
-            },
-            "python": {
-                "packageRepository": "PyPI",
-                "packageSettings": {
-                "PackageName": "thoughtspot-rest-api-sdk",
-                "Version": "1.13.1"
-                }
-            },
-            "csharp": {
-                "packageRepository": "NuGet",
-                "packageSettings": {
-                "PackageName": "thoughtspot.rest.api.sdk",
-                "Version": "1.13.1"
-                }
-=======
         "fontSource": [],
         "cssStyles": {
           "headings": {
@@ -85,7 +49,6 @@
               "fontWeight": "300",
               "fontStyle": "normal",
               "lineHeight": "1"
->>>>>>> 4beebcab395d24bc104f60d0202269684005b8d5
             }
           },
           "body": {
