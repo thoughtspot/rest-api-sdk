@@ -5051,13 +5051,7 @@
             "type": "string"
           },
           "type": {
-            "type": "string",
-            "enum": [
-              "LIVEBOARD",
-              "ANSWER",
-              "LOGICAL_TABLE",
-              "LOGICAL_COLUMN"
-            ]
+            "type": "string"
           },
           "status": {
             "$ref": "#/components/schemas/StatusCode"
