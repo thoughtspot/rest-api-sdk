@@ -2106,7 +2106,7 @@
         }
       }
     },
-    "/api/rest/2.0/users/$user_identifier/delete": {
+    "/api/rest/2.0/users/{user_identifier}/delete": {
       "post": {
         "operationId": "deleteUser",
         "description": "To programmatically delete a user account in the ThoughtSpot system use this API endpoint.\nUsing this API, you can delete by passing GUID / name of the user.\nTo delete a user, you require admin user privileges.",
@@ -2156,7 +2156,7 @@
         }
       }
     },
-    "/api/rest/2.0/users/$user_identifier/update": {
+    "/api/rest/2.0/users/{user_identifier}/update": {
       "post": {
         "operationId": "updateUser",
         "description": "To programmatically update a user account in the ThoughtSpot system use this API endpoint.\nUsing this API, you can update a user and assign groups.\nTo update a user, you require admin user privileges.",
@@ -2599,7 +2599,7 @@
         }
       }
     },
-    "/api/rest/2.0/orgs/$org_identifier/update": {
+    "/api/rest/2.0/orgs/{org_identifier}/update": {
       "post": {
         "operationId": "updateOrg",
         "description": "To programmatically update an Org in the ThoughtSpot system use this API endpoint.",
@@ -2685,7 +2685,7 @@
         }
       }
     },
-    "/api/rest/2.0/orgs/$org_identifier/addusers": {
+    "/api/rest/2.0/orgs/{org_identifier}/addusers": {
       "post": {
         "operationId": "addUsersToOrg",
         "description": "To programmatically update an Org in the ThoughtSpot system use this API endpoint.",
@@ -2752,7 +2752,7 @@
         }
       }
     },
-    "/api/rest/2.0/orgs/$org_identifier/delete": {
+    "/api/rest/2.0/orgs/{org_identifier}/delete": {
       "post": {
         "operationId": "deleteOrg",
         "description": "To programmatically delete an Org in the ThoughtSpot system use this API endpoint.",
@@ -2866,7 +2866,7 @@
         }
       }
     },
-    "/api/rest/2.0/tags/$tag_identifier/update": {
+    "/api/rest/2.0/tags/{tag_identifier}/update": {
       "post": {
         "operationId": "updateTag",
         "description": "To programmatically update tags, use this endpoint. Specify either tag id or tag name",
@@ -2926,7 +2926,7 @@
         }
       }
     },
-    "/api/rest/2.0/tags/$tag_identifier/delete": {
+    "/api/rest/2.0/tags/{tag_identifier}/delete": {
       "post": {
         "operationId": "deleteTag",
         "description": "To programmatically delete tags, use this endpoint. Specify either tag id or tag name",
@@ -3269,7 +3269,7 @@
         }
       }
     },
-    "/api/rest/2.0/groups/$group_identifier/delete": {
+    "/api/rest/2.0/groups/{group_identifier}/delete": {
       "post": {
         "operationId": "deleteUserGroup",
         "description": "Deletes a user group from the current org",
@@ -3319,7 +3319,7 @@
         }
       }
     },
-    "/api/rest/2.0/groups/$group_identifier/update": {
+    "/api/rest/2.0/groups/{group_identifier}/update": {
       "post": {
         "operationId": "updateUserGroup",
         "description": "Update the user group",
@@ -3646,7 +3646,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/MetadataResponse"
+                    "type": "object"
                   }
                 }
               }
@@ -4983,20 +4983,6 @@
           }
         }
       },
-      "MetadataResponse": {
-        "type": "object",
-        "required": [
-          "edoc"
-        ],
-        "properties": {
-          "edoc": {
-            "type": "string"
-          },
-          "info": {
-            "$ref": "#/components/schemas/MetadataResponseInfo"
-          }
-        }
-      },
       "Org": {
         "type": "object",
         "properties": {
@@ -5035,26 +5021,6 @@
           },
           "metadata_id": {
             "type": "string"
-          }
-        }
-      },
-      "MetadataResponseInfo": {
-        "type": "object",
-        "properties": {
-          "filename": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "id": {
-            "type": "string"
-          },
-          "type": {
-            "type": "string"
-          },
-          "status": {
-            "$ref": "#/components/schemas/StatusCode"
           }
         }
       },
@@ -5167,14 +5133,6 @@
           "viz_name": {
             "type": "string",
             "description": "Name of the visualization."
-          }
-        }
-      },
-      "StatusCode": {
-        "type": "object",
-        "properties": {
-          "status_code": {
-            "type": "string"
           }
         }
       }
