@@ -4765,7 +4765,7 @@
         "required": [
           "id",
           "name",
-          "_queries"
+          "sql_queries"
         ],
         "properties": {
           "id": {
@@ -4774,7 +4774,7 @@
           "name": {
             "type": "string"
           },
-          "_queries": {
+          "sql_queries": {
             "type": "string"
           }
         },
