@@ -163,14 +163,6 @@
                       "type": "string"
                     },
                     "deprecated": false
-                  },
-                  "org_scope": {
-                    "description": "Org override for the request",
-                    "type": "string",
-                    "enum": [
-                      "ALL"
-                    ],
-                    "deprecated": false
                   }
                 }
               }
@@ -314,15 +306,6 @@
                       "type": "string"
                     },
                     "deprecated": false
-                  },
-                  "org_scope": {
-                    "description": "Org override for the request",
-                    "default": "ALL",
-                    "type": "string",
-                    "enum": [
-                      "ALL"
-                    ],
-                    "deprecated": false
                   }
                 }
               }
@@ -453,14 +436,6 @@
                     "items": {
                       "type": "string"
                     },
-                    "deprecated": false
-                  },
-                  "org_scope": {
-                    "description": "Supported org scope.",
-                    "type": "string",
-                    "enum": [
-                      "ALL"
-                    ],
                     "deprecated": false
                   },
                   "privileges": {
@@ -1126,14 +1101,8 @@
           "required": true
         },
         "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+          "204": {
+            "description": "Successful"
           },
           "500": {
             "description": "Operation failed",
@@ -1203,14 +1172,8 @@
           "required": true
         },
         "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+          "204": {
+            "description": "Successful"
           },
           "500": {
             "description": "Operation failed",
@@ -1538,14 +1501,8 @@
           "required": true
         },
         "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+          "204": {
+            "description": "Successful"
           },
           "500": {
             "description": "Operation failed",
@@ -1755,14 +1712,8 @@
         ],
         "parameters": [],
         "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+          "204": {
+            "description": "Successful"
           },
           "500": {
             "description": "Operation failed",
@@ -1805,14 +1756,8 @@
           "required": true
         },
         "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+          "204": {
+            "description": "Successful"
           },
           "500": {
             "description": "Operation failed",
@@ -1941,14 +1886,6 @@
                     "items": {
                       "$ref": "#/components/schemas/FavoriteMetadataInput"
                     },
-                    "deprecated": false
-                  },
-                  "org_scope": {
-                    "description": "Org override for the request",
-                    "type": "string",
-                    "enum": [
-                      "ALL"
-                    ],
                     "deprecated": false
                   }
                 },
@@ -2094,14 +2031,6 @@
                       "type": "string"
                     },
                     "deprecated": false
-                  },
-                  "org_scope": {
-                    "description": "Org override for the request",
-                    "type": "string",
-                    "enum": [
-                      "ALL"
-                    ],
-                    "deprecated": false
                   }
                 }
               }
@@ -2110,14 +2039,8 @@
           "required": true
         },
         "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+          "204": {
+            "description": "Successful"
           },
           "500": {
             "description": "Operation failed",
@@ -2151,47 +2074,6 @@
         "tags": [
           "Users"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "org_scope": {
-                    "description": "Org override for the request",
-                    "type": "string",
-                    "enum": [
-                      "ALL"
-                    ],
-                    "deprecated": false
-                  }
-                }
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        },
         "parameters": [
           {
             "in": "path",
@@ -2203,7 +2085,22 @@
             "description": "GUID / name of the user to be deleted",
             "deprecated": false
           }
-        ]
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful"
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/api/rest/2.0/users/import": {
@@ -2242,14 +2139,6 @@
                     "description": "if true, this api will delete all other users specified in above users list. Some important users like tsadmin, guest, system and su will be ignored.",
                     "default": true,
                     "type": "boolean",
-                    "deprecated": false
-                  },
-                  "org_scope": {
-                    "description": "Org override for the request",
-                    "type": "string",
-                    "enum": [
-                      "ALL"
-                    ],
                     "deprecated": false
                   }
                 },
@@ -2325,14 +2214,8 @@
           "required": true
         },
         "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+          "204": {
+            "description": "Successful"
           },
           "500": {
             "description": "Operation failed",
@@ -2381,14 +2264,8 @@
           "required": true
         },
         "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+          "204": {
+            "description": "Successful"
           },
           "500": {
             "description": "Operation failed",
@@ -2434,14 +2311,8 @@
           "required": true
         },
         "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+          "204": {
+            "description": "Successful"
           },
           "500": {
             "description": "Operation failed",
@@ -2477,15 +2348,6 @@
                   "description": {
                     "description": "Description of the Org.",
                     "type": "string",
-                    "deprecated": false
-                  },
-                  "org_scope": {
-                    "description": "Org override for the request",
-                    "default": "ALL",
-                    "type": "string",
-                    "enum": [
-                      "ALL"
-                    ],
                     "deprecated": false
                   }
                 },
@@ -2550,15 +2412,6 @@
                       "type": "string"
                     },
                     "deprecated": false
-                  },
-                  "org_scope": {
-                    "description": "Org override for the request",
-                    "default": "ALL",
-                    "type": "string",
-                    "enum": [
-                      "ALL"
-                    ],
-                    "deprecated": false
                   }
                 }
               }
@@ -2567,14 +2420,8 @@
           "required": true
         },
         "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+          "204": {
+            "description": "Successful"
           },
           "500": {
             "description": "Operation failed",
@@ -2608,48 +2455,6 @@
         "tags": [
           "Orgs"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "org_scope": {
-                    "description": "Org override for the request",
-                    "default": "ALL",
-                    "type": "string",
-                    "enum": [
-                      "ALL"
-                    ],
-                    "deprecated": false
-                  }
-                }
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        },
         "parameters": [
           {
             "in": "path",
@@ -2661,54 +2466,10 @@
             "description": "Org identifier for the Org: Either unique id or unique name of the Org.",
             "deprecated": false
           }
-        ]
-      }
-    },
-    "/api/rest/2.0/orgs/{org_identifier}/addusers": {
-      "post": {
-        "operationId": "addUsersToOrg",
-        "description": "To programmatically update an Org in the ThoughtSpot system use this API endpoint.",
-        "tags": [
-          "Orgs"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "user_identifiers": {
-                    "description": "Add Users to an Org.",
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    },
-                    "deprecated": false
-                  },
-                  "org_scope": {
-                    "description": "Org override for the request",
-                    "default": "ALL",
-                    "type": "string",
-                    "enum": [
-                      "ALL"
-                    ],
-                    "deprecated": false
-                  }
-                }
-              }
-            }
-          },
-          "required": true
-        },
         "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+          "204": {
+            "description": "Successful"
           },
           "500": {
             "description": "Operation failed",
@@ -2720,19 +2481,7 @@
               }
             }
           }
-        },
-        "parameters": [
-          {
-            "in": "path",
-            "name": "org_identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "identifier for the Org: Either unique id or unique name of the Org.",
-            "deprecated": false
-          }
-        ]
+        }
       }
     },
     "/api/rest/2.0/tags/create": {
@@ -2821,14 +2570,8 @@
           "required": true
         },
         "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+          "204": {
+            "description": "Successful"
           },
           "500": {
             "description": "Operation failed",
@@ -2875,14 +2618,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+          "204": {
+            "description": "Successful"
           },
           "500": {
             "description": "Operation failed",
@@ -2937,14 +2674,8 @@
           "required": true
         },
         "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+          "204": {
+            "description": "Successful"
           },
           "500": {
             "description": "Operation failed",
@@ -2999,14 +2730,8 @@
           "required": true
         },
         "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+          "204": {
+            "description": "Successful"
           },
           "500": {
             "description": "Operation failed",
@@ -3273,14 +2998,8 @@
           "required": true
         },
         "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+          "204": {
+            "description": "Successful"
           },
           "500": {
             "description": "Operation failed",
@@ -3327,14 +3046,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+          "204": {
+            "description": "Successful"
           },
           "500": {
             "description": "Operation failed",
@@ -3456,14 +3169,8 @@
           "required": true
         },
         "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+          "204": {
+            "description": "Successful"
           },
           "500": {
             "description": "Operation failed",
@@ -3593,14 +3300,8 @@
           "required": true
         },
         "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+          "204": {
+            "description": "Successful"
           },
           "500": {
             "description": "Operation failed",
@@ -3657,14 +3358,8 @@
           "required": true
         },
         "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+          "204": {
+            "description": "Successful"
           },
           "500": {
             "description": "Operation failed",
@@ -3716,19 +3411,12 @@
                     },
                     "deprecated": false
                   },
-                  "principal": {
-                    "description": "Details of users or user groups.",
-                    "$ref": "#/components/schemas/PrincipalsInput",
-                    "deprecated": false
-                  },
-                  "share_mode": {
-                    "description": "Object share mode.",
-                    "type": "string",
-                    "enum": [
-                      "READ_ONLY",
-                      "MODIFY",
-                      "NO_ACCESS"
-                    ],
+                  "permissions": {
+                    "description": "Permission details for sharing the objects.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/SharePermissionsInput"
+                    },
                     "deprecated": false
                   },
                   "visualization_identifiers": {
@@ -3762,8 +3450,7 @@
                 "required": [
                   "metadata_type",
                   "metadata_identifiers",
-                  "principal",
-                  "share_mode"
+                  "permissions"
                 ]
               }
             }
@@ -3771,14 +3458,8 @@
           "required": true
         },
         "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+          "204": {
+            "description": "Successful"
           },
           "500": {
             "description": "Operation failed",
@@ -4160,6 +3841,28 @@
               "USER_GROUP"
             ],
             "description": "Principal type."
+          }
+        }
+      },
+      "SharePermissionsInput": {
+        "type": "object",
+        "required": [
+          "principal",
+          "share_mode"
+        ],
+        "properties": {
+          "principal": {
+            "$ref": "#/components/schemas/PrincipalsInput",
+            "description": "Details of users or user groups."
+          },
+          "share_mode": {
+            "type": "string",
+            "enum": [
+              "READ_ONLY",
+              "MODIFY",
+              "NO_ACCESS"
+            ],
+            "description": "Object share mode."
           }
         }
       },
