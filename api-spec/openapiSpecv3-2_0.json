@@ -511,8 +511,7 @@
                     "type": "string",
                     "enum": [
                       "LOCAL_GROUP",
-                      "LDAP_GROUP",
-                      "TENANT_GROUP"
+                      "LDAP_GROUP"
                     ],
                     "deprecated": false
                   },
@@ -1987,68 +1986,6 @@
         }
       }
     },
-    "/api/rest/2.0/users/{user_identifier}/delete": {
-      "post": {
-        "operationId": "deleteUser",
-        "description": "To programmatically delete a user account in the ThoughtSpot system use this API endpoint.\nUsing this API, you can delete by passing GUID / name of the user.\nTo delete a user, you require admin user privileges.",
-        "tags": [
-          "Users"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "org_scope": {
-                    "description": "Org override for the request",
-                    "type": "string",
-                    "enum": [
-                      "ALL"
-                    ],
-                    "deprecated": false
-                  }
-                }
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "in": "path",
-            "name": "user_identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "GUID / name of the user to be deleted",
-            "deprecated": false
-          }
-        ]
-      }
-    },
     "/api/rest/2.0/users/{user_identifier}/update": {
       "post": {
         "operationId": "updateUser",
@@ -2202,6 +2139,68 @@
               "type": "string"
             },
             "description": "GUID / name of the user to be updated",
+            "deprecated": false
+          }
+        ]
+      }
+    },
+    "/api/rest/2.0/users/{user_identifier}/delete": {
+      "post": {
+        "operationId": "deleteUser",
+        "description": "To programmatically delete a user account in the ThoughtSpot system use this API endpoint.\nUsing this API, you can delete by passing GUID / name of the user.\nTo delete a user, you require admin user privileges.",
+        "tags": [
+          "Users"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "org_scope": {
+                    "description": "Org override for the request",
+                    "type": "string",
+                    "enum": [
+                      "ALL"
+                    ],
+                    "deprecated": false
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "user_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "GUID / name of the user to be deleted",
             "deprecated": false
           }
         ]
@@ -2602,6 +2601,69 @@
         ]
       }
     },
+    "/api/rest/2.0/orgs/{org_identifier}/delete": {
+      "post": {
+        "operationId": "deleteOrg",
+        "description": "To programmatically delete an Org in the ThoughtSpot system use this API endpoint.",
+        "tags": [
+          "Orgs"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "org_scope": {
+                    "description": "Org override for the request",
+                    "default": "ALL",
+                    "type": "string",
+                    "enum": [
+                      "ALL"
+                    ],
+                    "deprecated": false
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "org_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Org identifier for the Org: Either unique id or unique name of the Org.",
+            "deprecated": false
+          }
+        ]
+      }
+    },
     "/api/rest/2.0/orgs/{org_identifier}/addusers": {
       "post": {
         "operationId": "addUsersToOrg",
@@ -2668,69 +2730,6 @@
               "type": "string"
             },
             "description": "identifier for the Org: Either unique id or unique name of the Org.",
-            "deprecated": false
-          }
-        ]
-      }
-    },
-    "/api/rest/2.0/orgs/{org_identifier}/delete": {
-      "post": {
-        "operationId": "deleteOrg",
-        "description": "To programmatically delete an Org in the ThoughtSpot system use this API endpoint.",
-        "tags": [
-          "Orgs"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "org_scope": {
-                    "description": "Org override for the request",
-                    "default": "ALL",
-                    "type": "string",
-                    "enum": [
-                      "ALL"
-                    ],
-                    "deprecated": false
-                  }
-                }
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "in": "path",
-            "name": "org_identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Org identifier for the Org: Either unique id or unique name of the Org.",
             "deprecated": false
           }
         ]
@@ -3107,8 +3106,7 @@
                     "type": "string",
                     "enum": [
                       "LOCAL_GROUP",
-                      "LDAP_GROUP",
-                      "TENANT_GROUP"
+                      "LDAP_GROUP"
                     ],
                     "deprecated": false
                   },
@@ -3146,48 +3144,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/UserGroupResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/rest/2.0/groups/{group_identifier}/delete": {
-      "post": {
-        "operationId": "deleteUserGroup",
-        "description": "Deletes a user group from the current org",
-        "tags": [
-          "Groups"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "group_identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Unique ID or name of the user group.",
-            "deprecated": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
                 }
               }
             }
@@ -3289,8 +3245,7 @@
                     "type": "string",
                     "enum": [
                       "LOCAL_GROUP",
-                      "LDAP_GROUP",
-                      "TENANT_GROUP"
+                      "LDAP_GROUP"
                     ],
                     "deprecated": false
                   },
@@ -3350,6 +3305,48 @@
             "deprecated": false
           }
         ]
+      }
+    },
+    "/api/rest/2.0/groups/{group_identifier}/delete": {
+      "post": {
+        "operationId": "deleteUserGroup",
+        "description": "Deletes a user group from the current org",
+        "tags": [
+          "Groups"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "group_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique ID or name of the user group.",
+            "deprecated": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/api/rest/2.0/groups/import": {
@@ -3922,9 +3919,6 @@
           "account_parent_type": {
             "type": "string"
           },
-          "tenant_id": {
-            "type": "string"
-          },
           "complete_detail": {
             "type": "boolean"
           },
@@ -4174,7 +4168,6 @@
         "required": [
           "metadata_id",
           "metadata_name",
-          "metadata_type",
           "contents"
         ],
         "properties": {
@@ -4185,21 +4178,6 @@
           "metadata_name": {
             "type": "string",
             "description": "Name of the metadata."
-          },
-          "metadata_type": {
-            "type": "string",
-            "enum": [
-              "LIVEBOARD",
-              "ANSWER",
-              "LOGICAL_TABLE",
-              "LOGICAL_COLUMN",
-              "CONNECTION",
-              "TAG",
-              "USER",
-              "USER_GROUP",
-              "LOGICAL_RELATIONSHIP"
-            ],
-            "description": "Type of the metadata."
           },
           "contents": {
             "type": "array",
@@ -4578,16 +4556,11 @@
             },
             "description": "Tags associated with the user group."
           },
-          "tenant_id": {
-            "type": "string",
-            "description": "The unique identifier of the object"
-          },
           "type": {
             "type": "string",
             "enum": [
               "LOCAL_GROUP",
-              "LDAP_GROUP",
-              "TENANT_GROUP"
+              "LDAP_GROUP"
             ],
             "description": "Type of the user group."
           },
@@ -4841,7 +4814,7 @@
           "creation_time_in_millis",
           "expiration_time_in_millis",
           "scope",
-          "valid_for_userid",
+          "valid_for_user_id",
           "valid_for_username"
         ],
         "properties": {
@@ -4859,7 +4832,7 @@
           "scope": {
             "$ref": "#/components/schemas/Scope"
           },
-          "valid_for_userid": {
+          "valid_for_user_id": {
             "type": "string"
           },
           "valid_for_username": {
@@ -4969,8 +4942,7 @@
             "type": "string",
             "enum": [
               "LOCAL_GROUP",
-              "LDAP_GROUP",
-              "TENANT_GROUP"
+              "LDAP_GROUP"
             ],
             "description": "Type of the user group."
           },
@@ -5017,19 +4989,21 @@
       "Content": {
         "type": "object",
         "required": [
+          "available_data_row_count",
+          "column_names",
           "data_rows",
-          "column_names"
+          "record_offset",
+          "record_size",
+          "returned_data_row_count",
+          "sampling_ratio",
+          "visualization_id",
+          "visualization_name"
         ],
         "properties": {
-          "data_rows": {
-            "type": "array",
-            "items": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            },
-            "description": "Rows of data set."
+          "available_data_row_count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Total available data row count."
           },
           "column_names": {
             "type": "array",
@@ -5038,36 +5012,38 @@
             },
             "description": "Name of the columns."
           },
-          "offset": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Offset number."
+          "data_rows": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": "Rows of data set."
           },
-          "page_size": {
+          "record_offset": {
             "type": "integer",
             "format": "int32",
-            "description": "Page size."
+            "description": "The starting record number from where the records should be included."
           },
-          "row_count": {
+          "record_size": {
             "type": "integer",
             "format": "int32",
-            "description": "Data row count."
+            "description": "The number of records that should be included."
+          },
+          "returned_data_row_count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Total returned data row count."
           },
           "sampling_ratio": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Sampling ratio."
+            "type": "number",
+            "format": "float",
+            "description": "Sampling ratio (0 to 1). If the query was sampled, it is the ratio of keys returned in the data set to the total number of keys expected in the query. If the value is 1.0, this means that the complete result is returned."
           },
-          "total_row_count": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Total data row count."
-          },
-          "viz_id": {
+          "visualization_id": {
             "type": "string",
-            "description": "The unique identifier of the object."
+            "description": "Unique ID of the visualization."
           },
-          "viz_name": {
+          "visualization_name": {
             "type": "string",
             "description": "Name of the visualization."
           }
