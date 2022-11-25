@@ -39,7 +39,7 @@
     },
     "/api/rest/2.0/users/search": {
       "post": {
-        "operationId": "searchUser",
+        "operationId": "searchUsers",
         "description": "To programmatically search a user account in the ThoughtSpot system use this API endpoint.\nUsing this API, you can search a user with GUID / name.",
         "tags": [
           "Users"
@@ -559,6 +559,14 @@
                     },
                     "deprecated": false
                   },
+                  "permissions": {
+                    "description": "Permission details for searching the objects.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/PermissionInput"
+                    },
+                    "deprecated": false
+                  },
                   "created_by_user_identifiers": {
                     "description": "Unique ID or name of users who has created the metadata object.",
                     "type": "array",
@@ -657,14 +665,6 @@
                     },
                     "deprecated": false
                   },
-                  "permissions": {
-                    "description": "Permission details for searching the objects.",
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/PermissionInput"
-                    },
-                    "deprecated": false
-                  },
                   "record_offset": {
                     "description": "The starting record number from where the records should be included.",
                     "default": 0,
@@ -700,7 +700,8 @@
                   }
                 },
                 "required": [
-                  "metadata"
+                  "metadata",
+                  "permissions"
                 ]
               }
             }
@@ -928,7 +929,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/DataResponse"
+                  "$ref": "#/components/schemas/LiveboardDataResponse"
                 }
               }
             }
@@ -983,7 +984,7 @@
                   },
                   "record_size": {
                     "description": "The number of records that should be included.",
-                    "default": -1,
+                    "default": 10,
                     "type": "integer",
                     "format": "int32",
                     "deprecated": false
@@ -1014,7 +1015,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/DataResponse"
+                  "$ref": "#/components/schemas/AnswerDataResponse"
                 }
               }
             }
@@ -1338,7 +1339,6 @@
                   },
                   "data_format": {
                     "description": "JSON output data format.",
-                    "default": "COMPACT",
                     "type": "string",
                     "enum": [
                       "COMPACT",
@@ -1355,7 +1355,7 @@
                   },
                   "record_size": {
                     "description": "The number of records that should be included.",
-                    "default": -1,
+                    "default": 10,
                     "type": "integer",
                     "format": "int32",
                     "deprecated": false
@@ -1375,7 +1375,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/DataResponse"
+                  "$ref": "#/components/schemas/LiveboardDataResponse"
                 }
               }
             }
@@ -1489,11 +1489,7 @@
                     "type": "boolean",
                     "deprecated": false
                   }
-                },
-                "required": [
-                  "username",
-                  "password"
-                ]
+                }
               }
             }
           },
@@ -1879,7 +1875,7 @@
                     "deprecated": false
                   },
                   "favorite_metadata": {
-                    "description": "to set GUID for home live board.",
+                    "description": "Metadata objects to be assigned as favorites for the imported user.",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/FavoriteMetadataInput"
@@ -1946,7 +1942,6 @@
                   },
                   "visibility": {
                     "description": "Visibility of the user. The visibility attribute is set to DEFAULT when creating a user. The DEFAULT attribute makes a user visible to other users and user groups, and this allows them to share objects",
-                    "default": "SHARABLE",
                     "type": "string",
                     "enum": [
                       "SHARABLE",
@@ -1973,19 +1968,16 @@
                   },
                   "notify_on_share": {
                     "description": "User preference for receiving email notifications when another ThoughtSpot user shares answers or pinboards.",
-                    "default": true,
                     "type": "boolean",
                     "deprecated": false
                   },
                   "show_onboarding_experience": {
                     "description": "The user preference for revisiting the onboarding experience.",
-                    "default": true,
                     "type": "boolean",
                     "deprecated": false
                   },
                   "onboarding_experience_completed": {
                     "description": "flag to get the on-boarding experience is completed or not.",
-                    "default": false,
                     "type": "boolean",
                     "deprecated": false
                   },
@@ -2014,7 +2006,7 @@
                     "deprecated": false
                   },
                   "favorite_metadata": {
-                    "description": "to set GUID for home live board.",
+                    "description": "Metadata objects to be assigned as favorites for the imported user.",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/FavoriteMetadataInput"
@@ -2134,14 +2126,13 @@
                   },
                   "delete_unspecified_users": {
                     "description": "if true, this api will delete all other users specified in above users list. Some important users like tsadmin, guest, system and su will be ignored.",
-                    "default": true,
+                    "default": false,
                     "type": "boolean",
                     "deprecated": false
                   }
                 },
                 "required": [
-                  "users",
-                  "default_password"
+                  "users"
                 ]
               }
             }
@@ -3931,32 +3922,6 @@
           }
         }
       },
-      "DataResponse": {
-        "type": "object",
-        "required": [
-          "metadata_id",
-          "metadata_name",
-          "contents"
-        ],
-        "properties": {
-          "metadata_id": {
-            "type": "string",
-            "description": "The unique identifier of the object"
-          },
-          "metadata_name": {
-            "type": "string",
-            "description": "Name of the metadata."
-          },
-          "contents": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Content"
-            },
-            "description": "Data content of metadata objects."
-          }
-        },
-        "description": "Response format associated with fetch data api"
-      },
       "RiseSetter": {
         "type": "object",
         "required": [
@@ -4443,6 +4408,25 @@
           }
         }
       },
+      "PermissionInput": {
+        "type": "object",
+        "properties": {
+          "principal": {
+            "$ref": "#/components/schemas/PrincipalsInput",
+            "description": "Details of users or user groups."
+          },
+          "share_mode": {
+            "type": "string",
+            "enum": [
+              "READ_ONLY",
+              "MODIFY",
+              "NO_ACCESS"
+            ],
+            "description": "Object share mode."
+          }
+        },
+        "description": "Details of users or user groups."
+      },
       "ExcludeMetadataListItemInput": {
         "type": "object",
         "properties": {
@@ -4480,25 +4464,6 @@
           }
         },
         "description": "Favorite object options."
-      },
-      "PermissionInput": {
-        "type": "object",
-        "properties": {
-          "principal": {
-            "$ref": "#/components/schemas/PrincipalsInput",
-            "description": "Details of users or user groups."
-          },
-          "share_mode": {
-            "type": "string",
-            "enum": [
-              "READ_ONLY",
-              "MODIFY",
-              "NO_ACCESS"
-            ],
-            "description": "Object share mode."
-          }
-        },
-        "description": "Details of users or user groups."
       },
       "SortOptions": {
         "type": "object",
@@ -4550,6 +4515,57 @@
           }
         },
         "description": "Response format associated with fetch SQL query api"
+      },
+      "LiveboardDataResponse": {
+        "type": "object",
+        "required": [
+          "metadata_id",
+          "metadata_name",
+          "contents"
+        ],
+        "properties": {
+          "metadata_id": {
+            "type": "string",
+            "description": "The unique identifier of the object"
+          },
+          "metadata_name": {
+            "type": "string",
+            "description": "Name of the metadata."
+          },
+          "contents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LiveboardContent"
+            },
+            "description": "Data content of metadata objects."
+          }
+        }
+      },
+      "AnswerDataResponse": {
+        "type": "object",
+        "required": [
+          "metadata_id",
+          "metadata_name",
+          "contents"
+        ],
+        "properties": {
+          "metadata_id": {
+            "type": "string",
+            "description": "The unique identifier of the object"
+          },
+          "metadata_name": {
+            "type": "string",
+            "description": "Name of the metadata."
+          },
+          "contents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AnswerContent"
+            },
+            "description": "Data content of metadata objects."
+          }
+        },
+        "description": "Response format associated with fetch data api"
       },
       "PdfOptionsInput": {
         "type": "object",
@@ -4877,7 +4893,7 @@
           }
         }
       },
-      "Content": {
+      "LiveboardContent": {
         "type": "object",
         "required": [
           "available_data_row_count",
@@ -4935,6 +4951,59 @@
           "visualization_name": {
             "type": "string",
             "description": "Name of the visualization."
+          }
+        }
+      },
+      "AnswerContent": {
+        "type": "object",
+        "required": [
+          "available_data_row_count",
+          "column_names",
+          "data_rows",
+          "record_offset",
+          "record_size",
+          "returned_data_row_count",
+          "sampling_ratio"
+        ],
+        "properties": {
+          "available_data_row_count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Total available data row count."
+          },
+          "column_names": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Name of the columns."
+          },
+          "data_rows": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": "Rows of data set."
+          },
+          "record_offset": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The starting record number from where the records should be included."
+          },
+          "record_size": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of records that should be included."
+          },
+          "returned_data_row_count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Total returned data row count."
+          },
+          "sampling_ratio": {
+            "type": "number",
+            "format": "float",
+            "description": "Sampling ratio (0 to 1). If the query was sampled, it is the ratio of keys returned in the data set to the total number of keys expected in the query. If the value is 1.0, this means that the complete result is returned."
           }
         }
       },
