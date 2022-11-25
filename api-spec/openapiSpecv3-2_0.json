@@ -3807,7 +3807,7 @@
             "type": "boolean"
           },
           "home_liveboard_identifier": {
-            "$ref": "#/components/schemas/Object_ID_And_Name"
+            "type": "string"
           },
           "favorite_metadata": {
             "type": "array",
