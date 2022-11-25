@@ -124,8 +124,7 @@
                       "LOCAL_USER",
                       "LDAP_USER",
                       "SAML_USER",
-                      "OIDC_USER",
-                      "REMOTE_USER"
+                      "OIDC_USER"
                     ],
                     "deprecated": false
                   },
@@ -581,7 +580,7 @@
                     "description": "Exclude Metadata objects.",
                     "type": "array",
                     "items": {
-                      "$ref": "#/components/schemas/MetadataListItemInput"
+                      "$ref": "#/components/schemas/ExcludeMetadataListItemInput"
                     },
                     "deprecated": false
                   },
@@ -1055,7 +1054,7 @@
                     "description": "Unique ID or name of visualizations.",
                     "type": "array",
                     "items": {
-                      "$ref": "#/components/schemas/VisualizationIdentifiersInput"
+                      "type": "string"
                     },
                     "deprecated": false
                   },
@@ -1415,14 +1414,14 @@
                     ],
                     "deprecated": false
                   },
-                  "end_epoc_time_in_millis": {
-                    "description": "End epoc time in milli seconds.",
+                  "start_epoc_time_in_millis": {
+                    "description": "Start epoc time in milli seconds.",
                     "type": "number",
                     "format": "float",
                     "deprecated": false
                   },
-                  "start_epoc_time_in_millis": {
-                    "description": "Start epoc time in milli seconds.",
+                  "end_epoc_time_in_millis": {
+                    "description": "End epoc time in milli seconds.",
                     "type": "number",
                     "format": "float",
                     "deprecated": false
@@ -1813,8 +1812,7 @@
                       "LOCAL_USER",
                       "LDAP_USER",
                       "SAML_USER",
-                      "OIDC_USER",
-                      "REMOTE_USER"
+                      "OIDC_USER"
                     ],
                     "deprecated": false
                   },
@@ -1998,8 +1996,7 @@
                       "LOCAL_USER",
                       "LDAP_USER",
                       "SAML_USER",
-                      "OIDC_USER",
-                      "REMOTE_USER"
+                      "OIDC_USER"
                     ],
                     "deprecated": false
                   },
@@ -2651,7 +2648,7 @@
                     "description": "Metadata objects.",
                     "type": "array",
                     "items": {
-                      "$ref": "#/components/schemas/MetadataTypeInput"
+                      "$ref": "#/components/schemas/TagMetadataTypeInput"
                     },
                     "deprecated": false
                   },
@@ -2707,7 +2704,7 @@
                     "description": "Metadata objects.",
                     "type": "array",
                     "items": {
-                      "$ref": "#/components/schemas/MetadataTypeInput"
+                      "$ref": "#/components/schemas/TagMetadataTypeInput"
                     },
                     "deprecated": false
                   },
@@ -3491,36 +3488,160 @@
           "id",
           "name",
           "display_name",
-          "account_type",
-          "account_status",
-          "email",
-          "creation_time_in_millis",
-          "first_login_time_in_millis"
+          "visibility"
         ],
         "properties": {
           "id": {
-            "type": "string"
+            "type": "string",
+            "description": "Unique identifier of the user."
           },
           "name": {
-            "type": "string"
+            "type": "string",
+            "description": "Name of the user."
           },
           "display_name": {
-            "type": "string"
+            "type": "string",
+            "description": "Display name of the user."
+          },
+          "visibility": {
+            "type": "string",
+            "enum": [
+              "SHARABLE",
+              "NON_SHARABLE"
+            ],
+            "description": "Visibility of the users. The SHARABLE makes a users visible to other users and user groups, and thus allows them to share objects."
+          },
+          "author_id": {
+            "type": "string",
+            "description": "Unique identifier of author of the user."
+          },
+          "can_change_password": {
+            "type": "boolean",
+            "description": "Indicates whether the user can change their password."
+          },
+          "complete_detail": {
+            "type": "boolean",
+            "description": "Indicates whether the response has complete detail of the user."
+          },
+          "creation_time_in_millis": {
+            "type": "number",
+            "format": "float",
+            "description": "Creation time of the user in milliseconds."
+          },
+          "current_org": {
+            "$ref": "#/components/schemas/Org",
+            "description": "Current logged in Organizations of the user."
+          },
+          "deleted": {
+            "type": "boolean",
+            "description": "Indicates whether the user is deleted."
+          },
+          "deprecated": {
+            "type": "boolean",
+            "description": "Indicates whether the user is deprecated."
           },
           "account_type": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "LOCAL_USER",
+              "LDAP_USER",
+              "SAML_USER",
+              "OIDC_USER"
+            ],
+            "description": "Type of the user account."
           },
           "account_status": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "INACTIVE",
+              "EXPIRED",
+              "LOCKED",
+              "PENDING"
+            ],
+            "description": "Status of the user account."
           },
           "email": {
-            "type": "string"
+            "type": "string",
+            "description": "Email of the user."
           },
-          "user_groups": {
+          "expiration_time_in_millis": {
+            "type": "number",
+            "format": "float",
+            "description": "Expiration time of the user in milliseconds."
+          },
+          "external": {
+            "type": "boolean",
+            "description": "Indicates whether the user is external."
+          },
+          "favorite_metadata": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/UserGroup"
-            }
+              "$ref": "#/components/schemas/FavoriteMetadataItem"
+            },
+            "description": "Metadata objects to be assigned as favorites for the imported user."
+          },
+          "first_login_time_in_millis": {
+            "type": "number",
+            "format": "float",
+            "description": "First login time of the user in milliseconds."
+          },
+          "group_mask": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Group mask of the user."
+          },
+          "hidden": {
+            "type": "boolean",
+            "description": "Indicates whether the user is hidden."
+          },
+          "home_liveboard": {
+            "$ref": "#/components/schemas/Object_ID_And_Name",
+            "description": "Unique ID or name of the users home liveboard."
+          },
+          "incomplete_details": {
+            "type": "object",
+            "description": "Incomplete details of user if any present."
+          },
+          "is_first_login": {
+            "type": "boolean",
+            "description": "Indicates whether it is first login of the user."
+          },
+          "modification_time_in_millis": {
+            "type": "number",
+            "format": "float",
+            "description": "Last modified time of the user in milliseconds."
+          },
+          "modifier_id": {
+            "type": "string",
+            "description": "Unique identifier of modifier of the user."
+          },
+          "notify_on_share": {
+            "type": "boolean",
+            "description": "User preference for receiving email notifications on shared answers or liveboard."
+          },
+          "onboarding_experience_completed": {
+            "type": "boolean",
+            "description": "The user preference for turning off the onboarding experience."
+          },
+          "orgs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Org"
+            },
+            "description": "Organizations in which user exists."
+          },
+          "owner_id": {
+            "type": "string",
+            "description": "Unique identifier of owner of the user."
+          },
+          "parent_type": {
+            "type": "string",
+            "enum": [
+              "USER",
+              "GROUP"
+            ],
+            "description": "Parent type of the user."
           },
           "privileges": {
             "type": "array",
@@ -3553,108 +3674,49 @@
                 "ENABLESPOTAPPCREATION",
                 "SYNCMANAGEMENT"
               ]
-            }
+            },
+            "description": "Privileges which are assigned to the user."
           },
-          "creation_time_in_millis": {
-            "type": "number",
-            "format": "float"
+          "show_onboarding_experience": {
+            "type": "boolean",
+            "description": "The user preference for revisiting the onboarding experience."
           },
-          "first_login_time_in_millis": {
-            "type": "number",
-            "format": "float"
+          "super_user": {
+            "type": "boolean",
+            "description": "Indicates whether the user is a super user."
+          },
+          "system_user": {
+            "type": "boolean",
+            "description": "Indicates whether the user is a system user."
           },
           "tags": {
             "type": "array",
             "items": {
-              "type": "string"
-            }
+              "$ref": "#/components/schemas/Object_ID_And_Name"
+            },
+            "description": "Tags associated with the user."
           },
-          "hidden": {
-            "type": "boolean"
+          "tenant_id": {
+            "type": "string",
+            "description": "Unique identifier of tenant of the user."
           },
-          "deprecated": {
-            "type": "boolean"
-          },
-          "external": {
-            "type": "boolean"
-          },
-          "deleted": {
-            "type": "boolean"
-          },
-          "visibility": {
-            "type": "string"
-          },
-          "notify_on_share": {
-            "type": "boolean"
-          },
-          "show_onboarding_experience": {
-            "type": "boolean"
-          },
-          "onboarding_experience_completed": {
-            "type": "boolean"
-          },
-          "modification_time_in_millis": {
-            "type": "number",
-            "format": "float"
-          },
-          "account_parent_type": {
-            "type": "string"
-          },
-          "complete_detail": {
-            "type": "boolean"
-          },
-          "super_user": {
-            "type": "boolean"
-          },
-          "system_user": {
-            "type": "boolean"
-          },
-          "author_id": {
-            "type": "string"
-          },
-          "owner_id": {
-            "type": "string"
-          },
-          "modifier_id": {
-            "type": "string"
-          },
-          "welcome_email_sent": {
-            "type": "boolean"
-          },
-          "expiration_time_in_millis": {
-            "type": "number",
-            "format": "float"
-          },
-          "is_first_login": {
-            "type": "boolean"
-          },
-          "group_mask": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "can_change_password": {
-            "type": "boolean"
-          },
-          "current_org": {
-            "$ref": "#/components/schemas/Org"
-          },
-          "incomplete_details": {
+          "user_groups": {
             "type": "array",
             "items": {
-              "type": "string"
-            }
+              "$ref": "#/components/schemas/Object_ID_And_Name"
+            },
+            "description": "User Groups which the user is part of."
           },
           "user_inherited_groups": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/UserInheritedGroup"
-            }
+              "$ref": "#/components/schemas/Object_ID_And_Name"
+            },
+            "description": "Inherited User Groups which the user is part of."
           },
-          "orgs": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Org"
-            }
+          "welcome_email_sent": {
+            "type": "boolean",
+            "description": "Indicates whether welcome email is sent for the user."
           }
         }
       },
@@ -3700,8 +3762,7 @@
               "LOCAL_USER",
               "LDAP_USER",
               "SAML_USER",
-              "OIDC_USER",
-              "REMOTE_USER"
+              "OIDC_USER"
             ]
           },
           "account_status": {
@@ -3746,7 +3807,7 @@
             "type": "boolean"
           },
           "home_liveboard_identifier": {
-            "type": "string"
+            "$ref": "#/components/schemas/Object_ID_And_Name"
           },
           "favorite_metadata": {
             "type": "array",
@@ -3762,19 +3823,19 @@
           "users_added": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/User"
+              "$ref": "#/components/schemas/ImportUserType"
             }
           },
           "users_updated": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/User"
+              "$ref": "#/components/schemas/ImportUserType"
             }
           },
           "users_deleted": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/User"
+              "$ref": "#/components/schemas/ImportUserType"
             }
           }
         }
@@ -3801,6 +3862,10 @@
       },
       "MetadataTypeInput": {
         "type": "object",
+        "required": [
+          "type",
+          "identifier"
+        ],
         "properties": {
           "type": {
             "type": "string",
@@ -4022,27 +4087,33 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "string"
+            "type": "integer",
+            "format": "int32",
+            "description": "Unique identifier of the organization."
           },
           "name": {
-            "type": "string"
+            "type": "string",
+            "description": "Name of the organization."
           },
           "status": {
             "type": "string",
             "enum": [
               "ACTIVE",
               "IN_ACTIVE"
-            ]
+            ],
+            "description": "Status of the organization."
           },
           "description": {
-            "type": "string"
+            "type": "string",
+            "description": "Description of the organization."
           },
           "visibility": {
             "type": "string",
             "enum": [
               "SHOW",
               "HIDDEN"
-            ]
+            ],
+            "description": "Visibility of the organization."
           }
         }
       },
@@ -4075,11 +4146,11 @@
           "deprecated": {
             "type": "boolean"
           },
-          "created_time_in_millis": {
+          "creation_time_in_millis": {
             "type": "number",
             "format": "float"
           },
-          "modified_time_in_millis": {
+          "modification_time_in_millis": {
             "type": "number",
             "format": "float"
           },
@@ -4372,6 +4443,30 @@
           }
         }
       },
+      "ExcludeMetadataListItemInput": {
+        "type": "object",
+        "properties": {
+          "identifier": {
+            "type": "string",
+            "description": "Unique ID or name of the metadata."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "LIVEBOARD",
+              "ANSWER",
+              "LOGICAL_TABLE",
+              "LOGICAL_COLUMN",
+              "CONNECTION",
+              "TAG",
+              "USER",
+              "USER_GROUP",
+              "LOGICAL_RELATIONSHIP"
+            ],
+            "description": "Type of metadata."
+          }
+        }
+      },
       "FavoriteObjectOptionsInput": {
         "type": "object",
         "properties": {
@@ -4522,24 +4617,53 @@
         ],
         "properties": {
           "token": {
-            "type": "string"
+            "type": "string",
+            "description": "Bearer auth token."
           },
           "creation_time_in_millis": {
             "type": "number",
-            "format": "float"
+            "format": "float",
+            "description": "Token creation time in milliseconds."
           },
           "expiration_time_in_millis": {
             "type": "number",
-            "format": "float"
+            "format": "float",
+            "description": "Token expiration time in milliseconds."
           },
           "scope": {
-            "$ref": "#/components/schemas/Scope"
+            "$ref": "#/components/schemas/Scope",
+            "description": "Token access scope details"
           },
           "valid_for_user_id": {
-            "type": "string"
+            "type": "string",
+            "description": "Username to whom the token is issued."
           },
           "valid_for_username": {
-            "type": "string"
+            "type": "string",
+            "description": "Unique identifier of the user to whom the token is issued."
+          }
+        }
+      },
+      "TagMetadataTypeInput": {
+        "type": "object",
+        "required": [
+          "type",
+          "identifier"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "LIVEBOARD",
+              "ANSWER",
+              "LOGICAL_TABLE",
+              "LOGICAL_COLUMN"
+            ],
+            "description": "Type of metadata."
+          },
+          "identifier": {
+            "type": "string",
+            "description": "Unique ID or name of the metadata."
           }
         }
       },
@@ -4668,24 +4792,88 @@
       },
       "Org": {
         "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
         "properties": {
           "id": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "description": "The ID of the object."
           },
           "name": {
-            "type": "string"
+            "type": "string",
+            "description": "Name of the object."
+          }
+        },
+        "description": "Current logged in Organizations of the user."
+      },
+      "FavoriteMetadataItem": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "type"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique ID of the metadata."
+          },
+          "name": {
+            "type": "string",
+            "description": "name of the metadata."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "LIVEBOARD",
+              "ANSWER",
+              "LOGICAL_TABLE",
+              "LOGICAL_COLUMN",
+              "CONNECTION",
+              "TAG",
+              "USER",
+              "USER_GROUP",
+              "LOGICAL_RELATIONSHIP"
+            ],
+            "description": "Type of metadata."
           }
         }
       },
-      "UserInheritedGroup": {
+      "Object_ID_And_Name": {
         "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
         "properties": {
           "id": {
-            "type": "string"
+            "type": "string",
+            "description": "The unique identifier of the object."
           },
           "name": {
-            "type": "string"
+            "type": "string",
+            "description": "Name of the object."
+          }
+        },
+        "description": "The object representation with ID and Name."
+      },
+      "ImportUserType": {
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the user."
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the user."
           }
         }
       },
@@ -4698,9 +4886,7 @@
           "record_offset",
           "record_size",
           "returned_data_row_count",
-          "sampling_ratio",
-          "visualization_id",
-          "visualization_name"
+          "sampling_ratio"
         ],
         "properties": {
           "available_data_row_count": {
@@ -4759,14 +4945,17 @@
         ],
         "properties": {
           "access_type": {
-            "type": "string"
+            "type": "string",
+            "description": "Object access scope type."
           },
           "org_id": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "description": "Unique identifier of the metadata."
           },
           "metadata_id": {
-            "type": "string"
+            "type": "string",
+            "description": "Unique identifier of the organization."
           }
         }
       }
