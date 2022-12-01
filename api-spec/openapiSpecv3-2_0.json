@@ -623,7 +623,7 @@
                   },
                   "include_headers": {
                     "description": "Indicates whether to include headers of the metadata objects.",
-                    "default": false,
+                    "default": true,
                     "type": "boolean",
                     "deprecated": false
                   },
@@ -771,10 +771,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/SqlQueryResponse"
-                  }
+                  "$ref": "#/components/schemas/SqlQueryResponse"
                 }
               }
             }
@@ -824,10 +821,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/SqlQueryResponse"
-                  }
+                  "$ref": "#/components/schemas/SqlQueryResponse"
                 }
               }
             }
@@ -1131,7 +1125,7 @@
                     "type": "string",
                     "enum": [
                       "CSV",
-                      "PNG",
+                      "PDF",
                       "XLSX"
                     ],
                     "deprecated": false
@@ -3715,6 +3709,10 @@
       "FavoriteMetadataInput": {
         "type": "object",
         "properties": {
+          "identifier": {
+            "type": "string",
+            "description": "Unique ID or name of the metadata."
+          },
           "type": {
             "type": "string",
             "enum": [
@@ -3723,30 +3721,31 @@
               "LOGICAL_TABLE",
               "CONNECTION",
               "DATA_SOURCE"
-            ]
-          },
-          "identifier": {
-            "type": "string"
+            ],
+            "description": "Type of metadata."
           }
         }
       },
       "ImportUser": {
         "type": "object",
         "required": [
-          "name",
+          "user_identifier",
           "display_name",
           "password",
           "email"
         ],
         "properties": {
-          "name": {
-            "type": "string"
+          "user_identifier": {
+            "type": "string",
+            "description": "Unique ID or name of the user."
           },
           "display_name": {
-            "type": "string"
+            "type": "string",
+            "description": "Unique display name of the user."
           },
           "password": {
-            "type": "string"
+            "type": "string",
+            "description": "Password of the user."
           },
           "account_type": {
             "type": "string",
@@ -3756,7 +3755,8 @@
               "SAML_USER",
               "OIDC_USER",
               "REMOTE_USER"
-            ]
+            ],
+            "description": "Type of the user account."
           },
           "account_status": {
             "type": "string",
@@ -3766,47 +3766,57 @@
               "EXPIRED",
               "LOCKED",
               "PENDING"
-            ]
+            ],
+            "description": "Status of the user account."
           },
           "email": {
-            "type": "string"
+            "type": "string",
+            "description": "Email of the user."
           },
           "org_identifiers": {
             "type": "array",
             "items": {
               "type": "string"
-            }
+            },
+            "description": "Unique ID or name of the Orgs for the users."
           },
           "group_identifiers": {
             "type": "array",
             "items": {
               "type": "string"
-            }
+            },
+            "description": "Unique ID or name of the User Groups of the users."
           },
           "visibility": {
             "type": "string",
             "enum": [
               "SHARABLE",
               "NON_SHARABLE"
-            ]
+            ],
+            "description": "Visibility of the users. The SHARABLE makes a users visible to other users and user groups, \nand thus allows them to share objects."
           },
           "notify_on_share": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "User preference for receiving email notifications on shared answers or liveboard."
           },
           "show_onboarding_experience": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "The user preference for revisiting the onboarding experience."
           },
           "onboarding_experience_completed": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "The user preference for turning off the onboarding experience."
           },
           "home_liveboard_identifier": {
-            "type": "string"
+            "type": "string",
+            "description": "Unique ID or name of the users home liveboard."
           },
           "favorite_metadata": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FavoriteMetadataInput"
-            }
+            },
+            "description": "Metadata objects to be assigned as favorites for the imported user."
           }
         }
       },
