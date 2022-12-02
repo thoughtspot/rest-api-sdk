@@ -1057,10 +1057,10 @@
                     "description": "Export file format.",
                     "type": "string",
                     "enum": [
+                      "CSV",
                       "PDF",
                       "XLSX",
-                      "PNG",
-                      "CSV"
+                      "PNG"
                     ],
                     "deprecated": false
                   },
@@ -1127,10 +1127,10 @@
                     "description": "Export file format.",
                     "type": "string",
                     "enum": [
+                      "CSV",
                       "PDF",
                       "XLSX",
-                      "PNG",
-                      "CSV"
+                      "PNG"
                     ],
                     "deprecated": false
                   },
