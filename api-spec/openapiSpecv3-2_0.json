@@ -143,16 +143,19 @@
                   },
                   "notify_on_share": {
                     "description": "User preference for receiving email notifications when another ThoughtSpot user shares answers or pinboards.",
+                    "default": true,
                     "type": "boolean",
                     "deprecated": false
                   },
                   "show_onboarding_experience": {
                     "description": "The user preference for revisiting the onboarding experience.",
+                    "default": true,
                     "type": "boolean",
                     "deprecated": false
                   },
                   "onboarding_experience_completed": {
                     "description": "flag to get the on-boarding experience is completed or not.",
+                    "default": false,
                     "type": "boolean",
                     "deprecated": false
                   },
@@ -578,6 +581,7 @@
                   },
                   "dependent_object_version": {
                     "description": "Version of the dependent metadata object.",
+                    "default": "V1",
                     "type": "string",
                     "enum": [
                       "V1",
@@ -691,12 +695,6 @@
                     "items": {
                       "type": "string"
                     },
-                    "deprecated": false
-                  },
-                  "version": {
-                    "description": "Version of the metadata object.",
-                    "type": "integer",
-                    "format": "int32",
                     "deprecated": false
                   }
                 }
@@ -1055,6 +1053,7 @@
                   },
                   "file_format": {
                     "description": "Export file format.",
+                    "default": "CSV",
                     "type": "string",
                     "enum": [
                       "CSV",
@@ -1125,6 +1124,7 @@
                   },
                   "file_format": {
                     "description": "Export file format.",
+                    "default": "CSV",
                     "type": "string",
                     "enum": [
                       "CSV",
@@ -1142,11 +1142,6 @@
                   "runtime_sort": {
                     "description": "JSON string representing runtime sort.\n{ sortCol1: region, asc1 :true, sortCol2 : date }",
                     "type": "object",
-                    "deprecated": false
-                  },
-                  "pdf_options": {
-                    "description": "Options for PDF export.",
-                    "$ref": "#/components/schemas/PdfOptionsInput",
                     "deprecated": false
                   }
                 },
@@ -1200,7 +1195,7 @@
                     "description": "Metadata objects considered while fetching permission of specified principals.\nIf not provided then all applicable metadata objects are considered.",
                     "type": "array",
                     "items": {
-                      "$ref": "#/components/schemas/MetadataTypeInput"
+                      "$ref": "#/components/schemas/PermissionsMetadataTypeInput"
                     },
                     "deprecated": false
                   }
@@ -1253,7 +1248,7 @@
                     "description": "Metadata objects.",
                     "type": "array",
                     "items": {
-                      "$ref": "#/components/schemas/MetadataTypeInput"
+                      "$ref": "#/components/schemas/PermissionsMetadataTypeInput"
                     },
                     "deprecated": false
                   },
@@ -1267,6 +1262,7 @@
                   },
                   "include_dependent_objects": {
                     "description": "Indicates whether to fetch permissions of depedent metadata objects.",
+                    "default": false,
                     "type": "boolean",
                     "deprecated": false
                   }
@@ -1472,6 +1468,7 @@
                   },
                   "remember_me": {
                     "description": "A flag to remember the user session. When set to true, sets a session cookie that persists in subsequent API calls.",
+                    "default": false,
                     "type": "boolean",
                     "deprecated": false
                   }
@@ -2277,10 +2274,7 @@
                     },
                     "deprecated": false
                   }
-                },
-                "required": [
-                  "user_identifiers"
-                ]
+                }
               }
             }
           },
@@ -3266,7 +3260,7 @@
                     "description": "Metadata objects.",
                     "type": "array",
                     "items": {
-                      "$ref": "#/components/schemas/MetadataTypeInput"
+                      "$ref": "#/components/schemas/DeleteMetadataTypeInput"
                     },
                     "deprecated": false
                   },
@@ -3319,7 +3313,7 @@
                     "description": "Metadata objects.",
                     "type": "array",
                     "items": {
-                      "$ref": "#/components/schemas/MetadataTypeInput"
+                      "$ref": "#/components/schemas/AuthorMetadataTypeInput"
                     },
                     "deprecated": false
                   },
@@ -3892,7 +3886,33 @@
             "type": "string",
             "description": "Unique ID or name of the metadata."
           }
-        }
+        },
+        "description": "MetadataType InputType associated in the Product"
+      },
+      "DeleteMetadataTypeInput": {
+        "type": "object",
+        "required": [
+          "type",
+          "identifier"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "LIVEBOARD",
+              "ANSWER",
+              "LOGICAL_TABLE",
+              "LOGICAL_COLUMN",
+              "LOGICAL_RELATIONSHIP"
+            ],
+            "description": "Type of metadata."
+          },
+          "identifier": {
+            "type": "string",
+            "description": "Unique ID or name of the metadata."
+          }
+        },
+        "description": "MetadataType InputType used in Delete MetadataType API's"
       },
       "PrincipalsInput": {
         "type": "object",
@@ -3914,6 +3934,54 @@
             "description": "Principal type."
           }
         }
+      },
+      "AuthorMetadataTypeInput": {
+        "type": "object",
+        "required": [
+          "type",
+          "identifier"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "LIVEBOARD",
+              "ANSWER",
+              "LOGICAL_TABLE"
+            ],
+            "description": "Type of metadata."
+          },
+          "identifier": {
+            "type": "string",
+            "description": "Unique ID or name of the metadata."
+          }
+        },
+        "description": "MetadataType InputType used in Author API's"
+      },
+      "PermissionsMetadataTypeInput": {
+        "type": "object",
+        "required": [
+          "type",
+          "identifier"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "LIVEBOARD",
+              "ANSWER",
+              "LOGICAL_TABLE",
+              "LOGICAL_COLUMN",
+              "CONNECTION"
+            ],
+            "description": "Type of metadata."
+          },
+          "identifier": {
+            "type": "string",
+            "description": "Unique ID or name of the metadata."
+          }
+        },
+        "description": "MetadataType InputType used in Permission API's"
       },
       "SharePermissionsInput": {
         "type": "object",
@@ -4035,14 +4103,14 @@
             "type": "string",
             "description": "The unique identifier of ALL user group."
           },
+          "accept_language": {
+            "type": "string",
+            "description": "The supported accept language by the cluster."
+          },
           "all_user_group_member_user_count": {
             "type": "integer",
             "format": "int32",
             "description": "The count of users of ALL user group."
-          },
-          "accept_language": {
-            "type": "string",
-            "description": "The supported accept language by the cluster."
           },
           "logical_model_version": {
             "type": "integer",
@@ -4421,6 +4489,10 @@
       },
       "PermissionInput": {
         "type": "object",
+        "required": [
+          "principal",
+          "share_mode"
+        ],
         "properties": {
           "principal": {
             "$ref": "#/components/schemas/PrincipalsInput",
@@ -4440,6 +4512,10 @@
       },
       "ExcludeMetadataListItemInput": {
         "type": "object",
+        "required": [
+          "identifier",
+          "type"
+        ],
         "properties": {
           "identifier": {
             "type": "string",
@@ -4490,7 +4566,6 @@
               "LAST_ACCESSED",
               "SYNCED",
               "VIEWS",
-              "NONE",
               "USER_STATE",
               "ROW_COUNT"
             ],
