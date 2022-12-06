@@ -662,14 +662,6 @@
                     },
                     "deprecated": false
                   },
-                  "owned_by_user_identifiers": {
-                    "description": "Unique ID or name of users who is the owner of the metadata object.",
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    },
-                    "deprecated": false
-                  },
                   "record_offset": {
                     "description": "The starting record number from where the records should be included.",
                     "default": 0,
@@ -4562,12 +4554,7 @@
               "DISPLAY_NAME",
               "AUTHOR",
               "CREATED",
-              "MODIFIED",
-              "LAST_ACCESSED",
-              "SYNCED",
-              "VIEWS",
-              "USER_STATE",
-              "ROW_COUNT"
+              "MODIFIED"
             ],
             "description": "Name of the field to apply the sort on."
           },
