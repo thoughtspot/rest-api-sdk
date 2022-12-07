@@ -829,189 +829,6 @@
         }
       }
     },
-    "/api/rest/2.0/metadata/liveboard/data": {
-      "post": {
-        "operationId": "fetchLiveboardData",
-        "description": "Fetch data of Liveboard visualizations.",
-        "tags": [
-          "Metadata"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "metadata_identifier": {
-                    "description": "Unique ID or name of the metadata.",
-                    "type": "string",
-                    "deprecated": false
-                  },
-                  "visualization_identifiers": {
-                    "description": "List of unique ID or name of visualizations.",
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    },
-                    "deprecated": false
-                  },
-                  "transient_content": {
-                    "description": "Transient content of the Liveboard.",
-                    "type": "string",
-                    "deprecated": false
-                  },
-                  "data_format": {
-                    "description": "JSON output data format.",
-                    "default": "COMPACT",
-                    "type": "string",
-                    "enum": [
-                      "COMPACT"
-                    ],
-                    "deprecated": false
-                  },
-                  "record_offset": {
-                    "description": "The starting record number from where the records should be included.",
-                    "default": 0,
-                    "type": "integer",
-                    "format": "int32",
-                    "deprecated": false
-                  },
-                  "record_size": {
-                    "description": "The number of records that should be included.",
-                    "default": 10,
-                    "type": "integer",
-                    "format": "int32",
-                    "deprecated": false
-                  },
-                  "runtime_filter": {
-                    "description": "JSON object representing filter condition to filter the data.",
-                    "default": "",
-                    "type": "object",
-                    "deprecated": false
-                  },
-                  "runtime_sort": {
-                    "description": "JSON object representing columns to sort the data.",
-                    "default": "",
-                    "type": "object",
-                    "deprecated": false
-                  }
-                },
-                "required": [
-                  "metadata_identifier"
-                ]
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LiveboardDataResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/rest/2.0/metadata/answer/data": {
-      "post": {
-        "operationId": "fetchAnswerData",
-        "description": "Fetch data of Answer.",
-        "tags": [
-          "Metadata"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "metadata_identifier": {
-                    "description": "Unique ID or name of the metadata.",
-                    "type": "string",
-                    "deprecated": false
-                  },
-                  "data_format": {
-                    "description": "JSON output data format.",
-                    "default": "COMPACT",
-                    "type": "string",
-                    "enum": [
-                      "COMPACT"
-                    ],
-                    "deprecated": false
-                  },
-                  "record_offset": {
-                    "description": "The starting record number from where the records should be included.",
-                    "default": 0,
-                    "type": "integer",
-                    "format": "int32",
-                    "deprecated": false
-                  },
-                  "record_size": {
-                    "description": "The number of records that should be included.",
-                    "default": 10,
-                    "type": "integer",
-                    "format": "int32",
-                    "deprecated": false
-                  },
-                  "runtime_filter": {
-                    "description": "JSON object representing filter condition to filter the data.",
-                    "default": "",
-                    "type": "object",
-                    "deprecated": false
-                  },
-                  "runtime_sort": {
-                    "description": "JSON object representing columns to sort the data.",
-                    "default": "",
-                    "type": "object",
-                    "deprecated": false
-                  }
-                },
-                "required": [
-                  "metadata_identifier"
-                ]
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AnswerDataResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/rest/2.0/report/liveboard": {
       "post": {
         "operationId": "exportLiveboardReport",
@@ -1350,6 +1167,189 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/LiveboardDataResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/metadata/liveboard/data": {
+      "post": {
+        "operationId": "fetchLiveboardData",
+        "description": "Fetch data of Liveboard visualizations.",
+        "tags": [
+          "Search Data"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "metadata_identifier": {
+                    "description": "Unique ID or name of the metadata.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "visualization_identifiers": {
+                    "description": "List of unique ID or name of visualizations.",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "deprecated": false
+                  },
+                  "transient_content": {
+                    "description": "Transient content of the Liveboard.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "data_format": {
+                    "description": "JSON output data format.",
+                    "default": "COMPACT",
+                    "type": "string",
+                    "enum": [
+                      "COMPACT"
+                    ],
+                    "deprecated": false
+                  },
+                  "record_offset": {
+                    "description": "The starting record number from where the records should be included.",
+                    "default": 0,
+                    "type": "integer",
+                    "format": "int32",
+                    "deprecated": false
+                  },
+                  "record_size": {
+                    "description": "The number of records that should be included.",
+                    "default": 10,
+                    "type": "integer",
+                    "format": "int32",
+                    "deprecated": false
+                  },
+                  "runtime_filter": {
+                    "description": "JSON object representing filter condition to filter the data.",
+                    "default": "",
+                    "type": "object",
+                    "deprecated": false
+                  },
+                  "runtime_sort": {
+                    "description": "JSON object representing columns to sort the data.",
+                    "default": "",
+                    "type": "object",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "metadata_identifier"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LiveboardDataResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/metadata/answer/data": {
+      "post": {
+        "operationId": "fetchAnswerData",
+        "description": "Fetch data of Answer.",
+        "tags": [
+          "Search Data"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "metadata_identifier": {
+                    "description": "Unique ID or name of the metadata.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "data_format": {
+                    "description": "JSON output data format.",
+                    "default": "COMPACT",
+                    "type": "string",
+                    "enum": [
+                      "COMPACT"
+                    ],
+                    "deprecated": false
+                  },
+                  "record_offset": {
+                    "description": "The starting record number from where the records should be included.",
+                    "default": 0,
+                    "type": "integer",
+                    "format": "int32",
+                    "deprecated": false
+                  },
+                  "record_size": {
+                    "description": "The number of records that should be included.",
+                    "default": 10,
+                    "type": "integer",
+                    "format": "int32",
+                    "deprecated": false
+                  },
+                  "runtime_filter": {
+                    "description": "JSON object representing filter condition to filter the data.",
+                    "default": "",
+                    "type": "object",
+                    "deprecated": false
+                  },
+                  "runtime_sort": {
+                    "description": "JSON object representing columns to sort the data.",
+                    "default": "",
+                    "type": "object",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "metadata_identifier"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnswerDataResponse"
                 }
               }
             }
@@ -3997,6 +3997,57 @@
           }
         }
       },
+      "AnswerDataResponse": {
+        "type": "object",
+        "required": [
+          "metadata_id",
+          "metadata_name",
+          "contents"
+        ],
+        "properties": {
+          "metadata_id": {
+            "type": "string",
+            "description": "The unique identifier of the object"
+          },
+          "metadata_name": {
+            "type": "string",
+            "description": "Name of the metadata."
+          },
+          "contents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AnswerContent"
+            },
+            "description": "Data content of metadata objects."
+          }
+        },
+        "description": "Response format associated with fetch data api"
+      },
+      "LiveboardDataResponse": {
+        "type": "object",
+        "required": [
+          "metadata_id",
+          "metadata_name",
+          "contents"
+        ],
+        "properties": {
+          "metadata_id": {
+            "type": "string",
+            "description": "The unique identifier of the object"
+          },
+          "metadata_name": {
+            "type": "string",
+            "description": "Name of the metadata."
+          },
+          "contents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LiveboardContent"
+            },
+            "description": "Data content of metadata objects."
+          }
+        }
+      },
       "RiseSetter": {
         "type": "object",
         "required": [
@@ -4538,7 +4589,10 @@
             "description": "Only include object marked as favorite."
           },
           "user_identifiers": {
-            "type": "string",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
             "description": "Unique ID or name of the users."
           }
         },
@@ -4610,57 +4664,6 @@
           }
         }
       },
-      "LiveboardDataResponse": {
-        "type": "object",
-        "required": [
-          "metadata_id",
-          "metadata_name",
-          "contents"
-        ],
-        "properties": {
-          "metadata_id": {
-            "type": "string",
-            "description": "The unique identifier of the object"
-          },
-          "metadata_name": {
-            "type": "string",
-            "description": "Name of the metadata."
-          },
-          "contents": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/LiveboardContent"
-            },
-            "description": "Data content of metadata objects."
-          }
-        }
-      },
-      "AnswerDataResponse": {
-        "type": "object",
-        "required": [
-          "metadata_id",
-          "metadata_name",
-          "contents"
-        ],
-        "properties": {
-          "metadata_id": {
-            "type": "string",
-            "description": "The unique identifier of the object"
-          },
-          "metadata_name": {
-            "type": "string",
-            "description": "Name of the metadata."
-          },
-          "contents": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AnswerContent"
-            },
-            "description": "Data content of metadata objects."
-          }
-        },
-        "description": "Response format associated with fetch data api"
-      },
       "PdfOptionsInput": {
         "type": "object",
         "properties": {
@@ -4680,10 +4683,6 @@
             "type": "boolean",
             "description": "Indicates whether to include page number in the footer of each page."
           },
-          "page_footer_text": {
-            "type": "string",
-            "description": "Text to include in the footer of each page."
-          },
           "page_orientation": {
             "type": "string",
             "enum": [
@@ -4695,6 +4694,10 @@
           "truncate_table": {
             "type": "boolean",
             "description": "Indicates whether to include only first page of the tables."
+          },
+          "page_footer_text": {
+            "type": "string",
+            "description": "Text to include in the footer of each page."
           }
         }
       },
@@ -4983,28 +4986,58 @@
           }
         }
       },
-      "SqlQuery": {
+      "AnswerContent": {
         "type": "object",
         "required": [
-          "metadata_id",
-          "metadata_name",
-          "sql_query"
+          "available_data_row_count",
+          "column_names",
+          "data_rows",
+          "record_offset",
+          "record_size",
+          "returned_data_row_count",
+          "sampling_ratio"
         ],
         "properties": {
-          "metadata_id": {
-            "type": "string",
-            "description": "Unique identifier of the metadata."
+          "available_data_row_count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Total available data row count."
           },
-          "metadata_name": {
-            "type": "string",
-            "description": "Name of the metadata."
+          "column_names": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Name of the columns."
           },
-          "sql_query": {
-            "type": "string",
-            "description": "SQL query of a metadata object."
+          "data_rows": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": "Rows of data set."
+          },
+          "record_offset": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The starting record number from where the records should be included."
+          },
+          "record_size": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of records that should be included."
+          },
+          "returned_data_row_count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Total returned data row count."
+          },
+          "sampling_ratio": {
+            "type": "number",
+            "format": "float",
+            "description": "Sampling ratio (0 to 1). If the query was sampled, it is the ratio of keys returned in the data set to the total number of keys expected in the query. If the value is 1.0, this means that the complete result is returned."
           }
-        },
-        "description": "Response format associated with fetch SQL query api"
+        }
       },
       "LiveboardContent": {
         "type": "object",
@@ -5067,58 +5100,28 @@
           }
         }
       },
-      "AnswerContent": {
+      "SqlQuery": {
         "type": "object",
         "required": [
-          "available_data_row_count",
-          "column_names",
-          "data_rows",
-          "record_offset",
-          "record_size",
-          "returned_data_row_count",
-          "sampling_ratio"
+          "metadata_id",
+          "metadata_name",
+          "sql_query"
         ],
         "properties": {
-          "available_data_row_count": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Total available data row count."
+          "metadata_id": {
+            "type": "string",
+            "description": "Unique identifier of the metadata."
           },
-          "column_names": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Name of the columns."
+          "metadata_name": {
+            "type": "string",
+            "description": "Name of the metadata."
           },
-          "data_rows": {
-            "type": "array",
-            "items": {
-              "type": "object"
-            },
-            "description": "Rows of data set."
-          },
-          "record_offset": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The starting record number from where the records should be included."
-          },
-          "record_size": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The number of records that should be included."
-          },
-          "returned_data_row_count": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Total returned data row count."
-          },
-          "sampling_ratio": {
-            "type": "number",
-            "format": "float",
-            "description": "Sampling ratio (0 to 1). If the query was sampled, it is the ratio of keys returned in the data set to the total number of keys expected in the query. If the value is 1.0, this means that the complete result is returned."
+          "sql_query": {
+            "type": "string",
+            "description": "SQL query of a metadata object."
           }
-        }
+        },
+        "description": "Response format associated with fetch SQL query api"
       },
       "Scope": {
         "type": "object",
