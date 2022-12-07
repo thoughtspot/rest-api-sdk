@@ -143,7 +143,6 @@
                   },
                   "notify_on_share": {
                     "description": "User preference for receiving email notifications when another ThoughtSpot user shares answers or pinboards.",
-                    "default": true,
                     "type": "boolean",
                     "deprecated": false
                   },
@@ -873,12 +872,12 @@
                     "deprecated": false
                   },
                   "runtime_filter": {
-                    "description": "JSON string representing runtime filter.\n{ col1:region, op1: EQ, val1: northeast }",
+                    "description": "JSON string representing runtime filter.\n{ col1:'region', op1: 'EQ', val1: 'northeast' }",
                     "type": "object",
                     "deprecated": false
                   },
                   "runtime_sort": {
-                    "description": "JSON string representing runtime sort.\n{ sortCol1: region, asc1 :true, sortCol2 : date }",
+                    "description": "JSON string representing runtime sort.\n{ sortCol1: 'region', asc1 : true, sortCol2 : 'date' }",
                     "type": "object",
                     "deprecated": false
                   },
@@ -3720,8 +3719,7 @@
         "type": "object",
         "required": [
           "user_identifier",
-          "display_name",
-          "email"
+          "display_name"
         ],
         "properties": {
           "user_identifier": {
