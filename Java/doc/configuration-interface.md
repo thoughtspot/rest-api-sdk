@@ -9,8 +9,6 @@ This is the base class for all exceptions that represent an error response from 
 |  --- | --- | --- |
 | `getEnvironment()` | Current API environment. | `Environment` |
 | `getBaseUrl()` | baseUrl value. | `String` |
-| `getAcceptLanguage()` | response format. | `String` |
-| `getContentType()` | body content type for post request. | `String` |
 | `getHttpClientConfig()` | Http Client Configuration instance. | `ReadonlyHttpClientConfiguration` |
 | `getAccessToken()` | OAuth 2.0 Access Token. | `String` |
 | `getBaseUri(Server server)` | Get base URI by current environment. | `String` |

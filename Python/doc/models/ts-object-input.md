@@ -10,7 +10,7 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `id` | `string` | Required | GUID of the metadata object |
-| `mtype` | [`TsObjectInputTypeEnum`](../../doc/models/ts-object-input-type-enum.md) | Required | Type of the metadata object |
+| `mtype` | [`TypeEnum`](../../doc/models/type-enum.md) | Required | Type of the metadata object |
 
 ## Example (as JSON)
 

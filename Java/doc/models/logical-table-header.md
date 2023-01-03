@@ -19,8 +19,8 @@
 | `ModifiedBy` | `String` | Optional | - | String getModifiedBy() | setModifiedBy(String modifiedBy) |
 | `GenerationNum` | `Integer` | Optional | - | Integer getGenerationNum() | setGenerationNum(Integer generationNum) |
 | `Owner` | `String` | Optional | - | String getOwner() | setOwner(String owner) |
-| `Deleted` | [`LogicalTableHeaderDeletedEnum`](../../doc/models/logical-table-header-deleted-enum.md) | Optional | - | LogicalTableHeaderDeletedEnum getDeleted() | setDeleted(LogicalTableHeaderDeletedEnum deleted) |
-| `Hidden` | [`LogicalTableHeaderHiddenEnum`](../../doc/models/logical-table-header-hidden-enum.md) | Optional | - | LogicalTableHeaderHiddenEnum getHidden() | setHidden(LogicalTableHeaderHiddenEnum hidden) |
+| `Deleted` | `Boolean` | Optional | - | Boolean getDeleted() | setDeleted(Boolean deleted) |
+| `Hidden` | `Boolean` | Optional | - | Boolean getHidden() | setHidden(Boolean hidden) |
 | `Database` | `String` | Optional | - | String getDatabase() | setDatabase(String database) |
 | `Schema` | `String` | Optional | - | String getSchema() | setSchema(String schema) |
 | `Type` | `String` | Optional | - | String getType() | setType(String type) |

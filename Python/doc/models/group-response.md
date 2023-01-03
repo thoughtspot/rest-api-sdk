@@ -15,6 +15,7 @@
 | `visibility` | `string` | Optional | Visibility of the group |
 | `description` | `string` | Optional | Description of the group |
 | `privileges` | `List of string` | Optional | Privileges assigned to the group |
+| `orgs` | [`List of OrgType`](../../doc/models/org-type.md) | Optional | The organizations that user belongs to |
 | `groups` | [`List of GroupNameAndID`](../../doc/models/group-name-and-id.md) | Optional | Name of the group to which is added |
 | `users` | [`List of UserNameAndID`](../../doc/models/user-name-and-id.md) | Optional | User Group Information by Id or Name. |
 | `assigned_liveboards` | [`List of LiveboardNameAndID`](../../doc/models/liveboard-name-and-id.md) | Optional | Liveboards assigned to the group |
@@ -49,6 +50,7 @@
   "visibility": null,
   "description": null,
   "privileges": null,
+  "orgs": null,
   "groups": null,
   "users": null,
   "assignedLiveboards": null,

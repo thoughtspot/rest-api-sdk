@@ -9,13 +9,13 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `id` | `string` | Required | The GUID of the Liveboard to be shared |
+| `id` | `string` | Required | A JSON array of the GUIDs of the objects to be shared |
 | `viz_id` | `string` | Required | The GUID of visualization |
 | `principal_id` | `List of string` | Required | The GUID of the users and user groups with which you want to share the visualization |
-| `email_id` | `List of string` | Optional | The email addresses that should ne notified when the objects are shared. |
-| `notify` | [`ShareVisualizationNotifyEnum`](../../doc/models/share-visualization-notify-enum.md) | Optional | When set to true, a notification is sent to the users after an object is shared.<br>**Default**: `'true'` |
-| `message` | `string` | Optional | The message text to send in the notification email |
-| `include_custom_embed_url` | [`ShareVisualizationIncludeCustomEmbedUrlEnum`](../../doc/models/share-visualization-include-custom-embed-url-enum.md) | Optional | When set to true, ThoughtSpot sends a link with the host application context to allow users to access the shared object from their ThoughtSpot embedded instance.<br>**Default**: `'false'` |
+| `email_id` | `List of string` | Optional | The email addresses that should ne notified when the objects are shared |
+| `notify` | `bool` | Optional | When set to true, a notification is sent to the users after an object is shared.<br>**Default**: `True` |
+| `message` | `string` | Optional | The message text to send in the notification email. |
+| `include_custom_embed_url` | `bool` | Optional | When set to true, ThoughtSpot sends a link with the host application context to allow users to access the shared object from their ThoughtSpot embedded instance.<br>**Default**: `False` |
 
 ## Example (as JSON)
 

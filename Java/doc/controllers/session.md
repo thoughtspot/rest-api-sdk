@@ -10,61 +10,32 @@ SessionController sessionController = client.getSessionController();
 
 ## Methods
 
-* [Get Session Info](../../doc/controllers/session.md#get-session-info)
-* [Login](../../doc/controllers/session.md#login)
-* [Logout](../../doc/controllers/session.md#logout)
-* [Get Token](../../doc/controllers/session.md#get-token)
-* [Revoke Token](../../doc/controllers/session.md#revoke-token)
+* [Restapi V2 Login](../../doc/controllers/session.md#restapi-v2-login)
+* [Restapi V2 Get Token](../../doc/controllers/session.md#restapi-v2-get-token)
 
 
-# Get Session Info
-
-To get session object information, use this endpoint
-
-```java
-CompletableFuture<Object> getSessionInfoAsync()
-```
-
-## Response Type
-
-`Object`
-
-## Example Usage
-
-```java
-sessionController.getSessionInfoAsync().thenAccept(result -> {
-    // TODO success callback handler
-}).exceptionally(exception -> {
-    // TODO failure callback handler
-    return null;
-});
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
-
-
-# Login
+# Restapi V2 Login
 
 You can programmatically create login session for a user in ThoughtSpot using this endpoint.
 
-You can create session by either providing userName and password as inputs in this request body or by including "Authorization" header with the token generated through the endpoint /tspublic/rest/v2/session/getToken.
+You can create session by either providing userName and password as inputs in this request body or by including "Authorization" header with the token generated through the endpoint /tspublic/rest/v2/session/gettoken.
 
 userName and password input is given precedence over "Authorization" header, when both are included in the request.
 
 ```java
-CompletableFuture<SessionLoginResponse> loginAsync(
-    final TspublicRestV2SessionLoginRequest body)
+CompletableFuture<SessionLoginResponse> restapiV2LoginAsync(
+    final String userName,
+    final String password,
+    final Boolean rememberMe)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`TspublicRestV2SessionLoginRequest`](../../doc/models/tspublic-rest-v2-session-login-request.md) | Body, Required | - |
+| `userName` | `String` | Query, Optional | Username of the user account |
+| `password` | `String` | Query, Optional | The password of the user account |
+| `rememberMe` | `Boolean` | Query, Optional | A flag to remember the user session. When set to true, sets a session cookie that persists in subsequent API calls. |
 
 ## Response Type
 
@@ -73,9 +44,7 @@ CompletableFuture<SessionLoginResponse> loginAsync(
 ## Example Usage
 
 ```java
-TspublicRestV2SessionLoginRequest body = new TspublicRestV2SessionLoginRequest();
-
-sessionController.loginAsync(body).thenAccept(result -> {
+sessionController.restapiV2LoginAsync(null, null, null).thenAccept(result -> {
     // TODO success callback handler
 }).exceptionally(exception -> {
     // TODO failure callback handler
@@ -87,42 +56,10 @@ sessionController.loginAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Logout
-
-To log a user out of the current session, use this endpoint
-
-:information_source: **Note** This endpoint does not require authentication.
-
-```java
-CompletableFuture<Boolean> logoutAsync()
-```
-
-## Response Type
-
-`boolean`
-
-## Example Usage
-
-```java
-sessionController.logoutAsync().thenAccept(result -> {
-    // TODO success callback handler
-}).exceptionally(exception -> {
-    // TODO failure callback handler
-    return null;
-});
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
-
-
-# Get Token
+# Restapi V2 Get Token
 
 To programmatically create session token for a user in ThoughtSpot, use this endpoint.
 
@@ -142,18 +79,28 @@ You need to enable trusted authentication to generate secret key. To generate se
 
 Password is given precedence over secretKey input, when both are included in the request.
 
-:information_source: **Note** This endpoint does not require authentication.
-
 ```java
-CompletableFuture<SessionLoginResponse> getTokenAsync(
-    final TspublicRestV2SessionGettokenRequest body)
+CompletableFuture<SessionLoginResponse> restapiV2GetTokenAsync(
+    final String userName,
+    final String password,
+    final String secretKey,
+    final AccessLevelEnum accessLevel,
+    final String tsObjectId,
+    final String tokenExpiryDuration,
+    final String orgId)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`TspublicRestV2SessionGettokenRequest`](../../doc/models/tspublic-rest-v2-session-gettoken-request.md) | Body, Required | - |
+| `userName` | `String` | Query, Required | Username of the user account |
+| `password` | `String` | Query, Optional | The password of the user account |
+| `secretKey` | `String` | Query, Optional | The secret key string provided by the ThoughtSpot application server. ThoughtSpot generates this secret key when you enable trusted authentication. |
+| `accessLevel` | [`AccessLevelEnum`](../../doc/models/access-level-enum.md) | Query, Optional | User access privilege.<br><br>FULL - Creates a session with full access.<br><br>REPORT_BOOK_VIEW - Allow view access to the specified visualizations. |
+| `tsObjectId` | `String` | Query, Optional | GUID of the ThoughtSpot object. If you have set the accessLevel attribute to REPORT_BOOK_VIEW, specify the GUID of the Liveboard or visualization object. |
+| `tokenExpiryDuration` | `String` | Query, Optional | Duration in seconds after which the token expires |
+| `orgId` | `String` | Query, Optional | Id of the organization to be associated with the user login. If no input is provided then last logged in organization will be considered |
 
 ## Response Type
 
@@ -162,10 +109,9 @@ CompletableFuture<SessionLoginResponse> getTokenAsync(
 ## Example Usage
 
 ```java
-TspublicRestV2SessionGettokenRequest body = new TspublicRestV2SessionGettokenRequest();
-body.setUserName("userName8");
+String userName = "userName2";
 
-sessionController.getTokenAsync(body).thenAccept(result -> {
+sessionController.restapiV2GetTokenAsync(userName, null, null, null, null, null, null).thenAccept(result -> {
     // TODO success callback handler
 }).exceptionally(exception -> {
     // TODO failure callback handler
@@ -177,35 +123,5 @@ sessionController.getTokenAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
-
-
-# Revoke Token
-
-To expire or revoke a token for a user, use this endpoint
-
-```java
-CompletableFuture<Boolean> revokeTokenAsync()
-```
-
-## Response Type
-
-`boolean`
-
-## Example Usage
-
-```java
-sessionController.revokeTokenAsync().thenAccept(result -> {
-    // TODO success callback handler
-}).exceptionally(exception -> {
-    // TODO failure callback handler
-    return null;
-});
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 

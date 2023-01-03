@@ -16,6 +16,7 @@
 | `Mail` | `string` | Optional | Email of the user account |
 | `Groups` | [`List<Models.GroupNameAndID>`](../../doc/models/group-name-and-id.md) | Optional | Name of the group to which user account is added |
 | `Privileges` | `List<string>` | Optional | Privileges assigned to user account |
+| `Orgs` | [`List<Models.OrgType>`](../../doc/models/org-type.md) | Optional | The organizations that user belongs to |
 | `Tags` | `List<string>` | Optional | Tags assigned to the user |
 | `State` | `string` | Optional | Indicates if the user account is active or inactive |
 | `NotifyOnShare` | `bool?` | Optional | Indicates if the email should be sent when object is shared with the user |
@@ -52,6 +53,7 @@
   "mail": null,
   "groups": null,
   "privileges": null,
+  "orgs": null,
   "tags": null,
   "state": null,
   "notifyOnShare": null,

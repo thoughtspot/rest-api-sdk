@@ -1,7 +1,6 @@
 
-# Getting Started with RESTAPI SDK
+# Getting Started with ThoughtSpot Public REST API
 
-SDK for ThoughtSpot's v2 [Rest APIs](https://developers.thoughtspot.com/docs/?pageid=rest-api-v2) (Beta)
 ## Install the Package
 
 Install the SDK by adding the following dependency in your project's pom.xml file:
@@ -10,12 +9,22 @@ Install the SDK by adding the following dependency in your project's pom.xml fil
 <dependency>
   <groupId>io.github.thoughtspot</groupId>
   <artifactId>rest-api-sdk-lib</artifactId>
-  <version>1.10.0</version>
+  <version>1.13.1</version>
 </dependency>
 ```
 
 You can also view the package at:
-https://mvnrepository.com/artifact/io.github.thoughtspot/rest-api-sdk-lib/1.10.0
+https://mvnrepository.com/artifact/io.github.thoughtspot/rest-api-sdk-lib/1.13.1
+
+## Test the SDK
+
+The generated code and the server can be tested using automatically generated test cases.
+JUnit is used as the testing framework and test runner.
+
+In Eclipse, for running the tests do the following:
+
+1. Select the project ThoughtSpotPublicRESTAPILib from the package explorer.
+2. Select `Run -> Run as -> JUnit Test` or use `Alt + Shift + X` followed by `T` to run the Tests.
 
 ## Initialize the API Client
 
@@ -25,8 +34,6 @@ The following parameters are configurable for the API Client:
 
 | Parameter | Type | Description |
 |  --- | --- | --- |
-| `acceptLanguage` | `String` | response format<br>*Default*: `"application/json"` |
-| `contentType` | `String` | body content type for post request<br>*Default*: `"application/json"` |
 | `baseUrl` | `String` | *Default*: `"https://localhost:443"` |
 | `environment` | Environment | The API environment. <br> **Default: `Environment.PRODUCTION`** |
 | `httpClientConfig` | `ReadonlyHttpClientConfiguration` | Http Client Configuration instance. |
@@ -35,11 +42,9 @@ The following parameters are configurable for the API Client:
 The API client can be initialized as follows:
 
 ```java
-RESTAPISDKClient client = new RESTAPISDKClient.Builder()
+ThoughtSpotPublicRESTAPIClient client = new ThoughtSpotPublicRESTAPIClient.Builder()
     .httpClientConfig(configBuilder -> configBuilder
             .timeout(0))
-    .acceptLanguage("application/json")
-    .contentType("application/json")
     .accessToken("AccessToken")
     .environment(Environment.PRODUCTION)
     .baseUrl("https://localhost:443")
@@ -50,7 +55,35 @@ RESTAPISDKClient client = new RESTAPISDKClient.Builder()
 
 This API uses `OAuth 2 Bearer token`.
 
-## Guide
-[API Reference](https://github.com/thoughtspot/rest-api-sdk/blob/1.10.0/Typescript/doc/README.md)
-## Live Playground
-We recommend that you browse through the [code playground](https://try-everywhere.thoughtspot.cloud/v2/#/everywhere/api/rest/playgroundV2) before you start constructing your API requests. The playground offers an interactive portal with comprehensive information about the API endpoints, request and response workflows.
+## List of APIs
+
+* [User](doc/controllers/user.md)
+* [Group](doc/controllers/group.md)
+* [Metadata](doc/controllers/metadata.md)
+* [Database](doc/controllers/database.md)
+* [Connection](doc/controllers/connection.md)
+* [Data](doc/controllers/data.md)
+* [Logs](doc/controllers/logs.md)
+* [Custom Actions](doc/controllers/custom-actions.md)
+* [Security](doc/controllers/security.md)
+* [Org](doc/controllers/org.md)
+* [Session](doc/controllers/session.md)
+* [Admin](doc/controllers/admin.md)
+* [Report](doc/controllers/report.md)
+* [Materialization](doc/controllers/materialization.md)
+
+## Classes Documentation
+
+* [Utility Classes](doc/utility-classes.md)
+* [HttpRequest](doc/http-request.md)
+* [HttpResponse](doc/http-response.md)
+* [HttpStringResponse](doc/http-string-response.md)
+* [HttpContext](doc/http-context.md)
+* [HttpBodyRequest](doc/http-body-request.md)
+* [HttpCallback Interface](doc/http-callback-interface.md)
+* [Headers](doc/headers.md)
+* [ApiException](doc/api-exception.md)
+* [Configuration Interface](doc/configuration-interface.md)
+* [HttpClientConfiguration](doc/http-client-configuration.md)
+* [HttpClientConfiguration.Builder](doc/http-client-configuration-builder.md)
+

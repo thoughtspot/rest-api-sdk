@@ -10,84 +10,20 @@ AdminController adminController = client.AdminController;
 
 ## Methods
 
-* [Get Cluster Config](../../doc/controllers/admin.md#get-cluster-config)
-* [Get Cluster Config Overrides](../../doc/controllers/admin.md#get-cluster-config-overrides)
-* [Update Cluster Config](../../doc/controllers/admin.md#update-cluster-config)
-* [Reset User Password](../../doc/controllers/admin.md#reset-user-password)
-* [Sync Principal](../../doc/controllers/admin.md#sync-principal)
-* [Change Owner of Objects](../../doc/controllers/admin.md#change-owner-of-objects)
+* [Restapi V2 Update Cluster Config](../../doc/controllers/admin.md#restapi-v2-update-cluster-config)
+* [Restapi V2 Reset User Password](../../doc/controllers/admin.md#restapi-v2-reset-user-password)
+* [Restapi V2 Sync Principal](../../doc/controllers/admin.md#restapi-v2-sync-principal)
+* [Restapi V2 Change Author of Objects](../../doc/controllers/admin.md#restapi-v2-change-author-of-objects)
+* [Restapi V2 Assign Author to Objects](../../doc/controllers/admin.md#restapi-v2-assign-author-to-objects)
+* [Restapi V2 Force Logout Users](../../doc/controllers/admin.md#restapi-v2-force-logout-users)
 
 
-# Get Cluster Config
-
-To get details of the current configuration of a Thoughtspot cluster, use this endpoint.
-
-Permission: Requires administration privilege
-
-```csharp
-GetClusterConfigAsync()
-```
-
-## Response Type
-
-`Task<object>`
-
-## Example Usage
-
-```csharp
-try
-{
-    object result = await adminController.GetClusterConfigAsync();
-}
-catch (ApiException e){};
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
-
-
-# Get Cluster Config Overrides
-
-To get the details of overrides to the Thoughtspot cluster configuration, use this endpoint.
-
-Permission: Requires administration privilege
-
-```csharp
-GetClusterConfigOverridesAsync()
-```
-
-## Response Type
-
-`Task<object>`
-
-## Example Usage
-
-```csharp
-try
-{
-    object result = await adminController.GetClusterConfigOverridesAsync();
-}
-catch (ApiException e){};
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
-
-
-# Update Cluster Config
+# Restapi V2 Update Cluster Config
 
 To update the Thoughtspot cluster configuration, use this endpoint.
 
-Permission: Requires administration privilege
-
 ```csharp
-UpdateClusterConfigAsync(
+RestapiV2UpdateClusterConfigAsync(
     Models.TspublicRestV2AdminConfigurationUpdateRequest body)
 ```
 
@@ -108,7 +44,7 @@ var body = new TspublicRestV2AdminConfigurationUpdateRequest();
 
 try
 {
-    bool? result = await adminController.UpdateClusterConfigAsync(body);
+    bool? result = await adminController.RestapiV2UpdateClusterConfigAsync(body);
 }
 catch (ApiException e){};
 ```
@@ -117,10 +53,10 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Reset User Password
+# Restapi V2 Reset User Password
 
 To reset the password of a ThoughtSpot user account, use this endpoint.
 
@@ -128,10 +64,8 @@ It is mandatory to use Authorization header with token of a user with admin acce
 
 At least one of User Id or username is mandatory. When both are given, then user id will be considered.
 
-Permission: Requires administration privilege
-
 ```csharp
-ResetUserPasswordAsync(
+RestapiV2ResetUserPasswordAsync(
     Models.TspublicRestV2AdminResetpasswordRequest body)
 ```
 
@@ -153,7 +87,7 @@ body.NewPassword = "newPassword0";
 
 try
 {
-    bool? result = await adminController.ResetUserPasswordAsync(body);
+    bool? result = await adminController.RestapiV2ResetUserPasswordAsync(body);
 }
 catch (ApiException e){};
 ```
@@ -162,10 +96,10 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Sync Principal
+# Restapi V2 Sync Principal
 
 To programmatically synchronize user accounts and user groups from external system with ThoughtSpot, use this endpoint.
 
@@ -176,10 +110,8 @@ The users and user groups in Thoughtspot get updated for any matching inputs.
 Any user and user group present in the input, but not present in the cluster, gets created in cluster.
 n You can optionally choose to delete the user and groups from the cluster, that are not present in the input.
 
-Permission: Requires administration privilege
-
 ```csharp
-SyncPrincipalAsync(
+RestapiV2SyncPrincipalAsync(
     Models.TspublicRestV2AdminSyncprincipalRequest body)
 ```
 
@@ -202,7 +134,7 @@ body.PrincipalObject.Add(ApiHelper.JsonDeserialize<Object>("{\"key1\":\"val1\",\
 
 try
 {
-    AdminsyncPrincipalResponse result = await adminController.SyncPrincipalAsync(body);
+    AdminsyncPrincipalResponse result = await adminController.RestapiV2SyncPrincipalAsync(body);
 }
 catch (ApiException e){};
 ```
@@ -211,27 +143,25 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Change Owner of Objects
+# Restapi V2 Change Author of Objects
 
 To programmatically change the owner of one or several objects from one user account to another, use this endpoint.
 
 You might want to transfer ownership of objects owned by a user to another active user, when the account is removed from the ThoughtSpot application.
 
-Permission: Requires administration privilege
-
 ```csharp
-ChangeOwnerOfObjectsAsync(
-    Models.TspublicRestV2AdminChangeownerRequest body)
+RestapiV2ChangeAuthorOfObjectsAsync(
+    Models.TspublicRestV2AdminChangeauthorRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.TspublicRestV2AdminChangeownerRequest`](../../doc/models/tspublic-rest-v2-admin-changeowner-request.md) | Body, Required | - |
+| `body` | [`Models.TspublicRestV2AdminChangeauthorRequest`](../../doc/models/tspublic-rest-v2-admin-changeauthor-request.md) | Body, Required | - |
 
 ## Response Type
 
@@ -240,7 +170,7 @@ ChangeOwnerOfObjectsAsync(
 ## Example Usage
 
 ```csharp
-var body = new TspublicRestV2AdminChangeownerRequest();
+var body = new TspublicRestV2AdminChangeauthorRequest();
 body.TsObjectId = new List<string>();
 body.TsObjectId.Add("tsObjectId7");
 body.FromUser = new FromUserNameAndIDInput();
@@ -248,7 +178,7 @@ body.ToUser = new ToUserNameAndIDInput();
 
 try
 {
-    bool? result = await adminController.ChangeOwnerOfObjectsAsync(body);
+    bool? result = await adminController.RestapiV2ChangeAuthorOfObjectsAsync(body);
 }
 catch (ApiException e){};
 ```
@@ -257,5 +187,89 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+
+
+# Restapi V2 Assign Author to Objects
+
+To programmatically assign an author to one or several objects, use this endpoint.
+
+Provide either user name or id as input. When both are given user id will be considered.
+
+Requires administration privilege.
+
+```csharp
+RestapiV2AssignAuthorToObjectsAsync(
+    Models.TspublicRestV2AdminAssignauthorRequest body)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`Models.TspublicRestV2AdminAssignauthorRequest`](../../doc/models/tspublic-rest-v2-admin-assignauthor-request.md) | Body, Required | - |
+
+## Response Type
+
+`Task<bool>`
+
+## Example Usage
+
+```csharp
+var body = new TspublicRestV2AdminAssignauthorRequest();
+body.TsObjectId = new List<string>();
+body.TsObjectId.Add("tsObjectId7");
+
+try
+{
+    bool? result = await adminController.RestapiV2AssignAuthorToObjectsAsync(body);
+}
+catch (ApiException e){};
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+
+
+# Restapi V2 Force Logout Users
+
+To logout one or more users from logged in session, use this endpoint. If no input is provided then all logged in users are force logged out.
+
+Requires administration privilege
+
+```csharp
+RestapiV2ForceLogoutUsersAsync(
+    Models.TspublicRestV2AdminForcelogoutRequest body)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`Models.TspublicRestV2AdminForcelogoutRequest`](../../doc/models/tspublic-rest-v2-admin-forcelogout-request.md) | Body, Required | - |
+
+## Response Type
+
+`Task<bool>`
+
+## Example Usage
+
+```csharp
+var body = new TspublicRestV2AdminForcelogoutRequest();
+
+try
+{
+    bool? result = await adminController.RestapiV2ForceLogoutUsersAsync(body);
+}
+catch (ApiException e){};
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 

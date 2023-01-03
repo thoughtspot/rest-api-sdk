@@ -10,27 +10,25 @@ connection_controller = client.connection
 
 ## Methods
 
-* [Get Connection](../../doc/controllers/connection.md#get-connection)
-* [Get Connection Database](../../doc/controllers/connection.md#get-connection-database)
-* [Get Connection Tables](../../doc/controllers/connection.md#get-connection-tables)
-* [Get Connection Table Columns](../../doc/controllers/connection.md#get-connection-table-columns)
-* [Create Connection](../../doc/controllers/connection.md#create-connection)
-* [Update Connection](../../doc/controllers/connection.md#update-connection)
-* [Delete Connection](../../doc/controllers/connection.md#delete-connection)
-* [Add Table to Connection](../../doc/controllers/connection.md#add-table-to-connection)
-* [Remove Table From Connection](../../doc/controllers/connection.md#remove-table-from-connection)
-* [Search Connection](../../doc/controllers/connection.md#search-connection)
+* [Restapi V2 Get Connection](../../doc/controllers/connection.md#restapi-v2-get-connection)
+* [Restapi V2 Get Connection Database](../../doc/controllers/connection.md#restapi-v2-get-connection-database)
+* [Restapi V2 Create Connection](../../doc/controllers/connection.md#restapi-v2-create-connection)
+* [Restapi V2 Update Connection](../../doc/controllers/connection.md#restapi-v2-update-connection)
+* [Restapi V2 Delete Connection](../../doc/controllers/connection.md#restapi-v2-delete-connection)
+* [Restapi V2 Add Table to Connection](../../doc/controllers/connection.md#restapi-v2-add-table-to-connection)
+* [Restapi V2 Remove Table From Connection](../../doc/controllers/connection.md#restapi-v2-remove-table-from-connection)
+* [Restapi V2 Search Connection](../../doc/controllers/connection.md#restapi-v2-search-connection)
+* [Restapi V2 Get Connection Tables](../../doc/controllers/connection.md#restapi-v2-get-connection-tables)
+* [Restapi V2 Get Connection Table Columns](../../doc/controllers/connection.md#restapi-v2-get-connection-table-columns)
 
 
-# Get Connection
+# Restapi V2 Get Connection
 
-To get the details of a specific connection use this endpoint.
-
-Permission: Requires datamanagement privilege
+To get the details of a specific connection use this endpoint
 
 ```python
-def get_connection(self,
-                  id)
+def restapi_v_2__get_connection(self,
+                               id)
 ```
 
 ## Parameters
@@ -48,27 +46,25 @@ def get_connection(self,
 ```python
 id = 'id0'
 
-result = connection_controller.get_connection(id)
+result = connection_controller.restapi_v_2__get_connection(id)
 ```
 
 ## Errors
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Get Connection Database
+# Restapi V2 Get Connection Database
 
 To get the list of databases for a connection, use this endpoint.
 
 The response will include databases from the data platform corresponding to the connection id provided.
 
-Permission: Requires datamanagement privilege
-
 ```python
-def get_connection_database(self,
-                           id)
+def restapi_v_2__get_connection_database(self,
+                                        id)
 ```
 
 ## Parameters
@@ -86,120 +82,26 @@ def get_connection_database(self,
 ```python
 id = 'id0'
 
-result = connection_controller.get_connection_database(id)
+result = connection_controller.restapi_v_2__get_connection_database(id)
 ```
 
 ## Errors
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Get Connection Tables
-
-To get the details of tables from a connection, use this endpoint.
-
-You can get the details of tables in the data platform for the connection id provided.
-
-Permission: Requires datamanagement privilege
-
-```python
-def get_connection_tables(self,
-                         body)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `body` | [`TspublicRestV2ConnectionTableRequest`](../../doc/models/tspublic-rest-v2-connection-table-request.md) | Body, Required | - |
-
-## Response Type
-
-[`ConnectionTableResponse`](../../doc/models/connection-table-response.md)
-
-## Example Usage
-
-```python
-body = TspublicRestV2ConnectionTableRequest()
-body.id = 'id6'
-
-result = connection_controller.get_connection_tables(body)
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
-
-
-# Get Connection Table Columns
-
-To get the details of columns in a table associated to a connection, use this endpoint.
-
-You can get the columns of any table available in the data platform for the connection id provided.
-
-Permission: Requires datamanagement privilege
-
-```python
-def get_connection_table_columns(self,
-                                body)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `body` | [`TspublicRestV2ConnectionTablecoloumnRequest`](../../doc/models/tspublic-rest-v2-connection-tablecoloumn-request.md) | Body, Required | - |
-
-## Response Type
-
-[`ConnectionTableColumnsResponse`](../../doc/models/connection-table-columns-response.md)
-
-## Example Usage
-
-```python
-body = TspublicRestV2ConnectionTablecoloumnRequest()
-body.id = 'id6'
-body.table = []
-
-body.table.append(ConnectionTableColumnsInput())
-body.table[0].db_name = 'dbName8'
-body.table[0].schema_name = 'schemaName4'
-body.table[0].name = 'name0'
-
-body.table.append(ConnectionTableColumnsInput())
-body.table[1].db_name = 'dbName9'
-body.table[1].schema_name = 'schemaName5'
-body.table[1].name = 'name1'
-
-body.table.append(ConnectionTableColumnsInput())
-body.table[2].db_name = 'dbName0'
-body.table[2].schema_name = 'schemaName6'
-body.table[2].name = 'name2'
-
-
-result = connection_controller.get_connection_table_columns(body)
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
-
-
-# Create Connection
+# Restapi V2 Create Connection
 
 To programmatically create a connection in the ThoughtSpot system use this API endpoint.
-
-Permission: Requires datamanagement privilege
+Using this API, you can create a connection and assign groups.
+To create a connection, you require admin connection privileges.
+All connections created in the ThoughtSpot system are added to ALL_GROUP
 
 ```python
-def create_connection(self,
-                     body)
+def restapi_v_2__create_connection(self,
+                                  body)
 ```
 
 ## Parameters
@@ -216,29 +118,29 @@ def create_connection(self,
 
 ```python
 body = TspublicRestV2ConnectionCreateRequest()
-body.mtype = CreateConnectionTypeEnum.TERADATA
+body.mtype = Type14Enum.ORACLE_ADW
 body.name = 'name6'
 body.configuration = 'configuration0'
 
-result = connection_controller.create_connection(body)
+result = connection_controller.restapi_v_2__create_connection(body)
 ```
 
 ## Errors
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Update Connection
+# Restapi V2 Update Connection
 
 You can use this endpoint to programmatically modify an existing connection
-
-Permission: Requires datamanagement privilege
+To modify a connection, you require admin connection privileges.
+At least one of Connection Id or connectionname is mandatory. When both are given, then connection id will be considered and connectionname will be updated
 
 ```python
-def update_connection(self,
-                     body)
+def restapi_v_2__update_connection(self,
+                                  body)
 ```
 
 ## Parameters
@@ -258,25 +160,23 @@ body = TspublicRestV2ConnectionUpdateRequest()
 body.id = 'id6'
 body.configuration = 'configuration0'
 
-result = connection_controller.update_connection(body)
+result = connection_controller.restapi_v_2__update_connection(body)
 ```
 
 ## Errors
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Delete Connection
+# Restapi V2 Delete Connection
 
 To remove a connection from the ThoughtSpot system, use this endpoint.
 
-Permission: Requires datamanagement privilege
-
 ```python
-def delete_connection(self,
-                     id)
+def restapi_v_2__delete_connection(self,
+                                  id)
 ```
 
 ## Parameters
@@ -294,25 +194,25 @@ def delete_connection(self,
 ```python
 id = ['id0']
 
-result = connection_controller.delete_connection(id)
+result = connection_controller.restapi_v_2__delete_connection(id)
 ```
 
 ## Errors
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Add Table to Connection
+# Restapi V2 Add Table to Connection
 
-To programmatically add table to an existing connection, use this endpoint
-
-Permission: Requires datamanagement privilege
+To programmatically add table to an existing connection use this endpoint.
+When you assign groups to a connection, the connection inherits the privileges assigned to those groups.
+At least one of Connection Id or connectionname is mandatory. When both are given, then connection id will be considered.
 
 ```python
-def add_table_to_connection(self,
-                           body)
+def restapi_v_2__add_table_to_connection(self,
+                                        body)
 ```
 
 ## Parameters
@@ -378,25 +278,25 @@ body.table[2].columns[2].data_type = 'dataType2'
 
 
 
-result = connection_controller.add_table_to_connection(body)
+result = connection_controller.restapi_v_2__add_table_to_connection(body)
 ```
 
 ## Errors
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Remove Table From Connection
+# Restapi V2 Remove Table From Connection
 
-To programmatically remove a table from a connection, use API endpoint.
-
-Permission: Requires datamanagement privilege
+To programmatically remove a table from a connection use API endpoint.
+The API removes only the connection association. It does not delete the connection or group from the Thoughtspot system.
+At least one of id or name of connection is required. When both are given connection id will be considered.
 
 ```python
-def remove_table_from_connection(self,
-                                body)
+def restapi_v_2__remove_table_from_connection(self,
+                                             body)
 ```
 
 ## Parameters
@@ -423,25 +323,23 @@ body.table.append(TableInput())
 body.table.append(TableInput())
 
 
-result = connection_controller.remove_table_from_connection(body)
+result = connection_controller.restapi_v_2__remove_table_from_connection(body)
 ```
 
 ## Errors
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Search Connection
+# Restapi V2 Search Connection
 
 To get the details of a specific connection or all connections in the ThoughtSpot system use this end point.
 
-Permission: Requires datamanagement privilege
-
 ```python
-def search_connection(self,
-                     body)
+def restapi_v_2__search_connection(self,
+                                  body)
 ```
 
 ## Parameters
@@ -458,14 +356,105 @@ def search_connection(self,
 
 ```python
 body = TspublicRestV2ConnectionSearchRequest()
-body.mtype = SearchConnectionTypeEnum.TERADATA
+body.mtype = Type15Enum.ORACLE_ADW
 
-result = connection_controller.search_connection(body)
+result = connection_controller.restapi_v_2__search_connection(body)
 ```
 
 ## Errors
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+
+
+# Restapi V2 Get Connection Tables
+
+To get the details of tables from a connection, use this endpoint.
+
+You can get the details of tables in the data platform for the connection id provided.
+
+```python
+def restapi_v_2__get_connection_tables(self,
+                                      body)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`TspublicRestV2ConnectionTableRequest`](../../doc/models/tspublic-rest-v2-connection-table-request.md) | Body, Required | - |
+
+## Response Type
+
+[`ConnectionTableResponse`](../../doc/models/connection-table-response.md)
+
+## Example Usage
+
+```python
+body = TspublicRestV2ConnectionTableRequest()
+body.id = 'id6'
+
+result = connection_controller.restapi_v_2__get_connection_tables(body)
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+
+
+# Restapi V2 Get Connection Table Columns
+
+To get the details of columns in a table associated to a connection, use this endpoint.
+
+You can get the columns of any table available in the data platform for the connection id provided.
+
+```python
+def restapi_v_2__get_connection_table_columns(self,
+                                             body)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`TspublicRestV2ConnectionTablecoloumnRequest`](../../doc/models/tspublic-rest-v2-connection-tablecoloumn-request.md) | Body, Required | - |
+
+## Response Type
+
+[`ConnectionTableColumnsResponse`](../../doc/models/connection-table-columns-response.md)
+
+## Example Usage
+
+```python
+body = TspublicRestV2ConnectionTablecoloumnRequest()
+body.id = 'id6'
+body.table = []
+
+body.table.append(ConnectionTableColumnsInput())
+body.table[0].db_name = 'dbName8'
+body.table[0].schema_name = 'schemaName4'
+body.table[0].name = 'name0'
+
+body.table.append(ConnectionTableColumnsInput())
+body.table[1].db_name = 'dbName9'
+body.table[1].schema_name = 'schemaName5'
+body.table[1].name = 'name1'
+
+body.table.append(ConnectionTableColumnsInput())
+body.table[2].db_name = 'dbName0'
+body.table[2].schema_name = 'schemaName6'
+body.table[2].name = 'name2'
+
+
+result = connection_controller.restapi_v_2__get_connection_table_columns(body)
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 

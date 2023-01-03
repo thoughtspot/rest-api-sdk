@@ -9,7 +9,7 @@ LogsController logsController = client.getLogsController();
 `LogsController`
 
 
-# Get Log Events
+# Restapi V2 Get Log Events
 
 Note: This endpoint is applicable only for SAAS deployments.
 
@@ -21,11 +21,9 @@ ThoughtSpot cloud deployments allow you to collect security audit events and sen
 
 These events can help your security operations personnel to detect potential security threats or compromised user accounts in your organization.
 
-Permission: Requires administration privilege
-
 ```java
-CompletableFuture<LogsResponse> getLogEventsAsync(
-    final GetLogEventsTopicEnum topic,
+CompletableFuture<LogsResponse> restapiV2GetLogEventsAsync(
+    final TopicEnum topic,
     final String fromEpoch,
     final String toEpoch)
 ```
@@ -34,7 +32,7 @@ CompletableFuture<LogsResponse> getLogEventsAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `topic` | [`GetLogEventsTopicEnum`](../../doc/models/get-log-events-topic-enum.md) | Query, Required | Type of the log. |
+| `topic` | [`TopicEnum`](../../doc/models/topic-enum.md) | Query, Required | Type of the log |
 | `fromEpoch` | `String` | Query, Optional | The EPOCH time in milliseconds to set the start time for streaming logs.<br><br>Example: To set the timestamp as June 1, 2021 8 am, specify 1622534400000. |
 | `toEpoch` | `String` | Query, Optional | The EPOCH time in milliseconds to set the end time for streaming logs.<br><br>Example: To set the timestamp as July 1, 2021, 8 am, specify 1625126400000. |
 
@@ -45,9 +43,9 @@ CompletableFuture<LogsResponse> getLogEventsAsync(
 ## Example Usage
 
 ```java
-GetLogEventsTopicEnum topic = GetLogEventsTopicEnum.SECURITY_LOGS;
+TopicEnum topic = TopicEnum.SECURITY_LOGS;
 
-logsController.getLogEventsAsync(topic, null, null).thenAccept(result -> {
+logsController.restapiV2GetLogEventsAsync(topic, null, null).thenAccept(result -> {
     // TODO success callback handler
 }).exceptionally(exception -> {
     // TODO failure callback handler
@@ -59,5 +57,5 @@ logsController.getLogEventsAsync(topic, null, null).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 

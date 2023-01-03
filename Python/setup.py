@@ -12,23 +12,22 @@ else:
 
 setup(
     name='thoughtspot-rest-api-sdk',
-    version='1.8.0',
-    description='Python client library for RESTAPI SDK',
+    version='1.13.1',
+    description='Python client library for ThoughtSpot Public REST API',
     long_description=long_description,
     long_description_content_type="text/markdown",
-    author='ThoughtSpot',
-    author_email='support@thoughtspot.com',
-    url='https://github.com/thoughtspot/rest-api-sdk/tree/main/Python',
+    author='APIMatic SDK Generator',
+    author_email='support@apimatic.io',
+    url='https://apimatic.io',
     packages=find_packages(),
     install_requires=[
-        'jsonpickle~=1.4, >= 1.4.1',
-        'requests~=2.24',
-        'cachecontrol~=0.12.6',
+        'apimatic-core~=0.1.0',
+        'apimatic-core-interfaces~=0.1.0',
+        'apimatic-requests-client-adapter~=0.1.0',
         'python-dateutil~=2.8.1',
         'enum34~=1.1, >=1.1.10'
     ],
     tests_require=[
-        'nose>=1.3.7'
+        'pytest>=7.1.3'
     ],
-    test_suite = 'nose.collector'
 )

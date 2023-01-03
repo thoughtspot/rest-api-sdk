@@ -10,26 +10,24 @@ const connectionController = new ConnectionController(client);
 
 ## Methods
 
-* [Get Connection](../../doc/controllers/connection.md#get-connection)
-* [Get Connection Database](../../doc/controllers/connection.md#get-connection-database)
-* [Get Connection Tables](../../doc/controllers/connection.md#get-connection-tables)
-* [Get Connection Table Columns](../../doc/controllers/connection.md#get-connection-table-columns)
-* [Create Connection](../../doc/controllers/connection.md#create-connection)
-* [Update Connection](../../doc/controllers/connection.md#update-connection)
-* [Delete Connection](../../doc/controllers/connection.md#delete-connection)
-* [Add Table to Connection](../../doc/controllers/connection.md#add-table-to-connection)
-* [Remove Table From Connection](../../doc/controllers/connection.md#remove-table-from-connection)
-* [Search Connection](../../doc/controllers/connection.md#search-connection)
+* [Restapi V2 Get Connection](../../doc/controllers/connection.md#restapi-v2-get-connection)
+* [Restapi V2 Get Connection Database](../../doc/controllers/connection.md#restapi-v2-get-connection-database)
+* [Restapi V2 Create Connection](../../doc/controllers/connection.md#restapi-v2-create-connection)
+* [Restapi V2 Update Connection](../../doc/controllers/connection.md#restapi-v2-update-connection)
+* [Restapi V2 Delete Connection](../../doc/controllers/connection.md#restapi-v2-delete-connection)
+* [Restapi V2 Add Table to Connection](../../doc/controllers/connection.md#restapi-v2-add-table-to-connection)
+* [Restapi V2 Remove Table From Connection](../../doc/controllers/connection.md#restapi-v2-remove-table-from-connection)
+* [Restapi V2 Search Connection](../../doc/controllers/connection.md#restapi-v2-search-connection)
+* [Restapi V2 Get Connection Tables](../../doc/controllers/connection.md#restapi-v2-get-connection-tables)
+* [Restapi V2 Get Connection Table Columns](../../doc/controllers/connection.md#restapi-v2-get-connection-table-columns)
 
 
-# Get Connection
+# Restapi V2 Get Connection
 
-To get the details of a specific connection use this endpoint.
-
-Permission: Requires datamanagement privilege
+To get the details of a specific connection use this endpoint
 
 ```ts
-async getConnection(
+async restapiV2GetConnection(
   id: string,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ConnectionResponse>>
@@ -51,7 +49,7 @@ async getConnection(
 ```ts
 const id = 'id0';
 try {
-  const { result, ...httpResponse } = await connectionController.getConnection(id);
+  const { result, ...httpResponse } = await connectionController.restapiV2GetConnection(id);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch(error) {
@@ -66,19 +64,17 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
+| 500 | Operation failed | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
-# Get Connection Database
+# Restapi V2 Get Connection Database
 
 To get the list of databases for a connection, use this endpoint.
 
 The response will include databases from the data platform corresponding to the connection id provided.
 
-Permission: Requires datamanagement privilege
-
 ```ts
-async getConnectionDatabase(
+async restapiV2GetConnectionDatabase(
   id: string,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<string[]>>
@@ -100,7 +96,7 @@ async getConnectionDatabase(
 ```ts
 const id = 'id0';
 try {
-  const { result, ...httpResponse } = await connectionController.getConnectionDatabase(id);
+  const { result, ...httpResponse } = await connectionController.restapiV2GetConnectionDatabase(id);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch(error) {
@@ -115,150 +111,18 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
+| 500 | Operation failed | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
-# Get Connection Tables
-
-To get the details of tables from a connection, use this endpoint.
-
-You can get the details of tables in the data platform for the connection id provided.
-
-Permission: Requires datamanagement privilege
-
-```ts
-async getConnectionTables(
-  body: TspublicRestV2ConnectionTableRequest,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<ConnectionTableResponse>>
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `body` | [`TspublicRestV2ConnectionTableRequest`](../../doc/models/tspublic-rest-v2-connection-table-request.md) | Body, Required | - |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-[`ConnectionTableResponse`](../../doc/models/connection-table-response.md)
-
-## Example Usage
-
-```ts
-const contentType = null;
-const body: TspublicRestV2ConnectionTableRequest = {
-  id: 'id6',
-};
-
-try {
-  const { result, ...httpResponse } = await connectionController.getConnectionTables(body);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch(error) {
-  if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
-
-
-# Get Connection Table Columns
-
-To get the details of columns in a table associated to a connection, use this endpoint.
-
-You can get the columns of any table available in the data platform for the connection id provided.
-
-Permission: Requires datamanagement privilege
-
-```ts
-async getConnectionTableColumns(
-  body: TspublicRestV2ConnectionTablecoloumnRequest,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<ConnectionTableColumnsResponse>>
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `body` | [`TspublicRestV2ConnectionTablecoloumnRequest`](../../doc/models/tspublic-rest-v2-connection-tablecoloumn-request.md) | Body, Required | - |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-[`ConnectionTableColumnsResponse`](../../doc/models/connection-table-columns-response.md)
-
-## Example Usage
-
-```ts
-const contentType = null;
-const bodyTable: ConnectionTableColumnsInput[] = [];
-
-const bodytable0: ConnectionTableColumnsInput = {
-  dbName: 'dbName8',
-  schemaName: 'schemaName4',
-  name: 'name0',
-};
-
-bodyTable[0] = bodytable0;
-
-const bodytable1: ConnectionTableColumnsInput = {
-  dbName: 'dbName9',
-  schemaName: 'schemaName5',
-  name: 'name1',
-};
-
-bodyTable[1] = bodytable1;
-
-const bodytable2: ConnectionTableColumnsInput = {
-  dbName: 'dbName0',
-  schemaName: 'schemaName6',
-  name: 'name2',
-};
-
-bodyTable[2] = bodytable2;
-
-const body: TspublicRestV2ConnectionTablecoloumnRequest = {
-  id: 'id6',
-  table: bodyTable,
-};
-
-try {
-  const { result, ...httpResponse } = await connectionController.getConnectionTableColumns(body);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch(error) {
-  if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
-
-
-# Create Connection
+# Restapi V2 Create Connection
 
 To programmatically create a connection in the ThoughtSpot system use this API endpoint.
-
-Permission: Requires datamanagement privilege
+Using this API, you can create a connection and assign groups.
+To create a connection, you require admin connection privileges.
+All connections created in the ThoughtSpot system are added to ALL_GROUP
 
 ```ts
-async createConnection(
+async restapiV2CreateConnection(
   body: TspublicRestV2ConnectionCreateRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<CreateConnectionResponse>>
@@ -280,13 +144,13 @@ async createConnection(
 ```ts
 const contentType = null;
 const body: TspublicRestV2ConnectionCreateRequest = {
-  type: 'TERADATA',
+  type: 'ORACLE_ADW',
   name: 'name6',
   configuration: 'configuration0',
 };
 
 try {
-  const { result, ...httpResponse } = await connectionController.createConnection(body);
+  const { result, ...httpResponse } = await connectionController.restapiV2CreateConnection(body);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch(error) {
@@ -301,17 +165,17 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
+| 500 | Operation failed | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
-# Update Connection
+# Restapi V2 Update Connection
 
 You can use this endpoint to programmatically modify an existing connection
-
-Permission: Requires datamanagement privilege
+To modify a connection, you require admin connection privileges.
+At least one of Connection Id or connectionname is mandatory. When both are given, then connection id will be considered and connectionname will be updated
 
 ```ts
-async updateConnection(
+async restapiV2UpdateConnection(
   body: TspublicRestV2ConnectionUpdateRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<boolean>>
@@ -338,7 +202,7 @@ const body: TspublicRestV2ConnectionUpdateRequest = {
 };
 
 try {
-  const { result, ...httpResponse } = await connectionController.updateConnection(body);
+  const { result, ...httpResponse } = await connectionController.restapiV2UpdateConnection(body);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch(error) {
@@ -353,17 +217,15 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
+| 500 | Operation failed | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
-# Delete Connection
+# Restapi V2 Delete Connection
 
 To remove a connection from the ThoughtSpot system, use this endpoint.
 
-Permission: Requires datamanagement privilege
-
 ```ts
-async deleteConnection(
+async restapiV2DeleteConnection(
   id: string[],
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<boolean>>
@@ -385,7 +247,7 @@ async deleteConnection(
 ```ts
 const Id: string[] = ['id0'];
 try {
-  const { result, ...httpResponse } = await connectionController.deleteConnection(id);
+  const { result, ...httpResponse } = await connectionController.restapiV2DeleteConnection(id);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch(error) {
@@ -400,17 +262,17 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
+| 500 | Operation failed | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
-# Add Table to Connection
+# Restapi V2 Add Table to Connection
 
-To programmatically add table to an existing connection, use this endpoint
-
-Permission: Requires datamanagement privilege
+To programmatically add table to an existing connection use this endpoint.
+When you assign groups to a connection, the connection inherits the privileges assigned to those groups.
+At least one of Connection Id or connectionname is mandatory. When both are given, then connection id will be considered.
 
 ```ts
-async addTableToConnection(
+async restapiV2AddTableToConnection(
   body: TspublicRestV2ConnectionAddtableRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<boolean>>
@@ -514,7 +376,7 @@ const body: TspublicRestV2ConnectionAddtableRequest = {
 };
 
 try {
-  const { result, ...httpResponse } = await connectionController.addTableToConnection(body);
+  const { result, ...httpResponse } = await connectionController.restapiV2AddTableToConnection(body);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch(error) {
@@ -529,17 +391,17 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
+| 500 | Operation failed | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
-# Remove Table From Connection
+# Restapi V2 Remove Table From Connection
 
-To programmatically remove a table from a connection, use API endpoint.
-
-Permission: Requires datamanagement privilege
+To programmatically remove a table from a connection use API endpoint.
+The API removes only the connection association. It does not delete the connection or group from the Thoughtspot system.
+At least one of id or name of connection is required. When both are given connection id will be considered.
 
 ```ts
-async removeTableFromConnection(
+async restapiV2RemoveTableFromConnection(
   body: TspublicRestV2ConnectionRemovetableRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<boolean>>
@@ -580,7 +442,7 @@ const body: TspublicRestV2ConnectionRemovetableRequest = {
 };
 
 try {
-  const { result, ...httpResponse } = await connectionController.removeTableFromConnection(body);
+  const { result, ...httpResponse } = await connectionController.restapiV2RemoveTableFromConnection(body);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch(error) {
@@ -595,17 +457,15 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
+| 500 | Operation failed | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
-# Search Connection
+# Restapi V2 Search Connection
 
 To get the details of a specific connection or all connections in the ThoughtSpot system use this end point.
 
-Permission: Requires datamanagement privilege
-
 ```ts
-async searchConnection(
+async restapiV2SearchConnection(
   body: TspublicRestV2ConnectionSearchRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ConnectionResponse[]>>
@@ -627,11 +487,11 @@ async searchConnection(
 ```ts
 const contentType = null;
 const body: TspublicRestV2ConnectionSearchRequest = {
-  type: 'TERADATA',
+  type: 'ORACLE_ADW',
 };
 
 try {
-  const { result, ...httpResponse } = await connectionController.searchConnection(body);
+  const { result, ...httpResponse } = await connectionController.restapiV2SearchConnection(body);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch(error) {
@@ -646,5 +506,134 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
+| 500 | Operation failed | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
+
+
+# Restapi V2 Get Connection Tables
+
+To get the details of tables from a connection, use this endpoint.
+
+You can get the details of tables in the data platform for the connection id provided.
+
+```ts
+async restapiV2GetConnectionTables(
+  body: TspublicRestV2ConnectionTableRequest,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ConnectionTableResponse>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`TspublicRestV2ConnectionTableRequest`](../../doc/models/tspublic-rest-v2-connection-table-request.md) | Body, Required | - |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+[`ConnectionTableResponse`](../../doc/models/connection-table-response.md)
+
+## Example Usage
+
+```ts
+const contentType = null;
+const body: TspublicRestV2ConnectionTableRequest = {
+  id: 'id6',
+};
+
+try {
+  const { result, ...httpResponse } = await connectionController.restapiV2GetConnectionTables(body);
+  // Get more response info...
+  // const { statusCode, headers } = httpResponse;
+} catch(error) {
+  if (error instanceof ApiError) {
+    const errors = error.result;
+    // const { statusCode, headers } = error;
+  }
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 500 | Operation failed | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
+
+
+# Restapi V2 Get Connection Table Columns
+
+To get the details of columns in a table associated to a connection, use this endpoint.
+
+You can get the columns of any table available in the data platform for the connection id provided.
+
+```ts
+async restapiV2GetConnectionTableColumns(
+  body: TspublicRestV2ConnectionTablecoloumnRequest,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ConnectionTableColumnsResponse>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`TspublicRestV2ConnectionTablecoloumnRequest`](../../doc/models/tspublic-rest-v2-connection-tablecoloumn-request.md) | Body, Required | - |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+[`ConnectionTableColumnsResponse`](../../doc/models/connection-table-columns-response.md)
+
+## Example Usage
+
+```ts
+const contentType = null;
+const bodyTable: ConnectionTableColumnsInput[] = [];
+
+const bodytable0: ConnectionTableColumnsInput = {
+  dbName: 'dbName8',
+  schemaName: 'schemaName4',
+  name: 'name0',
+};
+
+bodyTable[0] = bodytable0;
+
+const bodytable1: ConnectionTableColumnsInput = {
+  dbName: 'dbName9',
+  schemaName: 'schemaName5',
+  name: 'name1',
+};
+
+bodyTable[1] = bodytable1;
+
+const bodytable2: ConnectionTableColumnsInput = {
+  dbName: 'dbName0',
+  schemaName: 'schemaName6',
+  name: 'name2',
+};
+
+bodyTable[2] = bodytable2;
+
+const body: TspublicRestV2ConnectionTablecoloumnRequest = {
+  id: 'id6',
+  table: bodyTable,
+};
+
+try {
+  const { result, ...httpResponse } = await connectionController.restapiV2GetConnectionTableColumns(body);
+  // Get more response info...
+  // const { statusCode, headers } = httpResponse;
+} catch(error) {
+  if (error instanceof ApiError) {
+    const errors = error.result;
+    // const { statusCode, headers } = error;
+  }
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 500 | Operation failed | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 

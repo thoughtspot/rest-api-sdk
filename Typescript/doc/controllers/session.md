@@ -10,66 +10,23 @@ const sessionController = new SessionController(client);
 
 ## Methods
 
-* [Get Session Info](../../doc/controllers/session.md#get-session-info)
-* [Login](../../doc/controllers/session.md#login)
-* [Logout](../../doc/controllers/session.md#logout)
-* [Get Token](../../doc/controllers/session.md#get-token)
-* [Revoke Token](../../doc/controllers/session.md#revoke-token)
+* [Restapi V2 Login](../../doc/controllers/session.md#restapi-v2-login)
+* [Restapi V2 Get Token](../../doc/controllers/session.md#restapi-v2-get-token)
 
 
-# Get Session Info
-
-To get session object information, use this endpoint
-
-```ts
-async getSessionInfo(
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<unknown>>
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-`unknown`
-
-## Example Usage
-
-```ts
-try {
-  const { result, ...httpResponse } = await sessionController.getSessionInfo();
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch(error) {
-  if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
-
-
-# Login
+# Restapi V2 Login
 
 You can programmatically create login session for a user in ThoughtSpot using this endpoint.
 
-You can create session by either providing userName and password as inputs in this request body or by including "Authorization" header with the token generated through the endpoint /tspublic/rest/v2/session/getToken.
+You can create session by either providing userName and password as inputs in this request body or by including "Authorization" header with the token generated through the endpoint /tspublic/rest/v2/session/gettoken.
 
 userName and password input is given precedence over "Authorization" header, when both are included in the request.
 
 ```ts
-async login(
-  body: TspublicRestV2SessionLoginRequest,
+async restapiV2Login(
+  userName?: string,
+  password?: string,
+  rememberMe?: boolean,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<SessionLoginResponse>>
 ```
@@ -78,7 +35,9 @@ async login(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`TspublicRestV2SessionLoginRequest`](../../doc/models/tspublic-rest-v2-session-login-request.md) | Body, Required | - |
+| `userName` | `string \| undefined` | Query, Optional | Username of the user account |
+| `password` | `string \| undefined` | Query, Optional | The password of the user account |
+| `rememberMe` | `boolean \| undefined` | Query, Optional | A flag to remember the user session. When set to true, sets a session cookie that persists in subsequent API calls. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -88,11 +47,8 @@ async login(
 ## Example Usage
 
 ```ts
-const contentType = null;
-const body: TspublicRestV2SessionLoginRequest = {};
-
 try {
-  const { result, ...httpResponse } = await sessionController.login(body);
+  const { result, ...httpResponse } = await sessionController.restapiV2Login();
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch(error) {
@@ -107,54 +63,10 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
+| 500 | Operation failed | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 
 
-# Logout
-
-To log a user out of the current session, use this endpoint
-
-:information_source: **Note** This endpoint does not require authentication.
-
-```ts
-async logout(
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<boolean>>
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-`boolean`
-
-## Example Usage
-
-```ts
-try {
-  const { result, ...httpResponse } = await sessionController.logout();
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch(error) {
-  if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
-
-
-# Get Token
+# Restapi V2 Get Token
 
 To programmatically create session token for a user in ThoughtSpot, use this endpoint.
 
@@ -174,11 +86,15 @@ You need to enable trusted authentication to generate secret key. To generate se
 
 Password is given precedence over secretKey input, when both are included in the request.
 
-:information_source: **Note** This endpoint does not require authentication.
-
 ```ts
-async getToken(
-  body: TspublicRestV2SessionGettokenRequest,
+async restapiV2GetToken(
+  userName: string,
+  password?: string,
+  secretKey?: string,
+  accessLevel?: AccessLevelEnum,
+  tsObjectId?: string,
+  tokenExpiryDuration?: string,
+  orgId?: string,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<SessionLoginResponse>>
 ```
@@ -187,7 +103,13 @@ async getToken(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`TspublicRestV2SessionGettokenRequest`](../../doc/models/tspublic-rest-v2-session-gettoken-request.md) | Body, Required | - |
+| `userName` | `string` | Query, Required | Username of the user account |
+| `password` | `string \| undefined` | Query, Optional | The password of the user account |
+| `secretKey` | `string \| undefined` | Query, Optional | The secret key string provided by the ThoughtSpot application server. ThoughtSpot generates this secret key when you enable trusted authentication. |
+| `accessLevel` | [`AccessLevelEnum \| undefined`](../../doc/models/access-level-enum.md) | Query, Optional | User access privilege.<br><br>FULL - Creates a session with full access.<br><br>REPORT_BOOK_VIEW - Allow view access to the specified visualizations. |
+| `tsObjectId` | `string \| undefined` | Query, Optional | GUID of the ThoughtSpot object. If you have set the accessLevel attribute to REPORT_BOOK_VIEW, specify the GUID of the Liveboard or visualization object. |
+| `tokenExpiryDuration` | `string \| undefined` | Query, Optional | Duration in seconds after which the token expires |
+| `orgId` | `string \| undefined` | Query, Optional | Id of the organization to be associated with the user login. If no input is provided then last logged in organization will be considered |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -197,13 +119,9 @@ async getToken(
 ## Example Usage
 
 ```ts
-const contentType = null;
-const body: TspublicRestV2SessionGettokenRequest = {
-  userName: 'userName8',
-};
-
+const userName = 'userName2';
 try {
-  const { result, ...httpResponse } = await sessionController.getToken(body);
+  const { result, ...httpResponse } = await sessionController.restapiV2GetToken(userName);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch(error) {
@@ -218,47 +136,5 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
-
-
-# Revoke Token
-
-To expire or revoke a token for a user, use this endpoint
-
-```ts
-async revokeToken(
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<boolean>>
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-`boolean`
-
-## Example Usage
-
-```ts
-try {
-  const { result, ...httpResponse } = await sessionController.revokeToken();
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch(error) {
-  if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
+| 500 | Operation failed | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 

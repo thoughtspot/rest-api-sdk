@@ -11,7 +11,7 @@
 |  --- | --- | --- | --- | --- | --- |
 | `Name` | `String` | Optional | Name of the group | String getName() | setName(String name) |
 | `Id` | `String` | Optional | The GUID of the group to query. | String getId() | setId(String id) |
-| `Privileges` | [`List<RemovePrivilegesFromGroupPrivilegesEnum>`](../../doc/models/remove-privileges-from-group-privileges-enum.md) | Optional | List of privileges | List<RemovePrivilegesFromGroupPrivilegesEnum> getPrivileges() | setPrivileges(List<RemovePrivilegesFromGroupPrivilegesEnum> privileges) |
+| `Privileges` | [`List<PrivilegeEnum>`](../../doc/models/privilege-enum.md) | Optional | A JSON array of name of users or GUIDs of users or both. When both are given then id is considered | List<PrivilegeEnum> getPrivileges() | setPrivileges(List<PrivilegeEnum> privileges) |
 
 ## Example (as JSON)
 

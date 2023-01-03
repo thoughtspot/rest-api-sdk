@@ -10,7 +10,7 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `Id` | `string` | Required | GUID of the connection |
-| `Table` | [`List<Models.AddTableInput>`](../../doc/models/add-table-input.md) | Required | - |
+| `Table` | [`List<Models.AddTableInput>`](../../doc/models/add-table-input.md) | Required | A JSON array of table details |
 
 ## Example (as JSON)
 

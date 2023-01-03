@@ -10,26 +10,24 @@ ConnectionController connectionController = client.getConnectionController();
 
 ## Methods
 
-* [Get Connection](../../doc/controllers/connection.md#get-connection)
-* [Get Connection Database](../../doc/controllers/connection.md#get-connection-database)
-* [Get Connection Tables](../../doc/controllers/connection.md#get-connection-tables)
-* [Get Connection Table Columns](../../doc/controllers/connection.md#get-connection-table-columns)
-* [Create Connection](../../doc/controllers/connection.md#create-connection)
-* [Update Connection](../../doc/controllers/connection.md#update-connection)
-* [Delete Connection](../../doc/controllers/connection.md#delete-connection)
-* [Add Table to Connection](../../doc/controllers/connection.md#add-table-to-connection)
-* [Remove Table From Connection](../../doc/controllers/connection.md#remove-table-from-connection)
-* [Search Connection](../../doc/controllers/connection.md#search-connection)
+* [Restapi V2 Get Connection](../../doc/controllers/connection.md#restapi-v2-get-connection)
+* [Restapi V2 Get Connection Database](../../doc/controllers/connection.md#restapi-v2-get-connection-database)
+* [Restapi V2 Create Connection](../../doc/controllers/connection.md#restapi-v2-create-connection)
+* [Restapi V2 Update Connection](../../doc/controllers/connection.md#restapi-v2-update-connection)
+* [Restapi V2 Delete Connection](../../doc/controllers/connection.md#restapi-v2-delete-connection)
+* [Restapi V2 Add Table to Connection](../../doc/controllers/connection.md#restapi-v2-add-table-to-connection)
+* [Restapi V2 Remove Table From Connection](../../doc/controllers/connection.md#restapi-v2-remove-table-from-connection)
+* [Restapi V2 Search Connection](../../doc/controllers/connection.md#restapi-v2-search-connection)
+* [Restapi V2 Get Connection Tables](../../doc/controllers/connection.md#restapi-v2-get-connection-tables)
+* [Restapi V2 Get Connection Table Columns](../../doc/controllers/connection.md#restapi-v2-get-connection-table-columns)
 
 
-# Get Connection
+# Restapi V2 Get Connection
 
-To get the details of a specific connection use this endpoint.
-
-Permission: Requires datamanagement privilege
+To get the details of a specific connection use this endpoint
 
 ```java
-CompletableFuture<ConnectionResponse> getConnectionAsync(
+CompletableFuture<ConnectionResponse> restapiV2GetConnectionAsync(
     final String id)
 ```
 
@@ -48,7 +46,7 @@ CompletableFuture<ConnectionResponse> getConnectionAsync(
 ```java
 String id = "id0";
 
-connectionController.getConnectionAsync(id).thenAccept(result -> {
+connectionController.restapiV2GetConnectionAsync(id).thenAccept(result -> {
     // TODO success callback handler
 }).exceptionally(exception -> {
     // TODO failure callback handler
@@ -60,19 +58,17 @@ connectionController.getConnectionAsync(id).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Get Connection Database
+# Restapi V2 Get Connection Database
 
 To get the list of databases for a connection, use this endpoint.
 
 The response will include databases from the data platform corresponding to the connection id provided.
 
-Permission: Requires datamanagement privilege
-
 ```java
-CompletableFuture<List<String>> getConnectionDatabaseAsync(
+CompletableFuture<List<String>> restapiV2GetConnectionDatabaseAsync(
     final String id)
 ```
 
@@ -91,7 +87,7 @@ CompletableFuture<List<String>> getConnectionDatabaseAsync(
 ```java
 String id = "id0";
 
-connectionController.getConnectionDatabaseAsync(id).thenAccept(result -> {
+connectionController.restapiV2GetConnectionDatabaseAsync(id).thenAccept(result -> {
     // TODO success callback handler
 }).exceptionally(exception -> {
     // TODO failure callback handler
@@ -103,125 +99,18 @@ connectionController.getConnectionDatabaseAsync(id).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Get Connection Tables
-
-To get the details of tables from a connection, use this endpoint.
-
-You can get the details of tables in the data platform for the connection id provided.
-
-Permission: Requires datamanagement privilege
-
-```java
-CompletableFuture<ConnectionTableResponse> getConnectionTablesAsync(
-    final TspublicRestV2ConnectionTableRequest body)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `body` | [`TspublicRestV2ConnectionTableRequest`](../../doc/models/tspublic-rest-v2-connection-table-request.md) | Body, Required | - |
-
-## Response Type
-
-[`ConnectionTableResponse`](../../doc/models/connection-table-response.md)
-
-## Example Usage
-
-```java
-TspublicRestV2ConnectionTableRequest body = new TspublicRestV2ConnectionTableRequest();
-body.setId("id6");
-
-connectionController.getConnectionTablesAsync(body).thenAccept(result -> {
-    // TODO success callback handler
-}).exceptionally(exception -> {
-    // TODO failure callback handler
-    return null;
-});
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
-
-
-# Get Connection Table Columns
-
-To get the details of columns in a table associated to a connection, use this endpoint.
-
-You can get the columns of any table available in the data platform for the connection id provided.
-
-Permission: Requires datamanagement privilege
-
-```java
-CompletableFuture<ConnectionTableColumnsResponse> getConnectionTableColumnsAsync(
-    final TspublicRestV2ConnectionTablecoloumnRequest body)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `body` | [`TspublicRestV2ConnectionTablecoloumnRequest`](../../doc/models/tspublic-rest-v2-connection-tablecoloumn-request.md) | Body, Required | - |
-
-## Response Type
-
-[`ConnectionTableColumnsResponse`](../../doc/models/connection-table-columns-response.md)
-
-## Example Usage
-
-```java
-TspublicRestV2ConnectionTablecoloumnRequest body = new TspublicRestV2ConnectionTablecoloumnRequest();
-body.setId("id6");
-body.setTable(new LinkedList<>());
-
-ConnectionTableColumnsInput bodyTable0 = new ConnectionTableColumnsInput();
-bodyTable0.setDbName("dbName8");
-bodyTable0.setSchemaName("schemaName4");
-bodyTable0.setName("name0");
-body.getTable().add(bodyTable0);
-
-ConnectionTableColumnsInput bodyTable1 = new ConnectionTableColumnsInput();
-bodyTable1.setDbName("dbName9");
-bodyTable1.setSchemaName("schemaName5");
-bodyTable1.setName("name1");
-body.getTable().add(bodyTable1);
-
-ConnectionTableColumnsInput bodyTable2 = new ConnectionTableColumnsInput();
-bodyTable2.setDbName("dbName0");
-bodyTable2.setSchemaName("schemaName6");
-bodyTable2.setName("name2");
-body.getTable().add(bodyTable2);
-
-
-connectionController.getConnectionTableColumnsAsync(body).thenAccept(result -> {
-    // TODO success callback handler
-}).exceptionally(exception -> {
-    // TODO failure callback handler
-    return null;
-});
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
-
-
-# Create Connection
+# Restapi V2 Create Connection
 
 To programmatically create a connection in the ThoughtSpot system use this API endpoint.
-
-Permission: Requires datamanagement privilege
+Using this API, you can create a connection and assign groups.
+To create a connection, you require admin connection privileges.
+All connections created in the ThoughtSpot system are added to ALL_GROUP
 
 ```java
-CompletableFuture<CreateConnectionResponse> createConnectionAsync(
+CompletableFuture<CreateConnectionResponse> restapiV2CreateConnectionAsync(
     final TspublicRestV2ConnectionCreateRequest body)
 ```
 
@@ -239,11 +128,11 @@ CompletableFuture<CreateConnectionResponse> createConnectionAsync(
 
 ```java
 TspublicRestV2ConnectionCreateRequest body = new TspublicRestV2ConnectionCreateRequest();
-body.setType(CreateConnectionTypeEnum.TERADATA);
+body.setType(Type14Enum.ORACLE_ADW);
 body.setName("name6");
 body.setConfiguration("configuration0");
 
-connectionController.createConnectionAsync(body).thenAccept(result -> {
+connectionController.restapiV2CreateConnectionAsync(body).thenAccept(result -> {
     // TODO success callback handler
 }).exceptionally(exception -> {
     // TODO failure callback handler
@@ -255,17 +144,17 @@ connectionController.createConnectionAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Update Connection
+# Restapi V2 Update Connection
 
 You can use this endpoint to programmatically modify an existing connection
-
-Permission: Requires datamanagement privilege
+To modify a connection, you require admin connection privileges.
+At least one of Connection Id or connectionname is mandatory. When both are given, then connection id will be considered and connectionname will be updated
 
 ```java
-CompletableFuture<Boolean> updateConnectionAsync(
+CompletableFuture<Boolean> restapiV2UpdateConnectionAsync(
     final TspublicRestV2ConnectionUpdateRequest body)
 ```
 
@@ -286,7 +175,7 @@ TspublicRestV2ConnectionUpdateRequest body = new TspublicRestV2ConnectionUpdateR
 body.setId("id6");
 body.setConfiguration("configuration0");
 
-connectionController.updateConnectionAsync(body).thenAccept(result -> {
+connectionController.restapiV2UpdateConnectionAsync(body).thenAccept(result -> {
     // TODO success callback handler
 }).exceptionally(exception -> {
     // TODO failure callback handler
@@ -298,17 +187,15 @@ connectionController.updateConnectionAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Delete Connection
+# Restapi V2 Delete Connection
 
 To remove a connection from the ThoughtSpot system, use this endpoint.
 
-Permission: Requires datamanagement privilege
-
 ```java
-CompletableFuture<Boolean> deleteConnectionAsync(
+CompletableFuture<Boolean> restapiV2DeleteConnectionAsync(
     final List<String> id)
 ```
 
@@ -328,7 +215,7 @@ CompletableFuture<Boolean> deleteConnectionAsync(
 List<String> id = new LinkedList<>();
 id.add("id0");
 
-connectionController.deleteConnectionAsync(id).thenAccept(result -> {
+connectionController.restapiV2DeleteConnectionAsync(id).thenAccept(result -> {
     // TODO success callback handler
 }).exceptionally(exception -> {
     // TODO failure callback handler
@@ -340,17 +227,17 @@ connectionController.deleteConnectionAsync(id).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Add Table to Connection
+# Restapi V2 Add Table to Connection
 
-To programmatically add table to an existing connection, use this endpoint
-
-Permission: Requires datamanagement privilege
+To programmatically add table to an existing connection use this endpoint.
+When you assign groups to a connection, the connection inherits the privileges assigned to those groups.
+At least one of Connection Id or connectionname is mandatory. When both are given, then connection id will be considered.
 
 ```java
-CompletableFuture<Boolean> addTableToConnectionAsync(
+CompletableFuture<Boolean> restapiV2AddTableToConnectionAsync(
     final TspublicRestV2ConnectionAddtableRequest body)
 ```
 
@@ -426,7 +313,7 @@ bodyTable2.getColumns().add(bodyTable2Columns2);
 body.getTable().add(bodyTable2);
 
 
-connectionController.addTableToConnectionAsync(body).thenAccept(result -> {
+connectionController.restapiV2AddTableToConnectionAsync(body).thenAccept(result -> {
     // TODO success callback handler
 }).exceptionally(exception -> {
     // TODO failure callback handler
@@ -438,17 +325,17 @@ connectionController.addTableToConnectionAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Remove Table From Connection
+# Restapi V2 Remove Table From Connection
 
-To programmatically remove a table from a connection, use API endpoint.
-
-Permission: Requires datamanagement privilege
+To programmatically remove a table from a connection use API endpoint.
+The API removes only the connection association. It does not delete the connection or group from the Thoughtspot system.
+At least one of id or name of connection is required. When both are given connection id will be considered.
 
 ```java
-CompletableFuture<Boolean> removeTableFromConnectionAsync(
+CompletableFuture<Boolean> restapiV2RemoveTableFromConnectionAsync(
     final TspublicRestV2ConnectionRemovetableRequest body)
 ```
 
@@ -479,7 +366,7 @@ TableInput bodyTable2 = new TableInput();
 body.getTable().add(bodyTable2);
 
 
-connectionController.removeTableFromConnectionAsync(body).thenAccept(result -> {
+connectionController.restapiV2RemoveTableFromConnectionAsync(body).thenAccept(result -> {
     // TODO success callback handler
 }).exceptionally(exception -> {
     // TODO failure callback handler
@@ -491,17 +378,15 @@ connectionController.removeTableFromConnectionAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Search Connection
+# Restapi V2 Search Connection
 
 To get the details of a specific connection or all connections in the ThoughtSpot system use this end point.
 
-Permission: Requires datamanagement privilege
-
 ```java
-CompletableFuture<List<ConnectionResponse>> searchConnectionAsync(
+CompletableFuture<List<ConnectionResponse>> restapiV2SearchConnectionAsync(
     final TspublicRestV2ConnectionSearchRequest body)
 ```
 
@@ -519,9 +404,9 @@ CompletableFuture<List<ConnectionResponse>> searchConnectionAsync(
 
 ```java
 TspublicRestV2ConnectionSearchRequest body = new TspublicRestV2ConnectionSearchRequest();
-body.setType(SearchConnectionTypeEnum.TERADATA);
+body.setType(Type15Enum.ORACLE_ADW);
 
-connectionController.searchConnectionAsync(body).thenAccept(result -> {
+connectionController.restapiV2SearchConnectionAsync(body).thenAccept(result -> {
     // TODO success callback handler
 }).exceptionally(exception -> {
     // TODO failure callback handler
@@ -533,5 +418,109 @@ connectionController.searchConnectionAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+
+
+# Restapi V2 Get Connection Tables
+
+To get the details of tables from a connection, use this endpoint.
+
+You can get the details of tables in the data platform for the connection id provided.
+
+```java
+CompletableFuture<ConnectionTableResponse> restapiV2GetConnectionTablesAsync(
+    final TspublicRestV2ConnectionTableRequest body)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`TspublicRestV2ConnectionTableRequest`](../../doc/models/tspublic-rest-v2-connection-table-request.md) | Body, Required | - |
+
+## Response Type
+
+[`ConnectionTableResponse`](../../doc/models/connection-table-response.md)
+
+## Example Usage
+
+```java
+TspublicRestV2ConnectionTableRequest body = new TspublicRestV2ConnectionTableRequest();
+body.setId("id6");
+
+connectionController.restapiV2GetConnectionTablesAsync(body).thenAccept(result -> {
+    // TODO success callback handler
+}).exceptionally(exception -> {
+    // TODO failure callback handler
+    return null;
+});
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+
+
+# Restapi V2 Get Connection Table Columns
+
+To get the details of columns in a table associated to a connection, use this endpoint.
+
+You can get the columns of any table available in the data platform for the connection id provided.
+
+```java
+CompletableFuture<ConnectionTableColumnsResponse> restapiV2GetConnectionTableColumnsAsync(
+    final TspublicRestV2ConnectionTablecoloumnRequest body)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`TspublicRestV2ConnectionTablecoloumnRequest`](../../doc/models/tspublic-rest-v2-connection-tablecoloumn-request.md) | Body, Required | - |
+
+## Response Type
+
+[`ConnectionTableColumnsResponse`](../../doc/models/connection-table-columns-response.md)
+
+## Example Usage
+
+```java
+TspublicRestV2ConnectionTablecoloumnRequest body = new TspublicRestV2ConnectionTablecoloumnRequest();
+body.setId("id6");
+body.setTable(new LinkedList<>());
+
+ConnectionTableColumnsInput bodyTable0 = new ConnectionTableColumnsInput();
+bodyTable0.setDbName("dbName8");
+bodyTable0.setSchemaName("schemaName4");
+bodyTable0.setName("name0");
+body.getTable().add(bodyTable0);
+
+ConnectionTableColumnsInput bodyTable1 = new ConnectionTableColumnsInput();
+bodyTable1.setDbName("dbName9");
+bodyTable1.setSchemaName("schemaName5");
+bodyTable1.setName("name1");
+body.getTable().add(bodyTable1);
+
+ConnectionTableColumnsInput bodyTable2 = new ConnectionTableColumnsInput();
+bodyTable2.setDbName("dbName0");
+bodyTable2.setSchemaName("schemaName6");
+bodyTable2.setName("name2");
+body.getTable().add(bodyTable2);
+
+
+connectionController.restapiV2GetConnectionTableColumnsAsync(body).thenAccept(result -> {
+    // TODO success callback handler
+}).exceptionally(exception -> {
+    // TODO failure callback handler
+    return null;
+});
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 

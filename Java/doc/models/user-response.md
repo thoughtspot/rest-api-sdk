@@ -16,6 +16,7 @@
 | `Mail` | `String` | Optional | Email of the user account | String getMail() | setMail(String mail) |
 | `Groups` | [`List<GroupNameAndID>`](../../doc/models/group-name-and-id.md) | Optional | Name of the group to which user account is added | List<GroupNameAndID> getGroups() | setGroups(List<GroupNameAndID> groups) |
 | `Privileges` | `List<String>` | Optional | Privileges assigned to user account | List<String> getPrivileges() | setPrivileges(List<String> privileges) |
+| `Orgs` | [`List<OrgType>`](../../doc/models/org-type.md) | Optional | The organizations that user belongs to | List<OrgType> getOrgs() | setOrgs(List<OrgType> orgs) |
 | `Tags` | `List<String>` | Optional | Tags assigned to the user | List<String> getTags() | setTags(List<String> tags) |
 | `State` | `String` | Optional | Indicates if the user account is active or inactive | String getState() | setState(String state) |
 | `NotifyOnShare` | `Boolean` | Optional | Indicates if the email should be sent when object is shared with the user | Boolean getNotifyOnShare() | setNotifyOnShare(Boolean notifyOnShare) |
@@ -52,6 +53,7 @@
   "mail": null,
   "groups": null,
   "privileges": null,
+  "orgs": null,
   "tags": null,
   "state": null,
   "notifyOnShare": null,

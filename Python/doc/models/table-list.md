@@ -14,10 +14,10 @@
 | `id` | `string` | Optional | GUID of the table |
 | `database_stripe` | `string` | Optional | Name of the database to which the table belongs |
 | `schema_stripe` | `string` | Optional | Name of the schema to which the table belongs |
-| `is_external` | [`TableListIsExternalEnum`](../../doc/models/table-list-is-external-enum.md) | Optional | - |
-| `is_deprecated` | [`TableListIsDeprecatedEnum`](../../doc/models/table-list-is-deprecated-enum.md) | Optional | Indicates if the table is deprecated |
-| `is_deleted` | [`TableListIsDeletedEnum`](../../doc/models/table-list-is-deleted-enum.md) | Optional | Indicates if the table is deleted |
-| `is_hidden` | [`TableListIsHiddenEnum`](../../doc/models/table-list-is-hidden-enum.md) | Optional | Indicates if the table is hideen |
+| `is_external` | `bool` | Optional | - |
+| `is_deprecated` | `bool` | Optional | Indicates if the table is deprecated |
+| `is_deleted` | `bool` | Optional | Indicates if the table is deleted |
+| `is_hidden` | `bool` | Optional | Indicates if the table is hideen |
 | `index_version` | `float` | Optional | - |
 | `generation_num` | `float` | Optional | - |
 | `created` | `string` | Optional | Date and time when the table was created |

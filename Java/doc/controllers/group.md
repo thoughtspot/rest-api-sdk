@@ -10,29 +10,26 @@ GroupController groupController = client.getGroupController();
 
 ## Methods
 
-* [Get Group](../../doc/controllers/group.md#get-group)
-* [Create Group](../../doc/controllers/group.md#create-group)
-* [Update Group](../../doc/controllers/group.md#update-group)
-* [Delete Group](../../doc/controllers/group.md#delete-group)
-* [Add Privileges to Group](../../doc/controllers/group.md#add-privileges-to-group)
-* [Remove Privileges From Group](../../doc/controllers/group.md#remove-privileges-from-group)
-* [Add Users to Group](../../doc/controllers/group.md#add-users-to-group)
-* [Remove Users From Group](../../doc/controllers/group.md#remove-users-from-group)
-* [Add Groups to Group](../../doc/controllers/group.md#add-groups-to-group)
-* [Remove Groups From Group](../../doc/controllers/group.md#remove-groups-from-group)
-* [Search Groups](../../doc/controllers/group.md#search-groups)
+* [Restapi V2 Get Group](../../doc/controllers/group.md#restapi-v2-get-group)
+* [Restapi V2 Create Group](../../doc/controllers/group.md#restapi-v2-create-group)
+* [Restapi V2 Update Group](../../doc/controllers/group.md#restapi-v2-update-group)
+* [Restapi V2 Delete Group](../../doc/controllers/group.md#restapi-v2-delete-group)
+* [Restapi V2 Add Privileges to Group](../../doc/controllers/group.md#restapi-v2-add-privileges-to-group)
+* [Restapi V2 Remove Privileges From Group](../../doc/controllers/group.md#restapi-v2-remove-privileges-from-group)
+* [Restapi V2 Add Users to Group](../../doc/controllers/group.md#restapi-v2-add-users-to-group)
+* [Restapi V2 Remove Users From Group](../../doc/controllers/group.md#restapi-v2-remove-users-from-group)
+* [Restapi V2 Add Groups to Group](../../doc/controllers/group.md#restapi-v2-add-groups-to-group)
+* [Restapi V2 Remove Groups From Group](../../doc/controllers/group.md#restapi-v2-remove-groups-from-group)
+* [Restapi V2 Search Groups](../../doc/controllers/group.md#restapi-v2-search-groups)
 
 
-# Get Group
+# Restapi V2 Get Group
 
 To get the details of a specific group by name or id, use this endpoint.
-
-At least one value needed. When both are given,then id will be considered to fetch user information.
-
-Permission: Requires administration privilege
+At Least one value needed.  When both are given id will be considered to fetch user information.
 
 ```java
-CompletableFuture<GroupResponse> getGroupAsync(
+CompletableFuture<GroupResponse> restapiV2GetGroupAsync(
     final String name,
     final String id)
 ```
@@ -42,7 +39,7 @@ CompletableFuture<GroupResponse> getGroupAsync(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `name` | `String` | Query, Optional | Name of the group |
-| `id` | `String` | Query, Optional | The GUID of the group |
+| `id` | `String` | Query, Optional | The GUID of the group to query. |
 
 ## Response Type
 
@@ -51,7 +48,7 @@ CompletableFuture<GroupResponse> getGroupAsync(
 ## Example Usage
 
 ```java
-groupController.getGroupAsync(null, null).thenAccept(result -> {
+groupController.restapiV2GetGroupAsync(null, null).thenAccept(result -> {
     // TODO success callback handler
 }).exceptionally(exception -> {
     // TODO failure callback handler
@@ -63,25 +60,15 @@ groupController.getGroupAsync(null, null).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Create Group
+# Restapi V2 Create Group
 
-To programmatically create a group in the ThoughtSpot system, use this API endpoint.
-
-Using this API, you can create a group and assign privileges and users.
-
-For ease of user management and access control, ThoughtSpot administrations can create groups and assign privileges to these groups.
-
-The privileges determine the actions that the users belonging to a group are allowed to do.
-
-ThoughtSpot also has a default group called ALL_GROUP. When you create new group in ThoughtSpot, they are automatically added to ALL_GROUP. You cannot delete the ALL_GROUP or remove members from it.
-
-Permission: Requires administration privilege
+To programmatically create a group in the ThoughtSpot system, use this API endpoint. Using this API, you can create a group and assign privileges and users. For ease of user management and access control, ThoughtSpot administrators can create groups and assign privileges to these groups. The privileges determine the actions that the users belonging to a group are allowed to do. ThoughtSpot also has a default group called ALL_GROUP. When you create new group in ThoughtSpot, they are automatically added to ALL_GROUP. You cannot delete the ALL_GROUP or remove members from it.
 
 ```java
-CompletableFuture<GroupResponse> createGroupAsync(
+CompletableFuture<GroupResponse> restapiV2CreateGroupAsync(
     final TspublicRestV2GroupCreateRequest body)
 ```
 
@@ -102,7 +89,7 @@ TspublicRestV2GroupCreateRequest body = new TspublicRestV2GroupCreateRequest();
 body.setName("name6");
 body.setDisplayName("displayName6");
 
-groupController.createGroupAsync(body).thenAccept(result -> {
+groupController.restapiV2CreateGroupAsync(body).thenAccept(result -> {
     // TODO success callback handler
 }).exceptionally(exception -> {
     // TODO failure callback handler
@@ -114,21 +101,17 @@ groupController.createGroupAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Update Group
+# Restapi V2 Update Group
 
-You can use this endpoint to programmatically modify an existing group.
-
-To modify a group, you require admin user privileges.
-
-At least one of id or name is required to update the group. When both are given, then id will be considered and group name will be updated.
-
-Permission: Requires administration privilege
+You can use this endpoint to programmatically modify an existing user account.
+To modify a user, you require admin user privileges.
+At least one of User Id or username is mandatory. When both are given, then user id will be considered and username will be updated
 
 ```java
-CompletableFuture<Boolean> updateGroupAsync(
+CompletableFuture<Boolean> restapiV2UpdateGroupAsync(
     final TspublicRestV2GroupUpdateRequest body)
 ```
 
@@ -147,7 +130,7 @@ CompletableFuture<Boolean> updateGroupAsync(
 ```java
 TspublicRestV2GroupUpdateRequest body = new TspublicRestV2GroupUpdateRequest();
 
-groupController.updateGroupAsync(body).thenAccept(result -> {
+groupController.restapiV2UpdateGroupAsync(body).thenAccept(result -> {
     // TODO success callback handler
 }).exceptionally(exception -> {
     // TODO failure callback handler
@@ -159,19 +142,15 @@ groupController.updateGroupAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Delete Group
+# Restapi V2 Delete Group
 
-To remove a group from the ThoughtSpot system, send a DELETE request to this endpoint.
-
-At least one value needed. When both are given,then user id will be considered to fetch user information.
-
-Permission: Requires administration privilege
+To remove a group from the ThoughtSpot system, send a DELETE request to this endpoint. At Least one value needed.  When both are given user id will be considered to fetch user information.
 
 ```java
-CompletableFuture<Boolean> deleteGroupAsync(
+CompletableFuture<Boolean> restapiV2DeleteGroupAsync(
     final String name,
     final String id)
 ```
@@ -190,7 +169,7 @@ CompletableFuture<Boolean> deleteGroupAsync(
 ## Example Usage
 
 ```java
-groupController.deleteGroupAsync(null, null).thenAccept(result -> {
+groupController.restapiV2DeleteGroupAsync(null, null).thenAccept(result -> {
     // TODO success callback handler
 }).exceptionally(exception -> {
     // TODO failure callback handler
@@ -202,21 +181,17 @@ groupController.deleteGroupAsync(null, null).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Add Privileges to Group
+# Restapi V2 Add Privileges to Group
 
 To programmatically add privileges to an existing group, use API endpoint.
-
-When you assign privileges to a group, all the users under to this group inherits the privileges assigned to that group.
-
-At least one of id or name of group is required. When both are given,then user id will be considered.
-
-Permission: Requires administration privilege
+When you assign privileges to a group,  all the users under to this group inherits the privileges assigned to that group.
+At least one of id or name of group is required. When both are given user id will be considered.
 
 ```java
-CompletableFuture<Boolean> addPrivilegesToGroupAsync(
+CompletableFuture<Boolean> restapiV2AddPrivilegesToGroupAsync(
     final TspublicRestV2GroupAddprivilegeRequest body)
 ```
 
@@ -235,7 +210,7 @@ CompletableFuture<Boolean> addPrivilegesToGroupAsync(
 ```java
 TspublicRestV2GroupAddprivilegeRequest body = new TspublicRestV2GroupAddprivilegeRequest();
 
-groupController.addPrivilegesToGroupAsync(body).thenAccept(result -> {
+groupController.restapiV2AddPrivilegesToGroupAsync(body).thenAccept(result -> {
     // TODO success callback handler
 }).exceptionally(exception -> {
     // TODO failure callback handler
@@ -247,21 +222,15 @@ groupController.addPrivilegesToGroupAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Remove Privileges From Group
+# Restapi V2 Remove Privileges From Group
 
-To programmatically remove privileges from a group, use API endpoint.
-
-The API removes only the privilege association. It does not delete the privilege or group from the Thoughtspot system.
-
-At least one of id or name of group is required. When both are given,then user id will be considered.
-
-Permission: Requires administration privilege
+To programmatically remove privileges from a group, use API endpoint. The API removes only the privilege association. It does not delete the privilege or group from the Thoughtspot system. At least one of id or name of group is required. When both are given user id will be considered.
 
 ```java
-CompletableFuture<Boolean> removePrivilegesFromGroupAsync(
+CompletableFuture<Boolean> restapiV2RemovePrivilegesFromGroupAsync(
     final TspublicRestV2GroupRemoveprivilegeRequest body)
 ```
 
@@ -280,7 +249,7 @@ CompletableFuture<Boolean> removePrivilegesFromGroupAsync(
 ```java
 TspublicRestV2GroupRemoveprivilegeRequest body = new TspublicRestV2GroupRemoveprivilegeRequest();
 
-groupController.removePrivilegesFromGroupAsync(body).thenAccept(result -> {
+groupController.restapiV2RemovePrivilegesFromGroupAsync(body).thenAccept(result -> {
     // TODO success callback handler
 }).exceptionally(exception -> {
     // TODO failure callback handler
@@ -292,21 +261,15 @@ groupController.removePrivilegesFromGroupAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Add Users to Group
+# Restapi V2 Add Users to Group
 
-To programmatically add existing ThoughtSpot users to a group, use this API endpoint.
-
-hen you assign users to a group, the users inherits the privileges assigned to that group.
-
-At least one of id or name of the group is required. When both are given,then user id will be considered.
-
-Permission: Requires administration privilege
+To programmatically add existing ThoughtSpot users to a group, use this API endpoint. When you assign users to a group, the users inherits the privileges assigned to that group. At least one of id or name of the group is required. When both are given user id will be considered.
 
 ```java
-CompletableFuture<Boolean> addUsersToGroupAsync(
+CompletableFuture<Boolean> restapiV2AddUsersToGroupAsync(
     final TspublicRestV2GroupAdduserRequest body)
 ```
 
@@ -330,7 +293,7 @@ UserNameAndIDInput bodyUsers0 = new UserNameAndIDInput();
 body.getUsers().add(bodyUsers0);
 
 
-groupController.addUsersToGroupAsync(body).thenAccept(result -> {
+groupController.restapiV2AddUsersToGroupAsync(body).thenAccept(result -> {
     // TODO success callback handler
 }).exceptionally(exception -> {
     // TODO failure callback handler
@@ -342,21 +305,15 @@ groupController.addUsersToGroupAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Remove Users From Group
+# Restapi V2 Remove Users From Group
 
-To programmatically remove users from a group, use API endpoint.
-
-The API removes only the user association. It does not delete the users or group from the Thoughtspot system.
-
-At least one of id or name of group is required. When both are given,then user id will be considered.
-
-Permission: Requires administration privilege
+To programmatically remove users from a group, use API endpoint.The API removes only the user association. It does not delete the users or group from the Thoughtspot system. At least one of id or name of group is required. When both are given user id will be considered.
 
 ```java
-CompletableFuture<Boolean> removeUsersFromGroupAsync(
+CompletableFuture<Boolean> restapiV2RemoveUsersFromGroupAsync(
     final TspublicRestV2GroupRemoveuserRequest body)
 ```
 
@@ -380,7 +337,7 @@ UserNameAndIDInput bodyUsers0 = new UserNameAndIDInput();
 body.getUsers().add(bodyUsers0);
 
 
-groupController.removeUsersFromGroupAsync(body).thenAccept(result -> {
+groupController.restapiV2RemoveUsersFromGroupAsync(body).thenAccept(result -> {
     // TODO success callback handler
 }).exceptionally(exception -> {
     // TODO failure callback handler
@@ -392,21 +349,15 @@ groupController.removeUsersFromGroupAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Add Groups to Group
+# Restapi V2 Add Groups to Group
 
-To programmatically add existing groups to a group, use API endpoint.
-
-When you assign groups to a group, the group inherits the privileges assigned to those groups.
-
-At least one of id or name of group is required. When both are given,then user id will be considered.
-
-Permission: Requires administration privilege
+To programmatically add existing groups to a group, use API endpoint. When you assign groups to a group, the group inherits the privileges assigned to those groups. At least one of id or name of group is required. When both are given user id will be considered.
 
 ```java
-CompletableFuture<Boolean> addGroupsToGroupAsync(
+CompletableFuture<Boolean> restapiV2AddGroupsToGroupAsync(
     final TspublicRestV2GroupAddgroupRequest body)
 ```
 
@@ -430,7 +381,7 @@ GroupNameAndIDInput bodyGroups0 = new GroupNameAndIDInput();
 body.getGroups().add(bodyGroups0);
 
 
-groupController.addGroupsToGroupAsync(body).thenAccept(result -> {
+groupController.restapiV2AddGroupsToGroupAsync(body).thenAccept(result -> {
     // TODO success callback handler
 }).exceptionally(exception -> {
     // TODO failure callback handler
@@ -442,21 +393,15 @@ groupController.addGroupsToGroupAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Remove Groups From Group
+# Restapi V2 Remove Groups From Group
 
-To programmatically remove groups from a group, use API endpoint.
-
-The API removes only the group association. It does not delete the group from the Thoughtspot system.
-
-At least one of id or name of group is required. When both are given,then user id will be considered.
-
-Permission: Requires administration privilege
+To programmatically remove groups from a group, use API endpoint.The API removes only the group association. It does not delete the group from the Thoughtspot system. At least one of id or name of group is required. When both are given user id will be considered.
 
 ```java
-CompletableFuture<Boolean> removeGroupsFromGroupAsync(
+CompletableFuture<Boolean> restapiV2RemoveGroupsFromGroupAsync(
     final TspublicRestV2GroupRemovegroupRequest body)
 ```
 
@@ -480,7 +425,7 @@ GroupNameAndIDInput bodyGroups0 = new GroupNameAndIDInput();
 body.getGroups().add(bodyGroups0);
 
 
-groupController.removeGroupsFromGroupAsync(body).thenAccept(result -> {
+groupController.restapiV2RemoveGroupsFromGroupAsync(body).thenAccept(result -> {
     // TODO success callback handler
 }).exceptionally(exception -> {
     // TODO failure callback handler
@@ -492,19 +437,15 @@ groupController.removeGroupsFromGroupAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Search Groups
+# Restapi V2 Search Groups
 
-To get the details of a specific group account or all groups in the ThoughtSpot system use this end point.
-
-If no inputs are provided, then all groups are included in the response.
-
-Permission: Requires administration privilege
+To get the details of a specific group account or all groups in the ThoughtSpot system, use this end point.
 
 ```java
-CompletableFuture<Object> searchGroupsAsync(
+CompletableFuture<Object> restapiV2SearchGroupsAsync(
     final TspublicRestV2GroupSearchRequest body)
 ```
 
@@ -523,7 +464,7 @@ CompletableFuture<Object> searchGroupsAsync(
 ```java
 TspublicRestV2GroupSearchRequest body = new TspublicRestV2GroupSearchRequest();
 
-groupController.searchGroupsAsync(body).thenAccept(result -> {
+groupController.restapiV2SearchGroupsAsync(body).thenAccept(result -> {
     // TODO success callback handler
 }).exceptionally(exception -> {
     // TODO failure callback handler
@@ -535,5 +476,5 @@ groupController.searchGroupsAsync(body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 

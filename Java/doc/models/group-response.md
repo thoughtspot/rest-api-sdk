@@ -15,6 +15,7 @@
 | `Visibility` | `String` | Optional | Visibility of the group | String getVisibility() | setVisibility(String visibility) |
 | `Description` | `String` | Optional | Description of the group | String getDescription() | setDescription(String description) |
 | `Privileges` | `List<String>` | Optional | Privileges assigned to the group | List<String> getPrivileges() | setPrivileges(List<String> privileges) |
+| `Orgs` | [`List<OrgType>`](../../doc/models/org-type.md) | Optional | The organizations that user belongs to | List<OrgType> getOrgs() | setOrgs(List<OrgType> orgs) |
 | `Groups` | [`List<GroupNameAndID>`](../../doc/models/group-name-and-id.md) | Optional | Name of the group to which is added | List<GroupNameAndID> getGroups() | setGroups(List<GroupNameAndID> groups) |
 | `Users` | [`List<UserNameAndID>`](../../doc/models/user-name-and-id.md) | Optional | User Group Information by Id or Name. | List<UserNameAndID> getUsers() | setUsers(List<UserNameAndID> users) |
 | `AssignedLiveboards` | [`List<LiveboardNameAndID>`](../../doc/models/liveboard-name-and-id.md) | Optional | Liveboards assigned to the group | List<LiveboardNameAndID> getAssignedLiveboards() | setAssignedLiveboards(List<LiveboardNameAndID> assignedLiveboards) |
@@ -49,6 +50,7 @@
   "visibility": null,
   "description": null,
   "privileges": null,
+  "orgs": null,
   "groups": null,
   "users": null,
   "assignedLiveboards": null,

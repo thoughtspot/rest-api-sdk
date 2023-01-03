@@ -9,12 +9,12 @@ const materializationController = new MaterializationController(client);
 `MaterializationController`
 
 
-# Refresh Materialized View
+# Restapi V2 Refresh Materialized View
 
 Use this endpoint to refresh data in the materialized view by running the query associated with it
 
 ```ts
-async refreshMaterializedView(
+async restapiV2RefreshMaterializedView(
   body: TspublicRestV2MaterializationRefreshviewRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<unknown>>
@@ -40,7 +40,7 @@ const body: TspublicRestV2MaterializationRefreshviewRequest = {
 };
 
 try {
-  const { result, ...httpResponse } = await materializationController.refreshMaterializedView(body);
+  const { result, ...httpResponse } = await materializationController.restapiV2RefreshMaterializedView(body);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch(error) {
@@ -55,5 +55,5 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
+| 500 | Operation failed | [`ErrorResponseError`](../../doc/models/error-response-error.md) |
 

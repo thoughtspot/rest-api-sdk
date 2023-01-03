@@ -10,56 +10,19 @@ DatabaseController databaseController = client.DatabaseController;
 
 ## Methods
 
-* [Get Databases](../../doc/controllers/database.md#get-databases)
-* [Get Schemas](../../doc/controllers/database.md#get-schemas)
-* [Get Tables](../../doc/controllers/database.md#get-tables)
-* [Create Table](../../doc/controllers/database.md#create-table)
-* [Run Query](../../doc/controllers/database.md#run-query)
+* [Restapi V2 Get Schemas](../../doc/controllers/database.md#restapi-v2-get-schemas)
+* [Restapi V2 Get Tables](../../doc/controllers/database.md#restapi-v2-get-tables)
+* [Restapi V2 Get Table Details](../../doc/controllers/database.md#restapi-v2-get-table-details)
+* [Restapi V2 Create Table](../../doc/controllers/database.md#restapi-v2-create-table)
+* [Restapi V2 Run Query](../../doc/controllers/database.md#restapi-v2-run-query)
 
 
-# Get Databases
-
-Note: This endpoint is applicable only for on-prem deployments
-
-To list all the databases in Falcon, use this endpoint.
-
-Permission: Requires administration privilege
-
-```csharp
-GetDatabasesAsync()
-```
-
-## Response Type
-
-`Task<List<string>>`
-
-## Example Usage
-
-```csharp
-try
-{
-    List<string> result = await databaseController.GetDatabasesAsync();
-}
-catch (ApiException e){};
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
-
-
-# Get Schemas
-
-Note: This endpoint is applicable only for on-prem deployments
+# Restapi V2 Get Schemas
 
 To list all the schemas in a database in Falcon, use this endpoint.
 
-Permission: Requires administration privilege
-
 ```csharp
-GetSchemasAsync(
+RestapiV2GetSchemasAsync(
     string database)
 ```
 
@@ -80,7 +43,7 @@ string database = "database0";
 
 try
 {
-    List<string> result = await databaseController.GetSchemasAsync(database);
+    List<string> result = await databaseController.RestapiV2GetSchemasAsync(database);
 }
 catch (ApiException e){};
 ```
@@ -89,19 +52,15 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Get Tables
-
-Note: This endpoint is applicable only for on-prem deployments.
+# Restapi V2 Get Tables
 
 To list all the tables in a schema of a database in Falcon, use this endpoint.
 
-Permission: Requires administration privilege
-
 ```csharp
-GetTablesAsync(
+RestapiV2GetTablesAsync(
     string database,
     string schema)
 ```
@@ -125,7 +84,7 @@ string schema = "schema2";
 
 try
 {
-    List<string> result = await databaseController.GetTablesAsync(database, schema);
+    List<string> result = await databaseController.RestapiV2GetTablesAsync(database, schema);
 }
 catch (ApiException e){};
 ```
@@ -134,19 +93,60 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Create Table
+# Restapi V2 Get Table Details
 
 Note: This endpoint is applicable only for on-prem deployments.
 
-To create a table in Falcon, use this endpoint.
-
-Permission: Requires administration privilege
+To provide details of a table in a schema of a database in Falcon, use this endpoint.
 
 ```csharp
-CreateTableAsync(
+RestapiV2GetTableDetailsAsync(
+    string database,
+    string table,
+    string schema = null)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `database` | `string` | Query, Required | Name of the Falcon database |
+| `table` | `string` | Query, Required | Name of the table in Falcon database |
+| `schema` | `string` | Query, Optional | Name of the schema in Falcon database |
+
+## Response Type
+
+`Task<object>`
+
+## Example Usage
+
+```csharp
+string database = "database0";
+string table = "table2";
+
+try
+{
+    object result = await databaseController.RestapiV2GetTableDetailsAsync(database, table, null);
+}
+catch (ApiException e){};
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+
+
+# Restapi V2 Create Table
+
+To create a table in Falcon, use this endpoint.
+
+```csharp
+RestapiV2CreateTableAsync(
     Models.TspublicRestV2DatabaseTableCreateRequest body)
 ```
 
@@ -167,7 +167,7 @@ var body = new TspublicRestV2DatabaseTableCreateRequest();
 
 try
 {
-    CreateTableResponse result = await databaseController.CreateTableAsync(body);
+    CreateTableResponse result = await databaseController.RestapiV2CreateTableAsync(body);
 }
 catch (ApiException e){};
 ```
@@ -176,21 +176,15 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
 
-# Run Query
+# Restapi V2 Run Query
 
-Note: This endpoint is applicable only for on-prem deployments.
-
-To run a TQL statement in Falcon, use this endpoint.
-
-You can run only following type of statements - Table DDL alter and Table rows update and delete.
-
-Permission: Requires administration privilege
+To run a TQL statement in Falcon, use this endpoint. You can run only following type of statements - Table DDL alter and Table rows update and delete.
 
 ```csharp
-RunQueryAsync(
+RestapiV2RunQueryAsync(
     Models.TspublicRestV2DatabaseTableRunqueryRequest body)
 ```
 
@@ -214,7 +208,7 @@ body.Statement.Add("statement7");
 
 try
 {
-    object result = await databaseController.RunQueryAsync(body);
+    object result = await databaseController.RestapiV2RunQueryAsync(body);
 }
 catch (ApiException e){};
 ```
@@ -223,5 +217,5 @@ catch (ApiException e){};
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 500 | Operation failed or unauthorized request | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
+| 500 | Operation failed | [`ErrorResponseException`](../../doc/models/error-response-exception.md) |
 
