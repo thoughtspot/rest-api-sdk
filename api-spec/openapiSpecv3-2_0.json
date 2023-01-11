@@ -8,8 +8,8 @@
   "paths": {
     "/api/rest/2.0/auth/session/user": {
       "get": {
-        "operationId": "getCurrentUserInfo",
-        "description": "Get Session object information",
+        "operationId": "getCurrentUserInformation",
+        "description": "Get session information for the currently logged-in user.",
         "tags": [
           "Authentication"
         ],
@@ -40,7 +40,7 @@
     "/api/rest/2.0/users/search": {
       "post": {
         "operationId": "searchUsers",
-        "description": "To programmatically search a user account in the ThoughtSpot system use this API endpoint.\nUsing this API, you can search a user with GUID / name.",
+        "description": "Gets a list of ThoughtSpot users. To get details of a specific user, specify the user GUID or name.  ",
         "tags": [
           "Users"
         ],
@@ -51,7 +51,7 @@
                 "type": "object",
                 "properties": {
                   "user_identifier": {
-                    "description": "GUID / name of the user to be updated",
+                    "description": "GUID / name of the user to search",
                     "type": "string",
                     "deprecated": false
                   },
@@ -75,7 +75,7 @@
                     "deprecated": false
                   },
                   "group_identifiers": {
-                    "description": "List of user-group to be associated with",
+                    "description": "GUID or name of the group to which the user belongs.",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -83,7 +83,7 @@
                     "deprecated": false
                   },
                   "privileges": {
-                    "description": "List of privileges to be associated with",
+                    "description": "Privileges assigned to the user.",
                     "type": "array",
                     "items": {
                       "type": "string",
@@ -142,7 +142,7 @@
                     "deprecated": false
                   },
                   "notify_on_share": {
-                    "description": "User preference for receiving email notifications when another ThoughtSpot user shares answers or pinboards.",
+                    "description": "User preference for receiving email notifications when another ThoughtSpot user\nshares a metadata object such as Answer, Liveboard, or Worksheet.",
                     "type": "boolean",
                     "deprecated": false
                   },
@@ -153,7 +153,7 @@
                     "deprecated": false
                   },
                   "onboarding_experience_completed": {
-                    "description": "flag to get the on-boarding experience is completed or not.",
+                    "description": "Indicates if the user has completed the onboarding walkthrough.",
                     "default": false,
                     "type": "boolean",
                     "deprecated": false
@@ -200,7 +200,7 @@
     },
     "/api/rest/2.0/system": {
       "get": {
-        "operationId": "getSystemInfo",
+        "operationId": "getSystemInformation",
         "description": "Get system details",
         "tags": [
           "System"
@@ -263,7 +263,7 @@
     "/api/rest/2.0/orgs/search": {
       "post": {
         "operationId": "searchOrgs",
-        "description": "To programmatically search an Org in the ThoughtSpot system use this API endpoint.",
+        "description": "Gets Orgs configured on a ThoughtSpot instance. Requires cluster administration privileges.",
         "tags": [
           "Orgs"
         ],
@@ -274,7 +274,7 @@
                 "type": "object",
                 "properties": {
                   "org_identifier": {
-                    "description": "identifier for the Org: Either unique id or unique name of the Org.",
+                    "description": "ID or name of the Org.",
                     "type": "string",
                     "deprecated": false
                   },
@@ -302,7 +302,7 @@
                     "deprecated": false
                   },
                   "user_identifiers": {
-                    "description": "User identifier for the Org: Either unique id or unique name of the user.",
+                    "description": "GUIDs or names of the users for which you want to retrieve the Orgs data.",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -344,7 +344,7 @@
     "/api/rest/2.0/tags/search": {
       "post": {
         "operationId": "searchTags",
-        "description": "To programmatically search tags in the ThoughtSpot system use this API endpoint.\nProvide any of tag attributes. Matching tags will be returned.",
+        "description": "TAllows searching tags. ",
         "tags": [
           "Tags"
         ],
@@ -1438,7 +1438,7 @@
     "/api/rest/2.0/auth/session/login": {
       "post": {
         "operationId": "login",
-        "description": "You can programmatically create login session for a user in ThoughtSpot using this endpoint. \n\nYou can create session by either providing userName and password as inputs in this request body or by including \"Authorization\" header with the token generated through the endpoint /tspublic/rest/v2/session/gettoken. \n\nuserName and password input is given precedence over \"Authorization\" header, when both are included in the request.",
+        "description": "Using this endpoint, you can programmatically create a login session for a user in ThoughtSpot.",
         "tags": [
           "Authentication"
         ],
@@ -1490,7 +1490,7 @@
     "/api/rest/2.0/auth/token/object": {
       "post": {
         "operationId": "getObjectAccessToken",
-        "description": " To programmatically create session token for a user in ThoughtSpot, use this endpoint. \n\nYou can generate the token for a user by providing password or secret key from the cluster. \n\nYou need to enable trusted authentication to generate secret key. To generate secret key, follow below steps. \n\n\n 1. Click the Develop tab. \n\n\n 2. Under Customizations, click Settings. \n\n\n 3. To enable trusted authentication, turn on the toggle. \n\n\n 4. A secret_key for trusted authentication is generated. \n\n\n 5. Click the clipboard icon to copy the token. \n\n\n \n\nPassword is given precedence over secretKey input, when both are included in the request.",
+        "description": " To programmatically create object session token for a user in ThoughtSpot, use this endpoint. \n\nYou can generate the token for a user by providing password or secret key from the cluster. \n\nYou need to enable trusted authentication to generate secret key. To generate secret key, follow below steps. \n\n\n 1. Click the Develop tab. \n\n\n 2. Under Customizations, click Settings. \n\n\n 3. To enable trusted authentication, turn on the toggle. \n\n\n 4. A secret_key for trusted authentication is generated. \n\n\n 5. Click the clipboard icon to copy the token. \n\n\n \n\nPassword is given precedence over secretKey input, when both are included in the request.",
         "tags": [
           "Authentication"
         ],
@@ -1586,7 +1586,7 @@
     "/api/rest/2.0/auth/token/full": {
       "post": {
         "operationId": "getFullAccessToken",
-        "description": " To programmatically create session token for a user in ThoughtSpot, use this endpoint. \n\nYou can generate the token for a user by providing password or secret key from the cluster. \n\nYou need to enable trusted authentication to generate secret key. To generate secret key, follow below steps. \n\n\n 1. Click the Develop tab. \n\n\n 2. Under Customizations, click Settings. \n\n\n 3. To enable trusted authentication, turn on the toggle. \n\n\n 4. A secret_key for trusted authentication is generated. \n\n\n 5. Click the clipboard icon to copy the token. \n\n\n \n\nPassword is given precedence over secretKey input, when both are included in the request.",
+        "description": " To programmatically create full session token for a user in ThoughtSpot, use this endpoint. \n\nYou can generate the token for a user by providing password or secret key from the cluster. \n\nYou need to enable trusted authentication to generate secret key. To generate secret key, follow below steps. \n\n\n 1. Click the Develop tab. \n\n\n 2. Under Customizations, click Settings. \n\n\n 3. To enable trusted authentication, turn on the toggle. \n\n\n 4. A secret_key for trusted authentication is generated. \n\n\n 5. Click the clipboard icon to copy the token. \n\n\n \n\nPassword is given precedence over secretKey input, when both are included in the request.",
         "tags": [
           "Authentication"
         ],
@@ -1634,7 +1634,7 @@
                     "deprecated": false
                   },
                   "group_identifiers": {
-                    "description": "Unique ID or name of the User Groups to which newly created user to be added.",
+                    "description": "ID or name of the groups to which the newly created user belongs.",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -1745,7 +1745,7 @@
     "/api/rest/2.0/users/create": {
       "post": {
         "operationId": "createUser",
-        "description": "To programmatically create a user account in the ThoughtSpot system use this API endpoint. Using this API, you can create a user and assign groups.\nTo create a user, you require admin user privileges.",
+        "description": "Allows creating a user in ThoughtSpot. The API endpoint also allows you to assign the user to specific groups,\nOrgs, and add favorite Liveboards and Answers. To create a user, you require administration privileges.",
         "tags": [
           "Users"
         ],
@@ -1802,7 +1802,7 @@
                     "deprecated": false
                   },
                   "org_identifiers": {
-                    "description": "List of Unique Org Identifiers to be associated with",
+                    "description": "List of Org IDs to which the user belongs.",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -1810,7 +1810,7 @@
                     "deprecated": false
                   },
                   "group_identifiers": {
-                    "description": "List of user-group to be associated with",
+                    "description": "GUIDs or names of the groups to which the newly created user belongs.",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -1818,7 +1818,7 @@
                     "deprecated": false
                   },
                   "visibility": {
-                    "description": "Visibility of the user. The visibility attribute is set to DEFAULT when creating a user. The DEFAULT attribute makes a user visible to other users and user groups, and this allows them to share objects",
+                    "description": "Visibility of the users. When set to SHARABLE, the user is visible to other users and groups when they try to share an object.",
                     "default": "SHARABLE",
                     "type": "string",
                     "enum": [
@@ -1828,7 +1828,7 @@
                     "deprecated": false
                   },
                   "notify_on_share": {
-                    "description": "User preference for receiving email notifications when another ThoughtSpot user shares answers or pinboards.",
+                    "description": "User preference for receiving email notifications when another ThoughtSpot\nuser shares a metadata object such as Answer, Liveboard, or Worksheet.",
                     "default": true,
                     "type": "boolean",
                     "deprecated": false
@@ -1846,12 +1846,12 @@
                     "deprecated": false
                   },
                   "home_liveboard_identifier": {
-                    "description": "to set GUID for home live board.",
+                    "description": "GUID of the Liveboard to set a default Liveboard for the user. \nThoughtSpot displays this Liveboard on the Home page when the user logs in.",
                     "type": "string",
                     "deprecated": false
                   },
                   "favorite_metadata": {
-                    "description": "Metadata objects to be assigned as favorites for the imported user.",
+                    "description": "Metadata objects to add to the user's favorites list.",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/FavoriteMetadataInput"
@@ -1896,7 +1896,7 @@
     "/api/rest/2.0/users/{user_identifier}/update": {
       "post": {
         "operationId": "updateUser",
-        "description": "To programmatically update a user account in the ThoughtSpot system use this API endpoint.\nUsing this API, you can update a user and assign groups.\nTo update a user, you require admin user privileges.",
+        "description": "Updates a given user object. Requires administrator privileges.",
         "tags": [
           "Users"
         ],
@@ -1917,7 +1917,7 @@
                     "deprecated": false
                   },
                   "visibility": {
-                    "description": "Visibility of the user. The visibility attribute is set to DEFAULT when creating a user. The DEFAULT attribute makes a user visible to other users and user groups, and this allows them to share objects",
+                    "description": "Visibility of the users. When set to SHARABLE, the user is visible to other users and groups when they try to share an object.",
                     "type": "string",
                     "enum": [
                       "SHARABLE",
@@ -1943,7 +1943,7 @@
                     "deprecated": false
                   },
                   "notify_on_share": {
-                    "description": "User preference for receiving email notifications when another ThoughtSpot user shares answers or pinboards.",
+                    "description": "User preference for receiving email notifications when another ThoughtSpot user \nshares a metadata object such as Answer, Liveboard, or Worksheet. ",
                     "type": "boolean",
                     "deprecated": false
                   },
@@ -1953,7 +1953,7 @@
                     "deprecated": false
                   },
                   "onboarding_experience_completed": {
-                    "description": "flag to get the on-boarding experience is completed or not.",
+                    "description": "Indicates if the user has completed the onboarding and allows turning off the onboarding walkthrough.",
                     "type": "boolean",
                     "deprecated": false
                   },
@@ -1970,7 +1970,7 @@
                     "deprecated": false
                   },
                   "group_identifiers": {
-                    "description": "List of user-group to be associated with",
+                    "description": "GUIDs or names of the groups.",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -1978,12 +1978,12 @@
                     "deprecated": false
                   },
                   "home_liveboard_identifier": {
-                    "description": "to set GUID for home live board.",
+                    "description": "GUID of the Liveboard to set a default Liveboard for the user. ThoughtSpot displays\nthis Liveboard on the Home page when the user logs in.",
                     "type": "string",
                     "deprecated": false
                   },
                   "favorite_metadata": {
-                    "description": "Metadata objects to be assigned as favorites for the imported user.",
+                    "description": "Metadata objects to add to the user's favorites list.",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/FavoriteMetadataInput"
@@ -1991,7 +1991,7 @@
                     "deprecated": false
                   },
                   "org_identifiers": {
-                    "description": "List of Unique Org Identifiers to be associated with",
+                    "description": "IDs of the Orgs.",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -2027,7 +2027,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "GUID / name of the user to be updated",
+            "description": "GUID / name of the user",
             "deprecated": false
           }
         ]
@@ -2036,7 +2036,7 @@
     "/api/rest/2.0/users/{user_identifier}/delete": {
       "post": {
         "operationId": "deleteUser",
-        "description": "To programmatically delete a user account in the ThoughtSpot system use this API endpoint.\nUsing this API, you can delete by passing GUID / name of the user.\nTo delete a user, you require admin user privileges.",
+        "description": "Deletes a user. Requires administrator privileges.",
         "tags": [
           "Users"
         ],
@@ -2048,7 +2048,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "GUID / name of the user to be deleted",
+            "description": "GUID / name of the user",
             "deprecated": false
           }
         ],
@@ -2072,7 +2072,7 @@
     "/api/rest/2.0/users/import": {
       "post": {
         "operationId": "importUsers",
-        "description": "To programmatically import users accounts in the ThoughtSpot system use this API endpoint.\nUsing this API, you can import multiple users.",
+        "description": "Imports user data from external databases to ThoughtSpot.",
         "tags": [
           "Users"
         ],
@@ -2091,18 +2091,18 @@
                     "deprecated": false
                   },
                   "default_password": {
-                    "description": "Default password to be set if password field not present in above import user like first one",
+                    "description": "The default password to assign to users if they do not have a password assigned in ThoughtSpot. ",
                     "type": "string",
                     "deprecated": false
                   },
                   "dry_run": {
-                    "description": "If true, This will preview the impacted users, but changes won't applied into the system",
+                    "description": "If true, the API performs a test operation and returns user IDs whose data will be edited after the import.",
                     "default": true,
                     "type": "boolean",
                     "deprecated": false
                   },
                   "delete_unspecified_users": {
-                    "description": "if true, this api will delete all other users specified in above users list. Some important users like tsadmin, guest, system and su will be ignored.",
+                    "description": "If set to true, removes the users that are not specified in the API request.",
                     "default": false,
                     "type": "boolean",
                     "deprecated": false
@@ -2142,7 +2142,7 @@
     "/api/rest/2.0/users/change_password": {
       "post": {
         "operationId": "changeUserPassword",
-        "description": "Change user password",
+        "description": "Allows changing the password of a ThoughtSpot user account.",
         "tags": [
           "Users"
         ],
@@ -2198,7 +2198,7 @@
     "/api/rest/2.0/users/reset_password": {
       "post": {
         "operationId": "resetUserPassword",
-        "description": "Reset user password",
+        "description": "Resets the password of a ThoughtSpot user account.",
         "tags": [
           "Users"
         ],
@@ -2248,7 +2248,7 @@
     "/api/rest/2.0/users/force_logout": {
       "post": {
         "operationId": "forceLogoutUsers",
-        "description": "Force logout users session",
+        "description": "Logs out a user from their current session. This API operation makes\na user session invalid and forces the user to re-login.",
         "tags": [
           "Users"
         ],
@@ -2292,7 +2292,7 @@
     "/api/rest/2.0/orgs/create": {
       "post": {
         "operationId": "createOrg",
-        "description": "To programmatically create an Org in the ThoughtSpot system use this API endpoint.",
+        "description": "Creates an Org. Requires cluster administration privileges.",
         "tags": [
           "Orgs"
         ],
@@ -2347,7 +2347,7 @@
     "/api/rest/2.0/orgs/{org_identifier}/update": {
       "post": {
         "operationId": "updateOrg",
-        "description": "To programmatically update an Org in the ThoughtSpot system use this API endpoint.",
+        "description": "Updates an Org. Requires cluster administration privileges.",
         "tags": [
           "Orgs"
         ],
@@ -2404,7 +2404,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "identifier for the Org: Either unique id or unique name of the Org.",
+            "description": "ID or name of the Org.",
             "deprecated": false
           }
         ]
@@ -2413,7 +2413,7 @@
     "/api/rest/2.0/orgs/{org_identifier}/delete": {
       "post": {
         "operationId": "deleteOrg",
-        "description": "To programmatically delete an Org in the ThoughtSpot system use this API endpoint.",
+        "description": "Deletes an Org. Requires cluster administration privileges.",
         "tags": [
           "Orgs"
         ],
@@ -2425,7 +2425,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Org identifier for the Org: Either unique id or unique name of the Org.",
+            "description": "ID or name of the Org.",
             "deprecated": false
           }
         ],
@@ -2449,7 +2449,7 @@
     "/api/rest/2.0/tags/create": {
       "post": {
         "operationId": "createTag",
-        "description": "To programmatically create an org in the ThoughtSpot system use this API endpoint.",
+        "description": "Creates an Org. Requires administrator privileges.",
         "tags": [
           "Tags"
         ],
@@ -2465,7 +2465,7 @@
                     "deprecated": false
                   },
                   "color": {
-                    "description": "Hex color code to be assigned to the tag. Example, Input: #ff78a9.",
+                    "description": "Hex color code to be assigned to the tag. For example, #ff78a9.",
                     "type": "string",
                     "deprecated": false
                   }
@@ -2505,7 +2505,7 @@
     "/api/rest/2.0/tags/{tag_identifier}/update": {
       "post": {
         "operationId": "updateTag",
-        "description": "To programmatically update tags, use this endpoint. Specify either tag id or tag name",
+        "description": "Updates an Org. Requires administrator privileges.",
         "tags": [
           "Tags"
         ],
@@ -2521,7 +2521,7 @@
                     "deprecated": false
                   },
                   "color": {
-                    "description": "Hex color code to be assigned to the tag. Example, Input: #ff78a9",
+                    "description": "Hex color code to be assigned to the tag. For example, #ff78a9.",
                     "type": "string",
                     "deprecated": false
                   }
@@ -2563,7 +2563,7 @@
     "/api/rest/2.0/tags/{tag_identifier}/delete": {
       "post": {
         "operationId": "deleteTag",
-        "description": "To programmatically delete tags, use this endpoint. Specify either tag id or tag name",
+        "description": "Deletes a tag. Requires administrator privileges.",
         "tags": [
           "Tags"
         ],
@@ -2599,7 +2599,7 @@
     "/api/rest/2.0/tags/assign": {
       "post": {
         "operationId": "assignTag",
-        "description": "Assign tags to metadata objects",
+        "description": "Assigns a tag to a metadata object Org.",
         "tags": [
           "Tags"
         ],
@@ -2618,7 +2618,7 @@
                     "deprecated": false
                   },
                   "tag_identifiers": {
-                    "description": "Unique ID or name of tags.",
+                    "description": "GUID or name of the tag.",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -2655,7 +2655,7 @@
     "/api/rest/2.0/tags/unassign": {
       "post": {
         "operationId": "unassignTag",
-        "description": "Unassign tags to metadata objects",
+        "description": "Unassign a tag to a metadata object.",
         "tags": [
           "Tags"
         ],
@@ -2674,7 +2674,7 @@
                     "deprecated": false
                   },
                   "tag_identifiers": {
-                    "description": "Unique ID or name of tags.",
+                    "description": "GUID or name of the tag.",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -2851,7 +2851,7 @@
     "/api/rest/2.0/groups/{group_identifier}/update": {
       "post": {
         "operationId": "updateUserGroup",
-        "description": "Update the user group",
+        "description": "Update group properties.",
         "tags": [
           "Groups"
         ],
@@ -2862,12 +2862,12 @@
                 "type": "object",
                 "properties": {
                   "name": {
-                    "description": "Name of the user group. The user group name must be unique.",
+                    "description": "Name of the group to modify.",
                     "type": "string",
                     "deprecated": false
                   },
                   "default_liveboard_identifiers": {
-                    "description": "Unique ID of liveboards which will be assigned as default liveboards to the user group.",
+                    "description": "Unique ID of Liveboards to assign as default liveboards to the users in the group.",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -2875,17 +2875,17 @@
                     "deprecated": false
                   },
                   "description": {
-                    "description": "Description for the user group.",
+                    "description": "Description for the group.",
                     "type": "string",
                     "deprecated": false
                   },
                   "display_name": {
-                    "description": "Unique display name for the user group.",
+                    "description": "Display name of the group.",
                     "type": "string",
                     "deprecated": false
                   },
                   "privileges": {
-                    "description": "Privileges which will be assigned to the user group.",
+                    "description": "Privileges to assign to the group.",
                     "type": "array",
                     "items": {
                       "type": "string",
@@ -2920,7 +2920,7 @@
                     "deprecated": false
                   },
                   "sub_group_identifiers": {
-                    "description": "Unique ID or name of the User Groups who will be part of the user group.",
+                    "description": "GUID or name of the sub groups. A subgroup is a group assigned to a parent group.",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -2937,7 +2937,7 @@
                     "deprecated": false
                   },
                   "user_identifiers": {
-                    "description": "Unique ID or name of the Users who will be part of the user group.",
+                    "description": "GUID or name of the users to assign to the group.",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -2945,7 +2945,7 @@
                     "deprecated": false
                   },
                   "visibility": {
-                    "description": "Visibility of the user group. The SHARABLE makes a user group visible to other users and user groups, and thus \nallows them to share objects.",
+                    "description": "Visibility of the group. To make a group visible to other users and \ngroups, set the visibility to SHAREABLE. ",
                     "type": "string",
                     "enum": [
                       "SHARABLE",
@@ -2982,7 +2982,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique ID or name of the user group.",
+            "description": "GUID or name of the group.",
             "deprecated": false
           }
         ]
@@ -2991,7 +2991,7 @@
     "/api/rest/2.0/groups/{group_identifier}/delete": {
       "post": {
         "operationId": "deleteUserGroup",
-        "description": "Deletes a user group from the current org",
+        "description": "Deletes a group.",
         "tags": [
           "Groups"
         ],
@@ -3003,7 +3003,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique ID or name of the user group.",
+            "description": "GUID or name of the group.",
             "deprecated": false
           }
         ],
@@ -3027,7 +3027,7 @@
     "/api/rest/2.0/groups/import": {
       "post": {
         "operationId": "importUserGroups",
-        "description": "Import user groups to the current org",
+        "description": "Import groups to ThoughtSpot. Requires administrator privilege.",
         "tags": [
           "Groups"
         ],
@@ -3046,12 +3046,12 @@
                     "deprecated": false
                   },
                   "delete_unspecified_groups": {
-                    "description": "Option to remove any existing groups from system which are not specified in the input request.",
+                    "description": "If set to true, removes groups that are not specified in the API request.",
                     "type": "boolean",
                     "deprecated": false
                   },
                   "dry_run": {
-                    "description": "Option to dry or mock run of operation without importing any objects.",
+                    "description": "If true, the API performs a test operation and returns user IDs whose \ndata will be edited after the import.",
                     "type": "boolean",
                     "deprecated": false
                   }
