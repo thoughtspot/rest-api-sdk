@@ -8,7 +8,6 @@
   "paths": {
     "/api/rest/2.0/auth/session/user": {
       "get": {
-        "summary": "Get Current User Information",
         "operationId": "getCurrentUserInfo",
         "description": "Get session information for the currently logged-in user.",
         "tags": [
@@ -580,7 +579,7 @@
                     "deprecated": false
                   },
                   "dependent_object_version": {
-                    "description": "Version of the dependent metadata object.",
+                    "description": "Version of the dependent table of the metadata like worksheets.",
                     "default": "V1",
                     "type": "string",
                     "enum": [
@@ -617,11 +616,6 @@
                   "include_details": {
                     "description": "Includes complete details of the metadata objects.",
                     "default": false,
-                    "type": "boolean",
-                    "deprecated": false
-                  },
-                  "include_expert_request": {
-                    "description": "Indicates whether to include expert requests information of metadata objects.",
                     "type": "boolean",
                     "deprecated": false
                   },
