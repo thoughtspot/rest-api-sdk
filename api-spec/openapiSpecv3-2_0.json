@@ -148,13 +148,11 @@
                   },
                   "show_onboarding_experience": {
                     "description": "The user preference for revisiting the onboarding experience.",
-                    "default": true,
                     "type": "boolean",
                     "deprecated": false
                   },
                   "onboarding_experience_completed": {
                     "description": "flag to get the on-boarding experience is completed or not.",
-                    "default": false,
                     "type": "boolean",
                     "deprecated": false
                   },
@@ -608,7 +606,7 @@
                     "deprecated": false
                   },
                   "include_dependent_objects": {
-                    "description": "Indicates whether to include dependent objects of the metadata objects.",
+                    "description": "Indicates whether to include dependent objects of the metadata objects.(Valid only for LOGICAL TABLE)",
                     "default": false,
                     "type": "boolean",
                     "deprecated": false
@@ -616,11 +614,6 @@
                   "include_details": {
                     "description": "Indicates whether to include complete details of the metadata objects.",
                     "default": false,
-                    "type": "boolean",
-                    "deprecated": false
-                  },
-                  "include_expert_request": {
-                    "description": "Indicates whether to include expert requests information of metadata objects.",
                     "type": "boolean",
                     "deprecated": false
                   },
@@ -1165,7 +1158,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/LiveboardDataResponse"
+                  "$ref": "#/components/schemas/SearchDataResponse"
                 }
               }
             }
@@ -1235,18 +1228,6 @@
                     "default": 10,
                     "type": "integer",
                     "format": "int32",
-                    "deprecated": false
-                  },
-                  "runtime_filter": {
-                    "description": "JSON object representing filter condition to filter the data.",
-                    "default": "",
-                    "type": "object",
-                    "deprecated": false
-                  },
-                  "runtime_sort": {
-                    "description": "JSON object representing columns to sort the data.",
-                    "default": "",
-                    "type": "object",
                     "deprecated": false
                   }
                 },
@@ -1320,18 +1301,6 @@
                     "default": 10,
                     "type": "integer",
                     "format": "int32",
-                    "deprecated": false
-                  },
-                  "runtime_filter": {
-                    "description": "JSON object representing filter condition to filter the data.",
-                    "default": "",
-                    "type": "object",
-                    "deprecated": false
-                  },
-                  "runtime_sort": {
-                    "description": "JSON object representing columns to sort the data.",
-                    "default": "",
-                    "type": "object",
                     "deprecated": false
                   }
                 },
@@ -3177,16 +3146,6 @@
                     },
                     "deprecated": false
                   },
-                  "edoc_format": {
-                    "description": "TML EDOC content format.",
-                    "default": "YAML",
-                    "type": "string",
-                    "enum": [
-                      "JSON",
-                      "YAML"
-                    ],
-                    "deprecated": false
-                  },
                   "export_associated": {
                     "description": "Indicates whether to export associated metadata objects of specified metadata objects.",
                     "default": false,
@@ -3421,7 +3380,9 @@
                 "required": [
                   "metadata_type",
                   "metadata_identifiers",
-                  "permissions"
+                  "permissions",
+                  "emails",
+                  "message"
                 ]
               }
             }
@@ -3780,7 +3741,7 @@
               "SHARABLE",
               "NON_SHARABLE"
             ],
-            "description": "Visibility of the users. The SHARABLE makes a users visible to other users and user groups, \nand thus allows them to share objects."
+            "description": "Visibility of the users. The SHARABLE makes a users visible to other users and user groups,\nand thus allows them to share objects."
           },
           "notify_on_share": {
             "type": "boolean",
@@ -3892,8 +3853,7 @@
               "LIVEBOARD",
               "ANSWER",
               "LOGICAL_TABLE",
-              "LOGICAL_COLUMN",
-              "LOGICAL_RELATIONSHIP"
+              "LOGICAL_COLUMN"
             ],
             "description": "Type of metadata."
           },
@@ -4443,8 +4403,6 @@
       "MetadataSearchResponse": {
         "type": "object",
         "required": [
-          "metadata_id",
-          "metadata_name",
           "metadata_type"
         ],
         "properties": {
@@ -4591,7 +4549,7 @@
             "items": {
               "type": "string"
             },
-            "description": "Unique ID or name of the users."
+            "description": "Unique ID or name of the users. If not specified then favorite of current logged in user is considered."
           }
         },
         "description": "Favorite object options."
@@ -4698,6 +4656,22 @@
             "description": "Text to include in the footer of each page."
           }
         }
+      },
+      "SearchDataResponse": {
+        "type": "object",
+        "required": [
+          "contents"
+        ],
+        "properties": {
+          "contents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AnswerContent"
+            },
+            "description": "Data content of metadata objects."
+          }
+        },
+        "description": "Response format associated with the search data API."
       },
       "LogResponse": {
         "type": "object",
