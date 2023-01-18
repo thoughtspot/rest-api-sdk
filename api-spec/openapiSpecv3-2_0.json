@@ -148,18 +148,16 @@
                   },
                   "show_onboarding_experience": {
                     "description": "The user preference for revisiting the onboarding experience.",
-                    "default": true,
                     "type": "boolean",
                     "deprecated": false
                   },
                   "onboarding_experience_completed": {
                     "description": "Indicates if the user has completed the onboarding walkthrough.",
-                    "default": false,
                     "type": "boolean",
                     "deprecated": false
                   },
                   "org_identifiers": {
-                    "description": "List of Unique Org Identifiers to be associated with",
+                    "description": "IDs or names of the Orgs to which the user belongs",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -1106,7 +1104,7 @@
         "operationId": "searchData",
         "description": "Allows passing a search query string and retrieving data from ThoughtSpot.",
         "tags": [
-          "Search Data"
+          "Data"
         ],
         "requestBody": {
           "content": {
@@ -1161,7 +1159,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/LiveboardDataResponse"
+                  "$ref": "#/components/schemas/SearchDataResponse"
                 }
               }
             }
@@ -1184,7 +1182,7 @@
         "operationId": "fetchLiveboardData",
         "description": "Fetches Liveboard data. Requires at least view access to the Liveboard. ",
         "tags": [
-          "Search Data"
+          "Data"
         ],
         "requestBody": {
           "content": {
@@ -1232,18 +1230,6 @@
                     "type": "integer",
                     "format": "int32",
                     "deprecated": false
-                  },
-                  "runtime_filter": {
-                    "description": "JSON object representing filter condition to filter the data.",
-                    "default": "",
-                    "type": "object",
-                    "deprecated": false
-                  },
-                  "runtime_sort": {
-                    "description": "JSON object representing columns to sort the data.",
-                    "default": "",
-                    "type": "object",
-                    "deprecated": false
                   }
                 },
                 "required": [
@@ -1282,7 +1268,7 @@
         "operationId": "fetchAnswerData",
         "description": "Fetches data from a saved Answer. Requires at least view access to the Answer object. ",
         "tags": [
-          "Search Data"
+          "Data"
         ],
         "requestBody": {
           "content": {
@@ -1316,18 +1302,6 @@
                     "default": 10,
                     "type": "integer",
                     "format": "int32",
-                    "deprecated": false
-                  },
-                  "runtime_filter": {
-                    "description": "JSON object representing filter condition to filter the data.",
-                    "default": "",
-                    "type": "object",
-                    "deprecated": false
-                  },
-                  "runtime_sort": {
-                    "description": "JSON object representing columns to sort the data.",
-                    "default": "",
-                    "type": "object",
                     "deprecated": false
                   }
                 },
@@ -1532,7 +1506,7 @@
                     "deprecated": false
                   },
                   "auto_create": {
-                    "description": "“user_options” attribute is added as an optional attribute which will allow JIT token support",
+                    "description": "“Creates a new user if the specified username does not already exist in ThoughtSpot. Use this parameter to provision a user just-in-time (JIT).",
                     "default": false,
                     "type": "boolean",
                     "deprecated": false
@@ -1623,7 +1597,7 @@
                     "deprecated": false
                   },
                   "auto_create": {
-                    "description": "user_options attribute is added as an optional attribute which will allow JIT token support",
+                    "description": "Creates a new user if the specified username does not already exist in ThoughtSpot. Use this parameter to provision a user just-in-time (JIT).",
                     "default": false,
                     "type": "boolean",
                     "deprecated": false
@@ -2158,7 +2132,7 @@
                     "deprecated": false
                   },
                   "user_identifier": {
-                    "description": "Unique ID or name of the user.",
+                    "description": "GUID or name of the user.",
                     "type": "string",
                     "deprecated": false
                   }
@@ -2209,7 +2183,7 @@
                     "deprecated": false
                   },
                   "user_identifier": {
-                    "description": "Unique ID or name of the user.",
+                    "description": "GUID or name of the user.",
                     "type": "string",
                     "deprecated": false
                   }
@@ -2254,7 +2228,7 @@
                 "type": "object",
                 "properties": {
                   "user_identifiers": {
-                    "description": "Unique ID or name of the users for force logging out their sessions.",
+                    "description": "GUID or name of the users for force logging out their sessions.",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -3173,16 +3147,6 @@
                     },
                     "deprecated": false
                   },
-                  "edoc_format": {
-                    "description": "Format type for exported objects.",
-                    "default": "YAML",
-                    "type": "string",
-                    "enum": [
-                      "JSON",
-                      "YAML"
-                    ],
-                    "deprecated": false
-                  },
                   "export_associated": {
                     "description": "Indicates whether to export associated metadata objects of specified metadata objects.",
                     "default": false,
@@ -3355,7 +3319,7 @@
                 "type": "object",
                 "properties": {
                   "metadata_type": {
-                    "description": "Type of metadata.",
+                    "description": "Type of metadata.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view.\n5. CONNECTION for creating or modify data connections.\n6. TAG for tag objects.\n7. USER for user objects.\n8. USER_GROUP for user group objects.\n9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values",
                     "type": "string",
                     "enum": [
                       "LIVEBOARD",
@@ -3417,7 +3381,9 @@
                 "required": [
                   "metadata_type",
                   "metadata_identifiers",
-                  "permissions"
+                  "permissions",
+                  "emails",
+                  "message"
                 ]
               }
             }
@@ -3776,7 +3742,7 @@
               "SHARABLE",
               "NON_SHARABLE"
             ],
-            "description": "Visibility of the users. The SHARABLE makes a users visible to other users and user groups, \nand thus allows them to share objects."
+            "description": "Visibility of the users. The SHARABLE makes a users visible to other users and user groups,\nand thus allows them to share objects."
           },
           "notify_on_share": {
             "type": "boolean",
@@ -3888,8 +3854,7 @@
               "LIVEBOARD",
               "ANSWER",
               "LOGICAL_TABLE",
-              "LOGICAL_COLUMN",
-              "LOGICAL_RELATIONSHIP"
+              "LOGICAL_COLUMN"
             ],
             "description": "Type of metadata."
           },
@@ -4439,8 +4404,6 @@
       "MetadataSearchResponse": {
         "type": "object",
         "required": [
-          "metadata_id",
-          "metadata_name",
           "metadata_type"
         ],
         "properties": {
@@ -4520,7 +4483,7 @@
               "USER_GROUP",
               "LOGICAL_RELATIONSHIP"
             ],
-            "description": "Type of metadata."
+            "description": "Type of metadata.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view.\n5. CONNECTION for creating or modify data connections.\n6. TAG for tag objects.\n7. USER for user objects.\n8. USER_GROUP for user group objects.\n9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values"
           }
         }
       },
@@ -4571,7 +4534,7 @@
               "USER_GROUP",
               "LOGICAL_RELATIONSHIP"
             ],
-            "description": "Type of metadata."
+            "description": "Type of metadata.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view.\n5. CONNECTION for creating or modify data connections.\n6. TAG for tag objects.\n7. USER for user objects.\n8. USER_GROUP for user group objects.\n9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values"
           }
         }
       },
@@ -4587,7 +4550,7 @@
             "items": {
               "type": "string"
             },
-            "description": "Unique ID or name of the users."
+            "description": "Unique ID or name of the users. If not specified then favorite of current logged in user is considered."
           }
         },
         "description": "Favorite object options."
@@ -4695,6 +4658,22 @@
           }
         }
       },
+      "SearchDataResponse": {
+        "type": "object",
+        "required": [
+          "contents"
+        ],
+        "properties": {
+          "contents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AnswerContent"
+            },
+            "description": "Data content of metadata objects."
+          }
+        },
+        "description": "Response format associated with the search data API."
+      },
       "LogResponse": {
         "type": "object",
         "required": [
@@ -4766,7 +4745,7 @@
               "LOGICAL_TABLE",
               "LOGICAL_COLUMN"
             ],
-            "description": "Type of metadata."
+            "description": "Type of metadata.\n1. LIVEBOARD\n2. ANSWERS\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n4. LOGICAL_COLUMN for a column of any data object such as tables, worksheets or views."
           },
           "identifier": {
             "type": "string",
