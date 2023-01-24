@@ -1393,6 +1393,74 @@
         }
       }
     },
+    "/api/rest/2.0/logs/fetch": {
+      "post": {
+        "operationId": "fetchLogs",
+        "description": "Fetches security audit logs. Requires administrator privileges.",
+        "tags": [
+          "Log"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "log_type": {
+                    "description": "Name of the log type.",
+                    "type": "string",
+                    "enum": [
+                      "SECURITY_AUDIT"
+                    ],
+                    "deprecated": false
+                  },
+                  "start_epoch_time_in_millis": {
+                    "description": "Start time in EPOCH format",
+                    "type": "number",
+                    "format": "float",
+                    "deprecated": false
+                  },
+                  "end_epoch_time_in_millis": {
+                    "description": "End time in EPOCH format",
+                    "type": "number",
+                    "format": "float",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "log_type"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LogResponse"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/vcs/config/search": {
       "post": {
         "operationId": "searchLocalConfig",
@@ -1496,74 +1564,6 @@
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/CommitHistoryResponse"
-                  }
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/rest/2.0/logs/fetch": {
-      "post": {
-        "operationId": "fetchLogs",
-        "description": "Fetches security audit logs. Requires administrator privileges.",
-        "tags": [
-          "Log"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "log_type": {
-                    "description": "Name of the log type.",
-                    "type": "string",
-                    "enum": [
-                      "SECURITY_AUDIT"
-                    ],
-                    "deprecated": false
-                  },
-                  "start_epoch_time_in_millis": {
-                    "description": "Start time in EPOCH format",
-                    "type": "number",
-                    "format": "float",
-                    "deprecated": false
-                  },
-                  "end_epoch_time_in_millis": {
-                    "description": "End time in EPOCH format",
-                    "type": "number",
-                    "format": "float",
-                    "deprecated": false
-                  }
-                },
-                "required": [
-                  "log_type"
-                ]
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/LogResponse"
                   }
                 }
               }
@@ -5292,6 +5292,23 @@
         },
         "description": "Response format associated with the search data API."
       },
+      "LogResponse": {
+        "type": "object",
+        "required": [
+          "date",
+          "log"
+        ],
+        "properties": {
+          "date": {
+            "type": "string",
+            "description": "Date timestamp of the log entry"
+          },
+          "log": {
+            "type": "string",
+            "description": "Log data"
+          }
+        }
+      },
       "RepoConfigObject": {
         "type": "object",
         "required": [
@@ -5349,23 +5366,6 @@
           "branch": {
             "type": "string",
             "description": "Branch where changes were committed"
-          }
-        }
-      },
-      "LogResponse": {
-        "type": "object",
-        "required": [
-          "date",
-          "log"
-        ],
-        "properties": {
-          "date": {
-            "type": "string",
-            "description": "Date timestamp of the log entry"
-          },
-          "log": {
-            "type": "string",
-            "description": "Log data"
           }
         }
       },
