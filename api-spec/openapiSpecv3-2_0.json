@@ -9,7 +9,7 @@
     "/api/rest/2.0/auth/session/user": {
       "get": {
         "operationId": "getCurrentUserInfo",
-        "description": "Get Session object information",
+        "description": "Get session information for the currently logged-in user.",
         "tags": [
           "Authentication"
         ],
@@ -40,7 +40,7 @@
     "/api/rest/2.0/users/search": {
       "post": {
         "operationId": "searchUsers",
-        "description": "To programmatically search a user account in the ThoughtSpot system use this API endpoint.\nUsing this API, you can search a user with GUID / name.",
+        "description": "Gets a list of ThoughtSpot users. To get details of a specific user, specify the user GUID or name.  ",
         "tags": [
           "Users"
         ],
@@ -51,7 +51,7 @@
                 "type": "object",
                 "properties": {
                   "user_identifier": {
-                    "description": "GUID / name of the user to be updated",
+                    "description": "GUID / name of the user to search",
                     "type": "string",
                     "deprecated": false
                   },
@@ -75,7 +75,7 @@
                     "deprecated": false
                   },
                   "group_identifiers": {
-                    "description": "List of user-group to be associated with",
+                    "description": "GUID or name of the group to which the user belongs.",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -83,7 +83,7 @@
                     "deprecated": false
                   },
                   "privileges": {
-                    "description": "List of privileges to be associated with",
+                    "description": "Privileges assigned to the user.",
                     "type": "array",
                     "items": {
                       "type": "string",
@@ -142,7 +142,7 @@
                     "deprecated": false
                   },
                   "notify_on_share": {
-                    "description": "User preference for receiving email notifications when another ThoughtSpot user shares answers or pinboards.",
+                    "description": "User preference for receiving email notifications when another ThoughtSpot user\nshares a metadata object such as Answer, Liveboard, or Worksheet.",
                     "type": "boolean",
                     "deprecated": false
                   },
@@ -152,15 +152,28 @@
                     "deprecated": false
                   },
                   "onboarding_experience_completed": {
-                    "description": "flag to get the on-boarding experience is completed or not.",
+                    "description": "Indicates if the user has completed the onboarding walkthrough.",
                     "type": "boolean",
                     "deprecated": false
                   },
                   "org_identifiers": {
-                    "description": "List of Unique Org Identifiers to be associated with",
+                    "description": "IDs or names of the Orgs to which the user belongs",
                     "type": "array",
                     "items": {
                       "type": "string"
+                    },
+                    "deprecated": false
+                  },
+                  "home_liveboard_identifier": {
+                    "description": "Unique ID or name of the users home liveboard.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "favorite_metadata": {
+                    "description": "Metadata objects which are assigned as favorites of the user.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/FavoriteMetadataInput"
                     },
                     "deprecated": false
                   }
@@ -198,7 +211,7 @@
     },
     "/api/rest/2.0/system": {
       "get": {
-        "operationId": "getSystemInfo",
+        "operationId": "getSystemInformation",
         "description": "Get system details",
         "tags": [
           "System"
@@ -228,9 +241,53 @@
       }
     },
     "/api/rest/2.0/system/config": {
+      "post": {
+        "operationId": "updateSystemConfig",
+        "description": "Update cluster configuration",
+        "tags": [
+          "System"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "configuration": {
+                    "description": "Configuration JSON with the key-value pair of configuration attributes to be updated.",
+                    "type": "object",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "configuration"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "Successful"
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/system/config-overrides": {
       "get": {
-        "operationId": "getSystemConfig",
-        "description": "Get system config information",
+        "operationId": "getSystemOverrideInfo",
+        "description": "Get cluster override info.",
         "tags": [
           "System"
         ],
@@ -240,7 +297,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SystemConfig"
+                  "type": "object"
                 }
               }
             }
@@ -261,7 +318,7 @@
     "/api/rest/2.0/orgs/search": {
       "post": {
         "operationId": "searchOrgs",
-        "description": "To programmatically search an Org in the ThoughtSpot system use this API endpoint.",
+        "description": "Gets Orgs configured on a ThoughtSpot instance. Requires cluster administration privileges.",
         "tags": [
           "Orgs"
         ],
@@ -272,7 +329,7 @@
                 "type": "object",
                 "properties": {
                   "org_identifier": {
-                    "description": "identifier for the Org: Either unique id or unique name of the Org.",
+                    "description": "ID or name of the Org.",
                     "type": "string",
                     "deprecated": false
                   },
@@ -300,7 +357,7 @@
                     "deprecated": false
                   },
                   "user_identifiers": {
-                    "description": "User identifier for the Org: Either unique id or unique name of the user.",
+                    "description": "GUIDs or names of the users for which you want to retrieve the Orgs data.",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -342,7 +399,7 @@
     "/api/rest/2.0/tags/search": {
       "post": {
         "operationId": "searchTags",
-        "description": "To programmatically search tags in the ThoughtSpot system use this API endpoint.\nProvide any of tag attributes. Matching tags will be returned.",
+        "description": "TAllows searching tags. ",
         "tags": [
           "Tags"
         ],
@@ -397,7 +454,7 @@
     "/api/rest/2.0/groups/search": {
       "post": {
         "operationId": "searchUserGroups",
-        "description": "Search User Groups from the current org",
+        "description": "Allows searching groups. Requires administrator privileges.",
         "tags": [
           "Groups"
         ],
@@ -408,7 +465,7 @@
                 "type": "object",
                 "properties": {
                   "default_liveboard_identifiers": {
-                    "description": "Unique ID of liveboards which will be assigned as default liveboards to the user group.",
+                    "description": "GUID of Liveboards which will be assigned as default Liveboards for the users in the specified group.",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -416,22 +473,22 @@
                     "deprecated": false
                   },
                   "description": {
-                    "description": "Description for the user group.",
+                    "description": "Description of the group.",
                     "type": "string",
                     "deprecated": false
                   },
                   "display_name": {
-                    "description": "Unique display name for the user group.",
+                    "description": "Display name of the group",
                     "type": "string",
                     "deprecated": false
                   },
                   "group_identifier": {
-                    "description": "Unique ID or name of the user group.",
+                    "description": "GUID or name of the group",
                     "type": "string",
                     "deprecated": false
                   },
                   "org_identifiers": {
-                    "description": "Unique ID or name of the org where the user group will be created. \nIf not specified then group will be created in the current logged in org. \nNote that only tenant admins are allowed to create group across org.",
+                    "description": "ID or name of the Org to which the group belongs.",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -439,7 +496,7 @@
                     "deprecated": false
                   },
                   "privileges": {
-                    "description": "Privileges which will be assigned to the user group.",
+                    "description": "Privileges assigned to the group.",
                     "type": "array",
                     "items": {
                       "type": "string",
@@ -474,7 +531,7 @@
                     "deprecated": false
                   },
                   "sub_group_identifiers": {
-                    "description": "Unique ID or name of the User Groups who will be part of the user group.",
+                    "description": "GUID or name of the sub groups. A subgroup is a group assigned to a parent group.",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -482,7 +539,7 @@
                     "deprecated": false
                   },
                   "type": {
-                    "description": "Type of the user group.",
+                    "description": "Group type.",
                     "type": "string",
                     "enum": [
                       "LOCAL_GROUP",
@@ -491,7 +548,7 @@
                     "deprecated": false
                   },
                   "user_identifiers": {
-                    "description": "Unique ID or name of the Users who will be part of the user group.",
+                    "description": "GUID or name of the users assigned to the group.",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -499,7 +556,7 @@
                     "deprecated": false
                   },
                   "visibility": {
-                    "description": "Visibility of the user group. The SHARABLE makes a user group visible to other users and user groups, \nand thus allows them to share objects.",
+                    "description": "Visibility of the group. To make a group visible to other users and groups,\nset the visibility to SHAREABLE. ",
                     "type": "string",
                     "enum": [
                       "SHARABLE",
@@ -542,7 +599,7 @@
     "/api/rest/2.0/metadata/search": {
       "post": {
         "operationId": "searchMetadata",
-        "description": "Search Metadata",
+        "description": "Allows searching for metadata objects. You can search for metadata objects \nsuch as Liveboard, Answer. Requires at least view access to the metadata object.",
         "tags": [
           "Metadata"
         ],
@@ -553,7 +610,7 @@
                 "type": "object",
                 "properties": {
                   "metadata": {
-                    "description": "Metadata objects.",
+                    "description": "Metadata objects such as Liveboards, Answers, and Worksheets.",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/MetadataListItemInput"
@@ -561,7 +618,7 @@
                     "deprecated": false
                   },
                   "permissions": {
-                    "description": "Permission details for searching the objects.",
+                    "description": "Object permission details to search by.",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/PermissionInput"
@@ -569,7 +626,7 @@
                     "deprecated": false
                   },
                   "created_by_user_identifiers": {
-                    "description": "Unique ID or name of users who has created the metadata object.",
+                    "description": "GUID or name of user who created the metadata object.",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -577,7 +634,7 @@
                     "deprecated": false
                   },
                   "dependent_object_version": {
-                    "description": "Version of the dependent metadata object.",
+                    "description": "Version of the dependent table of the metadata like worksheets.",
                     "default": "V1",
                     "type": "string",
                     "enum": [
@@ -587,7 +644,7 @@
                     "deprecated": false
                   },
                   "exclude_objects": {
-                    "description": "Exclude Metadata objects.",
+                    "description": "List of metadata objects to exclude from search.",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/ExcludeMetadataListItemInput"
@@ -595,59 +652,59 @@
                     "deprecated": false
                   },
                   "favorite_object_options": {
-                    "description": "Favorite object options.",
+                    "description": "Options to sort the API response by objects set as favorites \nfor the logged-in user or the users specified in the API request.",
                     "$ref": "#/components/schemas/FavoriteObjectOptionsInput",
                     "deprecated": false
                   },
                   "include_auto_created_objects": {
-                    "description": "Indicates whether to include auto created metadata objects.",
+                    "description": "Includes system-generated metadata objects.",
                     "default": false,
                     "type": "boolean",
                     "deprecated": false
                   },
                   "include_dependent_objects": {
-                    "description": "Indicates whether to include dependent objects of the metadata objects.(Valid only for LOGICAL TABLE)",
+                    "description": "Includes dependents of the metadata object specified in the API request.\nFor example, a worksheet can consist of dependent objects such as Liveboards or Answers.",
                     "default": false,
                     "type": "boolean",
                     "deprecated": false
                   },
                   "include_details": {
-                    "description": "Indicates whether to include complete details of the metadata objects.",
+                    "description": "Includes complete details of the metadata objects.",
                     "default": false,
                     "type": "boolean",
                     "deprecated": false
                   },
                   "include_headers": {
-                    "description": "Indicates whether to include headers of the metadata objects.",
+                    "description": "Includes headers of the metadata objects.",
                     "default": true,
                     "type": "boolean",
                     "deprecated": false
                   },
                   "include_hidden_objects": {
-                    "description": "Indicates whether to include hidden metadata objects.",
+                    "description": "Includes details of the hidden objects, such as a column in a worksheet or a table.",
                     "default": false,
                     "type": "boolean",
                     "deprecated": false
                   },
                   "include_incomplete_objects": {
-                    "description": "Indicates whether to include details of incomplete information of the metadata objects if any present.",
+                    "description": "Includes objects with incomplete metadata.",
                     "default": false,
                     "type": "boolean",
                     "deprecated": false
                   },
                   "include_visualization_headers": {
-                    "description": "Indicates whether to include visualization headers of the Liveboard metadata objects.",
+                    "description": "Includes visualization headers of the specified Liveboard object.",
                     "default": false,
                     "type": "boolean",
                     "deprecated": false
                   },
                   "include_worksheet_search_assist_data": {
-                    "description": "Indicates whether to include search assist data of the worksheet objects.",
+                    "description": "If search assistance lessons are configured on a worksheet, \nthe API returns the search assist data for Worksheet objects.",
                     "type": "boolean",
                     "deprecated": false
                   },
                   "modified_by_user_identifiers": {
-                    "description": "Unique ID or name of users who has modified the metadata object.",
+                    "description": "Includes ID or names of the users who have modified the metadata object.",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -669,12 +726,12 @@
                     "deprecated": false
                   },
                   "sort_options": {
-                    "description": "Sort options.",
+                    "description": "Sort options to filter metadata details.",
                     "$ref": "#/components/schemas/SortOptions",
                     "deprecated": false
                   },
                   "tag_identifiers": {
-                    "description": "Unique ID or name of tags.",
+                    "description": "Tags to filter metadata objects by",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -716,7 +773,7 @@
     "/api/rest/2.0/metadata/liveboard/sql": {
       "post": {
         "operationId": "fetchLiveboardSqlQuery",
-        "description": "Fetch SQL query for Liveboard visualizations.",
+        "description": "Fetches SQL query data for Liveboard and its visualizations.",
         "tags": [
           "Metadata"
         ],
@@ -727,7 +784,7 @@
                 "type": "object",
                 "properties": {
                   "metadata_identifier": {
-                    "description": "Unique ID or name of the metadata.",
+                    "description": "ID or name of an Liveboard.",
                     "type": "string",
                     "deprecated": false
                   },
@@ -774,7 +831,7 @@
     "/api/rest/2.0/metadata/answer/sql": {
       "post": {
         "operationId": "fetchAnswerSqlQuery",
-        "description": "Fetch SQL query for Answer.",
+        "description": "Fetches SQL query data for an Answer.",
         "tags": [
           "Metadata"
         ],
@@ -785,7 +842,7 @@
                 "type": "object",
                 "properties": {
                   "metadata_identifier": {
-                    "description": "Unique ID or name of the metadata.",
+                    "description": "ID or name of an Answer.",
                     "type": "string",
                     "deprecated": false
                   }
@@ -824,7 +881,7 @@
     "/api/rest/2.0/report/liveboard": {
       "post": {
         "operationId": "exportLiveboardReport",
-        "description": "Export report file for Liveboard visualization data.",
+        "description": "Exports Liveboard and visualization data in PDF, PNG, XLS, or CSV format.\nRequires at least view access to the Liveboard.",
         "tags": [
           "Reports"
         ],
@@ -835,12 +892,12 @@
                 "type": "object",
                 "properties": {
                   "metadata_identifier": {
-                    "description": "Unique ID or name of the metadata.",
+                    "description": "GUID or name of the Liveboard object.",
                     "type": "string",
                     "deprecated": false
                   },
                   "visualization_identifiers": {
-                    "description": "Unique ID or name of visualizations.",
+                    "description": "GUID or name of visualizations on the Liveboard. If this parameter is \nnot defined, the API returns a report with all visualizations saved on a Liveboard.",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -974,7 +1031,7 @@
     "/api/rest/2.0/security/principals/fetch-permissions": {
       "post": {
         "operationId": "fetchPermissionsOfPrincipals",
-        "description": "Fetch permissions of principals (Users or Usergroups).",
+        "description": "Fetch permission details for principal objects, such as users and groups.",
         "tags": [
           "Security"
         ],
@@ -985,7 +1042,7 @@
                 "type": "object",
                 "properties": {
                   "principals": {
-                    "description": "Principal details.",
+                    "description": "GUID or name of the principal.",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/PrincipalsInput"
@@ -993,7 +1050,7 @@
                     "deprecated": false
                   },
                   "metadata": {
-                    "description": "Metadata objects considered while fetching permission of specified principals.\nIf not provided then all applicable metadata objects are considered.",
+                    "description": "Metadata objects for which you want to fetch permission details. \nIf not specified, the API returns permission details for all \nmetadata objects that the specified users and groups can access.",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/PermissionsMetadataTypeInput"
@@ -1035,7 +1092,7 @@
     "/api/rest/2.0/security/metadata/fetch-permissions": {
       "post": {
         "operationId": "fetchPermissionsOnMetadata",
-        "description": "Fetch permissions on metadata objects.",
+        "description": "Fetch permission details for metadata objects",
         "tags": [
           "Security"
         ],
@@ -1046,7 +1103,7 @@
                 "type": "object",
                 "properties": {
                   "metadata": {
-                    "description": "Metadata objects.",
+                    "description": "GUID or name of the metadata object.",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/PermissionsMetadataTypeInput"
@@ -1054,7 +1111,7 @@
                     "deprecated": false
                   },
                   "principals": {
-                    "description": "Principal details considered while fetching permission on metadata objects.\nIf not provided then all applicable principals are considered.",
+                    "description": "Principal objects for which you want to fetch permissions. \nIf not specified, the API returns all users and groups that \ncan access the specified metadata objects.",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/PrincipalsInput"
@@ -1102,8 +1159,9 @@
     "/api/rest/2.0/searchdata": {
       "post": {
         "operationId": "searchData",
+        "description": "Allows passing a search query string and retrieving data from ThoughtSpot.",
         "tags": [
-          "Search Data"
+          "Data"
         ],
         "requestBody": {
           "content": {
@@ -1112,17 +1170,17 @@
                 "type": "object",
                 "properties": {
                   "query_string": {
-                    "description": "Data search query string.",
+                    "description": "Data search query string token.",
                     "type": "string",
                     "deprecated": false
                   },
                   "logical_table_identifier": {
-                    "description": "Unique ID of data object (worksheet, view, or a table)",
+                    "description": "GUID of the data source object, such as a worksheet, view, or table.",
                     "type": "string",
                     "deprecated": false
                   },
                   "data_format": {
-                    "description": "JSON output data format.",
+                    "description": "JSON output format. By default, the API returns full data in the JSON.",
                     "type": "string",
                     "enum": [
                       "COMPACT"
@@ -1137,7 +1195,7 @@
                     "deprecated": false
                   },
                   "record_size": {
-                    "description": "The number of records that should be included.",
+                    "description": "The number of records to include in a batch.",
                     "default": 10,
                     "type": "integer",
                     "format": "int32",
@@ -1179,9 +1237,9 @@
     "/api/rest/2.0/metadata/liveboard/data": {
       "post": {
         "operationId": "fetchLiveboardData",
-        "description": "Fetch data of Liveboard visualizations.",
+        "description": "Fetches Liveboard data. Requires at least view access to the Liveboard. ",
         "tags": [
-          "Search Data"
+          "Data"
         ],
         "requestBody": {
           "content": {
@@ -1190,12 +1248,12 @@
                 "type": "object",
                 "properties": {
                   "metadata_identifier": {
-                    "description": "Unique ID or name of the metadata.",
+                    "description": "GUID or name of the Liveboard.",
                     "type": "string",
                     "deprecated": false
                   },
                   "visualization_identifiers": {
-                    "description": "List of unique ID or name of visualizations.",
+                    "description": "GUIDs or names of the visualizations on the Liveboard.",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -1208,7 +1266,7 @@
                     "deprecated": false
                   },
                   "data_format": {
-                    "description": "JSON output data format.",
+                    "description": "JSON output format. By default, the API returns full data in the JSON.",
                     "default": "COMPACT",
                     "type": "string",
                     "enum": [
@@ -1224,7 +1282,7 @@
                     "deprecated": false
                   },
                   "record_size": {
-                    "description": "The number of records that should be included.",
+                    "description": "The number of records to include in a batch.",
                     "default": 10,
                     "type": "integer",
                     "format": "int32",
@@ -1265,9 +1323,9 @@
     "/api/rest/2.0/metadata/answer/data": {
       "post": {
         "operationId": "fetchAnswerData",
-        "description": "Fetch data of Answer.",
+        "description": "Fetches data from a saved Answer. Requires at least view access to the Answer object. ",
         "tags": [
-          "Search Data"
+          "Data"
         ],
         "requestBody": {
           "content": {
@@ -1276,12 +1334,12 @@
                 "type": "object",
                 "properties": {
                   "metadata_identifier": {
-                    "description": "Unique ID or name of the metadata.",
+                    "description": "GUID or name of the Answer.",
                     "type": "string",
                     "deprecated": false
                   },
                   "data_format": {
-                    "description": "JSON output data format.",
+                    "description": "JSON output format. By default, the API returns full data in the JSON.",
                     "default": "COMPACT",
                     "type": "string",
                     "enum": [
@@ -1297,7 +1355,7 @@
                     "deprecated": false
                   },
                   "record_size": {
-                    "description": "The number of records that should be included.",
+                    "description": "The number of records to include in a batch.",
                     "default": 10,
                     "type": "integer",
                     "format": "int32",
@@ -1335,10 +1393,167 @@
         }
       }
     },
+    "/api/rest/2.0/vcs/config/search": {
+      "post": {
+        "operationId": "vcsGetConfig",
+        "description": "Search local repository configuration",
+        "tags": [
+          "VCS"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/repoConfigObject"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/vcs/branches/{branch_name}/pull": {
+      "post": {
+        "operationId": "pullBranch",
+        "description": "Pull a branch from remote repository to local repository.",
+        "tags": [
+          "VCS"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "branch_name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Name of the branch to pull",
+            "deprecated": false
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful"
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/vcs/commits/search": {
+      "post": {
+        "operationId": "commitHistory",
+        "description": "List the commit history of a metadata object",
+        "tags": [
+          "VCS"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "metadata_identifier": {
+                    "description": "Unique ID or name of the metadata.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "metadata_type": {
+                    "description": "Type of metadata.",
+                    "type": "string",
+                    "enum": [
+                      "LIVEBOARD",
+                      "ANSWER",
+                      "LOGICAL_TABLE",
+                      "LOGICAL_COLUMN",
+                      "CONNECTION",
+                      "TAG",
+                      "USER",
+                      "USER_GROUP",
+                      "LOGICAL_RELATIONSHIP"
+                    ],
+                    "deprecated": false
+                  },
+                  "branch_name": {
+                    "description": "Name of the branch from which commit history needs to be displayed",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "record_offset": {
+                    "description": "Record offset point in the commit history to display the response",
+                    "type": "integer",
+                    "format": "int32",
+                    "deprecated": false
+                  },
+                  "record_size": {
+                    "description": "Number of history records from record offset point to be displayed in the response",
+                    "type": "integer",
+                    "format": "int32",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "metadata_identifier",
+                  "metadata_type"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/commitHistoryResponse"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/logs/fetch": {
       "post": {
         "operationId": "fetchLogs",
-        "description": "Fetch Log details",
+        "description": "Fetches security audit logs. Requires administrator privileges.",
         "tags": [
           "Log"
         ],
@@ -1356,14 +1571,14 @@
                     ],
                     "deprecated": false
                   },
-                  "start_epoc_time_in_millis": {
-                    "description": "Start epoc time in milli seconds.",
+                  "start_epoch_time_in_millis": {
+                    "description": "Start time in EPOCH format",
                     "type": "number",
                     "format": "float",
                     "deprecated": false
                   },
-                  "end_epoc_time_in_millis": {
-                    "description": "End epoc time in milli seconds.",
+                  "end_epoch_time_in_millis": {
+                    "description": "End time in EPOCH format",
                     "type": "number",
                     "format": "float",
                     "deprecated": false
@@ -1406,7 +1621,7 @@
     "/api/rest/2.0/auth/session/login": {
       "post": {
         "operationId": "login",
-        "description": "You can programmatically create login session for a user in ThoughtSpot using this endpoint. \n\nYou can create session by either providing userName and password as inputs in this request body or by including \"Authorization\" header with the token generated through the endpoint /tspublic/rest/v2/session/gettoken. \n\nuserName and password input is given precedence over \"Authorization\" header, when both are included in the request.",
+        "description": "Using this endpoint, you can programmatically create a login session for a user in ThoughtSpot.",
         "tags": [
           "Authentication"
         ],
@@ -1458,7 +1673,7 @@
     "/api/rest/2.0/auth/token/object": {
       "post": {
         "operationId": "getObjectAccessToken",
-        "description": " To programmatically create session token for a user in ThoughtSpot, use this endpoint. \n\nYou can generate the token for a user by providing password or secret key from the cluster. \n\nYou need to enable trusted authentication to generate secret key. To generate secret key, follow below steps. \n\n\n 1. Click the Develop tab. \n\n\n 2. Under Customizations, click Settings. \n\n\n 3. To enable trusted authentication, turn on the toggle. \n\n\n 4. A secret_key for trusted authentication is generated. \n\n\n 5. Click the clipboard icon to copy the token. \n\n\n \n\nPassword is given precedence over secretKey input, when both are included in the request.",
+        "description": " To programmatically create object session token for a user in ThoughtSpot, use this endpoint. \n\nYou can generate the token for a user by providing password or secret key from the cluster. \n\nYou need to enable trusted authentication to generate secret key. To generate secret key, follow below steps. \n\n\n 1. Click the Develop tab. \n\n\n 2. Under Customizations, click Settings. \n\n\n 3. To enable trusted authentication, turn on the toggle. \n\n\n 4. A secret_key for trusted authentication is generated. \n\n\n 5. Click the clipboard icon to copy the token. \n\n\n \n\nPassword is given precedence over secretKey input, when both are included in the request.",
         "tags": [
           "Authentication"
         ],
@@ -1505,7 +1720,7 @@
                     "deprecated": false
                   },
                   "auto_create": {
-                    "description": "“user_options” attribute is added as an optional attribute which will allow JIT token support",
+                    "description": "“Creates a new user if the specified username does not already exist in ThoughtSpot. Use this parameter to provision a user just-in-time (JIT).",
                     "default": false,
                     "type": "boolean",
                     "deprecated": false
@@ -1554,7 +1769,7 @@
     "/api/rest/2.0/auth/token/full": {
       "post": {
         "operationId": "getFullAccessToken",
-        "description": " To programmatically create session token for a user in ThoughtSpot, use this endpoint. \n\nYou can generate the token for a user by providing password or secret key from the cluster. \n\nYou need to enable trusted authentication to generate secret key. To generate secret key, follow below steps. \n\n\n 1. Click the Develop tab. \n\n\n 2. Under Customizations, click Settings. \n\n\n 3. To enable trusted authentication, turn on the toggle. \n\n\n 4. A secret_key for trusted authentication is generated. \n\n\n 5. Click the clipboard icon to copy the token. \n\n\n \n\nPassword is given precedence over secretKey input, when both are included in the request.",
+        "description": " To programmatically create full session token for a user in ThoughtSpot, use this endpoint. \n\nYou can generate the token for a user by providing password or secret key from the cluster. \n\nYou need to enable trusted authentication to generate secret key. To generate secret key, follow below steps. \n\n\n 1. Click the Develop tab. \n\n\n 2. Under Customizations, click Settings. \n\n\n 3. To enable trusted authentication, turn on the toggle. \n\n\n 4. A secret_key for trusted authentication is generated. \n\n\n 5. Click the clipboard icon to copy the token. \n\n\n \n\nPassword is given precedence over secretKey input, when both are included in the request.",
         "tags": [
           "Authentication"
         ],
@@ -1596,13 +1811,13 @@
                     "deprecated": false
                   },
                   "auto_create": {
-                    "description": "user_options attribute is added as an optional attribute which will allow JIT token support",
+                    "description": "Creates a new user if the specified username does not already exist in ThoughtSpot. Use this parameter to provision a user just-in-time (JIT).",
                     "default": false,
                     "type": "boolean",
                     "deprecated": false
                   },
                   "group_identifiers": {
-                    "description": "Unique ID or name of the User Groups to which newly created user to be added.",
+                    "description": "ID or name of the groups to which the newly created user belongs.",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -1713,7 +1928,7 @@
     "/api/rest/2.0/users/create": {
       "post": {
         "operationId": "createUser",
-        "description": "To programmatically create a user account in the ThoughtSpot system use this API endpoint. Using this API, you can create a user and assign groups.\nTo create a user, you require admin user privileges.",
+        "description": "Allows creating a user in ThoughtSpot. The API endpoint also allows you to assign the user to specific groups,\nOrgs, and add favorite Liveboards and Answers. To create a user, you require administration privileges.",
         "tags": [
           "Users"
         ],
@@ -1770,7 +1985,7 @@
                     "deprecated": false
                   },
                   "org_identifiers": {
-                    "description": "List of Unique Org Identifiers to be associated with",
+                    "description": "List of Org IDs to which the user belongs.",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -1778,7 +1993,7 @@
                     "deprecated": false
                   },
                   "group_identifiers": {
-                    "description": "List of user-group to be associated with",
+                    "description": "GUIDs or names of the groups to which the newly created user belongs.",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -1786,7 +2001,7 @@
                     "deprecated": false
                   },
                   "visibility": {
-                    "description": "Visibility of the user. The visibility attribute is set to DEFAULT when creating a user. The DEFAULT attribute makes a user visible to other users and user groups, and this allows them to share objects",
+                    "description": "Visibility of the users. When set to SHARABLE, the user is visible to other users and groups when they try to share an object.",
                     "default": "SHARABLE",
                     "type": "string",
                     "enum": [
@@ -1796,7 +2011,7 @@
                     "deprecated": false
                   },
                   "notify_on_share": {
-                    "description": "User preference for receiving email notifications when another ThoughtSpot user shares answers or pinboards.",
+                    "description": "User preference for receiving email notifications when another ThoughtSpot\nuser shares a metadata object such as Answer, Liveboard, or Worksheet.",
                     "default": true,
                     "type": "boolean",
                     "deprecated": false
@@ -1814,12 +2029,12 @@
                     "deprecated": false
                   },
                   "home_liveboard_identifier": {
-                    "description": "to set GUID for home live board.",
+                    "description": "GUID of the Liveboard to set a default Liveboard for the user. \nThoughtSpot displays this Liveboard on the Home page when the user logs in.",
                     "type": "string",
                     "deprecated": false
                   },
                   "favorite_metadata": {
-                    "description": "Metadata objects to be assigned as favorites for the imported user.",
+                    "description": "Metadata objects to add to the user's favorites list.",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/FavoriteMetadataInput"
@@ -1864,7 +2079,7 @@
     "/api/rest/2.0/users/{user_identifier}/update": {
       "post": {
         "operationId": "updateUser",
-        "description": "To programmatically update a user account in the ThoughtSpot system use this API endpoint.\nUsing this API, you can update a user and assign groups.\nTo update a user, you require admin user privileges.",
+        "description": "Updates a given user object. Requires administrator privileges.",
         "tags": [
           "Users"
         ],
@@ -1885,7 +2100,7 @@
                     "deprecated": false
                   },
                   "visibility": {
-                    "description": "Visibility of the user. The visibility attribute is set to DEFAULT when creating a user. The DEFAULT attribute makes a user visible to other users and user groups, and this allows them to share objects",
+                    "description": "Visibility of the users. When set to SHARABLE, the user is visible to other users and groups when they try to share an object.",
                     "type": "string",
                     "enum": [
                       "SHARABLE",
@@ -1911,7 +2126,7 @@
                     "deprecated": false
                   },
                   "notify_on_share": {
-                    "description": "User preference for receiving email notifications when another ThoughtSpot user shares answers or pinboards.",
+                    "description": "User preference for receiving email notifications when another ThoughtSpot user \nshares a metadata object such as Answer, Liveboard, or Worksheet. ",
                     "type": "boolean",
                     "deprecated": false
                   },
@@ -1921,7 +2136,7 @@
                     "deprecated": false
                   },
                   "onboarding_experience_completed": {
-                    "description": "flag to get the on-boarding experience is completed or not.",
+                    "description": "Indicates if the user has completed the onboarding and allows turning off the onboarding walkthrough.",
                     "type": "boolean",
                     "deprecated": false
                   },
@@ -1938,7 +2153,7 @@
                     "deprecated": false
                   },
                   "group_identifiers": {
-                    "description": "List of user-group to be associated with",
+                    "description": "GUIDs or names of the groups.",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -1946,12 +2161,12 @@
                     "deprecated": false
                   },
                   "home_liveboard_identifier": {
-                    "description": "to set GUID for home live board.",
+                    "description": "GUID of the Liveboard to set a default Liveboard for the user. ThoughtSpot displays\nthis Liveboard on the Home page when the user logs in.",
                     "type": "string",
                     "deprecated": false
                   },
                   "favorite_metadata": {
-                    "description": "Metadata objects to be assigned as favorites for the imported user.",
+                    "description": "Metadata objects to add to the user's favorites list.",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/FavoriteMetadataInput"
@@ -1959,7 +2174,7 @@
                     "deprecated": false
                   },
                   "org_identifiers": {
-                    "description": "List of Unique Org Identifiers to be associated with",
+                    "description": "IDs of the Orgs.",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -1995,7 +2210,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "GUID / name of the user to be updated",
+            "description": "GUID / name of the user",
             "deprecated": false
           }
         ]
@@ -2004,7 +2219,7 @@
     "/api/rest/2.0/users/{user_identifier}/delete": {
       "post": {
         "operationId": "deleteUser",
-        "description": "To programmatically delete a user account in the ThoughtSpot system use this API endpoint.\nUsing this API, you can delete by passing GUID / name of the user.\nTo delete a user, you require admin user privileges.",
+        "description": "Deletes a user. Requires administrator privileges.",
         "tags": [
           "Users"
         ],
@@ -2016,7 +2231,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "GUID / name of the user to be deleted",
+            "description": "GUID / name of the user",
             "deprecated": false
           }
         ],
@@ -2040,7 +2255,7 @@
     "/api/rest/2.0/users/import": {
       "post": {
         "operationId": "importUsers",
-        "description": "To programmatically import users accounts in the ThoughtSpot system use this API endpoint.\nUsing this API, you can import multiple users.",
+        "description": "Imports user data from external databases to ThoughtSpot.",
         "tags": [
           "Users"
         ],
@@ -2059,18 +2274,18 @@
                     "deprecated": false
                   },
                   "default_password": {
-                    "description": "Default password to be set if password field not present in above import user like first one",
+                    "description": "The default password to assign to users if they do not have a password assigned in ThoughtSpot. ",
                     "type": "string",
                     "deprecated": false
                   },
                   "dry_run": {
-                    "description": "If true, This will preview the impacted users, but changes won't applied into the system",
+                    "description": "If true, the API performs a test operation and returns user IDs whose data will be edited after the import.",
                     "default": true,
                     "type": "boolean",
                     "deprecated": false
                   },
                   "delete_unspecified_users": {
-                    "description": "if true, this api will delete all other users specified in above users list. Some important users like tsadmin, guest, system and su will be ignored.",
+                    "description": "If set to true, removes the users that are not specified in the API request.",
                     "default": false,
                     "type": "boolean",
                     "deprecated": false
@@ -2107,10 +2322,10 @@
         }
       }
     },
-    "/api/rest/2.0/users/change_password": {
+    "/api/rest/2.0/users/change-password": {
       "post": {
         "operationId": "changeUserPassword",
-        "description": "Change user password",
+        "description": "Allows changing the password of a ThoughtSpot user account.",
         "tags": [
           "Users"
         ],
@@ -2131,7 +2346,7 @@
                     "deprecated": false
                   },
                   "user_identifier": {
-                    "description": "Unique ID or name of the user.",
+                    "description": "GUID or name of the user.",
                     "type": "string",
                     "deprecated": false
                   }
@@ -2163,10 +2378,10 @@
         }
       }
     },
-    "/api/rest/2.0/users/reset_password": {
+    "/api/rest/2.0/users/reset-password": {
       "post": {
         "operationId": "resetUserPassword",
-        "description": "Reset user password",
+        "description": "Resets the password of a ThoughtSpot user account.",
         "tags": [
           "Users"
         ],
@@ -2182,7 +2397,7 @@
                     "deprecated": false
                   },
                   "user_identifier": {
-                    "description": "Unique ID or name of the user.",
+                    "description": "GUID or name of the user.",
                     "type": "string",
                     "deprecated": false
                   }
@@ -2213,10 +2428,10 @@
         }
       }
     },
-    "/api/rest/2.0/users/force_logout": {
+    "/api/rest/2.0/users/force-logout": {
       "post": {
         "operationId": "forceLogoutUsers",
-        "description": "Force logout users session",
+        "description": "Logs out a user from their current session. This API operation makes\na user session invalid and forces the user to re-login.",
         "tags": [
           "Users"
         ],
@@ -2227,7 +2442,7 @@
                 "type": "object",
                 "properties": {
                   "user_identifiers": {
-                    "description": "Unique ID or name of the users for force logging out their sessions.",
+                    "description": "GUID or name of the users for force logging out their sessions.",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -2260,7 +2475,7 @@
     "/api/rest/2.0/orgs/create": {
       "post": {
         "operationId": "createOrg",
-        "description": "To programmatically create an Org in the ThoughtSpot system use this API endpoint.",
+        "description": "Creates an Org. Requires cluster administration privileges.",
         "tags": [
           "Orgs"
         ],
@@ -2315,7 +2530,7 @@
     "/api/rest/2.0/orgs/{org_identifier}/update": {
       "post": {
         "operationId": "updateOrg",
-        "description": "To programmatically update an Org in the ThoughtSpot system use this API endpoint.",
+        "description": "Updates an Org. Requires cluster administration privileges.",
         "tags": [
           "Orgs"
         ],
@@ -2372,7 +2587,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "identifier for the Org: Either unique id or unique name of the Org.",
+            "description": "ID or name of the Org.",
             "deprecated": false
           }
         ]
@@ -2381,7 +2596,7 @@
     "/api/rest/2.0/orgs/{org_identifier}/delete": {
       "post": {
         "operationId": "deleteOrg",
-        "description": "To programmatically delete an Org in the ThoughtSpot system use this API endpoint.",
+        "description": "Deletes an Org. Requires cluster administration privileges.",
         "tags": [
           "Orgs"
         ],
@@ -2393,7 +2608,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Org identifier for the Org: Either unique id or unique name of the Org.",
+            "description": "ID or name of the Org.",
             "deprecated": false
           }
         ],
@@ -2417,7 +2632,7 @@
     "/api/rest/2.0/tags/create": {
       "post": {
         "operationId": "createTag",
-        "description": "To programmatically create an org in the ThoughtSpot system use this API endpoint.",
+        "description": "Creates an Org. Requires administrator privileges.",
         "tags": [
           "Tags"
         ],
@@ -2433,7 +2648,7 @@
                     "deprecated": false
                   },
                   "color": {
-                    "description": "Hex color code to be assigned to the tag. Example, Input: #ff78a9.",
+                    "description": "Hex color code to be assigned to the tag. For example, #ff78a9.",
                     "type": "string",
                     "deprecated": false
                   }
@@ -2473,7 +2688,7 @@
     "/api/rest/2.0/tags/{tag_identifier}/update": {
       "post": {
         "operationId": "updateTag",
-        "description": "To programmatically update tags, use this endpoint. Specify either tag id or tag name",
+        "description": "Updates an Org. Requires administrator privileges.",
         "tags": [
           "Tags"
         ],
@@ -2489,7 +2704,7 @@
                     "deprecated": false
                   },
                   "color": {
-                    "description": "Hex color code to be assigned to the tag. Example, Input: #ff78a9",
+                    "description": "Hex color code to be assigned to the tag. For example, #ff78a9.",
                     "type": "string",
                     "deprecated": false
                   }
@@ -2531,7 +2746,7 @@
     "/api/rest/2.0/tags/{tag_identifier}/delete": {
       "post": {
         "operationId": "deleteTag",
-        "description": "To programmatically delete tags, use this endpoint. Specify either tag id or tag name",
+        "description": "Deletes a tag. Requires administrator privileges.",
         "tags": [
           "Tags"
         ],
@@ -2567,7 +2782,7 @@
     "/api/rest/2.0/tags/assign": {
       "post": {
         "operationId": "assignTag",
-        "description": "Assign tags to metadata objects",
+        "description": "Assigns a tag to a metadata object Org.",
         "tags": [
           "Tags"
         ],
@@ -2586,7 +2801,7 @@
                     "deprecated": false
                   },
                   "tag_identifiers": {
-                    "description": "Unique ID or name of tags.",
+                    "description": "GUID or name of the tag.",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -2623,7 +2838,7 @@
     "/api/rest/2.0/tags/unassign": {
       "post": {
         "operationId": "unassignTag",
-        "description": "Unassign tags to metadata objects",
+        "description": "Unassign a tag to a metadata object.",
         "tags": [
           "Tags"
         ],
@@ -2642,7 +2857,7 @@
                     "deprecated": false
                   },
                   "tag_identifiers": {
-                    "description": "Unique ID or name of tags.",
+                    "description": "GUID or name of the tag.",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -2679,7 +2894,7 @@
     "/api/rest/2.0/groups/create": {
       "post": {
         "operationId": "createUserGroup",
-        "description": "Create a User Group from the current org",
+        "description": "Create a group. Requires administrator privilege.",
         "tags": [
           "Groups"
         ],
@@ -2690,17 +2905,17 @@
                 "type": "object",
                 "properties": {
                   "name": {
-                    "description": "Name of the user group. The user group name must be unique.",
+                    "description": "Name of the group. The group name must be unique.",
                     "type": "string",
                     "deprecated": false
                   },
                   "display_name": {
-                    "description": "Unique display name for the user group.",
+                    "description": "Unique display name for the group.",
                     "type": "string",
                     "deprecated": false
                   },
                   "default_liveboard_identifiers": {
-                    "description": "Unique ID of liveboards which will be assigned as default liveboards to the user group.",
+                    "description": "Unique ID of Liveboards to assign as default liveboards to the users in the group.",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -2708,12 +2923,12 @@
                     "deprecated": false
                   },
                   "description": {
-                    "description": "Description for the user group.",
+                    "description": "Description of the group.",
                     "type": "string",
                     "deprecated": false
                   },
                   "privileges": {
-                    "description": "Privileges which will be assigned to the user group.",
+                    "description": "Privileges to assign to the group.",
                     "type": "array",
                     "items": {
                       "type": "string",
@@ -2748,7 +2963,7 @@
                     "deprecated": false
                   },
                   "sub_group_identifiers": {
-                    "description": "Unique ID or name of the User Groups who will be part of the user group.",
+                    "description": "GUID or name of the sub groups. A subgroup is a group assigned to a parent group.",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -2756,7 +2971,7 @@
                     "deprecated": false
                   },
                   "type": {
-                    "description": "Type of the user group.",
+                    "description": "Group type.",
                     "default": "LOCAL_GROUP",
                     "type": "string",
                     "enum": [
@@ -2766,7 +2981,7 @@
                     "deprecated": false
                   },
                   "user_identifiers": {
-                    "description": "Unique ID or name of the Users who will be part of the user group.",
+                    "description": "GUID or name of the users to assign to the group.",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -2774,7 +2989,7 @@
                     "deprecated": false
                   },
                   "visibility": {
-                    "description": "Visibility of the user group. The SHARABLE makes a user group visible to other users and user groups, and thus \nallows them to share objects.",
+                    "description": "Visibility of the group. To make a group visible to other users and groups,\nset the visibility to SHAREABLE. ",
                     "default": "SHARABLE",
                     "type": "string",
                     "enum": [
@@ -2819,7 +3034,7 @@
     "/api/rest/2.0/groups/{group_identifier}/update": {
       "post": {
         "operationId": "updateUserGroup",
-        "description": "Update the user group",
+        "description": "Update group properties.",
         "tags": [
           "Groups"
         ],
@@ -2830,12 +3045,12 @@
                 "type": "object",
                 "properties": {
                   "name": {
-                    "description": "Name of the user group. The user group name must be unique.",
+                    "description": "Name of the group to modify.",
                     "type": "string",
                     "deprecated": false
                   },
                   "default_liveboard_identifiers": {
-                    "description": "Unique ID of liveboards which will be assigned as default liveboards to the user group.",
+                    "description": "Unique ID of Liveboards to assign as default liveboards to the users in the group.",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -2843,17 +3058,17 @@
                     "deprecated": false
                   },
                   "description": {
-                    "description": "Description for the user group.",
+                    "description": "Description for the group.",
                     "type": "string",
                     "deprecated": false
                   },
                   "display_name": {
-                    "description": "Unique display name for the user group.",
+                    "description": "Display name of the group.",
                     "type": "string",
                     "deprecated": false
                   },
                   "privileges": {
-                    "description": "Privileges which will be assigned to the user group.",
+                    "description": "Privileges to assign to the group.",
                     "type": "array",
                     "items": {
                       "type": "string",
@@ -2888,7 +3103,7 @@
                     "deprecated": false
                   },
                   "sub_group_identifiers": {
-                    "description": "Unique ID or name of the User Groups who will be part of the user group.",
+                    "description": "GUID or name of the sub groups. A subgroup is a group assigned to a parent group.",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -2905,7 +3120,7 @@
                     "deprecated": false
                   },
                   "user_identifiers": {
-                    "description": "Unique ID or name of the Users who will be part of the user group.",
+                    "description": "GUID or name of the users to assign to the group.",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -2913,7 +3128,7 @@
                     "deprecated": false
                   },
                   "visibility": {
-                    "description": "Visibility of the user group. The SHARABLE makes a user group visible to other users and user groups, and thus \nallows them to share objects.",
+                    "description": "Visibility of the group. To make a group visible to other users and \ngroups, set the visibility to SHAREABLE. ",
                     "type": "string",
                     "enum": [
                       "SHARABLE",
@@ -2950,7 +3165,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique ID or name of the user group.",
+            "description": "GUID or name of the group.",
             "deprecated": false
           }
         ]
@@ -2959,7 +3174,7 @@
     "/api/rest/2.0/groups/{group_identifier}/delete": {
       "post": {
         "operationId": "deleteUserGroup",
-        "description": "Deletes a user group from the current org",
+        "description": "Deletes a group.",
         "tags": [
           "Groups"
         ],
@@ -2971,7 +3186,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique ID or name of the user group.",
+            "description": "GUID or name of the group.",
             "deprecated": false
           }
         ],
@@ -2995,7 +3210,7 @@
     "/api/rest/2.0/groups/import": {
       "post": {
         "operationId": "importUserGroups",
-        "description": "Import user groups to the current org",
+        "description": "Import groups to ThoughtSpot. Requires administrator privilege.",
         "tags": [
           "Groups"
         ],
@@ -3014,12 +3229,12 @@
                     "deprecated": false
                   },
                   "delete_unspecified_groups": {
-                    "description": "Option to remove any existing groups from system which are not specified in the input request.",
+                    "description": "If set to true, removes groups that are not specified in the API request.",
                     "type": "boolean",
                     "deprecated": false
                   },
                   "dry_run": {
-                    "description": "Option to dry or mock run of operation without importing any objects.",
+                    "description": "If true, the API performs a test operation and returns user IDs whose \ndata will be edited after the import.",
                     "type": "boolean",
                     "deprecated": false
                   }
@@ -3055,7 +3270,7 @@
     "/api/rest/2.0/metadata/tml/import": {
       "post": {
         "operationId": "importMetadata",
-        "description": "Import metadata objects using specified TMLs",
+        "description": "Imports TML representation of metadata objects. Requires data management privileges.",
         "tags": [
           "Metadata"
         ],
@@ -3066,7 +3281,7 @@
                 "type": "object",
                 "properties": {
                   "metadata_tmls": {
-                    "description": "Details of metadata object TMLs.",
+                    "description": "Details of TML objects.",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -3074,7 +3289,7 @@
                     "deprecated": false
                   },
                   "import_policy": {
-                    "description": "Import policy.",
+                    "description": "Specifies the import policy for the TML import.",
                     "default": "PARTIAL",
                     "type": "string",
                     "enum": [
@@ -3085,7 +3300,7 @@
                     "deprecated": false
                   },
                   "create_new": {
-                    "description": "Indicates whether object represented in TMLs to be newly created.",
+                    "description": "If selected, creates TML objects with new GUIDs.",
                     "default": false,
                     "type": "boolean",
                     "deprecated": false
@@ -3128,7 +3343,7 @@
     "/api/rest/2.0/metadata/tml/export": {
       "post": {
         "operationId": "exportMetadata",
-        "description": "Export metadata objects TMLs",
+        "description": "Exports TML representation of metadata objects",
         "tags": [
           "Metadata"
         ],
@@ -3153,7 +3368,7 @@
                     "deprecated": false
                   },
                   "export_fqn": {
-                    "description": "Indicates whether to include GUID (FQN) of specified metadata objects.",
+                    "description": "Indicates whether to include FQN (GUID) of specified metadata objects.",
                     "default": false,
                     "type": "boolean",
                     "deprecated": false
@@ -3196,7 +3411,7 @@
     "/api/rest/2.0/metadata/delete": {
       "post": {
         "operationId": "deleteMetadata",
-        "description": "Deletes metadata objects",
+        "description": "Deletes metadata objects. Requires edit access to objects.",
         "tags": [
           "Metadata"
         ],
@@ -3249,7 +3464,7 @@
     "/api/rest/2.0/security/metadata/assign": {
       "post": {
         "operationId": "assignChangeAuthor",
-        "description": "Assign new or change existing authors of metadata objects.",
+        "description": "Assigns a new author or transfers the ownership of the specified metadata objects.",
         "tags": [
           "Security"
         ],
@@ -3260,7 +3475,7 @@
                 "type": "object",
                 "properties": {
                   "metadata": {
-                    "description": "Metadata objects.",
+                    "description": "GUID or name of the metadata object.",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/AuthorMetadataTypeInput"
@@ -3268,12 +3483,12 @@
                     "deprecated": false
                   },
                   "user_identifier": {
-                    "description": "Unique ID or name of the user who will be new author of the metadata objects.",
+                    "description": "GUID or name of the user who you want to assign as the author.",
                     "type": "string",
                     "deprecated": false
                   },
                   "current_owner_identifier": {
-                    "description": "Unique ID or name of the current owner of metadata objects.\nMetadata objects matching specified current owner will be considered.",
+                    "description": "GUID or name of the current author.  When defined, the metadata objects \nauthored by the specified owner are filtered for the API operation.",
                     "type": "string",
                     "deprecated": false
                   }
@@ -3307,7 +3522,7 @@
     "/api/rest/2.0/security/metadata/share": {
       "post": {
         "operationId": "shareMetadata",
-        "description": "Share metadata objects with users or user groups.",
+        "description": "Share one or several metadata objects with users or groups. \nRequires edit access to metadata objects.",
         "tags": [
           "Security"
         ],
@@ -3318,7 +3533,7 @@
                 "type": "object",
                 "properties": {
                   "metadata_type": {
-                    "description": "Type of metadata.",
+                    "description": "Type of metadata.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view.\n5. CONNECTION for creating or modify data connections.\n6. TAG for tag objects.\n7. USER for user objects.\n8. USER_GROUP for user group objects.\n9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values",
                     "type": "string",
                     "enum": [
                       "LIVEBOARD",
@@ -3371,7 +3586,7 @@
                     "deprecated": false
                   },
                   "enable_custom_url": {
-                    "description": "Indicates whether to customize the URLs in the notification content.",
+                    "description": "Sends object URLs in the customized format in email notifications. ",
                     "default": false,
                     "type": "boolean",
                     "deprecated": false
@@ -3392,6 +3607,346 @@
         "responses": {
           "204": {
             "description": "Successful"
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/vcs/config": {
+      "put": {
+        "operationId": "vcsUpdateConfig",
+        "description": "Update local repository configuration.",
+        "tags": [
+          "VCS"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "description": "Username to authenticate connection to vcs",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "access_token": {
+                    "description": "Access token corresponding to the user to authenticate connection to vcs",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "default_branch": {
+                    "description": "Name of the default remote branch",
+                    "type": "string",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "username",
+                  "access_token",
+                  "default_branch"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/repoConfigObject"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/vcs/config/delete": {
+      "post": {
+        "operationId": "vcsDeleteConfig",
+        "description": "Delete local repository configuration",
+        "tags": [
+          "VCS"
+        ],
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "Successful"
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/vcs/branches/commit": {
+      "post": {
+        "operationId": "vcsCommit",
+        "description": "Commit the object from metadata to remote repository",
+        "tags": [
+          "VCS"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "metadata": {
+                    "description": "Metadata objects.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/metadataObject"
+                    },
+                    "deprecated": false
+                  },
+                  "branch_name": {
+                    "description": "Name of the remote branch where object tml should be pushed",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "comment": {
+                    "description": "Comment to be added to the commit",
+                    "type": "string",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "metadata",
+                  "branch_name",
+                  "comment"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/commitResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/vcs/commits/{commit_id}/revert": {
+      "post": {
+        "operationId": "vcsRevert",
+        "description": "Revert an object to a specific commit id",
+        "tags": [
+          "VCS"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "metadata": {
+                    "description": "Metadata objects.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/metadataObject"
+                    },
+                    "deprecated": false
+                  },
+                  "branch_name": {
+                    "description": "Name of the branch where the reverted version should be comitted",
+                    "type": "string",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "metadata",
+                  "branch_name"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/commitResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "commit_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Commit id to which the object should be reverted",
+            "deprecated": false
+          }
+        ]
+      }
+    },
+    "/api/rest/2.0/vcs/branches/validate": {
+      "post": {
+        "operationId": "vcsValidateMerge",
+        "description": "Before merging changes to target branch, pick the changes from source branch and validate the files",
+        "tags": [
+          "VCS"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "source_branch_name": {
+                    "description": "Name of the branch from which changes need to be picked for validation",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "target_branch_name": {
+                    "description": "Name of the branch where files will be merged",
+                    "type": "string",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "source_branch_name",
+                  "target_branch_name"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/deployResponse"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/vcs/commits/deploy": {
+      "post": {
+        "operationId": "vcsDeploy",
+        "description": "Deploy changes to a Thoughtspot environment from a commit point\"",
+        "tags": [
+          "VCS"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "import_type": {
+                    "description": "Indicates if all files or only modified file at specified commit point should be considered",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "commit_id": {
+                    "description": "Commit_id against which the files should be picked to deploy",
+                    "type": "string",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "commit_id"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/deployResponse"
+                  }
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -3669,8 +4224,7 @@
               "LIVEBOARD",
               "ANSWER",
               "LOGICAL_TABLE",
-              "CONNECTION",
-              "DATA_SOURCE"
+              "CONNECTION"
             ],
             "description": "Type of metadata."
           }
@@ -4482,7 +5036,7 @@
               "USER_GROUP",
               "LOGICAL_RELATIONSHIP"
             ],
-            "description": "Type of metadata."
+            "description": "Type of metadata.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view.\n5. CONNECTION for creating or modify data connections.\n6. TAG for tag objects.\n7. USER for user objects.\n8. USER_GROUP for user group objects.\n9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values"
           }
         }
       },
@@ -4533,7 +5087,7 @@
               "USER_GROUP",
               "LOGICAL_RELATIONSHIP"
             ],
-            "description": "Type of metadata."
+            "description": "Type of metadata.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view.\n5. CONNECTION for creating or modify data connections.\n6. TAG for tag objects.\n7. USER for user objects.\n8. USER_GROUP for user group objects.\n9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values"
           }
         }
       },
@@ -4542,7 +5096,7 @@
         "properties": {
           "include": {
             "type": "boolean",
-            "description": "Only include object marked as favorite."
+            "description": "Includes objects marked as favorite for the specified user GUIDs."
           },
           "user_identifiers": {
             "type": "array",
@@ -4673,6 +5227,66 @@
         },
         "description": "Response format associated with the search data API."
       },
+      "repoConfigObject": {
+        "type": "object",
+        "required": [
+          "remote_alias"
+        ],
+        "properties": {
+          "repository_url": {
+            "type": "string",
+            "description": "Remote repository URL configured"
+          },
+          "branches": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Branches that have been pulled in local repository"
+          },
+          "remote_alias": {
+            "type": "string",
+            "description": "Alias name associated with the remote repository"
+          }
+        }
+      },
+      "commitHistoryResponse": {
+        "type": "object",
+        "required": [
+          "committer",
+          "author",
+          "comment",
+          "commit_time",
+          "commit_id",
+          "branch"
+        ],
+        "properties": {
+          "committer": {
+            "$ref": "#/components/schemas/commiterType",
+            "description": "Repository user using which changes were committed"
+          },
+          "author": {
+            "$ref": "#/components/schemas/authorType",
+            "description": "Thoughtspot user who commits the changes"
+          },
+          "comment": {
+            "type": "string",
+            "description": "Comments associated with the commit"
+          },
+          "commit_time": {
+            "type": "string",
+            "description": "Time at which the changes were committed."
+          },
+          "commit_id": {
+            "type": "string",
+            "description": "SHA id associated with the commit"
+          },
+          "branch": {
+            "type": "string",
+            "description": "Branch where changes were committed"
+          }
+        }
+      },
       "LogResponse": {
         "type": "object",
         "required": [
@@ -4744,7 +5358,7 @@
               "LOGICAL_TABLE",
               "LOGICAL_COLUMN"
             ],
-            "description": "Type of metadata."
+            "description": "Type of metadata.\n1. LIVEBOARD\n2. ANSWERS\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n4. LOGICAL_COLUMN for a column of any data object such as tables, worksheets or views."
           },
           "identifier": {
             "type": "string",
@@ -4872,6 +5486,100 @@
               "NON_SHARABLE"
             ],
             "description": "Visibility of the user group. The SHARABLE makes a user group visible to other users and user groups, and thus allows them to share objects."
+          }
+        }
+      },
+      "commitResponse": {
+        "type": "object",
+        "required": [
+          "committer",
+          "author",
+          "comment"
+        ],
+        "properties": {
+          "committer": {
+            "$ref": "#/components/schemas/commiterType",
+            "description": "Repository user using which changes were committed"
+          },
+          "author": {
+            "$ref": "#/components/schemas/authorType",
+            "description": "Thoughtspot user who commits the changes"
+          },
+          "comment": {
+            "type": "string",
+            "description": "Comments associated with the commit"
+          },
+          "commit_time": {
+            "type": "string",
+            "description": "Time at which the changes were committed."
+          },
+          "commit_id": {
+            "type": "string",
+            "description": "SHA id associated with the commit"
+          },
+          "branch": {
+            "type": "string",
+            "description": "Branch where changes were committed"
+          },
+          "committed_files": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Files that were pushed as part of this commit"
+          }
+        }
+      },
+      "metadataObject": {
+        "type": "object",
+        "required": [
+          "identifier",
+          "type"
+        ],
+        "properties": {
+          "identifier": {
+            "type": "string",
+            "description": "Unique ID or name of the metadata"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "LIVEBOARD",
+              "ANSWER",
+              "LOGICAL_TABLE",
+              "LOGICAL_COLUMN",
+              "CONNECTION",
+              "TAG",
+              "USER",
+              "USER_GROUP",
+              "LOGICAL_RELATIONSHIP"
+            ],
+            "description": "Type of metadata."
+          }
+        }
+      },
+      "deployResponse": {
+        "type": "object",
+        "properties": {
+          "file_name": {
+            "type": "string",
+            "description": "Name of the file deployed"
+          },
+          "metadata_name": {
+            "type": "string",
+            "description": "Name of the metadata object"
+          },
+          "metadata_type": {
+            "type": "string",
+            "description": "Type of the metadata object"
+          },
+          "status_code": {
+            "type": "string",
+            "description": "Indicates the status of deployment for the file"
+          },
+          "status_message": {
+            "type": "string",
+            "description": "Any error or warning with the deployment"
           }
         }
       },
@@ -5094,6 +5802,39 @@
           }
         },
         "description": "Response format associated with fetch SQL query api"
+      },
+      "commiterType": {
+        "type": "object",
+        "required": [
+          "username"
+        ],
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "Email id of the committer"
+          },
+          "username": {
+            "type": "string",
+            "description": "Username of the committer"
+          }
+        }
+      },
+      "authorType": {
+        "type": "object",
+        "required": [
+          "email",
+          "username"
+        ],
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "Email id of the committer"
+          },
+          "username": {
+            "type": "string",
+            "description": "Username of the committer"
+          }
+        }
       },
       "Scope": {
         "type": "object",
