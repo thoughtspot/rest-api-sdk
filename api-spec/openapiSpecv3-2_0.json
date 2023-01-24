@@ -3585,8 +3585,75 @@
         }
       }
     },
-    "/api/rest/2.0/vcs/config": {
-      "put": {
+    "/api/rest/2.0/vcs/config/create": {
+      "post": {
+        "operationId": "createLocalConfig",
+        "description": "Configure local repository to connect to remote repository",
+        "tags": [
+          "Version-Control"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "repository_url": {
+                    "description": "URL for connecting to remote repository",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "default_branch": {
+                    "description": "Name of the default remote branch",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "username": {
+                    "description": "Username to authenticate connection to remote repository",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "access_token": {
+                    "description": "Access token corresponding to the user to authenticate connection to remote repository",
+                    "type": "string",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "repository_url",
+                  "username",
+                  "access_token"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RepoConfigObject"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/vcs/config/update": {
+      "post": {
         "operationId": "updateLocalConfig",
         "description": "Update local repository configuration.",
         "tags": [
