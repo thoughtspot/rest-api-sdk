@@ -1398,7 +1398,7 @@
         "operationId": "searchLocalConfig",
         "description": "Search local repository configuration",
         "tags": [
-          "Version-Control"
+          "Version Control"
         ],
         "parameters": [],
         "responses": {
@@ -1432,7 +1432,7 @@
         "operationId": "searchCommits",
         "description": "List the commit history of a metadata object",
         "tags": [
-          "Version-Control"
+          "Version Control"
         ],
         "requestBody": {
           "content": {
@@ -3590,7 +3590,7 @@
         "operationId": "createLocalConfig",
         "description": "Configure local repository to connect to remote repository",
         "tags": [
-          "Version-Control"
+          "Version Control"
         ],
         "requestBody": {
           "content": {
@@ -3657,7 +3657,7 @@
         "operationId": "updateLocalConfig",
         "description": "Update local repository configuration.",
         "tags": [
-          "Version-Control"
+          "Version Control"
         ],
         "requestBody": {
           "content": {
@@ -3680,12 +3680,7 @@
                     "type": "string",
                     "deprecated": false
                   }
-                },
-                "required": [
-                  "username",
-                  "access_token",
-                  "default_branch"
-                ]
+                }
               }
             }
           },
@@ -3719,7 +3714,7 @@
         "operationId": "deleteLocalConfig",
         "description": "Delete local repository configuration",
         "tags": [
-          "Version-Control"
+          "Version Control"
         ],
         "parameters": [],
         "responses": {
@@ -3744,7 +3739,7 @@
         "operationId": "pullBranch",
         "description": "Pull a branch from remote repository to local repository.",
         "tags": [
-          "Version-Control"
+          "Version Control"
         ],
         "parameters": [
           {
@@ -3780,7 +3775,7 @@
         "operationId": "commitBranch",
         "description": "Commit the object from metadata to remote repository",
         "tags": [
-          "Version-Control"
+          "Version Control"
         ],
         "requestBody": {
           "content": {
@@ -3809,7 +3804,6 @@
                 },
                 "required": [
                   "metadata",
-                  "branch_name",
                   "comment"
                 ]
               }
@@ -3845,7 +3839,7 @@
         "operationId": "revertCommit",
         "description": "Revert an object to a specific commit id",
         "tags": [
-          "Version-Control"
+          "Version Control"
         ],
         "requestBody": {
           "content": {
@@ -3868,8 +3862,7 @@
                   }
                 },
                 "required": [
-                  "metadata",
-                  "branch_name"
+                  "metadata"
                 ]
               }
             }
@@ -3916,7 +3909,7 @@
         "operationId": "validateMerge",
         "description": "Before merging changes to target branch, pick the changes from source branch and validate the files",
         "tags": [
-          "Version-Control"
+          "Version Control"
         ],
         "requestBody": {
           "content": {
@@ -3975,7 +3968,7 @@
         "operationId": "deployCommit",
         "description": "Deploy changes to a Thoughtspot environment from a commit point\"",
         "tags": [
-          "Version-Control"
+          "Version Control"
         ],
         "requestBody": {
           "content": {
@@ -3985,7 +3978,12 @@
                 "properties": {
                   "import_type": {
                     "description": "Indicates if all files or only modified file at specified commit point should be considered",
+                    "default": "DELTA",
                     "type": "string",
+                    "enum": [
+                      "FULL",
+                      "DELTA"
+                    ],
                     "deprecated": false
                   },
                   "commit_id": {
