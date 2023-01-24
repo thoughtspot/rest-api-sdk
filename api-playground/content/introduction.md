@@ -18,10 +18,10 @@ On clicking the **Try it out** button, you can view the API response. If the req
 ## Errors
 The portal uses the standard HTTP response codes to indicate the success or failure of a request. The 200 response code indicates a successful request, whereas 500 and 4xx response codes indicate an error.
 
-If the API response indicates an error, you can view the error details by navigating to `extensions` > `upstreamResponse` > `data` > `debug` in the error response body. You can also capture the response code by navigating to `extensions` -> `upstreamResponse` -> `status` in the error response body.
+If the API response indicates an error, you can view the error details by navigating to `root` > `error` > `message` > `debug` in the error response body. 
 
 ## Authentication
 
 All API requests generated from Playground are authenticated using the Bearer token included with the `Authorization` header passed along with the request. This token is generated and set each time you open the REST API Playground and navigate to an endpoint. The token is generated for the logged-in user and is valid for 24 hours.
 
-If you want to use a new token, you can generate a token using the `/tspublic/rest/v2/session/gettoken` endpoint. To update the token, click  **Configure** in the code explorer and edit the `AccessToken` field in the pop-up that appears.
+If you want to use a new token, you can generate a token using the `/api/rest/2.0/auth/token/object` endpoint. To update the token, click  **Configure** in the code explorer and edit the `AccessToken` field in the pop-up that appears.
