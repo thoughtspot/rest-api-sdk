@@ -1404,6 +1404,127 @@
         }
       }
     },
+    "/api/rest/2.0/vcs/config/search": {
+      "post": {
+        "operationId": "searchLocalConfig",
+        "description": "Search local repository configuration",
+        "tags": [
+          "Version Control"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RepoConfigObject"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/vcs/commits/search": {
+      "post": {
+        "operationId": "searchCommits",
+        "description": "List the commit history of a metadata object",
+        "tags": [
+          "Version Control"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "metadata_identifier": {
+                    "description": "Unique ID or name of the metadata.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "metadata_type": {
+                    "description": "Type of metadata.",
+                    "type": "string",
+                    "enum": [
+                      "LIVEBOARD",
+                      "ANSWER",
+                      "LOGICAL_TABLE",
+                      "LOGICAL_COLUMN",
+                      "CONNECTION",
+                      "TAG",
+                      "USER",
+                      "USER_GROUP",
+                      "LOGICAL_RELATIONSHIP"
+                    ],
+                    "deprecated": false
+                  },
+                  "branch_name": {
+                    "description": "Name of the branch from which commit history needs to be displayed",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "record_offset": {
+                    "description": "Record offset point in the commit history to display the response",
+                    "type": "integer",
+                    "format": "int32",
+                    "deprecated": false
+                  },
+                  "record_size": {
+                    "description": "Number of history records from record offset point to be displayed in the response",
+                    "type": "integer",
+                    "format": "int32",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "metadata_identifier",
+                  "metadata_type"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CommitHistoryResponse"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/auth/session/login": {
       "post": {
         "operationId": "login",
@@ -3406,6 +3527,447 @@
           }
         }
       }
+    },
+    "/api/rest/2.0/vcs/config/create": {
+      "post": {
+        "operationId": "createLocalConfig",
+        "description": "Configure local repository to connect to remote repository",
+        "tags": [
+          "Version Control"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "repository_url": {
+                    "description": "URL for connecting to remote repository",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "default_branch": {
+                    "description": "Name of the default remote branch",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "username": {
+                    "description": "Username to authenticate connection to remote repository",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "access_token": {
+                    "description": "Access token corresponding to the user to authenticate connection to remote repository",
+                    "type": "string",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "repository_url",
+                  "username",
+                  "access_token"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RepoConfigObject"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/vcs/config/update": {
+      "post": {
+        "operationId": "updateLocalConfig",
+        "description": "Update local repository configuration.",
+        "tags": [
+          "Version Control"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "description": "Username to authenticate connection to vcs",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "access_token": {
+                    "description": "Access token corresponding to the user to authenticate connection to vcs",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "default_branch": {
+                    "description": "Name of the default remote branch",
+                    "type": "string",
+                    "deprecated": false
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RepoConfigObject"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/vcs/config/delete": {
+      "post": {
+        "operationId": "deleteLocalConfig",
+        "description": "Delete local repository configuration",
+        "tags": [
+          "Version Control"
+        ],
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "Successful"
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/vcs/branches/{branch_name}/pull": {
+      "post": {
+        "operationId": "pullBranch",
+        "description": "Pull a branch from remote repository to local repository.",
+        "tags": [
+          "Version Control"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "branch_name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Name of the branch to pull",
+            "deprecated": false
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful"
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/vcs/branches/commit": {
+      "post": {
+        "operationId": "commitBranch",
+        "description": "Commit the object from metadata to remote repository",
+        "tags": [
+          "Version Control"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "metadata": {
+                    "description": "Metadata objects.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/MetadataObject"
+                    },
+                    "deprecated": false
+                  },
+                  "branch_name": {
+                    "description": "Name of the remote branch where object tml should be pushed",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "comment": {
+                    "description": "Comment to be added to the commit",
+                    "type": "string",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "metadata",
+                  "comment"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommitResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/vcs/commits/{commit_id}/revert": {
+      "post": {
+        "operationId": "revertCommit",
+        "description": "Revert an object to a specific commit id",
+        "tags": [
+          "Version Control"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "metadata": {
+                    "description": "Metadata objects.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/MetadataObject"
+                    },
+                    "deprecated": false
+                  },
+                  "branch_name": {
+                    "description": "Name of the branch where the reverted version should be comitted",
+                    "type": "string",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "metadata"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommitResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "commit_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Commit id to which the object should be reverted",
+            "deprecated": false
+          }
+        ]
+      }
+    },
+    "/api/rest/2.0/vcs/branches/validate": {
+      "post": {
+        "operationId": "validateMerge",
+        "description": "Before merging changes to target branch, pick the changes from source branch and validate the files",
+        "tags": [
+          "Version Control"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "source_branch_name": {
+                    "description": "Name of the branch from which changes need to be picked for validation",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "target_branch_name": {
+                    "description": "Name of the branch where files will be merged",
+                    "type": "string",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "source_branch_name",
+                  "target_branch_name"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DeployResponse"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/vcs/commits/deploy": {
+      "post": {
+        "operationId": "deployCommit",
+        "description": "Deploy changes to a Thoughtspot environment from a commit point\"",
+        "tags": [
+          "Version Control"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "import_type": {
+                    "description": "Indicates if all files or only modified file at specified commit point should be considered",
+                    "default": "DELTA",
+                    "type": "string",
+                    "enum": [
+                      "FULL",
+                      "DELTA"
+                    ],
+                    "deprecated": false
+                  },
+                  "commit_id": {
+                    "description": "Commit_id against which the files should be picked to deploy",
+                    "type": "string",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "commit_id"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DeployResponse"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -4691,6 +5253,66 @@
           }
         }
       },
+      "RepoConfigObject": {
+        "type": "object",
+        "required": [
+          "remote_alias"
+        ],
+        "properties": {
+          "repository_url": {
+            "type": "string",
+            "description": "Remote repository URL configured"
+          },
+          "branches": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Branches that have been pulled in local repository"
+          },
+          "remote_alias": {
+            "type": "string",
+            "description": "Alias name associated with the remote repository"
+          }
+        }
+      },
+      "CommitHistoryResponse": {
+        "type": "object",
+        "required": [
+          "committer",
+          "author",
+          "comment",
+          "commit_time",
+          "commit_id",
+          "branch"
+        ],
+        "properties": {
+          "committer": {
+            "$ref": "#/components/schemas/CommiterType",
+            "description": "Repository user using which changes were committed"
+          },
+          "author": {
+            "$ref": "#/components/schemas/AuthorType",
+            "description": "Thoughtspot user who commits the changes"
+          },
+          "comment": {
+            "type": "string",
+            "description": "Comments associated with the commit"
+          },
+          "commit_time": {
+            "type": "string",
+            "description": "Time at which the changes were committed."
+          },
+          "commit_id": {
+            "type": "string",
+            "description": "SHA id associated with the commit"
+          },
+          "branch": {
+            "type": "string",
+            "description": "Branch where changes were committed"
+          }
+        }
+      },
       "Token": {
         "type": "object",
         "required": [
@@ -4873,6 +5495,100 @@
               "NON_SHARABLE"
             ],
             "description": "Visibility of the user group. The SHARABLE makes a user group visible to other users and user groups, and thus allows them to share objects."
+          }
+        }
+      },
+      "CommitResponse": {
+        "type": "object",
+        "required": [
+          "committer",
+          "author",
+          "comment"
+        ],
+        "properties": {
+          "committer": {
+            "$ref": "#/components/schemas/CommiterType",
+            "description": "Repository user using which changes were committed"
+          },
+          "author": {
+            "$ref": "#/components/schemas/AuthorType",
+            "description": "Thoughtspot user who commits the changes"
+          },
+          "comment": {
+            "type": "string",
+            "description": "Comments associated with the commit"
+          },
+          "commit_time": {
+            "type": "string",
+            "description": "Time at which the changes were committed."
+          },
+          "commit_id": {
+            "type": "string",
+            "description": "SHA id associated with the commit"
+          },
+          "branch": {
+            "type": "string",
+            "description": "Branch where changes were committed"
+          },
+          "committed_files": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Files that were pushed as part of this commit"
+          }
+        }
+      },
+      "MetadataObject": {
+        "type": "object",
+        "required": [
+          "identifier",
+          "type"
+        ],
+        "properties": {
+          "identifier": {
+            "type": "string",
+            "description": "Unique ID or name of the metadata"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "LIVEBOARD",
+              "ANSWER",
+              "LOGICAL_TABLE",
+              "LOGICAL_COLUMN",
+              "CONNECTION",
+              "TAG",
+              "USER",
+              "USER_GROUP",
+              "LOGICAL_RELATIONSHIP"
+            ],
+            "description": "Type of metadata."
+          }
+        }
+      },
+      "DeployResponse": {
+        "type": "object",
+        "properties": {
+          "file_name": {
+            "type": "string",
+            "description": "Name of the file deployed"
+          },
+          "metadata_name": {
+            "type": "string",
+            "description": "Name of the metadata object"
+          },
+          "metadata_type": {
+            "type": "string",
+            "description": "Type of the metadata object"
+          },
+          "status_code": {
+            "type": "string",
+            "description": "Indicates the status of deployment for the file"
+          },
+          "status_message": {
+            "type": "string",
+            "description": "Any error or warning with the deployment"
           }
         }
       },
@@ -5095,6 +5811,39 @@
           }
         },
         "description": "Response format associated with fetch SQL query api"
+      },
+      "CommiterType": {
+        "type": "object",
+        "required": [
+          "username"
+        ],
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "Email id of the committer"
+          },
+          "username": {
+            "type": "string",
+            "description": "Username of the committer"
+          }
+        }
+      },
+      "AuthorType": {
+        "type": "object",
+        "required": [
+          "email",
+          "username"
+        ],
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "Email id of the committer"
+          },
+          "username": {
+            "type": "string",
+            "description": "Username of the committer"
+          }
+        }
       },
       "Scope": {
         "type": "object",
