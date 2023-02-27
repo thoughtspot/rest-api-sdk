@@ -5516,12 +5516,7 @@
               "DISPLAY_NAME",
               "AUTHOR",
               "CREATED",
-              "MODIFIED",
-              "LAST_ACCESSED",
-              "SYNCED",
-              "VIEWS",
-              "USER_STATE",
-              "ROW_COUNT"
+              "MODIFIED"
             ],
             "description": "Name of the field to apply the sort on."
           },
