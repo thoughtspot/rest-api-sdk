@@ -1488,13 +1488,7 @@
                     "enum": [
                       "LIVEBOARD",
                       "ANSWER",
-                      "LOGICAL_TABLE",
-                      "LOGICAL_COLUMN",
-                      "CONNECTION",
-                      "TAG",
-                      "USER",
-                      "USER_GROUP",
-                      "LOGICAL_RELATIONSHIP"
+                      "LOGICAL_TABLE"
                     ],
                     "deprecated": false
                   },
@@ -3642,18 +3636,12 @@
                 "type": "object",
                 "properties": {
                   "metadata_type": {
-                    "description": "Type of metadata.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view.\n5. CONNECTION for creating or modify data connections.\n6. TAG for tag objects.\n7. USER for user objects.\n8. USER_GROUP for user group objects.\n9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values",
+                    "description": "Type of metadata.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.",
                     "type": "string",
                     "enum": [
                       "LIVEBOARD",
                       "ANSWER",
-                      "LOGICAL_TABLE",
-                      "LOGICAL_COLUMN",
-                      "CONNECTION",
-                      "TAG",
-                      "USER",
-                      "USER_GROUP",
-                      "LOGICAL_RELATIONSHIP"
+                      "LOGICAL_TABLE"
                     ],
                     "deprecated": false
                   },
@@ -4825,7 +4813,8 @@
               "LIVEBOARD",
               "ANSWER",
               "LOGICAL_TABLE",
-              "LOGICAL_COLUMN"
+              "LOGICAL_COLUMN",
+              "LOGICAL_RELATIONSHIP"
             ],
             "description": "Type of metadata (Optional when given identifier is ID)."
           },
@@ -6048,13 +6037,7 @@
             "enum": [
               "LIVEBOARD",
               "ANSWER",
-              "LOGICAL_TABLE",
-              "LOGICAL_COLUMN",
-              "CONNECTION",
-              "TAG",
-              "USER",
-              "USER_GROUP",
-              "LOGICAL_RELATIONSHIP"
+              "LOGICAL_TABLE"
             ],
             "description": "Type of metadata."
           }
@@ -6539,8 +6522,7 @@
       "Database": {
         "type": "object",
         "required": [
-          "name",
-          "schemas"
+          "name"
         ],
         "properties": {
           "name": {
@@ -6559,8 +6541,7 @@
       "Schema": {
         "type": "object",
         "required": [
-          "name",
-          "tables"
+          "name"
         ],
         "properties": {
           "name": {
@@ -6579,8 +6560,7 @@
       "Table": {
         "type": "object",
         "required": [
-          "name",
-          "columns"
+          "name"
         ],
         "properties": {
           "name": {
