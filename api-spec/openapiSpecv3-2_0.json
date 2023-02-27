@@ -61,7 +61,7 @@
                     "deprecated": false
                   },
                   "visibility": {
-                    "description": "Visibility of the user.",
+                    "description": "Visibility of the user. *apiversion 9.1.0*",
                     "type": "string",
                     "enum": [
                       "SHARABLE",
