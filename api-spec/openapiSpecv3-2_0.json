@@ -1150,6 +1150,7 @@
                   },
                   "data_format": {
                     "description": "JSON output format. By default, the API returns full data in the JSON.",
+                    "default": "COMPACT",
                     "type": "string",
                     "enum": [
                       "COMPACT"
@@ -1488,7 +1489,13 @@
                     "enum": [
                       "LIVEBOARD",
                       "ANSWER",
-                      "LOGICAL_TABLE"
+                      "LOGICAL_TABLE",
+                      "LOGICAL_COLUMN",
+                      "CONNECTION",
+                      "TAG",
+                      "USER",
+                      "USER_GROUP",
+                      "LOGICAL_RELATIONSHIP"
                     ],
                     "deprecated": false
                   },
@@ -3636,12 +3643,18 @@
                 "type": "object",
                 "properties": {
                   "metadata_type": {
-                    "description": "Type of metadata.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.",
+                    "description": "Type of metadata.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view.\n5. CONNECTION for creating or modify data connections.\n6. TAG for tag objects.\n7. USER for user objects.\n8. USER_GROUP for user group objects.\n9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values",
                     "type": "string",
                     "enum": [
                       "LIVEBOARD",
                       "ANSWER",
-                      "LOGICAL_TABLE"
+                      "LOGICAL_TABLE",
+                      "LOGICAL_COLUMN",
+                      "CONNECTION",
+                      "TAG",
+                      "USER",
+                      "USER_GROUP",
+                      "LOGICAL_RELATIONSHIP"
                     ],
                     "deprecated": false
                   },
@@ -4813,8 +4826,7 @@
               "LIVEBOARD",
               "ANSWER",
               "LOGICAL_TABLE",
-              "LOGICAL_COLUMN",
-              "LOGICAL_RELATIONSHIP"
+              "LOGICAL_COLUMN"
             ],
             "description": "Type of metadata (Optional when given identifier is ID)."
           },
@@ -5516,7 +5528,12 @@
               "DISPLAY_NAME",
               "AUTHOR",
               "CREATED",
-              "MODIFIED"
+              "MODIFIED",
+              "LAST_ACCESSED",
+              "SYNCED",
+              "VIEWS",
+              "USER_STATE",
+              "ROW_COUNT"
             ],
             "description": "Name of the field to apply the sort on."
           },
@@ -6032,7 +6049,13 @@
             "enum": [
               "LIVEBOARD",
               "ANSWER",
-              "LOGICAL_TABLE"
+              "LOGICAL_TABLE",
+              "LOGICAL_COLUMN",
+              "CONNECTION",
+              "TAG",
+              "USER",
+              "USER_GROUP",
+              "LOGICAL_RELATIONSHIP"
             ],
             "description": "Type of metadata."
           }
