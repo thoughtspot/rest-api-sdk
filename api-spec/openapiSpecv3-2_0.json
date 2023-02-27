@@ -1150,6 +1150,7 @@
                   },
                   "data_format": {
                     "description": "JSON output format. By default, the API returns full data in the JSON.",
+                    "default": "COMPACT",
                     "type": "string",
                     "enum": [
                       "COMPACT"
