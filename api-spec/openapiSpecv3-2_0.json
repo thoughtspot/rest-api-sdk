@@ -61,7 +61,7 @@
                     "deprecated": false
                   },
                   "visibility": {
-                    "description": "Visibility of the user. *apiversion 9.1.0*",
+                    "description": "Visibility of the user.",
                     "type": "string",
                     "enum": [
                       "SHARABLE",
@@ -93,25 +93,16 @@
                         "USERDATAUPLOADING",
                         "DATADOWNLOADING",
                         "USERMANAGEMENT",
-                        "SECURITYMANAGEMENT",
-                        "LOGICALMODELING",
                         "DATAMANAGEMENT",
-                        "TAGMANAGEMENT",
                         "SHAREWITHALL",
-                        "SYSTEMMANAGEMENT",
                         "JOBSCHEDULING",
                         "A3ANALYSIS",
                         "EXPERIMENTALFEATUREPRIVILEGE",
                         "BYPASSRLS",
                         "RANALYSIS",
-                        "DISABLE_PINBOARD_CREATION",
                         "DEVELOPER",
-                        "APPLICATION_ADMINISTRATION",
                         "USER_ADMINISTRATION",
                         "GROUP_ADMINISTRATION",
-                        "BACKUP_ADMINISTRATION",
-                        "SYSTEM_INFO_ADMINISTRATION",
-                        "ENABLESPOTAPPCREATION",
                         "SYNCMANAGEMENT"
                       ]
                     },
@@ -148,21 +139,32 @@
                   },
                   "show_onboarding_experience": {
                     "description": "The user preference for revisiting the onboarding experience.",
-                    "default": true,
                     "type": "boolean",
                     "deprecated": false
                   },
                   "onboarding_experience_completed": {
                     "description": "Indicates if the user has completed the onboarding walkthrough.",
-                    "default": false,
                     "type": "boolean",
                     "deprecated": false
                   },
                   "org_identifiers": {
-                    "description": "List of Unique Org Identifiers to be associated with",
+                    "description": "IDs or names of the Orgs to which the user belongs",
                     "type": "array",
                     "items": {
                       "type": "string"
+                    },
+                    "deprecated": false
+                  },
+                  "home_liveboard_identifier": {
+                    "description": "Unique ID or name of the users home liveboard.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "favorite_metadata": {
+                    "description": "Metadata objects which are assigned as favorites of the user.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/FavoriteMetadataInput"
                     },
                     "deprecated": false
                   }
@@ -243,6 +245,37 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/SystemConfig"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/system/config-overrides": {
+      "get": {
+        "operationId": "getSystemOverrideInfo",
+        "description": "Get cluster override info.",
+        "tags": [
+          "System"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
                 }
               }
             }
@@ -451,25 +484,16 @@
                         "USERDATAUPLOADING",
                         "DATADOWNLOADING",
                         "USERMANAGEMENT",
-                        "SECURITYMANAGEMENT",
-                        "LOGICALMODELING",
                         "DATAMANAGEMENT",
-                        "TAGMANAGEMENT",
                         "SHAREWITHALL",
-                        "SYSTEMMANAGEMENT",
                         "JOBSCHEDULING",
                         "A3ANALYSIS",
                         "EXPERIMENTALFEATUREPRIVILEGE",
                         "BYPASSRLS",
                         "RANALYSIS",
-                        "DISABLE_PINBOARD_CREATION",
                         "DEVELOPER",
-                        "APPLICATION_ADMINISTRATION",
                         "USER_ADMINISTRATION",
                         "GROUP_ADMINISTRATION",
-                        "BACKUP_ADMINISTRATION",
-                        "SYSTEM_INFO_ADMINISTRATION",
-                        "ENABLESPOTAPPCREATION",
                         "SYNCMANAGEMENT"
                       ]
                     },
@@ -1106,7 +1130,7 @@
         "operationId": "searchData",
         "description": "Allows passing a search query string and retrieving data from ThoughtSpot.",
         "tags": [
-          "Search Data"
+          "Data"
         ],
         "requestBody": {
           "content": {
@@ -1161,7 +1185,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/LiveboardDataResponse"
+                  "$ref": "#/components/schemas/SearchDataResponse"
                 }
               }
             }
@@ -1182,9 +1206,9 @@
     "/api/rest/2.0/metadata/liveboard/data": {
       "post": {
         "operationId": "fetchLiveboardData",
-        "description": "Fetches Liveboard data. Requires at least view access to the Liveboard. ",
+        "description": "Fetches Liveboard data. Requires at least view access to the Liveboard.",
         "tags": [
-          "Search Data"
+          "Data"
         ],
         "requestBody": {
           "content": {
@@ -1232,18 +1256,6 @@
                     "type": "integer",
                     "format": "int32",
                     "deprecated": false
-                  },
-                  "runtime_filter": {
-                    "description": "JSON object representing filter condition to filter the data.",
-                    "default": "",
-                    "type": "object",
-                    "deprecated": false
-                  },
-                  "runtime_sort": {
-                    "description": "JSON object representing columns to sort the data.",
-                    "default": "",
-                    "type": "object",
-                    "deprecated": false
                   }
                 },
                 "required": [
@@ -1280,9 +1292,9 @@
     "/api/rest/2.0/metadata/answer/data": {
       "post": {
         "operationId": "fetchAnswerData",
-        "description": "Fetches data from a saved Answer. Requires at least view access to the Answer object. ",
+        "description": "Fetches data from a saved Answer. Requires at least view access to the Answer object.",
         "tags": [
-          "Search Data"
+          "Data"
         ],
         "requestBody": {
           "content": {
@@ -1316,18 +1328,6 @@
                     "default": 10,
                     "type": "integer",
                     "format": "int32",
-                    "deprecated": false
-                  },
-                  "runtime_filter": {
-                    "description": "JSON object representing filter condition to filter the data.",
-                    "default": "",
-                    "type": "object",
-                    "deprecated": false
-                  },
-                  "runtime_sort": {
-                    "description": "JSON object representing columns to sort the data.",
-                    "default": "",
-                    "type": "object",
                     "deprecated": false
                   }
                 },
@@ -1430,6 +1430,246 @@
         }
       }
     },
+    "/api/rest/2.0/vcs/git/config/search": {
+      "post": {
+        "operationId": "searchLocalConfig",
+        "description": "Search local repository configuration",
+        "tags": [
+          "Version Control"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RepoConfigObject"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/vcs/git/commits/search": {
+      "post": {
+        "operationId": "searchCommits",
+        "description": "List the commit history of a metadata object",
+        "tags": [
+          "Version Control"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "metadata_identifier": {
+                    "description": "Unique ID or name of the metadata.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "metadata_type": {
+                    "description": "Type of metadata.",
+                    "type": "string",
+                    "enum": [
+                      "LIVEBOARD",
+                      "ANSWER",
+                      "LOGICAL_TABLE",
+                      "LOGICAL_COLUMN",
+                      "CONNECTION",
+                      "TAG",
+                      "USER",
+                      "USER_GROUP",
+                      "LOGICAL_RELATIONSHIP"
+                    ],
+                    "deprecated": false
+                  },
+                  "branch_name": {
+                    "description": "Name of the branch from which commit history needs to be displayed",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "record_offset": {
+                    "description": "Record offset point in the commit history to display the response",
+                    "type": "integer",
+                    "format": "int32",
+                    "deprecated": false
+                  },
+                  "record_size": {
+                    "description": "Number of history records from record offset point to be displayed in the response",
+                    "type": "integer",
+                    "format": "int32",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "metadata_identifier",
+                  "metadata_type"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CommitHistoryResponse"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/connection/search": {
+      "post": {
+        "operationId": "searchConnection",
+        "description": "Search connection objects. Requires DATAMANAGEMENT privilege. *since: 9.3.0.cl | 9.3.0.sw*",
+        "tags": [
+          "Connections"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "connections": {
+                    "description": "List of connections and name pattern",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/ConnectionInput"
+                    },
+                    "deprecated": false
+                  },
+                  "data_warehouse_types": {
+                    "description": "Array of types of data warehouse defined for the connection.",
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "SNOWFLAKE",
+                        "AMAZON_REDSHIFT",
+                        "GOOGLE_BIGQUERY",
+                        "AZURE_SYNAPSE",
+                        "TERADATA",
+                        "SAP_HANA",
+                        "STARBURST",
+                        "ORACLE_ADW",
+                        "DATABRICKS",
+                        "DENODO",
+                        "DREMIO",
+                        "TRINO",
+                        "PRESTO"
+                      ]
+                    },
+                    "deprecated": false
+                  },
+                  "record_offset": {
+                    "description": "The starting record number from where the records should be included.",
+                    "default": 0,
+                    "type": "integer",
+                    "format": "int32",
+                    "deprecated": false
+                  },
+                  "record_size": {
+                    "description": "The number of records that should be included.",
+                    "default": 10,
+                    "type": "integer",
+                    "format": "int32",
+                    "deprecated": false
+                  },
+                  "tag_identifiers": {
+                    "description": "Unique ID or name of tags.",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "deprecated": false
+                  },
+                  "data_warehouse_object_type": {
+                    "description": "Data warehouse object type.",
+                    "type": "string",
+                    "enum": [
+                      "DATABASE",
+                      "SCHEMA",
+                      "TABLE",
+                      "COLUMN"
+                    ],
+                    "deprecated": false
+                  },
+                  "sort_options": {
+                    "description": "Sort options.",
+                    "$ref": "#/components/schemas/SortOptionInput",
+                    "deprecated": false
+                  },
+                  "include_details": {
+                    "description": "Indicates whether to include complete details of the connection objects. *since: 9.3.0.cl | 9.3.0.sw*",
+                    "type": "boolean",
+                    "deprecated": false
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SearchConnectionResponse"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/auth/session/login": {
       "post": {
         "operationId": "login",
@@ -1450,6 +1690,11 @@
                   },
                   "password": {
                     "description": "The password of the user account",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "org_identifier": {
+                    "description": "Id of the Org to be associated with the user login. If no input is provided then last logged in Org will be considered",
                     "type": "string",
                     "deprecated": false
                   },
@@ -1531,14 +1776,26 @@
                     "format": "int32",
                     "deprecated": false
                   },
+                  "email": {
+                    "description": "Indicates email id of the user. Use this parameter to provision a user just-in-time (JIT).",
+                    "default": "",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "display_name": {
+                    "description": "Indicates display name of the user. Use this parameter to provision a user just-in-time (JIT).",
+                    "default": "",
+                    "type": "string",
+                    "deprecated": false
+                  },
                   "auto_create": {
-                    "description": "“user_options” attribute is added as an optional attribute which will allow JIT token support",
+                    "description": "“Creates a new user if the specified username does not already exist in ThoughtSpot. Use this parameter to provision a user just-in-time (JIT).",
                     "default": false,
                     "type": "boolean",
                     "deprecated": false
                   },
                   "group_identifiers": {
-                    "description": "Unique ID or name of the User Groups to which newly created user to be added.",
+                    "description": "Unique ID or name of the User Groups to which newly created user to be added. Use this parameter to provision a user just-in-time (JIT).",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -1622,14 +1879,26 @@
                     "format": "int32",
                     "deprecated": false
                   },
+                  "email": {
+                    "description": "Indicates email id of the user. Use this parameter to provision a user just-in-time (JIT).",
+                    "default": "",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "display_name": {
+                    "description": "Indicates display name of the user. Use this parameter to provision a user just-in-time (JIT).",
+                    "default": "",
+                    "type": "string",
+                    "deprecated": false
+                  },
                   "auto_create": {
-                    "description": "user_options attribute is added as an optional attribute which will allow JIT token support",
+                    "description": "Creates a new user if the specified username does not already exist in ThoughtSpot. Use this parameter to provision a user just-in-time (JIT).",
                     "default": false,
                     "type": "boolean",
                     "deprecated": false
                   },
                   "group_identifiers": {
-                    "description": "ID or name of the groups to which the newly created user belongs.",
+                    "description": "ID or name of the groups to which the newly created user belongs. Use this parameter to provision a user just-in-time (JIT).",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -2134,7 +2403,7 @@
         }
       }
     },
-    "/api/rest/2.0/users/change_password": {
+    "/api/rest/2.0/users/change-password": {
       "post": {
         "operationId": "changeUserPassword",
         "description": "Allows changing the password of a ThoughtSpot user account.",
@@ -2158,7 +2427,7 @@
                     "deprecated": false
                   },
                   "user_identifier": {
-                    "description": "Unique ID or name of the user.",
+                    "description": "GUID or name of the user.",
                     "type": "string",
                     "deprecated": false
                   }
@@ -2190,7 +2459,7 @@
         }
       }
     },
-    "/api/rest/2.0/users/reset_password": {
+    "/api/rest/2.0/users/reset-password": {
       "post": {
         "operationId": "resetUserPassword",
         "description": "Resets the password of a ThoughtSpot user account.",
@@ -2209,7 +2478,7 @@
                     "deprecated": false
                   },
                   "user_identifier": {
-                    "description": "Unique ID or name of the user.",
+                    "description": "GUID or name of the user.",
                     "type": "string",
                     "deprecated": false
                   }
@@ -2240,7 +2509,7 @@
         }
       }
     },
-    "/api/rest/2.0/users/force_logout": {
+    "/api/rest/2.0/users/force-logout": {
       "post": {
         "operationId": "forceLogoutUsers",
         "description": "Logs out a user from their current session. This API operation makes\na user session invalid and forces the user to re-login.",
@@ -2254,7 +2523,7 @@
                 "type": "object",
                 "properties": {
                   "user_identifiers": {
-                    "description": "Unique ID or name of the users for force logging out their sessions.",
+                    "description": "GUID or name of the users for force logging out their sessions.",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -2262,6 +2531,50 @@
                     "deprecated": false
                   }
                 }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "Successful"
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/system/config-update": {
+      "post": {
+        "operationId": "updateSystemConfig",
+        "description": "Update cluster configuration",
+        "tags": [
+          "System"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "configuration": {
+                    "description": "Configuration JSON with the key-value pair of configuration attributes to be updated.",
+                    "type": "object",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "configuration"
+                ]
               }
             }
           },
@@ -2750,25 +3063,16 @@
                         "USERDATAUPLOADING",
                         "DATADOWNLOADING",
                         "USERMANAGEMENT",
-                        "SECURITYMANAGEMENT",
-                        "LOGICALMODELING",
                         "DATAMANAGEMENT",
-                        "TAGMANAGEMENT",
                         "SHAREWITHALL",
-                        "SYSTEMMANAGEMENT",
                         "JOBSCHEDULING",
                         "A3ANALYSIS",
                         "EXPERIMENTALFEATUREPRIVILEGE",
                         "BYPASSRLS",
                         "RANALYSIS",
-                        "DISABLE_PINBOARD_CREATION",
                         "DEVELOPER",
-                        "APPLICATION_ADMINISTRATION",
                         "USER_ADMINISTRATION",
                         "GROUP_ADMINISTRATION",
-                        "BACKUP_ADMINISTRATION",
-                        "SYSTEM_INFO_ADMINISTRATION",
-                        "ENABLESPOTAPPCREATION",
                         "SYNCMANAGEMENT"
                       ]
                     },
@@ -2890,25 +3194,16 @@
                         "USERDATAUPLOADING",
                         "DATADOWNLOADING",
                         "USERMANAGEMENT",
-                        "SECURITYMANAGEMENT",
-                        "LOGICALMODELING",
                         "DATAMANAGEMENT",
-                        "TAGMANAGEMENT",
                         "SHAREWITHALL",
-                        "SYSTEMMANAGEMENT",
                         "JOBSCHEDULING",
                         "A3ANALYSIS",
                         "EXPERIMENTALFEATUREPRIVILEGE",
                         "BYPASSRLS",
                         "RANALYSIS",
-                        "DISABLE_PINBOARD_CREATION",
                         "DEVELOPER",
-                        "APPLICATION_ADMINISTRATION",
                         "USER_ADMINISTRATION",
                         "GROUP_ADMINISTRATION",
-                        "BACKUP_ADMINISTRATION",
-                        "SYSTEM_INFO_ADMINISTRATION",
-                        "ENABLESPOTAPPCREATION",
                         "SYNCMANAGEMENT"
                       ]
                     },
@@ -3042,11 +3337,13 @@
                   },
                   "delete_unspecified_groups": {
                     "description": "If set to true, removes groups that are not specified in the API request.",
+                    "default": false,
                     "type": "boolean",
                     "deprecated": false
                   },
                   "dry_run": {
                     "description": "If true, the API performs a test operation and returns user IDs whose \ndata will be edited after the import.",
+                    "default": true,
                     "type": "boolean",
                     "deprecated": false
                   }
@@ -3169,18 +3466,8 @@
                     "description": "Metadata objects.",
                     "type": "array",
                     "items": {
-                      "$ref": "#/components/schemas/MetadataTypeInput"
+                      "$ref": "#/components/schemas/ExportMetadataTypeInput"
                     },
-                    "deprecated": false
-                  },
-                  "edoc_format": {
-                    "description": "Format type for exported objects.",
-                    "default": "YAML",
-                    "type": "string",
-                    "enum": [
-                      "JSON",
-                      "YAML"
-                    ],
                     "deprecated": false
                   },
                   "export_associated": {
@@ -3190,7 +3477,7 @@
                     "deprecated": false
                   },
                   "export_fqn": {
-                    "description": "Indicates whether to include FQN (GUID) of specified metadata objects.",
+                    "description": "Adds FQNs of the referenced objects. For example, if you are exporting a Liveboard and its associated objects, \nthe API returns the Liveboard TML data with the FQNs of the referenced worksheet.\nIf the exported TML data includes FQNs, you don't need to manually add FQNs of the referenced objects during TML import.",
                     "default": false,
                     "type": "boolean",
                     "deprecated": false
@@ -3355,7 +3642,7 @@
                 "type": "object",
                 "properties": {
                   "metadata_type": {
-                    "description": "Type of metadata.",
+                    "description": "Type of metadata.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view.\n5. CONNECTION for creating or modify data connections.\n6. TAG for tag objects.\n7. USER for user objects.\n8. USER_GROUP for user group objects.\n9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values",
                     "type": "string",
                     "enum": [
                       "LIVEBOARD",
@@ -3417,7 +3704,647 @@
                 "required": [
                   "metadata_type",
                   "metadata_identifiers",
-                  "permissions"
+                  "permissions",
+                  "emails",
+                  "message"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "Successful"
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/vcs/git/config/create": {
+      "post": {
+        "operationId": "createLocalConfig",
+        "description": "Configure local repository to connect to remote repository",
+        "tags": [
+          "Version Control"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "repository_url": {
+                    "description": "URL for connecting to remote repository",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "default_branch": {
+                    "description": "Name of the default remote branch",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "username": {
+                    "description": "Username to authenticate connection to remote repository",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "access_token": {
+                    "description": "Access token corresponding to the user to authenticate connection to remote repository",
+                    "type": "string",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "repository_url",
+                  "username",
+                  "access_token"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RepoConfigObject"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/vcs/git/config/update": {
+      "post": {
+        "operationId": "updateLocalConfig",
+        "description": "Update local repository configuration.",
+        "tags": [
+          "Version Control"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "description": "Username to authenticate connection to vcs",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "access_token": {
+                    "description": "Access token corresponding to the user to authenticate connection to vcs",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "default_branch": {
+                    "description": "Name of the default remote branch",
+                    "type": "string",
+                    "deprecated": false
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RepoConfigObject"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/vcs/git/config/delete": {
+      "post": {
+        "operationId": "deleteLocalConfig",
+        "description": "Delete local repository configuration",
+        "tags": [
+          "Version Control"
+        ],
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "Successful"
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/vcs/git/branches/{branch_name}/pull": {
+      "post": {
+        "operationId": "pullBranch",
+        "description": "Pull a branch from remote repository to local repository.",
+        "tags": [
+          "Version Control"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "branch_name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Name of the branch to pull",
+            "deprecated": false
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful"
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/vcs/git/branches/commit": {
+      "post": {
+        "operationId": "commitBranch",
+        "description": "Commit the object from metadata to remote repository",
+        "tags": [
+          "Version Control"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "metadata": {
+                    "description": "Metadata objects.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/MetadataObject"
+                    },
+                    "deprecated": false
+                  },
+                  "branch_name": {
+                    "description": "Name of the remote branch where object tml should be pushed",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "comment": {
+                    "description": "Comment to be added to the commit",
+                    "type": "string",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "metadata",
+                  "comment"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommitResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/vcs/git/commits/{commit_id}/revert": {
+      "post": {
+        "operationId": "revertCommit",
+        "description": "Revert an object to a specific commit id",
+        "tags": [
+          "Version Control"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "metadata": {
+                    "description": "Metadata objects.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/MetadataObject"
+                    },
+                    "deprecated": false
+                  },
+                  "branch_name": {
+                    "description": "Name of the branch where the reverted version should be comitted",
+                    "type": "string",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "metadata"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RevertResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "commit_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Commit id to which the object should be reverted",
+            "deprecated": false
+          }
+        ]
+      }
+    },
+    "/api/rest/2.0/vcs/git/branches/validate": {
+      "post": {
+        "operationId": "validateMerge",
+        "description": "Before merging changes to target branch, pick the changes from source branch and validate the files",
+        "tags": [
+          "Version Control"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "source_branch_name": {
+                    "description": "Name of the branch from which changes need to be picked for validation",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "target_branch_name": {
+                    "description": "Name of the branch where files will be merged",
+                    "type": "string",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "source_branch_name",
+                  "target_branch_name"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DeployResponse"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/vcs/git/commits/deploy": {
+      "post": {
+        "operationId": "deployCommit",
+        "description": "Deploy changes to a Thoughtspot environment from a commit point\"",
+        "tags": [
+          "Version Control"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "import_type": {
+                    "description": "Indicates if all files or only modified file at specified commit point should be considered",
+                    "default": "DELTA",
+                    "type": "string",
+                    "enum": [
+                      "FULL",
+                      "DELTA"
+                    ],
+                    "deprecated": false
+                  },
+                  "commit_id": {
+                    "description": "Commit_id against which the files should be picked to deploy",
+                    "type": "string",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "commit_id"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DeployResponse"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/connection/create": {
+      "post": {
+        "operationId": "createConnection",
+        "description": "Creates a connection to a Data WareHouse. Requires ADMINSITRATION or DATAMANAGEMENT privilege.",
+        "tags": [
+          "Connections"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "description": "Unique name for the connection.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "description": {
+                    "description": "Description of the connection.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "data_warehouse_type": {
+                    "description": "Type of the data warehouse.",
+                    "type": "string",
+                    "enum": [
+                      "SNOWFLAKE",
+                      "AMAZON_REDSHIFT",
+                      "GOOGLE_BIGQUERY",
+                      "AZURE_SYNAPSE",
+                      "TERADATA",
+                      "SAP_HANA",
+                      "STARBURST",
+                      "ORACLE_ADW",
+                      "DATABRICKS",
+                      "DENODO",
+                      "DREMIO",
+                      "TRINO",
+                      "PRESTO"
+                    ],
+                    "deprecated": false
+                  },
+                  "data_warehouse_config": {
+                    "description": "Configuration of the data warehouse in JSON.",
+                    "type": "object",
+                    "deprecated": false
+                  },
+                  "validate": {
+                    "description": "Indicates whether to validate the connection details.",
+                    "default": true,
+                    "type": "boolean",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "name",
+                  "data_warehouse_type",
+                  "data_warehouse_config"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateConnectionResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/connection/delete": {
+      "post": {
+        "operationId": "deleteConnection",
+        "description": "Deletes a connection to a Data WareHouse. Requires ADMINSITRATION or DATAMANAGEMENT privilege.",
+        "tags": [
+          "Connections"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "connection_identifier": {
+                    "description": "Unique ID or name of the connection.",
+                    "type": "string",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "connection_identifier"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "Successful"
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/connection/update": {
+      "post": {
+        "operationId": "updateConnection",
+        "description": "Updates a connection to a Data WareHouse. Requires ADMINSITRATION or DATAMANAGEMENT privilege.",
+        "tags": [
+          "Connections"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "connection_identifier": {
+                    "description": "Unique ID or name of the connection.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "name": {
+                    "description": "Updated name of the connection.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "description": {
+                    "description": "Updated description of the connection.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "data_warehouse_config": {
+                    "description": "Configuration of the data warehouse in JSON.",
+                    "type": "object",
+                    "deprecated": false
+                  },
+                  "validate": {
+                    "description": "Indicates whether to validate the connection details.",
+                    "default": true,
+                    "type": "boolean",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "connection_identifier"
                 ]
               }
             }
@@ -3624,25 +4551,16 @@
                 "USERDATAUPLOADING",
                 "DATADOWNLOADING",
                 "USERMANAGEMENT",
-                "SECURITYMANAGEMENT",
-                "LOGICALMODELING",
                 "DATAMANAGEMENT",
-                "TAGMANAGEMENT",
                 "SHAREWITHALL",
-                "SYSTEMMANAGEMENT",
                 "JOBSCHEDULING",
                 "A3ANALYSIS",
                 "EXPERIMENTALFEATUREPRIVILEGE",
                 "BYPASSRLS",
                 "RANALYSIS",
-                "DISABLE_PINBOARD_CREATION",
                 "DEVELOPER",
-                "APPLICATION_ADMINISTRATION",
                 "USER_ADMINISTRATION",
                 "GROUP_ADMINISTRATION",
-                "BACKUP_ADMINISTRATION",
-                "SYSTEM_INFO_ADMINISTRATION",
-                "ENABLESPOTAPPCREATION",
                 "SYNCMANAGEMENT"
               ]
             },
@@ -3704,8 +4622,7 @@
               "LIVEBOARD",
               "ANSWER",
               "LOGICAL_TABLE",
-              "CONNECTION",
-              "DATA_SOURCE"
+              "CONNECTION"
             ],
             "description": "Type of metadata."
           }
@@ -3776,7 +4693,7 @@
               "SHARABLE",
               "NON_SHARABLE"
             ],
-            "description": "Visibility of the users. The SHARABLE makes a users visible to other users and user groups, \nand thus allows them to share objects."
+            "description": "Visibility of the users. The SHARABLE makes a users visible to other users and user groups,\nand thus allows them to share objects."
           },
           "notify_on_share": {
             "type": "boolean",
@@ -3849,7 +4766,6 @@
       "MetadataTypeInput": {
         "type": "object",
         "required": [
-          "type",
           "identifier"
         ],
         "properties": {
@@ -3866,7 +4782,7 @@
               "USER_GROUP",
               "LOGICAL_RELATIONSHIP"
             ],
-            "description": "Type of metadata."
+            "description": "Type of metadata (Optional when given identifier is ID)."
           },
           "identifier": {
             "type": "string",
@@ -3875,10 +4791,31 @@
         },
         "description": "MetadataType InputType associated in the Product"
       },
+      "ExportMetadataTypeInput": {
+        "type": "object",
+        "required": [
+          "identifier"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "LIVEBOARD",
+              "ANSWER",
+              "LOGICAL_TABLE"
+            ],
+            "description": "Type of metadata (Optional when given identifier is ID)."
+          },
+          "identifier": {
+            "type": "string",
+            "description": "Unique ID or name of the metadata."
+          }
+        },
+        "description": "MetadataType InputType used in Export MetadataType API's"
+      },
       "DeleteMetadataTypeInput": {
         "type": "object",
         "required": [
-          "type",
           "identifier"
         ],
         "properties": {
@@ -3888,10 +4825,9 @@
               "LIVEBOARD",
               "ANSWER",
               "LOGICAL_TABLE",
-              "LOGICAL_COLUMN",
-              "LOGICAL_RELATIONSHIP"
+              "LOGICAL_COLUMN"
             ],
-            "description": "Type of metadata."
+            "description": "Type of metadata (Optional when given identifier is ID)."
           },
           "identifier": {
             "type": "string",
@@ -4369,25 +5305,16 @@
                 "USERDATAUPLOADING",
                 "DATADOWNLOADING",
                 "USERMANAGEMENT",
-                "SECURITYMANAGEMENT",
-                "LOGICALMODELING",
                 "DATAMANAGEMENT",
-                "TAGMANAGEMENT",
                 "SHAREWITHALL",
-                "SYSTEMMANAGEMENT",
                 "JOBSCHEDULING",
                 "A3ANALYSIS",
                 "EXPERIMENTALFEATUREPRIVILEGE",
                 "BYPASSRLS",
                 "RANALYSIS",
-                "DISABLE_PINBOARD_CREATION",
                 "DEVELOPER",
-                "APPLICATION_ADMINISTRATION",
                 "USER_ADMINISTRATION",
                 "GROUP_ADMINISTRATION",
-                "BACKUP_ADMINISTRATION",
-                "SYSTEM_INFO_ADMINISTRATION",
-                "ENABLESPOTAPPCREATION",
                 "SYNCMANAGEMENT"
               ]
             },
@@ -4439,8 +5366,6 @@
       "MetadataSearchResponse": {
         "type": "object",
         "required": [
-          "metadata_id",
-          "metadata_name",
           "metadata_type"
         ],
         "properties": {
@@ -4520,7 +5445,7 @@
               "USER_GROUP",
               "LOGICAL_RELATIONSHIP"
             ],
-            "description": "Type of metadata."
+            "description": "Type of metadata.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view.\n5. CONNECTION for creating or modify data connections.\n6. TAG for tag objects.\n7. USER for user objects.\n8. USER_GROUP for user group objects.\n9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values"
           }
         }
       },
@@ -4571,7 +5496,7 @@
               "USER_GROUP",
               "LOGICAL_RELATIONSHIP"
             ],
-            "description": "Type of metadata."
+            "description": "Type of metadata.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view.\n5. CONNECTION for creating or modify data connections.\n6. TAG for tag objects.\n7. USER for user objects.\n8. USER_GROUP for user group objects.\n9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values"
           }
         }
       },
@@ -4587,7 +5512,7 @@
             "items": {
               "type": "string"
             },
-            "description": "Unique ID or name of the users."
+            "description": "Unique ID or name of the users. If not specified then favorite of current logged in user is considered."
           }
         },
         "description": "Favorite object options."
@@ -4602,7 +5527,12 @@
               "DISPLAY_NAME",
               "AUTHOR",
               "CREATED",
-              "MODIFIED"
+              "MODIFIED",
+              "LAST_ACCESSED",
+              "SYNCED",
+              "VIEWS",
+              "USER_STATE",
+              "ROW_COUNT"
             ],
             "description": "Name of the field to apply the sort on."
           },
@@ -4695,6 +5625,22 @@
           }
         }
       },
+      "SearchDataResponse": {
+        "type": "object",
+        "required": [
+          "contents"
+        ],
+        "properties": {
+          "contents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AnswerContent"
+            },
+            "description": "Data content of metadata objects."
+          }
+        },
+        "description": "Response format associated with the search data API."
+      },
       "LogResponse": {
         "type": "object",
         "required": [
@@ -4709,6 +5655,164 @@
           "log": {
             "type": "string",
             "description": "Log data"
+          }
+        }
+      },
+      "RepoConfigObject": {
+        "type": "object",
+        "required": [
+          "remote_alias"
+        ],
+        "properties": {
+          "repository_url": {
+            "type": "string",
+            "description": "Remote repository URL configured"
+          },
+          "branches": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Branches that have been pulled in local repository"
+          },
+          "remote_alias": {
+            "type": "string",
+            "description": "Alias name associated with the remote repository"
+          }
+        }
+      },
+      "CommitHistoryResponse": {
+        "type": "object",
+        "required": [
+          "committer",
+          "author",
+          "comment",
+          "commit_time",
+          "commit_id",
+          "branch"
+        ],
+        "properties": {
+          "committer": {
+            "$ref": "#/components/schemas/CommiterType",
+            "description": "Repository user using which changes were committed"
+          },
+          "author": {
+            "$ref": "#/components/schemas/AuthorType",
+            "description": "Thoughtspot user who commits the changes"
+          },
+          "comment": {
+            "type": "string",
+            "description": "Comments associated with the commit"
+          },
+          "commit_time": {
+            "type": "string",
+            "description": "Time at which the changes were committed."
+          },
+          "commit_id": {
+            "type": "string",
+            "description": "SHA id associated with the commit"
+          },
+          "branch": {
+            "type": "string",
+            "description": "Branch where changes were committed"
+          }
+        }
+      },
+      "SearchConnectionResponse": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "data_warehouse_type"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique ID of the connection."
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the connection."
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the connection."
+          },
+          "data_warehouse_type": {
+            "type": "string",
+            "enum": [
+              "SNOWFLAKE",
+              "AMAZON_REDSHIFT",
+              "GOOGLE_BIGQUERY",
+              "AZURE_SYNAPSE",
+              "TERADATA",
+              "SAP_HANA",
+              "STARBURST",
+              "ORACLE_ADW",
+              "DATABRICKS",
+              "DENODO",
+              "DREMIO",
+              "TRINO",
+              "PRESTO"
+            ],
+            "description": "Type of data warehouse."
+          },
+          "data_warehouse_objects": {
+            "$ref": "#/components/schemas/DataWarehouseObjects",
+            "description": "List of Data warehouse objects"
+          },
+          "details": {
+            "type": "object",
+            "description": "Details of the connection."
+          }
+        }
+      },
+      "ConnectionInput": {
+        "type": "object",
+        "properties": {
+          "identifier": {
+            "type": "string",
+            "description": "Unique ID or name of the connection."
+          },
+          "name_pattern": {
+            "type": "string",
+            "description": "A pattern to match case-insensitive name of the connection object. User % for a wildcard match."
+          },
+          "data_warehouse_objects": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DataWarehouseObjectInput"
+            },
+            "description": "Filter options for databases, schemas, tables and columns."
+          }
+        }
+      },
+      "SortOptionInput": {
+        "type": "object",
+        "properties": {
+          "field_name": {
+            "type": "string",
+            "enum": [
+              "NAME",
+              "DISPLAY_NAME",
+              "AUTHOR",
+              "CREATED",
+              "MODIFIED",
+              "LAST_ACCESSED",
+              "SYNCED",
+              "VIEWS",
+              "USER_STATE",
+              "ROW_COUNT"
+            ],
+            "description": "Name of the field to apply the sort on."
+          },
+          "order": {
+            "type": "string",
+            "enum": [
+              "ASC",
+              "DESC"
+            ],
+            "description": "Sort order : ASC(Ascending) or DESC(Descending)."
           }
         }
       },
@@ -4754,7 +5858,6 @@
       "TagMetadataTypeInput": {
         "type": "object",
         "required": [
-          "type",
           "identifier"
         ],
         "properties": {
@@ -4766,7 +5869,7 @@
               "LOGICAL_TABLE",
               "LOGICAL_COLUMN"
             ],
-            "description": "Type of metadata."
+            "description": "Type of metadata (Optional when given identifier is ID).\n1. LIVEBOARD\n2. ANSWERS\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n4. LOGICAL_COLUMN for a column of any data object such as tables, worksheets or views."
           },
           "identifier": {
             "type": "string",
@@ -4841,25 +5944,16 @@
                 "USERDATAUPLOADING",
                 "DATADOWNLOADING",
                 "USERMANAGEMENT",
-                "SECURITYMANAGEMENT",
-                "LOGICALMODELING",
                 "DATAMANAGEMENT",
-                "TAGMANAGEMENT",
                 "SHAREWITHALL",
-                "SYSTEMMANAGEMENT",
                 "JOBSCHEDULING",
                 "A3ANALYSIS",
                 "EXPERIMENTALFEATUREPRIVILEGE",
                 "BYPASSRLS",
                 "RANALYSIS",
-                "DISABLE_PINBOARD_CREATION",
                 "DEVELOPER",
-                "APPLICATION_ADMINISTRATION",
                 "USER_ADMINISTRATION",
                 "GROUP_ADMINISTRATION",
-                "BACKUP_ADMINISTRATION",
-                "SYSTEM_INFO_ADMINISTRATION",
-                "ENABLESPOTAPPCREATION",
                 "SYNCMANAGEMENT"
               ]
             },
@@ -4894,6 +5988,189 @@
               "NON_SHARABLE"
             ],
             "description": "Visibility of the user group. The SHARABLE makes a user group visible to other users and user groups, and thus allows them to share objects."
+          }
+        }
+      },
+      "CommitResponse": {
+        "type": "object",
+        "required": [
+          "committer",
+          "author",
+          "comment"
+        ],
+        "properties": {
+          "committer": {
+            "$ref": "#/components/schemas/CommiterType",
+            "description": "Repository user using which changes were committed"
+          },
+          "author": {
+            "$ref": "#/components/schemas/AuthorType",
+            "description": "Thoughtspot user who commits the changes"
+          },
+          "comment": {
+            "type": "string",
+            "description": "Comments associated with the commit"
+          },
+          "commit_time": {
+            "type": "string",
+            "description": "Time at which the changes were committed."
+          },
+          "commit_id": {
+            "type": "string",
+            "description": "SHA id associated with the commit"
+          },
+          "branch": {
+            "type": "string",
+            "description": "Branch where changes were committed"
+          },
+          "committed_files": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CommitFileType"
+            },
+            "description": "Files that were pushed as part of this commit"
+          }
+        }
+      },
+      "MetadataObject": {
+        "type": "object",
+        "required": [
+          "identifier",
+          "type"
+        ],
+        "properties": {
+          "identifier": {
+            "type": "string",
+            "description": "Unique ID or name of the metadata"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "LIVEBOARD",
+              "ANSWER",
+              "LOGICAL_TABLE",
+              "LOGICAL_COLUMN",
+              "CONNECTION",
+              "TAG",
+              "USER",
+              "USER_GROUP",
+              "LOGICAL_RELATIONSHIP"
+            ],
+            "description": "Type of metadata."
+          }
+        }
+      },
+      "RevertResponse": {
+        "type": "object",
+        "required": [
+          "committer",
+          "author",
+          "comment"
+        ],
+        "properties": {
+          "committer": {
+            "$ref": "#/components/schemas/CommiterType",
+            "description": "Repository user using which changes were committed"
+          },
+          "author": {
+            "$ref": "#/components/schemas/AuthorType",
+            "description": "Thoughtspot user who commits the changes"
+          },
+          "comment": {
+            "type": "string",
+            "description": "Comments associated with the commit"
+          },
+          "commit_time": {
+            "type": "string",
+            "description": "Time at which the changes were committed."
+          },
+          "commit_id": {
+            "type": "string",
+            "description": "SHA id associated with the commit"
+          },
+          "branch": {
+            "type": "string",
+            "description": "Branch where changes were committed"
+          },
+          "committed_files": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CommitFileType"
+            },
+            "description": "Files that were pushed as part of this commit"
+          },
+          "reverted_metadata": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RevertedMetadata"
+            },
+            "description": "Metadata of reverted file of this commit"
+          }
+        }
+      },
+      "DeployResponse": {
+        "type": "object",
+        "properties": {
+          "file_name": {
+            "type": "string",
+            "description": "Name of the file deployed"
+          },
+          "metadata_name": {
+            "type": "string",
+            "description": "Name of the metadata object"
+          },
+          "metadata_type": {
+            "type": "string",
+            "description": "Type of the metadata object"
+          },
+          "status_code": {
+            "type": "string",
+            "description": "Indicates the status of deployment for the file"
+          },
+          "status_message": {
+            "type": "string",
+            "description": "Any error or warning with the deployment"
+          }
+        }
+      },
+      "CreateConnectionResponse": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "data_warehouse_type"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "ID of the connection created."
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the connection."
+          },
+          "data_warehouse_type": {
+            "type": "string",
+            "enum": [
+              "SNOWFLAKE",
+              "AMAZON_REDSHIFT",
+              "GOOGLE_BIGQUERY",
+              "AZURE_SYNAPSE",
+              "TERADATA",
+              "SAP_HANA",
+              "STARBURST",
+              "ORACLE_ADW",
+              "DATABRICKS",
+              "DENODO",
+              "DREMIO",
+              "TRINO",
+              "PRESTO"
+            ],
+            "description": "Type of data warehouse."
+          },
+          "details": {
+            "type": "object",
+            "description": "Details of the connection."
           }
         }
       },
@@ -4966,7 +6243,6 @@
       "ImportUserType": {
         "type": "object",
         "required": [
-          "id",
           "name"
         ],
         "properties": {
@@ -5117,6 +6393,75 @@
         },
         "description": "Response format associated with fetch SQL query api"
       },
+      "CommiterType": {
+        "type": "object",
+        "required": [
+          "username"
+        ],
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "Email id of the committer"
+          },
+          "username": {
+            "type": "string",
+            "description": "Username of the committer"
+          }
+        }
+      },
+      "AuthorType": {
+        "type": "object",
+        "required": [
+          "email",
+          "username"
+        ],
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "Email id of the committer"
+          },
+          "username": {
+            "type": "string",
+            "description": "Username of the committer"
+          }
+        }
+      },
+      "DataWarehouseObjects": {
+        "type": "object",
+        "required": [
+          "databases"
+        ],
+        "properties": {
+          "databases": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Database"
+            },
+            "description": "Databases of the connection."
+          }
+        }
+      },
+      "DataWarehouseObjectInput": {
+        "type": "object",
+        "properties": {
+          "database": {
+            "type": "string",
+            "description": "Name of the database."
+          },
+          "schema": {
+            "type": "string",
+            "description": "Name of the schema within the database."
+          },
+          "table": {
+            "type": "string",
+            "description": "Name of the table within the schema."
+          },
+          "column": {
+            "type": "string",
+            "description": "Name of the column within the table."
+          }
+        }
+      },
       "Scope": {
         "type": "object",
         "required": [
@@ -5135,6 +6480,133 @@
           "metadata_id": {
             "type": "string",
             "description": "Unique identifier of the organization."
+          }
+        }
+      },
+      "CommitFileType": {
+        "type": "object",
+        "required": [
+          "file_name",
+          "status_code"
+        ],
+        "properties": {
+          "file_name": {
+            "type": "string",
+            "description": "Name of the file deployed"
+          },
+          "status_code": {
+            "type": "string",
+            "description": "Indicates the status of deployment for the file"
+          },
+          "status_message": {
+            "type": "string",
+            "description": "Any error or warning with the deployment"
+          }
+        }
+      },
+      "RevertedMetadata": {
+        "type": "object",
+        "required": [
+          "file_name",
+          "metadata_name",
+          "metadata_type",
+          "status_code",
+          "status_message"
+        ],
+        "properties": {
+          "file_name": {
+            "type": "string",
+            "description": "Name of the file deployed"
+          },
+          "metadata_name": {
+            "type": "string",
+            "description": "Name of the metadata object"
+          },
+          "metadata_type": {
+            "type": "string",
+            "description": "Type of the metadata object"
+          },
+          "status_code": {
+            "type": "string",
+            "description": "Indicates the status of deployment for the file"
+          },
+          "status_message": {
+            "type": "string",
+            "description": "Any error or warning with the deployment"
+          }
+        }
+      },
+      "Database": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the database."
+          },
+          "schemas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Schema"
+            },
+            "description": "Schemas of the database."
+          }
+        }
+      },
+      "Schema": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the schema."
+          },
+          "tables": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Table"
+            },
+            "description": "Tables of the schema."
+          }
+        }
+      },
+      "Table": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the table."
+          },
+          "columns": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Column"
+            },
+            "description": "Columns of the table."
+          }
+        }
+      },
+      "Column": {
+        "type": "object",
+        "required": [
+          "name",
+          "data_type"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the column."
+          },
+          "data_type": {
+            "type": "string",
+            "description": "Data type of the column."
           }
         }
       }
