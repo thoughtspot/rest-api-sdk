@@ -212,7 +212,7 @@
     "/api/rest/2.0/system": {
       "get": {
         "operationId": "getSystemInformation",
-        "description": "Get system details",
+        "description": "<font color=\"red\"><p>Get system details *since: 9.0.0.sw | 9.2.0.cl*</p></font>",
         "tags": [
           "System"
         ],
@@ -241,35 +241,22 @@
       }
     },
     "/api/rest/2.0/system/config": {
-      "post": {
-        "operationId": "updateSystemConfig",
-        "description": "Update cluster configuration",
+      "get": {
+        "operationId": "getSystemConfig",
+        "description": "Get system config information",
         "tags": [
           "System"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "configuration": {
-                    "description": "Configuration JSON with the key-value pair of configuration attributes to be updated.",
-                    "type": "object",
-                    "deprecated": false
-                  }
-                },
-                "required": [
-                  "configuration"
-                ]
+        "parameters": [],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SystemConfig"
+                }
               }
             }
-          },
-          "required": true
-        },
-        "responses": {
-          "204": {
-            "description": "Successful"
           },
           "500": {
             "description": "Operation failed",
@@ -946,8 +933,14 @@
           "required": true
         },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -1012,8 +1005,14 @@
           "required": true
         },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -1181,6 +1180,7 @@
                   },
                   "data_format": {
                     "description": "JSON output format. By default, the API returns full data in the JSON.",
+                    "default": "COMPACT",
                     "type": "string",
                     "enum": [
                       "COMPACT"
@@ -1497,8 +1497,14 @@
           "required": true
         },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -1706,10 +1712,26 @@
         "tags": [
           "Authentication"
         ],
-        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          },
+          "required": true
+        },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -1752,8 +1774,14 @@
           "required": true
         },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -1932,6 +1960,11 @@
               "schema": {
                 "type": "object",
                 "properties": {
+                  "user_identifier": {
+                    "description": "GUID / name of the user",
+                    "type": "string",
+                    "deprecated": false
+                  },
                   "name": {
                     "description": "Name of the user. The username string must be unique.",
                     "type": "string",
@@ -2024,15 +2057,24 @@
                     },
                     "deprecated": false
                   }
-                }
+                },
+                "required": [
+                  "user_identifier"
+                ]
               }
             }
           },
           "required": true
         },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -2044,19 +2086,7 @@
               }
             }
           }
-        },
-        "parameters": [
-          {
-            "in": "path",
-            "name": "user_identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "GUID / name of the user",
-            "deprecated": false
-          }
-        ]
+        }
       }
     },
     "/api/rest/2.0/users/{user_identifier}/delete": {
@@ -2066,21 +2096,35 @@
         "tags": [
           "Users"
         ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "user_identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "GUID / name of the user",
-            "deprecated": false
-          }
-        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "user_identifier": {
+                    "description": "GUID / name of the user",
+                    "type": "string",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "user_identifier"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -2205,8 +2249,14 @@
           "required": true
         },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -2255,8 +2305,14 @@
           "required": true
         },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -2299,8 +2355,64 @@
           "required": true
         },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/system/config-update": {
+      "post": {
+        "operationId": "updateSystemConfig",
+        "description": "Update cluster configuration",
+        "tags": [
+          "System"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "configuration": {
+                    "description": "<font color=\"red\"><p>Configuration JSON with the key-value pair of configuration attributes to be updated. *since: 9.0.0.sw | 9.2.0.cl*</p></font>",
+                    "type": "object",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "configuration"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -2383,6 +2495,11 @@
               "schema": {
                 "type": "object",
                 "properties": {
+                  "org_identifier": {
+                    "description": "ID or name of the Org.",
+                    "type": "string",
+                    "deprecated": false
+                  },
                   "name": {
                     "description": "Name of the Org.",
                     "type": "string",
@@ -2401,15 +2518,24 @@
                     },
                     "deprecated": false
                   }
-                }
+                },
+                "required": [
+                  "org_identifier"
+                ]
               }
             }
           },
           "required": true
         },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -2421,19 +2547,7 @@
               }
             }
           }
-        },
-        "parameters": [
-          {
-            "in": "path",
-            "name": "org_identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "ID or name of the Org.",
-            "deprecated": false
-          }
-        ]
+        }
       }
     },
     "/api/rest/2.0/orgs/{org_identifier}/delete": {
@@ -2443,21 +2557,35 @@
         "tags": [
           "Orgs"
         ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "org_identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "ID or name of the Org.",
-            "deprecated": false
-          }
-        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "org_identifier": {
+                    "description": "ID or name of the Org.",
+                    "type": "string",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "org_identifier"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -2541,6 +2669,11 @@
               "schema": {
                 "type": "object",
                 "properties": {
+                  "tag_identifier": {
+                    "description": "Name or Id of the tag.",
+                    "type": "string",
+                    "deprecated": false
+                  },
                   "name": {
                     "description": "Name of the tag.",
                     "type": "string",
@@ -2551,15 +2684,24 @@
                     "type": "string",
                     "deprecated": false
                   }
-                }
+                },
+                "required": [
+                  "tag_identifier"
+                ]
               }
             }
           },
           "required": true
         },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -2571,19 +2713,7 @@
               }
             }
           }
-        },
-        "parameters": [
-          {
-            "in": "path",
-            "name": "tag_identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Name or Id of the tag.",
-            "deprecated": false
-          }
-        ]
+        }
       }
     },
     "/api/rest/2.0/tags/{tag_identifier}/delete": {
@@ -2593,21 +2723,35 @@
         "tags": [
           "Tags"
         ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "tag_identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Tag identifier Tag name or Tag id.",
-            "deprecated": false
-          }
-        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "tag_identifier": {
+                    "description": "Tag identifier Tag name or Tag id.",
+                    "type": "string",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "tag_identifier"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -2662,8 +2806,14 @@
           "required": true
         },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -2718,8 +2868,14 @@
           "required": true
         },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -2887,6 +3043,11 @@
               "schema": {
                 "type": "object",
                 "properties": {
+                  "group_identifier": {
+                    "description": "GUID or name of the group.",
+                    "type": "string",
+                    "deprecated": false
+                  },
                   "name": {
                     "description": "Name of the group to modify.",
                     "type": "string",
@@ -2979,15 +3140,24 @@
                     ],
                     "deprecated": false
                   }
-                }
+                },
+                "required": [
+                  "group_identifier"
+                ]
               }
             }
           },
           "required": true
         },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -2999,19 +3169,7 @@
               }
             }
           }
-        },
-        "parameters": [
-          {
-            "in": "path",
-            "name": "group_identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "GUID or name of the group.",
-            "deprecated": false
-          }
-        ]
+        }
       }
     },
     "/api/rest/2.0/groups/{group_identifier}/delete": {
@@ -3021,21 +3179,35 @@
         "tags": [
           "Groups"
         ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "group_identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "GUID or name of the group.",
-            "deprecated": false
-          }
-        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "group_identifier": {
+                    "description": "GUID or name of the group.",
+                    "type": "string",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "group_identifier"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -3288,8 +3460,14 @@
           "required": true
         },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -3346,8 +3524,14 @@
           "required": true
         },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -3448,8 +3632,14 @@
           "required": true
         },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -3910,7 +4100,8 @@
               "LIVEBOARD",
               "ANSWER",
               "LOGICAL_TABLE",
-              "LOGICAL_COLUMN"
+              "LOGICAL_COLUMN",
+              "LOGICAL_RELATIONSHIP"
             ],
             "description": "Type of metadata."
           },
@@ -4181,7 +4372,8 @@
         "type": "object",
         "properties": {
           "onboarding_content_url": {
-            "type": "string"
+            "type": "string",
+            "description": "*since: 9.0.0.sw | 9.2.0.cl*"
           }
         }
       },
