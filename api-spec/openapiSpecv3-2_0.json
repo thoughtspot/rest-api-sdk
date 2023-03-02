@@ -212,7 +212,7 @@
     "/api/rest/2.0/system": {
       "get": {
         "operationId": "getSystemInformation",
-        "description": "Get system details <font color=\"red\">*since: 9.0.0.sw | 9.2.0.cl*</font>",
+        "description": "Get system details <br/> <font color=\"red\">. *since: 9.0.0.sw | 9.2.0.cl*</font>",
         "tags": [
           "System"
         ],
@@ -2391,7 +2391,7 @@
                 "type": "object",
                 "properties": {
                   "configuration": {
-                    "description": "Configuration JSON with the key-value pair of configuration attributes to be updated. <font color=\"red\">*since: 9.0.0.sw | 9.2.0.cl*</font>",
+                    "description": "Configuration JSON with the key-value pair of configuration attributes to be updated. <br/> <font color=\"red\">. *since: 9.0.0.sw | 9.2.0.cl*</font>",
                     "type": "object",
                     "deprecated": false
                   }
@@ -4373,7 +4373,7 @@
         "properties": {
           "onboarding_content_url": {
             "type": "string",
-            "description": "*since: 9.0.0.sw | 9.2.0.cl*"
+            "description": ". *since: 9.0.0.sw | 9.2.0.cl*"
           }
         }
       },
