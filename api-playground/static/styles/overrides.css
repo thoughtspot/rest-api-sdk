@@ -21,7 +21,6 @@
     color: #eaedf2
 }
 .since-beta-tag {
-    float: left;
     padding: 1px 5px;
     margin: 0 10px 0 0;
     border-radius: 4px;
@@ -29,5 +28,5 @@
     color: white;
     font-size: 0.8em;
     font-weight: normal;
-    background: rgb(69, 191, 123);
+    background: grey;
 }
