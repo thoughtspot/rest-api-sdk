@@ -212,7 +212,7 @@
     "/api/rest/2.0/system": {
       "get": {
         "operationId": "getSystemInformation",
-        "description": "Get system details <br/> <font color=\"red\">. *since: 9.0.0.sw | 9.2.0.cl*</font>",
+        "description": "<span class=\"since-beta-tag\">Beta</span> Get system details.<span class=\"since-beta-tag\">*since: 9.0.0.sw | 9.2.0.cl*</span>",
         "tags": [
           "System"
         ],
