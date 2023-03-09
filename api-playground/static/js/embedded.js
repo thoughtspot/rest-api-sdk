@@ -97,14 +97,14 @@ const setAPIMaticConfigSetter = () => {
   });
 }
 
-const setPlaygroundConfig = ({ baseUrl, access }) => {
+const setPlaygroundConfig = ({ baseUrl, accessToken }) => {
     _setConfig((defaultConfig) => {
       return {
         ...defaultConfig,
         showFullCode: false,
         config: {
           ...defaultConfig.config,
-          AccessToken: access,
+          AccessToken: accessToken,
           'base-url': baseUrl,
         }
       };
