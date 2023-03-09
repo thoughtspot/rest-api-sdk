@@ -1,24 +1,5 @@
 let setConfig = null;
 
-
-APIMaticDevPortal.ready(({ _setConfig })=> {
-  setConfig = _setConfig;
-});
-
-const setPlaygroundConfig = ({ baseUrl, access }) => {
-  setConfig((defaultConfig) => {
-    return {
-      ...defaultConfig,
-      showFullCode: false,
-      config: {
-        ...defaultConfig.config,
-        AccessToken: access,
-        'base-url': baseUrl,
-      }
-    };
-  });
-}
-
 const navigateEndpoint = (apiResourceId) => {
   document.location.hash = apiResourceId;
 };
@@ -88,15 +69,12 @@ function getElementByIdAsync(id) {
   });
 }
 
-
-
 document.getElementsByClassName('portal-header')[0].style.display = 'none';
 
 window.addEventListener('hashchange', (e) => {
   if (!shouldPatch) {
     return;
   }
-  // patchURLAndPlayground(playgroundConfig);
   setPlaygroundConfig(playgroundConfig);
 });
 
@@ -105,12 +83,33 @@ window.addEventListener('message', (event) => {
     shouldPatch = true;
     playgroundConfig = event.data;
     // patchURLAndPlayground(playgroundConfig);
-    setPlaygroundConfig(playgroundConfig);
+    setAPIMaticConfigSetter();
     if (playgroundConfig.apiResourceId) {
       navigateEndpoint(playgroundConfig.apiResourceId);
     }
   }
 });
+
+const setAPIMaticConfigSetter = () => {
+  APIMaticDevPortal.ready(({ _setConfig })=> {
+      setConfig = _setConfig;
+      setPlaygroundConfig(playgroundConfig);
+  });
+}
+
+const setPlaygroundConfig = ({ baseUrl, access }) => {
+    setConfig((defaultConfig) => {
+      return {
+        ...defaultConfig,
+        showFullCode: false,
+        config: {
+          ...defaultConfig.config,
+          AccessToken: access,
+          'base-url': baseUrl,
+        }
+      };
+    });
+}
 
 window.test = (config) => {
   // patchURLAndPlayground(config);
