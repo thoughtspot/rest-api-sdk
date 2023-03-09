@@ -1,4 +1,4 @@
-let setConfig = null;
+let _setConfig = null;
 
 const navigateEndpoint = (apiResourceId) => {
   document.location.hash = apiResourceId;
@@ -91,14 +91,14 @@ window.addEventListener('message', (event) => {
 });
 
 const setAPIMaticConfigSetter = () => {
-  APIMaticDevPortal.ready(({ _setConfig })=> {
-      setConfig = _setConfig;
+  APIMaticDevPortal.ready(({ setConfig })=> {
+      _setConfig = setConfig;
       setPlaygroundConfig(playgroundConfig);
   });
 }
 
 const setPlaygroundConfig = ({ baseUrl, access }) => {
-    setConfig((defaultConfig) => {
+    _setConfig((defaultConfig) => {
       return {
         ...defaultConfig,
         showFullCode: false,
