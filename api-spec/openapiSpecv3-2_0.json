@@ -3924,7 +3924,7 @@
                     "deprecated": false
                   },
                   "default_branch": {
-                    "description": "Name of the default remote branch",
+                    "description": "Name of the default remote branch <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.2.0</span>",
                     "type": "string",
                     "deprecated": false
                   },
