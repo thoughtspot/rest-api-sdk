@@ -915,8 +915,14 @@
           "required": true
         },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -981,8 +987,14 @@
           "required": true
         },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -1434,11 +1446,21 @@
     "/api/rest/2.0/vcs/git/config/search": {
       "post": {
         "operationId": "searchLocalConfig",
-        "description": "Search local repository configuration",
+        "description": "Search local repository configuration <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: No longer supported</span>",
         "tags": [
           "Version Control"
         ],
-        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          },
+          "required": true
+        },
         "responses": {
           "200": {
             "content": {
@@ -1468,7 +1490,7 @@
     "/api/rest/2.0/vcs/git/commits/search": {
       "post": {
         "operationId": "searchCommits",
-        "description": "List the commit history of a metadata object",
+        "description": "List the commit history of a metadata object <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: No longer supported</span>",
         "tags": [
           "Version Control"
         ],
@@ -1706,8 +1728,14 @@
           "required": true
         },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -1939,10 +1967,26 @@
         "tags": [
           "Authentication"
         ],
-        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          },
+          "required": true
+        },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -1985,8 +2029,14 @@
           "required": true
         },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -2165,6 +2215,11 @@
               "schema": {
                 "type": "object",
                 "properties": {
+                  "user_identifier": {
+                    "description": "GUID / name of the user",
+                    "type": "string",
+                    "deprecated": false
+                  },
                   "name": {
                     "description": "Name of the user. The username string must be unique.",
                     "type": "string",
@@ -2257,15 +2312,24 @@
                     },
                     "deprecated": false
                   }
-                }
+                },
+                "required": [
+                  "user_identifier"
+                ]
               }
             }
           },
           "required": true
         },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -2277,19 +2341,7 @@
               }
             }
           }
-        },
-        "parameters": [
-          {
-            "in": "path",
-            "name": "user_identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "GUID / name of the user",
-            "deprecated": false
-          }
-        ]
+        }
       }
     },
     "/api/rest/2.0/users/{user_identifier}/delete": {
@@ -2299,21 +2351,35 @@
         "tags": [
           "Users"
         ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "user_identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "GUID / name of the user",
-            "deprecated": false
-          }
-        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "user_identifier": {
+                    "description": "GUID / name of the user",
+                    "type": "string",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "user_identifier"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -2438,8 +2504,14 @@
           "required": true
         },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -2488,8 +2560,14 @@
           "required": true
         },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -2532,8 +2610,14 @@
           "required": true
         },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -2576,8 +2660,14 @@
           "required": true
         },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -2660,6 +2750,11 @@
               "schema": {
                 "type": "object",
                 "properties": {
+                  "org_identifier": {
+                    "description": "ID or name of the Org.",
+                    "type": "string",
+                    "deprecated": false
+                  },
                   "name": {
                     "description": "Name of the Org.",
                     "type": "string",
@@ -2678,15 +2773,24 @@
                     },
                     "deprecated": false
                   }
-                }
+                },
+                "required": [
+                  "org_identifier"
+                ]
               }
             }
           },
           "required": true
         },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -2698,19 +2802,7 @@
               }
             }
           }
-        },
-        "parameters": [
-          {
-            "in": "path",
-            "name": "org_identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "ID or name of the Org.",
-            "deprecated": false
-          }
-        ]
+        }
       }
     },
     "/api/rest/2.0/orgs/{org_identifier}/delete": {
@@ -2720,21 +2812,35 @@
         "tags": [
           "Orgs"
         ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "org_identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "ID or name of the Org.",
-            "deprecated": false
-          }
-        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "org_identifier": {
+                    "description": "ID or name of the Org.",
+                    "type": "string",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "org_identifier"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -2818,6 +2924,11 @@
               "schema": {
                 "type": "object",
                 "properties": {
+                  "tag_identifier": {
+                    "description": "Name or Id of the tag.",
+                    "type": "string",
+                    "deprecated": false
+                  },
                   "name": {
                     "description": "Name of the tag.",
                     "type": "string",
@@ -2828,15 +2939,24 @@
                     "type": "string",
                     "deprecated": false
                   }
-                }
+                },
+                "required": [
+                  "tag_identifier"
+                ]
               }
             }
           },
           "required": true
         },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -2848,19 +2968,7 @@
               }
             }
           }
-        },
-        "parameters": [
-          {
-            "in": "path",
-            "name": "tag_identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Name or Id of the tag.",
-            "deprecated": false
-          }
-        ]
+        }
       }
     },
     "/api/rest/2.0/tags/{tag_identifier}/delete": {
@@ -2870,21 +2978,35 @@
         "tags": [
           "Tags"
         ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "tag_identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Tag identifier Tag name or Tag id.",
-            "deprecated": false
-          }
-        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "tag_identifier": {
+                    "description": "Tag identifier Tag name or Tag id.",
+                    "type": "string",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "tag_identifier"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -2939,8 +3061,14 @@
           "required": true
         },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -2995,8 +3123,14 @@
           "required": true
         },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -3155,6 +3289,11 @@
               "schema": {
                 "type": "object",
                 "properties": {
+                  "group_identifier": {
+                    "description": "GUID or name of the group.",
+                    "type": "string",
+                    "deprecated": false
+                  },
                   "name": {
                     "description": "Name of the group to modify.",
                     "type": "string",
@@ -3238,15 +3377,24 @@
                     ],
                     "deprecated": false
                   }
-                }
+                },
+                "required": [
+                  "group_identifier"
+                ]
               }
             }
           },
           "required": true
         },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -3258,19 +3406,7 @@
               }
             }
           }
-        },
-        "parameters": [
-          {
-            "in": "path",
-            "name": "group_identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "GUID or name of the group.",
-            "deprecated": false
-          }
-        ]
+        }
       }
     },
     "/api/rest/2.0/groups/{group_identifier}/delete": {
@@ -3280,21 +3416,35 @@
         "tags": [
           "Groups"
         ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "group_identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "GUID or name of the group.",
-            "deprecated": false
-          }
-        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "group_identifier": {
+                    "description": "GUID or name of the group.",
+                    "type": "string",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "group_identifier"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -3549,8 +3699,14 @@
           "required": true
         },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -3607,8 +3763,14 @@
           "required": true
         },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -3703,8 +3865,14 @@
           "required": true
         },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -3722,7 +3890,7 @@
     "/api/rest/2.0/vcs/git/config/create": {
       "post": {
         "operationId": "createLocalConfig",
-        "description": "Configure local repository to connect to remote repository",
+        "description": "Configure local repository to connect to remote repository <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: No longer supported</span>",
         "tags": [
           "Version Control"
         ],
@@ -3737,9 +3905,17 @@
                     "type": "string",
                     "deprecated": false
                   },
-                  "default_branch": {
+                  "default_branch_name": {
                     "description": "Name of the default remote branch",
                     "type": "string",
+                    "deprecated": false
+                  },
+                  "branch_names": {
+                    "description": "List the remote branches to configure. Example:[development, production]",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
                     "deprecated": false
                   },
                   "username": {
@@ -3789,7 +3965,7 @@
     "/api/rest/2.0/vcs/git/config/update": {
       "post": {
         "operationId": "updateLocalConfig",
-        "description": "Update local repository configuration.",
+        "description": "Update local repository configuration. <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: No longer supported</span>",
         "tags": [
           "Version Control"
         ],
@@ -3809,9 +3985,17 @@
                     "type": "string",
                     "deprecated": false
                   },
-                  "default_branch": {
+                  "default_branch_name": {
                     "description": "Name of the default remote branch",
                     "type": "string",
+                    "deprecated": false
+                  },
+                  "branch_names": {
+                    "description": "List the remote branches to configure. Example:[development, production]",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
                     "deprecated": false
                   }
                 }
@@ -3846,14 +4030,30 @@
     "/api/rest/2.0/vcs/git/config/delete": {
       "post": {
         "operationId": "deleteLocalConfig",
-        "description": "Delete local repository configuration",
+        "description": "Delete local repository configuration <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: No longer supported</span>",
         "tags": [
           "Version Control"
         ],
-        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          },
+          "required": true
+        },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -3871,25 +4071,39 @@
     "/api/rest/2.0/vcs/git/branches/{branch_name}/pull": {
       "post": {
         "operationId": "pullBranch",
-        "description": "Pull a branch from remote repository to local repository.",
+        "description": "Pull a branch from remote repository to local repository. <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: No longer supported</span>",
         "tags": [
           "Version Control"
         ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "branch_name",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Name of the branch to pull",
-            "deprecated": false
-          }
-        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "branch_name": {
+                    "description": "Name of the branch to pull",
+                    "type": "string",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "branch_name"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -3907,7 +4121,7 @@
     "/api/rest/2.0/vcs/git/branches/commit": {
       "post": {
         "operationId": "commitBranch",
-        "description": "Commit the object from metadata to remote repository",
+        "description": "Commit the object from metadata to remote repository <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: No longer supported</span>",
         "tags": [
           "Version Control"
         ],
@@ -3971,7 +4185,7 @@
     "/api/rest/2.0/vcs/git/commits/{commit_id}/revert": {
       "post": {
         "operationId": "revertCommit",
-        "description": "Revert an object to a specific commit id",
+        "description": "Revert an object to a specific commit id <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: No longer supported</span>",
         "tags": [
           "Version Control"
         ],
@@ -3993,10 +4207,15 @@
                     "description": "Name of the branch where the reverted version should be comitted",
                     "type": "string",
                     "deprecated": false
+                  },
+                  "commit_id": {
+                    "description": "Commit id to which the object should be reverted",
+                    "type": "string",
+                    "deprecated": false
                   }
                 },
                 "required": [
-                  "metadata"
+                  "commit_id"
                 ]
               }
             }
@@ -4023,25 +4242,13 @@
               }
             }
           }
-        },
-        "parameters": [
-          {
-            "in": "path",
-            "name": "commit_id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Commit id to which the object should be reverted",
-            "deprecated": false
-          }
-        ]
+        }
       }
     },
     "/api/rest/2.0/vcs/git/branches/validate": {
       "post": {
         "operationId": "validateMerge",
-        "description": "Before merging changes to target branch, pick the changes from source branch and validate the files",
+        "description": "Before merging changes to target branch, pick the changes from source branch and validate the files <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: No longer supported</span>",
         "tags": [
           "Version Control"
         ],
@@ -4100,7 +4307,7 @@
     "/api/rest/2.0/vcs/git/commits/deploy": {
       "post": {
         "operationId": "deployCommit",
-        "description": "Deploy changes to a Thoughtspot environment from a commit point\"",
+        "description": "Deploy changes to a Thoughtspot environment from a commit point\" <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: No longer supported</span>",
         "tags": [
           "Version Control"
         ],
@@ -4120,14 +4327,39 @@
                     ],
                     "deprecated": false
                   },
+                  "deploy_type": {
+                    "description": "Indicates if all files or only modified file at specified commit point should be considered",
+                    "default": "DELTA",
+                    "type": "string",
+                    "enum": [
+                      "FULL",
+                      "DELTA"
+                    ],
+                    "deprecated": false
+                  },
                   "commit_id": {
                     "description": "Commit_id against which the files should be picked to deploy",
                     "type": "string",
                     "deprecated": false
+                  },
+                  "branch_name": {
+                    "description": "Name of the remote branch where changes should be picked",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "deploy_policy": {
+                    "description": "Policy to be followed while importing. Valid values: [ALL_OR_NONE, PARTIAL]",
+                    "default": "ALL_OR_NONE",
+                    "type": "string",
+                    "enum": [
+                      "ALL_OR_NONE",
+                      "PARTIAL"
+                    ],
+                    "deprecated": false
                   }
                 },
                 "required": [
-                  "commit_id"
+                  "deploy_policy"
                 ]
               }
             }
@@ -4276,8 +4508,14 @@
           "required": true
         },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -4341,8 +4579,14 @@
           "required": true
         },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
