@@ -1445,7 +1445,7 @@
     },
     "/api/rest/2.0/vcs/git/config/search": {
       "post": {
-        "operationId": "searchLocalConfig",
+        "operationId": "searchConfig",
         "description": "Search local repository configuration <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: No longer supported</span>",
         "tags": [
           "Version Control"
@@ -3889,7 +3889,7 @@
     },
     "/api/rest/2.0/vcs/git/config/create": {
       "post": {
-        "operationId": "createLocalConfig",
+        "operationId": "createConfig",
         "description": "Configure local repository to connect to remote repository <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: No longer supported</span>",
         "tags": [
           "Version Control"
@@ -3964,7 +3964,7 @@
     },
     "/api/rest/2.0/vcs/git/config/update": {
       "post": {
-        "operationId": "updateLocalConfig",
+        "operationId": "updateConfig",
         "description": "Update local repository configuration. <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: No longer supported</span>",
         "tags": [
           "Version Control"
@@ -4029,7 +4029,7 @@
     },
     "/api/rest/2.0/vcs/git/config/delete": {
       "post": {
-        "operationId": "deleteLocalConfig",
+        "operationId": "deleteConfig",
         "description": "Delete local repository configuration <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: No longer supported</span>",
         "tags": [
           "Version Control"
@@ -4307,7 +4307,7 @@
     "/api/rest/2.0/vcs/git/commits/deploy": {
       "post": {
         "operationId": "deployCommit",
-        "description": "Deploy changes to a Thoughtspot environment from a commit point\" <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: No longer supported</span>",
+        "description": "Deploy changes to a Thoughtspot environment from a commit point\" <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.3.0</span>",
         "tags": [
           "Version Control"
         ],
