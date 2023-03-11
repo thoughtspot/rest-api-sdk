@@ -1,10 +1,13 @@
-let _setConfig = null;
+let setConfig = null;
 
 const navigateEndpoint = (apiResourceId) => {
   document.location.hash = apiResourceId;
 };
 
 let shouldPatch = false;
+
+/** setting APIMatic Portal */
+setAPIMaticPortalConfig();
 
 const patchURLAndPlayground = async ({ baseUrl, accessToken }) => {
   // find the configure button element
@@ -82,29 +85,27 @@ window.addEventListener('message', (event) => {
   if (event.data?.type === 'api-playground-config') {
     shouldPatch = true;
     playgroundConfig = event.data;
-    // patchURLAndPlayground(playgroundConfig);
-    setAPIMaticConfigSetter();
+    setPlaygroundConfig(playgroundConfig);
     if (playgroundConfig.apiResourceId) {
       navigateEndpoint(playgroundConfig.apiResourceId);
     }
   }
 });
 
-const setAPIMaticConfigSetter = () => {
-  APIMaticDevPortal.ready(({ setConfig })=> {
-      _setConfig = setConfig;
-      setPlaygroundConfig(playgroundConfig);
+const setAPIMaticPortalConfig = () => {
+  APIMaticDevPortal.ready(({ _setConfig })=> {
+      setConfig = _setConfig;
   });
 }
 
-const setPlaygroundConfig = ({ baseUrl, accessToken }) => {
-    _setConfig((defaultConfig) => {
+const setPlaygroundConfig = ({ baseUrl, access }) => {
+    setConfig((defaultConfig) => {
       return {
         ...defaultConfig,
         showFullCode: false,
         config: {
           ...defaultConfig.config,
-          AccessToken: accessToken,
+          AccessToken: access,
           'base-url': baseUrl,
         }
       };
@@ -112,6 +113,5 @@ const setPlaygroundConfig = ({ baseUrl, accessToken }) => {
 }
 
 window.test = (config) => {
-  // patchURLAndPlayground(config);
   setPlaygroundConfig(playgroundConfig);
 };
