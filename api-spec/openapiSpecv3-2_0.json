@@ -3913,7 +3913,7 @@
                     "deprecated": false
                   },
                   "default_branch": {
-                    "description": "Name of the default remote branch <span class=\"since-beta-tag\">*since: 9.2.0</span>",
+                    "description": "Name of the default remote branch  <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.2.0</span>",
                     "type": "string",
                     "deprecated": false
                   },
@@ -3988,7 +3988,7 @@
                     "deprecated": false
                   },
                   "default_branch": {
-                    "description": "Name of the default remote branch <span class=\"since-beta-tag\">*since: 9.2.0</span>",
+                    "description": "Name of the default remote branch  <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.2.0</span>",
                     "type": "string",
                     "deprecated": false
                   },
@@ -4322,7 +4322,7 @@
                     "deprecated": false
                   },
                   "import_type": {
-                    "description": "Indicates if all files or only modified file at specified commit point should be considered <span class=\"since-beta-tag\">*since: 9.2.0</span>",
+                    "description": "Indicates if all files or only modified file at specified commit point should be considered <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.2.0</span>",
                     "default": "DELTA",
                     "type": "string",
                     "enum": [
