@@ -77,8 +77,10 @@ const setAPIMaticPortalConfig = () => {
     isApiMaticPortalReady = true;
     setConfig((defaultConfig) => {
       return {
+        ...defaultConfig,
         showFullCode: false,
         config: {
+          ...defaultConfig.config,
           AccessToken: playgroundConfig.access,
           "base-url": playgroundConfig.baseUrl,
         },
