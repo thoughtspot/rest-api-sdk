@@ -77,11 +77,8 @@ const setAPIMaticPortalConfig = () => {
     isApiMaticPortalReady = true;
     setConfig((defaultConfig) => {
       return {
-        ...defaultConfig,
         showFullCode: false,
         config: {
-          ...defaultConfig.config,
-          "Accept-Language": "Typescript",
           AccessToken: playgroundConfig.access,
           "base-url": playgroundConfig.baseUrl,
         },
