@@ -71,6 +71,15 @@ function getElementByIdAsync(id) {
 
 document.getElementsByClassName('portal-header')[0].style.display = 'none';
 
+const setAPIMaticPortalConfig = () => {
+  APIMaticDevPortal.ready(({ _setConfig })=> {
+      setConfig = _setConfig;
+  });
+}
+
+/** setting APIMatic Portal */
+setAPIMaticPortalConfig();
+
 window.addEventListener('hashchange', (e) => {
   if (!shouldPatch) {
     return;
@@ -89,12 +98,6 @@ window.addEventListener('message', (event) => {
   }
 });
 
-const setAPIMaticPortalConfig = () => {
-  APIMaticDevPortal.ready(({ _setConfig })=> {
-      setConfig = _setConfig;
-  });
-}
-
 const setPlaygroundConfig = ({ baseUrl, access }) => {
     setConfig((defaultConfig) => {
       return {
@@ -112,6 +115,3 @@ const setPlaygroundConfig = ({ baseUrl, access }) => {
 window.test = (config) => {
   setPlaygroundConfig(playgroundConfig);
 };
-
-/** setting APIMatic Portal */
-setAPIMaticPortalConfig();
