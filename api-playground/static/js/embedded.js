@@ -5,6 +5,7 @@ const navigateEndpoint = (apiResourceId) => {
 };
 
 let shouldPatch = false;
+let isApiMaticPortalReady = false;
 
 const patchURLAndPlayground = async ({ baseUrl, accessToken }) => {
   // find the configure button element
@@ -48,7 +49,7 @@ const patchURLAndPlayground = async ({ baseUrl, accessToken }) => {
 };
 
 const channel = new MessageChannel();
-let playgroundConfig = {};
+let playgroundConfig = null;
 
 window.parent.postMessage({ type: 'api-playground-ready' }, '*', [
   channel.port2,
@@ -73,7 +74,12 @@ document.getElementsByClassName('portal-header')[0].style.display = 'none';
 
 const setAPIMaticPortalConfig = () => {
   APIMaticDevPortal.ready(({ _setConfig })=> {
+      isApiMaticPortalReady = true;
       setConfig = _setConfig;
+      // To run this first time
+      if(playgroundConfig) {
+        setPlaygroundConfig(playgroundConfig);
+      }
   });
 }
 
@@ -91,7 +97,7 @@ window.addEventListener('message', (event) => {
   if (event.data?.type === 'api-playground-config') {
     shouldPatch = true;
     playgroundConfig = event.data;
-    setPlaygroundConfig(playgroundConfig);
+    if(isApiMaticPortalReady) { setPlaygroundConfig(playgroundConfig); }
     if (playgroundConfig.apiResourceId) {
       navigateEndpoint(playgroundConfig.apiResourceId);
     }
