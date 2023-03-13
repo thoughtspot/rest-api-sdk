@@ -4063,26 +4063,6 @@
         "tags": [
           "Version Control"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "branch_name": {
-                    "description": "Name of the branch to pull",
-                    "type": "string",
-                    "deprecated": false
-                  }
-                },
-                "required": [
-                  "branch_name"
-                ]
-              }
-            }
-          },
-          "required": true
-        },
         "responses": {
           "200": {
             "content": {
@@ -4183,11 +4163,6 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "commit_id": {
-                    "description": "Commit id to which the object should be reverted",
-                    "type": "string",
-                    "deprecated": false
-                  },
                   "metadata": {
                     "description": "Metadata objects.",
                     "type": "array",
