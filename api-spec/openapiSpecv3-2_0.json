@@ -3913,12 +3913,12 @@
                     "deprecated": false
                   },
                   "default_branch": {
-                    "description": "Name of the default remote branch <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.2.0</span>",
+                    "description": "Name of the default remote branch <span class=\"since-beta-tag\">*since: 9.2.0</span>",
                     "type": "string",
                     "deprecated": false
                   },
                   "default_branch_name": {
-                    "description": "Name of the default remote branch <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.3.0</span>",
+                    "description": "Name of the default remote branch <span class=\"since-beta-tag\">*since: 9.3.0</span>",
                     "type": "string",
                     "deprecated": false
                   }
@@ -3980,7 +3980,7 @@
                     "deprecated": false
                   },
                   "branch_names": {
-                    "description": "List the remote branches to configure. Example:[development, production] <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.3.0</span>",
+                    "description": "List the remote branches to configure. Example:[development, production] <span class=\"since-beta-tag\">*since: 9.3.0</span>",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -3988,12 +3988,12 @@
                     "deprecated": false
                   },
                   "default_branch": {
-                    "description": "Name of the default remote branch <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.2.0</span>",
+                    "description": "Name of the default remote branch <span class=\"since-beta-tag\">*since: 9.2.0</span>",
                     "type": "string",
                     "deprecated": false
                   },
                   "default_branch_name": {
-                    "description": "Name of the default remote branch <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.3.0</span>",
+                    "description": "Name of the default remote branch <span class=\"since-beta-tag\">*since: 9.3.0</span>",
                     "type": "string",
                     "deprecated": false
                   }
@@ -4201,7 +4201,7 @@
                     "deprecated": false
                   },
                   "revert_policy": {
-                    "description": "Policy to be followed while importing. Valid values: [ALL_OR_NONE, PARTIAL] <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.3.0</span>",
+                    "description": "Policy to be followed while importing. Valid values: [ALL_OR_NONE, PARTIAL] <span class=\"since-beta-tag\">*since: 9.3.0</span>",
                     "default": "ALL_OR_NONE",
                     "type": "string",
                     "enum": [
@@ -4317,12 +4317,12 @@
                     "deprecated": false
                   },
                   "branch_name": {
-                    "description": "Name of the remote branch where changes should be picked <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.3.0</span>",
+                    "description": "Name of the remote branch where changes should be picked <span class=\"since-beta-tag\">*since: 9.3.0</span>",
                     "type": "string",
                     "deprecated": false
                   },
                   "import_type": {
-                    "description": "Indicates if all files or only modified file at specified commit point should be considered <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.2.0</span>",
+                    "description": "Indicates if all files or only modified file at specified commit point should be considered <span class=\"since-beta-tag\">*since: 9.2.0</span>",
                     "default": "DELTA",
                     "type": "string",
                     "enum": [
@@ -4332,7 +4332,7 @@
                     "deprecated": false
                   },
                   "deploy_type": {
-                    "description": "Indicates if all files or only modified file at specified commit point should be considered <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.3.0</span>",
+                    "description": "Indicates if all files or only modified file at specified commit point should be considered <span class=\"since-beta-tag\">*since: 9.3.0</span>",
                     "default": "DELTA",
                     "type": "string",
                     "enum": [
@@ -4342,7 +4342,7 @@
                     "deprecated": false
                   },
                   "deploy_policy": {
-                    "description": "Policy to be followed while importing. Valid values: [ALL_OR_NONE, PARTIAL] <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.3.0</span>",
+                    "description": "Policy to be followed while importing. Valid values: [ALL_OR_NONE, PARTIAL] <span class=\"since-beta-tag\">*since: 9.3.0</span>",
                     "default": "ALL_OR_NONE",
                     "type": "string",
                     "enum": [
