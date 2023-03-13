@@ -1,4 +1,4 @@
-let setConfig = null;
+let _setConfig = null;
 
 const navigateEndpoint = (apiResourceId) => {
   document.location.hash = apiResourceId;
@@ -73,9 +73,9 @@ function getElementByIdAsync(id) {
 document.getElementsByClassName('portal-header')[0].style.display = 'none';
 
 const setAPIMaticPortalConfig = () => {
-  APIMaticDevPortal.ready(({ _setConfig })=> {
+  APIMaticDevPortal.ready(({ setConfig })=> {
       isApiMaticPortalReady = true;
-      setConfig = _setConfig;
+      _setConfig = setConfig;
       // To run this first time
       if(playgroundConfig) {
         setPlaygroundConfig(playgroundConfig);
@@ -105,7 +105,7 @@ window.addEventListener('message', (event) => {
 });
 
 const setPlaygroundConfig = ({ baseUrl, access }) => {
-    setConfig((defaultConfig) => {
+    _setConfig((defaultConfig) => {
       return {
         ...defaultConfig,
         showFullCode: false,
