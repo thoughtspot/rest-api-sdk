@@ -1450,17 +1450,6 @@
         "tags": [
           "Version Control"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {}
-              }
-            }
-          },
-          "required": true
-        },
         "responses": {
           "200": {
             "content": {
@@ -4044,17 +4033,6 @@
         "tags": [
           "Version Control"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {}
-              }
-            }
-          },
-          "required": true
-        },
         "responses": {
           "200": {
             "content": {
