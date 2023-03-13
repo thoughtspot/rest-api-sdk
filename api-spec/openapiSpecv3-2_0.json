@@ -4186,10 +4186,7 @@
                     ],
                     "deprecated": false
                   }
-                },
-                "required": [
-                  "commit_id"
-                ]
+                }
               }
             }
           },
