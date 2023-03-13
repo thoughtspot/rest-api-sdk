@@ -6,9 +6,6 @@ const navigateEndpoint = (apiResourceId) => {
 
 let shouldPatch = false;
 
-/** setting APIMatic Portal */
-setAPIMaticPortalConfig();
-
 const patchURLAndPlayground = async ({ baseUrl, accessToken }) => {
   // find the configure button element
   const configButtonElement = await getElementByIdAsync('code-config-button');
@@ -115,3 +112,6 @@ const setPlaygroundConfig = ({ baseUrl, access }) => {
 window.test = (config) => {
   setPlaygroundConfig(playgroundConfig);
 };
+
+/** setting APIMatic Portal */
+setAPIMaticPortalConfig();
