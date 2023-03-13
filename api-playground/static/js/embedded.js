@@ -97,7 +97,7 @@ window.addEventListener("hashchange", (e) => {
   if (!shouldPatch) {
     return;
   }
-  setPlaygroundConfig(playgroundConfig);
+  // setPlaygroundConfig(playgroundConfig);
 });
 
 window.addEventListener("message", (event) => {
