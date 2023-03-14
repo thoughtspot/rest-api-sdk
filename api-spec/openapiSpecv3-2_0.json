@@ -1257,6 +1257,16 @@
                     "type": "integer",
                     "format": "int32",
                     "deprecated": false
+                  },
+                  "runtime_filter": {
+                    "description": "JSON object representing filter condition to filter the data.",
+                    "type": "object",
+                    "deprecated": false
+                  },
+                  "runtime_sort": {
+                    "description": "JSON object representing columns to sort the data.",
+                    "type": "object",
+                    "deprecated": false
                   }
                 },
                 "required": [
@@ -1329,6 +1339,18 @@
                     "default": 10,
                     "type": "integer",
                     "format": "int32",
+                    "deprecated": false
+                  },
+                  "runtime_filter": {
+                    "description": "JSON object representing filter condition to filter the data.",
+                    "default": "",
+                    "type": "object",
+                    "deprecated": false
+                  },
+                  "runtime_sort": {
+                    "description": "JSON object representing columns to sort the data.",
+                    "default": "",
+                    "type": "object",
                     "deprecated": false
                   }
                 },
