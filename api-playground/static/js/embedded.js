@@ -96,7 +96,10 @@ window.addEventListener("hashchange", (e) => {
   if (!shouldPatch) {
     return;
   }
-  // setPlaygroundConfig(playgroundConfig);
+  const url = new URL(window.location.href);
+  const queryParams = window.location.href.split("#")[1];
+  url.searchParams.set('apiResourceId', queryParams);
+  history.pushState(null, '', url);
 });
 
 window.addEventListener("message", (event) => {
