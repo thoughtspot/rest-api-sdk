@@ -93,13 +93,17 @@ const setAPIMaticPortalConfig = () => {
 setAPIMaticPortalConfig();
 
 window.addEventListener("hashchange", (e) => {
+  const queryParams = window.location.href.split("#/")[1];
+  window.parent.postMessage({ type: "url-change", data: queryParams }, "*", [
+    channel.port2,
+  ]);
   if (!shouldPatch) {
     return;
   }
-  const url = new URL(window.location.href);
-  const queryParams = window.location.href.split("#/")[1];
-  url.searchParams.set('apiResourceId', queryParams);
-  navigateEndpoint(queryParams);
+  // const url = new URL(window.location.href);
+  
+  // url.searchParams.set('apiResourceId', queryParams);
+  // navigateEndpoint(queryParams);
 });
 
 window.addEventListener("message", (event) => {
