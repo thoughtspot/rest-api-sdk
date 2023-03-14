@@ -97,9 +97,9 @@ window.addEventListener("hashchange", (e) => {
     return;
   }
   const url = new URL(window.location.href);
-  const queryParams = window.location.href.split("#")[1];
+  const queryParams = window.location.href.split("#/")[1];
   url.searchParams.set('apiResourceId', queryParams);
-  history.pushState(null, '', url);
+  navigateEndpoint(queryParams);
 });
 
 window.addEventListener("message", (event) => {
