@@ -70,11 +70,11 @@ function getElementByIdAsync(id) {
 document.getElementsByClassName('portal-header')[0].style.display = 'none';
 
 window.addEventListener('hashchange', (e) => {
-  const queryParams = window.location.href.split("#/")[1];
-  window.parent.postMessage({ type: "url-change", data: queryParams }, "*");
   if (!shouldPatch) {
     return;
   }
+  const queryParams = window.location.href.split("#/")[1];
+  window.parent.postMessage({ type: "url-change", data: queryParams }, "*");
   patchURLAndPlayground(playgroundConfig);
 });
 
