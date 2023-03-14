@@ -95,7 +95,7 @@ setAPIMaticPortalConfig();
 window.addEventListener("hashchange", (e) => {
   const queryParams = window.location.href.split("#/")[1];
   window.parent.postMessage({ type: "url-change", data: queryParams }, "*", [
-    channel.port2,
+    channel.port1,
   ]);
   if (!shouldPatch) {
     return;
