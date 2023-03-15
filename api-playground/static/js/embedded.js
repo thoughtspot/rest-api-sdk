@@ -84,7 +84,7 @@ window.addEventListener('message', (event) => {
     playgroundConfig = event.data;
     patchURLAndPlayground(playgroundConfig);
   } else if(event.data?.type === 'initial-query-param') {
-    const apiResourceId = event.data;
+    const apiResourceId = event.data.apiResourceId;
     navigateEndpoint(apiResourceId);
   }
 });
