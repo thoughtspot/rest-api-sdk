@@ -1,3 +1,7 @@
+# TS API Playground
+
+Please go [here](https://try-everywhere.thoughtspot.cloud/v2/#/everywhere/api/rest/playgroundV2_0) to use the API playground.
+
 ## Background
 The Rest API playground is generated using APIMatic's [portal generation API](https://portal-api-docs.apimatic.io/#/http/getting-started/overview-apimatic-portal-generation) and deployed directly on Vercel
 
