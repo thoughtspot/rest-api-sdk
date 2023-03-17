@@ -73,6 +73,8 @@ window.addEventListener('hashchange', (e) => {
   if (!shouldPatch) {
     return;
   }
+  const queryParams = window.location.href.split("#/")[1];
+  window.parent.postMessage({ type: "url-change", data: queryParams }, "*");
   patchURLAndPlayground(playgroundConfig);
 });
 
