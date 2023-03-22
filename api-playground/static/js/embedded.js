@@ -80,17 +80,19 @@ const setAPIMaticPortalConfig = () => {
 };
 
 const setPlaygroundConfig = ({ baseUrl, access }) => {
-  _setConfig((defaultConfig) => {
-    return {
-      ...defaultConfig,
-      showFullCode: false,
-      config: {
-        ...defaultConfig.config,
-        AccessToken: access,
-        "base-url": baseUrl,
-      },
-    };
-  });
+  if(isApiMaticPortalReady) {
+    _setConfig((defaultConfig) => {
+      return {
+        ...defaultConfig,
+        showFullCode: false,
+        config: {
+          ...defaultConfig.config,
+          AccessToken: access,
+          "base-url": baseUrl,
+        },
+      };
+    });
+  }
 };
 
 /** setting APIMatic Portal */
