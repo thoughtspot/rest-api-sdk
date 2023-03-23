@@ -1,3 +1,6 @@
 .DS_Store
 **/.DS_Store
 Typescript/package.json
+Python/test.py
+Python/__pycache__/**
+Python/build/function_builder.ipynb
