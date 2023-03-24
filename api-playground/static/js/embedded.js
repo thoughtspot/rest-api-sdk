@@ -79,7 +79,7 @@ const setAPIMaticPortalConfig = () => {
   });
 };
 
-const setPlaygroundConfig = ({ baseUrl, access }) => {
+const setPlaygroundConfig = ({ baseUrl, accessToken }) => {
   if(isApiMaticPortalReady) {
     _setConfig((defaultConfig) => {
       return {
