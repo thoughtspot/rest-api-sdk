@@ -87,7 +87,7 @@ const setPlaygroundConfig = ({ baseUrl, accessToken }) => {
         showFullCode: false,
         config: {
           ...defaultConfig.config,
-          AccessToken: access,
+          AccessToken: accessToken,
           "base-url": baseUrl,
         },
       };
