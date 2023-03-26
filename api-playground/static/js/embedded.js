@@ -1,8 +1,11 @@
+
 const navigateEndpoint = (apiResourceId) => {
   document.location.hash = apiResourceId;
 };
 
 let shouldPatch = false;
+let _setConfig = null;
+let isApiMaticPortalReady = false;
 
 const patchURLAndPlayground = async ({ baseUrl, accessToken }) => {
   // find the configure button element
@@ -69,20 +72,46 @@ function getElementByIdAsync(id) {
 
 document.getElementsByClassName('portal-header')[0].style.display = 'none';
 
+const setAPIMaticPortalConfig = () => {
+  APIMaticDevPortal.ready(({ setConfig }) => {
+    isApiMaticPortalReady = true;
+    _setConfig = setConfig;
+  });
+};
+
+const setPlaygroundConfig = ({ baseUrl, access }) => {
+  if(isApiMaticPortalReady) {
+    _setConfig((defaultConfig) => {
+      return {
+        ...defaultConfig,
+        showFullCode: false,
+        config: {
+          ...defaultConfig.config,
+          AccessToken: access,
+          "base-url": baseUrl,
+        },
+      };
+    });
+  }
+};
+
+/** setting APIMatic Portal */
+setAPIMaticPortalConfig();
+
 window.addEventListener('hashchange', (e) => {
   if (!shouldPatch) {
     return;
   }
   const queryParams = window.location.href.split("#/")[1];
   window.parent.postMessage({ type: "url-change", data: queryParams }, "*");
-  patchURLAndPlayground(playgroundConfig);
+  setPlaygroundConfig(playgroundConfig);
 });
 
 window.addEventListener('message', (event) => {
   if (event.data?.type === 'api-playground-config') {
     shouldPatch = true;
     playgroundConfig = event.data;
-    patchURLAndPlayground(playgroundConfig);
+    setPlaygroundConfig(playgroundConfig);
     if (playgroundConfig.apiResourceId) {
       navigateEndpoint(playgroundConfig.apiResourceId);
     }
@@ -90,5 +119,5 @@ window.addEventListener('message', (event) => {
 });
 
 window.test = (config) => {
-  patchURLAndPlayground(config);
+  setPlaygroundConfig(playgroundConfig);
 };
