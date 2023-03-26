@@ -1,9 +1,12 @@
 
+
 const navigateEndpoint = (apiResourceId) => {
   document.location.hash = apiResourceId;
 };
 
 let shouldPatch = false;
+let _setConfig = null;
+let isApiMaticPortalReady = false;
 let _setConfig = null;
 let isApiMaticPortalReady = false;
 
@@ -79,7 +82,7 @@ const setAPIMaticPortalConfig = () => {
   });
 };
 
-const setPlaygroundConfig = ({ baseUrl, access }) => {
+const setPlaygroundConfig = ({ baseUrl, accessToken }) => {
   if(isApiMaticPortalReady) {
     _setConfig((defaultConfig) => {
       return {
@@ -87,7 +90,7 @@ const setPlaygroundConfig = ({ baseUrl, access }) => {
         showFullCode: false,
         config: {
           ...defaultConfig.config,
-          AccessToken: access,
+          AccessToken: accessToken,
           "base-url": baseUrl,
         },
       };
@@ -105,12 +108,14 @@ window.addEventListener('hashchange', (e) => {
   const queryParams = window.location.href.split("#/")[1];
   window.parent.postMessage({ type: "url-change", data: queryParams }, "*");
   setPlaygroundConfig(playgroundConfig);
+  setPlaygroundConfig(playgroundConfig);
 });
 
 window.addEventListener('message', (event) => {
   if (event.data?.type === 'api-playground-config') {
     shouldPatch = true;
     playgroundConfig = event.data;
+    setPlaygroundConfig(playgroundConfig);
     setPlaygroundConfig(playgroundConfig);
     if (playgroundConfig.apiResourceId) {
       navigateEndpoint(playgroundConfig.apiResourceId);
@@ -119,5 +124,6 @@ window.addEventListener('message', (event) => {
 });
 
 window.test = (config) => {
+  setPlaygroundConfig(playgroundConfig);
   setPlaygroundConfig(playgroundConfig);
 };
