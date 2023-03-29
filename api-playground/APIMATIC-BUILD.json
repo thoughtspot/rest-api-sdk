@@ -7,7 +7,7 @@
       "http": {}
     },
     "headIncludes": "<link rel=\"icon\" type=\"image/svg+xml\" href='static/images/favicon.svg' /><link rel=\"stylesheet\" href=\"./static/styles/overrides.css\">",
-    "tailIncludes": "<script id=\"ts-playground-snippet\" src=\"./static/js/embedded.js\"></script>",
+    "tailIncludes": "<script id=\"ts-playground-snippet\" src=\"./static/js/embedded.js\" defer></script>",
     "portalSettings": {
       "themeOverrides": {
         "themeType": "cool",
