@@ -106,14 +106,12 @@ window.addEventListener('hashchange', (e) => {
   const queryParams = window.location.href.split("#/")[1];
   window.parent.postMessage({ type: "url-change", data: queryParams }, "*");
   setPlaygroundConfig(playgroundConfig);
-  setPlaygroundConfig(playgroundConfig);
 });
 
 window.addEventListener('message', (event) => {
   if (event.data?.type === 'api-playground-config') {
     shouldPatch = true;
     playgroundConfig = event.data;
-    setPlaygroundConfig(playgroundConfig);
     setPlaygroundConfig(playgroundConfig);
     if (playgroundConfig.apiResourceId) {
       navigateEndpoint(playgroundConfig.apiResourceId);
@@ -122,6 +120,5 @@ window.addEventListener('message', (event) => {
 });
 
 window.test = (config) => {
-  setPlaygroundConfig(playgroundConfig);
   setPlaygroundConfig(playgroundConfig);
 };
