@@ -7,8 +7,6 @@ const navigateEndpoint = (apiResourceId) => {
 let shouldPatch = false;
 let _setConfig = null;
 let isApiMaticPortalReady = false;
-let _setConfig = null;
-let isApiMaticPortalReady = false;
 
 const patchURLAndPlayground = async ({ baseUrl, accessToken }) => {
   // find the configure button element
