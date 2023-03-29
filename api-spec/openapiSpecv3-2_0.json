@@ -167,6 +167,25 @@
                       "$ref": "#/components/schemas/FavoriteMetadataInput"
                     },
                     "deprecated": false
+                  },
+                  "record_offset": {
+                    "description": "The starting record number from where the records should be included.",
+                    "default": 0,
+                    "type": "integer",
+                    "format": "int32",
+                    "deprecated": false
+                  },
+                  "record_size": {
+                    "description": "The number of records that should be included.",
+                    "default": 10,
+                    "type": "integer",
+                    "format": "int32",
+                    "deprecated": false
+                  },
+                  "sort_options": {
+                    "description": "Sort options.",
+                    "$ref": "#/components/schemas/SortOptions",
+                    "deprecated": false
                   }
                 }
               }
@@ -1730,25 +1749,37 @@
                     "items": {
                       "type": "string",
                       "enum": [
+                        "UNKNOWN",
+                        "ADMINISTRATION",
+                        "AUTHORING",
                         "USERDATAUPLOADING",
                         "DATADOWNLOADING",
+                        "USERMANAGEMENT",
+                        "SECURITYMANAGEMENT",
+                        "LOGICALMODELING",
                         "DATAMANAGEMENT",
+                        "TAGMANAGEMENT",
                         "SHAREWITHALL",
+                        "SYSTEMMANAGEMENT",
                         "JOBSCHEDULING",
                         "A3ANALYSIS",
                         "EXPERIMENTALFEATUREPRIVILEGE",
                         "BYPASSRLS",
+                        "RANALYSIS",
                         "DISABLE_PINBOARD_CREATION",
                         "DEVELOPER",
                         "APPLICATION_ADMINISTRATION",
                         "USER_ADMINISTRATION",
                         "GROUP_ADMINISTRATION",
+                        "BACKUP_ADMINISTRATION",
                         "SYSTEM_INFO_ADMINISTRATION",
+                        "ENABLESPOTAPPCREATION",
                         "SYNCMANAGEMENT",
                         "ORG_ADMINISTRATION",
                         "ROLE_ADMINISTRATION",
                         "AUTHENTICATION_ADMINISTRATION",
-                        "BILLING_INFO_ADMINISTRATION"
+                        "BILLING_INFO_ADMINISTRATION",
+                        "PREVIEW_THOUGHTSPOT_SAGE"
                       ]
                     },
                     "deprecated": false
@@ -1794,7 +1825,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/RoleResponse"
+                    "$ref": "#/components/schemas/SearchRoleResponse"
                   }
                 }
               }
@@ -5343,6 +5374,31 @@
           }
         }
       },
+      "SortOptions": {
+        "type": "object",
+        "properties": {
+          "field_name": {
+            "type": "string",
+            "enum": [
+              "NAME",
+              "DISPLAY_NAME",
+              "AUTHOR",
+              "CREATED",
+              "MODIFIED"
+            ],
+            "description": "Name of the field to apply the sort on."
+          },
+          "order": {
+            "type": "string",
+            "enum": [
+              "ASC",
+              "DESC"
+            ],
+            "description": "Sort order : ASC(Ascending) or DESC(Descending)."
+          }
+        },
+        "description": "Sort options."
+      },
       "UserGroup": {
         "type": "object",
         "properties": {
@@ -6129,31 +6185,6 @@
         },
         "description": "Favorite object options."
       },
-      "SortOptions": {
-        "type": "object",
-        "properties": {
-          "field_name": {
-            "type": "string",
-            "enum": [
-              "NAME",
-              "DISPLAY_NAME",
-              "AUTHOR",
-              "CREATED",
-              "MODIFIED"
-            ],
-            "description": "Name of the field to apply the sort on."
-          },
-          "order": {
-            "type": "string",
-            "enum": [
-              "ASC",
-              "DESC"
-            ],
-            "description": "Sort order : ASC(Ascending) or DESC(Descending)."
-          }
-        },
-        "description": "Sort options."
-      },
       "SqlQueryResponse": {
         "type": "object",
         "required": [
@@ -6427,7 +6458,7 @@
           }
         }
       },
-      "RoleResponse": {
+      "SearchRoleResponse": {
         "type": "object",
         "required": [
           "id",
@@ -6472,39 +6503,48 @@
             "items": {
               "type": "string",
               "enum": [
+                "UNKNOWN",
+                "ADMINISTRATION",
+                "AUTHORING",
                 "USERDATAUPLOADING",
                 "DATADOWNLOADING",
+                "USERMANAGEMENT",
+                "SECURITYMANAGEMENT",
+                "LOGICALMODELING",
                 "DATAMANAGEMENT",
+                "TAGMANAGEMENT",
                 "SHAREWITHALL",
+                "SYSTEMMANAGEMENT",
                 "JOBSCHEDULING",
                 "A3ANALYSIS",
                 "EXPERIMENTALFEATUREPRIVILEGE",
                 "BYPASSRLS",
+                "RANALYSIS",
                 "DISABLE_PINBOARD_CREATION",
                 "DEVELOPER",
                 "APPLICATION_ADMINISTRATION",
                 "USER_ADMINISTRATION",
                 "GROUP_ADMINISTRATION",
+                "BACKUP_ADMINISTRATION",
                 "SYSTEM_INFO_ADMINISTRATION",
+                "ENABLESPOTAPPCREATION",
                 "SYNCMANAGEMENT",
                 "ORG_ADMINISTRATION",
                 "ROLE_ADMINISTRATION",
                 "AUTHENTICATION_ADMINISTRATION",
-                "BILLING_INFO_ADMINISTRATION"
+                "BILLING_INFO_ADMINISTRATION",
+                "PREVIEW_THOUGHTSPOT_SAGE"
               ]
             },
             "description": "Privileges granted to the role."
           },
           "permission": {
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "READ_ONLY",
-                "MODIFY",
-                "NO_ACCESS"
-              ]
-            },
+            "type": "string",
+            "enum": [
+              "READ_ONLY",
+              "MODIFY",
+              "NO_ACCESS"
+            ],
             "description": "Permission details of the Role"
           },
           "author_id": {
@@ -6543,7 +6583,8 @@
             "type": "boolean",
             "description": "Indicates whether the role is shared via connection"
           }
-        }
+        },
+        "description": "Response for search role api should handle hidden privileges as well."
       },
       "Token": {
         "type": "object",
@@ -6894,6 +6935,121 @@
           "details": {
             "type": "object",
             "description": "Details of the connection."
+          }
+        }
+      },
+      "RoleResponse": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "description",
+          "privileges"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique Id of the role."
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the role"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the role"
+          },
+          "groups_assigned_count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "number of groups assigned with this role"
+          },
+          "orgs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GenericInfo"
+            },
+            "description": "Organizations in which role exists."
+          },
+          "groups": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GenericInfo"
+            },
+            "description": "Details of groups assigned with this role"
+          },
+          "privileges": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "USERDATAUPLOADING",
+                "DATADOWNLOADING",
+                "DATAMANAGEMENT",
+                "SHAREWITHALL",
+                "JOBSCHEDULING",
+                "A3ANALYSIS",
+                "EXPERIMENTALFEATUREPRIVILEGE",
+                "BYPASSRLS",
+                "DISABLE_PINBOARD_CREATION",
+                "DEVELOPER",
+                "APPLICATION_ADMINISTRATION",
+                "USER_ADMINISTRATION",
+                "GROUP_ADMINISTRATION",
+                "SYSTEM_INFO_ADMINISTRATION",
+                "SYNCMANAGEMENT",
+                "ORG_ADMINISTRATION",
+                "ROLE_ADMINISTRATION",
+                "AUTHENTICATION_ADMINISTRATION",
+                "BILLING_INFO_ADMINISTRATION"
+              ]
+            },
+            "description": "Privileges granted to the role."
+          },
+          "permission": {
+            "type": "string",
+            "enum": [
+              "READ_ONLY",
+              "MODIFY",
+              "NO_ACCESS"
+            ],
+            "description": "Permission details of the Role"
+          },
+          "author_id": {
+            "type": "string",
+            "description": "Unique identifier of author of the role."
+          },
+          "modifier_id": {
+            "type": "string",
+            "description": "Unique identifier of modifier of the role."
+          },
+          "creation_time_in_millis": {
+            "type": "object",
+            "description": "Creation time of the role in milliseconds."
+          },
+          "modification_time_in_millis": {
+            "type": "object",
+            "description": "Last modified time of the role in milliseconds."
+          },
+          "deleted": {
+            "type": "boolean",
+            "description": "Indicates whether the role is deleted."
+          },
+          "deprecated": {
+            "type": "boolean",
+            "description": "Indicates whether the role is deprecated."
+          },
+          "external": {
+            "type": "boolean",
+            "description": "Indicates whether the role is external."
+          },
+          "hidden": {
+            "type": "boolean",
+            "description": "Indicates whether the role is hidden."
+          },
+          "shared_via_connection": {
+            "type": "boolean",
+            "description": "Indicates whether the role is shared via connection"
           }
         }
       },
