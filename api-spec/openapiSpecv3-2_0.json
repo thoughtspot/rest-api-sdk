@@ -29,8 +29,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/User",
-                  "x-is-dynamic": true
+                  "$ref": "#/components/schemas/User"
                 }
               }
             },
