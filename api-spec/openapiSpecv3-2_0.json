@@ -4987,6 +4987,12 @@
           "display_name",
           "visibility"
         ],
+        "examples": {
+          "jsonObject": {
+            "summary": "A sample object",
+            "externalValue": "http://example.com/examples/object-example.json"
+          }
+        }
         "properties": {
           "id": {
             "type": "string",
