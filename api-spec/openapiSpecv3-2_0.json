@@ -4,6 +4,16 @@
     "title": "ThoughtSpot Public REST API",
     "version": "2.0"
   },
+  "x-roles": [
+    {
+      "name": "private-role",
+      "id": "9.0.0.cl",
+      "tags": [
+        "Authentication"
+      ],
+      "description": "private role"
+    }
+  ],
   "tags": [],
   "paths": {
     "/api/rest/2.0/auth/session/user": {
