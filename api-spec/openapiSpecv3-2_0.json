@@ -21,12 +21,6 @@
                 "schema": {
                   "$ref": "#/components/schemas/User"
                 }
-                "examples": {
-                    "jsonObject": {
-                      "summary": "A sample object"
-                      "externalValue": "http://example.com/examples/object-example.json"
-                    }
-                }
               }
             }
           },
@@ -921,8 +915,14 @@
           "required": true
         },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -987,8 +987,14 @@
           "required": true
         },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -1439,12 +1445,22 @@
     },
     "/api/rest/2.0/vcs/git/config/search": {
       "post": {
-        "operationId": "searchLocalConfig",
-        "description": "Search local repository configuration",
+        "operationId": "searchConfig",
+        "description": "Search local repository configuration <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.2.0</span>",
         "tags": [
           "Version Control"
         ],
-        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          },
+          "required": true
+        },
         "responses": {
           "200": {
             "content": {
@@ -1474,7 +1490,7 @@
     "/api/rest/2.0/vcs/git/commits/search": {
       "post": {
         "operationId": "searchCommits",
-        "description": "List the commit history of a metadata object",
+        "description": "List the commit history of a metadata object <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.2.0</span>",
         "tags": [
           "Version Control"
         ],
@@ -1671,6 +1687,132 @@
         }
       }
     },
+    "/api/rest/2.0/roles/search": {
+      "post": {
+        "operationId": "searchRoles",
+        "description": "Gets Roles configured on a ThoughtSpot instance.\nRequires cluster Administration, Role Administration or\nGroup Administration privileges.",
+        "tags": [
+          "Roles"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "role_identifiers": {
+                    "description": "unique ID or name of the Roles",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "deprecated": false
+                  },
+                  "org_identifiers": {
+                    "description": "Unique Id or name of the Organisation",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "deprecated": false
+                  },
+                  "group_identifiers": {
+                    "description": "Unique Id or name of the User Group",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "deprecated": false
+                  },
+                  "privileges": {
+                    "description": "Privileges assigned to the Role.",
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "USERDATAUPLOADING",
+                        "DATADOWNLOADING",
+                        "DATAMANAGEMENT",
+                        "SHAREWITHALL",
+                        "JOBSCHEDULING",
+                        "A3ANALYSIS",
+                        "EXPERIMENTALFEATUREPRIVILEGE",
+                        "BYPASSRLS",
+                        "DISABLE_PINBOARD_CREATION",
+                        "DEVELOPER",
+                        "APPLICATION_ADMINISTRATION",
+                        "USER_ADMINISTRATION",
+                        "GROUP_ADMINISTRATION",
+                        "SYSTEM_INFO_ADMINISTRATION",
+                        "SYNCMANAGEMENT",
+                        "ORG_ADMINISTRATION",
+                        "ROLE_ADMINISTRATION",
+                        "AUTHENTICATION_ADMINISTRATION",
+                        "BILLING_INFO_ADMINISTRATION"
+                      ]
+                    },
+                    "deprecated": false
+                  },
+                  "deprecated": {
+                    "description": "Indicates whether the role is deprecated.",
+                    "type": "boolean",
+                    "deprecated": false
+                  },
+                  "external": {
+                    "description": "Indicates whether the Role is external",
+                    "type": "boolean",
+                    "deprecated": false
+                  },
+                  "shared_via_connection": {
+                    "description": "Indicates whether the role is shared via connection",
+                    "type": "boolean",
+                    "deprecated": false
+                  },
+                  "permissions": {
+                    "description": "Permission details of the Role",
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "READ_ONLY",
+                        "MODIFY",
+                        "NO_ACCESS"
+                      ]
+                    },
+                    "deprecated": false
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RoleResponse"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/auth/session/login": {
       "post": {
         "operationId": "login",
@@ -1712,8 +1854,14 @@
           "required": true
         },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -1945,10 +2093,26 @@
         "tags": [
           "Authentication"
         ],
-        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          },
+          "required": true
+        },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -1991,8 +2155,14 @@
           "required": true
         },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -2171,6 +2341,11 @@
               "schema": {
                 "type": "object",
                 "properties": {
+                  "user_identifier": {
+                    "description": "GUID / name of the user",
+                    "type": "string",
+                    "deprecated": false
+                  },
                   "name": {
                     "description": "Name of the user. The username string must be unique.",
                     "type": "string",
@@ -2263,15 +2438,24 @@
                     },
                     "deprecated": false
                   }
-                }
+                },
+                "required": [
+                  "user_identifier"
+                ]
               }
             }
           },
           "required": true
         },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -2283,19 +2467,7 @@
               }
             }
           }
-        },
-        "parameters": [
-          {
-            "in": "path",
-            "name": "user_identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "GUID / name of the user",
-            "deprecated": false
-          }
-        ]
+        }
       }
     },
     "/api/rest/2.0/users/{user_identifier}/delete": {
@@ -2305,21 +2477,35 @@
         "tags": [
           "Users"
         ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "user_identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "GUID / name of the user",
-            "deprecated": false
-          }
-        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "user_identifier": {
+                    "description": "GUID / name of the user",
+                    "type": "string",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "user_identifier"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -2444,8 +2630,14 @@
           "required": true
         },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -2494,8 +2686,14 @@
           "required": true
         },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -2538,8 +2736,14 @@
           "required": true
         },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -2582,8 +2786,14 @@
           "required": true
         },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -2666,6 +2876,11 @@
               "schema": {
                 "type": "object",
                 "properties": {
+                  "org_identifier": {
+                    "description": "ID or name of the Org.",
+                    "type": "string",
+                    "deprecated": false
+                  },
                   "name": {
                     "description": "Name of the Org.",
                     "type": "string",
@@ -2684,15 +2899,24 @@
                     },
                     "deprecated": false
                   }
-                }
+                },
+                "required": [
+                  "org_identifier"
+                ]
               }
             }
           },
           "required": true
         },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -2704,19 +2928,7 @@
               }
             }
           }
-        },
-        "parameters": [
-          {
-            "in": "path",
-            "name": "org_identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "ID or name of the Org.",
-            "deprecated": false
-          }
-        ]
+        }
       }
     },
     "/api/rest/2.0/orgs/{org_identifier}/delete": {
@@ -2726,21 +2938,35 @@
         "tags": [
           "Orgs"
         ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "org_identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "ID or name of the Org.",
-            "deprecated": false
-          }
-        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "org_identifier": {
+                    "description": "ID or name of the Org.",
+                    "type": "string",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "org_identifier"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -2824,6 +3050,11 @@
               "schema": {
                 "type": "object",
                 "properties": {
+                  "tag_identifier": {
+                    "description": "Name or Id of the tag.",
+                    "type": "string",
+                    "deprecated": false
+                  },
                   "name": {
                     "description": "Name of the tag.",
                     "type": "string",
@@ -2834,15 +3065,24 @@
                     "type": "string",
                     "deprecated": false
                   }
-                }
+                },
+                "required": [
+                  "tag_identifier"
+                ]
               }
             }
           },
           "required": true
         },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -2854,19 +3094,7 @@
               }
             }
           }
-        },
-        "parameters": [
-          {
-            "in": "path",
-            "name": "tag_identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Name or Id of the tag.",
-            "deprecated": false
-          }
-        ]
+        }
       }
     },
     "/api/rest/2.0/tags/{tag_identifier}/delete": {
@@ -2876,21 +3104,35 @@
         "tags": [
           "Tags"
         ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "tag_identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Tag identifier Tag name or Tag id.",
-            "deprecated": false
-          }
-        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "tag_identifier": {
+                    "description": "Tag identifier Tag name or Tag id.",
+                    "type": "string",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "tag_identifier"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -2945,8 +3187,14 @@
           "required": true
         },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -3001,8 +3249,14 @@
           "required": true
         },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -3161,6 +3415,11 @@
               "schema": {
                 "type": "object",
                 "properties": {
+                  "group_identifier": {
+                    "description": "GUID or name of the group.",
+                    "type": "string",
+                    "deprecated": false
+                  },
                   "name": {
                     "description": "Name of the group to modify.",
                     "type": "string",
@@ -3244,15 +3503,24 @@
                     ],
                     "deprecated": false
                   }
-                }
+                },
+                "required": [
+                  "group_identifier"
+                ]
               }
             }
           },
           "required": true
         },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -3264,19 +3532,7 @@
               }
             }
           }
-        },
-        "parameters": [
-          {
-            "in": "path",
-            "name": "group_identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "GUID or name of the group.",
-            "deprecated": false
-          }
-        ]
+        }
       }
     },
     "/api/rest/2.0/groups/{group_identifier}/delete": {
@@ -3286,21 +3542,35 @@
         "tags": [
           "Groups"
         ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "group_identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "GUID or name of the group.",
-            "deprecated": false
-          }
-        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "group_identifier": {
+                    "description": "GUID or name of the group.",
+                    "type": "string",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "group_identifier"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -3555,8 +3825,14 @@
           "required": true
         },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -3613,8 +3889,14 @@
           "required": true
         },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -3709,8 +3991,14 @@
           "required": true
         },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -3727,8 +4015,8 @@
     },
     "/api/rest/2.0/vcs/git/config/create": {
       "post": {
-        "operationId": "createLocalConfig",
-        "description": "Configure local repository to connect to remote repository",
+        "operationId": "createConfig",
+        "description": "Configure local repository to connect to remote repository <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.2.0</span>",
         "tags": [
           "Version Control"
         ],
@@ -3743,11 +4031,6 @@
                     "type": "string",
                     "deprecated": false
                   },
-                  "default_branch": {
-                    "description": "Name of the default remote branch",
-                    "type": "string",
-                    "deprecated": false
-                  },
                   "username": {
                     "description": "Username to authenticate connection to remote repository",
                     "type": "string",
@@ -3755,6 +4038,24 @@
                   },
                   "access_token": {
                     "description": "Access token corresponding to the user to authenticate connection to remote repository",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "branch_names": {
+                    "description": "List the remote branches to configure. Example:[development, production]",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "deprecated": false
+                  },
+                  "default_branch": {
+                    "description": "Name of the default remote branch <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.2.0</span>",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "default_branch_name": {
+                    "description": "Name of the default remote branch <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.3.0</span>",
                     "type": "string",
                     "deprecated": false
                   }
@@ -3794,8 +4095,8 @@
     },
     "/api/rest/2.0/vcs/git/config/update": {
       "post": {
-        "operationId": "updateLocalConfig",
-        "description": "Update local repository configuration.",
+        "operationId": "updateConfig",
+        "description": "Update local repository configuration. <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.2.0</span>",
         "tags": [
           "Version Control"
         ],
@@ -3815,8 +4116,21 @@
                     "type": "string",
                     "deprecated": false
                   },
+                  "branch_names": {
+                    "description": "List the remote branches to configure. Example:[development, production] <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.3.0</span>",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "deprecated": false
+                  },
                   "default_branch": {
-                    "description": "Name of the default remote branch",
+                    "description": "Name of the default remote branch <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.2.0</span>",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "default_branch_name": {
+                    "description": "Name of the default remote branch <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.3.0</span>",
                     "type": "string",
                     "deprecated": false
                   }
@@ -3851,15 +4165,31 @@
     },
     "/api/rest/2.0/vcs/git/config/delete": {
       "post": {
-        "operationId": "deleteLocalConfig",
-        "description": "Delete local repository configuration",
+        "operationId": "deleteConfig",
+        "description": "Delete local repository configuration <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.2.0</span>",
         "tags": [
           "Version Control"
         ],
-        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          },
+          "required": true
+        },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -3877,25 +4207,39 @@
     "/api/rest/2.0/vcs/git/branches/{branch_name}/pull": {
       "post": {
         "operationId": "pullBranch",
-        "description": "Pull a branch from remote repository to local repository.",
+        "description": "Pull a branch from remote repository to local repository. <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.2.0</span>",
         "tags": [
           "Version Control"
         ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "branch_name",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Name of the branch to pull",
-            "deprecated": false
-          }
-        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "branch_name": {
+                    "description": "Name of the branch to pull",
+                    "type": "string",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "branch_name"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -3913,7 +4257,7 @@
     "/api/rest/2.0/vcs/git/branches/commit": {
       "post": {
         "operationId": "commitBranch",
-        "description": "Commit the object from metadata to remote repository",
+        "description": "Commit the object from metadata to remote repository <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.2.0</span>",
         "tags": [
           "Version Control"
         ],
@@ -3932,7 +4276,7 @@
                     "deprecated": false
                   },
                   "branch_name": {
-                    "description": "Name of the remote branch where object tml should be pushed",
+                    "description": "Name of the remote branch where object should be pushed",
                     "type": "string",
                     "deprecated": false
                   },
@@ -3977,7 +4321,7 @@
     "/api/rest/2.0/vcs/git/commits/{commit_id}/revert": {
       "post": {
         "operationId": "revertCommit",
-        "description": "Revert an object to a specific commit id",
+        "description": "Revert an object to a specific commit id <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.2.0</span>",
         "tags": [
           "Version Control"
         ],
@@ -3987,6 +4331,11 @@
               "schema": {
                 "type": "object",
                 "properties": {
+                  "commit_id": {
+                    "description": "Commit id to which the object should be reverted",
+                    "type": "string",
+                    "deprecated": false
+                  },
                   "metadata": {
                     "description": "Metadata objects.",
                     "type": "array",
@@ -3999,10 +4348,20 @@
                     "description": "Name of the branch where the reverted version should be comitted",
                     "type": "string",
                     "deprecated": false
+                  },
+                  "revert_policy": {
+                    "description": "Policy to be followed while importing. Valid values: [ALL_OR_NONE, PARTIAL] <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.3.0</span>",
+                    "default": "ALL_OR_NONE",
+                    "type": "string",
+                    "enum": [
+                      "ALL_OR_NONE",
+                      "PARTIAL"
+                    ],
+                    "deprecated": false
                   }
                 },
                 "required": [
-                  "metadata"
+                  "commit_id"
                 ]
               }
             }
@@ -4029,25 +4388,13 @@
               }
             }
           }
-        },
-        "parameters": [
-          {
-            "in": "path",
-            "name": "commit_id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Commit id to which the object should be reverted",
-            "deprecated": false
-          }
-        ]
+        }
       }
     },
     "/api/rest/2.0/vcs/git/branches/validate": {
       "post": {
         "operationId": "validateMerge",
-        "description": "Before merging changes to target branch, pick the changes from source branch and validate the files",
+        "description": "Before merging changes to target branch, pick the changes from source branch and validate the files <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.2.0</span>",
         "tags": [
           "Version Control"
         ],
@@ -4106,7 +4453,7 @@
     "/api/rest/2.0/vcs/git/commits/deploy": {
       "post": {
         "operationId": "deployCommit",
-        "description": "Deploy changes to a Thoughtspot environment from a commit point\"",
+        "description": "Deploy changes to a Thoughtspot environment from a commit point\" <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.2.0</span>",
         "tags": [
           "Version Control"
         ],
@@ -4116,8 +4463,18 @@
               "schema": {
                 "type": "object",
                 "properties": {
+                  "commit_id": {
+                    "description": "Commit_id against which the files should be picked to deploy",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "branch_name": {
+                    "description": "Name of the remote branch where changes should be picked <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.3.0</span>",
+                    "type": "string",
+                    "deprecated": false
+                  },
                   "import_type": {
-                    "description": "Indicates if all files or only modified file at specified commit point should be considered",
+                    "description": "Indicates if all files or only modified file at specified commit point should be considered <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.2.0</span>",
                     "default": "DELTA",
                     "type": "string",
                     "enum": [
@@ -4126,15 +4483,27 @@
                     ],
                     "deprecated": false
                   },
-                  "commit_id": {
-                    "description": "Commit_id against which the files should be picked to deploy",
+                  "deploy_type": {
+                    "description": "Indicates if all files or only modified file at specified commit point should be considered <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.3.0</span>",
+                    "default": "DELTA",
                     "type": "string",
+                    "enum": [
+                      "FULL",
+                      "DELTA"
+                    ],
+                    "deprecated": false
+                  },
+                  "deploy_policy": {
+                    "description": "Policy to be followed while importing. Valid values: [ALL_OR_NONE, PARTIAL] <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.3.0</span>",
+                    "default": "ALL_OR_NONE",
+                    "type": "string",
+                    "enum": [
+                      "ALL_OR_NONE",
+                      "PARTIAL"
+                    ],
                     "deprecated": false
                   }
-                },
-                "required": [
-                  "commit_id"
-                ]
+                }
               }
             }
           },
@@ -4282,8 +4651,14 @@
           "required": true
         },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -4347,8 +4722,238 @@
           "required": true
         },
         "responses": {
-          "204": {
-            "description": "Successful"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/roles/create": {
+      "post": {
+        "operationId": "createRole",
+        "description": "Creates a Role.\nRequires cluster Administration or Role Administration privileges.",
+        "tags": [
+          "Roles"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "description": "Unique name of the role.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "description": {
+                    "description": "Description of the role.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "privileges": {
+                    "description": "Privileges granted to the role.",
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "USERDATAUPLOADING",
+                        "DATADOWNLOADING",
+                        "DATAMANAGEMENT",
+                        "SHAREWITHALL",
+                        "JOBSCHEDULING",
+                        "A3ANALYSIS",
+                        "EXPERIMENTALFEATUREPRIVILEGE",
+                        "BYPASSRLS",
+                        "DISABLE_PINBOARD_CREATION",
+                        "DEVELOPER",
+                        "APPLICATION_ADMINISTRATION",
+                        "USER_ADMINISTRATION",
+                        "GROUP_ADMINISTRATION",
+                        "SYSTEM_INFO_ADMINISTRATION",
+                        "SYNCMANAGEMENT",
+                        "ORG_ADMINISTRATION",
+                        "ROLE_ADMINISTRATION",
+                        "AUTHENTICATION_ADMINISTRATION",
+                        "BILLING_INFO_ADMINISTRATION"
+                      ]
+                    },
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoleResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/roles/{role_identifier}/update": {
+      "post": {
+        "operationId": "updateRole",
+        "description": "Updates a Role.\nRequires cluster Administration or Role Administration privileges.",
+        "tags": [
+          "Roles"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "role_identifier": {
+                    "description": "Unique ID or name of the role.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "name": {
+                    "description": "Name of the Role.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "description": {
+                    "description": "Description of the Role",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "privileges": {
+                    "description": "Privileges granted to the role.",
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "USERDATAUPLOADING",
+                        "DATADOWNLOADING",
+                        "DATAMANAGEMENT",
+                        "SHAREWITHALL",
+                        "JOBSCHEDULING",
+                        "A3ANALYSIS",
+                        "EXPERIMENTALFEATUREPRIVILEGE",
+                        "BYPASSRLS",
+                        "DISABLE_PINBOARD_CREATION",
+                        "DEVELOPER",
+                        "APPLICATION_ADMINISTRATION",
+                        "USER_ADMINISTRATION",
+                        "GROUP_ADMINISTRATION",
+                        "SYSTEM_INFO_ADMINISTRATION",
+                        "SYNCMANAGEMENT",
+                        "ORG_ADMINISTRATION",
+                        "ROLE_ADMINISTRATION",
+                        "AUTHENTICATION_ADMINISTRATION",
+                        "BILLING_INFO_ADMINISTRATION"
+                      ]
+                    },
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "role_identifier",
+                  "name"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoleResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/roles/{role_identifier}/delete": {
+      "post": {
+        "operationId": "deleteRole",
+        "description": "Deletes a Role.\nRequires cluster Administration or Role Administration privileges.",
+        "tags": [
+          "Roles"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "role_identifier": {
+                    "description": "Unique ID or name of the role.",
+                    "type": "string",
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "role_identifier"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "500": {
             "description": "Operation failed",
@@ -4971,6 +5576,17 @@
               "$ref": "#/components/schemas/LiveboardContent"
             },
             "description": "Data content of metadata objects."
+          }
+        }
+      },
+      "GenericInfo": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
           }
         }
       },
@@ -5659,6 +6275,10 @@
             "type": "string",
             "description": "Remote repository URL configured"
           },
+          "username": {
+            "type": "string",
+            "description": "Username to authenticate connection to vcs"
+          },
           "branches": {
             "type": "array",
             "items": {
@@ -5804,6 +6424,124 @@
               "DESC"
             ],
             "description": "Sort order : ASC(Ascending) or DESC(Descending)."
+          }
+        }
+      },
+      "RoleResponse": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "description",
+          "privileges"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique Id of the role."
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the role"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the role"
+          },
+          "groups_assigned_count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "number of groups assigned with this role"
+          },
+          "orgs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GenericInfo"
+            },
+            "description": "Organizations in which role exists."
+          },
+          "groups": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GenericInfo"
+            },
+            "description": "Details of groups assigned with this role"
+          },
+          "privileges": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "USERDATAUPLOADING",
+                "DATADOWNLOADING",
+                "DATAMANAGEMENT",
+                "SHAREWITHALL",
+                "JOBSCHEDULING",
+                "A3ANALYSIS",
+                "EXPERIMENTALFEATUREPRIVILEGE",
+                "BYPASSRLS",
+                "DISABLE_PINBOARD_CREATION",
+                "DEVELOPER",
+                "APPLICATION_ADMINISTRATION",
+                "USER_ADMINISTRATION",
+                "GROUP_ADMINISTRATION",
+                "SYSTEM_INFO_ADMINISTRATION",
+                "SYNCMANAGEMENT",
+                "ORG_ADMINISTRATION",
+                "ROLE_ADMINISTRATION",
+                "AUTHENTICATION_ADMINISTRATION",
+                "BILLING_INFO_ADMINISTRATION"
+              ]
+            },
+            "description": "Privileges granted to the role."
+          },
+          "permission": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "READ_ONLY",
+                "MODIFY",
+                "NO_ACCESS"
+              ]
+            },
+            "description": "Permission details of the Role"
+          },
+          "author_id": {
+            "type": "string",
+            "description": "Unique identifier of author of the role."
+          },
+          "modifier_id": {
+            "type": "string",
+            "description": "Unique identifier of modifier of the role."
+          },
+          "creation_time_in_millis": {
+            "type": "object",
+            "description": "Creation time of the role in milliseconds."
+          },
+          "modification_time_in_millis": {
+            "type": "object",
+            "description": "Last modified time of the role in milliseconds."
+          },
+          "deleted": {
+            "type": "boolean",
+            "description": "Indicates whether the role is deleted."
+          },
+          "deprecated": {
+            "type": "boolean",
+            "description": "Indicates whether the role is deprecated."
+          },
+          "external": {
+            "type": "boolean",
+            "description": "Indicates whether the role is external."
+          },
+          "hidden": {
+            "type": "boolean",
+            "description": "Indicates whether the role is hidden."
+          },
+          "shared_via_connection": {
+            "type": "boolean",
+            "description": "Indicates whether the role is shared via connection"
           }
         }
       },
