@@ -21,6 +21,12 @@
                 "schema": {
                   "$ref": "#/components/schemas/User"
                 }
+                "examples": {
+                    "jsonObject": {
+                      "summary": "A sample object"
+                      "externalValue": "http://example.com/examples/object-example.json"
+                    }
+                }
               }
             }
           },
