@@ -33,6 +33,14 @@
                   "x-is-dynamic": true
                 }
               }
+            },
+            "examples": {
+              "application/json": {
+                "id": 2,
+                "name": "get cider",
+                "completed": true,
+                "completed_at": "2020-08-23T13:22:52.685Z"
+              }
             }
           },
           "500": {
