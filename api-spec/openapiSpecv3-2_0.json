@@ -31,8 +31,7 @@
                 "schema": {
                   "$ref": "#/components/schemas/User"
                 },
-                {
-                  "example": {
+                "example": {
                     "status": "OK",
                     "copyright": "Copyright (c) 2019 The New York Times Company.  All Rights Reserved.",
                     "num_results": 2,
@@ -42,7 +41,6 @@
                         "name": "User Name"
                       }
                     ]
-                  }
                 }
               }
             }
