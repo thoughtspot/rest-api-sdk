@@ -9,7 +9,7 @@
       "name": "private-role",
       "id": "9.0.0.cl",
       "tags": [
-        "Authentication"
+        "FilterIn"
       ],
       "description": "private role"
     }
@@ -21,7 +21,7 @@
         "operationId": "getCurrentUserInfo",
         "description": "Get session information for the currently logged-in user.",
         "tags": [
-          "Authentication"
+          "Authentication", "FilterIn"
         ],
         "parameters": [],
         "responses": {
