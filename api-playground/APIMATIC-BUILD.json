@@ -6,7 +6,7 @@
     "languageConfig": {
       "http": {}
     },
-    "filterByRole": ["9.0.0.cl"],
+    "filterByRole": ["9.2.0"],
     "headIncludes": "<link rel=\"icon\" type=\"image/svg+xml\" href='static/images/favicon.svg' /><link rel=\"stylesheet\" href=\"./static/styles/overrides.css\">",
     "tailIncludes": "<script id=\"ts-playground-snippet\" src=\"./static/js/embedded.js\" defer></script>",
     "portalSettings": {
