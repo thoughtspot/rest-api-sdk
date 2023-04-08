@@ -12,6 +12,14 @@
                 "pets"
             ],
             "description": "This role only allows endpoints that should be visible to the public."
+        },
+        {
+            "name": "Public Endpoints",
+            "id": "pub",
+            "tags": [
+                "pets"
+            ],
+            "description": "This role only allows endpoints that should be visible to the public."
         }
   ],
   "tags": [],
