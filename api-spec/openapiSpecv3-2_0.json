@@ -4,15 +4,25 @@
     "title": "ThoughtSpot Public REST API",
     "version": "2.0"
   },
-  "x-roles": [
-    {
-      "name": "private-role",
-      "id": "9.0.0.cl",
-      "tags": [
-        "FilterIn"
-      ],
-      "description": "private role"
-    }
+  "x-roles":  [
+      {
+        name: '9.0.0.cl',
+        id: '9.0.0.cl',
+        tags: [ '9.0.0.cl' ],
+        description: 'Roles for version 9.0.0.cl'
+      },
+      {
+        name: '9.2.0.cl',
+        id: '9.2.0.cl',
+        tags: [ '9.2.0.cl' ],
+        description: 'Roles for version 9.2.0.cl'
+      },
+      {
+        name: '9.1.0.cl',
+        id: '9.1.0.cl',
+        tags: [ '9.1.0.cl' ],
+        description: 'Roles for version 9.1.0.cl'
+      }
   ],
   "tags": [],
   "paths": {
@@ -21,7 +31,7 @@
         "operationId": "getCurrentUserInfo",
         "description": "Get session information for the currently logged-in user.",
         "tags": [
-          "Authentication", "FilterIn"
+          "Authentication", "9.1.0.cl"
         ],
         "parameters": [],
         "responses": {
@@ -87,7 +97,7 @@
         "operationId": "searchUsers",
         "description": "Gets a list of ThoughtSpot users. To get details of a specific user, specify the user GUID or name.  ",
         "tags": [
-          "Users"
+          "Users", "9.0.0.cl" 
         ],
         "requestBody": {
           "content": {
