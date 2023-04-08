@@ -1458,8 +1458,8 @@
         "operationId": "searchConfig",
         "description": "Search local repository configuration <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.2.0</span>",
         "tags": [
-          "9.2.0",
-          "Version Control"
+          "Version Control",
+          "9.2.0"
         ],
         "requestBody": {
           "content": {
