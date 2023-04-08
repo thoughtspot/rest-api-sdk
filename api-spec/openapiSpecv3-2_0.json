@@ -5,22 +5,14 @@
     "version": "2.0"
   },
   "x-roles": [
-        {
-            "name": "Public Endpoints",
-            "id": "pub",
-            "tags": [
-                "pets"
-            ],
-            "description": "This role only allows endpoints that should be visible to the public."
-        },
-        {
-            "name": "Public Endpoints",
-            "id": "pub",
-            "tags": [
-                "pets"
-            ],
-            "description": "This role only allows endpoints that should be visible to the public."
-        }
+    {
+      "name": "9.2.0",
+      "id": "9.2.0",
+      "tags": [
+        "9.2.0"
+      ],
+      "description": "Roles for version 9.2.0"
+    }
   ],
   "tags": [],
   "paths": {
@@ -29,7 +21,7 @@
         "operationId": "getCurrentUserInfo",
         "description": "Get session information for the currently logged-in user.",
         "tags": [
-          "Authentication", "9.1.0.cl"
+          "Authentication"
         ],
         "parameters": [],
         "responses": {
@@ -37,42 +29,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "allOf": [
-                    {
-                      "$ref": "#/components/schemas/User"
-                    },
-                    {
-                      "example": {
-                        "status": "OK",
-                        "copyright": "Copyright (c) 2019 The New York Times Company.  All Rights Reserved.",
-                        "num_results": 2,
-                        "results": [
-                          {
-                            "url": "http://www.nytimes.com/2011/11/10/books/1q84-by-haruki-murakami-review.html",
-                            "publication_dt": "2011-11-10",
-                            "byline": "JANET MASLIN",
-                            "book_title": "1Q84",
-                            "book_author": "Haruki Murakami",
-                            "summary": "In “1Q84,” the Japanese novelist Haruki Murakami writes about characters in a Tokyo with two moons.",
-                            "isbn13": [
-                              "9780307476463"
-                            ]
-                          }
-                        ]
-                      }
-                    }
-                  ]
-                },
-                "example": {
-                    "status": "OK",
-                    "copyright": "Copyright (c) 2019 The New York Times Company.  All Rights Reserved.",
-                    "num_results": 2,
-                    "results": [
-                      {
-                        "id": "User Id 1",
-                        "name": "User Name"
-                      }
-                    ]
+                  "$ref": "#/components/schemas/User"
                 }
               }
             }
@@ -95,7 +52,7 @@
         "operationId": "searchUsers",
         "description": "Gets a list of ThoughtSpot users. To get details of a specific user, specify the user GUID or name.  ",
         "tags": [
-          "Users", "9.0.0.cl" 
+          "Users"
         ],
         "requestBody": {
           "content": {
@@ -1501,6 +1458,7 @@
         "operationId": "searchConfig",
         "description": "Search local repository configuration <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.2.0</span>",
         "tags": [
+          "9.2.0",
           "Version Control"
         ],
         "requestBody": {
@@ -1545,6 +1503,7 @@
         "operationId": "searchCommits",
         "description": "List the commit history of a metadata object <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.2.0</span>",
         "tags": [
+          "9.2.0",
           "Version Control"
         ],
         "requestBody": {
@@ -4071,6 +4030,7 @@
         "operationId": "createConfig",
         "description": "Configure local repository to connect to remote repository <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.2.0</span>",
         "tags": [
+          "9.2.0",
           "Version Control"
         ],
         "requestBody": {
@@ -4151,6 +4111,7 @@
         "operationId": "updateConfig",
         "description": "Update local repository configuration. <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.2.0</span>",
         "tags": [
+          "9.2.0",
           "Version Control"
         ],
         "requestBody": {
@@ -4221,6 +4182,7 @@
         "operationId": "deleteConfig",
         "description": "Delete local repository configuration <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.2.0</span>",
         "tags": [
+          "9.2.0",
           "Version Control"
         ],
         "requestBody": {
@@ -4262,6 +4224,7 @@
         "operationId": "pullBranch",
         "description": "Pull a branch from remote repository to local repository. <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.2.0</span>",
         "tags": [
+          "9.2.0",
           "Version Control"
         ],
         "requestBody": {
@@ -4312,6 +4275,7 @@
         "operationId": "commitBranch",
         "description": "Commit the object from metadata to remote repository <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.2.0</span>",
         "tags": [
+          "9.2.0",
           "Version Control"
         ],
         "requestBody": {
@@ -4376,6 +4340,7 @@
         "operationId": "revertCommit",
         "description": "Revert an object to a specific commit id <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.2.0</span>",
         "tags": [
+          "9.2.0",
           "Version Control"
         ],
         "requestBody": {
@@ -4449,6 +4414,7 @@
         "operationId": "validateMerge",
         "description": "Before merging changes to target branch, pick the changes from source branch and validate the files <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.2.0</span>",
         "tags": [
+          "9.2.0",
           "Version Control"
         ],
         "requestBody": {
@@ -4508,6 +4474,7 @@
         "operationId": "deployCommit",
         "description": "Deploy changes to a Thoughtspot environment from a commit point\" <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.2.0</span>",
         "tags": [
+          "9.2.0",
           "Version Control"
         ],
         "requestBody": {
@@ -5040,12 +5007,6 @@
           "display_name",
           "visibility"
         ],
-        "examples": {
-          "jsonObject": {
-            "summary": "A sample object",
-            "externalValue": "http://example.com/examples/object-example.json"
-          }
-        },
         "properties": {
           "id": {
             "type": "string",
@@ -7331,13 +7292,13 @@
           "schemas": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Schema"
+              "$ref": "#/components/schemas/SchemaObject"
             },
             "description": "Schemas of the database."
           }
         }
       },
-      "Schema": {
+      "SchemaObject": {
         "type": "object",
         "required": [
           "name"
