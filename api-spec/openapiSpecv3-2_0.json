@@ -10,18 +10,6 @@
         id: "9.0.0.cl",
         tags: [ "9.0.0.cl" ],
         description: "Roles for version 9.0.0.cl"
-      },
-      {
-        name: "9.2.0.cl",
-        id: "9.2.0.cl",
-        tags: [ "9.2.0.cl" ],
-        description: "Roles for version 9.2.0.cl"
-      },
-      {
-        name: "9.1.0.cl",
-        id: "9.1.0.cl",
-        tags: [ "9.1.0.cl" ],
-        description: "Roles for version 9.1.0.cl"
       }
   ],
   "tags": [],
