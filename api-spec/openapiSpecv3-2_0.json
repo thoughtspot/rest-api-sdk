@@ -4,13 +4,15 @@
     "title": "ThoughtSpot Public REST API",
     "version": "2.0"
   },
-  "x-roles":  [
-      {
-        name: "9.0.0.cl",
-        id: "9.0.0.cl",
-        tags: [ "9.0.0.cl" ],
-        description: "Roles for version 9.0.0.cl"
-      }
+  "x-roles": [
+        {
+            "name": "Public Endpoints",
+            "id": "pub",
+            "tags": [
+                "pets"
+            ],
+            "description": "This role only allows endpoints that should be visible to the public."
+        }
   ],
   "tags": [],
   "paths": {
