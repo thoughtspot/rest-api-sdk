@@ -32,22 +32,13 @@
                   "$ref": "#/components/schemas/User"
                 },
                 "example": {
-                  "status": "OK",
-                  "copyright": "Copyright (c) 2019 The New York Times Company.  All Rights Reserved.",
-                  "num_results": 2,
-                  "results": [
-                    {
-                      "url": "http://www.nytimes.com/2011/11/10/books/1q84-by-haruki-murakami-review.html",
-                      "publication_dt": "2011-11-10",
-                      "byline": "JANET MASLIN",
-                      "book_title": "1Q84",
-                      "book_author": "Haruki Murakami",
-                      "summary": "In “1Q84,” the Japanese novelist Haruki Murakami writes about characters in a Tokyo with two moons.",
-                      "isbn13": [
-                        "9780307476463"
-                      ]
-                    }
-                  ]
+                      "id": "id0",
+                      "name": "name0",
+                      "display_name": "display_name0",
+                      "visibility": "SHARABLE",
+                      "author_id": "author_id0",
+                      "can_change_password": false,
+                      "complete_detail": false,
                 }
               }
             }
