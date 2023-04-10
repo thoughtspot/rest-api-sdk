@@ -32,7 +32,6 @@
                   "$ref": "#/components/schemas/User"
                 },
                 "example": {
-                      [{
                         "id": "id0",
                         "name": "name0",
                         "display_name": "display_name0",
@@ -40,7 +39,6 @@
                         "author_id": "author_id0",
                         "can_change_password": false,
                         "complete_detail": false,
-                      }]
                 }
               }
             }
