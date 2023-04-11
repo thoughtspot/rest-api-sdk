@@ -6,6 +6,14 @@
   },
   "x-roles": [
     {
+      "name": "9.0.0.cl",
+      "id": "9.0.0.cl",
+      "tags": [
+        "9.0.0.cl"
+      ],
+      "description": "Roles for version 9.0.0.cl"
+    },
+    {
       "name": "9.2.0",
       "id": "9.2.0",
       "tags": [
@@ -30,15 +38,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/User"
-                },
-                "example": {
-                        "id": "id0",
-                        "name": "name0",
-                        "display_name": "display_name0",
-                        "visibility": "SHARABLE",
-                        "author_id": "author_id0",
-                        "can_change_password": false,
-                        "complete_detail": false,
                 }
               }
             }
@@ -190,8 +189,7 @@
                 }
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -364,8 +362,7 @@
                 }
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -419,8 +416,7 @@
                 }
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -555,8 +551,7 @@
                 }
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -729,8 +724,7 @@
                 }
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -790,8 +784,7 @@
                 ]
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -840,8 +833,7 @@
                 ]
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -930,8 +922,7 @@
                 ]
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -1002,8 +993,7 @@
                 ]
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -1063,8 +1053,7 @@
                 ]
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -1130,8 +1119,7 @@
                 ]
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -1295,8 +1283,7 @@
                 ]
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -1368,8 +1355,7 @@
                 ]
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -1433,8 +1419,7 @@
                 ]
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -1465,7 +1450,7 @@
     "/api/rest/2.0/vcs/git/config/search": {
       "post": {
         "operationId": "searchConfig",
-        "description": "Search local repository configuration <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.2.0</span>",
+        "description": "Search local repository configuration <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*Version: 9.2.0 or later</span>",
         "tags": [
           "Version Control",
           "9.2.0"
@@ -1478,8 +1463,7 @@
                 "properties": {}
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -1510,10 +1494,10 @@
     "/api/rest/2.0/vcs/git/commits/search": {
       "post": {
         "operationId": "searchCommits",
-        "description": "List the commit history of a metadata object <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.2.0</span>",
+        "description": "List the commit history of a metadata object <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*Version: 9.2.0.cl or later</span>",
         "tags": [
-          "9.2.0",
-          "Version Control"
+          "Version Control",
+          "9.2.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -1679,8 +1663,7 @@
                 }
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -1805,8 +1788,7 @@
                 }
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -1837,9 +1819,10 @@
     "/api/rest/2.0/auth/session/login": {
       "post": {
         "operationId": "login",
-        "description": "Using this endpoint, you can programmatically create a login session for a user in ThoughtSpot.",
+        "description": "Using this endpoint, you can programmatically create a login session for a user in ThoughtSpot.  <span class=\"since-beta-tag\">*Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Authentication"
+          "Authentication",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -1871,8 +1854,7 @@
                 }
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -1880,6 +1862,10 @@
               "application/json": {
                 "schema": {
                   "type": "object"
+                },
+                "example": {
+                  "id": "id0",
+                  "name": "name0"
                 }
               }
             }
@@ -1890,6 +1876,10 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": "error",
+                  "message": "message"
                 }
               }
             }
@@ -2081,8 +2071,7 @@
                 ]
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -2122,8 +2111,7 @@
                 "properties": {}
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -2172,8 +2160,7 @@
                 }
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -2465,8 +2452,7 @@
                 ]
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -2515,8 +2501,7 @@
                 ]
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -2585,8 +2570,7 @@
                 ]
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -2753,8 +2737,7 @@
                 }
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -2803,8 +2786,7 @@
                 ]
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -2858,8 +2840,7 @@
                 ]
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -2926,8 +2907,7 @@
                 ]
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -2976,8 +2956,7 @@
                 ]
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -3092,8 +3071,7 @@
                 ]
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -3142,8 +3120,7 @@
                 ]
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -3530,8 +3507,7 @@
                 ]
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -3580,8 +3556,7 @@
                 ]
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -3642,8 +3617,7 @@
                 }
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -3712,8 +3686,7 @@
                 ]
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -3780,8 +3753,7 @@
                 ]
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -3842,8 +3814,7 @@
                 ]
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -4037,10 +4008,10 @@
     "/api/rest/2.0/vcs/git/config/create": {
       "post": {
         "operationId": "createConfig",
-        "description": "Configure local repository to connect to remote repository <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.2.0</span>",
+        "description": "Configure local repository to connect to remote repository <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*Version: 9.2.0 or later</span>",
         "tags": [
-          "9.2.0",
-          "Version Control"
+          "Version Control",
+          "9.2.0"
         ],
         "requestBody": {
           "content": {
@@ -4072,12 +4043,12 @@
                     "deprecated": false
                   },
                   "default_branch": {
-                    "description": "Name of the default remote branch <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.2.0</span>",
+                    "description": "Name of the default remote branch <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*Version: 9.2.0 or later</span>",
                     "type": "string",
                     "deprecated": false
                   },
                   "default_branch_name": {
-                    "description": "Name of the default remote branch <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.3.0</span>",
+                    "description": "Name of the default remote branch <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*Version: 9.3.0 or later</span>",
                     "type": "string",
                     "deprecated": false
                   }
@@ -4118,10 +4089,10 @@
     "/api/rest/2.0/vcs/git/config/update": {
       "post": {
         "operationId": "updateConfig",
-        "description": "Update local repository configuration. <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.2.0</span>",
+        "description": "Update local repository configuration. <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*Version: 9.2.0 or later</span>",
         "tags": [
-          "9.2.0",
-          "Version Control"
+          "Version Control",
+          "9.2.0"
         ],
         "requestBody": {
           "content": {
@@ -4140,7 +4111,7 @@
                     "deprecated": false
                   },
                   "branch_names": {
-                    "description": "List the remote branches to configure. Example:[development, production] <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.3.0</span>",
+                    "description": "List the remote branches to configure. Example:[development, production] <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*Version: 9.3.0 or later</span>",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -4148,20 +4119,19 @@
                     "deprecated": false
                   },
                   "default_branch": {
-                    "description": "Name of the default remote branch <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.2.0</span>",
+                    "description": "Name of the default remote branch <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*Version: 9.2.0 or later</span>",
                     "type": "string",
                     "deprecated": false
                   },
                   "default_branch_name": {
-                    "description": "Name of the default remote branch <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.3.0</span>",
+                    "description": "Name of the default remote branch <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*Version: 9.3.0 or later</span>",
                     "type": "string",
                     "deprecated": false
                   }
                 }
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -4189,10 +4159,10 @@
     "/api/rest/2.0/vcs/git/config/delete": {
       "post": {
         "operationId": "deleteConfig",
-        "description": "Delete local repository configuration <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.2.0</span>",
+        "description": "Delete local repository configuration <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*Version: 9.2.0 or later</span>",
         "tags": [
-          "9.2.0",
-          "Version Control"
+          "Version Control",
+          "9.2.0"
         ],
         "requestBody": {
           "content": {
@@ -4202,8 +4172,7 @@
                 "properties": {}
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -4231,10 +4200,10 @@
     "/api/rest/2.0/vcs/git/branches/{branch_name}/pull": {
       "post": {
         "operationId": "pullBranch",
-        "description": "Pull a branch from remote repository to local repository. <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.2.0</span>",
+        "description": "Pull a branch from remote repository to local repository. <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*Version: 9.2.0 or later</span>",
         "tags": [
-          "9.2.0",
-          "Version Control"
+          "Version Control",
+          "9.2.0"
         ],
         "requestBody": {
           "content": {
@@ -4253,8 +4222,7 @@
                 ]
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -4282,10 +4250,10 @@
     "/api/rest/2.0/vcs/git/branches/commit": {
       "post": {
         "operationId": "commitBranch",
-        "description": "Commit the object from metadata to remote repository <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.2.0</span>",
+        "description": "Commit the object from metadata to remote repository <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*Version: 9.2.0 or later</span>",
         "tags": [
-          "9.2.0",
-          "Version Control"
+          "Version Control",
+          "9.2.0"
         ],
         "requestBody": {
           "content": {
@@ -4347,10 +4315,10 @@
     "/api/rest/2.0/vcs/git/commits/{commit_id}/revert": {
       "post": {
         "operationId": "revertCommit",
-        "description": "Revert an object to a specific commit id <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.2.0</span>",
+        "description": "Revert an object to a specific commit id <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*Version: 9.2.0 or later</span>",
         "tags": [
-          "9.2.0",
-          "Version Control"
+          "Version Control",
+          "9.2.0"
         ],
         "requestBody": {
           "content": {
@@ -4377,7 +4345,7 @@
                     "deprecated": false
                   },
                   "revert_policy": {
-                    "description": "Policy to be followed while importing. Valid values: [ALL_OR_NONE, PARTIAL] <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.3.0</span>",
+                    "description": "Policy to be followed while importing. Valid values: [ALL_OR_NONE, PARTIAL] <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*Version: 9.3.0 or later</span>",
                     "default": "ALL_OR_NONE",
                     "type": "string",
                     "enum": [
@@ -4392,8 +4360,7 @@
                 ]
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -4421,10 +4388,10 @@
     "/api/rest/2.0/vcs/git/branches/validate": {
       "post": {
         "operationId": "validateMerge",
-        "description": "Before merging changes to target branch, pick the changes from source branch and validate the files <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.2.0</span>",
+        "description": "Before merging changes to target branch, pick the changes from source branch and validate the files <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*Version: 9.2.0 or later</span>",
         "tags": [
-          "9.2.0",
-          "Version Control"
+          "Version Control",
+          "9.2.0"
         ],
         "requestBody": {
           "content": {
@@ -4481,10 +4448,10 @@
     "/api/rest/2.0/vcs/git/commits/deploy": {
       "post": {
         "operationId": "deployCommit",
-        "description": "Deploy changes to a Thoughtspot environment from a commit point\" <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.2.0</span>",
+        "description": "Deploy changes to a Thoughtspot environment from a commit point\" <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*Version: 9.2.0 or later</span>",
         "tags": [
-          "9.2.0",
-          "Version Control"
+          "Version Control",
+          "9.2.0"
         ],
         "requestBody": {
           "content": {
@@ -4498,12 +4465,12 @@
                     "deprecated": false
                   },
                   "branch_name": {
-                    "description": "Name of the remote branch where changes should be picked <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.3.0</span>",
+                    "description": "Name of the remote branch where changes should be picked <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*Version: 9.3.0 or later</span>",
                     "type": "string",
                     "deprecated": false
                   },
                   "import_type": {
-                    "description": "Indicates if all files or only modified file at specified commit point should be considered <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.2.0</span>",
+                    "description": "Indicates if all files or only modified file at specified commit point should be considered <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*Version: 9.2.0 or later</span>",
                     "default": "DELTA",
                     "type": "string",
                     "enum": [
@@ -4513,7 +4480,7 @@
                     "deprecated": false
                   },
                   "deploy_type": {
-                    "description": "Indicates if all files or only modified file at specified commit point should be considered <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.3.0</span>",
+                    "description": "Indicates if all files or only modified file at specified commit point should be considered <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*Version: 9.3.0 or later</span>",
                     "default": "DELTA",
                     "type": "string",
                     "enum": [
@@ -4523,7 +4490,7 @@
                     "deprecated": false
                   },
                   "deploy_policy": {
-                    "description": "Policy to be followed while importing. Valid values: [ALL_OR_NONE, PARTIAL] <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.3.0</span>",
+                    "description": "Policy to be followed while importing. Valid values: [ALL_OR_NONE, PARTIAL] <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*Version: 9.3.0 or later</span>",
                     "default": "ALL_OR_NONE",
                     "type": "string",
                     "enum": [
@@ -4535,8 +4502,7 @@
                 }
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -4676,8 +4642,7 @@
                 ]
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -4747,8 +4712,7 @@
                 ]
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -4831,8 +4795,7 @@
                 ]
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -4971,8 +4934,7 @@
                 ]
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
