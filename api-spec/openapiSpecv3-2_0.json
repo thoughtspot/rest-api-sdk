@@ -1867,7 +1867,7 @@
     "/api/rest/2.0/vcs/git/config/search": {
       "post": {
         "operationId": "searchConfig",
-        "description": "<br/> Search local repository configuration <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*Version: 9.2.0 or later</span>",
+        "description": "Search local repository configuration <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*Version: 9.2.0 or later</span>",
         "tags": [
           "Version Control",
           "9.2.0"
@@ -1935,7 +1935,7 @@
     "/api/rest/2.0/vcs/git/commits/search": {
       "post": {
         "operationId": "searchCommits",
-        "description": "<br/> List the commit history of a metadata object <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*Version: 9.2.0.cl or later</span>",
+        "description": "List the commit history of a metadata object <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*Version: 9.2.0.cl or later</span>",
         "tags": [
           "Version Control",
           "9.2.0.cl"
@@ -2332,7 +2332,7 @@
     "/api/rest/2.0/auth/session/login": {
       "post": {
         "operationId": "login",
-        "description": "<br/> Using this endpoint, you can programmatically create a login session for a user in ThoughtSpot.  <span class=\"since-beta-tag\">*Version: 9.0.0.cl or later</span>",
+        "description": "Using this endpoint, you can programmatically create a login session for a user in ThoughtSpot. <br/>  <span class=\"since-beta-tag\">*Version: 9.0.0.cl or later</span>",
         "tags": [
           "Authentication",
           "9.0.0.cl"
@@ -5165,7 +5165,7 @@
     "/api/rest/2.0/vcs/git/config/create": {
       "post": {
         "operationId": "createConfig",
-        "description": "<br/> Configure local repository to connect to remote repository <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*Version: 9.2.0 or later</span>",
+        "description": "Configure local repository to connect to remote repository <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*Version: 9.2.0 or later</span>",
         "tags": [
           "Version Control",
           "9.2.0"
@@ -5200,12 +5200,12 @@
                     "deprecated": false
                   },
                   "default_branch": {
-                    "description": "<br/> Name of the default remote branch <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*Version: 9.2.0 or later</span>",
+                    "description": "Name of the default remote branch <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*Version: 9.2.0 or later</span>",
                     "type": "string",
                     "deprecated": false
                   },
                   "default_branch_name": {
-                    "description": "<br/> Name of the default remote branch <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*Version: 9.3.0 or later</span>",
+                    "description": "Name of the default remote branch <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*Version: 9.3.0 or later</span>",
                     "type": "string",
                     "deprecated": false
                   }
@@ -5267,7 +5267,7 @@
     "/api/rest/2.0/vcs/git/config/update": {
       "post": {
         "operationId": "updateConfig",
-        "description": "<br/> Update local repository configuration. <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*Version: 9.2.0 or later</span>",
+        "description": "Update local repository configuration. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*Version: 9.2.0 or later</span>",
         "tags": [
           "Version Control",
           "9.2.0"
@@ -5289,7 +5289,7 @@
                     "deprecated": false
                   },
                   "branch_names": {
-                    "description": "<br/> List the remote branches to configure. Example:[development, production] <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*Version: 9.3.0 or later</span>",
+                    "description": "List the remote branches to configure. Example:[development, production] <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*Version: 9.3.0 or later</span>",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -5297,12 +5297,12 @@
                     "deprecated": false
                   },
                   "default_branch": {
-                    "description": "<br/> Name of the default remote branch <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*Version: 9.2.0 or later</span>",
+                    "description": "Name of the default remote branch <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*Version: 9.2.0 or later</span>",
                     "type": "string",
                     "deprecated": false
                   },
                   "default_branch_name": {
-                    "description": "<br/> Name of the default remote branch <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*Version: 9.3.0 or later</span>",
+                    "description": "Name of the default remote branch <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*Version: 9.3.0 or later</span>",
                     "type": "string",
                     "deprecated": false
                   }
@@ -5358,7 +5358,7 @@
     "/api/rest/2.0/vcs/git/config/delete": {
       "post": {
         "operationId": "deleteConfig",
-        "description": "<br/> Delete local repository configuration <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*Version: 9.2.0 or later</span>",
+        "description": "Delete local repository configuration <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*Version: 9.2.0 or later</span>",
         "tags": [
           "Version Control",
           "9.2.0"
@@ -5420,7 +5420,7 @@
     "/api/rest/2.0/vcs/git/branches/{branch_name}/pull": {
       "post": {
         "operationId": "pullBranch",
-        "description": "<br/> Pull a branch from remote repository to local repository. <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*Version: 9.2.0 or later</span>",
+        "description": "Pull a branch from remote repository to local repository. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*Version: 9.2.0 or later</span>",
         "tags": [
           "Version Control",
           "9.2.0"
@@ -5491,7 +5491,7 @@
     "/api/rest/2.0/vcs/git/branches/commit": {
       "post": {
         "operationId": "commitBranch",
-        "description": "<br/> Commit the object from metadata to remote repository <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*Version: 9.2.0 or later</span>",
+        "description": "Commit the object from metadata to remote repository <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*Version: 9.2.0 or later</span>",
         "tags": [
           "Version Control",
           "9.2.0"
@@ -5577,7 +5577,7 @@
     "/api/rest/2.0/vcs/git/commits/{commit_id}/revert": {
       "post": {
         "operationId": "revertCommit",
-        "description": "<br/> Revert an object to a specific commit id <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*Version: 9.2.0 or later</span>",
+        "description": "Revert an object to a specific commit id <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*Version: 9.2.0 or later</span>",
         "tags": [
           "Version Control",
           "9.2.0"
@@ -5607,7 +5607,7 @@
                     "deprecated": false
                   },
                   "revert_policy": {
-                    "description": "<br/> Policy to be followed while importing. Valid values: [ALL_OR_NONE, PARTIAL] <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*Version: 9.3.0 or later</span>",
+                    "description": "Policy to be followed while importing. Valid values: [ALL_OR_NONE, PARTIAL] <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*Version: 9.3.0 or later</span>",
                     "default": "ALL_OR_NONE",
                     "type": "string",
                     "enum": [
@@ -5671,7 +5671,7 @@
     "/api/rest/2.0/vcs/git/branches/validate": {
       "post": {
         "operationId": "validateMerge",
-        "description": "<br/> Before merging changes to target branch, pick the changes from source branch and validate the files <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*Version: 9.2.0 or later</span>",
+        "description": "Before merging changes to target branch, pick the changes from source branch and validate the files <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*Version: 9.2.0 or later</span>",
         "tags": [
           "Version Control",
           "9.2.0"
@@ -5755,7 +5755,7 @@
     "/api/rest/2.0/vcs/git/commits/deploy": {
       "post": {
         "operationId": "deployCommit",
-        "description": "<br/> Deploy changes to a Thoughtspot environment from a commit point\" <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*Version: 9.2.0 or later</span>",
+        "description": "Deploy changes to a Thoughtspot environment from a commit point\" <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*Version: 9.2.0 or later</span>",
         "tags": [
           "Version Control",
           "9.2.0"
@@ -5772,12 +5772,12 @@
                     "deprecated": false
                   },
                   "branch_name": {
-                    "description": "<br/> Name of the remote branch where changes should be picked <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*Version: 9.3.0 or later</span>",
+                    "description": "Name of the remote branch where changes should be picked <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*Version: 9.3.0 or later</span>",
                     "type": "string",
                     "deprecated": false
                   },
                   "import_type": {
-                    "description": "<br/> Indicates if all files or only modified file at specified commit point should be considered <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*Version: 9.2.0 or later</span>",
+                    "description": "Indicates if all files or only modified file at specified commit point should be considered <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*Version: 9.2.0 or later</span>",
                     "default": "DELTA",
                     "type": "string",
                     "enum": [
@@ -5787,7 +5787,7 @@
                     "deprecated": false
                   },
                   "deploy_type": {
-                    "description": "<br/> Indicates if all files or only modified file at specified commit point should be considered <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*Version: 9.3.0 or later</span>",
+                    "description": "Indicates if all files or only modified file at specified commit point should be considered <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*Version: 9.3.0 or later</span>",
                     "default": "DELTA",
                     "type": "string",
                     "enum": [
@@ -5797,7 +5797,7 @@
                     "deprecated": false
                   },
                   "deploy_policy": {
-                    "description": "<br/> Policy to be followed while importing. Valid values: [ALL_OR_NONE, PARTIAL] <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*Version: 9.3.0 or later</span>",
+                    "description": "Policy to be followed while importing. Valid values: [ALL_OR_NONE, PARTIAL] <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*Version: 9.3.0 or later</span>",
                     "default": "ALL_OR_NONE",
                     "type": "string",
                     "enum": [
