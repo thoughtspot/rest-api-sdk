@@ -2390,6 +2390,10 @@
               "application/json": {
                 "schema": {
                   "type": "object"
+                },
+                "example": {
+                  "id": "201",
+                  "name": "201 name"
                 }
               }
             }
