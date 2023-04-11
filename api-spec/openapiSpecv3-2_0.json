@@ -2399,11 +2399,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "example": {
-                    "error": "error",
-                    "message": "message"
-                  },
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": "error",
+                  "message": "message"
                 }
               }
             }
@@ -2413,11 +2413,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "example": {
-                    "error": "error",
-                    "message": "message"
-                  },
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": "error",
+                  "message": "message"
                 }
               }
             }
