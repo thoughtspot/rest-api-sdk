@@ -6538,12 +6538,7 @@
   "components": {
     "schemas": {
       "ErrorResponse": {
-        "type": "object",
-        "properties": {
-          "error": {
-            "type": "string"
-          }
-        }
+        "type": "object"
       },
       "User": {
         "type": "object",
