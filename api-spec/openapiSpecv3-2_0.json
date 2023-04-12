@@ -1948,6 +1948,17 @@
                   "items": {
                     "$ref": "#/components/schemas/RepoConfigObject"
                   }
+                },
+                "example": {
+                  "repository_url": "repository_url0",
+                  "username": "username0",
+                  "default_branch": "default_branch8",
+                  "branches": [
+                    "branches4"
+                  ],
+                  "remote_alias": "remote_alias8",
+                  "enable_guid_mapping": false,
+                  "guid_mapping_branch_name": "guid_mapping_branch_name4"
                 }
               }
             }
@@ -1961,6 +1972,17 @@
                   "items": {
                     "$ref": "#/components/schemas/RepoConfigObject"
                   }
+                },
+                "example": {
+                  "repository_url": "repository_url0",
+                  "username": "username0",
+                  "default_branch": "default_branch8",
+                  "branches": [
+                    "branches4"
+                  ],
+                  "remote_alias": "remote_alias8",
+                  "enable_guid_mapping": false,
+                  "guid_mapping_branch_name": "guid_mapping_branch_name4"
                 }
               }
             }
@@ -1970,6 +1992,10 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "example": {
+                    "error": "error",
+                    "message": "message"
+                  },
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
@@ -1980,6 +2006,12 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "example": {
+                    "error": {
+                      "key1": "val1",
+                      "key2": "val2"
+                    }
+                  },
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
