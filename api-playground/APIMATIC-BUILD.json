@@ -6545,7 +6545,7 @@
         "type": "object",
         "properties": {
           "error": {
-            "type": "object"
+            "type": "string"
           }
         }
       },
