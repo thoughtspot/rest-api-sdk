@@ -1993,10 +1993,8 @@
               "application/json": {
                 "schema": {
                   "example": {
-                    "error": {
-                      "key1": "val1",
-                      "key2": "val2"
-                    }
+                    "error": "error",
+                    "message": "message"
                   },
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
@@ -2009,10 +2007,8 @@
               "application/json": {
                 "schema": {
                   "example": {
-                    "error": {
-                      "key1": "val1",
-                      "key2": "val2"
-                    }
+                    "error": "error",
+                    "message": "message"
                   },
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
