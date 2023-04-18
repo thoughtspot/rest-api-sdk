@@ -5157,8 +5157,26 @@
               "schema": {
                 "type": "object",
                 "properties": {
+                  "name": {
+                    "description": "Name of the scheduled job.",
+                    "type": "string",
+                    "deprecated": false
+                  },
                   "description": {
                     "description": "Description of the job.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "metadata_type": {
+                    "description": "Type of metadata.",
+                    "type": "string",
+                    "enum": [
+                      "LIVEBOARD"
+                    ],
+                    "deprecated": false
+                  },
+                  "metadata_identifier": {
+                    "description": "Unique ID or name of the metadata.",
                     "type": "string",
                     "deprecated": false
                   },
@@ -5172,32 +5190,9 @@
                     ],
                     "deprecated": false
                   },
-                  "frequency": {
-                    "description": "Configuration of schedule with cron expression",
-                    "$ref": "#/components/schemas/FrequencyInput",
-                    "deprecated": false
-                  },
                   "liveboard_options": {
                     "description": "Options to specify details of liveboard.",
                     "$ref": "#/components/schemas/LiveboardOptionsInput",
-                    "deprecated": false
-                  },
-                  "metadata_identifier": {
-                    "description": "Unique ID or name of the metadata.",
-                    "type": "string",
-                    "deprecated": false
-                  },
-                  "metadata_type": {
-                    "description": "Type of metadata.",
-                    "type": "string",
-                    "enum": [
-                      "LIVEBOARD"
-                    ],
-                    "deprecated": false
-                  },
-                  "name": {
-                    "description": "Name of the scheduled job.",
-                    "type": "string",
                     "deprecated": false
                   },
                   "pdf_options": {
@@ -5205,25 +5200,30 @@
                     "$ref": "#/components/schemas/PdfOptionsInput",
                     "deprecated": false
                   },
-                  "recipient_details": {
-                    "description": "Recipient configuration which includes emails and recipients of the schedule",
-                    "$ref": "#/components/schemas/RecipientDetailsInput",
-                    "deprecated": false
-                  },
                   "time_zone": {
                     "description": "Time zone",
                     "default": "America/Los_Angeles",
                     "type": "string",
                     "deprecated": false
+                  },
+                  "frequency": {
+                    "description": "Configuration of schedule with cron expression",
+                    "$ref": "#/components/schemas/FrequencyInput",
+                    "deprecated": false
+                  },
+                  "recipient_details": {
+                    "description": "Recipient configuration which includes emails and recipients of the schedule",
+                    "$ref": "#/components/schemas/RecipientDetailsInput",
+                    "deprecated": false
                   }
                 },
                 "required": [
-                  "description",
-                  "metadata_identifier",
-                  "metadata_type",
                   "name",
-                  "recipient_details",
-                  "time_zone"
+                  "description",
+                  "metadata_type",
+                  "metadata_identifier",
+                  "time_zone",
+                  "recipient_details"
                 ]
               }
             }
@@ -5386,28 +5386,13 @@
               "schema": {
                 "type": "object",
                 "properties": {
+                  "name": {
+                    "description": "Name of the scheduled job.",
+                    "type": "string",
+                    "deprecated": false
+                  },
                   "description": {
                     "description": "Description of the job.",
-                    "type": "string",
-                    "deprecated": false
-                  },
-                  "file_format": {
-                    "description": "Export file format.",
-                    "type": "string",
-                    "deprecated": false
-                  },
-                  "frequency": {
-                    "description": "Configuration of schedule with cron expression",
-                    "$ref": "#/components/schemas/FrequencyInput",
-                    "deprecated": false
-                  },
-                  "liveboard_options": {
-                    "description": "Options to specify details of liveboard.",
-                    "$ref": "#/components/schemas/LiveboardOptionsInput",
-                    "deprecated": false
-                  },
-                  "metadata_identifier": {
-                    "description": "Unique ID or name of the metadata.",
                     "type": "string",
                     "deprecated": false
                   },
@@ -5419,9 +5404,19 @@
                     ],
                     "deprecated": false
                   },
-                  "name": {
-                    "description": "Name of the scheduled job.",
+                  "metadata_identifier": {
+                    "description": "Unique ID or name of the metadata.",
                     "type": "string",
+                    "deprecated": false
+                  },
+                  "file_format": {
+                    "description": "Export file format.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "liveboard_options": {
+                    "description": "Options to specify details of liveboard.",
+                    "$ref": "#/components/schemas/LiveboardOptionsInput",
                     "deprecated": false
                   },
                   "pdf_options": {
@@ -5429,14 +5424,19 @@
                     "$ref": "#/components/schemas/PdfOptionsInput",
                     "deprecated": false
                   },
-                  "recipient_details": {
-                    "description": "Recipient configuration which includes emails and recipients of the schedule",
-                    "$ref": "#/components/schemas/RecipientDetailsInput",
-                    "deprecated": false
-                  },
                   "time_zone": {
                     "description": "Time zone",
                     "type": "string",
+                    "deprecated": false
+                  },
+                  "frequency": {
+                    "description": "Configuration of schedule with cron expression",
+                    "$ref": "#/components/schemas/FrequencyInput",
+                    "deprecated": false
+                  },
+                  "recipient_details": {
+                    "description": "Recipient configuration which includes emails and recipients of the schedule",
+                    "$ref": "#/components/schemas/RecipientDetailsInput",
                     "deprecated": false
                   },
                   "schedule_identifier": {
@@ -7656,19 +7656,6 @@
           }
         }
       },
-      "FrequencyInput": {
-        "type": "object",
-        "required": [
-          "cron_expression"
-        ],
-        "properties": {
-          "cron_expression": {
-            "$ref": "#/components/schemas/CronExpressionInput",
-            "description": "Schedule selected cron expression."
-          }
-        },
-        "description": "Configuration of schedule with cron expression"
-      },
       "LiveboardOptionsInput": {
         "type": "object",
         "required": [
@@ -7684,6 +7671,19 @@
           }
         },
         "description": "Options to specify details of liveboard."
+      },
+      "FrequencyInput": {
+        "type": "object",
+        "required": [
+          "cron_expression"
+        ],
+        "properties": {
+          "cron_expression": {
+            "$ref": "#/components/schemas/CronExpressionInput",
+            "description": "Schedule selected cron expression."
+          }
+        },
+        "description": "Configuration of schedule with cron expression"
       },
       "RecipientDetailsInput": {
         "type": "object",
