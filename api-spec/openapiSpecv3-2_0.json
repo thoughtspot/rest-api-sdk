@@ -5253,7 +5253,7 @@
         }
       }
     },
-    "/api/rest/2.0/schedules/:schedule_identifier/delete": {
+    "/api/rest/2.0/schedules/{schedule_identifier}/delete": {
       "post": {
         "operationId": "deleteSchedule",
         "description": "Deletes a schedule",
@@ -5373,7 +5373,7 @@
         }
       }
     },
-    "/api/rest/2.0/schedules/:schedule_identifier/update": {
+    "/api/rest/2.0/schedules/{schedule_identifier}/update": {
       "post": {
         "operationId": "updateSchedule",
         "description": "Update schedule.",
