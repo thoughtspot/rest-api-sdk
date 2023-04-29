@@ -3179,6 +3179,11 @@
               "schema": {
                 "type": "object",
                 "properties": {
+                  "user_identifier": {
+                    "description": "GUID / name of the user",
+                    "type": "string",
+                    "deprecated": false
+                  },
                   "name": {
                     "description": "Name of the user. The username string must be unique.",
                     "type": "string",
@@ -3350,7 +3355,13 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "properties": {},
+                "properties": {
+                  "user_identifier": {
+                    "description": "GUID / name of the user",
+                    "type": "string",
+                    "deprecated": false
+                  }
+                },
                 "required": [
                   "user_identifier"
                 ]
@@ -3886,6 +3897,11 @@
               "schema": {
                 "type": "object",
                 "properties": {
+                  "org_identifier": {
+                    "description": "ID or name of the Org.",
+                    "type": "string",
+                    "deprecated": false
+                  },
                   "name": {
                     "description": "Name of the Org.",
                     "type": "string",
@@ -3969,7 +3985,13 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "properties": {},
+                "properties": {
+                  "org_identifier": {
+                    "description": "ID or name of the Org.",
+                    "type": "string",
+                    "deprecated": false
+                  }
+                },
                 "required": [
                   "org_identifier"
                 ]
@@ -4047,8 +4069,7 @@
                   }
                 },
                 "required": [
-                  "name",
-                  "color"
+                  "name"
                 ]
               }
             }
@@ -4112,6 +4133,11 @@
               "schema": {
                 "type": "object",
                 "properties": {
+                  "tag_identifier": {
+                    "description": "Name or Id of the tag.",
+                    "type": "string",
+                    "deprecated": false
+                  },
                   "name": {
                     "description": "Name of the tag.",
                     "type": "string",
@@ -4187,7 +4213,13 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "properties": {},
+                "properties": {
+                  "tag_identifier": {
+                    "description": "Tag identifier Tag name or Tag id.",
+                    "type": "string",
+                    "deprecated": false
+                  }
+                },
                 "required": [
                   "tag_identifier"
                 ]
@@ -4579,6 +4611,11 @@
               "schema": {
                 "type": "object",
                 "properties": {
+                  "group_identifier": {
+                    "description": "GUID or name of the group.",
+                    "type": "string",
+                    "deprecated": false
+                  },
                   "name": {
                     "description": "Name of the group to modify.",
                     "type": "string",
@@ -4746,7 +4783,13 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "properties": {},
+                "properties": {
+                  "group_identifier": {
+                    "description": "GUID or name of the group.",
+                    "type": "string",
+                    "deprecated": false
+                  }
+                },
                 "required": [
                   "group_identifier"
                 ]
@@ -5683,7 +5726,13 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "properties": {},
+                "properties": {
+                  "branch_name": {
+                    "description": "Name of the branch to pull",
+                    "type": "string",
+                    "deprecated": false
+                  }
+                },
                 "required": [
                   "branch_name"
                 ]
@@ -5836,6 +5885,11 @@
               "schema": {
                 "type": "object",
                 "properties": {
+                  "commit_id": {
+                    "description": "Commit id to which the object should be reverted",
+                    "type": "string",
+                    "deprecated": false
+                  },
                   "metadata": {
                     "description": "Metadata objects.",
                     "type": "array",
@@ -6497,6 +6551,11 @@
               "schema": {
                 "type": "object",
                 "properties": {
+                  "role_identifier": {
+                    "description": "Unique ID or name of the role.",
+                    "type": "string",
+                    "deprecated": false
+                  },
                   "name": {
                     "description": "Name of the Role.",
                     "type": "string",
@@ -6602,7 +6661,13 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "properties": {},
+                "properties": {
+                  "role_identifier": {
+                    "description": "Unique ID or name of the role.",
+                    "type": "string",
+                    "deprecated": false
+                  }
+                },
                 "required": [
                   "role_identifier"
                 ]
@@ -6797,7 +6862,13 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "properties": {},
+                "properties": {
+                  "schedule_identifier": {
+                    "description": "Unique ID or name of the schedule.",
+                    "type": "string",
+                    "deprecated": false
+                  }
+                },
                 "required": [
                   "schedule_identifier"
                 ]
@@ -7011,6 +7082,11 @@
                   "recipient_details": {
                     "description": "Recipient configuration which includes emails and recipients of the schedule",
                     "$ref": "#/components/schemas/RecipientDetailsInput",
+                    "deprecated": false
+                  },
+                  "schedule_identifier": {
+                    "description": "Unique ID or name of the schedule.",
+                    "type": "string",
                     "deprecated": false
                   }
                 },
