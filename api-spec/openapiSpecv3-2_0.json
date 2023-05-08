@@ -6,12 +6,36 @@
   },
   "x-roles": [
     {
+      "name": "9.0.0.cl",
+      "id": "9.0.0.cl",
+      "tags": [
+        "9.0.0.cl"
+      ],
+      "description": "Roles for version 9.0.0.cl"
+    },
+    {
+      "name": "9.4.0.cl",
+      "id": "9.4.0.cl",
+      "tags": [
+        "9.4.0.cl"
+      ],
+      "description": "Roles for version 9.4.0.cl"
+    },
+    {
       "name": "9.2.0.cl",
       "id": "9.2.0.cl",
       "tags": [
         "9.2.0.cl"
       ],
       "description": "Roles for version 9.2.0.cl"
+    },
+    {
+      "name": "9.5.0.cl",
+      "id": "9.5.0.cl",
+      "tags": [
+        "9.5.0.cl"
+      ],
+      "description": "Roles for version 9.5.0.cl"
     }
   ],
   "tags": [],
@@ -71,9 +95,10 @@
     "/api/rest/2.0/auth/session/token": {
       "get": {
         "operationId": "getCurrentUserToken",
-        "description": "Get token for the currently logged-in user.",
+        "description": "Get token for the currently logged-in user. <br/>  <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>",
         "tags": [
-          "Authentication"
+          "Authentication",
+          "9.4.0.cl"
         ],
         "parameters": [],
         "responses": {
@@ -123,9 +148,10 @@
     "/api/rest/2.0/users/search": {
       "post": {
         "operationId": "searchUsers",
-        "description": "Gets a list of ThoughtSpot users. To get details of a specific user, specify the user GUID or name.",
+        "description": "Gets a list of ThoughtSpot users. To get details of a specific user, specify the user GUID or name. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Users"
+          "Users",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -398,9 +424,10 @@
     "/api/rest/2.0/system/config": {
       "get": {
         "operationId": "getSystemConfig",
-        "description": "Get system config information",
+        "description": "Get system config information <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "System"
+          "System",
+          "9.0.0.cl"
         ],
         "parameters": [],
         "responses": {
@@ -450,9 +477,10 @@
     "/api/rest/2.0/system/config-overrides": {
       "get": {
         "operationId": "getSystemOverrideInfo",
-        "description": "Get cluster override info.",
+        "description": "Get cluster override info. <br/>  <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>",
         "tags": [
-          "System"
+          "System",
+          "9.4.0.cl"
         ],
         "parameters": [],
         "responses": {
@@ -502,9 +530,10 @@
     "/api/rest/2.0/orgs/search": {
       "post": {
         "operationId": "searchOrgs",
-        "description": "Gets Orgs configured on a ThoughtSpot instance. Requires cluster administration privileges.",
+        "description": "Gets Orgs configured on a ThoughtSpot instance. Requires cluster administration privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Orgs"
+          "Orgs",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -684,9 +713,10 @@
     "/api/rest/2.0/groups/search": {
       "post": {
         "operationId": "searchUserGroups",
-        "description": "Allows searching groups. Requires administrator privileges.",
+        "description": "Allows searching groups. Requires administrator privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Groups"
+          "Groups",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -870,9 +900,10 @@
     "/api/rest/2.0/metadata/search": {
       "post": {
         "operationId": "searchMetadata",
-        "description": "Allows searching for metadata objects. You can search for metadata objects\nsuch as Liveboard, Answer. Requires at least view access to the metadata object.",
+        "description": "Allows searching for metadata objects. You can search for metadata objects\nsuch as Liveboard, Answer. Requires at least view access to the metadata object. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Metadata"
+          "Metadata",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -1082,9 +1113,10 @@
     "/api/rest/2.0/metadata/liveboard/sql": {
       "post": {
         "operationId": "fetchLiveboardSqlQuery",
-        "description": "Fetches SQL query data for Liveboard and its visualizations.",
+        "description": "Fetches SQL query data for Liveboard and its visualizations. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Metadata"
+          "Metadata",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -1161,9 +1193,10 @@
     "/api/rest/2.0/metadata/answer/sql": {
       "post": {
         "operationId": "fetchAnswerSqlQuery",
-        "description": "Fetches SQL query data for an Answer.",
+        "description": "Fetches SQL query data for an Answer. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Metadata"
+          "Metadata",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -1232,9 +1265,10 @@
     "/api/rest/2.0/report/liveboard": {
       "post": {
         "operationId": "exportLiveboardReport",
-        "description": "Exports Liveboard and visualization data in PDF, PNG, XLS, or CSV format.\nRequires at least view access to the Liveboard.",
+        "description": "Exports Liveboard and visualization data in PDF, PNG, XLS, or CSV format.\nRequires at least view access to the Liveboard. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Reports"
+          "Reports",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -1348,9 +1382,10 @@
     "/api/rest/2.0/report/answer": {
       "post": {
         "operationId": "exportAnswerReport",
-        "description": "Export report file for Answer data.",
+        "description": "Export report file for Answer data. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Reports"
+          "Reports",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -1441,9 +1476,10 @@
     "/api/rest/2.0/security/principals/fetch-permissions": {
       "post": {
         "operationId": "fetchPermissionsOfPrincipals",
-        "description": "Fetch permission details for principal objects, such as users and groups.",
+        "description": "Fetch permission details for principal objects, such as users and groups. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Security"
+          "Security",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -1523,9 +1559,10 @@
     "/api/rest/2.0/security/metadata/fetch-permissions": {
       "post": {
         "operationId": "fetchPermissionsOnMetadata",
-        "description": "Fetch permission details for metadata objects",
+        "description": "Fetch permission details for metadata objects <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Security"
+          "Security",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -1612,9 +1649,10 @@
     "/api/rest/2.0/searchdata": {
       "post": {
         "operationId": "searchData",
-        "description": "Allows passing a search query string and retrieving data from ThoughtSpot.",
+        "description": "Allows passing a search query string and retrieving data from ThoughtSpot. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Data"
+          "Data",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -1722,9 +1760,10 @@
     "/api/rest/2.0/metadata/liveboard/data": {
       "post": {
         "operationId": "fetchLiveboardData",
-        "description": "Fetches Liveboard data. Requires at least view access to the Liveboard.",
+        "description": "Fetches Liveboard data. Requires at least view access to the Liveboard. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Data"
+          "Data",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -1839,9 +1878,10 @@
     "/api/rest/2.0/metadata/answer/data": {
       "post": {
         "operationId": "fetchAnswerData",
-        "description": "Fetches data from a saved Answer. Requires at least view access to the Answer object.",
+        "description": "Fetches data from a saved Answer. Requires at least view access to the Answer object. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Data"
+          "Data",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -1943,9 +1983,10 @@
     "/api/rest/2.0/logs/fetch": {
       "post": {
         "operationId": "fetchLogs",
-        "description": "Fetches security audit logs. Requires administrator privileges.",
+        "description": "Fetches security audit logs. Requires administrator privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Log"
+          "Log",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -2218,9 +2259,10 @@
     "/api/rest/2.0/connection/search": {
       "post": {
         "operationId": "searchConnection",
-        "description": "Search connection objects. Requires DATAMANAGEMENT privilege.",
+        "description": "Search connection objects. Requires DATAMANAGEMENT privilege. <br/>  <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>",
         "tags": [
-          "Connections"
+          "Connections",
+          "9.4.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -2361,9 +2403,10 @@
     "/api/rest/2.0/roles/search": {
       "post": {
         "operationId": "searchRoles",
-        "description": "Gets Roles configured on a ThoughtSpot instance.\nRequires cluster Administration, Role Administration or\nGroup Administration privileges.",
+        "description": "Gets Roles configured on a ThoughtSpot instance.\nRequires cluster Administration, Role Administration or\nGroup Administration privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
         "tags": [
-          "Roles"
+          "Roles",
+          "9.5.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -2525,9 +2568,10 @@
     "/api/rest/2.0/auth/session/login": {
       "post": {
         "operationId": "login",
-        "description": "Using this endpoint, you can programmatically create a login session for a user in ThoughtSpot.",
+        "description": "Using this endpoint, you can programmatically create a login session for a user in ThoughtSpot. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Authentication"
+          "Authentication",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -2609,9 +2653,10 @@
     "/api/rest/2.0/auth/token/object": {
       "post": {
         "operationId": "getObjectAccessToken",
-        "description": " To programmatically create object session token for a user in ThoughtSpot, use this endpoint. \n\nYou can generate the token for a user by providing password or secret key from the cluster. \n\nYou need to enable trusted authentication to generate secret key. To generate secret key, follow below steps. \n\n\n 1. Click the Develop tab. \n\n\n 2. Under Customizations, click Settings. \n\n\n 3. To enable trusted authentication, turn on the toggle. \n\n\n 4. A secret_key for trusted authentication is generated. \n\n\n 5. Click the clipboard icon to copy the token. \n\n\n \n\nPassword is given precedence over secretKey input, when both are included in the request.",
+        "description": " To programmatically create object session token for a user in ThoughtSpot, use this endpoint. \n\nYou can generate the token for a user by providing password or secret key from the cluster. \n\nYou need to enable trusted authentication to generate secret key. To generate secret key, follow below steps. \n\n\n 1. Click the Develop tab. \n\n\n 2. Under Customizations, click Settings. \n\n\n 3. To enable trusted authentication, turn on the toggle. \n\n\n 4. A secret_key for trusted authentication is generated. \n\n\n 5. Click the clipboard icon to copy the token. \n\n\n \n\nPassword is given precedence over secretKey input, when both are included in the request. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Authentication"
+          "Authentication",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -2737,9 +2782,10 @@
     "/api/rest/2.0/auth/token/full": {
       "post": {
         "operationId": "getFullAccessToken",
-        "description": " To programmatically create full session token for a user in ThoughtSpot, use this endpoint. \n\nYou can generate the token for a user by providing password or secret key from the cluster. \n\nYou need to enable trusted authentication to generate secret key. To generate secret key, follow below steps. \n\n\n 1. Click the Develop tab. \n\n\n 2. Under Customizations, click Settings. \n\n\n 3. To enable trusted authentication, turn on the toggle. \n\n\n 4. A secret_key for trusted authentication is generated. \n\n\n 5. Click the clipboard icon to copy the token. \n\n\n \n\nPassword is given precedence over secretKey input, when both are included in the request.",
+        "description": " To programmatically create full session token for a user in ThoughtSpot, use this endpoint. \n\nYou can generate the token for a user by providing password or secret key from the cluster. \n\nYou need to enable trusted authentication to generate secret key. To generate secret key, follow below steps. \n\n\n 1. Click the Develop tab. \n\n\n 2. Under Customizations, click Settings. \n\n\n 3. To enable trusted authentication, turn on the toggle. \n\n\n 4. A secret_key for trusted authentication is generated. \n\n\n 5. Click the clipboard icon to copy the token. \n\n\n \n\nPassword is given precedence over secretKey input, when both are included in the request. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Authentication"
+          "Authentication",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -2859,9 +2905,10 @@
     "/api/rest/2.0/auth/session/logout": {
       "post": {
         "operationId": "logout",
-        "description": "To log a user out of the current session, use this endpoint",
+        "description": "To log a user out of the current session, use this endpoint <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Authentication"
+          "Authentication",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -2920,9 +2967,10 @@
     "/api/rest/2.0/auth/token/revoke": {
       "post": {
         "operationId": "revokeToken",
-        "description": "To expire or revoke a token for a user, use this endpoint",
+        "description": "To expire or revoke a token for a user, use this endpoint <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Authentication"
+          "Authentication",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -2990,9 +3038,10 @@
     "/api/rest/2.0/users/create": {
       "post": {
         "operationId": "createUser",
-        "description": "Allows creating a user in ThoughtSpot. The API endpoint also allows you to assign the user to specific groups,\nOrgs, and add favorite Liveboards and Answers. To create a user, you require administration privileges.",
+        "description": "Allows creating a user in ThoughtSpot. The API endpoint also allows you to assign the user to specific groups,\nOrgs, and add favorite Liveboards and Answers. To create a user, you require administration privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Users"
+          "Users",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -3736,9 +3785,10 @@
     "/api/rest/2.0/system/config-update": {
       "post": {
         "operationId": "updateSystemConfig",
-        "description": "Update cluster configuration",
+        "description": "Update cluster configuration <br/>  <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>",
         "tags": [
-          "System"
+          "System",
+          "9.4.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -3807,9 +3857,10 @@
     "/api/rest/2.0/orgs/create": {
       "post": {
         "operationId": "createOrg",
-        "description": "Creates an Org. Requires cluster administration privileges.",
+        "description": "Creates an Org. Requires cluster administration privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Orgs"
+          "Orgs",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -3883,9 +3934,10 @@
     "/api/rest/2.0/orgs/{org_identifier}/update": {
       "post": {
         "operationId": "updateOrg",
-        "description": "Updates an Org. Requires cluster administration privileges.",
+        "description": "Updates an Org. Requires cluster administration privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Orgs"
+          "Orgs",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -3972,9 +4024,10 @@
     "/api/rest/2.0/orgs/{org_identifier}/delete": {
       "post": {
         "operationId": "deleteOrg",
-        "description": "Deletes an Org. Requires cluster administration privileges.",
+        "description": "Deletes an Org. Requires cluster administration privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Orgs"
+          "Orgs",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -4043,9 +4096,10 @@
     "/api/rest/2.0/tags/create": {
       "post": {
         "operationId": "createTag",
-        "description": "Creates a Tag. Requires administrator privileges.",
+        "description": "Creates a Tag. Requires administrator privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Tags"
+          "Tags",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -4119,9 +4173,10 @@
     "/api/rest/2.0/tags/{tag_identifier}/update": {
       "post": {
         "operationId": "updateTag",
-        "description": "Updates a Tag. Requires administrator privileges.",
+        "description": "Updates a Tag. Requires administrator privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Tags"
+          "Tags",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -4200,9 +4255,10 @@
     "/api/rest/2.0/tags/{tag_identifier}/delete": {
       "post": {
         "operationId": "deleteTag",
-        "description": "Deletes a tag. Requires administrator privileges.",
+        "description": "Deletes a tag. Requires administrator privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Tags"
+          "Tags",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -4271,9 +4327,10 @@
     "/api/rest/2.0/tags/assign": {
       "post": {
         "operationId": "assignTag",
-        "description": "Assigns a tag to a metadata object.",
+        "description": "Assigns a tag to a metadata object. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Tags"
+          "Tags",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -4354,9 +4411,10 @@
     "/api/rest/2.0/tags/unassign": {
       "post": {
         "operationId": "unassignTag",
-        "description": "Unassign a tag to a metadata object.",
+        "description": "Unassign a tag to a metadata object. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Tags"
+          "Tags",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -4437,9 +4495,10 @@
     "/api/rest/2.0/groups/create": {
       "post": {
         "operationId": "createUserGroup",
-        "description": "Create a group. Requires administrator privilege.",
+        "description": "Create a group. Requires administrator privilege. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Groups"
+          "Groups",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -4597,9 +4656,10 @@
     "/api/rest/2.0/groups/{group_identifier}/update": {
       "post": {
         "operationId": "updateUserGroup",
-        "description": "Update group properties.",
+        "description": "Update group properties. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Groups"
+          "Groups",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -4770,9 +4830,10 @@
     "/api/rest/2.0/groups/{group_identifier}/delete": {
       "post": {
         "operationId": "deleteUserGroup",
-        "description": "Deletes a group.",
+        "description": "Deletes a group. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Groups"
+          "Groups",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -4841,9 +4902,10 @@
     "/api/rest/2.0/groups/import": {
       "post": {
         "operationId": "importUserGroups",
-        "description": "Import groups to ThoughtSpot. Requires administrator privilege.",
+        "description": "Import groups to ThoughtSpot. Requires administrator privilege. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Groups"
+          "Groups",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -4925,9 +4987,10 @@
     "/api/rest/2.0/metadata/tml/import": {
       "post": {
         "operationId": "importMetadata",
-        "description": "Imports TML representation of metadata objects. Requires data management privileges.",
+        "description": "Imports TML representation of metadata objects. Requires data management privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Metadata"
+          "Metadata",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -5023,9 +5086,10 @@
     "/api/rest/2.0/metadata/tml/export": {
       "post": {
         "operationId": "exportMetadata",
-        "description": "Exports TML representation of metadata objects",
+        "description": "Exports TML representation of metadata objects <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Metadata"
+          "Metadata",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -5127,9 +5191,10 @@
     "/api/rest/2.0/metadata/delete": {
       "post": {
         "operationId": "deleteMetadata",
-        "description": "Deletes metadata objects. Requires edit access to objects.",
+        "description": "Deletes metadata objects. Requires edit access to objects. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Metadata"
+          "Metadata",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -5208,9 +5273,10 @@
     "/api/rest/2.0/security/metadata/assign": {
       "post": {
         "operationId": "assignChangeAuthor",
-        "description": "Assigns a new author or transfers the ownership of the specified metadata objects.",
+        "description": "Assigns a new author or transfers the ownership of the specified metadata objects. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Security"
+          "Security",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -5293,9 +5359,10 @@
     "/api/rest/2.0/security/metadata/share": {
       "post": {
         "operationId": "shareMetadata",
-        "description": "Share one or several metadata objects with users or groups.\nRequires edit access to metadata objects.",
+        "description": "Share one or several metadata objects with users or groups.\nRequires edit access to metadata objects. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Security"
+          "Security",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -6158,9 +6225,10 @@
     "/api/rest/2.0/connection/create": {
       "post": {
         "operationId": "createConnection",
-        "description": "Creates a connection to a Data WareHouse. Requires ADMINSITRATION or DATAMANAGEMENT privilege.",
+        "description": "Creates a connection to a Data WareHouse. Requires ADMINSITRATION or DATAMANAGEMENT privilege. <br/>  <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>",
         "tags": [
-          "Connections"
+          "Connections",
+          "9.4.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -6268,9 +6336,10 @@
     "/api/rest/2.0/connection/delete": {
       "post": {
         "operationId": "deleteConnection",
-        "description": "Deletes a connection to a Data WareHouse. Requires ADMINSITRATION or DATAMANAGEMENT privilege.",
+        "description": "Deletes a connection to a Data WareHouse. Requires ADMINSITRATION or DATAMANAGEMENT privilege. <br/>  <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>",
         "tags": [
-          "Connections"
+          "Connections",
+          "9.4.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -6339,9 +6408,10 @@
     "/api/rest/2.0/connection/update": {
       "post": {
         "operationId": "updateConnection",
-        "description": "Updates a connection to a Data WareHouse. Requires ADMINSITRATION or DATAMANAGEMENT privilege.",
+        "description": "Updates a connection to a Data WareHouse. Requires ADMINSITRATION or DATAMANAGEMENT privilege. <br/>  <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>",
         "tags": [
-          "Connections"
+          "Connections",
+          "9.4.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -6432,9 +6502,10 @@
     "/api/rest/2.0/roles/create": {
       "post": {
         "operationId": "createRole",
-        "description": "Creates a Role.\nRequires cluster Administration or Role Administration privileges.",
+        "description": "Creates a Role.\nRequires cluster Administration or Role Administration privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
         "tags": [
-          "Roles"
+          "Roles",
+          "9.5.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -6537,9 +6608,10 @@
     "/api/rest/2.0/roles/{role_identifier}/update": {
       "post": {
         "operationId": "updateRole",
-        "description": "Updates a Role.\nRequires cluster Administration or Role Administration privileges.",
+        "description": "Updates a Role.\nRequires cluster Administration or Role Administration privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
         "tags": [
-          "Roles"
+          "Roles",
+          "9.5.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -6648,9 +6720,10 @@
     "/api/rest/2.0/roles/{role_identifier}/delete": {
       "post": {
         "operationId": "deleteRole",
-        "description": "Deletes a Role.\nRequires cluster Administration or Role Administration privileges.",
+        "description": "Deletes a Role.\nRequires cluster Administration or Role Administration privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
         "tags": [
-          "Roles"
+          "Roles",
+          "9.5.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -6719,9 +6792,10 @@
     "/api/rest/2.0/schedules": {
       "post": {
         "operationId": "createSchedule",
-        "description": "Create schedule.",
+        "description": "Create schedule. <br/>  <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>",
         "tags": [
-          "Schedules"
+          "Schedules",
+          "9.4.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -6849,9 +6923,10 @@
     "/api/rest/2.0/schedules/{schedule_identifier}/delete": {
       "post": {
         "operationId": "deleteSchedule",
-        "description": "Deletes a schedule",
+        "description": "Deletes a schedule <br/>  <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>",
         "tags": [
-          "Schedules"
+          "Schedules",
+          "9.4.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -6920,9 +6995,10 @@
     "/api/rest/2.0/schedules/search": {
       "post": {
         "operationId": "searchSchedules",
-        "description": "Search Schedules",
+        "description": "Search Schedules <br/>  <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>",
         "tags": [
-          "Schedules"
+          "Schedules",
+          "9.4.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -7013,9 +7089,10 @@
     "/api/rest/2.0/schedules/{schedule_identifier}/update": {
       "post": {
         "operationId": "updateSchedule",
-        "description": "Update schedule.",
+        "description": "Update schedule. <br/>  <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>",
         "tags": [
-          "Schedules"
+          "Schedules",
+          "9.4.0.cl"
         ],
         "requestBody": {
           "content": {
