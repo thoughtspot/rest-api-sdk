@@ -4,6 +4,7 @@
     "title": "ThoughtSpot Public REST API",
     "version": "2.0"
   },
+  "x-roles": [],
   "tags": [],
   "paths": {
     "/api/rest/2.0/auth/session/user": {
@@ -16,10 +17,31 @@
         "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -193,11 +215,12 @@
                 }
               }
             }
-          },
-          "required": true
+          }
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
@@ -205,6 +228,29 @@
                   "items": {
                     "$ref": "#/components/schemas/User"
                   }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -232,10 +278,31 @@
         "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/SystemInfo"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SystemInfo"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -263,10 +330,31 @@
         "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/SystemConfig"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SystemConfig"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -294,10 +382,31 @@
         "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -367,11 +476,12 @@
                 }
               }
             }
-          },
-          "required": true
+          }
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
@@ -379,6 +489,29 @@
                   "items": {
                     "$ref": "#/components/schemas/OrgResponse"
                   }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/OrgResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -422,11 +555,12 @@
                 }
               }
             }
-          },
-          "required": true
+          }
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
@@ -434,6 +568,29 @@
                   "items": {
                     "$ref": "#/components/schemas/Tag"
                   }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Tag"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -558,11 +715,12 @@
                 }
               }
             }
-          },
-          "required": true
+          }
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
@@ -570,6 +728,29 @@
                   "items": {
                     "$ref": "#/components/schemas/UserGroupResponse"
                   }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserGroupResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -740,11 +921,12 @@
                 }
               }
             }
-          },
-          "required": true
+          }
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
@@ -752,6 +934,29 @@
                   "items": {
                     "$ref": "#/components/schemas/MetadataSearchResponse"
                   }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MetadataSearchResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -804,12 +1009,34 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/SqlQueryResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SqlQueryResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -854,12 +1081,34 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/SqlQueryResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SqlQueryResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -934,6 +1183,11 @@
                     "description": "Options for PDF export.",
                     "$ref": "#/components/schemas/PdfOptionsInput",
                     "deprecated": false
+                  },
+                  "png_options": {
+                    "description": "Options for PNG export.",
+                    "$ref": "#/components/schemas/PngOptionsInput",
+                    "deprecated": false
                   }
                 },
                 "required": [
@@ -944,12 +1198,34 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -1016,12 +1292,34 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -1077,12 +1375,34 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -1145,12 +1465,34 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -1224,12 +1566,34 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/SearchDataResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchDataResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -1310,12 +1674,34 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/LiveboardDataResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LiveboardDataResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -1383,12 +1769,34 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/AnswerDataResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnswerDataResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -1448,8 +1856,10 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
@@ -1457,6 +1867,29 @@
                   "items": {
                     "$ref": "#/components/schemas/LogResponse"
                   }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LogResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -1489,11 +1922,12 @@
                 "properties": {}
               }
             }
-          },
-          "required": true
+          }
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
@@ -1501,6 +1935,29 @@
                   "items": {
                     "$ref": "#/components/schemas/RepoConfigObject"
                   }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RepoConfigObject"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -1579,8 +2036,10 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
@@ -1588,6 +2047,29 @@
                   "items": {
                     "$ref": "#/components/schemas/CommitHistoryResponse"
                   }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CommitHistoryResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -1696,11 +2178,12 @@
                 }
               }
             }
-          },
-          "required": true
+          }
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
@@ -1708,6 +2191,29 @@
                   "items": {
                     "$ref": "#/components/schemas/SearchConnectionResponse"
                   }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SearchConnectionResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -1763,15 +2269,36 @@
                 }
               }
             }
-          },
-          "required": true
+          }
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -1873,12 +2400,34 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Token"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Token"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -1974,12 +2523,34 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Token"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Token"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -2012,15 +2583,36 @@
                 "properties": {}
               }
             }
-          },
-          "required": true
+          }
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -2062,15 +2654,36 @@
                 }
               }
             }
-          },
-          "required": true
+          }
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -2219,12 +2832,34 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -2255,11 +2890,6 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "user_identifier": {
-                    "description": "GUID / name of the user",
-                    "type": "string",
-                    "deprecated": false
-                  },
                   "name": {
                     "description": "Name of the user. The username string must be unique.",
                     "type": "string",
@@ -2355,21 +2985,50 @@
                     },
                     "deprecated": false
                   }
-                },
-                "required": [
-                  "user_identifier"
-                ]
+                }
               }
             }
-          },
-          "required": true
+          }
         },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "user_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "GUID / name of the user",
+            "deprecated": false
+          }
+        ],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -2399,27 +3058,50 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "properties": {
-                  "user_identifier": {
-                    "description": "GUID / name of the user",
-                    "type": "string",
-                    "deprecated": false
-                  }
-                },
-                "required": [
-                  "user_identifier"
-                ]
+                "properties": {}
               }
             }
-          },
-          "required": true
+          }
         },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "user_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "GUID / name of the user",
+            "deprecated": false
+          }
+        ],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -2486,12 +3168,34 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ImportUsersResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportUsersResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -2548,12 +3252,34 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -2604,12 +3330,34 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -2651,15 +3399,36 @@
                 }
               }
             }
-          },
-          "required": true
+          }
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -2704,12 +3473,34 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -2759,12 +3550,34 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/OrgResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrgResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -2795,11 +3608,6 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "org_identifier": {
-                    "description": "ID or name of the Org.",
-                    "type": "string",
-                    "deprecated": false
-                  },
                   "name": {
                     "description": "Name of the Org.",
                     "type": "string",
@@ -2818,21 +3626,50 @@
                     },
                     "deprecated": false
                   }
-                },
-                "required": [
-                  "org_identifier"
-                ]
+                }
               }
             }
-          },
-          "required": true
+          }
         },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "org_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID or name of the Org.",
+            "deprecated": false
+          }
+        ],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -2862,27 +3699,50 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "properties": {
-                  "org_identifier": {
-                    "description": "ID or name of the Org.",
-                    "type": "string",
-                    "deprecated": false
-                  }
-                },
-                "required": [
-                  "org_identifier"
-                ]
+                "properties": {}
               }
             }
-          },
-          "required": true
+          }
         },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "org_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID or name of the Org.",
+            "deprecated": false
+          }
+        ],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -2925,20 +3785,41 @@
                   }
                 },
                 "required": [
-                  "name",
-                  "color"
+                  "name"
                 ]
               }
             }
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Tag"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Tag"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -2969,11 +3850,6 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "tag_identifier": {
-                    "description": "Name or Id of the tag.",
-                    "type": "string",
-                    "deprecated": false
-                  },
                   "name": {
                     "description": "Name of the tag.",
                     "type": "string",
@@ -2984,21 +3860,50 @@
                     "type": "string",
                     "deprecated": false
                   }
-                },
-                "required": [
-                  "tag_identifier"
-                ]
+                }
               }
             }
-          },
-          "required": true
+          }
         },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "tag_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Name or Id of the tag.",
+            "deprecated": false
+          }
+        ],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -3028,27 +3933,50 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "properties": {
-                  "tag_identifier": {
-                    "description": "Tag identifier Tag name or Tag id.",
-                    "type": "string",
-                    "deprecated": false
-                  }
-                },
-                "required": [
-                  "tag_identifier"
-                ]
+                "properties": {}
               }
             }
-          },
-          "required": true
+          }
         },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "tag_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Tag identifier Tag name or Tag id.",
+            "deprecated": false
+          }
+        ],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -3105,12 +4033,34 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -3167,12 +4117,34 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -3298,12 +4270,34 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/UserGroupResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserGroupResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -3334,11 +4328,6 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "group_identifier": {
-                    "description": "GUID or name of the group.",
-                    "type": "string",
-                    "deprecated": false
-                  },
                   "name": {
                     "description": "Name of the group to modify.",
                     "type": "string",
@@ -3422,21 +4411,50 @@
                     ],
                     "deprecated": false
                   }
-                },
-                "required": [
-                  "group_identifier"
-                ]
+                }
               }
             }
-          },
-          "required": true
+          }
         },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "group_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "GUID or name of the group.",
+            "deprecated": false
+          }
+        ],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -3466,27 +4484,50 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "properties": {
-                  "group_identifier": {
-                    "description": "GUID or name of the group.",
-                    "type": "string",
-                    "deprecated": false
-                  }
-                },
-                "required": [
-                  "group_identifier"
-                ]
+                "properties": {}
               }
             }
-          },
-          "required": true
+          }
         },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "group_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "GUID or name of the group.",
+            "deprecated": false
+          }
+        ],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -3542,15 +4583,36 @@
                 }
               }
             }
-          },
-          "required": true
+          }
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ImportUserGroupsResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportUserGroupsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -3616,8 +4678,10 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
@@ -3625,6 +4689,29 @@
                   "items": {
                     "type": "object"
                   }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -3686,8 +4773,10 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
@@ -3695,6 +4784,29 @@
                   "items": {
                     "type": "object"
                   }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -3749,12 +4861,34 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -3813,12 +4947,34 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -3922,12 +5078,34 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -3989,12 +5167,34 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/RepoConfigObject"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RepoConfigObject"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -4043,15 +5243,36 @@
                 }
               }
             }
-          },
-          "required": true
+          }
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/RepoConfigObject"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RepoConfigObject"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -4084,15 +5305,36 @@
                 "properties": {}
               }
             }
-          },
-          "required": true
+          }
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -4122,27 +5364,50 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "properties": {
-                  "branch_name": {
-                    "description": "Name of the branch to pull",
-                    "type": "string",
-                    "deprecated": false
-                  }
-                },
-                "required": [
-                  "branch_name"
-                ]
+                "properties": {}
               }
             }
-          },
-          "required": true
+          }
         },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "branch_name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Name of the branch to pull",
+            "deprecated": false
+          }
+        ],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -4201,12 +5466,34 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/CommitResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommitResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -4249,28 +5536,55 @@
                     "description": "Name of the branch where the reverted version should be comitted",
                     "type": "string",
                     "deprecated": false
-                  },
-                  "commit_id": {
-                    "description": "Commit id to which the object should be reverted",
-                    "type": "string",
-                    "deprecated": false
                   }
                 },
                 "required": [
-                  "metadata",
-                  "commit_id"
+                  "metadata"
                 ]
               }
             }
           },
           "required": true
         },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "commit_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Commit id to which the object should be reverted",
+            "deprecated": false
+          }
+        ],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/RevertResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RevertResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -4321,8 +5635,10 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
@@ -4330,6 +5646,29 @@
                   "items": {
                     "$ref": "#/components/schemas/DeployResponse"
                   }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DeployResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -4384,8 +5723,10 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
@@ -4393,6 +5734,29 @@
                   "items": {
                     "$ref": "#/components/schemas/DeployResponse"
                   }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DeployResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -4476,12 +5840,34 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/CreateConnectionResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateConnectionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -4526,12 +5912,34 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -4598,12 +6006,34 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -5421,8 +6851,7 @@
         "type": "object",
         "required": [
           "name",
-          "id",
-          "color"
+          "id"
         ],
         "properties": {
           "name": {
@@ -5875,6 +7304,19 @@
           "page_footer_text": {
             "type": "string",
             "description": "Text to include in the footer of each page."
+          }
+        }
+      },
+      "PngOptionsInput": {
+        "type": "object",
+        "properties": {
+          "include_cover_page": {
+            "type": "boolean",
+            "description": "Indicates whether to include cover page with the Liveboard title."
+          },
+          "include_filter_page": {
+            "type": "boolean",
+            "description": "Indicates whether to include a page with all applied filters."
           }
         }
       },
