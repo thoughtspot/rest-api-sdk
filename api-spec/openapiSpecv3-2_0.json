@@ -9,7 +9,7 @@
     "/api/rest/2.0/auth/session/user": {
       "get": {
         "operationId": "getCurrentUserInfo",
-        "description": "Get session information for the currently logged-in user.",
+        "description": "Get session information for the currently logged-in user to test.",
         "tags": [
           "Authentication"
         ],
