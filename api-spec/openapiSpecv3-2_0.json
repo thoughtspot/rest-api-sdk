@@ -3166,7 +3166,7 @@
     "/api/rest/2.0/auth/token/revoke": {
       "post": {
         "operationId": "revokeToken",
-        "description": "\nRevokes the authentication token issued for current user session.\n\nThe token of your current session expires when you make a call to the `/api/rest/2.0/auth/token/revoke` endpoint.\nthe users will not be able to access ThoughtSpot objects until a new token is obtained.\n\nTo start the session, request for a new token from ThoughtSpot. See [Get Object Access Token](/#/develop/api/rest/playgroundV2_0?apiResourceId=http/api-endpoints/authentication/get-object-access-token) and [Get Full Access Token](/#/develop/api/rest/playgroundV2_0?apiResourceId=http/api-endpoints/authentication/get-full-access-token).\n\nTo expire or revoke a token for a user, use this endpoint",
+        "description": "\nRevokes the authentication token issued for current user session.\n\nThe token of your current session expires when you make a call to the `/api/rest/2.0/auth/token/revoke` endpoint.\nthe users will not be able to access ThoughtSpot objects until a new token is obtained.\n\nTo start the session, request for a new token from ThoughtSpot. See [Get Object Access Token](/#/http/api-endpoints/authentication/get-object-access-token) and [Get Full Access Token](/#/http/api-endpoints/authentication/get-full-access-token).\n\nTo expire or revoke a token for a user, use this endpoint",
         "tags": [
           "Authentication"
         ],
