@@ -1545,17 +1545,7 @@
         "tags": [
           "Version Control"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {}
-              }
-            }
-          },
-          "required": true
-        },
+        "requestBody": {},
         "responses": {
           "200": {
             "content": {
