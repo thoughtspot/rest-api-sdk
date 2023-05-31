@@ -50,17 +50,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/User"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
+            "description": "Fetch current session user detail successful.",
             "content": {
               "application/json": {
                 "schema": {
@@ -70,7 +60,27 @@
             }
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -80,7 +90,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -103,17 +113,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetTokenResponse"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
+            "description": "Fetching token for current user successful.",
             "content": {
               "application/json": {
                 "schema": {
@@ -123,7 +123,27 @@
             }
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -133,7 +153,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -327,20 +347,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/User"
-                  }
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
+            "description": "User search result.",
             "content": {
               "application/json": {
                 "schema": {
@@ -353,7 +360,27 @@
             }
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -363,7 +390,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -385,17 +412,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SystemInfo"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
+            "description": "Cluster information.",
             "content": {
               "application/json": {
                 "schema": {
@@ -405,7 +422,27 @@
             }
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -415,7 +452,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -438,17 +475,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SystemConfig"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
+            "description": "Cluster config information.",
             "content": {
               "application/json": {
                 "schema": {
@@ -458,7 +485,27 @@
             }
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -468,7 +515,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -491,17 +538,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
+            "description": "Cluster configuration which can be overridden.",
             "content": {
               "application/json": {
                 "schema": {
@@ -511,7 +548,27 @@
             }
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -521,7 +578,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -591,20 +648,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/OrgResponse"
-                  }
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
+            "description": "Organization search result.",
             "content": {
               "application/json": {
                 "schema": {
@@ -617,7 +661,27 @@
             }
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -627,7 +691,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -670,20 +734,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Tag"
-                  }
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
+            "description": "Tags search result.",
             "content": {
               "application/json": {
                 "schema": {
@@ -696,7 +747,27 @@
             }
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -706,7 +777,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -863,20 +934,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/UserGroupResponse"
-                  }
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
+            "description": "User group search result.",
             "content": {
               "application/json": {
                 "schema": {
@@ -889,7 +947,27 @@
             }
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -899,7 +977,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -1077,20 +1155,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/MetadataSearchResponse"
-                  }
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
+            "description": "Metadata objects search result.",
             "content": {
               "application/json": {
                 "schema": {
@@ -1103,7 +1168,27 @@
             }
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -1113,7 +1198,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -1164,17 +1249,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SqlQueryResponse"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
+            "description": "Fetching SQL query of specified metadata object is successful.",
             "content": {
               "application/json": {
                 "schema": {
@@ -1184,7 +1259,27 @@
             }
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -1194,7 +1289,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -1237,17 +1332,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SqlQueryResponse"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
+            "description": "Fetching SQL query of specified metadata object is successful.",
             "content": {
               "application/json": {
                 "schema": {
@@ -1257,7 +1342,27 @@
             }
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -1267,7 +1372,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -1355,17 +1460,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
+            "description": "Export report file of specified metadata object is successful.",
             "content": {
               "application/json": {
                 "schema": {
@@ -1375,7 +1470,27 @@
             }
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -1385,7 +1500,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -1450,17 +1565,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
+            "description": "Export report file of specified metadata object is successful.",
             "content": {
               "application/json": {
                 "schema": {
@@ -1470,7 +1575,27 @@
             }
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -1480,7 +1605,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -1534,17 +1659,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
+            "description": "Fetching permissions of principals is successful.",
             "content": {
               "application/json": {
                 "schema": {
@@ -1554,7 +1669,27 @@
             }
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -1564,7 +1699,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -1625,17 +1760,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
+            "description": "Fetching permissions of metadata objects is successful.",
             "content": {
               "application/json": {
                 "schema": {
@@ -1645,7 +1770,27 @@
             }
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -1655,7 +1800,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -1737,17 +1882,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SearchDataResponse"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
+            "description": "Fetching data of specified metadata object is successful.",
             "content": {
               "application/json": {
                 "schema": {
@@ -1757,7 +1892,27 @@
             }
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -1767,7 +1922,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -1856,17 +2011,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LiveboardDataResponse"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
+            "description": "Fetching data of specified metadata object is successful.",
             "content": {
               "application/json": {
                 "schema": {
@@ -1876,7 +2021,27 @@
             }
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -1886,7 +2051,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -1962,17 +2127,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AnswerDataResponse"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
+            "description": "Fetching data of specified metadata object is successful.",
             "content": {
               "application/json": {
                 "schema": {
@@ -1982,7 +2137,27 @@
             }
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -1992,7 +2167,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -2050,20 +2225,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/LogResponse"
-                  }
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
+            "description": "Log fetched successfully.",
             "content": {
               "application/json": {
                 "schema": {
@@ -2076,7 +2238,27 @@
             }
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -2086,7 +2268,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -2128,20 +2310,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/RepoConfigObject"
-                  }
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
+            "description": "Details of local repository configuration",
             "content": {
               "application/json": {
                 "schema": {
@@ -2154,7 +2323,27 @@
             }
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -2164,7 +2353,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -2235,20 +2424,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/CommitHistoryResponse"
-                  }
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
+            "description": "Commit history of the metadata object",
             "content": {
               "application/json": {
                 "schema": {
@@ -2261,7 +2437,27 @@
             }
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -2271,7 +2467,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -2380,20 +2576,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/SearchConnectionResponse"
-                  }
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
+            "description": "List of connections to the datasource.",
             "content": {
               "application/json": {
                 "schema": {
@@ -2406,7 +2589,27 @@
             }
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -2416,7 +2619,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -2546,20 +2749,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/SearchRoleResponse"
-                  }
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
+            "description": "Roles search result.",
             "content": {
               "application/json": {
                 "schema": {
@@ -2572,7 +2762,27 @@
             }
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -2582,7 +2792,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Internal error",
             "content": {
               "application/json": {
                 "schema": {
@@ -2637,28 +2847,31 @@
         },
         "parameters": [],
         "responses": {
-          "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+          "204": {
+            "description": "User login successful."
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -2668,7 +2881,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -2768,17 +2981,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Token"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
+            "description": "Bearer auth token creation successful.",
             "content": {
               "application/json": {
                 "schema": {
@@ -2788,7 +2991,27 @@
             }
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -2798,7 +3021,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -2892,17 +3115,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Token"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
+            "description": "Bearer auth token creation successful.",
             "content": {
               "application/json": {
                 "schema": {
@@ -2912,7 +3125,27 @@
             }
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -2922,7 +3155,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -2944,28 +3177,31 @@
         ],
         "parameters": [],
         "responses": {
-          "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+          "204": {
+            "description": "User logout successful."
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -2975,7 +3211,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -3016,28 +3252,31 @@
         },
         "parameters": [],
         "responses": {
-          "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+          "204": {
+            "description": "Token successfully revoked."
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -3047,7 +3286,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -3194,17 +3433,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/User"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
+            "description": "User successfully created.",
             "content": {
               "application/json": {
                 "schema": {
@@ -3214,7 +3443,27 @@
             }
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -3224,7 +3473,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -3373,28 +3622,31 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+          "204": {
+            "description": "User successfully updated."
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -3404,7 +3656,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -3436,28 +3688,31 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+          "204": {
+            "description": "User successfully deleted."
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -3467,7 +3722,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -3531,17 +3786,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ImportUsersResponse"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
+            "description": "Import users operation successful.",
             "content": {
               "application/json": {
                 "schema": {
@@ -3551,7 +3796,27 @@
             }
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -3561,7 +3826,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -3614,28 +3879,31 @@
         },
         "parameters": [],
         "responses": {
-          "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+          "204": {
+            "description": "User password change operation successful."
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -3645,7 +3913,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -3692,28 +3960,31 @@
         },
         "parameters": [],
         "responses": {
-          "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+          "204": {
+            "description": "User password reset operation successful."
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -3723,7 +3994,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -3763,28 +4034,31 @@
         },
         "parameters": [],
         "responses": {
-          "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+          "204": {
+            "description": "Force logging out of users operation successful."
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -3794,7 +4068,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -3836,28 +4110,31 @@
         },
         "parameters": [],
         "responses": {
-          "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+          "204": {
+            "description": "Configuration successfully updated."
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -3867,7 +4144,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -3915,17 +4192,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/OrgResponse"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
+            "description": "Organization successfully created.",
             "content": {
               "application/json": {
                 "schema": {
@@ -3935,7 +4202,27 @@
             }
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -3945,7 +4232,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -4018,28 +4305,31 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+          "204": {
+            "description": "Organization successfully updated."
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -4049,7 +4339,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -4082,28 +4372,31 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+          "204": {
+            "description": "Organization successfully deleted."
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -4113,7 +4406,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -4161,17 +4454,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Tag"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
+            "description": "Tag successfully created.",
             "content": {
               "application/json": {
                 "schema": {
@@ -4181,7 +4464,27 @@
             }
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -4191,7 +4494,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -4245,28 +4548,31 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+          "204": {
+            "description": "Tag successfully updated."
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -4276,7 +4582,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -4309,28 +4615,31 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+          "204": {
+            "description": "Tag successfully deleted."
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -4340,7 +4649,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -4394,28 +4703,31 @@
         },
         "parameters": [],
         "responses": {
-          "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+          "204": {
+            "description": "Tags successfully assigned."
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -4425,7 +4737,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -4479,28 +4791,31 @@
         },
         "parameters": [],
         "responses": {
-          "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+          "204": {
+            "description": "Tags successfully unassigned."
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -4510,7 +4825,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -4647,17 +4962,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/UserGroupResponse"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
+            "description": "User group successfully created.",
             "content": {
               "application/json": {
                 "schema": {
@@ -4667,7 +4972,27 @@
             }
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -4677,7 +5002,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -4828,28 +5153,31 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+          "204": {
+            "description": "User group successfully updated."
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -4859,7 +5187,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -4892,28 +5220,31 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+          "204": {
+            "description": "User group successfully deleted."
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -4923,7 +5254,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -4979,17 +5310,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ImportUserGroupsResponse"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
+            "description": "Import user groups operation successful.",
             "content": {
               "application/json": {
                 "schema": {
@@ -4999,7 +5320,27 @@
             }
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -5009,7 +5350,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -5073,20 +5414,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "object"
-                  }
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
+            "description": "Import metadata objects using specified TMLs is successful.",
             "content": {
               "application/json": {
                 "schema": {
@@ -5099,7 +5427,27 @@
             }
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -5109,7 +5457,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -5179,20 +5527,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "object"
-                  }
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
+            "description": "Export TMLs of specified metadata objects is successful.",
             "content": {
               "application/json": {
                 "schema": {
@@ -5205,7 +5540,27 @@
             }
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -5215,7 +5570,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -5267,28 +5622,31 @@
         },
         "parameters": [],
         "responses": {
-          "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+          "204": {
+            "description": "Metadata objects successfully deleted."
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -5298,7 +5656,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -5354,28 +5712,31 @@
         },
         "parameters": [],
         "responses": {
-          "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+          "204": {
+            "description": "Author assignment for given metadata objects is successful."
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -5385,7 +5746,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -5480,28 +5841,31 @@
         },
         "parameters": [],
         "responses": {
-          "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+          "204": {
+            "description": "Sharing metadata objects is successful."
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -5511,7 +5875,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -5601,17 +5965,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RepoConfigObject"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
+            "description": "Successfully configured local repository",
             "content": {
               "application/json": {
                 "schema": {
@@ -5621,7 +5975,27 @@
             }
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -5631,7 +6005,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -5709,17 +6083,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RepoConfigObject"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
+            "description": "Successfully updated local repository configuration",
             "content": {
               "application/json": {
                 "schema": {
@@ -5729,7 +6093,27 @@
             }
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -5739,7 +6123,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -5778,28 +6162,31 @@
         },
         "parameters": [],
         "responses": {
-          "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+          "204": {
+            "description": "Successfully deleted local repository configuration"
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -5809,7 +6196,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -5842,28 +6229,31 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+          "204": {
+            "description": "Remote branch pulled to local successfully"
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -5873,7 +6263,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -5930,17 +6320,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CommitResponse"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
+            "description": "Successfully committed the metadata objects",
             "content": {
               "application/json": {
                 "schema": {
@@ -5950,7 +6330,27 @@
             }
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -5960,7 +6360,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -6028,17 +6428,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RevertResponse"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
+            "description": "Reverted the object to the commit point specified",
             "content": {
               "application/json": {
                 "schema": {
@@ -6048,7 +6438,27 @@
             }
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -6058,7 +6468,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -6107,20 +6517,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/DeployResponse"
-                  }
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
+            "description": "validation done successfully",
             "content": {
               "application/json": {
                 "schema": {
@@ -6133,7 +6530,27 @@
             }
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -6143,7 +6560,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -6217,20 +6634,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/DeployResponse"
-                  }
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
+            "description": "Successfully deployed the changes",
             "content": {
               "application/json": {
                 "schema": {
@@ -6243,7 +6647,27 @@
             }
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -6253,7 +6677,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -6335,17 +6759,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CreateConnectionResponse"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
+            "description": "Connection to the datasource successfully created.",
             "content": {
               "application/json": {
                 "schema": {
@@ -6355,7 +6769,27 @@
             }
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -6365,7 +6799,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -6407,28 +6841,31 @@
         },
         "parameters": [],
         "responses": {
-          "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+          "204": {
+            "description": "Connection successfully deleted."
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -6438,7 +6875,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -6502,28 +6939,31 @@
         },
         "parameters": [],
         "responses": {
-          "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+          "204": {
+            "description": "Connection successfully updated."
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -6533,7 +6973,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -6610,17 +7050,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RoleResponse"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
+            "description": "Role successfully created.",
             "content": {
               "application/json": {
                 "schema": {
@@ -6630,7 +7060,27 @@
             }
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid parameters.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -6640,7 +7090,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Internal error",
             "content": {
               "application/json": {
                 "schema": {
@@ -6728,17 +7178,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RoleResponse"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
+            "description": "Role successfully updated.",
             "content": {
               "application/json": {
                 "schema": {
@@ -6748,7 +7188,27 @@
             }
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -6758,7 +7218,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -6791,28 +7251,31 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+          "204": {
+            "description": "Role successfully deleted."
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -6822,7 +7285,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Internal error",
             "content": {
               "application/json": {
                 "schema": {
@@ -6924,17 +7387,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseSchedule"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
+            "description": "Schedule successfully created.",
             "content": {
               "application/json": {
                 "schema": {
@@ -6944,7 +7397,27 @@
             }
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -6954,7 +7427,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -6987,28 +7460,31 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+          "204": {
+            "description": "Schedule successfully deleted."
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -7018,7 +7494,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -7082,20 +7558,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/ResponseSchedule"
-                  }
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
+            "description": "Schedule search result.",
             "content": {
               "application/json": {
                 "schema": {
@@ -7108,7 +7571,27 @@
             }
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -7118,7 +7601,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -7228,28 +7711,31 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+          "204": {
+            "description": "Schedule successfully updated."
           },
           "400": {
-            "description": "Operation failed",
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -7259,7 +7745,7 @@
             }
           },
           "500": {
-            "description": "Operation failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
