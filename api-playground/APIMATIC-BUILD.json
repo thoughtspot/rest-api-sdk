@@ -2,7 +2,7 @@
   "$schema": "https://titan.apimatic.io/api/build/schema",
   "buildFileVersion": "1.0",
   "generatePortal": {
-    "filterByRole": ["9.0.0.cl", "9.1.0.cl", "9.2.0.cl"],
+    "filterByRole": ["9.0.0.cl", "9.2.0.cl"],
     "pageTitle": "ThoughtSpot Public Rest APIs",
     "languageConfig": {
       "http": {}
