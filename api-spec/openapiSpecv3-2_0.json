@@ -19,7 +19,7 @@
     "/api/rest/2.0/auth/session/user": {
       "get": {
         "operationId": "getCurrentUserInfo",
-        "description": "Get session information for the currently logged-in user.\n\nAll users can view their session information. The API response varies according to user's access permissions and group privilege.\n\nundefined",
+        "description": "Get session information for the currently logged-in user.\n\nAll users can view their session information. The API response varies according to user's access permissions and group privilege.\n\n",
         "tags": [
           "Authentication"
         ],
@@ -220,7 +220,7 @@
     "/api/rest/2.0/users/search": {
       "post": {
         "operationId": "searchUsers",
-        "description": "Gets user details.To get details of a specific user, specify the user GUID or name. You can also filter the API response based on groups, Org ID, user visibility, account status, user type, user preference settings, user’s favorite objects, or home Liveboard setting.\n\nAvailable to all users. Users with `ADMINISTRATION` (Can administer ThoughtSpot) privileges can view all users properties.\n\n**Note**: If you are querying users by Org, user privileges may show null values in the API response.\n\nundefined",
+        "description": "Gets user details.To get details of a specific user, specify the user GUID or name. You can also filter the API response based on groups, Org ID, user visibility, account status, user type, user preference settings, user’s favorite objects, or home Liveboard setting.\n\nAvailable to all users. Users with `ADMINISTRATION` (Can administer ThoughtSpot) privileges can view all users properties.\n\n**Note**: If you are querying users by Org, user privileges may show null values in the API response.\n\n",
         "tags": [
           "Users"
         ],
@@ -7745,7 +7745,7 @@
     "/api/rest/2.0/auth/session/login": {
       "post": {
         "operationId": "login",
-        "description": "Creates a login session for a ThoughtSpot user with basic authentication. In the basic authentication method, REST clients log in to ThoughtSpot using `username` and `password` attributes.\n\nA successful login returns a session cookie that can be used in your subsequent API calls.\n\nundefined",
+        "description": "Creates a login session for a ThoughtSpot user with basic authentication. In the basic authentication method, REST clients log in to ThoughtSpot using `username` and `password` attributes.\n\nA successful login returns a session cookie that can be used in your subsequent API calls.\n\n",
         "tags": [
           "Authentication"
         ],
@@ -7833,7 +7833,7 @@
     "/api/rest/2.0/auth/token/object": {
       "post": {
         "operationId": "getObjectAccessToken",
-        "description": "Gets authentication token that provides access to a specific metadata object. By default, the token obtained from ThoughtSpot is valid for 5 mins.\n\nYou can generate the token for a user by providing `username` and `password` (Basic authentication), or by using the cluster’s secret key (Trusted authentication). To generate a `secret_key` on your cluster, administrator must enable **Trusted authentication** in the **Develop** > **Customizations** > **Security Settings** page. For more information, see [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth).\n\nWhen both `password` and `secret_key` are included in the API request, `password` takes precedence.\n\n#### Just-in-time provisioning\n\nFor just-in-time user creation and provisioning, use the following attributes.\n\n- `auto_create`\n- `username`\n\nTo assign privileges to the new user, specify the group name or GUID in `group_identifiers`.\n\nTo add the user to an Org, send the `Org ID` in the API request.\n\n**Note**: This feature is only available for clusters with trusted authentication enabled.\n\nTo provision a new user, you need `ADMINISTRATION` (Can administer ThoughtSpot) privilege.\n\nundefined",
+        "description": "Gets authentication token that provides access to a specific metadata object. By default, the token obtained from ThoughtSpot is valid for 5 mins.\n\nYou can generate the token for a user by providing `username` and `password` (Basic authentication), or by using the cluster’s secret key (Trusted authentication). To generate a `secret_key` on your cluster, administrator must enable **Trusted authentication** in the **Develop** > **Customizations** > **Security Settings** page. For more information, see [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth).\n\nWhen both `password` and `secret_key` are included in the API request, `password` takes precedence.\n\n#### Just-in-time provisioning\n\nFor just-in-time user creation and provisioning, use the following attributes.\n\n- `auto_create`\n- `username`\n\nTo assign privileges to the new user, specify the group name or GUID in `group_identifiers`.\n\nTo add the user to an Org, send the `Org ID` in the API request.\n\n**Note**: This feature is only available for clusters with trusted authentication enabled.\n\nTo provision a new user, you need `ADMINISTRATION` (Can administer ThoughtSpot) privilege.\n\n",
         "tags": [
           "Authentication"
         ],
@@ -7973,7 +7973,7 @@
     "/api/rest/2.0/auth/token/full": {
       "post": {
         "operationId": "getFullAccessToken",
-        "description": "Gets authentication token that provides full access to ThoughtSpot application. By default, the token obtained remains valid for 5 mins.\n\nYou can generate the token for a user by providing `username` and `password` (Basic authentication), or by using the cluster’s secret key (Trusted authentication). To generate a `secret_key` on your cluster, administrator must enable **Trusted authentication** in the **Develop** > **Customizations** > **Security Settings** page. For more information, see [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth).\n\nWhen both `password` and `secret_key` are included in the API request, `password` takes precedence.\n\n#### Just-in-time provisioning\n\nFor just-in-time user creation and provisioning, use the following attributes.\n\n- `auto_create`\n- `username`\n\nTo assign privileges to the new user, specify the group name or GUID in `group_identifiers`.\n\nTo add the user to an Org, specify the Org ID in the `org_id` attribute.\n\n**Note**: This feature is only available for clusters with trusted authentication enabled.\n\nTo provision a new user, you need `ADMINISTRATION` (Can administer ThoughtSpot) privilege.\n\nundefined",
+        "description": "Gets authentication token that provides full access to ThoughtSpot application. By default, the token obtained remains valid for 5 mins.\n\nYou can generate the token for a user by providing `username` and `password` (Basic authentication), or by using the cluster’s secret key (Trusted authentication). To generate a `secret_key` on your cluster, administrator must enable **Trusted authentication** in the **Develop** > **Customizations** > **Security Settings** page. For more information, see [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth).\n\nWhen both `password` and `secret_key` are included in the API request, `password` takes precedence.\n\n#### Just-in-time provisioning\n\nFor just-in-time user creation and provisioning, use the following attributes.\n\n- `auto_create`\n- `username`\n\nTo assign privileges to the new user, specify the group name or GUID in `group_identifiers`.\n\nTo add the user to an Org, specify the Org ID in the `org_id` attribute.\n\n**Note**: This feature is only available for clusters with trusted authentication enabled.\n\nTo provision a new user, you need `ADMINISTRATION` (Can administer ThoughtSpot) privilege.\n\n",
         "tags": [
           "Authentication"
         ],
@@ -8107,7 +8107,7 @@
     "/api/rest/2.0/auth/session/logout": {
       "post": {
         "operationId": "logout",
-        "description": "Logs a user out of their current session.\n\nundefined",
+        "description": "Logs a user out of their current session.\n\n",
         "tags": [
           "Authentication"
         ],
@@ -8162,7 +8162,7 @@
     "/api/rest/2.0/auth/token/revoke": {
       "post": {
         "operationId": "revokeToken",
-        "description": "Revokes the authentication token issued for current user session.\n\nThe token of your current session expires when you make a call to the `/api/rest/2.0/auth/token/revoke` endpoint.\nthe users will not be able to access ThoughtSpot objects until a new token is obtained.\n\nTo start the session, request for a new token from ThoughtSpot. See [Get Object Access Token](/http/api-endpoints/authentication/get-object-access-token)\nand [Get Full Access Token](http/api-endpoints/authentication/get-full-access-token).\n\nundefined",
+        "description": "Revokes the authentication token issued for current user session.\n\nThe token of your current session expires when you make a call to the `/api/rest/2.0/auth/token/revoke` endpoint.\nthe users will not be able to access ThoughtSpot objects until a new token is obtained.\n\nTo start the session, request for a new token from ThoughtSpot. See [Get Object Access Token](/http/api-endpoints/authentication/get-object-access-token)\nand [Get Full Access Token](http/api-endpoints/authentication/get-full-access-token).\n\n",
         "tags": [
           "Authentication"
         ],
@@ -8236,7 +8236,7 @@
     "/api/rest/2.0/users/create": {
       "post": {
         "operationId": "createUser",
-        "description": "Creates a user in ThoughtSpot. The API endpoint also allows you to add user properties such as email address, account status, share notification preferences, and sharing visibility. You can also assign the user to groups and Orgs, and set favorite objects.\n\nRequires ADMINISTRATION (Can administer Thoughtspot) privilege.\n\nundefined",
+        "description": "Creates a user in ThoughtSpot. The API endpoint also allows you to add user properties such as email address, account status, share notification preferences, and sharing visibility. You can also assign the user to groups and Orgs, and set favorite objects.\n\nRequires ADMINISTRATION (Can administer Thoughtspot) privilege.\n\n",
         "tags": [
           "Users"
         ],
@@ -8477,7 +8477,7 @@
     "/api/rest/2.0/users/{user_identifier}/update": {
       "post": {
         "operationId": "updateUser",
-        "description": "Updates properties of a user object. You can modify username, reset password, assign groups or remove the user from a group, and modify user preferences.\n\nRequires ADMINISTRATION (Can administer Thoughtspot) privilege.\n\nundefined",
+        "description": "Updates properties of a user object. You can modify username, reset password, assign groups or remove the user from a group, and modify user preferences.\n\nRequires ADMINISTRATION (Can administer Thoughtspot) privilege.\n\n",
         "tags": [
           "Users"
         ],
@@ -8660,7 +8660,7 @@
     "/api/rest/2.0/users/{user_identifier}/delete": {
       "post": {
         "operationId": "deleteUser",
-        "description": "Deletes a user from the ThoughtSpot system.\n\nIf you want to remove a user from a specific Org, update the group and Org mapping properties of the user object via a POST API call to the [/api/rest/2.0/users/{user_identifier}/update](#/http/api-endpoints/users/update-user) endpoint.\n\nRequires ADMINISTRATION (Can administer Thoughtspot) privilege.\n\nundefined",
+        "description": "Deletes a user from the ThoughtSpot system.\n\nIf you want to remove a user from a specific Org, update the group and Org mapping properties of the user object via a POST API call to the [/api/rest/2.0/users/{user_identifier}/update](#/http/api-endpoints/users/update-user) endpoint.\n\nRequires ADMINISTRATION (Can administer Thoughtspot) privilege.\n\n",
         "tags": [
           "Users"
         ],
@@ -8844,7 +8844,7 @@
     "/api/rest/2.0/users/change-password": {
       "post": {
         "operationId": "changeUserPassword",
-        "description": "Updates the current password of a ThoughtSpot user.\n\nRequires ADMINISTRATION (Can administer Thoughtspot) privilege.\n\nundefined",
+        "description": "Updates the current password of a ThoughtSpot user.\n\nRequires ADMINISTRATION (Can administer Thoughtspot) privilege.\n\n",
         "tags": [
           "Users"
         ],
@@ -8931,7 +8931,7 @@
     "/api/rest/2.0/users/reset-password": {
       "post": {
         "operationId": "resetUserPassword",
-        "description": "Resets the password of a user account. Administrators can reset password on behalf of a user.\n\nRequires ADMINISTRATION (Can administer Thoughtspot) privilege.\n\nundefined",
+        "description": "Resets the password of a user account. Administrators can reset password on behalf of a user.\n\nRequires ADMINISTRATION (Can administer Thoughtspot) privilege.\n\n",
         "tags": [
           "Users"
         ],
@@ -9012,7 +9012,7 @@
     "/api/rest/2.0/users/force-logout": {
       "post": {
         "operationId": "forceLogoutUsers",
-        "description": "Forces logout on user sessions. Note the following points. This API operation makes a user session invalid and forces the user to re-login.\n\n- Use this API with caution as it may invalidate active user sessions and force users to re-login.\n\n- Make sure you specify the usernames or GUIDs. If you pass null values in the API call, all user sessions on your cluster become invalid, and the users are forced to re-login.\n\nRequires ADMINISTRATION (Can administer Thoughtspot) privilege.\n\nundefined",
+        "description": "Forces logout on user sessions. Note the following points. This API operation makes a user session invalid and forces the user to re-login.\n\n- Use this API with caution as it may invalidate active user sessions and force users to re-login.\n\n- Make sure you specify the usernames or GUIDs. If you pass null values in the API call, all user sessions on your cluster become invalid, and the users are forced to re-login.\n\nRequires ADMINISTRATION (Can administer Thoughtspot) privilege.\n\n",
         "tags": [
           "Users"
         ],
@@ -10330,7 +10330,7 @@
     "/api/rest/2.0/groups/import": {
       "post": {
         "operationId": "importUserGroups",
-        "description": "Imports user data from external databases into ThoughtSpot. During the user import operation:\n\n- If the specified users are not available in ThoughtSpot, the users are created and assigned a default password. The default_password definition in the API request is optional.\n- If the `delete_unspecified_users` property is set to `true`, users not specified in the API request, excluding `tsadmin`, `guest`, `system` and `su` users, are deleted.\n- If the specified user objects are already available in ThoughtSpot, the object properties of these users are modified and synchronized as per the input data in the API request.\n\nA successful API call returns the object that represents the changes made in the ThoughtSpot system.\n\nRequires ADMINISTRATION (Can administer Thoughtspot) privilege.\n\nundefined",
+        "description": "Imports user data from external databases into ThoughtSpot. During the user import operation:\n\n- If the specified users are not available in ThoughtSpot, the users are created and assigned a default password. The default_password definition in the API request is optional.\n- If the `delete_unspecified_users` property is set to `true`, users not specified in the API request, excluding `tsadmin`, `guest`, `system` and `su` users, are deleted.\n- If the specified user objects are already available in ThoughtSpot, the object properties of these users are modified and synchronized as per the input data in the API request.\n\nA successful API call returns the object that represents the changes made in the ThoughtSpot system.\n\nRequires ADMINISTRATION (Can administer Thoughtspot) privilege.\n\n",
         "tags": [
           "Groups"
         ],
