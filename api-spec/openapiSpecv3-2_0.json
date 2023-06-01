@@ -43,9 +43,10 @@
     "/api/rest/2.0/auth/session/user": {
       "get": {
         "operationId": "getCurrentUserInfo",
-        "description": "Get session information for the currently logged-in user.",
+        "description": "Get session information for the currently logged-in user. <br/>  <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>",
         "tags": [
-          "Authentication"
+          "Authentication",
+          "9.4.0.cl"
         ],
         "parameters": [],
         "responses": {
@@ -405,9 +406,10 @@
     "/api/rest/2.0/system": {
       "get": {
         "operationId": "getSystemInformation",
-        "description": "Get system details",
+        "description": "Get system details <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "System"
+          "System",
+          "9.0.0.cl"
         ],
         "parameters": [],
         "responses": {
@@ -706,9 +708,10 @@
     "/api/rest/2.0/tags/search": {
       "post": {
         "operationId": "searchTags",
-        "description": "Allows searching tags.",
+        "description": "Allows searching tags. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Tags"
+          "Tags",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -3488,9 +3491,10 @@
     "/api/rest/2.0/users/{user_identifier}/update": {
       "post": {
         "operationId": "updateUser",
-        "description": "Updates a given user object. Requires administrator privileges.",
+        "description": "Updates a given user object. Requires administrator privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Users"
+          "Users",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -3671,9 +3675,10 @@
     "/api/rest/2.0/users/{user_identifier}/delete": {
       "post": {
         "operationId": "deleteUser",
-        "description": "Deletes a user. Requires administrator privileges.",
+        "description": "Deletes a user. Requires administrator privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Users"
+          "Users",
+          "9.0.0.cl"
         ],
         "parameters": [
           {
@@ -3737,9 +3742,10 @@
     "/api/rest/2.0/users/import": {
       "post": {
         "operationId": "importUsers",
-        "description": "Imports user data from external databases to ThoughtSpot.",
+        "description": "Imports user data from external databases to ThoughtSpot. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Users"
+          "Users",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -3841,9 +3847,10 @@
     "/api/rest/2.0/users/change-password": {
       "post": {
         "operationId": "changeUserPassword",
-        "description": "Allows changing the password of a ThoughtSpot user account.",
+        "description": "Allows changing the password of a ThoughtSpot user account. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Users"
+          "Users",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -3928,9 +3935,10 @@
     "/api/rest/2.0/users/reset-password": {
       "post": {
         "operationId": "resetUserPassword",
-        "description": "Resets the password of a ThoughtSpot user account.",
+        "description": "Resets the password of a ThoughtSpot user account. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Users"
+          "Users",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -4009,9 +4017,10 @@
     "/api/rest/2.0/users/force-logout": {
       "post": {
         "operationId": "forceLogoutUsers",
-        "description": "Logs out a user from their current session. This API operation makes\na user session invalid and forces the user to re-login.",
+        "description": "Logs out a user from their current session. This API operation makes\na user session invalid and forces the user to re-login. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Users"
+          "Users",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
