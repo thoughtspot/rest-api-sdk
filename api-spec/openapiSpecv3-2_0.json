@@ -186,7 +186,12 @@
                         "DEVELOPER",
                         "USER_ADMINISTRATION",
                         "GROUP_ADMINISTRATION",
-                        "SYNCMANAGEMENT"
+                        "SYNCMANAGEMENT",
+                        "CAN_CREATE_CATALOG",
+                        "DISABLE_PINBOARD_CREATION",
+                        "ENABLESPOTAPPCREATION",
+                        "LIVEBOARD_VERIFIER",
+                        "PREVIEW_THOUGHTSPOT_SAGE"
                       ]
                     },
                     "deprecated": false
@@ -293,6 +298,7 @@
             }
           }
         },
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -553,6 +559,7 @@
             }
           }
         },
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -631,6 +638,7 @@
             }
           }
         },
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -746,7 +754,12 @@
                         "DEVELOPER",
                         "USER_ADMINISTRATION",
                         "GROUP_ADMINISTRATION",
-                        "SYNCMANAGEMENT"
+                        "SYNCMANAGEMENT",
+                        "CAN_CREATE_CATALOG",
+                        "DISABLE_PINBOARD_CREATION",
+                        "ENABLESPOTAPPCREATION",
+                        "LIVEBOARD_VERIFIER",
+                        "PREVIEW_THOUGHTSPOT_SAGE"
                       ]
                     },
                     "deprecated": false
@@ -817,6 +830,7 @@
             }
           }
         },
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -1029,6 +1043,7 @@
             }
           }
         },
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -1114,6 +1129,7 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -1185,6 +1201,7 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -1301,6 +1318,7 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -1394,6 +1412,7 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -1476,6 +1495,7 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -1565,6 +1585,7 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -1654,6 +1675,16 @@
                     "type": "integer",
                     "format": "int32",
                     "deprecated": false
+                  },
+                  "runtime_filter": {
+                    "description": "JSON object representing filter condition to filter the data.",
+                    "type": "object",
+                    "deprecated": false
+                  },
+                  "runtime_sort": {
+                    "description": "JSON object representing columns to sort the data.",
+                    "type": "object",
+                    "deprecated": false
                   }
                 },
                 "required": [
@@ -1665,6 +1696,7 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -1765,13 +1797,11 @@
                   },
                   "runtime_filter": {
                     "description": "JSON object representing filter condition to filter the data.",
-                    "default": "",
                     "type": "object",
                     "deprecated": false
                   },
                   "runtime_sort": {
                     "description": "JSON object representing columns to sort the data.",
-                    "default": "",
                     "type": "object",
                     "deprecated": false
                   }
@@ -1784,6 +1814,7 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -1871,13 +1902,11 @@
                   },
                   "runtime_filter": {
                     "description": "JSON object representing filter condition to filter the data.",
-                    "default": "",
                     "type": "object",
                     "deprecated": false
                   },
                   "runtime_sort": {
                     "description": "JSON object representing columns to sort the data.",
-                    "default": "",
                     "type": "object",
                     "deprecated": false
                   }
@@ -1890,6 +1919,7 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -1976,6 +2006,7 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -2053,6 +2084,7 @@
             }
           }
         },
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -2151,14 +2183,14 @@
                   }
                 },
                 "required": [
-                  "metadata_identifier",
-                  "metadata_type"
+                  "metadata_identifier"
                 ]
               }
             }
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -2302,6 +2334,7 @@
             }
           }
         },
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -2466,6 +2499,7 @@
             }
           }
         },
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -2556,6 +2590,7 @@
             }
           }
         },
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -2603,7 +2638,7 @@
     "/api/rest/2.0/auth/token/object": {
       "post": {
         "operationId": "getObjectAccessToken",
-        "description": " To programmatically create object session token for a user in ThoughtSpot, use this endpoint. \n\nYou can generate the token for a user by providing password or secret key from the cluster. \n\nYou need to enable trusted authentication to generate secret key. To generate secret key, follow below steps. \n\n\n 1. Click the Develop tab. \n\n\n 2. Under Customizations, click Settings. \n\n\n 3. To enable trusted authentication, turn on the toggle. \n\n\n 4. A secret_key for trusted authentication is generated. \n\n\n 5. Click the clipboard icon to copy the token. \n\n\n \n\nPassword is given precedence over secretKey input, when both are included in the request.",
+        "description": " To programmatically create an object session token for a user in ThoughtSpot, use this endpoint.\n\nYou can generate the token for a user by providing username and password (basic authentication) or by using the cluster’s secret key (trusted authentication). \n\nYou need to enable trusted authentication to generate a secret key. To generate a secret key, follow below steps. \n\n\n 1. Click the Develop tab. \n\n\n 2. Under Customizations, click on Security Settings. \n\n\n 3. To enable trusted authentication, turn on the toggle. \n\n\n 4. A secret_key for trusted authentication is generated. \n\n\n 5. Click the clipboard icon to copy the token. \n\n\n \n\nPassword is given precedence over secretKey input, when both are included in the request. ",
         "tags": [
           "Authentication"
         ],
@@ -2651,18 +2686,16 @@
                   },
                   "email": {
                     "description": "Indicates email id of the user. Use this parameter to provision a user just-in-time (JIT).",
-                    "default": "",
                     "type": "string",
                     "deprecated": false
                   },
                   "display_name": {
                     "description": "Indicates display name of the user. Use this parameter to provision a user just-in-time (JIT).",
-                    "default": "",
                     "type": "string",
                     "deprecated": false
                   },
                   "auto_create": {
-                    "description": "“Creates a new user if the specified username does not already exist in ThoughtSpot. Use this parameter to provision a user just-in-time (JIT).",
+                    "description": "“Creates a new user if the specified username does not already exist in ThoughtSpot. Use this parameter to provision a user just-in-time (JIT) \n\n\nNote: This is only available for clusters with trusted authentication enabled. ",
                     "default": false,
                     "type": "boolean",
                     "deprecated": false,
@@ -2686,6 +2719,7 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -2727,13 +2761,14 @@
               }
             }
           }
-        }
+        },
+        "security": []
       }
     },
     "/api/rest/2.0/auth/token/full": {
       "post": {
         "operationId": "getFullAccessToken",
-        "description": " To programmatically create full session token for a user in ThoughtSpot, use this endpoint. \n\nYou can generate the token for a user by providing password or secret key from the cluster. \n\nYou need to enable trusted authentication to generate secret key. To generate secret key, follow below steps. \n\n\n 1. Click the Develop tab. \n\n\n 2. Under Customizations, click Settings. \n\n\n 3. To enable trusted authentication, turn on the toggle. \n\n\n 4. A secret_key for trusted authentication is generated. \n\n\n 5. Click the clipboard icon to copy the token. \n\n\n \n\nPassword is given precedence over secretKey input, when both are included in the request.",
+        "description": " To programmatically create a full session token for a user in ThoughtSpot, use this endpoint.\n\nYou can generate the token for a user by providing username and password (basic authentication) or by using the cluster’s secret key (trusted authentication). \n\n\n You need to enable trusted authentication to generate a secret key. To generate a secret key, follow below steps. \n\n\n 1. Click the Develop tab. \n\n\n 2. Under Customizations, click on Security Settings. \n\n\n 3. To enable trusted authentication, turn on the toggle. \n\n\n 4. A secret_key for trusted authentication is generated. \n\n\n 5. Click the clipboard icon to copy the token. \n\n\n \n\nPassword is given precedence over secretKey input, when both are included in the request. ",
         "tags": [
           "Authentication"
         ],
@@ -2776,18 +2811,16 @@
                   },
                   "email": {
                     "description": "Indicates email id of the user. Use this parameter to provision a user just-in-time (JIT).",
-                    "default": "",
                     "type": "string",
                     "deprecated": false
                   },
                   "display_name": {
                     "description": "Indicates display name of the user. Use this parameter to provision a user just-in-time (JIT).",
-                    "default": "",
                     "type": "string",
                     "deprecated": false
                   },
                   "auto_create": {
-                    "description": "Creates a new user if the specified username does not already exist in ThoughtSpot. Use this parameter to provision a user just-in-time (JIT).",
+                    "description": "   Creates a new user if the specified username does not already exist in ThoughtSpot. Use this parameter to provision a user just-in-time (JIT). \n\nNote: This is only available for clusters with trusted authentication enabled.",
                     "default": false,
                     "type": "boolean",
                     "deprecated": false,
@@ -2810,6 +2843,7 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -2851,7 +2885,8 @@
               }
             }
           }
-        }
+        },
+        "security": []
       }
     },
     "/api/rest/2.0/auth/session/logout": {
@@ -2861,16 +2896,7 @@
         "tags": [
           "Authentication"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {}
-              }
-            }
-          }
-        },
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -2941,6 +2967,7 @@
             }
           }
         },
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -3116,6 +3143,7 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -3173,11 +3201,6 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "user_identifier": {
-                    "description": "GUID / name of the user",
-                    "type": "string",
-                    "deprecated": false
-                  },
                   "name": {
                     "description": "Name of the user. The username string must be unique.",
                     "type": "string",
@@ -3284,15 +3307,23 @@
                     ],
                     "deprecated": false
                   }
-                },
-                "required": [
-                  "user_identifier"
-                ]
+                }
               }
             }
-          },
-          "required": true
+          }
         },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "user_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "GUID / name of the user",
+            "deprecated": false
+          }
+        ],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -3344,26 +3375,18 @@
         "tags": [
           "Users"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "user_identifier": {
-                    "description": "GUID / name of the user",
-                    "type": "string",
-                    "deprecated": false
-                  }
-                },
-                "required": [
-                  "user_identifier"
-                ]
-              }
-            }
-          },
-          "required": true
-        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "user_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "GUID / name of the user",
+            "deprecated": false
+          }
+        ],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -3457,6 +3480,7 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -3540,6 +3564,7 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -3617,6 +3642,7 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -3687,6 +3713,7 @@
             }
           }
         },
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -3758,6 +3785,7 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -3834,6 +3862,7 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -3891,11 +3920,6 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "org_identifier": {
-                    "description": "ID or name of the Org.",
-                    "type": "string",
-                    "deprecated": false
-                  },
                   "name": {
                     "description": "Name of the Org.",
                     "type": "string",
@@ -3913,16 +3937,35 @@
                       "type": "string"
                     },
                     "deprecated": false
+                  },
+                  "operation": {
+                    "description": "Type of update operation. Default operation type is ADD",
+                    "default": "ADD",
+                    "type": "string",
+                    "enum": [
+                      "ADD",
+                      "REMOVE",
+                      "REPLACE"
+                    ],
+                    "deprecated": false
                   }
-                },
-                "required": [
-                  "org_identifier"
-                ]
+                }
               }
             }
-          },
-          "required": true
+          }
         },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "org_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID or name of the Org.",
+            "deprecated": false
+          }
+        ],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -3974,26 +4017,18 @@
         "tags": [
           "Orgs"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "org_identifier": {
-                    "description": "ID or name of the Org.",
-                    "type": "string",
-                    "deprecated": false
-                  }
-                },
-                "required": [
-                  "org_identifier"
-                ]
-              }
-            }
-          },
-          "required": true
-        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "org_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID or name of the Org.",
+            "deprecated": false
+          }
+        ],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -4063,14 +4098,14 @@
                   }
                 },
                 "required": [
-                  "name",
-                  "color"
+                  "name"
                 ]
               }
             }
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -4128,11 +4163,6 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "tag_identifier": {
-                    "description": "Name or Id of the tag.",
-                    "type": "string",
-                    "deprecated": false
-                  },
                   "name": {
                     "description": "Name of the tag.",
                     "type": "string",
@@ -4143,15 +4173,23 @@
                     "type": "string",
                     "deprecated": false
                   }
-                },
-                "required": [
-                  "tag_identifier"
-                ]
+                }
               }
             }
-          },
-          "required": true
+          }
         },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "tag_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Name or Id of the tag.",
+            "deprecated": false
+          }
+        ],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -4203,26 +4241,18 @@
         "tags": [
           "Tags"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "tag_identifier": {
-                    "description": "Tag identifier Tag name or Tag id.",
-                    "type": "string",
-                    "deprecated": false
-                  }
-                },
-                "required": [
-                  "tag_identifier"
-                ]
-              }
-            }
-          },
-          "required": true
-        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "tag_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Tag identifier Tag name or Tag id.",
+            "deprecated": false
+          }
+        ],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -4306,6 +4336,7 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -4389,6 +4420,7 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -4490,7 +4522,12 @@
                         "DEVELOPER",
                         "USER_ADMINISTRATION",
                         "GROUP_ADMINISTRATION",
-                        "SYNCMANAGEMENT"
+                        "SYNCMANAGEMENT",
+                        "CAN_CREATE_CATALOG",
+                        "DISABLE_PINBOARD_CREATION",
+                        "ENABLESPOTAPPCREATION",
+                        "LIVEBOARD_VERIFIER",
+                        "PREVIEW_THOUGHTSPOT_SAGE"
                       ]
                     },
                     "deprecated": false
@@ -4549,6 +4586,7 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -4606,11 +4644,6 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "group_identifier": {
-                    "description": "GUID or name of the group.",
-                    "type": "string",
-                    "deprecated": false
-                  },
                   "name": {
                     "description": "Name of the group to modify.",
                     "type": "string",
@@ -4655,7 +4688,12 @@
                         "DEVELOPER",
                         "USER_ADMINISTRATION",
                         "GROUP_ADMINISTRATION",
-                        "SYNCMANAGEMENT"
+                        "SYNCMANAGEMENT",
+                        "CAN_CREATE_CATALOG",
+                        "DISABLE_PINBOARD_CREATION",
+                        "ENABLESPOTAPPCREATION",
+                        "LIVEBOARD_VERIFIER",
+                        "PREVIEW_THOUGHTSPOT_SAGE"
                       ]
                     },
                     "deprecated": false
@@ -4713,15 +4751,23 @@
                     ],
                     "deprecated": false
                   }
-                },
-                "required": [
-                  "group_identifier"
-                ]
+                }
               }
             }
-          },
-          "required": true
+          }
         },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "group_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "GUID or name of the group.",
+            "deprecated": false
+          }
+        ],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -4773,26 +4819,18 @@
         "tags": [
           "Groups"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "group_identifier": {
-                    "description": "GUID or name of the group.",
-                    "type": "string",
-                    "deprecated": false
-                  }
-                },
-                "required": [
-                  "group_identifier"
-                ]
-              }
-            }
-          },
-          "required": true
-        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "group_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "GUID or name of the group.",
+            "deprecated": false
+          }
+        ],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -4877,6 +4915,7 @@
             }
           }
         },
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -4969,6 +5008,7 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -5073,6 +5113,7 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -5160,6 +5201,7 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -5245,6 +5287,7 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -5369,6 +5412,7 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -5443,7 +5487,7 @@
                     "deprecated": false
                   },
                   "org_identifier": {
-                    "description": "Unique identifier of the organization. If no value is providedthen user will be created in the organization associated with the login session. Provide value -1 for cluster level. Example : OrgID1-or-Name1 <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
+                    "description": "Unique identifier of the organization. If no value is provided then user will be created in the organization associated with the login session. Provide value -1 for cluster level. Example : OrgID1-or-Name1 <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
                     "type": "string",
                     "deprecated": false
                   },
@@ -5456,9 +5500,9 @@
                     "deprecated": false
                   },
                   "default_branch": {
-                    "description": "Name of the default remote branch <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>",
+                    "description": "    Name of the default remote branch\n        \n\nNote: *Deprecated since 9.3.0.cl :Replaced by default_branch_name* <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>",
                     "type": "string",
-                    "deprecated": false
+                    "deprecated": true
                   },
                   "default_branch_name": {
                     "description": "Name of the default remote branch <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.3.0.cl or later</span>",
@@ -5488,6 +5532,7 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -5557,7 +5602,7 @@
                     "deprecated": false
                   },
                   "org_identifier": {
-                    "description": "Unique identifier of the organization. If no value is providedthen user will be created in the organization associated with the login session. Provide value -1 for cluster level. Example : OrgID1-or-Name1 <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
+                    "description": "Unique identifier of the organization. If no value is provided then user will be created in the organization associated with the login session. Provide value -1 for cluster level. Example : OrgID1-or-Name1 <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
                     "type": "string",
                     "deprecated": false
                   },
@@ -5570,9 +5615,9 @@
                     "deprecated": false
                   },
                   "default_branch": {
-                    "description": "Name of the default remote branch <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>",
+                    "description": "    Name of the default remote branch \n    \n\nNote: *Deprecated since 9.3.0.cl :Replaced by default_branch_name* <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>",
                     "type": "string",
-                    "deprecated": false
+                    "deprecated": true
                   },
                   "default_branch_name": {
                     "description": "Name of the default remote branch <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.3.0.cl or later</span>",
@@ -5595,6 +5640,7 @@
             }
           }
         },
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -5664,6 +5710,7 @@
             }
           }
         },
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -5711,31 +5758,23 @@
     "/api/rest/2.0/vcs/git/branches/{branch_name}/pull": {
       "post": {
         "operationId": "pullBranch",
-        "description": "Pull a branch from remote repository to local repository. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>",
+        "description": "  Pull a branch from remote repository to local repository.\n  \n\nNote: *Deprecated since 9.3.0.cl : Replaced by /vcs/git/config/create* <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>",
         "tags": [
           "Version Control",
           "9.2.0.cl"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "branch_name": {
-                    "description": "Name of the branch to pull",
-                    "type": "string",
-                    "deprecated": false
-                  }
-                },
-                "required": [
-                  "branch_name"
-                ]
-              }
-            }
-          },
-          "required": true
-        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "branch_name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Name of the branch to pull",
+            "deprecated": false
+          }
+        ],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -5822,6 +5861,7 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -5880,11 +5920,6 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "commit_id": {
-                    "description": "Commit id to which the object should be reverted",
-                    "type": "string",
-                    "deprecated": false
-                  },
                   "metadata": {
                     "description": "Metadata objects.",
                     "type": "array",
@@ -5908,15 +5943,23 @@
                     ],
                     "deprecated": false
                   }
-                },
-                "required": [
-                  "commit_id"
-                ]
+                }
               }
             }
-          },
-          "required": true
+          }
         },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "commit_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Commit id to which the object should be reverted",
+            "deprecated": false
+          }
+        ],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -5995,6 +6038,7 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -6070,14 +6114,14 @@
                     "deprecated": false
                   },
                   "import_type": {
-                    "description": "Indicates if all files or only modified file at specified commit point should be considered <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>",
+                    "description": "    Indicates if all files or only modified file at specified commit point should be considered\n    \n\nNote: *Deprecated since 9.3.0.cl :Replaced by deploy_type* <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>",
                     "default": "DELTA",
                     "type": "string",
                     "enum": [
                       "FULL",
                       "DELTA"
                     ],
-                    "deprecated": false
+                    "deprecated": true
                   },
                   "deploy_type": {
                     "description": "Indicates if all files or only modified file at specified commit point should be considered <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.3.0.cl or later</span>",
@@ -6104,6 +6148,7 @@
             }
           }
         },
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -6220,6 +6265,7 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -6291,6 +6337,7 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -6384,6 +6431,7 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -6489,6 +6537,7 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -6546,11 +6595,6 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "role_identifier": {
-                    "description": "Unique ID or name of the role.",
-                    "type": "string",
-                    "deprecated": false
-                  },
                   "name": {
                     "description": "Name of the Role.",
                     "type": "string",
@@ -6592,7 +6636,6 @@
                   }
                 },
                 "required": [
-                  "role_identifier",
                   "name"
                 ]
               }
@@ -6600,6 +6643,18 @@
           },
           "required": true
         },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "role_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique ID or name of the role.",
+            "deprecated": false
+          }
+        ],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -6651,26 +6706,18 @@
         "tags": [
           "Roles"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "role_identifier": {
-                    "description": "Unique ID or name of the role.",
-                    "type": "string",
-                    "deprecated": false
-                  }
-                },
-                "required": [
-                  "role_identifier"
-                ]
-              }
-            }
-          },
-          "required": true
-        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "role_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique ID or name of the role.",
+            "deprecated": false
+          }
+        ],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -6768,7 +6815,7 @@
                   },
                   "pdf_options": {
                     "description": "Options for PDF export.",
-                    "$ref": "#/components/schemas/PdfOptionsInput",
+                    "$ref": "#/components/schemas/SchedulesPdfOptionsInput",
                     "deprecated": false
                   },
                   "time_zone": {
@@ -6801,6 +6848,7 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -6852,26 +6900,18 @@
         "tags": [
           "Schedules"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "schedule_identifier": {
-                    "description": "Unique ID or name of the schedule.",
-                    "type": "string",
-                    "deprecated": false
-                  }
-                },
-                "required": [
-                  "schedule_identifier"
-                ]
-              }
-            }
-          },
-          "required": true
-        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "schedule_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique ID or name of the schedule.",
+            "deprecated": false
+          }
+        ],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -6951,7 +6991,12 @@
                   },
                   "sort_options": {
                     "description": "Sort options.",
-                    "$ref": "#/components/schemas/SortOptions",
+                    "$ref": "#/components/schemas/SortingOptions",
+                    "deprecated": false
+                  },
+                  "history_runs_options": {
+                    "description": "Options while fetching history runs wrt to the schedule.",
+                    "$ref": "#/components/schemas/ScheduleHistoryRunsOptionsInput",
                     "deprecated": false
                   }
                 }
@@ -6959,6 +7004,7 @@
             }
           }
         },
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -7048,6 +7094,10 @@
                   "file_format": {
                     "description": "Export file format.",
                     "type": "string",
+                    "enum": [
+                      "CSV",
+                      "PDF"
+                    ],
                     "deprecated": false
                   },
                   "liveboard_options": {
@@ -7057,7 +7107,7 @@
                   },
                   "pdf_options": {
                     "description": "Options for PDF export.",
-                    "$ref": "#/components/schemas/PdfOptionsInput",
+                    "$ref": "#/components/schemas/SchedulesPdfOptionsInput",
                     "deprecated": false
                   },
                   "time_zone": {
@@ -7075,20 +7125,32 @@
                     "$ref": "#/components/schemas/RecipientDetailsInput",
                     "deprecated": false
                   },
-                  "schedule_identifier": {
-                    "description": "Unique ID or name of the schedule.",
+                  "status": {
+                    "description": "Status of the schedule",
                     "type": "string",
+                    "enum": [
+                      "ACTIVE",
+                      "PAUSE"
+                    ],
                     "deprecated": false
                   }
-                },
-                "required": [
-                  "schedule_identifier"
-                ]
+                }
               }
             }
-          },
-          "required": true
+          }
         },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "schedule_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique ID or name of the schedule.",
+            "deprecated": false
+          }
+        ],
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -7309,25 +7371,7 @@
           "privileges": {
             "type": "array",
             "items": {
-              "type": "string",
-              "enum": [
-                "ADMINISTRATION",
-                "AUTHORING",
-                "USERDATAUPLOADING",
-                "DATADOWNLOADING",
-                "USERMANAGEMENT",
-                "DATAMANAGEMENT",
-                "SHAREWITHALL",
-                "JOBSCHEDULING",
-                "A3ANALYSIS",
-                "EXPERIMENTALFEATUREPRIVILEGE",
-                "BYPASSRLS",
-                "RANALYSIS",
-                "DEVELOPER",
-                "USER_ADMINISTRATION",
-                "GROUP_ADMINISTRATION",
-                "SYNCMANAGEMENT"
-              ]
+              "type": "string"
             },
             "description": "Privileges which are assigned to the user."
           },
@@ -7592,7 +7636,8 @@
             "enum": [
               "LIVEBOARD",
               "ANSWER",
-              "LOGICAL_TABLE"
+              "LOGICAL_TABLE",
+              "CONNECTION"
             ],
             "description": "Type of metadata (Optional when given identifier is ID)."
           },
@@ -7784,6 +7829,25 @@
             "description": "Data content of metadata objects."
           }
         }
+      },
+      "Org": {
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The ID of the object."
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the object."
+          }
+        },
+        "description": "Current logged in Organizations of the user."
       },
       "GenericInfo": {
         "type": "object",
@@ -8149,25 +8213,7 @@
           "privileges": {
             "type": "array",
             "items": {
-              "type": "string",
-              "enum": [
-                "ADMINISTRATION",
-                "AUTHORING",
-                "USERDATAUPLOADING",
-                "DATADOWNLOADING",
-                "USERMANAGEMENT",
-                "DATAMANAGEMENT",
-                "SHAREWITHALL",
-                "JOBSCHEDULING",
-                "A3ANALYSIS",
-                "EXPERIMENTALFEATUREPRIVILEGE",
-                "BYPASSRLS",
-                "RANALYSIS",
-                "DEVELOPER",
-                "USER_ADMINISTRATION",
-                "GROUP_ADMINISTRATION",
-                "SYNCMANAGEMENT"
-              ]
+              "type": "string"
             },
             "description": "Privileges which are assigned to the user group."
           },
@@ -8550,7 +8596,7 @@
             "description": "Name of the branch where file containing guid mapping should be maintained"
           },
           "org": {
-            "$ref": "#/components/schemas/OrgType",
+            "$ref": "#/components/schemas/Org",
             "description": "Details of the organization"
           }
         }
@@ -8956,7 +9002,12 @@
                 "DEVELOPER",
                 "USER_ADMINISTRATION",
                 "GROUP_ADMINISTRATION",
-                "SYNCMANAGEMENT"
+                "SYNCMANAGEMENT",
+                "CAN_CREATE_CATALOG",
+                "DISABLE_PINBOARD_CREATION",
+                "ENABLESPOTAPPCREATION",
+                "LIVEBOARD_VERIFIER",
+                "PREVIEW_THOUGHTSPOT_SAGE"
               ]
             },
             "description": "Privileges which will be assigned to the user group."
@@ -9037,8 +9088,7 @@
       "MetadataObject": {
         "type": "object",
         "required": [
-          "identifier",
-          "type"
+          "identifier"
         ],
         "properties": {
           "identifier": {
@@ -9293,6 +9343,7 @@
           "file_format",
           "frequency",
           "id",
+          "metadata",
           "name",
           "time_zone"
         ],
@@ -9348,6 +9399,13 @@
           "time_zone": {
             "type": "string",
             "description": "Time zone"
+          },
+          "history_runs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ResponseScheduleRun"
+            },
+            "description": "Schedule runs history records."
           }
         }
       },
@@ -9366,6 +9424,51 @@
           }
         },
         "description": "Options to specify details of liveboard."
+      },
+      "SchedulesPdfOptionsInput": {
+        "type": "object",
+        "properties": {
+          "complete_liveboard": {
+            "type": "boolean",
+            "description": "Indicates whether to include complete liveboard."
+          },
+          "include_cover_page": {
+            "type": "boolean",
+            "description": "Indicates whether to include cover page with the liveboard title."
+          },
+          "include_custom_logo": {
+            "type": "boolean",
+            "description": "Indicates whether to include customized wide logo in the footer if available."
+          },
+          "include_filter_page": {
+            "type": "boolean",
+            "description": "Indicates whether to include a page with all applied filters."
+          },
+          "include_page_number": {
+            "type": "boolean",
+            "description": "Indicates whether to include page number in the footer of each page"
+          },
+          "page_footer_text": {
+            "type": "string",
+            "description": "Text to include in the footer of each page."
+          },
+          "page_orientation": {
+            "type": "string",
+            "description": "Page orientation of the PDF."
+          },
+          "page_size": {
+            "type": "string",
+            "enum": [
+              "A4"
+            ],
+            "description": "Page size."
+          },
+          "truncate_table": {
+            "type": "boolean",
+            "description": "Indicates whether to include only first page of the tables."
+          }
+        },
+        "description": "Options for PDF export."
       },
       "FrequencyInput": {
         "type": "object",
@@ -9414,24 +9517,38 @@
           }
         }
       },
-      "Org": {
+      "SortingOptions": {
         "type": "object",
-        "required": [
-          "id",
-          "name"
-        ],
         "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The ID of the object."
-          },
-          "name": {
+          "field_name": {
             "type": "string",
-            "description": "Name of the object."
+            "description": "Name of the field to apply the sort on."
+          },
+          "order": {
+            "type": "string",
+            "description": "Sort order : ASC(Ascending) or DESC(Descending)."
           }
         },
-        "description": "Current logged in Organizations of the user."
+        "description": "Sort options."
+      },
+      "ScheduleHistoryRunsOptionsInput": {
+        "type": "object",
+        "properties": {
+          "include_history_runs": {
+            "type": "boolean",
+            "description": "Indicates whether to fetch history runs wrt to the schedule or not."
+          },
+          "record_size": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Indicates the max number of records that can be fetched as history runs wrt any scheduled job."
+          },
+          "record_offset": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Indicates the starting record number from where history runs records should be fetched."
+          }
+        }
       },
       "FavoriteMetadataItem": {
         "type": "object",
@@ -9646,15 +9763,6 @@
         },
         "description": "Response format associated with fetch SQL query api"
       },
-      "OrgType": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "Unique identifier of the organization."
-          }
-        }
-      },
       "CommiterType": {
         "type": "object",
         "required": [
@@ -9847,8 +9955,15 @@
       },
       "MetadataResponse": {
         "type": "object",
+        "required": [
+          "id",
+          "type"
+        ],
         "properties": {
-          "identifier": {
+          "name": {
+            "type": "string"
+          },
+          "id": {
             "type": "string"
           },
           "type": {
@@ -9892,6 +10007,9 @@
           },
           "page_size": {
             "type": "string",
+            "enum": [
+              "A4"
+            ],
             "description": "Page size."
           },
           "truncate_table": {
@@ -9920,6 +10038,40 @@
           }
         },
         "description": "Recipient configuration which includes emails and recipients of the schedule"
+      },
+      "ResponseScheduleRun": {
+        "type": "object",
+        "required": [
+          "id",
+          "start_time_in_millis",
+          "end_time_in_millis",
+          "status"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "GUID of the scheduled job."
+          },
+          "start_time_in_millis": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Schedule run start time in milliseconds."
+          },
+          "end_time_in_millis": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Schedule run end time in milliseconds."
+          },
+          "status": {
+            "type": "string",
+            "description": "Status of the schedule run."
+          },
+          "detail": {
+            "type": "string",
+            "description": "Message details related to the schedule run."
+          }
+        },
+        "description": "Schedule run response object"
       },
       "CronExpressionInput": {
         "type": "object",
