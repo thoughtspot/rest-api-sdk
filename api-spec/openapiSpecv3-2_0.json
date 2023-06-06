@@ -3050,7 +3050,7 @@
     "/api/rest/2.0/auth/session/login": {
       "post": {
         "operationId": "login",
-        "description": "\nCreates a login session for a ThoughtSpot user with Basic authentication. In Basic authentication method, REST clients log in to ThoughtSpot using `username` and `password` attributes.\n\nA successful login returns a session cookie that can be used in your subsequent API calls.\n\n#### Endpoint URL\n\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
+        "description": "Creates a login session for a ThoughtSpot user with Basic authentication. In Basic authentication method, REST clients log in to ThoughtSpot using `username` and `password` attributes.\n\nA successful login returns a session cookie that can be used in your subsequent API calls.\n\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
           "Authentication",
           "9.0.0.cl"
