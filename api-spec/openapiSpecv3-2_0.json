@@ -4,22 +4,131 @@
     "title": "ThoughtSpot Public REST API",
     "version": "2.0"
   },
+  "x-roles": [
+    {
+      "name": "9.0.0.cl",
+      "id": "9.0.0.cl",
+      "tags": [
+        "9.0.0.cl"
+      ],
+      "description": "Roles for version 9.0.0.cl"
+    },
+    {
+      "name": "9.2.0.cl",
+      "id": "9.2.0.cl",
+      "tags": [
+        "9.2.0.cl"
+      ],
+      "description": "Roles for version 9.2.0.cl"
+    },
+    {
+      "name": "9.5.0.cl",
+      "id": "9.5.0.cl",
+      "tags": [
+        "9.5.0.cl"
+      ],
+      "description": "Roles for version 9.5.0.cl"
+    },
+    {
+      "name": "9.4.0.cl",
+      "id": "9.4.0.cl",
+      "tags": [
+        "9.4.0.cl"
+      ],
+      "description": "Roles for version 9.4.0.cl"
+    }
+  ],
   "tags": [],
   "paths": {
     "/api/rest/2.0/auth/session/user": {
       "get": {
         "operationId": "getCurrentUserInfo",
-        "description": "Get session information for the currently logged-in user.",
+        "description": " <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Authentication"
+          "Authentication",
+          "9.0.0.cl"
         ],
         "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/auth/session/token": {
+      "get": {
+        "operationId": "getCurrentUserToken",
+        "description": "Get token for the currently logged-in user. <br/>  <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>",
+        "tags": [
+          "Authentication",
+          "9.4.0.cl"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTokenResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTokenResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -40,9 +149,10 @@
     "/api/rest/2.0/users/search": {
       "post": {
         "operationId": "searchUsers",
-        "description": "Gets a list of ThoughtSpot users. To get details of a specific user, specify the user GUID or name.  ",
+        "description": " <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Users"
+          "Users",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -194,15 +304,31 @@
                     "description": "Sort options.",
                     "$ref": "#/components/schemas/SortOptions",
                     "deprecated": false
+                  },
+                  "role_identifiers": {
+                    "description": "Filter with list of role assigned to the user.",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "deprecated": false
+                  },
+                  "include_favorite_metadata": {
+                    "description": "Indicates if the user's favorite objects should be displayed.",
+                    "default": false,
+                    "type": "boolean",
+                    "deprecated": false,
+                    "nullable": true
                   }
                 }
               }
             }
-          },
-          "required": true
+          }
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
@@ -210,6 +336,29 @@
                   "items": {
                     "$ref": "#/components/schemas/User"
                   }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -230,17 +379,39 @@
     "/api/rest/2.0/system": {
       "get": {
         "operationId": "getSystemInformation",
-        "description": "Get system details",
+        "description": "Get system details <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "System"
+          "System",
+          "9.0.0.cl"
         ],
         "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/SystemInfo"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SystemInfo"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -261,17 +432,39 @@
     "/api/rest/2.0/system/config": {
       "get": {
         "operationId": "getSystemConfig",
-        "description": "Get system config information",
+        "description": "Get system config information <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "System"
+          "System",
+          "9.0.0.cl"
         ],
         "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/SystemConfig"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SystemConfig"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -292,17 +485,39 @@
     "/api/rest/2.0/system/config-overrides": {
       "get": {
         "operationId": "getSystemOverrideInfo",
-        "description": "Get cluster override info.",
+        "description": "Get cluster override info. <br/>  <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>",
         "tags": [
-          "System"
+          "System",
+          "9.2.0.cl"
         ],
         "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -323,9 +538,10 @@
     "/api/rest/2.0/orgs/search": {
       "post": {
         "operationId": "searchOrgs",
-        "description": "Gets Orgs configured on a ThoughtSpot instance. Requires cluster administration privileges.",
+        "description": "Gets Orgs configured on a ThoughtSpot instance. Requires cluster administration privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Orgs"
+          "Orgs",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -372,11 +588,12 @@
                 }
               }
             }
-          },
-          "required": true
+          }
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
@@ -384,6 +601,29 @@
                   "items": {
                     "$ref": "#/components/schemas/OrgResponse"
                   }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/OrgResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -404,9 +644,10 @@
     "/api/rest/2.0/tags/search": {
       "post": {
         "operationId": "searchTags",
-        "description": "TAllows searching tags. ",
+        "description": "Allows searching tags. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Tags"
+          "Tags",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -427,11 +668,12 @@
                 }
               }
             }
-          },
-          "required": true
+          }
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
@@ -439,6 +681,29 @@
                   "items": {
                     "$ref": "#/components/schemas/Tag"
                   }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Tag"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -459,9 +724,10 @@
     "/api/rest/2.0/groups/search": {
       "post": {
         "operationId": "searchUserGroups",
-        "description": "Allows searching groups. Requires administrator privileges.",
+        "description": "Allows searching groups. Requires administrator privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Groups"
+          "Groups",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -557,22 +823,50 @@
                     "deprecated": false
                   },
                   "visibility": {
-                    "description": "Visibility of the group. To make a group visible to other users and groups,\nset the visibility to SHAREABLE. ",
+                    "description": "Visibility of the group. To make a group visible to other users and groups,\nset the visibility to SHAREABLE.",
                     "type": "string",
                     "enum": [
                       "SHARABLE",
                       "NON_SHARABLE"
                     ],
                     "deprecated": false
+                  },
+                  "role_identifiers": {
+                    "description": "Filter groups with a list of roles assigned to a group",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "deprecated": false
+                  },
+                  "record_offset": {
+                    "description": "The starting record number from where the records should be included.",
+                    "default": 0,
+                    "type": "integer",
+                    "format": "int32",
+                    "deprecated": false
+                  },
+                  "record_size": {
+                    "description": "The number of records that should be included.",
+                    "default": 10,
+                    "type": "integer",
+                    "format": "int32",
+                    "deprecated": false
+                  },
+                  "sort_options": {
+                    "description": "Sort options to filter group details.",
+                    "$ref": "#/components/schemas/SortOptions",
+                    "deprecated": false
                   }
                 }
               }
             }
-          },
-          "required": true
+          }
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
@@ -580,6 +874,29 @@
                   "items": {
                     "$ref": "#/components/schemas/UserGroupResponse"
                   }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserGroupResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -600,9 +917,10 @@
     "/api/rest/2.0/metadata/search": {
       "post": {
         "operationId": "searchMetadata",
-        "description": "Allows searching for metadata objects. You can search for metadata objects \nsuch as Liveboard, Answer. Requires at least view access to the metadata object.",
+        "description": "Allows searching for metadata objects. You can search for metadata objects\nsuch as Liveboard, Answer. Requires at least view access to the metadata object. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Metadata"
+          "Metadata",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -653,7 +971,7 @@
                     "deprecated": false
                   },
                   "favorite_object_options": {
-                    "description": "Options to sort the API response by objects set as favorites \nfor the logged-in user or the users specified in the API request.",
+                    "description": "Options to sort the API response by objects set as favorites\nfor the logged-in user or the users specified in the API request.",
                     "$ref": "#/components/schemas/FavoriteObjectOptionsInput",
                     "deprecated": false
                   },
@@ -707,7 +1025,7 @@
                     "nullable": true
                   },
                   "include_worksheet_search_assist_data": {
-                    "description": "If search assistance lessons are configured on a worksheet, \nthe API returns the search assist data for Worksheet objects.",
+                    "description": "If search assistance lessons are configured on a worksheet,\nthe API returns the search assist data for Worksheet objects.",
                     "type": "boolean",
                     "deprecated": false,
                     "nullable": true
@@ -736,7 +1054,7 @@
                   },
                   "sort_options": {
                     "description": "Sort options to filter metadata details.",
-                    "$ref": "#/components/schemas/SortOptions",
+                    "$ref": "#/components/schemas/MetadataSearchSortOptions",
                     "deprecated": false
                   },
                   "tag_identifiers": {
@@ -746,15 +1064,23 @@
                       "type": "string"
                     },
                     "deprecated": false
+                  },
+                  "include_stats": {
+                    "description": "Indicates whether to include stats of the metadata objects.",
+                    "default": false,
+                    "type": "boolean",
+                    "deprecated": false,
+                    "nullable": true
                   }
                 }
               }
             }
-          },
-          "required": true
+          }
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
@@ -762,6 +1088,29 @@
                   "items": {
                     "$ref": "#/components/schemas/MetadataSearchResponse"
                   }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MetadataSearchResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -782,9 +1131,10 @@
     "/api/rest/2.0/metadata/liveboard/sql": {
       "post": {
         "operationId": "fetchLiveboardSqlQuery",
-        "description": "Fetches SQL query data for Liveboard and its visualizations.",
+        "description": "Fetches SQL query data for Liveboard and its visualizations. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Metadata"
+          "Metadata",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -814,12 +1164,34 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/SqlQueryResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SqlQueryResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -840,9 +1212,10 @@
     "/api/rest/2.0/metadata/answer/sql": {
       "post": {
         "operationId": "fetchAnswerSqlQuery",
-        "description": "Fetches SQL query data for an Answer.",
+        "description": "Fetches SQL query data for an Answer. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Metadata"
+          "Metadata",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -864,12 +1237,34 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/SqlQueryResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SqlQueryResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -890,9 +1285,10 @@
     "/api/rest/2.0/report/liveboard": {
       "post": {
         "operationId": "exportLiveboardReport",
-        "description": "Exports Liveboard and visualization data in PDF, PNG, XLS, or CSV format.\nRequires at least view access to the Liveboard.",
+        "description": "Exports Liveboard and visualization data in PDF, PNG, XLS, or CSV format.\nRequires at least view access to the Liveboard. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Reports"
+          "Reports",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -906,7 +1302,7 @@
                     "deprecated": false
                   },
                   "visualization_identifiers": {
-                    "description": "GUID or name of visualizations on the Liveboard. If this parameter is \nnot defined, the API returns a report with all visualizations saved on a Liveboard.",
+                    "description": "GUID or name of visualizations on the Liveboard. If this parameter is\nnot defined, the API returns a report with all visualizations saved on a Liveboard.",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -949,6 +1345,11 @@
                     "description": "Options for PNG export.",
                     "$ref": "#/components/schemas/PngOptionsInput",
                     "deprecated": false
+                  },
+                  "runtime_param_override": {
+                    "description": "JSON object for setting values of parameters in runtime.",
+                    "type": "object",
+                    "deprecated": false
                   }
                 },
                 "required": [
@@ -959,12 +1360,34 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -985,9 +1408,10 @@
     "/api/rest/2.0/report/answer": {
       "post": {
         "operationId": "exportAnswerReport",
-        "description": "Export report file for Answer data.",
+        "description": "Export report file for Answer data. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Reports"
+          "Reports",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -1021,6 +1445,11 @@
                     "description": "JSON string representing runtime sort.\n{ sortCol1: region, asc1 :true, sortCol2 : date }",
                     "type": "object",
                     "deprecated": false
+                  },
+                  "runtime_param_override": {
+                    "description": "JSON object for setting values of parameters in runtime.",
+                    "type": "object",
+                    "deprecated": false
                   }
                 },
                 "required": [
@@ -1031,12 +1460,34 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -1057,9 +1508,10 @@
     "/api/rest/2.0/security/principals/fetch-permissions": {
       "post": {
         "operationId": "fetchPermissionsOfPrincipals",
-        "description": "Fetch permission details for principal objects, such as users and groups.",
+        "description": "Fetch permission details for principal objects, such as users and groups. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Security"
+          "Security",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -1076,7 +1528,7 @@
                     "deprecated": false
                   },
                   "metadata": {
-                    "description": "Metadata objects for which you want to fetch permission details. \nIf not specified, the API returns permission details for all \nmetadata objects that the specified users and groups can access.",
+                    "description": "Metadata objects for which you want to fetch permission details.\nIf not specified, the API returns permission details for all\nmetadata objects that the specified users and groups can access.",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/PermissionsMetadataTypeInput"
@@ -1092,12 +1544,34 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -1118,9 +1592,10 @@
     "/api/rest/2.0/security/metadata/fetch-permissions": {
       "post": {
         "operationId": "fetchPermissionsOnMetadata",
-        "description": "Fetch permission details for metadata objects",
+        "description": "Fetch permission details for metadata objects <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Security"
+          "Security",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -1137,7 +1612,7 @@
                     "deprecated": false
                   },
                   "principals": {
-                    "description": "Principal objects for which you want to fetch permissions. \nIf not specified, the API returns all users and groups that \ncan access the specified metadata objects.",
+                    "description": "Principal objects for which you want to fetch permissions.\nIf not specified, the API returns all users and groups that\ncan access the specified metadata objects.",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/PrincipalsInput"
@@ -1160,12 +1635,34 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -1186,9 +1683,10 @@
     "/api/rest/2.0/searchdata": {
       "post": {
         "operationId": "searchData",
-        "description": "Allows passing a search query string and retrieving data from ThoughtSpot.",
+        "description": "Allows passing a search query string and retrieving data from ThoughtSpot. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Data"
+          "Data",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -1228,6 +1726,21 @@
                     "type": "integer",
                     "format": "int32",
                     "deprecated": false
+                  },
+                  "runtime_filter": {
+                    "description": "JSON object representing filter condition to filter the data.",
+                    "type": "object",
+                    "deprecated": false
+                  },
+                  "runtime_sort": {
+                    "description": "JSON object representing columns to sort the data.",
+                    "type": "object",
+                    "deprecated": false
+                  },
+                  "runtime_param_override": {
+                    "description": "JSON object for setting values of parameters in runtime.",
+                    "type": "object",
+                    "deprecated": false
                   }
                 },
                 "required": [
@@ -1239,12 +1752,34 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/SearchDataResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchDataResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -1265,9 +1800,10 @@
     "/api/rest/2.0/metadata/liveboard/data": {
       "post": {
         "operationId": "fetchLiveboardData",
-        "description": "Fetches Liveboard data. Requires at least view access to the Liveboard.",
+        "description": "Fetches Liveboard data. Requires at least view access to the Liveboard. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Data"
+          "Data",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -1315,6 +1851,21 @@
                     "type": "integer",
                     "format": "int32",
                     "deprecated": false
+                  },
+                  "runtime_filter": {
+                    "description": "JSON object representing filter condition to filter the data.",
+                    "type": "object",
+                    "deprecated": false
+                  },
+                  "runtime_sort": {
+                    "description": "JSON object representing columns to sort the data.",
+                    "type": "object",
+                    "deprecated": false
+                  },
+                  "runtime_param_override": {
+                    "description": "JSON object for setting values of parameters in runtime.",
+                    "type": "object",
+                    "deprecated": false
                   }
                 },
                 "required": [
@@ -1325,12 +1876,34 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/LiveboardDataResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LiveboardDataResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -1351,9 +1924,10 @@
     "/api/rest/2.0/metadata/answer/data": {
       "post": {
         "operationId": "fetchAnswerData",
-        "description": "Fetches data from a saved Answer. Requires at least view access to the Answer object.",
+        "description": "Fetches data from a saved Answer. Requires at least view access to the Answer object. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Data"
+          "Data",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -1388,6 +1962,21 @@
                     "type": "integer",
                     "format": "int32",
                     "deprecated": false
+                  },
+                  "runtime_filter": {
+                    "description": "JSON object representing filter condition to filter the data.",
+                    "type": "object",
+                    "deprecated": false
+                  },
+                  "runtime_sort": {
+                    "description": "JSON object representing columns to sort the data.",
+                    "type": "object",
+                    "deprecated": false
+                  },
+                  "runtime_param_override": {
+                    "description": "JSON object for setting values of parameters in runtime.",
+                    "type": "object",
+                    "deprecated": false
                   }
                 },
                 "required": [
@@ -1398,12 +1987,34 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/AnswerDataResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnswerDataResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -1424,9 +2035,10 @@
     "/api/rest/2.0/logs/fetch": {
       "post": {
         "operationId": "fetchLogs",
-        "description": "Fetches security audit logs. Requires administrator privileges.",
+        "description": "Fetches security audit logs. Requires administrator privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Log"
+          "Log",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -1463,8 +2075,10 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
@@ -1472,6 +2086,29 @@
                   "items": {
                     "$ref": "#/components/schemas/LogResponse"
                   }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LogResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -1492,7 +2129,7 @@
     "/api/rest/2.0/vcs/git/config/search": {
       "post": {
         "operationId": "searchConfig",
-        "description": "Search local repository configuration <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.2.0</span>",
+        "description": "Search existing Git configurations in the current cluster",
         "tags": [
           "Version Control"
         ],
@@ -1501,14 +2138,24 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "properties": {}
+                "properties": {
+                  "org_identifiers": {
+                    "description": "   List of Unique identifier of the organization. Provide value -1 for cluster level. Example : [\"OrgID1-or-Name1\", \"OrgID2-or-Name2\"]\n   \n\nNote:  If no org identifier is specified,then the configurations will be returned for all orgs the user has access to <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "deprecated": false
+                  }
+                }
               }
             }
-          },
-          "required": true
+          }
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
@@ -1516,6 +2163,29 @@
                   "items": {
                     "$ref": "#/components/schemas/RepoConfigObject"
                   }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RepoConfigObject"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -1536,7 +2206,7 @@
     "/api/rest/2.0/vcs/git/commits/search": {
       "post": {
         "operationId": "searchCommits",
-        "description": "List the commit history of a metadata object <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.2.0</span>",
+        "description": "List the commit history of a metadata object",
         "tags": [
           "Version Control"
         ],
@@ -1562,18 +2232,18 @@
                     "deprecated": false
                   },
                   "branch_name": {
-                    "description": "Name of the branch from which commit history needs to be displayed",
+                    "description": "   Name of the branch from which commit history needs to be displayed.\n   \n\nNote: If no branch_name is specified, then commits will be returned for the default branch for this configuration.",
                     "type": "string",
                     "deprecated": false
                   },
                   "record_offset": {
-                    "description": "Record offset point in the commit history to display the response",
+                    "description": "    Record offset point in the commit history to display the response.\n    \n\nNote: If no record offset is specified, the beginning of the record will be considered.",
                     "type": "integer",
                     "format": "int32",
                     "deprecated": false
                   },
                   "record_size": {
-                    "description": "Number of history records from record offset point to be displayed in the response",
+                    "description": "    Number of history records from record offset point to be displayed in the response.\n    \n\nNote: If no record size is specified, then all the records will be considered.",
                     "type": "integer",
                     "format": "int32",
                     "deprecated": false
@@ -1587,8 +2257,10 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
@@ -1596,6 +2268,29 @@
                   "items": {
                     "$ref": "#/components/schemas/CommitHistoryResponse"
                   }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CommitHistoryResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -1616,9 +2311,10 @@
     "/api/rest/2.0/connection/search": {
       "post": {
         "operationId": "searchConnection",
-        "description": "Search connection objects. Requires DATAMANAGEMENT privilege.",
+        "description": "Search connection objects. Requires DATAMANAGEMENT privilege. <br/>  <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>",
         "tags": [
-          "Connections"
+          "Connections",
+          "9.2.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -1700,15 +2396,33 @@
                     "type": "boolean",
                     "deprecated": false,
                     "nullable": true
+                  },
+                  "configuration": {
+                    "description": "Configuration values. If empty we are fetching configuration from datasource based on given connection id. If required you can provide config details to fetch specific details. Example input: {}, {\"warehouse\":\"SMALL_WH\",\"database\":\"DEVELOPMENT\"}. This is only applicable when data_warehouse_object_type is selected.",
+                    "type": "object",
+                    "deprecated": false
+                  },
+                  "authentication_type": {
+                    "description": "List of authentication types to fetch data_ware_house_objects from external Data warehouse. This is only applicable when data_warehouse_object_type is selected.",
+                    "default": "SERVICE_ACCOUNT",
+                    "type": "string",
+                    "enum": [
+                      "SERVICE_ACCOUNT",
+                      "OAUTH",
+                      "IAM",
+                      "EXTOAUTH"
+                    ],
+                    "deprecated": false
                   }
                 }
               }
             }
-          },
-          "required": true
+          }
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
@@ -1716,6 +2430,29 @@
                   "items": {
                     "$ref": "#/components/schemas/SearchConnectionResponse"
                   }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SearchConnectionResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -1736,9 +2473,10 @@
     "/api/rest/2.0/roles/search": {
       "post": {
         "operationId": "searchRoles",
-        "description": "Gets Roles configured on a ThoughtSpot instance.\nRequires cluster Administration, Role Administration or\nGroup Administration privileges.",
+        "description": "Gets Roles configured on a ThoughtSpot instance.\nRequires cluster Administration, Role Administration or\nGroup Administration privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
         "tags": [
-          "Roles"
+          "Roles",
+          "9.5.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -1776,25 +2514,37 @@
                     "items": {
                       "type": "string",
                       "enum": [
+                        "UNKNOWN",
+                        "ADMINISTRATION",
+                        "AUTHORING",
                         "USERDATAUPLOADING",
                         "DATADOWNLOADING",
+                        "USERMANAGEMENT",
+                        "SECURITYMANAGEMENT",
+                        "LOGICALMODELING",
                         "DATAMANAGEMENT",
+                        "TAGMANAGEMENT",
                         "SHAREWITHALL",
+                        "SYSTEMMANAGEMENT",
                         "JOBSCHEDULING",
                         "A3ANALYSIS",
                         "EXPERIMENTALFEATUREPRIVILEGE",
                         "BYPASSRLS",
+                        "RANALYSIS",
                         "DISABLE_PINBOARD_CREATION",
                         "DEVELOPER",
                         "APPLICATION_ADMINISTRATION",
                         "USER_ADMINISTRATION",
                         "GROUP_ADMINISTRATION",
+                        "BACKUP_ADMINISTRATION",
                         "SYSTEM_INFO_ADMINISTRATION",
+                        "ENABLESPOTAPPCREATION",
                         "SYNCMANAGEMENT",
                         "ORG_ADMINISTRATION",
                         "ROLE_ADMINISTRATION",
                         "AUTHENTICATION_ADMINISTRATION",
-                        "BILLING_INFO_ADMINISTRATION"
+                        "BILLING_INFO_ADMINISTRATION",
+                        "PREVIEW_THOUGHTSPOT_SAGE"
                       ]
                     },
                     "deprecated": false
@@ -1833,18 +2583,42 @@
                 }
               }
             }
-          },
-          "required": true
+          }
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/RoleResponse"
+                    "$ref": "#/components/schemas/SearchRoleResponse"
                   }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SearchRoleResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -1865,9 +2639,10 @@
     "/api/rest/2.0/auth/session/login": {
       "post": {
         "operationId": "login",
-        "description": "Using this endpoint, you can programmatically create a login session for a user in ThoughtSpot.",
+        "description": " <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Authentication"
+          "Authentication",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -1900,15 +2675,36 @@
                 }
               }
             }
-          },
-          "required": true
+          }
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -1929,9 +2725,10 @@
     "/api/rest/2.0/auth/token/object": {
       "post": {
         "operationId": "getObjectAccessToken",
-        "description": " To programmatically create object session token for a user in ThoughtSpot, use this endpoint. \n\nYou can generate the token for a user by providing password or secret key from the cluster. \n\nYou need to enable trusted authentication to generate secret key. To generate secret key, follow below steps. \n\n\n 1. Click the Develop tab. \n\n\n 2. Under Customizations, click Settings. \n\n\n 3. To enable trusted authentication, turn on the toggle. \n\n\n 4. A secret_key for trusted authentication is generated. \n\n\n 5. Click the clipboard icon to copy the token. \n\n\n \n\nPassword is given precedence over secretKey input, when both are included in the request.",
+        "description": " <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Authentication"
+          "Authentication",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -1986,7 +2783,7 @@
                     "deprecated": false
                   },
                   "auto_create": {
-                    "description": "“Creates a new user if the specified username does not already exist in ThoughtSpot. Use this parameter to provision a user just-in-time (JIT).",
+                    "description": "“Creates a new user if the specified username does not already exist in ThoughtSpot. Use this parameter to provision a user just-in-time (JIT) \n\n\nNote: This is only available for clusters with trusted authentication enabled. ",
                     "default": false,
                     "type": "boolean",
                     "deprecated": false,
@@ -2010,12 +2807,34 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Token"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Token"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -2030,15 +2849,17 @@
               }
             }
           }
-        }
+        },
+        "security": []
       }
     },
     "/api/rest/2.0/auth/token/full": {
       "post": {
         "operationId": "getFullAccessToken",
-        "description": " To programmatically create full session token for a user in ThoughtSpot, use this endpoint. \n\nYou can generate the token for a user by providing password or secret key from the cluster. \n\nYou need to enable trusted authentication to generate secret key. To generate secret key, follow below steps. \n\n\n 1. Click the Develop tab. \n\n\n 2. Under Customizations, click Settings. \n\n\n 3. To enable trusted authentication, turn on the toggle. \n\n\n 4. A secret_key for trusted authentication is generated. \n\n\n 5. Click the clipboard icon to copy the token. \n\n\n \n\nPassword is given precedence over secretKey input, when both are included in the request.",
+        "description": " <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Authentication"
+          "Authentication",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -2088,7 +2909,7 @@
                     "deprecated": false
                   },
                   "auto_create": {
-                    "description": "Creates a new user if the specified username does not already exist in ThoughtSpot. Use this parameter to provision a user just-in-time (JIT).",
+                    "description": "   Creates a new user if the specified username does not already exist in ThoughtSpot. Use this parameter to provision a user just-in-time (JIT). \n\nNote: This is only available for clusters with trusted authentication enabled.",
                     "default": false,
                     "type": "boolean",
                     "deprecated": false,
@@ -2111,12 +2932,34 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Token"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Token"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -2131,33 +2974,46 @@
               }
             }
           }
-        }
+        },
+        "security": []
       }
     },
     "/api/rest/2.0/auth/session/logout": {
       "post": {
         "operationId": "logout",
-        "description": "To log a user out of the current session, use this endpoint",
+        "description": " <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Authentication"
+          "Authentication",
+          "9.0.0.cl"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {}
-              }
-            }
-          },
-          "required": true
-        },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -2178,9 +3034,10 @@
     "/api/rest/2.0/auth/token/revoke": {
       "post": {
         "operationId": "revokeToken",
-        "description": "To expire or revoke a token for a user, use this endpoint",
+        "description": " <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Authentication"
+          "Authentication",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -2199,15 +3056,36 @@
                 }
               }
             }
-          },
-          "required": true
+          }
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -2228,9 +3106,10 @@
     "/api/rest/2.0/users/create": {
       "post": {
         "operationId": "createUser",
-        "description": "Allows creating a user in ThoughtSpot. The API endpoint also allows you to assign the user to specific groups,\nOrgs, and add favorite Liveboards and Answers. To create a user, you require administration privileges.",
+        "description": " <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Users"
+          "Users",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -2332,7 +3211,7 @@
                     "nullable": true
                   },
                   "home_liveboard_identifier": {
-                    "description": "GUID of the Liveboard to set a default Liveboard for the user. \nThoughtSpot displays this Liveboard on the Home page when the user logs in.",
+                    "description": "GUID of the Liveboard to set a default Liveboard for the user.\nThoughtSpot displays this Liveboard on the Home page when the user logs in.",
                     "type": "string",
                     "deprecated": false
                   },
@@ -2356,12 +3235,34 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -2382,9 +3283,10 @@
     "/api/rest/2.0/users/{user_identifier}/update": {
       "post": {
         "operationId": "updateUser",
-        "description": "Updates a given user object. Requires administrator privileges.",
+        "description": " <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Users"
+          "Users",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -2392,11 +3294,6 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "user_identifier": {
-                    "description": "GUID / name of the user",
-                    "type": "string",
-                    "deprecated": false
-                  },
                   "name": {
                     "description": "Name of the user. The username string must be unique.",
                     "type": "string",
@@ -2434,7 +3331,7 @@
                     "deprecated": false
                   },
                   "notify_on_share": {
-                    "description": "User preference for receiving email notifications when another ThoughtSpot user \nshares a metadata object such as Answer, Liveboard, or Worksheet. ",
+                    "description": "User preference for receiving email notifications when another ThoughtSpot user\nshares a metadata object such as Answer, Liveboard, or Worksheet.",
                     "type": "boolean",
                     "deprecated": false,
                     "nullable": true
@@ -2491,22 +3388,62 @@
                       "type": "string"
                     },
                     "deprecated": false
+                  },
+                  "operation": {
+                    "description": "Type of update operation. Default operation type is REPLACE",
+                    "default": "REPLACE",
+                    "type": "string",
+                    "enum": [
+                      "ADD",
+                      "REMOVE",
+                      "REPLACE"
+                    ],
+                    "deprecated": false
                   }
-                },
-                "required": [
-                  "user_identifier"
-                ]
+                }
               }
             }
-          },
-          "required": true
+          }
         },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "user_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "GUID / name of the user",
+            "deprecated": false
+          }
+        ],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -2527,36 +3464,50 @@
     "/api/rest/2.0/users/{user_identifier}/delete": {
       "post": {
         "operationId": "deleteUser",
-        "description": "Deletes a user. Requires administrator privileges.",
+        "description": " <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Users"
+          "Users",
+          "9.0.0.cl"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "user_identifier": {
-                    "description": "GUID / name of the user",
-                    "type": "string",
-                    "deprecated": false
-                  }
-                },
-                "required": [
-                  "user_identifier"
-                ]
-              }
-            }
-          },
-          "required": true
-        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "user_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "GUID / name of the user",
+            "deprecated": false
+          }
+        ],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -2577,9 +3528,10 @@
     "/api/rest/2.0/users/import": {
       "post": {
         "operationId": "importUsers",
-        "description": "Imports user data from external databases to ThoughtSpot.",
+        "description": "Imports user data from external databases to ThoughtSpot. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Users"
+          "Users",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -2596,7 +3548,7 @@
                     "deprecated": false
                   },
                   "default_password": {
-                    "description": "The default password to assign to users if they do not have a password assigned in ThoughtSpot. ",
+                    "description": "The default password to assign to users if they do not have a password assigned in ThoughtSpot.",
                     "type": "string",
                     "deprecated": false
                   },
@@ -2623,12 +3575,34 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ImportUsersResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportUsersResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -2649,9 +3623,10 @@
     "/api/rest/2.0/users/change-password": {
       "post": {
         "operationId": "changeUserPassword",
-        "description": "Allows changing the password of a ThoughtSpot user account.",
+        "description": " <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Users"
+          "Users",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -2685,12 +3660,34 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -2711,9 +3708,10 @@
     "/api/rest/2.0/users/reset-password": {
       "post": {
         "operationId": "resetUserPassword",
-        "description": "Resets the password of a ThoughtSpot user account.",
+        "description": " <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Users"
+          "Users",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -2741,12 +3739,34 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -2767,9 +3787,10 @@
     "/api/rest/2.0/users/force-logout": {
       "post": {
         "operationId": "forceLogoutUsers",
-        "description": "Logs out a user from their current session. This API operation makes\na user session invalid and forces the user to re-login.",
+        "description": " <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Users"
+          "Users",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -2788,15 +3809,36 @@
                 }
               }
             }
-          },
-          "required": true
+          }
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -2817,9 +3859,10 @@
     "/api/rest/2.0/system/config-update": {
       "post": {
         "operationId": "updateSystemConfig",
-        "description": "Update cluster configuration",
+        "description": "Update cluster configuration <br/>  <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>",
         "tags": [
-          "System"
+          "System",
+          "9.2.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -2841,12 +3884,34 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -2867,9 +3932,10 @@
     "/api/rest/2.0/orgs/create": {
       "post": {
         "operationId": "createOrg",
-        "description": "Creates an Org. Requires cluster administration privileges.",
+        "description": "Creates an Org. Requires cluster administration privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Orgs"
+          "Orgs",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -2896,12 +3962,34 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/OrgResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrgResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -2922,9 +4010,10 @@
     "/api/rest/2.0/orgs/{org_identifier}/update": {
       "post": {
         "operationId": "updateOrg",
-        "description": "Updates an Org. Requires cluster administration privileges.",
+        "description": "Updates an Org. Requires cluster administration privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Orgs"
+          "Orgs",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -2932,11 +4021,6 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "org_identifier": {
-                    "description": "ID or name of the Org.",
-                    "type": "string",
-                    "deprecated": false
-                  },
                   "name": {
                     "description": "Name of the Org.",
                     "type": "string",
@@ -2954,22 +4038,62 @@
                       "type": "string"
                     },
                     "deprecated": false
+                  },
+                  "operation": {
+                    "description": "Type of update operation. Default operation type is ADD",
+                    "default": "ADD",
+                    "type": "string",
+                    "enum": [
+                      "ADD",
+                      "REMOVE",
+                      "REPLACE"
+                    ],
+                    "deprecated": false
                   }
-                },
-                "required": [
-                  "org_identifier"
-                ]
+                }
               }
             }
-          },
-          "required": true
+          }
         },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "org_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID or name of the Org.",
+            "deprecated": false
+          }
+        ],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -2990,36 +4114,50 @@
     "/api/rest/2.0/orgs/{org_identifier}/delete": {
       "post": {
         "operationId": "deleteOrg",
-        "description": "Deletes an Org. Requires cluster administration privileges.",
+        "description": "Deletes an Org. Requires cluster administration privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Orgs"
+          "Orgs",
+          "9.0.0.cl"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "org_identifier": {
-                    "description": "ID or name of the Org.",
-                    "type": "string",
-                    "deprecated": false
-                  }
-                },
-                "required": [
-                  "org_identifier"
-                ]
-              }
-            }
-          },
-          "required": true
-        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "org_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID or name of the Org.",
+            "deprecated": false
+          }
+        ],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -3040,9 +4178,10 @@
     "/api/rest/2.0/tags/create": {
       "post": {
         "operationId": "createTag",
-        "description": "Creates an Org. Requires administrator privileges.",
+        "description": "Creates a Tag. Requires administrator privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Tags"
+          "Tags",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -3069,12 +4208,34 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Tag"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Tag"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -3095,9 +4256,10 @@
     "/api/rest/2.0/tags/{tag_identifier}/update": {
       "post": {
         "operationId": "updateTag",
-        "description": "Updates an Org. Requires administrator privileges.",
+        "description": "Updates a Tag. Requires administrator privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Tags"
+          "Tags",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -3105,11 +4267,6 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "tag_identifier": {
-                    "description": "Name or Id of the tag.",
-                    "type": "string",
-                    "deprecated": false
-                  },
                   "name": {
                     "description": "Name of the tag.",
                     "type": "string",
@@ -3120,21 +4277,50 @@
                     "type": "string",
                     "deprecated": false
                   }
-                },
-                "required": [
-                  "tag_identifier"
-                ]
+                }
               }
             }
-          },
-          "required": true
+          }
         },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "tag_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Name or Id of the tag.",
+            "deprecated": false
+          }
+        ],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -3155,36 +4341,50 @@
     "/api/rest/2.0/tags/{tag_identifier}/delete": {
       "post": {
         "operationId": "deleteTag",
-        "description": "Deletes a tag. Requires administrator privileges.",
+        "description": "Deletes a tag. Requires administrator privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Tags"
+          "Tags",
+          "9.0.0.cl"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "tag_identifier": {
-                    "description": "Tag identifier Tag name or Tag id.",
-                    "type": "string",
-                    "deprecated": false
-                  }
-                },
-                "required": [
-                  "tag_identifier"
-                ]
-              }
-            }
-          },
-          "required": true
-        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "tag_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Tag identifier Tag name or Tag id.",
+            "deprecated": false
+          }
+        ],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -3205,9 +4405,10 @@
     "/api/rest/2.0/tags/assign": {
       "post": {
         "operationId": "assignTag",
-        "description": "Assigns a tag to a metadata object Org.",
+        "description": "Assigns a tag to a metadata object. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Tags"
+          "Tags",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -3241,12 +4442,34 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -3267,9 +4490,10 @@
     "/api/rest/2.0/tags/unassign": {
       "post": {
         "operationId": "unassignTag",
-        "description": "Unassign a tag to a metadata object.",
+        "description": "Unassign a tag to a metadata object. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Tags"
+          "Tags",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -3303,12 +4527,34 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -3329,9 +4575,10 @@
     "/api/rest/2.0/groups/create": {
       "post": {
         "operationId": "createUserGroup",
-        "description": "Create a group. Requires administrator privilege.",
+        "description": "Create a group. Requires administrator privilege. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Groups"
+          "Groups",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -3420,13 +4667,21 @@
                     "deprecated": false
                   },
                   "visibility": {
-                    "description": "Visibility of the group. To make a group visible to other users and groups,\nset the visibility to SHAREABLE. ",
+                    "description": "Visibility of the group. To make a group visible to other users and groups,\nset the visibility to SHAREABLE.",
                     "default": "SHARABLE",
                     "type": "string",
                     "enum": [
                       "SHARABLE",
                       "NON_SHARABLE"
                     ],
+                    "deprecated": false
+                  },
+                  "role_identifiers": {
+                    "description": "Role identifiers of the roles that should be assigned to the group.",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
                     "deprecated": false
                   }
                 },
@@ -3439,12 +4694,34 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/UserGroupResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserGroupResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -3465,9 +4742,10 @@
     "/api/rest/2.0/groups/{group_identifier}/update": {
       "post": {
         "operationId": "updateUserGroup",
-        "description": "Update group properties.",
+        "description": "Update group properties. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Groups"
+          "Groups",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -3475,11 +4753,6 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "group_identifier": {
-                    "description": "GUID or name of the group.",
-                    "type": "string",
-                    "deprecated": false
-                  },
                   "name": {
                     "description": "Name of the group to modify.",
                     "type": "string",
@@ -3560,29 +4833,77 @@
                     "deprecated": false
                   },
                   "visibility": {
-                    "description": "Visibility of the group. To make a group visible to other users and \ngroups, set the visibility to SHAREABLE. ",
+                    "description": "Visibility of the group. To make a group visible to other users and\ngroups, set the visibility to SHAREABLE.",
                     "type": "string",
                     "enum": [
                       "SHARABLE",
                       "NON_SHARABLE"
                     ],
                     "deprecated": false
+                  },
+                  "role_identifiers": {
+                    "description": "Role identifiers of the roles that should be assigned to the group.",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "deprecated": false
+                  },
+                  "operation": {
+                    "description": "Type of update operation. Default operation type is REPLACE",
+                    "default": "REPLACE",
+                    "type": "string",
+                    "enum": [
+                      "ADD",
+                      "REMOVE",
+                      "REPLACE"
+                    ],
+                    "deprecated": false
                   }
-                },
-                "required": [
-                  "group_identifier"
-                ]
+                }
               }
             }
-          },
-          "required": true
+          }
         },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "group_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "GUID or name of the group.",
+            "deprecated": false
+          }
+        ],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -3603,36 +4924,50 @@
     "/api/rest/2.0/groups/{group_identifier}/delete": {
       "post": {
         "operationId": "deleteUserGroup",
-        "description": "Deletes a group.",
+        "description": "Deletes a group. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Groups"
+          "Groups",
+          "9.0.0.cl"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "group_identifier": {
-                    "description": "GUID or name of the group.",
-                    "type": "string",
-                    "deprecated": false
-                  }
-                },
-                "required": [
-                  "group_identifier"
-                ]
-              }
-            }
-          },
-          "required": true
-        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "group_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "GUID or name of the group.",
+            "deprecated": false
+          }
+        ],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -3653,9 +4988,10 @@
     "/api/rest/2.0/groups/import": {
       "post": {
         "operationId": "importUserGroups",
-        "description": "Import groups to ThoughtSpot. Requires administrator privilege.",
+        "description": " <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Groups"
+          "Groups",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -3679,7 +5015,7 @@
                     "nullable": true
                   },
                   "dry_run": {
-                    "description": "If true, the API performs a test operation and returns user IDs whose \ndata will be edited after the import.",
+                    "description": "If true, the API performs a test operation and returns user IDs whose\ndata will be edited after the import.",
                     "default": true,
                     "type": "boolean",
                     "deprecated": false,
@@ -3688,15 +5024,36 @@
                 }
               }
             }
-          },
-          "required": true
+          }
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ImportUserGroupsResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportUserGroupsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -3716,10 +5073,11 @@
     },
     "/api/rest/2.0/metadata/tml/import": {
       "post": {
-        "operationId": "importMetadata",
-        "description": "Imports TML representation of metadata objects. Requires data management privileges.",
+        "operationId": "importMetadataTML",
+        "description": "Imports TML representation of metadata objects. Requires data management privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Metadata"
+          "Metadata",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -3762,8 +5120,10 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
@@ -3771,6 +5131,29 @@
                   "items": {
                     "type": "object"
                   }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -3790,10 +5173,11 @@
     },
     "/api/rest/2.0/metadata/tml/export": {
       "post": {
-        "operationId": "exportMetadata",
-        "description": "Exports TML representation of metadata objects",
+        "operationId": "exportMetadataTML",
+        "description": "Exports TML representation of metadata objects <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Metadata"
+          "Metadata",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -3817,11 +5201,21 @@
                     "nullable": true
                   },
                   "export_fqn": {
-                    "description": "Adds FQNs of the referenced objects. For example, if you are exporting a Liveboard and its associated objects, \nthe API returns the Liveboard TML data with the FQNs of the referenced worksheet.\nIf the exported TML data includes FQNs, you don't need to manually add FQNs of the referenced objects during TML import.",
+                    "description": "Adds FQNs of the referenced objects. For example, if you are exporting a Liveboard and its associated objects,\nthe API returns the Liveboard TML data with the FQNs of the referenced worksheet.\nIf the exported TML data includes FQNs, you don't need to manually add FQNs of the referenced objects during TML import.",
                     "default": false,
                     "type": "boolean",
                     "deprecated": false,
                     "nullable": true
+                  },
+                  "edoc_format": {
+                    "description": "TML EDOC content format.",
+                    "default": "YAML",
+                    "type": "string",
+                    "enum": [
+                      "JSON",
+                      "YAML"
+                    ],
+                    "deprecated": false
                   }
                 },
                 "required": [
@@ -3832,8 +5226,10 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
@@ -3841,6 +5237,29 @@
                   "items": {
                     "type": "object"
                   }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -3861,9 +5280,10 @@
     "/api/rest/2.0/metadata/delete": {
       "post": {
         "operationId": "deleteMetadata",
-        "description": "Deletes metadata objects. Requires edit access to objects.",
+        "description": "Deletes metadata objects. Requires edit access to objects. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Metadata"
+          "Metadata",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -3895,12 +5315,34 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -3921,9 +5363,10 @@
     "/api/rest/2.0/security/metadata/assign": {
       "post": {
         "operationId": "assignChangeAuthor",
-        "description": "Assigns a new author or transfers the ownership of the specified metadata objects.",
+        "description": "Assigns a new author or transfers the ownership of the specified metadata objects. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Security"
+          "Security",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -3945,7 +5388,7 @@
                     "deprecated": false
                   },
                   "current_owner_identifier": {
-                    "description": "GUID or name of the current author.  When defined, the metadata objects \nauthored by the specified owner are filtered for the API operation.",
+                    "description": "GUID or name of the current author.  When defined, the metadata objects\nauthored by the specified owner are filtered for the API operation.",
                     "type": "string",
                     "deprecated": false
                   }
@@ -3959,12 +5402,34 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -3985,9 +5450,10 @@
     "/api/rest/2.0/security/metadata/share": {
       "post": {
         "operationId": "shareMetadata",
-        "description": "Share one or several metadata objects with users or groups. \nRequires edit access to metadata objects.",
+        "description": "Share one or several metadata objects with users or groups.\nRequires edit access to metadata objects. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
-          "Security"
+          "Security",
+          "9.0.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -4043,7 +5509,7 @@
                     "deprecated": false
                   },
                   "enable_custom_url": {
-                    "description": "Sends object URLs in the customized format in email notifications. ",
+                    "description": "Sends object URLs in the customized format in email notifications.",
                     "default": false,
                     "type": "boolean",
                     "deprecated": false,
@@ -4062,12 +5528,34 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -4088,7 +5576,7 @@
     "/api/rest/2.0/vcs/git/config/create": {
       "post": {
         "operationId": "createConfig",
-        "description": "Configure local repository to connect to remote repository <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.2.0</span>",
+        "description": "Configure local repository to connect to remote repository",
         "tags": [
           "Version Control"
         ],
@@ -4113,6 +5601,11 @@
                     "type": "string",
                     "deprecated": false
                   },
+                  "org_identifier": {
+                    "description": "   Unique identifier of the organization. If no value is provided then user will be created in the organization associated with the login session. Provide value -1 for cluster level. Example : OrgID1-or-Name1\n   \n\nNote: If no org identifier is specified, then current org identifier of the user will be considered <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
+                    "type": "string",
+                    "deprecated": false
+                  },
                   "branch_names": {
                     "description": "List the remote branches to configure. Example:[development, production]",
                     "type": "array",
@@ -4121,13 +5614,20 @@
                     },
                     "deprecated": false
                   },
-                  "default_branch": {
-                    "description": "   Name of the default remote branch\n   \n\n*Deprecated since 9.3.0.cl : Replaced by default_branch_name * <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.2.0</span>",
-                    "type": "string",
-                    "deprecated": true
-                  },
                   "default_branch_name": {
-                    "description": "Name of the default remote branch <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.3.0</span>",
+                    "description": "Name of the default remote branch",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "enable_guid_mapping": {
+                    "description": "Maintain mapping of guid for the deployment to an instance <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>",
+                    "default": false,
+                    "type": "boolean",
+                    "deprecated": false,
+                    "nullable": true
+                  },
+                  "guid_mapping_branch_name": {
+                    "description": "   Name of the branch where file containing guid mapping should be maintained. This will be set only when enable_guid_mapping is true.\n   \n\nNote: If no guid mapping branch is specified, then the default branch for this configuration will be considered.  <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>",
                     "type": "string",
                     "deprecated": false
                   }
@@ -4142,12 +5642,34 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/RepoConfigObject"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RepoConfigObject"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -4168,7 +5690,7 @@
     "/api/rest/2.0/vcs/git/config/update": {
       "post": {
         "operationId": "updateConfig",
-        "description": "Update local repository configuration. <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.2.0</span>",
+        "description": "Update local repository configuration.",
         "tags": [
           "Version Control"
         ],
@@ -4188,36 +5710,68 @@
                     "type": "string",
                     "deprecated": false
                   },
+                  "org_identifier": {
+                    "description": "   Unique identifier of the organization. If no value is provided then user will be created in the organization associated with the login session. Provide value -1 for cluster level. Example : OrgID1-or-Name1\n   \n\nNote: If no org identifier is specified, then current org identifier of the user will be considered  <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
+                    "type": "string",
+                    "deprecated": false
+                  },
                   "branch_names": {
-                    "description": "List the remote branches to configure. Example:[development, production] <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.3.0</span>",
+                    "description": "List the remote branches to configure. Example:[development, production]",
                     "type": "array",
                     "items": {
                       "type": "string"
                     },
                     "deprecated": false
                   },
-                  "default_branch": {
-                    "description": "   Name of the default remote branch\n   \n\n*Deprecated since 9.3.0.cl : Replaced by default_branch_name * <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.2.0</span>",
-                    "type": "string",
-                    "deprecated": true
-                  },
                   "default_branch_name": {
-                    "description": "Name of the default remote branch <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.3.0</span>",
+                    "description": "Name of the default remote branch",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "enable_guid_mapping": {
+                    "description": "Maintain mapping of guid for the deployment to an instance <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>",
+                    "type": "boolean",
+                    "deprecated": false,
+                    "nullable": true
+                  },
+                  "guid_mapping_branch_name": {
+                    "description": "   Name of the branch where file containing guid mapping should be maintained This will be set only when enable_guid_mapping is true.\n   \n\nNote: If no guid mapping branch is specified, then the default branch for this configuration will be considered.  <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>",
                     "type": "string",
                     "deprecated": false
                   }
                 }
               }
             }
-          },
-          "required": true
+          }
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/RepoConfigObject"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RepoConfigObject"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -4238,48 +5792,7 @@
     "/api/rest/2.0/vcs/git/config/delete": {
       "post": {
         "operationId": "deleteConfig",
-        "description": "Delete local repository configuration <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.2.0</span>",
-        "tags": [
-          "Version Control"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {}
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/rest/2.0/vcs/git/branches/{branch_name}/pull": {
-      "post": {
-        "operationId": "pullBranch",
-        "description": " Pull a branch from remote repository to local repository.\n \n\n*Deprecated since 9.3.0.cl : Replaced by /vcs/git/config/create * <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.2.0</span>",
+        "description": "Delete local repository configuration",
         "tags": [
           "Version Control"
         ],
@@ -4289,26 +5802,45 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "branch_name": {
-                    "description": "Name of the branch to pull",
-                    "type": "string",
-                    "deprecated": false
+                  "cluster_level": {
+                    "description": "Consider cluster level or org level config. Set it to false to delete configuration from current org. If set to true, then the configuration at cluster level and orgs that inherited the configuration from cluster level will be deleted. <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
+                    "type": "boolean",
+                    "deprecated": false,
+                    "nullable": true
                   }
-                },
-                "required": [
-                  "branch_name"
-                ]
+                }
               }
             }
-          },
-          "required": true
+          }
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -4329,7 +5861,7 @@
     "/api/rest/2.0/vcs/git/branches/commit": {
       "post": {
         "operationId": "commitBranch",
-        "description": "Commit the object from metadata to remote repository <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.2.0</span>",
+        "description": "Commit the object from metadata to remote repository",
         "tags": [
           "Version Control"
         ],
@@ -4348,7 +5880,7 @@
                     "deprecated": false
                   },
                   "branch_name": {
-                    "description": "Name of the remote branch where object should be pushed",
+                    "description": "   Name of the remote branch where object should be pushed\n   \n\nNote: If no branch_name is specified, then the default branch will be considered.",
                     "type": "string",
                     "deprecated": false
                   },
@@ -4367,12 +5899,34 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/CommitResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommitResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -4393,7 +5947,7 @@
     "/api/rest/2.0/vcs/git/commits/{commit_id}/revert": {
       "post": {
         "operationId": "revertCommit",
-        "description": "Revert an object to a specific commit id <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.2.0</span>",
+        "description": "Revert an object to a specific commit id",
         "tags": [
           "Version Control"
         ],
@@ -4403,11 +5957,6 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "commit_id": {
-                    "description": "Commit id to which the object should be reverted",
-                    "type": "string",
-                    "deprecated": false
-                  },
                   "metadata": {
                     "description": "Metadata objects.",
                     "type": "array",
@@ -4417,12 +5966,12 @@
                     "deprecated": false
                   },
                   "branch_name": {
-                    "description": "Name of the branch where the reverted version should be comitted",
+                    "description": "   Name of the branch where the reverted version should be comitted\n   \n\nNote: If no branch_name is specified, then the default branch will be considered.",
                     "type": "string",
                     "deprecated": false
                   },
                   "revert_policy": {
-                    "description": "Policy to be followed while importing. Valid values: [ALL_OR_NONE, PARTIAL] <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.3.0</span>",
+                    "description": "Policy to be followed while importing. Valid values: [ALL_OR_NONE, PARTIAL]",
                     "default": "ALL_OR_NONE",
                     "type": "string",
                     "enum": [
@@ -4431,21 +5980,50 @@
                     ],
                     "deprecated": false
                   }
-                },
-                "required": [
-                  "commit_id"
-                ]
+                }
               }
             }
-          },
-          "required": true
+          }
         },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "commit_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Commit id to which the object should be reverted",
+            "deprecated": false
+          }
+        ],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/RevertResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RevertResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -4466,7 +6044,7 @@
     "/api/rest/2.0/vcs/git/branches/validate": {
       "post": {
         "operationId": "validateMerge",
-        "description": "Before merging changes to target branch, pick the changes from source branch and validate the files <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.2.0</span>",
+        "description": "The Validate Merge endpoint can be run from your target ThoughtSpot organization / cluster to ensure that the changes implemented in the source branch would function in the target ThoughtSpot environment prior to merging a source branch into a target branch.",
         "tags": [
           "Version Control"
         ],
@@ -4496,8 +6074,10 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
@@ -4505,6 +6085,29 @@
                   "items": {
                     "$ref": "#/components/schemas/DeployResponse"
                   }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DeployResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -4525,7 +6128,7 @@
     "/api/rest/2.0/vcs/git/commits/deploy": {
       "post": {
         "operationId": "deployCommit",
-        "description": "Deploy changes to a Thoughtspot environment from a commit point\" <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.2.0</span>",
+        "description": "Deploy changes to a Thoughtspot environment from the latest version of a branch or a specific commit point.",
         "tags": [
           "Version Control"
         ],
@@ -4536,27 +6139,17 @@
                 "type": "object",
                 "properties": {
                   "commit_id": {
-                    "description": "Commit_id against which the files should be picked to deploy",
+                    "description": "   Commit_id against which the files should be picked to deploy.\n   \n\nNote: If no commit_id is specified, then the head of the branch is considered.",
                     "type": "string",
                     "deprecated": false
                   },
                   "branch_name": {
-                    "description": "Name of the remote branch where changes should be picked <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.3.0</span>",
+                    "description": "   Name of the remote branch where changes should be picked\n   \n\nNote: If no branch_name is specified, then the default branch will be considered.",
                     "type": "string",
                     "deprecated": false
                   },
-                  "import_type": {
-                    "description": "   Indicates if all files or only modified file at specified commit point should be considered\n   \n\n*Deprecated since 9.3.0.cl : Replaced by deploy_type * <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.2.0</span>",
-                    "default": "DELTA",
-                    "type": "string",
-                    "enum": [
-                      "FULL",
-                      "DELTA"
-                    ],
-                    "deprecated": true
-                  },
                   "deploy_type": {
-                    "description": "Indicates if all files or only modified file at specified commit point should be considered <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.3.0</span>",
+                    "description": "Indicates if all files or only modified file at specified commit point should be considered",
                     "default": "DELTA",
                     "type": "string",
                     "enum": [
@@ -4566,7 +6159,7 @@
                     "deprecated": false
                   },
                   "deploy_policy": {
-                    "description": "Policy to be followed while importing. Valid values: [ALL_OR_NONE, PARTIAL] <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">*since: 9.3.0</span>",
+                    "description": "Define the policy to follow while importing TML in the ThoughtSpot environment. Use “ALL_OR_NONE” to cancel the deployment of all ThoughtSpot objects if at least one of them fails to import. Use “Partial” to import ThoughtSpot objects that validate successfully even if other objects in the same deploy operations fail to import.",
                     "default": "ALL_OR_NONE",
                     "type": "string",
                     "enum": [
@@ -4578,11 +6171,12 @@
                 }
               }
             }
-          },
-          "required": true
+          }
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
@@ -4590,6 +6184,29 @@
                   "items": {
                     "$ref": "#/components/schemas/DeployResponse"
                   }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DeployResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -4610,9 +6227,10 @@
     "/api/rest/2.0/connection/create": {
       "post": {
         "operationId": "createConnection",
-        "description": "Creates a connection to a Data WareHouse. Requires ADMINSITRATION or DATAMANAGEMENT privilege.",
+        "description": "Creates a connection to a Data WareHouse. Requires ADMINSITRATION or DATAMANAGEMENT privilege. <br/>  <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>",
         "tags": [
-          "Connections"
+          "Connections",
+          "9.2.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -4673,12 +6291,34 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/CreateConnectionResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateConnectionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -4699,9 +6339,10 @@
     "/api/rest/2.0/connection/delete": {
       "post": {
         "operationId": "deleteConnection",
-        "description": "Deletes a connection to a Data WareHouse. Requires ADMINSITRATION or DATAMANAGEMENT privilege.",
+        "description": "Deletes a connection to a Data WareHouse. Requires ADMINSITRATION or DATAMANAGEMENT privilege. <br/>  <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>",
         "tags": [
-          "Connections"
+          "Connections",
+          "9.2.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -4723,12 +6364,34 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -4749,9 +6412,10 @@
     "/api/rest/2.0/connection/update": {
       "post": {
         "operationId": "updateConnection",
-        "description": "Updates a connection to a Data WareHouse. Requires ADMINSITRATION or DATAMANAGEMENT privilege.",
+        "description": "Updates a connection to a Data WareHouse. Requires ADMINSITRATION or DATAMANAGEMENT privilege. <br/>  <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>",
         "tags": [
-          "Connections"
+          "Connections",
+          "9.2.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -4795,12 +6459,34 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -4821,9 +6507,10 @@
     "/api/rest/2.0/roles/create": {
       "post": {
         "operationId": "createRole",
-        "description": "Creates a Role.\nRequires cluster Administration or Role Administration privileges.",
+        "description": "Creates a Role.\nRequires cluster Administration or Role Administration privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
         "tags": [
-          "Roles"
+          "Roles",
+          "9.5.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -4879,12 +6566,34 @@
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/RoleResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoleResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -4905,9 +6614,10 @@
     "/api/rest/2.0/roles/{role_identifier}/update": {
       "post": {
         "operationId": "updateRole",
-        "description": "Updates a Role.\nRequires cluster Administration or Role Administration privileges.",
+        "description": "Updates a Role.\nRequires cluster Administration or Role Administration privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
         "tags": [
-          "Roles"
+          "Roles",
+          "9.5.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -4915,11 +6625,6 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "role_identifier": {
-                    "description": "Unique ID or name of the role.",
-                    "type": "string",
-                    "deprecated": false
-                  },
                   "name": {
                     "description": "Name of the Role.",
                     "type": "string",
@@ -4961,7 +6666,6 @@
                   }
                 },
                 "required": [
-                  "role_identifier",
                   "name"
                 ]
               }
@@ -4969,12 +6673,45 @@
           },
           "required": true
         },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "role_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique ID or name of the role.",
+            "deprecated": false
+          }
+        ],
         "responses": {
           "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/RoleResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoleResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -4995,9 +6732,74 @@
     "/api/rest/2.0/roles/{role_identifier}/delete": {
       "post": {
         "operationId": "deleteRole",
-        "description": "Deletes a Role.\nRequires cluster Administration or Role Administration privileges.",
+        "description": "Deletes a Role.\nRequires cluster Administration or Role Administration privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
         "tags": [
-          "Roles"
+          "Roles",
+          "9.5.0.cl"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "role_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique ID or name of the role.",
+            "deprecated": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/schedules": {
+      "post": {
+        "operationId": "createSchedule",
+        "description": "Create schedule. <br/>  <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>",
+        "tags": [
+          "Schedules",
+          "9.4.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -5005,26 +6807,420 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "role_identifier": {
-                    "description": "Unique ID or name of the role.",
+                  "name": {
+                    "description": "Name of the scheduled job.",
                     "type": "string",
+                    "deprecated": false
+                  },
+                  "description": {
+                    "description": "Description of the job.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "metadata_type": {
+                    "description": "Type of metadata.",
+                    "type": "string",
+                    "enum": [
+                      "LIVEBOARD"
+                    ],
+                    "deprecated": false
+                  },
+                  "metadata_identifier": {
+                    "description": "Unique ID or name of the metadata.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "file_format": {
+                    "description": "Export file format.",
+                    "default": "PDF",
+                    "type": "string",
+                    "enum": [
+                      "CSV",
+                      "PDF"
+                    ],
+                    "deprecated": false
+                  },
+                  "liveboard_options": {
+                    "description": "Options to specify details of liveboard.",
+                    "$ref": "#/components/schemas/LiveboardOptionsInput",
+                    "deprecated": false
+                  },
+                  "pdf_options": {
+                    "description": "Options for PDF export.",
+                    "$ref": "#/components/schemas/SchedulesPdfOptionsInput",
+                    "deprecated": false
+                  },
+                  "time_zone": {
+                    "description": "Time zone",
+                    "default": "America/Los_Angeles",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "frequency": {
+                    "description": "Configuration of schedule with cron expression",
+                    "$ref": "#/components/schemas/FrequencyInput",
+                    "deprecated": false
+                  },
+                  "recipient_details": {
+                    "description": "Recipient configuration which includes emails and recipients of the schedule",
+                    "$ref": "#/components/schemas/RecipientDetailsInput",
                     "deprecated": false
                   }
                 },
                 "required": [
-                  "role_identifier"
+                  "name",
+                  "description",
+                  "metadata_type",
+                  "metadata_identifier",
+                  "time_zone",
+                  "recipient_details"
                 ]
               }
             }
           },
           "required": true
         },
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseSchedule"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseSchedule"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/schedules/{schedule_identifier}/delete": {
+      "post": {
+        "operationId": "deleteSchedule",
+        "description": "Deletes a schedule <br/>  <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>",
+        "tags": [
+          "Schedules",
+          "9.4.0.cl"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "schedule_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique ID or name of the schedule.",
+            "deprecated": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/schedules/search": {
+      "post": {
+        "operationId": "searchSchedules",
+        "description": "Search Schedules <br/>  <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>",
+        "tags": [
+          "Schedules",
+          "9.4.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "metadata": {
+                    "description": "Metadata objects associated with schedules.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/MetadataInput"
+                    },
+                    "deprecated": false
+                  },
+                  "record_offset": {
+                    "description": "The starting record number from where the records should be included.",
+                    "type": "integer",
+                    "format": "int32",
+                    "deprecated": false
+                  },
+                  "record_size": {
+                    "description": "The number of records that should be included.",
+                    "type": "integer",
+                    "format": "int32",
+                    "deprecated": false
+                  },
+                  "sort_options": {
+                    "description": "Sort options.",
+                    "$ref": "#/components/schemas/SortingOptions",
+                    "deprecated": false
+                  },
+                  "history_runs_options": {
+                    "description": "Options while fetching history runs wrt to the schedule.",
+                    "$ref": "#/components/schemas/ScheduleHistoryRunsOptionsInput",
+                    "deprecated": false
+                  },
+                  "schedule_identifiers": {
+                    "description": "unique ID or name of the Schedule",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "deprecated": false
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ResponseSchedule"
+                  }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ResponseSchedule"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/schedules/{schedule_identifier}/update": {
+      "post": {
+        "operationId": "updateSchedule",
+        "description": "Update schedule. <br/>  <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>",
+        "tags": [
+          "Schedules",
+          "9.4.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "description": "Name of the scheduled job.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "description": {
+                    "description": "Description of the job.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "metadata_type": {
+                    "description": "Type of metadata.",
+                    "type": "string",
+                    "enum": [
+                      "LIVEBOARD"
+                    ],
+                    "deprecated": false
+                  },
+                  "metadata_identifier": {
+                    "description": "Unique ID or name of the metadata.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "file_format": {
+                    "description": "Export file format.",
+                    "type": "string",
+                    "enum": [
+                      "CSV",
+                      "PDF"
+                    ],
+                    "deprecated": false
+                  },
+                  "liveboard_options": {
+                    "description": "Options to specify details of liveboard.",
+                    "$ref": "#/components/schemas/LiveboardOptionsInput",
+                    "deprecated": false
+                  },
+                  "pdf_options": {
+                    "description": "Options for PDF export.",
+                    "$ref": "#/components/schemas/SchedulesPdfOptionsInput",
+                    "deprecated": false
+                  },
+                  "time_zone": {
+                    "description": "Time zone",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "frequency": {
+                    "description": "Configuration of schedule with cron expression",
+                    "$ref": "#/components/schemas/FrequencyInput",
+                    "deprecated": false
+                  },
+                  "recipient_details": {
+                    "description": "Recipient configuration which includes emails and recipients of the schedule",
+                    "$ref": "#/components/schemas/RecipientDetailsInput",
+                    "deprecated": false
+                  },
+                  "status": {
+                    "description": "Status of the schedule",
+                    "type": "string",
+                    "enum": [
+                      "ACTIVE",
+                      "PAUSE"
+                    ],
+                    "deprecated": false
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "schedule_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique ID or name of the schedule.",
+            "deprecated": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -5262,6 +7458,10 @@
           "welcome_email_sent": {
             "type": "boolean",
             "description": "Indicates whether welcome email is sent for the user."
+          },
+          "org_privileges": {
+            "type": "object",
+            "description": "Privileges which are assigned to the user with org."
           }
         }
       },
@@ -5483,7 +7683,8 @@
             "enum": [
               "LIVEBOARD",
               "ANSWER",
-              "LOGICAL_TABLE"
+              "LOGICAL_TABLE",
+              "CONNECTION"
             ],
             "description": "Type of metadata (Optional when given identifier is ID)."
           },
@@ -5609,6 +7810,22 @@
           }
         }
       },
+      "SearchDataResponse": {
+        "type": "object",
+        "required": [
+          "contents"
+        ],
+        "properties": {
+          "contents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AnswerContent"
+            },
+            "description": "Data content of metadata objects."
+          }
+        },
+        "description": "Response format associated with the search data API."
+      },
       "AnswerDataResponse": {
         "type": "object",
         "required": [
@@ -5660,6 +7877,25 @@
           }
         }
       },
+      "Org": {
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The ID of the object."
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the object."
+          }
+        },
+        "description": "Current logged in Organizations of the user."
+      },
       "GenericInfo": {
         "type": "object",
         "properties": {
@@ -5683,6 +7919,40 @@
           },
           "path": {
             "type": "string"
+          }
+        }
+      },
+      "GetTokenResponse": {
+        "type": "object",
+        "required": [
+          "token",
+          "creation_time_in_millis",
+          "expiration_time_in_millis",
+          "valid_for_user_id",
+          "valid_for_username"
+        ],
+        "properties": {
+          "token": {
+            "type": "string",
+            "description": "Bearer auth token."
+          },
+          "creation_time_in_millis": {
+            "type": "number",
+            "format": "float",
+            "description": "Token creation time in milliseconds."
+          },
+          "expiration_time_in_millis": {
+            "type": "number",
+            "format": "float",
+            "description": "Token expiration time in milliseconds."
+          },
+          "valid_for_user_id": {
+            "type": "string",
+            "description": "Username to whom the token is issued."
+          },
+          "valid_for_username": {
+            "type": "string",
+            "description": "Unique identifier of the user to whom the token is issued."
           }
         }
       },
@@ -6034,6 +8304,13 @@
               "NON_SHARABLE"
             ],
             "description": "Visibility of the user group. The SHARABLE makes a user group visible to other users and user groups, and thus allows them to share objects."
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Role"
+            },
+            "description": "List of roles assgined to the user"
           }
         }
       },
@@ -6091,6 +8368,10 @@
               "type": "object"
             },
             "description": "Visualization header information of the metadata objects."
+          },
+          "stats": {
+            "type": "object",
+            "description": "Stats of the metadata object. Includes views, favorites, last_accessed."
           }
         },
         "description": "Metadata Search Response Object."
@@ -6191,6 +8472,34 @@
         },
         "description": "Favorite object options."
       },
+      "MetadataSearchSortOptions": {
+        "type": "object",
+        "properties": {
+          "field_name": {
+            "type": "string",
+            "enum": [
+              "NAME",
+              "DISPLAY_NAME",
+              "AUTHOR",
+              "CREATED",
+              "MODIFIED",
+              "VIEWS",
+              "FAVORITES",
+              "LAST_ACCESSED"
+            ],
+            "description": "Name of the field to apply the sort on."
+          },
+          "order": {
+            "type": "string",
+            "enum": [
+              "ASC",
+              "DESC"
+            ],
+            "description": "Sort order : ASC(Ascending) or DESC(Descending)."
+          }
+        },
+        "description": "Sort options."
+      },
       "SqlQueryResponse": {
         "type": "object",
         "required": [
@@ -6282,22 +8591,6 @@
           }
         }
       },
-      "SearchDataResponse": {
-        "type": "object",
-        "required": [
-          "contents"
-        ],
-        "properties": {
-          "contents": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AnswerContent"
-            },
-            "description": "Data content of metadata objects."
-          }
-        },
-        "description": "Response format associated with the search data API."
-      },
       "LogResponse": {
         "type": "object",
         "required": [
@@ -6326,12 +8619,28 @@
             "type": "string",
             "description": "Username to authenticate connection to vcs"
           },
+          "default_branch": {
+            "type": "string",
+            "description": "Name of the default remote branch"
+          },
           "branches": {
             "type": "array",
             "items": {
               "type": "string"
             },
             "description": "Branches that have been pulled in local repository"
+          },
+          "enable_guid_mapping": {
+            "type": "boolean",
+            "description": "Maintain mapping of guid for the deployment to an instance"
+          },
+          "guid_mapping_branch_name": {
+            "type": "string",
+            "description": "Name of the branch where file containing guid mapping should be maintained"
+          },
+          "org": {
+            "$ref": "#/components/schemas/Org",
+            "description": "Details of the organization"
           }
         }
       },
@@ -6470,7 +8779,7 @@
           }
         }
       },
-      "RoleResponse": {
+      "SearchRoleResponse": {
         "type": "object",
         "required": [
           "id",
@@ -6515,39 +8824,48 @@
             "items": {
               "type": "string",
               "enum": [
+                "UNKNOWN",
+                "ADMINISTRATION",
+                "AUTHORING",
                 "USERDATAUPLOADING",
                 "DATADOWNLOADING",
+                "USERMANAGEMENT",
+                "SECURITYMANAGEMENT",
+                "LOGICALMODELING",
                 "DATAMANAGEMENT",
+                "TAGMANAGEMENT",
                 "SHAREWITHALL",
+                "SYSTEMMANAGEMENT",
                 "JOBSCHEDULING",
                 "A3ANALYSIS",
                 "EXPERIMENTALFEATUREPRIVILEGE",
                 "BYPASSRLS",
+                "RANALYSIS",
                 "DISABLE_PINBOARD_CREATION",
                 "DEVELOPER",
                 "APPLICATION_ADMINISTRATION",
                 "USER_ADMINISTRATION",
                 "GROUP_ADMINISTRATION",
+                "BACKUP_ADMINISTRATION",
                 "SYSTEM_INFO_ADMINISTRATION",
+                "ENABLESPOTAPPCREATION",
                 "SYNCMANAGEMENT",
                 "ORG_ADMINISTRATION",
                 "ROLE_ADMINISTRATION",
                 "AUTHENTICATION_ADMINISTRATION",
-                "BILLING_INFO_ADMINISTRATION"
+                "BILLING_INFO_ADMINISTRATION",
+                "PREVIEW_THOUGHTSPOT_SAGE"
               ]
             },
             "description": "Privileges granted to the role."
           },
           "permission": {
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "READ_ONLY",
-                "MODIFY",
-                "NO_ACCESS"
-              ]
-            },
+            "type": "string",
+            "enum": [
+              "READ_ONLY",
+              "MODIFY",
+              "NO_ACCESS"
+            ],
             "description": "Permission details of the Role"
           },
           "author_id": {
@@ -6586,7 +8904,8 @@
             "type": "boolean",
             "description": "Indicates whether the role is shared via connection"
           }
-        }
+        },
+        "description": "Response for search role api should handle hidden privileges as well."
       },
       "Token": {
         "type": "object",
@@ -6934,24 +9253,335 @@
           }
         }
       },
-      "Org": {
+      "RoleResponse": {
         "type": "object",
         "required": [
           "id",
-          "name"
+          "name",
+          "description",
+          "privileges"
         ],
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The ID of the object."
+            "type": "string",
+            "description": "Unique Id of the role."
           },
           "name": {
             "type": "string",
-            "description": "Name of the object."
+            "description": "Name of the role"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the role"
+          },
+          "groups_assigned_count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "number of groups assigned with this role"
+          },
+          "orgs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GenericInfo"
+            },
+            "description": "Organizations in which role exists."
+          },
+          "groups": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GenericInfo"
+            },
+            "description": "Details of groups assigned with this role"
+          },
+          "privileges": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "USERDATAUPLOADING",
+                "DATADOWNLOADING",
+                "DATAMANAGEMENT",
+                "SHAREWITHALL",
+                "JOBSCHEDULING",
+                "A3ANALYSIS",
+                "EXPERIMENTALFEATUREPRIVILEGE",
+                "BYPASSRLS",
+                "DISABLE_PINBOARD_CREATION",
+                "DEVELOPER",
+                "APPLICATION_ADMINISTRATION",
+                "USER_ADMINISTRATION",
+                "GROUP_ADMINISTRATION",
+                "SYSTEM_INFO_ADMINISTRATION",
+                "SYNCMANAGEMENT",
+                "ORG_ADMINISTRATION",
+                "ROLE_ADMINISTRATION",
+                "AUTHENTICATION_ADMINISTRATION",
+                "BILLING_INFO_ADMINISTRATION"
+              ]
+            },
+            "description": "Privileges granted to the role."
+          },
+          "permission": {
+            "type": "string",
+            "enum": [
+              "READ_ONLY",
+              "MODIFY",
+              "NO_ACCESS"
+            ],
+            "description": "Permission details of the Role"
+          },
+          "author_id": {
+            "type": "string",
+            "description": "Unique identifier of author of the role."
+          },
+          "modifier_id": {
+            "type": "string",
+            "description": "Unique identifier of modifier of the role."
+          },
+          "creation_time_in_millis": {
+            "type": "object",
+            "description": "Creation time of the role in milliseconds."
+          },
+          "modification_time_in_millis": {
+            "type": "object",
+            "description": "Last modified time of the role in milliseconds."
+          },
+          "deleted": {
+            "type": "boolean",
+            "description": "Indicates whether the role is deleted."
+          },
+          "deprecated": {
+            "type": "boolean",
+            "description": "Indicates whether the role is deprecated."
+          },
+          "external": {
+            "type": "boolean",
+            "description": "Indicates whether the role is external."
+          },
+          "hidden": {
+            "type": "boolean",
+            "description": "Indicates whether the role is hidden."
+          },
+          "shared_via_connection": {
+            "type": "boolean",
+            "description": "Indicates whether the role is shared via connection"
+          }
+        }
+      },
+      "ResponseSchedule": {
+        "type": "object",
+        "required": [
+          "author",
+          "creation_time_in_millis",
+          "file_format",
+          "frequency",
+          "id",
+          "metadata",
+          "name",
+          "time_zone"
+        ],
+        "properties": {
+          "author": {
+            "$ref": "#/components/schemas/Author",
+            "description": "Author of the schedule."
+          },
+          "creation_time_in_millis": {
+            "type": "object",
+            "description": "Schedule creation time in milliseconds."
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the job."
+          },
+          "file_format": {
+            "type": "string",
+            "description": "Export file format."
+          },
+          "frequency": {
+            "$ref": "#/components/schemas/Frequency",
+            "description": "Configuration of schedule with cron expression"
+          },
+          "id": {
+            "type": "string",
+            "description": "GUID of the scheduled job."
+          },
+          "liveboard_options": {
+            "$ref": "#/components/schemas/LiveboardOptions",
+            "description": "Options to specify details of liveboard."
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/MetadataResponse",
+            "description": "Unique ID or name of the metadata."
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the scheduled job."
+          },
+          "pdf_options": {
+            "$ref": "#/components/schemas/PdfOptions",
+            "description": "Options for PDF export."
+          },
+          "recipient_details": {
+            "$ref": "#/components/schemas/RecipientDetails",
+            "description": "Recipient configuration which includes emails and recipients of the schedule"
+          },
+          "status": {
+            "type": "string",
+            "description": "Status of the job"
+          },
+          "time_zone": {
+            "type": "string",
+            "description": "Time zone"
+          },
+          "history_runs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ResponseScheduleRun"
+            },
+            "description": "Schedule runs history records."
+          }
+        }
+      },
+      "LiveboardOptionsInput": {
+        "type": "object",
+        "required": [
+          "visualization_identifiers"
+        ],
+        "properties": {
+          "visualization_identifiers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Unique ID or name of visualizations."
           }
         },
-        "description": "Current logged in Organizations of the user."
+        "description": "Options to specify details of liveboard."
+      },
+      "SchedulesPdfOptionsInput": {
+        "type": "object",
+        "properties": {
+          "complete_liveboard": {
+            "type": "boolean",
+            "description": "Indicates whether to include complete liveboard."
+          },
+          "include_cover_page": {
+            "type": "boolean",
+            "description": "Indicates whether to include cover page with the liveboard title."
+          },
+          "include_custom_logo": {
+            "type": "boolean",
+            "description": "Indicates whether to include customized wide logo in the footer if available."
+          },
+          "include_filter_page": {
+            "type": "boolean",
+            "description": "Indicates whether to include a page with all applied filters."
+          },
+          "include_page_number": {
+            "type": "boolean",
+            "description": "Indicates whether to include page number in the footer of each page"
+          },
+          "page_footer_text": {
+            "type": "string",
+            "description": "Text to include in the footer of each page."
+          },
+          "page_orientation": {
+            "type": "string",
+            "description": "Page orientation of the PDF."
+          },
+          "page_size": {
+            "type": "string",
+            "enum": [
+              "A4"
+            ],
+            "description": "Page size."
+          },
+          "truncate_table": {
+            "type": "boolean",
+            "description": "Indicates whether to include only first page of the tables."
+          }
+        },
+        "description": "Options for PDF export."
+      },
+      "FrequencyInput": {
+        "type": "object",
+        "required": [
+          "cron_expression"
+        ],
+        "properties": {
+          "cron_expression": {
+            "$ref": "#/components/schemas/CronExpressionInput",
+            "description": "Schedule selected cron expression."
+          }
+        },
+        "description": "Configuration of schedule with cron expression"
+      },
+      "RecipientDetailsInput": {
+        "type": "object",
+        "properties": {
+          "emails": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Emails of the recipients."
+          },
+          "principals": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PrincipalsListItemInput"
+            },
+            "description": "List of user or user groups to be associated for schedule."
+          }
+        },
+        "description": "Recipient configuration which includes emails and recipients of the schedule"
+      },
+      "MetadataInput": {
+        "type": "object",
+        "properties": {
+          "identifier": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "LIVEBOARD"
+            ]
+          }
+        }
+      },
+      "SortingOptions": {
+        "type": "object",
+        "properties": {
+          "field_name": {
+            "type": "string",
+            "description": "Name of the field to apply the sort on."
+          },
+          "order": {
+            "type": "string",
+            "description": "Sort order : ASC(Ascending) or DESC(Descending)."
+          }
+        },
+        "description": "Sort options."
+      },
+      "ScheduleHistoryRunsOptionsInput": {
+        "type": "object",
+        "properties": {
+          "include_history_runs": {
+            "type": "boolean",
+            "description": "Indicates whether to fetch history runs wrt to the schedule or not."
+          },
+          "record_size": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Indicates the max number of records that can be fetched as history runs wrt any scheduled job."
+          },
+          "record_offset": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Indicates the starting record number from where history runs records should be fetched."
+          }
+        }
       },
       "FavoriteMetadataItem": {
         "type": "object",
@@ -7130,6 +9760,19 @@
           }
         }
       },
+      "Role": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "id of the Role"
+          },
+          "name": {
+            "type": "string",
+            "description": "name of the Role"
+          }
+        }
+      },
       "SqlQuery": {
         "type": "object",
         "required": [
@@ -7289,6 +9932,228 @@
           }
         }
       },
+      "Author": {
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique identifier of the object."
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the object."
+          }
+        },
+        "description": "Author of the schedule."
+      },
+      "Frequency": {
+        "type": "object",
+        "required": [
+          "cron_expression"
+        ],
+        "properties": {
+          "cron_expression": {
+            "$ref": "#/components/schemas/CronExpression",
+            "description": "Schedule selected cron expression."
+          }
+        },
+        "description": "Configuration of schedule with cron expression"
+      },
+      "LiveboardOptions": {
+        "type": "object",
+        "required": [
+          "visualization_identifiers"
+        ],
+        "properties": {
+          "visualization_identifiers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Unique ID or name of visualizations."
+          }
+        },
+        "description": "Options to specify details of liveboard."
+      },
+      "MetadataResponse": {
+        "type": "object",
+        "required": [
+          "id",
+          "type"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "LIVEBOARD"
+            ]
+          }
+        }
+      },
+      "PdfOptions": {
+        "type": "object",
+        "properties": {
+          "complete_liveboard": {
+            "type": "boolean",
+            "description": "Indicates whether to include complete liveboard."
+          },
+          "include_cover_page": {
+            "type": "boolean",
+            "description": "Indicates whether to include cover page with the liveboard title."
+          },
+          "include_custom_logo": {
+            "type": "boolean",
+            "description": "Indicates whether to include customized wide logo in the footer if available."
+          },
+          "include_filter_page": {
+            "type": "boolean",
+            "description": "Indicates whether to include a page with all applied filters."
+          },
+          "include_page_number": {
+            "type": "boolean",
+            "description": "Indicates whether to include page number in the footer of each page"
+          },
+          "page_footer_text": {
+            "type": "string",
+            "description": "Text to include in the footer of each page."
+          },
+          "page_orientation": {
+            "type": "string",
+            "description": "Page orientation of the PDF."
+          },
+          "page_size": {
+            "type": "string",
+            "enum": [
+              "A4"
+            ],
+            "description": "Page size."
+          },
+          "truncate_table": {
+            "type": "boolean",
+            "description": "Indicates whether to include only first page of the tables."
+          }
+        },
+        "description": "Options for PDF export."
+      },
+      "RecipientDetails": {
+        "type": "object",
+        "properties": {
+          "emails": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Emails of the recipients."
+          },
+          "principals": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PrincipalsListItem"
+            },
+            "description": "List of user or user groups to be associated for schedule."
+          }
+        },
+        "description": "Recipient configuration which includes emails and recipients of the schedule"
+      },
+      "ResponseScheduleRun": {
+        "type": "object",
+        "required": [
+          "id",
+          "start_time_in_millis",
+          "end_time_in_millis",
+          "status"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "GUID of the scheduled job."
+          },
+          "start_time_in_millis": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Schedule run start time in milliseconds."
+          },
+          "end_time_in_millis": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Schedule run end time in milliseconds."
+          },
+          "status": {
+            "type": "string",
+            "description": "Status of the schedule run."
+          },
+          "detail": {
+            "type": "string",
+            "description": "Message details related to the schedule run."
+          }
+        },
+        "description": "Schedule run response object"
+      },
+      "CronExpressionInput": {
+        "type": "object",
+        "required": [
+          "day_of_month",
+          "day_of_week",
+          "hour",
+          "minute",
+          "month",
+          "second"
+        ],
+        "properties": {
+          "day_of_month": {
+            "type": "string",
+            "description": "Day of month of the object."
+          },
+          "day_of_week": {
+            "type": "string",
+            "description": "Day of Week of the object."
+          },
+          "hour": {
+            "type": "string",
+            "description": "Hour of the object."
+          },
+          "minute": {
+            "type": "string",
+            "description": "Minute of the object."
+          },
+          "month": {
+            "type": "string",
+            "description": "Month of the object."
+          },
+          "second": {
+            "type": "string",
+            "description": "Second of the object."
+          }
+        },
+        "description": "Schedule selected cron expression."
+      },
+      "PrincipalsListItemInput": {
+        "type": "object",
+        "required": [
+          "identifier",
+          "type"
+        ],
+        "properties": {
+          "identifier": {
+            "type": "string",
+            "description": "Unique ID or name of the principal."
+          },
+          "type": {
+            "type": "string",
+            "description": "Principal type."
+          }
+        }
+      },
       "Database": {
         "type": "object",
         "required": [
@@ -7302,13 +10167,72 @@
           "schemas": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Schema"
+              "$ref": "#/components/schemas/SchemaObject"
             },
             "description": "Schemas of the database."
+          },
+          "auto_created": {
+            "type": "boolean",
+            "description": "Determines if the object is auto created."
           }
         }
       },
-      "Schema": {
+      "CronExpression": {
+        "type": "object",
+        "required": [
+          "day_of_month",
+          "day_of_week",
+          "hour",
+          "minute",
+          "month",
+          "second"
+        ],
+        "properties": {
+          "day_of_month": {
+            "type": "string",
+            "description": "Day of month of the object."
+          },
+          "day_of_week": {
+            "type": "string",
+            "description": "Day of Week of the object."
+          },
+          "hour": {
+            "type": "string",
+            "description": "Hour of the object."
+          },
+          "minute": {
+            "type": "string",
+            "description": "Minute of the object."
+          },
+          "month": {
+            "type": "string",
+            "description": "Month of the object."
+          },
+          "second": {
+            "type": "string",
+            "description": "Second of the object."
+          }
+        },
+        "description": "Schedule selected cron expression."
+      },
+      "PrincipalsListItem": {
+        "type": "object",
+        "required": [
+          "identifier",
+          "type"
+        ],
+        "properties": {
+          "identifier": {
+            "type": "string",
+            "description": "Unique ID or name of the principal."
+          },
+          "type": {
+            "type": "string",
+            "description": "Principal type."
+          }
+        }
+      },
+      "SchemaObject": {
         "type": "object",
         "required": [
           "name"
@@ -7343,6 +10267,29 @@
               "$ref": "#/components/schemas/Column"
             },
             "description": "Columns of the table."
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of table. Either view or table"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the table"
+          },
+          "selected": {
+            "type": "boolean",
+            "description": "Determines if the table is selected"
+          },
+          "linked": {
+            "type": "boolean",
+            "description": "Determines if the table is linked"
+          },
+          "relationships": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": "List of relationships for the table"
           }
         }
       },
@@ -7360,6 +10307,22 @@
           "data_type": {
             "type": "string",
             "description": "Data type of the column."
+          },
+          "is_aggregate": {
+            "type": "string",
+            "description": "Determines if the column schema is an aggregate"
+          },
+          "can_import": {
+            "type": "boolean",
+            "description": "Determines if the column schema can be imported"
+          },
+          "selected": {
+            "type": "boolean",
+            "description": "Determines if the table is selected"
+          },
+          "is_linked_active": {
+            "type": "boolean",
+            "description": "Determines if the table is linked"
           }
         }
       }
