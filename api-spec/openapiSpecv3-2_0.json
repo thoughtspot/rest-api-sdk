@@ -568,7 +568,7 @@
     "/api/rest/2.0/system/config-overrides": {
       "get": {
         "operationId": "getSystemOverrideInfo",
-        "description": "\nGet cluster override info. <br/>  <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nGets a list of configuration overrides applied on the cluster.  \n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\nThis API does not require any parameters to be passed in the request.  \n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nGets a list of configuration overrides applied on the cluster.  \n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\nThis API does not require any parameters to be passed in the request.  \n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "System",
           "9.2.0.cl"
@@ -764,7 +764,7 @@
     "/api/rest/2.0/tags/search": {
       "post": {
         "operationId": "searchTags",
-        "description": "\nAllows searching tags. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGets a list of tag objects available on the ThoughtSpot system. To get details of a specific tag object, specify the GUID or name.\n\nAny authenticated user can search for tag objects.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGets a list of tag objects available on the ThoughtSpot system. To get details of a specific tag object, specify the GUID or name.\n\nAny authenticated user can search for tag objects.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Tags",
           "9.0.0.cl"
@@ -2027,7 +2027,7 @@
     "/api/rest/2.0/searchdata": {
       "post": {
         "operationId": "searchData",
-        "description": "\nAllows passing a search query string and retrieving data from ThoughtSpot. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGenerates an Answer from a given data source.\n\nRequires at least view access to the data source.\n\n#### Usage guidelines\n\nTo generate a new Answer, specify the data source GUID. The data source can be a Worksheet, View, Table, or SQL view.\n\nPass search tokens in the `query_string` attribute in the API request as shown in the following example. For more information passing search query string in API requests, see [`Components of a search query`](https://developers.thoughtspot.com/docs/?pageid=search-data-api#components).  \n```\n{\n  \"query_string\": \"[sales] by [store]\",\n  \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\",\n}\n```\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGenerates an Answer from a given data source.\n\nRequires at least view access to the data source.\n\n#### Usage guidelines\n\nTo generate a new Answer, specify the data source GUID. The data source can be a Worksheet, View, Table, or SQL view.\n\nPass search tokens in the `query_string` attribute in the API request as shown in the following example. For more information passing search query string in API requests, see [`Components of a search query`](https://developers.thoughtspot.com/docs/?pageid=search-data-api#components).  \n```\n{\n  \"query_string\": \"[sales] by [store]\",\n  \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\",\n}\n```\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Data",
           "9.0.0.cl"
@@ -2154,7 +2154,7 @@
     "/api/rest/2.0/metadata/liveboard/data": {
       "post": {
         "operationId": "fetchLiveboardData",
-        "description": "\nFetches Liveboard data. Requires at least view access to the Liveboard. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGets data from a Liveboard object and its visualization.  \n\nRequires at least view access to the Liveboard.\n\n#### Usage guidelines\n\nIn the request body, specify the GUID or name of the Liveboard. To get data for specific visualizations, add the GUIDs or names of the visualizations in the API request.\n\nTo include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes. If the new Liveboard experience mode, the transient content includes ad hoc changes to visualizations such as sorting, toggling of legends, and data drill down.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGets data from a Liveboard object and its visualization.  \n\nRequires at least view access to the Liveboard.\n\n#### Usage guidelines\n\nIn the request body, specify the GUID or name of the Liveboard. To get data for specific visualizations, add the GUIDs or names of the visualizations in the API request.\n\nTo include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes. If the new Liveboard experience mode, the transient content includes ad hoc changes to visualizations such as sorting, toggling of legends, and data drill down.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Data",
           "9.0.0.cl"
@@ -2288,7 +2288,7 @@
     "/api/rest/2.0/metadata/answer/data": {
       "post": {
         "operationId": "fetchAnswerData",
-        "description": "\nFetches data from a saved Answer. Requires at least view access to the Answer object. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nFetches data from a saved Answer.\n\nRequires at least view access to the saved Answer.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nFetches data from a saved Answer.\n\nRequires at least view access to the saved Answer.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Data",
           "9.0.0.cl"
@@ -3984,7 +3984,7 @@
     "/api/rest/2.0/users/import": {
       "post": {
         "operationId": "importUsers",
-        "description": "\nImports user data from external databases to ThoughtSpot. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nImports user data from external databases into ThoughtSpot. During the user import operation:\n\n* If the specified users are not available in ThoughtSpot, the users are created and assigned a default password. Defining a `default_password` in the API request is optional.\n* If `delete_unspecified_users` is set to `true`, the users not specified in the API request, excluding the `tsadmin`, `guest`, `system` and `su` users, are deleted.\n* If the specified user objects are already available in ThoughtSpot, the object properties are updated and synchronized as per the input data in the API request.\n\nA successful API call returns the object that represents the changes made in the ThoughtSpot system.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nImports user data from external databases into ThoughtSpot. During the user import operation:\n\n* If the specified users are not available in ThoughtSpot, the users are created and assigned a default password. Defining a `default_password` in the API request is optional.\n* If `delete_unspecified_users` is set to `true`, the users not specified in the API request, excluding the `tsadmin`, `guest`, `system` and `su` users, are deleted.\n* If the specified user objects are already available in ThoughtSpot, the object properties are updated and synchronized as per the input data in the API request.\n\nA successful API call returns the object that represents the changes made in the ThoughtSpot system.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Users",
           "9.0.0.cl"
