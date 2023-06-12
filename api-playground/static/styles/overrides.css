@@ -20,3 +20,13 @@
 .branding-container .logo p {
     color: #eaedf2
 }
+.since-beta-tag {
+    padding: 1px 5px;
+    margin: 0 10px 0 0;
+    border-radius: 4px;
+    border: 1px solid #707070;
+    color: white;
+    font-size: 0.8em;
+    font-weight: normal;
+    background: grey;
+}
