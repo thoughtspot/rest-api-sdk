@@ -28,14 +28,6 @@
         "9.5.0.cl"
       ],
       "description": "Roles for version 9.5.0.cl"
-    },
-    {
-      "name": "9.4.0.cl",
-      "id": "9.4.0.cl",
-      "tags": [
-        "9.4.0.cl"
-      ],
-      "description": "Roles for version 9.4.0.cl"
     }
   ],
   "tags": [],
@@ -56,69 +48,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/User"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/rest/2.0/auth/session/token": {
-      "get": {
-        "operationId": "getCurrentUserToken",
-        "description": "\nGet token for the currently logged-in user. <br/>  <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>\n\nGets token details for the currently logged-in user.  You can use this endpoint to obtain the token associated with the user's session.\n\nThis API does not require any parameters to be passed in the request.  \n\nAny ThoughtSpot user can access this endpoint and send an API request.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "Authentication",
-          "9.4.0.cl"
-        ],
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Fetching token for current user successful.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetTokenResponse"
                 }
               }
             }
@@ -324,21 +253,6 @@
                     "description": "Sort options.",
                     "$ref": "#/components/schemas/SortOptions",
                     "deprecated": false
-                  },
-                  "role_identifiers": {
-                    "description": "Filter with list of role assigned to the user.",
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    },
-                    "deprecated": false
-                  },
-                  "include_favorite_metadata": {
-                    "description": "Indicates if the user's favorite objects should be displayed.",
-                    "default": false,
-                    "type": "boolean",
-                    "deprecated": false,
-                    "nullable": true
                   }
                 }
               }
@@ -991,33 +905,6 @@
                       "NON_SHARABLE"
                     ],
                     "deprecated": false
-                  },
-                  "role_identifiers": {
-                    "description": "Filter groups with a list of roles assigned to a group",
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    },
-                    "deprecated": false
-                  },
-                  "record_offset": {
-                    "description": "The starting record number from where the records should be included.",
-                    "default": 0,
-                    "type": "integer",
-                    "format": "int32",
-                    "deprecated": false
-                  },
-                  "record_size": {
-                    "description": "The number of records that should be included.",
-                    "default": 10,
-                    "type": "integer",
-                    "format": "int32",
-                    "deprecated": false
-                  },
-                  "sort_options": {
-                    "description": "Sort options to filter group details.",
-                    "$ref": "#/components/schemas/SortOptions",
-                    "deprecated": false
                   }
                 }
               }
@@ -1222,7 +1109,7 @@
                   },
                   "sort_options": {
                     "description": "Sort options to filter metadata details.",
-                    "$ref": "#/components/schemas/MetadataSearchSortOptions",
+                    "$ref": "#/components/schemas/SortOptions",
                     "deprecated": false
                   },
                   "tag_identifiers": {
@@ -1232,13 +1119,6 @@
                       "type": "string"
                     },
                     "deprecated": false
-                  },
-                  "include_stats": {
-                    "description": "Indicates whether to include stats of the metadata objects.",
-                    "default": false,
-                    "type": "boolean",
-                    "deprecated": false,
-                    "nullable": true
                   }
                 }
               }
@@ -1540,11 +1420,6 @@
                     "description": "Options for PNG export.",
                     "$ref": "#/components/schemas/PngOptionsInput",
                     "deprecated": false
-                  },
-                  "runtime_param_override": {
-                    "description": "JSON object for setting values of parameters in runtime.",
-                    "type": "object",
-                    "deprecated": false
                   }
                 },
                 "required": [
@@ -1648,11 +1523,6 @@
                   },
                   "runtime_sort": {
                     "description": "JSON string representing runtime sort.\n{ sortCol1: region, asc1 :true, sortCol2 : date }",
-                    "type": "object",
-                    "deprecated": false
-                  },
-                  "runtime_param_override": {
-                    "description": "JSON object for setting values of parameters in runtime.",
                     "type": "object",
                     "deprecated": false
                   }
@@ -2070,21 +1940,6 @@
                     "type": "integer",
                     "format": "int32",
                     "deprecated": false
-                  },
-                  "runtime_filter": {
-                    "description": "JSON object representing filter condition to filter the data.",
-                    "type": "object",
-                    "deprecated": false
-                  },
-                  "runtime_sort": {
-                    "description": "JSON object representing columns to sort the data.",
-                    "type": "object",
-                    "deprecated": false
-                  },
-                  "runtime_param_override": {
-                    "description": "JSON object for setting values of parameters in runtime.",
-                    "type": "object",
-                    "deprecated": false
                   }
                 },
                 "required": [
@@ -2205,21 +2060,6 @@
                     "type": "integer",
                     "format": "int32",
                     "deprecated": false
-                  },
-                  "runtime_filter": {
-                    "description": "JSON object representing filter condition to filter the data.",
-                    "type": "object",
-                    "deprecated": false
-                  },
-                  "runtime_sort": {
-                    "description": "JSON object representing columns to sort the data.",
-                    "type": "object",
-                    "deprecated": false
-                  },
-                  "runtime_param_override": {
-                    "description": "JSON object for setting values of parameters in runtime.",
-                    "type": "object",
-                    "deprecated": false
                   }
                 },
                 "required": [
@@ -2325,21 +2165,6 @@
                     "default": 10,
                     "type": "integer",
                     "format": "int32",
-                    "deprecated": false
-                  },
-                  "runtime_filter": {
-                    "description": "JSON object representing filter condition to filter the data.",
-                    "type": "object",
-                    "deprecated": false
-                  },
-                  "runtime_sort": {
-                    "description": "JSON object representing columns to sort the data.",
-                    "type": "object",
-                    "deprecated": false
-                  },
-                  "runtime_param_override": {
-                    "description": "JSON object for setting values of parameters in runtime.",
-                    "type": "object",
                     "deprecated": false
                   }
                 },
@@ -2512,28 +2337,9 @@
         "operationId": "searchConfig",
         "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nGets Git repository connections configured on the ThoughtSpot instance.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
-          "Version Control",
+          " Control",
           "9.2.0.cl"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "org_identifiers": {
-                    "description": "   List of Unique identifier of the organization. Provide value -1 for cluster level. Example : [\"OrgID1-or-Name1\", \"OrgID2-or-Name2\"]\n   \n\nNote:  If no org identifier is specified,then the configurations will be returned for all orgs the user has access to <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    },
-                    "deprecated": false
-                  }
-                }
-              }
-            }
-          }
-        },
         "parameters": [],
         "responses": {
           "200": {
@@ -2597,7 +2403,7 @@
         "operationId": "searchCommits",
         "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nGets a list of commits for a given metadata object.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
-          "Version Control",
+          " Control",
           "9.2.0.cl"
         ],
         "requestBody": {
@@ -2622,25 +2428,26 @@
                     "deprecated": false
                   },
                   "branch_name": {
-                    "description": "   Name of the branch from which commit history needs to be displayed.\n   \n\nNote: If no branch_name is specified, then commits will be returned for the default branch for this configuration.",
+                    "description": "Name of the branch from which commit history needs to be displayed",
                     "type": "string",
                     "deprecated": false
                   },
                   "record_offset": {
-                    "description": "    Record offset point in the commit history to display the response.\n    \n\nNote: If no record offset is specified, the beginning of the record will be considered.",
+                    "description": "Record offset point in the commit history to display the response",
                     "type": "integer",
                     "format": "int32",
                     "deprecated": false
                   },
                   "record_size": {
-                    "description": "    Number of history records from record offset point to be displayed in the response.\n    \n\nNote: If no record size is specified, then all the records will be considered.",
+                    "description": "Number of history records from record offset point to be displayed in the response",
                     "type": "integer",
                     "format": "int32",
                     "deprecated": false
                   }
                 },
                 "required": [
-                  "metadata_identifier"
+                  "metadata_identifier",
+                  "metadata_type"
                 ]
               }
             }
@@ -2708,7 +2515,7 @@
     "/api/rest/2.0/connection/search": {
       "post": {
         "operationId": "searchConnection",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nGets connection objects configured on the ThoughtSpot.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n* To get a list of all connection objects available in the ThoughtSpot system, send a `POST` request with no attributes in the request body.\n* To get the connection objects created for a specific type of data warehouse, set the type in `data_warehouse_types`.\n* To fetch details of a connection object, specify the connection object GUID or name. The `name_pattern` attribute allows passing partial text with `%` for a wildcard match.\n* To get details of the database, schemas, tables, or columns from a data connection object, specify the `data_warehouse_object_type` attribute.\n* To get a specific database, schema, table, or column from a connection object, define the object type in `data_warehouse_object_type` and object properties in the `data_warehouse_objects` array. For example, to search for a column, you must pass the database, schema, and table names in the API request.  \nNote that in the following example, object properties are set in a hierarchical order (`database` > `schema` > `table` > `column`).\n```\n{\n  \"connections\": [\n    {\n      \"identifier\": \"b9d1f2ef-fa65-4a4b-994e-30fa2d57b0c2\",\n      \"data_warehouse_objects\": [\n        {\n          \"database\": \"NEBULADEV\",\n          \"schema\": \"INFORMATION_SCHEMA\",\n          \"table\": \"APPLICABLE_ROLES\",\n          \"column\": \"ROLE_NAME\"\n        }\n      ]\n    }\n  ],\n  \"data_warehouse_object_type\": \"COLUMN\"\n}\n```\n* To include more details about connection objects in the API response, set `include_details` to `true`.\n* You can also sort the output by field names and filter connections by tags.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\nSearch connection objects. Requires DATAMANAGEMENT privilege. <br/>  <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nGets connection objects configured on the ThoughtSpot.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n* To get a list of all connection objects available in the ThoughtSpot system, send a `POST` request with no attributes in the request body.\n* To get the connection objects created for a specific type of data warehouse, set the type in `data_warehouse_types`.\n* To fetch details of a connection object, specify the connection object GUID or name. The `name_pattern` attribute allows passing partial text with `%` for a wildcard match.\n* To get details of the database, schemas, tables, or columns from a data connection object, specify the `data_warehouse_object_type` attribute.\n* To get a specific database, schema, table, or column from a connection object, define the object type in `data_warehouse_object_type` and object properties in the `data_warehouse_objects` array. For example, to search for a column, you must pass the database, schema, and table names in the API request.  \nNote that in the following example, object properties are set in a hierarchical order (`database` > `schema` > `table` > `column`).\n```\n{\n  \"connections\": [\n    {\n      \"identifier\": \"b9d1f2ef-fa65-4a4b-994e-30fa2d57b0c2\",\n      \"data_warehouse_objects\": [\n        {\n          \"database\": \"NEBULADEV\",\n          \"schema\": \"INFORMATION_SCHEMA\",\n          \"table\": \"APPLICABLE_ROLES\",\n          \"column\": \"ROLE_NAME\"\n        }\n      ]\n    }\n  ],\n  \"data_warehouse_object_type\": \"COLUMN\"\n}\n```\n* To include more details about connection objects in the API response, set `include_details` to `true`.\n* You can also sort the output by field names and filter connections by tags.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Connections",
           "9.2.0.cl"
@@ -2793,23 +2600,6 @@
                     "type": "boolean",
                     "deprecated": false,
                     "nullable": true
-                  },
-                  "configuration": {
-                    "description": "Configuration values. If empty we are fetching configuration from datasource based on given connection id. If required you can provide config details to fetch specific details. Example input: {}, {\"warehouse\":\"SMALL_WH\",\"database\":\"DEVELOPMENT\"}. This is only applicable when data_warehouse_object_type is selected.",
-                    "type": "object",
-                    "deprecated": false
-                  },
-                  "authentication_type": {
-                    "description": "List of authentication types to fetch data_ware_house_objects from external Data warehouse. This is only applicable when data_warehouse_object_type is selected.",
-                    "default": "SERVICE_ACCOUNT",
-                    "type": "string",
-                    "enum": [
-                      "SERVICE_ACCOUNT",
-                      "OAUTH",
-                      "IAM",
-                      "EXTOAUTH"
-                    ],
-                    "deprecated": false
                   }
                 }
               }
@@ -2877,7 +2667,7 @@
     "/api/rest/2.0/roles/search": {
       "post": {
         "operationId": "searchRoles",
-        "description": "Gets Roles configured on a ThoughtSpot instance.\nRequires cluster Administration, Role Administration or\nGroup Administration privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
+        "description": " <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
         "tags": [
           "Roles",
           "9.5.0.cl"
@@ -2918,37 +2708,25 @@
                     "items": {
                       "type": "string",
                       "enum": [
-                        "UNKNOWN",
-                        "ADMINISTRATION",
-                        "AUTHORING",
                         "USERDATAUPLOADING",
                         "DATADOWNLOADING",
-                        "USERMANAGEMENT",
-                        "SECURITYMANAGEMENT",
-                        "LOGICALMODELING",
                         "DATAMANAGEMENT",
-                        "TAGMANAGEMENT",
                         "SHAREWITHALL",
-                        "SYSTEMMANAGEMENT",
                         "JOBSCHEDULING",
                         "A3ANALYSIS",
                         "EXPERIMENTALFEATUREPRIVILEGE",
                         "BYPASSRLS",
-                        "RANALYSIS",
                         "DISABLE_PINBOARD_CREATION",
                         "DEVELOPER",
                         "APPLICATION_ADMINISTRATION",
                         "USER_ADMINISTRATION",
                         "GROUP_ADMINISTRATION",
-                        "BACKUP_ADMINISTRATION",
                         "SYSTEM_INFO_ADMINISTRATION",
-                        "ENABLESPOTAPPCREATION",
                         "SYNCMANAGEMENT",
                         "ORG_ADMINISTRATION",
                         "ROLE_ADMINISTRATION",
                         "AUTHENTICATION_ADMINISTRATION",
-                        "BILLING_INFO_ADMINISTRATION",
-                        "PREVIEW_THOUGHTSPOT_SAGE"
+                        "BILLING_INFO_ADMINISTRATION"
                       ]
                     },
                     "deprecated": false
@@ -2998,7 +2776,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/SearchRoleResponse"
+                    "$ref": "#/components/schemas/RoleResponse"
                   }
                 }
               }
@@ -3197,7 +2975,7 @@
                     "deprecated": false
                   },
                   "auto_create": {
-                    "description": "“Creates a new user if the specified username does not already exist in ThoughtSpot. Use this parameter to provision a user just-in-time (JIT) \n\n\nNote: This is only available for clusters with trusted authentication enabled. ",
+                    "description": "“Creates a new user if the specified username does not already exist in ThoughtSpot. Use this parameter to provision a user just-in-time (JIT).",
                     "default": false,
                     "type": "boolean",
                     "deprecated": false,
@@ -3333,7 +3111,7 @@
                     "deprecated": false
                   },
                   "auto_create": {
-                    "description": "   Creates a new user if the specified username does not already exist in ThoughtSpot. Use this parameter to provision a user just-in-time (JIT). \n\nNote: This is only available for clusters with trusted authentication enabled.",
+                    "description": "Creates a new user if the specified username does not already exist in ThoughtSpot. Use this parameter to provision a user just-in-time (JIT).",
                     "default": false,
                     "type": "boolean",
                     "deprecated": false,
@@ -3837,17 +3615,6 @@
                     "items": {
                       "type": "string"
                     },
-                    "deprecated": false
-                  },
-                  "operation": {
-                    "description": "Type of update operation. Default operation type is REPLACE",
-                    "default": "REPLACE",
-                    "type": "string",
-                    "enum": [
-                      "ADD",
-                      "REMOVE",
-                      "REPLACE"
-                    ],
                     "deprecated": false
                   }
                 }
@@ -4537,17 +4304,6 @@
                       "type": "string"
                     },
                     "deprecated": false
-                  },
-                  "operation": {
-                    "description": "Type of update operation. Default operation type is ADD",
-                    "default": "ADD",
-                    "type": "string",
-                    "enum": [
-                      "ADD",
-                      "REMOVE",
-                      "REPLACE"
-                    ],
-                    "deprecated": false
                   }
                 }
               }
@@ -5220,14 +4976,6 @@
                       "NON_SHARABLE"
                     ],
                     "deprecated": false
-                  },
-                  "role_identifiers": {
-                    "description": "Role identifiers of the roles that should be assigned to the group.",
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    },
-                    "deprecated": false
                   }
                 },
                 "required": [
@@ -5393,25 +5141,6 @@
                     "enum": [
                       "SHARABLE",
                       "NON_SHARABLE"
-                    ],
-                    "deprecated": false
-                  },
-                  "role_identifiers": {
-                    "description": "Role identifiers of the roles that should be assigned to the group.",
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    },
-                    "deprecated": false
-                  },
-                  "operation": {
-                    "description": "Type of update operation. Default operation type is REPLACE",
-                    "default": "REPLACE",
-                    "type": "string",
-                    "enum": [
-                      "ADD",
-                      "REMOVE",
-                      "REPLACE"
                     ],
                     "deprecated": false
                   }
@@ -5644,8 +5373,8 @@
     },
     "/api/rest/2.0/metadata/tml/import": {
       "post": {
-        "operationId": "importMetadataTML",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nImports [TML](https://docs.thoughtspot.com/cloud/latest/tml) files into ThoughtSpot.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtsSpot**) privilege.\n\n#### Usage guidelines\n\n*  Import all related objects in a single TML Import API call. For example, Tables that use the same Connection object and Worksheets connected to these Tables.\n* Include the `fqn` property to distinguish objects that have the same name.\n  For example, if you have multiple Connections or Worksheets with the same name on ThoughtSpot and the Connection or Worksheet referenced in your TML file does not have a unique name to distinguish, it may result in invalid object references.\n  Adding `fqn` helps ThoughtSpot differentiate a Table from another with the same name.\n  We recommend [exporting TML with FQNs](#/http/api-endpoints/metadata/export-metadata-tml) and using these during the import operation.\n* You can upload multiple TML files at a time.\n  If you import a Worksheet along with Liveboards, Answers, and other dependent objects in a single API call, the imported objects will be immediately available for use.\n  When you import only a Worksheet object, it may take some time for the Worksheet to become available in the ThoughtSpot system. Please wait for a few minutes, and then proceed to create an Answer and Liveboard from the newly imported Worksheet.\n\n\n\n\n#### Endpoint URL\n",
+        "operationId": "importMetadata",
+        "description": " <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
           "Metadata",
           "9.0.0.cl"
@@ -5751,8 +5480,8 @@
     },
     "/api/rest/2.0/metadata/tml/export": {
       "post": {
-        "operationId": "exportMetadataTML",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nExports the [TML](https://docs.thoughtspot.com/cloud/latest/tml) representation of metadata objects in JSON or YAML format.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtsSpot**) privilege.\n\n#### Usage guidelines\n\n* You can export one or several objects by passing metadata object GUIDs in the `metadata` array.\n* When exporting TML content for a Liveboard or Answer object, you can set `export_associated` to `true` to retrieve TML content for underlying Worksheets, Tables, or Views, including the GUID of each object within the headers. When   `export_associated` is set to `true`, consider retrieving one metadata object at a time.\n* Set `export_fqns` to `true` to add FQNs of the referenced objects in the TML content. For example, if you send an API request to retrieve TML for a Liveboard and its associated objects, the API returns the TML content with FQNs of the referenced Worksheet. Exporting TML with FQNs is useful if ThoughtSpot has multiple objects with the same name and you want to eliminate ambiguity when importing TML files into ThoughtSpot. It eliminates the need for adding FQNs of the referenced objects manually during the import operation.\n\n\n\n\n#### Endpoint URL\n",
+        "operationId": "exportMetadata",
+        "description": " <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
         "tags": [
           "Metadata",
           "9.0.0.cl"
@@ -5784,16 +5513,6 @@
                     "type": "boolean",
                     "deprecated": false,
                     "nullable": true
-                  },
-                  "edoc_format": {
-                    "description": "TML EDOC content format.",
-                    "default": "YAML",
-                    "type": "string",
-                    "enum": [
-                      "JSON",
-                      "YAML"
-                    ],
-                    "deprecated": false
                   }
                 },
                 "required": [
@@ -6172,7 +5891,7 @@
         "operationId": "createConfig",
         "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nAllows you to connect a ThoughtSpot instance to a Git repository.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\nYou can use this API endpoint to connect your ThoughtSpot development and production environments to the development and production branches of a Git repository.\n\nBefore using this endpoint to connect your ThoughtSpot instance to a Git repository, check the following prerequisites:\n\n* You have a Git repository. If you are using GitHub, make sure you have a valid account and an access token to connect ThoughtSpot to GitHub. For information about generating a token, see [GitHub Documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).\n\n* Your access token has `repo` scope that grants full access to public and private repositories.\n* Your Git repository has a branch that can be configured as a default branch in ThoughtSpot.\n\nFor more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
-          "Version Control",
+          " Control",
           "9.2.0.cl"
         ],
         "requestBody": {
@@ -6196,11 +5915,6 @@
                     "type": "string",
                     "deprecated": false
                   },
-                  "org_identifier": {
-                    "description": "   Unique identifier of the organization. If no value is provided then user will be created in the organization associated with the login session. Provide value -1 for cluster level. Example : OrgID1-or-Name1\n   \n\nNote: If no org identifier is specified, then current org identifier of the user will be considered <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
-                    "type": "string",
-                    "deprecated": false
-                  },
                   "branch_names": {
                     "description": "List the remote branches to configure. Example:[development, production]",
                     "type": "array",
@@ -6210,24 +5924,12 @@
                     "deprecated": false
                   },
                   "default_branch": {
-                    "description": "   Name of the default remote branch\n   \n\n*Deprecated since 9.3.0.cl : Replaced by default_branch_name * <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>",
-                    "type": "string",
-                    "deprecated": true
-                  },
-                  "default_branch_name": {
-                    "description": "Name of the default remote branch <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.3.0.cl or later</span>",
+                    "description": "Name of the default remote branch <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.2.0 or later</span>",
                     "type": "string",
                     "deprecated": false
                   },
-                  "enable_guid_mapping": {
-                    "description": "Maintain mapping of guid for the deployment to an instance <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>",
-                    "default": false,
-                    "type": "boolean",
-                    "deprecated": false,
-                    "nullable": true
-                  },
-                  "guid_mapping_branch_name": {
-                    "description": "   Name of the branch where file containing guid mapping should be maintained. This will be set only when enable_guid_mapping is true.\n   \n\nNote: If no guid mapping branch is specified, then the default branch for this configuration will be considered.  <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>",
+                  "default_branch_name": {
+                    "description": "Name of the default remote branch <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.3.0 or later</span>",
                     "type": "string",
                     "deprecated": false
                   }
@@ -6302,7 +6004,7 @@
         "operationId": "updateConfig",
         "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nUpdates Git repository configuration settings.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
-          "Version Control",
+          " Control",
           "9.2.0.cl"
         ],
         "requestBody": {
@@ -6321,13 +6023,8 @@
                     "type": "string",
                     "deprecated": false
                   },
-                  "org_identifier": {
-                    "description": "   Unique identifier of the organization. If no value is provided then user will be created in the organization associated with the login session. Provide value -1 for cluster level. Example : OrgID1-or-Name1\n   \n\nNote: If no org identifier is specified, then current org identifier of the user will be considered  <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
-                    "type": "string",
-                    "deprecated": false
-                  },
                   "branch_names": {
-                    "description": "List the remote branches to configure. Example:[development, production] <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.3.0.cl or later</span>",
+                    "description": "List the remote branches to configure. Example:[development, production] <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.3.0 or later</span>",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -6335,23 +6032,12 @@
                     "deprecated": false
                   },
                   "default_branch": {
-                    "description": "   Name of the default remote branch\n   \n\n*Deprecated since 9.3.0.cl : Replaced by default_branch_name * <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>",
-                    "type": "string",
-                    "deprecated": true
-                  },
-                  "default_branch_name": {
-                    "description": "Name of the default remote branch <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.3.0.cl or later</span>",
+                    "description": "Name of the default remote branch <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.2.0 or later</span>",
                     "type": "string",
                     "deprecated": false
                   },
-                  "enable_guid_mapping": {
-                    "description": "Maintain mapping of guid for the deployment to an instance <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>",
-                    "type": "boolean",
-                    "deprecated": false,
-                    "nullable": true
-                  },
-                  "guid_mapping_branch_name": {
-                    "description": "   Name of the branch where file containing guid mapping should be maintained This will be set only when enable_guid_mapping is true.\n   \n\nNote: If no guid mapping branch is specified, then the default branch for this configuration will be considered.  <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>",
+                  "default_branch_name": {
+                    "description": "Name of the default remote branch <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.3.0 or later</span>",
                     "type": "string",
                     "deprecated": false
                   }
@@ -6420,26 +6106,9 @@
         "operationId": "deleteConfig",
         "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nDeletes Git repository configuration from your ThoughtSpot instance.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
-          "Version Control",
+          " Control",
           "9.2.0.cl"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "cluster_level": {
-                    "description": "Consider cluster level or org level config. Set it to false to delete configuration from current org. If set to true, then the configuration at cluster level and orgs that inherited the configuration from cluster level will be deleted. <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
-                    "type": "boolean",
-                    "deprecated": false,
-                    "nullable": true
-                  }
-                }
-              }
-            }
-          }
-        },
         "parameters": [],
         "responses": {
           "204": {
@@ -6493,7 +6162,7 @@
         "operationId": "pullBranch",
         "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nPull a branch from remote repository to local repository.\n\n**Deprecated since 9.3.0.cl**. use [/api/rest/2.0/vcs/git/config/create](#/http/api-endpoints/version-control/create-local-config) instead.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
-          "Version Control",
+          " Control",
           "9.2.0.cl"
         ],
         "parameters": [
@@ -6560,7 +6229,7 @@
         "operationId": "commitBranch",
         "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nCommits TML files of metadata objects to the Git branch configured on your instance.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\nBefore using this endpoint to push your commits:\n\n* Enable Git integration on your instance.\n* Make sure the Git repository and branch details are configured on your instance.\n\nFor more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
-          "Version Control",
+          " Control",
           "9.2.0.cl"
         ],
         "requestBody": {
@@ -6578,7 +6247,7 @@
                     "deprecated": false
                   },
                   "branch_name": {
-                    "description": "   Name of the remote branch where object should be pushed\n   \n\nNote: If no branch_name is specified, then the default branch will be considered.",
+                    "description": "Name of the remote branch where object should be pushed",
                     "type": "string",
                     "deprecated": false
                   },
@@ -6657,7 +6326,7 @@
         "operationId": "revertCommit",
         "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nReverts TML objects to a previous commit specified in the API request.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\nIn the API request, specify the `commit_id`. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.\n\nBy default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
-          "Version Control",
+          " Control",
           "9.2.0.cl"
         ],
         "requestBody": {
@@ -6675,12 +6344,12 @@
                     "deprecated": false
                   },
                   "branch_name": {
-                    "description": "   Name of the branch where the reverted version should be comitted\n   \n\nNote: If no branch_name is specified, then the default branch will be considered.",
+                    "description": "Name of the branch where the reverted  should be comitted",
                     "type": "string",
                     "deprecated": false
                   },
                   "revert_policy": {
-                    "description": "Policy to be followed while importing. Valid values: [ALL_OR_NONE, PARTIAL] <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.3.0.cl or later</span>",
+                    "description": "Policy to be followed while importing. Valid values: [ALL_OR_NONE, PARTIAL] <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.3.0 or later</span>",
                     "default": "ALL_OR_NONE",
                     "type": "string",
                     "enum": [
@@ -6765,7 +6434,7 @@
         "operationId": "validateMerge",
         "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nValidates the content of your source branch against the objects in your destination environment.\n\nBefore merging content from your source branch to the destination branch, run this API operation from your destination environment and ensure that the changes from the source branch function in the destination environment.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
-          "Version Control",
+          " Control",
           "9.2.0.cl"
         ],
         "requestBody": {
@@ -6857,7 +6526,7 @@
         "operationId": "deployCommit",
         "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nAllows you to deploy a commit and publish TML content to your ThoughtSpot instance.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\nThe API deploys the head of the branch unless a `commit_id` is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
-          "Version Control",
+          " Control",
           "9.2.0.cl"
         ],
         "requestBody": {
@@ -6867,27 +6536,27 @@
                 "type": "object",
                 "properties": {
                   "commit_id": {
-                    "description": "   Commit_id against which the files should be picked to deploy.\n   \n\nNote: If no commit_id is specified, then the head of the branch is considered.",
+                    "description": "Commit_id against which the files should be picked to deploy",
                     "type": "string",
                     "deprecated": false
                   },
                   "branch_name": {
-                    "description": "   Name of the remote branch where changes should be picked\n   \n\nNote: If no branch_name is specified, then the default branch will be considered. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.3.0.cl or later</span>",
+                    "description": "Name of the remote branch where changes should be picked <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.3.0 or later</span>",
                     "type": "string",
                     "deprecated": false
                   },
                   "import_type": {
-                    "description": "   Indicates if all files or only modified file at specified commit point should be considered\n   \n\n*Deprecated since 9.3.0.cl : Replaced by deploy_type * <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>",
+                    "description": "Indicates if all files or only modified file at specified commit point should be considered <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.2.0 or later</span>",
                     "default": "DELTA",
                     "type": "string",
                     "enum": [
                       "FULL",
                       "DELTA"
                     ],
-                    "deprecated": true
+                    "deprecated": false
                   },
                   "deploy_type": {
-                    "description": "Indicates if all files or only modified file at specified commit point should be considered <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.3.0.cl or later</span>",
+                    "description": "Indicates if all files or only modified file at specified commit point should be considered <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.3.0 or later</span>",
                     "default": "DELTA",
                     "type": "string",
                     "enum": [
@@ -6897,7 +6566,7 @@
                     "deprecated": false
                   },
                   "deploy_policy": {
-                    "description": "Define the policy to follow while importing TML in the ThoughtSpot environment. Use “ALL_OR_NONE” to cancel the deployment of all ThoughtSpot objects if at least one of them fails to import. Use “Partial” to import ThoughtSpot objects that validate successfully even if other objects in the same deploy operations fail to import. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.3.0.cl or later</span>",
+                    "description": "Policy to be followed while importing. Valid values: [ALL_OR_NONE, PARTIAL] <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.3.0 or later</span>",
                     "default": "ALL_OR_NONE",
                     "type": "string",
                     "enum": [
@@ -7268,7 +6937,7 @@
     "/api/rest/2.0/roles/create": {
       "post": {
         "operationId": "createRole",
-        "description": "Creates a Role.\nRequires cluster Administration or Role Administration privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
+        "description": " <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
         "tags": [
           "Roles",
           "9.5.0.cl"
@@ -7385,7 +7054,7 @@
     "/api/rest/2.0/roles/{role_identifier}/update": {
       "post": {
         "operationId": "updateRole",
-        "description": "Updates a Role.\nRequires cluster Administration or Role Administration privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
+        "description": " <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
         "tags": [
           "Roles",
           "9.5.0.cl"
@@ -7513,7 +7182,7 @@
     "/api/rest/2.0/roles/{role_identifier}/delete": {
       "post": {
         "operationId": "deleteRole",
-        "description": "Deletes a Role.\nRequires cluster Administration or Role Administration privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
+        "description": " <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
         "tags": [
           "Roles",
           "9.5.0.cl"
@@ -7566,474 +7235,6 @@
           },
           "500": {
             "description": "Internal error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/rest/2.0/schedules": {
-      "post": {
-        "operationId": "createSchedule",
-        "description": "Create schedule. <br/>  <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>",
-        "tags": [
-          "Schedules",
-          "9.4.0.cl"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "description": "Name of the scheduled job.",
-                    "type": "string",
-                    "deprecated": false
-                  },
-                  "description": {
-                    "description": "Description of the job.",
-                    "type": "string",
-                    "deprecated": false
-                  },
-                  "metadata_type": {
-                    "description": "Type of metadata.",
-                    "type": "string",
-                    "enum": [
-                      "LIVEBOARD"
-                    ],
-                    "deprecated": false
-                  },
-                  "metadata_identifier": {
-                    "description": "Unique ID or name of the metadata.",
-                    "type": "string",
-                    "deprecated": false
-                  },
-                  "file_format": {
-                    "description": "Export file format.",
-                    "default": "PDF",
-                    "type": "string",
-                    "enum": [
-                      "CSV",
-                      "PDF"
-                    ],
-                    "deprecated": false
-                  },
-                  "liveboard_options": {
-                    "description": "Options to specify details of liveboard.",
-                    "$ref": "#/components/schemas/LiveboardOptionsInput",
-                    "deprecated": false
-                  },
-                  "pdf_options": {
-                    "description": "Options for PDF export.",
-                    "$ref": "#/components/schemas/SchedulesPdfOptionsInput",
-                    "deprecated": false
-                  },
-                  "time_zone": {
-                    "description": "Time zone",
-                    "default": "America/Los_Angeles",
-                    "type": "string",
-                    "deprecated": false
-                  },
-                  "frequency": {
-                    "description": "Configuration of schedule with cron expression",
-                    "$ref": "#/components/schemas/FrequencyInput",
-                    "deprecated": false
-                  },
-                  "recipient_details": {
-                    "description": "Recipient configuration which includes emails and recipients of the schedule",
-                    "$ref": "#/components/schemas/RecipientDetailsInput",
-                    "deprecated": false
-                  }
-                },
-                "required": [
-                  "name",
-                  "description",
-                  "metadata_type",
-                  "metadata_identifier",
-                  "time_zone",
-                  "recipient_details"
-                ]
-              }
-            }
-          },
-          "required": true
-        },
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Schedule successfully created.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseSchedule"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/rest/2.0/schedules/{schedule_identifier}/delete": {
-      "post": {
-        "operationId": "deleteSchedule",
-        "description": "Deletes a schedule <br/>  <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>",
-        "tags": [
-          "Schedules",
-          "9.4.0.cl"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "schedule_identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Unique ID or name of the schedule.",
-            "deprecated": false
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Schedule successfully deleted."
-          },
-          "400": {
-            "description": "Invalid request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/rest/2.0/schedules/search": {
-      "post": {
-        "operationId": "searchSchedules",
-        "description": "Search Schedules <br/>  <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>",
-        "tags": [
-          "Schedules",
-          "9.4.0.cl"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "metadata": {
-                    "description": "Metadata objects associated with schedules.",
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/MetadataInput"
-                    },
-                    "deprecated": false
-                  },
-                  "record_offset": {
-                    "description": "The starting record number from where the records should be included.",
-                    "type": "integer",
-                    "format": "int32",
-                    "deprecated": false
-                  },
-                  "record_size": {
-                    "description": "The number of records that should be included.",
-                    "type": "integer",
-                    "format": "int32",
-                    "deprecated": false
-                  },
-                  "sort_options": {
-                    "description": "Sort options.",
-                    "$ref": "#/components/schemas/SortingOptions",
-                    "deprecated": false
-                  },
-                  "history_runs_options": {
-                    "description": "Options while fetching history runs wrt to the schedule.",
-                    "$ref": "#/components/schemas/ScheduleHistoryRunsOptionsInput",
-                    "deprecated": false
-                  },
-                  "schedule_identifiers": {
-                    "description": "unique ID or name of the Schedule",
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    },
-                    "deprecated": false
-                  }
-                }
-              }
-            }
-          }
-        },
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Schedule search result.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/ResponseSchedule"
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/rest/2.0/schedules/{schedule_identifier}/update": {
-      "post": {
-        "operationId": "updateSchedule",
-        "description": "Update schedule. <br/>  <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>",
-        "tags": [
-          "Schedules",
-          "9.4.0.cl"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "description": "Name of the scheduled job.",
-                    "type": "string",
-                    "deprecated": false
-                  },
-                  "description": {
-                    "description": "Description of the job.",
-                    "type": "string",
-                    "deprecated": false
-                  },
-                  "metadata_type": {
-                    "description": "Type of metadata.",
-                    "type": "string",
-                    "enum": [
-                      "LIVEBOARD"
-                    ],
-                    "deprecated": false
-                  },
-                  "metadata_identifier": {
-                    "description": "Unique ID or name of the metadata.",
-                    "type": "string",
-                    "deprecated": false
-                  },
-                  "file_format": {
-                    "description": "Export file format.",
-                    "type": "string",
-                    "enum": [
-                      "CSV",
-                      "PDF"
-                    ],
-                    "deprecated": false
-                  },
-                  "liveboard_options": {
-                    "description": "Options to specify details of liveboard.",
-                    "$ref": "#/components/schemas/LiveboardOptionsInput",
-                    "deprecated": false
-                  },
-                  "pdf_options": {
-                    "description": "Options for PDF export.",
-                    "$ref": "#/components/schemas/SchedulesPdfOptionsInput",
-                    "deprecated": false
-                  },
-                  "time_zone": {
-                    "description": "Time zone",
-                    "type": "string",
-                    "deprecated": false
-                  },
-                  "frequency": {
-                    "description": "Configuration of schedule with cron expression",
-                    "$ref": "#/components/schemas/FrequencyInput",
-                    "deprecated": false
-                  },
-                  "recipient_details": {
-                    "description": "Recipient configuration which includes emails and recipients of the schedule",
-                    "$ref": "#/components/schemas/RecipientDetailsInput",
-                    "deprecated": false
-                  },
-                  "status": {
-                    "description": "Status of the schedule",
-                    "type": "string",
-                    "enum": [
-                      "ACTIVE",
-                      "PAUSE"
-                    ],
-                    "deprecated": false
-                  }
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "in": "path",
-            "name": "schedule_identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Unique ID or name of the schedule.",
-            "deprecated": false
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Schedule successfully updated."
-          },
-          "400": {
-            "description": "Invalid request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -8265,10 +7466,6 @@
           "welcome_email_sent": {
             "type": "boolean",
             "description": "Indicates whether welcome email is sent for the user."
-          },
-          "org_privileges": {
-            "type": "object",
-            "description": "Privileges which are assigned to the user with org."
           }
         }
       },
@@ -8490,8 +7687,7 @@
             "enum": [
               "LIVEBOARD",
               "ANSWER",
-              "LOGICAL_TABLE",
-              "CONNECTION"
+              "LOGICAL_TABLE"
             ],
             "description": "Type of metadata (Optional when given identifier is ID)."
           },
@@ -8617,22 +7813,6 @@
           }
         }
       },
-      "SearchDataResponse": {
-        "type": "object",
-        "required": [
-          "contents"
-        ],
-        "properties": {
-          "contents": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AnswerContent"
-            },
-            "description": "Data content of metadata objects."
-          }
-        },
-        "description": "Response format associated with the search data API."
-      },
       "AnswerDataResponse": {
         "type": "object",
         "required": [
@@ -8684,25 +7864,6 @@
           }
         }
       },
-      "Org": {
-        "type": "object",
-        "required": [
-          "id",
-          "name"
-        ],
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The ID of the object."
-          },
-          "name": {
-            "type": "string",
-            "description": "Name of the object."
-          }
-        },
-        "description": "Current logged in Organizations of the user."
-      },
       "GenericInfo": {
         "type": "object",
         "properties": {
@@ -8726,40 +7887,6 @@
           },
           "path": {
             "type": "string"
-          }
-        }
-      },
-      "GetTokenResponse": {
-        "type": "object",
-        "required": [
-          "token",
-          "creation_time_in_millis",
-          "expiration_time_in_millis",
-          "valid_for_user_id",
-          "valid_for_username"
-        ],
-        "properties": {
-          "token": {
-            "type": "string",
-            "description": "Bearer auth token."
-          },
-          "creation_time_in_millis": {
-            "type": "number",
-            "format": "float",
-            "description": "Token creation time in milliseconds."
-          },
-          "expiration_time_in_millis": {
-            "type": "number",
-            "format": "float",
-            "description": "Token expiration time in milliseconds."
-          },
-          "valid_for_user_id": {
-            "type": "string",
-            "description": "Username to whom the token is issued."
-          },
-          "valid_for_username": {
-            "type": "string",
-            "description": "Unique identifier of the user to whom the token is issued."
           }
         }
       },
@@ -9111,13 +8238,6 @@
               "NON_SHARABLE"
             ],
             "description": "Visibility of the user group. The SHARABLE makes a user group visible to other users and user groups, and thus allows them to share objects."
-          },
-          "roles": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Role"
-            },
-            "description": "List of roles assgined to the user"
           }
         }
       },
@@ -9175,10 +8295,6 @@
               "type": "object"
             },
             "description": "Visualization header information of the metadata objects."
-          },
-          "stats": {
-            "type": "object",
-            "description": "Stats of the metadata object. Includes views, favorites, last_accessed."
           }
         },
         "description": "Metadata Search Response Object."
@@ -9279,34 +8395,6 @@
         },
         "description": "Favorite object options."
       },
-      "MetadataSearchSortOptions": {
-        "type": "object",
-        "properties": {
-          "field_name": {
-            "type": "string",
-            "enum": [
-              "NAME",
-              "DISPLAY_NAME",
-              "AUTHOR",
-              "CREATED",
-              "MODIFIED",
-              "VIEWS",
-              "FAVORITES",
-              "LAST_ACCESSED"
-            ],
-            "description": "Name of the field to apply the sort on."
-          },
-          "order": {
-            "type": "string",
-            "enum": [
-              "ASC",
-              "DESC"
-            ],
-            "description": "Sort order : ASC(Ascending) or DESC(Descending)."
-          }
-        },
-        "description": "Sort options."
-      },
       "SqlQueryResponse": {
         "type": "object",
         "required": [
@@ -9398,6 +8486,22 @@
           }
         }
       },
+      "SearchDataResponse": {
+        "type": "object",
+        "required": [
+          "contents"
+        ],
+        "properties": {
+          "contents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AnswerContent"
+            },
+            "description": "Data content of metadata objects."
+          }
+        },
+        "description": "Response format associated with the search data API."
+      },
       "LogResponse": {
         "type": "object",
         "required": [
@@ -9417,6 +8521,9 @@
       },
       "RepoConfigObject": {
         "type": "object",
+        "required": [
+          "remote_alias"
+        ],
         "properties": {
           "repository_url": {
             "type": "string",
@@ -9426,10 +8533,6 @@
             "type": "string",
             "description": "Username to authenticate connection to vcs"
           },
-          "default_branch": {
-            "type": "string",
-            "description": "Name of the default remote branch"
-          },
           "branches": {
             "type": "array",
             "items": {
@@ -9437,17 +8540,9 @@
             },
             "description": "Branches that have been pulled in local repository"
           },
-          "enable_guid_mapping": {
-            "type": "boolean",
-            "description": "Maintain mapping of guid for the deployment to an instance"
-          },
-          "guid_mapping_branch_name": {
+          "remote_alias": {
             "type": "string",
-            "description": "Name of the branch where file containing guid mapping should be maintained"
-          },
-          "org": {
-            "$ref": "#/components/schemas/Org",
-            "description": "Details of the organization"
+            "description": "Alias name associated with the remote repository"
           }
         }
       },
@@ -9586,7 +8681,7 @@
           }
         }
       },
-      "SearchRoleResponse": {
+      "RoleResponse": {
         "type": "object",
         "required": [
           "id",
@@ -9631,48 +8726,39 @@
             "items": {
               "type": "string",
               "enum": [
-                "UNKNOWN",
-                "ADMINISTRATION",
-                "AUTHORING",
                 "USERDATAUPLOADING",
                 "DATADOWNLOADING",
-                "USERMANAGEMENT",
-                "SECURITYMANAGEMENT",
-                "LOGICALMODELING",
                 "DATAMANAGEMENT",
-                "TAGMANAGEMENT",
                 "SHAREWITHALL",
-                "SYSTEMMANAGEMENT",
                 "JOBSCHEDULING",
                 "A3ANALYSIS",
                 "EXPERIMENTALFEATUREPRIVILEGE",
                 "BYPASSRLS",
-                "RANALYSIS",
                 "DISABLE_PINBOARD_CREATION",
                 "DEVELOPER",
                 "APPLICATION_ADMINISTRATION",
                 "USER_ADMINISTRATION",
                 "GROUP_ADMINISTRATION",
-                "BACKUP_ADMINISTRATION",
                 "SYSTEM_INFO_ADMINISTRATION",
-                "ENABLESPOTAPPCREATION",
                 "SYNCMANAGEMENT",
                 "ORG_ADMINISTRATION",
                 "ROLE_ADMINISTRATION",
                 "AUTHENTICATION_ADMINISTRATION",
-                "BILLING_INFO_ADMINISTRATION",
-                "PREVIEW_THOUGHTSPOT_SAGE"
+                "BILLING_INFO_ADMINISTRATION"
               ]
             },
             "description": "Privileges granted to the role."
           },
           "permission": {
-            "type": "string",
-            "enum": [
-              "READ_ONLY",
-              "MODIFY",
-              "NO_ACCESS"
-            ],
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "READ_ONLY",
+                "MODIFY",
+                "NO_ACCESS"
+              ]
+            },
             "description": "Permission details of the Role"
           },
           "author_id": {
@@ -9711,8 +8797,7 @@
             "type": "boolean",
             "description": "Indicates whether the role is shared via connection"
           }
-        },
-        "description": "Response for search role api should handle hidden privileges as well."
+        }
       },
       "Token": {
         "type": "object",
@@ -9896,6 +8981,11 @@
       },
       "CommitResponse": {
         "type": "object",
+        "required": [
+          "committer",
+          "author",
+          "comment"
+        ],
         "properties": {
           "committer": {
             "$ref": "#/components/schemas/CommiterType",
@@ -9933,7 +9023,8 @@
       "MetadataObject": {
         "type": "object",
         "required": [
-          "identifier"
+          "identifier",
+          "type"
         ],
         "properties": {
           "identifier": {
@@ -9953,6 +9044,11 @@
       },
       "RevertResponse": {
         "type": "object",
+        "required": [
+          "committer",
+          "author",
+          "comment"
+        ],
         "properties": {
           "committer": {
             "$ref": "#/components/schemas/CommiterType",
@@ -10060,335 +9156,24 @@
           }
         }
       },
-      "RoleResponse": {
+      "Org": {
         "type": "object",
         "required": [
           "id",
-          "name",
-          "description",
-          "privileges"
+          "name"
         ],
         "properties": {
           "id": {
-            "type": "string",
-            "description": "Unique Id of the role."
+            "type": "integer",
+            "format": "int32",
+            "description": "The ID of the object."
           },
           "name": {
             "type": "string",
-            "description": "Name of the role"
-          },
-          "description": {
-            "type": "string",
-            "description": "Description of the role"
-          },
-          "groups_assigned_count": {
-            "type": "integer",
-            "format": "int32",
-            "description": "number of groups assigned with this role"
-          },
-          "orgs": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/GenericInfo"
-            },
-            "description": "Organizations in which role exists."
-          },
-          "groups": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/GenericInfo"
-            },
-            "description": "Details of groups assigned with this role"
-          },
-          "privileges": {
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "USERDATAUPLOADING",
-                "DATADOWNLOADING",
-                "DATAMANAGEMENT",
-                "SHAREWITHALL",
-                "JOBSCHEDULING",
-                "A3ANALYSIS",
-                "EXPERIMENTALFEATUREPRIVILEGE",
-                "BYPASSRLS",
-                "DISABLE_PINBOARD_CREATION",
-                "DEVELOPER",
-                "APPLICATION_ADMINISTRATION",
-                "USER_ADMINISTRATION",
-                "GROUP_ADMINISTRATION",
-                "SYSTEM_INFO_ADMINISTRATION",
-                "SYNCMANAGEMENT",
-                "ORG_ADMINISTRATION",
-                "ROLE_ADMINISTRATION",
-                "AUTHENTICATION_ADMINISTRATION",
-                "BILLING_INFO_ADMINISTRATION"
-              ]
-            },
-            "description": "Privileges granted to the role."
-          },
-          "permission": {
-            "type": "string",
-            "enum": [
-              "READ_ONLY",
-              "MODIFY",
-              "NO_ACCESS"
-            ],
-            "description": "Permission details of the Role"
-          },
-          "author_id": {
-            "type": "string",
-            "description": "Unique identifier of author of the role."
-          },
-          "modifier_id": {
-            "type": "string",
-            "description": "Unique identifier of modifier of the role."
-          },
-          "creation_time_in_millis": {
-            "type": "object",
-            "description": "Creation time of the role in milliseconds."
-          },
-          "modification_time_in_millis": {
-            "type": "object",
-            "description": "Last modified time of the role in milliseconds."
-          },
-          "deleted": {
-            "type": "boolean",
-            "description": "Indicates whether the role is deleted."
-          },
-          "deprecated": {
-            "type": "boolean",
-            "description": "Indicates whether the role is deprecated."
-          },
-          "external": {
-            "type": "boolean",
-            "description": "Indicates whether the role is external."
-          },
-          "hidden": {
-            "type": "boolean",
-            "description": "Indicates whether the role is hidden."
-          },
-          "shared_via_connection": {
-            "type": "boolean",
-            "description": "Indicates whether the role is shared via connection"
-          }
-        }
-      },
-      "ResponseSchedule": {
-        "type": "object",
-        "required": [
-          "author",
-          "creation_time_in_millis",
-          "file_format",
-          "frequency",
-          "id",
-          "metadata",
-          "name",
-          "time_zone"
-        ],
-        "properties": {
-          "author": {
-            "$ref": "#/components/schemas/Author",
-            "description": "Author of the schedule."
-          },
-          "creation_time_in_millis": {
-            "type": "object",
-            "description": "Schedule creation time in milliseconds."
-          },
-          "description": {
-            "type": "string",
-            "description": "Description of the job."
-          },
-          "file_format": {
-            "type": "string",
-            "description": "Export file format."
-          },
-          "frequency": {
-            "$ref": "#/components/schemas/Frequency",
-            "description": "Configuration of schedule with cron expression"
-          },
-          "id": {
-            "type": "string",
-            "description": "GUID of the scheduled job."
-          },
-          "liveboard_options": {
-            "$ref": "#/components/schemas/LiveboardOptions",
-            "description": "Options to specify details of liveboard."
-          },
-          "metadata": {
-            "$ref": "#/components/schemas/MetadataResponse",
-            "description": "Unique ID or name of the metadata."
-          },
-          "name": {
-            "type": "string",
-            "description": "Name of the scheduled job."
-          },
-          "pdf_options": {
-            "$ref": "#/components/schemas/PdfOptions",
-            "description": "Options for PDF export."
-          },
-          "recipient_details": {
-            "$ref": "#/components/schemas/RecipientDetails",
-            "description": "Recipient configuration which includes emails and recipients of the schedule"
-          },
-          "status": {
-            "type": "string",
-            "description": "Status of the job"
-          },
-          "time_zone": {
-            "type": "string",
-            "description": "Time zone"
-          },
-          "history_runs": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ResponseScheduleRun"
-            },
-            "description": "Schedule runs history records."
-          }
-        }
-      },
-      "LiveboardOptionsInput": {
-        "type": "object",
-        "required": [
-          "visualization_identifiers"
-        ],
-        "properties": {
-          "visualization_identifiers": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Unique ID or name of visualizations."
+            "description": "Name of the object."
           }
         },
-        "description": "Options to specify details of liveboard."
-      },
-      "SchedulesPdfOptionsInput": {
-        "type": "object",
-        "properties": {
-          "complete_liveboard": {
-            "type": "boolean",
-            "description": "Indicates whether to include complete liveboard."
-          },
-          "include_cover_page": {
-            "type": "boolean",
-            "description": "Indicates whether to include cover page with the liveboard title."
-          },
-          "include_custom_logo": {
-            "type": "boolean",
-            "description": "Indicates whether to include customized wide logo in the footer if available."
-          },
-          "include_filter_page": {
-            "type": "boolean",
-            "description": "Indicates whether to include a page with all applied filters."
-          },
-          "include_page_number": {
-            "type": "boolean",
-            "description": "Indicates whether to include page number in the footer of each page"
-          },
-          "page_footer_text": {
-            "type": "string",
-            "description": "Text to include in the footer of each page."
-          },
-          "page_orientation": {
-            "type": "string",
-            "description": "Page orientation of the PDF."
-          },
-          "page_size": {
-            "type": "string",
-            "enum": [
-              "A4"
-            ],
-            "description": "Page size."
-          },
-          "truncate_table": {
-            "type": "boolean",
-            "description": "Indicates whether to include only first page of the tables."
-          }
-        },
-        "description": "Options for PDF export."
-      },
-      "FrequencyInput": {
-        "type": "object",
-        "required": [
-          "cron_expression"
-        ],
-        "properties": {
-          "cron_expression": {
-            "$ref": "#/components/schemas/CronExpressionInput",
-            "description": "Schedule selected cron expression."
-          }
-        },
-        "description": "Configuration of schedule with cron expression"
-      },
-      "RecipientDetailsInput": {
-        "type": "object",
-        "properties": {
-          "emails": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Emails of the recipients."
-          },
-          "principals": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/PrincipalsListItemInput"
-            },
-            "description": "List of user or user groups to be associated for schedule."
-          }
-        },
-        "description": "Recipient configuration which includes emails and recipients of the schedule"
-      },
-      "MetadataInput": {
-        "type": "object",
-        "properties": {
-          "identifier": {
-            "type": "string"
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "LIVEBOARD"
-            ]
-          }
-        }
-      },
-      "SortingOptions": {
-        "type": "object",
-        "properties": {
-          "field_name": {
-            "type": "string",
-            "description": "Name of the field to apply the sort on."
-          },
-          "order": {
-            "type": "string",
-            "description": "Sort order : ASC(Ascending) or DESC(Descending)."
-          }
-        },
-        "description": "Sort options."
-      },
-      "ScheduleHistoryRunsOptionsInput": {
-        "type": "object",
-        "properties": {
-          "include_history_runs": {
-            "type": "boolean",
-            "description": "Indicates whether to fetch history runs wrt to the schedule or not."
-          },
-          "record_size": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Indicates the max number of records that can be fetched as history runs wrt any scheduled job."
-          },
-          "record_offset": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Indicates the starting record number from where history runs records should be fetched."
-          }
-        }
+        "description": "Current logged in Organizations of the user."
       },
       "FavoriteMetadataItem": {
         "type": "object",
@@ -10567,19 +9352,6 @@
           }
         }
       },
-      "Role": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "id of the Role"
-          },
-          "name": {
-            "type": "string",
-            "description": "name of the Role"
-          }
-        }
-      },
       "SqlQuery": {
         "type": "object",
         "required": [
@@ -10605,6 +9377,9 @@
       },
       "CommiterType": {
         "type": "object",
+        "required": [
+          "username"
+        ],
         "properties": {
           "email": {
             "type": "string",
@@ -10618,6 +9393,10 @@
       },
       "AuthorType": {
         "type": "object",
+        "required": [
+          "email",
+          "username"
+        ],
         "properties": {
           "email": {
             "type": "string",
@@ -10739,228 +9518,6 @@
           }
         }
       },
-      "Author": {
-        "type": "object",
-        "required": [
-          "id",
-          "name"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "The unique identifier of the object."
-          },
-          "name": {
-            "type": "string",
-            "description": "Name of the object."
-          }
-        },
-        "description": "Author of the schedule."
-      },
-      "Frequency": {
-        "type": "object",
-        "required": [
-          "cron_expression"
-        ],
-        "properties": {
-          "cron_expression": {
-            "$ref": "#/components/schemas/CronExpression",
-            "description": "Schedule selected cron expression."
-          }
-        },
-        "description": "Configuration of schedule with cron expression"
-      },
-      "LiveboardOptions": {
-        "type": "object",
-        "required": [
-          "visualization_identifiers"
-        ],
-        "properties": {
-          "visualization_identifiers": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Unique ID or name of visualizations."
-          }
-        },
-        "description": "Options to specify details of liveboard."
-      },
-      "MetadataResponse": {
-        "type": "object",
-        "required": [
-          "id",
-          "type"
-        ],
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "id": {
-            "type": "string"
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "LIVEBOARD"
-            ]
-          }
-        }
-      },
-      "PdfOptions": {
-        "type": "object",
-        "properties": {
-          "complete_liveboard": {
-            "type": "boolean",
-            "description": "Indicates whether to include complete liveboard."
-          },
-          "include_cover_page": {
-            "type": "boolean",
-            "description": "Indicates whether to include cover page with the liveboard title."
-          },
-          "include_custom_logo": {
-            "type": "boolean",
-            "description": "Indicates whether to include customized wide logo in the footer if available."
-          },
-          "include_filter_page": {
-            "type": "boolean",
-            "description": "Indicates whether to include a page with all applied filters."
-          },
-          "include_page_number": {
-            "type": "boolean",
-            "description": "Indicates whether to include page number in the footer of each page"
-          },
-          "page_footer_text": {
-            "type": "string",
-            "description": "Text to include in the footer of each page."
-          },
-          "page_orientation": {
-            "type": "string",
-            "description": "Page orientation of the PDF."
-          },
-          "page_size": {
-            "type": "string",
-            "enum": [
-              "A4"
-            ],
-            "description": "Page size."
-          },
-          "truncate_table": {
-            "type": "boolean",
-            "description": "Indicates whether to include only first page of the tables."
-          }
-        },
-        "description": "Options for PDF export."
-      },
-      "RecipientDetails": {
-        "type": "object",
-        "properties": {
-          "emails": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Emails of the recipients."
-          },
-          "principals": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/PrincipalsListItem"
-            },
-            "description": "List of user or user groups to be associated for schedule."
-          }
-        },
-        "description": "Recipient configuration which includes emails and recipients of the schedule"
-      },
-      "ResponseScheduleRun": {
-        "type": "object",
-        "required": [
-          "id",
-          "start_time_in_millis",
-          "end_time_in_millis",
-          "status"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "GUID of the scheduled job."
-          },
-          "start_time_in_millis": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Schedule run start time in milliseconds."
-          },
-          "end_time_in_millis": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Schedule run end time in milliseconds."
-          },
-          "status": {
-            "type": "string",
-            "description": "Status of the schedule run."
-          },
-          "detail": {
-            "type": "string",
-            "description": "Message details related to the schedule run."
-          }
-        },
-        "description": "Schedule run response object"
-      },
-      "CronExpressionInput": {
-        "type": "object",
-        "required": [
-          "day_of_month",
-          "day_of_week",
-          "hour",
-          "minute",
-          "month",
-          "second"
-        ],
-        "properties": {
-          "day_of_month": {
-            "type": "string",
-            "description": "Day of month of the object."
-          },
-          "day_of_week": {
-            "type": "string",
-            "description": "Day of Week of the object."
-          },
-          "hour": {
-            "type": "string",
-            "description": "Hour of the object."
-          },
-          "minute": {
-            "type": "string",
-            "description": "Minute of the object."
-          },
-          "month": {
-            "type": "string",
-            "description": "Month of the object."
-          },
-          "second": {
-            "type": "string",
-            "description": "Second of the object."
-          }
-        },
-        "description": "Schedule selected cron expression."
-      },
-      "PrincipalsListItemInput": {
-        "type": "object",
-        "required": [
-          "identifier",
-          "type"
-        ],
-        "properties": {
-          "identifier": {
-            "type": "string",
-            "description": "Unique ID or name of the principal."
-          },
-          "type": {
-            "type": "string",
-            "description": "Principal type."
-          }
-        }
-      },
       "Database": {
         "type": "object",
         "required": [
@@ -10974,72 +9531,13 @@
           "schemas": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/SchemaObject"
+              "$ref": "#/components/schemas/Schema"
             },
             "description": "Schemas of the database."
-          },
-          "auto_created": {
-            "type": "boolean",
-            "description": "Determines if the object is auto created."
           }
         }
       },
-      "CronExpression": {
-        "type": "object",
-        "required": [
-          "day_of_month",
-          "day_of_week",
-          "hour",
-          "minute",
-          "month",
-          "second"
-        ],
-        "properties": {
-          "day_of_month": {
-            "type": "string",
-            "description": "Day of month of the object."
-          },
-          "day_of_week": {
-            "type": "string",
-            "description": "Day of Week of the object."
-          },
-          "hour": {
-            "type": "string",
-            "description": "Hour of the object."
-          },
-          "minute": {
-            "type": "string",
-            "description": "Minute of the object."
-          },
-          "month": {
-            "type": "string",
-            "description": "Month of the object."
-          },
-          "second": {
-            "type": "string",
-            "description": "Second of the object."
-          }
-        },
-        "description": "Schedule selected cron expression."
-      },
-      "PrincipalsListItem": {
-        "type": "object",
-        "required": [
-          "identifier",
-          "type"
-        ],
-        "properties": {
-          "identifier": {
-            "type": "string",
-            "description": "Unique ID or name of the principal."
-          },
-          "type": {
-            "type": "string",
-            "description": "Principal type."
-          }
-        }
-      },
-      "SchemaObject": {
+      "Schema": {
         "type": "object",
         "required": [
           "name"
@@ -11074,29 +9572,6 @@
               "$ref": "#/components/schemas/Column"
             },
             "description": "Columns of the table."
-          },
-          "type": {
-            "type": "string",
-            "description": "Type of table. Either view or table"
-          },
-          "description": {
-            "type": "string",
-            "description": "Description of the table"
-          },
-          "selected": {
-            "type": "boolean",
-            "description": "Determines if the table is selected"
-          },
-          "linked": {
-            "type": "boolean",
-            "description": "Determines if the table is linked"
-          },
-          "relationships": {
-            "type": "array",
-            "items": {
-              "type": "object"
-            },
-            "description": "List of relationships for the table"
           }
         }
       },
@@ -11114,22 +9589,6 @@
           "data_type": {
             "type": "string",
             "description": "Data type of the column."
-          },
-          "is_aggregate": {
-            "type": "string",
-            "description": "Determines if the column schema is an aggregate"
-          },
-          "can_import": {
-            "type": "boolean",
-            "description": "Determines if the column schema can be imported"
-          },
-          "selected": {
-            "type": "boolean",
-            "description": "Determines if the table is selected"
-          },
-          "is_linked_active": {
-            "type": "boolean",
-            "description": "Determines if the table is linked"
           }
         }
       }
