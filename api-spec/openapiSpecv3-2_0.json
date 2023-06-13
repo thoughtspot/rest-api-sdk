@@ -2337,7 +2337,7 @@
         "operationId": "searchConfig",
         "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nGets Git repository connections configured on the ThoughtSpot instance.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
-          " Control",
+          "Version Control",
           "9.2.0.cl"
         ],
         "parameters": [],
@@ -2403,7 +2403,7 @@
         "operationId": "searchCommits",
         "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nGets a list of commits for a given metadata object.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
-          " Control",
+          "Version Control",
           "9.2.0.cl"
         ],
         "requestBody": {
@@ -5891,7 +5891,7 @@
         "operationId": "createConfig",
         "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nAllows you to connect a ThoughtSpot instance to a Git repository.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\nYou can use this API endpoint to connect your ThoughtSpot development and production environments to the development and production branches of a Git repository.\n\nBefore using this endpoint to connect your ThoughtSpot instance to a Git repository, check the following prerequisites:\n\n* You have a Git repository. If you are using GitHub, make sure you have a valid account and an access token to connect ThoughtSpot to GitHub. For information about generating a token, see [GitHub Documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).\n\n* Your access token has `repo` scope that grants full access to public and private repositories.\n* Your Git repository has a branch that can be configured as a default branch in ThoughtSpot.\n\nFor more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
-          " Control",
+          "Version Control",
           "9.2.0.cl"
         ],
         "requestBody": {
@@ -6004,7 +6004,7 @@
         "operationId": "updateConfig",
         "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nUpdates Git repository configuration settings.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
-          " Control",
+          "Version Control",
           "9.2.0.cl"
         ],
         "requestBody": {
@@ -6162,7 +6162,7 @@
         "operationId": "pullBranch",
         "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nPull a branch from remote repository to local repository.\n\n**Deprecated since 9.3.0.cl**. use [/api/rest/2.0/vcs/git/config/create](#/http/api-endpoints/version-control/create-local-config) instead.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
-          " Control",
+          "Version Control",
           "9.2.0.cl"
         ],
         "parameters": [
@@ -6229,7 +6229,7 @@
         "operationId": "commitBranch",
         "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nCommits TML files of metadata objects to the Git branch configured on your instance.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\nBefore using this endpoint to push your commits:\n\n* Enable Git integration on your instance.\n* Make sure the Git repository and branch details are configured on your instance.\n\nFor more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
-          " Control",
+          "Version Control",
           "9.2.0.cl"
         ],
         "requestBody": {
@@ -6326,7 +6326,7 @@
         "operationId": "revertCommit",
         "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nReverts TML objects to a previous commit specified in the API request.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\nIn the API request, specify the `commit_id`. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.\n\nBy default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
-          " Control",
+          "Version Control",
           "9.2.0.cl"
         ],
         "requestBody": {
@@ -6434,7 +6434,7 @@
         "operationId": "validateMerge",
         "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nValidates the content of your source branch against the objects in your destination environment.\n\nBefore merging content from your source branch to the destination branch, run this API operation from your destination environment and ensure that the changes from the source branch function in the destination environment.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
-          " Control",
+          "Version Control",
           "9.2.0.cl"
         ],
         "requestBody": {
@@ -6526,7 +6526,7 @@
         "operationId": "deployCommit",
         "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nAllows you to deploy a commit and publish TML content to your ThoughtSpot instance.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\nThe API deploys the head of the branch unless a `commit_id` is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
-          " Control",
+          "Version Control",
           "9.2.0.cl"
         ],
         "requestBody": {
