@@ -3047,6 +3047,118 @@
         }
       }
     },
+    "/api/rest/2.0/customization/custom-actions/search": {
+      "post": {
+        "operationId": "searchCustomActions",
+        "description": "Search custom actions\n\nEquivalent to POST /customization/custom-actions/search <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
+        "tags": [
+          "Custom Action",
+          "9.5.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "custom_action_identifier": {
+                    "description": "Name or Id of the custom action.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "default_action_config": {
+                    "description": "Default Custom action configuration. This includes if the custom action visibility across visualization. By default, visible across visualizations.",
+                    "$ref": "#/components/schemas/Default_action_config_Input",
+                    "deprecated": false
+                  },
+                  "include_group_associations": {
+                    "description": "When set to true, returns associated groups for custom action.",
+                    "type": "boolean",
+                    "deprecated": false,
+                    "nullable": true
+                  },
+                  "include_metadata_associations": {
+                    "description": "When set to true, returns associated metadata for custom action.",
+                    "type": "boolean",
+                    "deprecated": false,
+                    "nullable": true
+                  },
+                  "metadata": {
+                    "description": "Search with a given metadata identifier.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/MetadataTypeInput"
+                    },
+                    "deprecated": false
+                  },
+                  "type": {
+                    "description": "Filter the action objects based on type",
+                    "$ref": "#/components/schemas/TypeInput",
+                    "deprecated": false
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Custom action search is successful.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Response_Custom_Action"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/auth/session/login": {
       "post": {
         "operationId": "login",
@@ -8044,6 +8156,292 @@
           }
         }
       }
+    },
+    "/api/rest/2.0/customization/custom-actions": {
+      "post": {
+        "operationId": "createCustomAction",
+        "description": "Create a custom action\n\nEquivalent to POST /customization/custom-actions <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
+        "tags": [
+          "Custom Action",
+          "9.5.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "description": "Name of the custom action. The custom action name must be unique.",
+                    "type": "string",
+                    "deprecated": false
+                  },
+                  "action_details": {
+                    "description": "Action details includes Type and Configuration for Custom Actions",
+                    "$ref": "#/components/schemas/Action_detailsInput",
+                    "deprecated": false
+                  },
+                  "associate_metadata": {
+                    "description": "Metadata objects to which the custom action needs to be associated.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Associate_metadataListItemInput"
+                    },
+                    "deprecated": false
+                  },
+                  "default_action_config": {
+                    "description": "Default Custom action configuration. This includes if the custom action visibility across visualization. By default, visible across visualizations.",
+                    "$ref": "#/components/schemas/Default_action_config_Input",
+                    "deprecated": false
+                  },
+                  "group_identifiers": {
+                    "description": "Unique ID or name of the User groups who will be associated with the custom action.",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "deprecated": false
+                  }
+                },
+                "required": [
+                  "name",
+                  "action_details"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Custom action created successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response_Custom_Action"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/customization/custom-actions/{custom_action_identifier}/update": {
+      "post": {
+        "operationId": "updateCustomAction",
+        "description": "Update a custom action for the current organization.\nEquivalent to PUT /customization/custom-actions/{custom_action_identifier} <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
+        "tags": [
+          "Custom Action",
+          "9.5.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "action_details": {
+                    "description": "Action details includes Type and Configuration for Custom Actions",
+                    "$ref": "#/components/schemas/Action_detailsInput",
+                    "deprecated": false
+                  },
+                  "associate_metadata": {
+                    "description": "Metadata objects to which the custom action needs to be associated.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Associate_metadataListItemInput"
+                    },
+                    "deprecated": false
+                  },
+                  "default_action_config": {
+                    "description": "Default Custom action configuration. This includes if the custom action visibility across visualization. By default, visible across visualizations.",
+                    "$ref": "#/components/schemas/Default_action_config_Input",
+                    "deprecated": false
+                  },
+                  "group_identifiers": {
+                    "description": "Unique ID or name of the User groups who will be associated with the custom action.",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "deprecated": false
+                  },
+                  "name": {
+                    "description": "Name of the custom action. The custom action name must be unique.",
+                    "type": "string",
+                    "deprecated": false
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "custom_action_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique ID or name of the custom action.",
+            "deprecated": false
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Custom action updated successfully."
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/customization/custom-actions/{custom_action_identifier}/delete": {
+      "post": {
+        "operationId": "deleteCustomAction",
+        "description": "Deletes a custom action from the current organization\n\nEquivalent to DELETE /customization/custom-actions/{custom_action_identifier} <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
+        "tags": [
+          "Custom Action",
+          "9.5.0.cl"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "custom_action_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique ID or name of the Custom action.",
+            "deprecated": false
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Custom action is successfully deleted."
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -9714,6 +10112,72 @@
         },
         "description": "Response for search role api should handle hidden privileges as well."
       },
+      "Response_Custom_Action": {
+        "type": "object",
+        "required": [
+          "action_details",
+          "default_action_config",
+          "id",
+          "name"
+        ],
+        "properties": {
+          "action_details": {
+            "$ref": "#/components/schemas/Action_details",
+            "description": "Type and Configuration for Custom Actions"
+          },
+          "default_action_config": {
+            "$ref": "#/components/schemas/Default_action_config",
+            "description": "Default Custom action configuration. This includes if the custom action visibility across visualization. By default, visible across visualizations."
+          },
+          "id": {
+            "type": "string",
+            "description": "Unique Id of the custom action."
+          },
+          "metadata_association": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Metadata_associationListItem"
+            },
+            "description": "Metadata objects to which the custom action needs to be associated."
+          },
+          "name": {
+            "type": "string",
+            "description": "Unique name of the custom action."
+          },
+          "user_groups": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Object_ID_And_Name"
+            },
+            "description": "Unique ID or name of the User groups which are associated with the custom action."
+          }
+        },
+        "description": "Custom action details"
+      },
+      "Default_action_config_Input": {
+        "type": "object",
+        "properties": {
+          "visibility": {
+            "type": "boolean",
+            "description": "Custom action is visible to all Visualizations. Earlier naming convention: LOCAL/GLOBAL. TRUE signifies GLOBAL for backward compatibility."
+          }
+        },
+        "description": "Default Custom action configuration. This includes if the custom action visibility across visualization. By default, visible across visualizations."
+      },
+      "TypeInput": {
+        "type": "object",
+        "properties": {
+          "CALLBACK": {
+            "$ref": "#/components/schemas/CALLBACKInput",
+            "description": "CALLBACK Custom Action Type"
+          },
+          "URL": {
+            "$ref": "#/components/schemas/URLInput",
+            "description": "URL Custom Action Type"
+          }
+        },
+        "description": "Filter the action objects based on type"
+      },
       "Token": {
         "type": "object",
         "required": [
@@ -10390,6 +10854,40 @@
           }
         }
       },
+      "Action_detailsInput": {
+        "type": "object",
+        "properties": {
+          "CALLBACK": {
+            "$ref": "#/components/schemas/CALLBACKInput",
+            "description": "CALLBACK Custom Action Type"
+          },
+          "URL": {
+            "$ref": "#/components/schemas/URLInput",
+            "description": "URL Custom Action Type"
+          }
+        },
+        "description": "Action details includes Type and Configuration for Custom Actions"
+      },
+      "Associate_metadataListItemInput": {
+        "type": "object",
+        "required": [
+          "identifier"
+        ],
+        "properties": {
+          "action_config": {
+            "$ref": "#/components/schemas/Action_config_Input",
+            "description": "Specify that the association is enabled for the metadata object"
+          },
+          "identifier": {
+            "type": "string",
+            "description": "Unique ID or name of the metadata."
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of metadata."
+          }
+        }
+      },
       "FavoriteMetadataItem": {
         "type": "object",
         "required": [
@@ -10664,6 +11162,86 @@
             "description": "Name of the column within the table."
           }
         }
+      },
+      "Action_details": {
+        "type": "object",
+        "properties": {
+          "CALLBACK": {
+            "$ref": "#/components/schemas/CALLBACK",
+            "description": "CALLBACK Custom Action Type"
+          },
+          "URL": {
+            "$ref": "#/components/schemas/URL",
+            "description": "URL Custom Action Type"
+          }
+        },
+        "description": "Type and Configuration for Custom Actions"
+      },
+      "Default_action_config": {
+        "type": "object",
+        "properties": {
+          "visibility": {
+            "type": "boolean",
+            "description": "Custom action is visible to all Visualizations. Earlier naming convention: LOCAL/GLOBAL. TRUE signifies GLOBAL for backward compatibility."
+          }
+        },
+        "description": "Default Custom action configuration. This includes if the custom action visibility across visualization. By default, visible across visualizations."
+      },
+      "Metadata_associationListItem": {
+        "type": "object",
+        "required": [
+          "action_config",
+          "identifier",
+          "type"
+        ],
+        "properties": {
+          "action_config": {
+            "$ref": "#/components/schemas/Action_config",
+            "description": "Specify that the association is enabled for the metadata object"
+          },
+          "identifier": {
+            "type": "string",
+            "description": "Unique ID or name of the metadata."
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of metadata."
+          }
+        }
+      },
+      "CALLBACKInput": {
+        "type": "object",
+        "properties": {
+          "reference": {
+            "type": "string",
+            "description": "Reference name of the sdk. By default the value will be set to action name"
+          }
+        },
+        "description": "CALLBACK Custom Action Type"
+      },
+      "URLInput": {
+        "type": "object",
+        "required": [
+          "url"
+        ],
+        "properties": {
+          "authentication": {
+            "$ref": "#/components/schemas/AuthenticationInput",
+            "description": "Authorization type for the custom action."
+          },
+          "parameters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ParametersListItemInput"
+            },
+            "description": "Query parameters for url."
+          },
+          "url": {
+            "type": "string",
+            "description": "Request Url for the Custom action."
+          }
+        },
+        "description": "URL Custom Action Type"
       },
       "Scope": {
         "type": "object",
@@ -10961,6 +11539,20 @@
           }
         }
       },
+      "Action_config_Input": {
+        "type": "object",
+        "properties": {
+          "position": {
+            "type": "string",
+            "description": "Position of the Custom action on the Metadata object. Earlier naming convention: context."
+          },
+          "visibility": {
+            "type": "boolean",
+            "description": "Visibility of the metadata association with custom action. Earlier naming convention: enabled"
+          }
+        },
+        "description": "Specify that the association is enabled for the metadata object"
+      },
       "Database": {
         "type": "object",
         "required": [
@@ -10981,6 +11573,89 @@
           "auto_created": {
             "type": "boolean",
             "description": "Determines if the object is auto created."
+          }
+        }
+      },
+      "CALLBACK": {
+        "type": "object",
+        "properties": {
+          "reference": {
+            "type": "string",
+            "description": "Reference name of the sdk. By default the value will be set to action name"
+          }
+        },
+        "description": "CALLBACK Custom Action Type"
+      },
+      "URL": {
+        "type": "object",
+        "required": [
+          "url"
+        ],
+        "properties": {
+          "authentication": {
+            "$ref": "#/components/schemas/Authentication",
+            "description": "Authorization type for the custom action."
+          },
+          "parameters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ParametersListItem"
+            },
+            "description": "Query parameters for url."
+          },
+          "url": {
+            "type": "string",
+            "description": "Request Url for the Custom action."
+          }
+        },
+        "description": "URL Custom Action Type"
+      },
+      "Action_config": {
+        "type": "object",
+        "properties": {
+          "position": {
+            "type": "string",
+            "description": "Position of the Custom action on the Metadata object. Earlier naming convention: context."
+          },
+          "visibility": {
+            "type": "boolean",
+            "description": "Visibility of the metadata association with custom action. Earlier naming convention: enabled"
+          }
+        },
+        "description": "Specify that the association is enabled for the metadata object"
+      },
+      "AuthenticationInput": {
+        "type": "object",
+        "properties": {
+          "API_Key": {
+            "$ref": "#/components/schemas/API_KeyInput",
+            "description": "With API key auth, you send a key-value pair to the API either in the request headers or query parameters."
+          },
+          "Basic_Auth": {
+            "$ref": "#/components/schemas/Basic_AuthInput",
+            "description": "Basic Auth: Basic authentication involves sending a verified username and password with your request."
+          },
+          "Bearer_Token": {
+            "type": "string",
+            "description": "Bearer tokens enable requests to authenticate using an access key."
+          },
+          "No_Auth": {
+            "type": "string",
+            "description": "No authorization. If your request doesn't require authorization."
+          }
+        },
+        "description": "Authorization type for the custom action."
+      },
+      "ParametersListItemInput": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "Key for the url query parameter"
+          },
+          "value": {
+            "type": "string",
+            "description": "Value for the url query parameter"
           }
         }
       },
@@ -11058,6 +11733,69 @@
           }
         }
       },
+      "Authentication": {
+        "type": "object",
+        "properties": {
+          "API_Key": {
+            "$ref": "#/components/schemas/API_Key",
+            "description": "With API key auth, you send a key-value pair to the API either in the request headers or query parameters."
+          },
+          "Basic_Auth": {
+            "$ref": "#/components/schemas/Basic_Auth",
+            "description": "Basic Auth: Basic authentication involves sending a verified username and password with your request."
+          },
+          "Bearer_Token": {
+            "type": "string",
+            "description": "Bearer tokens enable requests to authenticate using an access key."
+          },
+          "No_Auth": {
+            "type": "string",
+            "description": "No authorization. If your request doesn't require authorization."
+          }
+        },
+        "description": "Authorization type for the custom action."
+      },
+      "ParametersListItem": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "Key for the url query parameter"
+          },
+          "value": {
+            "type": "string",
+            "description": "Value for the url query parameter"
+          }
+        }
+      },
+      "API_KeyInput": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "Enter your key name"
+          },
+          "value": {
+            "type": "string",
+            "description": "Enter you key value"
+          }
+        },
+        "description": "With API key auth, you send a key-value pair to the API either in the request headers or query parameters."
+      },
+      "Basic_AuthInput": {
+        "type": "object",
+        "properties": {
+          "password": {
+            "type": "string",
+            "description": "Password for the basic authentication"
+          },
+          "username": {
+            "type": "string",
+            "description": "Username for the basic authentication"
+          }
+        },
+        "description": "Basic Auth: Basic authentication involves sending a verified username and password with your request."
+      },
       "Table": {
         "type": "object",
         "required": [
@@ -11099,6 +11837,34 @@
             "description": "List of relationships for the table"
           }
         }
+      },
+      "API_Key": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "Enter your key name"
+          },
+          "value": {
+            "type": "string",
+            "description": "Enter you key value"
+          }
+        },
+        "description": "With API key auth, you send a key-value pair to the API either in the request headers or query parameters."
+      },
+      "Basic_Auth": {
+        "type": "object",
+        "properties": {
+          "password": {
+            "type": "string",
+            "description": "Password for the basic authentication"
+          },
+          "username": {
+            "type": "string",
+            "description": "Username for the basic authentication"
+          }
+        },
+        "description": "Basic Auth: Basic authentication involves sending a verified username and password with your request."
       },
       "Column": {
         "type": "object",
