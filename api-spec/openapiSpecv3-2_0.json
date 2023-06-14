@@ -8,34 +8,32 @@
     {
       "name": "9.0.0.cl",
       "id": "9.0.0.cl",
-      "tags": [
-        "9.0.0.cl"
-      ],
+      "tags": ["9.0.0.cl"],
       "description": "Roles for version 9.0.0.cl"
     },
     {
       "name": "9.2.0.cl",
       "id": "9.2.0.cl",
-      "tags": [
-        "9.2.0.cl"
-      ],
+      "tags": ["9.2.0.cl"],
       "description": "Roles for version 9.2.0.cl"
     },
     {
       "name": "9.5.0.cl",
       "id": "9.5.0.cl",
-      "tags": [
-        "9.5.0.cl"
-      ],
+      "tags": ["9.5.0.cl"],
       "description": "Roles for version 9.5.0.cl"
     },
     {
       "name": "9.4.0.cl",
       "id": "9.4.0.cl",
-      "tags": [
-        "9.4.0.cl"
-      ],
+      "tags": ["9.4.0.cl"],
       "description": "Roles for version 9.4.0.cl"
+    },
+    {
+      "name": "9.6.0.cl",
+      "id": "9.6.0.cl",
+      "tags": ["9.6.0.cl"],
+      "description": "Roles for version 9.6.0.cl"
     }
   ],
   "tags": [],
@@ -44,10 +42,7 @@
       "get": {
         "operationId": "getCurrentUserInfo",
         "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGet session information for the currently logged-in user.\n\nAll users can view their session information. The API response varies according to user's access permissions and group privilege.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "Authentication",
-          "9.0.0.cl"
-        ],
+        "tags": ["Authentication", "9.0.0.cl"],
         "parameters": [],
         "responses": {
           "200": {
@@ -107,10 +102,7 @@
       "get": {
         "operationId": "getCurrentUserToken",
         "description": "Get token for the currently logged-in user. <br/>  <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>",
-        "tags": [
-          "Authentication",
-          "9.4.0.cl"
-        ],
+        "tags": ["Authentication", "9.4.0.cl"],
         "parameters": [],
         "responses": {
           "200": {
@@ -170,10 +162,7 @@
       "post": {
         "operationId": "searchUsers",
         "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGets user details.To get details of a specific user, specify the user GUID or name. You can also filter the API response based on groups, Org ID, user visibility, account status, user type, user preference settings, user’s favorite objects, or home Liveboard setting.\n\nAvailable to all users. Users with `ADMINISTRATION` (Can administer ThoughtSpot) privileges can view all users properties.\n\n**Note**: If you are querying users by Org, user privileges may show null values in the API response.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "Users",
-          "9.0.0.cl"
-        ],
+        "tags": ["Users", "9.0.0.cl"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -193,10 +182,7 @@
                   "visibility": {
                     "description": "Visibility of the user.",
                     "type": "string",
-                    "enum": [
-                      "SHARABLE",
-                      "NON_SHARABLE"
-                    ],
+                    "enum": ["SHARABLE", "NON_SHARABLE"],
                     "deprecated": false
                   },
                   "email": {
@@ -407,10 +393,7 @@
       "get": {
         "operationId": "getSystemInformation",
         "description": "Get system details <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
-        "tags": [
-          "System",
-          "9.0.0.cl"
-        ],
+        "tags": ["System", "9.0.0.cl"],
         "parameters": [],
         "responses": {
           "200": {
@@ -499,10 +482,7 @@
       "get": {
         "operationId": "getSystemConfig",
         "description": "Get system config information <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
-        "tags": [
-          "System",
-          "9.0.0.cl"
-        ],
+        "tags": ["System", "9.0.0.cl"],
         "parameters": [],
         "responses": {
           "200": {
@@ -569,10 +549,7 @@
       "get": {
         "operationId": "getSystemOverrideInfo",
         "description": "Get cluster override info. <br/>  <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>",
-        "tags": [
-          "System",
-          "9.2.0.cl"
-        ],
+        "tags": ["System", "9.2.0.cl"],
         "parameters": [],
         "responses": {
           "200": {
@@ -632,10 +609,7 @@
       "post": {
         "operationId": "searchOrgs",
         "description": "Gets Orgs configured on a ThoughtSpot instance. Requires cluster administration privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
-        "tags": [
-          "Orgs",
-          "9.0.0.cl"
-        ],
+        "tags": ["Orgs", "9.0.0.cl"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -655,19 +629,13 @@
                   "visibility": {
                     "description": "Visibility of the Org.",
                     "type": "string",
-                    "enum": [
-                      "SHOW",
-                      "HIDDEN"
-                    ],
+                    "enum": ["SHOW", "HIDDEN"],
                     "deprecated": false
                   },
                   "status": {
                     "description": "Status of the Org.",
                     "type": "string",
-                    "enum": [
-                      "ACTIVE",
-                      "IN_ACTIVE"
-                    ],
+                    "enum": ["ACTIVE", "IN_ACTIVE"],
                     "deprecated": false
                   },
                   "user_identifiers": {
@@ -765,10 +733,7 @@
       "post": {
         "operationId": "searchTags",
         "description": "Allows searching tags. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
-        "tags": [
-          "Tags",
-          "9.0.0.cl"
-        ],
+        "tags": ["Tags", "9.0.0.cl"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -886,10 +851,7 @@
       "post": {
         "operationId": "searchUserGroups",
         "description": "Allows searching groups. Requires administrator privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
-        "tags": [
-          "Groups",
-          "9.0.0.cl"
-        ],
+        "tags": ["Groups", "9.0.0.cl"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -969,10 +931,7 @@
                   "type": {
                     "description": "Group type.",
                     "type": "string",
-                    "enum": [
-                      "LOCAL_GROUP",
-                      "LDAP_GROUP"
-                    ],
+                    "enum": ["LOCAL_GROUP", "LDAP_GROUP"],
                     "deprecated": false
                   },
                   "user_identifiers": {
@@ -986,10 +945,7 @@
                   "visibility": {
                     "description": "Visibility of the group. To make a group visible to other users and groups,\nset the visibility to SHAREABLE.",
                     "type": "string",
-                    "enum": [
-                      "SHARABLE",
-                      "NON_SHARABLE"
-                    ],
+                    "enum": ["SHARABLE", "NON_SHARABLE"],
                     "deprecated": false
                   },
                   "role_identifiers": {
@@ -1086,10 +1042,7 @@
       "post": {
         "operationId": "searchMetadata",
         "description": "Allows searching for metadata objects. You can search for metadata objects\nsuch as Liveboard, Answer. Requires at least view access to the metadata object. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
-        "tags": [
-          "Metadata",
-          "9.0.0.cl"
-        ],
+        "tags": ["Metadata", "9.0.0.cl"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -1124,10 +1077,7 @@
                     "description": "Version of the dependent table of the metadata like worksheets.",
                     "default": "V1",
                     "type": "string",
-                    "enum": [
-                      "V1",
-                      "V2"
-                    ],
+                    "enum": ["V1", "V2"],
                     "deprecated": false
                   },
                   "exclude_objects": {
@@ -1307,10 +1257,7 @@
       "post": {
         "operationId": "fetchLiveboardSqlQuery",
         "description": "Fetches SQL query data for Liveboard and its visualizations. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
-        "tags": [
-          "Metadata",
-          "9.0.0.cl"
-        ],
+        "tags": ["Metadata", "9.0.0.cl"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -1331,9 +1278,7 @@
                     "deprecated": false
                   }
                 },
-                "required": [
-                  "metadata_identifier"
-                ]
+                "required": ["metadata_identifier"]
               }
             }
           },
@@ -1398,10 +1343,7 @@
       "post": {
         "operationId": "fetchAnswerSqlQuery",
         "description": "Fetches SQL query data for an Answer. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
-        "tags": [
-          "Metadata",
-          "9.0.0.cl"
-        ],
+        "tags": ["Metadata", "9.0.0.cl"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -1414,9 +1356,7 @@
                     "deprecated": false
                   }
                 },
-                "required": [
-                  "metadata_identifier"
-                ]
+                "required": ["metadata_identifier"]
               }
             }
           },
@@ -1481,10 +1421,7 @@
       "post": {
         "operationId": "exportLiveboardReport",
         "description": "Exports Liveboard and visualization data in PDF, PNG, XLS, or CSV format.\nRequires at least view access to the Liveboard. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
-        "tags": [
-          "Reports",
-          "9.0.0.cl"
-        ],
+        "tags": ["Reports", "9.0.0.cl"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -1513,12 +1450,7 @@
                     "description": "Export file format.",
                     "default": "CSV",
                     "type": "string",
-                    "enum": [
-                      "CSV",
-                      "PDF",
-                      "XLSX",
-                      "PNG"
-                    ],
+                    "enum": ["CSV", "PDF", "XLSX", "PNG"],
                     "deprecated": false
                   },
                   "runtime_filter": {
@@ -1547,9 +1479,7 @@
                     "deprecated": false
                   }
                 },
-                "required": [
-                  "metadata_identifier"
-                ]
+                "required": ["metadata_identifier"]
               }
             }
           },
@@ -1614,10 +1544,7 @@
       "post": {
         "operationId": "exportAnswerReport",
         "description": "Export report file for Answer data. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
-        "tags": [
-          "Reports",
-          "9.0.0.cl"
-        ],
+        "tags": ["Reports", "9.0.0.cl"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -1633,12 +1560,7 @@
                     "description": "Export file format.",
                     "default": "CSV",
                     "type": "string",
-                    "enum": [
-                      "CSV",
-                      "PDF",
-                      "XLSX",
-                      "PNG"
-                    ],
+                    "enum": ["CSV", "PDF", "XLSX", "PNG"],
                     "deprecated": false
                   },
                   "runtime_filter": {
@@ -1657,9 +1579,7 @@
                     "deprecated": false
                   }
                 },
-                "required": [
-                  "metadata_identifier"
-                ]
+                "required": ["metadata_identifier"]
               }
             }
           },
@@ -1724,10 +1644,7 @@
       "post": {
         "operationId": "fetchPermissionsOfPrincipals",
         "description": "Fetch permission details for principal objects, such as users and groups. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
-        "tags": [
-          "Security",
-          "9.0.0.cl"
-        ],
+        "tags": ["Security", "9.0.0.cl"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -1751,9 +1668,7 @@
                     "deprecated": false
                   }
                 },
-                "required": [
-                  "principals"
-                ]
+                "required": ["principals"]
               }
             }
           },
@@ -1862,10 +1777,7 @@
       "post": {
         "operationId": "fetchPermissionsOnMetadata",
         "description": "Fetch permission details for metadata objects <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
-        "tags": [
-          "Security",
-          "9.0.0.cl"
-        ],
+        "tags": ["Security", "9.0.0.cl"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -1896,9 +1808,7 @@
                     "nullable": true
                   }
                 },
-                "required": [
-                  "metadata"
-                ]
+                "required": ["metadata"]
               }
             }
           },
@@ -2028,10 +1938,7 @@
       "post": {
         "operationId": "searchData",
         "description": "Allows passing a search query string and retrieving data from ThoughtSpot. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
-        "tags": [
-          "Data",
-          "9.0.0.cl"
-        ],
+        "tags": ["Data", "9.0.0.cl"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -2052,9 +1959,7 @@
                     "description": "JSON output format. By default, the API returns full data in the JSON.",
                     "default": "COMPACT",
                     "type": "string",
-                    "enum": [
-                      "COMPACT"
-                    ],
+                    "enum": ["COMPACT"],
                     "deprecated": false
                   },
                   "record_offset": {
@@ -2087,10 +1992,7 @@
                     "deprecated": false
                   }
                 },
-                "required": [
-                  "query_string",
-                  "logical_table_identifier"
-                ]
+                "required": ["query_string", "logical_table_identifier"]
               }
             }
           },
@@ -2155,10 +2057,7 @@
       "post": {
         "operationId": "fetchLiveboardData",
         "description": "Fetches Liveboard data. Requires at least view access to the Liveboard. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
-        "tags": [
-          "Data",
-          "9.0.0.cl"
-        ],
+        "tags": ["Data", "9.0.0.cl"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -2187,9 +2086,7 @@
                     "description": "JSON output format. By default, the API returns full data in the JSON.",
                     "default": "COMPACT",
                     "type": "string",
-                    "enum": [
-                      "COMPACT"
-                    ],
+                    "enum": ["COMPACT"],
                     "deprecated": false
                   },
                   "record_offset": {
@@ -2222,9 +2119,7 @@
                     "deprecated": false
                   }
                 },
-                "required": [
-                  "metadata_identifier"
-                ]
+                "required": ["metadata_identifier"]
               }
             }
           },
@@ -2289,10 +2184,7 @@
       "post": {
         "operationId": "fetchAnswerData",
         "description": "Fetches data from a saved Answer. Requires at least view access to the Answer object. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
-        "tags": [
-          "Data",
-          "9.0.0.cl"
-        ],
+        "tags": ["Data", "9.0.0.cl"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -2308,9 +2200,7 @@
                     "description": "JSON output format. By default, the API returns full data in the JSON.",
                     "default": "COMPACT",
                     "type": "string",
-                    "enum": [
-                      "COMPACT"
-                    ],
+                    "enum": ["COMPACT"],
                     "deprecated": false
                   },
                   "record_offset": {
@@ -2343,9 +2233,7 @@
                     "deprecated": false
                   }
                 },
-                "required": [
-                  "metadata_identifier"
-                ]
+                "required": ["metadata_identifier"]
               }
             }
           },
@@ -2410,10 +2298,7 @@
       "post": {
         "operationId": "fetchLogs",
         "description": "Fetches security audit logs. Requires administrator privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
-        "tags": [
-          "Log",
-          "9.0.0.cl"
-        ],
+        "tags": ["Log", "9.0.0.cl"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -2423,9 +2308,7 @@
                   "log_type": {
                     "description": "Name of the log type.",
                     "type": "string",
-                    "enum": [
-                      "SECURITY_AUDIT"
-                    ],
+                    "enum": ["SECURITY_AUDIT"],
                     "deprecated": false
                   },
                   "start_epoch_time_in_millis": {
@@ -2441,9 +2324,7 @@
                     "deprecated": false
                   }
                 },
-                "required": [
-                  "log_type"
-                ]
+                "required": ["log_type"]
               }
             }
           },
@@ -2511,9 +2392,7 @@
       "post": {
         "operationId": "searchConfig",
         "description": "Search existing Git configurations in the current cluster",
-        "tags": [
-          "Version Control"
-        ],
+        "tags": ["Version Control"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -2595,9 +2474,7 @@
       "post": {
         "operationId": "searchCommits",
         "description": "List the commit history of a metadata object",
-        "tags": [
-          "Version Control"
-        ],
+        "tags": ["Version Control"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -2612,11 +2489,7 @@
                   "metadata_type": {
                     "description": "Type of metadata.",
                     "type": "string",
-                    "enum": [
-                      "LIVEBOARD",
-                      "ANSWER",
-                      "LOGICAL_TABLE"
-                    ],
+                    "enum": ["LIVEBOARD", "ANSWER", "LOGICAL_TABLE"],
                     "deprecated": false
                   },
                   "branch_name": {
@@ -2637,9 +2510,7 @@
                     "deprecated": false
                   }
                 },
-                "required": [
-                  "metadata_identifier"
-                ]
+                "required": ["metadata_identifier"]
               }
             }
           },
@@ -2707,10 +2578,7 @@
       "post": {
         "operationId": "searchConnection",
         "description": "Search connection objects. Requires DATAMANAGEMENT privilege. <br/>  <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>",
-        "tags": [
-          "Connections",
-          "9.2.0.cl"
-        ],
+        "tags": ["Connections", "9.2.0.cl"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -2773,12 +2641,7 @@
                   "data_warehouse_object_type": {
                     "description": "Data warehouse object type.",
                     "type": "string",
-                    "enum": [
-                      "DATABASE",
-                      "SCHEMA",
-                      "TABLE",
-                      "COLUMN"
-                    ],
+                    "enum": ["DATABASE", "SCHEMA", "TABLE", "COLUMN"],
                     "deprecated": false
                   },
                   "sort_options": {
@@ -2801,12 +2664,7 @@
                     "description": "List of authentication types to fetch data_ware_house_objects from external Data warehouse. This is only applicable when data_warehouse_object_type is selected.",
                     "default": "SERVICE_ACCOUNT",
                     "type": "string",
-                    "enum": [
-                      "SERVICE_ACCOUNT",
-                      "OAUTH",
-                      "IAM",
-                      "EXTOAUTH"
-                    ],
+                    "enum": ["SERVICE_ACCOUNT", "OAUTH", "IAM", "EXTOAUTH"],
                     "deprecated": false
                   }
                 }
@@ -2876,10 +2734,7 @@
       "post": {
         "operationId": "searchRoles",
         "description": "Gets Roles configured on a ThoughtSpot instance.\nRequires cluster Administration, Role Administration or\nGroup Administration privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
-        "tags": [
-          "Roles",
-          "9.5.0.cl"
-        ],
+        "tags": ["Roles", "9.5.0.cl"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -2974,11 +2829,7 @@
                     "type": "array",
                     "items": {
                       "type": "string",
-                      "enum": [
-                        "READ_ONLY",
-                        "MODIFY",
-                        "NO_ACCESS"
-                      ]
+                      "enum": ["READ_ONLY", "MODIFY", "NO_ACCESS"]
                     },
                     "deprecated": false
                   }
@@ -3048,11 +2899,8 @@
     "/api/rest/2.0/customization/custom-actions/search": {
       "post": {
         "operationId": "searchCustomActions",
-        "description": "Search custom actions\n\nEquivalent to POST /customization/custom-actions/search <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
-        "tags": [
-          "Custom Action",
-          "9.5.0.cl"
-        ],
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.6.0.cl or later</span>\n\nSearch custom actions\n\n\n\n\n#### Endpoint URL\n",
+        "tags": ["Custom Action", "9.6.0.cl"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -3071,12 +2919,14 @@
                   },
                   "include_group_associations": {
                     "description": "When set to true, returns associated groups for custom action.",
+                    "default": false,
                     "type": "boolean",
                     "deprecated": false,
                     "nullable": true
                   },
                   "include_metadata_associations": {
                     "description": "When set to true, returns associated metadata for custom action.",
+                    "default": false,
                     "type": "boolean",
                     "deprecated": false,
                     "nullable": true
@@ -3109,6 +2959,24 @@
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/ResponseCustomAction"
+                  }
+                },
+                "examples": {
+                  "example_1": {
+                    "value": [
+                      {
+                        "action_details": {
+                          "CALLBACK": {
+                            "reference": "LEDE"
+                          }
+                        },
+                        "default_action_config": {
+                          "visibility": true
+                        },
+                        "id": "c59262df-cf9e-4947-96fa-52d494688797",
+                        "name": "LEDE"
+                      }
+                    ]
                   }
                 }
               }
@@ -3161,10 +3029,7 @@
       "post": {
         "operationId": "login",
         "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nCreates a login session for a ThoughtSpot user with basic authentication. In the basic authentication method, REST clients log in to ThoughtSpot using `username` and `password` attributes.\n\nA successful login returns a session cookie that can be used in your subsequent API calls.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "Authentication",
-          "9.0.0.cl"
-        ],
+        "tags": ["Authentication", "9.0.0.cl"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -3250,10 +3115,7 @@
       "post": {
         "operationId": "getObjectAccessToken",
         "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGets authentication token that provides access to a specific metadata object. By default, the token obtained from ThoughtSpot is valid for 5 mins.\n\nYou can generate the token for a user by providing `username` and `password` (Basic authentication), or by using the cluster’s secret key (Trusted authentication). To generate a `secret_key` on your cluster, administrator must enable **Trusted authentication** in the **Develop** > **Customizations** > **Security Settings** page. For more information, see [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth).\n\nWhen both `password` and `secret_key` are included in the API request, `password` takes precedence.\n\n#### Just-in-time provisioning\n\nFor just-in-time user creation and provisioning, use the following attributes.\n\n- `auto_create`\n- `username`\n\nTo assign privileges to the new user, specify the group name or GUID in `group_identifiers`.\n\nTo add the user to an Org, send the `Org ID` in the API request.\n\n**Note**: This feature is only available for clusters with trusted authentication enabled.\n\nTo provision a new user, you need `ADMINISTRATION` (Can administer ThoughtSpot) privilege.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "Authentication",
-          "9.0.0.cl"
-        ],
+        "tags": ["Authentication", "9.0.0.cl"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -3322,10 +3184,7 @@
                     "deprecated": false
                   }
                 },
-                "required": [
-                  "username",
-                  "object_id"
-                ]
+                "required": ["username", "object_id"]
               }
             }
           },
@@ -3391,10 +3250,7 @@
       "post": {
         "operationId": "getFullAccessToken",
         "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGets authentication token that provides full access to ThoughtSpot application. By default, the token obtained remains valid for 5 mins.\n\nYou can generate the token for a user by providing `username` and `password` (Basic authentication), or by using the cluster’s secret key (Trusted authentication). To generate a `secret_key` on your cluster, administrator must enable **Trusted authentication** in the **Develop** > **Customizations** > **Security Settings** page. For more information, see [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth).\n\nWhen both `password` and `secret_key` are included in the API request, `password` takes precedence.\n\n#### Just-in-time provisioning\n\nFor just-in-time user creation and provisioning, use the following attributes.\n\n- `auto_create`\n- `username`\n\nTo assign privileges to the new user, specify the group name or GUID in `group_identifiers`.\n\nTo add the user to an Org, specify the Org ID in the `org_id` attribute.\n\n**Note**: This feature is only available for clusters with trusted authentication enabled.\n\nTo provision a new user, you need `ADMINISTRATION` (Can administer ThoughtSpot) privilege.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "Authentication",
-          "9.0.0.cl"
-        ],
+        "tags": ["Authentication", "9.0.0.cl"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -3458,9 +3314,7 @@
                     "deprecated": false
                   }
                 },
-                "required": [
-                  "username"
-                ]
+                "required": ["username"]
               }
             }
           },
@@ -3526,10 +3380,7 @@
       "post": {
         "operationId": "logout",
         "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nLogs a user out of their current session.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "Authentication",
-          "9.0.0.cl"
-        ],
+        "tags": ["Authentication", "9.0.0.cl"],
         "parameters": [],
         "responses": {
           "204": {
@@ -3582,10 +3433,7 @@
       "post": {
         "operationId": "revokeToken",
         "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nRevokes the authentication token issued for current user session.\n\nThe token of your current session expires when you make a call to the `/api/rest/2.0/auth/token/revoke` endpoint.\nthe users will not be able to access ThoughtSpot objects until a new token is obtained.\n\nTo start the session, request for a new token from ThoughtSpot. See [Get Object Access Token](/http/api-endpoints/authentication/get-object-access-token)\nand [Get Full Access Token](http/api-endpoints/authentication/get-full-access-token).\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "Authentication",
-          "9.0.0.cl"
-        ],
+        "tags": ["Authentication", "9.0.0.cl"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -3657,10 +3505,7 @@
       "post": {
         "operationId": "createUser",
         "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nCreates a user in ThoughtSpot. The API endpoint also allows you to add user properties such as email address, account status, share notification preferences, and sharing visibility. You can also assign the user to groups and Orgs, and set favorite objects.\n\nRequires ADMINISTRATION (Can administer Thoughtspot) privilege.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "Users",
-          "9.0.0.cl"
-        ],
+        "tags": ["Users", "9.0.0.cl"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -3733,10 +3578,7 @@
                     "description": "Visibility of the users. When set to SHARABLE, the user is visible to other users and groups when they try to share an object.",
                     "default": "SHARABLE",
                     "type": "string",
-                    "enum": [
-                      "SHARABLE",
-                      "NON_SHARABLE"
-                    ],
+                    "enum": ["SHARABLE", "NON_SHARABLE"],
                     "deprecated": false
                   },
                   "notify_on_share": {
@@ -3774,12 +3616,7 @@
                     "deprecated": false
                   }
                 },
-                "required": [
-                  "name",
-                  "display_name",
-                  "password",
-                  "email"
-                ]
+                "required": ["name", "display_name", "password", "email"]
               }
             }
           },
@@ -3844,10 +3681,7 @@
       "post": {
         "operationId": "updateUser",
         "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nUpdates properties of a user object. You can modify username, reset password, assign groups or remove the user from a group, and modify user preferences.\n\nRequires ADMINISTRATION (Can administer Thoughtspot) privilege.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "Users",
-          "9.0.0.cl"
-        ],
+        "tags": ["Users", "9.0.0.cl"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -3867,10 +3701,7 @@
                   "visibility": {
                     "description": "Visibility of the users. When set to SHARABLE, the user is visible to other users and groups when they try to share an object.",
                     "type": "string",
-                    "enum": [
-                      "SHARABLE",
-                      "NON_SHARABLE"
-                    ],
+                    "enum": ["SHARABLE", "NON_SHARABLE"],
                     "deprecated": false
                   },
                   "email": {
@@ -3953,11 +3784,7 @@
                     "description": "Type of update operation. Default operation type is REPLACE",
                     "default": "REPLACE",
                     "type": "string",
-                    "enum": [
-                      "ADD",
-                      "REMOVE",
-                      "REPLACE"
-                    ],
+                    "enum": ["ADD", "REMOVE", "REPLACE"],
                     "deprecated": false
                   }
                 }
@@ -4028,10 +3855,7 @@
       "post": {
         "operationId": "deleteUser",
         "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nDeletes a user from the ThoughtSpot system.\n\nIf you want to remove a user from a specific Org, update the group and Org mapping properties of the user object via a POST API call to the [/api/rest/2.0/users/{user_identifier}/update](#/http/api-endpoints/users/update-user) endpoint.\n\nRequires ADMINISTRATION (Can administer Thoughtspot) privilege.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "Users",
-          "9.0.0.cl"
-        ],
+        "tags": ["Users", "9.0.0.cl"],
         "parameters": [
           {
             "in": "path",
@@ -4095,10 +3919,7 @@
       "post": {
         "operationId": "importUsers",
         "description": "Imports user data from external databases to ThoughtSpot. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
-        "tags": [
-          "Users",
-          "9.0.0.cl"
-        ],
+        "tags": ["Users", "9.0.0.cl"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -4133,9 +3954,7 @@
                     "nullable": true
                   }
                 },
-                "required": [
-                  "users"
-                ]
+                "required": ["users"]
               }
             }
           },
@@ -4200,10 +4019,7 @@
       "post": {
         "operationId": "changeUserPassword",
         "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nUpdates the current password of a ThoughtSpot user.\n\nRequires ADMINISTRATION (Can administer Thoughtspot) privilege.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "Users",
-          "9.0.0.cl"
-        ],
+        "tags": ["Users", "9.0.0.cl"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -4288,10 +4104,7 @@
       "post": {
         "operationId": "resetUserPassword",
         "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nResets the password of a user account. Administrators can reset password on behalf of a user.\n\nRequires ADMINISTRATION (Can administer Thoughtspot) privilege.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "Users",
-          "9.0.0.cl"
-        ],
+        "tags": ["Users", "9.0.0.cl"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -4309,10 +4122,7 @@
                     "deprecated": false
                   }
                 },
-                "required": [
-                  "new_password",
-                  "user_identifier"
-                ]
+                "required": ["new_password", "user_identifier"]
               }
             }
           },
@@ -4370,10 +4180,7 @@
       "post": {
         "operationId": "forceLogoutUsers",
         "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nForces logout on user sessions. Note the following points. This API operation makes a user session invalid and forces the user to re-login.\n\n- Use this API with caution as it may invalidate active user sessions and force users to re-login.\n\n- Make sure you specify the usernames or GUIDs. If you pass null values in the API call, all user sessions on your cluster become invalid, and the users are forced to re-login.\n\nRequires ADMINISTRATION (Can administer Thoughtspot) privilege.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "Users",
-          "9.0.0.cl"
-        ],
+        "tags": ["Users", "9.0.0.cl"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -4445,10 +4252,7 @@
       "post": {
         "operationId": "updateSystemConfig",
         "description": "Update cluster configuration <br/>  <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>",
-        "tags": [
-          "System",
-          "9.2.0.cl"
-        ],
+        "tags": ["System", "9.2.0.cl"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -4461,9 +4265,7 @@
                     "deprecated": false
                   }
                 },
-                "required": [
-                  "configuration"
-                ]
+                "required": ["configuration"]
               }
             }
           },
@@ -4521,10 +4323,7 @@
       "post": {
         "operationId": "createOrg",
         "description": "Creates an Org. Requires cluster administration privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
-        "tags": [
-          "Orgs",
-          "9.0.0.cl"
-        ],
+        "tags": ["Orgs", "9.0.0.cl"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -4542,9 +4341,7 @@
                     "deprecated": false
                   }
                 },
-                "required": [
-                  "name"
-                ]
+                "required": ["name"]
               }
             }
           },
@@ -4620,10 +4417,7 @@
       "post": {
         "operationId": "updateOrg",
         "description": "Updates an Org. Requires cluster administration privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
-        "tags": [
-          "Orgs",
-          "9.0.0.cl"
-        ],
+        "tags": ["Orgs", "9.0.0.cl"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -4652,11 +4446,7 @@
                     "description": "Type of update operation. Default operation type is ADD",
                     "default": "ADD",
                     "type": "string",
-                    "enum": [
-                      "ADD",
-                      "REMOVE",
-                      "REPLACE"
-                    ],
+                    "enum": ["ADD", "REMOVE", "REPLACE"],
                     "deprecated": false
                   }
                 }
@@ -4727,10 +4517,7 @@
       "post": {
         "operationId": "deleteOrg",
         "description": "Deletes an Org. Requires cluster administration privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
-        "tags": [
-          "Orgs",
-          "9.0.0.cl"
-        ],
+        "tags": ["Orgs", "9.0.0.cl"],
         "parameters": [
           {
             "in": "path",
@@ -4794,10 +4581,7 @@
       "post": {
         "operationId": "createTag",
         "description": "Creates a Tag. Requires administrator privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
-        "tags": [
-          "Tags",
-          "9.0.0.cl"
-        ],
+        "tags": ["Tags", "9.0.0.cl"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -4815,9 +4599,7 @@
                     "deprecated": false
                   }
                 },
-                "required": [
-                  "name"
-                ]
+                "required": ["name"]
               }
             }
           },
@@ -4900,10 +4682,7 @@
       "post": {
         "operationId": "updateTag",
         "description": "Updates a Tag. Requires administrator privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
-        "tags": [
-          "Tags",
-          "9.0.0.cl"
-        ],
+        "tags": ["Tags", "9.0.0.cl"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -4988,10 +4767,7 @@
       "post": {
         "operationId": "deleteTag",
         "description": "Deletes a tag. Requires administrator privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
-        "tags": [
-          "Tags",
-          "9.0.0.cl"
-        ],
+        "tags": ["Tags", "9.0.0.cl"],
         "parameters": [
           {
             "in": "path",
@@ -5055,10 +4831,7 @@
       "post": {
         "operationId": "assignTag",
         "description": "Assigns a tag to a metadata object. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
-        "tags": [
-          "Tags",
-          "9.0.0.cl"
-        ],
+        "tags": ["Tags", "9.0.0.cl"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -5082,10 +4855,7 @@
                     "deprecated": false
                   }
                 },
-                "required": [
-                  "metadata",
-                  "tag_identifiers"
-                ]
+                "required": ["metadata", "tag_identifiers"]
               }
             }
           },
@@ -5143,10 +4913,7 @@
       "post": {
         "operationId": "unassignTag",
         "description": "Unassign a tag to a metadata object. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
-        "tags": [
-          "Tags",
-          "9.0.0.cl"
-        ],
+        "tags": ["Tags", "9.0.0.cl"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -5170,10 +4937,7 @@
                     "deprecated": false
                   }
                 },
-                "required": [
-                  "metadata",
-                  "tag_identifiers"
-                ]
+                "required": ["metadata", "tag_identifiers"]
               }
             }
           },
@@ -5231,10 +4995,7 @@
       "post": {
         "operationId": "createUserGroup",
         "description": "Create a group. Requires administrator privilege. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
-        "tags": [
-          "Groups",
-          "9.0.0.cl"
-        ],
+        "tags": ["Groups", "9.0.0.cl"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -5307,10 +5068,7 @@
                     "description": "Group type.",
                     "default": "LOCAL_GROUP",
                     "type": "string",
-                    "enum": [
-                      "LOCAL_GROUP",
-                      "LDAP_GROUP"
-                    ],
+                    "enum": ["LOCAL_GROUP", "LDAP_GROUP"],
                     "deprecated": false
                   },
                   "user_identifiers": {
@@ -5325,10 +5083,7 @@
                     "description": "Visibility of the group. To make a group visible to other users and groups,\nset the visibility to SHAREABLE.",
                     "default": "SHARABLE",
                     "type": "string",
-                    "enum": [
-                      "SHARABLE",
-                      "NON_SHARABLE"
-                    ],
+                    "enum": ["SHARABLE", "NON_SHARABLE"],
                     "deprecated": false
                   },
                   "role_identifiers": {
@@ -5340,10 +5095,7 @@
                     "deprecated": false
                   }
                 },
-                "required": [
-                  "name",
-                  "display_name"
-                ]
+                "required": ["name", "display_name"]
               }
             }
           },
@@ -5408,10 +5160,7 @@
       "post": {
         "operationId": "updateUserGroup",
         "description": "Update group properties. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
-        "tags": [
-          "Groups",
-          "9.0.0.cl"
-        ],
+        "tags": ["Groups", "9.0.0.cl"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -5483,10 +5232,7 @@
                   "type": {
                     "description": "Type of the user group.",
                     "type": "string",
-                    "enum": [
-                      "LOCAL_GROUP",
-                      "LDAP_GROUP"
-                    ],
+                    "enum": ["LOCAL_GROUP", "LDAP_GROUP"],
                     "deprecated": false
                   },
                   "user_identifiers": {
@@ -5500,10 +5246,7 @@
                   "visibility": {
                     "description": "Visibility of the group. To make a group visible to other users and\ngroups, set the visibility to SHAREABLE.",
                     "type": "string",
-                    "enum": [
-                      "SHARABLE",
-                      "NON_SHARABLE"
-                    ],
+                    "enum": ["SHARABLE", "NON_SHARABLE"],
                     "deprecated": false
                   },
                   "role_identifiers": {
@@ -5518,11 +5261,7 @@
                     "description": "Type of update operation. Default operation type is REPLACE",
                     "default": "REPLACE",
                     "type": "string",
-                    "enum": [
-                      "ADD",
-                      "REMOVE",
-                      "REPLACE"
-                    ],
+                    "enum": ["ADD", "REMOVE", "REPLACE"],
                     "deprecated": false
                   }
                 }
@@ -5593,10 +5332,7 @@
       "post": {
         "operationId": "deleteUserGroup",
         "description": "Deletes a group. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
-        "tags": [
-          "Groups",
-          "9.0.0.cl"
-        ],
+        "tags": ["Groups", "9.0.0.cl"],
         "parameters": [
           {
             "in": "path",
@@ -5660,10 +5396,7 @@
       "post": {
         "operationId": "importUserGroups",
         "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nImports user data from external databases into ThoughtSpot. During the user import operation:\n\n- If the specified users are not available in ThoughtSpot, the users are created and assigned a default password. The default_password definition in the API request is optional.\n- If the `delete_unspecified_users` property is set to `true`, users not specified in the API request, excluding `tsadmin`, `guest`, `system` and `su` users, are deleted.\n- If the specified user objects are already available in ThoughtSpot, the object properties of these users are modified and synchronized as per the input data in the API request.\n\nA successful API call returns the object that represents the changes made in the ThoughtSpot system.\n\nRequires ADMINISTRATION (Can administer Thoughtspot) privilege.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "Groups",
-          "9.0.0.cl"
-        ],
+        "tags": ["Groups", "9.0.0.cl"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -5756,10 +5489,7 @@
       "post": {
         "operationId": "importMetadataTML",
         "description": "Imports TML representation of metadata objects. Requires data management privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
-        "tags": [
-          "Metadata",
-          "9.0.0.cl"
-        ],
+        "tags": ["Metadata", "9.0.0.cl"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -5778,11 +5508,7 @@
                     "description": "Specifies the import policy for the TML import.",
                     "default": "PARTIAL",
                     "type": "string",
-                    "enum": [
-                      "PARTIAL",
-                      "ALL_OR_NONE",
-                      "VALIDATE_ONLY"
-                    ],
+                    "enum": ["PARTIAL", "ALL_OR_NONE", "VALIDATE_ONLY"],
                     "deprecated": false
                   },
                   "create_new": {
@@ -5793,9 +5519,7 @@
                     "nullable": true
                   }
                 },
-                "required": [
-                  "metadata_tmls"
-                ]
+                "required": ["metadata_tmls"]
               }
             }
           },
@@ -5863,10 +5587,7 @@
       "post": {
         "operationId": "exportMetadataTML",
         "description": "Exports TML representation of metadata objects <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
-        "tags": [
-          "Metadata",
-          "9.0.0.cl"
-        ],
+        "tags": ["Metadata", "9.0.0.cl"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -5899,16 +5620,11 @@
                     "description": "TML EDOC content format.",
                     "default": "YAML",
                     "type": "string",
-                    "enum": [
-                      "JSON",
-                      "YAML"
-                    ],
+                    "enum": ["JSON", "YAML"],
                     "deprecated": false
                   }
                 },
-                "required": [
-                  "metadata"
-                ]
+                "required": ["metadata"]
               }
             }
           },
@@ -5976,10 +5692,7 @@
       "post": {
         "operationId": "deleteMetadata",
         "description": "Deletes metadata objects. Requires edit access to objects. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
-        "tags": [
-          "Metadata",
-          "9.0.0.cl"
-        ],
+        "tags": ["Metadata", "9.0.0.cl"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -6002,9 +5715,7 @@
                     "nullable": true
                   }
                 },
-                "required": [
-                  "metadata"
-                ]
+                "required": ["metadata"]
               }
             }
           },
@@ -6062,10 +5773,7 @@
       "post": {
         "operationId": "assignChangeAuthor",
         "description": "Assigns a new author or transfers the ownership of the specified metadata objects. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
-        "tags": [
-          "Security",
-          "9.0.0.cl"
-        ],
+        "tags": ["Security", "9.0.0.cl"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -6091,10 +5799,7 @@
                     "deprecated": false
                   }
                 },
-                "required": [
-                  "metadata",
-                  "user_identifier"
-                ]
+                "required": ["metadata", "user_identifier"]
               }
             }
           },
@@ -6152,10 +5857,7 @@
       "post": {
         "operationId": "shareMetadata",
         "description": "Share one or several metadata objects with users or groups.\nRequires edit access to metadata objects. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
-        "tags": [
-          "Security",
-          "9.0.0.cl"
-        ],
+        "tags": ["Security", "9.0.0.cl"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -6165,11 +5867,7 @@
                   "metadata_type": {
                     "description": "Type of metadata.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.",
                     "type": "string",
-                    "enum": [
-                      "LIVEBOARD",
-                      "ANSWER",
-                      "LOGICAL_TABLE"
-                    ],
+                    "enum": ["LIVEBOARD", "ANSWER", "LOGICAL_TABLE"],
                     "deprecated": false
                   },
                   "metadata_identifiers": {
@@ -6281,9 +5979,7 @@
       "post": {
         "operationId": "createConfig",
         "description": "Configure local repository to connect to remote repository",
-        "tags": [
-          "Version Control"
-        ],
+        "tags": ["Version Control"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -6336,11 +6032,7 @@
                     "deprecated": false
                   }
                 },
-                "required": [
-                  "repository_url",
-                  "username",
-                  "access_token"
-                ]
+                "required": ["repository_url", "username", "access_token"]
               }
             }
           },
@@ -6405,9 +6097,7 @@
       "post": {
         "operationId": "updateConfig",
         "description": "Update local repository configuration.",
-        "tags": [
-          "Version Control"
-        ],
+        "tags": ["Version Control"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -6517,9 +6207,7 @@
       "post": {
         "operationId": "deleteConfig",
         "description": "Delete local repository configuration",
-        "tags": [
-          "Version Control"
-        ],
+        "tags": ["Version Control"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -6589,9 +6277,7 @@
       "post": {
         "operationId": "commitBranch",
         "description": "Commit the object from metadata to remote repository",
-        "tags": [
-          "Version Control"
-        ],
+        "tags": ["Version Control"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -6617,10 +6303,7 @@
                     "deprecated": false
                   }
                 },
-                "required": [
-                  "metadata",
-                  "comment"
-                ]
+                "required": ["metadata", "comment"]
               }
             }
           },
@@ -6685,9 +6368,7 @@
       "post": {
         "operationId": "revertCommit",
         "description": "Revert an object to a specific commit id",
-        "tags": [
-          "Version Control"
-        ],
+        "tags": ["Version Control"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -6711,10 +6392,7 @@
                     "description": "Policy to be followed while importing. Valid values: [ALL_OR_NONE, PARTIAL]",
                     "default": "ALL_OR_NONE",
                     "type": "string",
-                    "enum": [
-                      "ALL_OR_NONE",
-                      "PARTIAL"
-                    ],
+                    "enum": ["ALL_OR_NONE", "PARTIAL"],
                     "deprecated": false
                   }
                 }
@@ -6792,9 +6470,7 @@
       "post": {
         "operationId": "validateMerge",
         "description": "The Validate Merge endpoint can be run from your target ThoughtSpot organization / cluster to ensure that the changes implemented in the source branch would function in the target ThoughtSpot environment prior to merging a source branch into a target branch.",
-        "tags": [
-          "Version Control"
-        ],
+        "tags": ["Version Control"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -6812,10 +6488,7 @@
                     "deprecated": false
                   }
                 },
-                "required": [
-                  "source_branch_name",
-                  "target_branch_name"
-                ]
+                "required": ["source_branch_name", "target_branch_name"]
               }
             }
           },
@@ -6883,9 +6556,7 @@
       "post": {
         "operationId": "deployCommit",
         "description": "Deploy changes to a Thoughtspot environment from the latest version of a branch or a specific commit point.",
-        "tags": [
-          "Version Control"
-        ],
+        "tags": ["Version Control"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -6906,20 +6577,14 @@
                     "description": "Indicates if all files or only modified file at specified commit point should be considered",
                     "default": "DELTA",
                     "type": "string",
-                    "enum": [
-                      "FULL",
-                      "DELTA"
-                    ],
+                    "enum": ["FULL", "DELTA"],
                     "deprecated": false
                   },
                   "deploy_policy": {
                     "description": "Define the policy to follow while importing TML in the ThoughtSpot environment. Use “ALL_OR_NONE” to cancel the deployment of all ThoughtSpot objects if at least one of them fails to import. Use “Partial” to import ThoughtSpot objects that validate successfully even if other objects in the same deploy operations fail to import.",
                     "default": "ALL_OR_NONE",
                     "type": "string",
-                    "enum": [
-                      "ALL_OR_NONE",
-                      "PARTIAL"
-                    ],
+                    "enum": ["ALL_OR_NONE", "PARTIAL"],
                     "deprecated": false
                   }
                 }
@@ -6989,10 +6654,7 @@
       "post": {
         "operationId": "createConnection",
         "description": "Creates a connection to a Data WareHouse. Requires ADMINSITRATION or DATAMANAGEMENT privilege. <br/>  <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>",
-        "tags": [
-          "Connections",
-          "9.2.0.cl"
-        ],
+        "tags": ["Connections", "9.2.0.cl"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -7111,10 +6773,7 @@
       "post": {
         "operationId": "deleteConnection",
         "description": "Deletes a connection to a Data WareHouse. Requires ADMINSITRATION or DATAMANAGEMENT privilege. <br/>  <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>",
-        "tags": [
-          "Connections",
-          "9.2.0.cl"
-        ],
+        "tags": ["Connections", "9.2.0.cl"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -7127,9 +6786,7 @@
                     "deprecated": false
                   }
                 },
-                "required": [
-                  "connection_identifier"
-                ]
+                "required": ["connection_identifier"]
               }
             }
           },
@@ -7187,10 +6844,7 @@
       "post": {
         "operationId": "updateConnection",
         "description": "Updates a connection to a Data WareHouse. Requires ADMINSITRATION or DATAMANAGEMENT privilege. <br/>  <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>",
-        "tags": [
-          "Connections",
-          "9.2.0.cl"
-        ],
+        "tags": ["Connections", "9.2.0.cl"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -7225,9 +6879,7 @@
                     "nullable": true
                   }
                 },
-                "required": [
-                  "connection_identifier"
-                ]
+                "required": ["connection_identifier"]
               }
             }
           },
@@ -7285,10 +6937,7 @@
       "post": {
         "operationId": "createRole",
         "description": "Creates a Role.\nRequires cluster Administration or Role Administration privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
-        "tags": [
-          "Roles",
-          "9.5.0.cl"
-        ],
+        "tags": ["Roles", "9.5.0.cl"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -7335,9 +6984,7 @@
                     "deprecated": false
                   }
                 },
-                "required": [
-                  "name"
-                ]
+                "required": ["name"]
               }
             }
           },
@@ -7402,10 +7049,7 @@
       "post": {
         "operationId": "updateRole",
         "description": "Updates a Role.\nRequires cluster Administration or Role Administration privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
-        "tags": [
-          "Roles",
-          "9.5.0.cl"
-        ],
+        "tags": ["Roles", "9.5.0.cl"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -7452,9 +7096,7 @@
                     "deprecated": false
                   }
                 },
-                "required": [
-                  "name"
-                ]
+                "required": ["name"]
               }
             }
           },
@@ -7530,10 +7172,7 @@
       "post": {
         "operationId": "deleteRole",
         "description": "Deletes a Role.\nRequires cluster Administration or Role Administration privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
-        "tags": [
-          "Roles",
-          "9.5.0.cl"
-        ],
+        "tags": ["Roles", "9.5.0.cl"],
         "parameters": [
           {
             "in": "path",
@@ -7597,10 +7236,7 @@
       "post": {
         "operationId": "createSchedule",
         "description": "Create schedule. <br/>  <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>",
-        "tags": [
-          "Schedules",
-          "9.4.0.cl"
-        ],
+        "tags": ["Schedules", "9.4.0.cl"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -7620,9 +7256,7 @@
                   "metadata_type": {
                     "description": "Type of metadata.",
                     "type": "string",
-                    "enum": [
-                      "LIVEBOARD"
-                    ],
+                    "enum": ["LIVEBOARD"],
                     "deprecated": false
                   },
                   "metadata_identifier": {
@@ -7634,10 +7268,7 @@
                     "description": "Export file format.",
                     "default": "PDF",
                     "type": "string",
-                    "enum": [
-                      "CSV",
-                      "PDF"
-                    ],
+                    "enum": ["CSV", "PDF"],
                     "deprecated": false
                   },
                   "liveboard_options": {
@@ -7739,10 +7370,7 @@
       "post": {
         "operationId": "deleteSchedule",
         "description": "Deletes a schedule <br/>  <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>",
-        "tags": [
-          "Schedules",
-          "9.4.0.cl"
-        ],
+        "tags": ["Schedules", "9.4.0.cl"],
         "parameters": [
           {
             "in": "path",
@@ -7806,10 +7434,7 @@
       "post": {
         "operationId": "searchSchedules",
         "description": "Search Schedules <br/>  <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>",
-        "tags": [
-          "Schedules",
-          "9.4.0.cl"
-        ],
+        "tags": ["Schedules", "9.4.0.cl"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -7921,10 +7546,7 @@
       "post": {
         "operationId": "updateSchedule",
         "description": "Update schedule. <br/>  <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>",
-        "tags": [
-          "Schedules",
-          "9.4.0.cl"
-        ],
+        "tags": ["Schedules", "9.4.0.cl"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -7944,9 +7566,7 @@
                   "metadata_type": {
                     "description": "Type of metadata.",
                     "type": "string",
-                    "enum": [
-                      "LIVEBOARD"
-                    ],
+                    "enum": ["LIVEBOARD"],
                     "deprecated": false
                   },
                   "metadata_identifier": {
@@ -7957,10 +7577,7 @@
                   "file_format": {
                     "description": "Export file format.",
                     "type": "string",
-                    "enum": [
-                      "CSV",
-                      "PDF"
-                    ],
+                    "enum": ["CSV", "PDF"],
                     "deprecated": false
                   },
                   "liveboard_options": {
@@ -7991,10 +7608,7 @@
                   "status": {
                     "description": "Status of the schedule",
                     "type": "string",
-                    "enum": [
-                      "ACTIVE",
-                      "PAUSE"
-                    ],
+                    "enum": ["ACTIVE", "PAUSE"],
                     "deprecated": false
                   }
                 }
@@ -8064,11 +7678,8 @@
     "/api/rest/2.0/customization/custom-actions": {
       "post": {
         "operationId": "createCustomAction",
-        "description": "Create a custom action\n\nEquivalent to POST /customization/custom-actions <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
-        "tags": [
-          "Custom Action",
-          "9.5.0.cl"
-        ],
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.6.0.cl or later</span>\n\nCreate a custom action\n\n\n\n\n#### Endpoint URL\n",
+        "tags": ["Custom Action", "9.6.0.cl"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -8082,20 +7693,20 @@
                   },
                   "action_details": {
                     "description": "Action details includes Type and Configuration for Custom Actions,either Callback or URL is required.",
-                    "$ref": "#/components/schemas/Action_Details_Input",
+                    "$ref": "#/components/schemas/Action_Details_Input_Create",
                     "deprecated": false
                   },
                   "associate_metadata": {
                     "description": "Metadata objects to which the custom action needs to be associated.",
                     "type": "array",
                     "items": {
-                      "$ref": "#/components/schemas/Associate_Metadata_Input"
+                      "$ref": "#/components/schemas/Associate_Metadata_Input_Create"
                     },
                     "deprecated": false
                   },
                   "default_action_config": {
                     "description": "Default Custom action configuration. This includes if the custom action visibility across visualization. By default, visible across visualizations.",
-                    "$ref": "#/components/schemas/Default_Action_Config_Input",
+                    "$ref": "#/components/schemas/Default_Action_Config_Input_Create",
                     "deprecated": false
                   },
                   "group_identifiers": {
@@ -8107,10 +7718,7 @@
                     "deprecated": false
                   }
                 },
-                "required": [
-                  "name",
-                  "action_details"
-                ]
+                "required": ["name", "action_details"]
               }
             }
           },
@@ -8124,6 +7732,24 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ResponseCustomAction"
+                },
+                "examples": {
+                  "example_1": {
+                    "value": {
+                      "action_details": {
+                        "CALLBACK": {
+                          "reference": "customaction"
+                        }
+                      },
+                      "default_action_config": {
+                        "visibility": true
+                      },
+                      "id": "3d3cad0f-e57b-4faa-8e24-da596c727ee0",
+                      "metadata_association": [],
+                      "name": "customactionsample",
+                      "user_groups": []
+                    }
+                  }
                 }
               }
             }
@@ -8174,11 +7800,8 @@
     "/api/rest/2.0/customization/custom-actions/{custom_action_identifier}/update": {
       "post": {
         "operationId": "updateCustomAction",
-        "description": "Update a custom action for the current organization.\nEquivalent to PUT /customization/custom-actions/{custom_action_identifier} <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
-        "tags": [
-          "Custom Action",
-          "9.5.0.cl"
-        ],
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.6.0.cl or later</span>\n\nUpdate a custom action for the current organization.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": ["Custom Action", "9.6.0.cl"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -8283,11 +7906,8 @@
     "/api/rest/2.0/customization/custom-actions/{custom_action_identifier}/delete": {
       "post": {
         "operationId": "deleteCustomAction",
-        "description": "Deletes a custom action from the current organization\n\nEquivalent to DELETE /customization/custom-actions/{custom_action_identifier} <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
-        "tags": [
-          "Custom Action",
-          "9.5.0.cl"
-        ],
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.6.0.cl or later</span>\n\nDeletes a custom action from the current organization\n\n\n\n\n#### Endpoint URL\n",
+        "tags": ["Custom Action", "9.6.0.cl"],
         "parameters": [
           {
             "in": "path",
@@ -8360,12 +7980,7 @@
       },
       "User": {
         "type": "object",
-        "required": [
-          "id",
-          "name",
-          "display_name",
-          "visibility"
-        ],
+        "required": ["id", "name", "display_name", "visibility"],
         "properties": {
           "id": {
             "type": "string",
@@ -8381,10 +7996,7 @@
           },
           "visibility": {
             "type": "string",
-            "enum": [
-              "SHARABLE",
-              "NON_SHARABLE"
-            ],
+            "enum": ["SHARABLE", "NON_SHARABLE"],
             "description": "Visibility of the users. The SHARABLE makes a users visible to other users and user groups, and thus allows them to share objects."
           },
           "author_id": {
@@ -8429,13 +8041,7 @@
           },
           "account_status": {
             "type": "string",
-            "enum": [
-              "ACTIVE",
-              "INACTIVE",
-              "EXPIRED",
-              "LOCKED",
-              "PENDING"
-            ],
+            "enum": ["ACTIVE", "INACTIVE", "EXPIRED", "LOCKED", "PENDING"],
             "description": "Status of the user account."
           },
           "email": {
@@ -8514,10 +8120,7 @@
           },
           "parent_type": {
             "type": "string",
-            "enum": [
-              "USER",
-              "GROUP"
-            ],
+            "enum": ["USER", "GROUP"],
             "description": "Parent type of the user."
           },
           "privileges": {
@@ -8583,22 +8186,14 @@
           },
           "type": {
             "type": "string",
-            "enum": [
-              "LIVEBOARD",
-              "ANSWER",
-              "LOGICAL_TABLE",
-              "CONNECTION"
-            ],
+            "enum": ["LIVEBOARD", "ANSWER", "LOGICAL_TABLE", "CONNECTION"],
             "description": "Type of metadata."
           }
         }
       },
       "ImportUser": {
         "type": "object",
-        "required": [
-          "user_identifier",
-          "display_name"
-        ],
+        "required": ["user_identifier", "display_name"],
         "properties": {
           "user_identifier": {
             "type": "string",
@@ -8625,13 +8220,7 @@
           },
           "account_status": {
             "type": "string",
-            "enum": [
-              "ACTIVE",
-              "INACTIVE",
-              "EXPIRED",
-              "LOCKED",
-              "PENDING"
-            ],
+            "enum": ["ACTIVE", "INACTIVE", "EXPIRED", "LOCKED", "PENDING"],
             "description": "Status of the user account."
           },
           "email": {
@@ -8654,10 +8243,7 @@
           },
           "visibility": {
             "type": "string",
-            "enum": [
-              "SHARABLE",
-              "NON_SHARABLE"
-            ],
+            "enum": ["SHARABLE", "NON_SHARABLE"],
             "description": "Visibility of the users. The SHARABLE makes a users visible to other users and user groups,\nand thus allows them to share objects."
           },
           "notify_on_share": {
@@ -8713,21 +8299,12 @@
         "properties": {
           "field_name": {
             "type": "string",
-            "enum": [
-              "NAME",
-              "DISPLAY_NAME",
-              "AUTHOR",
-              "CREATED",
-              "MODIFIED"
-            ],
+            "enum": ["NAME", "DISPLAY_NAME", "AUTHOR", "CREATED", "MODIFIED"],
             "description": "Name of the field to apply the sort on."
           },
           "order": {
             "type": "string",
-            "enum": [
-              "ASC",
-              "DESC"
-            ],
+            "enum": ["ASC", "DESC"],
             "description": "Sort order : ASC(Ascending) or DESC(Descending)."
           }
         },
@@ -8755,9 +8332,7 @@
       },
       "MetadataTypeInput": {
         "type": "object",
-        "required": [
-          "identifier"
-        ],
+        "required": ["identifier"],
         "properties": {
           "type": {
             "type": "string",
@@ -8783,18 +8358,11 @@
       },
       "ExportMetadataTypeInput": {
         "type": "object",
-        "required": [
-          "identifier"
-        ],
+        "required": ["identifier"],
         "properties": {
           "type": {
             "type": "string",
-            "enum": [
-              "LIVEBOARD",
-              "ANSWER",
-              "LOGICAL_TABLE",
-              "CONNECTION"
-            ],
+            "enum": ["LIVEBOARD", "ANSWER", "LOGICAL_TABLE", "CONNECTION"],
             "description": "Type of metadata (Optional when given identifier is ID)."
           },
           "identifier": {
@@ -8806,9 +8374,7 @@
       },
       "DeleteMetadataTypeInput": {
         "type": "object",
-        "required": [
-          "identifier"
-        ],
+        "required": ["identifier"],
         "properties": {
           "type": {
             "type": "string",
@@ -8830,10 +8396,7 @@
       },
       "PrincipalsInput": {
         "type": "object",
-        "required": [
-          "identifier",
-          "type"
-        ],
+        "required": ["identifier", "type"],
         "properties": {
           "identifier": {
             "type": "string",
@@ -8841,28 +8404,18 @@
           },
           "type": {
             "type": "string",
-            "enum": [
-              "USER",
-              "USER_GROUP"
-            ],
+            "enum": ["USER", "USER_GROUP"],
             "description": "Principal type."
           }
         }
       },
       "AuthorMetadataTypeInput": {
         "type": "object",
-        "required": [
-          "type",
-          "identifier"
-        ],
+        "required": ["type", "identifier"],
         "properties": {
           "type": {
             "type": "string",
-            "enum": [
-              "LIVEBOARD",
-              "ANSWER",
-              "LOGICAL_TABLE"
-            ],
+            "enum": ["LIVEBOARD", "ANSWER", "LOGICAL_TABLE"],
             "description": "Type of metadata."
           },
           "identifier": {
@@ -8874,10 +8427,7 @@
       },
       "PermissionsMetadataTypeInput": {
         "type": "object",
-        "required": [
-          "type",
-          "identifier"
-        ],
+        "required": ["type", "identifier"],
         "properties": {
           "type": {
             "type": "string",
@@ -8899,10 +8449,7 @@
       },
       "SharePermissionsInput": {
         "type": "object",
-        "required": [
-          "principal",
-          "share_mode"
-        ],
+        "required": ["principal", "share_mode"],
         "properties": {
           "principal": {
             "$ref": "#/components/schemas/PrincipalsInput",
@@ -8910,20 +8457,14 @@
           },
           "share_mode": {
             "type": "string",
-            "enum": [
-              "READ_ONLY",
-              "MODIFY",
-              "NO_ACCESS"
-            ],
+            "enum": ["READ_ONLY", "MODIFY", "NO_ACCESS"],
             "description": "Object share mode."
           }
         }
       },
       "SearchDataResponse": {
         "type": "object",
-        "required": [
-          "contents"
-        ],
+        "required": ["contents"],
         "properties": {
           "contents": {
             "type": "array",
@@ -8937,11 +8478,7 @@
       },
       "AnswerDataResponse": {
         "type": "object",
-        "required": [
-          "metadata_id",
-          "metadata_name",
-          "contents"
-        ],
+        "required": ["metadata_id", "metadata_name", "contents"],
         "properties": {
           "metadata_id": {
             "type": "string",
@@ -8963,11 +8500,7 @@
       },
       "LiveboardDataResponse": {
         "type": "object",
-        "required": [
-          "metadata_id",
-          "metadata_name",
-          "contents"
-        ],
+        "required": ["metadata_id", "metadata_name", "contents"],
         "properties": {
           "metadata_id": {
             "type": "string",
@@ -8988,10 +8521,7 @@
       },
       "Org": {
         "type": "object",
-        "required": [
-          "id",
-          "name"
-        ],
+        "required": ["id", "name"],
         "properties": {
           "id": {
             "type": "integer",
@@ -9018,18 +8548,11 @@
       },
       "CustomActionMetadataTypeInput": {
         "type": "object",
-        "required": [
-          "type",
-          "identifier"
-        ],
+        "required": ["type", "identifier"],
         "properties": {
           "type": {
             "type": "string",
-            "enum": [
-              "VISUALIZATION",
-              "ANSWER",
-              "WORKSHEET"
-            ],
+            "enum": ["VISUALIZATION", "ANSWER", "WORKSHEET"],
             "description": "Type of metadata."
           },
           "identifier": {
@@ -9055,10 +8578,7 @@
       },
       "RiseSetter": {
         "type": "object",
-        "required": [
-          "field",
-          "path"
-        ],
+        "required": ["field", "path"],
         "properties": {
           "field": {
             "type": "string"
@@ -9223,10 +8743,7 @@
           },
           "status": {
             "type": "string",
-            "enum": [
-              "ACTIVE",
-              "IN_ACTIVE"
-            ],
+            "enum": ["ACTIVE", "IN_ACTIVE"],
             "description": "Status of the organization."
           },
           "description": {
@@ -9235,20 +8752,14 @@
           },
           "visibility": {
             "type": "string",
-            "enum": [
-              "SHOW",
-              "HIDDEN"
-            ],
+            "enum": ["SHOW", "HIDDEN"],
             "description": "Visibility of the organization."
           }
         }
       },
       "Tag": {
         "type": "object",
-        "required": [
-          "name",
-          "id"
-        ],
+        "required": ["name", "id"],
         "properties": {
           "name": {
             "type": "string"
@@ -9292,12 +8803,7 @@
       },
       "UserGroupResponse": {
         "type": "object",
-        "required": [
-          "display_name",
-          "id",
-          "name",
-          "visibility"
-        ],
+        "required": ["display_name", "id", "name", "visibility"],
         "properties": {
           "author_id": {
             "type": "string",
@@ -9397,10 +8903,7 @@
           },
           "parent_type": {
             "type": "string",
-            "enum": [
-              "USER",
-              "GROUP"
-            ],
+            "enum": ["USER", "GROUP"],
             "description": "Parent type of the user group."
           },
           "privileges": {
@@ -9430,10 +8933,7 @@
           },
           "type": {
             "type": "string",
-            "enum": [
-              "LOCAL_GROUP",
-              "LDAP_GROUP"
-            ],
+            "enum": ["LOCAL_GROUP", "LDAP_GROUP"],
             "description": "Type of the user group."
           },
           "users": {
@@ -9445,10 +8945,7 @@
           },
           "visibility": {
             "type": "string",
-            "enum": [
-              "SHARABLE",
-              "NON_SHARABLE"
-            ],
+            "enum": ["SHARABLE", "NON_SHARABLE"],
             "description": "Visibility of the user group. The SHARABLE makes a user group visible to other users and user groups, and thus allows them to share objects."
           },
           "roles": {
@@ -9462,9 +8959,7 @@
       },
       "MetadataSearchResponse": {
         "type": "object",
-        "required": [
-          "metadata_type"
-        ],
+        "required": ["metadata_type"],
         "properties": {
           "metadata_id": {
             "type": "string",
@@ -9552,10 +9047,7 @@
       },
       "PermissionInput": {
         "type": "object",
-        "required": [
-          "principal",
-          "share_mode"
-        ],
+        "required": ["principal", "share_mode"],
         "properties": {
           "principal": {
             "$ref": "#/components/schemas/PrincipalsInput",
@@ -9563,11 +9055,7 @@
           },
           "share_mode": {
             "type": "string",
-            "enum": [
-              "READ_ONLY",
-              "MODIFY",
-              "NO_ACCESS"
-            ],
+            "enum": ["READ_ONLY", "MODIFY", "NO_ACCESS"],
             "description": "Object share mode."
           }
         },
@@ -9575,10 +9063,7 @@
       },
       "ExcludeMetadataListItemInput": {
         "type": "object",
-        "required": [
-          "identifier",
-          "type"
-        ],
+        "required": ["identifier", "type"],
         "properties": {
           "identifier": {
             "type": "string",
@@ -9637,10 +9122,7 @@
           },
           "order": {
             "type": "string",
-            "enum": [
-              "ASC",
-              "DESC"
-            ],
+            "enum": ["ASC", "DESC"],
             "description": "Sort order : ASC(Ascending) or DESC(Descending)."
           }
         },
@@ -9708,10 +9190,7 @@
           },
           "page_orientation": {
             "type": "string",
-            "enum": [
-              "PORTRAIT",
-              "LANDSCAPE"
-            ],
+            "enum": ["PORTRAIT", "LANDSCAPE"],
             "description": "Page orientation of the PDF."
           },
           "truncate_table": {
@@ -9739,10 +9218,7 @@
       },
       "LogResponse": {
         "type": "object",
-        "required": [
-          "date",
-          "log"
-        ],
+        "required": ["date", "log"],
         "properties": {
           "date": {
             "type": "string",
@@ -9829,11 +9305,7 @@
       },
       "SearchConnectionResponse": {
         "type": "object",
-        "required": [
-          "id",
-          "name",
-          "data_warehouse_type"
-        ],
+        "required": ["id", "name", "data_warehouse_type"],
         "properties": {
           "id": {
             "type": "string",
@@ -9917,22 +9389,14 @@
           },
           "order": {
             "type": "string",
-            "enum": [
-              "ASC",
-              "DESC"
-            ],
+            "enum": ["ASC", "DESC"],
             "description": "Sort order : ASC(Ascending) or DESC(Descending)."
           }
         }
       },
       "SearchRoleResponse": {
         "type": "object",
-        "required": [
-          "id",
-          "name",
-          "description",
-          "privileges"
-        ],
+        "required": ["id", "name", "description", "privileges"],
         "properties": {
           "id": {
             "type": "string",
@@ -10007,11 +9471,7 @@
           },
           "permission": {
             "type": "string",
-            "enum": [
-              "READ_ONLY",
-              "MODIFY",
-              "NO_ACCESS"
-            ],
+            "enum": ["READ_ONLY", "MODIFY", "NO_ACCESS"],
             "description": "Permission details of the Role"
           },
           "author_id": {
@@ -10055,12 +9515,7 @@
       },
       "ResponseCustomAction": {
         "type": "object",
-        "required": [
-          "action_details",
-          "default_action_config",
-          "id",
-          "name"
-        ],
+        "required": ["action_details", "default_action_config", "id", "name"],
         "properties": {
           "action_details": {
             "$ref": "#/components/schemas/Action_details",
@@ -10160,18 +9615,11 @@
       },
       "TagMetadataTypeInput": {
         "type": "object",
-        "required": [
-          "identifier"
-        ],
+        "required": ["identifier"],
         "properties": {
           "type": {
             "type": "string",
-            "enum": [
-              "LIVEBOARD",
-              "ANSWER",
-              "LOGICAL_TABLE",
-              "LOGICAL_COLUMN"
-            ],
+            "enum": ["LIVEBOARD", "ANSWER", "LOGICAL_TABLE", "LOGICAL_COLUMN"],
             "description": "Type of metadata (Optional when given identifier is ID).\n1. LIVEBOARD\n2. ANSWERS\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n4. LOGICAL_COLUMN for a column of any data object such as tables, worksheets or views."
           },
           "identifier": {
@@ -10182,11 +9630,7 @@
       },
       "ImportUserGroupsResponse": {
         "type": "object",
-        "required": [
-          "groups_added",
-          "groups_deleted",
-          "groups_updated"
-        ],
+        "required": ["groups_added", "groups_deleted", "groups_updated"],
         "properties": {
           "groups_added": {
             "type": "array",
@@ -10213,10 +9657,7 @@
       },
       "GroupsImportListInput": {
         "type": "object",
-        "required": [
-          "display_name",
-          "group_identifier"
-        ],
+        "required": ["display_name", "group_identifier"],
         "properties": {
           "display_name": {
             "type": "string",
@@ -10276,10 +9717,7 @@
           },
           "type": {
             "type": "string",
-            "enum": [
-              "LOCAL_GROUP",
-              "LDAP_GROUP"
-            ],
+            "enum": ["LOCAL_GROUP", "LDAP_GROUP"],
             "description": "Type of the user group."
           },
           "user_identifiers": {
@@ -10291,10 +9729,7 @@
           },
           "visibility": {
             "type": "string",
-            "enum": [
-              "SHARABLE",
-              "NON_SHARABLE"
-            ],
+            "enum": ["SHARABLE", "NON_SHARABLE"],
             "description": "Visibility of the user group. The SHARABLE makes a user group visible to other users and user groups, and thus allows them to share objects."
           }
         }
@@ -10337,9 +9772,7 @@
       },
       "MetadataObject": {
         "type": "object",
-        "required": [
-          "identifier"
-        ],
+        "required": ["identifier"],
         "properties": {
           "identifier": {
             "type": "string",
@@ -10347,11 +9780,7 @@
           },
           "type": {
             "type": "string",
-            "enum": [
-              "LIVEBOARD",
-              "ANSWER",
-              "LOGICAL_TABLE"
-            ],
+            "enum": ["LIVEBOARD", "ANSWER", "LOGICAL_TABLE"],
             "description": "Type of metadata."
           }
         }
@@ -10426,11 +9855,7 @@
       },
       "CreateConnectionResponse": {
         "type": "object",
-        "required": [
-          "id",
-          "name",
-          "data_warehouse_type"
-        ],
+        "required": ["id", "name", "data_warehouse_type"],
         "properties": {
           "id": {
             "type": "string",
@@ -10467,12 +9892,7 @@
       },
       "RoleResponse": {
         "type": "object",
-        "required": [
-          "id",
-          "name",
-          "description",
-          "privileges"
-        ],
+        "required": ["id", "name", "description", "privileges"],
         "properties": {
           "id": {
             "type": "string",
@@ -10535,11 +9955,7 @@
           },
           "permission": {
             "type": "string",
-            "enum": [
-              "READ_ONLY",
-              "MODIFY",
-              "NO_ACCESS"
-            ],
+            "enum": ["READ_ONLY", "MODIFY", "NO_ACCESS"],
             "description": "Permission details of the Role"
           },
           "author_id": {
@@ -10656,9 +10072,7 @@
       },
       "LiveboardOptionsInput": {
         "type": "object",
-        "required": [
-          "visualization_identifiers"
-        ],
+        "required": ["visualization_identifiers"],
         "properties": {
           "visualization_identifiers": {
             "type": "array",
@@ -10703,9 +10117,7 @@
           },
           "page_size": {
             "type": "string",
-            "enum": [
-              "A4"
-            ],
+            "enum": ["A4"],
             "description": "Page size."
           },
           "truncate_table": {
@@ -10717,9 +10129,7 @@
       },
       "FrequencyInput": {
         "type": "object",
-        "required": [
-          "cron_expression"
-        ],
+        "required": ["cron_expression"],
         "properties": {
           "cron_expression": {
             "$ref": "#/components/schemas/CronExpressionInput",
@@ -10756,9 +10166,7 @@
           },
           "type": {
             "type": "string",
-            "enum": [
-              "LIVEBOARD"
-            ]
+            "enum": ["LIVEBOARD"]
           }
         }
       },
@@ -10795,6 +10203,49 @@
           }
         }
       },
+      "Action_Details_Input_Create": {
+        "type": "object",
+        "properties": {
+          "CALLBACK": {
+            "$ref": "#/components/schemas/CALLBACKInputMandatory",
+            "description": "CALLBACK Custom Action Type"
+          },
+          "URL": {
+            "$ref": "#/components/schemas/URLInputMandatory",
+            "description": "URL Custom Action Type"
+          }
+        },
+        "description": "Action details includes Type and Configuration for Custom Actions, either Callback or URL is required."
+      },
+      "Associate_Metadata_Input_Create": {
+        "type": "object",
+        "required": ["identifier"],
+        "properties": {
+          "action_config": {
+            "$ref": "#/components/schemas/ActionConfigInputCreate",
+            "description": "Specify that the association is enabled for the metadata object"
+          },
+          "identifier": {
+            "type": "string",
+            "description": "Unique ID or name of the metadata."
+          },
+          "type": {
+            "type": "string",
+            "enum": ["VISUALIZATION", "ANSWER", "WORKSHEET"],
+            "description": "Type of metadata."
+          }
+        }
+      },
+      "Default_Action_Config_Input_Create": {
+        "type": "object",
+        "properties": {
+          "visibility": {
+            "type": "boolean",
+            "description": "Custom action is visible to all Visualizations. Earlier naming convention: LOCAL/GLOBAL. TRUE signifies GLOBAL for backward compatibility.\n\nDefault: true"
+          }
+        },
+        "description": "Default Custom action configuration. This includes if the custom action visibility across visualization. By default, visible across visualizations."
+      },
       "Action_Details_Input": {
         "type": "object",
         "properties": {
@@ -10811,9 +10262,6 @@
       },
       "Associate_Metadata_Input": {
         "type": "object",
-        "required": [
-          "identifier"
-        ],
         "properties": {
           "action_config": {
             "$ref": "#/components/schemas/ActionConfigInput",
@@ -10825,11 +10273,7 @@
           },
           "type": {
             "type": "string",
-            "enum": [
-              "VISUALIZATION",
-              "ANSWER",
-              "WORKSHEET"
-            ],
+            "enum": ["VISUALIZATION", "ANSWER", "WORKSHEET"],
             "description": "Type of metadata."
           }
         }
@@ -10846,11 +10290,7 @@
       },
       "FavoriteMetadataItem": {
         "type": "object",
-        "required": [
-          "id",
-          "name",
-          "type"
-        ],
+        "required": ["id", "name", "type"],
         "properties": {
           "id": {
             "type": "string",
@@ -10879,9 +10319,7 @@
       },
       "ImportUserType": {
         "type": "object",
-        "required": [
-          "name"
-        ],
+        "required": ["name"],
         "properties": {
           "id": {
             "type": "string",
@@ -11022,11 +10460,7 @@
       },
       "SqlQuery": {
         "type": "object",
-        "required": [
-          "metadata_id",
-          "metadata_name",
-          "sql_query"
-        ],
+        "required": ["metadata_id", "metadata_name", "sql_query"],
         "properties": {
           "metadata_id": {
             "type": "string",
@@ -11071,9 +10505,7 @@
       },
       "DataWarehouseObjects": {
         "type": "object",
-        "required": [
-          "databases"
-        ],
+        "required": ["databases"],
         "properties": {
           "databases": {
             "type": "array",
@@ -11131,11 +10563,7 @@
       },
       "Metadata_Association_Item": {
         "type": "object",
-        "required": [
-          "action_config",
-          "identifier",
-          "type"
-        ],
+        "required": ["action_config", "identifier", "type"],
         "properties": {
           "action_config": {
             "$ref": "#/components/schemas/Action_config",
@@ -11153,9 +10581,6 @@
       },
       "CALLBACKInput": {
         "type": "object",
-        "required": [
-          "reference"
-        ],
         "properties": {
           "reference": {
             "type": "string",
@@ -11166,9 +10591,6 @@
       },
       "URLInput": {
         "type": "object",
-        "required": [
-          "url"
-        ],
         "properties": {
           "authentication": {
             "$ref": "#/components/schemas/AuthenticationInput",
@@ -11190,9 +10612,7 @@
       },
       "Scope": {
         "type": "object",
-        "required": [
-          "access_type"
-        ],
+        "required": ["access_type"],
         "properties": {
           "access_type": {
             "type": "string",
@@ -11211,10 +10631,7 @@
       },
       "CommitFileType": {
         "type": "object",
-        "required": [
-          "file_name",
-          "status_code"
-        ],
+        "required": ["file_name", "status_code"],
         "properties": {
           "file_name": {
             "type": "string",
@@ -11264,10 +10681,7 @@
       },
       "Author": {
         "type": "object",
-        "required": [
-          "id",
-          "name"
-        ],
+        "required": ["id", "name"],
         "properties": {
           "id": {
             "type": "string",
@@ -11282,9 +10696,7 @@
       },
       "Frequency": {
         "type": "object",
-        "required": [
-          "cron_expression"
-        ],
+        "required": ["cron_expression"],
         "properties": {
           "cron_expression": {
             "$ref": "#/components/schemas/CronExpression",
@@ -11295,9 +10707,7 @@
       },
       "LiveboardOptions": {
         "type": "object",
-        "required": [
-          "visualization_identifiers"
-        ],
+        "required": ["visualization_identifiers"],
         "properties": {
           "visualization_identifiers": {
             "type": "array",
@@ -11311,10 +10721,7 @@
       },
       "MetadataResponse": {
         "type": "object",
-        "required": [
-          "id",
-          "type"
-        ],
+        "required": ["id", "type"],
         "properties": {
           "name": {
             "type": "string"
@@ -11324,9 +10731,7 @@
           },
           "type": {
             "type": "string",
-            "enum": [
-              "LIVEBOARD"
-            ]
+            "enum": ["LIVEBOARD"]
           }
         }
       },
@@ -11363,9 +10768,7 @@
           },
           "page_size": {
             "type": "string",
-            "enum": [
-              "A4"
-            ],
+            "enum": ["A4"],
             "description": "Page size."
           },
           "truncate_table": {
@@ -11469,10 +10872,7 @@
       },
       "PrincipalsListItemInput": {
         "type": "object",
-        "required": [
-          "identifier",
-          "type"
-        ],
+        "required": ["identifier", "type"],
         "properties": {
           "identifier": {
             "type": "string",
@@ -11484,30 +10884,72 @@
           }
         }
       },
+      "CALLBACKInputMandatory": {
+        "type": "object",
+        "required": ["reference"],
+        "properties": {
+          "reference": {
+            "type": "string",
+            "description": "Reference name of the sdk. By default the value will be set to action name"
+          }
+        },
+        "description": "CALLBACK Custom Action Type"
+      },
+      "URLInputMandatory": {
+        "type": "object",
+        "required": ["url"],
+        "properties": {
+          "authentication": {
+            "$ref": "#/components/schemas/AuthenticationInput",
+            "description": "Authorization type for the custom action."
+          },
+          "parameters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ParametersListItemInput"
+            },
+            "description": "Query parameters for url."
+          },
+          "url": {
+            "type": "string",
+            "description": "Request Url for the Custom action."
+          }
+        },
+        "description": "URL Custom Action Type"
+      },
+      "ActionConfigInputCreate": {
+        "type": "object",
+        "properties": {
+          "position": {
+            "type": "string",
+            "enum": ["MENU", "PRIMARY", "CONTEXT_MENU"],
+            "description": "Position of the Custom action on the Metadata object. Earlier naming convention: context.\n\nDefault : MENU"
+          },
+          "visibility": {
+            "type": "boolean",
+            "description": "Visibility of the metadata association with custom action. Earlier naming convention: enabled\n\nDefault : true"
+          }
+        },
+        "description": "Specify that the association is enabled for the metadata object Default"
+      },
       "ActionConfigInput": {
         "type": "object",
         "properties": {
           "position": {
             "type": "string",
-            "enum": [
-              "CONTEXT_MENU",
-              "PRIMARY",
-              "MENU"
-            ],
+            "enum": ["MENU", "PRIMARY", "CONTEXT_MENU"],
             "description": "Position of the Custom action on the Metadata object. Earlier naming convention: context."
           },
           "visibility": {
             "type": "boolean",
-            "description": "Visibility of the metadata association with custom action. Earlier naming convention: enabled\nDefault: true"
+            "description": "Visibility of the metadata association with custom action. Earlier naming convention: enabled"
           }
         },
-        "description": "Specify that the association is enabled for the metadata object"
+        "description": "Specify that the association is enabled for the metadata object Default"
       },
       "Database": {
         "type": "object",
-        "required": [
-          "name"
-        ],
+        "required": ["name"],
         "properties": {
           "name": {
             "type": "string",
@@ -11538,9 +10980,7 @@
       },
       "URL": {
         "type": "object",
-        "required": [
-          "url"
-        ],
+        "required": ["url"],
         "properties": {
           "authentication": {
             "$ref": "#/components/schemas/Authentication",
@@ -11649,10 +11089,7 @@
       },
       "PrincipalsListItem": {
         "type": "object",
-        "required": [
-          "identifier",
-          "type"
-        ],
+        "required": ["identifier", "type"],
         "properties": {
           "identifier": {
             "type": "string",
@@ -11666,9 +11103,7 @@
       },
       "SchemaObject": {
         "type": "object",
-        "required": [
-          "name"
-        ],
+        "required": ["name"],
         "properties": {
           "name": {
             "type": "string",
@@ -11748,9 +11183,7 @@
       },
       "Table": {
         "type": "object",
-        "required": [
-          "name"
-        ],
+        "required": ["name"],
         "properties": {
           "name": {
             "type": "string",
@@ -11818,10 +11251,7 @@
       },
       "Column": {
         "type": "object",
-        "required": [
-          "name",
-          "data_type"
-        ],
+        "required": ["name", "data_type"],
         "properties": {
           "name": {
             "type": "string",
