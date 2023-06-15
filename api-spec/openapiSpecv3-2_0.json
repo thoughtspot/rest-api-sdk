@@ -5374,7 +5374,7 @@
     "/api/rest/2.0/metadata/tml/import": {
       "post": {
         "operationId": "importMetadata",
-        "description": " <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nImports [TML](https://docs.thoughtspot.com/cloud/latest/tml) files into ThoughtSpot.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtsSpot**) privilege.\n\n#### Usage guidelines\n\n*  Import all related objects in a single TML Import API call. For example, Tables that use the same Connection object and Worksheets connected to these Tables.\n* Include the `fqn` property to distinguish objects that have the same name.\n  For example, if you have multiple Connections or Worksheets with the same name on ThoughtSpot and the Connection or Worksheet referenced in your TML file does not have a unique name to distinguish, it may result in invalid object references.\n  Adding `fqn` helps ThoughtSpot differentiate a Table from another with the same name.\n  We recommend [exporting TML with FQNs](#/http/api-endpoints/metadata/export-metadata-tml) and using these during the import operation.\n* You can upload multiple TML files at a time.\n  If you import a Worksheet along with Liveboards, Answers, and other dependent objects in a single API call, the imported objects will be immediately available for use.\n  When you import only a Worksheet object, it may take some time for the Worksheet to become available in the ThoughtSpot system. Please wait for a few minutes, and then proceed to create an Answer and Liveboard from the newly imported Worksheet.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Metadata",
           "9.0.0.cl"
@@ -5481,7 +5481,7 @@
     "/api/rest/2.0/metadata/tml/export": {
       "post": {
         "operationId": "exportMetadata",
-        "description": " <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nExports the [TML](https://docs.thoughtspot.com/cloud/latest/tml) representation of metadata objects in JSON or YAML format.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtsSpot**) privilege.\n\n#### Usage guidelines\n\n* You can export one or several objects by passing metadata object GUIDs in the `metadata` array.\n* When exporting TML content for a Liveboard or Answer object, you can set `export_associated` to `true` to retrieve TML content for underlying Worksheets, Tables, or Views, including the GUID of each object within the headers. When   `export_associated` is set to `true`, consider retrieving one metadata object at a time.\n* Set `export_fqns` to `true` to add FQNs of the referenced objects in the TML content. For example, if you send an API request to retrieve TML for a Liveboard and its associated objects, the API returns the TML content with FQNs of the referenced Worksheet. Exporting TML with FQNs is useful if ThoughtSpot has multiple objects with the same name and you want to eliminate ambiguity when importing TML files into ThoughtSpot. It eliminates the need for adding FQNs of the referenced objects manually during the import operation.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Metadata",
           "9.0.0.cl"
