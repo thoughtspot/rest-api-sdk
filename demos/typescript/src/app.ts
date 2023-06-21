@@ -5,10 +5,10 @@ import {
   createConfiguration,
   BaseServerConfiguration,
   AuthMethodsConfiguration,
-  TsRestApi,
+  ThoughtSpotRestApi,
 } from "thoughtspot-rest-api-sdk";
 
-const BASE_URL = "http://127.0.0.1:4123";
+const BASE_URL = "<CLUSTER-URL>";
 
 const createBearerAuthenticationConfig = (
   url,
@@ -55,7 +55,7 @@ const main = async () => {
     password: "admin",
   });
 
-  const tsRestApiClient = new TsRestApi(config);
+  const tsRestApiClient = new ThoughtSpotRestApi(config);
 
   try {
     const users = await tsRestApiClient.searchUsers();
