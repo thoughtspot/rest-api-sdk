@@ -95,7 +95,7 @@
     "/api/rest/2.0/auth/session/token": {
       "get": {
         "operationId": "getCurrentUserToken",
-        "description": "\nGet token for the currently logged-in user. <br/>  <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>\n\nGets token details for the currently logged-in user.  You can use this endpoint to obtain the token associated with the user's session.\n\nThis API does not require any parameters to be passed in the request.  \n\nAny ThoughtSpot user can access this endpoint and send an API request.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\nGet token for the currently logged-in user. <br/>  <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>\n\nGets token details for the currently logged-in user.  You can use this endpoint to obtain the token associated with the user's session.\n\nThis API does not require any parameters to be passed in the request.  \n\nAny ThoughtSpot user can access this endpoint and send an API request.",
         "tags": ["Authentication", "9.4.0.cl"],
         "parameters": [],
         "responses": {
