@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "ThoughtSpot Public REST API ",
+    "title": "ThoughtSpot Public REST API",
     "version": "2.0"
   },
   "x-roles": [
@@ -28,6 +28,12 @@
       "id": "9.4.0.cl",
       "tags": ["9.4.0.cl"],
       "description": "Roles for version 9.4.0.cl"
+    },
+    {
+      "name": "9.6.0.cl",
+      "id": "9.6.0.cl",
+      "tags": ["9.6.0.cl"],
+      "description": "Roles for version 9.6.0.cl"
     }
   ],
   "tags": [],
@@ -95,7 +101,7 @@
     "/api/rest/2.0/auth/session/token": {
       "get": {
         "operationId": "getCurrentUserToken",
-        "description": "\nGet token for the currently logged-in user. <br/>  <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>\n\nGets token details for the currently logged-in user.  You can use this endpoint to obtain the token associated with the user's session.\n\nThis API does not require any parameters to be passed in the request.  \n\nAny ThoughtSpot user can access this endpoint and send an API request.",
+        "description": "\nGet token for the currently logged-in user. <br/>  <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>\n\nGets token details for the currently logged-in user.  You can use this endpoint to obtain the token associated with the user's session.\n\nThis API does not require any parameters to be passed in the request.  \n\nAny ThoughtSpot user can access this endpoint and send an API request.\n\n\n\n\n#### Endpoint URL\n",
         "tags": ["Authentication", "9.4.0.cl"],
         "parameters": [],
         "responses": {
@@ -155,7 +161,7 @@
     "/api/rest/2.0/users/search": {
       "post": {
         "operationId": "searchUsers",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\n\nGets a list of users available on the ThoughtSpot system.\n\nTo get details of a specific user, specify the user GUID or name. You can also filter the API response based on groups, Org ID, user visibility, account status, user type, and user preference settings and favorites.\n\nAvailable to all users. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view all users properties.",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\n\nGets a list of users available on the ThoughtSpot system.\n\nTo get details of a specific user, specify the user GUID or name. You can also filter the API response based on groups, Org ID, user visibility, account status, user type, and user preference settings and favorites.\n\nAvailable to all users. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view all users properties.\n\n\n\n\n#### Endpoint URL\n",
         "tags": ["Users", "9.0.0.cl"],
         "requestBody": {
           "content": {
@@ -2760,8 +2766,8 @@
     "/api/rest/2.0/customization/custom-actions/search": {
       "post": {
         "operationId": "searchCustomActions",
-        "description": "Search custom actions\n\nEquivalent to POST /customization/custom-actions/search <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
-        "tags": ["Custom Action", "9.5.0.cl"],
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.6.0.cl or later</span>\n\nGets custom actions configured on the cluster.\n\nRequires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": ["Custom Action", "9.6.0.cl"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -2774,15 +2780,17 @@
                   },
                   "default_action_config": {
                     "description": "Default Custom action configuration. This includes if the custom action visibility across visualization. By default, visible across visualizations.",
-                    "$ref": "#/components/schemas/Default_action_config_Input"
+                    "$ref": "#/components/schemas/Default_Action_Config_Search_Input"
                   },
                   "include_group_associations": {
                     "description": "When set to true, returns associated groups for custom action.",
+                    "default": false,
                     "type": "boolean",
                     "nullable": true
                   },
                   "include_metadata_associations": {
                     "description": "When set to true, returns associated metadata for custom action.",
+                    "default": false,
                     "type": "boolean",
                     "nullable": true
                   },
@@ -2790,7 +2798,7 @@
                     "description": "Search with a given metadata identifier.",
                     "type": "array",
                     "items": {
-                      "$ref": "#/components/schemas/MetadataTypeInput"
+                      "$ref": "#/components/schemas/CustomActionMetadataTypeInput"
                     }
                   },
                   "type": {
@@ -2811,7 +2819,25 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Response_Custom_Action"
+                    "$ref": "#/components/schemas/ResponseCustomAction"
+                  }
+                },
+                "examples": {
+                  "example_1": {
+                    "value": [
+                      {
+                        "action_details": {
+                          "CALLBACK": {
+                            "reference": "LEDE"
+                          }
+                        },
+                        "default_action_config": {
+                          "visibility": true
+                        },
+                        "id": "c59262df-cf9e-4947-96fa-52d494688797",
+                        "name": "LEDE"
+                      }
+                    ]
                   }
                 }
               }
@@ -7307,8 +7333,8 @@
     "/api/rest/2.0/customization/custom-actions": {
       "post": {
         "operationId": "createCustomAction",
-        "description": "Create a custom action\n\nEquivalent to POST /customization/custom-actions <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
-        "tags": ["Custom Action", "9.5.0.cl"],
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.6.0.cl or later</span>\n\nCreates a custom action that appears as a menu action on a saved Answer or Liveboard visualization.\n\nRequires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n#### Usage Guidelines\n\nThe API lets you create the following types of custom actions:\n\n* URL-based action     \n  Allows pushing data to an external URL.\n* Callback action        \n  Triggers a callback to the host application and initiates a response payload on an embedded ThoughtSpot instance.\n\nBy default, custom actions are visible to only administrator or developer users. To make a custom action available to other users, and specify the groups in `group_identifiers`.\n\nBy default, the custom action is set as a _global_ action on all visualizations and saved Answers. To assign a custom action to specific Liveboard visualization, saved Answer, or Worksheet, set `visibility` to `false` in `default_action_config` property and specify the GUID or name of the object in `associate_metadata`.\n\nFor more information, see [Custom actions](https://developers.thoughtspot.com/docs/?pageid=custom-action-intro).\n\n\n\n\n#### Endpoint URL\n",
+        "tags": ["Custom Action", "9.6.0.cl"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -7320,19 +7346,19 @@
                     "type": "string"
                   },
                   "action_details": {
-                    "description": "Action details includes Type and Configuration for Custom Actions",
-                    "$ref": "#/components/schemas/Action_detailsInput"
+                    "description": "Action details includes Type and Configuration for Custom Actions,either Callback or URL is required.",
+                    "$ref": "#/components/schemas/Action_Details_Input_Create"
                   },
                   "associate_metadata": {
                     "description": "Metadata objects to which the custom action needs to be associated.",
                     "type": "array",
                     "items": {
-                      "$ref": "#/components/schemas/Associate_metadataListItemInput"
+                      "$ref": "#/components/schemas/Associate_Metadata_Input_Create"
                     }
                   },
                   "default_action_config": {
                     "description": "Default Custom action configuration. This includes if the custom action visibility across visualization. By default, visible across visualizations.",
-                    "$ref": "#/components/schemas/Default_action_config_Input"
+                    "$ref": "#/components/schemas/Default_Action_Config_Input_Create"
                   },
                   "group_identifiers": {
                     "description": "Unique ID or name of the User groups who will be associated with the custom action.",
@@ -7355,7 +7381,25 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Response_Custom_Action"
+                  "$ref": "#/components/schemas/ResponseCustomAction"
+                },
+                "examples": {
+                  "example_1": {
+                    "value": {
+                      "action_details": {
+                        "CALLBACK": {
+                          "reference": "customaction"
+                        }
+                      },
+                      "default_action_config": {
+                        "visibility": true
+                      },
+                      "id": "3d3cad0f-e57b-4faa-8e24-da596c727ee0",
+                      "metadata_association": [],
+                      "name": "customactionsample",
+                      "user_groups": []
+                    }
+                  }
                 }
               }
             }
@@ -7406,8 +7450,8 @@
     "/api/rest/2.0/customization/custom-actions/{custom_action_identifier}/update": {
       "post": {
         "operationId": "updateCustomAction",
-        "description": "Update a custom action for the current organization.\nEquivalent to PUT /customization/custom-actions/{custom_action_identifier} <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
-        "tags": ["Custom Action", "9.5.0.cl"],
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.6.0.cl or later</span>\n\nUpdates a custom action.\n\nRequires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n#### Usage Guidelines\n\nThe API allows you to modify the following properties:\n\n* Name of the custom action\n* Action availability to groups\n* Association to metadata objects\n* Authentication settings for a URL-based action\n\nFor more information, see [Custom actions](https://developers.thoughtspot.com/docs/?pageid=custom-action-intro).\n\n\n\n\n#### Endpoint URL\n",
+        "tags": ["Custom Action", "9.6.0.cl"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -7415,19 +7459,19 @@
                 "type": "object",
                 "properties": {
                   "action_details": {
-                    "description": "Action details includes Type and Configuration for Custom Actions",
-                    "$ref": "#/components/schemas/Action_detailsInput"
+                    "description": "Action details includes Type and Configuration for Custom Actions, either Callback or URL is required.",
+                    "$ref": "#/components/schemas/Action_Details_Input"
                   },
                   "associate_metadata": {
                     "description": "Metadata objects to which the custom action needs to be associated.",
                     "type": "array",
                     "items": {
-                      "$ref": "#/components/schemas/Associate_metadataListItemInput"
+                      "$ref": "#/components/schemas/Associate_Metadata_Input"
                     }
                   },
                   "default_action_config": {
                     "description": "Default Custom action configuration. This includes if the custom action visibility across visualization. By default, visible across visualizations.",
-                    "$ref": "#/components/schemas/Default_action_config_Input"
+                    "$ref": "#/components/schemas/Default_Action_Config_Input"
                   },
                   "group_identifiers": {
                     "description": "Unique ID or name of the User groups who will be associated with the custom action.",
@@ -7439,6 +7483,12 @@
                   "name": {
                     "description": "Name of the custom action. The custom action name must be unique.",
                     "type": "string"
+                  },
+                  "operation": {
+                    "description": "Type of update operation. Default operation type is ADD",
+                    "default": "ADD",
+                    "type": "string",
+                    "enum": ["ADD", "REMOVE"]
                   }
                 }
               }
@@ -7506,8 +7556,8 @@
     "/api/rest/2.0/customization/custom-actions/{custom_action_identifier}/delete": {
       "post": {
         "operationId": "deleteCustomAction",
-        "description": "Deletes a custom action from the current organization\n\nEquivalent to DELETE /customization/custom-actions/{custom_action_identifier} <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
-        "tags": ["Custom Action", "9.5.0.cl"],
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.6.0.cl or later</span>\n\nRemoves the custom action specified in the API request.\n\nRequires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": ["Custom Action", "9.6.0.cl"],
         "parameters": [
           {
             "in": "path",
@@ -8147,6 +8197,36 @@
             "type": "string"
           }
         }
+      },
+      "CustomActionMetadataTypeInput": {
+        "type": "object",
+        "required": ["type", "identifier"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["VISUALIZATION", "ANSWER", "WORKSHEET"],
+            "description": "Type of metadata."
+          },
+          "identifier": {
+            "type": "string",
+            "description": "Unique ID or name of the metadata."
+          }
+        },
+        "description": "MetadataType InputType used in Custom Action API's"
+      },
+      "Object_ID_And_Name": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique identifier of the object."
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the object."
+          }
+        },
+        "description": "The object representation with ID and Name."
       },
       "RiseSetter": {
         "type": "object",
@@ -9094,7 +9174,7 @@
         },
         "description": "Response for search role api should handle hidden privileges as well."
       },
-      "Response_Custom_Action": {
+      "ResponseCustomAction": {
         "type": "object",
         "required": ["action_details", "default_action_config", "id", "name"],
         "properties": {
@@ -9113,7 +9193,7 @@
           "metadata_association": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Metadata_associationListItem"
+              "$ref": "#/components/schemas/Metadata_Association_Item"
             },
             "description": "Metadata objects to which the custom action needs to be associated."
           },
@@ -9131,7 +9211,7 @@
         },
         "description": "Custom action details"
       },
-      "Default_action_config_Input": {
+      "Default_Action_Config_Search_Input": {
         "type": "object",
         "properties": {
           "visibility": {
@@ -9793,7 +9873,51 @@
           }
         }
       },
-      "Action_detailsInput": {
+      "Action_Details_Input_Create": {
+        "type": "object",
+        "properties": {
+          "CALLBACK": {
+            "$ref": "#/components/schemas/CALLBACKInputMandatory",
+            "description": "CALLBACK Custom Action Type"
+          },
+          "URL": {
+            "$ref": "#/components/schemas/URLInputMandatory",
+            "description": "URL Custom Action Type"
+          }
+        },
+        "description": "Action details includes Type and Configuration for Custom Actions, either Callback or URL is required."
+      },
+      "Associate_Metadata_Input_Create": {
+        "type": "object",
+        "required": ["identifier"],
+        "properties": {
+          "action_config": {
+            "$ref": "#/components/schemas/ActionConfigInputCreate",
+            "description": "Specify that the association is enabled for the metadata object"
+          },
+          "identifier": {
+            "type": "string",
+            "description": "Unique ID or name of the metadata."
+          },
+          "type": {
+            "type": "string",
+            "enum": ["VISUALIZATION", "ANSWER", "WORKSHEET"],
+            "description": "Type of metadata."
+          }
+        }
+      },
+      "Default_Action_Config_Input_Create": {
+        "type": "object",
+        "properties": {
+          "visibility": {
+            "type": "boolean",
+            "default": true,
+            "description": "Custom action is visible to all Visualizations. Earlier naming convention: LOCAL/GLOBAL. TRUE signifies GLOBAL for backward compatibility.\n\nDefault: true"
+          }
+        },
+        "description": "Default Custom action configuration. This includes if the custom action visibility across visualization. By default, visible across visualizations."
+      },
+      "Action_Details_Input": {
         "type": "object",
         "properties": {
           "CALLBACK": {
@@ -9805,14 +9929,13 @@
             "description": "URL Custom Action Type"
           }
         },
-        "description": "Action details includes Type and Configuration for Custom Actions"
+        "description": "Action details includes Type and Configuration for Custom Actions, either Callback or URL is required."
       },
-      "Associate_metadataListItemInput": {
+      "Associate_Metadata_Input": {
         "type": "object",
-        "required": ["identifier"],
         "properties": {
           "action_config": {
-            "$ref": "#/components/schemas/Action_config_Input",
+            "$ref": "#/components/schemas/ActionConfigInput",
             "description": "Specify that the association is enabled for the metadata object"
           },
           "identifier": {
@@ -9821,9 +9944,20 @@
           },
           "type": {
             "type": "string",
+            "enum": ["VISUALIZATION", "ANSWER", "WORKSHEET"],
             "description": "Type of metadata."
           }
         }
+      },
+      "Default_Action_Config_Input": {
+        "type": "object",
+        "properties": {
+          "visibility": {
+            "type": "boolean",
+            "description": "Custom action is visible to all Visualizations. Earlier naming convention: LOCAL/GLOBAL. TRUE signifies GLOBAL for backward compatibility."
+          }
+        },
+        "description": "Default Custom action configuration. This includes if the custom action visibility across visualization. By default, visible across visualizations."
       },
       "FavoriteMetadataItem": {
         "type": "object",
@@ -9853,20 +9987,6 @@
             "description": "Type of metadata."
           }
         }
-      },
-      "Object_ID_And_Name": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "The unique identifier of the object."
-          },
-          "name": {
-            "type": "string",
-            "description": "Name of the object."
-          }
-        },
-        "description": "The object representation with ID and Name."
       },
       "ImportUserType": {
         "type": "object",
@@ -10112,7 +10232,7 @@
         },
         "description": "Default Custom action configuration. This includes if the custom action visibility across visualization. By default, visible across visualizations."
       },
-      "Metadata_associationListItem": {
+      "Metadata_Association_Item": {
         "type": "object",
         "required": ["action_config", "identifier", "type"],
         "properties": {
@@ -10142,7 +10262,6 @@
       },
       "URLInput": {
         "type": "object",
-        "required": ["url"],
         "properties": {
           "authentication": {
             "$ref": "#/components/schemas/AuthenticationInput",
@@ -10158,6 +10277,10 @@
           "url": {
             "type": "string",
             "description": "Request Url for the Custom action."
+          },
+          "reference": {
+            "type": "string",
+            "description": "Reference name of the sdk. By default the value will be set to action name"
           }
         },
         "description": "URL Custom Action Type"
@@ -10436,11 +10559,66 @@
           }
         }
       },
-      "Action_config_Input": {
+      "CALLBACKInputMandatory": {
+        "type": "object",
+        "required": ["reference"],
+        "properties": {
+          "reference": {
+            "type": "string",
+            "description": "Reference name of the sdk. By default the value will be set to action name"
+          }
+        },
+        "description": "CALLBACK Custom Action Type"
+      },
+      "URLInputMandatory": {
+        "type": "object",
+        "required": ["url"],
+        "properties": {
+          "authentication": {
+            "$ref": "#/components/schemas/AuthenticationInput",
+            "description": "Authorization type for the custom action."
+          },
+          "parameters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ParametersListItemInput"
+            },
+            "description": "Query parameters for url."
+          },
+          "url": {
+            "type": "string",
+            "description": "Request Url for the Custom action."
+          },
+          "reference": {
+            "type": "string",
+            "description": "Reference name of the sdk. By default the value will be set to action name"
+          }
+        },
+        "description": "URL Custom Action Type"
+      },
+      "ActionConfigInputCreate": {
         "type": "object",
         "properties": {
           "position": {
             "type": "string",
+            "enum": ["MENU", "PRIMARY", "CONTEXT_MENU"],
+            "default": "MENU",
+            "description": "Position of the Custom action on the Metadata object. Earlier naming convention: context."
+          },
+          "visibility": {
+            "type": "boolean",
+            "default": true,
+            "description": "Visibility of the metadata association with custom action. Earlier naming convention: enabled"
+          }
+        },
+        "description": "Specify that the association is enabled for the metadata object Default"
+      },
+      "ActionConfigInput": {
+        "type": "object",
+        "properties": {
+          "position": {
+            "type": "string",
+            "enum": ["MENU", "PRIMARY", "CONTEXT_MENU"],
             "description": "Position of the Custom action on the Metadata object. Earlier naming convention: context."
           },
           "visibility": {
@@ -10448,7 +10626,7 @@
             "description": "Visibility of the metadata association with custom action. Earlier naming convention: enabled"
           }
         },
-        "description": "Specify that the association is enabled for the metadata object"
+        "description": "Specify that the association is enabled for the metadata object Default"
       },
       "Database": {
         "type": "object",
@@ -10499,6 +10677,10 @@
           "url": {
             "type": "string",
             "description": "Request Url for the Custom action."
+          },
+          "reference": {
+            "type": "string",
+            "description": "Reference name of the sdk. By default the value will be set to action name"
           }
         },
         "description": "URL Custom Action Type"
