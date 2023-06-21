@@ -1,0 +1,609 @@
+# ThoughtSpotRestApiSdk.UsersApi
+
+All URIs are relative to *https://localhost:443*
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**changeUserPassword**](UsersApi.md#changeUserPassword) | **POST** /api/rest/2.0/users/change-password | 
+[**createUser**](UsersApi.md#createUser) | **POST** /api/rest/2.0/users/create | 
+[**deleteUser**](UsersApi.md#deleteUser) | **POST** /api/rest/2.0/users/{user_identifier}/delete | 
+[**forceLogoutUsers**](UsersApi.md#forceLogoutUsers) | **POST** /api/rest/2.0/users/force-logout | 
+[**importUsers**](UsersApi.md#importUsers) | **POST** /api/rest/2.0/users/import | 
+[**resetUserPassword**](UsersApi.md#resetUserPassword) | **POST** /api/rest/2.0/users/reset-password | 
+[**searchUsers**](UsersApi.md#searchUsers) | **POST** /api/rest/2.0/users/search | 
+[**updateUser**](UsersApi.md#updateUser) | **POST** /api/rest/2.0/users/{user_identifier}/update | 
+
+
+# **changeUserPassword**
+> void changeUserPassword(changeUserPasswordRequest)
+
+  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>  Updates the current password of the user.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.     #### Endpoint URL 
+
+### Example
+
+
+```typescript
+import * as ThoughtSpotRestApiSdk from 'thoughtspot-rest-api-sdk';
+import * as fs from 'fs';
+
+const configuration = ThoughtSpotRestApiSdk.createConfiguration();
+const apiInstance = new ThoughtSpotRestApiSdk.UsersApi(configuration);
+
+let body:ThoughtSpotRestApiSdk.UsersApiChangeUserPasswordRequest = {
+  // ChangeUserPasswordRequest
+  changeUserPasswordRequest: {
+    currentPassword: "currentPassword_example",
+    newPassword: "newPassword_example",
+    userIdentifier: "userIdentifier_example",
+  },
+};
+
+apiInstance.changeUserPassword(body).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **changeUserPasswordRequest** | **ChangeUserPasswordRequest**|  |
+
+
+### Return type
+
+**void**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | User password change operation successful. |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **createUser**
+> User createUser(createUserRequest)
+
+  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>  Creates a user in ThoughtSpot.  The API endpoint allows you to configure several user properties such as email address, account status, share notification preferences, and sharing visibility. You can provision the user to [groups](https://docs.thoughtspot.com/cloud/latest/groups-privileges) and [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview). You can also add Liveboard, Answer, and Worksheet objects to the user’s favorites list, assign a default Liveboard for the user, and set user preferences.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.     #### Endpoint URL 
+
+### Example
+
+
+```typescript
+import * as ThoughtSpotRestApiSdk from 'thoughtspot-rest-api-sdk';
+import * as fs from 'fs';
+
+const configuration = ThoughtSpotRestApiSdk.createConfiguration();
+const apiInstance = new ThoughtSpotRestApiSdk.UsersApi(configuration);
+
+let body:ThoughtSpotRestApiSdk.UsersApiCreateUserRequest = {
+  // CreateUserRequest
+  createUserRequest: {
+    name: "name_example",
+    displayName: "displayName_example",
+    password: "password_example",
+    email: "email_example",
+    accountType: "LOCAL_USER",
+    accountStatus: "ACTIVE",
+    orgIdentifiers: [
+      "orgIdentifiers_example",
+    ],
+    groupIdentifiers: [
+      "groupIdentifiers_example",
+    ],
+    visibility: "SHARABLE",
+    notifyOnShare: true,
+    showOnboardingExperience: true,
+    onboardingExperienceCompleted: false,
+    homeLiveboardIdentifier: "homeLiveboardIdentifier_example",
+    favoriteMetadata: [
+      {
+        identifier: "identifier_example",
+        type: "LIVEBOARD",
+      },
+    ],
+  },
+};
+
+apiInstance.createUser(body).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **createUserRequest** | **CreateUserRequest**|  |
+
+
+### Return type
+
+**User**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | User successfully created. |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **deleteUser**
+> void deleteUser()
+
+  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>  Deletes a user from the ThoughtSpot system.  If you want to remove a user from a specific Org but not from ThoughtSpot, update the group and Org mapping properties of the user object via a POST API call to the [/api/rest/2.0/users/{user_identifier}/update](#/http/api-endpoints/users/update-user) endpoint.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.     #### Endpoint URL 
+
+### Example
+
+
+```typescript
+import * as ThoughtSpotRestApiSdk from 'thoughtspot-rest-api-sdk';
+import * as fs from 'fs';
+
+const configuration = ThoughtSpotRestApiSdk.createConfiguration();
+const apiInstance = new ThoughtSpotRestApiSdk.UsersApi(configuration);
+
+let body:ThoughtSpotRestApiSdk.UsersApiDeleteUserRequest = {
+  // string | GUID / name of the user
+  userIdentifier: "user_identifier_example",
+};
+
+apiInstance.deleteUser(body).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **userIdentifier** | [**string**] | GUID / name of the user | defaults to undefined
+
+
+### Return type
+
+**void**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | User successfully deleted. |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **forceLogoutUsers**
+> void forceLogoutUsers()
+
+  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>  Enforces logout on current user sessions.    Use this API with caution as it may invalidate active user sessions and force users to re-login. Make sure you specify the usernames or GUIDs. If you pass null values in the API call, all user sessions on your cluster become invalid, and the users are forced to re-login.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.     #### Endpoint URL 
+
+### Example
+
+
+```typescript
+import * as ThoughtSpotRestApiSdk from 'thoughtspot-rest-api-sdk';
+import * as fs from 'fs';
+
+const configuration = ThoughtSpotRestApiSdk.createConfiguration();
+const apiInstance = new ThoughtSpotRestApiSdk.UsersApi(configuration);
+
+let body:ThoughtSpotRestApiSdk.UsersApiForceLogoutUsersRequest = {
+  // ForceLogoutUsersRequest (optional)
+  forceLogoutUsersRequest: {
+    userIdentifiers: [
+      "userIdentifiers_example",
+    ],
+  },
+};
+
+apiInstance.forceLogoutUsers(body).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **forceLogoutUsersRequest** | **ForceLogoutUsersRequest**|  |
+
+
+### Return type
+
+**void**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Force logging out of users operation successful. |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **importUsers**
+> ImportUsersResponse importUsers(importUsersRequest)
+
+  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>  Imports user data from external databases into ThoughtSpot. During the user import operation:  * If the specified users are not available in ThoughtSpot, the users are created and assigned a default password. Defining a `default_password` in the API request is optional. * If `delete_unspecified_users` is set to `true`, the users not specified in the API request, excluding the `tsadmin`, `guest`, `system` and `su` users, are deleted. * If the specified user objects are already available in ThoughtSpot, the object properties are updated and synchronized as per the input data in the API request.  A successful API call returns the object that represents the changes made in the ThoughtSpot system.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.     #### Endpoint URL 
+
+### Example
+
+
+```typescript
+import * as ThoughtSpotRestApiSdk from 'thoughtspot-rest-api-sdk';
+import * as fs from 'fs';
+
+const configuration = ThoughtSpotRestApiSdk.createConfiguration();
+const apiInstance = new ThoughtSpotRestApiSdk.UsersApi(configuration);
+
+let body:ThoughtSpotRestApiSdk.UsersApiImportUsersRequest = {
+  // ImportUsersRequest
+  importUsersRequest: {
+    users: [
+      {
+        userIdentifier: "userIdentifier_example",
+        displayName: "displayName_example",
+        password: "password_example",
+        accountType: "LOCAL_USER",
+        accountStatus: "ACTIVE",
+        email: "email_example",
+        orgIdentifiers: [
+          "orgIdentifiers_example",
+        ],
+        groupIdentifiers: [
+          "groupIdentifiers_example",
+        ],
+        visibility: "SHARABLE",
+        notifyOnShare: true,
+        showOnboardingExperience: true,
+        onboardingExperienceCompleted: true,
+        homeLiveboardIdentifier: "homeLiveboardIdentifier_example",
+        favoriteMetadata: [
+          {
+            identifier: "identifier_example",
+            type: "LIVEBOARD",
+          },
+        ],
+      },
+    ],
+    defaultPassword: "defaultPassword_example",
+    dryRun: true,
+    deleteUnspecifiedUsers: false,
+  },
+};
+
+apiInstance.importUsers(body).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **importUsersRequest** | **ImportUsersRequest**|  |
+
+
+### Return type
+
+**ImportUsersResponse**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Import users operation successful. |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **resetUserPassword**
+> void resetUserPassword(resetUserPasswordRequest)
+
+  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>  Resets the password of a user account. Administrators can reset password on behalf of a user.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.     #### Endpoint URL 
+
+### Example
+
+
+```typescript
+import * as ThoughtSpotRestApiSdk from 'thoughtspot-rest-api-sdk';
+import * as fs from 'fs';
+
+const configuration = ThoughtSpotRestApiSdk.createConfiguration();
+const apiInstance = new ThoughtSpotRestApiSdk.UsersApi(configuration);
+
+let body:ThoughtSpotRestApiSdk.UsersApiResetUserPasswordRequest = {
+  // ResetUserPasswordRequest
+  resetUserPasswordRequest: {
+    newPassword: "newPassword_example",
+    userIdentifier: "userIdentifier_example",
+  },
+};
+
+apiInstance.resetUserPassword(body).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **resetUserPasswordRequest** | **ResetUserPasswordRequest**|  |
+
+
+### Return type
+
+**void**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | User password reset operation successful. |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **searchUsers**
+> Array<User> searchUsers()
+
+  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>   Gets a list of users available on the ThoughtSpot system.  To get details of a specific user, specify the user GUID or name. You can also filter the API response based on groups, Org ID, user visibility, account status, user type, and user preference settings and favorites.  Available to all users. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view all users properties.     #### Endpoint URL 
+
+### Example
+
+
+```typescript
+import * as ThoughtSpotRestApiSdk from 'thoughtspot-rest-api-sdk';
+import * as fs from 'fs';
+
+const configuration = ThoughtSpotRestApiSdk.createConfiguration();
+const apiInstance = new ThoughtSpotRestApiSdk.UsersApi(configuration);
+
+let body:ThoughtSpotRestApiSdk.UsersApiSearchUsersRequest = {
+  // SearchUsersRequest (optional)
+  searchUsersRequest: {
+    userIdentifier: "userIdentifier_example",
+    displayName: "displayName_example",
+    visibility: "SHARABLE",
+    email: "email_example",
+    groupIdentifiers: [
+      "groupIdentifiers_example",
+    ],
+    privileges: [
+      "ADMINISTRATION",
+    ],
+    accountType: "LOCAL_USER",
+    accountStatus: "ACTIVE",
+    notifyOnShare: true,
+    showOnboardingExperience: true,
+    onboardingExperienceCompleted: true,
+    orgIdentifiers: [
+      "orgIdentifiers_example",
+    ],
+    homeLiveboardIdentifier: "homeLiveboardIdentifier_example",
+    favoriteMetadata: [
+      {
+        identifier: "identifier_example",
+        type: "LIVEBOARD",
+      },
+    ],
+    recordOffset: 0,
+    recordSize: 10,
+    sortOptions: {
+      fieldName: "NAME",
+      order: "ASC",
+    },
+    roleIdentifiers: [
+      "roleIdentifiers_example",
+    ],
+    includeFavoriteMetadata: false,
+  },
+};
+
+apiInstance.searchUsers(body).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **searchUsersRequest** | **SearchUsersRequest**|  |
+
+
+### Return type
+
+**Array<User>**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | User search result. |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **updateUser**
+> void updateUser()
+
+  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>  Updates a user object.  You can modify user properties such as username, email, and share notification settings. You can also assign new groups and Orgs, remove the user from a group or Org, reset password, and modify user preferences.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.     #### Endpoint URL 
+
+### Example
+
+
+```typescript
+import * as ThoughtSpotRestApiSdk from 'thoughtspot-rest-api-sdk';
+import * as fs from 'fs';
+
+const configuration = ThoughtSpotRestApiSdk.createConfiguration();
+const apiInstance = new ThoughtSpotRestApiSdk.UsersApi(configuration);
+
+let body:ThoughtSpotRestApiSdk.UsersApiUpdateUserRequest = {
+  // string | GUID / name of the user
+  userIdentifier: "user_identifier_example",
+  // UpdateUserRequest (optional)
+  updateUserRequest: {
+    name: "name_example",
+    displayName: "displayName_example",
+    visibility: "SHARABLE",
+    email: "email_example",
+    accountStatus: "ACTIVE",
+    notifyOnShare: true,
+    showOnboardingExperience: true,
+    onboardingExperienceCompleted: true,
+    accountType: "LOCAL_USER",
+    groupIdentifiers: [
+      "groupIdentifiers_example",
+    ],
+    homeLiveboardIdentifier: "homeLiveboardIdentifier_example",
+    favoriteMetadata: [
+      {
+        identifier: "identifier_example",
+        type: "LIVEBOARD",
+      },
+    ],
+    orgIdentifiers: [
+      "orgIdentifiers_example",
+    ],
+    operation: "REPLACE",
+  },
+};
+
+apiInstance.updateUser(body).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **updateUserRequest** | **UpdateUserRequest**|  |
+ **userIdentifier** | [**string**] | GUID / name of the user | defaults to undefined
+
+
+### Return type
+
+**void**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | User successfully updated. |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
