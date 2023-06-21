@@ -9872,7 +9872,7 @@
             "description": "URL Custom Action Type"
           }
         },
-        "description": "Action details includes Type and Configuration for Custom Actions, either Callback or URL is required."
+        "description": "Action details includes Type and Configuration for Custom Actions, either Callback or URL is required.\nWhen both callback and url are provided, callback would be considered"
       },
       "Associate_Metadata_Input_Create": {
         "type": "object",
