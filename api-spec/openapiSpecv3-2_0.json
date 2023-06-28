@@ -308,6 +308,9 @@
                     "nullable": true
                   }
                 }
+              },
+              "example": {
+                "user_identifier": "test"
               }
             }
           }
