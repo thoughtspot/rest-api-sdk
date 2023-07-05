@@ -2635,7 +2635,17 @@
                         "DENODO",
                         "DREMIO",
                         "TRINO",
-                        "PRESTO"
+                        "PRESTO",
+                        "POSTGRES",
+                        "SQL_SERVER",
+                        "MYSQL",
+                        "GENERIC_JDBC",
+                        "AMAZON_RDS_POSTGRESQL",
+                        "AMAZON_AURORA_POSTGRESQL",
+                        "AMAZON_RDS_MYSQL",
+                        "AMAZON_AURORA_MYSQL",
+                        "LOOKER",
+                        "AMAZON_ATHENA"
                       ]
                     }
                   },
@@ -6758,7 +6768,17 @@
                       "DENODO",
                       "DREMIO",
                       "TRINO",
-                      "PRESTO"
+                      "PRESTO",
+                      "POSTGRES",
+                      "SQL_SERVER",
+                      "MYSQL",
+                      "GENERIC_JDBC",
+                      "AMAZON_RDS_POSTGRESQL",
+                      "AMAZON_AURORA_POSTGRESQL",
+                      "AMAZON_RDS_MYSQL",
+                      "AMAZON_AURORA_MYSQL",
+                      "LOOKER",
+                      "AMAZON_ATHENA"
                     ]
                   },
                   "data_warehouse_config": {
@@ -9576,7 +9596,17 @@
               "DENODO",
               "DREMIO",
               "TRINO",
-              "PRESTO"
+              "PRESTO",
+              "POSTGRES",
+              "SQL_SERVER",
+              "MYSQL",
+              "GENERIC_JDBC",
+              "AMAZON_RDS_POSTGRESQL",
+              "AMAZON_AURORA_POSTGRESQL",
+              "AMAZON_RDS_MYSQL",
+              "AMAZON_AURORA_MYSQL",
+              "LOOKER",
+              "AMAZON_ATHENA"
             ],
             "description": "Type of data warehouse."
           },
@@ -10156,7 +10186,17 @@
               "DENODO",
               "DREMIO",
               "TRINO",
-              "PRESTO"
+              "PRESTO",
+              "POSTGRES",
+              "SQL_SERVER",
+              "MYSQL",
+              "GENERIC_JDBC",
+              "AMAZON_RDS_POSTGRESQL",
+              "AMAZON_AURORA_POSTGRESQL",
+              "AMAZON_RDS_MYSQL",
+              "AMAZON_AURORA_MYSQL",
+              "LOOKER",
+              "AMAZON_ATHENA"
             ],
             "description": "Type of data warehouse."
           },
