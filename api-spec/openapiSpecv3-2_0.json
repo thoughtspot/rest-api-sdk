@@ -3638,6 +3638,23 @@
                     "items": {
                       "$ref": "#/components/schemas/FavoriteMetadataInput"
                     }
+                  },
+                  "preferred_locale": {
+                    "description": "Locale for the user.",
+                    "type": "string"
+                  },
+                  "extended_properties": {
+                    "description": "Properties for the user",
+                    "type": "object"
+                  },
+                  "extended_preferences": {
+                    "description": "Preferences for the user",
+                    "type": "object"
+                  },
+                  "trigger_welcome_email": {
+                    "description": "Flag to indicate whether welcome email should be sent to user",
+                    "type": "boolean",
+                    "nullable": true
                   }
                 },
                 "required": [
@@ -3811,6 +3828,18 @@
                       "REMOVE",
                       "REPLACE"
                     ]
+                  },
+                  "preferred_locale": {
+                    "description": "Locale for the user.",
+                    "type": "string"
+                  },
+                  "extended_properties": {
+                    "description": "Properties for the user",
+                    "type": "object"
+                  },
+                  "extended_preferences": {
+                    "description": "Preferences for the user",
+                    "type": "object"
                   }
                 }
               }
@@ -8302,6 +8331,18 @@
           "org_privileges": {
             "type": "object",
             "description": "Privileges which are assigned to the user with org."
+          },
+          "preferred_locale": {
+            "type": "string",
+            "description": "Locale for the user."
+          },
+          "extended_properties": {
+            "type": "object",
+            "description": "Properties for the user"
+          },
+          "extended_preferences": {
+            "type": "object",
+            "description": "Preferences for the user"
           }
         }
       },
