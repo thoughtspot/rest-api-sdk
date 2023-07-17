@@ -52,10 +52,6 @@ const patchURLAndPlayground = async ({ baseUrl, accessToken }) => {
 const channel = new MessageChannel();
 let playgroundConfig = {};
 
-window.parent.postMessage({ type: 'api-playground-ready' }, '*', [
-  channel.port2,
-]);
-
 function getElementByIdAsync(id) {
   let maxTime = 2000;
   const STEP = 16;
@@ -77,6 +73,9 @@ const setAPIMaticPortalConfig = () => {
   APIMaticDevPortal.ready(({ setConfig }) => {
     isApiMaticPortalReady = true;
     _setConfig = setConfig;
+    window.parent.postMessage({ type: 'api-playground-ready' }, '*', [
+      channel.port2,
+    ]);
   });
 };
 
