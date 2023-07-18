@@ -6023,7 +6023,6 @@
                   }
                 },
                 "required": [
-                  "metadata_type",
                   "metadata_identifiers",
                   "permissions",
                   "emails",
@@ -8357,9 +8356,7 @@
             "type": "string",
             "enum": [
               "LIVEBOARD",
-              "ANSWER",
-              "LOGICAL_TABLE",
-              "CONNECTION"
+              "ANSWER"
             ],
             "description": "Type of metadata."
           }
@@ -8606,8 +8603,7 @@
       "PrincipalsInput": {
         "type": "object",
         "required": [
-          "identifier",
-          "type"
+          "identifier"
         ],
         "properties": {
           "identifier": {
@@ -8627,7 +8623,6 @@
       "AuthorMetadataTypeInput": {
         "type": "object",
         "required": [
-          "type",
           "identifier"
         ],
         "properties": {
@@ -8650,7 +8645,6 @@
       "PermissionsMetadataTypeInput": {
         "type": "object",
         "required": [
-          "type",
           "identifier"
         ],
         "properties": {
@@ -8794,7 +8788,6 @@
       "CustomActionMetadataTypeInput": {
         "type": "object",
         "required": [
-          "type",
           "identifier"
         ],
         "properties": {
