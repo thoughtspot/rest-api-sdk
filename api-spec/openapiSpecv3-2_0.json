@@ -2139,7 +2139,7 @@
     "/api/rest/2.0/metadata/liveboard/data": {
       "post": {
         "operationId": "fetchLiveboardData",
-        "description": "\nFetches Liveboard data. Requires at least view access to the Liveboard. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGets data from a Liveboard object and its visualization.  \n\nRequires at least view access to the Liveboard.\n\n#### Usage guidelines\n\nIn the request body, specify the GUID or name of the Liveboard. To get data for specific visualizations, add the GUIDs or names of the visualizations in the API request.\n\nTo include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes. If the new Liveboard experience mode, the transient content includes ad hoc changes to visualizations such as sorting, toggling of legends, and data drill down.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGets data from a Liveboard object and its visualization.  \n\nRequires at least view access to the Liveboard.\n\n#### Usage guidelines\n\nIn the request body, specify the GUID or name of the Liveboard. To get data for specific visualizations, add the GUIDs or names of the visualizations in the API request.\n\nTo include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes. If the new Liveboard experience mode, the transient content includes ad hoc changes to visualizations such as sorting, toggling of legends, and data drill down.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Data",
           "9.0.0.cl"
@@ -2268,7 +2268,7 @@
     "/api/rest/2.0/metadata/answer/data": {
       "post": {
         "operationId": "fetchAnswerData",
-        "description": "\nFetches data from a saved Answer. Requires at least view access to the Answer object. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nFetches data from a saved Answer.\n\nRequires at least view access to the saved Answer.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nFetches data from a saved Answer.\n\nRequires at least view access to the saved Answer.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Data",
           "9.0.0.cl"
@@ -4349,7 +4349,7 @@
     "/api/rest/2.0/orgs/create": {
       "post": {
         "operationId": "createOrg",
-        "description": "\nCreates an Org. Requires cluster administration privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nCreates an Org object.\n\nTo use this API, the [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview) feature must be enabled in your cluster.\n\nRequires cluster administration (**Can administer Org**) privileges.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nCreates an Org object.\n\nTo use this API, the [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview) feature must be enabled in your cluster.\n\nRequires cluster administration (**Can administer Org**) privileges.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Orgs",
           "9.0.0.cl"
@@ -4448,7 +4448,7 @@
     "/api/rest/2.0/orgs/{org_identifier}/update": {
       "post": {
         "operationId": "updateOrg",
-        "description": "\nUpdates an Org. Requires cluster administration privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nUpdates an Org object. You can modify Org properties such as name, description, and user associations.\n\nRequires cluster administration (**Can administer Org**) privileges.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nUpdates an Org object. You can modify Org properties such as name, description, and user associations.\n\nRequires cluster administration (**Can administer Org**) privileges.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Orgs",
           "9.0.0.cl"
@@ -4544,7 +4544,7 @@
     "/api/rest/2.0/orgs/{org_identifier}/delete": {
       "post": {
         "operationId": "deleteOrg",
-        "description": "\nDeletes an Org. Requires cluster administration privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nDeletes an Org object from the ThoughtSpot system.\n\nRequires cluster administration (**Can administer Org**) privilege.\n\nWhen you delete an Org, all its users and objects created in that Org context are removed. However, if the users in the deleted Org also exists in other Orgs, they are removed only from the deleted Org.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nDeletes an Org object from the ThoughtSpot system.\n\nRequires cluster administration (**Can administer Org**) privilege.\n\nWhen you delete an Org, all its users and objects created in that Org context are removed. However, if the users in the deleted Org also exists in other Orgs, they are removed only from the deleted Org.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Orgs",
           "9.0.0.cl"
