@@ -8565,7 +8565,8 @@
               "LIVEBOARD",
               "ANSWER",
               "LOGICAL_TABLE",
-              "CONNECTION"
+              "CONNECTION",
+              "ACTION_OBJECT"
             ],
             "description": "Type of metadata (Optional when given identifier is ID)."
           },
