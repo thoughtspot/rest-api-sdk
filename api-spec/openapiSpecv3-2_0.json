@@ -7676,7 +7676,7 @@
     "/api/rest/2.0/schedules/{schedule_identifier}/update": {
       "post": {
         "operationId": "updateSchedule",
-        "description": "\nUpdate schedule. <br/>  <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>\n\nUpdates a scheduled Liveboard job.\n\nRequires at least edit access to Liveboards. To update a schedule on behalf of another user, you need  `ADMINISTRATION` (**Can administer Org**) or `JOBSCHEDULING` (**Can schedule for others**) privilege and edit access to the Liveboard.\n\nThe API endpoint allows you to pause a scheduled job, change the status of a paused job, and edit the properties of a schedule, such as the recipient list, frequency of the job, format of the file to send to the recipients in email notifications, PDF options, and time zone settings.  \n\n\n\n\n#### Endpoint URL\n",
+        "description": "\nUpdate schedule. <br/>  <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>\n\nUpdates a scheduled Liveboard job.\n\nRequires at least edit access to Liveboards. To update a schedule on behalf of another user, you need `ADMINISTRATION` (**Can administer Org**) or `JOBSCHEDULING` (**Can schedule for others**) privilege and edit access to the Liveboard.\n\nThe API endpoint allows you to pause a scheduled job, change the status of a paused job. You can also edit the recipients list, frequency of the job, format of the file to send to the recipients in email notifications, PDF options, and time zone setting.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Schedules",
           "9.4.0.cl"
