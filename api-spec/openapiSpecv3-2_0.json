@@ -5565,7 +5565,7 @@
                     "type": "string"
                   },
                   "guid_mapping_branch_name": {
-                    "description": "   Use configuration_branch_name instead.\n   Name of the branch where the configuration files related to operations between Thoughtspot and version control repo should be maintained.\n   \n\nNote: If no branch name is specified, then by default, ts_config_files branch is considered. Ensure this branch exists before configuration. \n\n\n   \n\n*Deprecated from 10.0.0.cl : Replaced by configuration_branch_name*  <br/>  <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>",
+                    "description": "   Use configuration_branch_name instead.\n   \n\nName of the branch where the configuration files related to operations between Thoughtspot and version control repo should be maintained.\n\n\n   \n\nNote: If no branch name is specified, then by default, ts_config_files branch is considered. Ensure this branch exists before configuration. \n\n\n   \n\n*Deprecated from 10.0.0.cl : Replaced by configuration_branch_name*  <br/>  <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>",
                     "type": "string",
                     "deprecated": true
                   }
@@ -5677,7 +5677,7 @@
                     "type": "string"
                   },
                   "guid_mapping_branch_name": {
-                    "description": "   Use configuration_branch_name instead.\n   Name of the branch where the configuration files related to operations between Thoughtspot and version control repo should be maintained.\n   \n\nNote: If no branch name is specified, then by default, ts_config_files branch is considered. Ensure this branch exists before configuration. \n\n\n   \n\n*Deprecated from 10.0.0.cl : Replaced by configuration_branch_name*  <br/>  <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>",
+                    "description": "   Use configuration_branch_name instead.\n   \n\nName of the branch where the configuration files related to operations between Thoughtspot and version control repo should be maintained.\n\n\n   \n\nNote: If no branch name is specified, then by default, ts_config_files branch is considered. Ensure this branch exists before configuration. \n\n\n   \n\n*Deprecated from 10.0.0.cl : Replaced by configuration_branch_name*  <br/>  <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>",
                     "type": "string",
                     "deprecated": true
                   }
