@@ -6178,29 +6178,19 @@
                       "type": "string"
                     }
                   },
-                  "commit_branch_name": {
-                    "description": "Name of the remote branch where objects from this Thoughtspot instance will be versioned. <br/>  <span class=\"since-beta-tag\">Version: 9.7.0.cl or later</span>",
-                    "type": "string"
-                  },
                   "default_branch_name": {
-                    "description": "   Use commit_branch_name instead.\n   \n\nName of the remote branch where objects from this Thoughtspot instance will be versioned.\n\n\n   \n\n*Deprecated from 10.0.0.cl : Replaced by commit_branch_name* ",
-                    "type": "string",
-                    "deprecated": true
+                    "description": "Name of the default remote branch",
+                    "type": "string"
                   },
                   "enable_guid_mapping": {
                     "description": "Maintain mapping of guid for the deployment to an instance <br/>  <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>",
-                    "default": true,
+                    "default": false,
                     "type": "boolean",
                     "nullable": true
                   },
-                  "configuration_branch_name": {
-                    "description": "   Name of the branch where the configuration files related to operations between Thoughtspot and version control repo should be maintained.\n   \n\nNote: If no branch name is specified, then by default, ts_config_files branch is considered. Ensure this branch exists before configuration. <br/>  <span class=\"since-beta-tag\">Version: 9.7.0.cl or later</span>",
-                    "type": "string"
-                  },
                   "guid_mapping_branch_name": {
-                    "description": "   Use configuration_branch_name instead.\n   \n\nName of the branch where the configuration files related to operations between Thoughtspot and version control repo should be maintained.\n\n\n   \n\nNote: If no branch name is specified, then by default, ts_config_files branch is considered. Ensure this branch exists before configuration. \n\n\n   \n\n*Deprecated from 10.0.0.cl : Replaced by configuration_branch_name*  <br/>  <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>",
-                    "type": "string",
-                    "deprecated": true
+                    "description": "   Name of the branch where the file containing guid mapping should be maintained. This will be set only when enable_guid_mapping is true.\n   \n\nNote: If no guid mapping branch is specified, then the default branch for this configuration will be considered.  <br/>  <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>",
+                    "type": "string"
                   }
                 },
                 "required": [
@@ -6301,28 +6291,18 @@
                       "type": "string"
                     }
                   },
-                  "commit_branch_name": {
-                    "description": "Name of the remote branch where objects from this Thoughtspot instance will be versioned. <br/>  <span class=\"since-beta-tag\">Version: 9.7.0.cl or later</span>",
-                    "type": "string"
-                  },
                   "default_branch_name": {
-                    "description": "   Use commit_branch_name instead.\n   \n\nName of the remote branch where objects from this Thoughtspot instance will be versioned.\n\n\n   \n\n*Deprecated from 10.0.0.cl : Replaced by commit_branch_name* ",
-                    "type": "string",
-                    "deprecated": true
+                    "description": "Name of the default remote branch",
+                    "type": "string"
                   },
                   "enable_guid_mapping": {
                     "description": "Maintain mapping of guid for the deployment to an instance <br/>  <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>",
                     "type": "boolean",
                     "nullable": true
                   },
-                  "configuration_branch_name": {
-                    "description": "Name of the branch where the configuration files related to operations between Thoughtspot and version control repo should be maintained. <br/>  <span class=\"since-beta-tag\">Version: 9.7.0.cl or later</span>",
-                    "type": "string"
-                  },
                   "guid_mapping_branch_name": {
-                    "description": "   Use configuration_branch_name instead.\n   \n\nName of the branch where the configuration files related to operations between Thoughtspot and version control repo should be maintained.\n\n\n   \n\n*Deprecated from 10.0.0.cl : Replaced by configuration_branch_name*  <br/>  <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>",
-                    "type": "string",
-                    "deprecated": true
+                    "description": "   Name of the branch in which the file containing guid mapping should be maintained. This will be set only if enable_guid_mapping is true.\n   \n\nNote: If no guid mapping branch is specified, then the default branch for this configuration will be considered.  <br/>  <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>",
+                    "type": "string"
                   }
                 }
               }
@@ -6477,14 +6457,8 @@
                       "$ref": "#/components/schemas/MetadataObject"
                     }
                   },
-                  "delete_aware": {
-                    "description": "Delete the tml files from version control repo if it does not exist in the ThoughSpot instance",
-                    "default": true,
-                    "type": "boolean",
-                    "nullable": true
-                  },
                   "branch_name": {
-                    "description": "   Name of the remote branch where object should be pushed\n   \n\nNote: If no branch_name is specified, then the commit_branch_name will be considered.",
+                    "description": "   Name of the remote branch where object should be pushed\n   \n\nNote: If no branch_name is specified, then the default branch will be considered.",
                     "type": "string"
                   },
                   "comment": {
@@ -6578,11 +6552,11 @@
                     }
                   },
                   "branch_name": {
-                    "description": "   Name of the branch where the reverted version should be committed\n   \n\nNote: If no branch_name is specified, then the commit_branch_name will be considered.",
+                    "description": "   Name of the branch where the reverted version should be committed\n   \n\nNote: If no branch_name is specified, then the default branch will be considered.",
                     "type": "string"
                   },
                   "revert_policy": {
-                    "description": "Policy to apply when reverting a commit. Valid values: [ALL_OR_NONE, PARTIAL]",
+                    "description": "Policy to be followed while importing. Valid values: [ALL_OR_NONE, PARTIAL]",
                     "default": "ALL_OR_NONE",
                     "type": "string",
                     "enum": [
@@ -6769,7 +6743,7 @@
                     "type": "string"
                   },
                   "branch_name": {
-                    "description": "Name of the remote branch where changes should be picked",
+                    "description": "   Name of the remote branch where changes should be picked\n   \n\nNote: If no branch_name is specified, then the default branch will be considered.",
                     "type": "string"
                   },
                   "deploy_type": {
@@ -6790,14 +6764,10 @@
                       "PARTIAL"
                     ]
                   }
-                },
-                "required": [
-                  "branch_name"
-                ]
+                }
               }
             }
-          },
-          "required": true
+          }
         },
         "parameters": [],
         "responses": {
@@ -10897,9 +10867,9 @@
             "type": "string",
             "description": "Username to authenticate connection to the version control system"
           },
-          "commit_branch_name": {
+          "default_branch": {
             "type": "string",
-            "description": "Name of the remote branch where objects from this Thoughtspot instance will be versioned."
+            "description": "Name of the default remote branch"
           },
           "branches": {
             "type": "array",
@@ -10912,9 +10882,9 @@
             "type": "boolean",
             "description": "Maintain mapping of guid for the deployment to an instance"
           },
-          "configuration_branch_name": {
+          "guid_mapping_branch_name": {
             "type": "string",
-            "description": "Name of the branch where the configuration files related to operations between Thoughtspot and version control repo should be maintained."
+            "description": "Name of the branch in the file containing guid mapping should be maintained"
           },
           "org": {
             "$ref": "#/components/schemas/Org",
