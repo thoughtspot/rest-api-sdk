@@ -9890,7 +9890,7 @@
               "ANSWER",
               "LOGICAL_TABLE",
               "CONNECTION",
-              "ACTION_OBJECT"
+              "CUSTOM_ACTION"
             ],
             "description": "Type of metadata (Optional when given identifier is ID)."
           },
