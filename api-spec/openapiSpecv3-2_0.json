@@ -14,6 +14,14 @@
       "description": "Roles for version 9.0.0.cl"
     },
     {
+      "name": "9.7.0.cl",
+      "id": "9.7.0.cl",
+      "tags": [
+        "9.7.0.cl"
+      ],
+      "description": "Roles for version 9.7.0.cl"
+    },
+    {
       "name": "9.2.0.cl",
       "id": "9.2.0.cl",
       "tags": [
@@ -4326,6 +4334,185 @@
         "responses": {
           "204": {
             "description": "Force logging out of users operation successful."
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/users/activate": {
+      "post": {
+        "operationId": "activateUser",
+        "description": " <span class=\"since-beta-tag\">Version: 9.7.0.cl or later</span>",
+        "tags": [
+          "Users",
+          "9.7.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "user_identifier": {
+                    "description": "Unique ID or name of the user.",
+                    "type": "string"
+                  },
+                  "auth_token": {
+                    "description": "Auth token for the user.",
+                    "type": "string"
+                  },
+                  "password": {
+                    "description": "New password for the user to access the account.",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "user_identifier",
+                  "auth_token",
+                  "password"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "User activated successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/users/deactivate": {
+      "post": {
+        "operationId": "deactivateUser",
+        "description": " <span class=\"since-beta-tag\">Version: 9.7.0.cl or later</span>",
+        "tags": [
+          "Users",
+          "9.7.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "user_identifier": {
+                    "description": "Unique ID or name of the user.",
+                    "type": "string"
+                  },
+                  "base_url": {
+                    "description": "Base url of the cluster.",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "user_identifier",
+                  "base_url"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "User deactivated successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseActivationURL"
+                }
+              }
+            }
           },
           "400": {
             "description": "Invalid request.",
@@ -11285,6 +11472,16 @@
             "description": "Unique identifier of the user to whom the token is issued."
           }
         }
+      },
+      "ResponseActivationURL": {
+        "type": "object",
+        "properties": {
+          "activation_link": {
+            "type": "string",
+            "description": "Activation link to activate the user."
+          }
+        },
+        "description": "The object representation with activation link."
       },
       "TagMetadataTypeInput": {
         "type": "object",
