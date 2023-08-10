@@ -2343,7 +2343,7 @@
                 "type": "object",
                 "properties": {
                   "log_type": {
-                    "description": "Name of the log type.",
+                    "description": "Name of the log type",
                     "type": "string",
                     "enum": [
                       "SECURITY_AUDIT"
