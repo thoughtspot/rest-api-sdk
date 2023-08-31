@@ -888,7 +888,7 @@
     "/api/rest/2.0/groups/search": {
       "post": {
         "operationId": "searchUserGroups",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\n\nGets a list of groups available on the ThoughtSpot system.\n\nAvailable to all users. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view all group properties.\n\nTo get details of a group, specify the group GUID or name. You can also filter the API response by group type, user name or ID, Org name or ID, roles, privileges, and group visibility.\n\nYou can also use the `pattern` attribute to search by the group name. For a wildcard match, use %.\n\nBy default, the API fetches 10 records per request. To fetch more than 10 objects at once, specify the `record_size` and set `record_offset` to `-1`.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\n\nGets a list of groups available on the ThoughtSpot system.\n\nAvailable to all users. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view all group properties.\n\nTo get details of a group, specify the group GUID or name. You can also filter the API response by group type, user name or ID, Org name or ID, roles, privileges, and group visibility.\n\nYou can also use the `pattern` attribute to search by the group name. For a wildcard match, use %.\n\n**NOTE**: By default, the API fetches 10 records per request. To fetch more than 10 objects at once, specify the `record_size` and set `record_offset` to `-1`.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Groups",
           "9.0.0.cl"
