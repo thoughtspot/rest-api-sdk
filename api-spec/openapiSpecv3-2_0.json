@@ -13066,11 +13066,11 @@
       "PrincipalsListItem": {
         "type": "object",
         "required": [
-          "identifier",
+          "id",
           "type"
         ],
         "properties": {
-          "identifier": {
+          "id": {
             "type": "string",
             "description": "Unique ID or name of the user or group."
           },
