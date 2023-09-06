@@ -8338,7 +8338,8 @@
                   "description",
                   "metadata_type",
                   "metadata_identifier",
-                  "time_zone"
+                  "time_zone",
+                  "recipient_details"
                 ]
               }
             }
@@ -11921,7 +11922,6 @@
           "id",
           "metadata",
           "name",
-          "recipient_details",
           "time_zone"
         ],
         "properties": {
