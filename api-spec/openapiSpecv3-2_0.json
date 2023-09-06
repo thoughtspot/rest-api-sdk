@@ -1516,11 +1516,7 @@
           "200": {
             "description": "Export report file of specified metadata object is successful.",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
+              "application/octet-stream": {}
             }
           },
           "400": {
@@ -1621,11 +1617,7 @@
           "200": {
             "description": "Export report file of specified metadata object is successful.",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
+              "application/octet-stream": {}
             }
           },
           "400": {
@@ -11930,6 +11922,7 @@
           "id",
           "metadata",
           "name",
+          "recipient_details",
           "time_zone"
         ],
         "properties": {
