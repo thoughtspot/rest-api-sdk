@@ -1516,7 +1516,11 @@
           "200": {
             "description": "Export report file of specified metadata object is successful.",
             "content": {
-              "application/octet-stream": {}
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
             }
           },
           "400": {
@@ -1617,7 +1621,11 @@
           "200": {
             "description": "Export report file of specified metadata object is successful.",
             "content": {
-              "application/octet-stream": {}
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
             }
           },
           "400": {
@@ -13058,11 +13066,11 @@
       "PrincipalsListItem": {
         "type": "object",
         "required": [
-          "id",
+          "identifier",
           "type"
         ],
         "properties": {
-          "id": {
+          "identifier": {
             "type": "string",
             "description": "Unique ID or name of the user or group."
           },
