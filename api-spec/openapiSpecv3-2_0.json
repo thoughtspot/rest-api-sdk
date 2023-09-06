@@ -8338,8 +8338,7 @@
                   "description",
                   "metadata_type",
                   "metadata_identifier",
-                  "time_zone",
-                  "recipient_details"
+                  "time_zone"
                 ]
               }
             }
