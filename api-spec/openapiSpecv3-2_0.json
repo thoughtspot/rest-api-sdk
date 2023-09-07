@@ -11922,6 +11922,7 @@
           "id",
           "metadata",
           "name",
+          "recipient_details",
           "time_zone"
         ],
         "properties": {
