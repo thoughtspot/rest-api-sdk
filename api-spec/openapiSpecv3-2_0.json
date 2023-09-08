@@ -2660,7 +2660,8 @@
                         "AMAZON_AURORA_MYSQL",
                         "LOOKER",
                         "AMAZON_ATHENA",
-                        "SINGLESTORE"
+                        "SINGLESTORE",
+                        "GCP_SQLSERVER"
                       ]
                     }
                   },
@@ -7086,7 +7087,8 @@
                       "AMAZON_AURORA_MYSQL",
                       "LOOKER",
                       "AMAZON_ATHENA",
-                      "SINGLESTORE"
+                      "SINGLESTORE",
+                      "GCP_SQLSERVER"
                     ]
                   },
                   "data_warehouse_config": {
@@ -11186,7 +11188,8 @@
               "AMAZON_AURORA_MYSQL",
               "LOOKER",
               "AMAZON_ATHENA",
-              "SINGLESTORE"
+              "SINGLESTORE",
+              "GCP_SQLSERVER"
             ],
             "description": "Type of data warehouse."
           },
@@ -11787,7 +11790,8 @@
               "AMAZON_AURORA_MYSQL",
               "LOOKER",
               "AMAZON_ATHENA",
-              "SINGLESTORE"
+              "SINGLESTORE",
+              "GCP_SQLSERVER"
             ],
             "description": "Type of data warehouse."
           },
