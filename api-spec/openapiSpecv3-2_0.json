@@ -4752,6 +4752,13 @@
                       "type": "string"
                     }
                   },
+                  "group_identifiers": {
+                    "description": "Add Default Groups to an Org",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
                   "operation": {
                     "description": "Type of update operation. Default operation type is ADD",
                     "default": "ADD",
