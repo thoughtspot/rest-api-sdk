@@ -2421,7 +2421,7 @@
     "/api/rest/2.0/vcs/git/config/search": {
       "post": {
         "operationId": "searchConfig",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nGets Git repository connections configured on the ThoughtSpot instance.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nGets Git repository connections configured on the ThoughtSpot instance.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Version Control",
           "9.2.0.cl"
@@ -2433,7 +2433,7 @@
                 "type": "object",
                 "properties": {
                   "org_identifiers": {
-                    "description": "   Applicable when Orgs is enabled in the cluster\n   \n\nList of Org ids or name. Provide value -1 for cluster level. Example : [\"OrgID1-or-Name1\", \"OrgID2-or-Name2\"] \n\n\n   \n\nNote: If no value is specified, then the configurations will be returned for all orgs the user has access to  <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
+                    "description": "   List of Org IDs. Provide value -1 for cluster level. Example : [\"OrgID1-or-Name1\", \"OrgID2-or-Name2\"]\n   \n\nNote:  If no org identifier is specified,then the configurations will be returned for all orgs the user has access to <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -2505,7 +2505,7 @@
     "/api/rest/2.0/vcs/git/commits/search": {
       "post": {
         "operationId": "searchCommits",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nGets a list of commits for a given metadata object.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nGets a list of commits for a given metadata object.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Version Control",
           "9.2.0.cl"
@@ -2660,10 +2660,7 @@
                         "AMAZON_AURORA_MYSQL",
                         "LOOKER",
                         "AMAZON_ATHENA",
-                        "SINGLESTORE",
-                        "GCP_SQLSERVER",
-                        "GCP_ALLOYDB_POSTGRESQL",
-                        "GCP_POSTGRESQL"
+                        "SINGLESTORE"
                       ]
                     }
                   },
@@ -3231,6 +3228,10 @@
                     "items": {
                       "type": "string"
                     }
+                  },
+                  "jwt_user_options": {
+                    "description": "JWT user options to create a JWT token given the payload.",
+                    "$ref": "#/components/schemas/JWT_User_Options"
                   }
                 },
                 "required": [
@@ -3358,6 +3359,10 @@
                     "items": {
                       "type": "string"
                     }
+                  },
+                  "jwt_user_options": {
+                    "description": "JWT user options to create a JWT token given the payload.",
+                    "$ref": "#/components/schemas/JWT_User_Options"
                   }
                 },
                 "required": [
@@ -4749,13 +4754,6 @@
                   },
                   "user_identifiers": {
                     "description": "Add Users to an Org",
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    }
-                  },
-                  "group_identifiers": {
-                    "description": "Add Default Groups to an Org",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -6334,7 +6332,7 @@
     "/api/rest/2.0/vcs/git/config/create": {
       "post": {
         "operationId": "createConfig",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nAllows you to connect a ThoughtSpot instance to a Git repository.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\nYou can use this API endpoint to connect your ThoughtSpot development and production environments to the development and production branches of a Git repository.\n\nBefore using this endpoint to connect your ThoughtSpot instance to a Git repository, check the following prerequisites:\n\n* You have a Git repository. If you are using GitHub, make sure you have a valid account and an access token to connect ThoughtSpot to GitHub. For information about generating a token, see [GitHub Documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).\n\n* Your access token has `repo` scope that grants full access to public and private repositories.\n* Your Git repository has a branch that can be configured as a default branch in ThoughtSpot.\n\nFor more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nAllows you to connect a ThoughtSpot instance to a Git repository.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\nYou can use this API endpoint to connect your ThoughtSpot development and production environments to the development and production branches of a Git repository.\n\nBefore using this endpoint to connect your ThoughtSpot instance to a Git repository, check the following prerequisites:\n\n* You have a Git repository. If you are using GitHub, make sure you have a valid account and an access token to connect ThoughtSpot to GitHub. For information about generating a token, see [GitHub Documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).\n\n* Your access token has `repo` scope that grants full access to public and private repositories.\n* Your Git repository has a branch that can be configured as a default branch in ThoughtSpot.\n\nFor more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Version Control",
           "9.2.0.cl"
@@ -6358,7 +6356,7 @@
                     "type": "string"
                   },
                   "org_identifier": {
-                    "description": "   Applicable when Orgs is enabled in the cluster\n   \n\nList of Org ids or name. Provide value -1 for cluster level. Example : [\"OrgID1-or-Name1\", \"OrgID2-or-Name2\"] \n\n\n   \n\nNote: If no value is specified, then the configurations will be returned for all orgs the user has access to  <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
+                    "description": "   Unique identifier of the Org. If no value is provided, the user will be created in the Org associated with the login session. Provide value -1 for cluster level. Example : OrgID1-or-Name1\n   \n\nNote: If no org identifier is specified, then current org identifier of the user will be considered <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
                     "type": "string"
                   },
                   "branch_names": {
@@ -6461,7 +6459,7 @@
     "/api/rest/2.0/vcs/git/config/update": {
       "post": {
         "operationId": "updateConfig",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nUpdates Git repository configuration settings.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nUpdates Git repository configuration settings.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Version Control",
           "9.2.0.cl"
@@ -6481,7 +6479,7 @@
                     "type": "string"
                   },
                   "org_identifier": {
-                    "description": "   Applicable when Orgs is enabled in the cluster\n   \n\nList of Org ids or name. Provide value -1 for cluster level. Example : [\"OrgID1-or-Name1\", \"OrgID2-or-Name2\"] \n\n\n   \n\nNote: If no value is specified, then the configurations will be returned for all orgs the user has access to  <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
+                    "description": "   Unique identifier of the Org. If no value is provided, the user will be created in the Org associated with the login session. Provide value -1 for cluster level. Example : OrgID1-or-Name1\n   \n\nNote: If no org identifier is specified, then current org identifier of the user will be considered  <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
                     "type": "string"
                   },
                   "branch_names": {
@@ -6577,7 +6575,7 @@
     "/api/rest/2.0/vcs/git/config/delete": {
       "post": {
         "operationId": "deleteConfig",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nDeletes Git repository configuration from your ThoughtSpot instance.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nDeletes Git repository configuration from your ThoughtSpot instance.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Version Control",
           "9.2.0.cl"
@@ -6589,7 +6587,7 @@
                 "type": "object",
                 "properties": {
                   "cluster_level": {
-                    "description": "   Applicable when Orgs is enabled in the cluster\n   \n\nIndicator to consider cluster level or org level config. Set it to false to delete configuration from current org. If set to true, then the configuration at cluster level and orgs that inherited the configuration from cluster level will be deleted.  <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
+                    "description": "Consider cluster level or org level config. Set it to false to delete configuration from current org. If set to true, then the configuration at cluster level and orgs that inherited the configuration from cluster level will be deleted. <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
                     "type": "boolean",
                     "nullable": true
                   }
@@ -6649,7 +6647,7 @@
     "/api/rest/2.0/vcs/git/branches/commit": {
       "post": {
         "operationId": "commitBranch",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nCommits TML files of metadata objects to the Git branch configured on your instance.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\nBefore using this endpoint to push your commits:\n\n* Enable Git integration on your instance.\n* Make sure the Git repository and branch details are configured on your instance.\n\nFor more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nCommits TML files of metadata objects to the Git branch configured on your instance.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\nBefore using this endpoint to push your commits:\n\n* Enable Git integration on your instance.\n* Make sure the Git repository and branch details are configured on your instance.\n\nFor more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Version Control",
           "9.2.0.cl"
@@ -6749,7 +6747,7 @@
     "/api/rest/2.0/vcs/git/commits/{commit_id}/revert": {
       "post": {
         "operationId": "revertCommit",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nReverts TML objects to a previous commit specified in the API request.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\nIn the API request, specify the `commit_id`. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.\n\nBy default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nReverts TML objects to a previous commit specified in the API request.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\nIn the API request, specify the `commit_id`. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.\n\nBy default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Version Control",
           "9.2.0.cl"
@@ -6853,7 +6851,7 @@
     "/api/rest/2.0/vcs/git/branches/validate": {
       "post": {
         "operationId": "validateMerge",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nValidates the content of your source branch against the objects in your destination environment.\n\nBefore merging content from your source branch to the destination branch, run this API operation from your destination environment and ensure that the changes from the source branch function in the destination environment.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nValidates the content of your source branch against the objects in your destination environment.\n\nBefore merging content from your source branch to the destination branch, run this API operation from your destination environment and ensure that the changes from the source branch function in the destination environment.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Version Control",
           "9.2.0.cl"
@@ -6943,7 +6941,7 @@
     "/api/rest/2.0/vcs/git/commits/deploy": {
       "post": {
         "operationId": "deployCommit",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nAllows you to deploy a commit and publish TML content to your ThoughtSpot instance.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\nThe API deploys the head of the branch unless a `commit_id` is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nAllows you to deploy a commit and publish TML content to your ThoughtSpot instance.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\nThe API deploys the head of the branch unless a `commit_id` is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Version Control",
           "9.2.0.cl"
@@ -6977,8 +6975,7 @@
                     "type": "string",
                     "enum": [
                       "ALL_OR_NONE",
-                      "PARTIAL",
-                      "VALIDATE_ONLY"
+                      "PARTIAL"
                     ]
                   }
                 },
@@ -7097,10 +7094,7 @@
                       "AMAZON_AURORA_MYSQL",
                       "LOOKER",
                       "AMAZON_ATHENA",
-                      "SINGLESTORE",
-                      "GCP_SQLSERVER",
-                      "GCP_ALLOYDB_POSTGRESQL",
-                      "GCP_POSTGRESQL"
+                      "SINGLESTORE"
                     ]
                   },
                   "data_warehouse_config": {
@@ -11200,10 +11194,7 @@
               "AMAZON_AURORA_MYSQL",
               "LOOKER",
               "AMAZON_ATHENA",
-              "SINGLESTORE",
-              "GCP_SQLSERVER",
-              "GCP_ALLOYDB_POSTGRESQL",
-              "GCP_POSTGRESQL"
+              "SINGLESTORE"
             ],
             "description": "Type of data warehouse."
           },
@@ -11484,6 +11475,33 @@
             "description": "Unique identifier of the user to whom the token is issued."
           }
         }
+      },
+      "JWT_User_Options": {
+        "type": "object",
+        "properties": {
+          "parameters": {
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/JWT_Parameter_Filter"
+                },
+                {
+                  "$ref": "#/components/schemas/JWT_Parameter_Sort"
+                },
+                {
+                  "$ref": "#/components/schemas/JWT_Parameter_Override"
+                }
+              ]
+            }
+          },
+          "metadata": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/JWT_Metadata_Object"
+            }
+          }
+        },
+        "description": "JWT user options to create a JWT token given the payload."
       },
       "ResponseActivationURL": {
         "type": "object",
@@ -11804,10 +11822,7 @@
               "AMAZON_AURORA_MYSQL",
               "LOOKER",
               "AMAZON_ATHENA",
-              "SINGLESTORE",
-              "GCP_SQLSERVER",
-              "GCP_ALLOYDB_POSTGRESQL",
-              "GCP_POSTGRESQL"
+              "SINGLESTORE"
             ],
             "description": "Type of data warehouse."
           },
@@ -12575,6 +12590,40 @@
           }
         }
       },
+      "JWT_Parameter": {
+        "type": "object",
+        "properties": {
+          "runtime_filter": {
+            "type": "object",
+            "description": "Runtime filter parameter type in JWT."
+          },
+          "runtime_sort": {
+            "type": "object",
+            "description": "Runtime sort parameter type in JWT."
+          },
+          "runtime_param_override": {
+            "type": "object",
+            "description": "Runtime param override type in JWT."
+          }
+        },
+        "description": "List of runtime parameters need to set during the session."
+      },
+      "JWT_Metadata_Object": {
+        "type": "object",
+        "properties": {
+          "identifier": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "LIVEBOARD",
+              "ANSWER"
+            ]
+          }
+        },
+        "description": "Metadata objects."
+      },
       "CommitFileType": {
         "type": "object",
         "required": [
@@ -13312,6 +13361,36 @@
             "description": "Determines if the table is linked"
           }
         }
+      },
+      "JWT_Parameter_Filter": {
+        "type": "object",
+        "properties": {
+          "runtime_filter": {
+            "type": "object",
+            "description": "Runtime filter parameter type in JWT."
+          }
+        },
+        "description": "List of runtime parameters need to set during the session."
+      },
+      "JWT_Parameter_Sort": {
+        "type": "object",
+        "properties": {
+          "runtime_sort": {
+            "type": "object",
+            "description": "Runtime sort parameter type in JWT."
+          }
+        },
+        "description": "List of runtime parameters need to set during the session."
+      },
+      "JWT_Parameter_Override": {
+        "type": "object",
+        "properties": {
+          "runtime_param_override": {
+            "type": "object",
+            "description": "Runtime param override type in JWT."
+          }
+        },
+        "description": "List of runtime parameters need to set during the session."
       }
     },
     "securitySchemes": {
