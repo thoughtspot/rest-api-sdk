@@ -2661,7 +2661,9 @@
                         "LOOKER",
                         "AMAZON_ATHENA",
                         "SINGLESTORE",
-                        "GCP_SQLSERVER"
+                        "GCP_SQLSERVER",
+                        "GCP_ALLOYDB_POSTGRESQL",
+                        "GCP_POSTGRESQL"
                       ]
                     }
                   },
@@ -7096,7 +7098,9 @@
                       "LOOKER",
                       "AMAZON_ATHENA",
                       "SINGLESTORE",
-                      "GCP_SQLSERVER"
+                      "GCP_SQLSERVER",
+                      "GCP_ALLOYDB_POSTGRESQL",
+                      "GCP_POSTGRESQL"
                     ]
                   },
                   "data_warehouse_config": {
@@ -11197,7 +11201,9 @@
               "LOOKER",
               "AMAZON_ATHENA",
               "SINGLESTORE",
-              "GCP_SQLSERVER"
+              "GCP_SQLSERVER",
+              "GCP_ALLOYDB_POSTGRESQL",
+              "GCP_POSTGRESQL"
             ],
             "description": "Type of data warehouse."
           },
@@ -11799,7 +11805,9 @@
               "LOOKER",
               "AMAZON_ATHENA",
               "SINGLESTORE",
-              "GCP_SQLSERVER"
+              "GCP_SQLSERVER",
+              "GCP_ALLOYDB_POSTGRESQL",
+              "GCP_POSTGRESQL"
             ],
             "description": "Type of data warehouse."
           },
