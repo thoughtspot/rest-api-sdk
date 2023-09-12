@@ -3231,6 +3231,10 @@
                     "items": {
                       "type": "string"
                     }
+                  },
+                  "jwt_user_options": {
+                    "description": "JWT user options to create a JWT token given the payload.",
+                    "$ref": "#/components/schemas/JWT_User_Options"
                   }
                 },
                 "required": [
@@ -3358,6 +3362,10 @@
                     "items": {
                       "type": "string"
                     }
+                  },
+                  "jwt_user_options": {
+                    "description": "JWT user options to create a JWT token given the payload.",
+                    "$ref": "#/components/schemas/JWT_User_Options"
                   }
                 },
                 "required": [
@@ -11485,6 +11493,33 @@
           }
         }
       },
+      "JWT_User_Options": {
+        "type": "object",
+        "properties": {
+          "parameters": {
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/Runtime_Filter"
+                },
+                {
+                  "$ref": "#/components/schemas/Runtime_Sort"
+                },
+                {
+                  "$ref": "#/components/schemas/Runtime_Param_Override"
+                }
+              ]
+            }
+          },
+          "metadata": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/JWT_Metadata_Object"
+            }
+          }
+        },
+        "description": "JWT user options to create a JWT token given the payload."
+      },
       "ResponseActivationURL": {
         "type": "object",
         "properties": {
@@ -12575,6 +12610,40 @@
           }
         }
       },
+      "JWT_Parameter": {
+        "type": "object",
+        "properties": {
+          "runtime_filter": {
+            "type": "object",
+            "description": "Runtime filter parameter type in JWT."
+          },
+          "runtime_sort": {
+            "type": "object",
+            "description": "Runtime sort parameter type in JWT."
+          },
+          "runtime_param_override": {
+            "type": "object",
+            "description": "Runtime param override type in JWT."
+          }
+        },
+        "description": "List of runtime parameters need to set during the session."
+      },
+      "JWT_Metadata_Object": {
+        "type": "object",
+        "properties": {
+          "identifier": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "LIVEBOARD",
+              "ANSWER"
+            ]
+          }
+        },
+        "description": "Metadata objects."
+      },
       "CommitFileType": {
         "type": "object",
         "required": [
@@ -13312,6 +13381,36 @@
             "description": "Determines if the table is linked"
           }
         }
+      },
+      "Runtime_Filter": {
+        "type": "object",
+        "properties": {
+          "runtime_filter": {
+            "type": "object",
+            "description": "Runtime filter parameter type in JWT."
+          }
+        },
+        "description": "List of runtime parameters need to set during the session."
+      },
+      "Runtime_Sort": {
+        "type": "object",
+        "properties": {
+          "runtime_sort": {
+            "type": "object",
+            "description": "Runtime sort parameter type in JWT."
+          }
+        },
+        "description": "List of runtime parameters need to set during the session."
+      },
+      "Runtime_Param_Override": {
+        "type": "object",
+        "properties": {
+          "runtime_param_override": {
+            "type": "object",
+            "description": "Runtime param override type in JWT."
+          }
+        },
+        "description": "List of runtime parameters need to set during the session."
       }
     },
     "securitySchemes": {
