@@ -72,7 +72,7 @@ document.getElementsByClassName('portal-header')[0].style.display = 'none';
 const setAPIMaticPortalConfig = () => {
   APIMaticDevPortal.ready(({ setConfig }) => {
     console.log('url changes runs');
-     window.parent.postMessage({ type: "url-change", data: queryParams }, "*");
+     window.parent.postMessage({ type: "url-change", data: undefined }, "*");
     isApiMaticPortalReady = true;
     _setConfig = setConfig;
     console.log("playground is ready")
