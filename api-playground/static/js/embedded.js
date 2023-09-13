@@ -81,7 +81,7 @@ const setAPIMaticPortalConfig = () => {
         window.parent.postMessage({ type: 'api-playground-ready' }, '*', [
         channel.port2,
       ]);
-    }, 5000)
+    }, 100000)
     
   });
 };
