@@ -74,7 +74,7 @@ const setAPIMaticPortalConfig = () => {
     isApiMaticPortalReady = true;
     _setConfig = setConfig;
     console.log("playground is ready")
-    setTimeOut(() => {
+    setTimeout(() => {
         window.parent.postMessage({ type: 'api-playground-ready' }, '*', [
         channel.port2,
       ]);
