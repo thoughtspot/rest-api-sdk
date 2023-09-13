@@ -52,6 +52,14 @@
         "9.6.0.cl"
       ],
       "description": "Roles for version 9.6.0.cl"
+    },
+    {
+      "name": "9.8.0.cl",
+      "id": "9.8.0.cl",
+      "tags": [
+        "9.8.0.cl"
+      ],
+      "description": "Roles for version 9.8.0.cl"
     }
   ],
   "tags": [],
@@ -9662,6 +9670,494 @@
           }
         }
       }
+    },
+    "/api/rest/2.0/dbt/dbt-connection": {
+      "post": {
+        "operationId": "dbtConnection",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.8.0.cl or later</span>\n\nCreates a DBT connection object in ThoughtSpot.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege.\n\n#### About create DBT connection\nDBT connection in ThoughtSpot is used by the user to define DBT credentials for cloud . The API needs  embrace connection, embrace database name, DBT url ,import type, DBT account identifier , DBT project identifier, DBT access token and environment details to create a connection object. To know more about DBT, see ThoughtSpot Product Documentation.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "DBT",
+          "9.8.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "connection_name": {
+                    "description": "Name of the connection.",
+                    "type": "string"
+                  },
+                  "database_name": {
+                    "description": "Name of the Database.",
+                    "type": "string"
+                  },
+                  "import_type": {
+                    "description": "Mention type of Import",
+                    "default": "DBT_CLOUD",
+                    "type": "string",
+                    "enum": [
+                      "DBT_CLOUD"
+                    ]
+                  },
+                  "access_token": {
+                    "description": "Access token is mandatory when Import_Type is DBT_CLOUD.",
+                    "type": "string"
+                  },
+                  "dbt_url": {
+                    "description": "DBT URL is mandatory when Import_Type is DBT_CLOUD.",
+                    "type": "string"
+                  },
+                  "account_id": {
+                    "description": "Account ID is mandatory when Import_Type is DBT_CLOUD",
+                    "type": "string"
+                  },
+                  "project_id": {
+                    "description": "Project ID is mandatory when Import_Type is DBT_CLOUD",
+                    "type": "string"
+                  },
+                  "dbt_env_id": {
+                    "description": "DBT Environment ID\"",
+                    "type": "string"
+                  },
+                  "project_name": {
+                    "description": "Name of the project",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "connection_name",
+                  "database_name"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Succesfully created DBT Connection.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/dbt/generate-tml": {
+      "post": {
+        "operationId": "generateTml",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.8.0.cl or later</span>\n\nGenerate required table and worksheet and import them.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege, along with an existing DBT connection.\n\n#### About generate TML\nModels and Worksheets to be imported can be selected by the user as part of the API.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "DBT",
+          "9.8.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "dbt_connection_identifier": {
+                    "description": "Unique ID of the DBT connection.",
+                    "type": "string"
+                  },
+                  "model_tables": {
+                    "description": "List of Models and their respective Tables",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/ModelTableList"
+                    }
+                  },
+                  "import_worksheets": {
+                    "description": "Mention the worksheet tmls to import",
+                    "type": "string",
+                    "enum": [
+                      "ALL",
+                      "NONE",
+                      "SELECTED"
+                    ]
+                  },
+                  "worksheets": {
+                    "description": "List of worksheets is mandatory when import_Worksheets is type SELECTED",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "dbt_connection_identifier",
+                  "model_tables",
+                  "import_worksheets"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Required Table and Worksheet TML's are successfully generated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/dbt/generate-sync-tml": {
+      "post": {
+        "operationId": "generateSyncTml",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.8.0.cl or later</span>\n\nResynchronize the existing list of models, tables, worksheet tml’s and import them to Thoughtspot based on the DBT connection object.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege, along with an existing DBT connection.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "DBT",
+          "9.8.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "dbt_connection_identifier": {
+                    "description": "Unique ID of the DBT connection.",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "dbt_connection_identifier"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Sync Table and Worksheet TML's are successfully generated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/dbt/search": {
+      "post": {
+        "operationId": "dbtSearch",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.8.0.cl or later</span>\n\nGets a list of DBT connection objects by user and organization, available on the ThoughtSpot system.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege\n\n#### About search DBT connection\nTo get details of a specific DBT connection identifier, database connection identifier, database connection name, database name, project name, project identifier, environment identifier , import type and author.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "DBT",
+          "9.8.0.cl"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Retrieved list of DBT connections successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/dbt/{dbt_connection_identifier}": {
+      "post": {
+        "operationId": "updateDbtConnection",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.8.0.cl or later</span>\n\nUpdates a DBT connection object.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege, along with an existing DBT connection.\n\n#### About update DBT connection\nYou can modify DBT connection object properties such as embrace connection name, embrace database name,import type, account identifier, access token, project identifier and environment  settings.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "DBT",
+          "9.8.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "connection_name": {
+                    "description": "Name of the connection.",
+                    "type": "string"
+                  },
+                  "database_name": {
+                    "description": "Name of the Database.",
+                    "type": "string"
+                  },
+                  "import_type": {
+                    "description": "Mention type of Import",
+                    "default": "DBT_CLOUD",
+                    "type": "string",
+                    "enum": [
+                      "DBT_CLOUD"
+                    ]
+                  },
+                  "access_token": {
+                    "description": "Access token is mandatory when Import_Type is DBT_CLOUD.",
+                    "type": "string"
+                  },
+                  "dbt_url": {
+                    "description": "DBT URL is mandatory when Import_Type is DBT_CLOUD.",
+                    "type": "string"
+                  },
+                  "account_id": {
+                    "description": "Account ID is mandatory when Import_Type is DBT_CLOUD",
+                    "type": "string"
+                  },
+                  "project_id": {
+                    "description": "Project ID is mandatory when Import_Type is DBT_CLOUD",
+                    "type": "string"
+                  },
+                  "dbt_env_id": {
+                    "description": "DBT Environment ID\"",
+                    "type": "string"
+                  },
+                  "project_name": {
+                    "description": "Name of the project",
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dbt_connection_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique ID of the DBT Connection."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "DBT Connection successfully updated."
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -12281,6 +12777,22 @@
           }
         },
         "description": "Default Custom action configuration. This includes the custom action's visibility across all visualizations and Answers. By default, a custom action is added to all visualizations and Answers."
+      },
+      "ModelTableList": {
+        "type": "object",
+        "properties": {
+          "model_name": {
+            "type": "string",
+            "description": "Name of the Model."
+          },
+          "tables": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of Tables."
+          }
+        }
       },
       "FavoriteMetadataItem": {
         "type": "object",
