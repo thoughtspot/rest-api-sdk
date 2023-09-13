@@ -1286,7 +1286,7 @@
                 "type": "object",
                 "properties": {
                   "metadata_identifier": {
-                    "description": "ID or name of an Liveboard.",
+                    "description": "ID or name of the Liveboard.",
                     "type": "string"
                   },
                   "visualization_identifiers": {
