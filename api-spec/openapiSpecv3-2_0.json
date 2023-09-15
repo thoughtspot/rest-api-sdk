@@ -36,6 +36,14 @@
         "9.4.0.cl"
       ],
       "description": "Roles for version 9.4.0.cl"
+    },
+    {
+      "name": "9.6.0.cl",
+      "id": "9.6.0.cl",
+      "tags": [
+        "9.6.0.cl"
+      ],
+      "description": "Roles for version 9.6.0.cl"
     }
   ],
   "tags": [],
@@ -2744,7 +2752,7 @@
     "/api/rest/2.0/roles/search": {
       "post": {
         "operationId": "searchRoles",
-        "description": "Gets Roles configured on a ThoughtSpot instance.\nRequires cluster Administration, Role Administration or\nGroup Administration privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>\n\nGets Roles configured on a ThoughtSpot instance.\nRequires cluster Administration, Role Administration or\nGroup Administration privileges.\n\n**Note**: The Role-Based Access Control (RBAC) feature is in Beta and turned off by default. To enable this feature on your instance, contact ThoughtSpot Support.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Roles",
           "9.5.0.cl"
@@ -2909,10 +2917,10 @@
     "/api/rest/2.0/customization/custom-actions/search": {
       "post": {
         "operationId": "searchCustomActions",
-        "description": "\nSearch custom actions\n\nEquivalent to POST /customization/custom-actions/search <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>\n\nGets custom actions configured on the cluster.\n\nRequires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.6.0.cl or later</span>\n\nGets custom actions configured on the cluster.\n\nRequires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Custom Action",
-          "9.5.0.cl"
+          "9.6.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -6995,7 +7003,7 @@
     "/api/rest/2.0/roles/create": {
       "post": {
         "operationId": "createRole",
-        "description": "Creates a Role.\nRequires cluster Administration or Role Administration privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>\n\nCreates a Role.\nRequires cluster Administration or Role Administration privileges.\n\n**Note**: The Role-Based Access Control (RBAC) feature is in Beta and turned off by default. To enable this feature on your instance, contact ThoughtSpot Support.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Roles",
           "9.5.0.cl"
@@ -7109,7 +7117,7 @@
     "/api/rest/2.0/roles/{role_identifier}/update": {
       "post": {
         "operationId": "updateRole",
-        "description": "Updates a Role.\nRequires cluster Administration or Role Administration privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>\n\nUpdates a Role.\nRequires cluster Administration or Role Administration privileges.\n\n**Note**: The Role-Based Access Control (RBAC) feature is in Beta and turned off by default. To enable this feature on your instance, contact ThoughtSpot Support.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Roles",
           "9.5.0.cl"
@@ -7233,7 +7241,7 @@
     "/api/rest/2.0/roles/{role_identifier}/delete": {
       "post": {
         "operationId": "deleteRole",
-        "description": "Deletes a Role.\nRequires cluster Administration or Role Administration privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>\n\nDeletes a Role.\nRequires cluster Administration or Role Administration privileges.\n\n**Note**: The Role-Based Access Control (RBAC) feature is in Beta and turned off by default. To enable this feature on your instance, contact ThoughtSpot Support.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Roles",
           "9.5.0.cl"
@@ -7738,10 +7746,10 @@
     "/api/rest/2.0/customization/custom-actions": {
       "post": {
         "operationId": "createCustomAction",
-        "description": "\nCreate a custom action\n\nEquivalent to POST /customization/custom-actions <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>\n\nCreates a custom action that appears as a menu action on a saved Answer or Liveboard visualization.\n\nRequires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n#### Usage Guidelines\n\nThe API lets you create the following types of custom actions:\n\n* URL-based action     \n  Allows pushing data to an external URL.\n* Callback action        \n  Triggers a callback to the host application and initiates a response payload on an embedded ThoughtSpot instance.\n\nBy default, custom actions are visible to only administrator or developer users. To make a custom action available to other users, and specify the groups in `group_identifiers`.\n\nBy default, the custom action is set as a _global_ action on all visualizations and saved Answers. To assign a custom action to specific Liveboard visualization, saved Answer, or Worksheet, set `visibility` to `false` in `default_action_config` property and specify the GUID or name of the object in `associate_metadata`.\n\nFor more information, see [Custom actions](https://developers.thoughtspot.com/docs/?pageid=custom-action-intro).\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.6.0.cl or later</span>\n\nCreates a custom action that appears as a menu action on a saved Answer or Liveboard visualization.\n\nRequires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n#### Usage Guidelines\n\nThe API lets you create the following types of custom actions:\n\n* URL-based action     \n  Allows pushing data to an external URL.\n* Callback action        \n  Triggers a callback to the host application and initiates a response payload on an embedded ThoughtSpot instance.\n\nBy default, custom actions are visible to only administrator or developer users. To make a custom action available to other users, and specify the groups in `group_identifiers`.\n\nBy default, the custom action is set as a _global_ action on all visualizations and saved Answers. To assign a custom action to specific Liveboard visualization, saved Answer, or Worksheet, set `visibility` to `false` in `default_action_config` property and specify the GUID or name of the object in `associate_metadata`.\n\nFor more information, see [Custom actions](https://developers.thoughtspot.com/docs/?pageid=custom-action-intro).\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Custom Action",
-          "9.5.0.cl"
+          "9.6.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -7861,10 +7869,10 @@
     "/api/rest/2.0/customization/custom-actions/{custom_action_identifier}/update": {
       "post": {
         "operationId": "updateCustomAction",
-        "description": "\nUpdate a custom action for the current organization.\nEquivalent to PUT /customization/custom-actions/{custom_action_identifier} <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>\n\nUpdates a custom action.\n\nRequires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n#### Usage Guidelines\n\nThe API allows you to modify the following properties:\n\n* Name of the custom action\n* Action availability to groups\n* Association to metadata objects\n* Authentication settings for a URL-based action\n\nFor more information, see [Custom actions](https://developers.thoughtspot.com/docs/?pageid=custom-action-intro).\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.6.0.cl or later</span>\n\nUpdates a custom action.\n\nRequires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n#### Usage Guidelines\n\nThe API allows you to modify the following properties:\n\n* Name of the custom action\n* Action availability to groups\n* Association to metadata objects\n* Authentication settings for a URL-based action\n\nFor more information, see [Custom actions](https://developers.thoughtspot.com/docs/?pageid=custom-action-intro).\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Custom Action",
-          "9.5.0.cl"
+          "9.6.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -7964,10 +7972,10 @@
     "/api/rest/2.0/customization/custom-actions/{custom_action_identifier}/delete": {
       "post": {
         "operationId": "deleteCustomAction",
-        "description": "\nDeletes a custom action from the current organization\n\nEquivalent to DELETE /customization/custom-actions/{custom_action_identifier} <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>\n\nRemoves the custom action specified in the API request.\n\nRequires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.6.0.cl or later</span>\n\nRemoves the custom action specified in the API request.\n\nRequires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Custom Action",
-          "9.5.0.cl"
+          "9.6.0.cl"
         ],
         "parameters": [
           {
