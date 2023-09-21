@@ -13340,7 +13340,7 @@
             "description": "List of user or groups to subscribe for the scheduled job notifications."
           }
         },
-        "description": "Recipient configuration which includes email address, ID or name of the users and groups."
+        "description": "Recipient configuration which includes email address, ID or name of the users and groups. "
       },
       "ResponseScheduleRun": {
         "type": "object",
