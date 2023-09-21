@@ -245,7 +245,6 @@ models/all.ts
 package.json
 rxjsStub.ts
 servers.ts
-tests/DBTApiTest.ts
 tsconfig.json
 types/ObjectParamAPI.ts
 types/ObservableAPI.ts

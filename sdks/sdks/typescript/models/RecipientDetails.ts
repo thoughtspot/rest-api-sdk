@@ -14,7 +14,7 @@ import { PrincipalsListItem } from '../models/PrincipalsListItem';
 import { HttpFile } from '../http/http';
 
 /**
-* Recipient configuration which includes email address, ID or name of the users and groups.
+* Recipient configuration which includes email address, ID or name of the users and groups. 
 */
 export class RecipientDetails {
     /**

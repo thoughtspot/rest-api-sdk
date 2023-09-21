@@ -1,6 +1,6 @@
 # ThoughtSpotRestApiSdk.OrgsApi
 
-All URIs are relative to the basePath
+All URIs are relative to *https://localhost:443*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------

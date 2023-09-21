@@ -40,27 +40,39 @@ exports.createBearerAuthenticationConfig = void 0;
 var configuration_1 = require("../configuration");
 var servers_1 = require("../servers");
 var PromiseAPI_1 = require("../types/PromiseAPI");
-var createBearerAuthenticationConfig = function (url, params) {
+var createBearerAuthenticationConfig = function (url, paramOrTokenProvider) {
     var serverConfig = new servers_1.ServerConfiguration(url, {});
     var config = (0, configuration_1.createConfiguration)({
         baseServer: serverConfig,
     });
     var authApiClient = new PromiseAPI_1.PromiseAuthenticationApi(config);
+    var configTokenProvider;
+    if (paramOrTokenProvider.hasOwnProperty("username")) {
+        configTokenProvider = {
+            getToken: function () { return __awaiter(void 0, void 0, void 0, function () {
+                var token;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4, authApiClient.getFullAccessToken(paramOrTokenProvider)];
+                        case 1:
+                            token = (_a.sent()).token;
+                            return [2, token];
+                    }
+                });
+            }); },
+        };
+    }
+    else if (typeof paramOrTokenProvider === "function") {
+        configTokenProvider = {
+            getToken: paramOrTokenProvider,
+        };
+    }
+    else {
+        throw new Error("Pass a proper GetFullAccessTokenRequest or a function which returns a token");
+    }
     var authConfig = {
         bearerAuth: {
-            tokenProvider: {
-                getToken: function () { return __awaiter(void 0, void 0, void 0, function () {
-                    var token;
-                    return __generator(this, function (_a) {
-                        switch (_a.label) {
-                            case 0: return [4, authApiClient.getFullAccessToken(params)];
-                            case 1:
-                                token = (_a.sent()).token;
-                                return [2, token];
-                        }
-                    });
-                }); },
-            },
+            tokenProvider: configTokenProvider,
         },
     };
     var globalConfig = (0, configuration_1.createConfiguration)({
