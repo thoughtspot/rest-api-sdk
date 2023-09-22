@@ -259,9 +259,19 @@
                         "SYNCMANAGEMENT",
                         "CAN_CREATE_CATALOG",
                         "DISABLE_PINBOARD_CREATION",
-                        "ENABLESPOTAPPCREATION",
                         "LIVEBOARD_VERIFIER",
-                        "PREVIEW_THOUGHTSPOT_SAGE"
+                        "ENABLESPOTAPPCREATION",
+                        "PREVIEW_THOUGHTSPOT_SAGE",
+                        "APPLICATION_ADMINISTRATION",
+                        "SYSTEM_INFO_ADMINISTRATION",
+                        "ORG_ADMINISTRATION",
+                        "ROLE_ADMINISTRATION",
+                        "AUTHENTICATION_ADMINISTRATION",
+                        "BILLING_INFO_ADMINISTRATION",
+                        "CAN_MANAGE_CUSTOM_CALENDAR",
+                        "CAN_CREATE_OR_EDIT_CONNECTIONS",
+                        "CAN_CONFIGURE_CONNECTIONS",
+                        "CAN_MANAGE_WORKSHEET_VIEWS_TABLES"
                       ]
                     }
                   },
@@ -956,9 +966,19 @@
                         "SYNCMANAGEMENT",
                         "CAN_CREATE_CATALOG",
                         "DISABLE_PINBOARD_CREATION",
-                        "ENABLESPOTAPPCREATION",
                         "LIVEBOARD_VERIFIER",
-                        "PREVIEW_THOUGHTSPOT_SAGE"
+                        "ENABLESPOTAPPCREATION",
+                        "PREVIEW_THOUGHTSPOT_SAGE",
+                        "APPLICATION_ADMINISTRATION",
+                        "SYSTEM_INFO_ADMINISTRATION",
+                        "ORG_ADMINISTRATION",
+                        "ROLE_ADMINISTRATION",
+                        "AUTHENTICATION_ADMINISTRATION",
+                        "BILLING_INFO_ADMINISTRATION",
+                        "CAN_MANAGE_CUSTOM_CALENDAR",
+                        "CAN_CREATE_OR_EDIT_CONNECTIONS",
+                        "CAN_CONFIGURE_CONNECTIONS",
+                        "CAN_MANAGE_WORKSHEET_VIEWS_TABLES"
                       ]
                     }
                   },
