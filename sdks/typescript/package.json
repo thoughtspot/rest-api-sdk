@@ -25,7 +25,8 @@
   "typings": "./dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "prepare": "npm run build"
+    "prepare": "npm run build",
+    "test" : "ts-mocha ./tests/ThoughtSpotRestApiTest.ts --timeout 6000"
   },
   "dependencies": {
     "whatwg-fetch": "^3.0.0",
