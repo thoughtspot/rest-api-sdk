@@ -28,7 +28,7 @@ import { User } from '../models/User';
 export class UsersApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     *  <span class=\"since-beta-tag\">Version: 9.7.0.cl or later</span>
+     *  Version: 9.7.0.cl or later
      * @param activateUserRequest 
      */
     public async activateUser(activateUserRequest: ActivateUserRequest, _options?: Configuration): Promise<RequestContext> {
@@ -78,7 +78,7 @@ export class UsersApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     *   <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>  Updates the current password of the user.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.     #### Endpoint URL 
+     *   Version: 9.0.0.cl or later  Updates the current password of the user.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.     #### Endpoint URL 
      * @param changeUserPasswordRequest 
      */
     public async changeUserPassword(changeUserPasswordRequest: ChangeUserPasswordRequest, _options?: Configuration): Promise<RequestContext> {
@@ -128,7 +128,7 @@ export class UsersApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     *   <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>  Creates a user in ThoughtSpot.  The API endpoint allows you to configure several user properties such as email address, account status, share notification preferences, and sharing visibility. You can provision the user to [groups](https://docs.thoughtspot.com/cloud/latest/groups-privileges) and [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview). You can also add Liveboard, Answer, and Worksheet objects to the user’s favorites list, assign a default Liveboard for the user, and set user preferences.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.     #### Endpoint URL 
+     *   Version: 9.0.0.cl or later  Creates a user in ThoughtSpot.  The API endpoint allows you to configure several user properties such as email address, account status, share notification preferences, and sharing visibility. You can provision the user to [groups](https://docs.thoughtspot.com/cloud/latest/groups-privileges) and [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview). You can also add Liveboard, Answer, and Worksheet objects to the user’s favorites list, assign a default Liveboard for the user, and set user preferences.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.     #### Endpoint URL 
      * @param createUserRequest 
      */
     public async createUser(createUserRequest: CreateUserRequest, _options?: Configuration): Promise<RequestContext> {
@@ -178,7 +178,7 @@ export class UsersApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     *  <span class=\"since-beta-tag\">Version: 9.7.0.cl or later</span>
+     *  Version: 9.7.0.cl or later
      * @param deactivateUserRequest 
      */
     public async deactivateUser(deactivateUserRequest: DeactivateUserRequest, _options?: Configuration): Promise<RequestContext> {
@@ -228,7 +228,7 @@ export class UsersApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     *   <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>  Deletes a user from the ThoughtSpot system.  If you want to remove a user from a specific Org but not from ThoughtSpot, update the group and Org mapping properties of the user object via a POST API call to the [/api/rest/2.0/users/{user_identifier}/update](#/http/api-endpoints/users/update-user) endpoint.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.     #### Endpoint URL 
+     *   Version: 9.0.0.cl or later  Deletes a user from the ThoughtSpot system.  If you want to remove a user from a specific Org but not from ThoughtSpot, update the group and Org mapping properties of the user object via a POST API call to the [/api/rest/2.0/users/{user_identifier}/update](#/http/api-endpoints/users/update-user) endpoint.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.     #### Endpoint URL 
      * @param userIdentifier GUID / name of the user
      */
     public async deleteUser(userIdentifier: string, _options?: Configuration): Promise<RequestContext> {
@@ -268,7 +268,7 @@ export class UsersApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     *   <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>  Enforces logout on current user sessions.    Use this API with caution as it may invalidate active user sessions and force users to re-login. Make sure you specify the usernames or GUIDs. If you pass null values in the API call, all user sessions on your cluster become invalid, and the users are forced to re-login.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.     #### Endpoint URL 
+     *   Version: 9.0.0.cl or later  Enforces logout on current user sessions.    Use this API with caution as it may invalidate active user sessions and force users to re-login. Make sure you specify the usernames or GUIDs. If you pass null values in the API call, all user sessions on your cluster become invalid, and the users are forced to re-login.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.     #### Endpoint URL 
      * @param forceLogoutUsersRequest 
      */
     public async forceLogoutUsers(forceLogoutUsersRequest?: ForceLogoutUsersRequest, _options?: Configuration): Promise<RequestContext> {
@@ -313,7 +313,7 @@ export class UsersApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     *   <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>  Imports user data from external databases into ThoughtSpot. During the user import operation:  * If the specified users are not available in ThoughtSpot, the users are created and assigned a default password. Defining a `default_password` in the API request is optional. * If `delete_unspecified_users` is set to `true`, the users not specified in the API request, excluding the `tsadmin`, `guest`, `system` and `su` users, are deleted. * If the specified user objects are already available in ThoughtSpot, the object properties are updated and synchronized as per the input data in the API request.  A successful API call returns the object that represents the changes made in the ThoughtSpot system.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.     #### Endpoint URL 
+     *   Version: 9.0.0.cl or later  Imports user data from external databases into ThoughtSpot. During the user import operation:  * If the specified users are not available in ThoughtSpot, the users are created and assigned a default password. Defining a `default_password` in the API request is optional. * If `delete_unspecified_users` is set to `true`, the users not specified in the API request, excluding the `tsadmin`, `guest`, `system` and `su` users, are deleted. * If the specified user objects are already available in ThoughtSpot, the object properties are updated and synchronized as per the input data in the API request.  A successful API call returns the object that represents the changes made in the ThoughtSpot system.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.     #### Endpoint URL 
      * @param importUsersRequest 
      */
     public async importUsers(importUsersRequest: ImportUsersRequest, _options?: Configuration): Promise<RequestContext> {
@@ -363,7 +363,7 @@ export class UsersApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     *   <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>  Resets the password of a user account. Administrators can reset password on behalf of a user.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.     #### Endpoint URL 
+     *   Version: 9.0.0.cl or later  Resets the password of a user account. Administrators can reset password on behalf of a user.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.     #### Endpoint URL 
      * @param resetUserPasswordRequest 
      */
     public async resetUserPassword(resetUserPasswordRequest: ResetUserPasswordRequest, _options?: Configuration): Promise<RequestContext> {
@@ -413,7 +413,7 @@ export class UsersApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     *   <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>   Gets a list of users available on the ThoughtSpot system.  To get details of a specific user, specify the user GUID or name. You can also filter the API response based on groups, Org ID, user visibility, account status, user type, and user preference settings and favorites.  Available to all users. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view all users properties.     #### Endpoint URL 
+     *   Version: 9.0.0.cl or later   Gets a list of users available on the ThoughtSpot system.  To get details of a specific user, specify the user GUID or name. You can also filter the API response based on groups, Org ID, user visibility, account status, user type, and user preference settings and favorites.  Available to all users. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view all users properties.     #### Endpoint URL 
      * @param searchUsersRequest 
      */
     public async searchUsers(searchUsersRequest?: SearchUsersRequest, _options?: Configuration): Promise<RequestContext> {
@@ -458,7 +458,7 @@ export class UsersApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     *   <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>  Updates a user object.  You can modify user properties such as username, email, and share notification settings. You can also assign new groups and Orgs, remove the user from a group or Org, reset password, and modify user preferences.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.     #### Endpoint URL 
+     *   Version: 9.0.0.cl or later  Updates a user object.  You can modify user properties such as username, email, and share notification settings. You can also assign new groups and Orgs, remove the user from a group or Org, reset password, and modify user preferences.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.     #### Endpoint URL 
      * @param userIdentifier GUID / name of the user
      * @param updateUserRequest 
      */

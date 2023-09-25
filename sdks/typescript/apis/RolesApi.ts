@@ -21,7 +21,7 @@ import { UpdateRoleRequest } from '../models/UpdateRoleRequest';
 export class RolesApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * Creates a Role. Requires cluster Administration or Role Administration privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>
+     * Creates a Role. Requires cluster Administration or Role Administration privileges. /n  Version: 9.5.0.cl or later
      * @param createRoleRequest 
      */
     public async createRole(createRoleRequest: CreateRoleRequest, _options?: Configuration): Promise<RequestContext> {
@@ -71,7 +71,7 @@ export class RolesApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Deletes a Role. Requires cluster Administration or Role Administration privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>
+     * Deletes a Role. Requires cluster Administration or Role Administration privileges. /n  Version: 9.5.0.cl or later
      * @param roleIdentifier Unique ID or name of the role.
      */
     public async deleteRole(roleIdentifier: string, _options?: Configuration): Promise<RequestContext> {
@@ -111,7 +111,7 @@ export class RolesApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Gets Roles configured on a ThoughtSpot instance. Requires cluster Administration, Role Administration or Group Administration privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>
+     * Gets Roles configured on a ThoughtSpot instance. Requires cluster Administration, Role Administration or Group Administration privileges. /n  Version: 9.5.0.cl or later
      * @param searchRolesRequest 
      */
     public async searchRoles(searchRolesRequest?: SearchRolesRequest, _options?: Configuration): Promise<RequestContext> {
@@ -156,7 +156,7 @@ export class RolesApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Updates a Role. Requires cluster Administration or Role Administration privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>
+     * Updates a Role. Requires cluster Administration or Role Administration privileges. /n  Version: 9.5.0.cl or later
      * @param roleIdentifier Unique ID or name of the role.
      * @param updateRoleRequest 
      */

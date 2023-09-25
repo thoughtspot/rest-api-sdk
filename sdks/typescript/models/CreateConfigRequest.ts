@@ -26,7 +26,7 @@ export class CreateConfigRequest {
     */
     'access_token': string;
     /**
-    *    Applicable when Orgs is enabled in the cluster      List of Org ids or name. Provide value -1 for cluster level. Example : [\"OrgID1-or-Name1\", \"OrgID2-or-Name2\"]         Note: If no value is specified, then the configurations will be returned for all orgs the user has access to  <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>
+    *    Applicable when Orgs is enabled in the cluster      List of Org ids or name. Provide value -1 for cluster level. Example : [\"OrgID1-or-Name1\", \"OrgID2-or-Name2\"]         Note: If no value is specified, then the configurations will be returned for all orgs the user has access to  /n  Version: 9.5.0.cl or later
     */
     'org_identifier'?: string;
     /**
@@ -34,7 +34,7 @@ export class CreateConfigRequest {
     */
     'branch_names'?: Array<string>;
     /**
-    * Name of the remote branch where objects from this Thoughtspot instance will be versioned. <br/>  <span class=\"since-beta-tag\">Version: 9.7.0.cl or later</span>
+    * Name of the remote branch where objects from this Thoughtspot instance will be versioned. /n  Version: 9.7.0.cl or later
     */
     'commit_branch_name'?: string;
     /**
@@ -42,15 +42,15 @@ export class CreateConfigRequest {
     */
     'default_branch_name'?: string;
     /**
-    * Maintain mapping of guid for the deployment to an instance <br/>  <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>
+    * Maintain mapping of guid for the deployment to an instance /n  Version: 9.4.0.cl or later
     */
     'enable_guid_mapping'?: boolean | null;
     /**
-    *    Name of the branch where the configuration files related to operations between Thoughtspot and version control repo should be maintained.      Note: If no branch name is specified, then by default, ts_config_files branch is considered. Ensure this branch exists before configuration. <br/>  <span class=\"since-beta-tag\">Version: 9.7.0.cl or later</span>
+    *    Name of the branch where the configuration files related to operations between Thoughtspot and version control repo should be maintained.      Note: If no branch name is specified, then by default, ts_config_files branch is considered. Ensure this branch exists before configuration. /n  Version: 9.7.0.cl or later
     */
     'configuration_branch_name'?: string;
     /**
-    *    Use configuration_branch_name instead.      Name of the branch where the configuration files related to operations between Thoughtspot and version control repo should be maintained.        Note: If no branch name is specified, then by default, ts_config_files branch is considered. Ensure this branch exists before configuration.         *Deprecated from 10.0.0.cl : Replaced by configuration_branch_name*  <br/>  <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>
+    *    Use configuration_branch_name instead.      Name of the branch where the configuration files related to operations between Thoughtspot and version control repo should be maintained.        Note: If no branch name is specified, then by default, ts_config_files branch is considered. Ensure this branch exists before configuration.         *Deprecated from 10.0.0.cl : Replaced by configuration_branch_name*  /n  Version: 9.4.0.cl or later
     */
     'guid_mapping_branch_name'?: string;
 

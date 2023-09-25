@@ -24,8 +24,9 @@
   },
   "typings": "./dist/index.d.ts",
   "scripts": {
-    "build": "tsc",
-    "prepare": "npm run build"
+    "build": "tsup index.ts --format esm,cjs --dts",
+    "prepare": "npm run build",
+    "test" : "ts-mocha ./tests/ThoughtSpotRestApiTest.ts --timeout 6000"
   },
   "dependencies": {
     "whatwg-fetch": "^3.0.0",
@@ -42,6 +43,8 @@
     "ts-mocha": "^10.0.0",
     "@types/expect": "^24.3.0",
     "@types/chai-as-promised": "^7.1.5",
-    "chai-as-promised": "^7.1.1"
+    "chai-as-promised": "^7.1.1",
+    "tsup": "^7.2.0",
+    "@swc/core": "^1.3.88"
   }
 }

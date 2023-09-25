@@ -15,7 +15,7 @@ Method | HTTP request | Description
 # **assignTag**
 > void assignTag(assignTagRequest)
 
-  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>  Assigns tags to Liveboards, Answers, Tables, and Worksheets.  Requires edit access to the metadata object.     #### Endpoint URL 
+  Version: 9.0.0.cl or later  Assigns tags to Liveboards, Answers, Tables, and Worksheets.  Requires edit access to the metadata object.     #### Endpoint URL 
 
 ### Example
 
@@ -83,7 +83,7 @@ Name | Type | Description  | Notes
 # **createTag**
 > Tag createTag(createTagRequest)
 
-  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>  Creates a tag object.  Tags are labels that identify a metadata object. For example, you can create a tag to designate subject areas, such as sales, HR, marketing, and finance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.     #### Endpoint URL 
+  Version: 9.0.0.cl or later  Creates a tag object.  Tags are labels that identify a metadata object. For example, you can create a tag to designate subject areas, such as sales, HR, marketing, and finance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.     #### Endpoint URL 
 
 ### Example
 
@@ -144,7 +144,7 @@ Name | Type | Description  | Notes
 # **deleteTag**
 > void deleteTag()
 
-  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>  Deletes a tag object from the ThoughtSpot system  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.     #### Endpoint URL 
+  Version: 9.0.0.cl or later  Deletes a tag object from the ThoughtSpot system  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.     #### Endpoint URL 
 
 ### Example
 
@@ -202,7 +202,7 @@ Name | Type | Description  | Notes
 # **searchTags**
 > Array<Tag> searchTags()
 
-  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>  Gets a list of tag objects available on the ThoughtSpot system. To get details of a specific tag object, specify the GUID or name.  Any authenticated user can search for tag objects.     #### Endpoint URL 
+  Version: 9.0.0.cl or later  Gets a list of tag objects available on the ThoughtSpot system. To get details of a specific tag object, specify the GUID or name.  Any authenticated user can search for tag objects.     #### Endpoint URL 
 
 ### Example
 
@@ -264,7 +264,7 @@ Name | Type | Description  | Notes
 # **unassignTag**
 > void unassignTag(assignTagRequest)
 
-  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>  Removes the tags applied to a Liveboard, Answer, Table, or Worksheet.  Requires edit access to the metadata object.     #### Endpoint URL 
+  Version: 9.0.0.cl or later  Removes the tags applied to a Liveboard, Answer, Table, or Worksheet.  Requires edit access to the metadata object.     #### Endpoint URL 
 
 ### Example
 
@@ -332,7 +332,7 @@ Name | Type | Description  | Notes
 # **updateTag**
 > void updateTag()
 
-  <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>  Updates a tag object.  You can modify the `name` and `color` properties of a tag object.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.     #### Endpoint URL 
+  Version: 9.0.0.cl or later  Updates a tag object.  You can modify the `name` and `color` properties of a tag object.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.     #### Endpoint URL 
 
 ### Example
 
