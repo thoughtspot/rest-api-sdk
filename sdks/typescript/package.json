@@ -15,6 +15,7 @@
   ],
   "license": "Unlicense",
   "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "type": "commonjs",
   "exports": {
     ".": {
@@ -25,7 +26,6 @@
   "typings": "./dist/index.d.ts",
   "scripts": {
     "build": "tsup index.ts --format esm,cjs --dts",
-    "prepare": "npm run build",
     "test" : "ts-mocha ./tests/ThoughtSpotRestApiTest.ts --timeout 6000"
   },
   "dependencies": {
