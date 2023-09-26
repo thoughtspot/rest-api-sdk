@@ -17,10 +17,13 @@ Method | HTTP request | Description
 
 
 ```typescript
-import { createConfiguration, ReportsApi, ExportAnswerReportRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, ReportsApi, ExportAnswerReportRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new ReportsApi(configuration);
 
 apiInstance.exportAnswerReport(
@@ -81,10 +84,13 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ReportsApi, ExportLiveboardReportRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, ReportsApi, ExportLiveboardReportRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new ReportsApi(configuration);
 
 apiInstance.exportLiveboardReport(

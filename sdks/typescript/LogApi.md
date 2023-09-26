@@ -16,10 +16,13 @@ Method | HTTP request | Description
 
 
 ```typescript
-import { createConfiguration, LogApi, FetchLogsRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, LogApi, FetchLogsRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new LogApi(configuration);
 
 apiInstance.fetchLogs(

@@ -24,10 +24,13 @@ Method | HTTP request | Description
 
 
 ```typescript
-import { createConfiguration, VersionControlApi, CommitBranchRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, VersionControlApi, CommitBranchRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new VersionControlApi(configuration);
 
 apiInstance.commitBranch(
@@ -92,10 +95,13 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, VersionControlApi, CreateConfigRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, VersionControlApi, CreateConfigRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new VersionControlApi(configuration);
 
 apiInstance.createConfig(
@@ -163,10 +169,13 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, VersionControlApi, DeleteConfigRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, VersionControlApi, DeleteConfigRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new VersionControlApi(configuration);
 
 apiInstance.deleteConfig(
@@ -223,10 +232,13 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, VersionControlApi, DeployCommitRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, VersionControlApi, DeployCommitRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new VersionControlApi(configuration);
 
 apiInstance.deployCommit(
@@ -286,10 +298,13 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, VersionControlApi, RevertCommitRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, VersionControlApi, RevertCommitRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new VersionControlApi(configuration);
 
 apiInstance.revertCommit(
@@ -356,10 +371,13 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, VersionControlApi, SearchCommitsRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, VersionControlApi, SearchCommitsRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new VersionControlApi(configuration);
 
 apiInstance.searchCommits(
@@ -420,10 +438,13 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, VersionControlApi, SearchConfigRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, VersionControlApi, SearchConfigRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new VersionControlApi(configuration);
 
 apiInstance.searchConfig(
@@ -482,10 +503,13 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, VersionControlApi, UpdateConfigRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, VersionControlApi, UpdateConfigRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new VersionControlApi(configuration);
 
 apiInstance.updateConfig(
@@ -552,10 +576,13 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, VersionControlApi, ValidateMergeRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, VersionControlApi, ValidateMergeRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new VersionControlApi(configuration);
 
 apiInstance.validateMerge(

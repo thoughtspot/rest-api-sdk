@@ -19,10 +19,13 @@ Method | HTTP request | Description
 
 
 ```typescript
-import { createConfiguration, SchedulesApi, CreateScheduleRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, SchedulesApi, CreateScheduleRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new SchedulesApi(configuration);
 
 apiInstance.createSchedule(
@@ -121,10 +124,13 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, SchedulesApi, DeleteScheduleRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, SchedulesApi, DeleteScheduleRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new SchedulesApi(configuration);
 
 apiInstance.deleteSchedule(
@@ -179,10 +185,13 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, SchedulesApi, SearchSchedulesRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, SchedulesApi, SearchSchedulesRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new SchedulesApi(configuration);
 
 apiInstance.searchSchedules(
@@ -258,10 +267,13 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, SchedulesApi, UpdateScheduleRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, SchedulesApi, UpdateScheduleRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new SchedulesApi(configuration);
 
 apiInstance.updateSchedule(

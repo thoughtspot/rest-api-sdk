@@ -19,14 +19,17 @@ Method | HTTP request | Description
 
 
 ```typescript
-import { createConfiguration, SystemApi, GetSystemConfigRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, SystemApi, GetSystemConfigRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new SystemApi(configuration);
 
 apiInstance.getSystemConfig().then((data:any) => {
-  console.log('API called successfully. Returned data: ' + data);
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }).catch((error:any) => console.error(error));
 
 
@@ -71,14 +74,17 @@ This endpoint does not need any parameter.
 
 
 ```typescript
-import { createConfiguration, SystemApi, GetSystemInformationRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, SystemApi, GetSystemInformationRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new SystemApi(configuration);
 
 apiInstance.getSystemInformation().then((data:any) => {
-  console.log('API called successfully. Returned data: ' + data);
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }).catch((error:any) => console.error(error));
 
 
@@ -123,14 +129,17 @@ This endpoint does not need any parameter.
 
 
 ```typescript
-import { createConfiguration, SystemApi, GetSystemOverrideInfoRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, SystemApi, GetSystemOverrideInfoRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new SystemApi(configuration);
 
 apiInstance.getSystemOverrideInfo().then((data:any) => {
-  console.log('API called successfully. Returned data: ' + data);
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }).catch((error:any) => console.error(error));
 
 
@@ -175,10 +184,13 @@ This endpoint does not need any parameter.
 
 
 ```typescript
-import { createConfiguration, SystemApi, UpdateSystemConfigRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, SystemApi, UpdateSystemConfigRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new SystemApi(configuration);
 
 apiInstance.updateSystemConfig(

@@ -21,10 +21,13 @@ Method | HTTP request | Description
 
 
 ```typescript
-import { createConfiguration, TagsApi, AssignTagRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, TagsApi, AssignTagRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new TagsApi(configuration);
 
 apiInstance.assignTag(
@@ -89,10 +92,13 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, TagsApi, CreateTagRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, TagsApi, CreateTagRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new TagsApi(configuration);
 
 apiInstance.createTag(
@@ -150,10 +156,13 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, TagsApi, DeleteTagRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, TagsApi, DeleteTagRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new TagsApi(configuration);
 
 apiInstance.deleteTag(
@@ -208,10 +217,13 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, TagsApi, SearchTagsRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, TagsApi, SearchTagsRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new TagsApi(configuration);
 
 apiInstance.searchTags(
@@ -270,10 +282,13 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, TagsApi, UnassignTagRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, TagsApi, UnassignTagRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new TagsApi(configuration);
 
 apiInstance.unassignTag(
@@ -338,10 +353,13 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, TagsApi, UpdateTagRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, TagsApi, UpdateTagRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new TagsApi(configuration);
 
 apiInstance.updateTag(

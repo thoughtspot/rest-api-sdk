@@ -19,10 +19,13 @@ Method | HTTP request | Description
 
 
 ```typescript
-import { createConfiguration, OrgsApi, CreateOrgRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, OrgsApi, CreateOrgRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new OrgsApi(configuration);
 
 apiInstance.createOrg(
@@ -80,10 +83,13 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, OrgsApi, DeleteOrgRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, OrgsApi, DeleteOrgRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new OrgsApi(configuration);
 
 apiInstance.deleteOrg(
@@ -138,10 +144,13 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, OrgsApi, SearchOrgsRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, OrgsApi, SearchOrgsRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new OrgsApi(configuration);
 
 apiInstance.searchOrgs(
@@ -204,10 +213,13 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, OrgsApi, UpdateOrgRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, OrgsApi, UpdateOrgRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new OrgsApi(configuration);
 
 apiInstance.updateOrg(

@@ -22,14 +22,17 @@ Method | HTTP request | Description
 
 
 ```typescript
-import { createConfiguration, AuthenticationApi, GetCurrentUserInfoRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, AuthenticationApi, GetCurrentUserInfoRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new AuthenticationApi(configuration);
 
 apiInstance.getCurrentUserInfo().then((data:any) => {
-  console.log('API called successfully. Returned data: ' + data);
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }).catch((error:any) => console.error(error));
 
 
@@ -74,14 +77,17 @@ This endpoint does not need any parameter.
 
 
 ```typescript
-import { createConfiguration, AuthenticationApi, GetCurrentUserTokenRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, AuthenticationApi, GetCurrentUserTokenRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new AuthenticationApi(configuration);
 
 apiInstance.getCurrentUserToken().then((data:any) => {
-  console.log('API called successfully. Returned data: ' + data);
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }).catch((error:any) => console.error(error));
 
 
@@ -126,10 +132,13 @@ This endpoint does not need any parameter.
 
 
 ```typescript
-import { createConfiguration, AuthenticationApi, GetFullAccessTokenRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, AuthenticationApi, GetFullAccessTokenRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new AuthenticationApi(configuration);
 
 apiInstance.getFullAccessToken(
@@ -207,10 +216,13 @@ No authorization required
 
 
 ```typescript
-import { createConfiguration, AuthenticationApi, GetObjectAccessTokenRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, AuthenticationApi, GetObjectAccessTokenRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new AuthenticationApi(configuration);
 
 apiInstance.getObjectAccessToken(
@@ -289,10 +301,13 @@ No authorization required
 
 
 ```typescript
-import { createConfiguration, AuthenticationApi, LoginRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, AuthenticationApi, LoginRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new AuthenticationApi(configuration);
 
 apiInstance.login(
@@ -352,14 +367,17 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, AuthenticationApi, LogoutRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, AuthenticationApi, LogoutRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new AuthenticationApi(configuration);
 
 apiInstance.logout().then((data:any) => {
-  console.log('API called successfully. Returned data: ' + data);
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }).catch((error:any) => console.error(error));
 
 
@@ -404,10 +422,13 @@ This endpoint does not need any parameter.
 
 
 ```typescript
-import { createConfiguration, AuthenticationApi, RevokeTokenRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, AuthenticationApi, RevokeTokenRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new AuthenticationApi(configuration);
 
 apiInstance.revokeToken(

@@ -19,10 +19,13 @@ Method | HTTP request | Description
 
 
 ```typescript
-import { createConfiguration, SecurityApi, AssignChangeAuthorRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, SecurityApi, AssignChangeAuthorRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new SecurityApi(configuration);
 
 apiInstance.assignChangeAuthor(
@@ -86,10 +89,13 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, SecurityApi, FetchPermissionsOfPrincipalsRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, SecurityApi, FetchPermissionsOfPrincipalsRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new SecurityApi(configuration);
 
 apiInstance.fetchPermissionsOfPrincipals(
@@ -157,10 +163,13 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, SecurityApi, FetchPermissionsOnMetadataRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, SecurityApi, FetchPermissionsOnMetadataRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new SecurityApi(configuration);
 
 apiInstance.fetchPermissionsOnMetadata(
@@ -229,10 +238,13 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, SecurityApi, ShareMetadataRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, SecurityApi, ShareMetadataRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new SecurityApi(configuration);
 
 apiInstance.shareMetadata(

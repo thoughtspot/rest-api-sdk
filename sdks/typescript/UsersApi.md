@@ -23,10 +23,13 @@ Method | HTTP request | Description
 
 
 ```typescript
-import { createConfiguration, UsersApi, ChangeUserPasswordRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, UsersApi, ChangeUserPasswordRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new UsersApi(configuration);
 
 apiInstance.changeUserPassword(
@@ -85,10 +88,13 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, UsersApi, CreateUserRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, UsersApi, CreateUserRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new UsersApi(configuration);
 
 apiInstance.createUser(
@@ -171,10 +177,13 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, UsersApi, DeleteUserRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, UsersApi, DeleteUserRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new UsersApi(configuration);
 
 apiInstance.deleteUser(
@@ -229,10 +238,13 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, UsersApi, ForceLogoutUsersRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, UsersApi, ForceLogoutUsersRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new UsersApi(configuration);
 
 apiInstance.forceLogoutUsers(
@@ -291,10 +303,13 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, UsersApi, ImportUsersRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, UsersApi, ImportUsersRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new UsersApi(configuration);
 
 apiInstance.importUsers(
@@ -380,10 +395,13 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, UsersApi, ResetUserPasswordRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, UsersApi, ResetUserPasswordRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new UsersApi(configuration);
 
 apiInstance.resetUserPassword(
@@ -441,10 +459,13 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, UsersApi, SearchUsersRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, UsersApi, SearchUsersRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new UsersApi(configuration);
 
 apiInstance.searchUsers(
@@ -536,10 +557,13 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, UsersApi, UpdateUserRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, UsersApi, UpdateUserRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new UsersApi(configuration);
 
 apiInstance.updateUser(

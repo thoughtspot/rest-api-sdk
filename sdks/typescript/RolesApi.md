@@ -19,10 +19,13 @@ Creates a Role. Requires cluster Administration or Role Administration privilege
 
 
 ```typescript
-import { createConfiguration, RolesApi, CreateRoleRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, RolesApi, CreateRoleRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new RolesApi(configuration);
 
 apiInstance.createRole(
@@ -83,10 +86,13 @@ Deletes a Role. Requires cluster Administration or Role Administration privilege
 
 
 ```typescript
-import { createConfiguration, RolesApi, DeleteRoleRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, RolesApi, DeleteRoleRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new RolesApi(configuration);
 
 apiInstance.deleteRole(
@@ -141,10 +147,13 @@ Gets Roles configured on a ThoughtSpot instance. Requires cluster Administration
 
 
 ```typescript
-import { createConfiguration, RolesApi, SearchRolesRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, RolesApi, SearchRolesRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new RolesApi(configuration);
 
 apiInstance.searchRoles(
@@ -218,10 +227,13 @@ Updates a Role. Requires cluster Administration or Role Administration privilege
 
 
 ```typescript
-import { createConfiguration, RolesApi, UpdateRoleRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, RolesApi, UpdateRoleRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new RolesApi(configuration);
 
 apiInstance.updateRole(

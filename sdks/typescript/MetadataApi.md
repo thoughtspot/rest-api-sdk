@@ -21,10 +21,13 @@ Method | HTTP request | Description
 
 
 ```typescript
-import { createConfiguration, MetadataApi, DeleteMetadataRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, MetadataApi, DeleteMetadataRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new MetadataApi(configuration);
 
 apiInstance.deleteMetadata(
@@ -87,10 +90,13 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, MetadataApi, ExportMetadataTMLRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, MetadataApi, ExportMetadataTMLRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new MetadataApi(configuration);
 
 apiInstance.exportMetadataTML(
@@ -155,10 +161,13 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, MetadataApi, FetchAnswerSqlQueryRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, MetadataApi, FetchAnswerSqlQueryRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new MetadataApi(configuration);
 
 apiInstance.fetchAnswerSqlQuery(
@@ -215,10 +224,13 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, MetadataApi, FetchLiveboardSqlQueryRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, MetadataApi, FetchLiveboardSqlQueryRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new MetadataApi(configuration);
 
 apiInstance.fetchLiveboardSqlQuery(
@@ -278,10 +290,13 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, MetadataApi, ImportMetadataTMLRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, MetadataApi, ImportMetadataTMLRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new MetadataApi(configuration);
 
 apiInstance.importMetadataTML(
@@ -342,10 +357,13 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, MetadataApi, SearchMetadataRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, MetadataApi, SearchMetadataRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new MetadataApi(configuration);
 
 apiInstance.searchMetadata(

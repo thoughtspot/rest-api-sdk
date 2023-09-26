@@ -18,10 +18,13 @@ Method | HTTP request | Description
 
 
 ```typescript
-import { createConfiguration, DataApi, FetchAnswerDataRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, DataApi, FetchAnswerDataRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new DataApi(configuration);
 
 apiInstance.fetchAnswerData(
@@ -84,10 +87,13 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, DataApi, FetchLiveboardDataRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, DataApi, FetchLiveboardDataRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new DataApi(configuration);
 
 apiInstance.fetchLiveboardData(
@@ -154,10 +160,13 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, DataApi, SearchDataRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, DataApi, SearchDataRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new DataApi(configuration);
 
 apiInstance.searchData(

@@ -19,10 +19,13 @@ Method | HTTP request | Description
 
 
 ```typescript
-import { createConfiguration, CustomActionApi, CreateCustomActionRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, CustomActionApi, CreateCustomActionRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new CustomActionApi(configuration);
 
 apiInstance.createCustomAction(
@@ -122,10 +125,13 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, CustomActionApi, DeleteCustomActionRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, CustomActionApi, DeleteCustomActionRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new CustomActionApi(configuration);
 
 apiInstance.deleteCustomAction(
@@ -180,10 +186,13 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, CustomActionApi, SearchCustomActionsRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, CustomActionApi, SearchCustomActionsRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new CustomActionApi(configuration);
 
 apiInstance.searchCustomActions(
@@ -253,10 +262,13 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, CustomActionApi, UpdateCustomActionRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, CustomActionApi, UpdateCustomActionRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new CustomActionApi(configuration);
 
 apiInstance.updateCustomAction(

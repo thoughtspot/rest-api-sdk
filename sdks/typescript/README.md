@@ -32,67 +32,27 @@ Below code snippet shows how to create a simple config and use it to
 call the getUsers and getUserGroups apis.
 
 ```
-import * as ThoughtSpotRestApiSdk from "@thoughtspot/rest-api-sdk";
+import {
+  ThoughtSpotRestApi,
+  createBearerAuthenticationConfig
+} from "@thoughtspot/rest-api-sdk";
 
-const BASE_URL = "<CLUSTER-URL>";
-
-// creates a simple AuthConfig which uses getFullAccessToken for Auth
-const createBearerAuthenticationConfig = (
-  url,
-  params: ThoughtSpotRestApiSdk.GetFullAccessTokenRequest
-) => {
-  const serverConfig: ThoughtSpotRestApiSdk.BaseServerConfiguration =
-    new ThoughtSpotRestApiSdk.ServerConfiguration<{}>(url, {});
-
-  const config = ThoughtSpotRestApiSdk.createConfiguration({
-    baseServer: serverConfig,
-  });
-  const authApiClient = new ThoughtSpotRestApiSdk.AuthenticationApi(config);
-
-  const authConfig: ThoughtSpotRestApiSdk.AuthMethodsConfiguration = {
-    bearerAuth: {
-      tokenProvider: {
-        getToken: async () => {
-          console.log("Calling Auth api to get token...");
-          const token = (await authApiClient.getFullAccessToken(params)).token;
-
-          console.log("Received token : ", token);
-
-          return token;
-        },
-      },
-    },
-  };
-
-  const apiConfig = ThoughtSpotRestApiSdk.createConfiguration({
-    authMethods: authConfig,
-    baseServer: serverConfig,
-  });
-
-  return apiConfig;
-};
+const BASE_URL = "CLUSTER_URL";
 
 const main = async () => {
+  // getting the token
   const config = createBearerAuthenticationConfig(BASE_URL, {
-    username: "tsadmin",
-    password: "admin",
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
   });
 
-  const tsRestApiClient = new ThoughtSpotRestApiSdk.ThoughtSpotRestApi(config);
+  const tsRestApiClient = new ThoughtSpotRestApi(config);
 
   try {
-    // Get all the users in the cluster
     const users = await tsRestApiClient.searchUsers();
     console.log("Users on the cluster : ");
     users.forEach((user) => {
       console.log(user.name, user.email);
-    });
-
-    // Get all the user groups on the cluster
-    console.log("UserGroups on the cluster : ");
-    const groups = await tsRestApiClient.searchUserGroups();
-    groups.forEach((group) => {
-      console.log(group.name, group.displayName);
     });
   } catch (e) {
     console.log(e);

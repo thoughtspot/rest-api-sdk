@@ -20,10 +20,13 @@ Method | HTTP request | Description
 
 
 ```typescript
-import { createConfiguration, GroupsApi, CreateUserGroupRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, GroupsApi, CreateUserGroupRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new GroupsApi(configuration);
 
 apiInstance.createUserGroup(
@@ -99,10 +102,13 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, GroupsApi, DeleteUserGroupRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, GroupsApi, DeleteUserGroupRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new GroupsApi(configuration);
 
 apiInstance.deleteUserGroup(
@@ -157,10 +163,13 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, GroupsApi, ImportUserGroupsRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, GroupsApi, ImportUserGroupsRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new GroupsApi(configuration);
 
 apiInstance.importUserGroups(
@@ -239,10 +248,13 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, GroupsApi, SearchUserGroupsRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, GroupsApi, SearchUserGroupsRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new GroupsApi(configuration);
 
 apiInstance.searchUserGroups(
@@ -328,10 +340,13 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, GroupsApi, UpdateUserGroupRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, GroupsApi, UpdateUserGroupRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
-const configuration = createConfiguration();
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
 const apiInstance = new GroupsApi(configuration);
 
 apiInstance.updateUserGroup(
