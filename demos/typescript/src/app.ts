@@ -1,55 +1,12 @@
 import {
-  AuthenticationApi,
-  GetFullAccessTokenRequest,
-  ServerConfiguration,
-  createConfiguration,
-  BaseServerConfiguration,
-  AuthMethodsConfiguration,
   ThoughtSpotRestApi,
-} from "thoughtspot-rest-api-sdk";
+  createBearerAuthenticationConfig
+} from "@thoughtspot/rest-api-sdk";
 
-const BASE_URL = "<CLUSTER-URL>";
-
-const createBearerAuthenticationConfig = (
-  url,
-  params: GetFullAccessTokenRequest
-) => {
-  const serverConfig: BaseServerConfiguration = new ServerConfiguration<{}>(
-    url,
-    {}
-  );
-
-  const config = createConfiguration({
-    baseServer: serverConfig,
-  });
-  const authApiClient = new AuthenticationApi(config);
-
-  const authConfig: AuthMethodsConfiguration = {
-    bearerAuth: {
-      tokenProvider: {
-        getToken: async () => {
-          console.log("Calling Auth api to get token...");
-          const token = (await authApiClient.getFullAccessToken(params)).token;
-
-          console.log("Received token : ", token);
-
-          return token;
-        },
-      },
-    },
-  };
-
-  const globalConfig = createConfiguration({
-    authMethods: authConfig,
-    baseServer: serverConfig,
-  });
-
-  return globalConfig;
-};
+const BASE_URL = "http://172.19.213.202:8088";
 
 const main = async () => {
   // getting the token
-
   const config = createBearerAuthenticationConfig(BASE_URL, {
     username: "tsadmin",
     password: "admin",
@@ -58,19 +15,13 @@ const main = async () => {
   const tsRestApiClient = new ThoughtSpotRestApi(config);
 
   try {
-    const users = await tsRestApiClient.searchUsers();
+    const users = await tsRestApiClient.deleteUser("tsadmin");
     console.log("Users on the cluster : ");
-    users.forEach((user) => {
-      console.log(user.name, user.email);
-    });
-    console.log("UserGroups on the cluster : ");
-    const groups = await tsRestApiClient.searchUserGroups();
-    groups.forEach((group) => {
-      console.log(group.name, group.displayName);
-    });
+    console.log(users)
   } catch (e) {
     console.log(e);
   }
 };
 
 main();
+
