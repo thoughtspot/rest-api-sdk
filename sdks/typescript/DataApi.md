@@ -18,7 +18,7 @@ Method | HTTP request | Description
 
 
 ```typescript
-import { createConfiguration, DataApi, FetchAnswerDataRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, DataApi, FetchAnswerDataRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -84,7 +84,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, DataApi, FetchLiveboardDataRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, DataApi, FetchLiveboardDataRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -154,7 +154,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, DataApi, SearchDataRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, DataApi, SearchDataRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();

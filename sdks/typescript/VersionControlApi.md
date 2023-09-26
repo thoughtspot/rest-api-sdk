@@ -24,7 +24,7 @@ Method | HTTP request | Description
 
 
 ```typescript
-import { createConfiguration, VersionControlApi, CommitBranchRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, VersionControlApi, CommitBranchRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -92,7 +92,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, VersionControlApi, CreateConfigRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, VersionControlApi, CreateConfigRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -163,7 +163,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, VersionControlApi, DeleteConfigRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, VersionControlApi, DeleteConfigRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -223,7 +223,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, VersionControlApi, DeployCommitRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, VersionControlApi, DeployCommitRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -286,7 +286,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, VersionControlApi, RevertCommitRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, VersionControlApi, RevertCommitRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -356,7 +356,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, VersionControlApi, SearchCommitsRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, VersionControlApi, SearchCommitsRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -420,7 +420,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, VersionControlApi, SearchConfigRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, VersionControlApi, SearchConfigRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -482,7 +482,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, VersionControlApi, UpdateConfigRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, VersionControlApi, UpdateConfigRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -552,7 +552,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, VersionControlApi, ValidateMergeRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, VersionControlApi, ValidateMergeRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();

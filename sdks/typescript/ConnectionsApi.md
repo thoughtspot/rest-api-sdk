@@ -19,7 +19,7 @@ Method | HTTP request | Description
 
 
 ```typescript
-import { createConfiguration, ConnectionsApi, CreateConnectionRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ConnectionsApi, CreateConnectionRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -83,7 +83,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ConnectionsApi, DeleteConnectionRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ConnectionsApi, DeleteConnectionRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -143,7 +143,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ConnectionsApi, SearchConnectionRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ConnectionsApi, SearchConnectionRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -232,7 +232,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ConnectionsApi, UpdateConnectionRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ConnectionsApi, UpdateConnectionRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();

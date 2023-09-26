@@ -1,4 +1,4 @@
-## thoughtspot-rest-api-sdk@2.0
+## @thoughtspot/rest-api-sdk@1.0.0
 
 This generator creates TypeScript/JavaScript client that utilizes fetch-api.
 
@@ -17,7 +17,7 @@ Navigate to the folder of your consuming project and run one of the following co
 _published:_
 
 ```
-npm install thoughtspot-rest-api-sdk@2.0 --save
+npm install @thoughtspot/rest-api-sdk@1.0.0 --save
 ```
 
 _unPublished (not recommended):_
@@ -32,7 +32,7 @@ Below code snippet shows how to create a simple config and use it to
 call the getUsers and getUserGroups apis.
 
 ```
-import * as ThoughtSpotRestApiSdk from "thoughtspot-rest-api-sdk";
+import * as ThoughtSpotRestApiSdk from "@thoughtspot/rest-api-sdk";
 
 const BASE_URL = "<CLUSTER-URL>";
 

@@ -90,7 +90,7 @@ Method | HTTP request | Description
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, AssignChangeAuthorRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, AssignChangeAuthorRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -157,7 +157,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, AssignTagRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, AssignTagRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -225,7 +225,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, ChangeUserPasswordRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, ChangeUserPasswordRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -287,7 +287,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, CommitBranchRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, CommitBranchRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -355,7 +355,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, CreateConfigRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, CreateConfigRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -426,7 +426,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, CreateConnectionRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, CreateConnectionRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -490,7 +490,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, CreateCustomActionRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, CreateCustomActionRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -593,7 +593,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, CreateOrgRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, CreateOrgRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -654,7 +654,7 @@ Creates a Role. Requires cluster Administration or Role Administration privilege
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, CreateRoleRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, CreateRoleRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -718,7 +718,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, CreateScheduleRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, CreateScheduleRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -820,7 +820,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, CreateTagRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, CreateTagRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -881,7 +881,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, CreateUserRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, CreateUserRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -967,7 +967,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, CreateUserGroupRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, CreateUserGroupRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -1046,7 +1046,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, DeleteConfigRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, DeleteConfigRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -1106,7 +1106,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, DeleteConnectionRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, DeleteConnectionRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -1166,7 +1166,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, DeleteCustomActionRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, DeleteCustomActionRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -1224,7 +1224,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, DeleteMetadataRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, DeleteMetadataRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -1290,7 +1290,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, DeleteOrgRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, DeleteOrgRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -1348,7 +1348,7 @@ Deletes a Role. Requires cluster Administration or Role Administration privilege
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, DeleteRoleRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, DeleteRoleRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -1406,7 +1406,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, DeleteScheduleRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, DeleteScheduleRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -1464,7 +1464,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, DeleteTagRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, DeleteTagRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -1522,7 +1522,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, DeleteUserRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, DeleteUserRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -1580,7 +1580,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, DeleteUserGroupRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, DeleteUserGroupRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -1638,7 +1638,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, DeployCommitRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, DeployCommitRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -1701,7 +1701,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, ExportAnswerReportRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, ExportAnswerReportRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -1765,7 +1765,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, ExportLiveboardReportRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, ExportLiveboardReportRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -1846,7 +1846,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, ExportMetadataTMLRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, ExportMetadataTMLRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -1914,7 +1914,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, FetchAnswerDataRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, FetchAnswerDataRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -1980,7 +1980,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, FetchAnswerSqlQueryRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, FetchAnswerSqlQueryRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -2040,7 +2040,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, FetchLiveboardDataRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, FetchLiveboardDataRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -2110,7 +2110,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, FetchLiveboardSqlQueryRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, FetchLiveboardSqlQueryRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -2173,7 +2173,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, FetchLogsRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, FetchLogsRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -2235,7 +2235,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, FetchPermissionsOfPrincipalsRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, FetchPermissionsOfPrincipalsRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -2306,7 +2306,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, FetchPermissionsOnMetadataRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, FetchPermissionsOnMetadataRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -2378,7 +2378,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, ForceLogoutUsersRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, ForceLogoutUsersRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -2440,7 +2440,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, GetCurrentUserInfoRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, GetCurrentUserInfoRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -2492,7 +2492,7 @@ This endpoint does not need any parameter.
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, GetCurrentUserTokenRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, GetCurrentUserTokenRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -2544,7 +2544,7 @@ This endpoint does not need any parameter.
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, GetFullAccessTokenRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, GetFullAccessTokenRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -2625,7 +2625,7 @@ No authorization required
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, GetObjectAccessTokenRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, GetObjectAccessTokenRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -2707,7 +2707,7 @@ No authorization required
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, GetSystemConfigRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, GetSystemConfigRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -2759,7 +2759,7 @@ This endpoint does not need any parameter.
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, GetSystemInformationRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, GetSystemInformationRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -2811,7 +2811,7 @@ This endpoint does not need any parameter.
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, GetSystemOverrideInfoRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, GetSystemOverrideInfoRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -2863,7 +2863,7 @@ This endpoint does not need any parameter.
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, ImportMetadataTMLRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, ImportMetadataTMLRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -2927,7 +2927,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, ImportUserGroupsRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, ImportUserGroupsRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -3009,7 +3009,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, ImportUsersRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, ImportUsersRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -3098,7 +3098,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, LoginRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, LoginRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -3161,7 +3161,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, LogoutRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, LogoutRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -3213,7 +3213,7 @@ This endpoint does not need any parameter.
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, ResetUserPasswordRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, ResetUserPasswordRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -3274,7 +3274,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, RevertCommitRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, RevertCommitRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -3344,7 +3344,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, RevokeTokenRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, RevokeTokenRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -3405,7 +3405,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, SearchCommitsRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, SearchCommitsRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -3469,7 +3469,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, SearchConfigRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, SearchConfigRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -3531,7 +3531,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, SearchConnectionRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, SearchConnectionRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -3620,7 +3620,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, SearchCustomActionsRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, SearchCustomActionsRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -3693,7 +3693,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, SearchDataRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, SearchDataRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -3760,7 +3760,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, SearchMetadataRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, SearchMetadataRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -3872,7 +3872,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, SearchOrgsRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, SearchOrgsRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -3938,7 +3938,7 @@ Gets Roles configured on a ThoughtSpot instance. Requires cluster Administration
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, SearchRolesRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, SearchRolesRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -4015,7 +4015,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, SearchSchedulesRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, SearchSchedulesRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -4094,7 +4094,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, SearchTagsRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, SearchTagsRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -4156,7 +4156,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, SearchUserGroupsRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, SearchUserGroupsRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -4245,7 +4245,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, SearchUsersRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, SearchUsersRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -4340,7 +4340,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, ShareMetadataRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, ShareMetadataRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -4420,7 +4420,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, UnassignTagRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, UnassignTagRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -4488,7 +4488,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, UpdateConfigRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, UpdateConfigRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -4558,7 +4558,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, UpdateConnectionRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, UpdateConnectionRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -4622,7 +4622,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, UpdateCustomActionRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, UpdateCustomActionRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -4729,7 +4729,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, UpdateOrgRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, UpdateOrgRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -4800,7 +4800,7 @@ Updates a Role. Requires cluster Administration or Role Administration privilege
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, UpdateRoleRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, UpdateRoleRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -4867,7 +4867,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, UpdateScheduleRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, UpdateScheduleRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -4973,7 +4973,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, UpdateSystemConfigRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, UpdateSystemConfigRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -5033,7 +5033,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, UpdateTagRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, UpdateTagRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -5097,7 +5097,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, UpdateUserRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, UpdateUserRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -5185,7 +5185,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, UpdateUserGroupRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, UpdateUserGroupRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -5268,7 +5268,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ThoughtSpotRestApi, ValidateMergeRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ThoughtSpotRestApi, ValidateMergeRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();

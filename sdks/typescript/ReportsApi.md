@@ -17,7 +17,7 @@ Method | HTTP request | Description
 
 
 ```typescript
-import { createConfiguration, ReportsApi, ExportAnswerReportRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ReportsApi, ExportAnswerReportRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -81,7 +81,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, ReportsApi, ExportLiveboardReportRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, ReportsApi, ExportLiveboardReportRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();

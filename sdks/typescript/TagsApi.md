@@ -21,7 +21,7 @@ Method | HTTP request | Description
 
 
 ```typescript
-import { createConfiguration, TagsApi, AssignTagRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, TagsApi, AssignTagRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -89,7 +89,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, TagsApi, CreateTagRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, TagsApi, CreateTagRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -150,7 +150,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, TagsApi, DeleteTagRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, TagsApi, DeleteTagRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -208,7 +208,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, TagsApi, SearchTagsRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, TagsApi, SearchTagsRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -270,7 +270,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, TagsApi, UnassignTagRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, TagsApi, UnassignTagRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -338,7 +338,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, TagsApi, UpdateTagRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, TagsApi, UpdateTagRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();

@@ -23,7 +23,7 @@ Method | HTTP request | Description
 
 
 ```typescript
-import { createConfiguration, UsersApi, ChangeUserPasswordRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, UsersApi, ChangeUserPasswordRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -85,7 +85,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, UsersApi, CreateUserRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, UsersApi, CreateUserRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -171,7 +171,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, UsersApi, DeleteUserRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, UsersApi, DeleteUserRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -229,7 +229,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, UsersApi, ForceLogoutUsersRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, UsersApi, ForceLogoutUsersRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -291,7 +291,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, UsersApi, ImportUsersRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, UsersApi, ImportUsersRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -380,7 +380,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, UsersApi, ResetUserPasswordRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, UsersApi, ResetUserPasswordRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -441,7 +441,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, UsersApi, SearchUsersRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, UsersApi, SearchUsersRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -536,7 +536,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, UsersApi, UpdateUserRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, UsersApi, UpdateUserRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();

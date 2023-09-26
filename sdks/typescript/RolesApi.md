@@ -19,7 +19,7 @@ Creates a Role. Requires cluster Administration or Role Administration privilege
 
 
 ```typescript
-import { createConfiguration, RolesApi, CreateRoleRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, RolesApi, CreateRoleRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -83,7 +83,7 @@ Deletes a Role. Requires cluster Administration or Role Administration privilege
 
 
 ```typescript
-import { createConfiguration, RolesApi, DeleteRoleRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, RolesApi, DeleteRoleRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -141,7 +141,7 @@ Gets Roles configured on a ThoughtSpot instance. Requires cluster Administration
 
 
 ```typescript
-import { createConfiguration, RolesApi, SearchRolesRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, RolesApi, SearchRolesRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -218,7 +218,7 @@ Updates a Role. Requires cluster Administration or Role Administration privilege
 
 
 ```typescript
-import { createConfiguration, RolesApi, UpdateRoleRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, RolesApi, UpdateRoleRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();

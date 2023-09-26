@@ -19,7 +19,7 @@ Method | HTTP request | Description
 
 
 ```typescript
-import { createConfiguration, SecurityApi, AssignChangeAuthorRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, SecurityApi, AssignChangeAuthorRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -86,7 +86,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, SecurityApi, FetchPermissionsOfPrincipalsRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, SecurityApi, FetchPermissionsOfPrincipalsRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -157,7 +157,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, SecurityApi, FetchPermissionsOnMetadataRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, SecurityApi, FetchPermissionsOnMetadataRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -229,7 +229,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, SecurityApi, ShareMetadataRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, SecurityApi, ShareMetadataRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();

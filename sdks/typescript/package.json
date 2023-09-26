@@ -1,19 +1,17 @@
 {
-  "name": "thoughtspot-rest-api-sdk",
-  "version": "2.0",
-  "description": "OpenAPI client for thoughtspot-rest-api-sdk",
-  "author": "OpenAPI-Generator Contributors",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/GIT_USER_ID/GIT_REPO_ID.git"
-  },
+  "name": "@thoughtspot/rest-api-sdk",
+  "version": "1.0.0",
+  "description": "Api sdk for thoughtspot's public v2 rest api",
   "keywords": [
     "fetch",
     "typescript",
-    "openapi-client",
-    "openapi-generator"
+    "rest",
+    "api",
+    "Thoughtspot"
   ],
-  "license": "Unlicense",
+  "author": "ThoughtSpot",
+  "email": "support@thoughtspot.com",
+  "license": "ThoughtSpot Development Tools End User License Agreement",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "type": "commonjs",

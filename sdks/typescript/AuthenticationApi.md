@@ -22,7 +22,7 @@ Method | HTTP request | Description
 
 
 ```typescript
-import { createConfiguration, AuthenticationApi, GetCurrentUserInfoRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, AuthenticationApi, GetCurrentUserInfoRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -74,7 +74,7 @@ This endpoint does not need any parameter.
 
 
 ```typescript
-import { createConfiguration, AuthenticationApi, GetCurrentUserTokenRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, AuthenticationApi, GetCurrentUserTokenRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -126,7 +126,7 @@ This endpoint does not need any parameter.
 
 
 ```typescript
-import { createConfiguration, AuthenticationApi, GetFullAccessTokenRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, AuthenticationApi, GetFullAccessTokenRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -207,7 +207,7 @@ No authorization required
 
 
 ```typescript
-import { createConfiguration, AuthenticationApi, GetObjectAccessTokenRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, AuthenticationApi, GetObjectAccessTokenRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -289,7 +289,7 @@ No authorization required
 
 
 ```typescript
-import { createConfiguration, AuthenticationApi, LoginRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, AuthenticationApi, LoginRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -352,7 +352,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, AuthenticationApi, LogoutRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, AuthenticationApi, LogoutRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -404,7 +404,7 @@ This endpoint does not need any parameter.
 
 
 ```typescript
-import { createConfiguration, AuthenticationApi, RevokeTokenRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, AuthenticationApi, RevokeTokenRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();

@@ -20,7 +20,7 @@ Method | HTTP request | Description
 
 
 ```typescript
-import { createConfiguration, GroupsApi, CreateUserGroupRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, GroupsApi, CreateUserGroupRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -99,7 +99,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, GroupsApi, DeleteUserGroupRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, GroupsApi, DeleteUserGroupRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -157,7 +157,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, GroupsApi, ImportUserGroupsRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, GroupsApi, ImportUserGroupsRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -239,7 +239,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, GroupsApi, SearchUserGroupsRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, GroupsApi, SearchUserGroupsRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -328,7 +328,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, GroupsApi, UpdateUserGroupRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, GroupsApi, UpdateUserGroupRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();

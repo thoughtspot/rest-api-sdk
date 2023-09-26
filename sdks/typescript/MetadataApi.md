@@ -21,7 +21,7 @@ Method | HTTP request | Description
 
 
 ```typescript
-import { createConfiguration, MetadataApi, DeleteMetadataRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, MetadataApi, DeleteMetadataRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -87,7 +87,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, MetadataApi, ExportMetadataTMLRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, MetadataApi, ExportMetadataTMLRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -155,7 +155,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, MetadataApi, FetchAnswerSqlQueryRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, MetadataApi, FetchAnswerSqlQueryRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -215,7 +215,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, MetadataApi, FetchLiveboardSqlQueryRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, MetadataApi, FetchLiveboardSqlQueryRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -278,7 +278,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, MetadataApi, ImportMetadataTMLRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, MetadataApi, ImportMetadataTMLRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -342,7 +342,7 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createConfiguration, MetadataApi, SearchMetadataRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, MetadataApi, SearchMetadataRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();

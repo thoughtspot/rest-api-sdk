@@ -19,7 +19,7 @@ Method | HTTP request | Description
 
 
 ```typescript
-import { createConfiguration, SystemApi, GetSystemConfigRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, SystemApi, GetSystemConfigRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -71,7 +71,7 @@ This endpoint does not need any parameter.
 
 
 ```typescript
-import { createConfiguration, SystemApi, GetSystemInformationRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, SystemApi, GetSystemInformationRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -123,7 +123,7 @@ This endpoint does not need any parameter.
 
 
 ```typescript
-import { createConfiguration, SystemApi, GetSystemOverrideInfoRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, SystemApi, GetSystemOverrideInfoRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
@@ -175,7 +175,7 @@ This endpoint does not need any parameter.
 
 
 ```typescript
-import { createConfiguration, SystemApi, UpdateSystemConfigRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, SystemApi, UpdateSystemConfigRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();

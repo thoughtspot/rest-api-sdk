@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 
 ```typescript
-import { createConfiguration, LogApi, FetchLogsRequest } from 'thoughtspot-rest-api-sdk';
+import { createConfiguration, LogApi, FetchLogsRequest } from '@thoughtspot/rest-api-sdk';
 import * as fs from 'fs';
 
 const configuration = createConfiguration();
