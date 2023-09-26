@@ -6,7 +6,6 @@ export * from '../models/ActionConfigInputCreate';
 export * from '../models/ActionDetails';
 export * from '../models/ActionDetailsInput';
 export * from '../models/ActionDetailsInputCreate';
-export * from '../models/ActivateUserRequest';
 export * from '../models/AnswerContent';
 export * from '../models/AnswerDataResponse';
 export * from '../models/AssignChangeAuthorRequest';
@@ -47,8 +46,6 @@ export * from '../models/CustomActionMetadataTypeInput';
 export * from '../models/DataWarehouseObjectInput';
 export * from '../models/DataWarehouseObjects';
 export * from '../models/Database';
-export * from '../models/DbtConnectionRequest';
-export * from '../models/DeactivateUserRequest';
 export * from '../models/DefaultActionConfig';
 export * from '../models/DefaultActionConfigInput';
 export * from '../models/DefaultActionConfigInputCreate';
@@ -78,8 +75,6 @@ export * from '../models/FetchPermissionsOnMetadataRequest';
 export * from '../models/ForceLogoutUsersRequest';
 export * from '../models/Frequency';
 export * from '../models/FrequencyInput';
-export * from '../models/GenerateSyncTmlRequest';
-export * from '../models/GenerateTmlRequest';
 export * from '../models/GenericInfo';
 export * from '../models/GetFullAccessTokenRequest';
 export * from '../models/GetObjectAccessTokenRequest';
@@ -179,7 +174,6 @@ export * from '../models/URLInputMandatory';
 export * from '../models/UpdateConfigRequest';
 export * from '../models/UpdateConnectionRequest';
 export * from '../models/UpdateCustomActionRequest';
-export * from '../models/UpdateDbtConnectionRequest';
 export * from '../models/UpdateOrgRequest';
 export * from '../models/UpdateRoleRequest';
 export * from '../models/UpdateScheduleRequest';
@@ -200,7 +194,6 @@ import { ActionConfigInputCreate, ActionConfigInputCreatePositionEnum    } from 
 import { ActionDetails } from '../models/ActionDetails';
 import { ActionDetailsInput } from '../models/ActionDetailsInput';
 import { ActionDetailsInputCreate } from '../models/ActionDetailsInputCreate';
-import { ActivateUserRequest } from '../models/ActivateUserRequest';
 import { AnswerContent } from '../models/AnswerContent';
 import { AnswerDataResponse } from '../models/AnswerDataResponse';
 import { AssignChangeAuthorRequest } from '../models/AssignChangeAuthorRequest';
@@ -241,8 +234,6 @@ import { CustomActionMetadataTypeInput, CustomActionMetadataTypeInputTypeEnum   
 import { DataWarehouseObjectInput } from '../models/DataWarehouseObjectInput';
 import { DataWarehouseObjects } from '../models/DataWarehouseObjects';
 import { Database } from '../models/Database';
-import { DbtConnectionRequest  , DbtConnectionRequestImportTypeEnum         } from '../models/DbtConnectionRequest';
-import { DeactivateUserRequest } from '../models/DeactivateUserRequest';
 import { DefaultActionConfig } from '../models/DefaultActionConfig';
 import { DefaultActionConfigInput } from '../models/DefaultActionConfigInput';
 import { DefaultActionConfigInputCreate } from '../models/DefaultActionConfigInputCreate';
@@ -272,8 +263,6 @@ import { FetchPermissionsOnMetadataRequest } from '../models/FetchPermissionsOnM
 import { ForceLogoutUsersRequest } from '../models/ForceLogoutUsersRequest';
 import { Frequency } from '../models/Frequency';
 import { FrequencyInput } from '../models/FrequencyInput';
-import { GenerateSyncTmlRequest } from '../models/GenerateSyncTmlRequest';
-import { GenerateTmlRequest  , GenerateTmlRequestImportWorksheetsEnum    } from '../models/GenerateTmlRequest';
 import { GenericInfo } from '../models/GenericInfo';
 import { GetFullAccessTokenRequest } from '../models/GetFullAccessTokenRequest';
 import { GetObjectAccessTokenRequest } from '../models/GetObjectAccessTokenRequest';
@@ -373,7 +362,6 @@ import { URLInputMandatory } from '../models/URLInputMandatory';
 import { UpdateConfigRequest } from '../models/UpdateConfigRequest';
 import { UpdateConnectionRequest } from '../models/UpdateConnectionRequest';
 import { UpdateCustomActionRequest     , UpdateCustomActionRequestOperationEnum   } from '../models/UpdateCustomActionRequest';
-import { UpdateDbtConnectionRequest  , UpdateDbtConnectionRequestImportTypeEnum         } from '../models/UpdateDbtConnectionRequest';
 import { UpdateOrgRequest    , UpdateOrgRequestOperationEnum   } from '../models/UpdateOrgRequest';
 import { UpdateRoleRequest  , UpdateRoleRequestPrivilegesEnum   } from '../models/UpdateRoleRequest';
 import { UpdateScheduleRequest  , UpdateScheduleRequestMetadataTypeEnum   , UpdateScheduleRequestFileFormatEnum    , UpdateScheduleRequestTimeZoneEnum    , UpdateScheduleRequestStatusEnum   } from '../models/UpdateScheduleRequest';
@@ -425,7 +413,6 @@ let enumsMap: Set<string> = new Set<string>([
     "CreateUserRequestVisibilityEnum",
     "CreateUserRequestPreferredLocaleEnum",
     "CustomActionMetadataTypeInputTypeEnum",
-    "DbtConnectionRequestImportTypeEnum",
     "DeleteMetadataTypeInputTypeEnum",
     "DeployCommitRequestDeployTypeEnum",
     "DeployCommitRequestDeployPolicyEnum",
@@ -439,7 +426,6 @@ let enumsMap: Set<string> = new Set<string>([
     "FetchAnswerDataRequestDataFormatEnum",
     "FetchLiveboardDataRequestDataFormatEnum",
     "FetchLogsRequestLogTypeEnum",
-    "GenerateTmlRequestImportWorksheetsEnum",
     "GroupsImportListInputPrivilegesEnum",
     "GroupsImportListInputTypeEnum",
     "GroupsImportListInputVisibilityEnum",
@@ -496,7 +482,6 @@ let enumsMap: Set<string> = new Set<string>([
     "SqlQueryResponseMetadataTypeEnum",
     "TagMetadataTypeInputTypeEnum",
     "UpdateCustomActionRequestOperationEnum",
-    "UpdateDbtConnectionRequestImportTypeEnum",
     "UpdateOrgRequestOperationEnum",
     "UpdateRoleRequestPrivilegesEnum",
     "UpdateScheduleRequestMetadataTypeEnum",
@@ -530,7 +515,6 @@ let typeMap: {[index: string]: any} = {
     "ActionDetails": ActionDetails,
     "ActionDetailsInput": ActionDetailsInput,
     "ActionDetailsInputCreate": ActionDetailsInputCreate,
-    "ActivateUserRequest": ActivateUserRequest,
     "AnswerContent": AnswerContent,
     "AnswerDataResponse": AnswerDataResponse,
     "AssignChangeAuthorRequest": AssignChangeAuthorRequest,
@@ -571,8 +555,6 @@ let typeMap: {[index: string]: any} = {
     "DataWarehouseObjectInput": DataWarehouseObjectInput,
     "DataWarehouseObjects": DataWarehouseObjects,
     "Database": Database,
-    "DbtConnectionRequest": DbtConnectionRequest,
-    "DeactivateUserRequest": DeactivateUserRequest,
     "DefaultActionConfig": DefaultActionConfig,
     "DefaultActionConfigInput": DefaultActionConfigInput,
     "DefaultActionConfigInputCreate": DefaultActionConfigInputCreate,
@@ -602,8 +584,6 @@ let typeMap: {[index: string]: any} = {
     "ForceLogoutUsersRequest": ForceLogoutUsersRequest,
     "Frequency": Frequency,
     "FrequencyInput": FrequencyInput,
-    "GenerateSyncTmlRequest": GenerateSyncTmlRequest,
-    "GenerateTmlRequest": GenerateTmlRequest,
     "GenericInfo": GenericInfo,
     "GetFullAccessTokenRequest": GetFullAccessTokenRequest,
     "GetObjectAccessTokenRequest": GetObjectAccessTokenRequest,
@@ -703,7 +683,6 @@ let typeMap: {[index: string]: any} = {
     "UpdateConfigRequest": UpdateConfigRequest,
     "UpdateConnectionRequest": UpdateConnectionRequest,
     "UpdateCustomActionRequest": UpdateCustomActionRequest,
-    "UpdateDbtConnectionRequest": UpdateDbtConnectionRequest,
     "UpdateOrgRequest": UpdateOrgRequest,
     "UpdateRoleRequest": UpdateRoleRequest,
     "UpdateScheduleRequest": UpdateScheduleRequest,

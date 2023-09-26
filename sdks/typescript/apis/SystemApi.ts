@@ -19,7 +19,7 @@ import { UpdateSystemConfigRequest } from '../models/UpdateSystemConfigRequest';
 export class SystemApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     *   Version: 9.0.0.cl or later  Retrieves the current configuration details of the cluster. If the request is successful, the API returns a list configuration settings applied on the cluster.  Requires `ADMINISTRATION`(**Can administer ThoughtSpot**) privilege to view these complete configuration settings of the cluster.  This API does not require any parameters to be passed in the request.     #### Endpoint URL 
+     *   Version: 9.0.0.cl or later  Retrieves the current configuration details of the cluster. If the request is successful, the API returns a list configuration settings applied on the cluster.  Requires `ADMINISTRATION`(**Can administer ThoughtSpot**) privilege to view these complete configuration settings of the cluster.  This API does not require any parameters to be passed in the request.      
      */
     public async getSystemConfig(_options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -51,7 +51,7 @@ export class SystemApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     *   Version: 9.0.0.cl or later  Gets system information such as the release version, locale, time zone, deployment environment, date format, and date time format of the cluster.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges.  This API does not require any parameters to be passed in the request.       #### Endpoint URL 
+     *   Version: 9.0.0.cl or later  Gets system information such as the release version, locale, time zone, deployment environment, date format, and date time format of the cluster.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges.  This API does not require any parameters to be passed in the request.        
      */
     public async getSystemInformation(_options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -83,7 +83,7 @@ export class SystemApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     *   Version: 9.2.0.cl or later  Gets a list of configuration overrides applied on the cluster.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  This API does not require any parameters to be passed in the request.       #### Endpoint URL 
+     *   Version: 9.2.0.cl or later  Gets a list of configuration overrides applied on the cluster.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  This API does not require any parameters to be passed in the request.        
      */
     public async getSystemOverrideInfo(_options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -115,7 +115,7 @@ export class SystemApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     *   Version: 9.2.0.cl or later  Updates the current configuration of the cluster. You must send the configuration settings in JSON format.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges.     #### Endpoint URL 
+     *   Version: 9.2.0.cl or later  Updates the current configuration of the cluster. You must send the configuration settings in JSON format.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges.      
      * @param updateSystemConfigRequest 
      */
     public async updateSystemConfig(updateSystemConfigRequest: UpdateSystemConfigRequest, _options?: Configuration): Promise<RequestContext> {

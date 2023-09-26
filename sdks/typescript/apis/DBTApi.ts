@@ -20,7 +20,7 @@ import { UpdateDbtConnectionRequest } from '../models/UpdateDbtConnectionRequest
 export class DBTApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     *   Version: 9.8.0.cl or later  Creates a DBT connection object in ThoughtSpot.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege.  #### About create DBT connection DBT connection in ThoughtSpot is used by the user to define DBT credentials for cloud . The API needs  embrace connection, embrace database name, DBT url ,import type, DBT account identifier , DBT project identifier, DBT access token and environment details to create a connection object. To know more about DBT, see ThoughtSpot Product Documentation.     #### Endpoint URL 
+     *   Version: 9.8.0.cl or later  Creates a DBT connection object in ThoughtSpot.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege.  #### About create DBT connection DBT connection in ThoughtSpot is used by the user to define DBT credentials for cloud . The API needs  embrace connection, embrace database name, DBT url ,import type, DBT account identifier , DBT project identifier, DBT access token and environment details to create a connection object. To know more about DBT, see ThoughtSpot Product Documentation.      
      * @param dbtConnectionRequest 
      */
     public async dbtConnection(dbtConnectionRequest: DbtConnectionRequest, _options?: Configuration): Promise<RequestContext> {
@@ -70,7 +70,7 @@ export class DBTApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     *   Version: 9.8.0.cl or later  Gets a list of DBT connection objects by user and organization, available on the ThoughtSpot system.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege  #### About search DBT connection To get details of a specific DBT connection identifier, database connection identifier, database connection name, database name, project name, project identifier, environment identifier , import type and author.     #### Endpoint URL 
+     *   Version: 9.8.0.cl or later  Gets a list of DBT connection objects by user and organization, available on the ThoughtSpot system.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege  #### About search DBT connection To get details of a specific DBT connection identifier, database connection identifier, database connection name, database name, project name, project identifier, environment identifier , import type and author.      
      */
     public async dbtSearch(_options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -102,7 +102,7 @@ export class DBTApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     *   Version: 9.8.0.cl or later  Resynchronize the existing list of models, tables, worksheet tml’s and import them to Thoughtspot based on the DBT connection object.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege, along with an existing DBT connection.     #### Endpoint URL 
+     *   Version: 9.8.0.cl or later  Resynchronize the existing list of models, tables, worksheet tml’s and import them to Thoughtspot based on the DBT connection object.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege, along with an existing DBT connection.      
      * @param generateSyncTmlRequest 
      */
     public async generateSyncTml(generateSyncTmlRequest: GenerateSyncTmlRequest, _options?: Configuration): Promise<RequestContext> {
@@ -152,7 +152,7 @@ export class DBTApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     *   Version: 9.8.0.cl or later  Generate required table and worksheet and import them.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege, along with an existing DBT connection.  #### About generate TML Models and Worksheets to be imported can be selected by the user as part of the API.     #### Endpoint URL 
+     *   Version: 9.8.0.cl or later  Generate required table and worksheet and import them.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege, along with an existing DBT connection.  #### About generate TML Models and Worksheets to be imported can be selected by the user as part of the API.      
      * @param generateTmlRequest 
      */
     public async generateTml(generateTmlRequest: GenerateTmlRequest, _options?: Configuration): Promise<RequestContext> {
@@ -202,7 +202,7 @@ export class DBTApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     *   Version: 9.8.0.cl or later  Updates a DBT connection object.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege, along with an existing DBT connection.  #### About update DBT connection You can modify DBT connection object properties such as embrace connection name, embrace database name,import type, account identifier, access token, project identifier and environment  settings.     #### Endpoint URL 
+     *   Version: 9.8.0.cl or later  Updates a DBT connection object.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege, along with an existing DBT connection.  #### About update DBT connection You can modify DBT connection object properties such as embrace connection name, embrace database name,import type, account identifier, access token, project identifier and environment  settings.      
      * @param dbtConnectionIdentifier Unique ID of the DBT Connection.
      * @param updateDbtConnectionRequest 
      */

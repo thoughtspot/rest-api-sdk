@@ -4,10 +4,8 @@ All URIs are relative to *https://localhost:443*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**activateUser**](UsersApi.md#activateUser) | **POST** /api/rest/2.0/users/activate | 
 [**changeUserPassword**](UsersApi.md#changeUserPassword) | **POST** /api/rest/2.0/users/change-password | 
 [**createUser**](UsersApi.md#createUser) | **POST** /api/rest/2.0/users/create | 
-[**deactivateUser**](UsersApi.md#deactivateUser) | **POST** /api/rest/2.0/users/deactivate | 
 [**deleteUser**](UsersApi.md#deleteUser) | **POST** /api/rest/2.0/users/{user_identifier}/delete | 
 [**forceLogoutUsers**](UsersApi.md#forceLogoutUsers) | **POST** /api/rest/2.0/users/force-logout | 
 [**importUsers**](UsersApi.md#importUsers) | **POST** /api/rest/2.0/users/import | 
@@ -16,72 +14,10 @@ Method | HTTP request | Description
 [**updateUser**](UsersApi.md#updateUser) | **POST** /api/rest/2.0/users/{user_identifier}/update | 
 
 
-# **activateUser**
-> User activateUser(activateUserRequest)
-
- Version: 9.7.0.cl or later
-
-### Example
-
-
-```typescript
-import { createConfiguration, UsersApi, ActivateUserRequest } from 'thoughtspot-rest-api-sdk';
-import * as fs from 'fs';
-
-const configuration = createConfiguration();
-const apiInstance = new UsersApi(configuration);
-
-apiInstance.activateUser(
-  // ActivateUserRequest
-  {
-    user_identifier: "user_identifier_example",
-    auth_token: "auth_token_example",
-    password: "password_example",
-  } 
-).then((data:any) => {
-  console.log('API called successfully. Returned data: ' + data);
-}).catch((error:any) => console.error(error));
-
-
-```
-
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **activateUserRequest** | **ActivateUserRequest**|  |
-
-
-### Return type
-
-**User**
-
-### Authorization
-
-[bearerAuth](README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | User activated successfully. |  -  |
-**400** | Invalid request. |  -  |
-**401** | Unauthorized access. |  -  |
-**403** | Forbidden access. |  -  |
-**500** | Unexpected error |  -  |
-
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
-
 # **changeUserPassword**
 > void changeUserPassword(changeUserPasswordRequest)
 
-  Version: 9.0.0.cl or later  Updates the current password of the user.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.     #### Endpoint URL 
+  Version: 9.0.0.cl or later  Updates the current password of the user.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
 
 ### Example
 
@@ -143,7 +79,7 @@ Name | Type | Description  | Notes
 # **createUser**
 > User createUser(createUserRequest)
 
-  Version: 9.0.0.cl or later  Creates a user in ThoughtSpot.  The API endpoint allows you to configure several user properties such as email address, account status, share notification preferences, and sharing visibility. You can provision the user to [groups](https://docs.thoughtspot.com/cloud/latest/groups-privileges) and [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview). You can also add Liveboard, Answer, and Worksheet objects to the user’s favorites list, assign a default Liveboard for the user, and set user preferences.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.     #### Endpoint URL 
+  Version: 9.0.0.cl or later  Creates a user in ThoughtSpot.  The API endpoint allows you to configure several user properties such as email address, account status, share notification preferences, and sharing visibility. You can provision the user to [groups](https://docs.thoughtspot.com/cloud/latest/groups-privileges) and [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview). You can also add Liveboard, Answer, and Worksheet objects to the user’s favorites list, assign a default Liveboard for the user, and set user preferences.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
 
 ### Example
 
@@ -226,71 +162,10 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-# **deactivateUser**
-> ResponseActivationURL deactivateUser(deactivateUserRequest)
-
- Version: 9.7.0.cl or later
-
-### Example
-
-
-```typescript
-import { createConfiguration, UsersApi, DeactivateUserRequest } from 'thoughtspot-rest-api-sdk';
-import * as fs from 'fs';
-
-const configuration = createConfiguration();
-const apiInstance = new UsersApi(configuration);
-
-apiInstance.deactivateUser(
-  // DeactivateUserRequest
-  {
-    user_identifier: "user_identifier_example",
-    base_url: "base_url_example",
-  } 
-).then((data:any) => {
-  console.log('API called successfully. Returned data: ' + data);
-}).catch((error:any) => console.error(error));
-
-
-```
-
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **deactivateUserRequest** | **DeactivateUserRequest**|  |
-
-
-### Return type
-
-**ResponseActivationURL**
-
-### Authorization
-
-[bearerAuth](README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | User deactivated successfully. |  -  |
-**400** | Invalid request. |  -  |
-**401** | Unauthorized access. |  -  |
-**403** | Forbidden access. |  -  |
-**500** | Unexpected error |  -  |
-
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
-
 # **deleteUser**
 > void deleteUser()
 
-  Version: 9.0.0.cl or later  Deletes a user from the ThoughtSpot system.  If you want to remove a user from a specific Org but not from ThoughtSpot, update the group and Org mapping properties of the user object via a POST API call to the [/api/rest/2.0/users/{user_identifier}/update](#/http/api-endpoints/users/update-user) endpoint.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.     #### Endpoint URL 
+  Version: 9.0.0.cl or later  Deletes a user from the ThoughtSpot system.  If you want to remove a user from a specific Org but not from ThoughtSpot, update the group and Org mapping properties of the user object via a POST API call to the [/api/rest/2.0/users/{user_identifier}/update](#/http/api-endpoints/users/update-user) endpoint.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
 
 ### Example
 
@@ -348,7 +223,7 @@ Name | Type | Description  | Notes
 # **forceLogoutUsers**
 > void forceLogoutUsers()
 
-  Version: 9.0.0.cl or later  Enforces logout on current user sessions.    Use this API with caution as it may invalidate active user sessions and force users to re-login. Make sure you specify the usernames or GUIDs. If you pass null values in the API call, all user sessions on your cluster become invalid, and the users are forced to re-login.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.     #### Endpoint URL 
+  Version: 9.0.0.cl or later  Enforces logout on current user sessions.    Use this API with caution as it may invalidate active user sessions and force users to re-login. Make sure you specify the usernames or GUIDs. If you pass null values in the API call, all user sessions on your cluster become invalid, and the users are forced to re-login.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
 
 ### Example
 
@@ -410,7 +285,7 @@ Name | Type | Description  | Notes
 # **importUsers**
 > ImportUsersResponse importUsers(importUsersRequest)
 
-  Version: 9.0.0.cl or later  Imports user data from external databases into ThoughtSpot. During the user import operation:  * If the specified users are not available in ThoughtSpot, the users are created and assigned a default password. Defining a `default_password` in the API request is optional. * If `delete_unspecified_users` is set to `true`, the users not specified in the API request, excluding the `tsadmin`, `guest`, `system` and `su` users, are deleted. * If the specified user objects are already available in ThoughtSpot, the object properties are updated and synchronized as per the input data in the API request.  A successful API call returns the object that represents the changes made in the ThoughtSpot system.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.     #### Endpoint URL 
+  Version: 9.0.0.cl or later  Imports user data from external databases into ThoughtSpot. During the user import operation:  * If the specified users are not available in ThoughtSpot, the users are created and assigned a default password. Defining a `default_password` in the API request is optional. * If `delete_unspecified_users` is set to `true`, the users not specified in the API request, excluding the `tsadmin`, `guest`, `system` and `su` users, are deleted. * If the specified user objects are already available in ThoughtSpot, the object properties are updated and synchronized as per the input data in the API request.  A successful API call returns the object that represents the changes made in the ThoughtSpot system.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
 
 ### Example
 
@@ -499,7 +374,7 @@ Name | Type | Description  | Notes
 # **resetUserPassword**
 > void resetUserPassword(resetUserPasswordRequest)
 
-  Version: 9.0.0.cl or later  Resets the password of a user account. Administrators can reset password on behalf of a user.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.     #### Endpoint URL 
+  Version: 9.0.0.cl or later  Resets the password of a user account. Administrators can reset password on behalf of a user.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
 
 ### Example
 
@@ -560,7 +435,7 @@ Name | Type | Description  | Notes
 # **searchUsers**
 > Array<User> searchUsers()
 
-  Version: 9.0.0.cl or later   Gets a list of users available on the ThoughtSpot system.  To get details of a specific user, specify the user GUID or name. You can also filter the API response based on groups, Org ID, user visibility, account status, user type, and user preference settings and favorites.  Available to all users. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view all users properties.     #### Endpoint URL 
+  Version: 9.0.0.cl or later   Gets a list of users available on the ThoughtSpot system.  To get details of a specific user, specify the user GUID or name. You can also filter the API response based on groups, Org ID, user visibility, account status, user type, and user preference settings and favorites.  Available to all users. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view all users properties.      
 
 ### Example
 
@@ -655,7 +530,7 @@ Name | Type | Description  | Notes
 # **updateUser**
 > void updateUser()
 
-  Version: 9.0.0.cl or later  Updates a user object.  You can modify user properties such as username, email, and share notification settings. You can also assign new groups and Orgs, remove the user from a group or Org, reset password, and modify user preferences.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.     #### Endpoint URL 
+  Version: 9.0.0.cl or later  Updates a user object.  You can modify user properties such as username, email, and share notification settings. You can also assign new groups and Orgs, remove the user from a group or Org, reset password, and modify user preferences.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
 
 ### Example
 
