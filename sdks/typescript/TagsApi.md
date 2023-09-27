@@ -22,7 +22,6 @@ Method | HTTP request | Description
 
 ```typescript
 import { createBearerAuthenticationConfig, TagsApi, AssignTagRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -93,7 +92,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, TagsApi, CreateTagRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -157,7 +155,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, TagsApi, DeleteTagRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -218,7 +215,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, TagsApi, SearchTagsRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -283,7 +279,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, TagsApi, UnassignTagRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -354,7 +349,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, TagsApi, UpdateTagRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",

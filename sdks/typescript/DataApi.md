@@ -19,7 +19,6 @@ Method | HTTP request | Description
 
 ```typescript
 import { createBearerAuthenticationConfig, DataApi, FetchAnswerDataRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -88,7 +87,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, DataApi, FetchLiveboardDataRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -161,7 +159,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, DataApi, SearchDataRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",

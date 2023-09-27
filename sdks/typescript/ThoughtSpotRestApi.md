@@ -91,7 +91,6 @@ Method | HTTP request | Description
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, AssignChangeAuthorRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -161,7 +160,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, AssignTagRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -232,7 +230,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, ChangeUserPasswordRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -297,7 +294,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, CommitBranchRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -368,7 +364,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, CreateConfigRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -442,7 +437,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, CreateConnectionRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -509,7 +503,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, CreateCustomActionRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -615,7 +608,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, CreateOrgRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -679,7 +671,6 @@ Creates a Role. Requires cluster Administration or Role Administration privilege
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, CreateRoleRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -746,7 +737,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, CreateScheduleRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -851,7 +841,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, CreateTagRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -915,7 +904,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, CreateUserRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -1004,7 +992,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, CreateUserGroupRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -1086,7 +1073,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, DeleteConfigRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -1149,7 +1135,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, DeleteConnectionRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -1212,7 +1197,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, DeleteCustomActionRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -1273,7 +1257,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, DeleteMetadataRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -1342,7 +1325,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, DeleteOrgRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -1403,7 +1385,6 @@ Deletes a Role. Requires cluster Administration or Role Administration privilege
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, DeleteRoleRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -1464,7 +1445,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, DeleteScheduleRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -1525,7 +1505,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, DeleteTagRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -1586,7 +1565,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, DeleteUserRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -1647,7 +1625,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, DeleteUserGroupRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -1708,7 +1685,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, DeployCommitRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -1774,7 +1750,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, ExportAnswerReportRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -1841,7 +1816,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, ExportLiveboardReportRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -1925,7 +1899,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, ExportMetadataTMLRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -1996,7 +1969,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, FetchAnswerDataRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -2065,7 +2037,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, FetchAnswerSqlQueryRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -2128,7 +2099,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, FetchLiveboardDataRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -2201,7 +2171,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, FetchLiveboardSqlQueryRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -2267,7 +2236,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, FetchLogsRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -2332,7 +2300,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, FetchPermissionsOfPrincipalsRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -2406,7 +2373,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, FetchPermissionsOnMetadataRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -2481,7 +2447,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, ForceLogoutUsersRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -2546,7 +2511,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, GetCurrentUserInfoRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -2601,7 +2565,6 @@ This endpoint does not need any parameter.
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, GetCurrentUserTokenRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -2656,7 +2619,6 @@ This endpoint does not need any parameter.
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, GetFullAccessTokenRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -2740,7 +2702,6 @@ No authorization required
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, GetObjectAccessTokenRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -2825,7 +2786,6 @@ No authorization required
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, GetSystemConfigRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -2880,7 +2840,6 @@ This endpoint does not need any parameter.
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, GetSystemInformationRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -2935,7 +2894,6 @@ This endpoint does not need any parameter.
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, GetSystemOverrideInfoRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -2990,7 +2948,6 @@ This endpoint does not need any parameter.
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, ImportMetadataTMLRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -3057,7 +3014,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, ImportUserGroupsRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -3142,7 +3098,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, ImportUsersRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -3234,7 +3189,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, LoginRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -3300,7 +3254,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, LogoutRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -3355,7 +3308,6 @@ This endpoint does not need any parameter.
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, ResetUserPasswordRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -3419,7 +3371,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, RevertCommitRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -3492,7 +3443,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, RevokeTokenRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -3556,7 +3506,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, SearchCommitsRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -3623,7 +3572,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, SearchConfigRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -3688,7 +3636,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, SearchConnectionRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -3780,7 +3727,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, SearchCustomActionsRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -3856,7 +3802,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, SearchDataRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -3926,7 +3871,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, SearchMetadataRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -4041,7 +3985,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, SearchOrgsRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -4110,7 +4053,6 @@ Gets Roles configured on a ThoughtSpot instance. Requires cluster Administration
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, SearchRolesRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -4190,7 +4132,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, SearchSchedulesRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -4272,7 +4213,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, SearchTagsRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -4337,7 +4277,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, SearchUserGroupsRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -4429,7 +4368,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, SearchUsersRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -4527,7 +4465,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, ShareMetadataRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -4610,7 +4547,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, UnassignTagRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -4681,7 +4617,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, UpdateConfigRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -4754,7 +4689,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, UpdateConnectionRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -4821,7 +4755,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, UpdateCustomActionRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -4931,7 +4864,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, UpdateOrgRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -5005,7 +4937,6 @@ Updates a Role. Requires cluster Administration or Role Administration privilege
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, UpdateRoleRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -5075,7 +5006,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, UpdateScheduleRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -5184,7 +5114,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, UpdateSystemConfigRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -5247,7 +5176,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, UpdateTagRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -5314,7 +5242,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, UpdateUserRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -5405,7 +5332,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, UpdateUserGroupRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -5491,7 +5417,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, ThoughtSpotRestApi, ValidateMergeRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",

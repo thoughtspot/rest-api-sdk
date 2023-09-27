@@ -20,7 +20,6 @@ Method | HTTP request | Description
 
 ```typescript
 import { createBearerAuthenticationConfig, SystemApi, GetSystemConfigRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -75,7 +74,6 @@ This endpoint does not need any parameter.
 
 ```typescript
 import { createBearerAuthenticationConfig, SystemApi, GetSystemInformationRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -130,7 +128,6 @@ This endpoint does not need any parameter.
 
 ```typescript
 import { createBearerAuthenticationConfig, SystemApi, GetSystemOverrideInfoRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -185,7 +182,6 @@ This endpoint does not need any parameter.
 
 ```typescript
 import { createBearerAuthenticationConfig, SystemApi, UpdateSystemConfigRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",

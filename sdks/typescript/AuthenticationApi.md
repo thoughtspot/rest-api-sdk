@@ -23,7 +23,6 @@ Method | HTTP request | Description
 
 ```typescript
 import { createBearerAuthenticationConfig, AuthenticationApi, GetCurrentUserInfoRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -78,7 +77,6 @@ This endpoint does not need any parameter.
 
 ```typescript
 import { createBearerAuthenticationConfig, AuthenticationApi, GetCurrentUserTokenRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -133,7 +131,6 @@ This endpoint does not need any parameter.
 
 ```typescript
 import { createBearerAuthenticationConfig, AuthenticationApi, GetFullAccessTokenRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -217,7 +214,6 @@ No authorization required
 
 ```typescript
 import { createBearerAuthenticationConfig, AuthenticationApi, GetObjectAccessTokenRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -302,7 +298,6 @@ No authorization required
 
 ```typescript
 import { createBearerAuthenticationConfig, AuthenticationApi, LoginRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -368,7 +363,6 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createBearerAuthenticationConfig, AuthenticationApi, LogoutRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -423,7 +417,6 @@ This endpoint does not need any parameter.
 
 ```typescript
 import { createBearerAuthenticationConfig, AuthenticationApi, RevokeTokenRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",

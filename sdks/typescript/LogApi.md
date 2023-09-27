@@ -17,7 +17,6 @@ Method | HTTP request | Description
 
 ```typescript
 import { createBearerAuthenticationConfig, LogApi, FetchLogsRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",

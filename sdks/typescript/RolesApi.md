@@ -20,7 +20,6 @@ Creates a Role. Requires cluster Administration or Role Administration privilege
 
 ```typescript
 import { createBearerAuthenticationConfig, RolesApi, CreateRoleRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -87,7 +86,6 @@ Deletes a Role. Requires cluster Administration or Role Administration privilege
 
 ```typescript
 import { createBearerAuthenticationConfig, RolesApi, DeleteRoleRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -148,7 +146,6 @@ Gets Roles configured on a ThoughtSpot instance. Requires cluster Administration
 
 ```typescript
 import { createBearerAuthenticationConfig, RolesApi, SearchRolesRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
@@ -228,7 +225,6 @@ Updates a Role. Requires cluster Administration or Role Administration privilege
 
 ```typescript
 import { createBearerAuthenticationConfig, RolesApi, UpdateRoleRequest } from '@thoughtspot/rest-api-sdk';
-import * as fs from 'fs';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
