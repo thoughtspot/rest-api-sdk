@@ -61,3 +61,13 @@ const main = async () => {
 
 main();
 ```
+
+---
+
+**NOTE:** For self certified ssl certificates, use the following config:
+
+```
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"
+```
+
+---
