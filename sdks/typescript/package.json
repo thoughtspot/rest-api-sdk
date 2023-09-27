@@ -1,6 +1,6 @@
 {
   "name": "@thoughtspot/rest-api-sdk",
-  "version": "1.0.0",
+  "version": "0.0.1-dev",
   "description": "Api sdk for thoughtspot's public v2 rest api",
   "keywords": [
     "fetch",
@@ -17,6 +17,7 @@
   "type": "commonjs",
   "exports": {
     ".": {
+      "import": "./dist/index.js",
       "require": "./dist/index.js",
       "types": "./dist/index.d.js"
     }
@@ -24,7 +25,7 @@
   "typings": "./dist/index.d.ts",
   "scripts": {
     "build": "tsup index.ts --format esm,cjs --dts",
-    "test" : "ts-mocha ./tests/ThoughtSpotRestApiTest.ts --timeout 6000"
+    "test": "ts-mocha ./tests/ThoughtSpotRestApiTest.ts --timeout 6000"
   },
   "dependencies": {
     "whatwg-fetch": "^3.0.0",
