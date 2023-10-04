@@ -1,6 +1,6 @@
 # ThoughtSpotRestApiSdk.OrgsApi
 
-All URIs are relative to *https://localhost:443*
+All URIs are relative to *CLUSTER_URL*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
