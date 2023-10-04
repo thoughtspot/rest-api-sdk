@@ -24,7 +24,8 @@
   "typings": "./dist/index.d.ts",
   "scripts": {
     "build": "tsup index.ts --format esm,cjs --dts",
-    "test" : "ts-mocha ./tests/ThoughtSpotRestApiTest.ts --timeout 6000"
+    "test" : "ts-mocha ./tests/ThoughtSpotRestApiTest.ts --timeout 6000",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "whatwg-fetch": "^3.0.0",
