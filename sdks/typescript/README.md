@@ -1,14 +1,6 @@
 ## @thoughtspot/rest-api-sdk@2.0.0
 
-This generator creates TypeScript/JavaScript client that utilizes fetch-api.
-
-### Building
-
-To build and compile the typescript sources to javascript use:
-```
-npm install
-npm run build
-```
+TypeScript/JavaScript client for ThoughtSpot's v2 [Rest APIs](https://developers.thoughtspot.com/docs/rest-api-v2).
 
 ### Consuming
 
@@ -46,6 +38,7 @@ const main = async () => {
     password: "YOUR_PASSWORD",
   });
 
+  // create a thoughtspot client
   const tsRestApiClient = new ThoughtSpotRestApi(config);
 
   try {
@@ -71,3 +64,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"
 ```
 
 ---
+
+## Live Playground
+
+We recommend that you browse through the [code playground](https://try-everywhere.thoughtspot.cloud/v2/#/everywhere/api/rest/playgroundV2_0) before you start constructing your API requests. The playground offers an interactive portal with comprehensive information about the API endpoints, request and response workflows.
