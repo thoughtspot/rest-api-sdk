@@ -2691,7 +2691,8 @@
                         "SINGLESTORE",
                         "GCP_SQLSERVER",
                         "GCP_ALLOYDB_POSTGRESQL",
-                        "GCP_POSTGRESQL"
+                        "GCP_POSTGRESQL",
+                        "GCP_MYSQL"
                       ]
                     }
                   },
@@ -7140,7 +7141,8 @@
                       "SINGLESTORE",
                       "GCP_SQLSERVER",
                       "GCP_ALLOYDB_POSTGRESQL",
-                      "GCP_POSTGRESQL"
+                      "GCP_POSTGRESQL",
+                      "GCP_MYSQL"
                     ]
                   },
                   "data_warehouse_config": {
@@ -11727,7 +11729,8 @@
               "SINGLESTORE",
               "GCP_SQLSERVER",
               "GCP_ALLOYDB_POSTGRESQL",
-              "GCP_POSTGRESQL"
+              "GCP_POSTGRESQL",
+              "GCP_MYSQL"
             ],
             "description": "Type of data warehouse."
           },
@@ -12984,7 +12987,8 @@
               "SINGLESTORE",
               "GCP_SQLSERVER",
               "GCP_ALLOYDB_POSTGRESQL",
-              "GCP_POSTGRESQL"
+              "GCP_POSTGRESQL",
+              "GCP_MYSQL"
             ],
             "description": "Type of data warehouse."
           },
