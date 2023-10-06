@@ -1,4 +1,4 @@
-## @thoughtspot/rest-api-sdk@2.0.0
+## @thoughtspot/rest-api-sdk@2.0.1
 
 TypeScript/JavaScript client for ThoughtSpot's v2 [Rest APIs](https://developers.thoughtspot.com/docs/rest-api-v2).
 
@@ -9,7 +9,7 @@ Navigate to the folder of your consuming project and run one of the following co
 _published:_
 
 ```
-npm install @thoughtspot/rest-api-sdk@2.0.0 --save
+npm install @thoughtspot/rest-api-sdk@2.0.1 --save
 ```
 
 _unPublished (not recommended):_
