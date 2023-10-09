@@ -9,7 +9,7 @@ Navigate to the folder of your consuming project and run one of the following co
 _published:_
 
 ```
-npm install @thoughtspot/rest-api-sdk@2.0.1 --save
+npm install @thoughtspot/rest-api-sdk --save
 ```
 
 _unPublished (not recommended):_
