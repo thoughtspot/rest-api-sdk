@@ -30,6 +30,14 @@
       "description": "Roles for version 9.2.0.cl"
     },
     {
+      "name": "9.9.0.cl",
+      "id": "9.9.0.cl",
+      "tags": [
+        "9.9.0.cl"
+      ],
+      "description": "Roles for version 9.9.0.cl"
+    },
+    {
       "name": "9.5.0.cl",
       "id": "9.5.0.cl",
       "tags": [
@@ -7389,6 +7397,152 @@
         }
       }
     },
+    "/api/rest/2.0/connections/fetch-connection-diff-status/{connection_identifier}": {
+      "post": {
+        "operationId": "fetchConnectionDiffStatus",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.9.0.cl or later</span>\n\nValidates the difference in connection metadata between CDW and ThoughtSpot\n\nRequires `DATAMANAGEMENT` (**Can manage data**) privilege\n\nReturns a boolean indicating whether there is any difference between the connection metadata at ThoughtSpot and CDW.\n\nTo get the connection metadata difference status, pass the connection GUID as `connection_identifier` in the API request.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Connections",
+          "9.9.0.cl"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "connection_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "GUID of the connection"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "true/false",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FetchConnectionDiffStatusResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/connections/download-connection-metadata-changes/{connection_identifier}": {
+      "post": {
+        "operationId": "downloadConnectionMetadataChanges",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.9.0.cl or later</span>\n\nExports the difference in connection metadata between CDW and ThoughtSpot\n\nRequires `DATAMANAGEMENT` (**Can manage data**) privilege\n\nTo download the connection metadata difference between ThoughtSpot and CDW, pass the connection GUID as `connection_identifier` in the API request.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Connections",
+          "9.9.0.cl"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "connection_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "GUID of the connection"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Export metadata changes.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/roles/create": {
       "post": {
         "operationId": "createRole",
@@ -12995,6 +13149,15 @@
           "details": {
             "type": "object",
             "description": "Details of the connection."
+          }
+        }
+      },
+      "FetchConnectionDiffStatusResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "boolean",
+            "description": "Status of the connection diff."
           }
         }
       },
