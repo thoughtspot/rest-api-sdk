@@ -9862,7 +9862,7 @@
     "/api/rest/2.0/dbt/dbt-connection": {
       "post": {
         "operationId": "dbtConnection",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.8.0.cl or later</span>\n\nCreates a DBT connection object in ThoughtSpot.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege.\n\n#### About create DBT connection\nDBT connection in ThoughtSpot is used by the user to define DBT credentials for cloud . The API needs  embrace connection, embrace database name, DBT url ,import type, DBT account identifier , DBT project identifier, DBT access token and environment details to create a connection object. To know more about DBT, see ThoughtSpot Product Documentation.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.8.0.cl or later</span>\n\nCreates a DBT connection object in ThoughtSpot.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege.\n\n#### About create DBT connection\nDBT connection in ThoughtSpot is used by the user to define DBT credentials for cloud . The API needs  embrace connection, embrace database name, DBT url, import type, DBT account identifier, DBT project identifier, DBT access token and environment details (or) embrace connection, embrace database name, import type, file_content to create a connection object. To know more about DBT, see ThoughtSpot Product Documentation.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "DBT",
           "9.8.0.cl"
@@ -9886,7 +9886,8 @@
                     "default": "DBT_CLOUD",
                     "type": "string",
                     "enum": [
-                      "DBT_CLOUD"
+                      "DBT_CLOUD",
+                      "ZIP_FILE"
                     ]
                   },
                   "access_token": {
@@ -9911,6 +9912,10 @@
                   },
                   "project_name": {
                     "description": "Name of the project",
+                    "type": "string"
+                  },
+                  "file_content": {
+                    "description": "Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is Mandatory when Import Type is 'ZIP_FILE'",
                     "type": "string"
                   }
                 },
@@ -9980,8 +9985,8 @@
     },
     "/api/rest/2.0/dbt/generate-tml": {
       "post": {
-        "operationId": "generateTml",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.8.0.cl or later</span>\n\nGenerate required table and worksheet and import them.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege, along with an existing DBT connection.\n\n#### About generate TML\nModels and Worksheets to be imported can be selected by the user as part of the API.\n\n\n\n\n#### Endpoint URL\n",
+        "operationId": "dbtGenerateTml",
+        "description": " <span class=\"since-beta-tag\">Version: 9.8.0.cl or later</span>",
         "tags": [
           "DBT",
           "9.8.0.cl"
@@ -10018,11 +10023,14 @@
                     "items": {
                       "type": "string"
                     }
+                  },
+                  "file_content": {
+                    "description": "Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’",
+                    "type": "string"
                   }
                 },
                 "required": [
                   "dbt_connection_identifier",
-                  "model_tables",
                   "import_worksheets"
                 ]
               }
@@ -10087,8 +10095,8 @@
     },
     "/api/rest/2.0/dbt/generate-sync-tml": {
       "post": {
-        "operationId": "generateSyncTml",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.8.0.cl or later</span>\n\nResynchronize the existing list of models, tables, worksheet tml’s and import them to Thoughtspot based on the DBT connection object.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege, along with an existing DBT connection.\n\n\n\n\n#### Endpoint URL\n",
+        "operationId": "dbtGenerateSyncTml",
+        "description": " <span class=\"since-beta-tag\">Version: 9.8.0.cl or later</span>",
         "tags": [
           "DBT",
           "9.8.0.cl"
@@ -10101,6 +10109,10 @@
                 "properties": {
                   "dbt_connection_identifier": {
                     "description": "Unique ID of the DBT connection.",
+                    "type": "string"
+                  },
+                  "file_content": {
+                    "description": "Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’",
                     "type": "string"
                   }
                 },
@@ -10230,10 +10242,76 @@
         }
       }
     },
+    "/api/rest/2.0/dbt/{dbt_connection_identifier}/delete": {
+      "post": {
+        "operationId": "deleteDbtConnection",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.8.0.cl or later</span>\n\nRemoves the specified DBT connection object from the ThoughtSpot system.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "DBT",
+          "9.8.0.cl"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dbt_connection_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique ID of the DBT Connection."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "DBT Connection successfully deleted."
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/dbt/{dbt_connection_identifier}": {
       "post": {
         "operationId": "updateDbtConnection",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.8.0.cl or later</span>\n\nUpdates a DBT connection object.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege, along with an existing DBT connection.\n\n#### About update DBT connection\nYou can modify DBT connection object properties such as embrace connection name, embrace database name,import type, account identifier, access token, project identifier and environment  settings.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.8.0.cl or later</span>\n\nUpdates a DBT connection object.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege, along with an existing DBT connection.\n\n#### About update DBT connection\nYou can modify DBT connection object properties such as embrace connection name, embrace database name, import type, account identifier, access token, project identifier and environment (or) embrace connection, embrace database name, import type, file_content settings.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "DBT",
           "9.8.0.cl"
@@ -10257,7 +10335,8 @@
                     "default": "DBT_CLOUD",
                     "type": "string",
                     "enum": [
-                      "DBT_CLOUD"
+                      "DBT_CLOUD",
+                      "ZIP_FILE"
                     ]
                   },
                   "access_token": {
@@ -10283,6 +10362,10 @@
                   "project_name": {
                     "description": "Name of the project",
                     "type": "string"
+                  },
+                  "file_content": {
+                    "description": "Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is Mandatory when Import Type is 'ZIP_FILE'",
+                    "type": "string"
                   }
                 }
               }
@@ -10301,8 +10384,15 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "DBT Connection successfully updated."
+          "200": {
+            "description": "DBT Connection successfully updated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "400": {
             "description": "Invalid request.",
@@ -14050,10 +14140,18 @@
       },
       "ModelTableList": {
         "type": "object",
+        "required": [
+          "model_name",
+          "tables"
+        ],
         "properties": {
           "model_name": {
             "type": "string",
             "description": "Name of the Model."
+          },
+          "model_path": {
+            "type": "string",
+            "description": "Model directory path, this is optional param and required if there are duplicate models with the same name."
           },
           "tables": {
             "type": "array",
