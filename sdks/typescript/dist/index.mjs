@@ -2591,6 +2591,25 @@ _FetchAnswerSqlQueryRequest.attributeTypeMap = [
 ];
 var FetchAnswerSqlQueryRequest = _FetchAnswerSqlQueryRequest;
 
+// models/FetchConnectionDiffStatusResponse.ts
+var _FetchConnectionDiffStatusResponse = class _FetchConnectionDiffStatusResponse {
+  static getAttributeTypeMap() {
+    return _FetchConnectionDiffStatusResponse.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_FetchConnectionDiffStatusResponse.discriminator = void 0;
+_FetchConnectionDiffStatusResponse.attributeTypeMap = [
+  {
+    "name": "status",
+    "baseName": "status",
+    "type": "boolean",
+    "format": ""
+  }
+];
+var FetchConnectionDiffStatusResponse = _FetchConnectionDiffStatusResponse;
+
 // models/FetchLiveboardDataRequest.ts
 var _FetchLiveboardDataRequest = class _FetchLiveboardDataRequest {
   static getAttributeTypeMap() {
@@ -8320,6 +8339,7 @@ var typeMap = {
   "FavoriteObjectOptionsInput": FavoriteObjectOptionsInput,
   "FetchAnswerDataRequest": FetchAnswerDataRequest,
   "FetchAnswerSqlQueryRequest": FetchAnswerSqlQueryRequest,
+  "FetchConnectionDiffStatusResponse": FetchConnectionDiffStatusResponse,
   "FetchLiveboardDataRequest": FetchLiveboardDataRequest,
   "FetchLiveboardSqlQueryRequest": FetchLiveboardSqlQueryRequest,
   "FetchLogsRequest": FetchLogsRequest,
@@ -26087,6 +26107,7 @@ export {
   FavoriteObjectOptionsInput,
   FetchAnswerDataRequest,
   FetchAnswerSqlQueryRequest,
+  FetchConnectionDiffStatusResponse,
   FetchLiveboardDataRequest,
   FetchLiveboardSqlQueryRequest,
   FetchLogsRequest,

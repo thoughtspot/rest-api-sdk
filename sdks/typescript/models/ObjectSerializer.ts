@@ -67,6 +67,7 @@ export * from '../models/FavoriteMetadataItem';
 export * from '../models/FavoriteObjectOptionsInput';
 export * from '../models/FetchAnswerDataRequest';
 export * from '../models/FetchAnswerSqlQueryRequest';
+export * from '../models/FetchConnectionDiffStatusResponse';
 export * from '../models/FetchLiveboardDataRequest';
 export * from '../models/FetchLiveboardSqlQueryRequest';
 export * from '../models/FetchLogsRequest';
@@ -255,6 +256,7 @@ import { FavoriteMetadataItem  , FavoriteMetadataItemTypeEnum   } from '../model
 import { FavoriteObjectOptionsInput } from '../models/FavoriteObjectOptionsInput';
 import { FetchAnswerDataRequest , FetchAnswerDataRequestDataFormatEnum        } from '../models/FetchAnswerDataRequest';
 import { FetchAnswerSqlQueryRequest } from '../models/FetchAnswerSqlQueryRequest';
+import { FetchConnectionDiffStatusResponse } from '../models/FetchConnectionDiffStatusResponse';
 import { FetchLiveboardDataRequest   , FetchLiveboardDataRequestDataFormatEnum        } from '../models/FetchLiveboardDataRequest';
 import { FetchLiveboardSqlQueryRequest } from '../models/FetchLiveboardSqlQueryRequest';
 import { FetchLogsRequest, FetchLogsRequestLogTypeEnum     } from '../models/FetchLogsRequest';
@@ -576,6 +578,7 @@ let typeMap: {[index: string]: any} = {
     "FavoriteObjectOptionsInput": FavoriteObjectOptionsInput,
     "FetchAnswerDataRequest": FetchAnswerDataRequest,
     "FetchAnswerSqlQueryRequest": FetchAnswerSqlQueryRequest,
+    "FetchConnectionDiffStatusResponse": FetchConnectionDiffStatusResponse,
     "FetchLiveboardDataRequest": FetchLiveboardDataRequest,
     "FetchLiveboardSqlQueryRequest": FetchLiveboardSqlQueryRequest,
     "FetchLogsRequest": FetchLogsRequest,

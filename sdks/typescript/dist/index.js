@@ -574,6 +574,9 @@ __export(typescript_exports, {
     FetchAnswerSqlQueryRequest: function() {
         return FetchAnswerSqlQueryRequest;
     },
+    FetchConnectionDiffStatusResponse: function() {
+        return FetchConnectionDiffStatusResponse;
+    },
     FetchLiveboardDataRequest: function() {
         return FetchLiveboardDataRequest;
     },
@@ -4178,6 +4181,31 @@ _FetchAnswerSqlQueryRequest.attributeTypeMap = [
     }
 ];
 var FetchAnswerSqlQueryRequest = _FetchAnswerSqlQueryRequest;
+// models/FetchConnectionDiffStatusResponse.ts
+var _FetchConnectionDiffStatusResponse = /*#__PURE__*/ function() {
+    function _FetchConnectionDiffStatusResponse() {
+        _class_call_check(this, _FetchConnectionDiffStatusResponse);
+    }
+    _create_class(_FetchConnectionDiffStatusResponse, null, [
+        {
+            key: "getAttributeTypeMap",
+            value: function getAttributeTypeMap() {
+                return _FetchConnectionDiffStatusResponse.attributeTypeMap;
+            }
+        }
+    ]);
+    return _FetchConnectionDiffStatusResponse;
+}();
+_FetchConnectionDiffStatusResponse.discriminator = void 0;
+_FetchConnectionDiffStatusResponse.attributeTypeMap = [
+    {
+        "name": "status",
+        "baseName": "status",
+        "type": "boolean",
+        "format": ""
+    }
+];
+var FetchConnectionDiffStatusResponse = _FetchConnectionDiffStatusResponse;
 // models/FetchLiveboardDataRequest.ts
 var _FetchLiveboardDataRequest = /*#__PURE__*/ function() {
     function _FetchLiveboardDataRequest() {
@@ -10650,6 +10678,7 @@ var typeMap = {
     "FavoriteObjectOptionsInput": FavoriteObjectOptionsInput,
     "FetchAnswerDataRequest": FetchAnswerDataRequest,
     "FetchAnswerSqlQueryRequest": FetchAnswerSqlQueryRequest,
+    "FetchConnectionDiffStatusResponse": FetchConnectionDiffStatusResponse,
     "FetchLiveboardDataRequest": FetchLiveboardDataRequest,
     "FetchLiveboardSqlQueryRequest": FetchLiveboardSqlQueryRequest,
     "FetchLogsRequest": FetchLogsRequest,
@@ -55863,6 +55892,7 @@ var createBearerAuthenticationConfig = function(url, paramOrTokenProvider) {
     FavoriteObjectOptionsInput: FavoriteObjectOptionsInput,
     FetchAnswerDataRequest: FetchAnswerDataRequest,
     FetchAnswerSqlQueryRequest: FetchAnswerSqlQueryRequest,
+    FetchConnectionDiffStatusResponse: FetchConnectionDiffStatusResponse,
     FetchLiveboardDataRequest: FetchLiveboardDataRequest,
     FetchLiveboardSqlQueryRequest: FetchLiveboardSqlQueryRequest,
     FetchLogsRequest: FetchLogsRequest,
