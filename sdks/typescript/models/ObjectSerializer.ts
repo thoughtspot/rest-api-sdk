@@ -67,7 +67,6 @@ export * from '../models/FavoriteMetadataItem';
 export * from '../models/FavoriteObjectOptionsInput';
 export * from '../models/FetchAnswerDataRequest';
 export * from '../models/FetchAnswerSqlQueryRequest';
-export * from '../models/FetchConnectionDiffStatusResponse';
 export * from '../models/FetchLiveboardDataRequest';
 export * from '../models/FetchLiveboardSqlQueryRequest';
 export * from '../models/FetchLogsRequest';
@@ -105,6 +104,7 @@ export * from '../models/MetadataObject';
 export * from '../models/MetadataResponse';
 export * from '../models/MetadataSearchResponse';
 export * from '../models/MetadataSearchSortOptions';
+export * from '../models/MetadataTypeInput';
 export * from '../models/ModelTableList';
 export * from '../models/ObjectIDAndName';
 export * from '../models/Org';
@@ -186,6 +186,7 @@ export * from '../models/User';
 export * from '../models/UserGroup';
 export * from '../models/UserGroupResponse';
 export * from '../models/ValidateMergeRequest';
+export * from '../models/VisualizationIdentifiersInput';
 
 import { APIKey } from '../models/APIKey';
 import { APIKeyInput } from '../models/APIKeyInput';
@@ -256,7 +257,6 @@ import { FavoriteMetadataItem  , FavoriteMetadataItemTypeEnum   } from '../model
 import { FavoriteObjectOptionsInput } from '../models/FavoriteObjectOptionsInput';
 import { FetchAnswerDataRequest , FetchAnswerDataRequestDataFormatEnum        } from '../models/FetchAnswerDataRequest';
 import { FetchAnswerSqlQueryRequest } from '../models/FetchAnswerSqlQueryRequest';
-import { FetchConnectionDiffStatusResponse } from '../models/FetchConnectionDiffStatusResponse';
 import { FetchLiveboardDataRequest   , FetchLiveboardDataRequestDataFormatEnum        } from '../models/FetchLiveboardDataRequest';
 import { FetchLiveboardSqlQueryRequest } from '../models/FetchLiveboardSqlQueryRequest';
 import { FetchLogsRequest, FetchLogsRequestLogTypeEnum     } from '../models/FetchLogsRequest';
@@ -294,6 +294,7 @@ import { MetadataObject , MetadataObjectTypeEnum   } from '../models/MetadataObj
 import { MetadataResponse  , MetadataResponseTypeEnum   } from '../models/MetadataResponse';
 import { MetadataSearchResponse  , MetadataSearchResponseMetadataTypeEnum         } from '../models/MetadataSearchResponse';
 import { MetadataSearchSortOptions, MetadataSearchSortOptionsFieldNameEnum  , MetadataSearchSortOptionsOrderEnum   } from '../models/MetadataSearchSortOptions';
+import { MetadataTypeInput, MetadataTypeInputTypeEnum    } from '../models/MetadataTypeInput';
 import { ModelTableList } from '../models/ModelTableList';
 import { ObjectIDAndName } from '../models/ObjectIDAndName';
 import { Org } from '../models/Org';
@@ -375,6 +376,7 @@ import { User   , UserVisibilityEnum         , UserAccountTypeEnum  , UserAccoun
 import { UserGroup } from '../models/UserGroup';
 import { UserGroupResponse                     , UserGroupResponseParentTypeEnum      , UserGroupResponseTypeEnum   , UserGroupResponseVisibilityEnum    } from '../models/UserGroupResponse';
 import { ValidateMergeRequest } from '../models/ValidateMergeRequest';
+import { VisualizationIdentifiersInput } from '../models/VisualizationIdentifiersInput';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -443,6 +445,7 @@ let enumsMap: Set<string> = new Set<string>([
     "MetadataSearchResponseMetadataTypeEnum",
     "MetadataSearchSortOptionsFieldNameEnum",
     "MetadataSearchSortOptionsOrderEnum",
+    "MetadataTypeInputTypeEnum",
     "OrgResponseStatusEnum",
     "OrgResponseVisibilityEnum",
     "PdfOptionsPageSizeEnum",
@@ -578,7 +581,6 @@ let typeMap: {[index: string]: any} = {
     "FavoriteObjectOptionsInput": FavoriteObjectOptionsInput,
     "FetchAnswerDataRequest": FetchAnswerDataRequest,
     "FetchAnswerSqlQueryRequest": FetchAnswerSqlQueryRequest,
-    "FetchConnectionDiffStatusResponse": FetchConnectionDiffStatusResponse,
     "FetchLiveboardDataRequest": FetchLiveboardDataRequest,
     "FetchLiveboardSqlQueryRequest": FetchLiveboardSqlQueryRequest,
     "FetchLogsRequest": FetchLogsRequest,
@@ -616,6 +618,7 @@ let typeMap: {[index: string]: any} = {
     "MetadataResponse": MetadataResponse,
     "MetadataSearchResponse": MetadataSearchResponse,
     "MetadataSearchSortOptions": MetadataSearchSortOptions,
+    "MetadataTypeInput": MetadataTypeInput,
     "ModelTableList": ModelTableList,
     "ObjectIDAndName": ObjectIDAndName,
     "Org": Org,
@@ -697,6 +700,7 @@ let typeMap: {[index: string]: any} = {
     "UserGroup": UserGroup,
     "UserGroupResponse": UserGroupResponse,
     "ValidateMergeRequest": ValidateMergeRequest,
+    "VisualizationIdentifiersInput": VisualizationIdentifiersInput,
 }
 
 export class ObjectSerializer {

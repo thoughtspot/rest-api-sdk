@@ -22,7 +22,7 @@ export class UpdateConfigRequest {
     */
     'access_token'?: string;
     /**
-    *    Applicable when Orgs is enabled in the cluster      List of Org ids or name. Provide value -1 for cluster level. Example : [\"OrgID1-or-Name1\", \"OrgID2-or-Name2\"]         Note: If no value is specified, then the configurations will be returned for all orgs the user has access to  /n  Version: 9.5.0.cl or later
+    *    Applicable when Orgs is enabled in the cluster      List of Org ids or name. Provide value -1 for cluster level. Example : [\"OrgID1-or-Name1\", \"OrgID2-or-Name2\"]         Note: If no value is specified, then the configurations will be returned for all orgs the user has access to     Version: 9.5.0.cl or later 
     */
     'org_identifier'?: string;
     /**
@@ -30,7 +30,7 @@ export class UpdateConfigRequest {
     */
     'branch_names'?: Array<string>;
     /**
-    * Name of the remote branch where objects from this Thoughtspot instance will be versioned. /n  Version: 9.7.0.cl or later
+    * Name of the remote branch where objects from this Thoughtspot instance will be versioned.    Version: 9.7.0.cl or later 
     */
     'commit_branch_name'?: string;
     /**
@@ -38,15 +38,15 @@ export class UpdateConfigRequest {
     */
     'default_branch_name'?: string;
     /**
-    * Maintain mapping of guid for the deployment to an instance /n  Version: 9.4.0.cl or later
+    * Maintain mapping of guid for the deployment to an instance    Version: 9.4.0.cl or later 
     */
     'enable_guid_mapping'?: boolean | null;
     /**
-    * Name of the branch where the configuration files related to operations between Thoughtspot and version control repo should be maintained. /n  Version: 9.7.0.cl or later
+    * Name of the branch where the configuration files related to operations between Thoughtspot and version control repo should be maintained.    Version: 9.7.0.cl or later 
     */
     'configuration_branch_name'?: string;
     /**
-    *    Use configuration_branch_name instead.      Name of the branch where the configuration files related to operations between Thoughtspot and version control repo should be maintained.        *Deprecated from 10.0.0.cl : Replaced by configuration_branch_name*  /n  Version: 9.4.0.cl or later
+    *    Use configuration_branch_name instead.      Name of the branch where the configuration files related to operations between Thoughtspot and version control repo should be maintained.        *Deprecated from 10.0.0.cl : Replaced by configuration_branch_name*     Version: 9.4.0.cl or later 
     */
     'guid_mapping_branch_name'?: string;
 

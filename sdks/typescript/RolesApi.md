@@ -13,7 +13,7 @@ Method | HTTP request | Description
 # **createRole**
 > RoleResponse createRole(createRoleRequest)
 
-Creates a Role. Requires cluster Administration or Role Administration privileges. /n  Version: 9.5.0.cl or later
+Creates a Role. Requires cluster Administration or Role Administration privileges.    Version: 9.5.0.cl or later 
 
 ### Example
 
@@ -79,7 +79,7 @@ Name | Type | Description  | Notes
 # **deleteRole**
 > void deleteRole()
 
-Deletes a Role. Requires cluster Administration or Role Administration privileges. /n  Version: 9.5.0.cl or later
+Deletes a Role. Requires cluster Administration or Role Administration privileges.    Version: 9.5.0.cl or later 
 
 ### Example
 
@@ -139,7 +139,7 @@ Name | Type | Description  | Notes
 # **searchRoles**
 > Array<SearchRoleResponse> searchRoles()
 
-Gets Roles configured on a ThoughtSpot instance. Requires cluster Administration, Role Administration or Group Administration privileges. /n  Version: 9.5.0.cl or later
+Gets Roles configured on a ThoughtSpot instance. Requires cluster Administration, Role Administration or Group Administration privileges.    Version: 9.5.0.cl or later 
 
 ### Example
 
@@ -218,7 +218,7 @@ Name | Type | Description  | Notes
 # **updateRole**
 > RoleResponse updateRole(updateRoleRequest)
 
-Updates a Role. Requires cluster Administration or Role Administration privileges. /n  Version: 9.5.0.cl or later
+Updates a Role. Requires cluster Administration or Role Administration privileges.    Version: 9.5.0.cl or later 
 
 ### Example
 

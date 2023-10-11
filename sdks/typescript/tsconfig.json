@@ -2,7 +2,8 @@
   "compilerOptions": {
     "strict": true,
     /* Basic Options */
-    "target": "es5",
+    "target": "es6",
+    "esModuleInterop": true,
     "moduleResolution": "node",
     "declaration": true,
 
@@ -17,8 +18,7 @@
     "outDir": "./dist",
     "noLib": false,
     "lib": [ "es6", "dom" ],
-    "resolveJsonModule": true,
-    "esModuleInterop": true
+    "resolveJsonModule": true
   },
   "exclude": [
     "dist",

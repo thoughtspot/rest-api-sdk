@@ -13,7 +13,7 @@ Method | HTTP request | Description
 # **createOrg**
 > OrgResponse createOrg(createOrgRequest)
 
-  Version: 9.0.0.cl or later  Creates an Org object.  To use this API, the [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview) feature must be enabled in your cluster.  Requires cluster administration (**Can administer Org**) privileges.      
+  Version: 9.0.0.cl or later   Creates an Org object.  To use this API, the [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview) feature must be enabled in your cluster.  Requires cluster administration (**Can administer Org**) privileges.      
 
 ### Example
 
@@ -76,7 +76,7 @@ Name | Type | Description  | Notes
 # **deleteOrg**
 > void deleteOrg()
 
-  Version: 9.0.0.cl or later  Deletes an Org object from the ThoughtSpot system.  Requires cluster administration (**Can administer Org**) privilege.  When you delete an Org, all its users and objects created in that Org context are removed. However, if the users in the deleted Org also exists in other Orgs, they are removed only from the deleted Org.      
+  Version: 9.0.0.cl or later   Deletes an Org object from the ThoughtSpot system.  Requires cluster administration (**Can administer Org**) privilege.  When you delete an Org, all its users and objects created in that Org context are removed. However, if the users in the deleted Org also exists in other Orgs, they are removed only from the deleted Org.      
 
 ### Example
 
@@ -136,7 +136,7 @@ Name | Type | Description  | Notes
 # **searchOrgs**
 > Array<OrgResponse> searchOrgs()
 
-  Version: 9.0.0.cl or later  Gets a list of Orgs configured on the ThoughtSpot system. To get details of a specific Org, specify the Org ID or name. You can also pass parameters such as status, visibility, and user identifiers to get a specific list of Orgs.  Requires cluster administration (**Can administer Org**) privileges.      
+  Version: 9.0.0.cl or later   Gets a list of Orgs configured on the ThoughtSpot system. To get details of a specific Org, specify the Org ID or name. You can also pass parameters such as status, visibility, and user identifiers to get a specific list of Orgs.  Requires cluster administration (**Can administer Org**) privileges.      
 
 ### Example
 
@@ -204,7 +204,7 @@ Name | Type | Description  | Notes
 # **updateOrg**
 > void updateOrg()
 
-  Version: 9.0.0.cl or later  Updates an Org object. You can modify Org properties such as name, description, and user associations.  Requires cluster administration (**Can administer Org**) privileges.      
+  Version: 9.0.0.cl or later   Updates an Org object. You can modify Org properties such as name, description, and user associations.  Requires cluster administration (**Can administer Org**) privileges.      
 
 ### Example
 

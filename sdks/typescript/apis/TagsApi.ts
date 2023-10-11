@@ -21,7 +21,7 @@ import { UpdateTagRequest } from '../models/UpdateTagRequest';
 export class TagsApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     *   Version: 9.0.0.cl or later  Assigns tags to Liveboards, Answers, Tables, and Worksheets.  Requires edit access to the metadata object.      
+     *   Version: 9.0.0.cl or later   Assigns tags to Liveboards, Answers, Tables, and Worksheets.  Requires edit access to the metadata object.      
      * @param assignTagRequest 
      */
     public async assignTag(assignTagRequest: AssignTagRequest, _options?: Configuration): Promise<RequestContext> {
@@ -71,7 +71,7 @@ export class TagsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     *   Version: 9.0.0.cl or later  Creates a tag object.  Tags are labels that identify a metadata object. For example, you can create a tag to designate subject areas, such as sales, HR, marketing, and finance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+     *   Version: 9.0.0.cl or later   Creates a tag object.  Tags are labels that identify a metadata object. For example, you can create a tag to designate subject areas, such as sales, HR, marketing, and finance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
      * @param createTagRequest 
      */
     public async createTag(createTagRequest: CreateTagRequest, _options?: Configuration): Promise<RequestContext> {
@@ -121,7 +121,7 @@ export class TagsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     *   Version: 9.0.0.cl or later  Deletes a tag object from the ThoughtSpot system  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+     *   Version: 9.0.0.cl or later   Deletes a tag object from the ThoughtSpot system  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
      * @param tagIdentifier Tag identifier Tag name or Tag id.
      */
     public async deleteTag(tagIdentifier: string, _options?: Configuration): Promise<RequestContext> {
@@ -161,7 +161,7 @@ export class TagsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     *   Version: 9.0.0.cl or later  Gets a list of tag objects available on the ThoughtSpot system. To get details of a specific tag object, specify the GUID or name.  Any authenticated user can search for tag objects.      
+     *   Version: 9.0.0.cl or later   Gets a list of tag objects available on the ThoughtSpot system. To get details of a specific tag object, specify the GUID or name.  Any authenticated user can search for tag objects.      
      * @param searchTagsRequest 
      */
     public async searchTags(searchTagsRequest?: SearchTagsRequest, _options?: Configuration): Promise<RequestContext> {
@@ -206,7 +206,7 @@ export class TagsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     *   Version: 9.0.0.cl or later  Removes the tags applied to a Liveboard, Answer, Table, or Worksheet.  Requires edit access to the metadata object.      
+     *   Version: 9.0.0.cl or later   Removes the tags applied to a Liveboard, Answer, Table, or Worksheet.  Requires edit access to the metadata object.      
      * @param assignTagRequest 
      */
     public async unassignTag(assignTagRequest: AssignTagRequest, _options?: Configuration): Promise<RequestContext> {
@@ -256,7 +256,7 @@ export class TagsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     *   Version: 9.0.0.cl or later  Updates a tag object.  You can modify the `name` and `color` properties of a tag object.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+     *   Version: 9.0.0.cl or later   Updates a tag object.  You can modify the `name` and `color` properties of a tag object.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
      * @param tagIdentifier Name or Id of the tag.
      * @param updateTagRequest 
      */

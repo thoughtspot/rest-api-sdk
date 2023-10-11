@@ -15,7 +15,7 @@ Method | HTTP request | Description
 # **assignTag**
 > void assignTag(assignTagRequest)
 
-  Version: 9.0.0.cl or later  Assigns tags to Liveboards, Answers, Tables, and Worksheets.  Requires edit access to the metadata object.      
+  Version: 9.0.0.cl or later   Assigns tags to Liveboards, Answers, Tables, and Worksheets.  Requires edit access to the metadata object.      
 
 ### Example
 
@@ -85,7 +85,7 @@ Name | Type | Description  | Notes
 # **createTag**
 > Tag createTag(createTagRequest)
 
-  Version: 9.0.0.cl or later  Creates a tag object.  Tags are labels that identify a metadata object. For example, you can create a tag to designate subject areas, such as sales, HR, marketing, and finance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+  Version: 9.0.0.cl or later   Creates a tag object.  Tags are labels that identify a metadata object. For example, you can create a tag to designate subject areas, such as sales, HR, marketing, and finance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
 
 ### Example
 
@@ -148,7 +148,7 @@ Name | Type | Description  | Notes
 # **deleteTag**
 > void deleteTag()
 
-  Version: 9.0.0.cl or later  Deletes a tag object from the ThoughtSpot system  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+  Version: 9.0.0.cl or later   Deletes a tag object from the ThoughtSpot system  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
 
 ### Example
 
@@ -208,7 +208,7 @@ Name | Type | Description  | Notes
 # **searchTags**
 > Array<Tag> searchTags()
 
-  Version: 9.0.0.cl or later  Gets a list of tag objects available on the ThoughtSpot system. To get details of a specific tag object, specify the GUID or name.  Any authenticated user can search for tag objects.      
+  Version: 9.0.0.cl or later   Gets a list of tag objects available on the ThoughtSpot system. To get details of a specific tag object, specify the GUID or name.  Any authenticated user can search for tag objects.      
 
 ### Example
 
@@ -272,7 +272,7 @@ Name | Type | Description  | Notes
 # **unassignTag**
 > void unassignTag(assignTagRequest)
 
-  Version: 9.0.0.cl or later  Removes the tags applied to a Liveboard, Answer, Table, or Worksheet.  Requires edit access to the metadata object.      
+  Version: 9.0.0.cl or later   Removes the tags applied to a Liveboard, Answer, Table, or Worksheet.  Requires edit access to the metadata object.      
 
 ### Example
 
@@ -342,7 +342,7 @@ Name | Type | Description  | Notes
 # **updateTag**
 > void updateTag()
 
-  Version: 9.0.0.cl or later  Updates a tag object.  You can modify the `name` and `color` properties of a tag object.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+  Version: 9.0.0.cl or later   Updates a tag object.  You can modify the `name` and `color` properties of a tag object.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
 
 ### Example
 
