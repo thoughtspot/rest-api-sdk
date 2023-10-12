@@ -9909,7 +9909,7 @@
                   "file_content": {
                     "description": "Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is Mandatory when Import Type is 'ZIP_FILE'",
                     "type": "string",
-                    "format": "binary"
+                    "format": "buffer"
                   }
                 },
                 "required": [
