@@ -60,14 +60,6 @@
         "9.6.0.cl"
       ],
       "description": "Roles for version 9.6.0.cl"
-    },
-    {
-      "name": "9.8.0.cl",
-      "id": "9.8.0.cl",
-      "tags": [
-        "9.8.0.cl"
-      ],
-      "description": "Roles for version 9.8.0.cl"
     }
   ],
   "tags": [],
@@ -9862,10 +9854,10 @@
     "/api/rest/2.0/dbt/dbt-connection": {
       "post": {
         "operationId": "dbtConnection",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.8.0.cl or later</span>\n\nCreates a DBT connection object in ThoughtSpot.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege.\n\n#### About create DBT connection\nDBT connection in ThoughtSpot is used by the user to define DBT credentials for cloud . The API needs  embrace connection, embrace database name, DBT url, import type, DBT account identifier, DBT project identifier, DBT access token and environment details (or) embrace connection, embrace database name, import type, file_content to create a connection object. To know more about DBT, see ThoughtSpot Product Documentation.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.9.0.cl or later</span>\n\nCreates a DBT connection object in ThoughtSpot.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege.\n\n#### About create DBT connection\nDBT connection in ThoughtSpot is used by the user to define DBT credentials for cloud . The API needs  embrace connection, embrace database name, DBT url, import type, DBT account identifier, DBT project identifier, DBT access token and environment details (or) embrace connection, embrace database name, import type, file_content to create a connection object. To know more about DBT, see ThoughtSpot Product Documentation.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "DBT",
-          "9.8.0.cl"
+          "9.9.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -9916,7 +9908,8 @@
                   },
                   "file_content": {
                     "description": "Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is Mandatory when Import Type is 'ZIP_FILE'",
-                    "type": "string"
+                    "type": "string",
+                    "format": "binary"
                   }
                 },
                 "required": [
@@ -9986,10 +9979,10 @@
     "/api/rest/2.0/dbt/generate-tml": {
       "post": {
         "operationId": "dbtGenerateTml",
-        "description": " <span class=\"since-beta-tag\">Version: 9.8.0.cl or later</span>",
+        "description": " <span class=\"since-beta-tag\">Version: 9.9.0.cl or later</span>",
         "tags": [
           "DBT",
-          "9.8.0.cl"
+          "9.9.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -10026,7 +10019,8 @@
                   },
                   "file_content": {
                     "description": "Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’",
-                    "type": "string"
+                    "type": "string",
+                    "format": "binary"
                   }
                 },
                 "required": [
@@ -10096,10 +10090,10 @@
     "/api/rest/2.0/dbt/generate-sync-tml": {
       "post": {
         "operationId": "dbtGenerateSyncTml",
-        "description": " <span class=\"since-beta-tag\">Version: 9.8.0.cl or later</span>",
+        "description": " <span class=\"since-beta-tag\">Version: 9.9.0.cl or later</span>",
         "tags": [
           "DBT",
-          "9.8.0.cl"
+          "9.9.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -10113,7 +10107,8 @@
                   },
                   "file_content": {
                     "description": "Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’",
-                    "type": "string"
+                    "type": "string",
+                    "format": "binary"
                   }
                 },
                 "required": [
@@ -10182,10 +10177,10 @@
     "/api/rest/2.0/dbt/search": {
       "post": {
         "operationId": "dbtSearch",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.8.0.cl or later</span>\n\nGets a list of DBT connection objects by user and organization, available on the ThoughtSpot system.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege\n\n#### About search DBT connection\nTo get details of a specific DBT connection identifier, database connection identifier, database connection name, database name, project name, project identifier, environment identifier , import type and author.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.9.0.cl or later</span>\n\nGets a list of DBT connection objects by user and organization, available on the ThoughtSpot system.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege\n\n#### About search DBT connection\nTo get details of a specific DBT connection identifier, database connection identifier, database connection name, database name, project name, project identifier, environment identifier , import type and author.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "DBT",
-          "9.8.0.cl"
+          "9.9.0.cl"
         ],
         "parameters": [],
         "responses": {
@@ -10245,10 +10240,10 @@
     "/api/rest/2.0/dbt/{dbt_connection_identifier}/delete": {
       "post": {
         "operationId": "deleteDbtConnection",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.8.0.cl or later</span>\n\nRemoves the specified DBT connection object from the ThoughtSpot system.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.9.0.cl or later</span>\n\nRemoves the specified DBT connection object from the ThoughtSpot system.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "DBT",
-          "9.8.0.cl"
+          "9.9.0.cl"
         ],
         "parameters": [
           {
@@ -10311,10 +10306,10 @@
     "/api/rest/2.0/dbt/{dbt_connection_identifier}": {
       "post": {
         "operationId": "updateDbtConnection",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.8.0.cl or later</span>\n\nUpdates a DBT connection object.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege, along with an existing DBT connection.\n\n#### About update DBT connection\nYou can modify DBT connection object properties such as embrace connection name, embrace database name, import type, account identifier, access token, project identifier and environment (or) embrace connection, embrace database name, import type, file_content settings.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.9.0.cl or later</span>\n\nUpdates a DBT connection object.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege, along with an existing DBT connection.\n\n#### About update DBT connection\nYou can modify DBT connection object properties such as embrace connection name, embrace database name, import type, account identifier, access token, project identifier and environment (or) embrace connection, embrace database name, import type, file_content settings.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "DBT",
-          "9.8.0.cl"
+          "9.9.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -10365,7 +10360,8 @@
                   },
                   "file_content": {
                     "description": "Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is Mandatory when Import Type is 'ZIP_FILE'",
-                    "type": "string"
+                    "type": "string",
+                    "format": "binary"
                   }
                 }
               }
