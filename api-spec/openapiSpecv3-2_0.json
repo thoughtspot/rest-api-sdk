@@ -10303,7 +10303,7 @@
         }
       }
     },
-    "/api/rest/2.0/dbt/{dbt_connection_identifier}": {
+    "/api/rest/2.0/dbt/update-dbt-connection": {
       "post": {
         "operationId": "updateDbtConnection",
         "description": "\n <span class=\"since-beta-tag\">Version: 9.9.0.cl or later</span>\n\nUpdates a DBT connection object.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege, along with an existing DBT connection.\n\n#### About update DBT connection\nYou can modify DBT connection object properties such as embrace connection name, embrace database name, import type, account identifier, access token, project identifier and environment (or) embrace connection, embrace database name, import type, file_content settings.\n\n\n\n\n#### Endpoint URL\n",
@@ -10317,6 +10317,10 @@
               "schema": {
                 "type": "object",
                 "properties": {
+                  "dbt_connection_identifier": {
+                    "description": "Unique ID of the DBT Connection.",
+                    "type": "string"
+                  },
                   "connection_name": {
                     "description": "Name of the connection.",
                     "type": "string"
@@ -10363,22 +10367,16 @@
                     "type": "string",
                     "format": "binary"
                   }
-                }
+                },
+                "required": [
+                  "dbt_connection_identifier"
+                ]
               }
             }
-          }
+          },
+          "required": true
         },
-        "parameters": [
-          {
-            "in": "path",
-            "name": "dbt_connection_identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Unique ID of the DBT Connection."
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "DBT Connection successfully updated.",
