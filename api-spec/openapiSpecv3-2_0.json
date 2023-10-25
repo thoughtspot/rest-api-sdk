@@ -267,11 +267,7 @@
                         "ORG_ADMINISTRATION",
                         "ROLE_ADMINISTRATION",
                         "AUTHENTICATION_ADMINISTRATION",
-                        "BILLING_INFO_ADMINISTRATION",
-                        "CAN_MANAGE_CUSTOM_CALENDAR",
-                        "CAN_CREATE_OR_EDIT_CONNECTIONS",
-                        "CAN_CONFIGURE_CONNECTIONS",
-                        "CAN_MANAGE_WORKSHEET_VIEWS_TABLES"
+                        "BILLING_INFO_ADMINISTRATION"
                       ]
                     }
                   },
@@ -974,11 +970,7 @@
                         "ORG_ADMINISTRATION",
                         "ROLE_ADMINISTRATION",
                         "AUTHENTICATION_ADMINISTRATION",
-                        "BILLING_INFO_ADMINISTRATION",
-                        "CAN_MANAGE_CUSTOM_CALENDAR",
-                        "CAN_CREATE_OR_EDIT_CONNECTIONS",
-                        "CAN_CONFIGURE_CONNECTIONS",
-                        "CAN_MANAGE_WORKSHEET_VIEWS_TABLES"
+                        "BILLING_INFO_ADMINISTRATION"
                       ]
                     }
                   },
@@ -2883,11 +2875,7 @@
                         "ROLE_ADMINISTRATION",
                         "AUTHENTICATION_ADMINISTRATION",
                         "BILLING_INFO_ADMINISTRATION",
-                        "PREVIEW_THOUGHTSPOT_SAGE",
-                        "CAN_MANAGE_CUSTOM_CALENDAR",
-                        "CAN_CREATE_OR_EDIT_CONNECTIONS",
-                        "CAN_CONFIGURE_CONNECTIONS",
-                        "CAN_MANAGE_WORKSHEET_VIEWS_TABLES"
+                        "PREVIEW_THOUGHTSPOT_SAGE"
                       ]
                     }
                   },
@@ -7581,11 +7569,7 @@
                         "ORG_ADMINISTRATION",
                         "ROLE_ADMINISTRATION",
                         "AUTHENTICATION_ADMINISTRATION",
-                        "BILLING_INFO_ADMINISTRATION",
-                        "CAN_MANAGE_CUSTOM_CALENDAR",
-                        "CAN_CREATE_OR_EDIT_CONNECTIONS",
-                        "CAN_CONFIGURE_CONNECTIONS",
-                        "CAN_MANAGE_WORKSHEET_VIEWS_TABLES"
+                        "BILLING_INFO_ADMINISTRATION"
                       ]
                     }
                   }
@@ -7699,11 +7683,7 @@
                         "ORG_ADMINISTRATION",
                         "ROLE_ADMINISTRATION",
                         "AUTHENTICATION_ADMINISTRATION",
-                        "BILLING_INFO_ADMINISTRATION",
-                        "CAN_MANAGE_CUSTOM_CALENDAR",
-                        "CAN_CREATE_OR_EDIT_CONNECTIONS",
-                        "CAN_CONFIGURE_CONNECTIONS",
-                        "CAN_MANAGE_WORKSHEET_VIEWS_TABLES"
+                        "BILLING_INFO_ADMINISTRATION"
                       ]
                     }
                   }
@@ -12189,11 +12169,7 @@
                 "ROLE_ADMINISTRATION",
                 "AUTHENTICATION_ADMINISTRATION",
                 "BILLING_INFO_ADMINISTRATION",
-                "PREVIEW_THOUGHTSPOT_SAGE",
-                "CAN_MANAGE_CUSTOM_CALENDAR",
-                "CAN_CREATE_OR_EDIT_CONNECTIONS",
-                "CAN_CONFIGURE_CONNECTIONS",
-                "CAN_MANAGE_WORKSHEET_VIEWS_TABLES"
+                "PREVIEW_THOUGHTSPOT_SAGE"
               ]
             },
             "description": "Privileges granted to the role."
@@ -13308,11 +13284,7 @@
                 "ORG_ADMINISTRATION",
                 "ROLE_ADMINISTRATION",
                 "AUTHENTICATION_ADMINISTRATION",
-                "BILLING_INFO_ADMINISTRATION",
-                "CAN_MANAGE_CUSTOM_CALENDAR",
-                "CAN_CREATE_OR_EDIT_CONNECTIONS",
-                "CAN_CONFIGURE_CONNECTIONS",
-                "CAN_MANAGE_WORKSHEET_VIEWS_TABLES"
+                "BILLING_INFO_ADMINISTRATION"
               ]
             },
             "description": "Privileges granted to the role."
