@@ -10,7 +10,7 @@ cp ../api-spec/* spec/
 # native zip and unzip unavailable
 npx bestzip $PWD/build/portal-input.zip .
 
-curl -X POST --url 'https://www.api.apimatic.io/portal' -H "Authorization:X-Auth-Key "$APIMATIC_API_KEY"" -F 'file=@./build/portal-input.zip' -o ./build/portal-output.zip
+curl -X POST --url 'https://api.apimatic.io/portal' -H "Authorization:X-Auth-Key "$APIMATIC_API_KEY"" -F 'file=@./build/portal-input.zip' -o ./build/portal-output.zip
 
 npx extract-zip $PWD/build/portal-output.zip $PWD/build/static-portal
 ls -Rlh $PWD/build/static-portal
