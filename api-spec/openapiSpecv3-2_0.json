@@ -6280,7 +6280,7 @@
                     ]
                   },
                   "metadata_identifiers": {
-                    "description": "Unique ID or name of metadata objects.",
+                    "description": "Unique ID or name of metadata objects. Note: All the identifiers should belong to same metadata_type",
                     "type": "array",
                     "items": {
                       "type": "string"
