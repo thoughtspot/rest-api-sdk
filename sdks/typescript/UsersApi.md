@@ -227,7 +227,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
 # **forceLogoutUsers**
-> void forceLogoutUsers()
+> void forceLogoutUsers(forceLogoutUsersRequest)
 
   Version: 9.0.0.cl or later   Enforces logout on current user sessions.    Use this API with caution as it may invalidate active user sessions and force users to re-login. Make sure you specify the usernames or GUIDs. If you pass null values in the API call, all user sessions on your cluster become invalid, and the users are forced to re-login.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
 
@@ -244,7 +244,7 @@ const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
 const apiInstance = new UsersApi(configuration);
 
 apiInstance.forceLogoutUsers(
-  // ForceLogoutUsersRequest (optional)
+  // ForceLogoutUsersRequest
   {
     user_identifiers: [
       "user_identifiers_example",
@@ -445,9 +445,9 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
 # **searchUsers**
-> Array<User> searchUsers()
+> Array<User> searchUsers(searchUsersRequest)
 
-  Version: 9.0.0.cl or later    Gets a list of users available on the ThoughtSpot system.  To get details of a specific user, specify the user GUID or name. You can also filter the API response based on groups, Org ID, user visibility, account status, user type, and user preference settings and favorites.  Available to all users. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view all users properties.      
+  Version: 9.0.0.cl or later   Gets a list of users available on the ThoughtSpot system.  To get details of a specific user, specify the user GUID or name. You can also filter the API response based on groups, Org ID, user visibility, account status, user type, and user preference settings and favorites.  Available to all users. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view all users properties.  **NOTE**: If the API returns an empty list, consider increasing the value of the `record_size` parameter. To search across all available users, set `record_size` to `-1`.      
 
 ### Example
 
@@ -462,7 +462,7 @@ const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
 const apiInstance = new UsersApi(configuration);
 
 apiInstance.searchUsers(
-  // SearchUsersRequest (optional)
+  // SearchUsersRequest
   {
     user_identifier: "user_identifier_example",
     display_name: "display_name_example",
@@ -542,7 +542,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
 # **updateUser**
-> void updateUser()
+> void updateUser(updateUserRequest)
 
   Version: 9.0.0.cl or later   Updates a user object.  You can modify user properties such as username, email, and share notification settings. You can also assign new groups and Orgs, remove the user from a group or Org, reset password, and modify user preferences.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
 
@@ -561,7 +561,7 @@ const apiInstance = new UsersApi(configuration);
 apiInstance.updateUser(
   // string | GUID / name of the user
   "user_identifier_example" , 
-  // UpdateUserRequest (optional)
+  // UpdateUserRequest
   {
     name: "name_example",
     display_name: "display_name_example",

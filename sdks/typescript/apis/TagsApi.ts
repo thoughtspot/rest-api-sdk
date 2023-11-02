@@ -164,8 +164,13 @@ export class TagsApiRequestFactory extends BaseAPIRequestFactory {
      *   Version: 9.0.0.cl or later   Gets a list of tag objects available on the ThoughtSpot system. To get details of a specific tag object, specify the GUID or name.  Any authenticated user can search for tag objects.      
      * @param searchTagsRequest 
      */
-    public async searchTags(searchTagsRequest?: SearchTagsRequest, _options?: Configuration): Promise<RequestContext> {
+    public async searchTags(searchTagsRequest: SearchTagsRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
+
+        // verify required parameter 'searchTagsRequest' is not null or undefined
+        if (searchTagsRequest === null || searchTagsRequest === undefined) {
+            throw new RequiredError("TagsApi", "searchTags", "searchTagsRequest");
+        }
 
 
         // Path Params
@@ -260,7 +265,7 @@ export class TagsApiRequestFactory extends BaseAPIRequestFactory {
      * @param tagIdentifier Name or Id of the tag.
      * @param updateTagRequest 
      */
-    public async updateTag(tagIdentifier: string, updateTagRequest?: UpdateTagRequest, _options?: Configuration): Promise<RequestContext> {
+    public async updateTag(tagIdentifier: string, updateTagRequest: UpdateTagRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'tagIdentifier' is not null or undefined
@@ -268,6 +273,11 @@ export class TagsApiRequestFactory extends BaseAPIRequestFactory {
             throw new RequiredError("TagsApi", "updateTag", "tagIdentifier");
         }
 
+
+        // verify required parameter 'updateTagRequest' is not null or undefined
+        if (updateTagRequest === null || updateTagRequest === undefined) {
+            throw new RequiredError("TagsApi", "updateTag", "updateTagRequest");
+        }
 
 
         // Path Params

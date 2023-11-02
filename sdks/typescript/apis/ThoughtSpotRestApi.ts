@@ -757,8 +757,13 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
      *   Version: 9.2.0.cl or later   Deletes Git repository configuration from your ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
      * @param deleteConfigRequest 
      */
-    public async deleteConfig(deleteConfigRequest?: DeleteConfigRequest, _options?: Configuration): Promise<RequestContext> {
+    public async deleteConfig(deleteConfigRequest: DeleteConfigRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
+
+        // verify required parameter 'deleteConfigRequest' is not null or undefined
+        if (deleteConfigRequest === null || deleteConfigRequest === undefined) {
+            throw new RequiredError("ThoughtSpotRestApi", "deleteConfig", "deleteConfigRequest");
+        }
 
 
         // Path Params
@@ -1732,8 +1737,13 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
      *   Version: 9.0.0.cl or later   Enforces logout on current user sessions.    Use this API with caution as it may invalidate active user sessions and force users to re-login. Make sure you specify the usernames or GUIDs. If you pass null values in the API call, all user sessions on your cluster become invalid, and the users are forced to re-login.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
      * @param forceLogoutUsersRequest 
      */
-    public async forceLogoutUsers(forceLogoutUsersRequest?: ForceLogoutUsersRequest, _options?: Configuration): Promise<RequestContext> {
+    public async forceLogoutUsers(forceLogoutUsersRequest: ForceLogoutUsersRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
+
+        // verify required parameter 'forceLogoutUsersRequest' is not null or undefined
+        if (forceLogoutUsersRequest === null || forceLogoutUsersRequest === undefined) {
+            throw new RequiredError("ThoughtSpotRestApi", "forceLogoutUsers", "forceLogoutUsersRequest");
+        }
 
 
         // Path Params
@@ -2075,8 +2085,13 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
      *   Version: 9.0.0.cl or later   Imports group objects from external databases into ThoughtSpot.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  During the import operation:  * If the specified group is not available in ThoughtSpot, it will be added to ThoughtSpot. * If `delete_unspecified_groups` is set to `true`, the groups not specified in the API request, excluding administrator and system user groups, are deleted. * If the specified groups are already available in ThoughtSpot, the object properties of these groups are modified and synchronized as per the input data in the API request.  A successful API call returns the object that represents the changes made in the ThoughtSpot system.      
      * @param importUserGroupsRequest 
      */
-    public async importUserGroups(importUserGroupsRequest?: ImportUserGroupsRequest, _options?: Configuration): Promise<RequestContext> {
+    public async importUserGroups(importUserGroupsRequest: ImportUserGroupsRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
+
+        // verify required parameter 'importUserGroupsRequest' is not null or undefined
+        if (importUserGroupsRequest === null || importUserGroupsRequest === undefined) {
+            throw new RequiredError("ThoughtSpotRestApi", "importUserGroups", "importUserGroupsRequest");
+        }
 
 
         // Path Params
@@ -2170,8 +2185,13 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
      *   Version: 9.0.0.cl or later    Creates a login session for a ThoughtSpot user with Basic authentication.  In Basic authentication method, REST clients log in to ThoughtSpot using `username` and `password` attributes. On a multi-tenant cluster with Orgs, users can pass the ID of the Org in the API request to log in to a specific Org context.  A successful login returns a session cookie that can be used in your subsequent API requests.      
      * @param loginRequest 
      */
-    public async login(loginRequest?: LoginRequest, _options?: Configuration): Promise<RequestContext> {
+    public async login(loginRequest: LoginRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
+
+        // verify required parameter 'loginRequest' is not null or undefined
+        if (loginRequest === null || loginRequest === undefined) {
+            throw new RequiredError("ThoughtSpotRestApi", "login", "loginRequest");
+        }
 
 
         // Path Params
@@ -2298,7 +2318,7 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
      * @param commitId Commit id to which the object should be reverted
      * @param revertCommitRequest 
      */
-    public async revertCommit(commitId: string, revertCommitRequest?: RevertCommitRequest, _options?: Configuration): Promise<RequestContext> {
+    public async revertCommit(commitId: string, revertCommitRequest: RevertCommitRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'commitId' is not null or undefined
@@ -2306,6 +2326,11 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
             throw new RequiredError("ThoughtSpotRestApi", "revertCommit", "commitId");
         }
 
+
+        // verify required parameter 'revertCommitRequest' is not null or undefined
+        if (revertCommitRequest === null || revertCommitRequest === undefined) {
+            throw new RequiredError("ThoughtSpotRestApi", "revertCommit", "revertCommitRequest");
+        }
 
 
         // Path Params
@@ -2350,8 +2375,13 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
      *   Version: 9.0.0.cl or later    Revokes the authentication token issued for current user session.  The token of your current session expires when you make a call to the `/api/rest/2.0/auth/token/revoke` endpoint. the users will not be able to access ThoughtSpot objects until a new token is obtained.  To restart your session, request for a new token from ThoughtSpot. See [Get Object Access Token](#/http/api-endpoints/authentication/get-object-access-token) and [Get Full Access Token](#/http/api-endpoints/authentication/get-full-access-token).      
      * @param revokeTokenRequest 
      */
-    public async revokeToken(revokeTokenRequest?: RevokeTokenRequest, _options?: Configuration): Promise<RequestContext> {
+    public async revokeToken(revokeTokenRequest: RevokeTokenRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
+
+        // verify required parameter 'revokeTokenRequest' is not null or undefined
+        if (revokeTokenRequest === null || revokeTokenRequest === undefined) {
+            throw new RequiredError("ThoughtSpotRestApi", "revokeToken", "revokeTokenRequest");
+        }
 
 
         // Path Params
@@ -2445,8 +2475,13 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
      *   Version: 9.2.0.cl or later   Gets Git repository connections configured on the ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
      * @param searchConfigRequest 
      */
-    public async searchConfig(searchConfigRequest?: SearchConfigRequest, _options?: Configuration): Promise<RequestContext> {
+    public async searchConfig(searchConfigRequest: SearchConfigRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
+
+        // verify required parameter 'searchConfigRequest' is not null or undefined
+        if (searchConfigRequest === null || searchConfigRequest === undefined) {
+            throw new RequiredError("ThoughtSpotRestApi", "searchConfig", "searchConfigRequest");
+        }
 
 
         // Path Params
@@ -2487,11 +2522,16 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     *   Version: 9.2.0.cl or later   Gets connection objects. Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. - To get a list of all connections available in the ThoughtSpot system, send the API request without any attributes in the request body. - To get the connection objects for a specific type of data warehouse, specify the type in `data_warehouse_types`. - To fetch details of a connection object, specify the connection object GUID or name. The `name_pattern` attribute allows passing partial text with `%` for a wildcard match. - To get details of the database, schemas, tables, or columns from a data connection object, specify `data_warehouse_object_type`. - To get a specific database, schema, table, or column from a connection object, define the object type in `data_warehouse_object_type` and object properties in the `data_warehouse_objects` array. For example, to search for a column, you must pass the database, schema, and table names in the API request.   Note that in the following example, object properties are set in a hierarchical order (`database` > `schema` > `table` > `column`). ``` {   \"connections\": [     {       \"identifier\": \"b9d1f2ef-fa65-4a4b-994e-30fa2d57b0c2\",       \"data_warehouse_objects\": [         {           \"database\": \"NEBULADEV\",           \"schema\": \"INFORMATION_SCHEMA\",           \"table\": \"APPLICABLE_ROLES\",           \"column\": \"ROLE_NAME\"         }       ]     }   ],   \"data_warehouse_object_type\": \"COLUMN\" } ``` - To fetch data by `configuration`, specify `data_warehouse_object_type`. For example, to fetch columns from the `DEVELOPMENT` database, specify the `data_warehouse_object_type` as `DATABASE` and define the `configuration` string as `{\"database\":\"DEVELOPMENT\"}`. To get column data for a specific table, specify the table, for example,`{\"database\":\"RETAILAPPAREL\",\"table\":\"PIPES\"}`. - To query connections by `authentication_type`, specify `data_warehouse_object_type`. Supported values for `authentication_type` are:   * `SERVICE_ACCOUNT`: For connections that require service account credentials to authenticate to the Cloud Data Warehouse and fetch data.   * `OAUTH`: For connections that require OAuth credentials to authenticate to the Cloud Data Warehouse and fetch data. Teradata, Oracle, and Presto Cloud Data Warehouses do not support the OAuth authentication type.   * `IAM`: For connections that have the IAM OAuth set up. This authentication type is supported on Amazon Redshift connections only.   * `EXTOAUTH`: For connections that have external OAuth set up. ThoughtSpot supports external [OAuth with Microsoft Azure Active Directory (AD)](https://docs.thoughtspot.com/cloud/latest/ connections-snowflake-azure-ad-oauth) and [Okta for Snowflake data connections](https://docs.thoughtspot.com/cloud/latest/connections-snowflake-okta-oauth). - To include more details about connection objects in the API response, set `include_details` to `true`. - You can also sort the output by field names and filter connections by tags.     
+     *   Version: 9.2.0.cl or later   Gets connection objects. Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  - To get a list of all connections available in the ThoughtSpot system, send the API request without any attributes in the request body. - To get the connection objects for a specific type of data warehouse, specify the type in `data_warehouse_types`. - To fetch details of a connection object, specify the connection object GUID or name. The `name_pattern` attribute allows passing partial text with `%` for a wildcard match. - To get details of the database, schemas, tables, or columns from a data connection object, specify `data_warehouse_object_type`. - To get a specific database, schema, table, or column from a connection object, define the object type in `data_warehouse_object_type` and object properties in the `data_warehouse_objects` array. For example, to search for a column, you must pass the database, schema, and table names in the API request.   Note that in the following example, object properties are set in a hierarchical order (`database` > `schema` > `table` > `column`).  ``` {   \"connections\": [     {       \"identifier\": \"b9d1f2ef-fa65-4a4b-994e-30fa2d57b0c2\",       \"data_warehouse_objects\": [         {           \"database\": \"NEBULADEV\",           \"schema\": \"INFORMATION_SCHEMA\",           \"table\": \"APPLICABLE_ROLES\",           \"column\": \"ROLE_NAME\"         }       ]     }   ],   \"data_warehouse_object_type\": \"COLUMN\" } ```  - To fetch data by `configuration`, specify `data_warehouse_object_type`. For example, to fetch columns from the `DEVELOPMENT` database, specify the `data_warehouse_object_type` as `DATABASE` and define the `configuration` string as `{\"database\":\"DEVELOPMENT\"}`. To get column data for a specific table, specify the table, for example,`{\"database\":\"RETAILAPPAREL\",\"table\":\"PIPES\"}`. - To query connections by `authentication_type`, specify `data_warehouse_object_type`. Supported values for `authentication_type` are:   - `SERVICE_ACCOUNT`: For connections that require service account credentials to authenticate to the Cloud Data Warehouse and fetch data.   - `OAUTH`: For connections that require OAuth credentials to authenticate to the Cloud Data Warehouse and fetch data. Teradata, Oracle, and Presto Cloud Data Warehouses do not support the OAuth authentication type.   - `IAM`: For connections that have the IAM OAuth set up. This authentication type is supported on Amazon Redshift connections only.   - `EXTOAUTH`: For connections that have external OAuth set up. ThoughtSpot supports external [OAuth with Microsoft Azure Active Directory (AD)](https://docs.thoughtspot.com/cloud/latest/ connections-snowflake-azure-ad-oauth) and [Okta for Snowflake data connections](https://docs.thoughtspot.com/cloud/latest/connections-snowflake-okta-oauth). - To include more details about connection objects in the API response, set `include_details` to `true`. - You can also sort the output by field names and filter connections by tags.  **NOTE**: When filtering connection records by parameters other than `data_warehouse_types` or `tag_identifiers`, ensure that you set `record_size` to `-1` and `record_offset` to `0` for precise results.      
      * @param searchConnectionRequest 
      */
-    public async searchConnection(searchConnectionRequest?: SearchConnectionRequest, _options?: Configuration): Promise<RequestContext> {
+    public async searchConnection(searchConnectionRequest: SearchConnectionRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
+
+        // verify required parameter 'searchConnectionRequest' is not null or undefined
+        if (searchConnectionRequest === null || searchConnectionRequest === undefined) {
+            throw new RequiredError("ThoughtSpotRestApi", "searchConnection", "searchConnectionRequest");
+        }
 
 
         // Path Params
@@ -2535,8 +2575,13 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
      *   Version: 9.6.0.cl or later   Gets custom actions configured on the cluster.  Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
      * @param searchCustomActionsRequest 
      */
-    public async searchCustomActions(searchCustomActionsRequest?: SearchCustomActionsRequest, _options?: Configuration): Promise<RequestContext> {
+    public async searchCustomActions(searchCustomActionsRequest: SearchCustomActionsRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
+
+        // verify required parameter 'searchCustomActionsRequest' is not null or undefined
+        if (searchCustomActionsRequest === null || searchCustomActionsRequest === undefined) {
+            throw new RequiredError("ThoughtSpotRestApi", "searchCustomActions", "searchCustomActionsRequest");
+        }
 
 
         // Path Params
@@ -2627,11 +2672,16 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     *   Version: 9.0.0.cl or later    Gets a list of metadata objects available on the ThoughtSpot system.  This API endpoint is available to all users who have view access to the object. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view data for all metadata objects, including users and groups.  #### Usage guidelines  * To get all metadata objects, send the API request without any attributes. * To get metadata objects of a specific type, set the `type` attribute. For example, to fetch a Worksheet, set the type as `LOGICAL_TABLE`. * To get a specific metadata object, specify the GUID. * To customize your search and filter the API response, you can use several parameters.   You can search for objects created or modified by specific users, by tags applied to the objects, or by using the include parameters like `include_auto_created_objects`, `include_dependent_objects`, `include_headers`, `include_incomplete_objects`, and so on.   You can also define sorting options to sort the data retrieved in the API response.      
+     *   Version: 9.0.0.cl or later   Gets a list of metadata objects available on the ThoughtSpot system.  This API endpoint is available to all users who have view access to the object. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view data for all metadata objects, including users and groups.  #### Usage guidelines  - To get all metadata objects, send the API request without any attributes. - To get metadata objects of a specific type, set the `type` attribute. For example, to fetch a Worksheet, set the type as `LOGICAL_TABLE`. - To get a specific metadata object, specify the GUID. - To customize your search and filter the API response, you can use several parameters.   You can search for objects created or modified by specific users, by tags applied to the objects, or by using the include parameters like `include_auto_created_objects`, `include_dependent_objects`, `include_headers`, `include_incomplete_objects`, and so on.   You can also define sorting options to sort the data retrieved in the API response.  **NOTE**: The following parameters support pagination of metadata records: `tag_identifiers` `type` `created_by_user_identifiers` `modified_by_user_identifiers` `owned_by_user_identifiers` `exclude_objects` `include_auto_created_objects` `favorite_object_options` If you are using other parameters to search metadata, set `record_size` to `-1` and `record_offset` to `0`.      
      * @param searchMetadataRequest 
      */
-    public async searchMetadata(searchMetadataRequest?: SearchMetadataRequest, _options?: Configuration): Promise<RequestContext> {
+    public async searchMetadata(searchMetadataRequest: SearchMetadataRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
+
+        // verify required parameter 'searchMetadataRequest' is not null or undefined
+        if (searchMetadataRequest === null || searchMetadataRequest === undefined) {
+            throw new RequiredError("ThoughtSpotRestApi", "searchMetadata", "searchMetadataRequest");
+        }
 
 
         // Path Params
@@ -2675,8 +2725,13 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
      *   Version: 9.0.0.cl or later   Gets a list of Orgs configured on the ThoughtSpot system. To get details of a specific Org, specify the Org ID or name. You can also pass parameters such as status, visibility, and user identifiers to get a specific list of Orgs.  Requires cluster administration (**Can administer Org**) privileges.      
      * @param searchOrgsRequest 
      */
-    public async searchOrgs(searchOrgsRequest?: SearchOrgsRequest, _options?: Configuration): Promise<RequestContext> {
+    public async searchOrgs(searchOrgsRequest: SearchOrgsRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
+
+        // verify required parameter 'searchOrgsRequest' is not null or undefined
+        if (searchOrgsRequest === null || searchOrgsRequest === undefined) {
+            throw new RequiredError("ThoughtSpotRestApi", "searchOrgs", "searchOrgsRequest");
+        }
 
 
         // Path Params
@@ -2720,8 +2775,13 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
      * Gets Roles configured on a ThoughtSpot instance. Requires cluster Administration, Role Administration or Group Administration privileges.    Version: 9.5.0.cl or later 
      * @param searchRolesRequest 
      */
-    public async searchRoles(searchRolesRequest?: SearchRolesRequest, _options?: Configuration): Promise<RequestContext> {
+    public async searchRoles(searchRolesRequest: SearchRolesRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
+
+        // verify required parameter 'searchRolesRequest' is not null or undefined
+        if (searchRolesRequest === null || searchRolesRequest === undefined) {
+            throw new RequiredError("ThoughtSpotRestApi", "searchRoles", "searchRolesRequest");
+        }
 
 
         // Path Params
@@ -2762,11 +2822,16 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     *  Search Schedules    Version: 9.4.0.cl or later   Gets a list of scheduled jobs configured for a Liveboard.  To get details of a specific scheduled job, specify the name or GUID of the scheduled job.  Requires at least view access to Liveboards.      
+     *  Search Schedules    Version: 9.4.0.cl or later   Gets a list of scheduled jobs configured for a Liveboard.  To get details of a specific scheduled job, specify the name or GUID of the scheduled job.  Requires at least view access to Liveboards.  **NOTE**: When filtering schedules by parameters other than `metadata`, set `record_size` to `-1` and `record_offset` to `0` for accurate results.      
      * @param searchSchedulesRequest 
      */
-    public async searchSchedules(searchSchedulesRequest?: SearchSchedulesRequest, _options?: Configuration): Promise<RequestContext> {
+    public async searchSchedules(searchSchedulesRequest: SearchSchedulesRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
+
+        // verify required parameter 'searchSchedulesRequest' is not null or undefined
+        if (searchSchedulesRequest === null || searchSchedulesRequest === undefined) {
+            throw new RequiredError("ThoughtSpotRestApi", "searchSchedules", "searchSchedulesRequest");
+        }
 
 
         // Path Params
@@ -2810,8 +2875,13 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
      *   Version: 9.0.0.cl or later   Gets a list of tag objects available on the ThoughtSpot system. To get details of a specific tag object, specify the GUID or name.  Any authenticated user can search for tag objects.      
      * @param searchTagsRequest 
      */
-    public async searchTags(searchTagsRequest?: SearchTagsRequest, _options?: Configuration): Promise<RequestContext> {
+    public async searchTags(searchTagsRequest: SearchTagsRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
+
+        // verify required parameter 'searchTagsRequest' is not null or undefined
+        if (searchTagsRequest === null || searchTagsRequest === undefined) {
+            throw new RequiredError("ThoughtSpotRestApi", "searchTags", "searchTagsRequest");
+        }
 
 
         // Path Params
@@ -2852,11 +2922,16 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     *   Version: 9.0.0.cl or later    Gets a list of users available on the ThoughtSpot system.  To get details of a specific user, specify the user GUID or name. You can also filter the API response based on groups, Org ID, user visibility, account status, user type, and user preference settings and favorites.  Available to all users. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view all users properties.      
+     *   Version: 9.0.0.cl or later   Gets a list of users available on the ThoughtSpot system.  To get details of a specific user, specify the user GUID or name. You can also filter the API response based on groups, Org ID, user visibility, account status, user type, and user preference settings and favorites.  Available to all users. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view all users properties.  **NOTE**: If you do not get precise results, try setting `record_size` to `-1` and `record_offset` to `0`.      
      * @param searchUserGroupsRequest 
      */
-    public async searchUserGroups(searchUserGroupsRequest?: SearchUserGroupsRequest, _options?: Configuration): Promise<RequestContext> {
+    public async searchUserGroups(searchUserGroupsRequest: SearchUserGroupsRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
+
+        // verify required parameter 'searchUserGroupsRequest' is not null or undefined
+        if (searchUserGroupsRequest === null || searchUserGroupsRequest === undefined) {
+            throw new RequiredError("ThoughtSpotRestApi", "searchUserGroups", "searchUserGroupsRequest");
+        }
 
 
         // Path Params
@@ -2897,11 +2972,16 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     *   Version: 9.0.0.cl or later    Gets a list of users available on the ThoughtSpot system.  To get details of a specific user, specify the user GUID or name. You can also filter the API response based on groups, Org ID, user visibility, account status, user type, and user preference settings and favorites.  Available to all users. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view all users properties.      
+     *   Version: 9.0.0.cl or later   Gets a list of users available on the ThoughtSpot system.  To get details of a specific user, specify the user GUID or name. You can also filter the API response based on groups, Org ID, user visibility, account status, user type, and user preference settings and favorites.  Available to all users. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view all users properties.  **NOTE**: If the API returns an empty list, consider increasing the value of the `record_size` parameter. To search across all available users, set `record_size` to `-1`.      
      * @param searchUsersRequest 
      */
-    public async searchUsers(searchUsersRequest?: SearchUsersRequest, _options?: Configuration): Promise<RequestContext> {
+    public async searchUsers(searchUsersRequest: SearchUsersRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
+
+        // verify required parameter 'searchUsersRequest' is not null or undefined
+        if (searchUsersRequest === null || searchUsersRequest === undefined) {
+            throw new RequiredError("ThoughtSpotRestApi", "searchUsers", "searchUsersRequest");
+        }
 
 
         // Path Params
@@ -3045,8 +3125,13 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
      *   Version: 9.2.0.cl or later   Updates Git repository configuration settings.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
      * @param updateConfigRequest 
      */
-    public async updateConfig(updateConfigRequest?: UpdateConfigRequest, _options?: Configuration): Promise<RequestContext> {
+    public async updateConfig(updateConfigRequest: UpdateConfigRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
+
+        // verify required parameter 'updateConfigRequest' is not null or undefined
+        if (updateConfigRequest === null || updateConfigRequest === undefined) {
+            throw new RequiredError("ThoughtSpotRestApi", "updateConfig", "updateConfigRequest");
+        }
 
 
         // Path Params
@@ -3141,7 +3226,7 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
      * @param customActionIdentifier Unique ID or name of the custom action.
      * @param updateCustomActionRequest 
      */
-    public async updateCustomAction(customActionIdentifier: string, updateCustomActionRequest?: UpdateCustomActionRequest, _options?: Configuration): Promise<RequestContext> {
+    public async updateCustomAction(customActionIdentifier: string, updateCustomActionRequest: UpdateCustomActionRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'customActionIdentifier' is not null or undefined
@@ -3149,6 +3234,11 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
             throw new RequiredError("ThoughtSpotRestApi", "updateCustomAction", "customActionIdentifier");
         }
 
+
+        // verify required parameter 'updateCustomActionRequest' is not null or undefined
+        if (updateCustomActionRequest === null || updateCustomActionRequest === undefined) {
+            throw new RequiredError("ThoughtSpotRestApi", "updateCustomAction", "updateCustomActionRequest");
+        }
 
 
         // Path Params
@@ -3194,7 +3284,7 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
      * @param orgIdentifier ID or name of the Org
      * @param updateOrgRequest 
      */
-    public async updateOrg(orgIdentifier: string, updateOrgRequest?: UpdateOrgRequest, _options?: Configuration): Promise<RequestContext> {
+    public async updateOrg(orgIdentifier: string, updateOrgRequest: UpdateOrgRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'orgIdentifier' is not null or undefined
@@ -3202,6 +3292,11 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
             throw new RequiredError("ThoughtSpotRestApi", "updateOrg", "orgIdentifier");
         }
 
+
+        // verify required parameter 'updateOrgRequest' is not null or undefined
+        if (updateOrgRequest === null || updateOrgRequest === undefined) {
+            throw new RequiredError("ThoughtSpotRestApi", "updateOrg", "updateOrgRequest");
+        }
 
 
         // Path Params
@@ -3305,7 +3400,7 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
      * @param scheduleIdentifier Unique ID or name of the schedule.
      * @param updateScheduleRequest 
      */
-    public async updateSchedule(scheduleIdentifier: string, updateScheduleRequest?: UpdateScheduleRequest, _options?: Configuration): Promise<RequestContext> {
+    public async updateSchedule(scheduleIdentifier: string, updateScheduleRequest: UpdateScheduleRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'scheduleIdentifier' is not null or undefined
@@ -3313,6 +3408,11 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
             throw new RequiredError("ThoughtSpotRestApi", "updateSchedule", "scheduleIdentifier");
         }
 
+
+        // verify required parameter 'updateScheduleRequest' is not null or undefined
+        if (updateScheduleRequest === null || updateScheduleRequest === undefined) {
+            throw new RequiredError("ThoughtSpotRestApi", "updateSchedule", "updateScheduleRequest");
+        }
 
 
         // Path Params
@@ -3408,7 +3508,7 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
      * @param tagIdentifier Name or Id of the tag.
      * @param updateTagRequest 
      */
-    public async updateTag(tagIdentifier: string, updateTagRequest?: UpdateTagRequest, _options?: Configuration): Promise<RequestContext> {
+    public async updateTag(tagIdentifier: string, updateTagRequest: UpdateTagRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'tagIdentifier' is not null or undefined
@@ -3416,6 +3516,11 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
             throw new RequiredError("ThoughtSpotRestApi", "updateTag", "tagIdentifier");
         }
 
+
+        // verify required parameter 'updateTagRequest' is not null or undefined
+        if (updateTagRequest === null || updateTagRequest === undefined) {
+            throw new RequiredError("ThoughtSpotRestApi", "updateTag", "updateTagRequest");
+        }
 
 
         // Path Params
@@ -3461,7 +3566,7 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
      * @param userIdentifier GUID / name of the user
      * @param updateUserRequest 
      */
-    public async updateUser(userIdentifier: string, updateUserRequest?: UpdateUserRequest, _options?: Configuration): Promise<RequestContext> {
+    public async updateUser(userIdentifier: string, updateUserRequest: UpdateUserRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'userIdentifier' is not null or undefined
@@ -3469,6 +3574,11 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
             throw new RequiredError("ThoughtSpotRestApi", "updateUser", "userIdentifier");
         }
 
+
+        // verify required parameter 'updateUserRequest' is not null or undefined
+        if (updateUserRequest === null || updateUserRequest === undefined) {
+            throw new RequiredError("ThoughtSpotRestApi", "updateUser", "updateUserRequest");
+        }
 
 
         // Path Params
@@ -3514,7 +3624,7 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
      * @param groupIdentifier GUID or name of the group.
      * @param updateUserGroupRequest 
      */
-    public async updateUserGroup(groupIdentifier: string, updateUserGroupRequest?: UpdateUserGroupRequest, _options?: Configuration): Promise<RequestContext> {
+    public async updateUserGroup(groupIdentifier: string, updateUserGroupRequest: UpdateUserGroupRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'groupIdentifier' is not null or undefined
@@ -3522,6 +3632,11 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
             throw new RequiredError("ThoughtSpotRestApi", "updateUserGroup", "groupIdentifier");
         }
 
+
+        // verify required parameter 'updateUserGroupRequest' is not null or undefined
+        if (updateUserGroupRequest === null || updateUserGroupRequest === undefined) {
+            throw new RequiredError("ThoughtSpotRestApi", "updateUserGroup", "updateUserGroupRequest");
+        }
 
 
         // Path Params

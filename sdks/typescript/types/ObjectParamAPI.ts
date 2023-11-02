@@ -223,7 +223,7 @@ export interface AuthenticationApiLoginRequest {
      * @type LoginRequest
      * @memberof AuthenticationApilogin
      */
-    loginRequest?: LoginRequest
+    loginRequest: LoginRequest
 }
 
 export interface AuthenticationApiLogoutRequest {
@@ -235,7 +235,7 @@ export interface AuthenticationApiRevokeTokenRequest {
      * @type RevokeTokenRequest
      * @memberof AuthenticationApirevokeToken
      */
-    revokeTokenRequest?: RevokeTokenRequest
+    revokeTokenRequest: RevokeTokenRequest
 }
 
 export class ObjectAuthenticationApi {
@@ -281,7 +281,7 @@ export class ObjectAuthenticationApi {
      *   Version: 9.0.0.cl or later    Creates a login session for a ThoughtSpot user with Basic authentication.  In Basic authentication method, REST clients log in to ThoughtSpot using `username` and `password` attributes. On a multi-tenant cluster with Orgs, users can pass the ID of the Org in the API request to log in to a specific Org context.  A successful login returns a session cookie that can be used in your subsequent API requests.      
      * @param param the request object
      */
-    public login(param: AuthenticationApiLoginRequest = {}, options?: Configuration): Promise<void> {
+    public login(param: AuthenticationApiLoginRequest, options?: Configuration): Promise<void> {
         return this.api.login(param.loginRequest,  options).toPromise();
     }
 
@@ -297,7 +297,7 @@ export class ObjectAuthenticationApi {
      *   Version: 9.0.0.cl or later    Revokes the authentication token issued for current user session.  The token of your current session expires when you make a call to the `/api/rest/2.0/auth/token/revoke` endpoint. the users will not be able to access ThoughtSpot objects until a new token is obtained.  To restart your session, request for a new token from ThoughtSpot. See [Get Object Access Token](#/http/api-endpoints/authentication/get-object-access-token) and [Get Full Access Token](#/http/api-endpoints/authentication/get-full-access-token).      
      * @param param the request object
      */
-    public revokeToken(param: AuthenticationApiRevokeTokenRequest = {}, options?: Configuration): Promise<void> {
+    public revokeToken(param: AuthenticationApiRevokeTokenRequest, options?: Configuration): Promise<void> {
         return this.api.revokeToken(param.revokeTokenRequest,  options).toPromise();
     }
 
@@ -330,7 +330,7 @@ export interface ConnectionsApiSearchConnectionRequest {
      * @type SearchConnectionRequest
      * @memberof ConnectionsApisearchConnection
      */
-    searchConnectionRequest?: SearchConnectionRequest
+    searchConnectionRequest: SearchConnectionRequest
 }
 
 export interface ConnectionsApiUpdateConnectionRequest {
@@ -366,10 +366,10 @@ export class ObjectConnectionsApi {
     }
 
     /**
-     *   Version: 9.2.0.cl or later   Gets connection objects. Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. - To get a list of all connections available in the ThoughtSpot system, send the API request without any attributes in the request body. - To get the connection objects for a specific type of data warehouse, specify the type in `data_warehouse_types`. - To fetch details of a connection object, specify the connection object GUID or name. The `name_pattern` attribute allows passing partial text with `%` for a wildcard match. - To get details of the database, schemas, tables, or columns from a data connection object, specify `data_warehouse_object_type`. - To get a specific database, schema, table, or column from a connection object, define the object type in `data_warehouse_object_type` and object properties in the `data_warehouse_objects` array. For example, to search for a column, you must pass the database, schema, and table names in the API request.   Note that in the following example, object properties are set in a hierarchical order (`database` > `schema` > `table` > `column`). ``` {   \"connections\": [     {       \"identifier\": \"b9d1f2ef-fa65-4a4b-994e-30fa2d57b0c2\",       \"data_warehouse_objects\": [         {           \"database\": \"NEBULADEV\",           \"schema\": \"INFORMATION_SCHEMA\",           \"table\": \"APPLICABLE_ROLES\",           \"column\": \"ROLE_NAME\"         }       ]     }   ],   \"data_warehouse_object_type\": \"COLUMN\" } ``` - To fetch data by `configuration`, specify `data_warehouse_object_type`. For example, to fetch columns from the `DEVELOPMENT` database, specify the `data_warehouse_object_type` as `DATABASE` and define the `configuration` string as `{\"database\":\"DEVELOPMENT\"}`. To get column data for a specific table, specify the table, for example,`{\"database\":\"RETAILAPPAREL\",\"table\":\"PIPES\"}`. - To query connections by `authentication_type`, specify `data_warehouse_object_type`. Supported values for `authentication_type` are:   * `SERVICE_ACCOUNT`: For connections that require service account credentials to authenticate to the Cloud Data Warehouse and fetch data.   * `OAUTH`: For connections that require OAuth credentials to authenticate to the Cloud Data Warehouse and fetch data. Teradata, Oracle, and Presto Cloud Data Warehouses do not support the OAuth authentication type.   * `IAM`: For connections that have the IAM OAuth set up. This authentication type is supported on Amazon Redshift connections only.   * `EXTOAUTH`: For connections that have external OAuth set up. ThoughtSpot supports external [OAuth with Microsoft Azure Active Directory (AD)](https://docs.thoughtspot.com/cloud/latest/ connections-snowflake-azure-ad-oauth) and [Okta for Snowflake data connections](https://docs.thoughtspot.com/cloud/latest/connections-snowflake-okta-oauth). - To include more details about connection objects in the API response, set `include_details` to `true`. - You can also sort the output by field names and filter connections by tags.     
+     *   Version: 9.2.0.cl or later   Gets connection objects. Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  - To get a list of all connections available in the ThoughtSpot system, send the API request without any attributes in the request body. - To get the connection objects for a specific type of data warehouse, specify the type in `data_warehouse_types`. - To fetch details of a connection object, specify the connection object GUID or name. The `name_pattern` attribute allows passing partial text with `%` for a wildcard match. - To get details of the database, schemas, tables, or columns from a data connection object, specify `data_warehouse_object_type`. - To get a specific database, schema, table, or column from a connection object, define the object type in `data_warehouse_object_type` and object properties in the `data_warehouse_objects` array. For example, to search for a column, you must pass the database, schema, and table names in the API request.   Note that in the following example, object properties are set in a hierarchical order (`database` > `schema` > `table` > `column`).  ``` {   \"connections\": [     {       \"identifier\": \"b9d1f2ef-fa65-4a4b-994e-30fa2d57b0c2\",       \"data_warehouse_objects\": [         {           \"database\": \"NEBULADEV\",           \"schema\": \"INFORMATION_SCHEMA\",           \"table\": \"APPLICABLE_ROLES\",           \"column\": \"ROLE_NAME\"         }       ]     }   ],   \"data_warehouse_object_type\": \"COLUMN\" } ```  - To fetch data by `configuration`, specify `data_warehouse_object_type`. For example, to fetch columns from the `DEVELOPMENT` database, specify the `data_warehouse_object_type` as `DATABASE` and define the `configuration` string as `{\"database\":\"DEVELOPMENT\"}`. To get column data for a specific table, specify the table, for example,`{\"database\":\"RETAILAPPAREL\",\"table\":\"PIPES\"}`. - To query connections by `authentication_type`, specify `data_warehouse_object_type`. Supported values for `authentication_type` are:   - `SERVICE_ACCOUNT`: For connections that require service account credentials to authenticate to the Cloud Data Warehouse and fetch data.   - `OAUTH`: For connections that require OAuth credentials to authenticate to the Cloud Data Warehouse and fetch data. Teradata, Oracle, and Presto Cloud Data Warehouses do not support the OAuth authentication type.   - `IAM`: For connections that have the IAM OAuth set up. This authentication type is supported on Amazon Redshift connections only.   - `EXTOAUTH`: For connections that have external OAuth set up. ThoughtSpot supports external [OAuth with Microsoft Azure Active Directory (AD)](https://docs.thoughtspot.com/cloud/latest/ connections-snowflake-azure-ad-oauth) and [Okta for Snowflake data connections](https://docs.thoughtspot.com/cloud/latest/connections-snowflake-okta-oauth). - To include more details about connection objects in the API response, set `include_details` to `true`. - You can also sort the output by field names and filter connections by tags.  **NOTE**: When filtering connection records by parameters other than `data_warehouse_types` or `tag_identifiers`, ensure that you set `record_size` to `-1` and `record_offset` to `0` for precise results.      
      * @param param the request object
      */
-    public searchConnection(param: ConnectionsApiSearchConnectionRequest = {}, options?: Configuration): Promise<Array<SearchConnectionResponse>> {
+    public searchConnection(param: ConnectionsApiSearchConnectionRequest, options?: Configuration): Promise<Array<SearchConnectionResponse>> {
         return this.api.searchConnection(param.searchConnectionRequest,  options).toPromise();
     }
 
@@ -410,7 +410,7 @@ export interface CustomActionApiSearchCustomActionsRequest {
      * @type SearchCustomActionsRequest
      * @memberof CustomActionApisearchCustomActions
      */
-    searchCustomActionsRequest?: SearchCustomActionsRequest
+    searchCustomActionsRequest: SearchCustomActionsRequest
 }
 
 export interface CustomActionApiUpdateCustomActionRequest {
@@ -425,7 +425,7 @@ export interface CustomActionApiUpdateCustomActionRequest {
      * @type UpdateCustomActionRequest
      * @memberof CustomActionApiupdateCustomAction
      */
-    updateCustomActionRequest?: UpdateCustomActionRequest
+    updateCustomActionRequest: UpdateCustomActionRequest
 }
 
 export class ObjectCustomActionApi {
@@ -455,7 +455,7 @@ export class ObjectCustomActionApi {
      *   Version: 9.6.0.cl or later   Gets custom actions configured on the cluster.  Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
      * @param param the request object
      */
-    public searchCustomActions(param: CustomActionApiSearchCustomActionsRequest = {}, options?: Configuration): Promise<Array<ResponseCustomAction>> {
+    public searchCustomActions(param: CustomActionApiSearchCustomActionsRequest, options?: Configuration): Promise<Array<ResponseCustomAction>> {
         return this.api.searchCustomActions(param.searchCustomActionsRequest,  options).toPromise();
     }
 
@@ -559,7 +559,7 @@ export interface GroupsApiImportUserGroupsRequest {
      * @type ImportUserGroupsRequest
      * @memberof GroupsApiimportUserGroups
      */
-    importUserGroupsRequest?: ImportUserGroupsRequest
+    importUserGroupsRequest: ImportUserGroupsRequest
 }
 
 export interface GroupsApiSearchUserGroupsRequest {
@@ -568,7 +568,7 @@ export interface GroupsApiSearchUserGroupsRequest {
      * @type SearchUserGroupsRequest
      * @memberof GroupsApisearchUserGroups
      */
-    searchUserGroupsRequest?: SearchUserGroupsRequest
+    searchUserGroupsRequest: SearchUserGroupsRequest
 }
 
 export interface GroupsApiUpdateUserGroupRequest {
@@ -583,7 +583,7 @@ export interface GroupsApiUpdateUserGroupRequest {
      * @type UpdateUserGroupRequest
      * @memberof GroupsApiupdateUserGroup
      */
-    updateUserGroupRequest?: UpdateUserGroupRequest
+    updateUserGroupRequest: UpdateUserGroupRequest
 }
 
 export class ObjectGroupsApi {
@@ -613,15 +613,15 @@ export class ObjectGroupsApi {
      *   Version: 9.0.0.cl or later   Imports group objects from external databases into ThoughtSpot.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  During the import operation:  * If the specified group is not available in ThoughtSpot, it will be added to ThoughtSpot. * If `delete_unspecified_groups` is set to `true`, the groups not specified in the API request, excluding administrator and system user groups, are deleted. * If the specified groups are already available in ThoughtSpot, the object properties of these groups are modified and synchronized as per the input data in the API request.  A successful API call returns the object that represents the changes made in the ThoughtSpot system.      
      * @param param the request object
      */
-    public importUserGroups(param: GroupsApiImportUserGroupsRequest = {}, options?: Configuration): Promise<ImportUserGroupsResponse> {
+    public importUserGroups(param: GroupsApiImportUserGroupsRequest, options?: Configuration): Promise<ImportUserGroupsResponse> {
         return this.api.importUserGroups(param.importUserGroupsRequest,  options).toPromise();
     }
 
     /**
-     *   Version: 9.0.0.cl or later    Gets a list of users available on the ThoughtSpot system.  To get details of a specific user, specify the user GUID or name. You can also filter the API response based on groups, Org ID, user visibility, account status, user type, and user preference settings and favorites.  Available to all users. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view all users properties.      
+     *   Version: 9.0.0.cl or later   Gets a list of users available on the ThoughtSpot system.  To get details of a specific user, specify the user GUID or name. You can also filter the API response based on groups, Org ID, user visibility, account status, user type, and user preference settings and favorites.  Available to all users. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view all users properties.  **NOTE**: If you do not get precise results, try setting `record_size` to `-1` and `record_offset` to `0`.      
      * @param param the request object
      */
-    public searchUserGroups(param: GroupsApiSearchUserGroupsRequest = {}, options?: Configuration): Promise<Array<UserGroupResponse>> {
+    public searchUserGroups(param: GroupsApiSearchUserGroupsRequest, options?: Configuration): Promise<Array<UserGroupResponse>> {
         return this.api.searchUserGroups(param.searchUserGroupsRequest,  options).toPromise();
     }
 
@@ -718,7 +718,7 @@ export interface MetadataApiSearchMetadataRequest {
      * @type SearchMetadataRequest
      * @memberof MetadataApisearchMetadata
      */
-    searchMetadataRequest?: SearchMetadataRequest
+    searchMetadataRequest: SearchMetadataRequest
 }
 
 export class ObjectMetadataApi {
@@ -769,10 +769,10 @@ export class ObjectMetadataApi {
     }
 
     /**
-     *   Version: 9.0.0.cl or later    Gets a list of metadata objects available on the ThoughtSpot system.  This API endpoint is available to all users who have view access to the object. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view data for all metadata objects, including users and groups.  #### Usage guidelines  * To get all metadata objects, send the API request without any attributes. * To get metadata objects of a specific type, set the `type` attribute. For example, to fetch a Worksheet, set the type as `LOGICAL_TABLE`. * To get a specific metadata object, specify the GUID. * To customize your search and filter the API response, you can use several parameters.   You can search for objects created or modified by specific users, by tags applied to the objects, or by using the include parameters like `include_auto_created_objects`, `include_dependent_objects`, `include_headers`, `include_incomplete_objects`, and so on.   You can also define sorting options to sort the data retrieved in the API response.      
+     *   Version: 9.0.0.cl or later   Gets a list of metadata objects available on the ThoughtSpot system.  This API endpoint is available to all users who have view access to the object. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view data for all metadata objects, including users and groups.  #### Usage guidelines  - To get all metadata objects, send the API request without any attributes. - To get metadata objects of a specific type, set the `type` attribute. For example, to fetch a Worksheet, set the type as `LOGICAL_TABLE`. - To get a specific metadata object, specify the GUID. - To customize your search and filter the API response, you can use several parameters.   You can search for objects created or modified by specific users, by tags applied to the objects, or by using the include parameters like `include_auto_created_objects`, `include_dependent_objects`, `include_headers`, `include_incomplete_objects`, and so on.   You can also define sorting options to sort the data retrieved in the API response.  **NOTE**: The following parameters support pagination of metadata records: `tag_identifiers` `type` `created_by_user_identifiers` `modified_by_user_identifiers` `owned_by_user_identifiers` `exclude_objects` `include_auto_created_objects` `favorite_object_options` If you are using other parameters to search metadata, set `record_size` to `-1` and `record_offset` to `0`.      
      * @param param the request object
      */
-    public searchMetadata(param: MetadataApiSearchMetadataRequest = {}, options?: Configuration): Promise<Array<MetadataSearchResponse>> {
+    public searchMetadata(param: MetadataApiSearchMetadataRequest, options?: Configuration): Promise<Array<MetadataSearchResponse>> {
         return this.api.searchMetadata(param.searchMetadataRequest,  options).toPromise();
     }
 
@@ -805,7 +805,7 @@ export interface OrgsApiSearchOrgsRequest {
      * @type SearchOrgsRequest
      * @memberof OrgsApisearchOrgs
      */
-    searchOrgsRequest?: SearchOrgsRequest
+    searchOrgsRequest: SearchOrgsRequest
 }
 
 export interface OrgsApiUpdateOrgRequest {
@@ -820,7 +820,7 @@ export interface OrgsApiUpdateOrgRequest {
      * @type UpdateOrgRequest
      * @memberof OrgsApiupdateOrg
      */
-    updateOrgRequest?: UpdateOrgRequest
+    updateOrgRequest: UpdateOrgRequest
 }
 
 export class ObjectOrgsApi {
@@ -850,7 +850,7 @@ export class ObjectOrgsApi {
      *   Version: 9.0.0.cl or later   Gets a list of Orgs configured on the ThoughtSpot system. To get details of a specific Org, specify the Org ID or name. You can also pass parameters such as status, visibility, and user identifiers to get a specific list of Orgs.  Requires cluster administration (**Can administer Org**) privileges.      
      * @param param the request object
      */
-    public searchOrgs(param: OrgsApiSearchOrgsRequest = {}, options?: Configuration): Promise<Array<OrgResponse>> {
+    public searchOrgs(param: OrgsApiSearchOrgsRequest, options?: Configuration): Promise<Array<OrgResponse>> {
         return this.api.searchOrgs(param.searchOrgsRequest,  options).toPromise();
     }
 
@@ -937,7 +937,7 @@ export interface RolesApiSearchRolesRequest {
      * @type SearchRolesRequest
      * @memberof RolesApisearchRoles
      */
-    searchRolesRequest?: SearchRolesRequest
+    searchRolesRequest: SearchRolesRequest
 }
 
 export interface RolesApiUpdateRoleRequest {
@@ -982,7 +982,7 @@ export class ObjectRolesApi {
      * Gets Roles configured on a ThoughtSpot instance. Requires cluster Administration, Role Administration or Group Administration privileges.    Version: 9.5.0.cl or later 
      * @param param the request object
      */
-    public searchRoles(param: RolesApiSearchRolesRequest = {}, options?: Configuration): Promise<Array<SearchRoleResponse>> {
+    public searchRoles(param: RolesApiSearchRolesRequest, options?: Configuration): Promise<Array<SearchRoleResponse>> {
         return this.api.searchRoles(param.searchRolesRequest,  options).toPromise();
     }
 
@@ -1023,7 +1023,7 @@ export interface SchedulesApiSearchSchedulesRequest {
      * @type SearchSchedulesRequest
      * @memberof SchedulesApisearchSchedules
      */
-    searchSchedulesRequest?: SearchSchedulesRequest
+    searchSchedulesRequest: SearchSchedulesRequest
 }
 
 export interface SchedulesApiUpdateScheduleRequest {
@@ -1038,7 +1038,7 @@ export interface SchedulesApiUpdateScheduleRequest {
      * @type UpdateScheduleRequest
      * @memberof SchedulesApiupdateSchedule
      */
-    updateScheduleRequest?: UpdateScheduleRequest
+    updateScheduleRequest: UpdateScheduleRequest
 }
 
 export class ObjectSchedulesApi {
@@ -1065,10 +1065,10 @@ export class ObjectSchedulesApi {
     }
 
     /**
-     *  Search Schedules    Version: 9.4.0.cl or later   Gets a list of scheduled jobs configured for a Liveboard.  To get details of a specific scheduled job, specify the name or GUID of the scheduled job.  Requires at least view access to Liveboards.      
+     *  Search Schedules    Version: 9.4.0.cl or later   Gets a list of scheduled jobs configured for a Liveboard.  To get details of a specific scheduled job, specify the name or GUID of the scheduled job.  Requires at least view access to Liveboards.  **NOTE**: When filtering schedules by parameters other than `metadata`, set `record_size` to `-1` and `record_offset` to `0` for accurate results.      
      * @param param the request object
      */
-    public searchSchedules(param: SchedulesApiSearchSchedulesRequest = {}, options?: Configuration): Promise<Array<ResponseSchedule>> {
+    public searchSchedules(param: SchedulesApiSearchSchedulesRequest, options?: Configuration): Promise<Array<ResponseSchedule>> {
         return this.api.searchSchedules(param.searchSchedulesRequest,  options).toPromise();
     }
 
@@ -1260,7 +1260,7 @@ export interface TagsApiSearchTagsRequest {
      * @type SearchTagsRequest
      * @memberof TagsApisearchTags
      */
-    searchTagsRequest?: SearchTagsRequest
+    searchTagsRequest: SearchTagsRequest
 }
 
 export interface TagsApiUnassignTagRequest {
@@ -1284,7 +1284,7 @@ export interface TagsApiUpdateTagRequest {
      * @type UpdateTagRequest
      * @memberof TagsApiupdateTag
      */
-    updateTagRequest?: UpdateTagRequest
+    updateTagRequest: UpdateTagRequest
 }
 
 export class ObjectTagsApi {
@@ -1322,7 +1322,7 @@ export class ObjectTagsApi {
      *   Version: 9.0.0.cl or later   Gets a list of tag objects available on the ThoughtSpot system. To get details of a specific tag object, specify the GUID or name.  Any authenticated user can search for tag objects.      
      * @param param the request object
      */
-    public searchTags(param: TagsApiSearchTagsRequest = {}, options?: Configuration): Promise<Array<Tag>> {
+    public searchTags(param: TagsApiSearchTagsRequest, options?: Configuration): Promise<Array<Tag>> {
         return this.api.searchTags(param.searchTagsRequest,  options).toPromise();
     }
 
@@ -1470,7 +1470,7 @@ export interface ThoughtSpotRestApiDeleteConfigRequest {
      * @type DeleteConfigRequest
      * @memberof ThoughtSpotRestApideleteConfig
      */
-    deleteConfigRequest?: DeleteConfigRequest
+    deleteConfigRequest: DeleteConfigRequest
 }
 
 export interface ThoughtSpotRestApiDeleteConnectionRequest {
@@ -1659,7 +1659,7 @@ export interface ThoughtSpotRestApiForceLogoutUsersRequest {
      * @type ForceLogoutUsersRequest
      * @memberof ThoughtSpotRestApiforceLogoutUsers
      */
-    forceLogoutUsersRequest?: ForceLogoutUsersRequest
+    forceLogoutUsersRequest: ForceLogoutUsersRequest
 }
 
 export interface ThoughtSpotRestApiGetCurrentUserInfoRequest {
@@ -1710,7 +1710,7 @@ export interface ThoughtSpotRestApiImportUserGroupsRequest {
      * @type ImportUserGroupsRequest
      * @memberof ThoughtSpotRestApiimportUserGroups
      */
-    importUserGroupsRequest?: ImportUserGroupsRequest
+    importUserGroupsRequest: ImportUserGroupsRequest
 }
 
 export interface ThoughtSpotRestApiImportUsersRequest {
@@ -1728,7 +1728,7 @@ export interface ThoughtSpotRestApiLoginRequest {
      * @type LoginRequest
      * @memberof ThoughtSpotRestApilogin
      */
-    loginRequest?: LoginRequest
+    loginRequest: LoginRequest
 }
 
 export interface ThoughtSpotRestApiLogoutRequest {
@@ -1755,7 +1755,7 @@ export interface ThoughtSpotRestApiRevertCommitRequest {
      * @type RevertCommitRequest
      * @memberof ThoughtSpotRestApirevertCommit
      */
-    revertCommitRequest?: RevertCommitRequest
+    revertCommitRequest: RevertCommitRequest
 }
 
 export interface ThoughtSpotRestApiRevokeTokenRequest {
@@ -1764,7 +1764,7 @@ export interface ThoughtSpotRestApiRevokeTokenRequest {
      * @type RevokeTokenRequest
      * @memberof ThoughtSpotRestApirevokeToken
      */
-    revokeTokenRequest?: RevokeTokenRequest
+    revokeTokenRequest: RevokeTokenRequest
 }
 
 export interface ThoughtSpotRestApiSearchCommitsRequest {
@@ -1782,7 +1782,7 @@ export interface ThoughtSpotRestApiSearchConfigRequest {
      * @type SearchConfigRequest
      * @memberof ThoughtSpotRestApisearchConfig
      */
-    searchConfigRequest?: SearchConfigRequest
+    searchConfigRequest: SearchConfigRequest
 }
 
 export interface ThoughtSpotRestApiSearchConnectionRequest {
@@ -1791,7 +1791,7 @@ export interface ThoughtSpotRestApiSearchConnectionRequest {
      * @type SearchConnectionRequest
      * @memberof ThoughtSpotRestApisearchConnection
      */
-    searchConnectionRequest?: SearchConnectionRequest
+    searchConnectionRequest: SearchConnectionRequest
 }
 
 export interface ThoughtSpotRestApiSearchCustomActionsRequest {
@@ -1800,7 +1800,7 @@ export interface ThoughtSpotRestApiSearchCustomActionsRequest {
      * @type SearchCustomActionsRequest
      * @memberof ThoughtSpotRestApisearchCustomActions
      */
-    searchCustomActionsRequest?: SearchCustomActionsRequest
+    searchCustomActionsRequest: SearchCustomActionsRequest
 }
 
 export interface ThoughtSpotRestApiSearchDataRequest {
@@ -1818,7 +1818,7 @@ export interface ThoughtSpotRestApiSearchMetadataRequest {
      * @type SearchMetadataRequest
      * @memberof ThoughtSpotRestApisearchMetadata
      */
-    searchMetadataRequest?: SearchMetadataRequest
+    searchMetadataRequest: SearchMetadataRequest
 }
 
 export interface ThoughtSpotRestApiSearchOrgsRequest {
@@ -1827,7 +1827,7 @@ export interface ThoughtSpotRestApiSearchOrgsRequest {
      * @type SearchOrgsRequest
      * @memberof ThoughtSpotRestApisearchOrgs
      */
-    searchOrgsRequest?: SearchOrgsRequest
+    searchOrgsRequest: SearchOrgsRequest
 }
 
 export interface ThoughtSpotRestApiSearchRolesRequest {
@@ -1836,7 +1836,7 @@ export interface ThoughtSpotRestApiSearchRolesRequest {
      * @type SearchRolesRequest
      * @memberof ThoughtSpotRestApisearchRoles
      */
-    searchRolesRequest?: SearchRolesRequest
+    searchRolesRequest: SearchRolesRequest
 }
 
 export interface ThoughtSpotRestApiSearchSchedulesRequest {
@@ -1845,7 +1845,7 @@ export interface ThoughtSpotRestApiSearchSchedulesRequest {
      * @type SearchSchedulesRequest
      * @memberof ThoughtSpotRestApisearchSchedules
      */
-    searchSchedulesRequest?: SearchSchedulesRequest
+    searchSchedulesRequest: SearchSchedulesRequest
 }
 
 export interface ThoughtSpotRestApiSearchTagsRequest {
@@ -1854,7 +1854,7 @@ export interface ThoughtSpotRestApiSearchTagsRequest {
      * @type SearchTagsRequest
      * @memberof ThoughtSpotRestApisearchTags
      */
-    searchTagsRequest?: SearchTagsRequest
+    searchTagsRequest: SearchTagsRequest
 }
 
 export interface ThoughtSpotRestApiSearchUserGroupsRequest {
@@ -1863,7 +1863,7 @@ export interface ThoughtSpotRestApiSearchUserGroupsRequest {
      * @type SearchUserGroupsRequest
      * @memberof ThoughtSpotRestApisearchUserGroups
      */
-    searchUserGroupsRequest?: SearchUserGroupsRequest
+    searchUserGroupsRequest: SearchUserGroupsRequest
 }
 
 export interface ThoughtSpotRestApiSearchUsersRequest {
@@ -1872,7 +1872,7 @@ export interface ThoughtSpotRestApiSearchUsersRequest {
      * @type SearchUsersRequest
      * @memberof ThoughtSpotRestApisearchUsers
      */
-    searchUsersRequest?: SearchUsersRequest
+    searchUsersRequest: SearchUsersRequest
 }
 
 export interface ThoughtSpotRestApiShareMetadataRequest {
@@ -1899,7 +1899,7 @@ export interface ThoughtSpotRestApiUpdateConfigRequest {
      * @type UpdateConfigRequest
      * @memberof ThoughtSpotRestApiupdateConfig
      */
-    updateConfigRequest?: UpdateConfigRequest
+    updateConfigRequest: UpdateConfigRequest
 }
 
 export interface ThoughtSpotRestApiUpdateConnectionRequest {
@@ -1923,7 +1923,7 @@ export interface ThoughtSpotRestApiUpdateCustomActionRequest {
      * @type UpdateCustomActionRequest
      * @memberof ThoughtSpotRestApiupdateCustomAction
      */
-    updateCustomActionRequest?: UpdateCustomActionRequest
+    updateCustomActionRequest: UpdateCustomActionRequest
 }
 
 export interface ThoughtSpotRestApiUpdateOrgRequest {
@@ -1938,7 +1938,7 @@ export interface ThoughtSpotRestApiUpdateOrgRequest {
      * @type UpdateOrgRequest
      * @memberof ThoughtSpotRestApiupdateOrg
      */
-    updateOrgRequest?: UpdateOrgRequest
+    updateOrgRequest: UpdateOrgRequest
 }
 
 export interface ThoughtSpotRestApiUpdateRoleRequest {
@@ -1968,7 +1968,7 @@ export interface ThoughtSpotRestApiUpdateScheduleRequest {
      * @type UpdateScheduleRequest
      * @memberof ThoughtSpotRestApiupdateSchedule
      */
-    updateScheduleRequest?: UpdateScheduleRequest
+    updateScheduleRequest: UpdateScheduleRequest
 }
 
 export interface ThoughtSpotRestApiUpdateSystemConfigRequest {
@@ -1992,7 +1992,7 @@ export interface ThoughtSpotRestApiUpdateTagRequest {
      * @type UpdateTagRequest
      * @memberof ThoughtSpotRestApiupdateTag
      */
-    updateTagRequest?: UpdateTagRequest
+    updateTagRequest: UpdateTagRequest
 }
 
 export interface ThoughtSpotRestApiUpdateUserRequest {
@@ -2007,7 +2007,7 @@ export interface ThoughtSpotRestApiUpdateUserRequest {
      * @type UpdateUserRequest
      * @memberof ThoughtSpotRestApiupdateUser
      */
-    updateUserRequest?: UpdateUserRequest
+    updateUserRequest: UpdateUserRequest
 }
 
 export interface ThoughtSpotRestApiUpdateUserGroupRequest {
@@ -2022,7 +2022,7 @@ export interface ThoughtSpotRestApiUpdateUserGroupRequest {
      * @type UpdateUserGroupRequest
      * @memberof ThoughtSpotRestApiupdateUserGroup
      */
-    updateUserGroupRequest?: UpdateUserGroupRequest
+    updateUserGroupRequest: UpdateUserGroupRequest
 }
 
 export interface ThoughtSpotRestApiValidateMergeRequest {
@@ -2149,7 +2149,7 @@ export class ObjectThoughtSpotRestApi {
      *   Version: 9.2.0.cl or later   Deletes Git repository configuration from your ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
      * @param param the request object
      */
-    public deleteConfig(param: ThoughtSpotRestApiDeleteConfigRequest = {}, options?: Configuration): Promise<void> {
+    public deleteConfig(param: ThoughtSpotRestApiDeleteConfigRequest, options?: Configuration): Promise<void> {
         return this.api.deleteConfig(param.deleteConfigRequest,  options).toPromise();
     }
 
@@ -2317,7 +2317,7 @@ export class ObjectThoughtSpotRestApi {
      *   Version: 9.0.0.cl or later   Enforces logout on current user sessions.    Use this API with caution as it may invalidate active user sessions and force users to re-login. Make sure you specify the usernames or GUIDs. If you pass null values in the API call, all user sessions on your cluster become invalid, and the users are forced to re-login.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
      * @param param the request object
      */
-    public forceLogoutUsers(param: ThoughtSpotRestApiForceLogoutUsersRequest = {}, options?: Configuration): Promise<void> {
+    public forceLogoutUsers(param: ThoughtSpotRestApiForceLogoutUsersRequest, options?: Configuration): Promise<void> {
         return this.api.forceLogoutUsers(param.forceLogoutUsersRequest,  options).toPromise();
     }
 
@@ -2389,7 +2389,7 @@ export class ObjectThoughtSpotRestApi {
      *   Version: 9.0.0.cl or later   Imports group objects from external databases into ThoughtSpot.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  During the import operation:  * If the specified group is not available in ThoughtSpot, it will be added to ThoughtSpot. * If `delete_unspecified_groups` is set to `true`, the groups not specified in the API request, excluding administrator and system user groups, are deleted. * If the specified groups are already available in ThoughtSpot, the object properties of these groups are modified and synchronized as per the input data in the API request.  A successful API call returns the object that represents the changes made in the ThoughtSpot system.      
      * @param param the request object
      */
-    public importUserGroups(param: ThoughtSpotRestApiImportUserGroupsRequest = {}, options?: Configuration): Promise<ImportUserGroupsResponse> {
+    public importUserGroups(param: ThoughtSpotRestApiImportUserGroupsRequest, options?: Configuration): Promise<ImportUserGroupsResponse> {
         return this.api.importUserGroups(param.importUserGroupsRequest,  options).toPromise();
     }
 
@@ -2405,7 +2405,7 @@ export class ObjectThoughtSpotRestApi {
      *   Version: 9.0.0.cl or later    Creates a login session for a ThoughtSpot user with Basic authentication.  In Basic authentication method, REST clients log in to ThoughtSpot using `username` and `password` attributes. On a multi-tenant cluster with Orgs, users can pass the ID of the Org in the API request to log in to a specific Org context.  A successful login returns a session cookie that can be used in your subsequent API requests.      
      * @param param the request object
      */
-    public login(param: ThoughtSpotRestApiLoginRequest = {}, options?: Configuration): Promise<void> {
+    public login(param: ThoughtSpotRestApiLoginRequest, options?: Configuration): Promise<void> {
         return this.api.login(param.loginRequest,  options).toPromise();
     }
 
@@ -2437,7 +2437,7 @@ export class ObjectThoughtSpotRestApi {
      *   Version: 9.0.0.cl or later    Revokes the authentication token issued for current user session.  The token of your current session expires when you make a call to the `/api/rest/2.0/auth/token/revoke` endpoint. the users will not be able to access ThoughtSpot objects until a new token is obtained.  To restart your session, request for a new token from ThoughtSpot. See [Get Object Access Token](#/http/api-endpoints/authentication/get-object-access-token) and [Get Full Access Token](#/http/api-endpoints/authentication/get-full-access-token).      
      * @param param the request object
      */
-    public revokeToken(param: ThoughtSpotRestApiRevokeTokenRequest = {}, options?: Configuration): Promise<void> {
+    public revokeToken(param: ThoughtSpotRestApiRevokeTokenRequest, options?: Configuration): Promise<void> {
         return this.api.revokeToken(param.revokeTokenRequest,  options).toPromise();
     }
 
@@ -2453,15 +2453,15 @@ export class ObjectThoughtSpotRestApi {
      *   Version: 9.2.0.cl or later   Gets Git repository connections configured on the ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
      * @param param the request object
      */
-    public searchConfig(param: ThoughtSpotRestApiSearchConfigRequest = {}, options?: Configuration): Promise<Array<RepoConfigObject>> {
+    public searchConfig(param: ThoughtSpotRestApiSearchConfigRequest, options?: Configuration): Promise<Array<RepoConfigObject>> {
         return this.api.searchConfig(param.searchConfigRequest,  options).toPromise();
     }
 
     /**
-     *   Version: 9.2.0.cl or later   Gets connection objects. Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. - To get a list of all connections available in the ThoughtSpot system, send the API request without any attributes in the request body. - To get the connection objects for a specific type of data warehouse, specify the type in `data_warehouse_types`. - To fetch details of a connection object, specify the connection object GUID or name. The `name_pattern` attribute allows passing partial text with `%` for a wildcard match. - To get details of the database, schemas, tables, or columns from a data connection object, specify `data_warehouse_object_type`. - To get a specific database, schema, table, or column from a connection object, define the object type in `data_warehouse_object_type` and object properties in the `data_warehouse_objects` array. For example, to search for a column, you must pass the database, schema, and table names in the API request.   Note that in the following example, object properties are set in a hierarchical order (`database` > `schema` > `table` > `column`). ``` {   \"connections\": [     {       \"identifier\": \"b9d1f2ef-fa65-4a4b-994e-30fa2d57b0c2\",       \"data_warehouse_objects\": [         {           \"database\": \"NEBULADEV\",           \"schema\": \"INFORMATION_SCHEMA\",           \"table\": \"APPLICABLE_ROLES\",           \"column\": \"ROLE_NAME\"         }       ]     }   ],   \"data_warehouse_object_type\": \"COLUMN\" } ``` - To fetch data by `configuration`, specify `data_warehouse_object_type`. For example, to fetch columns from the `DEVELOPMENT` database, specify the `data_warehouse_object_type` as `DATABASE` and define the `configuration` string as `{\"database\":\"DEVELOPMENT\"}`. To get column data for a specific table, specify the table, for example,`{\"database\":\"RETAILAPPAREL\",\"table\":\"PIPES\"}`. - To query connections by `authentication_type`, specify `data_warehouse_object_type`. Supported values for `authentication_type` are:   * `SERVICE_ACCOUNT`: For connections that require service account credentials to authenticate to the Cloud Data Warehouse and fetch data.   * `OAUTH`: For connections that require OAuth credentials to authenticate to the Cloud Data Warehouse and fetch data. Teradata, Oracle, and Presto Cloud Data Warehouses do not support the OAuth authentication type.   * `IAM`: For connections that have the IAM OAuth set up. This authentication type is supported on Amazon Redshift connections only.   * `EXTOAUTH`: For connections that have external OAuth set up. ThoughtSpot supports external [OAuth with Microsoft Azure Active Directory (AD)](https://docs.thoughtspot.com/cloud/latest/ connections-snowflake-azure-ad-oauth) and [Okta for Snowflake data connections](https://docs.thoughtspot.com/cloud/latest/connections-snowflake-okta-oauth). - To include more details about connection objects in the API response, set `include_details` to `true`. - You can also sort the output by field names and filter connections by tags.     
+     *   Version: 9.2.0.cl or later   Gets connection objects. Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  - To get a list of all connections available in the ThoughtSpot system, send the API request without any attributes in the request body. - To get the connection objects for a specific type of data warehouse, specify the type in `data_warehouse_types`. - To fetch details of a connection object, specify the connection object GUID or name. The `name_pattern` attribute allows passing partial text with `%` for a wildcard match. - To get details of the database, schemas, tables, or columns from a data connection object, specify `data_warehouse_object_type`. - To get a specific database, schema, table, or column from a connection object, define the object type in `data_warehouse_object_type` and object properties in the `data_warehouse_objects` array. For example, to search for a column, you must pass the database, schema, and table names in the API request.   Note that in the following example, object properties are set in a hierarchical order (`database` > `schema` > `table` > `column`).  ``` {   \"connections\": [     {       \"identifier\": \"b9d1f2ef-fa65-4a4b-994e-30fa2d57b0c2\",       \"data_warehouse_objects\": [         {           \"database\": \"NEBULADEV\",           \"schema\": \"INFORMATION_SCHEMA\",           \"table\": \"APPLICABLE_ROLES\",           \"column\": \"ROLE_NAME\"         }       ]     }   ],   \"data_warehouse_object_type\": \"COLUMN\" } ```  - To fetch data by `configuration`, specify `data_warehouse_object_type`. For example, to fetch columns from the `DEVELOPMENT` database, specify the `data_warehouse_object_type` as `DATABASE` and define the `configuration` string as `{\"database\":\"DEVELOPMENT\"}`. To get column data for a specific table, specify the table, for example,`{\"database\":\"RETAILAPPAREL\",\"table\":\"PIPES\"}`. - To query connections by `authentication_type`, specify `data_warehouse_object_type`. Supported values for `authentication_type` are:   - `SERVICE_ACCOUNT`: For connections that require service account credentials to authenticate to the Cloud Data Warehouse and fetch data.   - `OAUTH`: For connections that require OAuth credentials to authenticate to the Cloud Data Warehouse and fetch data. Teradata, Oracle, and Presto Cloud Data Warehouses do not support the OAuth authentication type.   - `IAM`: For connections that have the IAM OAuth set up. This authentication type is supported on Amazon Redshift connections only.   - `EXTOAUTH`: For connections that have external OAuth set up. ThoughtSpot supports external [OAuth with Microsoft Azure Active Directory (AD)](https://docs.thoughtspot.com/cloud/latest/ connections-snowflake-azure-ad-oauth) and [Okta for Snowflake data connections](https://docs.thoughtspot.com/cloud/latest/connections-snowflake-okta-oauth). - To include more details about connection objects in the API response, set `include_details` to `true`. - You can also sort the output by field names and filter connections by tags.  **NOTE**: When filtering connection records by parameters other than `data_warehouse_types` or `tag_identifiers`, ensure that you set `record_size` to `-1` and `record_offset` to `0` for precise results.      
      * @param param the request object
      */
-    public searchConnection(param: ThoughtSpotRestApiSearchConnectionRequest = {}, options?: Configuration): Promise<Array<SearchConnectionResponse>> {
+    public searchConnection(param: ThoughtSpotRestApiSearchConnectionRequest, options?: Configuration): Promise<Array<SearchConnectionResponse>> {
         return this.api.searchConnection(param.searchConnectionRequest,  options).toPromise();
     }
 
@@ -2469,7 +2469,7 @@ export class ObjectThoughtSpotRestApi {
      *   Version: 9.6.0.cl or later   Gets custom actions configured on the cluster.  Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
      * @param param the request object
      */
-    public searchCustomActions(param: ThoughtSpotRestApiSearchCustomActionsRequest = {}, options?: Configuration): Promise<Array<ResponseCustomAction>> {
+    public searchCustomActions(param: ThoughtSpotRestApiSearchCustomActionsRequest, options?: Configuration): Promise<Array<ResponseCustomAction>> {
         return this.api.searchCustomActions(param.searchCustomActionsRequest,  options).toPromise();
     }
 
@@ -2482,10 +2482,10 @@ export class ObjectThoughtSpotRestApi {
     }
 
     /**
-     *   Version: 9.0.0.cl or later    Gets a list of metadata objects available on the ThoughtSpot system.  This API endpoint is available to all users who have view access to the object. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view data for all metadata objects, including users and groups.  #### Usage guidelines  * To get all metadata objects, send the API request without any attributes. * To get metadata objects of a specific type, set the `type` attribute. For example, to fetch a Worksheet, set the type as `LOGICAL_TABLE`. * To get a specific metadata object, specify the GUID. * To customize your search and filter the API response, you can use several parameters.   You can search for objects created or modified by specific users, by tags applied to the objects, or by using the include parameters like `include_auto_created_objects`, `include_dependent_objects`, `include_headers`, `include_incomplete_objects`, and so on.   You can also define sorting options to sort the data retrieved in the API response.      
+     *   Version: 9.0.0.cl or later   Gets a list of metadata objects available on the ThoughtSpot system.  This API endpoint is available to all users who have view access to the object. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view data for all metadata objects, including users and groups.  #### Usage guidelines  - To get all metadata objects, send the API request without any attributes. - To get metadata objects of a specific type, set the `type` attribute. For example, to fetch a Worksheet, set the type as `LOGICAL_TABLE`. - To get a specific metadata object, specify the GUID. - To customize your search and filter the API response, you can use several parameters.   You can search for objects created or modified by specific users, by tags applied to the objects, or by using the include parameters like `include_auto_created_objects`, `include_dependent_objects`, `include_headers`, `include_incomplete_objects`, and so on.   You can also define sorting options to sort the data retrieved in the API response.  **NOTE**: The following parameters support pagination of metadata records: `tag_identifiers` `type` `created_by_user_identifiers` `modified_by_user_identifiers` `owned_by_user_identifiers` `exclude_objects` `include_auto_created_objects` `favorite_object_options` If you are using other parameters to search metadata, set `record_size` to `-1` and `record_offset` to `0`.      
      * @param param the request object
      */
-    public searchMetadata(param: ThoughtSpotRestApiSearchMetadataRequest = {}, options?: Configuration): Promise<Array<MetadataSearchResponse>> {
+    public searchMetadata(param: ThoughtSpotRestApiSearchMetadataRequest, options?: Configuration): Promise<Array<MetadataSearchResponse>> {
         return this.api.searchMetadata(param.searchMetadataRequest,  options).toPromise();
     }
 
@@ -2493,7 +2493,7 @@ export class ObjectThoughtSpotRestApi {
      *   Version: 9.0.0.cl or later   Gets a list of Orgs configured on the ThoughtSpot system. To get details of a specific Org, specify the Org ID or name. You can also pass parameters such as status, visibility, and user identifiers to get a specific list of Orgs.  Requires cluster administration (**Can administer Org**) privileges.      
      * @param param the request object
      */
-    public searchOrgs(param: ThoughtSpotRestApiSearchOrgsRequest = {}, options?: Configuration): Promise<Array<OrgResponse>> {
+    public searchOrgs(param: ThoughtSpotRestApiSearchOrgsRequest, options?: Configuration): Promise<Array<OrgResponse>> {
         return this.api.searchOrgs(param.searchOrgsRequest,  options).toPromise();
     }
 
@@ -2501,15 +2501,15 @@ export class ObjectThoughtSpotRestApi {
      * Gets Roles configured on a ThoughtSpot instance. Requires cluster Administration, Role Administration or Group Administration privileges.    Version: 9.5.0.cl or later 
      * @param param the request object
      */
-    public searchRoles(param: ThoughtSpotRestApiSearchRolesRequest = {}, options?: Configuration): Promise<Array<SearchRoleResponse>> {
+    public searchRoles(param: ThoughtSpotRestApiSearchRolesRequest, options?: Configuration): Promise<Array<SearchRoleResponse>> {
         return this.api.searchRoles(param.searchRolesRequest,  options).toPromise();
     }
 
     /**
-     *  Search Schedules    Version: 9.4.0.cl or later   Gets a list of scheduled jobs configured for a Liveboard.  To get details of a specific scheduled job, specify the name or GUID of the scheduled job.  Requires at least view access to Liveboards.      
+     *  Search Schedules    Version: 9.4.0.cl or later   Gets a list of scheduled jobs configured for a Liveboard.  To get details of a specific scheduled job, specify the name or GUID of the scheduled job.  Requires at least view access to Liveboards.  **NOTE**: When filtering schedules by parameters other than `metadata`, set `record_size` to `-1` and `record_offset` to `0` for accurate results.      
      * @param param the request object
      */
-    public searchSchedules(param: ThoughtSpotRestApiSearchSchedulesRequest = {}, options?: Configuration): Promise<Array<ResponseSchedule>> {
+    public searchSchedules(param: ThoughtSpotRestApiSearchSchedulesRequest, options?: Configuration): Promise<Array<ResponseSchedule>> {
         return this.api.searchSchedules(param.searchSchedulesRequest,  options).toPromise();
     }
 
@@ -2517,23 +2517,23 @@ export class ObjectThoughtSpotRestApi {
      *   Version: 9.0.0.cl or later   Gets a list of tag objects available on the ThoughtSpot system. To get details of a specific tag object, specify the GUID or name.  Any authenticated user can search for tag objects.      
      * @param param the request object
      */
-    public searchTags(param: ThoughtSpotRestApiSearchTagsRequest = {}, options?: Configuration): Promise<Array<Tag>> {
+    public searchTags(param: ThoughtSpotRestApiSearchTagsRequest, options?: Configuration): Promise<Array<Tag>> {
         return this.api.searchTags(param.searchTagsRequest,  options).toPromise();
     }
 
     /**
-     *   Version: 9.0.0.cl or later    Gets a list of users available on the ThoughtSpot system.  To get details of a specific user, specify the user GUID or name. You can also filter the API response based on groups, Org ID, user visibility, account status, user type, and user preference settings and favorites.  Available to all users. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view all users properties.      
+     *   Version: 9.0.0.cl or later   Gets a list of users available on the ThoughtSpot system.  To get details of a specific user, specify the user GUID or name. You can also filter the API response based on groups, Org ID, user visibility, account status, user type, and user preference settings and favorites.  Available to all users. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view all users properties.  **NOTE**: If you do not get precise results, try setting `record_size` to `-1` and `record_offset` to `0`.      
      * @param param the request object
      */
-    public searchUserGroups(param: ThoughtSpotRestApiSearchUserGroupsRequest = {}, options?: Configuration): Promise<Array<UserGroupResponse>> {
+    public searchUserGroups(param: ThoughtSpotRestApiSearchUserGroupsRequest, options?: Configuration): Promise<Array<UserGroupResponse>> {
         return this.api.searchUserGroups(param.searchUserGroupsRequest,  options).toPromise();
     }
 
     /**
-     *   Version: 9.0.0.cl or later    Gets a list of users available on the ThoughtSpot system.  To get details of a specific user, specify the user GUID or name. You can also filter the API response based on groups, Org ID, user visibility, account status, user type, and user preference settings and favorites.  Available to all users. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view all users properties.      
+     *   Version: 9.0.0.cl or later   Gets a list of users available on the ThoughtSpot system.  To get details of a specific user, specify the user GUID or name. You can also filter the API response based on groups, Org ID, user visibility, account status, user type, and user preference settings and favorites.  Available to all users. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view all users properties.  **NOTE**: If the API returns an empty list, consider increasing the value of the `record_size` parameter. To search across all available users, set `record_size` to `-1`.      
      * @param param the request object
      */
-    public searchUsers(param: ThoughtSpotRestApiSearchUsersRequest = {}, options?: Configuration): Promise<Array<User>> {
+    public searchUsers(param: ThoughtSpotRestApiSearchUsersRequest, options?: Configuration): Promise<Array<User>> {
         return this.api.searchUsers(param.searchUsersRequest,  options).toPromise();
     }
 
@@ -2557,7 +2557,7 @@ export class ObjectThoughtSpotRestApi {
      *   Version: 9.2.0.cl or later   Updates Git repository configuration settings.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
      * @param param the request object
      */
-    public updateConfig(param: ThoughtSpotRestApiUpdateConfigRequest = {}, options?: Configuration): Promise<RepoConfigObject> {
+    public updateConfig(param: ThoughtSpotRestApiUpdateConfigRequest, options?: Configuration): Promise<RepoConfigObject> {
         return this.api.updateConfig(param.updateConfigRequest,  options).toPromise();
     }
 
@@ -2679,7 +2679,7 @@ export interface UsersApiForceLogoutUsersRequest {
      * @type ForceLogoutUsersRequest
      * @memberof UsersApiforceLogoutUsers
      */
-    forceLogoutUsersRequest?: ForceLogoutUsersRequest
+    forceLogoutUsersRequest: ForceLogoutUsersRequest
 }
 
 export interface UsersApiImportUsersRequest {
@@ -2706,7 +2706,7 @@ export interface UsersApiSearchUsersRequest {
      * @type SearchUsersRequest
      * @memberof UsersApisearchUsers
      */
-    searchUsersRequest?: SearchUsersRequest
+    searchUsersRequest: SearchUsersRequest
 }
 
 export interface UsersApiUpdateUserRequest {
@@ -2721,7 +2721,7 @@ export interface UsersApiUpdateUserRequest {
      * @type UpdateUserRequest
      * @memberof UsersApiupdateUser
      */
-    updateUserRequest?: UpdateUserRequest
+    updateUserRequest: UpdateUserRequest
 }
 
 export class ObjectUsersApi {
@@ -2759,7 +2759,7 @@ export class ObjectUsersApi {
      *   Version: 9.0.0.cl or later   Enforces logout on current user sessions.    Use this API with caution as it may invalidate active user sessions and force users to re-login. Make sure you specify the usernames or GUIDs. If you pass null values in the API call, all user sessions on your cluster become invalid, and the users are forced to re-login.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
      * @param param the request object
      */
-    public forceLogoutUsers(param: UsersApiForceLogoutUsersRequest = {}, options?: Configuration): Promise<void> {
+    public forceLogoutUsers(param: UsersApiForceLogoutUsersRequest, options?: Configuration): Promise<void> {
         return this.api.forceLogoutUsers(param.forceLogoutUsersRequest,  options).toPromise();
     }
 
@@ -2780,10 +2780,10 @@ export class ObjectUsersApi {
     }
 
     /**
-     *   Version: 9.0.0.cl or later    Gets a list of users available on the ThoughtSpot system.  To get details of a specific user, specify the user GUID or name. You can also filter the API response based on groups, Org ID, user visibility, account status, user type, and user preference settings and favorites.  Available to all users. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view all users properties.      
+     *   Version: 9.0.0.cl or later   Gets a list of users available on the ThoughtSpot system.  To get details of a specific user, specify the user GUID or name. You can also filter the API response based on groups, Org ID, user visibility, account status, user type, and user preference settings and favorites.  Available to all users. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view all users properties.  **NOTE**: If the API returns an empty list, consider increasing the value of the `record_size` parameter. To search across all available users, set `record_size` to `-1`.      
      * @param param the request object
      */
-    public searchUsers(param: UsersApiSearchUsersRequest = {}, options?: Configuration): Promise<Array<User>> {
+    public searchUsers(param: UsersApiSearchUsersRequest, options?: Configuration): Promise<Array<User>> {
         return this.api.searchUsers(param.searchUsersRequest,  options).toPromise();
     }
 
@@ -2824,7 +2824,7 @@ export interface VersionControlApiDeleteConfigRequest {
      * @type DeleteConfigRequest
      * @memberof VersionControlApideleteConfig
      */
-    deleteConfigRequest?: DeleteConfigRequest
+    deleteConfigRequest: DeleteConfigRequest
 }
 
 export interface VersionControlApiDeployCommitRequest {
@@ -2848,7 +2848,7 @@ export interface VersionControlApiRevertCommitRequest {
      * @type RevertCommitRequest
      * @memberof VersionControlApirevertCommit
      */
-    revertCommitRequest?: RevertCommitRequest
+    revertCommitRequest: RevertCommitRequest
 }
 
 export interface VersionControlApiSearchCommitsRequest {
@@ -2866,7 +2866,7 @@ export interface VersionControlApiSearchConfigRequest {
      * @type SearchConfigRequest
      * @memberof VersionControlApisearchConfig
      */
-    searchConfigRequest?: SearchConfigRequest
+    searchConfigRequest: SearchConfigRequest
 }
 
 export interface VersionControlApiUpdateConfigRequest {
@@ -2875,7 +2875,7 @@ export interface VersionControlApiUpdateConfigRequest {
      * @type UpdateConfigRequest
      * @memberof VersionControlApiupdateConfig
      */
-    updateConfigRequest?: UpdateConfigRequest
+    updateConfigRequest: UpdateConfigRequest
 }
 
 export interface VersionControlApiValidateMergeRequest {
@@ -2914,7 +2914,7 @@ export class ObjectVersionControlApi {
      *   Version: 9.2.0.cl or later   Deletes Git repository configuration from your ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
      * @param param the request object
      */
-    public deleteConfig(param: VersionControlApiDeleteConfigRequest = {}, options?: Configuration): Promise<void> {
+    public deleteConfig(param: VersionControlApiDeleteConfigRequest, options?: Configuration): Promise<void> {
         return this.api.deleteConfig(param.deleteConfigRequest,  options).toPromise();
     }
 
@@ -2946,7 +2946,7 @@ export class ObjectVersionControlApi {
      *   Version: 9.2.0.cl or later   Gets Git repository connections configured on the ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
      * @param param the request object
      */
-    public searchConfig(param: VersionControlApiSearchConfigRequest = {}, options?: Configuration): Promise<Array<RepoConfigObject>> {
+    public searchConfig(param: VersionControlApiSearchConfigRequest, options?: Configuration): Promise<Array<RepoConfigObject>> {
         return this.api.searchConfig(param.searchConfigRequest,  options).toPromise();
     }
 
@@ -2954,7 +2954,7 @@ export class ObjectVersionControlApi {
      *   Version: 9.2.0.cl or later   Updates Git repository configuration settings.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
      * @param param the request object
      */
-    public updateConfig(param: VersionControlApiUpdateConfigRequest = {}, options?: Configuration): Promise<RepoConfigObject> {
+    public updateConfig(param: VersionControlApiUpdateConfigRequest, options?: Configuration): Promise<RepoConfigObject> {
         return this.api.updateConfig(param.updateConfigRequest,  options).toPromise();
     }
 

@@ -137,7 +137,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
 # **searchRoles**
-> Array<SearchRoleResponse> searchRoles()
+> Array<SearchRoleResponse> searchRoles(searchRolesRequest)
 
 Gets Roles configured on a ThoughtSpot instance. Requires cluster Administration, Role Administration or Group Administration privileges.    Version: 9.5.0.cl or later 
 
@@ -154,7 +154,7 @@ const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
 const apiInstance = new RolesApi(configuration);
 
 apiInstance.searchRoles(
-  // SearchRolesRequest (optional)
+  // SearchRolesRequest
   {
     role_identifiers: [
       "role_identifiers_example",

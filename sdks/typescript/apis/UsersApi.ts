@@ -168,8 +168,13 @@ export class UsersApiRequestFactory extends BaseAPIRequestFactory {
      *   Version: 9.0.0.cl or later   Enforces logout on current user sessions.    Use this API with caution as it may invalidate active user sessions and force users to re-login. Make sure you specify the usernames or GUIDs. If you pass null values in the API call, all user sessions on your cluster become invalid, and the users are forced to re-login.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
      * @param forceLogoutUsersRequest 
      */
-    public async forceLogoutUsers(forceLogoutUsersRequest?: ForceLogoutUsersRequest, _options?: Configuration): Promise<RequestContext> {
+    public async forceLogoutUsers(forceLogoutUsersRequest: ForceLogoutUsersRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
+
+        // verify required parameter 'forceLogoutUsersRequest' is not null or undefined
+        if (forceLogoutUsersRequest === null || forceLogoutUsersRequest === undefined) {
+            throw new RequiredError("UsersApi", "forceLogoutUsers", "forceLogoutUsersRequest");
+        }
 
 
         // Path Params
@@ -310,11 +315,16 @@ export class UsersApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     *   Version: 9.0.0.cl or later    Gets a list of users available on the ThoughtSpot system.  To get details of a specific user, specify the user GUID or name. You can also filter the API response based on groups, Org ID, user visibility, account status, user type, and user preference settings and favorites.  Available to all users. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view all users properties.      
+     *   Version: 9.0.0.cl or later   Gets a list of users available on the ThoughtSpot system.  To get details of a specific user, specify the user GUID or name. You can also filter the API response based on groups, Org ID, user visibility, account status, user type, and user preference settings and favorites.  Available to all users. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view all users properties.  **NOTE**: If the API returns an empty list, consider increasing the value of the `record_size` parameter. To search across all available users, set `record_size` to `-1`.      
      * @param searchUsersRequest 
      */
-    public async searchUsers(searchUsersRequest?: SearchUsersRequest, _options?: Configuration): Promise<RequestContext> {
+    public async searchUsers(searchUsersRequest: SearchUsersRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
+
+        // verify required parameter 'searchUsersRequest' is not null or undefined
+        if (searchUsersRequest === null || searchUsersRequest === undefined) {
+            throw new RequiredError("UsersApi", "searchUsers", "searchUsersRequest");
+        }
 
 
         // Path Params
@@ -359,7 +369,7 @@ export class UsersApiRequestFactory extends BaseAPIRequestFactory {
      * @param userIdentifier GUID / name of the user
      * @param updateUserRequest 
      */
-    public async updateUser(userIdentifier: string, updateUserRequest?: UpdateUserRequest, _options?: Configuration): Promise<RequestContext> {
+    public async updateUser(userIdentifier: string, updateUserRequest: UpdateUserRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'userIdentifier' is not null or undefined
@@ -367,6 +377,11 @@ export class UsersApiRequestFactory extends BaseAPIRequestFactory {
             throw new RequiredError("UsersApi", "updateUser", "userIdentifier");
         }
 
+
+        // verify required parameter 'updateUserRequest' is not null or undefined
+        if (updateUserRequest === null || updateUserRequest === undefined) {
+            throw new RequiredError("UsersApi", "updateUser", "updateUserRequest");
+        }
 
 
         // Path Params

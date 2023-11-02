@@ -159,7 +159,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
 # **deleteConfig**
-> void deleteConfig()
+> void deleteConfig(deleteConfigRequest)
 
   Version: 9.2.0.cl or later   Deletes Git repository configuration from your ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
 
@@ -176,7 +176,7 @@ const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
 const apiInstance = new VersionControlApi(configuration);
 
 apiInstance.deleteConfig(
-  // DeleteConfigRequest (optional)
+  // DeleteConfigRequest
   {
     cluster_level: true,
   } 
@@ -286,7 +286,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
 # **revertCommit**
-> RevertResponse revertCommit()
+> RevertResponse revertCommit(revertCommitRequest)
 
   Version: 9.2.0.cl or later   Reverts TML objects to a previous commit specified in the API request.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  In the API request, specify the `commit_id`. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.  By default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.      
 
@@ -305,7 +305,7 @@ const apiInstance = new VersionControlApi(configuration);
 apiInstance.revertCommit(
   // string | Commit id to which the object should be reverted
   "commit_id_example" , 
-  // RevertCommitRequest (optional)
+  // RevertCommitRequest
   {
     metadata: [
       {
@@ -424,7 +424,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
 # **searchConfig**
-> Array<RepoConfigObject> searchConfig()
+> Array<RepoConfigObject> searchConfig(searchConfigRequest)
 
   Version: 9.2.0.cl or later   Gets Git repository connections configured on the ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
 
@@ -441,7 +441,7 @@ const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
 const apiInstance = new VersionControlApi(configuration);
 
 apiInstance.searchConfig(
-  // SearchConfigRequest (optional)
+  // SearchConfigRequest
   {
     org_identifiers: [
       "org_identifiers_example",
@@ -488,7 +488,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
 # **updateConfig**
-> RepoConfigObject updateConfig()
+> RepoConfigObject updateConfig(updateConfigRequest)
 
   Version: 9.2.0.cl or later   Updates Git repository configuration settings.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
 
@@ -505,7 +505,7 @@ const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
 const apiInstance = new VersionControlApi(configuration);
 
 apiInstance.updateConfig(
-  // UpdateConfigRequest (optional)
+  // UpdateConfigRequest
   {
     username: "username_example",
     access_token: "access_token_example",

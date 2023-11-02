@@ -133,8 +133,13 @@ export class VersionControlApiRequestFactory extends BaseAPIRequestFactory {
      *   Version: 9.2.0.cl or later   Deletes Git repository configuration from your ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
      * @param deleteConfigRequest 
      */
-    public async deleteConfig(deleteConfigRequest?: DeleteConfigRequest, _options?: Configuration): Promise<RequestContext> {
+    public async deleteConfig(deleteConfigRequest: DeleteConfigRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
+
+        // verify required parameter 'deleteConfigRequest' is not null or undefined
+        if (deleteConfigRequest === null || deleteConfigRequest === undefined) {
+            throw new RequiredError("VersionControlApi", "deleteConfig", "deleteConfigRequest");
+        }
 
 
         // Path Params
@@ -229,7 +234,7 @@ export class VersionControlApiRequestFactory extends BaseAPIRequestFactory {
      * @param commitId Commit id to which the object should be reverted
      * @param revertCommitRequest 
      */
-    public async revertCommit(commitId: string, revertCommitRequest?: RevertCommitRequest, _options?: Configuration): Promise<RequestContext> {
+    public async revertCommit(commitId: string, revertCommitRequest: RevertCommitRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'commitId' is not null or undefined
@@ -237,6 +242,11 @@ export class VersionControlApiRequestFactory extends BaseAPIRequestFactory {
             throw new RequiredError("VersionControlApi", "revertCommit", "commitId");
         }
 
+
+        // verify required parameter 'revertCommitRequest' is not null or undefined
+        if (revertCommitRequest === null || revertCommitRequest === undefined) {
+            throw new RequiredError("VersionControlApi", "revertCommit", "revertCommitRequest");
+        }
 
 
         // Path Params
@@ -331,8 +341,13 @@ export class VersionControlApiRequestFactory extends BaseAPIRequestFactory {
      *   Version: 9.2.0.cl or later   Gets Git repository connections configured on the ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
      * @param searchConfigRequest 
      */
-    public async searchConfig(searchConfigRequest?: SearchConfigRequest, _options?: Configuration): Promise<RequestContext> {
+    public async searchConfig(searchConfigRequest: SearchConfigRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
+
+        // verify required parameter 'searchConfigRequest' is not null or undefined
+        if (searchConfigRequest === null || searchConfigRequest === undefined) {
+            throw new RequiredError("VersionControlApi", "searchConfig", "searchConfigRequest");
+        }
 
 
         // Path Params
@@ -376,8 +391,13 @@ export class VersionControlApiRequestFactory extends BaseAPIRequestFactory {
      *   Version: 9.2.0.cl or later   Updates Git repository configuration settings.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
      * @param updateConfigRequest 
      */
-    public async updateConfig(updateConfigRequest?: UpdateConfigRequest, _options?: Configuration): Promise<RequestContext> {
+    public async updateConfig(updateConfigRequest: UpdateConfigRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
+
+        // verify required parameter 'updateConfigRequest' is not null or undefined
+        if (updateConfigRequest === null || updateConfigRequest === undefined) {
+            throw new RequiredError("VersionControlApi", "updateConfig", "updateConfigRequest");
+        }
 
 
         // Path Params
