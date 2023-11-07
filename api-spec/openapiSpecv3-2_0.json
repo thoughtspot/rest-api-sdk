@@ -4386,7 +4386,7 @@
     "/api/rest/2.0/users/activate": {
       "post": {
         "operationId": "activateUser",
-        "description": " <span class=\"since-beta-tag\">Version: 9.7.0.cl or later</span>",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.7.0.cl or later</span>\n\nActivates a user.\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Users",
           "9.7.0.cl"
