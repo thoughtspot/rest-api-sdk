@@ -6017,6 +6017,15 @@
                       "JSON",
                       "YAML"
                     ]
+                  },
+                  "export_schema_version": {
+                    "description": "Indicates whether to export worksheet TML in V1 or V2 version.",
+                    "default": "V1",
+                    "type": "string",
+                    "enum": [
+                      "V1",
+                      "V2"
+                    ]
                   }
                 },
                 "required": [
