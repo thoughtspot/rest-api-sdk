@@ -7761,7 +7761,7 @@ declare class ShareMetadataRequest {
     */
     'metadata_type'?: ShareMetadataRequestMetadataTypeEnum;
     /**
-    * Unique ID or name of metadata objects.
+    * Unique ID or name of metadata objects. Note: All the identifiers should belong to same metadata_type
     */
     'metadata_identifiers': Array<string>;
     /**
