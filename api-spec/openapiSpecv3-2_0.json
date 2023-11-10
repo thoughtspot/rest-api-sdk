@@ -6325,6 +6325,18 @@
                     "default": false,
                     "type": "boolean",
                     "nullable": true
+                  },
+                  "notify_on_share": {
+                    "description": "Flag to notify user when any object is shared.",
+                    "default": true,
+                    "type": "boolean",
+                    "nullable": true
+                  },
+                  "has_lenient_discoverability": {
+                    "description": "Flag to make the object discoverable.",
+                    "default": false,
+                    "type": "boolean",
+                    "nullable": true
                   }
                 },
                 "required": [
