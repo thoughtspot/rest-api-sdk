@@ -249,7 +249,7 @@ import { ErrorResponse } from '../models/ErrorResponse';
 import { ExcludeMetadataListItemInput , ExcludeMetadataListItemInputTypeEnum   } from '../models/ExcludeMetadataListItemInput';
 import { ExportAnswerReportRequest , ExportAnswerReportRequestFileFormatEnum      } from '../models/ExportAnswerReportRequest';
 import { ExportLiveboardReportRequest   , ExportLiveboardReportRequestFileFormatEnum        } from '../models/ExportLiveboardReportRequest';
-import { ExportMetadataTMLRequest   , ExportMetadataTMLRequestEdocFormatEnum   } from '../models/ExportMetadataTMLRequest';
+import { ExportMetadataTMLRequest   , ExportMetadataTMLRequestEdocFormatEnum  , ExportMetadataTMLRequestExportSchemaVersionEnum   } from '../models/ExportMetadataTMLRequest';
 import { ExportMetadataTypeInput, ExportMetadataTypeInputTypeEnum    } from '../models/ExportMetadataTypeInput';
 import { FavoriteMetadataInput , FavoriteMetadataInputTypeEnum   } from '../models/FavoriteMetadataInput';
 import { FavoriteMetadataItem  , FavoriteMetadataItemTypeEnum   } from '../models/FavoriteMetadataItem';
@@ -422,6 +422,7 @@ let enumsMap: Set<string> = new Set<string>([
     "ExportAnswerReportRequestFileFormatEnum",
     "ExportLiveboardReportRequestFileFormatEnum",
     "ExportMetadataTMLRequestEdocFormatEnum",
+    "ExportMetadataTMLRequestExportSchemaVersionEnum",
     "ExportMetadataTypeInputTypeEnum",
     "FavoriteMetadataInputTypeEnum",
     "FavoriteMetadataItemTypeEnum",

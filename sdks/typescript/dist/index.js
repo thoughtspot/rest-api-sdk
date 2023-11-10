@@ -2434,6 +2434,12 @@ _ExportMetadataTMLRequest.attributeTypeMap = [
     "baseName": "edoc_format",
     "type": "ExportMetadataTMLRequestEdocFormatEnum",
     "format": ""
+  },
+  {
+    "name": "export_schema_version",
+    "baseName": "export_schema_version",
+    "type": "ExportMetadataTMLRequestExportSchemaVersionEnum",
+    "format": ""
   }
 ];
 var ExportMetadataTMLRequest = _ExportMetadataTMLRequest;
@@ -8217,6 +8223,7 @@ var enumsMap = /* @__PURE__ */ new Set([
   "ExportAnswerReportRequestFileFormatEnum",
   "ExportLiveboardReportRequestFileFormatEnum",
   "ExportMetadataTMLRequestEdocFormatEnum",
+  "ExportMetadataTMLRequestExportSchemaVersionEnum",
   "ExportMetadataTypeInputTypeEnum",
   "FavoriteMetadataInputTypeEnum",
   "FavoriteMetadataItemTypeEnum",
