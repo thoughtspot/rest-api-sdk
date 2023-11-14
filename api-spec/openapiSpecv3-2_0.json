@@ -1766,7 +1766,15 @@
                             }
                           ]
                         }
-                      ]
+                      ],
+                      "__args": {
+                        "principals": [
+                          {
+                            "identifier": "test_user",
+                            "type": "USER"
+                          }
+                        ]
+                      }
                     }
                   }
                 }
@@ -1920,7 +1928,16 @@
                             }
                           ]
                         }
-                      ]
+                      ],
+                      "__args": {
+                        "metadata": [
+                          {
+                            "type": "LIVEBOARD",
+                            "identifier": "a62a5bf3-9f16-45b2-a174-7d30b3b577a9"
+                          }
+                        ],
+                        "include_dependent_objects": false
+                      }
                     }
                   }
                 }
@@ -10200,7 +10217,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DbtSearchResponse"
+                  }
                 }
               }
             }
@@ -14158,6 +14178,36 @@
               "type": "string"
             },
             "description": "List of Tables."
+          }
+        }
+      },
+      "DbtSearchResponse": {
+        "type": "object",
+        "properties": {
+          "dbt_connection_identifier": {
+            "type": "string"
+          },
+          "project_name": {
+            "type": "string"
+          },
+          "connection_id": {
+            "type": "string"
+          },
+          "connection_name": {
+            "type": "string"
+          },
+          "cdw_database": {
+            "type": "string"
+          },
+          "import_type": {
+            "type": "string",
+            "enum": [
+              "DBT_CLOUD",
+              "ZIP_FILE"
+            ]
+          },
+          "author_name": {
+            "type": "string"
           }
         }
       },
