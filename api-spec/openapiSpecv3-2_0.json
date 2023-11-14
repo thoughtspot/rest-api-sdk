@@ -14200,11 +14200,7 @@
             "type": "string"
           },
           "import_type": {
-            "type": "string",
-            "enum": [
-              "DBT_CLOUD",
-              "ZIP_FILE"
-            ]
+            "type": "string"
           },
           "author_name": {
             "type": "string"
