@@ -10217,7 +10217,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DbtSearchResponse"
+                  }
                 }
               }
             }
@@ -14175,6 +14178,32 @@
               "type": "string"
             },
             "description": "List of Tables."
+          }
+        }
+      },
+      "DbtSearchResponse": {
+        "type": "object",
+        "properties": {
+          "dbt_connection_identifier": {
+            "type": "string"
+          },
+          "project_name": {
+            "type": "string"
+          },
+          "connection_id": {
+            "type": "string"
+          },
+          "connection_name": {
+            "type": "string"
+          },
+          "cdw_database": {
+            "type": "string"
+          },
+          "import_type": {
+            "type": "string"
+          },
+          "author_name": {
+            "type": "string"
           }
         }
       },
