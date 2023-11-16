@@ -267,6 +267,8 @@ apiInstance.shareMetadata(
     ],
     message: "message_example",
     enable_custom_url: false,
+    notify_on_share: true,
+    has_lenient_discoverability: false,
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);

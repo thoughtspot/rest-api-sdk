@@ -7789,6 +7789,14 @@ declare class ShareMetadataRequest {
     * Sends object URLs in the customized format in email notifications.
     */
     'enable_custom_url'?: boolean | null;
+    /**
+    * Flag to notify user when any object is shared.
+    */
+    'notify_on_share'?: boolean | null;
+    /**
+    * Flag to make the object discoverable.
+    */
+    'has_lenient_discoverability'?: boolean | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;

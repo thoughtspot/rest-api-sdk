@@ -345,7 +345,7 @@ import { SearchSchedulesRequest } from '../models/SearchSchedulesRequest';
 import { SearchTagsRequest } from '../models/SearchTagsRequest';
 import { SearchUserGroupsRequest      , SearchUserGroupsRequestPrivilegesEnum   , SearchUserGroupsRequestTypeEnum   , SearchUserGroupsRequestVisibilityEnum       } from '../models/SearchUserGroupsRequest';
 import { SearchUsersRequest   , SearchUsersRequestVisibilityEnum    , SearchUsersRequestPrivilegesEnum  , SearchUsersRequestAccountTypeEnum  , SearchUsersRequestAccountStatusEnum              } from '../models/SearchUsersRequest';
-import { ShareMetadataRequest, ShareMetadataRequestMetadataTypeEnum         } from '../models/ShareMetadataRequest';
+import { ShareMetadataRequest, ShareMetadataRequestMetadataTypeEnum           } from '../models/ShareMetadataRequest';
 import { SharePermissionsInput , SharePermissionsInputShareModeEnum   } from '../models/SharePermissionsInput';
 import { SortOptionInput, SortOptionInputFieldNameEnum  , SortOptionInputOrderEnum   } from '../models/SortOptionInput';
 import { SortOptions, SortOptionsFieldNameEnum  , SortOptionsOrderEnum   } from '../models/SortOptions';

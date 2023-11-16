@@ -6352,6 +6352,18 @@ _ShareMetadataRequest.attributeTypeMap = [
     "baseName": "enable_custom_url",
     "type": "boolean",
     "format": ""
+  },
+  {
+    "name": "notify_on_share",
+    "baseName": "notify_on_share",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "has_lenient_discoverability",
+    "baseName": "has_lenient_discoverability",
+    "type": "boolean",
+    "format": ""
   }
 ];
 var ShareMetadataRequest = _ShareMetadataRequest;

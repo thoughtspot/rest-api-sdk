@@ -42,6 +42,14 @@ export class ShareMetadataRequest {
     * Sends object URLs in the customized format in email notifications.
     */
     'enable_custom_url'?: boolean | null;
+    /**
+    * Flag to notify user when any object is shared.
+    */
+    'notify_on_share'?: boolean | null;
+    /**
+    * Flag to make the object discoverable.
+    */
+    'has_lenient_discoverability'?: boolean | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -85,6 +93,18 @@ export class ShareMetadataRequest {
         {
             "name": "enable_custom_url",
             "baseName": "enable_custom_url",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "notify_on_share",
+            "baseName": "notify_on_share",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "has_lenient_discoverability",
+            "baseName": "has_lenient_discoverability",
             "type": "boolean",
             "format": ""
         }    ];
