@@ -2889,16 +2889,19 @@
                   "deprecated": {
                     "description": "Indicates whether the role is deprecated.",
                     "type": "boolean",
+                    "deprecated": true,
                     "nullable": true
                   },
                   "external": {
                     "description": "Indicates whether the Role is external",
                     "type": "boolean",
+                    "deprecated": true,
                     "nullable": true
                   },
                   "shared_via_connection": {
                     "description": "Indicates whether the role is shared via connection",
                     "type": "boolean",
+                    "deprecated": true,
                     "nullable": true
                   },
                   "permissions": {
@@ -2911,7 +2914,8 @@
                         "MODIFY",
                         "NO_ACCESS"
                       ]
-                    }
+                    },
+                    "deprecated": true
                   }
                 }
               }
