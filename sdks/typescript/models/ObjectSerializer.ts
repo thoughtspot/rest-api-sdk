@@ -46,6 +46,7 @@ export * from '../models/CustomActionMetadataTypeInput';
 export * from '../models/DataWarehouseObjectInput';
 export * from '../models/DataWarehouseObjects';
 export * from '../models/Database';
+export * from '../models/DbtSearchResponse';
 export * from '../models/DefaultActionConfig';
 export * from '../models/DefaultActionConfigInput';
 export * from '../models/DefaultActionConfigInputCreate';
@@ -235,6 +236,7 @@ import { CustomActionMetadataTypeInput, CustomActionMetadataTypeInputTypeEnum   
 import { DataWarehouseObjectInput } from '../models/DataWarehouseObjectInput';
 import { DataWarehouseObjects } from '../models/DataWarehouseObjects';
 import { Database } from '../models/Database';
+import { DbtSearchResponse } from '../models/DbtSearchResponse';
 import { DefaultActionConfig } from '../models/DefaultActionConfig';
 import { DefaultActionConfigInput } from '../models/DefaultActionConfigInput';
 import { DefaultActionConfigInputCreate } from '../models/DefaultActionConfigInputCreate';
@@ -558,6 +560,7 @@ let typeMap: {[index: string]: any} = {
     "DataWarehouseObjectInput": DataWarehouseObjectInput,
     "DataWarehouseObjects": DataWarehouseObjects,
     "Database": Database,
+    "DbtSearchResponse": DbtSearchResponse,
     "DefaultActionConfig": DefaultActionConfig,
     "DefaultActionConfigInput": DefaultActionConfigInput,
     "DefaultActionConfigInputCreate": DefaultActionConfigInputCreate,

@@ -2003,6 +2003,61 @@ _Database.attributeTypeMap = [
 ];
 var Database = _Database;
 
+// models/DbtSearchResponse.ts
+var _DbtSearchResponse = class _DbtSearchResponse {
+  static getAttributeTypeMap() {
+    return _DbtSearchResponse.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_DbtSearchResponse.discriminator = void 0;
+_DbtSearchResponse.attributeTypeMap = [
+  {
+    "name": "dbt_connection_identifier",
+    "baseName": "dbt_connection_identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "project_name",
+    "baseName": "project_name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "connection_id",
+    "baseName": "connection_id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "connection_name",
+    "baseName": "connection_name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "cdw_database",
+    "baseName": "cdw_database",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "import_type",
+    "baseName": "import_type",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "author_name",
+    "baseName": "author_name",
+    "type": "string",
+    "format": ""
+  }
+];
+var DbtSearchResponse = _DbtSearchResponse;
+
 // models/DefaultActionConfig.ts
 var _DefaultActionConfig = class _DefaultActionConfig {
   static getAttributeTypeMap() {
@@ -8370,6 +8425,7 @@ var typeMap = {
   "DataWarehouseObjectInput": DataWarehouseObjectInput,
   "DataWarehouseObjects": DataWarehouseObjects,
   "Database": Database,
+  "DbtSearchResponse": DbtSearchResponse,
   "DefaultActionConfig": DefaultActionConfig,
   "DefaultActionConfigInput": DefaultActionConfigInput,
   "DefaultActionConfigInputCreate": DefaultActionConfigInputCreate,
@@ -27026,6 +27082,7 @@ export {
   DataWarehouseObjectInput,
   DataWarehouseObjects,
   Database,
+  DbtSearchResponse,
   DefaultActionConfig,
   DefaultActionConfigInput,
   DefaultActionConfigInputCreate,
