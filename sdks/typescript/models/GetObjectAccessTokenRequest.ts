@@ -21,7 +21,7 @@ export class GetObjectAccessTokenRequest {
     /**
     * GUID of the ThoughtSpot metadata object that the user can access. The bearer will only have access to the object specified in the API request.
     */
-    'object_id': string;
+    'object_id'?: string;
     /**
     * Password of the user account
     */
