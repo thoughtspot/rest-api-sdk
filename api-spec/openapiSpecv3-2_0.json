@@ -7615,7 +7615,7 @@
                         "AUTHENTICATION_ADMINISTRATION",
                         "BILLING_INFO_ADMINISTRATION",
                         "CONTROL_TRUSTED_AUTH",
-                        "TAG_MANAGEMENT"
+                        "TAGMANAGEMENT"
                       ]
                     }
                   }
@@ -7731,7 +7731,7 @@
                         "AUTHENTICATION_ADMINISTRATION",
                         "BILLING_INFO_ADMINISTRATION",
                         "CONTROL_TRUSTED_AUTH",
-                        "TAG_MANAGEMENT"
+                        "TAGMANAGEMENT"
                       ]
                     }
                   }
@@ -13340,7 +13340,7 @@
                 "AUTHENTICATION_ADMINISTRATION",
                 "BILLING_INFO_ADMINISTRATION",
                 "CONTROL_TRUSTED_AUTH",
-                "TAG_MANAGEMENT"
+                "TAGMANAGEMENT"
               ]
             },
             "description": "Privileges granted to the role."
