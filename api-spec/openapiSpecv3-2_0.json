@@ -2882,7 +2882,8 @@
                         "ROLE_ADMINISTRATION",
                         "AUTHENTICATION_ADMINISTRATION",
                         "BILLING_INFO_ADMINISTRATION",
-                        "PREVIEW_THOUGHTSPOT_SAGE"
+                        "PREVIEW_THOUGHTSPOT_SAGE",
+                        "LIVEBOARD_VERIFIER"
                       ]
                     }
                   },
@@ -7615,7 +7616,8 @@
                         "AUTHENTICATION_ADMINISTRATION",
                         "BILLING_INFO_ADMINISTRATION",
                         "CONTROL_TRUSTED_AUTH",
-                        "TAGMANAGEMENT"
+                        "TAGMANAGEMENT",
+                        "LIVEBOARD_VERIFIER"
                       ]
                     }
                   }
@@ -7731,7 +7733,8 @@
                         "AUTHENTICATION_ADMINISTRATION",
                         "BILLING_INFO_ADMINISTRATION",
                         "CONTROL_TRUSTED_AUTH",
-                        "TAGMANAGEMENT"
+                        "TAGMANAGEMENT",
+                        "LIVEBOARD_VERIFIER"
                       ]
                     }
                   }
@@ -12223,7 +12226,8 @@
                 "ROLE_ADMINISTRATION",
                 "AUTHENTICATION_ADMINISTRATION",
                 "BILLING_INFO_ADMINISTRATION",
-                "PREVIEW_THOUGHTSPOT_SAGE"
+                "PREVIEW_THOUGHTSPOT_SAGE",
+                "LIVEBOARD_VERIFIER"
               ]
             },
             "description": "Privileges granted to the role."
@@ -13340,7 +13344,8 @@
                 "AUTHENTICATION_ADMINISTRATION",
                 "BILLING_INFO_ADMINISTRATION",
                 "CONTROL_TRUSTED_AUTH",
-                "TAGMANAGEMENT"
+                "TAGMANAGEMENT",
+                "LIVEBOARD_VERIFIER"
               ]
             },
             "description": "Privileges granted to the role."
