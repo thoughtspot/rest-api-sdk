@@ -2882,8 +2882,7 @@
                         "ROLE_ADMINISTRATION",
                         "AUTHENTICATION_ADMINISTRATION",
                         "BILLING_INFO_ADMINISTRATION",
-                        "PREVIEW_THOUGHTSPOT_SAGE",
-                        "LIVEBOARD_VERIFIER"
+                        "PREVIEW_THOUGHTSPOT_SAGE"
                       ]
                     }
                   },
@@ -7616,8 +7615,7 @@
                         "AUTHENTICATION_ADMINISTRATION",
                         "BILLING_INFO_ADMINISTRATION",
                         "CONTROL_TRUSTED_AUTH",
-                        "TAGMANAGEMENT",
-                        "LIVEBOARD_VERIFIER"
+                        "TAG_MANAGEMENT"
                       ]
                     }
                   }
@@ -7733,8 +7731,7 @@
                         "AUTHENTICATION_ADMINISTRATION",
                         "BILLING_INFO_ADMINISTRATION",
                         "CONTROL_TRUSTED_AUTH",
-                        "TAGMANAGEMENT",
-                        "LIVEBOARD_VERIFIER"
+                        "TAG_MANAGEMENT"
                       ]
                     }
                   }
@@ -12226,8 +12223,7 @@
                 "ROLE_ADMINISTRATION",
                 "AUTHENTICATION_ADMINISTRATION",
                 "BILLING_INFO_ADMINISTRATION",
-                "PREVIEW_THOUGHTSPOT_SAGE",
-                "LIVEBOARD_VERIFIER"
+                "PREVIEW_THOUGHTSPOT_SAGE"
               ]
             },
             "description": "Privileges granted to the role."
@@ -12568,15 +12564,24 @@
         "type": "object",
         "properties": {
           "runtime_filter": {
-            "type": "object",
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
             "description": "Runtime filter parameter type in JWT."
           },
           "runtime_sort": {
-            "type": "object",
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
             "description": "Runtime sort parameter type in JWT."
           },
           "runtime_param_override": {
-            "type": "object",
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
             "description": "Runtime param override type in JWT."
           }
         },
@@ -13344,8 +13349,7 @@
                 "AUTHENTICATION_ADMINISTRATION",
                 "BILLING_INFO_ADMINISTRATION",
                 "CONTROL_TRUSTED_AUTH",
-                "TAGMANAGEMENT",
-                "LIVEBOARD_VERIFIER"
+                "TAG_MANAGEMENT"
               ]
             },
             "description": "Privileges granted to the role."
