@@ -12544,13 +12544,13 @@
             "items": {
               "anyOf": [
                 {
-                  "$ref": "#/components/schemas/Runtime_Filter"
+                  "$ref": "#/components/schemas/JWT_Runtime_Filter"
                 },
                 {
-                  "$ref": "#/components/schemas/Runtime_Sort"
+                  "$ref": "#/components/schemas/JWT_Runtime_Sort"
                 },
                 {
-                  "$ref": "#/components/schemas/Runtime_Param_Override"
+                  "$ref": "#/components/schemas/JWT_Runtime_Param_Override"
                 }
               ]
             }
