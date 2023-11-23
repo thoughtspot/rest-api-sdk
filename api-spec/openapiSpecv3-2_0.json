@@ -12544,13 +12544,13 @@
             "items": {
               "anyOf": [
                 {
-                  "$ref": "#/components/schemas/Runtime_Filter"
+                  "$ref": "#/components/schemas/JWT_Runtime_Filter"
                 },
                 {
-                  "$ref": "#/components/schemas/Runtime_Sort"
+                  "$ref": "#/components/schemas/JWT_Runtime_Sort"
                 },
                 {
-                  "$ref": "#/components/schemas/Runtime_Param_Override"
+                  "$ref": "#/components/schemas/JWT_Runtime_Param_Override"
                 }
               ]
             }
@@ -12568,19 +12568,79 @@
         "type": "object",
         "properties": {
           "runtime_filter": {
-            "type": "object",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/JWT_Runtime_Filter"
+            },
             "description": "Runtime filter parameter type in JWT."
           },
           "runtime_sort": {
-            "type": "object",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/JWT_Runtime_Sort"
+            },
             "description": "Runtime sort parameter type in JWT."
           },
           "runtime_param_override": {
-            "type": "object",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/JWT_Runtime_Param_Override"
+            },
             "description": "Runtime param override type in JWT."
           }
         },
         "description": "List of runtime parameters need to set during the session."
+      },
+      "JWT_Runtime_Filter": {
+        "type": "object",
+        "required": [
+          "column_name",
+          "operator",
+          "values"
+        ],
+        "properties": {
+          "column_name": {
+            "type": "string"
+          },
+          "operator": {
+            "type": "string"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "JWT_Runtime_Sort": {
+        "type": "object",
+        "properties": {
+          "column_name": {
+            "type": "string"
+          },
+          "order": {
+            "type": "string"
+          }
+        }
+      },
+      "JWT_Runtime_Param_Override": {
+        "type": "object",
+        "required": [
+          "name",
+          "values"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "operator": {
+            "type": "string"
+          },
+          "values": {
+            "type": "string"
+          }
+        }
       },
       "JWT_Metadata_Object": {
         "type": "object",
