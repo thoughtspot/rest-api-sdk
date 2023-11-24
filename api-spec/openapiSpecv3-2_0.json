@@ -3400,7 +3400,7 @@
                   },
                   "jwt_user_options": {
                     "description": "JWT user options to create a JWT token given the payload.",
-                    "$ref": "#/components/schemas/JWT_User_Options_Full"
+                    "$ref": "#/components/schemas/JWT_User_Options"
                   }
                 },
                 "required": [
@@ -12657,18 +12657,6 @@
             "description": "Unique identifier of the Org."
           }
         }
-      },
-      "JWT_User_Options_Full": {
-        "type": "object",
-        "properties": {
-          "parameters": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/JWT_Parameter"
-            }
-          }
-        },
-        "description": "JWT user options to create a JWT token given the payload."
       },
       "ResponseActivationURL": {
         "type": "object",
