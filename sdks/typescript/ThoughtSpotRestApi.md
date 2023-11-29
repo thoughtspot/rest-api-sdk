@@ -2643,12 +2643,10 @@ apiInstance.getFullAccessToken(
     ],
     jwt_user_options: {
       parameters: [
-        null,
-      ],
-      metadata: [
         {
-          identifier: "identifier_example",
-          type: "LIVEBOARD",
+          runtime_filter: {},
+          runtime_sort: {},
+          runtime_param_override: {},
         },
       ],
     },

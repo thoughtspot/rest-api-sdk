@@ -3026,7 +3026,7 @@ _GetFullAccessTokenRequest.attributeTypeMap = [
   {
     "name": "jwt_user_options",
     "baseName": "jwt_user_options",
-    "type": "JWTUserOptions",
+    "type": "JWTUserOptionsFull",
     "format": ""
   }
 ];
@@ -3584,6 +3584,25 @@ _JWTUserOptions.attributeTypeMap = [
   }
 ];
 var JWTUserOptions = _JWTUserOptions;
+
+// models/JWTUserOptionsFull.ts
+var _JWTUserOptionsFull = class _JWTUserOptionsFull {
+  static getAttributeTypeMap() {
+    return _JWTUserOptionsFull.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_JWTUserOptionsFull.discriminator = void 0;
+_JWTUserOptionsFull.attributeTypeMap = [
+  {
+    "name": "parameters",
+    "baseName": "parameters",
+    "type": "Array<JWTParameter>",
+    "format": ""
+  }
+];
+var JWTUserOptionsFull = _JWTUserOptionsFull;
 
 // models/JWTUserOptionsParametersInner.ts
 var _JWTUserOptionsParametersInner = class _JWTUserOptionsParametersInner {
@@ -8471,6 +8490,7 @@ var typeMap = {
   "JWTMetadataObject": JWTMetadataObject,
   "JWTParameter": JWTParameter,
   "JWTUserOptions": JWTUserOptions,
+  "JWTUserOptionsFull": JWTUserOptionsFull,
   "JWTUserOptionsParametersInner": JWTUserOptionsParametersInner,
   "LiveboardContent": LiveboardContent,
   "LiveboardDataResponse": LiveboardDataResponse,
@@ -27132,6 +27152,7 @@ export {
   JWTMetadataObject,
   JWTParameter,
   JWTUserOptions,
+  JWTUserOptionsFull,
   JWTUserOptionsParametersInner,
   LiveboardContent,
   LiveboardDataResponse,

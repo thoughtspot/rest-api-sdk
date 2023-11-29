@@ -95,6 +95,7 @@ import { ImportUsersResponse } from '../models/ImportUsersResponse';
 import { JWTMetadataObject } from '../models/JWTMetadataObject';
 import { JWTParameter } from '../models/JWTParameter';
 import { JWTUserOptions } from '../models/JWTUserOptions';
+import { JWTUserOptionsFull } from '../models/JWTUserOptionsFull';
 import { JWTUserOptionsParametersInner } from '../models/JWTUserOptionsParametersInner';
 import { LiveboardContent } from '../models/LiveboardContent';
 import { LiveboardDataResponse } from '../models/LiveboardDataResponse';

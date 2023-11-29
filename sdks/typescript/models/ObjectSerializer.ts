@@ -92,6 +92,7 @@ export * from '../models/ImportUsersResponse';
 export * from '../models/JWTMetadataObject';
 export * from '../models/JWTParameter';
 export * from '../models/JWTUserOptions';
+export * from '../models/JWTUserOptionsFull';
 export * from '../models/JWTUserOptionsParametersInner';
 export * from '../models/LiveboardContent';
 export * from '../models/LiveboardDataResponse';
@@ -282,6 +283,7 @@ import { ImportUsersResponse } from '../models/ImportUsersResponse';
 import { JWTMetadataObject , JWTMetadataObjectTypeEnum   } from '../models/JWTMetadataObject';
 import { JWTParameter } from '../models/JWTParameter';
 import { JWTUserOptions } from '../models/JWTUserOptions';
+import { JWTUserOptionsFull } from '../models/JWTUserOptionsFull';
 import { JWTUserOptionsParametersInner } from '../models/JWTUserOptionsParametersInner';
 import { LiveboardContent } from '../models/LiveboardContent';
 import { LiveboardDataResponse } from '../models/LiveboardDataResponse';
@@ -606,6 +608,7 @@ let typeMap: {[index: string]: any} = {
     "JWTMetadataObject": JWTMetadataObject,
     "JWTParameter": JWTParameter,
     "JWTUserOptions": JWTUserOptions,
+    "JWTUserOptionsFull": JWTUserOptionsFull,
     "JWTUserOptionsParametersInner": JWTUserOptionsParametersInner,
     "LiveboardContent": LiveboardContent,
     "LiveboardDataResponse": LiveboardDataResponse,
