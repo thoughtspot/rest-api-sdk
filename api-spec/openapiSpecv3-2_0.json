@@ -2531,7 +2531,7 @@
     "/api/rest/2.0/vcs/git/commits/search": {
       "post": {
         "operationId": "searchCommits",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nGets a list of commits for a given metadata object.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nGets a list of commits for a given metadata object.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) privilege.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Version Control",
           "9.2.0.cl"
@@ -3400,7 +3400,7 @@
                   },
                   "jwt_user_options": {
                     "description": "JWT user options to create a JWT token given the payload.",
-                    "$ref": "#/components/schemas/JWT_User_Options"
+                    "$ref": "#/components/schemas/JWT_User_Options_Full"
                   }
                 },
                 "required": [
@@ -3746,7 +3746,6 @@
                 "required": [
                   "name",
                   "display_name",
-                  "password",
                   "email"
                 ]
               }
@@ -4423,7 +4422,7 @@
     "/api/rest/2.0/users/activate": {
       "post": {
         "operationId": "activateUser",
-        "description": " <span class=\"since-beta-tag\">Version: 9.7.0.cl or later</span>",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.7.0.cl or later</span>\n\nActivates a deactivated user account.\n\nRequires `ADMINISTRATION` (**Can administer Thoughtspot**) privilege.\n\nTo activate an inactive user account, the API request body must include the following information:\n\n* Username or the GUID of the user account.\n* Auth token generated for the deactivated user. The auth token is sent in the API response when a user is deactivated.\n* Password for the user account.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Users",
           "9.7.0.cl"
@@ -4515,7 +4514,7 @@
     "/api/rest/2.0/users/deactivate": {
       "post": {
         "operationId": "deactivateUser",
-        "description": " <span class=\"since-beta-tag\">Version: 9.7.0.cl or later</span>",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.7.0.cl or later</span>\n\nDeactivates a user account.\n\nRequires `ADMINISTRATION` (**Can administer Thoughtspot**) privilege.\n\nTo deactivate a user account, the API request body must include the following information:\n\n* Username or the GUID of the user account\n* Base URL of the ThoughtSpot instance\n\nIf the API request is successful, ThoughtSpot returns the activation URL in the response. The activation URL is valid for 14 days and can be used to re-activate the account and reset the password of the deactivated account.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Users",
           "9.7.0.cl"
@@ -6722,7 +6721,7 @@
     "/api/rest/2.0/vcs/git/branches/commit": {
       "post": {
         "operationId": "commitBranch",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nCommits TML files of metadata objects to the Git branch configured on your instance.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\nBefore using this endpoint to push your commits:\n\n* Enable Git integration on your instance.\n* Make sure the Git repository and branch details are configured on your instance.\n\nFor more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nCommits TML files of metadata objects to the Git branch configured on your instance.\n\nRequires `DATAMANAGEMENT` privilege.\n\nBefore using this endpoint to push your commits:\n\n* Enable Git integration on your instance.\n* Make sure the Git repository and branch details are configured on your instance.\n\nFor more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Version Control",
           "9.2.0.cl"
@@ -6822,7 +6821,7 @@
     "/api/rest/2.0/vcs/git/commits/{commit_id}/revert": {
       "post": {
         "operationId": "revertCommit",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nReverts TML objects to a previous commit specified in the API request.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\nIn the API request, specify the `commit_id`. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.\n\nBy default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nReverts TML objects to a previous commit specified in the API request.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) privilege.\n\nIn the API request, specify the `commit_id`. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.\n\nBy default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Version Control",
           "9.2.0.cl"
@@ -6927,7 +6926,7 @@
     "/api/rest/2.0/vcs/git/branches/validate": {
       "post": {
         "operationId": "validateMerge",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nValidates the content of your source branch against the objects in your destination environment.\n\nBefore merging content from your source branch to the destination branch, run this API operation from your destination environment and ensure that the changes from the source branch function in the destination environment.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nValidates the content of your source branch against the objects in your destination environment.\n\nBefore merging content from your source branch to the destination branch, run this API operation from your destination environment and ensure that the changes from the source branch function in the destination environment.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) privilege.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Version Control",
           "9.2.0.cl"
@@ -7017,7 +7016,7 @@
     "/api/rest/2.0/vcs/git/commits/deploy": {
       "post": {
         "operationId": "deployCommit",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nAllows you to deploy a commit and publish TML content to your ThoughtSpot instance.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\nThe API deploys the head of the branch unless a `commit_id` is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nAllows you to deploy a commit and publish TML content to your ThoughtSpot instance.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) privilege.\n\nThe API deploys the head of the branch unless a `commit_id` is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Version Control",
           "9.2.0.cl"
@@ -12657,6 +12656,18 @@
             "description": "Unique identifier of the Org."
           }
         }
+      },
+      "JWT_User_Options_Full": {
+        "type": "object",
+        "properties": {
+          "parameters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/JWT_Parameter"
+            }
+          }
+        },
+        "description": "JWT user options to create a JWT token given the payload."
       },
       "ResponseActivationURL": {
         "type": "object",
