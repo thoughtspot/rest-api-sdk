@@ -6029,6 +6029,18 @@
                       "V1",
                       "V2"
                     ]
+                  },
+                  "export_dependent": {
+                    "description": "Indicates whether to export table while exporting connection.",
+                    "default": false,
+                    "type": "boolean",
+                    "nullable": true
+                  },
+                  "export_connection_as_dependent": {
+                    "description": "Indicates whether to export connection as dependent while exporting table/worksheet/answer/liveboard.\nThis will only be active when export_associated is true.",
+                    "default": false,
+                    "type": "boolean",
+                    "nullable": true
                   }
                 },
                 "required": [
