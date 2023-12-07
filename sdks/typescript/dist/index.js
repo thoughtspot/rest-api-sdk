@@ -14364,7 +14364,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *   Version: 9.2.0.cl or later   Commits TML files of metadata objects to the Git branch configured on your instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  Before using this endpoint to push your commits:  * Enable Git integration on your instance. * Make sure the Git repository and branch details are configured on your instance.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).      
+   *   Version: 9.2.0.cl or later   Commits TML files of metadata objects to the Git branch configured on your instance.  Requires `DATAMANAGEMENT` privilege.  Before using this endpoint to push your commits:  * Enable Git integration on your instance. * Make sure the Git repository and branch details are configured on your instance.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).      
    * @param commitBranchRequest 
    */
   commitBranch(commitBranchRequest, _options) {
@@ -15021,7 +15021,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *   Version: 9.2.0.cl or later   Allows you to deploy a commit and publish TML content to your ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  The API deploys the head of the branch unless a `commit_id` is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.      
+   *   Version: 9.2.0.cl or later   Allows you to deploy a commit and publish TML content to your ThoughtSpot instance.  Requires `DATAMANAGEMENT` (**Can manage data**) privilege.  The API deploys the head of the branch unless a `commit_id` is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.      
    * @param deployCommitRequest 
    */
   deployCommit(deployCommitRequest, _options) {
@@ -15833,7 +15833,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *   Version: 9.2.0.cl or later   Reverts TML objects to a previous commit specified in the API request.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  In the API request, specify the `commit_id`. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.  By default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.      
+   *   Version: 9.2.0.cl or later   Reverts TML objects to a previous commit specified in the API request.  Requires `DATAMANAGEMENT` (**Can manage data**) privilege.  In the API request, specify the `commit_id`. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.  By default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.      
    * @param commitId Commit id to which the object should be reverted
    * @param revertCommitRequest 
    */
@@ -15909,7 +15909,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *   Version: 9.2.0.cl or later   Gets a list of commits for a given metadata object.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *   Version: 9.2.0.cl or later   Gets a list of commits for a given metadata object.  Requires `DATAMANAGEMENT` (**Can manage data**) privilege.      
    * @param searchCommitsRequest 
    */
   searchCommits(searchCommitsRequest, _options) {
@@ -16801,7 +16801,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *   Version: 9.2.0.cl or later   Validates the content of your source branch against the objects in your destination environment.  Before merging content from your source branch to the destination branch, run this API operation from your destination environment and ensure that the changes from the source branch function in the destination environment.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *   Version: 9.2.0.cl or later   Validates the content of your source branch against the objects in your destination environment.  Before merging content from your source branch to the destination branch, run this API operation from your destination environment and ensure that the changes from the source branch function in the destination environment.  Requires `DATAMANAGEMENT` (**Can manage data**) privilege.      
    * @param validateMergeRequest 
    */
   validateMerge(validateMergeRequest, _options) {
@@ -22020,7 +22020,7 @@ var UsersApiResponseProcessor = class {
 // apis/VersionControlApi.ts
 var VersionControlApiRequestFactory = class extends BaseAPIRequestFactory {
   /**
-   *   Version: 9.2.0.cl or later   Commits TML files of metadata objects to the Git branch configured on your instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  Before using this endpoint to push your commits:  * Enable Git integration on your instance. * Make sure the Git repository and branch details are configured on your instance.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).      
+   *   Version: 9.2.0.cl or later   Commits TML files of metadata objects to the Git branch configured on your instance.  Requires `DATAMANAGEMENT` privilege.  Before using this endpoint to push your commits:  * Enable Git integration on your instance. * Make sure the Git repository and branch details are configured on your instance.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).      
    * @param commitBranchRequest 
    */
   commitBranch(commitBranchRequest, _options) {
@@ -22128,7 +22128,7 @@ var VersionControlApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *   Version: 9.2.0.cl or later   Allows you to deploy a commit and publish TML content to your ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  The API deploys the head of the branch unless a `commit_id` is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.      
+   *   Version: 9.2.0.cl or later   Allows you to deploy a commit and publish TML content to your ThoughtSpot instance.  Requires `DATAMANAGEMENT` (**Can manage data**) privilege.  The API deploys the head of the branch unless a `commit_id` is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.      
    * @param deployCommitRequest 
    */
   deployCommit(deployCommitRequest, _options) {
@@ -22164,7 +22164,7 @@ var VersionControlApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *   Version: 9.2.0.cl or later   Reverts TML objects to a previous commit specified in the API request.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  In the API request, specify the `commit_id`. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.  By default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.      
+   *   Version: 9.2.0.cl or later   Reverts TML objects to a previous commit specified in the API request.  Requires `DATAMANAGEMENT` (**Can manage data**) privilege.  In the API request, specify the `commit_id`. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.  By default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.      
    * @param commitId Commit id to which the object should be reverted
    * @param revertCommitRequest 
    */
@@ -22204,7 +22204,7 @@ var VersionControlApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *   Version: 9.2.0.cl or later   Gets a list of commits for a given metadata object.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *   Version: 9.2.0.cl or later   Gets a list of commits for a given metadata object.  Requires `DATAMANAGEMENT` (**Can manage data**) privilege.      
    * @param searchCommitsRequest 
    */
   searchCommits(searchCommitsRequest, _options) {
@@ -22312,7 +22312,7 @@ var VersionControlApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *   Version: 9.2.0.cl or later   Validates the content of your source branch against the objects in your destination environment.  Before merging content from your source branch to the destination branch, run this API operation from your destination environment and ensure that the changes from the source branch function in the destination environment.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *   Version: 9.2.0.cl or later   Validates the content of your source branch against the objects in your destination environment.  Before merging content from your source branch to the destination branch, run this API operation from your destination environment and ensure that the changes from the source branch function in the destination environment.  Requires `DATAMANAGEMENT` (**Can manage data**) privilege.      
    * @param validateMergeRequest 
    */
   validateMerge(validateMergeRequest, _options) {
@@ -24099,7 +24099,7 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *   Version: 9.2.0.cl or later   Commits TML files of metadata objects to the Git branch configured on your instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  Before using this endpoint to push your commits:  * Enable Git integration on your instance. * Make sure the Git repository and branch details are configured on your instance.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).      
+   *   Version: 9.2.0.cl or later   Commits TML files of metadata objects to the Git branch configured on your instance.  Requires `DATAMANAGEMENT` privilege.  Before using this endpoint to push your commits:  * Enable Git integration on your instance. * Make sure the Git repository and branch details are configured on your instance.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).      
    * @param commitBranchRequest 
    */
   commitBranch(commitBranchRequest, _options) {
@@ -24459,7 +24459,7 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *   Version: 9.2.0.cl or later   Allows you to deploy a commit and publish TML content to your ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  The API deploys the head of the branch unless a `commit_id` is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.      
+   *   Version: 9.2.0.cl or later   Allows you to deploy a commit and publish TML content to your ThoughtSpot instance.  Requires `DATAMANAGEMENT` (**Can manage data**) privilege.  The API deploys the head of the branch unless a `commit_id` is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.      
    * @param deployCommitRequest 
    */
   deployCommit(deployCommitRequest, _options) {
@@ -24903,7 +24903,7 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *   Version: 9.2.0.cl or later   Reverts TML objects to a previous commit specified in the API request.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  In the API request, specify the `commit_id`. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.  By default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.      
+   *   Version: 9.2.0.cl or later   Reverts TML objects to a previous commit specified in the API request.  Requires `DATAMANAGEMENT` (**Can manage data**) privilege.  In the API request, specify the `commit_id`. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.  By default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.      
    * @param commitId Commit id to which the object should be reverted
    * @param revertCommitRequest 
    */
@@ -24940,7 +24940,7 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *   Version: 9.2.0.cl or later   Gets a list of commits for a given metadata object.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *   Version: 9.2.0.cl or later   Gets a list of commits for a given metadata object.  Requires `DATAMANAGEMENT` (**Can manage data**) privilege.      
    * @param searchCommitsRequest 
    */
   searchCommits(searchCommitsRequest, _options) {
@@ -25379,7 +25379,7 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *   Version: 9.2.0.cl or later   Validates the content of your source branch against the objects in your destination environment.  Before merging content from your source branch to the destination branch, run this API operation from your destination environment and ensure that the changes from the source branch function in the destination environment.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *   Version: 9.2.0.cl or later   Validates the content of your source branch against the objects in your destination environment.  Before merging content from your source branch to the destination branch, run this API operation from your destination environment and ensure that the changes from the source branch function in the destination environment.  Requires `DATAMANAGEMENT` (**Can manage data**) privilege.      
    * @param validateMergeRequest 
    */
   validateMerge(validateMergeRequest, _options) {
@@ -25556,7 +25556,7 @@ var ObservableVersionControlApi = class {
     this.responseProcessor = responseProcessor || new VersionControlApiResponseProcessor();
   }
   /**
-   *   Version: 9.2.0.cl or later   Commits TML files of metadata objects to the Git branch configured on your instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  Before using this endpoint to push your commits:  * Enable Git integration on your instance. * Make sure the Git repository and branch details are configured on your instance.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).      
+   *   Version: 9.2.0.cl or later   Commits TML files of metadata objects to the Git branch configured on your instance.  Requires `DATAMANAGEMENT` privilege.  Before using this endpoint to push your commits:  * Enable Git integration on your instance. * Make sure the Git repository and branch details are configured on your instance.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).      
    * @param commitBranchRequest 
    */
   commitBranch(commitBranchRequest, _options) {
@@ -25610,7 +25610,7 @@ var ObservableVersionControlApi = class {
     }));
   }
   /**
-   *   Version: 9.2.0.cl or later   Allows you to deploy a commit and publish TML content to your ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  The API deploys the head of the branch unless a `commit_id` is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.      
+   *   Version: 9.2.0.cl or later   Allows you to deploy a commit and publish TML content to your ThoughtSpot instance.  Requires `DATAMANAGEMENT` (**Can manage data**) privilege.  The API deploys the head of the branch unless a `commit_id` is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.      
    * @param deployCommitRequest 
    */
   deployCommit(deployCommitRequest, _options) {
@@ -25628,7 +25628,7 @@ var ObservableVersionControlApi = class {
     }));
   }
   /**
-   *   Version: 9.2.0.cl or later   Reverts TML objects to a previous commit specified in the API request.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  In the API request, specify the `commit_id`. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.  By default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.      
+   *   Version: 9.2.0.cl or later   Reverts TML objects to a previous commit specified in the API request.  Requires `DATAMANAGEMENT` (**Can manage data**) privilege.  In the API request, specify the `commit_id`. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.  By default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.      
    * @param commitId Commit id to which the object should be reverted
    * @param revertCommitRequest 
    */
@@ -25647,7 +25647,7 @@ var ObservableVersionControlApi = class {
     }));
   }
   /**
-   *   Version: 9.2.0.cl or later   Gets a list of commits for a given metadata object.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *   Version: 9.2.0.cl or later   Gets a list of commits for a given metadata object.  Requires `DATAMANAGEMENT` (**Can manage data**) privilege.      
    * @param searchCommitsRequest 
    */
   searchCommits(searchCommitsRequest, _options) {
@@ -25701,7 +25701,7 @@ var ObservableVersionControlApi = class {
     }));
   }
   /**
-   *   Version: 9.2.0.cl or later   Validates the content of your source branch against the objects in your destination environment.  Before merging content from your source branch to the destination branch, run this API operation from your destination environment and ensure that the changes from the source branch function in the destination environment.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *   Version: 9.2.0.cl or later   Validates the content of your source branch against the objects in your destination environment.  Before merging content from your source branch to the destination branch, run this API operation from your destination environment and ensure that the changes from the source branch function in the destination environment.  Requires `DATAMANAGEMENT` (**Can manage data**) privilege.      
    * @param validateMergeRequest 
    */
   validateMerge(validateMergeRequest, _options) {
@@ -26284,7 +26284,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 9.2.0.cl or later   Commits TML files of metadata objects to the Git branch configured on your instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  Before using this endpoint to push your commits:  * Enable Git integration on your instance. * Make sure the Git repository and branch details are configured on your instance.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).      
+   *   Version: 9.2.0.cl or later   Commits TML files of metadata objects to the Git branch configured on your instance.  Requires `DATAMANAGEMENT` privilege.  Before using this endpoint to push your commits:  * Enable Git integration on your instance. * Make sure the Git repository and branch details are configured on your instance.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).      
    * @param commitBranchRequest 
    */
   commitBranch(commitBranchRequest, _options) {
@@ -26444,7 +26444,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 9.2.0.cl or later   Allows you to deploy a commit and publish TML content to your ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  The API deploys the head of the branch unless a `commit_id` is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.      
+   *   Version: 9.2.0.cl or later   Allows you to deploy a commit and publish TML content to your ThoughtSpot instance.  Requires `DATAMANAGEMENT` (**Can manage data**) privilege.  The API deploys the head of the branch unless a `commit_id` is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.      
    * @param deployCommitRequest 
    */
   deployCommit(deployCommitRequest, _options) {
@@ -26638,7 +26638,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 9.2.0.cl or later   Reverts TML objects to a previous commit specified in the API request.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  In the API request, specify the `commit_id`. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.  By default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.      
+   *   Version: 9.2.0.cl or later   Reverts TML objects to a previous commit specified in the API request.  Requires `DATAMANAGEMENT` (**Can manage data**) privilege.  In the API request, specify the `commit_id`. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.  By default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.      
    * @param commitId Commit id to which the object should be reverted
    * @param revertCommitRequest 
    */
@@ -26655,7 +26655,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 9.2.0.cl or later   Gets a list of commits for a given metadata object.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *   Version: 9.2.0.cl or later   Gets a list of commits for a given metadata object.  Requires `DATAMANAGEMENT` (**Can manage data**) privilege.      
    * @param searchCommitsRequest 
    */
   searchCommits(searchCommitsRequest, _options) {
@@ -26854,7 +26854,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 9.2.0.cl or later   Validates the content of your source branch against the objects in your destination environment.  Before merging content from your source branch to the destination branch, run this API operation from your destination environment and ensure that the changes from the source branch function in the destination environment.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *   Version: 9.2.0.cl or later   Validates the content of your source branch against the objects in your destination environment.  Before merging content from your source branch to the destination branch, run this API operation from your destination environment and ensure that the changes from the source branch function in the destination environment.  Requires `DATAMANAGEMENT` (**Can manage data**) privilege.      
    * @param validateMergeRequest 
    */
   validateMerge(validateMergeRequest, _options) {
@@ -26937,7 +26937,7 @@ var PromiseVersionControlApi = class {
     this.api = new ObservableVersionControlApi(configuration, requestFactory, responseProcessor);
   }
   /**
-   *   Version: 9.2.0.cl or later   Commits TML files of metadata objects to the Git branch configured on your instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  Before using this endpoint to push your commits:  * Enable Git integration on your instance. * Make sure the Git repository and branch details are configured on your instance.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).      
+   *   Version: 9.2.0.cl or later   Commits TML files of metadata objects to the Git branch configured on your instance.  Requires `DATAMANAGEMENT` privilege.  Before using this endpoint to push your commits:  * Enable Git integration on your instance. * Make sure the Git repository and branch details are configured on your instance.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).      
    * @param commitBranchRequest 
    */
   commitBranch(commitBranchRequest, _options) {
@@ -26961,7 +26961,7 @@ var PromiseVersionControlApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 9.2.0.cl or later   Allows you to deploy a commit and publish TML content to your ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  The API deploys the head of the branch unless a `commit_id` is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.      
+   *   Version: 9.2.0.cl or later   Allows you to deploy a commit and publish TML content to your ThoughtSpot instance.  Requires `DATAMANAGEMENT` (**Can manage data**) privilege.  The API deploys the head of the branch unless a `commit_id` is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.      
    * @param deployCommitRequest 
    */
   deployCommit(deployCommitRequest, _options) {
@@ -26969,7 +26969,7 @@ var PromiseVersionControlApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 9.2.0.cl or later   Reverts TML objects to a previous commit specified in the API request.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  In the API request, specify the `commit_id`. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.  By default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.      
+   *   Version: 9.2.0.cl or later   Reverts TML objects to a previous commit specified in the API request.  Requires `DATAMANAGEMENT` (**Can manage data**) privilege.  In the API request, specify the `commit_id`. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.  By default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.      
    * @param commitId Commit id to which the object should be reverted
    * @param revertCommitRequest 
    */
@@ -26978,7 +26978,7 @@ var PromiseVersionControlApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 9.2.0.cl or later   Gets a list of commits for a given metadata object.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *   Version: 9.2.0.cl or later   Gets a list of commits for a given metadata object.  Requires `DATAMANAGEMENT` (**Can manage data**) privilege.      
    * @param searchCommitsRequest 
    */
   searchCommits(searchCommitsRequest, _options) {
@@ -27002,7 +27002,7 @@ var PromiseVersionControlApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 9.2.0.cl or later   Validates the content of your source branch against the objects in your destination environment.  Before merging content from your source branch to the destination branch, run this API operation from your destination environment and ensure that the changes from the source branch function in the destination environment.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *   Version: 9.2.0.cl or later   Validates the content of your source branch against the objects in your destination environment.  Before merging content from your source branch to the destination branch, run this API operation from your destination environment and ensure that the changes from the source branch function in the destination environment.  Requires `DATAMANAGEMENT` (**Can manage data**) privilege.      
    * @param validateMergeRequest 
    */
   validateMerge(validateMergeRequest, _options) {

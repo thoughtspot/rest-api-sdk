@@ -25,7 +25,7 @@ export class CreateUserRequest {
     /**
     * Password for the user account.
     */
-    'password': string;
+    'password'?: string;
     /**
     * Email of the user account
     */
