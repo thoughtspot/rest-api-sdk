@@ -3741,6 +3741,11 @@
                     "description": "Flag to indicate whether welcome email should be sent to user",
                     "type": "boolean",
                     "nullable": true
+                  },
+                  "trigger_activation_email": {
+                    "description": "Flag to indicate whether activation email should be sent to user",
+                    "type": "boolean",
+                    "nullable": true
                   }
                 },
                 "required": [
