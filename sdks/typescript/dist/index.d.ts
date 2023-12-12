@@ -3667,6 +3667,14 @@ declare class ExportMetadataTMLRequest {
     * Indicates whether to export worksheet TML in V1 or V2 version.
     */
     'export_schema_version'?: ExportMetadataTMLRequestExportSchemaVersionEnum;
+    /**
+    * Indicates whether to export table while exporting connection.
+    */
+    'export_dependent'?: boolean | null;
+    /**
+    * Indicates whether to export connection as dependent while exporting table/worksheet/answer/liveboard. This will only be active when export_associated is true.
+    */
+    'export_connection_as_dependent'?: boolean | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;

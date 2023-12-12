@@ -2495,6 +2495,18 @@ _ExportMetadataTMLRequest.attributeTypeMap = [
     "baseName": "export_schema_version",
     "type": "ExportMetadataTMLRequestExportSchemaVersionEnum",
     "format": ""
+  },
+  {
+    "name": "export_dependent",
+    "baseName": "export_dependent",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "export_connection_as_dependent",
+    "baseName": "export_connection_as_dependent",
+    "type": "boolean",
+    "format": ""
   }
 ];
 var ExportMetadataTMLRequest = _ExportMetadataTMLRequest;
