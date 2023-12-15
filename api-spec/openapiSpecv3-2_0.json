@@ -1982,7 +1982,7 @@
                 "type": "object",
                 "properties": {
                   "query_string": {
-                    "description": "Data search query string token. (test)[https://youtube.com]  (test-2)[/someother]",
+                    "description": "Data search query string token. [test](https://youtube.com)  [test-2](/someother)  <a href='/somelink'>here</a> <code>here 2 </code> `here 5`",
                     "type": "string"
                   },
                   "logical_table_identifier": {
