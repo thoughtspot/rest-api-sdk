@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "ThoughtSpot Public REST API",
+    "title": "ThoughtSpot Public REST API | Doc testing",
     "version": "2.0"
   },
   "x-roles": [
@@ -1982,7 +1982,7 @@
                 "type": "object",
                 "properties": {
                   "query_string": {
-                    "description": "Data search query string token.",
+                    "description": "Data search query string token. (test)[https://youtube.com]  (test-2)[/someother]",
                     "type": "string"
                   },
                   "logical_table_identifier": {
