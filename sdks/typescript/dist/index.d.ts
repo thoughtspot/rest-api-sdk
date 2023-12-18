@@ -2668,6 +2668,10 @@ declare class CreateUserRequest {
     * Flag to indicate whether welcome email should be sent to user
     */
     'trigger_welcome_email'?: boolean | null;
+    /**
+    * Flag to indicate whether activation email should be sent to user
+    */
+    'trigger_activation_email'?: boolean | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;

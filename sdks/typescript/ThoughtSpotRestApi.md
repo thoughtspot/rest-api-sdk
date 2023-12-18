@@ -941,6 +941,7 @@ apiInstance.createUser(
     extended_properties: {},
     extended_preferences: {},
     trigger_welcome_email: true,
+    trigger_activation_email: true,
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);

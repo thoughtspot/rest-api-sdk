@@ -2036,6 +2036,12 @@ _CreateUserRequest.attributeTypeMap = [
     "baseName": "trigger_welcome_email",
     "type": "boolean",
     "format": ""
+  },
+  {
+    "name": "trigger_activation_email",
+    "baseName": "trigger_activation_email",
+    "type": "boolean",
+    "format": ""
   }
 ];
 var CreateUserRequest = _CreateUserRequest;
