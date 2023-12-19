@@ -1832,10 +1832,6 @@ declare class CreateConfigRequest {
     */
     'commit_branch_name'?: string;
     /**
-    *    Use commit_branch_name instead.      Name of the remote branch where objects from this Thoughtspot instance will be versioned.        *Deprecated from 10.0.0.cl : Replaced by commit_branch_name*
-    */
-    'default_branch_name'?: string;
-    /**
     * Maintain mapping of guid for the deployment to an instance    Version: 9.4.0.cl or later
     */
     'enable_guid_mapping'?: boolean | null;
@@ -1843,10 +1839,6 @@ declare class CreateConfigRequest {
     *    Name of the branch where the configuration files related to operations between Thoughtspot and version control repo should be maintained.      Note: If no branch name is specified, then by default, ts_config_files branch is considered. Ensure this branch exists before configuration.    Version: 9.7.0.cl or later
     */
     'configuration_branch_name'?: string;
-    /**
-    *    Use configuration_branch_name instead.      Name of the branch where the configuration files related to operations between Thoughtspot and version control repo should be maintained.        Note: If no branch name is specified, then by default, ts_config_files branch is considered. Ensure this branch exists before configuration.         *Deprecated from 10.0.0.cl : Replaced by configuration_branch_name*     Version: 9.4.0.cl or later
-    */
-    'guid_mapping_branch_name'?: string;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -8255,10 +8247,6 @@ declare class UpdateConfigRequest {
     */
     'commit_branch_name'?: string;
     /**
-    *    Use commit_branch_name instead.      Name of the remote branch where objects from this Thoughtspot instance will be versioned.        *Deprecated from 10.0.0.cl : Replaced by commit_branch_name*
-    */
-    'default_branch_name'?: string;
-    /**
     * Maintain mapping of guid for the deployment to an instance    Version: 9.4.0.cl or later
     */
     'enable_guid_mapping'?: boolean | null;
@@ -8266,10 +8254,6 @@ declare class UpdateConfigRequest {
     * Name of the branch where the configuration files related to operations between Thoughtspot and version control repo should be maintained.    Version: 9.7.0.cl or later
     */
     'configuration_branch_name'?: string;
-    /**
-    *    Use configuration_branch_name instead.      Name of the branch where the configuration files related to operations between Thoughtspot and version control repo should be maintained.        *Deprecated from 10.0.0.cl : Replaced by configuration_branch_name*     Version: 9.4.0.cl or later
-    */
-    'guid_mapping_branch_name'?: string;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
