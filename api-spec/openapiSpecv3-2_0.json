@@ -267,7 +267,10 @@
                         "ORG_ADMINISTRATION",
                         "ROLE_ADMINISTRATION",
                         "AUTHENTICATION_ADMINISTRATION",
-                        "BILLING_INFO_ADMINISTRATION"
+                        "BILLING_INFO_ADMINISTRATION",
+                        "CAN_MANAGE_CUSTOM_CALENDAR",
+                        "CAN_CREATE_OR_EDIT_CONNECTIONS",
+                        "CAN_MANAGE_WORKSHEET_VIEWS_TABLES"
                       ]
                     }
                   },
@@ -973,7 +976,10 @@
                         "ORG_ADMINISTRATION",
                         "ROLE_ADMINISTRATION",
                         "AUTHENTICATION_ADMINISTRATION",
-                        "BILLING_INFO_ADMINISTRATION"
+                        "BILLING_INFO_ADMINISTRATION",
+                        "CAN_MANAGE_CUSTOM_CALENDAR",
+                        "CAN_CREATE_OR_EDIT_CONNECTIONS",
+                        "CAN_MANAGE_WORKSHEET_VIEWS_TABLES"
                       ]
                     }
                   },
@@ -2866,7 +2872,11 @@
                         "AUTHENTICATION_ADMINISTRATION",
                         "BILLING_INFO_ADMINISTRATION",
                         "PREVIEW_THOUGHTSPOT_SAGE",
-                        "LIVEBOARD_VERIFIER"
+                        "LIVEBOARD_VERIFIER",
+                        "CAN_MANAGE_CUSTOM_CALENDAR",
+                        "CAN_CREATE_OR_EDIT_CONNECTIONS",
+                        "CAN_CONFIGURE_CONNECTIONS",
+                        "CAN_MANAGE_WORKSHEET_VIEWS_TABLES"
                       ]
                     }
                   },
@@ -7616,7 +7626,10 @@
                         "BILLING_INFO_ADMINISTRATION",
                         "CONTROL_TRUSTED_AUTH",
                         "TAGMANAGEMENT",
-                        "LIVEBOARD_VERIFIER"
+                        "LIVEBOARD_VERIFIER",
+                        "CAN_MANAGE_CUSTOM_CALENDAR",
+                        "CAN_CREATE_OR_EDIT_CONNECTIONS",
+                        "CAN_MANAGE_WORKSHEET_VIEWS_TABLES"
                       ]
                     }
                   }
@@ -7733,7 +7746,10 @@
                         "BILLING_INFO_ADMINISTRATION",
                         "CONTROL_TRUSTED_AUTH",
                         "TAGMANAGEMENT",
-                        "LIVEBOARD_VERIFIER"
+                        "LIVEBOARD_VERIFIER",
+                        "CAN_MANAGE_CUSTOM_CALENDAR",
+                        "CAN_CREATE_OR_EDIT_CONNECTIONS",
+                        "CAN_MANAGE_WORKSHEET_VIEWS_TABLES"
                       ]
                     }
                   }
@@ -12242,7 +12258,11 @@
                 "AUTHENTICATION_ADMINISTRATION",
                 "BILLING_INFO_ADMINISTRATION",
                 "PREVIEW_THOUGHTSPOT_SAGE",
-                "LIVEBOARD_VERIFIER"
+                "LIVEBOARD_VERIFIER",
+                "CAN_MANAGE_CUSTOM_CALENDAR",
+                "CAN_CREATE_OR_EDIT_CONNECTIONS",
+                "CAN_CONFIGURE_CONNECTIONS",
+                "CAN_MANAGE_WORKSHEET_VIEWS_TABLES"
               ]
             },
             "description": "Privileges granted to the role."
@@ -13372,7 +13392,10 @@
                 "BILLING_INFO_ADMINISTRATION",
                 "CONTROL_TRUSTED_AUTH",
                 "TAGMANAGEMENT",
-                "LIVEBOARD_VERIFIER"
+                "LIVEBOARD_VERIFIER",
+                "CAN_MANAGE_CUSTOM_CALENDAR",
+                "CAN_CREATE_OR_EDIT_CONNECTIONS",
+                "CAN_MANAGE_WORKSHEET_VIEWS_TABLES"
               ]
             },
             "description": "Privileges granted to the role."
