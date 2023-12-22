@@ -382,8 +382,10 @@ apiInstance.createConfig(
       "branch_names_example",
     ],
     commit_branch_name: "commit_branch_name_example",
+    default_branch_name: "default_branch_name_example",
     enable_guid_mapping: true,
     configuration_branch_name: "configuration_branch_name_example",
+    guid_mapping_branch_name: "guid_mapping_branch_name_example",
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -4636,8 +4638,10 @@ apiInstance.updateConfig(
       "branch_names_example",
     ],
     commit_branch_name: "commit_branch_name_example",
+    default_branch_name: "default_branch_name_example",
     enable_guid_mapping: true,
     configuration_branch_name: "configuration_branch_name_example",
+    guid_mapping_branch_name: "guid_mapping_branch_name_example",
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);
