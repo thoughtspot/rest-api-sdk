@@ -1732,7 +1732,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object"
+                  "$ref": "#/components/schemas/PermissionOfPrincipalsResponse"
                 },
                 "examples": {
                   "example_1": {
@@ -1766,15 +1766,7 @@
                             }
                           ]
                         }
-                      ],
-                      "__args": {
-                        "principals": [
-                          {
-                            "identifier": "test_user",
-                            "type": "USER"
-                          }
-                        ]
-                      }
+                      ]
                     }
                   }
                 }
@@ -1874,7 +1866,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object"
+                  "$ref": "#/components/schemas/PermissionOfMetadataResponse"
                 },
                 "examples": {
                   "example_1": {
@@ -1928,16 +1920,7 @@
                             }
                           ]
                         }
-                      ],
-                      "__args": {
-                        "metadata": [
-                          {
-                            "type": "LIVEBOARD",
-                            "identifier": "a62a5bf3-9f16-45b2-a174-7d30b3b577a9"
-                          }
-                        ],
-                        "include_dependent_objects": false
-                      }
+                      ]
                     }
                   }
                 }
@@ -11557,6 +11540,22 @@
             "type": "boolean",
             "default": false,
             "description": "Indicates whether to include a page with all applied filters."
+          }
+        }
+      },
+      "PermissionOfPrincipalsResponse": {
+        "type": "object",
+        "properties": {
+          "principal_permission_details": {
+            "type": "object"
+          }
+        }
+      },
+      "PermissionOfMetadataResponse": {
+        "type": "object",
+        "properties": {
+          "metadata_permission_details": {
+            "type": "object"
           }
         }
       },
