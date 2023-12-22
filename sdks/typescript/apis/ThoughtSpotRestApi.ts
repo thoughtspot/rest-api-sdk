@@ -55,6 +55,8 @@ import { LogResponse } from '../models/LogResponse';
 import { LoginRequest } from '../models/LoginRequest';
 import { MetadataSearchResponse } from '../models/MetadataSearchResponse';
 import { OrgResponse } from '../models/OrgResponse';
+import { PermissionOfMetadataResponse } from '../models/PermissionOfMetadataResponse';
+import { PermissionOfPrincipalsResponse } from '../models/PermissionOfPrincipalsResponse';
 import { RepoConfigObject } from '../models/RepoConfigObject';
 import { ResetUserPasswordRequest } from '../models/ResetUserPasswordRequest';
 import { ResponseCustomAction } from '../models/ResponseCustomAction';
@@ -5502,13 +5504,13 @@ export class ThoughtSpotRestApiResponseProcessor {
      * @params response Response returned by the server for a request to fetchPermissionsOfPrincipals
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async fetchPermissionsOfPrincipals(response: ResponseContext): Promise<any > {
+     public async fetchPermissionsOfPrincipals(response: ResponseContext): Promise<PermissionOfPrincipalsResponse > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: any = ObjectSerializer.deserialize(
+            const body: PermissionOfPrincipalsResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "any", ""
-            ) as any;
+                "PermissionOfPrincipalsResponse", ""
+            ) as PermissionOfPrincipalsResponse;
             return body;
         }
         if (isCodeInRange("400", response.httpStatusCode)) {
@@ -5542,10 +5544,10 @@ export class ThoughtSpotRestApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: any = ObjectSerializer.deserialize(
+            const body: PermissionOfPrincipalsResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "any", ""
-            ) as any;
+                "PermissionOfPrincipalsResponse", ""
+            ) as PermissionOfPrincipalsResponse;
             return body;
         }
 
@@ -5559,13 +5561,13 @@ export class ThoughtSpotRestApiResponseProcessor {
      * @params response Response returned by the server for a request to fetchPermissionsOnMetadata
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async fetchPermissionsOnMetadata(response: ResponseContext): Promise<any > {
+     public async fetchPermissionsOnMetadata(response: ResponseContext): Promise<PermissionOfMetadataResponse > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: any = ObjectSerializer.deserialize(
+            const body: PermissionOfMetadataResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "any", ""
-            ) as any;
+                "PermissionOfMetadataResponse", ""
+            ) as PermissionOfMetadataResponse;
             return body;
         }
         if (isCodeInRange("400", response.httpStatusCode)) {
@@ -5599,10 +5601,10 @@ export class ThoughtSpotRestApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: any = ObjectSerializer.deserialize(
+            const body: PermissionOfMetadataResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "any", ""
-            ) as any;
+                "PermissionOfMetadataResponse", ""
+            ) as PermissionOfMetadataResponse;
             return body;
         }
 

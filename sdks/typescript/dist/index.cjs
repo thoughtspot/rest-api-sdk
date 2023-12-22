@@ -171,6 +171,8 @@ __export(typescript_exports, {
   PdfOptions: () => PdfOptions,
   PdfOptionsInput: () => PdfOptionsInput,
   PermissionInput: () => PermissionInput,
+  PermissionOfMetadataResponse: () => PermissionOfMetadataResponse,
+  PermissionOfPrincipalsResponse: () => PermissionOfPrincipalsResponse,
   PermissionsMetadataTypeInput: () => PermissionsMetadataTypeInput,
   PngOptionsInput: () => PngOptionsInput,
   PrincipalsInput: () => PrincipalsInput,
@@ -4654,6 +4656,44 @@ _PermissionInput.attributeTypeMap = [
 ];
 var PermissionInput = _PermissionInput;
 
+// models/PermissionOfMetadataResponse.ts
+var _PermissionOfMetadataResponse = class _PermissionOfMetadataResponse {
+  static getAttributeTypeMap() {
+    return _PermissionOfMetadataResponse.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_PermissionOfMetadataResponse.discriminator = void 0;
+_PermissionOfMetadataResponse.attributeTypeMap = [
+  {
+    "name": "metadata_permission_details",
+    "baseName": "metadata_permission_details",
+    "type": "any",
+    "format": ""
+  }
+];
+var PermissionOfMetadataResponse = _PermissionOfMetadataResponse;
+
+// models/PermissionOfPrincipalsResponse.ts
+var _PermissionOfPrincipalsResponse = class _PermissionOfPrincipalsResponse {
+  static getAttributeTypeMap() {
+    return _PermissionOfPrincipalsResponse.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_PermissionOfPrincipalsResponse.discriminator = void 0;
+_PermissionOfPrincipalsResponse.attributeTypeMap = [
+  {
+    "name": "principal_permission_details",
+    "baseName": "principal_permission_details",
+    "type": "any",
+    "format": ""
+  }
+];
+var PermissionOfPrincipalsResponse = _PermissionOfPrincipalsResponse;
+
 // models/PermissionsMetadataTypeInput.ts
 var _PermissionsMetadataTypeInput = class _PermissionsMetadataTypeInput {
   static getAttributeTypeMap() {
@@ -8779,6 +8819,8 @@ var typeMap = {
   "PdfOptions": PdfOptions,
   "PdfOptionsInput": PdfOptionsInput,
   "PermissionInput": PermissionInput,
+  "PermissionOfMetadataResponse": PermissionOfMetadataResponse,
+  "PermissionOfPrincipalsResponse": PermissionOfPrincipalsResponse,
   "PermissionsMetadataTypeInput": PermissionsMetadataTypeInput,
   "PngOptionsInput": PngOptionsInput,
   "PrincipalsInput": PrincipalsInput,
@@ -13438,7 +13480,7 @@ var SecurityApiResponseProcessor = class {
       if (isCodeInRange("200", response.httpStatusCode)) {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
-          "any",
+          "PermissionOfPrincipalsResponse",
           ""
         );
         return body;
@@ -13478,7 +13520,7 @@ var SecurityApiResponseProcessor = class {
       if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
-          "any",
+          "PermissionOfPrincipalsResponse",
           ""
         );
         return body;
@@ -13499,7 +13541,7 @@ var SecurityApiResponseProcessor = class {
       if (isCodeInRange("200", response.httpStatusCode)) {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
-          "any",
+          "PermissionOfMetadataResponse",
           ""
         );
         return body;
@@ -13539,7 +13581,7 @@ var SecurityApiResponseProcessor = class {
       if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
-          "any",
+          "PermissionOfMetadataResponse",
           ""
         );
         return body;
@@ -18993,7 +19035,7 @@ var ThoughtSpotRestApiResponseProcessor = class {
       if (isCodeInRange("200", response.httpStatusCode)) {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
-          "any",
+          "PermissionOfPrincipalsResponse",
           ""
         );
         return body;
@@ -19033,7 +19075,7 @@ var ThoughtSpotRestApiResponseProcessor = class {
       if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
-          "any",
+          "PermissionOfPrincipalsResponse",
           ""
         );
         return body;
@@ -19054,7 +19096,7 @@ var ThoughtSpotRestApiResponseProcessor = class {
       if (isCodeInRange("200", response.httpStatusCode)) {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
-          "any",
+          "PermissionOfMetadataResponse",
           ""
         );
         return body;
@@ -19094,7 +19136,7 @@ var ThoughtSpotRestApiResponseProcessor = class {
       if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
-          "any",
+          "PermissionOfMetadataResponse",
           ""
         );
         return body;
@@ -27445,6 +27487,8 @@ var createBearerAuthenticationConfig = (url, paramOrTokenProvider) => {
   PdfOptions,
   PdfOptionsInput,
   PermissionInput,
+  PermissionOfMetadataResponse,
+  PermissionOfPrincipalsResponse,
   PermissionsMetadataTypeInput,
   PngOptionsInput,
   PrincipalsInput,

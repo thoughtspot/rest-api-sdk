@@ -116,6 +116,8 @@ export * from '../models/ParametersListItemInput';
 export * from '../models/PdfOptions';
 export * from '../models/PdfOptionsInput';
 export * from '../models/PermissionInput';
+export * from '../models/PermissionOfMetadataResponse';
+export * from '../models/PermissionOfPrincipalsResponse';
 export * from '../models/PermissionsMetadataTypeInput';
 export * from '../models/PngOptionsInput';
 export * from '../models/PrincipalsInput';
@@ -307,6 +309,8 @@ import { ParametersListItemInput } from '../models/ParametersListItemInput';
 import { PdfOptions       , PdfOptionsPageSizeEnum    } from '../models/PdfOptions';
 import { PdfOptionsInput    , PdfOptionsInputPageOrientationEnum     } from '../models/PdfOptionsInput';
 import { PermissionInput , PermissionInputShareModeEnum   } from '../models/PermissionInput';
+import { PermissionOfMetadataResponse } from '../models/PermissionOfMetadataResponse';
+import { PermissionOfPrincipalsResponse } from '../models/PermissionOfPrincipalsResponse';
 import { PermissionsMetadataTypeInput, PermissionsMetadataTypeInputTypeEnum    } from '../models/PermissionsMetadataTypeInput';
 import { PngOptionsInput } from '../models/PngOptionsInput';
 import { PrincipalsInput , PrincipalsInputTypeEnum   } from '../models/PrincipalsInput';
@@ -632,6 +636,8 @@ let typeMap: {[index: string]: any} = {
     "PdfOptions": PdfOptions,
     "PdfOptionsInput": PdfOptionsInput,
     "PermissionInput": PermissionInput,
+    "PermissionOfMetadataResponse": PermissionOfMetadataResponse,
+    "PermissionOfPrincipalsResponse": PermissionOfPrincipalsResponse,
     "PermissionsMetadataTypeInput": PermissionsMetadataTypeInput,
     "PngOptionsInput": PngOptionsInput,
     "PrincipalsInput": PrincipalsInput,
