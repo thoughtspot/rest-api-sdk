@@ -59,7 +59,7 @@ export class SearchUserGroupsRequest {
     */
     'visibility'?: SearchUserGroupsRequestVisibilityEnum;
     /**
-    * Filter groups with a list of roles assigned to a group
+    * Filter groups with a list of Roles assigned to a group
     */
     'role_identifiers'?: Array<string>;
     /**

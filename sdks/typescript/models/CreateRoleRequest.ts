@@ -14,15 +14,15 @@ import { HttpFile } from '../http/http';
 
 export class CreateRoleRequest {
     /**
-    * Unique name of the role.
+    * Unique name of the Role.
     */
     'name': string;
     /**
-    * Description of the role.
+    * Description of the Role.
     */
     'description'?: string;
     /**
-    * Privileges granted to the role.
+    * Privileges granted to the Role. See [Documentation](https://developers.thoughtspot.com/docs/rbac#_role_categories_and_privileges)for supported roles privileges.
     */
     'privileges'?: Array<CreateRoleRequestPrivilegesEnum>;
 

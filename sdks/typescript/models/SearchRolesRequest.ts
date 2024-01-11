@@ -14,7 +14,7 @@ import { HttpFile } from '../http/http';
 
 export class SearchRolesRequest {
     /**
-    * unique ID or name of the roles
+    * unique ID or name of the Roles
     */
     'role_identifiers'?: Array<string>;
     /**
@@ -26,11 +26,11 @@ export class SearchRolesRequest {
     */
     'group_identifiers'?: Array<string>;
     /**
-    * Privileges assigned to the Role.
+    * Privileges assigned to the Role. See [Documentation](https://developers.thoughtspot.com/docs/rbac#_role_categories_and_privileges)for supported roles privileges.
     */
     'privileges'?: Array<SearchRolesRequestPrivilegesEnum>;
     /**
-    * Indicates whether the role is deprecated.
+    * Indicates whether the Role is deprecated.
     */
     'deprecated'?: boolean | null;
     /**
@@ -38,7 +38,7 @@ export class SearchRolesRequest {
     */
     'external'?: boolean | null;
     /**
-    * Indicates whether the role is shared via connection
+    * Indicates whether the Role is shared via connection
     */
     'shared_via_connection'?: boolean | null;
     /**

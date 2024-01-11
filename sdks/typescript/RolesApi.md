@@ -94,7 +94,7 @@ const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
 const apiInstance = new RolesApi(configuration);
 
 apiInstance.deleteRole(
-  // string | Unique ID or name of the role.
+  // string | Unique ID or name of the Role.
   "role_identifier_example" 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -108,7 +108,7 @@ apiInstance.deleteRole(
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **roleIdentifier** | [**string**] | Unique ID or name of the role. | defaults to undefined
+ **roleIdentifier** | [**string**] | Unique ID or name of the Role. | defaults to undefined
 
 
 ### Return type
@@ -233,7 +233,7 @@ const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
 const apiInstance = new RolesApi(configuration);
 
 apiInstance.updateRole(
-  // string | Unique ID or name of the role.
+  // string | Unique ID or name of the Role.
   "role_identifier_example" , 
   // UpdateRoleRequest
   {
@@ -256,7 +256,7 @@ apiInstance.updateRole(
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **updateRoleRequest** | **UpdateRoleRequest**|  |
- **roleIdentifier** | [**string**] | Unique ID or name of the role. | defaults to undefined
+ **roleIdentifier** | [**string**] | Unique ID or name of the Role. | defaults to undefined
 
 
 ### Return type

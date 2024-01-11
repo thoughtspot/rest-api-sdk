@@ -18,11 +18,11 @@ export class UpdateRoleRequest {
     */
     'name': string;
     /**
-    * Description of the Role
+    * Description of the Role.
     */
     'description'?: string;
     /**
-    * Privileges granted to the role.
+    * Privileges granted to the role. See [Documentation](https://developers.thoughtspot.com/docs/rbac#_role_categories_and_privileges)for supported roles privileges.
     */
     'privileges'?: Array<UpdateRoleRequestPrivilegesEnum>;
 
