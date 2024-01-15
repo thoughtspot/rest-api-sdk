@@ -192,6 +192,11 @@ import { UpdateUserRequest } from '../models/UpdateUserRequest';
 import { User } from '../models/User';
 import { UserGroup } from '../models/UserGroup';
 import { UserGroupResponse } from '../models/UserGroupResponse';
+import { UserObject } from '../models/UserObject';
+import { UserParameterOptions } from '../models/UserParameterOptions';
+import { UserParameters } from '../models/UserParameters';
+import { UserRuntimeFilters } from '../models/UserRuntimeFilters';
+import { UserRuntimeSorts } from '../models/UserRuntimeSorts';
 import { ValidateMergeRequest } from '../models/ValidateMergeRequest';
 
 import { ObservableAuthenticationApi } from "./ObservableAPI";

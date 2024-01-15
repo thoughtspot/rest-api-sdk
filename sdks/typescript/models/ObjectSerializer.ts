@@ -189,6 +189,11 @@ export * from '../models/UpdateUserRequest';
 export * from '../models/User';
 export * from '../models/UserGroup';
 export * from '../models/UserGroupResponse';
+export * from '../models/UserObject';
+export * from '../models/UserParameterOptions';
+export * from '../models/UserParameters';
+export * from '../models/UserRuntimeFilters';
+export * from '../models/UserRuntimeSorts';
 export * from '../models/ValidateMergeRequest';
 
 import { APIKey } from '../models/APIKey';
@@ -379,9 +384,14 @@ import { UpdateSystemConfigRequest } from '../models/UpdateSystemConfigRequest';
 import { UpdateTagRequest } from '../models/UpdateTagRequest';
 import { UpdateUserGroupRequest    , UpdateUserGroupRequestPrivilegesEnum   , UpdateUserGroupRequestTypeEnum   , UpdateUserGroupRequestVisibilityEnum   , UpdateUserGroupRequestOperationEnum   } from '../models/UpdateUserGroupRequest';
 import { UpdateUserRequest  , UpdateUserRequestVisibilityEnum   , UpdateUserRequestAccountStatusEnum     , UpdateUserRequestAccountTypeEnum      , UpdateUserRequestOperationEnum  , UpdateUserRequestPreferredLocaleEnum     } from '../models/UpdateUserRequest';
-import { User   , UserVisibilityEnum         , UserAccountTypeEnum  , UserAccountStatusEnum                  , UserParentTypeEnum                } from '../models/User';
+import { User   , UserVisibilityEnum         , UserAccountTypeEnum  , UserAccountStatusEnum                  , UserParentTypeEnum                 } from '../models/User';
 import { UserGroup } from '../models/UserGroup';
 import { UserGroupResponse                     , UserGroupResponseParentTypeEnum      , UserGroupResponseTypeEnum   , UserGroupResponseVisibilityEnum    } from '../models/UserGroupResponse';
+import { UserObject, UserObjectTypeEnum    } from '../models/UserObject';
+import { UserParameterOptions } from '../models/UserParameterOptions';
+import { UserParameters } from '../models/UserParameters';
+import { UserRuntimeFilters  , UserRuntimeFiltersOperatorEnum     } from '../models/UserRuntimeFilters';
+import { UserRuntimeSorts , UserRuntimeSortsOrderEnum     } from '../models/UserRuntimeSorts';
 import { ValidateMergeRequest } from '../models/ValidateMergeRequest';
 
 /* tslint:disable:no-unused-variable */
@@ -515,6 +525,9 @@ let enumsMap: Set<string> = new Set<string>([
     "UserGroupResponseParentTypeEnum",
     "UserGroupResponseTypeEnum",
     "UserGroupResponseVisibilityEnum",
+    "UserObjectTypeEnum",
+    "UserRuntimeFiltersOperatorEnum",
+    "UserRuntimeSortsOrderEnum",
 ]);
 
 let typeMap: {[index: string]: any} = {
@@ -709,6 +722,11 @@ let typeMap: {[index: string]: any} = {
     "User": User,
     "UserGroup": UserGroup,
     "UserGroupResponse": UserGroupResponse,
+    "UserObject": UserObject,
+    "UserParameterOptions": UserParameterOptions,
+    "UserParameters": UserParameters,
+    "UserRuntimeFilters": UserRuntimeFilters,
+    "UserRuntimeSorts": UserRuntimeSorts,
     "ValidateMergeRequest": ValidateMergeRequest,
 }
 

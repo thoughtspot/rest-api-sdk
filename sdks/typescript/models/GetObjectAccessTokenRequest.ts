@@ -11,6 +11,7 @@
  */
 
 import { JWTUserOptions } from '../models/JWTUserOptions';
+import { UserParameterOptions } from '../models/UserParameterOptions';
 import { HttpFile } from '../http/http';
 
 export class GetObjectAccessTokenRequest {
@@ -55,6 +56,7 @@ export class GetObjectAccessTokenRequest {
     */
     'group_identifiers'?: Array<string>;
     'jwt_user_options'?: JWTUserOptions;
+    'user_parameters'?: UserParameterOptions;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -123,6 +125,12 @@ export class GetObjectAccessTokenRequest {
             "name": "jwt_user_options",
             "baseName": "jwt_user_options",
             "type": "JWTUserOptions",
+            "format": ""
+        },
+        {
+            "name": "user_parameters",
+            "baseName": "user_parameters",
+            "type": "UserParameterOptions",
             "format": ""
         }    ];
 

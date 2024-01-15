@@ -256,6 +256,11 @@ __export(typescript_exports, {
   User: () => User,
   UserGroup: () => UserGroup,
   UserGroupResponse: () => UserGroupResponse,
+  UserObject: () => UserObject,
+  UserParameterOptions: () => UserParameterOptions,
+  UserParameters: () => UserParameters,
+  UserRuntimeFilters: () => UserRuntimeFilters,
+  UserRuntimeSorts: () => UserRuntimeSorts,
   UsersApi: () => PromiseUsersApi,
   ValidateMergeRequest: () => ValidateMergeRequest,
   VersionControlApi: () => PromiseVersionControlApi,
@@ -3283,6 +3288,12 @@ _GetFullAccessTokenRequest.attributeTypeMap = [
     "baseName": "jwt_user_options",
     "type": "JWTUserOptionsFull",
     "format": ""
+  },
+  {
+    "name": "user_parameters",
+    "baseName": "user_parameters",
+    "type": "UserParameterOptions",
+    "format": ""
   }
 ];
 var GetFullAccessTokenRequest = _GetFullAccessTokenRequest;
@@ -3361,6 +3372,12 @@ _GetObjectAccessTokenRequest.attributeTypeMap = [
     "name": "jwt_user_options",
     "baseName": "jwt_user_options",
     "type": "JWTUserOptions",
+    "format": ""
+  },
+  {
+    "name": "user_parameters",
+    "baseName": "user_parameters",
+    "type": "UserParameterOptions",
     "format": ""
   }
 ];
@@ -8203,6 +8220,12 @@ _User.attributeTypeMap = [
     "baseName": "extended_preferences",
     "type": "any",
     "format": ""
+  },
+  {
+    "name": "user_parameters",
+    "baseName": "user_parameters",
+    "type": "any",
+    "format": ""
   }
 ];
 var User = _User;
@@ -8424,6 +8447,185 @@ _UserGroupResponse.attributeTypeMap = [
   }
 ];
 var UserGroupResponse = _UserGroupResponse;
+
+// models/UserObject.ts
+var _UserObject = class _UserObject {
+  static getAttributeTypeMap() {
+    return _UserObject.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_UserObject.discriminator = void 0;
+_UserObject.attributeTypeMap = [
+  {
+    "name": "type",
+    "baseName": "type",
+    "type": "UserObjectTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "identifier",
+    "baseName": "identifier",
+    "type": "string",
+    "format": ""
+  }
+];
+var UserObject = _UserObject;
+
+// models/UserParameterOptions.ts
+var _UserParameterOptions = class _UserParameterOptions {
+  static getAttributeTypeMap() {
+    return _UserParameterOptions.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_UserParameterOptions.discriminator = void 0;
+_UserParameterOptions.attributeTypeMap = [
+  {
+    "name": "objects",
+    "baseName": "objects",
+    "type": "Array<UserObject>",
+    "format": ""
+  },
+  {
+    "name": "runtime_filters",
+    "baseName": "runtime_filters",
+    "type": "Array<UserRuntimeFilters>",
+    "format": ""
+  },
+  {
+    "name": "runtime_sorts",
+    "baseName": "runtime_sorts",
+    "type": "Array<UserRuntimeSorts>",
+    "format": ""
+  },
+  {
+    "name": "parameters",
+    "baseName": "parameters",
+    "type": "Array<UserParameters>",
+    "format": ""
+  }
+];
+var UserParameterOptions = _UserParameterOptions;
+
+// models/UserParameters.ts
+var _UserParameters = class _UserParameters {
+  static getAttributeTypeMap() {
+    return _UserParameters.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_UserParameters.discriminator = void 0;
+_UserParameters.attributeTypeMap = [
+  {
+    "name": "name",
+    "baseName": "name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "values",
+    "baseName": "values",
+    "type": "Array<string>",
+    "format": ""
+  },
+  {
+    "name": "persist",
+    "baseName": "persist",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "objects",
+    "baseName": "objects",
+    "type": "Array<UserObject>",
+    "format": ""
+  }
+];
+var UserParameters = _UserParameters;
+
+// models/UserRuntimeFilters.ts
+var _UserRuntimeFilters = class _UserRuntimeFilters {
+  static getAttributeTypeMap() {
+    return _UserRuntimeFilters.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_UserRuntimeFilters.discriminator = void 0;
+_UserRuntimeFilters.attributeTypeMap = [
+  {
+    "name": "column_name",
+    "baseName": "column_name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "values",
+    "baseName": "values",
+    "type": "Array<string>",
+    "format": ""
+  },
+  {
+    "name": "operator",
+    "baseName": "operator",
+    "type": "UserRuntimeFiltersOperatorEnum",
+    "format": ""
+  },
+  {
+    "name": "persist",
+    "baseName": "persist",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "objects",
+    "baseName": "objects",
+    "type": "Array<UserObject>",
+    "format": ""
+  }
+];
+var UserRuntimeFilters = _UserRuntimeFilters;
+
+// models/UserRuntimeSorts.ts
+var _UserRuntimeSorts = class _UserRuntimeSorts {
+  static getAttributeTypeMap() {
+    return _UserRuntimeSorts.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_UserRuntimeSorts.discriminator = void 0;
+_UserRuntimeSorts.attributeTypeMap = [
+  {
+    "name": "column_name",
+    "baseName": "column_name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "order",
+    "baseName": "order",
+    "type": "UserRuntimeSortsOrderEnum",
+    "format": ""
+  },
+  {
+    "name": "persist",
+    "baseName": "persist",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "objects",
+    "baseName": "objects",
+    "type": "Array<UserObject>",
+    "format": ""
+  }
+];
+var UserRuntimeSorts = _UserRuntimeSorts;
 
 // models/ValidateMergeRequest.ts
 var _ValidateMergeRequest = class _ValidateMergeRequest {
@@ -8674,7 +8876,10 @@ var enumsMap = /* @__PURE__ */ new Set([
   "UserParentTypeEnum",
   "UserGroupResponseParentTypeEnum",
   "UserGroupResponseTypeEnum",
-  "UserGroupResponseVisibilityEnum"
+  "UserGroupResponseVisibilityEnum",
+  "UserObjectTypeEnum",
+  "UserRuntimeFiltersOperatorEnum",
+  "UserRuntimeSortsOrderEnum"
 ]);
 var typeMap = {
   "APIKey": APIKey,
@@ -8868,6 +9073,11 @@ var typeMap = {
   "User": User,
   "UserGroup": UserGroup,
   "UserGroupResponse": UserGroupResponse,
+  "UserObject": UserObject,
+  "UserParameterOptions": UserParameterOptions,
+  "UserParameters": UserParameters,
+  "UserRuntimeFilters": UserRuntimeFilters,
+  "UserRuntimeSorts": UserRuntimeSorts,
   "ValidateMergeRequest": ValidateMergeRequest
 };
 var ObjectSerializer = class _ObjectSerializer {
@@ -27548,6 +27758,11 @@ var createBearerAuthenticationConfig = (url, paramOrTokenProvider) => {
   User,
   UserGroup,
   UserGroupResponse,
+  UserObject,
+  UserParameterOptions,
+  UserParameters,
+  UserRuntimeFilters,
+  UserRuntimeSorts,
   UsersApi,
   ValidateMergeRequest,
   VersionControlApi,

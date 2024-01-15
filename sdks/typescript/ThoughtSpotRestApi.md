@@ -2651,6 +2651,58 @@ apiInstance.getFullAccessToken(
         },
       ],
     },
+    user_parameters: {
+      objects: [
+        {
+          type: "LIVEBOARD",
+          identifier: "identifier_example",
+        },
+      ],
+      runtime_filters: [
+        {
+          column_name: "column_name_example",
+          values: [
+            "values_example",
+          ],
+          operator: "EQ",
+          persist: false,
+          objects: [
+            {
+              type: "LIVEBOARD",
+              identifier: "identifier_example",
+            },
+          ],
+        },
+      ],
+      runtime_sorts: [
+        {
+          column_name: "column_name_example",
+          order: "ASC",
+          persist: false,
+          objects: [
+            {
+              type: "LIVEBOARD",
+              identifier: "identifier_example",
+            },
+          ],
+        },
+      ],
+      parameters: [
+        {
+          name: "name_example",
+          values: [
+            "values_example",
+          ],
+          persist: false,
+          objects: [
+            {
+              type: "LIVEBOARD",
+              identifier: "identifier_example",
+            },
+          ],
+        },
+      ],
+    },
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -2732,6 +2784,58 @@ apiInstance.getObjectAccessToken(
         {
           identifier: "identifier_example",
           type: "LIVEBOARD",
+        },
+      ],
+    },
+    user_parameters: {
+      objects: [
+        {
+          type: "LIVEBOARD",
+          identifier: "identifier_example",
+        },
+      ],
+      runtime_filters: [
+        {
+          column_name: "column_name_example",
+          values: [
+            "values_example",
+          ],
+          operator: "EQ",
+          persist: false,
+          objects: [
+            {
+              type: "LIVEBOARD",
+              identifier: "identifier_example",
+            },
+          ],
+        },
+      ],
+      runtime_sorts: [
+        {
+          column_name: "column_name_example",
+          order: "ASC",
+          persist: false,
+          objects: [
+            {
+              type: "LIVEBOARD",
+              identifier: "identifier_example",
+            },
+          ],
+        },
+      ],
+      parameters: [
+        {
+          name: "name_example",
+          values: [
+            "values_example",
+          ],
+          persist: false,
+          objects: [
+            {
+              type: "LIVEBOARD",
+              identifier: "identifier_example",
+            },
+          ],
         },
       ],
     },
