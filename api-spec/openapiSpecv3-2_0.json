@@ -3262,8 +3262,13 @@
                     }
                   },
                   "jwt_user_options": {
-                    "description": "JWT user options to create a JWT token given the payload.",
-                    "$ref": "#/components/schemas/JWT_User_Options"
+                    "description": "   JWT user options to create a JWT token given the payload.\n   \n\n*Deprecated from 9.11.0.cl : Replaced by user_parameters* ",
+                    "$ref": "#/components/schemas/JWT_User_Options",
+                    "deprecated": true
+                  },
+                  "user_parameters": {
+                    "description": "User Parameters to be set via JWT Token. <br/>  <span class=\"since-beta-tag\">Version: 9.11.0.cl or later</span>",
+                    "$ref": "#/components/schemas/User_Parameter_Options"
                   }
                 },
                 "required": [
@@ -3392,8 +3397,13 @@
                     }
                   },
                   "jwt_user_options": {
-                    "description": "JWT user options to create a JWT token given the payload.",
-                    "$ref": "#/components/schemas/JWT_User_Options_Full"
+                    "description": "   JWT user options to create a JWT token given the payload.\n   \n\n*Deprecated from 9.11.0.cl : Replaced by user_parameters* ",
+                    "$ref": "#/components/schemas/JWT_User_Options_Full",
+                    "deprecated": true
+                  },
+                  "user_parameters": {
+                    "description": "User Parameters to be set via JWT Token. <br/>  <span class=\"since-beta-tag\">Version: 9.11.0.cl or later</span>",
+                    "$ref": "#/components/schemas/User_Parameter_Options"
                   }
                 },
                 "required": [
@@ -10744,6 +10754,10 @@
           "extended_preferences": {
             "type": "object",
             "description": "Preferences for the user"
+          },
+          "user_parameters": {
+            "type": "object",
+            "description": "User Parameters which are specified for the user via JWToken"
           }
         }
       },
@@ -12608,6 +12622,175 @@
           }
         },
         "description": "Metadata objects."
+      },
+      "User_Parameter_Options": {
+        "type": "object",
+        "properties": {
+          "objects": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/User_Object"
+            }
+          },
+          "runtime_filters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/User_Runtime_Filters"
+            }
+          },
+          "runtime_sorts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/User_Runtime_Sorts"
+            }
+          },
+          "parameters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/User_Parameters"
+            }
+          }
+        },
+        "description": "User properties runtime_filters,runtime_sorts,parameters applicable to LOGICAL_TABLE(Worksheet)"
+      },
+      "User_Object": {
+        "type": "object",
+        "required": [
+          "identifier"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "LIVEBOARD",
+              "ANSWER",
+              "LOGICAL_TABLE"
+            ],
+            "description": "Type of object."
+          },
+          "identifier": {
+            "type": "string",
+            "description": "Unique name/id of the object."
+          }
+        },
+        "description": "Objects to apply the User_Object."
+      },
+      "User_Runtime_Filters": {
+        "type": "object",
+        "required": [
+          "column_name",
+          "values",
+          "operator"
+        ],
+        "properties": {
+          "column_name": {
+            "type": "string",
+            "description": "The column name to apply filter."
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Value of the filters."
+          },
+          "operator": {
+            "type": "string",
+            "enum": [
+              "EQ",
+              "GE",
+              "GT",
+              "IN",
+              "LE",
+              "LT",
+              "NE",
+              "BEGINS_WITH",
+              "BW",
+              "BW_INC",
+              "BW_INC_MAX",
+              "BW_INC_MIN",
+              "CONTAINS",
+              "ENDS_WITH"
+            ],
+            "description": "Operator value. Example: EQ"
+          },
+          "persist": {
+            "type": "boolean",
+            "default": false,
+            "description": "Flag to persist the runtime filters."
+          },
+          "objects": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/User_Object"
+            },
+            "description": "Object to apply the runtime filter."
+          }
+        },
+        "description": "Objects to apply the User_Runtime_Filters."
+      },
+      "User_Runtime_Sorts": {
+        "type": "object",
+        "properties": {
+          "column_name": {
+            "type": "string",
+            "description": "The column name to apply filter."
+          },
+          "order": {
+            "type": "string",
+            "enum": [
+              "ASC",
+              "DESC"
+            ],
+            "description": "Order for the sort."
+          },
+          "persist": {
+            "type": "boolean",
+            "default": false,
+            "description": "Flag to persist the runtime sorts."
+          },
+          "objects": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/User_Object"
+            },
+            "description": "Object to apply the runtime sort."
+          }
+        },
+        "description": "Objects to apply the User_Runtime_Sorts."
+      },
+      "User_Parameters": {
+        "type": "object",
+        "required": [
+          "name",
+          "values"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the parameter."
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The array of values."
+          },
+          "persist": {
+            "type": "boolean",
+            "default": false,
+            "description": "Flag to persist the parameters."
+          },
+          "objects": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/User_Object"
+            },
+            "description": "Object to apply the runtime parameter."
+          }
+        },
+        "description": "Objects to apply the Runtime_Parameters."
       },
       "Token": {
         "type": "object",
