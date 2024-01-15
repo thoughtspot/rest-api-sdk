@@ -1545,12 +1545,6 @@ _CreateConfigRequest.attributeTypeMap = [
     "format": ""
   },
   {
-    "name": "default_branch_name",
-    "baseName": "default_branch_name",
-    "type": "string",
-    "format": ""
-  },
-  {
     "name": "enable_guid_mapping",
     "baseName": "enable_guid_mapping",
     "type": "boolean",
@@ -1559,12 +1553,6 @@ _CreateConfigRequest.attributeTypeMap = [
   {
     "name": "configuration_branch_name",
     "baseName": "configuration_branch_name",
-    "type": "string",
-    "format": ""
-  },
-  {
-    "name": "guid_mapping_branch_name",
-    "baseName": "guid_mapping_branch_name",
     "type": "string",
     "format": ""
   }
@@ -7451,12 +7439,6 @@ _UpdateConfigRequest.attributeTypeMap = [
     "format": ""
   },
   {
-    "name": "default_branch_name",
-    "baseName": "default_branch_name",
-    "type": "string",
-    "format": ""
-  },
-  {
     "name": "enable_guid_mapping",
     "baseName": "enable_guid_mapping",
     "type": "boolean",
@@ -7465,12 +7447,6 @@ _UpdateConfigRequest.attributeTypeMap = [
   {
     "name": "configuration_branch_name",
     "baseName": "configuration_branch_name",
-    "type": "string",
-    "format": ""
-  },
-  {
-    "name": "guid_mapping_branch_name",
-    "baseName": "guid_mapping_branch_name",
     "type": "string",
     "format": ""
   }
