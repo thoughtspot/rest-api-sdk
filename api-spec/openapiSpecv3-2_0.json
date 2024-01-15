@@ -267,10 +267,7 @@
                         "ORG_ADMINISTRATION",
                         "ROLE_ADMINISTRATION",
                         "AUTHENTICATION_ADMINISTRATION",
-                        "BILLING_INFO_ADMINISTRATION",
-                        "CAN_MANAGE_CUSTOM_CALENDAR",
-                        "CAN_CREATE_OR_EDIT_CONNECTIONS",
-                        "CAN_MANAGE_WORKSHEET_VIEWS_TABLES"
+                        "BILLING_INFO_ADMINISTRATION"
                       ]
                     }
                   },
@@ -976,10 +973,7 @@
                         "ORG_ADMINISTRATION",
                         "ROLE_ADMINISTRATION",
                         "AUTHENTICATION_ADMINISTRATION",
-                        "BILLING_INFO_ADMINISTRATION",
-                        "CAN_MANAGE_CUSTOM_CALENDAR",
-                        "CAN_CREATE_OR_EDIT_CONNECTIONS",
-                        "CAN_MANAGE_WORKSHEET_VIEWS_TABLES"
+                        "BILLING_INFO_ADMINISTRATION"
                       ]
                     }
                   },
@@ -1014,7 +1008,7 @@
                     ]
                   },
                   "role_identifiers": {
-                    "description": "Filter groups with a list of Roles assigned to a group",
+                    "description": "Filter groups with a list of roles assigned to a group",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -1476,7 +1470,7 @@
     "/api/rest/2.0/report/liveboard": {
       "post": {
         "operationId": "exportLiveboardReport",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nExports the data from a Liveboard and its visualization in a given file format. You can download the Liveboard data as a PDF, PNG, CSV, or XLSX file.\n\nRequires `DATADOWNLOADING` (**Can download data**) privilege.\n\n#### Usage guidelines\n\nIn the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.\n\nThe default `file_format` is CSV. For PDF file format, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.\n\nOptionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.\n\nTo include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).  \n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nExports the data from a Liveboard and its visualization in a given file format. You can download the Liveboard data as a PDF, PNG, CSV, or XLSX file.\n\nRequires `DATADOWNLOADING` (**Can download data**) privilege.\n\n#### Usage guidelines\n\nIn the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.\n\nThe default `file_format` is CSV. For PDF file format, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.\n\nYou can also apply [runtime filter](https://developers.thoughtspot.com/docs/?pageid=runtime-filters#_apply_runtime_filters_via_rest_api_v2_0_endpoints) overrides and [sort columns](https://developers.thoughtspot.com/docs/?pageid=runtime-sort#_rest_api_v2_0) to the data retrieved in the API response.\n\nTo include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes. If the new Liveboard experience mode, the transient content includes ad hoc changes to visualizations such as sorting, toggling of legends, and data drill down.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Reports",
           "9.0.0.cl"
@@ -1514,11 +1508,11 @@
                     ]
                   },
                   "runtime_filter": {
-                    "description": "JSON object with representing filter condition to apply filters at runtime. For example, {\"col1\": \"region\", \"op1\": \"EQ\", \"val1\": \"northeast\" }. You can add multiple keys by incrementing the number at the end, for example, col2, op2, val2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_filters).",
+                    "description": "JSON string representing runtime filter.\n{ col1:'region', op1: 'EQ', val1: 'northeast' }",
                     "type": "object"
                   },
                   "runtime_sort": {
-                    "description": "JSON string representing runtime sort. For example, {\"sortCol1\": \"region\", \"asc1\" : true}. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort).",
+                    "description": "JSON string representing runtime sort.\n{ sortCol1: 'region', asc1 : true, sortCol2 : 'date' }",
                     "type": "object"
                   },
                   "pdf_options": {
@@ -1530,7 +1524,7 @@
                     "$ref": "#/components/schemas/PngOptionsInput"
                   },
                   "runtime_param_override": {
-                    "description": "JSON object for setting values of parameters at runtime. For example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>. You can add multiple keys by incrementing the number at the end, for example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters).",
+                    "description": "JSON object for setting values of parameters in runtime.",
                     "type": "object"
                   }
                 },
@@ -1596,7 +1590,7 @@
     "/api/rest/2.0/report/answer": {
       "post": {
         "operationId": "exportAnswerReport",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nExports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.\n\nRequires `DATADOWNLOADING` (**Can download data**) privilege.\n\n#### Usage guidelines\n\nIn the request body, the GUID or name of the Answer and set `file_format`. The default file format is CSV.\n\nOptionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.\n\nThe `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).  \n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nExports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.\n\nRequires `DATADOWNLOADING` (**Can download data**) privilege.\n\n#### Usage guidelines\n\nIn the request body, the GUID or name of the Answer and set `file_format`. The default file format is CSV.\n\nYou can apply [runtime filter](https://developers.thoughtspot.com/docs/?pageid=runtime-filters#_apply_runtime_filters_via_rest_api_v2_0_endpoints) overrides and [sort columns](https://developers.thoughtspot.com/docs/?pageid=runtime-sort#_rest_api_v2_0) to the data retrieved in the API response.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Reports",
           "9.0.0.cl"
@@ -1738,7 +1732,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PermissionOfPrincipalsResponse"
+                  "type": "object"
                 },
                 "examples": {
                   "example_1": {
@@ -1772,7 +1766,15 @@
                             }
                           ]
                         }
-                      ]
+                      ],
+                      "__args": {
+                        "principals": [
+                          {
+                            "identifier": "test_user",
+                            "type": "USER"
+                          }
+                        ]
+                      }
                     }
                   }
                 }
@@ -1872,7 +1874,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PermissionOfMetadataResponse"
+                  "type": "object"
                 },
                 "examples": {
                   "example_1": {
@@ -1926,7 +1928,16 @@
                             }
                           ]
                         }
-                      ]
+                      ],
+                      "__args": {
+                        "metadata": [
+                          {
+                            "type": "LIVEBOARD",
+                            "identifier": "a62a5bf3-9f16-45b2-a174-7d30b3b577a9"
+                          }
+                        ],
+                        "include_dependent_objects": false
+                      }
                     }
                   }
                 }
@@ -1979,7 +1990,7 @@
     "/api/rest/2.0/searchdata": {
       "post": {
         "operationId": "searchData",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGenerates an Answer from a given data source.\n\nRequires at least view access to the data source object.\n\n#### Usage guidelines\n\nTo search data, specify the data source GUID in `logical_table_identifier`. The data source can be a Worksheet, View, Table, or SQL view.\n\nPass search tokens in the `query_string` attribute in the API request as shown in the following example:\n\n```\n{\n  \"query_string\": \"[sales] by [store]\",\n  \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\",\n}\n```\n\nFor more information about the `query_string` format and data source attribute, see [Search data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_data_api).  \n\nThe `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).  \n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGenerates an Answer from a given data source.\n\nRequires at least view access to the data source.\n\n#### Usage guidelines\n\nTo generate a new Answer, specify the data source GUID. The data source can be a Worksheet, View, Table, or SQL view.\n\nPass search tokens in the `query_string` attribute in the API request as shown in the following example. For more information passing search query string in API requests, see [`Components of a search query`](https://developers.thoughtspot.com/docs/?pageid=search-data-api#components).  \n```\n{\n  \"query_string\": \"[sales] by [store]\",\n  \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\",\n}\n```\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Data",
           "9.0.0.cl"
@@ -1991,11 +2002,11 @@
                 "type": "object",
                 "properties": {
                   "query_string": {
-                    "description": "Query string with search tokens. For example, <code>[Sales][Region]</code>. See [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_data_api)",
+                    "description": "Data search query string token.",
                     "type": "string"
                   },
                   "logical_table_identifier": {
-                    "description": "GUID of the data source object, such as a Worksheet, View, or Table. You can find the GUID of a data object from the UI or via API. See [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_query) for more details.",
+                    "description": "GUID of the data source object, such as a Worksheet, View, or Table.",
                     "type": "string"
                   },
                   "data_format": {
@@ -2019,15 +2030,15 @@
                     "format": "int32"
                   },
                   "runtime_filter": {
-                    "description": "JSON object with representing filter condition to apply filters at runtime. For example, <code> {\"col1\": \"item type\", \"op1\": \"EQ\", \"val1\": \"Bags\"} </code>. You can add multiple keys by incrementing the number at the end, for example, col2, op2, val2, and col3, op3, val3. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_filters).",
+                    "description": "JSON object representing filter condition to filter the data.",
                     "type": "object"
                   },
                   "runtime_sort": {
-                    "description": "JSON object representing columns to sort data at runtime. For example, <code> {\"sortCol1\": \"sales\", \"asc1\": true} </code>. You can add multiple keys by incrementing the number at the end, for example, sortCol1, asc2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort).",
+                    "description": "JSON object representing columns to sort the data.",
                     "type": "object"
                   },
                   "runtime_param_override": {
-                    "description": "JSON object for setting values of parameters at runtime. For example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>. You can add multiple keys by incrementing the number at the end, for example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters).",
+                    "description": "JSON object for setting values of parameters in runtime.",
                     "type": "object"
                   }
                 },
@@ -2098,7 +2109,7 @@
     "/api/rest/2.0/metadata/liveboard/data": {
       "post": {
         "operationId": "fetchLiveboardData",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGets data from a Liveboard object and its visualization.  \n\nRequires at least view access to the Liveboard.\n\n#### Usage guidelines\n\nIn the request body, specify the GUID or name of the Liveboard. To get data for specific visualizations, add the GUIDs or names of the visualizations in the API request.\n\nTo include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes. If the new Liveboard experience mode, the transient content includes ad hoc changes to visualizations such as sorting, toggling of legends, and data drill down.\n\nFor more information, and see [Liveboard data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_fetch_liveboard_data_api).  \n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGets data from a Liveboard object and its visualization.  \n\nRequires at least view access to the Liveboard.\n\n#### Usage guidelines\n\nIn the request body, specify the GUID or name of the Liveboard. To get data for specific visualizations, add the GUIDs or names of the visualizations in the API request.\n\nTo include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes. If the new Liveboard experience mode, the transient content includes ad hoc changes to visualizations such as sorting, toggling of legends, and data drill down.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Data",
           "9.0.0.cl"
@@ -2145,15 +2156,15 @@
                     "format": "int32"
                   },
                   "runtime_filter": {
-                    "description": "JSON object with representing filter condition to apply filters at runtime. For example, <code> {\"col1\": \"item type\", \"op1\": \"EQ\", \"val1\": \"Bags\"} </code>. You can add multiple keys by incrementing the number at the end, for example, col2, op2, val2, and col3, op3, val3. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_filters).",
+                    "description": "JSON object representing filter condition to filter the data.",
                     "type": "object"
                   },
                   "runtime_sort": {
-                    "description": "JSON object representing columns to sort data at runtime. For example, <code> {\"sortCol1\": \"sales\", \"asc1\": true} </code>. You can add multiple keys by incrementing the number at the end, for example, sortCol1, asc2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort).",
+                    "description": "JSON object representing columns to sort the data.",
                     "type": "object"
                   },
                   "runtime_param_override": {
-                    "description": "JSON object for setting values of parameters at runtime. For example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>. You can add multiple keys by incrementing the number at the end, for example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters).",
+                    "description": "JSON object for setting values of parameters in runtime.",
                     "type": "object"
                   }
                 },
@@ -2223,7 +2234,7 @@
     "/api/rest/2.0/metadata/answer/data": {
       "post": {
         "operationId": "fetchAnswerData",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nFetches data from a saved Answer.\n\nRequires at least view access to the saved Answer.\n\nThe `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](For more information, and see [Liveboard data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_apis).  \n).  \n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nFetches data from a saved Answer.\n\nRequires at least view access to the saved Answer.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Data",
           "9.0.0.cl"
@@ -2259,15 +2270,15 @@
                     "format": "int32"
                   },
                   "runtime_filter": {
-                    "description": "JSON object with representing filter condition to apply filters at runtime. For example, <code> {\"col1\": \"item type\", \"op1\": \"EQ\", \"val1\": \"Bags\"} </code>. You can add multiple keys by incrementing the number at the end, for example, col2, op2, val2, and col3, op3, val3. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_filters).",
+                    "description": "JSON object representing filter condition to filter the data.",
                     "type": "object"
                   },
                   "runtime_sort": {
-                    "description": "JSON object representing columns to sort data at runtime. For example, <code> {\"sortCol1\": \"sales\", \"asc1\": true} </code>. You can add multiple keys by incrementing the number at the end, for example, sortCol1, asc2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort).",
+                    "description": "JSON object representing columns to sort the data.",
                     "type": "object"
                   },
                   "runtime_param_override": {
-                    "description": "JSON object for setting values of parameters at runtime. For example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>. You can add multiple keys by incrementing the number at the end, for example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters).",
+                    "description": "JSON object for setting values of parameters in runtime.",
                     "type": "object"
                   }
                 },
@@ -2337,7 +2348,7 @@
     "/api/rest/2.0/logs/fetch": {
       "post": {
         "operationId": "fetchLogs",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nFetches security audit logs.  \n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n#### Usage guidelines\n\nBy default, the API retrieves logs for the last 24 hours. You can set a custom duration in EPOCH time. Make sure the log duration specified in your API request doesn’t exceed 24 hours. If you must fetch logs for a longer time range, modify the duration and make multiple sequential API requests.\n\nUpon successful execution, the API returns logs with the following information:\n* timestamp of the event\n* event ID\n* event type\n* name and GUID of the user\n* IP address of ThoughtSpot instance\n\nFor more information about security events returned in the API response, see [Security events](https://developers.thoughtspot.com/docs/logs-api#_security_events).\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nFetches security audit logs.  \n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n#### Usage guidelines\n\nBy default, the API retrieves logs for the last 24 hours. You can set a custom duration in EPOCH time. Make sure the log duration specified in your API request doesn’t exceed 24 hours. If you must fetch logs for a longer time range, modify the duration and make multiple sequential API requests.\n\nUpon successful execution, the API returns logs with the following information:\n* timestamp of the event\n* event ID\n* event type\n* name and GUID of the user\n* IP address of ThoughtSpot instance\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Log",
           "9.0.0.cl"
@@ -2815,7 +2826,7 @@
                 "type": "object",
                 "properties": {
                   "role_identifiers": {
-                    "description": "unique ID or name of the Roles",
+                    "description": "unique ID or name of the roles",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -2836,7 +2847,7 @@
                     }
                   },
                   "privileges": {
-                    "description": "Privileges assigned to the Role. See [Documentation](https://developers.thoughtspot.com/docs/rbac#_role_categories_and_privileges)for supported roles privileges.",
+                    "description": "Privileges assigned to the Role.",
                     "type": "array",
                     "items": {
                       "type": "string",
@@ -2872,16 +2883,12 @@
                         "AUTHENTICATION_ADMINISTRATION",
                         "BILLING_INFO_ADMINISTRATION",
                         "PREVIEW_THOUGHTSPOT_SAGE",
-                        "LIVEBOARD_VERIFIER",
-                        "CAN_MANAGE_CUSTOM_CALENDAR",
-                        "CAN_CREATE_OR_EDIT_CONNECTIONS",
-                        "CAN_CONFIGURE_CONNECTIONS",
-                        "CAN_MANAGE_WORKSHEET_VIEWS_TABLES"
+                        "LIVEBOARD_VERIFIER"
                       ]
                     }
                   },
                   "deprecated": {
-                    "description": "Indicates whether the Role is deprecated.",
+                    "description": "Indicates whether the role is deprecated.",
                     "type": "boolean",
                     "deprecated": true,
                     "nullable": true
@@ -2893,7 +2900,7 @@
                     "nullable": true
                   },
                   "shared_via_connection": {
-                    "description": "Indicates whether the Role is shared via connection",
+                    "description": "Indicates whether the role is shared via connection",
                     "type": "boolean",
                     "deprecated": true,
                     "nullable": true
@@ -3262,13 +3269,8 @@
                     }
                   },
                   "jwt_user_options": {
-                    "description": "   JWT user options to create a JWT token given the payload.\n   \n\n*Deprecated from 9.11.0.cl : Replaced by user_parameters* ",
-                    "$ref": "#/components/schemas/JWT_User_Options",
-                    "deprecated": true
-                  },
-                  "user_parameters": {
-                    "description": "User Parameters to be set via JWT Token. <br/>  <span class=\"since-beta-tag\">Version: 9.11.0.cl or later</span>",
-                    "$ref": "#/components/schemas/User_Parameter_Options"
+                    "description": "JWT user options to create a JWT token given the payload.",
+                    "$ref": "#/components/schemas/JWT_User_Options"
                   }
                 },
                 "required": [
@@ -3397,13 +3399,8 @@
                     }
                   },
                   "jwt_user_options": {
-                    "description": "   JWT user options to create a JWT token given the payload.\n   \n\n*Deprecated from 9.11.0.cl : Replaced by user_parameters* ",
-                    "$ref": "#/components/schemas/JWT_User_Options_Full",
-                    "deprecated": true
-                  },
-                  "user_parameters": {
-                    "description": "User Parameters to be set via JWT Token. <br/>  <span class=\"since-beta-tag\">Version: 9.11.0.cl or later</span>",
-                    "$ref": "#/components/schemas/User_Parameter_Options"
+                    "description": "JWT user options to create a JWT token given the payload.",
+                    "$ref": "#/components/schemas/JWT_User_Options_Full"
                   }
                 },
                 "required": [
@@ -4430,7 +4427,7 @@
     "/api/rest/2.0/users/activate": {
       "post": {
         "operationId": "activateUser",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.7.0.cl or later</span>\n\nActivates a deactivated user account.\n\nRequires `ADMINISTRATION` (**Can administer Thoughtspot**) privilege.\n\nTo activate an inactive user account, the API request body must include the following information:\n\n- Username or the GUID of the user account.\n- Auth token generated for the deactivated user. The auth token is sent in the API response when a user is deactivated.\n- Password for the user account.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.7.0.cl or later</span>\n\nActivates a deactivated user account.\n\nRequires `ADMINISTRATION` (**Can administer Thoughtspot**) privilege.\n\nTo activate an inactive user account, the API request body must include the following information:\n\n* Username or the GUID of the user account.\n* Auth token generated for the deactivated user. The auth token is sent in the API response when a user is deactivated.\n* Password for the user account.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Users",
           "9.7.0.cl"
@@ -4522,7 +4519,7 @@
     "/api/rest/2.0/users/deactivate": {
       "post": {
         "operationId": "deactivateUser",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.7.0.cl or later</span>\n\nDeactivates a user account.\n\nRequires `ADMINISTRATION` (**Can administer Thoughtspot**) privilege.\n\nTo deactivate a user account, the API request body must include the following information:\n\n- Username or the GUID of the user account\n- Base URL of the ThoughtSpot instance\n\nIf the API request is successful, ThoughtSpot returns the activation URL in the response. The activation URL is valid for 14 days and can be used to re-activate the account and reset the password of the deactivated account.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.7.0.cl or later</span>\n\nDeactivates a user account.\n\nRequires `ADMINISTRATION` (**Can administer Thoughtspot**) privilege.\n\nTo deactivate a user account, the API request body must include the following information:\n\n* Username or the GUID of the user account\n* Base URL of the ThoughtSpot instance\n\nIf the API request is successful, ThoughtSpot returns the activation URL in the response. The activation URL is valid for 14 days and can be used to re-activate the account and reset the password of the deactivated account.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Users",
           "9.7.0.cl"
@@ -5643,7 +5640,7 @@
                     ]
                   },
                   "role_identifiers": {
-                    "description": "Role identifiers of the Roles that should be assigned to the group.",
+                    "description": "Role identifiers of the roles that should be assigned to the group.",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -6037,18 +6034,6 @@
                       "V1",
                       "V2"
                     ]
-                  },
-                  "export_dependent": {
-                    "description": "Indicates whether to export table while exporting connection.",
-                    "default": false,
-                    "type": "boolean",
-                    "nullable": true
-                  },
-                  "export_connection_as_dependent": {
-                    "description": "Indicates whether to export connection as dependent while exporting table/worksheet/answer/liveboard.\nThis will only be active when export_associated is true.",
-                    "default": false,
-                    "type": "boolean",
-                    "nullable": true
                   }
                 },
                 "required": [
@@ -6424,7 +6409,7 @@
     "/api/rest/2.0/vcs/git/config/create": {
       "post": {
         "operationId": "createConfig",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nAllows you to connect a ThoughtSpot instance to a Git repository.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\nYou can use this API endpoint to connect your ThoughtSpot development and production environments to the development and production branches of a Git repository.\n\nBefore using this endpoint to connect your ThoughtSpot instance to a Git repository, check the following prerequisites:\n\n* You have a Git repository. If you are using GitHub, make sure you have a valid account and an access token to connect ThoughtSpot to GitHub. For information about generating a token, see [GitHub Documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).\n\n* Your access token has `repo` scope that grants full access to public and private repositories.\n* Your Git repository has a branch that can be configured as a default branch in ThoughtSpot.\n\nFor more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).\n\n**Note**: ThoughtSpot supports only GitHub / GitHub Enterprise for CI/CD.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nAllows you to connect a ThoughtSpot instance to a Git repository.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\nYou can use this API endpoint to connect your ThoughtSpot development and production environments to the development and production branches of a Git repository.\n\nBefore using this endpoint to connect your ThoughtSpot instance to a Git repository, check the following prerequisites:\n\n* You have a Git repository. If you are using GitHub, make sure you have a valid account and an access token to connect ThoughtSpot to GitHub. For information about generating a token, see [GitHub Documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).\n\n* Your access token has `repo` scope that grants full access to public and private repositories.\n* Your Git repository has a branch that can be configured as a default branch in ThoughtSpot.\n\nFor more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Version Control",
           "9.2.0.cl"
@@ -6462,6 +6447,11 @@
                     "description": "Name of the remote branch where objects from this Thoughtspot instance will be versioned. <br/>  <span class=\"since-beta-tag\">Version: 9.7.0.cl or later</span>",
                     "type": "string"
                   },
+                  "default_branch_name": {
+                    "description": "   Use commit_branch_name instead.\n   \n\nName of the remote branch where objects from this Thoughtspot instance will be versioned.\n\n\n   \n\n*Deprecated from 10.0.0.cl : Replaced by commit_branch_name* ",
+                    "type": "string",
+                    "deprecated": true
+                  },
                   "enable_guid_mapping": {
                     "description": "Maintain mapping of guid for the deployment to an instance <br/>  <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>",
                     "default": true,
@@ -6471,6 +6461,11 @@
                   "configuration_branch_name": {
                     "description": "   Name of the branch where the configuration files related to operations between Thoughtspot and version control repo should be maintained.\n   \n\nNote: If no branch name is specified, then by default, ts_config_files branch is considered. Ensure this branch exists before configuration. <br/>  <span class=\"since-beta-tag\">Version: 9.7.0.cl or later</span>",
                     "type": "string"
+                  },
+                  "guid_mapping_branch_name": {
+                    "description": "   Use configuration_branch_name instead.\n   \n\nName of the branch where the configuration files related to operations between Thoughtspot and version control repo should be maintained.\n\n\n   \n\nNote: If no branch name is specified, then by default, ts_config_files branch is considered. Ensure this branch exists before configuration. \n\n\n   \n\n*Deprecated from 10.0.0.cl : Replaced by configuration_branch_name*  <br/>  <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>",
+                    "type": "string",
+                    "deprecated": true
                   }
                 },
                 "required": [
@@ -6575,6 +6570,11 @@
                     "description": "Name of the remote branch where objects from this Thoughtspot instance will be versioned. <br/>  <span class=\"since-beta-tag\">Version: 9.7.0.cl or later</span>",
                     "type": "string"
                   },
+                  "default_branch_name": {
+                    "description": "   Use commit_branch_name instead.\n   \n\nName of the remote branch where objects from this Thoughtspot instance will be versioned.\n\n\n   \n\n*Deprecated from 10.0.0.cl : Replaced by commit_branch_name* ",
+                    "type": "string",
+                    "deprecated": true
+                  },
                   "enable_guid_mapping": {
                     "description": "Maintain mapping of guid for the deployment to an instance <br/>  <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>",
                     "type": "boolean",
@@ -6583,6 +6583,11 @@
                   "configuration_branch_name": {
                     "description": "Name of the branch where the configuration files related to operations between Thoughtspot and version control repo should be maintained. <br/>  <span class=\"since-beta-tag\">Version: 9.7.0.cl or later</span>",
                     "type": "string"
+                  },
+                  "guid_mapping_branch_name": {
+                    "description": "   Use configuration_branch_name instead.\n   \n\nName of the branch where the configuration files related to operations between Thoughtspot and version control repo should be maintained.\n\n\n   \n\n*Deprecated from 10.0.0.cl : Replaced by configuration_branch_name*  <br/>  <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>",
+                    "type": "string",
+                    "deprecated": true
                   }
                 }
               }
@@ -7517,7 +7522,11 @@
           "200": {
             "description": "Export metadata changes.",
             "content": {
-              "application/octet-stream": {}
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
             }
           },
           "400": {
@@ -7578,15 +7587,15 @@
                 "type": "object",
                 "properties": {
                   "name": {
-                    "description": "Unique name of the Role.",
+                    "description": "Unique name of the role.",
                     "type": "string"
                   },
                   "description": {
-                    "description": "Description of the Role.",
+                    "description": "Description of the role.",
                     "type": "string"
                   },
                   "privileges": {
-                    "description": "Privileges granted to the Role. See [Documentation](https://developers.thoughtspot.com/docs/rbac#_role_categories_and_privileges)for supported roles privileges.",
+                    "description": "Privileges granted to the role.",
                     "type": "array",
                     "items": {
                       "type": "string",
@@ -7612,10 +7621,7 @@
                         "BILLING_INFO_ADMINISTRATION",
                         "CONTROL_TRUSTED_AUTH",
                         "TAGMANAGEMENT",
-                        "LIVEBOARD_VERIFIER",
-                        "CAN_MANAGE_CUSTOM_CALENDAR",
-                        "CAN_CREATE_OR_EDIT_CONNECTIONS",
-                        "CAN_MANAGE_WORKSHEET_VIEWS_TABLES"
+                        "LIVEBOARD_VERIFIER"
                       ]
                     }
                   }
@@ -7702,11 +7708,11 @@
                     "type": "string"
                   },
                   "description": {
-                    "description": "Description of the Role.",
+                    "description": "Description of the Role",
                     "type": "string"
                   },
                   "privileges": {
-                    "description": "Privileges granted to the role. See [Documentation](https://developers.thoughtspot.com/docs/rbac#_role_categories_and_privileges)for supported roles privileges.",
+                    "description": "Privileges granted to the role.",
                     "type": "array",
                     "items": {
                       "type": "string",
@@ -7732,10 +7738,7 @@
                         "BILLING_INFO_ADMINISTRATION",
                         "CONTROL_TRUSTED_AUTH",
                         "TAGMANAGEMENT",
-                        "LIVEBOARD_VERIFIER",
-                        "CAN_MANAGE_CUSTOM_CALENDAR",
-                        "CAN_CREATE_OR_EDIT_CONNECTIONS",
-                        "CAN_MANAGE_WORKSHEET_VIEWS_TABLES"
+                        "LIVEBOARD_VERIFIER"
                       ]
                     }
                   }
@@ -7756,7 +7759,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique ID or name of the Role."
+            "description": "Unique ID or name of the role."
           }
         ],
         "responses": {
@@ -7829,7 +7832,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique ID or name of the Role."
+            "description": "Unique ID or name of the role."
           }
         ],
         "responses": {
@@ -10754,10 +10757,6 @@
           "extended_preferences": {
             "type": "object",
             "description": "Preferences for the user"
-          },
-          "user_parameters": {
-            "type": "object",
-            "description": "User Parameters which are specified for the user via JWToken"
           }
         }
       },
@@ -11264,7 +11263,7 @@
               "USER_GROUP",
               "LOGICAL_RELATIONSHIP"
             ],
-            "description": "Type of metadata. Required if the name of the object is set as identifier. This attribute is optional when the object GUID is specified as identifier.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view.\n5. CONNECTION for creating or modify data connections.\n6. TAG for tag objects.\n7. USER for user objects.\n8. USER_GROUP for group objects.\n9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values"
+            "description": "Type of metadata.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view.\n5. CONNECTION for creating or modify data connections.\n6. TAG for tag objects.\n7. USER for user objects.\n8. USER_GROUP for group objects.\n9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values"
           }
         }
       },
@@ -11315,7 +11314,7 @@
               "USER_GROUP",
               "LOGICAL_RELATIONSHIP"
             ],
-            "description": "Type of metadata. Required if the name of the object is set as identifier. This attribute is optional when the object GUID is specified as identifier.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view\n4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view\n5. CONNECTION for connection objects\n6. TAG for tag objects\n7. USER for user objects\n8. USER_GROUP for group objects\n9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values."
+            "description": "Type of metadata.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view\n4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view\n5. CONNECTION for connection objects\n6. TAG for tag objects\n7. USER for user objects\n8. USER_GROUP for group objects\n9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values."
           }
         }
       },
@@ -11546,22 +11545,6 @@
             "type": "boolean",
             "default": false,
             "description": "Indicates whether to include a page with all applied filters."
-          }
-        }
-      },
-      "PermissionOfPrincipalsResponse": {
-        "type": "object",
-        "properties": {
-          "principal_permission_details": {
-            "type": "object"
-          }
-        }
-      },
-      "PermissionOfMetadataResponse": {
-        "type": "object",
-        "properties": {
-          "metadata_permission_details": {
-            "type": "object"
           }
         }
       },
@@ -12248,11 +12231,7 @@
                 "AUTHENTICATION_ADMINISTRATION",
                 "BILLING_INFO_ADMINISTRATION",
                 "PREVIEW_THOUGHTSPOT_SAGE",
-                "LIVEBOARD_VERIFIER",
-                "CAN_MANAGE_CUSTOM_CALENDAR",
-                "CAN_CREATE_OR_EDIT_CONNECTIONS",
-                "CAN_CONFIGURE_CONNECTIONS",
-                "CAN_MANAGE_WORKSHEET_VIEWS_TABLES"
+                "LIVEBOARD_VERIFIER"
               ]
             },
             "description": "Privileges granted to the role."
@@ -12622,175 +12601,6 @@
           }
         },
         "description": "Metadata objects."
-      },
-      "User_Parameter_Options": {
-        "type": "object",
-        "properties": {
-          "objects": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/User_Object"
-            }
-          },
-          "runtime_filters": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/User_Runtime_Filters"
-            }
-          },
-          "runtime_sorts": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/User_Runtime_Sorts"
-            }
-          },
-          "parameters": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/User_Parameters"
-            }
-          }
-        },
-        "description": "User properties runtime_filters,runtime_sorts,parameters applicable to LOGICAL_TABLE(Worksheet)"
-      },
-      "User_Object": {
-        "type": "object",
-        "required": [
-          "identifier"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "LIVEBOARD",
-              "ANSWER",
-              "LOGICAL_TABLE"
-            ],
-            "description": "Type of object."
-          },
-          "identifier": {
-            "type": "string",
-            "description": "Unique name/id of the object."
-          }
-        },
-        "description": "Objects to apply the User_Object."
-      },
-      "User_Runtime_Filters": {
-        "type": "object",
-        "required": [
-          "column_name",
-          "values",
-          "operator"
-        ],
-        "properties": {
-          "column_name": {
-            "type": "string",
-            "description": "The column name to apply filter."
-          },
-          "values": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Value of the filters."
-          },
-          "operator": {
-            "type": "string",
-            "enum": [
-              "EQ",
-              "GE",
-              "GT",
-              "IN",
-              "LE",
-              "LT",
-              "NE",
-              "BEGINS_WITH",
-              "BW",
-              "BW_INC",
-              "BW_INC_MAX",
-              "BW_INC_MIN",
-              "CONTAINS",
-              "ENDS_WITH"
-            ],
-            "description": "Operator value. Example: EQ"
-          },
-          "persist": {
-            "type": "boolean",
-            "default": false,
-            "description": "Flag to persist the runtime filters."
-          },
-          "objects": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/User_Object"
-            },
-            "description": "Object to apply the runtime filter."
-          }
-        },
-        "description": "Objects to apply the User_Runtime_Filters."
-      },
-      "User_Runtime_Sorts": {
-        "type": "object",
-        "properties": {
-          "column_name": {
-            "type": "string",
-            "description": "The column name to apply filter."
-          },
-          "order": {
-            "type": "string",
-            "enum": [
-              "ASC",
-              "DESC"
-            ],
-            "description": "Order for the sort."
-          },
-          "persist": {
-            "type": "boolean",
-            "default": false,
-            "description": "Flag to persist the runtime sorts."
-          },
-          "objects": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/User_Object"
-            },
-            "description": "Object to apply the runtime sort."
-          }
-        },
-        "description": "Objects to apply the User_Runtime_Sorts."
-      },
-      "User_Parameters": {
-        "type": "object",
-        "required": [
-          "name",
-          "values"
-        ],
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "The name of the parameter."
-          },
-          "values": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "The array of values."
-          },
-          "persist": {
-            "type": "boolean",
-            "default": false,
-            "description": "Flag to persist the parameters."
-          },
-          "objects": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/User_Object"
-            },
-            "description": "Object to apply the runtime parameter."
-          }
-        },
-        "description": "Objects to apply the Runtime_Parameters."
       },
       "Token": {
         "type": "object",
@@ -13551,10 +13361,7 @@
                 "BILLING_INFO_ADMINISTRATION",
                 "CONTROL_TRUSTED_AUTH",
                 "TAGMANAGEMENT",
-                "LIVEBOARD_VERIFIER",
-                "CAN_MANAGE_CUSTOM_CALENDAR",
-                "CAN_CREATE_OR_EDIT_CONNECTIONS",
-                "CAN_MANAGE_WORKSHEET_VIEWS_TABLES"
+                "LIVEBOARD_VERIFIER"
               ]
             },
             "description": "Privileges granted to the role."
