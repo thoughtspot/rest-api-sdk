@@ -182,10 +182,6 @@ export class User {
     * Preferences for the user
     */
     'extended_preferences'?: any;
-    /**
-    * User Parameters which are specified for the user via JWToken
-    */
-    'user_parameters'?: any;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -445,12 +441,6 @@ export class User {
         {
             "name": "extended_preferences",
             "baseName": "extended_preferences",
-            "type": "any",
-            "format": ""
-        },
-        {
-            "name": "user_parameters",
-            "baseName": "user_parameters",
             "type": "any",
             "format": ""
         }    ];

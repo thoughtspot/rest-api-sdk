@@ -116,8 +116,6 @@ export * from '../models/ParametersListItemInput';
 export * from '../models/PdfOptions';
 export * from '../models/PdfOptionsInput';
 export * from '../models/PermissionInput';
-export * from '../models/PermissionOfMetadataResponse';
-export * from '../models/PermissionOfPrincipalsResponse';
 export * from '../models/PermissionsMetadataTypeInput';
 export * from '../models/PngOptionsInput';
 export * from '../models/PrincipalsInput';
@@ -189,11 +187,6 @@ export * from '../models/UpdateUserRequest';
 export * from '../models/User';
 export * from '../models/UserGroup';
 export * from '../models/UserGroupResponse';
-export * from '../models/UserObject';
-export * from '../models/UserParameterOptions';
-export * from '../models/UserParameters';
-export * from '../models/UserRuntimeFilters';
-export * from '../models/UserRuntimeSorts';
 export * from '../models/ValidateMergeRequest';
 
 import { APIKey } from '../models/APIKey';
@@ -259,7 +252,7 @@ import { ErrorResponse } from '../models/ErrorResponse';
 import { ExcludeMetadataListItemInput , ExcludeMetadataListItemInputTypeEnum   } from '../models/ExcludeMetadataListItemInput';
 import { ExportAnswerReportRequest , ExportAnswerReportRequestFileFormatEnum      } from '../models/ExportAnswerReportRequest';
 import { ExportLiveboardReportRequest   , ExportLiveboardReportRequestFileFormatEnum        } from '../models/ExportLiveboardReportRequest';
-import { ExportMetadataTMLRequest   , ExportMetadataTMLRequestEdocFormatEnum  , ExportMetadataTMLRequestExportSchemaVersionEnum     } from '../models/ExportMetadataTMLRequest';
+import { ExportMetadataTMLRequest   , ExportMetadataTMLRequestEdocFormatEnum  , ExportMetadataTMLRequestExportSchemaVersionEnum   } from '../models/ExportMetadataTMLRequest';
 import { ExportMetadataTypeInput, ExportMetadataTypeInputTypeEnum    } from '../models/ExportMetadataTypeInput';
 import { FavoriteMetadataInput , FavoriteMetadataInputTypeEnum   } from '../models/FavoriteMetadataInput';
 import { FavoriteMetadataItem  , FavoriteMetadataItemTypeEnum   } from '../models/FavoriteMetadataItem';
@@ -314,8 +307,6 @@ import { ParametersListItemInput } from '../models/ParametersListItemInput';
 import { PdfOptions       , PdfOptionsPageSizeEnum    } from '../models/PdfOptions';
 import { PdfOptionsInput    , PdfOptionsInputPageOrientationEnum     } from '../models/PdfOptionsInput';
 import { PermissionInput , PermissionInputShareModeEnum   } from '../models/PermissionInput';
-import { PermissionOfMetadataResponse } from '../models/PermissionOfMetadataResponse';
-import { PermissionOfPrincipalsResponse } from '../models/PermissionOfPrincipalsResponse';
 import { PermissionsMetadataTypeInput, PermissionsMetadataTypeInputTypeEnum    } from '../models/PermissionsMetadataTypeInput';
 import { PngOptionsInput } from '../models/PngOptionsInput';
 import { PrincipalsInput , PrincipalsInputTypeEnum   } from '../models/PrincipalsInput';
@@ -384,14 +375,9 @@ import { UpdateSystemConfigRequest } from '../models/UpdateSystemConfigRequest';
 import { UpdateTagRequest } from '../models/UpdateTagRequest';
 import { UpdateUserGroupRequest    , UpdateUserGroupRequestPrivilegesEnum   , UpdateUserGroupRequestTypeEnum   , UpdateUserGroupRequestVisibilityEnum   , UpdateUserGroupRequestOperationEnum   } from '../models/UpdateUserGroupRequest';
 import { UpdateUserRequest  , UpdateUserRequestVisibilityEnum   , UpdateUserRequestAccountStatusEnum     , UpdateUserRequestAccountTypeEnum      , UpdateUserRequestOperationEnum  , UpdateUserRequestPreferredLocaleEnum     } from '../models/UpdateUserRequest';
-import { User   , UserVisibilityEnum         , UserAccountTypeEnum  , UserAccountStatusEnum                  , UserParentTypeEnum                 } from '../models/User';
+import { User   , UserVisibilityEnum         , UserAccountTypeEnum  , UserAccountStatusEnum                  , UserParentTypeEnum                } from '../models/User';
 import { UserGroup } from '../models/UserGroup';
 import { UserGroupResponse                     , UserGroupResponseParentTypeEnum      , UserGroupResponseTypeEnum   , UserGroupResponseVisibilityEnum    } from '../models/UserGroupResponse';
-import { UserObject, UserObjectTypeEnum    } from '../models/UserObject';
-import { UserParameterOptions } from '../models/UserParameterOptions';
-import { UserParameters } from '../models/UserParameters';
-import { UserRuntimeFilters  , UserRuntimeFiltersOperatorEnum     } from '../models/UserRuntimeFilters';
-import { UserRuntimeSorts , UserRuntimeSortsOrderEnum     } from '../models/UserRuntimeSorts';
 import { ValidateMergeRequest } from '../models/ValidateMergeRequest';
 
 /* tslint:disable:no-unused-variable */
@@ -525,9 +511,6 @@ let enumsMap: Set<string> = new Set<string>([
     "UserGroupResponseParentTypeEnum",
     "UserGroupResponseTypeEnum",
     "UserGroupResponseVisibilityEnum",
-    "UserObjectTypeEnum",
-    "UserRuntimeFiltersOperatorEnum",
-    "UserRuntimeSortsOrderEnum",
 ]);
 
 let typeMap: {[index: string]: any} = {
@@ -649,8 +632,6 @@ let typeMap: {[index: string]: any} = {
     "PdfOptions": PdfOptions,
     "PdfOptionsInput": PdfOptionsInput,
     "PermissionInput": PermissionInput,
-    "PermissionOfMetadataResponse": PermissionOfMetadataResponse,
-    "PermissionOfPrincipalsResponse": PermissionOfPrincipalsResponse,
     "PermissionsMetadataTypeInput": PermissionsMetadataTypeInput,
     "PngOptionsInput": PngOptionsInput,
     "PrincipalsInput": PrincipalsInput,
@@ -722,11 +703,6 @@ let typeMap: {[index: string]: any} = {
     "User": User,
     "UserGroup": UserGroup,
     "UserGroupResponse": UserGroupResponse,
-    "UserObject": UserObject,
-    "UserParameterOptions": UserParameterOptions,
-    "UserParameters": UserParameters,
-    "UserRuntimeFilters": UserRuntimeFilters,
-    "UserRuntimeSorts": UserRuntimeSorts,
     "ValidateMergeRequest": ValidateMergeRequest,
 }
 

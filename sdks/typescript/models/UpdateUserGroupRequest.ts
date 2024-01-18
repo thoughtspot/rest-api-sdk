@@ -50,7 +50,7 @@ export class UpdateUserGroupRequest {
     */
     'visibility'?: UpdateUserGroupRequestVisibilityEnum;
     /**
-    * Role identifiers of the Roles that should be assigned to the group.
+    * Role identifiers of the roles that should be assigned to the group.
     */
     'role_identifiers'?: Array<string>;
     /**

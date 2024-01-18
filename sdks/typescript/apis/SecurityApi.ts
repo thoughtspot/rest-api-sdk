@@ -12,8 +12,6 @@ import { AssignChangeAuthorRequest } from '../models/AssignChangeAuthorRequest';
 import { ErrorResponse } from '../models/ErrorResponse';
 import { FetchPermissionsOfPrincipalsRequest } from '../models/FetchPermissionsOfPrincipalsRequest';
 import { FetchPermissionsOnMetadataRequest } from '../models/FetchPermissionsOnMetadataRequest';
-import { PermissionOfMetadataResponse } from '../models/PermissionOfMetadataResponse';
-import { PermissionOfPrincipalsResponse } from '../models/PermissionOfPrincipalsResponse';
 import { ShareMetadataRequest } from '../models/ShareMetadataRequest';
 
 /**
@@ -285,13 +283,13 @@ export class SecurityApiResponseProcessor {
      * @params response Response returned by the server for a request to fetchPermissionsOfPrincipals
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async fetchPermissionsOfPrincipals(response: ResponseContext): Promise<PermissionOfPrincipalsResponse > {
+     public async fetchPermissionsOfPrincipals(response: ResponseContext): Promise<any > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: PermissionOfPrincipalsResponse = ObjectSerializer.deserialize(
+            const body: any = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "PermissionOfPrincipalsResponse", ""
-            ) as PermissionOfPrincipalsResponse;
+                "any", ""
+            ) as any;
             return body;
         }
         if (isCodeInRange("400", response.httpStatusCode)) {
@@ -325,10 +323,10 @@ export class SecurityApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: PermissionOfPrincipalsResponse = ObjectSerializer.deserialize(
+            const body: any = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "PermissionOfPrincipalsResponse", ""
-            ) as PermissionOfPrincipalsResponse;
+                "any", ""
+            ) as any;
             return body;
         }
 
@@ -342,13 +340,13 @@ export class SecurityApiResponseProcessor {
      * @params response Response returned by the server for a request to fetchPermissionsOnMetadata
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async fetchPermissionsOnMetadata(response: ResponseContext): Promise<PermissionOfMetadataResponse > {
+     public async fetchPermissionsOnMetadata(response: ResponseContext): Promise<any > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: PermissionOfMetadataResponse = ObjectSerializer.deserialize(
+            const body: any = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "PermissionOfMetadataResponse", ""
-            ) as PermissionOfMetadataResponse;
+                "any", ""
+            ) as any;
             return body;
         }
         if (isCodeInRange("400", response.httpStatusCode)) {
@@ -382,10 +380,10 @@ export class SecurityApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: PermissionOfMetadataResponse = ObjectSerializer.deserialize(
+            const body: any = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "PermissionOfMetadataResponse", ""
-            ) as PermissionOfMetadataResponse;
+                "any", ""
+            ) as any;
             return body;
         }
 

@@ -110,8 +110,6 @@ apiInstance.exportMetadataTML(
     export_fqn: false,
     edoc_format: "JSON",
     export_schema_version: "V1",
-    export_dependent: false,
-    export_connection_as_dependent: false,
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);

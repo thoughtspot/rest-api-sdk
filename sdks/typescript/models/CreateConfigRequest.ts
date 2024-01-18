@@ -38,6 +38,10 @@ export class CreateConfigRequest {
     */
     'commit_branch_name'?: string;
     /**
+    *    Use commit_branch_name instead.      Name of the remote branch where objects from this Thoughtspot instance will be versioned.        *Deprecated from 10.0.0.cl : Replaced by commit_branch_name* 
+    */
+    'default_branch_name'?: string;
+    /**
     * Maintain mapping of guid for the deployment to an instance    Version: 9.4.0.cl or later 
     */
     'enable_guid_mapping'?: boolean | null;
@@ -45,6 +49,10 @@ export class CreateConfigRequest {
     *    Name of the branch where the configuration files related to operations between Thoughtspot and version control repo should be maintained.      Note: If no branch name is specified, then by default, ts_config_files branch is considered. Ensure this branch exists before configuration.    Version: 9.7.0.cl or later 
     */
     'configuration_branch_name'?: string;
+    /**
+    *    Use configuration_branch_name instead.      Name of the branch where the configuration files related to operations between Thoughtspot and version control repo should be maintained.        Note: If no branch name is specified, then by default, ts_config_files branch is considered. Ensure this branch exists before configuration.         *Deprecated from 10.0.0.cl : Replaced by configuration_branch_name*     Version: 9.4.0.cl or later 
+    */
+    'guid_mapping_branch_name'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -86,6 +94,12 @@ export class CreateConfigRequest {
             "format": ""
         },
         {
+            "name": "default_branch_name",
+            "baseName": "default_branch_name",
+            "type": "string",
+            "format": ""
+        },
+        {
             "name": "enable_guid_mapping",
             "baseName": "enable_guid_mapping",
             "type": "boolean",
@@ -94,6 +108,12 @@ export class CreateConfigRequest {
         {
             "name": "configuration_branch_name",
             "baseName": "configuration_branch_name",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "guid_mapping_branch_name",
+            "baseName": "guid_mapping_branch_name",
             "type": "string",
             "format": ""
         }    ];

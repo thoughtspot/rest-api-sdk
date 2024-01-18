@@ -171,8 +171,6 @@ __export(typescript_exports, {
   PdfOptions: () => PdfOptions,
   PdfOptionsInput: () => PdfOptionsInput,
   PermissionInput: () => PermissionInput,
-  PermissionOfMetadataResponse: () => PermissionOfMetadataResponse,
-  PermissionOfPrincipalsResponse: () => PermissionOfPrincipalsResponse,
   PermissionsMetadataTypeInput: () => PermissionsMetadataTypeInput,
   PngOptionsInput: () => PngOptionsInput,
   PrincipalsInput: () => PrincipalsInput,
@@ -256,11 +254,6 @@ __export(typescript_exports, {
   User: () => User,
   UserGroup: () => UserGroup,
   UserGroupResponse: () => UserGroupResponse,
-  UserObject: () => UserObject,
-  UserParameterOptions: () => UserParameterOptions,
-  UserParameters: () => UserParameters,
-  UserRuntimeFilters: () => UserRuntimeFilters,
-  UserRuntimeSorts: () => UserRuntimeSorts,
   UsersApi: () => PromiseUsersApi,
   ValidateMergeRequest: () => ValidateMergeRequest,
   VersionControlApi: () => PromiseVersionControlApi,
@@ -1550,6 +1543,12 @@ _CreateConfigRequest.attributeTypeMap = [
     "format": ""
   },
   {
+    "name": "default_branch_name",
+    "baseName": "default_branch_name",
+    "type": "string",
+    "format": ""
+  },
+  {
     "name": "enable_guid_mapping",
     "baseName": "enable_guid_mapping",
     "type": "boolean",
@@ -1558,6 +1557,12 @@ _CreateConfigRequest.attributeTypeMap = [
   {
     "name": "configuration_branch_name",
     "baseName": "configuration_branch_name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "guid_mapping_branch_name",
+    "baseName": "guid_mapping_branch_name",
     "type": "string",
     "format": ""
   }
@@ -2743,18 +2748,6 @@ _ExportMetadataTMLRequest.attributeTypeMap = [
     "baseName": "export_schema_version",
     "type": "ExportMetadataTMLRequestExportSchemaVersionEnum",
     "format": ""
-  },
-  {
-    "name": "export_dependent",
-    "baseName": "export_dependent",
-    "type": "boolean",
-    "format": ""
-  },
-  {
-    "name": "export_connection_as_dependent",
-    "baseName": "export_connection_as_dependent",
-    "type": "boolean",
-    "format": ""
   }
 ];
 var ExportMetadataTMLRequest = _ExportMetadataTMLRequest;
@@ -3288,12 +3281,6 @@ _GetFullAccessTokenRequest.attributeTypeMap = [
     "baseName": "jwt_user_options",
     "type": "JWTUserOptionsFull",
     "format": ""
-  },
-  {
-    "name": "user_parameters",
-    "baseName": "user_parameters",
-    "type": "UserParameterOptions",
-    "format": ""
   }
 ];
 var GetFullAccessTokenRequest = _GetFullAccessTokenRequest;
@@ -3372,12 +3359,6 @@ _GetObjectAccessTokenRequest.attributeTypeMap = [
     "name": "jwt_user_options",
     "baseName": "jwt_user_options",
     "type": "JWTUserOptions",
-    "format": ""
-  },
-  {
-    "name": "user_parameters",
-    "baseName": "user_parameters",
-    "type": "UserParameterOptions",
     "format": ""
   }
 ];
@@ -4660,44 +4641,6 @@ _PermissionInput.attributeTypeMap = [
   }
 ];
 var PermissionInput = _PermissionInput;
-
-// models/PermissionOfMetadataResponse.ts
-var _PermissionOfMetadataResponse = class _PermissionOfMetadataResponse {
-  static getAttributeTypeMap() {
-    return _PermissionOfMetadataResponse.attributeTypeMap;
-  }
-  constructor() {
-  }
-};
-_PermissionOfMetadataResponse.discriminator = void 0;
-_PermissionOfMetadataResponse.attributeTypeMap = [
-  {
-    "name": "metadata_permission_details",
-    "baseName": "metadata_permission_details",
-    "type": "any",
-    "format": ""
-  }
-];
-var PermissionOfMetadataResponse = _PermissionOfMetadataResponse;
-
-// models/PermissionOfPrincipalsResponse.ts
-var _PermissionOfPrincipalsResponse = class _PermissionOfPrincipalsResponse {
-  static getAttributeTypeMap() {
-    return _PermissionOfPrincipalsResponse.attributeTypeMap;
-  }
-  constructor() {
-  }
-};
-_PermissionOfPrincipalsResponse.discriminator = void 0;
-_PermissionOfPrincipalsResponse.attributeTypeMap = [
-  {
-    "name": "principal_permission_details",
-    "baseName": "principal_permission_details",
-    "type": "any",
-    "format": ""
-  }
-];
-var PermissionOfPrincipalsResponse = _PermissionOfPrincipalsResponse;
 
 // models/PermissionsMetadataTypeInput.ts
 var _PermissionsMetadataTypeInput = class _PermissionsMetadataTypeInput {
@@ -7456,6 +7399,12 @@ _UpdateConfigRequest.attributeTypeMap = [
     "format": ""
   },
   {
+    "name": "default_branch_name",
+    "baseName": "default_branch_name",
+    "type": "string",
+    "format": ""
+  },
+  {
     "name": "enable_guid_mapping",
     "baseName": "enable_guid_mapping",
     "type": "boolean",
@@ -7464,6 +7413,12 @@ _UpdateConfigRequest.attributeTypeMap = [
   {
     "name": "configuration_branch_name",
     "baseName": "configuration_branch_name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "guid_mapping_branch_name",
+    "baseName": "guid_mapping_branch_name",
     "type": "string",
     "format": ""
   }
@@ -8220,12 +8175,6 @@ _User.attributeTypeMap = [
     "baseName": "extended_preferences",
     "type": "any",
     "format": ""
-  },
-  {
-    "name": "user_parameters",
-    "baseName": "user_parameters",
-    "type": "any",
-    "format": ""
   }
 ];
 var User = _User;
@@ -8447,185 +8396,6 @@ _UserGroupResponse.attributeTypeMap = [
   }
 ];
 var UserGroupResponse = _UserGroupResponse;
-
-// models/UserObject.ts
-var _UserObject = class _UserObject {
-  static getAttributeTypeMap() {
-    return _UserObject.attributeTypeMap;
-  }
-  constructor() {
-  }
-};
-_UserObject.discriminator = void 0;
-_UserObject.attributeTypeMap = [
-  {
-    "name": "type",
-    "baseName": "type",
-    "type": "UserObjectTypeEnum",
-    "format": ""
-  },
-  {
-    "name": "identifier",
-    "baseName": "identifier",
-    "type": "string",
-    "format": ""
-  }
-];
-var UserObject = _UserObject;
-
-// models/UserParameterOptions.ts
-var _UserParameterOptions = class _UserParameterOptions {
-  static getAttributeTypeMap() {
-    return _UserParameterOptions.attributeTypeMap;
-  }
-  constructor() {
-  }
-};
-_UserParameterOptions.discriminator = void 0;
-_UserParameterOptions.attributeTypeMap = [
-  {
-    "name": "objects",
-    "baseName": "objects",
-    "type": "Array<UserObject>",
-    "format": ""
-  },
-  {
-    "name": "runtime_filters",
-    "baseName": "runtime_filters",
-    "type": "Array<UserRuntimeFilters>",
-    "format": ""
-  },
-  {
-    "name": "runtime_sorts",
-    "baseName": "runtime_sorts",
-    "type": "Array<UserRuntimeSorts>",
-    "format": ""
-  },
-  {
-    "name": "parameters",
-    "baseName": "parameters",
-    "type": "Array<UserParameters>",
-    "format": ""
-  }
-];
-var UserParameterOptions = _UserParameterOptions;
-
-// models/UserParameters.ts
-var _UserParameters = class _UserParameters {
-  static getAttributeTypeMap() {
-    return _UserParameters.attributeTypeMap;
-  }
-  constructor() {
-  }
-};
-_UserParameters.discriminator = void 0;
-_UserParameters.attributeTypeMap = [
-  {
-    "name": "name",
-    "baseName": "name",
-    "type": "string",
-    "format": ""
-  },
-  {
-    "name": "values",
-    "baseName": "values",
-    "type": "Array<string>",
-    "format": ""
-  },
-  {
-    "name": "persist",
-    "baseName": "persist",
-    "type": "boolean",
-    "format": ""
-  },
-  {
-    "name": "objects",
-    "baseName": "objects",
-    "type": "Array<UserObject>",
-    "format": ""
-  }
-];
-var UserParameters = _UserParameters;
-
-// models/UserRuntimeFilters.ts
-var _UserRuntimeFilters = class _UserRuntimeFilters {
-  static getAttributeTypeMap() {
-    return _UserRuntimeFilters.attributeTypeMap;
-  }
-  constructor() {
-  }
-};
-_UserRuntimeFilters.discriminator = void 0;
-_UserRuntimeFilters.attributeTypeMap = [
-  {
-    "name": "column_name",
-    "baseName": "column_name",
-    "type": "string",
-    "format": ""
-  },
-  {
-    "name": "values",
-    "baseName": "values",
-    "type": "Array<string>",
-    "format": ""
-  },
-  {
-    "name": "operator",
-    "baseName": "operator",
-    "type": "UserRuntimeFiltersOperatorEnum",
-    "format": ""
-  },
-  {
-    "name": "persist",
-    "baseName": "persist",
-    "type": "boolean",
-    "format": ""
-  },
-  {
-    "name": "objects",
-    "baseName": "objects",
-    "type": "Array<UserObject>",
-    "format": ""
-  }
-];
-var UserRuntimeFilters = _UserRuntimeFilters;
-
-// models/UserRuntimeSorts.ts
-var _UserRuntimeSorts = class _UserRuntimeSorts {
-  static getAttributeTypeMap() {
-    return _UserRuntimeSorts.attributeTypeMap;
-  }
-  constructor() {
-  }
-};
-_UserRuntimeSorts.discriminator = void 0;
-_UserRuntimeSorts.attributeTypeMap = [
-  {
-    "name": "column_name",
-    "baseName": "column_name",
-    "type": "string",
-    "format": ""
-  },
-  {
-    "name": "order",
-    "baseName": "order",
-    "type": "UserRuntimeSortsOrderEnum",
-    "format": ""
-  },
-  {
-    "name": "persist",
-    "baseName": "persist",
-    "type": "boolean",
-    "format": ""
-  },
-  {
-    "name": "objects",
-    "baseName": "objects",
-    "type": "Array<UserObject>",
-    "format": ""
-  }
-];
-var UserRuntimeSorts = _UserRuntimeSorts;
 
 // models/ValidateMergeRequest.ts
 var _ValidateMergeRequest = class _ValidateMergeRequest {
@@ -8876,10 +8646,7 @@ var enumsMap = /* @__PURE__ */ new Set([
   "UserParentTypeEnum",
   "UserGroupResponseParentTypeEnum",
   "UserGroupResponseTypeEnum",
-  "UserGroupResponseVisibilityEnum",
-  "UserObjectTypeEnum",
-  "UserRuntimeFiltersOperatorEnum",
-  "UserRuntimeSortsOrderEnum"
+  "UserGroupResponseVisibilityEnum"
 ]);
 var typeMap = {
   "APIKey": APIKey,
@@ -9000,8 +8767,6 @@ var typeMap = {
   "PdfOptions": PdfOptions,
   "PdfOptionsInput": PdfOptionsInput,
   "PermissionInput": PermissionInput,
-  "PermissionOfMetadataResponse": PermissionOfMetadataResponse,
-  "PermissionOfPrincipalsResponse": PermissionOfPrincipalsResponse,
   "PermissionsMetadataTypeInput": PermissionsMetadataTypeInput,
   "PngOptionsInput": PngOptionsInput,
   "PrincipalsInput": PrincipalsInput,
@@ -9073,11 +8838,6 @@ var typeMap = {
   "User": User,
   "UserGroup": UserGroup,
   "UserGroupResponse": UserGroupResponse,
-  "UserObject": UserObject,
-  "UserParameterOptions": UserParameterOptions,
-  "UserParameters": UserParameters,
-  "UserRuntimeFilters": UserRuntimeFilters,
-  "UserRuntimeSorts": UserRuntimeSorts,
   "ValidateMergeRequest": ValidateMergeRequest
 };
 var ObjectSerializer = class _ObjectSerializer {
@@ -10661,7 +10421,7 @@ var CustomActionApiResponseProcessor = class {
 // apis/DataApi.ts
 var DataApiRequestFactory = class extends BaseAPIRequestFactory {
   /**
-   *   Version: 9.0.0.cl or later   Fetches data from a saved Answer.  Requires at least view access to the saved Answer.  The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](For more information, and see [Liveboard data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_apis).   ).        
+   *   Version: 9.0.0.cl or later   Fetches data from a saved Answer.  Requires at least view access to the saved Answer.      
    * @param fetchAnswerDataRequest 
    */
   fetchAnswerData(fetchAnswerDataRequest, _options) {
@@ -10697,7 +10457,7 @@ var DataApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *   Version: 9.0.0.cl or later   Gets data from a Liveboard object and its visualization.    Requires at least view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To get data for specific visualizations, add the GUIDs or names of the visualizations in the API request.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes. If the new Liveboard experience mode, the transient content includes ad hoc changes to visualizations such as sorting, toggling of legends, and data drill down.  For more information, and see [Liveboard data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_fetch_liveboard_data_api).        
+   *   Version: 9.0.0.cl or later   Gets data from a Liveboard object and its visualization.    Requires at least view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To get data for specific visualizations, add the GUIDs or names of the visualizations in the API request.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes. If the new Liveboard experience mode, the transient content includes ad hoc changes to visualizations such as sorting, toggling of legends, and data drill down.      
    * @param fetchLiveboardDataRequest 
    */
   fetchLiveboardData(fetchLiveboardDataRequest, _options) {
@@ -10733,7 +10493,7 @@ var DataApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *   Version: 9.0.0.cl or later   Generates an Answer from a given data source.  Requires at least view access to the data source object.  #### Usage guidelines  To search data, specify the data source GUID in `logical_table_identifier`. The data source can be a Worksheet, View, Table, or SQL view.  Pass search tokens in the `query_string` attribute in the API request as shown in the following example:  ``` {   \"query_string\": \"[sales] by [store]\",   \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\", } ```  For more information about the `query_string` format and data source attribute, see [Search data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_data_api).    The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).        
+   *   Version: 9.0.0.cl or later   Generates an Answer from a given data source.  Requires at least view access to the data source.  #### Usage guidelines  To generate a new Answer, specify the data source GUID. The data source can be a Worksheet, View, Table, or SQL view.  Pass search tokens in the `query_string` attribute in the API request as shown in the following example. For more information passing search query string in API requests, see [`Components of a search query`](https://developers.thoughtspot.com/docs/?pageid=search-data-api#components).   ``` {   \"query_string\": \"[sales] by [store]\",   \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\", } ```      
    * @param searchDataRequest 
    */
   searchData(searchDataRequest, _options) {
@@ -11434,7 +11194,7 @@ var GroupsApiResponseProcessor = class {
 // apis/LogApi.ts
 var LogApiRequestFactory = class extends BaseAPIRequestFactory {
   /**
-   *   Version: 9.0.0.cl or later   Fetches security audit logs.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  By default, the API retrieves logs for the last 24 hours. You can set a custom duration in EPOCH time. Make sure the log duration specified in your API request doesn’t exceed 24 hours. If you must fetch logs for a longer time range, modify the duration and make multiple sequential API requests.  Upon successful execution, the API returns logs with the following information: * timestamp of the event * event ID * event type * name and GUID of the user * IP address of ThoughtSpot instance  For more information about security events returned in the API response, see [Security events](https://developers.thoughtspot.com/docs/logs-api#_security_events).      
+   *   Version: 9.0.0.cl or later   Fetches security audit logs.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  By default, the API retrieves logs for the last 24 hours. You can set a custom duration in EPOCH time. Make sure the log duration specified in your API request doesn’t exceed 24 hours. If you must fetch logs for a longer time range, modify the duration and make multiple sequential API requests.  Upon successful execution, the API returns logs with the following information: * timestamp of the event * event ID * event type * name and GUID of the user * IP address of ThoughtSpot instance      
    * @param fetchLogsRequest 
    */
   fetchLogs(fetchLogsRequest, _options) {
@@ -12499,7 +12259,7 @@ var OrgsApiResponseProcessor = class {
 // apis/ReportsApi.ts
 var ReportsApiRequestFactory = class extends BaseAPIRequestFactory {
   /**
-   *   Version: 9.0.0.cl or later   Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege.  #### Usage guidelines  In the request body, the GUID or name of the Answer and set `file_format`. The default file format is CSV.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).        
+   *   Version: 9.0.0.cl or later   Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege.  #### Usage guidelines  In the request body, the GUID or name of the Answer and set `file_format`. The default file format is CSV.  You can apply [runtime filter](https://developers.thoughtspot.com/docs/?pageid=runtime-filters#_apply_runtime_filters_via_rest_api_v2_0_endpoints) overrides and [sort columns](https://developers.thoughtspot.com/docs/?pageid=runtime-sort#_rest_api_v2_0) to the data retrieved in the API response.      
    * @param exportAnswerReportRequest 
    */
   exportAnswerReport(exportAnswerReportRequest, _options) {
@@ -12535,7 +12295,7 @@ var ReportsApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *   Version: 9.0.0.cl or later   Exports the data from a Liveboard and its visualization in a given file format. You can download the Liveboard data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default `file_format` is CSV. For PDF file format, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).        
+   *   Version: 9.0.0.cl or later   Exports the data from a Liveboard and its visualization in a given file format. You can download the Liveboard data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default `file_format` is CSV. For PDF file format, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  You can also apply [runtime filter](https://developers.thoughtspot.com/docs/?pageid=runtime-filters#_apply_runtime_filters_via_rest_api_v2_0_endpoints) overrides and [sort columns](https://developers.thoughtspot.com/docs/?pageid=runtime-sort#_rest_api_v2_0) to the data retrieved in the API response.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes. If the new Liveboard experience mode, the transient content includes ad hoc changes to visualizations such as sorting, toggling of legends, and data drill down.      
    * @param exportLiveboardReportRequest 
    */
   exportLiveboardReport(exportLiveboardReportRequest, _options) {
@@ -12726,7 +12486,7 @@ var RolesApiRequestFactory = class extends BaseAPIRequestFactory {
   }
   /**
    * Deletes a Role. Requires cluster Administration or Role Administration privileges.    Version: 9.5.0.cl or later 
-   * @param roleIdentifier Unique ID or name of the Role.
+   * @param roleIdentifier Unique ID or name of the role.
    */
   deleteRole(roleIdentifier, _options) {
     return __async(this, null, function* () {
@@ -12789,7 +12549,7 @@ var RolesApiRequestFactory = class extends BaseAPIRequestFactory {
   }
   /**
    * Updates a Role. Requires cluster Administration or Role Administration privileges.    Version: 9.5.0.cl or later 
-   * @param roleIdentifier Unique ID or name of the Role.
+   * @param roleIdentifier Unique ID or name of the role.
    * @param updateRoleRequest 
    */
   updateRole(roleIdentifier, updateRoleRequest, _options) {
@@ -13666,7 +13426,7 @@ var SecurityApiResponseProcessor = class {
       if (isCodeInRange("200", response.httpStatusCode)) {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
-          "PermissionOfPrincipalsResponse",
+          "any",
           ""
         );
         return body;
@@ -13706,7 +13466,7 @@ var SecurityApiResponseProcessor = class {
       if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
-          "PermissionOfPrincipalsResponse",
+          "any",
           ""
         );
         return body;
@@ -13727,7 +13487,7 @@ var SecurityApiResponseProcessor = class {
       if (isCodeInRange("200", response.httpStatusCode)) {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
-          "PermissionOfMetadataResponse",
+          "any",
           ""
         );
         return body;
@@ -13767,7 +13527,7 @@ var SecurityApiResponseProcessor = class {
       if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
-          "PermissionOfMetadataResponse",
+          "any",
           ""
         );
         return body;
@@ -14893,7 +14653,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *   Version: 9.2.0.cl or later   Allows you to connect a ThoughtSpot instance to a Git repository.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  You can use this API endpoint to connect your ThoughtSpot development and production environments to the development and production branches of a Git repository.  Before using this endpoint to connect your ThoughtSpot instance to a Git repository, check the following prerequisites:  * You have a Git repository. If you are using GitHub, make sure you have a valid account and an access token to connect ThoughtSpot to GitHub. For information about generating a token, see [GitHub Documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).  * Your access token has `repo` scope that grants full access to public and private repositories. * Your Git repository has a branch that can be configured as a default branch in ThoughtSpot.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).  **Note**: ThoughtSpot supports only GitHub / GitHub Enterprise for CI/CD.      
+   *   Version: 9.2.0.cl or later   Allows you to connect a ThoughtSpot instance to a Git repository.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  You can use this API endpoint to connect your ThoughtSpot development and production environments to the development and production branches of a Git repository.  Before using this endpoint to connect your ThoughtSpot instance to a Git repository, check the following prerequisites:  * You have a Git repository. If you are using GitHub, make sure you have a valid account and an access token to connect ThoughtSpot to GitHub. For information about generating a token, see [GitHub Documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).  * Your access token has `repo` scope that grants full access to public and private repositories. * Your Git repository has a branch that can be configured as a default branch in ThoughtSpot.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).      
    * @param createConfigRequest 
    */
   createConfig(createConfigRequest, _options) {
@@ -15380,7 +15140,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
   }
   /**
    * Deletes a Role. Requires cluster Administration or Role Administration privileges.    Version: 9.5.0.cl or later 
-   * @param roleIdentifier Unique ID or name of the Role.
+   * @param roleIdentifier Unique ID or name of the role.
    */
   deleteRole(roleIdentifier, _options) {
     return __async(this, null, function* () {
@@ -15550,7 +15310,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *   Version: 9.0.0.cl or later   Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege.  #### Usage guidelines  In the request body, the GUID or name of the Answer and set `file_format`. The default file format is CSV.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).        
+   *   Version: 9.0.0.cl or later   Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege.  #### Usage guidelines  In the request body, the GUID or name of the Answer and set `file_format`. The default file format is CSV.  You can apply [runtime filter](https://developers.thoughtspot.com/docs/?pageid=runtime-filters#_apply_runtime_filters_via_rest_api_v2_0_endpoints) overrides and [sort columns](https://developers.thoughtspot.com/docs/?pageid=runtime-sort#_rest_api_v2_0) to the data retrieved in the API response.      
    * @param exportAnswerReportRequest 
    */
   exportAnswerReport(exportAnswerReportRequest, _options) {
@@ -15586,7 +15346,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *   Version: 9.0.0.cl or later   Exports the data from a Liveboard and its visualization in a given file format. You can download the Liveboard data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default `file_format` is CSV. For PDF file format, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).        
+   *   Version: 9.0.0.cl or later   Exports the data from a Liveboard and its visualization in a given file format. You can download the Liveboard data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default `file_format` is CSV. For PDF file format, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  You can also apply [runtime filter](https://developers.thoughtspot.com/docs/?pageid=runtime-filters#_apply_runtime_filters_via_rest_api_v2_0_endpoints) overrides and [sort columns](https://developers.thoughtspot.com/docs/?pageid=runtime-sort#_rest_api_v2_0) to the data retrieved in the API response.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes. If the new Liveboard experience mode, the transient content includes ad hoc changes to visualizations such as sorting, toggling of legends, and data drill down.      
    * @param exportLiveboardReportRequest 
    */
   exportLiveboardReport(exportLiveboardReportRequest, _options) {
@@ -15658,7 +15418,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *   Version: 9.0.0.cl or later   Fetches data from a saved Answer.  Requires at least view access to the saved Answer.  The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](For more information, and see [Liveboard data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_apis).   ).        
+   *   Version: 9.0.0.cl or later   Fetches data from a saved Answer.  Requires at least view access to the saved Answer.      
    * @param fetchAnswerDataRequest 
    */
   fetchAnswerData(fetchAnswerDataRequest, _options) {
@@ -15730,7 +15490,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *   Version: 9.0.0.cl or later   Gets data from a Liveboard object and its visualization.    Requires at least view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To get data for specific visualizations, add the GUIDs or names of the visualizations in the API request.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes. If the new Liveboard experience mode, the transient content includes ad hoc changes to visualizations such as sorting, toggling of legends, and data drill down.  For more information, and see [Liveboard data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_fetch_liveboard_data_api).        
+   *   Version: 9.0.0.cl or later   Gets data from a Liveboard object and its visualization.    Requires at least view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To get data for specific visualizations, add the GUIDs or names of the visualizations in the API request.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes. If the new Liveboard experience mode, the transient content includes ad hoc changes to visualizations such as sorting, toggling of legends, and data drill down.      
    * @param fetchLiveboardDataRequest 
    */
   fetchLiveboardData(fetchLiveboardDataRequest, _options) {
@@ -15802,7 +15562,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *   Version: 9.0.0.cl or later   Fetches security audit logs.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  By default, the API retrieves logs for the last 24 hours. You can set a custom duration in EPOCH time. Make sure the log duration specified in your API request doesn’t exceed 24 hours. If you must fetch logs for a longer time range, modify the duration and make multiple sequential API requests.  Upon successful execution, the API returns logs with the following information: * timestamp of the event * event ID * event type * name and GUID of the user * IP address of ThoughtSpot instance  For more information about security events returned in the API response, see [Security events](https://developers.thoughtspot.com/docs/logs-api#_security_events).      
+   *   Version: 9.0.0.cl or later   Fetches security audit logs.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  By default, the API retrieves logs for the last 24 hours. You can set a custom duration in EPOCH time. Make sure the log duration specified in your API request doesn’t exceed 24 hours. If you must fetch logs for a longer time range, modify the duration and make multiple sequential API requests.  Upon successful execution, the API returns logs with the following information: * timestamp of the event * event ID * event type * name and GUID of the user * IP address of ThoughtSpot instance      
    * @param fetchLogsRequest 
    */
   fetchLogs(fetchLogsRequest, _options) {
@@ -16546,7 +16306,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *   Version: 9.0.0.cl or later   Generates an Answer from a given data source.  Requires at least view access to the data source object.  #### Usage guidelines  To search data, specify the data source GUID in `logical_table_identifier`. The data source can be a Worksheet, View, Table, or SQL view.  Pass search tokens in the `query_string` attribute in the API request as shown in the following example:  ``` {   \"query_string\": \"[sales] by [store]\",   \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\", } ```  For more information about the `query_string` format and data source attribute, see [Search data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_data_api).    The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).        
+   *   Version: 9.0.0.cl or later   Generates an Answer from a given data source.  Requires at least view access to the data source.  #### Usage guidelines  To generate a new Answer, specify the data source GUID. The data source can be a Worksheet, View, Table, or SQL view.  Pass search tokens in the `query_string` attribute in the API request as shown in the following example. For more information passing search query string in API requests, see [`Components of a search query`](https://developers.thoughtspot.com/docs/?pageid=search-data-api#components).   ``` {   \"query_string\": \"[sales] by [store]\",   \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\", } ```      
    * @param searchDataRequest 
    */
   searchData(searchDataRequest, _options) {
@@ -17059,7 +16819,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
   }
   /**
    * Updates a Role. Requires cluster Administration or Role Administration privileges.    Version: 9.5.0.cl or later 
-   * @param roleIdentifier Unique ID or name of the Role.
+   * @param roleIdentifier Unique ID or name of the role.
    * @param updateRoleRequest 
    */
   updateRole(roleIdentifier, updateRoleRequest, _options) {
@@ -19221,7 +18981,7 @@ var ThoughtSpotRestApiResponseProcessor = class {
       if (isCodeInRange("200", response.httpStatusCode)) {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
-          "PermissionOfPrincipalsResponse",
+          "any",
           ""
         );
         return body;
@@ -19261,7 +19021,7 @@ var ThoughtSpotRestApiResponseProcessor = class {
       if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
-          "PermissionOfPrincipalsResponse",
+          "any",
           ""
         );
         return body;
@@ -19282,7 +19042,7 @@ var ThoughtSpotRestApiResponseProcessor = class {
       if (isCodeInRange("200", response.httpStatusCode)) {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
-          "PermissionOfMetadataResponse",
+          "any",
           ""
         );
         return body;
@@ -19322,7 +19082,7 @@ var ThoughtSpotRestApiResponseProcessor = class {
       if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
-          "PermissionOfMetadataResponse",
+          "any",
           ""
         );
         return body;
@@ -22549,7 +22309,7 @@ var VersionControlApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *   Version: 9.2.0.cl or later   Allows you to connect a ThoughtSpot instance to a Git repository.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  You can use this API endpoint to connect your ThoughtSpot development and production environments to the development and production branches of a Git repository.  Before using this endpoint to connect your ThoughtSpot instance to a Git repository, check the following prerequisites:  * You have a Git repository. If you are using GitHub, make sure you have a valid account and an access token to connect ThoughtSpot to GitHub. For information about generating a token, see [GitHub Documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).  * Your access token has `repo` scope that grants full access to public and private repositories. * Your Git repository has a branch that can be configured as a default branch in ThoughtSpot.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).  **Note**: ThoughtSpot supports only GitHub / GitHub Enterprise for CI/CD.      
+   *   Version: 9.2.0.cl or later   Allows you to connect a ThoughtSpot instance to a Git repository.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  You can use this API endpoint to connect your ThoughtSpot development and production environments to the development and production branches of a Git repository.  Before using this endpoint to connect your ThoughtSpot instance to a Git repository, check the following prerequisites:  * You have a Git repository. If you are using GitHub, make sure you have a valid account and an access token to connect ThoughtSpot to GitHub. For information about generating a token, see [GitHub Documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).  * Your access token has `repo` scope that grants full access to public and private repositories. * Your Git repository has a branch that can be configured as a default branch in ThoughtSpot.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).      
    * @param createConfigRequest 
    */
   createConfig(createConfigRequest, _options) {
@@ -23685,7 +23445,7 @@ var ObservableDataApi = class {
     this.responseProcessor = responseProcessor || new DataApiResponseProcessor();
   }
   /**
-   *   Version: 9.0.0.cl or later   Fetches data from a saved Answer.  Requires at least view access to the saved Answer.  The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](For more information, and see [Liveboard data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_apis).   ).        
+   *   Version: 9.0.0.cl or later   Fetches data from a saved Answer.  Requires at least view access to the saved Answer.      
    * @param fetchAnswerDataRequest 
    */
   fetchAnswerData(fetchAnswerDataRequest, _options) {
@@ -23703,7 +23463,7 @@ var ObservableDataApi = class {
     }));
   }
   /**
-   *   Version: 9.0.0.cl or later   Gets data from a Liveboard object and its visualization.    Requires at least view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To get data for specific visualizations, add the GUIDs or names of the visualizations in the API request.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes. If the new Liveboard experience mode, the transient content includes ad hoc changes to visualizations such as sorting, toggling of legends, and data drill down.  For more information, and see [Liveboard data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_fetch_liveboard_data_api).        
+   *   Version: 9.0.0.cl or later   Gets data from a Liveboard object and its visualization.    Requires at least view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To get data for specific visualizations, add the GUIDs or names of the visualizations in the API request.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes. If the new Liveboard experience mode, the transient content includes ad hoc changes to visualizations such as sorting, toggling of legends, and data drill down.      
    * @param fetchLiveboardDataRequest 
    */
   fetchLiveboardData(fetchLiveboardDataRequest, _options) {
@@ -23721,7 +23481,7 @@ var ObservableDataApi = class {
     }));
   }
   /**
-   *   Version: 9.0.0.cl or later   Generates an Answer from a given data source.  Requires at least view access to the data source object.  #### Usage guidelines  To search data, specify the data source GUID in `logical_table_identifier`. The data source can be a Worksheet, View, Table, or SQL view.  Pass search tokens in the `query_string` attribute in the API request as shown in the following example:  ``` {   \"query_string\": \"[sales] by [store]\",   \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\", } ```  For more information about the `query_string` format and data source attribute, see [Search data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_data_api).    The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).        
+   *   Version: 9.0.0.cl or later   Generates an Answer from a given data source.  Requires at least view access to the data source.  #### Usage guidelines  To generate a new Answer, specify the data source GUID. The data source can be a Worksheet, View, Table, or SQL view.  Pass search tokens in the `query_string` attribute in the API request as shown in the following example. For more information passing search query string in API requests, see [`Components of a search query`](https://developers.thoughtspot.com/docs/?pageid=search-data-api#components).   ``` {   \"query_string\": \"[sales] by [store]\",   \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\", } ```      
    * @param searchDataRequest 
    */
   searchData(searchDataRequest, _options) {
@@ -23844,7 +23604,7 @@ var ObservableLogApi = class {
     this.responseProcessor = responseProcessor || new LogApiResponseProcessor();
   }
   /**
-   *   Version: 9.0.0.cl or later   Fetches security audit logs.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  By default, the API retrieves logs for the last 24 hours. You can set a custom duration in EPOCH time. Make sure the log duration specified in your API request doesn’t exceed 24 hours. If you must fetch logs for a longer time range, modify the duration and make multiple sequential API requests.  Upon successful execution, the API returns logs with the following information: * timestamp of the event * event ID * event type * name and GUID of the user * IP address of ThoughtSpot instance  For more information about security events returned in the API response, see [Security events](https://developers.thoughtspot.com/docs/logs-api#_security_events).      
+   *   Version: 9.0.0.cl or later   Fetches security audit logs.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  By default, the API retrieves logs for the last 24 hours. You can set a custom duration in EPOCH time. Make sure the log duration specified in your API request doesn’t exceed 24 hours. If you must fetch logs for a longer time range, modify the duration and make multiple sequential API requests.  Upon successful execution, the API returns logs with the following information: * timestamp of the event * event ID * event type * name and GUID of the user * IP address of ThoughtSpot instance      
    * @param fetchLogsRequest 
    */
   fetchLogs(fetchLogsRequest, _options) {
@@ -24064,7 +23824,7 @@ var ObservableReportsApi = class {
     this.responseProcessor = responseProcessor || new ReportsApiResponseProcessor();
   }
   /**
-   *   Version: 9.0.0.cl or later   Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege.  #### Usage guidelines  In the request body, the GUID or name of the Answer and set `file_format`. The default file format is CSV.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).        
+   *   Version: 9.0.0.cl or later   Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege.  #### Usage guidelines  In the request body, the GUID or name of the Answer and set `file_format`. The default file format is CSV.  You can apply [runtime filter](https://developers.thoughtspot.com/docs/?pageid=runtime-filters#_apply_runtime_filters_via_rest_api_v2_0_endpoints) overrides and [sort columns](https://developers.thoughtspot.com/docs/?pageid=runtime-sort#_rest_api_v2_0) to the data retrieved in the API response.      
    * @param exportAnswerReportRequest 
    */
   exportAnswerReport(exportAnswerReportRequest, _options) {
@@ -24082,7 +23842,7 @@ var ObservableReportsApi = class {
     }));
   }
   /**
-   *   Version: 9.0.0.cl or later   Exports the data from a Liveboard and its visualization in a given file format. You can download the Liveboard data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default `file_format` is CSV. For PDF file format, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).        
+   *   Version: 9.0.0.cl or later   Exports the data from a Liveboard and its visualization in a given file format. You can download the Liveboard data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default `file_format` is CSV. For PDF file format, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  You can also apply [runtime filter](https://developers.thoughtspot.com/docs/?pageid=runtime-filters#_apply_runtime_filters_via_rest_api_v2_0_endpoints) overrides and [sort columns](https://developers.thoughtspot.com/docs/?pageid=runtime-sort#_rest_api_v2_0) to the data retrieved in the API response.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes. If the new Liveboard experience mode, the transient content includes ad hoc changes to visualizations such as sorting, toggling of legends, and data drill down.      
    * @param exportLiveboardReportRequest 
    */
   exportLiveboardReport(exportLiveboardReportRequest, _options) {
@@ -24126,7 +23886,7 @@ var ObservableRolesApi = class {
   }
   /**
    * Deletes a Role. Requires cluster Administration or Role Administration privileges.    Version: 9.5.0.cl or later 
-   * @param roleIdentifier Unique ID or name of the Role.
+   * @param roleIdentifier Unique ID or name of the role.
    */
   deleteRole(roleIdentifier, _options) {
     const requestContextPromise = this.requestFactory.deleteRole(roleIdentifier, _options);
@@ -24162,7 +23922,7 @@ var ObservableRolesApi = class {
   }
   /**
    * Updates a Role. Requires cluster Administration or Role Administration privileges.    Version: 9.5.0.cl or later 
-   * @param roleIdentifier Unique ID or name of the Role.
+   * @param roleIdentifier Unique ID or name of the role.
    * @param updateRoleRequest 
    */
   updateRole(roleIdentifier, updateRoleRequest, _options) {
@@ -24610,7 +24370,7 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *   Version: 9.2.0.cl or later   Allows you to connect a ThoughtSpot instance to a Git repository.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  You can use this API endpoint to connect your ThoughtSpot development and production environments to the development and production branches of a Git repository.  Before using this endpoint to connect your ThoughtSpot instance to a Git repository, check the following prerequisites:  * You have a Git repository. If you are using GitHub, make sure you have a valid account and an access token to connect ThoughtSpot to GitHub. For information about generating a token, see [GitHub Documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).  * Your access token has `repo` scope that grants full access to public and private repositories. * Your Git repository has a branch that can be configured as a default branch in ThoughtSpot.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).  **Note**: ThoughtSpot supports only GitHub / GitHub Enterprise for CI/CD.      
+   *   Version: 9.2.0.cl or later   Allows you to connect a ThoughtSpot instance to a Git repository.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  You can use this API endpoint to connect your ThoughtSpot development and production environments to the development and production branches of a Git repository.  Before using this endpoint to connect your ThoughtSpot instance to a Git repository, check the following prerequisites:  * You have a Git repository. If you are using GitHub, make sure you have a valid account and an access token to connect ThoughtSpot to GitHub. For information about generating a token, see [GitHub Documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).  * Your access token has `repo` scope that grants full access to public and private repositories. * Your Git repository has a branch that can be configured as a default branch in ThoughtSpot.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).      
    * @param createConfigRequest 
    */
   createConfig(createConfigRequest, _options) {
@@ -24863,7 +24623,7 @@ var ObservableThoughtSpotRestApi = class {
   }
   /**
    * Deletes a Role. Requires cluster Administration or Role Administration privileges.    Version: 9.5.0.cl or later 
-   * @param roleIdentifier Unique ID or name of the Role.
+   * @param roleIdentifier Unique ID or name of the role.
    */
   deleteRole(roleIdentifier, _options) {
     const requestContextPromise = this.requestFactory.deleteRole(roleIdentifier, _options);
@@ -24970,7 +24730,7 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *   Version: 9.0.0.cl or later   Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege.  #### Usage guidelines  In the request body, the GUID or name of the Answer and set `file_format`. The default file format is CSV.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).        
+   *   Version: 9.0.0.cl or later   Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege.  #### Usage guidelines  In the request body, the GUID or name of the Answer and set `file_format`. The default file format is CSV.  You can apply [runtime filter](https://developers.thoughtspot.com/docs/?pageid=runtime-filters#_apply_runtime_filters_via_rest_api_v2_0_endpoints) overrides and [sort columns](https://developers.thoughtspot.com/docs/?pageid=runtime-sort#_rest_api_v2_0) to the data retrieved in the API response.      
    * @param exportAnswerReportRequest 
    */
   exportAnswerReport(exportAnswerReportRequest, _options) {
@@ -24988,7 +24748,7 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *   Version: 9.0.0.cl or later   Exports the data from a Liveboard and its visualization in a given file format. You can download the Liveboard data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default `file_format` is CSV. For PDF file format, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).        
+   *   Version: 9.0.0.cl or later   Exports the data from a Liveboard and its visualization in a given file format. You can download the Liveboard data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default `file_format` is CSV. For PDF file format, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  You can also apply [runtime filter](https://developers.thoughtspot.com/docs/?pageid=runtime-filters#_apply_runtime_filters_via_rest_api_v2_0_endpoints) overrides and [sort columns](https://developers.thoughtspot.com/docs/?pageid=runtime-sort#_rest_api_v2_0) to the data retrieved in the API response.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes. If the new Liveboard experience mode, the transient content includes ad hoc changes to visualizations such as sorting, toggling of legends, and data drill down.      
    * @param exportLiveboardReportRequest 
    */
   exportLiveboardReport(exportLiveboardReportRequest, _options) {
@@ -25024,7 +24784,7 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *   Version: 9.0.0.cl or later   Fetches data from a saved Answer.  Requires at least view access to the saved Answer.  The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](For more information, and see [Liveboard data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_apis).   ).        
+   *   Version: 9.0.0.cl or later   Fetches data from a saved Answer.  Requires at least view access to the saved Answer.      
    * @param fetchAnswerDataRequest 
    */
   fetchAnswerData(fetchAnswerDataRequest, _options) {
@@ -25060,7 +24820,7 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *   Version: 9.0.0.cl or later   Gets data from a Liveboard object and its visualization.    Requires at least view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To get data for specific visualizations, add the GUIDs or names of the visualizations in the API request.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes. If the new Liveboard experience mode, the transient content includes ad hoc changes to visualizations such as sorting, toggling of legends, and data drill down.  For more information, and see [Liveboard data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_fetch_liveboard_data_api).        
+   *   Version: 9.0.0.cl or later   Gets data from a Liveboard object and its visualization.    Requires at least view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To get data for specific visualizations, add the GUIDs or names of the visualizations in the API request.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes. If the new Liveboard experience mode, the transient content includes ad hoc changes to visualizations such as sorting, toggling of legends, and data drill down.      
    * @param fetchLiveboardDataRequest 
    */
   fetchLiveboardData(fetchLiveboardDataRequest, _options) {
@@ -25096,7 +24856,7 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *   Version: 9.0.0.cl or later   Fetches security audit logs.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  By default, the API retrieves logs for the last 24 hours. You can set a custom duration in EPOCH time. Make sure the log duration specified in your API request doesn’t exceed 24 hours. If you must fetch logs for a longer time range, modify the duration and make multiple sequential API requests.  Upon successful execution, the API returns logs with the following information: * timestamp of the event * event ID * event type * name and GUID of the user * IP address of ThoughtSpot instance  For more information about security events returned in the API response, see [Security events](https://developers.thoughtspot.com/docs/logs-api#_security_events).      
+   *   Version: 9.0.0.cl or later   Fetches security audit logs.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  By default, the API retrieves logs for the last 24 hours. You can set a custom duration in EPOCH time. Make sure the log duration specified in your API request doesn’t exceed 24 hours. If you must fetch logs for a longer time range, modify the duration and make multiple sequential API requests.  Upon successful execution, the API returns logs with the following information: * timestamp of the event * event ID * event type * name and GUID of the user * IP address of ThoughtSpot instance      
    * @param fetchLogsRequest 
    */
   fetchLogs(fetchLogsRequest, _options) {
@@ -25505,7 +25265,7 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *   Version: 9.0.0.cl or later   Generates an Answer from a given data source.  Requires at least view access to the data source object.  #### Usage guidelines  To search data, specify the data source GUID in `logical_table_identifier`. The data source can be a Worksheet, View, Table, or SQL view.  Pass search tokens in the `query_string` attribute in the API request as shown in the following example:  ``` {   \"query_string\": \"[sales] by [store]\",   \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\", } ```  For more information about the `query_string` format and data source attribute, see [Search data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_data_api).    The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).        
+   *   Version: 9.0.0.cl or later   Generates an Answer from a given data source.  Requires at least view access to the data source.  #### Usage guidelines  To generate a new Answer, specify the data source GUID. The data source can be a Worksheet, View, Table, or SQL view.  Pass search tokens in the `query_string` attribute in the API request as shown in the following example. For more information passing search query string in API requests, see [`Components of a search query`](https://developers.thoughtspot.com/docs/?pageid=search-data-api#components).   ``` {   \"query_string\": \"[sales] by [store]\",   \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\", } ```      
    * @param searchDataRequest 
    */
   searchData(searchDataRequest, _options) {
@@ -25760,7 +25520,7 @@ var ObservableThoughtSpotRestApi = class {
   }
   /**
    * Updates a Role. Requires cluster Administration or Role Administration privileges.    Version: 9.5.0.cl or later 
-   * @param roleIdentifier Unique ID or name of the Role.
+   * @param roleIdentifier Unique ID or name of the role.
    * @param updateRoleRequest 
    */
   updateRole(roleIdentifier, updateRoleRequest, _options) {
@@ -26067,7 +25827,7 @@ var ObservableVersionControlApi = class {
     }));
   }
   /**
-   *   Version: 9.2.0.cl or later   Allows you to connect a ThoughtSpot instance to a Git repository.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  You can use this API endpoint to connect your ThoughtSpot development and production environments to the development and production branches of a Git repository.  Before using this endpoint to connect your ThoughtSpot instance to a Git repository, check the following prerequisites:  * You have a Git repository. If you are using GitHub, make sure you have a valid account and an access token to connect ThoughtSpot to GitHub. For information about generating a token, see [GitHub Documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).  * Your access token has `repo` scope that grants full access to public and private repositories. * Your Git repository has a branch that can be configured as a default branch in ThoughtSpot.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).  **Note**: ThoughtSpot supports only GitHub / GitHub Enterprise for CI/CD.      
+   *   Version: 9.2.0.cl or later   Allows you to connect a ThoughtSpot instance to a Git repository.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  You can use this API endpoint to connect your ThoughtSpot development and production environments to the development and production branches of a Git repository.  Before using this endpoint to connect your ThoughtSpot instance to a Git repository, check the following prerequisites:  * You have a Git repository. If you are using GitHub, make sure you have a valid account and an access token to connect ThoughtSpot to GitHub. For information about generating a token, see [GitHub Documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).  * Your access token has `repo` scope that grants full access to public and private repositories. * Your Git repository has a branch that can be configured as a default branch in ThoughtSpot.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).      
    * @param createConfigRequest 
    */
   createConfig(createConfigRequest, _options) {
@@ -26352,7 +26112,7 @@ var PromiseDataApi = class {
     this.api = new ObservableDataApi(configuration, requestFactory, responseProcessor);
   }
   /**
-   *   Version: 9.0.0.cl or later   Fetches data from a saved Answer.  Requires at least view access to the saved Answer.  The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](For more information, and see [Liveboard data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_apis).   ).        
+   *   Version: 9.0.0.cl or later   Fetches data from a saved Answer.  Requires at least view access to the saved Answer.      
    * @param fetchAnswerDataRequest 
    */
   fetchAnswerData(fetchAnswerDataRequest, _options) {
@@ -26360,7 +26120,7 @@ var PromiseDataApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 9.0.0.cl or later   Gets data from a Liveboard object and its visualization.    Requires at least view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To get data for specific visualizations, add the GUIDs or names of the visualizations in the API request.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes. If the new Liveboard experience mode, the transient content includes ad hoc changes to visualizations such as sorting, toggling of legends, and data drill down.  For more information, and see [Liveboard data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_fetch_liveboard_data_api).        
+   *   Version: 9.0.0.cl or later   Gets data from a Liveboard object and its visualization.    Requires at least view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To get data for specific visualizations, add the GUIDs or names of the visualizations in the API request.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes. If the new Liveboard experience mode, the transient content includes ad hoc changes to visualizations such as sorting, toggling of legends, and data drill down.      
    * @param fetchLiveboardDataRequest 
    */
   fetchLiveboardData(fetchLiveboardDataRequest, _options) {
@@ -26368,7 +26128,7 @@ var PromiseDataApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 9.0.0.cl or later   Generates an Answer from a given data source.  Requires at least view access to the data source object.  #### Usage guidelines  To search data, specify the data source GUID in `logical_table_identifier`. The data source can be a Worksheet, View, Table, or SQL view.  Pass search tokens in the `query_string` attribute in the API request as shown in the following example:  ``` {   \"query_string\": \"[sales] by [store]\",   \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\", } ```  For more information about the `query_string` format and data source attribute, see [Search data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_data_api).    The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).        
+   *   Version: 9.0.0.cl or later   Generates an Answer from a given data source.  Requires at least view access to the data source.  #### Usage guidelines  To generate a new Answer, specify the data source GUID. The data source can be a Worksheet, View, Table, or SQL view.  Pass search tokens in the `query_string` attribute in the API request as shown in the following example. For more information passing search query string in API requests, see [`Components of a search query`](https://developers.thoughtspot.com/docs/?pageid=search-data-api#components).   ``` {   \"query_string\": \"[sales] by [store]\",   \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\", } ```      
    * @param searchDataRequest 
    */
   searchData(searchDataRequest, _options) {
@@ -26427,7 +26187,7 @@ var PromiseLogApi = class {
     this.api = new ObservableLogApi(configuration, requestFactory, responseProcessor);
   }
   /**
-   *   Version: 9.0.0.cl or later   Fetches security audit logs.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  By default, the API retrieves logs for the last 24 hours. You can set a custom duration in EPOCH time. Make sure the log duration specified in your API request doesn’t exceed 24 hours. If you must fetch logs for a longer time range, modify the duration and make multiple sequential API requests.  Upon successful execution, the API returns logs with the following information: * timestamp of the event * event ID * event type * name and GUID of the user * IP address of ThoughtSpot instance  For more information about security events returned in the API response, see [Security events](https://developers.thoughtspot.com/docs/logs-api#_security_events).      
+   *   Version: 9.0.0.cl or later   Fetches security audit logs.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  By default, the API retrieves logs for the last 24 hours. You can set a custom duration in EPOCH time. Make sure the log duration specified in your API request doesn’t exceed 24 hours. If you must fetch logs for a longer time range, modify the duration and make multiple sequential API requests.  Upon successful execution, the API returns logs with the following information: * timestamp of the event * event ID * event type * name and GUID of the user * IP address of ThoughtSpot instance      
    * @param fetchLogsRequest 
    */
   fetchLogs(fetchLogsRequest, _options) {
@@ -26531,7 +26291,7 @@ var PromiseReportsApi = class {
     this.api = new ObservableReportsApi(configuration, requestFactory, responseProcessor);
   }
   /**
-   *   Version: 9.0.0.cl or later   Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege.  #### Usage guidelines  In the request body, the GUID or name of the Answer and set `file_format`. The default file format is CSV.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).        
+   *   Version: 9.0.0.cl or later   Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege.  #### Usage guidelines  In the request body, the GUID or name of the Answer and set `file_format`. The default file format is CSV.  You can apply [runtime filter](https://developers.thoughtspot.com/docs/?pageid=runtime-filters#_apply_runtime_filters_via_rest_api_v2_0_endpoints) overrides and [sort columns](https://developers.thoughtspot.com/docs/?pageid=runtime-sort#_rest_api_v2_0) to the data retrieved in the API response.      
    * @param exportAnswerReportRequest 
    */
   exportAnswerReport(exportAnswerReportRequest, _options) {
@@ -26539,7 +26299,7 @@ var PromiseReportsApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 9.0.0.cl or later   Exports the data from a Liveboard and its visualization in a given file format. You can download the Liveboard data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default `file_format` is CSV. For PDF file format, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).        
+   *   Version: 9.0.0.cl or later   Exports the data from a Liveboard and its visualization in a given file format. You can download the Liveboard data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default `file_format` is CSV. For PDF file format, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  You can also apply [runtime filter](https://developers.thoughtspot.com/docs/?pageid=runtime-filters#_apply_runtime_filters_via_rest_api_v2_0_endpoints) overrides and [sort columns](https://developers.thoughtspot.com/docs/?pageid=runtime-sort#_rest_api_v2_0) to the data retrieved in the API response.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes. If the new Liveboard experience mode, the transient content includes ad hoc changes to visualizations such as sorting, toggling of legends, and data drill down.      
    * @param exportLiveboardReportRequest 
    */
   exportLiveboardReport(exportLiveboardReportRequest, _options) {
@@ -26561,7 +26321,7 @@ var PromiseRolesApi = class {
   }
   /**
    * Deletes a Role. Requires cluster Administration or Role Administration privileges.    Version: 9.5.0.cl or later 
-   * @param roleIdentifier Unique ID or name of the Role.
+   * @param roleIdentifier Unique ID or name of the role.
    */
   deleteRole(roleIdentifier, _options) {
     const result = this.api.deleteRole(roleIdentifier, _options);
@@ -26577,7 +26337,7 @@ var PromiseRolesApi = class {
   }
   /**
    * Updates a Role. Requires cluster Administration or Role Administration privileges.    Version: 9.5.0.cl or later 
-   * @param roleIdentifier Unique ID or name of the Role.
+   * @param roleIdentifier Unique ID or name of the role.
    * @param updateRoleRequest 
    */
   updateRole(roleIdentifier, updateRoleRequest, _options) {
@@ -26785,7 +26545,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 9.2.0.cl or later   Allows you to connect a ThoughtSpot instance to a Git repository.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  You can use this API endpoint to connect your ThoughtSpot development and production environments to the development and production branches of a Git repository.  Before using this endpoint to connect your ThoughtSpot instance to a Git repository, check the following prerequisites:  * You have a Git repository. If you are using GitHub, make sure you have a valid account and an access token to connect ThoughtSpot to GitHub. For information about generating a token, see [GitHub Documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).  * Your access token has `repo` scope that grants full access to public and private repositories. * Your Git repository has a branch that can be configured as a default branch in ThoughtSpot.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).  **Note**: ThoughtSpot supports only GitHub / GitHub Enterprise for CI/CD.      
+   *   Version: 9.2.0.cl or later   Allows you to connect a ThoughtSpot instance to a Git repository.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  You can use this API endpoint to connect your ThoughtSpot development and production environments to the development and production branches of a Git repository.  Before using this endpoint to connect your ThoughtSpot instance to a Git repository, check the following prerequisites:  * You have a Git repository. If you are using GitHub, make sure you have a valid account and an access token to connect ThoughtSpot to GitHub. For information about generating a token, see [GitHub Documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).  * Your access token has `repo` scope that grants full access to public and private repositories. * Your Git repository has a branch that can be configured as a default branch in ThoughtSpot.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).      
    * @param createConfigRequest 
    */
   createConfig(createConfigRequest, _options) {
@@ -26898,7 +26658,7 @@ var PromiseThoughtSpotRestApi = class {
   }
   /**
    * Deletes a Role. Requires cluster Administration or Role Administration privileges.    Version: 9.5.0.cl or later 
-   * @param roleIdentifier Unique ID or name of the Role.
+   * @param roleIdentifier Unique ID or name of the role.
    */
   deleteRole(roleIdentifier, _options) {
     const result = this.api.deleteRole(roleIdentifier, _options);
@@ -26945,7 +26705,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 9.0.0.cl or later   Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege.  #### Usage guidelines  In the request body, the GUID or name of the Answer and set `file_format`. The default file format is CSV.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).        
+   *   Version: 9.0.0.cl or later   Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege.  #### Usage guidelines  In the request body, the GUID or name of the Answer and set `file_format`. The default file format is CSV.  You can apply [runtime filter](https://developers.thoughtspot.com/docs/?pageid=runtime-filters#_apply_runtime_filters_via_rest_api_v2_0_endpoints) overrides and [sort columns](https://developers.thoughtspot.com/docs/?pageid=runtime-sort#_rest_api_v2_0) to the data retrieved in the API response.      
    * @param exportAnswerReportRequest 
    */
   exportAnswerReport(exportAnswerReportRequest, _options) {
@@ -26953,7 +26713,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 9.0.0.cl or later   Exports the data from a Liveboard and its visualization in a given file format. You can download the Liveboard data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default `file_format` is CSV. For PDF file format, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).        
+   *   Version: 9.0.0.cl or later   Exports the data from a Liveboard and its visualization in a given file format. You can download the Liveboard data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default `file_format` is CSV. For PDF file format, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  You can also apply [runtime filter](https://developers.thoughtspot.com/docs/?pageid=runtime-filters#_apply_runtime_filters_via_rest_api_v2_0_endpoints) overrides and [sort columns](https://developers.thoughtspot.com/docs/?pageid=runtime-sort#_rest_api_v2_0) to the data retrieved in the API response.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes. If the new Liveboard experience mode, the transient content includes ad hoc changes to visualizations such as sorting, toggling of legends, and data drill down.      
    * @param exportLiveboardReportRequest 
    */
   exportLiveboardReport(exportLiveboardReportRequest, _options) {
@@ -26969,7 +26729,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 9.0.0.cl or later   Fetches data from a saved Answer.  Requires at least view access to the saved Answer.  The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](For more information, and see [Liveboard data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_apis).   ).        
+   *   Version: 9.0.0.cl or later   Fetches data from a saved Answer.  Requires at least view access to the saved Answer.      
    * @param fetchAnswerDataRequest 
    */
   fetchAnswerData(fetchAnswerDataRequest, _options) {
@@ -26985,7 +26745,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 9.0.0.cl or later   Gets data from a Liveboard object and its visualization.    Requires at least view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To get data for specific visualizations, add the GUIDs or names of the visualizations in the API request.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes. If the new Liveboard experience mode, the transient content includes ad hoc changes to visualizations such as sorting, toggling of legends, and data drill down.  For more information, and see [Liveboard data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_fetch_liveboard_data_api).        
+   *   Version: 9.0.0.cl or later   Gets data from a Liveboard object and its visualization.    Requires at least view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To get data for specific visualizations, add the GUIDs or names of the visualizations in the API request.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes. If the new Liveboard experience mode, the transient content includes ad hoc changes to visualizations such as sorting, toggling of legends, and data drill down.      
    * @param fetchLiveboardDataRequest 
    */
   fetchLiveboardData(fetchLiveboardDataRequest, _options) {
@@ -27001,7 +26761,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 9.0.0.cl or later   Fetches security audit logs.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  By default, the API retrieves logs for the last 24 hours. You can set a custom duration in EPOCH time. Make sure the log duration specified in your API request doesn’t exceed 24 hours. If you must fetch logs for a longer time range, modify the duration and make multiple sequential API requests.  Upon successful execution, the API returns logs with the following information: * timestamp of the event * event ID * event type * name and GUID of the user * IP address of ThoughtSpot instance  For more information about security events returned in the API response, see [Security events](https://developers.thoughtspot.com/docs/logs-api#_security_events).      
+   *   Version: 9.0.0.cl or later   Fetches security audit logs.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  By default, the API retrieves logs for the last 24 hours. You can set a custom duration in EPOCH time. Make sure the log duration specified in your API request doesn’t exceed 24 hours. If you must fetch logs for a longer time range, modify the duration and make multiple sequential API requests.  Upon successful execution, the API returns logs with the following information: * timestamp of the event * event ID * event type * name and GUID of the user * IP address of ThoughtSpot instance      
    * @param fetchLogsRequest 
    */
   fetchLogs(fetchLogsRequest, _options) {
@@ -27180,7 +26940,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 9.0.0.cl or later   Generates an Answer from a given data source.  Requires at least view access to the data source object.  #### Usage guidelines  To search data, specify the data source GUID in `logical_table_identifier`. The data source can be a Worksheet, View, Table, or SQL view.  Pass search tokens in the `query_string` attribute in the API request as shown in the following example:  ``` {   \"query_string\": \"[sales] by [store]\",   \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\", } ```  For more information about the `query_string` format and data source attribute, see [Search data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_data_api).    The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).        
+   *   Version: 9.0.0.cl or later   Generates an Answer from a given data source.  Requires at least view access to the data source.  #### Usage guidelines  To generate a new Answer, specify the data source GUID. The data source can be a Worksheet, View, Table, or SQL view.  Pass search tokens in the `query_string` attribute in the API request as shown in the following example. For more information passing search query string in API requests, see [`Components of a search query`](https://developers.thoughtspot.com/docs/?pageid=search-data-api#components).   ``` {   \"query_string\": \"[sales] by [store]\",   \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\", } ```      
    * @param searchDataRequest 
    */
   searchData(searchDataRequest, _options) {
@@ -27295,7 +27055,7 @@ var PromiseThoughtSpotRestApi = class {
   }
   /**
    * Updates a Role. Requires cluster Administration or Role Administration privileges.    Version: 9.5.0.cl or later 
-   * @param roleIdentifier Unique ID or name of the Role.
+   * @param roleIdentifier Unique ID or name of the role.
    * @param updateRoleRequest 
    */
   updateRole(roleIdentifier, updateRoleRequest, _options) {
@@ -27438,7 +27198,7 @@ var PromiseVersionControlApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 9.2.0.cl or later   Allows you to connect a ThoughtSpot instance to a Git repository.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  You can use this API endpoint to connect your ThoughtSpot development and production environments to the development and production branches of a Git repository.  Before using this endpoint to connect your ThoughtSpot instance to a Git repository, check the following prerequisites:  * You have a Git repository. If you are using GitHub, make sure you have a valid account and an access token to connect ThoughtSpot to GitHub. For information about generating a token, see [GitHub Documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).  * Your access token has `repo` scope that grants full access to public and private repositories. * Your Git repository has a branch that can be configured as a default branch in ThoughtSpot.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).  **Note**: ThoughtSpot supports only GitHub / GitHub Enterprise for CI/CD.      
+   *   Version: 9.2.0.cl or later   Allows you to connect a ThoughtSpot instance to a Git repository.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  You can use this API endpoint to connect your ThoughtSpot development and production environments to the development and production branches of a Git repository.  Before using this endpoint to connect your ThoughtSpot instance to a Git repository, check the following prerequisites:  * You have a Git repository. If you are using GitHub, make sure you have a valid account and an access token to connect ThoughtSpot to GitHub. For information about generating a token, see [GitHub Documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).  * Your access token has `repo` scope that grants full access to public and private repositories. * Your Git repository has a branch that can be configured as a default branch in ThoughtSpot.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).      
    * @param createConfigRequest 
    */
   createConfig(createConfigRequest, _options) {
@@ -27673,8 +27433,6 @@ var createBearerAuthenticationConfig = (url, paramOrTokenProvider) => {
   PdfOptions,
   PdfOptionsInput,
   PermissionInput,
-  PermissionOfMetadataResponse,
-  PermissionOfPrincipalsResponse,
   PermissionsMetadataTypeInput,
   PngOptionsInput,
   PrincipalsInput,
@@ -27758,11 +27516,6 @@ var createBearerAuthenticationConfig = (url, paramOrTokenProvider) => {
   User,
   UserGroup,
   UserGroupResponse,
-  UserObject,
-  UserParameterOptions,
-  UserParameters,
-  UserRuntimeFilters,
-  UserRuntimeSorts,
   UsersApi,
   ValidateMergeRequest,
   VersionControlApi,

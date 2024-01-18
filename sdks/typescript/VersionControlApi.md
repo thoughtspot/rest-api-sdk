@@ -88,7 +88,7 @@ Name | Type | Description  | Notes
 # **createConfig**
 > RepoConfigObject createConfig(createConfigRequest)
 
-  Version: 9.2.0.cl or later   Allows you to connect a ThoughtSpot instance to a Git repository.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  You can use this API endpoint to connect your ThoughtSpot development and production environments to the development and production branches of a Git repository.  Before using this endpoint to connect your ThoughtSpot instance to a Git repository, check the following prerequisites:  * You have a Git repository. If you are using GitHub, make sure you have a valid account and an access token to connect ThoughtSpot to GitHub. For information about generating a token, see [GitHub Documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).  * Your access token has `repo` scope that grants full access to public and private repositories. * Your Git repository has a branch that can be configured as a default branch in ThoughtSpot.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).  **Note**: ThoughtSpot supports only GitHub / GitHub Enterprise for CI/CD.      
+  Version: 9.2.0.cl or later   Allows you to connect a ThoughtSpot instance to a Git repository.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  You can use this API endpoint to connect your ThoughtSpot development and production environments to the development and production branches of a Git repository.  Before using this endpoint to connect your ThoughtSpot instance to a Git repository, check the following prerequisites:  * You have a Git repository. If you are using GitHub, make sure you have a valid account and an access token to connect ThoughtSpot to GitHub. For information about generating a token, see [GitHub Documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).  * Your access token has `repo` scope that grants full access to public and private repositories. * Your Git repository has a branch that can be configured as a default branch in ThoughtSpot.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).      
 
 ### Example
 
@@ -113,8 +113,10 @@ apiInstance.createConfig(
       "branch_names_example",
     ],
     commit_branch_name: "commit_branch_name_example",
+    default_branch_name: "default_branch_name_example",
     enable_guid_mapping: true,
     configuration_branch_name: "configuration_branch_name_example",
+    guid_mapping_branch_name: "guid_mapping_branch_name_example",
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -512,8 +514,10 @@ apiInstance.updateConfig(
       "branch_names_example",
     ],
     commit_branch_name: "commit_branch_name_example",
+    default_branch_name: "default_branch_name_example",
     enable_guid_mapping: true,
     configuration_branch_name: "configuration_branch_name_example",
+    guid_mapping_branch_name: "guid_mapping_branch_name_example",
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);

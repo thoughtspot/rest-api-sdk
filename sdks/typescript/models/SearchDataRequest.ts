@@ -14,11 +14,11 @@ import { HttpFile } from '../http/http';
 
 export class SearchDataRequest {
     /**
-    * Query string with search tokens. For example, <code>[Sales][Region]</code>. See [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_data_api)
+    * Data search query string token.
     */
     'query_string': string;
     /**
-    * GUID of the data source object, such as a Worksheet, View, or Table. You can find the GUID of a data object from the UI or via API. See [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_query) for more details.
+    * GUID of the data source object, such as a Worksheet, View, or Table.
     */
     'logical_table_identifier': string;
     /**
@@ -34,15 +34,15 @@ export class SearchDataRequest {
     */
     'record_size'?: number;
     /**
-    * JSON object with representing filter condition to apply filters at runtime. For example, <code> {\"col1\": \"item type\", \"op1\": \"EQ\", \"val1\": \"Bags\"} </code>. You can add multiple keys by incrementing the number at the end, for example, col2, op2, val2, and col3, op3, val3. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_filters).
+    * JSON object representing filter condition to filter the data.
     */
     'runtime_filter'?: any;
     /**
-    * JSON object representing columns to sort data at runtime. For example, <code> {\"sortCol1\": \"sales\", \"asc1\": true} </code>. You can add multiple keys by incrementing the number at the end, for example, sortCol1, asc2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort).
+    * JSON object representing columns to sort the data.
     */
     'runtime_sort'?: any;
     /**
-    * JSON object for setting values of parameters at runtime. For example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>. You can add multiple keys by incrementing the number at the end, for example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters).
+    * JSON object for setting values of parameters in runtime.
     */
     'runtime_param_override'?: any;
 
