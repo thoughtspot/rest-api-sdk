@@ -2680,6 +2680,7 @@
                         "GCP_ALLOYDB_POSTGRESQL",
                         "GCP_POSTGRESQL",
                         "GCP_MYSQL",
+                        "MODE",
                         "RDBMS_LOOKER_ML"
                       ]
                     }
@@ -7176,6 +7177,7 @@
                       "GCP_ALLOYDB_POSTGRESQL",
                       "GCP_POSTGRESQL",
                       "GCP_MYSQL",
+                      "MODE",
                       "RDBMS_LOOKER_ML"
                     ]
                   },
@@ -12029,6 +12031,7 @@
               "GCP_ALLOYDB_POSTGRESQL",
               "GCP_POSTGRESQL",
               "GCP_MYSQL",
+              "MODE",
               "RDBMS_LOOKER_ML"
             ],
             "description": "Type of data warehouse."
@@ -13470,6 +13473,7 @@
               "GCP_ALLOYDB_POSTGRESQL",
               "GCP_POSTGRESQL",
               "GCP_MYSQL",
+              "MODE",
               "RDBMS_LOOKER_ML"
             ],
             "description": "Type of data warehouse."
