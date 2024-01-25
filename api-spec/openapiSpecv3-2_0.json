@@ -988,7 +988,7 @@
                     ]
                   },
                   "role_identifiers": {
-                    "description": "Filter groups with a list of Roles assigned to a group",
+                    "description": "Filter groups with a list of roles assigned to a group",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -1291,7 +1291,7 @@
                 "type": "object",
                 "properties": {
                   "metadata_identifier": {
-                    "description": "ID or name of the Liveboard.",
+                    "description": "ID or name of an Liveboard.",
                     "type": "string"
                   },
                   "visualization_identifiers": {
@@ -1488,11 +1488,11 @@
                     ]
                   },
                   "runtime_filter": {
-                    "description": "JSON object with representing filter condition to apply filters at runtime. For example, {\"col1\": \"region\", \"op1\": \"EQ\", \"val1\": \"northeast\" }. You can add multiple keys by incrementing the number at the end, for example, col2, op2, val2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_filters).",
+                    "description": "JSON string representing runtime filter.\n{ col1:'region', op1: 'EQ', val1: 'northeast' }",
                     "type": "object"
                   },
                   "runtime_sort": {
-                    "description": "JSON string representing runtime sort. For example, {\"sortCol1\": \"region\", \"asc1\" : true}. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort).",
+                    "description": "JSON string representing runtime sort.\n{ sortCol1: 'region', asc1 : true, sortCol2 : 'date' }",
                     "type": "object"
                   },
                   "pdf_options": {
@@ -1504,7 +1504,7 @@
                     "$ref": "#/components/schemas/PngOptionsInput"
                   },
                   "runtime_param_override": {
-                    "description": "JSON object for setting values of parameters at runtime. For example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>. You can add multiple keys by incrementing the number at the end, for example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters).",
+                    "description": "JSON object for setting values of parameters in runtime.",
                     "type": "object"
                   }
                 },
@@ -1746,15 +1746,7 @@
                             }
                           ]
                         }
-                      ],
-                      "__args": {
-                        "principals": [
-                          {
-                            "identifier": "test_user",
-                            "type": "USER"
-                          }
-                        ]
-                      }
+                      ]
                     }
                   }
                 }
@@ -1908,16 +1900,7 @@
                             }
                           ]
                         }
-                      ],
-                      "__args": {
-                        "metadata": [
-                          {
-                            "type": "LIVEBOARD",
-                            "identifier": "a62a5bf3-9f16-45b2-a174-7d30b3b577a9"
-                          }
-                        ],
-                        "include_dependent_objects": false
-                      }
+                      ]
                     }
                   }
                 }
@@ -1982,11 +1965,11 @@
                 "type": "object",
                 "properties": {
                   "query_string": {
-                    "description": "Query string with search tokens. For example, <code>[Sales][Region]</code>. See [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_data_api)",
+                    "description": "Data search query string token.",
                     "type": "string"
                   },
                   "logical_table_identifier": {
-                    "description": "GUID of the data source object, such as a Worksheet, View, or Table. You can find the GUID of a data object from the UI or via API. See [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_query) for more details.",
+                    "description": "GUID of the data source object, such as a Worksheet, View, or Table.",
                     "type": "string"
                   },
                   "data_format": {
@@ -2010,15 +1993,15 @@
                     "format": "int32"
                   },
                   "runtime_filter": {
-                    "description": "JSON object with representing filter condition to apply filters at runtime. For example, <code> {\"col1\": \"item type\", \"op1\": \"EQ\", \"val1\": \"Bags\"} </code>. You can add multiple keys by incrementing the number at the end, for example, col2, op2, val2, and col3, op3, val3. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_filters).",
+                    "description": "JSON object representing filter condition to filter the data.",
                     "type": "object"
                   },
                   "runtime_sort": {
-                    "description": "JSON object representing columns to sort data at runtime. For example, <code> {\"sortCol1\": \"sales\", \"asc1\": true} </code>. You can add multiple keys by incrementing the number at the end, for example, sortCol1, asc2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort).",
+                    "description": "JSON object representing columns to sort the data.",
                     "type": "object"
                   },
                   "runtime_param_override": {
-                    "description": "JSON object for setting values of parameters at runtime. For example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>. You can add multiple keys by incrementing the number at the end, for example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters).",
+                    "description": "JSON object for setting values of parameters in runtime.",
                     "type": "object"
                   }
                 },
@@ -2136,15 +2119,15 @@
                     "format": "int32"
                   },
                   "runtime_filter": {
-                    "description": "JSON object with representing filter condition to apply filters at runtime. For example, <code> {\"col1\": \"item type\", \"op1\": \"EQ\", \"val1\": \"Bags\"} </code>. You can add multiple keys by incrementing the number at the end, for example, col2, op2, val2, and col3, op3, val3. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_filters).",
+                    "description": "JSON object representing filter condition to filter the data.",
                     "type": "object"
                   },
                   "runtime_sort": {
-                    "description": "JSON object representing columns to sort data at runtime. For example, <code> {\"sortCol1\": \"sales\", \"asc1\": true} </code>. You can add multiple keys by incrementing the number at the end, for example, sortCol1, asc2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort).",
+                    "description": "JSON object representing columns to sort the data.",
                     "type": "object"
                   },
                   "runtime_param_override": {
-                    "description": "JSON object for setting values of parameters at runtime. For example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>. You can add multiple keys by incrementing the number at the end, for example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters).",
+                    "description": "JSON object for setting values of parameters in runtime.",
                     "type": "object"
                   }
                 },
@@ -2250,15 +2233,15 @@
                     "format": "int32"
                   },
                   "runtime_filter": {
-                    "description": "JSON object with representing filter condition to apply filters at runtime. For example, <code> {\"col1\": \"item type\", \"op1\": \"EQ\", \"val1\": \"Bags\"} </code>. You can add multiple keys by incrementing the number at the end, for example, col2, op2, val2, and col3, op3, val3. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_filters).",
+                    "description": "JSON object representing filter condition to filter the data.",
                     "type": "object"
                   },
                   "runtime_sort": {
-                    "description": "JSON object representing columns to sort data at runtime. For example, <code> {\"sortCol1\": \"sales\", \"asc1\": true} </code>. You can add multiple keys by incrementing the number at the end, for example, sortCol1, asc2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort).",
+                    "description": "JSON object representing columns to sort the data.",
                     "type": "object"
                   },
                   "runtime_param_override": {
-                    "description": "JSON object for setting values of parameters at runtime. For example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>. You can add multiple keys by incrementing the number at the end, for example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters).",
+                    "description": "JSON object for setting values of parameters in runtime.",
                     "type": "object"
                   }
                 },
@@ -2426,7 +2409,7 @@
     "/api/rest/2.0/vcs/git/config/search": {
       "post": {
         "operationId": "searchConfig",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nGets Git repository connections configured on the ThoughtSpot instance.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nGets Git repository connections configured on the ThoughtSpot instance.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Version Control",
           "9.2.0.cl"
@@ -2511,7 +2494,7 @@
     "/api/rest/2.0/vcs/git/commits/search": {
       "post": {
         "operationId": "searchCommits",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nGets a list of commits for a given metadata object.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nGets a list of commits for a given metadata object.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) privilege.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Version Control",
           "9.2.0.cl"
@@ -2801,7 +2784,7 @@
                 "type": "object",
                 "properties": {
                   "role_identifiers": {
-                    "description": "unique ID or name of the Roles",
+                    "description": "unique ID or name of the roles",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -2822,7 +2805,7 @@
                     }
                   },
                   "privileges": {
-                    "description": "Privileges assigned to the Role. See [Documentation](https://developers.thoughtspot.com/docs/rbac#_role_categories_and_privileges)for supported roles privileges.",
+                    "description": "Privileges assigned to the Role.",
                     "type": "array",
                     "items": {
                       "type": "string",
@@ -2862,21 +2845,18 @@
                     }
                   },
                   "deprecated": {
-                    "description": "Indicates whether the Role is deprecated.",
+                    "description": "Indicates whether the role is deprecated.",
                     "type": "boolean",
-                    "deprecated": true,
                     "nullable": true
                   },
                   "external": {
                     "description": "Indicates whether the Role is external",
                     "type": "boolean",
-                    "deprecated": true,
                     "nullable": true
                   },
                   "shared_via_connection": {
-                    "description": "Indicates whether the Role is shared via connection",
+                    "description": "Indicates whether the role is shared via connection",
                     "type": "boolean",
-                    "deprecated": true,
                     "nullable": true
                   },
                   "permissions": {
@@ -2889,8 +2869,7 @@
                         "MODIFY",
                         "NO_ACCESS"
                       ]
-                    },
-                    "deprecated": true
+                    }
                   }
                 }
               }
@@ -4390,7 +4369,7 @@
     "/api/rest/2.0/users/activate": {
       "post": {
         "operationId": "activateUser",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.7.0.cl or later</span>\n\nActivates a user.\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.7.0.cl or later</span>\n\nActivates a deactivated user account.\n\nRequires `ADMINISTRATION` (**Can administer Thoughtspot**) privilege.\n\nTo activate an inactive user account, the API request body must include the following information:\n\n- Username or the GUID of the user account.\n- Auth token generated for the deactivated user. The auth token is sent in the API response when a user is deactivated.\n- Password for the user account.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Users",
           "9.7.0.cl"
@@ -4482,7 +4461,7 @@
     "/api/rest/2.0/users/deactivate": {
       "post": {
         "operationId": "deactivateUser",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.7.0.cl or later</span>\n\nDeactivates a user.\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.7.0.cl or later</span>\n\nDeactivates a user account.\n\nRequires `ADMINISTRATION` (**Can administer Thoughtspot**) privilege.\n\nTo deactivate a user account, the API request body must include the following information:\n\n- Username or the GUID of the user account\n- Base URL of the ThoughtSpot instance\n\nIf the API request is successful, ThoughtSpot returns the activation URL in the response. The activation URL is valid for 14 days and can be used to re-activate the account and reset the password of the deactivated account.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Users",
           "9.7.0.cl"
@@ -5596,7 +5575,7 @@
                     ]
                   },
                   "role_identifiers": {
-                    "description": "Role identifiers of the Roles that should be assigned to the group.",
+                    "description": "Role identifiers of the roles that should be assigned to the group.",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -6344,7 +6323,7 @@
     "/api/rest/2.0/vcs/git/config/create": {
       "post": {
         "operationId": "createConfig",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nAllows you to connect a ThoughtSpot instance to a Git repository.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\nYou can use this API endpoint to connect your ThoughtSpot development and production environments to the development and production branches of a Git repository.\n\nBefore using this endpoint to connect your ThoughtSpot instance to a Git repository, check the following prerequisites:\n\n* You have a Git repository. If you are using GitHub, make sure you have a valid account and an access token to connect ThoughtSpot to GitHub. For information about generating a token, see [GitHub Documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).\n\n* Your access token has `repo` scope that grants full access to public and private repositories.\n* Your Git repository has a branch that can be configured as a default branch in ThoughtSpot.\n\nFor more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).\n\n**Note**: ThoughtSpot supports only GitHub / GitHub Enterprise for CI/CD.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nAllows you to connect a ThoughtSpot instance to a Git repository.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\nYou can use this API endpoint to connect your ThoughtSpot development and production environments to the development and production branches of a Git repository.\n\nBefore using this endpoint to connect your ThoughtSpot instance to a Git repository, check the following prerequisites:\n\n* You have a Git repository. If you are using GitHub, make sure you have a valid account and an access token to connect ThoughtSpot to GitHub. For information about generating a token, see [GitHub Documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).\n\n* Your access token has `repo` scope that grants full access to public and private repositories.\n* Your Git repository has a branch that can be configured as a default branch in ThoughtSpot.\n\nFor more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).\n\n**Note**: ThoughtSpot supports only GitHub / GitHub Enterprise for CI/CD.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Version Control",
           "9.2.0.cl"
@@ -6471,7 +6450,7 @@
     "/api/rest/2.0/vcs/git/config/update": {
       "post": {
         "operationId": "updateConfig",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nUpdates Git repository configuration settings.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nUpdates Git repository configuration settings.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Version Control",
           "9.2.0.cl"
@@ -6588,7 +6567,7 @@
     "/api/rest/2.0/vcs/git/config/delete": {
       "post": {
         "operationId": "deleteConfig",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nDeletes Git repository configuration from your ThoughtSpot instance.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nDeletes Git repository configuration from your ThoughtSpot instance.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Version Control",
           "9.2.0.cl"
@@ -6661,7 +6640,7 @@
     "/api/rest/2.0/vcs/git/branches/commit": {
       "post": {
         "operationId": "commitBranch",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nCommits TML files of metadata objects to the Git branch configured on your instance.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\nBefore using this endpoint to push your commits:\n\n* Enable Git integration on your instance.\n* Make sure the Git repository and branch details are configured on your instance.\n\nFor more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nCommits TML files of metadata objects to the Git branch configured on your instance.\n\nRequires `DATAMANAGEMENT` privilege.\n\nBefore using this endpoint to push your commits:\n\n* Enable Git integration on your instance.\n* Make sure the Git repository and branch details are configured on your instance.\n\nFor more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Version Control",
           "9.2.0.cl"
@@ -6761,7 +6740,7 @@
     "/api/rest/2.0/vcs/git/commits/{commit_id}/revert": {
       "post": {
         "operationId": "revertCommit",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nReverts TML objects to a previous commit specified in the API request.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\nIn the API request, specify the `commit_id`. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.\n\nBy default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nReverts TML objects to a previous commit specified in the API request.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) privilege.\n\nIn the API request, specify the `commit_id`. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.\n\nBy default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Version Control",
           "9.2.0.cl"
@@ -6866,7 +6845,7 @@
     "/api/rest/2.0/vcs/git/branches/validate": {
       "post": {
         "operationId": "validateMerge",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nValidates the content of your source branch against the objects in your destination environment.\n\nBefore merging content from your source branch to the destination branch, run this API operation from your destination environment and ensure that the changes from the source branch function in the destination environment.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nValidates the content of your source branch against the objects in your destination environment.\n\nBefore merging content from your source branch to the destination branch, run this API operation from your destination environment and ensure that the changes from the source branch function in the destination environment.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) privilege.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Version Control",
           "9.2.0.cl"
@@ -6956,7 +6935,7 @@
     "/api/rest/2.0/vcs/git/commits/deploy": {
       "post": {
         "operationId": "deployCommit",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nAllows you to deploy a commit and publish TML content to your ThoughtSpot instance.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\nThe API deploys the head of the branch unless a `commit_id` is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nAllows you to deploy a commit and publish TML content to your ThoughtSpot instance.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) privilege.\n\nThe API deploys the head of the branch unless a `commit_id` is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Version Control",
           "9.2.0.cl"
@@ -7370,15 +7349,15 @@
                 "type": "object",
                 "properties": {
                   "name": {
-                    "description": "Unique name of the Role.",
+                    "description": "Unique name of the role.",
                     "type": "string"
                   },
                   "description": {
-                    "description": "Description of the Role.",
+                    "description": "Description of the role.",
                     "type": "string"
                   },
                   "privileges": {
-                    "description": "Privileges granted to the Role. See [Documentation](https://developers.thoughtspot.com/docs/rbac#_role_categories_and_privileges)for supported roles privileges.",
+                    "description": "Privileges granted to the role.",
                     "type": "array",
                     "items": {
                       "type": "string",
@@ -7488,11 +7467,11 @@
                     "type": "string"
                   },
                   "description": {
-                    "description": "Description of the Role.",
+                    "description": "Description of the Role",
                     "type": "string"
                   },
                   "privileges": {
-                    "description": "Privileges granted to the role. See [Documentation](https://developers.thoughtspot.com/docs/rbac#_role_categories_and_privileges)for supported roles privileges.",
+                    "description": "Privileges granted to the role.",
                     "type": "array",
                     "items": {
                       "type": "string",
@@ -7536,7 +7515,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique ID or name of the Role."
+            "description": "Unique ID or name of the role."
           }
         ],
         "responses": {
@@ -7609,7 +7588,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique ID or name of the Role."
+            "description": "Unique ID or name of the role."
           }
         ],
         "responses": {
@@ -10875,7 +10854,7 @@
               "USER_GROUP",
               "LOGICAL_RELATIONSHIP"
             ],
-            "description": "Type of metadata. Required if the name of the object is set as identifier. This attribute is optional when the object GUID is specified as identifier.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view.\n5. CONNECTION for creating or modify data connections.\n6. TAG for tag objects.\n7. USER for user objects.\n8. USER_GROUP for group objects.\n9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values"
+            "description": "Type of metadata.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view.\n5. CONNECTION for creating or modify data connections.\n6. TAG for tag objects.\n7. USER for user objects.\n8. USER_GROUP for group objects.\n9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values"
           }
         }
       },
@@ -10926,7 +10905,7 @@
               "USER_GROUP",
               "LOGICAL_RELATIONSHIP"
             ],
-            "description": "Type of metadata. Required if the name of the object is set as identifier. This attribute is optional when the object GUID is specified as identifier.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view\n4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view\n5. CONNECTION for connection objects\n6. TAG for tag objects\n7. USER for user objects\n8. USER_GROUP for group objects\n9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values."
+            "description": "Type of metadata.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view\n4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view\n5. CONNECTION for connection objects\n6. TAG for tag objects\n7. USER for user objects\n8. USER_GROUP for group objects\n9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values."
           }
         }
       },
