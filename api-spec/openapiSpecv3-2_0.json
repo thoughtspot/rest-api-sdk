@@ -344,7 +344,8 @@
                 }
               }
             }
-          }
+          },
+          "required": true
         },
         "parameters": [],
         "responses": {
@@ -677,7 +678,8 @@
                 }
               }
             }
-          }
+          },
+          "required": true
         },
         "parameters": [],
         "responses": {
@@ -786,7 +788,8 @@
                 }
               }
             }
-          }
+          },
+          "required": true
         },
         "parameters": [],
         "responses": {
@@ -1010,7 +1013,8 @@
                 }
               }
             }
-          }
+          },
+          "required": true
         },
         "parameters": [],
         "responses": {
@@ -1211,7 +1215,8 @@
                 }
               }
             }
-          }
+          },
+          "required": true
         },
         "parameters": [],
         "responses": {
@@ -1516,11 +1521,7 @@
           "200": {
             "description": "Export report file of specified metadata object is successful.",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
+              "application/octet-stream": {}
             }
           },
           "400": {
@@ -1621,11 +1622,7 @@
           "200": {
             "description": "Export report file of specified metadata object is successful.",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
+              "application/octet-stream": {}
             }
           },
           "400": {
@@ -2433,7 +2430,8 @@
                 }
               }
             }
-          }
+          },
+          "required": true
         },
         "parameters": [],
         "responses": {
@@ -2710,7 +2708,8 @@
                 }
               }
             }
-          }
+          },
+          "required": true
         },
         "parameters": [],
         "responses": {
@@ -2875,7 +2874,8 @@
                 }
               }
             }
-          }
+          },
+          "required": true
         },
         "parameters": [],
         "responses": {
@@ -2991,7 +2991,8 @@
                 }
               }
             }
-          }
+          },
+          "required": true
         },
         "parameters": [],
         "responses": {
@@ -3104,7 +3105,8 @@
                 }
               }
             }
-          }
+          },
+          "required": true
         },
         "parameters": [],
         "responses": {
@@ -3490,7 +3492,8 @@
                 }
               }
             }
-          }
+          },
+          "required": true
         },
         "parameters": [],
         "responses": {
@@ -3895,7 +3898,8 @@
                 }
               }
             }
-          }
+          },
+          "required": true
         },
         "parameters": [
           {
@@ -4311,7 +4315,8 @@
                 }
               }
             }
-          }
+          },
+          "required": true
         },
         "parameters": [],
         "responses": {
@@ -4754,7 +4759,8 @@
                 }
               }
             }
-          }
+          },
+          "required": true
         },
         "parameters": [
           {
@@ -5009,7 +5015,8 @@
                 }
               }
             }
-          }
+          },
+          "required": true
         },
         "parameters": [
           {
@@ -5587,7 +5594,8 @@
                 }
               }
             }
-          }
+          },
+          "required": true
         },
         "parameters": [
           {
@@ -5749,7 +5757,8 @@
                 }
               }
             }
-          }
+          },
+          "required": true
         },
         "parameters": [],
         "responses": {
@@ -6497,7 +6506,8 @@
                 }
               }
             }
-          }
+          },
+          "required": true
         },
         "parameters": [],
         "responses": {
@@ -6576,7 +6586,8 @@
                 }
               }
             }
-          }
+          },
+          "required": true
         },
         "parameters": [],
         "responses": {
@@ -6763,7 +6774,8 @@
                 }
               }
             }
-          }
+          },
+          "required": true
         },
         "parameters": [
           {
@@ -8505,7 +8517,8 @@
                 }
               }
             }
-          }
+          },
+          "required": true
         },
         "parameters": [],
         "responses": {
@@ -9269,7 +9282,8 @@
                 }
               }
             }
-          }
+          },
+          "required": true
         },
         "parameters": [
           {
@@ -9504,7 +9518,8 @@
                 }
               }
             }
-          }
+          },
+          "required": true
         },
         "parameters": [
           {
