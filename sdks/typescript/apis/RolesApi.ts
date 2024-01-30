@@ -72,7 +72,7 @@ export class RolesApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * Deletes a Role. Requires cluster Administration or Role Administration privileges.    Version: 9.5.0.cl or later 
-     * @param roleIdentifier Unique ID or name of the role.
+     * @param roleIdentifier Unique ID or name of the Role.
      */
     public async deleteRole(roleIdentifier: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -162,7 +162,7 @@ export class RolesApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * Updates a Role. Requires cluster Administration or Role Administration privileges.    Version: 9.5.0.cl or later 
-     * @param roleIdentifier Unique ID or name of the role.
+     * @param roleIdentifier Unique ID or name of the Role.
      * @param updateRoleRequest 
      */
     public async updateRole(roleIdentifier: string, updateRoleRequest: UpdateRoleRequest, _options?: Configuration): Promise<RequestContext> {

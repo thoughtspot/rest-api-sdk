@@ -11,6 +11,7 @@
  */
 
 import { JWTUserOptionsFull } from '../models/JWTUserOptionsFull';
+import { UserParameterOptions } from '../models/UserParameterOptions';
 import { HttpFile } from '../http/http';
 
 export class GetFullAccessTokenRequest {
@@ -51,6 +52,7 @@ export class GetFullAccessTokenRequest {
     */
     'group_identifiers'?: Array<string>;
     'jwt_user_options'?: JWTUserOptionsFull;
+    'user_parameters'?: UserParameterOptions;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -113,6 +115,12 @@ export class GetFullAccessTokenRequest {
             "name": "jwt_user_options",
             "baseName": "jwt_user_options",
             "type": "JWTUserOptionsFull",
+            "format": ""
+        },
+        {
+            "name": "user_parameters",
+            "baseName": "user_parameters",
+            "type": "UserParameterOptions",
             "format": ""
         }    ];
 
