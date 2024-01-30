@@ -1721,6 +1721,30 @@
                     "items": {
                       "$ref": "#/components/schemas/PermissionsMetadataTypeInput"
                     }
+                  },
+                  "record_offset": {
+                    "description": "The starting record number from where the records should be included for each metadata type.",
+                    "default": 0,
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "record_size": {
+                    "description": "The number of records that should be included for each metadata type.",
+                    "default": -1,
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "default_metadata_type": {
+                    "description": "When no metadata objects input is passed, metadata objects of this type are fetched.",
+                    "type": "string",
+                    "enum": [
+                      "ALL",
+                      "LIVEBOARD",
+                      "ANSWER",
+                      "LOGICAL_TABLE",
+                      "LOGICAL_COLUMN",
+                      "CONNECTION"
+                    ]
                   }
                 },
                 "required": [
