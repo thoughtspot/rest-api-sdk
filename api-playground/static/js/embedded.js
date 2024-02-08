@@ -90,7 +90,6 @@ const setPlaygroundConfig = ({ baseUrl, accessToken }) => {
         },
         config: {
           ...defaultConfig.config,
-          AccessToken: accessToken,
           "base-url": baseUrl,
         },
       };
