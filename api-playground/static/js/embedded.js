@@ -1,5 +1,3 @@
-
-
 const navigateEndpoint = (apiResourceId) => {
   document.location.hash = apiResourceId;
 };
@@ -52,8 +50,6 @@ const patchURLAndPlayground = async ({ baseUrl, accessToken }) => {
 const channel = new MessageChannel();
 let playgroundConfig = {};
 
-
-
 function getElementByIdAsync(id) {
   let maxTime = 2000;
   const STEP = 16;
@@ -87,9 +83,15 @@ const setPlaygroundConfig = ({ baseUrl, accessToken }) => {
       return {
         ...defaultConfig,
         showFullCode: false,
+        auth: {
+          ...defaultConfig.auth,
+          bearerAuth: {
+            ...defaultConfig.auth.bearerAuth,
+            AccessToken: "accessToken",
+          },
+        },
         config: {
           ...defaultConfig.config,
-          AccessToken: accessToken,
           "base-url": baseUrl,
         },
       };
