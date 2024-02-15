@@ -82,10 +82,14 @@ const setPlaygroundConfig = ({ baseUrl, accessToken }) => {
     _setConfig((defaultConfig) => {
       return {
         ...defaultConfig,
-        showFullCode: false,       
+        showFullCode: false,   
+        auth: {
+          bearerAuth: {
+            AccessToken: accessToken,
+          },
+        },
         config: {
           ...defaultConfig.config,
-          AccessToken: accessToken,
           "base-url": baseUrl,
         },
       };
