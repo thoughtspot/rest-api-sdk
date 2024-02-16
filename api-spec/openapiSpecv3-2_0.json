@@ -14,6 +14,14 @@
       "description": "Roles for version 9.0.0.cl"
     },
     {
+      "name": "9.12.0.cl",
+      "id": "9.12.0.cl",
+      "tags": [
+        "9.12.0.cl"
+      ],
+      "description": "Roles for version 9.12.0.cl"
+    },
+    {
       "name": "9.7.0.cl",
       "id": "9.7.0.cl",
       "tags": [
@@ -2388,6 +2396,12 @@
                     "description": "End time in EPOCH format",
                     "type": "number",
                     "format": "float"
+                  },
+                  "get_all_logs": {
+                    "description": "Fetch all the logs. This is available from 9.11.0.cl",
+                    "default": true,
+                    "type": "boolean",
+                    "nullable": true
                   }
                 },
                 "required": [
@@ -3582,6 +3596,87 @@
         "responses": {
           "204": {
             "description": "Token successfully revoked."
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/auth/token/validate": {
+      "post": {
+        "operationId": "validateToken",
+        "description": " <span class=\"since-beta-tag\">Version: 9.12.0.cl or later</span>",
+        "tags": [
+          "Authentication",
+          "9.12.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "token": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "token"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Token validation successful.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenValidationResponse"
+                }
+              }
+            }
           },
           "400": {
             "description": "Invalid request.",
@@ -12893,6 +12988,40 @@
           }
         },
         "description": "JWT user options to create a JWT token given the payload."
+      },
+      "TokenValidationResponse": {
+        "type": "object",
+        "required": [
+          "creation_time_in_millis",
+          "expiration_time_in_millis",
+          "scope",
+          "valid_for_user_id",
+          "token_type"
+        ],
+        "properties": {
+          "creation_time_in_millis": {
+            "type": "number",
+            "format": "float",
+            "description": "Token creation time in milliseconds."
+          },
+          "expiration_time_in_millis": {
+            "type": "number",
+            "format": "float",
+            "description": "Token expiration time in milliseconds."
+          },
+          "scope": {
+            "$ref": "#/components/schemas/Scope",
+            "description": "Token access scope details"
+          },
+          "valid_for_user_id": {
+            "type": "string",
+            "description": "Username to whom the token is issued."
+          },
+          "token_type": {
+            "type": "string",
+            "description": "Type of token."
+          }
+        }
       },
       "ResponseActivationURL": {
         "type": "object",
