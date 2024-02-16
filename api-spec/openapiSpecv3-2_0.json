@@ -52,6 +52,14 @@
         "9.6.0.cl"
       ],
       "description": "Roles for version 9.6.0.cl"
+    },
+    {
+      "name": "9.8.0.cl",
+      "id": "9.8.0.cl",
+      "tags": [
+        "9.8.0.cl"
+      ],
+      "description": "Roles for version 9.8.0.cl"
     }
   ],
   "tags": [],
@@ -988,7 +996,7 @@
                     ]
                   },
                   "role_identifiers": {
-                    "description": "Filter groups with a list of Roles assigned to a group",
+                    "description": "Filter groups with a list of roles assigned to a group",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -1488,11 +1496,11 @@
                     ]
                   },
                   "runtime_filter": {
-                    "description": "JSON object with representing filter condition to apply filters at runtime. For example, {\"col1\": \"region\", \"op1\": \"EQ\", \"val1\": \"northeast\" }. You can add multiple keys by incrementing the number at the end, for example, col2, op2, val2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_filters).",
+                    "description": "JSON string representing runtime filter.\n{ col1:'region', op1: 'EQ', val1: 'northeast' }",
                     "type": "object"
                   },
                   "runtime_sort": {
-                    "description": "JSON string representing runtime sort. For example, {\"sortCol1\": \"region\", \"asc1\" : true}. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort).",
+                    "description": "JSON string representing runtime sort.\n{ sortCol1: 'region', asc1 : true, sortCol2 : 'date' }",
                     "type": "object"
                   },
                   "pdf_options": {
@@ -1504,7 +1512,7 @@
                     "$ref": "#/components/schemas/PngOptionsInput"
                   },
                   "runtime_param_override": {
-                    "description": "JSON object for setting values of parameters at runtime. For example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>. You can add multiple keys by incrementing the number at the end, for example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters).",
+                    "description": "JSON object for setting values of parameters in runtime.",
                     "type": "object"
                   }
                 },
@@ -1746,15 +1754,7 @@
                             }
                           ]
                         }
-                      ],
-                      "__args": {
-                        "principals": [
-                          {
-                            "identifier": "test_user",
-                            "type": "USER"
-                          }
-                        ]
-                      }
+                      ]
                     }
                   }
                 }
@@ -1908,16 +1908,7 @@
                             }
                           ]
                         }
-                      ],
-                      "__args": {
-                        "metadata": [
-                          {
-                            "type": "LIVEBOARD",
-                            "identifier": "a62a5bf3-9f16-45b2-a174-7d30b3b577a9"
-                          }
-                        ],
-                        "include_dependent_objects": false
-                      }
+                      ]
                     }
                   }
                 }
@@ -1982,11 +1973,11 @@
                 "type": "object",
                 "properties": {
                   "query_string": {
-                    "description": "Query string with search tokens. For example, <code>[Sales][Region]</code>. See [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_data_api)",
+                    "description": "Data search query string token.",
                     "type": "string"
                   },
                   "logical_table_identifier": {
-                    "description": "GUID of the data source object, such as a Worksheet, View, or Table. You can find the GUID of a data object from the UI or via API. See [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_query) for more details.",
+                    "description": "GUID of the data source object, such as a Worksheet, View, or Table.",
                     "type": "string"
                   },
                   "data_format": {
@@ -2010,15 +2001,15 @@
                     "format": "int32"
                   },
                   "runtime_filter": {
-                    "description": "JSON object with representing filter condition to apply filters at runtime. For example, <code> {\"col1\": \"item type\", \"op1\": \"EQ\", \"val1\": \"Bags\"} </code>. You can add multiple keys by incrementing the number at the end, for example, col2, op2, val2, and col3, op3, val3. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_filters).",
+                    "description": "JSON object representing filter condition to filter the data.",
                     "type": "object"
                   },
                   "runtime_sort": {
-                    "description": "JSON object representing columns to sort data at runtime. For example, <code> {\"sortCol1\": \"sales\", \"asc1\": true} </code>. You can add multiple keys by incrementing the number at the end, for example, sortCol1, asc2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort).",
+                    "description": "JSON object representing columns to sort the data.",
                     "type": "object"
                   },
                   "runtime_param_override": {
-                    "description": "JSON object for setting values of parameters at runtime. For example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>. You can add multiple keys by incrementing the number at the end, for example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters).",
+                    "description": "JSON object for setting values of parameters in runtime.",
                     "type": "object"
                   }
                 },
@@ -2136,15 +2127,15 @@
                     "format": "int32"
                   },
                   "runtime_filter": {
-                    "description": "JSON object with representing filter condition to apply filters at runtime. For example, <code> {\"col1\": \"item type\", \"op1\": \"EQ\", \"val1\": \"Bags\"} </code>. You can add multiple keys by incrementing the number at the end, for example, col2, op2, val2, and col3, op3, val3. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_filters).",
+                    "description": "JSON object representing filter condition to filter the data.",
                     "type": "object"
                   },
                   "runtime_sort": {
-                    "description": "JSON object representing columns to sort data at runtime. For example, <code> {\"sortCol1\": \"sales\", \"asc1\": true} </code>. You can add multiple keys by incrementing the number at the end, for example, sortCol1, asc2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort).",
+                    "description": "JSON object representing columns to sort the data.",
                     "type": "object"
                   },
                   "runtime_param_override": {
-                    "description": "JSON object for setting values of parameters at runtime. For example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>. You can add multiple keys by incrementing the number at the end, for example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters).",
+                    "description": "JSON object for setting values of parameters in runtime.",
                     "type": "object"
                   }
                 },
@@ -2250,15 +2241,15 @@
                     "format": "int32"
                   },
                   "runtime_filter": {
-                    "description": "JSON object with representing filter condition to apply filters at runtime. For example, <code> {\"col1\": \"item type\", \"op1\": \"EQ\", \"val1\": \"Bags\"} </code>. You can add multiple keys by incrementing the number at the end, for example, col2, op2, val2, and col3, op3, val3. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_filters).",
+                    "description": "JSON object representing filter condition to filter the data.",
                     "type": "object"
                   },
                   "runtime_sort": {
-                    "description": "JSON object representing columns to sort data at runtime. For example, <code> {\"sortCol1\": \"sales\", \"asc1\": true} </code>. You can add multiple keys by incrementing the number at the end, for example, sortCol1, asc2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort).",
+                    "description": "JSON object representing columns to sort the data.",
                     "type": "object"
                   },
                   "runtime_param_override": {
-                    "description": "JSON object for setting values of parameters at runtime. For example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>. You can add multiple keys by incrementing the number at the end, for example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters).",
+                    "description": "JSON object for setting values of parameters in runtime.",
                     "type": "object"
                   }
                 },
@@ -2438,7 +2429,7 @@
                 "type": "object",
                 "properties": {
                   "org_identifiers": {
-                    "description": "   List of Org IDs. Provide value -1 for cluster level. Example : [\"OrgID1-or-Name1\", \"OrgID2-or-Name2\"]\n   \n\nNote:  If no org identifier is specified,then the configurations will be returned for all orgs the user has access to <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
+                    "description": "   Applicable when Orgs is enabled in the cluster\n   \n\nList of Org ids or name. Provide value -1 for cluster level. Example : [\"OrgID1-or-Name1\", \"OrgID2-or-Name2\"] \n\n\n   \n\nNote: If no value is specified, then the configurations will be returned for all orgs the user has access to  <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -2511,7 +2502,7 @@
     "/api/rest/2.0/vcs/git/commits/search": {
       "post": {
         "operationId": "searchCommits",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nGets a list of commits for a given metadata object.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nGets a list of commits for a given metadata object.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) privilege.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Version Control",
           "9.2.0.cl"
@@ -2665,7 +2656,11 @@
                         "AMAZON_RDS_MYSQL",
                         "AMAZON_AURORA_MYSQL",
                         "LOOKER",
-                        "AMAZON_ATHENA"
+                        "AMAZON_ATHENA",
+                        "SINGLESTORE",
+                        "GCP_SQLSERVER",
+                        "GCP_ALLOYDB_POSTGRESQL",
+                        "GCP_POSTGRESQL"
                       ]
                     }
                   },
@@ -2801,7 +2796,7 @@
                 "type": "object",
                 "properties": {
                   "role_identifiers": {
-                    "description": "unique ID or name of the Roles",
+                    "description": "unique ID or name of the roles",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -2822,7 +2817,7 @@
                     }
                   },
                   "privileges": {
-                    "description": "Privileges assigned to the Role. See [Documentation](https://developers.thoughtspot.com/docs/rbac#_role_categories_and_privileges)for supported roles privileges.",
+                    "description": "Privileges assigned to the Role.",
                     "type": "array",
                     "items": {
                       "type": "string",
@@ -2862,21 +2857,18 @@
                     }
                   },
                   "deprecated": {
-                    "description": "Indicates whether the Role is deprecated.",
+                    "description": "Indicates whether the role is deprecated.",
                     "type": "boolean",
-                    "deprecated": true,
                     "nullable": true
                   },
                   "external": {
                     "description": "Indicates whether the Role is external",
                     "type": "boolean",
-                    "deprecated": true,
                     "nullable": true
                   },
                   "shared_via_connection": {
-                    "description": "Indicates whether the Role is shared via connection",
+                    "description": "Indicates whether the role is shared via connection",
                     "type": "boolean",
-                    "deprecated": true,
                     "nullable": true
                   },
                   "permissions": {
@@ -2889,8 +2881,7 @@
                         "MODIFY",
                         "NO_ACCESS"
                       ]
-                    },
-                    "deprecated": true
+                    }
                   }
                 }
               }
@@ -3180,7 +3171,7 @@
     "/api/rest/2.0/auth/token/object": {
       "post": {
         "operationId": "getObjectAccessToken",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGets an authentication token that provides access to a specific metadata object. By default, the token obtained from ThoughtSpot remains valid for 5 mins.\n\nYou can generate the token for a user by providing a `username` and `password` (for [Bearer token authentication](https://developers.thoughtspot.com/docs/?pageid=api-authv2#bearerToken)), or by using the cluster’s `secret key` (for [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable)).\n\nTo generate a `secret_key` on your cluster, the administrator must enable **Trusted authentication** in the **Develop** > **Customizations** > **Security Settings** page.\n\n**Note**: When both `password` and `secret_key` are included in the API request,  `password` takes precedence.\n\n#### Just-in-time provisioning\n\nFor just-in-time user creation and provisioning, use the following attributes.\n\n* `auto_create`\n* `username`\n\nTo assign privileges to the new user, specify the group name or GUID in `group_identifiers`.\n\nTo add the user to an Org, send the `Org ID` in the API request.\n\n**Note**: This feature is available only if Trusted authentication is enabled on your cluster.\n\nTo provision a new user and assign privileges, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGets an authentication token that provides access to a specific metadata object. By default, the token obtained from ThoughtSpot remains valid for 5 mins.\n\nYou can generate the token for a user by providing a `username` and `password` (for [Basic authentication](https://developers.thoughtspot.com/docs/api-authv2#_basic_authentication)), or by using the cluster’s `secret_key` (for [Trusted authentication](https://developers.thoughtspot.com/docs/api-authv2#trusted-auth-v2)).\n\nTo generate a `secret_key` on your cluster, the administrator must enable **Trusted authentication** in the **Develop** > **Customizations** > **Security Settings** page.\n\n**Note**: When both `password` and `secret_key` are included in the API request, `secret_key` takes precedence.\n\nTo get a token for a specific Org, define the Org ID. If no ID is specified, the token is generated for the primary Org (Org 0).\n\n#### Just-in-time provisioning\n\nFor just-in-time user creation and provisioning, define the following attributes:\n\n* `auto_create`\n* `username`\n* `display_name`\n* `email`\n* `group_identifiers`\n\nSet `auto_create` to `True` if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create` parameter is set to `true`, the API call will update user properties like display name, email and group assignment.\n\nFor more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).\n\nTo provision a new user and assign privileges, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Authentication",
           "9.0.0.cl"
@@ -3216,7 +3207,7 @@
                     "format": "int32"
                   },
                   "org_id": {
-                    "description": "ID of the Org context to log in to. If Org ID is not specified, the user will be logged in to the Org context of their previous login session.",
+                    "description": "ID of the Org context to log in to. If Org ID is not specified, the token is generated for the Primary Org (Org 0).",
                     "default": 0,
                     "type": "integer",
                     "format": "int32"
@@ -3241,6 +3232,10 @@
                     "items": {
                       "type": "string"
                     }
+                  },
+                  "jwt_user_options": {
+                    "description": "JWT user options to create a JWT token given the payload.",
+                    "$ref": "#/components/schemas/JWT_User_Options"
                   }
                 },
                 "required": [
@@ -3311,7 +3306,7 @@
     "/api/rest/2.0/auth/token/full": {
       "post": {
         "operationId": "getFullAccessToken",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGets an authentication token and creates a full session in ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot remains valid for 5 mins.\n\nYou can generate the token for a user by providing a `username` and `password` (for [Bearer token authentication](https://developers.thoughtspot.com/docs/?pageid=api-authv2#bearerToken)), or by using the cluster’s `secret_key` (for [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable)).\n\nTo generate a `secret_key` on your cluster, the administrator must enable **Trusted authentication** in the **Develop** > **Customizations** > **Security Settings** page. For more information, see [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable).\n\n**Note**: When both `password` and `secret_key` are included in the API request, `password` takes precedence.\n\n#### Just-in-time provisioning\n\nFor just-in-time user creation and provisioning, use the following attributes.\n\n* `auto_create`\n* `username`\n\nTo assign privileges to the new user, specify the group name or GUID in `group_identifiers`.\n\nTo add the user to an Org, specify the Org ID in the `org_id` attribute.\n\n**Note**: This feature is available only on clusters with trusted authentication enabled.\n\nTo provision a new user and assign privileges, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGets an authentication token and creates a full session in ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot remains valid for 5 mins.\n\nYou can generate the token for a user by providing a `username` and `password` (for [Basic authentication](https://developers.thoughtspot.com/docs/api-authv2#_basic_authentication)), or by using the cluster’s `secret_key` (for [Trusted authentication](https://developers.thoughtspot.com/docs/api-authv2#trusted-auth-v2)).\n\nTo generate a `secret_key` on your cluster, the administrator must enable **Trusted authentication** in the **Develop** > **Customizations** > **Security Settings** page. For more information, see [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable).\n\n**Note**: When both `password` and `secret_key` are included in the API request, `secret_key` takes precedence.\n\nTo get a token for a specific Org, define the Org ID. If no ID is specified, the token is generated for the primary Org (Org 0).\n\n#### Just-in-time provisioning\n\nFor just-in-time user creation and provisioning, define the following attributes:\n\n* `auto_create`\n* `username`\n* `display_name`\n* `email`\n* `group_identifiers`\n\nSet `auto_create` to `True` if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create` parameter is set to `true`, the API call will update user properties like display name, email and group assignment.\n\nFor more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).\n\nTo provision a new user and assign privileges, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Authentication",
           "9.0.0.cl"
@@ -3343,7 +3338,7 @@
                     "format": "int32"
                   },
                   "org_id": {
-                    "description": "ID of the Org context to log in to. If the Org ID is not specified, the user will be logged in to the Org context of their previous login session.",
+                    "description": "ID of the Org context to log in to. If Org ID is not specified, the token is generated for the Primary Org (Org 0).",
                     "default": 0,
                     "type": "integer",
                     "format": "int32"
@@ -3368,6 +3363,10 @@
                     "items": {
                       "type": "string"
                     }
+                  },
+                  "jwt_user_options": {
+                    "description": "JWT user options to create a JWT token given the payload.",
+                    "$ref": "#/components/schemas/JWT_User_Options"
                   }
                 },
                 "required": [
@@ -3706,6 +3705,11 @@
                   },
                   "trigger_welcome_email": {
                     "description": "Flag to indicate whether welcome email should be sent to user",
+                    "type": "boolean",
+                    "nullable": true
+                  },
+                  "trigger_activation_email": {
+                    "description": "Flag to indicate whether activation email should be sent to user",
                     "type": "boolean",
                     "nullable": true
                   }
@@ -4390,7 +4394,7 @@
     "/api/rest/2.0/users/activate": {
       "post": {
         "operationId": "activateUser",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.7.0.cl or later</span>\n\nActivates a user.\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.7.0.cl or later</span>\n\nActivates a deactivated user account.\n\nRequires `ADMINISTRATION` (**Can administer Thoughtspot**) privilege.\n\nTo activate an inactive user account, the API request body must include the following information:\n\n- Username or the GUID of the user account.\n- Auth token generated for the deactivated user. The auth token is sent in the API response when a user is deactivated.\n- Password for the user account.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Users",
           "9.7.0.cl"
@@ -4482,7 +4486,7 @@
     "/api/rest/2.0/users/deactivate": {
       "post": {
         "operationId": "deactivateUser",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.7.0.cl or later</span>\n\nDeactivates a user.\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.7.0.cl or later</span>\n\nDeactivates a user account.\n\nRequires `ADMINISTRATION` (**Can administer Thoughtspot**) privilege.\n\nTo deactivate a user account, the API request body must include the following information:\n\n- Username or the GUID of the user account\n- Base URL of the ThoughtSpot instance\n\nIf the API request is successful, ThoughtSpot returns the activation URL in the response. The activation URL is valid for 14 days and can be used to re-activate the account and reset the password of the deactivated account.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Users",
           "9.7.0.cl"
@@ -4762,6 +4766,13 @@
                   },
                   "user_identifiers": {
                     "description": "Add Users to an Org",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "group_identifiers": {
+                    "description": "Add Default Groups to an Org",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -5596,7 +5607,7 @@
                     ]
                   },
                   "role_identifiers": {
-                    "description": "Role identifiers of the Roles that should be assigned to the group.",
+                    "description": "Role identifiers of the roles that should be assigned to the group.",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -6244,7 +6255,7 @@
                     ]
                   },
                   "metadata_identifiers": {
-                    "description": "Unique ID or name of metadata objects.",
+                    "description": "Unique ID or name of metadata objects. Note: All the identifiers should belong to same metadata_type",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -6368,7 +6379,7 @@
                     "type": "string"
                   },
                   "org_identifier": {
-                    "description": "   Unique identifier of the Org. If no value is provided, the user will be created in the Org associated with the login session. Provide value -1 for cluster level. Example : OrgID1-or-Name1\n   \n\nNote: If no org identifier is specified, then current org identifier of the user will be considered <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
+                    "description": "   Applicable when Orgs is enabled in the cluster\n   \n\nList of Org ids or name. Provide value -1 for cluster level. Example : [\"OrgID1-or-Name1\", \"OrgID2-or-Name2\"] \n\n\n   \n\nNote: If no value is specified, then the configurations will be returned for all orgs the user has access to  <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
                     "type": "string"
                   },
                   "branch_names": {
@@ -6491,7 +6502,7 @@
                     "type": "string"
                   },
                   "org_identifier": {
-                    "description": "   Unique identifier of the Org. If no value is provided, the user will be created in the Org associated with the login session. Provide value -1 for cluster level. Example : OrgID1-or-Name1\n   \n\nNote: If no org identifier is specified, then current org identifier of the user will be considered  <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
+                    "description": "   Applicable when Orgs is enabled in the cluster\n   \n\nList of Org ids or name. Provide value -1 for cluster level. Example : [\"OrgID1-or-Name1\", \"OrgID2-or-Name2\"] \n\n\n   \n\nNote: If no value is specified, then the configurations will be returned for all orgs the user has access to  <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
                     "type": "string"
                   },
                   "branch_names": {
@@ -6600,7 +6611,7 @@
                 "type": "object",
                 "properties": {
                   "cluster_level": {
-                    "description": "Consider cluster level or org level config. Set it to false to delete configuration from current org. If set to true, then the configuration at cluster level and orgs that inherited the configuration from cluster level will be deleted. <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
+                    "description": "   Applicable when Orgs is enabled in the cluster\n   \n\nIndicator to consider cluster level or org level config. Set it to false to delete configuration from current org. If set to true, then the configuration at cluster level and orgs that inherited the configuration from cluster level will be deleted.  <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>",
                     "type": "boolean",
                     "nullable": true
                   }
@@ -6661,7 +6672,7 @@
     "/api/rest/2.0/vcs/git/branches/commit": {
       "post": {
         "operationId": "commitBranch",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nCommits TML files of metadata objects to the Git branch configured on your instance.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\nBefore using this endpoint to push your commits:\n\n* Enable Git integration on your instance.\n* Make sure the Git repository and branch details are configured on your instance.\n\nFor more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nCommits TML files of metadata objects to the Git branch configured on your instance.\n\nTo commit objects from Thoughtspot to a Git repository, you require at least view access to the objects. If the commit contains changes to Worksheets, Views, or Tables, users require `DATAMANAGEMENT` (**Can manage data**) privilege.\n\nBefore using this endpoint to push your commits:\n\n* Enable Git integration on your instance.\n* Make sure the Git repository and branch details are configured on your instance.\n\nFor more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Version Control",
           "9.2.0.cl"
@@ -6761,7 +6772,7 @@
     "/api/rest/2.0/vcs/git/commits/{commit_id}/revert": {
       "post": {
         "operationId": "revertCommit",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nReverts TML objects to a previous commit specified in the API request.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\nIn the API request, specify the `commit_id`. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.\n\nBy default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nReverts TML objects to a previous commit specified in the API request.\n\nTo revert objects from a Git repository to ThoughtSpot, you require edit access to objects that will be updated as part of the revert operation. If the commit contains Worksheets, Views, or Tables, users require `DATAMANAGEMENT` (**Can manage data**) privilege.\n\nIn the API request, specify the `commit_id`. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.\n\nBy default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Version Control",
           "9.2.0.cl"
@@ -6866,7 +6877,7 @@
     "/api/rest/2.0/vcs/git/branches/validate": {
       "post": {
         "operationId": "validateMerge",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nValidates the content of your source branch against the objects in your destination environment.\n\nBefore merging content from your source branch to the destination branch, run this API operation from your destination environment and ensure that the changes from the source branch function in the destination environment.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nValidates the content of your source branch against the objects in your destination environment.\n\nBefore merging content from your source branch to the destination branch, run this API operation from your destination environment and ensure that the changes from the source branch function in the destination environment.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) privilege.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Version Control",
           "9.2.0.cl"
@@ -6956,7 +6967,7 @@
     "/api/rest/2.0/vcs/git/commits/deploy": {
       "post": {
         "operationId": "deployCommit",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nAllows you to deploy a commit and publish TML content to your ThoughtSpot instance.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\nThe API deploys the head of the branch unless a `commit_id` is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nAllows you to deploy a commit and publish TML content to your ThoughtSpot instance.\n\nTo deploy objects from a Git repository to ThoughtSpot, you require edit access to all objects that will be updated as part of the deployment. If the deployment contains Worksheets, Views, or Tables, users require `DATAMANAGEMENT` (**Can manage data**) privilege.\n\nThe API deploys the head of the branch unless a `commit_id` is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Version Control",
           "9.2.0.cl"
@@ -6990,7 +7001,8 @@
                     "type": "string",
                     "enum": [
                       "ALL_OR_NONE",
-                      "PARTIAL"
+                      "PARTIAL",
+                      "VALIDATE_ONLY"
                     ]
                   }
                 },
@@ -7108,7 +7120,11 @@
                       "AMAZON_RDS_MYSQL",
                       "AMAZON_AURORA_MYSQL",
                       "LOOKER",
-                      "AMAZON_ATHENA"
+                      "AMAZON_ATHENA",
+                      "SINGLESTORE",
+                      "GCP_SQLSERVER",
+                      "GCP_ALLOYDB_POSTGRESQL",
+                      "GCP_POSTGRESQL"
                     ]
                   },
                   "data_warehouse_config": {
@@ -7370,15 +7386,15 @@
                 "type": "object",
                 "properties": {
                   "name": {
-                    "description": "Unique name of the Role.",
+                    "description": "Unique name of the role.",
                     "type": "string"
                   },
                   "description": {
-                    "description": "Description of the Role.",
+                    "description": "Description of the role.",
                     "type": "string"
                   },
                   "privileges": {
-                    "description": "Privileges granted to the Role. See [Documentation](https://developers.thoughtspot.com/docs/rbac#_role_categories_and_privileges)for supported roles privileges.",
+                    "description": "Privileges granted to the role.",
                     "type": "array",
                     "items": {
                       "type": "string",
@@ -7401,7 +7417,9 @@
                         "ORG_ADMINISTRATION",
                         "ROLE_ADMINISTRATION",
                         "AUTHENTICATION_ADMINISTRATION",
-                        "BILLING_INFO_ADMINISTRATION"
+                        "BILLING_INFO_ADMINISTRATION",
+                        "CONTROL_TRUSTED_AUTH",
+                        "TAG_MANAGEMENT"
                       ]
                     }
                   }
@@ -7488,11 +7506,11 @@
                     "type": "string"
                   },
                   "description": {
-                    "description": "Description of the Role.",
+                    "description": "Description of the Role",
                     "type": "string"
                   },
                   "privileges": {
-                    "description": "Privileges granted to the role. See [Documentation](https://developers.thoughtspot.com/docs/rbac#_role_categories_and_privileges)for supported roles privileges.",
+                    "description": "Privileges granted to the role.",
                     "type": "array",
                     "items": {
                       "type": "string",
@@ -7515,7 +7533,9 @@
                         "ORG_ADMINISTRATION",
                         "ROLE_ADMINISTRATION",
                         "AUTHENTICATION_ADMINISTRATION",
-                        "BILLING_INFO_ADMINISTRATION"
+                        "BILLING_INFO_ADMINISTRATION",
+                        "CONTROL_TRUSTED_AUTH",
+                        "TAG_MANAGEMENT"
                       ]
                     }
                   }
@@ -7536,7 +7556,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique ID or name of the Role."
+            "description": "Unique ID or name of the role."
           }
         ],
         "responses": {
@@ -7609,7 +7629,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique ID or name of the Role."
+            "description": "Unique ID or name of the role."
           }
         ],
         "responses": {
@@ -9665,6 +9685,504 @@
           }
         }
       }
+    },
+    "/api/rest/2.0/dbt/dbt-connection": {
+      "post": {
+        "operationId": "dbtConnection",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.8.0.cl or later</span>\n\nCreates a DBT connection object in ThoughtSpot.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege.\n\n#### About create DBT connection\nDBT connection in ThoughtSpot is used by the user to define DBT credentials for cloud . The API needs  embrace connection, embrace database name, DBT url, import type, DBT account identifier, DBT project identifier, DBT access token and environment details (or) embrace connection, embrace database name, import type, file_content to create a connection object. To know more about DBT, see ThoughtSpot Product Documentation.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "DBT",
+          "9.8.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "connection_name": {
+                    "description": "Name of the connection.",
+                    "type": "string"
+                  },
+                  "database_name": {
+                    "description": "Name of the Database.",
+                    "type": "string"
+                  },
+                  "import_type": {
+                    "description": "Mention type of Import",
+                    "default": "DBT_CLOUD",
+                    "type": "string",
+                    "enum": [
+                      "DBT_CLOUD"
+                    ]
+                  },
+                  "access_token": {
+                    "description": "Access token is mandatory when Import_Type is DBT_CLOUD.",
+                    "type": "string"
+                  },
+                  "dbt_url": {
+                    "description": "DBT URL is mandatory when Import_Type is DBT_CLOUD.",
+                    "type": "string"
+                  },
+                  "account_id": {
+                    "description": "Account ID is mandatory when Import_Type is DBT_CLOUD",
+                    "type": "string"
+                  },
+                  "project_id": {
+                    "description": "Project ID is mandatory when Import_Type is DBT_CLOUD",
+                    "type": "string"
+                  },
+                  "dbt_env_id": {
+                    "description": "DBT Environment ID\"",
+                    "type": "string"
+                  },
+                  "project_name": {
+                    "description": "Name of the project",
+                    "type": "string"
+                  },
+                  "file_content": {
+                    "format": "binary"
+                  }
+                },
+                "required": [
+                  "connection_name",
+                  "database_name"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Succesfully created DBT Connection.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/dbt/generate-tml": {
+      "post": {
+        "operationId": "generateTml",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.8.0.cl or later</span>\n\nGenerate required table and worksheet and import them.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege, along with an existing DBT connection.\n\n#### About generate TML\nModels and Worksheets to be imported can be selected by the user as part of the API.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "DBT",
+          "9.8.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "dbt_connection_identifier": {
+                    "description": "Unique ID of the DBT connection.",
+                    "type": "string"
+                  },
+                  "model_tables": {
+                    "description": "List of Models and their respective Tables",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/ModelTableList"
+                    }
+                  },
+                  "import_worksheets": {
+                    "description": "Mention the worksheet tmls to import",
+                    "type": "string",
+                    "enum": [
+                      "ALL",
+                      "NONE",
+                      "SELECTED"
+                    ]
+                  },
+                  "worksheets": {
+                    "description": "List of worksheets is mandatory when import_Worksheets is type SELECTED",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "file_content": {
+                    "format": "binary"
+                  }
+                },
+                "required": [
+                  "dbt_connection_identifier",
+                  "model_tables",
+                  "import_worksheets"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Required Table and Worksheet TML's are successfully generated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/dbt/generate-sync-tml": {
+      "post": {
+        "operationId": "generateSyncTml",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.8.0.cl or later</span>\n\nResynchronize the existing list of models, tables, worksheet tml’s and import them to Thoughtspot based on the DBT connection object.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege, along with an existing DBT connection.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "DBT",
+          "9.8.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "dbt_connection_identifier": {
+                    "description": "Unique ID of the DBT connection.",
+                    "type": "string"
+                  },
+                  "file_content": {
+                    "format": "binary"
+                  }
+                },
+                "required": [
+                  "dbt_connection_identifier"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Sync Table and Worksheet TML's are successfully generated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/dbt/search": {
+      "post": {
+        "operationId": "dbtSearch",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.8.0.cl or later</span>\n\nGets a list of DBT connection objects by user and organization, available on the ThoughtSpot system.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege\n\n#### About search DBT connection\nTo get details of a specific DBT connection identifier, database connection identifier, database connection name, database name, project name, project identifier, environment identifier , import type and author.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "DBT",
+          "9.8.0.cl"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Retrieved list of DBT connections successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/dbt/{dbt_connection_identifier}": {
+      "post": {
+        "operationId": "updateDbtConnection",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.8.0.cl or later</span>\n\nUpdates a DBT connection object.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege, along with an existing DBT connection.\n\n#### About update DBT connection\nYou can modify DBT connection object properties such as embrace connection name, embrace database name, import type, account identifier, access token, project identifier and environment (or) embrace connection, embrace database name, import type, file_content settings.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "DBT",
+          "9.8.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "connection_name": {
+                    "description": "Name of the connection.",
+                    "type": "string"
+                  },
+                  "database_name": {
+                    "description": "Name of the Database.",
+                    "type": "string"
+                  },
+                  "import_type": {
+                    "description": "Mention type of Import",
+                    "default": "DBT_CLOUD",
+                    "type": "string",
+                    "enum": [
+                      "DBT_CLOUD"
+                    ]
+                  },
+                  "access_token": {
+                    "description": "Access token is mandatory when Import_Type is DBT_CLOUD.",
+                    "type": "string"
+                  },
+                  "dbt_url": {
+                    "description": "DBT URL is mandatory when Import_Type is DBT_CLOUD.",
+                    "type": "string"
+                  },
+                  "account_id": {
+                    "description": "Account ID is mandatory when Import_Type is DBT_CLOUD",
+                    "type": "string"
+                  },
+                  "project_id": {
+                    "description": "Project ID is mandatory when Import_Type is DBT_CLOUD",
+                    "type": "string"
+                  },
+                  "dbt_env_id": {
+                    "description": "DBT Environment ID\"",
+                    "type": "string"
+                  },
+                  "project_name": {
+                    "description": "Name of the project",
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dbt_connection_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique ID of the DBT Connection."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "DBT Connection successfully updated."
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -10875,7 +11393,7 @@
               "USER_GROUP",
               "LOGICAL_RELATIONSHIP"
             ],
-            "description": "Type of metadata. Required if the name of the object is set as identifier. This attribute is optional when the object GUID is specified as identifier.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view.\n5. CONNECTION for creating or modify data connections.\n6. TAG for tag objects.\n7. USER for user objects.\n8. USER_GROUP for group objects.\n9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values"
+            "description": "Type of metadata.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view.\n5. CONNECTION for creating or modify data connections.\n6. TAG for tag objects.\n7. USER for user objects.\n8. USER_GROUP for group objects.\n9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values"
           }
         }
       },
@@ -10926,7 +11444,7 @@
               "USER_GROUP",
               "LOGICAL_RELATIONSHIP"
             ],
-            "description": "Type of metadata. Required if the name of the object is set as identifier. This attribute is optional when the object GUID is specified as identifier.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view\n4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view\n5. CONNECTION for connection objects\n6. TAG for tag objects\n7. USER for user objects\n8. USER_GROUP for group objects\n9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values."
+            "description": "Type of metadata.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view\n4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view\n5. CONNECTION for connection objects\n6. TAG for tag objects\n7. USER for user objects\n8. USER_GROUP for group objects\n9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values."
           }
         }
       },
@@ -11210,7 +11728,11 @@
               "AMAZON_RDS_MYSQL",
               "AMAZON_AURORA_MYSQL",
               "LOOKER",
-              "AMAZON_ATHENA"
+              "AMAZON_ATHENA",
+              "SINGLESTORE",
+              "GCP_SQLSERVER",
+              "GCP_ALLOYDB_POSTGRESQL",
+              "GCP_POSTGRESQL"
             ],
             "description": "Type of data warehouse."
           },
@@ -11491,6 +12013,33 @@
             "description": "Unique identifier of the user to whom the token is issued."
           }
         }
+      },
+      "JWT_User_Options": {
+        "type": "object",
+        "properties": {
+          "parameters": {
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/Runtime_Filter"
+                },
+                {
+                  "$ref": "#/components/schemas/Runtime_Sort"
+                },
+                {
+                  "$ref": "#/components/schemas/Runtime_Param_Override"
+                }
+              ]
+            }
+          },
+          "metadata": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/JWT_Metadata_Object"
+            }
+          }
+        },
+        "description": "JWT user options to create a JWT token given the payload."
       },
       "ResponseActivationURL": {
         "type": "object",
@@ -11810,7 +12359,11 @@
               "AMAZON_RDS_MYSQL",
               "AMAZON_AURORA_MYSQL",
               "LOOKER",
-              "AMAZON_ATHENA"
+              "AMAZON_ATHENA",
+              "SINGLESTORE",
+              "GCP_SQLSERVER",
+              "GCP_ALLOYDB_POSTGRESQL",
+              "GCP_POSTGRESQL"
             ],
             "description": "Type of data warehouse."
           },
@@ -11883,7 +12436,9 @@
                 "ORG_ADMINISTRATION",
                 "ROLE_ADMINISTRATION",
                 "AUTHENTICATION_ADMINISTRATION",
-                "BILLING_INFO_ADMINISTRATION"
+                "BILLING_INFO_ADMINISTRATION",
+                "CONTROL_TRUSTED_AUTH",
+                "TAG_MANAGEMENT"
               ]
             },
             "description": "Privileges granted to the role."
@@ -11945,6 +12500,7 @@
           "id",
           "metadata",
           "name",
+          "recipient_details",
           "time_zone"
         ],
         "properties": {
@@ -12248,6 +12804,22 @@
           }
         },
         "description": "Default Custom action configuration. This includes the custom action's visibility across all visualizations and Answers. By default, a custom action is added to all visualizations and Answers."
+      },
+      "ModelTableList": {
+        "type": "object",
+        "properties": {
+          "model_name": {
+            "type": "string",
+            "description": "Name of the Model."
+          },
+          "tables": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of Tables."
+          }
+        }
       },
       "FavoriteMetadataItem": {
         "type": "object",
@@ -12576,6 +13148,40 @@
             "description": "Unique identifier of the Org."
           }
         }
+      },
+      "JWT_Parameter": {
+        "type": "object",
+        "properties": {
+          "runtime_filter": {
+            "type": "object",
+            "description": "Runtime filter parameter type in JWT."
+          },
+          "runtime_sort": {
+            "type": "object",
+            "description": "Runtime sort parameter type in JWT."
+          },
+          "runtime_param_override": {
+            "type": "object",
+            "description": "Runtime param override type in JWT."
+          }
+        },
+        "description": "List of runtime parameters need to set during the session."
+      },
+      "JWT_Metadata_Object": {
+        "type": "object",
+        "properties": {
+          "identifier": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "LIVEBOARD",
+              "ANSWER"
+            ]
+          }
+        },
+        "description": "Metadata objects."
       },
       "CommitFileType": {
         "type": "object",
@@ -13314,6 +13920,36 @@
             "description": "Determines if the table is linked"
           }
         }
+      },
+      "Runtime_Filter": {
+        "type": "object",
+        "properties": {
+          "runtime_filter": {
+            "type": "object",
+            "description": "Runtime filter parameter type in JWT."
+          }
+        },
+        "description": "List of runtime parameters need to set during the session."
+      },
+      "Runtime_Sort": {
+        "type": "object",
+        "properties": {
+          "runtime_sort": {
+            "type": "object",
+            "description": "Runtime sort parameter type in JWT."
+          }
+        },
+        "description": "List of runtime parameters need to set during the session."
+      },
+      "Runtime_Param_Override": {
+        "type": "object",
+        "properties": {
+          "runtime_param_override": {
+            "type": "object",
+            "description": "Runtime param override type in JWT."
+          }
+        },
+        "description": "List of runtime parameters need to set during the session."
       }
     },
     "securitySchemes": {
