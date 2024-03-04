@@ -111,6 +111,9 @@ apiInstance.fetchPermissionsOfPrincipals(
         identifier: "identifier_example",
       },
     ],
+    record_offset: 0,
+    record_size: -1,
+    default_metadata_type: "ALL",
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);

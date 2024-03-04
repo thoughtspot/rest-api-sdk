@@ -3102,6 +3102,24 @@ _FetchPermissionsOfPrincipalsRequest.attributeTypeMap = [
     "baseName": "metadata",
     "type": "Array<PermissionsMetadataTypeInput>",
     "format": ""
+  },
+  {
+    "name": "record_offset",
+    "baseName": "record_offset",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "record_size",
+    "baseName": "record_size",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "default_metadata_type",
+    "baseName": "default_metadata_type",
+    "type": "FetchPermissionsOfPrincipalsRequestDefaultMetadataTypeEnum",
+    "format": ""
   }
 ];
 var FetchPermissionsOfPrincipalsRequest = _FetchPermissionsOfPrincipalsRequest;
@@ -8799,6 +8817,7 @@ var enumsMap = /* @__PURE__ */ new Set([
   "FetchAnswerDataRequestDataFormatEnum",
   "FetchLiveboardDataRequestDataFormatEnum",
   "FetchLogsRequestLogTypeEnum",
+  "FetchPermissionsOfPrincipalsRequestDefaultMetadataTypeEnum",
   "GroupsImportListInputPrivilegesEnum",
   "GroupsImportListInputTypeEnum",
   "GroupsImportListInputVisibilityEnum",

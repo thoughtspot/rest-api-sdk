@@ -270,7 +270,7 @@ import { FetchConnectionDiffStatusResponse } from '../models/FetchConnectionDiff
 import { FetchLiveboardDataRequest   , FetchLiveboardDataRequestDataFormatEnum        } from '../models/FetchLiveboardDataRequest';
 import { FetchLiveboardSqlQueryRequest } from '../models/FetchLiveboardSqlQueryRequest';
 import { FetchLogsRequest, FetchLogsRequestLogTypeEnum     } from '../models/FetchLogsRequest';
-import { FetchPermissionsOfPrincipalsRequest } from '../models/FetchPermissionsOfPrincipalsRequest';
+import { FetchPermissionsOfPrincipalsRequest    , FetchPermissionsOfPrincipalsRequestDefaultMetadataTypeEnum   } from '../models/FetchPermissionsOfPrincipalsRequest';
 import { FetchPermissionsOnMetadataRequest } from '../models/FetchPermissionsOnMetadataRequest';
 import { ForceLogoutUsersRequest } from '../models/ForceLogoutUsersRequest';
 import { Frequency } from '../models/Frequency';
@@ -447,6 +447,7 @@ let enumsMap: Set<string> = new Set<string>([
     "FetchAnswerDataRequestDataFormatEnum",
     "FetchLiveboardDataRequestDataFormatEnum",
     "FetchLogsRequestLogTypeEnum",
+    "FetchPermissionsOfPrincipalsRequestDefaultMetadataTypeEnum",
     "GroupsImportListInputPrivilegesEnum",
     "GroupsImportListInputTypeEnum",
     "GroupsImportListInputVisibilityEnum",
