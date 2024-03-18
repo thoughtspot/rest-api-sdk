@@ -844,7 +844,7 @@
                     ]
                   },
                   "role_identifiers": {
-                    "description": "Filter groups with a list of roles assigned to a group",
+                    "description": "Filter groups with a list of Roles assigned to a group",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -1308,11 +1308,11 @@
                     ]
                   },
                   "runtime_filter": {
-                    "description": "JSON string representing runtime filter.\n{ col1:'region', op1: 'EQ', val1: 'northeast' }",
+                    "description": "JSON object with representing filter condition to apply filters at runtime. For example, {\"col1\": \"region\", \"op1\": \"EQ\", \"val1\": \"northeast\" }. You can add multiple keys by incrementing the number at the end, for example, col2, op2, val2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_filters).",
                     "type": "object"
                   },
                   "runtime_sort": {
-                    "description": "JSON string representing runtime sort.\n{ sortCol1: 'region', asc1 : true, sortCol2 : 'date' }",
+                    "description": "JSON string representing runtime sort. For example, {\"sortCol1\": \"region\", \"asc1\" : true}. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort).",
                     "type": "object"
                   },
                   "pdf_options": {
@@ -1324,7 +1324,7 @@
                     "$ref": "#/components/schemas/PngOptionsInput"
                   },
                   "runtime_param_override": {
-                    "description": "JSON object for setting values of parameters in runtime.",
+                    "description": "JSON object for setting values of parameters at runtime. For example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>. You can add multiple keys by incrementing the number at the end, for example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters).",
                     "type": "object"
                   }
                 },
@@ -1661,11 +1661,11 @@
                 "type": "object",
                 "properties": {
                   "query_string": {
-                    "description": "Data search query string token.",
+                    "description": "Query string with search tokens. For example, <code>[Sales][Region]</code>. See [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_data_api)",
                     "type": "string"
                   },
                   "logical_table_identifier": {
-                    "description": "GUID of the data source object, such as a Worksheet, View, or Table.",
+                    "description": "GUID of the data source object, such as a Worksheet, View, or Table. You can find the GUID of a data object from the UI or via API. See [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_query) for more details.",
                     "type": "string"
                   },
                   "data_format": {
@@ -1689,15 +1689,15 @@
                     "format": "int32"
                   },
                   "runtime_filter": {
-                    "description": "JSON object representing filter condition to filter the data.",
+                    "description": "JSON object with representing filter condition to apply filters at runtime. For example, <code> {\"col1\": \"item type\", \"op1\": \"EQ\", \"val1\": \"Bags\"} </code>. You can add multiple keys by incrementing the number at the end, for example, col2, op2, val2, and col3, op3, val3. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_filters).",
                     "type": "object"
                   },
                   "runtime_sort": {
-                    "description": "JSON object representing columns to sort the data.",
+                    "description": "JSON object representing columns to sort data at runtime. For example, <code> {\"sortCol1\": \"sales\", \"asc1\": true} </code>. You can add multiple keys by incrementing the number at the end, for example, sortCol1, asc2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort).",
                     "type": "object"
                   },
                   "runtime_param_override": {
-                    "description": "JSON object for setting values of parameters in runtime.",
+                    "description": "JSON object for setting values of parameters at runtime. For example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>. You can add multiple keys by incrementing the number at the end, for example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters).",
                     "type": "object"
                   }
                 },
@@ -1805,15 +1805,15 @@
                     "format": "int32"
                   },
                   "runtime_filter": {
-                    "description": "JSON object representing filter condition to filter the data.",
+                    "description": "JSON object with representing filter condition to apply filters at runtime. For example, <code> {\"col1\": \"item type\", \"op1\": \"EQ\", \"val1\": \"Bags\"} </code>. You can add multiple keys by incrementing the number at the end, for example, col2, op2, val2, and col3, op3, val3. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_filters).",
                     "type": "object"
                   },
                   "runtime_sort": {
-                    "description": "JSON object representing columns to sort the data.",
+                    "description": "JSON object representing columns to sort data at runtime. For example, <code> {\"sortCol1\": \"sales\", \"asc1\": true} </code>. You can add multiple keys by incrementing the number at the end, for example, sortCol1, asc2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort).",
                     "type": "object"
                   },
                   "runtime_param_override": {
-                    "description": "JSON object for setting values of parameters in runtime.",
+                    "description": "JSON object for setting values of parameters at runtime. For example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>. You can add multiple keys by incrementing the number at the end, for example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters).",
                     "type": "object"
                   }
                 },
@@ -1909,15 +1909,15 @@
                     "format": "int32"
                   },
                   "runtime_filter": {
-                    "description": "JSON object representing filter condition to filter the data.",
+                    "description": "JSON object with representing filter condition to apply filters at runtime. For example, <code> {\"col1\": \"item type\", \"op1\": \"EQ\", \"val1\": \"Bags\"} </code>. You can add multiple keys by incrementing the number at the end, for example, col2, op2, val2, and col3, op3, val3. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_filters).",
                     "type": "object"
                   },
                   "runtime_sort": {
-                    "description": "JSON object representing columns to sort the data.",
+                    "description": "JSON object representing columns to sort data at runtime. For example, <code> {\"sortCol1\": \"sales\", \"asc1\": true} </code>. You can add multiple keys by incrementing the number at the end, for example, sortCol1, asc2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort).",
                     "type": "object"
                   },
                   "runtime_param_override": {
-                    "description": "JSON object for setting values of parameters in runtime.",
+                    "description": "JSON object for setting values of parameters at runtime. For example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>. You can add multiple keys by incrementing the number at the end, for example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters).",
                     "type": "object"
                   }
                 },
@@ -2425,7 +2425,7 @@
                 "type": "object",
                 "properties": {
                   "role_identifiers": {
-                    "description": "unique ID or name of the roles",
+                    "description": "unique ID or name of the Roles",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -2446,7 +2446,7 @@
                     }
                   },
                   "privileges": {
-                    "description": "Privileges assigned to the Role.",
+                    "description": "Privileges assigned to the Role. See [Documentation](https://developers.thoughtspot.com/docs/rbac#_role_categories_and_privileges)for supported roles privileges.",
                     "type": "array",
                     "items": {
                       "type": "string",
@@ -2482,12 +2482,17 @@
                         "AUTHENTICATION_ADMINISTRATION",
                         "BILLING_INFO_ADMINISTRATION",
                         "PREVIEW_THOUGHTSPOT_SAGE",
-                        "LIVEBOARD_VERIFIER"
+                        "LIVEBOARD_VERIFIER",
+                        "CAN_MANAGE_CUSTOM_CALENDAR",
+                        "CAN_CREATE_OR_EDIT_CONNECTIONS",
+                        "CAN_CONFIGURE_CONNECTIONS",
+                        "CAN_MANAGE_WORKSHEET_VIEWS_TABLES",
+                        "CAN_MANAGE_USER_SECURITY_PARAMETERS"
                       ]
                     }
                   },
                   "deprecated": {
-                    "description": "Indicates whether the role is deprecated.",
+                    "description": "Indicates whether the Role is deprecated.",
                     "type": "boolean",
                     "deprecated": true,
                     "nullable": true
@@ -2499,7 +2504,7 @@
                     "nullable": true
                   },
                   "shared_via_connection": {
-                    "description": "Indicates whether the role is shared via connection",
+                    "description": "Indicates whether the Role is shared via connection",
                     "type": "boolean",
                     "deprecated": true,
                     "nullable": true
@@ -5035,7 +5040,7 @@
                     ]
                   },
                   "role_identifiers": {
-                    "description": "Role identifiers of the roles that should be assigned to the group.",
+                    "description": "Role identifiers of the Roles that should be assigned to the group.",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -5293,6 +5298,12 @@
                     "default": false,
                     "type": "boolean",
                     "nullable": true
+                  },
+                  "all_orgs_context": {
+                    "description": "If import is happening from all orgs context.",
+                    "default": false,
+                    "type": "boolean",
+                    "nullable": true
                   }
                 },
                 "required": [
@@ -5404,6 +5415,24 @@
                       "V1",
                       "V2"
                     ]
+                  },
+                  "export_dependent": {
+                    "description": "Indicates whether to export table while exporting connection.",
+                    "default": false,
+                    "type": "boolean",
+                    "nullable": true
+                  },
+                  "export_connection_as_dependent": {
+                    "description": "Indicates whether to export connection as dependent while exporting table/worksheet/answer/liveboard.\nThis will only be active when export_associated is true.",
+                    "default": false,
+                    "type": "boolean",
+                    "nullable": true
+                  },
+                  "all_orgs_override": {
+                    "description": "Indicates whether to export is happening from all orgs context.",
+                    "default": false,
+                    "type": "boolean",
+                    "nullable": true
                   }
                 },
                 "required": [
@@ -6845,15 +6874,15 @@
                 "type": "object",
                 "properties": {
                   "name": {
-                    "description": "Unique name of the role.",
+                    "description": "Unique name of the Role.",
                     "type": "string"
                   },
                   "description": {
-                    "description": "Description of the role.",
+                    "description": "Description of the Role.",
                     "type": "string"
                   },
                   "privileges": {
-                    "description": "Privileges granted to the role.",
+                    "description": "Privileges granted to the Role. See [Documentation](https://developers.thoughtspot.com/docs/rbac#_role_categories_and_privileges)for supported roles privileges.",
                     "type": "array",
                     "items": {
                       "type": "string",
@@ -6956,11 +6985,11 @@
                     "type": "string"
                   },
                   "description": {
-                    "description": "Description of the Role",
+                    "description": "Description of the Role.",
                     "type": "string"
                   },
                   "privileges": {
-                    "description": "Privileges granted to the role.",
+                    "description": "Privileges granted to the role. See [Documentation](https://developers.thoughtspot.com/docs/rbac#_role_categories_and_privileges)for supported roles privileges.",
                     "type": "array",
                     "items": {
                       "type": "string",
@@ -7007,7 +7036,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique ID or name of the role."
+            "description": "Unique ID or name of the Role."
           }
         ],
         "responses": {
@@ -7070,7 +7099,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique ID or name of the role."
+            "description": "Unique ID or name of the Role."
           }
         ],
         "responses": {
@@ -10388,7 +10417,7 @@
               "USER_GROUP",
               "LOGICAL_RELATIONSHIP"
             ],
-            "description": "Type of metadata.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view.\n5. CONNECTION for creating or modify data connections.\n6. TAG for tag objects.\n7. USER for user objects.\n8. USER_GROUP for group objects.\n9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values"
+            "description": "Type of metadata. Required if the name of the object is set as identifier. This attribute is optional when the object GUID is specified as identifier.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view.\n5. CONNECTION for creating or modify data connections.\n6. TAG for tag objects.\n7. USER for user objects.\n8. USER_GROUP for group objects.\n9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values"
           }
         }
       },
@@ -10439,7 +10468,7 @@
               "USER_GROUP",
               "LOGICAL_RELATIONSHIP"
             ],
-            "description": "Type of metadata.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view\n4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view\n5. CONNECTION for connection objects\n6. TAG for tag objects\n7. USER for user objects\n8. USER_GROUP for group objects\n9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values."
+            "description": "Type of metadata. Required if the name of the object is set as identifier. This attribute is optional when the object GUID is specified as identifier.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view\n4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view\n5. CONNECTION for connection objects\n6. TAG for tag objects\n7. USER for user objects\n8. USER_GROUP for group objects\n9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values."
           }
         }
       },
@@ -11356,7 +11385,12 @@
                 "AUTHENTICATION_ADMINISTRATION",
                 "BILLING_INFO_ADMINISTRATION",
                 "PREVIEW_THOUGHTSPOT_SAGE",
-                "LIVEBOARD_VERIFIER"
+                "LIVEBOARD_VERIFIER",
+                "CAN_MANAGE_CUSTOM_CALENDAR",
+                "CAN_CREATE_OR_EDIT_CONNECTIONS",
+                "CAN_CONFIGURE_CONNECTIONS",
+                "CAN_MANAGE_WORKSHEET_VIEWS_TABLES",
+                "CAN_MANAGE_USER_SECURITY_PARAMETERS"
               ]
             },
             "description": "Privileges granted to the role."
