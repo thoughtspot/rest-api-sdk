@@ -30,6 +30,14 @@
       "description": "Roles for version 9.2.0.cl"
     },
     {
+      "name": "9.9.0.cl",
+      "id": "9.9.0.cl",
+      "tags": [
+        "9.9.0.cl"
+      ],
+      "description": "Roles for version 9.9.0.cl"
+    },
+    {
       "name": "9.5.0.cl",
       "id": "9.5.0.cl",
       "tags": [
@@ -52,14 +60,6 @@
         "9.6.0.cl"
       ],
       "description": "Roles for version 9.6.0.cl"
-    },
-    {
-      "name": "9.8.0.cl",
-      "id": "9.8.0.cl",
-      "tags": [
-        "9.8.0.cl"
-      ],
-      "description": "Roles for version 9.8.0.cl"
     }
   ],
   "tags": [],
@@ -259,9 +259,15 @@
                         "SYNCMANAGEMENT",
                         "CAN_CREATE_CATALOG",
                         "DISABLE_PINBOARD_CREATION",
-                        "ENABLESPOTAPPCREATION",
                         "LIVEBOARD_VERIFIER",
-                        "PREVIEW_THOUGHTSPOT_SAGE"
+                        "ENABLESPOTAPPCREATION",
+                        "PREVIEW_THOUGHTSPOT_SAGE",
+                        "APPLICATION_ADMINISTRATION",
+                        "SYSTEM_INFO_ADMINISTRATION",
+                        "ORG_ADMINISTRATION",
+                        "ROLE_ADMINISTRATION",
+                        "AUTHENTICATION_ADMINISTRATION",
+                        "BILLING_INFO_ADMINISTRATION"
                       ]
                     }
                   },
@@ -959,9 +965,15 @@
                         "SYNCMANAGEMENT",
                         "CAN_CREATE_CATALOG",
                         "DISABLE_PINBOARD_CREATION",
-                        "ENABLESPOTAPPCREATION",
                         "LIVEBOARD_VERIFIER",
-                        "PREVIEW_THOUGHTSPOT_SAGE"
+                        "ENABLESPOTAPPCREATION",
+                        "PREVIEW_THOUGHTSPOT_SAGE",
+                        "APPLICATION_ADMINISTRATION",
+                        "SYSTEM_INFO_ADMINISTRATION",
+                        "ORG_ADMINISTRATION",
+                        "ROLE_ADMINISTRATION",
+                        "AUTHENTICATION_ADMINISTRATION",
+                        "BILLING_INFO_ADMINISTRATION"
                       ]
                     }
                   },
@@ -996,7 +1008,7 @@
                     ]
                   },
                   "role_identifiers": {
-                    "description": "Filter groups with a list of roles assigned to a group",
+                    "description": "Filter groups with a list of Roles assigned to a group",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -1496,11 +1508,11 @@
                     ]
                   },
                   "runtime_filter": {
-                    "description": "JSON string representing runtime filter.\n{ col1:'region', op1: 'EQ', val1: 'northeast' }",
+                    "description": "JSON object with representing filter condition to apply filters at runtime. For example, {\"col1\": \"region\", \"op1\": \"EQ\", \"val1\": \"northeast\" }. You can add multiple keys by incrementing the number at the end, for example, col2, op2, val2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_filters).",
                     "type": "object"
                   },
                   "runtime_sort": {
-                    "description": "JSON string representing runtime sort.\n{ sortCol1: 'region', asc1 : true, sortCol2 : 'date' }",
+                    "description": "JSON string representing runtime sort. For example, {\"sortCol1\": \"region\", \"asc1\" : true}. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort).",
                     "type": "object"
                   },
                   "pdf_options": {
@@ -1512,7 +1524,7 @@
                     "$ref": "#/components/schemas/PngOptionsInput"
                   },
                   "runtime_param_override": {
-                    "description": "JSON object for setting values of parameters in runtime.",
+                    "description": "JSON object for setting values of parameters at runtime. For example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>. You can add multiple keys by incrementing the number at the end, for example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters).",
                     "type": "object"
                   }
                 },
@@ -1973,11 +1985,11 @@
                 "type": "object",
                 "properties": {
                   "query_string": {
-                    "description": "Data search query string token.",
+                    "description": "Query string with search tokens. For example, <code>[Sales][Region]</code>. See [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_data_api)",
                     "type": "string"
                   },
                   "logical_table_identifier": {
-                    "description": "GUID of the data source object, such as a Worksheet, View, or Table.",
+                    "description": "GUID of the data source object, such as a Worksheet, View, or Table. You can find the GUID of a data object from the UI or via API. See [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_query) for more details.",
                     "type": "string"
                   },
                   "data_format": {
@@ -2001,15 +2013,15 @@
                     "format": "int32"
                   },
                   "runtime_filter": {
-                    "description": "JSON object representing filter condition to filter the data.",
+                    "description": "JSON object with representing filter condition to apply filters at runtime. For example, <code> {\"col1\": \"item type\", \"op1\": \"EQ\", \"val1\": \"Bags\"} </code>. You can add multiple keys by incrementing the number at the end, for example, col2, op2, val2, and col3, op3, val3. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_filters).",
                     "type": "object"
                   },
                   "runtime_sort": {
-                    "description": "JSON object representing columns to sort the data.",
+                    "description": "JSON object representing columns to sort data at runtime. For example, <code> {\"sortCol1\": \"sales\", \"asc1\": true} </code>. You can add multiple keys by incrementing the number at the end, for example, sortCol1, asc2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort).",
                     "type": "object"
                   },
                   "runtime_param_override": {
-                    "description": "JSON object for setting values of parameters in runtime.",
+                    "description": "JSON object for setting values of parameters at runtime. For example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>. You can add multiple keys by incrementing the number at the end, for example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters).",
                     "type": "object"
                   }
                 },
@@ -2127,15 +2139,15 @@
                     "format": "int32"
                   },
                   "runtime_filter": {
-                    "description": "JSON object representing filter condition to filter the data.",
+                    "description": "JSON object with representing filter condition to apply filters at runtime. For example, <code> {\"col1\": \"item type\", \"op1\": \"EQ\", \"val1\": \"Bags\"} </code>. You can add multiple keys by incrementing the number at the end, for example, col2, op2, val2, and col3, op3, val3. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_filters).",
                     "type": "object"
                   },
                   "runtime_sort": {
-                    "description": "JSON object representing columns to sort the data.",
+                    "description": "JSON object representing columns to sort data at runtime. For example, <code> {\"sortCol1\": \"sales\", \"asc1\": true} </code>. You can add multiple keys by incrementing the number at the end, for example, sortCol1, asc2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort).",
                     "type": "object"
                   },
                   "runtime_param_override": {
-                    "description": "JSON object for setting values of parameters in runtime.",
+                    "description": "JSON object for setting values of parameters at runtime. For example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>. You can add multiple keys by incrementing the number at the end, for example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters).",
                     "type": "object"
                   }
                 },
@@ -2241,15 +2253,15 @@
                     "format": "int32"
                   },
                   "runtime_filter": {
-                    "description": "JSON object representing filter condition to filter the data.",
+                    "description": "JSON object with representing filter condition to apply filters at runtime. For example, <code> {\"col1\": \"item type\", \"op1\": \"EQ\", \"val1\": \"Bags\"} </code>. You can add multiple keys by incrementing the number at the end, for example, col2, op2, val2, and col3, op3, val3. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_filters).",
                     "type": "object"
                   },
                   "runtime_sort": {
-                    "description": "JSON object representing columns to sort the data.",
+                    "description": "JSON object representing columns to sort data at runtime. For example, <code> {\"sortCol1\": \"sales\", \"asc1\": true} </code>. You can add multiple keys by incrementing the number at the end, for example, sortCol1, asc2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort).",
                     "type": "object"
                   },
                   "runtime_param_override": {
-                    "description": "JSON object for setting values of parameters in runtime.",
+                    "description": "JSON object for setting values of parameters at runtime. For example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>. You can add multiple keys by incrementing the number at the end, for example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters).",
                     "type": "object"
                   }
                 },
@@ -2648,7 +2660,7 @@
                         "TRINO",
                         "PRESTO",
                         "POSTGRES",
-                        "SQL_SERVER",
+                        "SQLSERVER",
                         "MYSQL",
                         "GENERIC_JDBC",
                         "AMAZON_RDS_POSTGRESQL",
@@ -2660,7 +2672,8 @@
                         "SINGLESTORE",
                         "GCP_SQLSERVER",
                         "GCP_ALLOYDB_POSTGRESQL",
-                        "GCP_POSTGRESQL"
+                        "GCP_POSTGRESQL",
+                        "GCP_MYSQL"
                       ]
                     }
                   },
@@ -2796,7 +2809,7 @@
                 "type": "object",
                 "properties": {
                   "role_identifiers": {
-                    "description": "unique ID or name of the roles",
+                    "description": "unique ID or name of the Roles",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -2817,7 +2830,7 @@
                     }
                   },
                   "privileges": {
-                    "description": "Privileges assigned to the Role.",
+                    "description": "Privileges assigned to the Role. See [Documentation](https://developers.thoughtspot.com/docs/rbac#_role_categories_and_privileges)for supported roles privileges.",
                     "type": "array",
                     "items": {
                       "type": "string",
@@ -2852,23 +2865,32 @@
                         "ROLE_ADMINISTRATION",
                         "AUTHENTICATION_ADMINISTRATION",
                         "BILLING_INFO_ADMINISTRATION",
-                        "PREVIEW_THOUGHTSPOT_SAGE"
+                        "PREVIEW_THOUGHTSPOT_SAGE",
+                        "LIVEBOARD_VERIFIER",
+                        "CAN_MANAGE_CUSTOM_CALENDAR",
+                        "CAN_CREATE_OR_EDIT_CONNECTIONS",
+                        "CAN_CONFIGURE_CONNECTIONS",
+                        "CAN_MANAGE_WORKSHEET_VIEWS_TABLES",
+                        "CAN_MANAGE_USER_SECURITY_PARAMETERS"
                       ]
                     }
                   },
                   "deprecated": {
-                    "description": "Indicates whether the role is deprecated.",
+                    "description": "Indicates whether the Role is deprecated.",
                     "type": "boolean",
+                    "deprecated": true,
                     "nullable": true
                   },
                   "external": {
                     "description": "Indicates whether the Role is external",
                     "type": "boolean",
+                    "deprecated": true,
                     "nullable": true
                   },
                   "shared_via_connection": {
-                    "description": "Indicates whether the role is shared via connection",
+                    "description": "Indicates whether the Role is shared via connection",
                     "type": "boolean",
+                    "deprecated": true,
                     "nullable": true
                   },
                   "permissions": {
@@ -2881,7 +2903,8 @@
                         "MODIFY",
                         "NO_ACCESS"
                       ]
-                    }
+                    },
+                    "deprecated": true
                   }
                 }
               }
@@ -3171,7 +3194,7 @@
     "/api/rest/2.0/auth/token/object": {
       "post": {
         "operationId": "getObjectAccessToken",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGets an authentication token that provides access to a specific metadata object. By default, the token obtained from ThoughtSpot remains valid for 5 mins.\n\nYou can generate the token for a user by providing a `username` and `password` (for [Basic authentication](https://developers.thoughtspot.com/docs/api-authv2#_basic_authentication)), or by using the cluster’s `secret_key` (for [Trusted authentication](https://developers.thoughtspot.com/docs/api-authv2#trusted-auth-v2)).\n\nTo generate a `secret_key` on your cluster, the administrator must enable **Trusted authentication** in the **Develop** > **Customizations** > **Security Settings** page.\n\n**Note**: When both `password` and `secret_key` are included in the API request, `secret_key` takes precedence.\n\nTo get a token for a specific Org, define the Org ID. If no ID is specified, the token is generated for the primary Org (Org 0).\n\n#### Just-in-time provisioning\n\nFor just-in-time user creation and provisioning, define the following attributes:\n\n* `auto_create`\n* `username`\n* `display_name`\n* `email`\n* `group_identifiers`\n\nSet `auto_create` to `True` if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create` parameter is set to `true`, the API call will update user properties like display name, email and group assignment.\n\nFor more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).\n\nTo provision a new user and assign privileges, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGets an authentication token that provides access to a specific metadata object. By default, the token obtained from ThoughtSpot remains valid for 5 mins.\n\nYou can generate the token for a user by providing a `username` and `password` (for [Bearer token authentication](https://developers.thoughtspot.com/docs/?pageid=api-authv2#bearerToken)), or by using the cluster’s `secret key` (for [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable)).\n\nTo generate a `secret_key` on your cluster, the administrator must enable **Trusted authentication** in the **Develop** > **Customizations** > **Security Settings** page.\n\n**Note**: When both `password` and `secret_key` are included in the API request,  `password` takes precedence.\n\n#### Just-in-time provisioning\n\nFor just-in-time user creation and provisioning, use the following attributes.\n\n* `auto_create`\n* `username`\n\nTo assign privileges to the new user, specify the group name or GUID in `group_identifiers`.\n\nTo add the user to an Org, send the `Org ID` in the API request.\n\n**Note**: This feature is available only if Trusted authentication is enabled on your cluster.\n\nTo provision a new user and assign privileges, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Authentication",
           "9.0.0.cl"
@@ -3207,7 +3230,7 @@
                     "format": "int32"
                   },
                   "org_id": {
-                    "description": "ID of the Org context to log in to. If Org ID is not specified, the token is generated for the Primary Org (Org 0).",
+                    "description": "ID of the Org context to log in to. If Org ID is not specified, the user will be logged in to the Org context of their previous login session.",
                     "default": 0,
                     "type": "integer",
                     "format": "int32"
@@ -3239,8 +3262,7 @@
                   }
                 },
                 "required": [
-                  "username",
-                  "object_id"
+                  "username"
                 ]
               }
             }
@@ -3306,7 +3328,7 @@
     "/api/rest/2.0/auth/token/full": {
       "post": {
         "operationId": "getFullAccessToken",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGets an authentication token and creates a full session in ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot remains valid for 5 mins.\n\nYou can generate the token for a user by providing a `username` and `password` (for [Basic authentication](https://developers.thoughtspot.com/docs/api-authv2#_basic_authentication)), or by using the cluster’s `secret_key` (for [Trusted authentication](https://developers.thoughtspot.com/docs/api-authv2#trusted-auth-v2)).\n\nTo generate a `secret_key` on your cluster, the administrator must enable **Trusted authentication** in the **Develop** > **Customizations** > **Security Settings** page. For more information, see [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable).\n\n**Note**: When both `password` and `secret_key` are included in the API request, `secret_key` takes precedence.\n\nTo get a token for a specific Org, define the Org ID. If no ID is specified, the token is generated for the primary Org (Org 0).\n\n#### Just-in-time provisioning\n\nFor just-in-time user creation and provisioning, define the following attributes:\n\n* `auto_create`\n* `username`\n* `display_name`\n* `email`\n* `group_identifiers`\n\nSet `auto_create` to `True` if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create` parameter is set to `true`, the API call will update user properties like display name, email and group assignment.\n\nFor more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).\n\nTo provision a new user and assign privileges, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGets an authentication token and creates a full session in ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot remains valid for 5 mins.\n\nYou can generate the token for a user by providing a `username` and `password` (for [Bearer token authentication](https://developers.thoughtspot.com/docs/?pageid=api-authv2#bearerToken)), or by using the cluster’s `secret_key` (for [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable)).\n\nTo generate a `secret_key` on your cluster, the administrator must enable **Trusted authentication** in the **Develop** > **Customizations** > **Security Settings** page. For more information, see [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable).\n\n**Note**: When both `password` and `secret_key` are included in the API request, `password` takes precedence.\n\n#### Just-in-time provisioning\n\nFor just-in-time user creation and provisioning, use the following attributes.\n\n* `auto_create`\n* `username`\n\nTo assign privileges to the new user, specify the group name or GUID in `group_identifiers`.\n\nTo add the user to an Org, specify the Org ID in the `org_id` attribute.\n\n**Note**: This feature is available only on clusters with trusted authentication enabled.\n\nTo provision a new user and assign privileges, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Authentication",
           "9.0.0.cl"
@@ -3338,7 +3360,7 @@
                     "format": "int32"
                   },
                   "org_id": {
-                    "description": "ID of the Org context to log in to. If Org ID is not specified, the token is generated for the Primary Org (Org 0).",
+                    "description": "ID of the Org context to log in to. If the Org ID is not specified, the user will be logged in to the Org context of their previous login session.",
                     "default": 0,
                     "type": "integer",
                     "format": "int32"
@@ -3366,7 +3388,7 @@
                   },
                   "jwt_user_options": {
                     "description": "JWT user options to create a JWT token given the payload.",
-                    "$ref": "#/components/schemas/JWT_User_Options"
+                    "$ref": "#/components/schemas/JWT_User_Options_Full"
                   }
                 },
                 "required": [
@@ -3717,7 +3739,6 @@
                 "required": [
                   "name",
                   "display_name",
-                  "password",
                   "email"
                 ]
               }
@@ -5607,7 +5628,7 @@
                     ]
                   },
                   "role_identifiers": {
-                    "description": "Role identifiers of the roles that should be assigned to the group.",
+                    "description": "Role identifiers of the Roles that should be assigned to the group.",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -5883,6 +5904,12 @@
                     "default": false,
                     "type": "boolean",
                     "nullable": true
+                  },
+                  "all_orgs_context": {
+                    "description": "If import is happening from all orgs context.",
+                    "default": false,
+                    "type": "boolean",
+                    "nullable": true
                   }
                 },
                 "required": [
@@ -5992,6 +6019,33 @@
                       "JSON",
                       "YAML"
                     ]
+                  },
+                  "export_schema_version": {
+                    "description": "Indicates whether to export worksheet TML in V1 or V2 version.",
+                    "default": "V1",
+                    "type": "string",
+                    "enum": [
+                      "V1",
+                      "V2"
+                    ]
+                  },
+                  "export_dependent": {
+                    "description": "Indicates whether to export table while exporting connection.",
+                    "default": false,
+                    "type": "boolean",
+                    "nullable": true
+                  },
+                  "export_connection_as_dependent": {
+                    "description": "Indicates whether to export connection as dependent while exporting table/worksheet/answer/liveboard.\nThis will only be active when export_associated is true.",
+                    "default": false,
+                    "type": "boolean",
+                    "nullable": true
+                  },
+                  "all_orgs_override": {
+                    "description": "Indicates whether to export is happening from all orgs context.",
+                    "default": false,
+                    "type": "boolean",
+                    "nullable": true
                   }
                 },
                 "required": [
@@ -6288,6 +6342,18 @@
                   },
                   "enable_custom_url": {
                     "description": "Sends object URLs in the customized format in email notifications.",
+                    "default": false,
+                    "type": "boolean",
+                    "nullable": true
+                  },
+                  "notify_on_share": {
+                    "description": "Flag to notify user when any object is shared.",
+                    "default": true,
+                    "type": "boolean",
+                    "nullable": true
+                  },
+                  "has_lenient_discoverability": {
+                    "description": "Flag to make the object discoverable.",
                     "default": false,
                     "type": "boolean",
                     "nullable": true
@@ -6672,7 +6738,7 @@
     "/api/rest/2.0/vcs/git/branches/commit": {
       "post": {
         "operationId": "commitBranch",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nCommits TML files of metadata objects to the Git branch configured on your instance.\n\nTo commit objects from Thoughtspot to a Git repository, you require at least view access to the objects. If the commit contains changes to Worksheets, Views, or Tables, users require `DATAMANAGEMENT` (**Can manage data**) privilege.\n\nBefore using this endpoint to push your commits:\n\n* Enable Git integration on your instance.\n* Make sure the Git repository and branch details are configured on your instance.\n\nFor more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nCommits TML files of metadata objects to the Git branch configured on your instance.\n\nRequires `DATAMANAGEMENT` privilege.\n\nBefore using this endpoint to push your commits:\n\n* Enable Git integration on your instance.\n* Make sure the Git repository and branch details are configured on your instance.\n\nFor more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Version Control",
           "9.2.0.cl"
@@ -6772,7 +6838,7 @@
     "/api/rest/2.0/vcs/git/commits/{commit_id}/revert": {
       "post": {
         "operationId": "revertCommit",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nReverts TML objects to a previous commit specified in the API request.\n\nTo revert objects from a Git repository to ThoughtSpot, you require edit access to objects that will be updated as part of the revert operation. If the commit contains Worksheets, Views, or Tables, users require `DATAMANAGEMENT` (**Can manage data**) privilege.\n\nIn the API request, specify the `commit_id`. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.\n\nBy default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nReverts TML objects to a previous commit specified in the API request.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) privilege.\n\nIn the API request, specify the `commit_id`. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.\n\nBy default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Version Control",
           "9.2.0.cl"
@@ -6967,7 +7033,7 @@
     "/api/rest/2.0/vcs/git/commits/deploy": {
       "post": {
         "operationId": "deployCommit",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nAllows you to deploy a commit and publish TML content to your ThoughtSpot instance.\n\nTo deploy objects from a Git repository to ThoughtSpot, you require edit access to all objects that will be updated as part of the deployment. If the deployment contains Worksheets, Views, or Tables, users require `DATAMANAGEMENT` (**Can manage data**) privilege.\n\nThe API deploys the head of the branch unless a `commit_id` is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nAllows you to deploy a commit and publish TML content to your ThoughtSpot instance.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) privilege.\n\nThe API deploys the head of the branch unless a `commit_id` is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Version Control",
           "9.2.0.cl"
@@ -7112,7 +7178,7 @@
                       "TRINO",
                       "PRESTO",
                       "POSTGRES",
-                      "SQL_SERVER",
+                      "SQLSERVER",
                       "MYSQL",
                       "GENERIC_JDBC",
                       "AMAZON_RDS_POSTGRESQL",
@@ -7124,7 +7190,8 @@
                       "SINGLESTORE",
                       "GCP_SQLSERVER",
                       "GCP_ALLOYDB_POSTGRESQL",
-                      "GCP_POSTGRESQL"
+                      "GCP_POSTGRESQL",
+                      "GCP_MYSQL"
                     ]
                   },
                   "data_warehouse_config": {
@@ -7371,6 +7438,152 @@
         }
       }
     },
+    "/api/rest/2.0/connections/fetch-connection-diff-status/{connection_identifier}": {
+      "post": {
+        "operationId": "fetchConnectionDiffStatus",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.9.0.cl or later</span>\n\nValidates the difference in connection metadata between CDW and ThoughtSpot\n\nRequires `DATAMANAGEMENT` (**Can manage data**) privilege\n\nReturns a boolean indicating whether there is any difference between the connection metadata at ThoughtSpot and CDW.\n\nTo get the connection metadata difference status, pass the connection GUID as `connection_identifier` in the API request.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Connections",
+          "9.9.0.cl"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "connection_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "GUID of the connection"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "true/false",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FetchConnectionDiffStatusResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/connections/download-connection-metadata-changes/{connection_identifier}": {
+      "post": {
+        "operationId": "downloadConnectionMetadataChanges",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.9.0.cl or later</span>\n\nExports the difference in connection metadata between CDW and ThoughtSpot\n\nRequires `DATAMANAGEMENT` (**Can manage data**) privilege\n\nTo download the connection metadata difference between ThoughtSpot and CDW, pass the connection GUID as `connection_identifier` in the API request.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Connections",
+          "9.9.0.cl"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "connection_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "GUID of the connection"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Export metadata changes.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/roles/create": {
       "post": {
         "operationId": "createRole",
@@ -7386,15 +7599,15 @@
                 "type": "object",
                 "properties": {
                   "name": {
-                    "description": "Unique name of the role.",
+                    "description": "Unique name of the Role.",
                     "type": "string"
                   },
                   "description": {
-                    "description": "Description of the role.",
+                    "description": "Description of the Role.",
                     "type": "string"
                   },
                   "privileges": {
-                    "description": "Privileges granted to the role.",
+                    "description": "Privileges granted to the Role. See [Documentation](https://developers.thoughtspot.com/docs/rbac#_role_categories_and_privileges)for supported roles privileges.",
                     "type": "array",
                     "items": {
                       "type": "string",
@@ -7419,7 +7632,8 @@
                         "AUTHENTICATION_ADMINISTRATION",
                         "BILLING_INFO_ADMINISTRATION",
                         "CONTROL_TRUSTED_AUTH",
-                        "TAG_MANAGEMENT"
+                        "TAGMANAGEMENT",
+                        "LIVEBOARD_VERIFIER"
                       ]
                     }
                   }
@@ -7506,11 +7720,11 @@
                     "type": "string"
                   },
                   "description": {
-                    "description": "Description of the Role",
+                    "description": "Description of the Role.",
                     "type": "string"
                   },
                   "privileges": {
-                    "description": "Privileges granted to the role.",
+                    "description": "Privileges granted to the role. See [Documentation](https://developers.thoughtspot.com/docs/rbac#_role_categories_and_privileges)for supported roles privileges.",
                     "type": "array",
                     "items": {
                       "type": "string",
@@ -7535,7 +7749,8 @@
                         "AUTHENTICATION_ADMINISTRATION",
                         "BILLING_INFO_ADMINISTRATION",
                         "CONTROL_TRUSTED_AUTH",
-                        "TAG_MANAGEMENT"
+                        "TAGMANAGEMENT",
+                        "LIVEBOARD_VERIFIER"
                       ]
                     }
                   }
@@ -7556,7 +7771,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique ID or name of the role."
+            "description": "Unique ID or name of the Role."
           }
         ],
         "responses": {
@@ -7629,7 +7844,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique ID or name of the role."
+            "description": "Unique ID or name of the Role."
           }
         ],
         "responses": {
@@ -9689,10 +9904,10 @@
     "/api/rest/2.0/dbt/dbt-connection": {
       "post": {
         "operationId": "dbtConnection",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.8.0.cl or later</span>\n\nCreates a DBT connection object in ThoughtSpot.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege.\n\n#### About create DBT connection\nDBT connection in ThoughtSpot is used by the user to define DBT credentials for cloud . The API needs  embrace connection, embrace database name, DBT url, import type, DBT account identifier, DBT project identifier, DBT access token and environment details (or) embrace connection, embrace database name, import type, file_content to create a connection object. To know more about DBT, see ThoughtSpot Product Documentation.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.9.0.cl or later</span>\n\nCreates a DBT connection object in ThoughtSpot.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege.\n\n#### About create DBT connection\nDBT connection in ThoughtSpot is used by the user to define DBT credentials for cloud . The API needs  embrace connection, embrace database name, DBT url, import type, DBT account identifier, DBT project identifier, DBT access token and environment details (or) embrace connection, embrace database name, import type, file_content to create a connection object. To know more about DBT, see ThoughtSpot Product Documentation.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "DBT",
-          "9.8.0.cl"
+          "9.9.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -9713,7 +9928,8 @@
                     "default": "DBT_CLOUD",
                     "type": "string",
                     "enum": [
-                      "DBT_CLOUD"
+                      "DBT_CLOUD",
+                      "ZIP_FILE"
                     ]
                   },
                   "access_token": {
@@ -9741,6 +9957,8 @@
                     "type": "string"
                   },
                   "file_content": {
+                    "description": "Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is Mandatory when Import Type is 'ZIP_FILE'",
+                    "type": "string",
                     "format": "binary"
                   }
                 },
@@ -9810,11 +10028,11 @@
     },
     "/api/rest/2.0/dbt/generate-tml": {
       "post": {
-        "operationId": "generateTml",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.8.0.cl or later</span>\n\nGenerate required table and worksheet and import them.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege, along with an existing DBT connection.\n\n#### About generate TML\nModels and Worksheets to be imported can be selected by the user as part of the API.\n\n\n\n\n#### Endpoint URL\n",
+        "operationId": "dbtGenerateTml",
+        "description": " <span class=\"since-beta-tag\">Version: 9.9.0.cl or later</span>",
         "tags": [
           "DBT",
-          "9.8.0.cl"
+          "9.9.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -9850,12 +10068,13 @@
                     }
                   },
                   "file_content": {
+                    "description": "Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’",
+                    "type": "string",
                     "format": "binary"
                   }
                 },
                 "required": [
                   "dbt_connection_identifier",
-                  "model_tables",
                   "import_worksheets"
                 ]
               }
@@ -9920,11 +10139,11 @@
     },
     "/api/rest/2.0/dbt/generate-sync-tml": {
       "post": {
-        "operationId": "generateSyncTml",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.8.0.cl or later</span>\n\nResynchronize the existing list of models, tables, worksheet tml’s and import them to Thoughtspot based on the DBT connection object.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege, along with an existing DBT connection.\n\n\n\n\n#### Endpoint URL\n",
+        "operationId": "dbtGenerateSyncTml",
+        "description": " <span class=\"since-beta-tag\">Version: 9.9.0.cl or later</span>",
         "tags": [
           "DBT",
-          "9.8.0.cl"
+          "9.9.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -9937,6 +10156,8 @@
                     "type": "string"
                   },
                   "file_content": {
+                    "description": "Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’",
+                    "type": "string",
                     "format": "binary"
                   }
                 },
@@ -10006,10 +10227,10 @@
     "/api/rest/2.0/dbt/search": {
       "post": {
         "operationId": "dbtSearch",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.8.0.cl or later</span>\n\nGets a list of DBT connection objects by user and organization, available on the ThoughtSpot system.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege\n\n#### About search DBT connection\nTo get details of a specific DBT connection identifier, database connection identifier, database connection name, database name, project name, project identifier, environment identifier , import type and author.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.9.0.cl or later</span>\n\nGets a list of DBT connection objects by user and organization, available on the ThoughtSpot system.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege\n\n#### About search DBT connection\nTo get details of a specific DBT connection identifier, database connection identifier, database connection name, database name, project name, project identifier, environment identifier , import type and author.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "DBT",
-          "9.8.0.cl"
+          "9.9.0.cl"
         ],
         "parameters": [],
         "responses": {
@@ -10018,7 +10239,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DbtSearchResponse"
+                  }
                 }
               }
             }
@@ -10066,13 +10290,79 @@
         }
       }
     },
-    "/api/rest/2.0/dbt/{dbt_connection_identifier}": {
+    "/api/rest/2.0/dbt/{dbt_connection_identifier}/delete": {
       "post": {
-        "operationId": "updateDbtConnection",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.8.0.cl or later</span>\n\nUpdates a DBT connection object.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege, along with an existing DBT connection.\n\n#### About update DBT connection\nYou can modify DBT connection object properties such as embrace connection name, embrace database name, import type, account identifier, access token, project identifier and environment (or) embrace connection, embrace database name, import type, file_content settings.\n\n\n\n\n#### Endpoint URL\n",
+        "operationId": "deleteDbtConnection",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.9.0.cl or later</span>\n\nRemoves the specified DBT connection object from the ThoughtSpot system.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "DBT",
-          "9.8.0.cl"
+          "9.9.0.cl"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dbt_connection_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique ID of the DBT Connection."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "DBT Connection successfully deleted."
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/dbt/update-dbt-connection": {
+      "post": {
+        "operationId": "updateDbtConnection",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.9.0.cl or later</span>\n\nUpdates a DBT connection object.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege, along with an existing DBT connection.\n\n#### About update DBT connection\nYou can modify DBT connection object properties such as embrace connection name, embrace database name, import type, account identifier, access token, project identifier and environment (or) embrace connection, embrace database name, import type, file_content settings.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "DBT",
+          "9.9.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -10080,6 +10370,10 @@
               "schema": {
                 "type": "object",
                 "properties": {
+                  "dbt_connection_identifier": {
+                    "description": "Unique ID of the DBT Connection.",
+                    "type": "string"
+                  },
                   "connection_name": {
                     "description": "Name of the connection.",
                     "type": "string"
@@ -10093,7 +10387,8 @@
                     "default": "DBT_CLOUD",
                     "type": "string",
                     "enum": [
-                      "DBT_CLOUD"
+                      "DBT_CLOUD",
+                      "ZIP_FILE"
                     ]
                   },
                   "access_token": {
@@ -10119,27 +10414,32 @@
                   "project_name": {
                     "description": "Name of the project",
                     "type": "string"
+                  },
+                  "file_content": {
+                    "description": "Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is Mandatory when Import Type is 'ZIP_FILE'",
+                    "type": "string",
+                    "format": "binary"
                   }
-                }
+                },
+                "required": [
+                  "dbt_connection_identifier"
+                ]
               }
             }
           },
           "required": true
         },
-        "parameters": [
-          {
-            "in": "path",
-            "name": "dbt_connection_identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Unique ID of the DBT Connection."
-          }
-        ],
+        "parameters": [],
         "responses": {
-          "204": {
-            "description": "DBT Connection successfully updated."
+          "200": {
+            "description": "DBT Connection successfully updated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "400": {
             "description": "Invalid request.",
@@ -10192,6 +10492,55 @@
         "properties": {
           "error": {
             "type": "object"
+          }
+        }
+      },
+      "GetTokenResponse": {
+        "type": "object",
+        "required": [
+          "token",
+          "creation_time_in_millis",
+          "expiration_time_in_millis",
+          "valid_for_user_id",
+          "valid_for_username"
+        ],
+        "properties": {
+          "token": {
+            "type": "string",
+            "description": "Bearer auth token."
+          },
+          "creation_time_in_millis": {
+            "type": "number",
+            "format": "float",
+            "description": "Token creation time in milliseconds."
+          },
+          "expiration_time_in_millis": {
+            "type": "number",
+            "format": "float",
+            "description": "Token expiration time in milliseconds."
+          },
+          "valid_for_user_id": {
+            "type": "string",
+            "description": "Username to whom the token is issued."
+          },
+          "valid_for_username": {
+            "type": "string",
+            "description": "Unique identifier of the user to whom the token is issued."
+          }
+        }
+      },
+      "RiseSetter": {
+        "type": "object",
+        "required": [
+          "field",
+          "path"
+        ],
+        "properties": {
+          "field": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string"
           }
         }
       },
@@ -10423,6 +10772,72 @@
           }
         }
       },
+      "Org": {
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The ID of the object."
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the object."
+          }
+        },
+        "description": "The current Org context of the user."
+      },
+      "FavoriteMetadataItem": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "type"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique ID of the metadata object."
+          },
+          "name": {
+            "type": "string",
+            "description": "name of the metadata object."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "LIVEBOARD",
+              "ANSWER",
+              "LOGICAL_TABLE",
+              "LOGICAL_COLUMN",
+              "CONNECTION",
+              "TAG",
+              "USER",
+              "USER_GROUP",
+              "LOGICAL_RELATIONSHIP"
+            ],
+            "description": "Type of metadata object."
+          }
+        }
+      },
+      "Object_ID_And_Name": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique identifier of the object."
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the object."
+          }
+        },
+        "description": "The object representation with ID and Name."
+      },
       "FavoriteMetadataInput": {
         "type": "object",
         "properties": {
@@ -10437,124 +10852,6 @@
               "ANSWER"
             ],
             "description": "Type of metadata object."
-          }
-        }
-      },
-      "ImportUser": {
-        "type": "object",
-        "required": [
-          "user_identifier",
-          "display_name"
-        ],
-        "properties": {
-          "user_identifier": {
-            "type": "string",
-            "description": "Unique ID or name of the user."
-          },
-          "display_name": {
-            "type": "string",
-            "description": "Display name of the user."
-          },
-          "password": {
-            "type": "string",
-            "description": "Password of the user."
-          },
-          "account_type": {
-            "type": "string",
-            "enum": [
-              "LOCAL_USER",
-              "LDAP_USER",
-              "SAML_USER",
-              "OIDC_USER",
-              "REMOTE_USER"
-            ],
-            "default": "LOCAL_USER",
-            "description": "Type of the user account."
-          },
-          "account_status": {
-            "type": "string",
-            "enum": [
-              "ACTIVE",
-              "INACTIVE",
-              "EXPIRED",
-              "LOCKED",
-              "PENDING"
-            ],
-            "default": "ACTIVE",
-            "description": "Status of the user account."
-          },
-          "email": {
-            "type": "string",
-            "description": "Email address of the user."
-          },
-          "org_identifiers": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "ID or name of the Orgs to which the user belongs."
-          },
-          "group_identifiers": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "ID or name of the groups to which the user belongs."
-          },
-          "visibility": {
-            "type": "string",
-            "enum": [
-              "SHARABLE",
-              "NON_SHARABLE"
-            ],
-            "description": "Visibility of the users. The SHARABLE property makes a user visible to other users and group, who can share objects with the user."
-          },
-          "notify_on_share": {
-            "type": "boolean",
-            "default": true,
-            "description": "Notify user when other users or groups share metadata objects"
-          },
-          "show_onboarding_experience": {
-            "type": "boolean",
-            "description": "Show or hide the new user onboarding walkthroughs"
-          },
-          "onboarding_experience_completed": {
-            "type": "boolean",
-            "description": "Revisit the new user onboarding walkthroughs"
-          },
-          "home_liveboard_identifier": {
-            "type": "string",
-            "description": "Unique ID or name of the default Liveboard assigned to the user."
-          },
-          "favorite_metadata": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FavoriteMetadataInput"
-            },
-            "description": "Metadata objects to add to the user's favorites list."
-          }
-        }
-      },
-      "ImportUsersResponse": {
-        "type": "object",
-        "properties": {
-          "users_added": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ImportUserType"
-            }
-          },
-          "users_updated": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ImportUserType"
-            }
-          },
-          "users_deleted": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ImportUserType"
-            }
           }
         }
       },
@@ -10582,372 +10879,6 @@
           }
         },
         "description": "Sort options."
-      },
-      "UserGroup": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          }
-        }
-      },
-      "VisualizationIdentifiersInput": {
-        "type": "object",
-        "properties": {
-          "identifier": {
-            "type": "string",
-            "description": "Unique ID or name of the visualization."
-          }
-        }
-      },
-      "MetadataTypeInput": {
-        "type": "object",
-        "required": [
-          "identifier"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "LIVEBOARD",
-              "ANSWER",
-              "LOGICAL_TABLE",
-              "LOGICAL_COLUMN",
-              "CONNECTION",
-              "TAG",
-              "USER",
-              "USER_GROUP",
-              "LOGICAL_RELATIONSHIP"
-            ],
-            "description": "Type of metadata (Optional when given identifier is ID)."
-          },
-          "identifier": {
-            "type": "string",
-            "description": "Unique ID or name of the metadata object."
-          }
-        },
-        "description": "MetadataType InputType associated in the Product"
-      },
-      "ExportMetadataTypeInput": {
-        "type": "object",
-        "required": [
-          "identifier"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "LIVEBOARD",
-              "ANSWER",
-              "LOGICAL_TABLE",
-              "CONNECTION",
-              "CUSTOM_ACTION"
-            ],
-            "description": "Type of metadata (Optional when given identifier is ID)."
-          },
-          "identifier": {
-            "type": "string",
-            "description": "Unique ID or name of the metadata object."
-          }
-        },
-        "description": "MetadataType InputType used in Export MetadataType API"
-      },
-      "DeleteMetadataTypeInput": {
-        "type": "object",
-        "required": [
-          "identifier"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "LIVEBOARD",
-              "ANSWER",
-              "LOGICAL_TABLE",
-              "LOGICAL_COLUMN",
-              "LOGICAL_RELATIONSHIP"
-            ],
-            "description": "Type of metadata (Optional when given identifier is ID)."
-          },
-          "identifier": {
-            "type": "string",
-            "description": "Unique ID or name of the metadata object."
-          }
-        },
-        "description": "MetadataType InputType used in Delete MetadataType API"
-      },
-      "PrincipalsInput": {
-        "type": "object",
-        "required": [
-          "identifier"
-        ],
-        "properties": {
-          "identifier": {
-            "type": "string",
-            "description": "Unique ID or name of the principal object such as a user or group."
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "USER",
-              "USER_GROUP"
-            ],
-            "description": "Principal type."
-          }
-        }
-      },
-      "AuthorMetadataTypeInput": {
-        "type": "object",
-        "required": [
-          "identifier"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "LIVEBOARD",
-              "ANSWER",
-              "LOGICAL_TABLE"
-            ],
-            "description": "Type of metadata."
-          },
-          "identifier": {
-            "type": "string",
-            "description": "Unique ID or name of the metadata object."
-          }
-        },
-        "description": "MetadataType InputType used in Author API's"
-      },
-      "PermissionsMetadataTypeInput": {
-        "type": "object",
-        "required": [
-          "identifier"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "LIVEBOARD",
-              "ANSWER",
-              "LOGICAL_TABLE",
-              "LOGICAL_COLUMN",
-              "CONNECTION"
-            ],
-            "description": "Type of metadata object."
-          },
-          "identifier": {
-            "type": "string",
-            "description": "Unique ID or name of the metadata object."
-          }
-        },
-        "description": "MetadataType InputType used in Permission API's"
-      },
-      "SharePermissionsInput": {
-        "type": "object",
-        "required": [
-          "principal",
-          "share_mode"
-        ],
-        "properties": {
-          "principal": {
-            "$ref": "#/components/schemas/PrincipalsInput",
-            "description": "Details of users or groups."
-          },
-          "share_mode": {
-            "type": "string",
-            "enum": [
-              "READ_ONLY",
-              "MODIFY",
-              "NO_ACCESS"
-            ],
-            "description": "Type of access to the shared object"
-          }
-        }
-      },
-      "SearchDataResponse": {
-        "type": "object",
-        "required": [
-          "contents"
-        ],
-        "properties": {
-          "contents": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AnswerContent"
-            },
-            "description": "Data content of metadata objects"
-          }
-        },
-        "description": "Response format associated with the search data API."
-      },
-      "AnswerDataResponse": {
-        "type": "object",
-        "required": [
-          "metadata_id",
-          "metadata_name",
-          "contents"
-        ],
-        "properties": {
-          "metadata_id": {
-            "type": "string",
-            "description": "The unique identifier of the object"
-          },
-          "metadata_name": {
-            "type": "string",
-            "description": "Name of the metadata object"
-          },
-          "contents": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AnswerContent"
-            },
-            "description": "Data content of metadata objects"
-          }
-        },
-        "description": "Response format associated with fetch data api"
-      },
-      "LiveboardDataResponse": {
-        "type": "object",
-        "required": [
-          "metadata_id",
-          "metadata_name",
-          "contents"
-        ],
-        "properties": {
-          "metadata_id": {
-            "type": "string",
-            "description": "The unique identifier of the object"
-          },
-          "metadata_name": {
-            "type": "string",
-            "description": "Name of the metadata object"
-          },
-          "contents": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/LiveboardContent"
-            },
-            "description": "Data content of metadata objects"
-          }
-        }
-      },
-      "Org": {
-        "type": "object",
-        "required": [
-          "id",
-          "name"
-        ],
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The ID of the object."
-          },
-          "name": {
-            "type": "string",
-            "description": "Name of the object."
-          }
-        },
-        "description": "The current Org context of the user."
-      },
-      "GenericInfo": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          }
-        }
-      },
-      "CustomActionMetadataTypeInput": {
-        "type": "object",
-        "required": [
-          "identifier"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "VISUALIZATION",
-              "ANSWER",
-              "WORKSHEET"
-            ],
-            "description": "Type of metadata object."
-          },
-          "identifier": {
-            "type": "string",
-            "description": "Unique ID or name of the metadata object."
-          }
-        },
-        "description": "MetadataType InputType used in Custom Action API's"
-      },
-      "Object_ID_And_Name": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "The unique identifier of the object."
-          },
-          "name": {
-            "type": "string",
-            "description": "Name of the object."
-          }
-        },
-        "description": "The object representation with ID and Name."
-      },
-      "RiseSetter": {
-        "type": "object",
-        "required": [
-          "field",
-          "path"
-        ],
-        "properties": {
-          "field": {
-            "type": "string"
-          },
-          "path": {
-            "type": "string"
-          }
-        }
-      },
-      "GetTokenResponse": {
-        "type": "object",
-        "required": [
-          "token",
-          "creation_time_in_millis",
-          "expiration_time_in_millis",
-          "valid_for_user_id",
-          "valid_for_username"
-        ],
-        "properties": {
-          "token": {
-            "type": "string",
-            "description": "Bearer auth token."
-          },
-          "creation_time_in_millis": {
-            "type": "number",
-            "format": "float",
-            "description": "Token creation time in milliseconds."
-          },
-          "expiration_time_in_millis": {
-            "type": "number",
-            "format": "float",
-            "description": "Token expiration time in milliseconds."
-          },
-          "valid_for_user_id": {
-            "type": "string",
-            "description": "Username to whom the token is issued."
-          },
-          "valid_for_username": {
-            "type": "string",
-            "description": "Unique identifier of the user to whom the token is issued."
-          }
-        }
       },
       "SystemInfo": {
         "type": "object",
@@ -11307,6 +11238,144 @@
           }
         }
       },
+      "Role": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "id of the role"
+          },
+          "name": {
+            "type": "string",
+            "description": "name of the role"
+          }
+        }
+      },
+      "MetadataListItemInput": {
+        "type": "object",
+        "properties": {
+          "identifier": {
+            "type": "string",
+            "description": "Unique ID or name of the metadata."
+          },
+          "name_pattern": {
+            "type": "string",
+            "description": "A pattern to match the case-insensitive name of the metadata object. User % for a wildcard match."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "LIVEBOARD",
+              "ANSWER",
+              "LOGICAL_TABLE",
+              "LOGICAL_COLUMN",
+              "CONNECTION",
+              "TAG",
+              "USER",
+              "USER_GROUP",
+              "LOGICAL_RELATIONSHIP"
+            ],
+            "description": "Type of metadata. Required if the name of the object is set as identifier. This attribute is optional when the object GUID is specified as identifier.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view.\n5. CONNECTION for creating or modify data connections.\n6. TAG for tag objects.\n7. USER for user objects.\n8. USER_GROUP for group objects.\n9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values"
+          }
+        }
+      },
+      "PermissionInput": {
+        "type": "object",
+        "required": [
+          "principal",
+          "share_mode"
+        ],
+        "properties": {
+          "principal": {
+            "$ref": "#/components/schemas/PrincipalsInput",
+            "description": "Details of users or groups."
+          },
+          "share_mode": {
+            "type": "string",
+            "enum": [
+              "READ_ONLY",
+              "MODIFY",
+              "NO_ACCESS"
+            ],
+            "description": "Object share mode."
+          }
+        },
+        "description": "Details of users or groups."
+      },
+      "ExcludeMetadataListItemInput": {
+        "type": "object",
+        "required": [
+          "identifier",
+          "type"
+        ],
+        "properties": {
+          "identifier": {
+            "type": "string",
+            "description": "Unique ID or name of the metadata."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "LIVEBOARD",
+              "ANSWER",
+              "LOGICAL_TABLE",
+              "LOGICAL_COLUMN",
+              "CONNECTION",
+              "TAG",
+              "USER",
+              "USER_GROUP",
+              "LOGICAL_RELATIONSHIP"
+            ],
+            "description": "Type of metadata. Required if the name of the object is set as identifier. This attribute is optional when the object GUID is specified as identifier.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view\n4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view\n5. CONNECTION for connection objects\n6. TAG for tag objects\n7. USER for user objects\n8. USER_GROUP for group objects\n9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values."
+          }
+        }
+      },
+      "FavoriteObjectOptionsInput": {
+        "type": "object",
+        "properties": {
+          "include": {
+            "type": "boolean",
+            "default": false,
+            "description": "Includes objects marked as favorite for the specified users."
+          },
+          "user_identifiers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Unique ID or name of the users. If not specified, the favorite objects of current logged in user are returned."
+          }
+        },
+        "description": "Favorite object options."
+      },
+      "MetadataSearchSortOptions": {
+        "type": "object",
+        "properties": {
+          "field_name": {
+            "type": "string",
+            "enum": [
+              "NAME",
+              "DISPLAY_NAME",
+              "AUTHOR",
+              "CREATED",
+              "MODIFIED",
+              "VIEWS",
+              "FAVORITES",
+              "LAST_ACCESSED"
+            ],
+            "description": "Name of the field to apply the sort on."
+          },
+          "order": {
+            "type": "string",
+            "enum": [
+              "ASC",
+              "DESC"
+            ],
+            "description": "Sort order : ASC(Ascending) or DESC(Descending)."
+          }
+        },
+        "description": "Sort options."
+      },
       "MetadataSearchResponse": {
         "type": "object",
         "required": [
@@ -11369,131 +11438,6 @@
         },
         "description": "Metadata Search Response Object."
       },
-      "MetadataListItemInput": {
-        "type": "object",
-        "properties": {
-          "identifier": {
-            "type": "string",
-            "description": "Unique ID or name of the metadata."
-          },
-          "name_pattern": {
-            "type": "string",
-            "description": "A pattern to match the case-insensitive name of the metadata object. User % for a wildcard match."
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "LIVEBOARD",
-              "ANSWER",
-              "LOGICAL_TABLE",
-              "LOGICAL_COLUMN",
-              "CONNECTION",
-              "TAG",
-              "USER",
-              "USER_GROUP",
-              "LOGICAL_RELATIONSHIP"
-            ],
-            "description": "Type of metadata.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view.\n5. CONNECTION for creating or modify data connections.\n6. TAG for tag objects.\n7. USER for user objects.\n8. USER_GROUP for group objects.\n9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values"
-          }
-        }
-      },
-      "PermissionInput": {
-        "type": "object",
-        "required": [
-          "principal",
-          "share_mode"
-        ],
-        "properties": {
-          "principal": {
-            "$ref": "#/components/schemas/PrincipalsInput",
-            "description": "Details of users or groups."
-          },
-          "share_mode": {
-            "type": "string",
-            "enum": [
-              "READ_ONLY",
-              "MODIFY",
-              "NO_ACCESS"
-            ],
-            "description": "Object share mode."
-          }
-        },
-        "description": "Details of users or groups."
-      },
-      "ExcludeMetadataListItemInput": {
-        "type": "object",
-        "required": [
-          "identifier",
-          "type"
-        ],
-        "properties": {
-          "identifier": {
-            "type": "string",
-            "description": "Unique ID or name of the metadata."
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "LIVEBOARD",
-              "ANSWER",
-              "LOGICAL_TABLE",
-              "LOGICAL_COLUMN",
-              "CONNECTION",
-              "TAG",
-              "USER",
-              "USER_GROUP",
-              "LOGICAL_RELATIONSHIP"
-            ],
-            "description": "Type of metadata.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view\n4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view\n5. CONNECTION for connection objects\n6. TAG for tag objects\n7. USER for user objects\n8. USER_GROUP for group objects\n9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values."
-          }
-        }
-      },
-      "FavoriteObjectOptionsInput": {
-        "type": "object",
-        "properties": {
-          "include": {
-            "type": "boolean",
-            "default": false,
-            "description": "Includes objects marked as favorite for the specified users."
-          },
-          "user_identifiers": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Unique ID or name of the users. If not specified, the favorite objects of current logged in user are returned."
-          }
-        },
-        "description": "Favorite object options."
-      },
-      "MetadataSearchSortOptions": {
-        "type": "object",
-        "properties": {
-          "field_name": {
-            "type": "string",
-            "enum": [
-              "NAME",
-              "DISPLAY_NAME",
-              "AUTHOR",
-              "CREATED",
-              "MODIFIED",
-              "VIEWS",
-              "FAVORITES",
-              "LAST_ACCESSED"
-            ],
-            "description": "Name of the field to apply the sort on."
-          },
-          "order": {
-            "type": "string",
-            "enum": [
-              "ASC",
-              "DESC"
-            ],
-            "description": "Sort order : ASC(Ascending) or DESC(Descending)."
-          }
-        },
-        "description": "Sort options."
-      },
       "SqlQueryResponse": {
         "type": "object",
         "required": [
@@ -11534,6 +11478,29 @@
             "description": "SQL query details of metadata objects."
           }
         }
+      },
+      "SqlQuery": {
+        "type": "object",
+        "required": [
+          "metadata_id",
+          "metadata_name",
+          "sql_query"
+        ],
+        "properties": {
+          "metadata_id": {
+            "type": "string",
+            "description": "Unique identifier of the metadata."
+          },
+          "metadata_name": {
+            "type": "string",
+            "description": "Name of the metadata."
+          },
+          "sql_query": {
+            "type": "string",
+            "description": "SQL query of a metadata object."
+          }
+        },
+        "description": "Response format associated with fetch SQL query api"
       },
       "PdfOptionsInput": {
         "type": "object",
@@ -11592,6 +11559,231 @@
             "description": "Indicates whether to include a page with all applied filters."
           }
         }
+      },
+      "PrincipalsInput": {
+        "type": "object",
+        "required": [
+          "identifier"
+        ],
+        "properties": {
+          "identifier": {
+            "type": "string",
+            "description": "Unique ID or name of the principal object such as a user or group."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "USER",
+              "USER_GROUP"
+            ],
+            "description": "Principal type."
+          }
+        }
+      },
+      "PermissionsMetadataTypeInput": {
+        "type": "object",
+        "required": [
+          "identifier"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "LIVEBOARD",
+              "ANSWER",
+              "LOGICAL_TABLE",
+              "LOGICAL_COLUMN",
+              "CONNECTION"
+            ],
+            "description": "Type of metadata object."
+          },
+          "identifier": {
+            "type": "string",
+            "description": "Unique ID or name of the metadata object."
+          }
+        },
+        "description": "MetadataType InputType used in Permission API's"
+      },
+      "SearchDataResponse": {
+        "type": "object",
+        "required": [
+          "contents"
+        ],
+        "properties": {
+          "contents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AnswerContent"
+            },
+            "description": "Data content of metadata objects"
+          }
+        },
+        "description": "Response format associated with the search data API."
+      },
+      "AnswerContent": {
+        "type": "object",
+        "required": [
+          "available_data_row_count",
+          "column_names",
+          "data_rows",
+          "record_offset",
+          "record_size",
+          "returned_data_row_count",
+          "sampling_ratio"
+        ],
+        "properties": {
+          "available_data_row_count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Total available data row count."
+          },
+          "column_names": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Name of the columns."
+          },
+          "data_rows": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": "Rows of data set."
+          },
+          "record_offset": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The starting record number from where the records should be included."
+          },
+          "record_size": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of records that should be included."
+          },
+          "returned_data_row_count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Total returned data row count."
+          },
+          "sampling_ratio": {
+            "type": "number",
+            "format": "float",
+            "description": "Sampling ratio (0 to 1). If the query was sampled, it is the ratio of keys returned in the data set to the total number of keys expected in the query. If the value is 1.0, this means that the complete result is returned."
+          }
+        }
+      },
+      "LiveboardDataResponse": {
+        "type": "object",
+        "required": [
+          "metadata_id",
+          "metadata_name",
+          "contents"
+        ],
+        "properties": {
+          "metadata_id": {
+            "type": "string",
+            "description": "The unique identifier of the object"
+          },
+          "metadata_name": {
+            "type": "string",
+            "description": "Name of the metadata object"
+          },
+          "contents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LiveboardContent"
+            },
+            "description": "Data content of metadata objects"
+          }
+        }
+      },
+      "LiveboardContent": {
+        "type": "object",
+        "required": [
+          "available_data_row_count",
+          "column_names",
+          "data_rows",
+          "record_offset",
+          "record_size",
+          "returned_data_row_count",
+          "sampling_ratio"
+        ],
+        "properties": {
+          "available_data_row_count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Total available data row count."
+          },
+          "column_names": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Name of the columns."
+          },
+          "data_rows": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": "Rows of data set."
+          },
+          "record_offset": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The starting record number from where the records should be included."
+          },
+          "record_size": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of records that should be included."
+          },
+          "returned_data_row_count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Total returned data row count."
+          },
+          "sampling_ratio": {
+            "type": "number",
+            "format": "float",
+            "description": "Sampling ratio (0 to 1). If the query was sampled, it is the ratio of keys returned in the data set to the total number of keys expected in the query. If the value is 1.0, this means that the complete result is returned."
+          },
+          "visualization_id": {
+            "type": "string",
+            "description": "Unique ID of the visualization."
+          },
+          "visualization_name": {
+            "type": "string",
+            "description": "Name of the visualization."
+          }
+        }
+      },
+      "AnswerDataResponse": {
+        "type": "object",
+        "required": [
+          "metadata_id",
+          "metadata_name",
+          "contents"
+        ],
+        "properties": {
+          "metadata_id": {
+            "type": "string",
+            "description": "The unique identifier of the object"
+          },
+          "metadata_name": {
+            "type": "string",
+            "description": "Name of the metadata object"
+          },
+          "contents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AnswerContent"
+            },
+            "description": "Data content of metadata objects"
+          }
+        },
+        "description": "Response format associated with fetch data api"
       },
       "LogResponse": {
         "type": "object",
@@ -11683,6 +11875,102 @@
           }
         }
       },
+      "CommiterType": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "Email id of the committer"
+          },
+          "username": {
+            "type": "string",
+            "description": "Username of the committer"
+          }
+        }
+      },
+      "AuthorType": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "Email id of the committer"
+          },
+          "username": {
+            "type": "string",
+            "description": "Username of the committer"
+          }
+        }
+      },
+      "ConnectionInput": {
+        "type": "object",
+        "properties": {
+          "identifier": {
+            "type": "string",
+            "description": "Unique ID or name of the connection."
+          },
+          "name_pattern": {
+            "type": "string",
+            "description": "A pattern to match case-insensitive name of the connection object. User `%` for a wildcard match."
+          },
+          "data_warehouse_objects": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DataWarehouseObjectInput"
+            },
+            "description": "Filter options for databases, schemas, tables and columns."
+          }
+        }
+      },
+      "DataWarehouseObjectInput": {
+        "type": "object",
+        "properties": {
+          "database": {
+            "type": "string",
+            "description": "Name of the database."
+          },
+          "schema": {
+            "type": "string",
+            "description": "Name of the schema within the database."
+          },
+          "table": {
+            "type": "string",
+            "description": "Name of the table within the schema."
+          },
+          "column": {
+            "type": "string",
+            "description": "Name of the column within the table."
+          }
+        }
+      },
+      "SortOptionInput": {
+        "type": "object",
+        "properties": {
+          "field_name": {
+            "type": "string",
+            "enum": [
+              "NAME",
+              "DISPLAY_NAME",
+              "AUTHOR",
+              "CREATED",
+              "MODIFIED",
+              "LAST_ACCESSED",
+              "SYNCED",
+              "VIEWS",
+              "USER_STATE",
+              "ROW_COUNT"
+            ],
+            "description": "Name of the field to apply the sort on."
+          },
+          "order": {
+            "type": "string",
+            "enum": [
+              "ASC",
+              "DESC"
+            ],
+            "description": "Sort order : ASC(Ascending) or DESC(Descending)."
+          }
+        }
+      },
       "SearchConnectionResponse": {
         "type": "object",
         "required": [
@@ -11720,7 +12008,7 @@
               "TRINO",
               "PRESTO",
               "POSTGRES",
-              "SQL_SERVER",
+              "SQLSERVER",
               "MYSQL",
               "GENERIC_JDBC",
               "AMAZON_RDS_POSTGRESQL",
@@ -11732,7 +12020,8 @@
               "SINGLESTORE",
               "GCP_SQLSERVER",
               "GCP_ALLOYDB_POSTGRESQL",
-              "GCP_POSTGRESQL"
+              "GCP_POSTGRESQL",
+              "GCP_MYSQL"
             ],
             "description": "Type of data warehouse."
           },
@@ -11746,52 +12035,135 @@
           }
         }
       },
-      "ConnectionInput": {
+      "DataWarehouseObjects": {
         "type": "object",
+        "required": [
+          "databases"
+        ],
         "properties": {
-          "identifier": {
-            "type": "string",
-            "description": "Unique ID or name of the connection."
-          },
-          "name_pattern": {
-            "type": "string",
-            "description": "A pattern to match case-insensitive name of the connection object. User `%` for a wildcard match."
-          },
-          "data_warehouse_objects": {
+          "databases": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/DataWarehouseObjectInput"
+              "$ref": "#/components/schemas/Database"
             },
-            "description": "Filter options for databases, schemas, tables and columns."
+            "description": "Databases of the connection."
           }
         }
       },
-      "SortOptionInput": {
+      "Database": {
         "type": "object",
+        "required": [
+          "name"
+        ],
         "properties": {
-          "field_name": {
+          "name": {
             "type": "string",
-            "enum": [
-              "NAME",
-              "DISPLAY_NAME",
-              "AUTHOR",
-              "CREATED",
-              "MODIFIED",
-              "LAST_ACCESSED",
-              "SYNCED",
-              "VIEWS",
-              "USER_STATE",
-              "ROW_COUNT"
-            ],
-            "description": "Name of the field to apply the sort on."
+            "description": "Name of the database."
           },
-          "order": {
+          "schemas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SchemaObject"
+            },
+            "description": "Schemas of the database."
+          },
+          "auto_created": {
+            "type": "boolean",
+            "description": "Determines if the object is auto created."
+          }
+        }
+      },
+      "SchemaObject": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
             "type": "string",
-            "enum": [
-              "ASC",
-              "DESC"
-            ],
-            "description": "Sort order : ASC(Ascending) or DESC(Descending)."
+            "description": "Name of the schema."
+          },
+          "tables": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Table"
+            },
+            "description": "Tables in the schema."
+          }
+        }
+      },
+      "Table": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the table."
+          },
+          "columns": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Column"
+            },
+            "description": "Columns of the table."
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of table. Either view or table"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the table"
+          },
+          "selected": {
+            "type": "boolean",
+            "description": "Determines if the table is selected"
+          },
+          "linked": {
+            "type": "boolean",
+            "description": "Determines if the table is linked"
+          },
+          "relationships": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": "List of relationships for the table"
+          }
+        }
+      },
+      "Column": {
+        "type": "object",
+        "required": [
+          "name",
+          "data_type"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the column"
+          },
+          "data_type": {
+            "type": "string",
+            "description": "Data type of the column"
+          },
+          "is_aggregate": {
+            "type": "string",
+            "description": "Determines if the column schema is an aggregate"
+          },
+          "can_import": {
+            "type": "boolean",
+            "description": "Determines if the column schema can be imported"
+          },
+          "selected": {
+            "type": "boolean",
+            "description": "Determines if the table is selected"
+          },
+          "is_linked_active": {
+            "type": "boolean",
+            "description": "Determines if the table is linked"
           }
         }
       },
@@ -11870,7 +12242,13 @@
                 "ROLE_ADMINISTRATION",
                 "AUTHENTICATION_ADMINISTRATION",
                 "BILLING_INFO_ADMINISTRATION",
-                "PREVIEW_THOUGHTSPOT_SAGE"
+                "PREVIEW_THOUGHTSPOT_SAGE",
+                "LIVEBOARD_VERIFIER",
+                "CAN_MANAGE_CUSTOM_CALENDAR",
+                "CAN_CREATE_OR_EDIT_CONNECTIONS",
+                "CAN_CONFIGURE_CONNECTIONS",
+                "CAN_MANAGE_WORKSHEET_VIEWS_TABLES",
+                "CAN_MANAGE_USER_SECURITY_PARAMETERS"
               ]
             },
             "description": "Privileges granted to the role."
@@ -11923,6 +12301,16 @@
         },
         "description": "Response for search role api should handle hidden privileges as well."
       },
+      "Default_Action_Config_Search_Input": {
+        "type": "object",
+        "properties": {
+          "visibility": {
+            "type": "boolean",
+            "description": "Custom action is available on all visualizations. Earlier naming convention: LOCAL/GLOBAL. TRUE signifies GLOBAL for backward compatibility."
+          }
+        },
+        "description": "Default Custom action configuration. This includes the custom action's visibility across all visualizations and Answers. By default, a custom action is added to all visualizations and Answers."
+      },
       "ResponseCustomAction": {
         "type": "object",
         "required": [
@@ -11965,15 +12353,271 @@
         },
         "description": "Custom action details"
       },
-      "Default_Action_Config_Search_Input": {
+      "Action_details": {
+        "type": "object",
+        "properties": {
+          "CALLBACK": {
+            "$ref": "#/components/schemas/CALLBACK",
+            "description": "CALLBACK Custom Action Type"
+          },
+          "URL": {
+            "$ref": "#/components/schemas/URL",
+            "description": "URL Custom Action Type"
+          }
+        },
+        "description": "Type and Configuration for Custom Actions"
+      },
+      "CALLBACK": {
+        "type": "object",
+        "properties": {
+          "reference": {
+            "type": "string",
+            "description": "Reference name of the SDK. By default, the value will be set to action name."
+          }
+        },
+        "description": "CALLBACK Custom Action Type"
+      },
+      "URL": {
+        "type": "object",
+        "required": [
+          "url"
+        ],
+        "properties": {
+          "authentication": {
+            "$ref": "#/components/schemas/Authentication",
+            "description": "Authorization type for the custom action."
+          },
+          "parameters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ParametersListItem"
+            },
+            "description": "Query parameters for url."
+          },
+          "url": {
+            "type": "string",
+            "description": "Request Url for the Custom action."
+          },
+          "reference": {
+            "type": "string",
+            "description": "Reference name of the SDK. By default, the value will be set to action name."
+          }
+        },
+        "description": "URL Custom Action Type"
+      },
+      "Authentication": {
+        "type": "object",
+        "properties": {
+          "API_Key": {
+            "$ref": "#/components/schemas/API_Key",
+            "description": "With API key auth, you send a key-value pair to the API either in the request headers or query parameters."
+          },
+          "Basic_Auth": {
+            "$ref": "#/components/schemas/Basic_Auth",
+            "description": "Basic Auth: Basic authentication involves sending a verified username and password with your request."
+          },
+          "Bearer_Token": {
+            "type": "string",
+            "description": "Bearer tokens enable requests to authenticate using an access key."
+          },
+          "No_Auth": {
+            "type": "string",
+            "description": "No authorization. If your request doesn't require authorization."
+          }
+        },
+        "description": "Authorization type for the custom action."
+      },
+      "API_Key": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "Enter your key name"
+          },
+          "value": {
+            "type": "string",
+            "description": "Enter you key value"
+          }
+        },
+        "description": "With API key auth, you send a key-value pair to the API either in the request headers or query parameters."
+      },
+      "Basic_Auth": {
+        "type": "object",
+        "properties": {
+          "password": {
+            "type": "string",
+            "description": "Password for the basic authentication"
+          },
+          "username": {
+            "type": "string",
+            "description": "Username for the basic authentication"
+          }
+        },
+        "description": "Basic Auth: Basic authentication involves sending a verified username and password with your request."
+      },
+      "ParametersListItem": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "Key for the url query parameter"
+          },
+          "value": {
+            "type": "string",
+            "description": "Value for the url query parameter"
+          }
+        }
+      },
+      "Default_action_config": {
         "type": "object",
         "properties": {
           "visibility": {
             "type": "boolean",
-            "description": "Custom action is available on all visualizations. Earlier naming convention: LOCAL/GLOBAL. TRUE signifies GLOBAL for backward compatibility."
+            "description": "Custom action is available on all visualizations. Earlier , the naming convention: LOCAL/GLOBAL. TRUE signifies GLOBAL for backward compatibility."
           }
         },
         "description": "Default Custom action configuration. This includes the custom action's visibility across all visualizations and Answers. By default, a custom action is added to all visualizations and Answers."
+      },
+      "Metadata_Association_Item": {
+        "type": "object",
+        "required": [
+          "action_config",
+          "identifier",
+          "type"
+        ],
+        "properties": {
+          "action_config": {
+            "$ref": "#/components/schemas/Action_config",
+            "description": "Specify that the association is enabled for the metadata object"
+          },
+          "identifier": {
+            "type": "string",
+            "description": "Unique ID or name of the metadata."
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of metadata."
+          }
+        }
+      },
+      "Action_config": {
+        "type": "object",
+        "properties": {
+          "position": {
+            "type": "string",
+            "description": "Position of the Custom action on the Metadata object. Earlier naming convention: context."
+          },
+          "visibility": {
+            "type": "boolean",
+            "description": "Visibility of the metadata association with custom action. Earlier naming convention: enabled"
+          }
+        },
+        "description": "Specify that the association is enabled for the metadata object"
+      },
+      "CustomActionMetadataTypeInput": {
+        "type": "object",
+        "required": [
+          "identifier"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "VISUALIZATION",
+              "ANSWER",
+              "WORKSHEET"
+            ],
+            "description": "Type of metadata object."
+          },
+          "identifier": {
+            "type": "string",
+            "description": "Unique ID or name of the metadata object."
+          }
+        },
+        "description": "MetadataType InputType used in Custom Action API's"
+      },
+      "GenericInfo": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "UserGroup": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "JWT_User_Options": {
+        "type": "object",
+        "properties": {
+          "parameters": {
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/Runtime_Filter"
+                },
+                {
+                  "$ref": "#/components/schemas/Runtime_Sort"
+                },
+                {
+                  "$ref": "#/components/schemas/Runtime_Param_Override"
+                }
+              ]
+            }
+          },
+          "metadata": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/JWT_Metadata_Object"
+            }
+          }
+        },
+        "description": "JWT user options to create a JWT token given the payload."
+      },
+      "JWT_Parameter": {
+        "type": "object",
+        "properties": {
+          "runtime_filter": {
+            "type": "object",
+            "description": "Runtime filter parameter type in JWT."
+          },
+          "runtime_sort": {
+            "type": "object",
+            "description": "Runtime sort parameter type in JWT."
+          },
+          "runtime_param_override": {
+            "type": "object",
+            "description": "Runtime param override type in JWT."
+          }
+        },
+        "description": "List of runtime parameters need to set during the session."
+      },
+      "JWT_Metadata_Object": {
+        "type": "object",
+        "properties": {
+          "identifier": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "LIVEBOARD",
+              "ANSWER"
+            ]
+          }
+        },
+        "description": "Metadata objects."
       },
       "Token": {
         "type": "object",
@@ -12014,28 +12658,34 @@
           }
         }
       },
-      "JWT_User_Options": {
+      "Scope": {
+        "type": "object",
+        "required": [
+          "access_type"
+        ],
+        "properties": {
+          "access_type": {
+            "type": "string",
+            "description": "Object access scope type."
+          },
+          "org_id": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Unique identifier of the metadata."
+          },
+          "metadata_id": {
+            "type": "string",
+            "description": "Unique identifier of the Org."
+          }
+        }
+      },
+      "JWT_User_Options_Full": {
         "type": "object",
         "properties": {
           "parameters": {
-            "items": {
-              "anyOf": [
-                {
-                  "$ref": "#/components/schemas/Runtime_Filter"
-                },
-                {
-                  "$ref": "#/components/schemas/Runtime_Sort"
-                },
-                {
-                  "$ref": "#/components/schemas/Runtime_Param_Override"
-                }
-              ]
-            }
-          },
-          "metadata": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/JWT_Metadata_Object"
+              "$ref": "#/components/schemas/JWT_Parameter"
             }
           }
         },
@@ -12050,6 +12700,140 @@
           }
         },
         "description": "The object representation with activation link."
+      },
+      "ImportUser": {
+        "type": "object",
+        "required": [
+          "user_identifier",
+          "display_name"
+        ],
+        "properties": {
+          "user_identifier": {
+            "type": "string",
+            "description": "Unique ID or name of the user."
+          },
+          "display_name": {
+            "type": "string",
+            "description": "Display name of the user."
+          },
+          "password": {
+            "type": "string",
+            "description": "Password of the user."
+          },
+          "account_type": {
+            "type": "string",
+            "enum": [
+              "LOCAL_USER",
+              "LDAP_USER",
+              "SAML_USER",
+              "OIDC_USER",
+              "REMOTE_USER"
+            ],
+            "default": "LOCAL_USER",
+            "description": "Type of the user account."
+          },
+          "account_status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "INACTIVE",
+              "EXPIRED",
+              "LOCKED",
+              "PENDING"
+            ],
+            "default": "ACTIVE",
+            "description": "Status of the user account."
+          },
+          "email": {
+            "type": "string",
+            "description": "Email address of the user."
+          },
+          "org_identifiers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "ID or name of the Orgs to which the user belongs."
+          },
+          "group_identifiers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "ID or name of the groups to which the user belongs."
+          },
+          "visibility": {
+            "type": "string",
+            "enum": [
+              "SHARABLE",
+              "NON_SHARABLE"
+            ],
+            "description": "Visibility of the users. The SHARABLE property makes a user visible to other users and group, who can share objects with the user."
+          },
+          "notify_on_share": {
+            "type": "boolean",
+            "default": true,
+            "description": "Notify user when other users or groups share metadata objects"
+          },
+          "show_onboarding_experience": {
+            "type": "boolean",
+            "description": "Show or hide the new user onboarding walkthroughs"
+          },
+          "onboarding_experience_completed": {
+            "type": "boolean",
+            "description": "Revisit the new user onboarding walkthroughs"
+          },
+          "home_liveboard_identifier": {
+            "type": "string",
+            "description": "Unique ID or name of the default Liveboard assigned to the user."
+          },
+          "favorite_metadata": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FavoriteMetadataInput"
+            },
+            "description": "Metadata objects to add to the user's favorites list."
+          }
+        }
+      },
+      "ImportUsersResponse": {
+        "type": "object",
+        "properties": {
+          "users_added": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ImportUserType"
+            }
+          },
+          "users_updated": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ImportUserType"
+            }
+          },
+          "users_deleted": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ImportUserType"
+            }
+          }
+        }
+      },
+      "ImportUserType": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the user."
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the user."
+          }
+        }
       },
       "TagMetadataTypeInput": {
         "type": "object",
@@ -12071,37 +12855,6 @@
           "identifier": {
             "type": "string",
             "description": "Unique ID or name of the metadata."
-          }
-        }
-      },
-      "ImportUserGroupsResponse": {
-        "type": "object",
-        "required": [
-          "groups_added",
-          "groups_deleted",
-          "groups_updated"
-        ],
-        "properties": {
-          "groups_added": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/UserGroup"
-            },
-            "description": "The groups which are added into the system."
-          },
-          "groups_deleted": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/UserGroup"
-            },
-            "description": "The groups which are deleted from the system."
-          },
-          "groups_updated": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/UserGroup"
-            },
-            "description": "The groups which are updated in the system."
           }
         }
       },
@@ -12193,6 +12946,150 @@
           }
         }
       },
+      "ImportUserGroupsResponse": {
+        "type": "object",
+        "required": [
+          "groups_added",
+          "groups_deleted",
+          "groups_updated"
+        ],
+        "properties": {
+          "groups_added": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserGroup"
+            },
+            "description": "The groups which are added into the system."
+          },
+          "groups_deleted": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserGroup"
+            },
+            "description": "The groups which are deleted from the system."
+          },
+          "groups_updated": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserGroup"
+            },
+            "description": "The groups which are updated in the system."
+          }
+        }
+      },
+      "ExportMetadataTypeInput": {
+        "type": "object",
+        "required": [
+          "identifier"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "LIVEBOARD",
+              "ANSWER",
+              "LOGICAL_TABLE",
+              "CONNECTION",
+              "CUSTOM_ACTION"
+            ],
+            "description": "Type of metadata (Optional when given identifier is ID)."
+          },
+          "identifier": {
+            "type": "string",
+            "description": "Unique ID or name of the metadata object."
+          }
+        },
+        "description": "MetadataType InputType used in Export MetadataType API"
+      },
+      "DeleteMetadataTypeInput": {
+        "type": "object",
+        "required": [
+          "identifier"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "LIVEBOARD",
+              "ANSWER",
+              "LOGICAL_TABLE",
+              "LOGICAL_COLUMN",
+              "LOGICAL_RELATIONSHIP"
+            ],
+            "description": "Type of metadata (Optional when given identifier is ID)."
+          },
+          "identifier": {
+            "type": "string",
+            "description": "Unique ID or name of the metadata object."
+          }
+        },
+        "description": "MetadataType InputType used in Delete MetadataType API"
+      },
+      "AuthorMetadataTypeInput": {
+        "type": "object",
+        "required": [
+          "identifier"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "LIVEBOARD",
+              "ANSWER",
+              "LOGICAL_TABLE"
+            ],
+            "description": "Type of metadata."
+          },
+          "identifier": {
+            "type": "string",
+            "description": "Unique ID or name of the metadata object."
+          }
+        },
+        "description": "MetadataType InputType used in Author API's"
+      },
+      "SharePermissionsInput": {
+        "type": "object",
+        "required": [
+          "principal",
+          "share_mode"
+        ],
+        "properties": {
+          "principal": {
+            "$ref": "#/components/schemas/PrincipalsInput",
+            "description": "Details of users or groups."
+          },
+          "share_mode": {
+            "type": "string",
+            "enum": [
+              "READ_ONLY",
+              "MODIFY",
+              "NO_ACCESS"
+            ],
+            "description": "Type of access to the shared object"
+          }
+        }
+      },
+      "MetadataObject": {
+        "type": "object",
+        "required": [
+          "identifier"
+        ],
+        "properties": {
+          "identifier": {
+            "type": "string",
+            "description": "Unique ID or name of the metadata"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "LIVEBOARD",
+              "ANSWER",
+              "LOGICAL_TABLE"
+            ],
+            "description": "Type of metadata."
+          }
+        }
+      },
       "CommitResponse": {
         "type": "object",
         "properties": {
@@ -12229,24 +13126,24 @@
           }
         }
       },
-      "MetadataObject": {
+      "CommitFileType": {
         "type": "object",
         "required": [
-          "identifier"
+          "file_name",
+          "status_code"
         ],
         "properties": {
-          "identifier": {
+          "file_name": {
             "type": "string",
-            "description": "Unique ID or name of the metadata"
+            "description": "Name of the file deployed"
           },
-          "type": {
+          "status_code": {
             "type": "string",
-            "enum": [
-              "LIVEBOARD",
-              "ANSWER",
-              "LOGICAL_TABLE"
-            ],
-            "description": "Type of metadata."
+            "description": "Indicates the status of deployment for the file"
+          },
+          "status_message": {
+            "type": "string",
+            "description": "Any error or warning with the deployment"
           }
         }
       },
@@ -12290,6 +13187,38 @@
               "$ref": "#/components/schemas/RevertedMetadata"
             },
             "description": "Metadata of reverted file of this commit"
+          }
+        }
+      },
+      "RevertedMetadata": {
+        "type": "object",
+        "required": [
+          "file_name",
+          "metadata_name",
+          "metadata_type",
+          "status_code",
+          "status_message"
+        ],
+        "properties": {
+          "file_name": {
+            "type": "string",
+            "description": "Name of the file deployed"
+          },
+          "metadata_name": {
+            "type": "string",
+            "description": "Name of the metadata object"
+          },
+          "metadata_type": {
+            "type": "string",
+            "description": "Type of the metadata object"
+          },
+          "status_code": {
+            "type": "string",
+            "description": "Indicates the status of deployment for the file"
+          },
+          "status_message": {
+            "type": "string",
+            "description": "Any error or warning with the deployment"
           }
         }
       },
@@ -12351,7 +13280,7 @@
               "TRINO",
               "PRESTO",
               "POSTGRES",
-              "SQL_SERVER",
+              "SQLSERVER",
               "MYSQL",
               "GENERIC_JDBC",
               "AMAZON_RDS_POSTGRESQL",
@@ -12363,13 +13292,23 @@
               "SINGLESTORE",
               "GCP_SQLSERVER",
               "GCP_ALLOYDB_POSTGRESQL",
-              "GCP_POSTGRESQL"
+              "GCP_POSTGRESQL",
+              "GCP_MYSQL"
             ],
             "description": "Type of data warehouse."
           },
           "details": {
             "type": "object",
             "description": "Details of the connection."
+          }
+        }
+      },
+      "FetchConnectionDiffStatusResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "boolean",
+            "description": "Status of the connection diff."
           }
         }
       },
@@ -12438,7 +13377,8 @@
                 "AUTHENTICATION_ADMINISTRATION",
                 "BILLING_INFO_ADMINISTRATION",
                 "CONTROL_TRUSTED_AUTH",
-                "TAG_MANAGEMENT"
+                "TAGMANAGEMENT",
+                "LIVEBOARD_VERIFIER"
               ]
             },
             "description": "Privileges granted to the role."
@@ -12487,6 +13427,155 @@
           "shared_via_connection": {
             "type": "boolean",
             "description": "Indicates whether the role is shared via connection"
+          }
+        }
+      },
+      "LiveboardOptionsInput": {
+        "type": "object",
+        "required": [
+          "visualization_identifiers"
+        ],
+        "properties": {
+          "visualization_identifiers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Unique ID or name of visualizations."
+          }
+        },
+        "description": "Options to specify details of Liveboard."
+      },
+      "SchedulesPdfOptionsInput": {
+        "type": "object",
+        "properties": {
+          "complete_liveboard": {
+            "type": "boolean",
+            "description": "Indicates whether to include complete Liveboard."
+          },
+          "include_cover_page": {
+            "type": "boolean",
+            "description": "Indicates whether to include cover page with the Liveboard title."
+          },
+          "include_custom_logo": {
+            "type": "boolean",
+            "description": "Indicates whether to include customized wide logo in the footer if available."
+          },
+          "include_filter_page": {
+            "type": "boolean",
+            "description": "Indicates whether to include a page with all applied filters."
+          },
+          "include_page_number": {
+            "type": "boolean",
+            "description": "Indicates whether to include page number in the footer of each page"
+          },
+          "page_footer_text": {
+            "type": "string",
+            "description": "Text to include in the footer of each page."
+          },
+          "page_orientation": {
+            "type": "string",
+            "description": "Page orientation of the PDF."
+          },
+          "page_size": {
+            "type": "string",
+            "enum": [
+              "A4"
+            ],
+            "description": "Page size."
+          },
+          "truncate_table": {
+            "type": "boolean",
+            "description": "Indicates whether to include only first page of the tables."
+          }
+        },
+        "description": "Options for PDF export."
+      },
+      "FrequencyInput": {
+        "type": "object",
+        "required": [
+          "cron_expression"
+        ],
+        "properties": {
+          "cron_expression": {
+            "$ref": "#/components/schemas/CronExpressionInput",
+            "description": "Schedule selected cron expression."
+          }
+        },
+        "description": "Configuration of schedule with cron expression"
+      },
+      "CronExpressionInput": {
+        "type": "object",
+        "required": [
+          "day_of_month",
+          "day_of_week",
+          "hour",
+          "minute",
+          "month",
+          "second"
+        ],
+        "properties": {
+          "day_of_month": {
+            "type": "string",
+            "description": "Day of month of the object."
+          },
+          "day_of_week": {
+            "type": "string",
+            "description": "Day of Week of the object."
+          },
+          "hour": {
+            "type": "string",
+            "description": "Hour of the object."
+          },
+          "minute": {
+            "type": "string",
+            "description": "Minute of the object."
+          },
+          "month": {
+            "type": "string",
+            "description": "Month of the object."
+          },
+          "second": {
+            "type": "string",
+            "description": "Second of the object."
+          }
+        },
+        "description": "Schedule selected cron expression."
+      },
+      "RecipientDetailsInput": {
+        "type": "object",
+        "properties": {
+          "emails": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Emails of the recipients."
+          },
+          "principals": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PrincipalsListItemInput"
+            },
+            "description": "User or groups to be set as recipients of the schedule notifications."
+          }
+        },
+        "description": "Recipients of the scheduled job notification."
+      },
+      "PrincipalsListItemInput": {
+        "type": "object",
+        "required": [
+          "identifier",
+          "type"
+        ],
+        "properties": {
+          "identifier": {
+            "type": "string",
+            "description": "Unique ID or name of the user or group."
+          },
+          "type": {
+            "type": "string",
+            "description": "Principal type."
           }
         }
       },
@@ -12565,677 +13654,6 @@
           }
         }
       },
-      "LiveboardOptionsInput": {
-        "type": "object",
-        "required": [
-          "visualization_identifiers"
-        ],
-        "properties": {
-          "visualization_identifiers": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Unique ID or name of visualizations."
-          }
-        },
-        "description": "Options to specify details of Liveboard."
-      },
-      "SchedulesPdfOptionsInput": {
-        "type": "object",
-        "properties": {
-          "complete_liveboard": {
-            "type": "boolean",
-            "description": "Indicates whether to include complete Liveboard."
-          },
-          "include_cover_page": {
-            "type": "boolean",
-            "description": "Indicates whether to include cover page with the Liveboard title."
-          },
-          "include_custom_logo": {
-            "type": "boolean",
-            "description": "Indicates whether to include customized wide logo in the footer if available."
-          },
-          "include_filter_page": {
-            "type": "boolean",
-            "description": "Indicates whether to include a page with all applied filters."
-          },
-          "include_page_number": {
-            "type": "boolean",
-            "description": "Indicates whether to include page number in the footer of each page"
-          },
-          "page_footer_text": {
-            "type": "string",
-            "description": "Text to include in the footer of each page."
-          },
-          "page_orientation": {
-            "type": "string",
-            "description": "Page orientation of the PDF."
-          },
-          "page_size": {
-            "type": "string",
-            "enum": [
-              "A4"
-            ],
-            "description": "Page size."
-          },
-          "truncate_table": {
-            "type": "boolean",
-            "description": "Indicates whether to include only first page of the tables."
-          }
-        },
-        "description": "Options for PDF export."
-      },
-      "FrequencyInput": {
-        "type": "object",
-        "required": [
-          "cron_expression"
-        ],
-        "properties": {
-          "cron_expression": {
-            "$ref": "#/components/schemas/CronExpressionInput",
-            "description": "Schedule selected cron expression."
-          }
-        },
-        "description": "Configuration of schedule with cron expression"
-      },
-      "RecipientDetailsInput": {
-        "type": "object",
-        "properties": {
-          "emails": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Emails of the recipients."
-          },
-          "principals": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/PrincipalsListItemInput"
-            },
-            "description": "User or groups to be set as recipients of the schedule notifications."
-          }
-        },
-        "description": "Recipients of the scheduled job notification."
-      },
-      "MetadataInput": {
-        "type": "object",
-        "properties": {
-          "identifier": {
-            "type": "string"
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "LIVEBOARD"
-            ]
-          }
-        }
-      },
-      "SortingOptions": {
-        "type": "object",
-        "properties": {
-          "field_name": {
-            "type": "string",
-            "description": "Name of the field to apply the sort on."
-          },
-          "order": {
-            "type": "string",
-            "description": "Sort order : ASC(Ascending) or DESC(Descending)."
-          }
-        },
-        "description": "Sort options."
-      },
-      "ScheduleHistoryRunsOptionsInput": {
-        "type": "object",
-        "properties": {
-          "include_history_runs": {
-            "type": "boolean",
-            "default": false,
-            "description": "Indicates whether to fetch history runs for the scheduled notification."
-          },
-          "record_size": {
-            "type": "integer",
-            "format": "int32",
-            "default": 10,
-            "description": "Indicates the max number of records that can be fetched as past runs of any scheduled job."
-          },
-          "record_offset": {
-            "type": "integer",
-            "format": "int32",
-            "default": 0,
-            "description": "Indicates the starting record number from where history runs records should be fetched."
-          }
-        }
-      },
-      "Action_Details_Input_Create": {
-        "type": "object",
-        "properties": {
-          "CALLBACK": {
-            "$ref": "#/components/schemas/CALLBACKInputMandatory",
-            "description": "CALLBACK Custom Action Type"
-          },
-          "URL": {
-            "$ref": "#/components/schemas/URLInputMandatory",
-            "description": "URL Custom Action Type"
-          }
-        },
-        "description": "Action details includes Type and Configuration for Custom Actions, either Callback or URL is required.\nWhen both callback and url are provided, callback would be considered"
-      },
-      "Associate_Metadata_Input_Create": {
-        "type": "object",
-        "required": [
-          "identifier"
-        ],
-        "properties": {
-          "action_config": {
-            "$ref": "#/components/schemas/ActionConfigInputCreate",
-            "description": "Specify that the association is enabled for the metadata object"
-          },
-          "identifier": {
-            "type": "string",
-            "description": "Unique ID or name of the metadata."
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "VISUALIZATION",
-              "ANSWER",
-              "WORKSHEET"
-            ],
-            "description": "Type of metadata."
-          }
-        }
-      },
-      "Default_Action_Config_Input_Create": {
-        "type": "object",
-        "properties": {
-          "visibility": {
-            "type": "boolean",
-            "default": true,
-            "description": "Custom action is available on all visualizations. Earlier naming convention: LOCAL/GLOBAL. TRUE signifies GLOBAL for backward compatibility.\n\nDefault: true"
-          }
-        },
-        "description": "Default Custom action configuration. This includes the custom action's visibility across all visualizations and Answers. By default, a custom action is added to all visualizations and Answers."
-      },
-      "Action_Details_Input": {
-        "type": "object",
-        "properties": {
-          "CALLBACK": {
-            "$ref": "#/components/schemas/CALLBACKInput",
-            "description": "CALLBACK Custom Action Type"
-          },
-          "URL": {
-            "$ref": "#/components/schemas/URLInput",
-            "description": "URL Custom Action Type"
-          }
-        },
-        "description": "Action details includes `Type` and configuration details of Custom Actions. Either Callback or URL is required."
-      },
-      "Associate_Metadata_Input": {
-        "type": "object",
-        "properties": {
-          "action_config": {
-            "$ref": "#/components/schemas/ActionConfigInput",
-            "description": "Specify that the association is enabled for the metadata object"
-          },
-          "identifier": {
-            "type": "string",
-            "description": "Unique ID or name of the metadata."
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "VISUALIZATION",
-              "ANSWER",
-              "WORKSHEET"
-            ],
-            "description": "Type of metadata."
-          }
-        }
-      },
-      "Default_Action_Config_Input": {
-        "type": "object",
-        "properties": {
-          "visibility": {
-            "type": "boolean",
-            "description": "Custom action is available on all visualizations. Earlier naming convention: LOCAL/GLOBAL. TRUE signifies GLOBAL for backward compatibility."
-          }
-        },
-        "description": "Default Custom action configuration. This includes the custom action's visibility across all visualizations and Answers. By default, a custom action is added to all visualizations and Answers."
-      },
-      "ModelTableList": {
-        "type": "object",
-        "properties": {
-          "model_name": {
-            "type": "string",
-            "description": "Name of the Model."
-          },
-          "tables": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "List of Tables."
-          }
-        }
-      },
-      "FavoriteMetadataItem": {
-        "type": "object",
-        "required": [
-          "id",
-          "name",
-          "type"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "Unique ID of the metadata object."
-          },
-          "name": {
-            "type": "string",
-            "description": "name of the metadata object."
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "LIVEBOARD",
-              "ANSWER",
-              "LOGICAL_TABLE",
-              "LOGICAL_COLUMN",
-              "CONNECTION",
-              "TAG",
-              "USER",
-              "USER_GROUP",
-              "LOGICAL_RELATIONSHIP"
-            ],
-            "description": "Type of metadata object."
-          }
-        }
-      },
-      "ImportUserType": {
-        "type": "object",
-        "required": [
-          "name"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "Unique identifier of the user."
-          },
-          "name": {
-            "type": "string",
-            "description": "Name of the user."
-          }
-        }
-      },
-      "AnswerContent": {
-        "type": "object",
-        "required": [
-          "available_data_row_count",
-          "column_names",
-          "data_rows",
-          "record_offset",
-          "record_size",
-          "returned_data_row_count",
-          "sampling_ratio"
-        ],
-        "properties": {
-          "available_data_row_count": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Total available data row count."
-          },
-          "column_names": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Name of the columns."
-          },
-          "data_rows": {
-            "type": "array",
-            "items": {
-              "type": "object"
-            },
-            "description": "Rows of data set."
-          },
-          "record_offset": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The starting record number from where the records should be included."
-          },
-          "record_size": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The number of records that should be included."
-          },
-          "returned_data_row_count": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Total returned data row count."
-          },
-          "sampling_ratio": {
-            "type": "number",
-            "format": "float",
-            "description": "Sampling ratio (0 to 1). If the query was sampled, it is the ratio of keys returned in the data set to the total number of keys expected in the query. If the value is 1.0, this means that the complete result is returned."
-          }
-        }
-      },
-      "LiveboardContent": {
-        "type": "object",
-        "required": [
-          "available_data_row_count",
-          "column_names",
-          "data_rows",
-          "record_offset",
-          "record_size",
-          "returned_data_row_count",
-          "sampling_ratio"
-        ],
-        "properties": {
-          "available_data_row_count": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Total available data row count."
-          },
-          "column_names": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Name of the columns."
-          },
-          "data_rows": {
-            "type": "array",
-            "items": {
-              "type": "object"
-            },
-            "description": "Rows of data set."
-          },
-          "record_offset": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The starting record number from where the records should be included."
-          },
-          "record_size": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The number of records that should be included."
-          },
-          "returned_data_row_count": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Total returned data row count."
-          },
-          "sampling_ratio": {
-            "type": "number",
-            "format": "float",
-            "description": "Sampling ratio (0 to 1). If the query was sampled, it is the ratio of keys returned in the data set to the total number of keys expected in the query. If the value is 1.0, this means that the complete result is returned."
-          },
-          "visualization_id": {
-            "type": "string",
-            "description": "Unique ID of the visualization."
-          },
-          "visualization_name": {
-            "type": "string",
-            "description": "Name of the visualization."
-          }
-        }
-      },
-      "Role": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "id of the role"
-          },
-          "name": {
-            "type": "string",
-            "description": "name of the role"
-          }
-        }
-      },
-      "SqlQuery": {
-        "type": "object",
-        "required": [
-          "metadata_id",
-          "metadata_name",
-          "sql_query"
-        ],
-        "properties": {
-          "metadata_id": {
-            "type": "string",
-            "description": "Unique identifier of the metadata."
-          },
-          "metadata_name": {
-            "type": "string",
-            "description": "Name of the metadata."
-          },
-          "sql_query": {
-            "type": "string",
-            "description": "SQL query of a metadata object."
-          }
-        },
-        "description": "Response format associated with fetch SQL query api"
-      },
-      "CommiterType": {
-        "type": "object",
-        "properties": {
-          "email": {
-            "type": "string",
-            "description": "Email id of the committer"
-          },
-          "username": {
-            "type": "string",
-            "description": "Username of the committer"
-          }
-        }
-      },
-      "AuthorType": {
-        "type": "object",
-        "properties": {
-          "email": {
-            "type": "string",
-            "description": "Email id of the committer"
-          },
-          "username": {
-            "type": "string",
-            "description": "Username of the committer"
-          }
-        }
-      },
-      "DataWarehouseObjects": {
-        "type": "object",
-        "required": [
-          "databases"
-        ],
-        "properties": {
-          "databases": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Database"
-            },
-            "description": "Databases of the connection."
-          }
-        }
-      },
-      "DataWarehouseObjectInput": {
-        "type": "object",
-        "properties": {
-          "database": {
-            "type": "string",
-            "description": "Name of the database."
-          },
-          "schema": {
-            "type": "string",
-            "description": "Name of the schema within the database."
-          },
-          "table": {
-            "type": "string",
-            "description": "Name of the table within the schema."
-          },
-          "column": {
-            "type": "string",
-            "description": "Name of the column within the table."
-          }
-        }
-      },
-      "Action_details": {
-        "type": "object",
-        "properties": {
-          "CALLBACK": {
-            "$ref": "#/components/schemas/CALLBACK",
-            "description": "CALLBACK Custom Action Type"
-          },
-          "URL": {
-            "$ref": "#/components/schemas/URL",
-            "description": "URL Custom Action Type"
-          }
-        },
-        "description": "Type and Configuration for Custom Actions"
-      },
-      "Default_action_config": {
-        "type": "object",
-        "properties": {
-          "visibility": {
-            "type": "boolean",
-            "description": "Custom action is available on all visualizations. Earlier , the naming convention: LOCAL/GLOBAL. TRUE signifies GLOBAL for backward compatibility."
-          }
-        },
-        "description": "Default Custom action configuration. This includes the custom action's visibility across all visualizations and Answers. By default, a custom action is added to all visualizations and Answers."
-      },
-      "Metadata_Association_Item": {
-        "type": "object",
-        "required": [
-          "action_config",
-          "identifier",
-          "type"
-        ],
-        "properties": {
-          "action_config": {
-            "$ref": "#/components/schemas/Action_config",
-            "description": "Specify that the association is enabled for the metadata object"
-          },
-          "identifier": {
-            "type": "string",
-            "description": "Unique ID or name of the metadata."
-          },
-          "type": {
-            "type": "string",
-            "description": "Type of metadata."
-          }
-        }
-      },
-      "Scope": {
-        "type": "object",
-        "required": [
-          "access_type"
-        ],
-        "properties": {
-          "access_type": {
-            "type": "string",
-            "description": "Object access scope type."
-          },
-          "org_id": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Unique identifier of the metadata."
-          },
-          "metadata_id": {
-            "type": "string",
-            "description": "Unique identifier of the Org."
-          }
-        }
-      },
-      "JWT_Parameter": {
-        "type": "object",
-        "properties": {
-          "runtime_filter": {
-            "type": "object",
-            "description": "Runtime filter parameter type in JWT."
-          },
-          "runtime_sort": {
-            "type": "object",
-            "description": "Runtime sort parameter type in JWT."
-          },
-          "runtime_param_override": {
-            "type": "object",
-            "description": "Runtime param override type in JWT."
-          }
-        },
-        "description": "List of runtime parameters need to set during the session."
-      },
-      "JWT_Metadata_Object": {
-        "type": "object",
-        "properties": {
-          "identifier": {
-            "type": "string"
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "LIVEBOARD",
-              "ANSWER"
-            ]
-          }
-        },
-        "description": "Metadata objects."
-      },
-      "CommitFileType": {
-        "type": "object",
-        "required": [
-          "file_name",
-          "status_code"
-        ],
-        "properties": {
-          "file_name": {
-            "type": "string",
-            "description": "Name of the file deployed"
-          },
-          "status_code": {
-            "type": "string",
-            "description": "Indicates the status of deployment for the file"
-          },
-          "status_message": {
-            "type": "string",
-            "description": "Any error or warning with the deployment"
-          }
-        }
-      },
-      "RevertedMetadata": {
-        "type": "object",
-        "required": [
-          "file_name",
-          "metadata_name",
-          "metadata_type",
-          "status_code",
-          "status_message"
-        ],
-        "properties": {
-          "file_name": {
-            "type": "string",
-            "description": "Name of the file deployed"
-          },
-          "metadata_name": {
-            "type": "string",
-            "description": "Name of the metadata object"
-          },
-          "metadata_type": {
-            "type": "string",
-            "description": "Type of the metadata object"
-          },
-          "status_code": {
-            "type": "string",
-            "description": "Indicates the status of deployment for the file"
-          },
-          "status_message": {
-            "type": "string",
-            "description": "Any error or warning with the deployment"
-          }
-        }
-      },
       "Author": {
         "type": "object",
         "required": [
@@ -13266,6 +13684,44 @@
           }
         },
         "description": "Configuration of schedule with cron expression"
+      },
+      "CronExpression": {
+        "type": "object",
+        "required": [
+          "day_of_month",
+          "day_of_week",
+          "hour",
+          "minute",
+          "month",
+          "second"
+        ],
+        "properties": {
+          "day_of_month": {
+            "type": "string",
+            "description": "Day of month of the object."
+          },
+          "day_of_week": {
+            "type": "string",
+            "description": "Day of Week of the object."
+          },
+          "hour": {
+            "type": "string",
+            "description": "Hour of the object."
+          },
+          "minute": {
+            "type": "string",
+            "description": "Minute of the object."
+          },
+          "month": {
+            "type": "string",
+            "description": "Month of the object."
+          },
+          "second": {
+            "type": "string",
+            "description": "Second of the object."
+          }
+        },
+        "description": "Schedule selected cron expression."
       },
       "LiveboardOptions": {
         "type": "object",
@@ -13369,6 +13825,23 @@
         },
         "description": "Recipient configuration which includes email address, ID or name of the users and groups."
       },
+      "PrincipalsListItem": {
+        "type": "object",
+        "required": [
+          "identifier",
+          "type"
+        ],
+        "properties": {
+          "identifier": {
+            "type": "string",
+            "description": "Unique ID or name of the user or group."
+          },
+          "type": {
+            "type": "string",
+            "description": "Principal type. Valid values are"
+          }
+        }
+      },
       "ResponseScheduleRun": {
         "type": "object",
         "required": [
@@ -13403,60 +13876,69 @@
         },
         "description": "Schedule run response object"
       },
-      "CronExpressionInput": {
+      "MetadataInput": {
         "type": "object",
-        "required": [
-          "day_of_month",
-          "day_of_week",
-          "hour",
-          "minute",
-          "month",
-          "second"
-        ],
-        "properties": {
-          "day_of_month": {
-            "type": "string",
-            "description": "Day of month of the object."
-          },
-          "day_of_week": {
-            "type": "string",
-            "description": "Day of Week of the object."
-          },
-          "hour": {
-            "type": "string",
-            "description": "Hour of the object."
-          },
-          "minute": {
-            "type": "string",
-            "description": "Minute of the object."
-          },
-          "month": {
-            "type": "string",
-            "description": "Month of the object."
-          },
-          "second": {
-            "type": "string",
-            "description": "Second of the object."
-          }
-        },
-        "description": "Schedule selected cron expression."
-      },
-      "PrincipalsListItemInput": {
-        "type": "object",
-        "required": [
-          "identifier",
-          "type"
-        ],
         "properties": {
           "identifier": {
-            "type": "string",
-            "description": "Unique ID or name of the user or group."
+            "type": "string"
           },
           "type": {
             "type": "string",
-            "description": "Principal type."
+            "enum": [
+              "LIVEBOARD"
+            ]
           }
         }
+      },
+      "SortingOptions": {
+        "type": "object",
+        "properties": {
+          "field_name": {
+            "type": "string",
+            "description": "Name of the field to apply the sort on."
+          },
+          "order": {
+            "type": "string",
+            "description": "Sort order : ASC(Ascending) or DESC(Descending)."
+          }
+        },
+        "description": "Sort options."
+      },
+      "ScheduleHistoryRunsOptionsInput": {
+        "type": "object",
+        "properties": {
+          "include_history_runs": {
+            "type": "boolean",
+            "default": false,
+            "description": "Indicates whether to fetch history runs for the scheduled notification."
+          },
+          "record_size": {
+            "type": "integer",
+            "format": "int32",
+            "default": 10,
+            "description": "Indicates the max number of records that can be fetched as past runs of any scheduled job."
+          },
+          "record_offset": {
+            "type": "integer",
+            "format": "int32",
+            "default": 0,
+            "description": "Indicates the starting record number from where history runs records should be fetched."
+          }
+        }
+      },
+      "Action_Details_Input_Create": {
+        "type": "object",
+        "properties": {
+          "CALLBACK": {
+            "$ref": "#/components/schemas/CALLBACKInputMandatory",
+            "description": "CALLBACK Custom Action Type"
+          },
+          "URL": {
+            "$ref": "#/components/schemas/URLInputMandatory",
+            "description": "URL Custom Action Type"
+          }
+        },
+        "description": "Action details includes Type and Configuration for Custom Actions, either Callback or URL is required.\nWhen both callback and url are provided, callback would be considered"
       },
       "CALLBACKInputMandatory": {
         "type": "object",
@@ -13496,6 +13978,94 @@
         },
         "description": "URL Custom Action Type"
       },
+      "AuthenticationInput": {
+        "type": "object",
+        "properties": {
+          "API_Key": {
+            "$ref": "#/components/schemas/API_KeyInput",
+            "description": "With API key auth, you send a key-value pair to the API either in the request headers or query parameters."
+          },
+          "Basic_Auth": {
+            "$ref": "#/components/schemas/Basic_AuthInput",
+            "description": "Basic Auth: Basic authentication involves sending a verified username and password with your request."
+          },
+          "Bearer_Token": {
+            "type": "string",
+            "description": "Bearer tokens enable requests to authenticate using an access key."
+          },
+          "No_Auth": {
+            "type": "string",
+            "description": "No authorization. If your request doesn't require authorization."
+          }
+        },
+        "description": "Authorization type for the custom action."
+      },
+      "API_KeyInput": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "Enter your key name"
+          },
+          "value": {
+            "type": "string",
+            "description": "Enter you key value"
+          }
+        },
+        "description": "With API key auth, you send a key-value pair to the API either in the request headers or query parameters."
+      },
+      "Basic_AuthInput": {
+        "type": "object",
+        "properties": {
+          "password": {
+            "type": "string",
+            "description": "Password for the basic authentication"
+          },
+          "username": {
+            "type": "string",
+            "description": "Username for the basic authentication"
+          }
+        },
+        "description": "Basic Auth: Basic authentication involves sending a verified username and password with your request."
+      },
+      "ParametersListItemInput": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "Key for the url query parameter"
+          },
+          "value": {
+            "type": "string",
+            "description": "Value for the url query parameter"
+          }
+        }
+      },
+      "Associate_Metadata_Input_Create": {
+        "type": "object",
+        "required": [
+          "identifier"
+        ],
+        "properties": {
+          "action_config": {
+            "$ref": "#/components/schemas/ActionConfigInputCreate",
+            "description": "Specify that the association is enabled for the metadata object"
+          },
+          "identifier": {
+            "type": "string",
+            "description": "Unique ID or name of the metadata."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "VISUALIZATION",
+              "ANSWER",
+              "WORKSHEET"
+            ],
+            "description": "Type of metadata."
+          }
+        }
+      },
       "ActionConfigInputCreate": {
         "type": "object",
         "properties": {
@@ -13516,6 +14086,31 @@
           }
         },
         "description": "Specify that the association is enabled for the metadata object Default"
+      },
+      "Default_Action_Config_Input_Create": {
+        "type": "object",
+        "properties": {
+          "visibility": {
+            "type": "boolean",
+            "default": true,
+            "description": "Custom action is available on all visualizations. Earlier naming convention: LOCAL/GLOBAL. TRUE signifies GLOBAL for backward compatibility.\nDefault: true"
+          }
+        },
+        "description": "Default Custom action configuration. This includes the custom action's visibility across all visualizations and Answers. By default, a custom action is added to all visualizations and Answers."
+      },
+      "Action_Details_Input": {
+        "type": "object",
+        "properties": {
+          "CALLBACK": {
+            "$ref": "#/components/schemas/CALLBACKInput",
+            "description": "CALLBACK Custom Action Type"
+          },
+          "URL": {
+            "$ref": "#/components/schemas/URLInput",
+            "description": "URL Custom Action Type"
+          }
+        },
+        "description": "Action details includes `Type` and configuration details of Custom Actions. Either Callback or URL is required."
       },
       "CALLBACKInput": {
         "type": "object",
@@ -13552,6 +14147,28 @@
         },
         "description": "URL Custom Action Type"
       },
+      "Associate_Metadata_Input": {
+        "type": "object",
+        "properties": {
+          "action_config": {
+            "$ref": "#/components/schemas/ActionConfigInput",
+            "description": "Specify that the association is enabled for the metadata object"
+          },
+          "identifier": {
+            "type": "string",
+            "description": "Unique ID or name of the metadata."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "VISUALIZATION",
+              "ANSWER",
+              "WORKSHEET"
+            ],
+            "description": "Type of metadata."
+          }
+        }
+      },
       "ActionConfigInput": {
         "type": "object",
         "properties": {
@@ -13571,353 +14188,63 @@
         },
         "description": "Specify that the association is enabled for the metadata object Default"
       },
-      "Database": {
-        "type": "object",
-        "required": [
-          "name"
-        ],
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "Name of the database."
-          },
-          "schemas": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/SchemaObject"
-            },
-            "description": "Schemas of the database."
-          },
-          "auto_created": {
-            "type": "boolean",
-            "description": "Determines if the object is auto created."
-          }
-        }
-      },
-      "CALLBACK": {
+      "Default_Action_Config_Input": {
         "type": "object",
         "properties": {
-          "reference": {
-            "type": "string",
-            "description": "Reference name of the SDK. By default, the value will be set to action name."
-          }
-        },
-        "description": "CALLBACK Custom Action Type"
-      },
-      "URL": {
-        "type": "object",
-        "required": [
-          "url"
-        ],
-        "properties": {
-          "authentication": {
-            "$ref": "#/components/schemas/Authentication",
-            "description": "Authorization type for the custom action."
-          },
-          "parameters": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ParametersListItem"
-            },
-            "description": "Query parameters for url."
-          },
-          "url": {
-            "type": "string",
-            "description": "Request Url for the Custom action."
-          },
-          "reference": {
-            "type": "string",
-            "description": "Reference name of the SDK. By default, the value will be set to action name."
-          }
-        },
-        "description": "URL Custom Action Type"
-      },
-      "Action_config": {
-        "type": "object",
-        "properties": {
-          "position": {
-            "type": "string",
-            "description": "Position of the Custom action on the Metadata object. Earlier naming convention: context."
-          },
           "visibility": {
             "type": "boolean",
-            "description": "Visibility of the metadata association with custom action. Earlier naming convention: enabled"
+            "description": "Custom action is available on all visualizations. Earlier naming convention: LOCAL/GLOBAL. TRUE signifies GLOBAL for backward compatibility."
           }
         },
-        "description": "Specify that the association is enabled for the metadata object"
+        "description": "Default Custom action configuration. This includes the custom action's visibility across all visualizations and Answers. By default, a custom action is added to all visualizations and Answers."
       },
-      "CronExpression": {
+      "ModelTableList": {
         "type": "object",
         "required": [
-          "day_of_month",
-          "day_of_week",
-          "hour",
-          "minute",
-          "month",
-          "second"
+          "model_name",
+          "tables"
         ],
         "properties": {
-          "day_of_month": {
+          "model_name": {
             "type": "string",
-            "description": "Day of month of the object."
+            "description": "Name of the Model."
           },
-          "day_of_week": {
+          "model_path": {
             "type": "string",
-            "description": "Day of Week of the object."
-          },
-          "hour": {
-            "type": "string",
-            "description": "Hour of the object."
-          },
-          "minute": {
-            "type": "string",
-            "description": "Minute of the object."
-          },
-          "month": {
-            "type": "string",
-            "description": "Month of the object."
-          },
-          "second": {
-            "type": "string",
-            "description": "Second of the object."
-          }
-        },
-        "description": "Schedule selected cron expression."
-      },
-      "PrincipalsListItem": {
-        "type": "object",
-        "required": [
-          "identifier",
-          "type"
-        ],
-        "properties": {
-          "identifier": {
-            "type": "string",
-            "description": "Unique ID or name of the user or group."
-          },
-          "type": {
-            "type": "string",
-            "description": "Principal type. Valid values are"
-          }
-        }
-      },
-      "AuthenticationInput": {
-        "type": "object",
-        "properties": {
-          "API_Key": {
-            "$ref": "#/components/schemas/API_KeyInput",
-            "description": "With API key auth, you send a key-value pair to the API either in the request headers or query parameters."
-          },
-          "Basic_Auth": {
-            "$ref": "#/components/schemas/Basic_AuthInput",
-            "description": "Basic Auth: Basic authentication involves sending a verified username and password with your request."
-          },
-          "Bearer_Token": {
-            "type": "string",
-            "description": "Bearer tokens enable requests to authenticate using an access key."
-          },
-          "No_Auth": {
-            "type": "string",
-            "description": "No authorization. If your request doesn't require authorization."
-          }
-        },
-        "description": "Authorization type for the custom action."
-      },
-      "ParametersListItemInput": {
-        "type": "object",
-        "properties": {
-          "key": {
-            "type": "string",
-            "description": "Key for the url query parameter"
-          },
-          "value": {
-            "type": "string",
-            "description": "Value for the url query parameter"
-          }
-        }
-      },
-      "SchemaObject": {
-        "type": "object",
-        "required": [
-          "name"
-        ],
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "Name of the schema."
+            "description": "Model directory path, this is optional param and required if there are duplicate models with the same name."
           },
           "tables": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Table"
+              "type": "string"
             },
-            "description": "Tables in the schema."
+            "description": "List of Tables."
           }
         }
       },
-      "Authentication": {
+      "DbtSearchResponse": {
         "type": "object",
         "properties": {
-          "API_Key": {
-            "$ref": "#/components/schemas/API_Key",
-            "description": "With API key auth, you send a key-value pair to the API either in the request headers or query parameters."
+          "dbt_connection_identifier": {
+            "type": "string"
           },
-          "Basic_Auth": {
-            "$ref": "#/components/schemas/Basic_Auth",
-            "description": "Basic Auth: Basic authentication involves sending a verified username and password with your request."
+          "project_name": {
+            "type": "string"
           },
-          "Bearer_Token": {
-            "type": "string",
-            "description": "Bearer tokens enable requests to authenticate using an access key."
+          "connection_id": {
+            "type": "string"
           },
-          "No_Auth": {
-            "type": "string",
-            "description": "No authorization. If your request doesn't require authorization."
-          }
-        },
-        "description": "Authorization type for the custom action."
-      },
-      "ParametersListItem": {
-        "type": "object",
-        "properties": {
-          "key": {
-            "type": "string",
-            "description": "Key for the url query parameter"
+          "connection_name": {
+            "type": "string"
           },
-          "value": {
-            "type": "string",
-            "description": "Value for the url query parameter"
-          }
-        }
-      },
-      "API_KeyInput": {
-        "type": "object",
-        "properties": {
-          "key": {
-            "type": "string",
-            "description": "Enter your key name"
+          "cdw_database": {
+            "type": "string"
           },
-          "value": {
-            "type": "string",
-            "description": "Enter you key value"
-          }
-        },
-        "description": "With API key auth, you send a key-value pair to the API either in the request headers or query parameters."
-      },
-      "Basic_AuthInput": {
-        "type": "object",
-        "properties": {
-          "password": {
-            "type": "string",
-            "description": "Password for the basic authentication"
+          "import_type": {
+            "type": "string"
           },
-          "username": {
-            "type": "string",
-            "description": "Username for the basic authentication"
-          }
-        },
-        "description": "Basic Auth: Basic authentication involves sending a verified username and password with your request."
-      },
-      "Table": {
-        "type": "object",
-        "required": [
-          "name"
-        ],
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "Name of the table."
-          },
-          "columns": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Column"
-            },
-            "description": "Columns of the table."
-          },
-          "type": {
-            "type": "string",
-            "description": "Type of table. Either view or table"
-          },
-          "description": {
-            "type": "string",
-            "description": "Description of the table"
-          },
-          "selected": {
-            "type": "boolean",
-            "description": "Determines if the table is selected"
-          },
-          "linked": {
-            "type": "boolean",
-            "description": "Determines if the table is linked"
-          },
-          "relationships": {
-            "type": "array",
-            "items": {
-              "type": "object"
-            },
-            "description": "List of relationships for the table"
-          }
-        }
-      },
-      "API_Key": {
-        "type": "object",
-        "properties": {
-          "key": {
-            "type": "string",
-            "description": "Enter your key name"
-          },
-          "value": {
-            "type": "string",
-            "description": "Enter you key value"
-          }
-        },
-        "description": "With API key auth, you send a key-value pair to the API either in the request headers or query parameters."
-      },
-      "Basic_Auth": {
-        "type": "object",
-        "properties": {
-          "password": {
-            "type": "string",
-            "description": "Password for the basic authentication"
-          },
-          "username": {
-            "type": "string",
-            "description": "Username for the basic authentication"
-          }
-        },
-        "description": "Basic Auth: Basic authentication involves sending a verified username and password with your request."
-      },
-      "Column": {
-        "type": "object",
-        "required": [
-          "name",
-          "data_type"
-        ],
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "Name of the column"
-          },
-          "data_type": {
-            "type": "string",
-            "description": "Data type of the column"
-          },
-          "is_aggregate": {
-            "type": "string",
-            "description": "Determines if the column schema is an aggregate"
-          },
-          "can_import": {
-            "type": "boolean",
-            "description": "Determines if the column schema can be imported"
-          },
-          "selected": {
-            "type": "boolean",
-            "description": "Determines if the table is selected"
-          },
-          "is_linked_active": {
-            "type": "boolean",
-            "description": "Determines if the table is linked"
+          "author_name": {
+            "type": "string"
           }
         }
       },
