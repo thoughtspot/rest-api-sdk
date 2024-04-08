@@ -30,6 +30,10 @@ export class ExportMetadataTMLRequest {
     * TML EDOC content format.
     */
     'edoc_format'?: ExportMetadataTMLRequestEdocFormatEnum;
+    /**
+    * Indicates whether to export worksheet TML in V1 or V2 version.
+    */
+    'export_schema_version'?: ExportMetadataTMLRequestExportSchemaVersionEnum;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -57,6 +61,12 @@ export class ExportMetadataTMLRequest {
             "baseName": "edoc_format",
             "type": "ExportMetadataTMLRequestEdocFormatEnum",
             "format": ""
+        },
+        {
+            "name": "export_schema_version",
+            "baseName": "export_schema_version",
+            "type": "ExportMetadataTMLRequestExportSchemaVersionEnum",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
@@ -69,4 +79,5 @@ export class ExportMetadataTMLRequest {
 
 
 export type ExportMetadataTMLRequestEdocFormatEnum = "JSON" | "YAML" ;
+export type ExportMetadataTMLRequestExportSchemaVersionEnum = "V1" | "V2" ;
 

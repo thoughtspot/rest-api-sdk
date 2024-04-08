@@ -4,8 +4,10 @@ All URIs are relative to *CLUSTER_URL*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**activateUser**](UsersApi.md#activateUser) | **POST** /api/rest/2.0/users/activate | 
 [**changeUserPassword**](UsersApi.md#changeUserPassword) | **POST** /api/rest/2.0/users/change-password | 
 [**createUser**](UsersApi.md#createUser) | **POST** /api/rest/2.0/users/create | 
+[**deactivateUser**](UsersApi.md#deactivateUser) | **POST** /api/rest/2.0/users/deactivate | 
 [**deleteUser**](UsersApi.md#deleteUser) | **POST** /api/rest/2.0/users/{user_identifier}/delete | 
 [**forceLogoutUsers**](UsersApi.md#forceLogoutUsers) | **POST** /api/rest/2.0/users/force-logout | 
 [**importUsers**](UsersApi.md#importUsers) | **POST** /api/rest/2.0/users/import | 
@@ -13,6 +15,70 @@ Method | HTTP request | Description
 [**searchUsers**](UsersApi.md#searchUsers) | **POST** /api/rest/2.0/users/search | 
 [**updateUser**](UsersApi.md#updateUser) | **POST** /api/rest/2.0/users/{user_identifier}/update | 
 
+
+# **activateUser**
+> User activateUser(activateUserRequest)
+
+  Version: 9.7.0.cl or later   Activates a deactivated user account.  Requires `ADMINISTRATION` (**Can administer Thoughtspot**) privilege.  To activate an inactive user account, the API request body must include the following information:  - Username or the GUID of the user account. - Auth token generated for the deactivated user. The auth token is sent in the API response when a user is deactivated. - Password for the user account.      
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, UsersApi, ActivateUserRequest } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new UsersApi(configuration);
+
+apiInstance.activateUser(
+  // ActivateUserRequest
+  {
+    user_identifier: "user_identifier_example",
+    auth_token: "auth_token_example",
+    password: "password_example",
+  } 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **activateUserRequest** | **ActivateUserRequest**|  |
+
+
+### Return type
+
+**User**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | User activated successfully. |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
 # **changeUserPassword**
 > void changeUserPassword(changeUserPasswordRequest)
@@ -125,6 +191,7 @@ apiInstance.createUser(
     extended_properties: {},
     extended_preferences: {},
     trigger_welcome_email: true,
+    trigger_activation_email: true,
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -159,6 +226,69 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | User successfully created. |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **deactivateUser**
+> ResponseActivationURL deactivateUser(deactivateUserRequest)
+
+  Version: 9.7.0.cl or later   Deactivates a user account.  Requires `ADMINISTRATION` (**Can administer Thoughtspot**) privilege.  To deactivate a user account, the API request body must include the following information:  - Username or the GUID of the user account - Base URL of the ThoughtSpot instance  If the API request is successful, ThoughtSpot returns the activation URL in the response. The activation URL is valid for 14 days and can be used to re-activate the account and reset the password of the deactivated account.      
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, UsersApi, DeactivateUserRequest } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new UsersApi(configuration);
+
+apiInstance.deactivateUser(
+  // DeactivateUserRequest
+  {
+    user_identifier: "user_identifier_example",
+    base_url: "base_url_example",
+  } 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **deactivateUserRequest** | **DeactivateUserRequest**|  |
+
+
+### Return type
+
+**ResponseActivationURL**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | User deactivated successfully. |  -  |
 **400** | Invalid request. |  -  |
 **401** | Unauthorized access. |  -  |
 **403** | Forbidden access. |  -  |
@@ -227,7 +357,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
 # **forceLogoutUsers**
-> void forceLogoutUsers()
+> void forceLogoutUsers(forceLogoutUsersRequest)
 
   Version: 9.0.0.cl or later   Enforces logout on current user sessions.    Use this API with caution as it may invalidate active user sessions and force users to re-login. Make sure you specify the usernames or GUIDs. If you pass null values in the API call, all user sessions on your cluster become invalid, and the users are forced to re-login.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
 
@@ -244,7 +374,7 @@ const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
 const apiInstance = new UsersApi(configuration);
 
 apiInstance.forceLogoutUsers(
-  // ForceLogoutUsersRequest (optional)
+  // ForceLogoutUsersRequest
   {
     user_identifiers: [
       "user_identifiers_example",
@@ -445,7 +575,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
 # **searchUsers**
-> Array<User> searchUsers()
+> Array<User> searchUsers(searchUsersRequest)
 
   Version: 9.0.0.cl or later   Gets a list of users available on the ThoughtSpot system.  To get details of a specific user, specify the user GUID or name. You can also filter the API response based on groups, Org ID, user visibility, account status, user type, and user preference settings and favorites.  Available to all users. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view all users properties.  **NOTE**: If the API returns an empty list, consider increasing the value of the `record_size` parameter. To search across all available users, set `record_size` to `-1`.      
 
@@ -462,7 +592,7 @@ const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
 const apiInstance = new UsersApi(configuration);
 
 apiInstance.searchUsers(
-  // SearchUsersRequest (optional)
+  // SearchUsersRequest
   {
     user_identifier: "user_identifier_example",
     display_name: "display_name_example",
@@ -542,7 +672,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
 # **updateUser**
-> void updateUser()
+> void updateUser(updateUserRequest)
 
   Version: 9.0.0.cl or later   Updates a user object.  You can modify user properties such as username, email, and share notification settings. You can also assign new groups and Orgs, remove the user from a group or Org, reset password, and modify user preferences.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
 
@@ -561,7 +691,7 @@ const apiInstance = new UsersApi(configuration);
 apiInstance.updateUser(
   // string | GUID / name of the user
   "user_identifier_example" , 
-  // UpdateUserRequest (optional)
+  // UpdateUserRequest
   {
     name: "name_example",
     display_name: "display_name_example",

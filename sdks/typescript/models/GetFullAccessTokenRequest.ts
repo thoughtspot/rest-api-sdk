@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { JWTUserOptions } from '../models/JWTUserOptions';
+import { JWTUserOptionsFull } from '../models/JWTUserOptionsFull';
 import { HttpFile } from '../http/http';
 
 export class GetFullAccessTokenRequest {
@@ -50,7 +50,7 @@ export class GetFullAccessTokenRequest {
     * ID or name of the groups to which the newly created user belongs. Use this parameter to provision a user just-in-time (JIT).
     */
     'group_identifiers'?: Array<string>;
-    'jwt_user_options'?: JWTUserOptions;
+    'jwt_user_options'?: JWTUserOptionsFull;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -112,7 +112,7 @@ export class GetFullAccessTokenRequest {
         {
             "name": "jwt_user_options",
             "baseName": "jwt_user_options",
-            "type": "JWTUserOptions",
+            "type": "JWTUserOptionsFull",
             "format": ""
         }    ];
 

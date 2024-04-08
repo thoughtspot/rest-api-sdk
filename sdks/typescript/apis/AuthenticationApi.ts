@@ -178,8 +178,13 @@ export class AuthenticationApiRequestFactory extends BaseAPIRequestFactory {
      *   Version: 9.0.0.cl or later    Creates a login session for a ThoughtSpot user with Basic authentication.  In Basic authentication method, REST clients log in to ThoughtSpot using `username` and `password` attributes. On a multi-tenant cluster with Orgs, users can pass the ID of the Org in the API request to log in to a specific Org context.  A successful login returns a session cookie that can be used in your subsequent API requests.      
      * @param loginRequest 
      */
-    public async login(loginRequest?: LoginRequest, _options?: Configuration): Promise<RequestContext> {
+    public async login(loginRequest: LoginRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
+
+        // verify required parameter 'loginRequest' is not null or undefined
+        if (loginRequest === null || loginRequest === undefined) {
+            throw new RequiredError("AuthenticationApi", "login", "loginRequest");
+        }
 
 
         // Path Params
@@ -255,8 +260,13 @@ export class AuthenticationApiRequestFactory extends BaseAPIRequestFactory {
      *   Version: 9.0.0.cl or later    Revokes the authentication token issued for current user session.  The token of your current session expires when you make a call to the `/api/rest/2.0/auth/token/revoke` endpoint. the users will not be able to access ThoughtSpot objects until a new token is obtained.  To restart your session, request for a new token from ThoughtSpot. See [Get Object Access Token](#/http/api-endpoints/authentication/get-object-access-token) and [Get Full Access Token](#/http/api-endpoints/authentication/get-full-access-token).      
      * @param revokeTokenRequest 
      */
-    public async revokeToken(revokeTokenRequest?: RevokeTokenRequest, _options?: Configuration): Promise<RequestContext> {
+    public async revokeToken(revokeTokenRequest: RevokeTokenRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
+
+        // verify required parameter 'revokeTokenRequest' is not null or undefined
+        if (revokeTokenRequest === null || revokeTokenRequest === undefined) {
+            throw new RequiredError("AuthenticationApi", "revokeToken", "revokeTokenRequest");
+        }
 
 
         // Path Params
