@@ -3399,12 +3399,12 @@
                     }
                   },
                   "jwt_user_options": {
-                    "description": "Test lo JWT user options to create a JWT token given the payload. *Deprecated from 9.12.0.cl.* Use user_parameters  for Attribute-Based Access Control (ABAC). For more information, see https://developers.thoughtspot.com/docs/abac-user-parameters.",
+                    "description": "Description in below",
                     "$ref": "#/components/schemas/JWT_User_Options_Full",
                     "deprecated": true
                   },
                   "user_parameters": {
-                    "description": "TEST lol Define attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see https://developers.thoughtspot.com/docs/abac-user-parameters. <br/>  <span class=\"since-beta-tag\">Version: 9.11.0.cl or later</span>",
+                    "description": "Define attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see https://developers.thoughtspot.com/docs/abac-user-parameters. <br/>  <span class=\"since-beta-tag\">Version: 9.11.0.cl or later</span>",
                     "$ref": "#/components/schemas/User_Parameter_Options"
                   }
                 },
@@ -12593,7 +12593,7 @@
             }
           }
         },
-        "description": "JWT user options to create a JWT token given the payload."
+        "description": "*Deprecated from 9.12.0.cl.*\nJWT user options to create a JWT token given the payload. Use user_parameters for Attribute-Based Access Control (ABAC). \nFor more information, see https://developers.thoughtspot.com/docs/abac-user-parameters."
       },
       "JWT_Parameter": {
         "type": "object",
@@ -12657,7 +12657,7 @@
             }
           }
         },
-        "description": "User properties runtime_filters,runtime_sorts,parameters applicable to LOGICAL_TABLE(Worksheet)"
+        "description": "User properties runtime_filters,runtime_sorts,parameters applicable to LOGICAL_TABLE(Worksheet)\nDefine attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, \nsee https://developers.thoughtspot.com/docs/abac-user-parameters."
       },
       "User_Object": {
         "type": "object",
