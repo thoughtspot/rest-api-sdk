@@ -12593,7 +12593,7 @@
             }
           }
         },
-        "description": "*Deprecated from 9.12.0.cl.*\nJWT user options to create a JWT token given the payload. Use user_parameters for Attribute-Based Access Control (ABAC). \nFor more information, see https://developers.thoughtspot.com/docs/abac-user-parameters."
+        "description": "*Deprecated from 9.12.0.cl.* \n\nJWT user options to create a JWT token given the payload. Use user_parameters for Attribute-Based Access Control (ABAC). \nFor more information, see https://developers.thoughtspot.com/docs/abac-user-parameters."
       },
       "JWT_Parameter": {
         "type": "object",
@@ -12868,7 +12868,7 @@
             }
           }
         },
-        "description": "JWT user options to create a JWT token given the payload."
+        "description": "*Deprecated from 9.12.0.cl.*\nJWT user options to create a JWT token given the payload. Use user_parameters for Attribute-Based Access Control (ABAC). \nFor more information, see https://developers.thoughtspot.com/docs/abac-user-parameters."
       },
       "ResponseActivationURL": {
         "type": "object",
