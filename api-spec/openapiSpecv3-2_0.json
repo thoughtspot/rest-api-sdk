@@ -3404,7 +3404,7 @@
                     "deprecated": true
                   },
                   "user_parameters": {
-                    "description": "Define attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see https://developers.thoughtspot.com/docs/abac-user-parameters. <br/>  <span class=\"since-beta-tag\">Version: 9.11.0.cl or later</span>",
+                    "description": "Define attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see https://developers.thoughtspot.com/docs/abac-user-parameters.  <br/>  <span class=\"since-beta-tag\">Version: 9.11.0.cl or later</span>",
                     "$ref": "#/components/schemas/User_Parameter_Options"
                   }
                 },
@@ -12593,7 +12593,7 @@
             }
           }
         },
-        "description": "*Deprecated from 9.12.0.cl.* \n \nJWT user options to create a JWT token given the payload. Use user_parameters for Attribute-Based Access Control (ABAC). \nFor more information, see https://developers.thoughtspot.com/docs/abac-user-parameters."
+        "description": "*Deprecated from 9.10.5.cl.* \n \nJWT user options to create a JWT token given the payload. Use user_parameters for Attribute-Based Access Control (ABAC). \nFor more information, see https://developers.thoughtspot.com/docs/abac-user-parameters."
       },
       "JWT_Parameter": {
         "type": "object",
@@ -12657,7 +12657,7 @@
             }
           }
         },
-        "description": "Define attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, \nsee https://developers.thoughtspot.com/docs/abac-user-parameters."
+        "description": "*Version: 9.10.5.cl or later*\nDefine attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, \nsee https://developers.thoughtspot.com/docs/abac-user-parameters."
       },
       "User_Object": {
         "type": "object",
@@ -12868,7 +12868,7 @@
             }
           }
         },
-        "description": "*Deprecated from 9.12.0.cl.*\nJWT user options to create a JWT token given the payload. Use user_parameters for Attribute-Based Access Control (ABAC). \nFor more information, see https://developers.thoughtspot.com/docs/abac-user-parameters."
+        "description": "*Deprecated from 9.10.5.cl.*\nJWT user options to create a JWT token given the payload. Use user_parameters for Attribute-Based Access Control (ABAC). \nFor more information, see https://developers.thoughtspot.com/docs/abac-user-parameters."
       },
       "ResponseActivationURL": {
         "type": "object",
