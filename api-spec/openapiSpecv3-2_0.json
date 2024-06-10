@@ -14,6 +14,14 @@
       "description": "Roles for version 9.0.0.cl"
     },
     {
+      "name": "9.12.0.cl",
+      "id": "9.12.0.cl",
+      "tags": [
+        "9.12.0.cl"
+      ],
+      "description": "Roles for version 9.12.0.cl"
+    },
+    {
       "name": "9.7.0.cl",
       "id": "9.7.0.cl",
       "tags": [
@@ -270,7 +278,8 @@
                         "BILLING_INFO_ADMINISTRATION",
                         "CAN_MANAGE_CUSTOM_CALENDAR",
                         "CAN_CREATE_OR_EDIT_CONNECTIONS",
-                        "CAN_MANAGE_WORKSHEET_VIEWS_TABLES"
+                        "CAN_MANAGE_WORKSHEET_VIEWS_TABLES",
+                        "THIRDPARTY_ANALYSIS"
                       ]
                     }
                   },
@@ -979,7 +988,8 @@
                         "BILLING_INFO_ADMINISTRATION",
                         "CAN_MANAGE_CUSTOM_CALENDAR",
                         "CAN_CREATE_OR_EDIT_CONNECTIONS",
-                        "CAN_MANAGE_WORKSHEET_VIEWS_TABLES"
+                        "CAN_MANAGE_WORKSHEET_VIEWS_TABLES",
+                        "THIRDPARTY_ANALYSIS"
                       ]
                     }
                   },
@@ -1721,6 +1731,30 @@
                     "items": {
                       "$ref": "#/components/schemas/PermissionsMetadataTypeInput"
                     }
+                  },
+                  "record_offset": {
+                    "description": "The starting record number from where the records should be included for each metadata type.",
+                    "default": 0,
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "record_size": {
+                    "description": "The number of records that should be included for each metadata type.",
+                    "default": -1,
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "default_metadata_type": {
+                    "description": "When no metadata objects input is passed, metadata objects of this type are fetched.",
+                    "type": "string",
+                    "enum": [
+                      "ALL",
+                      "LIVEBOARD",
+                      "ANSWER",
+                      "LOGICAL_TABLE",
+                      "LOGICAL_COLUMN",
+                      "CONNECTION"
+                    ]
                   }
                 },
                 "required": [
@@ -2364,6 +2398,12 @@
                     "description": "End time in EPOCH format",
                     "type": "number",
                     "format": "float"
+                  },
+                  "get_all_logs": {
+                    "description": "Fetch all the logs. This is available from 9.11.0.cl",
+                    "default": true,
+                    "type": "boolean",
+                    "nullable": true
                   }
                 },
                 "required": [
@@ -2681,7 +2721,7 @@
                         "GCP_POSTGRESQL",
                         "GCP_MYSQL",
                         "MODE",
-                        "RDBMS_LOOKER_ML"
+                        "GOOGLE_SHEETS"
                       ]
                     }
                   },
@@ -2878,7 +2918,10 @@
                         "CAN_MANAGE_CUSTOM_CALENDAR",
                         "CAN_CREATE_OR_EDIT_CONNECTIONS",
                         "CAN_CONFIGURE_CONNECTIONS",
-                        "CAN_MANAGE_WORKSHEET_VIEWS_TABLES"
+                        "CAN_MANAGE_WORKSHEET_VIEWS_TABLES",
+                        "THIRDPARTY_ANALYSIS",
+                        "CONTROL_TRUSTED_AUTH",
+                        "CAN_CREATE_CATALOG"
                       ]
                     }
                   },
@@ -2980,7 +3023,7 @@
     "/api/rest/2.0/customization/custom-actions/search": {
       "post": {
         "operationId": "searchCustomActions",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.6.0.cl or later</span>\n\nGets custom actions configured on the cluster.\n\nRequires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.6.0.cl or later</span>\n\nGets custom actions configured on the cluster.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Custom Action",
           "9.6.0.cl"
@@ -3264,12 +3307,12 @@
                     }
                   },
                   "jwt_user_options": {
-                    "description": "Description for JWT_User_Options",
+                    "description": "   JWT user options to create a JWT token given the payload.\n   \n\n*Deprecated from 9.11.0.cl : Replaced by user_parameters* ",
                     "$ref": "#/components/schemas/JWT_User_Options",
                     "deprecated": true
                   },
                   "user_parameters": {
-                    "description": "Description for User_Parameter_Options <br/>  <span class=\"since-beta-tag\">Version: 9.11.0.cl or later</span>",
+                    "description": "User Parameters to be set via JWT Token. <br/>  <span class=\"since-beta-tag\">Version: 9.11.0.cl or later</span>",
                     "$ref": "#/components/schemas/User_Parameter_Options"
                   }
                 },
@@ -3399,12 +3442,12 @@
                     }
                   },
                   "jwt_user_options": {
-                    "description": "Description in below",
+                    "description": "   JWT user options to create a JWT token given the payload.\n   \n\n*Deprecated from 9.11.0.cl : Replaced by user_parameters* ",
                     "$ref": "#/components/schemas/JWT_User_Options_Full",
                     "deprecated": true
                   },
                   "user_parameters": {
-                    "description": "Define attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see https://developers.thoughtspot.com/docs/abac-user-parameters.  <br/>  <span class=\"since-beta-tag\">Version: 9.11.0.cl or later</span>",
+                    "description": "User Parameters to be set via JWT Token. <br/>  <span class=\"since-beta-tag\">Version: 9.11.0.cl or later</span>",
                     "$ref": "#/components/schemas/User_Parameter_Options"
                   }
                 },
@@ -3558,6 +3601,87 @@
         "responses": {
           "204": {
             "description": "Token successfully revoked."
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/auth/token/validate": {
+      "post": {
+        "operationId": "validateToken",
+        "description": " <span class=\"since-beta-tag\">Version: 9.12.0.cl or later</span>",
+        "tags": [
+          "Authentication",
+          "9.12.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "token": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "token"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Token validation successful.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenValidationResponse"
+                }
+              }
+            }
           },
           "400": {
             "description": "Invalid request.",
@@ -5443,7 +5567,8 @@
                         "DISABLE_PINBOARD_CREATION",
                         "ENABLESPOTAPPCREATION",
                         "LIVEBOARD_VERIFIER",
-                        "PREVIEW_THOUGHTSPOT_SAGE"
+                        "PREVIEW_THOUGHTSPOT_SAGE",
+                        "THIRDPARTY_ANALYSIS"
                       ]
                     }
                   },
@@ -5610,7 +5735,8 @@
                         "DISABLE_PINBOARD_CREATION",
                         "ENABLESPOTAPPCREATION",
                         "LIVEBOARD_VERIFIER",
-                        "PREVIEW_THOUGHTSPOT_SAGE"
+                        "PREVIEW_THOUGHTSPOT_SAGE",
+                        "THIRDPARTY_ANALYSIS"
                       ]
                     }
                   },
@@ -5921,6 +6047,12 @@
                     "default": false,
                     "type": "boolean",
                     "nullable": true
+                  },
+                  "all_orgs_context": {
+                    "description": "If import is happening from all orgs context.",
+                    "default": false,
+                    "type": "boolean",
+                    "nullable": true
                   }
                 },
                 "required": [
@@ -6048,6 +6180,12 @@
                   },
                   "export_connection_as_dependent": {
                     "description": "Indicates whether to export connection as dependent while exporting table/worksheet/answer/liveboard.\nThis will only be active when export_associated is true.",
+                    "default": false,
+                    "type": "boolean",
+                    "nullable": true
+                  },
+                  "all_orgs_override": {
+                    "description": "Indicates whether to export is happening from all orgs context.",
                     "default": false,
                     "type": "boolean",
                     "nullable": true
@@ -7178,7 +7316,7 @@
                       "GCP_POSTGRESQL",
                       "GCP_MYSQL",
                       "MODE",
-                      "RDBMS_LOOKER_ML"
+                      "GOOGLE_SHEETS"
                     ]
                   },
                   "data_warehouse_config": {
@@ -7619,7 +7757,9 @@
                         "LIVEBOARD_VERIFIER",
                         "CAN_MANAGE_CUSTOM_CALENDAR",
                         "CAN_CREATE_OR_EDIT_CONNECTIONS",
-                        "CAN_MANAGE_WORKSHEET_VIEWS_TABLES"
+                        "CAN_MANAGE_WORKSHEET_VIEWS_TABLES",
+                        "THIRDPARTY_ANALYSIS",
+                        "CAN_CREATE_CATALOG"
                       ]
                     }
                   }
@@ -7739,7 +7879,9 @@
                         "LIVEBOARD_VERIFIER",
                         "CAN_MANAGE_CUSTOM_CALENDAR",
                         "CAN_CREATE_OR_EDIT_CONNECTIONS",
-                        "CAN_MANAGE_WORKSHEET_VIEWS_TABLES"
+                        "CAN_MANAGE_WORKSHEET_VIEWS_TABLES",
+                        "THIRDPARTY_ANALYSIS",
+                        "CAN_CREATE_CATALOG"
                       ]
                     }
                   }
@@ -7922,7 +8064,8 @@
                     "type": "string",
                     "enum": [
                       "CSV",
-                      "PDF"
+                      "PDF",
+                      "XLSX"
                     ]
                   },
                   "liveboard_options": {
@@ -8861,7 +9004,8 @@
                     "type": "string",
                     "enum": [
                       "CSV",
-                      "PDF"
+                      "PDF",
+                      "XLSX"
                     ]
                   },
                   "liveboard_options": {
@@ -12032,7 +12176,7 @@
               "GCP_POSTGRESQL",
               "GCP_MYSQL",
               "MODE",
-              "RDBMS_LOOKER_ML"
+              "GOOGLE_SHEETS"
             ],
             "description": "Type of data warehouse."
           },
@@ -12258,7 +12402,10 @@
                 "CAN_MANAGE_CUSTOM_CALENDAR",
                 "CAN_CREATE_OR_EDIT_CONNECTIONS",
                 "CAN_CONFIGURE_CONNECTIONS",
-                "CAN_MANAGE_WORKSHEET_VIEWS_TABLES"
+                "CAN_MANAGE_WORKSHEET_VIEWS_TABLES",
+                "THIRDPARTY_ANALYSIS",
+                "CONTROL_TRUSTED_AUTH",
+                "CAN_CREATE_CATALOG"
               ]
             },
             "description": "Privileges granted to the role."
@@ -12593,7 +12740,7 @@
             }
           }
         },
-        "description": "*Deprecated from 9.10.5.cl.* \n \nJWT user options to create a JWT token given the payload. Use user_parameters for Attribute-Based Access Control (ABAC). \nFor more information, see https://developers.thoughtspot.com/docs/abac-user-parameters."
+        "description": "JWT user options to create a JWT token given the payload."
       },
       "JWT_Parameter": {
         "type": "object",
@@ -12655,9 +12802,13 @@
             "items": {
               "$ref": "#/components/schemas/User_Parameters"
             }
+          },
+          "compress": {
+            "type": "boolean",
+            "default": false
           }
         },
-        "description": "*Version: 9.10.5.cl or later.* \n\nDefine attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, \nsee https://developers.thoughtspot.com/docs/abac-user-parameters."
+        "description": "User properties runtime_filters,runtime_sorts,parameters applicable to LOGICAL_TABLE(Worksheet)"
       },
       "User_Object": {
         "type": "object",
@@ -12868,7 +13019,41 @@
             }
           }
         },
-        "description": "*Deprecated from 9.10.5.cl.* \n\nJWT user options to create a JWT token given the payload. Use user_parameters for Attribute-Based Access Control (ABAC). \nFor more information, see https://developers.thoughtspot.com/docs/abac-user-parameters."
+        "description": "JWT user options to create a JWT token given the payload."
+      },
+      "TokenValidationResponse": {
+        "type": "object",
+        "required": [
+          "creation_time_in_millis",
+          "expiration_time_in_millis",
+          "scope",
+          "valid_for_user_id",
+          "token_type"
+        ],
+        "properties": {
+          "creation_time_in_millis": {
+            "type": "number",
+            "format": "float",
+            "description": "Token creation time in milliseconds."
+          },
+          "expiration_time_in_millis": {
+            "type": "number",
+            "format": "float",
+            "description": "Token expiration time in milliseconds."
+          },
+          "scope": {
+            "$ref": "#/components/schemas/Scope",
+            "description": "Token access scope details"
+          },
+          "valid_for_user_id": {
+            "type": "string",
+            "description": "Username to whom the token is issued."
+          },
+          "token_type": {
+            "type": "string",
+            "description": "Type of token."
+          }
+        }
       },
       "ResponseActivationURL": {
         "type": "object",
@@ -13088,7 +13273,8 @@
                 "DISABLE_PINBOARD_CREATION",
                 "ENABLESPOTAPPCREATION",
                 "LIVEBOARD_VERIFIER",
-                "PREVIEW_THOUGHTSPOT_SAGE"
+                "PREVIEW_THOUGHTSPOT_SAGE",
+                "THIRDPARTY_ANALYSIS"
               ]
             },
             "description": "Privileges that will be assigned to the group."
@@ -13474,7 +13660,7 @@
               "GCP_POSTGRESQL",
               "GCP_MYSQL",
               "MODE",
-              "RDBMS_LOOKER_ML"
+              "GOOGLE_SHEETS"
             ],
             "description": "Type of data warehouse."
           },
@@ -13562,7 +13748,9 @@
                 "LIVEBOARD_VERIFIER",
                 "CAN_MANAGE_CUSTOM_CALENDAR",
                 "CAN_CREATE_OR_EDIT_CONNECTIONS",
-                "CAN_MANAGE_WORKSHEET_VIEWS_TABLES"
+                "CAN_MANAGE_WORKSHEET_VIEWS_TABLES",
+                "THIRDPARTY_ANALYSIS",
+                "CAN_CREATE_CATALOG"
               ]
             },
             "description": "Privileges granted to the role."
