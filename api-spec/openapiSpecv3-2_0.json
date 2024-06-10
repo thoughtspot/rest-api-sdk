@@ -2980,7 +2980,7 @@
     "/api/rest/2.0/customization/custom-actions/search": {
       "post": {
         "operationId": "searchCustomActions",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.6.0.cl or later</span>\n\nGets custom actions configured on the cluster.\n\nRequires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.6.0.cl or later</span>\n\nGets custom actions configured on the cluster.\n",
         "tags": [
           "Custom Action",
           "9.6.0.cl"
