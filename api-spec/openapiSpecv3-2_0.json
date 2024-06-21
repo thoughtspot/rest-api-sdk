@@ -38,6 +38,14 @@
       "description": "Roles for version 9.2.0.cl"
     },
     {
+      "name": "10.0.0.cl",
+      "id": "10.0.0.cl",
+      "tags": [
+        "10.0.0.cl"
+      ],
+      "description": "Roles for version 10.0.0.cl"
+    },
+    {
       "name": "9.9.0.cl",
       "id": "9.9.0.cl",
       "tags": [
@@ -268,7 +276,6 @@
                         "CAN_CREATE_CATALOG",
                         "DISABLE_PINBOARD_CREATION",
                         "LIVEBOARD_VERIFIER",
-                        "ENABLESPOTAPPCREATION",
                         "PREVIEW_THOUGHTSPOT_SAGE",
                         "APPLICATION_ADMINISTRATION",
                         "SYSTEM_INFO_ADMINISTRATION",
@@ -279,6 +286,7 @@
                         "CAN_MANAGE_CUSTOM_CALENDAR",
                         "CAN_CREATE_OR_EDIT_CONNECTIONS",
                         "CAN_MANAGE_WORKSHEET_VIEWS_TABLES",
+                        "CAN_MANAGE_VERSION_CONTROL",
                         "THIRDPARTY_ANALYSIS"
                       ]
                     }
@@ -978,7 +986,6 @@
                         "CAN_CREATE_CATALOG",
                         "DISABLE_PINBOARD_CREATION",
                         "LIVEBOARD_VERIFIER",
-                        "ENABLESPOTAPPCREATION",
                         "PREVIEW_THOUGHTSPOT_SAGE",
                         "APPLICATION_ADMINISTRATION",
                         "SYSTEM_INFO_ADMINISTRATION",
@@ -989,6 +996,7 @@
                         "CAN_MANAGE_CUSTOM_CALENDAR",
                         "CAN_CREATE_OR_EDIT_CONNECTIONS",
                         "CAN_MANAGE_WORKSHEET_VIEWS_TABLES",
+                        "CAN_MANAGE_VERSION_CONTROL",
                         "THIRDPARTY_ANALYSIS"
                       ]
                     }
@@ -1176,6 +1184,12 @@
                     "default": false,
                     "type": "boolean",
                     "nullable": true
+                  },
+                  "dependent_objects_record_size": {
+                    "description": "The maximum number of dependents to include per metadata object.",
+                    "default": 50,
+                    "type": "integer",
+                    "format": "int32"
                   },
                   "include_details": {
                     "description": "Includes complete details of the metadata objects.",
@@ -2037,6 +2051,7 @@
                     "default": "COMPACT",
                     "type": "string",
                     "enum": [
+                      "FULL",
                       "COMPACT"
                     ]
                   },
@@ -2163,6 +2178,7 @@
                     "default": "COMPACT",
                     "type": "string",
                     "enum": [
+                      "FULL",
                       "COMPACT"
                     ]
                   },
@@ -2277,6 +2293,7 @@
                     "default": "COMPACT",
                     "type": "string",
                     "enum": [
+                      "FULL",
                       "COMPACT"
                     ]
                   },
@@ -2400,7 +2417,7 @@
                     "format": "float"
                   },
                   "get_all_logs": {
-                    "description": "Fetch all the logs. This is available from 9.11.0.cl",
+                    "description": "Fetch all the logs. This is available from 9.10.5.cl",
                     "default": true,
                     "type": "boolean",
                     "nullable": true
@@ -2581,7 +2598,8 @@
                     "enum": [
                       "LIVEBOARD",
                       "ANSWER",
-                      "LOGICAL_TABLE"
+                      "LOGICAL_TABLE",
+                      "CUSTOM_ACTION"
                     ]
                   },
                   "branch_name": {
@@ -2919,6 +2937,7 @@
                         "CAN_CREATE_OR_EDIT_CONNECTIONS",
                         "CAN_CONFIGURE_CONNECTIONS",
                         "CAN_MANAGE_WORKSHEET_VIEWS_TABLES",
+                        "CAN_MANAGE_VERSION_CONTROL",
                         "THIRDPARTY_ANALYSIS",
                         "CONTROL_TRUSTED_AUTH",
                         "CAN_CREATE_CATALOG"
@@ -3023,7 +3042,7 @@
     "/api/rest/2.0/customization/custom-actions/search": {
       "post": {
         "operationId": "searchCustomActions",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.6.0.cl or later</span>\n\nGets custom actions configured on the cluster.\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.6.0.cl or later</span>\n\nGets custom actions configured on the cluster.\n\nRequires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Custom Action",
           "9.6.0.cl"
@@ -3307,12 +3326,12 @@
                     }
                   },
                   "jwt_user_options": {
-                    "description": "   JWT user options to create a JWT token given the payload.\n   \n\n*Deprecated from 9.11.0.cl : Replaced by user_parameters* ",
+                    "description": "   JWT user options to create a JWT token given the payload.\n   \n\n*Deprecated from 9.10.5.cl : Replaced by user_parameters* ",
                     "$ref": "#/components/schemas/JWT_User_Options",
                     "deprecated": true
                   },
                   "user_parameters": {
-                    "description": "User Parameters to be set via JWT Token. <br/>  <span class=\"since-beta-tag\">Version: 9.11.0.cl or later</span>",
+                    "description": "User Parameters to be set via JWT Token. <br/>  <span class=\"since-beta-tag\">Version: 9.10.5.cl or later</span>",
                     "$ref": "#/components/schemas/User_Parameter_Options"
                   }
                 },
@@ -3442,12 +3461,12 @@
                     }
                   },
                   "jwt_user_options": {
-                    "description": "   JWT user options to create a JWT token given the payload.\n   \n\n*Deprecated from 9.11.0.cl : Replaced by user_parameters* ",
+                    "description": "   JWT user options to create a JWT token given the payload.\n   \n\n*Deprecated from 9.10.5.cl : Replaced by user_parameters* ",
                     "$ref": "#/components/schemas/JWT_User_Options_Full",
                     "deprecated": true
                   },
                   "user_parameters": {
-                    "description": "User Parameters to be set via JWT Token. <br/>  <span class=\"since-beta-tag\">Version: 9.11.0.cl or later</span>",
+                    "description": "User Parameters to be set via JWT Token. <br/>  <span class=\"since-beta-tag\">Version: 9.10.5.cl or later</span>",
                     "$ref": "#/components/schemas/User_Parameter_Options"
                   }
                 },
@@ -5565,9 +5584,9 @@
                         "SYNCMANAGEMENT",
                         "CAN_CREATE_CATALOG",
                         "DISABLE_PINBOARD_CREATION",
-                        "ENABLESPOTAPPCREATION",
                         "LIVEBOARD_VERIFIER",
                         "PREVIEW_THOUGHTSPOT_SAGE",
+                        "CAN_MANAGE_VERSION_CONTROL",
                         "THIRDPARTY_ANALYSIS"
                       ]
                     }
@@ -5733,9 +5752,9 @@
                         "SYNCMANAGEMENT",
                         "CAN_CREATE_CATALOG",
                         "DISABLE_PINBOARD_CREATION",
-                        "ENABLESPOTAPPCREATION",
                         "LIVEBOARD_VERIFIER",
                         "PREVIEW_THOUGHTSPOT_SAGE",
+                        "CAN_MANAGE_VERSION_CONTROL",
                         "THIRDPARTY_ANALYSIS"
                       ]
                     }
@@ -6164,10 +6183,11 @@
                     ]
                   },
                   "export_schema_version": {
-                    "description": "Indicates whether to export worksheet TML in V1 or V2 version.",
-                    "default": "V1",
+                    "description": "Indicates whether to export worksheet TML in DEFAULT or V1 or V2 version.",
+                    "default": "DEFAULT",
                     "type": "string",
                     "enum": [
+                      "DEFAULT",
                       "V1",
                       "V2"
                     ]
@@ -7470,6 +7490,72 @@
         }
       }
     },
+    "/api/rest/2.0/connections/delete/{connection_identifier}": {
+      "post": {
+        "operationId": "deleteConnectionV2",
+        "description": "\n <span class=\"since-beta-tag\">Version: 10.0.0.cl or later</span>\n\nDeletes a connection object.\n\n**Note**: If a connection has dependent objects, make sure you remove its associations before the delete operation.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Connections",
+          "10.0.0.cl"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "connection_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique ID or name of the connection."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Connection successfully deleted."
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/connection/update": {
       "post": {
         "operationId": "updateConnection",
@@ -7516,6 +7602,102 @@
           "required": true
         },
         "parameters": [],
+        "responses": {
+          "204": {
+            "description": "Connection successfully updated."
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/connections/update/{connection_identifier}": {
+      "post": {
+        "operationId": "updateConnectionV2",
+        "description": "\n <span class=\"since-beta-tag\">Version: 10.0.0.cl or later</span>\n\nUpdates a connection object.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\nTo update a connection object, pass these parameters in your API request:\n\n1. GUID of the connection object.\n2. If you are updating tables or database schema of a connection object:\n   a. Add the updated JSON map of metadata with database, schema, and tables in `data_warehouse_config`.\n   b. Set `validate` to `true`.\n3. If you are updating a configuration attribute, connection name, or description, you can set `validate` to `false`.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Connections",
+          "10.0.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "description": "Updated name of the connection.",
+                    "type": "string"
+                  },
+                  "description": {
+                    "description": "Updated description of the connection.",
+                    "type": "string"
+                  },
+                  "data_warehouse_config": {
+                    "description": "Configuration of the data warehouse in JSON.",
+                    "type": "object"
+                  },
+                  "validate": {
+                    "description": "Indicates whether to validate the connection details.",
+                    "default": true,
+                    "type": "boolean",
+                    "nullable": true
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "connection_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique ID or name of the connection."
+          }
+        ],
         "responses": {
           "204": {
             "description": "Connection successfully updated."
@@ -7758,6 +7940,7 @@
                         "CAN_MANAGE_CUSTOM_CALENDAR",
                         "CAN_CREATE_OR_EDIT_CONNECTIONS",
                         "CAN_MANAGE_WORKSHEET_VIEWS_TABLES",
+                        "CAN_MANAGE_VERSION_CONTROL",
                         "THIRDPARTY_ANALYSIS",
                         "CAN_CREATE_CATALOG"
                       ]
@@ -7880,6 +8063,7 @@
                         "CAN_MANAGE_CUSTOM_CALENDAR",
                         "CAN_CREATE_OR_EDIT_CONNECTIONS",
                         "CAN_MANAGE_WORKSHEET_VIEWS_TABLES",
+                        "CAN_MANAGE_VERSION_CONTROL",
                         "THIRDPARTY_ANALYSIS",
                         "CAN_CREATE_CATALOG"
                       ]
@@ -12403,6 +12587,7 @@
                 "CAN_CREATE_OR_EDIT_CONNECTIONS",
                 "CAN_CONFIGURE_CONNECTIONS",
                 "CAN_MANAGE_WORKSHEET_VIEWS_TABLES",
+                "CAN_MANAGE_VERSION_CONTROL",
                 "THIRDPARTY_ANALYSIS",
                 "CONTROL_TRUSTED_AUTH",
                 "CAN_CREATE_CATALOG"
@@ -12805,7 +12990,8 @@
           },
           "compress": {
             "type": "boolean",
-            "default": false
+            "default": false,
+            "description": " <span class=\"since-beta-tag\">Version: 9.12.0.cl or later</span>"
           }
         },
         "description": "User properties runtime_filters,runtime_sorts,parameters applicable to LOGICAL_TABLE(Worksheet)"
@@ -12874,7 +13060,7 @@
           "persist": {
             "type": "boolean",
             "default": false,
-            "description": "Flag to persist the runtime filters."
+            "description": "Flag to persist the runtime filters. <br/>  <span class=\"since-beta-tag\">Version: 9.12.0.cl or later</span>"
           },
           "objects": {
             "type": "array",
@@ -12904,7 +13090,7 @@
           "persist": {
             "type": "boolean",
             "default": false,
-            "description": "Flag to persist the runtime sorts."
+            "description": "Flag to persist the runtime sorts. <br/>  <span class=\"since-beta-tag\">Version: 9.12.0.cl or later</span>"
           },
           "objects": {
             "type": "array",
@@ -12937,7 +13123,7 @@
           "persist": {
             "type": "boolean",
             "default": false,
-            "description": "Flag to persist the parameters."
+            "description": "Flag to persist the parameters. <br/>  <span class=\"since-beta-tag\">Version: 9.12.0.cl or later</span>"
           },
           "objects": {
             "type": "array",
@@ -13271,9 +13457,9 @@
                 "SYNCMANAGEMENT",
                 "CAN_CREATE_CATALOG",
                 "DISABLE_PINBOARD_CREATION",
-                "ENABLESPOTAPPCREATION",
                 "LIVEBOARD_VERIFIER",
                 "PREVIEW_THOUGHTSPOT_SAGE",
+                "CAN_MANAGE_VERSION_CONTROL",
                 "THIRDPARTY_ANALYSIS"
               ]
             },
@@ -13449,7 +13635,8 @@
             "enum": [
               "LIVEBOARD",
               "ANSWER",
-              "LOGICAL_TABLE"
+              "LOGICAL_TABLE",
+              "CUSTOM_ACTION"
             ],
             "description": "Type of metadata."
           }
@@ -13749,6 +13936,7 @@
                 "CAN_MANAGE_CUSTOM_CALENDAR",
                 "CAN_CREATE_OR_EDIT_CONNECTIONS",
                 "CAN_MANAGE_WORKSHEET_VIEWS_TABLES",
+                "CAN_MANAGE_VERSION_CONTROL",
                 "THIRDPARTY_ANALYSIS",
                 "CAN_CREATE_CATALOG"
               ]
