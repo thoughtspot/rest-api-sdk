@@ -11,6 +11,7 @@ Method | HTTP request | Description
 [**login**](AuthenticationApi.md#login) | **POST** /api/rest/2.0/auth/session/login | 
 [**logout**](AuthenticationApi.md#logout) | **POST** /api/rest/2.0/auth/session/logout | 
 [**revokeToken**](AuthenticationApi.md#revokeToken) | **POST** /api/rest/2.0/auth/token/revoke | 
+[**validateToken**](AuthenticationApi.md#validateToken) | **POST** /api/rest/2.0/auth/token/validate | 
 
 
 # **getCurrentUserInfo**
@@ -154,14 +155,65 @@ apiInstance.getFullAccessToken(
     ],
     jwt_user_options: {
       parameters: [
-        null,
-      ],
-      metadata: [
         {
-          identifier: "identifier_example",
-          type: "LIVEBOARD",
+          runtime_filter: {},
+          runtime_sort: {},
+          runtime_param_override: {},
         },
       ],
+    },
+    user_parameters: {
+      objects: [
+        {
+          type: "LIVEBOARD",
+          identifier: "identifier_example",
+        },
+      ],
+      runtime_filters: [
+        {
+          column_name: "column_name_example",
+          values: [
+            "values_example",
+          ],
+          operator: "EQ",
+          persist: false,
+          objects: [
+            {
+              type: "LIVEBOARD",
+              identifier: "identifier_example",
+            },
+          ],
+        },
+      ],
+      runtime_sorts: [
+        {
+          column_name: "column_name_example",
+          order: "ASC",
+          persist: false,
+          objects: [
+            {
+              type: "LIVEBOARD",
+              identifier: "identifier_example",
+            },
+          ],
+        },
+      ],
+      parameters: [
+        {
+          name: "name_example",
+          values: [
+            "values_example",
+          ],
+          persist: false,
+          objects: [
+            {
+              type: "LIVEBOARD",
+              identifier: "identifier_example",
+            },
+          ],
+        },
+      ],
+      compress: false,
     },
   } 
 ).then((data:any) => {
@@ -247,6 +299,59 @@ apiInstance.getObjectAccessToken(
         },
       ],
     },
+    user_parameters: {
+      objects: [
+        {
+          type: "LIVEBOARD",
+          identifier: "identifier_example",
+        },
+      ],
+      runtime_filters: [
+        {
+          column_name: "column_name_example",
+          values: [
+            "values_example",
+          ],
+          operator: "EQ",
+          persist: false,
+          objects: [
+            {
+              type: "LIVEBOARD",
+              identifier: "identifier_example",
+            },
+          ],
+        },
+      ],
+      runtime_sorts: [
+        {
+          column_name: "column_name_example",
+          order: "ASC",
+          persist: false,
+          objects: [
+            {
+              type: "LIVEBOARD",
+              identifier: "identifier_example",
+            },
+          ],
+        },
+      ],
+      parameters: [
+        {
+          name: "name_example",
+          values: [
+            "values_example",
+          ],
+          persist: false,
+          objects: [
+            {
+              type: "LIVEBOARD",
+              identifier: "identifier_example",
+            },
+          ],
+        },
+      ],
+      compress: false,
+    },
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -289,7 +394,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
 # **login**
-> void login()
+> void login(loginRequest)
 
   Version: 9.0.0.cl or later    Creates a login session for a ThoughtSpot user with Basic authentication.  In Basic authentication method, REST clients log in to ThoughtSpot using `username` and `password` attributes. On a multi-tenant cluster with Orgs, users can pass the ID of the Org in the API request to log in to a specific Org context.  A successful login returns a session cookie that can be used in your subsequent API requests.      
 
@@ -306,7 +411,7 @@ const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
 const apiInstance = new AuthenticationApi(configuration);
 
 apiInstance.login(
-  // LoginRequest (optional)
+  // LoginRequest
   {
     username: "username_example",
     password: "password_example",
@@ -408,7 +513,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
 # **revokeToken**
-> void revokeToken()
+> void revokeToken(revokeTokenRequest)
 
   Version: 9.0.0.cl or later    Revokes the authentication token issued for current user session.  The token of your current session expires when you make a call to the `/api/rest/2.0/auth/token/revoke` endpoint. the users will not be able to access ThoughtSpot objects until a new token is obtained.  To restart your session, request for a new token from ThoughtSpot. See [Get Object Access Token](#/http/api-endpoints/authentication/get-object-access-token) and [Get Full Access Token](#/http/api-endpoints/authentication/get-full-access-token).      
 
@@ -425,7 +530,7 @@ const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
 const apiInstance = new AuthenticationApi(configuration);
 
 apiInstance.revokeToken(
-  // RevokeTokenRequest (optional)
+  // RevokeTokenRequest
   {
     user_identifier: "user_identifier_example",
     token: "token_example",
@@ -463,6 +568,68 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **204** | Token successfully revoked. |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **validateToken**
+> TokenValidationResponse validateToken(validateTokenRequest)
+
+ Version: 9.12.0.cl or later 
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, AuthenticationApi, ValidateTokenRequest } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new AuthenticationApi(configuration);
+
+apiInstance.validateToken(
+  // ValidateTokenRequest
+  {
+    token: "token_example",
+  } 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **validateTokenRequest** | **ValidateTokenRequest**|  |
+
+
+### Return type
+
+**TokenValidationResponse**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Token validation successful. |  -  |
 **400** | Invalid request. |  -  |
 **401** | Unauthorized access. |  -  |
 **403** | Forbidden access. |  -  |

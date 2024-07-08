@@ -48,6 +48,10 @@ export class SearchMetadataRequest {
     */
     'include_dependent_objects'?: boolean | null;
     /**
+    * The maximum number of dependents to include per metadata object.
+    */
+    'dependent_objects_record_size'?: number;
+    /**
     * Includes complete details of the metadata objects.
     */
     'include_details'?: boolean | null;
@@ -143,6 +147,12 @@ export class SearchMetadataRequest {
             "baseName": "include_dependent_objects",
             "type": "boolean",
             "format": ""
+        },
+        {
+            "name": "dependent_objects_record_size",
+            "baseName": "dependent_objects_record_size",
+            "type": "number",
+            "format": "int32"
         },
         {
             "name": "include_details",

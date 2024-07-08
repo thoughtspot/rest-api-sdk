@@ -175,7 +175,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
 # **searchSchedules**
-> Array<ResponseSchedule> searchSchedules()
+> Array<ResponseSchedule> searchSchedules(searchSchedulesRequest)
 
  Search Schedules    Version: 9.4.0.cl or later   Gets a list of scheduled jobs configured for a Liveboard.  To get details of a specific scheduled job, specify the name or GUID of the scheduled job.  Requires at least view access to Liveboards.  **NOTE**: When filtering schedules by parameters other than `metadata`, set `record_size` to `-1` and `record_offset` to `0` for accurate results.      
 
@@ -192,7 +192,7 @@ const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
 const apiInstance = new SchedulesApi(configuration);
 
 apiInstance.searchSchedules(
-  // SearchSchedulesRequest (optional)
+  // SearchSchedulesRequest
   {
     metadata: [
       {
@@ -256,7 +256,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
 # **updateSchedule**
-> void updateSchedule()
+> void updateSchedule(updateScheduleRequest)
 
  Update schedule.    Version: 9.4.0.cl or later   Updates a scheduled Liveboard job.  Requires at least edit access to Liveboards. To update a schedule on behalf of another user, you need `ADMINISTRATION` (**Can administer Org**) or `JOBSCHEDULING` (**Can schedule for others**) privilege and edit access to the Liveboard.  The API endpoint allows you to pause a scheduled job, change the status of a paused job. You can also edit the recipients list, frequency of the job, format of the file to send to the recipients in email notifications, PDF options, and time zone setting.      
 
@@ -275,7 +275,7 @@ const apiInstance = new SchedulesApi(configuration);
 apiInstance.updateSchedule(
   // string | Unique ID or name of the schedule.
   "schedule_identifier_example" , 
-  // UpdateScheduleRequest (optional)
+  // UpdateScheduleRequest
   {
     name: "name_example",
     description: "description_example",

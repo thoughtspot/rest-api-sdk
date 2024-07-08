@@ -14,6 +14,10 @@ import { HttpFile } from '../http/http';
 
 export class UpdateDbtConnectionRequest {
     /**
+    * Unique ID of the DBT Connection.
+    */
+    'dbt_connection_identifier': string;
+    /**
     * Name of the connection.
     */
     'connection_name'?: string;
@@ -49,10 +53,20 @@ export class UpdateDbtConnectionRequest {
     * Name of the project
     */
     'project_name'?: string;
+    /**
+    * Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is Mandatory when Import Type is \'ZIP_FILE\'
+    */
+    'file_content'?: HttpFile;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "dbt_connection_identifier",
+            "baseName": "dbt_connection_identifier",
+            "type": "string",
+            "format": ""
+        },
         {
             "name": "connection_name",
             "baseName": "connection_name",
@@ -106,6 +120,12 @@ export class UpdateDbtConnectionRequest {
             "baseName": "project_name",
             "type": "string",
             "format": ""
+        },
+        {
+            "name": "file_content",
+            "baseName": "file_content",
+            "type": "HttpFile",
+            "format": "binary"
         }    ];
 
     static getAttributeTypeMap() {
@@ -117,5 +137,5 @@ export class UpdateDbtConnectionRequest {
 }
 
 
-export type UpdateDbtConnectionRequestImportTypeEnum = "DBT_CLOUD" ;
+export type UpdateDbtConnectionRequestImportTypeEnum = "DBT_CLOUD" | "ZIP_FILE" ;
 

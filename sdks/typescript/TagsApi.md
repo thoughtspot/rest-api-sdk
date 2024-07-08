@@ -206,7 +206,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
 # **searchTags**
-> Array<Tag> searchTags()
+> Array<Tag> searchTags(searchTagsRequest)
 
   Version: 9.0.0.cl or later   Gets a list of tag objects available on the ThoughtSpot system. To get details of a specific tag object, specify the GUID or name.  Any authenticated user can search for tag objects.      
 
@@ -223,7 +223,7 @@ const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
 const apiInstance = new TagsApi(configuration);
 
 apiInstance.searchTags(
-  // SearchTagsRequest (optional)
+  // SearchTagsRequest
   {
     tag_identifier: "tag_identifier_example",
     name_pattern: "name_pattern_example",
@@ -340,7 +340,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
 # **updateTag**
-> void updateTag()
+> void updateTag(updateTagRequest)
 
   Version: 9.0.0.cl or later   Updates a tag object.  You can modify the `name` and `color` properties of a tag object.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
 
@@ -359,7 +359,7 @@ const apiInstance = new TagsApi(configuration);
 apiInstance.updateTag(
   // string | Name or Id of the tag.
   "tag_identifier_example" , 
-  // UpdateTagRequest (optional)
+  // UpdateTagRequest
   {
     name: "name_example",
     color: "color_example",
