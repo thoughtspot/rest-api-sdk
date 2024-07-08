@@ -176,7 +176,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
 # **searchCustomActions**
-> Array<ResponseCustomAction> searchCustomActions()
+> Array<ResponseCustomAction> searchCustomActions(searchCustomActionsRequest)
 
   Version: 9.6.0.cl or later   Gets custom actions configured on the cluster.  Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
 
@@ -193,7 +193,7 @@ const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
 const apiInstance = new CustomActionApi(configuration);
 
 apiInstance.searchCustomActions(
-  // SearchCustomActionsRequest (optional)
+  // SearchCustomActionsRequest
   {
     custom_action_identifier: "custom_action_identifier_example",
     name_pattern: "name_pattern_example",
@@ -251,7 +251,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
 # **updateCustomAction**
-> void updateCustomAction()
+> void updateCustomAction(updateCustomActionRequest)
 
   Version: 9.6.0.cl or later   Updates a custom action.  Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage Guidelines  The API allows you to modify the following properties:  * Name of the custom action * Action availability to groups * Association to metadata objects * Authentication settings for a URL-based action  For more information, see [Custom actions](https://developers.thoughtspot.com/docs/?pageid=custom-action-intro).      
 
@@ -270,7 +270,7 @@ const apiInstance = new CustomActionApi(configuration);
 apiInstance.updateCustomAction(
   // string | Unique ID or name of the custom action.
   "custom_action_identifier_example" , 
-  // UpdateCustomActionRequest (optional)
+  // UpdateCustomActionRequest
   {
     action_details: {
       CALLBACK: {

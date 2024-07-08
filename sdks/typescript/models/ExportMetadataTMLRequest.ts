@@ -30,6 +30,22 @@ export class ExportMetadataTMLRequest {
     * TML EDOC content format.
     */
     'edoc_format'?: ExportMetadataTMLRequestEdocFormatEnum;
+    /**
+    * Indicates whether to export worksheet TML in DEFAULT or V1 or V2 version.
+    */
+    'export_schema_version'?: ExportMetadataTMLRequestExportSchemaVersionEnum;
+    /**
+    * Indicates whether to export table while exporting connection.
+    */
+    'export_dependent'?: boolean | null;
+    /**
+    * Indicates whether to export connection as dependent while exporting table/worksheet/answer/liveboard. This will only be active when export_associated is true.
+    */
+    'export_connection_as_dependent'?: boolean | null;
+    /**
+    * Indicates whether to export is happening from all orgs context.
+    */
+    'all_orgs_override'?: boolean | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -57,6 +73,30 @@ export class ExportMetadataTMLRequest {
             "baseName": "edoc_format",
             "type": "ExportMetadataTMLRequestEdocFormatEnum",
             "format": ""
+        },
+        {
+            "name": "export_schema_version",
+            "baseName": "export_schema_version",
+            "type": "ExportMetadataTMLRequestExportSchemaVersionEnum",
+            "format": ""
+        },
+        {
+            "name": "export_dependent",
+            "baseName": "export_dependent",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "export_connection_as_dependent",
+            "baseName": "export_connection_as_dependent",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "all_orgs_override",
+            "baseName": "all_orgs_override",
+            "type": "boolean",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
@@ -69,4 +109,5 @@ export class ExportMetadataTMLRequest {
 
 
 export type ExportMetadataTMLRequestEdocFormatEnum = "JSON" | "YAML" ;
+export type ExportMetadataTMLRequestExportSchemaVersionEnum = "DEFAULT" | "V1" | "V2" ;
 

@@ -13,7 +13,7 @@
 import { ModelTableList } from '../models/ModelTableList';
 import { HttpFile } from '../http/http';
 
-export class GenerateTmlRequest {
+export class DbtGenerateTmlRequest {
     /**
     * Unique ID of the DBT connection.
     */
@@ -21,15 +21,19 @@ export class GenerateTmlRequest {
     /**
     * List of Models and their respective Tables
     */
-    'model_tables': Array<ModelTableList>;
+    'model_tables'?: Array<ModelTableList>;
     /**
     * Mention the worksheet tmls to import
     */
-    'import_worksheets': GenerateTmlRequestImportWorksheetsEnum;
+    'import_worksheets': DbtGenerateTmlRequestImportWorksheetsEnum;
     /**
     * List of worksheets is mandatory when import_Worksheets is type SELECTED
     */
     'worksheets'?: Array<string>;
+    /**
+    * Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’
+    */
+    'file_content'?: HttpFile;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -49,7 +53,7 @@ export class GenerateTmlRequest {
         {
             "name": "import_worksheets",
             "baseName": "import_worksheets",
-            "type": "GenerateTmlRequestImportWorksheetsEnum",
+            "type": "DbtGenerateTmlRequestImportWorksheetsEnum",
             "format": ""
         },
         {
@@ -57,10 +61,16 @@ export class GenerateTmlRequest {
             "baseName": "worksheets",
             "type": "Array<string>",
             "format": ""
+        },
+        {
+            "name": "file_content",
+            "baseName": "file_content",
+            "type": "HttpFile",
+            "format": "binary"
         }    ];
 
     static getAttributeTypeMap() {
-        return GenerateTmlRequest.attributeTypeMap;
+        return DbtGenerateTmlRequest.attributeTypeMap;
     }
 
     public constructor() {
@@ -68,5 +78,5 @@ export class GenerateTmlRequest {
 }
 
 
-export type GenerateTmlRequestImportWorksheetsEnum = "ALL" | "NONE" | "SELECTED" ;
+export type DbtGenerateTmlRequestImportWorksheetsEnum = "ALL" | "NONE" | "SELECTED" ;
 

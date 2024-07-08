@@ -12,43 +12,37 @@
 
 import { HttpFile } from '../http/http';
 
-/**
-* MetadataType InputType associated in the Product
-*/
-export class MetadataTypeInput {
+export class DbtGenerateSyncTmlRequest {
     /**
-    * Type of metadata (Optional when given identifier is ID).
+    * Unique ID of the DBT connection.
     */
-    'type'?: MetadataTypeInputTypeEnum;
+    'dbt_connection_identifier': string;
     /**
-    * Unique ID or name of the metadata object.
+    * Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’
     */
-    'identifier': string;
+    'file_content'?: HttpFile;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "type",
-            "baseName": "type",
-            "type": "MetadataTypeInputTypeEnum",
+            "name": "dbt_connection_identifier",
+            "baseName": "dbt_connection_identifier",
+            "type": "string",
             "format": ""
         },
         {
-            "name": "identifier",
-            "baseName": "identifier",
-            "type": "string",
-            "format": ""
+            "name": "file_content",
+            "baseName": "file_content",
+            "type": "HttpFile",
+            "format": "binary"
         }    ];
 
     static getAttributeTypeMap() {
-        return MetadataTypeInput.attributeTypeMap;
+        return DbtGenerateSyncTmlRequest.attributeTypeMap;
     }
 
     public constructor() {
     }
 }
-
-
-export type MetadataTypeInputTypeEnum = "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE" | "LOGICAL_COLUMN" | "CONNECTION" | "TAG" | "USER" | "USER_GROUP" | "LOGICAL_RELATIONSHIP" ;
 

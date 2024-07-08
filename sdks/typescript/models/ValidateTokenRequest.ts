@@ -12,24 +12,21 @@
 
 import { HttpFile } from '../http/http';
 
-export class VisualizationIdentifiersInput {
-    /**
-    * Unique ID or name of the visualization.
-    */
-    'identifier'?: string;
+export class ValidateTokenRequest {
+    'token': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "identifier",
-            "baseName": "identifier",
+            "name": "token",
+            "baseName": "token",
             "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return VisualizationIdentifiersInput.attributeTypeMap;
+        return ValidateTokenRequest.attributeTypeMap;
     }
 
     public constructor() {

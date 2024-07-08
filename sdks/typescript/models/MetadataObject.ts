@@ -47,5 +47,5 @@ export class MetadataObject {
 }
 
 
-export type MetadataObjectTypeEnum = "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE" ;
+export type MetadataObjectTypeEnum = "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE" | "CUSTOM_ACTION" ;
 

@@ -113,8 +113,13 @@ export class SchedulesApiRequestFactory extends BaseAPIRequestFactory {
      *  Search Schedules    Version: 9.4.0.cl or later   Gets a list of scheduled jobs configured for a Liveboard.  To get details of a specific scheduled job, specify the name or GUID of the scheduled job.  Requires at least view access to Liveboards.  **NOTE**: When filtering schedules by parameters other than `metadata`, set `record_size` to `-1` and `record_offset` to `0` for accurate results.      
      * @param searchSchedulesRequest 
      */
-    public async searchSchedules(searchSchedulesRequest?: SearchSchedulesRequest, _options?: Configuration): Promise<RequestContext> {
+    public async searchSchedules(searchSchedulesRequest: SearchSchedulesRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
+
+        // verify required parameter 'searchSchedulesRequest' is not null or undefined
+        if (searchSchedulesRequest === null || searchSchedulesRequest === undefined) {
+            throw new RequiredError("SchedulesApi", "searchSchedules", "searchSchedulesRequest");
+        }
 
 
         // Path Params
@@ -159,7 +164,7 @@ export class SchedulesApiRequestFactory extends BaseAPIRequestFactory {
      * @param scheduleIdentifier Unique ID or name of the schedule.
      * @param updateScheduleRequest 
      */
-    public async updateSchedule(scheduleIdentifier: string, updateScheduleRequest?: UpdateScheduleRequest, _options?: Configuration): Promise<RequestContext> {
+    public async updateSchedule(scheduleIdentifier: string, updateScheduleRequest: UpdateScheduleRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'scheduleIdentifier' is not null or undefined
@@ -167,6 +172,11 @@ export class SchedulesApiRequestFactory extends BaseAPIRequestFactory {
             throw new RequiredError("SchedulesApi", "updateSchedule", "scheduleIdentifier");
         }
 
+
+        // verify required parameter 'updateScheduleRequest' is not null or undefined
+        if (updateScheduleRequest === null || updateScheduleRequest === undefined) {
+            throw new RequiredError("SchedulesApi", "updateSchedule", "updateScheduleRequest");
+        }
 
 
         // Path Params

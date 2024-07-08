@@ -11,6 +11,7 @@
  */
 
 import { JWTUserOptions } from '../models/JWTUserOptions';
+import { UserParameterOptions } from '../models/UserParameterOptions';
 import { HttpFile } from '../http/http';
 
 export class GetObjectAccessTokenRequest {
@@ -21,7 +22,7 @@ export class GetObjectAccessTokenRequest {
     /**
     * GUID of the ThoughtSpot metadata object that the user can access. The bearer will only have access to the object specified in the API request.
     */
-    'object_id': string;
+    'object_id'?: string;
     /**
     * Password of the user account
     */
@@ -55,6 +56,7 @@ export class GetObjectAccessTokenRequest {
     */
     'group_identifiers'?: Array<string>;
     'jwt_user_options'?: JWTUserOptions;
+    'user_parameters'?: UserParameterOptions;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -123,6 +125,12 @@ export class GetObjectAccessTokenRequest {
             "name": "jwt_user_options",
             "baseName": "jwt_user_options",
             "type": "JWTUserOptions",
+            "format": ""
+        },
+        {
+            "name": "user_parameters",
+            "baseName": "user_parameters",
+            "type": "UserParameterOptions",
             "format": ""
         }    ];
 

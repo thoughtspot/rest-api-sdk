@@ -113,8 +113,13 @@ export class OrgsApiRequestFactory extends BaseAPIRequestFactory {
      *   Version: 9.0.0.cl or later   Gets a list of Orgs configured on the ThoughtSpot system. To get details of a specific Org, specify the Org ID or name. You can also pass parameters such as status, visibility, and user identifiers to get a specific list of Orgs.  Requires cluster administration (**Can administer Org**) privileges.      
      * @param searchOrgsRequest 
      */
-    public async searchOrgs(searchOrgsRequest?: SearchOrgsRequest, _options?: Configuration): Promise<RequestContext> {
+    public async searchOrgs(searchOrgsRequest: SearchOrgsRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
+
+        // verify required parameter 'searchOrgsRequest' is not null or undefined
+        if (searchOrgsRequest === null || searchOrgsRequest === undefined) {
+            throw new RequiredError("OrgsApi", "searchOrgs", "searchOrgsRequest");
+        }
 
 
         // Path Params
@@ -159,7 +164,7 @@ export class OrgsApiRequestFactory extends BaseAPIRequestFactory {
      * @param orgIdentifier ID or name of the Org
      * @param updateOrgRequest 
      */
-    public async updateOrg(orgIdentifier: string, updateOrgRequest?: UpdateOrgRequest, _options?: Configuration): Promise<RequestContext> {
+    public async updateOrg(orgIdentifier: string, updateOrgRequest: UpdateOrgRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'orgIdentifier' is not null or undefined
@@ -167,6 +172,11 @@ export class OrgsApiRequestFactory extends BaseAPIRequestFactory {
             throw new RequiredError("OrgsApi", "updateOrg", "orgIdentifier");
         }
 
+
+        // verify required parameter 'updateOrgRequest' is not null or undefined
+        if (updateOrgRequest === null || updateOrgRequest === undefined) {
+            throw new RequiredError("OrgsApi", "updateOrg", "updateOrgRequest");
+        }
 
 
         // Path Params

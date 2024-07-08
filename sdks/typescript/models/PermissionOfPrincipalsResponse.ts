@@ -12,24 +12,21 @@
 
 import { HttpFile } from '../http/http';
 
-export class GenerateSyncTmlRequest {
-    /**
-    * Unique ID of the DBT connection.
-    */
-    'dbt_connection_identifier': string;
+export class PermissionOfPrincipalsResponse {
+    'principal_permission_details'?: any;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "dbt_connection_identifier",
-            "baseName": "dbt_connection_identifier",
-            "type": "string",
+            "name": "principal_permission_details",
+            "baseName": "principal_permission_details",
+            "type": "any",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return GenerateSyncTmlRequest.attributeTypeMap;
+        return PermissionOfPrincipalsResponse.attributeTypeMap;
     }
 
     public constructor() {

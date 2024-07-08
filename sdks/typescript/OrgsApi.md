@@ -134,7 +134,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
 # **searchOrgs**
-> Array<OrgResponse> searchOrgs()
+> Array<OrgResponse> searchOrgs(searchOrgsRequest)
 
   Version: 9.0.0.cl or later   Gets a list of Orgs configured on the ThoughtSpot system. To get details of a specific Org, specify the Org ID or name. You can also pass parameters such as status, visibility, and user identifiers to get a specific list of Orgs.  Requires cluster administration (**Can administer Org**) privileges.      
 
@@ -151,7 +151,7 @@ const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
 const apiInstance = new OrgsApi(configuration);
 
 apiInstance.searchOrgs(
-  // SearchOrgsRequest (optional)
+  // SearchOrgsRequest
   {
     org_identifier: "org_identifier_example",
     description: "description_example",
@@ -202,7 +202,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
 # **updateOrg**
-> void updateOrg()
+> void updateOrg(updateOrgRequest)
 
   Version: 9.0.0.cl or later   Updates an Org object. You can modify Org properties such as name, description, and user associations.  Requires cluster administration (**Can administer Org**) privileges.      
 
@@ -221,7 +221,7 @@ const apiInstance = new OrgsApi(configuration);
 apiInstance.updateOrg(
   // string | ID or name of the Org
   "org_identifier_example" , 
-  // UpdateOrgRequest (optional)
+  // UpdateOrgRequest
   {
     name: "name_example",
     description: "description_example",
