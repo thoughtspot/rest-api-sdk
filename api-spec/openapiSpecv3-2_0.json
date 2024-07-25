@@ -2388,7 +2388,7 @@
     "/api/rest/2.0/logs/fetch": {
       "post": {
         "operationId": "fetchLogs",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nFetches security audit logs.  \n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n#### Usage guidelines\n\nBy default, the API retrieves logs for the last 24 hours. You can set a custom duration in EPOCH time. Make sure the log duration specified in your API request doesn’t exceed 24 hours. If you must fetch logs for a longer time range, modify the duration and make multiple sequential API requests.\n\nUpon successful execution, the API returns logs with the following information:\n* timestamp of the event\n* event ID\n* event type\n* name and GUID of the user\n* IP address of ThoughtSpot instance\n\nFor more information about security events returned in the API response, see [Security events](https://developers.thoughtspot.com/docs/logs-api#_security_events).\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nFetches security audit logs.  \n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.\n\n#### Usage guidelines\n\nBy default, the API retrieves logs for the last 24 hours. You can set a custom duration in EPOCH time. Make sure the log duration specified in your API request doesn’t exceed 24 hours. If you must fetch logs for a longer time range, modify the duration and make multiple sequential API requests.\n\nUpon successful execution, the API returns logs with the following information:\n* timestamp of the event\n* event ID\n* event type\n* name and GUID of the user\n* IP address of ThoughtSpot instance\n\nFor more information about security events returned in the API response, see [Security events](https://developers.thoughtspot.com/docs/audit-logs#_security_events).\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Log",
           "9.0.0.cl"
@@ -3886,12 +3886,12 @@
                     "type": "object"
                   },
                   "trigger_welcome_email": {
-                    "description": "Flag to indicate whether welcome email should be sent to user",
+                    "description": "Flag to indicate whether welcome email should be sent to user. This parameter is applied only on clusters on which IAM is disabled.",
                     "type": "boolean",
                     "nullable": true
                   },
                   "trigger_activation_email": {
-                    "description": "Flag to indicate whether activation email should be sent to user",
+                    "description": "Flag to indicate whether activation email should be sent to user.",
                     "type": "boolean",
                     "nullable": true
                   }
@@ -5102,7 +5102,7 @@
     "/api/rest/2.0/tags/create": {
       "post": {
         "operationId": "createTag",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nCreates a tag object.\n\nTags are labels that identify a metadata object. For example, you can create a tag to designate subject areas, such as sales, HR, marketing, and finance.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nCreates a tag object.\n\nTags are labels that identify a metadata object. For example, you can create a tag to designate subject areas, such as sales, HR, marketing, and finance.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Tags",
           "9.0.0.cl"
@@ -5206,7 +5206,7 @@
     "/api/rest/2.0/tags/{tag_identifier}/update": {
       "post": {
         "operationId": "updateTag",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nUpdates a tag object.\n\nYou can modify the `name` and `color` properties of a tag object.  \n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nUpdates a tag object.\n\nYou can modify the `name` and `color` properties of a tag object.  \n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Tags",
           "9.0.0.cl"
@@ -5292,7 +5292,7 @@
     "/api/rest/2.0/tags/{tag_identifier}/delete": {
       "post": {
         "operationId": "deleteTag",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nDeletes a tag object from the ThoughtSpot system\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nDeletes a tag object from the ThoughtSpot system\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Tags",
           "9.0.0.cl"
