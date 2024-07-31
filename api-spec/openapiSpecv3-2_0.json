@@ -2047,7 +2047,7 @@
                     "type": "string"
                   },
                   "data_format": {
-                    "description": "JSON output format. By default, the API returns full data in the JSON.",
+                    "description": "JSON output in compact or full format. The FULL option is available in 9.12.5.cl or later.",
                     "default": "COMPACT",
                     "type": "string",
                     "enum": [
@@ -2174,7 +2174,7 @@
                     "type": "string"
                   },
                   "data_format": {
-                    "description": "JSON output format. By default, the API returns full data in the JSON.",
+                    "description": "JSON output in compact or full format. The FULL option is available in 9.12.5.cl or later.",
                     "default": "COMPACT",
                     "type": "string",
                     "enum": [
@@ -2289,7 +2289,7 @@
                     "type": "string"
                   },
                   "data_format": {
-                    "description": "JSON output format. By default, the API returns full data in the JSON.",
+                    "description": "JSON output in compact or full format. The FULL option is available in 9.12.5.cl or later.",
                     "default": "COMPACT",
                     "type": "string",
                     "enum": [
