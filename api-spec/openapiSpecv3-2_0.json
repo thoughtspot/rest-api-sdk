@@ -2047,7 +2047,7 @@
                     "type": "string"
                   },
                   "data_format": {
-                    "description": "JSON output format. By default, the API returns full data in the JSON.",
+                    "description": "JSON output in compact or full format. The FULL option is available in 9.12.5.cl or later.",
                     "default": "COMPACT",
                     "type": "string",
                     "enum": [
@@ -2174,7 +2174,7 @@
                     "type": "string"
                   },
                   "data_format": {
-                    "description": "JSON output format. By default, the API returns full data in the JSON.",
+                    "description": "JSON output in compact or full format. The FULL option is available in 9.12.5.cl or later.",
                     "default": "COMPACT",
                     "type": "string",
                     "enum": [
@@ -2289,7 +2289,7 @@
                     "type": "string"
                   },
                   "data_format": {
-                    "description": "JSON output format. By default, the API returns full data in the JSON.",
+                    "description": "JSON output in compact or full format. The FULL option is available in 9.12.5.cl or later.",
                     "default": "COMPACT",
                     "type": "string",
                     "enum": [
@@ -2388,7 +2388,7 @@
     "/api/rest/2.0/logs/fetch": {
       "post": {
         "operationId": "fetchLogs",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nFetches security audit logs.  \n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n#### Usage guidelines\n\nBy default, the API retrieves logs for the last 24 hours. You can set a custom duration in EPOCH time. Make sure the log duration specified in your API request doesn’t exceed 24 hours. If you must fetch logs for a longer time range, modify the duration and make multiple sequential API requests.\n\nUpon successful execution, the API returns logs with the following information:\n* timestamp of the event\n* event ID\n* event type\n* name and GUID of the user\n* IP address of ThoughtSpot instance\n\nFor more information about security events returned in the API response, see [Security events](https://developers.thoughtspot.com/docs/logs-api#_security_events).\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nFetches security audit logs.  \n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.\n\n#### Usage guidelines\n\nBy default, the API retrieves logs for the last 24 hours. You can set a custom duration in EPOCH time. Make sure the log duration specified in your API request doesn’t exceed 24 hours. If you must fetch logs for a longer time range, modify the duration and make multiple sequential API requests.\n\nUpon successful execution, the API returns logs with the following information:\n* timestamp of the event\n* event ID\n* event type\n* name and GUID of the user\n* IP address of ThoughtSpot instance\n\nFor more information about security events returned in the API response, see [Security events](https://developers.thoughtspot.com/docs/audit-logs#_security_events).\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Log",
           "9.0.0.cl"
@@ -3886,12 +3886,12 @@
                     "type": "object"
                   },
                   "trigger_welcome_email": {
-                    "description": "Flag to indicate whether welcome email should be sent to user",
+                    "description": "Flag to indicate whether welcome email should be sent to user. This parameter is applied only on clusters on which IAM is disabled.",
                     "type": "boolean",
                     "nullable": true
                   },
                   "trigger_activation_email": {
-                    "description": "Flag to indicate whether activation email should be sent to user",
+                    "description": "Flag to indicate whether activation email should be sent to user.",
                     "type": "boolean",
                     "nullable": true
                   }
@@ -5102,7 +5102,7 @@
     "/api/rest/2.0/tags/create": {
       "post": {
         "operationId": "createTag",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nCreates a tag object.\n\nTags are labels that identify a metadata object. For example, you can create a tag to designate subject areas, such as sales, HR, marketing, and finance.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nCreates a tag object.\n\nTags are labels that identify a metadata object. For example, you can create a tag to designate subject areas, such as sales, HR, marketing, and finance.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Tags",
           "9.0.0.cl"
@@ -5206,7 +5206,7 @@
     "/api/rest/2.0/tags/{tag_identifier}/update": {
       "post": {
         "operationId": "updateTag",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nUpdates a tag object.\n\nYou can modify the `name` and `color` properties of a tag object.  \n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nUpdates a tag object.\n\nYou can modify the `name` and `color` properties of a tag object.  \n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Tags",
           "9.0.0.cl"
@@ -5292,7 +5292,7 @@
     "/api/rest/2.0/tags/{tag_identifier}/delete": {
       "post": {
         "operationId": "deleteTag",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nDeletes a tag object from the ThoughtSpot system\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nDeletes a tag object from the ThoughtSpot system\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Tags",
           "9.0.0.cl"
@@ -6881,7 +6881,7 @@
     "/api/rest/2.0/vcs/git/branches/commit": {
       "post": {
         "operationId": "commitBranch",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nCommits TML files of metadata objects to the Git branch configured on your instance.\n\nRequires `DATAMANAGEMENT` privilege.\n\nBefore using this endpoint to push your commits:\n\n* Enable Git integration on your instance.\n* Make sure the Git repository and branch details are configured on your instance.\n\nFor more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nCommits TML files of metadata objects to the Git branch configured on your instance.\n\nRequires at least edit access to objects used in the commit operation.\n\nBefore using this endpoint to push your commits:\n\n* Enable Git integration on your instance.\n* Make sure the Git repository and branch details are configured on your instance.\n\nFor more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Version Control",
           "9.2.0.cl"
@@ -6981,7 +6981,7 @@
     "/api/rest/2.0/vcs/git/commits/{commit_id}/revert": {
       "post": {
         "operationId": "revertCommit",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nReverts TML objects to a previous commit specified in the API request.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) privilege.\n\nIn the API request, specify the `commit_id`. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.\n\nBy default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nReverts TML objects to a previous commit specified in the API request.\n\nRequires at least edit access to objects.\n\nIn the API request, specify the `commit_id`. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.\n\nBy default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.\n\nFor more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Version Control",
           "9.2.0.cl"
@@ -7176,7 +7176,7 @@
     "/api/rest/2.0/vcs/git/commits/deploy": {
       "post": {
         "operationId": "deployCommit",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nAllows you to deploy a commit and publish TML content to your ThoughtSpot instance.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) privilege.\n\nThe API deploys the head of the branch unless a `commit_id` is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nAllows you to deploy a commit and publish TML content to your ThoughtSpot instance.\n\nRequires at least edit access to the objects used in the deploy operation.\n\nThe API deploys the head of the branch unless a `commit_id` is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.\n\nFor more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Version Control",
           "9.2.0.cl"
