@@ -298,7 +298,8 @@
                         "THIRDPARTY_ANALYSIS",
                         "ALLOW_NON_EMBED_FULL_APP_ACCESS",
                         "CAN_ACCESS_ANALYST_STUDIO",
-                        "CAN_MANAGE_ANALYST_STUDIO"
+                        "CAN_MANAGE_ANALYST_STUDIO",
+                        "PREVIEW_DOCUMENT_SEARCH"
                       ]
                     }
                   },
@@ -1011,7 +1012,8 @@
                         "THIRDPARTY_ANALYSIS",
                         "ALLOW_NON_EMBED_FULL_APP_ACCESS",
                         "CAN_ACCESS_ANALYST_STUDIO",
-                        "CAN_MANAGE_ANALYST_STUDIO"
+                        "CAN_MANAGE_ANALYST_STUDIO",
+                        "PREVIEW_DOCUMENT_SEARCH"
                       ]
                     }
                   },
@@ -2957,7 +2959,8 @@
                         "CAN_CREATE_CATALOG",
                         "ALLOW_NON_EMBED_FULL_APP_ACCESS",
                         "CAN_ACCESS_ANALYST_STUDIO",
-                        "CAN_MANAGE_ANALYST_STUDIO"
+                        "CAN_MANAGE_ANALYST_STUDIO",
+                        "PREVIEW_DOCUMENT_SEARCH"
                       ]
                     }
                   },
@@ -5605,7 +5608,8 @@
                         "THIRDPARTY_ANALYSIS",
                         "ALLOW_NON_EMBED_FULL_APP_ACCESS",
                         "CAN_ACCESS_ANALYST_STUDIO",
-                        "CAN_MANAGE_ANALYST_STUDIO"
+                        "CAN_MANAGE_ANALYST_STUDIO",
+                        "PREVIEW_DOCUMENT_SEARCH"
                       ]
                     }
                   },
@@ -5776,7 +5780,8 @@
                         "THIRDPARTY_ANALYSIS",
                         "ALLOW_NON_EMBED_FULL_APP_ACCESS",
                         "CAN_ACCESS_ANALYST_STUDIO",
-                        "CAN_MANAGE_ANALYST_STUDIO"
+                        "CAN_MANAGE_ANALYST_STUDIO",
+                        "PREVIEW_DOCUMENT_SEARCH"
                       ]
                     }
                   },
@@ -8092,7 +8097,8 @@
                         "CAN_CREATE_CATALOG",
                         "ALLOW_NON_EMBED_FULL_APP_ACCESS",
                         "CAN_ACCESS_ANALYST_STUDIO",
-                        "CAN_MANAGE_ANALYST_STUDIO"
+                        "CAN_MANAGE_ANALYST_STUDIO",
+                        "PREVIEW_DOCUMENT_SEARCH"
                       ]
                     }
                   }
@@ -8218,7 +8224,8 @@
                         "CAN_CREATE_CATALOG",
                         "ALLOW_NON_EMBED_FULL_APP_ACCESS",
                         "CAN_ACCESS_ANALYST_STUDIO",
-                        "CAN_MANAGE_ANALYST_STUDIO"
+                        "CAN_MANAGE_ANALYST_STUDIO",
+                        "PREVIEW_DOCUMENT_SEARCH"
                       ]
                     }
                   }
@@ -12931,7 +12938,8 @@
                 "CAN_CREATE_CATALOG",
                 "ALLOW_NON_EMBED_FULL_APP_ACCESS",
                 "CAN_ACCESS_ANALYST_STUDIO",
-                "CAN_MANAGE_ANALYST_STUDIO"
+                "CAN_MANAGE_ANALYST_STUDIO",
+                "PREVIEW_DOCUMENT_SEARCH"
               ]
             },
             "description": "Privileges granted to the role."
@@ -13884,7 +13892,8 @@
                 "THIRDPARTY_ANALYSIS",
                 "ALLOW_NON_EMBED_FULL_APP_ACCESS",
                 "CAN_ACCESS_ANALYST_STUDIO",
-                "CAN_MANAGE_ANALYST_STUDIO"
+                "CAN_MANAGE_ANALYST_STUDIO",
+                "PREVIEW_DOCUMENT_SEARCH"
               ]
             },
             "description": "Privileges that will be assigned to the group.",
@@ -14425,7 +14434,8 @@
                 "CAN_CREATE_CATALOG",
                 "ALLOW_NON_EMBED_FULL_APP_ACCESS",
                 "CAN_ACCESS_ANALYST_STUDIO",
-                "CAN_MANAGE_ANALYST_STUDIO"
+                "CAN_MANAGE_ANALYST_STUDIO",
+                "PREVIEW_DOCUMENT_SEARCH"
               ]
             },
             "description": "Privileges granted to the role."
