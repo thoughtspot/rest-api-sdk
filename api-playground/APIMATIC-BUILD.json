@@ -3,7 +3,7 @@
   "buildFileVersion": "1.0",
   "generatePortal": {
      "useHostedPortalScript": false,
-    "filterByRole": ["9.0.0.cl", "9.2.0.cl", "9.4.0.cl", "9.5.0.cl", "9.6.0.cl", "9.7.0.cl", "9.9.0.cl","9.12.0.cl"],
+    "filterByRole": ["9.0.0.cl", "9.2.0.cl", "9.4.0.cl", "9.5.0.cl", "9.6.0.cl", "9.7.0.cl", "9.9.0.cl","9.12.0.cl","10.1.0.cl"],
     "pageTitle": "ThoughtSpot Public Rest APIs",
     "languageConfig": {
       "http": {}
