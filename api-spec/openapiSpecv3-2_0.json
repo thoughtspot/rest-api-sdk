@@ -38,6 +38,14 @@
       "description": "Roles for version 9.2.0.cl"
     },
     {
+      "name": "10.1.0.cl",
+      "id": "10.1.0.cl",
+      "tags": [
+        "10.1.0.cl"
+      ],
+      "description": "Roles for version 10.1.0.cl"
+    },
+    {
       "name": "10.0.0.cl",
       "id": "10.0.0.cl",
       "tags": [
@@ -287,7 +295,8 @@
                         "CAN_CREATE_OR_EDIT_CONNECTIONS",
                         "CAN_MANAGE_WORKSHEET_VIEWS_TABLES",
                         "CAN_MANAGE_VERSION_CONTROL",
-                        "THIRDPARTY_ANALYSIS"
+                        "THIRDPARTY_ANALYSIS",
+                        "BLOCK_NON_EMBED_FULL_APP_ACCESS"
                       ]
                     }
                   },
@@ -997,7 +1006,8 @@
                         "CAN_CREATE_OR_EDIT_CONNECTIONS",
                         "CAN_MANAGE_WORKSHEET_VIEWS_TABLES",
                         "CAN_MANAGE_VERSION_CONTROL",
-                        "THIRDPARTY_ANALYSIS"
+                        "THIRDPARTY_ANALYSIS",
+                        "BLOCK_NON_EMBED_FULL_APP_ACCESS"
                       ]
                     }
                   },
@@ -2388,7 +2398,7 @@
     "/api/rest/2.0/logs/fetch": {
       "post": {
         "operationId": "fetchLogs",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nFetches security audit logs.  \n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n#### Usage guidelines\n\nBy default, the API retrieves logs for the last 24 hours. You can set a custom duration in EPOCH time. Make sure the log duration specified in your API request doesn’t exceed 24 hours. If you must fetch logs for a longer time range, modify the duration and make multiple sequential API requests.\n\nUpon successful execution, the API returns logs with the following information:\n* timestamp of the event\n* event ID\n* event type\n* name and GUID of the user\n* IP address of ThoughtSpot instance\n\nFor more information about security events returned in the API response, see [Security events](https://developers.thoughtspot.com/docs/logs-api#_security_events).\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nFetches security audit logs.  \n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n#### Usage guidelines\n\nBy default, the API retrieves logs for the last 24 hours. You can set a custom duration in EPOCH time. Make sure the log duration specified in your API request doesn’t exceed 24 hours. If you must fetch logs for a longer time range, modify the duration and make multiple sequential API requests.\n\nUpon successful execution, the API returns logs with the following information:\n* timestamp of the event\n* event ID\n* event type\n* name and GUID of the user\n* IP address of ThoughtSpot instance\n\nFor more information about security events returned in the API response, see [Security events](https://developers.thoughtspot.com/docs/audit-logs#_security_events).\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Log",
           "9.0.0.cl"
@@ -2940,7 +2950,8 @@
                         "CAN_MANAGE_VERSION_CONTROL",
                         "THIRDPARTY_ANALYSIS",
                         "CONTROL_TRUSTED_AUTH",
-                        "CAN_CREATE_CATALOG"
+                        "CAN_CREATE_CATALOG",
+                        "BLOCK_NON_EMBED_FULL_APP_ACCESS"
                       ]
                     }
                   },
@@ -3299,8 +3310,7 @@
                     "format": "int32"
                   },
                   "org_id": {
-                    "description": "ID of the Org context to log in to. If Org ID is not specified, the user will be logged in to the Org context of their previous login session.",
-                    "default": 0,
+                    "description": "ID of the Org context to log in to. If the Org ID is not specified and secret key is provided then user will be logged into the org corresponding to the secret key, and if secret key is not provided then user will be logged in to the Org context of their previous login session.",
                     "type": "integer",
                     "format": "int32"
                   },
@@ -3434,8 +3444,7 @@
                     "format": "int32"
                   },
                   "org_id": {
-                    "description": "ID of the Org context to log in to. If the Org ID is not specified, the user will be logged in to the Org context of their previous login session.",
-                    "default": 0,
+                    "description": "ID of the Org context to log in to. If the Org ID is not specified and secret key is provided then user will be logged into the org corresponding to the secret key, and if secret key is not provided then user will be logged in to the Org context of their previous login session.",
                     "type": "integer",
                     "format": "int32"
                   },
@@ -5102,7 +5111,7 @@
     "/api/rest/2.0/tags/create": {
       "post": {
         "operationId": "createTag",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nCreates a tag object.\n\nTags are labels that identify a metadata object. For example, you can create a tag to designate subject areas, such as sales, HR, marketing, and finance.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nCreates a tag object.\n\nTags are labels that identify a metadata object. For example, you can create a tag to designate subject areas, such as sales, HR, marketing, and finance.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Tags",
           "9.0.0.cl"
@@ -5206,7 +5215,7 @@
     "/api/rest/2.0/tags/{tag_identifier}/update": {
       "post": {
         "operationId": "updateTag",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nUpdates a tag object.\n\nYou can modify the `name` and `color` properties of a tag object.  \n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nUpdates a tag object.\n\nYou can modify the `name` and `color` properties of a tag object.  \n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Tags",
           "9.0.0.cl"
@@ -5292,7 +5301,7 @@
     "/api/rest/2.0/tags/{tag_identifier}/delete": {
       "post": {
         "operationId": "deleteTag",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nDeletes a tag object from the ThoughtSpot system\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nDeletes a tag object from the ThoughtSpot system\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Tags",
           "9.0.0.cl"
@@ -5587,7 +5596,8 @@
                         "LIVEBOARD_VERIFIER",
                         "PREVIEW_THOUGHTSPOT_SAGE",
                         "CAN_MANAGE_VERSION_CONTROL",
-                        "THIRDPARTY_ANALYSIS"
+                        "THIRDPARTY_ANALYSIS",
+                        "BLOCK_NON_EMBED_FULL_APP_ACCESS"
                       ]
                     }
                   },
@@ -5755,7 +5765,8 @@
                         "LIVEBOARD_VERIFIER",
                         "PREVIEW_THOUGHTSPOT_SAGE",
                         "CAN_MANAGE_VERSION_CONTROL",
-                        "THIRDPARTY_ANALYSIS"
+                        "THIRDPARTY_ANALYSIS",
+                        "BLOCK_NON_EMBED_FULL_APP_ACCESS"
                       ]
                     }
                   },
@@ -6277,6 +6288,126 @@
         }
       }
     },
+    "/api/rest/2.0/metadata/tml/export/batch": {
+      "post": {
+        "operationId": "exportMetadataTMLBatched",
+        "description": " <span class=\"since-beta-tag\">Version: 10.1.0.cl or later</span>",
+        "tags": [
+          "Metadata",
+          "10.1.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "metadata_type": {
+                    "description": "Type of metadata object to export, can be one of USER | ROLE | USER_GROUP",
+                    "type": "string",
+                    "enum": [
+                      "USER",
+                      "USER_GROUP",
+                      "ROLE"
+                    ]
+                  },
+                  "batch_offset": {
+                    "description": "Indicates the position within the complete set from where the API should begin returning objects.",
+                    "default": 0,
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "batch_size": {
+                    "description": "Determines the number of objects or items to be retrieved in a single request.",
+                    "default": 20,
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "edoc_format": {
+                    "description": "TML EDOC content format.",
+                    "default": "JSON",
+                    "type": "string",
+                    "enum": [
+                      "JSON",
+                      "YAML"
+                    ]
+                  },
+                  "export_dependent": {
+                    "description": "Indicates whether to export dependent metadata objects of specified metadata objects.",
+                    "default": false,
+                    "type": "boolean",
+                    "nullable": true
+                  },
+                  "all_orgs_override": {
+                    "description": "Indicates whether to export is happening from all orgs context.",
+                    "default": false,
+                    "type": "boolean",
+                    "nullable": true
+                  }
+                },
+                "required": [
+                  "metadata_type"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Export TMLs of specified metadata objects is successful.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/metadata/delete": {
       "post": {
         "operationId": "deleteMetadata",
@@ -6463,7 +6594,7 @@
                 "type": "object",
                 "properties": {
                   "metadata_type": {
-                    "description": "Type of metadata.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.",
+                    "description": "Type of metadata. Required if identifier in metadata_identifies is a name\".\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.",
                     "type": "string",
                     "enum": [
                       "LIVEBOARD",
@@ -6472,10 +6603,17 @@
                     ]
                   },
                   "metadata_identifiers": {
-                    "description": "Unique ID or name of metadata objects. Note: All the identifiers should belong to same metadata_type",
+                    "description": "Unique ID or name of metadata objects. Note: All the names should belong to same metadata_type",
                     "type": "array",
                     "items": {
                       "type": "string"
+                    }
+                  },
+                  "metadata": {
+                    "description": "Metadata details for sharing objects.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/ShareMetadataTypeInput"
                     }
                   },
                   "permissions": {
@@ -6486,7 +6624,7 @@
                     }
                   },
                   "visualization_identifiers": {
-                    "description": "Options to specify details of Liveboard.",
+                    "description": "Options to specify details of Liveboard. First Liveboard encountered in payload is considered to be the corresponding Liveboard.",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -6523,7 +6661,6 @@
                   }
                 },
                 "required": [
-                  "metadata_identifiers",
                   "permissions",
                   "emails",
                   "message"
@@ -7942,7 +8079,8 @@
                         "CAN_MANAGE_WORKSHEET_VIEWS_TABLES",
                         "CAN_MANAGE_VERSION_CONTROL",
                         "THIRDPARTY_ANALYSIS",
-                        "CAN_CREATE_CATALOG"
+                        "CAN_CREATE_CATALOG",
+                        "BLOCK_NON_EMBED_FULL_APP_ACCESS"
                       ]
                     }
                   }
@@ -8065,7 +8203,8 @@
                         "CAN_MANAGE_WORKSHEET_VIEWS_TABLES",
                         "CAN_MANAGE_VERSION_CONTROL",
                         "THIRDPARTY_ANALYSIS",
-                        "CAN_CREATE_CATALOG"
+                        "CAN_CREATE_CATALOG",
+                        "BLOCK_NON_EMBED_FULL_APP_ACCESS"
                       ]
                     }
                   }
@@ -12590,7 +12729,8 @@
                 "CAN_MANAGE_VERSION_CONTROL",
                 "THIRDPARTY_ANALYSIS",
                 "CONTROL_TRUSTED_AUTH",
-                "CAN_CREATE_CATALOG"
+                "CAN_CREATE_CATALOG",
+                "BLOCK_NON_EMBED_FULL_APP_ACCESS"
               ]
             },
             "description": "Privileges granted to the role."
@@ -12925,7 +13065,7 @@
             }
           }
         },
-        "description": "*Deprecated from 9.10.5.cl.* \n \nJWT user options to create a JWT token given the payload. Use user_parameters for Attribute-Based Access Control (ABAC). \nFor more information, see https://developers.thoughtspot.com/docs/abac-user-parameters."
+        "description": "JWT user options to create a JWT token given the payload."
       },
       "JWT_Parameter": {
         "type": "object",
@@ -12994,7 +13134,7 @@
             "description": " <span class=\"since-beta-tag\">Version: 9.12.0.cl or later</span>"
           }
         },
-        "description": "Define attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, \nsee https://developers.thoughtspot.com/docs/abac-user-parameters."
+        "description": "User properties runtime_filters,runtime_sorts,parameters applicable to LOGICAL_TABLE(Worksheet)"
       },
       "User_Object": {
         "type": "object",
@@ -13205,7 +13345,7 @@
             }
           }
         },
-        "description": "*Deprecated from 9.10.5.cl.*\nJWT user options to create a JWT token given the payload. Use user_parameters for Attribute-Based Access Control (ABAC). \nFor more information, see https://developers.thoughtspot.com/docs/abac-user-parameters."
+        "description": "JWT user options to create a JWT token given the payload."
       },
       "TokenValidationResponse": {
         "type": "object",
@@ -13460,7 +13600,8 @@
                 "LIVEBOARD_VERIFIER",
                 "PREVIEW_THOUGHTSPOT_SAGE",
                 "CAN_MANAGE_VERSION_CONTROL",
-                "THIRDPARTY_ANALYSIS"
+                "THIRDPARTY_ANALYSIS",
+                "BLOCK_NON_EMBED_FULL_APP_ACCESS"
               ]
             },
             "description": "Privileges that will be assigned to the group."
@@ -13541,7 +13682,10 @@
               "ANSWER",
               "LOGICAL_TABLE",
               "CONNECTION",
-              "CUSTOM_ACTION"
+              "CUSTOM_ACTION",
+              "USER",
+              "USER_GROUP",
+              "ROLE"
             ],
             "description": "Type of metadata (Optional when given identifier is ID)."
           },
@@ -13597,6 +13741,27 @@
           }
         },
         "description": "MetadataType InputType used in Author API's"
+      },
+      "ShareMetadataTypeInput": {
+        "type": "object",
+        "required": [
+          "identifier"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "LIVEBOARD",
+              "ANSWER",
+              "LOGICAL_TABLE"
+            ],
+            "description": "Type of metadata (Optional when given identifier is ID)."
+          },
+          "identifier": {
+            "type": "string",
+            "description": "Unique ID or name of the metadata object."
+          }
+        }
       },
       "SharePermissionsInput": {
         "type": "object",
@@ -13938,7 +14103,8 @@
                 "CAN_MANAGE_WORKSHEET_VIEWS_TABLES",
                 "CAN_MANAGE_VERSION_CONTROL",
                 "THIRDPARTY_ANALYSIS",
-                "CAN_CREATE_CATALOG"
+                "CAN_CREATE_CATALOG",
+                "BLOCK_NON_EMBED_FULL_APP_ACCESS"
               ]
             },
             "description": "Privileges granted to the role."
