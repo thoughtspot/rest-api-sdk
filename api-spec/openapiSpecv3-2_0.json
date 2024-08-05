@@ -296,10 +296,7 @@
                         "CAN_MANAGE_WORKSHEET_VIEWS_TABLES",
                         "CAN_MANAGE_VERSION_CONTROL",
                         "THIRDPARTY_ANALYSIS",
-                        "ALLOW_NON_EMBED_FULL_APP_ACCESS",
-                        "CAN_ACCESS_ANALYST_STUDIO",
-                        "CAN_MANAGE_ANALYST_STUDIO",
-                        "PREVIEW_DOCUMENT_SEARCH"
+                        "BLOCK_NON_EMBED_FULL_APP_ACCESS"
                       ]
                     }
                   },
@@ -1010,10 +1007,7 @@
                         "CAN_MANAGE_WORKSHEET_VIEWS_TABLES",
                         "CAN_MANAGE_VERSION_CONTROL",
                         "THIRDPARTY_ANALYSIS",
-                        "ALLOW_NON_EMBED_FULL_APP_ACCESS",
-                        "CAN_ACCESS_ANALYST_STUDIO",
-                        "CAN_MANAGE_ANALYST_STUDIO",
-                        "PREVIEW_DOCUMENT_SEARCH"
+                        "BLOCK_NON_EMBED_FULL_APP_ACCESS"
                       ]
                     }
                   },
@@ -2404,7 +2398,7 @@
     "/api/rest/2.0/logs/fetch": {
       "post": {
         "operationId": "fetchLogs",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nFetches security audit logs.  \n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n#### Usage guidelines\n\nBy default, the API retrieves logs for the last 24 hours. You can set a custom duration in EPOCH time. Make sure the log duration specified in your API request doesn’t exceed 24 hours. If you must fetch logs for a longer time range, modify the duration and make multiple sequential API requests.\n\nUpon successful execution, the API returns logs with the following information:\n* timestamp of the event\n* event ID\n* event type\n* name and GUID of the user\n* IP address of ThoughtSpot instance\n\nFor more information about security events returned in the API response, see [Security events](https://developers.thoughtspot.com/docs/audit-logs#_security_events).\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nFetches security audit logs.  \n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n#### Usage guidelines\n\nBy default, the API retrieves logs for the last 24 hours. You can set a custom duration in EPOCH time. Make sure the log duration specified in your API request doesn’t exceed 24 hours. If you must fetch logs for a longer time range, modify the duration and make multiple sequential API requests.\n\nUpon successful execution, the API returns logs with the following information:\n* timestamp of the event\n* event ID\n* event type\n* name and GUID of the user\n* IP address of ThoughtSpot instance\n\nFor more information about security events returned in the API response, see [Security events](https://developers.thoughtspot.com/docs/logs-api#_security_events).\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Log",
           "9.0.0.cl"
@@ -2957,10 +2951,7 @@
                         "THIRDPARTY_ANALYSIS",
                         "CONTROL_TRUSTED_AUTH",
                         "CAN_CREATE_CATALOG",
-                        "ALLOW_NON_EMBED_FULL_APP_ACCESS",
-                        "CAN_ACCESS_ANALYST_STUDIO",
-                        "CAN_MANAGE_ANALYST_STUDIO",
-                        "PREVIEW_DOCUMENT_SEARCH"
+                        "BLOCK_NON_EMBED_FULL_APP_ACCESS"
                       ]
                     }
                   },
@@ -3904,12 +3895,12 @@
                     "type": "object"
                   },
                   "trigger_welcome_email": {
-                    "description": "Flag to indicate whether welcome email should be sent to user. This parameter is applied only on clusters on which IAM is disabled.",
+                    "description": "Flag to indicate whether welcome email should be sent to user",
                     "type": "boolean",
                     "nullable": true
                   },
                   "trigger_activation_email": {
-                    "description": "Flag to indicate whether activation email should be sent to user.",
+                    "description": "Flag to indicate whether activation email should be sent to user",
                     "type": "boolean",
                     "nullable": true
                   }
@@ -5120,7 +5111,7 @@
     "/api/rest/2.0/tags/create": {
       "post": {
         "operationId": "createTag",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nCreates a tag object.\n\nTags are labels that identify a metadata object. For example, you can create a tag to designate subject areas, such as sales, HR, marketing, and finance.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nCreates a tag object.\n\nTags are labels that identify a metadata object. For example, you can create a tag to designate subject areas, such as sales, HR, marketing, and finance.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Tags",
           "9.0.0.cl"
@@ -5224,7 +5215,7 @@
     "/api/rest/2.0/tags/{tag_identifier}/update": {
       "post": {
         "operationId": "updateTag",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nUpdates a tag object.\n\nYou can modify the `name` and `color` properties of a tag object.  \n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nUpdates a tag object.\n\nYou can modify the `name` and `color` properties of a tag object.  \n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Tags",
           "9.0.0.cl"
@@ -5310,7 +5301,7 @@
     "/api/rest/2.0/tags/{tag_identifier}/delete": {
       "post": {
         "operationId": "deleteTag",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nDeletes a tag object from the ThoughtSpot system\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nDeletes a tag object from the ThoughtSpot system\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Tags",
           "9.0.0.cl"
@@ -5606,10 +5597,7 @@
                         "PREVIEW_THOUGHTSPOT_SAGE",
                         "CAN_MANAGE_VERSION_CONTROL",
                         "THIRDPARTY_ANALYSIS",
-                        "ALLOW_NON_EMBED_FULL_APP_ACCESS",
-                        "CAN_ACCESS_ANALYST_STUDIO",
-                        "CAN_MANAGE_ANALYST_STUDIO",
-                        "PREVIEW_DOCUMENT_SEARCH"
+                        "BLOCK_NON_EMBED_FULL_APP_ACCESS"
                       ]
                     }
                   },
@@ -5778,10 +5766,7 @@
                         "PREVIEW_THOUGHTSPOT_SAGE",
                         "CAN_MANAGE_VERSION_CONTROL",
                         "THIRDPARTY_ANALYSIS",
-                        "ALLOW_NON_EMBED_FULL_APP_ACCESS",
-                        "CAN_ACCESS_ANALYST_STUDIO",
-                        "CAN_MANAGE_ANALYST_STUDIO",
-                        "PREVIEW_DOCUMENT_SEARCH"
+                        "BLOCK_NON_EMBED_FULL_APP_ACCESS"
                       ]
                     }
                   },
@@ -8095,10 +8080,7 @@
                         "CAN_MANAGE_VERSION_CONTROL",
                         "THIRDPARTY_ANALYSIS",
                         "CAN_CREATE_CATALOG",
-                        "ALLOW_NON_EMBED_FULL_APP_ACCESS",
-                        "CAN_ACCESS_ANALYST_STUDIO",
-                        "CAN_MANAGE_ANALYST_STUDIO",
-                        "PREVIEW_DOCUMENT_SEARCH"
+                        "BLOCK_NON_EMBED_FULL_APP_ACCESS"
                       ]
                     }
                   }
@@ -8222,10 +8204,7 @@
                         "CAN_MANAGE_VERSION_CONTROL",
                         "THIRDPARTY_ANALYSIS",
                         "CAN_CREATE_CATALOG",
-                        "ALLOW_NON_EMBED_FULL_APP_ACCESS",
-                        "CAN_ACCESS_ANALYST_STUDIO",
-                        "CAN_MANAGE_ANALYST_STUDIO",
-                        "PREVIEW_DOCUMENT_SEARCH"
+                        "BLOCK_NON_EMBED_FULL_APP_ACCESS"
                       ]
                     }
                   }
@@ -10968,8 +10947,7 @@
         "type": "object",
         "properties": {
           "error": {
-            "type": "object",
-            "nullable": true
+            "type": "object"
           }
         }
       },
@@ -11053,39 +11031,32 @@
           },
           "author_id": {
             "type": "string",
-            "description": "Unique identifier of author of the user.",
-            "nullable": true
+            "description": "Unique identifier of author of the user."
           },
           "can_change_password": {
             "type": "boolean",
-            "description": "Defines whether the user can change their password.",
-            "nullable": true
+            "description": "Defines whether the user can change their password."
           },
           "complete_detail": {
             "type": "boolean",
-            "description": "Defines whether the response has complete detail of the user.",
-            "nullable": true
+            "description": "Defines whether the response has complete detail of the user."
           },
           "creation_time_in_millis": {
             "type": "number",
             "format": "float",
-            "description": "Creation time of the user in milliseconds.",
-            "nullable": true
+            "description": "Creation time of the user in milliseconds."
           },
           "current_org": {
             "$ref": "#/components/schemas/Org",
-            "description": "Current logged-in Org of the user.",
-            "nullable": true
+            "description": "Current logged-in Org of the user."
           },
           "deleted": {
             "type": "boolean",
-            "description": "Indicates whether the user is deleted.",
-            "nullable": true
+            "description": "Indicates whether the user is deleted."
           },
           "deprecated": {
             "type": "boolean",
-            "description": "Indicates whether the user is deprecated.",
-            "nullable": true
+            "description": "Indicates whether the user is deprecated."
           },
           "account_type": {
             "type": "string",
@@ -11096,8 +11067,7 @@
               "OIDC_USER",
               "REMOTE_USER"
             ],
-            "description": "Type of the user account.",
-            "nullable": true
+            "description": "Type of the user account."
           },
           "account_status": {
             "type": "string",
@@ -11108,98 +11078,81 @@
               "LOCKED",
               "PENDING"
             ],
-            "description": "Status of the user account.",
-            "nullable": true
+            "description": "Status of the user account."
           },
           "email": {
             "type": "string",
-            "description": "Email of the user.",
-            "nullable": true
+            "description": "Email of the user."
           },
           "expiration_time_in_millis": {
             "type": "number",
             "format": "float",
-            "description": "Expiration time of the user in milliseconds.",
-            "nullable": true
+            "description": "Expiration time of the user in milliseconds."
           },
           "external": {
             "type": "boolean",
-            "description": "Indicates whether the user is external.",
-            "nullable": true
+            "description": "Indicates whether the user is external."
           },
           "favorite_metadata": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FavoriteMetadataItem"
             },
-            "description": "Metadata objects to add to the users' favorites list.",
-            "nullable": true
+            "description": "Metadata objects to add to the users' favorites list."
           },
           "first_login_time_in_millis": {
             "type": "number",
             "format": "float",
-            "description": "Timestamp of the first login session of the user in milliseconds.",
-            "nullable": true
+            "description": "Timestamp of the first login session of the user in milliseconds."
           },
           "group_mask": {
             "type": "integer",
             "format": "int32",
-            "description": "Group mask of the user.",
-            "nullable": true
+            "description": "Group mask of the user."
           },
           "hidden": {
             "type": "boolean",
-            "description": "Indicates whether the user is hidden.",
-            "nullable": true
+            "description": "Indicates whether the user is hidden."
           },
           "home_liveboard": {
             "$ref": "#/components/schemas/Object_ID_And_Name",
-            "description": "Unique ID or name of the default Liveboard assigned to the user.",
-            "nullable": true
+            "description": "Unique ID or name of the default Liveboard assigned to the user."
           },
           "incomplete_details": {
             "type": "object",
-            "description": "Incomplete details of user if any present.",
-            "nullable": true
+            "description": "Incomplete details of user if any present."
           },
           "is_first_login": {
             "type": "boolean",
-            "description": "Indicates whether it is first login of the user.",
-            "nullable": true
+            "description": "Indicates whether it is first login of the user."
           },
           "modification_time_in_millis": {
             "type": "number",
             "format": "float",
-            "description": "Last modified time of the user in milliseconds.",
-            "nullable": true
+            "description": "Last modified time of the user in milliseconds."
           },
           "modifier_id": {
             "type": "string",
-            "description": "Unique identifier of modifier of the user.",
-            "nullable": true
+            "description": "Unique identifier of modifier of the user."
           },
           "notify_on_share": {
             "type": "boolean",
-            "description": "User preference for receiving email notifications on shared Answers or Liveboard.",
-            "nullable": true
+            "description": "User preference for receiving email notifications on shared Answers or Liveboard."
           },
           "onboarding_experience_completed": {
             "type": "boolean",
-            "description": "The user preference for turning off the onboarding experience.",
-            "nullable": true
+            "description": "The user preference for turning off the onboarding experience."
           },
           "orgs": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Org"
             },
-            "description": "Orgs to which the user belongs.",
-            "nullable": true
+            "description": "Orgs to which the user belongs."
           },
           "owner_id": {
             "type": "string",
-            "description": "Unique identifier of owner of the user.",
-            "nullable": true
+            "description": "Unique identifier of owner of the user."
           },
           "parent_type": {
             "type": "string",
@@ -11207,90 +11160,75 @@
               "USER",
               "GROUP"
             ],
-            "description": "Parent type of the user.",
-            "nullable": true
+            "description": "Parent type of the user."
           },
           "privileges": {
             "type": "array",
             "items": {
               "type": "string"
             },
-            "description": "Privileges which are assigned to the user.",
-            "nullable": true
+            "description": "Privileges which are assigned to the user."
           },
           "show_onboarding_experience": {
             "type": "boolean",
-            "description": "User's preference to revisit the new user onboarding experience.",
-            "nullable": true
+            "description": "User's preference to revisit the new user onboarding experience."
           },
           "super_user": {
             "type": "boolean",
-            "description": "Indicates whether the user is a super user.",
-            "nullable": true
+            "description": "Indicates whether the user is a super user."
           },
           "system_user": {
             "type": "boolean",
-            "description": "Indicates whether the user is a system user.",
-            "nullable": true
+            "description": "Indicates whether the user is a system user."
           },
           "tags": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Object_ID_And_Name"
             },
-            "description": "Tags associated with the user.",
-            "nullable": true
+            "description": "Tags associated with the user."
           },
           "tenant_id": {
             "type": "string",
-            "description": "Unique identifier of tenant of the user.",
-            "nullable": true
+            "description": "Unique identifier of tenant of the user."
           },
           "user_groups": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Object_ID_And_Name"
             },
-            "description": "Groups to which the user is assigned.",
-            "nullable": true
+            "description": "Groups to which the user is assigned."
           },
           "user_inherited_groups": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Object_ID_And_Name"
             },
-            "description": "Inherited User Groups which the user is part of.",
-            "nullable": true
+            "description": "Inherited User Groups which the user is part of."
           },
           "welcome_email_sent": {
             "type": "boolean",
-            "description": "Indicates whether welcome email is sent for the user.",
-            "nullable": true
+            "description": "Indicates whether welcome email is sent for the user."
           },
           "org_privileges": {
             "type": "object",
-            "description": "Privileges which are assigned to the user with org.",
-            "nullable": true
+            "description": "Privileges which are assigned to the user with org."
           },
           "preferred_locale": {
             "type": "string",
-            "description": "Locale for the user.",
-            "nullable": true
+            "description": "Locale for the user."
           },
           "extended_properties": {
             "type": "object",
-            "description": "Properties for the user",
-            "nullable": true
+            "description": "Properties for the user"
           },
           "extended_preferences": {
             "type": "object",
-            "description": "Preferences for the user",
-            "nullable": true
+            "description": "Preferences for the user"
           },
           "user_parameters": {
             "type": "object",
-            "description": "User Parameters which are specified for the user via JWToken",
-            "nullable": true
+            "description": "User Parameters which are specified for the user via JWToken"
           }
         }
       },
@@ -11351,13 +11289,11 @@
         "properties": {
           "id": {
             "type": "string",
-            "description": "The unique identifier of the object.",
-            "nullable": true
+            "description": "The unique identifier of the object."
           },
           "name": {
             "type": "string",
-            "description": "Name of the object.",
-            "nullable": true
+            "description": "Name of the object."
           }
         },
         "description": "The object representation with ID and Name."
@@ -11367,8 +11303,7 @@
         "properties": {
           "identifier": {
             "type": "string",
-            "description": "Unique ID or name of the metadata object.",
-            "nullable": true
+            "description": "Unique ID or name of the metadata object."
           },
           "type": {
             "type": "string",
@@ -11376,8 +11311,7 @@
               "LIVEBOARD",
               "ANSWER"
             ],
-            "description": "Type of metadata object.",
-            "nullable": true
+            "description": "Type of metadata object."
           }
         }
       },
@@ -11393,8 +11327,7 @@
               "CREATED",
               "MODIFIED"
             ],
-            "description": "Name of the field to apply the sort on.",
-            "nullable": true
+            "description": "Name of the field to apply the sort on."
           },
           "order": {
             "type": "string",
@@ -11402,8 +11335,7 @@
               "ASC",
               "DESC"
             ],
-            "description": "Sort order : ASC(Ascending) or DESC(Descending).",
-            "nullable": true
+            "description": "Sort order : ASC(Ascending) or DESC(Descending)."
           }
         },
         "description": "Sort options."
@@ -11413,120 +11345,97 @@
         "properties": {
           "id": {
             "type": "string",
-            "description": "The unique identifier of the object",
-            "nullable": true
+            "description": "The unique identifier of the object"
           },
           "name": {
             "type": "string",
-            "description": "Name of the cluster.",
-            "nullable": true
+            "description": "Name of the cluster."
           },
           "release_version": {
             "type": "string",
-            "description": "The release version of the cluster.",
-            "nullable": true
+            "description": "The release version of the cluster."
           },
           "time_zone": {
             "type": "string",
-            "description": "The timezone of the cluster.",
-            "nullable": true
+            "description": "The timezone of the cluster."
           },
           "locale": {
             "type": "string",
-            "description": "The default locale of the cluster.",
-            "nullable": true
+            "description": "The default locale of the cluster."
           },
           "date_format": {
             "type": "string",
-            "description": "The default date format representation of the cluster.",
-            "nullable": true
+            "description": "The default date format representation of the cluster."
           },
           "api_version": {
             "type": "string",
-            "description": "The API version of the cluster.",
-            "nullable": true
+            "description": "The API version of the cluster."
           },
           "type": {
             "type": "string",
-            "description": "The deployment type of the cluster.",
-            "nullable": true
+            "description": "The deployment type of the cluster."
           },
           "environment": {
             "type": "string",
-            "description": "The deployed environment of the cluster.",
-            "nullable": true
+            "description": "The deployed environment of the cluster."
           },
           "license": {
             "type": "string",
-            "description": "The license applied to the cluster.",
-            "nullable": true
+            "description": "The license applied to the cluster."
           },
           "date_time_format": {
             "type": "string",
-            "description": "The default date time format representation of the cluster.",
-            "nullable": true
+            "description": "The default date time format representation of the cluster."
           },
           "time_format": {
             "type": "string",
-            "description": "The default time format representation of the cluster.",
-            "nullable": true
+            "description": "The default time format representation of the cluster."
           },
           "system_user_id": {
             "type": "string",
-            "description": "The unique identifier of system user.",
-            "nullable": true
+            "description": "The unique identifier of system user."
           },
           "super_user_id": {
             "type": "string",
-            "description": "The unique identifier of super user.",
-            "nullable": true
+            "description": "The unique identifier of super user."
           },
           "hidden_object_id": {
             "type": "string",
-            "description": "The unique identifier of hidden object.",
-            "nullable": true
+            "description": "The unique identifier of hidden object."
           },
           "system_group_id": {
             "type": "string",
-            "description": "The unique identifier of system group.",
-            "nullable": true
+            "description": "The unique identifier of system group."
           },
           "tsadmin_user_id": {
             "type": "string",
-            "description": "The unique identifier of tsadmin user.",
-            "nullable": true
+            "description": "The unique identifier of tsadmin user."
           },
           "admin_group_id": {
             "type": "string",
-            "description": "The unique identifier of admin group.",
-            "nullable": true
+            "description": "The unique identifier of admin group."
           },
           "all_tables_connection_id": {
             "type": "string",
-            "description": "The unique identifier of all tables connection.",
-            "nullable": true
+            "description": "The unique identifier of all tables connection."
           },
           "all_user_group_id": {
             "type": "string",
-            "description": "The unique identifier of ALL group.",
-            "nullable": true
+            "description": "The unique identifier of ALL group."
           },
           "accept_language": {
             "type": "string",
-            "description": "The supported accept language by the cluster.",
-            "nullable": true
+            "description": "The supported accept language by the cluster."
           },
           "all_user_group_member_user_count": {
             "type": "integer",
             "format": "int32",
-            "description": "The count of users of ALL group.",
-            "nullable": true
+            "description": "The count of users of ALL group."
           },
           "logical_model_version": {
             "type": "integer",
             "format": "int32",
-            "description": "The version number of logical model of the cluster.",
-            "nullable": true
+            "description": "The version number of logical model of the cluster."
           }
         }
       },
@@ -11534,8 +11443,7 @@
         "type": "object",
         "properties": {
           "onboarding_content_url": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           }
         }
       },
@@ -11545,13 +11453,11 @@
           "id": {
             "type": "integer",
             "format": "int32",
-            "description": "Unique identifier of the Org.",
-            "nullable": true
+            "description": "Unique identifier of the Org."
           },
           "name": {
             "type": "string",
-            "description": "Name of the Org.",
-            "nullable": true
+            "description": "Name of the Org."
           },
           "status": {
             "type": "string",
@@ -11559,13 +11465,11 @@
               "ACTIVE",
               "IN_ACTIVE"
             ],
-            "description": "Status of the Org.",
-            "nullable": true
+            "description": "Status of the Org."
           },
           "description": {
             "type": "string",
-            "description": "Description of the Org.",
-            "nullable": true
+            "description": "Description of the Org."
           },
           "visibility": {
             "type": "string",
@@ -11573,8 +11477,7 @@
               "SHOW",
               "HIDDEN"
             ],
-            "description": "Visibility of the Org.",
-            "nullable": true
+            "description": "Visibility of the Org."
           }
         }
       },
@@ -11592,46 +11495,36 @@
             "type": "string"
           },
           "color": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "deleted": {
-            "type": "boolean",
-            "nullable": true
+            "type": "boolean"
           },
           "hidden": {
-            "type": "boolean",
-            "nullable": true
+            "type": "boolean"
           },
           "external": {
-            "type": "boolean",
-            "nullable": true
+            "type": "boolean"
           },
           "deprecated": {
-            "type": "boolean",
-            "nullable": true
+            "type": "boolean"
           },
           "creation_time_in_millis": {
             "type": "number",
-            "format": "float",
-            "nullable": true
+            "format": "float"
           },
           "modification_time_in_millis": {
             "type": "number",
-            "format": "float",
-            "nullable": true
+            "format": "float"
           },
           "author_id": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "modifier_id": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "owner_id": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           }
         }
       },
@@ -11646,47 +11539,39 @@
         "properties": {
           "author_id": {
             "type": "string",
-            "description": "The unique identifier of the object",
-            "nullable": true
+            "description": "The unique identifier of the object"
           },
           "complete_detail": {
             "type": "boolean",
-            "description": "Indicates whether the response has complete detail of the group.",
-            "nullable": true
+            "description": "Indicates whether the response has complete detail of the group."
           },
           "content": {
             "type": "object",
-            "description": "Content details of the group",
-            "nullable": true
+            "description": "Content details of the group"
           },
           "creation_time_in_millis": {
             "type": "number",
             "format": "float",
-            "description": "Creation time of the group in milliseconds",
-            "nullable": true
+            "description": "Creation time of the group in milliseconds"
           },
           "default_liveboards": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/UserGroup"
             },
-            "description": "Liveboards that are assigned as default Liveboards to the group.",
-            "nullable": true
+            "description": "Liveboards that are assigned as default Liveboards to the group."
           },
           "deleted": {
             "type": "boolean",
-            "description": "Indicates whether the group is deleted",
-            "nullable": true
+            "description": "Indicates whether the group is deleted"
           },
           "deprecated": {
             "type": "boolean",
-            "description": "Indicates whether the group is deprecated",
-            "nullable": true
+            "description": "Indicates whether the group is deprecated"
           },
           "description": {
             "type": "string",
-            "description": "Description of the group",
-            "nullable": true
+            "description": "Description of the group"
           },
           "display_name": {
             "type": "string",
@@ -11694,19 +11579,16 @@
           },
           "external": {
             "type": "boolean",
-            "description": "Indicates whether the group is external",
-            "nullable": true
+            "description": "Indicates whether the group is external"
           },
           "generation_number": {
             "type": "integer",
             "format": "int32",
-            "description": "Generation number of the group",
-            "nullable": true
+            "description": "Generation number of the group"
           },
           "hidden": {
             "type": "boolean",
-            "description": "Indicates whether the group is hidden",
-            "nullable": true
+            "description": "Indicates whether the group is hidden"
           },
           "id": {
             "type": "string",
@@ -11715,31 +11597,26 @@
           "index": {
             "type": "integer",
             "format": "int32",
-            "description": "Index number of the group",
-            "nullable": true
+            "description": "Index number of the group"
           },
           "index_version": {
             "type": "integer",
             "format": "int32",
-            "description": "Index version number of the group",
-            "nullable": true
+            "description": "Index version number of the group"
           },
           "metadata_version": {
             "type": "integer",
             "format": "int32",
-            "description": "Metadata version number of the group",
-            "nullable": true
+            "description": "Metadata version number of the group"
           },
           "modification_time_in_millis": {
             "type": "number",
             "format": "float",
-            "description": "Last modified time of the group in milliseconds.",
-            "nullable": true
+            "description": "Last modified time of the group in milliseconds."
           },
           "modifier_id": {
             "type": "string",
-            "description": "The unique identifier of the object",
-            "nullable": true
+            "description": "The unique identifier of the object"
           },
           "name": {
             "type": "string",
@@ -11750,13 +11627,11 @@
             "items": {
               "$ref": "#/components/schemas/UserGroup"
             },
-            "description": "Orgs in which group exists.",
-            "nullable": true
+            "description": "Orgs in which group exists."
           },
           "owner_id": {
             "type": "string",
-            "description": "The unique identifier of the object",
-            "nullable": true
+            "description": "The unique identifier of the object"
           },
           "parent_type": {
             "type": "string",
@@ -11764,37 +11639,32 @@
               "USER",
               "GROUP"
             ],
-            "description": "Parent type of the group.",
-            "nullable": true
+            "description": "Parent type of the group."
           },
           "privileges": {
             "type": "array",
             "items": {
               "type": "string"
             },
-            "description": "Privileges which are assigned to the group",
-            "nullable": true
+            "description": "Privileges which are assigned to the group"
           },
           "sub_groups": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/UserGroup"
             },
-            "description": "Groups who are part of the group",
-            "nullable": true
+            "description": "Groups who are part of the group"
           },
           "system_group": {
             "type": "boolean",
-            "description": "Indicates whether the group is a system group.",
-            "nullable": true
+            "description": "Indicates whether the group is a system group."
           },
           "tags": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/UserGroup"
             },
-            "description": "Tags associated with the group.",
-            "nullable": true
+            "description": "Tags associated with the group."
           },
           "type": {
             "type": "string",
@@ -11802,16 +11672,14 @@
               "LOCAL_GROUP",
               "LDAP_GROUP"
             ],
-            "description": "Type of the group.",
-            "nullable": true
+            "description": "Type of the group."
           },
           "users": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/UserGroup"
             },
-            "description": "Users who are part of the group.",
-            "nullable": true
+            "description": "Users who are part of the group."
           },
           "visibility": {
             "type": "string",
@@ -11826,8 +11694,7 @@
             "items": {
               "$ref": "#/components/schemas/Role"
             },
-            "description": "List of roles assgined to the user",
-            "nullable": true
+            "description": "List of roles assgined to the user"
           }
         }
       },
@@ -11836,13 +11703,11 @@
         "properties": {
           "id": {
             "type": "string",
-            "description": "id of the role",
-            "nullable": true
+            "description": "id of the role"
           },
           "name": {
             "type": "string",
-            "description": "name of the role",
-            "nullable": true
+            "description": "name of the role"
           }
         }
       },
@@ -11851,13 +11716,11 @@
         "properties": {
           "identifier": {
             "type": "string",
-            "description": "Unique ID or name of the metadata.",
-            "nullable": true
+            "description": "Unique ID or name of the metadata."
           },
           "name_pattern": {
             "type": "string",
-            "description": "A pattern to match the case-insensitive name of the metadata object. User % for a wildcard match.",
-            "nullable": true
+            "description": "A pattern to match the case-insensitive name of the metadata object. User % for a wildcard match."
           },
           "type": {
             "type": "string",
@@ -11870,11 +11733,9 @@
               "TAG",
               "USER",
               "USER_GROUP",
-              "LOGICAL_RELATIONSHIP",
-              "INSIGHT_SPEC"
+              "LOGICAL_RELATIONSHIP"
             ],
-            "description": "Type of metadata. Required if the name of the object is set as identifier. This attribute is optional when the object GUID is specified as identifier.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view.\n5. CONNECTION for creating or modify data connections.\n6. TAG for tag objects.\n7. USER for user objects.\n8. USER_GROUP for group objects.\n9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values\n10. INSIGHT_SPEC for SpotIQ objects",
-            "nullable": true
+            "description": "Type of metadata. Required if the name of the object is set as identifier. This attribute is optional when the object GUID is specified as identifier.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view.\n5. CONNECTION for creating or modify data connections.\n6. TAG for tag objects.\n7. USER for user objects.\n8. USER_GROUP for group objects.\n9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values"
           }
         }
       },
@@ -11923,10 +11784,9 @@
               "TAG",
               "USER",
               "USER_GROUP",
-              "LOGICAL_RELATIONSHIP",
-              "INSIGHT_SPEC"
+              "LOGICAL_RELATIONSHIP"
             ],
-            "description": "Type of metadata. Required if the name of the object is set as identifier. This attribute is optional when the object GUID is specified as identifier.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view\n4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view\n5. CONNECTION for connection objects\n6. TAG for tag objects\n7. USER for user objects\n8. USER_GROUP for group objects\n9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values.\n10. INSIGHT_SPEC for SpotIQ objects"
+            "description": "Type of metadata. Required if the name of the object is set as identifier. This attribute is optional when the object GUID is specified as identifier.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view\n4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view\n5. CONNECTION for connection objects\n6. TAG for tag objects\n7. USER for user objects\n8. USER_GROUP for group objects\n9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values."
           }
         }
       },
@@ -11936,16 +11796,14 @@
           "include": {
             "type": "boolean",
             "default": false,
-            "description": "Includes objects marked as favorite for the specified users.",
-            "nullable": true
+            "description": "Includes objects marked as favorite for the specified users."
           },
           "user_identifiers": {
             "type": "array",
             "items": {
               "type": "string"
             },
-            "description": "Unique ID or name of the users. If not specified, the favorite objects of current logged in user are returned.",
-            "nullable": true
+            "description": "Unique ID or name of the users. If not specified, the favorite objects of current logged in user are returned."
           }
         },
         "description": "Favorite object options."
@@ -11965,8 +11823,7 @@
               "FAVORITES",
               "LAST_ACCESSED"
             ],
-            "description": "Name of the field to apply the sort on.",
-            "nullable": true
+            "description": "Name of the field to apply the sort on."
           },
           "order": {
             "type": "string",
@@ -11974,8 +11831,7 @@
               "ASC",
               "DESC"
             ],
-            "description": "Sort order : ASC(Ascending) or DESC(Descending).",
-            "nullable": true
+            "description": "Sort order : ASC(Ascending) or DESC(Descending)."
           }
         },
         "description": "Sort options."
@@ -11988,13 +11844,11 @@
         "properties": {
           "metadata_id": {
             "type": "string",
-            "description": "Unique identifier of the metadata.",
-            "nullable": true
+            "description": "Unique identifier of the metadata."
           },
           "metadata_name": {
             "type": "string",
-            "description": "Name of the metadata.",
-            "nullable": true
+            "description": "Name of the metadata."
           },
           "metadata_type": {
             "type": "string",
@@ -12013,39 +11867,33 @@
           },
           "dependent_objects": {
             "type": "object",
-            "description": "Details of dependent objects of the metadata objects.",
-            "nullable": true
+            "description": "Details of dependent objects of the metadata objects."
           },
           "incomplete_objects": {
             "type": "array",
             "items": {
               "type": "object"
             },
-            "description": "Details of incomplete information of the metadata objects if any.",
-            "nullable": true
+            "description": "Details of incomplete information of the metadata objects if any."
           },
           "metadata_detail": {
             "type": "object",
-            "description": "Complete details of the metadata objects.",
-            "nullable": true
+            "description": "Complete details of the metadata objects."
           },
           "metadata_header": {
             "type": "object",
-            "description": "Header information of the metadata objects.",
-            "nullable": true
+            "description": "Header information of the metadata objects."
           },
           "visualization_headers": {
             "type": "array",
             "items": {
               "type": "object"
             },
-            "description": "Visualization header information of the metadata objects.",
-            "nullable": true
+            "description": "Visualization header information of the metadata objects."
           },
           "stats": {
             "type": "object",
-            "description": "Stats of the metadata object. Includes views, favorites, last_accessed.",
-            "nullable": true
+            "description": "Stats of the metadata object. Includes views, favorites, last_accessed."
           }
         },
         "description": "Metadata Search Response Object."
@@ -12120,26 +11968,22 @@
           "include_cover_page": {
             "type": "boolean",
             "default": true,
-            "description": "Indicates whether to include the cover page with the Liveboard title.",
-            "nullable": true
+            "description": "Indicates whether to include the cover page with the Liveboard title."
           },
           "include_custom_logo": {
             "type": "boolean",
             "default": true,
-            "description": "Indicates whether to include customized wide logo in the footer if available.",
-            "nullable": true
+            "description": "Indicates whether to include customized wide logo in the footer if available."
           },
           "include_filter_page": {
             "type": "boolean",
             "default": true,
-            "description": "Indicates whether to include a page with all applied filters.",
-            "nullable": true
+            "description": "Indicates whether to include a page with all applied filters."
           },
           "include_page_number": {
             "type": "boolean",
             "default": true,
-            "description": "Indicates whether to include page number in the footer of each page.",
-            "nullable": true
+            "description": "Indicates whether to include page number in the footer of each page."
           },
           "page_orientation": {
             "type": "string",
@@ -12148,19 +11992,16 @@
               "LANDSCAPE"
             ],
             "default": "PORTRAIT",
-            "description": "Page orientation of the PDF.",
-            "nullable": true
+            "description": "Page orientation of the PDF."
           },
           "truncate_table": {
             "type": "boolean",
             "default": false,
-            "description": "Indicates whether to include only the first page of the tables.",
-            "nullable": true
+            "description": "Indicates whether to include only the first page of the tables."
           },
           "page_footer_text": {
             "type": "string",
-            "description": "Text to include in the footer of each page.",
-            "nullable": true
+            "description": "Text to include in the footer of each page."
           }
         }
       },
@@ -12170,14 +12011,12 @@
           "include_cover_page": {
             "type": "boolean",
             "default": false,
-            "description": "Indicates whether to include the cover page with the Liveboard title.",
-            "nullable": true
+            "description": "Indicates whether to include the cover page with the Liveboard title."
           },
           "include_filter_page": {
             "type": "boolean",
             "default": false,
-            "description": "Indicates whether to include a page with all applied filters.",
-            "nullable": true
+            "description": "Indicates whether to include a page with all applied filters."
           }
         }
       },
@@ -12185,8 +12024,7 @@
         "type": "object",
         "properties": {
           "principal_permission_details": {
-            "type": "object",
-            "nullable": true
+            "type": "object"
           }
         }
       },
@@ -12194,8 +12032,7 @@
         "type": "object",
         "properties": {
           "metadata_permission_details": {
-            "type": "object",
-            "nullable": true
+            "type": "object"
           }
         }
       },
@@ -12215,8 +12052,7 @@
               "USER",
               "USER_GROUP"
             ],
-            "description": "Principal type.",
-            "nullable": true
+            "description": "Principal type."
           }
         }
       },
@@ -12235,8 +12071,7 @@
               "LOGICAL_COLUMN",
               "CONNECTION"
             ],
-            "description": "Type of metadata object.",
-            "nullable": true
+            "description": "Type of metadata object."
           },
           "identifier": {
             "type": "string",
@@ -12392,13 +12227,11 @@
           },
           "visualization_id": {
             "type": "string",
-            "description": "Unique ID of the visualization.",
-            "nullable": true
+            "description": "Unique ID of the visualization."
           },
           "visualization_name": {
             "type": "string",
-            "description": "Name of the visualization.",
-            "nullable": true
+            "description": "Name of the visualization."
           }
         }
       },
@@ -12450,41 +12283,34 @@
         "properties": {
           "repository_url": {
             "type": "string",
-            "description": "Remote repository URL configured",
-            "nullable": true
+            "description": "Remote repository URL configured"
           },
           "username": {
             "type": "string",
-            "description": "Username to authenticate connection to the version control system",
-            "nullable": true
+            "description": "Username to authenticate connection to the version control system"
           },
           "commit_branch_name": {
             "type": "string",
-            "description": "Name of the remote branch where objects from this Thoughtspot instance will be versioned.",
-            "nullable": true
+            "description": "Name of the remote branch where objects from this Thoughtspot instance will be versioned."
           },
           "branches": {
             "type": "array",
             "items": {
               "type": "string"
             },
-            "description": "Branches that have been pulled in local repository",
-            "nullable": true
+            "description": "Branches that have been pulled in local repository"
           },
           "enable_guid_mapping": {
             "type": "boolean",
-            "description": "Maintain mapping of guid for the deployment to an instance",
-            "nullable": true
+            "description": "Maintain mapping of guid for the deployment to an instance"
           },
           "configuration_branch_name": {
             "type": "string",
-            "description": "Name of the branch where the configuration files related to operations between Thoughtspot and version control repo should be maintained.",
-            "nullable": true
+            "description": "Name of the branch where the configuration files related to operations between Thoughtspot and version control repo should be maintained."
           },
           "org": {
             "$ref": "#/components/schemas/Org",
-            "description": "Details of the Org",
-            "nullable": true
+            "description": "Details of the Org"
           }
         }
       },
@@ -12530,13 +12356,11 @@
         "properties": {
           "email": {
             "type": "string",
-            "description": "Email id of the committer",
-            "nullable": true
+            "description": "Email id of the committer"
           },
           "username": {
             "type": "string",
-            "description": "Username of the committer",
-            "nullable": true
+            "description": "Username of the committer"
           }
         }
       },
@@ -12545,13 +12369,11 @@
         "properties": {
           "email": {
             "type": "string",
-            "description": "Email id of the committer",
-            "nullable": true
+            "description": "Email id of the committer"
           },
           "username": {
             "type": "string",
-            "description": "Username of the committer",
-            "nullable": true
+            "description": "Username of the committer"
           }
         }
       },
@@ -12560,21 +12382,18 @@
         "properties": {
           "identifier": {
             "type": "string",
-            "description": "Unique ID or name of the connection.",
-            "nullable": true
+            "description": "Unique ID or name of the connection."
           },
           "name_pattern": {
             "type": "string",
-            "description": "A pattern to match case-insensitive name of the connection object. User `%` for a wildcard match.",
-            "nullable": true
+            "description": "A pattern to match case-insensitive name of the connection object. User `%` for a wildcard match."
           },
           "data_warehouse_objects": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/DataWarehouseObjectInput"
             },
-            "description": "Filter options for databases, schemas, tables and columns.",
-            "nullable": true
+            "description": "Filter options for databases, schemas, tables and columns."
           }
         }
       },
@@ -12583,23 +12402,19 @@
         "properties": {
           "database": {
             "type": "string",
-            "description": "Name of the database.",
-            "nullable": true
+            "description": "Name of the database."
           },
           "schema": {
             "type": "string",
-            "description": "Name of the schema within the database.",
-            "nullable": true
+            "description": "Name of the schema within the database."
           },
           "table": {
             "type": "string",
-            "description": "Name of the table within the schema.",
-            "nullable": true
+            "description": "Name of the table within the schema."
           },
           "column": {
             "type": "string",
-            "description": "Name of the column within the table.",
-            "nullable": true
+            "description": "Name of the column within the table."
           }
         }
       },
@@ -12620,8 +12435,7 @@
               "USER_STATE",
               "ROW_COUNT"
             ],
-            "description": "Name of the field to apply the sort on.",
-            "nullable": true
+            "description": "Name of the field to apply the sort on."
           },
           "order": {
             "type": "string",
@@ -12629,8 +12443,7 @@
               "ASC",
               "DESC"
             ],
-            "description": "Sort order : ASC(Ascending) or DESC(Descending).",
-            "nullable": true
+            "description": "Sort order : ASC(Ascending) or DESC(Descending)."
           }
         }
       },
@@ -12652,8 +12465,7 @@
           },
           "description": {
             "type": "string",
-            "description": "Description of the connection.",
-            "nullable": true
+            "description": "Description of the connection."
           },
           "data_warehouse_type": {
             "type": "string",
@@ -12693,13 +12505,11 @@
           },
           "data_warehouse_objects": {
             "$ref": "#/components/schemas/DataWarehouseObjects",
-            "description": "List of Data warehouse objects",
-            "nullable": true
+            "description": "List of Data warehouse objects"
           },
           "details": {
             "type": "object",
-            "description": "Details of the connection.",
-            "nullable": true
+            "description": "Details of the connection."
           }
         }
       },
@@ -12733,13 +12543,11 @@
             "items": {
               "$ref": "#/components/schemas/SchemaObject"
             },
-            "description": "Schemas of the database.",
-            "nullable": true
+            "description": "Schemas of the database."
           },
           "auto_created": {
             "type": "boolean",
-            "description": "Determines if the object is auto created.",
-            "nullable": true
+            "description": "Determines if the object is auto created."
           }
         }
       },
@@ -12758,8 +12566,7 @@
             "items": {
               "$ref": "#/components/schemas/Table"
             },
-            "description": "Tables in the schema.",
-            "nullable": true
+            "description": "Tables in the schema."
           }
         }
       },
@@ -12778,36 +12585,30 @@
             "items": {
               "$ref": "#/components/schemas/Column"
             },
-            "description": "Columns of the table.",
-            "nullable": true
+            "description": "Columns of the table."
           },
           "type": {
             "type": "string",
-            "description": "Type of table. Either view or table",
-            "nullable": true
+            "description": "Type of table. Either view or table"
           },
           "description": {
             "type": "string",
-            "description": "Description of the table",
-            "nullable": true
+            "description": "Description of the table"
           },
           "selected": {
             "type": "boolean",
-            "description": "Determines if the table is selected",
-            "nullable": true
+            "description": "Determines if the table is selected"
           },
           "linked": {
             "type": "boolean",
-            "description": "Determines if the table is linked",
-            "nullable": true
+            "description": "Determines if the table is linked"
           },
           "relationships": {
             "type": "array",
             "items": {
               "type": "object"
             },
-            "description": "List of relationships for the table",
-            "nullable": true
+            "description": "List of relationships for the table"
           }
         }
       },
@@ -12828,23 +12629,19 @@
           },
           "is_aggregate": {
             "type": "string",
-            "description": "Determines if the column schema is an aggregate",
-            "nullable": true
+            "description": "Determines if the column schema is an aggregate"
           },
           "can_import": {
             "type": "boolean",
-            "description": "Determines if the column schema can be imported",
-            "nullable": true
+            "description": "Determines if the column schema can be imported"
           },
           "selected": {
             "type": "boolean",
-            "description": "Determines if the table is selected",
-            "nullable": true
+            "description": "Determines if the table is selected"
           },
           "is_linked_active": {
             "type": "boolean",
-            "description": "Determines if the table is linked",
-            "nullable": true
+            "description": "Determines if the table is linked"
           }
         }
       },
@@ -12872,24 +12669,21 @@
           "groups_assigned_count": {
             "type": "integer",
             "format": "int32",
-            "description": "number of groups assigned with this role",
-            "nullable": true
+            "description": "number of groups assigned with this role"
           },
           "orgs": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/GenericInfo"
             },
-            "description": "Orgs in which role exists.",
-            "nullable": true
+            "description": "Orgs in which role exists."
           },
           "groups": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/GenericInfo"
             },
-            "description": "Details of groups assigned with this role",
-            "nullable": true
+            "description": "Details of groups assigned with this role"
           },
           "privileges": {
             "type": "array",
@@ -12936,10 +12730,7 @@
                 "THIRDPARTY_ANALYSIS",
                 "CONTROL_TRUSTED_AUTH",
                 "CAN_CREATE_CATALOG",
-                "ALLOW_NON_EMBED_FULL_APP_ACCESS",
-                "CAN_ACCESS_ANALYST_STUDIO",
-                "CAN_MANAGE_ANALYST_STUDIO",
-                "PREVIEW_DOCUMENT_SEARCH"
+                "BLOCK_NON_EMBED_FULL_APP_ACCESS"
               ]
             },
             "description": "Privileges granted to the role."
@@ -12951,53 +12742,43 @@
               "MODIFY",
               "NO_ACCESS"
             ],
-            "description": "Permission details of the Role",
-            "nullable": true
+            "description": "Permission details of the Role"
           },
           "author_id": {
             "type": "string",
-            "description": "Unique identifier of author of the role.",
-            "nullable": true
+            "description": "Unique identifier of author of the role."
           },
           "modifier_id": {
             "type": "string",
-            "description": "Unique identifier of modifier of the role.",
-            "nullable": true
+            "description": "Unique identifier of modifier of the role."
           },
           "creation_time_in_millis": {
             "type": "object",
-            "description": "Creation time of the role in milliseconds.",
-            "nullable": true
+            "description": "Creation time of the role in milliseconds."
           },
           "modification_time_in_millis": {
             "type": "object",
-            "description": "Last modified time of the role in milliseconds.",
-            "nullable": true
+            "description": "Last modified time of the role in milliseconds."
           },
           "deleted": {
             "type": "boolean",
-            "description": "Indicates whether the role is deleted.",
-            "nullable": true
+            "description": "Indicates whether the role is deleted."
           },
           "deprecated": {
             "type": "boolean",
-            "description": "Indicates whether the role is deprecated.",
-            "nullable": true
+            "description": "Indicates whether the role is deprecated."
           },
           "external": {
             "type": "boolean",
-            "description": "Indicates whether the role is external.",
-            "nullable": true
+            "description": "Indicates whether the role is external."
           },
           "hidden": {
             "type": "boolean",
-            "description": "Indicates whether the role is hidden.",
-            "nullable": true
+            "description": "Indicates whether the role is hidden."
           },
           "shared_via_connection": {
             "type": "boolean",
-            "description": "Indicates whether the role is shared via connection",
-            "nullable": true
+            "description": "Indicates whether the role is shared via connection"
           }
         },
         "description": "Response for search role api should handle hidden privileges as well."
@@ -13007,8 +12788,7 @@
         "properties": {
           "visibility": {
             "type": "boolean",
-            "description": "Custom action is available on all visualizations. Earlier naming convention: LOCAL/GLOBAL. TRUE signifies GLOBAL for backward compatibility.",
-            "nullable": true
+            "description": "Custom action is available on all visualizations. Earlier naming convention: LOCAL/GLOBAL. TRUE signifies GLOBAL for backward compatibility."
           }
         },
         "description": "Default Custom action configuration. This includes the custom action's visibility across all visualizations and Answers. By default, a custom action is added to all visualizations and Answers."
@@ -13039,8 +12819,7 @@
             "items": {
               "$ref": "#/components/schemas/Metadata_Association_Item"
             },
-            "description": "Metadata objects to assign the the custom action to.",
-            "nullable": true
+            "description": "Metadata objects to assign the the custom action to."
           },
           "name": {
             "type": "string",
@@ -13051,8 +12830,7 @@
             "items": {
               "$ref": "#/components/schemas/Object_ID_And_Name"
             },
-            "description": "Unique ID or name of the User groups which are associated with the custom action.",
-            "nullable": true
+            "description": "Unique ID or name of the User groups which are associated with the custom action."
           }
         },
         "description": "Custom action details"
@@ -13062,13 +12840,11 @@
         "properties": {
           "CALLBACK": {
             "$ref": "#/components/schemas/CALLBACK",
-            "description": "CALLBACK Custom Action Type",
-            "nullable": true
+            "description": "CALLBACK Custom Action Type"
           },
           "URL": {
             "$ref": "#/components/schemas/URL",
-            "description": "URL Custom Action Type",
-            "nullable": true
+            "description": "URL Custom Action Type"
           }
         },
         "description": "Type and Configuration for Custom Actions"
@@ -13078,8 +12854,7 @@
         "properties": {
           "reference": {
             "type": "string",
-            "description": "Reference name of the SDK. By default, the value will be set to action name.",
-            "nullable": true
+            "description": "Reference name of the SDK. By default, the value will be set to action name."
           }
         },
         "description": "CALLBACK Custom Action Type"
@@ -13092,16 +12867,14 @@
         "properties": {
           "authentication": {
             "$ref": "#/components/schemas/Authentication",
-            "description": "Authorization type for the custom action.",
-            "nullable": true
+            "description": "Authorization type for the custom action."
           },
           "parameters": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ParametersListItem"
             },
-            "description": "Query parameters for url.",
-            "nullable": true
+            "description": "Query parameters for url."
           },
           "url": {
             "type": "string",
@@ -13109,8 +12882,7 @@
           },
           "reference": {
             "type": "string",
-            "description": "Reference name of the SDK. By default, the value will be set to action name.",
-            "nullable": true
+            "description": "Reference name of the SDK. By default, the value will be set to action name."
           }
         },
         "description": "URL Custom Action Type"
@@ -13120,23 +12892,19 @@
         "properties": {
           "API_Key": {
             "$ref": "#/components/schemas/API_Key",
-            "description": "With API key auth, you send a key-value pair to the API either in the request headers or query parameters.",
-            "nullable": true
+            "description": "With API key auth, you send a key-value pair to the API either in the request headers or query parameters."
           },
           "Basic_Auth": {
             "$ref": "#/components/schemas/Basic_Auth",
-            "description": "Basic Auth: Basic authentication involves sending a verified username and password with your request.",
-            "nullable": true
+            "description": "Basic Auth: Basic authentication involves sending a verified username and password with your request."
           },
           "Bearer_Token": {
             "type": "string",
-            "description": "Bearer tokens enable requests to authenticate using an access key.",
-            "nullable": true
+            "description": "Bearer tokens enable requests to authenticate using an access key."
           },
           "No_Auth": {
             "type": "string",
-            "description": "No authorization. If your request doesn't require authorization.",
-            "nullable": true
+            "description": "No authorization. If your request doesn't require authorization."
           }
         },
         "description": "Authorization type for the custom action."
@@ -13146,13 +12914,11 @@
         "properties": {
           "key": {
             "type": "string",
-            "description": "Enter your key name",
-            "nullable": true
+            "description": "Enter your key name"
           },
           "value": {
             "type": "string",
-            "description": "Enter you key value",
-            "nullable": true
+            "description": "Enter you key value"
           }
         },
         "description": "With API key auth, you send a key-value pair to the API either in the request headers or query parameters."
@@ -13162,13 +12928,11 @@
         "properties": {
           "password": {
             "type": "string",
-            "description": "Password for the basic authentication",
-            "nullable": true
+            "description": "Password for the basic authentication"
           },
           "username": {
             "type": "string",
-            "description": "Username for the basic authentication",
-            "nullable": true
+            "description": "Username for the basic authentication"
           }
         },
         "description": "Basic Auth: Basic authentication involves sending a verified username and password with your request."
@@ -13178,13 +12942,11 @@
         "properties": {
           "key": {
             "type": "string",
-            "description": "Key for the url query parameter",
-            "nullable": true
+            "description": "Key for the url query parameter"
           },
           "value": {
             "type": "string",
-            "description": "Value for the url query parameter",
-            "nullable": true
+            "description": "Value for the url query parameter"
           }
         }
       },
@@ -13193,8 +12955,7 @@
         "properties": {
           "visibility": {
             "type": "boolean",
-            "description": "Custom action is available on all visualizations. Earlier , the naming convention: LOCAL/GLOBAL. TRUE signifies GLOBAL for backward compatibility.",
-            "nullable": true
+            "description": "Custom action is available on all visualizations. Earlier , the naming convention: LOCAL/GLOBAL. TRUE signifies GLOBAL for backward compatibility."
           }
         },
         "description": "Default Custom action configuration. This includes the custom action's visibility across all visualizations and Answers. By default, a custom action is added to all visualizations and Answers."
@@ -13226,13 +12987,11 @@
         "properties": {
           "position": {
             "type": "string",
-            "description": "Position of the Custom action on the Metadata object. Earlier naming convention: context.",
-            "nullable": true
+            "description": "Position of the Custom action on the Metadata object. Earlier naming convention: context."
           },
           "visibility": {
             "type": "boolean",
-            "description": "Visibility of the metadata association with custom action. Earlier naming convention: enabled",
-            "nullable": true
+            "description": "Visibility of the metadata association with custom action. Earlier naming convention: enabled"
           }
         },
         "description": "Specify that the association is enabled for the metadata object"
@@ -13250,8 +13009,7 @@
               "ANSWER",
               "WORKSHEET"
             ],
-            "description": "Type of metadata object.",
-            "nullable": true
+            "description": "Type of metadata object."
           },
           "identifier": {
             "type": "string",
@@ -13264,12 +13022,10 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "name": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           }
         }
       },
@@ -13277,12 +13033,10 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "name": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           }
         }
       },
@@ -13308,8 +13062,7 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/JWT_Metadata_Object"
-            },
-            "nullable": true
+            }
           }
         },
         "description": "JWT user options to create a JWT token given the payload."
@@ -13319,18 +13072,15 @@
         "properties": {
           "runtime_filter": {
             "type": "object",
-            "description": "Runtime filter parameter type in JWT.",
-            "nullable": true
+            "description": "Runtime filter parameter type in JWT."
           },
           "runtime_sort": {
             "type": "object",
-            "description": "Runtime sort parameter type in JWT.",
-            "nullable": true
+            "description": "Runtime sort parameter type in JWT."
           },
           "runtime_param_override": {
             "type": "object",
-            "description": "Runtime param override type in JWT.",
-            "nullable": true
+            "description": "Runtime param override type in JWT."
           }
         },
         "description": "List of runtime parameters need to set during the session."
@@ -13339,16 +13089,14 @@
         "type": "object",
         "properties": {
           "identifier": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "type": {
             "type": "string",
             "enum": [
               "LIVEBOARD",
               "ANSWER"
-            ],
-            "nullable": true
+            ]
           }
         },
         "description": "Metadata objects."
@@ -13360,35 +13108,30 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/User_Object"
-            },
-            "nullable": true
+            }
           },
           "runtime_filters": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/User_Runtime_Filters"
-            },
-            "nullable": true
+            }
           },
           "runtime_sorts": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/User_Runtime_Sorts"
-            },
-            "nullable": true
+            }
           },
           "parameters": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/User_Parameters"
-            },
-            "nullable": true
+            }
           },
           "compress": {
             "type": "boolean",
             "default": false,
-            "description": " <span class=\"since-beta-tag\">Version: 9.12.0.cl or later</span>",
-            "nullable": true
+            "description": " <span class=\"since-beta-tag\">Version: 9.12.0.cl or later</span>"
           }
         },
         "description": "User properties runtime_filters,runtime_sorts,parameters applicable to LOGICAL_TABLE(Worksheet)"
@@ -13406,8 +13149,7 @@
               "ANSWER",
               "LOGICAL_TABLE"
             ],
-            "description": "Type of object.",
-            "nullable": true
+            "description": "Type of object."
           },
           "identifier": {
             "type": "string",
@@ -13458,16 +13200,14 @@
           "persist": {
             "type": "boolean",
             "default": false,
-            "description": "Flag to persist the runtime filters. <br/>  <span class=\"since-beta-tag\">Version: 9.12.0.cl or later</span>",
-            "nullable": true
+            "description": "Flag to persist the runtime filters. <br/>  <span class=\"since-beta-tag\">Version: 9.12.0.cl or later</span>"
           },
           "objects": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/User_Object"
             },
-            "description": "Object to apply the runtime filter.",
-            "nullable": true
+            "description": "Object to apply the runtime filter."
           }
         },
         "description": "Objects to apply the User_Runtime_Filters."
@@ -13477,8 +13217,7 @@
         "properties": {
           "column_name": {
             "type": "string",
-            "description": "The column name to apply filter.",
-            "nullable": true
+            "description": "The column name to apply filter."
           },
           "order": {
             "type": "string",
@@ -13486,22 +13225,19 @@
               "ASC",
               "DESC"
             ],
-            "description": "Order for the sort.",
-            "nullable": true
+            "description": "Order for the sort."
           },
           "persist": {
             "type": "boolean",
             "default": false,
-            "description": "Flag to persist the runtime sorts. <br/>  <span class=\"since-beta-tag\">Version: 9.12.0.cl or later</span>",
-            "nullable": true
+            "description": "Flag to persist the runtime sorts. <br/>  <span class=\"since-beta-tag\">Version: 9.12.0.cl or later</span>"
           },
           "objects": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/User_Object"
             },
-            "description": "Object to apply the runtime sort.",
-            "nullable": true
+            "description": "Object to apply the runtime sort."
           }
         },
         "description": "Objects to apply the User_Runtime_Sorts."
@@ -13527,16 +13263,14 @@
           "persist": {
             "type": "boolean",
             "default": false,
-            "description": "Flag to persist the parameters. <br/>  <span class=\"since-beta-tag\">Version: 9.12.0.cl or later</span>",
-            "nullable": true
+            "description": "Flag to persist the parameters. <br/>  <span class=\"since-beta-tag\">Version: 9.12.0.cl or later</span>"
           },
           "objects": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/User_Object"
             },
-            "description": "Object to apply the runtime parameter.",
-            "nullable": true
+            "description": "Object to apply the runtime parameter."
           }
         },
         "description": "Objects to apply the Runtime_Parameters."
@@ -13593,13 +13327,11 @@
           "org_id": {
             "type": "integer",
             "format": "int32",
-            "description": "Unique identifier of the metadata.",
-            "nullable": true
+            "description": "Unique identifier of the metadata."
           },
           "metadata_id": {
             "type": "string",
-            "description": "Unique identifier of the Org.",
-            "nullable": true
+            "description": "Unique identifier of the Org."
           }
         }
       },
@@ -13610,8 +13342,7 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/JWT_Parameter"
-            },
-            "nullable": true
+            }
           }
         },
         "description": "JWT user options to create a JWT token given the payload."
@@ -13655,8 +13386,7 @@
         "properties": {
           "activation_link": {
             "type": "string",
-            "description": "Activation link to activate the user.",
-            "nullable": true
+            "description": "Activation link to activate the user."
           }
         },
         "description": "The object representation with activation link."
@@ -13678,8 +13408,7 @@
           },
           "password": {
             "type": "string",
-            "description": "Password of the user.",
-            "nullable": true
+            "description": "Password of the user."
           },
           "account_type": {
             "type": "string",
@@ -13691,8 +13420,7 @@
               "REMOTE_USER"
             ],
             "default": "LOCAL_USER",
-            "description": "Type of the user account.",
-            "nullable": true
+            "description": "Type of the user account."
           },
           "account_status": {
             "type": "string",
@@ -13704,29 +13432,25 @@
               "PENDING"
             ],
             "default": "ACTIVE",
-            "description": "Status of the user account.",
-            "nullable": true
+            "description": "Status of the user account."
           },
           "email": {
             "type": "string",
-            "description": "Email address of the user.",
-            "nullable": true
+            "description": "Email address of the user."
           },
           "org_identifiers": {
             "type": "array",
             "items": {
               "type": "string"
             },
-            "description": "ID or name of the Orgs to which the user belongs.",
-            "nullable": true
+            "description": "ID or name of the Orgs to which the user belongs."
           },
           "group_identifiers": {
             "type": "array",
             "items": {
               "type": "string"
             },
-            "description": "ID or name of the groups to which the user belongs.",
-            "nullable": true
+            "description": "ID or name of the groups to which the user belongs."
           },
           "visibility": {
             "type": "string",
@@ -13734,37 +13458,31 @@
               "SHARABLE",
               "NON_SHARABLE"
             ],
-            "description": "Visibility of the users. The SHARABLE property makes a user visible to other users and group, who can share objects with the user.",
-            "nullable": true
+            "description": "Visibility of the users. The SHARABLE property makes a user visible to other users and group, who can share objects with the user."
           },
           "notify_on_share": {
             "type": "boolean",
             "default": true,
-            "description": "Notify user when other users or groups share metadata objects",
-            "nullable": true
+            "description": "Notify user when other users or groups share metadata objects"
           },
           "show_onboarding_experience": {
             "type": "boolean",
-            "description": "Show or hide the new user onboarding walkthroughs",
-            "nullable": true
+            "description": "Show or hide the new user onboarding walkthroughs"
           },
           "onboarding_experience_completed": {
             "type": "boolean",
-            "description": "Revisit the new user onboarding walkthroughs",
-            "nullable": true
+            "description": "Revisit the new user onboarding walkthroughs"
           },
           "home_liveboard_identifier": {
             "type": "string",
-            "description": "Unique ID or name of the default Liveboard assigned to the user.",
-            "nullable": true
+            "description": "Unique ID or name of the default Liveboard assigned to the user."
           },
           "favorite_metadata": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FavoriteMetadataInput"
             },
-            "description": "Metadata objects to add to the user's favorites list.",
-            "nullable": true
+            "description": "Metadata objects to add to the user's favorites list."
           }
         }
       },
@@ -13775,22 +13493,19 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ImportUserType"
-            },
-            "nullable": true
+            }
           },
           "users_updated": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ImportUserType"
-            },
-            "nullable": true
+            }
           },
           "users_deleted": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ImportUserType"
-            },
-            "nullable": true
+            }
           }
         }
       },
@@ -13802,8 +13517,7 @@
         "properties": {
           "id": {
             "type": "string",
-            "description": "Unique identifier of the user.",
-            "nullable": true
+            "description": "Unique identifier of the user."
           },
           "name": {
             "type": "string",
@@ -13826,8 +13540,7 @@
               "LOGICAL_COLUMN",
               "CONNECTION"
             ],
-            "description": "Type of metadata (Optional when given identifier is ID).\n1. LIVEBOARD\n2. ANSWERS\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n4. LOGICAL_COLUMN for a column of any data object such as tables, worksheets or views.",
-            "nullable": true
+            "description": "Type of metadata (Optional when given identifier is ID).\n1. LIVEBOARD\n2. ANSWERS\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n4. LOGICAL_COLUMN for a column of any data object such as tables, worksheets or views."
           },
           "identifier": {
             "type": "string",
@@ -13855,13 +13568,11 @@
             "items": {
               "type": "string"
             },
-            "description": "Unique ID of Liveboards that will be assigned as default Liveboards to the users in the group.",
-            "nullable": true
+            "description": "Unique ID of Liveboards that will be assigned as default Liveboards to the users in the group."
           },
           "description": {
             "type": "string",
-            "description": "Description of the group.",
-            "nullable": true
+            "description": "Description of the group."
           },
           "privileges": {
             "type": "array",
@@ -13890,22 +13601,17 @@
                 "PREVIEW_THOUGHTSPOT_SAGE",
                 "CAN_MANAGE_VERSION_CONTROL",
                 "THIRDPARTY_ANALYSIS",
-                "ALLOW_NON_EMBED_FULL_APP_ACCESS",
-                "CAN_ACCESS_ANALYST_STUDIO",
-                "CAN_MANAGE_ANALYST_STUDIO",
-                "PREVIEW_DOCUMENT_SEARCH"
+                "BLOCK_NON_EMBED_FULL_APP_ACCESS"
               ]
             },
-            "description": "Privileges that will be assigned to the group.",
-            "nullable": true
+            "description": "Privileges that will be assigned to the group."
           },
           "sub_group_identifiers": {
             "type": "array",
             "items": {
               "type": "string"
             },
-            "description": "Unique ID or name of the sub-groups to add to the group.",
-            "nullable": true
+            "description": "Unique ID or name of the sub-groups to add to the group."
           },
           "type": {
             "type": "string",
@@ -13913,16 +13619,14 @@
               "LOCAL_GROUP",
               "LDAP_GROUP"
             ],
-            "description": "Type of the group.",
-            "nullable": true
+            "description": "Type of the group."
           },
           "user_identifiers": {
             "type": "array",
             "items": {
               "type": "string"
             },
-            "description": "Unique ID or name of the users to assign to the group.",
-            "nullable": true
+            "description": "Unique ID or name of the users to assign to the group."
           },
           "visibility": {
             "type": "string",
@@ -13930,8 +13634,7 @@
               "SHARABLE",
               "NON_SHARABLE"
             ],
-            "description": "Visibility of the group. The SHARABLE makes a group visible to other users and groups, and thus allows them to share objects.",
-            "nullable": true
+            "description": "Visibility of the group. The SHARABLE makes a group visible to other users and groups, and thus allows them to share objects."
           }
         }
       },
@@ -13984,8 +13687,7 @@
               "USER_GROUP",
               "ROLE"
             ],
-            "description": "Type of metadata (Optional when given identifier is ID).",
-            "nullable": true
+            "description": "Type of metadata (Optional when given identifier is ID)."
           },
           "identifier": {
             "type": "string",
@@ -14009,8 +13711,7 @@
               "LOGICAL_COLUMN",
               "LOGICAL_RELATIONSHIP"
             ],
-            "description": "Type of metadata (Optional when given identifier is ID).",
-            "nullable": true
+            "description": "Type of metadata (Optional when given identifier is ID)."
           },
           "identifier": {
             "type": "string",
@@ -14032,8 +13733,7 @@
               "ANSWER",
               "LOGICAL_TABLE"
             ],
-            "description": "Type of metadata.",
-            "nullable": true
+            "description": "Type of metadata."
           },
           "identifier": {
             "type": "string",
@@ -14055,8 +13755,7 @@
               "ANSWER",
               "LOGICAL_TABLE"
             ],
-            "description": "Type of metadata (Optional when given identifier is ID).",
-            "nullable": true
+            "description": "Type of metadata (Optional when given identifier is ID)."
           },
           "identifier": {
             "type": "string",
@@ -14104,8 +13803,7 @@
               "LOGICAL_TABLE",
               "CUSTOM_ACTION"
             ],
-            "description": "Type of metadata.",
-            "nullable": true
+            "description": "Type of metadata."
           }
         }
       },
@@ -14114,41 +13812,34 @@
         "properties": {
           "committer": {
             "$ref": "#/components/schemas/CommiterType",
-            "description": "Repository user using which changes were committed",
-            "nullable": true
+            "description": "Repository user using which changes were committed"
           },
           "author": {
             "$ref": "#/components/schemas/AuthorType",
-            "description": "Thoughtspot user who commits the changes",
-            "nullable": true
+            "description": "Thoughtspot user who commits the changes"
           },
           "comment": {
             "type": "string",
-            "description": "Comments associated with the commit",
-            "nullable": true
+            "description": "Comments associated with the commit"
           },
           "commit_time": {
             "type": "string",
-            "description": "Time at which the changes were committed.",
-            "nullable": true
+            "description": "Time at which the changes were committed."
           },
           "commit_id": {
             "type": "string",
-            "description": "SHA id associated with the commit",
-            "nullable": true
+            "description": "SHA id associated with the commit"
           },
           "branch": {
             "type": "string",
-            "description": "Branch where changes were committed",
-            "nullable": true
+            "description": "Branch where changes were committed"
           },
           "committed_files": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CommitFileType"
             },
-            "description": "Files that were pushed as part of this commit",
-            "nullable": true
+            "description": "Files that were pushed as part of this commit"
           }
         }
       },
@@ -14169,8 +13860,7 @@
           },
           "status_message": {
             "type": "string",
-            "description": "Any error or warning with the deployment",
-            "nullable": true
+            "description": "Any error or warning with the deployment"
           }
         }
       },
@@ -14179,49 +13869,41 @@
         "properties": {
           "committer": {
             "$ref": "#/components/schemas/CommiterType",
-            "description": "Repository user using which changes were committed",
-            "nullable": true
+            "description": "Repository user using which changes were committed"
           },
           "author": {
             "$ref": "#/components/schemas/AuthorType",
-            "description": "Thoughtspot user who commits the changes",
-            "nullable": true
+            "description": "Thoughtspot user who commits the changes"
           },
           "comment": {
             "type": "string",
-            "description": "Comments associated with the commit",
-            "nullable": true
+            "description": "Comments associated with the commit"
           },
           "commit_time": {
             "type": "string",
-            "description": "Time at which the changes were committed.",
-            "nullable": true
+            "description": "Time at which the changes were committed."
           },
           "commit_id": {
             "type": "string",
-            "description": "SHA id associated with the commit",
-            "nullable": true
+            "description": "SHA id associated with the commit"
           },
           "branch": {
             "type": "string",
-            "description": "Branch where changes were committed",
-            "nullable": true
+            "description": "Branch where changes were committed"
           },
           "committed_files": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CommitFileType"
             },
-            "description": "Files that were pushed as part of this commit",
-            "nullable": true
+            "description": "Files that were pushed as part of this commit"
           },
           "reverted_metadata": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/RevertedMetadata"
             },
-            "description": "Metadata of reverted file of this commit",
-            "nullable": true
+            "description": "Metadata of reverted file of this commit"
           }
         }
       },
@@ -14262,28 +13944,23 @@
         "properties": {
           "file_name": {
             "type": "string",
-            "description": "Name of the file deployed",
-            "nullable": true
+            "description": "Name of the file deployed"
           },
           "metadata_name": {
             "type": "string",
-            "description": "Name of the metadata object",
-            "nullable": true
+            "description": "Name of the metadata object"
           },
           "metadata_type": {
             "type": "string",
-            "description": "Type of the metadata object",
-            "nullable": true
+            "description": "Type of the metadata object"
           },
           "status_code": {
             "type": "string",
-            "description": "Indicates the status of deployment for the file",
-            "nullable": true
+            "description": "Indicates the status of deployment for the file"
           },
           "status_message": {
             "type": "string",
-            "description": "Any error or warning with the deployment",
-            "nullable": true
+            "description": "Any error or warning with the deployment"
           }
         }
       },
@@ -14341,8 +14018,7 @@
           },
           "details": {
             "type": "object",
-            "description": "Details of the connection.",
-            "nullable": true
+            "description": "Details of the connection."
           }
         }
       },
@@ -14351,8 +14027,7 @@
         "properties": {
           "status": {
             "type": "boolean",
-            "description": "Status of the connection diff.",
-            "nullable": true
+            "description": "Status of the connection diff."
           }
         }
       },
@@ -14380,24 +14055,21 @@
           "groups_assigned_count": {
             "type": "integer",
             "format": "int32",
-            "description": "number of groups assigned with this role",
-            "nullable": true
+            "description": "number of groups assigned with this role"
           },
           "orgs": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/GenericInfo"
             },
-            "description": "Orgs in which role exists.",
-            "nullable": true
+            "description": "Orgs in which role exists."
           },
           "groups": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/GenericInfo"
             },
-            "description": "Details of groups assigned with this role",
-            "nullable": true
+            "description": "Details of groups assigned with this role"
           },
           "privileges": {
             "type": "array",
@@ -14432,10 +14104,7 @@
                 "CAN_MANAGE_VERSION_CONTROL",
                 "THIRDPARTY_ANALYSIS",
                 "CAN_CREATE_CATALOG",
-                "ALLOW_NON_EMBED_FULL_APP_ACCESS",
-                "CAN_ACCESS_ANALYST_STUDIO",
-                "CAN_MANAGE_ANALYST_STUDIO",
-                "PREVIEW_DOCUMENT_SEARCH"
+                "BLOCK_NON_EMBED_FULL_APP_ACCESS"
               ]
             },
             "description": "Privileges granted to the role."
@@ -14447,53 +14116,43 @@
               "MODIFY",
               "NO_ACCESS"
             ],
-            "description": "Permission details of the Role",
-            "nullable": true
+            "description": "Permission details of the Role"
           },
           "author_id": {
             "type": "string",
-            "description": "Unique identifier of author of the role.",
-            "nullable": true
+            "description": "Unique identifier of author of the role."
           },
           "modifier_id": {
             "type": "string",
-            "description": "Unique identifier of modifier of the role.",
-            "nullable": true
+            "description": "Unique identifier of modifier of the role."
           },
           "creation_time_in_millis": {
             "type": "object",
-            "description": "Creation time of the role in milliseconds.",
-            "nullable": true
+            "description": "Creation time of the role in milliseconds."
           },
           "modification_time_in_millis": {
             "type": "object",
-            "description": "Last modified time of the role in milliseconds.",
-            "nullable": true
+            "description": "Last modified time of the role in milliseconds."
           },
           "deleted": {
             "type": "boolean",
-            "description": "Indicates whether the role is deleted.",
-            "nullable": true
+            "description": "Indicates whether the role is deleted."
           },
           "deprecated": {
             "type": "boolean",
-            "description": "Indicates whether the role is deprecated.",
-            "nullable": true
+            "description": "Indicates whether the role is deprecated."
           },
           "external": {
             "type": "boolean",
-            "description": "Indicates whether the role is external.",
-            "nullable": true
+            "description": "Indicates whether the role is external."
           },
           "hidden": {
             "type": "boolean",
-            "description": "Indicates whether the role is hidden.",
-            "nullable": true
+            "description": "Indicates whether the role is hidden."
           },
           "shared_via_connection": {
             "type": "boolean",
-            "description": "Indicates whether the role is shared via connection",
-            "nullable": true
+            "description": "Indicates whether the role is shared via connection"
           }
         }
       },
@@ -14518,51 +14177,42 @@
         "properties": {
           "complete_liveboard": {
             "type": "boolean",
-            "description": "Indicates whether to include complete Liveboard.",
-            "nullable": true
+            "description": "Indicates whether to include complete Liveboard."
           },
           "include_cover_page": {
             "type": "boolean",
-            "description": "Indicates whether to include cover page with the Liveboard title.",
-            "nullable": true
+            "description": "Indicates whether to include cover page with the Liveboard title."
           },
           "include_custom_logo": {
             "type": "boolean",
-            "description": "Indicates whether to include customized wide logo in the footer if available.",
-            "nullable": true
+            "description": "Indicates whether to include customized wide logo in the footer if available."
           },
           "include_filter_page": {
             "type": "boolean",
-            "description": "Indicates whether to include a page with all applied filters.",
-            "nullable": true
+            "description": "Indicates whether to include a page with all applied filters."
           },
           "include_page_number": {
             "type": "boolean",
-            "description": "Indicates whether to include page number in the footer of each page",
-            "nullable": true
+            "description": "Indicates whether to include page number in the footer of each page"
           },
           "page_footer_text": {
             "type": "string",
-            "description": "Text to include in the footer of each page.",
-            "nullable": true
+            "description": "Text to include in the footer of each page."
           },
           "page_orientation": {
             "type": "string",
-            "description": "Page orientation of the PDF.",
-            "nullable": true
+            "description": "Page orientation of the PDF."
           },
           "page_size": {
             "type": "string",
             "enum": [
               "A4"
             ],
-            "description": "Page size.",
-            "nullable": true
+            "description": "Page size."
           },
           "truncate_table": {
             "type": "boolean",
-            "description": "Indicates whether to include only first page of the tables.",
-            "nullable": true
+            "description": "Indicates whether to include only first page of the tables."
           }
         },
         "description": "Options for PDF export."
@@ -14626,16 +14276,14 @@
             "items": {
               "type": "string"
             },
-            "description": "Emails of the recipients.",
-            "nullable": true
+            "description": "Emails of the recipients."
           },
           "principals": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/PrincipalsListItemInput"
             },
-            "description": "User or groups to be set as recipients of the schedule notifications.",
-            "nullable": true
+            "description": "User or groups to be set as recipients of the schedule notifications."
           }
         },
         "description": "Recipients of the scheduled job notification."
@@ -14681,8 +14329,7 @@
           },
           "description": {
             "type": "string",
-            "description": "Description of the job.",
-            "nullable": true
+            "description": "Description of the job."
           },
           "file_format": {
             "type": "string",
@@ -14698,8 +14345,7 @@
           },
           "liveboard_options": {
             "$ref": "#/components/schemas/LiveboardOptions",
-            "description": "Options to specify details of Liveboard.",
-            "nullable": true
+            "description": "Options to specify details of Liveboard."
           },
           "metadata": {
             "$ref": "#/components/schemas/MetadataResponse",
@@ -14711,8 +14357,7 @@
           },
           "pdf_options": {
             "$ref": "#/components/schemas/PdfOptions",
-            "description": "Options for PDF export.",
-            "nullable": true
+            "description": "Options for PDF export."
           },
           "recipient_details": {
             "$ref": "#/components/schemas/RecipientDetails",
@@ -14720,8 +14365,7 @@
           },
           "status": {
             "type": "string",
-            "description": "Status of the job",
-            "nullable": true
+            "description": "Status of the job"
           },
           "time_zone": {
             "type": "string",
@@ -14732,8 +14376,7 @@
             "items": {
               "$ref": "#/components/schemas/ResponseScheduleRun"
             },
-            "description": "Schedule runs history records.",
-            "nullable": true
+            "description": "Schedule runs history records."
           }
         }
       },
@@ -14830,8 +14473,7 @@
         ],
         "properties": {
           "name": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "id": {
             "type": "string"
@@ -14849,51 +14491,42 @@
         "properties": {
           "complete_liveboard": {
             "type": "boolean",
-            "description": "Indicates whether to include complete Liveboard.",
-            "nullable": true
+            "description": "Indicates whether to include complete Liveboard."
           },
           "include_cover_page": {
             "type": "boolean",
-            "description": "Indicates whether to include cover page with the Liveboard title.",
-            "nullable": true
+            "description": "Indicates whether to include cover page with the Liveboard title."
           },
           "include_custom_logo": {
             "type": "boolean",
-            "description": "Indicates whether to include customized wide logo in the footer if available.",
-            "nullable": true
+            "description": "Indicates whether to include customized wide logo in the footer if available."
           },
           "include_filter_page": {
             "type": "boolean",
-            "description": "Indicates whether to include a page with all applied filters.",
-            "nullable": true
+            "description": "Indicates whether to include a page with all applied filters."
           },
           "include_page_number": {
             "type": "boolean",
-            "description": "Indicates whether to include page number in the footer of each page",
-            "nullable": true
+            "description": "Indicates whether to include page number in the footer of each page"
           },
           "page_footer_text": {
             "type": "string",
-            "description": "Text to include in the footer of each page.",
-            "nullable": true
+            "description": "Text to include in the footer of each page."
           },
           "page_orientation": {
             "type": "string",
-            "description": "Page orientation of the PDF.",
-            "nullable": true
+            "description": "Page orientation of the PDF."
           },
           "page_size": {
             "type": "string",
             "enum": [
               "A4"
             ],
-            "description": "Page size.",
-            "nullable": true
+            "description": "Page size."
           },
           "truncate_table": {
             "type": "boolean",
-            "description": "Indicates whether to include only first page of the tables.",
-            "nullable": true
+            "description": "Indicates whether to include only first page of the tables."
           }
         },
         "description": "Options for PDF export."
@@ -14906,16 +14539,14 @@
             "items": {
               "type": "string"
             },
-            "description": "Emails of the recipients. Specify email address if the recipient is not a ThoughtSpot user.",
-            "nullable": true
+            "description": "Emails of the recipients. Specify email address if the recipient is not a ThoughtSpot user."
           },
           "principals": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/PrincipalsListItem"
             },
-            "description": "List of user or groups to subscribe for the scheduled job notifications.",
-            "nullable": true
+            "description": "List of user or groups to subscribe for the scheduled job notifications."
           }
         },
         "description": "Recipient configuration which includes email address, ID or name of the users and groups."
@@ -14966,8 +14597,7 @@
           },
           "detail": {
             "type": "string",
-            "description": "Message details related to the schedule run.",
-            "nullable": true
+            "description": "Message details related to the schedule run."
           }
         },
         "description": "Schedule run response object"
@@ -14976,15 +14606,13 @@
         "type": "object",
         "properties": {
           "identifier": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "type": {
             "type": "string",
             "enum": [
               "LIVEBOARD"
-            ],
-            "nullable": true
+            ]
           }
         }
       },
@@ -14993,13 +14621,11 @@
         "properties": {
           "field_name": {
             "type": "string",
-            "description": "Name of the field to apply the sort on.",
-            "nullable": true
+            "description": "Name of the field to apply the sort on."
           },
           "order": {
             "type": "string",
-            "description": "Sort order : ASC(Ascending) or DESC(Descending).",
-            "nullable": true
+            "description": "Sort order : ASC(Ascending) or DESC(Descending)."
           }
         },
         "description": "Sort options."
@@ -15010,22 +14636,19 @@
           "include_history_runs": {
             "type": "boolean",
             "default": false,
-            "description": "Indicates whether to fetch history runs for the scheduled notification.",
-            "nullable": true
+            "description": "Indicates whether to fetch history runs for the scheduled notification."
           },
           "record_size": {
             "type": "integer",
             "format": "int32",
             "default": 10,
-            "description": "Indicates the max number of records that can be fetched as past runs of any scheduled job.",
-            "nullable": true
+            "description": "Indicates the max number of records that can be fetched as past runs of any scheduled job."
           },
           "record_offset": {
             "type": "integer",
             "format": "int32",
             "default": 0,
-            "description": "Indicates the starting record number from where history runs records should be fetched.",
-            "nullable": true
+            "description": "Indicates the starting record number from where history runs records should be fetched."
           }
         }
       },
@@ -15034,13 +14657,11 @@
         "properties": {
           "CALLBACK": {
             "$ref": "#/components/schemas/CALLBACKInputMandatory",
-            "description": "CALLBACK Custom Action Type",
-            "nullable": true
+            "description": "CALLBACK Custom Action Type"
           },
           "URL": {
             "$ref": "#/components/schemas/URLInputMandatory",
-            "description": "URL Custom Action Type",
-            "nullable": true
+            "description": "URL Custom Action Type"
           }
         },
         "description": "Action details includes Type and Configuration for Custom Actions, either Callback or URL is required.\nWhen both callback and url are provided, callback would be considered"
@@ -15050,8 +14671,7 @@
         "properties": {
           "reference": {
             "type": "string",
-            "description": "Reference name. By default, the value will be set to action name.",
-            "nullable": true
+            "description": "Reference name. By default, the value will be set to action name."
           }
         },
         "description": "CALLBACK Custom Action Type"
@@ -15064,16 +14684,14 @@
         "properties": {
           "authentication": {
             "$ref": "#/components/schemas/AuthenticationInput",
-            "description": "Authorization type for the custom action.",
-            "nullable": true
+            "description": "Authorization type for the custom action."
           },
           "parameters": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ParametersListItemInput"
             },
-            "description": "Query parameters for url.",
-            "nullable": true
+            "description": "Query parameters for url."
           },
           "url": {
             "type": "string",
@@ -15081,8 +14699,7 @@
           },
           "reference": {
             "type": "string",
-            "description": "Reference name. By default the value will be set to action name",
-            "nullable": true
+            "description": "Reference name. By default the value will be set to action name"
           }
         },
         "description": "URL Custom Action Type"
@@ -15092,23 +14709,19 @@
         "properties": {
           "API_Key": {
             "$ref": "#/components/schemas/API_KeyInput",
-            "description": "With API key auth, you send a key-value pair to the API either in the request headers or query parameters.",
-            "nullable": true
+            "description": "With API key auth, you send a key-value pair to the API either in the request headers or query parameters."
           },
           "Basic_Auth": {
             "$ref": "#/components/schemas/Basic_AuthInput",
-            "description": "Basic Auth: Basic authentication involves sending a verified username and password with your request.",
-            "nullable": true
+            "description": "Basic Auth: Basic authentication involves sending a verified username and password with your request."
           },
           "Bearer_Token": {
             "type": "string",
-            "description": "Bearer tokens enable requests to authenticate using an access key.",
-            "nullable": true
+            "description": "Bearer tokens enable requests to authenticate using an access key."
           },
           "No_Auth": {
             "type": "string",
-            "description": "No authorization. If your request doesn't require authorization.",
-            "nullable": true
+            "description": "No authorization. If your request doesn't require authorization."
           }
         },
         "description": "Authorization type for the custom action."
@@ -15118,13 +14731,11 @@
         "properties": {
           "key": {
             "type": "string",
-            "description": "Enter your key name",
-            "nullable": true
+            "description": "Enter your key name"
           },
           "value": {
             "type": "string",
-            "description": "Enter you key value",
-            "nullable": true
+            "description": "Enter you key value"
           }
         },
         "description": "With API key auth, you send a key-value pair to the API either in the request headers or query parameters."
@@ -15134,13 +14745,11 @@
         "properties": {
           "password": {
             "type": "string",
-            "description": "Password for the basic authentication",
-            "nullable": true
+            "description": "Password for the basic authentication"
           },
           "username": {
             "type": "string",
-            "description": "Username for the basic authentication",
-            "nullable": true
+            "description": "Username for the basic authentication"
           }
         },
         "description": "Basic Auth: Basic authentication involves sending a verified username and password with your request."
@@ -15150,13 +14759,11 @@
         "properties": {
           "key": {
             "type": "string",
-            "description": "Key for the url query parameter",
-            "nullable": true
+            "description": "Key for the url query parameter"
           },
           "value": {
             "type": "string",
-            "description": "Value for the url query parameter",
-            "nullable": true
+            "description": "Value for the url query parameter"
           }
         }
       },
@@ -15168,8 +14775,7 @@
         "properties": {
           "action_config": {
             "$ref": "#/components/schemas/ActionConfigInputCreate",
-            "description": "Specify that the association is enabled for the metadata object",
-            "nullable": true
+            "description": "Specify that the association is enabled for the metadata object"
           },
           "identifier": {
             "type": "string",
@@ -15182,8 +14788,7 @@
               "ANSWER",
               "WORKSHEET"
             ],
-            "description": "Type of metadata.",
-            "nullable": true
+            "description": "Type of metadata."
           }
         }
       },
@@ -15198,14 +14803,12 @@
               "CONTEXT_MENU"
             ],
             "default": "MENU",
-            "description": "Position of the Custom action on the Metadata object. Earlier naming convention: context.",
-            "nullable": true
+            "description": "Position of the Custom action on the Metadata object. Earlier naming convention: context."
           },
           "visibility": {
             "type": "boolean",
             "default": true,
-            "description": "Visibility of the metadata association with custom action. Earlier naming convention: enabled",
-            "nullable": true
+            "description": "Visibility of the metadata association with custom action. Earlier naming convention: enabled"
           }
         },
         "description": "Specify that the association is enabled for the metadata object Default"
@@ -15216,8 +14819,7 @@
           "visibility": {
             "type": "boolean",
             "default": true,
-            "description": "Custom action is available on all visualizations. Earlier naming convention: LOCAL/GLOBAL. TRUE signifies GLOBAL for backward compatibility.\nDefault: true",
-            "nullable": true
+            "description": "Custom action is available on all visualizations. Earlier naming convention: LOCAL/GLOBAL. TRUE signifies GLOBAL for backward compatibility.\nDefault: true"
           }
         },
         "description": "Default Custom action configuration. This includes the custom action's visibility across all visualizations and Answers. By default, a custom action is added to all visualizations and Answers."
@@ -15227,13 +14829,11 @@
         "properties": {
           "CALLBACK": {
             "$ref": "#/components/schemas/CALLBACKInput",
-            "description": "CALLBACK Custom Action Type",
-            "nullable": true
+            "description": "CALLBACK Custom Action Type"
           },
           "URL": {
             "$ref": "#/components/schemas/URLInput",
-            "description": "URL Custom Action Type",
-            "nullable": true
+            "description": "URL Custom Action Type"
           }
         },
         "description": "Action details includes `Type` and configuration details of Custom Actions. Either Callback or URL is required."
@@ -15243,8 +14843,7 @@
         "properties": {
           "reference": {
             "type": "string",
-            "description": "Reference name. By default, the value will be set to action name.",
-            "nullable": true
+            "description": "Reference name. By default, the value will be set to action name."
           }
         },
         "description": "CALLBACK Custom Action Type"
@@ -15254,26 +14853,22 @@
         "properties": {
           "authentication": {
             "$ref": "#/components/schemas/AuthenticationInput",
-            "description": "Authorization type for the custom action.",
-            "nullable": true
+            "description": "Authorization type for the custom action."
           },
           "parameters": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ParametersListItemInput"
             },
-            "description": "Query parameters for url.",
-            "nullable": true
+            "description": "Query parameters for url."
           },
           "url": {
             "type": "string",
-            "description": "Request Url for the Custom action.",
-            "nullable": true
+            "description": "Request Url for the Custom action."
           },
           "reference": {
             "type": "string",
-            "description": "Reference name. By default the value will be set to action name",
-            "nullable": true
+            "description": "Reference name. By default the value will be set to action name"
           }
         },
         "description": "URL Custom Action Type"
@@ -15283,13 +14878,11 @@
         "properties": {
           "action_config": {
             "$ref": "#/components/schemas/ActionConfigInput",
-            "description": "Specify that the association is enabled for the metadata object",
-            "nullable": true
+            "description": "Specify that the association is enabled for the metadata object"
           },
           "identifier": {
             "type": "string",
-            "description": "Unique ID or name of the metadata.",
-            "nullable": true
+            "description": "Unique ID or name of the metadata."
           },
           "type": {
             "type": "string",
@@ -15298,8 +14891,7 @@
               "ANSWER",
               "WORKSHEET"
             ],
-            "description": "Type of metadata.",
-            "nullable": true
+            "description": "Type of metadata."
           }
         }
       },
@@ -15313,13 +14905,11 @@
               "PRIMARY",
               "CONTEXT_MENU"
             ],
-            "description": "Position of the Custom action on the Metadata object. Earlier naming convention: context.",
-            "nullable": true
+            "description": "Position of the Custom action on the Metadata object. Earlier naming convention: context."
           },
           "visibility": {
             "type": "boolean",
-            "description": "Visibility of the metadata association with custom action. Earlier naming convention: enabled",
-            "nullable": true
+            "description": "Visibility of the metadata association with custom action. Earlier naming convention: enabled"
           }
         },
         "description": "Specify that the association is enabled for the metadata object Default"
@@ -15329,8 +14919,7 @@
         "properties": {
           "visibility": {
             "type": "boolean",
-            "description": "Custom action is available on all visualizations. Earlier naming convention: LOCAL/GLOBAL. TRUE signifies GLOBAL for backward compatibility.",
-            "nullable": true
+            "description": "Custom action is available on all visualizations. Earlier naming convention: LOCAL/GLOBAL. TRUE signifies GLOBAL for backward compatibility."
           }
         },
         "description": "Default Custom action configuration. This includes the custom action's visibility across all visualizations and Answers. By default, a custom action is added to all visualizations and Answers."
@@ -15348,8 +14937,7 @@
           },
           "model_path": {
             "type": "string",
-            "description": "Model directory path, this is optional param and required if there are duplicate models with the same name.",
-            "nullable": true
+            "description": "Model directory path, this is optional param and required if there are duplicate models with the same name."
           },
           "tables": {
             "type": "array",
@@ -15364,32 +14952,25 @@
         "type": "object",
         "properties": {
           "dbt_connection_identifier": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "project_name": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "connection_id": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "connection_name": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "cdw_database": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "import_type": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "author_name": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           }
         }
       },
