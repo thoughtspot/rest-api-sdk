@@ -1917,22 +1917,6 @@
                     "default": false,
                     "type": "boolean",
                     "nullable": true
-                  },
-                  "record_offset": {
-                    "description": "The starting record number from where the records should be included for each metadata type.",
-                    "default": 0,
-                    "type": "integer",
-                    "format": "int32"
-                  },
-                  "record_size": {
-                    "description": "The number of records that should be included for each metadata type.",
-                    "default": -1,
-                    "type": "integer",
-                    "format": "int32"
-                  },
-                  "permission_type": {
-                    "description": "Permission type if it is effective then fetch the effective permission\nof principals else fetch the defined permission of principals.",
-                    "type": "string"
                   }
                 },
                 "required": [
