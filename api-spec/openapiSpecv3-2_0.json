@@ -3336,7 +3336,7 @@
                     }
                   },
                   "jwt_user_options": {
-                    "description": "JWT user options to create a JWT token given the payload. Deprecated from 9.10.5.cl : Replaced by user_parameters",
+                    "description": "WOLOLO",
                     "$ref": "#/components/schemas/JWT_User_Options",
                     "deprecated": true
                   },
