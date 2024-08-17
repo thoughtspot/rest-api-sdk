@@ -13065,7 +13065,7 @@
             }
           }
         },
-        "description": "JWT user options to create a JWT token given the payload."
+        "description": "This is for object huh? "
       },
       "JWT_Parameter": {
         "type": "object",
