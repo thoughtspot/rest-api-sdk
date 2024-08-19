@@ -13622,7 +13622,7 @@
             "nullable": true
           }
         },
-        "description": "JWT user options to create a JWT token given the payload."
+        "description": "JWT user options to create a JWT token given the payload.\n\n\n *Deprecated from 9.10.5.cl : Replaced by user_parameters* "
       },
       "TokenValidationResponse": {
         "type": "object",
