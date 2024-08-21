@@ -3494,7 +3494,7 @@
                     }
                   },
                   "jwt_user_options": {
-                    "description": "Deprecated in 9.12.0.cl. Use user_parameters  instead.",
+                    "description": "    JWT user options to create a JWT token given the payload.\n    \n\n*Deprecated in 9.12.0.cl. Use user_parameters instead.*",
                     "$ref": "#/components/schemas/JWT_User_Options",
                     "deprecated": true
                   },
@@ -3628,7 +3628,7 @@
                     }
                   },
                   "jwt_user_options": {
-                    "description": "Deprecated in 9.12.0.cl. Use user_parameters  instead.",
+                    "description": "    JWT user options to create a JWT token given the payload.\n    \n\n*Deprecated in 9.12.0.cl. Use user_parameters instead.*",
                     "$ref": "#/components/schemas/JWT_User_Options_Full",
                     "deprecated": true
                   },
@@ -13778,7 +13778,7 @@
             "nullable": true
           }
         },
-        "description": "Deprecated in 9.12.0.cl. Use user_parameters  instead."
+        "description": "JWT user options to create a JWT token given the payload.\n\n\n*Deprecated in 9.12.0.cl. Use user_parameters instead.*"
       },
       "JWT_Parameter": {
         "type": "object",
@@ -14080,7 +14080,7 @@
             "nullable": true
           }
         },
-        "description": "Deprecated in 9.12.0.cl. Use user_parameters  instead."
+        "description": "JWT user options to create a JWT token given the payload.\n\n\n*Deprecated in 9.12.0.cl. Use user_parameters instead.*"
       },
       "TokenValidationResponse": {
         "type": "object",
@@ -14580,7 +14580,7 @@
               "LOGICAL_TABLE",
               "CUSTOM_ACTION"
             ],
-            "description": "  Type of metadata. \n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.",
+            "description": "  Type of metadata.\n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.",
             "nullable": true
           }
         }
