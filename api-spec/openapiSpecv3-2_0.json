@@ -2057,7 +2057,7 @@
                     "type": "string"
                   },
                   "data_format": {
-                    "description": "JSON output format. By default, the API returns full data in the JSON.",
+                    "description": "JSON output in compact or full format. The FULL option is available in 9.12.5.cl or later.",
                     "default": "COMPACT",
                     "type": "string",
                     "enum": [
@@ -2184,7 +2184,7 @@
                     "type": "string"
                   },
                   "data_format": {
-                    "description": "JSON output format. By default, the API returns full data in the JSON.",
+                    "description": "JSON output in compact or full format. The FULL option is available in 9.12.5.cl or later.",
                     "default": "COMPACT",
                     "type": "string",
                     "enum": [
@@ -2299,7 +2299,7 @@
                     "type": "string"
                   },
                   "data_format": {
-                    "description": "JSON output format. By default, the API returns full data in the JSON.",
+                    "description": "JSON output in compact or full format. The FULL option is available in 9.12.5.cl or later.",
                     "default": "COMPACT",
                     "type": "string",
                     "enum": [
@@ -3336,12 +3336,12 @@
                     }
                   },
                   "jwt_user_options": {
-                    "description": "   JWT user options to create a JWT token given the payload.\n   \n\n*Deprecated from 9.10.5.cl : Replaced by user_parameters* ",
+                    "description": "    JWT user options to create a JWT token given the payload.\n    \n\n*Deprecated in 9.12.0.cl. Use user_parameters instead.*",
                     "$ref": "#/components/schemas/JWT_User_Options",
                     "deprecated": true
                   },
                   "user_parameters": {
-                    "description": "User Parameters to be set via JWT Token. <br/>  <span class=\"since-beta-tag\">Version: 9.10.5.cl or later</span>",
+                    "description": "Define attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters). <br/>  <span class=\"since-beta-tag\">Version: 9.10.5.cl or later</span>",
                     "$ref": "#/components/schemas/User_Parameter_Options"
                   }
                 },
@@ -3470,12 +3470,12 @@
                     }
                   },
                   "jwt_user_options": {
-                    "description": "   JWT user options to create a JWT token given the payload.\n   \n\n*Deprecated from 9.10.5.cl : Replaced by user_parameters* ",
+                    "description": "    JWT user options to create a JWT token given the payload.\n    \n\n*Deprecated in 9.12.0.cl. Use user_parameters instead.*",
                     "$ref": "#/components/schemas/JWT_User_Options_Full",
                     "deprecated": true
                   },
                   "user_parameters": {
-                    "description": "User Parameters to be set via JWT Token. <br/>  <span class=\"since-beta-tag\">Version: 9.10.5.cl or later</span>",
+                    "description": "Define attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters). <br/>  <span class=\"since-beta-tag\">Version: 9.10.5.cl or later</span>",
                     "$ref": "#/components/schemas/User_Parameter_Options"
                   }
                 },
@@ -3900,7 +3900,7 @@
                     "nullable": true
                   },
                   "trigger_activation_email": {
-                    "description": "Flag to indicate whether activation email should be sent to user",
+                    "description": "Flag to indicate whether activation email should be sent to user.",
                     "type": "boolean",
                     "nullable": true
                   }
@@ -7018,7 +7018,7 @@
     "/api/rest/2.0/vcs/git/branches/commit": {
       "post": {
         "operationId": "commitBranch",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nCommits TML files of metadata objects to the Git branch configured on your instance.\n\nRequires `DATAMANAGEMENT` privilege.\n\nBefore using this endpoint to push your commits:\n\n* Enable Git integration on your instance.\n* Make sure the Git repository and branch details are configured on your instance.\n\nFor more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nCommits TML files of metadata objects to the Git branch configured on your instance.\n\nRequires at least edit access to objects used in the commit operation.\n\nBefore using this endpoint to push your commits:\n\n* Enable Git integration on your instance.\n* Make sure the Git repository and branch details are configured on your instance.\n\nFor more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Version Control",
           "9.2.0.cl"
@@ -7118,7 +7118,7 @@
     "/api/rest/2.0/vcs/git/commits/{commit_id}/revert": {
       "post": {
         "operationId": "revertCommit",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nReverts TML objects to a previous commit specified in the API request.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) privilege.\n\nIn the API request, specify the `commit_id`. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.\n\nBy default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nReverts TML objects to a previous commit specified in the API request.\n\nRequires at least edit access to objects.\n\nIn the API request, specify the `commit_id`. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.\n\nBy default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.\n\nFor more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Version Control",
           "9.2.0.cl"
@@ -7313,7 +7313,7 @@
     "/api/rest/2.0/vcs/git/commits/deploy": {
       "post": {
         "operationId": "deployCommit",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nAllows you to deploy a commit and publish TML content to your ThoughtSpot instance.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) privilege.\n\nThe API deploys the head of the branch unless a `commit_id` is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nAllows you to deploy a commit and publish TML content to your ThoughtSpot instance.\n\nRequires at least edit access to the objects used in the deploy operation.\n\nThe API deploys the head of the branch unless a `commit_id` is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.\n\nFor more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Version Control",
           "9.2.0.cl"
@@ -11280,7 +11280,7 @@
               "USER_GROUP",
               "LOGICAL_RELATIONSHIP"
             ],
-            "description": "Type of metadata object."
+            "description": "  Type of metadata object.\n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier."
           }
         }
       },
@@ -11311,7 +11311,7 @@
               "LIVEBOARD",
               "ANSWER"
             ],
-            "description": "Type of metadata object."
+            "description": "  Type of metadata object.\n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier."
           }
         }
       },
@@ -12071,7 +12071,7 @@
               "LOGICAL_COLUMN",
               "CONNECTION"
             ],
-            "description": "Type of metadata object."
+            "description": "  Type of metadata object.\n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier."
           },
           "identifier": {
             "type": "string",
@@ -12978,7 +12978,7 @@
           },
           "type": {
             "type": "string",
-            "description": "Type of metadata."
+            "description": "  Type of metadata.\n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier."
           }
         }
       },
@@ -13009,7 +13009,7 @@
               "ANSWER",
               "WORKSHEET"
             ],
-            "description": "Type of metadata object."
+            "description": "  Type of metadata object.\n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier."
           },
           "identifier": {
             "type": "string",
@@ -13065,7 +13065,7 @@
             }
           }
         },
-        "description": "JWT user options to create a JWT token given the payload."
+        "description": "JWT user options to create a JWT token given the payload.\n\n\n*Deprecated in 9.12.0.cl. Use user_parameters instead.*"
       },
       "JWT_Parameter": {
         "type": "object",
@@ -13134,7 +13134,7 @@
             "description": " <span class=\"since-beta-tag\">Version: 9.12.0.cl or later</span>"
           }
         },
-        "description": "User properties runtime_filters,runtime_sorts,parameters applicable to LOGICAL_TABLE(Worksheet)"
+        "description": "Define attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters)."
       },
       "User_Object": {
         "type": "object",
@@ -13149,7 +13149,7 @@
               "ANSWER",
               "LOGICAL_TABLE"
             ],
-            "description": "Type of object."
+            "description": "  Type of object.\n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier."
           },
           "identifier": {
             "type": "string",
@@ -13345,7 +13345,7 @@
             }
           }
         },
-        "description": "JWT user options to create a JWT token given the payload."
+        "description": "JWT user options to create a JWT token given the payload.\n\n\n*Deprecated in 9.12.0.cl. Use user_parameters instead.*"
       },
       "TokenValidationResponse": {
         "type": "object",
@@ -13540,7 +13540,7 @@
               "LOGICAL_COLUMN",
               "CONNECTION"
             ],
-            "description": "Type of metadata (Optional when given identifier is ID).\n1. LIVEBOARD\n2. ANSWERS\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n4. LOGICAL_COLUMN for a column of any data object such as tables, worksheets or views."
+            "description": "  Type of metadata.\n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.\n  1. LIVEBOARD\n  2. ANSWERS\n  3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n  4. LOGICAL_COLUMN for a column of any data object such as tables, worksheets or views."
           },
           "identifier": {
             "type": "string",
@@ -13687,7 +13687,7 @@
               "USER_GROUP",
               "ROLE"
             ],
-            "description": "Type of metadata (Optional when given identifier is ID)."
+            "description": "  Type of metadata.\n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier."
           },
           "identifier": {
             "type": "string",
@@ -13711,7 +13711,7 @@
               "LOGICAL_COLUMN",
               "LOGICAL_RELATIONSHIP"
             ],
-            "description": "Type of metadata (Optional when given identifier is ID)."
+            "description": "  Type of metadata.\n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier."
           },
           "identifier": {
             "type": "string",
@@ -13733,7 +13733,7 @@
               "ANSWER",
               "LOGICAL_TABLE"
             ],
-            "description": "Type of metadata."
+            "description": "  Type of metadata.\n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier."
           },
           "identifier": {
             "type": "string",
@@ -13755,7 +13755,7 @@
               "ANSWER",
               "LOGICAL_TABLE"
             ],
-            "description": "Type of metadata (Optional when given identifier is ID)."
+            "description": "  Type of metadata.\n  \n\nType of metadata. Required if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier."
           },
           "identifier": {
             "type": "string",
@@ -13803,7 +13803,7 @@
               "LOGICAL_TABLE",
               "CUSTOM_ACTION"
             ],
-            "description": "Type of metadata."
+            "description": "  Type of metadata.\n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier."
           }
         }
       },
@@ -14788,7 +14788,7 @@
               "ANSWER",
               "WORKSHEET"
             ],
-            "description": "Type of metadata."
+            "description": "  Type of metadata.\n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier."
           }
         }
       },
@@ -14891,7 +14891,7 @@
               "ANSWER",
               "WORKSHEET"
             ],
-            "description": "Type of metadata."
+            "description": "  Type of metadata.\n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier."
           }
         }
       },
