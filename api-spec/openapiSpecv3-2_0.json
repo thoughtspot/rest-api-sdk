@@ -54,6 +54,14 @@
       "description": "Roles for version 10.1.0.cl"
     },
     {
+      "name": "10.3.0.cl",
+      "id": "10.3.0.cl",
+      "tags": [
+        "10.3.0.cl"
+      ],
+      "description": "Roles for version 10.3.0.cl"
+    },
+    {
       "name": "10.0.0.cl",
       "id": "10.0.0.cl",
       "tags": [
@@ -306,7 +314,8 @@
                         "THIRDPARTY_ANALYSIS",
                         "ALLOW_NON_EMBED_FULL_APP_ACCESS",
                         "CAN_ACCESS_ANALYST_STUDIO",
-                        "CAN_MANAGE_ANALYST_STUDIO"
+                        "CAN_MANAGE_ANALYST_STUDIO",
+                        "PREVIEW_DOCUMENT_SEARCH"
                       ]
                     }
                   },
@@ -379,7 +388,11 @@
                   },
                   "sort_options": {
                     "description": "Sort options.",
-                    "$ref": "#/components/schemas/SortOptions"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/SortOptions"
+                      }
+                    ]
                   },
                   "role_identifiers": {
                     "description": "Filters by the role assigned to the user.",
@@ -1019,7 +1032,8 @@
                         "THIRDPARTY_ANALYSIS",
                         "ALLOW_NON_EMBED_FULL_APP_ACCESS",
                         "CAN_ACCESS_ANALYST_STUDIO",
-                        "CAN_MANAGE_ANALYST_STUDIO"
+                        "CAN_MANAGE_ANALYST_STUDIO",
+                        "PREVIEW_DOCUMENT_SEARCH"
                       ]
                     }
                   },
@@ -1074,7 +1088,11 @@
                   },
                   "sort_options": {
                     "description": "Sort options to filter group details.",
-                    "$ref": "#/components/schemas/SortOptions"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/SortOptions"
+                      }
+                    ]
                   }
                 }
               }
@@ -1193,7 +1211,11 @@
                   },
                   "favorite_object_options": {
                     "description": "Options to sort the API response by objects set as favorites\nfor the logged-in user or the users specified in the API request.",
-                    "$ref": "#/components/schemas/FavoriteObjectOptionsInput"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/FavoriteObjectOptionsInput"
+                      }
+                    ]
                   },
                   "include_auto_created_objects": {
                     "description": "Includes system-generated metadata objects.",
@@ -1269,7 +1291,11 @@
                   },
                   "sort_options": {
                     "description": "Sort options to filter metadata details.",
-                    "$ref": "#/components/schemas/MetadataSearchSortOptions"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/MetadataSearchSortOptions"
+                      }
+                    ]
                   },
                   "tag_identifiers": {
                     "description": "Tags to filter metadata objects by",
@@ -1382,17 +1408,17 @@
                       ]
                     }
                   },
-                  "author_id": {
+                  "author_identifier": {
                     "description": "Author ID of async import tasks to filter on.",
                     "type": "string"
                   },
-                  "offset": {
+                  "record_offset": {
                     "description": "The offset point, starting from where the task status should be included in the response.",
                     "default": 0,
                     "type": "integer",
                     "format": "int32"
                   },
-                  "batch_size": {
+                  "record_size": {
                     "description": "The number of task statuses that should be included in the response starting from offset position.",
                     "default": 5,
                     "type": "integer",
@@ -1417,10 +1443,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/ImportEPackAsyncTaskStatus"
-                  }
+                  "$ref": "#/components/schemas/GetAsyncImportStatusResponse"
                 }
               }
             }
@@ -1689,11 +1712,19 @@
                   },
                   "pdf_options": {
                     "description": "Options for PDF export.",
-                    "$ref": "#/components/schemas/PdfOptionsInput"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/PdfOptionsInput"
+                      }
+                    ]
                   },
                   "png_options": {
                     "description": "Options for PNG export.",
-                    "$ref": "#/components/schemas/PngOptionsInput"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/PngOptionsInput"
+                      }
+                    ]
                   },
                   "runtime_param_override": {
                     "description": "JSON object for setting values of parameters at runtime. For example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>. You can add multiple keys by incrementing the number at the end, for example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters).",
@@ -2205,7 +2236,7 @@
                     "type": "string"
                   },
                   "data_format": {
-                    "description": "JSON output format. By default, the API returns full data in the JSON.",
+                    "description": "JSON output in compact or full format. The FULL option is available in 9.12.5.cl or later.",
                     "default": "COMPACT",
                     "type": "string",
                     "enum": [
@@ -2332,7 +2363,7 @@
                     "type": "string"
                   },
                   "data_format": {
-                    "description": "JSON output format. By default, the API returns full data in the JSON.",
+                    "description": "JSON output in compact or full format. The FULL option is available in 9.12.5.cl or later.",
                     "default": "COMPACT",
                     "type": "string",
                     "enum": [
@@ -2447,7 +2478,7 @@
                     "type": "string"
                   },
                   "data_format": {
-                    "description": "JSON output format. By default, the API returns full data in the JSON.",
+                    "description": "JSON output in compact or full format. The FULL option is available in 9.12.5.cl or later.",
                     "default": "COMPACT",
                     "type": "string",
                     "enum": [
@@ -2932,7 +2963,11 @@
                   },
                   "sort_options": {
                     "description": "Sort options.",
-                    "$ref": "#/components/schemas/SortOptionInput"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/SortOptionInput"
+                      }
+                    ]
                   },
                   "include_details": {
                     "description": "Indicates whether to include complete details of the connection objects.",
@@ -3101,7 +3136,8 @@
                         "CAN_CREATE_CATALOG",
                         "ALLOW_NON_EMBED_FULL_APP_ACCESS",
                         "CAN_ACCESS_ANALYST_STUDIO",
-                        "CAN_MANAGE_ANALYST_STUDIO"
+                        "CAN_MANAGE_ANALYST_STUDIO",
+                        "PREVIEW_DOCUMENT_SEARCH"
                       ]
                     }
                   },
@@ -3224,7 +3260,11 @@
                   },
                   "default_action_config": {
                     "description": "Default Custom action configuration. This includes if the custom action is available on all visualizations. By default, a custom action is added to all visualizations and Answers.",
-                    "$ref": "#/components/schemas/Default_Action_Config_Search_Input"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/Default_Action_Config_Search_Input"
+                      }
+                    ]
                   },
                   "include_group_associations": {
                     "description": "When set to true, returns the associated groups for a custom action.",
@@ -3436,7 +3476,7 @@
                 "type": "object",
                 "properties": {
                   "username": {
-                    "description": "Username of the ThoughtSpot user",
+                    "description": "Define attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters).",
                     "type": "string"
                   },
                   "object_id": {
@@ -3485,14 +3525,13 @@
                       "type": "string"
                     }
                   },
-                  "jwt_user_options": {
-                    "description": "   JWT user options to create a JWT token given the payload.\n   \n\n*Deprecated from 9.10.5.cl : Replaced by user_parameters* ",
-                    "$ref": "#/components/schemas/JWT_User_Options",
-                    "deprecated": true
-                  },
                   "user_parameters": {
-                    "description": "User Parameters to be set via JWT Token. <br/>  <span class=\"since-beta-tag\">Version: 9.10.5.cl or later</span>",
-                    "$ref": "#/components/schemas/User_Parameter_Options"
+                    "description": "Define attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters).",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/User_Parameter_Options"
+                      }
+                    ]
                   }
                 },
                 "required": [
@@ -3619,14 +3658,13 @@
                       "type": "string"
                     }
                   },
-                  "jwt_user_options": {
-                    "description": "   JWT user options to create a JWT token given the payload.\n   \n\n*Deprecated from 9.10.5.cl : Replaced by user_parameters* ",
-                    "$ref": "#/components/schemas/JWT_User_Options_Full",
-                    "deprecated": true
-                  },
                   "user_parameters": {
-                    "description": "User Parameters to be set via JWT Token. <br/>  <span class=\"since-beta-tag\">Version: 9.10.5.cl or later</span>",
-                    "$ref": "#/components/schemas/User_Parameter_Options"
+                    "description": "Define attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters).",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/User_Parameter_Options"
+                      }
+                    ]
                   }
                 },
                 "required": [
@@ -5749,7 +5787,8 @@
                         "THIRDPARTY_ANALYSIS",
                         "ALLOW_NON_EMBED_FULL_APP_ACCESS",
                         "CAN_ACCESS_ANALYST_STUDIO",
-                        "CAN_MANAGE_ANALYST_STUDIO"
+                        "CAN_MANAGE_ANALYST_STUDIO",
+                        "PREVIEW_DOCUMENT_SEARCH"
                       ]
                     }
                   },
@@ -5920,7 +5959,8 @@
                         "THIRDPARTY_ANALYSIS",
                         "ALLOW_NON_EMBED_FULL_APP_ACCESS",
                         "CAN_ACCESS_ANALYST_STUDIO",
-                        "CAN_MANAGE_ANALYST_STUDIO"
+                        "CAN_MANAGE_ANALYST_STUDIO",
+                        "PREVIEW_DOCUMENT_SEARCH"
                       ]
                     }
                   },
@@ -6744,6 +6784,114 @@
         }
       }
     },
+    "/api/rest/2.0/metadata/copyobject": {
+      "post": {
+        "operationId": "copyObject",
+        "description": "\nMakes a copy of an Answer or Liveboard saved in Atlas <br/>  <span class=\"since-beta-tag\">Version: 10.3.0.cl or later</span>\n\nCreates a copy of the metadata object specified in the API request.\n\nRequires create access to metadata objects\n\nUpon successful execution, the API returns the id of the new object which is copied from the given object.\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Metadata",
+          "10.3.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "description": {
+                    "description": "Description of the new object",
+                    "type": "string"
+                  },
+                  "identifier": {
+                    "description": "GUID of metadata object to be copied (answer id or liveboard id)",
+                    "type": "string"
+                  },
+                  "type": {
+                    "description": "Type of metadata object",
+                    "type": "string",
+                    "enum": [
+                      "LIVEBOARD",
+                      "ANSWER"
+                    ]
+                  },
+                  "title": {
+                    "description": "Title of the new object",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "identifier"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successfully created a copy of the object",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseCopyObject"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Object not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/security/metadata/assign": {
       "post": {
         "operationId": "assignChangeAuthor",
@@ -7270,7 +7418,7 @@
     "/api/rest/2.0/vcs/git/branches/commit": {
       "post": {
         "operationId": "commitBranch",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nCommits TML files of metadata objects to the Git branch configured on your instance.\n\nRequires `DATAMANAGEMENT` privilege.\n\nBefore using this endpoint to push your commits:\n\n* Enable Git integration on your instance.\n* Make sure the Git repository and branch details are configured on your instance.\n\nFor more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nCommits TML files of metadata objects to the Git branch configured on your instance.\n\nRequires at least edit access to objects used in the commit operation.\n\nBefore using this endpoint to push your commits:\n\n* Enable Git integration on your instance.\n* Make sure the Git repository and branch details are configured on your instance.\n\nFor more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Version Control",
           "9.2.0.cl"
@@ -7370,7 +7518,7 @@
     "/api/rest/2.0/vcs/git/commits/{commit_id}/revert": {
       "post": {
         "operationId": "revertCommit",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nReverts TML objects to a previous commit specified in the API request.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) privilege.\n\nIn the API request, specify the `commit_id`. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.\n\nBy default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nReverts TML objects to a previous commit specified in the API request.\n\nRequires at least edit access to objects.\n\nIn the API request, specify the `commit_id`. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.\n\nBy default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.\n\nFor more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Version Control",
           "9.2.0.cl"
@@ -7565,7 +7713,7 @@
     "/api/rest/2.0/vcs/git/commits/deploy": {
       "post": {
         "operationId": "deployCommit",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nAllows you to deploy a commit and publish TML content to your ThoughtSpot instance.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) privilege.\n\nThe API deploys the head of the branch unless a `commit_id` is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nAllows you to deploy a commit and publish TML content to your ThoughtSpot instance.\n\nRequires at least edit access to the objects used in the deploy operation.\n\nThe API deploys the head of the branch unless a `commit_id` is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.\n\nFor more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Version Control",
           "9.2.0.cl"
@@ -8334,7 +8482,8 @@
                         "CAN_CREATE_CATALOG",
                         "ALLOW_NON_EMBED_FULL_APP_ACCESS",
                         "CAN_ACCESS_ANALYST_STUDIO",
-                        "CAN_MANAGE_ANALYST_STUDIO"
+                        "CAN_MANAGE_ANALYST_STUDIO",
+                        "PREVIEW_DOCUMENT_SEARCH"
                       ]
                     }
                   }
@@ -8458,9 +8607,9 @@
                         "CAN_MANAGE_VERSION_CONTROL",
                         "THIRDPARTY_ANALYSIS",
                         "CAN_CREATE_CATALOG",
-                        "ALLOW_NON_EMBED_FULL_APP_ACCESS",
                         "CAN_ACCESS_ANALYST_STUDIO",
-                        "CAN_MANAGE_ANALYST_STUDIO"
+                        "CAN_MANAGE_ANALYST_STUDIO",
+                        "PREVIEW_DOCUMENT_SEARCH"
                       ]
                     }
                   }
@@ -8649,11 +8798,19 @@
                   },
                   "liveboard_options": {
                     "description": "Options to specify details of Liveboard.",
-                    "$ref": "#/components/schemas/LiveboardOptionsInput"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/LiveboardOptionsInput"
+                      }
+                    ]
                   },
                   "pdf_options": {
                     "description": "PDF layout and orientation settings. Applicable only if the `file_format` is specified as `PDF`.",
-                    "$ref": "#/components/schemas/SchedulesPdfOptionsInput"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/SchedulesPdfOptionsInput"
+                      }
+                    ]
                   },
                   "time_zone": {
                     "description": "Time zone",
@@ -9294,11 +9451,19 @@
                   },
                   "frequency": {
                     "description": "Frequency settings for the scheduled job.",
-                    "$ref": "#/components/schemas/FrequencyInput"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/FrequencyInput"
+                      }
+                    ]
                   },
                   "recipient_details": {
                     "description": "Recipients of the scheduled job notifications. Add the GUID or name of the ThoughtSpot users or groups as recipients in the `principals` array. If a recipient is not a ThoughtSpot user, specify email address.",
-                    "$ref": "#/components/schemas/RecipientDetailsInput"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/RecipientDetailsInput"
+                      }
+                    ]
                   }
                 },
                 "required": [
@@ -9468,11 +9633,19 @@
                   },
                   "sort_options": {
                     "description": "Sort options.",
-                    "$ref": "#/components/schemas/SortingOptions"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/SortingOptions"
+                      }
+                    ]
                   },
                   "history_runs_options": {
                     "description": "Options while fetching history runs for the schedule.",
-                    "$ref": "#/components/schemas/ScheduleHistoryRunsOptionsInput"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/ScheduleHistoryRunsOptionsInput"
+                      }
+                    ]
                   },
                   "schedule_identifiers": {
                     "description": "unique ID or name of the Schedule",
@@ -9589,11 +9762,19 @@
                   },
                   "liveboard_options": {
                     "description": "Options to specify the details of a Liveboard.",
-                    "$ref": "#/components/schemas/LiveboardOptionsInput"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/LiveboardOptionsInput"
+                      }
+                    ]
                   },
                   "pdf_options": {
                     "description": "Options for PDF export.",
-                    "$ref": "#/components/schemas/SchedulesPdfOptionsInput"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/SchedulesPdfOptionsInput"
+                      }
+                    ]
                   },
                   "time_zone": {
                     "description": "Time zone",
@@ -10233,11 +10414,19 @@
                   },
                   "frequency": {
                     "description": "Frequency of the scheduled job run.",
-                    "$ref": "#/components/schemas/FrequencyInput"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/FrequencyInput"
+                      }
+                    ]
                   },
                   "recipient_details": {
                     "description": "Recipients of the scheduled job notifications. You can add the ID or name of the ThoughtSpot users or groups as recipients in the `principals` array. If a recipient is not a ThoughtSpot user, specify email address.",
-                    "$ref": "#/components/schemas/RecipientDetailsInput"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/RecipientDetailsInput"
+                      }
+                    ]
                   },
                   "status": {
                     "description": "Status of the schedule",
@@ -10331,7 +10520,11 @@
                   },
                   "action_details": {
                     "description": "Action details includes `Type` and Configuration data for Custom Actions, either Callback or URL is required.",
-                    "$ref": "#/components/schemas/Action_Details_Input_Create"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/Action_Details_Input_Create"
+                      }
+                    ]
                   },
                   "associate_metadata": {
                     "description": "Metadata objects to which the custom action needs to be associated.",
@@ -10342,7 +10535,11 @@
                   },
                   "default_action_config": {
                     "description": "Default Custom action configuration. This includes if the custom action is available on all visualizations. By default, a custom action is added to all visualizations and Answers.",
-                    "$ref": "#/components/schemas/Default_Action_Config_Input_Create"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/Default_Action_Config_Input_Create"
+                      }
+                    ]
                   },
                   "group_identifiers": {
                     "description": "Unique ID or name of the groups that can view and access the custom action.",
@@ -10450,7 +10647,11 @@
                 "properties": {
                   "action_details": {
                     "description": "Action details includes `Type` and Configuration for Custom Actions, either Callback or URL is required.",
-                    "$ref": "#/components/schemas/Action_Details_Input"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/Action_Details_Input"
+                      }
+                    ]
                   },
                   "associate_metadata": {
                     "description": "Metadata objects to which the custom action needs to be associated.",
@@ -10461,7 +10662,11 @@
                   },
                   "default_action_config": {
                     "description": "Default Custom action configuration. This includes if the custom action available on visualizations and Answers. By default, a custom action is added to all visualizations and Answers.",
-                    "$ref": "#/components/schemas/Default_Action_Config_Input"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/Default_Action_Config_Input"
+                      }
+                    ]
                   },
                   "group_identifiers": {
                     "description": "Unique ID or name of the groups that can view and access the custom action.",
@@ -11577,7 +11782,7 @@
               "USER_GROUP",
               "LOGICAL_RELATIONSHIP"
             ],
-            "description": "Type of metadata object."
+            "description": "  Type of metadata object.\n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier."
           }
         }
       },
@@ -11611,7 +11816,7 @@
               "LIVEBOARD",
               "ANSWER"
             ],
-            "description": "Type of metadata object.",
+            "description": "  Type of metadata object.\n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.",
             "nullable": true
           }
         }
@@ -12285,6 +12490,24 @@
         },
         "description": "Metadata Search Response Object."
       },
+      "GetAsyncImportStatusResponse": {
+        "type": "object",
+        "properties": {
+          "status_list": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ImportEPackAsyncTaskStatus"
+            },
+            "description": "List of task statuses.",
+            "nullable": true
+          },
+          "last_batch": {
+            "type": "boolean",
+            "description": "Indicates whether there are more task statuses to fetch.",
+            "nullable": true
+          }
+        }
+      },
       "ImportEPackAsyncTaskStatus": {
         "type": "object",
         "properties": {
@@ -12564,7 +12787,7 @@
               "LOGICAL_COLUMN",
               "CONNECTION"
             ],
-            "description": "Type of metadata object.",
+            "description": "  Type of metadata object.\n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.",
             "nullable": true
           },
           "identifier": {
@@ -13267,7 +13490,8 @@
                 "CAN_CREATE_CATALOG",
                 "ALLOW_NON_EMBED_FULL_APP_ACCESS",
                 "CAN_ACCESS_ANALYST_STUDIO",
-                "CAN_MANAGE_ANALYST_STUDIO"
+                "CAN_MANAGE_ANALYST_STUDIO",
+                "PREVIEW_DOCUMENT_SEARCH"
               ]
             },
             "description": "Privileges granted to the role."
@@ -13545,7 +13769,7 @@
           },
           "type": {
             "type": "string",
-            "description": "Type of metadata."
+            "description": "  Type of metadata.\n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier."
           }
         }
       },
@@ -13578,7 +13802,7 @@
               "ANSWER",
               "WORKSHEET"
             ],
-            "description": "Type of metadata object.",
+            "description": "  Type of metadata object.\n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.",
             "nullable": true
           },
           "identifier": {
@@ -13640,7 +13864,7 @@
             "nullable": true
           }
         },
-        "description": "JWT user options to create a JWT token given the payload."
+        "description": "JWT user options to create a JWT token given the payload.\n\n\n*Deprecated in 9.12.0.cl. Use user_parameters instead.*"
       },
       "JWT_Parameter": {
         "type": "object",
@@ -13719,7 +13943,7 @@
             "nullable": true
           }
         },
-        "description": "User properties runtime_filters,runtime_sorts,parameters applicable to LOGICAL_TABLE(Worksheet)"
+        "description": "Define attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters)."
       },
       "User_Object": {
         "type": "object",
@@ -13734,7 +13958,7 @@
               "ANSWER",
               "LOGICAL_TABLE"
             ],
-            "description": "Type of object.",
+            "description": "  Type of object.\n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.",
             "nullable": true
           },
           "identifier": {
@@ -13942,7 +14166,7 @@
             "nullable": true
           }
         },
-        "description": "JWT user options to create a JWT token given the payload."
+        "description": "JWT user options to create a JWT token given the payload.\n\n\n*Deprecated in 9.12.0.cl. Use user_parameters instead.*"
       },
       "TokenValidationResponse": {
         "type": "object",
@@ -14154,7 +14378,7 @@
               "LOGICAL_COLUMN",
               "CONNECTION"
             ],
-            "description": "Type of metadata (Optional when given identifier is ID).\n1. LIVEBOARD\n2. ANSWERS\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n4. LOGICAL_COLUMN for a column of any data object such as tables, worksheets or views.",
+            "description": "  Type of metadata.\n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.\n  1. LIVEBOARD\n  2. ANSWERS\n  3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n  4. LOGICAL_COLUMN for a column of any data object such as tables, worksheets or views.",
             "nullable": true
           },
           "identifier": {
@@ -14220,7 +14444,8 @@
                 "THIRDPARTY_ANALYSIS",
                 "ALLOW_NON_EMBED_FULL_APP_ACCESS",
                 "CAN_ACCESS_ANALYST_STUDIO",
-                "CAN_MANAGE_ANALYST_STUDIO"
+                "CAN_MANAGE_ANALYST_STUDIO",
+                "PREVIEW_DOCUMENT_SEARCH"
               ]
             },
             "description": "Privileges that will be assigned to the group.",
@@ -14293,6 +14518,16 @@
           }
         }
       },
+      "ResponseCopyObject": {
+        "type": "object",
+        "properties": {
+          "metadata_id": {
+            "type": "string",
+            "description": "The unique identifier of the object.",
+            "nullable": true
+          }
+        }
+      },
       "ExportMetadataTypeInput": {
         "type": "object",
         "required": [
@@ -14311,7 +14546,7 @@
               "USER_GROUP",
               "ROLE"
             ],
-            "description": "Type of metadata (Optional when given identifier is ID).",
+            "description": "  Type of metadata.\n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.",
             "nullable": true
           },
           "identifier": {
@@ -14336,7 +14571,7 @@
               "LOGICAL_COLUMN",
               "LOGICAL_RELATIONSHIP"
             ],
-            "description": "Type of metadata (Optional when given identifier is ID).",
+            "description": "  Type of metadata.\n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.",
             "nullable": true
           },
           "identifier": {
@@ -14359,7 +14594,7 @@
               "ANSWER",
               "LOGICAL_TABLE"
             ],
-            "description": "Type of metadata.",
+            "description": "  Type of metadata.\n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.",
             "nullable": true
           },
           "identifier": {
@@ -14382,7 +14617,7 @@
               "ANSWER",
               "LOGICAL_TABLE"
             ],
-            "description": "Type of metadata (Optional when given identifier is ID).",
+            "description": "  Type of metadata.\n  \n\nType of metadata. Required if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.",
             "nullable": true
           },
           "identifier": {
@@ -14431,7 +14666,7 @@
               "LOGICAL_TABLE",
               "CUSTOM_ACTION"
             ],
-            "description": "Type of metadata.",
+            "description": "  Type of metadata.\n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.",
             "nullable": true
           }
         }
@@ -14761,7 +14996,8 @@
                 "CAN_CREATE_CATALOG",
                 "ALLOW_NON_EMBED_FULL_APP_ACCESS",
                 "CAN_ACCESS_ANALYST_STUDIO",
-                "CAN_MANAGE_ANALYST_STUDIO"
+                "CAN_MANAGE_ANALYST_STUDIO",
+                "PREVIEW_DOCUMENT_SEARCH"
               ]
             },
             "description": "Privileges granted to the role."
@@ -15508,7 +15744,7 @@
               "ANSWER",
               "WORKSHEET"
             ],
-            "description": "Type of metadata.",
+            "description": "  Type of metadata.\n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.",
             "nullable": true
           }
         }
@@ -15624,7 +15860,7 @@
               "ANSWER",
               "WORKSHEET"
             ],
-            "description": "Type of metadata.",
+            "description": "  Type of metadata.\n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.",
             "nullable": true
           }
         }
