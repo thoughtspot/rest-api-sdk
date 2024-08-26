@@ -3476,7 +3476,7 @@
                 "type": "object",
                 "properties": {
                   "username": {
-                    "description": "Define attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters).",
+                    "description": "Username of the ThoughtSpot user",
                     "type": "string"
                   },
                   "object_id": {
@@ -13935,15 +13935,9 @@
               "$ref": "#/components/schemas/User_Parameters"
             },
             "nullable": true
-          },
-          "compress": {
-            "type": "boolean",
-            "default": false,
-            "description": " <span class=\"since-beta-tag\">Version: 9.12.0.cl or later</span>",
-            "nullable": true
           }
         },
-        "description": "Define attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters)."
+        "description": "Define attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters).\n"
       },
       "User_Object": {
         "type": "object",
