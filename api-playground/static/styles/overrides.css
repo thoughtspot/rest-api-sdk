@@ -31,6 +31,6 @@
     background: grey;
 }
 code {
-    border: 2px solid red;
-    overflow: scroll;
+    border: 2px solid red !important;
+    overflow: scroll !important;
 }
