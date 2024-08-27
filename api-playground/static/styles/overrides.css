@@ -30,3 +30,6 @@
     font-weight: normal;
     background: grey;
 }
+pre > code {
+    overflow: scroll;
+}
