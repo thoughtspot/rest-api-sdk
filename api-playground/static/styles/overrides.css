@@ -30,6 +30,7 @@
     font-weight: normal;
     background: grey;
 }
-pre > code {
+code {
+    border: 2px solid red;
     overflow: scroll;
 }
