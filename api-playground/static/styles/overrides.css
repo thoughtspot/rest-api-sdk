@@ -30,3 +30,6 @@
     font-weight: normal;
     background: grey;
 }
+.rjsf-field-description code {
+    overflow: scroll !important;
+}
