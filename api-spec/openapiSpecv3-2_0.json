@@ -3895,7 +3895,7 @@
                     "type": "object"
                   },
                   "trigger_welcome_email": {
-                    "description": "Flag to indicate whether welcome email should be sent to user",
+                    "description": "Flag to indicate whether welcome email should be sent to user. This parameter is applied only on clusters on which IAM is disabled.",
                     "type": "boolean",
                     "nullable": true
                   },
