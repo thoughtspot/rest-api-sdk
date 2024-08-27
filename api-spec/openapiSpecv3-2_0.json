@@ -3659,7 +3659,7 @@
                     }
                   },
                   "user_parameters": {
-                    "description": "\n<div><span class=\"since-beta-tag\">Version: 9.10.5.cl or later</span></div>\n\nDefine attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters).\n\nExamples to set the `user_parameters` :\n\n```json\n{ \n  runtime_filters: [{\"column_name\": \"Color\", \"operator\": \"EQ\", \"values\": [\"red\"], \"persist\": false}],\n  runtime_sorts: [{\"column_name\": \"Color\", \"order\": \"ASC\", \"persist\": false}],\n  parameters: [{\"name\": \"Color\", \"values\": [\"ASC\"], \"persist\": false}],\n}\n```\n\nExamples to reset `user_parameters` :\n```json\n{\n  runtime_filters: [],\n  runtime_sorts: [],\n  parameters: [],\n}\n```",
+                    "description": "\n<div><span class=\"since-beta-tag\">Version: 9.10.5.cl or later</span></div>\n\nDefine attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters).",
                     "allOf": [
                       {
                         "$ref": "#/components/schemas/User_Parameter_Options"
@@ -13920,6 +13920,7 @@
             "items": {
               "$ref": "#/components/schemas/User_Runtime_Filters"
             },
+            "description": "Objects to apply the User_Runtime_Filters.\n\nExamples to set the `runtime_filters` :\n```json\n{ \n  runtime_filters: [{\"column_name\": \"Color\", \"operator\": \"EQ\", \"values\": [\"red\"], \"persist\": false}]\n}\n```",
             "nullable": true
           },
           "runtime_sorts": {
@@ -13927,6 +13928,7 @@
             "items": {
               "$ref": "#/components/schemas/User_Runtime_Sorts"
             },
+            "description": "Objects to apply the User_Runtime_Sorts.\n\nExamples to set the `runtime_sorts` :\n```json\n{ \n  runtime_sorts: [{\"column_name\": \"Color\", \"order\": \"ASC\", \"persist\": false}]\n}\n```",
             "nullable": true
           },
           "parameters": {
@@ -13934,6 +13936,7 @@
             "items": {
               "$ref": "#/components/schemas/User_Parameters"
             },
+            "description": "Objects to apply the Runtime_Parameters.\n\nExamples to set the `parameters` :\n```json\n{ \n  parameters: [{\"name\": \"Color\", \"values\": [\"Blue\"], \"persist\": false}]\n}\n```",
             "nullable": true
           }
         },
