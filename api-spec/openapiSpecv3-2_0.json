@@ -1393,7 +1393,7 @@
                     }
                   },
                   "author_identifier": {
-                    "description": "Author ID of async import tasks to filter on.",
+                    "description": "Author GUID or name of async import tasks to filter on.",
                     "type": "string"
                   },
                   "record_offset": {
