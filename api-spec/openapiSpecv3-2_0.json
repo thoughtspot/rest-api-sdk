@@ -3526,7 +3526,7 @@
                     }
                   },
                   "user_parameters": {
-                    "description": "\n<div><span class=\"since-beta-tag\">Version: 9.10.5.cl or later</span></div>\n\nDefine attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters).\n\nExamples to set the `user_parameters` :\n\n```json\n{ \n  runtime_filters: [{\"column_name\": \"Color\", \"operator\": \"EQ\", \"values\": [\"red\"], \"persist\": false}],\n  runtime_sorts: [{\"column_name\": \"Color\", \"order\": \"ASC\", \"persist\": false}],\n  parameters: [{\"name\": \"Color\", \"values\": [\"ASC\"], \"persist\": false}],\n}\n```\n\nExamples to reset `user_parameters` :\n```json\n{\n  runtime_filters: [],\n  runtime_sorts: [],\n  parameters: [],\n}\n```",
+                    "description": "<div><span class=\"since-beta-tag\">Version: 9.10.5.cl or later</span><span class=\"since-beta-tag\">Deprecated from: 10.4.0.cl and later</span></div>\n\nDefine attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters).",
                     "allOf": [
                       {
                         "$ref": "#/components/schemas/User_Parameter_Options"
@@ -3659,7 +3659,7 @@
                     }
                   },
                   "user_parameters": {
-                    "description": "\n<div><span class=\"since-beta-tag\">Version: 9.10.5.cl or later</span></div>\n\nDefine attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters).",
+                    "description": "<div><span class=\"since-beta-tag\">Version: 9.10.5.cl or later</span></div>\n\nDefine attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters).",
                     "allOf": [
                       {
                         "$ref": "#/components/schemas/User_Parameter_Options"
@@ -7032,6 +7032,7 @@
                   },
                   "emails": {
                     "description": "Email IDs to which notifications will be sent.",
+                    "default": [],
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -7049,7 +7050,7 @@
                   },
                   "notify_on_share": {
                     "description": "Flag to notify user when any object is shared.",
-                    "default": true,
+                    "default": false,
                     "type": "boolean",
                     "nullable": true
                   },
@@ -7062,7 +7063,6 @@
                 },
                 "required": [
                   "permissions",
-                  "emails",
                   "message"
                 ]
               }
