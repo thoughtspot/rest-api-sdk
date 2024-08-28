@@ -6248,6 +6248,12 @@
                     "default": false,
                     "type": "boolean",
                     "nullable": true
+                  },
+                  "skip_cdw_validation_for_tables": {
+                    "description": "if we should skip CDW validation for table imports.",
+                    "default": false,
+                    "type": "boolean",
+                    "nullable": true
                   }
                 },
                 "required": [
@@ -6345,6 +6351,12 @@
                   },
                   "all_orgs_context": {
                     "description": "If import is happening from all orgs context.",
+                    "default": false,
+                    "type": "boolean",
+                    "nullable": true
+                  },
+                  "skip_cdw_validation_for_tables": {
+                    "description": "if we should skip CDW validation for table imports.",
                     "default": false,
                     "type": "boolean",
                     "nullable": true
