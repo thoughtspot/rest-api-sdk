@@ -33,3 +33,7 @@
 .rjsf-field-description code {
     overflow: scroll !important;
 }
+.rjsf-field-description pre {
+    margin: 0px !important;
+    padding: 0px !important;
+}
