@@ -388,7 +388,11 @@
                   },
                   "sort_options": {
                     "description": "Sort options.",
-                    "$ref": "#/components/schemas/SortOptions"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/SortOptions"
+                      }
+                    ]
                   },
                   "role_identifiers": {
                     "description": "Filters by the role assigned to the user.",
@@ -1084,7 +1088,11 @@
                   },
                   "sort_options": {
                     "description": "Sort options to filter group details.",
-                    "$ref": "#/components/schemas/SortOptions"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/SortOptions"
+                      }
+                    ]
                   }
                 }
               }
@@ -1203,7 +1211,11 @@
                   },
                   "favorite_object_options": {
                     "description": "Options to sort the API response by objects set as favorites\nfor the logged-in user or the users specified in the API request.",
-                    "$ref": "#/components/schemas/FavoriteObjectOptionsInput"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/FavoriteObjectOptionsInput"
+                      }
+                    ]
                   },
                   "include_auto_created_objects": {
                     "description": "Includes system-generated metadata objects.",
@@ -1279,7 +1291,11 @@
                   },
                   "sort_options": {
                     "description": "Sort options to filter metadata details.",
-                    "$ref": "#/components/schemas/MetadataSearchSortOptions"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/MetadataSearchSortOptions"
+                      }
+                    ]
                   },
                   "tag_identifiers": {
                     "description": "Tags to filter metadata objects by",
@@ -1696,11 +1712,19 @@
                   },
                   "pdf_options": {
                     "description": "Options for PDF export.",
-                    "$ref": "#/components/schemas/PdfOptionsInput"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/PdfOptionsInput"
+                      }
+                    ]
                   },
                   "png_options": {
                     "description": "Options for PNG export.",
-                    "$ref": "#/components/schemas/PngOptionsInput"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/PngOptionsInput"
+                      }
+                    ]
                   },
                   "runtime_param_override": {
                     "description": "JSON object for setting values of parameters at runtime. For example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>. You can add multiple keys by incrementing the number at the end, for example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters).",
@@ -2939,7 +2963,11 @@
                   },
                   "sort_options": {
                     "description": "Sort options.",
-                    "$ref": "#/components/schemas/SortOptionInput"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/SortOptionInput"
+                      }
+                    ]
                   },
                   "include_details": {
                     "description": "Indicates whether to include complete details of the connection objects.",
@@ -3232,7 +3260,11 @@
                   },
                   "default_action_config": {
                     "description": "Default Custom action configuration. This includes if the custom action is available on all visualizations. By default, a custom action is added to all visualizations and Answers.",
-                    "$ref": "#/components/schemas/Default_Action_Config_Search_Input"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/Default_Action_Config_Search_Input"
+                      }
+                    ]
                   },
                   "include_group_associations": {
                     "description": "When set to true, returns the associated groups for a custom action.",
@@ -3493,14 +3525,13 @@
                       "type": "string"
                     }
                   },
-                  "jwt_user_options": {
-                    "description": "    JWT user options to create a JWT token given the payload.\n    \n\n*Deprecated in 9.12.0.cl. Use user_parameters instead.*",
-                    "$ref": "#/components/schemas/JWT_User_Options",
-                    "deprecated": true
-                  },
                   "user_parameters": {
-                    "description": "Define attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters). <br/>  <span class=\"since-beta-tag\">Version: 9.10.5.cl or later</span>",
-                    "$ref": "#/components/schemas/User_Parameter_Options"
+                    "description": "<div><span class=\"since-beta-tag\">Version: 9.10.5.cl or later</span></div>\n\nDefine attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters).",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/User_Parameter_Options"
+                      }
+                    ]
                   }
                 },
                 "required": [
@@ -3627,14 +3658,13 @@
                       "type": "string"
                     }
                   },
-                  "jwt_user_options": {
-                    "description": "    JWT user options to create a JWT token given the payload.\n    \n\n*Deprecated in 9.12.0.cl. Use user_parameters instead.*",
-                    "$ref": "#/components/schemas/JWT_User_Options_Full",
-                    "deprecated": true
-                  },
                   "user_parameters": {
-                    "description": "Define attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters). <br/>  <span class=\"since-beta-tag\">Version: 9.10.5.cl or later</span>",
-                    "$ref": "#/components/schemas/User_Parameter_Options"
+                    "description": "<div><span class=\"since-beta-tag\">Version: 9.10.5.cl or later</span></div>\n\nDefine attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters).",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/User_Parameter_Options"
+                      }
+                    ]
                   }
                 },
                 "required": [
@@ -8780,11 +8810,19 @@
                   },
                   "liveboard_options": {
                     "description": "Options to specify details of Liveboard.",
-                    "$ref": "#/components/schemas/LiveboardOptionsInput"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/LiveboardOptionsInput"
+                      }
+                    ]
                   },
                   "pdf_options": {
                     "description": "PDF layout and orientation settings. Applicable only if the `file_format` is specified as `PDF`.",
-                    "$ref": "#/components/schemas/SchedulesPdfOptionsInput"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/SchedulesPdfOptionsInput"
+                      }
+                    ]
                   },
                   "time_zone": {
                     "description": "Time zone",
@@ -9425,11 +9463,19 @@
                   },
                   "frequency": {
                     "description": "Frequency settings for the scheduled job.",
-                    "$ref": "#/components/schemas/FrequencyInput"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/FrequencyInput"
+                      }
+                    ]
                   },
                   "recipient_details": {
                     "description": "Recipients of the scheduled job notifications. Add the GUID or name of the ThoughtSpot users or groups as recipients in the `principals` array. If a recipient is not a ThoughtSpot user, specify email address.",
-                    "$ref": "#/components/schemas/RecipientDetailsInput"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/RecipientDetailsInput"
+                      }
+                    ]
                   }
                 },
                 "required": [
@@ -9599,11 +9645,19 @@
                   },
                   "sort_options": {
                     "description": "Sort options.",
-                    "$ref": "#/components/schemas/SortingOptions"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/SortingOptions"
+                      }
+                    ]
                   },
                   "history_runs_options": {
                     "description": "Options while fetching history runs for the schedule.",
-                    "$ref": "#/components/schemas/ScheduleHistoryRunsOptionsInput"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/ScheduleHistoryRunsOptionsInput"
+                      }
+                    ]
                   },
                   "schedule_identifiers": {
                     "description": "unique ID or name of the Schedule",
@@ -9720,11 +9774,19 @@
                   },
                   "liveboard_options": {
                     "description": "Options to specify the details of a Liveboard.",
-                    "$ref": "#/components/schemas/LiveboardOptionsInput"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/LiveboardOptionsInput"
+                      }
+                    ]
                   },
                   "pdf_options": {
                     "description": "Options for PDF export.",
-                    "$ref": "#/components/schemas/SchedulesPdfOptionsInput"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/SchedulesPdfOptionsInput"
+                      }
+                    ]
                   },
                   "time_zone": {
                     "description": "Time zone",
@@ -10364,11 +10426,19 @@
                   },
                   "frequency": {
                     "description": "Frequency of the scheduled job run.",
-                    "$ref": "#/components/schemas/FrequencyInput"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/FrequencyInput"
+                      }
+                    ]
                   },
                   "recipient_details": {
                     "description": "Recipients of the scheduled job notifications. You can add the ID or name of the ThoughtSpot users or groups as recipients in the `principals` array. If a recipient is not a ThoughtSpot user, specify email address.",
-                    "$ref": "#/components/schemas/RecipientDetailsInput"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/RecipientDetailsInput"
+                      }
+                    ]
                   },
                   "status": {
                     "description": "Status of the schedule",
@@ -10462,7 +10532,11 @@
                   },
                   "action_details": {
                     "description": "Action details includes `Type` and Configuration data for Custom Actions, either Callback or URL is required.",
-                    "$ref": "#/components/schemas/Action_Details_Input_Create"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/Action_Details_Input_Create"
+                      }
+                    ]
                   },
                   "associate_metadata": {
                     "description": "Metadata objects to which the custom action needs to be associated.",
@@ -10473,7 +10547,11 @@
                   },
                   "default_action_config": {
                     "description": "Default Custom action configuration. This includes if the custom action is available on all visualizations. By default, a custom action is added to all visualizations and Answers.",
-                    "$ref": "#/components/schemas/Default_Action_Config_Input_Create"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/Default_Action_Config_Input_Create"
+                      }
+                    ]
                   },
                   "group_identifiers": {
                     "description": "Unique ID or name of the groups that can view and access the custom action.",
@@ -10581,7 +10659,11 @@
                 "properties": {
                   "action_details": {
                     "description": "Action details includes `Type` and Configuration for Custom Actions, either Callback or URL is required.",
-                    "$ref": "#/components/schemas/Action_Details_Input"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/Action_Details_Input"
+                      }
+                    ]
                   },
                   "associate_metadata": {
                     "description": "Metadata objects to which the custom action needs to be associated.",
@@ -10592,7 +10674,11 @@
                   },
                   "default_action_config": {
                     "description": "Default Custom action configuration. This includes if the custom action available on visualizations and Answers. By default, a custom action is added to all visualizations and Answers.",
-                    "$ref": "#/components/schemas/Default_Action_Config_Input"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/Default_Action_Config_Input"
+                      }
+                    ]
                   },
                   "group_identifiers": {
                     "description": "Unique ID or name of the groups that can view and access the custom action.",
@@ -13846,6 +13932,7 @@
             "items": {
               "$ref": "#/components/schemas/User_Runtime_Filters"
             },
+            "description": "Objects to apply the User_Runtime_Filters.\n\nExamples to set the `runtime_filters` :\n```json\n{ \"column_name\": \"Color\", \"operator\": \"EQ\", \"values\": [\"red\"], \"persist\": false }\n```",
             "nullable": true
           },
           "runtime_sorts": {
@@ -13853,6 +13940,7 @@
             "items": {
               "$ref": "#/components/schemas/User_Runtime_Sorts"
             },
+            "description": "Objects to apply the User_Runtime_Sorts.\n\nExamples to set the `runtime_sorts` :\n```json\n{ \"column_name\": \"Color\", \"order\": \"ASC\", \"persist\": false }\n```",
             "nullable": true
           },
           "parameters": {
@@ -13860,16 +13948,11 @@
             "items": {
               "$ref": "#/components/schemas/User_Parameters"
             },
-            "nullable": true
-          },
-          "compress": {
-            "type": "boolean",
-            "default": false,
-            "description": " <span class=\"since-beta-tag\">Version: 9.12.0.cl or later</span>",
+            "description": "Objects to apply the Runtime_Parameters.\n\nExamples to set the `parameters` :\n```json\n{ \"name\": \"Color\", \"values\": [\"Blue\"], \"persist\": false }\n```",
             "nullable": true
           }
         },
-        "description": "Define attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters)."
+        "description": "Define attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters).\n"
       },
       "User_Object": {
         "type": "object",
