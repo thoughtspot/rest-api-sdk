@@ -113,8 +113,13 @@ export class CustomActionApiRequestFactory extends BaseAPIRequestFactory {
      *   Version: 9.6.0.cl or later   Gets custom actions configured on the cluster.  Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
      * @param searchCustomActionsRequest 
      */
-    public async searchCustomActions(searchCustomActionsRequest?: SearchCustomActionsRequest, _options?: Configuration): Promise<RequestContext> {
+    public async searchCustomActions(searchCustomActionsRequest: SearchCustomActionsRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
+
+        // verify required parameter 'searchCustomActionsRequest' is not null or undefined
+        if (searchCustomActionsRequest === null || searchCustomActionsRequest === undefined) {
+            throw new RequiredError("CustomActionApi", "searchCustomActions", "searchCustomActionsRequest");
+        }
 
 
         // Path Params
@@ -159,7 +164,7 @@ export class CustomActionApiRequestFactory extends BaseAPIRequestFactory {
      * @param customActionIdentifier Unique ID or name of the custom action.
      * @param updateCustomActionRequest 
      */
-    public async updateCustomAction(customActionIdentifier: string, updateCustomActionRequest?: UpdateCustomActionRequest, _options?: Configuration): Promise<RequestContext> {
+    public async updateCustomAction(customActionIdentifier: string, updateCustomActionRequest: UpdateCustomActionRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'customActionIdentifier' is not null or undefined
@@ -167,6 +172,11 @@ export class CustomActionApiRequestFactory extends BaseAPIRequestFactory {
             throw new RequiredError("CustomActionApi", "updateCustomAction", "customActionIdentifier");
         }
 
+
+        // verify required parameter 'updateCustomActionRequest' is not null or undefined
+        if (updateCustomActionRequest === null || updateCustomActionRequest === undefined) {
+            throw new RequiredError("CustomActionApi", "updateCustomAction", "updateCustomActionRequest");
+        }
 
 
         // Path Params

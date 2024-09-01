@@ -94,7 +94,7 @@ const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
 const apiInstance = new RolesApi(configuration);
 
 apiInstance.deleteRole(
-  // string | Unique ID or name of the role.
+  // string | Unique ID or name of the Role.
   "role_identifier_example" 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -108,7 +108,7 @@ apiInstance.deleteRole(
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **roleIdentifier** | [**string**] | Unique ID or name of the role. | defaults to undefined
+ **roleIdentifier** | [**string**] | Unique ID or name of the Role. | defaults to undefined
 
 
 ### Return type
@@ -137,7 +137,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
 # **searchRoles**
-> Array<SearchRoleResponse> searchRoles()
+> Array<SearchRoleResponse> searchRoles(searchRolesRequest)
 
 Gets Roles configured on a ThoughtSpot instance. Requires cluster Administration, Role Administration or Group Administration privileges.    Version: 9.5.0.cl or later 
 
@@ -154,7 +154,7 @@ const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
 const apiInstance = new RolesApi(configuration);
 
 apiInstance.searchRoles(
-  // SearchRolesRequest (optional)
+  // SearchRolesRequest
   {
     role_identifiers: [
       "role_identifiers_example",
@@ -233,7 +233,7 @@ const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
 const apiInstance = new RolesApi(configuration);
 
 apiInstance.updateRole(
-  // string | Unique ID or name of the role.
+  // string | Unique ID or name of the Role.
   "role_identifier_example" , 
   // UpdateRoleRequest
   {
@@ -256,7 +256,7 @@ apiInstance.updateRole(
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **updateRoleRequest** | **UpdateRoleRequest**|  |
- **roleIdentifier** | [**string**] | Unique ID or name of the role. | defaults to undefined
+ **roleIdentifier** | [**string**] | Unique ID or name of the Role. | defaults to undefined
 
 
 ### Return type

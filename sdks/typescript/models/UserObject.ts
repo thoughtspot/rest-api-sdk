@@ -10,38 +10,45 @@
  * Do not edit the class manually.
  */
 
-import { CALLBACKInput } from '../models/CALLBACKInput';
-import { URLInput } from '../models/URLInput';
 import { HttpFile } from '../http/http';
 
 /**
-* Filter the action objects based on type
+* Objects to apply the User_Object.
 */
-export class TypeInput {
-    'CALLBACK'?: CALLBACKInput;
-    'URL'?: URLInput;
+export class UserObject {
+    /**
+    * Type of object.
+    */
+    'type'?: UserObjectTypeEnum;
+    /**
+    * Unique name/id of the object.
+    */
+    'identifier': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "CALLBACK",
-            "baseName": "CALLBACK",
-            "type": "CALLBACKInput",
+            "name": "type",
+            "baseName": "type",
+            "type": "UserObjectTypeEnum",
             "format": ""
         },
         {
-            "name": "URL",
-            "baseName": "URL",
-            "type": "URLInput",
+            "name": "identifier",
+            "baseName": "identifier",
+            "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return TypeInput.attributeTypeMap;
+        return UserObject.attributeTypeMap;
     }
 
     public constructor() {
     }
 }
+
+
+export type UserObjectTypeEnum = "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE" ;
 

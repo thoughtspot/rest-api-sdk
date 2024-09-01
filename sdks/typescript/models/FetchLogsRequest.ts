@@ -25,6 +25,10 @@ export class FetchLogsRequest {
     * End time in EPOCH format
     */
     'end_epoch_time_in_millis'?: number;
+    /**
+    * Fetch all the logs. This is available from 9.11.0.cl
+    */
+    'get_all_logs'?: boolean | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -46,6 +50,12 @@ export class FetchLogsRequest {
             "baseName": "end_epoch_time_in_millis",
             "type": "number",
             "format": "float"
+        },
+        {
+            "name": "get_all_logs",
+            "baseName": "get_all_logs",
+            "type": "boolean",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {

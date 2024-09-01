@@ -115,8 +115,13 @@ export class GroupsApiRequestFactory extends BaseAPIRequestFactory {
      *   Version: 9.0.0.cl or later   Imports group objects from external databases into ThoughtSpot.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  During the import operation:  * If the specified group is not available in ThoughtSpot, it will be added to ThoughtSpot. * If `delete_unspecified_groups` is set to `true`, the groups not specified in the API request, excluding administrator and system user groups, are deleted. * If the specified groups are already available in ThoughtSpot, the object properties of these groups are modified and synchronized as per the input data in the API request.  A successful API call returns the object that represents the changes made in the ThoughtSpot system.      
      * @param importUserGroupsRequest 
      */
-    public async importUserGroups(importUserGroupsRequest?: ImportUserGroupsRequest, _options?: Configuration): Promise<RequestContext> {
+    public async importUserGroups(importUserGroupsRequest: ImportUserGroupsRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
+
+        // verify required parameter 'importUserGroupsRequest' is not null or undefined
+        if (importUserGroupsRequest === null || importUserGroupsRequest === undefined) {
+            throw new RequiredError("GroupsApi", "importUserGroups", "importUserGroupsRequest");
+        }
 
 
         // Path Params
@@ -160,8 +165,13 @@ export class GroupsApiRequestFactory extends BaseAPIRequestFactory {
      *   Version: 9.0.0.cl or later   Gets a list of users available on the ThoughtSpot system.  To get details of a specific user, specify the user GUID or name. You can also filter the API response based on groups, Org ID, user visibility, account status, user type, and user preference settings and favorites.  Available to all users. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view all users properties.  **NOTE**: If you do not get precise results, try setting `record_size` to `-1` and `record_offset` to `0`.      
      * @param searchUserGroupsRequest 
      */
-    public async searchUserGroups(searchUserGroupsRequest?: SearchUserGroupsRequest, _options?: Configuration): Promise<RequestContext> {
+    public async searchUserGroups(searchUserGroupsRequest: SearchUserGroupsRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
+
+        // verify required parameter 'searchUserGroupsRequest' is not null or undefined
+        if (searchUserGroupsRequest === null || searchUserGroupsRequest === undefined) {
+            throw new RequiredError("GroupsApi", "searchUserGroups", "searchUserGroupsRequest");
+        }
 
 
         // Path Params
@@ -206,7 +216,7 @@ export class GroupsApiRequestFactory extends BaseAPIRequestFactory {
      * @param groupIdentifier GUID or name of the group.
      * @param updateUserGroupRequest 
      */
-    public async updateUserGroup(groupIdentifier: string, updateUserGroupRequest?: UpdateUserGroupRequest, _options?: Configuration): Promise<RequestContext> {
+    public async updateUserGroup(groupIdentifier: string, updateUserGroupRequest: UpdateUserGroupRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'groupIdentifier' is not null or undefined
@@ -214,6 +224,11 @@ export class GroupsApiRequestFactory extends BaseAPIRequestFactory {
             throw new RequiredError("GroupsApi", "updateUserGroup", "groupIdentifier");
         }
 
+
+        // verify required parameter 'updateUserGroupRequest' is not null or undefined
+        if (updateUserGroupRequest === null || updateUserGroupRequest === undefined) {
+            throw new RequiredError("GroupsApi", "updateUserGroup", "updateUserGroupRequest");
+        }
 
 
         // Path Params
