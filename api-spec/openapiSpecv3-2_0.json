@@ -2092,7 +2092,7 @@
                     "format": "int32"
                   },
                   "permission_type": {
-                    "description": "Permission type if it is effective then fetch the effective permission\nof principals else fetch the defined permission of principals.",
+                    "description": "<div><span class=\"since-beta-tag\">Version: 10.3.0.cl or later</span></div>\n\nSpecifies the type of permission. Valid values are:\n    EFFECTIVE - If the user permission to the metadata objects is granted by the privileges assigned to the groups to which they belong.\n    DEFINED - If a user or user group received access to metadata objects via object sharing by another user.",
                     "type": "string"
                   }
                 },
