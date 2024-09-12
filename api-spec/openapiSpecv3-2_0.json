@@ -3995,19 +3995,17 @@
                   },
                   "filter_rules": {
                     "description": "Filter rules.",
-                    "allOf": [
-                      {
-                        "$ref": "#/components/schemas/FilterRules"
-                      }
-                    ]
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/FilterRules"
+                    }
                   },
                   "parameter_values": {
                     "description": "Parameter values.",
-                    "allOf": [
-                      {
-                        "$ref": "#/components/schemas/ParameterValues"
-                      }
-                    ]
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/ParameterValues"
+                    }
                   },
                   "objects": {
                     "description": "Objects on which the filter rules and parameters values should be applied to",
