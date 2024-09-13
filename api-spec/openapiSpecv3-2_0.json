@@ -14155,7 +14155,7 @@
                   "type": "boolean"
                 },
                 {
-                  "type": "float"
+                  "type": "Precision"
                 }
               ]
             },
