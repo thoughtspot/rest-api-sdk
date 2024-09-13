@@ -14155,7 +14155,7 @@
                   "type": "boolean"
                 },
                 {
-                  "type": "Precision"
+                  "type": "number"
                 }
               ]
             },
@@ -14248,7 +14248,7 @@
           "values": {
             "type": "array",
             "items": {
-              "type": "string"
+              
             },
             "description": "The array of values."
           },
