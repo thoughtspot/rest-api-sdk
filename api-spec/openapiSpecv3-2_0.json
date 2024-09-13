@@ -14147,7 +14147,17 @@
           "values": {
             "type": "array",
             "items": {
-              "type": "object"
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "float"
+                }
+              ]
             },
             "description": "Value of the filters."
           },
