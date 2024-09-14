@@ -4022,7 +4022,7 @@
                     "description": "(just-in-time (JIT) provisioning) Indicates display name of the user. Specify this attribute when creating a new user.",
                     "type": "string"
                   },
-                  "group_identifiers": {
+                  "groups": {
                     "description": "(just-in-time (JIT) provisioning) ID or name of the groups to which the newly created user belongs. Specify this attribute when creating a new user.",
                     "type": "array",
                     "items": {
