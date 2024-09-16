@@ -4090,7 +4090,8 @@
               }
             }
           }
-        }
+        },
+        "security": []
       }
     },
     "/api/rest/2.0/users/create": {
