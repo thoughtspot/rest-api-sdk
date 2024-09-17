@@ -3983,7 +3983,7 @@
                     "description": "ID of the Org context to log in to. If the Org ID is not specified and secret key is provided then user will be logged into the org corresponding to the secret key, and if secret key is not provided then user will be logged in to the Org context of their previous login session.",
                     "type": "string"
                   },
-                  "persist_options": {
+                  "persist_option": {
                     "description": "Indicates whether the specified attributes should be persisted or not.",
                     "default": "ADD",
                     "type": "string",
@@ -14475,7 +14475,6 @@
       "AccessToken": {
         "type": "object",
         "required": [
-          "id",
           "token",
           "org",
           "user",
@@ -14485,7 +14484,8 @@
         "properties": {
           "id": {
             "type": "string",
-            "description": "GUID of the auth token."
+            "description": "GUID of the auth token.",
+            "nullable": true
           },
           "token": {
             "type": "string",
@@ -14514,8 +14514,7 @@
       "OrgInfo": {
         "type": "object",
         "required": [
-          "id",
-          "name"
+          "id"
         ],
         "properties": {
           "id": {
@@ -14525,15 +14524,15 @@
           },
           "name": {
             "type": "string",
-            "description": "Name."
+            "description": "Name.",
+            "nullable": true
           }
         }
       },
       "UserInfo": {
         "type": "object",
         "required": [
-          "id",
-          "name"
+          "id"
         ],
         "properties": {
           "id": {
@@ -14542,7 +14541,8 @@
           },
           "name": {
             "type": "string",
-            "description": "Name."
+            "description": "Name.",
+            "nullable": true
           }
         }
       },
