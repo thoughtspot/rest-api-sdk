@@ -11898,6 +11898,11 @@
             "type": "object",
             "description": "User Parameters which are specified for the user via JWToken",
             "nullable": true
+          },
+          "access_control_properties": {
+            "type": "object",
+            "description": "Access Control Properties which are specified for the user via JWToken",
+            "nullable": true
           }
         }
       },
