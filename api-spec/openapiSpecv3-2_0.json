@@ -62,14 +62,6 @@
       "description": "Roles for version 10.3.0.cl"
     },
     {
-      "name": "10.0.0.cl",
-      "id": "10.0.0.cl",
-      "tags": [
-        "10.0.0.cl"
-      ],
-      "description": "Roles for version 10.0.0.cl"
-    },
-    {
       "name": "9.9.0.cl",
       "id": "9.9.0.cl",
       "tags": [
@@ -8122,6 +8114,7 @@
       "post": {
         "operationId": "deleteConnection",
         "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nDeletes a connection object.\n\n**Note**: If a connection has dependent objects, make sure you remove its associations before the delete operation.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "deprecated": true,
         "tags": [
           "Connections",
           "9.2.0.cl"
@@ -8193,13 +8186,13 @@
         }
       }
     },
-    "/api/rest/2.0/connections/delete/{connection_identifier}": {
+    "/api/rest/2.0/connections/{connection_identifier}/delete": {
       "post": {
         "operationId": "deleteConnectionV2",
-        "description": "\n <span class=\"since-beta-tag\">Version: 10.0.0.cl or later</span>\n\nDeletes a connection object.\n\n**Note**: If a connection has dependent objects, make sure you remove its associations before the delete operation.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nDeletes a connection object.\n\n**Note**: If a connection has dependent objects, make sure you remove its associations before the delete operation.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Connections",
-          "10.0.0.cl"
+          "10.4.0.cl"
         ],
         "parameters": [
           {
@@ -8263,6 +8256,7 @@
       "post": {
         "operationId": "updateConnection",
         "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nUpdates a connection object.  \n\nRequires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\nTo update a connection object, pass these parameters in your API request:\n\n1. GUID of the connection object.\n2. If you are updating tables or database schema of a connection object:\n   a. Add the updated JSON map of metadata with database, schema, and tables in `data_warehouse_config`.\n   b. Set `validate` to `true`.\n3. If you are updating a configuration attribute, connection name, or description, you can set `validate` to `false`.\n\n\n\n\n#### Endpoint URL\n",
+        "deprecated": true,
         "tags": [
           "Connections",
           "9.2.0.cl"
@@ -8352,13 +8346,13 @@
         }
       }
     },
-    "/api/rest/2.0/connections/update/{connection_identifier}": {
+    "/api/rest/2.0/connections/{connection_identifier}/update": {
       "post": {
         "operationId": "updateConnectionV2",
-        "description": "\n <span class=\"since-beta-tag\">Version: 10.0.0.cl or later</span>\n\nUpdates a connection object.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\nTo update a connection object, pass these parameters in your API request:\n\n1. GUID of the connection object.\n2. If you are updating tables or database schema of a connection object:\n   a. Add the updated JSON map of metadata with database, schema, and tables in `data_warehouse_config`.\n   b. Set `validate` to `true`.\n3. If you are updating a configuration attribute, connection name, or description, you can set `validate` to `false`.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nUpdates a connection object.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\nTo update a connection object, pass these parameters in your API request:\n\n1. GUID of the connection object.\n2. If you are updating tables or database schema of a connection object:\n   a. Add the updated JSON map of metadata with database, schema, and tables in `data_warehouse_config`.\n   b. Set `validate` to `true`.\n3. If you are updating a configuration attribute, connection name, or description, you can set `validate` to `false`.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Connections",
-          "10.0.0.cl"
+          "10.4.0.cl"
         ],
         "requestBody": {
           "content": {
