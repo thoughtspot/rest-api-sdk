@@ -331,7 +331,8 @@
                       "INACTIVE",
                       "EXPIRED",
                       "LOCKED",
-                      "PENDING"
+                      "PENDING",
+                      "SUSPENDED"
                     ]
                   },
                   "notify_on_share": {
@@ -4137,7 +4138,8 @@
                       "INACTIVE",
                       "EXPIRED",
                       "LOCKED",
-                      "PENDING"
+                      "PENDING",
+                      "SUSPENDED"
                     ]
                   },
                   "org_identifiers": {
@@ -4344,7 +4346,8 @@
                       "INACTIVE",
                       "EXPIRED",
                       "LOCKED",
-                      "PENDING"
+                      "PENDING",
+                      "SUSPENDED"
                     ]
                   },
                   "notify_on_share": {
@@ -11707,7 +11710,8 @@
               "INACTIVE",
               "EXPIRED",
               "LOCKED",
-              "PENDING"
+              "PENDING",
+              "SUSPENDED"
             ],
             "description": "Status of the user account.",
             "nullable": true
@@ -14591,7 +14595,8 @@
               "INACTIVE",
               "EXPIRED",
               "LOCKED",
-              "PENDING"
+              "PENDING",
+              "SUSPENDED"
             ],
             "default": "ACTIVE",
             "description": "Status of the user account.",
