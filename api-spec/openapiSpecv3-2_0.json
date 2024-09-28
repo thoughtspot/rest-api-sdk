@@ -3978,10 +3978,9 @@
                   },
                   "persist_option": {
                     "description": "Indicates whether the specified attributes should be persisted or not.",
-                    "default": "ADD",
                     "type": "string",
                     "enum": [
-                      "ADD",
+                      "APPEND",
                       "NONE",
                       "RESET"
                     ]
@@ -4024,7 +4023,8 @@
                   }
                 },
                 "required": [
-                  "username"
+                  "username",
+                  "persist_option"
                 ]
               }
             }
