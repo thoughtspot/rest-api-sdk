@@ -23,11 +23,11 @@ export class AuthenticationInput {
     /**
     * Bearer tokens enable requests to authenticate using an access key.
     */
-    'Bearer_Token'?: string;
+    'Bearer_Token'?: string | null;
     /**
     * No authorization. If your request doesn\'t require authorization.
     */
-    'No_Auth'?: string;
+    'No_Auth'?: string | null;
 
     static readonly discriminator: string | undefined = undefined;
 

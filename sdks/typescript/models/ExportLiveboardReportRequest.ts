@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { PdfOptionsInput } from '../models/PdfOptionsInput';
-import { PngOptionsInput } from '../models/PngOptionsInput';
+import { ExportLiveboardReportRequestPdfOptions } from '../models/ExportLiveboardReportRequestPdfOptions';
+import { ExportLiveboardReportRequestPngOptions } from '../models/ExportLiveboardReportRequestPngOptions';
 import { HttpFile } from '../http/http';
 
 export class ExportLiveboardReportRequest {
@@ -32,17 +32,17 @@ export class ExportLiveboardReportRequest {
     */
     'file_format'?: ExportLiveboardReportRequestFileFormatEnum;
     /**
-    * JSON string representing runtime filter. { col1:\'region\', op1: \'EQ\', val1: \'northeast\' }
+    * JSON object with representing filter condition to apply filters at runtime. For example, {\"col1\": \"region\", \"op1\": \"EQ\", \"val1\": \"northeast\" }. You can add multiple keys by incrementing the number at the end, for example, col2, op2, val2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_filters).
     */
     'runtime_filter'?: any;
     /**
-    * JSON string representing runtime sort. { sortCol1: \'region\', asc1 : true, sortCol2 : \'date\' }
+    * JSON string representing runtime sort. For example, {\"sortCol1\": \"region\", \"asc1\" : true}. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort).
     */
     'runtime_sort'?: any;
-    'pdf_options'?: PdfOptionsInput;
-    'png_options'?: PngOptionsInput;
+    'pdf_options'?: ExportLiveboardReportRequestPdfOptions;
+    'png_options'?: ExportLiveboardReportRequestPngOptions;
     /**
-    * JSON object for setting values of parameters in runtime.
+    * JSON object for setting values of parameters at runtime. For example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>. You can add multiple keys by incrementing the number at the end, for example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters).
     */
     'runtime_param_override'?: any;
 
@@ -88,13 +88,13 @@ export class ExportLiveboardReportRequest {
         {
             "name": "pdf_options",
             "baseName": "pdf_options",
-            "type": "PdfOptionsInput",
+            "type": "ExportLiveboardReportRequestPdfOptions",
             "format": ""
         },
         {
             "name": "png_options",
             "baseName": "png_options",
-            "type": "PngOptionsInput",
+            "type": "ExportLiveboardReportRequestPngOptions",
             "format": ""
         },
         {

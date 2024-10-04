@@ -19,7 +19,7 @@ export class DefaultActionConfig {
     /**
     * Custom action is available on all visualizations. Earlier , the naming convention: LOCAL/GLOBAL. TRUE signifies GLOBAL for backward compatibility.
     */
-    'visibility'?: boolean;
+    'visibility'?: boolean | null;
 
     static readonly discriminator: string | undefined = undefined;
 

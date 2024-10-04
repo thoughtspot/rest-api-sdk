@@ -16,11 +16,15 @@ export class ModelTableList {
     /**
     * Name of the Model.
     */
-    'model_name'?: string;
+    'model_name': string;
+    /**
+    * Model directory path, this is optional param and required if there are duplicate models with the same name.
+    */
+    'model_path'?: string | null;
     /**
     * List of Tables.
     */
-    'tables'?: Array<string>;
+    'tables': Array<string>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -28,6 +32,12 @@ export class ModelTableList {
         {
             "name": "model_name",
             "baseName": "model_name",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "model_path",
+            "baseName": "model_path",
             "type": "string",
             "format": ""
         },

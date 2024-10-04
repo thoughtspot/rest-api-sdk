@@ -16,11 +16,11 @@ export class ParametersListItem {
     /**
     * Key for the url query parameter
     */
-    'key'?: string;
+    'key'?: string | null;
     /**
     * Value for the url query parameter
     */
-    'value'?: string;
+    'value'?: string | null;
 
     static readonly discriminator: string | undefined = undefined;
 

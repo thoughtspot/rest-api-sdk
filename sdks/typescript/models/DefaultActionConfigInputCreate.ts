@@ -17,9 +17,9 @@ import { HttpFile } from '../http/http';
 */
 export class DefaultActionConfigInputCreate {
     /**
-    * Custom action is available on all visualizations. Earlier naming convention: LOCAL/GLOBAL. TRUE signifies GLOBAL for backward compatibility.  Default: true
+    * Custom action is available on all visualizations. Earlier naming convention: LOCAL/GLOBAL. TRUE signifies GLOBAL for backward compatibility. Default: true
     */
-    'visibility'?: boolean;
+    'visibility'?: boolean | null;
 
     static readonly discriminator: string | undefined = undefined;
 

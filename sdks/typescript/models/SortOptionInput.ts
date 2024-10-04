@@ -16,11 +16,11 @@ export class SortOptionInput {
     /**
     * Name of the field to apply the sort on.
     */
-    'field_name'?: SortOptionInputFieldNameEnum;
+    'field_name'?: SortOptionInputFieldNameEnum | null;
     /**
     * Sort order : ASC(Ascending) or DESC(Descending).
     */
-    'order'?: SortOptionInputOrderEnum;
+    'order'?: SortOptionInputOrderEnum | null;
 
     static readonly discriminator: string | undefined = undefined;
 

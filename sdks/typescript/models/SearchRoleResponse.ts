@@ -32,15 +32,15 @@ export class SearchRoleResponse {
     /**
     * number of groups assigned with this role
     */
-    'groups_assigned_count'?: number;
+    'groups_assigned_count'?: number | null;
     /**
     * Orgs in which role exists.
     */
-    'orgs'?: Array<GenericInfo>;
+    'orgs'?: Array<GenericInfo> | null;
     /**
     * Details of groups assigned with this role
     */
-    'groups'?: Array<GenericInfo>;
+    'groups'?: Array<GenericInfo> | null;
     /**
     * Privileges granted to the role.
     */
@@ -48,43 +48,43 @@ export class SearchRoleResponse {
     /**
     * Permission details of the Role
     */
-    'permission'?: SearchRoleResponsePermissionEnum;
+    'permission'?: SearchRoleResponsePermissionEnum | null;
     /**
     * Unique identifier of author of the role.
     */
-    'author_id'?: string;
+    'author_id'?: string | null;
     /**
     * Unique identifier of modifier of the role.
     */
-    'modifier_id'?: string;
+    'modifier_id'?: string | null;
     /**
     * Creation time of the role in milliseconds.
     */
-    'creation_time_in_millis'?: any;
+    'creation_time_in_millis'?: any | null;
     /**
     * Last modified time of the role in milliseconds.
     */
-    'modification_time_in_millis'?: any;
+    'modification_time_in_millis'?: any | null;
     /**
     * Indicates whether the role is deleted.
     */
-    'deleted'?: boolean;
+    'deleted'?: boolean | null;
     /**
     * Indicates whether the role is deprecated.
     */
-    'deprecated'?: boolean;
+    'deprecated'?: boolean | null;
     /**
     * Indicates whether the role is external.
     */
-    'external'?: boolean;
+    'external'?: boolean | null;
     /**
     * Indicates whether the role is hidden.
     */
-    'hidden'?: boolean;
+    'hidden'?: boolean | null;
     /**
     * Indicates whether the role is shared via connection
     */
-    'shared_via_connection'?: boolean;
+    'shared_via_connection'?: boolean | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -201,6 +201,6 @@ export class SearchRoleResponse {
 }
 
 
-export type SearchRoleResponsePrivilegesEnum = "UNKNOWN" | "ADMINISTRATION" | "AUTHORING" | "USERDATAUPLOADING" | "DATADOWNLOADING" | "USERMANAGEMENT" | "SECURITYMANAGEMENT" | "LOGICALMODELING" | "DATAMANAGEMENT" | "TAGMANAGEMENT" | "SHAREWITHALL" | "SYSTEMMANAGEMENT" | "JOBSCHEDULING" | "A3ANALYSIS" | "EXPERIMENTALFEATUREPRIVILEGE" | "BYPASSRLS" | "RANALYSIS" | "DISABLE_PINBOARD_CREATION" | "DEVELOPER" | "APPLICATION_ADMINISTRATION" | "USER_ADMINISTRATION" | "GROUP_ADMINISTRATION" | "BACKUP_ADMINISTRATION" | "SYSTEM_INFO_ADMINISTRATION" | "ENABLESPOTAPPCREATION" | "SYNCMANAGEMENT" | "ORG_ADMINISTRATION" | "ROLE_ADMINISTRATION" | "AUTHENTICATION_ADMINISTRATION" | "BILLING_INFO_ADMINISTRATION" | "PREVIEW_THOUGHTSPOT_SAGE" ;
+export type SearchRoleResponsePrivilegesEnum = "UNKNOWN" | "ADMINISTRATION" | "AUTHORING" | "USERDATAUPLOADING" | "DATADOWNLOADING" | "USERMANAGEMENT" | "SECURITYMANAGEMENT" | "LOGICALMODELING" | "DATAMANAGEMENT" | "TAGMANAGEMENT" | "SHAREWITHALL" | "SYSTEMMANAGEMENT" | "JOBSCHEDULING" | "A3ANALYSIS" | "EXPERIMENTALFEATUREPRIVILEGE" | "BYPASSRLS" | "RANALYSIS" | "DISABLE_PINBOARD_CREATION" | "DEVELOPER" | "APPLICATION_ADMINISTRATION" | "USER_ADMINISTRATION" | "GROUP_ADMINISTRATION" | "BACKUP_ADMINISTRATION" | "SYSTEM_INFO_ADMINISTRATION" | "ENABLESPOTAPPCREATION" | "SYNCMANAGEMENT" | "ORG_ADMINISTRATION" | "ROLE_ADMINISTRATION" | "AUTHENTICATION_ADMINISTRATION" | "BILLING_INFO_ADMINISTRATION" | "PREVIEW_THOUGHTSPOT_SAGE" | "LIVEBOARD_VERIFIER" | "CAN_MANAGE_CUSTOM_CALENDAR" | "CAN_CREATE_OR_EDIT_CONNECTIONS" | "CAN_CONFIGURE_CONNECTIONS" | "CAN_MANAGE_WORKSHEET_VIEWS_TABLES" | "CAN_MANAGE_VERSION_CONTROL" | "THIRDPARTY_ANALYSIS" | "CONTROL_TRUSTED_AUTH" | "CAN_CREATE_CATALOG" | "ALLOW_NON_EMBED_FULL_APP_ACCESS" | "CAN_ACCESS_ANALYST_STUDIO" | "CAN_MANAGE_ANALYST_STUDIO" | "PREVIEW_DOCUMENT_SEARCH" ;
 export type SearchRoleResponsePermissionEnum = "READ_ONLY" | "MODIFY" | "NO_ACCESS" ;
 

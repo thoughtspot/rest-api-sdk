@@ -80,7 +80,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
 # **fetchPermissionsOfPrincipals**
-> any fetchPermissionsOfPrincipals(fetchPermissionsOfPrincipalsRequest)
+> PermissionOfPrincipalsResponse fetchPermissionsOfPrincipals(fetchPermissionsOfPrincipalsRequest)
 
   Version: 9.0.0.cl or later   Fetches object permission details for a given principal object such as a user and group.  Requires view access to the metadata object.  #### Usage guidelines  * To get a list of all metadata objects that a user or group can access, specify the `type` and GUID or name of the principal. * To get permission details for a specific object, add the `type` and GUID or name of the metadata object to your API request.  Upon successful execution, the API returns a list of metadata objects and permission details for each object.        
 
@@ -111,6 +111,9 @@ apiInstance.fetchPermissionsOfPrincipals(
         identifier: "identifier_example",
       },
     ],
+    record_offset: 0,
+    record_size: -1,
+    default_metadata_type: "ALL",
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -129,7 +132,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**any**
+**PermissionOfPrincipalsResponse**
 
 ### Authorization
 
@@ -153,7 +156,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
 # **fetchPermissionsOnMetadata**
-> any fetchPermissionsOnMetadata(fetchPermissionsOnMetadataRequest)
+> PermissionOfMetadataResponse fetchPermissionsOnMetadata(fetchPermissionsOnMetadataRequest)
 
   Version: 9.0.0.cl or later   Fetches permission details for a given metadata object.  Requires view access to the metadata object.  #### Usage guidelines  * To fetch a list of users and groups for a metadata object, specify `type` and GUID or name of the metadata object. * To get permission details for a specific user or group, add `type` and GUID or name of the principal object to your API request.  Upon successful execution, the API returns permission details and principal information for the object specified in the API request.      
 
@@ -185,6 +188,9 @@ apiInstance.fetchPermissionsOnMetadata(
       },
     ],
     include_dependent_objects: false,
+    record_offset: 0,
+    record_size: -1,
+    permission_type: "permission_type_example",
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -203,7 +209,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**any**
+**PermissionOfMetadataResponse**
 
 ### Authorization
 
@@ -250,6 +256,12 @@ apiInstance.shareMetadata(
     metadata_identifiers: [
       "metadata_identifiers_example",
     ],
+    metadata: [
+      {
+        type: "LIVEBOARD",
+        identifier: "identifier_example",
+      },
+    ],
     permissions: [
       {
         principal: {
@@ -262,11 +274,11 @@ apiInstance.shareMetadata(
     visualization_identifiers: [
       "visualization_identifiers_example",
     ],
-    emails: [
-      "emails_example",
-    ],
+    emails: [],
     message: "message_example",
     enable_custom_url: false,
+    notify_on_share: false,
+    has_lenient_discoverability: false,
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);

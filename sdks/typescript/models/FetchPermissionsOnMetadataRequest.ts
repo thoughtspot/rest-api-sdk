@@ -27,6 +27,18 @@ export class FetchPermissionsOnMetadataRequest {
     * Indicates whether to fetch permissions of dependent metadata objects.
     */
     'include_dependent_objects'?: boolean | null;
+    /**
+    * The starting record number from where the records should be included for each metadata type.
+    */
+    'record_offset'?: number;
+    /**
+    * The number of records that should be included for each metadata type.
+    */
+    'record_size'?: number;
+    /**
+    * Permission type if it is effective then fetch the effective permission of principals else fetch the defined permission of principals.
+    */
+    'permission_type'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -47,6 +59,24 @@ export class FetchPermissionsOnMetadataRequest {
             "name": "include_dependent_objects",
             "baseName": "include_dependent_objects",
             "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "record_offset",
+            "baseName": "record_offset",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "record_size",
+            "baseName": "record_size",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "permission_type",
+            "baseName": "permission_type",
+            "type": "string",
             "format": ""
         }    ];
 

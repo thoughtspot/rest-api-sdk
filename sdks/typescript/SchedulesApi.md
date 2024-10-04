@@ -35,44 +35,11 @@ apiInstance.createSchedule(
     metadata_type: "LIVEBOARD",
     metadata_identifier: "metadata_identifier_example",
     file_format: "PDF",
-    liveboard_options: {
-      visualization_identifiers: [
-        "visualization_identifiers_example",
-      ],
-    },
-    pdf_options: {
-      complete_liveboard: true,
-      include_cover_page: true,
-      include_custom_logo: true,
-      include_filter_page: true,
-      include_page_number: true,
-      page_footer_text: "page_footer_text_example",
-      page_orientation: "page_orientation_example",
-      page_size: "A4",
-      truncate_table: true,
-    },
+    liveboard_options: null,
+    pdf_options: null,
     time_zone: "America/Los_Angeles",
-    frequency: {
-      cron_expression: {
-        day_of_month: "day_of_month_example",
-        day_of_week: "day_of_week_example",
-        hour: "hour_example",
-        minute: "minute_example",
-        month: "month_example",
-        second: "second_example",
-      },
-    },
-    recipient_details: {
-      emails: [
-        "emails_example",
-      ],
-      principals: [
-        {
-          identifier: "identifier_example",
-          type: "type_example",
-        },
-      ],
-    },
+    frequency: null,
+    recipient_details: null,
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -175,7 +142,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
 # **searchSchedules**
-> Array<ResponseSchedule> searchSchedules()
+> Array<ResponseSchedule> searchSchedules(searchSchedulesRequest)
 
  Search Schedules    Version: 9.4.0.cl or later   Gets a list of scheduled jobs configured for a Liveboard.  To get details of a specific scheduled job, specify the name or GUID of the scheduled job.  Requires at least view access to Liveboards.  **NOTE**: When filtering schedules by parameters other than `metadata`, set `record_size` to `-1` and `record_offset` to `0` for accurate results.      
 
@@ -192,7 +159,7 @@ const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
 const apiInstance = new SchedulesApi(configuration);
 
 apiInstance.searchSchedules(
-  // SearchSchedulesRequest (optional)
+  // SearchSchedulesRequest
   {
     metadata: [
       {
@@ -202,15 +169,8 @@ apiInstance.searchSchedules(
     ],
     record_offset: 1,
     record_size: 1,
-    sort_options: {
-      field_name: "field_name_example",
-      order: "order_example",
-    },
-    history_runs_options: {
-      include_history_runs: false,
-      record_size: 10,
-      record_offset: 0,
-    },
+    sort_options: null,
+    history_runs_options: null,
     schedule_identifiers: [
       "schedule_identifiers_example",
     ],
@@ -256,7 +216,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
 # **updateSchedule**
-> void updateSchedule()
+> void updateSchedule(updateScheduleRequest)
 
  Update schedule.    Version: 9.4.0.cl or later   Updates a scheduled Liveboard job.  Requires at least edit access to Liveboards. To update a schedule on behalf of another user, you need `ADMINISTRATION` (**Can administer Org**) or `JOBSCHEDULING` (**Can schedule for others**) privilege and edit access to the Liveboard.  The API endpoint allows you to pause a scheduled job, change the status of a paused job. You can also edit the recipients list, frequency of the job, format of the file to send to the recipients in email notifications, PDF options, and time zone setting.      
 
@@ -275,51 +235,18 @@ const apiInstance = new SchedulesApi(configuration);
 apiInstance.updateSchedule(
   // string | Unique ID or name of the schedule.
   "schedule_identifier_example" , 
-  // UpdateScheduleRequest (optional)
+  // UpdateScheduleRequest
   {
     name: "name_example",
     description: "description_example",
     metadata_type: "LIVEBOARD",
     metadata_identifier: "metadata_identifier_example",
     file_format: "CSV",
-    liveboard_options: {
-      visualization_identifiers: [
-        "visualization_identifiers_example",
-      ],
-    },
-    pdf_options: {
-      complete_liveboard: true,
-      include_cover_page: true,
-      include_custom_logo: true,
-      include_filter_page: true,
-      include_page_number: true,
-      page_footer_text: "page_footer_text_example",
-      page_orientation: "page_orientation_example",
-      page_size: "A4",
-      truncate_table: true,
-    },
+    liveboard_options: null,
+    pdf_options: null,
     time_zone: "Africa/Abidjan",
-    frequency: {
-      cron_expression: {
-        day_of_month: "day_of_month_example",
-        day_of_week: "day_of_week_example",
-        hour: "hour_example",
-        minute: "minute_example",
-        month: "month_example",
-        second: "second_example",
-      },
-    },
-    recipient_details: {
-      emails: [
-        "emails_example",
-      ],
-      principals: [
-        {
-          identifier: "identifier_example",
-          type: "type_example",
-        },
-      ],
-    },
+    frequency: null,
+    recipient_details: null,
     status: "ACTIVE",
   } 
 ).then((data:any) => {

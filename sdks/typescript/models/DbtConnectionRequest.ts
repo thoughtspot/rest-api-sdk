@@ -49,6 +49,10 @@ export class DbtConnectionRequest {
     * Name of the project
     */
     'project_name'?: string;
+    /**
+    * Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is Mandatory when Import Type is \'ZIP_FILE\'
+    */
+    'file_content'?: HttpFile;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -106,6 +110,12 @@ export class DbtConnectionRequest {
             "baseName": "project_name",
             "type": "string",
             "format": ""
+        },
+        {
+            "name": "file_content",
+            "baseName": "file_content",
+            "type": "HttpFile",
+            "format": "binary"
         }    ];
 
     static getAttributeTypeMap() {
@@ -117,5 +127,5 @@ export class DbtConnectionRequest {
 }
 
 
-export type DbtConnectionRequestImportTypeEnum = "DBT_CLOUD" ;
+export type DbtConnectionRequestImportTypeEnum = "DBT_CLOUD" | "ZIP_FILE" ;
 

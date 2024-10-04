@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**deleteMetadata**](MetadataApi.md#deleteMetadata) | **POST** /api/rest/2.0/metadata/delete | 
 [**exportMetadataTML**](MetadataApi.md#exportMetadataTML) | **POST** /api/rest/2.0/metadata/tml/export | 
+[**exportMetadataTMLBatched**](MetadataApi.md#exportMetadataTMLBatched) | **POST** /api/rest/2.0/metadata/tml/export/batch | 
 [**fetchAnswerSqlQuery**](MetadataApi.md#fetchAnswerSqlQuery) | **POST** /api/rest/2.0/metadata/answer/sql | 
 [**fetchLiveboardSqlQuery**](MetadataApi.md#fetchLiveboardSqlQuery) | **POST** /api/rest/2.0/metadata/liveboard/sql | 
 [**importMetadataTML**](MetadataApi.md#importMetadataTML) | **POST** /api/rest/2.0/metadata/tml/import | 
@@ -109,6 +110,10 @@ apiInstance.exportMetadataTML(
     export_associated: false,
     export_fqn: false,
     edoc_format: "JSON",
+    export_schema_version: "DEFAULT",
+    export_dependent: false,
+    export_connection_as_dependent: false,
+    all_orgs_override: false,
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -128,6 +133,73 @@ Name | Type | Description  | Notes
 ### Return type
 
 **Array<any>**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Export TMLs of specified metadata objects is successful. |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **exportMetadataTMLBatched**
+> any exportMetadataTMLBatched(exportMetadataTMLBatchedRequest)
+
+ Version: 10.1.0.cl or later 
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, MetadataApi, ExportMetadataTMLBatchedRequest } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new MetadataApi(configuration);
+
+apiInstance.exportMetadataTMLBatched(
+  // ExportMetadataTMLBatchedRequest
+  {
+    metadata_type: "USER",
+    batch_offset: 0,
+    batch_size: 20,
+    edoc_format: "JSON",
+    export_dependent: false,
+    all_orgs_override: false,
+  } 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **exportMetadataTMLBatchedRequest** | **ExportMetadataTMLBatchedRequest**|  |
+
+
+### Return type
+
+**any**
 
 ### Authorization
 
@@ -302,6 +374,7 @@ apiInstance.importMetadataTML(
     ],
     import_policy: "PARTIAL",
     create_new: false,
+    all_orgs_context: false,
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -344,7 +417,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
 # **searchMetadata**
-> Array<MetadataSearchResponse> searchMetadata()
+> Array<MetadataSearchResponse> searchMetadata(searchMetadataRequest)
 
   Version: 9.0.0.cl or later   Gets a list of metadata objects available on the ThoughtSpot system.  This API endpoint is available to all users who have view access to the object. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view data for all metadata objects, including users and groups.  #### Usage guidelines  - To get all metadata objects, send the API request without any attributes. - To get metadata objects of a specific type, set the `type` attribute. For example, to fetch a Worksheet, set the type as `LOGICAL_TABLE`. - To get a specific metadata object, specify the GUID. - To customize your search and filter the API response, you can use several parameters.   You can search for objects created or modified by specific users, by tags applied to the objects, or by using the include parameters like `include_auto_created_objects`, `include_dependent_objects`, `include_headers`, `include_incomplete_objects`, and so on.   You can also define sorting options to sort the data retrieved in the API response.  **NOTE**: The following parameters support pagination of metadata records: `tag_identifiers` `type` `created_by_user_identifiers` `modified_by_user_identifiers` `owned_by_user_identifiers` `exclude_objects` `include_auto_created_objects` `favorite_object_options` If you are using other parameters to search metadata, set `record_size` to `-1` and `record_offset` to `0`.      
 
@@ -361,7 +434,7 @@ const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
 const apiInstance = new MetadataApi(configuration);
 
 apiInstance.searchMetadata(
-  // SearchMetadataRequest (optional)
+  // SearchMetadataRequest
   {
     metadata: [
       {
@@ -389,14 +462,10 @@ apiInstance.searchMetadata(
         type: "LIVEBOARD",
       },
     ],
-    favorite_object_options: {
-      include: false,
-      user_identifiers: [
-        "user_identifiers_example",
-      ],
-    },
+    favorite_object_options: null,
     include_auto_created_objects: false,
     include_dependent_objects: false,
+    dependent_objects_record_size: 50,
     include_details: false,
     include_headers: true,
     include_hidden_objects: false,
@@ -408,10 +477,7 @@ apiInstance.searchMetadata(
     ],
     record_offset: 0,
     record_size: 10,
-    sort_options: {
-      field_name: "NAME",
-      order: "ASC",
-    },
+    sort_options: null,
     tag_identifiers: [
       "tag_identifiers_example",
     ],

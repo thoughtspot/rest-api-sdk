@@ -17,15 +17,15 @@ export class ConnectionInput {
     /**
     * Unique ID or name of the connection.
     */
-    'identifier'?: string;
+    'identifier'?: string | null;
     /**
     * A pattern to match case-insensitive name of the connection object. User `%` for a wildcard match.
     */
-    'name_pattern'?: string;
+    'name_pattern'?: string | null;
     /**
     * Filter options for databases, schemas, tables and columns.
     */
-    'data_warehouse_objects'?: Array<DataWarehouseObjectInput>;
+    'data_warehouse_objects'?: Array<DataWarehouseObjectInput> | null;
 
     static readonly discriminator: string | undefined = undefined;
 

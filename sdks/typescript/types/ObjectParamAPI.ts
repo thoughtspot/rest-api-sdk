@@ -9,6 +9,7 @@ import { ActionConfigInputCreate } from '../models/ActionConfigInputCreate';
 import { ActionDetails } from '../models/ActionDetails';
 import { ActionDetailsInput } from '../models/ActionDetailsInput';
 import { ActionDetailsInputCreate } from '../models/ActionDetailsInputCreate';
+import { ActivateUserRequest } from '../models/ActivateUserRequest';
 import { AnswerContent } from '../models/AnswerContent';
 import { AnswerDataResponse } from '../models/AnswerDataResponse';
 import { AssignChangeAuthorRequest } from '../models/AssignChangeAuthorRequest';
@@ -37,9 +38,15 @@ import { CreateConfigRequest } from '../models/CreateConfigRequest';
 import { CreateConnectionRequest } from '../models/CreateConnectionRequest';
 import { CreateConnectionResponse } from '../models/CreateConnectionResponse';
 import { CreateCustomActionRequest } from '../models/CreateCustomActionRequest';
+import { CreateCustomActionRequestActionDetails } from '../models/CreateCustomActionRequestActionDetails';
+import { CreateCustomActionRequestDefaultActionConfig } from '../models/CreateCustomActionRequestDefaultActionConfig';
 import { CreateOrgRequest } from '../models/CreateOrgRequest';
 import { CreateRoleRequest } from '../models/CreateRoleRequest';
 import { CreateScheduleRequest } from '../models/CreateScheduleRequest';
+import { CreateScheduleRequestFrequency } from '../models/CreateScheduleRequestFrequency';
+import { CreateScheduleRequestLiveboardOptions } from '../models/CreateScheduleRequestLiveboardOptions';
+import { CreateScheduleRequestPdfOptions } from '../models/CreateScheduleRequestPdfOptions';
+import { CreateScheduleRequestRecipientDetails } from '../models/CreateScheduleRequestRecipientDetails';
 import { CreateTagRequest } from '../models/CreateTagRequest';
 import { CreateUserGroupRequest } from '../models/CreateUserGroupRequest';
 import { CreateUserRequest } from '../models/CreateUserRequest';
@@ -49,6 +56,11 @@ import { CustomActionMetadataTypeInput } from '../models/CustomActionMetadataTyp
 import { DataWarehouseObjectInput } from '../models/DataWarehouseObjectInput';
 import { DataWarehouseObjects } from '../models/DataWarehouseObjects';
 import { Database } from '../models/Database';
+import { DbtConnectionRequest } from '../models/DbtConnectionRequest';
+import { DbtGenerateSyncTmlRequest } from '../models/DbtGenerateSyncTmlRequest';
+import { DbtGenerateTmlRequest } from '../models/DbtGenerateTmlRequest';
+import { DbtSearchResponse } from '../models/DbtSearchResponse';
+import { DeactivateUserRequest } from '../models/DeactivateUserRequest';
 import { DefaultActionConfig } from '../models/DefaultActionConfig';
 import { DefaultActionConfigInput } from '../models/DefaultActionConfigInput';
 import { DefaultActionConfigInputCreate } from '../models/DefaultActionConfigInputCreate';
@@ -63,6 +75,9 @@ import { ErrorResponse } from '../models/ErrorResponse';
 import { ExcludeMetadataListItemInput } from '../models/ExcludeMetadataListItemInput';
 import { ExportAnswerReportRequest } from '../models/ExportAnswerReportRequest';
 import { ExportLiveboardReportRequest } from '../models/ExportLiveboardReportRequest';
+import { ExportLiveboardReportRequestPdfOptions } from '../models/ExportLiveboardReportRequestPdfOptions';
+import { ExportLiveboardReportRequestPngOptions } from '../models/ExportLiveboardReportRequestPngOptions';
+import { ExportMetadataTMLBatchedRequest } from '../models/ExportMetadataTMLBatchedRequest';
 import { ExportMetadataTMLRequest } from '../models/ExportMetadataTMLRequest';
 import { ExportMetadataTypeInput } from '../models/ExportMetadataTypeInput';
 import { FavoriteMetadataInput } from '../models/FavoriteMetadataInput';
@@ -70,6 +85,7 @@ import { FavoriteMetadataItem } from '../models/FavoriteMetadataItem';
 import { FavoriteObjectOptionsInput } from '../models/FavoriteObjectOptionsInput';
 import { FetchAnswerDataRequest } from '../models/FetchAnswerDataRequest';
 import { FetchAnswerSqlQueryRequest } from '../models/FetchAnswerSqlQueryRequest';
+import { FetchConnectionDiffStatusResponse } from '../models/FetchConnectionDiffStatusResponse';
 import { FetchLiveboardDataRequest } from '../models/FetchLiveboardDataRequest';
 import { FetchLiveboardSqlQueryRequest } from '../models/FetchLiveboardSqlQueryRequest';
 import { FetchLogsRequest } from '../models/FetchLogsRequest';
@@ -79,10 +95,13 @@ import { ForceLogoutUsersRequest } from '../models/ForceLogoutUsersRequest';
 import { Frequency } from '../models/Frequency';
 import { FrequencyInput } from '../models/FrequencyInput';
 import { GenericInfo } from '../models/GenericInfo';
+import { GetAsyncImportStatusResponse } from '../models/GetAsyncImportStatusResponse';
 import { GetFullAccessTokenRequest } from '../models/GetFullAccessTokenRequest';
 import { GetObjectAccessTokenRequest } from '../models/GetObjectAccessTokenRequest';
+import { GetObjectAccessTokenRequestUserParameters } from '../models/GetObjectAccessTokenRequestUserParameters';
 import { GetTokenResponse } from '../models/GetTokenResponse';
 import { GroupsImportListInput } from '../models/GroupsImportListInput';
+import { ImportEPackAsyncTaskStatus } from '../models/ImportEPackAsyncTaskStatus';
 import { ImportMetadataTMLRequest } from '../models/ImportMetadataTMLRequest';
 import { ImportUser } from '../models/ImportUser';
 import { ImportUserGroupsRequest } from '../models/ImportUserGroupsRequest';
@@ -93,6 +112,7 @@ import { ImportUsersResponse } from '../models/ImportUsersResponse';
 import { JWTMetadataObject } from '../models/JWTMetadataObject';
 import { JWTParameter } from '../models/JWTParameter';
 import { JWTUserOptions } from '../models/JWTUserOptions';
+import { JWTUserOptionsFull } from '../models/JWTUserOptionsFull';
 import { JWTUserOptionsParametersInner } from '../models/JWTUserOptionsParametersInner';
 import { LiveboardContent } from '../models/LiveboardContent';
 import { LiveboardDataResponse } from '../models/LiveboardDataResponse';
@@ -107,7 +127,6 @@ import { MetadataObject } from '../models/MetadataObject';
 import { MetadataResponse } from '../models/MetadataResponse';
 import { MetadataSearchResponse } from '../models/MetadataSearchResponse';
 import { MetadataSearchSortOptions } from '../models/MetadataSearchSortOptions';
-import { MetadataTypeInput } from '../models/MetadataTypeInput';
 import { ModelTableList } from '../models/ModelTableList';
 import { ObjectIDAndName } from '../models/ObjectIDAndName';
 import { Org } from '../models/Org';
@@ -117,6 +136,8 @@ import { ParametersListItemInput } from '../models/ParametersListItemInput';
 import { PdfOptions } from '../models/PdfOptions';
 import { PdfOptionsInput } from '../models/PdfOptionsInput';
 import { PermissionInput } from '../models/PermissionInput';
+import { PermissionOfMetadataResponse } from '../models/PermissionOfMetadataResponse';
+import { PermissionOfPrincipalsResponse } from '../models/PermissionOfPrincipalsResponse';
 import { PermissionsMetadataTypeInput } from '../models/PermissionsMetadataTypeInput';
 import { PngOptionsInput } from '../models/PngOptionsInput';
 import { PrincipalsInput } from '../models/PrincipalsInput';
@@ -127,6 +148,7 @@ import { RecipientDetailsInput } from '../models/RecipientDetailsInput';
 import { RepoConfigObject } from '../models/RepoConfigObject';
 import { ResetUserPasswordRequest } from '../models/ResetUserPasswordRequest';
 import { ResponseActivationURL } from '../models/ResponseActivationURL';
+import { ResponseCopyObject } from '../models/ResponseCopyObject';
 import { ResponseCustomAction } from '../models/ResponseCustomAction';
 import { ResponseSchedule } from '../models/ResponseSchedule';
 import { ResponseScheduleRun } from '../models/ResponseScheduleRun';
@@ -147,19 +169,28 @@ import { Scope } from '../models/Scope';
 import { SearchCommitsRequest } from '../models/SearchCommitsRequest';
 import { SearchConfigRequest } from '../models/SearchConfigRequest';
 import { SearchConnectionRequest } from '../models/SearchConnectionRequest';
+import { SearchConnectionRequestSortOptions } from '../models/SearchConnectionRequestSortOptions';
 import { SearchConnectionResponse } from '../models/SearchConnectionResponse';
 import { SearchCustomActionsRequest } from '../models/SearchCustomActionsRequest';
+import { SearchCustomActionsRequestDefaultActionConfig } from '../models/SearchCustomActionsRequestDefaultActionConfig';
 import { SearchDataRequest } from '../models/SearchDataRequest';
 import { SearchDataResponse } from '../models/SearchDataResponse';
 import { SearchMetadataRequest } from '../models/SearchMetadataRequest';
+import { SearchMetadataRequestFavoriteObjectOptions } from '../models/SearchMetadataRequestFavoriteObjectOptions';
+import { SearchMetadataRequestSortOptions } from '../models/SearchMetadataRequestSortOptions';
 import { SearchOrgsRequest } from '../models/SearchOrgsRequest';
 import { SearchRoleResponse } from '../models/SearchRoleResponse';
 import { SearchRolesRequest } from '../models/SearchRolesRequest';
 import { SearchSchedulesRequest } from '../models/SearchSchedulesRequest';
+import { SearchSchedulesRequestHistoryRunsOptions } from '../models/SearchSchedulesRequestHistoryRunsOptions';
+import { SearchSchedulesRequestSortOptions } from '../models/SearchSchedulesRequestSortOptions';
 import { SearchTagsRequest } from '../models/SearchTagsRequest';
 import { SearchUserGroupsRequest } from '../models/SearchUserGroupsRequest';
+import { SearchUserGroupsRequestSortOptions } from '../models/SearchUserGroupsRequestSortOptions';
 import { SearchUsersRequest } from '../models/SearchUsersRequest';
+import { SearchUsersRequestSortOptions } from '../models/SearchUsersRequestSortOptions';
 import { ShareMetadataRequest } from '../models/ShareMetadataRequest';
+import { ShareMetadataTypeInput } from '../models/ShareMetadataTypeInput';
 import { SharePermissionsInput } from '../models/SharePermissionsInput';
 import { SortOptionInput } from '../models/SortOptionInput';
 import { SortOptions } from '../models/SortOptions';
@@ -172,15 +203,24 @@ import { Table } from '../models/Table';
 import { Tag } from '../models/Tag';
 import { TagMetadataTypeInput } from '../models/TagMetadataTypeInput';
 import { Token } from '../models/Token';
+import { TokenValidationResponse } from '../models/TokenValidationResponse';
 import { URL } from '../models/URL';
 import { URLInput } from '../models/URLInput';
 import { URLInputMandatory } from '../models/URLInputMandatory';
 import { UpdateConfigRequest } from '../models/UpdateConfigRequest';
 import { UpdateConnectionRequest } from '../models/UpdateConnectionRequest';
+import { UpdateConnectionV2Request } from '../models/UpdateConnectionV2Request';
 import { UpdateCustomActionRequest } from '../models/UpdateCustomActionRequest';
+import { UpdateCustomActionRequestActionDetails } from '../models/UpdateCustomActionRequestActionDetails';
+import { UpdateCustomActionRequestDefaultActionConfig } from '../models/UpdateCustomActionRequestDefaultActionConfig';
+import { UpdateDbtConnectionRequest } from '../models/UpdateDbtConnectionRequest';
 import { UpdateOrgRequest } from '../models/UpdateOrgRequest';
 import { UpdateRoleRequest } from '../models/UpdateRoleRequest';
 import { UpdateScheduleRequest } from '../models/UpdateScheduleRequest';
+import { UpdateScheduleRequestFrequency } from '../models/UpdateScheduleRequestFrequency';
+import { UpdateScheduleRequestLiveboardOptions } from '../models/UpdateScheduleRequestLiveboardOptions';
+import { UpdateScheduleRequestPdfOptions } from '../models/UpdateScheduleRequestPdfOptions';
+import { UpdateScheduleRequestRecipientDetails } from '../models/UpdateScheduleRequestRecipientDetails';
 import { UpdateSystemConfigRequest } from '../models/UpdateSystemConfigRequest';
 import { UpdateTagRequest } from '../models/UpdateTagRequest';
 import { UpdateUserGroupRequest } from '../models/UpdateUserGroupRequest';
@@ -188,8 +228,13 @@ import { UpdateUserRequest } from '../models/UpdateUserRequest';
 import { User } from '../models/User';
 import { UserGroup } from '../models/UserGroup';
 import { UserGroupResponse } from '../models/UserGroupResponse';
+import { UserObject } from '../models/UserObject';
+import { UserParameterOptions } from '../models/UserParameterOptions';
+import { UserParameters } from '../models/UserParameters';
+import { UserRuntimeFilters } from '../models/UserRuntimeFilters';
+import { UserRuntimeSorts } from '../models/UserRuntimeSorts';
 import { ValidateMergeRequest } from '../models/ValidateMergeRequest';
-import { VisualizationIdentifiersInput } from '../models/VisualizationIdentifiersInput';
+import { ValidateTokenRequest } from '../models/ValidateTokenRequest';
 
 import { ObservableAuthenticationApi } from "./ObservableAPI";
 import { AuthenticationApiRequestFactory, AuthenticationApiResponseProcessor} from "../apis/AuthenticationApi";
@@ -224,7 +269,7 @@ export interface AuthenticationApiLoginRequest {
      * @type LoginRequest
      * @memberof AuthenticationApilogin
      */
-    loginRequest?: LoginRequest
+    loginRequest: LoginRequest
 }
 
 export interface AuthenticationApiLogoutRequest {
@@ -236,7 +281,16 @@ export interface AuthenticationApiRevokeTokenRequest {
      * @type RevokeTokenRequest
      * @memberof AuthenticationApirevokeToken
      */
-    revokeTokenRequest?: RevokeTokenRequest
+    revokeTokenRequest: RevokeTokenRequest
+}
+
+export interface AuthenticationApiValidateTokenRequest {
+    /**
+     * 
+     * @type ValidateTokenRequest
+     * @memberof AuthenticationApivalidateToken
+     */
+    validateTokenRequest: ValidateTokenRequest
 }
 
 export class ObjectAuthenticationApi {
@@ -282,7 +336,7 @@ export class ObjectAuthenticationApi {
      *   Version: 9.0.0.cl or later    Creates a login session for a ThoughtSpot user with Basic authentication.  In Basic authentication method, REST clients log in to ThoughtSpot using `username` and `password` attributes. On a multi-tenant cluster with Orgs, users can pass the ID of the Org in the API request to log in to a specific Org context.  A successful login returns a session cookie that can be used in your subsequent API requests.      
      * @param param the request object
      */
-    public login(param: AuthenticationApiLoginRequest = {}, options?: Configuration): Promise<void> {
+    public login(param: AuthenticationApiLoginRequest, options?: Configuration): Promise<void> {
         return this.api.login(param.loginRequest,  options).toPromise();
     }
 
@@ -298,8 +352,16 @@ export class ObjectAuthenticationApi {
      *   Version: 9.0.0.cl or later    Revokes the authentication token issued for current user session.  The token of your current session expires when you make a call to the `/api/rest/2.0/auth/token/revoke` endpoint. the users will not be able to access ThoughtSpot objects until a new token is obtained.  To restart your session, request for a new token from ThoughtSpot. See [Get Object Access Token](#/http/api-endpoints/authentication/get-object-access-token) and [Get Full Access Token](#/http/api-endpoints/authentication/get-full-access-token).      
      * @param param the request object
      */
-    public revokeToken(param: AuthenticationApiRevokeTokenRequest = {}, options?: Configuration): Promise<void> {
+    public revokeToken(param: AuthenticationApiRevokeTokenRequest, options?: Configuration): Promise<void> {
         return this.api.revokeToken(param.revokeTokenRequest,  options).toPromise();
+    }
+
+    /**
+     *  Version: 9.12.0.cl or later 
+     * @param param the request object
+     */
+    public validateToken(param: AuthenticationApiValidateTokenRequest, options?: Configuration): Promise<TokenValidationResponse> {
+        return this.api.validateToken(param.validateTokenRequest,  options).toPromise();
     }
 
 }
@@ -325,13 +387,40 @@ export interface ConnectionsApiDeleteConnectionRequest {
     deleteConnectionRequest: DeleteConnectionRequest
 }
 
+export interface ConnectionsApiDeleteConnectionV2Request {
+    /**
+     * Unique ID or name of the connection.
+     * @type string
+     * @memberof ConnectionsApideleteConnectionV2
+     */
+    connectionIdentifier: string
+}
+
+export interface ConnectionsApiDownloadConnectionMetadataChangesRequest {
+    /**
+     * GUID of the connection
+     * @type string
+     * @memberof ConnectionsApidownloadConnectionMetadataChanges
+     */
+    connectionIdentifier: string
+}
+
+export interface ConnectionsApiFetchConnectionDiffStatusRequest {
+    /**
+     * GUID of the connection
+     * @type string
+     * @memberof ConnectionsApifetchConnectionDiffStatus
+     */
+    connectionIdentifier: string
+}
+
 export interface ConnectionsApiSearchConnectionRequest {
     /**
      * 
      * @type SearchConnectionRequest
      * @memberof ConnectionsApisearchConnection
      */
-    searchConnectionRequest?: SearchConnectionRequest
+    searchConnectionRequest: SearchConnectionRequest
 }
 
 export interface ConnectionsApiUpdateConnectionRequest {
@@ -341,6 +430,21 @@ export interface ConnectionsApiUpdateConnectionRequest {
      * @memberof ConnectionsApiupdateConnection
      */
     updateConnectionRequest: UpdateConnectionRequest
+}
+
+export interface ConnectionsApiUpdateConnectionV2Request {
+    /**
+     * Unique ID or name of the connection.
+     * @type string
+     * @memberof ConnectionsApiupdateConnectionV2
+     */
+    connectionIdentifier: string
+    /**
+     * 
+     * @type UpdateConnectionV2Request
+     * @memberof ConnectionsApiupdateConnectionV2
+     */
+    updateConnectionV2Request: UpdateConnectionV2Request
 }
 
 export class ObjectConnectionsApi {
@@ -367,10 +471,34 @@ export class ObjectConnectionsApi {
     }
 
     /**
+     *   Version: 10.0.0.cl or later   Deletes a connection object.  **Note**: If a connection has dependent objects, make sure you remove its associations before the delete operation.  Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+     * @param param the request object
+     */
+    public deleteConnectionV2(param: ConnectionsApiDeleteConnectionV2Request, options?: Configuration): Promise<void> {
+        return this.api.deleteConnectionV2(param.connectionIdentifier,  options).toPromise();
+    }
+
+    /**
+     *   Version: 9.9.0.cl or later   Exports the difference in connection metadata between CDW and ThoughtSpot  Requires `DATAMANAGEMENT` (**Can manage data**) privilege  To download the connection metadata difference between ThoughtSpot and CDW, pass the connection GUID as `connection_identifier` in the API request.      
+     * @param param the request object
+     */
+    public downloadConnectionMetadataChanges(param: ConnectionsApiDownloadConnectionMetadataChangesRequest, options?: Configuration): Promise<void> {
+        return this.api.downloadConnectionMetadataChanges(param.connectionIdentifier,  options).toPromise();
+    }
+
+    /**
+     *   Version: 9.9.0.cl or later   Validates the difference in connection metadata between CDW and ThoughtSpot  Requires `DATAMANAGEMENT` (**Can manage data**) privilege  Returns a boolean indicating whether there is any difference between the connection metadata at ThoughtSpot and CDW.  To get the connection metadata difference status, pass the connection GUID as `connection_identifier` in the API request.      
+     * @param param the request object
+     */
+    public fetchConnectionDiffStatus(param: ConnectionsApiFetchConnectionDiffStatusRequest, options?: Configuration): Promise<FetchConnectionDiffStatusResponse> {
+        return this.api.fetchConnectionDiffStatus(param.connectionIdentifier,  options).toPromise();
+    }
+
+    /**
      *   Version: 9.2.0.cl or later   Gets connection objects. Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  - To get a list of all connections available in the ThoughtSpot system, send the API request without any attributes in the request body. - To get the connection objects for a specific type of data warehouse, specify the type in `data_warehouse_types`. - To fetch details of a connection object, specify the connection object GUID or name. The `name_pattern` attribute allows passing partial text with `%` for a wildcard match. - To get details of the database, schemas, tables, or columns from a data connection object, specify `data_warehouse_object_type`. - To get a specific database, schema, table, or column from a connection object, define the object type in `data_warehouse_object_type` and object properties in the `data_warehouse_objects` array. For example, to search for a column, you must pass the database, schema, and table names in the API request.   Note that in the following example, object properties are set in a hierarchical order (`database` > `schema` > `table` > `column`).  ``` {   \"connections\": [     {       \"identifier\": \"b9d1f2ef-fa65-4a4b-994e-30fa2d57b0c2\",       \"data_warehouse_objects\": [         {           \"database\": \"NEBULADEV\",           \"schema\": \"INFORMATION_SCHEMA\",           \"table\": \"APPLICABLE_ROLES\",           \"column\": \"ROLE_NAME\"         }       ]     }   ],   \"data_warehouse_object_type\": \"COLUMN\" } ```  - To fetch data by `configuration`, specify `data_warehouse_object_type`. For example, to fetch columns from the `DEVELOPMENT` database, specify the `data_warehouse_object_type` as `DATABASE` and define the `configuration` string as `{\"database\":\"DEVELOPMENT\"}`. To get column data for a specific table, specify the table, for example,`{\"database\":\"RETAILAPPAREL\",\"table\":\"PIPES\"}`. - To query connections by `authentication_type`, specify `data_warehouse_object_type`. Supported values for `authentication_type` are:   - `SERVICE_ACCOUNT`: For connections that require service account credentials to authenticate to the Cloud Data Warehouse and fetch data.   - `OAUTH`: For connections that require OAuth credentials to authenticate to the Cloud Data Warehouse and fetch data. Teradata, Oracle, and Presto Cloud Data Warehouses do not support the OAuth authentication type.   - `IAM`: For connections that have the IAM OAuth set up. This authentication type is supported on Amazon Redshift connections only.   - `EXTOAUTH`: For connections that have external OAuth set up. ThoughtSpot supports external [OAuth with Microsoft Azure Active Directory (AD)](https://docs.thoughtspot.com/cloud/latest/ connections-snowflake-azure-ad-oauth) and [Okta for Snowflake data connections](https://docs.thoughtspot.com/cloud/latest/connections-snowflake-okta-oauth). - To include more details about connection objects in the API response, set `include_details` to `true`. - You can also sort the output by field names and filter connections by tags.  **NOTE**: When filtering connection records by parameters other than `data_warehouse_types` or `tag_identifiers`, ensure that you set `record_size` to `-1` and `record_offset` to `0` for precise results.      
      * @param param the request object
      */
-    public searchConnection(param: ConnectionsApiSearchConnectionRequest = {}, options?: Configuration): Promise<Array<SearchConnectionResponse>> {
+    public searchConnection(param: ConnectionsApiSearchConnectionRequest, options?: Configuration): Promise<Array<SearchConnectionResponse>> {
         return this.api.searchConnection(param.searchConnectionRequest,  options).toPromise();
     }
 
@@ -380,6 +508,14 @@ export class ObjectConnectionsApi {
      */
     public updateConnection(param: ConnectionsApiUpdateConnectionRequest, options?: Configuration): Promise<void> {
         return this.api.updateConnection(param.updateConnectionRequest,  options).toPromise();
+    }
+
+    /**
+     *   Version: 10.0.0.cl or later   Updates a connection object.  Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  To update a connection object, pass these parameters in your API request:  1. GUID of the connection object. 2. If you are updating tables or database schema of a connection object:    a. Add the updated JSON map of metadata with database, schema, and tables in `data_warehouse_config`.    b. Set `validate` to `true`. 3. If you are updating a configuration attribute, connection name, or description, you can set `validate` to `false`.      
+     * @param param the request object
+     */
+    public updateConnectionV2(param: ConnectionsApiUpdateConnectionV2Request, options?: Configuration): Promise<void> {
+        return this.api.updateConnectionV2(param.connectionIdentifier, param.updateConnectionV2Request,  options).toPromise();
     }
 
 }
@@ -411,7 +547,7 @@ export interface CustomActionApiSearchCustomActionsRequest {
      * @type SearchCustomActionsRequest
      * @memberof CustomActionApisearchCustomActions
      */
-    searchCustomActionsRequest?: SearchCustomActionsRequest
+    searchCustomActionsRequest: SearchCustomActionsRequest
 }
 
 export interface CustomActionApiUpdateCustomActionRequest {
@@ -426,7 +562,7 @@ export interface CustomActionApiUpdateCustomActionRequest {
      * @type UpdateCustomActionRequest
      * @memberof CustomActionApiupdateCustomAction
      */
-    updateCustomActionRequest?: UpdateCustomActionRequest
+    updateCustomActionRequest: UpdateCustomActionRequest
 }
 
 export class ObjectCustomActionApi {
@@ -456,7 +592,7 @@ export class ObjectCustomActionApi {
      *   Version: 9.6.0.cl or later   Gets custom actions configured on the cluster.  Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
      * @param param the request object
      */
-    public searchCustomActions(param: CustomActionApiSearchCustomActionsRequest = {}, options?: Configuration): Promise<Array<ResponseCustomAction>> {
+    public searchCustomActions(param: CustomActionApiSearchCustomActionsRequest, options?: Configuration): Promise<Array<ResponseCustomAction>> {
         return this.api.searchCustomActions(param.searchCustomActionsRequest,  options).toPromise();
     }
 
@@ -466,6 +602,114 @@ export class ObjectCustomActionApi {
      */
     public updateCustomAction(param: CustomActionApiUpdateCustomActionRequest, options?: Configuration): Promise<void> {
         return this.api.updateCustomAction(param.customActionIdentifier, param.updateCustomActionRequest,  options).toPromise();
+    }
+
+}
+
+import { ObservableDBTApi } from "./ObservableAPI";
+import { DBTApiRequestFactory, DBTApiResponseProcessor} from "../apis/DBTApi";
+
+export interface DBTApiDbtConnectionRequest {
+    /**
+     * 
+     * @type DbtConnectionRequest
+     * @memberof DBTApidbtConnection
+     */
+    dbtConnectionRequest: DbtConnectionRequest
+}
+
+export interface DBTApiDbtGenerateSyncTmlRequest {
+    /**
+     * 
+     * @type DbtGenerateSyncTmlRequest
+     * @memberof DBTApidbtGenerateSyncTml
+     */
+    dbtGenerateSyncTmlRequest: DbtGenerateSyncTmlRequest
+}
+
+export interface DBTApiDbtGenerateTmlRequest {
+    /**
+     * 
+     * @type DbtGenerateTmlRequest
+     * @memberof DBTApidbtGenerateTml
+     */
+    dbtGenerateTmlRequest: DbtGenerateTmlRequest
+}
+
+export interface DBTApiDbtSearchRequest {
+}
+
+export interface DBTApiDeleteDbtConnectionRequest {
+    /**
+     * Unique ID of the DBT Connection.
+     * @type string
+     * @memberof DBTApideleteDbtConnection
+     */
+    dbtConnectionIdentifier: string
+}
+
+export interface DBTApiUpdateDbtConnectionRequest {
+    /**
+     * 
+     * @type UpdateDbtConnectionRequest
+     * @memberof DBTApiupdateDbtConnection
+     */
+    updateDbtConnectionRequest: UpdateDbtConnectionRequest
+}
+
+export class ObjectDBTApi {
+    private api: ObservableDBTApi
+
+    public constructor(configuration: Configuration, requestFactory?: DBTApiRequestFactory, responseProcessor?: DBTApiResponseProcessor) {
+        this.api = new ObservableDBTApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     *   Version: 9.9.0.cl or later   Creates a DBT connection object in ThoughtSpot.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege.  #### About create DBT connection DBT connection in ThoughtSpot is used by the user to define DBT credentials for cloud . The API needs  embrace connection, embrace database name, DBT url, import type, DBT account identifier, DBT project identifier, DBT access token and environment details (or) embrace connection, embrace database name, import type, file_content to create a connection object. To know more about DBT, see ThoughtSpot Product Documentation.      
+     * @param param the request object
+     */
+    public dbtConnection(param: DBTApiDbtConnectionRequest, options?: Configuration): Promise<any> {
+        return this.api.dbtConnection(param.dbtConnectionRequest,  options).toPromise();
+    }
+
+    /**
+     *  Version: 9.9.0.cl or later 
+     * @param param the request object
+     */
+    public dbtGenerateSyncTml(param: DBTApiDbtGenerateSyncTmlRequest, options?: Configuration): Promise<any> {
+        return this.api.dbtGenerateSyncTml(param.dbtGenerateSyncTmlRequest,  options).toPromise();
+    }
+
+    /**
+     *  Version: 9.9.0.cl or later 
+     * @param param the request object
+     */
+    public dbtGenerateTml(param: DBTApiDbtGenerateTmlRequest, options?: Configuration): Promise<any> {
+        return this.api.dbtGenerateTml(param.dbtGenerateTmlRequest,  options).toPromise();
+    }
+
+    /**
+     *   Version: 9.9.0.cl or later   Gets a list of DBT connection objects by user and organization, available on the ThoughtSpot system.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege  #### About search DBT connection To get details of a specific DBT connection identifier, database connection identifier, database connection name, database name, project name, project identifier, environment identifier , import type and author.      
+     * @param param the request object
+     */
+    public dbtSearch(param: DBTApiDbtSearchRequest = {}, options?: Configuration): Promise<Array<DbtSearchResponse>> {
+        return this.api.dbtSearch( options).toPromise();
+    }
+
+    /**
+     *   Version: 9.9.0.cl or later   Removes the specified DBT connection object from the ThoughtSpot system.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege.      
+     * @param param the request object
+     */
+    public deleteDbtConnection(param: DBTApiDeleteDbtConnectionRequest, options?: Configuration): Promise<void> {
+        return this.api.deleteDbtConnection(param.dbtConnectionIdentifier,  options).toPromise();
+    }
+
+    /**
+     *   Version: 9.9.0.cl or later   Updates a DBT connection object.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege, along with an existing DBT connection.  #### About update DBT connection You can modify DBT connection object properties such as embrace connection name, embrace database name, import type, account identifier, access token, project identifier and environment (or) embrace connection, embrace database name, import type, file_content settings.      
+     * @param param the request object
+     */
+    public updateDbtConnection(param: DBTApiUpdateDbtConnectionRequest, options?: Configuration): Promise<any> {
+        return this.api.updateDbtConnection(param.updateDbtConnectionRequest,  options).toPromise();
     }
 
 }
@@ -508,7 +752,7 @@ export class ObjectDataApi {
     }
 
     /**
-     *   Version: 9.0.0.cl or later   Fetches data from a saved Answer.  Requires at least view access to the saved Answer.      
+     *   Version: 9.0.0.cl or later   Fetches data from a saved Answer.  Requires at least view access to the saved Answer.  The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](For more information, and see [Liveboard data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_apis).   ).        
      * @param param the request object
      */
     public fetchAnswerData(param: DataApiFetchAnswerDataRequest, options?: Configuration): Promise<AnswerDataResponse> {
@@ -516,7 +760,7 @@ export class ObjectDataApi {
     }
 
     /**
-     *   Version: 9.0.0.cl or later   Gets data from a Liveboard object and its visualization.    Requires at least view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To get data for specific visualizations, add the GUIDs or names of the visualizations in the API request.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes. If the new Liveboard experience mode, the transient content includes ad hoc changes to visualizations such as sorting, toggling of legends, and data drill down.      
+     *   Version: 9.0.0.cl or later   Gets data from a Liveboard object and its visualization.    Requires at least view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To get data for specific visualizations, add the GUIDs or names of the visualizations in the API request.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes. If the new Liveboard experience mode, the transient content includes ad hoc changes to visualizations such as sorting, toggling of legends, and data drill down.  For more information, and see [Liveboard data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_fetch_liveboard_data_api).        
      * @param param the request object
      */
     public fetchLiveboardData(param: DataApiFetchLiveboardDataRequest, options?: Configuration): Promise<LiveboardDataResponse> {
@@ -524,7 +768,7 @@ export class ObjectDataApi {
     }
 
     /**
-     *   Version: 9.0.0.cl or later   Generates an Answer from a given data source.  Requires at least view access to the data source.  #### Usage guidelines  To generate a new Answer, specify the data source GUID. The data source can be a Worksheet, View, Table, or SQL view.  Pass search tokens in the `query_string` attribute in the API request as shown in the following example. For more information passing search query string in API requests, see [`Components of a search query`](https://developers.thoughtspot.com/docs/?pageid=search-data-api#components).   ``` {   \"query_string\": \"[sales] by [store]\",   \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\", } ```      
+     *   Version: 9.0.0.cl or later   Generates an Answer from a given data source.  Requires at least view access to the data source object.  #### Usage guidelines  To search data, specify the data source GUID in `logical_table_identifier`. The data source can be a Worksheet, View, Table, or SQL view.  Pass search tokens in the `query_string` attribute in the API request as shown in the following example:  ``` {   \"query_string\": \"[sales] by [store]\",   \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\", } ```  For more information about the `query_string` format and data source attribute, see [Search data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_data_api).    The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).        
      * @param param the request object
      */
     public searchData(param: DataApiSearchDataRequest, options?: Configuration): Promise<SearchDataResponse> {
@@ -560,7 +804,7 @@ export interface GroupsApiImportUserGroupsRequest {
      * @type ImportUserGroupsRequest
      * @memberof GroupsApiimportUserGroups
      */
-    importUserGroupsRequest?: ImportUserGroupsRequest
+    importUserGroupsRequest: ImportUserGroupsRequest
 }
 
 export interface GroupsApiSearchUserGroupsRequest {
@@ -569,7 +813,7 @@ export interface GroupsApiSearchUserGroupsRequest {
      * @type SearchUserGroupsRequest
      * @memberof GroupsApisearchUserGroups
      */
-    searchUserGroupsRequest?: SearchUserGroupsRequest
+    searchUserGroupsRequest: SearchUserGroupsRequest
 }
 
 export interface GroupsApiUpdateUserGroupRequest {
@@ -584,7 +828,7 @@ export interface GroupsApiUpdateUserGroupRequest {
      * @type UpdateUserGroupRequest
      * @memberof GroupsApiupdateUserGroup
      */
-    updateUserGroupRequest?: UpdateUserGroupRequest
+    updateUserGroupRequest: UpdateUserGroupRequest
 }
 
 export class ObjectGroupsApi {
@@ -614,7 +858,7 @@ export class ObjectGroupsApi {
      *   Version: 9.0.0.cl or later   Imports group objects from external databases into ThoughtSpot.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  During the import operation:  * If the specified group is not available in ThoughtSpot, it will be added to ThoughtSpot. * If `delete_unspecified_groups` is set to `true`, the groups not specified in the API request, excluding administrator and system user groups, are deleted. * If the specified groups are already available in ThoughtSpot, the object properties of these groups are modified and synchronized as per the input data in the API request.  A successful API call returns the object that represents the changes made in the ThoughtSpot system.      
      * @param param the request object
      */
-    public importUserGroups(param: GroupsApiImportUserGroupsRequest = {}, options?: Configuration): Promise<ImportUserGroupsResponse> {
+    public importUserGroups(param: GroupsApiImportUserGroupsRequest, options?: Configuration): Promise<ImportUserGroupsResponse> {
         return this.api.importUserGroups(param.importUserGroupsRequest,  options).toPromise();
     }
 
@@ -622,7 +866,7 @@ export class ObjectGroupsApi {
      *   Version: 9.0.0.cl or later   Gets a list of users available on the ThoughtSpot system.  To get details of a specific user, specify the user GUID or name. You can also filter the API response based on groups, Org ID, user visibility, account status, user type, and user preference settings and favorites.  Available to all users. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view all users properties.  **NOTE**: If you do not get precise results, try setting `record_size` to `-1` and `record_offset` to `0`.      
      * @param param the request object
      */
-    public searchUserGroups(param: GroupsApiSearchUserGroupsRequest = {}, options?: Configuration): Promise<Array<UserGroupResponse>> {
+    public searchUserGroups(param: GroupsApiSearchUserGroupsRequest, options?: Configuration): Promise<Array<UserGroupResponse>> {
         return this.api.searchUserGroups(param.searchUserGroupsRequest,  options).toPromise();
     }
 
@@ -656,7 +900,7 @@ export class ObjectLogApi {
     }
 
     /**
-     *   Version: 9.0.0.cl or later   Fetches security audit logs.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  By default, the API retrieves logs for the last 24 hours. You can set a custom duration in EPOCH time. Make sure the log duration specified in your API request doesn’t exceed 24 hours. If you must fetch logs for a longer time range, modify the duration and make multiple sequential API requests.  Upon successful execution, the API returns logs with the following information: * timestamp of the event * event ID * event type * name and GUID of the user * IP address of ThoughtSpot instance      
+     *   Version: 9.0.0.cl or later   Fetches security audit logs.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  By default, the API retrieves logs for the last 24 hours. You can set a custom duration in EPOCH time. Make sure the log duration specified in your API request doesn’t exceed 24 hours. If you must fetch logs for a longer time range, modify the duration and make multiple sequential API requests.  Upon successful execution, the API returns logs with the following information: * timestamp of the event * event ID * event type * name and GUID of the user * IP address of ThoughtSpot instance  For more information about security events returned in the API response, see [Security events](https://developers.thoughtspot.com/docs/audit-logs#_security_events).      
      * @param param the request object
      */
     public fetchLogs(param: LogApiFetchLogsRequest, options?: Configuration): Promise<Array<LogResponse>> {
@@ -684,6 +928,15 @@ export interface MetadataApiExportMetadataTMLRequest {
      * @memberof MetadataApiexportMetadataTML
      */
     exportMetadataTMLRequest: ExportMetadataTMLRequest
+}
+
+export interface MetadataApiExportMetadataTMLBatchedRequest {
+    /**
+     * 
+     * @type ExportMetadataTMLBatchedRequest
+     * @memberof MetadataApiexportMetadataTMLBatched
+     */
+    exportMetadataTMLBatchedRequest: ExportMetadataTMLBatchedRequest
 }
 
 export interface MetadataApiFetchAnswerSqlQueryRequest {
@@ -719,7 +972,7 @@ export interface MetadataApiSearchMetadataRequest {
      * @type SearchMetadataRequest
      * @memberof MetadataApisearchMetadata
      */
-    searchMetadataRequest?: SearchMetadataRequest
+    searchMetadataRequest: SearchMetadataRequest
 }
 
 export class ObjectMetadataApi {
@@ -743,6 +996,14 @@ export class ObjectMetadataApi {
      */
     public exportMetadataTML(param: MetadataApiExportMetadataTMLRequest, options?: Configuration): Promise<Array<any>> {
         return this.api.exportMetadataTML(param.exportMetadataTMLRequest,  options).toPromise();
+    }
+
+    /**
+     *  Version: 10.1.0.cl or later 
+     * @param param the request object
+     */
+    public exportMetadataTMLBatched(param: MetadataApiExportMetadataTMLBatchedRequest, options?: Configuration): Promise<any> {
+        return this.api.exportMetadataTMLBatched(param.exportMetadataTMLBatchedRequest,  options).toPromise();
     }
 
     /**
@@ -773,7 +1034,7 @@ export class ObjectMetadataApi {
      *   Version: 9.0.0.cl or later   Gets a list of metadata objects available on the ThoughtSpot system.  This API endpoint is available to all users who have view access to the object. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view data for all metadata objects, including users and groups.  #### Usage guidelines  - To get all metadata objects, send the API request without any attributes. - To get metadata objects of a specific type, set the `type` attribute. For example, to fetch a Worksheet, set the type as `LOGICAL_TABLE`. - To get a specific metadata object, specify the GUID. - To customize your search and filter the API response, you can use several parameters.   You can search for objects created or modified by specific users, by tags applied to the objects, or by using the include parameters like `include_auto_created_objects`, `include_dependent_objects`, `include_headers`, `include_incomplete_objects`, and so on.   You can also define sorting options to sort the data retrieved in the API response.  **NOTE**: The following parameters support pagination of metadata records: `tag_identifiers` `type` `created_by_user_identifiers` `modified_by_user_identifiers` `owned_by_user_identifiers` `exclude_objects` `include_auto_created_objects` `favorite_object_options` If you are using other parameters to search metadata, set `record_size` to `-1` and `record_offset` to `0`.      
      * @param param the request object
      */
-    public searchMetadata(param: MetadataApiSearchMetadataRequest = {}, options?: Configuration): Promise<Array<MetadataSearchResponse>> {
+    public searchMetadata(param: MetadataApiSearchMetadataRequest, options?: Configuration): Promise<Array<MetadataSearchResponse>> {
         return this.api.searchMetadata(param.searchMetadataRequest,  options).toPromise();
     }
 
@@ -806,7 +1067,7 @@ export interface OrgsApiSearchOrgsRequest {
      * @type SearchOrgsRequest
      * @memberof OrgsApisearchOrgs
      */
-    searchOrgsRequest?: SearchOrgsRequest
+    searchOrgsRequest: SearchOrgsRequest
 }
 
 export interface OrgsApiUpdateOrgRequest {
@@ -821,7 +1082,7 @@ export interface OrgsApiUpdateOrgRequest {
      * @type UpdateOrgRequest
      * @memberof OrgsApiupdateOrg
      */
-    updateOrgRequest?: UpdateOrgRequest
+    updateOrgRequest: UpdateOrgRequest
 }
 
 export class ObjectOrgsApi {
@@ -851,7 +1112,7 @@ export class ObjectOrgsApi {
      *   Version: 9.0.0.cl or later   Gets a list of Orgs configured on the ThoughtSpot system. To get details of a specific Org, specify the Org ID or name. You can also pass parameters such as status, visibility, and user identifiers to get a specific list of Orgs.  Requires cluster administration (**Can administer Org**) privileges.      
      * @param param the request object
      */
-    public searchOrgs(param: OrgsApiSearchOrgsRequest = {}, options?: Configuration): Promise<Array<OrgResponse>> {
+    public searchOrgs(param: OrgsApiSearchOrgsRequest, options?: Configuration): Promise<Array<OrgResponse>> {
         return this.api.searchOrgs(param.searchOrgsRequest,  options).toPromise();
     }
 
@@ -894,7 +1155,7 @@ export class ObjectReportsApi {
     }
 
     /**
-     *   Version: 9.0.0.cl or later   Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege.  #### Usage guidelines  In the request body, the GUID or name of the Answer and set `file_format`. The default file format is CSV.  You can apply [runtime filter](https://developers.thoughtspot.com/docs/?pageid=runtime-filters#_apply_runtime_filters_via_rest_api_v2_0_endpoints) overrides and [sort columns](https://developers.thoughtspot.com/docs/?pageid=runtime-sort#_rest_api_v2_0) to the data retrieved in the API response.      
+     *   Version: 9.0.0.cl or later   Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege.  #### Usage guidelines  In the request body, the GUID or name of the Answer and set `file_format`. The default file format is CSV.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).        
      * @param param the request object
      */
     public exportAnswerReport(param: ReportsApiExportAnswerReportRequest, options?: Configuration): Promise<void> {
@@ -902,7 +1163,7 @@ export class ObjectReportsApi {
     }
 
     /**
-     *   Version: 9.0.0.cl or later   Exports the data from a Liveboard and its visualization in a given file format. You can download the Liveboard data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default `file_format` is CSV. For PDF file format, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  You can also apply [runtime filter](https://developers.thoughtspot.com/docs/?pageid=runtime-filters#_apply_runtime_filters_via_rest_api_v2_0_endpoints) overrides and [sort columns](https://developers.thoughtspot.com/docs/?pageid=runtime-sort#_rest_api_v2_0) to the data retrieved in the API response.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes. If the new Liveboard experience mode, the transient content includes ad hoc changes to visualizations such as sorting, toggling of legends, and data drill down.      
+     *   Version: 9.0.0.cl or later   Exports the data from a Liveboard and its visualization in a given file format. You can download the Liveboard data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default `file_format` is CSV. For PDF file format, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).        
      * @param param the request object
      */
     public exportLiveboardReport(param: ReportsApiExportLiveboardReportRequest, options?: Configuration): Promise<void> {
@@ -925,7 +1186,7 @@ export interface RolesApiCreateRoleRequest {
 
 export interface RolesApiDeleteRoleRequest {
     /**
-     * Unique ID or name of the role.
+     * Unique ID or name of the Role.
      * @type string
      * @memberof RolesApideleteRole
      */
@@ -938,12 +1199,12 @@ export interface RolesApiSearchRolesRequest {
      * @type SearchRolesRequest
      * @memberof RolesApisearchRoles
      */
-    searchRolesRequest?: SearchRolesRequest
+    searchRolesRequest: SearchRolesRequest
 }
 
 export interface RolesApiUpdateRoleRequest {
     /**
-     * Unique ID or name of the role.
+     * Unique ID or name of the Role.
      * @type string
      * @memberof RolesApiupdateRole
      */
@@ -983,7 +1244,7 @@ export class ObjectRolesApi {
      * Gets Roles configured on a ThoughtSpot instance. Requires cluster Administration, Role Administration or Group Administration privileges.    Version: 9.5.0.cl or later 
      * @param param the request object
      */
-    public searchRoles(param: RolesApiSearchRolesRequest = {}, options?: Configuration): Promise<Array<SearchRoleResponse>> {
+    public searchRoles(param: RolesApiSearchRolesRequest, options?: Configuration): Promise<Array<SearchRoleResponse>> {
         return this.api.searchRoles(param.searchRolesRequest,  options).toPromise();
     }
 
@@ -1024,7 +1285,7 @@ export interface SchedulesApiSearchSchedulesRequest {
      * @type SearchSchedulesRequest
      * @memberof SchedulesApisearchSchedules
      */
-    searchSchedulesRequest?: SearchSchedulesRequest
+    searchSchedulesRequest: SearchSchedulesRequest
 }
 
 export interface SchedulesApiUpdateScheduleRequest {
@@ -1039,7 +1300,7 @@ export interface SchedulesApiUpdateScheduleRequest {
      * @type UpdateScheduleRequest
      * @memberof SchedulesApiupdateSchedule
      */
-    updateScheduleRequest?: UpdateScheduleRequest
+    updateScheduleRequest: UpdateScheduleRequest
 }
 
 export class ObjectSchedulesApi {
@@ -1069,7 +1330,7 @@ export class ObjectSchedulesApi {
      *  Search Schedules    Version: 9.4.0.cl or later   Gets a list of scheduled jobs configured for a Liveboard.  To get details of a specific scheduled job, specify the name or GUID of the scheduled job.  Requires at least view access to Liveboards.  **NOTE**: When filtering schedules by parameters other than `metadata`, set `record_size` to `-1` and `record_offset` to `0` for accurate results.      
      * @param param the request object
      */
-    public searchSchedules(param: SchedulesApiSearchSchedulesRequest = {}, options?: Configuration): Promise<Array<ResponseSchedule>> {
+    public searchSchedules(param: SchedulesApiSearchSchedulesRequest, options?: Configuration): Promise<Array<ResponseSchedule>> {
         return this.api.searchSchedules(param.searchSchedulesRequest,  options).toPromise();
     }
 
@@ -1141,7 +1402,7 @@ export class ObjectSecurityApi {
      *   Version: 9.0.0.cl or later   Fetches object permission details for a given principal object such as a user and group.  Requires view access to the metadata object.  #### Usage guidelines  * To get a list of all metadata objects that a user or group can access, specify the `type` and GUID or name of the principal. * To get permission details for a specific object, add the `type` and GUID or name of the metadata object to your API request.  Upon successful execution, the API returns a list of metadata objects and permission details for each object.        
      * @param param the request object
      */
-    public fetchPermissionsOfPrincipals(param: SecurityApiFetchPermissionsOfPrincipalsRequest, options?: Configuration): Promise<any> {
+    public fetchPermissionsOfPrincipals(param: SecurityApiFetchPermissionsOfPrincipalsRequest, options?: Configuration): Promise<PermissionOfPrincipalsResponse> {
         return this.api.fetchPermissionsOfPrincipals(param.fetchPermissionsOfPrincipalsRequest,  options).toPromise();
     }
 
@@ -1149,7 +1410,7 @@ export class ObjectSecurityApi {
      *   Version: 9.0.0.cl or later   Fetches permission details for a given metadata object.  Requires view access to the metadata object.  #### Usage guidelines  * To fetch a list of users and groups for a metadata object, specify `type` and GUID or name of the metadata object. * To get permission details for a specific user or group, add `type` and GUID or name of the principal object to your API request.  Upon successful execution, the API returns permission details and principal information for the object specified in the API request.      
      * @param param the request object
      */
-    public fetchPermissionsOnMetadata(param: SecurityApiFetchPermissionsOnMetadataRequest, options?: Configuration): Promise<any> {
+    public fetchPermissionsOnMetadata(param: SecurityApiFetchPermissionsOnMetadataRequest, options?: Configuration): Promise<PermissionOfMetadataResponse> {
         return this.api.fetchPermissionsOnMetadata(param.fetchPermissionsOnMetadataRequest,  options).toPromise();
     }
 
@@ -1261,7 +1522,7 @@ export interface TagsApiSearchTagsRequest {
      * @type SearchTagsRequest
      * @memberof TagsApisearchTags
      */
-    searchTagsRequest?: SearchTagsRequest
+    searchTagsRequest: SearchTagsRequest
 }
 
 export interface TagsApiUnassignTagRequest {
@@ -1285,7 +1546,7 @@ export interface TagsApiUpdateTagRequest {
      * @type UpdateTagRequest
      * @memberof TagsApiupdateTag
      */
-    updateTagRequest?: UpdateTagRequest
+    updateTagRequest: UpdateTagRequest
 }
 
 export class ObjectTagsApi {
@@ -1304,7 +1565,7 @@ export class ObjectTagsApi {
     }
 
     /**
-     *   Version: 9.0.0.cl or later   Creates a tag object.  Tags are labels that identify a metadata object. For example, you can create a tag to designate subject areas, such as sales, HR, marketing, and finance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+     *   Version: 9.0.0.cl or later   Creates a tag object.  Tags are labels that identify a metadata object. For example, you can create a tag to designate subject areas, such as sales, HR, marketing, and finance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.      
      * @param param the request object
      */
     public createTag(param: TagsApiCreateTagRequest, options?: Configuration): Promise<Tag> {
@@ -1312,7 +1573,7 @@ export class ObjectTagsApi {
     }
 
     /**
-     *   Version: 9.0.0.cl or later   Deletes a tag object from the ThoughtSpot system  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+     *   Version: 9.0.0.cl or later   Deletes a tag object from the ThoughtSpot system  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.      
      * @param param the request object
      */
     public deleteTag(param: TagsApiDeleteTagRequest, options?: Configuration): Promise<void> {
@@ -1323,7 +1584,7 @@ export class ObjectTagsApi {
      *   Version: 9.0.0.cl or later   Gets a list of tag objects available on the ThoughtSpot system. To get details of a specific tag object, specify the GUID or name.  Any authenticated user can search for tag objects.      
      * @param param the request object
      */
-    public searchTags(param: TagsApiSearchTagsRequest = {}, options?: Configuration): Promise<Array<Tag>> {
+    public searchTags(param: TagsApiSearchTagsRequest, options?: Configuration): Promise<Array<Tag>> {
         return this.api.searchTags(param.searchTagsRequest,  options).toPromise();
     }
 
@@ -1336,7 +1597,7 @@ export class ObjectTagsApi {
     }
 
     /**
-     *   Version: 9.0.0.cl or later   Updates a tag object.  You can modify the `name` and `color` properties of a tag object.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+     *   Version: 9.0.0.cl or later   Updates a tag object.  You can modify the `name` and `color` properties of a tag object.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.      
      * @param param the request object
      */
     public updateTag(param: TagsApiUpdateTagRequest, options?: Configuration): Promise<void> {
@@ -1347,6 +1608,15 @@ export class ObjectTagsApi {
 
 import { ObservableThoughtSpotRestApi } from "./ObservableAPI";
 import { ThoughtSpotRestApiRequestFactory, ThoughtSpotRestApiResponseProcessor} from "../apis/ThoughtSpotRestApi";
+
+export interface ThoughtSpotRestApiActivateUserRequest {
+    /**
+     * 
+     * @type ActivateUserRequest
+     * @memberof ThoughtSpotRestApiactivateUser
+     */
+    activateUserRequest: ActivateUserRequest
+}
 
 export interface ThoughtSpotRestApiAssignChangeAuthorRequest {
     /**
@@ -1465,13 +1735,52 @@ export interface ThoughtSpotRestApiCreateUserGroupRequest {
     createUserGroupRequest: CreateUserGroupRequest
 }
 
+export interface ThoughtSpotRestApiDbtConnectionRequest {
+    /**
+     * 
+     * @type DbtConnectionRequest
+     * @memberof ThoughtSpotRestApidbtConnection
+     */
+    dbtConnectionRequest: DbtConnectionRequest
+}
+
+export interface ThoughtSpotRestApiDbtGenerateSyncTmlRequest {
+    /**
+     * 
+     * @type DbtGenerateSyncTmlRequest
+     * @memberof ThoughtSpotRestApidbtGenerateSyncTml
+     */
+    dbtGenerateSyncTmlRequest: DbtGenerateSyncTmlRequest
+}
+
+export interface ThoughtSpotRestApiDbtGenerateTmlRequest {
+    /**
+     * 
+     * @type DbtGenerateTmlRequest
+     * @memberof ThoughtSpotRestApidbtGenerateTml
+     */
+    dbtGenerateTmlRequest: DbtGenerateTmlRequest
+}
+
+export interface ThoughtSpotRestApiDbtSearchRequest {
+}
+
+export interface ThoughtSpotRestApiDeactivateUserRequest {
+    /**
+     * 
+     * @type DeactivateUserRequest
+     * @memberof ThoughtSpotRestApideactivateUser
+     */
+    deactivateUserRequest: DeactivateUserRequest
+}
+
 export interface ThoughtSpotRestApiDeleteConfigRequest {
     /**
      * 
      * @type DeleteConfigRequest
      * @memberof ThoughtSpotRestApideleteConfig
      */
-    deleteConfigRequest?: DeleteConfigRequest
+    deleteConfigRequest: DeleteConfigRequest
 }
 
 export interface ThoughtSpotRestApiDeleteConnectionRequest {
@@ -1483,6 +1792,15 @@ export interface ThoughtSpotRestApiDeleteConnectionRequest {
     deleteConnectionRequest: DeleteConnectionRequest
 }
 
+export interface ThoughtSpotRestApiDeleteConnectionV2Request {
+    /**
+     * Unique ID or name of the connection.
+     * @type string
+     * @memberof ThoughtSpotRestApideleteConnectionV2
+     */
+    connectionIdentifier: string
+}
+
 export interface ThoughtSpotRestApiDeleteCustomActionRequest {
     /**
      * Unique ID or name of the custom action.
@@ -1490,6 +1808,15 @@ export interface ThoughtSpotRestApiDeleteCustomActionRequest {
      * @memberof ThoughtSpotRestApideleteCustomAction
      */
     customActionIdentifier: string
+}
+
+export interface ThoughtSpotRestApiDeleteDbtConnectionRequest {
+    /**
+     * Unique ID of the DBT Connection.
+     * @type string
+     * @memberof ThoughtSpotRestApideleteDbtConnection
+     */
+    dbtConnectionIdentifier: string
 }
 
 export interface ThoughtSpotRestApiDeleteMetadataRequest {
@@ -1512,7 +1839,7 @@ export interface ThoughtSpotRestApiDeleteOrgRequest {
 
 export interface ThoughtSpotRestApiDeleteRoleRequest {
     /**
-     * Unique ID or name of the role.
+     * Unique ID or name of the Role.
      * @type string
      * @memberof ThoughtSpotRestApideleteRole
      */
@@ -1564,6 +1891,15 @@ export interface ThoughtSpotRestApiDeployCommitRequest {
     deployCommitRequest: DeployCommitRequest
 }
 
+export interface ThoughtSpotRestApiDownloadConnectionMetadataChangesRequest {
+    /**
+     * GUID of the connection
+     * @type string
+     * @memberof ThoughtSpotRestApidownloadConnectionMetadataChanges
+     */
+    connectionIdentifier: string
+}
+
 export interface ThoughtSpotRestApiExportAnswerReportRequest {
     /**
      * 
@@ -1591,6 +1927,15 @@ export interface ThoughtSpotRestApiExportMetadataTMLRequest {
     exportMetadataTMLRequest: ExportMetadataTMLRequest
 }
 
+export interface ThoughtSpotRestApiExportMetadataTMLBatchedRequest {
+    /**
+     * 
+     * @type ExportMetadataTMLBatchedRequest
+     * @memberof ThoughtSpotRestApiexportMetadataTMLBatched
+     */
+    exportMetadataTMLBatchedRequest: ExportMetadataTMLBatchedRequest
+}
+
 export interface ThoughtSpotRestApiFetchAnswerDataRequest {
     /**
      * 
@@ -1607,6 +1952,15 @@ export interface ThoughtSpotRestApiFetchAnswerSqlQueryRequest {
      * @memberof ThoughtSpotRestApifetchAnswerSqlQuery
      */
     fetchAnswerSqlQueryRequest: FetchAnswerSqlQueryRequest
+}
+
+export interface ThoughtSpotRestApiFetchConnectionDiffStatusRequest {
+    /**
+     * GUID of the connection
+     * @type string
+     * @memberof ThoughtSpotRestApifetchConnectionDiffStatus
+     */
+    connectionIdentifier: string
 }
 
 export interface ThoughtSpotRestApiFetchLiveboardDataRequest {
@@ -1660,7 +2014,7 @@ export interface ThoughtSpotRestApiForceLogoutUsersRequest {
      * @type ForceLogoutUsersRequest
      * @memberof ThoughtSpotRestApiforceLogoutUsers
      */
-    forceLogoutUsersRequest?: ForceLogoutUsersRequest
+    forceLogoutUsersRequest: ForceLogoutUsersRequest
 }
 
 export interface ThoughtSpotRestApiGetCurrentUserInfoRequest {
@@ -1711,7 +2065,7 @@ export interface ThoughtSpotRestApiImportUserGroupsRequest {
      * @type ImportUserGroupsRequest
      * @memberof ThoughtSpotRestApiimportUserGroups
      */
-    importUserGroupsRequest?: ImportUserGroupsRequest
+    importUserGroupsRequest: ImportUserGroupsRequest
 }
 
 export interface ThoughtSpotRestApiImportUsersRequest {
@@ -1729,7 +2083,7 @@ export interface ThoughtSpotRestApiLoginRequest {
      * @type LoginRequest
      * @memberof ThoughtSpotRestApilogin
      */
-    loginRequest?: LoginRequest
+    loginRequest: LoginRequest
 }
 
 export interface ThoughtSpotRestApiLogoutRequest {
@@ -1756,7 +2110,7 @@ export interface ThoughtSpotRestApiRevertCommitRequest {
      * @type RevertCommitRequest
      * @memberof ThoughtSpotRestApirevertCommit
      */
-    revertCommitRequest?: RevertCommitRequest
+    revertCommitRequest: RevertCommitRequest
 }
 
 export interface ThoughtSpotRestApiRevokeTokenRequest {
@@ -1765,7 +2119,7 @@ export interface ThoughtSpotRestApiRevokeTokenRequest {
      * @type RevokeTokenRequest
      * @memberof ThoughtSpotRestApirevokeToken
      */
-    revokeTokenRequest?: RevokeTokenRequest
+    revokeTokenRequest: RevokeTokenRequest
 }
 
 export interface ThoughtSpotRestApiSearchCommitsRequest {
@@ -1783,7 +2137,7 @@ export interface ThoughtSpotRestApiSearchConfigRequest {
      * @type SearchConfigRequest
      * @memberof ThoughtSpotRestApisearchConfig
      */
-    searchConfigRequest?: SearchConfigRequest
+    searchConfigRequest: SearchConfigRequest
 }
 
 export interface ThoughtSpotRestApiSearchConnectionRequest {
@@ -1792,7 +2146,7 @@ export interface ThoughtSpotRestApiSearchConnectionRequest {
      * @type SearchConnectionRequest
      * @memberof ThoughtSpotRestApisearchConnection
      */
-    searchConnectionRequest?: SearchConnectionRequest
+    searchConnectionRequest: SearchConnectionRequest
 }
 
 export interface ThoughtSpotRestApiSearchCustomActionsRequest {
@@ -1801,7 +2155,7 @@ export interface ThoughtSpotRestApiSearchCustomActionsRequest {
      * @type SearchCustomActionsRequest
      * @memberof ThoughtSpotRestApisearchCustomActions
      */
-    searchCustomActionsRequest?: SearchCustomActionsRequest
+    searchCustomActionsRequest: SearchCustomActionsRequest
 }
 
 export interface ThoughtSpotRestApiSearchDataRequest {
@@ -1819,7 +2173,7 @@ export interface ThoughtSpotRestApiSearchMetadataRequest {
      * @type SearchMetadataRequest
      * @memberof ThoughtSpotRestApisearchMetadata
      */
-    searchMetadataRequest?: SearchMetadataRequest
+    searchMetadataRequest: SearchMetadataRequest
 }
 
 export interface ThoughtSpotRestApiSearchOrgsRequest {
@@ -1828,7 +2182,7 @@ export interface ThoughtSpotRestApiSearchOrgsRequest {
      * @type SearchOrgsRequest
      * @memberof ThoughtSpotRestApisearchOrgs
      */
-    searchOrgsRequest?: SearchOrgsRequest
+    searchOrgsRequest: SearchOrgsRequest
 }
 
 export interface ThoughtSpotRestApiSearchRolesRequest {
@@ -1837,7 +2191,7 @@ export interface ThoughtSpotRestApiSearchRolesRequest {
      * @type SearchRolesRequest
      * @memberof ThoughtSpotRestApisearchRoles
      */
-    searchRolesRequest?: SearchRolesRequest
+    searchRolesRequest: SearchRolesRequest
 }
 
 export interface ThoughtSpotRestApiSearchSchedulesRequest {
@@ -1846,7 +2200,7 @@ export interface ThoughtSpotRestApiSearchSchedulesRequest {
      * @type SearchSchedulesRequest
      * @memberof ThoughtSpotRestApisearchSchedules
      */
-    searchSchedulesRequest?: SearchSchedulesRequest
+    searchSchedulesRequest: SearchSchedulesRequest
 }
 
 export interface ThoughtSpotRestApiSearchTagsRequest {
@@ -1855,7 +2209,7 @@ export interface ThoughtSpotRestApiSearchTagsRequest {
      * @type SearchTagsRequest
      * @memberof ThoughtSpotRestApisearchTags
      */
-    searchTagsRequest?: SearchTagsRequest
+    searchTagsRequest: SearchTagsRequest
 }
 
 export interface ThoughtSpotRestApiSearchUserGroupsRequest {
@@ -1864,7 +2218,7 @@ export interface ThoughtSpotRestApiSearchUserGroupsRequest {
      * @type SearchUserGroupsRequest
      * @memberof ThoughtSpotRestApisearchUserGroups
      */
-    searchUserGroupsRequest?: SearchUserGroupsRequest
+    searchUserGroupsRequest: SearchUserGroupsRequest
 }
 
 export interface ThoughtSpotRestApiSearchUsersRequest {
@@ -1873,7 +2227,7 @@ export interface ThoughtSpotRestApiSearchUsersRequest {
      * @type SearchUsersRequest
      * @memberof ThoughtSpotRestApisearchUsers
      */
-    searchUsersRequest?: SearchUsersRequest
+    searchUsersRequest: SearchUsersRequest
 }
 
 export interface ThoughtSpotRestApiShareMetadataRequest {
@@ -1900,7 +2254,7 @@ export interface ThoughtSpotRestApiUpdateConfigRequest {
      * @type UpdateConfigRequest
      * @memberof ThoughtSpotRestApiupdateConfig
      */
-    updateConfigRequest?: UpdateConfigRequest
+    updateConfigRequest: UpdateConfigRequest
 }
 
 export interface ThoughtSpotRestApiUpdateConnectionRequest {
@@ -1910,6 +2264,21 @@ export interface ThoughtSpotRestApiUpdateConnectionRequest {
      * @memberof ThoughtSpotRestApiupdateConnection
      */
     updateConnectionRequest: UpdateConnectionRequest
+}
+
+export interface ThoughtSpotRestApiUpdateConnectionV2Request {
+    /**
+     * Unique ID or name of the connection.
+     * @type string
+     * @memberof ThoughtSpotRestApiupdateConnectionV2
+     */
+    connectionIdentifier: string
+    /**
+     * 
+     * @type UpdateConnectionV2Request
+     * @memberof ThoughtSpotRestApiupdateConnectionV2
+     */
+    updateConnectionV2Request: UpdateConnectionV2Request
 }
 
 export interface ThoughtSpotRestApiUpdateCustomActionRequest {
@@ -1924,7 +2293,16 @@ export interface ThoughtSpotRestApiUpdateCustomActionRequest {
      * @type UpdateCustomActionRequest
      * @memberof ThoughtSpotRestApiupdateCustomAction
      */
-    updateCustomActionRequest?: UpdateCustomActionRequest
+    updateCustomActionRequest: UpdateCustomActionRequest
+}
+
+export interface ThoughtSpotRestApiUpdateDbtConnectionRequest {
+    /**
+     * 
+     * @type UpdateDbtConnectionRequest
+     * @memberof ThoughtSpotRestApiupdateDbtConnection
+     */
+    updateDbtConnectionRequest: UpdateDbtConnectionRequest
 }
 
 export interface ThoughtSpotRestApiUpdateOrgRequest {
@@ -1939,12 +2317,12 @@ export interface ThoughtSpotRestApiUpdateOrgRequest {
      * @type UpdateOrgRequest
      * @memberof ThoughtSpotRestApiupdateOrg
      */
-    updateOrgRequest?: UpdateOrgRequest
+    updateOrgRequest: UpdateOrgRequest
 }
 
 export interface ThoughtSpotRestApiUpdateRoleRequest {
     /**
-     * Unique ID or name of the role.
+     * Unique ID or name of the Role.
      * @type string
      * @memberof ThoughtSpotRestApiupdateRole
      */
@@ -1969,7 +2347,7 @@ export interface ThoughtSpotRestApiUpdateScheduleRequest {
      * @type UpdateScheduleRequest
      * @memberof ThoughtSpotRestApiupdateSchedule
      */
-    updateScheduleRequest?: UpdateScheduleRequest
+    updateScheduleRequest: UpdateScheduleRequest
 }
 
 export interface ThoughtSpotRestApiUpdateSystemConfigRequest {
@@ -1993,7 +2371,7 @@ export interface ThoughtSpotRestApiUpdateTagRequest {
      * @type UpdateTagRequest
      * @memberof ThoughtSpotRestApiupdateTag
      */
-    updateTagRequest?: UpdateTagRequest
+    updateTagRequest: UpdateTagRequest
 }
 
 export interface ThoughtSpotRestApiUpdateUserRequest {
@@ -2008,7 +2386,7 @@ export interface ThoughtSpotRestApiUpdateUserRequest {
      * @type UpdateUserRequest
      * @memberof ThoughtSpotRestApiupdateUser
      */
-    updateUserRequest?: UpdateUserRequest
+    updateUserRequest: UpdateUserRequest
 }
 
 export interface ThoughtSpotRestApiUpdateUserGroupRequest {
@@ -2023,7 +2401,7 @@ export interface ThoughtSpotRestApiUpdateUserGroupRequest {
      * @type UpdateUserGroupRequest
      * @memberof ThoughtSpotRestApiupdateUserGroup
      */
-    updateUserGroupRequest?: UpdateUserGroupRequest
+    updateUserGroupRequest: UpdateUserGroupRequest
 }
 
 export interface ThoughtSpotRestApiValidateMergeRequest {
@@ -2035,11 +2413,28 @@ export interface ThoughtSpotRestApiValidateMergeRequest {
     validateMergeRequest: ValidateMergeRequest
 }
 
+export interface ThoughtSpotRestApiValidateTokenRequest {
+    /**
+     * 
+     * @type ValidateTokenRequest
+     * @memberof ThoughtSpotRestApivalidateToken
+     */
+    validateTokenRequest: ValidateTokenRequest
+}
+
 export class ObjectThoughtSpotRestApi {
     private api: ObservableThoughtSpotRestApi
 
     public constructor(configuration: Configuration, requestFactory?: ThoughtSpotRestApiRequestFactory, responseProcessor?: ThoughtSpotRestApiResponseProcessor) {
         this.api = new ObservableThoughtSpotRestApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     *   Version: 9.7.0.cl or later   Activates a deactivated user account.  Requires `ADMINISTRATION` (**Can administer Thoughtspot**) privilege.  To activate an inactive user account, the API request body must include the following information:  - Username or the GUID of the user account. - Auth token generated for the deactivated user. The auth token is sent in the API response when a user is deactivated. - Password for the user account.      
+     * @param param the request object
+     */
+    public activateUser(param: ThoughtSpotRestApiActivateUserRequest, options?: Configuration): Promise<User> {
+        return this.api.activateUser(param.activateUserRequest,  options).toPromise();
     }
 
     /**
@@ -2067,7 +2462,7 @@ export class ObjectThoughtSpotRestApi {
     }
 
     /**
-     *  Version: 9.2.0.cl or later   Commits TML files of metadata objects to the Git branch configured on your instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  Before using this endpoint to push your commits:  * Enable Git integration on your instance. * Make sure the Git repository and branch details are configured on your instance.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).      
+     *   Version: 9.2.0.cl or later   Commits TML files of metadata objects to the Git branch configured on your instance.  Requires at least edit access to objects used in the commit operation.  Before using this endpoint to push your commits:  * Enable Git integration on your instance. * Make sure the Git repository and branch details are configured on your instance.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).      
      * @param param the request object
      */
     public commitBranch(param: ThoughtSpotRestApiCommitBranchRequest, options?: Configuration): Promise<CommitResponse> {
@@ -2075,7 +2470,7 @@ export class ObjectThoughtSpotRestApi {
     }
 
     /**
-     *  Version: 9.2.0.cl or later   Allows you to connect a ThoughtSpot instance to a Git repository.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  You can use this API endpoint to connect your ThoughtSpot development and production environments to the development and production branches of a Git repository.  Before using this endpoint to connect your ThoughtSpot instance to a Git repository, check the following prerequisites:  * You have a Git repository. If you are using GitHub, make sure you have a valid account and an access token to connect ThoughtSpot to GitHub. For information about generating a token, see [GitHub Documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).  * Your access token has `repo` scope that grants full access to public and private repositories. * Your Git repository has a branch that can be configured as a default branch in ThoughtSpot.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).      
+     *   Version: 9.2.0.cl or later   Allows you to connect a ThoughtSpot instance to a Git repository.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  You can use this API endpoint to connect your ThoughtSpot development and production environments to the development and production branches of a Git repository.  Before using this endpoint to connect your ThoughtSpot instance to a Git repository, check the following prerequisites:  * You have a Git repository. If you are using GitHub, make sure you have a valid account and an access token to connect ThoughtSpot to GitHub. For information about generating a token, see [GitHub Documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).  * Your access token has `repo` scope that grants full access to public and private repositories. * Your Git repository has a branch that can be configured as a default branch in ThoughtSpot.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).  **Note**: ThoughtSpot supports only GitHub / GitHub Enterprise for CI/CD.      
      * @param param the request object
      */
     public createConfig(param: ThoughtSpotRestApiCreateConfigRequest, options?: Configuration): Promise<RepoConfigObject> {
@@ -2123,7 +2518,7 @@ export class ObjectThoughtSpotRestApi {
     }
 
     /**
-     *   Version: 9.0.0.cl or later   Creates a tag object.  Tags are labels that identify a metadata object. For example, you can create a tag to designate subject areas, such as sales, HR, marketing, and finance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+     *   Version: 9.0.0.cl or later   Creates a tag object.  Tags are labels that identify a metadata object. For example, you can create a tag to designate subject areas, such as sales, HR, marketing, and finance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.      
      * @param param the request object
      */
     public createTag(param: ThoughtSpotRestApiCreateTagRequest, options?: Configuration): Promise<Tag> {
@@ -2147,10 +2542,50 @@ export class ObjectThoughtSpotRestApi {
     }
 
     /**
-     *  Version: 9.2.0.cl or later   Deletes Git repository configuration from your ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+     *   Version: 9.9.0.cl or later   Creates a DBT connection object in ThoughtSpot.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege.  #### About create DBT connection DBT connection in ThoughtSpot is used by the user to define DBT credentials for cloud . The API needs  embrace connection, embrace database name, DBT url, import type, DBT account identifier, DBT project identifier, DBT access token and environment details (or) embrace connection, embrace database name, import type, file_content to create a connection object. To know more about DBT, see ThoughtSpot Product Documentation.      
      * @param param the request object
      */
-    public deleteConfig(param: ThoughtSpotRestApiDeleteConfigRequest = {}, options?: Configuration): Promise<void> {
+    public dbtConnection(param: ThoughtSpotRestApiDbtConnectionRequest, options?: Configuration): Promise<any> {
+        return this.api.dbtConnection(param.dbtConnectionRequest,  options).toPromise();
+    }
+
+    /**
+     *  Version: 9.9.0.cl or later 
+     * @param param the request object
+     */
+    public dbtGenerateSyncTml(param: ThoughtSpotRestApiDbtGenerateSyncTmlRequest, options?: Configuration): Promise<any> {
+        return this.api.dbtGenerateSyncTml(param.dbtGenerateSyncTmlRequest,  options).toPromise();
+    }
+
+    /**
+     *  Version: 9.9.0.cl or later 
+     * @param param the request object
+     */
+    public dbtGenerateTml(param: ThoughtSpotRestApiDbtGenerateTmlRequest, options?: Configuration): Promise<any> {
+        return this.api.dbtGenerateTml(param.dbtGenerateTmlRequest,  options).toPromise();
+    }
+
+    /**
+     *   Version: 9.9.0.cl or later   Gets a list of DBT connection objects by user and organization, available on the ThoughtSpot system.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege  #### About search DBT connection To get details of a specific DBT connection identifier, database connection identifier, database connection name, database name, project name, project identifier, environment identifier , import type and author.      
+     * @param param the request object
+     */
+    public dbtSearch(param: ThoughtSpotRestApiDbtSearchRequest = {}, options?: Configuration): Promise<Array<DbtSearchResponse>> {
+        return this.api.dbtSearch( options).toPromise();
+    }
+
+    /**
+     *   Version: 9.7.0.cl or later   Deactivates a user account.  Requires `ADMINISTRATION` (**Can administer Thoughtspot**) privilege.  To deactivate a user account, the API request body must include the following information:  - Username or the GUID of the user account - Base URL of the ThoughtSpot instance  If the API request is successful, ThoughtSpot returns the activation URL in the response. The activation URL is valid for 14 days and can be used to re-activate the account and reset the password of the deactivated account.      
+     * @param param the request object
+     */
+    public deactivateUser(param: ThoughtSpotRestApiDeactivateUserRequest, options?: Configuration): Promise<ResponseActivationURL> {
+        return this.api.deactivateUser(param.deactivateUserRequest,  options).toPromise();
+    }
+
+    /**
+     *   Version: 9.2.0.cl or later   Deletes Git repository configuration from your ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+     * @param param the request object
+     */
+    public deleteConfig(param: ThoughtSpotRestApiDeleteConfigRequest, options?: Configuration): Promise<void> {
         return this.api.deleteConfig(param.deleteConfigRequest,  options).toPromise();
     }
 
@@ -2163,11 +2598,27 @@ export class ObjectThoughtSpotRestApi {
     }
 
     /**
+     *   Version: 10.0.0.cl or later   Deletes a connection object.  **Note**: If a connection has dependent objects, make sure you remove its associations before the delete operation.  Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+     * @param param the request object
+     */
+    public deleteConnectionV2(param: ThoughtSpotRestApiDeleteConnectionV2Request, options?: Configuration): Promise<void> {
+        return this.api.deleteConnectionV2(param.connectionIdentifier,  options).toPromise();
+    }
+
+    /**
      *   Version: 9.6.0.cl or later   Removes the custom action specified in the API request.  Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
      * @param param the request object
      */
     public deleteCustomAction(param: ThoughtSpotRestApiDeleteCustomActionRequest, options?: Configuration): Promise<void> {
         return this.api.deleteCustomAction(param.customActionIdentifier,  options).toPromise();
+    }
+
+    /**
+     *   Version: 9.9.0.cl or later   Removes the specified DBT connection object from the ThoughtSpot system.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege.      
+     * @param param the request object
+     */
+    public deleteDbtConnection(param: ThoughtSpotRestApiDeleteDbtConnectionRequest, options?: Configuration): Promise<void> {
+        return this.api.deleteDbtConnection(param.dbtConnectionIdentifier,  options).toPromise();
     }
 
     /**
@@ -2203,7 +2654,7 @@ export class ObjectThoughtSpotRestApi {
     }
 
     /**
-     *   Version: 9.0.0.cl or later   Deletes a tag object from the ThoughtSpot system  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+     *   Version: 9.0.0.cl or later   Deletes a tag object from the ThoughtSpot system  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.      
      * @param param the request object
      */
     public deleteTag(param: ThoughtSpotRestApiDeleteTagRequest, options?: Configuration): Promise<void> {
@@ -2227,7 +2678,7 @@ export class ObjectThoughtSpotRestApi {
     }
 
     /**
-     *  Version: 9.2.0.cl or later   Allows you to deploy a commit and publish TML content to your ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  The API deploys the head of the branch unless a `commit_id` is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.      
+     *   Version: 9.2.0.cl or later   Allows you to deploy a commit and publish TML content to your ThoughtSpot instance.  Requires at least edit access to the objects used in the deploy operation.  The API deploys the head of the branch unless a `commit_id` is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).      
      * @param param the request object
      */
     public deployCommit(param: ThoughtSpotRestApiDeployCommitRequest, options?: Configuration): Promise<Array<DeployResponse>> {
@@ -2235,7 +2686,15 @@ export class ObjectThoughtSpotRestApi {
     }
 
     /**
-     *   Version: 9.0.0.cl or later   Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege.  #### Usage guidelines  In the request body, the GUID or name of the Answer and set `file_format`. The default file format is CSV.  You can apply [runtime filter](https://developers.thoughtspot.com/docs/?pageid=runtime-filters#_apply_runtime_filters_via_rest_api_v2_0_endpoints) overrides and [sort columns](https://developers.thoughtspot.com/docs/?pageid=runtime-sort#_rest_api_v2_0) to the data retrieved in the API response.      
+     *   Version: 9.9.0.cl or later   Exports the difference in connection metadata between CDW and ThoughtSpot  Requires `DATAMANAGEMENT` (**Can manage data**) privilege  To download the connection metadata difference between ThoughtSpot and CDW, pass the connection GUID as `connection_identifier` in the API request.      
+     * @param param the request object
+     */
+    public downloadConnectionMetadataChanges(param: ThoughtSpotRestApiDownloadConnectionMetadataChangesRequest, options?: Configuration): Promise<void> {
+        return this.api.downloadConnectionMetadataChanges(param.connectionIdentifier,  options).toPromise();
+    }
+
+    /**
+     *   Version: 9.0.0.cl or later   Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege.  #### Usage guidelines  In the request body, the GUID or name of the Answer and set `file_format`. The default file format is CSV.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).        
      * @param param the request object
      */
     public exportAnswerReport(param: ThoughtSpotRestApiExportAnswerReportRequest, options?: Configuration): Promise<void> {
@@ -2243,7 +2702,7 @@ export class ObjectThoughtSpotRestApi {
     }
 
     /**
-     *   Version: 9.0.0.cl or later   Exports the data from a Liveboard and its visualization in a given file format. You can download the Liveboard data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default `file_format` is CSV. For PDF file format, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  You can also apply [runtime filter](https://developers.thoughtspot.com/docs/?pageid=runtime-filters#_apply_runtime_filters_via_rest_api_v2_0_endpoints) overrides and [sort columns](https://developers.thoughtspot.com/docs/?pageid=runtime-sort#_rest_api_v2_0) to the data retrieved in the API response.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes. If the new Liveboard experience mode, the transient content includes ad hoc changes to visualizations such as sorting, toggling of legends, and data drill down.      
+     *   Version: 9.0.0.cl or later   Exports the data from a Liveboard and its visualization in a given file format. You can download the Liveboard data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default `file_format` is CSV. For PDF file format, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).        
      * @param param the request object
      */
     public exportLiveboardReport(param: ThoughtSpotRestApiExportLiveboardReportRequest, options?: Configuration): Promise<void> {
@@ -2259,7 +2718,15 @@ export class ObjectThoughtSpotRestApi {
     }
 
     /**
-     *   Version: 9.0.0.cl or later   Fetches data from a saved Answer.  Requires at least view access to the saved Answer.      
+     *  Version: 10.1.0.cl or later 
+     * @param param the request object
+     */
+    public exportMetadataTMLBatched(param: ThoughtSpotRestApiExportMetadataTMLBatchedRequest, options?: Configuration): Promise<any> {
+        return this.api.exportMetadataTMLBatched(param.exportMetadataTMLBatchedRequest,  options).toPromise();
+    }
+
+    /**
+     *   Version: 9.0.0.cl or later   Fetches data from a saved Answer.  Requires at least view access to the saved Answer.  The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](For more information, and see [Liveboard data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_apis).   ).        
      * @param param the request object
      */
     public fetchAnswerData(param: ThoughtSpotRestApiFetchAnswerDataRequest, options?: Configuration): Promise<AnswerDataResponse> {
@@ -2275,7 +2742,15 @@ export class ObjectThoughtSpotRestApi {
     }
 
     /**
-     *   Version: 9.0.0.cl or later   Gets data from a Liveboard object and its visualization.    Requires at least view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To get data for specific visualizations, add the GUIDs or names of the visualizations in the API request.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes. If the new Liveboard experience mode, the transient content includes ad hoc changes to visualizations such as sorting, toggling of legends, and data drill down.      
+     *   Version: 9.9.0.cl or later   Validates the difference in connection metadata between CDW and ThoughtSpot  Requires `DATAMANAGEMENT` (**Can manage data**) privilege  Returns a boolean indicating whether there is any difference between the connection metadata at ThoughtSpot and CDW.  To get the connection metadata difference status, pass the connection GUID as `connection_identifier` in the API request.      
+     * @param param the request object
+     */
+    public fetchConnectionDiffStatus(param: ThoughtSpotRestApiFetchConnectionDiffStatusRequest, options?: Configuration): Promise<FetchConnectionDiffStatusResponse> {
+        return this.api.fetchConnectionDiffStatus(param.connectionIdentifier,  options).toPromise();
+    }
+
+    /**
+     *   Version: 9.0.0.cl or later   Gets data from a Liveboard object and its visualization.    Requires at least view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To get data for specific visualizations, add the GUIDs or names of the visualizations in the API request.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes. If the new Liveboard experience mode, the transient content includes ad hoc changes to visualizations such as sorting, toggling of legends, and data drill down.  For more information, and see [Liveboard data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_fetch_liveboard_data_api).        
      * @param param the request object
      */
     public fetchLiveboardData(param: ThoughtSpotRestApiFetchLiveboardDataRequest, options?: Configuration): Promise<LiveboardDataResponse> {
@@ -2291,7 +2766,7 @@ export class ObjectThoughtSpotRestApi {
     }
 
     /**
-     *   Version: 9.0.0.cl or later   Fetches security audit logs.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  By default, the API retrieves logs for the last 24 hours. You can set a custom duration in EPOCH time. Make sure the log duration specified in your API request doesn’t exceed 24 hours. If you must fetch logs for a longer time range, modify the duration and make multiple sequential API requests.  Upon successful execution, the API returns logs with the following information: * timestamp of the event * event ID * event type * name and GUID of the user * IP address of ThoughtSpot instance      
+     *   Version: 9.0.0.cl or later   Fetches security audit logs.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  By default, the API retrieves logs for the last 24 hours. You can set a custom duration in EPOCH time. Make sure the log duration specified in your API request doesn’t exceed 24 hours. If you must fetch logs for a longer time range, modify the duration and make multiple sequential API requests.  Upon successful execution, the API returns logs with the following information: * timestamp of the event * event ID * event type * name and GUID of the user * IP address of ThoughtSpot instance  For more information about security events returned in the API response, see [Security events](https://developers.thoughtspot.com/docs/audit-logs#_security_events).      
      * @param param the request object
      */
     public fetchLogs(param: ThoughtSpotRestApiFetchLogsRequest, options?: Configuration): Promise<Array<LogResponse>> {
@@ -2302,7 +2777,7 @@ export class ObjectThoughtSpotRestApi {
      *   Version: 9.0.0.cl or later   Fetches object permission details for a given principal object such as a user and group.  Requires view access to the metadata object.  #### Usage guidelines  * To get a list of all metadata objects that a user or group can access, specify the `type` and GUID or name of the principal. * To get permission details for a specific object, add the `type` and GUID or name of the metadata object to your API request.  Upon successful execution, the API returns a list of metadata objects and permission details for each object.        
      * @param param the request object
      */
-    public fetchPermissionsOfPrincipals(param: ThoughtSpotRestApiFetchPermissionsOfPrincipalsRequest, options?: Configuration): Promise<any> {
+    public fetchPermissionsOfPrincipals(param: ThoughtSpotRestApiFetchPermissionsOfPrincipalsRequest, options?: Configuration): Promise<PermissionOfPrincipalsResponse> {
         return this.api.fetchPermissionsOfPrincipals(param.fetchPermissionsOfPrincipalsRequest,  options).toPromise();
     }
 
@@ -2310,7 +2785,7 @@ export class ObjectThoughtSpotRestApi {
      *   Version: 9.0.0.cl or later   Fetches permission details for a given metadata object.  Requires view access to the metadata object.  #### Usage guidelines  * To fetch a list of users and groups for a metadata object, specify `type` and GUID or name of the metadata object. * To get permission details for a specific user or group, add `type` and GUID or name of the principal object to your API request.  Upon successful execution, the API returns permission details and principal information for the object specified in the API request.      
      * @param param the request object
      */
-    public fetchPermissionsOnMetadata(param: ThoughtSpotRestApiFetchPermissionsOnMetadataRequest, options?: Configuration): Promise<any> {
+    public fetchPermissionsOnMetadata(param: ThoughtSpotRestApiFetchPermissionsOnMetadataRequest, options?: Configuration): Promise<PermissionOfMetadataResponse> {
         return this.api.fetchPermissionsOnMetadata(param.fetchPermissionsOnMetadataRequest,  options).toPromise();
     }
 
@@ -2318,7 +2793,7 @@ export class ObjectThoughtSpotRestApi {
      *   Version: 9.0.0.cl or later   Enforces logout on current user sessions.    Use this API with caution as it may invalidate active user sessions and force users to re-login. Make sure you specify the usernames or GUIDs. If you pass null values in the API call, all user sessions on your cluster become invalid, and the users are forced to re-login.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
      * @param param the request object
      */
-    public forceLogoutUsers(param: ThoughtSpotRestApiForceLogoutUsersRequest = {}, options?: Configuration): Promise<void> {
+    public forceLogoutUsers(param: ThoughtSpotRestApiForceLogoutUsersRequest, options?: Configuration): Promise<void> {
         return this.api.forceLogoutUsers(param.forceLogoutUsersRequest,  options).toPromise();
     }
 
@@ -2390,7 +2865,7 @@ export class ObjectThoughtSpotRestApi {
      *   Version: 9.0.0.cl or later   Imports group objects from external databases into ThoughtSpot.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  During the import operation:  * If the specified group is not available in ThoughtSpot, it will be added to ThoughtSpot. * If `delete_unspecified_groups` is set to `true`, the groups not specified in the API request, excluding administrator and system user groups, are deleted. * If the specified groups are already available in ThoughtSpot, the object properties of these groups are modified and synchronized as per the input data in the API request.  A successful API call returns the object that represents the changes made in the ThoughtSpot system.      
      * @param param the request object
      */
-    public importUserGroups(param: ThoughtSpotRestApiImportUserGroupsRequest = {}, options?: Configuration): Promise<ImportUserGroupsResponse> {
+    public importUserGroups(param: ThoughtSpotRestApiImportUserGroupsRequest, options?: Configuration): Promise<ImportUserGroupsResponse> {
         return this.api.importUserGroups(param.importUserGroupsRequest,  options).toPromise();
     }
 
@@ -2406,7 +2881,7 @@ export class ObjectThoughtSpotRestApi {
      *   Version: 9.0.0.cl or later    Creates a login session for a ThoughtSpot user with Basic authentication.  In Basic authentication method, REST clients log in to ThoughtSpot using `username` and `password` attributes. On a multi-tenant cluster with Orgs, users can pass the ID of the Org in the API request to log in to a specific Org context.  A successful login returns a session cookie that can be used in your subsequent API requests.      
      * @param param the request object
      */
-    public login(param: ThoughtSpotRestApiLoginRequest = {}, options?: Configuration): Promise<void> {
+    public login(param: ThoughtSpotRestApiLoginRequest, options?: Configuration): Promise<void> {
         return this.api.login(param.loginRequest,  options).toPromise();
     }
 
@@ -2427,7 +2902,7 @@ export class ObjectThoughtSpotRestApi {
     }
 
     /**
-     *  Version: 9.2.0.cl or later   Reverts TML objects to a previous commit specified in the API request.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  In the API request, specify the `commit_id`. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.  By default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.      
+     *   Version: 9.2.0.cl or later   Reverts TML objects to a previous commit specified in the API request.  Requires at least edit access to objects.  In the API request, specify the `commit_id`. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.  By default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).      
      * @param param the request object
      */
     public revertCommit(param: ThoughtSpotRestApiRevertCommitRequest, options?: Configuration): Promise<RevertResponse> {
@@ -2438,12 +2913,12 @@ export class ObjectThoughtSpotRestApi {
      *   Version: 9.0.0.cl or later    Revokes the authentication token issued for current user session.  The token of your current session expires when you make a call to the `/api/rest/2.0/auth/token/revoke` endpoint. the users will not be able to access ThoughtSpot objects until a new token is obtained.  To restart your session, request for a new token from ThoughtSpot. See [Get Object Access Token](#/http/api-endpoints/authentication/get-object-access-token) and [Get Full Access Token](#/http/api-endpoints/authentication/get-full-access-token).      
      * @param param the request object
      */
-    public revokeToken(param: ThoughtSpotRestApiRevokeTokenRequest = {}, options?: Configuration): Promise<void> {
+    public revokeToken(param: ThoughtSpotRestApiRevokeTokenRequest, options?: Configuration): Promise<void> {
         return this.api.revokeToken(param.revokeTokenRequest,  options).toPromise();
     }
 
     /**
-     *  Version: 9.2.0.cl or later   Gets a list of commits for a given metadata object.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+     *   Version: 9.2.0.cl or later   Gets a list of commits for a given metadata object.  Requires `DATAMANAGEMENT` (**Can manage data**) privilege.      
      * @param param the request object
      */
     public searchCommits(param: ThoughtSpotRestApiSearchCommitsRequest, options?: Configuration): Promise<Array<CommitHistoryResponse>> {
@@ -2451,10 +2926,10 @@ export class ObjectThoughtSpotRestApi {
     }
 
     /**
-     *  Version: 9.2.0.cl or later   Gets Git repository connections configured on the ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+     *   Version: 9.2.0.cl or later   Gets Git repository connections configured on the ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
      * @param param the request object
      */
-    public searchConfig(param: ThoughtSpotRestApiSearchConfigRequest = {}, options?: Configuration): Promise<Array<RepoConfigObject>> {
+    public searchConfig(param: ThoughtSpotRestApiSearchConfigRequest, options?: Configuration): Promise<Array<RepoConfigObject>> {
         return this.api.searchConfig(param.searchConfigRequest,  options).toPromise();
     }
 
@@ -2462,7 +2937,7 @@ export class ObjectThoughtSpotRestApi {
      *   Version: 9.2.0.cl or later   Gets connection objects. Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  - To get a list of all connections available in the ThoughtSpot system, send the API request without any attributes in the request body. - To get the connection objects for a specific type of data warehouse, specify the type in `data_warehouse_types`. - To fetch details of a connection object, specify the connection object GUID or name. The `name_pattern` attribute allows passing partial text with `%` for a wildcard match. - To get details of the database, schemas, tables, or columns from a data connection object, specify `data_warehouse_object_type`. - To get a specific database, schema, table, or column from a connection object, define the object type in `data_warehouse_object_type` and object properties in the `data_warehouse_objects` array. For example, to search for a column, you must pass the database, schema, and table names in the API request.   Note that in the following example, object properties are set in a hierarchical order (`database` > `schema` > `table` > `column`).  ``` {   \"connections\": [     {       \"identifier\": \"b9d1f2ef-fa65-4a4b-994e-30fa2d57b0c2\",       \"data_warehouse_objects\": [         {           \"database\": \"NEBULADEV\",           \"schema\": \"INFORMATION_SCHEMA\",           \"table\": \"APPLICABLE_ROLES\",           \"column\": \"ROLE_NAME\"         }       ]     }   ],   \"data_warehouse_object_type\": \"COLUMN\" } ```  - To fetch data by `configuration`, specify `data_warehouse_object_type`. For example, to fetch columns from the `DEVELOPMENT` database, specify the `data_warehouse_object_type` as `DATABASE` and define the `configuration` string as `{\"database\":\"DEVELOPMENT\"}`. To get column data for a specific table, specify the table, for example,`{\"database\":\"RETAILAPPAREL\",\"table\":\"PIPES\"}`. - To query connections by `authentication_type`, specify `data_warehouse_object_type`. Supported values for `authentication_type` are:   - `SERVICE_ACCOUNT`: For connections that require service account credentials to authenticate to the Cloud Data Warehouse and fetch data.   - `OAUTH`: For connections that require OAuth credentials to authenticate to the Cloud Data Warehouse and fetch data. Teradata, Oracle, and Presto Cloud Data Warehouses do not support the OAuth authentication type.   - `IAM`: For connections that have the IAM OAuth set up. This authentication type is supported on Amazon Redshift connections only.   - `EXTOAUTH`: For connections that have external OAuth set up. ThoughtSpot supports external [OAuth with Microsoft Azure Active Directory (AD)](https://docs.thoughtspot.com/cloud/latest/ connections-snowflake-azure-ad-oauth) and [Okta for Snowflake data connections](https://docs.thoughtspot.com/cloud/latest/connections-snowflake-okta-oauth). - To include more details about connection objects in the API response, set `include_details` to `true`. - You can also sort the output by field names and filter connections by tags.  **NOTE**: When filtering connection records by parameters other than `data_warehouse_types` or `tag_identifiers`, ensure that you set `record_size` to `-1` and `record_offset` to `0` for precise results.      
      * @param param the request object
      */
-    public searchConnection(param: ThoughtSpotRestApiSearchConnectionRequest = {}, options?: Configuration): Promise<Array<SearchConnectionResponse>> {
+    public searchConnection(param: ThoughtSpotRestApiSearchConnectionRequest, options?: Configuration): Promise<Array<SearchConnectionResponse>> {
         return this.api.searchConnection(param.searchConnectionRequest,  options).toPromise();
     }
 
@@ -2470,12 +2945,12 @@ export class ObjectThoughtSpotRestApi {
      *   Version: 9.6.0.cl or later   Gets custom actions configured on the cluster.  Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
      * @param param the request object
      */
-    public searchCustomActions(param: ThoughtSpotRestApiSearchCustomActionsRequest = {}, options?: Configuration): Promise<Array<ResponseCustomAction>> {
+    public searchCustomActions(param: ThoughtSpotRestApiSearchCustomActionsRequest, options?: Configuration): Promise<Array<ResponseCustomAction>> {
         return this.api.searchCustomActions(param.searchCustomActionsRequest,  options).toPromise();
     }
 
     /**
-     *   Version: 9.0.0.cl or later   Generates an Answer from a given data source.  Requires at least view access to the data source.  #### Usage guidelines  To generate a new Answer, specify the data source GUID. The data source can be a Worksheet, View, Table, or SQL view.  Pass search tokens in the `query_string` attribute in the API request as shown in the following example. For more information passing search query string in API requests, see [`Components of a search query`](https://developers.thoughtspot.com/docs/?pageid=search-data-api#components).   ``` {   \"query_string\": \"[sales] by [store]\",   \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\", } ```      
+     *   Version: 9.0.0.cl or later   Generates an Answer from a given data source.  Requires at least view access to the data source object.  #### Usage guidelines  To search data, specify the data source GUID in `logical_table_identifier`. The data source can be a Worksheet, View, Table, or SQL view.  Pass search tokens in the `query_string` attribute in the API request as shown in the following example:  ``` {   \"query_string\": \"[sales] by [store]\",   \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\", } ```  For more information about the `query_string` format and data source attribute, see [Search data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_data_api).    The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).        
      * @param param the request object
      */
     public searchData(param: ThoughtSpotRestApiSearchDataRequest, options?: Configuration): Promise<SearchDataResponse> {
@@ -2486,7 +2961,7 @@ export class ObjectThoughtSpotRestApi {
      *   Version: 9.0.0.cl or later   Gets a list of metadata objects available on the ThoughtSpot system.  This API endpoint is available to all users who have view access to the object. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view data for all metadata objects, including users and groups.  #### Usage guidelines  - To get all metadata objects, send the API request without any attributes. - To get metadata objects of a specific type, set the `type` attribute. For example, to fetch a Worksheet, set the type as `LOGICAL_TABLE`. - To get a specific metadata object, specify the GUID. - To customize your search and filter the API response, you can use several parameters.   You can search for objects created or modified by specific users, by tags applied to the objects, or by using the include parameters like `include_auto_created_objects`, `include_dependent_objects`, `include_headers`, `include_incomplete_objects`, and so on.   You can also define sorting options to sort the data retrieved in the API response.  **NOTE**: The following parameters support pagination of metadata records: `tag_identifiers` `type` `created_by_user_identifiers` `modified_by_user_identifiers` `owned_by_user_identifiers` `exclude_objects` `include_auto_created_objects` `favorite_object_options` If you are using other parameters to search metadata, set `record_size` to `-1` and `record_offset` to `0`.      
      * @param param the request object
      */
-    public searchMetadata(param: ThoughtSpotRestApiSearchMetadataRequest = {}, options?: Configuration): Promise<Array<MetadataSearchResponse>> {
+    public searchMetadata(param: ThoughtSpotRestApiSearchMetadataRequest, options?: Configuration): Promise<Array<MetadataSearchResponse>> {
         return this.api.searchMetadata(param.searchMetadataRequest,  options).toPromise();
     }
 
@@ -2494,7 +2969,7 @@ export class ObjectThoughtSpotRestApi {
      *   Version: 9.0.0.cl or later   Gets a list of Orgs configured on the ThoughtSpot system. To get details of a specific Org, specify the Org ID or name. You can also pass parameters such as status, visibility, and user identifiers to get a specific list of Orgs.  Requires cluster administration (**Can administer Org**) privileges.      
      * @param param the request object
      */
-    public searchOrgs(param: ThoughtSpotRestApiSearchOrgsRequest = {}, options?: Configuration): Promise<Array<OrgResponse>> {
+    public searchOrgs(param: ThoughtSpotRestApiSearchOrgsRequest, options?: Configuration): Promise<Array<OrgResponse>> {
         return this.api.searchOrgs(param.searchOrgsRequest,  options).toPromise();
     }
 
@@ -2502,7 +2977,7 @@ export class ObjectThoughtSpotRestApi {
      * Gets Roles configured on a ThoughtSpot instance. Requires cluster Administration, Role Administration or Group Administration privileges.    Version: 9.5.0.cl or later 
      * @param param the request object
      */
-    public searchRoles(param: ThoughtSpotRestApiSearchRolesRequest = {}, options?: Configuration): Promise<Array<SearchRoleResponse>> {
+    public searchRoles(param: ThoughtSpotRestApiSearchRolesRequest, options?: Configuration): Promise<Array<SearchRoleResponse>> {
         return this.api.searchRoles(param.searchRolesRequest,  options).toPromise();
     }
 
@@ -2510,7 +2985,7 @@ export class ObjectThoughtSpotRestApi {
      *  Search Schedules    Version: 9.4.0.cl or later   Gets a list of scheduled jobs configured for a Liveboard.  To get details of a specific scheduled job, specify the name or GUID of the scheduled job.  Requires at least view access to Liveboards.  **NOTE**: When filtering schedules by parameters other than `metadata`, set `record_size` to `-1` and `record_offset` to `0` for accurate results.      
      * @param param the request object
      */
-    public searchSchedules(param: ThoughtSpotRestApiSearchSchedulesRequest = {}, options?: Configuration): Promise<Array<ResponseSchedule>> {
+    public searchSchedules(param: ThoughtSpotRestApiSearchSchedulesRequest, options?: Configuration): Promise<Array<ResponseSchedule>> {
         return this.api.searchSchedules(param.searchSchedulesRequest,  options).toPromise();
     }
 
@@ -2518,7 +2993,7 @@ export class ObjectThoughtSpotRestApi {
      *   Version: 9.0.0.cl or later   Gets a list of tag objects available on the ThoughtSpot system. To get details of a specific tag object, specify the GUID or name.  Any authenticated user can search for tag objects.      
      * @param param the request object
      */
-    public searchTags(param: ThoughtSpotRestApiSearchTagsRequest = {}, options?: Configuration): Promise<Array<Tag>> {
+    public searchTags(param: ThoughtSpotRestApiSearchTagsRequest, options?: Configuration): Promise<Array<Tag>> {
         return this.api.searchTags(param.searchTagsRequest,  options).toPromise();
     }
 
@@ -2526,7 +3001,7 @@ export class ObjectThoughtSpotRestApi {
      *   Version: 9.0.0.cl or later   Gets a list of users available on the ThoughtSpot system.  To get details of a specific user, specify the user GUID or name. You can also filter the API response based on groups, Org ID, user visibility, account status, user type, and user preference settings and favorites.  Available to all users. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view all users properties.  **NOTE**: If you do not get precise results, try setting `record_size` to `-1` and `record_offset` to `0`.      
      * @param param the request object
      */
-    public searchUserGroups(param: ThoughtSpotRestApiSearchUserGroupsRequest = {}, options?: Configuration): Promise<Array<UserGroupResponse>> {
+    public searchUserGroups(param: ThoughtSpotRestApiSearchUserGroupsRequest, options?: Configuration): Promise<Array<UserGroupResponse>> {
         return this.api.searchUserGroups(param.searchUserGroupsRequest,  options).toPromise();
     }
 
@@ -2534,7 +3009,7 @@ export class ObjectThoughtSpotRestApi {
      *   Version: 9.0.0.cl or later   Gets a list of users available on the ThoughtSpot system.  To get details of a specific user, specify the user GUID or name. You can also filter the API response based on groups, Org ID, user visibility, account status, user type, and user preference settings and favorites.  Available to all users. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view all users properties.  **NOTE**: If the API returns an empty list, consider increasing the value of the `record_size` parameter. To search across all available users, set `record_size` to `-1`.      
      * @param param the request object
      */
-    public searchUsers(param: ThoughtSpotRestApiSearchUsersRequest = {}, options?: Configuration): Promise<Array<User>> {
+    public searchUsers(param: ThoughtSpotRestApiSearchUsersRequest, options?: Configuration): Promise<Array<User>> {
         return this.api.searchUsers(param.searchUsersRequest,  options).toPromise();
     }
 
@@ -2555,10 +3030,10 @@ export class ObjectThoughtSpotRestApi {
     }
 
     /**
-     *  Version: 9.2.0.cl or later   Updates Git repository configuration settings.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+     *   Version: 9.2.0.cl or later   Updates Git repository configuration settings.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
      * @param param the request object
      */
-    public updateConfig(param: ThoughtSpotRestApiUpdateConfigRequest = {}, options?: Configuration): Promise<RepoConfigObject> {
+    public updateConfig(param: ThoughtSpotRestApiUpdateConfigRequest, options?: Configuration): Promise<RepoConfigObject> {
         return this.api.updateConfig(param.updateConfigRequest,  options).toPromise();
     }
 
@@ -2571,11 +3046,27 @@ export class ObjectThoughtSpotRestApi {
     }
 
     /**
+     *   Version: 10.0.0.cl or later   Updates a connection object.  Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  To update a connection object, pass these parameters in your API request:  1. GUID of the connection object. 2. If you are updating tables or database schema of a connection object:    a. Add the updated JSON map of metadata with database, schema, and tables in `data_warehouse_config`.    b. Set `validate` to `true`. 3. If you are updating a configuration attribute, connection name, or description, you can set `validate` to `false`.      
+     * @param param the request object
+     */
+    public updateConnectionV2(param: ThoughtSpotRestApiUpdateConnectionV2Request, options?: Configuration): Promise<void> {
+        return this.api.updateConnectionV2(param.connectionIdentifier, param.updateConnectionV2Request,  options).toPromise();
+    }
+
+    /**
      *   Version: 9.6.0.cl or later   Updates a custom action.  Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage Guidelines  The API allows you to modify the following properties:  * Name of the custom action * Action availability to groups * Association to metadata objects * Authentication settings for a URL-based action  For more information, see [Custom actions](https://developers.thoughtspot.com/docs/?pageid=custom-action-intro).      
      * @param param the request object
      */
     public updateCustomAction(param: ThoughtSpotRestApiUpdateCustomActionRequest, options?: Configuration): Promise<void> {
         return this.api.updateCustomAction(param.customActionIdentifier, param.updateCustomActionRequest,  options).toPromise();
+    }
+
+    /**
+     *   Version: 9.9.0.cl or later   Updates a DBT connection object.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege, along with an existing DBT connection.  #### About update DBT connection You can modify DBT connection object properties such as embrace connection name, embrace database name, import type, account identifier, access token, project identifier and environment (or) embrace connection, embrace database name, import type, file_content settings.      
+     * @param param the request object
+     */
+    public updateDbtConnection(param: ThoughtSpotRestApiUpdateDbtConnectionRequest, options?: Configuration): Promise<any> {
+        return this.api.updateDbtConnection(param.updateDbtConnectionRequest,  options).toPromise();
     }
 
     /**
@@ -2611,7 +3102,7 @@ export class ObjectThoughtSpotRestApi {
     }
 
     /**
-     *   Version: 9.0.0.cl or later   Updates a tag object.  You can modify the `name` and `color` properties of a tag object.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+     *   Version: 9.0.0.cl or later   Updates a tag object.  You can modify the `name` and `color` properties of a tag object.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.      
      * @param param the request object
      */
     public updateTag(param: ThoughtSpotRestApiUpdateTagRequest, options?: Configuration): Promise<void> {
@@ -2635,17 +3126,34 @@ export class ObjectThoughtSpotRestApi {
     }
 
     /**
-     *  Version: 9.2.0.cl or later   Validates the content of your source branch against the objects in your destination environment.  Before merging content from your source branch to the destination branch, run this API operation from your destination environment and ensure that the changes from the source branch function in the destination environment.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+     *   Version: 9.2.0.cl or later   Validates the content of your source branch against the objects in your destination environment.  Before merging content from your source branch to the destination branch, run this API operation from your destination environment and ensure that the changes from the source branch function in the destination environment.  Requires `DATAMANAGEMENT` (**Can manage data**) privilege.      
      * @param param the request object
      */
     public validateMerge(param: ThoughtSpotRestApiValidateMergeRequest, options?: Configuration): Promise<Array<DeployResponse>> {
         return this.api.validateMerge(param.validateMergeRequest,  options).toPromise();
     }
 
+    /**
+     *  Version: 9.12.0.cl or later 
+     * @param param the request object
+     */
+    public validateToken(param: ThoughtSpotRestApiValidateTokenRequest, options?: Configuration): Promise<TokenValidationResponse> {
+        return this.api.validateToken(param.validateTokenRequest,  options).toPromise();
+    }
+
 }
 
 import { ObservableUsersApi } from "./ObservableAPI";
 import { UsersApiRequestFactory, UsersApiResponseProcessor} from "../apis/UsersApi";
+
+export interface UsersApiActivateUserRequest {
+    /**
+     * 
+     * @type ActivateUserRequest
+     * @memberof UsersApiactivateUser
+     */
+    activateUserRequest: ActivateUserRequest
+}
 
 export interface UsersApiChangeUserPasswordRequest {
     /**
@@ -2665,6 +3173,15 @@ export interface UsersApiCreateUserRequest {
     createUserRequest: CreateUserRequest
 }
 
+export interface UsersApiDeactivateUserRequest {
+    /**
+     * 
+     * @type DeactivateUserRequest
+     * @memberof UsersApideactivateUser
+     */
+    deactivateUserRequest: DeactivateUserRequest
+}
+
 export interface UsersApiDeleteUserRequest {
     /**
      * GUID / name of the user
@@ -2680,7 +3197,7 @@ export interface UsersApiForceLogoutUsersRequest {
      * @type ForceLogoutUsersRequest
      * @memberof UsersApiforceLogoutUsers
      */
-    forceLogoutUsersRequest?: ForceLogoutUsersRequest
+    forceLogoutUsersRequest: ForceLogoutUsersRequest
 }
 
 export interface UsersApiImportUsersRequest {
@@ -2707,7 +3224,7 @@ export interface UsersApiSearchUsersRequest {
      * @type SearchUsersRequest
      * @memberof UsersApisearchUsers
      */
-    searchUsersRequest?: SearchUsersRequest
+    searchUsersRequest: SearchUsersRequest
 }
 
 export interface UsersApiUpdateUserRequest {
@@ -2722,7 +3239,7 @@ export interface UsersApiUpdateUserRequest {
      * @type UpdateUserRequest
      * @memberof UsersApiupdateUser
      */
-    updateUserRequest?: UpdateUserRequest
+    updateUserRequest: UpdateUserRequest
 }
 
 export class ObjectUsersApi {
@@ -2730,6 +3247,14 @@ export class ObjectUsersApi {
 
     public constructor(configuration: Configuration, requestFactory?: UsersApiRequestFactory, responseProcessor?: UsersApiResponseProcessor) {
         this.api = new ObservableUsersApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     *   Version: 9.7.0.cl or later   Activates a deactivated user account.  Requires `ADMINISTRATION` (**Can administer Thoughtspot**) privilege.  To activate an inactive user account, the API request body must include the following information:  - Username or the GUID of the user account. - Auth token generated for the deactivated user. The auth token is sent in the API response when a user is deactivated. - Password for the user account.      
+     * @param param the request object
+     */
+    public activateUser(param: UsersApiActivateUserRequest, options?: Configuration): Promise<User> {
+        return this.api.activateUser(param.activateUserRequest,  options).toPromise();
     }
 
     /**
@@ -2749,6 +3274,14 @@ export class ObjectUsersApi {
     }
 
     /**
+     *   Version: 9.7.0.cl or later   Deactivates a user account.  Requires `ADMINISTRATION` (**Can administer Thoughtspot**) privilege.  To deactivate a user account, the API request body must include the following information:  - Username or the GUID of the user account - Base URL of the ThoughtSpot instance  If the API request is successful, ThoughtSpot returns the activation URL in the response. The activation URL is valid for 14 days and can be used to re-activate the account and reset the password of the deactivated account.      
+     * @param param the request object
+     */
+    public deactivateUser(param: UsersApiDeactivateUserRequest, options?: Configuration): Promise<ResponseActivationURL> {
+        return this.api.deactivateUser(param.deactivateUserRequest,  options).toPromise();
+    }
+
+    /**
      *   Version: 9.0.0.cl or later   Deletes a user from the ThoughtSpot system.  If you want to remove a user from a specific Org but not from ThoughtSpot, update the group and Org mapping properties of the user object via a POST API call to the [/api/rest/2.0/users/{user_identifier}/update](#/http/api-endpoints/users/update-user) endpoint.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
      * @param param the request object
      */
@@ -2760,7 +3293,7 @@ export class ObjectUsersApi {
      *   Version: 9.0.0.cl or later   Enforces logout on current user sessions.    Use this API with caution as it may invalidate active user sessions and force users to re-login. Make sure you specify the usernames or GUIDs. If you pass null values in the API call, all user sessions on your cluster become invalid, and the users are forced to re-login.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
      * @param param the request object
      */
-    public forceLogoutUsers(param: UsersApiForceLogoutUsersRequest = {}, options?: Configuration): Promise<void> {
+    public forceLogoutUsers(param: UsersApiForceLogoutUsersRequest, options?: Configuration): Promise<void> {
         return this.api.forceLogoutUsers(param.forceLogoutUsersRequest,  options).toPromise();
     }
 
@@ -2784,7 +3317,7 @@ export class ObjectUsersApi {
      *   Version: 9.0.0.cl or later   Gets a list of users available on the ThoughtSpot system.  To get details of a specific user, specify the user GUID or name. You can also filter the API response based on groups, Org ID, user visibility, account status, user type, and user preference settings and favorites.  Available to all users. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view all users properties.  **NOTE**: If the API returns an empty list, consider increasing the value of the `record_size` parameter. To search across all available users, set `record_size` to `-1`.      
      * @param param the request object
      */
-    public searchUsers(param: UsersApiSearchUsersRequest = {}, options?: Configuration): Promise<Array<User>> {
+    public searchUsers(param: UsersApiSearchUsersRequest, options?: Configuration): Promise<Array<User>> {
         return this.api.searchUsers(param.searchUsersRequest,  options).toPromise();
     }
 
@@ -2825,7 +3358,7 @@ export interface VersionControlApiDeleteConfigRequest {
      * @type DeleteConfigRequest
      * @memberof VersionControlApideleteConfig
      */
-    deleteConfigRequest?: DeleteConfigRequest
+    deleteConfigRequest: DeleteConfigRequest
 }
 
 export interface VersionControlApiDeployCommitRequest {
@@ -2849,7 +3382,7 @@ export interface VersionControlApiRevertCommitRequest {
      * @type RevertCommitRequest
      * @memberof VersionControlApirevertCommit
      */
-    revertCommitRequest?: RevertCommitRequest
+    revertCommitRequest: RevertCommitRequest
 }
 
 export interface VersionControlApiSearchCommitsRequest {
@@ -2867,7 +3400,7 @@ export interface VersionControlApiSearchConfigRequest {
      * @type SearchConfigRequest
      * @memberof VersionControlApisearchConfig
      */
-    searchConfigRequest?: SearchConfigRequest
+    searchConfigRequest: SearchConfigRequest
 }
 
 export interface VersionControlApiUpdateConfigRequest {
@@ -2876,7 +3409,7 @@ export interface VersionControlApiUpdateConfigRequest {
      * @type UpdateConfigRequest
      * @memberof VersionControlApiupdateConfig
      */
-    updateConfigRequest?: UpdateConfigRequest
+    updateConfigRequest: UpdateConfigRequest
 }
 
 export interface VersionControlApiValidateMergeRequest {
@@ -2896,7 +3429,7 @@ export class ObjectVersionControlApi {
     }
 
     /**
-     *  Version: 9.2.0.cl or later   Commits TML files of metadata objects to the Git branch configured on your instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  Before using this endpoint to push your commits:  * Enable Git integration on your instance. * Make sure the Git repository and branch details are configured on your instance.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).      
+     *   Version: 9.2.0.cl or later   Commits TML files of metadata objects to the Git branch configured on your instance.  Requires at least edit access to objects used in the commit operation.  Before using this endpoint to push your commits:  * Enable Git integration on your instance. * Make sure the Git repository and branch details are configured on your instance.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).      
      * @param param the request object
      */
     public commitBranch(param: VersionControlApiCommitBranchRequest, options?: Configuration): Promise<CommitResponse> {
@@ -2904,7 +3437,7 @@ export class ObjectVersionControlApi {
     }
 
     /**
-     *  Version: 9.2.0.cl or later   Allows you to connect a ThoughtSpot instance to a Git repository.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  You can use this API endpoint to connect your ThoughtSpot development and production environments to the development and production branches of a Git repository.  Before using this endpoint to connect your ThoughtSpot instance to a Git repository, check the following prerequisites:  * You have a Git repository. If you are using GitHub, make sure you have a valid account and an access token to connect ThoughtSpot to GitHub. For information about generating a token, see [GitHub Documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).  * Your access token has `repo` scope that grants full access to public and private repositories. * Your Git repository has a branch that can be configured as a default branch in ThoughtSpot.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).      
+     *   Version: 9.2.0.cl or later   Allows you to connect a ThoughtSpot instance to a Git repository.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  You can use this API endpoint to connect your ThoughtSpot development and production environments to the development and production branches of a Git repository.  Before using this endpoint to connect your ThoughtSpot instance to a Git repository, check the following prerequisites:  * You have a Git repository. If you are using GitHub, make sure you have a valid account and an access token to connect ThoughtSpot to GitHub. For information about generating a token, see [GitHub Documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).  * Your access token has `repo` scope that grants full access to public and private repositories. * Your Git repository has a branch that can be configured as a default branch in ThoughtSpot.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).  **Note**: ThoughtSpot supports only GitHub / GitHub Enterprise for CI/CD.      
      * @param param the request object
      */
     public createConfig(param: VersionControlApiCreateConfigRequest, options?: Configuration): Promise<RepoConfigObject> {
@@ -2912,15 +3445,15 @@ export class ObjectVersionControlApi {
     }
 
     /**
-     *  Version: 9.2.0.cl or later   Deletes Git repository configuration from your ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+     *   Version: 9.2.0.cl or later   Deletes Git repository configuration from your ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
      * @param param the request object
      */
-    public deleteConfig(param: VersionControlApiDeleteConfigRequest = {}, options?: Configuration): Promise<void> {
+    public deleteConfig(param: VersionControlApiDeleteConfigRequest, options?: Configuration): Promise<void> {
         return this.api.deleteConfig(param.deleteConfigRequest,  options).toPromise();
     }
 
     /**
-     *  Version: 9.2.0.cl or later   Allows you to deploy a commit and publish TML content to your ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  The API deploys the head of the branch unless a `commit_id` is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.      
+     *   Version: 9.2.0.cl or later   Allows you to deploy a commit and publish TML content to your ThoughtSpot instance.  Requires at least edit access to the objects used in the deploy operation.  The API deploys the head of the branch unless a `commit_id` is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).      
      * @param param the request object
      */
     public deployCommit(param: VersionControlApiDeployCommitRequest, options?: Configuration): Promise<Array<DeployResponse>> {
@@ -2928,7 +3461,7 @@ export class ObjectVersionControlApi {
     }
 
     /**
-     *  Version: 9.2.0.cl or later   Reverts TML objects to a previous commit specified in the API request.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  In the API request, specify the `commit_id`. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.  By default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.      
+     *   Version: 9.2.0.cl or later   Reverts TML objects to a previous commit specified in the API request.  Requires at least edit access to objects.  In the API request, specify the `commit_id`. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.  By default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).      
      * @param param the request object
      */
     public revertCommit(param: VersionControlApiRevertCommitRequest, options?: Configuration): Promise<RevertResponse> {
@@ -2936,7 +3469,7 @@ export class ObjectVersionControlApi {
     }
 
     /**
-     *  Version: 9.2.0.cl or later   Gets a list of commits for a given metadata object.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+     *   Version: 9.2.0.cl or later   Gets a list of commits for a given metadata object.  Requires `DATAMANAGEMENT` (**Can manage data**) privilege.      
      * @param param the request object
      */
     public searchCommits(param: VersionControlApiSearchCommitsRequest, options?: Configuration): Promise<Array<CommitHistoryResponse>> {
@@ -2944,23 +3477,23 @@ export class ObjectVersionControlApi {
     }
 
     /**
-     *  Version: 9.2.0.cl or later   Gets Git repository connections configured on the ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+     *   Version: 9.2.0.cl or later   Gets Git repository connections configured on the ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
      * @param param the request object
      */
-    public searchConfig(param: VersionControlApiSearchConfigRequest = {}, options?: Configuration): Promise<Array<RepoConfigObject>> {
+    public searchConfig(param: VersionControlApiSearchConfigRequest, options?: Configuration): Promise<Array<RepoConfigObject>> {
         return this.api.searchConfig(param.searchConfigRequest,  options).toPromise();
     }
 
     /**
-     *  Version: 9.2.0.cl or later   Updates Git repository configuration settings.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+     *   Version: 9.2.0.cl or later   Updates Git repository configuration settings.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
      * @param param the request object
      */
-    public updateConfig(param: VersionControlApiUpdateConfigRequest = {}, options?: Configuration): Promise<RepoConfigObject> {
+    public updateConfig(param: VersionControlApiUpdateConfigRequest, options?: Configuration): Promise<RepoConfigObject> {
         return this.api.updateConfig(param.updateConfigRequest,  options).toPromise();
     }
 
     /**
-     *  Version: 9.2.0.cl or later   Validates the content of your source branch against the objects in your destination environment.  Before merging content from your source branch to the destination branch, run this API operation from your destination environment and ensure that the changes from the source branch function in the destination environment.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+     *   Version: 9.2.0.cl or later   Validates the content of your source branch against the objects in your destination environment.  Before merging content from your source branch to the destination branch, run this API operation from your destination environment and ensure that the changes from the source branch function in the destination environment.  Requires `DATAMANAGEMENT` (**Can manage data**) privilege.      
      * @param param the request object
      */
     public validateMerge(param: VersionControlApiValidateMergeRequest, options?: Configuration): Promise<Array<DeployResponse>> {

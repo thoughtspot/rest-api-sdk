@@ -20,11 +20,11 @@ export class Scope {
     /**
     * Unique identifier of the metadata.
     */
-    'org_id'?: number;
+    'org_id'?: number | null;
     /**
     * Unique identifier of the Org.
     */
-    'metadata_id'?: string;
+    'metadata_id'?: string | null;
 
     static readonly discriminator: string | undefined = undefined;
 

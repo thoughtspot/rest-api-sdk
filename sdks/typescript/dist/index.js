@@ -481,6 +481,37 @@ _ActionDetailsInputCreate.attributeTypeMap = [
 ];
 var ActionDetailsInputCreate = _ActionDetailsInputCreate;
 
+// models/ActivateUserRequest.ts
+var _ActivateUserRequest = class _ActivateUserRequest {
+  static getAttributeTypeMap() {
+    return _ActivateUserRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ActivateUserRequest.discriminator = void 0;
+_ActivateUserRequest.attributeTypeMap = [
+  {
+    "name": "user_identifier",
+    "baseName": "user_identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "auth_token",
+    "baseName": "auth_token",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "password",
+    "baseName": "password",
+    "type": "string",
+    "format": ""
+  }
+];
+var ActivateUserRequest = _ActivateUserRequest;
+
 // models/AnswerContent.ts
 var _AnswerContent = class _AnswerContent {
   static getAttributeTypeMap() {
@@ -1296,12 +1327,6 @@ _CreateConfigRequest.attributeTypeMap = [
     "format": ""
   },
   {
-    "name": "default_branch_name",
-    "baseName": "default_branch_name",
-    "type": "string",
-    "format": ""
-  },
-  {
     "name": "enable_guid_mapping",
     "baseName": "enable_guid_mapping",
     "type": "boolean",
@@ -1310,12 +1335,6 @@ _CreateConfigRequest.attributeTypeMap = [
   {
     "name": "configuration_branch_name",
     "baseName": "configuration_branch_name",
-    "type": "string",
-    "format": ""
-  },
-  {
-    "name": "guid_mapping_branch_name",
-    "baseName": "guid_mapping_branch_name",
     "type": "string",
     "format": ""
   }
@@ -1421,7 +1440,7 @@ _CreateCustomActionRequest.attributeTypeMap = [
   {
     "name": "action_details",
     "baseName": "action_details",
-    "type": "ActionDetailsInputCreate",
+    "type": "CreateCustomActionRequestActionDetails",
     "format": ""
   },
   {
@@ -1433,7 +1452,7 @@ _CreateCustomActionRequest.attributeTypeMap = [
   {
     "name": "default_action_config",
     "baseName": "default_action_config",
-    "type": "DefaultActionConfigInputCreate",
+    "type": "CreateCustomActionRequestDefaultActionConfig",
     "format": ""
   },
   {
@@ -1444,6 +1463,50 @@ _CreateCustomActionRequest.attributeTypeMap = [
   }
 ];
 var CreateCustomActionRequest = _CreateCustomActionRequest;
+
+// models/CreateCustomActionRequestActionDetails.ts
+var _CreateCustomActionRequestActionDetails = class _CreateCustomActionRequestActionDetails {
+  static getAttributeTypeMap() {
+    return _CreateCustomActionRequestActionDetails.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_CreateCustomActionRequestActionDetails.discriminator = void 0;
+_CreateCustomActionRequestActionDetails.attributeTypeMap = [
+  {
+    "name": "CALLBACK",
+    "baseName": "CALLBACK",
+    "type": "CALLBACKInputMandatory",
+    "format": ""
+  },
+  {
+    "name": "URL",
+    "baseName": "URL",
+    "type": "URLInputMandatory",
+    "format": ""
+  }
+];
+var CreateCustomActionRequestActionDetails = _CreateCustomActionRequestActionDetails;
+
+// models/CreateCustomActionRequestDefaultActionConfig.ts
+var _CreateCustomActionRequestDefaultActionConfig = class _CreateCustomActionRequestDefaultActionConfig {
+  static getAttributeTypeMap() {
+    return _CreateCustomActionRequestDefaultActionConfig.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_CreateCustomActionRequestDefaultActionConfig.discriminator = void 0;
+_CreateCustomActionRequestDefaultActionConfig.attributeTypeMap = [
+  {
+    "name": "visibility",
+    "baseName": "visibility",
+    "type": "boolean",
+    "format": ""
+  }
+];
+var CreateCustomActionRequestDefaultActionConfig = _CreateCustomActionRequestDefaultActionConfig;
 
 // models/CreateOrgRequest.ts
 var _CreateOrgRequest = class _CreateOrgRequest {
@@ -1544,13 +1607,13 @@ _CreateScheduleRequest.attributeTypeMap = [
   {
     "name": "liveboard_options",
     "baseName": "liveboard_options",
-    "type": "LiveboardOptionsInput",
+    "type": "CreateScheduleRequestLiveboardOptions",
     "format": ""
   },
   {
     "name": "pdf_options",
     "baseName": "pdf_options",
-    "type": "SchedulesPdfOptionsInput",
+    "type": "CreateScheduleRequestPdfOptions",
     "format": ""
   },
   {
@@ -1562,17 +1625,147 @@ _CreateScheduleRequest.attributeTypeMap = [
   {
     "name": "frequency",
     "baseName": "frequency",
-    "type": "FrequencyInput",
+    "type": "CreateScheduleRequestFrequency",
     "format": ""
   },
   {
     "name": "recipient_details",
     "baseName": "recipient_details",
-    "type": "RecipientDetailsInput",
+    "type": "CreateScheduleRequestRecipientDetails",
     "format": ""
   }
 ];
 var CreateScheduleRequest = _CreateScheduleRequest;
+
+// models/CreateScheduleRequestFrequency.ts
+var _CreateScheduleRequestFrequency = class _CreateScheduleRequestFrequency {
+  static getAttributeTypeMap() {
+    return _CreateScheduleRequestFrequency.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_CreateScheduleRequestFrequency.discriminator = void 0;
+_CreateScheduleRequestFrequency.attributeTypeMap = [
+  {
+    "name": "cron_expression",
+    "baseName": "cron_expression",
+    "type": "CronExpressionInput",
+    "format": ""
+  }
+];
+var CreateScheduleRequestFrequency = _CreateScheduleRequestFrequency;
+
+// models/CreateScheduleRequestLiveboardOptions.ts
+var _CreateScheduleRequestLiveboardOptions = class _CreateScheduleRequestLiveboardOptions {
+  static getAttributeTypeMap() {
+    return _CreateScheduleRequestLiveboardOptions.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_CreateScheduleRequestLiveboardOptions.discriminator = void 0;
+_CreateScheduleRequestLiveboardOptions.attributeTypeMap = [
+  {
+    "name": "visualization_identifiers",
+    "baseName": "visualization_identifiers",
+    "type": "Array<string>",
+    "format": ""
+  }
+];
+var CreateScheduleRequestLiveboardOptions = _CreateScheduleRequestLiveboardOptions;
+
+// models/CreateScheduleRequestPdfOptions.ts
+var _CreateScheduleRequestPdfOptions = class _CreateScheduleRequestPdfOptions {
+  static getAttributeTypeMap() {
+    return _CreateScheduleRequestPdfOptions.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_CreateScheduleRequestPdfOptions.discriminator = void 0;
+_CreateScheduleRequestPdfOptions.attributeTypeMap = [
+  {
+    "name": "complete_liveboard",
+    "baseName": "complete_liveboard",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "include_cover_page",
+    "baseName": "include_cover_page",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "include_custom_logo",
+    "baseName": "include_custom_logo",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "include_filter_page",
+    "baseName": "include_filter_page",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "include_page_number",
+    "baseName": "include_page_number",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "page_footer_text",
+    "baseName": "page_footer_text",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "page_orientation",
+    "baseName": "page_orientation",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "page_size",
+    "baseName": "page_size",
+    "type": "CreateScheduleRequestPdfOptionsPageSizeEnum",
+    "format": ""
+  },
+  {
+    "name": "truncate_table",
+    "baseName": "truncate_table",
+    "type": "boolean",
+    "format": ""
+  }
+];
+var CreateScheduleRequestPdfOptions = _CreateScheduleRequestPdfOptions;
+
+// models/CreateScheduleRequestRecipientDetails.ts
+var _CreateScheduleRequestRecipientDetails = class _CreateScheduleRequestRecipientDetails {
+  static getAttributeTypeMap() {
+    return _CreateScheduleRequestRecipientDetails.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_CreateScheduleRequestRecipientDetails.discriminator = void 0;
+_CreateScheduleRequestRecipientDetails.attributeTypeMap = [
+  {
+    "name": "emails",
+    "baseName": "emails",
+    "type": "Array<string>",
+    "format": ""
+  },
+  {
+    "name": "principals",
+    "baseName": "principals",
+    "type": "Array<PrincipalsListItemInput>",
+    "format": ""
+  }
+];
+var CreateScheduleRequestRecipientDetails = _CreateScheduleRequestRecipientDetails;
 
 // models/CreateTagRequest.ts
 var _CreateTagRequest = class _CreateTagRequest {
@@ -1789,6 +1982,12 @@ _CreateUserRequest.attributeTypeMap = [
     "baseName": "trigger_welcome_email",
     "type": "boolean",
     "format": ""
+  },
+  {
+    "name": "trigger_activation_email",
+    "baseName": "trigger_activation_email",
+    "type": "boolean",
+    "format": ""
   }
 ];
 var CreateUserRequest = _CreateUserRequest;
@@ -2002,6 +2201,227 @@ _Database.attributeTypeMap = [
   }
 ];
 var Database = _Database;
+
+// models/DbtConnectionRequest.ts
+var _DbtConnectionRequest = class _DbtConnectionRequest {
+  static getAttributeTypeMap() {
+    return _DbtConnectionRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_DbtConnectionRequest.discriminator = void 0;
+_DbtConnectionRequest.attributeTypeMap = [
+  {
+    "name": "connection_name",
+    "baseName": "connection_name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "database_name",
+    "baseName": "database_name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "import_type",
+    "baseName": "import_type",
+    "type": "DbtConnectionRequestImportTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "access_token",
+    "baseName": "access_token",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "dbt_url",
+    "baseName": "dbt_url",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "account_id",
+    "baseName": "account_id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "project_id",
+    "baseName": "project_id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "dbt_env_id",
+    "baseName": "dbt_env_id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "project_name",
+    "baseName": "project_name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "file_content",
+    "baseName": "file_content",
+    "type": "HttpFile",
+    "format": "binary"
+  }
+];
+var DbtConnectionRequest = _DbtConnectionRequest;
+
+// models/DbtGenerateSyncTmlRequest.ts
+var _DbtGenerateSyncTmlRequest = class _DbtGenerateSyncTmlRequest {
+  static getAttributeTypeMap() {
+    return _DbtGenerateSyncTmlRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_DbtGenerateSyncTmlRequest.discriminator = void 0;
+_DbtGenerateSyncTmlRequest.attributeTypeMap = [
+  {
+    "name": "dbt_connection_identifier",
+    "baseName": "dbt_connection_identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "file_content",
+    "baseName": "file_content",
+    "type": "HttpFile",
+    "format": "binary"
+  }
+];
+var DbtGenerateSyncTmlRequest = _DbtGenerateSyncTmlRequest;
+
+// models/DbtGenerateTmlRequest.ts
+var _DbtGenerateTmlRequest = class _DbtGenerateTmlRequest {
+  static getAttributeTypeMap() {
+    return _DbtGenerateTmlRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_DbtGenerateTmlRequest.discriminator = void 0;
+_DbtGenerateTmlRequest.attributeTypeMap = [
+  {
+    "name": "dbt_connection_identifier",
+    "baseName": "dbt_connection_identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "model_tables",
+    "baseName": "model_tables",
+    "type": "Array<ModelTableList>",
+    "format": ""
+  },
+  {
+    "name": "import_worksheets",
+    "baseName": "import_worksheets",
+    "type": "DbtGenerateTmlRequestImportWorksheetsEnum",
+    "format": ""
+  },
+  {
+    "name": "worksheets",
+    "baseName": "worksheets",
+    "type": "Array<string>",
+    "format": ""
+  },
+  {
+    "name": "file_content",
+    "baseName": "file_content",
+    "type": "HttpFile",
+    "format": "binary"
+  }
+];
+var DbtGenerateTmlRequest = _DbtGenerateTmlRequest;
+
+// models/DbtSearchResponse.ts
+var _DbtSearchResponse = class _DbtSearchResponse {
+  static getAttributeTypeMap() {
+    return _DbtSearchResponse.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_DbtSearchResponse.discriminator = void 0;
+_DbtSearchResponse.attributeTypeMap = [
+  {
+    "name": "dbt_connection_identifier",
+    "baseName": "dbt_connection_identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "project_name",
+    "baseName": "project_name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "connection_id",
+    "baseName": "connection_id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "connection_name",
+    "baseName": "connection_name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "cdw_database",
+    "baseName": "cdw_database",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "import_type",
+    "baseName": "import_type",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "author_name",
+    "baseName": "author_name",
+    "type": "string",
+    "format": ""
+  }
+];
+var DbtSearchResponse = _DbtSearchResponse;
+
+// models/DeactivateUserRequest.ts
+var _DeactivateUserRequest = class _DeactivateUserRequest {
+  static getAttributeTypeMap() {
+    return _DeactivateUserRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_DeactivateUserRequest.discriminator = void 0;
+_DeactivateUserRequest.attributeTypeMap = [
+  {
+    "name": "user_identifier",
+    "baseName": "user_identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "base_url",
+    "baseName": "base_url",
+    "type": "string",
+    "format": ""
+  }
+];
+var DeactivateUserRequest = _DeactivateUserRequest;
 
 // models/DefaultActionConfig.ts
 var _DefaultActionConfig = class _DefaultActionConfig {
@@ -2383,13 +2803,13 @@ _ExportLiveboardReportRequest.attributeTypeMap = [
   {
     "name": "pdf_options",
     "baseName": "pdf_options",
-    "type": "PdfOptionsInput",
+    "type": "ExportLiveboardReportRequestPdfOptions",
     "format": ""
   },
   {
     "name": "png_options",
     "baseName": "png_options",
-    "type": "PngOptionsInput",
+    "type": "ExportLiveboardReportRequestPngOptions",
     "format": ""
   },
   {
@@ -2400,6 +2820,135 @@ _ExportLiveboardReportRequest.attributeTypeMap = [
   }
 ];
 var ExportLiveboardReportRequest = _ExportLiveboardReportRequest;
+
+// models/ExportLiveboardReportRequestPdfOptions.ts
+var _ExportLiveboardReportRequestPdfOptions = class _ExportLiveboardReportRequestPdfOptions {
+  static getAttributeTypeMap() {
+    return _ExportLiveboardReportRequestPdfOptions.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ExportLiveboardReportRequestPdfOptions.discriminator = void 0;
+_ExportLiveboardReportRequestPdfOptions.attributeTypeMap = [
+  {
+    "name": "include_cover_page",
+    "baseName": "include_cover_page",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "include_custom_logo",
+    "baseName": "include_custom_logo",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "include_filter_page",
+    "baseName": "include_filter_page",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "include_page_number",
+    "baseName": "include_page_number",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "page_orientation",
+    "baseName": "page_orientation",
+    "type": "ExportLiveboardReportRequestPdfOptionsPageOrientationEnum",
+    "format": ""
+  },
+  {
+    "name": "truncate_table",
+    "baseName": "truncate_table",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "page_footer_text",
+    "baseName": "page_footer_text",
+    "type": "string",
+    "format": ""
+  }
+];
+var ExportLiveboardReportRequestPdfOptions = _ExportLiveboardReportRequestPdfOptions;
+
+// models/ExportLiveboardReportRequestPngOptions.ts
+var _ExportLiveboardReportRequestPngOptions = class _ExportLiveboardReportRequestPngOptions {
+  static getAttributeTypeMap() {
+    return _ExportLiveboardReportRequestPngOptions.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ExportLiveboardReportRequestPngOptions.discriminator = void 0;
+_ExportLiveboardReportRequestPngOptions.attributeTypeMap = [
+  {
+    "name": "include_cover_page",
+    "baseName": "include_cover_page",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "include_filter_page",
+    "baseName": "include_filter_page",
+    "type": "boolean",
+    "format": ""
+  }
+];
+var ExportLiveboardReportRequestPngOptions = _ExportLiveboardReportRequestPngOptions;
+
+// models/ExportMetadataTMLBatchedRequest.ts
+var _ExportMetadataTMLBatchedRequest = class _ExportMetadataTMLBatchedRequest {
+  static getAttributeTypeMap() {
+    return _ExportMetadataTMLBatchedRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ExportMetadataTMLBatchedRequest.discriminator = void 0;
+_ExportMetadataTMLBatchedRequest.attributeTypeMap = [
+  {
+    "name": "metadata_type",
+    "baseName": "metadata_type",
+    "type": "ExportMetadataTMLBatchedRequestMetadataTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "batch_offset",
+    "baseName": "batch_offset",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "batch_size",
+    "baseName": "batch_size",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "edoc_format",
+    "baseName": "edoc_format",
+    "type": "ExportMetadataTMLBatchedRequestEdocFormatEnum",
+    "format": ""
+  },
+  {
+    "name": "export_dependent",
+    "baseName": "export_dependent",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "all_orgs_override",
+    "baseName": "all_orgs_override",
+    "type": "boolean",
+    "format": ""
+  }
+];
+var ExportMetadataTMLBatchedRequest = _ExportMetadataTMLBatchedRequest;
 
 // models/ExportMetadataTMLRequest.ts
 var _ExportMetadataTMLRequest = class _ExportMetadataTMLRequest {
@@ -2433,6 +2982,30 @@ _ExportMetadataTMLRequest.attributeTypeMap = [
     "name": "edoc_format",
     "baseName": "edoc_format",
     "type": "ExportMetadataTMLRequestEdocFormatEnum",
+    "format": ""
+  },
+  {
+    "name": "export_schema_version",
+    "baseName": "export_schema_version",
+    "type": "ExportMetadataTMLRequestExportSchemaVersionEnum",
+    "format": ""
+  },
+  {
+    "name": "export_dependent",
+    "baseName": "export_dependent",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "export_connection_as_dependent",
+    "baseName": "export_connection_as_dependent",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "all_orgs_override",
+    "baseName": "all_orgs_override",
+    "type": "boolean",
     "format": ""
   }
 ];
@@ -2618,6 +3191,25 @@ _FetchAnswerSqlQueryRequest.attributeTypeMap = [
 ];
 var FetchAnswerSqlQueryRequest = _FetchAnswerSqlQueryRequest;
 
+// models/FetchConnectionDiffStatusResponse.ts
+var _FetchConnectionDiffStatusResponse = class _FetchConnectionDiffStatusResponse {
+  static getAttributeTypeMap() {
+    return _FetchConnectionDiffStatusResponse.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_FetchConnectionDiffStatusResponse.discriminator = void 0;
+_FetchConnectionDiffStatusResponse.attributeTypeMap = [
+  {
+    "name": "status",
+    "baseName": "status",
+    "type": "boolean",
+    "format": ""
+  }
+];
+var FetchConnectionDiffStatusResponse = _FetchConnectionDiffStatusResponse;
+
 // models/FetchLiveboardDataRequest.ts
 var _FetchLiveboardDataRequest = class _FetchLiveboardDataRequest {
   static getAttributeTypeMap() {
@@ -2737,6 +3329,12 @@ _FetchLogsRequest.attributeTypeMap = [
     "baseName": "end_epoch_time_in_millis",
     "type": "number",
     "format": "float"
+  },
+  {
+    "name": "get_all_logs",
+    "baseName": "get_all_logs",
+    "type": "boolean",
+    "format": ""
   }
 ];
 var FetchLogsRequest = _FetchLogsRequest;
@@ -2761,6 +3359,24 @@ _FetchPermissionsOfPrincipalsRequest.attributeTypeMap = [
     "name": "metadata",
     "baseName": "metadata",
     "type": "Array<PermissionsMetadataTypeInput>",
+    "format": ""
+  },
+  {
+    "name": "record_offset",
+    "baseName": "record_offset",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "record_size",
+    "baseName": "record_size",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "default_metadata_type",
+    "baseName": "default_metadata_type",
+    "type": "FetchPermissionsOfPrincipalsRequestDefaultMetadataTypeEnum",
     "format": ""
   }
 ];
@@ -2792,6 +3408,24 @@ _FetchPermissionsOnMetadataRequest.attributeTypeMap = [
     "name": "include_dependent_objects",
     "baseName": "include_dependent_objects",
     "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "record_offset",
+    "baseName": "record_offset",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "record_size",
+    "baseName": "record_size",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "permission_type",
+    "baseName": "permission_type",
+    "type": "string",
     "format": ""
   }
 ];
@@ -2879,6 +3513,31 @@ _GenericInfo.attributeTypeMap = [
 ];
 var GenericInfo = _GenericInfo;
 
+// models/GetAsyncImportStatusResponse.ts
+var _GetAsyncImportStatusResponse = class _GetAsyncImportStatusResponse {
+  static getAttributeTypeMap() {
+    return _GetAsyncImportStatusResponse.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_GetAsyncImportStatusResponse.discriminator = void 0;
+_GetAsyncImportStatusResponse.attributeTypeMap = [
+  {
+    "name": "status_list",
+    "baseName": "status_list",
+    "type": "Array<ImportEPackAsyncTaskStatus>",
+    "format": ""
+  },
+  {
+    "name": "last_batch",
+    "baseName": "last_batch",
+    "type": "boolean",
+    "format": ""
+  }
+];
+var GetAsyncImportStatusResponse = _GetAsyncImportStatusResponse;
+
 // models/GetFullAccessTokenRequest.ts
 var _GetFullAccessTokenRequest = class _GetFullAccessTokenRequest {
   static getAttributeTypeMap() {
@@ -2944,9 +3603,9 @@ _GetFullAccessTokenRequest.attributeTypeMap = [
     "format": ""
   },
   {
-    "name": "jwt_user_options",
-    "baseName": "jwt_user_options",
-    "type": "JWTUserOptions",
+    "name": "user_parameters",
+    "baseName": "user_parameters",
+    "type": "GetObjectAccessTokenRequestUserParameters",
     "format": ""
   }
 ];
@@ -3023,13 +3682,50 @@ _GetObjectAccessTokenRequest.attributeTypeMap = [
     "format": ""
   },
   {
-    "name": "jwt_user_options",
-    "baseName": "jwt_user_options",
-    "type": "JWTUserOptions",
+    "name": "user_parameters",
+    "baseName": "user_parameters",
+    "type": "GetObjectAccessTokenRequestUserParameters",
     "format": ""
   }
 ];
 var GetObjectAccessTokenRequest = _GetObjectAccessTokenRequest;
+
+// models/GetObjectAccessTokenRequestUserParameters.ts
+var _GetObjectAccessTokenRequestUserParameters = class _GetObjectAccessTokenRequestUserParameters {
+  static getAttributeTypeMap() {
+    return _GetObjectAccessTokenRequestUserParameters.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_GetObjectAccessTokenRequestUserParameters.discriminator = void 0;
+_GetObjectAccessTokenRequestUserParameters.attributeTypeMap = [
+  {
+    "name": "objects",
+    "baseName": "objects",
+    "type": "Array<UserObject>",
+    "format": ""
+  },
+  {
+    "name": "runtime_filters",
+    "baseName": "runtime_filters",
+    "type": "Array<UserRuntimeFilters>",
+    "format": ""
+  },
+  {
+    "name": "runtime_sorts",
+    "baseName": "runtime_sorts",
+    "type": "Array<UserRuntimeSorts>",
+    "format": ""
+  },
+  {
+    "name": "parameters",
+    "baseName": "parameters",
+    "type": "Array<UserParameters>",
+    "format": ""
+  }
+];
+var GetObjectAccessTokenRequestUserParameters = _GetObjectAccessTokenRequestUserParameters;
 
 // models/GetTokenResponse.ts
 var _GetTokenResponse = class _GetTokenResponse {
@@ -3141,6 +3837,103 @@ _GroupsImportListInput.attributeTypeMap = [
 ];
 var GroupsImportListInput = _GroupsImportListInput;
 
+// models/ImportEPackAsyncTaskStatus.ts
+var _ImportEPackAsyncTaskStatus = class _ImportEPackAsyncTaskStatus {
+  static getAttributeTypeMap() {
+    return _ImportEPackAsyncTaskStatus.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ImportEPackAsyncTaskStatus.discriminator = void 0;
+_ImportEPackAsyncTaskStatus.attributeTypeMap = [
+  {
+    "name": "tenant_id",
+    "baseName": "tenant_id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "org_id",
+    "baseName": "org_id",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "task_id",
+    "baseName": "task_id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "task_name",
+    "baseName": "task_name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "import_response",
+    "baseName": "import_response",
+    "type": "any",
+    "format": ""
+  },
+  {
+    "name": "task_status",
+    "baseName": "task_status",
+    "type": "ImportEPackAsyncTaskStatusTaskStatusEnum",
+    "format": ""
+  },
+  {
+    "name": "author_id",
+    "baseName": "author_id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "import_policy",
+    "baseName": "import_policy",
+    "type": "ImportEPackAsyncTaskStatusImportPolicyEnum",
+    "format": ""
+  },
+  {
+    "name": "created_at",
+    "baseName": "created_at",
+    "type": "number",
+    "format": "float"
+  },
+  {
+    "name": "in_progress_at",
+    "baseName": "in_progress_at",
+    "type": "number",
+    "format": "float"
+  },
+  {
+    "name": "completed_at",
+    "baseName": "completed_at",
+    "type": "number",
+    "format": "float"
+  },
+  {
+    "name": "total_object_count",
+    "baseName": "total_object_count",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "object_processed_count",
+    "baseName": "object_processed_count",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "modified_at",
+    "baseName": "modified_at",
+    "type": "number",
+    "format": "float"
+  }
+];
+var ImportEPackAsyncTaskStatus = _ImportEPackAsyncTaskStatus;
+
 // models/ImportMetadataTMLRequest.ts
 var _ImportMetadataTMLRequest = class _ImportMetadataTMLRequest {
   static getAttributeTypeMap() {
@@ -3166,6 +3959,12 @@ _ImportMetadataTMLRequest.attributeTypeMap = [
   {
     "name": "create_new",
     "baseName": "create_new",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "all_orgs_context",
+    "baseName": "all_orgs_context",
     "type": "boolean",
     "format": ""
   }
@@ -3504,6 +4303,25 @@ _JWTUserOptions.attributeTypeMap = [
   }
 ];
 var JWTUserOptions = _JWTUserOptions;
+
+// models/JWTUserOptionsFull.ts
+var _JWTUserOptionsFull = class _JWTUserOptionsFull {
+  static getAttributeTypeMap() {
+    return _JWTUserOptionsFull.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_JWTUserOptionsFull.discriminator = void 0;
+_JWTUserOptionsFull.attributeTypeMap = [
+  {
+    "name": "parameters",
+    "baseName": "parameters",
+    "type": "Array<JWTParameter>",
+    "format": ""
+  }
+];
+var JWTUserOptionsFull = _JWTUserOptionsFull;
 
 // models/JWTUserOptionsParametersInner.ts
 var _JWTUserOptionsParametersInner = class _JWTUserOptionsParametersInner {
@@ -3969,31 +4787,6 @@ _MetadataSearchSortOptions.attributeTypeMap = [
 ];
 var MetadataSearchSortOptions = _MetadataSearchSortOptions;
 
-// models/MetadataTypeInput.ts
-var _MetadataTypeInput = class _MetadataTypeInput {
-  static getAttributeTypeMap() {
-    return _MetadataTypeInput.attributeTypeMap;
-  }
-  constructor() {
-  }
-};
-_MetadataTypeInput.discriminator = void 0;
-_MetadataTypeInput.attributeTypeMap = [
-  {
-    "name": "type",
-    "baseName": "type",
-    "type": "MetadataTypeInputTypeEnum",
-    "format": ""
-  },
-  {
-    "name": "identifier",
-    "baseName": "identifier",
-    "type": "string",
-    "format": ""
-  }
-];
-var MetadataTypeInput = _MetadataTypeInput;
-
 // models/ModelTableList.ts
 var _ModelTableList = class _ModelTableList {
   static getAttributeTypeMap() {
@@ -4007,6 +4800,12 @@ _ModelTableList.attributeTypeMap = [
   {
     "name": "model_name",
     "baseName": "model_name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "model_path",
+    "baseName": "model_path",
     "type": "string",
     "format": ""
   },
@@ -4309,6 +5108,44 @@ _PermissionInput.attributeTypeMap = [
 ];
 var PermissionInput = _PermissionInput;
 
+// models/PermissionOfMetadataResponse.ts
+var _PermissionOfMetadataResponse = class _PermissionOfMetadataResponse {
+  static getAttributeTypeMap() {
+    return _PermissionOfMetadataResponse.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_PermissionOfMetadataResponse.discriminator = void 0;
+_PermissionOfMetadataResponse.attributeTypeMap = [
+  {
+    "name": "metadata_permission_details",
+    "baseName": "metadata_permission_details",
+    "type": "any",
+    "format": ""
+  }
+];
+var PermissionOfMetadataResponse = _PermissionOfMetadataResponse;
+
+// models/PermissionOfPrincipalsResponse.ts
+var _PermissionOfPrincipalsResponse = class _PermissionOfPrincipalsResponse {
+  static getAttributeTypeMap() {
+    return _PermissionOfPrincipalsResponse.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_PermissionOfPrincipalsResponse.discriminator = void 0;
+_PermissionOfPrincipalsResponse.attributeTypeMap = [
+  {
+    "name": "principal_permission_details",
+    "baseName": "principal_permission_details",
+    "type": "any",
+    "format": ""
+  }
+];
+var PermissionOfPrincipalsResponse = _PermissionOfPrincipalsResponse;
+
 // models/PermissionsMetadataTypeInput.ts
 var _PermissionsMetadataTypeInput = class _PermissionsMetadataTypeInput {
   static getAttributeTypeMap() {
@@ -4582,6 +5419,25 @@ _ResponseActivationURL.attributeTypeMap = [
   }
 ];
 var ResponseActivationURL = _ResponseActivationURL;
+
+// models/ResponseCopyObject.ts
+var _ResponseCopyObject = class _ResponseCopyObject {
+  static getAttributeTypeMap() {
+    return _ResponseCopyObject.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ResponseCopyObject.discriminator = void 0;
+_ResponseCopyObject.attributeTypeMap = [
+  {
+    "name": "metadata_id",
+    "baseName": "metadata_id",
+    "type": "string",
+    "format": ""
+  }
+];
+var ResponseCopyObject = _ResponseCopyObject;
 
 // models/ResponseCustomAction.ts
 var _ResponseCustomAction = class _ResponseCustomAction {
@@ -5419,7 +6275,7 @@ _SearchConnectionRequest.attributeTypeMap = [
   {
     "name": "sort_options",
     "baseName": "sort_options",
-    "type": "SortOptionInput",
+    "type": "SearchConnectionRequestSortOptions",
     "format": ""
   },
   {
@@ -5442,6 +6298,31 @@ _SearchConnectionRequest.attributeTypeMap = [
   }
 ];
 var SearchConnectionRequest = _SearchConnectionRequest;
+
+// models/SearchConnectionRequestSortOptions.ts
+var _SearchConnectionRequestSortOptions = class _SearchConnectionRequestSortOptions {
+  static getAttributeTypeMap() {
+    return _SearchConnectionRequestSortOptions.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_SearchConnectionRequestSortOptions.discriminator = void 0;
+_SearchConnectionRequestSortOptions.attributeTypeMap = [
+  {
+    "name": "field_name",
+    "baseName": "field_name",
+    "type": "SearchConnectionRequestSortOptionsFieldNameEnum",
+    "format": ""
+  },
+  {
+    "name": "order",
+    "baseName": "order",
+    "type": "SearchConnectionRequestSortOptionsOrderEnum",
+    "format": ""
+  }
+];
+var SearchConnectionRequestSortOptions = _SearchConnectionRequestSortOptions;
 
 // models/SearchConnectionResponse.ts
 var _SearchConnectionResponse = class _SearchConnectionResponse {
@@ -5517,7 +6398,7 @@ _SearchCustomActionsRequest.attributeTypeMap = [
   {
     "name": "default_action_config",
     "baseName": "default_action_config",
-    "type": "DefaultActionConfigSearchInput",
+    "type": "SearchCustomActionsRequestDefaultActionConfig",
     "format": ""
   },
   {
@@ -5546,6 +6427,25 @@ _SearchCustomActionsRequest.attributeTypeMap = [
   }
 ];
 var SearchCustomActionsRequest = _SearchCustomActionsRequest;
+
+// models/SearchCustomActionsRequestDefaultActionConfig.ts
+var _SearchCustomActionsRequestDefaultActionConfig = class _SearchCustomActionsRequestDefaultActionConfig {
+  static getAttributeTypeMap() {
+    return _SearchCustomActionsRequestDefaultActionConfig.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_SearchCustomActionsRequestDefaultActionConfig.discriminator = void 0;
+_SearchCustomActionsRequestDefaultActionConfig.attributeTypeMap = [
+  {
+    "name": "visibility",
+    "baseName": "visibility",
+    "type": "boolean",
+    "format": ""
+  }
+];
+var SearchCustomActionsRequestDefaultActionConfig = _SearchCustomActionsRequestDefaultActionConfig;
 
 // models/SearchDataRequest.ts
 var _SearchDataRequest = class _SearchDataRequest {
@@ -5670,7 +6570,7 @@ _SearchMetadataRequest.attributeTypeMap = [
   {
     "name": "favorite_object_options",
     "baseName": "favorite_object_options",
-    "type": "FavoriteObjectOptionsInput",
+    "type": "SearchMetadataRequestFavoriteObjectOptions",
     "format": ""
   },
   {
@@ -5684,6 +6584,12 @@ _SearchMetadataRequest.attributeTypeMap = [
     "baseName": "include_dependent_objects",
     "type": "boolean",
     "format": ""
+  },
+  {
+    "name": "dependent_objects_record_size",
+    "baseName": "dependent_objects_record_size",
+    "type": "number",
+    "format": "int32"
   },
   {
     "name": "include_details",
@@ -5742,7 +6648,7 @@ _SearchMetadataRequest.attributeTypeMap = [
   {
     "name": "sort_options",
     "baseName": "sort_options",
-    "type": "MetadataSearchSortOptions",
+    "type": "SearchMetadataRequestSortOptions",
     "format": ""
   },
   {
@@ -5759,6 +6665,56 @@ _SearchMetadataRequest.attributeTypeMap = [
   }
 ];
 var SearchMetadataRequest = _SearchMetadataRequest;
+
+// models/SearchMetadataRequestFavoriteObjectOptions.ts
+var _SearchMetadataRequestFavoriteObjectOptions = class _SearchMetadataRequestFavoriteObjectOptions {
+  static getAttributeTypeMap() {
+    return _SearchMetadataRequestFavoriteObjectOptions.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_SearchMetadataRequestFavoriteObjectOptions.discriminator = void 0;
+_SearchMetadataRequestFavoriteObjectOptions.attributeTypeMap = [
+  {
+    "name": "include",
+    "baseName": "include",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "user_identifiers",
+    "baseName": "user_identifiers",
+    "type": "Array<string>",
+    "format": ""
+  }
+];
+var SearchMetadataRequestFavoriteObjectOptions = _SearchMetadataRequestFavoriteObjectOptions;
+
+// models/SearchMetadataRequestSortOptions.ts
+var _SearchMetadataRequestSortOptions = class _SearchMetadataRequestSortOptions {
+  static getAttributeTypeMap() {
+    return _SearchMetadataRequestSortOptions.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_SearchMetadataRequestSortOptions.discriminator = void 0;
+_SearchMetadataRequestSortOptions.attributeTypeMap = [
+  {
+    "name": "field_name",
+    "baseName": "field_name",
+    "type": "SearchMetadataRequestSortOptionsFieldNameEnum",
+    "format": ""
+  },
+  {
+    "name": "order",
+    "baseName": "order",
+    "type": "SearchMetadataRequestSortOptionsOrderEnum",
+    "format": ""
+  }
+];
+var SearchMetadataRequestSortOptions = _SearchMetadataRequestSortOptions;
 
 // models/SearchOrgsRequest.ts
 var _SearchOrgsRequest = class _SearchOrgsRequest {
@@ -6010,13 +6966,13 @@ _SearchSchedulesRequest.attributeTypeMap = [
   {
     "name": "sort_options",
     "baseName": "sort_options",
-    "type": "SortingOptions",
+    "type": "SearchSchedulesRequestSortOptions",
     "format": ""
   },
   {
     "name": "history_runs_options",
     "baseName": "history_runs_options",
-    "type": "ScheduleHistoryRunsOptionsInput",
+    "type": "SearchSchedulesRequestHistoryRunsOptions",
     "format": ""
   },
   {
@@ -6027,6 +6983,62 @@ _SearchSchedulesRequest.attributeTypeMap = [
   }
 ];
 var SearchSchedulesRequest = _SearchSchedulesRequest;
+
+// models/SearchSchedulesRequestHistoryRunsOptions.ts
+var _SearchSchedulesRequestHistoryRunsOptions = class _SearchSchedulesRequestHistoryRunsOptions {
+  static getAttributeTypeMap() {
+    return _SearchSchedulesRequestHistoryRunsOptions.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_SearchSchedulesRequestHistoryRunsOptions.discriminator = void 0;
+_SearchSchedulesRequestHistoryRunsOptions.attributeTypeMap = [
+  {
+    "name": "include_history_runs",
+    "baseName": "include_history_runs",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "record_size",
+    "baseName": "record_size",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "record_offset",
+    "baseName": "record_offset",
+    "type": "number",
+    "format": "int32"
+  }
+];
+var SearchSchedulesRequestHistoryRunsOptions = _SearchSchedulesRequestHistoryRunsOptions;
+
+// models/SearchSchedulesRequestSortOptions.ts
+var _SearchSchedulesRequestSortOptions = class _SearchSchedulesRequestSortOptions {
+  static getAttributeTypeMap() {
+    return _SearchSchedulesRequestSortOptions.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_SearchSchedulesRequestSortOptions.discriminator = void 0;
+_SearchSchedulesRequestSortOptions.attributeTypeMap = [
+  {
+    "name": "field_name",
+    "baseName": "field_name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "order",
+    "baseName": "order",
+    "type": "string",
+    "format": ""
+  }
+];
+var SearchSchedulesRequestSortOptions = _SearchSchedulesRequestSortOptions;
 
 // models/SearchTagsRequest.ts
 var _SearchTagsRequest = class _SearchTagsRequest {
@@ -6156,11 +7168,36 @@ _SearchUserGroupsRequest.attributeTypeMap = [
   {
     "name": "sort_options",
     "baseName": "sort_options",
-    "type": "SortOptions",
+    "type": "SearchUserGroupsRequestSortOptions",
     "format": ""
   }
 ];
 var SearchUserGroupsRequest = _SearchUserGroupsRequest;
+
+// models/SearchUserGroupsRequestSortOptions.ts
+var _SearchUserGroupsRequestSortOptions = class _SearchUserGroupsRequestSortOptions {
+  static getAttributeTypeMap() {
+    return _SearchUserGroupsRequestSortOptions.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_SearchUserGroupsRequestSortOptions.discriminator = void 0;
+_SearchUserGroupsRequestSortOptions.attributeTypeMap = [
+  {
+    "name": "field_name",
+    "baseName": "field_name",
+    "type": "SearchUserGroupsRequestSortOptionsFieldNameEnum",
+    "format": ""
+  },
+  {
+    "name": "order",
+    "baseName": "order",
+    "type": "SearchUserGroupsRequestSortOptionsOrderEnum",
+    "format": ""
+  }
+];
+var SearchUserGroupsRequestSortOptions = _SearchUserGroupsRequestSortOptions;
 
 // models/SearchUsersRequest.ts
 var _SearchUsersRequest = class _SearchUsersRequest {
@@ -6277,7 +7314,7 @@ _SearchUsersRequest.attributeTypeMap = [
   {
     "name": "sort_options",
     "baseName": "sort_options",
-    "type": "SortOptions",
+    "type": "SearchUsersRequestSortOptions",
     "format": ""
   },
   {
@@ -6294,6 +7331,31 @@ _SearchUsersRequest.attributeTypeMap = [
   }
 ];
 var SearchUsersRequest = _SearchUsersRequest;
+
+// models/SearchUsersRequestSortOptions.ts
+var _SearchUsersRequestSortOptions = class _SearchUsersRequestSortOptions {
+  static getAttributeTypeMap() {
+    return _SearchUsersRequestSortOptions.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_SearchUsersRequestSortOptions.discriminator = void 0;
+_SearchUsersRequestSortOptions.attributeTypeMap = [
+  {
+    "name": "field_name",
+    "baseName": "field_name",
+    "type": "SearchUsersRequestSortOptionsFieldNameEnum",
+    "format": ""
+  },
+  {
+    "name": "order",
+    "baseName": "order",
+    "type": "SearchUsersRequestSortOptionsOrderEnum",
+    "format": ""
+  }
+];
+var SearchUsersRequestSortOptions = _SearchUsersRequestSortOptions;
 
 // models/ShareMetadataRequest.ts
 var _ShareMetadataRequest = class _ShareMetadataRequest {
@@ -6315,6 +7377,12 @@ _ShareMetadataRequest.attributeTypeMap = [
     "name": "metadata_identifiers",
     "baseName": "metadata_identifiers",
     "type": "Array<string>",
+    "format": ""
+  },
+  {
+    "name": "metadata",
+    "baseName": "metadata",
+    "type": "Array<ShareMetadataTypeInput>",
     "format": ""
   },
   {
@@ -6346,9 +7414,46 @@ _ShareMetadataRequest.attributeTypeMap = [
     "baseName": "enable_custom_url",
     "type": "boolean",
     "format": ""
+  },
+  {
+    "name": "notify_on_share",
+    "baseName": "notify_on_share",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "has_lenient_discoverability",
+    "baseName": "has_lenient_discoverability",
+    "type": "boolean",
+    "format": ""
   }
 ];
 var ShareMetadataRequest = _ShareMetadataRequest;
+
+// models/ShareMetadataTypeInput.ts
+var _ShareMetadataTypeInput = class _ShareMetadataTypeInput {
+  static getAttributeTypeMap() {
+    return _ShareMetadataTypeInput.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ShareMetadataTypeInput.discriminator = void 0;
+_ShareMetadataTypeInput.attributeTypeMap = [
+  {
+    "name": "type",
+    "baseName": "type",
+    "type": "ShareMetadataTypeInputTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "identifier",
+    "baseName": "identifier",
+    "type": "string",
+    "format": ""
+  }
+];
+var ShareMetadataTypeInput = _ShareMetadataTypeInput;
 
 // models/SharePermissionsInput.ts
 var _SharePermissionsInput = class _SharePermissionsInput {
@@ -6902,6 +8007,49 @@ _Token.attributeTypeMap = [
 ];
 var Token = _Token;
 
+// models/TokenValidationResponse.ts
+var _TokenValidationResponse = class _TokenValidationResponse {
+  static getAttributeTypeMap() {
+    return _TokenValidationResponse.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_TokenValidationResponse.discriminator = void 0;
+_TokenValidationResponse.attributeTypeMap = [
+  {
+    "name": "creation_time_in_millis",
+    "baseName": "creation_time_in_millis",
+    "type": "number",
+    "format": "float"
+  },
+  {
+    "name": "expiration_time_in_millis",
+    "baseName": "expiration_time_in_millis",
+    "type": "number",
+    "format": "float"
+  },
+  {
+    "name": "scope",
+    "baseName": "scope",
+    "type": "Scope",
+    "format": ""
+  },
+  {
+    "name": "valid_for_user_id",
+    "baseName": "valid_for_user_id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "token_type",
+    "baseName": "token_type",
+    "type": "string",
+    "format": ""
+  }
+];
+var TokenValidationResponse = _TokenValidationResponse;
+
 // models/URL.ts
 var _URL = class _URL {
   static getAttributeTypeMap() {
@@ -7054,12 +8202,6 @@ _UpdateConfigRequest.attributeTypeMap = [
     "format": ""
   },
   {
-    "name": "default_branch_name",
-    "baseName": "default_branch_name",
-    "type": "string",
-    "format": ""
-  },
-  {
     "name": "enable_guid_mapping",
     "baseName": "enable_guid_mapping",
     "type": "boolean",
@@ -7068,12 +8210,6 @@ _UpdateConfigRequest.attributeTypeMap = [
   {
     "name": "configuration_branch_name",
     "baseName": "configuration_branch_name",
-    "type": "string",
-    "format": ""
-  },
-  {
-    "name": "guid_mapping_branch_name",
-    "baseName": "guid_mapping_branch_name",
     "type": "string",
     "format": ""
   }
@@ -7123,6 +8259,43 @@ _UpdateConnectionRequest.attributeTypeMap = [
 ];
 var UpdateConnectionRequest = _UpdateConnectionRequest;
 
+// models/UpdateConnectionV2Request.ts
+var _UpdateConnectionV2Request = class _UpdateConnectionV2Request {
+  static getAttributeTypeMap() {
+    return _UpdateConnectionV2Request.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_UpdateConnectionV2Request.discriminator = void 0;
+_UpdateConnectionV2Request.attributeTypeMap = [
+  {
+    "name": "name",
+    "baseName": "name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "description",
+    "baseName": "description",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "data_warehouse_config",
+    "baseName": "data_warehouse_config",
+    "type": "any",
+    "format": ""
+  },
+  {
+    "name": "validate",
+    "baseName": "validate",
+    "type": "boolean",
+    "format": ""
+  }
+];
+var UpdateConnectionV2Request = _UpdateConnectionV2Request;
+
 // models/UpdateCustomActionRequest.ts
 var _UpdateCustomActionRequest = class _UpdateCustomActionRequest {
   static getAttributeTypeMap() {
@@ -7136,7 +8309,7 @@ _UpdateCustomActionRequest.attributeTypeMap = [
   {
     "name": "action_details",
     "baseName": "action_details",
-    "type": "ActionDetailsInput",
+    "type": "UpdateCustomActionRequestActionDetails",
     "format": ""
   },
   {
@@ -7148,7 +8321,7 @@ _UpdateCustomActionRequest.attributeTypeMap = [
   {
     "name": "default_action_config",
     "baseName": "default_action_config",
-    "type": "DefaultActionConfigInput",
+    "type": "UpdateCustomActionRequestDefaultActionConfig",
     "format": ""
   },
   {
@@ -7171,6 +8344,129 @@ _UpdateCustomActionRequest.attributeTypeMap = [
   }
 ];
 var UpdateCustomActionRequest = _UpdateCustomActionRequest;
+
+// models/UpdateCustomActionRequestActionDetails.ts
+var _UpdateCustomActionRequestActionDetails = class _UpdateCustomActionRequestActionDetails {
+  static getAttributeTypeMap() {
+    return _UpdateCustomActionRequestActionDetails.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_UpdateCustomActionRequestActionDetails.discriminator = void 0;
+_UpdateCustomActionRequestActionDetails.attributeTypeMap = [
+  {
+    "name": "CALLBACK",
+    "baseName": "CALLBACK",
+    "type": "CALLBACKInput",
+    "format": ""
+  },
+  {
+    "name": "URL",
+    "baseName": "URL",
+    "type": "URLInput",
+    "format": ""
+  }
+];
+var UpdateCustomActionRequestActionDetails = _UpdateCustomActionRequestActionDetails;
+
+// models/UpdateCustomActionRequestDefaultActionConfig.ts
+var _UpdateCustomActionRequestDefaultActionConfig = class _UpdateCustomActionRequestDefaultActionConfig {
+  static getAttributeTypeMap() {
+    return _UpdateCustomActionRequestDefaultActionConfig.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_UpdateCustomActionRequestDefaultActionConfig.discriminator = void 0;
+_UpdateCustomActionRequestDefaultActionConfig.attributeTypeMap = [
+  {
+    "name": "visibility",
+    "baseName": "visibility",
+    "type": "boolean",
+    "format": ""
+  }
+];
+var UpdateCustomActionRequestDefaultActionConfig = _UpdateCustomActionRequestDefaultActionConfig;
+
+// models/UpdateDbtConnectionRequest.ts
+var _UpdateDbtConnectionRequest = class _UpdateDbtConnectionRequest {
+  static getAttributeTypeMap() {
+    return _UpdateDbtConnectionRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_UpdateDbtConnectionRequest.discriminator = void 0;
+_UpdateDbtConnectionRequest.attributeTypeMap = [
+  {
+    "name": "dbt_connection_identifier",
+    "baseName": "dbt_connection_identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "connection_name",
+    "baseName": "connection_name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "database_name",
+    "baseName": "database_name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "import_type",
+    "baseName": "import_type",
+    "type": "UpdateDbtConnectionRequestImportTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "access_token",
+    "baseName": "access_token",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "dbt_url",
+    "baseName": "dbt_url",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "account_id",
+    "baseName": "account_id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "project_id",
+    "baseName": "project_id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "dbt_env_id",
+    "baseName": "dbt_env_id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "project_name",
+    "baseName": "project_name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "file_content",
+    "baseName": "file_content",
+    "type": "HttpFile",
+    "format": "binary"
+  }
+];
+var UpdateDbtConnectionRequest = _UpdateDbtConnectionRequest;
 
 // models/UpdateOrgRequest.ts
 var _UpdateOrgRequest = class _UpdateOrgRequest {
@@ -7289,13 +8585,13 @@ _UpdateScheduleRequest.attributeTypeMap = [
   {
     "name": "liveboard_options",
     "baseName": "liveboard_options",
-    "type": "LiveboardOptionsInput",
+    "type": "UpdateScheduleRequestLiveboardOptions",
     "format": ""
   },
   {
     "name": "pdf_options",
     "baseName": "pdf_options",
-    "type": "SchedulesPdfOptionsInput",
+    "type": "UpdateScheduleRequestPdfOptions",
     "format": ""
   },
   {
@@ -7307,13 +8603,13 @@ _UpdateScheduleRequest.attributeTypeMap = [
   {
     "name": "frequency",
     "baseName": "frequency",
-    "type": "FrequencyInput",
+    "type": "UpdateScheduleRequestFrequency",
     "format": ""
   },
   {
     "name": "recipient_details",
     "baseName": "recipient_details",
-    "type": "RecipientDetailsInput",
+    "type": "UpdateScheduleRequestRecipientDetails",
     "format": ""
   },
   {
@@ -7324,6 +8620,136 @@ _UpdateScheduleRequest.attributeTypeMap = [
   }
 ];
 var UpdateScheduleRequest = _UpdateScheduleRequest;
+
+// models/UpdateScheduleRequestFrequency.ts
+var _UpdateScheduleRequestFrequency = class _UpdateScheduleRequestFrequency {
+  static getAttributeTypeMap() {
+    return _UpdateScheduleRequestFrequency.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_UpdateScheduleRequestFrequency.discriminator = void 0;
+_UpdateScheduleRequestFrequency.attributeTypeMap = [
+  {
+    "name": "cron_expression",
+    "baseName": "cron_expression",
+    "type": "CronExpressionInput",
+    "format": ""
+  }
+];
+var UpdateScheduleRequestFrequency = _UpdateScheduleRequestFrequency;
+
+// models/UpdateScheduleRequestLiveboardOptions.ts
+var _UpdateScheduleRequestLiveboardOptions = class _UpdateScheduleRequestLiveboardOptions {
+  static getAttributeTypeMap() {
+    return _UpdateScheduleRequestLiveboardOptions.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_UpdateScheduleRequestLiveboardOptions.discriminator = void 0;
+_UpdateScheduleRequestLiveboardOptions.attributeTypeMap = [
+  {
+    "name": "visualization_identifiers",
+    "baseName": "visualization_identifiers",
+    "type": "Array<string>",
+    "format": ""
+  }
+];
+var UpdateScheduleRequestLiveboardOptions = _UpdateScheduleRequestLiveboardOptions;
+
+// models/UpdateScheduleRequestPdfOptions.ts
+var _UpdateScheduleRequestPdfOptions = class _UpdateScheduleRequestPdfOptions {
+  static getAttributeTypeMap() {
+    return _UpdateScheduleRequestPdfOptions.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_UpdateScheduleRequestPdfOptions.discriminator = void 0;
+_UpdateScheduleRequestPdfOptions.attributeTypeMap = [
+  {
+    "name": "complete_liveboard",
+    "baseName": "complete_liveboard",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "include_cover_page",
+    "baseName": "include_cover_page",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "include_custom_logo",
+    "baseName": "include_custom_logo",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "include_filter_page",
+    "baseName": "include_filter_page",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "include_page_number",
+    "baseName": "include_page_number",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "page_footer_text",
+    "baseName": "page_footer_text",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "page_orientation",
+    "baseName": "page_orientation",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "page_size",
+    "baseName": "page_size",
+    "type": "UpdateScheduleRequestPdfOptionsPageSizeEnum",
+    "format": ""
+  },
+  {
+    "name": "truncate_table",
+    "baseName": "truncate_table",
+    "type": "boolean",
+    "format": ""
+  }
+];
+var UpdateScheduleRequestPdfOptions = _UpdateScheduleRequestPdfOptions;
+
+// models/UpdateScheduleRequestRecipientDetails.ts
+var _UpdateScheduleRequestRecipientDetails = class _UpdateScheduleRequestRecipientDetails {
+  static getAttributeTypeMap() {
+    return _UpdateScheduleRequestRecipientDetails.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_UpdateScheduleRequestRecipientDetails.discriminator = void 0;
+_UpdateScheduleRequestRecipientDetails.attributeTypeMap = [
+  {
+    "name": "emails",
+    "baseName": "emails",
+    "type": "Array<string>",
+    "format": ""
+  },
+  {
+    "name": "principals",
+    "baseName": "principals",
+    "type": "Array<PrincipalsListItemInput>",
+    "format": ""
+  }
+];
+var UpdateScheduleRequestRecipientDetails = _UpdateScheduleRequestRecipientDetails;
 
 // models/UpdateSystemConfigRequest.ts
 var _UpdateSystemConfigRequest = class _UpdateSystemConfigRequest {
@@ -7830,6 +9256,12 @@ _User.attributeTypeMap = [
     "baseName": "extended_preferences",
     "type": "any",
     "format": ""
+  },
+  {
+    "name": "user_parameters",
+    "baseName": "user_parameters",
+    "type": "any",
+    "format": ""
   }
 ];
 var User = _User;
@@ -8052,6 +9484,185 @@ _UserGroupResponse.attributeTypeMap = [
 ];
 var UserGroupResponse = _UserGroupResponse;
 
+// models/UserObject.ts
+var _UserObject = class _UserObject {
+  static getAttributeTypeMap() {
+    return _UserObject.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_UserObject.discriminator = void 0;
+_UserObject.attributeTypeMap = [
+  {
+    "name": "type",
+    "baseName": "type",
+    "type": "UserObjectTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "identifier",
+    "baseName": "identifier",
+    "type": "string",
+    "format": ""
+  }
+];
+var UserObject = _UserObject;
+
+// models/UserParameterOptions.ts
+var _UserParameterOptions = class _UserParameterOptions {
+  static getAttributeTypeMap() {
+    return _UserParameterOptions.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_UserParameterOptions.discriminator = void 0;
+_UserParameterOptions.attributeTypeMap = [
+  {
+    "name": "objects",
+    "baseName": "objects",
+    "type": "Array<UserObject>",
+    "format": ""
+  },
+  {
+    "name": "runtime_filters",
+    "baseName": "runtime_filters",
+    "type": "Array<UserRuntimeFilters>",
+    "format": ""
+  },
+  {
+    "name": "runtime_sorts",
+    "baseName": "runtime_sorts",
+    "type": "Array<UserRuntimeSorts>",
+    "format": ""
+  },
+  {
+    "name": "parameters",
+    "baseName": "parameters",
+    "type": "Array<UserParameters>",
+    "format": ""
+  }
+];
+var UserParameterOptions = _UserParameterOptions;
+
+// models/UserParameters.ts
+var _UserParameters = class _UserParameters {
+  static getAttributeTypeMap() {
+    return _UserParameters.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_UserParameters.discriminator = void 0;
+_UserParameters.attributeTypeMap = [
+  {
+    "name": "name",
+    "baseName": "name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "values",
+    "baseName": "values",
+    "type": "Array<string>",
+    "format": ""
+  },
+  {
+    "name": "persist",
+    "baseName": "persist",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "objects",
+    "baseName": "objects",
+    "type": "Array<UserObject>",
+    "format": ""
+  }
+];
+var UserParameters = _UserParameters;
+
+// models/UserRuntimeFilters.ts
+var _UserRuntimeFilters = class _UserRuntimeFilters {
+  static getAttributeTypeMap() {
+    return _UserRuntimeFilters.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_UserRuntimeFilters.discriminator = void 0;
+_UserRuntimeFilters.attributeTypeMap = [
+  {
+    "name": "column_name",
+    "baseName": "column_name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "values",
+    "baseName": "values",
+    "type": "Array<string>",
+    "format": ""
+  },
+  {
+    "name": "operator",
+    "baseName": "operator",
+    "type": "UserRuntimeFiltersOperatorEnum",
+    "format": ""
+  },
+  {
+    "name": "persist",
+    "baseName": "persist",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "objects",
+    "baseName": "objects",
+    "type": "Array<UserObject>",
+    "format": ""
+  }
+];
+var UserRuntimeFilters = _UserRuntimeFilters;
+
+// models/UserRuntimeSorts.ts
+var _UserRuntimeSorts = class _UserRuntimeSorts {
+  static getAttributeTypeMap() {
+    return _UserRuntimeSorts.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_UserRuntimeSorts.discriminator = void 0;
+_UserRuntimeSorts.attributeTypeMap = [
+  {
+    "name": "column_name",
+    "baseName": "column_name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "order",
+    "baseName": "order",
+    "type": "UserRuntimeSortsOrderEnum",
+    "format": ""
+  },
+  {
+    "name": "persist",
+    "baseName": "persist",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "objects",
+    "baseName": "objects",
+    "type": "Array<UserObject>",
+    "format": ""
+  }
+];
+var UserRuntimeSorts = _UserRuntimeSorts;
+
 // models/ValidateMergeRequest.ts
 var _ValidateMergeRequest = class _ValidateMergeRequest {
   static getAttributeTypeMap() {
@@ -8077,24 +9688,24 @@ _ValidateMergeRequest.attributeTypeMap = [
 ];
 var ValidateMergeRequest = _ValidateMergeRequest;
 
-// models/VisualizationIdentifiersInput.ts
-var _VisualizationIdentifiersInput = class _VisualizationIdentifiersInput {
+// models/ValidateTokenRequest.ts
+var _ValidateTokenRequest = class _ValidateTokenRequest {
   static getAttributeTypeMap() {
-    return _VisualizationIdentifiersInput.attributeTypeMap;
+    return _ValidateTokenRequest.attributeTypeMap;
   }
   constructor() {
   }
 };
-_VisualizationIdentifiersInput.discriminator = void 0;
-_VisualizationIdentifiersInput.attributeTypeMap = [
+_ValidateTokenRequest.discriminator = void 0;
+_ValidateTokenRequest.attributeTypeMap = [
   {
-    "name": "identifier",
-    "baseName": "identifier",
+    "name": "token",
+    "baseName": "token",
     "type": "string",
     "format": ""
   }
 ];
-var VisualizationIdentifiersInput = _VisualizationIdentifiersInput;
+var ValidateTokenRequest = _ValidateTokenRequest;
 
 // middleware.ts
 var PromiseMiddlewareWrapper = class {
@@ -8221,6 +9832,7 @@ var enumsMap = /* @__PURE__ */ new Set([
   "CreateScheduleRequestMetadataTypeEnum",
   "CreateScheduleRequestFileFormatEnum",
   "CreateScheduleRequestTimeZoneEnum",
+  "CreateScheduleRequestPdfOptionsPageSizeEnum",
   "CreateUserGroupRequestPrivilegesEnum",
   "CreateUserGroupRequestTypeEnum",
   "CreateUserGroupRequestVisibilityEnum",
@@ -8229,22 +9841,31 @@ var enumsMap = /* @__PURE__ */ new Set([
   "CreateUserRequestVisibilityEnum",
   "CreateUserRequestPreferredLocaleEnum",
   "CustomActionMetadataTypeInputTypeEnum",
+  "DbtConnectionRequestImportTypeEnum",
+  "DbtGenerateTmlRequestImportWorksheetsEnum",
   "DeleteMetadataTypeInputTypeEnum",
   "DeployCommitRequestDeployTypeEnum",
   "DeployCommitRequestDeployPolicyEnum",
   "ExcludeMetadataListItemInputTypeEnum",
   "ExportAnswerReportRequestFileFormatEnum",
   "ExportLiveboardReportRequestFileFormatEnum",
+  "ExportLiveboardReportRequestPdfOptionsPageOrientationEnum",
+  "ExportMetadataTMLBatchedRequestMetadataTypeEnum",
+  "ExportMetadataTMLBatchedRequestEdocFormatEnum",
   "ExportMetadataTMLRequestEdocFormatEnum",
+  "ExportMetadataTMLRequestExportSchemaVersionEnum",
   "ExportMetadataTypeInputTypeEnum",
   "FavoriteMetadataInputTypeEnum",
   "FavoriteMetadataItemTypeEnum",
   "FetchAnswerDataRequestDataFormatEnum",
   "FetchLiveboardDataRequestDataFormatEnum",
   "FetchLogsRequestLogTypeEnum",
+  "FetchPermissionsOfPrincipalsRequestDefaultMetadataTypeEnum",
   "GroupsImportListInputPrivilegesEnum",
   "GroupsImportListInputTypeEnum",
   "GroupsImportListInputVisibilityEnum",
+  "ImportEPackAsyncTaskStatusTaskStatusEnum",
+  "ImportEPackAsyncTaskStatusImportPolicyEnum",
   "ImportMetadataTMLRequestImportPolicyEnum",
   "ImportUserAccountTypeEnum",
   "ImportUserAccountStatusEnum",
@@ -8257,7 +9878,6 @@ var enumsMap = /* @__PURE__ */ new Set([
   "MetadataSearchResponseMetadataTypeEnum",
   "MetadataSearchSortOptionsFieldNameEnum",
   "MetadataSearchSortOptionsOrderEnum",
-  "MetadataTypeInputTypeEnum",
   "OrgResponseStatusEnum",
   "OrgResponseVisibilityEnum",
   "PdfOptionsPageSizeEnum",
@@ -8273,10 +9893,14 @@ var enumsMap = /* @__PURE__ */ new Set([
   "SearchConnectionRequestDataWarehouseTypesEnum",
   "SearchConnectionRequestDataWarehouseObjectTypeEnum",
   "SearchConnectionRequestAuthenticationTypeEnum",
+  "SearchConnectionRequestSortOptionsFieldNameEnum",
+  "SearchConnectionRequestSortOptionsOrderEnum",
   "SearchConnectionResponseDataWarehouseTypeEnum",
   "SearchCustomActionsRequestTypeEnum",
   "SearchDataRequestDataFormatEnum",
   "SearchMetadataRequestDependentObjectVersionEnum",
+  "SearchMetadataRequestSortOptionsFieldNameEnum",
+  "SearchMetadataRequestSortOptionsOrderEnum",
   "SearchOrgsRequestVisibilityEnum",
   "SearchOrgsRequestStatusEnum",
   "SearchRoleResponsePrivilegesEnum",
@@ -8286,11 +9910,16 @@ var enumsMap = /* @__PURE__ */ new Set([
   "SearchUserGroupsRequestPrivilegesEnum",
   "SearchUserGroupsRequestTypeEnum",
   "SearchUserGroupsRequestVisibilityEnum",
+  "SearchUserGroupsRequestSortOptionsFieldNameEnum",
+  "SearchUserGroupsRequestSortOptionsOrderEnum",
   "SearchUsersRequestVisibilityEnum",
   "SearchUsersRequestPrivilegesEnum",
   "SearchUsersRequestAccountTypeEnum",
   "SearchUsersRequestAccountStatusEnum",
+  "SearchUsersRequestSortOptionsFieldNameEnum",
+  "SearchUsersRequestSortOptionsOrderEnum",
   "ShareMetadataRequestMetadataTypeEnum",
+  "ShareMetadataTypeInputTypeEnum",
   "SharePermissionsInputShareModeEnum",
   "SortOptionInputFieldNameEnum",
   "SortOptionInputOrderEnum",
@@ -8299,12 +9928,14 @@ var enumsMap = /* @__PURE__ */ new Set([
   "SqlQueryResponseMetadataTypeEnum",
   "TagMetadataTypeInputTypeEnum",
   "UpdateCustomActionRequestOperationEnum",
+  "UpdateDbtConnectionRequestImportTypeEnum",
   "UpdateOrgRequestOperationEnum",
   "UpdateRoleRequestPrivilegesEnum",
   "UpdateScheduleRequestMetadataTypeEnum",
   "UpdateScheduleRequestFileFormatEnum",
   "UpdateScheduleRequestTimeZoneEnum",
   "UpdateScheduleRequestStatusEnum",
+  "UpdateScheduleRequestPdfOptionsPageSizeEnum",
   "UpdateUserGroupRequestPrivilegesEnum",
   "UpdateUserGroupRequestTypeEnum",
   "UpdateUserGroupRequestVisibilityEnum",
@@ -8320,7 +9951,10 @@ var enumsMap = /* @__PURE__ */ new Set([
   "UserParentTypeEnum",
   "UserGroupResponseParentTypeEnum",
   "UserGroupResponseTypeEnum",
-  "UserGroupResponseVisibilityEnum"
+  "UserGroupResponseVisibilityEnum",
+  "UserObjectTypeEnum",
+  "UserRuntimeFiltersOperatorEnum",
+  "UserRuntimeSortsOrderEnum"
 ]);
 var typeMap = {
   "APIKey": APIKey,
@@ -8331,6 +9965,7 @@ var typeMap = {
   "ActionDetails": ActionDetails,
   "ActionDetailsInput": ActionDetailsInput,
   "ActionDetailsInputCreate": ActionDetailsInputCreate,
+  "ActivateUserRequest": ActivateUserRequest,
   "AnswerContent": AnswerContent,
   "AnswerDataResponse": AnswerDataResponse,
   "AssignChangeAuthorRequest": AssignChangeAuthorRequest,
@@ -8359,9 +9994,15 @@ var typeMap = {
   "CreateConnectionRequest": CreateConnectionRequest,
   "CreateConnectionResponse": CreateConnectionResponse,
   "CreateCustomActionRequest": CreateCustomActionRequest,
+  "CreateCustomActionRequestActionDetails": CreateCustomActionRequestActionDetails,
+  "CreateCustomActionRequestDefaultActionConfig": CreateCustomActionRequestDefaultActionConfig,
   "CreateOrgRequest": CreateOrgRequest,
   "CreateRoleRequest": CreateRoleRequest,
   "CreateScheduleRequest": CreateScheduleRequest,
+  "CreateScheduleRequestFrequency": CreateScheduleRequestFrequency,
+  "CreateScheduleRequestLiveboardOptions": CreateScheduleRequestLiveboardOptions,
+  "CreateScheduleRequestPdfOptions": CreateScheduleRequestPdfOptions,
+  "CreateScheduleRequestRecipientDetails": CreateScheduleRequestRecipientDetails,
   "CreateTagRequest": CreateTagRequest,
   "CreateUserGroupRequest": CreateUserGroupRequest,
   "CreateUserRequest": CreateUserRequest,
@@ -8371,6 +10012,11 @@ var typeMap = {
   "DataWarehouseObjectInput": DataWarehouseObjectInput,
   "DataWarehouseObjects": DataWarehouseObjects,
   "Database": Database,
+  "DbtConnectionRequest": DbtConnectionRequest,
+  "DbtGenerateSyncTmlRequest": DbtGenerateSyncTmlRequest,
+  "DbtGenerateTmlRequest": DbtGenerateTmlRequest,
+  "DbtSearchResponse": DbtSearchResponse,
+  "DeactivateUserRequest": DeactivateUserRequest,
   "DefaultActionConfig": DefaultActionConfig,
   "DefaultActionConfigInput": DefaultActionConfigInput,
   "DefaultActionConfigInputCreate": DefaultActionConfigInputCreate,
@@ -8385,6 +10031,9 @@ var typeMap = {
   "ExcludeMetadataListItemInput": ExcludeMetadataListItemInput,
   "ExportAnswerReportRequest": ExportAnswerReportRequest,
   "ExportLiveboardReportRequest": ExportLiveboardReportRequest,
+  "ExportLiveboardReportRequestPdfOptions": ExportLiveboardReportRequestPdfOptions,
+  "ExportLiveboardReportRequestPngOptions": ExportLiveboardReportRequestPngOptions,
+  "ExportMetadataTMLBatchedRequest": ExportMetadataTMLBatchedRequest,
   "ExportMetadataTMLRequest": ExportMetadataTMLRequest,
   "ExportMetadataTypeInput": ExportMetadataTypeInput,
   "FavoriteMetadataInput": FavoriteMetadataInput,
@@ -8392,6 +10041,7 @@ var typeMap = {
   "FavoriteObjectOptionsInput": FavoriteObjectOptionsInput,
   "FetchAnswerDataRequest": FetchAnswerDataRequest,
   "FetchAnswerSqlQueryRequest": FetchAnswerSqlQueryRequest,
+  "FetchConnectionDiffStatusResponse": FetchConnectionDiffStatusResponse,
   "FetchLiveboardDataRequest": FetchLiveboardDataRequest,
   "FetchLiveboardSqlQueryRequest": FetchLiveboardSqlQueryRequest,
   "FetchLogsRequest": FetchLogsRequest,
@@ -8401,10 +10051,13 @@ var typeMap = {
   "Frequency": Frequency,
   "FrequencyInput": FrequencyInput,
   "GenericInfo": GenericInfo,
+  "GetAsyncImportStatusResponse": GetAsyncImportStatusResponse,
   "GetFullAccessTokenRequest": GetFullAccessTokenRequest,
   "GetObjectAccessTokenRequest": GetObjectAccessTokenRequest,
+  "GetObjectAccessTokenRequestUserParameters": GetObjectAccessTokenRequestUserParameters,
   "GetTokenResponse": GetTokenResponse,
   "GroupsImportListInput": GroupsImportListInput,
+  "ImportEPackAsyncTaskStatus": ImportEPackAsyncTaskStatus,
   "ImportMetadataTMLRequest": ImportMetadataTMLRequest,
   "ImportUser": ImportUser,
   "ImportUserGroupsRequest": ImportUserGroupsRequest,
@@ -8415,6 +10068,7 @@ var typeMap = {
   "JWTMetadataObject": JWTMetadataObject,
   "JWTParameter": JWTParameter,
   "JWTUserOptions": JWTUserOptions,
+  "JWTUserOptionsFull": JWTUserOptionsFull,
   "JWTUserOptionsParametersInner": JWTUserOptionsParametersInner,
   "LiveboardContent": LiveboardContent,
   "LiveboardDataResponse": LiveboardDataResponse,
@@ -8429,7 +10083,6 @@ var typeMap = {
   "MetadataResponse": MetadataResponse,
   "MetadataSearchResponse": MetadataSearchResponse,
   "MetadataSearchSortOptions": MetadataSearchSortOptions,
-  "MetadataTypeInput": MetadataTypeInput,
   "ModelTableList": ModelTableList,
   "ObjectIDAndName": ObjectIDAndName,
   "Org": Org,
@@ -8439,6 +10092,8 @@ var typeMap = {
   "PdfOptions": PdfOptions,
   "PdfOptionsInput": PdfOptionsInput,
   "PermissionInput": PermissionInput,
+  "PermissionOfMetadataResponse": PermissionOfMetadataResponse,
+  "PermissionOfPrincipalsResponse": PermissionOfPrincipalsResponse,
   "PermissionsMetadataTypeInput": PermissionsMetadataTypeInput,
   "PngOptionsInput": PngOptionsInput,
   "PrincipalsInput": PrincipalsInput,
@@ -8449,6 +10104,7 @@ var typeMap = {
   "RepoConfigObject": RepoConfigObject,
   "ResetUserPasswordRequest": ResetUserPasswordRequest,
   "ResponseActivationURL": ResponseActivationURL,
+  "ResponseCopyObject": ResponseCopyObject,
   "ResponseCustomAction": ResponseCustomAction,
   "ResponseSchedule": ResponseSchedule,
   "ResponseScheduleRun": ResponseScheduleRun,
@@ -8469,19 +10125,28 @@ var typeMap = {
   "SearchCommitsRequest": SearchCommitsRequest,
   "SearchConfigRequest": SearchConfigRequest,
   "SearchConnectionRequest": SearchConnectionRequest,
+  "SearchConnectionRequestSortOptions": SearchConnectionRequestSortOptions,
   "SearchConnectionResponse": SearchConnectionResponse,
   "SearchCustomActionsRequest": SearchCustomActionsRequest,
+  "SearchCustomActionsRequestDefaultActionConfig": SearchCustomActionsRequestDefaultActionConfig,
   "SearchDataRequest": SearchDataRequest,
   "SearchDataResponse": SearchDataResponse,
   "SearchMetadataRequest": SearchMetadataRequest,
+  "SearchMetadataRequestFavoriteObjectOptions": SearchMetadataRequestFavoriteObjectOptions,
+  "SearchMetadataRequestSortOptions": SearchMetadataRequestSortOptions,
   "SearchOrgsRequest": SearchOrgsRequest,
   "SearchRoleResponse": SearchRoleResponse,
   "SearchRolesRequest": SearchRolesRequest,
   "SearchSchedulesRequest": SearchSchedulesRequest,
+  "SearchSchedulesRequestHistoryRunsOptions": SearchSchedulesRequestHistoryRunsOptions,
+  "SearchSchedulesRequestSortOptions": SearchSchedulesRequestSortOptions,
   "SearchTagsRequest": SearchTagsRequest,
   "SearchUserGroupsRequest": SearchUserGroupsRequest,
+  "SearchUserGroupsRequestSortOptions": SearchUserGroupsRequestSortOptions,
   "SearchUsersRequest": SearchUsersRequest,
+  "SearchUsersRequestSortOptions": SearchUsersRequestSortOptions,
   "ShareMetadataRequest": ShareMetadataRequest,
+  "ShareMetadataTypeInput": ShareMetadataTypeInput,
   "SharePermissionsInput": SharePermissionsInput,
   "SortOptionInput": SortOptionInput,
   "SortOptions": SortOptions,
@@ -8494,15 +10159,24 @@ var typeMap = {
   "Tag": Tag,
   "TagMetadataTypeInput": TagMetadataTypeInput,
   "Token": Token,
+  "TokenValidationResponse": TokenValidationResponse,
   "URL": URL2,
   "URLInput": URLInput,
   "URLInputMandatory": URLInputMandatory,
   "UpdateConfigRequest": UpdateConfigRequest,
   "UpdateConnectionRequest": UpdateConnectionRequest,
+  "UpdateConnectionV2Request": UpdateConnectionV2Request,
   "UpdateCustomActionRequest": UpdateCustomActionRequest,
+  "UpdateCustomActionRequestActionDetails": UpdateCustomActionRequestActionDetails,
+  "UpdateCustomActionRequestDefaultActionConfig": UpdateCustomActionRequestDefaultActionConfig,
+  "UpdateDbtConnectionRequest": UpdateDbtConnectionRequest,
   "UpdateOrgRequest": UpdateOrgRequest,
   "UpdateRoleRequest": UpdateRoleRequest,
   "UpdateScheduleRequest": UpdateScheduleRequest,
+  "UpdateScheduleRequestFrequency": UpdateScheduleRequestFrequency,
+  "UpdateScheduleRequestLiveboardOptions": UpdateScheduleRequestLiveboardOptions,
+  "UpdateScheduleRequestPdfOptions": UpdateScheduleRequestPdfOptions,
+  "UpdateScheduleRequestRecipientDetails": UpdateScheduleRequestRecipientDetails,
   "UpdateSystemConfigRequest": UpdateSystemConfigRequest,
   "UpdateTagRequest": UpdateTagRequest,
   "UpdateUserGroupRequest": UpdateUserGroupRequest,
@@ -8510,8 +10184,13 @@ var typeMap = {
   "User": User,
   "UserGroup": UserGroup,
   "UserGroupResponse": UserGroupResponse,
+  "UserObject": UserObject,
+  "UserParameterOptions": UserParameterOptions,
+  "UserParameters": UserParameters,
+  "UserRuntimeFilters": UserRuntimeFilters,
+  "UserRuntimeSorts": UserRuntimeSorts,
   "ValidateMergeRequest": ValidateMergeRequest,
-  "VisualizationIdentifiersInput": VisualizationIdentifiersInput
+  "ValidateTokenRequest": ValidateTokenRequest
 };
 var ObjectSerializer = class _ObjectSerializer {
   static findCorrectType(data, expectedType) {
@@ -8825,6 +10504,9 @@ var AuthenticationApiRequestFactory = class extends BaseAPIRequestFactory {
     return __async(this, null, function* () {
       var _a, _b, _c;
       let _config = _options || this.configuration;
+      if (loginRequest === null || loginRequest === void 0) {
+        throw new RequiredError("AuthenticationApi", "login", "loginRequest");
+      }
       const localVarPath = "/api/rest/2.0/auth/session/login";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
@@ -8881,6 +10563,9 @@ var AuthenticationApiRequestFactory = class extends BaseAPIRequestFactory {
     return __async(this, null, function* () {
       var _a, _b, _c;
       let _config = _options || this.configuration;
+      if (revokeTokenRequest === null || revokeTokenRequest === void 0) {
+        throw new RequiredError("AuthenticationApi", "revokeToken", "revokeTokenRequest");
+      }
       const localVarPath = "/api/rest/2.0/auth/token/revoke";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
@@ -8891,6 +10576,42 @@ var AuthenticationApiRequestFactory = class extends BaseAPIRequestFactory {
       requestContext.setHeaderParam("Content-Type", contentType);
       const serializedBody = ObjectSerializer.stringify(
         ObjectSerializer.serialize(revokeTokenRequest, "RevokeTokenRequest", ""),
+        contentType
+      );
+      requestContext.setBody(serializedBody);
+      let authMethod;
+      authMethod = _config.authMethods["bearerAuth"];
+      if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
+        yield authMethod == null ? void 0 : authMethod.applySecurityAuthentication(requestContext);
+      }
+      const defaultAuth = ((_a = _options == null ? void 0 : _options.authMethods) == null ? void 0 : _a.default) || ((_c = (_b = this.configuration) == null ? void 0 : _b.authMethods) == null ? void 0 : _c.default);
+      if (defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication) {
+        yield defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication(requestContext);
+      }
+      return requestContext;
+    });
+  }
+  /**
+   *  Version: 9.12.0.cl or later 
+   * @param validateTokenRequest 
+   */
+  validateToken(validateTokenRequest, _options) {
+    return __async(this, null, function* () {
+      var _a, _b, _c;
+      let _config = _options || this.configuration;
+      if (validateTokenRequest === null || validateTokenRequest === void 0) {
+        throw new RequiredError("AuthenticationApi", "validateToken", "validateTokenRequest");
+      }
+      const localVarPath = "/api/rest/2.0/auth/token/validate";
+      const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
+      requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+      const contentType = ObjectSerializer.getPreferredMediaType([
+        "application/json"
+      ]);
+      requestContext.setHeaderParam("Content-Type", contentType);
+      const serializedBody = ObjectSerializer.stringify(
+        ObjectSerializer.serialize(validateTokenRequest, "ValidateTokenRequest", ""),
         contentType
       );
       requestContext.setBody(serializedBody);
@@ -9320,6 +11041,67 @@ var AuthenticationApiResponseProcessor = class {
       throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", yield response.getBodyAsAny(), response.headers);
     });
   }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
+   * @params response Response returned by the server for a request to validateToken
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  validateToken(response) {
+    return __async(this, null, function* () {
+      const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+      if (isCodeInRange("200", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "TokenValidationResponse",
+          ""
+        );
+        return body;
+      }
+      if (isCodeInRange("400", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
+      }
+      if (isCodeInRange("401", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+      }
+      if (isCodeInRange("403", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+      }
+      if (isCodeInRange("500", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+      }
+      if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "TokenValidationResponse",
+          ""
+        );
+        return body;
+      }
+      throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", yield response.getBodyAsAny(), response.headers);
+    });
+  }
 };
 
 // apis/ConnectionsApi.ts
@@ -9397,6 +11179,87 @@ var ConnectionsApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
+   *   Version: 10.0.0.cl or later   Deletes a connection object.  **Note**: If a connection has dependent objects, make sure you remove its associations before the delete operation.  Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   * @param connectionIdentifier Unique ID or name of the connection.
+   */
+  deleteConnectionV2(connectionIdentifier, _options) {
+    return __async(this, null, function* () {
+      var _a, _b, _c;
+      let _config = _options || this.configuration;
+      if (connectionIdentifier === null || connectionIdentifier === void 0) {
+        throw new RequiredError("ConnectionsApi", "deleteConnectionV2", "connectionIdentifier");
+      }
+      const localVarPath = "/api/rest/2.0/connections/delete/{connection_identifier}".replace("{connection_identifier}", encodeURIComponent(String(connectionIdentifier)));
+      const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
+      requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+      let authMethod;
+      authMethod = _config.authMethods["bearerAuth"];
+      if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
+        yield authMethod == null ? void 0 : authMethod.applySecurityAuthentication(requestContext);
+      }
+      const defaultAuth = ((_a = _options == null ? void 0 : _options.authMethods) == null ? void 0 : _a.default) || ((_c = (_b = this.configuration) == null ? void 0 : _b.authMethods) == null ? void 0 : _c.default);
+      if (defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication) {
+        yield defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication(requestContext);
+      }
+      return requestContext;
+    });
+  }
+  /**
+   *   Version: 9.9.0.cl or later   Exports the difference in connection metadata between CDW and ThoughtSpot  Requires `DATAMANAGEMENT` (**Can manage data**) privilege  To download the connection metadata difference between ThoughtSpot and CDW, pass the connection GUID as `connection_identifier` in the API request.      
+   * @param connectionIdentifier GUID of the connection
+   */
+  downloadConnectionMetadataChanges(connectionIdentifier, _options) {
+    return __async(this, null, function* () {
+      var _a, _b, _c;
+      let _config = _options || this.configuration;
+      if (connectionIdentifier === null || connectionIdentifier === void 0) {
+        throw new RequiredError("ConnectionsApi", "downloadConnectionMetadataChanges", "connectionIdentifier");
+      }
+      const localVarPath = "/api/rest/2.0/connections/download-connection-metadata-changes/{connection_identifier}".replace("{connection_identifier}", encodeURIComponent(String(connectionIdentifier)));
+      const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
+      requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+      let authMethod;
+      authMethod = _config.authMethods["bearerAuth"];
+      if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
+        yield authMethod == null ? void 0 : authMethod.applySecurityAuthentication(requestContext);
+      }
+      const defaultAuth = ((_a = _options == null ? void 0 : _options.authMethods) == null ? void 0 : _a.default) || ((_c = (_b = this.configuration) == null ? void 0 : _b.authMethods) == null ? void 0 : _c.default);
+      if (defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication) {
+        yield defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication(requestContext);
+      }
+      return requestContext;
+    });
+  }
+  /**
+   *   Version: 9.9.0.cl or later   Validates the difference in connection metadata between CDW and ThoughtSpot  Requires `DATAMANAGEMENT` (**Can manage data**) privilege  Returns a boolean indicating whether there is any difference between the connection metadata at ThoughtSpot and CDW.  To get the connection metadata difference status, pass the connection GUID as `connection_identifier` in the API request.      
+   * @param connectionIdentifier GUID of the connection
+   */
+  fetchConnectionDiffStatus(connectionIdentifier, _options) {
+    return __async(this, null, function* () {
+      var _a, _b, _c;
+      let _config = _options || this.configuration;
+      if (connectionIdentifier === null || connectionIdentifier === void 0) {
+        throw new RequiredError("ConnectionsApi", "fetchConnectionDiffStatus", "connectionIdentifier");
+      }
+      const localVarPath = "/api/rest/2.0/connections/fetch-connection-diff-status/{connection_identifier}".replace("{connection_identifier}", encodeURIComponent(String(connectionIdentifier)));
+      const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
+      requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+      let authMethod;
+      authMethod = _config.authMethods["bearerAuth"];
+      if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
+        yield authMethod == null ? void 0 : authMethod.applySecurityAuthentication(requestContext);
+      }
+      const defaultAuth = ((_a = _options == null ? void 0 : _options.authMethods) == null ? void 0 : _a.default) || ((_c = (_b = this.configuration) == null ? void 0 : _b.authMethods) == null ? void 0 : _c.default);
+      if (defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication) {
+        yield defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication(requestContext);
+      }
+      return requestContext;
+    });
+  }
+  /**
    *   Version: 9.2.0.cl or later   Gets connection objects. Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  - To get a list of all connections available in the ThoughtSpot system, send the API request without any attributes in the request body. - To get the connection objects for a specific type of data warehouse, specify the type in `data_warehouse_types`. - To fetch details of a connection object, specify the connection object GUID or name. The `name_pattern` attribute allows passing partial text with `%` for a wildcard match. - To get details of the database, schemas, tables, or columns from a data connection object, specify `data_warehouse_object_type`. - To get a specific database, schema, table, or column from a connection object, define the object type in `data_warehouse_object_type` and object properties in the `data_warehouse_objects` array. For example, to search for a column, you must pass the database, schema, and table names in the API request.   Note that in the following example, object properties are set in a hierarchical order (`database` > `schema` > `table` > `column`).  ``` {   \"connections\": [     {       \"identifier\": \"b9d1f2ef-fa65-4a4b-994e-30fa2d57b0c2\",       \"data_warehouse_objects\": [         {           \"database\": \"NEBULADEV\",           \"schema\": \"INFORMATION_SCHEMA\",           \"table\": \"APPLICABLE_ROLES\",           \"column\": \"ROLE_NAME\"         }       ]     }   ],   \"data_warehouse_object_type\": \"COLUMN\" } ```  - To fetch data by `configuration`, specify `data_warehouse_object_type`. For example, to fetch columns from the `DEVELOPMENT` database, specify the `data_warehouse_object_type` as `DATABASE` and define the `configuration` string as `{\"database\":\"DEVELOPMENT\"}`. To get column data for a specific table, specify the table, for example,`{\"database\":\"RETAILAPPAREL\",\"table\":\"PIPES\"}`. - To query connections by `authentication_type`, specify `data_warehouse_object_type`. Supported values for `authentication_type` are:   - `SERVICE_ACCOUNT`: For connections that require service account credentials to authenticate to the Cloud Data Warehouse and fetch data.   - `OAUTH`: For connections that require OAuth credentials to authenticate to the Cloud Data Warehouse and fetch data. Teradata, Oracle, and Presto Cloud Data Warehouses do not support the OAuth authentication type.   - `IAM`: For connections that have the IAM OAuth set up. This authentication type is supported on Amazon Redshift connections only.   - `EXTOAUTH`: For connections that have external OAuth set up. ThoughtSpot supports external [OAuth with Microsoft Azure Active Directory (AD)](https://docs.thoughtspot.com/cloud/latest/ connections-snowflake-azure-ad-oauth) and [Okta for Snowflake data connections](https://docs.thoughtspot.com/cloud/latest/connections-snowflake-okta-oauth). - To include more details about connection objects in the API response, set `include_details` to `true`. - You can also sort the output by field names and filter connections by tags.  **NOTE**: When filtering connection records by parameters other than `data_warehouse_types` or `tag_identifiers`, ensure that you set `record_size` to `-1` and `record_offset` to `0` for precise results.      
    * @param searchConnectionRequest 
    */
@@ -9404,6 +11267,9 @@ var ConnectionsApiRequestFactory = class extends BaseAPIRequestFactory {
     return __async(this, null, function* () {
       var _a, _b, _c;
       let _config = _options || this.configuration;
+      if (searchConnectionRequest === null || searchConnectionRequest === void 0) {
+        throw new RequiredError("ConnectionsApi", "searchConnection", "searchConnectionRequest");
+      }
       const localVarPath = "/api/rest/2.0/connection/search";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
@@ -9450,6 +11316,46 @@ var ConnectionsApiRequestFactory = class extends BaseAPIRequestFactory {
       requestContext.setHeaderParam("Content-Type", contentType);
       const serializedBody = ObjectSerializer.stringify(
         ObjectSerializer.serialize(updateConnectionRequest, "UpdateConnectionRequest", ""),
+        contentType
+      );
+      requestContext.setBody(serializedBody);
+      let authMethod;
+      authMethod = _config.authMethods["bearerAuth"];
+      if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
+        yield authMethod == null ? void 0 : authMethod.applySecurityAuthentication(requestContext);
+      }
+      const defaultAuth = ((_a = _options == null ? void 0 : _options.authMethods) == null ? void 0 : _a.default) || ((_c = (_b = this.configuration) == null ? void 0 : _b.authMethods) == null ? void 0 : _c.default);
+      if (defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication) {
+        yield defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication(requestContext);
+      }
+      return requestContext;
+    });
+  }
+  /**
+   *   Version: 10.0.0.cl or later   Updates a connection object.  Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  To update a connection object, pass these parameters in your API request:  1. GUID of the connection object. 2. If you are updating tables or database schema of a connection object:    a. Add the updated JSON map of metadata with database, schema, and tables in `data_warehouse_config`.    b. Set `validate` to `true`. 3. If you are updating a configuration attribute, connection name, or description, you can set `validate` to `false`.      
+   * @param connectionIdentifier Unique ID or name of the connection.
+   * @param updateConnectionV2Request 
+   */
+  updateConnectionV2(connectionIdentifier, updateConnectionV2Request, _options) {
+    return __async(this, null, function* () {
+      var _a, _b, _c;
+      let _config = _options || this.configuration;
+      if (connectionIdentifier === null || connectionIdentifier === void 0) {
+        throw new RequiredError("ConnectionsApi", "updateConnectionV2", "connectionIdentifier");
+      }
+      if (updateConnectionV2Request === null || updateConnectionV2Request === void 0) {
+        throw new RequiredError("ConnectionsApi", "updateConnectionV2", "updateConnectionV2Request");
+      }
+      const localVarPath = "/api/rest/2.0/connections/update/{connection_identifier}".replace("{connection_identifier}", encodeURIComponent(String(connectionIdentifier)));
+      const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
+      requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+      const contentType = ObjectSerializer.getPreferredMediaType([
+        "application/json"
+      ]);
+      requestContext.setHeaderParam("Content-Type", contentType);
+      const serializedBody = ObjectSerializer.stringify(
+        ObjectSerializer.serialize(updateConnectionV2Request, "UpdateConnectionV2Request", ""),
         contentType
       );
       requestContext.setBody(serializedBody);
@@ -9588,6 +11494,179 @@ var ConnectionsApiResponseProcessor = class {
    * Unwraps the actual response sent by the server from the response context and deserializes the response content
    * to the expected objects
    *
+   * @params response Response returned by the server for a request to deleteConnectionV2
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  deleteConnectionV2(response) {
+    return __async(this, null, function* () {
+      const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+      if (isCodeInRange("204", response.httpStatusCode)) {
+        return;
+      }
+      if (isCodeInRange("400", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
+      }
+      if (isCodeInRange("401", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+      }
+      if (isCodeInRange("403", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+      }
+      if (isCodeInRange("500", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+      }
+      if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "void",
+          ""
+        );
+        return body;
+      }
+      throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", yield response.getBodyAsAny(), response.headers);
+    });
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
+   * @params response Response returned by the server for a request to downloadConnectionMetadataChanges
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  downloadConnectionMetadataChanges(response) {
+    return __async(this, null, function* () {
+      const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+      if (isCodeInRange("200", response.httpStatusCode)) {
+        return;
+      }
+      if (isCodeInRange("400", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
+      }
+      if (isCodeInRange("401", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+      }
+      if (isCodeInRange("403", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+      }
+      if (isCodeInRange("500", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+      }
+      if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "void",
+          ""
+        );
+        return body;
+      }
+      throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", yield response.getBodyAsAny(), response.headers);
+    });
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
+   * @params response Response returned by the server for a request to fetchConnectionDiffStatus
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  fetchConnectionDiffStatus(response) {
+    return __async(this, null, function* () {
+      const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+      if (isCodeInRange("200", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "FetchConnectionDiffStatusResponse",
+          ""
+        );
+        return body;
+      }
+      if (isCodeInRange("400", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
+      }
+      if (isCodeInRange("401", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+      }
+      if (isCodeInRange("403", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+      }
+      if (isCodeInRange("500", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+      }
+      if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "FetchConnectionDiffStatusResponse",
+          ""
+        );
+        return body;
+      }
+      throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", yield response.getBodyAsAny(), response.headers);
+    });
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
    * @params response Response returned by the server for a request to searchConnection
    * @throws ApiException if the response code was not in [200, 299]
    */
@@ -9653,6 +11732,62 @@ var ConnectionsApiResponseProcessor = class {
    * @throws ApiException if the response code was not in [200, 299]
    */
   updateConnection(response) {
+    return __async(this, null, function* () {
+      const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+      if (isCodeInRange("204", response.httpStatusCode)) {
+        return;
+      }
+      if (isCodeInRange("400", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
+      }
+      if (isCodeInRange("401", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+      }
+      if (isCodeInRange("403", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+      }
+      if (isCodeInRange("500", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+      }
+      if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "void",
+          ""
+        );
+        return body;
+      }
+      throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", yield response.getBodyAsAny(), response.headers);
+    });
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
+   * @params response Response returned by the server for a request to updateConnectionV2
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  updateConnectionV2(response) {
     return __async(this, null, function* () {
       const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
       if (isCodeInRange("204", response.httpStatusCode)) {
@@ -9776,6 +11911,9 @@ var CustomActionApiRequestFactory = class extends BaseAPIRequestFactory {
     return __async(this, null, function* () {
       var _a, _b, _c;
       let _config = _options || this.configuration;
+      if (searchCustomActionsRequest === null || searchCustomActionsRequest === void 0) {
+        throw new RequiredError("CustomActionApi", "searchCustomActions", "searchCustomActionsRequest");
+      }
       const localVarPath = "/api/rest/2.0/customization/custom-actions/search";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
@@ -9812,6 +11950,9 @@ var CustomActionApiRequestFactory = class extends BaseAPIRequestFactory {
       let _config = _options || this.configuration;
       if (customActionIdentifier === null || customActionIdentifier === void 0) {
         throw new RequiredError("CustomActionApi", "updateCustomAction", "customActionIdentifier");
+      }
+      if (updateCustomActionRequest === null || updateCustomActionRequest === void 0) {
+        throw new RequiredError("CustomActionApi", "updateCustomAction", "updateCustomActionRequest");
       }
       const localVarPath = "/api/rest/2.0/customization/custom-actions/{custom_action_identifier}/update".replace("{custom_action_identifier}", encodeURIComponent(String(customActionIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
@@ -10076,10 +12217,571 @@ var CustomActionApiResponseProcessor = class {
   }
 };
 
+// apis/DBTApi.ts
+var DBTApiRequestFactory = class extends BaseAPIRequestFactory {
+  /**
+   *   Version: 9.9.0.cl or later   Creates a DBT connection object in ThoughtSpot.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege.  #### About create DBT connection DBT connection in ThoughtSpot is used by the user to define DBT credentials for cloud . The API needs  embrace connection, embrace database name, DBT url, import type, DBT account identifier, DBT project identifier, DBT access token and environment details (or) embrace connection, embrace database name, import type, file_content to create a connection object. To know more about DBT, see ThoughtSpot Product Documentation.      
+   * @param dbtConnectionRequest 
+   */
+  dbtConnection(dbtConnectionRequest, _options) {
+    return __async(this, null, function* () {
+      var _a, _b, _c;
+      let _config = _options || this.configuration;
+      if (dbtConnectionRequest === null || dbtConnectionRequest === void 0) {
+        throw new RequiredError("DBTApi", "dbtConnection", "dbtConnectionRequest");
+      }
+      const localVarPath = "/api/rest/2.0/dbt/dbt-connection";
+      const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
+      requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+      const contentType = ObjectSerializer.getPreferredMediaType([
+        "application/json"
+      ]);
+      requestContext.setHeaderParam("Content-Type", contentType);
+      const serializedBody = ObjectSerializer.stringify(
+        ObjectSerializer.serialize(dbtConnectionRequest, "DbtConnectionRequest", ""),
+        contentType
+      );
+      requestContext.setBody(serializedBody);
+      let authMethod;
+      authMethod = _config.authMethods["bearerAuth"];
+      if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
+        yield authMethod == null ? void 0 : authMethod.applySecurityAuthentication(requestContext);
+      }
+      const defaultAuth = ((_a = _options == null ? void 0 : _options.authMethods) == null ? void 0 : _a.default) || ((_c = (_b = this.configuration) == null ? void 0 : _b.authMethods) == null ? void 0 : _c.default);
+      if (defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication) {
+        yield defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication(requestContext);
+      }
+      return requestContext;
+    });
+  }
+  /**
+   *  Version: 9.9.0.cl or later 
+   * @param dbtGenerateSyncTmlRequest 
+   */
+  dbtGenerateSyncTml(dbtGenerateSyncTmlRequest, _options) {
+    return __async(this, null, function* () {
+      var _a, _b, _c;
+      let _config = _options || this.configuration;
+      if (dbtGenerateSyncTmlRequest === null || dbtGenerateSyncTmlRequest === void 0) {
+        throw new RequiredError("DBTApi", "dbtGenerateSyncTml", "dbtGenerateSyncTmlRequest");
+      }
+      const localVarPath = "/api/rest/2.0/dbt/generate-sync-tml";
+      const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
+      requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+      const contentType = ObjectSerializer.getPreferredMediaType([
+        "application/json"
+      ]);
+      requestContext.setHeaderParam("Content-Type", contentType);
+      const serializedBody = ObjectSerializer.stringify(
+        ObjectSerializer.serialize(dbtGenerateSyncTmlRequest, "DbtGenerateSyncTmlRequest", ""),
+        contentType
+      );
+      requestContext.setBody(serializedBody);
+      let authMethod;
+      authMethod = _config.authMethods["bearerAuth"];
+      if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
+        yield authMethod == null ? void 0 : authMethod.applySecurityAuthentication(requestContext);
+      }
+      const defaultAuth = ((_a = _options == null ? void 0 : _options.authMethods) == null ? void 0 : _a.default) || ((_c = (_b = this.configuration) == null ? void 0 : _b.authMethods) == null ? void 0 : _c.default);
+      if (defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication) {
+        yield defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication(requestContext);
+      }
+      return requestContext;
+    });
+  }
+  /**
+   *  Version: 9.9.0.cl or later 
+   * @param dbtGenerateTmlRequest 
+   */
+  dbtGenerateTml(dbtGenerateTmlRequest, _options) {
+    return __async(this, null, function* () {
+      var _a, _b, _c;
+      let _config = _options || this.configuration;
+      if (dbtGenerateTmlRequest === null || dbtGenerateTmlRequest === void 0) {
+        throw new RequiredError("DBTApi", "dbtGenerateTml", "dbtGenerateTmlRequest");
+      }
+      const localVarPath = "/api/rest/2.0/dbt/generate-tml";
+      const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
+      requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+      const contentType = ObjectSerializer.getPreferredMediaType([
+        "application/json"
+      ]);
+      requestContext.setHeaderParam("Content-Type", contentType);
+      const serializedBody = ObjectSerializer.stringify(
+        ObjectSerializer.serialize(dbtGenerateTmlRequest, "DbtGenerateTmlRequest", ""),
+        contentType
+      );
+      requestContext.setBody(serializedBody);
+      let authMethod;
+      authMethod = _config.authMethods["bearerAuth"];
+      if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
+        yield authMethod == null ? void 0 : authMethod.applySecurityAuthentication(requestContext);
+      }
+      const defaultAuth = ((_a = _options == null ? void 0 : _options.authMethods) == null ? void 0 : _a.default) || ((_c = (_b = this.configuration) == null ? void 0 : _b.authMethods) == null ? void 0 : _c.default);
+      if (defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication) {
+        yield defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication(requestContext);
+      }
+      return requestContext;
+    });
+  }
+  /**
+   *   Version: 9.9.0.cl or later   Gets a list of DBT connection objects by user and organization, available on the ThoughtSpot system.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege  #### About search DBT connection To get details of a specific DBT connection identifier, database connection identifier, database connection name, database name, project name, project identifier, environment identifier , import type and author.      
+   */
+  dbtSearch(_options) {
+    return __async(this, null, function* () {
+      var _a, _b, _c;
+      let _config = _options || this.configuration;
+      const localVarPath = "/api/rest/2.0/dbt/search";
+      const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
+      requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+      let authMethod;
+      authMethod = _config.authMethods["bearerAuth"];
+      if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
+        yield authMethod == null ? void 0 : authMethod.applySecurityAuthentication(requestContext);
+      }
+      const defaultAuth = ((_a = _options == null ? void 0 : _options.authMethods) == null ? void 0 : _a.default) || ((_c = (_b = this.configuration) == null ? void 0 : _b.authMethods) == null ? void 0 : _c.default);
+      if (defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication) {
+        yield defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication(requestContext);
+      }
+      return requestContext;
+    });
+  }
+  /**
+   *   Version: 9.9.0.cl or later   Removes the specified DBT connection object from the ThoughtSpot system.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege.      
+   * @param dbtConnectionIdentifier Unique ID of the DBT Connection.
+   */
+  deleteDbtConnection(dbtConnectionIdentifier, _options) {
+    return __async(this, null, function* () {
+      var _a, _b, _c;
+      let _config = _options || this.configuration;
+      if (dbtConnectionIdentifier === null || dbtConnectionIdentifier === void 0) {
+        throw new RequiredError("DBTApi", "deleteDbtConnection", "dbtConnectionIdentifier");
+      }
+      const localVarPath = "/api/rest/2.0/dbt/{dbt_connection_identifier}/delete".replace("{dbt_connection_identifier}", encodeURIComponent(String(dbtConnectionIdentifier)));
+      const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
+      requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+      let authMethod;
+      authMethod = _config.authMethods["bearerAuth"];
+      if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
+        yield authMethod == null ? void 0 : authMethod.applySecurityAuthentication(requestContext);
+      }
+      const defaultAuth = ((_a = _options == null ? void 0 : _options.authMethods) == null ? void 0 : _a.default) || ((_c = (_b = this.configuration) == null ? void 0 : _b.authMethods) == null ? void 0 : _c.default);
+      if (defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication) {
+        yield defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication(requestContext);
+      }
+      return requestContext;
+    });
+  }
+  /**
+   *   Version: 9.9.0.cl or later   Updates a DBT connection object.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege, along with an existing DBT connection.  #### About update DBT connection You can modify DBT connection object properties such as embrace connection name, embrace database name, import type, account identifier, access token, project identifier and environment (or) embrace connection, embrace database name, import type, file_content settings.      
+   * @param updateDbtConnectionRequest 
+   */
+  updateDbtConnection(updateDbtConnectionRequest, _options) {
+    return __async(this, null, function* () {
+      var _a, _b, _c;
+      let _config = _options || this.configuration;
+      if (updateDbtConnectionRequest === null || updateDbtConnectionRequest === void 0) {
+        throw new RequiredError("DBTApi", "updateDbtConnection", "updateDbtConnectionRequest");
+      }
+      const localVarPath = "/api/rest/2.0/dbt/update-dbt-connection";
+      const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
+      requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+      const contentType = ObjectSerializer.getPreferredMediaType([
+        "application/json"
+      ]);
+      requestContext.setHeaderParam("Content-Type", contentType);
+      const serializedBody = ObjectSerializer.stringify(
+        ObjectSerializer.serialize(updateDbtConnectionRequest, "UpdateDbtConnectionRequest", ""),
+        contentType
+      );
+      requestContext.setBody(serializedBody);
+      let authMethod;
+      authMethod = _config.authMethods["bearerAuth"];
+      if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
+        yield authMethod == null ? void 0 : authMethod.applySecurityAuthentication(requestContext);
+      }
+      const defaultAuth = ((_a = _options == null ? void 0 : _options.authMethods) == null ? void 0 : _a.default) || ((_c = (_b = this.configuration) == null ? void 0 : _b.authMethods) == null ? void 0 : _c.default);
+      if (defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication) {
+        yield defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication(requestContext);
+      }
+      return requestContext;
+    });
+  }
+};
+var DBTApiResponseProcessor = class {
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
+   * @params response Response returned by the server for a request to dbtConnection
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  dbtConnection(response) {
+    return __async(this, null, function* () {
+      const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+      if (isCodeInRange("200", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "any",
+          ""
+        );
+        return body;
+      }
+      if (isCodeInRange("400", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
+      }
+      if (isCodeInRange("401", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+      }
+      if (isCodeInRange("403", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+      }
+      if (isCodeInRange("500", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+      }
+      if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "any",
+          ""
+        );
+        return body;
+      }
+      throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", yield response.getBodyAsAny(), response.headers);
+    });
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
+   * @params response Response returned by the server for a request to dbtGenerateSyncTml
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  dbtGenerateSyncTml(response) {
+    return __async(this, null, function* () {
+      const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+      if (isCodeInRange("200", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "any",
+          ""
+        );
+        return body;
+      }
+      if (isCodeInRange("400", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
+      }
+      if (isCodeInRange("401", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+      }
+      if (isCodeInRange("403", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+      }
+      if (isCodeInRange("500", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+      }
+      if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "any",
+          ""
+        );
+        return body;
+      }
+      throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", yield response.getBodyAsAny(), response.headers);
+    });
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
+   * @params response Response returned by the server for a request to dbtGenerateTml
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  dbtGenerateTml(response) {
+    return __async(this, null, function* () {
+      const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+      if (isCodeInRange("200", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "any",
+          ""
+        );
+        return body;
+      }
+      if (isCodeInRange("400", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
+      }
+      if (isCodeInRange("401", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+      }
+      if (isCodeInRange("403", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+      }
+      if (isCodeInRange("500", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+      }
+      if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "any",
+          ""
+        );
+        return body;
+      }
+      throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", yield response.getBodyAsAny(), response.headers);
+    });
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
+   * @params response Response returned by the server for a request to dbtSearch
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  dbtSearch(response) {
+    return __async(this, null, function* () {
+      const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+      if (isCodeInRange("200", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "Array<DbtSearchResponse>",
+          ""
+        );
+        return body;
+      }
+      if (isCodeInRange("400", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
+      }
+      if (isCodeInRange("401", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+      }
+      if (isCodeInRange("403", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+      }
+      if (isCodeInRange("500", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+      }
+      if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "Array<DbtSearchResponse>",
+          ""
+        );
+        return body;
+      }
+      throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", yield response.getBodyAsAny(), response.headers);
+    });
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
+   * @params response Response returned by the server for a request to deleteDbtConnection
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  deleteDbtConnection(response) {
+    return __async(this, null, function* () {
+      const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+      if (isCodeInRange("204", response.httpStatusCode)) {
+        return;
+      }
+      if (isCodeInRange("400", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
+      }
+      if (isCodeInRange("401", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+      }
+      if (isCodeInRange("403", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+      }
+      if (isCodeInRange("500", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+      }
+      if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "void",
+          ""
+        );
+        return body;
+      }
+      throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", yield response.getBodyAsAny(), response.headers);
+    });
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
+   * @params response Response returned by the server for a request to updateDbtConnection
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  updateDbtConnection(response) {
+    return __async(this, null, function* () {
+      const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+      if (isCodeInRange("200", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "any",
+          ""
+        );
+        return body;
+      }
+      if (isCodeInRange("400", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
+      }
+      if (isCodeInRange("401", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+      }
+      if (isCodeInRange("403", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+      }
+      if (isCodeInRange("500", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+      }
+      if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "any",
+          ""
+        );
+        return body;
+      }
+      throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", yield response.getBodyAsAny(), response.headers);
+    });
+  }
+};
+
 // apis/DataApi.ts
 var DataApiRequestFactory = class extends BaseAPIRequestFactory {
   /**
-   *   Version: 9.0.0.cl or later   Fetches data from a saved Answer.  Requires at least view access to the saved Answer.      
+   *   Version: 9.0.0.cl or later   Fetches data from a saved Answer.  Requires at least view access to the saved Answer.  The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](For more information, and see [Liveboard data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_apis).   ).        
    * @param fetchAnswerDataRequest 
    */
   fetchAnswerData(fetchAnswerDataRequest, _options) {
@@ -10115,7 +12817,7 @@ var DataApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *   Version: 9.0.0.cl or later   Gets data from a Liveboard object and its visualization.    Requires at least view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To get data for specific visualizations, add the GUIDs or names of the visualizations in the API request.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes. If the new Liveboard experience mode, the transient content includes ad hoc changes to visualizations such as sorting, toggling of legends, and data drill down.      
+   *   Version: 9.0.0.cl or later   Gets data from a Liveboard object and its visualization.    Requires at least view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To get data for specific visualizations, add the GUIDs or names of the visualizations in the API request.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes. If the new Liveboard experience mode, the transient content includes ad hoc changes to visualizations such as sorting, toggling of legends, and data drill down.  For more information, and see [Liveboard data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_fetch_liveboard_data_api).        
    * @param fetchLiveboardDataRequest 
    */
   fetchLiveboardData(fetchLiveboardDataRequest, _options) {
@@ -10151,7 +12853,7 @@ var DataApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *   Version: 9.0.0.cl or later   Generates an Answer from a given data source.  Requires at least view access to the data source.  #### Usage guidelines  To generate a new Answer, specify the data source GUID. The data source can be a Worksheet, View, Table, or SQL view.  Pass search tokens in the `query_string` attribute in the API request as shown in the following example. For more information passing search query string in API requests, see [`Components of a search query`](https://developers.thoughtspot.com/docs/?pageid=search-data-api#components).   ``` {   \"query_string\": \"[sales] by [store]\",   \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\", } ```      
+   *   Version: 9.0.0.cl or later   Generates an Answer from a given data source.  Requires at least view access to the data source object.  #### Usage guidelines  To search data, specify the data source GUID in `logical_table_identifier`. The data source can be a Worksheet, View, Table, or SQL view.  Pass search tokens in the `query_string` attribute in the API request as shown in the following example:  ``` {   \"query_string\": \"[sales] by [store]\",   \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\", } ```  For more information about the `query_string` format and data source attribute, see [Search data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_data_api).    The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).        
    * @param searchDataRequest 
    */
   searchData(searchDataRequest, _options) {
@@ -10446,6 +13148,9 @@ var GroupsApiRequestFactory = class extends BaseAPIRequestFactory {
     return __async(this, null, function* () {
       var _a, _b, _c;
       let _config = _options || this.configuration;
+      if (importUserGroupsRequest === null || importUserGroupsRequest === void 0) {
+        throw new RequiredError("GroupsApi", "importUserGroups", "importUserGroupsRequest");
+      }
       const localVarPath = "/api/rest/2.0/groups/import";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
@@ -10479,6 +13184,9 @@ var GroupsApiRequestFactory = class extends BaseAPIRequestFactory {
     return __async(this, null, function* () {
       var _a, _b, _c;
       let _config = _options || this.configuration;
+      if (searchUserGroupsRequest === null || searchUserGroupsRequest === void 0) {
+        throw new RequiredError("GroupsApi", "searchUserGroups", "searchUserGroupsRequest");
+      }
       const localVarPath = "/api/rest/2.0/groups/search";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
@@ -10515,6 +13223,9 @@ var GroupsApiRequestFactory = class extends BaseAPIRequestFactory {
       let _config = _options || this.configuration;
       if (groupIdentifier === null || groupIdentifier === void 0) {
         throw new RequiredError("GroupsApi", "updateUserGroup", "groupIdentifier");
+      }
+      if (updateUserGroupRequest === null || updateUserGroupRequest === void 0) {
+        throw new RequiredError("GroupsApi", "updateUserGroup", "updateUserGroupRequest");
       }
       const localVarPath = "/api/rest/2.0/groups/{group_identifier}/update".replace("{group_identifier}", encodeURIComponent(String(groupIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
@@ -10843,7 +13554,7 @@ var GroupsApiResponseProcessor = class {
 // apis/LogApi.ts
 var LogApiRequestFactory = class extends BaseAPIRequestFactory {
   /**
-   *   Version: 9.0.0.cl or later   Fetches security audit logs.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  By default, the API retrieves logs for the last 24 hours. You can set a custom duration in EPOCH time. Make sure the log duration specified in your API request doesn’t exceed 24 hours. If you must fetch logs for a longer time range, modify the duration and make multiple sequential API requests.  Upon successful execution, the API returns logs with the following information: * timestamp of the event * event ID * event type * name and GUID of the user * IP address of ThoughtSpot instance      
+   *   Version: 9.0.0.cl or later   Fetches security audit logs.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  By default, the API retrieves logs for the last 24 hours. You can set a custom duration in EPOCH time. Make sure the log duration specified in your API request doesn’t exceed 24 hours. If you must fetch logs for a longer time range, modify the duration and make multiple sequential API requests.  Upon successful execution, the API returns logs with the following information: * timestamp of the event * event ID * event type * name and GUID of the user * IP address of ThoughtSpot instance  For more information about security events returned in the API response, see [Security events](https://developers.thoughtspot.com/docs/audit-logs#_security_events).      
    * @param fetchLogsRequest 
    */
   fetchLogs(fetchLogsRequest, _options) {
@@ -11018,6 +13729,42 @@ var MetadataApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
+   *  Version: 10.1.0.cl or later 
+   * @param exportMetadataTMLBatchedRequest 
+   */
+  exportMetadataTMLBatched(exportMetadataTMLBatchedRequest, _options) {
+    return __async(this, null, function* () {
+      var _a, _b, _c;
+      let _config = _options || this.configuration;
+      if (exportMetadataTMLBatchedRequest === null || exportMetadataTMLBatchedRequest === void 0) {
+        throw new RequiredError("MetadataApi", "exportMetadataTMLBatched", "exportMetadataTMLBatchedRequest");
+      }
+      const localVarPath = "/api/rest/2.0/metadata/tml/export/batch";
+      const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
+      requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+      const contentType = ObjectSerializer.getPreferredMediaType([
+        "application/json"
+      ]);
+      requestContext.setHeaderParam("Content-Type", contentType);
+      const serializedBody = ObjectSerializer.stringify(
+        ObjectSerializer.serialize(exportMetadataTMLBatchedRequest, "ExportMetadataTMLBatchedRequest", ""),
+        contentType
+      );
+      requestContext.setBody(serializedBody);
+      let authMethod;
+      authMethod = _config.authMethods["bearerAuth"];
+      if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
+        yield authMethod == null ? void 0 : authMethod.applySecurityAuthentication(requestContext);
+      }
+      const defaultAuth = ((_a = _options == null ? void 0 : _options.authMethods) == null ? void 0 : _a.default) || ((_c = (_b = this.configuration) == null ? void 0 : _b.authMethods) == null ? void 0 : _c.default);
+      if (defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication) {
+        yield defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication(requestContext);
+      }
+      return requestContext;
+    });
+  }
+  /**
    *   Version: 9.0.0.cl or later   Fetches the underlying SQL query data for an Answer object.  Requires at least view access to the Answer object.  Upon successful execution, the API returns the SQL queries for the specified object as shown in this example: ``` {    \"metadata_id\":\"8fbe44a8-46ad-4b16-8d39-184b2fada490\",    \"metadata_name\":\"Total sales\",    \"metadata_type\":\"ANSWER\",    \"sql_queries\":[       {          \"metadata_id\":\"8fbe44a8-46ad-4b16-8d39-184b2fada490\",          \"metadata_name\":\"Total sales -test\",          \"sql_query\":\"SELECT \\n  \\\"ta_1\\\".\\\"REGION\\\" \\\"ca_1\\\", \\n  \\\"ta_2\\\".\\\"PRODUCTNAME\\\" \\\"ca_2\\\", \\n  \\\"ta_1\\\".\\\"STORENAME\\\" \\\"ca_3\\\", \\n  CASE\\n    WHEN sum(\\\"ta_3\\\".\\\"SALES\\\") IS NOT NULL THEN sum(\\\"ta_3\\\".\\\"SALES\\\")\\n    ELSE 0\\n  END \\\"ca_4\\\", \\n  CASE\\n    WHEN sum(\\\"ta_3\\\".\\\"QUANTITYPURCHASED\\\") IS NOT NULL THEN sum(\\\"ta_3\\\".\\\"QUANTITYPURCHASED\\\")\\n    ELSE 0\\n  END \\\"ca_5\\\"\\nFROM \\\"RETAILAPPAREL\\\".\\\"PUBLIC\\\".\\\"FACT_RETAPP_SALES\\\" \\\"ta_3\\\"\\n  JOIN \\\"RETAILAPPAREL\\\".\\\"PUBLIC\\\".\\\"DIM_RETAPP_STORES\\\" \\\"ta_1\\\"\\n    ON \\\"ta_3\\\".\\\"STOREID\\\" = \\\"ta_1\\\".\\\"STOREID\\\"\\n  JOIN \\\"RETAILAPPAREL\\\".\\\"PUBLIC\\\".\\\"DIM_RETAPP_PRODUCTS\\\" \\\"ta_2\\\"\\n    ON \\\"ta_3\\\".\\\"PRODUCTID\\\" = \\\"ta_2\\\".\\\"PRODUCTID\\\"\\nGROUP BY \\n  \\\"ca_1\\\", \\n  \\\"ca_2\\\", \\n  \\\"ca_3\\\"\\n\"       }    ] } ```      
    * @param fetchAnswerSqlQueryRequest 
    */
@@ -11133,6 +13880,9 @@ var MetadataApiRequestFactory = class extends BaseAPIRequestFactory {
     return __async(this, null, function* () {
       var _a, _b, _c;
       let _config = _options || this.configuration;
+      if (searchMetadataRequest === null || searchMetadataRequest === void 0) {
+        throw new RequiredError("MetadataApi", "searchMetadata", "searchMetadataRequest");
+      }
       const localVarPath = "/api/rest/2.0/metadata/search";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
@@ -11270,6 +14020,67 @@ var MetadataApiResponseProcessor = class {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
           "Array<any>",
+          ""
+        );
+        return body;
+      }
+      throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", yield response.getBodyAsAny(), response.headers);
+    });
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
+   * @params response Response returned by the server for a request to exportMetadataTMLBatched
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  exportMetadataTMLBatched(response) {
+    return __async(this, null, function* () {
+      const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+      if (isCodeInRange("200", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "any",
+          ""
+        );
+        return body;
+      }
+      if (isCodeInRange("400", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
+      }
+      if (isCodeInRange("401", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+      }
+      if (isCodeInRange("403", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+      }
+      if (isCodeInRange("500", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+      }
+      if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "any",
           ""
         );
         return body;
@@ -11596,6 +14407,9 @@ var OrgsApiRequestFactory = class extends BaseAPIRequestFactory {
     return __async(this, null, function* () {
       var _a, _b, _c;
       let _config = _options || this.configuration;
+      if (searchOrgsRequest === null || searchOrgsRequest === void 0) {
+        throw new RequiredError("OrgsApi", "searchOrgs", "searchOrgsRequest");
+      }
       const localVarPath = "/api/rest/2.0/orgs/search";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
@@ -11632,6 +14446,9 @@ var OrgsApiRequestFactory = class extends BaseAPIRequestFactory {
       let _config = _options || this.configuration;
       if (orgIdentifier === null || orgIdentifier === void 0) {
         throw new RequiredError("OrgsApi", "updateOrg", "orgIdentifier");
+      }
+      if (updateOrgRequest === null || updateOrgRequest === void 0) {
+        throw new RequiredError("OrgsApi", "updateOrg", "updateOrgRequest");
       }
       const localVarPath = "/api/rest/2.0/orgs/{org_identifier}/update".replace("{org_identifier}", encodeURIComponent(String(orgIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
@@ -11899,7 +14716,7 @@ var OrgsApiResponseProcessor = class {
 // apis/ReportsApi.ts
 var ReportsApiRequestFactory = class extends BaseAPIRequestFactory {
   /**
-   *   Version: 9.0.0.cl or later   Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege.  #### Usage guidelines  In the request body, the GUID or name of the Answer and set `file_format`. The default file format is CSV.  You can apply [runtime filter](https://developers.thoughtspot.com/docs/?pageid=runtime-filters#_apply_runtime_filters_via_rest_api_v2_0_endpoints) overrides and [sort columns](https://developers.thoughtspot.com/docs/?pageid=runtime-sort#_rest_api_v2_0) to the data retrieved in the API response.      
+   *   Version: 9.0.0.cl or later   Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege.  #### Usage guidelines  In the request body, the GUID or name of the Answer and set `file_format`. The default file format is CSV.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).        
    * @param exportAnswerReportRequest 
    */
   exportAnswerReport(exportAnswerReportRequest, _options) {
@@ -11935,7 +14752,7 @@ var ReportsApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *   Version: 9.0.0.cl or later   Exports the data from a Liveboard and its visualization in a given file format. You can download the Liveboard data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default `file_format` is CSV. For PDF file format, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  You can also apply [runtime filter](https://developers.thoughtspot.com/docs/?pageid=runtime-filters#_apply_runtime_filters_via_rest_api_v2_0_endpoints) overrides and [sort columns](https://developers.thoughtspot.com/docs/?pageid=runtime-sort#_rest_api_v2_0) to the data retrieved in the API response.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes. If the new Liveboard experience mode, the transient content includes ad hoc changes to visualizations such as sorting, toggling of legends, and data drill down.      
+   *   Version: 9.0.0.cl or later   Exports the data from a Liveboard and its visualization in a given file format. You can download the Liveboard data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default `file_format` is CSV. For PDF file format, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).        
    * @param exportLiveboardReportRequest 
    */
   exportLiveboardReport(exportLiveboardReportRequest, _options) {
@@ -12126,7 +14943,7 @@ var RolesApiRequestFactory = class extends BaseAPIRequestFactory {
   }
   /**
    * Deletes a Role. Requires cluster Administration or Role Administration privileges.    Version: 9.5.0.cl or later 
-   * @param roleIdentifier Unique ID or name of the role.
+   * @param roleIdentifier Unique ID or name of the Role.
    */
   deleteRole(roleIdentifier, _options) {
     return __async(this, null, function* () {
@@ -12159,6 +14976,9 @@ var RolesApiRequestFactory = class extends BaseAPIRequestFactory {
     return __async(this, null, function* () {
       var _a, _b, _c;
       let _config = _options || this.configuration;
+      if (searchRolesRequest === null || searchRolesRequest === void 0) {
+        throw new RequiredError("RolesApi", "searchRoles", "searchRolesRequest");
+      }
       const localVarPath = "/api/rest/2.0/roles/search";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
@@ -12186,7 +15006,7 @@ var RolesApiRequestFactory = class extends BaseAPIRequestFactory {
   }
   /**
    * Updates a Role. Requires cluster Administration or Role Administration privileges.    Version: 9.5.0.cl or later 
-   * @param roleIdentifier Unique ID or name of the role.
+   * @param roleIdentifier Unique ID or name of the Role.
    * @param updateRoleRequest 
    */
   updateRole(roleIdentifier, updateRoleRequest, _options) {
@@ -12540,6 +15360,9 @@ var SchedulesApiRequestFactory = class extends BaseAPIRequestFactory {
     return __async(this, null, function* () {
       var _a, _b, _c;
       let _config = _options || this.configuration;
+      if (searchSchedulesRequest === null || searchSchedulesRequest === void 0) {
+        throw new RequiredError("SchedulesApi", "searchSchedules", "searchSchedulesRequest");
+      }
       const localVarPath = "/api/rest/2.0/schedules/search";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
@@ -12576,6 +15399,9 @@ var SchedulesApiRequestFactory = class extends BaseAPIRequestFactory {
       let _config = _options || this.configuration;
       if (scheduleIdentifier === null || scheduleIdentifier === void 0) {
         throw new RequiredError("SchedulesApi", "updateSchedule", "scheduleIdentifier");
+      }
+      if (updateScheduleRequest === null || updateScheduleRequest === void 0) {
+        throw new RequiredError("SchedulesApi", "updateSchedule", "updateScheduleRequest");
       }
       const localVarPath = "/api/rest/2.0/schedules/{schedule_identifier}/update".replace("{schedule_identifier}", encodeURIComponent(String(scheduleIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
@@ -13057,7 +15883,7 @@ var SecurityApiResponseProcessor = class {
       if (isCodeInRange("200", response.httpStatusCode)) {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
-          "any",
+          "PermissionOfPrincipalsResponse",
           ""
         );
         return body;
@@ -13097,7 +15923,7 @@ var SecurityApiResponseProcessor = class {
       if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
-          "any",
+          "PermissionOfPrincipalsResponse",
           ""
         );
         return body;
@@ -13118,7 +15944,7 @@ var SecurityApiResponseProcessor = class {
       if (isCodeInRange("200", response.httpStatusCode)) {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
-          "any",
+          "PermissionOfMetadataResponse",
           ""
         );
         return body;
@@ -13158,7 +15984,7 @@ var SecurityApiResponseProcessor = class {
       if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
-          "any",
+          "PermissionOfMetadataResponse",
           ""
         );
         return body;
@@ -13613,7 +16439,7 @@ var TagsApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *   Version: 9.0.0.cl or later   Creates a tag object.  Tags are labels that identify a metadata object. For example, you can create a tag to designate subject areas, such as sales, HR, marketing, and finance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *   Version: 9.0.0.cl or later   Creates a tag object.  Tags are labels that identify a metadata object. For example, you can create a tag to designate subject areas, such as sales, HR, marketing, and finance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.      
    * @param createTagRequest 
    */
   createTag(createTagRequest, _options) {
@@ -13649,7 +16475,7 @@ var TagsApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *   Version: 9.0.0.cl or later   Deletes a tag object from the ThoughtSpot system  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *   Version: 9.0.0.cl or later   Deletes a tag object from the ThoughtSpot system  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.      
    * @param tagIdentifier Tag identifier Tag name or Tag id.
    */
   deleteTag(tagIdentifier, _options) {
@@ -13683,6 +16509,9 @@ var TagsApiRequestFactory = class extends BaseAPIRequestFactory {
     return __async(this, null, function* () {
       var _a, _b, _c;
       let _config = _options || this.configuration;
+      if (searchTagsRequest === null || searchTagsRequest === void 0) {
+        throw new RequiredError("TagsApi", "searchTags", "searchTagsRequest");
+      }
       const localVarPath = "/api/rest/2.0/tags/search";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
@@ -13745,7 +16574,7 @@ var TagsApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *   Version: 9.0.0.cl or later   Updates a tag object.  You can modify the `name` and `color` properties of a tag object.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *   Version: 9.0.0.cl or later   Updates a tag object.  You can modify the `name` and `color` properties of a tag object.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.      
    * @param tagIdentifier Name or Id of the tag.
    * @param updateTagRequest 
    */
@@ -13755,6 +16584,9 @@ var TagsApiRequestFactory = class extends BaseAPIRequestFactory {
       let _config = _options || this.configuration;
       if (tagIdentifier === null || tagIdentifier === void 0) {
         throw new RequiredError("TagsApi", "updateTag", "tagIdentifier");
+      }
+      if (updateTagRequest === null || updateTagRequest === void 0) {
+        throw new RequiredError("TagsApi", "updateTag", "updateTagRequest");
       }
       const localVarPath = "/api/rest/2.0/tags/{tag_identifier}/update".replace("{tag_identifier}", encodeURIComponent(String(tagIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
@@ -14134,6 +16966,42 @@ var TagsApiResponseProcessor = class {
 // apis/ThoughtSpotRestApi.ts
 var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
   /**
+   *   Version: 9.7.0.cl or later   Activates a deactivated user account.  Requires `ADMINISTRATION` (**Can administer Thoughtspot**) privilege.  To activate an inactive user account, the API request body must include the following information:  - Username or the GUID of the user account. - Auth token generated for the deactivated user. The auth token is sent in the API response when a user is deactivated. - Password for the user account.      
+   * @param activateUserRequest 
+   */
+  activateUser(activateUserRequest, _options) {
+    return __async(this, null, function* () {
+      var _a, _b, _c;
+      let _config = _options || this.configuration;
+      if (activateUserRequest === null || activateUserRequest === void 0) {
+        throw new RequiredError("ThoughtSpotRestApi", "activateUser", "activateUserRequest");
+      }
+      const localVarPath = "/api/rest/2.0/users/activate";
+      const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
+      requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+      const contentType = ObjectSerializer.getPreferredMediaType([
+        "application/json"
+      ]);
+      requestContext.setHeaderParam("Content-Type", contentType);
+      const serializedBody = ObjectSerializer.stringify(
+        ObjectSerializer.serialize(activateUserRequest, "ActivateUserRequest", ""),
+        contentType
+      );
+      requestContext.setBody(serializedBody);
+      let authMethod;
+      authMethod = _config.authMethods["bearerAuth"];
+      if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
+        yield authMethod == null ? void 0 : authMethod.applySecurityAuthentication(requestContext);
+      }
+      const defaultAuth = ((_a = _options == null ? void 0 : _options.authMethods) == null ? void 0 : _a.default) || ((_c = (_b = this.configuration) == null ? void 0 : _b.authMethods) == null ? void 0 : _c.default);
+      if (defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication) {
+        yield defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication(requestContext);
+      }
+      return requestContext;
+    });
+  }
+  /**
    *   Version: 9.0.0.cl or later   Transfers the ownership of one or several objects from one user to another.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param assignChangeAuthorRequest 
    */
@@ -14242,7 +17110,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *  Version: 9.2.0.cl or later   Commits TML files of metadata objects to the Git branch configured on your instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  Before using this endpoint to push your commits:  * Enable Git integration on your instance. * Make sure the Git repository and branch details are configured on your instance.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).      
+   *   Version: 9.2.0.cl or later   Commits TML files of metadata objects to the Git branch configured on your instance.  Requires at least edit access to objects used in the commit operation.  Before using this endpoint to push your commits:  * Enable Git integration on your instance. * Make sure the Git repository and branch details are configured on your instance.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).      
    * @param commitBranchRequest 
    */
   commitBranch(commitBranchRequest, _options) {
@@ -14278,7 +17146,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *  Version: 9.2.0.cl or later   Allows you to connect a ThoughtSpot instance to a Git repository.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  You can use this API endpoint to connect your ThoughtSpot development and production environments to the development and production branches of a Git repository.  Before using this endpoint to connect your ThoughtSpot instance to a Git repository, check the following prerequisites:  * You have a Git repository. If you are using GitHub, make sure you have a valid account and an access token to connect ThoughtSpot to GitHub. For information about generating a token, see [GitHub Documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).  * Your access token has `repo` scope that grants full access to public and private repositories. * Your Git repository has a branch that can be configured as a default branch in ThoughtSpot.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).      
+   *   Version: 9.2.0.cl or later   Allows you to connect a ThoughtSpot instance to a Git repository.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  You can use this API endpoint to connect your ThoughtSpot development and production environments to the development and production branches of a Git repository.  Before using this endpoint to connect your ThoughtSpot instance to a Git repository, check the following prerequisites:  * You have a Git repository. If you are using GitHub, make sure you have a valid account and an access token to connect ThoughtSpot to GitHub. For information about generating a token, see [GitHub Documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).  * Your access token has `repo` scope that grants full access to public and private repositories. * Your Git repository has a branch that can be configured as a default branch in ThoughtSpot.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).  **Note**: ThoughtSpot supports only GitHub / GitHub Enterprise for CI/CD.      
    * @param createConfigRequest 
    */
   createConfig(createConfigRequest, _options) {
@@ -14494,7 +17362,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *   Version: 9.0.0.cl or later   Creates a tag object.  Tags are labels that identify a metadata object. For example, you can create a tag to designate subject areas, such as sales, HR, marketing, and finance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *   Version: 9.0.0.cl or later   Creates a tag object.  Tags are labels that identify a metadata object. For example, you can create a tag to designate subject areas, such as sales, HR, marketing, and finance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.      
    * @param createTagRequest 
    */
   createTag(createTagRequest, _options) {
@@ -14602,13 +17470,183 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *  Version: 9.2.0.cl or later   Deletes Git repository configuration from your ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *   Version: 9.9.0.cl or later   Creates a DBT connection object in ThoughtSpot.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege.  #### About create DBT connection DBT connection in ThoughtSpot is used by the user to define DBT credentials for cloud . The API needs  embrace connection, embrace database name, DBT url, import type, DBT account identifier, DBT project identifier, DBT access token and environment details (or) embrace connection, embrace database name, import type, file_content to create a connection object. To know more about DBT, see ThoughtSpot Product Documentation.      
+   * @param dbtConnectionRequest 
+   */
+  dbtConnection(dbtConnectionRequest, _options) {
+    return __async(this, null, function* () {
+      var _a, _b, _c;
+      let _config = _options || this.configuration;
+      if (dbtConnectionRequest === null || dbtConnectionRequest === void 0) {
+        throw new RequiredError("ThoughtSpotRestApi", "dbtConnection", "dbtConnectionRequest");
+      }
+      const localVarPath = "/api/rest/2.0/dbt/dbt-connection";
+      const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
+      requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+      const contentType = ObjectSerializer.getPreferredMediaType([
+        "application/json"
+      ]);
+      requestContext.setHeaderParam("Content-Type", contentType);
+      const serializedBody = ObjectSerializer.stringify(
+        ObjectSerializer.serialize(dbtConnectionRequest, "DbtConnectionRequest", ""),
+        contentType
+      );
+      requestContext.setBody(serializedBody);
+      let authMethod;
+      authMethod = _config.authMethods["bearerAuth"];
+      if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
+        yield authMethod == null ? void 0 : authMethod.applySecurityAuthentication(requestContext);
+      }
+      const defaultAuth = ((_a = _options == null ? void 0 : _options.authMethods) == null ? void 0 : _a.default) || ((_c = (_b = this.configuration) == null ? void 0 : _b.authMethods) == null ? void 0 : _c.default);
+      if (defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication) {
+        yield defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication(requestContext);
+      }
+      return requestContext;
+    });
+  }
+  /**
+   *  Version: 9.9.0.cl or later 
+   * @param dbtGenerateSyncTmlRequest 
+   */
+  dbtGenerateSyncTml(dbtGenerateSyncTmlRequest, _options) {
+    return __async(this, null, function* () {
+      var _a, _b, _c;
+      let _config = _options || this.configuration;
+      if (dbtGenerateSyncTmlRequest === null || dbtGenerateSyncTmlRequest === void 0) {
+        throw new RequiredError("ThoughtSpotRestApi", "dbtGenerateSyncTml", "dbtGenerateSyncTmlRequest");
+      }
+      const localVarPath = "/api/rest/2.0/dbt/generate-sync-tml";
+      const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
+      requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+      const contentType = ObjectSerializer.getPreferredMediaType([
+        "application/json"
+      ]);
+      requestContext.setHeaderParam("Content-Type", contentType);
+      const serializedBody = ObjectSerializer.stringify(
+        ObjectSerializer.serialize(dbtGenerateSyncTmlRequest, "DbtGenerateSyncTmlRequest", ""),
+        contentType
+      );
+      requestContext.setBody(serializedBody);
+      let authMethod;
+      authMethod = _config.authMethods["bearerAuth"];
+      if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
+        yield authMethod == null ? void 0 : authMethod.applySecurityAuthentication(requestContext);
+      }
+      const defaultAuth = ((_a = _options == null ? void 0 : _options.authMethods) == null ? void 0 : _a.default) || ((_c = (_b = this.configuration) == null ? void 0 : _b.authMethods) == null ? void 0 : _c.default);
+      if (defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication) {
+        yield defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication(requestContext);
+      }
+      return requestContext;
+    });
+  }
+  /**
+   *  Version: 9.9.0.cl or later 
+   * @param dbtGenerateTmlRequest 
+   */
+  dbtGenerateTml(dbtGenerateTmlRequest, _options) {
+    return __async(this, null, function* () {
+      var _a, _b, _c;
+      let _config = _options || this.configuration;
+      if (dbtGenerateTmlRequest === null || dbtGenerateTmlRequest === void 0) {
+        throw new RequiredError("ThoughtSpotRestApi", "dbtGenerateTml", "dbtGenerateTmlRequest");
+      }
+      const localVarPath = "/api/rest/2.0/dbt/generate-tml";
+      const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
+      requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+      const contentType = ObjectSerializer.getPreferredMediaType([
+        "application/json"
+      ]);
+      requestContext.setHeaderParam("Content-Type", contentType);
+      const serializedBody = ObjectSerializer.stringify(
+        ObjectSerializer.serialize(dbtGenerateTmlRequest, "DbtGenerateTmlRequest", ""),
+        contentType
+      );
+      requestContext.setBody(serializedBody);
+      let authMethod;
+      authMethod = _config.authMethods["bearerAuth"];
+      if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
+        yield authMethod == null ? void 0 : authMethod.applySecurityAuthentication(requestContext);
+      }
+      const defaultAuth = ((_a = _options == null ? void 0 : _options.authMethods) == null ? void 0 : _a.default) || ((_c = (_b = this.configuration) == null ? void 0 : _b.authMethods) == null ? void 0 : _c.default);
+      if (defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication) {
+        yield defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication(requestContext);
+      }
+      return requestContext;
+    });
+  }
+  /**
+   *   Version: 9.9.0.cl or later   Gets a list of DBT connection objects by user and organization, available on the ThoughtSpot system.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege  #### About search DBT connection To get details of a specific DBT connection identifier, database connection identifier, database connection name, database name, project name, project identifier, environment identifier , import type and author.      
+   */
+  dbtSearch(_options) {
+    return __async(this, null, function* () {
+      var _a, _b, _c;
+      let _config = _options || this.configuration;
+      const localVarPath = "/api/rest/2.0/dbt/search";
+      const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
+      requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+      let authMethod;
+      authMethod = _config.authMethods["bearerAuth"];
+      if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
+        yield authMethod == null ? void 0 : authMethod.applySecurityAuthentication(requestContext);
+      }
+      const defaultAuth = ((_a = _options == null ? void 0 : _options.authMethods) == null ? void 0 : _a.default) || ((_c = (_b = this.configuration) == null ? void 0 : _b.authMethods) == null ? void 0 : _c.default);
+      if (defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication) {
+        yield defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication(requestContext);
+      }
+      return requestContext;
+    });
+  }
+  /**
+   *   Version: 9.7.0.cl or later   Deactivates a user account.  Requires `ADMINISTRATION` (**Can administer Thoughtspot**) privilege.  To deactivate a user account, the API request body must include the following information:  - Username or the GUID of the user account - Base URL of the ThoughtSpot instance  If the API request is successful, ThoughtSpot returns the activation URL in the response. The activation URL is valid for 14 days and can be used to re-activate the account and reset the password of the deactivated account.      
+   * @param deactivateUserRequest 
+   */
+  deactivateUser(deactivateUserRequest, _options) {
+    return __async(this, null, function* () {
+      var _a, _b, _c;
+      let _config = _options || this.configuration;
+      if (deactivateUserRequest === null || deactivateUserRequest === void 0) {
+        throw new RequiredError("ThoughtSpotRestApi", "deactivateUser", "deactivateUserRequest");
+      }
+      const localVarPath = "/api/rest/2.0/users/deactivate";
+      const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
+      requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+      const contentType = ObjectSerializer.getPreferredMediaType([
+        "application/json"
+      ]);
+      requestContext.setHeaderParam("Content-Type", contentType);
+      const serializedBody = ObjectSerializer.stringify(
+        ObjectSerializer.serialize(deactivateUserRequest, "DeactivateUserRequest", ""),
+        contentType
+      );
+      requestContext.setBody(serializedBody);
+      let authMethod;
+      authMethod = _config.authMethods["bearerAuth"];
+      if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
+        yield authMethod == null ? void 0 : authMethod.applySecurityAuthentication(requestContext);
+      }
+      const defaultAuth = ((_a = _options == null ? void 0 : _options.authMethods) == null ? void 0 : _a.default) || ((_c = (_b = this.configuration) == null ? void 0 : _b.authMethods) == null ? void 0 : _c.default);
+      if (defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication) {
+        yield defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication(requestContext);
+      }
+      return requestContext;
+    });
+  }
+  /**
+   *   Version: 9.2.0.cl or later   Deletes Git repository configuration from your ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param deleteConfigRequest 
    */
   deleteConfig(deleteConfigRequest, _options) {
     return __async(this, null, function* () {
       var _a, _b, _c;
       let _config = _options || this.configuration;
+      if (deleteConfigRequest === null || deleteConfigRequest === void 0) {
+        throw new RequiredError("ThoughtSpotRestApi", "deleteConfig", "deleteConfigRequest");
+      }
       const localVarPath = "/api/rest/2.0/vcs/git/config/delete";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
@@ -14671,6 +17709,33 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
+   *   Version: 10.0.0.cl or later   Deletes a connection object.  **Note**: If a connection has dependent objects, make sure you remove its associations before the delete operation.  Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   * @param connectionIdentifier Unique ID or name of the connection.
+   */
+  deleteConnectionV2(connectionIdentifier, _options) {
+    return __async(this, null, function* () {
+      var _a, _b, _c;
+      let _config = _options || this.configuration;
+      if (connectionIdentifier === null || connectionIdentifier === void 0) {
+        throw new RequiredError("ThoughtSpotRestApi", "deleteConnectionV2", "connectionIdentifier");
+      }
+      const localVarPath = "/api/rest/2.0/connections/delete/{connection_identifier}".replace("{connection_identifier}", encodeURIComponent(String(connectionIdentifier)));
+      const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
+      requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+      let authMethod;
+      authMethod = _config.authMethods["bearerAuth"];
+      if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
+        yield authMethod == null ? void 0 : authMethod.applySecurityAuthentication(requestContext);
+      }
+      const defaultAuth = ((_a = _options == null ? void 0 : _options.authMethods) == null ? void 0 : _a.default) || ((_c = (_b = this.configuration) == null ? void 0 : _b.authMethods) == null ? void 0 : _c.default);
+      if (defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication) {
+        yield defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication(requestContext);
+      }
+      return requestContext;
+    });
+  }
+  /**
    *   Version: 9.6.0.cl or later   Removes the custom action specified in the API request.  Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param customActionIdentifier Unique ID or name of the custom action.
    */
@@ -14682,6 +17747,33 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
         throw new RequiredError("ThoughtSpotRestApi", "deleteCustomAction", "customActionIdentifier");
       }
       const localVarPath = "/api/rest/2.0/customization/custom-actions/{custom_action_identifier}/delete".replace("{custom_action_identifier}", encodeURIComponent(String(customActionIdentifier)));
+      const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
+      requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+      let authMethod;
+      authMethod = _config.authMethods["bearerAuth"];
+      if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
+        yield authMethod == null ? void 0 : authMethod.applySecurityAuthentication(requestContext);
+      }
+      const defaultAuth = ((_a = _options == null ? void 0 : _options.authMethods) == null ? void 0 : _a.default) || ((_c = (_b = this.configuration) == null ? void 0 : _b.authMethods) == null ? void 0 : _c.default);
+      if (defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication) {
+        yield defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication(requestContext);
+      }
+      return requestContext;
+    });
+  }
+  /**
+   *   Version: 9.9.0.cl or later   Removes the specified DBT connection object from the ThoughtSpot system.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege.      
+   * @param dbtConnectionIdentifier Unique ID of the DBT Connection.
+   */
+  deleteDbtConnection(dbtConnectionIdentifier, _options) {
+    return __async(this, null, function* () {
+      var _a, _b, _c;
+      let _config = _options || this.configuration;
+      if (dbtConnectionIdentifier === null || dbtConnectionIdentifier === void 0) {
+        throw new RequiredError("ThoughtSpotRestApi", "deleteDbtConnection", "dbtConnectionIdentifier");
+      }
+      const localVarPath = "/api/rest/2.0/dbt/{dbt_connection_identifier}/delete".replace("{dbt_connection_identifier}", encodeURIComponent(String(dbtConnectionIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
@@ -14762,7 +17854,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
   }
   /**
    * Deletes a Role. Requires cluster Administration or Role Administration privileges.    Version: 9.5.0.cl or later 
-   * @param roleIdentifier Unique ID or name of the role.
+   * @param roleIdentifier Unique ID or name of the Role.
    */
   deleteRole(roleIdentifier, _options) {
     return __async(this, null, function* () {
@@ -14815,7 +17907,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *   Version: 9.0.0.cl or later   Deletes a tag object from the ThoughtSpot system  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *   Version: 9.0.0.cl or later   Deletes a tag object from the ThoughtSpot system  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.      
    * @param tagIdentifier Tag identifier Tag name or Tag id.
    */
   deleteTag(tagIdentifier, _options) {
@@ -14896,7 +17988,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *  Version: 9.2.0.cl or later   Allows you to deploy a commit and publish TML content to your ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  The API deploys the head of the branch unless a `commit_id` is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.      
+   *   Version: 9.2.0.cl or later   Allows you to deploy a commit and publish TML content to your ThoughtSpot instance.  Requires at least edit access to the objects used in the deploy operation.  The API deploys the head of the branch unless a `commit_id` is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).      
    * @param deployCommitRequest 
    */
   deployCommit(deployCommitRequest, _options) {
@@ -14932,7 +18024,34 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *   Version: 9.0.0.cl or later   Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege.  #### Usage guidelines  In the request body, the GUID or name of the Answer and set `file_format`. The default file format is CSV.  You can apply [runtime filter](https://developers.thoughtspot.com/docs/?pageid=runtime-filters#_apply_runtime_filters_via_rest_api_v2_0_endpoints) overrides and [sort columns](https://developers.thoughtspot.com/docs/?pageid=runtime-sort#_rest_api_v2_0) to the data retrieved in the API response.      
+   *   Version: 9.9.0.cl or later   Exports the difference in connection metadata between CDW and ThoughtSpot  Requires `DATAMANAGEMENT` (**Can manage data**) privilege  To download the connection metadata difference between ThoughtSpot and CDW, pass the connection GUID as `connection_identifier` in the API request.      
+   * @param connectionIdentifier GUID of the connection
+   */
+  downloadConnectionMetadataChanges(connectionIdentifier, _options) {
+    return __async(this, null, function* () {
+      var _a, _b, _c;
+      let _config = _options || this.configuration;
+      if (connectionIdentifier === null || connectionIdentifier === void 0) {
+        throw new RequiredError("ThoughtSpotRestApi", "downloadConnectionMetadataChanges", "connectionIdentifier");
+      }
+      const localVarPath = "/api/rest/2.0/connections/download-connection-metadata-changes/{connection_identifier}".replace("{connection_identifier}", encodeURIComponent(String(connectionIdentifier)));
+      const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
+      requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+      let authMethod;
+      authMethod = _config.authMethods["bearerAuth"];
+      if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
+        yield authMethod == null ? void 0 : authMethod.applySecurityAuthentication(requestContext);
+      }
+      const defaultAuth = ((_a = _options == null ? void 0 : _options.authMethods) == null ? void 0 : _a.default) || ((_c = (_b = this.configuration) == null ? void 0 : _b.authMethods) == null ? void 0 : _c.default);
+      if (defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication) {
+        yield defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication(requestContext);
+      }
+      return requestContext;
+    });
+  }
+  /**
+   *   Version: 9.0.0.cl or later   Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege.  #### Usage guidelines  In the request body, the GUID or name of the Answer and set `file_format`. The default file format is CSV.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).        
    * @param exportAnswerReportRequest 
    */
   exportAnswerReport(exportAnswerReportRequest, _options) {
@@ -14968,7 +18087,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *   Version: 9.0.0.cl or later   Exports the data from a Liveboard and its visualization in a given file format. You can download the Liveboard data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default `file_format` is CSV. For PDF file format, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  You can also apply [runtime filter](https://developers.thoughtspot.com/docs/?pageid=runtime-filters#_apply_runtime_filters_via_rest_api_v2_0_endpoints) overrides and [sort columns](https://developers.thoughtspot.com/docs/?pageid=runtime-sort#_rest_api_v2_0) to the data retrieved in the API response.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes. If the new Liveboard experience mode, the transient content includes ad hoc changes to visualizations such as sorting, toggling of legends, and data drill down.      
+   *   Version: 9.0.0.cl or later   Exports the data from a Liveboard and its visualization in a given file format. You can download the Liveboard data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default `file_format` is CSV. For PDF file format, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).        
    * @param exportLiveboardReportRequest 
    */
   exportLiveboardReport(exportLiveboardReportRequest, _options) {
@@ -15040,7 +18159,43 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *   Version: 9.0.0.cl or later   Fetches data from a saved Answer.  Requires at least view access to the saved Answer.      
+   *  Version: 10.1.0.cl or later 
+   * @param exportMetadataTMLBatchedRequest 
+   */
+  exportMetadataTMLBatched(exportMetadataTMLBatchedRequest, _options) {
+    return __async(this, null, function* () {
+      var _a, _b, _c;
+      let _config = _options || this.configuration;
+      if (exportMetadataTMLBatchedRequest === null || exportMetadataTMLBatchedRequest === void 0) {
+        throw new RequiredError("ThoughtSpotRestApi", "exportMetadataTMLBatched", "exportMetadataTMLBatchedRequest");
+      }
+      const localVarPath = "/api/rest/2.0/metadata/tml/export/batch";
+      const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
+      requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+      const contentType = ObjectSerializer.getPreferredMediaType([
+        "application/json"
+      ]);
+      requestContext.setHeaderParam("Content-Type", contentType);
+      const serializedBody = ObjectSerializer.stringify(
+        ObjectSerializer.serialize(exportMetadataTMLBatchedRequest, "ExportMetadataTMLBatchedRequest", ""),
+        contentType
+      );
+      requestContext.setBody(serializedBody);
+      let authMethod;
+      authMethod = _config.authMethods["bearerAuth"];
+      if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
+        yield authMethod == null ? void 0 : authMethod.applySecurityAuthentication(requestContext);
+      }
+      const defaultAuth = ((_a = _options == null ? void 0 : _options.authMethods) == null ? void 0 : _a.default) || ((_c = (_b = this.configuration) == null ? void 0 : _b.authMethods) == null ? void 0 : _c.default);
+      if (defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication) {
+        yield defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication(requestContext);
+      }
+      return requestContext;
+    });
+  }
+  /**
+   *   Version: 9.0.0.cl or later   Fetches data from a saved Answer.  Requires at least view access to the saved Answer.  The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](For more information, and see [Liveboard data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_apis).   ).        
    * @param fetchAnswerDataRequest 
    */
   fetchAnswerData(fetchAnswerDataRequest, _options) {
@@ -15112,7 +18267,34 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *   Version: 9.0.0.cl or later   Gets data from a Liveboard object and its visualization.    Requires at least view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To get data for specific visualizations, add the GUIDs or names of the visualizations in the API request.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes. If the new Liveboard experience mode, the transient content includes ad hoc changes to visualizations such as sorting, toggling of legends, and data drill down.      
+   *   Version: 9.9.0.cl or later   Validates the difference in connection metadata between CDW and ThoughtSpot  Requires `DATAMANAGEMENT` (**Can manage data**) privilege  Returns a boolean indicating whether there is any difference between the connection metadata at ThoughtSpot and CDW.  To get the connection metadata difference status, pass the connection GUID as `connection_identifier` in the API request.      
+   * @param connectionIdentifier GUID of the connection
+   */
+  fetchConnectionDiffStatus(connectionIdentifier, _options) {
+    return __async(this, null, function* () {
+      var _a, _b, _c;
+      let _config = _options || this.configuration;
+      if (connectionIdentifier === null || connectionIdentifier === void 0) {
+        throw new RequiredError("ThoughtSpotRestApi", "fetchConnectionDiffStatus", "connectionIdentifier");
+      }
+      const localVarPath = "/api/rest/2.0/connections/fetch-connection-diff-status/{connection_identifier}".replace("{connection_identifier}", encodeURIComponent(String(connectionIdentifier)));
+      const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
+      requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+      let authMethod;
+      authMethod = _config.authMethods["bearerAuth"];
+      if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
+        yield authMethod == null ? void 0 : authMethod.applySecurityAuthentication(requestContext);
+      }
+      const defaultAuth = ((_a = _options == null ? void 0 : _options.authMethods) == null ? void 0 : _a.default) || ((_c = (_b = this.configuration) == null ? void 0 : _b.authMethods) == null ? void 0 : _c.default);
+      if (defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication) {
+        yield defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication(requestContext);
+      }
+      return requestContext;
+    });
+  }
+  /**
+   *   Version: 9.0.0.cl or later   Gets data from a Liveboard object and its visualization.    Requires at least view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To get data for specific visualizations, add the GUIDs or names of the visualizations in the API request.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes. If the new Liveboard experience mode, the transient content includes ad hoc changes to visualizations such as sorting, toggling of legends, and data drill down.  For more information, and see [Liveboard data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_fetch_liveboard_data_api).        
    * @param fetchLiveboardDataRequest 
    */
   fetchLiveboardData(fetchLiveboardDataRequest, _options) {
@@ -15184,7 +18366,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *   Version: 9.0.0.cl or later   Fetches security audit logs.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  By default, the API retrieves logs for the last 24 hours. You can set a custom duration in EPOCH time. Make sure the log duration specified in your API request doesn’t exceed 24 hours. If you must fetch logs for a longer time range, modify the duration and make multiple sequential API requests.  Upon successful execution, the API returns logs with the following information: * timestamp of the event * event ID * event type * name and GUID of the user * IP address of ThoughtSpot instance      
+   *   Version: 9.0.0.cl or later   Fetches security audit logs.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  By default, the API retrieves logs for the last 24 hours. You can set a custom duration in EPOCH time. Make sure the log duration specified in your API request doesn’t exceed 24 hours. If you must fetch logs for a longer time range, modify the duration and make multiple sequential API requests.  Upon successful execution, the API returns logs with the following information: * timestamp of the event * event ID * event type * name and GUID of the user * IP address of ThoughtSpot instance  For more information about security events returned in the API response, see [Security events](https://developers.thoughtspot.com/docs/audit-logs#_security_events).      
    * @param fetchLogsRequest 
    */
   fetchLogs(fetchLogsRequest, _options) {
@@ -15299,6 +18481,9 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     return __async(this, null, function* () {
       var _a, _b, _c;
       let _config = _options || this.configuration;
+      if (forceLogoutUsersRequest === null || forceLogoutUsersRequest === void 0) {
+        throw new RequiredError("ThoughtSpotRestApi", "forceLogoutUsers", "forceLogoutUsersRequest");
+      }
       const localVarPath = "/api/rest/2.0/users/force-logout";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
@@ -15545,6 +18730,9 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     return __async(this, null, function* () {
       var _a, _b, _c;
       let _config = _options || this.configuration;
+      if (importUserGroupsRequest === null || importUserGroupsRequest === void 0) {
+        throw new RequiredError("ThoughtSpotRestApi", "importUserGroups", "importUserGroupsRequest");
+      }
       const localVarPath = "/api/rest/2.0/groups/import";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
@@ -15614,6 +18802,9 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     return __async(this, null, function* () {
       var _a, _b, _c;
       let _config = _options || this.configuration;
+      if (loginRequest === null || loginRequest === void 0) {
+        throw new RequiredError("ThoughtSpotRestApi", "login", "loginRequest");
+      }
       const localVarPath = "/api/rest/2.0/auth/session/login";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
@@ -15699,7 +18890,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *  Version: 9.2.0.cl or later   Reverts TML objects to a previous commit specified in the API request.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  In the API request, specify the `commit_id`. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.  By default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.      
+   *   Version: 9.2.0.cl or later   Reverts TML objects to a previous commit specified in the API request.  Requires at least edit access to objects.  In the API request, specify the `commit_id`. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.  By default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).      
    * @param commitId Commit id to which the object should be reverted
    * @param revertCommitRequest 
    */
@@ -15709,6 +18900,9 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       let _config = _options || this.configuration;
       if (commitId === null || commitId === void 0) {
         throw new RequiredError("ThoughtSpotRestApi", "revertCommit", "commitId");
+      }
+      if (revertCommitRequest === null || revertCommitRequest === void 0) {
+        throw new RequiredError("ThoughtSpotRestApi", "revertCommit", "revertCommitRequest");
       }
       const localVarPath = "/api/rest/2.0/vcs/git/commits/{commit_id}/revert".replace("{commit_id}", encodeURIComponent(String(commitId)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
@@ -15743,6 +18937,9 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     return __async(this, null, function* () {
       var _a, _b, _c;
       let _config = _options || this.configuration;
+      if (revokeTokenRequest === null || revokeTokenRequest === void 0) {
+        throw new RequiredError("ThoughtSpotRestApi", "revokeToken", "revokeTokenRequest");
+      }
       const localVarPath = "/api/rest/2.0/auth/token/revoke";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
@@ -15769,7 +18966,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *  Version: 9.2.0.cl or later   Gets a list of commits for a given metadata object.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *   Version: 9.2.0.cl or later   Gets a list of commits for a given metadata object.  Requires `DATAMANAGEMENT` (**Can manage data**) privilege.      
    * @param searchCommitsRequest 
    */
   searchCommits(searchCommitsRequest, _options) {
@@ -15805,13 +19002,16 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *  Version: 9.2.0.cl or later   Gets Git repository connections configured on the ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *   Version: 9.2.0.cl or later   Gets Git repository connections configured on the ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param searchConfigRequest 
    */
   searchConfig(searchConfigRequest, _options) {
     return __async(this, null, function* () {
       var _a, _b, _c;
       let _config = _options || this.configuration;
+      if (searchConfigRequest === null || searchConfigRequest === void 0) {
+        throw new RequiredError("ThoughtSpotRestApi", "searchConfig", "searchConfigRequest");
+      }
       const localVarPath = "/api/rest/2.0/vcs/git/config/search";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
@@ -15845,6 +19045,9 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     return __async(this, null, function* () {
       var _a, _b, _c;
       let _config = _options || this.configuration;
+      if (searchConnectionRequest === null || searchConnectionRequest === void 0) {
+        throw new RequiredError("ThoughtSpotRestApi", "searchConnection", "searchConnectionRequest");
+      }
       const localVarPath = "/api/rest/2.0/connection/search";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
@@ -15878,6 +19081,9 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     return __async(this, null, function* () {
       var _a, _b, _c;
       let _config = _options || this.configuration;
+      if (searchCustomActionsRequest === null || searchCustomActionsRequest === void 0) {
+        throw new RequiredError("ThoughtSpotRestApi", "searchCustomActions", "searchCustomActionsRequest");
+      }
       const localVarPath = "/api/rest/2.0/customization/custom-actions/search";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
@@ -15904,7 +19110,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *   Version: 9.0.0.cl or later   Generates an Answer from a given data source.  Requires at least view access to the data source.  #### Usage guidelines  To generate a new Answer, specify the data source GUID. The data source can be a Worksheet, View, Table, or SQL view.  Pass search tokens in the `query_string` attribute in the API request as shown in the following example. For more information passing search query string in API requests, see [`Components of a search query`](https://developers.thoughtspot.com/docs/?pageid=search-data-api#components).   ``` {   \"query_string\": \"[sales] by [store]\",   \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\", } ```      
+   *   Version: 9.0.0.cl or later   Generates an Answer from a given data source.  Requires at least view access to the data source object.  #### Usage guidelines  To search data, specify the data source GUID in `logical_table_identifier`. The data source can be a Worksheet, View, Table, or SQL view.  Pass search tokens in the `query_string` attribute in the API request as shown in the following example:  ``` {   \"query_string\": \"[sales] by [store]\",   \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\", } ```  For more information about the `query_string` format and data source attribute, see [Search data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_data_api).    The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).        
    * @param searchDataRequest 
    */
   searchData(searchDataRequest, _options) {
@@ -15947,6 +19153,9 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     return __async(this, null, function* () {
       var _a, _b, _c;
       let _config = _options || this.configuration;
+      if (searchMetadataRequest === null || searchMetadataRequest === void 0) {
+        throw new RequiredError("ThoughtSpotRestApi", "searchMetadata", "searchMetadataRequest");
+      }
       const localVarPath = "/api/rest/2.0/metadata/search";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
@@ -15980,6 +19189,9 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     return __async(this, null, function* () {
       var _a, _b, _c;
       let _config = _options || this.configuration;
+      if (searchOrgsRequest === null || searchOrgsRequest === void 0) {
+        throw new RequiredError("ThoughtSpotRestApi", "searchOrgs", "searchOrgsRequest");
+      }
       const localVarPath = "/api/rest/2.0/orgs/search";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
@@ -16013,6 +19225,9 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     return __async(this, null, function* () {
       var _a, _b, _c;
       let _config = _options || this.configuration;
+      if (searchRolesRequest === null || searchRolesRequest === void 0) {
+        throw new RequiredError("ThoughtSpotRestApi", "searchRoles", "searchRolesRequest");
+      }
       const localVarPath = "/api/rest/2.0/roles/search";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
@@ -16046,6 +19261,9 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     return __async(this, null, function* () {
       var _a, _b, _c;
       let _config = _options || this.configuration;
+      if (searchSchedulesRequest === null || searchSchedulesRequest === void 0) {
+        throw new RequiredError("ThoughtSpotRestApi", "searchSchedules", "searchSchedulesRequest");
+      }
       const localVarPath = "/api/rest/2.0/schedules/search";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
@@ -16079,6 +19297,9 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     return __async(this, null, function* () {
       var _a, _b, _c;
       let _config = _options || this.configuration;
+      if (searchTagsRequest === null || searchTagsRequest === void 0) {
+        throw new RequiredError("ThoughtSpotRestApi", "searchTags", "searchTagsRequest");
+      }
       const localVarPath = "/api/rest/2.0/tags/search";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
@@ -16112,6 +19333,9 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     return __async(this, null, function* () {
       var _a, _b, _c;
       let _config = _options || this.configuration;
+      if (searchUserGroupsRequest === null || searchUserGroupsRequest === void 0) {
+        throw new RequiredError("ThoughtSpotRestApi", "searchUserGroups", "searchUserGroupsRequest");
+      }
       const localVarPath = "/api/rest/2.0/groups/search";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
@@ -16145,6 +19369,9 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     return __async(this, null, function* () {
       var _a, _b, _c;
       let _config = _options || this.configuration;
+      if (searchUsersRequest === null || searchUsersRequest === void 0) {
+        throw new RequiredError("ThoughtSpotRestApi", "searchUsers", "searchUsersRequest");
+      }
       const localVarPath = "/api/rest/2.0/users/search";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
@@ -16243,13 +19470,16 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *  Version: 9.2.0.cl or later   Updates Git repository configuration settings.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *   Version: 9.2.0.cl or later   Updates Git repository configuration settings.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param updateConfigRequest 
    */
   updateConfig(updateConfigRequest, _options) {
     return __async(this, null, function* () {
       var _a, _b, _c;
       let _config = _options || this.configuration;
+      if (updateConfigRequest === null || updateConfigRequest === void 0) {
+        throw new RequiredError("ThoughtSpotRestApi", "updateConfig", "updateConfigRequest");
+      }
       const localVarPath = "/api/rest/2.0/vcs/git/config/update";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
@@ -16312,6 +19542,46 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
+   *   Version: 10.0.0.cl or later   Updates a connection object.  Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  To update a connection object, pass these parameters in your API request:  1. GUID of the connection object. 2. If you are updating tables or database schema of a connection object:    a. Add the updated JSON map of metadata with database, schema, and tables in `data_warehouse_config`.    b. Set `validate` to `true`. 3. If you are updating a configuration attribute, connection name, or description, you can set `validate` to `false`.      
+   * @param connectionIdentifier Unique ID or name of the connection.
+   * @param updateConnectionV2Request 
+   */
+  updateConnectionV2(connectionIdentifier, updateConnectionV2Request, _options) {
+    return __async(this, null, function* () {
+      var _a, _b, _c;
+      let _config = _options || this.configuration;
+      if (connectionIdentifier === null || connectionIdentifier === void 0) {
+        throw new RequiredError("ThoughtSpotRestApi", "updateConnectionV2", "connectionIdentifier");
+      }
+      if (updateConnectionV2Request === null || updateConnectionV2Request === void 0) {
+        throw new RequiredError("ThoughtSpotRestApi", "updateConnectionV2", "updateConnectionV2Request");
+      }
+      const localVarPath = "/api/rest/2.0/connections/update/{connection_identifier}".replace("{connection_identifier}", encodeURIComponent(String(connectionIdentifier)));
+      const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
+      requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+      const contentType = ObjectSerializer.getPreferredMediaType([
+        "application/json"
+      ]);
+      requestContext.setHeaderParam("Content-Type", contentType);
+      const serializedBody = ObjectSerializer.stringify(
+        ObjectSerializer.serialize(updateConnectionV2Request, "UpdateConnectionV2Request", ""),
+        contentType
+      );
+      requestContext.setBody(serializedBody);
+      let authMethod;
+      authMethod = _config.authMethods["bearerAuth"];
+      if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
+        yield authMethod == null ? void 0 : authMethod.applySecurityAuthentication(requestContext);
+      }
+      const defaultAuth = ((_a = _options == null ? void 0 : _options.authMethods) == null ? void 0 : _a.default) || ((_c = (_b = this.configuration) == null ? void 0 : _b.authMethods) == null ? void 0 : _c.default);
+      if (defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication) {
+        yield defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication(requestContext);
+      }
+      return requestContext;
+    });
+  }
+  /**
    *   Version: 9.6.0.cl or later   Updates a custom action.  Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage Guidelines  The API allows you to modify the following properties:  * Name of the custom action * Action availability to groups * Association to metadata objects * Authentication settings for a URL-based action  For more information, see [Custom actions](https://developers.thoughtspot.com/docs/?pageid=custom-action-intro).      
    * @param customActionIdentifier Unique ID or name of the custom action.
    * @param updateCustomActionRequest 
@@ -16322,6 +19592,9 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       let _config = _options || this.configuration;
       if (customActionIdentifier === null || customActionIdentifier === void 0) {
         throw new RequiredError("ThoughtSpotRestApi", "updateCustomAction", "customActionIdentifier");
+      }
+      if (updateCustomActionRequest === null || updateCustomActionRequest === void 0) {
+        throw new RequiredError("ThoughtSpotRestApi", "updateCustomAction", "updateCustomActionRequest");
       }
       const localVarPath = "/api/rest/2.0/customization/custom-actions/{custom_action_identifier}/update".replace("{custom_action_identifier}", encodeURIComponent(String(customActionIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
@@ -16349,6 +19622,42 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
+   *   Version: 9.9.0.cl or later   Updates a DBT connection object.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege, along with an existing DBT connection.  #### About update DBT connection You can modify DBT connection object properties such as embrace connection name, embrace database name, import type, account identifier, access token, project identifier and environment (or) embrace connection, embrace database name, import type, file_content settings.      
+   * @param updateDbtConnectionRequest 
+   */
+  updateDbtConnection(updateDbtConnectionRequest, _options) {
+    return __async(this, null, function* () {
+      var _a, _b, _c;
+      let _config = _options || this.configuration;
+      if (updateDbtConnectionRequest === null || updateDbtConnectionRequest === void 0) {
+        throw new RequiredError("ThoughtSpotRestApi", "updateDbtConnection", "updateDbtConnectionRequest");
+      }
+      const localVarPath = "/api/rest/2.0/dbt/update-dbt-connection";
+      const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
+      requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+      const contentType = ObjectSerializer.getPreferredMediaType([
+        "application/json"
+      ]);
+      requestContext.setHeaderParam("Content-Type", contentType);
+      const serializedBody = ObjectSerializer.stringify(
+        ObjectSerializer.serialize(updateDbtConnectionRequest, "UpdateDbtConnectionRequest", ""),
+        contentType
+      );
+      requestContext.setBody(serializedBody);
+      let authMethod;
+      authMethod = _config.authMethods["bearerAuth"];
+      if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
+        yield authMethod == null ? void 0 : authMethod.applySecurityAuthentication(requestContext);
+      }
+      const defaultAuth = ((_a = _options == null ? void 0 : _options.authMethods) == null ? void 0 : _a.default) || ((_c = (_b = this.configuration) == null ? void 0 : _b.authMethods) == null ? void 0 : _c.default);
+      if (defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication) {
+        yield defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication(requestContext);
+      }
+      return requestContext;
+    });
+  }
+  /**
    *   Version: 9.0.0.cl or later   Updates an Org object. You can modify Org properties such as name, description, and user associations.  Requires cluster administration (**Can administer Org**) privileges.      
    * @param orgIdentifier ID or name of the Org
    * @param updateOrgRequest 
@@ -16359,6 +19668,9 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       let _config = _options || this.configuration;
       if (orgIdentifier === null || orgIdentifier === void 0) {
         throw new RequiredError("ThoughtSpotRestApi", "updateOrg", "orgIdentifier");
+      }
+      if (updateOrgRequest === null || updateOrgRequest === void 0) {
+        throw new RequiredError("ThoughtSpotRestApi", "updateOrg", "updateOrgRequest");
       }
       const localVarPath = "/api/rest/2.0/orgs/{org_identifier}/update".replace("{org_identifier}", encodeURIComponent(String(orgIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
@@ -16387,7 +19699,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
   }
   /**
    * Updates a Role. Requires cluster Administration or Role Administration privileges.    Version: 9.5.0.cl or later 
-   * @param roleIdentifier Unique ID or name of the role.
+   * @param roleIdentifier Unique ID or name of the Role.
    * @param updateRoleRequest 
    */
   updateRole(roleIdentifier, updateRoleRequest, _options) {
@@ -16436,6 +19748,9 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       let _config = _options || this.configuration;
       if (scheduleIdentifier === null || scheduleIdentifier === void 0) {
         throw new RequiredError("ThoughtSpotRestApi", "updateSchedule", "scheduleIdentifier");
+      }
+      if (updateScheduleRequest === null || updateScheduleRequest === void 0) {
+        throw new RequiredError("ThoughtSpotRestApi", "updateSchedule", "updateScheduleRequest");
       }
       const localVarPath = "/api/rest/2.0/schedules/{schedule_identifier}/update".replace("{schedule_identifier}", encodeURIComponent(String(scheduleIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
@@ -16499,7 +19814,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *   Version: 9.0.0.cl or later   Updates a tag object.  You can modify the `name` and `color` properties of a tag object.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *   Version: 9.0.0.cl or later   Updates a tag object.  You can modify the `name` and `color` properties of a tag object.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.      
    * @param tagIdentifier Name or Id of the tag.
    * @param updateTagRequest 
    */
@@ -16509,6 +19824,9 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       let _config = _options || this.configuration;
       if (tagIdentifier === null || tagIdentifier === void 0) {
         throw new RequiredError("ThoughtSpotRestApi", "updateTag", "tagIdentifier");
+      }
+      if (updateTagRequest === null || updateTagRequest === void 0) {
+        throw new RequiredError("ThoughtSpotRestApi", "updateTag", "updateTagRequest");
       }
       const localVarPath = "/api/rest/2.0/tags/{tag_identifier}/update".replace("{tag_identifier}", encodeURIComponent(String(tagIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
@@ -16547,6 +19865,9 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       if (userIdentifier === null || userIdentifier === void 0) {
         throw new RequiredError("ThoughtSpotRestApi", "updateUser", "userIdentifier");
       }
+      if (updateUserRequest === null || updateUserRequest === void 0) {
+        throw new RequiredError("ThoughtSpotRestApi", "updateUser", "updateUserRequest");
+      }
       const localVarPath = "/api/rest/2.0/users/{user_identifier}/update".replace("{user_identifier}", encodeURIComponent(String(userIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
@@ -16584,6 +19905,9 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       if (groupIdentifier === null || groupIdentifier === void 0) {
         throw new RequiredError("ThoughtSpotRestApi", "updateUserGroup", "groupIdentifier");
       }
+      if (updateUserGroupRequest === null || updateUserGroupRequest === void 0) {
+        throw new RequiredError("ThoughtSpotRestApi", "updateUserGroup", "updateUserGroupRequest");
+      }
       const localVarPath = "/api/rest/2.0/groups/{group_identifier}/update".replace("{group_identifier}", encodeURIComponent(String(groupIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
@@ -16610,7 +19934,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *  Version: 9.2.0.cl or later   Validates the content of your source branch against the objects in your destination environment.  Before merging content from your source branch to the destination branch, run this API operation from your destination environment and ensure that the changes from the source branch function in the destination environment.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *   Version: 9.2.0.cl or later   Validates the content of your source branch against the objects in your destination environment.  Before merging content from your source branch to the destination branch, run this API operation from your destination environment and ensure that the changes from the source branch function in the destination environment.  Requires `DATAMANAGEMENT` (**Can manage data**) privilege.      
    * @param validateMergeRequest 
    */
   validateMerge(validateMergeRequest, _options) {
@@ -16645,8 +19969,105 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       return requestContext;
     });
   }
+  /**
+   *  Version: 9.12.0.cl or later 
+   * @param validateTokenRequest 
+   */
+  validateToken(validateTokenRequest, _options) {
+    return __async(this, null, function* () {
+      var _a, _b, _c;
+      let _config = _options || this.configuration;
+      if (validateTokenRequest === null || validateTokenRequest === void 0) {
+        throw new RequiredError("ThoughtSpotRestApi", "validateToken", "validateTokenRequest");
+      }
+      const localVarPath = "/api/rest/2.0/auth/token/validate";
+      const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
+      requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+      const contentType = ObjectSerializer.getPreferredMediaType([
+        "application/json"
+      ]);
+      requestContext.setHeaderParam("Content-Type", contentType);
+      const serializedBody = ObjectSerializer.stringify(
+        ObjectSerializer.serialize(validateTokenRequest, "ValidateTokenRequest", ""),
+        contentType
+      );
+      requestContext.setBody(serializedBody);
+      let authMethod;
+      authMethod = _config.authMethods["bearerAuth"];
+      if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
+        yield authMethod == null ? void 0 : authMethod.applySecurityAuthentication(requestContext);
+      }
+      const defaultAuth = ((_a = _options == null ? void 0 : _options.authMethods) == null ? void 0 : _a.default) || ((_c = (_b = this.configuration) == null ? void 0 : _b.authMethods) == null ? void 0 : _c.default);
+      if (defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication) {
+        yield defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication(requestContext);
+      }
+      return requestContext;
+    });
+  }
 };
 var ThoughtSpotRestApiResponseProcessor = class {
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
+   * @params response Response returned by the server for a request to activateUser
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  activateUser(response) {
+    return __async(this, null, function* () {
+      const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+      if (isCodeInRange("200", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "User",
+          ""
+        );
+        return body;
+      }
+      if (isCodeInRange("400", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
+      }
+      if (isCodeInRange("401", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+      }
+      if (isCodeInRange("403", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+      }
+      if (isCodeInRange("500", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+      }
+      if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "User",
+          ""
+        );
+        return body;
+      }
+      throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", yield response.getBodyAsAny(), response.headers);
+    });
+  }
   /**
    * Unwraps the actual response sent by the server from the response context and deserializes the response content
    * to the expected objects
@@ -17429,6 +20850,311 @@ var ThoughtSpotRestApiResponseProcessor = class {
    * Unwraps the actual response sent by the server from the response context and deserializes the response content
    * to the expected objects
    *
+   * @params response Response returned by the server for a request to dbtConnection
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  dbtConnection(response) {
+    return __async(this, null, function* () {
+      const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+      if (isCodeInRange("200", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "any",
+          ""
+        );
+        return body;
+      }
+      if (isCodeInRange("400", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
+      }
+      if (isCodeInRange("401", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+      }
+      if (isCodeInRange("403", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+      }
+      if (isCodeInRange("500", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+      }
+      if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "any",
+          ""
+        );
+        return body;
+      }
+      throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", yield response.getBodyAsAny(), response.headers);
+    });
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
+   * @params response Response returned by the server for a request to dbtGenerateSyncTml
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  dbtGenerateSyncTml(response) {
+    return __async(this, null, function* () {
+      const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+      if (isCodeInRange("200", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "any",
+          ""
+        );
+        return body;
+      }
+      if (isCodeInRange("400", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
+      }
+      if (isCodeInRange("401", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+      }
+      if (isCodeInRange("403", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+      }
+      if (isCodeInRange("500", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+      }
+      if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "any",
+          ""
+        );
+        return body;
+      }
+      throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", yield response.getBodyAsAny(), response.headers);
+    });
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
+   * @params response Response returned by the server for a request to dbtGenerateTml
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  dbtGenerateTml(response) {
+    return __async(this, null, function* () {
+      const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+      if (isCodeInRange("200", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "any",
+          ""
+        );
+        return body;
+      }
+      if (isCodeInRange("400", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
+      }
+      if (isCodeInRange("401", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+      }
+      if (isCodeInRange("403", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+      }
+      if (isCodeInRange("500", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+      }
+      if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "any",
+          ""
+        );
+        return body;
+      }
+      throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", yield response.getBodyAsAny(), response.headers);
+    });
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
+   * @params response Response returned by the server for a request to dbtSearch
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  dbtSearch(response) {
+    return __async(this, null, function* () {
+      const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+      if (isCodeInRange("200", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "Array<DbtSearchResponse>",
+          ""
+        );
+        return body;
+      }
+      if (isCodeInRange("400", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
+      }
+      if (isCodeInRange("401", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+      }
+      if (isCodeInRange("403", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+      }
+      if (isCodeInRange("500", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+      }
+      if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "Array<DbtSearchResponse>",
+          ""
+        );
+        return body;
+      }
+      throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", yield response.getBodyAsAny(), response.headers);
+    });
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
+   * @params response Response returned by the server for a request to deactivateUser
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  deactivateUser(response) {
+    return __async(this, null, function* () {
+      const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+      if (isCodeInRange("200", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ResponseActivationURL",
+          ""
+        );
+        return body;
+      }
+      if (isCodeInRange("400", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
+      }
+      if (isCodeInRange("401", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+      }
+      if (isCodeInRange("403", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+      }
+      if (isCodeInRange("500", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+      }
+      if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ResponseActivationURL",
+          ""
+        );
+        return body;
+      }
+      throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", yield response.getBodyAsAny(), response.headers);
+    });
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
    * @params response Response returned by the server for a request to deleteConfig
    * @throws ApiException if the response code was not in [200, 299]
    */
@@ -17541,10 +21267,122 @@ var ThoughtSpotRestApiResponseProcessor = class {
    * Unwraps the actual response sent by the server from the response context and deserializes the response content
    * to the expected objects
    *
+   * @params response Response returned by the server for a request to deleteConnectionV2
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  deleteConnectionV2(response) {
+    return __async(this, null, function* () {
+      const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+      if (isCodeInRange("204", response.httpStatusCode)) {
+        return;
+      }
+      if (isCodeInRange("400", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
+      }
+      if (isCodeInRange("401", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+      }
+      if (isCodeInRange("403", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+      }
+      if (isCodeInRange("500", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+      }
+      if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "void",
+          ""
+        );
+        return body;
+      }
+      throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", yield response.getBodyAsAny(), response.headers);
+    });
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
    * @params response Response returned by the server for a request to deleteCustomAction
    * @throws ApiException if the response code was not in [200, 299]
    */
   deleteCustomAction(response) {
+    return __async(this, null, function* () {
+      const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+      if (isCodeInRange("204", response.httpStatusCode)) {
+        return;
+      }
+      if (isCodeInRange("400", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
+      }
+      if (isCodeInRange("401", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+      }
+      if (isCodeInRange("403", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+      }
+      if (isCodeInRange("500", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+      }
+      if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "void",
+          ""
+        );
+        return body;
+      }
+      throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", yield response.getBodyAsAny(), response.headers);
+    });
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
+   * @params response Response returned by the server for a request to deleteDbtConnection
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  deleteDbtConnection(response) {
     return __async(this, null, function* () {
       const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
       if (isCodeInRange("204", response.httpStatusCode)) {
@@ -18050,6 +21888,62 @@ var ThoughtSpotRestApiResponseProcessor = class {
    * Unwraps the actual response sent by the server from the response context and deserializes the response content
    * to the expected objects
    *
+   * @params response Response returned by the server for a request to downloadConnectionMetadataChanges
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  downloadConnectionMetadataChanges(response) {
+    return __async(this, null, function* () {
+      const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+      if (isCodeInRange("200", response.httpStatusCode)) {
+        return;
+      }
+      if (isCodeInRange("400", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
+      }
+      if (isCodeInRange("401", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+      }
+      if (isCodeInRange("403", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+      }
+      if (isCodeInRange("500", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+      }
+      if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "void",
+          ""
+        );
+        return body;
+      }
+      throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", yield response.getBodyAsAny(), response.headers);
+    });
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
    * @params response Response returned by the server for a request to exportAnswerReport
    * @throws ApiException if the response code was not in [200, 299]
    */
@@ -18223,6 +22117,67 @@ var ThoughtSpotRestApiResponseProcessor = class {
    * Unwraps the actual response sent by the server from the response context and deserializes the response content
    * to the expected objects
    *
+   * @params response Response returned by the server for a request to exportMetadataTMLBatched
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  exportMetadataTMLBatched(response) {
+    return __async(this, null, function* () {
+      const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+      if (isCodeInRange("200", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "any",
+          ""
+        );
+        return body;
+      }
+      if (isCodeInRange("400", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
+      }
+      if (isCodeInRange("401", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+      }
+      if (isCodeInRange("403", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+      }
+      if (isCodeInRange("500", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+      }
+      if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "any",
+          ""
+        );
+        return body;
+      }
+      throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", yield response.getBodyAsAny(), response.headers);
+    });
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
    * @params response Response returned by the server for a request to fetchAnswerData
    * @throws ApiException if the response code was not in [200, 299]
    */
@@ -18334,6 +22289,67 @@ var ThoughtSpotRestApiResponseProcessor = class {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
           "SqlQueryResponse",
+          ""
+        );
+        return body;
+      }
+      throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", yield response.getBodyAsAny(), response.headers);
+    });
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
+   * @params response Response returned by the server for a request to fetchConnectionDiffStatus
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  fetchConnectionDiffStatus(response) {
+    return __async(this, null, function* () {
+      const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+      if (isCodeInRange("200", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "FetchConnectionDiffStatusResponse",
+          ""
+        );
+        return body;
+      }
+      if (isCodeInRange("400", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
+      }
+      if (isCodeInRange("401", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+      }
+      if (isCodeInRange("403", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+      }
+      if (isCodeInRange("500", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+      }
+      if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "FetchConnectionDiffStatusResponse",
           ""
         );
         return body;
@@ -18537,7 +22553,7 @@ var ThoughtSpotRestApiResponseProcessor = class {
       if (isCodeInRange("200", response.httpStatusCode)) {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
-          "any",
+          "PermissionOfPrincipalsResponse",
           ""
         );
         return body;
@@ -18577,7 +22593,7 @@ var ThoughtSpotRestApiResponseProcessor = class {
       if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
-          "any",
+          "PermissionOfPrincipalsResponse",
           ""
         );
         return body;
@@ -18598,7 +22614,7 @@ var ThoughtSpotRestApiResponseProcessor = class {
       if (isCodeInRange("200", response.httpStatusCode)) {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
-          "any",
+          "PermissionOfMetadataResponse",
           ""
         );
         return body;
@@ -18638,7 +22654,7 @@ var ThoughtSpotRestApiResponseProcessor = class {
       if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
-          "any",
+          "PermissionOfMetadataResponse",
           ""
         );
         return body;
@@ -20562,6 +24578,62 @@ var ThoughtSpotRestApiResponseProcessor = class {
    * Unwraps the actual response sent by the server from the response context and deserializes the response content
    * to the expected objects
    *
+   * @params response Response returned by the server for a request to updateConnectionV2
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  updateConnectionV2(response) {
+    return __async(this, null, function* () {
+      const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+      if (isCodeInRange("204", response.httpStatusCode)) {
+        return;
+      }
+      if (isCodeInRange("400", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
+      }
+      if (isCodeInRange("401", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+      }
+      if (isCodeInRange("403", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+      }
+      if (isCodeInRange("500", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+      }
+      if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "void",
+          ""
+        );
+        return body;
+      }
+      throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", yield response.getBodyAsAny(), response.headers);
+    });
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
    * @params response Response returned by the server for a request to updateCustomAction
    * @throws ApiException if the response code was not in [200, 299]
    */
@@ -20607,6 +24679,67 @@ var ThoughtSpotRestApiResponseProcessor = class {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
           "void",
+          ""
+        );
+        return body;
+      }
+      throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", yield response.getBodyAsAny(), response.headers);
+    });
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
+   * @params response Response returned by the server for a request to updateDbtConnection
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  updateDbtConnection(response) {
+    return __async(this, null, function* () {
+      const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+      if (isCodeInRange("200", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "any",
+          ""
+        );
+        return body;
+      }
+      if (isCodeInRange("400", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
+      }
+      if (isCodeInRange("401", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+      }
+      if (isCodeInRange("403", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+      }
+      if (isCodeInRange("500", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+      }
+      if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "any",
           ""
         );
         return body;
@@ -21072,10 +25205,107 @@ var ThoughtSpotRestApiResponseProcessor = class {
       throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", yield response.getBodyAsAny(), response.headers);
     });
   }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
+   * @params response Response returned by the server for a request to validateToken
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  validateToken(response) {
+    return __async(this, null, function* () {
+      const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+      if (isCodeInRange("200", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "TokenValidationResponse",
+          ""
+        );
+        return body;
+      }
+      if (isCodeInRange("400", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
+      }
+      if (isCodeInRange("401", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+      }
+      if (isCodeInRange("403", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+      }
+      if (isCodeInRange("500", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+      }
+      if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "TokenValidationResponse",
+          ""
+        );
+        return body;
+      }
+      throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", yield response.getBodyAsAny(), response.headers);
+    });
+  }
 };
 
 // apis/UsersApi.ts
 var UsersApiRequestFactory = class extends BaseAPIRequestFactory {
+  /**
+   *   Version: 9.7.0.cl or later   Activates a deactivated user account.  Requires `ADMINISTRATION` (**Can administer Thoughtspot**) privilege.  To activate an inactive user account, the API request body must include the following information:  - Username or the GUID of the user account. - Auth token generated for the deactivated user. The auth token is sent in the API response when a user is deactivated. - Password for the user account.      
+   * @param activateUserRequest 
+   */
+  activateUser(activateUserRequest, _options) {
+    return __async(this, null, function* () {
+      var _a, _b, _c;
+      let _config = _options || this.configuration;
+      if (activateUserRequest === null || activateUserRequest === void 0) {
+        throw new RequiredError("UsersApi", "activateUser", "activateUserRequest");
+      }
+      const localVarPath = "/api/rest/2.0/users/activate";
+      const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
+      requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+      const contentType = ObjectSerializer.getPreferredMediaType([
+        "application/json"
+      ]);
+      requestContext.setHeaderParam("Content-Type", contentType);
+      const serializedBody = ObjectSerializer.stringify(
+        ObjectSerializer.serialize(activateUserRequest, "ActivateUserRequest", ""),
+        contentType
+      );
+      requestContext.setBody(serializedBody);
+      let authMethod;
+      authMethod = _config.authMethods["bearerAuth"];
+      if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
+        yield authMethod == null ? void 0 : authMethod.applySecurityAuthentication(requestContext);
+      }
+      const defaultAuth = ((_a = _options == null ? void 0 : _options.authMethods) == null ? void 0 : _a.default) || ((_c = (_b = this.configuration) == null ? void 0 : _b.authMethods) == null ? void 0 : _c.default);
+      if (defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication) {
+        yield defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication(requestContext);
+      }
+      return requestContext;
+    });
+  }
   /**
    *   Version: 9.0.0.cl or later   Updates the current password of the user.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param changeUserPasswordRequest 
@@ -21149,6 +25379,42 @@ var UsersApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
+   *   Version: 9.7.0.cl or later   Deactivates a user account.  Requires `ADMINISTRATION` (**Can administer Thoughtspot**) privilege.  To deactivate a user account, the API request body must include the following information:  - Username or the GUID of the user account - Base URL of the ThoughtSpot instance  If the API request is successful, ThoughtSpot returns the activation URL in the response. The activation URL is valid for 14 days and can be used to re-activate the account and reset the password of the deactivated account.      
+   * @param deactivateUserRequest 
+   */
+  deactivateUser(deactivateUserRequest, _options) {
+    return __async(this, null, function* () {
+      var _a, _b, _c;
+      let _config = _options || this.configuration;
+      if (deactivateUserRequest === null || deactivateUserRequest === void 0) {
+        throw new RequiredError("UsersApi", "deactivateUser", "deactivateUserRequest");
+      }
+      const localVarPath = "/api/rest/2.0/users/deactivate";
+      const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
+      requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+      const contentType = ObjectSerializer.getPreferredMediaType([
+        "application/json"
+      ]);
+      requestContext.setHeaderParam("Content-Type", contentType);
+      const serializedBody = ObjectSerializer.stringify(
+        ObjectSerializer.serialize(deactivateUserRequest, "DeactivateUserRequest", ""),
+        contentType
+      );
+      requestContext.setBody(serializedBody);
+      let authMethod;
+      authMethod = _config.authMethods["bearerAuth"];
+      if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
+        yield authMethod == null ? void 0 : authMethod.applySecurityAuthentication(requestContext);
+      }
+      const defaultAuth = ((_a = _options == null ? void 0 : _options.authMethods) == null ? void 0 : _a.default) || ((_c = (_b = this.configuration) == null ? void 0 : _b.authMethods) == null ? void 0 : _c.default);
+      if (defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication) {
+        yield defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication(requestContext);
+      }
+      return requestContext;
+    });
+  }
+  /**
    *   Version: 9.0.0.cl or later   Deletes a user from the ThoughtSpot system.  If you want to remove a user from a specific Org but not from ThoughtSpot, update the group and Org mapping properties of the user object via a POST API call to the [/api/rest/2.0/users/{user_identifier}/update](#/http/api-endpoints/users/update-user) endpoint.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param userIdentifier GUID / name of the user
    */
@@ -21183,6 +25449,9 @@ var UsersApiRequestFactory = class extends BaseAPIRequestFactory {
     return __async(this, null, function* () {
       var _a, _b, _c;
       let _config = _options || this.configuration;
+      if (forceLogoutUsersRequest === null || forceLogoutUsersRequest === void 0) {
+        throw new RequiredError("UsersApi", "forceLogoutUsers", "forceLogoutUsersRequest");
+      }
       const localVarPath = "/api/rest/2.0/users/force-logout";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
@@ -21288,6 +25557,9 @@ var UsersApiRequestFactory = class extends BaseAPIRequestFactory {
     return __async(this, null, function* () {
       var _a, _b, _c;
       let _config = _options || this.configuration;
+      if (searchUsersRequest === null || searchUsersRequest === void 0) {
+        throw new RequiredError("UsersApi", "searchUsers", "searchUsersRequest");
+      }
       const localVarPath = "/api/rest/2.0/users/search";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
@@ -21325,6 +25597,9 @@ var UsersApiRequestFactory = class extends BaseAPIRequestFactory {
       if (userIdentifier === null || userIdentifier === void 0) {
         throw new RequiredError("UsersApi", "updateUser", "userIdentifier");
       }
+      if (updateUserRequest === null || updateUserRequest === void 0) {
+        throw new RequiredError("UsersApi", "updateUser", "updateUserRequest");
+      }
       const localVarPath = "/api/rest/2.0/users/{user_identifier}/update".replace("{user_identifier}", encodeURIComponent(String(userIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
@@ -21352,6 +25627,67 @@ var UsersApiRequestFactory = class extends BaseAPIRequestFactory {
   }
 };
 var UsersApiResponseProcessor = class {
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
+   * @params response Response returned by the server for a request to activateUser
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  activateUser(response) {
+    return __async(this, null, function* () {
+      const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+      if (isCodeInRange("200", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "User",
+          ""
+        );
+        return body;
+      }
+      if (isCodeInRange("400", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
+      }
+      if (isCodeInRange("401", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+      }
+      if (isCodeInRange("403", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+      }
+      if (isCodeInRange("500", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+      }
+      if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "User",
+          ""
+        );
+        return body;
+      }
+      throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", yield response.getBodyAsAny(), response.headers);
+    });
+  }
   /**
    * Unwraps the actual response sent by the server from the response context and deserializes the response content
    * to the expected objects
@@ -21462,6 +25798,67 @@ var UsersApiResponseProcessor = class {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
           "User",
+          ""
+        );
+        return body;
+      }
+      throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", yield response.getBodyAsAny(), response.headers);
+    });
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
+   * @params response Response returned by the server for a request to deactivateUser
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  deactivateUser(response) {
+    return __async(this, null, function* () {
+      const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+      if (isCodeInRange("200", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ResponseActivationURL",
+          ""
+        );
+        return body;
+      }
+      if (isCodeInRange("400", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
+      }
+      if (isCodeInRange("401", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+      }
+      if (isCodeInRange("403", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+      }
+      if (isCodeInRange("500", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+      }
+      if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ResponseActivationURL",
           ""
         );
         return body;
@@ -21820,7 +26217,7 @@ var UsersApiResponseProcessor = class {
 // apis/VersionControlApi.ts
 var VersionControlApiRequestFactory = class extends BaseAPIRequestFactory {
   /**
-   *  Version: 9.2.0.cl or later   Commits TML files of metadata objects to the Git branch configured on your instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  Before using this endpoint to push your commits:  * Enable Git integration on your instance. * Make sure the Git repository and branch details are configured on your instance.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).      
+   *   Version: 9.2.0.cl or later   Commits TML files of metadata objects to the Git branch configured on your instance.  Requires at least edit access to objects used in the commit operation.  Before using this endpoint to push your commits:  * Enable Git integration on your instance. * Make sure the Git repository and branch details are configured on your instance.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).      
    * @param commitBranchRequest 
    */
   commitBranch(commitBranchRequest, _options) {
@@ -21856,7 +26253,7 @@ var VersionControlApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *  Version: 9.2.0.cl or later   Allows you to connect a ThoughtSpot instance to a Git repository.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  You can use this API endpoint to connect your ThoughtSpot development and production environments to the development and production branches of a Git repository.  Before using this endpoint to connect your ThoughtSpot instance to a Git repository, check the following prerequisites:  * You have a Git repository. If you are using GitHub, make sure you have a valid account and an access token to connect ThoughtSpot to GitHub. For information about generating a token, see [GitHub Documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).  * Your access token has `repo` scope that grants full access to public and private repositories. * Your Git repository has a branch that can be configured as a default branch in ThoughtSpot.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).      
+   *   Version: 9.2.0.cl or later   Allows you to connect a ThoughtSpot instance to a Git repository.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  You can use this API endpoint to connect your ThoughtSpot development and production environments to the development and production branches of a Git repository.  Before using this endpoint to connect your ThoughtSpot instance to a Git repository, check the following prerequisites:  * You have a Git repository. If you are using GitHub, make sure you have a valid account and an access token to connect ThoughtSpot to GitHub. For information about generating a token, see [GitHub Documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).  * Your access token has `repo` scope that grants full access to public and private repositories. * Your Git repository has a branch that can be configured as a default branch in ThoughtSpot.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).  **Note**: ThoughtSpot supports only GitHub / GitHub Enterprise for CI/CD.      
    * @param createConfigRequest 
    */
   createConfig(createConfigRequest, _options) {
@@ -21892,13 +26289,16 @@ var VersionControlApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *  Version: 9.2.0.cl or later   Deletes Git repository configuration from your ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *   Version: 9.2.0.cl or later   Deletes Git repository configuration from your ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param deleteConfigRequest 
    */
   deleteConfig(deleteConfigRequest, _options) {
     return __async(this, null, function* () {
       var _a, _b, _c;
       let _config = _options || this.configuration;
+      if (deleteConfigRequest === null || deleteConfigRequest === void 0) {
+        throw new RequiredError("VersionControlApi", "deleteConfig", "deleteConfigRequest");
+      }
       const localVarPath = "/api/rest/2.0/vcs/git/config/delete";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
@@ -21925,7 +26325,7 @@ var VersionControlApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *  Version: 9.2.0.cl or later   Allows you to deploy a commit and publish TML content to your ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  The API deploys the head of the branch unless a `commit_id` is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.      
+   *   Version: 9.2.0.cl or later   Allows you to deploy a commit and publish TML content to your ThoughtSpot instance.  Requires at least edit access to the objects used in the deploy operation.  The API deploys the head of the branch unless a `commit_id` is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).      
    * @param deployCommitRequest 
    */
   deployCommit(deployCommitRequest, _options) {
@@ -21961,7 +26361,7 @@ var VersionControlApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *  Version: 9.2.0.cl or later   Reverts TML objects to a previous commit specified in the API request.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  In the API request, specify the `commit_id`. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.  By default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.      
+   *   Version: 9.2.0.cl or later   Reverts TML objects to a previous commit specified in the API request.  Requires at least edit access to objects.  In the API request, specify the `commit_id`. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.  By default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).      
    * @param commitId Commit id to which the object should be reverted
    * @param revertCommitRequest 
    */
@@ -21971,6 +26371,9 @@ var VersionControlApiRequestFactory = class extends BaseAPIRequestFactory {
       let _config = _options || this.configuration;
       if (commitId === null || commitId === void 0) {
         throw new RequiredError("VersionControlApi", "revertCommit", "commitId");
+      }
+      if (revertCommitRequest === null || revertCommitRequest === void 0) {
+        throw new RequiredError("VersionControlApi", "revertCommit", "revertCommitRequest");
       }
       const localVarPath = "/api/rest/2.0/vcs/git/commits/{commit_id}/revert".replace("{commit_id}", encodeURIComponent(String(commitId)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
@@ -21998,7 +26401,7 @@ var VersionControlApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *  Version: 9.2.0.cl or later   Gets a list of commits for a given metadata object.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *   Version: 9.2.0.cl or later   Gets a list of commits for a given metadata object.  Requires `DATAMANAGEMENT` (**Can manage data**) privilege.      
    * @param searchCommitsRequest 
    */
   searchCommits(searchCommitsRequest, _options) {
@@ -22034,13 +26437,16 @@ var VersionControlApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *  Version: 9.2.0.cl or later   Gets Git repository connections configured on the ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *   Version: 9.2.0.cl or later   Gets Git repository connections configured on the ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param searchConfigRequest 
    */
   searchConfig(searchConfigRequest, _options) {
     return __async(this, null, function* () {
       var _a, _b, _c;
       let _config = _options || this.configuration;
+      if (searchConfigRequest === null || searchConfigRequest === void 0) {
+        throw new RequiredError("VersionControlApi", "searchConfig", "searchConfigRequest");
+      }
       const localVarPath = "/api/rest/2.0/vcs/git/config/search";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
@@ -22067,13 +26473,16 @@ var VersionControlApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *  Version: 9.2.0.cl or later   Updates Git repository configuration settings.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *   Version: 9.2.0.cl or later   Updates Git repository configuration settings.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param updateConfigRequest 
    */
   updateConfig(updateConfigRequest, _options) {
     return __async(this, null, function* () {
       var _a, _b, _c;
       let _config = _options || this.configuration;
+      if (updateConfigRequest === null || updateConfigRequest === void 0) {
+        throw new RequiredError("VersionControlApi", "updateConfig", "updateConfigRequest");
+      }
       const localVarPath = "/api/rest/2.0/vcs/git/config/update";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
@@ -22100,7 +26509,7 @@ var VersionControlApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *  Version: 9.2.0.cl or later   Validates the content of your source branch against the objects in your destination environment.  Before merging content from your source branch to the destination branch, run this API operation from your destination environment and ensure that the changes from the source branch function in the destination environment.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *   Version: 9.2.0.cl or later   Validates the content of your source branch against the objects in your destination environment.  Before merging content from your source branch to the destination branch, run this API operation from your destination environment and ensure that the changes from the source branch function in the destination environment.  Requires `DATAMANAGEMENT` (**Can manage data**) privilege.      
    * @param validateMergeRequest 
    */
   validateMerge(validateMergeRequest, _options) {
@@ -22813,6 +27222,24 @@ var ObservableAuthenticationApi = class {
       return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.revokeToken(rsp)));
     }));
   }
+  /**
+   *  Version: 9.12.0.cl or later 
+   * @param validateTokenRequest 
+   */
+  validateToken(validateTokenRequest, _options) {
+    const requestContextPromise = this.requestFactory.validateToken(validateTokenRequest, _options);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (let middleware of this.configuration.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => this.configuration.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (let middleware of this.configuration.middleware) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.validateToken(rsp)));
+    }));
+  }
 };
 var ObservableConnectionsApi = class {
   constructor(configuration, requestFactory, responseProcessor) {
@@ -22857,6 +27284,60 @@ var ObservableConnectionsApi = class {
     }));
   }
   /**
+   *   Version: 10.0.0.cl or later   Deletes a connection object.  **Note**: If a connection has dependent objects, make sure you remove its associations before the delete operation.  Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   * @param connectionIdentifier Unique ID or name of the connection.
+   */
+  deleteConnectionV2(connectionIdentifier, _options) {
+    const requestContextPromise = this.requestFactory.deleteConnectionV2(connectionIdentifier, _options);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (let middleware of this.configuration.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => this.configuration.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (let middleware of this.configuration.middleware) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.deleteConnectionV2(rsp)));
+    }));
+  }
+  /**
+   *   Version: 9.9.0.cl or later   Exports the difference in connection metadata between CDW and ThoughtSpot  Requires `DATAMANAGEMENT` (**Can manage data**) privilege  To download the connection metadata difference between ThoughtSpot and CDW, pass the connection GUID as `connection_identifier` in the API request.      
+   * @param connectionIdentifier GUID of the connection
+   */
+  downloadConnectionMetadataChanges(connectionIdentifier, _options) {
+    const requestContextPromise = this.requestFactory.downloadConnectionMetadataChanges(connectionIdentifier, _options);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (let middleware of this.configuration.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => this.configuration.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (let middleware of this.configuration.middleware) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.downloadConnectionMetadataChanges(rsp)));
+    }));
+  }
+  /**
+   *   Version: 9.9.0.cl or later   Validates the difference in connection metadata between CDW and ThoughtSpot  Requires `DATAMANAGEMENT` (**Can manage data**) privilege  Returns a boolean indicating whether there is any difference between the connection metadata at ThoughtSpot and CDW.  To get the connection metadata difference status, pass the connection GUID as `connection_identifier` in the API request.      
+   * @param connectionIdentifier GUID of the connection
+   */
+  fetchConnectionDiffStatus(connectionIdentifier, _options) {
+    const requestContextPromise = this.requestFactory.fetchConnectionDiffStatus(connectionIdentifier, _options);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (let middleware of this.configuration.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => this.configuration.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (let middleware of this.configuration.middleware) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.fetchConnectionDiffStatus(rsp)));
+    }));
+  }
+  /**
    *   Version: 9.2.0.cl or later   Gets connection objects. Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  - To get a list of all connections available in the ThoughtSpot system, send the API request without any attributes in the request body. - To get the connection objects for a specific type of data warehouse, specify the type in `data_warehouse_types`. - To fetch details of a connection object, specify the connection object GUID or name. The `name_pattern` attribute allows passing partial text with `%` for a wildcard match. - To get details of the database, schemas, tables, or columns from a data connection object, specify `data_warehouse_object_type`. - To get a specific database, schema, table, or column from a connection object, define the object type in `data_warehouse_object_type` and object properties in the `data_warehouse_objects` array. For example, to search for a column, you must pass the database, schema, and table names in the API request.   Note that in the following example, object properties are set in a hierarchical order (`database` > `schema` > `table` > `column`).  ``` {   \"connections\": [     {       \"identifier\": \"b9d1f2ef-fa65-4a4b-994e-30fa2d57b0c2\",       \"data_warehouse_objects\": [         {           \"database\": \"NEBULADEV\",           \"schema\": \"INFORMATION_SCHEMA\",           \"table\": \"APPLICABLE_ROLES\",           \"column\": \"ROLE_NAME\"         }       ]     }   ],   \"data_warehouse_object_type\": \"COLUMN\" } ```  - To fetch data by `configuration`, specify `data_warehouse_object_type`. For example, to fetch columns from the `DEVELOPMENT` database, specify the `data_warehouse_object_type` as `DATABASE` and define the `configuration` string as `{\"database\":\"DEVELOPMENT\"}`. To get column data for a specific table, specify the table, for example,`{\"database\":\"RETAILAPPAREL\",\"table\":\"PIPES\"}`. - To query connections by `authentication_type`, specify `data_warehouse_object_type`. Supported values for `authentication_type` are:   - `SERVICE_ACCOUNT`: For connections that require service account credentials to authenticate to the Cloud Data Warehouse and fetch data.   - `OAUTH`: For connections that require OAuth credentials to authenticate to the Cloud Data Warehouse and fetch data. Teradata, Oracle, and Presto Cloud Data Warehouses do not support the OAuth authentication type.   - `IAM`: For connections that have the IAM OAuth set up. This authentication type is supported on Amazon Redshift connections only.   - `EXTOAUTH`: For connections that have external OAuth set up. ThoughtSpot supports external [OAuth with Microsoft Azure Active Directory (AD)](https://docs.thoughtspot.com/cloud/latest/ connections-snowflake-azure-ad-oauth) and [Okta for Snowflake data connections](https://docs.thoughtspot.com/cloud/latest/connections-snowflake-okta-oauth). - To include more details about connection objects in the API response, set `include_details` to `true`. - You can also sort the output by field names and filter connections by tags.  **NOTE**: When filtering connection records by parameters other than `data_warehouse_types` or `tag_identifiers`, ensure that you set `record_size` to `-1` and `record_offset` to `0` for precise results.      
    * @param searchConnectionRequest 
    */
@@ -22890,6 +27371,25 @@ var ObservableConnectionsApi = class {
         middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
       }
       return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.updateConnection(rsp)));
+    }));
+  }
+  /**
+   *   Version: 10.0.0.cl or later   Updates a connection object.  Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  To update a connection object, pass these parameters in your API request:  1. GUID of the connection object. 2. If you are updating tables or database schema of a connection object:    a. Add the updated JSON map of metadata with database, schema, and tables in `data_warehouse_config`.    b. Set `validate` to `true`. 3. If you are updating a configuration attribute, connection name, or description, you can set `validate` to `false`.      
+   * @param connectionIdentifier Unique ID or name of the connection.
+   * @param updateConnectionV2Request 
+   */
+  updateConnectionV2(connectionIdentifier, updateConnectionV2Request, _options) {
+    const requestContextPromise = this.requestFactory.updateConnectionV2(connectionIdentifier, updateConnectionV2Request, _options);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (let middleware of this.configuration.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => this.configuration.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (let middleware of this.configuration.middleware) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.updateConnectionV2(rsp)));
     }));
   }
 };
@@ -22973,6 +27473,120 @@ var ObservableCustomActionApi = class {
     }));
   }
 };
+var ObservableDBTApi = class {
+  constructor(configuration, requestFactory, responseProcessor) {
+    this.configuration = configuration;
+    this.requestFactory = requestFactory || new DBTApiRequestFactory(configuration);
+    this.responseProcessor = responseProcessor || new DBTApiResponseProcessor();
+  }
+  /**
+   *   Version: 9.9.0.cl or later   Creates a DBT connection object in ThoughtSpot.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege.  #### About create DBT connection DBT connection in ThoughtSpot is used by the user to define DBT credentials for cloud . The API needs  embrace connection, embrace database name, DBT url, import type, DBT account identifier, DBT project identifier, DBT access token and environment details (or) embrace connection, embrace database name, import type, file_content to create a connection object. To know more about DBT, see ThoughtSpot Product Documentation.      
+   * @param dbtConnectionRequest 
+   */
+  dbtConnection(dbtConnectionRequest, _options) {
+    const requestContextPromise = this.requestFactory.dbtConnection(dbtConnectionRequest, _options);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (let middleware of this.configuration.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => this.configuration.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (let middleware of this.configuration.middleware) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.dbtConnection(rsp)));
+    }));
+  }
+  /**
+   *  Version: 9.9.0.cl or later 
+   * @param dbtGenerateSyncTmlRequest 
+   */
+  dbtGenerateSyncTml(dbtGenerateSyncTmlRequest, _options) {
+    const requestContextPromise = this.requestFactory.dbtGenerateSyncTml(dbtGenerateSyncTmlRequest, _options);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (let middleware of this.configuration.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => this.configuration.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (let middleware of this.configuration.middleware) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.dbtGenerateSyncTml(rsp)));
+    }));
+  }
+  /**
+   *  Version: 9.9.0.cl or later 
+   * @param dbtGenerateTmlRequest 
+   */
+  dbtGenerateTml(dbtGenerateTmlRequest, _options) {
+    const requestContextPromise = this.requestFactory.dbtGenerateTml(dbtGenerateTmlRequest, _options);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (let middleware of this.configuration.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => this.configuration.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (let middleware of this.configuration.middleware) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.dbtGenerateTml(rsp)));
+    }));
+  }
+  /**
+   *   Version: 9.9.0.cl or later   Gets a list of DBT connection objects by user and organization, available on the ThoughtSpot system.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege  #### About search DBT connection To get details of a specific DBT connection identifier, database connection identifier, database connection name, database name, project name, project identifier, environment identifier , import type and author.      
+   */
+  dbtSearch(_options) {
+    const requestContextPromise = this.requestFactory.dbtSearch(_options);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (let middleware of this.configuration.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => this.configuration.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (let middleware of this.configuration.middleware) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.dbtSearch(rsp)));
+    }));
+  }
+  /**
+   *   Version: 9.9.0.cl or later   Removes the specified DBT connection object from the ThoughtSpot system.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege.      
+   * @param dbtConnectionIdentifier Unique ID of the DBT Connection.
+   */
+  deleteDbtConnection(dbtConnectionIdentifier, _options) {
+    const requestContextPromise = this.requestFactory.deleteDbtConnection(dbtConnectionIdentifier, _options);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (let middleware of this.configuration.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => this.configuration.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (let middleware of this.configuration.middleware) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.deleteDbtConnection(rsp)));
+    }));
+  }
+  /**
+   *   Version: 9.9.0.cl or later   Updates a DBT connection object.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege, along with an existing DBT connection.  #### About update DBT connection You can modify DBT connection object properties such as embrace connection name, embrace database name, import type, account identifier, access token, project identifier and environment (or) embrace connection, embrace database name, import type, file_content settings.      
+   * @param updateDbtConnectionRequest 
+   */
+  updateDbtConnection(updateDbtConnectionRequest, _options) {
+    const requestContextPromise = this.requestFactory.updateDbtConnection(updateDbtConnectionRequest, _options);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (let middleware of this.configuration.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => this.configuration.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (let middleware of this.configuration.middleware) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.updateDbtConnection(rsp)));
+    }));
+  }
+};
 var ObservableDataApi = class {
   constructor(configuration, requestFactory, responseProcessor) {
     this.configuration = configuration;
@@ -22980,7 +27594,7 @@ var ObservableDataApi = class {
     this.responseProcessor = responseProcessor || new DataApiResponseProcessor();
   }
   /**
-   *   Version: 9.0.0.cl or later   Fetches data from a saved Answer.  Requires at least view access to the saved Answer.      
+   *   Version: 9.0.0.cl or later   Fetches data from a saved Answer.  Requires at least view access to the saved Answer.  The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](For more information, and see [Liveboard data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_apis).   ).        
    * @param fetchAnswerDataRequest 
    */
   fetchAnswerData(fetchAnswerDataRequest, _options) {
@@ -22998,7 +27612,7 @@ var ObservableDataApi = class {
     }));
   }
   /**
-   *   Version: 9.0.0.cl or later   Gets data from a Liveboard object and its visualization.    Requires at least view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To get data for specific visualizations, add the GUIDs or names of the visualizations in the API request.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes. If the new Liveboard experience mode, the transient content includes ad hoc changes to visualizations such as sorting, toggling of legends, and data drill down.      
+   *   Version: 9.0.0.cl or later   Gets data from a Liveboard object and its visualization.    Requires at least view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To get data for specific visualizations, add the GUIDs or names of the visualizations in the API request.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes. If the new Liveboard experience mode, the transient content includes ad hoc changes to visualizations such as sorting, toggling of legends, and data drill down.  For more information, and see [Liveboard data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_fetch_liveboard_data_api).        
    * @param fetchLiveboardDataRequest 
    */
   fetchLiveboardData(fetchLiveboardDataRequest, _options) {
@@ -23016,7 +27630,7 @@ var ObservableDataApi = class {
     }));
   }
   /**
-   *   Version: 9.0.0.cl or later   Generates an Answer from a given data source.  Requires at least view access to the data source.  #### Usage guidelines  To generate a new Answer, specify the data source GUID. The data source can be a Worksheet, View, Table, or SQL view.  Pass search tokens in the `query_string` attribute in the API request as shown in the following example. For more information passing search query string in API requests, see [`Components of a search query`](https://developers.thoughtspot.com/docs/?pageid=search-data-api#components).   ``` {   \"query_string\": \"[sales] by [store]\",   \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\", } ```      
+   *   Version: 9.0.0.cl or later   Generates an Answer from a given data source.  Requires at least view access to the data source object.  #### Usage guidelines  To search data, specify the data source GUID in `logical_table_identifier`. The data source can be a Worksheet, View, Table, or SQL view.  Pass search tokens in the `query_string` attribute in the API request as shown in the following example:  ``` {   \"query_string\": \"[sales] by [store]\",   \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\", } ```  For more information about the `query_string` format and data source attribute, see [Search data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_data_api).    The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).        
    * @param searchDataRequest 
    */
   searchData(searchDataRequest, _options) {
@@ -23139,7 +27753,7 @@ var ObservableLogApi = class {
     this.responseProcessor = responseProcessor || new LogApiResponseProcessor();
   }
   /**
-   *   Version: 9.0.0.cl or later   Fetches security audit logs.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  By default, the API retrieves logs for the last 24 hours. You can set a custom duration in EPOCH time. Make sure the log duration specified in your API request doesn’t exceed 24 hours. If you must fetch logs for a longer time range, modify the duration and make multiple sequential API requests.  Upon successful execution, the API returns logs with the following information: * timestamp of the event * event ID * event type * name and GUID of the user * IP address of ThoughtSpot instance      
+   *   Version: 9.0.0.cl or later   Fetches security audit logs.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  By default, the API retrieves logs for the last 24 hours. You can set a custom duration in EPOCH time. Make sure the log duration specified in your API request doesn’t exceed 24 hours. If you must fetch logs for a longer time range, modify the duration and make multiple sequential API requests.  Upon successful execution, the API returns logs with the following information: * timestamp of the event * event ID * event type * name and GUID of the user * IP address of ThoughtSpot instance  For more information about security events returned in the API response, see [Security events](https://developers.thoughtspot.com/docs/audit-logs#_security_events).      
    * @param fetchLogsRequest 
    */
   fetchLogs(fetchLogsRequest, _options) {
@@ -23197,6 +27811,24 @@ var ObservableMetadataApi = class {
         middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
       }
       return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.exportMetadataTML(rsp)));
+    }));
+  }
+  /**
+   *  Version: 10.1.0.cl or later 
+   * @param exportMetadataTMLBatchedRequest 
+   */
+  exportMetadataTMLBatched(exportMetadataTMLBatchedRequest, _options) {
+    const requestContextPromise = this.requestFactory.exportMetadataTMLBatched(exportMetadataTMLBatchedRequest, _options);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (let middleware of this.configuration.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => this.configuration.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (let middleware of this.configuration.middleware) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.exportMetadataTMLBatched(rsp)));
     }));
   }
   /**
@@ -23359,7 +27991,7 @@ var ObservableReportsApi = class {
     this.responseProcessor = responseProcessor || new ReportsApiResponseProcessor();
   }
   /**
-   *   Version: 9.0.0.cl or later   Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege.  #### Usage guidelines  In the request body, the GUID or name of the Answer and set `file_format`. The default file format is CSV.  You can apply [runtime filter](https://developers.thoughtspot.com/docs/?pageid=runtime-filters#_apply_runtime_filters_via_rest_api_v2_0_endpoints) overrides and [sort columns](https://developers.thoughtspot.com/docs/?pageid=runtime-sort#_rest_api_v2_0) to the data retrieved in the API response.      
+   *   Version: 9.0.0.cl or later   Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege.  #### Usage guidelines  In the request body, the GUID or name of the Answer and set `file_format`. The default file format is CSV.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).        
    * @param exportAnswerReportRequest 
    */
   exportAnswerReport(exportAnswerReportRequest, _options) {
@@ -23377,7 +28009,7 @@ var ObservableReportsApi = class {
     }));
   }
   /**
-   *   Version: 9.0.0.cl or later   Exports the data from a Liveboard and its visualization in a given file format. You can download the Liveboard data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default `file_format` is CSV. For PDF file format, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  You can also apply [runtime filter](https://developers.thoughtspot.com/docs/?pageid=runtime-filters#_apply_runtime_filters_via_rest_api_v2_0_endpoints) overrides and [sort columns](https://developers.thoughtspot.com/docs/?pageid=runtime-sort#_rest_api_v2_0) to the data retrieved in the API response.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes. If the new Liveboard experience mode, the transient content includes ad hoc changes to visualizations such as sorting, toggling of legends, and data drill down.      
+   *   Version: 9.0.0.cl or later   Exports the data from a Liveboard and its visualization in a given file format. You can download the Liveboard data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default `file_format` is CSV. For PDF file format, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).        
    * @param exportLiveboardReportRequest 
    */
   exportLiveboardReport(exportLiveboardReportRequest, _options) {
@@ -23421,7 +28053,7 @@ var ObservableRolesApi = class {
   }
   /**
    * Deletes a Role. Requires cluster Administration or Role Administration privileges.    Version: 9.5.0.cl or later 
-   * @param roleIdentifier Unique ID or name of the role.
+   * @param roleIdentifier Unique ID or name of the Role.
    */
   deleteRole(roleIdentifier, _options) {
     const requestContextPromise = this.requestFactory.deleteRole(roleIdentifier, _options);
@@ -23457,7 +28089,7 @@ var ObservableRolesApi = class {
   }
   /**
    * Updates a Role. Requires cluster Administration or Role Administration privileges.    Version: 9.5.0.cl or later 
-   * @param roleIdentifier Unique ID or name of the role.
+   * @param roleIdentifier Unique ID or name of the Role.
    * @param updateRoleRequest 
    */
   updateRole(roleIdentifier, updateRoleRequest, _options) {
@@ -23735,7 +28367,7 @@ var ObservableTagsApi = class {
     }));
   }
   /**
-   *   Version: 9.0.0.cl or later   Creates a tag object.  Tags are labels that identify a metadata object. For example, you can create a tag to designate subject areas, such as sales, HR, marketing, and finance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *   Version: 9.0.0.cl or later   Creates a tag object.  Tags are labels that identify a metadata object. For example, you can create a tag to designate subject areas, such as sales, HR, marketing, and finance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.      
    * @param createTagRequest 
    */
   createTag(createTagRequest, _options) {
@@ -23753,7 +28385,7 @@ var ObservableTagsApi = class {
     }));
   }
   /**
-   *   Version: 9.0.0.cl or later   Deletes a tag object from the ThoughtSpot system  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *   Version: 9.0.0.cl or later   Deletes a tag object from the ThoughtSpot system  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.      
    * @param tagIdentifier Tag identifier Tag name or Tag id.
    */
   deleteTag(tagIdentifier, _options) {
@@ -23807,7 +28439,7 @@ var ObservableTagsApi = class {
     }));
   }
   /**
-   *   Version: 9.0.0.cl or later   Updates a tag object.  You can modify the `name` and `color` properties of a tag object.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *   Version: 9.0.0.cl or later   Updates a tag object.  You can modify the `name` and `color` properties of a tag object.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.      
    * @param tagIdentifier Name or Id of the tag.
    * @param updateTagRequest 
    */
@@ -23831,6 +28463,24 @@ var ObservableThoughtSpotRestApi = class {
     this.configuration = configuration;
     this.requestFactory = requestFactory || new ThoughtSpotRestApiRequestFactory(configuration);
     this.responseProcessor = responseProcessor || new ThoughtSpotRestApiResponseProcessor();
+  }
+  /**
+   *   Version: 9.7.0.cl or later   Activates a deactivated user account.  Requires `ADMINISTRATION` (**Can administer Thoughtspot**) privilege.  To activate an inactive user account, the API request body must include the following information:  - Username or the GUID of the user account. - Auth token generated for the deactivated user. The auth token is sent in the API response when a user is deactivated. - Password for the user account.      
+   * @param activateUserRequest 
+   */
+  activateUser(activateUserRequest, _options) {
+    const requestContextPromise = this.requestFactory.activateUser(activateUserRequest, _options);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (let middleware of this.configuration.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => this.configuration.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (let middleware of this.configuration.middleware) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.activateUser(rsp)));
+    }));
   }
   /**
    *   Version: 9.0.0.cl or later   Transfers the ownership of one or several objects from one user to another.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
@@ -23887,7 +28537,7 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *  Version: 9.2.0.cl or later   Commits TML files of metadata objects to the Git branch configured on your instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  Before using this endpoint to push your commits:  * Enable Git integration on your instance. * Make sure the Git repository and branch details are configured on your instance.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).      
+   *   Version: 9.2.0.cl or later   Commits TML files of metadata objects to the Git branch configured on your instance.  Requires at least edit access to objects used in the commit operation.  Before using this endpoint to push your commits:  * Enable Git integration on your instance. * Make sure the Git repository and branch details are configured on your instance.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).      
    * @param commitBranchRequest 
    */
   commitBranch(commitBranchRequest, _options) {
@@ -23905,7 +28555,7 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *  Version: 9.2.0.cl or later   Allows you to connect a ThoughtSpot instance to a Git repository.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  You can use this API endpoint to connect your ThoughtSpot development and production environments to the development and production branches of a Git repository.  Before using this endpoint to connect your ThoughtSpot instance to a Git repository, check the following prerequisites:  * You have a Git repository. If you are using GitHub, make sure you have a valid account and an access token to connect ThoughtSpot to GitHub. For information about generating a token, see [GitHub Documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).  * Your access token has `repo` scope that grants full access to public and private repositories. * Your Git repository has a branch that can be configured as a default branch in ThoughtSpot.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).      
+   *   Version: 9.2.0.cl or later   Allows you to connect a ThoughtSpot instance to a Git repository.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  You can use this API endpoint to connect your ThoughtSpot development and production environments to the development and production branches of a Git repository.  Before using this endpoint to connect your ThoughtSpot instance to a Git repository, check the following prerequisites:  * You have a Git repository. If you are using GitHub, make sure you have a valid account and an access token to connect ThoughtSpot to GitHub. For information about generating a token, see [GitHub Documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).  * Your access token has `repo` scope that grants full access to public and private repositories. * Your Git repository has a branch that can be configured as a default branch in ThoughtSpot.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).  **Note**: ThoughtSpot supports only GitHub / GitHub Enterprise for CI/CD.      
    * @param createConfigRequest 
    */
   createConfig(createConfigRequest, _options) {
@@ -24013,7 +28663,7 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *   Version: 9.0.0.cl or later   Creates a tag object.  Tags are labels that identify a metadata object. For example, you can create a tag to designate subject areas, such as sales, HR, marketing, and finance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *   Version: 9.0.0.cl or later   Creates a tag object.  Tags are labels that identify a metadata object. For example, you can create a tag to designate subject areas, such as sales, HR, marketing, and finance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.      
    * @param createTagRequest 
    */
   createTag(createTagRequest, _options) {
@@ -24067,7 +28717,96 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *  Version: 9.2.0.cl or later   Deletes Git repository configuration from your ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *   Version: 9.9.0.cl or later   Creates a DBT connection object in ThoughtSpot.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege.  #### About create DBT connection DBT connection in ThoughtSpot is used by the user to define DBT credentials for cloud . The API needs  embrace connection, embrace database name, DBT url, import type, DBT account identifier, DBT project identifier, DBT access token and environment details (or) embrace connection, embrace database name, import type, file_content to create a connection object. To know more about DBT, see ThoughtSpot Product Documentation.      
+   * @param dbtConnectionRequest 
+   */
+  dbtConnection(dbtConnectionRequest, _options) {
+    const requestContextPromise = this.requestFactory.dbtConnection(dbtConnectionRequest, _options);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (let middleware of this.configuration.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => this.configuration.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (let middleware of this.configuration.middleware) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.dbtConnection(rsp)));
+    }));
+  }
+  /**
+   *  Version: 9.9.0.cl or later 
+   * @param dbtGenerateSyncTmlRequest 
+   */
+  dbtGenerateSyncTml(dbtGenerateSyncTmlRequest, _options) {
+    const requestContextPromise = this.requestFactory.dbtGenerateSyncTml(dbtGenerateSyncTmlRequest, _options);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (let middleware of this.configuration.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => this.configuration.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (let middleware of this.configuration.middleware) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.dbtGenerateSyncTml(rsp)));
+    }));
+  }
+  /**
+   *  Version: 9.9.0.cl or later 
+   * @param dbtGenerateTmlRequest 
+   */
+  dbtGenerateTml(dbtGenerateTmlRequest, _options) {
+    const requestContextPromise = this.requestFactory.dbtGenerateTml(dbtGenerateTmlRequest, _options);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (let middleware of this.configuration.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => this.configuration.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (let middleware of this.configuration.middleware) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.dbtGenerateTml(rsp)));
+    }));
+  }
+  /**
+   *   Version: 9.9.0.cl or later   Gets a list of DBT connection objects by user and organization, available on the ThoughtSpot system.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege  #### About search DBT connection To get details of a specific DBT connection identifier, database connection identifier, database connection name, database name, project name, project identifier, environment identifier , import type and author.      
+   */
+  dbtSearch(_options) {
+    const requestContextPromise = this.requestFactory.dbtSearch(_options);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (let middleware of this.configuration.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => this.configuration.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (let middleware of this.configuration.middleware) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.dbtSearch(rsp)));
+    }));
+  }
+  /**
+   *   Version: 9.7.0.cl or later   Deactivates a user account.  Requires `ADMINISTRATION` (**Can administer Thoughtspot**) privilege.  To deactivate a user account, the API request body must include the following information:  - Username or the GUID of the user account - Base URL of the ThoughtSpot instance  If the API request is successful, ThoughtSpot returns the activation URL in the response. The activation URL is valid for 14 days and can be used to re-activate the account and reset the password of the deactivated account.      
+   * @param deactivateUserRequest 
+   */
+  deactivateUser(deactivateUserRequest, _options) {
+    const requestContextPromise = this.requestFactory.deactivateUser(deactivateUserRequest, _options);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (let middleware of this.configuration.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => this.configuration.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (let middleware of this.configuration.middleware) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.deactivateUser(rsp)));
+    }));
+  }
+  /**
+   *   Version: 9.2.0.cl or later   Deletes Git repository configuration from your ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param deleteConfigRequest 
    */
   deleteConfig(deleteConfigRequest, _options) {
@@ -24103,6 +28842,24 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
+   *   Version: 10.0.0.cl or later   Deletes a connection object.  **Note**: If a connection has dependent objects, make sure you remove its associations before the delete operation.  Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   * @param connectionIdentifier Unique ID or name of the connection.
+   */
+  deleteConnectionV2(connectionIdentifier, _options) {
+    const requestContextPromise = this.requestFactory.deleteConnectionV2(connectionIdentifier, _options);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (let middleware of this.configuration.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => this.configuration.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (let middleware of this.configuration.middleware) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.deleteConnectionV2(rsp)));
+    }));
+  }
+  /**
    *   Version: 9.6.0.cl or later   Removes the custom action specified in the API request.  Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param customActionIdentifier Unique ID or name of the custom action.
    */
@@ -24118,6 +28875,24 @@ var ObservableThoughtSpotRestApi = class {
         middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
       }
       return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.deleteCustomAction(rsp)));
+    }));
+  }
+  /**
+   *   Version: 9.9.0.cl or later   Removes the specified DBT connection object from the ThoughtSpot system.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege.      
+   * @param dbtConnectionIdentifier Unique ID of the DBT Connection.
+   */
+  deleteDbtConnection(dbtConnectionIdentifier, _options) {
+    const requestContextPromise = this.requestFactory.deleteDbtConnection(dbtConnectionIdentifier, _options);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (let middleware of this.configuration.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => this.configuration.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (let middleware of this.configuration.middleware) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.deleteDbtConnection(rsp)));
     }));
   }
   /**
@@ -24158,7 +28933,7 @@ var ObservableThoughtSpotRestApi = class {
   }
   /**
    * Deletes a Role. Requires cluster Administration or Role Administration privileges.    Version: 9.5.0.cl or later 
-   * @param roleIdentifier Unique ID or name of the role.
+   * @param roleIdentifier Unique ID or name of the Role.
    */
   deleteRole(roleIdentifier, _options) {
     const requestContextPromise = this.requestFactory.deleteRole(roleIdentifier, _options);
@@ -24193,7 +28968,7 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *   Version: 9.0.0.cl or later   Deletes a tag object from the ThoughtSpot system  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *   Version: 9.0.0.cl or later   Deletes a tag object from the ThoughtSpot system  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.      
    * @param tagIdentifier Tag identifier Tag name or Tag id.
    */
   deleteTag(tagIdentifier, _options) {
@@ -24247,7 +29022,7 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *  Version: 9.2.0.cl or later   Allows you to deploy a commit and publish TML content to your ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  The API deploys the head of the branch unless a `commit_id` is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.      
+   *   Version: 9.2.0.cl or later   Allows you to deploy a commit and publish TML content to your ThoughtSpot instance.  Requires at least edit access to the objects used in the deploy operation.  The API deploys the head of the branch unless a `commit_id` is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).      
    * @param deployCommitRequest 
    */
   deployCommit(deployCommitRequest, _options) {
@@ -24265,7 +29040,25 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *   Version: 9.0.0.cl or later   Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege.  #### Usage guidelines  In the request body, the GUID or name of the Answer and set `file_format`. The default file format is CSV.  You can apply [runtime filter](https://developers.thoughtspot.com/docs/?pageid=runtime-filters#_apply_runtime_filters_via_rest_api_v2_0_endpoints) overrides and [sort columns](https://developers.thoughtspot.com/docs/?pageid=runtime-sort#_rest_api_v2_0) to the data retrieved in the API response.      
+   *   Version: 9.9.0.cl or later   Exports the difference in connection metadata between CDW and ThoughtSpot  Requires `DATAMANAGEMENT` (**Can manage data**) privilege  To download the connection metadata difference between ThoughtSpot and CDW, pass the connection GUID as `connection_identifier` in the API request.      
+   * @param connectionIdentifier GUID of the connection
+   */
+  downloadConnectionMetadataChanges(connectionIdentifier, _options) {
+    const requestContextPromise = this.requestFactory.downloadConnectionMetadataChanges(connectionIdentifier, _options);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (let middleware of this.configuration.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => this.configuration.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (let middleware of this.configuration.middleware) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.downloadConnectionMetadataChanges(rsp)));
+    }));
+  }
+  /**
+   *   Version: 9.0.0.cl or later   Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege.  #### Usage guidelines  In the request body, the GUID or name of the Answer and set `file_format`. The default file format is CSV.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).        
    * @param exportAnswerReportRequest 
    */
   exportAnswerReport(exportAnswerReportRequest, _options) {
@@ -24283,7 +29076,7 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *   Version: 9.0.0.cl or later   Exports the data from a Liveboard and its visualization in a given file format. You can download the Liveboard data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default `file_format` is CSV. For PDF file format, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  You can also apply [runtime filter](https://developers.thoughtspot.com/docs/?pageid=runtime-filters#_apply_runtime_filters_via_rest_api_v2_0_endpoints) overrides and [sort columns](https://developers.thoughtspot.com/docs/?pageid=runtime-sort#_rest_api_v2_0) to the data retrieved in the API response.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes. If the new Liveboard experience mode, the transient content includes ad hoc changes to visualizations such as sorting, toggling of legends, and data drill down.      
+   *   Version: 9.0.0.cl or later   Exports the data from a Liveboard and its visualization in a given file format. You can download the Liveboard data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default `file_format` is CSV. For PDF file format, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).        
    * @param exportLiveboardReportRequest 
    */
   exportLiveboardReport(exportLiveboardReportRequest, _options) {
@@ -24319,7 +29112,25 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *   Version: 9.0.0.cl or later   Fetches data from a saved Answer.  Requires at least view access to the saved Answer.      
+   *  Version: 10.1.0.cl or later 
+   * @param exportMetadataTMLBatchedRequest 
+   */
+  exportMetadataTMLBatched(exportMetadataTMLBatchedRequest, _options) {
+    const requestContextPromise = this.requestFactory.exportMetadataTMLBatched(exportMetadataTMLBatchedRequest, _options);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (let middleware of this.configuration.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => this.configuration.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (let middleware of this.configuration.middleware) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.exportMetadataTMLBatched(rsp)));
+    }));
+  }
+  /**
+   *   Version: 9.0.0.cl or later   Fetches data from a saved Answer.  Requires at least view access to the saved Answer.  The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](For more information, and see [Liveboard data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_apis).   ).        
    * @param fetchAnswerDataRequest 
    */
   fetchAnswerData(fetchAnswerDataRequest, _options) {
@@ -24355,7 +29166,25 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *   Version: 9.0.0.cl or later   Gets data from a Liveboard object and its visualization.    Requires at least view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To get data for specific visualizations, add the GUIDs or names of the visualizations in the API request.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes. If the new Liveboard experience mode, the transient content includes ad hoc changes to visualizations such as sorting, toggling of legends, and data drill down.      
+   *   Version: 9.9.0.cl or later   Validates the difference in connection metadata between CDW and ThoughtSpot  Requires `DATAMANAGEMENT` (**Can manage data**) privilege  Returns a boolean indicating whether there is any difference between the connection metadata at ThoughtSpot and CDW.  To get the connection metadata difference status, pass the connection GUID as `connection_identifier` in the API request.      
+   * @param connectionIdentifier GUID of the connection
+   */
+  fetchConnectionDiffStatus(connectionIdentifier, _options) {
+    const requestContextPromise = this.requestFactory.fetchConnectionDiffStatus(connectionIdentifier, _options);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (let middleware of this.configuration.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => this.configuration.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (let middleware of this.configuration.middleware) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.fetchConnectionDiffStatus(rsp)));
+    }));
+  }
+  /**
+   *   Version: 9.0.0.cl or later   Gets data from a Liveboard object and its visualization.    Requires at least view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To get data for specific visualizations, add the GUIDs or names of the visualizations in the API request.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes. If the new Liveboard experience mode, the transient content includes ad hoc changes to visualizations such as sorting, toggling of legends, and data drill down.  For more information, and see [Liveboard data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_fetch_liveboard_data_api).        
    * @param fetchLiveboardDataRequest 
    */
   fetchLiveboardData(fetchLiveboardDataRequest, _options) {
@@ -24391,7 +29220,7 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *   Version: 9.0.0.cl or later   Fetches security audit logs.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  By default, the API retrieves logs for the last 24 hours. You can set a custom duration in EPOCH time. Make sure the log duration specified in your API request doesn’t exceed 24 hours. If you must fetch logs for a longer time range, modify the duration and make multiple sequential API requests.  Upon successful execution, the API returns logs with the following information: * timestamp of the event * event ID * event type * name and GUID of the user * IP address of ThoughtSpot instance      
+   *   Version: 9.0.0.cl or later   Fetches security audit logs.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  By default, the API retrieves logs for the last 24 hours. You can set a custom duration in EPOCH time. Make sure the log duration specified in your API request doesn’t exceed 24 hours. If you must fetch logs for a longer time range, modify the duration and make multiple sequential API requests.  Upon successful execution, the API returns logs with the following information: * timestamp of the event * event ID * event type * name and GUID of the user * IP address of ThoughtSpot instance  For more information about security events returned in the API response, see [Security events](https://developers.thoughtspot.com/docs/audit-logs#_security_events).      
    * @param fetchLogsRequest 
    */
   fetchLogs(fetchLogsRequest, _options) {
@@ -24691,7 +29520,7 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *  Version: 9.2.0.cl or later   Reverts TML objects to a previous commit specified in the API request.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  In the API request, specify the `commit_id`. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.  By default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.      
+   *   Version: 9.2.0.cl or later   Reverts TML objects to a previous commit specified in the API request.  Requires at least edit access to objects.  In the API request, specify the `commit_id`. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.  By default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).      
    * @param commitId Commit id to which the object should be reverted
    * @param revertCommitRequest 
    */
@@ -24728,7 +29557,7 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *  Version: 9.2.0.cl or later   Gets a list of commits for a given metadata object.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *   Version: 9.2.0.cl or later   Gets a list of commits for a given metadata object.  Requires `DATAMANAGEMENT` (**Can manage data**) privilege.      
    * @param searchCommitsRequest 
    */
   searchCommits(searchCommitsRequest, _options) {
@@ -24746,7 +29575,7 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *  Version: 9.2.0.cl or later   Gets Git repository connections configured on the ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *   Version: 9.2.0.cl or later   Gets Git repository connections configured on the ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param searchConfigRequest 
    */
   searchConfig(searchConfigRequest, _options) {
@@ -24800,7 +29629,7 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *   Version: 9.0.0.cl or later   Generates an Answer from a given data source.  Requires at least view access to the data source.  #### Usage guidelines  To generate a new Answer, specify the data source GUID. The data source can be a Worksheet, View, Table, or SQL view.  Pass search tokens in the `query_string` attribute in the API request as shown in the following example. For more information passing search query string in API requests, see [`Components of a search query`](https://developers.thoughtspot.com/docs/?pageid=search-data-api#components).   ``` {   \"query_string\": \"[sales] by [store]\",   \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\", } ```      
+   *   Version: 9.0.0.cl or later   Generates an Answer from a given data source.  Requires at least view access to the data source object.  #### Usage guidelines  To search data, specify the data source GUID in `logical_table_identifier`. The data source can be a Worksheet, View, Table, or SQL view.  Pass search tokens in the `query_string` attribute in the API request as shown in the following example:  ``` {   \"query_string\": \"[sales] by [store]\",   \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\", } ```  For more information about the `query_string` format and data source attribute, see [Search data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_data_api).    The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).        
    * @param searchDataRequest 
    */
   searchData(searchDataRequest, _options) {
@@ -24980,7 +29809,7 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *  Version: 9.2.0.cl or later   Updates Git repository configuration settings.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *   Version: 9.2.0.cl or later   Updates Git repository configuration settings.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param updateConfigRequest 
    */
   updateConfig(updateConfigRequest, _options) {
@@ -25016,6 +29845,25 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
+   *   Version: 10.0.0.cl or later   Updates a connection object.  Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  To update a connection object, pass these parameters in your API request:  1. GUID of the connection object. 2. If you are updating tables or database schema of a connection object:    a. Add the updated JSON map of metadata with database, schema, and tables in `data_warehouse_config`.    b. Set `validate` to `true`. 3. If you are updating a configuration attribute, connection name, or description, you can set `validate` to `false`.      
+   * @param connectionIdentifier Unique ID or name of the connection.
+   * @param updateConnectionV2Request 
+   */
+  updateConnectionV2(connectionIdentifier, updateConnectionV2Request, _options) {
+    const requestContextPromise = this.requestFactory.updateConnectionV2(connectionIdentifier, updateConnectionV2Request, _options);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (let middleware of this.configuration.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => this.configuration.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (let middleware of this.configuration.middleware) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.updateConnectionV2(rsp)));
+    }));
+  }
+  /**
    *   Version: 9.6.0.cl or later   Updates a custom action.  Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage Guidelines  The API allows you to modify the following properties:  * Name of the custom action * Action availability to groups * Association to metadata objects * Authentication settings for a URL-based action  For more information, see [Custom actions](https://developers.thoughtspot.com/docs/?pageid=custom-action-intro).      
    * @param customActionIdentifier Unique ID or name of the custom action.
    * @param updateCustomActionRequest 
@@ -25032,6 +29880,24 @@ var ObservableThoughtSpotRestApi = class {
         middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
       }
       return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.updateCustomAction(rsp)));
+    }));
+  }
+  /**
+   *   Version: 9.9.0.cl or later   Updates a DBT connection object.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege, along with an existing DBT connection.  #### About update DBT connection You can modify DBT connection object properties such as embrace connection name, embrace database name, import type, account identifier, access token, project identifier and environment (or) embrace connection, embrace database name, import type, file_content settings.      
+   * @param updateDbtConnectionRequest 
+   */
+  updateDbtConnection(updateDbtConnectionRequest, _options) {
+    const requestContextPromise = this.requestFactory.updateDbtConnection(updateDbtConnectionRequest, _options);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (let middleware of this.configuration.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => this.configuration.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (let middleware of this.configuration.middleware) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.updateDbtConnection(rsp)));
     }));
   }
   /**
@@ -25055,7 +29921,7 @@ var ObservableThoughtSpotRestApi = class {
   }
   /**
    * Updates a Role. Requires cluster Administration or Role Administration privileges.    Version: 9.5.0.cl or later 
-   * @param roleIdentifier Unique ID or name of the role.
+   * @param roleIdentifier Unique ID or name of the Role.
    * @param updateRoleRequest 
    */
   updateRole(roleIdentifier, updateRoleRequest, _options) {
@@ -25110,7 +29976,7 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *   Version: 9.0.0.cl or later   Updates a tag object.  You can modify the `name` and `color` properties of a tag object.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *   Version: 9.0.0.cl or later   Updates a tag object.  You can modify the `name` and `color` properties of a tag object.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.      
    * @param tagIdentifier Name or Id of the tag.
    * @param updateTagRequest 
    */
@@ -25167,7 +30033,7 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *  Version: 9.2.0.cl or later   Validates the content of your source branch against the objects in your destination environment.  Before merging content from your source branch to the destination branch, run this API operation from your destination environment and ensure that the changes from the source branch function in the destination environment.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *   Version: 9.2.0.cl or later   Validates the content of your source branch against the objects in your destination environment.  Before merging content from your source branch to the destination branch, run this API operation from your destination environment and ensure that the changes from the source branch function in the destination environment.  Requires `DATAMANAGEMENT` (**Can manage data**) privilege.      
    * @param validateMergeRequest 
    */
   validateMerge(validateMergeRequest, _options) {
@@ -25184,12 +30050,48 @@ var ObservableThoughtSpotRestApi = class {
       return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.validateMerge(rsp)));
     }));
   }
+  /**
+   *  Version: 9.12.0.cl or later 
+   * @param validateTokenRequest 
+   */
+  validateToken(validateTokenRequest, _options) {
+    const requestContextPromise = this.requestFactory.validateToken(validateTokenRequest, _options);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (let middleware of this.configuration.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => this.configuration.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (let middleware of this.configuration.middleware) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.validateToken(rsp)));
+    }));
+  }
 };
 var ObservableUsersApi = class {
   constructor(configuration, requestFactory, responseProcessor) {
     this.configuration = configuration;
     this.requestFactory = requestFactory || new UsersApiRequestFactory(configuration);
     this.responseProcessor = responseProcessor || new UsersApiResponseProcessor();
+  }
+  /**
+   *   Version: 9.7.0.cl or later   Activates a deactivated user account.  Requires `ADMINISTRATION` (**Can administer Thoughtspot**) privilege.  To activate an inactive user account, the API request body must include the following information:  - Username or the GUID of the user account. - Auth token generated for the deactivated user. The auth token is sent in the API response when a user is deactivated. - Password for the user account.      
+   * @param activateUserRequest 
+   */
+  activateUser(activateUserRequest, _options) {
+    const requestContextPromise = this.requestFactory.activateUser(activateUserRequest, _options);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (let middleware of this.configuration.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => this.configuration.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (let middleware of this.configuration.middleware) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.activateUser(rsp)));
+    }));
   }
   /**
    *   Version: 9.0.0.cl or later   Updates the current password of the user.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
@@ -25225,6 +30127,24 @@ var ObservableUsersApi = class {
         middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
       }
       return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.createUser(rsp)));
+    }));
+  }
+  /**
+   *   Version: 9.7.0.cl or later   Deactivates a user account.  Requires `ADMINISTRATION` (**Can administer Thoughtspot**) privilege.  To deactivate a user account, the API request body must include the following information:  - Username or the GUID of the user account - Base URL of the ThoughtSpot instance  If the API request is successful, ThoughtSpot returns the activation URL in the response. The activation URL is valid for 14 days and can be used to re-activate the account and reset the password of the deactivated account.      
+   * @param deactivateUserRequest 
+   */
+  deactivateUser(deactivateUserRequest, _options) {
+    const requestContextPromise = this.requestFactory.deactivateUser(deactivateUserRequest, _options);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (let middleware of this.configuration.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => this.configuration.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (let middleware of this.configuration.middleware) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.deactivateUser(rsp)));
     }));
   }
   /**
@@ -25344,7 +30264,7 @@ var ObservableVersionControlApi = class {
     this.responseProcessor = responseProcessor || new VersionControlApiResponseProcessor();
   }
   /**
-   *  Version: 9.2.0.cl or later   Commits TML files of metadata objects to the Git branch configured on your instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  Before using this endpoint to push your commits:  * Enable Git integration on your instance. * Make sure the Git repository and branch details are configured on your instance.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).      
+   *   Version: 9.2.0.cl or later   Commits TML files of metadata objects to the Git branch configured on your instance.  Requires at least edit access to objects used in the commit operation.  Before using this endpoint to push your commits:  * Enable Git integration on your instance. * Make sure the Git repository and branch details are configured on your instance.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).      
    * @param commitBranchRequest 
    */
   commitBranch(commitBranchRequest, _options) {
@@ -25362,7 +30282,7 @@ var ObservableVersionControlApi = class {
     }));
   }
   /**
-   *  Version: 9.2.0.cl or later   Allows you to connect a ThoughtSpot instance to a Git repository.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  You can use this API endpoint to connect your ThoughtSpot development and production environments to the development and production branches of a Git repository.  Before using this endpoint to connect your ThoughtSpot instance to a Git repository, check the following prerequisites:  * You have a Git repository. If you are using GitHub, make sure you have a valid account and an access token to connect ThoughtSpot to GitHub. For information about generating a token, see [GitHub Documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).  * Your access token has `repo` scope that grants full access to public and private repositories. * Your Git repository has a branch that can be configured as a default branch in ThoughtSpot.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).      
+   *   Version: 9.2.0.cl or later   Allows you to connect a ThoughtSpot instance to a Git repository.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  You can use this API endpoint to connect your ThoughtSpot development and production environments to the development and production branches of a Git repository.  Before using this endpoint to connect your ThoughtSpot instance to a Git repository, check the following prerequisites:  * You have a Git repository. If you are using GitHub, make sure you have a valid account and an access token to connect ThoughtSpot to GitHub. For information about generating a token, see [GitHub Documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).  * Your access token has `repo` scope that grants full access to public and private repositories. * Your Git repository has a branch that can be configured as a default branch in ThoughtSpot.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).  **Note**: ThoughtSpot supports only GitHub / GitHub Enterprise for CI/CD.      
    * @param createConfigRequest 
    */
   createConfig(createConfigRequest, _options) {
@@ -25380,7 +30300,7 @@ var ObservableVersionControlApi = class {
     }));
   }
   /**
-   *  Version: 9.2.0.cl or later   Deletes Git repository configuration from your ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *   Version: 9.2.0.cl or later   Deletes Git repository configuration from your ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param deleteConfigRequest 
    */
   deleteConfig(deleteConfigRequest, _options) {
@@ -25398,7 +30318,7 @@ var ObservableVersionControlApi = class {
     }));
   }
   /**
-   *  Version: 9.2.0.cl or later   Allows you to deploy a commit and publish TML content to your ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  The API deploys the head of the branch unless a `commit_id` is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.      
+   *   Version: 9.2.0.cl or later   Allows you to deploy a commit and publish TML content to your ThoughtSpot instance.  Requires at least edit access to the objects used in the deploy operation.  The API deploys the head of the branch unless a `commit_id` is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).      
    * @param deployCommitRequest 
    */
   deployCommit(deployCommitRequest, _options) {
@@ -25416,7 +30336,7 @@ var ObservableVersionControlApi = class {
     }));
   }
   /**
-   *  Version: 9.2.0.cl or later   Reverts TML objects to a previous commit specified in the API request.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  In the API request, specify the `commit_id`. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.  By default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.      
+   *   Version: 9.2.0.cl or later   Reverts TML objects to a previous commit specified in the API request.  Requires at least edit access to objects.  In the API request, specify the `commit_id`. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.  By default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).      
    * @param commitId Commit id to which the object should be reverted
    * @param revertCommitRequest 
    */
@@ -25435,7 +30355,7 @@ var ObservableVersionControlApi = class {
     }));
   }
   /**
-   *  Version: 9.2.0.cl or later   Gets a list of commits for a given metadata object.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *   Version: 9.2.0.cl or later   Gets a list of commits for a given metadata object.  Requires `DATAMANAGEMENT` (**Can manage data**) privilege.      
    * @param searchCommitsRequest 
    */
   searchCommits(searchCommitsRequest, _options) {
@@ -25453,7 +30373,7 @@ var ObservableVersionControlApi = class {
     }));
   }
   /**
-   *  Version: 9.2.0.cl or later   Gets Git repository connections configured on the ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *   Version: 9.2.0.cl or later   Gets Git repository connections configured on the ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param searchConfigRequest 
    */
   searchConfig(searchConfigRequest, _options) {
@@ -25471,7 +30391,7 @@ var ObservableVersionControlApi = class {
     }));
   }
   /**
-   *  Version: 9.2.0.cl or later   Updates Git repository configuration settings.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *   Version: 9.2.0.cl or later   Updates Git repository configuration settings.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param updateConfigRequest 
    */
   updateConfig(updateConfigRequest, _options) {
@@ -25489,7 +30409,7 @@ var ObservableVersionControlApi = class {
     }));
   }
   /**
-   *  Version: 9.2.0.cl or later   Validates the content of your source branch against the objects in your destination environment.  Before merging content from your source branch to the destination branch, run this API operation from your destination environment and ensure that the changes from the source branch function in the destination environment.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *   Version: 9.2.0.cl or later   Validates the content of your source branch against the objects in your destination environment.  Before merging content from your source branch to the destination branch, run this API operation from your destination environment and ensure that the changes from the source branch function in the destination environment.  Requires `DATAMANAGEMENT` (**Can manage data**) privilege.      
    * @param validateMergeRequest 
    */
   validateMerge(validateMergeRequest, _options) {
@@ -25566,6 +30486,14 @@ var PromiseAuthenticationApi = class {
     const result = this.api.revokeToken(revokeTokenRequest, _options);
     return result.toPromise();
   }
+  /**
+   *  Version: 9.12.0.cl or later 
+   * @param validateTokenRequest 
+   */
+  validateToken(validateTokenRequest, _options) {
+    const result = this.api.validateToken(validateTokenRequest, _options);
+    return result.toPromise();
+  }
 };
 var PromiseConnectionsApi = class {
   constructor(configuration, requestFactory, responseProcessor) {
@@ -25588,6 +30516,30 @@ var PromiseConnectionsApi = class {
     return result.toPromise();
   }
   /**
+   *   Version: 10.0.0.cl or later   Deletes a connection object.  **Note**: If a connection has dependent objects, make sure you remove its associations before the delete operation.  Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   * @param connectionIdentifier Unique ID or name of the connection.
+   */
+  deleteConnectionV2(connectionIdentifier, _options) {
+    const result = this.api.deleteConnectionV2(connectionIdentifier, _options);
+    return result.toPromise();
+  }
+  /**
+   *   Version: 9.9.0.cl or later   Exports the difference in connection metadata between CDW and ThoughtSpot  Requires `DATAMANAGEMENT` (**Can manage data**) privilege  To download the connection metadata difference between ThoughtSpot and CDW, pass the connection GUID as `connection_identifier` in the API request.      
+   * @param connectionIdentifier GUID of the connection
+   */
+  downloadConnectionMetadataChanges(connectionIdentifier, _options) {
+    const result = this.api.downloadConnectionMetadataChanges(connectionIdentifier, _options);
+    return result.toPromise();
+  }
+  /**
+   *   Version: 9.9.0.cl or later   Validates the difference in connection metadata between CDW and ThoughtSpot  Requires `DATAMANAGEMENT` (**Can manage data**) privilege  Returns a boolean indicating whether there is any difference between the connection metadata at ThoughtSpot and CDW.  To get the connection metadata difference status, pass the connection GUID as `connection_identifier` in the API request.      
+   * @param connectionIdentifier GUID of the connection
+   */
+  fetchConnectionDiffStatus(connectionIdentifier, _options) {
+    const result = this.api.fetchConnectionDiffStatus(connectionIdentifier, _options);
+    return result.toPromise();
+  }
+  /**
    *   Version: 9.2.0.cl or later   Gets connection objects. Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  - To get a list of all connections available in the ThoughtSpot system, send the API request without any attributes in the request body. - To get the connection objects for a specific type of data warehouse, specify the type in `data_warehouse_types`. - To fetch details of a connection object, specify the connection object GUID or name. The `name_pattern` attribute allows passing partial text with `%` for a wildcard match. - To get details of the database, schemas, tables, or columns from a data connection object, specify `data_warehouse_object_type`. - To get a specific database, schema, table, or column from a connection object, define the object type in `data_warehouse_object_type` and object properties in the `data_warehouse_objects` array. For example, to search for a column, you must pass the database, schema, and table names in the API request.   Note that in the following example, object properties are set in a hierarchical order (`database` > `schema` > `table` > `column`).  ``` {   \"connections\": [     {       \"identifier\": \"b9d1f2ef-fa65-4a4b-994e-30fa2d57b0c2\",       \"data_warehouse_objects\": [         {           \"database\": \"NEBULADEV\",           \"schema\": \"INFORMATION_SCHEMA\",           \"table\": \"APPLICABLE_ROLES\",           \"column\": \"ROLE_NAME\"         }       ]     }   ],   \"data_warehouse_object_type\": \"COLUMN\" } ```  - To fetch data by `configuration`, specify `data_warehouse_object_type`. For example, to fetch columns from the `DEVELOPMENT` database, specify the `data_warehouse_object_type` as `DATABASE` and define the `configuration` string as `{\"database\":\"DEVELOPMENT\"}`. To get column data for a specific table, specify the table, for example,`{\"database\":\"RETAILAPPAREL\",\"table\":\"PIPES\"}`. - To query connections by `authentication_type`, specify `data_warehouse_object_type`. Supported values for `authentication_type` are:   - `SERVICE_ACCOUNT`: For connections that require service account credentials to authenticate to the Cloud Data Warehouse and fetch data.   - `OAUTH`: For connections that require OAuth credentials to authenticate to the Cloud Data Warehouse and fetch data. Teradata, Oracle, and Presto Cloud Data Warehouses do not support the OAuth authentication type.   - `IAM`: For connections that have the IAM OAuth set up. This authentication type is supported on Amazon Redshift connections only.   - `EXTOAUTH`: For connections that have external OAuth set up. ThoughtSpot supports external [OAuth with Microsoft Azure Active Directory (AD)](https://docs.thoughtspot.com/cloud/latest/ connections-snowflake-azure-ad-oauth) and [Okta for Snowflake data connections](https://docs.thoughtspot.com/cloud/latest/connections-snowflake-okta-oauth). - To include more details about connection objects in the API response, set `include_details` to `true`. - You can also sort the output by field names and filter connections by tags.  **NOTE**: When filtering connection records by parameters other than `data_warehouse_types` or `tag_identifiers`, ensure that you set `record_size` to `-1` and `record_offset` to `0` for precise results.      
    * @param searchConnectionRequest 
    */
@@ -25601,6 +30553,15 @@ var PromiseConnectionsApi = class {
    */
   updateConnection(updateConnectionRequest, _options) {
     const result = this.api.updateConnection(updateConnectionRequest, _options);
+    return result.toPromise();
+  }
+  /**
+   *   Version: 10.0.0.cl or later   Updates a connection object.  Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  To update a connection object, pass these parameters in your API request:  1. GUID of the connection object. 2. If you are updating tables or database schema of a connection object:    a. Add the updated JSON map of metadata with database, schema, and tables in `data_warehouse_config`.    b. Set `validate` to `true`. 3. If you are updating a configuration attribute, connection name, or description, you can set `validate` to `false`.      
+   * @param connectionIdentifier Unique ID or name of the connection.
+   * @param updateConnectionV2Request 
+   */
+  updateConnectionV2(connectionIdentifier, updateConnectionV2Request, _options) {
+    const result = this.api.updateConnectionV2(connectionIdentifier, updateConnectionV2Request, _options);
     return result.toPromise();
   }
 };
@@ -25642,12 +30603,64 @@ var PromiseCustomActionApi = class {
     return result.toPromise();
   }
 };
+var PromiseDBTApi = class {
+  constructor(configuration, requestFactory, responseProcessor) {
+    this.api = new ObservableDBTApi(configuration, requestFactory, responseProcessor);
+  }
+  /**
+   *   Version: 9.9.0.cl or later   Creates a DBT connection object in ThoughtSpot.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege.  #### About create DBT connection DBT connection in ThoughtSpot is used by the user to define DBT credentials for cloud . The API needs  embrace connection, embrace database name, DBT url, import type, DBT account identifier, DBT project identifier, DBT access token and environment details (or) embrace connection, embrace database name, import type, file_content to create a connection object. To know more about DBT, see ThoughtSpot Product Documentation.      
+   * @param dbtConnectionRequest 
+   */
+  dbtConnection(dbtConnectionRequest, _options) {
+    const result = this.api.dbtConnection(dbtConnectionRequest, _options);
+    return result.toPromise();
+  }
+  /**
+   *  Version: 9.9.0.cl or later 
+   * @param dbtGenerateSyncTmlRequest 
+   */
+  dbtGenerateSyncTml(dbtGenerateSyncTmlRequest, _options) {
+    const result = this.api.dbtGenerateSyncTml(dbtGenerateSyncTmlRequest, _options);
+    return result.toPromise();
+  }
+  /**
+   *  Version: 9.9.0.cl or later 
+   * @param dbtGenerateTmlRequest 
+   */
+  dbtGenerateTml(dbtGenerateTmlRequest, _options) {
+    const result = this.api.dbtGenerateTml(dbtGenerateTmlRequest, _options);
+    return result.toPromise();
+  }
+  /**
+   *   Version: 9.9.0.cl or later   Gets a list of DBT connection objects by user and organization, available on the ThoughtSpot system.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege  #### About search DBT connection To get details of a specific DBT connection identifier, database connection identifier, database connection name, database name, project name, project identifier, environment identifier , import type and author.      
+   */
+  dbtSearch(_options) {
+    const result = this.api.dbtSearch(_options);
+    return result.toPromise();
+  }
+  /**
+   *   Version: 9.9.0.cl or later   Removes the specified DBT connection object from the ThoughtSpot system.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege.      
+   * @param dbtConnectionIdentifier Unique ID of the DBT Connection.
+   */
+  deleteDbtConnection(dbtConnectionIdentifier, _options) {
+    const result = this.api.deleteDbtConnection(dbtConnectionIdentifier, _options);
+    return result.toPromise();
+  }
+  /**
+   *   Version: 9.9.0.cl or later   Updates a DBT connection object.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege, along with an existing DBT connection.  #### About update DBT connection You can modify DBT connection object properties such as embrace connection name, embrace database name, import type, account identifier, access token, project identifier and environment (or) embrace connection, embrace database name, import type, file_content settings.      
+   * @param updateDbtConnectionRequest 
+   */
+  updateDbtConnection(updateDbtConnectionRequest, _options) {
+    const result = this.api.updateDbtConnection(updateDbtConnectionRequest, _options);
+    return result.toPromise();
+  }
+};
 var PromiseDataApi = class {
   constructor(configuration, requestFactory, responseProcessor) {
     this.api = new ObservableDataApi(configuration, requestFactory, responseProcessor);
   }
   /**
-   *   Version: 9.0.0.cl or later   Fetches data from a saved Answer.  Requires at least view access to the saved Answer.      
+   *   Version: 9.0.0.cl or later   Fetches data from a saved Answer.  Requires at least view access to the saved Answer.  The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](For more information, and see [Liveboard data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_apis).   ).        
    * @param fetchAnswerDataRequest 
    */
   fetchAnswerData(fetchAnswerDataRequest, _options) {
@@ -25655,7 +30668,7 @@ var PromiseDataApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 9.0.0.cl or later   Gets data from a Liveboard object and its visualization.    Requires at least view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To get data for specific visualizations, add the GUIDs or names of the visualizations in the API request.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes. If the new Liveboard experience mode, the transient content includes ad hoc changes to visualizations such as sorting, toggling of legends, and data drill down.      
+   *   Version: 9.0.0.cl or later   Gets data from a Liveboard object and its visualization.    Requires at least view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To get data for specific visualizations, add the GUIDs or names of the visualizations in the API request.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes. If the new Liveboard experience mode, the transient content includes ad hoc changes to visualizations such as sorting, toggling of legends, and data drill down.  For more information, and see [Liveboard data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_fetch_liveboard_data_api).        
    * @param fetchLiveboardDataRequest 
    */
   fetchLiveboardData(fetchLiveboardDataRequest, _options) {
@@ -25663,7 +30676,7 @@ var PromiseDataApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 9.0.0.cl or later   Generates an Answer from a given data source.  Requires at least view access to the data source.  #### Usage guidelines  To generate a new Answer, specify the data source GUID. The data source can be a Worksheet, View, Table, or SQL view.  Pass search tokens in the `query_string` attribute in the API request as shown in the following example. For more information passing search query string in API requests, see [`Components of a search query`](https://developers.thoughtspot.com/docs/?pageid=search-data-api#components).   ``` {   \"query_string\": \"[sales] by [store]\",   \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\", } ```      
+   *   Version: 9.0.0.cl or later   Generates an Answer from a given data source.  Requires at least view access to the data source object.  #### Usage guidelines  To search data, specify the data source GUID in `logical_table_identifier`. The data source can be a Worksheet, View, Table, or SQL view.  Pass search tokens in the `query_string` attribute in the API request as shown in the following example:  ``` {   \"query_string\": \"[sales] by [store]\",   \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\", } ```  For more information about the `query_string` format and data source attribute, see [Search data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_data_api).    The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).        
    * @param searchDataRequest 
    */
   searchData(searchDataRequest, _options) {
@@ -25722,7 +30735,7 @@ var PromiseLogApi = class {
     this.api = new ObservableLogApi(configuration, requestFactory, responseProcessor);
   }
   /**
-   *   Version: 9.0.0.cl or later   Fetches security audit logs.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  By default, the API retrieves logs for the last 24 hours. You can set a custom duration in EPOCH time. Make sure the log duration specified in your API request doesn’t exceed 24 hours. If you must fetch logs for a longer time range, modify the duration and make multiple sequential API requests.  Upon successful execution, the API returns logs with the following information: * timestamp of the event * event ID * event type * name and GUID of the user * IP address of ThoughtSpot instance      
+   *   Version: 9.0.0.cl or later   Fetches security audit logs.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  By default, the API retrieves logs for the last 24 hours. You can set a custom duration in EPOCH time. Make sure the log duration specified in your API request doesn’t exceed 24 hours. If you must fetch logs for a longer time range, modify the duration and make multiple sequential API requests.  Upon successful execution, the API returns logs with the following information: * timestamp of the event * event ID * event type * name and GUID of the user * IP address of ThoughtSpot instance  For more information about security events returned in the API response, see [Security events](https://developers.thoughtspot.com/docs/audit-logs#_security_events).      
    * @param fetchLogsRequest 
    */
   fetchLogs(fetchLogsRequest, _options) {
@@ -25748,6 +30761,14 @@ var PromiseMetadataApi = class {
    */
   exportMetadataTML(exportMetadataTMLRequest, _options) {
     const result = this.api.exportMetadataTML(exportMetadataTMLRequest, _options);
+    return result.toPromise();
+  }
+  /**
+   *  Version: 10.1.0.cl or later 
+   * @param exportMetadataTMLBatchedRequest 
+   */
+  exportMetadataTMLBatched(exportMetadataTMLBatchedRequest, _options) {
+    const result = this.api.exportMetadataTMLBatched(exportMetadataTMLBatchedRequest, _options);
     return result.toPromise();
   }
   /**
@@ -25826,7 +30847,7 @@ var PromiseReportsApi = class {
     this.api = new ObservableReportsApi(configuration, requestFactory, responseProcessor);
   }
   /**
-   *   Version: 9.0.0.cl or later   Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege.  #### Usage guidelines  In the request body, the GUID or name of the Answer and set `file_format`. The default file format is CSV.  You can apply [runtime filter](https://developers.thoughtspot.com/docs/?pageid=runtime-filters#_apply_runtime_filters_via_rest_api_v2_0_endpoints) overrides and [sort columns](https://developers.thoughtspot.com/docs/?pageid=runtime-sort#_rest_api_v2_0) to the data retrieved in the API response.      
+   *   Version: 9.0.0.cl or later   Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege.  #### Usage guidelines  In the request body, the GUID or name of the Answer and set `file_format`. The default file format is CSV.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).        
    * @param exportAnswerReportRequest 
    */
   exportAnswerReport(exportAnswerReportRequest, _options) {
@@ -25834,7 +30855,7 @@ var PromiseReportsApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 9.0.0.cl or later   Exports the data from a Liveboard and its visualization in a given file format. You can download the Liveboard data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default `file_format` is CSV. For PDF file format, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  You can also apply [runtime filter](https://developers.thoughtspot.com/docs/?pageid=runtime-filters#_apply_runtime_filters_via_rest_api_v2_0_endpoints) overrides and [sort columns](https://developers.thoughtspot.com/docs/?pageid=runtime-sort#_rest_api_v2_0) to the data retrieved in the API response.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes. If the new Liveboard experience mode, the transient content includes ad hoc changes to visualizations such as sorting, toggling of legends, and data drill down.      
+   *   Version: 9.0.0.cl or later   Exports the data from a Liveboard and its visualization in a given file format. You can download the Liveboard data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default `file_format` is CSV. For PDF file format, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).        
    * @param exportLiveboardReportRequest 
    */
   exportLiveboardReport(exportLiveboardReportRequest, _options) {
@@ -25856,7 +30877,7 @@ var PromiseRolesApi = class {
   }
   /**
    * Deletes a Role. Requires cluster Administration or Role Administration privileges.    Version: 9.5.0.cl or later 
-   * @param roleIdentifier Unique ID or name of the role.
+   * @param roleIdentifier Unique ID or name of the Role.
    */
   deleteRole(roleIdentifier, _options) {
     const result = this.api.deleteRole(roleIdentifier, _options);
@@ -25872,7 +30893,7 @@ var PromiseRolesApi = class {
   }
   /**
    * Updates a Role. Requires cluster Administration or Role Administration privileges.    Version: 9.5.0.cl or later 
-   * @param roleIdentifier Unique ID or name of the role.
+   * @param roleIdentifier Unique ID or name of the Role.
    * @param updateRoleRequest 
    */
   updateRole(roleIdentifier, updateRoleRequest, _options) {
@@ -26002,7 +31023,7 @@ var PromiseTagsApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 9.0.0.cl or later   Creates a tag object.  Tags are labels that identify a metadata object. For example, you can create a tag to designate subject areas, such as sales, HR, marketing, and finance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *   Version: 9.0.0.cl or later   Creates a tag object.  Tags are labels that identify a metadata object. For example, you can create a tag to designate subject areas, such as sales, HR, marketing, and finance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.      
    * @param createTagRequest 
    */
   createTag(createTagRequest, _options) {
@@ -26010,7 +31031,7 @@ var PromiseTagsApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 9.0.0.cl or later   Deletes a tag object from the ThoughtSpot system  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *   Version: 9.0.0.cl or later   Deletes a tag object from the ThoughtSpot system  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.      
    * @param tagIdentifier Tag identifier Tag name or Tag id.
    */
   deleteTag(tagIdentifier, _options) {
@@ -26034,7 +31055,7 @@ var PromiseTagsApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 9.0.0.cl or later   Updates a tag object.  You can modify the `name` and `color` properties of a tag object.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *   Version: 9.0.0.cl or later   Updates a tag object.  You can modify the `name` and `color` properties of a tag object.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.      
    * @param tagIdentifier Name or Id of the tag.
    * @param updateTagRequest 
    */
@@ -26046,6 +31067,14 @@ var PromiseTagsApi = class {
 var PromiseThoughtSpotRestApi = class {
   constructor(configuration, requestFactory, responseProcessor) {
     this.api = new ObservableThoughtSpotRestApi(configuration, requestFactory, responseProcessor);
+  }
+  /**
+   *   Version: 9.7.0.cl or later   Activates a deactivated user account.  Requires `ADMINISTRATION` (**Can administer Thoughtspot**) privilege.  To activate an inactive user account, the API request body must include the following information:  - Username or the GUID of the user account. - Auth token generated for the deactivated user. The auth token is sent in the API response when a user is deactivated. - Password for the user account.      
+   * @param activateUserRequest 
+   */
+  activateUser(activateUserRequest, _options) {
+    const result = this.api.activateUser(activateUserRequest, _options);
+    return result.toPromise();
   }
   /**
    *   Version: 9.0.0.cl or later   Transfers the ownership of one or several objects from one user to another.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
@@ -26072,7 +31101,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *  Version: 9.2.0.cl or later   Commits TML files of metadata objects to the Git branch configured on your instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  Before using this endpoint to push your commits:  * Enable Git integration on your instance. * Make sure the Git repository and branch details are configured on your instance.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).      
+   *   Version: 9.2.0.cl or later   Commits TML files of metadata objects to the Git branch configured on your instance.  Requires at least edit access to objects used in the commit operation.  Before using this endpoint to push your commits:  * Enable Git integration on your instance. * Make sure the Git repository and branch details are configured on your instance.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).      
    * @param commitBranchRequest 
    */
   commitBranch(commitBranchRequest, _options) {
@@ -26080,7 +31109,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *  Version: 9.2.0.cl or later   Allows you to connect a ThoughtSpot instance to a Git repository.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  You can use this API endpoint to connect your ThoughtSpot development and production environments to the development and production branches of a Git repository.  Before using this endpoint to connect your ThoughtSpot instance to a Git repository, check the following prerequisites:  * You have a Git repository. If you are using GitHub, make sure you have a valid account and an access token to connect ThoughtSpot to GitHub. For information about generating a token, see [GitHub Documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).  * Your access token has `repo` scope that grants full access to public and private repositories. * Your Git repository has a branch that can be configured as a default branch in ThoughtSpot.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).      
+   *   Version: 9.2.0.cl or later   Allows you to connect a ThoughtSpot instance to a Git repository.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  You can use this API endpoint to connect your ThoughtSpot development and production environments to the development and production branches of a Git repository.  Before using this endpoint to connect your ThoughtSpot instance to a Git repository, check the following prerequisites:  * You have a Git repository. If you are using GitHub, make sure you have a valid account and an access token to connect ThoughtSpot to GitHub. For information about generating a token, see [GitHub Documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).  * Your access token has `repo` scope that grants full access to public and private repositories. * Your Git repository has a branch that can be configured as a default branch in ThoughtSpot.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).  **Note**: ThoughtSpot supports only GitHub / GitHub Enterprise for CI/CD.      
    * @param createConfigRequest 
    */
   createConfig(createConfigRequest, _options) {
@@ -26128,7 +31157,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 9.0.0.cl or later   Creates a tag object.  Tags are labels that identify a metadata object. For example, you can create a tag to designate subject areas, such as sales, HR, marketing, and finance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *   Version: 9.0.0.cl or later   Creates a tag object.  Tags are labels that identify a metadata object. For example, you can create a tag to designate subject areas, such as sales, HR, marketing, and finance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.      
    * @param createTagRequest 
    */
   createTag(createTagRequest, _options) {
@@ -26152,7 +31181,46 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *  Version: 9.2.0.cl or later   Deletes Git repository configuration from your ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *   Version: 9.9.0.cl or later   Creates a DBT connection object in ThoughtSpot.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege.  #### About create DBT connection DBT connection in ThoughtSpot is used by the user to define DBT credentials for cloud . The API needs  embrace connection, embrace database name, DBT url, import type, DBT account identifier, DBT project identifier, DBT access token and environment details (or) embrace connection, embrace database name, import type, file_content to create a connection object. To know more about DBT, see ThoughtSpot Product Documentation.      
+   * @param dbtConnectionRequest 
+   */
+  dbtConnection(dbtConnectionRequest, _options) {
+    const result = this.api.dbtConnection(dbtConnectionRequest, _options);
+    return result.toPromise();
+  }
+  /**
+   *  Version: 9.9.0.cl or later 
+   * @param dbtGenerateSyncTmlRequest 
+   */
+  dbtGenerateSyncTml(dbtGenerateSyncTmlRequest, _options) {
+    const result = this.api.dbtGenerateSyncTml(dbtGenerateSyncTmlRequest, _options);
+    return result.toPromise();
+  }
+  /**
+   *  Version: 9.9.0.cl or later 
+   * @param dbtGenerateTmlRequest 
+   */
+  dbtGenerateTml(dbtGenerateTmlRequest, _options) {
+    const result = this.api.dbtGenerateTml(dbtGenerateTmlRequest, _options);
+    return result.toPromise();
+  }
+  /**
+   *   Version: 9.9.0.cl or later   Gets a list of DBT connection objects by user and organization, available on the ThoughtSpot system.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege  #### About search DBT connection To get details of a specific DBT connection identifier, database connection identifier, database connection name, database name, project name, project identifier, environment identifier , import type and author.      
+   */
+  dbtSearch(_options) {
+    const result = this.api.dbtSearch(_options);
+    return result.toPromise();
+  }
+  /**
+   *   Version: 9.7.0.cl or later   Deactivates a user account.  Requires `ADMINISTRATION` (**Can administer Thoughtspot**) privilege.  To deactivate a user account, the API request body must include the following information:  - Username or the GUID of the user account - Base URL of the ThoughtSpot instance  If the API request is successful, ThoughtSpot returns the activation URL in the response. The activation URL is valid for 14 days and can be used to re-activate the account and reset the password of the deactivated account.      
+   * @param deactivateUserRequest 
+   */
+  deactivateUser(deactivateUserRequest, _options) {
+    const result = this.api.deactivateUser(deactivateUserRequest, _options);
+    return result.toPromise();
+  }
+  /**
+   *   Version: 9.2.0.cl or later   Deletes Git repository configuration from your ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param deleteConfigRequest 
    */
   deleteConfig(deleteConfigRequest, _options) {
@@ -26168,11 +31236,27 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
+   *   Version: 10.0.0.cl or later   Deletes a connection object.  **Note**: If a connection has dependent objects, make sure you remove its associations before the delete operation.  Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   * @param connectionIdentifier Unique ID or name of the connection.
+   */
+  deleteConnectionV2(connectionIdentifier, _options) {
+    const result = this.api.deleteConnectionV2(connectionIdentifier, _options);
+    return result.toPromise();
+  }
+  /**
    *   Version: 9.6.0.cl or later   Removes the custom action specified in the API request.  Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param customActionIdentifier Unique ID or name of the custom action.
    */
   deleteCustomAction(customActionIdentifier, _options) {
     const result = this.api.deleteCustomAction(customActionIdentifier, _options);
+    return result.toPromise();
+  }
+  /**
+   *   Version: 9.9.0.cl or later   Removes the specified DBT connection object from the ThoughtSpot system.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege.      
+   * @param dbtConnectionIdentifier Unique ID of the DBT Connection.
+   */
+  deleteDbtConnection(dbtConnectionIdentifier, _options) {
+    const result = this.api.deleteDbtConnection(dbtConnectionIdentifier, _options);
     return result.toPromise();
   }
   /**
@@ -26193,7 +31277,7 @@ var PromiseThoughtSpotRestApi = class {
   }
   /**
    * Deletes a Role. Requires cluster Administration or Role Administration privileges.    Version: 9.5.0.cl or later 
-   * @param roleIdentifier Unique ID or name of the role.
+   * @param roleIdentifier Unique ID or name of the Role.
    */
   deleteRole(roleIdentifier, _options) {
     const result = this.api.deleteRole(roleIdentifier, _options);
@@ -26208,7 +31292,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 9.0.0.cl or later   Deletes a tag object from the ThoughtSpot system  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *   Version: 9.0.0.cl or later   Deletes a tag object from the ThoughtSpot system  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.      
    * @param tagIdentifier Tag identifier Tag name or Tag id.
    */
   deleteTag(tagIdentifier, _options) {
@@ -26232,7 +31316,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *  Version: 9.2.0.cl or later   Allows you to deploy a commit and publish TML content to your ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  The API deploys the head of the branch unless a `commit_id` is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.      
+   *   Version: 9.2.0.cl or later   Allows you to deploy a commit and publish TML content to your ThoughtSpot instance.  Requires at least edit access to the objects used in the deploy operation.  The API deploys the head of the branch unless a `commit_id` is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).      
    * @param deployCommitRequest 
    */
   deployCommit(deployCommitRequest, _options) {
@@ -26240,7 +31324,15 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 9.0.0.cl or later   Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege.  #### Usage guidelines  In the request body, the GUID or name of the Answer and set `file_format`. The default file format is CSV.  You can apply [runtime filter](https://developers.thoughtspot.com/docs/?pageid=runtime-filters#_apply_runtime_filters_via_rest_api_v2_0_endpoints) overrides and [sort columns](https://developers.thoughtspot.com/docs/?pageid=runtime-sort#_rest_api_v2_0) to the data retrieved in the API response.      
+   *   Version: 9.9.0.cl or later   Exports the difference in connection metadata between CDW and ThoughtSpot  Requires `DATAMANAGEMENT` (**Can manage data**) privilege  To download the connection metadata difference between ThoughtSpot and CDW, pass the connection GUID as `connection_identifier` in the API request.      
+   * @param connectionIdentifier GUID of the connection
+   */
+  downloadConnectionMetadataChanges(connectionIdentifier, _options) {
+    const result = this.api.downloadConnectionMetadataChanges(connectionIdentifier, _options);
+    return result.toPromise();
+  }
+  /**
+   *   Version: 9.0.0.cl or later   Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege.  #### Usage guidelines  In the request body, the GUID or name of the Answer and set `file_format`. The default file format is CSV.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).        
    * @param exportAnswerReportRequest 
    */
   exportAnswerReport(exportAnswerReportRequest, _options) {
@@ -26248,7 +31340,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 9.0.0.cl or later   Exports the data from a Liveboard and its visualization in a given file format. You can download the Liveboard data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default `file_format` is CSV. For PDF file format, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  You can also apply [runtime filter](https://developers.thoughtspot.com/docs/?pageid=runtime-filters#_apply_runtime_filters_via_rest_api_v2_0_endpoints) overrides and [sort columns](https://developers.thoughtspot.com/docs/?pageid=runtime-sort#_rest_api_v2_0) to the data retrieved in the API response.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes. If the new Liveboard experience mode, the transient content includes ad hoc changes to visualizations such as sorting, toggling of legends, and data drill down.      
+   *   Version: 9.0.0.cl or later   Exports the data from a Liveboard and its visualization in a given file format. You can download the Liveboard data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default `file_format` is CSV. For PDF file format, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).        
    * @param exportLiveboardReportRequest 
    */
   exportLiveboardReport(exportLiveboardReportRequest, _options) {
@@ -26264,7 +31356,15 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 9.0.0.cl or later   Fetches data from a saved Answer.  Requires at least view access to the saved Answer.      
+   *  Version: 10.1.0.cl or later 
+   * @param exportMetadataTMLBatchedRequest 
+   */
+  exportMetadataTMLBatched(exportMetadataTMLBatchedRequest, _options) {
+    const result = this.api.exportMetadataTMLBatched(exportMetadataTMLBatchedRequest, _options);
+    return result.toPromise();
+  }
+  /**
+   *   Version: 9.0.0.cl or later   Fetches data from a saved Answer.  Requires at least view access to the saved Answer.  The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](For more information, and see [Liveboard data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_apis).   ).        
    * @param fetchAnswerDataRequest 
    */
   fetchAnswerData(fetchAnswerDataRequest, _options) {
@@ -26280,7 +31380,15 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 9.0.0.cl or later   Gets data from a Liveboard object and its visualization.    Requires at least view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To get data for specific visualizations, add the GUIDs or names of the visualizations in the API request.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes. If the new Liveboard experience mode, the transient content includes ad hoc changes to visualizations such as sorting, toggling of legends, and data drill down.      
+   *   Version: 9.9.0.cl or later   Validates the difference in connection metadata between CDW and ThoughtSpot  Requires `DATAMANAGEMENT` (**Can manage data**) privilege  Returns a boolean indicating whether there is any difference between the connection metadata at ThoughtSpot and CDW.  To get the connection metadata difference status, pass the connection GUID as `connection_identifier` in the API request.      
+   * @param connectionIdentifier GUID of the connection
+   */
+  fetchConnectionDiffStatus(connectionIdentifier, _options) {
+    const result = this.api.fetchConnectionDiffStatus(connectionIdentifier, _options);
+    return result.toPromise();
+  }
+  /**
+   *   Version: 9.0.0.cl or later   Gets data from a Liveboard object and its visualization.    Requires at least view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To get data for specific visualizations, add the GUIDs or names of the visualizations in the API request.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes. If the new Liveboard experience mode, the transient content includes ad hoc changes to visualizations such as sorting, toggling of legends, and data drill down.  For more information, and see [Liveboard data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_fetch_liveboard_data_api).        
    * @param fetchLiveboardDataRequest 
    */
   fetchLiveboardData(fetchLiveboardDataRequest, _options) {
@@ -26296,7 +31404,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 9.0.0.cl or later   Fetches security audit logs.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  By default, the API retrieves logs for the last 24 hours. You can set a custom duration in EPOCH time. Make sure the log duration specified in your API request doesn’t exceed 24 hours. If you must fetch logs for a longer time range, modify the duration and make multiple sequential API requests.  Upon successful execution, the API returns logs with the following information: * timestamp of the event * event ID * event type * name and GUID of the user * IP address of ThoughtSpot instance      
+   *   Version: 9.0.0.cl or later   Fetches security audit logs.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  By default, the API retrieves logs for the last 24 hours. You can set a custom duration in EPOCH time. Make sure the log duration specified in your API request doesn’t exceed 24 hours. If you must fetch logs for a longer time range, modify the duration and make multiple sequential API requests.  Upon successful execution, the API returns logs with the following information: * timestamp of the event * event ID * event type * name and GUID of the user * IP address of ThoughtSpot instance  For more information about security events returned in the API response, see [Security events](https://developers.thoughtspot.com/docs/audit-logs#_security_events).      
    * @param fetchLogsRequest 
    */
   fetchLogs(fetchLogsRequest, _options) {
@@ -26426,7 +31534,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *  Version: 9.2.0.cl or later   Reverts TML objects to a previous commit specified in the API request.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  In the API request, specify the `commit_id`. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.  By default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.      
+   *   Version: 9.2.0.cl or later   Reverts TML objects to a previous commit specified in the API request.  Requires at least edit access to objects.  In the API request, specify the `commit_id`. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.  By default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).      
    * @param commitId Commit id to which the object should be reverted
    * @param revertCommitRequest 
    */
@@ -26443,7 +31551,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *  Version: 9.2.0.cl or later   Gets a list of commits for a given metadata object.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *   Version: 9.2.0.cl or later   Gets a list of commits for a given metadata object.  Requires `DATAMANAGEMENT` (**Can manage data**) privilege.      
    * @param searchCommitsRequest 
    */
   searchCommits(searchCommitsRequest, _options) {
@@ -26451,7 +31559,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *  Version: 9.2.0.cl or later   Gets Git repository connections configured on the ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *   Version: 9.2.0.cl or later   Gets Git repository connections configured on the ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param searchConfigRequest 
    */
   searchConfig(searchConfigRequest, _options) {
@@ -26475,7 +31583,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 9.0.0.cl or later   Generates an Answer from a given data source.  Requires at least view access to the data source.  #### Usage guidelines  To generate a new Answer, specify the data source GUID. The data source can be a Worksheet, View, Table, or SQL view.  Pass search tokens in the `query_string` attribute in the API request as shown in the following example. For more information passing search query string in API requests, see [`Components of a search query`](https://developers.thoughtspot.com/docs/?pageid=search-data-api#components).   ``` {   \"query_string\": \"[sales] by [store]\",   \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\", } ```      
+   *   Version: 9.0.0.cl or later   Generates an Answer from a given data source.  Requires at least view access to the data source object.  #### Usage guidelines  To search data, specify the data source GUID in `logical_table_identifier`. The data source can be a Worksheet, View, Table, or SQL view.  Pass search tokens in the `query_string` attribute in the API request as shown in the following example:  ``` {   \"query_string\": \"[sales] by [store]\",   \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\", } ```  For more information about the `query_string` format and data source attribute, see [Search data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_data_api).    The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).        
    * @param searchDataRequest 
    */
   searchData(searchDataRequest, _options) {
@@ -26555,7 +31663,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *  Version: 9.2.0.cl or later   Updates Git repository configuration settings.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *   Version: 9.2.0.cl or later   Updates Git repository configuration settings.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param updateConfigRequest 
    */
   updateConfig(updateConfigRequest, _options) {
@@ -26571,12 +31679,29 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
+   *   Version: 10.0.0.cl or later   Updates a connection object.  Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  To update a connection object, pass these parameters in your API request:  1. GUID of the connection object. 2. If you are updating tables or database schema of a connection object:    a. Add the updated JSON map of metadata with database, schema, and tables in `data_warehouse_config`.    b. Set `validate` to `true`. 3. If you are updating a configuration attribute, connection name, or description, you can set `validate` to `false`.      
+   * @param connectionIdentifier Unique ID or name of the connection.
+   * @param updateConnectionV2Request 
+   */
+  updateConnectionV2(connectionIdentifier, updateConnectionV2Request, _options) {
+    const result = this.api.updateConnectionV2(connectionIdentifier, updateConnectionV2Request, _options);
+    return result.toPromise();
+  }
+  /**
    *   Version: 9.6.0.cl or later   Updates a custom action.  Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage Guidelines  The API allows you to modify the following properties:  * Name of the custom action * Action availability to groups * Association to metadata objects * Authentication settings for a URL-based action  For more information, see [Custom actions](https://developers.thoughtspot.com/docs/?pageid=custom-action-intro).      
    * @param customActionIdentifier Unique ID or name of the custom action.
    * @param updateCustomActionRequest 
    */
   updateCustomAction(customActionIdentifier, updateCustomActionRequest, _options) {
     const result = this.api.updateCustomAction(customActionIdentifier, updateCustomActionRequest, _options);
+    return result.toPromise();
+  }
+  /**
+   *   Version: 9.9.0.cl or later   Updates a DBT connection object.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege, along with an existing DBT connection.  #### About update DBT connection You can modify DBT connection object properties such as embrace connection name, embrace database name, import type, account identifier, access token, project identifier and environment (or) embrace connection, embrace database name, import type, file_content settings.      
+   * @param updateDbtConnectionRequest 
+   */
+  updateDbtConnection(updateDbtConnectionRequest, _options) {
+    const result = this.api.updateDbtConnection(updateDbtConnectionRequest, _options);
     return result.toPromise();
   }
   /**
@@ -26590,7 +31715,7 @@ var PromiseThoughtSpotRestApi = class {
   }
   /**
    * Updates a Role. Requires cluster Administration or Role Administration privileges.    Version: 9.5.0.cl or later 
-   * @param roleIdentifier Unique ID or name of the role.
+   * @param roleIdentifier Unique ID or name of the Role.
    * @param updateRoleRequest 
    */
   updateRole(roleIdentifier, updateRoleRequest, _options) {
@@ -26615,7 +31740,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 9.0.0.cl or later   Updates a tag object.  You can modify the `name` and `color` properties of a tag object.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *   Version: 9.0.0.cl or later   Updates a tag object.  You can modify the `name` and `color` properties of a tag object.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.      
    * @param tagIdentifier Name or Id of the tag.
    * @param updateTagRequest 
    */
@@ -26642,17 +31767,33 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *  Version: 9.2.0.cl or later   Validates the content of your source branch against the objects in your destination environment.  Before merging content from your source branch to the destination branch, run this API operation from your destination environment and ensure that the changes from the source branch function in the destination environment.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *   Version: 9.2.0.cl or later   Validates the content of your source branch against the objects in your destination environment.  Before merging content from your source branch to the destination branch, run this API operation from your destination environment and ensure that the changes from the source branch function in the destination environment.  Requires `DATAMANAGEMENT` (**Can manage data**) privilege.      
    * @param validateMergeRequest 
    */
   validateMerge(validateMergeRequest, _options) {
     const result = this.api.validateMerge(validateMergeRequest, _options);
     return result.toPromise();
   }
+  /**
+   *  Version: 9.12.0.cl or later 
+   * @param validateTokenRequest 
+   */
+  validateToken(validateTokenRequest, _options) {
+    const result = this.api.validateToken(validateTokenRequest, _options);
+    return result.toPromise();
+  }
 };
 var PromiseUsersApi = class {
   constructor(configuration, requestFactory, responseProcessor) {
     this.api = new ObservableUsersApi(configuration, requestFactory, responseProcessor);
+  }
+  /**
+   *   Version: 9.7.0.cl or later   Activates a deactivated user account.  Requires `ADMINISTRATION` (**Can administer Thoughtspot**) privilege.  To activate an inactive user account, the API request body must include the following information:  - Username or the GUID of the user account. - Auth token generated for the deactivated user. The auth token is sent in the API response when a user is deactivated. - Password for the user account.      
+   * @param activateUserRequest 
+   */
+  activateUser(activateUserRequest, _options) {
+    const result = this.api.activateUser(activateUserRequest, _options);
+    return result.toPromise();
   }
   /**
    *   Version: 9.0.0.cl or later   Updates the current password of the user.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
@@ -26668,6 +31809,14 @@ var PromiseUsersApi = class {
    */
   createUser(createUserRequest, _options) {
     const result = this.api.createUser(createUserRequest, _options);
+    return result.toPromise();
+  }
+  /**
+   *   Version: 9.7.0.cl or later   Deactivates a user account.  Requires `ADMINISTRATION` (**Can administer Thoughtspot**) privilege.  To deactivate a user account, the API request body must include the following information:  - Username or the GUID of the user account - Base URL of the ThoughtSpot instance  If the API request is successful, ThoughtSpot returns the activation URL in the response. The activation URL is valid for 14 days and can be used to re-activate the account and reset the password of the deactivated account.      
+   * @param deactivateUserRequest 
+   */
+  deactivateUser(deactivateUserRequest, _options) {
+    const result = this.api.deactivateUser(deactivateUserRequest, _options);
     return result.toPromise();
   }
   /**
@@ -26725,7 +31874,7 @@ var PromiseVersionControlApi = class {
     this.api = new ObservableVersionControlApi(configuration, requestFactory, responseProcessor);
   }
   /**
-   *  Version: 9.2.0.cl or later   Commits TML files of metadata objects to the Git branch configured on your instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  Before using this endpoint to push your commits:  * Enable Git integration on your instance. * Make sure the Git repository and branch details are configured on your instance.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).      
+   *   Version: 9.2.0.cl or later   Commits TML files of metadata objects to the Git branch configured on your instance.  Requires at least edit access to objects used in the commit operation.  Before using this endpoint to push your commits:  * Enable Git integration on your instance. * Make sure the Git repository and branch details are configured on your instance.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).      
    * @param commitBranchRequest 
    */
   commitBranch(commitBranchRequest, _options) {
@@ -26733,7 +31882,7 @@ var PromiseVersionControlApi = class {
     return result.toPromise();
   }
   /**
-   *  Version: 9.2.0.cl or later   Allows you to connect a ThoughtSpot instance to a Git repository.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  You can use this API endpoint to connect your ThoughtSpot development and production environments to the development and production branches of a Git repository.  Before using this endpoint to connect your ThoughtSpot instance to a Git repository, check the following prerequisites:  * You have a Git repository. If you are using GitHub, make sure you have a valid account and an access token to connect ThoughtSpot to GitHub. For information about generating a token, see [GitHub Documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).  * Your access token has `repo` scope that grants full access to public and private repositories. * Your Git repository has a branch that can be configured as a default branch in ThoughtSpot.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).      
+   *   Version: 9.2.0.cl or later   Allows you to connect a ThoughtSpot instance to a Git repository.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  You can use this API endpoint to connect your ThoughtSpot development and production environments to the development and production branches of a Git repository.  Before using this endpoint to connect your ThoughtSpot instance to a Git repository, check the following prerequisites:  * You have a Git repository. If you are using GitHub, make sure you have a valid account and an access token to connect ThoughtSpot to GitHub. For information about generating a token, see [GitHub Documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).  * Your access token has `repo` scope that grants full access to public and private repositories. * Your Git repository has a branch that can be configured as a default branch in ThoughtSpot.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).  **Note**: ThoughtSpot supports only GitHub / GitHub Enterprise for CI/CD.      
    * @param createConfigRequest 
    */
   createConfig(createConfigRequest, _options) {
@@ -26741,7 +31890,7 @@ var PromiseVersionControlApi = class {
     return result.toPromise();
   }
   /**
-   *  Version: 9.2.0.cl or later   Deletes Git repository configuration from your ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *   Version: 9.2.0.cl or later   Deletes Git repository configuration from your ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param deleteConfigRequest 
    */
   deleteConfig(deleteConfigRequest, _options) {
@@ -26749,7 +31898,7 @@ var PromiseVersionControlApi = class {
     return result.toPromise();
   }
   /**
-   *  Version: 9.2.0.cl or later   Allows you to deploy a commit and publish TML content to your ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  The API deploys the head of the branch unless a `commit_id` is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.      
+   *   Version: 9.2.0.cl or later   Allows you to deploy a commit and publish TML content to your ThoughtSpot instance.  Requires at least edit access to the objects used in the deploy operation.  The API deploys the head of the branch unless a `commit_id` is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).      
    * @param deployCommitRequest 
    */
   deployCommit(deployCommitRequest, _options) {
@@ -26757,7 +31906,7 @@ var PromiseVersionControlApi = class {
     return result.toPromise();
   }
   /**
-   *  Version: 9.2.0.cl or later   Reverts TML objects to a previous commit specified in the API request.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  In the API request, specify the `commit_id`. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.  By default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.      
+   *   Version: 9.2.0.cl or later   Reverts TML objects to a previous commit specified in the API request.  Requires at least edit access to objects.  In the API request, specify the `commit_id`. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.  By default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).      
    * @param commitId Commit id to which the object should be reverted
    * @param revertCommitRequest 
    */
@@ -26766,7 +31915,7 @@ var PromiseVersionControlApi = class {
     return result.toPromise();
   }
   /**
-   *  Version: 9.2.0.cl or later   Gets a list of commits for a given metadata object.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *   Version: 9.2.0.cl or later   Gets a list of commits for a given metadata object.  Requires `DATAMANAGEMENT` (**Can manage data**) privilege.      
    * @param searchCommitsRequest 
    */
   searchCommits(searchCommitsRequest, _options) {
@@ -26774,7 +31923,7 @@ var PromiseVersionControlApi = class {
     return result.toPromise();
   }
   /**
-   *  Version: 9.2.0.cl or later   Gets Git repository connections configured on the ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *   Version: 9.2.0.cl or later   Gets Git repository connections configured on the ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param searchConfigRequest 
    */
   searchConfig(searchConfigRequest, _options) {
@@ -26782,7 +31931,7 @@ var PromiseVersionControlApi = class {
     return result.toPromise();
   }
   /**
-   *  Version: 9.2.0.cl or later   Updates Git repository configuration settings.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *   Version: 9.2.0.cl or later   Updates Git repository configuration settings.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param updateConfigRequest 
    */
   updateConfig(updateConfigRequest, _options) {
@@ -26790,7 +31939,7 @@ var PromiseVersionControlApi = class {
     return result.toPromise();
   }
   /**
-   *  Version: 9.2.0.cl or later   Validates the content of your source branch against the objects in your destination environment.  Before merging content from your source branch to the destination branch, run this API operation from your destination environment and ensure that the changes from the source branch function in the destination environment.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *   Version: 9.2.0.cl or later   Validates the content of your source branch against the objects in your destination environment.  Before merging content from your source branch to the destination branch, run this API operation from your destination environment and ensure that the changes from the source branch function in the destination environment.  Requires `DATAMANAGEMENT` (**Can manage data**) privilege.      
    * @param validateMergeRequest 
    */
   validateMerge(validateMergeRequest, _options) {
@@ -26844,6 +31993,7 @@ export {
   ActionDetails,
   ActionDetailsInput,
   ActionDetailsInputCreate,
+  ActivateUserRequest,
   AnswerContent,
   AnswerDataResponse,
   ApiException,
@@ -26876,9 +32026,15 @@ export {
   CreateConnectionRequest,
   CreateConnectionResponse,
   CreateCustomActionRequest,
+  CreateCustomActionRequestActionDetails,
+  CreateCustomActionRequestDefaultActionConfig,
   CreateOrgRequest,
   CreateRoleRequest,
   CreateScheduleRequest,
+  CreateScheduleRequestFrequency,
+  CreateScheduleRequestLiveboardOptions,
+  CreateScheduleRequestPdfOptions,
+  CreateScheduleRequestRecipientDetails,
   CreateTagRequest,
   CreateUserGroupRequest,
   CreateUserRequest,
@@ -26886,10 +32042,16 @@ export {
   CronExpressionInput,
   PromiseCustomActionApi as CustomActionApi,
   CustomActionMetadataTypeInput,
+  PromiseDBTApi as DBTApi,
   PromiseDataApi as DataApi,
   DataWarehouseObjectInput,
   DataWarehouseObjects,
   Database,
+  DbtConnectionRequest,
+  DbtGenerateSyncTmlRequest,
+  DbtGenerateTmlRequest,
+  DbtSearchResponse,
+  DeactivateUserRequest,
   DefaultActionConfig,
   DefaultActionConfigInput,
   DefaultActionConfigInputCreate,
@@ -26904,6 +32066,9 @@ export {
   ExcludeMetadataListItemInput,
   ExportAnswerReportRequest,
   ExportLiveboardReportRequest,
+  ExportLiveboardReportRequestPdfOptions,
+  ExportLiveboardReportRequestPngOptions,
+  ExportMetadataTMLBatchedRequest,
   ExportMetadataTMLRequest,
   ExportMetadataTypeInput,
   FavoriteMetadataInput,
@@ -26911,6 +32076,7 @@ export {
   FavoriteObjectOptionsInput,
   FetchAnswerDataRequest,
   FetchAnswerSqlQueryRequest,
+  FetchConnectionDiffStatusResponse,
   FetchLiveboardDataRequest,
   FetchLiveboardSqlQueryRequest,
   FetchLogsRequest,
@@ -26920,13 +32086,16 @@ export {
   Frequency,
   FrequencyInput,
   GenericInfo,
+  GetAsyncImportStatusResponse,
   GetFullAccessTokenRequest,
   GetObjectAccessTokenRequest,
+  GetObjectAccessTokenRequestUserParameters,
   GetTokenResponse,
   PromiseGroupsApi as GroupsApi,
   GroupsImportListInput,
   HttpException,
   HttpMethod,
+  ImportEPackAsyncTaskStatus,
   ImportMetadataTMLRequest,
   ImportUser,
   ImportUserGroupsRequest,
@@ -26938,6 +32107,7 @@ export {
   JWTMetadataObject,
   JWTParameter,
   JWTUserOptions,
+  JWTUserOptionsFull,
   JWTUserOptionsParametersInner,
   LiveboardContent,
   LiveboardDataResponse,
@@ -26954,7 +32124,6 @@ export {
   MetadataResponse,
   MetadataSearchResponse,
   MetadataSearchSortOptions,
-  MetadataTypeInput,
   ModelTableList,
   ObjectIDAndName,
   Org,
@@ -26965,6 +32134,8 @@ export {
   PdfOptions,
   PdfOptionsInput,
   PermissionInput,
+  PermissionOfMetadataResponse,
+  PermissionOfPrincipalsResponse,
   PermissionsMetadataTypeInput,
   PngOptionsInput,
   PrincipalsInput,
@@ -26979,6 +32150,7 @@ export {
   ResetUserPasswordRequest,
   ResponseActivationURL,
   ResponseContext,
+  ResponseCopyObject,
   ResponseCustomAction,
   ResponseSchedule,
   ResponseScheduleRun,
@@ -27001,22 +32173,31 @@ export {
   SearchCommitsRequest,
   SearchConfigRequest,
   SearchConnectionRequest,
+  SearchConnectionRequestSortOptions,
   SearchConnectionResponse,
   SearchCustomActionsRequest,
+  SearchCustomActionsRequestDefaultActionConfig,
   SearchDataRequest,
   SearchDataResponse,
   SearchMetadataRequest,
+  SearchMetadataRequestFavoriteObjectOptions,
+  SearchMetadataRequestSortOptions,
   SearchOrgsRequest,
   SearchRoleResponse,
   SearchRolesRequest,
   SearchSchedulesRequest,
+  SearchSchedulesRequestHistoryRunsOptions,
+  SearchSchedulesRequestSortOptions,
   SearchTagsRequest,
   SearchUserGroupsRequest,
+  SearchUserGroupsRequestSortOptions,
   SearchUsersRequest,
+  SearchUsersRequestSortOptions,
   PromiseSecurityApi as SecurityApi,
   SelfDecodingBody,
   ServerConfiguration,
   ShareMetadataRequest,
+  ShareMetadataTypeInput,
   SharePermissionsInput,
   SortOptionInput,
   SortOptions,
@@ -27032,15 +32213,24 @@ export {
   PromiseTagsApi as TagsApi,
   PromiseThoughtSpotRestApi as ThoughtSpotRestApi,
   Token,
+  TokenValidationResponse,
   URL2 as URL,
   URLInput,
   URLInputMandatory,
   UpdateConfigRequest,
   UpdateConnectionRequest,
+  UpdateConnectionV2Request,
   UpdateCustomActionRequest,
+  UpdateCustomActionRequestActionDetails,
+  UpdateCustomActionRequestDefaultActionConfig,
+  UpdateDbtConnectionRequest,
   UpdateOrgRequest,
   UpdateRoleRequest,
   UpdateScheduleRequest,
+  UpdateScheduleRequestFrequency,
+  UpdateScheduleRequestLiveboardOptions,
+  UpdateScheduleRequestPdfOptions,
+  UpdateScheduleRequestRecipientDetails,
   UpdateSystemConfigRequest,
   UpdateTagRequest,
   UpdateUserGroupRequest,
@@ -27048,10 +32238,15 @@ export {
   User,
   UserGroup,
   UserGroupResponse,
+  UserObject,
+  UserParameterOptions,
+  UserParameters,
+  UserRuntimeFilters,
+  UserRuntimeSorts,
   PromiseUsersApi as UsersApi,
   ValidateMergeRequest,
+  ValidateTokenRequest,
   PromiseVersionControlApi as VersionControlApi,
-  VisualizationIdentifiersInput,
   configureAuthMethods,
   createBearerAuthenticationConfig,
   createConfiguration,

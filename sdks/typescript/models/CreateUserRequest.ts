@@ -25,7 +25,7 @@ export class CreateUserRequest {
     /**
     * Password for the user account.
     */
-    'password': string;
+    'password'?: string;
     /**
     * Email of the user account
     */
@@ -83,9 +83,13 @@ export class CreateUserRequest {
     */
     'extended_preferences'?: any;
     /**
-    * Flag to indicate whether welcome email should be sent to user
+    * Flag to indicate whether welcome email should be sent to user. This parameter is applied only on clusters on which IAM is disabled.
     */
     'trigger_welcome_email'?: boolean | null;
+    /**
+    * Flag to indicate whether activation email should be sent to user.
+    */
+    'trigger_activation_email'?: boolean | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -195,6 +199,12 @@ export class CreateUserRequest {
         {
             "name": "trigger_welcome_email",
             "baseName": "trigger_welcome_email",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "trigger_activation_email",
+            "baseName": "trigger_activation_email",
             "type": "boolean",
             "format": ""
         }    ];

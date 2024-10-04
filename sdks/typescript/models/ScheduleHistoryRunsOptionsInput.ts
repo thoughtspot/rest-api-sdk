@@ -16,15 +16,15 @@ export class ScheduleHistoryRunsOptionsInput {
     /**
     * Indicates whether to fetch history runs for the scheduled notification.
     */
-    'include_history_runs'?: boolean;
+    'include_history_runs'?: boolean | null;
     /**
     * Indicates the max number of records that can be fetched as past runs of any scheduled job.
     */
-    'record_size'?: number;
+    'record_size'?: number | null;
     /**
     * Indicates the starting record number from where history runs records should be fetched.
     */
-    'record_offset'?: number;
+    'record_offset'?: number | null;
 
     static readonly discriminator: string | undefined = undefined;
 

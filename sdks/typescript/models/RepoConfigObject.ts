@@ -17,27 +17,27 @@ export class RepoConfigObject {
     /**
     * Remote repository URL configured
     */
-    'repository_url'?: string;
+    'repository_url'?: string | null;
     /**
     * Username to authenticate connection to the version control system
     */
-    'username'?: string;
+    'username'?: string | null;
     /**
     * Name of the remote branch where objects from this Thoughtspot instance will be versioned.
     */
-    'commit_branch_name'?: string;
+    'commit_branch_name'?: string | null;
     /**
     * Branches that have been pulled in local repository
     */
-    'branches'?: Array<string>;
+    'branches'?: Array<string> | null;
     /**
     * Maintain mapping of guid for the deployment to an instance
     */
-    'enable_guid_mapping'?: boolean;
+    'enable_guid_mapping'?: boolean | null;
     /**
     * Name of the branch where the configuration files related to operations between Thoughtspot and version control repo should be maintained.
     */
-    'configuration_branch_name'?: string;
+    'configuration_branch_name'?: string | null;
     'org'?: Org;
 
     static readonly discriminator: string | undefined = undefined;

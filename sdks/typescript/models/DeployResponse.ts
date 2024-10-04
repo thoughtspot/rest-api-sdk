@@ -16,23 +16,23 @@ export class DeployResponse {
     /**
     * Name of the file deployed
     */
-    'file_name'?: string;
+    'file_name'?: string | null;
     /**
     * Name of the metadata object
     */
-    'metadata_name'?: string;
+    'metadata_name'?: string | null;
     /**
     * Type of the metadata object
     */
-    'metadata_type'?: string;
+    'metadata_type'?: string | null;
     /**
     * Indicates the status of deployment for the file
     */
-    'status_code'?: string;
+    'status_code'?: string | null;
     /**
     * Any error or warning with the deployment
     */
-    'status_message'?: string;
+    'status_message'?: string | null;
 
     static readonly discriminator: string | undefined = undefined;
 

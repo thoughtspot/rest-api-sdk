@@ -35,153 +35,157 @@ export class User {
     /**
     * Unique identifier of author of the user.
     */
-    'author_id'?: string;
+    'author_id'?: string | null;
     /**
     * Defines whether the user can change their password.
     */
-    'can_change_password'?: boolean;
+    'can_change_password'?: boolean | null;
     /**
     * Defines whether the response has complete detail of the user.
     */
-    'complete_detail'?: boolean;
+    'complete_detail'?: boolean | null;
     /**
     * Creation time of the user in milliseconds.
     */
-    'creation_time_in_millis'?: number;
+    'creation_time_in_millis'?: number | null;
     'current_org'?: Org;
     /**
     * Indicates whether the user is deleted.
     */
-    'deleted'?: boolean;
+    'deleted'?: boolean | null;
     /**
     * Indicates whether the user is deprecated.
     */
-    'deprecated'?: boolean;
+    'deprecated'?: boolean | null;
     /**
     * Type of the user account.
     */
-    'account_type'?: UserAccountTypeEnum;
+    'account_type'?: UserAccountTypeEnum | null;
     /**
     * Status of the user account.
     */
-    'account_status'?: UserAccountStatusEnum;
+    'account_status'?: UserAccountStatusEnum | null;
     /**
     * Email of the user.
     */
-    'email'?: string;
+    'email'?: string | null;
     /**
     * Expiration time of the user in milliseconds.
     */
-    'expiration_time_in_millis'?: number;
+    'expiration_time_in_millis'?: number | null;
     /**
     * Indicates whether the user is external.
     */
-    'external'?: boolean;
+    'external'?: boolean | null;
     /**
     * Metadata objects to add to the users\' favorites list.
     */
-    'favorite_metadata'?: Array<FavoriteMetadataItem>;
+    'favorite_metadata'?: Array<FavoriteMetadataItem> | null;
     /**
     * Timestamp of the first login session of the user in milliseconds.
     */
-    'first_login_time_in_millis'?: number;
+    'first_login_time_in_millis'?: number | null;
     /**
     * Group mask of the user.
     */
-    'group_mask'?: number;
+    'group_mask'?: number | null;
     /**
     * Indicates whether the user is hidden.
     */
-    'hidden'?: boolean;
+    'hidden'?: boolean | null;
     'home_liveboard'?: ObjectIDAndName;
     /**
     * Incomplete details of user if any present.
     */
-    'incomplete_details'?: any;
+    'incomplete_details'?: any | null;
     /**
     * Indicates whether it is first login of the user.
     */
-    'is_first_login'?: boolean;
+    'is_first_login'?: boolean | null;
     /**
     * Last modified time of the user in milliseconds.
     */
-    'modification_time_in_millis'?: number;
+    'modification_time_in_millis'?: number | null;
     /**
     * Unique identifier of modifier of the user.
     */
-    'modifier_id'?: string;
+    'modifier_id'?: string | null;
     /**
     * User preference for receiving email notifications on shared Answers or Liveboard.
     */
-    'notify_on_share'?: boolean;
+    'notify_on_share'?: boolean | null;
     /**
     * The user preference for turning off the onboarding experience.
     */
-    'onboarding_experience_completed'?: boolean;
+    'onboarding_experience_completed'?: boolean | null;
     /**
     * Orgs to which the user belongs.
     */
-    'orgs'?: Array<Org>;
+    'orgs'?: Array<Org> | null;
     /**
     * Unique identifier of owner of the user.
     */
-    'owner_id'?: string;
+    'owner_id'?: string | null;
     /**
     * Parent type of the user.
     */
-    'parent_type'?: UserParentTypeEnum;
+    'parent_type'?: UserParentTypeEnum | null;
     /**
     * Privileges which are assigned to the user.
     */
-    'privileges'?: Array<string>;
+    'privileges'?: Array<string> | null;
     /**
     * User\'s preference to revisit the new user onboarding experience.
     */
-    'show_onboarding_experience'?: boolean;
+    'show_onboarding_experience'?: boolean | null;
     /**
     * Indicates whether the user is a super user.
     */
-    'super_user'?: boolean;
+    'super_user'?: boolean | null;
     /**
     * Indicates whether the user is a system user.
     */
-    'system_user'?: boolean;
+    'system_user'?: boolean | null;
     /**
     * Tags associated with the user.
     */
-    'tags'?: Array<ObjectIDAndName>;
+    'tags'?: Array<ObjectIDAndName> | null;
     /**
     * Unique identifier of tenant of the user.
     */
-    'tenant_id'?: string;
+    'tenant_id'?: string | null;
     /**
     * Groups to which the user is assigned.
     */
-    'user_groups'?: Array<ObjectIDAndName>;
+    'user_groups'?: Array<ObjectIDAndName> | null;
     /**
     * Inherited User Groups which the user is part of.
     */
-    'user_inherited_groups'?: Array<ObjectIDAndName>;
+    'user_inherited_groups'?: Array<ObjectIDAndName> | null;
     /**
     * Indicates whether welcome email is sent for the user.
     */
-    'welcome_email_sent'?: boolean;
+    'welcome_email_sent'?: boolean | null;
     /**
     * Privileges which are assigned to the user with org.
     */
-    'org_privileges'?: any;
+    'org_privileges'?: any | null;
     /**
     * Locale for the user.
     */
-    'preferred_locale'?: string;
+    'preferred_locale'?: string | null;
     /**
     * Properties for the user
     */
-    'extended_properties'?: any;
+    'extended_properties'?: any | null;
     /**
     * Preferences for the user
     */
-    'extended_preferences'?: any;
+    'extended_preferences'?: any | null;
+    /**
+    * User Parameters which are specified for the user via JWToken
+    */
+    'user_parameters'?: any | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -441,6 +445,12 @@ export class User {
         {
             "name": "extended_preferences",
             "baseName": "extended_preferences",
+            "type": "any",
+            "format": ""
+        },
+        {
+            "name": "user_parameters",
+            "baseName": "user_parameters",
             "type": "any",
             "format": ""
         }    ];

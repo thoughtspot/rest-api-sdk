@@ -13,7 +13,7 @@
 import { HttpFile } from '../http/http';
 
 export class SystemConfig {
-    'onboarding_content_url'?: string;
+    'onboarding_content_url'?: string | null;
 
     static readonly discriminator: string | undefined = undefined;
 

@@ -19,11 +19,11 @@ export class SortingOptions {
     /**
     * Name of the field to apply the sort on.
     */
-    'field_name'?: string;
+    'field_name'?: string | null;
     /**
     * Sort order : ASC(Ascending) or DESC(Descending).
     */
-    'order'?: string;
+    'order'?: string | null;
 
     static readonly discriminator: string | undefined = undefined;
 

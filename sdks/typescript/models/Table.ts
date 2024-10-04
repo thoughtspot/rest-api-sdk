@@ -21,27 +21,27 @@ export class Table {
     /**
     * Columns of the table.
     */
-    'columns'?: Array<Column>;
+    'columns'?: Array<Column> | null;
     /**
     * Type of table. Either view or table
     */
-    'type'?: string;
+    'type'?: string | null;
     /**
     * Description of the table
     */
-    'description'?: string;
+    'description'?: string | null;
     /**
     * Determines if the table is selected
     */
-    'selected'?: boolean;
+    'selected'?: boolean | null;
     /**
     * Determines if the table is linked
     */
-    'linked'?: boolean;
+    'linked'?: boolean | null;
     /**
     * List of relationships for the table
     */
-    'relationships'?: Array<any>;
+    'relationships'?: Array<any> | null;
 
     static readonly discriminator: string | undefined = undefined;
 

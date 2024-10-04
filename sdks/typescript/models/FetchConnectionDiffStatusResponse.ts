@@ -16,7 +16,7 @@ export class FetchConnectionDiffStatusResponse {
     /**
     * Status of the connection diff.
     */
-    'status'?: boolean;
+    'status'?: boolean | null;
 
     static readonly discriminator: string | undefined = undefined;
 

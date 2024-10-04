@@ -16,11 +16,11 @@ export class AuthorType {
     /**
     * Email id of the committer
     */
-    'email'?: string;
+    'email'?: string | null;
     /**
     * Username of the committer
     */
-    'username'?: string;
+    'username'?: string | null;
 
     static readonly discriminator: string | undefined = undefined;
 

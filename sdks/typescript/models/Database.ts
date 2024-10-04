@@ -21,11 +21,11 @@ export class Database {
     /**
     * Schemas of the database.
     */
-    'schemas'?: Array<SchemaObject>;
+    'schemas'?: Array<SchemaObject> | null;
     /**
     * Determines if the object is auto created.
     */
-    'auto_created'?: boolean;
+    'auto_created'?: boolean | null;
 
     static readonly discriminator: string | undefined = undefined;
 

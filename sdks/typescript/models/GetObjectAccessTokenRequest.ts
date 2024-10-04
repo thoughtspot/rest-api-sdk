@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { JWTUserOptions } from '../models/JWTUserOptions';
+import { GetObjectAccessTokenRequestUserParameters } from '../models/GetObjectAccessTokenRequestUserParameters';
 import { HttpFile } from '../http/http';
 
 export class GetObjectAccessTokenRequest {
@@ -21,7 +21,7 @@ export class GetObjectAccessTokenRequest {
     /**
     * GUID of the ThoughtSpot metadata object that the user can access. The bearer will only have access to the object specified in the API request.
     */
-    'object_id': string;
+    'object_id'?: string;
     /**
     * Password of the user account
     */
@@ -35,7 +35,7 @@ export class GetObjectAccessTokenRequest {
     */
     'validity_time_in_sec'?: number;
     /**
-    * ID of the Org context to log in to. If Org ID is not specified, the user will be logged in to the Org context of their previous login session.
+    * ID of the Org context to log in to. If the Org ID is not specified and secret key is provided then user will be logged into the org corresponding to the secret key, and if secret key is not provided then user will be logged in to the Org context of their previous login session.
     */
     'org_id'?: number;
     /**
@@ -54,7 +54,7 @@ export class GetObjectAccessTokenRequest {
     * Unique ID or name of the groups to which you want to assign the new user. You can specify this attribute to dynamically assign privileges during just-in-time (JIT) provisioning.
     */
     'group_identifiers'?: Array<string>;
-    'jwt_user_options'?: JWTUserOptions;
+    'user_parameters'?: GetObjectAccessTokenRequestUserParameters;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -120,9 +120,9 @@ export class GetObjectAccessTokenRequest {
             "format": ""
         },
         {
-            "name": "jwt_user_options",
-            "baseName": "jwt_user_options",
-            "type": "JWTUserOptions",
+            "name": "user_parameters",
+            "baseName": "user_parameters",
+            "type": "GetObjectAccessTokenRequestUserParameters",
             "format": ""
         }    ];
 

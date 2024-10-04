@@ -19,39 +19,39 @@ export class SchedulesPdfOptionsInput {
     /**
     * Indicates whether to include complete Liveboard.
     */
-    'complete_liveboard'?: boolean;
+    'complete_liveboard'?: boolean | null;
     /**
     * Indicates whether to include cover page with the Liveboard title.
     */
-    'include_cover_page'?: boolean;
+    'include_cover_page'?: boolean | null;
     /**
     * Indicates whether to include customized wide logo in the footer if available.
     */
-    'include_custom_logo'?: boolean;
+    'include_custom_logo'?: boolean | null;
     /**
     * Indicates whether to include a page with all applied filters.
     */
-    'include_filter_page'?: boolean;
+    'include_filter_page'?: boolean | null;
     /**
     * Indicates whether to include page number in the footer of each page
     */
-    'include_page_number'?: boolean;
+    'include_page_number'?: boolean | null;
     /**
     * Text to include in the footer of each page.
     */
-    'page_footer_text'?: string;
+    'page_footer_text'?: string | null;
     /**
     * Page orientation of the PDF.
     */
-    'page_orientation'?: string;
+    'page_orientation'?: string | null;
     /**
     * Page size.
     */
-    'page_size'?: SchedulesPdfOptionsInputPageSizeEnum;
+    'page_size'?: SchedulesPdfOptionsInputPageSizeEnum | null;
     /**
     * Indicates whether to include only first page of the tables.
     */
-    'truncate_table'?: boolean;
+    'truncate_table'?: boolean | null;
 
     static readonly discriminator: string | undefined = undefined;
 

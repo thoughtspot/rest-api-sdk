@@ -24,19 +24,19 @@ export class Column {
     /**
     * Determines if the column schema is an aggregate
     */
-    'is_aggregate'?: string;
+    'is_aggregate'?: string | null;
     /**
     * Determines if the column schema can be imported
     */
-    'can_import'?: boolean;
+    'can_import'?: boolean | null;
     /**
     * Determines if the table is selected
     */
-    'selected'?: boolean;
+    'selected'?: boolean | null;
     /**
     * Determines if the table is linked
     */
-    'is_linked_active'?: boolean;
+    'is_linked_active'?: boolean | null;
 
     static readonly discriminator: string | undefined = undefined;
 

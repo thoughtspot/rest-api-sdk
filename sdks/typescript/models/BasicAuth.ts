@@ -19,11 +19,11 @@ export class BasicAuth {
     /**
     * Password for the basic authentication
     */
-    'password'?: string;
+    'password'?: string | null;
     /**
     * Username for the basic authentication
     */
-    'username'?: string;
+    'username'?: string | null;
 
     static readonly discriminator: string | undefined = undefined;
 

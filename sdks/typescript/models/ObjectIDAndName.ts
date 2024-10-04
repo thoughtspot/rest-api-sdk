@@ -19,11 +19,11 @@ export class ObjectIDAndName {
     /**
     * The unique identifier of the object.
     */
-    'id'?: string;
+    'id'?: string | null;
     /**
     * Name of the object.
     */
-    'name'?: string;
+    'name'?: string | null;
 
     static readonly discriminator: string | undefined = undefined;
 

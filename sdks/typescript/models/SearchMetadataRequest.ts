@@ -11,10 +11,10 @@
  */
 
 import { ExcludeMetadataListItemInput } from '../models/ExcludeMetadataListItemInput';
-import { FavoriteObjectOptionsInput } from '../models/FavoriteObjectOptionsInput';
 import { MetadataListItemInput } from '../models/MetadataListItemInput';
-import { MetadataSearchSortOptions } from '../models/MetadataSearchSortOptions';
 import { PermissionInput } from '../models/PermissionInput';
+import { SearchMetadataRequestFavoriteObjectOptions } from '../models/SearchMetadataRequestFavoriteObjectOptions';
+import { SearchMetadataRequestSortOptions } from '../models/SearchMetadataRequestSortOptions';
 import { HttpFile } from '../http/http';
 
 export class SearchMetadataRequest {
@@ -38,7 +38,7 @@ export class SearchMetadataRequest {
     * List of metadata objects to exclude from search.
     */
     'exclude_objects'?: Array<ExcludeMetadataListItemInput>;
-    'favorite_object_options'?: FavoriteObjectOptionsInput;
+    'favorite_object_options'?: SearchMetadataRequestFavoriteObjectOptions;
     /**
     * Includes system-generated metadata objects.
     */
@@ -47,6 +47,10 @@ export class SearchMetadataRequest {
     * Includes dependents of the metadata object specified in the API request. For example, a worksheet can consist of dependent objects such as Liveboards or Answers.
     */
     'include_dependent_objects'?: boolean | null;
+    /**
+    * The maximum number of dependents to include per metadata object.
+    */
+    'dependent_objects_record_size'?: number;
     /**
     * Includes complete details of the metadata objects.
     */
@@ -83,7 +87,7 @@ export class SearchMetadataRequest {
     * The number of records that should be included.
     */
     'record_size'?: number;
-    'sort_options'?: MetadataSearchSortOptions;
+    'sort_options'?: SearchMetadataRequestSortOptions;
     /**
     * Tags to filter metadata objects by
     */
@@ -129,7 +133,7 @@ export class SearchMetadataRequest {
         {
             "name": "favorite_object_options",
             "baseName": "favorite_object_options",
-            "type": "FavoriteObjectOptionsInput",
+            "type": "SearchMetadataRequestFavoriteObjectOptions",
             "format": ""
         },
         {
@@ -143,6 +147,12 @@ export class SearchMetadataRequest {
             "baseName": "include_dependent_objects",
             "type": "boolean",
             "format": ""
+        },
+        {
+            "name": "dependent_objects_record_size",
+            "baseName": "dependent_objects_record_size",
+            "type": "number",
+            "format": "int32"
         },
         {
             "name": "include_details",
@@ -201,7 +211,7 @@ export class SearchMetadataRequest {
         {
             "name": "sort_options",
             "baseName": "sort_options",
-            "type": "MetadataSearchSortOptions",
+            "type": "SearchMetadataRequestSortOptions",
             "format": ""
         },
         {

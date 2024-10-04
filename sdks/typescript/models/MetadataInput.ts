@@ -13,8 +13,8 @@
 import { HttpFile } from '../http/http';
 
 export class MetadataInput {
-    'identifier'?: string;
-    'type'?: MetadataInputTypeEnum;
+    'identifier'?: string | null;
+    'type'?: MetadataInputTypeEnum | null;
 
     static readonly discriminator: string | undefined = undefined;
 

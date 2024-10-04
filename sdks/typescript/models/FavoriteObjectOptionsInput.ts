@@ -19,11 +19,11 @@ export class FavoriteObjectOptionsInput {
     /**
     * Includes objects marked as favorite for the specified users.
     */
-    'include'?: boolean;
+    'include'?: boolean | null;
     /**
     * Unique ID or name of the users. If not specified, the favorite objects of current logged in user are returned.
     */
-    'user_identifiers'?: Array<string>;
+    'user_identifiers'?: Array<string> | null;
 
     static readonly discriminator: string | undefined = undefined;
 

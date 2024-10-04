@@ -18,7 +18,7 @@ Method | HTTP request | Description
 # **commitBranch**
 > CommitResponse commitBranch(commitBranchRequest)
 
- Version: 9.2.0.cl or later   Commits TML files of metadata objects to the Git branch configured on your instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  Before using this endpoint to push your commits:  * Enable Git integration on your instance. * Make sure the Git repository and branch details are configured on your instance.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).      
+  Version: 9.2.0.cl or later   Commits TML files of metadata objects to the Git branch configured on your instance.  Requires at least edit access to objects used in the commit operation.  Before using this endpoint to push your commits:  * Enable Git integration on your instance. * Make sure the Git repository and branch details are configured on your instance.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).      
 
 ### Example
 
@@ -88,7 +88,7 @@ Name | Type | Description  | Notes
 # **createConfig**
 > RepoConfigObject createConfig(createConfigRequest)
 
- Version: 9.2.0.cl or later   Allows you to connect a ThoughtSpot instance to a Git repository.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  You can use this API endpoint to connect your ThoughtSpot development and production environments to the development and production branches of a Git repository.  Before using this endpoint to connect your ThoughtSpot instance to a Git repository, check the following prerequisites:  * You have a Git repository. If you are using GitHub, make sure you have a valid account and an access token to connect ThoughtSpot to GitHub. For information about generating a token, see [GitHub Documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).  * Your access token has `repo` scope that grants full access to public and private repositories. * Your Git repository has a branch that can be configured as a default branch in ThoughtSpot.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).      
+  Version: 9.2.0.cl or later   Allows you to connect a ThoughtSpot instance to a Git repository.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  You can use this API endpoint to connect your ThoughtSpot development and production environments to the development and production branches of a Git repository.  Before using this endpoint to connect your ThoughtSpot instance to a Git repository, check the following prerequisites:  * You have a Git repository. If you are using GitHub, make sure you have a valid account and an access token to connect ThoughtSpot to GitHub. For information about generating a token, see [GitHub Documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).  * Your access token has `repo` scope that grants full access to public and private repositories. * Your Git repository has a branch that can be configured as a default branch in ThoughtSpot.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).  **Note**: ThoughtSpot supports only GitHub / GitHub Enterprise for CI/CD.      
 
 ### Example
 
@@ -113,10 +113,8 @@ apiInstance.createConfig(
       "branch_names_example",
     ],
     commit_branch_name: "commit_branch_name_example",
-    default_branch_name: "default_branch_name_example",
     enable_guid_mapping: true,
     configuration_branch_name: "configuration_branch_name_example",
-    guid_mapping_branch_name: "guid_mapping_branch_name_example",
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -159,9 +157,9 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
 # **deleteConfig**
-> void deleteConfig()
+> void deleteConfig(deleteConfigRequest)
 
- Version: 9.2.0.cl or later   Deletes Git repository configuration from your ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+  Version: 9.2.0.cl or later   Deletes Git repository configuration from your ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
 
 ### Example
 
@@ -176,7 +174,7 @@ const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
 const apiInstance = new VersionControlApi(configuration);
 
 apiInstance.deleteConfig(
-  // DeleteConfigRequest (optional)
+  // DeleteConfigRequest
   {
     cluster_level: true,
   } 
@@ -223,7 +221,7 @@ Name | Type | Description  | Notes
 # **deployCommit**
 > Array<DeployResponse> deployCommit(deployCommitRequest)
 
- Version: 9.2.0.cl or later   Allows you to deploy a commit and publish TML content to your ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  The API deploys the head of the branch unless a `commit_id` is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.      
+  Version: 9.2.0.cl or later   Allows you to deploy a commit and publish TML content to your ThoughtSpot instance.  Requires at least edit access to the objects used in the deploy operation.  The API deploys the head of the branch unless a `commit_id` is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).      
 
 ### Example
 
@@ -286,9 +284,9 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
 # **revertCommit**
-> RevertResponse revertCommit()
+> RevertResponse revertCommit(revertCommitRequest)
 
- Version: 9.2.0.cl or later   Reverts TML objects to a previous commit specified in the API request.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  In the API request, specify the `commit_id`. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.  By default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.      
+  Version: 9.2.0.cl or later   Reverts TML objects to a previous commit specified in the API request.  Requires at least edit access to objects.  In the API request, specify the `commit_id`. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.  By default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).      
 
 ### Example
 
@@ -305,7 +303,7 @@ const apiInstance = new VersionControlApi(configuration);
 apiInstance.revertCommit(
   // string | Commit id to which the object should be reverted
   "commit_id_example" , 
-  // RevertCommitRequest (optional)
+  // RevertCommitRequest
   {
     metadata: [
       {
@@ -360,7 +358,7 @@ Name | Type | Description  | Notes
 # **searchCommits**
 > Array<CommitHistoryResponse> searchCommits(searchCommitsRequest)
 
- Version: 9.2.0.cl or later   Gets a list of commits for a given metadata object.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+  Version: 9.2.0.cl or later   Gets a list of commits for a given metadata object.  Requires `DATAMANAGEMENT` (**Can manage data**) privilege.      
 
 ### Example
 
@@ -424,9 +422,9 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
 # **searchConfig**
-> Array<RepoConfigObject> searchConfig()
+> Array<RepoConfigObject> searchConfig(searchConfigRequest)
 
- Version: 9.2.0.cl or later   Gets Git repository connections configured on the ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+  Version: 9.2.0.cl or later   Gets Git repository connections configured on the ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
 
 ### Example
 
@@ -441,7 +439,7 @@ const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
 const apiInstance = new VersionControlApi(configuration);
 
 apiInstance.searchConfig(
-  // SearchConfigRequest (optional)
+  // SearchConfigRequest
   {
     org_identifiers: [
       "org_identifiers_example",
@@ -488,9 +486,9 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
 # **updateConfig**
-> RepoConfigObject updateConfig()
+> RepoConfigObject updateConfig(updateConfigRequest)
 
- Version: 9.2.0.cl or later   Updates Git repository configuration settings.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+  Version: 9.2.0.cl or later   Updates Git repository configuration settings.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
 
 ### Example
 
@@ -505,7 +503,7 @@ const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
 const apiInstance = new VersionControlApi(configuration);
 
 apiInstance.updateConfig(
-  // UpdateConfigRequest (optional)
+  // UpdateConfigRequest
   {
     username: "username_example",
     access_token: "access_token_example",
@@ -514,10 +512,8 @@ apiInstance.updateConfig(
       "branch_names_example",
     ],
     commit_branch_name: "commit_branch_name_example",
-    default_branch_name: "default_branch_name_example",
     enable_guid_mapping: true,
     configuration_branch_name: "configuration_branch_name_example",
-    guid_mapping_branch_name: "guid_mapping_branch_name_example",
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -562,7 +558,7 @@ Name | Type | Description  | Notes
 # **validateMerge**
 > Array<DeployResponse> validateMerge(validateMergeRequest)
 
- Version: 9.2.0.cl or later   Validates the content of your source branch against the objects in your destination environment.  Before merging content from your source branch to the destination branch, run this API operation from your destination environment and ensure that the changes from the source branch function in the destination environment.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+  Version: 9.2.0.cl or later   Validates the content of your source branch against the objects in your destination environment.  Before merging content from your source branch to the destination branch, run this API operation from your destination environment and ensure that the changes from the source branch function in the destination environment.  Requires `DATAMANAGEMENT` (**Can manage data**) privilege.      
 
 ### Example
 

@@ -24,7 +24,7 @@ export class CommitFileType {
     /**
     * Any error or warning with the deployment
     */
-    'status_message'?: string;
+    'status_message'?: string | null;
 
     static readonly discriminator: string | undefined = undefined;
 

@@ -22,15 +22,15 @@ export class URLInput {
     /**
     * Query parameters for url.
     */
-    'parameters'?: Array<ParametersListItemInput>;
+    'parameters'?: Array<ParametersListItemInput> | null;
     /**
     * Request Url for the Custom action.
     */
-    'url'?: string;
+    'url'?: string | null;
     /**
     * Reference name. By default the value will be set to action name
     */
-    'reference'?: string;
+    'reference'?: string | null;
 
     static readonly discriminator: string | undefined = undefined;
 

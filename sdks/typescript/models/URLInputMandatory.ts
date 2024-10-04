@@ -22,7 +22,7 @@ export class URLInputMandatory {
     /**
     * Query parameters for url.
     */
-    'parameters'?: Array<ParametersListItemInput>;
+    'parameters'?: Array<ParametersListItemInput> | null;
     /**
     * Request Url for the Custom action.
     */
@@ -30,7 +30,7 @@ export class URLInputMandatory {
     /**
     * Reference name. By default the value will be set to action name
     */
-    'reference'?: string;
+    'reference'?: string | null;
 
     static readonly discriminator: string | undefined = undefined;
 

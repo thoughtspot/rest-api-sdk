@@ -22,7 +22,7 @@ export class URL {
     /**
     * Query parameters for url.
     */
-    'parameters'?: Array<ParametersListItem>;
+    'parameters'?: Array<ParametersListItem> | null;
     /**
     * Request Url for the Custom action.
     */
@@ -30,7 +30,7 @@ export class URL {
     /**
     * Reference name of the SDK. By default, the value will be set to action name.
     */
-    'reference'?: string;
+    'reference'?: string | null;
 
     static readonly discriminator: string | undefined = undefined;
 

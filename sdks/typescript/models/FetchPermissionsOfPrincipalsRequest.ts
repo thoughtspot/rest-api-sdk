@@ -23,6 +23,18 @@ export class FetchPermissionsOfPrincipalsRequest {
     * Metadata objects for which you want to fetch permission details. If not specified, the API returns permission details for all metadata objects that the specified users and groups can access.
     */
     'metadata'?: Array<PermissionsMetadataTypeInput>;
+    /**
+    * The starting record number from where the records should be included for each metadata type.
+    */
+    'record_offset'?: number;
+    /**
+    * The number of records that should be included for each metadata type.
+    */
+    'record_size'?: number;
+    /**
+    * When no metadata objects input is passed, metadata objects of this type are fetched.
+    */
+    'default_metadata_type'?: FetchPermissionsOfPrincipalsRequestDefaultMetadataTypeEnum;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -38,6 +50,24 @@ export class FetchPermissionsOfPrincipalsRequest {
             "baseName": "metadata",
             "type": "Array<PermissionsMetadataTypeInput>",
             "format": ""
+        },
+        {
+            "name": "record_offset",
+            "baseName": "record_offset",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "record_size",
+            "baseName": "record_size",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "default_metadata_type",
+            "baseName": "default_metadata_type",
+            "type": "FetchPermissionsOfPrincipalsRequestDefaultMetadataTypeEnum",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
@@ -47,4 +77,7 @@ export class FetchPermissionsOfPrincipalsRequest {
     public constructor() {
     }
 }
+
+
+export type FetchPermissionsOfPrincipalsRequestDefaultMetadataTypeEnum = "ALL" | "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE" | "LOGICAL_COLUMN" | "CONNECTION" ;
 

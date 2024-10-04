@@ -28,7 +28,7 @@ export class ResponseSchedule {
     /**
     * Description of the job.
     */
-    'description'?: string;
+    'description'?: string | null;
     /**
     * Export file format.
     */
@@ -49,7 +49,7 @@ export class ResponseSchedule {
     /**
     * Status of the job
     */
-    'status'?: string;
+    'status'?: string | null;
     /**
     * Time zone
     */
@@ -57,7 +57,7 @@ export class ResponseSchedule {
     /**
     * Schedule runs history records.
     */
-    'history_runs'?: Array<ResponseScheduleRun>;
+    'history_runs'?: Array<ResponseScheduleRun> | null;
 
     static readonly discriminator: string | undefined = undefined;
 

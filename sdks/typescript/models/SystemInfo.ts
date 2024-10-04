@@ -16,95 +16,95 @@ export class SystemInfo {
     /**
     * The unique identifier of the object
     */
-    'id'?: string;
+    'id'?: string | null;
     /**
     * Name of the cluster.
     */
-    'name'?: string;
+    'name'?: string | null;
     /**
     * The release version of the cluster.
     */
-    'release_version'?: string;
+    'release_version'?: string | null;
     /**
     * The timezone of the cluster.
     */
-    'time_zone'?: string;
+    'time_zone'?: string | null;
     /**
     * The default locale of the cluster.
     */
-    'locale'?: string;
+    'locale'?: string | null;
     /**
     * The default date format representation of the cluster.
     */
-    'date_format'?: string;
+    'date_format'?: string | null;
     /**
     * The API version of the cluster.
     */
-    'api_version'?: string;
+    'api_version'?: string | null;
     /**
     * The deployment type of the cluster.
     */
-    'type'?: string;
+    'type'?: string | null;
     /**
     * The deployed environment of the cluster.
     */
-    'environment'?: string;
+    'environment'?: string | null;
     /**
     * The license applied to the cluster.
     */
-    'license'?: string;
+    'license'?: string | null;
     /**
     * The default date time format representation of the cluster.
     */
-    'date_time_format'?: string;
+    'date_time_format'?: string | null;
     /**
     * The default time format representation of the cluster.
     */
-    'time_format'?: string;
+    'time_format'?: string | null;
     /**
     * The unique identifier of system user.
     */
-    'system_user_id'?: string;
+    'system_user_id'?: string | null;
     /**
     * The unique identifier of super user.
     */
-    'super_user_id'?: string;
+    'super_user_id'?: string | null;
     /**
     * The unique identifier of hidden object.
     */
-    'hidden_object_id'?: string;
+    'hidden_object_id'?: string | null;
     /**
     * The unique identifier of system group.
     */
-    'system_group_id'?: string;
+    'system_group_id'?: string | null;
     /**
     * The unique identifier of tsadmin user.
     */
-    'tsadmin_user_id'?: string;
+    'tsadmin_user_id'?: string | null;
     /**
     * The unique identifier of admin group.
     */
-    'admin_group_id'?: string;
+    'admin_group_id'?: string | null;
     /**
     * The unique identifier of all tables connection.
     */
-    'all_tables_connection_id'?: string;
+    'all_tables_connection_id'?: string | null;
     /**
     * The unique identifier of ALL group.
     */
-    'all_user_group_id'?: string;
+    'all_user_group_id'?: string | null;
     /**
     * The supported accept language by the cluster.
     */
-    'accept_language'?: string;
+    'accept_language'?: string | null;
     /**
     * The count of users of ALL group.
     */
-    'all_user_group_member_user_count'?: number;
+    'all_user_group_member_user_count'?: number | null;
     /**
     * The version number of logical model of the cluster.
     */
-    'logical_model_version'?: number;
+    'logical_model_version'?: number | null;
 
     static readonly discriminator: string | undefined = undefined;
 

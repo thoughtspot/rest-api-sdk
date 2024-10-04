@@ -20,11 +20,11 @@ export class RecipientDetails {
     /**
     * Emails of the recipients. Specify email address if the recipient is not a ThoughtSpot user.
     */
-    'emails'?: Array<string>;
+    'emails'?: Array<string> | null;
     /**
     * List of user or groups to subscribe for the scheduled job notifications.
     */
-    'principals'?: Array<PrincipalsListItem>;
+    'principals'?: Array<PrincipalsListItem> | null;
 
     static readonly discriminator: string | undefined = undefined;
 
