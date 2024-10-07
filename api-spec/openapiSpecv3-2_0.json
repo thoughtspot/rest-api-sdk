@@ -2923,7 +2923,9 @@
                         "GCP_POSTGRESQL",
                         "GCP_MYSQL",
                         "MODE",
-                        "GOOGLE_SHEETS"
+                        "GOOGLE_SHEETS",
+                        "FALCON",
+                        "FALCON_ONPREM"
                       ]
                     }
                   },
@@ -6673,6 +6675,14 @@
                     "default": false,
                     "type": "boolean",
                     "nullable": true
+                  },
+                  "export_options": {
+                    "description": "Flags to specify additional options for export. <br/>  <span class=\"since-beta-tag\">Version: 10.5.0.cl or later</span>",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/Export_Options"
+                      }
+                    ]
                   }
                 },
                 "required": [
@@ -8034,7 +8044,9 @@
                       "GCP_POSTGRESQL",
                       "GCP_MYSQL",
                       "MODE",
-                      "GOOGLE_SHEETS"
+                      "GOOGLE_SHEETS",
+                      "FALCON",
+                      "FALCON_ONPREM"
                     ]
                   },
                   "data_warehouse_config": {
@@ -13409,7 +13421,9 @@
               "GCP_POSTGRESQL",
               "GCP_MYSQL",
               "MODE",
-              "GOOGLE_SHEETS"
+              "GOOGLE_SHEETS",
+              "FALCON",
+              "FALCON_ONPREM"
             ],
             "description": "Type of data warehouse."
           },
@@ -14862,6 +14876,30 @@
           }
         }
       },
+      "Export_Options": {
+        "type": "object",
+        "properties": {
+          "export_with_reference_object_id": {
+            "type": "boolean",
+            "default": false,
+            "description": "Boolean Flag to whether to export user_defined_id of referenced object. This will only be respected when UserDefinedId in TML is enabled.",
+            "nullable": true
+          },
+          "include_guid": {
+            "type": "boolean",
+            "default": true,
+            "description": "Boolean flag to whether to export guid of the object. This will only be respected when UserDefinedId in TML is enabled.",
+            "nullable": true
+          },
+          "include_object_id": {
+            "type": "boolean",
+            "default": false,
+            "description": "Boolean flag to whether to export user_defined_id of the object. This will only be respected when UserDefinedId in TML is enabled.",
+            "nullable": true
+          }
+        },
+        "description": "Flags to specify additional options for export. This will only be active when UserDefinedId in TML is enabled."
+      },
       "ResponseCopyObject": {
         "type": "object",
         "properties": {
@@ -15241,7 +15279,9 @@
               "GCP_POSTGRESQL",
               "GCP_MYSQL",
               "MODE",
-              "GOOGLE_SHEETS"
+              "GOOGLE_SHEETS",
+              "FALCON",
+              "FALCON_ONPREM"
             ],
             "description": "Type of data warehouse."
           },
