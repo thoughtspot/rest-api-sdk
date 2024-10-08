@@ -3984,6 +3984,7 @@
                     "enum": [
                       "APPEND",
                       "NONE",
+                      "REPLACE",
                       "RESET"
                     ]
                   },
