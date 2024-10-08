@@ -31,6 +31,7 @@ export * from '../models/CommitHistoryResponse';
 export * from '../models/CommitResponse';
 export * from '../models/CommiterType';
 export * from '../models/ConnectionInput';
+export * from '../models/CopyObjectRequest';
 export * from '../models/CreateConfigRequest';
 export * from '../models/CreateConnectionRequest';
 export * from '../models/CreateConnectionResponse';
@@ -266,6 +267,7 @@ import { CommitHistoryResponse } from '../models/CommitHistoryResponse';
 import { CommitResponse } from '../models/CommitResponse';
 import { CommiterType } from '../models/CommiterType';
 import { ConnectionInput } from '../models/ConnectionInput';
+import { CopyObjectRequest  , CopyObjectRequestTypeEnum    } from '../models/CopyObjectRequest';
 import { CreateConfigRequest } from '../models/CreateConfigRequest';
 import { CreateConnectionRequest  , CreateConnectionRequestDataWarehouseTypeEnum     } from '../models/CreateConnectionRequest';
 import { CreateConnectionResponse  , CreateConnectionResponseDataWarehouseTypeEnum    } from '../models/CreateConnectionResponse';
@@ -493,6 +495,7 @@ let enumsMap: Set<string> = new Set<string>([
     "AssociateMetadataInputTypeEnum",
     "AssociateMetadataInputCreateTypeEnum",
     "AuthorMetadataTypeInputTypeEnum",
+    "CopyObjectRequestTypeEnum",
     "CreateConnectionRequestDataWarehouseTypeEnum",
     "CreateConnectionResponseDataWarehouseTypeEnum",
     "CreateRoleRequestPrivilegesEnum",
@@ -658,6 +661,7 @@ let typeMap: {[index: string]: any} = {
     "CommitResponse": CommitResponse,
     "CommiterType": CommiterType,
     "ConnectionInput": ConnectionInput,
+    "CopyObjectRequest": CopyObjectRequest,
     "CreateConfigRequest": CreateConfigRequest,
     "CreateConnectionRequest": CreateConnectionRequest,
     "CreateConnectionResponse": CreateConnectionResponse,

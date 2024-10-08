@@ -4,6 +4,7 @@ All URIs are relative to *CLUSTER_URL*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**copyObject**](MetadataApi.md#copyObject) | **POST** /api/rest/2.0/metadata/copyobject | 
 [**deleteMetadata**](MetadataApi.md#deleteMetadata) | **POST** /api/rest/2.0/metadata/delete | 
 [**exportMetadataTML**](MetadataApi.md#exportMetadataTML) | **POST** /api/rest/2.0/metadata/tml/export | 
 [**exportMetadataTMLBatched**](MetadataApi.md#exportMetadataTMLBatched) | **POST** /api/rest/2.0/metadata/tml/export/batch | 
@@ -12,6 +13,72 @@ Method | HTTP request | Description
 [**importMetadataTML**](MetadataApi.md#importMetadataTML) | **POST** /api/rest/2.0/metadata/tml/import | 
 [**searchMetadata**](MetadataApi.md#searchMetadata) | **POST** /api/rest/2.0/metadata/search | 
 
+
+# **copyObject**
+> ResponseCopyObject copyObject(copyObjectRequest)
+
+ Makes a copy of an Answer or Liveboard saved in Atlas    Version: 10.3.0.cl or later   Creates a copy of the metadata object specified in the API request.  Requires create access to metadata objects  Upon successful execution, the API returns the id of the new object which is copied from the given object.     
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, MetadataApi, CopyObjectRequest } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new MetadataApi(configuration);
+
+apiInstance.copyObject(
+  // CopyObjectRequest
+  {
+    description: "description_example",
+    identifier: "identifier_example",
+    type: "LIVEBOARD",
+    title: "title_example",
+  } 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **copyObjectRequest** | **CopyObjectRequest**|  |
+
+
+### Return type
+
+**ResponseCopyObject**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successfully created a copy of the object |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**404** | Object not found |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
 # **deleteMetadata**
 > void deleteMetadata(deleteMetadataRequest)

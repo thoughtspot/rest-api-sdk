@@ -27,7 +27,7 @@ export class ExportMetadataTMLRequest {
     */
     'export_fqn'?: boolean | null;
     /**
-    * TML EDOC content format.
+    * TML EDOC content format. **Note: exporting in YAML format currently requires manual formatting of the output. For more details on the workaround, please click [here](https://developers.thoughtspot.com/docs/known-issues#_version_9_12_0_cl)**
     */
     'edoc_format'?: ExportMetadataTMLRequestEdocFormatEnum;
     /**

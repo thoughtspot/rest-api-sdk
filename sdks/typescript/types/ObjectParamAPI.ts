@@ -34,6 +34,7 @@ import { CommitHistoryResponse } from '../models/CommitHistoryResponse';
 import { CommitResponse } from '../models/CommitResponse';
 import { CommiterType } from '../models/CommiterType';
 import { ConnectionInput } from '../models/ConnectionInput';
+import { CopyObjectRequest } from '../models/CopyObjectRequest';
 import { CreateConfigRequest } from '../models/CreateConfigRequest';
 import { CreateConnectionRequest } from '../models/CreateConnectionRequest';
 import { CreateConnectionResponse } from '../models/CreateConnectionResponse';
@@ -912,6 +913,15 @@ export class ObjectLogApi {
 import { ObservableMetadataApi } from "./ObservableAPI";
 import { MetadataApiRequestFactory, MetadataApiResponseProcessor} from "../apis/MetadataApi";
 
+export interface MetadataApiCopyObjectRequest {
+    /**
+     * 
+     * @type CopyObjectRequest
+     * @memberof MetadataApicopyObject
+     */
+    copyObjectRequest: CopyObjectRequest
+}
+
 export interface MetadataApiDeleteMetadataRequest {
     /**
      * 
@@ -980,6 +990,14 @@ export class ObjectMetadataApi {
 
     public constructor(configuration: Configuration, requestFactory?: MetadataApiRequestFactory, responseProcessor?: MetadataApiResponseProcessor) {
         this.api = new ObservableMetadataApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     *  Makes a copy of an Answer or Liveboard saved in Atlas    Version: 10.3.0.cl or later   Creates a copy of the metadata object specified in the API request.  Requires create access to metadata objects  Upon successful execution, the API returns the id of the new object which is copied from the given object.     
+     * @param param the request object
+     */
+    public copyObject(param: MetadataApiCopyObjectRequest, options?: Configuration): Promise<ResponseCopyObject> {
+        return this.api.copyObject(param.copyObjectRequest,  options).toPromise();
     }
 
     /**
@@ -1652,6 +1670,15 @@ export interface ThoughtSpotRestApiCommitBranchRequest {
      * @memberof ThoughtSpotRestApicommitBranch
      */
     commitBranchRequest: CommitBranchRequest
+}
+
+export interface ThoughtSpotRestApiCopyObjectRequest {
+    /**
+     * 
+     * @type CopyObjectRequest
+     * @memberof ThoughtSpotRestApicopyObject
+     */
+    copyObjectRequest: CopyObjectRequest
 }
 
 export interface ThoughtSpotRestApiCreateConfigRequest {
@@ -2467,6 +2494,14 @@ export class ObjectThoughtSpotRestApi {
      */
     public commitBranch(param: ThoughtSpotRestApiCommitBranchRequest, options?: Configuration): Promise<CommitResponse> {
         return this.api.commitBranch(param.commitBranchRequest,  options).toPromise();
+    }
+
+    /**
+     *  Makes a copy of an Answer or Liveboard saved in Atlas    Version: 10.3.0.cl or later   Creates a copy of the metadata object specified in the API request.  Requires create access to metadata objects  Upon successful execution, the API returns the id of the new object which is copied from the given object.     
+     * @param param the request object
+     */
+    public copyObject(param: ThoughtSpotRestApiCopyObjectRequest, options?: Configuration): Promise<ResponseCopyObject> {
+        return this.api.copyObject(param.copyObjectRequest,  options).toPromise();
     }
 
     /**

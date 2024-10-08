@@ -17,7 +17,7 @@ import { UserRuntimeSorts } from '../models/UserRuntimeSorts';
 import { HttpFile } from '../http/http';
 
 /**
-* <div>Version: 9.10.5.cl or later </div>  Define attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters).
+* <div>Deprecated: 10.4.0.cl and later </div>  Define attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters).
 */
 export class GetObjectAccessTokenRequestUserParameters {
     'objects'?: Array<UserObject> | null;

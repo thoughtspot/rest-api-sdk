@@ -274,10 +274,12 @@ apiInstance.shareMetadata(
     visualization_identifiers: [
       "visualization_identifiers_example",
     ],
-    emails: [],
+    emails: [
+      "emails_example",
+    ],
     message: "message_example",
     enable_custom_url: false,
-    notify_on_share: false,
+    notify_on_share: true,
     has_lenient_discoverability: false,
   } 
 ).then((data:any) => {

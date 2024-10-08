@@ -38,7 +38,7 @@ export class ShareMetadataRequest {
     /**
     * Email IDs to which notifications will be sent.
     */
-    'emails'?: Array<string>;
+    'emails': Array<string>;
     /**
     * Message to be included in notification.
     */

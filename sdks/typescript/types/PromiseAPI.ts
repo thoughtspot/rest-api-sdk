@@ -34,6 +34,7 @@ import { CommitHistoryResponse } from '../models/CommitHistoryResponse';
 import { CommitResponse } from '../models/CommitResponse';
 import { CommiterType } from '../models/CommiterType';
 import { ConnectionInput } from '../models/ConnectionInput';
+import { CopyObjectRequest } from '../models/CopyObjectRequest';
 import { CreateConfigRequest } from '../models/CreateConfigRequest';
 import { CreateConnectionRequest } from '../models/CreateConnectionRequest';
 import { CreateConnectionResponse } from '../models/CreateConnectionResponse';
@@ -697,6 +698,15 @@ export class PromiseMetadataApi {
     }
 
     /**
+     *  Makes a copy of an Answer or Liveboard saved in Atlas    Version: 10.3.0.cl or later   Creates a copy of the metadata object specified in the API request.  Requires create access to metadata objects  Upon successful execution, the API returns the id of the new object which is copied from the given object.     
+     * @param copyObjectRequest 
+     */
+    public copyObject(copyObjectRequest: CopyObjectRequest, _options?: Configuration): Promise<ResponseCopyObject> {
+        const result = this.api.copyObject(copyObjectRequest, _options);
+        return result.toPromise();
+    }
+
+    /**
      *   Version: 9.0.0.cl or later   Removes the specified metadata object from the ThoughtSpot system.  Requires edit access to the metadata object or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
      * @param deleteMetadataRequest 
      */
@@ -1206,6 +1216,15 @@ export class PromiseThoughtSpotRestApi {
      */
     public commitBranch(commitBranchRequest: CommitBranchRequest, _options?: Configuration): Promise<CommitResponse> {
         const result = this.api.commitBranch(commitBranchRequest, _options);
+        return result.toPromise();
+    }
+
+    /**
+     *  Makes a copy of an Answer or Liveboard saved in Atlas    Version: 10.3.0.cl or later   Creates a copy of the metadata object specified in the API request.  Requires create access to metadata objects  Upon successful execution, the API returns the id of the new object which is copied from the given object.     
+     * @param copyObjectRequest 
+     */
+    public copyObject(copyObjectRequest: CopyObjectRequest, _options?: Configuration): Promise<ResponseCopyObject> {
+        const result = this.api.copyObject(copyObjectRequest, _options);
         return result.toPromise();
     }
 

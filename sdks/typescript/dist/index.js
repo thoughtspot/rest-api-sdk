@@ -1280,6 +1280,43 @@ _ConnectionInput.attributeTypeMap = [
 ];
 var ConnectionInput = _ConnectionInput;
 
+// models/CopyObjectRequest.ts
+var _CopyObjectRequest = class _CopyObjectRequest {
+  static getAttributeTypeMap() {
+    return _CopyObjectRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_CopyObjectRequest.discriminator = void 0;
+_CopyObjectRequest.attributeTypeMap = [
+  {
+    "name": "description",
+    "baseName": "description",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "identifier",
+    "baseName": "identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "type",
+    "baseName": "type",
+    "type": "CopyObjectRequestTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "title",
+    "baseName": "title",
+    "type": "string",
+    "format": ""
+  }
+];
+var CopyObjectRequest = _CopyObjectRequest;
+
 // models/CreateConfigRequest.ts
 var _CreateConfigRequest = class _CreateConfigRequest {
   static getAttributeTypeMap() {
@@ -9826,6 +9863,7 @@ var enumsMap = /* @__PURE__ */ new Set([
   "AssociateMetadataInputTypeEnum",
   "AssociateMetadataInputCreateTypeEnum",
   "AuthorMetadataTypeInputTypeEnum",
+  "CopyObjectRequestTypeEnum",
   "CreateConnectionRequestDataWarehouseTypeEnum",
   "CreateConnectionResponseDataWarehouseTypeEnum",
   "CreateRoleRequestPrivilegesEnum",
@@ -9990,6 +10028,7 @@ var typeMap = {
   "CommitResponse": CommitResponse,
   "CommiterType": CommiterType,
   "ConnectionInput": ConnectionInput,
+  "CopyObjectRequest": CopyObjectRequest,
   "CreateConfigRequest": CreateConfigRequest,
   "CreateConnectionRequest": CreateConnectionRequest,
   "CreateConnectionResponse": CreateConnectionResponse,
@@ -13657,6 +13696,42 @@ var LogApiResponseProcessor = class {
 // apis/MetadataApi.ts
 var MetadataApiRequestFactory = class extends BaseAPIRequestFactory {
   /**
+   *  Makes a copy of an Answer or Liveboard saved in Atlas    Version: 10.3.0.cl or later   Creates a copy of the metadata object specified in the API request.  Requires create access to metadata objects  Upon successful execution, the API returns the id of the new object which is copied from the given object.     
+   * @param copyObjectRequest 
+   */
+  copyObject(copyObjectRequest, _options) {
+    return __async(this, null, function* () {
+      var _a, _b, _c;
+      let _config = _options || this.configuration;
+      if (copyObjectRequest === null || copyObjectRequest === void 0) {
+        throw new RequiredError("MetadataApi", "copyObject", "copyObjectRequest");
+      }
+      const localVarPath = "/api/rest/2.0/metadata/copyobject";
+      const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
+      requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+      const contentType = ObjectSerializer.getPreferredMediaType([
+        "application/json"
+      ]);
+      requestContext.setHeaderParam("Content-Type", contentType);
+      const serializedBody = ObjectSerializer.stringify(
+        ObjectSerializer.serialize(copyObjectRequest, "CopyObjectRequest", ""),
+        contentType
+      );
+      requestContext.setBody(serializedBody);
+      let authMethod;
+      authMethod = _config.authMethods["bearerAuth"];
+      if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
+        yield authMethod == null ? void 0 : authMethod.applySecurityAuthentication(requestContext);
+      }
+      const defaultAuth = ((_a = _options == null ? void 0 : _options.authMethods) == null ? void 0 : _a.default) || ((_c = (_b = this.configuration) == null ? void 0 : _b.authMethods) == null ? void 0 : _c.default);
+      if (defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication) {
+        yield defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication(requestContext);
+      }
+      return requestContext;
+    });
+  }
+  /**
    *   Version: 9.0.0.cl or later   Removes the specified metadata object from the ThoughtSpot system.  Requires edit access to the metadata object or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param deleteMetadataRequest 
    */
@@ -13910,6 +13985,75 @@ var MetadataApiRequestFactory = class extends BaseAPIRequestFactory {
   }
 };
 var MetadataApiResponseProcessor = class {
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
+   * @params response Response returned by the server for a request to copyObject
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  copyObject(response) {
+    return __async(this, null, function* () {
+      const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+      if (isCodeInRange("200", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ResponseCopyObject",
+          ""
+        );
+        return body;
+      }
+      if (isCodeInRange("400", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
+      }
+      if (isCodeInRange("401", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+      }
+      if (isCodeInRange("403", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+      }
+      if (isCodeInRange("404", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Object not found", body, response.headers);
+      }
+      if (isCodeInRange("500", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+      }
+      if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ResponseCopyObject",
+          ""
+        );
+        return body;
+      }
+      throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", yield response.getBodyAsAny(), response.headers);
+    });
+  }
   /**
    * Unwraps the actual response sent by the server from the response context and deserializes the response content
    * to the expected objects
@@ -17146,6 +17290,42 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
+   *  Makes a copy of an Answer or Liveboard saved in Atlas    Version: 10.3.0.cl or later   Creates a copy of the metadata object specified in the API request.  Requires create access to metadata objects  Upon successful execution, the API returns the id of the new object which is copied from the given object.     
+   * @param copyObjectRequest 
+   */
+  copyObject(copyObjectRequest, _options) {
+    return __async(this, null, function* () {
+      var _a, _b, _c;
+      let _config = _options || this.configuration;
+      if (copyObjectRequest === null || copyObjectRequest === void 0) {
+        throw new RequiredError("ThoughtSpotRestApi", "copyObject", "copyObjectRequest");
+      }
+      const localVarPath = "/api/rest/2.0/metadata/copyobject";
+      const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client");
+      requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+      const contentType = ObjectSerializer.getPreferredMediaType([
+        "application/json"
+      ]);
+      requestContext.setHeaderParam("Content-Type", contentType);
+      const serializedBody = ObjectSerializer.stringify(
+        ObjectSerializer.serialize(copyObjectRequest, "CopyObjectRequest", ""),
+        contentType
+      );
+      requestContext.setBody(serializedBody);
+      let authMethod;
+      authMethod = _config.authMethods["bearerAuth"];
+      if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
+        yield authMethod == null ? void 0 : authMethod.applySecurityAuthentication(requestContext);
+      }
+      const defaultAuth = ((_a = _options == null ? void 0 : _options.authMethods) == null ? void 0 : _a.default) || ((_c = (_b = this.configuration) == null ? void 0 : _b.authMethods) == null ? void 0 : _c.default);
+      if (defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication) {
+        yield defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication(requestContext);
+      }
+      return requestContext;
+    });
+  }
+  /**
    *   Version: 9.2.0.cl or later   Allows you to connect a ThoughtSpot instance to a Git repository.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  You can use this API endpoint to connect your ThoughtSpot development and production environments to the development and production branches of a Git repository.  Before using this endpoint to connect your ThoughtSpot instance to a Git repository, check the following prerequisites:  * You have a Git repository. If you are using GitHub, make sure you have a valid account and an access token to connect ThoughtSpot to GitHub. For information about generating a token, see [GitHub Documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).  * Your access token has `repo` scope that grants full access to public and private repositories. * Your Git repository has a branch that can be configured as a default branch in ThoughtSpot.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).  **Note**: ThoughtSpot supports only GitHub / GitHub Enterprise for CI/CD.      
    * @param createConfigRequest 
    */
@@ -20290,6 +20470,75 @@ var ThoughtSpotRestApiResponseProcessor = class {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
           "CommitResponse",
+          ""
+        );
+        return body;
+      }
+      throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", yield response.getBodyAsAny(), response.headers);
+    });
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
+   * @params response Response returned by the server for a request to copyObject
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  copyObject(response) {
+    return __async(this, null, function* () {
+      const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+      if (isCodeInRange("200", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ResponseCopyObject",
+          ""
+        );
+        return body;
+      }
+      if (isCodeInRange("400", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
+      }
+      if (isCodeInRange("401", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+      }
+      if (isCodeInRange("403", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+      }
+      if (isCodeInRange("404", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Object not found", body, response.headers);
+      }
+      if (isCodeInRange("500", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+      }
+      if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ResponseCopyObject",
           ""
         );
         return body;
@@ -27778,6 +28027,24 @@ var ObservableMetadataApi = class {
     this.responseProcessor = responseProcessor || new MetadataApiResponseProcessor();
   }
   /**
+   *  Makes a copy of an Answer or Liveboard saved in Atlas    Version: 10.3.0.cl or later   Creates a copy of the metadata object specified in the API request.  Requires create access to metadata objects  Upon successful execution, the API returns the id of the new object which is copied from the given object.     
+   * @param copyObjectRequest 
+   */
+  copyObject(copyObjectRequest, _options) {
+    const requestContextPromise = this.requestFactory.copyObject(copyObjectRequest, _options);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (let middleware of this.configuration.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => this.configuration.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (let middleware of this.configuration.middleware) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.copyObject(rsp)));
+    }));
+  }
+  /**
    *   Version: 9.0.0.cl or later   Removes the specified metadata object from the ThoughtSpot system.  Requires edit access to the metadata object or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param deleteMetadataRequest 
    */
@@ -28552,6 +28819,24 @@ var ObservableThoughtSpotRestApi = class {
         middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
       }
       return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.commitBranch(rsp)));
+    }));
+  }
+  /**
+   *  Makes a copy of an Answer or Liveboard saved in Atlas    Version: 10.3.0.cl or later   Creates a copy of the metadata object specified in the API request.  Requires create access to metadata objects  Upon successful execution, the API returns the id of the new object which is copied from the given object.     
+   * @param copyObjectRequest 
+   */
+  copyObject(copyObjectRequest, _options) {
+    const requestContextPromise = this.requestFactory.copyObject(copyObjectRequest, _options);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (let middleware of this.configuration.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => this.configuration.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (let middleware of this.configuration.middleware) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.copyObject(rsp)));
     }));
   }
   /**
@@ -30748,6 +31033,14 @@ var PromiseMetadataApi = class {
     this.api = new ObservableMetadataApi(configuration, requestFactory, responseProcessor);
   }
   /**
+   *  Makes a copy of an Answer or Liveboard saved in Atlas    Version: 10.3.0.cl or later   Creates a copy of the metadata object specified in the API request.  Requires create access to metadata objects  Upon successful execution, the API returns the id of the new object which is copied from the given object.     
+   * @param copyObjectRequest 
+   */
+  copyObject(copyObjectRequest, _options) {
+    const result = this.api.copyObject(copyObjectRequest, _options);
+    return result.toPromise();
+  }
+  /**
    *   Version: 9.0.0.cl or later   Removes the specified metadata object from the ThoughtSpot system.  Requires edit access to the metadata object or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param deleteMetadataRequest 
    */
@@ -31106,6 +31399,14 @@ var PromiseThoughtSpotRestApi = class {
    */
   commitBranch(commitBranchRequest, _options) {
     const result = this.api.commitBranch(commitBranchRequest, _options);
+    return result.toPromise();
+  }
+  /**
+   *  Makes a copy of an Answer or Liveboard saved in Atlas    Version: 10.3.0.cl or later   Creates a copy of the metadata object specified in the API request.  Requires create access to metadata objects  Upon successful execution, the API returns the id of the new object which is copied from the given object.     
+   * @param copyObjectRequest 
+   */
+  copyObject(copyObjectRequest, _options) {
+    const result = this.api.copyObject(copyObjectRequest, _options);
     return result.toPromise();
   }
   /**
@@ -32022,6 +32323,7 @@ export {
   CommiterType,
   ConnectionInput,
   PromiseConnectionsApi as ConnectionsApi,
+  CopyObjectRequest,
   CreateConfigRequest,
   CreateConnectionRequest,
   CreateConnectionResponse,
