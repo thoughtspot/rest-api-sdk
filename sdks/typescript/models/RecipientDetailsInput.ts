@@ -20,11 +20,11 @@ export class RecipientDetailsInput {
     /**
     * Emails of the recipients.
     */
-    'emails'?: Array<string>;
+    'emails'?: Array<string> | null;
     /**
     * User or groups to be set as recipients of the schedule notifications.
     */
-    'principals'?: Array<PrincipalsListItemInput>;
+    'principals'?: Array<PrincipalsListItemInput> | null;
 
     static readonly discriminator: string | undefined = undefined;
 

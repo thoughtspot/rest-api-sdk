@@ -16,8 +16,8 @@ import { HttpFile } from '../http/http';
 * Metadata objects.
 */
 export class JWTMetadataObject {
-    'identifier'?: string;
-    'type'?: JWTMetadataObjectTypeEnum;
+    'identifier'?: string | null;
+    'type'?: JWTMetadataObjectTypeEnum | null;
 
     static readonly discriminator: string | undefined = undefined;
 

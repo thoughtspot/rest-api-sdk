@@ -25,10 +25,10 @@ import java.util.ArrayList;
 import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
 import org.thoughtspot.client.model.ExcludeMetadataListItemInput;
-import org.thoughtspot.client.model.FavoriteObjectOptionsInput;
 import org.thoughtspot.client.model.MetadataListItemInput;
-import org.thoughtspot.client.model.MetadataSearchSortOptions;
 import org.thoughtspot.client.model.PermissionInput;
+import org.thoughtspot.client.model.SearchMetadataRequestFavoriteObjectOptions;
+import org.thoughtspot.client.model.SearchMetadataRequestSortOptions;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -58,7 +58,7 @@ import org.thoughtspot.client.JSON;
 /**
  * SearchMetadataRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-03-04T10:25:25.563+05:30[Asia/Kolkata]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-10-08T14:03:41.316769Z[Etc/UTC]")
 public class SearchMetadataRequest {
   public static final String SERIALIZED_NAME_METADATA = "metadata";
   @SerializedName(SERIALIZED_NAME_METADATA)
@@ -129,7 +129,7 @@ public class SearchMetadataRequest {
 
   public static final String SERIALIZED_NAME_FAVORITE_OBJECT_OPTIONS = "favorite_object_options";
   @SerializedName(SERIALIZED_NAME_FAVORITE_OBJECT_OPTIONS)
-  private FavoriteObjectOptionsInput favoriteObjectOptions;
+  private SearchMetadataRequestFavoriteObjectOptions favoriteObjectOptions;
 
   public static final String SERIALIZED_NAME_INCLUDE_AUTO_CREATED_OBJECTS = "include_auto_created_objects";
   @SerializedName(SERIALIZED_NAME_INCLUDE_AUTO_CREATED_OBJECTS)
@@ -138,6 +138,10 @@ public class SearchMetadataRequest {
   public static final String SERIALIZED_NAME_INCLUDE_DEPENDENT_OBJECTS = "include_dependent_objects";
   @SerializedName(SERIALIZED_NAME_INCLUDE_DEPENDENT_OBJECTS)
   private Boolean includeDependentObjects = false;
+
+  public static final String SERIALIZED_NAME_DEPENDENT_OBJECTS_RECORD_SIZE = "dependent_objects_record_size";
+  @SerializedName(SERIALIZED_NAME_DEPENDENT_OBJECTS_RECORD_SIZE)
+  private Integer dependentObjectsRecordSize = 50;
 
   public static final String SERIALIZED_NAME_INCLUDE_DETAILS = "include_details";
   @SerializedName(SERIALIZED_NAME_INCLUDE_DETAILS)
@@ -177,7 +181,7 @@ public class SearchMetadataRequest {
 
   public static final String SERIALIZED_NAME_SORT_OPTIONS = "sort_options";
   @SerializedName(SERIALIZED_NAME_SORT_OPTIONS)
-  private MetadataSearchSortOptions sortOptions;
+  private SearchMetadataRequestSortOptions sortOptions;
 
   public static final String SERIALIZED_NAME_TAG_IDENTIFIERS = "tag_identifiers";
   @SerializedName(SERIALIZED_NAME_TAG_IDENTIFIERS)
@@ -327,7 +331,7 @@ public class SearchMetadataRequest {
   }
 
 
-  public SearchMetadataRequest favoriteObjectOptions(FavoriteObjectOptionsInput favoriteObjectOptions) {
+  public SearchMetadataRequest favoriteObjectOptions(SearchMetadataRequestFavoriteObjectOptions favoriteObjectOptions) {
     
     this.favoriteObjectOptions = favoriteObjectOptions;
     return this;
@@ -338,12 +342,12 @@ public class SearchMetadataRequest {
    * @return favoriteObjectOptions
   **/
   @javax.annotation.Nullable
-  public FavoriteObjectOptionsInput getFavoriteObjectOptions() {
+  public SearchMetadataRequestFavoriteObjectOptions getFavoriteObjectOptions() {
     return favoriteObjectOptions;
   }
 
 
-  public void setFavoriteObjectOptions(FavoriteObjectOptionsInput favoriteObjectOptions) {
+  public void setFavoriteObjectOptions(SearchMetadataRequestFavoriteObjectOptions favoriteObjectOptions) {
     this.favoriteObjectOptions = favoriteObjectOptions;
   }
 
@@ -387,6 +391,27 @@ public class SearchMetadataRequest {
 
   public void setIncludeDependentObjects(Boolean includeDependentObjects) {
     this.includeDependentObjects = includeDependentObjects;
+  }
+
+
+  public SearchMetadataRequest dependentObjectsRecordSize(Integer dependentObjectsRecordSize) {
+    
+    this.dependentObjectsRecordSize = dependentObjectsRecordSize;
+    return this;
+  }
+
+   /**
+   * The maximum number of dependents to include per metadata object.
+   * @return dependentObjectsRecordSize
+  **/
+  @javax.annotation.Nullable
+  public Integer getDependentObjectsRecordSize() {
+    return dependentObjectsRecordSize;
+  }
+
+
+  public void setDependentObjectsRecordSize(Integer dependentObjectsRecordSize) {
+    this.dependentObjectsRecordSize = dependentObjectsRecordSize;
   }
 
 
@@ -587,7 +612,7 @@ public class SearchMetadataRequest {
   }
 
 
-  public SearchMetadataRequest sortOptions(MetadataSearchSortOptions sortOptions) {
+  public SearchMetadataRequest sortOptions(SearchMetadataRequestSortOptions sortOptions) {
     
     this.sortOptions = sortOptions;
     return this;
@@ -598,12 +623,12 @@ public class SearchMetadataRequest {
    * @return sortOptions
   **/
   @javax.annotation.Nullable
-  public MetadataSearchSortOptions getSortOptions() {
+  public SearchMetadataRequestSortOptions getSortOptions() {
     return sortOptions;
   }
 
 
-  public void setSortOptions(MetadataSearchSortOptions sortOptions) {
+  public void setSortOptions(SearchMetadataRequestSortOptions sortOptions) {
     this.sortOptions = sortOptions;
   }
 
@@ -676,6 +701,7 @@ public class SearchMetadataRequest {
         Objects.equals(this.favoriteObjectOptions, searchMetadataRequest.favoriteObjectOptions) &&
         Objects.equals(this.includeAutoCreatedObjects, searchMetadataRequest.includeAutoCreatedObjects) &&
         Objects.equals(this.includeDependentObjects, searchMetadataRequest.includeDependentObjects) &&
+        Objects.equals(this.dependentObjectsRecordSize, searchMetadataRequest.dependentObjectsRecordSize) &&
         Objects.equals(this.includeDetails, searchMetadataRequest.includeDetails) &&
         Objects.equals(this.includeHeaders, searchMetadataRequest.includeHeaders) &&
         Objects.equals(this.includeHiddenObjects, searchMetadataRequest.includeHiddenObjects) &&
@@ -696,7 +722,7 @@ public class SearchMetadataRequest {
 
   @Override
   public int hashCode() {
-    return Objects.hash(metadata, permissions, createdByUserIdentifiers, dependentObjectVersion, excludeObjects, favoriteObjectOptions, includeAutoCreatedObjects, includeDependentObjects, includeDetails, includeHeaders, includeHiddenObjects, includeIncompleteObjects, includeVisualizationHeaders, includeWorksheetSearchAssistData, modifiedByUserIdentifiers, recordOffset, recordSize, sortOptions, tagIdentifiers, includeStats);
+    return Objects.hash(metadata, permissions, createdByUserIdentifiers, dependentObjectVersion, excludeObjects, favoriteObjectOptions, includeAutoCreatedObjects, includeDependentObjects, dependentObjectsRecordSize, includeDetails, includeHeaders, includeHiddenObjects, includeIncompleteObjects, includeVisualizationHeaders, includeWorksheetSearchAssistData, modifiedByUserIdentifiers, recordOffset, recordSize, sortOptions, tagIdentifiers, includeStats);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -718,6 +744,7 @@ public class SearchMetadataRequest {
     sb.append("    favoriteObjectOptions: ").append(toIndentedString(favoriteObjectOptions)).append("\n");
     sb.append("    includeAutoCreatedObjects: ").append(toIndentedString(includeAutoCreatedObjects)).append("\n");
     sb.append("    includeDependentObjects: ").append(toIndentedString(includeDependentObjects)).append("\n");
+    sb.append("    dependentObjectsRecordSize: ").append(toIndentedString(dependentObjectsRecordSize)).append("\n");
     sb.append("    includeDetails: ").append(toIndentedString(includeDetails)).append("\n");
     sb.append("    includeHeaders: ").append(toIndentedString(includeHeaders)).append("\n");
     sb.append("    includeHiddenObjects: ").append(toIndentedString(includeHiddenObjects)).append("\n");
@@ -760,6 +787,7 @@ public class SearchMetadataRequest {
     openapiFields.add("favorite_object_options");
     openapiFields.add("include_auto_created_objects");
     openapiFields.add("include_dependent_objects");
+    openapiFields.add("dependent_objects_record_size");
     openapiFields.add("include_details");
     openapiFields.add("include_headers");
     openapiFields.add("include_hidden_objects");
@@ -848,7 +876,7 @@ public class SearchMetadataRequest {
       }
       // validate the optional field `favorite_object_options`
       if (jsonObj.get("favorite_object_options") != null && !jsonObj.get("favorite_object_options").isJsonNull()) {
-        FavoriteObjectOptionsInput.validateJsonObject(jsonObj.getAsJsonObject("favorite_object_options"));
+        SearchMetadataRequestFavoriteObjectOptions.validateJsonObject(jsonObj.getAsJsonObject("favorite_object_options"));
       }
       // ensure the optional json data is an array if present
       if (jsonObj.get("modified_by_user_identifiers") != null && !jsonObj.get("modified_by_user_identifiers").isJsonArray()) {
@@ -856,7 +884,7 @@ public class SearchMetadataRequest {
       }
       // validate the optional field `sort_options`
       if (jsonObj.get("sort_options") != null && !jsonObj.get("sort_options").isJsonNull()) {
-        MetadataSearchSortOptions.validateJsonObject(jsonObj.getAsJsonObject("sort_options"));
+        SearchMetadataRequestSortOptions.validateJsonObject(jsonObj.getAsJsonObject("sort_options"));
       }
       // ensure the optional json data is an array if present
       if (jsonObj.get("tag_identifiers") != null && !jsonObj.get("tag_identifiers").isJsonArray()) {

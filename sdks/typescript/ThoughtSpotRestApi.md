@@ -4,10 +4,12 @@ All URIs are relative to *CLUSTER_URL*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**activateUser**](ThoughtSpotRestApi.md#activateUser) | **POST** /api/rest/2.0/users/activate | 
 [**assignChangeAuthor**](ThoughtSpotRestApi.md#assignChangeAuthor) | **POST** /api/rest/2.0/security/metadata/assign | 
 [**assignTag**](ThoughtSpotRestApi.md#assignTag) | **POST** /api/rest/2.0/tags/assign | 
 [**changeUserPassword**](ThoughtSpotRestApi.md#changeUserPassword) | **POST** /api/rest/2.0/users/change-password | 
 [**commitBranch**](ThoughtSpotRestApi.md#commitBranch) | **POST** /api/rest/2.0/vcs/git/branches/commit | 
+[**copyObject**](ThoughtSpotRestApi.md#copyObject) | **POST** /api/rest/2.0/metadata/copyobject | 
 [**createConfig**](ThoughtSpotRestApi.md#createConfig) | **POST** /api/rest/2.0/vcs/git/config/create | 
 [**createConnection**](ThoughtSpotRestApi.md#createConnection) | **POST** /api/rest/2.0/connection/create | 
 [**createCustomAction**](ThoughtSpotRestApi.md#createCustomAction) | **POST** /api/rest/2.0/customization/custom-actions | 
@@ -17,9 +19,16 @@ Method | HTTP request | Description
 [**createTag**](ThoughtSpotRestApi.md#createTag) | **POST** /api/rest/2.0/tags/create | 
 [**createUser**](ThoughtSpotRestApi.md#createUser) | **POST** /api/rest/2.0/users/create | 
 [**createUserGroup**](ThoughtSpotRestApi.md#createUserGroup) | **POST** /api/rest/2.0/groups/create | 
+[**dbtConnection**](ThoughtSpotRestApi.md#dbtConnection) | **POST** /api/rest/2.0/dbt/dbt-connection | 
+[**dbtGenerateSyncTml**](ThoughtSpotRestApi.md#dbtGenerateSyncTml) | **POST** /api/rest/2.0/dbt/generate-sync-tml | 
+[**dbtGenerateTml**](ThoughtSpotRestApi.md#dbtGenerateTml) | **POST** /api/rest/2.0/dbt/generate-tml | 
+[**dbtSearch**](ThoughtSpotRestApi.md#dbtSearch) | **POST** /api/rest/2.0/dbt/search | 
+[**deactivateUser**](ThoughtSpotRestApi.md#deactivateUser) | **POST** /api/rest/2.0/users/deactivate | 
 [**deleteConfig**](ThoughtSpotRestApi.md#deleteConfig) | **POST** /api/rest/2.0/vcs/git/config/delete | 
 [**deleteConnection**](ThoughtSpotRestApi.md#deleteConnection) | **POST** /api/rest/2.0/connection/delete | 
+[**deleteConnectionV2**](ThoughtSpotRestApi.md#deleteConnectionV2) | **POST** /api/rest/2.0/connections/delete/{connection_identifier} | 
 [**deleteCustomAction**](ThoughtSpotRestApi.md#deleteCustomAction) | **POST** /api/rest/2.0/customization/custom-actions/{custom_action_identifier}/delete | 
+[**deleteDbtConnection**](ThoughtSpotRestApi.md#deleteDbtConnection) | **POST** /api/rest/2.0/dbt/{dbt_connection_identifier}/delete | 
 [**deleteMetadata**](ThoughtSpotRestApi.md#deleteMetadata) | **POST** /api/rest/2.0/metadata/delete | 
 [**deleteOrg**](ThoughtSpotRestApi.md#deleteOrg) | **POST** /api/rest/2.0/orgs/{org_identifier}/delete | 
 [**deleteRole**](ThoughtSpotRestApi.md#deleteRole) | **POST** /api/rest/2.0/roles/{role_identifier}/delete | 
@@ -28,11 +37,14 @@ Method | HTTP request | Description
 [**deleteUser**](ThoughtSpotRestApi.md#deleteUser) | **POST** /api/rest/2.0/users/{user_identifier}/delete | 
 [**deleteUserGroup**](ThoughtSpotRestApi.md#deleteUserGroup) | **POST** /api/rest/2.0/groups/{group_identifier}/delete | 
 [**deployCommit**](ThoughtSpotRestApi.md#deployCommit) | **POST** /api/rest/2.0/vcs/git/commits/deploy | 
+[**downloadConnectionMetadataChanges**](ThoughtSpotRestApi.md#downloadConnectionMetadataChanges) | **POST** /api/rest/2.0/connections/download-connection-metadata-changes/{connection_identifier} | 
 [**exportAnswerReport**](ThoughtSpotRestApi.md#exportAnswerReport) | **POST** /api/rest/2.0/report/answer | 
 [**exportLiveboardReport**](ThoughtSpotRestApi.md#exportLiveboardReport) | **POST** /api/rest/2.0/report/liveboard | 
 [**exportMetadataTML**](ThoughtSpotRestApi.md#exportMetadataTML) | **POST** /api/rest/2.0/metadata/tml/export | 
+[**exportMetadataTMLBatched**](ThoughtSpotRestApi.md#exportMetadataTMLBatched) | **POST** /api/rest/2.0/metadata/tml/export/batch | 
 [**fetchAnswerData**](ThoughtSpotRestApi.md#fetchAnswerData) | **POST** /api/rest/2.0/metadata/answer/data | 
 [**fetchAnswerSqlQuery**](ThoughtSpotRestApi.md#fetchAnswerSqlQuery) | **POST** /api/rest/2.0/metadata/answer/sql | 
+[**fetchConnectionDiffStatus**](ThoughtSpotRestApi.md#fetchConnectionDiffStatus) | **POST** /api/rest/2.0/connections/fetch-connection-diff-status/{connection_identifier} | 
 [**fetchLiveboardData**](ThoughtSpotRestApi.md#fetchLiveboardData) | **POST** /api/rest/2.0/metadata/liveboard/data | 
 [**fetchLiveboardSqlQuery**](ThoughtSpotRestApi.md#fetchLiveboardSqlQuery) | **POST** /api/rest/2.0/metadata/liveboard/sql | 
 [**fetchLogs**](ThoughtSpotRestApi.md#fetchLogs) | **POST** /api/rest/2.0/logs/fetch | 
@@ -70,7 +82,9 @@ Method | HTTP request | Description
 [**unassignTag**](ThoughtSpotRestApi.md#unassignTag) | **POST** /api/rest/2.0/tags/unassign | 
 [**updateConfig**](ThoughtSpotRestApi.md#updateConfig) | **POST** /api/rest/2.0/vcs/git/config/update | 
 [**updateConnection**](ThoughtSpotRestApi.md#updateConnection) | **POST** /api/rest/2.0/connection/update | 
+[**updateConnectionV2**](ThoughtSpotRestApi.md#updateConnectionV2) | **POST** /api/rest/2.0/connections/update/{connection_identifier} | 
 [**updateCustomAction**](ThoughtSpotRestApi.md#updateCustomAction) | **POST** /api/rest/2.0/customization/custom-actions/{custom_action_identifier}/update | 
+[**updateDbtConnection**](ThoughtSpotRestApi.md#updateDbtConnection) | **POST** /api/rest/2.0/dbt/update-dbt-connection | 
 [**updateOrg**](ThoughtSpotRestApi.md#updateOrg) | **POST** /api/rest/2.0/orgs/{org_identifier}/update | 
 [**updateRole**](ThoughtSpotRestApi.md#updateRole) | **POST** /api/rest/2.0/roles/{role_identifier}/update | 
 [**updateSchedule**](ThoughtSpotRestApi.md#updateSchedule) | **POST** /api/rest/2.0/schedules/{schedule_identifier}/update | 
@@ -79,7 +93,72 @@ Method | HTTP request | Description
 [**updateUser**](ThoughtSpotRestApi.md#updateUser) | **POST** /api/rest/2.0/users/{user_identifier}/update | 
 [**updateUserGroup**](ThoughtSpotRestApi.md#updateUserGroup) | **POST** /api/rest/2.0/groups/{group_identifier}/update | 
 [**validateMerge**](ThoughtSpotRestApi.md#validateMerge) | **POST** /api/rest/2.0/vcs/git/branches/validate | 
+[**validateToken**](ThoughtSpotRestApi.md#validateToken) | **POST** /api/rest/2.0/auth/token/validate | 
 
+
+# **activateUser**
+> User activateUser(activateUserRequest)
+
+  Version: 9.7.0.cl or later   Activates a deactivated user account.  Requires `ADMINISTRATION` (**Can administer Thoughtspot**) privilege.  To activate an inactive user account, the API request body must include the following information:  - Username or the GUID of the user account. - Auth token generated for the deactivated user. The auth token is sent in the API response when a user is deactivated. - Password for the user account.      
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, ThoughtSpotRestApi, ActivateUserRequest } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new ThoughtSpotRestApi(configuration);
+
+apiInstance.activateUser(
+  // ActivateUserRequest
+  {
+    user_identifier: "user_identifier_example",
+    auth_token: "auth_token_example",
+    password: "password_example",
+  } 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **activateUserRequest** | **ActivateUserRequest**|  |
+
+
+### Return type
+
+**User**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | User activated successfully. |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
 # **assignChangeAuthor**
 > void assignChangeAuthor(assignChangeAuthorRequest)
@@ -287,7 +366,7 @@ Name | Type | Description  | Notes
 # **commitBranch**
 > CommitResponse commitBranch(commitBranchRequest)
 
-  Version: 9.2.0.cl or later   Commits TML files of metadata objects to the Git branch configured on your instance.  Requires `DATAMANAGEMENT` privilege.  Before using this endpoint to push your commits:  * Enable Git integration on your instance. * Make sure the Git repository and branch details are configured on your instance.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).      
+  Version: 9.2.0.cl or later   Commits TML files of metadata objects to the Git branch configured on your instance.  Requires at least edit access to objects used in the commit operation.  Before using this endpoint to push your commits:  * Enable Git integration on your instance. * Make sure the Git repository and branch details are configured on your instance.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).      
 
 ### Example
 
@@ -350,6 +429,72 @@ Name | Type | Description  | Notes
 **400** | Invalid request. |  -  |
 **401** | Unauthorized access. |  -  |
 **403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **copyObject**
+> ResponseCopyObject copyObject(copyObjectRequest)
+
+ Makes a copy of an Answer or Liveboard saved in Atlas    Version: 10.3.0.cl or later   Creates a copy of the metadata object specified in the API request.  Requires create access to metadata objects  Upon successful execution, the API returns the id of the new object which is copied from the given object.     
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, ThoughtSpotRestApi, CopyObjectRequest } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new ThoughtSpotRestApi(configuration);
+
+apiInstance.copyObject(
+  // CopyObjectRequest
+  {
+    description: "description_example",
+    identifier: "identifier_example",
+    type: "LIVEBOARD",
+    title: "title_example",
+  } 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **copyObjectRequest** | **CopyObjectRequest**|  |
+
+
+### Return type
+
+**ResponseCopyObject**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successfully created a copy of the object |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**404** | Object not found |  -  |
 **500** | Unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
@@ -512,33 +657,7 @@ apiInstance.createCustomAction(
   // CreateCustomActionRequest
   {
     name: "name_example",
-    action_details: {
-      CALLBACK: {
-        reference: "reference_example",
-      },
-      URL: {
-        authentication: {
-          API_Key: {
-            key: "key_example",
-            value: "value_example",
-          },
-          Basic_Auth: {
-            password: "password_example",
-            username: "username_example",
-          },
-          Bearer_Token: "Bearer_Token_example",
-          No_Auth: "No_Auth_example",
-        },
-        parameters: [
-          {
-            key: "key_example",
-            value: "value_example",
-          },
-        ],
-        url: "url_example",
-        reference: "reference_example",
-      },
-    },
+    action_details: null,
     associate_metadata: [
       {
         action_config: {
@@ -549,9 +668,7 @@ apiInstance.createCustomAction(
         type: "VISUALIZATION",
       },
     ],
-    default_action_config: {
-      visibility: true,
-    },
+    default_action_config: null,
     group_identifiers: [
       "group_identifiers_example",
     ],
@@ -750,44 +867,11 @@ apiInstance.createSchedule(
     metadata_type: "LIVEBOARD",
     metadata_identifier: "metadata_identifier_example",
     file_format: "PDF",
-    liveboard_options: {
-      visualization_identifiers: [
-        "visualization_identifiers_example",
-      ],
-    },
-    pdf_options: {
-      complete_liveboard: true,
-      include_cover_page: true,
-      include_custom_logo: true,
-      include_filter_page: true,
-      include_page_number: true,
-      page_footer_text: "page_footer_text_example",
-      page_orientation: "page_orientation_example",
-      page_size: "A4",
-      truncate_table: true,
-    },
+    liveboard_options: null,
+    pdf_options: null,
     time_zone: "America/Los_Angeles",
-    frequency: {
-      cron_expression: {
-        day_of_month: "day_of_month_example",
-        day_of_week: "day_of_week_example",
-        hour: "hour_example",
-        minute: "minute_example",
-        month: "month_example",
-        second: "second_example",
-      },
-    },
-    recipient_details: {
-      emails: [
-        "emails_example",
-      ],
-      principals: [
-        {
-          identifier: "identifier_example",
-          type: "type_example",
-        },
-      ],
-    },
+    frequency: null,
+    recipient_details: null,
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -832,7 +916,7 @@ Name | Type | Description  | Notes
 # **createTag**
 > Tag createTag(createTagRequest)
 
-  Version: 9.0.0.cl or later   Creates a tag object.  Tags are labels that identify a metadata object. For example, you can create a tag to designate subject areas, such as sales, HR, marketing, and finance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+  Version: 9.0.0.cl or later   Creates a tag object.  Tags are labels that identify a metadata object. For example, you can create a tag to designate subject areas, such as sales, HR, marketing, and finance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.      
 
 ### Example
 
@@ -1062,6 +1146,333 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
+# **dbtConnection**
+> any dbtConnection(dbtConnectionRequest)
+
+  Version: 9.9.0.cl or later   Creates a DBT connection object in ThoughtSpot.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege.  #### About create DBT connection DBT connection in ThoughtSpot is used by the user to define DBT credentials for cloud . The API needs  embrace connection, embrace database name, DBT url, import type, DBT account identifier, DBT project identifier, DBT access token and environment details (or) embrace connection, embrace database name, import type, file_content to create a connection object. To know more about DBT, see ThoughtSpot Product Documentation.      
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, ThoughtSpotRestApi, DbtConnectionRequest } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new ThoughtSpotRestApi(configuration);
+
+apiInstance.dbtConnection(
+  // DbtConnectionRequest
+  {
+    connection_name: "connection_name_example",
+    database_name: "database_name_example",
+    import_type: "DBT_CLOUD",
+    access_token: "access_token_example",
+    dbt_url: "dbt_url_example",
+    account_id: "account_id_example",
+    project_id: "project_id_example",
+    dbt_env_id: "dbt_env_id_example",
+    project_name: "project_name_example",
+    file_content: { data: Buffer.from(fs.readFileSync('/path/to/file', 'utf-8')), name: '/path/to/file' },
+  } 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **dbtConnectionRequest** | **DbtConnectionRequest**|  |
+
+
+### Return type
+
+**any**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Succesfully created DBT Connection. |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **dbtGenerateSyncTml**
+> any dbtGenerateSyncTml(dbtGenerateSyncTmlRequest)
+
+ Version: 9.9.0.cl or later 
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, ThoughtSpotRestApi, DbtGenerateSyncTmlRequest } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new ThoughtSpotRestApi(configuration);
+
+apiInstance.dbtGenerateSyncTml(
+  // DbtGenerateSyncTmlRequest
+  {
+    dbt_connection_identifier: "dbt_connection_identifier_example",
+    file_content: { data: Buffer.from(fs.readFileSync('/path/to/file', 'utf-8')), name: '/path/to/file' },
+  } 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **dbtGenerateSyncTmlRequest** | **DbtGenerateSyncTmlRequest**|  |
+
+
+### Return type
+
+**any**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Sync Table and Worksheet TML\&#39;s are successfully generated. |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **dbtGenerateTml**
+> any dbtGenerateTml(dbtGenerateTmlRequest)
+
+ Version: 9.9.0.cl or later 
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, ThoughtSpotRestApi, DbtGenerateTmlRequest } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new ThoughtSpotRestApi(configuration);
+
+apiInstance.dbtGenerateTml(
+  // DbtGenerateTmlRequest
+  {
+    dbt_connection_identifier: "dbt_connection_identifier_example",
+    model_tables: [
+      {
+        model_name: "model_name_example",
+        model_path: "model_path_example",
+        tables: [
+          "tables_example",
+        ],
+      },
+    ],
+    import_worksheets: "ALL",
+    worksheets: [
+      "worksheets_example",
+    ],
+    file_content: { data: Buffer.from(fs.readFileSync('/path/to/file', 'utf-8')), name: '/path/to/file' },
+  } 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **dbtGenerateTmlRequest** | **DbtGenerateTmlRequest**|  |
+
+
+### Return type
+
+**any**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Required Table and Worksheet TML\&#39;s are successfully generated. |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **dbtSearch**
+> Array<DbtSearchResponse> dbtSearch()
+
+  Version: 9.9.0.cl or later   Gets a list of DBT connection objects by user and organization, available on the ThoughtSpot system.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege  #### About search DBT connection To get details of a specific DBT connection identifier, database connection identifier, database connection name, database name, project name, project identifier, environment identifier , import type and author.      
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, ThoughtSpotRestApi, DbtSearchRequest } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new ThoughtSpotRestApi(configuration);
+
+apiInstance.dbtSearch().then((data:any) => {
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+This endpoint does not need any parameter.
+
+
+### Return type
+
+**Array<DbtSearchResponse>**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Retrieved list of DBT connections successfully. |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **deactivateUser**
+> ResponseActivationURL deactivateUser(deactivateUserRequest)
+
+  Version: 9.7.0.cl or later   Deactivates a user account.  Requires `ADMINISTRATION` (**Can administer Thoughtspot**) privilege.  To deactivate a user account, the API request body must include the following information:  - Username or the GUID of the user account - Base URL of the ThoughtSpot instance  If the API request is successful, ThoughtSpot returns the activation URL in the response. The activation URL is valid for 14 days and can be used to re-activate the account and reset the password of the deactivated account.      
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, ThoughtSpotRestApi, DeactivateUserRequest } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new ThoughtSpotRestApi(configuration);
+
+apiInstance.deactivateUser(
+  // DeactivateUserRequest
+  {
+    user_identifier: "user_identifier_example",
+    base_url: "base_url_example",
+  } 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **deactivateUserRequest** | **DeactivateUserRequest**|  |
+
+
+### Return type
+
+**ResponseActivationURL**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | User deactivated successfully. |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
 # **deleteConfig**
 > void deleteConfig(deleteConfigRequest)
 
@@ -1186,6 +1597,66 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
+# **deleteConnectionV2**
+> void deleteConnectionV2()
+
+  Version: 10.0.0.cl or later   Deletes a connection object.  **Note**: If a connection has dependent objects, make sure you remove its associations before the delete operation.  Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, ThoughtSpotRestApi, DeleteConnectionV2Request } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new ThoughtSpotRestApi(configuration);
+
+apiInstance.deleteConnectionV2(
+  // string | Unique ID or name of the connection.
+  "connection_identifier_example" 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **connectionIdentifier** | [**string**] | Unique ID or name of the connection. | defaults to undefined
+
+
+### Return type
+
+**void**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Connection successfully deleted. |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
 # **deleteCustomAction**
 > void deleteCustomAction()
 
@@ -1239,6 +1710,66 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **204** | Custom action is successfully deleted. |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **deleteDbtConnection**
+> void deleteDbtConnection()
+
+  Version: 9.9.0.cl or later   Removes the specified DBT connection object from the ThoughtSpot system.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege.      
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, ThoughtSpotRestApi, DeleteDbtConnectionRequest } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new ThoughtSpotRestApi(configuration);
+
+apiInstance.deleteDbtConnection(
+  // string | Unique ID of the DBT Connection.
+  "dbt_connection_identifier_example" 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **dbtConnectionIdentifier** | [**string**] | Unique ID of the DBT Connection. | defaults to undefined
+
+
+### Return type
+
+**void**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | DBT Connection successfully deleted. |  -  |
 **400** | Invalid request. |  -  |
 **401** | Unauthorized access. |  -  |
 **403** | Forbidden access. |  -  |
@@ -1497,7 +2028,7 @@ Name | Type | Description  | Notes
 # **deleteTag**
 > void deleteTag()
 
-  Version: 9.0.0.cl or later   Deletes a tag object from the ThoughtSpot system  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+  Version: 9.0.0.cl or later   Deletes a tag object from the ThoughtSpot system  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.      
 
 ### Example
 
@@ -1677,7 +2208,7 @@ Name | Type | Description  | Notes
 # **deployCommit**
 > Array<DeployResponse> deployCommit(deployCommitRequest)
 
-  Version: 9.2.0.cl or later   Allows you to deploy a commit and publish TML content to your ThoughtSpot instance.  Requires `DATAMANAGEMENT` (**Can manage data**) privilege.  The API deploys the head of the branch unless a `commit_id` is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.      
+  Version: 9.2.0.cl or later   Allows you to deploy a commit and publish TML content to your ThoughtSpot instance.  Requires at least edit access to the objects used in the deploy operation.  The API deploys the head of the branch unless a `commit_id` is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).      
 
 ### Example
 
@@ -1732,6 +2263,66 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Successfully deployed the changes |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **downloadConnectionMetadataChanges**
+> void downloadConnectionMetadataChanges()
+
+  Version: 9.9.0.cl or later   Exports the difference in connection metadata between CDW and ThoughtSpot  Requires `DATAMANAGEMENT` (**Can manage data**) privilege  To download the connection metadata difference between ThoughtSpot and CDW, pass the connection GUID as `connection_identifier` in the API request.      
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, ThoughtSpotRestApi, DownloadConnectionMetadataChangesRequest } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new ThoughtSpotRestApi(configuration);
+
+apiInstance.downloadConnectionMetadataChanges(
+  // string | GUID of the connection
+  "connection_identifier_example" 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **connectionIdentifier** | [**string**] | GUID of the connection | defaults to undefined
+
+
+### Return type
+
+**void**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/octet-stream, application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Export metadata changes. |  -  |
 **400** | Invalid request. |  -  |
 **401** | Unauthorized access. |  -  |
 **403** | Forbidden access. |  -  |
@@ -1833,19 +2424,8 @@ apiInstance.exportLiveboardReport(
     file_format: "CSV",
     runtime_filter: {},
     runtime_sort: {},
-    pdf_options: {
-      include_cover_page: true,
-      include_custom_logo: true,
-      include_filter_page: true,
-      include_page_number: true,
-      page_orientation: "PORTRAIT",
-      truncate_table: false,
-      page_footer_text: "page_footer_text_example",
-    },
-    png_options: {
-      include_cover_page: false,
-      include_filter_page: false,
-    },
+    pdf_options: null,
+    png_options: null,
     runtime_param_override: {},
   } 
 ).then((data:any) => {
@@ -1917,9 +2497,10 @@ apiInstance.exportMetadataTML(
     export_associated: false,
     export_fqn: false,
     edoc_format: "JSON",
-    export_schema_version: "V1",
+    export_schema_version: "DEFAULT",
     export_dependent: false,
     export_connection_as_dependent: false,
+    all_orgs_override: false,
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -1939,6 +2520,73 @@ Name | Type | Description  | Notes
 ### Return type
 
 **Array<any>**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Export TMLs of specified metadata objects is successful. |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **exportMetadataTMLBatched**
+> any exportMetadataTMLBatched(exportMetadataTMLBatchedRequest)
+
+ Version: 10.1.0.cl or later 
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, ThoughtSpotRestApi, ExportMetadataTMLBatchedRequest } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new ThoughtSpotRestApi(configuration);
+
+apiInstance.exportMetadataTMLBatched(
+  // ExportMetadataTMLBatchedRequest
+  {
+    metadata_type: "USER",
+    batch_offset: 0,
+    batch_size: 20,
+    edoc_format: "JSON",
+    export_dependent: false,
+    all_orgs_override: false,
+  } 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **exportMetadataTMLBatchedRequest** | **ExportMetadataTMLBatchedRequest**|  |
+
+
+### Return type
+
+**any**
 
 ### Authorization
 
@@ -2091,6 +2739,66 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
+# **fetchConnectionDiffStatus**
+> FetchConnectionDiffStatusResponse fetchConnectionDiffStatus()
+
+  Version: 9.9.0.cl or later   Validates the difference in connection metadata between CDW and ThoughtSpot  Requires `DATAMANAGEMENT` (**Can manage data**) privilege  Returns a boolean indicating whether there is any difference between the connection metadata at ThoughtSpot and CDW.  To get the connection metadata difference status, pass the connection GUID as `connection_identifier` in the API request.      
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, ThoughtSpotRestApi, FetchConnectionDiffStatusRequest } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new ThoughtSpotRestApi(configuration);
+
+apiInstance.fetchConnectionDiffStatus(
+  // string | GUID of the connection
+  "connection_identifier_example" 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **connectionIdentifier** | [**string**] | GUID of the connection | defaults to undefined
+
+
+### Return type
+
+**FetchConnectionDiffStatusResponse**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | true/false |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
 # **fetchLiveboardData**
 > LiveboardDataResponse fetchLiveboardData(fetchLiveboardDataRequest)
 
@@ -2231,7 +2939,7 @@ Name | Type | Description  | Notes
 # **fetchLogs**
 > Array<LogResponse> fetchLogs(fetchLogsRequest)
 
-  Version: 9.0.0.cl or later   Fetches security audit logs.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  By default, the API retrieves logs for the last 24 hours. You can set a custom duration in EPOCH time. Make sure the log duration specified in your API request doesn’t exceed 24 hours. If you must fetch logs for a longer time range, modify the duration and make multiple sequential API requests.  Upon successful execution, the API returns logs with the following information: * timestamp of the event * event ID * event type * name and GUID of the user * IP address of ThoughtSpot instance  For more information about security events returned in the API response, see [Security events](https://developers.thoughtspot.com/docs/logs-api#_security_events).      
+  Version: 9.0.0.cl or later   Fetches security audit logs.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  By default, the API retrieves logs for the last 24 hours. You can set a custom duration in EPOCH time. Make sure the log duration specified in your API request doesn’t exceed 24 hours. If you must fetch logs for a longer time range, modify the duration and make multiple sequential API requests.  Upon successful execution, the API returns logs with the following information: * timestamp of the event * event ID * event type * name and GUID of the user * IP address of ThoughtSpot instance  For more information about security events returned in the API response, see [Security events](https://developers.thoughtspot.com/docs/audit-logs#_security_events).      
 
 ### Example
 
@@ -2251,6 +2959,7 @@ apiInstance.fetchLogs(
     log_type: "SECURITY_AUDIT",
     start_epoch_time_in_millis: 3.14,
     end_epoch_time_in_millis: 3.14,
+    get_all_logs: true,
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -2401,6 +3110,9 @@ apiInstance.fetchPermissionsOnMetadata(
       },
     ],
     include_dependent_objects: false,
+    record_offset: 0,
+    record_size: -1,
+    permission_type: "permission_type_example",
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -2638,74 +3350,14 @@ apiInstance.getFullAccessToken(
     password: "",
     secret_key: "",
     validity_time_in_sec: 300,
-    org_id: 0,
+    org_id: 1,
     email: "email_example",
     display_name: "display_name_example",
     auto_create: false,
     group_identifiers: [
       "group_identifiers_example",
     ],
-    jwt_user_options: {
-      parameters: [
-        {
-          runtime_filter: {},
-          runtime_sort: {},
-          runtime_param_override: {},
-        },
-      ],
-    },
-    user_parameters: {
-      objects: [
-        {
-          type: "LIVEBOARD",
-          identifier: "identifier_example",
-        },
-      ],
-      runtime_filters: [
-        {
-          column_name: "column_name_example",
-          values: [
-            "values_example",
-          ],
-          operator: "EQ",
-          persist: false,
-          objects: [
-            {
-              type: "LIVEBOARD",
-              identifier: "identifier_example",
-            },
-          ],
-        },
-      ],
-      runtime_sorts: [
-        {
-          column_name: "column_name_example",
-          order: "ASC",
-          persist: false,
-          objects: [
-            {
-              type: "LIVEBOARD",
-              identifier: "identifier_example",
-            },
-          ],
-        },
-      ],
-      parameters: [
-        {
-          name: "name_example",
-          values: [
-            "values_example",
-          ],
-          persist: false,
-          objects: [
-            {
-              type: "LIVEBOARD",
-              identifier: "identifier_example",
-            },
-          ],
-        },
-      ],
-    },
+    user_parameters: null,
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -2772,76 +3424,14 @@ apiInstance.getObjectAccessToken(
     password: "",
     secret_key: "",
     validity_time_in_sec: 300,
-    org_id: 0,
+    org_id: 1,
     email: "email_example",
     display_name: "display_name_example",
     auto_create: false,
     group_identifiers: [
       "group_identifiers_example",
     ],
-    jwt_user_options: {
-      parameters: [
-        null,
-      ],
-      metadata: [
-        {
-          identifier: "identifier_example",
-          type: "LIVEBOARD",
-        },
-      ],
-    },
-    user_parameters: {
-      objects: [
-        {
-          type: "LIVEBOARD",
-          identifier: "identifier_example",
-        },
-      ],
-      runtime_filters: [
-        {
-          column_name: "column_name_example",
-          values: [
-            "values_example",
-          ],
-          operator: "EQ",
-          persist: false,
-          objects: [
-            {
-              type: "LIVEBOARD",
-              identifier: "identifier_example",
-            },
-          ],
-        },
-      ],
-      runtime_sorts: [
-        {
-          column_name: "column_name_example",
-          order: "ASC",
-          persist: false,
-          objects: [
-            {
-              type: "LIVEBOARD",
-              identifier: "identifier_example",
-            },
-          ],
-        },
-      ],
-      parameters: [
-        {
-          name: "name_example",
-          values: [
-            "values_example",
-          ],
-          persist: false,
-          objects: [
-            {
-              type: "LIVEBOARD",
-              identifier: "identifier_example",
-            },
-          ],
-        },
-      ],
-    },
+    user_parameters: null,
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -3070,6 +3660,7 @@ apiInstance.importMetadataTML(
     ],
     import_policy: "PARTIAL",
     create_new: false,
+    all_orgs_context: false,
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -3471,7 +4062,7 @@ Name | Type | Description  | Notes
 # **revertCommit**
 > RevertResponse revertCommit(revertCommitRequest)
 
-  Version: 9.2.0.cl or later   Reverts TML objects to a previous commit specified in the API request.  Requires `DATAMANAGEMENT` (**Can manage data**) privilege.  In the API request, specify the `commit_id`. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.  By default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.      
+  Version: 9.2.0.cl or later   Reverts TML objects to a previous commit specified in the API request.  Requires at least edit access to objects.  In the API request, specify the `commit_id`. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.  By default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).      
 
 ### Example
 
@@ -3776,10 +4367,7 @@ apiInstance.searchConnection(
       "tag_identifiers_example",
     ],
     data_warehouse_object_type: "DATABASE",
-    sort_options: {
-      field_name: "NAME",
-      order: "ASC",
-    },
+    sort_options: null,
     include_details: true,
     configuration: {},
     authentication_type: "SERVICE_ACCOUNT",
@@ -3846,9 +4434,7 @@ apiInstance.searchCustomActions(
   {
     custom_action_identifier: "custom_action_identifier_example",
     name_pattern: "name_pattern_example",
-    default_action_config: {
-      visibility: true,
-    },
+    default_action_config: null,
     include_group_associations: false,
     include_metadata_associations: false,
     metadata: [
@@ -4014,14 +4600,10 @@ apiInstance.searchMetadata(
         type: "LIVEBOARD",
       },
     ],
-    favorite_object_options: {
-      include: false,
-      user_identifiers: [
-        "user_identifiers_example",
-      ],
-    },
+    favorite_object_options: null,
     include_auto_created_objects: false,
     include_dependent_objects: false,
+    dependent_objects_record_size: 50,
     include_details: false,
     include_headers: true,
     include_hidden_objects: false,
@@ -4033,10 +4615,7 @@ apiInstance.searchMetadata(
     ],
     record_offset: 0,
     record_size: 10,
-    sort_options: {
-      field_name: "NAME",
-      order: "ASC",
-    },
+    sort_options: null,
     tag_identifiers: [
       "tag_identifiers_example",
     ],
@@ -4257,15 +4836,8 @@ apiInstance.searchSchedules(
     ],
     record_offset: 1,
     record_size: 1,
-    sort_options: {
-      field_name: "field_name_example",
-      order: "order_example",
-    },
-    history_runs_options: {
-      include_history_runs: false,
-      record_size: 10,
-      record_offset: 0,
-    },
+    sort_options: null,
+    history_runs_options: null,
     schedule_identifiers: [
       "schedule_identifiers_example",
     ],
@@ -4420,10 +4992,7 @@ apiInstance.searchUserGroups(
     ],
     record_offset: 0,
     record_size: 10,
-    sort_options: {
-      field_name: "NAME",
-      order: "ASC",
-    },
+    sort_options: null,
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -4513,10 +5082,7 @@ apiInstance.searchUsers(
     ],
     record_offset: 0,
     record_size: 10,
-    sort_options: {
-      field_name: "NAME",
-      order: "ASC",
-    },
+    sort_options: null,
     role_identifiers: [
       "role_identifiers_example",
     ],
@@ -4585,6 +5151,12 @@ apiInstance.shareMetadata(
     metadata_type: "LIVEBOARD",
     metadata_identifiers: [
       "metadata_identifiers_example",
+    ],
+    metadata: [
+      {
+        type: "LIVEBOARD",
+        identifier: "identifier_example",
+      },
     ],
     permissions: [
       {
@@ -4852,6 +5424,74 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
+# **updateConnectionV2**
+> void updateConnectionV2(updateConnectionV2Request)
+
+  Version: 10.0.0.cl or later   Updates a connection object.  Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  To update a connection object, pass these parameters in your API request:  1. GUID of the connection object. 2. If you are updating tables or database schema of a connection object:    a. Add the updated JSON map of metadata with database, schema, and tables in `data_warehouse_config`.    b. Set `validate` to `true`. 3. If you are updating a configuration attribute, connection name, or description, you can set `validate` to `false`.      
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, ThoughtSpotRestApi, UpdateConnectionV2Request } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new ThoughtSpotRestApi(configuration);
+
+apiInstance.updateConnectionV2(
+  // string | Unique ID or name of the connection.
+  "connection_identifier_example" , 
+  // UpdateConnectionV2Request
+  {
+    name: "name_example",
+    description: "description_example",
+    data_warehouse_config: {},
+    validate: true,
+  } 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **updateConnectionV2Request** | **UpdateConnectionV2Request**|  |
+ **connectionIdentifier** | [**string**] | Unique ID or name of the connection. | defaults to undefined
+
+
+### Return type
+
+**void**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Connection successfully updated. |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
 # **updateCustomAction**
 > void updateCustomAction(updateCustomActionRequest)
 
@@ -4874,33 +5514,7 @@ apiInstance.updateCustomAction(
   "custom_action_identifier_example" , 
   // UpdateCustomActionRequest
   {
-    action_details: {
-      CALLBACK: {
-        reference: "reference_example",
-      },
-      URL: {
-        authentication: {
-          API_Key: {
-            key: "key_example",
-            value: "value_example",
-          },
-          Basic_Auth: {
-            password: "password_example",
-            username: "username_example",
-          },
-          Bearer_Token: "Bearer_Token_example",
-          No_Auth: "No_Auth_example",
-        },
-        parameters: [
-          {
-            key: "key_example",
-            value: "value_example",
-          },
-        ],
-        url: "url_example",
-        reference: "reference_example",
-      },
-    },
+    action_details: null,
     associate_metadata: [
       {
         action_config: {
@@ -4911,9 +5525,7 @@ apiInstance.updateCustomAction(
         type: "VISUALIZATION",
       },
     ],
-    default_action_config: {
-      visibility: true,
-    },
+    default_action_config: null,
     group_identifiers: [
       "group_identifiers_example",
     ],
@@ -4954,6 +5566,78 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **204** | Custom action updated successfully. |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **updateDbtConnection**
+> any updateDbtConnection(updateDbtConnectionRequest)
+
+  Version: 9.9.0.cl or later   Updates a DBT connection object.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege, along with an existing DBT connection.  #### About update DBT connection You can modify DBT connection object properties such as embrace connection name, embrace database name, import type, account identifier, access token, project identifier and environment (or) embrace connection, embrace database name, import type, file_content settings.      
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, ThoughtSpotRestApi, UpdateDbtConnectionRequest } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new ThoughtSpotRestApi(configuration);
+
+apiInstance.updateDbtConnection(
+  // UpdateDbtConnectionRequest
+  {
+    dbt_connection_identifier: "dbt_connection_identifier_example",
+    connection_name: "connection_name_example",
+    database_name: "database_name_example",
+    import_type: "DBT_CLOUD",
+    access_token: "access_token_example",
+    dbt_url: "dbt_url_example",
+    account_id: "account_id_example",
+    project_id: "project_id_example",
+    dbt_env_id: "dbt_env_id_example",
+    project_name: "project_name_example",
+    file_content: { data: Buffer.from(fs.readFileSync('/path/to/file', 'utf-8')), name: '/path/to/file' },
+  } 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **updateDbtConnectionRequest** | **UpdateDbtConnectionRequest**|  |
+
+
+### Return type
+
+**any**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | DBT Connection successfully updated. |  -  |
 **400** | Invalid request. |  -  |
 **401** | Unauthorized access. |  -  |
 **403** | Forbidden access. |  -  |
@@ -5130,44 +5814,11 @@ apiInstance.updateSchedule(
     metadata_type: "LIVEBOARD",
     metadata_identifier: "metadata_identifier_example",
     file_format: "CSV",
-    liveboard_options: {
-      visualization_identifiers: [
-        "visualization_identifiers_example",
-      ],
-    },
-    pdf_options: {
-      complete_liveboard: true,
-      include_cover_page: true,
-      include_custom_logo: true,
-      include_filter_page: true,
-      include_page_number: true,
-      page_footer_text: "page_footer_text_example",
-      page_orientation: "page_orientation_example",
-      page_size: "A4",
-      truncate_table: true,
-    },
+    liveboard_options: null,
+    pdf_options: null,
     time_zone: "Africa/Abidjan",
-    frequency: {
-      cron_expression: {
-        day_of_month: "day_of_month_example",
-        day_of_week: "day_of_week_example",
-        hour: "hour_example",
-        minute: "minute_example",
-        month: "month_example",
-        second: "second_example",
-      },
-    },
-    recipient_details: {
-      emails: [
-        "emails_example",
-      ],
-      principals: [
-        {
-          identifier: "identifier_example",
-          type: "type_example",
-        },
-      ],
-    },
+    frequency: null,
+    recipient_details: null,
     status: "ACTIVE",
   } 
 ).then((data:any) => {
@@ -5276,7 +5927,7 @@ Name | Type | Description  | Notes
 # **updateTag**
 > void updateTag(updateTagRequest)
 
-  Version: 9.0.0.cl or later   Updates a tag object.  You can modify the `name` and `color` properties of a tag object.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+  Version: 9.0.0.cl or later   Updates a tag object.  You can modify the `name` and `color` properties of a tag object.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.      
 
 ### Example
 
@@ -5570,6 +6221,68 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | validation done successfully |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **validateToken**
+> TokenValidationResponse validateToken(validateTokenRequest)
+
+ Version: 9.12.0.cl or later 
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, ThoughtSpotRestApi, ValidateTokenRequest } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new ThoughtSpotRestApi(configuration);
+
+apiInstance.validateToken(
+  // ValidateTokenRequest
+  {
+    token: "token_example",
+  } 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **validateTokenRequest** | **ValidateTokenRequest**|  |
+
+
+### Return type
+
+**TokenValidationResponse**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Token validation successful. |  -  |
 **400** | Invalid request. |  -  |
 **401** | Unauthorized access. |  -  |
 **403** | Forbidden access. |  -  |

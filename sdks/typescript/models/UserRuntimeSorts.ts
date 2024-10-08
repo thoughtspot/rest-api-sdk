@@ -20,19 +20,19 @@ export class UserRuntimeSorts {
     /**
     * The column name to apply filter.
     */
-    'column_name'?: string;
+    'column_name'?: string | null;
     /**
     * Order for the sort.
     */
-    'order'?: UserRuntimeSortsOrderEnum;
+    'order'?: UserRuntimeSortsOrderEnum | null;
     /**
-    * Flag to persist the runtime sorts.
+    * Flag to persist the runtime sorts.    Version: 9.12.0.cl or later 
     */
-    'persist'?: boolean;
+    'persist'?: boolean | null;
     /**
     * Object to apply the runtime sort.
     */
-    'objects'?: Array<UserObject>;
+    'objects'?: Array<UserObject> | null;
 
     static readonly discriminator: string | undefined = undefined;
 

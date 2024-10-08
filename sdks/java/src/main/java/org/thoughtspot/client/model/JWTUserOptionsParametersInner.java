@@ -58,7 +58,7 @@ import com.google.gson.JsonParseException;
 
 import org.thoughtspot.client.JSON;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-03-04T10:25:25.563+05:30[Asia/Kolkata]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-10-08T14:03:41.316769Z[Etc/UTC]")
 public class JWTUserOptionsParametersInner extends AbstractOpenApiSchema {
     private static final Logger log = Logger.getLogger(JWTUserOptionsParametersInner.class.getName());
 

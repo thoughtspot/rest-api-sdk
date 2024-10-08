@@ -22,7 +22,7 @@ export class SearchDataRequest {
     */
     'logical_table_identifier': string;
     /**
-    * JSON output format. By default, the API returns full data in the JSON.
+    * JSON output in compact or full format. The FULL option is available in 9.12.5.cl or later.
     */
     'data_format'?: SearchDataRequestDataFormatEnum;
     /**
@@ -107,5 +107,5 @@ export class SearchDataRequest {
 }
 
 
-export type SearchDataRequestDataFormatEnum = "COMPACT" ;
+export type SearchDataRequestDataFormatEnum = "FULL" | "COMPACT" ;
 

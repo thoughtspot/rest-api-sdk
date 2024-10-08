@@ -23,8 +23,8 @@ import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import org.thoughtspot.client.model.PdfOptionsInput;
-import org.thoughtspot.client.model.PngOptionsInput;
+import org.thoughtspot.client.model.ExportLiveboardReportRequestPdfOptions;
+import org.thoughtspot.client.model.ExportLiveboardReportRequestPngOptions;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -54,7 +54,7 @@ import org.thoughtspot.client.JSON;
 /**
  * ExportLiveboardReportRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-03-04T10:25:25.563+05:30[Asia/Kolkata]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-10-08T14:03:41.316769Z[Etc/UTC]")
 public class ExportLiveboardReportRequest {
   public static final String SERIALIZED_NAME_METADATA_IDENTIFIER = "metadata_identifier";
   @SerializedName(SERIALIZED_NAME_METADATA_IDENTIFIER)
@@ -133,11 +133,11 @@ public class ExportLiveboardReportRequest {
 
   public static final String SERIALIZED_NAME_PDF_OPTIONS = "pdf_options";
   @SerializedName(SERIALIZED_NAME_PDF_OPTIONS)
-  private PdfOptionsInput pdfOptions;
+  private ExportLiveboardReportRequestPdfOptions pdfOptions;
 
   public static final String SERIALIZED_NAME_PNG_OPTIONS = "png_options";
   @SerializedName(SERIALIZED_NAME_PNG_OPTIONS)
-  private PngOptionsInput pngOptions;
+  private ExportLiveboardReportRequestPngOptions pngOptions;
 
   public static final String SERIALIZED_NAME_RUNTIME_PARAM_OVERRIDE = "runtime_param_override";
   @SerializedName(SERIALIZED_NAME_RUNTIME_PARAM_OVERRIDE)
@@ -280,7 +280,7 @@ public class ExportLiveboardReportRequest {
   }
 
 
-  public ExportLiveboardReportRequest pdfOptions(PdfOptionsInput pdfOptions) {
+  public ExportLiveboardReportRequest pdfOptions(ExportLiveboardReportRequestPdfOptions pdfOptions) {
     
     this.pdfOptions = pdfOptions;
     return this;
@@ -291,17 +291,17 @@ public class ExportLiveboardReportRequest {
    * @return pdfOptions
   **/
   @javax.annotation.Nullable
-  public PdfOptionsInput getPdfOptions() {
+  public ExportLiveboardReportRequestPdfOptions getPdfOptions() {
     return pdfOptions;
   }
 
 
-  public void setPdfOptions(PdfOptionsInput pdfOptions) {
+  public void setPdfOptions(ExportLiveboardReportRequestPdfOptions pdfOptions) {
     this.pdfOptions = pdfOptions;
   }
 
 
-  public ExportLiveboardReportRequest pngOptions(PngOptionsInput pngOptions) {
+  public ExportLiveboardReportRequest pngOptions(ExportLiveboardReportRequestPngOptions pngOptions) {
     
     this.pngOptions = pngOptions;
     return this;
@@ -312,12 +312,12 @@ public class ExportLiveboardReportRequest {
    * @return pngOptions
   **/
   @javax.annotation.Nullable
-  public PngOptionsInput getPngOptions() {
+  public ExportLiveboardReportRequestPngOptions getPngOptions() {
     return pngOptions;
   }
 
 
-  public void setPngOptions(PngOptionsInput pngOptions) {
+  public void setPngOptions(ExportLiveboardReportRequestPngOptions pngOptions) {
     this.pngOptions = pngOptions;
   }
 
@@ -461,11 +461,11 @@ public class ExportLiveboardReportRequest {
       }
       // validate the optional field `pdf_options`
       if (jsonObj.get("pdf_options") != null && !jsonObj.get("pdf_options").isJsonNull()) {
-        PdfOptionsInput.validateJsonObject(jsonObj.getAsJsonObject("pdf_options"));
+        ExportLiveboardReportRequestPdfOptions.validateJsonObject(jsonObj.getAsJsonObject("pdf_options"));
       }
       // validate the optional field `png_options`
       if (jsonObj.get("png_options") != null && !jsonObj.get("png_options").isJsonNull()) {
-        PngOptionsInput.validateJsonObject(jsonObj.getAsJsonObject("png_options"));
+        ExportLiveboardReportRequestPngOptions.validateJsonObject(jsonObj.getAsJsonObject("png_options"));
       }
   }
 

@@ -52,7 +52,7 @@ import org.thoughtspot.client.JSON;
 /**
  * UpdateUserGroupRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-03-04T10:25:25.563+05:30[Asia/Kolkata]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-10-08T14:03:41.316769Z[Etc/UTC]")
 public class UpdateUserGroupRequest {
   public static final String SERIALIZED_NAME_NAME = "name";
   @SerializedName(SERIALIZED_NAME_NAME)
@@ -111,11 +111,21 @@ public class UpdateUserGroupRequest {
     
     DISABLE_PINBOARD_CREATION("DISABLE_PINBOARD_CREATION"),
     
-    ENABLESPOTAPPCREATION("ENABLESPOTAPPCREATION"),
-    
     LIVEBOARD_VERIFIER("LIVEBOARD_VERIFIER"),
     
-    PREVIEW_THOUGHTSPOT_SAGE("PREVIEW_THOUGHTSPOT_SAGE");
+    PREVIEW_THOUGHTSPOT_SAGE("PREVIEW_THOUGHTSPOT_SAGE"),
+    
+    CAN_MANAGE_VERSION_CONTROL("CAN_MANAGE_VERSION_CONTROL"),
+    
+    THIRDPARTY_ANALYSIS("THIRDPARTY_ANALYSIS"),
+    
+    ALLOW_NON_EMBED_FULL_APP_ACCESS("ALLOW_NON_EMBED_FULL_APP_ACCESS"),
+    
+    CAN_ACCESS_ANALYST_STUDIO("CAN_ACCESS_ANALYST_STUDIO"),
+    
+    CAN_MANAGE_ANALYST_STUDIO("CAN_MANAGE_ANALYST_STUDIO"),
+    
+    PREVIEW_DOCUMENT_SEARCH("PREVIEW_DOCUMENT_SEARCH");
 
     private String value;
 

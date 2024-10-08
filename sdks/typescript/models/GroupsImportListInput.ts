@@ -24,31 +24,31 @@ export class GroupsImportListInput {
     /**
     * Unique ID of Liveboards that will be assigned as default Liveboards to the users in the group.
     */
-    'default_liveboard_identifiers'?: Array<string>;
+    'default_liveboard_identifiers'?: Array<string> | null;
     /**
     * Description of the group.
     */
-    'description'?: string;
+    'description'?: string | null;
     /**
     * Privileges that will be assigned to the group.
     */
-    'privileges'?: Array<GroupsImportListInputPrivilegesEnum>;
+    'privileges'?: Array<GroupsImportListInputPrivilegesEnum> | null;
     /**
     * Unique ID or name of the sub-groups to add to the group.
     */
-    'sub_group_identifiers'?: Array<string>;
+    'sub_group_identifiers'?: Array<string> | null;
     /**
     * Type of the group.
     */
-    'type'?: GroupsImportListInputTypeEnum;
+    'type'?: GroupsImportListInputTypeEnum | null;
     /**
     * Unique ID or name of the users to assign to the group.
     */
-    'user_identifiers'?: Array<string>;
+    'user_identifiers'?: Array<string> | null;
     /**
     * Visibility of the group. The SHARABLE makes a group visible to other users and groups, and thus allows them to share objects.
     */
-    'visibility'?: GroupsImportListInputVisibilityEnum;
+    'visibility'?: GroupsImportListInputVisibilityEnum | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -117,7 +117,7 @@ export class GroupsImportListInput {
 }
 
 
-export type GroupsImportListInputPrivilegesEnum = "ADMINISTRATION" | "AUTHORING" | "USERDATAUPLOADING" | "DATADOWNLOADING" | "USERMANAGEMENT" | "DATAMANAGEMENT" | "SHAREWITHALL" | "JOBSCHEDULING" | "A3ANALYSIS" | "EXPERIMENTALFEATUREPRIVILEGE" | "BYPASSRLS" | "RANALYSIS" | "DEVELOPER" | "USER_ADMINISTRATION" | "GROUP_ADMINISTRATION" | "SYNCMANAGEMENT" | "CAN_CREATE_CATALOG" | "DISABLE_PINBOARD_CREATION" | "ENABLESPOTAPPCREATION" | "LIVEBOARD_VERIFIER" | "PREVIEW_THOUGHTSPOT_SAGE" ;
+export type GroupsImportListInputPrivilegesEnum = "ADMINISTRATION" | "AUTHORING" | "USERDATAUPLOADING" | "DATADOWNLOADING" | "USERMANAGEMENT" | "DATAMANAGEMENT" | "SHAREWITHALL" | "JOBSCHEDULING" | "A3ANALYSIS" | "EXPERIMENTALFEATUREPRIVILEGE" | "BYPASSRLS" | "RANALYSIS" | "DEVELOPER" | "USER_ADMINISTRATION" | "GROUP_ADMINISTRATION" | "SYNCMANAGEMENT" | "CAN_CREATE_CATALOG" | "DISABLE_PINBOARD_CREATION" | "LIVEBOARD_VERIFIER" | "PREVIEW_THOUGHTSPOT_SAGE" | "CAN_MANAGE_VERSION_CONTROL" | "THIRDPARTY_ANALYSIS" | "ALLOW_NON_EMBED_FULL_APP_ACCESS" | "CAN_ACCESS_ANALYST_STUDIO" | "CAN_MANAGE_ANALYST_STUDIO" | "PREVIEW_DOCUMENT_SEARCH" ;
 export type GroupsImportListInputTypeEnum = "LOCAL_GROUP" | "LDAP_GROUP" ;
 export type GroupsImportListInputVisibilityEnum = "SHARABLE" | "NON_SHARABLE" ;
 

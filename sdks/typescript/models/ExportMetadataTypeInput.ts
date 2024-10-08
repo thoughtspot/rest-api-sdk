@@ -17,9 +17,9 @@ import { HttpFile } from '../http/http';
 */
 export class ExportMetadataTypeInput {
     /**
-    * Type of metadata (Optional when given identifier is ID).
+    *   Type of metadata.     Required if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.
     */
-    'type'?: ExportMetadataTypeInputTypeEnum;
+    'type'?: ExportMetadataTypeInputTypeEnum | null;
     /**
     * Unique ID or name of the metadata object.
     */
@@ -50,5 +50,5 @@ export class ExportMetadataTypeInput {
 }
 
 
-export type ExportMetadataTypeInputTypeEnum = "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE" | "CONNECTION" | "CUSTOM_ACTION" ;
+export type ExportMetadataTypeInputTypeEnum = "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE" | "CONNECTION" | "CUSTOM_ACTION" | "USER" | "USER_GROUP" | "ROLE" ;
 

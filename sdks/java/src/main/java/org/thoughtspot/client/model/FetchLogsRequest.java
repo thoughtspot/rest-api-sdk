@@ -21,6 +21,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -50,7 +51,7 @@ import org.thoughtspot.client.JSON;
 /**
  * FetchLogsRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-03-04T10:25:25.563+05:30[Asia/Kolkata]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-10-08T14:03:41.316769Z[Etc/UTC]")
 public class FetchLogsRequest {
   /**
    * Name of the log type
@@ -108,6 +109,10 @@ public class FetchLogsRequest {
   public static final String SERIALIZED_NAME_END_EPOCH_TIME_IN_MILLIS = "end_epoch_time_in_millis";
   @SerializedName(SERIALIZED_NAME_END_EPOCH_TIME_IN_MILLIS)
   private Float endEpochTimeInMillis;
+
+  public static final String SERIALIZED_NAME_GET_ALL_LOGS = "get_all_logs";
+  @SerializedName(SERIALIZED_NAME_GET_ALL_LOGS)
+  private Boolean getAllLogs = true;
 
   public FetchLogsRequest() {
   }
@@ -175,6 +180,27 @@ public class FetchLogsRequest {
   }
 
 
+  public FetchLogsRequest getAllLogs(Boolean getAllLogs) {
+    
+    this.getAllLogs = getAllLogs;
+    return this;
+  }
+
+   /**
+   * Fetch all the logs. This is available from 9.10.5.cl
+   * @return getAllLogs
+  **/
+  @javax.annotation.Nullable
+  public Boolean getGetAllLogs() {
+    return getAllLogs;
+  }
+
+
+  public void setGetAllLogs(Boolean getAllLogs) {
+    this.getAllLogs = getAllLogs;
+  }
+
+
 
   @Override
   public boolean equals(Object o) {
@@ -187,12 +213,24 @@ public class FetchLogsRequest {
     FetchLogsRequest fetchLogsRequest = (FetchLogsRequest) o;
     return Objects.equals(this.logType, fetchLogsRequest.logType) &&
         Objects.equals(this.startEpochTimeInMillis, fetchLogsRequest.startEpochTimeInMillis) &&
-        Objects.equals(this.endEpochTimeInMillis, fetchLogsRequest.endEpochTimeInMillis);
+        Objects.equals(this.endEpochTimeInMillis, fetchLogsRequest.endEpochTimeInMillis) &&
+        Objects.equals(this.getAllLogs, fetchLogsRequest.getAllLogs);
+  }
+
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(logType, startEpochTimeInMillis, endEpochTimeInMillis);
+    return Objects.hash(logType, startEpochTimeInMillis, endEpochTimeInMillis, getAllLogs);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override
@@ -202,6 +240,7 @@ public class FetchLogsRequest {
     sb.append("    logType: ").append(toIndentedString(logType)).append("\n");
     sb.append("    startEpochTimeInMillis: ").append(toIndentedString(startEpochTimeInMillis)).append("\n");
     sb.append("    endEpochTimeInMillis: ").append(toIndentedString(endEpochTimeInMillis)).append("\n");
+    sb.append("    getAllLogs: ").append(toIndentedString(getAllLogs)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -227,6 +266,7 @@ public class FetchLogsRequest {
     openapiFields.add("log_type");
     openapiFields.add("start_epoch_time_in_millis");
     openapiFields.add("end_epoch_time_in_millis");
+    openapiFields.add("get_all_logs");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();

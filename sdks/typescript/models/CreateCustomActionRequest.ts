@@ -10,9 +10,9 @@
  * Do not edit the class manually.
  */
 
-import { ActionDetailsInputCreate } from '../models/ActionDetailsInputCreate';
 import { AssociateMetadataInputCreate } from '../models/AssociateMetadataInputCreate';
-import { DefaultActionConfigInputCreate } from '../models/DefaultActionConfigInputCreate';
+import { CreateCustomActionRequestActionDetails } from '../models/CreateCustomActionRequestActionDetails';
+import { CreateCustomActionRequestDefaultActionConfig } from '../models/CreateCustomActionRequestDefaultActionConfig';
 import { HttpFile } from '../http/http';
 
 export class CreateCustomActionRequest {
@@ -20,12 +20,12 @@ export class CreateCustomActionRequest {
     * Name of the custom action. The custom action name must be unique.
     */
     'name': string;
-    'action_details': ActionDetailsInputCreate;
+    'action_details': CreateCustomActionRequestActionDetails;
     /**
     * Metadata objects to which the custom action needs to be associated.
     */
     'associate_metadata'?: Array<AssociateMetadataInputCreate>;
-    'default_action_config'?: DefaultActionConfigInputCreate;
+    'default_action_config'?: CreateCustomActionRequestDefaultActionConfig;
     /**
     * Unique ID or name of the groups that can view and access the custom action.
     */
@@ -43,7 +43,7 @@ export class CreateCustomActionRequest {
         {
             "name": "action_details",
             "baseName": "action_details",
-            "type": "ActionDetailsInputCreate",
+            "type": "CreateCustomActionRequestActionDetails",
             "format": ""
         },
         {
@@ -55,7 +55,7 @@ export class CreateCustomActionRequest {
         {
             "name": "default_action_config",
             "baseName": "default_action_config",
-            "type": "DefaultActionConfigInputCreate",
+            "type": "CreateCustomActionRequestDefaultActionConfig",
             "format": ""
         },
         {

@@ -19,7 +19,7 @@ export class CALLBACK {
     /**
     * Reference name of the SDK. By default, the value will be set to action name.
     */
-    'reference'?: string;
+    'reference'?: string | null;
 
     static readonly discriminator: string | undefined = undefined;
 

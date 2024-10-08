@@ -19,11 +19,11 @@ export class MetadataSearchSortOptions {
     /**
     * Name of the field to apply the sort on.
     */
-    'field_name'?: MetadataSearchSortOptionsFieldNameEnum;
+    'field_name'?: MetadataSearchSortOptionsFieldNameEnum | null;
     /**
     * Sort order : ASC(Ascending) or DESC(Descending).
     */
-    'order'?: MetadataSearchSortOptionsOrderEnum;
+    'order'?: MetadataSearchSortOptionsOrderEnum | null;
 
     static readonly discriminator: string | undefined = undefined;
 

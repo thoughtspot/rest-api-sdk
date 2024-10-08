@@ -16,7 +16,7 @@ export class ImportUserType {
     /**
     * Unique identifier of the user.
     */
-    'id'?: string;
+    'id'?: string | null;
     /**
     * Name of the user.
     */

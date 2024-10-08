@@ -10,8 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { JWTUserOptionsFull } from '../models/JWTUserOptionsFull';
-import { UserParameterOptions } from '../models/UserParameterOptions';
+import { GetObjectAccessTokenRequestUserParameters } from '../models/GetObjectAccessTokenRequestUserParameters';
 import { HttpFile } from '../http/http';
 
 export class GetFullAccessTokenRequest {
@@ -32,7 +31,7 @@ export class GetFullAccessTokenRequest {
     */
     'validity_time_in_sec'?: number;
     /**
-    * ID of the Org context to log in to. If the Org ID is not specified, the user will be logged in to the Org context of their previous login session.
+    * ID of the Org context to log in to. If the Org ID is not specified and secret key is provided then user will be logged into the org corresponding to the secret key, and if secret key is not provided then user will be logged in to the Org context of their previous login session.
     */
     'org_id'?: number;
     /**
@@ -51,8 +50,7 @@ export class GetFullAccessTokenRequest {
     * ID or name of the groups to which the newly created user belongs. Use this parameter to provision a user just-in-time (JIT).
     */
     'group_identifiers'?: Array<string>;
-    'jwt_user_options'?: JWTUserOptionsFull;
-    'user_parameters'?: UserParameterOptions;
+    'user_parameters'?: GetObjectAccessTokenRequestUserParameters;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -112,15 +110,9 @@ export class GetFullAccessTokenRequest {
             "format": ""
         },
         {
-            "name": "jwt_user_options",
-            "baseName": "jwt_user_options",
-            "type": "JWTUserOptionsFull",
-            "format": ""
-        },
-        {
             "name": "user_parameters",
             "baseName": "user_parameters",
-            "type": "UserParameterOptions",
+            "type": "GetObjectAccessTokenRequestUserParameters",
             "format": ""
         }    ];
 

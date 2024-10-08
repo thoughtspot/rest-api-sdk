@@ -52,7 +52,7 @@ import org.thoughtspot.client.JSON;
 /**
  * AnswerContent
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-03-04T10:25:25.563+05:30[Asia/Kolkata]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-10-08T14:03:41.316769Z[Etc/UTC]")
 public class AnswerContent {
   public static final String SERIALIZED_NAME_AVAILABLE_DATA_ROW_COUNT = "available_data_row_count";
   @SerializedName(SERIALIZED_NAME_AVAILABLE_DATA_ROW_COUNT)

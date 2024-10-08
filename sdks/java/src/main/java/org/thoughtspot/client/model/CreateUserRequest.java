@@ -54,7 +54,7 @@ import org.thoughtspot.client.JSON;
 /**
  * CreateUserRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-03-04T10:25:25.563+05:30[Asia/Kolkata]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-10-08T14:03:41.316769Z[Etc/UTC]")
 public class CreateUserRequest {
   public static final String SERIALIZED_NAME_NAME = "name";
   @SerializedName(SERIALIZED_NAME_NAME)
@@ -759,7 +759,7 @@ public class CreateUserRequest {
   }
 
    /**
-   * Flag to indicate whether welcome email should be sent to user
+   * Flag to indicate whether welcome email should be sent to user. This parameter is applied only on clusters on which IAM is disabled.
    * @return triggerWelcomeEmail
   **/
   @javax.annotation.Nullable
@@ -780,7 +780,7 @@ public class CreateUserRequest {
   }
 
    /**
-   * Flag to indicate whether activation email should be sent to user
+   * Flag to indicate whether activation email should be sent to user.
    * @return triggerActivationEmail
   **/
   @javax.annotation.Nullable

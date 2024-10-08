@@ -23,6 +23,7 @@ import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import org.openapitools.jackson.nullable.JsonNullable;
 import org.thoughtspot.client.model.GenericInfo;
 
 import com.google.gson.Gson;
@@ -53,7 +54,7 @@ import org.thoughtspot.client.JSON;
 /**
  * Response for search role api should handle hidden privileges as well.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-03-04T10:25:25.563+05:30[Asia/Kolkata]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-10-08T14:03:41.316769Z[Etc/UTC]")
 public class SearchRoleResponse {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
@@ -154,7 +155,23 @@ public class SearchRoleResponse {
     
     CAN_CONFIGURE_CONNECTIONS("CAN_CONFIGURE_CONNECTIONS"),
     
-    CAN_MANAGE_WORKSHEET_VIEWS_TABLES("CAN_MANAGE_WORKSHEET_VIEWS_TABLES");
+    CAN_MANAGE_WORKSHEET_VIEWS_TABLES("CAN_MANAGE_WORKSHEET_VIEWS_TABLES"),
+    
+    CAN_MANAGE_VERSION_CONTROL("CAN_MANAGE_VERSION_CONTROL"),
+    
+    THIRDPARTY_ANALYSIS("THIRDPARTY_ANALYSIS"),
+    
+    CONTROL_TRUSTED_AUTH("CONTROL_TRUSTED_AUTH"),
+    
+    CAN_CREATE_CATALOG("CAN_CREATE_CATALOG"),
+    
+    ALLOW_NON_EMBED_FULL_APP_ACCESS("ALLOW_NON_EMBED_FULL_APP_ACCESS"),
+    
+    CAN_ACCESS_ANALYST_STUDIO("CAN_ACCESS_ANALYST_STUDIO"),
+    
+    CAN_MANAGE_ANALYST_STUDIO("CAN_MANAGE_ANALYST_STUDIO"),
+    
+    PREVIEW_DOCUMENT_SEARCH("PREVIEW_DOCUMENT_SEARCH");
 
     private String value;
 
@@ -230,7 +247,7 @@ public class SearchRoleResponse {
           return b;
         }
       }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+      return null;
     }
 
     public static class Adapter extends TypeAdapter<PermissionEnum> {
@@ -700,9 +717,20 @@ public class SearchRoleResponse {
         Objects.equals(this.sharedViaConnection, searchRoleResponse.sharedViaConnection);
   }
 
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
+  }
+
   @Override
   public int hashCode() {
     return Objects.hash(id, name, description, groupsAssignedCount, orgs, groups, privileges, permission, authorId, modifierId, creationTimeInMillis, modificationTimeInMillis, deleted, deprecated, external, hidden, sharedViaConnection);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override

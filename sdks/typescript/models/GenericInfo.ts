@@ -13,8 +13,8 @@
 import { HttpFile } from '../http/http';
 
 export class GenericInfo {
-    'id'?: string;
-    'name'?: string;
+    'id'?: string | null;
+    'name'?: string | null;
 
     static readonly discriminator: string | undefined = undefined;
 

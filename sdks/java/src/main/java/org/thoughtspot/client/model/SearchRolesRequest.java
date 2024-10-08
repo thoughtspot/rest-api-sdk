@@ -53,7 +53,7 @@ import org.thoughtspot.client.JSON;
 /**
  * SearchRolesRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-03-04T10:25:25.563+05:30[Asia/Kolkata]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-10-08T14:03:41.316769Z[Etc/UTC]")
 public class SearchRolesRequest {
   public static final String SERIALIZED_NAME_ROLE_IDENTIFIERS = "role_identifiers";
   @SerializedName(SERIALIZED_NAME_ROLE_IDENTIFIERS)
@@ -142,7 +142,23 @@ public class SearchRolesRequest {
     
     CAN_CONFIGURE_CONNECTIONS("CAN_CONFIGURE_CONNECTIONS"),
     
-    CAN_MANAGE_WORKSHEET_VIEWS_TABLES("CAN_MANAGE_WORKSHEET_VIEWS_TABLES");
+    CAN_MANAGE_WORKSHEET_VIEWS_TABLES("CAN_MANAGE_WORKSHEET_VIEWS_TABLES"),
+    
+    CAN_MANAGE_VERSION_CONTROL("CAN_MANAGE_VERSION_CONTROL"),
+    
+    THIRDPARTY_ANALYSIS("THIRDPARTY_ANALYSIS"),
+    
+    CONTROL_TRUSTED_AUTH("CONTROL_TRUSTED_AUTH"),
+    
+    CAN_CREATE_CATALOG("CAN_CREATE_CATALOG"),
+    
+    ALLOW_NON_EMBED_FULL_APP_ACCESS("ALLOW_NON_EMBED_FULL_APP_ACCESS"),
+    
+    CAN_ACCESS_ANALYST_STUDIO("CAN_ACCESS_ANALYST_STUDIO"),
+    
+    CAN_MANAGE_ANALYST_STUDIO("CAN_MANAGE_ANALYST_STUDIO"),
+    
+    PREVIEW_DOCUMENT_SEARCH("PREVIEW_DOCUMENT_SEARCH");
 
     private String value;
 

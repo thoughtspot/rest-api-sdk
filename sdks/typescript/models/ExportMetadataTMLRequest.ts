@@ -27,11 +27,11 @@ export class ExportMetadataTMLRequest {
     */
     'export_fqn'?: boolean | null;
     /**
-    * TML EDOC content format.
+    * TML EDOC content format. **Note: exporting in YAML format currently requires manual formatting of the output. For more details on the workaround, please click [here](https://developers.thoughtspot.com/docs/known-issues#_version_9_12_0_cl)**
     */
     'edoc_format'?: ExportMetadataTMLRequestEdocFormatEnum;
     /**
-    * Indicates whether to export worksheet TML in V1 or V2 version.
+    * Indicates whether to export worksheet TML in DEFAULT or V1 or V2 version.
     */
     'export_schema_version'?: ExportMetadataTMLRequestExportSchemaVersionEnum;
     /**
@@ -42,6 +42,10 @@ export class ExportMetadataTMLRequest {
     * Indicates whether to export connection as dependent while exporting table/worksheet/answer/liveboard. This will only be active when export_associated is true.
     */
     'export_connection_as_dependent'?: boolean | null;
+    /**
+    * Indicates whether to export is happening from all orgs context.
+    */
+    'all_orgs_override'?: boolean | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -87,6 +91,12 @@ export class ExportMetadataTMLRequest {
             "baseName": "export_connection_as_dependent",
             "type": "boolean",
             "format": ""
+        },
+        {
+            "name": "all_orgs_override",
+            "baseName": "all_orgs_override",
+            "type": "boolean",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
@@ -99,5 +109,5 @@ export class ExportMetadataTMLRequest {
 
 
 export type ExportMetadataTMLRequestEdocFormatEnum = "JSON" | "YAML" ;
-export type ExportMetadataTMLRequestExportSchemaVersionEnum = "V1" | "V2" ;
+export type ExportMetadataTMLRequestExportSchemaVersionEnum = "DEFAULT" | "V1" | "V2" ;
 

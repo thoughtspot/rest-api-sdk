@@ -44,11 +44,11 @@ export class LiveboardContent {
     /**
     * Unique ID of the visualization.
     */
-    'visualization_id'?: string;
+    'visualization_id'?: string | null;
     /**
     * Name of the visualization.
     */
-    'visualization_name'?: string;
+    'visualization_name'?: string | null;
 
     static readonly discriminator: string | undefined = undefined;
 

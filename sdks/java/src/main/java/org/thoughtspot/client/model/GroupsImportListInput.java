@@ -23,6 +23,7 @@ import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -52,7 +53,7 @@ import org.thoughtspot.client.JSON;
 /**
  * GroupsImportListInput
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-03-04T10:25:25.563+05:30[Asia/Kolkata]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-10-08T14:03:41.316769Z[Etc/UTC]")
 public class GroupsImportListInput {
   public static final String SERIALIZED_NAME_DISPLAY_NAME = "display_name";
   @SerializedName(SERIALIZED_NAME_DISPLAY_NAME)
@@ -111,11 +112,21 @@ public class GroupsImportListInput {
     
     DISABLE_PINBOARD_CREATION("DISABLE_PINBOARD_CREATION"),
     
-    ENABLESPOTAPPCREATION("ENABLESPOTAPPCREATION"),
-    
     LIVEBOARD_VERIFIER("LIVEBOARD_VERIFIER"),
     
-    PREVIEW_THOUGHTSPOT_SAGE("PREVIEW_THOUGHTSPOT_SAGE");
+    PREVIEW_THOUGHTSPOT_SAGE("PREVIEW_THOUGHTSPOT_SAGE"),
+    
+    CAN_MANAGE_VERSION_CONTROL("CAN_MANAGE_VERSION_CONTROL"),
+    
+    THIRDPARTY_ANALYSIS("THIRDPARTY_ANALYSIS"),
+    
+    ALLOW_NON_EMBED_FULL_APP_ACCESS("ALLOW_NON_EMBED_FULL_APP_ACCESS"),
+    
+    CAN_ACCESS_ANALYST_STUDIO("CAN_ACCESS_ANALYST_STUDIO"),
+    
+    CAN_MANAGE_ANALYST_STUDIO("CAN_MANAGE_ANALYST_STUDIO"),
+    
+    PREVIEW_DOCUMENT_SEARCH("PREVIEW_DOCUMENT_SEARCH");
 
     private String value;
 
@@ -193,7 +204,7 @@ public class GroupsImportListInput {
           return b;
         }
       }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+      return null;
     }
 
     public static class Adapter extends TypeAdapter<TypeEnum> {
@@ -248,7 +259,7 @@ public class GroupsImportListInput {
           return b;
         }
       }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+      return null;
     }
 
     public static class Adapter extends TypeAdapter<VisibilityEnum> {
@@ -514,9 +525,20 @@ public class GroupsImportListInput {
         Objects.equals(this.visibility, groupsImportListInput.visibility);
   }
 
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
+  }
+
   @Override
   public int hashCode() {
     return Objects.hash(displayName, groupIdentifier, defaultLiveboardIdentifiers, description, privileges, subGroupIdentifiers, type, userIdentifiers, visibility);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override

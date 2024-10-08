@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
 import org.thoughtspot.client.model.FavoriteMetadataInput;
-import org.thoughtspot.client.model.SortOptions;
+import org.thoughtspot.client.model.SearchUsersRequestSortOptions;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -55,7 +55,7 @@ import org.thoughtspot.client.JSON;
 /**
  * SearchUsersRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-03-04T10:25:25.563+05:30[Asia/Kolkata]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-10-08T14:03:41.316769Z[Etc/UTC]")
 public class SearchUsersRequest {
   public static final String SERIALIZED_NAME_USER_IDENTIFIER = "user_identifier";
   @SerializedName(SERIALIZED_NAME_USER_IDENTIFIER)
@@ -171,8 +171,6 @@ public class SearchUsersRequest {
     
     LIVEBOARD_VERIFIER("LIVEBOARD_VERIFIER"),
     
-    ENABLESPOTAPPCREATION("ENABLESPOTAPPCREATION"),
-    
     PREVIEW_THOUGHTSPOT_SAGE("PREVIEW_THOUGHTSPOT_SAGE"),
     
     APPLICATION_ADMINISTRATION("APPLICATION_ADMINISTRATION"),
@@ -191,7 +189,19 @@ public class SearchUsersRequest {
     
     CAN_CREATE_OR_EDIT_CONNECTIONS("CAN_CREATE_OR_EDIT_CONNECTIONS"),
     
-    CAN_MANAGE_WORKSHEET_VIEWS_TABLES("CAN_MANAGE_WORKSHEET_VIEWS_TABLES");
+    CAN_MANAGE_WORKSHEET_VIEWS_TABLES("CAN_MANAGE_WORKSHEET_VIEWS_TABLES"),
+    
+    CAN_MANAGE_VERSION_CONTROL("CAN_MANAGE_VERSION_CONTROL"),
+    
+    THIRDPARTY_ANALYSIS("THIRDPARTY_ANALYSIS"),
+    
+    ALLOW_NON_EMBED_FULL_APP_ACCESS("ALLOW_NON_EMBED_FULL_APP_ACCESS"),
+    
+    CAN_ACCESS_ANALYST_STUDIO("CAN_ACCESS_ANALYST_STUDIO"),
+    
+    CAN_MANAGE_ANALYST_STUDIO("CAN_MANAGE_ANALYST_STUDIO"),
+    
+    PREVIEW_DOCUMENT_SEARCH("PREVIEW_DOCUMENT_SEARCH");
 
     private String value;
 
@@ -383,7 +393,7 @@ public class SearchUsersRequest {
 
   public static final String SERIALIZED_NAME_SORT_OPTIONS = "sort_options";
   @SerializedName(SERIALIZED_NAME_SORT_OPTIONS)
-  private SortOptions sortOptions;
+  private SearchUsersRequestSortOptions sortOptions;
 
   public static final String SERIALIZED_NAME_ROLE_IDENTIFIERS = "role_identifiers";
   @SerializedName(SERIALIZED_NAME_ROLE_IDENTIFIERS)
@@ -785,7 +795,7 @@ public class SearchUsersRequest {
   }
 
 
-  public SearchUsersRequest sortOptions(SortOptions sortOptions) {
+  public SearchUsersRequest sortOptions(SearchUsersRequestSortOptions sortOptions) {
     
     this.sortOptions = sortOptions;
     return this;
@@ -796,12 +806,12 @@ public class SearchUsersRequest {
    * @return sortOptions
   **/
   @javax.annotation.Nullable
-  public SortOptions getSortOptions() {
+  public SearchUsersRequestSortOptions getSortOptions() {
     return sortOptions;
   }
 
 
-  public void setSortOptions(SortOptions sortOptions) {
+  public void setSortOptions(SearchUsersRequestSortOptions sortOptions) {
     this.sortOptions = sortOptions;
   }
 
@@ -1047,7 +1057,7 @@ public class SearchUsersRequest {
       }
       // validate the optional field `sort_options`
       if (jsonObj.get("sort_options") != null && !jsonObj.get("sort_options").isJsonNull()) {
-        SortOptions.validateJsonObject(jsonObj.getAsJsonObject("sort_options"));
+        SearchUsersRequestSortOptions.validateJsonObject(jsonObj.getAsJsonObject("sort_options"));
       }
       // ensure the optional json data is an array if present
       if (jsonObj.get("role_identifiers") != null && !jsonObj.get("role_identifiers").isJsonArray()) {

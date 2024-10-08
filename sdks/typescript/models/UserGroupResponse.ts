@@ -18,35 +18,35 @@ export class UserGroupResponse {
     /**
     * The unique identifier of the object
     */
-    'author_id'?: string;
+    'author_id'?: string | null;
     /**
     * Indicates whether the response has complete detail of the group.
     */
-    'complete_detail'?: boolean;
+    'complete_detail'?: boolean | null;
     /**
     * Content details of the group
     */
-    'content'?: any;
+    'content'?: any | null;
     /**
     * Creation time of the group in milliseconds
     */
-    'creation_time_in_millis'?: number;
+    'creation_time_in_millis'?: number | null;
     /**
     * Liveboards that are assigned as default Liveboards to the group.
     */
-    'default_liveboards'?: Array<UserGroup>;
+    'default_liveboards'?: Array<UserGroup> | null;
     /**
     * Indicates whether the group is deleted
     */
-    'deleted'?: boolean;
+    'deleted'?: boolean | null;
     /**
     * Indicates whether the group is deprecated
     */
-    'deprecated'?: boolean;
+    'deprecated'?: boolean | null;
     /**
     * Description of the group
     */
-    'description'?: string;
+    'description'?: string | null;
     /**
     * Display name of the group.
     */
@@ -54,15 +54,15 @@ export class UserGroupResponse {
     /**
     * Indicates whether the group is external
     */
-    'external'?: boolean;
+    'external'?: boolean | null;
     /**
     * Generation number of the group
     */
-    'generation_number'?: number;
+    'generation_number'?: number | null;
     /**
     * Indicates whether the group is hidden
     */
-    'hidden'?: boolean;
+    'hidden'?: boolean | null;
     /**
     * The unique identifier of the object
     */
@@ -70,23 +70,23 @@ export class UserGroupResponse {
     /**
     * Index number of the group
     */
-    'index'?: number;
+    'index'?: number | null;
     /**
     * Index version number of the group
     */
-    'index_version'?: number;
+    'index_version'?: number | null;
     /**
     * Metadata version number of the group
     */
-    'metadata_version'?: number;
+    'metadata_version'?: number | null;
     /**
     * Last modified time of the group in milliseconds.
     */
-    'modification_time_in_millis'?: number;
+    'modification_time_in_millis'?: number | null;
     /**
     * The unique identifier of the object
     */
-    'modifier_id'?: string;
+    'modifier_id'?: string | null;
     /**
     * Name of the group.
     */
@@ -94,39 +94,39 @@ export class UserGroupResponse {
     /**
     * Orgs in which group exists.
     */
-    'orgs'?: Array<UserGroup>;
+    'orgs'?: Array<UserGroup> | null;
     /**
     * The unique identifier of the object
     */
-    'owner_id'?: string;
+    'owner_id'?: string | null;
     /**
     * Parent type of the group.
     */
-    'parent_type'?: UserGroupResponseParentTypeEnum;
+    'parent_type'?: UserGroupResponseParentTypeEnum | null;
     /**
     * Privileges which are assigned to the group
     */
-    'privileges'?: Array<string>;
+    'privileges'?: Array<string> | null;
     /**
     * Groups who are part of the group
     */
-    'sub_groups'?: Array<UserGroup>;
+    'sub_groups'?: Array<UserGroup> | null;
     /**
     * Indicates whether the group is a system group.
     */
-    'system_group'?: boolean;
+    'system_group'?: boolean | null;
     /**
     * Tags associated with the group.
     */
-    'tags'?: Array<UserGroup>;
+    'tags'?: Array<UserGroup> | null;
     /**
     * Type of the group.
     */
-    'type'?: UserGroupResponseTypeEnum;
+    'type'?: UserGroupResponseTypeEnum | null;
     /**
     * Users who are part of the group.
     */
-    'users'?: Array<UserGroup>;
+    'users'?: Array<UserGroup> | null;
     /**
     * Visibility of the group. The SHARABLE makes a group visible to other users and groups, and thus allows them to share objects.
     */
@@ -134,7 +134,7 @@ export class UserGroupResponse {
     /**
     * List of roles assgined to the user
     */
-    'roles'?: Array<Role>;
+    'roles'?: Array<Role> | null;
 
     static readonly discriminator: string | undefined = undefined;
 

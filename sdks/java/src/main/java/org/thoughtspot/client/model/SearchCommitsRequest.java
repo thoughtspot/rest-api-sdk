@@ -50,7 +50,7 @@ import org.thoughtspot.client.JSON;
 /**
  * SearchCommitsRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-03-04T10:25:25.563+05:30[Asia/Kolkata]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-10-08T14:03:41.316769Z[Etc/UTC]")
 public class SearchCommitsRequest {
   public static final String SERIALIZED_NAME_METADATA_IDENTIFIER = "metadata_identifier";
   @SerializedName(SERIALIZED_NAME_METADATA_IDENTIFIER)
@@ -65,7 +65,9 @@ public class SearchCommitsRequest {
     
     ANSWER("ANSWER"),
     
-    LOGICAL_TABLE("LOGICAL_TABLE");
+    LOGICAL_TABLE("LOGICAL_TABLE"),
+    
+    CUSTOM_ACTION("CUSTOM_ACTION");
 
     private String value;
 

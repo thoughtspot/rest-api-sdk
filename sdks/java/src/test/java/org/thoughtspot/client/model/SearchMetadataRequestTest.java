@@ -23,10 +23,10 @@ import java.util.ArrayList;
 import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
 import org.thoughtspot.client.model.ExcludeMetadataListItemInput;
-import org.thoughtspot.client.model.FavoriteObjectOptionsInput;
 import org.thoughtspot.client.model.MetadataListItemInput;
-import org.thoughtspot.client.model.MetadataSearchSortOptions;
 import org.thoughtspot.client.model.PermissionInput;
+import org.thoughtspot.client.model.SearchMetadataRequestFavoriteObjectOptions;
+import org.thoughtspot.client.model.SearchMetadataRequestSortOptions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -107,6 +107,14 @@ public class SearchMetadataRequestTest {
     @Test
     public void includeDependentObjectsTest() {
         // TODO: test includeDependentObjects
+    }
+
+    /**
+     * Test the property 'dependentObjectsRecordSize'
+     */
+    @Test
+    public void dependentObjectsRecordSizeTest() {
+        // TODO: test dependentObjectsRecordSize
     }
 
     /**

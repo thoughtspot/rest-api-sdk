@@ -50,7 +50,7 @@ import org.thoughtspot.client.JSON;
 /**
  * List of runtime parameters need to set during the session.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-03-04T10:25:25.563+05:30[Asia/Kolkata]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-10-08T14:03:41.316769Z[Etc/UTC]")
 public class RuntimeSort {
   public static final String SERIALIZED_NAME_RUNTIME_SORT = "runtime_sort";
   @SerializedName(SERIALIZED_NAME_RUNTIME_SORT)

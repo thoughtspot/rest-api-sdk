@@ -35,7 +35,7 @@ export class ResponseScheduleRun {
     /**
     * Message details related to the schedule run.
     */
-    'detail'?: string;
+    'detail'?: string | null;
 
     static readonly discriminator: string | undefined = undefined;
 

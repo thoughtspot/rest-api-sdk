@@ -26,7 +26,7 @@ export class FetchLiveboardDataRequest {
     */
     'transient_content'?: string;
     /**
-    * JSON output format. By default, the API returns full data in the JSON.
+    * JSON output in compact or full format. The FULL option is available in 9.12.5.cl or later.
     */
     'data_format'?: FetchLiveboardDataRequestDataFormatEnum;
     /**
@@ -117,5 +117,5 @@ export class FetchLiveboardDataRequest {
 }
 
 
-export type FetchLiveboardDataRequestDataFormatEnum = "COMPACT" ;
+export type FetchLiveboardDataRequestDataFormatEnum = "FULL" | "COMPACT" ;
 

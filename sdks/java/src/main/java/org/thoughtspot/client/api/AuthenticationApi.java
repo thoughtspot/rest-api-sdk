@@ -34,7 +34,9 @@ import org.thoughtspot.client.model.GetTokenResponse;
 import org.thoughtspot.client.model.LoginRequest;
 import org.thoughtspot.client.model.RevokeTokenRequest;
 import org.thoughtspot.client.model.Token;
+import org.thoughtspot.client.model.TokenValidationResponse;
 import org.thoughtspot.client.model.User;
+import org.thoughtspot.client.model.ValidateTokenRequest;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -1009,6 +1011,145 @@ public class AuthenticationApi {
 
         okhttp3.Call localVarCall = revokeTokenValidateBeforeCall(revokeTokenRequest, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for validateToken
+     * @param validateTokenRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Token validation successful. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call validateTokenCall(ValidateTokenRequest validateTokenRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = validateTokenRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/auth/token/validate";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call validateTokenValidateBeforeCall(ValidateTokenRequest validateTokenRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'validateTokenRequest' is set
+        if (validateTokenRequest == null) {
+            throw new ApiException("Missing the required parameter 'validateTokenRequest' when calling validateToken(Async)");
+        }
+
+        return validateTokenCall(validateTokenRequest, _callback);
+
+    }
+
+    /**
+     * 
+     *  Version: 9.12.0.cl or later 
+     * @param validateTokenRequest  (required)
+     * @return TokenValidationResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Token validation successful. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public TokenValidationResponse validateToken(ValidateTokenRequest validateTokenRequest) throws ApiException {
+        ApiResponse<TokenValidationResponse> localVarResp = validateTokenWithHttpInfo(validateTokenRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * 
+     *  Version: 9.12.0.cl or later 
+     * @param validateTokenRequest  (required)
+     * @return ApiResponse&lt;TokenValidationResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Token validation successful. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<TokenValidationResponse> validateTokenWithHttpInfo(ValidateTokenRequest validateTokenRequest) throws ApiException {
+        okhttp3.Call localVarCall = validateTokenValidateBeforeCall(validateTokenRequest, null);
+        Type localVarReturnType = new TypeToken<TokenValidationResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     *  (asynchronously)
+     *  Version: 9.12.0.cl or later 
+     * @param validateTokenRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Token validation successful. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call validateTokenAsync(ValidateTokenRequest validateTokenRequest, final ApiCallback<TokenValidationResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = validateTokenValidateBeforeCall(validateTokenRequest, _callback);
+        Type localVarReturnType = new TypeToken<TokenValidationResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
 }

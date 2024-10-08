@@ -6,8 +6,12 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**createConnection**](ConnectionsApi.md#createConnection) | **POST** /api/rest/2.0/connection/create | 
 [**deleteConnection**](ConnectionsApi.md#deleteConnection) | **POST** /api/rest/2.0/connection/delete | 
+[**deleteConnectionV2**](ConnectionsApi.md#deleteConnectionV2) | **POST** /api/rest/2.0/connections/delete/{connection_identifier} | 
+[**downloadConnectionMetadataChanges**](ConnectionsApi.md#downloadConnectionMetadataChanges) | **POST** /api/rest/2.0/connections/download-connection-metadata-changes/{connection_identifier} | 
+[**fetchConnectionDiffStatus**](ConnectionsApi.md#fetchConnectionDiffStatus) | **POST** /api/rest/2.0/connections/fetch-connection-diff-status/{connection_identifier} | 
 [**searchConnection**](ConnectionsApi.md#searchConnection) | **POST** /api/rest/2.0/connection/search | 
 [**updateConnection**](ConnectionsApi.md#updateConnection) | **POST** /api/rest/2.0/connection/update | 
+[**updateConnectionV2**](ConnectionsApi.md#updateConnectionV2) | **POST** /api/rest/2.0/connections/update/{connection_identifier} | 
 
 
 # **createConnection**
@@ -138,6 +142,186 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
+# **deleteConnectionV2**
+> void deleteConnectionV2()
+
+  Version: 10.0.0.cl or later   Deletes a connection object.  **Note**: If a connection has dependent objects, make sure you remove its associations before the delete operation.  Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, ConnectionsApi, DeleteConnectionV2Request } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new ConnectionsApi(configuration);
+
+apiInstance.deleteConnectionV2(
+  // string | Unique ID or name of the connection.
+  "connection_identifier_example" 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **connectionIdentifier** | [**string**] | Unique ID or name of the connection. | defaults to undefined
+
+
+### Return type
+
+**void**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Connection successfully deleted. |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **downloadConnectionMetadataChanges**
+> void downloadConnectionMetadataChanges()
+
+  Version: 9.9.0.cl or later   Exports the difference in connection metadata between CDW and ThoughtSpot  Requires `DATAMANAGEMENT` (**Can manage data**) privilege  To download the connection metadata difference between ThoughtSpot and CDW, pass the connection GUID as `connection_identifier` in the API request.      
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, ConnectionsApi, DownloadConnectionMetadataChangesRequest } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new ConnectionsApi(configuration);
+
+apiInstance.downloadConnectionMetadataChanges(
+  // string | GUID of the connection
+  "connection_identifier_example" 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **connectionIdentifier** | [**string**] | GUID of the connection | defaults to undefined
+
+
+### Return type
+
+**void**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/octet-stream, application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Export metadata changes. |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **fetchConnectionDiffStatus**
+> FetchConnectionDiffStatusResponse fetchConnectionDiffStatus()
+
+  Version: 9.9.0.cl or later   Validates the difference in connection metadata between CDW and ThoughtSpot  Requires `DATAMANAGEMENT` (**Can manage data**) privilege  Returns a boolean indicating whether there is any difference between the connection metadata at ThoughtSpot and CDW.  To get the connection metadata difference status, pass the connection GUID as `connection_identifier` in the API request.      
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, ConnectionsApi, FetchConnectionDiffStatusRequest } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new ConnectionsApi(configuration);
+
+apiInstance.fetchConnectionDiffStatus(
+  // string | GUID of the connection
+  "connection_identifier_example" 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **connectionIdentifier** | [**string**] | GUID of the connection | defaults to undefined
+
+
+### Return type
+
+**FetchConnectionDiffStatusResponse**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | true/false |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
 # **searchConnection**
 > Array<SearchConnectionResponse> searchConnection(searchConnectionRequest)
 
@@ -181,10 +365,7 @@ apiInstance.searchConnection(
       "tag_identifiers_example",
     ],
     data_warehouse_object_type: "DATABASE",
-    sort_options: {
-      field_name: "NAME",
-      order: "ASC",
-    },
+    sort_options: null,
     include_details: true,
     configuration: {},
     authentication_type: "SERVICE_ACCOUNT",
@@ -268,6 +449,74 @@ apiInstance.updateConnection(
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **updateConnectionRequest** | **UpdateConnectionRequest**|  |
+
+
+### Return type
+
+**void**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Connection successfully updated. |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **updateConnectionV2**
+> void updateConnectionV2(updateConnectionV2Request)
+
+  Version: 10.0.0.cl or later   Updates a connection object.  Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  To update a connection object, pass these parameters in your API request:  1. GUID of the connection object. 2. If you are updating tables or database schema of a connection object:    a. Add the updated JSON map of metadata with database, schema, and tables in `data_warehouse_config`.    b. Set `validate` to `true`. 3. If you are updating a configuration attribute, connection name, or description, you can set `validate` to `false`.      
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, ConnectionsApi, UpdateConnectionV2Request } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new ConnectionsApi(configuration);
+
+apiInstance.updateConnectionV2(
+  // string | Unique ID or name of the connection.
+  "connection_identifier_example" , 
+  // UpdateConnectionV2Request
+  {
+    name: "name_example",
+    description: "description_example",
+    data_warehouse_config: {},
+    validate: true,
+  } 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **updateConnectionV2Request** | **UpdateConnectionV2Request**|  |
+ **connectionIdentifier** | [**string**] | Unique ID or name of the connection. | defaults to undefined
 
 
 ### Return type

@@ -10,24 +10,29 @@
  * Do not edit the class manually.
  */
 
+import { ShareMetadataTypeInput } from '../models/ShareMetadataTypeInput';
 import { SharePermissionsInput } from '../models/SharePermissionsInput';
 import { HttpFile } from '../http/http';
 
 export class ShareMetadataRequest {
     /**
-    * Type of metadata. 1. Liveboard 2. Answers 3. LOGICAL_TABLE for any data object such as table, worksheet or view.
+    * Type of metadata. Required if identifier in metadata_identifies is a name\". 1. Liveboard 2. Answers 3. LOGICAL_TABLE for any data object such as table, worksheet or view.
     */
     'metadata_type'?: ShareMetadataRequestMetadataTypeEnum;
     /**
-    * Unique ID or name of metadata objects. Note: All the identifiers should belong to same metadata_type
+    * Unique ID or name of metadata objects. Note: All the names should belong to same metadata_type
     */
-    'metadata_identifiers': Array<string>;
+    'metadata_identifiers'?: Array<string>;
+    /**
+    * Metadata details for sharing objects.
+    */
+    'metadata'?: Array<ShareMetadataTypeInput>;
     /**
     * Permission details for sharing the objects.
     */
     'permissions': Array<SharePermissionsInput>;
     /**
-    * Options to specify details of Liveboard.
+    * Options to specify details of Liveboard. First Liveboard encountered in payload is considered to be the corresponding Liveboard.
     */
     'visualization_identifiers'?: Array<string>;
     /**
@@ -64,6 +69,12 @@ export class ShareMetadataRequest {
             "name": "metadata_identifiers",
             "baseName": "metadata_identifiers",
             "type": "Array<string>",
+            "format": ""
+        },
+        {
+            "name": "metadata",
+            "baseName": "metadata",
+            "type": "Array<ShareMetadataTypeInput>",
             "format": ""
         },
         {

@@ -97,4 +97,12 @@ public class ExportMetadataTMLRequestTest {
         // TODO: test exportConnectionAsDependent
     }
 
+    /**
+     * Test the property 'allOrgsOverride'
+     */
+    @Test
+    public void allOrgsOverrideTest() {
+        // TODO: test allOrgsOverride
+    }
+
 }

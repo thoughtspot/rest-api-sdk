@@ -17,13 +17,22 @@ import { UserRuntimeSorts } from '../models/UserRuntimeSorts';
 import { HttpFile } from '../http/http';
 
 /**
-* User properties runtime_filters,runtime_sorts,parameters applicable to LOGICAL_TABLE(Worksheet)
+* Define attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters). 
 */
 export class UserParameterOptions {
-    'objects'?: Array<UserObject>;
-    'runtime_filters'?: Array<UserRuntimeFilters>;
-    'runtime_sorts'?: Array<UserRuntimeSorts>;
-    'parameters'?: Array<UserParameters>;
+    'objects'?: Array<UserObject> | null;
+    /**
+    * Objects to apply the User_Runtime_Filters.  Examples to set the `runtime_filters` : ```json { \"column_name\": \"Color\", \"operator\": \"EQ\", \"values\": [\"red\"], \"persist\": false } ```
+    */
+    'runtime_filters'?: Array<UserRuntimeFilters> | null;
+    /**
+    * Objects to apply the User_Runtime_Sorts.  Examples to set the `runtime_sorts` : ```json { \"column_name\": \"Color\", \"order\": \"ASC\", \"persist\": false } ```
+    */
+    'runtime_sorts'?: Array<UserRuntimeSorts> | null;
+    /**
+    * Objects to apply the Runtime_Parameters.  Examples to set the `parameters` : ```json { \"name\": \"Color\", \"values\": [\"Blue\"], \"persist\": false } ```
+    */
+    'parameters'?: Array<UserParameters> | null;
 
     static readonly discriminator: string | undefined = undefined;
 

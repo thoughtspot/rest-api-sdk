@@ -4,8 +4,10 @@ All URIs are relative to *CLUSTER_URL*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**activateUser**](UsersApi.md#activateUser) | **POST** /api/rest/2.0/users/activate | 
 [**changeUserPassword**](UsersApi.md#changeUserPassword) | **POST** /api/rest/2.0/users/change-password | 
 [**createUser**](UsersApi.md#createUser) | **POST** /api/rest/2.0/users/create | 
+[**deactivateUser**](UsersApi.md#deactivateUser) | **POST** /api/rest/2.0/users/deactivate | 
 [**deleteUser**](UsersApi.md#deleteUser) | **POST** /api/rest/2.0/users/{user_identifier}/delete | 
 [**forceLogoutUsers**](UsersApi.md#forceLogoutUsers) | **POST** /api/rest/2.0/users/force-logout | 
 [**importUsers**](UsersApi.md#importUsers) | **POST** /api/rest/2.0/users/import | 
@@ -13,6 +15,70 @@ Method | HTTP request | Description
 [**searchUsers**](UsersApi.md#searchUsers) | **POST** /api/rest/2.0/users/search | 
 [**updateUser**](UsersApi.md#updateUser) | **POST** /api/rest/2.0/users/{user_identifier}/update | 
 
+
+# **activateUser**
+> User activateUser(activateUserRequest)
+
+  Version: 9.7.0.cl or later   Activates a deactivated user account.  Requires `ADMINISTRATION` (**Can administer Thoughtspot**) privilege.  To activate an inactive user account, the API request body must include the following information:  - Username or the GUID of the user account. - Auth token generated for the deactivated user. The auth token is sent in the API response when a user is deactivated. - Password for the user account.      
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, UsersApi, ActivateUserRequest } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new UsersApi(configuration);
+
+apiInstance.activateUser(
+  // ActivateUserRequest
+  {
+    user_identifier: "user_identifier_example",
+    auth_token: "auth_token_example",
+    password: "password_example",
+  } 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **activateUserRequest** | **ActivateUserRequest**|  |
+
+
+### Return type
+
+**User**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | User activated successfully. |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
 # **changeUserPassword**
 > void changeUserPassword(changeUserPasswordRequest)
@@ -160,6 +226,69 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | User successfully created. |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **deactivateUser**
+> ResponseActivationURL deactivateUser(deactivateUserRequest)
+
+  Version: 9.7.0.cl or later   Deactivates a user account.  Requires `ADMINISTRATION` (**Can administer Thoughtspot**) privilege.  To deactivate a user account, the API request body must include the following information:  - Username or the GUID of the user account - Base URL of the ThoughtSpot instance  If the API request is successful, ThoughtSpot returns the activation URL in the response. The activation URL is valid for 14 days and can be used to re-activate the account and reset the password of the deactivated account.      
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, UsersApi, DeactivateUserRequest } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new UsersApi(configuration);
+
+apiInstance.deactivateUser(
+  // DeactivateUserRequest
+  {
+    user_identifier: "user_identifier_example",
+    base_url: "base_url_example",
+  } 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **deactivateUserRequest** | **DeactivateUserRequest**|  |
+
+
+### Return type
+
+**ResponseActivationURL**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | User deactivated successfully. |  -  |
 **400** | Invalid request. |  -  |
 **401** | Unauthorized access. |  -  |
 **403** | Forbidden access. |  -  |
@@ -493,10 +622,7 @@ apiInstance.searchUsers(
     ],
     record_offset: 0,
     record_size: 10,
-    sort_options: {
-      field_name: "NAME",
-      order: "ASC",
-    },
+    sort_options: null,
     role_identifiers: [
       "role_identifiers_example",
     ],

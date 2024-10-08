@@ -29,7 +29,7 @@ export class ResponseCustomAction {
     /**
     * Metadata objects to assign the the custom action to.
     */
-    'metadata_association'?: Array<MetadataAssociationItem>;
+    'metadata_association'?: Array<MetadataAssociationItem> | null;
     /**
     * Unique name of the custom action.
     */
@@ -37,7 +37,7 @@ export class ResponseCustomAction {
     /**
     * Unique ID or name of the User groups which are associated with the custom action.
     */
-    'user_groups'?: Array<ObjectIDAndName>;
+    'user_groups'?: Array<ObjectIDAndName> | null;
 
     static readonly discriminator: string | undefined = undefined;
 

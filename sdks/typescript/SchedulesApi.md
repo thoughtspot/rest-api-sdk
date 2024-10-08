@@ -35,44 +35,11 @@ apiInstance.createSchedule(
     metadata_type: "LIVEBOARD",
     metadata_identifier: "metadata_identifier_example",
     file_format: "PDF",
-    liveboard_options: {
-      visualization_identifiers: [
-        "visualization_identifiers_example",
-      ],
-    },
-    pdf_options: {
-      complete_liveboard: true,
-      include_cover_page: true,
-      include_custom_logo: true,
-      include_filter_page: true,
-      include_page_number: true,
-      page_footer_text: "page_footer_text_example",
-      page_orientation: "page_orientation_example",
-      page_size: "A4",
-      truncate_table: true,
-    },
+    liveboard_options: null,
+    pdf_options: null,
     time_zone: "America/Los_Angeles",
-    frequency: {
-      cron_expression: {
-        day_of_month: "day_of_month_example",
-        day_of_week: "day_of_week_example",
-        hour: "hour_example",
-        minute: "minute_example",
-        month: "month_example",
-        second: "second_example",
-      },
-    },
-    recipient_details: {
-      emails: [
-        "emails_example",
-      ],
-      principals: [
-        {
-          identifier: "identifier_example",
-          type: "type_example",
-        },
-      ],
-    },
+    frequency: null,
+    recipient_details: null,
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -202,15 +169,8 @@ apiInstance.searchSchedules(
     ],
     record_offset: 1,
     record_size: 1,
-    sort_options: {
-      field_name: "field_name_example",
-      order: "order_example",
-    },
-    history_runs_options: {
-      include_history_runs: false,
-      record_size: 10,
-      record_offset: 0,
-    },
+    sort_options: null,
+    history_runs_options: null,
     schedule_identifiers: [
       "schedule_identifiers_example",
     ],
@@ -282,44 +242,11 @@ apiInstance.updateSchedule(
     metadata_type: "LIVEBOARD",
     metadata_identifier: "metadata_identifier_example",
     file_format: "CSV",
-    liveboard_options: {
-      visualization_identifiers: [
-        "visualization_identifiers_example",
-      ],
-    },
-    pdf_options: {
-      complete_liveboard: true,
-      include_cover_page: true,
-      include_custom_logo: true,
-      include_filter_page: true,
-      include_page_number: true,
-      page_footer_text: "page_footer_text_example",
-      page_orientation: "page_orientation_example",
-      page_size: "A4",
-      truncate_table: true,
-    },
+    liveboard_options: null,
+    pdf_options: null,
     time_zone: "Africa/Abidjan",
-    frequency: {
-      cron_expression: {
-        day_of_month: "day_of_month_example",
-        day_of_week: "day_of_week_example",
-        hour: "hour_example",
-        minute: "minute_example",
-        month: "month_example",
-        second: "second_example",
-      },
-    },
-    recipient_details: {
-      emails: [
-        "emails_example",
-      ],
-      principals: [
-        {
-          identifier: "identifier_example",
-          type: "type_example",
-        },
-      ],
-    },
+    frequency: null,
+    recipient_details: null,
     status: "ACTIVE",
   } 
 ).then((data:any) => {

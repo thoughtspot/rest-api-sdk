@@ -50,7 +50,7 @@ import org.thoughtspot.client.JSON;
 /**
  * FavoriteMetadataItem
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-03-04T10:25:25.563+05:30[Asia/Kolkata]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-10-08T14:03:41.316769Z[Etc/UTC]")
 public class FavoriteMetadataItem {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
@@ -61,7 +61,7 @@ public class FavoriteMetadataItem {
   private String name;
 
   /**
-   * Type of metadata object.
+   *   Type of metadata object.     Required if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.
    */
   @JsonAdapter(TypeEnum.Adapter.class)
   public enum TypeEnum {
@@ -177,7 +177,7 @@ public class FavoriteMetadataItem {
   }
 
    /**
-   * Type of metadata object.
+   *   Type of metadata object.     Required if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.
    * @return type
   **/
   @javax.annotation.Nonnull

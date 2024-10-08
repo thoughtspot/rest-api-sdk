@@ -10,7 +10,7 @@ Objects to apply the User_Runtime_Sorts.
 |------------ | ------------- | ------------- | -------------|
 |**columnName** | **String** | The column name to apply filter. |  [optional] |
 |**order** | [**OrderEnum**](#OrderEnum) | Order for the sort. |  [optional] |
-|**persist** | **Boolean** | Flag to persist the runtime sorts. |  [optional] |
+|**persist** | **Boolean** | Flag to persist the runtime sorts.    Version: 9.12.0.cl or later  |  [optional] |
 |**objects** | [**List&lt;UserObject&gt;**](UserObject.md) | Object to apply the runtime sort. |  [optional] |
 
 

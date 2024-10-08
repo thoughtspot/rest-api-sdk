@@ -29,15 +29,15 @@ export class RoleResponse {
     /**
     * number of groups assigned with this role
     */
-    'groups_assigned_count'?: number;
+    'groups_assigned_count'?: number | null;
     /**
     * Orgs in which role exists.
     */
-    'orgs'?: Array<GenericInfo>;
+    'orgs'?: Array<GenericInfo> | null;
     /**
     * Details of groups assigned with this role
     */
-    'groups'?: Array<GenericInfo>;
+    'groups'?: Array<GenericInfo> | null;
     /**
     * Privileges granted to the role.
     */
@@ -45,43 +45,43 @@ export class RoleResponse {
     /**
     * Permission details of the Role
     */
-    'permission'?: RoleResponsePermissionEnum;
+    'permission'?: RoleResponsePermissionEnum | null;
     /**
     * Unique identifier of author of the role.
     */
-    'author_id'?: string;
+    'author_id'?: string | null;
     /**
     * Unique identifier of modifier of the role.
     */
-    'modifier_id'?: string;
+    'modifier_id'?: string | null;
     /**
     * Creation time of the role in milliseconds.
     */
-    'creation_time_in_millis'?: any;
+    'creation_time_in_millis'?: any | null;
     /**
     * Last modified time of the role in milliseconds.
     */
-    'modification_time_in_millis'?: any;
+    'modification_time_in_millis'?: any | null;
     /**
     * Indicates whether the role is deleted.
     */
-    'deleted'?: boolean;
+    'deleted'?: boolean | null;
     /**
     * Indicates whether the role is deprecated.
     */
-    'deprecated'?: boolean;
+    'deprecated'?: boolean | null;
     /**
     * Indicates whether the role is external.
     */
-    'external'?: boolean;
+    'external'?: boolean | null;
     /**
     * Indicates whether the role is hidden.
     */
-    'hidden'?: boolean;
+    'hidden'?: boolean | null;
     /**
     * Indicates whether the role is shared via connection
     */
-    'shared_via_connection'?: boolean;
+    'shared_via_connection'?: boolean | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -198,6 +198,6 @@ export class RoleResponse {
 }
 
 
-export type RoleResponsePrivilegesEnum = "USERDATAUPLOADING" | "DATADOWNLOADING" | "DATAMANAGEMENT" | "SHAREWITHALL" | "JOBSCHEDULING" | "A3ANALYSIS" | "EXPERIMENTALFEATUREPRIVILEGE" | "BYPASSRLS" | "DISABLE_PINBOARD_CREATION" | "DEVELOPER" | "APPLICATION_ADMINISTRATION" | "USER_ADMINISTRATION" | "GROUP_ADMINISTRATION" | "SYSTEM_INFO_ADMINISTRATION" | "SYNCMANAGEMENT" | "ORG_ADMINISTRATION" | "ROLE_ADMINISTRATION" | "AUTHENTICATION_ADMINISTRATION" | "BILLING_INFO_ADMINISTRATION" | "CONTROL_TRUSTED_AUTH" | "TAGMANAGEMENT" | "LIVEBOARD_VERIFIER" | "CAN_MANAGE_CUSTOM_CALENDAR" | "CAN_CREATE_OR_EDIT_CONNECTIONS" | "CAN_MANAGE_WORKSHEET_VIEWS_TABLES" ;
+export type RoleResponsePrivilegesEnum = "USERDATAUPLOADING" | "DATADOWNLOADING" | "DATAMANAGEMENT" | "SHAREWITHALL" | "JOBSCHEDULING" | "A3ANALYSIS" | "EXPERIMENTALFEATUREPRIVILEGE" | "BYPASSRLS" | "DISABLE_PINBOARD_CREATION" | "DEVELOPER" | "APPLICATION_ADMINISTRATION" | "USER_ADMINISTRATION" | "GROUP_ADMINISTRATION" | "SYSTEM_INFO_ADMINISTRATION" | "SYNCMANAGEMENT" | "ORG_ADMINISTRATION" | "ROLE_ADMINISTRATION" | "AUTHENTICATION_ADMINISTRATION" | "BILLING_INFO_ADMINISTRATION" | "CONTROL_TRUSTED_AUTH" | "TAGMANAGEMENT" | "LIVEBOARD_VERIFIER" | "CAN_MANAGE_CUSTOM_CALENDAR" | "CAN_CREATE_OR_EDIT_CONNECTIONS" | "CAN_MANAGE_WORKSHEET_VIEWS_TABLES" | "CAN_MANAGE_VERSION_CONTROL" | "THIRDPARTY_ANALYSIS" | "CAN_CREATE_CATALOG" | "ALLOW_NON_EMBED_FULL_APP_ACCESS" | "CAN_ACCESS_ANALYST_STUDIO" | "CAN_MANAGE_ANALYST_STUDIO" | "PREVIEW_DOCUMENT_SEARCH" ;
 export type RoleResponsePermissionEnum = "READ_ONLY" | "MODIFY" | "NO_ACCESS" ;
 

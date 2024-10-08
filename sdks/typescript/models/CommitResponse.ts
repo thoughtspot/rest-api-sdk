@@ -21,23 +21,23 @@ export class CommitResponse {
     /**
     * Comments associated with the commit
     */
-    'comment'?: string;
+    'comment'?: string | null;
     /**
     * Time at which the changes were committed.
     */
-    'commit_time'?: string;
+    'commit_time'?: string | null;
     /**
     * SHA id associated with the commit
     */
-    'commit_id'?: string;
+    'commit_id'?: string | null;
     /**
     * Branch where changes were committed
     */
-    'branch'?: string;
+    'branch'?: string | null;
     /**
     * Files that were pushed as part of this commit
     */
-    'committed_files'?: Array<CommitFileType>;
+    'committed_files'?: Array<CommitFileType> | null;
 
     static readonly discriminator: string | undefined = undefined;
 

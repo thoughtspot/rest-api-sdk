@@ -14,9 +14,9 @@ import { ImportUserType } from '../models/ImportUserType';
 import { HttpFile } from '../http/http';
 
 export class ImportUsersResponse {
-    'users_added'?: Array<ImportUserType>;
-    'users_updated'?: Array<ImportUserType>;
-    'users_deleted'?: Array<ImportUserType>;
+    'users_added'?: Array<ImportUserType> | null;
+    'users_updated'?: Array<ImportUserType> | null;
+    'users_deleted'?: Array<ImportUserType> | null;
 
     static readonly discriminator: string | undefined = undefined;
 

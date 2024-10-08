@@ -13,7 +13,7 @@
 import { HttpFile } from '../http/http';
 
 export class PermissionOfMetadataResponse {
-    'metadata_permission_details'?: any;
+    'metadata_permission_details'?: any | null;
 
     static readonly discriminator: string | undefined = undefined;
 

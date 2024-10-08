@@ -23,6 +23,7 @@ import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import org.openapitools.jackson.nullable.JsonNullable;
 import org.thoughtspot.client.model.FavoriteMetadataItem;
 import org.thoughtspot.client.model.ObjectIDAndName;
 import org.thoughtspot.client.model.Org;
@@ -55,7 +56,7 @@ import org.thoughtspot.client.JSON;
 /**
  * User
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-03-04T10:25:25.563+05:30[Asia/Kolkata]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-10-08T14:03:41.316769Z[Etc/UTC]")
 public class User {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
@@ -184,7 +185,7 @@ public class User {
           return b;
         }
       }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+      return null;
     }
 
     public static class Adapter extends TypeAdapter<AccountTypeEnum> {
@@ -241,7 +242,7 @@ public class User {
           return b;
         }
       }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+      return null;
     }
 
     public static class Adapter extends TypeAdapter<AccountStatusEnum> {
@@ -356,7 +357,7 @@ public class User {
           return b;
         }
       }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+      return null;
     }
 
     public static class Adapter extends TypeAdapter<ParentTypeEnum> {
@@ -1464,9 +1465,20 @@ public class User {
         Objects.equals(this.userParameters, user.userParameters);
   }
 
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
+  }
+
   @Override
   public int hashCode() {
     return Objects.hash(id, name, displayName, visibility, authorId, canChangePassword, completeDetail, creationTimeInMillis, currentOrg, deleted, deprecated, accountType, accountStatus, email, expirationTimeInMillis, external, favoriteMetadata, firstLoginTimeInMillis, groupMask, hidden, homeLiveboard, incompleteDetails, isFirstLogin, modificationTimeInMillis, modifierId, notifyOnShare, onboardingExperienceCompleted, orgs, ownerId, parentType, privileges, showOnboardingExperience, superUser, systemUser, tags, tenantId, userGroups, userInheritedGroups, welcomeEmailSent, orgPrivileges, preferredLocale, extendedProperties, extendedPreferences, userParameters);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override

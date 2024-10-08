@@ -11,6 +11,7 @@ Method | HTTP request | Description
 [**login**](AuthenticationApi.md#login) | **POST** /api/rest/2.0/auth/session/login | 
 [**logout**](AuthenticationApi.md#logout) | **POST** /api/rest/2.0/auth/session/logout | 
 [**revokeToken**](AuthenticationApi.md#revokeToken) | **POST** /api/rest/2.0/auth/token/revoke | 
+[**validateToken**](AuthenticationApi.md#validateToken) | **POST** /api/rest/2.0/auth/token/validate | 
 
 
 # **getCurrentUserInfo**
@@ -145,74 +146,14 @@ apiInstance.getFullAccessToken(
     password: "",
     secret_key: "",
     validity_time_in_sec: 300,
-    org_id: 0,
+    org_id: 1,
     email: "email_example",
     display_name: "display_name_example",
     auto_create: false,
     group_identifiers: [
       "group_identifiers_example",
     ],
-    jwt_user_options: {
-      parameters: [
-        {
-          runtime_filter: {},
-          runtime_sort: {},
-          runtime_param_override: {},
-        },
-      ],
-    },
-    user_parameters: {
-      objects: [
-        {
-          type: "LIVEBOARD",
-          identifier: "identifier_example",
-        },
-      ],
-      runtime_filters: [
-        {
-          column_name: "column_name_example",
-          values: [
-            "values_example",
-          ],
-          operator: "EQ",
-          persist: false,
-          objects: [
-            {
-              type: "LIVEBOARD",
-              identifier: "identifier_example",
-            },
-          ],
-        },
-      ],
-      runtime_sorts: [
-        {
-          column_name: "column_name_example",
-          order: "ASC",
-          persist: false,
-          objects: [
-            {
-              type: "LIVEBOARD",
-              identifier: "identifier_example",
-            },
-          ],
-        },
-      ],
-      parameters: [
-        {
-          name: "name_example",
-          values: [
-            "values_example",
-          ],
-          persist: false,
-          objects: [
-            {
-              type: "LIVEBOARD",
-              identifier: "identifier_example",
-            },
-          ],
-        },
-      ],
-    },
+    user_parameters: null,
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -279,76 +220,14 @@ apiInstance.getObjectAccessToken(
     password: "",
     secret_key: "",
     validity_time_in_sec: 300,
-    org_id: 0,
+    org_id: 1,
     email: "email_example",
     display_name: "display_name_example",
     auto_create: false,
     group_identifiers: [
       "group_identifiers_example",
     ],
-    jwt_user_options: {
-      parameters: [
-        null,
-      ],
-      metadata: [
-        {
-          identifier: "identifier_example",
-          type: "LIVEBOARD",
-        },
-      ],
-    },
-    user_parameters: {
-      objects: [
-        {
-          type: "LIVEBOARD",
-          identifier: "identifier_example",
-        },
-      ],
-      runtime_filters: [
-        {
-          column_name: "column_name_example",
-          values: [
-            "values_example",
-          ],
-          operator: "EQ",
-          persist: false,
-          objects: [
-            {
-              type: "LIVEBOARD",
-              identifier: "identifier_example",
-            },
-          ],
-        },
-      ],
-      runtime_sorts: [
-        {
-          column_name: "column_name_example",
-          order: "ASC",
-          persist: false,
-          objects: [
-            {
-              type: "LIVEBOARD",
-              identifier: "identifier_example",
-            },
-          ],
-        },
-      ],
-      parameters: [
-        {
-          name: "name_example",
-          values: [
-            "values_example",
-          ],
-          persist: false,
-          objects: [
-            {
-              type: "LIVEBOARD",
-              identifier: "identifier_example",
-            },
-          ],
-        },
-      ],
-    },
+    user_parameters: null,
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -565,6 +444,68 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **204** | Token successfully revoked. |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **validateToken**
+> TokenValidationResponse validateToken(validateTokenRequest)
+
+ Version: 9.12.0.cl or later 
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, AuthenticationApi, ValidateTokenRequest } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new AuthenticationApi(configuration);
+
+apiInstance.validateToken(
+  // ValidateTokenRequest
+  {
+    token: "token_example",
+  } 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **validateTokenRequest** | **ValidateTokenRequest**|  |
+
+
+### Return type
+
+**TokenValidationResponse**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Token validation successful. |  -  |
 **400** | Invalid request. |  -  |
 **401** | Unauthorized access. |  -  |
 **403** | Forbidden access. |  -  |

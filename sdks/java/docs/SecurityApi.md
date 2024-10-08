@@ -1,252 +1,294 @@
-# ThoughtSpotRestApiSdk.SecurityApi
+# SecurityApi
 
-All URIs are relative to *CLUSTER_URL*
+All URIs are relative to *https://localhost:443*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**assignChangeAuthor**](SecurityApi.md#assignChangeAuthor) | **POST** /api/rest/2.0/security/metadata/assign | 
-[**fetchPermissionsOfPrincipals**](SecurityApi.md#fetchPermissionsOfPrincipals) | **POST** /api/rest/2.0/security/principals/fetch-permissions | 
-[**fetchPermissionsOnMetadata**](SecurityApi.md#fetchPermissionsOnMetadata) | **POST** /api/rest/2.0/security/metadata/fetch-permissions | 
-[**shareMetadata**](SecurityApi.md#shareMetadata) | **POST** /api/rest/2.0/security/metadata/share | 
+| Method | HTTP request | Description |
+|------------- | ------------- | -------------|
+| [**assignChangeAuthor**](SecurityApi.md#assignChangeAuthor) | **POST** /api/rest/2.0/security/metadata/assign |  |
+| [**fetchPermissionsOfPrincipals**](SecurityApi.md#fetchPermissionsOfPrincipals) | **POST** /api/rest/2.0/security/principals/fetch-permissions |  |
+| [**fetchPermissionsOnMetadata**](SecurityApi.md#fetchPermissionsOnMetadata) | **POST** /api/rest/2.0/security/metadata/fetch-permissions |  |
+| [**shareMetadata**](SecurityApi.md#shareMetadata) | **POST** /api/rest/2.0/security/metadata/share |  |
 
 
+<a id="assignChangeAuthor"></a>
 # **assignChangeAuthor**
 > assignChangeAuthor(assignChangeAuthorRequest)
 
-  Version: 9.0.0.cl or later   Transfers the ownership of one or several objects from one user to another.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+
+
+  Version: 9.0.0.cl or later   Transfers the ownership of one or several objects from one user to another.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
 
 ### Example
+```java
+// Import classes:
+import org.thoughtspot.client.ApiClient;
+import org.thoughtspot.client.ApiException;
+import org.thoughtspot.client.Configuration;
+import org.thoughtspot.client.auth.*;
+import org.thoughtspot.client.models.*;
+import org.thoughtspot.client.api.SecurityApi;
 
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://localhost:443");
+    
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-```typescript
-import { createBearerAuthenticationConfig, SecurityApi, AssignChangeAuthorRequest } from '@thoughtspot/rest-api-sdk';
-
-const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
-    username: "YOUR_USERNAME",
-    password: "YOUR_PASSWORD",
-});
-const apiInstance = new SecurityApi(configuration);
-
-apiInstance.assignChangeAuthor(
-  // AssignChangeAuthorRequest
-  new AssignChangeAuthorRequest() 
-).then((data:any) => {
-  console.log('API called successfully. Returned data: ' + data);
-}).catch((error:any) => console.error(error));
-
-
+    SecurityApi apiInstance = new SecurityApi(defaultClient);
+    AssignChangeAuthorRequest assignChangeAuthorRequest = new AssignChangeAuthorRequest(); // AssignChangeAuthorRequest | 
+    try {
+      apiInstance.assignChangeAuthor(assignChangeAuthorRequest);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling SecurityApi#assignChangeAuthor");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
 ```
-
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **assignChangeAuthorRequest** | **AssignChangeAuthorRequest**|  |
-
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **assignChangeAuthorRequest** | [**AssignChangeAuthorRequest**](AssignChangeAuthorRequest.md)|  | |
 
 ### Return type
 
-void (empty response body)
+null (empty response body)
 
 ### Authorization
 
-[bearerAuth](README.md#bearerAuth)
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**204** | Author assignment for given metadata objects is successful. |  -  |
-**400** | Invalid request. |  -  |
-**401** | Unauthorized access. |  -  |
-**403** | Forbidden access. |  -  |
-**500** | Unexpected error |  -  |
+| **204** | Author assignment for given metadata objects is successful. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
 
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
-
+<a id="fetchPermissionsOfPrincipals"></a>
 # **fetchPermissionsOfPrincipals**
 > PermissionOfPrincipalsResponse fetchPermissionsOfPrincipals(fetchPermissionsOfPrincipalsRequest)
 
-  Version: 9.0.0.cl or later   Fetches object permission details for a given principal object such as a user and group.  Requires view access to the metadata object.  #### Usage guidelines  * To get a list of all metadata objects that a user or group can access, specify the `type` and GUID or name of the principal. * To get permission details for a specific object, add the `type` and GUID or name of the metadata object to your API request.  Upon successful execution, the API returns a list of metadata objects and permission details for each object.        
+
+
+  Version: 9.0.0.cl or later   Fetches object permission details for a given principal object such as a user and group.  Requires view access to the metadata object.  #### Usage guidelines  * To get a list of all metadata objects that a user or group can access, specify the &#x60;type&#x60; and GUID or name of the principal. * To get permission details for a specific object, add the &#x60;type&#x60; and GUID or name of the metadata object to your API request.  Upon successful execution, the API returns a list of metadata objects and permission details for each object.        
 
 ### Example
+```java
+// Import classes:
+import org.thoughtspot.client.ApiClient;
+import org.thoughtspot.client.ApiException;
+import org.thoughtspot.client.Configuration;
+import org.thoughtspot.client.auth.*;
+import org.thoughtspot.client.models.*;
+import org.thoughtspot.client.api.SecurityApi;
 
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://localhost:443");
+    
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-```typescript
-import { createBearerAuthenticationConfig, SecurityApi, FetchPermissionsOfPrincipalsRequest } from '@thoughtspot/rest-api-sdk';
-
-const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
-    username: "YOUR_USERNAME",
-    password: "YOUR_PASSWORD",
-});
-const apiInstance = new SecurityApi(configuration);
-
-apiInstance.fetchPermissionsOfPrincipals(
-  // FetchPermissionsOfPrincipalsRequest
-  new FetchPermissionsOfPrincipalsRequest() 
-).then((data:any) => {
-  console.log('API called successfully. Returned data: ' + data);
-}).catch((error:any) => console.error(error));
-
-
+    SecurityApi apiInstance = new SecurityApi(defaultClient);
+    FetchPermissionsOfPrincipalsRequest fetchPermissionsOfPrincipalsRequest = new FetchPermissionsOfPrincipalsRequest(); // FetchPermissionsOfPrincipalsRequest | 
+    try {
+      PermissionOfPrincipalsResponse result = apiInstance.fetchPermissionsOfPrincipals(fetchPermissionsOfPrincipalsRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling SecurityApi#fetchPermissionsOfPrincipals");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
 ```
-
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **fetchPermissionsOfPrincipalsRequest** | **FetchPermissionsOfPrincipalsRequest**|  |
-
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **fetchPermissionsOfPrincipalsRequest** | [**FetchPermissionsOfPrincipalsRequest**](FetchPermissionsOfPrincipalsRequest.md)|  | |
 
 ### Return type
 
-**PermissionOfPrincipalsResponse**
+[**PermissionOfPrincipalsResponse**](PermissionOfPrincipalsResponse.md)
 
 ### Authorization
 
-[bearerAuth](README.md#bearerAuth)
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Fetching permissions of principals is successful. |  -  |
-**400** | Invalid request. |  -  |
-**401** | Unauthorized access. |  -  |
-**403** | Forbidden access. |  -  |
-**500** | Unexpected error |  -  |
+| **200** | Fetching permissions of principals is successful. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
 
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
-
+<a id="fetchPermissionsOnMetadata"></a>
 # **fetchPermissionsOnMetadata**
 > PermissionOfMetadataResponse fetchPermissionsOnMetadata(fetchPermissionsOnMetadataRequest)
 
-  Version: 9.0.0.cl or later   Fetches permission details for a given metadata object.  Requires view access to the metadata object.  #### Usage guidelines  * To fetch a list of users and groups for a metadata object, specify `type` and GUID or name of the metadata object. * To get permission details for a specific user or group, add `type` and GUID or name of the principal object to your API request.  Upon successful execution, the API returns permission details and principal information for the object specified in the API request.      
+
+
+  Version: 9.0.0.cl or later   Fetches permission details for a given metadata object.  Requires view access to the metadata object.  #### Usage guidelines  * To fetch a list of users and groups for a metadata object, specify &#x60;type&#x60; and GUID or name of the metadata object. * To get permission details for a specific user or group, add &#x60;type&#x60; and GUID or name of the principal object to your API request.  Upon successful execution, the API returns permission details and principal information for the object specified in the API request.      
 
 ### Example
+```java
+// Import classes:
+import org.thoughtspot.client.ApiClient;
+import org.thoughtspot.client.ApiException;
+import org.thoughtspot.client.Configuration;
+import org.thoughtspot.client.auth.*;
+import org.thoughtspot.client.models.*;
+import org.thoughtspot.client.api.SecurityApi;
 
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://localhost:443");
+    
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-```typescript
-import { createBearerAuthenticationConfig, SecurityApi, FetchPermissionsOnMetadataRequest } from '@thoughtspot/rest-api-sdk';
-
-const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
-    username: "YOUR_USERNAME",
-    password: "YOUR_PASSWORD",
-});
-const apiInstance = new SecurityApi(configuration);
-
-apiInstance.fetchPermissionsOnMetadata(
-  // FetchPermissionsOnMetadataRequest
-  new FetchPermissionsOnMetadataRequest() 
-).then((data:any) => {
-  console.log('API called successfully. Returned data: ' + data);
-}).catch((error:any) => console.error(error));
-
-
+    SecurityApi apiInstance = new SecurityApi(defaultClient);
+    FetchPermissionsOnMetadataRequest fetchPermissionsOnMetadataRequest = new FetchPermissionsOnMetadataRequest(); // FetchPermissionsOnMetadataRequest | 
+    try {
+      PermissionOfMetadataResponse result = apiInstance.fetchPermissionsOnMetadata(fetchPermissionsOnMetadataRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling SecurityApi#fetchPermissionsOnMetadata");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
 ```
-
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **fetchPermissionsOnMetadataRequest** | **FetchPermissionsOnMetadataRequest**|  |
-
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **fetchPermissionsOnMetadataRequest** | [**FetchPermissionsOnMetadataRequest**](FetchPermissionsOnMetadataRequest.md)|  | |
 
 ### Return type
 
-**PermissionOfMetadataResponse**
+[**PermissionOfMetadataResponse**](PermissionOfMetadataResponse.md)
 
 ### Authorization
 
-[bearerAuth](README.md#bearerAuth)
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Fetching permissions of metadata objects is successful. |  -  |
-**400** | Invalid request. |  -  |
-**401** | Unauthorized access. |  -  |
-**403** | Forbidden access. |  -  |
-**500** | Unexpected error |  -  |
+| **200** | Fetching permissions of metadata objects is successful. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
 
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
-
+<a id="shareMetadata"></a>
 # **shareMetadata**
 > shareMetadata(shareMetadataRequest)
 
-  Version: 9.0.0.cl or later   Allows sharing one or several metadata objects with users and groups in ThoughtSpot.  Requires edit access to the metadata object.  The API endpoint allows sharing only the following types of metadata objects: * Liveboards * Visualizations * Answers * Worksheets * Views  You can provide `READ_ONLY` or `MODIFY` access when sharing an object with another user or group. With `READ_ONLY` access grants view access to the shared object, whereas `MODIFY` provides edit access.  To prevent a user or group from accessing the shared object, specify the GUID or name of the principal and set `shareMode` to `NO_ACCESS`.      
+
+
+  Version: 9.0.0.cl or later   Allows sharing one or several metadata objects with users and groups in ThoughtSpot.  Requires edit access to the metadata object.  The API endpoint allows sharing only the following types of metadata objects: * Liveboards * Visualizations * Answers * Worksheets * Views  You can provide &#x60;READ_ONLY&#x60; or &#x60;MODIFY&#x60; access when sharing an object with another user or group. With &#x60;READ_ONLY&#x60; access grants view access to the shared object, whereas &#x60;MODIFY&#x60; provides edit access.  To prevent a user or group from accessing the shared object, specify the GUID or name of the principal and set &#x60;shareMode&#x60; to &#x60;NO_ACCESS&#x60;.      
 
 ### Example
+```java
+// Import classes:
+import org.thoughtspot.client.ApiClient;
+import org.thoughtspot.client.ApiException;
+import org.thoughtspot.client.Configuration;
+import org.thoughtspot.client.auth.*;
+import org.thoughtspot.client.models.*;
+import org.thoughtspot.client.api.SecurityApi;
 
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://localhost:443");
+    
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-```typescript
-import { createBearerAuthenticationConfig, SecurityApi, ShareMetadataRequest } from '@thoughtspot/rest-api-sdk';
-
-const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
-    username: "YOUR_USERNAME",
-    password: "YOUR_PASSWORD",
-});
-const apiInstance = new SecurityApi(configuration);
-
-apiInstance.shareMetadata(
-  // ShareMetadataRequest
-  new ShareMetadataRequest() 
-).then((data:any) => {
-  console.log('API called successfully. Returned data: ' + data);
-}).catch((error:any) => console.error(error));
-
-
+    SecurityApi apiInstance = new SecurityApi(defaultClient);
+    ShareMetadataRequest shareMetadataRequest = new ShareMetadataRequest(); // ShareMetadataRequest | 
+    try {
+      apiInstance.shareMetadata(shareMetadataRequest);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling SecurityApi#shareMetadata");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
 ```
-
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **shareMetadataRequest** | **ShareMetadataRequest**|  |
-
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **shareMetadataRequest** | [**ShareMetadataRequest**](ShareMetadataRequest.md)|  | |
 
 ### Return type
 
-void (empty response body)
+null (empty response body)
 
 ### Authorization
 
-[bearerAuth](README.md#bearerAuth)
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**204** | Sharing metadata objects is successful. |  -  |
-**400** | Invalid request. |  -  |
-**401** | Unauthorized access. |  -  |
-**403** | Forbidden access. |  -  |
-**500** | Unexpected error |  -  |
-
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+| **204** | Sharing metadata objects is successful. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
 

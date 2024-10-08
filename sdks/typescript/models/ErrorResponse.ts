@@ -13,7 +13,7 @@
 import { HttpFile } from '../http/http';
 
 export class ErrorResponse {
-    'error'?: any;
+    'error'?: any | null;
 
     static readonly discriminator: string | undefined = undefined;
 

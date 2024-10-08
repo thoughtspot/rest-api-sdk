@@ -1,51 +1,65 @@
-# ThoughtSpotRestApiSdk.DbtApi
+# DbtApi
 
-All URIs are relative to *CLUSTER_URL*
+All URIs are relative to *https://localhost:443*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**dbtConnection**](DbtApi.md#dbtConnection) | **POST** /api/rest/2.0/dbt/dbt-connection | 
-[**dbtGenerateSyncTml**](DbtApi.md#dbtGenerateSyncTml) | **POST** /api/rest/2.0/dbt/generate-sync-tml | 
-[**dbtGenerateTml**](DbtApi.md#dbtGenerateTml) | **POST** /api/rest/2.0/dbt/generate-tml | 
-[**dbtSearch**](DbtApi.md#dbtSearch) | **POST** /api/rest/2.0/dbt/search | 
-[**deleteDbtConnection**](DbtApi.md#deleteDbtConnection) | **POST** /api/rest/2.0/dbt/{dbt_connection_identifier}/delete | 
-[**updateDbtConnection**](DbtApi.md#updateDbtConnection) | **POST** /api/rest/2.0/dbt/update-dbt-connection | 
+| Method | HTTP request | Description |
+|------------- | ------------- | -------------|
+| [**dbtConnection**](DbtApi.md#dbtConnection) | **POST** /api/rest/2.0/dbt/dbt-connection |  |
+| [**dbtGenerateSyncTml**](DbtApi.md#dbtGenerateSyncTml) | **POST** /api/rest/2.0/dbt/generate-sync-tml |  |
+| [**dbtGenerateTml**](DbtApi.md#dbtGenerateTml) | **POST** /api/rest/2.0/dbt/generate-tml |  |
+| [**dbtSearch**](DbtApi.md#dbtSearch) | **POST** /api/rest/2.0/dbt/search |  |
+| [**deleteDbtConnection**](DbtApi.md#deleteDbtConnection) | **POST** /api/rest/2.0/dbt/{dbt_connection_identifier}/delete |  |
+| [**updateDbtConnection**](DbtApi.md#updateDbtConnection) | **POST** /api/rest/2.0/dbt/update-dbt-connection |  |
 
 
+<a id="dbtConnection"></a>
 # **dbtConnection**
 > Object dbtConnection(dbtConnectionRequest)
 
-  Version: 9.9.0.cl or later   Creates a DBT connection object in ThoughtSpot.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege.  #### About create DBT connection DBT connection in ThoughtSpot is used by the user to define DBT credentials for cloud . The API needs  embrace connection, embrace database name, DBT url, import type, DBT account identifier, DBT project identifier, DBT access token and environment details (or) embrace connection, embrace database name, import type, file_content to create a connection object. To know more about DBT, see ThoughtSpot Product Documentation.      
+
+
+  Version: 9.9.0.cl or later   Creates a DBT connection object in ThoughtSpot.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data ThoughtSpot**) privilege.  #### About create DBT connection DBT connection in ThoughtSpot is used by the user to define DBT credentials for cloud . The API needs  embrace connection, embrace database name, DBT url, import type, DBT account identifier, DBT project identifier, DBT access token and environment details (or) embrace connection, embrace database name, import type, file_content to create a connection object. To know more about DBT, see ThoughtSpot Product Documentation.      
 
 ### Example
+```java
+// Import classes:
+import org.thoughtspot.client.ApiClient;
+import org.thoughtspot.client.ApiException;
+import org.thoughtspot.client.Configuration;
+import org.thoughtspot.client.auth.*;
+import org.thoughtspot.client.models.*;
+import org.thoughtspot.client.api.DbtApi;
 
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://localhost:443");
+    
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-```typescript
-import { createBearerAuthenticationConfig, DbtApi, DbtConnectionRequest } from '@thoughtspot/rest-api-sdk';
-
-const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
-    username: "YOUR_USERNAME",
-    password: "YOUR_PASSWORD",
-});
-const apiInstance = new DbtApi(configuration);
-
-apiInstance.dbtConnection(
-  // DbtConnectionRequest
-  new DbtConnectionRequest() 
-).then((data:any) => {
-  console.log('API called successfully. Returned data: ' + data);
-}).catch((error:any) => console.error(error));
-
-
+    DbtApi apiInstance = new DbtApi(defaultClient);
+    DbtConnectionRequest dbtConnectionRequest = new DbtConnectionRequest(); // DbtConnectionRequest | 
+    try {
+      Object result = apiInstance.dbtConnection(dbtConnectionRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DbtApi#dbtConnection");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
 ```
-
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **dbtConnectionRequest** | **DbtConnectionRequest**|  |
-
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **dbtConnectionRequest** | [**DbtConnectionRequest**](DbtConnectionRequest.md)|  | |
 
 ### Return type
 
@@ -53,59 +67,70 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[bearerAuth](README.md#bearerAuth)
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Succesfully created DBT Connection. |  -  |
-**400** | Invalid request. |  -  |
-**401** | Unauthorized access. |  -  |
-**403** | Forbidden access. |  -  |
-**500** | Unexpected error |  -  |
+| **200** | Succesfully created DBT Connection. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
 
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
-
+<a id="dbtGenerateSyncTml"></a>
 # **dbtGenerateSyncTml**
 > Object dbtGenerateSyncTml(dbtGenerateSyncTmlRequest)
 
+
+
  Version: 9.9.0.cl or later 
 
 ### Example
+```java
+// Import classes:
+import org.thoughtspot.client.ApiClient;
+import org.thoughtspot.client.ApiException;
+import org.thoughtspot.client.Configuration;
+import org.thoughtspot.client.auth.*;
+import org.thoughtspot.client.models.*;
+import org.thoughtspot.client.api.DbtApi;
 
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://localhost:443");
+    
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-```typescript
-import { createBearerAuthenticationConfig, DbtApi, DbtGenerateSyncTmlRequest } from '@thoughtspot/rest-api-sdk';
-
-const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
-    username: "YOUR_USERNAME",
-    password: "YOUR_PASSWORD",
-});
-const apiInstance = new DbtApi(configuration);
-
-apiInstance.dbtGenerateSyncTml(
-  // DbtGenerateSyncTmlRequest
-  new DbtGenerateSyncTmlRequest() 
-).then((data:any) => {
-  console.log('API called successfully. Returned data: ' + data);
-}).catch((error:any) => console.error(error));
-
-
+    DbtApi apiInstance = new DbtApi(defaultClient);
+    DbtGenerateSyncTmlRequest dbtGenerateSyncTmlRequest = new DbtGenerateSyncTmlRequest(); // DbtGenerateSyncTmlRequest | 
+    try {
+      Object result = apiInstance.dbtGenerateSyncTml(dbtGenerateSyncTmlRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DbtApi#dbtGenerateSyncTml");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
 ```
-
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **dbtGenerateSyncTmlRequest** | **DbtGenerateSyncTmlRequest**|  |
-
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **dbtGenerateSyncTmlRequest** | [**DbtGenerateSyncTmlRequest**](DbtGenerateSyncTmlRequest.md)|  | |
 
 ### Return type
 
@@ -113,59 +138,70 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[bearerAuth](README.md#bearerAuth)
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Sync Table and Worksheet TML&#39;s are successfully generated. |  -  |
-**400** | Invalid request. |  -  |
-**401** | Unauthorized access. |  -  |
-**403** | Forbidden access. |  -  |
-**500** | Unexpected error |  -  |
+| **200** | Sync Table and Worksheet TML&#39;s are successfully generated. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
 
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
-
+<a id="dbtGenerateTml"></a>
 # **dbtGenerateTml**
 > Object dbtGenerateTml(dbtGenerateTmlRequest)
 
+
+
  Version: 9.9.0.cl or later 
 
 ### Example
+```java
+// Import classes:
+import org.thoughtspot.client.ApiClient;
+import org.thoughtspot.client.ApiException;
+import org.thoughtspot.client.Configuration;
+import org.thoughtspot.client.auth.*;
+import org.thoughtspot.client.models.*;
+import org.thoughtspot.client.api.DbtApi;
 
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://localhost:443");
+    
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-```typescript
-import { createBearerAuthenticationConfig, DbtApi, DbtGenerateTmlRequest } from '@thoughtspot/rest-api-sdk';
-
-const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
-    username: "YOUR_USERNAME",
-    password: "YOUR_PASSWORD",
-});
-const apiInstance = new DbtApi(configuration);
-
-apiInstance.dbtGenerateTml(
-  // DbtGenerateTmlRequest
-  new DbtGenerateTmlRequest() 
-).then((data:any) => {
-  console.log('API called successfully. Returned data: ' + data);
-}).catch((error:any) => console.error(error));
-
-
+    DbtApi apiInstance = new DbtApi(defaultClient);
+    DbtGenerateTmlRequest dbtGenerateTmlRequest = new DbtGenerateTmlRequest(); // DbtGenerateTmlRequest | 
+    try {
+      Object result = apiInstance.dbtGenerateTml(dbtGenerateTmlRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DbtApi#dbtGenerateTml");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
 ```
-
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **dbtGenerateTmlRequest** | **DbtGenerateTmlRequest**|  |
-
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **dbtGenerateTmlRequest** | [**DbtGenerateTmlRequest**](DbtGenerateTmlRequest.md)|  | |
 
 ### Return type
 
@@ -173,173 +209,207 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[bearerAuth](README.md#bearerAuth)
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Required Table and Worksheet TML&#39;s are successfully generated. |  -  |
-**400** | Invalid request. |  -  |
-**401** | Unauthorized access. |  -  |
-**403** | Forbidden access. |  -  |
-**500** | Unexpected error |  -  |
+| **200** | Required Table and Worksheet TML&#39;s are successfully generated. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
 
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
-
+<a id="dbtSearch"></a>
 # **dbtSearch**
-> List<DbtSearchResponse> dbtSearch()
+> List&lt;DbtSearchResponse&gt; dbtSearch()
 
-  Version: 9.9.0.cl or later   Gets a list of DBT connection objects by user and organization, available on the ThoughtSpot system.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege  #### About search DBT connection To get details of a specific DBT connection identifier, database connection identifier, database connection name, database name, project name, project identifier, environment identifier , import type and author.      
+
+
+  Version: 9.9.0.cl or later   Gets a list of DBT connection objects by user and organization, available on the ThoughtSpot system.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data ThoughtSpot**) privilege  #### About search DBT connection To get details of a specific DBT connection identifier, database connection identifier, database connection name, database name, project name, project identifier, environment identifier , import type and author.      
 
 ### Example
+```java
+// Import classes:
+import org.thoughtspot.client.ApiClient;
+import org.thoughtspot.client.ApiException;
+import org.thoughtspot.client.Configuration;
+import org.thoughtspot.client.auth.*;
+import org.thoughtspot.client.models.*;
+import org.thoughtspot.client.api.DbtApi;
 
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://localhost:443");
+    
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-```typescript
-import { createBearerAuthenticationConfig, DbtApi, DbtSearchRequest } from '@thoughtspot/rest-api-sdk';
-
-const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
-    username: "YOUR_USERNAME",
-    password: "YOUR_PASSWORD",
-});
-const apiInstance = new DbtApi(configuration);
-
-apiInstance.dbtSearch().then((data:any) => {
-  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
-}).catch((error:any) => console.error(error));
-
-
+    DbtApi apiInstance = new DbtApi(defaultClient);
+    try {
+      List<DbtSearchResponse> result = apiInstance.dbtSearch();
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DbtApi#dbtSearch");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
 ```
-
 
 ### Parameters
 This endpoint does not need any parameter.
 
-
 ### Return type
 
-**List<DbtSearchResponse>**
+[**List&lt;DbtSearchResponse&gt;**](DbtSearchResponse.md)
 
 ### Authorization
 
-[bearerAuth](README.md#bearerAuth)
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Retrieved list of DBT connections successfully. |  -  |
-**400** | Invalid request. |  -  |
-**401** | Unauthorized access. |  -  |
-**403** | Forbidden access. |  -  |
-**500** | Unexpected error |  -  |
+| **200** | Retrieved list of DBT connections successfully. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
 
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
-
+<a id="deleteDbtConnection"></a>
 # **deleteDbtConnection**
 > deleteDbtConnection(dbtConnectionIdentifier)
 
-  Version: 9.9.0.cl or later   Removes the specified DBT connection object from the ThoughtSpot system.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege.      
+
+
+  Version: 9.9.0.cl or later   Removes the specified DBT connection object from the ThoughtSpot system.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DATAMANAGEMENT&#x60; (**Can manage data ThoughtSpot**) privilege.      
 
 ### Example
+```java
+// Import classes:
+import org.thoughtspot.client.ApiClient;
+import org.thoughtspot.client.ApiException;
+import org.thoughtspot.client.Configuration;
+import org.thoughtspot.client.auth.*;
+import org.thoughtspot.client.models.*;
+import org.thoughtspot.client.api.DbtApi;
 
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://localhost:443");
+    
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-```typescript
-import { createBearerAuthenticationConfig, DbtApi, DeleteDbtConnectionRequest } from '@thoughtspot/rest-api-sdk';
-
-const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
-    username: "YOUR_USERNAME",
-    password: "YOUR_PASSWORD",
-});
-const apiInstance = new DbtApi(configuration);
-
-apiInstance.deleteDbtConnection(
-  // String | Unique ID of the DBT Connection.
-  "dbtConnectionIdentifier_example" 
-).then((data:any) => {
-  console.log('API called successfully. Returned data: ' + data);
-}).catch((error:any) => console.error(error));
-
-
+    DbtApi apiInstance = new DbtApi(defaultClient);
+    String dbtConnectionIdentifier = "dbtConnectionIdentifier_example"; // String | Unique ID of the DBT Connection.
+    try {
+      apiInstance.deleteDbtConnection(dbtConnectionIdentifier);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DbtApi#deleteDbtConnection");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
 ```
-
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **dbtConnectionIdentifier** | **String**| Unique ID of the DBT Connection. |
-
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **dbtConnectionIdentifier** | **String**| Unique ID of the DBT Connection. | |
 
 ### Return type
 
-void (empty response body)
+null (empty response body)
 
 ### Authorization
 
-[bearerAuth](README.md#bearerAuth)
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**204** | DBT Connection successfully deleted. |  -  |
-**400** | Invalid request. |  -  |
-**401** | Unauthorized access. |  -  |
-**403** | Forbidden access. |  -  |
-**500** | Unexpected error |  -  |
+| **204** | DBT Connection successfully deleted. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
 
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
-
+<a id="updateDbtConnection"></a>
 # **updateDbtConnection**
 > Object updateDbtConnection(updateDbtConnectionRequest)
 
-  Version: 9.9.0.cl or later   Updates a DBT connection object.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege, along with an existing DBT connection.  #### About update DBT connection You can modify DBT connection object properties such as embrace connection name, embrace database name, import type, account identifier, access token, project identifier and environment (or) embrace connection, embrace database name, import type, file_content settings.      
+
+
+  Version: 9.9.0.cl or later   Updates a DBT connection object.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data ThoughtSpot**) privilege, along with an existing DBT connection.  #### About update DBT connection You can modify DBT connection object properties such as embrace connection name, embrace database name, import type, account identifier, access token, project identifier and environment (or) embrace connection, embrace database name, import type, file_content settings.      
 
 ### Example
+```java
+// Import classes:
+import org.thoughtspot.client.ApiClient;
+import org.thoughtspot.client.ApiException;
+import org.thoughtspot.client.Configuration;
+import org.thoughtspot.client.auth.*;
+import org.thoughtspot.client.models.*;
+import org.thoughtspot.client.api.DbtApi;
 
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://localhost:443");
+    
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-```typescript
-import { createBearerAuthenticationConfig, DbtApi, UpdateDbtConnectionRequest } from '@thoughtspot/rest-api-sdk';
-
-const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
-    username: "YOUR_USERNAME",
-    password: "YOUR_PASSWORD",
-});
-const apiInstance = new DbtApi(configuration);
-
-apiInstance.updateDbtConnection(
-  // UpdateDbtConnectionRequest
-  new UpdateDbtConnectionRequest() 
-).then((data:any) => {
-  console.log('API called successfully. Returned data: ' + data);
-}).catch((error:any) => console.error(error));
-
-
+    DbtApi apiInstance = new DbtApi(defaultClient);
+    UpdateDbtConnectionRequest updateDbtConnectionRequest = new UpdateDbtConnectionRequest(); // UpdateDbtConnectionRequest | 
+    try {
+      Object result = apiInstance.updateDbtConnection(updateDbtConnectionRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DbtApi#updateDbtConnection");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
 ```
-
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **updateDbtConnectionRequest** | **UpdateDbtConnectionRequest**|  |
-
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **updateDbtConnectionRequest** | [**UpdateDbtConnectionRequest**](UpdateDbtConnectionRequest.md)|  | |
 
 ### Return type
 
@@ -347,22 +417,19 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[bearerAuth](README.md#bearerAuth)
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | DBT Connection successfully updated. |  -  |
-**400** | Invalid request. |  -  |
-**401** | Unauthorized access. |  -  |
-**403** | Forbidden access. |  -  |
-**500** | Unexpected error |  -  |
-
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+| **200** | DBT Connection successfully updated. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
 

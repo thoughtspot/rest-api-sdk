@@ -22,7 +22,7 @@ export class FavoriteMetadataItem {
     */
     'name': string;
     /**
-    * Type of metadata object.
+    *   Type of metadata object.     Required if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.
     */
     'type': FavoriteMetadataItemTypeEnum;
 

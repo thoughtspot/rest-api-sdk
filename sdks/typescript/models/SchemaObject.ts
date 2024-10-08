@@ -21,7 +21,7 @@ export class SchemaObject {
     /**
     * Tables in the schema.
     */
-    'tables'?: Array<Table>;
+    'tables'?: Array<Table> | null;
 
     static readonly discriminator: string | undefined = undefined;
 

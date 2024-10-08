@@ -19,11 +19,11 @@ export class ActionConfigInputCreate {
     /**
     * Position of the Custom action on the Metadata object. Earlier naming convention: context.
     */
-    'position'?: ActionConfigInputCreatePositionEnum;
+    'position'?: ActionConfigInputCreatePositionEnum | null;
     /**
     * Visibility of the metadata association with custom action. Earlier naming convention: enabled
     */
-    'visibility'?: boolean;
+    'visibility'?: boolean | null;
 
     static readonly discriminator: string | undefined = undefined;
 

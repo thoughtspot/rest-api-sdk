@@ -54,7 +54,7 @@ import org.thoughtspot.client.JSON;
 /**
  * ExportMetadataTMLRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-03-04T10:25:25.563+05:30[Asia/Kolkata]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-10-08T14:03:41.316769Z[Etc/UTC]")
 public class ExportMetadataTMLRequest {
   public static final String SERIALIZED_NAME_METADATA = "metadata";
   @SerializedName(SERIALIZED_NAME_METADATA)
@@ -69,7 +69,7 @@ public class ExportMetadataTMLRequest {
   private Boolean exportFqn = false;
 
   /**
-   * TML EDOC content format.
+   * TML EDOC content format. **Note: exporting in YAML format currently requires manual formatting of the output. For more details on the workaround, please click [here](https://developers.thoughtspot.com/docs/known-issues#_version_9_12_0_cl)**
    */
   @JsonAdapter(EdocFormatEnum.Adapter.class)
   public enum EdocFormatEnum {
@@ -120,10 +120,12 @@ public class ExportMetadataTMLRequest {
   private EdocFormatEnum edocFormat = EdocFormatEnum.JSON;
 
   /**
-   * Indicates whether to export worksheet TML in V1 or V2 version.
+   * Indicates whether to export worksheet TML in DEFAULT or V1 or V2 version.
    */
   @JsonAdapter(ExportSchemaVersionEnum.Adapter.class)
   public enum ExportSchemaVersionEnum {
+    DEFAULT("DEFAULT"),
+    
     V1("V1"),
     
     V2("V2");
@@ -168,7 +170,7 @@ public class ExportMetadataTMLRequest {
 
   public static final String SERIALIZED_NAME_EXPORT_SCHEMA_VERSION = "export_schema_version";
   @SerializedName(SERIALIZED_NAME_EXPORT_SCHEMA_VERSION)
-  private ExportSchemaVersionEnum exportSchemaVersion = ExportSchemaVersionEnum.V1;
+  private ExportSchemaVersionEnum exportSchemaVersion = ExportSchemaVersionEnum.DEFAULT;
 
   public static final String SERIALIZED_NAME_EXPORT_DEPENDENT = "export_dependent";
   @SerializedName(SERIALIZED_NAME_EXPORT_DEPENDENT)
@@ -177,6 +179,10 @@ public class ExportMetadataTMLRequest {
   public static final String SERIALIZED_NAME_EXPORT_CONNECTION_AS_DEPENDENT = "export_connection_as_dependent";
   @SerializedName(SERIALIZED_NAME_EXPORT_CONNECTION_AS_DEPENDENT)
   private Boolean exportConnectionAsDependent = false;
+
+  public static final String SERIALIZED_NAME_ALL_ORGS_OVERRIDE = "all_orgs_override";
+  @SerializedName(SERIALIZED_NAME_ALL_ORGS_OVERRIDE)
+  private Boolean allOrgsOverride = false;
 
   public ExportMetadataTMLRequest() {
   }
@@ -259,7 +265,7 @@ public class ExportMetadataTMLRequest {
   }
 
    /**
-   * TML EDOC content format.
+   * TML EDOC content format. **Note: exporting in YAML format currently requires manual formatting of the output. For more details on the workaround, please click [here](https://developers.thoughtspot.com/docs/known-issues#_version_9_12_0_cl)**
    * @return edocFormat
   **/
   @javax.annotation.Nullable
@@ -280,7 +286,7 @@ public class ExportMetadataTMLRequest {
   }
 
    /**
-   * Indicates whether to export worksheet TML in V1 or V2 version.
+   * Indicates whether to export worksheet TML in DEFAULT or V1 or V2 version.
    * @return exportSchemaVersion
   **/
   @javax.annotation.Nullable
@@ -336,6 +342,27 @@ public class ExportMetadataTMLRequest {
   }
 
 
+  public ExportMetadataTMLRequest allOrgsOverride(Boolean allOrgsOverride) {
+    
+    this.allOrgsOverride = allOrgsOverride;
+    return this;
+  }
+
+   /**
+   * Indicates whether to export is happening from all orgs context.
+   * @return allOrgsOverride
+  **/
+  @javax.annotation.Nullable
+  public Boolean getAllOrgsOverride() {
+    return allOrgsOverride;
+  }
+
+
+  public void setAllOrgsOverride(Boolean allOrgsOverride) {
+    this.allOrgsOverride = allOrgsOverride;
+  }
+
+
 
   @Override
   public boolean equals(Object o) {
@@ -352,7 +379,8 @@ public class ExportMetadataTMLRequest {
         Objects.equals(this.edocFormat, exportMetadataTMLRequest.edocFormat) &&
         Objects.equals(this.exportSchemaVersion, exportMetadataTMLRequest.exportSchemaVersion) &&
         Objects.equals(this.exportDependent, exportMetadataTMLRequest.exportDependent) &&
-        Objects.equals(this.exportConnectionAsDependent, exportMetadataTMLRequest.exportConnectionAsDependent);
+        Objects.equals(this.exportConnectionAsDependent, exportMetadataTMLRequest.exportConnectionAsDependent) &&
+        Objects.equals(this.allOrgsOverride, exportMetadataTMLRequest.allOrgsOverride);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -361,7 +389,7 @@ public class ExportMetadataTMLRequest {
 
   @Override
   public int hashCode() {
-    return Objects.hash(metadata, exportAssociated, exportFqn, edocFormat, exportSchemaVersion, exportDependent, exportConnectionAsDependent);
+    return Objects.hash(metadata, exportAssociated, exportFqn, edocFormat, exportSchemaVersion, exportDependent, exportConnectionAsDependent, allOrgsOverride);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -382,6 +410,7 @@ public class ExportMetadataTMLRequest {
     sb.append("    exportSchemaVersion: ").append(toIndentedString(exportSchemaVersion)).append("\n");
     sb.append("    exportDependent: ").append(toIndentedString(exportDependent)).append("\n");
     sb.append("    exportConnectionAsDependent: ").append(toIndentedString(exportConnectionAsDependent)).append("\n");
+    sb.append("    allOrgsOverride: ").append(toIndentedString(allOrgsOverride)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -411,6 +440,7 @@ public class ExportMetadataTMLRequest {
     openapiFields.add("export_schema_version");
     openapiFields.add("export_dependent");
     openapiFields.add("export_connection_as_dependent");
+    openapiFields.add("all_orgs_override");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();

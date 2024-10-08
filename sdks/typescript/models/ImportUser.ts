@@ -25,51 +25,51 @@ export class ImportUser {
     /**
     * Password of the user.
     */
-    'password'?: string;
+    'password'?: string | null;
     /**
     * Type of the user account.
     */
-    'account_type'?: ImportUserAccountTypeEnum;
+    'account_type'?: ImportUserAccountTypeEnum | null;
     /**
     * Status of the user account.
     */
-    'account_status'?: ImportUserAccountStatusEnum;
+    'account_status'?: ImportUserAccountStatusEnum | null;
     /**
     * Email address of the user.
     */
-    'email'?: string;
+    'email'?: string | null;
     /**
     * ID or name of the Orgs to which the user belongs.
     */
-    'org_identifiers'?: Array<string>;
+    'org_identifiers'?: Array<string> | null;
     /**
     * ID or name of the groups to which the user belongs.
     */
-    'group_identifiers'?: Array<string>;
+    'group_identifiers'?: Array<string> | null;
     /**
     * Visibility of the users. The SHARABLE property makes a user visible to other users and group, who can share objects with the user.
     */
-    'visibility'?: ImportUserVisibilityEnum;
+    'visibility'?: ImportUserVisibilityEnum | null;
     /**
     * Notify user when other users or groups share metadata objects
     */
-    'notify_on_share'?: boolean;
+    'notify_on_share'?: boolean | null;
     /**
     * Show or hide the new user onboarding walkthroughs
     */
-    'show_onboarding_experience'?: boolean;
+    'show_onboarding_experience'?: boolean | null;
     /**
     * Revisit the new user onboarding walkthroughs
     */
-    'onboarding_experience_completed'?: boolean;
+    'onboarding_experience_completed'?: boolean | null;
     /**
     * Unique ID or name of the default Liveboard assigned to the user.
     */
-    'home_liveboard_identifier'?: string;
+    'home_liveboard_identifier'?: string | null;
     /**
     * Metadata objects to add to the user\'s favorites list.
     */
-    'favorite_metadata'?: Array<FavoriteMetadataInput>;
+    'favorite_metadata'?: Array<FavoriteMetadataInput> | null;
 
     static readonly discriminator: string | undefined = undefined;
 

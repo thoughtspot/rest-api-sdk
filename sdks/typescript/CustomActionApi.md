@@ -31,33 +31,7 @@ apiInstance.createCustomAction(
   // CreateCustomActionRequest
   {
     name: "name_example",
-    action_details: {
-      CALLBACK: {
-        reference: "reference_example",
-      },
-      URL: {
-        authentication: {
-          API_Key: {
-            key: "key_example",
-            value: "value_example",
-          },
-          Basic_Auth: {
-            password: "password_example",
-            username: "username_example",
-          },
-          Bearer_Token: "Bearer_Token_example",
-          No_Auth: "No_Auth_example",
-        },
-        parameters: [
-          {
-            key: "key_example",
-            value: "value_example",
-          },
-        ],
-        url: "url_example",
-        reference: "reference_example",
-      },
-    },
+    action_details: null,
     associate_metadata: [
       {
         action_config: {
@@ -68,9 +42,7 @@ apiInstance.createCustomAction(
         type: "VISUALIZATION",
       },
     ],
-    default_action_config: {
-      visibility: true,
-    },
+    default_action_config: null,
     group_identifiers: [
       "group_identifiers_example",
     ],
@@ -197,9 +169,7 @@ apiInstance.searchCustomActions(
   {
     custom_action_identifier: "custom_action_identifier_example",
     name_pattern: "name_pattern_example",
-    default_action_config: {
-      visibility: true,
-    },
+    default_action_config: null,
     include_group_associations: false,
     include_metadata_associations: false,
     metadata: [
@@ -272,33 +242,7 @@ apiInstance.updateCustomAction(
   "custom_action_identifier_example" , 
   // UpdateCustomActionRequest
   {
-    action_details: {
-      CALLBACK: {
-        reference: "reference_example",
-      },
-      URL: {
-        authentication: {
-          API_Key: {
-            key: "key_example",
-            value: "value_example",
-          },
-          Basic_Auth: {
-            password: "password_example",
-            username: "username_example",
-          },
-          Bearer_Token: "Bearer_Token_example",
-          No_Auth: "No_Auth_example",
-        },
-        parameters: [
-          {
-            key: "key_example",
-            value: "value_example",
-          },
-        ],
-        url: "url_example",
-        reference: "reference_example",
-      },
-    },
+    action_details: null,
     associate_metadata: [
       {
         action_config: {
@@ -309,9 +253,7 @@ apiInstance.updateCustomAction(
         type: "VISUALIZATION",
       },
     ],
-    default_action_config: {
-      visibility: true,
-    },
+    default_action_config: null,
     group_identifiers: [
       "group_identifiers_example",
     ],

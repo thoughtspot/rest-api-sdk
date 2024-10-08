@@ -54,7 +54,7 @@ import org.thoughtspot.client.JSON;
 /**
  * DbtGenerateTmlRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-03-04T10:25:25.563+05:30[Asia/Kolkata]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-10-08T14:03:41.316769Z[Etc/UTC]")
 public class DbtGenerateTmlRequest {
   public static final String SERIALIZED_NAME_DBT_CONNECTION_IDENTIFIER = "dbt_connection_identifier";
   @SerializedName(SERIALIZED_NAME_DBT_CONNECTION_IDENTIFIER)

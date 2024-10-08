@@ -53,7 +53,7 @@ import org.thoughtspot.client.JSON;
 /**
  * ImportMetadataTMLRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-03-04T10:25:25.563+05:30[Asia/Kolkata]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-10-08T14:03:41.316769Z[Etc/UTC]")
 public class ImportMetadataTMLRequest {
   public static final String SERIALIZED_NAME_METADATA_TMLS = "metadata_tmls";
   @SerializedName(SERIALIZED_NAME_METADATA_TMLS)
@@ -68,7 +68,9 @@ public class ImportMetadataTMLRequest {
     
     ALL_OR_NONE("ALL_OR_NONE"),
     
-    VALIDATE_ONLY("VALIDATE_ONLY");
+    VALIDATE_ONLY("VALIDATE_ONLY"),
+    
+    PARTIAL_OBJECT("PARTIAL_OBJECT");
 
     private String value;
 
@@ -116,6 +118,10 @@ public class ImportMetadataTMLRequest {
   @SerializedName(SERIALIZED_NAME_CREATE_NEW)
   private Boolean createNew = false;
 
+  public static final String SERIALIZED_NAME_ALL_ORGS_CONTEXT = "all_orgs_context";
+  @SerializedName(SERIALIZED_NAME_ALL_ORGS_CONTEXT)
+  private Boolean allOrgsContext = false;
+
   public ImportMetadataTMLRequest() {
   }
 
@@ -134,7 +140,7 @@ public class ImportMetadataTMLRequest {
   }
 
    /**
-   * Details of TML objects.
+   * Details of TML objects. **Note: importing TML in YAML format, when coming directly from our Playground, is currently requires manual formatting. For more details on the workaround, please click [here](https://developers.thoughtspot.com/docs/known-issues#_version_9_12_0_cl)**
    * @return metadataTmls
   **/
   @javax.annotation.Nonnull
@@ -190,6 +196,27 @@ public class ImportMetadataTMLRequest {
   }
 
 
+  public ImportMetadataTMLRequest allOrgsContext(Boolean allOrgsContext) {
+    
+    this.allOrgsContext = allOrgsContext;
+    return this;
+  }
+
+   /**
+   * If import is happening from all orgs context.
+   * @return allOrgsContext
+  **/
+  @javax.annotation.Nullable
+  public Boolean getAllOrgsContext() {
+    return allOrgsContext;
+  }
+
+
+  public void setAllOrgsContext(Boolean allOrgsContext) {
+    this.allOrgsContext = allOrgsContext;
+  }
+
+
 
   @Override
   public boolean equals(Object o) {
@@ -202,7 +229,8 @@ public class ImportMetadataTMLRequest {
     ImportMetadataTMLRequest importMetadataTMLRequest = (ImportMetadataTMLRequest) o;
     return Objects.equals(this.metadataTmls, importMetadataTMLRequest.metadataTmls) &&
         Objects.equals(this.importPolicy, importMetadataTMLRequest.importPolicy) &&
-        Objects.equals(this.createNew, importMetadataTMLRequest.createNew);
+        Objects.equals(this.createNew, importMetadataTMLRequest.createNew) &&
+        Objects.equals(this.allOrgsContext, importMetadataTMLRequest.allOrgsContext);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -211,7 +239,7 @@ public class ImportMetadataTMLRequest {
 
   @Override
   public int hashCode() {
-    return Objects.hash(metadataTmls, importPolicy, createNew);
+    return Objects.hash(metadataTmls, importPolicy, createNew, allOrgsContext);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -228,6 +256,7 @@ public class ImportMetadataTMLRequest {
     sb.append("    metadataTmls: ").append(toIndentedString(metadataTmls)).append("\n");
     sb.append("    importPolicy: ").append(toIndentedString(importPolicy)).append("\n");
     sb.append("    createNew: ").append(toIndentedString(createNew)).append("\n");
+    sb.append("    allOrgsContext: ").append(toIndentedString(allOrgsContext)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -253,6 +282,7 @@ public class ImportMetadataTMLRequest {
     openapiFields.add("metadata_tmls");
     openapiFields.add("import_policy");
     openapiFields.add("create_new");
+    openapiFields.add("all_orgs_context");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();

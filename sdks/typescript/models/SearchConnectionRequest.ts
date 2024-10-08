@@ -11,7 +11,7 @@
  */
 
 import { ConnectionInput } from '../models/ConnectionInput';
-import { SortOptionInput } from '../models/SortOptionInput';
+import { SearchConnectionRequestSortOptions } from '../models/SearchConnectionRequestSortOptions';
 import { HttpFile } from '../http/http';
 
 export class SearchConnectionRequest {
@@ -39,7 +39,7 @@ export class SearchConnectionRequest {
     * Data warehouse object type.
     */
     'data_warehouse_object_type'?: SearchConnectionRequestDataWarehouseObjectTypeEnum;
-    'sort_options'?: SortOptionInput;
+    'sort_options'?: SearchConnectionRequestSortOptions;
     /**
     * Indicates whether to include complete details of the connection objects.
     */
@@ -95,7 +95,7 @@ export class SearchConnectionRequest {
         {
             "name": "sort_options",
             "baseName": "sort_options",
-            "type": "SortOptionInput",
+            "type": "SearchConnectionRequestSortOptions",
             "format": ""
         },
         {
@@ -126,7 +126,7 @@ export class SearchConnectionRequest {
 }
 
 
-export type SearchConnectionRequestDataWarehouseTypesEnum = "SNOWFLAKE" | "AMAZON_REDSHIFT" | "GOOGLE_BIGQUERY" | "AZURE_SYNAPSE" | "TERADATA" | "SAP_HANA" | "STARBURST" | "ORACLE_ADW" | "DATABRICKS" | "DENODO" | "DREMIO" | "TRINO" | "PRESTO" | "POSTGRES" | "SQLSERVER" | "MYSQL" | "GENERIC_JDBC" | "AMAZON_RDS_POSTGRESQL" | "AMAZON_AURORA_POSTGRESQL" | "AMAZON_RDS_MYSQL" | "AMAZON_AURORA_MYSQL" | "LOOKER" | "AMAZON_ATHENA" | "SINGLESTORE" | "GCP_SQLSERVER" | "GCP_ALLOYDB_POSTGRESQL" | "GCP_POSTGRESQL" | "GCP_MYSQL" | "MODE" | "RDBMS_LOOKER_ML" ;
+export type SearchConnectionRequestDataWarehouseTypesEnum = "SNOWFLAKE" | "AMAZON_REDSHIFT" | "GOOGLE_BIGQUERY" | "AZURE_SYNAPSE" | "TERADATA" | "SAP_HANA" | "STARBURST" | "ORACLE_ADW" | "DATABRICKS" | "DENODO" | "DREMIO" | "TRINO" | "PRESTO" | "POSTGRES" | "SQLSERVER" | "MYSQL" | "GENERIC_JDBC" | "AMAZON_RDS_POSTGRESQL" | "AMAZON_AURORA_POSTGRESQL" | "AMAZON_RDS_MYSQL" | "AMAZON_AURORA_MYSQL" | "LOOKER" | "AMAZON_ATHENA" | "SINGLESTORE" | "GCP_SQLSERVER" | "GCP_ALLOYDB_POSTGRESQL" | "GCP_POSTGRESQL" | "GCP_MYSQL" | "MODE" | "GOOGLE_SHEETS" ;
 export type SearchConnectionRequestDataWarehouseObjectTypeEnum = "DATABASE" | "SCHEMA" | "TABLE" | "COLUMN" ;
 export type SearchConnectionRequestAuthenticationTypeEnum = "SERVICE_ACCOUNT" | "OAUTH" | "IAM" | "EXTOAUTH" ;
 

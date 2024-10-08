@@ -16,11 +16,11 @@ export class FavoriteMetadataInput {
     /**
     * Unique ID or name of the metadata object.
     */
-    'identifier'?: string;
+    'identifier'?: string | null;
     /**
-    * Type of metadata object.
+    *   Type of metadata object.     Required if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.
     */
-    'type'?: FavoriteMetadataInputTypeEnum;
+    'type'?: FavoriteMetadataInputTypeEnum | null;
 
     static readonly discriminator: string | undefined = undefined;
 

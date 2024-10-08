@@ -48,7 +48,7 @@
 | GCP_POSTGRESQL | &quot;GCP_POSTGRESQL&quot; |
 | GCP_MYSQL | &quot;GCP_MYSQL&quot; |
 | MODE | &quot;MODE&quot; |
-| RDBMS_LOOKER_ML | &quot;RDBMS_LOOKER_ML&quot; |
+| GOOGLE_SHEETS | &quot;GOOGLE_SHEETS&quot; |
 
 
 

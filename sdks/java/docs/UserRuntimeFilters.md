@@ -11,7 +11,7 @@ Objects to apply the User_Runtime_Filters.
 |**columnName** | **String** | The column name to apply filter. |  |
 |**values** | **List&lt;String&gt;** | Value of the filters. |  |
 |**operator** | [**OperatorEnum**](#OperatorEnum) | Operator value. Example: EQ |  |
-|**persist** | **Boolean** | Flag to persist the runtime filters. |  [optional] |
+|**persist** | **Boolean** | Flag to persist the runtime filters.    Version: 9.12.0.cl or later  |  [optional] |
 |**objects** | [**List&lt;UserObject&gt;**](UserObject.md) | Object to apply the runtime filter. |  [optional] |
 
 

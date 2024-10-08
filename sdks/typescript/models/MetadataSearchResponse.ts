@@ -19,11 +19,11 @@ export class MetadataSearchResponse {
     /**
     * Unique identifier of the metadata.
     */
-    'metadata_id'?: string;
+    'metadata_id'?: string | null;
     /**
     * Name of the metadata.
     */
-    'metadata_name'?: string;
+    'metadata_name'?: string | null;
     /**
     * Type of the metadata.
     */
@@ -31,27 +31,27 @@ export class MetadataSearchResponse {
     /**
     * Details of dependent objects of the metadata objects.
     */
-    'dependent_objects'?: any;
+    'dependent_objects'?: any | null;
     /**
     * Details of incomplete information of the metadata objects if any.
     */
-    'incomplete_objects'?: Array<any>;
+    'incomplete_objects'?: Array<any> | null;
     /**
     * Complete details of the metadata objects.
     */
-    'metadata_detail'?: any;
+    'metadata_detail'?: any | null;
     /**
     * Header information of the metadata objects.
     */
-    'metadata_header'?: any;
+    'metadata_header'?: any | null;
     /**
     * Visualization header information of the metadata objects.
     */
-    'visualization_headers'?: Array<any>;
+    'visualization_headers'?: Array<any> | null;
     /**
     * Stats of the metadata object. Includes views, favorites, last_accessed.
     */
-    'stats'?: any;
+    'stats'?: any | null;
 
     static readonly discriminator: string | undefined = undefined;
 

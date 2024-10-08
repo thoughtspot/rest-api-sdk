@@ -13,7 +13,7 @@
 import { HttpFile } from '../http/http';
 
 export class MetadataResponse {
-    'name'?: string;
+    'name'?: string | null;
     'id': string;
     'type': MetadataResponseTypeEnum;
 

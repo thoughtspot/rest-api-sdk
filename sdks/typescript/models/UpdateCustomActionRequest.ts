@@ -10,18 +10,18 @@
  * Do not edit the class manually.
  */
 
-import { ActionDetailsInput } from '../models/ActionDetailsInput';
 import { AssociateMetadataInput } from '../models/AssociateMetadataInput';
-import { DefaultActionConfigInput } from '../models/DefaultActionConfigInput';
+import { UpdateCustomActionRequestActionDetails } from '../models/UpdateCustomActionRequestActionDetails';
+import { UpdateCustomActionRequestDefaultActionConfig } from '../models/UpdateCustomActionRequestDefaultActionConfig';
 import { HttpFile } from '../http/http';
 
 export class UpdateCustomActionRequest {
-    'action_details'?: ActionDetailsInput;
+    'action_details'?: UpdateCustomActionRequestActionDetails;
     /**
     * Metadata objects to which the custom action needs to be associated.
     */
     'associate_metadata'?: Array<AssociateMetadataInput>;
-    'default_action_config'?: DefaultActionConfigInput;
+    'default_action_config'?: UpdateCustomActionRequestDefaultActionConfig;
     /**
     * Unique ID or name of the groups that can view and access the custom action.
     */
@@ -41,7 +41,7 @@ export class UpdateCustomActionRequest {
         {
             "name": "action_details",
             "baseName": "action_details",
-            "type": "ActionDetailsInput",
+            "type": "UpdateCustomActionRequestActionDetails",
             "format": ""
         },
         {
@@ -53,7 +53,7 @@ export class UpdateCustomActionRequest {
         {
             "name": "default_action_config",
             "baseName": "default_action_config",
-            "type": "DefaultActionConfigInput",
+            "type": "UpdateCustomActionRequestDefaultActionConfig",
             "format": ""
         },
         {

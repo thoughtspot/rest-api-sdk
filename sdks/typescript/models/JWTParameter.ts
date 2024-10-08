@@ -19,15 +19,15 @@ export class JWTParameter {
     /**
     * Runtime filter parameter type in JWT.
     */
-    'runtime_filter'?: any;
+    'runtime_filter'?: any | null;
     /**
     * Runtime sort parameter type in JWT.
     */
-    'runtime_sort'?: any;
+    'runtime_sort'?: any | null;
     /**
     * Runtime param override type in JWT.
     */
-    'runtime_param_override'?: any;
+    'runtime_param_override'?: any | null;
 
     static readonly discriminator: string | undefined = undefined;
 

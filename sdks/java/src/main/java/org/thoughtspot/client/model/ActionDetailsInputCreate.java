@@ -52,7 +52,7 @@ import org.thoughtspot.client.JSON;
 /**
  * Action details includes Type and Configuration for Custom Actions, either Callback or URL is required. When both callback and url are provided, callback would be considered
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-03-04T10:25:25.563+05:30[Asia/Kolkata]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-10-08T14:03:41.316769Z[Etc/UTC]")
 public class ActionDetailsInputCreate {
   public static final String SERIALIZED_NAME_C_A_L_L_B_A_C_K = "CALLBACK";
   @SerializedName(SERIALIZED_NAME_C_A_L_L_B_A_C_K)

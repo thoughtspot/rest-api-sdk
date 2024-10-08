@@ -199,11 +199,11 @@ declare class APIKey {
     /**
     * Enter your key name
     */
-    'key'?: string;
+    'key'?: string | null;
     /**
     * Enter you key value
     */
-    'value'?: string;
+    'value'?: string | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -238,11 +238,11 @@ declare class APIKeyInput {
     /**
     * Enter your key name
     */
-    'key'?: string;
+    'key'?: string | null;
     /**
     * Enter you key value
     */
-    'value'?: string;
+    'value'?: string | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -277,11 +277,11 @@ declare class ActionConfig {
     /**
     * Position of the Custom action on the Metadata object. Earlier naming convention: context.
     */
-    'position'?: string;
+    'position'?: string | null;
     /**
     * Visibility of the metadata association with custom action. Earlier naming convention: enabled
     */
-    'visibility'?: boolean;
+    'visibility'?: boolean | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -316,11 +316,11 @@ declare class ActionConfigInput {
     /**
     * Position of the Custom action on the Metadata object. Earlier naming convention: context.
     */
-    'position'?: ActionConfigInputPositionEnum;
+    'position'?: ActionConfigInputPositionEnum | null;
     /**
     * Visibility of the metadata association with custom action. Earlier naming convention: enabled
     */
-    'visibility'?: boolean;
+    'visibility'?: boolean | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -356,11 +356,11 @@ declare class ActionConfigInputCreate {
     /**
     * Position of the Custom action on the Metadata object. Earlier naming convention: context.
     */
-    'position'?: ActionConfigInputCreatePositionEnum;
+    'position'?: ActionConfigInputCreatePositionEnum | null;
     /**
     * Visibility of the metadata association with custom action. Earlier naming convention: enabled
     */
-    'visibility'?: boolean;
+    'visibility'?: boolean | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -396,7 +396,7 @@ declare class CALLBACK {
     /**
     * Reference name of the SDK. By default, the value will be set to action name.
     */
-    'reference'?: string;
+    'reference'?: string | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -431,11 +431,11 @@ declare class BasicAuth {
     /**
     * Password for the basic authentication
     */
-    'password'?: string;
+    'password'?: string | null;
     /**
     * Username for the basic authentication
     */
-    'username'?: string;
+    'username'?: string | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -473,11 +473,11 @@ declare class Authentication {
     /**
     * Bearer tokens enable requests to authenticate using an access key.
     */
-    'Bearer_Token'?: string;
+    'Bearer_Token'?: string | null;
     /**
     * No authorization. If your request doesn\'t require authorization.
     */
-    'No_Auth'?: string;
+    'No_Auth'?: string | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -509,11 +509,11 @@ declare class ParametersListItem {
     /**
     * Key for the url query parameter
     */
-    'key'?: string;
+    'key'?: string | null;
     /**
     * Value for the url query parameter
     */
-    'value'?: string;
+    'value'?: string | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -550,7 +550,7 @@ declare class URL {
     /**
     * Query parameters for url.
     */
-    'parameters'?: Array<ParametersListItem>;
+    'parameters'?: Array<ParametersListItem> | null;
     /**
     * Request Url for the Custom action.
     */
@@ -558,7 +558,7 @@ declare class URL {
     /**
     * Reference name of the SDK. By default, the value will be set to action name.
     */
-    'reference'?: string;
+    'reference'?: string | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -627,7 +627,7 @@ declare class CALLBACKInput {
     /**
     * Reference name. By default, the value will be set to action name.
     */
-    'reference'?: string;
+    'reference'?: string | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -662,11 +662,11 @@ declare class BasicAuthInput {
     /**
     * Password for the basic authentication
     */
-    'password'?: string;
+    'password'?: string | null;
     /**
     * Username for the basic authentication
     */
-    'username'?: string;
+    'username'?: string | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -704,11 +704,11 @@ declare class AuthenticationInput {
     /**
     * Bearer tokens enable requests to authenticate using an access key.
     */
-    'Bearer_Token'?: string;
+    'Bearer_Token'?: string | null;
     /**
     * No authorization. If your request doesn\'t require authorization.
     */
-    'No_Auth'?: string;
+    'No_Auth'?: string | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -740,11 +740,11 @@ declare class ParametersListItemInput {
     /**
     * Key for the url query parameter
     */
-    'key'?: string;
+    'key'?: string | null;
     /**
     * Value for the url query parameter
     */
-    'value'?: string;
+    'value'?: string | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -781,15 +781,15 @@ declare class URLInput {
     /**
     * Query parameters for url.
     */
-    'parameters'?: Array<ParametersListItemInput>;
+    'parameters'?: Array<ParametersListItemInput> | null;
     /**
     * Request Url for the Custom action.
     */
-    'url'?: string;
+    'url'?: string | null;
     /**
     * Reference name. By default the value will be set to action name
     */
-    'reference'?: string;
+    'reference'?: string | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -858,7 +858,7 @@ declare class CALLBACKInputMandatory {
     /**
     * Reference name. By default, the value will be set to action name.
     */
-    'reference'?: string;
+    'reference'?: string | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -895,7 +895,7 @@ declare class URLInputMandatory {
     /**
     * Query parameters for url.
     */
-    'parameters'?: Array<ParametersListItemInput>;
+    'parameters'?: Array<ParametersListItemInput> | null;
     /**
     * Request Url for the Custom action.
     */
@@ -903,7 +903,7 @@ declare class URLInputMandatory {
     /**
     * Reference name. By default the value will be set to action name
     */
-    'reference'?: string;
+    'reference'?: string | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -938,6 +938,46 @@ declare class URLInputMandatory {
 declare class ActionDetailsInputCreate {
     'CALLBACK'?: CALLBACKInputMandatory;
     'URL'?: URLInputMandatory;
+    static readonly discriminator: string | undefined;
+    static readonly attributeTypeMap: Array<{
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }>;
+    static getAttributeTypeMap(): {
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }[];
+    constructor();
+}
+
+/**
+ * ThoughtSpot Public REST API
+ * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
+ *
+ * OpenAPI spec version: 2.0
+ *
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+declare class ActivateUserRequest {
+    /**
+    * Unique ID or name of the user.
+    */
+    'user_identifier': string;
+    /**
+    * Auth token for the user.
+    */
+    'auth_token': string;
+    /**
+    * New password for the user to access the account.
+    */
+    'password': string;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -1070,9 +1110,9 @@ declare class AnswerDataResponse {
 */
 declare class AuthorMetadataTypeInput {
     /**
-    * Type of metadata.
+    *   Type of metadata.     Required if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.
     */
-    'type'?: AuthorMetadataTypeInputTypeEnum;
+    'type'?: AuthorMetadataTypeInputTypeEnum | null;
     /**
     * Unique ID or name of the metadata object.
     */
@@ -1148,9 +1188,9 @@ declare class AssignChangeAuthorRequest {
  */
 declare class TagMetadataTypeInput {
     /**
-    * Type of metadata (Optional when given identifier is ID). 1. LIVEBOARD 2. ANSWERS 3. LOGICAL_TABLE for any data object such as table, worksheet or view. 4. LOGICAL_COLUMN for a column of any data object such as tables, worksheets or views.
+    *   Type of metadata.     Required if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.   1. LIVEBOARD   2. ANSWERS   3. LOGICAL_TABLE for any data object such as table, worksheet or view.   4. LOGICAL_COLUMN for a column of any data object such as tables, worksheets or views.
     */
-    'type'?: TagMetadataTypeInputTypeEnum;
+    'type'?: TagMetadataTypeInputTypeEnum | null;
     /**
     * Unique ID or name of the metadata.
     */
@@ -1226,11 +1266,11 @@ declare class AssociateMetadataInput {
     /**
     * Unique ID or name of the metadata.
     */
-    'identifier'?: string;
+    'identifier'?: string | null;
     /**
-    * Type of metadata.
+    *   Type of metadata.     Required if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.
     */
-    'type'?: AssociateMetadataInputTypeEnum;
+    'type'?: AssociateMetadataInputTypeEnum | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -1267,9 +1307,9 @@ declare class AssociateMetadataInputCreate {
     */
     'identifier': string;
     /**
-    * Type of metadata.
+    *   Type of metadata.     Required if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.
     */
-    'type'?: AssociateMetadataInputCreateTypeEnum;
+    'type'?: AssociateMetadataInputCreateTypeEnum | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -1341,11 +1381,11 @@ declare class AuthorType {
     /**
     * Email id of the committer
     */
-    'email'?: string;
+    'email'?: string | null;
     /**
     * Username of the committer
     */
-    'username'?: string;
+    'username'?: string | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -1425,19 +1465,19 @@ declare class Column {
     /**
     * Determines if the column schema is an aggregate
     */
-    'is_aggregate'?: string;
+    'is_aggregate'?: string | null;
     /**
     * Determines if the column schema can be imported
     */
-    'can_import'?: boolean;
+    'can_import'?: boolean | null;
     /**
     * Determines if the table is selected
     */
-    'selected'?: boolean;
+    'selected'?: boolean | null;
     /**
     * Determines if the table is linked
     */
-    'is_linked_active'?: boolean;
+    'is_linked_active'?: boolean | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -1471,9 +1511,9 @@ declare class MetadataObject {
     */
     'identifier': string;
     /**
-    * Type of metadata.
+    *   Type of metadata.     Required if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.
     */
-    'type'?: MetadataObjectTypeEnum;
+    'type'?: MetadataObjectTypeEnum | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -1489,7 +1529,7 @@ declare class MetadataObject {
     }[];
     constructor();
 }
-type MetadataObjectTypeEnum = "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE";
+type MetadataObjectTypeEnum = "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE" | "CUSTOM_ACTION";
 
 /**
  * ThoughtSpot Public REST API
@@ -1559,7 +1599,7 @@ declare class CommitFileType {
     /**
     * Any error or warning with the deployment
     */
-    'status_message'?: string;
+    'status_message'?: string | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -1591,11 +1631,11 @@ declare class CommiterType {
     /**
     * Email id of the committer
     */
-    'email'?: string;
+    'email'?: string | null;
     /**
     * Username of the committer
     */
-    'username'?: string;
+    'username'?: string | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -1677,23 +1717,23 @@ declare class CommitResponse {
     /**
     * Comments associated with the commit
     */
-    'comment'?: string;
+    'comment'?: string | null;
     /**
     * Time at which the changes were committed.
     */
-    'commit_time'?: string;
+    'commit_time'?: string | null;
     /**
     * SHA id associated with the commit
     */
-    'commit_id'?: string;
+    'commit_id'?: string | null;
     /**
     * Branch where changes were committed
     */
-    'branch'?: string;
+    'branch'?: string | null;
     /**
     * Files that were pushed as part of this commit
     */
-    'committed_files'?: Array<CommitFileType>;
+    'committed_files'?: Array<CommitFileType> | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -1725,19 +1765,19 @@ declare class DataWarehouseObjectInput {
     /**
     * Name of the database.
     */
-    'database'?: string;
+    'database'?: string | null;
     /**
     * Name of the schema within the database.
     */
-    'schema'?: string;
+    'schema'?: string | null;
     /**
     * Name of the table within the schema.
     */
-    'table'?: string;
+    'table'?: string | null;
     /**
     * Name of the column within the table.
     */
-    'column'?: string;
+    'column'?: string | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -1770,15 +1810,15 @@ declare class ConnectionInput {
     /**
     * Unique ID or name of the connection.
     */
-    'identifier'?: string;
+    'identifier'?: string | null;
     /**
     * A pattern to match case-insensitive name of the connection object. User `%` for a wildcard match.
     */
-    'name_pattern'?: string;
+    'name_pattern'?: string | null;
     /**
     * Filter options for databases, schemas, tables and columns.
     */
-    'data_warehouse_objects'?: Array<DataWarehouseObjectInput>;
+    'data_warehouse_objects'?: Array<DataWarehouseObjectInput> | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -1794,6 +1834,51 @@ declare class ConnectionInput {
     }[];
     constructor();
 }
+
+/**
+ * ThoughtSpot Public REST API
+ * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
+ *
+ * OpenAPI spec version: 2.0
+ *
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+declare class CopyObjectRequest {
+    /**
+    * Description of the new object
+    */
+    'description'?: string;
+    /**
+    * GUID of metadata object to be copied (answer id or liveboard id)
+    */
+    'identifier': string;
+    /**
+    * Type of metadata object
+    */
+    'type'?: CopyObjectRequestTypeEnum;
+    /**
+    * Title of the new object
+    */
+    'title'?: string;
+    static readonly discriminator: string | undefined;
+    static readonly attributeTypeMap: Array<{
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }>;
+    static getAttributeTypeMap(): {
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }[];
+    constructor();
+}
+type CopyObjectRequestTypeEnum = "LIVEBOARD" | "ANSWER";
 
 /**
  * ThoughtSpot Public REST API
@@ -1902,7 +1987,7 @@ declare class CreateConnectionRequest {
     }[];
     constructor();
 }
-type CreateConnectionRequestDataWarehouseTypeEnum = "SNOWFLAKE" | "AMAZON_REDSHIFT" | "GOOGLE_BIGQUERY" | "AZURE_SYNAPSE" | "TERADATA" | "SAP_HANA" | "STARBURST" | "ORACLE_ADW" | "DATABRICKS" | "DENODO" | "DREMIO" | "TRINO" | "PRESTO" | "POSTGRES" | "SQLSERVER" | "MYSQL" | "GENERIC_JDBC" | "AMAZON_RDS_POSTGRESQL" | "AMAZON_AURORA_POSTGRESQL" | "AMAZON_RDS_MYSQL" | "AMAZON_AURORA_MYSQL" | "LOOKER" | "AMAZON_ATHENA" | "SINGLESTORE" | "GCP_SQLSERVER" | "GCP_ALLOYDB_POSTGRESQL" | "GCP_POSTGRESQL" | "GCP_MYSQL" | "MODE" | "RDBMS_LOOKER_ML";
+type CreateConnectionRequestDataWarehouseTypeEnum = "SNOWFLAKE" | "AMAZON_REDSHIFT" | "GOOGLE_BIGQUERY" | "AZURE_SYNAPSE" | "TERADATA" | "SAP_HANA" | "STARBURST" | "ORACLE_ADW" | "DATABRICKS" | "DENODO" | "DREMIO" | "TRINO" | "PRESTO" | "POSTGRES" | "SQLSERVER" | "MYSQL" | "GENERIC_JDBC" | "AMAZON_RDS_POSTGRESQL" | "AMAZON_AURORA_POSTGRESQL" | "AMAZON_RDS_MYSQL" | "AMAZON_AURORA_MYSQL" | "LOOKER" | "AMAZON_ATHENA" | "SINGLESTORE" | "GCP_SQLSERVER" | "GCP_ALLOYDB_POSTGRESQL" | "GCP_POSTGRESQL" | "GCP_MYSQL" | "MODE" | "GOOGLE_SHEETS";
 
 /**
  * ThoughtSpot Public REST API
@@ -1931,7 +2016,7 @@ declare class CreateConnectionResponse {
     /**
     * Details of the connection.
     */
-    'details'?: any;
+    'details'?: any | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -1947,7 +2032,41 @@ declare class CreateConnectionResponse {
     }[];
     constructor();
 }
-type CreateConnectionResponseDataWarehouseTypeEnum = "SNOWFLAKE" | "AMAZON_REDSHIFT" | "GOOGLE_BIGQUERY" | "AZURE_SYNAPSE" | "TERADATA" | "SAP_HANA" | "STARBURST" | "ORACLE_ADW" | "DATABRICKS" | "DENODO" | "DREMIO" | "TRINO" | "PRESTO" | "POSTGRES" | "SQLSERVER" | "MYSQL" | "GENERIC_JDBC" | "AMAZON_RDS_POSTGRESQL" | "AMAZON_AURORA_POSTGRESQL" | "AMAZON_RDS_MYSQL" | "AMAZON_AURORA_MYSQL" | "LOOKER" | "AMAZON_ATHENA" | "SINGLESTORE" | "GCP_SQLSERVER" | "GCP_ALLOYDB_POSTGRESQL" | "GCP_POSTGRESQL" | "GCP_MYSQL" | "MODE" | "RDBMS_LOOKER_ML";
+type CreateConnectionResponseDataWarehouseTypeEnum = "SNOWFLAKE" | "AMAZON_REDSHIFT" | "GOOGLE_BIGQUERY" | "AZURE_SYNAPSE" | "TERADATA" | "SAP_HANA" | "STARBURST" | "ORACLE_ADW" | "DATABRICKS" | "DENODO" | "DREMIO" | "TRINO" | "PRESTO" | "POSTGRES" | "SQLSERVER" | "MYSQL" | "GENERIC_JDBC" | "AMAZON_RDS_POSTGRESQL" | "AMAZON_AURORA_POSTGRESQL" | "AMAZON_RDS_MYSQL" | "AMAZON_AURORA_MYSQL" | "LOOKER" | "AMAZON_ATHENA" | "SINGLESTORE" | "GCP_SQLSERVER" | "GCP_ALLOYDB_POSTGRESQL" | "GCP_POSTGRESQL" | "GCP_MYSQL" | "MODE" | "GOOGLE_SHEETS";
+
+/**
+ * ThoughtSpot Public REST API
+ * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
+ *
+ * OpenAPI spec version: 2.0
+ *
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+
+/**
+* Action details includes `Type` and Configuration data for Custom Actions, either Callback or URL is required.
+*/
+declare class CreateCustomActionRequestActionDetails {
+    'CALLBACK'?: CALLBACKInputMandatory;
+    'URL'?: URLInputMandatory;
+    static readonly discriminator: string | undefined;
+    static readonly attributeTypeMap: Array<{
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }>;
+    static getAttributeTypeMap(): {
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }[];
+    constructor();
+}
 
 /**
  * ThoughtSpot Public REST API
@@ -1961,13 +2080,13 @@ type CreateConnectionResponseDataWarehouseTypeEnum = "SNOWFLAKE" | "AMAZON_REDSH
  * Do not edit the class manually.
  */
 /**
-* Default Custom action configuration. This includes the custom action\'s visibility across all visualizations and Answers. By default, a custom action is added to all visualizations and Answers.
+* Default Custom action configuration. This includes if the custom action is available on all visualizations. By default, a custom action is added to all visualizations and Answers.
 */
-declare class DefaultActionConfigInputCreate {
+declare class CreateCustomActionRequestDefaultActionConfig {
     /**
     * Custom action is available on all visualizations. Earlier naming convention: LOCAL/GLOBAL. TRUE signifies GLOBAL for backward compatibility. Default: true
     */
-    'visibility'?: boolean;
+    'visibility'?: boolean | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -2001,12 +2120,12 @@ declare class CreateCustomActionRequest {
     * Name of the custom action. The custom action name must be unique.
     */
     'name': string;
-    'action_details': ActionDetailsInputCreate;
+    'action_details': CreateCustomActionRequestActionDetails;
     /**
     * Metadata objects to which the custom action needs to be associated.
     */
     'associate_metadata'?: Array<AssociateMetadataInputCreate>;
-    'default_action_config'?: DefaultActionConfigInputCreate;
+    'default_action_config'?: CreateCustomActionRequestDefaultActionConfig;
     /**
     * Unique ID or name of the groups that can view and access the custom action.
     */
@@ -2102,7 +2221,7 @@ declare class CreateRoleRequest {
     }[];
     constructor();
 }
-type CreateRoleRequestPrivilegesEnum = "USERDATAUPLOADING" | "DATADOWNLOADING" | "DATAMANAGEMENT" | "SHAREWITHALL" | "JOBSCHEDULING" | "A3ANALYSIS" | "EXPERIMENTALFEATUREPRIVILEGE" | "BYPASSRLS" | "DISABLE_PINBOARD_CREATION" | "DEVELOPER" | "APPLICATION_ADMINISTRATION" | "USER_ADMINISTRATION" | "GROUP_ADMINISTRATION" | "SYSTEM_INFO_ADMINISTRATION" | "SYNCMANAGEMENT" | "ORG_ADMINISTRATION" | "ROLE_ADMINISTRATION" | "AUTHENTICATION_ADMINISTRATION" | "BILLING_INFO_ADMINISTRATION" | "CONTROL_TRUSTED_AUTH" | "TAGMANAGEMENT" | "LIVEBOARD_VERIFIER" | "CAN_MANAGE_CUSTOM_CALENDAR" | "CAN_CREATE_OR_EDIT_CONNECTIONS" | "CAN_MANAGE_WORKSHEET_VIEWS_TABLES";
+type CreateRoleRequestPrivilegesEnum = "USERDATAUPLOADING" | "DATADOWNLOADING" | "DATAMANAGEMENT" | "SHAREWITHALL" | "JOBSCHEDULING" | "A3ANALYSIS" | "EXPERIMENTALFEATUREPRIVILEGE" | "BYPASSRLS" | "DISABLE_PINBOARD_CREATION" | "DEVELOPER" | "APPLICATION_ADMINISTRATION" | "USER_ADMINISTRATION" | "GROUP_ADMINISTRATION" | "SYSTEM_INFO_ADMINISTRATION" | "SYNCMANAGEMENT" | "ORG_ADMINISTRATION" | "ROLE_ADMINISTRATION" | "AUTHENTICATION_ADMINISTRATION" | "BILLING_INFO_ADMINISTRATION" | "CONTROL_TRUSTED_AUTH" | "TAGMANAGEMENT" | "LIVEBOARD_VERIFIER" | "CAN_MANAGE_CUSTOM_CALENDAR" | "CAN_CREATE_OR_EDIT_CONNECTIONS" | "CAN_MANAGE_WORKSHEET_VIEWS_TABLES" | "CAN_MANAGE_VERSION_CONTROL" | "THIRDPARTY_ANALYSIS" | "CAN_CREATE_CATALOG" | "ALLOW_NON_EMBED_FULL_APP_ACCESS" | "CAN_ACCESS_ANALYST_STUDIO" | "CAN_MANAGE_ANALYST_STUDIO" | "PREVIEW_DOCUMENT_SEARCH";
 
 /**
  * ThoughtSpot Public REST API
@@ -2172,9 +2291,9 @@ declare class CronExpressionInput {
  */
 
 /**
-* Configuration of schedule with cron expression
+* Frequency settings for the scheduled job.
 */
-declare class FrequencyInput {
+declare class CreateScheduleRequestFrequency {
     'cron_expression': CronExpressionInput;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
@@ -2206,7 +2325,7 @@ declare class FrequencyInput {
 /**
 * Options to specify details of Liveboard.
 */
-declare class LiveboardOptionsInput {
+declare class CreateScheduleRequestLiveboardOptions {
     /**
     * Unique ID or name of visualizations.
     */
@@ -2226,6 +2345,74 @@ declare class LiveboardOptionsInput {
     }[];
     constructor();
 }
+
+/**
+ * ThoughtSpot Public REST API
+ * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
+ *
+ * OpenAPI spec version: 2.0
+ *
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+* PDF layout and orientation settings. Applicable only if the `file_format` is specified as `PDF`.
+*/
+declare class CreateScheduleRequestPdfOptions {
+    /**
+    * Indicates whether to include complete Liveboard.
+    */
+    'complete_liveboard'?: boolean | null;
+    /**
+    * Indicates whether to include cover page with the Liveboard title.
+    */
+    'include_cover_page'?: boolean | null;
+    /**
+    * Indicates whether to include customized wide logo in the footer if available.
+    */
+    'include_custom_logo'?: boolean | null;
+    /**
+    * Indicates whether to include a page with all applied filters.
+    */
+    'include_filter_page'?: boolean | null;
+    /**
+    * Indicates whether to include page number in the footer of each page
+    */
+    'include_page_number'?: boolean | null;
+    /**
+    * Text to include in the footer of each page.
+    */
+    'page_footer_text'?: string | null;
+    /**
+    * Page orientation of the PDF.
+    */
+    'page_orientation'?: string | null;
+    /**
+    * Page size.
+    */
+    'page_size'?: CreateScheduleRequestPdfOptionsPageSizeEnum | null;
+    /**
+    * Indicates whether to include only first page of the tables.
+    */
+    'truncate_table'?: boolean | null;
+    static readonly discriminator: string | undefined;
+    static readonly attributeTypeMap: Array<{
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }>;
+    static getAttributeTypeMap(): {
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }[];
+    constructor();
+}
+type CreateScheduleRequestPdfOptionsPageSizeEnum = "A4";
 
 /**
  * ThoughtSpot Public REST API
@@ -2276,17 +2463,17 @@ declare class PrincipalsListItemInput {
  */
 
 /**
-* Recipients of the scheduled job notification.
+* Recipients of the scheduled job notifications. Add the GUID or name of the ThoughtSpot users or groups as recipients in the `principals` array. If a recipient is not a ThoughtSpot user, specify email address.
 */
-declare class RecipientDetailsInput {
+declare class CreateScheduleRequestRecipientDetails {
     /**
     * Emails of the recipients.
     */
-    'emails'?: Array<string>;
+    'emails'?: Array<string> | null;
     /**
     * User or groups to be set as recipients of the schedule notifications.
     */
-    'principals'?: Array<PrincipalsListItemInput>;
+    'principals'?: Array<PrincipalsListItemInput> | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -2302,74 +2489,6 @@ declare class RecipientDetailsInput {
     }[];
     constructor();
 }
-
-/**
- * ThoughtSpot Public REST API
- * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
- *
- * OpenAPI spec version: 2.0
- *
- *
- * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
- * https://openapi-generator.tech
- * Do not edit the class manually.
- */
-/**
-* Options for PDF export.
-*/
-declare class SchedulesPdfOptionsInput {
-    /**
-    * Indicates whether to include complete Liveboard.
-    */
-    'complete_liveboard'?: boolean;
-    /**
-    * Indicates whether to include cover page with the Liveboard title.
-    */
-    'include_cover_page'?: boolean;
-    /**
-    * Indicates whether to include customized wide logo in the footer if available.
-    */
-    'include_custom_logo'?: boolean;
-    /**
-    * Indicates whether to include a page with all applied filters.
-    */
-    'include_filter_page'?: boolean;
-    /**
-    * Indicates whether to include page number in the footer of each page
-    */
-    'include_page_number'?: boolean;
-    /**
-    * Text to include in the footer of each page.
-    */
-    'page_footer_text'?: string;
-    /**
-    * Page orientation of the PDF.
-    */
-    'page_orientation'?: string;
-    /**
-    * Page size.
-    */
-    'page_size'?: SchedulesPdfOptionsInputPageSizeEnum;
-    /**
-    * Indicates whether to include only first page of the tables.
-    */
-    'truncate_table'?: boolean;
-    static readonly discriminator: string | undefined;
-    static readonly attributeTypeMap: Array<{
-        name: string;
-        baseName: string;
-        type: string;
-        format: string;
-    }>;
-    static getAttributeTypeMap(): {
-        name: string;
-        baseName: string;
-        type: string;
-        format: string;
-    }[];
-    constructor();
-}
-type SchedulesPdfOptionsInputPageSizeEnum = "A4";
 
 /**
  * ThoughtSpot Public REST API
@@ -2404,14 +2523,14 @@ declare class CreateScheduleRequest {
     * Export file format.
     */
     'file_format'?: CreateScheduleRequestFileFormatEnum;
-    'liveboard_options'?: LiveboardOptionsInput;
-    'pdf_options'?: SchedulesPdfOptionsInput;
+    'liveboard_options'?: CreateScheduleRequestLiveboardOptions;
+    'pdf_options'?: CreateScheduleRequestPdfOptions;
     /**
     * Time zone
     */
     'time_zone': CreateScheduleRequestTimeZoneEnum;
-    'frequency'?: FrequencyInput;
-    'recipient_details': RecipientDetailsInput;
+    'frequency'?: CreateScheduleRequestFrequency;
+    'recipient_details': CreateScheduleRequestRecipientDetails;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -2428,7 +2547,7 @@ declare class CreateScheduleRequest {
     constructor();
 }
 type CreateScheduleRequestMetadataTypeEnum = "LIVEBOARD";
-type CreateScheduleRequestFileFormatEnum = "CSV" | "PDF";
+type CreateScheduleRequestFileFormatEnum = "CSV" | "PDF" | "XLSX";
 type CreateScheduleRequestTimeZoneEnum = "Africa/Abidjan" | "Africa/Accra" | "Africa/Addis_Ababa" | "Africa/Algiers" | "Africa/Asmara" | "Africa/Asmera" | "Africa/Bamako" | "Africa/Bangui" | "Africa/Banjul" | "Africa/Bissau" | "Africa/Blantyre" | "Africa/Brazzaville" | "Africa/Bujumbura" | "Africa/Cairo" | "Africa/Casablanca" | "Africa/Ceuta" | "Africa/Conakry" | "Africa/Dakar" | "Africa/Dar_es_Salaam" | "Africa/Djibouti" | "Africa/Douala" | "Africa/El_Aaiun" | "Africa/Freetown" | "Africa/Gaborone" | "Africa/Harare" | "Africa/Johannesburg" | "Africa/Juba" | "Africa/Kampala" | "Africa/Khartoum" | "Africa/Kigali" | "Africa/Kinshasa" | "Africa/Lagos" | "Africa/Libreville" | "Africa/Lome" | "Africa/Luanda" | "Africa/Lubumbashi" | "Africa/Lusaka" | "Africa/Malabo" | "Africa/Maputo" | "Africa/Maseru" | "Africa/Mbabane" | "Africa/Mogadishu" | "Africa/Monrovia" | "Africa/Nairobi" | "Africa/Ndjamena" | "Africa/Niamey" | "Africa/Nouakchott" | "Africa/Ouagadougou" | "Africa/Porto-Novo" | "Africa/Sao_Tome" | "Africa/Timbuktu" | "Africa/Tripoli" | "Africa/Tunis" | "Africa/Windhoek" | "America/Adak" | "America/Anchorage" | "America/Anguilla" | "America/Antigua" | "America/Araguaina" | "America/Argentina/Buenos_Aires" | "America/Argentina/Catamarca" | "America/Argentina/ComodRivadavia" | "America/Argentina/Cordoba" | "America/Argentina/Jujuy" | "America/Argentina/La_Rioja" | "America/Argentina/Mendoza" | "America/Argentina/Rio_Gallegos" | "America/Argentina/Salta" | "America/Argentina/San_Juan" | "America/Argentina/San_Luis" | "America/Argentina/Tucuman" | "America/Argentina/Ushuaia" | "America/Aruba" | "America/Asuncion" | "America/Atikokan" | "America/Atka" | "America/Bahia" | "America/Bahia_Banderas" | "America/Barbados" | "America/Belem" | "America/Belize" | "America/Blanc-Sablon" | "America/Boa_Vista" | "America/Bogota" | "America/Boise" | "America/Buenos_Aires" | "America/Cambridge_Bay" | "America/Campo_Grande" | "America/Cancun" | "America/Caracas" | "America/Catamarca" | "America/Cayenne" | "America/Cayman" | "America/Chicago" | "America/Chihuahua" | "America/Coral_Harbour" | "America/Cordoba" | "America/Costa_Rica" | "America/Creston" | "America/Cuiaba" | "America/Curacao" | "America/Danmarkshavn" | "America/Dawson" | "America/Dawson_Creek" | "America/Denver" | "America/Detroit" | "America/Dominica" | "America/Edmonton" | "America/Eirunepe" | "America/El_Salvador" | "America/Ensenada" | "America/Fort_Nelson" | "America/Fort_Wayne" | "America/Fortaleza" | "America/Glace_Bay" | "America/Godthab" | "America/Goose_Bay" | "America/Grand_Turk" | "America/Grenada" | "America/Guadeloupe" | "America/Guatemala" | "America/Guayaquil" | "America/Guyana" | "America/Halifax" | "America/Havana" | "America/Hermosillo" | "America/Indiana/Indianapolis" | "America/Indiana/Knox" | "America/Indiana/Marengo" | "America/Indiana/Petersburg" | "America/Indiana/Tell_City" | "America/Indiana/Vevay" | "America/Indiana/Vincennes" | "America/Indiana/Winamac" | "America/Indianapolis" | "America/Inuvik" | "America/Iqaluit" | "America/Jamaica" | "America/Jujuy" | "America/Juneau" | "America/Kentucky/Louisville" | "America/Kentucky/Monticello" | "America/Knox_IN" | "America/Kralendijk" | "America/La_Paz" | "America/Lima" | "America/Los_Angeles" | "America/Louisville" | "America/Lower_Princes" | "America/Maceio" | "America/Managua" | "America/Manaus" | "America/Marigot" | "America/Martinique" | "America/Matamoros" | "America/Mazatlan" | "America/Mendoza" | "America/Menominee" | "America/Merida" | "America/Metlakatla" | "America/Mexico_City" | "America/Miquelon" | "America/Moncton" | "America/Monterrey" | "America/Montevideo" | "America/Montreal" | "America/Montserrat" | "America/Nassau" | "America/New_York" | "America/Nipigon" | "America/Nome" | "America/Noronha" | "America/North_Dakota/Beulah" | "America/North_Dakota/Center" | "America/North_Dakota/New_Salem" | "America/Nuuk" | "America/Ojinaga" | "America/Panama" | "America/Pangnirtung" | "America/Paramaribo" | "America/Phoenix" | "America/Port-au-Prince" | "America/Port_of_Spain" | "America/Porto_Acre" | "America/Porto_Velho" | "America/Puerto_Rico" | "America/Punta_Arenas" | "America/Rainy_River" | "America/Rankin_Inlet" | "America/Recife" | "America/Regina" | "America/Resolute" | "America/Rio_Branco" | "America/Rosario" | "America/Santa_Isabel" | "America/Santarem" | "America/Santiago" | "America/Santo_Domingo" | "America/Sao_Paulo" | "America/Scoresbysund" | "America/Shiprock" | "America/Sitka" | "America/St_Barthelemy" | "America/St_Johns" | "America/St_Kitts" | "America/St_Lucia" | "America/St_Thomas" | "America/St_Vincent" | "America/Swift_Current" | "America/Tegucigalpa" | "America/Thule" | "America/Thunder_Bay" | "America/Tijuana" | "America/Toronto" | "America/Tortola" | "America/Vancouver" | "America/Virgin" | "America/Whitehorse" | "America/Winnipeg" | "America/Yakutat" | "America/Yellowknife" | "Antarctica/Casey" | "Antarctica/Davis" | "Antarctica/DumontDUrville" | "Antarctica/Macquarie" | "Antarctica/Mawson" | "Antarctica/McMurdo" | "Antarctica/Palmer" | "Antarctica/Rothera" | "Antarctica/South_Pole" | "Antarctica/Syowa" | "Antarctica/Troll" | "Antarctica/Vostok" | "Arctic/Longyearbyen" | "Asia/Aden" | "Asia/Almaty" | "Asia/Amman" | "Asia/Anadyr" | "Asia/Aqtau" | "Asia/Aqtobe" | "Asia/Ashgabat" | "Asia/Ashkhabad" | "Asia/Atyrau" | "Asia/Baghdad" | "Asia/Bahrain" | "Asia/Baku" | "Asia/Bangkok" | "Asia/Barnaul" | "Asia/Beirut" | "Asia/Bishkek" | "Asia/Brunei" | "Asia/Calcutta" | "Asia/Chita" | "Asia/Choibalsan" | "Asia/Chongqing" | "Asia/Chungking" | "Asia/Colombo" | "Asia/Dacca" | "Asia/Damascus" | "Asia/Dhaka" | "Asia/Dili" | "Asia/Dubai" | "Asia/Dushanbe" | "Asia/Famagusta" | "Asia/Gaza" | "Asia/Harbin" | "Asia/Hebron" | "Asia/Ho_Chi_Minh" | "Asia/Hong_Kong" | "Asia/Hovd" | "Asia/Irkutsk" | "Asia/Istanbul" | "Asia/Jakarta" | "Asia/Jayapura" | "Asia/Jerusalem" | "Asia/Kabul" | "Asia/Kamchatka" | "Asia/Karachi" | "Asia/Kashgar" | "Asia/Kathmandu" | "Asia/Katmandu" | "Asia/Khandyga" | "Asia/Kolkata" | "Asia/Krasnoyarsk" | "Asia/Kuala_Lumpur" | "Asia/Kuching" | "Asia/Kuwait" | "Asia/Macao" | "Asia/Macau" | "Asia/Magadan" | "Asia/Makassar" | "Asia/Manila" | "Asia/Muscat" | "Asia/Nicosia" | "Asia/Novokuznetsk" | "Asia/Novosibirsk" | "Asia/Omsk" | "Asia/Oral" | "Asia/Phnom_Penh" | "Asia/Pontianak" | "Asia/Pyongyang" | "Asia/Qatar" | "Asia/Qostanay" | "Asia/Qyzylorda" | "Asia/Rangoon" | "Asia/Riyadh" | "Asia/Saigon" | "Asia/Sakhalin" | "Asia/Samarkand" | "Asia/Seoul" | "Asia/Shanghai" | "Asia/Singapore" | "Asia/Srednekolymsk" | "Asia/Taipei" | "Asia/Tashkent" | "Asia/Tbilisi" | "Asia/Tehran" | "Asia/Tel_Aviv" | "Asia/Thimbu" | "Asia/Thimphu" | "Asia/Tokyo" | "Asia/Tomsk" | "Asia/Ujung_Pandang" | "Asia/Ulaanbaatar" | "Asia/Ulan_Bator" | "Asia/Urumqi" | "Asia/Ust-Nera" | "Asia/Vientiane" | "Asia/Vladivostok" | "Asia/Yakutsk" | "Asia/Yangon" | "Asia/Yekaterinburg" | "Asia/Yerevan" | "Atlantic/Azores" | "Atlantic/Bermuda" | "Atlantic/Canary" | "Atlantic/Cape_Verde" | "Atlantic/Faeroe" | "Atlantic/Faroe" | "Atlantic/Jan_Mayen" | "Atlantic/Madeira" | "Atlantic/Reykjavik" | "Atlantic/South_Georgia" | "Atlantic/St_Helena" | "Atlantic/Stanley" | "Australia/ACT" | "Australia/Adelaide" | "Australia/Brisbane" | "Australia/Broken_Hill" | "Australia/Canberra" | "Australia/Currie" | "Australia/Darwin" | "Australia/Eucla" | "Australia/Hobart" | "Australia/LHI" | "Australia/Lindeman" | "Australia/Lord_Howe" | "Australia/Melbourne" | "Australia/NSW" | "Australia/North" | "Australia/Perth" | "Australia/Queensland" | "Australia/South" | "Australia/Sydney" | "Australia/Tasmania" | "Australia/Victoria" | "Australia/West" | "Australia/Yancowinna" | "Brazil/Acre" | "Brazil/DeNoronha" | "Brazil/East" | "Brazil/West" | "CET" | "CST6CDT" | "Canada/Atlantic" | "Canada/Central" | "Canada/Eastern" | "Canada/Mountain" | "Canada/Newfoundland" | "Canada/Pacific" | "Canada/Saskatchewan" | "Canada/Yukon" | "Chile/Continental" | "Chile/EasterIsland" | "Cuba" | "EET" | "EST5EDT" | "Egypt" | "Eire" | "Etc/GMT" | "Etc/GMT+0" | "Etc/GMT+1" | "Etc/GMT+10" | "Etc/GMT+11" | "Etc/GMT+12" | "Etc/GMT+2" | "Etc/GMT+3" | "Etc/GMT+4" | "Etc/GMT+5" | "Etc/GMT+6" | "Etc/GMT+7" | "Etc/GMT+8" | "Etc/GMT+9" | "Etc/GMT-0" | "Etc/GMT-1" | "Etc/GMT-10" | "Etc/GMT-11" | "Etc/GMT-12" | "Etc/GMT-13" | "Etc/GMT-14" | "Etc/GMT-2" | "Etc/GMT-3" | "Etc/GMT-4" | "Etc/GMT-5" | "Etc/GMT-6" | "Etc/GMT-7" | "Etc/GMT-8" | "Etc/GMT-9" | "Etc/GMT0" | "Etc/Greenwich" | "Etc/UCT" | "Etc/UTC" | "Etc/Universal" | "Etc/Zulu" | "Europe/Amsterdam" | "Europe/Andorra" | "Europe/Astrakhan" | "Europe/Athens" | "Europe/Belfast" | "Europe/Belgrade" | "Europe/Berlin" | "Europe/Bratislava" | "Europe/Brussels" | "Europe/Bucharest" | "Europe/Budapest" | "Europe/Busingen" | "Europe/Chisinau" | "Europe/Copenhagen" | "Europe/Dublin" | "Europe/Gibraltar" | "Europe/Guernsey" | "Europe/Helsinki" | "Europe/Isle_of_Man" | "Europe/Istanbul" | "Europe/Jersey" | "Europe/Kaliningrad" | "Europe/Kiev" | "Europe/Kirov" | "Europe/Kyiv" | "Europe/Lisbon" | "Europe/Ljubljana" | "Europe/London" | "Europe/Luxembourg" | "Europe/Madrid" | "Europe/Malta" | "Europe/Mariehamn" | "Europe/Minsk" | "Europe/Monaco" | "Europe/Moscow" | "Europe/Nicosia" | "Europe/Oslo" | "Europe/Paris" | "Europe/Podgorica" | "Europe/Prague" | "Europe/Riga" | "Europe/Rome" | "Europe/Samara" | "Europe/San_Marino" | "Europe/Sarajevo" | "Europe/Saratov" | "Europe/Simferopol" | "Europe/Skopje" | "Europe/Sofia" | "Europe/Stockholm" | "Europe/Tallinn" | "Europe/Tirane" | "Europe/Tiraspol" | "Europe/Ulyanovsk" | "Europe/Uzhgorod" | "Europe/Vaduz" | "Europe/Vatican" | "Europe/Vienna" | "Europe/Vilnius" | "Europe/Volgograd" | "Europe/Warsaw" | "Europe/Zagreb" | "Europe/Zaporozhye" | "Europe/Zurich" | "GB" | "GB-Eire" | "GMT" | "GMT0" | "Greenwich" | "Hongkong" | "Iceland" | "Indian/Antananarivo" | "Indian/Chagos" | "Indian/Christmas" | "Indian/Cocos" | "Indian/Comoro" | "Indian/Kerguelen" | "Indian/Mahe" | "Indian/Maldives" | "Indian/Mauritius" | "Indian/Mayotte" | "Indian/Reunion" | "Iran" | "Israel" | "Jamaica" | "Japan" | "Kwajalein" | "Libya" | "MET" | "MST7MDT" | "Mexico/BajaNorte" | "Mexico/BajaSur" | "Mexico/General" | "NZ" | "NZ-CHAT" | "Navajo" | "PRC" | "PST8PDT" | "Pacific/Apia" | "Pacific/Auckland" | "Pacific/Bougainville" | "Pacific/Chatham" | "Pacific/Chuuk" | "Pacific/Easter" | "Pacific/Efate" | "Pacific/Enderbury" | "Pacific/Fakaofo" | "Pacific/Fiji" | "Pacific/Funafuti" | "Pacific/Galapagos" | "Pacific/Gambier" | "Pacific/Guadalcanal" | "Pacific/Guam" | "Pacific/Honolulu" | "Pacific/Johnston" | "Pacific/Kanton" | "Pacific/Kiritimati" | "Pacific/Kosrae" | "Pacific/Kwajalein" | "Pacific/Majuro" | "Pacific/Marquesas" | "Pacific/Midway" | "Pacific/Nauru" | "Pacific/Niue" | "Pacific/Norfolk" | "Pacific/Noumea" | "Pacific/Pago_Pago" | "Pacific/Palau" | "Pacific/Pitcairn" | "Pacific/Pohnpei" | "Pacific/Ponape" | "Pacific/Port_Moresby" | "Pacific/Rarotonga" | "Pacific/Saipan" | "Pacific/Samoa" | "Pacific/Tahiti" | "Pacific/Tarawa" | "Pacific/Tongatapu" | "Pacific/Truk" | "Pacific/Wake" | "Pacific/Wallis" | "Pacific/Yap" | "Poland" | "Portugal" | "ROK" | "Singapore" | "SystemV/AST4" | "SystemV/AST4ADT" | "SystemV/CST6" | "SystemV/CST6CDT" | "SystemV/EST5" | "SystemV/EST5EDT" | "SystemV/HST10" | "SystemV/MST7" | "SystemV/MST7MDT" | "SystemV/PST8" | "SystemV/PST8PDT" | "SystemV/YST9" | "SystemV/YST9YDT" | "Turkey" | "UCT" | "US/Alaska" | "US/Aleutian" | "US/Arizona" | "US/Central" | "US/East-Indiana" | "US/Eastern" | "US/Hawaii" | "US/Indiana-Starke" | "US/Michigan" | "US/Mountain" | "US/Pacific" | "US/Samoa" | "UTC" | "Universal" | "W-SU" | "WET" | "Zulu" | "EST" | "HST" | "MST" | "ACT" | "AET" | "AGT" | "ART" | "AST" | "BET" | "BST" | "CAT" | "CNT" | "CST" | "CTT" | "EAT" | "ECT" | "IET" | "IST" | "JST" | "MIT" | "NET" | "NST" | "PLT" | "PNT" | "PRT" | "PST" | "SST" | "VST";
 
 /**
@@ -2534,7 +2653,7 @@ declare class CreateUserGroupRequest {
     }[];
     constructor();
 }
-type CreateUserGroupRequestPrivilegesEnum = "ADMINISTRATION" | "AUTHORING" | "USERDATAUPLOADING" | "DATADOWNLOADING" | "USERMANAGEMENT" | "DATAMANAGEMENT" | "SHAREWITHALL" | "JOBSCHEDULING" | "A3ANALYSIS" | "EXPERIMENTALFEATUREPRIVILEGE" | "BYPASSRLS" | "RANALYSIS" | "DEVELOPER" | "USER_ADMINISTRATION" | "GROUP_ADMINISTRATION" | "SYNCMANAGEMENT" | "CAN_CREATE_CATALOG" | "DISABLE_PINBOARD_CREATION" | "ENABLESPOTAPPCREATION" | "LIVEBOARD_VERIFIER" | "PREVIEW_THOUGHTSPOT_SAGE";
+type CreateUserGroupRequestPrivilegesEnum = "ADMINISTRATION" | "AUTHORING" | "USERDATAUPLOADING" | "DATADOWNLOADING" | "USERMANAGEMENT" | "DATAMANAGEMENT" | "SHAREWITHALL" | "JOBSCHEDULING" | "A3ANALYSIS" | "EXPERIMENTALFEATUREPRIVILEGE" | "BYPASSRLS" | "RANALYSIS" | "DEVELOPER" | "USER_ADMINISTRATION" | "GROUP_ADMINISTRATION" | "SYNCMANAGEMENT" | "CAN_CREATE_CATALOG" | "DISABLE_PINBOARD_CREATION" | "LIVEBOARD_VERIFIER" | "PREVIEW_THOUGHTSPOT_SAGE" | "CAN_MANAGE_VERSION_CONTROL" | "THIRDPARTY_ANALYSIS" | "ALLOW_NON_EMBED_FULL_APP_ACCESS" | "CAN_ACCESS_ANALYST_STUDIO" | "CAN_MANAGE_ANALYST_STUDIO" | "PREVIEW_DOCUMENT_SEARCH";
 type CreateUserGroupRequestTypeEnum = "LOCAL_GROUP" | "LDAP_GROUP";
 type CreateUserGroupRequestVisibilityEnum = "SHARABLE" | "NON_SHARABLE";
 
@@ -2553,11 +2672,11 @@ declare class FavoriteMetadataInput {
     /**
     * Unique ID or name of the metadata object.
     */
-    'identifier'?: string;
+    'identifier'?: string | null;
     /**
-    * Type of metadata object.
+    *   Type of metadata object.     Required if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.
     */
-    'type'?: FavoriteMetadataInputTypeEnum;
+    'type'?: FavoriteMetadataInputTypeEnum | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -2657,11 +2776,11 @@ declare class CreateUserRequest {
     */
     'extended_preferences'?: any;
     /**
-    * Flag to indicate whether welcome email should be sent to user
+    * Flag to indicate whether welcome email should be sent to user. This parameter is applied only on clusters on which IAM is disabled.
     */
     'trigger_welcome_email'?: boolean | null;
     /**
-    * Flag to indicate whether activation email should be sent to user
+    * Flag to indicate whether activation email should be sent to user.
     */
     'trigger_activation_email'?: boolean | null;
     static readonly discriminator: string | undefined;
@@ -2755,9 +2874,9 @@ declare class CronExpression {
 */
 declare class CustomActionMetadataTypeInput {
     /**
-    * Type of metadata object.
+    *   Type of metadata object.     Required if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.
     */
-    'type'?: CustomActionMetadataTypeInputTypeEnum;
+    'type'?: CustomActionMetadataTypeInputTypeEnum | null;
     /**
     * Unique ID or name of the metadata object.
     */
@@ -2799,27 +2918,27 @@ declare class Table {
     /**
     * Columns of the table.
     */
-    'columns'?: Array<Column>;
+    'columns'?: Array<Column> | null;
     /**
     * Type of table. Either view or table
     */
-    'type'?: string;
+    'type'?: string | null;
     /**
     * Description of the table
     */
-    'description'?: string;
+    'description'?: string | null;
     /**
     * Determines if the table is selected
     */
-    'selected'?: boolean;
+    'selected'?: boolean | null;
     /**
     * Determines if the table is linked
     */
-    'linked'?: boolean;
+    'linked'?: boolean | null;
     /**
     * List of relationships for the table
     */
-    'relationships'?: Array<any>;
+    'relationships'?: Array<any> | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -2856,7 +2975,7 @@ declare class SchemaObject {
     /**
     * Tables in the schema.
     */
-    'tables'?: Array<Table>;
+    'tables'?: Array<Table> | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -2893,11 +3012,11 @@ declare class Database {
     /**
     * Schemas of the database.
     */
-    'schemas'?: Array<SchemaObject>;
+    'schemas'?: Array<SchemaObject> | null;
     /**
     * Determines if the object is auto created.
     */
-    'auto_created'?: boolean;
+    'auto_created'?: boolean | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -2958,14 +3077,247 @@ declare class DataWarehouseObjects {
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-declare class DbtSearchResponse {
-    'dbt_connection_identifier'?: string;
+
+declare class DbtConnectionRequest {
+    /**
+    * Name of the connection.
+    */
+    'connection_name': string;
+    /**
+    * Name of the Database.
+    */
+    'database_name': string;
+    /**
+    * Mention type of Import
+    */
+    'import_type'?: DbtConnectionRequestImportTypeEnum;
+    /**
+    * Access token is mandatory when Import_Type is DBT_CLOUD.
+    */
+    'access_token'?: string;
+    /**
+    * DBT URL is mandatory when Import_Type is DBT_CLOUD.
+    */
+    'dbt_url'?: string;
+    /**
+    * Account ID is mandatory when Import_Type is DBT_CLOUD
+    */
+    'account_id'?: string;
+    /**
+    * Project ID is mandatory when Import_Type is DBT_CLOUD
+    */
+    'project_id'?: string;
+    /**
+    * DBT Environment ID\"
+    */
+    'dbt_env_id'?: string;
+    /**
+    * Name of the project
+    */
     'project_name'?: string;
-    'connection_id'?: string;
-    'connection_name'?: string;
-    'cdw_database'?: string;
-    'import_type'?: string;
-    'author_name'?: string;
+    /**
+    * Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is Mandatory when Import Type is \'ZIP_FILE\'
+    */
+    'file_content'?: HttpFile;
+    static readonly discriminator: string | undefined;
+    static readonly attributeTypeMap: Array<{
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }>;
+    static getAttributeTypeMap(): {
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }[];
+    constructor();
+}
+type DbtConnectionRequestImportTypeEnum = "DBT_CLOUD" | "ZIP_FILE";
+
+/**
+ * ThoughtSpot Public REST API
+ * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
+ *
+ * OpenAPI spec version: 2.0
+ *
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+
+declare class DbtGenerateSyncTmlRequest {
+    /**
+    * Unique ID of the DBT connection.
+    */
+    'dbt_connection_identifier': string;
+    /**
+    * Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’
+    */
+    'file_content'?: HttpFile;
+    static readonly discriminator: string | undefined;
+    static readonly attributeTypeMap: Array<{
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }>;
+    static getAttributeTypeMap(): {
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }[];
+    constructor();
+}
+
+/**
+ * ThoughtSpot Public REST API
+ * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
+ *
+ * OpenAPI spec version: 2.0
+ *
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+declare class ModelTableList {
+    /**
+    * Name of the Model.
+    */
+    'model_name': string;
+    /**
+    * Model directory path, this is optional param and required if there are duplicate models with the same name.
+    */
+    'model_path'?: string | null;
+    /**
+    * List of Tables.
+    */
+    'tables': Array<string>;
+    static readonly discriminator: string | undefined;
+    static readonly attributeTypeMap: Array<{
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }>;
+    static getAttributeTypeMap(): {
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }[];
+    constructor();
+}
+
+/**
+ * ThoughtSpot Public REST API
+ * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
+ *
+ * OpenAPI spec version: 2.0
+ *
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+
+declare class DbtGenerateTmlRequest {
+    /**
+    * Unique ID of the DBT connection.
+    */
+    'dbt_connection_identifier': string;
+    /**
+    * List of Models and their respective Tables
+    */
+    'model_tables'?: Array<ModelTableList>;
+    /**
+    * Mention the worksheet tmls to import
+    */
+    'import_worksheets': DbtGenerateTmlRequestImportWorksheetsEnum;
+    /**
+    * List of worksheets is mandatory when import_Worksheets is type SELECTED
+    */
+    'worksheets'?: Array<string>;
+    /**
+    * Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’
+    */
+    'file_content'?: HttpFile;
+    static readonly discriminator: string | undefined;
+    static readonly attributeTypeMap: Array<{
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }>;
+    static getAttributeTypeMap(): {
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }[];
+    constructor();
+}
+type DbtGenerateTmlRequestImportWorksheetsEnum = "ALL" | "NONE" | "SELECTED";
+
+/**
+ * ThoughtSpot Public REST API
+ * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
+ *
+ * OpenAPI spec version: 2.0
+ *
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+declare class DbtSearchResponse {
+    'dbt_connection_identifier'?: string | null;
+    'project_name'?: string | null;
+    'connection_id'?: string | null;
+    'connection_name'?: string | null;
+    'cdw_database'?: string | null;
+    'import_type'?: string | null;
+    'author_name'?: string | null;
+    static readonly discriminator: string | undefined;
+    static readonly attributeTypeMap: Array<{
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }>;
+    static getAttributeTypeMap(): {
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }[];
+    constructor();
+}
+
+/**
+ * ThoughtSpot Public REST API
+ * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
+ *
+ * OpenAPI spec version: 2.0
+ *
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+declare class DeactivateUserRequest {
+    /**
+    * Unique ID or name of the user.
+    */
+    'user_identifier': string;
+    /**
+    * Base url of the cluster.
+    */
+    'base_url': string;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -3000,7 +3352,7 @@ declare class DefaultActionConfig {
     /**
     * Custom action is available on all visualizations. Earlier , the naming convention: LOCAL/GLOBAL. TRUE signifies GLOBAL for backward compatibility.
     */
-    'visibility'?: boolean;
+    'visibility'?: boolean | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -3035,7 +3387,42 @@ declare class DefaultActionConfigInput {
     /**
     * Custom action is available on all visualizations. Earlier naming convention: LOCAL/GLOBAL. TRUE signifies GLOBAL for backward compatibility.
     */
-    'visibility'?: boolean;
+    'visibility'?: boolean | null;
+    static readonly discriminator: string | undefined;
+    static readonly attributeTypeMap: Array<{
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }>;
+    static getAttributeTypeMap(): {
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }[];
+    constructor();
+}
+
+/**
+ * ThoughtSpot Public REST API
+ * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
+ *
+ * OpenAPI spec version: 2.0
+ *
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+* Default Custom action configuration. This includes the custom action\'s visibility across all visualizations and Answers. By default, a custom action is added to all visualizations and Answers.
+*/
+declare class DefaultActionConfigInputCreate {
+    /**
+    * Custom action is available on all visualizations. Earlier naming convention: LOCAL/GLOBAL. TRUE signifies GLOBAL for backward compatibility. Default: true
+    */
+    'visibility'?: boolean | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -3070,7 +3457,7 @@ declare class DefaultActionConfigSearchInput {
     /**
     * Custom action is available on all visualizations. Earlier naming convention: LOCAL/GLOBAL. TRUE signifies GLOBAL for backward compatibility.
     */
-    'visibility'?: boolean;
+    'visibility'?: boolean | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -3167,9 +3554,9 @@ declare class DeleteConnectionRequest {
 */
 declare class DeleteMetadataTypeInput {
     /**
-    * Type of metadata (Optional when given identifier is ID).
+    *   Type of metadata.     Required if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.
     */
-    'type'?: DeleteMetadataTypeInputTypeEnum;
+    'type'?: DeleteMetadataTypeInputTypeEnum | null;
     /**
     * Unique ID or name of the metadata object.
     */
@@ -3289,23 +3676,23 @@ declare class DeployResponse {
     /**
     * Name of the file deployed
     */
-    'file_name'?: string;
+    'file_name'?: string | null;
     /**
     * Name of the metadata object
     */
-    'metadata_name'?: string;
+    'metadata_name'?: string | null;
     /**
     * Type of the metadata object
     */
-    'metadata_type'?: string;
+    'metadata_type'?: string | null;
     /**
     * Indicates the status of deployment for the file
     */
-    'status_code'?: string;
+    'status_code'?: string | null;
     /**
     * Any error or warning with the deployment
     */
-    'status_message'?: string;
+    'status_message'?: string | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -3334,7 +3721,7 @@ declare class DeployResponse {
  * Do not edit the class manually.
  */
 declare class ErrorResponse {
-    'error'?: any;
+    'error'?: any | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -3368,7 +3755,7 @@ declare class ExcludeMetadataListItemInput {
     */
     'identifier': string;
     /**
-    * Type of metadata. Required if the name of the object is set as identifier. This attribute is optional when the object GUID is specified as identifier. 1. Liveboard 2. Answers 3. LOGICAL_TABLE for any data object such as table, worksheet or view 4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view 5. CONNECTION for connection objects 6. TAG for tag objects 7. USER for user objects 8. USER_GROUP for group objects 9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values.
+    * Type of metadata. Required if the name of the object is set as identifier. This attribute is optional when the object GUID is specified as identifier. 1. Liveboard 2. Answers 3. LOGICAL_TABLE for any data object such as table, worksheet or view 4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view 5. CONNECTION for connection objects 6. TAG for tag objects 7. USER for user objects 8. USER_GROUP for group objects 9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values. 10. INSIGHT_SPEC for SpotIQ objects
     */
     'type': ExcludeMetadataListItemInputTypeEnum;
     static readonly discriminator: string | undefined;
@@ -3386,7 +3773,7 @@ declare class ExcludeMetadataListItemInput {
     }[];
     constructor();
 }
-type ExcludeMetadataListItemInputTypeEnum = "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE" | "LOGICAL_COLUMN" | "CONNECTION" | "TAG" | "USER" | "USER_GROUP" | "LOGICAL_RELATIONSHIP";
+type ExcludeMetadataListItemInputTypeEnum = "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE" | "LOGICAL_COLUMN" | "CONNECTION" | "TAG" | "USER" | "USER_GROUP" | "LOGICAL_RELATIONSHIP" | "INSIGHT_SPEC";
 
 /**
  * ThoughtSpot Public REST API
@@ -3448,35 +3835,38 @@ type ExportAnswerReportRequestFileFormatEnum = "CSV" | "PDF" | "XLSX" | "PNG";
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-declare class PdfOptionsInput {
+/**
+* Options for PDF export.
+*/
+declare class ExportLiveboardReportRequestPdfOptions {
     /**
     * Indicates whether to include the cover page with the Liveboard title.
     */
-    'include_cover_page'?: boolean;
+    'include_cover_page'?: boolean | null;
     /**
     * Indicates whether to include customized wide logo in the footer if available.
     */
-    'include_custom_logo'?: boolean;
+    'include_custom_logo'?: boolean | null;
     /**
     * Indicates whether to include a page with all applied filters.
     */
-    'include_filter_page'?: boolean;
+    'include_filter_page'?: boolean | null;
     /**
     * Indicates whether to include page number in the footer of each page.
     */
-    'include_page_number'?: boolean;
+    'include_page_number'?: boolean | null;
     /**
     * Page orientation of the PDF.
     */
-    'page_orientation'?: PdfOptionsInputPageOrientationEnum;
+    'page_orientation'?: ExportLiveboardReportRequestPdfOptionsPageOrientationEnum | null;
     /**
     * Indicates whether to include only the first page of the tables.
     */
-    'truncate_table'?: boolean;
+    'truncate_table'?: boolean | null;
     /**
     * Text to include in the footer of each page.
     */
-    'page_footer_text'?: string;
+    'page_footer_text'?: string | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -3492,7 +3882,7 @@ declare class PdfOptionsInput {
     }[];
     constructor();
 }
-type PdfOptionsInputPageOrientationEnum = "PORTRAIT" | "LANDSCAPE";
+type ExportLiveboardReportRequestPdfOptionsPageOrientationEnum = "PORTRAIT" | "LANDSCAPE";
 
 /**
  * ThoughtSpot Public REST API
@@ -3505,15 +3895,18 @@ type PdfOptionsInputPageOrientationEnum = "PORTRAIT" | "LANDSCAPE";
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-declare class PngOptionsInput {
+/**
+* Options for PNG export.
+*/
+declare class ExportLiveboardReportRequestPngOptions {
     /**
     * Indicates whether to include the cover page with the Liveboard title.
     */
-    'include_cover_page'?: boolean;
+    'include_cover_page'?: boolean | null;
     /**
     * Indicates whether to include a page with all applied filters.
     */
-    'include_filter_page'?: boolean;
+    'include_filter_page'?: boolean | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -3567,8 +3960,8 @@ declare class ExportLiveboardReportRequest {
     * JSON string representing runtime sort. For example, {\"sortCol1\": \"region\", \"asc1\" : true}. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort).
     */
     'runtime_sort'?: any;
-    'pdf_options'?: PdfOptionsInput;
-    'png_options'?: PngOptionsInput;
+    'pdf_options'?: ExportLiveboardReportRequestPdfOptions;
+    'png_options'?: ExportLiveboardReportRequestPngOptions;
     /**
     * JSON object for setting values of parameters at runtime. For example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>. You can add multiple keys by incrementing the number at the end, for example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters).
     */
@@ -3601,14 +3994,68 @@ type ExportLiveboardReportRequestFileFormatEnum = "CSV" | "PDF" | "XLSX" | "PNG"
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+declare class ExportMetadataTMLBatchedRequest {
+    /**
+    * Type of metadata object to export, can be one of USER | ROLE | USER_GROUP
+    */
+    'metadata_type': ExportMetadataTMLBatchedRequestMetadataTypeEnum;
+    /**
+    * Indicates the position within the complete set from where the API should begin returning objects.
+    */
+    'batch_offset'?: number;
+    /**
+    * Determines the number of objects or items to be retrieved in a single request.
+    */
+    'batch_size'?: number;
+    /**
+    * TML EDOC content format.
+    */
+    'edoc_format'?: ExportMetadataTMLBatchedRequestEdocFormatEnum;
+    /**
+    * Indicates whether to export dependent metadata objects of specified metadata objects.
+    */
+    'export_dependent'?: boolean | null;
+    /**
+    * Indicates whether to export is happening from all orgs context.
+    */
+    'all_orgs_override'?: boolean | null;
+    static readonly discriminator: string | undefined;
+    static readonly attributeTypeMap: Array<{
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }>;
+    static getAttributeTypeMap(): {
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }[];
+    constructor();
+}
+type ExportMetadataTMLBatchedRequestMetadataTypeEnum = "USER" | "USER_GROUP" | "ROLE";
+type ExportMetadataTMLBatchedRequestEdocFormatEnum = "JSON" | "YAML";
+
+/**
+ * ThoughtSpot Public REST API
+ * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
+ *
+ * OpenAPI spec version: 2.0
+ *
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
 /**
 * MetadataType InputType used in Export MetadataType API
 */
 declare class ExportMetadataTypeInput {
     /**
-    * Type of metadata (Optional when given identifier is ID).
+    *   Type of metadata.     Required if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.
     */
-    'type'?: ExportMetadataTypeInputTypeEnum;
+    'type'?: ExportMetadataTypeInputTypeEnum | null;
     /**
     * Unique ID or name of the metadata object.
     */
@@ -3628,7 +4075,7 @@ declare class ExportMetadataTypeInput {
     }[];
     constructor();
 }
-type ExportMetadataTypeInputTypeEnum = "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE" | "CONNECTION" | "CUSTOM_ACTION";
+type ExportMetadataTypeInputTypeEnum = "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE" | "CONNECTION" | "CUSTOM_ACTION" | "USER" | "USER_GROUP" | "ROLE";
 
 /**
  * ThoughtSpot Public REST API
@@ -3656,11 +4103,11 @@ declare class ExportMetadataTMLRequest {
     */
     'export_fqn'?: boolean | null;
     /**
-    * TML EDOC content format.
+    * TML EDOC content format. **Note: exporting in YAML format currently requires manual formatting of the output. For more details on the workaround, please click [here](https://developers.thoughtspot.com/docs/known-issues#_version_9_12_0_cl)**
     */
     'edoc_format'?: ExportMetadataTMLRequestEdocFormatEnum;
     /**
-    * Indicates whether to export worksheet TML in V1 or V2 version.
+    * Indicates whether to export worksheet TML in DEFAULT or V1 or V2 version.
     */
     'export_schema_version'?: ExportMetadataTMLRequestExportSchemaVersionEnum;
     /**
@@ -3671,6 +4118,10 @@ declare class ExportMetadataTMLRequest {
     * Indicates whether to export connection as dependent while exporting table/worksheet/answer/liveboard. This will only be active when export_associated is true.
     */
     'export_connection_as_dependent'?: boolean | null;
+    /**
+    * Indicates whether to export is happening from all orgs context.
+    */
+    'all_orgs_override'?: boolean | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -3687,7 +4138,7 @@ declare class ExportMetadataTMLRequest {
     constructor();
 }
 type ExportMetadataTMLRequestEdocFormatEnum = "JSON" | "YAML";
-type ExportMetadataTMLRequestExportSchemaVersionEnum = "V1" | "V2";
+type ExportMetadataTMLRequestExportSchemaVersionEnum = "DEFAULT" | "V1" | "V2";
 
 /**
  * ThoughtSpot Public REST API
@@ -3710,7 +4161,7 @@ declare class FavoriteMetadataItem {
     */
     'name': string;
     /**
-    * Type of metadata object.
+    *   Type of metadata object.     Required if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.
     */
     'type': FavoriteMetadataItemTypeEnum;
     static readonly discriminator: string | undefined;
@@ -3748,11 +4199,11 @@ declare class FavoriteObjectOptionsInput {
     /**
     * Includes objects marked as favorite for the specified users.
     */
-    'include'?: boolean;
+    'include'?: boolean | null;
     /**
     * Unique ID or name of the users. If not specified, the favorite objects of current logged in user are returned.
     */
-    'user_identifiers'?: Array<string>;
+    'user_identifiers'?: Array<string> | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -3786,7 +4237,7 @@ declare class FetchAnswerDataRequest {
     */
     'metadata_identifier': string;
     /**
-    * JSON output format. By default, the API returns full data in the JSON.
+    * JSON output in compact or full format. The FULL option is available in 9.12.5.cl or later.
     */
     'data_format'?: FetchAnswerDataRequestDataFormatEnum;
     /**
@@ -3824,7 +4275,7 @@ declare class FetchAnswerDataRequest {
     }[];
     constructor();
 }
-type FetchAnswerDataRequestDataFormatEnum = "COMPACT";
+type FetchAnswerDataRequestDataFormatEnum = "FULL" | "COMPACT";
 
 /**
  * ThoughtSpot Public REST API
@@ -3873,7 +4324,7 @@ declare class FetchConnectionDiffStatusResponse {
     /**
     * Status of the connection diff.
     */
-    'status'?: boolean;
+    'status'?: boolean | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -3915,7 +4366,7 @@ declare class FetchLiveboardDataRequest {
     */
     'transient_content'?: string;
     /**
-    * JSON output format. By default, the API returns full data in the JSON.
+    * JSON output in compact or full format. The FULL option is available in 9.12.5.cl or later.
     */
     'data_format'?: FetchLiveboardDataRequestDataFormatEnum;
     /**
@@ -3953,7 +4404,7 @@ declare class FetchLiveboardDataRequest {
     }[];
     constructor();
 }
-type FetchLiveboardDataRequestDataFormatEnum = "COMPACT";
+type FetchLiveboardDataRequestDataFormatEnum = "FULL" | "COMPACT";
 
 /**
  * ThoughtSpot Public REST API
@@ -4015,6 +4466,10 @@ declare class FetchLogsRequest {
     * End time in EPOCH format
     */
     'end_epoch_time_in_millis'?: number;
+    /**
+    * Fetch all the logs. This is available from 9.10.5.cl
+    */
+    'get_all_logs'?: boolean | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -4048,9 +4503,9 @@ type FetchLogsRequestLogTypeEnum = "SECURITY_AUDIT";
 */
 declare class PermissionsMetadataTypeInput {
     /**
-    * Type of metadata object.
+    *   Type of metadata object.     Required if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.
     */
-    'type'?: PermissionsMetadataTypeInputTypeEnum;
+    'type'?: PermissionsMetadataTypeInputTypeEnum | null;
     /**
     * Unique ID or name of the metadata object.
     */
@@ -4091,7 +4546,7 @@ declare class PrincipalsInput {
     /**
     * Principal type.
     */
-    'type'?: PrincipalsInputTypeEnum;
+    'type'?: PrincipalsInputTypeEnum | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -4184,6 +4639,18 @@ declare class FetchPermissionsOnMetadataRequest {
     * Indicates whether to fetch permissions of dependent metadata objects.
     */
     'include_dependent_objects'?: boolean | null;
+    /**
+    * The starting record number from where the records should be included for each metadata type.
+    */
+    'record_offset'?: number;
+    /**
+    * The number of records that should be included for each metadata type.
+    */
+    'record_size'?: number;
+    /**
+    * <div>Version: 10.3.0.cl or later </div>  Specifies the type of permission. Valid values are:     EFFECTIVE - If the user permission to the metadata objects is granted by the privileges assigned to the groups to which they belong.     DEFINED - If a user or user group received access to metadata objects via object sharing by another user.
+    */
+    'permission_type'?: string;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -4276,9 +4743,42 @@ declare class Frequency {
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+
+/**
+* Configuration of schedule with cron expression
+*/
+declare class FrequencyInput {
+    'cron_expression': CronExpressionInput;
+    static readonly discriminator: string | undefined;
+    static readonly attributeTypeMap: Array<{
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }>;
+    static getAttributeTypeMap(): {
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }[];
+    constructor();
+}
+
+/**
+ * ThoughtSpot Public REST API
+ * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
+ *
+ * OpenAPI spec version: 2.0
+ *
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
 declare class GenericInfo {
-    'id'?: string;
-    'name'?: string;
+    'id'?: string | null;
+    'name'?: string | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -4306,22 +4806,63 @@ declare class GenericInfo {
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-/**
-* List of runtime parameters need to set during the session.
-*/
-declare class JWTParameter {
+declare class ImportEPackAsyncTaskStatus {
     /**
-    * Runtime filter parameter type in JWT.
+    * GUID of tenant from which the task is initiated.
     */
-    'runtime_filter'?: any;
+    'tenant_id'?: string | null;
     /**
-    * Runtime sort parameter type in JWT.
+    * Organisation ID of the user who initiated the task.
     */
-    'runtime_sort'?: any;
+    'org_id'?: number | null;
     /**
-    * Runtime param override type in JWT.
+    * Unique identifier for the task.
     */
-    'runtime_param_override'?: any;
+    'task_id'?: string | null;
+    /**
+    * Name of the task.
+    */
+    'task_name'?: string | null;
+    /**
+    * Response of imported objects so far.
+    */
+    'import_response'?: any | null;
+    /**
+    * Current status of the task.
+    */
+    'task_status'?: ImportEPackAsyncTaskStatusTaskStatusEnum | null;
+    /**
+    * ID of the user who initiated the task.
+    */
+    'author_id'?: string | null;
+    /**
+    * Policy used for the import task.
+    */
+    'import_policy'?: ImportEPackAsyncTaskStatusImportPolicyEnum | null;
+    /**
+    * Time when the task was created (in ms since epoch).
+    */
+    'created_at'?: number | null;
+    /**
+    * Time when the task started (in ms since epoch).
+    */
+    'in_progress_at'?: number | null;
+    /**
+    * Time when the task was completed (in ms since epoch).
+    */
+    'completed_at'?: number | null;
+    /**
+    * Total number of objects to process.
+    */
+    'total_object_count'?: number | null;
+    /**
+    * Number of objects processed so far.
+    */
+    'object_processed_count'?: number | null;
+    /**
+    * Last time the task status was updated (in ms since epoch).
+    */
+    'modified_at'?: number | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -4337,6 +4878,8 @@ declare class JWTParameter {
     }[];
     constructor();
 }
+type ImportEPackAsyncTaskStatusTaskStatusEnum = "COMPLETED" | "IN_QUEUE" | "IN_PROGRESS" | "FAILED";
+type ImportEPackAsyncTaskStatusImportPolicyEnum = "PARTIAL" | "ALL_OR_NONE" | "VALIDATE_ONLY" | "PARTIAL_OBJECT";
 
 /**
  * ThoughtSpot Public REST API
@@ -4350,11 +4893,15 @@ declare class JWTParameter {
  * Do not edit the class manually.
  */
 
-/**
-* JWT user options to create a JWT token given the payload.
-*/
-declare class JWTUserOptionsFull {
-    'parameters'?: Array<JWTParameter>;
+declare class GetAsyncImportStatusResponse {
+    /**
+    * List of task statuses.
+    */
+    'status_list'?: Array<ImportEPackAsyncTaskStatus> | null;
+    /**
+    * Indicates whether there are more task statuses to fetch.
+    */
+    'last_batch'?: boolean | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -4387,9 +4934,9 @@ declare class JWTUserOptionsFull {
 */
 declare class UserObject {
     /**
-    * Type of object.
+    *   Type of object.     Required if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.
     */
-    'type'?: UserObjectTypeEnum;
+    'type'?: UserObjectTypeEnum | null;
     /**
     * Unique name/id of the object.
     */
@@ -4436,13 +4983,13 @@ declare class UserParameters {
     */
     'values': Array<string>;
     /**
-    * Flag to persist the parameters.
+    * Flag to persist the parameters.    Version: 9.12.0.cl or later
     */
-    'persist'?: boolean;
+    'persist'?: boolean | null;
     /**
     * Object to apply the runtime parameter.
     */
-    'objects'?: Array<UserObject>;
+    'objects'?: Array<UserObject> | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -4488,13 +5035,13 @@ declare class UserRuntimeFilters {
     */
     'operator': UserRuntimeFiltersOperatorEnum;
     /**
-    * Flag to persist the runtime filters.
+    * Flag to persist the runtime filters.    Version: 9.12.0.cl or later
     */
-    'persist'?: boolean;
+    'persist'?: boolean | null;
     /**
     * Object to apply the runtime filter.
     */
-    'objects'?: Array<UserObject>;
+    'objects'?: Array<UserObject> | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -4531,19 +5078,19 @@ declare class UserRuntimeSorts {
     /**
     * The column name to apply filter.
     */
-    'column_name'?: string;
+    'column_name'?: string | null;
     /**
     * Order for the sort.
     */
-    'order'?: UserRuntimeSortsOrderEnum;
+    'order'?: UserRuntimeSortsOrderEnum | null;
     /**
-    * Flag to persist the runtime sorts.
+    * Flag to persist the runtime sorts.    Version: 9.12.0.cl or later
     */
-    'persist'?: boolean;
+    'persist'?: boolean | null;
     /**
     * Object to apply the runtime sort.
     */
-    'objects'?: Array<UserObject>;
+    'objects'?: Array<UserObject> | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -4574,13 +5121,22 @@ type UserRuntimeSortsOrderEnum = "ASC" | "DESC";
  */
 
 /**
-* User properties runtime_filters,runtime_sorts,parameters applicable to LOGICAL_TABLE(Worksheet)
+* <div>Deprecated: 10.4.0.cl and later </div>  Define attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters).
 */
-declare class UserParameterOptions {
-    'objects'?: Array<UserObject>;
-    'runtime_filters'?: Array<UserRuntimeFilters>;
-    'runtime_sorts'?: Array<UserRuntimeSorts>;
-    'parameters'?: Array<UserParameters>;
+declare class GetObjectAccessTokenRequestUserParameters {
+    'objects'?: Array<UserObject> | null;
+    /**
+    * Objects to apply the User_Runtime_Filters.  Examples to set the `runtime_filters` : ```json { \"column_name\": \"Color\", \"operator\": \"EQ\", \"values\": [\"red\"], \"persist\": false } ```
+    */
+    'runtime_filters'?: Array<UserRuntimeFilters> | null;
+    /**
+    * Objects to apply the User_Runtime_Sorts.  Examples to set the `runtime_sorts` : ```json { \"column_name\": \"Color\", \"order\": \"ASC\", \"persist\": false } ```
+    */
+    'runtime_sorts'?: Array<UserRuntimeSorts> | null;
+    /**
+    * Objects to apply the Runtime_Parameters.  Examples to set the `parameters` : ```json { \"name\": \"Color\", \"values\": [\"Blue\"], \"persist\": false } ```
+    */
+    'parameters'?: Array<UserParameters> | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -4627,7 +5183,7 @@ declare class GetFullAccessTokenRequest {
     */
     'validity_time_in_sec'?: number;
     /**
-    * ID of the Org context to log in to. If the Org ID is not specified, the user will be logged in to the Org context of their previous login session.
+    * ID of the Org context to log in to. If the Org ID is not specified and secret key is provided then user will be logged into the org corresponding to the secret key, and if secret key is not provided then user will be logged in to the Org context of their previous login session.
     */
     'org_id'?: number;
     /**
@@ -4646,116 +5202,7 @@ declare class GetFullAccessTokenRequest {
     * ID or name of the groups to which the newly created user belongs. Use this parameter to provision a user just-in-time (JIT).
     */
     'group_identifiers'?: Array<string>;
-    'jwt_user_options'?: JWTUserOptionsFull;
-    'user_parameters'?: UserParameterOptions;
-    static readonly discriminator: string | undefined;
-    static readonly attributeTypeMap: Array<{
-        name: string;
-        baseName: string;
-        type: string;
-        format: string;
-    }>;
-    static getAttributeTypeMap(): {
-        name: string;
-        baseName: string;
-        type: string;
-        format: string;
-    }[];
-    constructor();
-}
-
-/**
- * ThoughtSpot Public REST API
- * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
- *
- * OpenAPI spec version: 2.0
- *
- *
- * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
- * https://openapi-generator.tech
- * Do not edit the class manually.
- */
-/**
-* Metadata objects.
-*/
-declare class JWTMetadataObject {
-    'identifier'?: string;
-    'type'?: JWTMetadataObjectTypeEnum;
-    static readonly discriminator: string | undefined;
-    static readonly attributeTypeMap: Array<{
-        name: string;
-        baseName: string;
-        type: string;
-        format: string;
-    }>;
-    static getAttributeTypeMap(): {
-        name: string;
-        baseName: string;
-        type: string;
-        format: string;
-    }[];
-    constructor();
-}
-type JWTMetadataObjectTypeEnum = "LIVEBOARD" | "ANSWER";
-
-/**
- * ThoughtSpot Public REST API
- * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
- *
- * OpenAPI spec version: 2.0
- *
- *
- * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
- * https://openapi-generator.tech
- * Do not edit the class manually.
- */
-declare class JWTUserOptionsParametersInner {
-    /**
-    * Runtime filter parameter type in JWT.
-    */
-    'runtime_filter'?: any;
-    /**
-    * Runtime sort parameter type in JWT.
-    */
-    'runtime_sort'?: any;
-    /**
-    * Runtime param override type in JWT.
-    */
-    'runtime_param_override'?: any;
-    static readonly discriminator: string | undefined;
-    static readonly attributeTypeMap: Array<{
-        name: string;
-        baseName: string;
-        type: string;
-        format: string;
-    }>;
-    static getAttributeTypeMap(): {
-        name: string;
-        baseName: string;
-        type: string;
-        format: string;
-    }[];
-    constructor();
-}
-
-/**
- * ThoughtSpot Public REST API
- * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
- *
- * OpenAPI spec version: 2.0
- *
- *
- * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
- * https://openapi-generator.tech
- * Do not edit the class manually.
- */
-
-/**
-* JWT user options to create a JWT token given the payload.
-*/
-declare class JWTUserOptions {
-    'parameters'?: Array<JWTUserOptionsParametersInner>;
-    'metadata'?: Array<JWTMetadataObject>;
+    'user_parameters'?: GetObjectAccessTokenRequestUserParameters;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -4806,7 +5253,7 @@ declare class GetObjectAccessTokenRequest {
     */
     'validity_time_in_sec'?: number;
     /**
-    * ID of the Org context to log in to. If Org ID is not specified, the user will be logged in to the Org context of their previous login session.
+    * ID of the Org context to log in to. If the Org ID is not specified and secret key is provided then user will be logged into the org corresponding to the secret key, and if secret key is not provided then user will be logged in to the Org context of their previous login session.
     */
     'org_id'?: number;
     /**
@@ -4825,8 +5272,7 @@ declare class GetObjectAccessTokenRequest {
     * Unique ID or name of the groups to which you want to assign the new user. You can specify this attribute to dynamically assign privileges during just-in-time (JIT) provisioning.
     */
     'group_identifiers'?: Array<string>;
-    'jwt_user_options'?: JWTUserOptions;
-    'user_parameters'?: UserParameterOptions;
+    'user_parameters'?: GetObjectAccessTokenRequestUserParameters;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -4914,31 +5360,31 @@ declare class GroupsImportListInput {
     /**
     * Unique ID of Liveboards that will be assigned as default Liveboards to the users in the group.
     */
-    'default_liveboard_identifiers'?: Array<string>;
+    'default_liveboard_identifiers'?: Array<string> | null;
     /**
     * Description of the group.
     */
-    'description'?: string;
+    'description'?: string | null;
     /**
     * Privileges that will be assigned to the group.
     */
-    'privileges'?: Array<GroupsImportListInputPrivilegesEnum>;
+    'privileges'?: Array<GroupsImportListInputPrivilegesEnum> | null;
     /**
     * Unique ID or name of the sub-groups to add to the group.
     */
-    'sub_group_identifiers'?: Array<string>;
+    'sub_group_identifiers'?: Array<string> | null;
     /**
     * Type of the group.
     */
-    'type'?: GroupsImportListInputTypeEnum;
+    'type'?: GroupsImportListInputTypeEnum | null;
     /**
     * Unique ID or name of the users to assign to the group.
     */
-    'user_identifiers'?: Array<string>;
+    'user_identifiers'?: Array<string> | null;
     /**
     * Visibility of the group. The SHARABLE makes a group visible to other users and groups, and thus allows them to share objects.
     */
-    'visibility'?: GroupsImportListInputVisibilityEnum;
+    'visibility'?: GroupsImportListInputVisibilityEnum | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -4954,7 +5400,7 @@ declare class GroupsImportListInput {
     }[];
     constructor();
 }
-type GroupsImportListInputPrivilegesEnum = "ADMINISTRATION" | "AUTHORING" | "USERDATAUPLOADING" | "DATADOWNLOADING" | "USERMANAGEMENT" | "DATAMANAGEMENT" | "SHAREWITHALL" | "JOBSCHEDULING" | "A3ANALYSIS" | "EXPERIMENTALFEATUREPRIVILEGE" | "BYPASSRLS" | "RANALYSIS" | "DEVELOPER" | "USER_ADMINISTRATION" | "GROUP_ADMINISTRATION" | "SYNCMANAGEMENT" | "CAN_CREATE_CATALOG" | "DISABLE_PINBOARD_CREATION" | "ENABLESPOTAPPCREATION" | "LIVEBOARD_VERIFIER" | "PREVIEW_THOUGHTSPOT_SAGE";
+type GroupsImportListInputPrivilegesEnum = "ADMINISTRATION" | "AUTHORING" | "USERDATAUPLOADING" | "DATADOWNLOADING" | "USERMANAGEMENT" | "DATAMANAGEMENT" | "SHAREWITHALL" | "JOBSCHEDULING" | "A3ANALYSIS" | "EXPERIMENTALFEATUREPRIVILEGE" | "BYPASSRLS" | "RANALYSIS" | "DEVELOPER" | "USER_ADMINISTRATION" | "GROUP_ADMINISTRATION" | "SYNCMANAGEMENT" | "CAN_CREATE_CATALOG" | "DISABLE_PINBOARD_CREATION" | "LIVEBOARD_VERIFIER" | "PREVIEW_THOUGHTSPOT_SAGE" | "CAN_MANAGE_VERSION_CONTROL" | "THIRDPARTY_ANALYSIS" | "ALLOW_NON_EMBED_FULL_APP_ACCESS" | "CAN_ACCESS_ANALYST_STUDIO" | "CAN_MANAGE_ANALYST_STUDIO" | "PREVIEW_DOCUMENT_SEARCH";
 type GroupsImportListInputTypeEnum = "LOCAL_GROUP" | "LDAP_GROUP";
 type GroupsImportListInputVisibilityEnum = "SHARABLE" | "NON_SHARABLE";
 
@@ -4971,7 +5417,7 @@ type GroupsImportListInputVisibilityEnum = "SHARABLE" | "NON_SHARABLE";
  */
 declare class ImportMetadataTMLRequest {
     /**
-    * Details of TML objects.
+    * Details of TML objects. **Note: importing TML in YAML format, when coming directly from our Playground, is currently requires manual formatting. For more details on the workaround, please click [here](https://developers.thoughtspot.com/docs/known-issues#_version_9_12_0_cl)**
     */
     'metadata_tmls': Array<string>;
     /**
@@ -4982,6 +5428,10 @@ declare class ImportMetadataTMLRequest {
     * If selected, creates TML objects with new GUIDs.
     */
     'create_new'?: boolean | null;
+    /**
+    * If import is happening from all orgs context.
+    */
+    'all_orgs_context'?: boolean | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -4997,7 +5447,7 @@ declare class ImportMetadataTMLRequest {
     }[];
     constructor();
 }
-type ImportMetadataTMLRequestImportPolicyEnum = "PARTIAL" | "ALL_OR_NONE" | "VALIDATE_ONLY";
+type ImportMetadataTMLRequestImportPolicyEnum = "PARTIAL" | "ALL_OR_NONE" | "VALIDATE_ONLY" | "PARTIAL_OBJECT";
 
 /**
  * ThoughtSpot Public REST API
@@ -5023,51 +5473,51 @@ declare class ImportUser {
     /**
     * Password of the user.
     */
-    'password'?: string;
+    'password'?: string | null;
     /**
     * Type of the user account.
     */
-    'account_type'?: ImportUserAccountTypeEnum;
+    'account_type'?: ImportUserAccountTypeEnum | null;
     /**
     * Status of the user account.
     */
-    'account_status'?: ImportUserAccountStatusEnum;
+    'account_status'?: ImportUserAccountStatusEnum | null;
     /**
     * Email address of the user.
     */
-    'email'?: string;
+    'email'?: string | null;
     /**
     * ID or name of the Orgs to which the user belongs.
     */
-    'org_identifiers'?: Array<string>;
+    'org_identifiers'?: Array<string> | null;
     /**
     * ID or name of the groups to which the user belongs.
     */
-    'group_identifiers'?: Array<string>;
+    'group_identifiers'?: Array<string> | null;
     /**
     * Visibility of the users. The SHARABLE property makes a user visible to other users and group, who can share objects with the user.
     */
-    'visibility'?: ImportUserVisibilityEnum;
+    'visibility'?: ImportUserVisibilityEnum | null;
     /**
     * Notify user when other users or groups share metadata objects
     */
-    'notify_on_share'?: boolean;
+    'notify_on_share'?: boolean | null;
     /**
     * Show or hide the new user onboarding walkthroughs
     */
-    'show_onboarding_experience'?: boolean;
+    'show_onboarding_experience'?: boolean | null;
     /**
     * Revisit the new user onboarding walkthroughs
     */
-    'onboarding_experience_completed'?: boolean;
+    'onboarding_experience_completed'?: boolean | null;
     /**
     * Unique ID or name of the default Liveboard assigned to the user.
     */
-    'home_liveboard_identifier'?: string;
+    'home_liveboard_identifier'?: string | null;
     /**
     * Metadata objects to add to the user\'s favorites list.
     */
-    'favorite_metadata'?: Array<FavoriteMetadataInput>;
+    'favorite_metadata'?: Array<FavoriteMetadataInput> | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -5140,8 +5590,8 @@ declare class ImportUserGroupsRequest {
  * Do not edit the class manually.
  */
 declare class UserGroup {
-    'id'?: string;
-    'name'?: string;
+    'id'?: string | null;
+    'name'?: string | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -5214,7 +5664,7 @@ declare class ImportUserType {
     /**
     * Unique identifier of the user.
     */
-    'id'?: string;
+    'id'?: string | null;
     /**
     * Name of the user.
     */
@@ -5293,9 +5743,193 @@ declare class ImportUsersRequest {
  */
 
 declare class ImportUsersResponse {
-    'users_added'?: Array<ImportUserType>;
-    'users_updated'?: Array<ImportUserType>;
-    'users_deleted'?: Array<ImportUserType>;
+    'users_added'?: Array<ImportUserType> | null;
+    'users_updated'?: Array<ImportUserType> | null;
+    'users_deleted'?: Array<ImportUserType> | null;
+    static readonly discriminator: string | undefined;
+    static readonly attributeTypeMap: Array<{
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }>;
+    static getAttributeTypeMap(): {
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }[];
+    constructor();
+}
+
+/**
+ * ThoughtSpot Public REST API
+ * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
+ *
+ * OpenAPI spec version: 2.0
+ *
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+* Metadata objects.
+*/
+declare class JWTMetadataObject {
+    'identifier'?: string | null;
+    'type'?: JWTMetadataObjectTypeEnum | null;
+    static readonly discriminator: string | undefined;
+    static readonly attributeTypeMap: Array<{
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }>;
+    static getAttributeTypeMap(): {
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }[];
+    constructor();
+}
+type JWTMetadataObjectTypeEnum = "LIVEBOARD" | "ANSWER";
+
+/**
+ * ThoughtSpot Public REST API
+ * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
+ *
+ * OpenAPI spec version: 2.0
+ *
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+* List of runtime parameters need to set during the session.
+*/
+declare class JWTParameter {
+    /**
+    * Runtime filter parameter type in JWT.
+    */
+    'runtime_filter'?: any | null;
+    /**
+    * Runtime sort parameter type in JWT.
+    */
+    'runtime_sort'?: any | null;
+    /**
+    * Runtime param override type in JWT.
+    */
+    'runtime_param_override'?: any | null;
+    static readonly discriminator: string | undefined;
+    static readonly attributeTypeMap: Array<{
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }>;
+    static getAttributeTypeMap(): {
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }[];
+    constructor();
+}
+
+/**
+ * ThoughtSpot Public REST API
+ * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
+ *
+ * OpenAPI spec version: 2.0
+ *
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+declare class JWTUserOptionsParametersInner {
+    /**
+    * Runtime filter parameter type in JWT.
+    */
+    'runtime_filter'?: any;
+    /**
+    * Runtime sort parameter type in JWT.
+    */
+    'runtime_sort'?: any;
+    /**
+    * Runtime param override type in JWT.
+    */
+    'runtime_param_override'?: any;
+    static readonly discriminator: string | undefined;
+    static readonly attributeTypeMap: Array<{
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }>;
+    static getAttributeTypeMap(): {
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }[];
+    constructor();
+}
+
+/**
+ * ThoughtSpot Public REST API
+ * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
+ *
+ * OpenAPI spec version: 2.0
+ *
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+
+/**
+* JWT user options to create a JWT token given the payload.   *Deprecated in 9.12.0.cl. Use user_parameters instead.*
+*/
+declare class JWTUserOptions {
+    'parameters'?: Array<JWTUserOptionsParametersInner>;
+    'metadata'?: Array<JWTMetadataObject> | null;
+    static readonly discriminator: string | undefined;
+    static readonly attributeTypeMap: Array<{
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }>;
+    static getAttributeTypeMap(): {
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }[];
+    constructor();
+}
+
+/**
+ * ThoughtSpot Public REST API
+ * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
+ *
+ * OpenAPI spec version: 2.0
+ *
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+
+/**
+* JWT user options to create a JWT token given the payload.   *Deprecated in 9.12.0.cl. Use user_parameters instead.*
+*/
+declare class JWTUserOptionsFull {
+    'parameters'?: Array<JWTParameter> | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -5355,11 +5989,11 @@ declare class LiveboardContent {
     /**
     * Unique ID of the visualization.
     */
-    'visualization_id'?: string;
+    'visualization_id'?: string | null;
     /**
     * Name of the visualization.
     */
-    'visualization_name'?: string;
+    'visualization_name'?: string | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -5432,6 +6066,41 @@ declare class LiveboardDataResponse {
 * Options to specify details of Liveboard.
 */
 declare class LiveboardOptions {
+    /**
+    * Unique ID or name of visualizations.
+    */
+    'visualization_identifiers': Array<string>;
+    static readonly discriminator: string | undefined;
+    static readonly attributeTypeMap: Array<{
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }>;
+    static getAttributeTypeMap(): {
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }[];
+    constructor();
+}
+
+/**
+ * ThoughtSpot Public REST API
+ * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
+ *
+ * OpenAPI spec version: 2.0
+ *
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+* Options to specify details of Liveboard.
+*/
+declare class LiveboardOptionsInput {
     /**
     * Unique ID or name of visualizations.
     */
@@ -5551,7 +6220,7 @@ declare class MetadataAssociationItem {
     */
     'identifier': string;
     /**
-    * Type of metadata.
+    *   Type of metadata.     Required if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.
     */
     'type': string;
     static readonly discriminator: string | undefined;
@@ -5582,8 +6251,8 @@ declare class MetadataAssociationItem {
  * Do not edit the class manually.
  */
 declare class MetadataInput {
-    'identifier'?: string;
-    'type'?: MetadataInputTypeEnum;
+    'identifier'?: string | null;
+    'type'?: MetadataInputTypeEnum | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -5616,15 +6285,15 @@ declare class MetadataListItemInput {
     /**
     * Unique ID or name of the metadata.
     */
-    'identifier'?: string;
+    'identifier'?: string | null;
     /**
     * A pattern to match the case-insensitive name of the metadata object. User % for a wildcard match.
     */
-    'name_pattern'?: string;
+    'name_pattern'?: string | null;
     /**
-    * Type of metadata. Required if the name of the object is set as identifier. This attribute is optional when the object GUID is specified as identifier. 1. Liveboard 2. Answers 3. LOGICAL_TABLE for any data object such as table, worksheet or view. 4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view. 5. CONNECTION for creating or modify data connections. 6. TAG for tag objects. 7. USER for user objects. 8. USER_GROUP for group objects. 9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values
+    * Type of metadata. Required if the name of the object is set as identifier. This attribute is optional when the object GUID is specified as identifier. 1. Liveboard 2. Answers 3. LOGICAL_TABLE for any data object such as table, worksheet or view. 4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view. 5. CONNECTION for creating or modify data connections. 6. TAG for tag objects. 7. USER for user objects. 8. USER_GROUP for group objects. 9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values 10. INSIGHT_SPEC for SpotIQ objects
     */
-    'type'?: MetadataListItemInputTypeEnum;
+    'type'?: MetadataListItemInputTypeEnum | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -5640,7 +6309,7 @@ declare class MetadataListItemInput {
     }[];
     constructor();
 }
-type MetadataListItemInputTypeEnum = "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE" | "LOGICAL_COLUMN" | "CONNECTION" | "TAG" | "USER" | "USER_GROUP" | "LOGICAL_RELATIONSHIP";
+type MetadataListItemInputTypeEnum = "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE" | "LOGICAL_COLUMN" | "CONNECTION" | "TAG" | "USER" | "USER_GROUP" | "LOGICAL_RELATIONSHIP" | "INSIGHT_SPEC";
 
 /**
  * ThoughtSpot Public REST API
@@ -5654,7 +6323,7 @@ type MetadataListItemInputTypeEnum = "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE" | 
  * Do not edit the class manually.
  */
 declare class MetadataResponse {
-    'name'?: string;
+    'name'?: string | null;
     'id': string;
     'type': MetadataResponseTypeEnum;
     static readonly discriminator: string | undefined;
@@ -5692,11 +6361,11 @@ declare class MetadataSearchResponse {
     /**
     * Unique identifier of the metadata.
     */
-    'metadata_id'?: string;
+    'metadata_id'?: string | null;
     /**
     * Name of the metadata.
     */
-    'metadata_name'?: string;
+    'metadata_name'?: string | null;
     /**
     * Type of the metadata.
     */
@@ -5704,27 +6373,27 @@ declare class MetadataSearchResponse {
     /**
     * Details of dependent objects of the metadata objects.
     */
-    'dependent_objects'?: any;
+    'dependent_objects'?: any | null;
     /**
     * Details of incomplete information of the metadata objects if any.
     */
-    'incomplete_objects'?: Array<any>;
+    'incomplete_objects'?: Array<any> | null;
     /**
     * Complete details of the metadata objects.
     */
-    'metadata_detail'?: any;
+    'metadata_detail'?: any | null;
     /**
     * Header information of the metadata objects.
     */
-    'metadata_header'?: any;
+    'metadata_header'?: any | null;
     /**
     * Visualization header information of the metadata objects.
     */
-    'visualization_headers'?: Array<any>;
+    'visualization_headers'?: Array<any> | null;
     /**
     * Stats of the metadata object. Includes views, favorites, last_accessed.
     */
-    'stats'?: any;
+    'stats'?: any | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -5760,11 +6429,11 @@ declare class MetadataSearchSortOptions {
     /**
     * Name of the field to apply the sort on.
     */
-    'field_name'?: MetadataSearchSortOptionsFieldNameEnum;
+    'field_name'?: MetadataSearchSortOptionsFieldNameEnum | null;
     /**
     * Sort order : ASC(Ascending) or DESC(Descending).
     */
-    'order'?: MetadataSearchSortOptionsOrderEnum;
+    'order'?: MetadataSearchSortOptionsOrderEnum | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -5794,46 +6463,6 @@ type MetadataSearchSortOptionsOrderEnum = "ASC" | "DESC";
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-declare class ModelTableList {
-    /**
-    * Name of the Model.
-    */
-    'model_name': string;
-    /**
-    * Model directory path, this is optional param and required if there are duplicate models with the same name.
-    */
-    'model_path'?: string;
-    /**
-    * List of Tables.
-    */
-    'tables': Array<string>;
-    static readonly discriminator: string | undefined;
-    static readonly attributeTypeMap: Array<{
-        name: string;
-        baseName: string;
-        type: string;
-        format: string;
-    }>;
-    static getAttributeTypeMap(): {
-        name: string;
-        baseName: string;
-        type: string;
-        format: string;
-    }[];
-    constructor();
-}
-
-/**
- * ThoughtSpot Public REST API
- * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
- *
- * OpenAPI spec version: 2.0
- *
- *
- * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
- * https://openapi-generator.tech
- * Do not edit the class manually.
- */
 /**
 * The object representation with ID and Name.
 */
@@ -5841,11 +6470,11 @@ declare class ObjectIDAndName {
     /**
     * The unique identifier of the object.
     */
-    'id'?: string;
+    'id'?: string | null;
     /**
     * Name of the object.
     */
-    'name'?: string;
+    'name'?: string | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -5916,23 +6545,23 @@ declare class OrgResponse {
     /**
     * Unique identifier of the Org.
     */
-    'id'?: number;
+    'id'?: number | null;
     /**
     * Name of the Org.
     */
-    'name'?: string;
+    'name'?: string | null;
     /**
     * Status of the Org.
     */
-    'status'?: OrgResponseStatusEnum;
+    'status'?: OrgResponseStatusEnum | null;
     /**
     * Description of the Org.
     */
-    'description'?: string;
+    'description'?: string | null;
     /**
     * Visibility of the Org.
     */
-    'visibility'?: OrgResponseVisibilityEnum;
+    'visibility'?: OrgResponseVisibilityEnum | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -5969,39 +6598,39 @@ declare class PdfOptions {
     /**
     * Indicates whether to include complete Liveboard.
     */
-    'complete_liveboard'?: boolean;
+    'complete_liveboard'?: boolean | null;
     /**
     * Indicates whether to include cover page with the Liveboard title.
     */
-    'include_cover_page'?: boolean;
+    'include_cover_page'?: boolean | null;
     /**
     * Indicates whether to include customized wide logo in the footer if available.
     */
-    'include_custom_logo'?: boolean;
+    'include_custom_logo'?: boolean | null;
     /**
     * Indicates whether to include a page with all applied filters.
     */
-    'include_filter_page'?: boolean;
+    'include_filter_page'?: boolean | null;
     /**
     * Indicates whether to include page number in the footer of each page
     */
-    'include_page_number'?: boolean;
+    'include_page_number'?: boolean | null;
     /**
     * Text to include in the footer of each page.
     */
-    'page_footer_text'?: string;
+    'page_footer_text'?: string | null;
     /**
     * Page orientation of the PDF.
     */
-    'page_orientation'?: string;
+    'page_orientation'?: string | null;
     /**
     * Page size.
     */
-    'page_size'?: PdfOptionsPageSizeEnum;
+    'page_size'?: PdfOptionsPageSizeEnum | null;
     /**
     * Indicates whether to include only first page of the tables.
     */
-    'truncate_table'?: boolean;
+    'truncate_table'?: boolean | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -6018,6 +6647,63 @@ declare class PdfOptions {
     constructor();
 }
 type PdfOptionsPageSizeEnum = "A4";
+
+/**
+ * ThoughtSpot Public REST API
+ * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
+ *
+ * OpenAPI spec version: 2.0
+ *
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+declare class PdfOptionsInput {
+    /**
+    * Indicates whether to include the cover page with the Liveboard title.
+    */
+    'include_cover_page'?: boolean | null;
+    /**
+    * Indicates whether to include customized wide logo in the footer if available.
+    */
+    'include_custom_logo'?: boolean | null;
+    /**
+    * Indicates whether to include a page with all applied filters.
+    */
+    'include_filter_page'?: boolean | null;
+    /**
+    * Indicates whether to include page number in the footer of each page.
+    */
+    'include_page_number'?: boolean | null;
+    /**
+    * Page orientation of the PDF.
+    */
+    'page_orientation'?: PdfOptionsInputPageOrientationEnum | null;
+    /**
+    * Indicates whether to include only the first page of the tables.
+    */
+    'truncate_table'?: boolean | null;
+    /**
+    * Text to include in the footer of each page.
+    */
+    'page_footer_text'?: string | null;
+    static readonly discriminator: string | undefined;
+    static readonly attributeTypeMap: Array<{
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }>;
+    static getAttributeTypeMap(): {
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }[];
+    constructor();
+}
+type PdfOptionsInputPageOrientationEnum = "PORTRAIT" | "LANDSCAPE";
 
 /**
  * ThoughtSpot Public REST API
@@ -6069,7 +6755,7 @@ type PermissionInputShareModeEnum = "READ_ONLY" | "MODIFY" | "NO_ACCESS";
  * Do not edit the class manually.
  */
 declare class PermissionOfMetadataResponse {
-    'metadata_permission_details'?: any;
+    'metadata_permission_details'?: any | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -6098,7 +6784,43 @@ declare class PermissionOfMetadataResponse {
  * Do not edit the class manually.
  */
 declare class PermissionOfPrincipalsResponse {
-    'principal_permission_details'?: any;
+    'principal_permission_details'?: any | null;
+    static readonly discriminator: string | undefined;
+    static readonly attributeTypeMap: Array<{
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }>;
+    static getAttributeTypeMap(): {
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }[];
+    constructor();
+}
+
+/**
+ * ThoughtSpot Public REST API
+ * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
+ *
+ * OpenAPI spec version: 2.0
+ *
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+declare class PngOptionsInput {
+    /**
+    * Indicates whether to include the cover page with the Liveboard title.
+    */
+    'include_cover_page'?: boolean | null;
+    /**
+    * Indicates whether to include a page with all applied filters.
+    */
+    'include_filter_page'?: boolean | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -6170,11 +6892,51 @@ declare class RecipientDetails {
     /**
     * Emails of the recipients. Specify email address if the recipient is not a ThoughtSpot user.
     */
-    'emails'?: Array<string>;
+    'emails'?: Array<string> | null;
     /**
     * List of user or groups to subscribe for the scheduled job notifications.
     */
-    'principals'?: Array<PrincipalsListItem>;
+    'principals'?: Array<PrincipalsListItem> | null;
+    static readonly discriminator: string | undefined;
+    static readonly attributeTypeMap: Array<{
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }>;
+    static getAttributeTypeMap(): {
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }[];
+    constructor();
+}
+
+/**
+ * ThoughtSpot Public REST API
+ * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
+ *
+ * OpenAPI spec version: 2.0
+ *
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+
+/**
+* Recipients of the scheduled job notification.
+*/
+declare class RecipientDetailsInput {
+    /**
+    * Emails of the recipients.
+    */
+    'emails'?: Array<string> | null;
+    /**
+    * User or groups to be set as recipients of the schedule notifications.
+    */
+    'principals'?: Array<PrincipalsListItemInput> | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -6207,27 +6969,27 @@ declare class RepoConfigObject {
     /**
     * Remote repository URL configured
     */
-    'repository_url'?: string;
+    'repository_url'?: string | null;
     /**
     * Username to authenticate connection to the version control system
     */
-    'username'?: string;
+    'username'?: string | null;
     /**
     * Name of the remote branch where objects from this Thoughtspot instance will be versioned.
     */
-    'commit_branch_name'?: string;
+    'commit_branch_name'?: string | null;
     /**
     * Branches that have been pulled in local repository
     */
-    'branches'?: Array<string>;
+    'branches'?: Array<string> | null;
     /**
     * Maintain mapping of guid for the deployment to an instance
     */
-    'enable_guid_mapping'?: boolean;
+    'enable_guid_mapping'?: boolean | null;
     /**
     * Name of the branch where the configuration files related to operations between Thoughtspot and version control repo should be maintained.
     */
-    'configuration_branch_name'?: string;
+    'configuration_branch_name'?: string | null;
     'org'?: Org;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
@@ -6299,7 +7061,39 @@ declare class ResponseActivationURL {
     /**
     * Activation link to activate the user.
     */
-    'activation_link'?: string;
+    'activation_link'?: string | null;
+    static readonly discriminator: string | undefined;
+    static readonly attributeTypeMap: Array<{
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }>;
+    static getAttributeTypeMap(): {
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }[];
+    constructor();
+}
+
+/**
+ * ThoughtSpot Public REST API
+ * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
+ *
+ * OpenAPI spec version: 2.0
+ *
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+declare class ResponseCopyObject {
+    /**
+    * The unique identifier of the object.
+    */
+    'metadata_id'?: string | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -6341,7 +7135,7 @@ declare class ResponseCustomAction {
     /**
     * Metadata objects to assign the the custom action to.
     */
-    'metadata_association'?: Array<MetadataAssociationItem>;
+    'metadata_association'?: Array<MetadataAssociationItem> | null;
     /**
     * Unique name of the custom action.
     */
@@ -6349,7 +7143,7 @@ declare class ResponseCustomAction {
     /**
     * Unique ID or name of the User groups which are associated with the custom action.
     */
-    'user_groups'?: Array<ObjectIDAndName>;
+    'user_groups'?: Array<ObjectIDAndName> | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -6400,7 +7194,7 @@ declare class ResponseScheduleRun {
     /**
     * Message details related to the schedule run.
     */
-    'detail'?: string;
+    'detail'?: string | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -6438,7 +7232,7 @@ declare class ResponseSchedule {
     /**
     * Description of the job.
     */
-    'description'?: string;
+    'description'?: string | null;
     /**
     * Export file format.
     */
@@ -6459,7 +7253,7 @@ declare class ResponseSchedule {
     /**
     * Status of the job
     */
-    'status'?: string;
+    'status'?: string | null;
     /**
     * Time zone
     */
@@ -6467,7 +7261,7 @@ declare class ResponseSchedule {
     /**
     * Schedule runs history records.
     */
-    'history_runs'?: Array<ResponseScheduleRun>;
+    'history_runs'?: Array<ResponseScheduleRun> | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -6592,27 +7386,27 @@ declare class RevertResponse {
     /**
     * Comments associated with the commit
     */
-    'comment'?: string;
+    'comment'?: string | null;
     /**
     * Time at which the changes were committed.
     */
-    'commit_time'?: string;
+    'commit_time'?: string | null;
     /**
     * SHA id associated with the commit
     */
-    'commit_id'?: string;
+    'commit_id'?: string | null;
     /**
     * Branch where changes were committed
     */
-    'branch'?: string;
+    'branch'?: string | null;
     /**
     * Files that were pushed as part of this commit
     */
-    'committed_files'?: Array<CommitFileType>;
+    'committed_files'?: Array<CommitFileType> | null;
     /**
     * Metadata of reverted file of this commit
     */
-    'reverted_metadata'?: Array<RevertedMetadata>;
+    'reverted_metadata'?: Array<RevertedMetadata> | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -6704,11 +7498,11 @@ declare class Role {
     /**
     * id of the role
     */
-    'id'?: string;
+    'id'?: string | null;
     /**
     * name of the role
     */
-    'name'?: string;
+    'name'?: string | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -6753,15 +7547,15 @@ declare class RoleResponse {
     /**
     * number of groups assigned with this role
     */
-    'groups_assigned_count'?: number;
+    'groups_assigned_count'?: number | null;
     /**
     * Orgs in which role exists.
     */
-    'orgs'?: Array<GenericInfo>;
+    'orgs'?: Array<GenericInfo> | null;
     /**
     * Details of groups assigned with this role
     */
-    'groups'?: Array<GenericInfo>;
+    'groups'?: Array<GenericInfo> | null;
     /**
     * Privileges granted to the role.
     */
@@ -6769,43 +7563,43 @@ declare class RoleResponse {
     /**
     * Permission details of the Role
     */
-    'permission'?: RoleResponsePermissionEnum;
+    'permission'?: RoleResponsePermissionEnum | null;
     /**
     * Unique identifier of author of the role.
     */
-    'author_id'?: string;
+    'author_id'?: string | null;
     /**
     * Unique identifier of modifier of the role.
     */
-    'modifier_id'?: string;
+    'modifier_id'?: string | null;
     /**
     * Creation time of the role in milliseconds.
     */
-    'creation_time_in_millis'?: any;
+    'creation_time_in_millis'?: any | null;
     /**
     * Last modified time of the role in milliseconds.
     */
-    'modification_time_in_millis'?: any;
+    'modification_time_in_millis'?: any | null;
     /**
     * Indicates whether the role is deleted.
     */
-    'deleted'?: boolean;
+    'deleted'?: boolean | null;
     /**
     * Indicates whether the role is deprecated.
     */
-    'deprecated'?: boolean;
+    'deprecated'?: boolean | null;
     /**
     * Indicates whether the role is external.
     */
-    'external'?: boolean;
+    'external'?: boolean | null;
     /**
     * Indicates whether the role is hidden.
     */
-    'hidden'?: boolean;
+    'hidden'?: boolean | null;
     /**
     * Indicates whether the role is shared via connection
     */
-    'shared_via_connection'?: boolean;
+    'shared_via_connection'?: boolean | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -6821,7 +7615,7 @@ declare class RoleResponse {
     }[];
     constructor();
 }
-type RoleResponsePrivilegesEnum = "USERDATAUPLOADING" | "DATADOWNLOADING" | "DATAMANAGEMENT" | "SHAREWITHALL" | "JOBSCHEDULING" | "A3ANALYSIS" | "EXPERIMENTALFEATUREPRIVILEGE" | "BYPASSRLS" | "DISABLE_PINBOARD_CREATION" | "DEVELOPER" | "APPLICATION_ADMINISTRATION" | "USER_ADMINISTRATION" | "GROUP_ADMINISTRATION" | "SYSTEM_INFO_ADMINISTRATION" | "SYNCMANAGEMENT" | "ORG_ADMINISTRATION" | "ROLE_ADMINISTRATION" | "AUTHENTICATION_ADMINISTRATION" | "BILLING_INFO_ADMINISTRATION" | "CONTROL_TRUSTED_AUTH" | "TAGMANAGEMENT" | "LIVEBOARD_VERIFIER" | "CAN_MANAGE_CUSTOM_CALENDAR" | "CAN_CREATE_OR_EDIT_CONNECTIONS" | "CAN_MANAGE_WORKSHEET_VIEWS_TABLES";
+type RoleResponsePrivilegesEnum = "USERDATAUPLOADING" | "DATADOWNLOADING" | "DATAMANAGEMENT" | "SHAREWITHALL" | "JOBSCHEDULING" | "A3ANALYSIS" | "EXPERIMENTALFEATUREPRIVILEGE" | "BYPASSRLS" | "DISABLE_PINBOARD_CREATION" | "DEVELOPER" | "APPLICATION_ADMINISTRATION" | "USER_ADMINISTRATION" | "GROUP_ADMINISTRATION" | "SYSTEM_INFO_ADMINISTRATION" | "SYNCMANAGEMENT" | "ORG_ADMINISTRATION" | "ROLE_ADMINISTRATION" | "AUTHENTICATION_ADMINISTRATION" | "BILLING_INFO_ADMINISTRATION" | "CONTROL_TRUSTED_AUTH" | "TAGMANAGEMENT" | "LIVEBOARD_VERIFIER" | "CAN_MANAGE_CUSTOM_CALENDAR" | "CAN_CREATE_OR_EDIT_CONNECTIONS" | "CAN_MANAGE_WORKSHEET_VIEWS_TABLES" | "CAN_MANAGE_VERSION_CONTROL" | "THIRDPARTY_ANALYSIS" | "CAN_CREATE_CATALOG" | "ALLOW_NON_EMBED_FULL_APP_ACCESS" | "CAN_ACCESS_ANALYST_STUDIO" | "CAN_MANAGE_ANALYST_STUDIO" | "PREVIEW_DOCUMENT_SEARCH";
 type RoleResponsePermissionEnum = "READ_ONLY" | "MODIFY" | "NO_ACCESS";
 
 /**
@@ -6944,15 +7738,15 @@ declare class ScheduleHistoryRunsOptionsInput {
     /**
     * Indicates whether to fetch history runs for the scheduled notification.
     */
-    'include_history_runs'?: boolean;
+    'include_history_runs'?: boolean | null;
     /**
     * Indicates the max number of records that can be fetched as past runs of any scheduled job.
     */
-    'record_size'?: number;
+    'record_size'?: number | null;
     /**
     * Indicates the starting record number from where history runs records should be fetched.
     */
-    'record_offset'?: number;
+    'record_offset'?: number | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -6980,6 +7774,74 @@ declare class ScheduleHistoryRunsOptionsInput {
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+/**
+* Options for PDF export.
+*/
+declare class SchedulesPdfOptionsInput {
+    /**
+    * Indicates whether to include complete Liveboard.
+    */
+    'complete_liveboard'?: boolean | null;
+    /**
+    * Indicates whether to include cover page with the Liveboard title.
+    */
+    'include_cover_page'?: boolean | null;
+    /**
+    * Indicates whether to include customized wide logo in the footer if available.
+    */
+    'include_custom_logo'?: boolean | null;
+    /**
+    * Indicates whether to include a page with all applied filters.
+    */
+    'include_filter_page'?: boolean | null;
+    /**
+    * Indicates whether to include page number in the footer of each page
+    */
+    'include_page_number'?: boolean | null;
+    /**
+    * Text to include in the footer of each page.
+    */
+    'page_footer_text'?: string | null;
+    /**
+    * Page orientation of the PDF.
+    */
+    'page_orientation'?: string | null;
+    /**
+    * Page size.
+    */
+    'page_size'?: SchedulesPdfOptionsInputPageSizeEnum | null;
+    /**
+    * Indicates whether to include only first page of the tables.
+    */
+    'truncate_table'?: boolean | null;
+    static readonly discriminator: string | undefined;
+    static readonly attributeTypeMap: Array<{
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }>;
+    static getAttributeTypeMap(): {
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }[];
+    constructor();
+}
+type SchedulesPdfOptionsInputPageSizeEnum = "A4";
+
+/**
+ * ThoughtSpot Public REST API
+ * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
+ *
+ * OpenAPI spec version: 2.0
+ *
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
 declare class Scope {
     /**
     * Object access scope type.
@@ -6988,11 +7850,11 @@ declare class Scope {
     /**
     * Unique identifier of the metadata.
     */
-    'org_id'?: number;
+    'org_id'?: number | null;
     /**
     * Unique identifier of the Org.
     */
-    'metadata_id'?: string;
+    'metadata_id'?: string | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -7056,7 +7918,7 @@ declare class SearchCommitsRequest {
     }[];
     constructor();
 }
-type SearchCommitsRequestMetadataTypeEnum = "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE";
+type SearchCommitsRequestMetadataTypeEnum = "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE" | "CUSTOM_ACTION";
 
 /**
  * ThoughtSpot Public REST API
@@ -7101,15 +7963,18 @@ declare class SearchConfigRequest {
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-declare class SortOptionInput {
+/**
+* Sort options.
+*/
+declare class SearchConnectionRequestSortOptions {
     /**
     * Name of the field to apply the sort on.
     */
-    'field_name'?: SortOptionInputFieldNameEnum;
+    'field_name'?: SearchConnectionRequestSortOptionsFieldNameEnum | null;
     /**
     * Sort order : ASC(Ascending) or DESC(Descending).
     */
-    'order'?: SortOptionInputOrderEnum;
+    'order'?: SearchConnectionRequestSortOptionsOrderEnum | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -7125,8 +7990,8 @@ declare class SortOptionInput {
     }[];
     constructor();
 }
-type SortOptionInputFieldNameEnum = "NAME" | "DISPLAY_NAME" | "AUTHOR" | "CREATED" | "MODIFIED" | "LAST_ACCESSED" | "SYNCED" | "VIEWS" | "USER_STATE" | "ROW_COUNT";
-type SortOptionInputOrderEnum = "ASC" | "DESC";
+type SearchConnectionRequestSortOptionsFieldNameEnum = "NAME" | "DISPLAY_NAME" | "AUTHOR" | "CREATED" | "MODIFIED" | "LAST_ACCESSED" | "SYNCED" | "VIEWS" | "USER_STATE" | "ROW_COUNT";
+type SearchConnectionRequestSortOptionsOrderEnum = "ASC" | "DESC";
 
 /**
  * ThoughtSpot Public REST API
@@ -7165,7 +8030,7 @@ declare class SearchConnectionRequest {
     * Data warehouse object type.
     */
     'data_warehouse_object_type'?: SearchConnectionRequestDataWarehouseObjectTypeEnum;
-    'sort_options'?: SortOptionInput;
+    'sort_options'?: SearchConnectionRequestSortOptions;
     /**
     * Indicates whether to include complete details of the connection objects.
     */
@@ -7193,7 +8058,7 @@ declare class SearchConnectionRequest {
     }[];
     constructor();
 }
-type SearchConnectionRequestDataWarehouseTypesEnum = "SNOWFLAKE" | "AMAZON_REDSHIFT" | "GOOGLE_BIGQUERY" | "AZURE_SYNAPSE" | "TERADATA" | "SAP_HANA" | "STARBURST" | "ORACLE_ADW" | "DATABRICKS" | "DENODO" | "DREMIO" | "TRINO" | "PRESTO" | "POSTGRES" | "SQLSERVER" | "MYSQL" | "GENERIC_JDBC" | "AMAZON_RDS_POSTGRESQL" | "AMAZON_AURORA_POSTGRESQL" | "AMAZON_RDS_MYSQL" | "AMAZON_AURORA_MYSQL" | "LOOKER" | "AMAZON_ATHENA" | "SINGLESTORE" | "GCP_SQLSERVER" | "GCP_ALLOYDB_POSTGRESQL" | "GCP_POSTGRESQL" | "GCP_MYSQL" | "MODE" | "RDBMS_LOOKER_ML";
+type SearchConnectionRequestDataWarehouseTypesEnum = "SNOWFLAKE" | "AMAZON_REDSHIFT" | "GOOGLE_BIGQUERY" | "AZURE_SYNAPSE" | "TERADATA" | "SAP_HANA" | "STARBURST" | "ORACLE_ADW" | "DATABRICKS" | "DENODO" | "DREMIO" | "TRINO" | "PRESTO" | "POSTGRES" | "SQLSERVER" | "MYSQL" | "GENERIC_JDBC" | "AMAZON_RDS_POSTGRESQL" | "AMAZON_AURORA_POSTGRESQL" | "AMAZON_RDS_MYSQL" | "AMAZON_AURORA_MYSQL" | "LOOKER" | "AMAZON_ATHENA" | "SINGLESTORE" | "GCP_SQLSERVER" | "GCP_ALLOYDB_POSTGRESQL" | "GCP_POSTGRESQL" | "GCP_MYSQL" | "MODE" | "GOOGLE_SHEETS";
 type SearchConnectionRequestDataWarehouseObjectTypeEnum = "DATABASE" | "SCHEMA" | "TABLE" | "COLUMN";
 type SearchConnectionRequestAuthenticationTypeEnum = "SERVICE_ACCOUNT" | "OAUTH" | "IAM" | "EXTOAUTH";
 
@@ -7221,7 +8086,7 @@ declare class SearchConnectionResponse {
     /**
     * Description of the connection.
     */
-    'description'?: string;
+    'description'?: string | null;
     /**
     * Type of data warehouse.
     */
@@ -7230,7 +8095,7 @@ declare class SearchConnectionResponse {
     /**
     * Details of the connection.
     */
-    'details'?: any;
+    'details'?: any | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -7246,7 +8111,42 @@ declare class SearchConnectionResponse {
     }[];
     constructor();
 }
-type SearchConnectionResponseDataWarehouseTypeEnum = "SNOWFLAKE" | "AMAZON_REDSHIFT" | "GOOGLE_BIGQUERY" | "AZURE_SYNAPSE" | "TERADATA" | "SAP_HANA" | "STARBURST" | "ORACLE_ADW" | "DATABRICKS" | "DENODO" | "DREMIO" | "TRINO" | "PRESTO" | "POSTGRES" | "SQLSERVER" | "MYSQL" | "GENERIC_JDBC" | "AMAZON_RDS_POSTGRESQL" | "AMAZON_AURORA_POSTGRESQL" | "AMAZON_RDS_MYSQL" | "AMAZON_AURORA_MYSQL" | "LOOKER" | "AMAZON_ATHENA" | "SINGLESTORE" | "GCP_SQLSERVER" | "GCP_ALLOYDB_POSTGRESQL" | "GCP_POSTGRESQL" | "GCP_MYSQL" | "MODE" | "RDBMS_LOOKER_ML";
+type SearchConnectionResponseDataWarehouseTypeEnum = "SNOWFLAKE" | "AMAZON_REDSHIFT" | "GOOGLE_BIGQUERY" | "AZURE_SYNAPSE" | "TERADATA" | "SAP_HANA" | "STARBURST" | "ORACLE_ADW" | "DATABRICKS" | "DENODO" | "DREMIO" | "TRINO" | "PRESTO" | "POSTGRES" | "SQLSERVER" | "MYSQL" | "GENERIC_JDBC" | "AMAZON_RDS_POSTGRESQL" | "AMAZON_AURORA_POSTGRESQL" | "AMAZON_RDS_MYSQL" | "AMAZON_AURORA_MYSQL" | "LOOKER" | "AMAZON_ATHENA" | "SINGLESTORE" | "GCP_SQLSERVER" | "GCP_ALLOYDB_POSTGRESQL" | "GCP_POSTGRESQL" | "GCP_MYSQL" | "MODE" | "GOOGLE_SHEETS";
+
+/**
+ * ThoughtSpot Public REST API
+ * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
+ *
+ * OpenAPI spec version: 2.0
+ *
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+* Default Custom action configuration. This includes if the custom action is available on all visualizations. By default, a custom action is added to all visualizations and Answers.
+*/
+declare class SearchCustomActionsRequestDefaultActionConfig {
+    /**
+    * Custom action is available on all visualizations. Earlier naming convention: LOCAL/GLOBAL. TRUE signifies GLOBAL for backward compatibility.
+    */
+    'visibility'?: boolean | null;
+    static readonly discriminator: string | undefined;
+    static readonly attributeTypeMap: Array<{
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }>;
+    static getAttributeTypeMap(): {
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }[];
+    constructor();
+}
 
 /**
  * ThoughtSpot Public REST API
@@ -7269,7 +8169,7 @@ declare class SearchCustomActionsRequest {
     * A pattern to match case-insensitive name of the custom-action object.
     */
     'name_pattern'?: string;
-    'default_action_config'?: DefaultActionConfigSearchInput;
+    'default_action_config'?: SearchCustomActionsRequestDefaultActionConfig;
     /**
     * When set to true, returns the associated groups for a custom action.
     */
@@ -7324,7 +8224,7 @@ declare class SearchDataRequest {
     */
     'logical_table_identifier': string;
     /**
-    * JSON output format. By default, the API returns full data in the JSON.
+    * JSON output in compact or full format. The FULL option is available in 9.12.5.cl or later.
     */
     'data_format'?: SearchDataRequestDataFormatEnum;
     /**
@@ -7362,7 +8262,7 @@ declare class SearchDataRequest {
     }[];
     constructor();
 }
-type SearchDataRequestDataFormatEnum = "COMPACT";
+type SearchDataRequestDataFormatEnum = "FULL" | "COMPACT";
 
 /**
  * ThoughtSpot Public REST API
@@ -7411,6 +8311,86 @@ declare class SearchDataResponse {
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+/**
+* Options to sort the API response by objects set as favorites for the logged-in user or the users specified in the API request.
+*/
+declare class SearchMetadataRequestFavoriteObjectOptions {
+    /**
+    * Includes objects marked as favorite for the specified users.
+    */
+    'include'?: boolean | null;
+    /**
+    * Unique ID or name of the users. If not specified, the favorite objects of current logged in user are returned.
+    */
+    'user_identifiers'?: Array<string> | null;
+    static readonly discriminator: string | undefined;
+    static readonly attributeTypeMap: Array<{
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }>;
+    static getAttributeTypeMap(): {
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }[];
+    constructor();
+}
+
+/**
+ * ThoughtSpot Public REST API
+ * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
+ *
+ * OpenAPI spec version: 2.0
+ *
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+* Sort options to filter metadata details.
+*/
+declare class SearchMetadataRequestSortOptions {
+    /**
+    * Name of the field to apply the sort on.
+    */
+    'field_name'?: SearchMetadataRequestSortOptionsFieldNameEnum | null;
+    /**
+    * Sort order : ASC(Ascending) or DESC(Descending).
+    */
+    'order'?: SearchMetadataRequestSortOptionsOrderEnum | null;
+    static readonly discriminator: string | undefined;
+    static readonly attributeTypeMap: Array<{
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }>;
+    static getAttributeTypeMap(): {
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }[];
+    constructor();
+}
+type SearchMetadataRequestSortOptionsFieldNameEnum = "NAME" | "DISPLAY_NAME" | "AUTHOR" | "CREATED" | "MODIFIED" | "VIEWS" | "FAVORITES" | "LAST_ACCESSED";
+type SearchMetadataRequestSortOptionsOrderEnum = "ASC" | "DESC";
+
+/**
+ * ThoughtSpot Public REST API
+ * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
+ *
+ * OpenAPI spec version: 2.0
+ *
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
 
 declare class SearchMetadataRequest {
     /**
@@ -7433,7 +8413,7 @@ declare class SearchMetadataRequest {
     * List of metadata objects to exclude from search.
     */
     'exclude_objects'?: Array<ExcludeMetadataListItemInput>;
-    'favorite_object_options'?: FavoriteObjectOptionsInput;
+    'favorite_object_options'?: SearchMetadataRequestFavoriteObjectOptions;
     /**
     * Includes system-generated metadata objects.
     */
@@ -7442,6 +8422,10 @@ declare class SearchMetadataRequest {
     * Includes dependents of the metadata object specified in the API request. For example, a worksheet can consist of dependent objects such as Liveboards or Answers.
     */
     'include_dependent_objects'?: boolean | null;
+    /**
+    * The maximum number of dependents to include per metadata object.
+    */
+    'dependent_objects_record_size'?: number;
     /**
     * Includes complete details of the metadata objects.
     */
@@ -7478,7 +8462,7 @@ declare class SearchMetadataRequest {
     * The number of records that should be included.
     */
     'record_size'?: number;
-    'sort_options'?: MetadataSearchSortOptions;
+    'sort_options'?: SearchMetadataRequestSortOptions;
     /**
     * Tags to filter metadata objects by
     */
@@ -7585,15 +8569,15 @@ declare class SearchRoleResponse {
     /**
     * number of groups assigned with this role
     */
-    'groups_assigned_count'?: number;
+    'groups_assigned_count'?: number | null;
     /**
     * Orgs in which role exists.
     */
-    'orgs'?: Array<GenericInfo>;
+    'orgs'?: Array<GenericInfo> | null;
     /**
     * Details of groups assigned with this role
     */
-    'groups'?: Array<GenericInfo>;
+    'groups'?: Array<GenericInfo> | null;
     /**
     * Privileges granted to the role.
     */
@@ -7601,43 +8585,43 @@ declare class SearchRoleResponse {
     /**
     * Permission details of the Role
     */
-    'permission'?: SearchRoleResponsePermissionEnum;
+    'permission'?: SearchRoleResponsePermissionEnum | null;
     /**
     * Unique identifier of author of the role.
     */
-    'author_id'?: string;
+    'author_id'?: string | null;
     /**
     * Unique identifier of modifier of the role.
     */
-    'modifier_id'?: string;
+    'modifier_id'?: string | null;
     /**
     * Creation time of the role in milliseconds.
     */
-    'creation_time_in_millis'?: any;
+    'creation_time_in_millis'?: any | null;
     /**
     * Last modified time of the role in milliseconds.
     */
-    'modification_time_in_millis'?: any;
+    'modification_time_in_millis'?: any | null;
     /**
     * Indicates whether the role is deleted.
     */
-    'deleted'?: boolean;
+    'deleted'?: boolean | null;
     /**
     * Indicates whether the role is deprecated.
     */
-    'deprecated'?: boolean;
+    'deprecated'?: boolean | null;
     /**
     * Indicates whether the role is external.
     */
-    'external'?: boolean;
+    'external'?: boolean | null;
     /**
     * Indicates whether the role is hidden.
     */
-    'hidden'?: boolean;
+    'hidden'?: boolean | null;
     /**
     * Indicates whether the role is shared via connection
     */
-    'shared_via_connection'?: boolean;
+    'shared_via_connection'?: boolean | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -7653,7 +8637,7 @@ declare class SearchRoleResponse {
     }[];
     constructor();
 }
-type SearchRoleResponsePrivilegesEnum = "UNKNOWN" | "ADMINISTRATION" | "AUTHORING" | "USERDATAUPLOADING" | "DATADOWNLOADING" | "USERMANAGEMENT" | "SECURITYMANAGEMENT" | "LOGICALMODELING" | "DATAMANAGEMENT" | "TAGMANAGEMENT" | "SHAREWITHALL" | "SYSTEMMANAGEMENT" | "JOBSCHEDULING" | "A3ANALYSIS" | "EXPERIMENTALFEATUREPRIVILEGE" | "BYPASSRLS" | "RANALYSIS" | "DISABLE_PINBOARD_CREATION" | "DEVELOPER" | "APPLICATION_ADMINISTRATION" | "USER_ADMINISTRATION" | "GROUP_ADMINISTRATION" | "BACKUP_ADMINISTRATION" | "SYSTEM_INFO_ADMINISTRATION" | "ENABLESPOTAPPCREATION" | "SYNCMANAGEMENT" | "ORG_ADMINISTRATION" | "ROLE_ADMINISTRATION" | "AUTHENTICATION_ADMINISTRATION" | "BILLING_INFO_ADMINISTRATION" | "PREVIEW_THOUGHTSPOT_SAGE" | "LIVEBOARD_VERIFIER" | "CAN_MANAGE_CUSTOM_CALENDAR" | "CAN_CREATE_OR_EDIT_CONNECTIONS" | "CAN_CONFIGURE_CONNECTIONS" | "CAN_MANAGE_WORKSHEET_VIEWS_TABLES";
+type SearchRoleResponsePrivilegesEnum = "UNKNOWN" | "ADMINISTRATION" | "AUTHORING" | "USERDATAUPLOADING" | "DATADOWNLOADING" | "USERMANAGEMENT" | "SECURITYMANAGEMENT" | "LOGICALMODELING" | "DATAMANAGEMENT" | "TAGMANAGEMENT" | "SHAREWITHALL" | "SYSTEMMANAGEMENT" | "JOBSCHEDULING" | "A3ANALYSIS" | "EXPERIMENTALFEATUREPRIVILEGE" | "BYPASSRLS" | "RANALYSIS" | "DISABLE_PINBOARD_CREATION" | "DEVELOPER" | "APPLICATION_ADMINISTRATION" | "USER_ADMINISTRATION" | "GROUP_ADMINISTRATION" | "BACKUP_ADMINISTRATION" | "SYSTEM_INFO_ADMINISTRATION" | "ENABLESPOTAPPCREATION" | "SYNCMANAGEMENT" | "ORG_ADMINISTRATION" | "ROLE_ADMINISTRATION" | "AUTHENTICATION_ADMINISTRATION" | "BILLING_INFO_ADMINISTRATION" | "PREVIEW_THOUGHTSPOT_SAGE" | "LIVEBOARD_VERIFIER" | "CAN_MANAGE_CUSTOM_CALENDAR" | "CAN_CREATE_OR_EDIT_CONNECTIONS" | "CAN_CONFIGURE_CONNECTIONS" | "CAN_MANAGE_WORKSHEET_VIEWS_TABLES" | "CAN_MANAGE_VERSION_CONTROL" | "THIRDPARTY_ANALYSIS" | "CONTROL_TRUSTED_AUTH" | "CAN_CREATE_CATALOG" | "ALLOW_NON_EMBED_FULL_APP_ACCESS" | "CAN_ACCESS_ANALYST_STUDIO" | "CAN_MANAGE_ANALYST_STUDIO" | "PREVIEW_DOCUMENT_SEARCH";
 type SearchRoleResponsePermissionEnum = "READ_ONLY" | "MODIFY" | "NO_ACCESS";
 
 /**
@@ -7715,8 +8699,51 @@ declare class SearchRolesRequest {
     }[];
     constructor();
 }
-type SearchRolesRequestPrivilegesEnum = "UNKNOWN" | "ADMINISTRATION" | "AUTHORING" | "USERDATAUPLOADING" | "DATADOWNLOADING" | "USERMANAGEMENT" | "SECURITYMANAGEMENT" | "LOGICALMODELING" | "DATAMANAGEMENT" | "TAGMANAGEMENT" | "SHAREWITHALL" | "SYSTEMMANAGEMENT" | "JOBSCHEDULING" | "A3ANALYSIS" | "EXPERIMENTALFEATUREPRIVILEGE" | "BYPASSRLS" | "RANALYSIS" | "DISABLE_PINBOARD_CREATION" | "DEVELOPER" | "APPLICATION_ADMINISTRATION" | "USER_ADMINISTRATION" | "GROUP_ADMINISTRATION" | "BACKUP_ADMINISTRATION" | "SYSTEM_INFO_ADMINISTRATION" | "ENABLESPOTAPPCREATION" | "SYNCMANAGEMENT" | "ORG_ADMINISTRATION" | "ROLE_ADMINISTRATION" | "AUTHENTICATION_ADMINISTRATION" | "BILLING_INFO_ADMINISTRATION" | "PREVIEW_THOUGHTSPOT_SAGE" | "LIVEBOARD_VERIFIER" | "CAN_MANAGE_CUSTOM_CALENDAR" | "CAN_CREATE_OR_EDIT_CONNECTIONS" | "CAN_CONFIGURE_CONNECTIONS" | "CAN_MANAGE_WORKSHEET_VIEWS_TABLES";
+type SearchRolesRequestPrivilegesEnum = "UNKNOWN" | "ADMINISTRATION" | "AUTHORING" | "USERDATAUPLOADING" | "DATADOWNLOADING" | "USERMANAGEMENT" | "SECURITYMANAGEMENT" | "LOGICALMODELING" | "DATAMANAGEMENT" | "TAGMANAGEMENT" | "SHAREWITHALL" | "SYSTEMMANAGEMENT" | "JOBSCHEDULING" | "A3ANALYSIS" | "EXPERIMENTALFEATUREPRIVILEGE" | "BYPASSRLS" | "RANALYSIS" | "DISABLE_PINBOARD_CREATION" | "DEVELOPER" | "APPLICATION_ADMINISTRATION" | "USER_ADMINISTRATION" | "GROUP_ADMINISTRATION" | "BACKUP_ADMINISTRATION" | "SYSTEM_INFO_ADMINISTRATION" | "ENABLESPOTAPPCREATION" | "SYNCMANAGEMENT" | "ORG_ADMINISTRATION" | "ROLE_ADMINISTRATION" | "AUTHENTICATION_ADMINISTRATION" | "BILLING_INFO_ADMINISTRATION" | "PREVIEW_THOUGHTSPOT_SAGE" | "LIVEBOARD_VERIFIER" | "CAN_MANAGE_CUSTOM_CALENDAR" | "CAN_CREATE_OR_EDIT_CONNECTIONS" | "CAN_CONFIGURE_CONNECTIONS" | "CAN_MANAGE_WORKSHEET_VIEWS_TABLES" | "CAN_MANAGE_VERSION_CONTROL" | "THIRDPARTY_ANALYSIS" | "CONTROL_TRUSTED_AUTH" | "CAN_CREATE_CATALOG" | "ALLOW_NON_EMBED_FULL_APP_ACCESS" | "CAN_ACCESS_ANALYST_STUDIO" | "CAN_MANAGE_ANALYST_STUDIO" | "PREVIEW_DOCUMENT_SEARCH";
 type SearchRolesRequestPermissionsEnum = "READ_ONLY" | "MODIFY" | "NO_ACCESS";
+
+/**
+ * ThoughtSpot Public REST API
+ * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
+ *
+ * OpenAPI spec version: 2.0
+ *
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+* Options while fetching history runs for the schedule.
+*/
+declare class SearchSchedulesRequestHistoryRunsOptions {
+    /**
+    * Indicates whether to fetch history runs for the scheduled notification.
+    */
+    'include_history_runs'?: boolean | null;
+    /**
+    * Indicates the max number of records that can be fetched as past runs of any scheduled job.
+    */
+    'record_size'?: number | null;
+    /**
+    * Indicates the starting record number from where history runs records should be fetched.
+    */
+    'record_offset'?: number | null;
+    static readonly discriminator: string | undefined;
+    static readonly attributeTypeMap: Array<{
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }>;
+    static getAttributeTypeMap(): {
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }[];
+    constructor();
+}
 
 /**
  * ThoughtSpot Public REST API
@@ -7732,15 +8759,15 @@ type SearchRolesRequestPermissionsEnum = "READ_ONLY" | "MODIFY" | "NO_ACCESS";
 /**
 * Sort options.
 */
-declare class SortingOptions {
+declare class SearchSchedulesRequestSortOptions {
     /**
     * Name of the field to apply the sort on.
     */
-    'field_name'?: string;
+    'field_name'?: string | null;
     /**
     * Sort order : ASC(Ascending) or DESC(Descending).
     */
-    'order'?: string;
+    'order'?: string | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -7782,8 +8809,8 @@ declare class SearchSchedulesRequest {
     * The number of records that should be included.
     */
     'record_size'?: number;
-    'sort_options'?: SortingOptions;
-    'history_runs_options'?: ScheduleHistoryRunsOptionsInput;
+    'sort_options'?: SearchSchedulesRequestSortOptions;
+    'history_runs_options'?: SearchSchedulesRequestHistoryRunsOptions;
     /**
     * unique ID or name of the Schedule
     */
@@ -7856,17 +8883,17 @@ declare class SearchTagsRequest {
  * Do not edit the class manually.
  */
 /**
-* Sort options.
+* Sort options to filter group details.
 */
-declare class SortOptions {
+declare class SearchUserGroupsRequestSortOptions {
     /**
     * Name of the field to apply the sort on.
     */
-    'field_name'?: SortOptionsFieldNameEnum;
+    'field_name'?: SearchUserGroupsRequestSortOptionsFieldNameEnum | null;
     /**
     * Sort order : ASC(Ascending) or DESC(Descending).
     */
-    'order'?: SortOptionsOrderEnum;
+    'order'?: SearchUserGroupsRequestSortOptionsOrderEnum | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -7882,8 +8909,8 @@ declare class SortOptions {
     }[];
     constructor();
 }
-type SortOptionsFieldNameEnum = "NAME" | "DISPLAY_NAME" | "AUTHOR" | "CREATED" | "MODIFIED";
-type SortOptionsOrderEnum = "ASC" | "DESC";
+type SearchUserGroupsRequestSortOptionsFieldNameEnum = "NAME" | "DISPLAY_NAME" | "AUTHOR" | "CREATED" | "MODIFIED";
+type SearchUserGroupsRequestSortOptionsOrderEnum = "ASC" | "DESC";
 
 /**
  * ThoughtSpot Public REST API
@@ -7954,7 +8981,7 @@ declare class SearchUserGroupsRequest {
     * The number of records that should be included.
     */
     'record_size'?: number;
-    'sort_options'?: SortOptions;
+    'sort_options'?: SearchUserGroupsRequestSortOptions;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -7970,9 +8997,50 @@ declare class SearchUserGroupsRequest {
     }[];
     constructor();
 }
-type SearchUserGroupsRequestPrivilegesEnum = "ADMINISTRATION" | "AUTHORING" | "USERDATAUPLOADING" | "DATADOWNLOADING" | "USERMANAGEMENT" | "DATAMANAGEMENT" | "SHAREWITHALL" | "JOBSCHEDULING" | "A3ANALYSIS" | "EXPERIMENTALFEATUREPRIVILEGE" | "BYPASSRLS" | "RANALYSIS" | "DEVELOPER" | "USER_ADMINISTRATION" | "GROUP_ADMINISTRATION" | "SYNCMANAGEMENT" | "CAN_CREATE_CATALOG" | "DISABLE_PINBOARD_CREATION" | "LIVEBOARD_VERIFIER" | "ENABLESPOTAPPCREATION" | "PREVIEW_THOUGHTSPOT_SAGE" | "APPLICATION_ADMINISTRATION" | "SYSTEM_INFO_ADMINISTRATION" | "ORG_ADMINISTRATION" | "ROLE_ADMINISTRATION" | "AUTHENTICATION_ADMINISTRATION" | "BILLING_INFO_ADMINISTRATION" | "CAN_MANAGE_CUSTOM_CALENDAR" | "CAN_CREATE_OR_EDIT_CONNECTIONS" | "CAN_MANAGE_WORKSHEET_VIEWS_TABLES";
+type SearchUserGroupsRequestPrivilegesEnum = "ADMINISTRATION" | "AUTHORING" | "USERDATAUPLOADING" | "DATADOWNLOADING" | "USERMANAGEMENT" | "DATAMANAGEMENT" | "SHAREWITHALL" | "JOBSCHEDULING" | "A3ANALYSIS" | "EXPERIMENTALFEATUREPRIVILEGE" | "BYPASSRLS" | "RANALYSIS" | "DEVELOPER" | "USER_ADMINISTRATION" | "GROUP_ADMINISTRATION" | "SYNCMANAGEMENT" | "CAN_CREATE_CATALOG" | "DISABLE_PINBOARD_CREATION" | "LIVEBOARD_VERIFIER" | "PREVIEW_THOUGHTSPOT_SAGE" | "APPLICATION_ADMINISTRATION" | "SYSTEM_INFO_ADMINISTRATION" | "ORG_ADMINISTRATION" | "ROLE_ADMINISTRATION" | "AUTHENTICATION_ADMINISTRATION" | "BILLING_INFO_ADMINISTRATION" | "CAN_MANAGE_CUSTOM_CALENDAR" | "CAN_CREATE_OR_EDIT_CONNECTIONS" | "CAN_MANAGE_WORKSHEET_VIEWS_TABLES" | "CAN_MANAGE_VERSION_CONTROL" | "THIRDPARTY_ANALYSIS" | "ALLOW_NON_EMBED_FULL_APP_ACCESS" | "CAN_ACCESS_ANALYST_STUDIO" | "CAN_MANAGE_ANALYST_STUDIO" | "PREVIEW_DOCUMENT_SEARCH";
 type SearchUserGroupsRequestTypeEnum = "LOCAL_GROUP" | "LDAP_GROUP";
 type SearchUserGroupsRequestVisibilityEnum = "SHARABLE" | "NON_SHARABLE";
+
+/**
+ * ThoughtSpot Public REST API
+ * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
+ *
+ * OpenAPI spec version: 2.0
+ *
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+* Sort options.
+*/
+declare class SearchUsersRequestSortOptions {
+    /**
+    * Name of the field to apply the sort on.
+    */
+    'field_name'?: SearchUsersRequestSortOptionsFieldNameEnum | null;
+    /**
+    * Sort order : ASC(Ascending) or DESC(Descending).
+    */
+    'order'?: SearchUsersRequestSortOptionsOrderEnum | null;
+    static readonly discriminator: string | undefined;
+    static readonly attributeTypeMap: Array<{
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }>;
+    static getAttributeTypeMap(): {
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }[];
+    constructor();
+}
+type SearchUsersRequestSortOptionsFieldNameEnum = "NAME" | "DISPLAY_NAME" | "AUTHOR" | "CREATED" | "MODIFIED";
+type SearchUsersRequestSortOptionsOrderEnum = "ASC" | "DESC";
 
 /**
  * ThoughtSpot Public REST API
@@ -8055,7 +9123,7 @@ declare class SearchUsersRequest {
     * The number of records that should be included.
     */
     'record_size'?: number;
-    'sort_options'?: SortOptions;
+    'sort_options'?: SearchUsersRequestSortOptions;
     /**
     * Filters by the role assigned to the user.
     */
@@ -8080,9 +9148,46 @@ declare class SearchUsersRequest {
     constructor();
 }
 type SearchUsersRequestVisibilityEnum = "SHARABLE" | "NON_SHARABLE";
-type SearchUsersRequestPrivilegesEnum = "ADMINISTRATION" | "AUTHORING" | "USERDATAUPLOADING" | "DATADOWNLOADING" | "USERMANAGEMENT" | "DATAMANAGEMENT" | "SHAREWITHALL" | "JOBSCHEDULING" | "A3ANALYSIS" | "EXPERIMENTALFEATUREPRIVILEGE" | "BYPASSRLS" | "RANALYSIS" | "DEVELOPER" | "USER_ADMINISTRATION" | "GROUP_ADMINISTRATION" | "SYNCMANAGEMENT" | "CAN_CREATE_CATALOG" | "DISABLE_PINBOARD_CREATION" | "LIVEBOARD_VERIFIER" | "ENABLESPOTAPPCREATION" | "PREVIEW_THOUGHTSPOT_SAGE" | "APPLICATION_ADMINISTRATION" | "SYSTEM_INFO_ADMINISTRATION" | "ORG_ADMINISTRATION" | "ROLE_ADMINISTRATION" | "AUTHENTICATION_ADMINISTRATION" | "BILLING_INFO_ADMINISTRATION" | "CAN_MANAGE_CUSTOM_CALENDAR" | "CAN_CREATE_OR_EDIT_CONNECTIONS" | "CAN_MANAGE_WORKSHEET_VIEWS_TABLES";
+type SearchUsersRequestPrivilegesEnum = "ADMINISTRATION" | "AUTHORING" | "USERDATAUPLOADING" | "DATADOWNLOADING" | "USERMANAGEMENT" | "DATAMANAGEMENT" | "SHAREWITHALL" | "JOBSCHEDULING" | "A3ANALYSIS" | "EXPERIMENTALFEATUREPRIVILEGE" | "BYPASSRLS" | "RANALYSIS" | "DEVELOPER" | "USER_ADMINISTRATION" | "GROUP_ADMINISTRATION" | "SYNCMANAGEMENT" | "CAN_CREATE_CATALOG" | "DISABLE_PINBOARD_CREATION" | "LIVEBOARD_VERIFIER" | "PREVIEW_THOUGHTSPOT_SAGE" | "APPLICATION_ADMINISTRATION" | "SYSTEM_INFO_ADMINISTRATION" | "ORG_ADMINISTRATION" | "ROLE_ADMINISTRATION" | "AUTHENTICATION_ADMINISTRATION" | "BILLING_INFO_ADMINISTRATION" | "CAN_MANAGE_CUSTOM_CALENDAR" | "CAN_CREATE_OR_EDIT_CONNECTIONS" | "CAN_MANAGE_WORKSHEET_VIEWS_TABLES" | "CAN_MANAGE_VERSION_CONTROL" | "THIRDPARTY_ANALYSIS" | "ALLOW_NON_EMBED_FULL_APP_ACCESS" | "CAN_ACCESS_ANALYST_STUDIO" | "CAN_MANAGE_ANALYST_STUDIO" | "PREVIEW_DOCUMENT_SEARCH";
 type SearchUsersRequestAccountTypeEnum = "LOCAL_USER" | "LDAP_USER" | "SAML_USER" | "OIDC_USER" | "REMOTE_USER";
 type SearchUsersRequestAccountStatusEnum = "ACTIVE" | "INACTIVE" | "EXPIRED" | "LOCKED" | "PENDING";
+
+/**
+ * ThoughtSpot Public REST API
+ * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
+ *
+ * OpenAPI spec version: 2.0
+ *
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+declare class ShareMetadataTypeInput {
+    /**
+    *   Type of metadata.     Type of metadata. Required if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.
+    */
+    'type'?: ShareMetadataTypeInputTypeEnum | null;
+    /**
+    * Unique ID or name of the metadata object.
+    */
+    'identifier': string;
+    static readonly discriminator: string | undefined;
+    static readonly attributeTypeMap: Array<{
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }>;
+    static getAttributeTypeMap(): {
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }[];
+    constructor();
+}
+type ShareMetadataTypeInputTypeEnum = "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE";
 
 /**
  * ThoughtSpot Public REST API
@@ -8133,19 +9238,23 @@ type SharePermissionsInputShareModeEnum = "READ_ONLY" | "MODIFY" | "NO_ACCESS";
 
 declare class ShareMetadataRequest {
     /**
-    * Type of metadata. 1. Liveboard 2. Answers 3. LOGICAL_TABLE for any data object such as table, worksheet or view.
+    * Type of metadata. Required if identifier in metadata_identifies is a name\". 1. Liveboard 2. Answers 3. LOGICAL_TABLE for any data object such as table, worksheet or view.
     */
     'metadata_type'?: ShareMetadataRequestMetadataTypeEnum;
     /**
-    * Unique ID or name of metadata objects. Note: All the identifiers should belong to same metadata_type
+    * Unique ID or name of metadata objects. Note: All the names should belong to same metadata_type
     */
-    'metadata_identifiers': Array<string>;
+    'metadata_identifiers'?: Array<string>;
+    /**
+    * Metadata details for sharing objects.
+    */
+    'metadata'?: Array<ShareMetadataTypeInput>;
     /**
     * Permission details for sharing the objects.
     */
     'permissions': Array<SharePermissionsInput>;
     /**
-    * Options to specify details of Liveboard.
+    * Options to specify details of Liveboard. First Liveboard encountered in payload is considered to be the corresponding Liveboard.
     */
     'visualization_identifiers'?: Array<string>;
     /**
@@ -8184,6 +9293,124 @@ declare class ShareMetadataRequest {
     constructor();
 }
 type ShareMetadataRequestMetadataTypeEnum = "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE";
+
+/**
+ * ThoughtSpot Public REST API
+ * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
+ *
+ * OpenAPI spec version: 2.0
+ *
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+declare class SortOptionInput {
+    /**
+    * Name of the field to apply the sort on.
+    */
+    'field_name'?: SortOptionInputFieldNameEnum | null;
+    /**
+    * Sort order : ASC(Ascending) or DESC(Descending).
+    */
+    'order'?: SortOptionInputOrderEnum | null;
+    static readonly discriminator: string | undefined;
+    static readonly attributeTypeMap: Array<{
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }>;
+    static getAttributeTypeMap(): {
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }[];
+    constructor();
+}
+type SortOptionInputFieldNameEnum = "NAME" | "DISPLAY_NAME" | "AUTHOR" | "CREATED" | "MODIFIED" | "LAST_ACCESSED" | "SYNCED" | "VIEWS" | "USER_STATE" | "ROW_COUNT";
+type SortOptionInputOrderEnum = "ASC" | "DESC";
+
+/**
+ * ThoughtSpot Public REST API
+ * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
+ *
+ * OpenAPI spec version: 2.0
+ *
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+* Sort options.
+*/
+declare class SortOptions {
+    /**
+    * Name of the field to apply the sort on.
+    */
+    'field_name'?: SortOptionsFieldNameEnum | null;
+    /**
+    * Sort order : ASC(Ascending) or DESC(Descending).
+    */
+    'order'?: SortOptionsOrderEnum | null;
+    static readonly discriminator: string | undefined;
+    static readonly attributeTypeMap: Array<{
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }>;
+    static getAttributeTypeMap(): {
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }[];
+    constructor();
+}
+type SortOptionsFieldNameEnum = "NAME" | "DISPLAY_NAME" | "AUTHOR" | "CREATED" | "MODIFIED";
+type SortOptionsOrderEnum = "ASC" | "DESC";
+
+/**
+ * ThoughtSpot Public REST API
+ * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
+ *
+ * OpenAPI spec version: 2.0
+ *
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+* Sort options.
+*/
+declare class SortingOptions {
+    /**
+    * Name of the field to apply the sort on.
+    */
+    'field_name'?: string | null;
+    /**
+    * Sort order : ASC(Ascending) or DESC(Descending).
+    */
+    'order'?: string | null;
+    static readonly discriminator: string | undefined;
+    static readonly attributeTypeMap: Array<{
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }>;
+    static getAttributeTypeMap(): {
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }[];
+    constructor();
+}
 
 /**
  * ThoughtSpot Public REST API
@@ -8286,7 +9513,7 @@ type SqlQueryResponseMetadataTypeEnum = "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE"
  * Do not edit the class manually.
  */
 declare class SystemConfig {
-    'onboarding_content_url'?: string;
+    'onboarding_content_url'?: string | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -8318,95 +9545,95 @@ declare class SystemInfo {
     /**
     * The unique identifier of the object
     */
-    'id'?: string;
+    'id'?: string | null;
     /**
     * Name of the cluster.
     */
-    'name'?: string;
+    'name'?: string | null;
     /**
     * The release version of the cluster.
     */
-    'release_version'?: string;
+    'release_version'?: string | null;
     /**
     * The timezone of the cluster.
     */
-    'time_zone'?: string;
+    'time_zone'?: string | null;
     /**
     * The default locale of the cluster.
     */
-    'locale'?: string;
+    'locale'?: string | null;
     /**
     * The default date format representation of the cluster.
     */
-    'date_format'?: string;
+    'date_format'?: string | null;
     /**
     * The API version of the cluster.
     */
-    'api_version'?: string;
+    'api_version'?: string | null;
     /**
     * The deployment type of the cluster.
     */
-    'type'?: string;
+    'type'?: string | null;
     /**
     * The deployed environment of the cluster.
     */
-    'environment'?: string;
+    'environment'?: string | null;
     /**
     * The license applied to the cluster.
     */
-    'license'?: string;
+    'license'?: string | null;
     /**
     * The default date time format representation of the cluster.
     */
-    'date_time_format'?: string;
+    'date_time_format'?: string | null;
     /**
     * The default time format representation of the cluster.
     */
-    'time_format'?: string;
+    'time_format'?: string | null;
     /**
     * The unique identifier of system user.
     */
-    'system_user_id'?: string;
+    'system_user_id'?: string | null;
     /**
     * The unique identifier of super user.
     */
-    'super_user_id'?: string;
+    'super_user_id'?: string | null;
     /**
     * The unique identifier of hidden object.
     */
-    'hidden_object_id'?: string;
+    'hidden_object_id'?: string | null;
     /**
     * The unique identifier of system group.
     */
-    'system_group_id'?: string;
+    'system_group_id'?: string | null;
     /**
     * The unique identifier of tsadmin user.
     */
-    'tsadmin_user_id'?: string;
+    'tsadmin_user_id'?: string | null;
     /**
     * The unique identifier of admin group.
     */
-    'admin_group_id'?: string;
+    'admin_group_id'?: string | null;
     /**
     * The unique identifier of all tables connection.
     */
-    'all_tables_connection_id'?: string;
+    'all_tables_connection_id'?: string | null;
     /**
     * The unique identifier of ALL group.
     */
-    'all_user_group_id'?: string;
+    'all_user_group_id'?: string | null;
     /**
     * The supported accept language by the cluster.
     */
-    'accept_language'?: string;
+    'accept_language'?: string | null;
     /**
     * The count of users of ALL group.
     */
-    'all_user_group_member_user_count'?: number;
+    'all_user_group_member_user_count'?: number | null;
     /**
     * The version number of logical model of the cluster.
     */
-    'logical_model_version'?: number;
+    'logical_model_version'?: number | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -8437,16 +9664,16 @@ declare class SystemInfo {
 declare class Tag {
     'name': string;
     'id': string;
-    'color'?: string;
-    'deleted'?: boolean;
-    'hidden'?: boolean;
-    'external'?: boolean;
-    'deprecated'?: boolean;
-    'creation_time_in_millis'?: number;
-    'modification_time_in_millis'?: number;
-    'author_id'?: string;
-    'modifier_id'?: string;
-    'owner_id'?: string;
+    'color'?: string | null;
+    'deleted'?: boolean | null;
+    'hidden'?: boolean | null;
+    'external'?: boolean | null;
+    'deprecated'?: boolean | null;
+    'creation_time_in_millis'?: number | null;
+    'modification_time_in_millis'?: number | null;
+    'author_id'?: string | null;
+    'modifier_id'?: string | null;
+    'owner_id'?: string | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -8497,6 +9724,52 @@ declare class Token {
     * Unique identifier of the user to whom the token is issued.
     */
     'valid_for_username': string;
+    static readonly discriminator: string | undefined;
+    static readonly attributeTypeMap: Array<{
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }>;
+    static getAttributeTypeMap(): {
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }[];
+    constructor();
+}
+
+/**
+ * ThoughtSpot Public REST API
+ * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
+ *
+ * OpenAPI spec version: 2.0
+ *
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+
+declare class TokenValidationResponse {
+    /**
+    * Token creation time in milliseconds.
+    */
+    'creation_time_in_millis': number;
+    /**
+    * Token expiration time in milliseconds.
+    */
+    'expiration_time_in_millis': number;
+    'scope': Scope;
+    /**
+    * Username to whom the token is issued.
+    */
+    'valid_for_user_id': string;
+    /**
+    * Type of token.
+    */
+    'token_type': string;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -8628,14 +9901,127 @@ declare class UpdateConnectionRequest {
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+declare class UpdateConnectionV2Request {
+    /**
+    * Updated name of the connection.
+    */
+    'name'?: string;
+    /**
+    * Updated description of the connection.
+    */
+    'description'?: string;
+    /**
+    * Configuration of the data warehouse in JSON.
+    */
+    'data_warehouse_config'?: any;
+    /**
+    * Indicates whether to validate the connection details.
+    */
+    'validate'?: boolean | null;
+    static readonly discriminator: string | undefined;
+    static readonly attributeTypeMap: Array<{
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }>;
+    static getAttributeTypeMap(): {
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }[];
+    constructor();
+}
+
+/**
+ * ThoughtSpot Public REST API
+ * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
+ *
+ * OpenAPI spec version: 2.0
+ *
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+
+/**
+* Action details includes `Type` and Configuration for Custom Actions, either Callback or URL is required.
+*/
+declare class UpdateCustomActionRequestActionDetails {
+    'CALLBACK'?: CALLBACKInput;
+    'URL'?: URLInput;
+    static readonly discriminator: string | undefined;
+    static readonly attributeTypeMap: Array<{
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }>;
+    static getAttributeTypeMap(): {
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }[];
+    constructor();
+}
+
+/**
+ * ThoughtSpot Public REST API
+ * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
+ *
+ * OpenAPI spec version: 2.0
+ *
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+* Default Custom action configuration. This includes if the custom action available on visualizations and Answers. By default, a custom action is added to all visualizations and Answers.
+*/
+declare class UpdateCustomActionRequestDefaultActionConfig {
+    /**
+    * Custom action is available on all visualizations. Earlier naming convention: LOCAL/GLOBAL. TRUE signifies GLOBAL for backward compatibility.
+    */
+    'visibility'?: boolean | null;
+    static readonly discriminator: string | undefined;
+    static readonly attributeTypeMap: Array<{
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }>;
+    static getAttributeTypeMap(): {
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }[];
+    constructor();
+}
+
+/**
+ * ThoughtSpot Public REST API
+ * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
+ *
+ * OpenAPI spec version: 2.0
+ *
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
 
 declare class UpdateCustomActionRequest {
-    'action_details'?: ActionDetailsInput;
+    'action_details'?: UpdateCustomActionRequestActionDetails;
     /**
     * Metadata objects to which the custom action needs to be associated.
     */
     'associate_metadata'?: Array<AssociateMetadataInput>;
-    'default_action_config'?: DefaultActionConfigInput;
+    'default_action_config'?: UpdateCustomActionRequestDefaultActionConfig;
     /**
     * Unique ID or name of the groups that can view and access the custom action.
     */
@@ -8664,6 +10050,80 @@ declare class UpdateCustomActionRequest {
     constructor();
 }
 type UpdateCustomActionRequestOperationEnum = "ADD" | "REMOVE";
+
+/**
+ * ThoughtSpot Public REST API
+ * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
+ *
+ * OpenAPI spec version: 2.0
+ *
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+
+declare class UpdateDbtConnectionRequest {
+    /**
+    * Unique ID of the DBT Connection.
+    */
+    'dbt_connection_identifier': string;
+    /**
+    * Name of the connection.
+    */
+    'connection_name'?: string;
+    /**
+    * Name of the Database.
+    */
+    'database_name'?: string;
+    /**
+    * Mention type of Import
+    */
+    'import_type'?: UpdateDbtConnectionRequestImportTypeEnum;
+    /**
+    * Access token is mandatory when Import_Type is DBT_CLOUD.
+    */
+    'access_token'?: string;
+    /**
+    * DBT URL is mandatory when Import_Type is DBT_CLOUD.
+    */
+    'dbt_url'?: string;
+    /**
+    * Account ID is mandatory when Import_Type is DBT_CLOUD
+    */
+    'account_id'?: string;
+    /**
+    * Project ID is mandatory when Import_Type is DBT_CLOUD
+    */
+    'project_id'?: string;
+    /**
+    * DBT Environment ID\"
+    */
+    'dbt_env_id'?: string;
+    /**
+    * Name of the project
+    */
+    'project_name'?: string;
+    /**
+    * Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is Mandatory when Import Type is \'ZIP_FILE\'
+    */
+    'file_content'?: HttpFile;
+    static readonly discriminator: string | undefined;
+    static readonly attributeTypeMap: Array<{
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }>;
+    static getAttributeTypeMap(): {
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }[];
+    constructor();
+}
+type UpdateDbtConnectionRequestImportTypeEnum = "DBT_CLOUD" | "ZIP_FILE";
 
 /**
  * ThoughtSpot Public REST API
@@ -8753,7 +10213,183 @@ declare class UpdateRoleRequest {
     }[];
     constructor();
 }
-type UpdateRoleRequestPrivilegesEnum = "USERDATAUPLOADING" | "DATADOWNLOADING" | "DATAMANAGEMENT" | "SHAREWITHALL" | "JOBSCHEDULING" | "A3ANALYSIS" | "EXPERIMENTALFEATUREPRIVILEGE" | "BYPASSRLS" | "DISABLE_PINBOARD_CREATION" | "DEVELOPER" | "APPLICATION_ADMINISTRATION" | "USER_ADMINISTRATION" | "GROUP_ADMINISTRATION" | "SYSTEM_INFO_ADMINISTRATION" | "SYNCMANAGEMENT" | "ORG_ADMINISTRATION" | "ROLE_ADMINISTRATION" | "AUTHENTICATION_ADMINISTRATION" | "BILLING_INFO_ADMINISTRATION" | "CONTROL_TRUSTED_AUTH" | "TAGMANAGEMENT" | "LIVEBOARD_VERIFIER" | "CAN_MANAGE_CUSTOM_CALENDAR" | "CAN_CREATE_OR_EDIT_CONNECTIONS" | "CAN_MANAGE_WORKSHEET_VIEWS_TABLES";
+type UpdateRoleRequestPrivilegesEnum = "USERDATAUPLOADING" | "DATADOWNLOADING" | "DATAMANAGEMENT" | "SHAREWITHALL" | "JOBSCHEDULING" | "A3ANALYSIS" | "EXPERIMENTALFEATUREPRIVILEGE" | "BYPASSRLS" | "DISABLE_PINBOARD_CREATION" | "DEVELOPER" | "APPLICATION_ADMINISTRATION" | "USER_ADMINISTRATION" | "GROUP_ADMINISTRATION" | "SYSTEM_INFO_ADMINISTRATION" | "SYNCMANAGEMENT" | "ORG_ADMINISTRATION" | "ROLE_ADMINISTRATION" | "AUTHENTICATION_ADMINISTRATION" | "BILLING_INFO_ADMINISTRATION" | "CONTROL_TRUSTED_AUTH" | "TAGMANAGEMENT" | "LIVEBOARD_VERIFIER" | "CAN_MANAGE_CUSTOM_CALENDAR" | "CAN_CREATE_OR_EDIT_CONNECTIONS" | "CAN_MANAGE_WORKSHEET_VIEWS_TABLES" | "CAN_MANAGE_VERSION_CONTROL" | "THIRDPARTY_ANALYSIS" | "CAN_CREATE_CATALOG" | "CAN_ACCESS_ANALYST_STUDIO" | "CAN_MANAGE_ANALYST_STUDIO" | "PREVIEW_DOCUMENT_SEARCH";
+
+/**
+ * ThoughtSpot Public REST API
+ * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
+ *
+ * OpenAPI spec version: 2.0
+ *
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+
+/**
+* Frequency of the scheduled job run.
+*/
+declare class UpdateScheduleRequestFrequency {
+    'cron_expression': CronExpressionInput;
+    static readonly discriminator: string | undefined;
+    static readonly attributeTypeMap: Array<{
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }>;
+    static getAttributeTypeMap(): {
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }[];
+    constructor();
+}
+
+/**
+ * ThoughtSpot Public REST API
+ * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
+ *
+ * OpenAPI spec version: 2.0
+ *
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+* Options to specify the details of a Liveboard.
+*/
+declare class UpdateScheduleRequestLiveboardOptions {
+    /**
+    * Unique ID or name of visualizations.
+    */
+    'visualization_identifiers': Array<string>;
+    static readonly discriminator: string | undefined;
+    static readonly attributeTypeMap: Array<{
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }>;
+    static getAttributeTypeMap(): {
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }[];
+    constructor();
+}
+
+/**
+ * ThoughtSpot Public REST API
+ * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
+ *
+ * OpenAPI spec version: 2.0
+ *
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+* Options for PDF export.
+*/
+declare class UpdateScheduleRequestPdfOptions {
+    /**
+    * Indicates whether to include complete Liveboard.
+    */
+    'complete_liveboard'?: boolean | null;
+    /**
+    * Indicates whether to include cover page with the Liveboard title.
+    */
+    'include_cover_page'?: boolean | null;
+    /**
+    * Indicates whether to include customized wide logo in the footer if available.
+    */
+    'include_custom_logo'?: boolean | null;
+    /**
+    * Indicates whether to include a page with all applied filters.
+    */
+    'include_filter_page'?: boolean | null;
+    /**
+    * Indicates whether to include page number in the footer of each page
+    */
+    'include_page_number'?: boolean | null;
+    /**
+    * Text to include in the footer of each page.
+    */
+    'page_footer_text'?: string | null;
+    /**
+    * Page orientation of the PDF.
+    */
+    'page_orientation'?: string | null;
+    /**
+    * Page size.
+    */
+    'page_size'?: UpdateScheduleRequestPdfOptionsPageSizeEnum | null;
+    /**
+    * Indicates whether to include only first page of the tables.
+    */
+    'truncate_table'?: boolean | null;
+    static readonly discriminator: string | undefined;
+    static readonly attributeTypeMap: Array<{
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }>;
+    static getAttributeTypeMap(): {
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }[];
+    constructor();
+}
+type UpdateScheduleRequestPdfOptionsPageSizeEnum = "A4";
+
+/**
+ * ThoughtSpot Public REST API
+ * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
+ *
+ * OpenAPI spec version: 2.0
+ *
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+
+/**
+* Recipients of the scheduled job notifications. You can add the ID or name of the ThoughtSpot users or groups as recipients in the `principals` array. If a recipient is not a ThoughtSpot user, specify email address.
+*/
+declare class UpdateScheduleRequestRecipientDetails {
+    /**
+    * Emails of the recipients.
+    */
+    'emails'?: Array<string> | null;
+    /**
+    * User or groups to be set as recipients of the schedule notifications.
+    */
+    'principals'?: Array<PrincipalsListItemInput> | null;
+    static readonly discriminator: string | undefined;
+    static readonly attributeTypeMap: Array<{
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }>;
+    static getAttributeTypeMap(): {
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }[];
+    constructor();
+}
 
 /**
  * ThoughtSpot Public REST API
@@ -8788,14 +10424,14 @@ declare class UpdateScheduleRequest {
     * Export file format.
     */
     'file_format'?: UpdateScheduleRequestFileFormatEnum;
-    'liveboard_options'?: LiveboardOptionsInput;
-    'pdf_options'?: SchedulesPdfOptionsInput;
+    'liveboard_options'?: UpdateScheduleRequestLiveboardOptions;
+    'pdf_options'?: UpdateScheduleRequestPdfOptions;
     /**
     * Time zone
     */
     'time_zone'?: UpdateScheduleRequestTimeZoneEnum;
-    'frequency'?: FrequencyInput;
-    'recipient_details'?: RecipientDetailsInput;
+    'frequency'?: UpdateScheduleRequestFrequency;
+    'recipient_details'?: UpdateScheduleRequestRecipientDetails;
     /**
     * Status of the schedule
     */
@@ -8816,7 +10452,7 @@ declare class UpdateScheduleRequest {
     constructor();
 }
 type UpdateScheduleRequestMetadataTypeEnum = "LIVEBOARD";
-type UpdateScheduleRequestFileFormatEnum = "CSV" | "PDF";
+type UpdateScheduleRequestFileFormatEnum = "CSV" | "PDF" | "XLSX";
 type UpdateScheduleRequestTimeZoneEnum = "Africa/Abidjan" | "Africa/Accra" | "Africa/Addis_Ababa" | "Africa/Algiers" | "Africa/Asmara" | "Africa/Asmera" | "Africa/Bamako" | "Africa/Bangui" | "Africa/Banjul" | "Africa/Bissau" | "Africa/Blantyre" | "Africa/Brazzaville" | "Africa/Bujumbura" | "Africa/Cairo" | "Africa/Casablanca" | "Africa/Ceuta" | "Africa/Conakry" | "Africa/Dakar" | "Africa/Dar_es_Salaam" | "Africa/Djibouti" | "Africa/Douala" | "Africa/El_Aaiun" | "Africa/Freetown" | "Africa/Gaborone" | "Africa/Harare" | "Africa/Johannesburg" | "Africa/Juba" | "Africa/Kampala" | "Africa/Khartoum" | "Africa/Kigali" | "Africa/Kinshasa" | "Africa/Lagos" | "Africa/Libreville" | "Africa/Lome" | "Africa/Luanda" | "Africa/Lubumbashi" | "Africa/Lusaka" | "Africa/Malabo" | "Africa/Maputo" | "Africa/Maseru" | "Africa/Mbabane" | "Africa/Mogadishu" | "Africa/Monrovia" | "Africa/Nairobi" | "Africa/Ndjamena" | "Africa/Niamey" | "Africa/Nouakchott" | "Africa/Ouagadougou" | "Africa/Porto-Novo" | "Africa/Sao_Tome" | "Africa/Timbuktu" | "Africa/Tripoli" | "Africa/Tunis" | "Africa/Windhoek" | "America/Adak" | "America/Anchorage" | "America/Anguilla" | "America/Antigua" | "America/Araguaina" | "America/Argentina/Buenos_Aires" | "America/Argentina/Catamarca" | "America/Argentina/ComodRivadavia" | "America/Argentina/Cordoba" | "America/Argentina/Jujuy" | "America/Argentina/La_Rioja" | "America/Argentina/Mendoza" | "America/Argentina/Rio_Gallegos" | "America/Argentina/Salta" | "America/Argentina/San_Juan" | "America/Argentina/San_Luis" | "America/Argentina/Tucuman" | "America/Argentina/Ushuaia" | "America/Aruba" | "America/Asuncion" | "America/Atikokan" | "America/Atka" | "America/Bahia" | "America/Bahia_Banderas" | "America/Barbados" | "America/Belem" | "America/Belize" | "America/Blanc-Sablon" | "America/Boa_Vista" | "America/Bogota" | "America/Boise" | "America/Buenos_Aires" | "America/Cambridge_Bay" | "America/Campo_Grande" | "America/Cancun" | "America/Caracas" | "America/Catamarca" | "America/Cayenne" | "America/Cayman" | "America/Chicago" | "America/Chihuahua" | "America/Coral_Harbour" | "America/Cordoba" | "America/Costa_Rica" | "America/Creston" | "America/Cuiaba" | "America/Curacao" | "America/Danmarkshavn" | "America/Dawson" | "America/Dawson_Creek" | "America/Denver" | "America/Detroit" | "America/Dominica" | "America/Edmonton" | "America/Eirunepe" | "America/El_Salvador" | "America/Ensenada" | "America/Fort_Nelson" | "America/Fort_Wayne" | "America/Fortaleza" | "America/Glace_Bay" | "America/Godthab" | "America/Goose_Bay" | "America/Grand_Turk" | "America/Grenada" | "America/Guadeloupe" | "America/Guatemala" | "America/Guayaquil" | "America/Guyana" | "America/Halifax" | "America/Havana" | "America/Hermosillo" | "America/Indiana/Indianapolis" | "America/Indiana/Knox" | "America/Indiana/Marengo" | "America/Indiana/Petersburg" | "America/Indiana/Tell_City" | "America/Indiana/Vevay" | "America/Indiana/Vincennes" | "America/Indiana/Winamac" | "America/Indianapolis" | "America/Inuvik" | "America/Iqaluit" | "America/Jamaica" | "America/Jujuy" | "America/Juneau" | "America/Kentucky/Louisville" | "America/Kentucky/Monticello" | "America/Knox_IN" | "America/Kralendijk" | "America/La_Paz" | "America/Lima" | "America/Los_Angeles" | "America/Louisville" | "America/Lower_Princes" | "America/Maceio" | "America/Managua" | "America/Manaus" | "America/Marigot" | "America/Martinique" | "America/Matamoros" | "America/Mazatlan" | "America/Mendoza" | "America/Menominee" | "America/Merida" | "America/Metlakatla" | "America/Mexico_City" | "America/Miquelon" | "America/Moncton" | "America/Monterrey" | "America/Montevideo" | "America/Montreal" | "America/Montserrat" | "America/Nassau" | "America/New_York" | "America/Nipigon" | "America/Nome" | "America/Noronha" | "America/North_Dakota/Beulah" | "America/North_Dakota/Center" | "America/North_Dakota/New_Salem" | "America/Nuuk" | "America/Ojinaga" | "America/Panama" | "America/Pangnirtung" | "America/Paramaribo" | "America/Phoenix" | "America/Port-au-Prince" | "America/Port_of_Spain" | "America/Porto_Acre" | "America/Porto_Velho" | "America/Puerto_Rico" | "America/Punta_Arenas" | "America/Rainy_River" | "America/Rankin_Inlet" | "America/Recife" | "America/Regina" | "America/Resolute" | "America/Rio_Branco" | "America/Rosario" | "America/Santa_Isabel" | "America/Santarem" | "America/Santiago" | "America/Santo_Domingo" | "America/Sao_Paulo" | "America/Scoresbysund" | "America/Shiprock" | "America/Sitka" | "America/St_Barthelemy" | "America/St_Johns" | "America/St_Kitts" | "America/St_Lucia" | "America/St_Thomas" | "America/St_Vincent" | "America/Swift_Current" | "America/Tegucigalpa" | "America/Thule" | "America/Thunder_Bay" | "America/Tijuana" | "America/Toronto" | "America/Tortola" | "America/Vancouver" | "America/Virgin" | "America/Whitehorse" | "America/Winnipeg" | "America/Yakutat" | "America/Yellowknife" | "Antarctica/Casey" | "Antarctica/Davis" | "Antarctica/DumontDUrville" | "Antarctica/Macquarie" | "Antarctica/Mawson" | "Antarctica/McMurdo" | "Antarctica/Palmer" | "Antarctica/Rothera" | "Antarctica/South_Pole" | "Antarctica/Syowa" | "Antarctica/Troll" | "Antarctica/Vostok" | "Arctic/Longyearbyen" | "Asia/Aden" | "Asia/Almaty" | "Asia/Amman" | "Asia/Anadyr" | "Asia/Aqtau" | "Asia/Aqtobe" | "Asia/Ashgabat" | "Asia/Ashkhabad" | "Asia/Atyrau" | "Asia/Baghdad" | "Asia/Bahrain" | "Asia/Baku" | "Asia/Bangkok" | "Asia/Barnaul" | "Asia/Beirut" | "Asia/Bishkek" | "Asia/Brunei" | "Asia/Calcutta" | "Asia/Chita" | "Asia/Choibalsan" | "Asia/Chongqing" | "Asia/Chungking" | "Asia/Colombo" | "Asia/Dacca" | "Asia/Damascus" | "Asia/Dhaka" | "Asia/Dili" | "Asia/Dubai" | "Asia/Dushanbe" | "Asia/Famagusta" | "Asia/Gaza" | "Asia/Harbin" | "Asia/Hebron" | "Asia/Ho_Chi_Minh" | "Asia/Hong_Kong" | "Asia/Hovd" | "Asia/Irkutsk" | "Asia/Istanbul" | "Asia/Jakarta" | "Asia/Jayapura" | "Asia/Jerusalem" | "Asia/Kabul" | "Asia/Kamchatka" | "Asia/Karachi" | "Asia/Kashgar" | "Asia/Kathmandu" | "Asia/Katmandu" | "Asia/Khandyga" | "Asia/Kolkata" | "Asia/Krasnoyarsk" | "Asia/Kuala_Lumpur" | "Asia/Kuching" | "Asia/Kuwait" | "Asia/Macao" | "Asia/Macau" | "Asia/Magadan" | "Asia/Makassar" | "Asia/Manila" | "Asia/Muscat" | "Asia/Nicosia" | "Asia/Novokuznetsk" | "Asia/Novosibirsk" | "Asia/Omsk" | "Asia/Oral" | "Asia/Phnom_Penh" | "Asia/Pontianak" | "Asia/Pyongyang" | "Asia/Qatar" | "Asia/Qostanay" | "Asia/Qyzylorda" | "Asia/Rangoon" | "Asia/Riyadh" | "Asia/Saigon" | "Asia/Sakhalin" | "Asia/Samarkand" | "Asia/Seoul" | "Asia/Shanghai" | "Asia/Singapore" | "Asia/Srednekolymsk" | "Asia/Taipei" | "Asia/Tashkent" | "Asia/Tbilisi" | "Asia/Tehran" | "Asia/Tel_Aviv" | "Asia/Thimbu" | "Asia/Thimphu" | "Asia/Tokyo" | "Asia/Tomsk" | "Asia/Ujung_Pandang" | "Asia/Ulaanbaatar" | "Asia/Ulan_Bator" | "Asia/Urumqi" | "Asia/Ust-Nera" | "Asia/Vientiane" | "Asia/Vladivostok" | "Asia/Yakutsk" | "Asia/Yangon" | "Asia/Yekaterinburg" | "Asia/Yerevan" | "Atlantic/Azores" | "Atlantic/Bermuda" | "Atlantic/Canary" | "Atlantic/Cape_Verde" | "Atlantic/Faeroe" | "Atlantic/Faroe" | "Atlantic/Jan_Mayen" | "Atlantic/Madeira" | "Atlantic/Reykjavik" | "Atlantic/South_Georgia" | "Atlantic/St_Helena" | "Atlantic/Stanley" | "Australia/ACT" | "Australia/Adelaide" | "Australia/Brisbane" | "Australia/Broken_Hill" | "Australia/Canberra" | "Australia/Currie" | "Australia/Darwin" | "Australia/Eucla" | "Australia/Hobart" | "Australia/LHI" | "Australia/Lindeman" | "Australia/Lord_Howe" | "Australia/Melbourne" | "Australia/NSW" | "Australia/North" | "Australia/Perth" | "Australia/Queensland" | "Australia/South" | "Australia/Sydney" | "Australia/Tasmania" | "Australia/Victoria" | "Australia/West" | "Australia/Yancowinna" | "Brazil/Acre" | "Brazil/DeNoronha" | "Brazil/East" | "Brazil/West" | "CET" | "CST6CDT" | "Canada/Atlantic" | "Canada/Central" | "Canada/Eastern" | "Canada/Mountain" | "Canada/Newfoundland" | "Canada/Pacific" | "Canada/Saskatchewan" | "Canada/Yukon" | "Chile/Continental" | "Chile/EasterIsland" | "Cuba" | "EET" | "EST5EDT" | "Egypt" | "Eire" | "Etc/GMT" | "Etc/GMT+0" | "Etc/GMT+1" | "Etc/GMT+10" | "Etc/GMT+11" | "Etc/GMT+12" | "Etc/GMT+2" | "Etc/GMT+3" | "Etc/GMT+4" | "Etc/GMT+5" | "Etc/GMT+6" | "Etc/GMT+7" | "Etc/GMT+8" | "Etc/GMT+9" | "Etc/GMT-0" | "Etc/GMT-1" | "Etc/GMT-10" | "Etc/GMT-11" | "Etc/GMT-12" | "Etc/GMT-13" | "Etc/GMT-14" | "Etc/GMT-2" | "Etc/GMT-3" | "Etc/GMT-4" | "Etc/GMT-5" | "Etc/GMT-6" | "Etc/GMT-7" | "Etc/GMT-8" | "Etc/GMT-9" | "Etc/GMT0" | "Etc/Greenwich" | "Etc/UCT" | "Etc/UTC" | "Etc/Universal" | "Etc/Zulu" | "Europe/Amsterdam" | "Europe/Andorra" | "Europe/Astrakhan" | "Europe/Athens" | "Europe/Belfast" | "Europe/Belgrade" | "Europe/Berlin" | "Europe/Bratislava" | "Europe/Brussels" | "Europe/Bucharest" | "Europe/Budapest" | "Europe/Busingen" | "Europe/Chisinau" | "Europe/Copenhagen" | "Europe/Dublin" | "Europe/Gibraltar" | "Europe/Guernsey" | "Europe/Helsinki" | "Europe/Isle_of_Man" | "Europe/Istanbul" | "Europe/Jersey" | "Europe/Kaliningrad" | "Europe/Kiev" | "Europe/Kirov" | "Europe/Kyiv" | "Europe/Lisbon" | "Europe/Ljubljana" | "Europe/London" | "Europe/Luxembourg" | "Europe/Madrid" | "Europe/Malta" | "Europe/Mariehamn" | "Europe/Minsk" | "Europe/Monaco" | "Europe/Moscow" | "Europe/Nicosia" | "Europe/Oslo" | "Europe/Paris" | "Europe/Podgorica" | "Europe/Prague" | "Europe/Riga" | "Europe/Rome" | "Europe/Samara" | "Europe/San_Marino" | "Europe/Sarajevo" | "Europe/Saratov" | "Europe/Simferopol" | "Europe/Skopje" | "Europe/Sofia" | "Europe/Stockholm" | "Europe/Tallinn" | "Europe/Tirane" | "Europe/Tiraspol" | "Europe/Ulyanovsk" | "Europe/Uzhgorod" | "Europe/Vaduz" | "Europe/Vatican" | "Europe/Vienna" | "Europe/Vilnius" | "Europe/Volgograd" | "Europe/Warsaw" | "Europe/Zagreb" | "Europe/Zaporozhye" | "Europe/Zurich" | "GB" | "GB-Eire" | "GMT" | "GMT0" | "Greenwich" | "Hongkong" | "Iceland" | "Indian/Antananarivo" | "Indian/Chagos" | "Indian/Christmas" | "Indian/Cocos" | "Indian/Comoro" | "Indian/Kerguelen" | "Indian/Mahe" | "Indian/Maldives" | "Indian/Mauritius" | "Indian/Mayotte" | "Indian/Reunion" | "Iran" | "Israel" | "Jamaica" | "Japan" | "Kwajalein" | "Libya" | "MET" | "MST7MDT" | "Mexico/BajaNorte" | "Mexico/BajaSur" | "Mexico/General" | "NZ" | "NZ-CHAT" | "Navajo" | "PRC" | "PST8PDT" | "Pacific/Apia" | "Pacific/Auckland" | "Pacific/Bougainville" | "Pacific/Chatham" | "Pacific/Chuuk" | "Pacific/Easter" | "Pacific/Efate" | "Pacific/Enderbury" | "Pacific/Fakaofo" | "Pacific/Fiji" | "Pacific/Funafuti" | "Pacific/Galapagos" | "Pacific/Gambier" | "Pacific/Guadalcanal" | "Pacific/Guam" | "Pacific/Honolulu" | "Pacific/Johnston" | "Pacific/Kanton" | "Pacific/Kiritimati" | "Pacific/Kosrae" | "Pacific/Kwajalein" | "Pacific/Majuro" | "Pacific/Marquesas" | "Pacific/Midway" | "Pacific/Nauru" | "Pacific/Niue" | "Pacific/Norfolk" | "Pacific/Noumea" | "Pacific/Pago_Pago" | "Pacific/Palau" | "Pacific/Pitcairn" | "Pacific/Pohnpei" | "Pacific/Ponape" | "Pacific/Port_Moresby" | "Pacific/Rarotonga" | "Pacific/Saipan" | "Pacific/Samoa" | "Pacific/Tahiti" | "Pacific/Tarawa" | "Pacific/Tongatapu" | "Pacific/Truk" | "Pacific/Wake" | "Pacific/Wallis" | "Pacific/Yap" | "Poland" | "Portugal" | "ROK" | "Singapore" | "SystemV/AST4" | "SystemV/AST4ADT" | "SystemV/CST6" | "SystemV/CST6CDT" | "SystemV/EST5" | "SystemV/EST5EDT" | "SystemV/HST10" | "SystemV/MST7" | "SystemV/MST7MDT" | "SystemV/PST8" | "SystemV/PST8PDT" | "SystemV/YST9" | "SystemV/YST9YDT" | "Turkey" | "UCT" | "US/Alaska" | "US/Aleutian" | "US/Arizona" | "US/Central" | "US/East-Indiana" | "US/Eastern" | "US/Hawaii" | "US/Indiana-Starke" | "US/Michigan" | "US/Mountain" | "US/Pacific" | "US/Samoa" | "UTC" | "Universal" | "W-SU" | "WET" | "Zulu" | "EST" | "HST" | "MST" | "ACT" | "AET" | "AGT" | "ART" | "AST" | "BET" | "BST" | "CAT" | "CNT" | "CST" | "CTT" | "EAT" | "ECT" | "IET" | "IST" | "JST" | "MIT" | "NET" | "NST" | "PLT" | "PNT" | "PRT" | "PST" | "SST" | "VST";
 type UpdateScheduleRequestStatusEnum = "ACTIVE" | "PAUSE";
 
@@ -8959,7 +10595,7 @@ declare class UpdateUserGroupRequest {
     }[];
     constructor();
 }
-type UpdateUserGroupRequestPrivilegesEnum = "ADMINISTRATION" | "AUTHORING" | "USERDATAUPLOADING" | "DATADOWNLOADING" | "USERMANAGEMENT" | "DATAMANAGEMENT" | "SHAREWITHALL" | "JOBSCHEDULING" | "A3ANALYSIS" | "EXPERIMENTALFEATUREPRIVILEGE" | "BYPASSRLS" | "RANALYSIS" | "DEVELOPER" | "USER_ADMINISTRATION" | "GROUP_ADMINISTRATION" | "SYNCMANAGEMENT" | "CAN_CREATE_CATALOG" | "DISABLE_PINBOARD_CREATION" | "ENABLESPOTAPPCREATION" | "LIVEBOARD_VERIFIER" | "PREVIEW_THOUGHTSPOT_SAGE";
+type UpdateUserGroupRequestPrivilegesEnum = "ADMINISTRATION" | "AUTHORING" | "USERDATAUPLOADING" | "DATADOWNLOADING" | "USERMANAGEMENT" | "DATAMANAGEMENT" | "SHAREWITHALL" | "JOBSCHEDULING" | "A3ANALYSIS" | "EXPERIMENTALFEATUREPRIVILEGE" | "BYPASSRLS" | "RANALYSIS" | "DEVELOPER" | "USER_ADMINISTRATION" | "GROUP_ADMINISTRATION" | "SYNCMANAGEMENT" | "CAN_CREATE_CATALOG" | "DISABLE_PINBOARD_CREATION" | "LIVEBOARD_VERIFIER" | "PREVIEW_THOUGHTSPOT_SAGE" | "CAN_MANAGE_VERSION_CONTROL" | "THIRDPARTY_ANALYSIS" | "ALLOW_NON_EMBED_FULL_APP_ACCESS" | "CAN_ACCESS_ANALYST_STUDIO" | "CAN_MANAGE_ANALYST_STUDIO" | "PREVIEW_DOCUMENT_SEARCH";
 type UpdateUserGroupRequestTypeEnum = "LOCAL_GROUP" | "LDAP_GROUP";
 type UpdateUserGroupRequestVisibilityEnum = "SHARABLE" | "NON_SHARABLE";
 type UpdateUserGroupRequestOperationEnum = "ADD" | "REMOVE" | "REPLACE";
@@ -9098,157 +10734,157 @@ declare class User {
     /**
     * Unique identifier of author of the user.
     */
-    'author_id'?: string;
+    'author_id'?: string | null;
     /**
     * Defines whether the user can change their password.
     */
-    'can_change_password'?: boolean;
+    'can_change_password'?: boolean | null;
     /**
     * Defines whether the response has complete detail of the user.
     */
-    'complete_detail'?: boolean;
+    'complete_detail'?: boolean | null;
     /**
     * Creation time of the user in milliseconds.
     */
-    'creation_time_in_millis'?: number;
+    'creation_time_in_millis'?: number | null;
     'current_org'?: Org;
     /**
     * Indicates whether the user is deleted.
     */
-    'deleted'?: boolean;
+    'deleted'?: boolean | null;
     /**
     * Indicates whether the user is deprecated.
     */
-    'deprecated'?: boolean;
+    'deprecated'?: boolean | null;
     /**
     * Type of the user account.
     */
-    'account_type'?: UserAccountTypeEnum;
+    'account_type'?: UserAccountTypeEnum | null;
     /**
     * Status of the user account.
     */
-    'account_status'?: UserAccountStatusEnum;
+    'account_status'?: UserAccountStatusEnum | null;
     /**
     * Email of the user.
     */
-    'email'?: string;
+    'email'?: string | null;
     /**
     * Expiration time of the user in milliseconds.
     */
-    'expiration_time_in_millis'?: number;
+    'expiration_time_in_millis'?: number | null;
     /**
     * Indicates whether the user is external.
     */
-    'external'?: boolean;
+    'external'?: boolean | null;
     /**
     * Metadata objects to add to the users\' favorites list.
     */
-    'favorite_metadata'?: Array<FavoriteMetadataItem>;
+    'favorite_metadata'?: Array<FavoriteMetadataItem> | null;
     /**
     * Timestamp of the first login session of the user in milliseconds.
     */
-    'first_login_time_in_millis'?: number;
+    'first_login_time_in_millis'?: number | null;
     /**
     * Group mask of the user.
     */
-    'group_mask'?: number;
+    'group_mask'?: number | null;
     /**
     * Indicates whether the user is hidden.
     */
-    'hidden'?: boolean;
+    'hidden'?: boolean | null;
     'home_liveboard'?: ObjectIDAndName;
     /**
     * Incomplete details of user if any present.
     */
-    'incomplete_details'?: any;
+    'incomplete_details'?: any | null;
     /**
     * Indicates whether it is first login of the user.
     */
-    'is_first_login'?: boolean;
+    'is_first_login'?: boolean | null;
     /**
     * Last modified time of the user in milliseconds.
     */
-    'modification_time_in_millis'?: number;
+    'modification_time_in_millis'?: number | null;
     /**
     * Unique identifier of modifier of the user.
     */
-    'modifier_id'?: string;
+    'modifier_id'?: string | null;
     /**
     * User preference for receiving email notifications on shared Answers or Liveboard.
     */
-    'notify_on_share'?: boolean;
+    'notify_on_share'?: boolean | null;
     /**
     * The user preference for turning off the onboarding experience.
     */
-    'onboarding_experience_completed'?: boolean;
+    'onboarding_experience_completed'?: boolean | null;
     /**
     * Orgs to which the user belongs.
     */
-    'orgs'?: Array<Org>;
+    'orgs'?: Array<Org> | null;
     /**
     * Unique identifier of owner of the user.
     */
-    'owner_id'?: string;
+    'owner_id'?: string | null;
     /**
     * Parent type of the user.
     */
-    'parent_type'?: UserParentTypeEnum;
+    'parent_type'?: UserParentTypeEnum | null;
     /**
     * Privileges which are assigned to the user.
     */
-    'privileges'?: Array<string>;
+    'privileges'?: Array<string> | null;
     /**
     * User\'s preference to revisit the new user onboarding experience.
     */
-    'show_onboarding_experience'?: boolean;
+    'show_onboarding_experience'?: boolean | null;
     /**
     * Indicates whether the user is a super user.
     */
-    'super_user'?: boolean;
+    'super_user'?: boolean | null;
     /**
     * Indicates whether the user is a system user.
     */
-    'system_user'?: boolean;
+    'system_user'?: boolean | null;
     /**
     * Tags associated with the user.
     */
-    'tags'?: Array<ObjectIDAndName>;
+    'tags'?: Array<ObjectIDAndName> | null;
     /**
     * Unique identifier of tenant of the user.
     */
-    'tenant_id'?: string;
+    'tenant_id'?: string | null;
     /**
     * Groups to which the user is assigned.
     */
-    'user_groups'?: Array<ObjectIDAndName>;
+    'user_groups'?: Array<ObjectIDAndName> | null;
     /**
     * Inherited User Groups which the user is part of.
     */
-    'user_inherited_groups'?: Array<ObjectIDAndName>;
+    'user_inherited_groups'?: Array<ObjectIDAndName> | null;
     /**
     * Indicates whether welcome email is sent for the user.
     */
-    'welcome_email_sent'?: boolean;
+    'welcome_email_sent'?: boolean | null;
     /**
     * Privileges which are assigned to the user with org.
     */
-    'org_privileges'?: any;
+    'org_privileges'?: any | null;
     /**
     * Locale for the user.
     */
-    'preferred_locale'?: string;
+    'preferred_locale'?: string | null;
     /**
     * Properties for the user
     */
-    'extended_properties'?: any;
+    'extended_properties'?: any | null;
     /**
     * Preferences for the user
     */
-    'extended_preferences'?: any;
+    'extended_preferences'?: any | null;
     /**
     * User Parameters which are specified for the user via JWToken
     */
-    'user_parameters'?: any;
+    'user_parameters'?: any | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -9285,35 +10921,35 @@ declare class UserGroupResponse {
     /**
     * The unique identifier of the object
     */
-    'author_id'?: string;
+    'author_id'?: string | null;
     /**
     * Indicates whether the response has complete detail of the group.
     */
-    'complete_detail'?: boolean;
+    'complete_detail'?: boolean | null;
     /**
     * Content details of the group
     */
-    'content'?: any;
+    'content'?: any | null;
     /**
     * Creation time of the group in milliseconds
     */
-    'creation_time_in_millis'?: number;
+    'creation_time_in_millis'?: number | null;
     /**
     * Liveboards that are assigned as default Liveboards to the group.
     */
-    'default_liveboards'?: Array<UserGroup>;
+    'default_liveboards'?: Array<UserGroup> | null;
     /**
     * Indicates whether the group is deleted
     */
-    'deleted'?: boolean;
+    'deleted'?: boolean | null;
     /**
     * Indicates whether the group is deprecated
     */
-    'deprecated'?: boolean;
+    'deprecated'?: boolean | null;
     /**
     * Description of the group
     */
-    'description'?: string;
+    'description'?: string | null;
     /**
     * Display name of the group.
     */
@@ -9321,15 +10957,15 @@ declare class UserGroupResponse {
     /**
     * Indicates whether the group is external
     */
-    'external'?: boolean;
+    'external'?: boolean | null;
     /**
     * Generation number of the group
     */
-    'generation_number'?: number;
+    'generation_number'?: number | null;
     /**
     * Indicates whether the group is hidden
     */
-    'hidden'?: boolean;
+    'hidden'?: boolean | null;
     /**
     * The unique identifier of the object
     */
@@ -9337,23 +10973,23 @@ declare class UserGroupResponse {
     /**
     * Index number of the group
     */
-    'index'?: number;
+    'index'?: number | null;
     /**
     * Index version number of the group
     */
-    'index_version'?: number;
+    'index_version'?: number | null;
     /**
     * Metadata version number of the group
     */
-    'metadata_version'?: number;
+    'metadata_version'?: number | null;
     /**
     * Last modified time of the group in milliseconds.
     */
-    'modification_time_in_millis'?: number;
+    'modification_time_in_millis'?: number | null;
     /**
     * The unique identifier of the object
     */
-    'modifier_id'?: string;
+    'modifier_id'?: string | null;
     /**
     * Name of the group.
     */
@@ -9361,39 +10997,39 @@ declare class UserGroupResponse {
     /**
     * Orgs in which group exists.
     */
-    'orgs'?: Array<UserGroup>;
+    'orgs'?: Array<UserGroup> | null;
     /**
     * The unique identifier of the object
     */
-    'owner_id'?: string;
+    'owner_id'?: string | null;
     /**
     * Parent type of the group.
     */
-    'parent_type'?: UserGroupResponseParentTypeEnum;
+    'parent_type'?: UserGroupResponseParentTypeEnum | null;
     /**
     * Privileges which are assigned to the group
     */
-    'privileges'?: Array<string>;
+    'privileges'?: Array<string> | null;
     /**
     * Groups who are part of the group
     */
-    'sub_groups'?: Array<UserGroup>;
+    'sub_groups'?: Array<UserGroup> | null;
     /**
     * Indicates whether the group is a system group.
     */
-    'system_group'?: boolean;
+    'system_group'?: boolean | null;
     /**
     * Tags associated with the group.
     */
-    'tags'?: Array<UserGroup>;
+    'tags'?: Array<UserGroup> | null;
     /**
     * Type of the group.
     */
-    'type'?: UserGroupResponseTypeEnum;
+    'type'?: UserGroupResponseTypeEnum | null;
     /**
     * Users who are part of the group.
     */
-    'users'?: Array<UserGroup>;
+    'users'?: Array<UserGroup> | null;
     /**
     * Visibility of the group. The SHARABLE makes a group visible to other users and groups, and thus allows them to share objects.
     */
@@ -9401,7 +11037,7 @@ declare class UserGroupResponse {
     /**
     * List of roles assgined to the user
     */
-    'roles'?: Array<Role>;
+    'roles'?: Array<Role> | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -9432,6 +11068,51 @@ type UserGroupResponseVisibilityEnum = "SHARABLE" | "NON_SHARABLE";
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+
+/**
+* Define attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters).
+*/
+declare class UserParameterOptions {
+    'objects'?: Array<UserObject> | null;
+    /**
+    * Objects to apply the User_Runtime_Filters.  Examples to set the `runtime_filters` : ```json { \"column_name\": \"Color\", \"operator\": \"EQ\", \"values\": [\"red\"], \"persist\": false } ```
+    */
+    'runtime_filters'?: Array<UserRuntimeFilters> | null;
+    /**
+    * Objects to apply the User_Runtime_Sorts.  Examples to set the `runtime_sorts` : ```json { \"column_name\": \"Color\", \"order\": \"ASC\", \"persist\": false } ```
+    */
+    'runtime_sorts'?: Array<UserRuntimeSorts> | null;
+    /**
+    * Objects to apply the Runtime_Parameters.  Examples to set the `parameters` : ```json { \"name\": \"Color\", \"values\": [\"Blue\"], \"persist\": false } ```
+    */
+    'parameters'?: Array<UserParameters> | null;
+    static readonly discriminator: string | undefined;
+    static readonly attributeTypeMap: Array<{
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }>;
+    static getAttributeTypeMap(): {
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }[];
+    constructor();
+}
+
+/**
+ * ThoughtSpot Public REST API
+ * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
+ *
+ * OpenAPI spec version: 2.0
+ *
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
 declare class ValidateMergeRequest {
     /**
     * Name of the branch from which changes need to be picked for validation
@@ -9441,6 +11122,35 @@ declare class ValidateMergeRequest {
     * Name of the branch where files will be merged
     */
     'target_branch_name': string;
+    static readonly discriminator: string | undefined;
+    static readonly attributeTypeMap: Array<{
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }>;
+    static getAttributeTypeMap(): {
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }[];
+    constructor();
+}
+
+/**
+ * ThoughtSpot Public REST API
+ * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
+ *
+ * OpenAPI spec version: 2.0
+ *
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+declare class ValidateTokenRequest {
+    'token': string;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -9685,6 +11395,11 @@ declare class AuthenticationApiRequestFactory extends BaseAPIRequestFactory {
      * @param revokeTokenRequest
      */
     revokeToken(revokeTokenRequest: RevokeTokenRequest, _options?: Configuration): Promise<RequestContext>;
+    /**
+     *  Version: 9.12.0.cl or later
+     * @param validateTokenRequest
+     */
+    validateToken(validateTokenRequest: ValidateTokenRequest, _options?: Configuration): Promise<RequestContext>;
 }
 declare class AuthenticationApiResponseProcessor {
     /**
@@ -9743,6 +11458,14 @@ declare class AuthenticationApiResponseProcessor {
      * @throws ApiException if the response code was not in [200, 299]
      */
     revokeToken(response: ResponseContext): Promise<void>;
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to validateToken
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+    validateToken(response: ResponseContext): Promise<TokenValidationResponse>;
 }
 
 /**
@@ -9760,6 +11483,21 @@ declare class ConnectionsApiRequestFactory extends BaseAPIRequestFactory {
      */
     deleteConnection(deleteConnectionRequest: DeleteConnectionRequest, _options?: Configuration): Promise<RequestContext>;
     /**
+     *   Version: 10.0.0.cl or later   Deletes a connection object.  **Note**: If a connection has dependent objects, make sure you remove its associations before the delete operation.  Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+     * @param connectionIdentifier Unique ID or name of the connection.
+     */
+    deleteConnectionV2(connectionIdentifier: string, _options?: Configuration): Promise<RequestContext>;
+    /**
+     *   Version: 9.9.0.cl or later   Exports the difference in connection metadata between CDW and ThoughtSpot  Requires `DATAMANAGEMENT` (**Can manage data**) privilege  To download the connection metadata difference between ThoughtSpot and CDW, pass the connection GUID as `connection_identifier` in the API request.
+     * @param connectionIdentifier GUID of the connection
+     */
+    downloadConnectionMetadataChanges(connectionIdentifier: string, _options?: Configuration): Promise<RequestContext>;
+    /**
+     *   Version: 9.9.0.cl or later   Validates the difference in connection metadata between CDW and ThoughtSpot  Requires `DATAMANAGEMENT` (**Can manage data**) privilege  Returns a boolean indicating whether there is any difference between the connection metadata at ThoughtSpot and CDW.  To get the connection metadata difference status, pass the connection GUID as `connection_identifier` in the API request.
+     * @param connectionIdentifier GUID of the connection
+     */
+    fetchConnectionDiffStatus(connectionIdentifier: string, _options?: Configuration): Promise<RequestContext>;
+    /**
      *   Version: 9.2.0.cl or later   Gets connection objects. Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  - To get a list of all connections available in the ThoughtSpot system, send the API request without any attributes in the request body. - To get the connection objects for a specific type of data warehouse, specify the type in `data_warehouse_types`. - To fetch details of a connection object, specify the connection object GUID or name. The `name_pattern` attribute allows passing partial text with `%` for a wildcard match. - To get details of the database, schemas, tables, or columns from a data connection object, specify `data_warehouse_object_type`. - To get a specific database, schema, table, or column from a connection object, define the object type in `data_warehouse_object_type` and object properties in the `data_warehouse_objects` array. For example, to search for a column, you must pass the database, schema, and table names in the API request.   Note that in the following example, object properties are set in a hierarchical order (`database` > `schema` > `table` > `column`).  ``` {   \"connections\": [     {       \"identifier\": \"b9d1f2ef-fa65-4a4b-994e-30fa2d57b0c2\",       \"data_warehouse_objects\": [         {           \"database\": \"NEBULADEV\",           \"schema\": \"INFORMATION_SCHEMA\",           \"table\": \"APPLICABLE_ROLES\",           \"column\": \"ROLE_NAME\"         }       ]     }   ],   \"data_warehouse_object_type\": \"COLUMN\" } ```  - To fetch data by `configuration`, specify `data_warehouse_object_type`. For example, to fetch columns from the `DEVELOPMENT` database, specify the `data_warehouse_object_type` as `DATABASE` and define the `configuration` string as `{\"database\":\"DEVELOPMENT\"}`. To get column data for a specific table, specify the table, for example,`{\"database\":\"RETAILAPPAREL\",\"table\":\"PIPES\"}`. - To query connections by `authentication_type`, specify `data_warehouse_object_type`. Supported values for `authentication_type` are:   - `SERVICE_ACCOUNT`: For connections that require service account credentials to authenticate to the Cloud Data Warehouse and fetch data.   - `OAUTH`: For connections that require OAuth credentials to authenticate to the Cloud Data Warehouse and fetch data. Teradata, Oracle, and Presto Cloud Data Warehouses do not support the OAuth authentication type.   - `IAM`: For connections that have the IAM OAuth set up. This authentication type is supported on Amazon Redshift connections only.   - `EXTOAUTH`: For connections that have external OAuth set up. ThoughtSpot supports external [OAuth with Microsoft Azure Active Directory (AD)](https://docs.thoughtspot.com/cloud/latest/ connections-snowflake-azure-ad-oauth) and [Okta for Snowflake data connections](https://docs.thoughtspot.com/cloud/latest/connections-snowflake-okta-oauth). - To include more details about connection objects in the API response, set `include_details` to `true`. - You can also sort the output by field names and filter connections by tags.  **NOTE**: When filtering connection records by parameters other than `data_warehouse_types` or `tag_identifiers`, ensure that you set `record_size` to `-1` and `record_offset` to `0` for precise results.
      * @param searchConnectionRequest
      */
@@ -9769,6 +11507,12 @@ declare class ConnectionsApiRequestFactory extends BaseAPIRequestFactory {
      * @param updateConnectionRequest
      */
     updateConnection(updateConnectionRequest: UpdateConnectionRequest, _options?: Configuration): Promise<RequestContext>;
+    /**
+     *   Version: 10.0.0.cl or later   Updates a connection object.  Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  To update a connection object, pass these parameters in your API request:  1. GUID of the connection object. 2. If you are updating tables or database schema of a connection object:    a. Add the updated JSON map of metadata with database, schema, and tables in `data_warehouse_config`.    b. Set `validate` to `true`. 3. If you are updating a configuration attribute, connection name, or description, you can set `validate` to `false`.
+     * @param connectionIdentifier Unique ID or name of the connection.
+     * @param updateConnectionV2Request
+     */
+    updateConnectionV2(connectionIdentifier: string, updateConnectionV2Request: UpdateConnectionV2Request, _options?: Configuration): Promise<RequestContext>;
 }
 declare class ConnectionsApiResponseProcessor {
     /**
@@ -9791,6 +11535,30 @@ declare class ConnectionsApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
+     * @params response Response returned by the server for a request to deleteConnectionV2
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+    deleteConnectionV2(response: ResponseContext): Promise<void>;
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to downloadConnectionMetadataChanges
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+    downloadConnectionMetadataChanges(response: ResponseContext): Promise<void>;
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to fetchConnectionDiffStatus
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+    fetchConnectionDiffStatus(response: ResponseContext): Promise<FetchConnectionDiffStatusResponse>;
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
      * @params response Response returned by the server for a request to searchConnection
      * @throws ApiException if the response code was not in [200, 299]
      */
@@ -9803,6 +11571,14 @@ declare class ConnectionsApiResponseProcessor {
      * @throws ApiException if the response code was not in [200, 299]
      */
     updateConnection(response: ResponseContext): Promise<void>;
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to updateConnectionV2
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+    updateConnectionV2(response: ResponseContext): Promise<void>;
 }
 
 /**
@@ -9864,6 +11640,91 @@ declare class CustomActionApiResponseProcessor {
      * @throws ApiException if the response code was not in [200, 299]
      */
     updateCustomAction(response: ResponseContext): Promise<void>;
+}
+
+/**
+ * no description
+ */
+declare class DBTApiRequestFactory extends BaseAPIRequestFactory {
+    /**
+     *   Version: 9.9.0.cl or later   Creates a DBT connection object in ThoughtSpot.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege.  #### About create DBT connection DBT connection in ThoughtSpot is used by the user to define DBT credentials for cloud . The API needs  embrace connection, embrace database name, DBT url, import type, DBT account identifier, DBT project identifier, DBT access token and environment details (or) embrace connection, embrace database name, import type, file_content to create a connection object. To know more about DBT, see ThoughtSpot Product Documentation.
+     * @param dbtConnectionRequest
+     */
+    dbtConnection(dbtConnectionRequest: DbtConnectionRequest, _options?: Configuration): Promise<RequestContext>;
+    /**
+     *  Version: 9.9.0.cl or later
+     * @param dbtGenerateSyncTmlRequest
+     */
+    dbtGenerateSyncTml(dbtGenerateSyncTmlRequest: DbtGenerateSyncTmlRequest, _options?: Configuration): Promise<RequestContext>;
+    /**
+     *  Version: 9.9.0.cl or later
+     * @param dbtGenerateTmlRequest
+     */
+    dbtGenerateTml(dbtGenerateTmlRequest: DbtGenerateTmlRequest, _options?: Configuration): Promise<RequestContext>;
+    /**
+     *   Version: 9.9.0.cl or later   Gets a list of DBT connection objects by user and organization, available on the ThoughtSpot system.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege  #### About search DBT connection To get details of a specific DBT connection identifier, database connection identifier, database connection name, database name, project name, project identifier, environment identifier , import type and author.
+     */
+    dbtSearch(_options?: Configuration): Promise<RequestContext>;
+    /**
+     *   Version: 9.9.0.cl or later   Removes the specified DBT connection object from the ThoughtSpot system.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege.
+     * @param dbtConnectionIdentifier Unique ID of the DBT Connection.
+     */
+    deleteDbtConnection(dbtConnectionIdentifier: string, _options?: Configuration): Promise<RequestContext>;
+    /**
+     *   Version: 9.9.0.cl or later   Updates a DBT connection object.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege, along with an existing DBT connection.  #### About update DBT connection You can modify DBT connection object properties such as embrace connection name, embrace database name, import type, account identifier, access token, project identifier and environment (or) embrace connection, embrace database name, import type, file_content settings.
+     * @param updateDbtConnectionRequest
+     */
+    updateDbtConnection(updateDbtConnectionRequest: UpdateDbtConnectionRequest, _options?: Configuration): Promise<RequestContext>;
+}
+declare class DBTApiResponseProcessor {
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to dbtConnection
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+    dbtConnection(response: ResponseContext): Promise<any>;
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to dbtGenerateSyncTml
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+    dbtGenerateSyncTml(response: ResponseContext): Promise<any>;
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to dbtGenerateTml
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+    dbtGenerateTml(response: ResponseContext): Promise<any>;
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to dbtSearch
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+    dbtSearch(response: ResponseContext): Promise<Array<DbtSearchResponse>>;
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to deleteDbtConnection
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+    deleteDbtConnection(response: ResponseContext): Promise<void>;
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to updateDbtConnection
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+    updateDbtConnection(response: ResponseContext): Promise<any>;
 }
 
 /**
@@ -9992,7 +11853,7 @@ declare class GroupsApiResponseProcessor {
  */
 declare class LogApiRequestFactory extends BaseAPIRequestFactory {
     /**
-     *   Version: 9.0.0.cl or later   Fetches security audit logs.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  By default, the API retrieves logs for the last 24 hours. You can set a custom duration in EPOCH time. Make sure the log duration specified in your API request doesn’t exceed 24 hours. If you must fetch logs for a longer time range, modify the duration and make multiple sequential API requests.  Upon successful execution, the API returns logs with the following information: * timestamp of the event * event ID * event type * name and GUID of the user * IP address of ThoughtSpot instance  For more information about security events returned in the API response, see [Security events](https://developers.thoughtspot.com/docs/logs-api#_security_events).
+     *   Version: 9.0.0.cl or later   Fetches security audit logs.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  By default, the API retrieves logs for the last 24 hours. You can set a custom duration in EPOCH time. Make sure the log duration specified in your API request doesn’t exceed 24 hours. If you must fetch logs for a longer time range, modify the duration and make multiple sequential API requests.  Upon successful execution, the API returns logs with the following information: * timestamp of the event * event ID * event type * name and GUID of the user * IP address of ThoughtSpot instance  For more information about security events returned in the API response, see [Security events](https://developers.thoughtspot.com/docs/audit-logs#_security_events).
      * @param fetchLogsRequest
      */
     fetchLogs(fetchLogsRequest: FetchLogsRequest, _options?: Configuration): Promise<RequestContext>;
@@ -10013,6 +11874,11 @@ declare class LogApiResponseProcessor {
  */
 declare class MetadataApiRequestFactory extends BaseAPIRequestFactory {
     /**
+     *  Makes a copy of an Answer or Liveboard saved in Atlas    Version: 10.3.0.cl or later   Creates a copy of the metadata object specified in the API request.  Requires create access to metadata objects  Upon successful execution, the API returns the id of the new object which is copied from the given object.
+     * @param copyObjectRequest
+     */
+    copyObject(copyObjectRequest: CopyObjectRequest, _options?: Configuration): Promise<RequestContext>;
+    /**
      *   Version: 9.0.0.cl or later   Removes the specified metadata object from the ThoughtSpot system.  Requires edit access to the metadata object or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
      * @param deleteMetadataRequest
      */
@@ -10022,6 +11888,11 @@ declare class MetadataApiRequestFactory extends BaseAPIRequestFactory {
      * @param exportMetadataTMLRequest
      */
     exportMetadataTML(exportMetadataTMLRequest: ExportMetadataTMLRequest, _options?: Configuration): Promise<RequestContext>;
+    /**
+     *  Version: 10.1.0.cl or later
+     * @param exportMetadataTMLBatchedRequest
+     */
+    exportMetadataTMLBatched(exportMetadataTMLBatchedRequest: ExportMetadataTMLBatchedRequest, _options?: Configuration): Promise<RequestContext>;
     /**
      *   Version: 9.0.0.cl or later   Fetches the underlying SQL query data for an Answer object.  Requires at least view access to the Answer object.  Upon successful execution, the API returns the SQL queries for the specified object as shown in this example: ``` {    \"metadata_id\":\"8fbe44a8-46ad-4b16-8d39-184b2fada490\",    \"metadata_name\":\"Total sales\",    \"metadata_type\":\"ANSWER\",    \"sql_queries\":[       {          \"metadata_id\":\"8fbe44a8-46ad-4b16-8d39-184b2fada490\",          \"metadata_name\":\"Total sales -test\",          \"sql_query\":\"SELECT \\n  \\\"ta_1\\\".\\\"REGION\\\" \\\"ca_1\\\", \\n  \\\"ta_2\\\".\\\"PRODUCTNAME\\\" \\\"ca_2\\\", \\n  \\\"ta_1\\\".\\\"STORENAME\\\" \\\"ca_3\\\", \\n  CASE\\n    WHEN sum(\\\"ta_3\\\".\\\"SALES\\\") IS NOT NULL THEN sum(\\\"ta_3\\\".\\\"SALES\\\")\\n    ELSE 0\\n  END \\\"ca_4\\\", \\n  CASE\\n    WHEN sum(\\\"ta_3\\\".\\\"QUANTITYPURCHASED\\\") IS NOT NULL THEN sum(\\\"ta_3\\\".\\\"QUANTITYPURCHASED\\\")\\n    ELSE 0\\n  END \\\"ca_5\\\"\\nFROM \\\"RETAILAPPAREL\\\".\\\"PUBLIC\\\".\\\"FACT_RETAPP_SALES\\\" \\\"ta_3\\\"\\n  JOIN \\\"RETAILAPPAREL\\\".\\\"PUBLIC\\\".\\\"DIM_RETAPP_STORES\\\" \\\"ta_1\\\"\\n    ON \\\"ta_3\\\".\\\"STOREID\\\" = \\\"ta_1\\\".\\\"STOREID\\\"\\n  JOIN \\\"RETAILAPPAREL\\\".\\\"PUBLIC\\\".\\\"DIM_RETAPP_PRODUCTS\\\" \\\"ta_2\\\"\\n    ON \\\"ta_3\\\".\\\"PRODUCTID\\\" = \\\"ta_2\\\".\\\"PRODUCTID\\\"\\nGROUP BY \\n  \\\"ca_1\\\", \\n  \\\"ca_2\\\", \\n  \\\"ca_3\\\"\\n\"       }    ] } ```
      * @param fetchAnswerSqlQueryRequest
@@ -10048,6 +11919,14 @@ declare class MetadataApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
+     * @params response Response returned by the server for a request to copyObject
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+    copyObject(response: ResponseContext): Promise<ResponseCopyObject>;
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
      * @params response Response returned by the server for a request to deleteMetadata
      * @throws ApiException if the response code was not in [200, 299]
      */
@@ -10060,6 +11939,14 @@ declare class MetadataApiResponseProcessor {
      * @throws ApiException if the response code was not in [200, 299]
      */
     exportMetadataTML(response: ResponseContext): Promise<Array<any>>;
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to exportMetadataTMLBatched
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+    exportMetadataTMLBatched(response: ResponseContext): Promise<any>;
     /**
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
@@ -10438,12 +12325,12 @@ declare class TagsApiRequestFactory extends BaseAPIRequestFactory {
      */
     assignTag(assignTagRequest: AssignTagRequest, _options?: Configuration): Promise<RequestContext>;
     /**
-     *   Version: 9.0.0.cl or later   Creates a tag object.  Tags are labels that identify a metadata object. For example, you can create a tag to designate subject areas, such as sales, HR, marketing, and finance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+     *   Version: 9.0.0.cl or later   Creates a tag object.  Tags are labels that identify a metadata object. For example, you can create a tag to designate subject areas, such as sales, HR, marketing, and finance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.
      * @param createTagRequest
      */
     createTag(createTagRequest: CreateTagRequest, _options?: Configuration): Promise<RequestContext>;
     /**
-     *   Version: 9.0.0.cl or later   Deletes a tag object from the ThoughtSpot system  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+     *   Version: 9.0.0.cl or later   Deletes a tag object from the ThoughtSpot system  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.
      * @param tagIdentifier Tag identifier Tag name or Tag id.
      */
     deleteTag(tagIdentifier: string, _options?: Configuration): Promise<RequestContext>;
@@ -10458,7 +12345,7 @@ declare class TagsApiRequestFactory extends BaseAPIRequestFactory {
      */
     unassignTag(assignTagRequest: AssignTagRequest, _options?: Configuration): Promise<RequestContext>;
     /**
-     *   Version: 9.0.0.cl or later   Updates a tag object.  You can modify the `name` and `color` properties of a tag object.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+     *   Version: 9.0.0.cl or later   Updates a tag object.  You can modify the `name` and `color` properties of a tag object.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.
      * @param tagIdentifier Name or Id of the tag.
      * @param updateTagRequest
      */
@@ -10520,6 +12407,11 @@ declare class TagsApiResponseProcessor {
  */
 declare class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
     /**
+     *   Version: 9.7.0.cl or later   Activates a deactivated user account.  Requires `ADMINISTRATION` (**Can administer Thoughtspot**) privilege.  To activate an inactive user account, the API request body must include the following information:  - Username or the GUID of the user account. - Auth token generated for the deactivated user. The auth token is sent in the API response when a user is deactivated. - Password for the user account.
+     * @param activateUserRequest
+     */
+    activateUser(activateUserRequest: ActivateUserRequest, _options?: Configuration): Promise<RequestContext>;
+    /**
      *   Version: 9.0.0.cl or later   Transfers the ownership of one or several objects from one user to another.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
      * @param assignChangeAuthorRequest
      */
@@ -10535,10 +12427,15 @@ declare class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
      */
     changeUserPassword(changeUserPasswordRequest: ChangeUserPasswordRequest, _options?: Configuration): Promise<RequestContext>;
     /**
-     *   Version: 9.2.0.cl or later   Commits TML files of metadata objects to the Git branch configured on your instance.  Requires `DATAMANAGEMENT` privilege.  Before using this endpoint to push your commits:  * Enable Git integration on your instance. * Make sure the Git repository and branch details are configured on your instance.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).
+     *   Version: 9.2.0.cl or later   Commits TML files of metadata objects to the Git branch configured on your instance.  Requires at least edit access to objects used in the commit operation.  Before using this endpoint to push your commits:  * Enable Git integration on your instance. * Make sure the Git repository and branch details are configured on your instance.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).
      * @param commitBranchRequest
      */
     commitBranch(commitBranchRequest: CommitBranchRequest, _options?: Configuration): Promise<RequestContext>;
+    /**
+     *  Makes a copy of an Answer or Liveboard saved in Atlas    Version: 10.3.0.cl or later   Creates a copy of the metadata object specified in the API request.  Requires create access to metadata objects  Upon successful execution, the API returns the id of the new object which is copied from the given object.
+     * @param copyObjectRequest
+     */
+    copyObject(copyObjectRequest: CopyObjectRequest, _options?: Configuration): Promise<RequestContext>;
     /**
      *   Version: 9.2.0.cl or later   Allows you to connect a ThoughtSpot instance to a Git repository.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  You can use this API endpoint to connect your ThoughtSpot development and production environments to the development and production branches of a Git repository.  Before using this endpoint to connect your ThoughtSpot instance to a Git repository, check the following prerequisites:  * You have a Git repository. If you are using GitHub, make sure you have a valid account and an access token to connect ThoughtSpot to GitHub. For information about generating a token, see [GitHub Documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).  * Your access token has `repo` scope that grants full access to public and private repositories. * Your Git repository has a branch that can be configured as a default branch in ThoughtSpot.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).  **Note**: ThoughtSpot supports only GitHub / GitHub Enterprise for CI/CD.
      * @param createConfigRequest
@@ -10570,7 +12467,7 @@ declare class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
      */
     createSchedule(createScheduleRequest: CreateScheduleRequest, _options?: Configuration): Promise<RequestContext>;
     /**
-     *   Version: 9.0.0.cl or later   Creates a tag object.  Tags are labels that identify a metadata object. For example, you can create a tag to designate subject areas, such as sales, HR, marketing, and finance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+     *   Version: 9.0.0.cl or later   Creates a tag object.  Tags are labels that identify a metadata object. For example, you can create a tag to designate subject areas, such as sales, HR, marketing, and finance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.
      * @param createTagRequest
      */
     createTag(createTagRequest: CreateTagRequest, _options?: Configuration): Promise<RequestContext>;
@@ -10585,6 +12482,30 @@ declare class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
      */
     createUserGroup(createUserGroupRequest: CreateUserGroupRequest, _options?: Configuration): Promise<RequestContext>;
     /**
+     *   Version: 9.9.0.cl or later   Creates a DBT connection object in ThoughtSpot.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege.  #### About create DBT connection DBT connection in ThoughtSpot is used by the user to define DBT credentials for cloud . The API needs  embrace connection, embrace database name, DBT url, import type, DBT account identifier, DBT project identifier, DBT access token and environment details (or) embrace connection, embrace database name, import type, file_content to create a connection object. To know more about DBT, see ThoughtSpot Product Documentation.
+     * @param dbtConnectionRequest
+     */
+    dbtConnection(dbtConnectionRequest: DbtConnectionRequest, _options?: Configuration): Promise<RequestContext>;
+    /**
+     *  Version: 9.9.0.cl or later
+     * @param dbtGenerateSyncTmlRequest
+     */
+    dbtGenerateSyncTml(dbtGenerateSyncTmlRequest: DbtGenerateSyncTmlRequest, _options?: Configuration): Promise<RequestContext>;
+    /**
+     *  Version: 9.9.0.cl or later
+     * @param dbtGenerateTmlRequest
+     */
+    dbtGenerateTml(dbtGenerateTmlRequest: DbtGenerateTmlRequest, _options?: Configuration): Promise<RequestContext>;
+    /**
+     *   Version: 9.9.0.cl or later   Gets a list of DBT connection objects by user and organization, available on the ThoughtSpot system.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege  #### About search DBT connection To get details of a specific DBT connection identifier, database connection identifier, database connection name, database name, project name, project identifier, environment identifier , import type and author.
+     */
+    dbtSearch(_options?: Configuration): Promise<RequestContext>;
+    /**
+     *   Version: 9.7.0.cl or later   Deactivates a user account.  Requires `ADMINISTRATION` (**Can administer Thoughtspot**) privilege.  To deactivate a user account, the API request body must include the following information:  - Username or the GUID of the user account - Base URL of the ThoughtSpot instance  If the API request is successful, ThoughtSpot returns the activation URL in the response. The activation URL is valid for 14 days and can be used to re-activate the account and reset the password of the deactivated account.
+     * @param deactivateUserRequest
+     */
+    deactivateUser(deactivateUserRequest: DeactivateUserRequest, _options?: Configuration): Promise<RequestContext>;
+    /**
      *   Version: 9.2.0.cl or later   Deletes Git repository configuration from your ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
      * @param deleteConfigRequest
      */
@@ -10595,10 +12516,20 @@ declare class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
      */
     deleteConnection(deleteConnectionRequest: DeleteConnectionRequest, _options?: Configuration): Promise<RequestContext>;
     /**
+     *   Version: 10.0.0.cl or later   Deletes a connection object.  **Note**: If a connection has dependent objects, make sure you remove its associations before the delete operation.  Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+     * @param connectionIdentifier Unique ID or name of the connection.
+     */
+    deleteConnectionV2(connectionIdentifier: string, _options?: Configuration): Promise<RequestContext>;
+    /**
      *   Version: 9.6.0.cl or later   Removes the custom action specified in the API request.  Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
      * @param customActionIdentifier Unique ID or name of the custom action.
      */
     deleteCustomAction(customActionIdentifier: string, _options?: Configuration): Promise<RequestContext>;
+    /**
+     *   Version: 9.9.0.cl or later   Removes the specified DBT connection object from the ThoughtSpot system.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege.
+     * @param dbtConnectionIdentifier Unique ID of the DBT Connection.
+     */
+    deleteDbtConnection(dbtConnectionIdentifier: string, _options?: Configuration): Promise<RequestContext>;
     /**
      *   Version: 9.0.0.cl or later   Removes the specified metadata object from the ThoughtSpot system.  Requires edit access to the metadata object or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
      * @param deleteMetadataRequest
@@ -10620,7 +12551,7 @@ declare class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
      */
     deleteSchedule(scheduleIdentifier: string, _options?: Configuration): Promise<RequestContext>;
     /**
-     *   Version: 9.0.0.cl or later   Deletes a tag object from the ThoughtSpot system  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+     *   Version: 9.0.0.cl or later   Deletes a tag object from the ThoughtSpot system  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.
      * @param tagIdentifier Tag identifier Tag name or Tag id.
      */
     deleteTag(tagIdentifier: string, _options?: Configuration): Promise<RequestContext>;
@@ -10635,10 +12566,15 @@ declare class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
      */
     deleteUserGroup(groupIdentifier: string, _options?: Configuration): Promise<RequestContext>;
     /**
-     *   Version: 9.2.0.cl or later   Allows you to deploy a commit and publish TML content to your ThoughtSpot instance.  Requires `DATAMANAGEMENT` (**Can manage data**) privilege.  The API deploys the head of the branch unless a `commit_id` is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.
+     *   Version: 9.2.0.cl or later   Allows you to deploy a commit and publish TML content to your ThoughtSpot instance.  Requires at least edit access to the objects used in the deploy operation.  The API deploys the head of the branch unless a `commit_id` is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).
      * @param deployCommitRequest
      */
     deployCommit(deployCommitRequest: DeployCommitRequest, _options?: Configuration): Promise<RequestContext>;
+    /**
+     *   Version: 9.9.0.cl or later   Exports the difference in connection metadata between CDW and ThoughtSpot  Requires `DATAMANAGEMENT` (**Can manage data**) privilege  To download the connection metadata difference between ThoughtSpot and CDW, pass the connection GUID as `connection_identifier` in the API request.
+     * @param connectionIdentifier GUID of the connection
+     */
+    downloadConnectionMetadataChanges(connectionIdentifier: string, _options?: Configuration): Promise<RequestContext>;
     /**
      *   Version: 9.0.0.cl or later   Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege.  #### Usage guidelines  In the request body, the GUID or name of the Answer and set `file_format`. The default file format is CSV.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).
      * @param exportAnswerReportRequest
@@ -10655,6 +12591,11 @@ declare class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
      */
     exportMetadataTML(exportMetadataTMLRequest: ExportMetadataTMLRequest, _options?: Configuration): Promise<RequestContext>;
     /**
+     *  Version: 10.1.0.cl or later
+     * @param exportMetadataTMLBatchedRequest
+     */
+    exportMetadataTMLBatched(exportMetadataTMLBatchedRequest: ExportMetadataTMLBatchedRequest, _options?: Configuration): Promise<RequestContext>;
+    /**
      *   Version: 9.0.0.cl or later   Fetches data from a saved Answer.  Requires at least view access to the saved Answer.  The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](For more information, and see [Liveboard data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_apis).   ).
      * @param fetchAnswerDataRequest
      */
@@ -10664,6 +12605,11 @@ declare class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
      * @param fetchAnswerSqlQueryRequest
      */
     fetchAnswerSqlQuery(fetchAnswerSqlQueryRequest: FetchAnswerSqlQueryRequest, _options?: Configuration): Promise<RequestContext>;
+    /**
+     *   Version: 9.9.0.cl or later   Validates the difference in connection metadata between CDW and ThoughtSpot  Requires `DATAMANAGEMENT` (**Can manage data**) privilege  Returns a boolean indicating whether there is any difference between the connection metadata at ThoughtSpot and CDW.  To get the connection metadata difference status, pass the connection GUID as `connection_identifier` in the API request.
+     * @param connectionIdentifier GUID of the connection
+     */
+    fetchConnectionDiffStatus(connectionIdentifier: string, _options?: Configuration): Promise<RequestContext>;
     /**
      *   Version: 9.0.0.cl or later   Gets data from a Liveboard object and its visualization.    Requires at least view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To get data for specific visualizations, add the GUIDs or names of the visualizations in the API request.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes. If the new Liveboard experience mode, the transient content includes ad hoc changes to visualizations such as sorting, toggling of legends, and data drill down.  For more information, and see [Liveboard data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_fetch_liveboard_data_api).
      * @param fetchLiveboardDataRequest
@@ -10675,7 +12621,7 @@ declare class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
      */
     fetchLiveboardSqlQuery(fetchLiveboardSqlQueryRequest: FetchLiveboardSqlQueryRequest, _options?: Configuration): Promise<RequestContext>;
     /**
-     *   Version: 9.0.0.cl or later   Fetches security audit logs.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  By default, the API retrieves logs for the last 24 hours. You can set a custom duration in EPOCH time. Make sure the log duration specified in your API request doesn’t exceed 24 hours. If you must fetch logs for a longer time range, modify the duration and make multiple sequential API requests.  Upon successful execution, the API returns logs with the following information: * timestamp of the event * event ID * event type * name and GUID of the user * IP address of ThoughtSpot instance  For more information about security events returned in the API response, see [Security events](https://developers.thoughtspot.com/docs/logs-api#_security_events).
+     *   Version: 9.0.0.cl or later   Fetches security audit logs.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  By default, the API retrieves logs for the last 24 hours. You can set a custom duration in EPOCH time. Make sure the log duration specified in your API request doesn’t exceed 24 hours. If you must fetch logs for a longer time range, modify the duration and make multiple sequential API requests.  Upon successful execution, the API returns logs with the following information: * timestamp of the event * event ID * event type * name and GUID of the user * IP address of ThoughtSpot instance  For more information about security events returned in the API response, see [Security events](https://developers.thoughtspot.com/docs/audit-logs#_security_events).
      * @param fetchLogsRequest
      */
     fetchLogs(fetchLogsRequest: FetchLogsRequest, _options?: Configuration): Promise<RequestContext>;
@@ -10754,7 +12700,7 @@ declare class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
      */
     resetUserPassword(resetUserPasswordRequest: ResetUserPasswordRequest, _options?: Configuration): Promise<RequestContext>;
     /**
-     *   Version: 9.2.0.cl or later   Reverts TML objects to a previous commit specified in the API request.  Requires `DATAMANAGEMENT` (**Can manage data**) privilege.  In the API request, specify the `commit_id`. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.  By default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.
+     *   Version: 9.2.0.cl or later   Reverts TML objects to a previous commit specified in the API request.  Requires at least edit access to objects.  In the API request, specify the `commit_id`. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.  By default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).
      * @param commitId Commit id to which the object should be reverted
      * @param revertCommitRequest
      */
@@ -10845,11 +12791,22 @@ declare class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
      */
     updateConnection(updateConnectionRequest: UpdateConnectionRequest, _options?: Configuration): Promise<RequestContext>;
     /**
+     *   Version: 10.0.0.cl or later   Updates a connection object.  Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  To update a connection object, pass these parameters in your API request:  1. GUID of the connection object. 2. If you are updating tables or database schema of a connection object:    a. Add the updated JSON map of metadata with database, schema, and tables in `data_warehouse_config`.    b. Set `validate` to `true`. 3. If you are updating a configuration attribute, connection name, or description, you can set `validate` to `false`.
+     * @param connectionIdentifier Unique ID or name of the connection.
+     * @param updateConnectionV2Request
+     */
+    updateConnectionV2(connectionIdentifier: string, updateConnectionV2Request: UpdateConnectionV2Request, _options?: Configuration): Promise<RequestContext>;
+    /**
      *   Version: 9.6.0.cl or later   Updates a custom action.  Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage Guidelines  The API allows you to modify the following properties:  * Name of the custom action * Action availability to groups * Association to metadata objects * Authentication settings for a URL-based action  For more information, see [Custom actions](https://developers.thoughtspot.com/docs/?pageid=custom-action-intro).
      * @param customActionIdentifier Unique ID or name of the custom action.
      * @param updateCustomActionRequest
      */
     updateCustomAction(customActionIdentifier: string, updateCustomActionRequest: UpdateCustomActionRequest, _options?: Configuration): Promise<RequestContext>;
+    /**
+     *   Version: 9.9.0.cl or later   Updates a DBT connection object.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege, along with an existing DBT connection.  #### About update DBT connection You can modify DBT connection object properties such as embrace connection name, embrace database name, import type, account identifier, access token, project identifier and environment (or) embrace connection, embrace database name, import type, file_content settings.
+     * @param updateDbtConnectionRequest
+     */
+    updateDbtConnection(updateDbtConnectionRequest: UpdateDbtConnectionRequest, _options?: Configuration): Promise<RequestContext>;
     /**
      *   Version: 9.0.0.cl or later   Updates an Org object. You can modify Org properties such as name, description, and user associations.  Requires cluster administration (**Can administer Org**) privileges.
      * @param orgIdentifier ID or name of the Org
@@ -10874,7 +12831,7 @@ declare class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
      */
     updateSystemConfig(updateSystemConfigRequest: UpdateSystemConfigRequest, _options?: Configuration): Promise<RequestContext>;
     /**
-     *   Version: 9.0.0.cl or later   Updates a tag object.  You can modify the `name` and `color` properties of a tag object.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+     *   Version: 9.0.0.cl or later   Updates a tag object.  You can modify the `name` and `color` properties of a tag object.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.
      * @param tagIdentifier Name or Id of the tag.
      * @param updateTagRequest
      */
@@ -10896,8 +12853,21 @@ declare class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
      * @param validateMergeRequest
      */
     validateMerge(validateMergeRequest: ValidateMergeRequest, _options?: Configuration): Promise<RequestContext>;
+    /**
+     *  Version: 9.12.0.cl or later
+     * @param validateTokenRequest
+     */
+    validateToken(validateTokenRequest: ValidateTokenRequest, _options?: Configuration): Promise<RequestContext>;
 }
 declare class ThoughtSpotRestApiResponseProcessor {
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to activateUser
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+    activateUser(response: ResponseContext): Promise<User>;
     /**
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
@@ -10930,6 +12900,14 @@ declare class ThoughtSpotRestApiResponseProcessor {
      * @throws ApiException if the response code was not in [200, 299]
      */
     commitBranch(response: ResponseContext): Promise<CommitResponse>;
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to copyObject
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+    copyObject(response: ResponseContext): Promise<ResponseCopyObject>;
     /**
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
@@ -11006,6 +12984,46 @@ declare class ThoughtSpotRestApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
+     * @params response Response returned by the server for a request to dbtConnection
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+    dbtConnection(response: ResponseContext): Promise<any>;
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to dbtGenerateSyncTml
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+    dbtGenerateSyncTml(response: ResponseContext): Promise<any>;
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to dbtGenerateTml
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+    dbtGenerateTml(response: ResponseContext): Promise<any>;
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to dbtSearch
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+    dbtSearch(response: ResponseContext): Promise<Array<DbtSearchResponse>>;
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to deactivateUser
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+    deactivateUser(response: ResponseContext): Promise<ResponseActivationURL>;
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
      * @params response Response returned by the server for a request to deleteConfig
      * @throws ApiException if the response code was not in [200, 299]
      */
@@ -11022,10 +13040,26 @@ declare class ThoughtSpotRestApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
+     * @params response Response returned by the server for a request to deleteConnectionV2
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+    deleteConnectionV2(response: ResponseContext): Promise<void>;
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
      * @params response Response returned by the server for a request to deleteCustomAction
      * @throws ApiException if the response code was not in [200, 299]
      */
     deleteCustomAction(response: ResponseContext): Promise<void>;
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to deleteDbtConnection
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+    deleteDbtConnection(response: ResponseContext): Promise<void>;
     /**
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
@@ -11094,6 +13128,14 @@ declare class ThoughtSpotRestApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
+     * @params response Response returned by the server for a request to downloadConnectionMetadataChanges
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+    downloadConnectionMetadataChanges(response: ResponseContext): Promise<void>;
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
      * @params response Response returned by the server for a request to exportAnswerReport
      * @throws ApiException if the response code was not in [200, 299]
      */
@@ -11118,6 +13160,14 @@ declare class ThoughtSpotRestApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
+     * @params response Response returned by the server for a request to exportMetadataTMLBatched
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+    exportMetadataTMLBatched(response: ResponseContext): Promise<any>;
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
      * @params response Response returned by the server for a request to fetchAnswerData
      * @throws ApiException if the response code was not in [200, 299]
      */
@@ -11130,6 +13180,14 @@ declare class ThoughtSpotRestApiResponseProcessor {
      * @throws ApiException if the response code was not in [200, 299]
      */
     fetchAnswerSqlQuery(response: ResponseContext): Promise<SqlQueryResponse>;
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to fetchConnectionDiffStatus
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+    fetchConnectionDiffStatus(response: ResponseContext): Promise<FetchConnectionDiffStatusResponse>;
     /**
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
@@ -11430,10 +13488,26 @@ declare class ThoughtSpotRestApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
+     * @params response Response returned by the server for a request to updateConnectionV2
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+    updateConnectionV2(response: ResponseContext): Promise<void>;
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
      * @params response Response returned by the server for a request to updateCustomAction
      * @throws ApiException if the response code was not in [200, 299]
      */
     updateCustomAction(response: ResponseContext): Promise<void>;
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to updateDbtConnection
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+    updateDbtConnection(response: ResponseContext): Promise<any>;
     /**
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
@@ -11498,12 +13572,25 @@ declare class ThoughtSpotRestApiResponseProcessor {
      * @throws ApiException if the response code was not in [200, 299]
      */
     validateMerge(response: ResponseContext): Promise<Array<DeployResponse>>;
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to validateToken
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+    validateToken(response: ResponseContext): Promise<TokenValidationResponse>;
 }
 
 /**
  * no description
  */
 declare class UsersApiRequestFactory extends BaseAPIRequestFactory {
+    /**
+     *   Version: 9.7.0.cl or later   Activates a deactivated user account.  Requires `ADMINISTRATION` (**Can administer Thoughtspot**) privilege.  To activate an inactive user account, the API request body must include the following information:  - Username or the GUID of the user account. - Auth token generated for the deactivated user. The auth token is sent in the API response when a user is deactivated. - Password for the user account.
+     * @param activateUserRequest
+     */
+    activateUser(activateUserRequest: ActivateUserRequest, _options?: Configuration): Promise<RequestContext>;
     /**
      *   Version: 9.0.0.cl or later   Updates the current password of the user.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
      * @param changeUserPasswordRequest
@@ -11514,6 +13601,11 @@ declare class UsersApiRequestFactory extends BaseAPIRequestFactory {
      * @param createUserRequest
      */
     createUser(createUserRequest: CreateUserRequest, _options?: Configuration): Promise<RequestContext>;
+    /**
+     *   Version: 9.7.0.cl or later   Deactivates a user account.  Requires `ADMINISTRATION` (**Can administer Thoughtspot**) privilege.  To deactivate a user account, the API request body must include the following information:  - Username or the GUID of the user account - Base URL of the ThoughtSpot instance  If the API request is successful, ThoughtSpot returns the activation URL in the response. The activation URL is valid for 14 days and can be used to re-activate the account and reset the password of the deactivated account.
+     * @param deactivateUserRequest
+     */
+    deactivateUser(deactivateUserRequest: DeactivateUserRequest, _options?: Configuration): Promise<RequestContext>;
     /**
      *   Version: 9.0.0.cl or later   Deletes a user from the ThoughtSpot system.  If you want to remove a user from a specific Org but not from ThoughtSpot, update the group and Org mapping properties of the user object via a POST API call to the [/api/rest/2.0/users/{user_identifier}/update](#/http/api-endpoints/users/update-user) endpoint.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
      * @param userIdentifier GUID / name of the user
@@ -11551,6 +13643,14 @@ declare class UsersApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
+     * @params response Response returned by the server for a request to activateUser
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+    activateUser(response: ResponseContext): Promise<User>;
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
      * @params response Response returned by the server for a request to changeUserPassword
      * @throws ApiException if the response code was not in [200, 299]
      */
@@ -11563,6 +13663,14 @@ declare class UsersApiResponseProcessor {
      * @throws ApiException if the response code was not in [200, 299]
      */
     createUser(response: ResponseContext): Promise<User>;
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to deactivateUser
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+    deactivateUser(response: ResponseContext): Promise<ResponseActivationURL>;
     /**
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
@@ -11618,7 +13726,7 @@ declare class UsersApiResponseProcessor {
  */
 declare class VersionControlApiRequestFactory extends BaseAPIRequestFactory {
     /**
-     *   Version: 9.2.0.cl or later   Commits TML files of metadata objects to the Git branch configured on your instance.  Requires `DATAMANAGEMENT` privilege.  Before using this endpoint to push your commits:  * Enable Git integration on your instance. * Make sure the Git repository and branch details are configured on your instance.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).
+     *   Version: 9.2.0.cl or later   Commits TML files of metadata objects to the Git branch configured on your instance.  Requires at least edit access to objects used in the commit operation.  Before using this endpoint to push your commits:  * Enable Git integration on your instance. * Make sure the Git repository and branch details are configured on your instance.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).
      * @param commitBranchRequest
      */
     commitBranch(commitBranchRequest: CommitBranchRequest, _options?: Configuration): Promise<RequestContext>;
@@ -11633,12 +13741,12 @@ declare class VersionControlApiRequestFactory extends BaseAPIRequestFactory {
      */
     deleteConfig(deleteConfigRequest: DeleteConfigRequest, _options?: Configuration): Promise<RequestContext>;
     /**
-     *   Version: 9.2.0.cl or later   Allows you to deploy a commit and publish TML content to your ThoughtSpot instance.  Requires `DATAMANAGEMENT` (**Can manage data**) privilege.  The API deploys the head of the branch unless a `commit_id` is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.
+     *   Version: 9.2.0.cl or later   Allows you to deploy a commit and publish TML content to your ThoughtSpot instance.  Requires at least edit access to the objects used in the deploy operation.  The API deploys the head of the branch unless a `commit_id` is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).
      * @param deployCommitRequest
      */
     deployCommit(deployCommitRequest: DeployCommitRequest, _options?: Configuration): Promise<RequestContext>;
     /**
-     *   Version: 9.2.0.cl or later   Reverts TML objects to a previous commit specified in the API request.  Requires `DATAMANAGEMENT` (**Can manage data**) privilege.  In the API request, specify the `commit_id`. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.  By default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.
+     *   Version: 9.2.0.cl or later   Reverts TML objects to a previous commit specified in the API request.  Requires at least edit access to objects.  In the API request, specify the `commit_id`. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.  By default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).
      * @param commitId Commit id to which the object should be reverted
      * @param revertCommitRequest
      */
@@ -11774,6 +13882,11 @@ declare class PromiseAuthenticationApi {
      * @param revokeTokenRequest
      */
     revokeToken(revokeTokenRequest: RevokeTokenRequest, _options?: Configuration): Promise<void>;
+    /**
+     *  Version: 9.12.0.cl or later
+     * @param validateTokenRequest
+     */
+    validateToken(validateTokenRequest: ValidateTokenRequest, _options?: Configuration): Promise<TokenValidationResponse>;
 }
 
 declare class PromiseConnectionsApi {
@@ -11790,6 +13903,21 @@ declare class PromiseConnectionsApi {
      */
     deleteConnection(deleteConnectionRequest: DeleteConnectionRequest, _options?: Configuration): Promise<void>;
     /**
+     *   Version: 10.0.0.cl or later   Deletes a connection object.  **Note**: If a connection has dependent objects, make sure you remove its associations before the delete operation.  Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+     * @param connectionIdentifier Unique ID or name of the connection.
+     */
+    deleteConnectionV2(connectionIdentifier: string, _options?: Configuration): Promise<void>;
+    /**
+     *   Version: 9.9.0.cl or later   Exports the difference in connection metadata between CDW and ThoughtSpot  Requires `DATAMANAGEMENT` (**Can manage data**) privilege  To download the connection metadata difference between ThoughtSpot and CDW, pass the connection GUID as `connection_identifier` in the API request.
+     * @param connectionIdentifier GUID of the connection
+     */
+    downloadConnectionMetadataChanges(connectionIdentifier: string, _options?: Configuration): Promise<void>;
+    /**
+     *   Version: 9.9.0.cl or later   Validates the difference in connection metadata between CDW and ThoughtSpot  Requires `DATAMANAGEMENT` (**Can manage data**) privilege  Returns a boolean indicating whether there is any difference between the connection metadata at ThoughtSpot and CDW.  To get the connection metadata difference status, pass the connection GUID as `connection_identifier` in the API request.
+     * @param connectionIdentifier GUID of the connection
+     */
+    fetchConnectionDiffStatus(connectionIdentifier: string, _options?: Configuration): Promise<FetchConnectionDiffStatusResponse>;
+    /**
      *   Version: 9.2.0.cl or later   Gets connection objects. Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  - To get a list of all connections available in the ThoughtSpot system, send the API request without any attributes in the request body. - To get the connection objects for a specific type of data warehouse, specify the type in `data_warehouse_types`. - To fetch details of a connection object, specify the connection object GUID or name. The `name_pattern` attribute allows passing partial text with `%` for a wildcard match. - To get details of the database, schemas, tables, or columns from a data connection object, specify `data_warehouse_object_type`. - To get a specific database, schema, table, or column from a connection object, define the object type in `data_warehouse_object_type` and object properties in the `data_warehouse_objects` array. For example, to search for a column, you must pass the database, schema, and table names in the API request.   Note that in the following example, object properties are set in a hierarchical order (`database` > `schema` > `table` > `column`).  ``` {   \"connections\": [     {       \"identifier\": \"b9d1f2ef-fa65-4a4b-994e-30fa2d57b0c2\",       \"data_warehouse_objects\": [         {           \"database\": \"NEBULADEV\",           \"schema\": \"INFORMATION_SCHEMA\",           \"table\": \"APPLICABLE_ROLES\",           \"column\": \"ROLE_NAME\"         }       ]     }   ],   \"data_warehouse_object_type\": \"COLUMN\" } ```  - To fetch data by `configuration`, specify `data_warehouse_object_type`. For example, to fetch columns from the `DEVELOPMENT` database, specify the `data_warehouse_object_type` as `DATABASE` and define the `configuration` string as `{\"database\":\"DEVELOPMENT\"}`. To get column data for a specific table, specify the table, for example,`{\"database\":\"RETAILAPPAREL\",\"table\":\"PIPES\"}`. - To query connections by `authentication_type`, specify `data_warehouse_object_type`. Supported values for `authentication_type` are:   - `SERVICE_ACCOUNT`: For connections that require service account credentials to authenticate to the Cloud Data Warehouse and fetch data.   - `OAUTH`: For connections that require OAuth credentials to authenticate to the Cloud Data Warehouse and fetch data. Teradata, Oracle, and Presto Cloud Data Warehouses do not support the OAuth authentication type.   - `IAM`: For connections that have the IAM OAuth set up. This authentication type is supported on Amazon Redshift connections only.   - `EXTOAUTH`: For connections that have external OAuth set up. ThoughtSpot supports external [OAuth with Microsoft Azure Active Directory (AD)](https://docs.thoughtspot.com/cloud/latest/ connections-snowflake-azure-ad-oauth) and [Okta for Snowflake data connections](https://docs.thoughtspot.com/cloud/latest/connections-snowflake-okta-oauth). - To include more details about connection objects in the API response, set `include_details` to `true`. - You can also sort the output by field names and filter connections by tags.  **NOTE**: When filtering connection records by parameters other than `data_warehouse_types` or `tag_identifiers`, ensure that you set `record_size` to `-1` and `record_offset` to `0` for precise results.
      * @param searchConnectionRequest
      */
@@ -11799,6 +13927,12 @@ declare class PromiseConnectionsApi {
      * @param updateConnectionRequest
      */
     updateConnection(updateConnectionRequest: UpdateConnectionRequest, _options?: Configuration): Promise<void>;
+    /**
+     *   Version: 10.0.0.cl or later   Updates a connection object.  Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  To update a connection object, pass these parameters in your API request:  1. GUID of the connection object. 2. If you are updating tables or database schema of a connection object:    a. Add the updated JSON map of metadata with database, schema, and tables in `data_warehouse_config`.    b. Set `validate` to `true`. 3. If you are updating a configuration attribute, connection name, or description, you can set `validate` to `false`.
+     * @param connectionIdentifier Unique ID or name of the connection.
+     * @param updateConnectionV2Request
+     */
+    updateConnectionV2(connectionIdentifier: string, updateConnectionV2Request: UpdateConnectionV2Request, _options?: Configuration): Promise<void>;
 }
 
 declare class PromiseCustomActionApi {
@@ -11825,6 +13959,40 @@ declare class PromiseCustomActionApi {
      * @param updateCustomActionRequest
      */
     updateCustomAction(customActionIdentifier: string, updateCustomActionRequest: UpdateCustomActionRequest, _options?: Configuration): Promise<void>;
+}
+
+declare class PromiseDBTApi {
+    private api;
+    constructor(configuration: Configuration, requestFactory?: DBTApiRequestFactory, responseProcessor?: DBTApiResponseProcessor);
+    /**
+     *   Version: 9.9.0.cl or later   Creates a DBT connection object in ThoughtSpot.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege.  #### About create DBT connection DBT connection in ThoughtSpot is used by the user to define DBT credentials for cloud . The API needs  embrace connection, embrace database name, DBT url, import type, DBT account identifier, DBT project identifier, DBT access token and environment details (or) embrace connection, embrace database name, import type, file_content to create a connection object. To know more about DBT, see ThoughtSpot Product Documentation.
+     * @param dbtConnectionRequest
+     */
+    dbtConnection(dbtConnectionRequest: DbtConnectionRequest, _options?: Configuration): Promise<any>;
+    /**
+     *  Version: 9.9.0.cl or later
+     * @param dbtGenerateSyncTmlRequest
+     */
+    dbtGenerateSyncTml(dbtGenerateSyncTmlRequest: DbtGenerateSyncTmlRequest, _options?: Configuration): Promise<any>;
+    /**
+     *  Version: 9.9.0.cl or later
+     * @param dbtGenerateTmlRequest
+     */
+    dbtGenerateTml(dbtGenerateTmlRequest: DbtGenerateTmlRequest, _options?: Configuration): Promise<any>;
+    /**
+     *   Version: 9.9.0.cl or later   Gets a list of DBT connection objects by user and organization, available on the ThoughtSpot system.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege  #### About search DBT connection To get details of a specific DBT connection identifier, database connection identifier, database connection name, database name, project name, project identifier, environment identifier , import type and author.
+     */
+    dbtSearch(_options?: Configuration): Promise<Array<DbtSearchResponse>>;
+    /**
+     *   Version: 9.9.0.cl or later   Removes the specified DBT connection object from the ThoughtSpot system.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege.
+     * @param dbtConnectionIdentifier Unique ID of the DBT Connection.
+     */
+    deleteDbtConnection(dbtConnectionIdentifier: string, _options?: Configuration): Promise<void>;
+    /**
+     *   Version: 9.9.0.cl or later   Updates a DBT connection object.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege, along with an existing DBT connection.  #### About update DBT connection You can modify DBT connection object properties such as embrace connection name, embrace database name, import type, account identifier, access token, project identifier and environment (or) embrace connection, embrace database name, import type, file_content settings.
+     * @param updateDbtConnectionRequest
+     */
+    updateDbtConnection(updateDbtConnectionRequest: UpdateDbtConnectionRequest, _options?: Configuration): Promise<any>;
 }
 
 declare class PromiseDataApi {
@@ -11882,7 +14050,7 @@ declare class PromiseLogApi {
     private api;
     constructor(configuration: Configuration, requestFactory?: LogApiRequestFactory, responseProcessor?: LogApiResponseProcessor);
     /**
-     *   Version: 9.0.0.cl or later   Fetches security audit logs.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  By default, the API retrieves logs for the last 24 hours. You can set a custom duration in EPOCH time. Make sure the log duration specified in your API request doesn’t exceed 24 hours. If you must fetch logs for a longer time range, modify the duration and make multiple sequential API requests.  Upon successful execution, the API returns logs with the following information: * timestamp of the event * event ID * event type * name and GUID of the user * IP address of ThoughtSpot instance  For more information about security events returned in the API response, see [Security events](https://developers.thoughtspot.com/docs/logs-api#_security_events).
+     *   Version: 9.0.0.cl or later   Fetches security audit logs.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  By default, the API retrieves logs for the last 24 hours. You can set a custom duration in EPOCH time. Make sure the log duration specified in your API request doesn’t exceed 24 hours. If you must fetch logs for a longer time range, modify the duration and make multiple sequential API requests.  Upon successful execution, the API returns logs with the following information: * timestamp of the event * event ID * event type * name and GUID of the user * IP address of ThoughtSpot instance  For more information about security events returned in the API response, see [Security events](https://developers.thoughtspot.com/docs/audit-logs#_security_events).
      * @param fetchLogsRequest
      */
     fetchLogs(fetchLogsRequest: FetchLogsRequest, _options?: Configuration): Promise<Array<LogResponse>>;
@@ -11891,6 +14059,11 @@ declare class PromiseLogApi {
 declare class PromiseMetadataApi {
     private api;
     constructor(configuration: Configuration, requestFactory?: MetadataApiRequestFactory, responseProcessor?: MetadataApiResponseProcessor);
+    /**
+     *  Makes a copy of an Answer or Liveboard saved in Atlas    Version: 10.3.0.cl or later   Creates a copy of the metadata object specified in the API request.  Requires create access to metadata objects  Upon successful execution, the API returns the id of the new object which is copied from the given object.
+     * @param copyObjectRequest
+     */
+    copyObject(copyObjectRequest: CopyObjectRequest, _options?: Configuration): Promise<ResponseCopyObject>;
     /**
      *   Version: 9.0.0.cl or later   Removes the specified metadata object from the ThoughtSpot system.  Requires edit access to the metadata object or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
      * @param deleteMetadataRequest
@@ -11901,6 +14074,11 @@ declare class PromiseMetadataApi {
      * @param exportMetadataTMLRequest
      */
     exportMetadataTML(exportMetadataTMLRequest: ExportMetadataTMLRequest, _options?: Configuration): Promise<Array<any>>;
+    /**
+     *  Version: 10.1.0.cl or later
+     * @param exportMetadataTMLBatchedRequest
+     */
+    exportMetadataTMLBatched(exportMetadataTMLBatchedRequest: ExportMetadataTMLBatchedRequest, _options?: Configuration): Promise<any>;
     /**
      *   Version: 9.0.0.cl or later   Fetches the underlying SQL query data for an Answer object.  Requires at least view access to the Answer object.  Upon successful execution, the API returns the SQL queries for the specified object as shown in this example: ``` {    \"metadata_id\":\"8fbe44a8-46ad-4b16-8d39-184b2fada490\",    \"metadata_name\":\"Total sales\",    \"metadata_type\":\"ANSWER\",    \"sql_queries\":[       {          \"metadata_id\":\"8fbe44a8-46ad-4b16-8d39-184b2fada490\",          \"metadata_name\":\"Total sales -test\",          \"sql_query\":\"SELECT \\n  \\\"ta_1\\\".\\\"REGION\\\" \\\"ca_1\\\", \\n  \\\"ta_2\\\".\\\"PRODUCTNAME\\\" \\\"ca_2\\\", \\n  \\\"ta_1\\\".\\\"STORENAME\\\" \\\"ca_3\\\", \\n  CASE\\n    WHEN sum(\\\"ta_3\\\".\\\"SALES\\\") IS NOT NULL THEN sum(\\\"ta_3\\\".\\\"SALES\\\")\\n    ELSE 0\\n  END \\\"ca_4\\\", \\n  CASE\\n    WHEN sum(\\\"ta_3\\\".\\\"QUANTITYPURCHASED\\\") IS NOT NULL THEN sum(\\\"ta_3\\\".\\\"QUANTITYPURCHASED\\\")\\n    ELSE 0\\n  END \\\"ca_5\\\"\\nFROM \\\"RETAILAPPAREL\\\".\\\"PUBLIC\\\".\\\"FACT_RETAPP_SALES\\\" \\\"ta_3\\\"\\n  JOIN \\\"RETAILAPPAREL\\\".\\\"PUBLIC\\\".\\\"DIM_RETAPP_STORES\\\" \\\"ta_1\\\"\\n    ON \\\"ta_3\\\".\\\"STOREID\\\" = \\\"ta_1\\\".\\\"STOREID\\\"\\n  JOIN \\\"RETAILAPPAREL\\\".\\\"PUBLIC\\\".\\\"DIM_RETAPP_PRODUCTS\\\" \\\"ta_2\\\"\\n    ON \\\"ta_3\\\".\\\"PRODUCTID\\\" = \\\"ta_2\\\".\\\"PRODUCTID\\\"\\nGROUP BY \\n  \\\"ca_1\\\", \\n  \\\"ca_2\\\", \\n  \\\"ca_3\\\"\\n\"       }    ] } ```
      * @param fetchAnswerSqlQueryRequest
@@ -12072,12 +14250,12 @@ declare class PromiseTagsApi {
      */
     assignTag(assignTagRequest: AssignTagRequest, _options?: Configuration): Promise<void>;
     /**
-     *   Version: 9.0.0.cl or later   Creates a tag object.  Tags are labels that identify a metadata object. For example, you can create a tag to designate subject areas, such as sales, HR, marketing, and finance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+     *   Version: 9.0.0.cl or later   Creates a tag object.  Tags are labels that identify a metadata object. For example, you can create a tag to designate subject areas, such as sales, HR, marketing, and finance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.
      * @param createTagRequest
      */
     createTag(createTagRequest: CreateTagRequest, _options?: Configuration): Promise<Tag>;
     /**
-     *   Version: 9.0.0.cl or later   Deletes a tag object from the ThoughtSpot system  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+     *   Version: 9.0.0.cl or later   Deletes a tag object from the ThoughtSpot system  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.
      * @param tagIdentifier Tag identifier Tag name or Tag id.
      */
     deleteTag(tagIdentifier: string, _options?: Configuration): Promise<void>;
@@ -12092,7 +14270,7 @@ declare class PromiseTagsApi {
      */
     unassignTag(assignTagRequest: AssignTagRequest, _options?: Configuration): Promise<void>;
     /**
-     *   Version: 9.0.0.cl or later   Updates a tag object.  You can modify the `name` and `color` properties of a tag object.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+     *   Version: 9.0.0.cl or later   Updates a tag object.  You can modify the `name` and `color` properties of a tag object.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.
      * @param tagIdentifier Name or Id of the tag.
      * @param updateTagRequest
      */
@@ -12102,6 +14280,11 @@ declare class PromiseTagsApi {
 declare class PromiseThoughtSpotRestApi {
     private api;
     constructor(configuration: Configuration, requestFactory?: ThoughtSpotRestApiRequestFactory, responseProcessor?: ThoughtSpotRestApiResponseProcessor);
+    /**
+     *   Version: 9.7.0.cl or later   Activates a deactivated user account.  Requires `ADMINISTRATION` (**Can administer Thoughtspot**) privilege.  To activate an inactive user account, the API request body must include the following information:  - Username or the GUID of the user account. - Auth token generated for the deactivated user. The auth token is sent in the API response when a user is deactivated. - Password for the user account.
+     * @param activateUserRequest
+     */
+    activateUser(activateUserRequest: ActivateUserRequest, _options?: Configuration): Promise<User>;
     /**
      *   Version: 9.0.0.cl or later   Transfers the ownership of one or several objects from one user to another.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
      * @param assignChangeAuthorRequest
@@ -12118,10 +14301,15 @@ declare class PromiseThoughtSpotRestApi {
      */
     changeUserPassword(changeUserPasswordRequest: ChangeUserPasswordRequest, _options?: Configuration): Promise<void>;
     /**
-     *   Version: 9.2.0.cl or later   Commits TML files of metadata objects to the Git branch configured on your instance.  Requires `DATAMANAGEMENT` privilege.  Before using this endpoint to push your commits:  * Enable Git integration on your instance. * Make sure the Git repository and branch details are configured on your instance.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).
+     *   Version: 9.2.0.cl or later   Commits TML files of metadata objects to the Git branch configured on your instance.  Requires at least edit access to objects used in the commit operation.  Before using this endpoint to push your commits:  * Enable Git integration on your instance. * Make sure the Git repository and branch details are configured on your instance.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).
      * @param commitBranchRequest
      */
     commitBranch(commitBranchRequest: CommitBranchRequest, _options?: Configuration): Promise<CommitResponse>;
+    /**
+     *  Makes a copy of an Answer or Liveboard saved in Atlas    Version: 10.3.0.cl or later   Creates a copy of the metadata object specified in the API request.  Requires create access to metadata objects  Upon successful execution, the API returns the id of the new object which is copied from the given object.
+     * @param copyObjectRequest
+     */
+    copyObject(copyObjectRequest: CopyObjectRequest, _options?: Configuration): Promise<ResponseCopyObject>;
     /**
      *   Version: 9.2.0.cl or later   Allows you to connect a ThoughtSpot instance to a Git repository.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  You can use this API endpoint to connect your ThoughtSpot development and production environments to the development and production branches of a Git repository.  Before using this endpoint to connect your ThoughtSpot instance to a Git repository, check the following prerequisites:  * You have a Git repository. If you are using GitHub, make sure you have a valid account and an access token to connect ThoughtSpot to GitHub. For information about generating a token, see [GitHub Documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).  * Your access token has `repo` scope that grants full access to public and private repositories. * Your Git repository has a branch that can be configured as a default branch in ThoughtSpot.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).  **Note**: ThoughtSpot supports only GitHub / GitHub Enterprise for CI/CD.
      * @param createConfigRequest
@@ -12153,7 +14341,7 @@ declare class PromiseThoughtSpotRestApi {
      */
     createSchedule(createScheduleRequest: CreateScheduleRequest, _options?: Configuration): Promise<ResponseSchedule>;
     /**
-     *   Version: 9.0.0.cl or later   Creates a tag object.  Tags are labels that identify a metadata object. For example, you can create a tag to designate subject areas, such as sales, HR, marketing, and finance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+     *   Version: 9.0.0.cl or later   Creates a tag object.  Tags are labels that identify a metadata object. For example, you can create a tag to designate subject areas, such as sales, HR, marketing, and finance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.
      * @param createTagRequest
      */
     createTag(createTagRequest: CreateTagRequest, _options?: Configuration): Promise<Tag>;
@@ -12168,6 +14356,30 @@ declare class PromiseThoughtSpotRestApi {
      */
     createUserGroup(createUserGroupRequest: CreateUserGroupRequest, _options?: Configuration): Promise<UserGroupResponse>;
     /**
+     *   Version: 9.9.0.cl or later   Creates a DBT connection object in ThoughtSpot.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege.  #### About create DBT connection DBT connection in ThoughtSpot is used by the user to define DBT credentials for cloud . The API needs  embrace connection, embrace database name, DBT url, import type, DBT account identifier, DBT project identifier, DBT access token and environment details (or) embrace connection, embrace database name, import type, file_content to create a connection object. To know more about DBT, see ThoughtSpot Product Documentation.
+     * @param dbtConnectionRequest
+     */
+    dbtConnection(dbtConnectionRequest: DbtConnectionRequest, _options?: Configuration): Promise<any>;
+    /**
+     *  Version: 9.9.0.cl or later
+     * @param dbtGenerateSyncTmlRequest
+     */
+    dbtGenerateSyncTml(dbtGenerateSyncTmlRequest: DbtGenerateSyncTmlRequest, _options?: Configuration): Promise<any>;
+    /**
+     *  Version: 9.9.0.cl or later
+     * @param dbtGenerateTmlRequest
+     */
+    dbtGenerateTml(dbtGenerateTmlRequest: DbtGenerateTmlRequest, _options?: Configuration): Promise<any>;
+    /**
+     *   Version: 9.9.0.cl or later   Gets a list of DBT connection objects by user and organization, available on the ThoughtSpot system.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege  #### About search DBT connection To get details of a specific DBT connection identifier, database connection identifier, database connection name, database name, project name, project identifier, environment identifier , import type and author.
+     */
+    dbtSearch(_options?: Configuration): Promise<Array<DbtSearchResponse>>;
+    /**
+     *   Version: 9.7.0.cl or later   Deactivates a user account.  Requires `ADMINISTRATION` (**Can administer Thoughtspot**) privilege.  To deactivate a user account, the API request body must include the following information:  - Username or the GUID of the user account - Base URL of the ThoughtSpot instance  If the API request is successful, ThoughtSpot returns the activation URL in the response. The activation URL is valid for 14 days and can be used to re-activate the account and reset the password of the deactivated account.
+     * @param deactivateUserRequest
+     */
+    deactivateUser(deactivateUserRequest: DeactivateUserRequest, _options?: Configuration): Promise<ResponseActivationURL>;
+    /**
      *   Version: 9.2.0.cl or later   Deletes Git repository configuration from your ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
      * @param deleteConfigRequest
      */
@@ -12178,10 +14390,20 @@ declare class PromiseThoughtSpotRestApi {
      */
     deleteConnection(deleteConnectionRequest: DeleteConnectionRequest, _options?: Configuration): Promise<void>;
     /**
+     *   Version: 10.0.0.cl or later   Deletes a connection object.  **Note**: If a connection has dependent objects, make sure you remove its associations before the delete operation.  Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+     * @param connectionIdentifier Unique ID or name of the connection.
+     */
+    deleteConnectionV2(connectionIdentifier: string, _options?: Configuration): Promise<void>;
+    /**
      *   Version: 9.6.0.cl or later   Removes the custom action specified in the API request.  Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
      * @param customActionIdentifier Unique ID or name of the custom action.
      */
     deleteCustomAction(customActionIdentifier: string, _options?: Configuration): Promise<void>;
+    /**
+     *   Version: 9.9.0.cl or later   Removes the specified DBT connection object from the ThoughtSpot system.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege.
+     * @param dbtConnectionIdentifier Unique ID of the DBT Connection.
+     */
+    deleteDbtConnection(dbtConnectionIdentifier: string, _options?: Configuration): Promise<void>;
     /**
      *   Version: 9.0.0.cl or later   Removes the specified metadata object from the ThoughtSpot system.  Requires edit access to the metadata object or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
      * @param deleteMetadataRequest
@@ -12203,7 +14425,7 @@ declare class PromiseThoughtSpotRestApi {
      */
     deleteSchedule(scheduleIdentifier: string, _options?: Configuration): Promise<void>;
     /**
-     *   Version: 9.0.0.cl or later   Deletes a tag object from the ThoughtSpot system  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+     *   Version: 9.0.0.cl or later   Deletes a tag object from the ThoughtSpot system  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.
      * @param tagIdentifier Tag identifier Tag name or Tag id.
      */
     deleteTag(tagIdentifier: string, _options?: Configuration): Promise<void>;
@@ -12218,10 +14440,15 @@ declare class PromiseThoughtSpotRestApi {
      */
     deleteUserGroup(groupIdentifier: string, _options?: Configuration): Promise<void>;
     /**
-     *   Version: 9.2.0.cl or later   Allows you to deploy a commit and publish TML content to your ThoughtSpot instance.  Requires `DATAMANAGEMENT` (**Can manage data**) privilege.  The API deploys the head of the branch unless a `commit_id` is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.
+     *   Version: 9.2.0.cl or later   Allows you to deploy a commit and publish TML content to your ThoughtSpot instance.  Requires at least edit access to the objects used in the deploy operation.  The API deploys the head of the branch unless a `commit_id` is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).
      * @param deployCommitRequest
      */
     deployCommit(deployCommitRequest: DeployCommitRequest, _options?: Configuration): Promise<Array<DeployResponse>>;
+    /**
+     *   Version: 9.9.0.cl or later   Exports the difference in connection metadata between CDW and ThoughtSpot  Requires `DATAMANAGEMENT` (**Can manage data**) privilege  To download the connection metadata difference between ThoughtSpot and CDW, pass the connection GUID as `connection_identifier` in the API request.
+     * @param connectionIdentifier GUID of the connection
+     */
+    downloadConnectionMetadataChanges(connectionIdentifier: string, _options?: Configuration): Promise<void>;
     /**
      *   Version: 9.0.0.cl or later   Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege.  #### Usage guidelines  In the request body, the GUID or name of the Answer and set `file_format`. The default file format is CSV.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).
      * @param exportAnswerReportRequest
@@ -12238,6 +14465,11 @@ declare class PromiseThoughtSpotRestApi {
      */
     exportMetadataTML(exportMetadataTMLRequest: ExportMetadataTMLRequest, _options?: Configuration): Promise<Array<any>>;
     /**
+     *  Version: 10.1.0.cl or later
+     * @param exportMetadataTMLBatchedRequest
+     */
+    exportMetadataTMLBatched(exportMetadataTMLBatchedRequest: ExportMetadataTMLBatchedRequest, _options?: Configuration): Promise<any>;
+    /**
      *   Version: 9.0.0.cl or later   Fetches data from a saved Answer.  Requires at least view access to the saved Answer.  The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](For more information, and see [Liveboard data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_apis).   ).
      * @param fetchAnswerDataRequest
      */
@@ -12247,6 +14479,11 @@ declare class PromiseThoughtSpotRestApi {
      * @param fetchAnswerSqlQueryRequest
      */
     fetchAnswerSqlQuery(fetchAnswerSqlQueryRequest: FetchAnswerSqlQueryRequest, _options?: Configuration): Promise<SqlQueryResponse>;
+    /**
+     *   Version: 9.9.0.cl or later   Validates the difference in connection metadata between CDW and ThoughtSpot  Requires `DATAMANAGEMENT` (**Can manage data**) privilege  Returns a boolean indicating whether there is any difference between the connection metadata at ThoughtSpot and CDW.  To get the connection metadata difference status, pass the connection GUID as `connection_identifier` in the API request.
+     * @param connectionIdentifier GUID of the connection
+     */
+    fetchConnectionDiffStatus(connectionIdentifier: string, _options?: Configuration): Promise<FetchConnectionDiffStatusResponse>;
     /**
      *   Version: 9.0.0.cl or later   Gets data from a Liveboard object and its visualization.    Requires at least view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To get data for specific visualizations, add the GUIDs or names of the visualizations in the API request.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes. If the new Liveboard experience mode, the transient content includes ad hoc changes to visualizations such as sorting, toggling of legends, and data drill down.  For more information, and see [Liveboard data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_fetch_liveboard_data_api).
      * @param fetchLiveboardDataRequest
@@ -12258,7 +14495,7 @@ declare class PromiseThoughtSpotRestApi {
      */
     fetchLiveboardSqlQuery(fetchLiveboardSqlQueryRequest: FetchLiveboardSqlQueryRequest, _options?: Configuration): Promise<SqlQueryResponse>;
     /**
-     *   Version: 9.0.0.cl or later   Fetches security audit logs.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  By default, the API retrieves logs for the last 24 hours. You can set a custom duration in EPOCH time. Make sure the log duration specified in your API request doesn’t exceed 24 hours. If you must fetch logs for a longer time range, modify the duration and make multiple sequential API requests.  Upon successful execution, the API returns logs with the following information: * timestamp of the event * event ID * event type * name and GUID of the user * IP address of ThoughtSpot instance  For more information about security events returned in the API response, see [Security events](https://developers.thoughtspot.com/docs/logs-api#_security_events).
+     *   Version: 9.0.0.cl or later   Fetches security audit logs.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  By default, the API retrieves logs for the last 24 hours. You can set a custom duration in EPOCH time. Make sure the log duration specified in your API request doesn’t exceed 24 hours. If you must fetch logs for a longer time range, modify the duration and make multiple sequential API requests.  Upon successful execution, the API returns logs with the following information: * timestamp of the event * event ID * event type * name and GUID of the user * IP address of ThoughtSpot instance  For more information about security events returned in the API response, see [Security events](https://developers.thoughtspot.com/docs/audit-logs#_security_events).
      * @param fetchLogsRequest
      */
     fetchLogs(fetchLogsRequest: FetchLogsRequest, _options?: Configuration): Promise<Array<LogResponse>>;
@@ -12337,7 +14574,7 @@ declare class PromiseThoughtSpotRestApi {
      */
     resetUserPassword(resetUserPasswordRequest: ResetUserPasswordRequest, _options?: Configuration): Promise<void>;
     /**
-     *   Version: 9.2.0.cl or later   Reverts TML objects to a previous commit specified in the API request.  Requires `DATAMANAGEMENT` (**Can manage data**) privilege.  In the API request, specify the `commit_id`. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.  By default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.
+     *   Version: 9.2.0.cl or later   Reverts TML objects to a previous commit specified in the API request.  Requires at least edit access to objects.  In the API request, specify the `commit_id`. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.  By default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).
      * @param commitId Commit id to which the object should be reverted
      * @param revertCommitRequest
      */
@@ -12428,11 +14665,22 @@ declare class PromiseThoughtSpotRestApi {
      */
     updateConnection(updateConnectionRequest: UpdateConnectionRequest, _options?: Configuration): Promise<void>;
     /**
+     *   Version: 10.0.0.cl or later   Updates a connection object.  Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  To update a connection object, pass these parameters in your API request:  1. GUID of the connection object. 2. If you are updating tables or database schema of a connection object:    a. Add the updated JSON map of metadata with database, schema, and tables in `data_warehouse_config`.    b. Set `validate` to `true`. 3. If you are updating a configuration attribute, connection name, or description, you can set `validate` to `false`.
+     * @param connectionIdentifier Unique ID or name of the connection.
+     * @param updateConnectionV2Request
+     */
+    updateConnectionV2(connectionIdentifier: string, updateConnectionV2Request: UpdateConnectionV2Request, _options?: Configuration): Promise<void>;
+    /**
      *   Version: 9.6.0.cl or later   Updates a custom action.  Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage Guidelines  The API allows you to modify the following properties:  * Name of the custom action * Action availability to groups * Association to metadata objects * Authentication settings for a URL-based action  For more information, see [Custom actions](https://developers.thoughtspot.com/docs/?pageid=custom-action-intro).
      * @param customActionIdentifier Unique ID or name of the custom action.
      * @param updateCustomActionRequest
      */
     updateCustomAction(customActionIdentifier: string, updateCustomActionRequest: UpdateCustomActionRequest, _options?: Configuration): Promise<void>;
+    /**
+     *   Version: 9.9.0.cl or later   Updates a DBT connection object.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege, along with an existing DBT connection.  #### About update DBT connection You can modify DBT connection object properties such as embrace connection name, embrace database name, import type, account identifier, access token, project identifier and environment (or) embrace connection, embrace database name, import type, file_content settings.
+     * @param updateDbtConnectionRequest
+     */
+    updateDbtConnection(updateDbtConnectionRequest: UpdateDbtConnectionRequest, _options?: Configuration): Promise<any>;
     /**
      *   Version: 9.0.0.cl or later   Updates an Org object. You can modify Org properties such as name, description, and user associations.  Requires cluster administration (**Can administer Org**) privileges.
      * @param orgIdentifier ID or name of the Org
@@ -12457,7 +14705,7 @@ declare class PromiseThoughtSpotRestApi {
      */
     updateSystemConfig(updateSystemConfigRequest: UpdateSystemConfigRequest, _options?: Configuration): Promise<void>;
     /**
-     *   Version: 9.0.0.cl or later   Updates a tag object.  You can modify the `name` and `color` properties of a tag object.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+     *   Version: 9.0.0.cl or later   Updates a tag object.  You can modify the `name` and `color` properties of a tag object.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.
      * @param tagIdentifier Name or Id of the tag.
      * @param updateTagRequest
      */
@@ -12479,11 +14727,21 @@ declare class PromiseThoughtSpotRestApi {
      * @param validateMergeRequest
      */
     validateMerge(validateMergeRequest: ValidateMergeRequest, _options?: Configuration): Promise<Array<DeployResponse>>;
+    /**
+     *  Version: 9.12.0.cl or later
+     * @param validateTokenRequest
+     */
+    validateToken(validateTokenRequest: ValidateTokenRequest, _options?: Configuration): Promise<TokenValidationResponse>;
 }
 
 declare class PromiseUsersApi {
     private api;
     constructor(configuration: Configuration, requestFactory?: UsersApiRequestFactory, responseProcessor?: UsersApiResponseProcessor);
+    /**
+     *   Version: 9.7.0.cl or later   Activates a deactivated user account.  Requires `ADMINISTRATION` (**Can administer Thoughtspot**) privilege.  To activate an inactive user account, the API request body must include the following information:  - Username or the GUID of the user account. - Auth token generated for the deactivated user. The auth token is sent in the API response when a user is deactivated. - Password for the user account.
+     * @param activateUserRequest
+     */
+    activateUser(activateUserRequest: ActivateUserRequest, _options?: Configuration): Promise<User>;
     /**
      *   Version: 9.0.0.cl or later   Updates the current password of the user.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
      * @param changeUserPasswordRequest
@@ -12494,6 +14752,11 @@ declare class PromiseUsersApi {
      * @param createUserRequest
      */
     createUser(createUserRequest: CreateUserRequest, _options?: Configuration): Promise<User>;
+    /**
+     *   Version: 9.7.0.cl or later   Deactivates a user account.  Requires `ADMINISTRATION` (**Can administer Thoughtspot**) privilege.  To deactivate a user account, the API request body must include the following information:  - Username or the GUID of the user account - Base URL of the ThoughtSpot instance  If the API request is successful, ThoughtSpot returns the activation URL in the response. The activation URL is valid for 14 days and can be used to re-activate the account and reset the password of the deactivated account.
+     * @param deactivateUserRequest
+     */
+    deactivateUser(deactivateUserRequest: DeactivateUserRequest, _options?: Configuration): Promise<ResponseActivationURL>;
     /**
      *   Version: 9.0.0.cl or later   Deletes a user from the ThoughtSpot system.  If you want to remove a user from a specific Org but not from ThoughtSpot, update the group and Org mapping properties of the user object via a POST API call to the [/api/rest/2.0/users/{user_identifier}/update](#/http/api-endpoints/users/update-user) endpoint.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
      * @param userIdentifier GUID / name of the user
@@ -12531,7 +14794,7 @@ declare class PromiseVersionControlApi {
     private api;
     constructor(configuration: Configuration, requestFactory?: VersionControlApiRequestFactory, responseProcessor?: VersionControlApiResponseProcessor);
     /**
-     *   Version: 9.2.0.cl or later   Commits TML files of metadata objects to the Git branch configured on your instance.  Requires `DATAMANAGEMENT` privilege.  Before using this endpoint to push your commits:  * Enable Git integration on your instance. * Make sure the Git repository and branch details are configured on your instance.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).
+     *   Version: 9.2.0.cl or later   Commits TML files of metadata objects to the Git branch configured on your instance.  Requires at least edit access to objects used in the commit operation.  Before using this endpoint to push your commits:  * Enable Git integration on your instance. * Make sure the Git repository and branch details are configured on your instance.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).
      * @param commitBranchRequest
      */
     commitBranch(commitBranchRequest: CommitBranchRequest, _options?: Configuration): Promise<CommitResponse>;
@@ -12546,12 +14809,12 @@ declare class PromiseVersionControlApi {
      */
     deleteConfig(deleteConfigRequest: DeleteConfigRequest, _options?: Configuration): Promise<void>;
     /**
-     *   Version: 9.2.0.cl or later   Allows you to deploy a commit and publish TML content to your ThoughtSpot instance.  Requires `DATAMANAGEMENT` (**Can manage data**) privilege.  The API deploys the head of the branch unless a `commit_id` is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.
+     *   Version: 9.2.0.cl or later   Allows you to deploy a commit and publish TML content to your ThoughtSpot instance.  Requires at least edit access to the objects used in the deploy operation.  The API deploys the head of the branch unless a `commit_id` is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).
      * @param deployCommitRequest
      */
     deployCommit(deployCommitRequest: DeployCommitRequest, _options?: Configuration): Promise<Array<DeployResponse>>;
     /**
-     *   Version: 9.2.0.cl or later   Reverts TML objects to a previous commit specified in the API request.  Requires `DATAMANAGEMENT` (**Can manage data**) privilege.  In the API request, specify the `commit_id`. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.  By default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.
+     *   Version: 9.2.0.cl or later   Reverts TML objects to a previous commit specified in the API request.  Requires at least edit access to objects.  In the API request, specify the `commit_id`. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.  By default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).
      * @param commitId Commit id to which the object should be reverted
      * @param revertCommitRequest
      */
@@ -12588,4 +14851,4 @@ declare class PromiseVersionControlApi {
  */
 declare const createBearerAuthenticationConfig: (url: string, paramOrTokenProvider: GetFullAccessTokenRequest | (() => Promise<string>)) => Configuration;
 
-export { APIKey, APIKeyInput, ActionConfig, ActionConfigInput, ActionConfigInputCreate, ActionConfigInputCreatePositionEnum, ActionConfigInputPositionEnum, ActionDetails, ActionDetailsInput, ActionDetailsInputCreate, AnswerContent, AnswerDataResponse, ApiException, ApiKeyConfiguration, AssignChangeAuthorRequest, AssignTagRequest, AssociateMetadataInput, AssociateMetadataInputCreate, AssociateMetadataInputCreateTypeEnum, AssociateMetadataInputTypeEnum, AuthMethods, AuthMethodsConfiguration, Authentication, PromiseAuthenticationApi as AuthenticationApi, AuthenticationInput, Author, AuthorMetadataTypeInput, AuthorMetadataTypeInputTypeEnum, AuthorType, BaseServerConfiguration, BasicAuth, BasicAuthInput, BearerAuthAuthentication, CALLBACK, CALLBACKInput, CALLBACKInputMandatory, ChangeUserPasswordRequest, Column, CommitBranchRequest, CommitFileType, CommitHistoryResponse, CommitResponse, CommiterType, Configuration, ConnectionInput, PromiseConnectionsApi as ConnectionsApi, CreateConfigRequest, CreateConnectionRequest, CreateConnectionRequestDataWarehouseTypeEnum, CreateConnectionResponse, CreateConnectionResponseDataWarehouseTypeEnum, CreateCustomActionRequest, CreateOrgRequest, CreateRoleRequest, CreateRoleRequestPrivilegesEnum, CreateScheduleRequest, CreateScheduleRequestFileFormatEnum, CreateScheduleRequestMetadataTypeEnum, CreateScheduleRequestTimeZoneEnum, CreateTagRequest, CreateUserGroupRequest, CreateUserGroupRequestPrivilegesEnum, CreateUserGroupRequestTypeEnum, CreateUserGroupRequestVisibilityEnum, CreateUserRequest, CreateUserRequestAccountStatusEnum, CreateUserRequestAccountTypeEnum, CreateUserRequestPreferredLocaleEnum, CreateUserRequestVisibilityEnum, CronExpression, CronExpressionInput, PromiseCustomActionApi as CustomActionApi, CustomActionMetadataTypeInput, CustomActionMetadataTypeInputTypeEnum, PromiseDataApi as DataApi, DataWarehouseObjectInput, DataWarehouseObjects, Database, DbtSearchResponse, DefaultActionConfig, DefaultActionConfigInput, DefaultActionConfigInputCreate, DefaultActionConfigSearchInput, DeleteConfigRequest, DeleteConnectionRequest, DeleteMetadataRequest, DeleteMetadataTypeInput, DeleteMetadataTypeInputTypeEnum, DeployCommitRequest, DeployCommitRequestDeployPolicyEnum, DeployCommitRequestDeployTypeEnum, DeployResponse, ErrorResponse, ExcludeMetadataListItemInput, ExcludeMetadataListItemInputTypeEnum, ExportAnswerReportRequest, ExportAnswerReportRequestFileFormatEnum, ExportLiveboardReportRequest, ExportLiveboardReportRequestFileFormatEnum, ExportMetadataTMLRequest, ExportMetadataTMLRequestEdocFormatEnum, ExportMetadataTMLRequestExportSchemaVersionEnum, ExportMetadataTypeInput, ExportMetadataTypeInputTypeEnum, FavoriteMetadataInput, FavoriteMetadataInputTypeEnum, FavoriteMetadataItem, FavoriteMetadataItemTypeEnum, FavoriteObjectOptionsInput, FetchAnswerDataRequest, FetchAnswerDataRequestDataFormatEnum, FetchAnswerSqlQueryRequest, FetchConnectionDiffStatusResponse, FetchLiveboardDataRequest, FetchLiveboardDataRequestDataFormatEnum, FetchLiveboardSqlQueryRequest, FetchLogsRequest, FetchLogsRequestLogTypeEnum, FetchPermissionsOfPrincipalsRequest, FetchPermissionsOfPrincipalsRequestDefaultMetadataTypeEnum, FetchPermissionsOnMetadataRequest, ForceLogoutUsersRequest, Frequency, FrequencyInput, GenericInfo, GetFullAccessTokenRequest, GetObjectAccessTokenRequest, GetTokenResponse, PromiseGroupsApi as GroupsApi, GroupsImportListInput, GroupsImportListInputPrivilegesEnum, GroupsImportListInputTypeEnum, GroupsImportListInputVisibilityEnum, HttpBasicConfiguration, HttpBearerConfiguration, HttpException, HttpFile, HttpLibrary, HttpMethod, ImportMetadataTMLRequest, ImportMetadataTMLRequestImportPolicyEnum, ImportUser, ImportUserAccountStatusEnum, ImportUserAccountTypeEnum, ImportUserGroupsRequest, ImportUserGroupsResponse, ImportUserType, ImportUserVisibilityEnum, ImportUsersRequest, ImportUsersResponse, IsomorphicFetchHttpLibrary, JWTMetadataObject, JWTMetadataObjectTypeEnum, JWTParameter, JWTUserOptions, JWTUserOptionsFull, JWTUserOptionsParametersInner, LiveboardContent, LiveboardDataResponse, LiveboardOptions, LiveboardOptionsInput, PromiseLogApi as LogApi, LogResponse, LoginRequest, PromiseMetadataApi as MetadataApi, MetadataAssociationItem, MetadataInput, MetadataInputTypeEnum, MetadataListItemInput, MetadataListItemInputTypeEnum, MetadataObject, MetadataObjectTypeEnum, MetadataResponse, MetadataResponseTypeEnum, MetadataSearchResponse, MetadataSearchResponseMetadataTypeEnum, MetadataSearchSortOptions, MetadataSearchSortOptionsFieldNameEnum, MetadataSearchSortOptionsOrderEnum, PromiseMiddleware as Middleware, ModelTableList, OAuth2Configuration, ObjectIDAndName, Org, OrgResponse, OrgResponseStatusEnum, OrgResponseVisibilityEnum, PromiseOrgsApi as OrgsApi, ParametersListItem, ParametersListItemInput, PdfOptions, PdfOptionsInput, PdfOptionsInputPageOrientationEnum, PdfOptionsPageSizeEnum, PermissionInput, PermissionInputShareModeEnum, PermissionOfMetadataResponse, PermissionOfPrincipalsResponse, PermissionsMetadataTypeInput, PermissionsMetadataTypeInputTypeEnum, PngOptionsInput, PrincipalsInput, PrincipalsInputTypeEnum, PrincipalsListItem, PrincipalsListItemInput, PromiseHttpLibrary, RecipientDetails, RecipientDetailsInput, RepoConfigObject, PromiseReportsApi as ReportsApi, RequestBody, RequestContext, RequiredError, ResetUserPasswordRequest, ResponseActivationURL, ResponseBody, ResponseContext, ResponseCustomAction, ResponseSchedule, ResponseScheduleRun, RevertCommitRequest, RevertCommitRequestRevertPolicyEnum, RevertResponse, RevertedMetadata, RevokeTokenRequest, RiseSetter, Role, RoleResponse, RoleResponsePermissionEnum, RoleResponsePrivilegesEnum, PromiseRolesApi as RolesApi, RuntimeFilter, RuntimeParamOverride, RuntimeSort, ScheduleHistoryRunsOptionsInput, PromiseSchedulesApi as SchedulesApi, SchedulesPdfOptionsInput, SchedulesPdfOptionsInputPageSizeEnum, SchemaObject, Scope, SearchCommitsRequest, SearchCommitsRequestMetadataTypeEnum, SearchConfigRequest, SearchConnectionRequest, SearchConnectionRequestAuthenticationTypeEnum, SearchConnectionRequestDataWarehouseObjectTypeEnum, SearchConnectionRequestDataWarehouseTypesEnum, SearchConnectionResponse, SearchConnectionResponseDataWarehouseTypeEnum, SearchCustomActionsRequest, SearchCustomActionsRequestTypeEnum, SearchDataRequest, SearchDataRequestDataFormatEnum, SearchDataResponse, SearchMetadataRequest, SearchMetadataRequestDependentObjectVersionEnum, SearchOrgsRequest, SearchOrgsRequestStatusEnum, SearchOrgsRequestVisibilityEnum, SearchRoleResponse, SearchRoleResponsePermissionEnum, SearchRoleResponsePrivilegesEnum, SearchRolesRequest, SearchRolesRequestPermissionsEnum, SearchRolesRequestPrivilegesEnum, SearchSchedulesRequest, SearchTagsRequest, SearchUserGroupsRequest, SearchUserGroupsRequestPrivilegesEnum, SearchUserGroupsRequestTypeEnum, SearchUserGroupsRequestVisibilityEnum, SearchUsersRequest, SearchUsersRequestAccountStatusEnum, SearchUsersRequestAccountTypeEnum, SearchUsersRequestPrivilegesEnum, SearchUsersRequestVisibilityEnum, PromiseSecurityApi as SecurityApi, SecurityAuthentication, SelfDecodingBody, ServerConfiguration, ShareMetadataRequest, ShareMetadataRequestMetadataTypeEnum, SharePermissionsInput, SharePermissionsInputShareModeEnum, SortOptionInput, SortOptionInputFieldNameEnum, SortOptionInputOrderEnum, SortOptions, SortOptionsFieldNameEnum, SortOptionsOrderEnum, SortingOptions, SqlQuery, SqlQueryResponse, SqlQueryResponseMetadataTypeEnum, PromiseSystemApi as SystemApi, SystemConfig, SystemInfo, Table, Tag, TagMetadataTypeInput, TagMetadataTypeInputTypeEnum, PromiseTagsApi as TagsApi, PromiseThoughtSpotRestApi as ThoughtSpotRestApi, Token, TokenProvider, URL, URLInput, URLInputMandatory, UpdateConfigRequest, UpdateConnectionRequest, UpdateCustomActionRequest, UpdateCustomActionRequestOperationEnum, UpdateOrgRequest, UpdateOrgRequestOperationEnum, UpdateRoleRequest, UpdateRoleRequestPrivilegesEnum, UpdateScheduleRequest, UpdateScheduleRequestFileFormatEnum, UpdateScheduleRequestMetadataTypeEnum, UpdateScheduleRequestStatusEnum, UpdateScheduleRequestTimeZoneEnum, UpdateSystemConfigRequest, UpdateTagRequest, UpdateUserGroupRequest, UpdateUserGroupRequestOperationEnum, UpdateUserGroupRequestPrivilegesEnum, UpdateUserGroupRequestTypeEnum, UpdateUserGroupRequestVisibilityEnum, UpdateUserRequest, UpdateUserRequestAccountStatusEnum, UpdateUserRequestAccountTypeEnum, UpdateUserRequestOperationEnum, UpdateUserRequestPreferredLocaleEnum, UpdateUserRequestVisibilityEnum, User, UserAccountStatusEnum, UserAccountTypeEnum, UserGroup, UserGroupResponse, UserGroupResponseParentTypeEnum, UserGroupResponseTypeEnum, UserGroupResponseVisibilityEnum, UserObject, UserObjectTypeEnum, UserParameterOptions, UserParameters, UserParentTypeEnum, UserRuntimeFilters, UserRuntimeFiltersOperatorEnum, UserRuntimeSorts, UserRuntimeSortsOrderEnum, UserVisibilityEnum, PromiseUsersApi as UsersApi, ValidateMergeRequest, PromiseVersionControlApi as VersionControlApi, configureAuthMethods, createBearerAuthenticationConfig, createConfiguration, server1, servers, wrapHttpLibrary };
+export { APIKey, APIKeyInput, ActionConfig, ActionConfigInput, ActionConfigInputCreate, ActionConfigInputCreatePositionEnum, ActionConfigInputPositionEnum, ActionDetails, ActionDetailsInput, ActionDetailsInputCreate, ActivateUserRequest, AnswerContent, AnswerDataResponse, ApiException, ApiKeyConfiguration, AssignChangeAuthorRequest, AssignTagRequest, AssociateMetadataInput, AssociateMetadataInputCreate, AssociateMetadataInputCreateTypeEnum, AssociateMetadataInputTypeEnum, AuthMethods, AuthMethodsConfiguration, Authentication, PromiseAuthenticationApi as AuthenticationApi, AuthenticationInput, Author, AuthorMetadataTypeInput, AuthorMetadataTypeInputTypeEnum, AuthorType, BaseServerConfiguration, BasicAuth, BasicAuthInput, BearerAuthAuthentication, CALLBACK, CALLBACKInput, CALLBACKInputMandatory, ChangeUserPasswordRequest, Column, CommitBranchRequest, CommitFileType, CommitHistoryResponse, CommitResponse, CommiterType, Configuration, ConnectionInput, PromiseConnectionsApi as ConnectionsApi, CopyObjectRequest, CopyObjectRequestTypeEnum, CreateConfigRequest, CreateConnectionRequest, CreateConnectionRequestDataWarehouseTypeEnum, CreateConnectionResponse, CreateConnectionResponseDataWarehouseTypeEnum, CreateCustomActionRequest, CreateCustomActionRequestActionDetails, CreateCustomActionRequestDefaultActionConfig, CreateOrgRequest, CreateRoleRequest, CreateRoleRequestPrivilegesEnum, CreateScheduleRequest, CreateScheduleRequestFileFormatEnum, CreateScheduleRequestFrequency, CreateScheduleRequestLiveboardOptions, CreateScheduleRequestMetadataTypeEnum, CreateScheduleRequestPdfOptions, CreateScheduleRequestPdfOptionsPageSizeEnum, CreateScheduleRequestRecipientDetails, CreateScheduleRequestTimeZoneEnum, CreateTagRequest, CreateUserGroupRequest, CreateUserGroupRequestPrivilegesEnum, CreateUserGroupRequestTypeEnum, CreateUserGroupRequestVisibilityEnum, CreateUserRequest, CreateUserRequestAccountStatusEnum, CreateUserRequestAccountTypeEnum, CreateUserRequestPreferredLocaleEnum, CreateUserRequestVisibilityEnum, CronExpression, CronExpressionInput, PromiseCustomActionApi as CustomActionApi, CustomActionMetadataTypeInput, CustomActionMetadataTypeInputTypeEnum, PromiseDBTApi as DBTApi, PromiseDataApi as DataApi, DataWarehouseObjectInput, DataWarehouseObjects, Database, DbtConnectionRequest, DbtConnectionRequestImportTypeEnum, DbtGenerateSyncTmlRequest, DbtGenerateTmlRequest, DbtGenerateTmlRequestImportWorksheetsEnum, DbtSearchResponse, DeactivateUserRequest, DefaultActionConfig, DefaultActionConfigInput, DefaultActionConfigInputCreate, DefaultActionConfigSearchInput, DeleteConfigRequest, DeleteConnectionRequest, DeleteMetadataRequest, DeleteMetadataTypeInput, DeleteMetadataTypeInputTypeEnum, DeployCommitRequest, DeployCommitRequestDeployPolicyEnum, DeployCommitRequestDeployTypeEnum, DeployResponse, ErrorResponse, ExcludeMetadataListItemInput, ExcludeMetadataListItemInputTypeEnum, ExportAnswerReportRequest, ExportAnswerReportRequestFileFormatEnum, ExportLiveboardReportRequest, ExportLiveboardReportRequestFileFormatEnum, ExportLiveboardReportRequestPdfOptions, ExportLiveboardReportRequestPdfOptionsPageOrientationEnum, ExportLiveboardReportRequestPngOptions, ExportMetadataTMLBatchedRequest, ExportMetadataTMLBatchedRequestEdocFormatEnum, ExportMetadataTMLBatchedRequestMetadataTypeEnum, ExportMetadataTMLRequest, ExportMetadataTMLRequestEdocFormatEnum, ExportMetadataTMLRequestExportSchemaVersionEnum, ExportMetadataTypeInput, ExportMetadataTypeInputTypeEnum, FavoriteMetadataInput, FavoriteMetadataInputTypeEnum, FavoriteMetadataItem, FavoriteMetadataItemTypeEnum, FavoriteObjectOptionsInput, FetchAnswerDataRequest, FetchAnswerDataRequestDataFormatEnum, FetchAnswerSqlQueryRequest, FetchConnectionDiffStatusResponse, FetchLiveboardDataRequest, FetchLiveboardDataRequestDataFormatEnum, FetchLiveboardSqlQueryRequest, FetchLogsRequest, FetchLogsRequestLogTypeEnum, FetchPermissionsOfPrincipalsRequest, FetchPermissionsOfPrincipalsRequestDefaultMetadataTypeEnum, FetchPermissionsOnMetadataRequest, ForceLogoutUsersRequest, Frequency, FrequencyInput, GenericInfo, GetAsyncImportStatusResponse, GetFullAccessTokenRequest, GetObjectAccessTokenRequest, GetObjectAccessTokenRequestUserParameters, GetTokenResponse, PromiseGroupsApi as GroupsApi, GroupsImportListInput, GroupsImportListInputPrivilegesEnum, GroupsImportListInputTypeEnum, GroupsImportListInputVisibilityEnum, HttpBasicConfiguration, HttpBearerConfiguration, HttpException, HttpFile, HttpLibrary, HttpMethod, ImportEPackAsyncTaskStatus, ImportEPackAsyncTaskStatusImportPolicyEnum, ImportEPackAsyncTaskStatusTaskStatusEnum, ImportMetadataTMLRequest, ImportMetadataTMLRequestImportPolicyEnum, ImportUser, ImportUserAccountStatusEnum, ImportUserAccountTypeEnum, ImportUserGroupsRequest, ImportUserGroupsResponse, ImportUserType, ImportUserVisibilityEnum, ImportUsersRequest, ImportUsersResponse, IsomorphicFetchHttpLibrary, JWTMetadataObject, JWTMetadataObjectTypeEnum, JWTParameter, JWTUserOptions, JWTUserOptionsFull, JWTUserOptionsParametersInner, LiveboardContent, LiveboardDataResponse, LiveboardOptions, LiveboardOptionsInput, PromiseLogApi as LogApi, LogResponse, LoginRequest, PromiseMetadataApi as MetadataApi, MetadataAssociationItem, MetadataInput, MetadataInputTypeEnum, MetadataListItemInput, MetadataListItemInputTypeEnum, MetadataObject, MetadataObjectTypeEnum, MetadataResponse, MetadataResponseTypeEnum, MetadataSearchResponse, MetadataSearchResponseMetadataTypeEnum, MetadataSearchSortOptions, MetadataSearchSortOptionsFieldNameEnum, MetadataSearchSortOptionsOrderEnum, PromiseMiddleware as Middleware, ModelTableList, OAuth2Configuration, ObjectIDAndName, Org, OrgResponse, OrgResponseStatusEnum, OrgResponseVisibilityEnum, PromiseOrgsApi as OrgsApi, ParametersListItem, ParametersListItemInput, PdfOptions, PdfOptionsInput, PdfOptionsInputPageOrientationEnum, PdfOptionsPageSizeEnum, PermissionInput, PermissionInputShareModeEnum, PermissionOfMetadataResponse, PermissionOfPrincipalsResponse, PermissionsMetadataTypeInput, PermissionsMetadataTypeInputTypeEnum, PngOptionsInput, PrincipalsInput, PrincipalsInputTypeEnum, PrincipalsListItem, PrincipalsListItemInput, PromiseHttpLibrary, RecipientDetails, RecipientDetailsInput, RepoConfigObject, PromiseReportsApi as ReportsApi, RequestBody, RequestContext, RequiredError, ResetUserPasswordRequest, ResponseActivationURL, ResponseBody, ResponseContext, ResponseCopyObject, ResponseCustomAction, ResponseSchedule, ResponseScheduleRun, RevertCommitRequest, RevertCommitRequestRevertPolicyEnum, RevertResponse, RevertedMetadata, RevokeTokenRequest, RiseSetter, Role, RoleResponse, RoleResponsePermissionEnum, RoleResponsePrivilegesEnum, PromiseRolesApi as RolesApi, RuntimeFilter, RuntimeParamOverride, RuntimeSort, ScheduleHistoryRunsOptionsInput, PromiseSchedulesApi as SchedulesApi, SchedulesPdfOptionsInput, SchedulesPdfOptionsInputPageSizeEnum, SchemaObject, Scope, SearchCommitsRequest, SearchCommitsRequestMetadataTypeEnum, SearchConfigRequest, SearchConnectionRequest, SearchConnectionRequestAuthenticationTypeEnum, SearchConnectionRequestDataWarehouseObjectTypeEnum, SearchConnectionRequestDataWarehouseTypesEnum, SearchConnectionRequestSortOptions, SearchConnectionRequestSortOptionsFieldNameEnum, SearchConnectionRequestSortOptionsOrderEnum, SearchConnectionResponse, SearchConnectionResponseDataWarehouseTypeEnum, SearchCustomActionsRequest, SearchCustomActionsRequestDefaultActionConfig, SearchCustomActionsRequestTypeEnum, SearchDataRequest, SearchDataRequestDataFormatEnum, SearchDataResponse, SearchMetadataRequest, SearchMetadataRequestDependentObjectVersionEnum, SearchMetadataRequestFavoriteObjectOptions, SearchMetadataRequestSortOptions, SearchMetadataRequestSortOptionsFieldNameEnum, SearchMetadataRequestSortOptionsOrderEnum, SearchOrgsRequest, SearchOrgsRequestStatusEnum, SearchOrgsRequestVisibilityEnum, SearchRoleResponse, SearchRoleResponsePermissionEnum, SearchRoleResponsePrivilegesEnum, SearchRolesRequest, SearchRolesRequestPermissionsEnum, SearchRolesRequestPrivilegesEnum, SearchSchedulesRequest, SearchSchedulesRequestHistoryRunsOptions, SearchSchedulesRequestSortOptions, SearchTagsRequest, SearchUserGroupsRequest, SearchUserGroupsRequestPrivilegesEnum, SearchUserGroupsRequestSortOptions, SearchUserGroupsRequestSortOptionsFieldNameEnum, SearchUserGroupsRequestSortOptionsOrderEnum, SearchUserGroupsRequestTypeEnum, SearchUserGroupsRequestVisibilityEnum, SearchUsersRequest, SearchUsersRequestAccountStatusEnum, SearchUsersRequestAccountTypeEnum, SearchUsersRequestPrivilegesEnum, SearchUsersRequestSortOptions, SearchUsersRequestSortOptionsFieldNameEnum, SearchUsersRequestSortOptionsOrderEnum, SearchUsersRequestVisibilityEnum, PromiseSecurityApi as SecurityApi, SecurityAuthentication, SelfDecodingBody, ServerConfiguration, ShareMetadataRequest, ShareMetadataRequestMetadataTypeEnum, ShareMetadataTypeInput, ShareMetadataTypeInputTypeEnum, SharePermissionsInput, SharePermissionsInputShareModeEnum, SortOptionInput, SortOptionInputFieldNameEnum, SortOptionInputOrderEnum, SortOptions, SortOptionsFieldNameEnum, SortOptionsOrderEnum, SortingOptions, SqlQuery, SqlQueryResponse, SqlQueryResponseMetadataTypeEnum, PromiseSystemApi as SystemApi, SystemConfig, SystemInfo, Table, Tag, TagMetadataTypeInput, TagMetadataTypeInputTypeEnum, PromiseTagsApi as TagsApi, PromiseThoughtSpotRestApi as ThoughtSpotRestApi, Token, TokenProvider, TokenValidationResponse, URL, URLInput, URLInputMandatory, UpdateConfigRequest, UpdateConnectionRequest, UpdateConnectionV2Request, UpdateCustomActionRequest, UpdateCustomActionRequestActionDetails, UpdateCustomActionRequestDefaultActionConfig, UpdateCustomActionRequestOperationEnum, UpdateDbtConnectionRequest, UpdateDbtConnectionRequestImportTypeEnum, UpdateOrgRequest, UpdateOrgRequestOperationEnum, UpdateRoleRequest, UpdateRoleRequestPrivilegesEnum, UpdateScheduleRequest, UpdateScheduleRequestFileFormatEnum, UpdateScheduleRequestFrequency, UpdateScheduleRequestLiveboardOptions, UpdateScheduleRequestMetadataTypeEnum, UpdateScheduleRequestPdfOptions, UpdateScheduleRequestPdfOptionsPageSizeEnum, UpdateScheduleRequestRecipientDetails, UpdateScheduleRequestStatusEnum, UpdateScheduleRequestTimeZoneEnum, UpdateSystemConfigRequest, UpdateTagRequest, UpdateUserGroupRequest, UpdateUserGroupRequestOperationEnum, UpdateUserGroupRequestPrivilegesEnum, UpdateUserGroupRequestTypeEnum, UpdateUserGroupRequestVisibilityEnum, UpdateUserRequest, UpdateUserRequestAccountStatusEnum, UpdateUserRequestAccountTypeEnum, UpdateUserRequestOperationEnum, UpdateUserRequestPreferredLocaleEnum, UpdateUserRequestVisibilityEnum, User, UserAccountStatusEnum, UserAccountTypeEnum, UserGroup, UserGroupResponse, UserGroupResponseParentTypeEnum, UserGroupResponseTypeEnum, UserGroupResponseVisibilityEnum, UserObject, UserObjectTypeEnum, UserParameterOptions, UserParameters, UserParentTypeEnum, UserRuntimeFilters, UserRuntimeFiltersOperatorEnum, UserRuntimeSorts, UserRuntimeSortsOrderEnum, UserVisibilityEnum, PromiseUsersApi as UsersApi, ValidateMergeRequest, ValidateTokenRequest, PromiseVersionControlApi as VersionControlApi, configureAuthMethods, createBearerAuthenticationConfig, createConfiguration, server1, servers, wrapHttpLibrary };

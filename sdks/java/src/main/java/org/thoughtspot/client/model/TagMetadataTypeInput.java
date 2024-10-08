@@ -21,6 +21,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -50,10 +51,10 @@ import org.thoughtspot.client.JSON;
 /**
  * TagMetadataTypeInput
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-03-04T10:25:25.563+05:30[Asia/Kolkata]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-10-08T14:03:41.316769Z[Etc/UTC]")
 public class TagMetadataTypeInput {
   /**
-   * Type of metadata (Optional when given identifier is ID). 1. LIVEBOARD 2. ANSWERS 3. LOGICAL_TABLE for any data object such as table, worksheet or view. 4. LOGICAL_COLUMN for a column of any data object such as tables, worksheets or views.
+   *   Type of metadata.     Required if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.   1. LIVEBOARD   2. ANSWERS   3. LOGICAL_TABLE for any data object such as table, worksheet or view.   4. LOGICAL_COLUMN for a column of any data object such as tables, worksheets or views.
    */
   @JsonAdapter(TypeEnum.Adapter.class)
   public enum TypeEnum {
@@ -88,7 +89,7 @@ public class TagMetadataTypeInput {
           return b;
         }
       }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+      return null;
     }
 
     public static class Adapter extends TypeAdapter<TypeEnum> {
@@ -123,7 +124,7 @@ public class TagMetadataTypeInput {
   }
 
    /**
-   * Type of metadata (Optional when given identifier is ID). 1. LIVEBOARD 2. ANSWERS 3. LOGICAL_TABLE for any data object such as table, worksheet or view. 4. LOGICAL_COLUMN for a column of any data object such as tables, worksheets or views.
+   *   Type of metadata.     Required if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.   1. LIVEBOARD   2. ANSWERS   3. LOGICAL_TABLE for any data object such as table, worksheet or view.   4. LOGICAL_COLUMN for a column of any data object such as tables, worksheets or views.
    * @return type
   **/
   @javax.annotation.Nullable
@@ -172,9 +173,20 @@ public class TagMetadataTypeInput {
         Objects.equals(this.identifier, tagMetadataTypeInput.identifier);
   }
 
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
+  }
+
   @Override
   public int hashCode() {
     return Objects.hash(type, identifier);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override

@@ -19,11 +19,11 @@ export class APIKey {
     /**
     * Enter your key name
     */
-    'key'?: string;
+    'key'?: string | null;
     /**
     * Enter you key value
     */
-    'value'?: string;
+    'value'?: string | null;
 
     static readonly discriminator: string | undefined = undefined;
 

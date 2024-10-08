@@ -22,6 +22,7 @@ import org.thoughtspot.client.model.ChangeUserPasswordRequest;
 import org.thoughtspot.client.model.CommitBranchRequest;
 import org.thoughtspot.client.model.CommitHistoryResponse;
 import org.thoughtspot.client.model.CommitResponse;
+import org.thoughtspot.client.model.CopyObjectRequest;
 import org.thoughtspot.client.model.CreateConfigRequest;
 import org.thoughtspot.client.model.CreateConnectionRequest;
 import org.thoughtspot.client.model.CreateConnectionResponse;
@@ -45,6 +46,7 @@ import org.thoughtspot.client.model.DeployResponse;
 import org.thoughtspot.client.model.ErrorResponse;
 import org.thoughtspot.client.model.ExportAnswerReportRequest;
 import org.thoughtspot.client.model.ExportLiveboardReportRequest;
+import org.thoughtspot.client.model.ExportMetadataTMLBatchedRequest;
 import org.thoughtspot.client.model.ExportMetadataTMLRequest;
 import org.thoughtspot.client.model.FetchAnswerDataRequest;
 import org.thoughtspot.client.model.FetchAnswerSqlQueryRequest;
@@ -73,6 +75,7 @@ import org.thoughtspot.client.model.PermissionOfPrincipalsResponse;
 import org.thoughtspot.client.model.RepoConfigObject;
 import org.thoughtspot.client.model.ResetUserPasswordRequest;
 import org.thoughtspot.client.model.ResponseActivationURL;
+import org.thoughtspot.client.model.ResponseCopyObject;
 import org.thoughtspot.client.model.ResponseCustomAction;
 import org.thoughtspot.client.model.ResponseSchedule;
 import org.thoughtspot.client.model.RevertCommitRequest;
@@ -100,8 +103,10 @@ import org.thoughtspot.client.model.SystemConfig;
 import org.thoughtspot.client.model.SystemInfo;
 import org.thoughtspot.client.model.Tag;
 import org.thoughtspot.client.model.Token;
+import org.thoughtspot.client.model.TokenValidationResponse;
 import org.thoughtspot.client.model.UpdateConfigRequest;
 import org.thoughtspot.client.model.UpdateConnectionRequest;
+import org.thoughtspot.client.model.UpdateConnectionV2Request;
 import org.thoughtspot.client.model.UpdateCustomActionRequest;
 import org.thoughtspot.client.model.UpdateDbtConnectionRequest;
 import org.thoughtspot.client.model.UpdateOrgRequest;
@@ -114,6 +119,7 @@ import org.thoughtspot.client.model.UpdateUserRequest;
 import org.thoughtspot.client.model.User;
 import org.thoughtspot.client.model.UserGroupResponse;
 import org.thoughtspot.client.model.ValidateMergeRequest;
+import org.thoughtspot.client.model.ValidateTokenRequest;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -179,7 +185,7 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
-     *   Version: 9.2.0.cl or later   Commits TML files of metadata objects to the Git branch configured on your instance.  Requires &#x60;DATAMANAGEMENT&#x60; privilege.  Before using this endpoint to push your commits:  * Enable Git integration on your instance. * Make sure the Git repository and branch details are configured on your instance.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid&#x3D;git-integration).      
+     *   Version: 9.2.0.cl or later   Commits TML files of metadata objects to the Git branch configured on your instance.  Requires at least edit access to objects used in the commit operation.  Before using this endpoint to push your commits:  * Enable Git integration on your instance. * Make sure the Git repository and branch details are configured on your instance.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).      
      *
      * @throws ApiException if the Api call fails
      */
@@ -187,6 +193,18 @@ public class ThoughtSpotRestApiTest {
     public void commitBranchTest() throws ApiException {
         CommitBranchRequest commitBranchRequest = null;
         CommitResponse response = api.commitBranch(commitBranchRequest);
+        // TODO: test validations
+    }
+
+    /**
+     *  Makes a copy of an Answer or Liveboard saved in Atlas    Version: 10.3.0.cl or later   Creates a copy of the metadata object specified in the API request.  Requires create access to metadata objects  Upon successful execution, the API returns the id of the new object which is copied from the given object.     
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void copyObjectTest() throws ApiException {
+        CopyObjectRequest copyObjectRequest = null;
+        ResponseCopyObject response = api.copyObject(copyObjectRequest);
         // TODO: test validations
     }
 
@@ -263,7 +281,7 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
-     *   Version: 9.0.0.cl or later   Creates a tag object.  Tags are labels that identify a metadata object. For example, you can create a tag to designate subject areas, such as sales, HR, marketing, and finance.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+     *   Version: 9.0.0.cl or later   Creates a tag object.  Tags are labels that identify a metadata object. For example, you can create a tag to designate subject areas, such as sales, HR, marketing, and finance.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the &#x60;TAGMANAGEMENT&#x60; (**Can manage tags**) privilege is required to create, edit, and delete tags.      
      *
      * @throws ApiException if the Api call fails
      */
@@ -382,6 +400,18 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
+     *   Version: 10.0.0.cl or later   Deletes a connection object.  **Note**: If a connection has dependent objects, make sure you remove its associations before the delete operation.  Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) and edit permissions to the connection object, or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void deleteConnectionV2Test() throws ApiException {
+        String connectionIdentifier = null;
+        api.deleteConnectionV2(connectionIdentifier);
+        // TODO: test validations
+    }
+
+    /**
      *   Version: 9.6.0.cl or later   Removes the custom action specified in the API request.  Requires &#x60;DEVELOPER&#x60; (**Has Developer privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
      *
      * @throws ApiException if the Api call fails
@@ -454,7 +484,7 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
-     *   Version: 9.0.0.cl or later   Deletes a tag object from the ThoughtSpot system  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+     *   Version: 9.0.0.cl or later   Deletes a tag object from the ThoughtSpot system  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the &#x60;TAGMANAGEMENT&#x60; (**Can manage tags**) privilege is required to create, edit, and delete tags.      
      *
      * @throws ApiException if the Api call fails
      */
@@ -490,7 +520,7 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
-     *   Version: 9.2.0.cl or later   Allows you to deploy a commit and publish TML content to your ThoughtSpot instance.  Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege.  The API deploys the head of the branch unless a &#x60;commit_id&#x60; is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.      
+     *   Version: 9.2.0.cl or later   Allows you to deploy a commit and publish TML content to your ThoughtSpot instance.  Requires at least edit access to the objects used in the deploy operation.  The API deploys the head of the branch unless a &#x60;commit_id&#x60; is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).      
      *
      * @throws ApiException if the Api call fails
      */
@@ -546,6 +576,18 @@ public class ThoughtSpotRestApiTest {
     public void exportMetadataTMLTest() throws ApiException {
         ExportMetadataTMLRequest exportMetadataTMLRequest = null;
         List<Object> response = api.exportMetadataTML(exportMetadataTMLRequest);
+        // TODO: test validations
+    }
+
+    /**
+     *  Version: 10.1.0.cl or later 
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void exportMetadataTMLBatchedTest() throws ApiException {
+        ExportMetadataTMLBatchedRequest exportMetadataTMLBatchedRequest = null;
+        Object response = api.exportMetadataTMLBatched(exportMetadataTMLBatchedRequest);
         // TODO: test validations
     }
 
@@ -610,7 +652,7 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
-     *   Version: 9.0.0.cl or later   Fetches security audit logs.    Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  By default, the API retrieves logs for the last 24 hours. You can set a custom duration in EPOCH time. Make sure the log duration specified in your API request doesn’t exceed 24 hours. If you must fetch logs for a longer time range, modify the duration and make multiple sequential API requests.  Upon successful execution, the API returns logs with the following information: * timestamp of the event * event ID * event type * name and GUID of the user * IP address of ThoughtSpot instance  For more information about security events returned in the API response, see [Security events](https://developers.thoughtspot.com/docs/logs-api#_security_events).      
+     *   Version: 9.0.0.cl or later   Fetches security audit logs.    Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  By default, the API retrieves logs for the last 24 hours. You can set a custom duration in EPOCH time. Make sure the log duration specified in your API request doesn’t exceed 24 hours. If you must fetch logs for a longer time range, modify the duration and make multiple sequential API requests.  Upon successful execution, the API returns logs with the following information: * timestamp of the event * event ID * event type * name and GUID of the user * IP address of ThoughtSpot instance  For more information about security events returned in the API response, see [Security events](https://developers.thoughtspot.com/docs/audit-logs#_security_events).      
      *
      * @throws ApiException if the Api call fails
      */
@@ -808,7 +850,7 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
-     *   Version: 9.2.0.cl or later   Reverts TML objects to a previous commit specified in the API request.  Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege.  In the API request, specify the &#x60;commit_id&#x60;. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.  By default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.      
+     *   Version: 9.2.0.cl or later   Reverts TML objects to a previous commit specified in the API request.  Requires at least edit access to objects.  In the API request, specify the &#x60;commit_id&#x60;. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.  By default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).      
      *
      * @throws ApiException if the Api call fails
      */
@@ -1025,6 +1067,19 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
+     *   Version: 10.0.0.cl or later   Updates a connection object.  Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) and edit permissions to the connection object, or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  To update a connection object, pass these parameters in your API request:  1. GUID of the connection object. 2. If you are updating tables or database schema of a connection object:    a. Add the updated JSON map of metadata with database, schema, and tables in &#x60;data_warehouse_config&#x60;.    b. Set &#x60;validate&#x60; to &#x60;true&#x60;. 3. If you are updating a configuration attribute, connection name, or description, you can set &#x60;validate&#x60; to &#x60;false&#x60;.      
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void updateConnectionV2Test() throws ApiException {
+        String connectionIdentifier = null;
+        UpdateConnectionV2Request updateConnectionV2Request = null;
+        api.updateConnectionV2(connectionIdentifier, updateConnectionV2Request);
+        // TODO: test validations
+    }
+
+    /**
      *   Version: 9.6.0.cl or later   Updates a custom action.  Requires &#x60;DEVELOPER&#x60; (**Has Developer privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage Guidelines  The API allows you to modify the following properties:  * Name of the custom action * Action availability to groups * Association to metadata objects * Authentication settings for a URL-based action  For more information, see [Custom actions](https://developers.thoughtspot.com/docs/?pageid&#x3D;custom-action-intro).      
      *
      * @throws ApiException if the Api call fails
@@ -1101,7 +1156,7 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
-     *   Version: 9.0.0.cl or later   Updates a tag object.  You can modify the &#x60;name&#x60; and &#x60;color&#x60; properties of a tag object.    Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+     *   Version: 9.0.0.cl or later   Updates a tag object.  You can modify the &#x60;name&#x60; and &#x60;color&#x60; properties of a tag object.    Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the &#x60;TAGMANAGEMENT&#x60; (**Can manage tags**) privilege is required to create, edit, and delete tags.      
      *
      * @throws ApiException if the Api call fails
      */
@@ -1148,6 +1203,18 @@ public class ThoughtSpotRestApiTest {
     public void validateMergeTest() throws ApiException {
         ValidateMergeRequest validateMergeRequest = null;
         List<DeployResponse> response = api.validateMerge(validateMergeRequest);
+        // TODO: test validations
+    }
+
+    /**
+     *  Version: 9.12.0.cl or later 
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void validateTokenTest() throws ApiException {
+        ValidateTokenRequest validateTokenRequest = null;
+        TokenValidationResponse response = api.validateToken(validateTokenRequest);
         // TODO: test validations
     }
 

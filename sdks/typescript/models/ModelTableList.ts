@@ -20,7 +20,7 @@ export class ModelTableList {
     /**
     * Model directory path, this is optional param and required if there are duplicate models with the same name.
     */
-    'model_path'?: string;
+    'model_path'?: string | null;
     /**
     * List of Tables.
     */

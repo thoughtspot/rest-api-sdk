@@ -21,7 +21,9 @@ import org.thoughtspot.client.model.GetTokenResponse;
 import org.thoughtspot.client.model.LoginRequest;
 import org.thoughtspot.client.model.RevokeTokenRequest;
 import org.thoughtspot.client.model.Token;
+import org.thoughtspot.client.model.TokenValidationResponse;
 import org.thoughtspot.client.model.User;
+import org.thoughtspot.client.model.ValidateTokenRequest;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -116,6 +118,18 @@ public class AuthenticationApiTest {
     public void revokeTokenTest() throws ApiException {
         RevokeTokenRequest revokeTokenRequest = null;
         api.revokeToken(revokeTokenRequest);
+        // TODO: test validations
+    }
+
+    /**
+     *  Version: 9.12.0.cl or later 
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void validateTokenTest() throws ApiException {
+        ValidateTokenRequest validateTokenRequest = null;
+        TokenValidationResponse response = api.validateToken(validateTokenRequest);
         // TODO: test validations
     }
 

@@ -83,11 +83,11 @@ export class CreateUserRequest {
     */
     'extended_preferences'?: any;
     /**
-    * Flag to indicate whether welcome email should be sent to user
+    * Flag to indicate whether welcome email should be sent to user. This parameter is applied only on clusters on which IAM is disabled.
     */
     'trigger_welcome_email'?: boolean | null;
     /**
-    * Flag to indicate whether activation email should be sent to user
+    * Flag to indicate whether activation email should be sent to user.
     */
     'trigger_activation_email'?: boolean | null;
 

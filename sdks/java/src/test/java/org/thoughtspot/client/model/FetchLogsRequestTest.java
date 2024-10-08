@@ -19,6 +19,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import org.openapitools.jackson.nullable.JsonNullable;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -59,6 +60,14 @@ public class FetchLogsRequestTest {
     @Test
     public void endEpochTimeInMillisTest() {
         // TODO: test endEpochTimeInMillis
+    }
+
+    /**
+     * Test the property 'getAllLogs'
+     */
+    @Test
+    public void getAllLogsTest() {
+        // TODO: test getAllLogs
     }
 
 }

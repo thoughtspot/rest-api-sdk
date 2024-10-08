@@ -16,19 +16,19 @@ export class DataWarehouseObjectInput {
     /**
     * Name of the database.
     */
-    'database'?: string;
+    'database'?: string | null;
     /**
     * Name of the schema within the database.
     */
-    'schema'?: string;
+    'schema'?: string | null;
     /**
     * Name of the table within the schema.
     */
-    'table'?: string;
+    'table'?: string | null;
     /**
     * Name of the column within the table.
     */
-    'column'?: string;
+    'column'?: string | null;
 
     static readonly discriminator: string | undefined = undefined;
 

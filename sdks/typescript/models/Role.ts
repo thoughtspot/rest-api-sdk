@@ -16,11 +16,11 @@ export class Role {
     /**
     * id of the role
     */
-    'id'?: string;
+    'id'?: string | null;
     /**
     * name of the role
     */
-    'name'?: string;
+    'name'?: string | null;
 
     static readonly discriminator: string | undefined = undefined;
 

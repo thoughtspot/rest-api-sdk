@@ -17,9 +17,9 @@ import { HttpFile } from '../http/http';
 */
 export class UserObject {
     /**
-    * Type of object.
+    *   Type of object.     Required if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.
     */
-    'type'?: UserObjectTypeEnum;
+    'type'?: UserObjectTypeEnum | null;
     /**
     * Unique name/id of the object.
     */

@@ -15,16 +15,16 @@ import { HttpFile } from '../http/http';
 export class Tag {
     'name': string;
     'id': string;
-    'color'?: string;
-    'deleted'?: boolean;
-    'hidden'?: boolean;
-    'external'?: boolean;
-    'deprecated'?: boolean;
-    'creation_time_in_millis'?: number;
-    'modification_time_in_millis'?: number;
-    'author_id'?: string;
-    'modifier_id'?: string;
-    'owner_id'?: string;
+    'color'?: string | null;
+    'deleted'?: boolean | null;
+    'hidden'?: boolean | null;
+    'external'?: boolean | null;
+    'deprecated'?: boolean | null;
+    'creation_time_in_millis'?: number | null;
+    'modification_time_in_millis'?: number | null;
+    'author_id'?: string | null;
+    'modifier_id'?: string | null;
+    'owner_id'?: string | null;
 
     static readonly discriminator: string | undefined = undefined;
 

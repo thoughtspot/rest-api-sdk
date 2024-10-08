@@ -21,7 +21,7 @@
 |**roleIdentifiers** | **List&lt;String&gt;** | Filter groups with a list of Roles assigned to a group |  [optional] |
 |**recordOffset** | **Integer** | The starting record number from where the records should be included. |  [optional] |
 |**recordSize** | **Integer** | The number of records that should be included. |  [optional] |
-|**sortOptions** | [**SortOptions**](SortOptions.md) |  |  [optional] |
+|**sortOptions** | [**SearchUserGroupsRequestSortOptions**](SearchUserGroupsRequestSortOptions.md) |  |  [optional] |
 
 
 
@@ -48,7 +48,6 @@
 | CAN_CREATE_CATALOG | &quot;CAN_CREATE_CATALOG&quot; |
 | DISABLE_PINBOARD_CREATION | &quot;DISABLE_PINBOARD_CREATION&quot; |
 | LIVEBOARD_VERIFIER | &quot;LIVEBOARD_VERIFIER&quot; |
-| ENABLESPOTAPPCREATION | &quot;ENABLESPOTAPPCREATION&quot; |
 | PREVIEW_THOUGHTSPOT_SAGE | &quot;PREVIEW_THOUGHTSPOT_SAGE&quot; |
 | APPLICATION_ADMINISTRATION | &quot;APPLICATION_ADMINISTRATION&quot; |
 | SYSTEM_INFO_ADMINISTRATION | &quot;SYSTEM_INFO_ADMINISTRATION&quot; |
@@ -59,6 +58,12 @@
 | CAN_MANAGE_CUSTOM_CALENDAR | &quot;CAN_MANAGE_CUSTOM_CALENDAR&quot; |
 | CAN_CREATE_OR_EDIT_CONNECTIONS | &quot;CAN_CREATE_OR_EDIT_CONNECTIONS&quot; |
 | CAN_MANAGE_WORKSHEET_VIEWS_TABLES | &quot;CAN_MANAGE_WORKSHEET_VIEWS_TABLES&quot; |
+| CAN_MANAGE_VERSION_CONTROL | &quot;CAN_MANAGE_VERSION_CONTROL&quot; |
+| THIRDPARTY_ANALYSIS | &quot;THIRDPARTY_ANALYSIS&quot; |
+| ALLOW_NON_EMBED_FULL_APP_ACCESS | &quot;ALLOW_NON_EMBED_FULL_APP_ACCESS&quot; |
+| CAN_ACCESS_ANALYST_STUDIO | &quot;CAN_ACCESS_ANALYST_STUDIO&quot; |
+| CAN_MANAGE_ANALYST_STUDIO | &quot;CAN_MANAGE_ANALYST_STUDIO&quot; |
+| PREVIEW_DOCUMENT_SEARCH | &quot;PREVIEW_DOCUMENT_SEARCH&quot; |
 
 
 

@@ -16,11 +16,11 @@ export class PngOptionsInput {
     /**
     * Indicates whether to include the cover page with the Liveboard title.
     */
-    'include_cover_page'?: boolean;
+    'include_cover_page'?: boolean | null;
     /**
     * Indicates whether to include a page with all applied filters.
     */
-    'include_filter_page'?: boolean;
+    'include_filter_page'?: boolean | null;
 
     static readonly discriminator: string | undefined = undefined;
 

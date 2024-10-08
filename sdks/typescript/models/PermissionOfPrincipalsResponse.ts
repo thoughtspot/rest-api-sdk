@@ -13,7 +13,7 @@
 import { HttpFile } from '../http/http';
 
 export class PermissionOfPrincipalsResponse {
-    'principal_permission_details'?: any;
+    'principal_permission_details'?: any | null;
 
     static readonly discriminator: string | undefined = undefined;
 

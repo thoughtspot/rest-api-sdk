@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
+import org.thoughtspot.client.model.ShareMetadataTypeInput;
 import org.thoughtspot.client.model.SharePermissionsInput;
 
 import com.google.gson.Gson;
@@ -54,10 +55,10 @@ import org.thoughtspot.client.JSON;
 /**
  * ShareMetadataRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-03-04T10:25:25.563+05:30[Asia/Kolkata]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-10-08T14:03:41.316769Z[Etc/UTC]")
 public class ShareMetadataRequest {
   /**
-   * Type of metadata. 1. Liveboard 2. Answers 3. LOGICAL_TABLE for any data object such as table, worksheet or view.
+   * Type of metadata. Required if identifier in metadata_identifies is a name\&quot;. 1. Liveboard 2. Answers 3. LOGICAL_TABLE for any data object such as table, worksheet or view.
    */
   @JsonAdapter(MetadataTypeEnum.Adapter.class)
   public enum MetadataTypeEnum {
@@ -111,7 +112,11 @@ public class ShareMetadataRequest {
 
   public static final String SERIALIZED_NAME_METADATA_IDENTIFIERS = "metadata_identifiers";
   @SerializedName(SERIALIZED_NAME_METADATA_IDENTIFIERS)
-  private List<String> metadataIdentifiers = new ArrayList<>();
+  private List<String> metadataIdentifiers;
+
+  public static final String SERIALIZED_NAME_METADATA = "metadata";
+  @SerializedName(SERIALIZED_NAME_METADATA)
+  private List<ShareMetadataTypeInput> metadata;
 
   public static final String SERIALIZED_NAME_PERMISSIONS = "permissions";
   @SerializedName(SERIALIZED_NAME_PERMISSIONS)
@@ -151,7 +156,7 @@ public class ShareMetadataRequest {
   }
 
    /**
-   * Type of metadata. 1. Liveboard 2. Answers 3. LOGICAL_TABLE for any data object such as table, worksheet or view.
+   * Type of metadata. Required if identifier in metadata_identifies is a name\&quot;. 1. Liveboard 2. Answers 3. LOGICAL_TABLE for any data object such as table, worksheet or view.
    * @return metadataType
   **/
   @javax.annotation.Nullable
@@ -180,10 +185,10 @@ public class ShareMetadataRequest {
   }
 
    /**
-   * Unique ID or name of metadata objects. Note: All the identifiers should belong to same metadata_type
+   * Unique ID or name of metadata objects. Note: All the names should belong to same metadata_type
    * @return metadataIdentifiers
   **/
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public List<String> getMetadataIdentifiers() {
     return metadataIdentifiers;
   }
@@ -191,6 +196,35 @@ public class ShareMetadataRequest {
 
   public void setMetadataIdentifiers(List<String> metadataIdentifiers) {
     this.metadataIdentifiers = metadataIdentifiers;
+  }
+
+
+  public ShareMetadataRequest metadata(List<ShareMetadataTypeInput> metadata) {
+    
+    this.metadata = metadata;
+    return this;
+  }
+
+  public ShareMetadataRequest addMetadataItem(ShareMetadataTypeInput metadataItem) {
+    if (this.metadata == null) {
+      this.metadata = new ArrayList<>();
+    }
+    this.metadata.add(metadataItem);
+    return this;
+  }
+
+   /**
+   * Metadata details for sharing objects.
+   * @return metadata
+  **/
+  @javax.annotation.Nullable
+  public List<ShareMetadataTypeInput> getMetadata() {
+    return metadata;
+  }
+
+
+  public void setMetadata(List<ShareMetadataTypeInput> metadata) {
+    this.metadata = metadata;
   }
 
 
@@ -238,7 +272,7 @@ public class ShareMetadataRequest {
   }
 
    /**
-   * Options to specify details of Liveboard.
+   * Options to specify details of Liveboard. First Liveboard encountered in payload is considered to be the corresponding Liveboard.
    * @return visualizationIdentifiers
   **/
   @javax.annotation.Nullable
@@ -377,6 +411,7 @@ public class ShareMetadataRequest {
     ShareMetadataRequest shareMetadataRequest = (ShareMetadataRequest) o;
     return Objects.equals(this.metadataType, shareMetadataRequest.metadataType) &&
         Objects.equals(this.metadataIdentifiers, shareMetadataRequest.metadataIdentifiers) &&
+        Objects.equals(this.metadata, shareMetadataRequest.metadata) &&
         Objects.equals(this.permissions, shareMetadataRequest.permissions) &&
         Objects.equals(this.visualizationIdentifiers, shareMetadataRequest.visualizationIdentifiers) &&
         Objects.equals(this.emails, shareMetadataRequest.emails) &&
@@ -392,7 +427,7 @@ public class ShareMetadataRequest {
 
   @Override
   public int hashCode() {
-    return Objects.hash(metadataType, metadataIdentifiers, permissions, visualizationIdentifiers, emails, message, enableCustomUrl, notifyOnShare, hasLenientDiscoverability);
+    return Objects.hash(metadataType, metadataIdentifiers, metadata, permissions, visualizationIdentifiers, emails, message, enableCustomUrl, notifyOnShare, hasLenientDiscoverability);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -408,6 +443,7 @@ public class ShareMetadataRequest {
     sb.append("class ShareMetadataRequest {\n");
     sb.append("    metadataType: ").append(toIndentedString(metadataType)).append("\n");
     sb.append("    metadataIdentifiers: ").append(toIndentedString(metadataIdentifiers)).append("\n");
+    sb.append("    metadata: ").append(toIndentedString(metadata)).append("\n");
     sb.append("    permissions: ").append(toIndentedString(permissions)).append("\n");
     sb.append("    visualizationIdentifiers: ").append(toIndentedString(visualizationIdentifiers)).append("\n");
     sb.append("    emails: ").append(toIndentedString(emails)).append("\n");
@@ -439,6 +475,7 @@ public class ShareMetadataRequest {
     openapiFields = new HashSet<String>();
     openapiFields.add("metadata_type");
     openapiFields.add("metadata_identifiers");
+    openapiFields.add("metadata");
     openapiFields.add("permissions");
     openapiFields.add("visualization_identifiers");
     openapiFields.add("emails");
@@ -449,7 +486,6 @@ public class ShareMetadataRequest {
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
-    openapiRequiredFields.add("metadata_identifiers");
     openapiRequiredFields.add("permissions");
     openapiRequiredFields.add("emails");
     openapiRequiredFields.add("message");
@@ -485,11 +521,23 @@ public class ShareMetadataRequest {
       if ((jsonObj.get("metadata_type") != null && !jsonObj.get("metadata_type").isJsonNull()) && !jsonObj.get("metadata_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `metadata_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("metadata_type").toString()));
       }
-      // ensure the required json array is present
-      if (jsonObj.get("metadata_identifiers") == null) {
-        throw new IllegalArgumentException("Expected the field `linkedContent` to be an array in the JSON string but got `null`");
-      } else if (!jsonObj.get("metadata_identifiers").isJsonArray()) {
+      // ensure the optional json data is an array if present
+      if (jsonObj.get("metadata_identifiers") != null && !jsonObj.get("metadata_identifiers").isJsonArray()) {
         throw new IllegalArgumentException(String.format("Expected the field `metadata_identifiers` to be an array in the JSON string but got `%s`", jsonObj.get("metadata_identifiers").toString()));
+      }
+      if (jsonObj.get("metadata") != null && !jsonObj.get("metadata").isJsonNull()) {
+        JsonArray jsonArraymetadata = jsonObj.getAsJsonArray("metadata");
+        if (jsonArraymetadata != null) {
+          // ensure the json data is an array
+          if (!jsonObj.get("metadata").isJsonArray()) {
+            throw new IllegalArgumentException(String.format("Expected the field `metadata` to be an array in the JSON string but got `%s`", jsonObj.get("metadata").toString()));
+          }
+
+          // validate the optional field `metadata` (array)
+          for (int i = 0; i < jsonArraymetadata.size(); i++) {
+            ShareMetadataTypeInput.validateJsonObject(jsonArraymetadata.get(i).getAsJsonObject());
+          };
+        }
       }
       // ensure the json data is an array
       if (!jsonObj.get("permissions").isJsonArray()) {

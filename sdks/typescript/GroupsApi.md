@@ -282,10 +282,7 @@ apiInstance.searchUserGroups(
     ],
     record_offset: 0,
     record_size: 10,
-    sort_options: {
-      field_name: "NAME",
-      order: "ASC",
-    },
+    sort_options: null,
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);

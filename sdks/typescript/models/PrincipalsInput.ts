@@ -20,7 +20,7 @@ export class PrincipalsInput {
     /**
     * Principal type.
     */
-    'type'?: PrincipalsInputTypeEnum;
+    'type'?: PrincipalsInputTypeEnum | null;
 
     static readonly discriminator: string | undefined = undefined;
 

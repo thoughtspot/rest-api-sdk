@@ -13,13 +13,13 @@
 import { HttpFile } from '../http/http';
 
 export class DbtSearchResponse {
-    'dbt_connection_identifier'?: string;
-    'project_name'?: string;
-    'connection_id'?: string;
-    'connection_name'?: string;
-    'cdw_database'?: string;
-    'import_type'?: string;
-    'author_name'?: string;
+    'dbt_connection_identifier'?: string | null;
+    'project_name'?: string | null;
+    'connection_id'?: string | null;
+    'connection_name'?: string | null;
+    'cdw_database'?: string | null;
+    'import_type'?: string | null;
+    'author_name'?: string | null;
 
     static readonly discriminator: string | undefined = undefined;
 

@@ -11,8 +11,8 @@
  */
 
 import { MetadataInput } from '../models/MetadataInput';
-import { ScheduleHistoryRunsOptionsInput } from '../models/ScheduleHistoryRunsOptionsInput';
-import { SortingOptions } from '../models/SortingOptions';
+import { SearchSchedulesRequestHistoryRunsOptions } from '../models/SearchSchedulesRequestHistoryRunsOptions';
+import { SearchSchedulesRequestSortOptions } from '../models/SearchSchedulesRequestSortOptions';
 import { HttpFile } from '../http/http';
 
 export class SearchSchedulesRequest {
@@ -28,8 +28,8 @@ export class SearchSchedulesRequest {
     * The number of records that should be included.
     */
     'record_size'?: number;
-    'sort_options'?: SortingOptions;
-    'history_runs_options'?: ScheduleHistoryRunsOptionsInput;
+    'sort_options'?: SearchSchedulesRequestSortOptions;
+    'history_runs_options'?: SearchSchedulesRequestHistoryRunsOptions;
     /**
     * unique ID or name of the Schedule
     */
@@ -59,13 +59,13 @@ export class SearchSchedulesRequest {
         {
             "name": "sort_options",
             "baseName": "sort_options",
-            "type": "SortingOptions",
+            "type": "SearchSchedulesRequestSortOptions",
             "format": ""
         },
         {
             "name": "history_runs_options",
             "baseName": "history_runs_options",
-            "type": "ScheduleHistoryRunsOptionsInput",
+            "type": "SearchSchedulesRequestHistoryRunsOptions",
             "format": ""
         },
         {

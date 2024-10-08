@@ -16,23 +16,23 @@ export class OrgResponse {
     /**
     * Unique identifier of the Org.
     */
-    'id'?: number;
+    'id'?: number | null;
     /**
     * Name of the Org.
     */
-    'name'?: string;
+    'name'?: string | null;
     /**
     * Status of the Org.
     */
-    'status'?: OrgResponseStatusEnum;
+    'status'?: OrgResponseStatusEnum | null;
     /**
     * Description of the Org.
     */
-    'description'?: string;
+    'description'?: string | null;
     /**
     * Visibility of the Org.
     */
-    'visibility'?: OrgResponseVisibilityEnum;
+    'visibility'?: OrgResponseVisibilityEnum | null;
 
     static readonly discriminator: string | undefined = undefined;
 

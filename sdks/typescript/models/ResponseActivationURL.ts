@@ -19,7 +19,7 @@ export class ResponseActivationURL {
     /**
     * Activation link to activate the user.
     */
-    'activation_link'?: string;
+    'activation_link'?: string | null;
 
     static readonly discriminator: string | undefined = undefined;
 

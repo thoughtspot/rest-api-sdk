@@ -188,6 +188,9 @@ apiInstance.fetchPermissionsOnMetadata(
       },
     ],
     include_dependent_objects: false,
+    record_offset: 0,
+    record_size: -1,
+    permission_type: "permission_type_example",
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -252,6 +255,12 @@ apiInstance.shareMetadata(
     metadata_type: "LIVEBOARD",
     metadata_identifiers: [
       "metadata_identifiers_example",
+    ],
+    metadata: [
+      {
+        type: "LIVEBOARD",
+        identifier: "identifier_example",
+      },
     ],
     permissions: [
       {

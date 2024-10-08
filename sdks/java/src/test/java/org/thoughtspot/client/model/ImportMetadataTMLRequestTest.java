@@ -64,4 +64,12 @@ public class ImportMetadataTMLRequestTest {
         // TODO: test createNew
     }
 
+    /**
+     * Test the property 'allOrgsContext'
+     */
+    @Test
+    public void allOrgsContextTest() {
+        // TODO: test allOrgsContext
+    }
+
 }

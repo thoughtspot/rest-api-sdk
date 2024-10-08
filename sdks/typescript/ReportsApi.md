@@ -102,19 +102,8 @@ apiInstance.exportLiveboardReport(
     file_format: "CSV",
     runtime_filter: {},
     runtime_sort: {},
-    pdf_options: {
-      include_cover_page: true,
-      include_custom_logo: true,
-      include_filter_page: true,
-      include_page_number: true,
-      page_orientation: "PORTRAIT",
-      truncate_table: false,
-      page_footer_text: "page_footer_text_example",
-    },
-    png_options: {
-      include_cover_page: false,
-      include_filter_page: false,
-    },
+    pdf_options: null,
+    png_options: null,
     runtime_param_override: {},
   } 
 ).then((data:any) => {

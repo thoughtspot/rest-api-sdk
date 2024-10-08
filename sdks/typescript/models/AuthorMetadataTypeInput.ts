@@ -17,9 +17,9 @@ import { HttpFile } from '../http/http';
 */
 export class AuthorMetadataTypeInput {
     /**
-    * Type of metadata.
+    *   Type of metadata.     Required if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.
     */
-    'type'?: AuthorMetadataTypeInputTypeEnum;
+    'type'?: AuthorMetadataTypeInputTypeEnum | null;
     /**
     * Unique ID or name of the metadata object.
     */
