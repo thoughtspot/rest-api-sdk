@@ -3525,8 +3525,17 @@
                       "type": "string"
                     }
                   },
+                  "jwt_user_options": {
+                    "description": "    JWT user options to create a JWT token given the payload.\n    \n\n*Deprecated in 9.12.0.cl. Use user_parameters instead.*",
+                    "deprecated": true,
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/JWT_User_Options"
+                      }
+                    ]
+                  },
                   "user_parameters": {
-                    "description": "<div><span class=\"since-beta-tag\">Version: 9.10.5.cl or later</span><span class=\"since-beta-tag\">Deprecated: 10.4.0.cl and later</span></div>\n\nDefine attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters).",
+                    "description": "Define attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters). <br/>  <span class=\"since-beta-tag\">Version: 9.10.5.cl or later</span>",
                     "allOf": [
                       {
                         "$ref": "#/components/schemas/User_Parameter_Options"
@@ -3658,8 +3667,17 @@
                       "type": "string"
                     }
                   },
+                  "jwt_user_options": {
+                    "description": "    JWT user options to create a JWT token given the payload.\n    \n\n*Deprecated in 9.12.0.cl. Use user_parameters instead.*",
+                    "deprecated": true,
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/JWT_User_Options_Full"
+                      }
+                    ]
+                  },
                   "user_parameters": {
-                    "description": "<div><span class=\"since-beta-tag\">Version: 9.10.5.cl or later</span><span class=\"since-beta-tag\">Deprecated: 10.4.0.cl and later</span></div>\n\nDefine attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters).",
+                    "description": "Define attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters). <br/>  <span class=\"since-beta-tag\">Version: 9.10.5.cl or later</span>",
                     "allOf": [
                       {
                         "$ref": "#/components/schemas/User_Parameter_Options"
@@ -6250,7 +6268,7 @@
                 "type": "object",
                 "properties": {
                   "metadata_tmls": {
-                    "description": "Details of TML objects.\n\n**Note: importing TML in YAML format, when coming directly from our Playground, is currently requires manual formatting. For more details on the workaround, please click [here](https://developers.thoughtspot.com/docs/known-issues#_version_9_12_0_cl)**",
+                    "description": "Details of TML objects.\nNote: importing TML in YAML format, when coming directly from our Playground, is currently requires manual formatting. For more details on the workaround, please click [here](https://developers.thoughtspot.com/docs/known-issues#_version_9_12_0_cl)**",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -6477,7 +6495,7 @@
                     "nullable": true
                   },
                   "edoc_format": {
-                    "description": "TML EDOC content format.\n\n**Note: exporting in YAML format currently requires manual formatting of the output. For more details on the workaround, please click [here](https://developers.thoughtspot.com/docs/known-issues#_version_9_12_0_cl)**",
+                    "description": "TML EDOC content format.\n**Note: exporting in YAML format currently requires manual formatting of the output. For more details on the workaround, please click [here](https://developers.thoughtspot.com/docs/known-issues#_version_9_12_0_cl)**",
                     "default": "JSON",
                     "type": "string",
                     "enum": [
