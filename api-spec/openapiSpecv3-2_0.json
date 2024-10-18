@@ -7205,6 +7205,7 @@
                   },
                   "emails": {
                     "description": "Email IDs to which notifications will be sent.",
+                    "default": [],
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -7235,7 +7236,6 @@
                 },
                 "required": [
                   "permissions",
-                  "emails",
                   "message"
                 ]
               }
