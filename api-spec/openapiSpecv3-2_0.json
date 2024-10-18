@@ -22,6 +22,14 @@
       "description": "Roles for version 9.12.0.cl"
     },
     {
+      "name": "10.4.0.cl",
+      "id": "10.4.0.cl",
+      "tags": [
+        "10.4.0.cl"
+      ],
+      "description": "Roles for version 10.4.0.cl"
+    },
+    {
       "name": "9.7.0.cl",
       "id": "9.7.0.cl",
       "tags": [
@@ -38,14 +46,6 @@
       "description": "Roles for version 9.2.0.cl"
     },
     {
-      "name": "10.4.0.cl",
-      "id": "10.4.0.cl",
-      "tags": [
-        "10.4.0.cl"
-      ],
-      "description": "Roles for version 10.4.0.cl"
-    },
-    {
       "name": "10.1.0.cl",
       "id": "10.1.0.cl",
       "tags": [
@@ -60,14 +60,6 @@
         "10.3.0.cl"
       ],
       "description": "Roles for version 10.3.0.cl"
-    },
-    {
-      "name": "10.0.0.cl",
-      "id": "10.0.0.cl",
-      "tags": [
-        "10.0.0.cl"
-      ],
-      "description": "Roles for version 10.0.0.cl"
     },
     {
       "name": "9.9.0.cl",
@@ -315,7 +307,8 @@
                         "ALLOW_NON_EMBED_FULL_APP_ACCESS",
                         "CAN_ACCESS_ANALYST_STUDIO",
                         "CAN_MANAGE_ANALYST_STUDIO",
-                        "PREVIEW_DOCUMENT_SEARCH"
+                        "PREVIEW_DOCUMENT_SEARCH",
+                        "CAN_SETUP_VERSION_CONTROL"
                       ]
                     }
                   },
@@ -338,7 +331,8 @@
                       "INACTIVE",
                       "EXPIRED",
                       "LOCKED",
-                      "PENDING"
+                      "PENDING",
+                      "SUSPENDED"
                     ]
                   },
                   "notify_on_share": {
@@ -1033,7 +1027,8 @@
                         "ALLOW_NON_EMBED_FULL_APP_ACCESS",
                         "CAN_ACCESS_ANALYST_STUDIO",
                         "CAN_MANAGE_ANALYST_STUDIO",
-                        "PREVIEW_DOCUMENT_SEARCH"
+                        "PREVIEW_DOCUMENT_SEARCH",
+                        "CAN_SETUP_VERSION_CONTROL"
                       ]
                     }
                   },
@@ -1409,7 +1404,7 @@
                     }
                   },
                   "author_identifier": {
-                    "description": "Author ID of async import tasks to filter on.",
+                    "description": "Author GUID or name of async import tasks to filter on.",
                     "type": "string"
                   },
                   "record_offset": {
@@ -2928,7 +2923,9 @@
                         "GCP_POSTGRESQL",
                         "GCP_MYSQL",
                         "MODE",
-                        "GOOGLE_SHEETS"
+                        "GOOGLE_SHEETS",
+                        "FALCON",
+                        "FALCON_ONPREM"
                       ]
                     }
                   },
@@ -3137,7 +3134,8 @@
                         "ALLOW_NON_EMBED_FULL_APP_ACCESS",
                         "CAN_ACCESS_ANALYST_STUDIO",
                         "CAN_MANAGE_ANALYST_STUDIO",
-                        "PREVIEW_DOCUMENT_SEARCH"
+                        "PREVIEW_DOCUMENT_SEARCH",
+                        "CAN_SETUP_VERSION_CONTROL"
                       ]
                     }
                   },
@@ -3464,7 +3462,7 @@
     "/api/rest/2.0/auth/token/object": {
       "post": {
         "operationId": "getObjectAccessToken",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGets an authentication token that provides access to a specific metadata object. By default, the token obtained from ThoughtSpot remains valid for 5 mins.\n\nYou can generate the token for a user by providing a `username` and `password`, or by using the cluster’s `secret key` (for [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable)).\n\nTo generate a `secret_key` on your cluster, the administrator must enable **Trusted authentication** in the **Develop** > **Customizations** > **Security Settings** page.\n\n**Note**: When both `password` and `secret_key` are included in the API request,  `password` takes precedence.\n\n#### Just-in-time provisioning\n\nFor just-in-time user creation and provisioning, define the following attributes:\n\n* `auto_create`\n* `username`\n* `display_name`\n* `email`\n* `group_identifiers`\n\nSet `auto_create` to `True` if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create` parameter is set to `true`, the API call will update user properties like display name, email and group assignment.\n\nFor more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).\n\nTo add a new user and assign privileges, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege is required.\n\n#### Attribute-Based Access Control (ABAC) with tokens\n\nYou can define Attribute-Based Access Control (ABAC) parameters to assign security entitlements to users during session creation. For more information, see [ABAC via token](https://developers.thoughtspot.com/docs/abac-user-parameters).\n\n#### Important point to note\nAll options in the token creation APIs changing the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, `auto_create:true` will create the user when the authentication token is created. Similarly, using `user_parameters` with `persist: true` persists security parameters on the user profile when the token is created and not during authentication.\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGets an authentication token that provides access to a specific metadata object. By default, the token obtained from ThoughtSpot remains valid for 5 mins.\n\nYou can generate the token for a user by providing a `username` and `password` (for [Bearer token authentication](https://developers.thoughtspot.com/docs/?pageid=api-authv2#bearerToken)), or by using the cluster’s `secret key` (for [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable)).\n\nTo generate a `secret_key` on your cluster, the administrator must enable **Trusted authentication** in the **Develop** > **Customizations** > **Security Settings** page.\n\n**Note**: When both `password` and `secret_key` are included in the API request,  `password` takes precedence.\n\n#### Just-in-time provisioning\n\nFor just-in-time user creation and provisioning, use the following attributes.\n\n* `auto_create`\n* `username`\n\nTo assign privileges to the new user, specify the group name or GUID in `group_identifiers`.\n\nTo add the user to an Org, send the `Org ID` in the API request.\n\n**Note**: This feature is available only if Trusted authentication is enabled on your cluster.\n\nTo provision a new user and assign privileges, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Authentication",
           "9.0.0.cl"
@@ -3601,7 +3599,7 @@
     "/api/rest/2.0/auth/token/full": {
       "post": {
         "operationId": "getFullAccessToken",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGets an authentication token and creates a full session in ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot remains valid for 5 mins.\n\nYou can generate the token for a user by providing a `username` and `password`, or by using the cluster’s `secret_key` (for [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable)).\n\nTo generate a `secret_key` on your cluster, the administrator must enable **Trusted authentication** in the **Develop** > **Customizations** > **Security Settings** page. For more information, see [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable).\n\n**Note**: When both `password` and `secret_key` are included in the API request, `password` takes precedence.\n\n#### Just-in-time provisioning\n\nFor just-in-time user creation and provisioning, define the following attributes:\n\n* `auto_create`\n* `username`\n* `display_name`\n* `email`\n* `group_identifiers`\n\nSet `auto_create` to `True` if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create` parameter is set to `true`, the API call will update user properties like display name, email and group assignment.\n\nFor more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).\n\nTo add a new user and assign privileges, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege is required.\n\n#### Attribute-Based Access Control (ABAC) with tokens\n\nYou can define Attribute-Based Access Control (ABAC) parameters to assign security entitlements to users during session creation. For more information, see [ABAC via token](https://developers.thoughtspot.com/docs/abac-user-parameters).\n\n#### Important point to note\nAll options in the token creation APIs changing the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, `auto_create:true` will create the user when the authentication token is created. Similarly, using `user_parameters` with `persist: true` persists security parameters on the user profile when the token is created and not during authentication.\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGets an authentication token and creates a full session in ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot remains valid for 5 mins.\n\nYou can generate the token for a user by providing a `username` and `password` (for [Bearer token authentication](https://developers.thoughtspot.com/docs/?pageid=api-authv2#bearerToken)), or by using the cluster’s `secret_key` (for [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable)).\n\nTo generate a `secret_key` on your cluster, the administrator must enable **Trusted authentication** in the **Develop** > **Customizations** > **Security Settings** page. For more information, see [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable).\n\n**Note**: When both `password` and `secret_key` are included in the API request, `password` takes precedence.\n\n#### Just-in-time provisioning\n\nFor just-in-time user creation and provisioning, use the following attributes.\n\n* `auto_create`\n* `username`\n\nTo assign privileges to the new user, specify the group name or GUID in `group_identifiers`.\n\nTo add the user to an Org, specify the Org ID in the `org_id` attribute.\n\n**Note**: This feature is available only on clusters with trusted authentication enabled.\n\nTo provision a new user and assign privileges, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Authentication",
           "9.0.0.cl"
@@ -3942,6 +3940,156 @@
         }
       }
     },
+    "/api/rest/2.0/auth/token/custom": {
+      "post": {
+        "operationId": "getCustomAccessToken",
+        "description": " <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>",
+        "tags": [
+          "Authentication",
+          "10.4.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "description": "Username for which the token needs to be created.",
+                    "type": "string"
+                  },
+                  "password": {
+                    "description": "Password of the user account",
+                    "default": "",
+                    "type": "string"
+                  },
+                  "secret_key": {
+                    "description": "The secret key string provided by the ThoughtSpot application server. ThoughtSpot generates a secret key when Trusted authentication is enabled.",
+                    "default": "",
+                    "type": "string"
+                  },
+                  "validity_time_in_sec": {
+                    "description": "Token validity duration in seconds",
+                    "default": 300,
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "org_identifier": {
+                    "description": "ID of the Org context to log in to. If the Org ID is not specified and secret key is provided then user will be logged into the org corresponding to the secret key, and if secret key is not provided then user will be logged in to the Org context of their previous login session.",
+                    "type": "string"
+                  },
+                  "persist_option": {
+                    "description": "Indicates whether the specified attributes should be persisted or not.",
+                    "type": "string",
+                    "enum": [
+                      "APPEND",
+                      "NONE",
+                      "REPLACE",
+                      "RESET"
+                    ]
+                  },
+                  "filter_rules": {
+                    "description": "Filter rules.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/FilterRules"
+                    }
+                  },
+                  "parameter_values": {
+                    "description": "Parameter values.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/ParameterValues"
+                    }
+                  },
+                  "objects": {
+                    "description": "Objects on which the filter rules and parameters values should be applied to",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/TokenAccessScopeObject"
+                    }
+                  },
+                  "email": {
+                    "description": "(just-in-time (JIT) provisioning)Email address of the user. Specify this attribute when creating a new user.",
+                    "type": "string"
+                  },
+                  "display_name": {
+                    "description": "(just-in-time (JIT) provisioning) Indicates display name of the user. Specify this attribute when creating a new user.",
+                    "type": "string"
+                  },
+                  "groups": {
+                    "description": "(just-in-time (JIT) provisioning) ID or name of the groups to which the newly created user belongs. Specify this attribute when creating a new user.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Group_Object"
+                    }
+                  }
+                },
+                "required": [
+                  "username",
+                  "persist_option"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ABAC token creation was successful.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccessToken"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request. This could be due to missing or incorrect parameters.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access. The request could not be authenticated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access. The user does not have permission to access this resource.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An unexpected error occurred on the server.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
     "/api/rest/2.0/users/create": {
       "post": {
         "operationId": "createUser",
@@ -3993,7 +4141,8 @@
                       "INACTIVE",
                       "EXPIRED",
                       "LOCKED",
-                      "PENDING"
+                      "PENDING",
+                      "SUSPENDED"
                     ]
                   },
                   "org_identifiers": {
@@ -4200,7 +4349,8 @@
                       "INACTIVE",
                       "EXPIRED",
                       "LOCKED",
-                      "PENDING"
+                      "PENDING",
+                      "SUSPENDED"
                     ]
                   },
                   "notify_on_share": {
@@ -5788,7 +5938,8 @@
                         "ALLOW_NON_EMBED_FULL_APP_ACCESS",
                         "CAN_ACCESS_ANALYST_STUDIO",
                         "CAN_MANAGE_ANALYST_STUDIO",
-                        "PREVIEW_DOCUMENT_SEARCH"
+                        "PREVIEW_DOCUMENT_SEARCH",
+                        "CAN_SETUP_VERSION_CONTROL"
                       ]
                     }
                   },
@@ -5960,7 +6111,8 @@
                         "ALLOW_NON_EMBED_FULL_APP_ACCESS",
                         "CAN_ACCESS_ANALYST_STUDIO",
                         "CAN_MANAGE_ANALYST_STUDIO",
-                        "PREVIEW_DOCUMENT_SEARCH"
+                        "PREVIEW_DOCUMENT_SEARCH",
+                        "CAN_SETUP_VERSION_CONTROL"
                       ]
                     }
                   },
@@ -6250,7 +6402,7 @@
                 "type": "object",
                 "properties": {
                   "metadata_tmls": {
-                    "description": "Details of TML objects.\n\n**Note: importing TML in YAML format, when coming directly from our Playground, is currently requires manual formatting. For more details on the workaround, please click [here](https://developers.thoughtspot.com/docs/known-issues#_version_9_12_0_cl)**",
+                    "description": "Details of TML objects.",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -6275,6 +6427,12 @@
                   },
                   "all_orgs_context": {
                     "description": "If import is happening from all orgs context.",
+                    "default": false,
+                    "type": "boolean",
+                    "nullable": true
+                  },
+                  "skip_cdw_validation_for_tables": {
+                    "description": "Boolean to indicate if the CDW validation for table imports should be skipped.",
                     "default": false,
                     "type": "boolean",
                     "nullable": true
@@ -6378,6 +6536,12 @@
                     "default": false,
                     "type": "boolean",
                     "nullable": true
+                  },
+                  "skip_cdw_validation_for_tables": {
+                    "description": "Boolean to indicate if the CDW validation for table imports should be skipped.",
+                    "default": false,
+                    "type": "boolean",
+                    "nullable": true
                   }
                 },
                 "required": [
@@ -6477,7 +6641,7 @@
                     "nullable": true
                   },
                   "edoc_format": {
-                    "description": "TML EDOC content format.\n\n**Note: exporting in YAML format currently requires manual formatting of the output. For more details on the workaround, please click [here](https://developers.thoughtspot.com/docs/known-issues#_version_9_12_0_cl)**",
+                    "description": "TML EDOC content format.",
                     "default": "JSON",
                     "type": "string",
                     "enum": [
@@ -6512,6 +6676,14 @@
                     "default": false,
                     "type": "boolean",
                     "nullable": true
+                  },
+                  "export_options": {
+                    "description": "Flags to specify additional options for export. <br/>  <span class=\"since-beta-tag\">Version: 10.5.0.cl or later</span>",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/Export_Options"
+                      }
+                    ]
                   }
                 },
                 "required": [
@@ -6994,12 +7166,13 @@
                 "type": "object",
                 "properties": {
                   "metadata_type": {
-                    "description": "Type of metadata. Required if identifier in metadata_identifies is a name.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.",
+                    "description": "Type of metadata. Required if identifier in metadata_identifies is a name\".\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n4. LOGICAL_COLUMN",
                     "type": "string",
                     "enum": [
                       "LIVEBOARD",
                       "ANSWER",
-                      "LOGICAL_TABLE"
+                      "LOGICAL_TABLE",
+                      "LOGICAL_COLUMN"
                     ]
                   },
                   "metadata_identifiers": {
@@ -7873,7 +8046,9 @@
                       "GCP_POSTGRESQL",
                       "GCP_MYSQL",
                       "MODE",
-                      "GOOGLE_SHEETS"
+                      "GOOGLE_SHEETS",
+                      "FALCON",
+                      "FALCON_ONPREM"
                     ]
                   },
                   "data_warehouse_config": {
@@ -7956,6 +8131,7 @@
       "post": {
         "operationId": "deleteConnection",
         "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nDeletes a connection object.\n\n**Note**: If a connection has dependent objects, make sure you remove its associations before the delete operation.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "deprecated": true,
         "tags": [
           "Connections",
           "9.2.0.cl"
@@ -8027,13 +8203,13 @@
         }
       }
     },
-    "/api/rest/2.0/connections/delete/{connection_identifier}": {
+    "/api/rest/2.0/connections/{connection_identifier}/delete": {
       "post": {
         "operationId": "deleteConnectionV2",
-        "description": "\n <span class=\"since-beta-tag\">Version: 10.0.0.cl or later</span>\n\nDeletes a connection object.\n\n**Note**: If a connection has dependent objects, make sure you remove its associations before the delete operation.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nDeletes a connection object.\n\n**Note**: If a connection has dependent objects, make sure you remove its associations before the delete operation.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Connections",
-          "10.0.0.cl"
+          "10.4.0.cl"
         ],
         "parameters": [
           {
@@ -8097,6 +8273,7 @@
       "post": {
         "operationId": "updateConnection",
         "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nUpdates a connection object.  \n\nRequires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\nTo update a connection object, pass these parameters in your API request:\n\n1. GUID of the connection object.\n2. If you are updating tables or database schema of a connection object:\n   a. Add the updated JSON map of metadata with database, schema, and tables in `data_warehouse_config`.\n   b. Set `validate` to `true`.\n3. If you are updating a configuration attribute, connection name, or description, you can set `validate` to `false`.\n\n\n\n\n#### Endpoint URL\n",
+        "deprecated": true,
         "tags": [
           "Connections",
           "9.2.0.cl"
@@ -8186,13 +8363,13 @@
         }
       }
     },
-    "/api/rest/2.0/connections/update/{connection_identifier}": {
+    "/api/rest/2.0/connections/{connection_identifier}/update": {
       "post": {
         "operationId": "updateConnectionV2",
-        "description": "\n <span class=\"since-beta-tag\">Version: 10.0.0.cl or later</span>\n\nUpdates a connection object.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\nTo update a connection object, pass these parameters in your API request:\n\n1. GUID of the connection object.\n2. If you are updating tables or database schema of a connection object:\n   a. Add the updated JSON map of metadata with database, schema, and tables in `data_warehouse_config`.\n   b. Set `validate` to `true`.\n3. If you are updating a configuration attribute, connection name, or description, you can set `validate` to `false`.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nUpdates a connection object.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\nTo update a connection object, pass these parameters in your API request:\n\n1. GUID of the connection object.\n2. If you are updating tables or database schema of a connection object:\n   a. Add the updated JSON map of metadata with database, schema, and tables in `data_warehouse_config`.\n   b. Set `validate` to `true`.\n3. If you are updating a configuration attribute, connection name, or description, you can set `validate` to `false`.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Connections",
-          "10.0.0.cl"
+          "10.4.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -8483,7 +8660,8 @@
                         "ALLOW_NON_EMBED_FULL_APP_ACCESS",
                         "CAN_ACCESS_ANALYST_STUDIO",
                         "CAN_MANAGE_ANALYST_STUDIO",
-                        "PREVIEW_DOCUMENT_SEARCH"
+                        "PREVIEW_DOCUMENT_SEARCH",
+                        "CAN_SETUP_VERSION_CONTROL"
                       ]
                     }
                   }
@@ -11400,6 +11578,251 @@
           }
         }
       }
+    },
+    "/api/rest/2.0/nls/conversation/create": {
+      "post": {
+        "operationId": "createConversation",
+        "description": "\n <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nCreate Conversation api\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "10.4.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "datamodel_id": {
+                    "type": "string"
+                  },
+                  "tokens": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "datamodel_id"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Conversation"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Conversation"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/nls/conversation/send/{conversation_id}": {
+      "post": {
+        "operationId": "sendMessage",
+        "description": "\n <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nSend Message api\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "10.4.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "datamodel_id": {
+                    "type": "string"
+                  },
+                  "message": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "datamodel_id",
+                  "message"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "conversation_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ResponseMessage"
+                  }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ResponseMessage"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/nls/answer": {
+      "post": {
+        "operationId": "singleAnswer",
+        "description": "\n <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nSingle Answer Api\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "10.4.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "query": {
+                    "type": "string"
+                  },
+                  "datamodel_id": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "query",
+                  "datamodel_id"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ResponseMessage"
+                  }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ResponseMessage"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -11546,7 +11969,8 @@
               "INACTIVE",
               "EXPIRED",
               "LOCKED",
-              "PENDING"
+              "PENDING",
+              "SUSPENDED"
             ],
             "description": "Status of the user account.",
             "nullable": true
@@ -11730,6 +12154,11 @@
           "user_parameters": {
             "type": "object",
             "description": "User Parameters which are specified for the user via JWToken",
+            "nullable": true
+          },
+          "access_control_properties": {
+            "type": "object",
+            "description": "Access Control Properties which are specified for the user via JWToken",
             "nullable": true
           }
         }
@@ -13239,7 +13668,9 @@
               "GCP_POSTGRESQL",
               "GCP_MYSQL",
               "MODE",
-              "GOOGLE_SHEETS"
+              "GOOGLE_SHEETS",
+              "FALCON",
+              "FALCON_ONPREM"
             ],
             "description": "Type of data warehouse."
           },
@@ -13491,7 +13922,8 @@
                 "ALLOW_NON_EMBED_FULL_APP_ACCESS",
                 "CAN_ACCESS_ANALYST_STUDIO",
                 "CAN_MANAGE_ANALYST_STUDIO",
-                "PREVIEW_DOCUMENT_SEARCH"
+                "PREVIEW_DOCUMENT_SEARCH",
+                "CAN_SETUP_VERSION_CONTROL"
               ]
             },
             "description": "Privileges granted to the role."
@@ -13918,7 +14350,7 @@
           "runtime_filters": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/User_Runtime_Filters"
+              "$ref": "#/components/schemas/Runtime_Filters"
             },
             "description": "Objects to apply the User_Runtime_Filters.\n\nExamples to set the `runtime_filters` :\n```json\n{ \"column_name\": \"Color\", \"operator\": \"EQ\", \"values\": [\"red\"], \"persist\": false }\n```",
             "nullable": true
@@ -13926,7 +14358,7 @@
           "runtime_sorts": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/User_Runtime_Sorts"
+              "$ref": "#/components/schemas/Runtime_Sorts"
             },
             "description": "Objects to apply the User_Runtime_Sorts.\n\nExamples to set the `runtime_sorts` :\n```json\n{ \"column_name\": \"Color\", \"order\": \"ASC\", \"persist\": false }\n```",
             "nullable": true
@@ -13934,7 +14366,7 @@
           "parameters": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/User_Parameters"
+              "$ref": "#/components/schemas/Runtime_Parameters"
             },
             "description": "Objects to apply the Runtime_Parameters.\n\nExamples to set the `parameters` :\n```json\n{ \"name\": \"Color\", \"values\": [\"Blue\"], \"persist\": false }\n```",
             "nullable": true
@@ -13965,7 +14397,7 @@
         },
         "description": "Objects to apply the User_Object."
       },
-      "User_Runtime_Filters": {
+      "Runtime_Filters": {
         "type": "object",
         "required": [
           "column_name",
@@ -13988,19 +14420,21 @@
             "type": "string",
             "enum": [
               "EQ",
-              "GE",
-              "GT",
-              "IN",
-              "LE",
-              "LT",
               "NE",
-              "BEGINS_WITH",
+              "LT",
+              "LE",
+              "GT",
+              "GE",
+              "IN",
               "BW",
-              "BW_INC",
-              "BW_INC_MAX",
-              "BW_INC_MIN",
               "CONTAINS",
-              "ENDS_WITH"
+              "BEGINS_WITH",
+              "ENDS_WITH",
+              "BW_INC",
+              "BW_INC_MIN",
+              "BW_INC_MAX",
+              "LIKE",
+              "NOT_IN"
             ],
             "description": "Operator value. Example: EQ"
           },
@@ -14019,9 +14453,9 @@
             "nullable": true
           }
         },
-        "description": "Objects to apply the User_Runtime_Filters."
+        "description": "Objects to apply the Runtime_Filters."
       },
-      "User_Runtime_Sorts": {
+      "Runtime_Sorts": {
         "type": "object",
         "properties": {
           "column_name": {
@@ -14053,9 +14487,9 @@
             "nullable": true
           }
         },
-        "description": "Objects to apply the User_Runtime_Sorts."
+        "description": "Objects to apply the Runtime_Sorts."
       },
-      "User_Parameters": {
+      "Runtime_Parameters": {
         "type": "object",
         "required": [
           "name",
@@ -14199,6 +14633,178 @@
           }
         }
       },
+      "FilterRules": {
+        "type": "object",
+        "required": [
+          "column_name",
+          "operator",
+          "values"
+        ],
+        "properties": {
+          "column_name": {
+            "type": "string",
+            "description": "The name of the column to apply the filter on."
+          },
+          "operator": {
+            "type": "string",
+            "enum": [
+              "EQ",
+              "NE",
+              "LT",
+              "LE",
+              "GT",
+              "GE",
+              "IN",
+              "BW",
+              "CONTAINS",
+              "BEGINS_WITH",
+              "ENDS_WITH",
+              "BW_INC",
+              "BW_INC_MIN",
+              "BW_INC_MAX",
+              "LIKE",
+              "NOT_IN"
+            ],
+            "description": "The operator to use for filtering. Example: EQ (equals), GT(greater than), etc."
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The values to filter on. To get all records, use TS_WILDCARD_ALL as values."
+          }
+        },
+        "description": "Filter Rules to be applied on Objects."
+      },
+      "ParameterValues": {
+        "type": "object",
+        "required": [
+          "name",
+          "values"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the column to apply the filter on."
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The values to filter on. Only single value is supported currently."
+          }
+        },
+        "description": "Filter Rules to be applied on Objects."
+      },
+      "TokenAccessScopeObject": {
+        "type": "object",
+        "required": [
+          "identifier"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "LIVEBOARD",
+              "ANSWER",
+              "LOGICAL_TABLE"
+            ],
+            "description": "  Type of object.\n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.",
+            "nullable": true
+          },
+          "identifier": {
+            "type": "string",
+            "description": "Unique name/id of the object."
+          }
+        },
+        "description": "Objects on which the filter rules and parameters values should be applied to"
+      },
+      "Group_Object": {
+        "type": "object",
+        "properties": {
+          "identifier": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "description": "Groups objects."
+      },
+      "AccessToken": {
+        "type": "object",
+        "required": [
+          "token",
+          "org",
+          "user",
+          "creation_time_in_millis",
+          "expiration_time_in_millis"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "GUID of the auth token.",
+            "nullable": true
+          },
+          "token": {
+            "type": "string",
+            "description": "Bearer auth token."
+          },
+          "org": {
+            "$ref": "#/components/schemas/OrgInfo",
+            "description": "Org information for which the token is generated."
+          },
+          "user": {
+            "$ref": "#/components/schemas/UserInfo",
+            "description": "User information for which the token is generated."
+          },
+          "creation_time_in_millis": {
+            "type": "number",
+            "format": "float",
+            "description": "Token creation time in milliseconds."
+          },
+          "expiration_time_in_millis": {
+            "type": "number",
+            "format": "float",
+            "description": "Token expiration time in milliseconds."
+          }
+        }
+      },
+      "OrgInfo": {
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Id."
+          },
+          "name": {
+            "type": "string",
+            "description": "Name.",
+            "nullable": true
+          }
+        }
+      },
+      "UserInfo": {
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Id."
+          },
+          "name": {
+            "type": "string",
+            "description": "Name.",
+            "nullable": true
+          }
+        }
+      },
       "ResponseActivationURL": {
         "type": "object",
         "properties": {
@@ -14250,7 +14856,8 @@
               "INACTIVE",
               "EXPIRED",
               "LOCKED",
-              "PENDING"
+              "PENDING",
+              "SUSPENDED"
             ],
             "default": "ACTIVE",
             "description": "Status of the user account.",
@@ -14442,7 +15049,8 @@
                 "ALLOW_NON_EMBED_FULL_APP_ACCESS",
                 "CAN_ACCESS_ANALYST_STUDIO",
                 "CAN_MANAGE_ANALYST_STUDIO",
-                "PREVIEW_DOCUMENT_SEARCH"
+                "PREVIEW_DOCUMENT_SEARCH",
+                "CAN_SETUP_VERSION_CONTROL"
               ]
             },
             "description": "Privileges that will be assigned to the group.",
@@ -14514,6 +15122,30 @@
             "description": "The groups which are updated in the system."
           }
         }
+      },
+      "Export_Options": {
+        "type": "object",
+        "properties": {
+          "export_with_reference_object_id": {
+            "type": "boolean",
+            "default": false,
+            "description": "Boolean Flag to whether to export user_defined_id of referenced object. This will only be respected when UserDefinedId in TML is enabled.",
+            "nullable": true
+          },
+          "include_guid": {
+            "type": "boolean",
+            "default": true,
+            "description": "Boolean flag to whether to export guid of the object. This will only be respected when UserDefinedId in TML is enabled.",
+            "nullable": true
+          },
+          "include_object_id": {
+            "type": "boolean",
+            "default": false,
+            "description": "Boolean flag to whether to export user_defined_id of the object. This will only be respected when UserDefinedId in TML is enabled.",
+            "nullable": true
+          }
+        },
+        "description": "Flags to specify additional options for export. This will only be active when UserDefinedId in TML is enabled."
       },
       "ResponseCopyObject": {
         "type": "object",
@@ -14612,7 +15244,8 @@
             "enum": [
               "LIVEBOARD",
               "ANSWER",
-              "LOGICAL_TABLE"
+              "LOGICAL_TABLE",
+              "LOGICAL_COLUMN"
             ],
             "description": "  Type of metadata.\n  \n\nType of metadata. Required if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.",
             "nullable": true
@@ -14894,7 +15527,9 @@
               "GCP_POSTGRESQL",
               "GCP_MYSQL",
               "MODE",
-              "GOOGLE_SHEETS"
+              "GOOGLE_SHEETS",
+              "FALCON",
+              "FALCON_ONPREM"
             ],
             "description": "Type of data warehouse."
           },
@@ -14994,7 +15629,8 @@
                 "ALLOW_NON_EMBED_FULL_APP_ACCESS",
                 "CAN_ACCESS_ANALYST_STUDIO",
                 "CAN_MANAGE_ANALYST_STUDIO",
-                "PREVIEW_DOCUMENT_SEARCH"
+                "PREVIEW_DOCUMENT_SEARCH",
+                "CAN_SETUP_VERSION_CONTROL"
               ]
             },
             "description": "Privileges granted to the role."
@@ -15949,6 +16585,72 @@
           "author_name": {
             "type": "string",
             "nullable": true
+          }
+        }
+      },
+      "Conversation": {
+        "type": "object",
+        "required": [
+          "conversation_id"
+        ],
+        "properties": {
+          "conversation_id": {
+            "type": "string"
+          }
+        }
+      },
+      "ResponseMessage": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "identifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "gen_no": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "TSAnswer"
+            ]
+          },
+          "viz_type": {
+            "type": "string",
+            "enum": [
+              "Chart",
+              "Table"
+            ],
+            "nullable": true
+          },
+          "tokens": {
+            "type": "string",
+            "nullable": true
+          },
+          "error": {
+            "$ref": "#/components/schemas/Error",
+            "nullable": true
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "required": [
+          "status_code",
+          "message"
+        ],
+        "properties": {
+          "status_code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
           }
         }
       },
