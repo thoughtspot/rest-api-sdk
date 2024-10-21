@@ -44,10 +44,10 @@ Based on your client setup, you can use one of the following methods to obtain a
 #### Using username and password
 In this method, you must have the `username` and `password` of the user to authenticate to ThoughtSpot and obtain a token. The following API endpoints can be used to obtain the token:
 
-- [Get a token for full access](#restV2-playground?apiResourceId=http/api-endpoints/authentication/get-full-access-token): `POST /api/rest/2.0/auth/token/full`                
+- [Get a token for full access](restV2-playground?apiResourceId=http/api-endpoints/authentication/get-full-access-token): `POST /api/rest/2.0/auth/token/full`                
 For additional details, see [ThoughtSpot Developer Documentation](https://developers.thoughtspot.com/docs/api-authv2#_get_a_token_for_full_access).
 
-- [Get a token for object access](#/http/api-endpoints/authentication/get-object-access-token): `POST /api/rest/2.0/auth/token/object`                        
+- [Get a token for object access](/restV2-playground?apiResourceId=#/http/api-endpoints/authentication/get-object-access-token): `POST /api/rest/2.0/auth/token/object`                        
 For additional details, see [ThoughtSpot Developer Documentation](https://developers.thoughtspot.com/docs/api-authv2#_get_a_token_to_access_a_specific_object).
 
 #### Using username and secret key
