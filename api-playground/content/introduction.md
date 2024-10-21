@@ -1,5 +1,5 @@
 # Introduction
-Welcome to the Thoughtspot REST API playground! We recommend that you browse through the following details before you start constructing your API requests to interact with the ThoughtSpot system.
+Welcome to the Thoughtspot REST API v2.0 playground! We recommend that you browse through the following details before you start constructing your API requests to interact with the ThoughtSpot system.
 
 ## Playground layout
 The REST API Playground offers an interactive portal with comprehensive information about the API endpoints, request and response workflows.
@@ -18,10 +18,11 @@ On clicking the **Try it out** button, you can view the API response. If the req
 ## Errors
 The portal uses the standard HTTP response codes to indicate the success or failure of a request. The 200 response code indicates a successful request, whereas 500 and 4xx response codes indicate an error.
 
-If the API response indicates an error, you can view the error details by navigating to `root` > `error` > `message` > `debug` in the error response body. 
+If the API response indicates an error, you can view the error details by navigating to `root` > `error` > `message` > `debug` in the error response body.
 
-## Authentication
+## Getting started
+For detailed instructions on setting up and using the REST API v2.0, please refer to the [Setup and Usage](#/develop/api/rest/playgroundV2_0?apiResourceId=http%2Fgetting-started%2Fsetup-and-usage) guide. This guide will walk you through the initial setup process, configuration options, and provide examples to help you effectively utilize the API in your applications.
 
-All API requests generated from Playground are authenticated using the Bearer token included with the `Authorization` header passed along with the request. This token is generated and set each time you open the REST API Playground and navigate to an endpoint. The token is generated for the logged-in user and is valid for 24 hours.
+If you have any questions or need further assistance, feel free to reach out to our support team or connect with ThoughtSpot Developer Community on [Discord](https://discord.com/invite/JHPGwCkvjQ)
 
-If you want to use a new token, you can generate a token using the `/api/rest/2.0/auth/token/object` endpoint. To update the token, click  **Configure** in the code explorer and edit the `AccessToken` field in the pop-up that appears.
+Happy coding!
