@@ -3,8 +3,8 @@ toc:
     items:
       - page: Introduction
         file: Introduction.md
-      - generate: Setup and Usage 
-        from: getting-started
+      - page: Setup and Usage
+        file: setup-and-usage.md
   - generate: Resources
     from: endpoints
   - generate: Models
