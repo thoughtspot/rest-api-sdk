@@ -23,6 +23,6 @@ The portal uses the standard HTTP response codes to indicate the success or fail
 If the API response indicates an error, you can view the error details by navigating to `root` > `error` > `message` > `debug` in the error response body.
 
 ## Getting started
-For information about setting up and using the REST API v2.0 endpoints, please refer to the [Setup and Usage](#/http/getting-started/setup-and-usage) guide, which. This guide describes the initial setup process and authentication options and examples to help you effectively use the APIs.
+For information about setting up and using the REST API v2.0 endpoints, please refer to the **Setup and usage** guide, which describes the initial setup process and authentication options and examples to help you effectively use the APIs.
 
-If you have any questions or need further assistance, feel free to reach out to our support team or connect with ThoughtSpot Developer Community on [Discord](https://discord.com/invite/JHPGwCkvjQ).
+If you need further assistance, contact ThoughtSpot support team or connect with ThoughtSpot Developer Community on [Discord](https://discord.com/invite/JHPGwCkvjQ).
