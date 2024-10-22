@@ -1788,7 +1788,7 @@
     "/api/rest/2.0/report/answer": {
       "post": {
         "operationId": "exportAnswerReport",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nExports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.\n\nRequires `DATADOWNLOADING` (**Can download data**) privilege.\n\n#### Usage guidelines\n\nIn the request body, the GUID or name of the Answer and set `file_format`. The default file format is CSV.\n\nOptionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.\n\nThe `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).  \n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nExports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.\n\nRequires `DATADOWNLOADING` (**Can download data**) privilege.\n\n#### Usage guidelines\n\nIn the request body, either provide the GUID or name of the answer, or provide the answer session id.\nAlso provide the `file_format` for the report. The default file format is CSV. In case of session id, only PNG & CSV file format are allowed.\n\nOptionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.\nThis is only supported when answer is exported by the GUID or name. \n\nThe `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).  \n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Reports",
           "9.0.0.cl"
@@ -1801,6 +1801,10 @@
                 "properties": {
                   "metadata_identifier": {
                     "description": "Unique ID or name of the metadata object.",
+                    "type": "string"
+                  },
+                  "session_identifier": {
+                    "description": "Unique ID of the answer session.",
                     "type": "string"
                   },
                   "file_format": {
@@ -1826,10 +1830,7 @@
                     "description": "JSON object for setting values of parameters in runtime.",
                     "type": "object"
                   }
-                },
-                "required": [
-                  "metadata_identifier"
-                ]
+                }
               }
             }
           },
@@ -3462,7 +3463,7 @@
     "/api/rest/2.0/auth/token/object": {
       "post": {
         "operationId": "getObjectAccessToken",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGets an authentication token that provides access to a specific metadata object. By default, the token obtained from ThoughtSpot remains valid for 5 mins.\n\nYou can generate the token for a user by providing a `username` and `password` (for [Bearer token authentication](https://developers.thoughtspot.com/docs/?pageid=api-authv2#bearerToken)), or by using the cluster’s `secret key` (for [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable)).\n\nTo generate a `secret_key` on your cluster, the administrator must enable **Trusted authentication** in the **Develop** > **Customizations** > **Security Settings** page.\n\n**Note**: When both `password` and `secret_key` are included in the API request,  `password` takes precedence.\n\n#### Just-in-time provisioning\n\nFor just-in-time user creation and provisioning, use the following attributes.\n\n* `auto_create`\n* `username`\n\nTo assign privileges to the new user, specify the group name or GUID in `group_identifiers`.\n\nTo add the user to an Org, send the `Org ID` in the API request.\n\n**Note**: This feature is available only if Trusted authentication is enabled on your cluster.\n\nTo provision a new user and assign privileges, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGets an authentication token that provides access to a specific metadata object. By default, the token obtained from ThoughtSpot remains valid for 5 mins.\n\nYou can generate the token for a user by providing a `username` and `password`, or by using the cluster’s `secret key` (for [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable)).\n\nTo generate a `secret_key` on your cluster, the administrator must enable **Trusted authentication** in the **Develop** > **Customizations** > **Security Settings** page.\n\n**Note**: When both `password` and `secret_key` are included in the API request,  `password` takes precedence.\n\n#### Just-in-time provisioning\n\nFor just-in-time user creation and provisioning, define the following attributes:\n\n* `auto_create`\n* `username`\n* `display_name`\n* `email`\n* `group_identifiers`\n\nSet `auto_create` to `True` if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create` parameter is set to `true`, the API call will update user properties like display name, email and group assignment.\n\nFor more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).\n\nTo add a new user and assign privileges, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege is required.\n\n#### Attribute-Based Access Control (ABAC) with tokens\n\nYou can define Attribute-Based Access Control (ABAC) parameters to assign security entitlements to users during session creation. For more information, see [ABAC via token](https://developers.thoughtspot.com/docs/abac-user-parameters).\n\n#### Important point to note\nAll options in the token creation APIs changing the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, `auto_create:true` will create the user when the authentication token is created. Similarly, using `user_parameters` with `persist: true` persists security parameters on the user profile when the token is created and not during authentication.\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Authentication",
           "9.0.0.cl"
@@ -3599,7 +3600,7 @@
     "/api/rest/2.0/auth/token/full": {
       "post": {
         "operationId": "getFullAccessToken",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGets an authentication token and creates a full session in ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot remains valid for 5 mins.\n\nYou can generate the token for a user by providing a `username` and `password` (for [Bearer token authentication](https://developers.thoughtspot.com/docs/?pageid=api-authv2#bearerToken)), or by using the cluster’s `secret_key` (for [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable)).\n\nTo generate a `secret_key` on your cluster, the administrator must enable **Trusted authentication** in the **Develop** > **Customizations** > **Security Settings** page. For more information, see [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable).\n\n**Note**: When both `password` and `secret_key` are included in the API request, `password` takes precedence.\n\n#### Just-in-time provisioning\n\nFor just-in-time user creation and provisioning, use the following attributes.\n\n* `auto_create`\n* `username`\n\nTo assign privileges to the new user, specify the group name or GUID in `group_identifiers`.\n\nTo add the user to an Org, specify the Org ID in the `org_id` attribute.\n\n**Note**: This feature is available only on clusters with trusted authentication enabled.\n\nTo provision a new user and assign privileges, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGets an authentication token and creates a full session in ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot remains valid for 5 mins.\n\nYou can generate the token for a user by providing a `username` and `password`, or by using the cluster’s `secret_key` (for [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable)).\n\nTo generate a `secret_key` on your cluster, the administrator must enable **Trusted authentication** in the **Develop** > **Customizations** > **Security Settings** page. For more information, see [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable).\n\n**Note**: When both `password` and `secret_key` are included in the API request, `password` takes precedence.\n\n#### Just-in-time provisioning\n\nFor just-in-time user creation and provisioning, define the following attributes:\n\n* `auto_create`\n* `username`\n* `display_name`\n* `email`\n* `group_identifiers`\n\nSet `auto_create` to `True` if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create` parameter is set to `true`, the API call will update user properties like display name, email and group assignment.\n\nFor more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).\n\nTo add a new user and assign privileges, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege is required.\n\n#### Attribute-Based Access Control (ABAC) with tokens\n\nYou can define Attribute-Based Access Control (ABAC) parameters to assign security entitlements to users during session creation. For more information, see [ABAC via token](https://developers.thoughtspot.com/docs/abac-user-parameters).\n\n#### Important point to note\nAll options in the token creation APIs changing the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, `auto_create:true` will create the user when the authentication token is created. Similarly, using `user_parameters` with `persist: true` persists security parameters on the user profile when the token is created and not during authentication.\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Authentication",
           "9.0.0.cl"
@@ -6402,7 +6403,7 @@
                 "type": "object",
                 "properties": {
                   "metadata_tmls": {
-                    "description": "Details of TML objects.",
+                    "description": "Details of TML objects.\n\n**Note: importing TML in YAML format, when coming directly from our Playground, is currently requires manual formatting. For more details on the workaround, please click [here](https://developers.thoughtspot.com/docs/known-issues#_version_9_12_0_cl)**",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -6641,7 +6642,7 @@
                     "nullable": true
                   },
                   "edoc_format": {
-                    "description": "TML EDOC content format.",
+                    "description": "TML EDOC content format.\n\n**Note: exporting in YAML format currently requires manual formatting of the output. For more details on the workaround, please click [here](https://developers.thoughtspot.com/docs/known-issues#_version_9_12_0_cl)**",
                     "default": "JSON",
                     "type": "string",
                     "enum": [
@@ -7166,7 +7167,7 @@
                 "type": "object",
                 "properties": {
                   "metadata_type": {
-                    "description": "Type of metadata. Required if identifier in metadata_identifies is a name\".\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n4. LOGICAL_COLUMN",
+                    "description": "Type of metadata. Required if identifier in metadata_identifies is a name.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n4. LOGICAL_COLUMN",
                     "type": "string",
                     "enum": [
                       "LIVEBOARD",
