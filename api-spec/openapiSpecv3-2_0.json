@@ -12479,6 +12479,11 @@
             "description": "Unique ID or name of the metadata.",
             "nullable": true
           },
+          "custom_identifier": {
+            "type": "string",
+            "description": "CustomObjectId of the metadata.",
+            "nullable": true
+          },
           "name_pattern": {
             "type": "string",
             "description": "A pattern to match the case-insensitive name of the metadata object. User % for a wildcard match.",
