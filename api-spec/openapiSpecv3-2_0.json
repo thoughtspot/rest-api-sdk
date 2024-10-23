@@ -1788,7 +1788,7 @@
     "/api/rest/2.0/report/answer": {
       "post": {
         "operationId": "exportAnswerReport",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nExports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.\n\nRequires `DATADOWNLOADING` (**Can download data**) privilege and view access to the Answer.\n\n#### Usage guidelines\n\nIn the request body, the GUID or name of the Answer and set `file_format`. The default file format is CSV.\n\nOptionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.\n\nThe `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).  \n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nExports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.\n\nRequires `DATADOWNLOADING` (**Can download data**) privilege and view access to the Answer.\n\n#### Usage guidelines\n\n\nIn the request body, either provide the GUID or name of the answer, or provide the answer session id.\nBy default, answer is exported from latest generation number of answer session. Optionally, you can also provide the generation number of the session.\nAlso provide the `file_format` for the report. The default file format is CSV. In case of session id, only PNG & CSV file format are allowed.\n\nOptionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.\n\nThe `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).  \n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Reports",
           "9.0.0.cl"
@@ -1806,6 +1806,11 @@
                   "session_identifier": {
                     "description": "Unique ID of the answer session.",
                     "type": "string"
+                  },
+                  "generation_number": {
+                    "description": "Generation number of the answer session.",
+                    "type": "integer",
+                    "format": "int32"
                   },
                   "file_format": {
                     "description": "Export file format.",
