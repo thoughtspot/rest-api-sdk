@@ -11607,6 +11607,252 @@
           }
         }
       }
+    },
+    "/api/rest/2.0/ai/conversation/create": {
+      "post": {
+        "operationId": "createConversation",
+        "description": "\n <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nCreates a Conversation identifier to start an AI-driven conversation based on a specific data model.\n\nThis API requires the metadata_identifier parameter to define the context for the conversation.\n\nOptionally, tokens can be provided to directly initiate the conversation.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "10.4.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "metadata_identifier": {
+                    "description": "Data model id to start the conversation on.",
+                    "type": "string"
+                  },
+                  "tokens": {
+                    "description": "Tokens to start the conversation with.",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "metadata_identifier"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Conversation"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Conversation"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/ai/conversation/{conversation_identifier}/converse": {
+      "post": {
+        "operationId": "sendMessage",
+        "description": "\n <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nSends a follow-up message to an ongoing conversation within the context of a specific data model and the conversation identifier.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "10.4.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "metadata_identifier": {
+                    "description": "Data model id to converse on.",
+                    "type": "string"
+                  },
+                  "message": {
+                    "description": "User follow up question.",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "metadata_identifier",
+                  "message"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "conversation_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the conversation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ResponseMessage"
+                  }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ResponseMessage"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/ai/answer/create": {
+      "post": {
+        "operationId": "singleAnswer",
+        "description": "\n <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nProcesses a natural language query and returns an AI-generated response based on a specified data model.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "10.4.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "query": {
+                    "description": "User natural language query.",
+                    "type": "string"
+                  },
+                  "metadata_identifier": {
+                    "description": "Data model id to answer the query on.",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "query",
+                  "metadata_identifier"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseMessage"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseMessage"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -16373,6 +16619,59 @@
           },
           "author_name": {
             "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "Conversation": {
+        "type": "object",
+        "required": [
+          "conversation_identifier"
+        ],
+        "properties": {
+          "conversation_identifier": {
+            "type": "string",
+            "description": "Unique identifier of the conversation."
+          }
+        }
+      },
+      "ResponseMessage": {
+        "type": "object",
+        "required": [
+          "message_type"
+        ],
+        "properties": {
+          "session_identifier": {
+            "type": "string",
+            "description": "Unique identifier of the generated response.",
+            "nullable": true
+          },
+          "generation_number": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Generate number of the response.",
+            "nullable": true
+          },
+          "message_type": {
+            "type": "string",
+            "enum": [
+              "TSAnswer"
+            ],
+            "description": "Type of the generated response."
+          },
+          "visualization_type": {
+            "type": "string",
+            "enum": [
+              "Chart",
+              "Table",
+              "Undefined"
+            ],
+            "description": "Generated visualization type.",
+            "nullable": true
+          },
+          "tokens": {
+            "type": "string",
+            "description": "Tokens for the response.",
             "nullable": true
           }
         }
