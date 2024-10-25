@@ -1,5 +1,6 @@
 
-Welcome to the Thoughtspot REST API v2.0 Setup and usage guide! This document provides a comprehensive overview of ThoughtSpot REST APIs and describes how to access and manage ThoughtSpot resources and objects programmatically. By using the guidelines listed on this page, you can successfully set up and configure authentication for your REST APIs, and make subsequent API calls.
+Welcome to the Thoughtspot REST API v2.0 Setup and usage guide!
+This document provides an overview of ThoughtSpot REST APIs and describes how to set up authentication, access, and manage ThoughtSpot resources and objects programmatically. 
 
 ## Base URL and suffix
 **Base URL**: For REST APIs, the base URL is the foundational URL that serves as the starting point for all API requests.
