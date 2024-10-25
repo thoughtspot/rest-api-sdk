@@ -58,7 +58,7 @@ In this method, you must have the `username` and `password` of the user to authe
 
 For more information about the API parameters, request format, and response, see [REST API v2 Authentication](https://developers.thoughtspot.com/docs/api-authv2#_basic_authentication).
 
-##### Request and response examples
+#### Request and response examples
 The following example sends `username` and `secret_key` in the `POST` request body to the `/api/rest/2.0/auth/token/full` API endpoint to obtain an authentication token:
 
 ```
