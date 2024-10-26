@@ -12911,7 +12911,8 @@
               "TAG",
               "USER",
               "USER_GROUP",
-              "LOGICAL_RELATIONSHIP"
+              "LOGICAL_RELATIONSHIP",
+              "INSIGHT_SPEC"
             ],
             "description": "Type of the metadata."
           },
