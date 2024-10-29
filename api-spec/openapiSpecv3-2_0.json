@@ -2989,7 +2989,9 @@
                       "SERVICE_ACCOUNT",
                       "OAUTH",
                       "IAM",
-                      "EXTOAUTH"
+                      "EXTOAUTH",
+                      "OAUTH_WITH_SERVICE_PRINCIPAL",
+                      "PERSONAL_ACCESS_TOKEN"
                     ]
                   }
                 }
