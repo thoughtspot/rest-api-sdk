@@ -6450,6 +6450,12 @@
                     "default": false,
                     "type": "boolean",
                     "nullable": true
+                  },
+                  "enable_large_metadata_validation": {
+                    "description": "Boolean to indicate if the large metadata validation should be enabled",
+                    "default": false,
+                    "type": "boolean",
+                    "nullable": true
                   }
                 },
                 "required": [
@@ -6570,6 +6576,12 @@
                   },
                   "skip_diff_check": {
                     "description": "Boolean Flag to skip TML diff check before processing object TMLs.",
+                    "default": false,
+                    "type": "boolean",
+                    "nullable": true
+                  },
+                  "enable_large_metadata_validation": {
+                    "description": "Boolean to indicate if the large metadata validation should be enabled",
                     "default": false,
                     "type": "boolean",
                     "nullable": true
