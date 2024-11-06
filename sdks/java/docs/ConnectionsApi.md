@@ -227,7 +227,7 @@ null (empty response body)
 
 <a id="downloadConnectionMetadataChanges"></a>
 # **downloadConnectionMetadataChanges**
-> downloadConnectionMetadataChanges(connectionIdentifier)
+> File downloadConnectionMetadataChanges(connectionIdentifier)
 
 
 
@@ -255,7 +255,8 @@ public class Example {
     ConnectionsApi apiInstance = new ConnectionsApi(defaultClient);
     String connectionIdentifier = "connectionIdentifier_example"; // String | GUID of the connection
     try {
-      apiInstance.downloadConnectionMetadataChanges(connectionIdentifier);
+      File result = apiInstance.downloadConnectionMetadataChanges(connectionIdentifier);
+      System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling ConnectionsApi#downloadConnectionMetadataChanges");
       System.err.println("Status code: " + e.getCode());
@@ -275,7 +276,7 @@ public class Example {
 
 ### Return type
 
-null (empty response body)
+[**File**](File.md)
 
 ### Authorization
 

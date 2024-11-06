@@ -2423,7 +2423,7 @@ public class Example {
 
 <a id="downloadConnectionMetadataChanges"></a>
 # **downloadConnectionMetadataChanges**
-> downloadConnectionMetadataChanges(connectionIdentifier)
+> File downloadConnectionMetadataChanges(connectionIdentifier)
 
 
 
@@ -2451,7 +2451,8 @@ public class Example {
     ThoughtSpotRestApi apiInstance = new ThoughtSpotRestApi(defaultClient);
     String connectionIdentifier = "connectionIdentifier_example"; // String | GUID of the connection
     try {
-      apiInstance.downloadConnectionMetadataChanges(connectionIdentifier);
+      File result = apiInstance.downloadConnectionMetadataChanges(connectionIdentifier);
+      System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling ThoughtSpotRestApi#downloadConnectionMetadataChanges");
       System.err.println("Status code: " + e.getCode());
@@ -2471,7 +2472,7 @@ public class Example {
 
 ### Return type
 
-null (empty response body)
+[**File**](File.md)
 
 ### Authorization
 
@@ -2493,7 +2494,7 @@ null (empty response body)
 
 <a id="exportAnswerReport"></a>
 # **exportAnswerReport**
-> exportAnswerReport(exportAnswerReportRequest)
+> File exportAnswerReport(exportAnswerReportRequest)
 
 
 
@@ -2521,7 +2522,8 @@ public class Example {
     ThoughtSpotRestApi apiInstance = new ThoughtSpotRestApi(defaultClient);
     ExportAnswerReportRequest exportAnswerReportRequest = new ExportAnswerReportRequest(); // ExportAnswerReportRequest | 
     try {
-      apiInstance.exportAnswerReport(exportAnswerReportRequest);
+      File result = apiInstance.exportAnswerReport(exportAnswerReportRequest);
+      System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling ThoughtSpotRestApi#exportAnswerReport");
       System.err.println("Status code: " + e.getCode());
@@ -2541,7 +2543,7 @@ public class Example {
 
 ### Return type
 
-null (empty response body)
+[**File**](File.md)
 
 ### Authorization
 
@@ -2563,7 +2565,7 @@ null (empty response body)
 
 <a id="exportLiveboardReport"></a>
 # **exportLiveboardReport**
-> exportLiveboardReport(exportLiveboardReportRequest)
+> File exportLiveboardReport(exportLiveboardReportRequest)
 
 
 
@@ -2591,7 +2593,8 @@ public class Example {
     ThoughtSpotRestApi apiInstance = new ThoughtSpotRestApi(defaultClient);
     ExportLiveboardReportRequest exportLiveboardReportRequest = new ExportLiveboardReportRequest(); // ExportLiveboardReportRequest | 
     try {
-      apiInstance.exportLiveboardReport(exportLiveboardReportRequest);
+      File result = apiInstance.exportLiveboardReport(exportLiveboardReportRequest);
+      System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling ThoughtSpotRestApi#exportLiveboardReport");
       System.err.println("Status code: " + e.getCode());
@@ -2611,7 +2614,7 @@ public class Example {
 
 ### Return type
 
-null (empty response body)
+[**File**](File.md)
 
 ### Authorization
 

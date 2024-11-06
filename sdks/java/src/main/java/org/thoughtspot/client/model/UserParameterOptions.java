@@ -57,7 +57,11 @@ import org.thoughtspot.client.JSON;
 /**
  * Define attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters). 
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-10-08T14:03:41.316769Z[Etc/UTC]")
+<<<<<<< HEAD
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-10-08T14:11:36.944876Z[Etc/UTC]")
+=======
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-11-06T15:38:04.754051+05:30[Asia/Kolkata]")
+>>>>>>> 41fee514 (Fix for streaming apis)
 public class UserParameterOptions {
   public static final String SERIALIZED_NAME_OBJECTS = "objects";
   @SerializedName(SERIALIZED_NAME_OBJECTS)

@@ -56,6 +56,7 @@ import org.thoughtspot.client.model.FetchLiveboardSqlQueryRequest;
 import org.thoughtspot.client.model.FetchLogsRequest;
 import org.thoughtspot.client.model.FetchPermissionsOfPrincipalsRequest;
 import org.thoughtspot.client.model.FetchPermissionsOnMetadataRequest;
+import java.io.File;
 import org.thoughtspot.client.model.ForceLogoutUsersRequest;
 import org.thoughtspot.client.model.GetFullAccessTokenRequest;
 import org.thoughtspot.client.model.GetObjectAccessTokenRequest;
@@ -539,7 +540,7 @@ public class ThoughtSpotRestApiTest {
     @Test
     public void downloadConnectionMetadataChangesTest() throws ApiException {
         String connectionIdentifier = null;
-        api.downloadConnectionMetadataChanges(connectionIdentifier);
+        File response = api.downloadConnectionMetadataChanges(connectionIdentifier);
         // TODO: test validations
     }
 
@@ -551,7 +552,7 @@ public class ThoughtSpotRestApiTest {
     @Test
     public void exportAnswerReportTest() throws ApiException {
         ExportAnswerReportRequest exportAnswerReportRequest = null;
-        api.exportAnswerReport(exportAnswerReportRequest);
+        File response = api.exportAnswerReport(exportAnswerReportRequest);
         // TODO: test validations
     }
 
@@ -563,7 +564,7 @@ public class ThoughtSpotRestApiTest {
     @Test
     public void exportLiveboardReportTest() throws ApiException {
         ExportLiveboardReportRequest exportLiveboardReportRequest = null;
-        api.exportLiveboardReport(exportLiveboardReportRequest);
+        File response = api.exportLiveboardReport(exportLiveboardReportRequest);
         // TODO: test validations
     }
 

@@ -825,7 +825,10 @@ paths:
       responses:
         "200":
           content:
-            application/octet-stream: {}
+            application/octet-stream:
+              schema:
+                format: binary
+                type: string
           description: Export report file of specified metadata object is successful.
         "400":
           content:
@@ -880,7 +883,10 @@ paths:
       responses:
         "200":
           content:
-            application/octet-stream: {}
+            application/octet-stream:
+              schema:
+                format: binary
+                type: string
           description: Export report file of specified metadata object is successful.
         "400":
           content:
@@ -4674,7 +4680,10 @@ paths:
       responses:
         "200":
           content:
-            application/octet-stream: {}
+            application/octet-stream:
+              schema:
+                format: binary
+                type: string
           description: Export metadata changes.
         "400":
           content:

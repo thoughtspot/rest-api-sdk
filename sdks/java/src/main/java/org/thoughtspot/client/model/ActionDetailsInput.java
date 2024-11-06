@@ -52,7 +52,11 @@ import org.thoughtspot.client.JSON;
 /**
  * Action details includes &#x60;Type&#x60; and configuration details of Custom Actions. Either Callback or URL is required.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-10-08T14:03:41.316769Z[Etc/UTC]")
+<<<<<<< HEAD
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-10-08T14:11:36.944876Z[Etc/UTC]")
+=======
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-11-06T15:38:04.754051+05:30[Asia/Kolkata]")
+>>>>>>> 41fee514 (Fix for streaming apis)
 public class ActionDetailsInput {
   public static final String SERIALIZED_NAME_C_A_L_L_B_A_C_K = "CALLBACK";
   @SerializedName(SERIALIZED_NAME_C_A_L_L_B_A_C_K)

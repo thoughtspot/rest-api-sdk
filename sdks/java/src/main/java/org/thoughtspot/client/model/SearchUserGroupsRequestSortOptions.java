@@ -51,7 +51,7 @@ import org.thoughtspot.client.JSON;
 /**
  * Sort options to filter group details.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-10-08T14:03:41.316769Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-10-08T14:11:36.944876Z[Etc/UTC]")
 public class SearchUserGroupsRequestSortOptions {
   /**
    * Name of the field to apply the sort on.

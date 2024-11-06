@@ -51,7 +51,7 @@ import org.thoughtspot.client.JSON;
 /**
  * Options for PDF export.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-10-08T14:03:41.316769Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-10-08T14:11:36.944876Z[Etc/UTC]")
 public class UpdateScheduleRequestPdfOptions {
   public static final String SERIALIZED_NAME_COMPLETE_LIVEBOARD = "complete_liveboard";
   @SerializedName(SERIALIZED_NAME_COMPLETE_LIVEBOARD)
