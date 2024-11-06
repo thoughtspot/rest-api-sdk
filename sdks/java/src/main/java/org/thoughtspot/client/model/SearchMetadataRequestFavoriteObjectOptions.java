@@ -53,7 +53,7 @@ import org.thoughtspot.client.JSON;
 /**
  * Options to sort the API response by objects set as favorites for the logged-in user or the users specified in the API request.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-10-08T14:11:36.944876Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-11-06T15:42:43.362610+05:30[Asia/Kolkata]")
 public class SearchMetadataRequestFavoriteObjectOptions {
   public static final String SERIALIZED_NAME_INCLUDE = "include";
   @SerializedName(SERIALIZED_NAME_INCLUDE)

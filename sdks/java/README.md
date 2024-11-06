@@ -4,11 +4,7 @@ ThoughtSpot Public REST API
 
 - API version: 2.0
 
-<<<<<<< HEAD
-    - Build date: 2024-10-08T14:11:36.944876Z[Etc/UTC]
-=======
-    - Build date: 2024-11-06T15:38:04.754051+05:30[Asia/Kolkata]
->>>>>>> 41fee514 (Fix for streaming apis)
+    - Build date: 2024-11-06T15:42:43.362610+05:30[Asia/Kolkata]
 
 - Generator version: 6.6.0
 

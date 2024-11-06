@@ -51,7 +51,7 @@ import org.thoughtspot.client.JSON;
 /**
  * Default Custom action configuration. This includes if the custom action is available on all visualizations. By default, a custom action is added to all visualizations and Answers.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-10-08T14:11:36.944876Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-11-06T15:42:43.362610+05:30[Asia/Kolkata]")
 public class CreateCustomActionRequestDefaultActionConfig {
   public static final String SERIALIZED_NAME_VISIBILITY = "visibility";
   @SerializedName(SERIALIZED_NAME_VISIBILITY)
