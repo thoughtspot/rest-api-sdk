@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
 import org.thoughtspot.client.model.FavoriteMetadataInput;
-import org.thoughtspot.client.model.SortOptions;
+import org.thoughtspot.client.model.SearchUsersRequestSortOptions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 

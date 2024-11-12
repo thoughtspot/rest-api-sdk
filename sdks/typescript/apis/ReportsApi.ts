@@ -128,46 +128,47 @@ export class ReportsApiResponseProcessor {
      * @params response Response returned by the server for a request to exportAnswerReport
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async exportAnswerReport(response: ResponseContext): Promise<void > {
+     public async exportAnswerReport(response: ResponseContext): Promise<HttpFile > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            return;
+            const body: HttpFile = await response.getBodyAsFile() as any as HttpFile;
+            return body;
         }
         if (isCodeInRange("400", response.httpStatusCode)) {
             const body: ErrorResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "ErrorResponse", ""
+                "ErrorResponse", "binary"
             ) as ErrorResponse;
             throw new ApiException<ErrorResponse>(response.httpStatusCode, "Invalid request.", body, response.headers);
         }
         if (isCodeInRange("401", response.httpStatusCode)) {
             const body: ErrorResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "ErrorResponse", ""
+                "ErrorResponse", "binary"
             ) as ErrorResponse;
             throw new ApiException<ErrorResponse>(response.httpStatusCode, "Unauthorized access.", body, response.headers);
         }
         if (isCodeInRange("403", response.httpStatusCode)) {
             const body: ErrorResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "ErrorResponse", ""
+                "ErrorResponse", "binary"
             ) as ErrorResponse;
             throw new ApiException<ErrorResponse>(response.httpStatusCode, "Forbidden access.", body, response.headers);
         }
         if (isCodeInRange("500", response.httpStatusCode)) {
             const body: ErrorResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "ErrorResponse", ""
+                "ErrorResponse", "binary"
             ) as ErrorResponse;
             throw new ApiException<ErrorResponse>(response.httpStatusCode, "Unexpected error", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: void = ObjectSerializer.deserialize(
+            const body: HttpFile = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "void", ""
-            ) as void;
+                "HttpFile", "binary"
+            ) as HttpFile;
             return body;
         }
 
@@ -181,46 +182,47 @@ export class ReportsApiResponseProcessor {
      * @params response Response returned by the server for a request to exportLiveboardReport
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async exportLiveboardReport(response: ResponseContext): Promise<void > {
+     public async exportLiveboardReport(response: ResponseContext): Promise<HttpFile > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            return;
+            const body: HttpFile = await response.getBodyAsFile() as any as HttpFile;
+            return body;
         }
         if (isCodeInRange("400", response.httpStatusCode)) {
             const body: ErrorResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "ErrorResponse", ""
+                "ErrorResponse", "binary"
             ) as ErrorResponse;
             throw new ApiException<ErrorResponse>(response.httpStatusCode, "Invalid request.", body, response.headers);
         }
         if (isCodeInRange("401", response.httpStatusCode)) {
             const body: ErrorResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "ErrorResponse", ""
+                "ErrorResponse", "binary"
             ) as ErrorResponse;
             throw new ApiException<ErrorResponse>(response.httpStatusCode, "Unauthorized access.", body, response.headers);
         }
         if (isCodeInRange("403", response.httpStatusCode)) {
             const body: ErrorResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "ErrorResponse", ""
+                "ErrorResponse", "binary"
             ) as ErrorResponse;
             throw new ApiException<ErrorResponse>(response.httpStatusCode, "Forbidden access.", body, response.headers);
         }
         if (isCodeInRange("500", response.httpStatusCode)) {
             const body: ErrorResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "ErrorResponse", ""
+                "ErrorResponse", "binary"
             ) as ErrorResponse;
             throw new ApiException<ErrorResponse>(response.httpStatusCode, "Unexpected error", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: void = ObjectSerializer.deserialize(
+            const body: HttpFile = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "void", ""
-            ) as void;
+                "HttpFile", "binary"
+            ) as HttpFile;
             return body;
         }
 

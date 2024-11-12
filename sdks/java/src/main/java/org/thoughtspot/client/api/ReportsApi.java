@@ -30,6 +30,7 @@ import java.io.IOException;
 import org.thoughtspot.client.model.ErrorResponse;
 import org.thoughtspot.client.model.ExportAnswerReportRequest;
 import org.thoughtspot.client.model.ExportLiveboardReportRequest;
+import java.io.File;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -152,6 +153,7 @@ public class ReportsApi {
      * 
      *   Version: 9.0.0.cl or later   Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.  Requires &#x60;DATADOWNLOADING&#x60; (**Can download data**) privilege.  #### Usage guidelines  In the request body, the GUID or name of the Answer and set &#x60;file_format&#x60;. The default file format is CSV.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  The &#x60;record_size&#x60; attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).        
      * @param exportAnswerReportRequest  (required)
+     * @return File
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -163,15 +165,16 @@ public class ReportsApi {
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public void exportAnswerReport(ExportAnswerReportRequest exportAnswerReportRequest) throws ApiException {
-        exportAnswerReportWithHttpInfo(exportAnswerReportRequest);
+    public File exportAnswerReport(ExportAnswerReportRequest exportAnswerReportRequest) throws ApiException {
+        ApiResponse<File> localVarResp = exportAnswerReportWithHttpInfo(exportAnswerReportRequest);
+        return localVarResp.getData();
     }
 
     /**
      * 
      *   Version: 9.0.0.cl or later   Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.  Requires &#x60;DATADOWNLOADING&#x60; (**Can download data**) privilege.  #### Usage guidelines  In the request body, the GUID or name of the Answer and set &#x60;file_format&#x60;. The default file format is CSV.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  The &#x60;record_size&#x60; attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).        
      * @param exportAnswerReportRequest  (required)
-     * @return ApiResponse&lt;Void&gt;
+     * @return ApiResponse&lt;File&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -183,9 +186,10 @@ public class ReportsApi {
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Void> exportAnswerReportWithHttpInfo(ExportAnswerReportRequest exportAnswerReportRequest) throws ApiException {
+    public ApiResponse<File> exportAnswerReportWithHttpInfo(ExportAnswerReportRequest exportAnswerReportRequest) throws ApiException {
         okhttp3.Call localVarCall = exportAnswerReportValidateBeforeCall(exportAnswerReportRequest, null);
-        return localVarApiClient.execute(localVarCall);
+        Type localVarReturnType = new TypeToken<File>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
@@ -205,10 +209,11 @@ public class ReportsApi {
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call exportAnswerReportAsync(ExportAnswerReportRequest exportAnswerReportRequest, final ApiCallback<Void> _callback) throws ApiException {
+    public okhttp3.Call exportAnswerReportAsync(ExportAnswerReportRequest exportAnswerReportRequest, final ApiCallback<File> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = exportAnswerReportValidateBeforeCall(exportAnswerReportRequest, _callback);
-        localVarApiClient.executeAsync(localVarCall, _callback);
+        Type localVarReturnType = new TypeToken<File>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
@@ -288,6 +293,7 @@ public class ReportsApi {
      * 
      *   Version: 9.0.0.cl or later   Exports the data from a Liveboard and its visualization in a given file format. You can download the Liveboard data as a PDF, PNG, CSV, or XLSX file.  Requires &#x60;DATADOWNLOADING&#x60; (**Can download data**) privilege.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default &#x60;file_format&#x60; is CSV. For PDF file format, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  To include unsaved changes in the report, pass the &#x60;transient_pinboard_content&#x60; script generated from the &#x60;getExportRequestForCurrentPinboard&#x60; method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).        
      * @param exportLiveboardReportRequest  (required)
+     * @return File
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -299,15 +305,16 @@ public class ReportsApi {
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public void exportLiveboardReport(ExportLiveboardReportRequest exportLiveboardReportRequest) throws ApiException {
-        exportLiveboardReportWithHttpInfo(exportLiveboardReportRequest);
+    public File exportLiveboardReport(ExportLiveboardReportRequest exportLiveboardReportRequest) throws ApiException {
+        ApiResponse<File> localVarResp = exportLiveboardReportWithHttpInfo(exportLiveboardReportRequest);
+        return localVarResp.getData();
     }
 
     /**
      * 
      *   Version: 9.0.0.cl or later   Exports the data from a Liveboard and its visualization in a given file format. You can download the Liveboard data as a PDF, PNG, CSV, or XLSX file.  Requires &#x60;DATADOWNLOADING&#x60; (**Can download data**) privilege.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default &#x60;file_format&#x60; is CSV. For PDF file format, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  To include unsaved changes in the report, pass the &#x60;transient_pinboard_content&#x60; script generated from the &#x60;getExportRequestForCurrentPinboard&#x60; method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).        
      * @param exportLiveboardReportRequest  (required)
-     * @return ApiResponse&lt;Void&gt;
+     * @return ApiResponse&lt;File&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -319,9 +326,10 @@ public class ReportsApi {
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Void> exportLiveboardReportWithHttpInfo(ExportLiveboardReportRequest exportLiveboardReportRequest) throws ApiException {
+    public ApiResponse<File> exportLiveboardReportWithHttpInfo(ExportLiveboardReportRequest exportLiveboardReportRequest) throws ApiException {
         okhttp3.Call localVarCall = exportLiveboardReportValidateBeforeCall(exportLiveboardReportRequest, null);
-        return localVarApiClient.execute(localVarCall);
+        Type localVarReturnType = new TypeToken<File>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
@@ -341,10 +349,11 @@ public class ReportsApi {
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call exportLiveboardReportAsync(ExportLiveboardReportRequest exportLiveboardReportRequest, final ApiCallback<Void> _callback) throws ApiException {
+    public okhttp3.Call exportLiveboardReportAsync(ExportLiveboardReportRequest exportLiveboardReportRequest, final ApiCallback<File> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = exportLiveboardReportValidateBeforeCall(exportLiveboardReportRequest, _callback);
-        localVarApiClient.executeAsync(localVarCall, _callback);
+        Type localVarReturnType = new TypeToken<File>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
 }

@@ -14,13 +14,16 @@
 package org.thoughtspot.client.api;
 
 import org.thoughtspot.client.ApiException;
+import org.thoughtspot.client.model.CopyObjectRequest;
 import org.thoughtspot.client.model.DeleteMetadataRequest;
 import org.thoughtspot.client.model.ErrorResponse;
+import org.thoughtspot.client.model.ExportMetadataTMLBatchedRequest;
 import org.thoughtspot.client.model.ExportMetadataTMLRequest;
 import org.thoughtspot.client.model.FetchAnswerSqlQueryRequest;
 import org.thoughtspot.client.model.FetchLiveboardSqlQueryRequest;
 import org.thoughtspot.client.model.ImportMetadataTMLRequest;
 import org.thoughtspot.client.model.MetadataSearchResponse;
+import org.thoughtspot.client.model.ResponseCopyObject;
 import org.thoughtspot.client.model.SearchMetadataRequest;
 import org.thoughtspot.client.model.SqlQueryResponse;
 import org.junit.jupiter.api.Disabled;
@@ -38,6 +41,18 @@ import java.util.Map;
 public class MetadataApiTest {
 
     private final MetadataApi api = new MetadataApi();
+
+    /**
+     *  Makes a copy of an Answer or Liveboard saved in Atlas    Version: 10.3.0.cl or later   Creates a copy of the metadata object specified in the API request.  Requires create access to metadata objects  Upon successful execution, the API returns the id of the new object which is copied from the given object.     
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void copyObjectTest() throws ApiException {
+        CopyObjectRequest copyObjectRequest = null;
+        ResponseCopyObject response = api.copyObject(copyObjectRequest);
+        // TODO: test validations
+    }
 
     /**
      *   Version: 9.0.0.cl or later   Removes the specified metadata object from the ThoughtSpot system.  Requires edit access to the metadata object or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
@@ -60,6 +75,18 @@ public class MetadataApiTest {
     public void exportMetadataTMLTest() throws ApiException {
         ExportMetadataTMLRequest exportMetadataTMLRequest = null;
         List<Object> response = api.exportMetadataTML(exportMetadataTMLRequest);
+        // TODO: test validations
+    }
+
+    /**
+     *  Version: 10.1.0.cl or later 
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void exportMetadataTMLBatchedTest() throws ApiException {
+        ExportMetadataTMLBatchedRequest exportMetadataTMLBatchedRequest = null;
+        Object response = api.exportMetadataTMLBatched(exportMetadataTMLBatchedRequest);
         // TODO: test validations
     }
 

@@ -50,7 +50,7 @@ import org.thoughtspot.client.JSON;
 /**
  * List of runtime parameters need to set during the session.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-10-08T19:10:59.327084+05:30[Asia/Kolkata]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-11-11T22:39:20.023683-08:00[America/Los_Angeles]")
 public class RuntimeFilter {
   public static final String SERIALIZED_NAME_RUNTIME_FILTER = "runtime_filter";
   @SerializedName(SERIALIZED_NAME_RUNTIME_FILTER)

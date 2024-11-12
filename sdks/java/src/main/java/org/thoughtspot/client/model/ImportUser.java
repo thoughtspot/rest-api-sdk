@@ -54,7 +54,7 @@ import org.thoughtspot.client.JSON;
 /**
  * ImportUser
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-10-08T19:10:59.327084+05:30[Asia/Kolkata]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-11-11T22:39:20.023683-08:00[America/Los_Angeles]")
 public class ImportUser {
   public static final String SERIALIZED_NAME_USER_IDENTIFIER = "user_identifier";
   @SerializedName(SERIALIZED_NAME_USER_IDENTIFIER)

@@ -32,6 +32,7 @@ import org.thoughtspot.client.model.CreateConnectionResponse;
 import org.thoughtspot.client.model.DeleteConnectionRequest;
 import org.thoughtspot.client.model.ErrorResponse;
 import org.thoughtspot.client.model.FetchConnectionDiffStatusResponse;
+import java.io.File;
 import org.thoughtspot.client.model.SearchConnectionRequest;
 import org.thoughtspot.client.model.SearchConnectionResponse;
 import org.thoughtspot.client.model.UpdateConnectionRequest;
@@ -567,6 +568,7 @@ public class ConnectionsApi {
      * 
      *   Version: 9.9.0.cl or later   Exports the difference in connection metadata between CDW and ThoughtSpot  Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege  To download the connection metadata difference between ThoughtSpot and CDW, pass the connection GUID as &#x60;connection_identifier&#x60; in the API request.      
      * @param connectionIdentifier GUID of the connection (required)
+     * @return File
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -578,15 +580,16 @@ public class ConnectionsApi {
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public void downloadConnectionMetadataChanges(String connectionIdentifier) throws ApiException {
-        downloadConnectionMetadataChangesWithHttpInfo(connectionIdentifier);
+    public File downloadConnectionMetadataChanges(String connectionIdentifier) throws ApiException {
+        ApiResponse<File> localVarResp = downloadConnectionMetadataChangesWithHttpInfo(connectionIdentifier);
+        return localVarResp.getData();
     }
 
     /**
      * 
      *   Version: 9.9.0.cl or later   Exports the difference in connection metadata between CDW and ThoughtSpot  Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege  To download the connection metadata difference between ThoughtSpot and CDW, pass the connection GUID as &#x60;connection_identifier&#x60; in the API request.      
      * @param connectionIdentifier GUID of the connection (required)
-     * @return ApiResponse&lt;Void&gt;
+     * @return ApiResponse&lt;File&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -598,9 +601,10 @@ public class ConnectionsApi {
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Void> downloadConnectionMetadataChangesWithHttpInfo(String connectionIdentifier) throws ApiException {
+    public ApiResponse<File> downloadConnectionMetadataChangesWithHttpInfo(String connectionIdentifier) throws ApiException {
         okhttp3.Call localVarCall = downloadConnectionMetadataChangesValidateBeforeCall(connectionIdentifier, null);
-        return localVarApiClient.execute(localVarCall);
+        Type localVarReturnType = new TypeToken<File>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
@@ -620,10 +624,11 @@ public class ConnectionsApi {
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call downloadConnectionMetadataChangesAsync(String connectionIdentifier, final ApiCallback<Void> _callback) throws ApiException {
+    public okhttp3.Call downloadConnectionMetadataChangesAsync(String connectionIdentifier, final ApiCallback<File> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = downloadConnectionMetadataChangesValidateBeforeCall(connectionIdentifier, _callback);
-        localVarApiClient.executeAsync(localVarCall, _callback);
+        Type localVarReturnType = new TypeToken<File>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**

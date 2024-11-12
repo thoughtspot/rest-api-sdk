@@ -11546,7 +11546,7 @@ declare class ConnectionsApiResponseProcessor {
      * @params response Response returned by the server for a request to downloadConnectionMetadataChanges
      * @throws ApiException if the response code was not in [200, 299]
      */
-    downloadConnectionMetadataChanges(response: ResponseContext): Promise<void>;
+    downloadConnectionMetadataChanges(response: ResponseContext): Promise<HttpFile>;
     /**
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
@@ -12065,7 +12065,7 @@ declare class ReportsApiResponseProcessor {
      * @params response Response returned by the server for a request to exportAnswerReport
      * @throws ApiException if the response code was not in [200, 299]
      */
-    exportAnswerReport(response: ResponseContext): Promise<void>;
+    exportAnswerReport(response: ResponseContext): Promise<HttpFile>;
     /**
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
@@ -12073,7 +12073,7 @@ declare class ReportsApiResponseProcessor {
      * @params response Response returned by the server for a request to exportLiveboardReport
      * @throws ApiException if the response code was not in [200, 299]
      */
-    exportLiveboardReport(response: ResponseContext): Promise<void>;
+    exportLiveboardReport(response: ResponseContext): Promise<HttpFile>;
 }
 
 /**
@@ -13131,7 +13131,7 @@ declare class ThoughtSpotRestApiResponseProcessor {
      * @params response Response returned by the server for a request to downloadConnectionMetadataChanges
      * @throws ApiException if the response code was not in [200, 299]
      */
-    downloadConnectionMetadataChanges(response: ResponseContext): Promise<void>;
+    downloadConnectionMetadataChanges(response: ResponseContext): Promise<HttpFile>;
     /**
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
@@ -13139,7 +13139,7 @@ declare class ThoughtSpotRestApiResponseProcessor {
      * @params response Response returned by the server for a request to exportAnswerReport
      * @throws ApiException if the response code was not in [200, 299]
      */
-    exportAnswerReport(response: ResponseContext): Promise<void>;
+    exportAnswerReport(response: ResponseContext): Promise<HttpFile>;
     /**
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
@@ -13147,7 +13147,7 @@ declare class ThoughtSpotRestApiResponseProcessor {
      * @params response Response returned by the server for a request to exportLiveboardReport
      * @throws ApiException if the response code was not in [200, 299]
      */
-    exportLiveboardReport(response: ResponseContext): Promise<void>;
+    exportLiveboardReport(response: ResponseContext): Promise<HttpFile>;
     /**
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
@@ -13911,7 +13911,7 @@ declare class PromiseConnectionsApi {
      *   Version: 9.9.0.cl or later   Exports the difference in connection metadata between CDW and ThoughtSpot  Requires `DATAMANAGEMENT` (**Can manage data**) privilege  To download the connection metadata difference between ThoughtSpot and CDW, pass the connection GUID as `connection_identifier` in the API request.
      * @param connectionIdentifier GUID of the connection
      */
-    downloadConnectionMetadataChanges(connectionIdentifier: string, _options?: Configuration): Promise<void>;
+    downloadConnectionMetadataChanges(connectionIdentifier: string, _options?: Configuration): Promise<HttpFile>;
     /**
      *   Version: 9.9.0.cl or later   Validates the difference in connection metadata between CDW and ThoughtSpot  Requires `DATAMANAGEMENT` (**Can manage data**) privilege  Returns a boolean indicating whether there is any difference between the connection metadata at ThoughtSpot and CDW.  To get the connection metadata difference status, pass the connection GUID as `connection_identifier` in the API request.
      * @param connectionIdentifier GUID of the connection
@@ -14134,12 +14134,12 @@ declare class PromiseReportsApi {
      *   Version: 9.0.0.cl or later   Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege.  #### Usage guidelines  In the request body, the GUID or name of the Answer and set `file_format`. The default file format is CSV.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).
      * @param exportAnswerReportRequest
      */
-    exportAnswerReport(exportAnswerReportRequest: ExportAnswerReportRequest, _options?: Configuration): Promise<void>;
+    exportAnswerReport(exportAnswerReportRequest: ExportAnswerReportRequest, _options?: Configuration): Promise<HttpFile>;
     /**
      *   Version: 9.0.0.cl or later   Exports the data from a Liveboard and its visualization in a given file format. You can download the Liveboard data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default `file_format` is CSV. For PDF file format, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).
      * @param exportLiveboardReportRequest
      */
-    exportLiveboardReport(exportLiveboardReportRequest: ExportLiveboardReportRequest, _options?: Configuration): Promise<void>;
+    exportLiveboardReport(exportLiveboardReportRequest: ExportLiveboardReportRequest, _options?: Configuration): Promise<HttpFile>;
 }
 
 declare class PromiseRolesApi {
@@ -14448,17 +14448,17 @@ declare class PromiseThoughtSpotRestApi {
      *   Version: 9.9.0.cl or later   Exports the difference in connection metadata between CDW and ThoughtSpot  Requires `DATAMANAGEMENT` (**Can manage data**) privilege  To download the connection metadata difference between ThoughtSpot and CDW, pass the connection GUID as `connection_identifier` in the API request.
      * @param connectionIdentifier GUID of the connection
      */
-    downloadConnectionMetadataChanges(connectionIdentifier: string, _options?: Configuration): Promise<void>;
+    downloadConnectionMetadataChanges(connectionIdentifier: string, _options?: Configuration): Promise<HttpFile>;
     /**
      *   Version: 9.0.0.cl or later   Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege.  #### Usage guidelines  In the request body, the GUID or name of the Answer and set `file_format`. The default file format is CSV.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).
      * @param exportAnswerReportRequest
      */
-    exportAnswerReport(exportAnswerReportRequest: ExportAnswerReportRequest, _options?: Configuration): Promise<void>;
+    exportAnswerReport(exportAnswerReportRequest: ExportAnswerReportRequest, _options?: Configuration): Promise<HttpFile>;
     /**
      *   Version: 9.0.0.cl or later   Exports the data from a Liveboard and its visualization in a given file format. You can download the Liveboard data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default `file_format` is CSV. For PDF file format, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).
      * @param exportLiveboardReportRequest
      */
-    exportLiveboardReport(exportLiveboardReportRequest: ExportLiveboardReportRequest, _options?: Configuration): Promise<void>;
+    exportLiveboardReport(exportLiveboardReportRequest: ExportLiveboardReportRequest, _options?: Configuration): Promise<HttpFile>;
     /**
      *   Version: 9.0.0.cl or later   Exports the [TML](https://docs.thoughtspot.com/cloud/latest/tml) representation of metadata objects in JSON or YAML format.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtsSpot**) privilege.  #### Usage guidelines  * You can export one or several objects by passing metadata object GUIDs in the `metadata` array. * When exporting TML content for a Liveboard or Answer object, you can set `export_associated` to `true` to retrieve TML content for underlying Worksheets, Tables, or Views, including the GUID of each object within the headers. When   `export_associated` is set to `true`, consider retrieving one metadata object at a time. * Set `export_fqns` to `true` to add FQNs of the referenced objects in the TML content. For example, if you send an API request to retrieve TML for a Liveboard and its associated objects, the API returns the TML content with FQNs of the referenced Worksheet. Exporting TML with FQNs is useful if ThoughtSpot has multiple objects with the same name and you want to eliminate ambiguity when importing TML files into ThoughtSpot. It eliminates the need for adding FQNs of the referenced objects manually during the import operation.
      * @param exportMetadataTMLRequest

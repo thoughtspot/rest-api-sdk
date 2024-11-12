@@ -21,6 +21,7 @@ import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import org.openapitools.jackson.nullable.JsonNullable;
 import org.thoughtspot.client.model.AuthorType;
 import org.thoughtspot.client.model.CommitFileType;
 import org.thoughtspot.client.model.CommiterType;

@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
+import org.thoughtspot.client.model.ShareMetadataTypeInput;
 import org.thoughtspot.client.model.SharePermissionsInput;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -55,6 +56,14 @@ public class ShareMetadataRequestTest {
     @Test
     public void metadataIdentifiersTest() {
         // TODO: test metadataIdentifiers
+    }
+
+    /**
+     * Test the property 'metadata'
+     */
+    @Test
+    public void metadataTest() {
+        // TODO: test metadata
     }
 
     /**

@@ -21,6 +21,7 @@ import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import org.openapitools.jackson.nullable.JsonNullable;
 import org.thoughtspot.client.model.UserObject;
 import org.thoughtspot.client.model.UserParameters;
 import org.thoughtspot.client.model.UserRuntimeFilters;
@@ -73,14 +74,6 @@ public class UserParameterOptionsTest {
     @Test
     public void parametersTest() {
         // TODO: test parameters
-    }
-
-    /**
-     * Test the property 'compress'
-     */
-    @Test
-    public void compressTest() {
-        // TODO: test compress
     }
 
 }

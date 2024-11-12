@@ -11889,13 +11889,14 @@ var ConnectionsApiResponseProcessor = class {
     return __async(this, null, function* () {
       const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
       if (isCodeInRange("200", response.httpStatusCode)) {
-        return;
+        const body = yield response.getBodyAsFile();
+        return body;
       }
       if (isCodeInRange("400", response.httpStatusCode)) {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
           "ErrorResponse",
-          ""
+          "binary"
         );
         throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
       }
@@ -11903,7 +11904,7 @@ var ConnectionsApiResponseProcessor = class {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
           "ErrorResponse",
-          ""
+          "binary"
         );
         throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
       }
@@ -11911,7 +11912,7 @@ var ConnectionsApiResponseProcessor = class {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
           "ErrorResponse",
-          ""
+          "binary"
         );
         throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
       }
@@ -11919,15 +11920,15 @@ var ConnectionsApiResponseProcessor = class {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
           "ErrorResponse",
-          ""
+          "binary"
         );
         throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
       }
       if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
-          "void",
-          ""
+          "HttpFile",
+          "binary"
         );
         return body;
       }
@@ -15237,13 +15238,14 @@ var ReportsApiResponseProcessor = class {
     return __async(this, null, function* () {
       const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
       if (isCodeInRange("200", response.httpStatusCode)) {
-        return;
+        const body = yield response.getBodyAsFile();
+        return body;
       }
       if (isCodeInRange("400", response.httpStatusCode)) {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
           "ErrorResponse",
-          ""
+          "binary"
         );
         throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
       }
@@ -15251,7 +15253,7 @@ var ReportsApiResponseProcessor = class {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
           "ErrorResponse",
-          ""
+          "binary"
         );
         throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
       }
@@ -15259,7 +15261,7 @@ var ReportsApiResponseProcessor = class {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
           "ErrorResponse",
-          ""
+          "binary"
         );
         throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
       }
@@ -15267,15 +15269,15 @@ var ReportsApiResponseProcessor = class {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
           "ErrorResponse",
-          ""
+          "binary"
         );
         throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
       }
       if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
-          "void",
-          ""
+          "HttpFile",
+          "binary"
         );
         return body;
       }
@@ -15293,13 +15295,14 @@ var ReportsApiResponseProcessor = class {
     return __async(this, null, function* () {
       const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
       if (isCodeInRange("200", response.httpStatusCode)) {
-        return;
+        const body = yield response.getBodyAsFile();
+        return body;
       }
       if (isCodeInRange("400", response.httpStatusCode)) {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
           "ErrorResponse",
-          ""
+          "binary"
         );
         throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
       }
@@ -15307,7 +15310,7 @@ var ReportsApiResponseProcessor = class {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
           "ErrorResponse",
-          ""
+          "binary"
         );
         throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
       }
@@ -15315,7 +15318,7 @@ var ReportsApiResponseProcessor = class {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
           "ErrorResponse",
-          ""
+          "binary"
         );
         throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
       }
@@ -15323,15 +15326,15 @@ var ReportsApiResponseProcessor = class {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
           "ErrorResponse",
-          ""
+          "binary"
         );
         throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
       }
       if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
-          "void",
-          ""
+          "HttpFile",
+          "binary"
         );
         return body;
       }
@@ -22437,13 +22440,14 @@ var ThoughtSpotRestApiResponseProcessor = class {
     return __async(this, null, function* () {
       const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
       if (isCodeInRange("200", response.httpStatusCode)) {
-        return;
+        const body = yield response.getBodyAsFile();
+        return body;
       }
       if (isCodeInRange("400", response.httpStatusCode)) {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
           "ErrorResponse",
-          ""
+          "binary"
         );
         throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
       }
@@ -22451,7 +22455,7 @@ var ThoughtSpotRestApiResponseProcessor = class {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
           "ErrorResponse",
-          ""
+          "binary"
         );
         throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
       }
@@ -22459,7 +22463,7 @@ var ThoughtSpotRestApiResponseProcessor = class {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
           "ErrorResponse",
-          ""
+          "binary"
         );
         throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
       }
@@ -22467,15 +22471,15 @@ var ThoughtSpotRestApiResponseProcessor = class {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
           "ErrorResponse",
-          ""
+          "binary"
         );
         throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
       }
       if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
-          "void",
-          ""
+          "HttpFile",
+          "binary"
         );
         return body;
       }
@@ -22493,13 +22497,14 @@ var ThoughtSpotRestApiResponseProcessor = class {
     return __async(this, null, function* () {
       const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
       if (isCodeInRange("200", response.httpStatusCode)) {
-        return;
+        const body = yield response.getBodyAsFile();
+        return body;
       }
       if (isCodeInRange("400", response.httpStatusCode)) {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
           "ErrorResponse",
-          ""
+          "binary"
         );
         throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
       }
@@ -22507,7 +22512,7 @@ var ThoughtSpotRestApiResponseProcessor = class {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
           "ErrorResponse",
-          ""
+          "binary"
         );
         throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
       }
@@ -22515,7 +22520,7 @@ var ThoughtSpotRestApiResponseProcessor = class {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
           "ErrorResponse",
-          ""
+          "binary"
         );
         throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
       }
@@ -22523,15 +22528,15 @@ var ThoughtSpotRestApiResponseProcessor = class {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
           "ErrorResponse",
-          ""
+          "binary"
         );
         throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
       }
       if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
-          "void",
-          ""
+          "HttpFile",
+          "binary"
         );
         return body;
       }
@@ -22549,13 +22554,14 @@ var ThoughtSpotRestApiResponseProcessor = class {
     return __async(this, null, function* () {
       const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
       if (isCodeInRange("200", response.httpStatusCode)) {
-        return;
+        const body = yield response.getBodyAsFile();
+        return body;
       }
       if (isCodeInRange("400", response.httpStatusCode)) {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
           "ErrorResponse",
-          ""
+          "binary"
         );
         throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
       }
@@ -22563,7 +22569,7 @@ var ThoughtSpotRestApiResponseProcessor = class {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
           "ErrorResponse",
-          ""
+          "binary"
         );
         throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
       }
@@ -22571,7 +22577,7 @@ var ThoughtSpotRestApiResponseProcessor = class {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
           "ErrorResponse",
-          ""
+          "binary"
         );
         throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
       }
@@ -22579,15 +22585,15 @@ var ThoughtSpotRestApiResponseProcessor = class {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
           "ErrorResponse",
-          ""
+          "binary"
         );
         throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
       }
       if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
-          "void",
-          ""
+          "HttpFile",
+          "binary"
         );
         return body;
       }
