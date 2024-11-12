@@ -14,7 +14,7 @@ import { HttpFile } from '../http/http';
 
 export class ImportMetadataTMLRequest {
     /**
-    * Details of TML objects. **Note: importing TML in YAML format, when coming directly from our Playground, is currently requires manual formatting. For more details on the workaround, please click [here](https://developers.thoughtspot.com/docs/known-issues#_version_9_12_0_cl)**
+    * Details of TML objects.
     */
     'metadata_tmls': Array<string>;
     /**

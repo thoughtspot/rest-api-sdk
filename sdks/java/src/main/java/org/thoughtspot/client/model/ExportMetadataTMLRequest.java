@@ -54,7 +54,7 @@ import org.thoughtspot.client.JSON;
 /**
  * ExportMetadataTMLRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-11-11T22:39:20.023683-08:00[America/Los_Angeles]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-11-12T09:37:12.899082-08:00[America/Los_Angeles]")
 public class ExportMetadataTMLRequest {
   public static final String SERIALIZED_NAME_METADATA = "metadata";
   @SerializedName(SERIALIZED_NAME_METADATA)
@@ -69,7 +69,7 @@ public class ExportMetadataTMLRequest {
   private Boolean exportFqn = false;
 
   /**
-   * TML EDOC content format. **Note: exporting in YAML format currently requires manual formatting of the output. For more details on the workaround, please click [here](https://developers.thoughtspot.com/docs/known-issues#_version_9_12_0_cl)**
+   * TML EDOC content format.
    */
   @JsonAdapter(EdocFormatEnum.Adapter.class)
   public enum EdocFormatEnum {
@@ -265,7 +265,7 @@ public class ExportMetadataTMLRequest {
   }
 
    /**
-   * TML EDOC content format. **Note: exporting in YAML format currently requires manual formatting of the output. For more details on the workaround, please click [here](https://developers.thoughtspot.com/docs/known-issues#_version_9_12_0_cl)**
+   * TML EDOC content format.
    * @return edocFormat
   **/
   @javax.annotation.Nullable

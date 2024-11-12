@@ -51,7 +51,7 @@ import org.thoughtspot.client.JSON;
 /**
  * PdfOptionsInput
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-11-11T22:39:20.023683-08:00[America/Los_Angeles]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-11-12T09:37:12.899082-08:00[America/Los_Angeles]")
 public class PdfOptionsInput {
   public static final String SERIALIZED_NAME_INCLUDE_COVER_PAGE = "include_cover_page";
   @SerializedName(SERIALIZED_NAME_INCLUDE_COVER_PAGE)

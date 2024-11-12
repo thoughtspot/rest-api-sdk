@@ -19,6 +19,7 @@ import org.thoughtspot.client.model.CreateConnectionResponse;
 import org.thoughtspot.client.model.DeleteConnectionRequest;
 import org.thoughtspot.client.model.ErrorResponse;
 import org.thoughtspot.client.model.FetchConnectionDiffStatusResponse;
+import java.io.File;
 import org.thoughtspot.client.model.SearchConnectionRequest;
 import org.thoughtspot.client.model.SearchConnectionResponse;
 import org.thoughtspot.client.model.UpdateConnectionRequest;
@@ -83,7 +84,7 @@ public class ConnectionsApiTest {
     @Test
     public void downloadConnectionMetadataChangesTest() throws ApiException {
         String connectionIdentifier = null;
-        api.downloadConnectionMetadataChanges(connectionIdentifier);
+        File response = api.downloadConnectionMetadataChanges(connectionIdentifier);
         // TODO: test validations
     }
 
