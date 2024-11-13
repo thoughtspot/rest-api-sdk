@@ -1,6 +1,6 @@
 {
   "openapi": "3.0.0",
-  "info": { 
+  "info": {
     "title": "ThoughtSpot Public REST API",
     "version": "2.0"
   },
