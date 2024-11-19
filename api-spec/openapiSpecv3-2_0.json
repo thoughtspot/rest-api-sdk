@@ -4031,6 +4031,12 @@
                     "items": {
                       "$ref": "#/components/schemas/Group_Object"
                     }
+                  },
+                  "auto_create": {
+                    "description": "   Creates a new user if the specified username does not exist in ThoughtSpot. To provision a user just-in-time (JIT), set this attribute to true.\n   \n\nNote: For JIT provisioning of a user, the secret_key is required.  <br/>  <span class=\"since-beta-tag\">Version: 10.5.0.cl or later</span>",
+                    "default": true,
+                    "type": "boolean",
+                    "nullable": true
                   }
                 },
                 "required": [
