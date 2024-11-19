@@ -15293,16 +15293,14 @@
       },
       "ConvertWorksheetInput": {
         "type": "object",
-        "required": [
-          "identifiers"
-        ],
         "properties": {
           "identifiers": {
             "type": "array",
             "items": {
               "type": "string"
             },
-            "description": "List of Worksheet Identifiers."
+            "description": "List of Worksheet Identifiers.",
+            "nullable": true
           },
           "exclude_identifiers": {
             "type": "array",
@@ -15314,7 +15312,7 @@
           },
           "convert_all": {
             "type": "boolean",
-            "default": true,
+            "default": false,
             "description": "Indicates whether all the worksheet needs to be converted to models.",
             "nullable": true
           },
