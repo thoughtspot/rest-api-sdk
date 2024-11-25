@@ -11625,7 +11625,7 @@
     "/api/rest/2.0/ai/conversation/create": {
       "post": {
         "operationId": "createConversation",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nCreates a Conversation identifier to start an AI-driven conversation based on a specific data model.\n\nThis API requires the metadata_identifier parameter to define the context for the conversation.\n\nOptionally, tokens can be provided to directly initiate the conversation.\n\n> ##### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n#### Endpoint URL\n",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nCreates a Conversation identifier to start an AI-driven conversation based on a specific data model.\n\nThis API requires the metadata_identifier parameter to define the context for the conversation.\n\nOptionally, tokens can be provided to directly initiate the conversation.\n\n> ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "AI",
           "10.4.0.cl"
@@ -11701,7 +11701,7 @@
     "/api/rest/2.0/ai/conversation/{conversation_identifier}/converse": {
       "post": {
         "operationId": "sendMessage",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nSends a follow-up message to an ongoing conversation within the context of a specific data model and the conversation identifier.\n\n> ##### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nSends a follow-up message to an ongoing conversation within the context of a specific data model and the conversation identifier.\n\n> ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "AI",
           "10.4.0.cl"
@@ -11794,7 +11794,7 @@
     "/api/rest/2.0/ai/answer/create": {
       "post": {
         "operationId": "singleAnswer",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nProcesses a natural language query and returns an AI-generated response based on a specified data model.\n\n> ##### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nProcesses a natural language query and returns an AI-generated response based on a specified data model.\n\n> ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "AI",
           "10.4.0.cl"
