@@ -186,6 +186,10 @@ export class User {
     * User Parameters which are specified for the user via JWToken
     */
     'user_parameters'?: any | null;
+    /**
+    * Access Control Properties which are specified for the user via JWToken
+    */
+    'access_control_properties'?: any | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -453,6 +457,12 @@ export class User {
             "baseName": "user_parameters",
             "type": "any",
             "format": ""
+        },
+        {
+            "name": "access_control_properties",
+            "baseName": "access_control_properties",
+            "type": "any",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
@@ -466,6 +476,6 @@ export class User {
 
 export type UserVisibilityEnum = "SHARABLE" | "NON_SHARABLE" ;
 export type UserAccountTypeEnum = "LOCAL_USER" | "LDAP_USER" | "SAML_USER" | "OIDC_USER" | "REMOTE_USER" ;
-export type UserAccountStatusEnum = "ACTIVE" | "INACTIVE" | "EXPIRED" | "LOCKED" | "PENDING" ;
+export type UserAccountStatusEnum = "ACTIVE" | "INACTIVE" | "EXPIRED" | "LOCKED" | "PENDING" | "SUSPENDED" ;
 export type UserParentTypeEnum = "USER" | "GROUP" ;
 

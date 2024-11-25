@@ -12,26 +12,31 @@
 
 import { HttpFile } from '../http/http';
 
-/**
-* MetadataType InputType associated in the Product
-*/
-export class MetadataTypeInput {
+export class CopyObjectRequest {
     /**
-    * Type of metadata (Optional when given identifier is ID).
+    * Description of the new object
     */
-    'type'?: MetadataTypeInputTypeEnum;
+    'description'?: string;
     /**
-    * Unique ID or name of the metadata object.
+    * GUID of metadata object to be copied (answer id or liveboard id)
     */
     'identifier': string;
+    /**
+    * Type of metadata object
+    */
+    'type'?: CopyObjectRequestTypeEnum;
+    /**
+    * Title of the new object
+    */
+    'title'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "type",
-            "baseName": "type",
-            "type": "MetadataTypeInputTypeEnum",
+            "name": "description",
+            "baseName": "description",
+            "type": "string",
             "format": ""
         },
         {
@@ -39,10 +44,22 @@ export class MetadataTypeInput {
             "baseName": "identifier",
             "type": "string",
             "format": ""
+        },
+        {
+            "name": "type",
+            "baseName": "type",
+            "type": "CopyObjectRequestTypeEnum",
+            "format": ""
+        },
+        {
+            "name": "title",
+            "baseName": "title",
+            "type": "string",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return MetadataTypeInput.attributeTypeMap;
+        return CopyObjectRequest.attributeTypeMap;
     }
 
     public constructor() {
@@ -50,5 +67,5 @@ export class MetadataTypeInput {
 }
 
 
-export type MetadataTypeInputTypeEnum = "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE" | "LOGICAL_COLUMN" | "CONNECTION" | "TAG" | "USER" | "USER_GROUP" | "LOGICAL_RELATIONSHIP" ;
+export type CopyObjectRequestTypeEnum = "LIVEBOARD" | "ANSWER" ;
 

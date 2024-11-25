@@ -10,35 +10,26 @@
  * Do not edit the class manually.
  */
 
-import { CALLBACKInput } from '../models/CALLBACKInput';
-import { URLInput } from '../models/URLInput';
 import { HttpFile } from '../http/http';
 
 /**
-* Filter the action objects based on type
+* Groups objects.
 */
-export class TypeInput {
-    'CALLBACK'?: CALLBACKInput;
-    'URL'?: URLInput;
+export class GroupObject {
+    'identifier'?: string | null;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "CALLBACK",
-            "baseName": "CALLBACK",
-            "type": "CALLBACKInput",
-            "format": ""
-        },
-        {
-            "name": "URL",
-            "baseName": "URL",
-            "type": "URLInput",
+            "name": "identifier",
+            "baseName": "identifier",
+            "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return TypeInput.attributeTypeMap;
+        return GroupObject.attributeTypeMap;
     }
 
     public constructor() {

@@ -12,24 +12,34 @@
 
 import { HttpFile } from '../http/http';
 
-export class VisualizationIdentifiersInput {
+export class SendMessageRequest {
     /**
-    * Unique ID or name of the visualization.
+    * Data model id to converse on.
     */
-    'identifier'?: string;
+    'metadata_identifier': string;
+    /**
+    * User follow up question.
+    */
+    'message': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "identifier",
-            "baseName": "identifier",
+            "name": "metadata_identifier",
+            "baseName": "metadata_identifier",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "message",
+            "baseName": "message",
             "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return VisualizationIdentifiersInput.attributeTypeMap;
+        return SendMessageRequest.attributeTypeMap;
     }
 
     public constructor() {

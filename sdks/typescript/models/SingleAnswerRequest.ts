@@ -12,24 +12,34 @@
 
 import { HttpFile } from '../http/http';
 
-export class GenerateSyncTmlRequest {
+export class SingleAnswerRequest {
     /**
-    * Unique ID of the DBT connection.
+    * User natural language query.
     */
-    'dbt_connection_identifier': string;
+    'query': string;
+    /**
+    * Data model id to answer the query on.
+    */
+    'metadata_identifier': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "dbt_connection_identifier",
-            "baseName": "dbt_connection_identifier",
+            "name": "query",
+            "baseName": "query",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "metadata_identifier",
+            "baseName": "metadata_identifier",
             "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return GenerateSyncTmlRequest.attributeTypeMap;
+        return SingleAnswerRequest.attributeTypeMap;
     }
 
     public constructor() {

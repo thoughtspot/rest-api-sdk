@@ -36,7 +36,7 @@ export class FetchPermissionsOnMetadataRequest {
     */
     'record_size'?: number;
     /**
-    * Permission type if it is effective then fetch the effective permission of principals else fetch the defined permission of principals.
+    * <div>Version: 10.3.0.cl or later </div>  Specifies the type of permission. Valid values are:     EFFECTIVE - If the user permission to the metadata objects is granted by the privileges assigned to the groups to which they belong.     DEFINED - If a user or user group received access to metadata objects via object sharing by another user.
     */
     'permission_type'?: string;
 

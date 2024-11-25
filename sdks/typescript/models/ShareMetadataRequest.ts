@@ -16,7 +16,7 @@ import { HttpFile } from '../http/http';
 
 export class ShareMetadataRequest {
     /**
-    * Type of metadata. Required if identifier in metadata_identifies is a name\". 1. Liveboard 2. Answers 3. LOGICAL_TABLE for any data object such as table, worksheet or view.
+    * Type of metadata. Required if identifier in metadata_identifies is a name. 1. Liveboard 2. Answers 3. LOGICAL_TABLE for any data object such as table, worksheet or view.
     */
     'metadata_type'?: ShareMetadataRequestMetadataTypeEnum;
     /**
@@ -38,7 +38,7 @@ export class ShareMetadataRequest {
     /**
     * Email IDs to which notifications will be sent.
     */
-    'emails'?: Array<string>;
+    'emails': Array<string>;
     /**
     * Message to be included in notification.
     */
