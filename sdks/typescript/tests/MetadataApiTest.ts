@@ -22,6 +22,38 @@ const instance = new PromiseMetadataApi(config);
 describe('MetadataApi', function() {
 
 
+      describe('copyObject', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "copyObject"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.copyObject(
+                    // copyObjectRequest CopyObjectRequest
+                     test.Body   
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.copyObject(
+                    // copyObjectRequest CopyObjectRequest
+                     test.Body   
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
       describe('deleteMetadata', function() {
 
         const testReqBodies = requestBodies.filter(
