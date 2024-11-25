@@ -10,29 +10,29 @@
  * Do not edit the class manually.
  */
 
+import { RuntimeFilters } from '../models/RuntimeFilters';
+import { RuntimeParameters } from '../models/RuntimeParameters';
+import { RuntimeSorts } from '../models/RuntimeSorts';
 import { UserObject } from '../models/UserObject';
-import { UserParameters } from '../models/UserParameters';
-import { UserRuntimeFilters } from '../models/UserRuntimeFilters';
-import { UserRuntimeSorts } from '../models/UserRuntimeSorts';
 import { HttpFile } from '../http/http';
 
 /**
-* <div>Version: 9.10.5.cl or later </div>  Define attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters).
+* <div>Deprecated: 10.4.0.cl and later </div>  Define attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters).
 */
 export class GetObjectAccessTokenRequestUserParameters {
     'objects'?: Array<UserObject> | null;
     /**
     * Objects to apply the User_Runtime_Filters.  Examples to set the `runtime_filters` : ```json { \"column_name\": \"Color\", \"operator\": \"EQ\", \"values\": [\"red\"], \"persist\": false } ```
     */
-    'runtime_filters'?: Array<UserRuntimeFilters> | null;
+    'runtime_filters'?: Array<RuntimeFilters> | null;
     /**
     * Objects to apply the User_Runtime_Sorts.  Examples to set the `runtime_sorts` : ```json { \"column_name\": \"Color\", \"order\": \"ASC\", \"persist\": false } ```
     */
-    'runtime_sorts'?: Array<UserRuntimeSorts> | null;
+    'runtime_sorts'?: Array<RuntimeSorts> | null;
     /**
     * Objects to apply the Runtime_Parameters.  Examples to set the `parameters` : ```json { \"name\": \"Color\", \"values\": [\"Blue\"], \"persist\": false } ```
     */
-    'parameters'?: Array<UserParameters> | null;
+    'parameters'?: Array<RuntimeParameters> | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -46,19 +46,19 @@ export class GetObjectAccessTokenRequestUserParameters {
         {
             "name": "runtime_filters",
             "baseName": "runtime_filters",
-            "type": "Array<UserRuntimeFilters>",
+            "type": "Array<RuntimeFilters>",
             "format": ""
         },
         {
             "name": "runtime_sorts",
             "baseName": "runtime_sorts",
-            "type": "Array<UserRuntimeSorts>",
+            "type": "Array<RuntimeSorts>",
             "format": ""
         },
         {
             "name": "parameters",
             "baseName": "parameters",
-            "type": "Array<UserParameters>",
+            "type": "Array<RuntimeParameters>",
             "format": ""
         }    ];
 

@@ -14,7 +14,7 @@ import { HttpFile } from '../http/http';
 
 export class ImportMetadataTMLRequest {
     /**
-    * Details of TML objects.
+    * Details of TML objects.  **Note: importing TML in YAML format, when coming directly from our Playground, is currently requires manual formatting. For more details on the workaround, please click [here](https://developers.thoughtspot.com/docs/known-issues#_version_9_12_0_cl)**
     */
     'metadata_tmls': Array<string>;
     /**
@@ -29,6 +29,10 @@ export class ImportMetadataTMLRequest {
     * If import is happening from all orgs context.
     */
     'all_orgs_context'?: boolean | null;
+    /**
+    * Boolean to indicate if the CDW validation for table imports should be skipped.
+    */
+    'skip_cdw_validation_for_tables'?: boolean | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -54,6 +58,12 @@ export class ImportMetadataTMLRequest {
         {
             "name": "all_orgs_context",
             "baseName": "all_orgs_context",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "skip_cdw_validation_for_tables",
+            "baseName": "skip_cdw_validation_for_tables",
             "type": "boolean",
             "format": ""
         }    ];
