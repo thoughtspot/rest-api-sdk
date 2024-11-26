@@ -11653,7 +11653,7 @@
     "/api/rest/2.0/ai/conversation/create": {
       "post": {
         "operationId": "createConversation",
-        "description": "\n <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nCreates a Conversation identifier to start an AI-driven conversation based on a specific data model.\n\nThis API requires the metadata_identifier parameter to define the context for the conversation.\n\nOptionally, tokens can be provided to directly initiate the conversation.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nCreates a Conversation object to start an AI-driven conversation based on a specific data model.\n\nRequires at least view access to the metadata object specified in the request.\n\n#### Usage guidelines\n\nThis API requires the `metadata_identifier` parameter to define the context for the conversation.\n\nYou can also specify the tokens to initiate the conversation as shown in this example:\n\n`\"tokens\": \"[tea],[sales],[type]\"`\n\nIf the API request is successful, ThoughtSpot returns the ID of the conversation.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "AI",
           "10.4.0.cl"
@@ -11665,11 +11665,11 @@
                 "type": "object",
                 "properties": {
                   "metadata_identifier": {
-                    "description": "Data model id to start the conversation on.",
+                    "description": "ID of the metadata object, such as a Worksheet or Model, to use as a data source for the conversation.",
                     "type": "string"
                   },
                   "tokens": {
-                    "description": "Tokens to start the conversation with.",
+                    "description": "Token string to set the context for the conversation. For example,`[sales],[item type],[state]`.",
                     "type": "string"
                   }
                 },
@@ -11729,7 +11729,7 @@
     "/api/rest/2.0/ai/conversation/{conversation_identifier}/converse": {
       "post": {
         "operationId": "sendMessage",
-        "description": "\n <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nSends a follow-up message to an ongoing conversation within the context of a specific data model and the conversation identifier.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nAllows sending a follow-up message to an ongoing conversation within the context of the metadata model.\n\nRequires at least view access to the metadata object specified in the request.\n\n#### Usage guidelines\n\nThe API requires you to specify the `conversation_identifier` in the request path, and a `metadata_identifier` and `message` string in the request body.\n\nIf the API request is successful, ThoughtSpot returns the session ID, tokens used in the conversation, and visualization type.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "AI",
           "10.4.0.cl"
@@ -11741,11 +11741,11 @@
                 "type": "object",
                 "properties": {
                   "metadata_identifier": {
-                    "description": "Data model id to converse on.",
+                    "description": "ID of the metadata object, such as a Worksheet or Model, to use as a data source for the conversation.",
                     "type": "string"
                   },
                   "message": {
-                    "description": "User follow up question.",
+                    "description": "A message string with the follow-up question to continue the conversation.",
                     "type": "string"
                   }
                 },
@@ -11822,7 +11822,7 @@
     "/api/rest/2.0/ai/answer/create": {
       "post": {
         "operationId": "singleAnswer",
-        "description": "\n <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nProcesses a natural language query and returns an AI-generated response based on a specified data model.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nProcesses a natural language query and returns an AI-generated response based on a specified data model.\n\nRequires at least view access to the metadata object specified in the request.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "AI",
           "10.4.0.cl"
@@ -11834,11 +11834,11 @@
                 "type": "object",
                 "properties": {
                   "query": {
-                    "description": "User natural language query.",
+                    "description": "A natural language query string to generate the Answer.",
                     "type": "string"
                   },
                   "metadata_identifier": {
-                    "description": "Data model id to answer the query on.",
+                    "description": "ID of the metadata object, such as a Worksheet or Model, to use as a data source for the query.",
                     "type": "string"
                   }
                 },
@@ -17042,6 +17042,11 @@
           "tokens": {
             "type": "string",
             "description": "Tokens for the response.",
+            "nullable": true
+          },
+          "display_tokens": {
+            "type": "string",
+            "description": "User friendly tokens for the response.",
             "nullable": true
           }
         }
