@@ -15075,7 +15075,17 @@
           "values": {
             "type": "array",
             "items": {
-              "type": "string"
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "number"
+                }
+              ]
             },
             "description": "The values to filter on. To get all records, use TS_WILDCARD_ALL as values."
           }
@@ -15096,7 +15106,17 @@
           "values": {
             "type": "array",
             "items": {
-              "type": "string"
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "number"
+                }
+              ]
             },
             "description": "The values to filter on. Only single value is supported currently."
           }
