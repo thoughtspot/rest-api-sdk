@@ -1803,15 +1803,6 @@
                     "description": "Unique ID or name of the metadata object.",
                     "type": "string"
                   },
-                  "session_identifier": {
-                    "description": "Unique ID of the answer session.",
-                    "type": "string"
-                  },
-                  "generation_number": {
-                    "description": "Generation number of the answer session.",
-                    "type": "integer",
-                    "format": "int32"
-                  },
                   "file_format": {
                     "description": "Export file format.",
                     "default": "CSV",
@@ -1835,7 +1826,10 @@
                     "description": "JSON object for setting values of parameters in runtime.",
                     "type": "object"
                   }
-                }
+                },
+                "required": [
+                  "metadata_identifier"
+                ]
               }
             }
           },
@@ -4116,7 +4110,7 @@
                     "type": "string"
                   },
                   "password": {
-                    "description": "Password for the user account.",
+                    "description": "Password for the user account. For IAMv2 users, you must set this password if you do not want to trigger an activation email.",
                     "type": "string"
                   },
                   "email": {
@@ -4136,7 +4130,7 @@
                     ]
                   },
                   "account_status": {
-                    "description": "Current status of the user account.",
+                    "description": "Current status of the user account. The `SUSPENDED` user state indicates a transitional state applicable to IAMv2 users only.",
                     "default": "ACTIVE",
                     "type": "string",
                     "enum": [
@@ -4240,7 +4234,7 @@
                     "nullable": true
                   },
                   "trigger_activation_email": {
-                    "description": "Flag to indicate whether activation email should be sent to user.",
+                    "description": "Flag to indicate whether activation email should be sent to the user. Default value for IAMv2 users is set to true. Users must either set this to false, or enter a valid \npassword if they do not want to trigger an activation email.",
                     "type": "boolean",
                     "nullable": true
                   }
@@ -4345,7 +4339,7 @@
                     "type": "string"
                   },
                   "account_status": {
-                    "description": "Current status of the user account.",
+                    "description": "Current status of the user account. The `SUSPENDED` user state indicates a transitional state applicable to IAMv2 users only.",
                     "type": "string",
                     "enum": [
                       "ACTIVE",
@@ -6405,7 +6399,7 @@
                 "type": "object",
                 "properties": {
                   "metadata_tmls": {
-                    "description": "Details of TML objects.\n\n**Note: importing TML in YAML format, when coming directly from our Playground, is currently requires manual formatting. For more details on the workaround, please click [here](https://developers.thoughtspot.com/docs/known-issues#_version_9_12_0_cl)**",
+                    "description": "Details of TML objects.",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -6644,7 +6638,7 @@
                     "nullable": true
                   },
                   "edoc_format": {
-                    "description": "TML EDOC content format.\n\n**Note: exporting in YAML format currently requires manual formatting of the output. For more details on the workaround, please click [here](https://developers.thoughtspot.com/docs/known-issues#_version_9_12_0_cl)**",
+                    "description": "TML EDOC content format.",
                     "default": "JSON",
                     "type": "string",
                     "enum": [
@@ -7161,7 +7155,7 @@
                 "type": "object",
                 "properties": {
                   "metadata_type": {
-                    "description": "Type of metadata. Required if identifier in metadata_identifies is a name.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.",
+                    "description": "Type of metadata. Required if identifier in metadata_identifies is a name\".\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.",
                     "type": "string",
                     "enum": [
                       "LIVEBOARD",
@@ -11570,252 +11564,6 @@
           }
         }
       }
-    },
-    "/api/rest/2.0/ai/conversation/create": {
-      "post": {
-        "operationId": "createConversation",
-        "description": "\n <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nCreates a Conversation identifier to start an AI-driven conversation based on a specific data model.\n\nThis API requires the metadata_identifier parameter to define the context for the conversation.\n\nOptionally, tokens can be provided to directly initiate the conversation.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "AI",
-          "10.4.0.cl"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "metadata_identifier": {
-                    "description": "Data model id to start the conversation on.",
-                    "type": "string"
-                  },
-                  "tokens": {
-                    "description": "Tokens to start the conversation with.",
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "metadata_identifier"
-                ]
-              }
-            }
-          },
-          "required": true
-        },
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Conversation"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Conversation"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/rest/2.0/ai/conversation/{conversation_identifier}/converse": {
-      "post": {
-        "operationId": "sendMessage",
-        "description": "\n <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nSends a follow-up message to an ongoing conversation within the context of a specific data model and the conversation identifier.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "AI",
-          "10.4.0.cl"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "metadata_identifier": {
-                    "description": "Data model id to converse on.",
-                    "type": "string"
-                  },
-                  "message": {
-                    "description": "User follow up question.",
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "metadata_identifier",
-                  "message"
-                ]
-              }
-            }
-          },
-          "required": true
-        },
-        "parameters": [
-          {
-            "in": "path",
-            "name": "conversation_identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Unique identifier of the conversation."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/ResponseMessage"
-                  }
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/ResponseMessage"
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/rest/2.0/ai/answer/create": {
-      "post": {
-        "operationId": "singleAnswer",
-        "description": "\n <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nProcesses a natural language query and returns an AI-generated response based on a specified data model.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "AI",
-          "10.4.0.cl"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "query": {
-                    "description": "User natural language query.",
-                    "type": "string"
-                  },
-                  "metadata_identifier": {
-                    "description": "Data model id to answer the query on.",
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "query",
-                  "metadata_identifier"
-                ]
-              }
-            }
-          },
-          "required": true
-        },
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseMessage"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseMessage"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
     }
   },
   "components": {
@@ -12869,8 +12617,7 @@
               "TAG",
               "USER",
               "USER_GROUP",
-              "LOGICAL_RELATIONSHIP",
-              "INSIGHT_SPEC"
+              "LOGICAL_RELATIONSHIP"
             ],
             "description": "Type of the metadata."
           },
@@ -16549,59 +16296,6 @@
           },
           "author_name": {
             "type": "string",
-            "nullable": true
-          }
-        }
-      },
-      "Conversation": {
-        "type": "object",
-        "required": [
-          "conversation_identifier"
-        ],
-        "properties": {
-          "conversation_identifier": {
-            "type": "string",
-            "description": "Unique identifier of the conversation."
-          }
-        }
-      },
-      "ResponseMessage": {
-        "type": "object",
-        "required": [
-          "message_type"
-        ],
-        "properties": {
-          "session_identifier": {
-            "type": "string",
-            "description": "Unique identifier of the generated response.",
-            "nullable": true
-          },
-          "generation_number": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Generate number of the response.",
-            "nullable": true
-          },
-          "message_type": {
-            "type": "string",
-            "enum": [
-              "TSAnswer"
-            ],
-            "description": "Type of the generated response."
-          },
-          "visualization_type": {
-            "type": "string",
-            "enum": [
-              "Chart",
-              "Table",
-              "Undefined"
-            ],
-            "description": "Generated visualization type.",
-            "nullable": true
-          },
-          "tokens": {
-            "type": "string",
-            "description": "Tokens for the response.",
             "nullable": true
           }
         }
