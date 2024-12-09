@@ -13224,7 +13224,7 @@
           },
           "personalised_view_id": {
             "type": "string",
-            "description": "Indicates personalised vies of the Liveboard",
+            "description": "Indicates personalised view of the Liveboard",
             "nullable": true
           }
         }
