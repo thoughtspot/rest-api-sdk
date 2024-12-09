@@ -7237,7 +7237,8 @@
                       "LIVEBOARD",
                       "ANSWER",
                       "LOGICAL_TABLE",
-                      "LOGICAL_COLUMN"
+                      "LOGICAL_COLUMN",
+                      "CONNECTION"
                     ]
                   },
                   "metadata_identifiers": {
@@ -15646,7 +15647,8 @@
             "enum": [
               "LIVEBOARD",
               "ANSWER",
-              "LOGICAL_TABLE"
+              "LOGICAL_TABLE",
+              "CONNECTION"
             ],
             "description": "  Type of metadata.\n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.",
             "nullable": true
@@ -15670,7 +15672,8 @@
               "LIVEBOARD",
               "ANSWER",
               "LOGICAL_TABLE",
-              "LOGICAL_COLUMN"
+              "LOGICAL_COLUMN",
+              "CONNECTION"
             ],
             "description": "  Type of metadata.\n  \n\nType of metadata. Required if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.",
             "nullable": true
