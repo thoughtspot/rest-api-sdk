@@ -13221,6 +13221,11 @@
             "type": "string",
             "description": "Text to include in the footer of each page.",
             "nullable": true
+          },
+          "personalised_view_id": {
+            "type": "string",
+            "description": "Indicates personalised vies of the Liveboard",
+            "nullable": true
           }
         }
       },
