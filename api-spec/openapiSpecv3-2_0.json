@@ -13221,11 +13221,6 @@
             "type": "string",
             "description": "Text to include in the footer of each page.",
             "nullable": true
-          },
-          "personalised_view_id": {
-            "type": "string",
-            "description": "Indicates personalised view of the Liveboard",
-            "nullable": true
           }
         }
       },
@@ -13242,6 +13237,11 @@
             "type": "boolean",
             "default": false,
             "description": "Indicates whether to include a page with all applied filters.",
+            "nullable": true
+          },
+          "personalised_view_id": {
+            "type": "string",
+            "description": "Indicates personalised view of the Liveboard",
             "nullable": true
           }
         }
