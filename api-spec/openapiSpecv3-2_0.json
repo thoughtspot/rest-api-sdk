@@ -13238,6 +13238,11 @@
             "default": false,
             "description": "Indicates whether to include a page with all applied filters.",
             "nullable": true
+          },
+          "personalised_view_id": {
+            "type": "string",
+            "description": "Indicates personalised view of the Liveboard",
+            "nullable": true
           }
         }
       },
