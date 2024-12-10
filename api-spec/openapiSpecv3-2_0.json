@@ -1372,7 +1372,7 @@
     "/api/rest/2.0/metadata/tml/async/status": {
       "post": {
         "operationId": "fetchAsyncImportTaskStatus",
-        "description": " <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>",
+        "description": "\n <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nGets information about the status of the TML async import task scheduled using the `/api/rest/2.0/metadata/tml/async/import` API call.\n\nTo fetch the task details, specify the ID of the TML async import task.  \n\nRequires access to the task ID. The API allows users who initiated the asynchronous TML import via `/api/rest/2.0/metadata/tml/async/import` to view the status of their tasks.  Users with administration privilege can view the status of all import tasks initiated by the users in their Org.\n\n#### Usage guidelines\n\nSee [TML API Documentation](https://developers.thoughtspot.com/docs/tml#_fetch_status_of_the_tml_import_task) for usage guidelines.\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Metadata",
           "10.4.0.cl"
@@ -6468,13 +6468,13 @@
                     "nullable": true
                   },
                   "skip_diff_check": {
-                    "description": "Boolean Flag to skip TML diff check before processing object TMLs.",
+                    "description": "<div><span class=\"since-beta-tag\">Version: 10.6.0.cl or later</span></div>\n\nBoolean Flag to skip TML diff check before processing object TMLs.",
                     "default": false,
                     "type": "boolean",
                     "nullable": true
                   },
                   "enable_large_metadata_validation": {
-                    "description": "Boolean to indicate if the large metadata validation should be enabled",
+                    "description": "<div><span class=\"since-beta-tag\">Version: 10.5.0.cl or later</span></div>\n\nBoolean to indicate if the large metadata validation should be enabled.",
                     "default": false,
                     "type": "boolean",
                     "nullable": true
@@ -6549,7 +6549,7 @@
     "/api/rest/2.0/metadata/tml/async/import": {
       "post": {
         "operationId": "importMetadataTMLAsync",
-        "description": " <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>",
+        "description": "\n <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nSchedules a task to import [TML](https://docs.thoughtspot.com/cloud/latest/tml) files into ThoughtSpot. You can use this API endpoint to process TML objects asynchronously when importing TMLs of large and complex metadata objects into ThoughtSpot. Unlike the synchronous import TML operation, the API processes TML data in the background and returns a task ID, which can be used to check the status of the import task via `/api/rest/2.0/metadata/tml/async/status` API endpoint.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtsSpot**) privilege, and edit access to the TML objects.\n\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:\n- `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**)\n- `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)\n\n#### Usage guidelines\n\nSee [Async TML API Documentation](https://developers.thoughtspot.com/docs/tml#_import_tml_objects_asynchronously) for usage guidelines.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Metadata",
           "10.4.0.cl"
@@ -6586,7 +6586,7 @@
                     "nullable": true
                   },
                   "import_policy": {
-                    "description": "Policy to be followed while importing the TML. Valid values are [PARTIAL_OBJECT, PARTIAL, VALIDATE_ONLY, ALL_OR_NONE]",
+                    "description": "<div><span class=\"since-beta-tag\">Version: 10.5.0.cl or later</span></div>\n\nPolicy to be followed while importing the TML. Valid values are [PARTIAL_OBJECT, PARTIAL, VALIDATE_ONLY, ALL_OR_NONE]",
                     "default": "PARTIAL_OBJECT",
                     "type": "string",
                     "enum": [
@@ -6597,13 +6597,13 @@
                     ]
                   },
                   "skip_diff_check": {
-                    "description": "Boolean Flag to skip TML diff check before processing object TMLs.",
+                    "description": "<div><span class=\"since-beta-tag\">Version: 10.6.0.cl or later</span></div>\n\nBoolean Flag to skip TML diff check before processing object TMLs.",
                     "default": false,
                     "type": "boolean",
                     "nullable": true
                   },
                   "enable_large_metadata_validation": {
-                    "description": "Boolean to indicate if the large metadata validation should be enabled",
+                    "description": "<div><span class=\"since-beta-tag\">Version: 10.5.0.cl or later</span></div>\n\nBoolean to indicate if the large metadata validation should be enabled.",
                     "default": false,
                     "type": "boolean",
                     "nullable": true
