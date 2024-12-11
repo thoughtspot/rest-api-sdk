@@ -4975,6 +4975,10 @@
                   "password": {
                     "description": "New password for the user to access the account.",
                     "type": "string"
+                  },
+                  "properties": {
+                    "description": "Properties of the user.",
+                    "type": "string"
                   }
                 },
                 "required": [
