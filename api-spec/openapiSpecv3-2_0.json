@@ -2947,7 +2947,8 @@
                         "MODE",
                         "GOOGLE_SHEETS",
                         "FALCON",
-                        "FALCON_ONPREM"
+                        "FALCON_ONPREM",
+                        "CLICKHOUSE"
                       ]
                     }
                   },
@@ -8114,7 +8115,8 @@
                       "MODE",
                       "GOOGLE_SHEETS",
                       "FALCON",
-                      "FALCON_ONPREM"
+                      "FALCON_ONPREM",
+                      "CLICKHOUSE"
                     ]
                   },
                   "data_warehouse_config": {
@@ -14081,7 +14083,8 @@
               "MODE",
               "GOOGLE_SHEETS",
               "FALCON",
-              "FALCON_ONPREM"
+              "FALCON_ONPREM",
+              "CLICKHOUSE"
             ],
             "description": "Type of data warehouse."
           },
@@ -15962,7 +15965,8 @@
               "MODE",
               "GOOGLE_SHEETS",
               "FALCON",
-              "FALCON_ONPREM"
+              "FALCON_ONPREM",
+              "CLICKHOUSE"
             ],
             "description": "Type of data warehouse."
           },
