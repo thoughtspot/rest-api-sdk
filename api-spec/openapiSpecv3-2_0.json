@@ -1668,7 +1668,7 @@
     "/api/rest/2.0/report/liveboard": {
       "post": {
         "operationId": "exportLiveboardReport",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nExports the data from a Liveboard and its visualization in a given file format. You can download the Liveboard data as a PDF, PNG, CSV, or XLSX file.\n\nRequires `DATADOWNLOADING` (**Can download data**) privilege and view access to the Liveboard.\n\n#### Usage guidelines\n\nIn the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.\n\nThe default `file_format` is CSV. For PDF file format, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.\n\nOptionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.\n\nTo include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).  \n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nExports the data from a Liveboard and its visualization in a given file format. You can download the Liveboard data as a PDF, PNG. Liveboard download as XLSX and CSV is not supported.\n\nRequires `DATADOWNLOADING` (**Can download data**) privilege and view access to the Liveboard.\n\n#### Usage guidelines\n\nIn the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.\n\nThe default `file_format` is PDF. For PDF file format, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.\n\nOptionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.\n\nTo include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).  \n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Reports",
           "9.0.0.cl"
@@ -1696,12 +1696,10 @@
                   },
                   "file_format": {
                     "description": "Export file format.",
-                    "default": "CSV",
+                    "default": "PDF",
                     "type": "string",
                     "enum": [
-                      "CSV",
                       "PDF",
-                      "XLSX",
                       "PNG"
                     ]
                   },
