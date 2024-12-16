@@ -62,6 +62,14 @@
       "description": "Roles for version 10.3.0.cl"
     },
     {
+      "name": "10.6.0.cl",
+      "id": "10.6.0.cl",
+      "tags": [
+        "10.6.0.cl"
+      ],
+      "description": "Roles for version 10.6.0.cl"
+    },
+    {
       "name": "9.9.0.cl",
       "id": "9.9.0.cl",
       "tags": [
@@ -7113,6 +7121,107 @@
           },
           "404": {
             "description": "Object not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/metadata/worksheets/convert": {
+      "post": {
+        "operationId": "convertWorksheetToModel",
+        "description": "\nConvert worksheets to models <br/>  <span class=\"since-beta-tag\">Version: 10.6.0.cl or later</span>\n\n## Prerequisites\n- **Privileges Required:**\n  - `DATAMANAGEMENT` (Can manage data) or `ADMINISTRATION` (Can administer ThoughtSpot).\n- **Additional Privileges (if RBAC is enabled):**\n  - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (Can manage data models).\n\n---\n\n## Usage Guidelines\n\n### Parameters\n\n1. **identifiers**  \n   - **Description:** A comma-separated list of GUIDs (Globally Unique Identifiers) specifying the Worksheets to be converted.  \n   - **Usage:**  \n     - Used only when `convert_all` is set to `false`.  \n     - Leave empty or omit when `convert_all` is set to `true`.\n\n2. **exclude_identifiers**  \n   - **Description:** A comma-separated list of GUIDs specifying Worksheets to be excluded from conversion.  \n   - **Usage:**  \n     - Useful when `convert_all` is set to `true` and specific Worksheets should not be converted.\n\n3. **convert_all**  \n   - **Description:** Sets the scope of conversion.\n   - **Options:**  \n     - `true`: Converts all Worksheets in the system, except those specified in `excludeIdentifiers`.  \n     - `false`: Converts only the Worksheets listed in `identifiers`.\n\n4. **apply_changes**  \n   - **Description:** Specifies whether to apply changes directly to ThoughtSpot or to generate a preview before applying any changes.Used for validation of conversion.\n   - **Options:**  \n     - `true`: Applies conversion changes directly to ThoughtSpot.\n     - `false`: Generates only a preview of the changes and does not apply any changes to ThoughtSpot\n\n---\n\n## Best Practices\n\n1. **Backup Before Conversion:**  \n   Always export metadata as a backup before initiating the conversion process\n\n2. **Partial Conversion for Testing:**  \n   Test the conversion process by setting `convert_all` to `false` and specifying a small number of `identifiers`.\n\n3. **Verify Dependencies:**  \n   Check for dependent objects, such as Tables and Connections, to avoid invalid references.\n\n4. **Review Changes:**  \n   Use `apply_changes: false` to preview the impact of the conversion before applying changes.\n\n---\n\n## Examples\n\n### Convert Specific Worksheets\n```json\n{\n  \"identifiers\": \"guid1,guid2,guid3\",\n  \"convertAll\": false,\n  \"applyChanges\": true\n}\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Metadata",
+          "10.6.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "worksheet_ids": {
+                    "description": "List of Worksheet IDs.",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "exclude_worksheet_ids": {
+                    "description": "List of Worksheet IDs to be excluded.",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "convert_all": {
+                    "description": "Indicates whether all the worksheet needs to be converted to models.",
+                    "default": false,
+                    "type": "boolean",
+                    "nullable": true
+                  },
+                  "apply_changes": {
+                    "description": "Indicates whether the changes should be applied to database.",
+                    "default": false,
+                    "type": "boolean",
+                    "nullable": true
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Conversion of worksheets to model done successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseWorksheetToModelConversion"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -15594,6 +15703,211 @@
             "nullable": true
           }
         }
+      },
+      "ResponseWorksheetToModelConversion": {
+        "type": "object",
+        "required": [
+          "name",
+          "success_count",
+          "failure_count",
+          "incomplete_count",
+          "post_upgrade_failed_count",
+          "total_time_in_millis",
+          "successful_entities",
+          "failed_entities",
+          "incomplete_entities",
+          "post_upgrade_failed_entities"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "success_count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of worksheets successfully converted to models."
+          },
+          "failure_count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of worksheets that failed to convert."
+          },
+          "incomplete_count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of worksheets that were incomplete during the conversion process."
+          },
+          "post_upgrade_failed_count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of worksheets that failed after an upgrade during the conversion process."
+          },
+          "total_time_in_millis": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The total time taken to complete the conversion process in milliseconds."
+          },
+          "successful_entities": {
+            "$ref": "#/components/schemas/ResponseSuccessfulEntities",
+            "description": "List of worksheets successfully converted to models."
+          },
+          "failed_entities": {
+            "$ref": "#/components/schemas/ResponseFailedEntities",
+            "description": "List of worksheets that failed to convert."
+          },
+          "incomplete_entities": {
+            "$ref": "#/components/schemas/ResponseIncompleteEntities",
+            "description": "List of worksheets that were incomplete during the conversion."
+          },
+          "post_upgrade_failed_entities": {
+            "$ref": "#/components/schemas/ResponsePostUpgradeFailedEntities",
+            "description": "List of worksheets that failed after an upgrade during the conversion process."
+          }
+        },
+        "description": "Name of the conversion process, which involves converting worksheets to models."
+      },
+      "ResponseSuccessfulEntities": {
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ResponseSuccessfulEntity"
+            }
+          }
+        },
+        "description": "Wrapper for the successful entities, as they are inside a 'data' field in the response."
+      },
+      "ResponseSuccessfulEntity": {
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the worksheet."
+          }
+        },
+        "description": "Unique ID of the worksheet."
+      },
+      "ResponseFailedEntities": {
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ResponseFailedEntity"
+            }
+          }
+        },
+        "description": "Wrapper for the failed entities, as they are inside a 'data' field in the response."
+      },
+      "ResponseFailedEntity": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "error"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the worksheet that failed to convert."
+          },
+          "error": {
+            "type": "string",
+            "description": "Error details related to the failed conversion."
+          }
+        },
+        "description": "Unique ID of the failed worksheet."
+      },
+      "ResponseIncompleteEntities": {
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ResponseIncompleteEntity"
+            }
+          }
+        },
+        "description": "Wrapper for the incomplete entities, as they are inside a 'data' field in the response."
+      },
+      "ResponseIncompleteEntity": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "error"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the incomplete worksheet."
+          },
+          "error": {
+            "type": "string",
+            "description": "Error details related to the incomplete conversion."
+          }
+        },
+        "description": "Unique ID of the incomplete worksheet."
+      },
+      "ResponsePostUpgradeFailedEntities": {
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ResponsePostUpgradeFailedEntity"
+            }
+          }
+        },
+        "description": "Wrapper for the post-upgrade failed entities, as they are inside a 'data' field in the response."
+      },
+      "ResponsePostUpgradeFailedEntity": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "error"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the worksheet that failed post-upgrade."
+          },
+          "error": {
+            "type": "string",
+            "description": "Error details related to the post-upgrade failure."
+          }
+        },
+        "description": "Unique ID of the worksheet that failed post-upgrade."
       },
       "ExportMetadataTypeInput": {
         "type": "object",
