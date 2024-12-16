@@ -1380,7 +1380,7 @@
     "/api/rest/2.0/metadata/tml/async/status": {
       "post": {
         "operationId": "fetchAsyncImportTaskStatus",
-        "description": " <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>",
+        "description": "\n <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nGets information about the status of the TML async import task scheduled using the `/api/rest/2.0/metadata/tml/async/import` API call.\n\nTo fetch the task details, specify the ID of the TML async import task.  \n\nRequires access to the task ID. The API allows users who initiated the asynchronous TML import via `/api/rest/2.0/metadata/tml/async/import` to view the status of their tasks.  Users with administration privilege can view the status of all import tasks initiated by the users in their Org.\n\n#### Usage guidelines\n\nSee [TML API Documentation](https://developers.thoughtspot.com/docs/tml#_fetch_status_of_the_tml_import_task) for usage guidelines.\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Metadata",
           "10.4.0.cl"
@@ -2955,7 +2955,8 @@
                         "MODE",
                         "GOOGLE_SHEETS",
                         "FALCON",
-                        "FALCON_ONPREM"
+                        "FALCON_ONPREM",
+                        "CLICKHOUSE"
                       ]
                     }
                   },
@@ -4982,6 +4983,10 @@
                   "password": {
                     "description": "New password for the user to access the account.",
                     "type": "string"
+                  },
+                  "properties": {
+                    "description": "Properties of the user.",
+                    "type": "string"
                   }
                 },
                 "required": [
@@ -6476,13 +6481,13 @@
                     "nullable": true
                   },
                   "skip_diff_check": {
-                    "description": "Boolean Flag to skip TML diff check before processing object TMLs.",
+                    "description": "<div><span class=\"since-beta-tag\">Version: 10.6.0.cl or later</span></div>\n\nBoolean Flag to skip TML diff check before processing object TMLs.",
                     "default": false,
                     "type": "boolean",
                     "nullable": true
                   },
                   "enable_large_metadata_validation": {
-                    "description": "Boolean to indicate if the large metadata validation should be enabled",
+                    "description": "<div><span class=\"since-beta-tag\">Version: 10.5.0.cl or later</span></div>\n\nBoolean to indicate if the large metadata validation should be enabled.",
                     "default": false,
                     "type": "boolean",
                     "nullable": true
@@ -6557,7 +6562,7 @@
     "/api/rest/2.0/metadata/tml/async/import": {
       "post": {
         "operationId": "importMetadataTMLAsync",
-        "description": " <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>",
+        "description": "\n <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nSchedules a task to import [TML](https://docs.thoughtspot.com/cloud/latest/tml) files into ThoughtSpot. You can use this API endpoint to process TML objects asynchronously when importing TMLs of large and complex metadata objects into ThoughtSpot. Unlike the synchronous import TML operation, the API processes TML data in the background and returns a task ID, which can be used to check the status of the import task via `/api/rest/2.0/metadata/tml/async/status` API endpoint.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtsSpot**) privilege, and edit access to the TML objects.\n\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:\n- `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**)\n- `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)\n\n#### Usage guidelines\n\nSee [Async TML API Documentation](https://developers.thoughtspot.com/docs/tml#_import_tml_objects_asynchronously) for usage guidelines.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Metadata",
           "10.4.0.cl"
@@ -6594,7 +6599,7 @@
                     "nullable": true
                   },
                   "import_policy": {
-                    "description": "Policy to be followed while importing the TML. Valid values are [PARTIAL_OBJECT, PARTIAL, VALIDATE_ONLY, ALL_OR_NONE]",
+                    "description": "<div><span class=\"since-beta-tag\">Version: 10.5.0.cl or later</span></div>\n\nPolicy to be followed while importing the TML. Valid values are [PARTIAL_OBJECT, PARTIAL, VALIDATE_ONLY, ALL_OR_NONE]",
                     "default": "PARTIAL_OBJECT",
                     "type": "string",
                     "enum": [
@@ -6605,13 +6610,13 @@
                     ]
                   },
                   "skip_diff_check": {
-                    "description": "Boolean Flag to skip TML diff check before processing object TMLs.",
+                    "description": "<div><span class=\"since-beta-tag\">Version: 10.6.0.cl or later</span></div>\n\nBoolean Flag to skip TML diff check before processing object TMLs.",
                     "default": false,
                     "type": "boolean",
                     "nullable": true
                   },
                   "enable_large_metadata_validation": {
-                    "description": "Boolean to indicate if the large metadata validation should be enabled",
+                    "description": "<div><span class=\"since-beta-tag\">Version: 10.5.0.cl or later</span></div>\n\nBoolean to indicate if the large metadata validation should be enabled.",
                     "default": false,
                     "type": "boolean",
                     "nullable": true
@@ -7140,7 +7145,7 @@
     "/api/rest/2.0/metadata/worksheets/convert": {
       "post": {
         "operationId": "convertWorksheetToModel",
-        "description": "\nConvert worksheets to models <br/>  <span class=\"since-beta-tag\">Version: 10.6.0.cl or later</span>\n\n## Prerequisites\n- **Privileges Required:**\n  - `DATAMANAGEMENT` (Can manage data) or `ADMINISTRATION` (Can administer ThoughtSpot).\n- **Additional Privileges (if RBAC is enabled):**\n  - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (Can manage data models).\n\n---\n\n## Usage Guidelines\n\n### Parameters\n\n1. **identifiers**  \n   - **Description:** A comma-separated list of GUIDs (Globally Unique Identifiers) specifying the Worksheets to be converted.  \n   - **Usage:**  \n     - Used only when `convert_all` is set to `false`.  \n     - Leave empty or omit when `convert_all` is set to `true`.\n\n2. **excludeIdentifiers**  \n   - **Description:** A comma-separated list of GUIDs specifying Worksheets to be excluded from conversion.  \n   - **Usage:**  \n     - Useful when `convert_all` is set to `true` and specific Worksheets should not be converted.\n\n3. **convertAll**  \n   - **Description:** Sets the scope of conversion.\n   - **Options:**  \n     - `true`: Converts all Worksheets in the system, except those specified in `excludeIdentifiers`.  \n     - `false`: Converts only the Worksheets listed in `identifiers`.\n\n4. **applyChanges**  \n   - **Description:** Specifies whether to apply changes directly to ThoughtSpot or to generate a preview before applying any changes.Used for validation of conversion.\n   - **Options:**  \n     - `true`: Applies conversion changes directly to ThoughtSpot.\n     - `false`: Generates only a preview of the changes and does not apply any changes to ThoughtSpot\n\n---\n\n## Best Practices\n\n1. **Backup Before Conversion:**  \n   Always export metadata as a backup before initiating the conversion process\n\n2. **Partial Conversion for Testing:**  \n   Test the conversion process by setting `convert_all` to `false` and specifying a small number of `identifiers`.\n\n3. **Verify Dependencies:**  \n   Check for dependent objects, such as Tables and Connections, to avoid invalid references.\n\n4. **Review Changes:**  \n   Use `apply_changes: false` to preview the impact of the conversion before applying changes.\n\n---\n\n## Examples\n\n### Convert Specific Worksheets\n```json\n{\n  \"identifiers\": \"guid1,guid2,guid3\",\n  \"convertAll\": false,\n  \"applyChanges\": true\n}\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\nConvert worksheets to models <br/>  <span class=\"since-beta-tag\">Version: 10.6.0.cl or later</span>\n\n## Prerequisites\n- **Privileges Required:**\n  - `DATAMANAGEMENT` (Can manage data) or `ADMINISTRATION` (Can administer ThoughtSpot).\n- **Additional Privileges (if RBAC is enabled):**\n  - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (Can manage data models).\n\n---\n\n## Usage Guidelines\n\n### Parameters\n\n1. **identifiers**  \n   - **Description:** A comma-separated list of GUIDs (Globally Unique Identifiers) specifying the Worksheets to be converted.  \n   - **Usage:**  \n     - Used only when `convert_all` is set to `false`.  \n     - Leave empty or omit when `convert_all` is set to `true`.\n\n2. **exclude_identifiers**  \n   - **Description:** A comma-separated list of GUIDs specifying Worksheets to be excluded from conversion.  \n   - **Usage:**  \n     - Useful when `convert_all` is set to `true` and specific Worksheets should not be converted.\n\n3. **convert_all**  \n   - **Description:** Sets the scope of conversion.\n   - **Options:**  \n     - `true`: Converts all Worksheets in the system, except those specified in `excludeIdentifiers`.  \n     - `false`: Converts only the Worksheets listed in `identifiers`.\n\n4. **apply_changes**  \n   - **Description:** Specifies whether to apply changes directly to ThoughtSpot or to generate a preview before applying any changes.Used for validation of conversion.\n   - **Options:**  \n     - `true`: Applies conversion changes directly to ThoughtSpot.\n     - `false`: Generates only a preview of the changes and does not apply any changes to ThoughtSpot\n\n---\n\n## Best Practices\n\n1. **Backup Before Conversion:**  \n   Always export metadata as a backup before initiating the conversion process\n\n2. **Partial Conversion for Testing:**  \n   Test the conversion process by setting `convert_all` to `false` and specifying a small number of `identifiers`.\n\n3. **Verify Dependencies:**  \n   Check for dependent objects, such as Tables and Connections, to avoid invalid references.\n\n4. **Review Changes:**  \n   Use `apply_changes: false` to preview the impact of the conversion before applying changes.\n\n---\n\n## Examples\n\n### Convert Specific Worksheets\n```json\n{\n  \"identifiers\": \"guid1,guid2,guid3\",\n  \"convertAll\": false,\n  \"applyChanges\": true\n}\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Metadata",
           "10.6.0.cl"
@@ -7151,15 +7156,15 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "identifiers": {
-                    "description": "List of Worksheet Identifiers.",
+                  "worksheet_ids": {
+                    "description": "List of Worksheet IDs.",
                     "type": "array",
                     "items": {
                       "type": "string"
                     }
                   },
-                  "exclude_identifiers": {
-                    "description": "Exclude Worksheet objects.",
+                  "exclude_worksheet_ids": {
+                    "description": "List of Worksheet IDs to be excluded.",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -7346,7 +7351,8 @@
                       "LIVEBOARD",
                       "ANSWER",
                       "LOGICAL_TABLE",
-                      "LOGICAL_COLUMN"
+                      "LOGICAL_COLUMN",
+                      "CONNECTION"
                     ]
                   },
                   "metadata_identifiers": {
@@ -8222,7 +8228,8 @@
                       "MODE",
                       "GOOGLE_SHEETS",
                       "FALCON",
-                      "FALCON_ONPREM"
+                      "FALCON_ONPREM",
+                      "CLICKHOUSE"
                     ]
                   },
                   "data_warehouse_config": {
@@ -13346,6 +13353,11 @@
             "default": false,
             "description": "Indicates whether to include a page with all applied filters.",
             "nullable": true
+          },
+          "personalised_view_id": {
+            "type": "string",
+            "description": "Indicates personalised view of the Liveboard in case of png",
+            "nullable": true
           }
         }
       },
@@ -14184,7 +14196,8 @@
               "MODE",
               "GOOGLE_SHEETS",
               "FALCON",
-              "FALCON_ONPREM"
+              "FALCON_ONPREM",
+              "CLICKHOUSE"
             ],
             "description": "Type of data warehouse."
           },
@@ -15184,7 +15197,17 @@
           "values": {
             "type": "array",
             "items": {
-              "type": "string"
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "number"
+                }
+              ]
             },
             "description": "The values to filter on. To get all records, use TS_WILDCARD_ALL as values."
           }
@@ -15205,7 +15228,17 @@
           "values": {
             "type": "array",
             "items": {
-              "type": "string"
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "number"
+                }
+              ]
             },
             "description": "The values to filter on. Only single value is supported currently."
           }
@@ -15940,7 +15973,8 @@
             "enum": [
               "LIVEBOARD",
               "ANSWER",
-              "LOGICAL_TABLE"
+              "LOGICAL_TABLE",
+              "CONNECTION"
             ],
             "description": "  Type of metadata.\n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.",
             "nullable": true
@@ -15964,7 +15998,8 @@
               "LIVEBOARD",
               "ANSWER",
               "LOGICAL_TABLE",
-              "LOGICAL_COLUMN"
+              "LOGICAL_COLUMN",
+              "CONNECTION"
             ],
             "description": "  Type of metadata.\n  \n\nType of metadata. Required if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.",
             "nullable": true
@@ -16248,7 +16283,8 @@
               "MODE",
               "GOOGLE_SHEETS",
               "FALCON",
-              "FALCON_ONPREM"
+              "FALCON_ONPREM",
+              "CLICKHOUSE"
             ],
             "description": "Type of data warehouse."
           },
