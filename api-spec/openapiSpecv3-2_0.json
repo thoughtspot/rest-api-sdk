@@ -7241,6 +7241,85 @@
         }
       }
     },
+    "/api/rest/2.0/metadata/headers/update": {
+      "post": {
+        "operationId": "updateMetadataHeader",
+        "description": "\nUpdate header attributes for a given list of header objects. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.6.0.cl or later</span>\n\n## Prerequisites\n- **Privileges Required:**\n  - `DATAMANAGEMENT` (Can manage data) or `ADMINISTRATION` (Can administer ThoughtSpot).\n- **Additional Privileges (if RBAC is enabled):**\n  - `ORG_ADMINISTRATION` (Can manage orgs).\n\n---\n\n## Usage Guidelines\n\n### Parameters\n\n1. **headers_update**  \n   - **Description:** List of header objects with their attributes to be updated. Each object contains a list of attributes to be updated in the header.\n   - **Usage:**\n      - You must provide either `identifier` or `obj_identifier`, but not both. Both fields cannot be empty.\n      - When `org_identifier` is set to `-1`, only the `identifier` value is accepted; `obj_identifier` is not allowed.\n\n2. **org_identifier**  \n   - **Description:** GUID (Globally Unique Identifier) or name of the organization.  \n   - **Usage:**\n     - Leaving this field empty assumes that the changes should be applied to the current organization \n     - Provide `org_guid` or `org_name` to uniquely identify the organization where changes need to be applied. .\n     - Provide `-1` if changes have to be applied across all the org.\n\n---\n\n## Note\nCurrently, this API is enabled only for updating the `obj_identifier` attribute. Only `text` will be allowed in attribute's value.\n\n## Best Practices\n\n1. **Backup Before Conversion:**  \n   Always export metadata as a backup before initiating the update process\n\n---\n\n## Examples\n\n### Only `identifier` is given \n```json\n{\n  \"headers_update\":\n  [\n    {\n      \"identifier\": \"guid_1\",\n      \"obj_identifier\": \"\",\n      \"type\": \"LOGICAL_COLUMN\",\n      \"attributes\":\n      [\n        {\n          \"name\": \"obj_id\",\n          \"value\": \"custom_object_id\"\n        }\n      ]\n    }\n  ],\n  \"org_identifier\": \"orgGuid\"\n}\n```\n\n### Only `obj_identifier` is given\n```json\n{\n  \"headers_update\":\n  [\n    {\n      \"obj_identifier\": \"custom_object_id\",\n      \"type\": \"ANSWER\",\n      \"attributes\":\n      [\n        {\n          \"name\": \"obj_id\",\n          \"value\": \"custom_object_id\"\n        }\n      ]\n    }\n  ],\n  \"org_identifier\": \"orgName\"\n}\n```\n\n### Executing update for all org `-1`\n```json\n{\n  \"headers_update\":\n  [\n    {\n      \"identifier\": \"guid_1\",\n      \"type\": \"ANSWER\",\n      \"attributes\":\n      [\n        {\n          \"name\": \"obj_id\",\n          \"value\": \"custom_object_id\"\n        }\n      ]\n    }\n  ],\n  \"org_identifier\": -1\n}\n```\n\n### Optional `type` is not provided\n```json\n{\n  \"headers_update\":\n  [\n    {\n      \"identifier\": \"guid_1\",\n      \"attributes\":\n      [\n        {\n          \"name\": \"obj_id\",\n          \"value\": \"custom_object_id\"\n        }\n      ]\n    }\n  ],\n  \"org_identifier\": -1\n}\n```\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Metadata",
+          "10.6.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "headers_update": {
+                    "description": "List of header objects to update.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/HeaderUpdateInput"
+                    }
+                  },
+                  "org_identifier": {
+                    "description": "Unique ID or name of the organization.",
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "Headers update was successful."
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/security/metadata/assign": {
       "post": {
         "operationId": "assignChangeAuthor",
@@ -15906,6 +15985,65 @@
           }
         },
         "description": "Unique ID of the worksheet that failed post-upgrade."
+      },
+      "HeaderUpdateInput": {
+        "type": "object",
+        "required": [
+          "attributes"
+        ],
+        "properties": {
+          "identifier": {
+            "type": "string",
+            "description": "Unique ID of a specified type to identify the header.",
+            "nullable": true
+          },
+          "obj_identifier": {
+            "type": "string",
+            "description": "Custom object identifier to uniquely identify header.",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "ANSWER",
+              "LOGICAL_TABLE",
+              "LOGICAL_COLUMN",
+              "LIVEBOARD",
+              "ACTION_OBJECT",
+              "DATA_SOURCE",
+              "USER",
+              "USER_GROUP"
+            ],
+            "description": "Optional type of the header object.",
+            "nullable": true
+          },
+          "attributes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HeaderAttributeInput"
+            },
+            "description": "List of attributes to update"
+          }
+        },
+        "description": "Favorite object options."
+      },
+      "HeaderAttributeInput": {
+        "type": "object",
+        "required": [
+          "name",
+          "value"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Attribute name to be updated."
+          },
+          "value": {
+            "type": "string",
+            "description": "Attribute's new value."
+          }
+        },
+        "description": "Attribute to update in a header."
       },
       "ExportMetadataTypeInput": {
         "type": "object",
