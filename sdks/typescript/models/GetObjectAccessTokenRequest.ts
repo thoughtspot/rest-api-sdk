@@ -15,7 +15,7 @@ import { HttpFile } from '../http/http';
 
 export class GetObjectAccessTokenRequest {
     /**
-    * Username of the ThoughtSpot user
+    * Username of the ThoughtSpot user. The username is stored in the `name` attribute of the user object.
     */
     'username': string;
     /**
