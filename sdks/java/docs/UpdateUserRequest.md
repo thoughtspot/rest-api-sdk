@@ -11,7 +11,7 @@
 |**displayName** | **String** | A unique display name string for the user account, usually their first and last name |  [optional] |
 |**visibility** | [**VisibilityEnum**](#VisibilityEnum) | Visibility of the users. When set to SHARABLE, the user is visible to other users and groups when they try to share an object. |  [optional] |
 |**email** | **String** | Email of the user account |  [optional] |
-|**accountStatus** | [**AccountStatusEnum**](#AccountStatusEnum) | Current status of the user account. The &#x60;SUSPENDED&#x60; user state indicates a transitional state applicable to IAMv2 users only. |  [optional] |
+|**accountStatus** | [**AccountStatusEnum**](#AccountStatusEnum) | Current status of the user account. |  [optional] |
 |**notifyOnShare** | **Boolean** | User preference for receiving email notifications when another ThoughtSpot user shares a metadata object such as Answer, Liveboard, or Worksheet. |  [optional] |
 |**showOnboardingExperience** | **Boolean** | The user preference for revisiting the onboarding experience. |  [optional] |
 |**onboardingExperienceCompleted** | **Boolean** | Indicates if the user has completed the onboarding and allows turning off the onboarding walkthrough. |  [optional] |
@@ -45,7 +45,6 @@
 | EXPIRED | &quot;EXPIRED&quot; |
 | LOCKED | &quot;LOCKED&quot; |
 | PENDING | &quot;PENDING&quot; |
-| SUSPENDED | &quot;SUSPENDED&quot; |
 
 
 

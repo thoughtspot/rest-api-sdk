@@ -21,7 +21,7 @@
 |**roleIdentifiers** | **List&lt;String&gt;** | Filter groups with a list of Roles assigned to a group |  [optional] |
 |**recordOffset** | **Integer** | The starting record number from where the records should be included. |  [optional] |
 |**recordSize** | **Integer** | The number of records that should be included. |  [optional] |
-|**sortOptions** | [**SearchUserGroupsRequestSortOptions**](SearchUserGroupsRequestSortOptions.md) |  |  [optional] |
+|**sortOptions** | [**SortOptions**](SortOptions.md) |  |  [optional] |
 
 
 
@@ -60,11 +60,6 @@
 | CAN_MANAGE_WORKSHEET_VIEWS_TABLES | &quot;CAN_MANAGE_WORKSHEET_VIEWS_TABLES&quot; |
 | CAN_MANAGE_VERSION_CONTROL | &quot;CAN_MANAGE_VERSION_CONTROL&quot; |
 | THIRDPARTY_ANALYSIS | &quot;THIRDPARTY_ANALYSIS&quot; |
-| ALLOW_NON_EMBED_FULL_APP_ACCESS | &quot;ALLOW_NON_EMBED_FULL_APP_ACCESS&quot; |
-| CAN_ACCESS_ANALYST_STUDIO | &quot;CAN_ACCESS_ANALYST_STUDIO&quot; |
-| CAN_MANAGE_ANALYST_STUDIO | &quot;CAN_MANAGE_ANALYST_STUDIO&quot; |
-| PREVIEW_DOCUMENT_SEARCH | &quot;PREVIEW_DOCUMENT_SEARCH&quot; |
-| CAN_SETUP_VERSION_CONTROL | &quot;CAN_SETUP_VERSION_CONTROL&quot; |
 
 
 

@@ -23,7 +23,6 @@ import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import org.openapitools.jackson.nullable.JsonNullable;
 import org.thoughtspot.client.model.FavoriteMetadataItem;
 import org.thoughtspot.client.model.ObjectIDAndName;
 import org.thoughtspot.client.model.Org;
@@ -56,7 +55,7 @@ import org.thoughtspot.client.JSON;
 /**
  * User
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-12-19T23:43:05.069148+05:30[Asia/Kolkata]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-08T10:47:55.743445Z[Etc/UTC]")
 public class User {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
@@ -185,7 +184,7 @@ public class User {
           return b;
         }
       }
-      return null;
+      throw new IllegalArgumentException("Unexpected value '" + value + "'");
     }
 
     public static class Adapter extends TypeAdapter<AccountTypeEnum> {
@@ -219,9 +218,7 @@ public class User {
     
     LOCKED("LOCKED"),
     
-    PENDING("PENDING"),
-    
-    SUSPENDED("SUSPENDED");
+    PENDING("PENDING");
 
     private String value;
 
@@ -244,7 +241,7 @@ public class User {
           return b;
         }
       }
-      return null;
+      throw new IllegalArgumentException("Unexpected value '" + value + "'");
     }
 
     public static class Adapter extends TypeAdapter<AccountStatusEnum> {
@@ -359,7 +356,7 @@ public class User {
           return b;
         }
       }
-      return null;
+      throw new IllegalArgumentException("Unexpected value '" + value + "'");
     }
 
     public static class Adapter extends TypeAdapter<ParentTypeEnum> {
@@ -435,10 +432,6 @@ public class User {
   public static final String SERIALIZED_NAME_USER_PARAMETERS = "user_parameters";
   @SerializedName(SERIALIZED_NAME_USER_PARAMETERS)
   private Object userParameters;
-
-  public static final String SERIALIZED_NAME_ACCESS_CONTROL_PROPERTIES = "access_control_properties";
-  @SerializedName(SERIALIZED_NAME_ACCESS_CONTROL_PROPERTIES)
-  private Object accessControlProperties;
 
   public User() {
   }
@@ -1415,27 +1408,6 @@ public class User {
   }
 
 
-  public User accessControlProperties(Object accessControlProperties) {
-    
-    this.accessControlProperties = accessControlProperties;
-    return this;
-  }
-
-   /**
-   * Access Control Properties which are specified for the user via JWToken
-   * @return accessControlProperties
-  **/
-  @javax.annotation.Nullable
-  public Object getAccessControlProperties() {
-    return accessControlProperties;
-  }
-
-
-  public void setAccessControlProperties(Object accessControlProperties) {
-    this.accessControlProperties = accessControlProperties;
-  }
-
-
 
   @Override
   public boolean equals(Object o) {
@@ -1489,24 +1461,12 @@ public class User {
         Objects.equals(this.preferredLocale, user.preferredLocale) &&
         Objects.equals(this.extendedProperties, user.extendedProperties) &&
         Objects.equals(this.extendedPreferences, user.extendedPreferences) &&
-        Objects.equals(this.userParameters, user.userParameters) &&
-        Objects.equals(this.accessControlProperties, user.accessControlProperties);
-  }
-
-  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
-    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
+        Objects.equals(this.userParameters, user.userParameters);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, displayName, visibility, authorId, canChangePassword, completeDetail, creationTimeInMillis, currentOrg, deleted, deprecated, accountType, accountStatus, email, expirationTimeInMillis, external, favoriteMetadata, firstLoginTimeInMillis, groupMask, hidden, homeLiveboard, incompleteDetails, isFirstLogin, modificationTimeInMillis, modifierId, notifyOnShare, onboardingExperienceCompleted, orgs, ownerId, parentType, privileges, showOnboardingExperience, superUser, systemUser, tags, tenantId, userGroups, userInheritedGroups, welcomeEmailSent, orgPrivileges, preferredLocale, extendedProperties, extendedPreferences, userParameters, accessControlProperties);
-  }
-
-  private static <T> int hashCodeNullable(JsonNullable<T> a) {
-    if (a == null) {
-      return 1;
-    }
-    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
+    return Objects.hash(id, name, displayName, visibility, authorId, canChangePassword, completeDetail, creationTimeInMillis, currentOrg, deleted, deprecated, accountType, accountStatus, email, expirationTimeInMillis, external, favoriteMetadata, firstLoginTimeInMillis, groupMask, hidden, homeLiveboard, incompleteDetails, isFirstLogin, modificationTimeInMillis, modifierId, notifyOnShare, onboardingExperienceCompleted, orgs, ownerId, parentType, privileges, showOnboardingExperience, superUser, systemUser, tags, tenantId, userGroups, userInheritedGroups, welcomeEmailSent, orgPrivileges, preferredLocale, extendedProperties, extendedPreferences, userParameters);
   }
 
   @Override
@@ -1557,7 +1517,6 @@ public class User {
     sb.append("    extendedProperties: ").append(toIndentedString(extendedProperties)).append("\n");
     sb.append("    extendedPreferences: ").append(toIndentedString(extendedPreferences)).append("\n");
     sb.append("    userParameters: ").append(toIndentedString(userParameters)).append("\n");
-    sb.append("    accessControlProperties: ").append(toIndentedString(accessControlProperties)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -1624,7 +1583,6 @@ public class User {
     openapiFields.add("extended_properties");
     openapiFields.add("extended_preferences");
     openapiFields.add("user_parameters");
-    openapiFields.add("access_control_properties");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();

@@ -10,7 +10,7 @@
 |**logType** | [**LogTypeEnum**](#LogTypeEnum) | Name of the log type |  |
 |**startEpochTimeInMillis** | **Float** | Start time in EPOCH format |  [optional] |
 |**endEpochTimeInMillis** | **Float** | End time in EPOCH format |  [optional] |
-|**getAllLogs** | **Boolean** | Fetch all the logs. This is available from 9.10.5.cl |  [optional] |
+|**getAllLogs** | **Boolean** | Fetch all the logs. This is available from 9.11.0.cl |  [optional] |
 
 
 

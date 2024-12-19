@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
 import org.thoughtspot.client.model.CustomActionMetadataTypeInput;
-import org.thoughtspot.client.model.SearchCustomActionsRequestDefaultActionConfig;
+import org.thoughtspot.client.model.DefaultActionConfigSearchInput;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -55,7 +55,7 @@ import org.thoughtspot.client.JSON;
 /**
  * SearchCustomActionsRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-12-19T23:43:05.069148+05:30[Asia/Kolkata]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-08T10:47:55.743445Z[Etc/UTC]")
 public class SearchCustomActionsRequest {
   public static final String SERIALIZED_NAME_CUSTOM_ACTION_IDENTIFIER = "custom_action_identifier";
   @SerializedName(SERIALIZED_NAME_CUSTOM_ACTION_IDENTIFIER)
@@ -67,7 +67,7 @@ public class SearchCustomActionsRequest {
 
   public static final String SERIALIZED_NAME_DEFAULT_ACTION_CONFIG = "default_action_config";
   @SerializedName(SERIALIZED_NAME_DEFAULT_ACTION_CONFIG)
-  private SearchCustomActionsRequestDefaultActionConfig defaultActionConfig;
+  private DefaultActionConfigSearchInput defaultActionConfig;
 
   public static final String SERIALIZED_NAME_INCLUDE_GROUP_ASSOCIATIONS = "include_group_associations";
   @SerializedName(SERIALIZED_NAME_INCLUDE_GROUP_ASSOCIATIONS)
@@ -177,7 +177,7 @@ public class SearchCustomActionsRequest {
   }
 
 
-  public SearchCustomActionsRequest defaultActionConfig(SearchCustomActionsRequestDefaultActionConfig defaultActionConfig) {
+  public SearchCustomActionsRequest defaultActionConfig(DefaultActionConfigSearchInput defaultActionConfig) {
     
     this.defaultActionConfig = defaultActionConfig;
     return this;
@@ -188,12 +188,12 @@ public class SearchCustomActionsRequest {
    * @return defaultActionConfig
   **/
   @javax.annotation.Nullable
-  public SearchCustomActionsRequestDefaultActionConfig getDefaultActionConfig() {
+  public DefaultActionConfigSearchInput getDefaultActionConfig() {
     return defaultActionConfig;
   }
 
 
-  public void setDefaultActionConfig(SearchCustomActionsRequestDefaultActionConfig defaultActionConfig) {
+  public void setDefaultActionConfig(DefaultActionConfigSearchInput defaultActionConfig) {
     this.defaultActionConfig = defaultActionConfig;
   }
 
@@ -398,7 +398,7 @@ public class SearchCustomActionsRequest {
       }
       // validate the optional field `default_action_config`
       if (jsonObj.get("default_action_config") != null && !jsonObj.get("default_action_config").isJsonNull()) {
-        SearchCustomActionsRequestDefaultActionConfig.validateJsonObject(jsonObj.getAsJsonObject("default_action_config"));
+        DefaultActionConfigSearchInput.validateJsonObject(jsonObj.getAsJsonObject("default_action_config"));
       }
       if (jsonObj.get("metadata") != null && !jsonObj.get("metadata").isJsonNull()) {
         JsonArray jsonArraymetadata = jsonObj.getAsJsonArray("metadata");

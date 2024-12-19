@@ -21,7 +21,6 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
-import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -51,22 +50,18 @@ import org.thoughtspot.client.JSON;
 /**
  * MetadataListItemInput
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-12-19T23:43:05.069148+05:30[Asia/Kolkata]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-08T10:47:55.743445Z[Etc/UTC]")
 public class MetadataListItemInput {
   public static final String SERIALIZED_NAME_IDENTIFIER = "identifier";
   @SerializedName(SERIALIZED_NAME_IDENTIFIER)
   private String identifier;
-
-  public static final String SERIALIZED_NAME_CUSTOM_IDENTIFIER = "custom_identifier";
-  @SerializedName(SERIALIZED_NAME_CUSTOM_IDENTIFIER)
-  private String customIdentifier;
 
   public static final String SERIALIZED_NAME_NAME_PATTERN = "name_pattern";
   @SerializedName(SERIALIZED_NAME_NAME_PATTERN)
   private String namePattern;
 
   /**
-   * Type of metadata. Required if the name of the object is set as identifier. This attribute is optional when the object GUID is specified as identifier. 1. Liveboard 2. Answers 3. LOGICAL_TABLE for any data object such as table, worksheet or view. 4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view. 5. CONNECTION for creating or modify data connections. 6. TAG for tag objects. 7. USER for user objects. 8. USER_GROUP for group objects. 9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values 10. INSIGHT_SPEC for SpotIQ objects
+   * Type of metadata. Required if the name of the object is set as identifier. This attribute is optional when the object GUID is specified as identifier. 1. Liveboard 2. Answers 3. LOGICAL_TABLE for any data object such as table, worksheet or view. 4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view. 5. CONNECTION for creating or modify data connections. 6. TAG for tag objects. 7. USER for user objects. 8. USER_GROUP for group objects. 9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values
    */
   @JsonAdapter(TypeEnum.Adapter.class)
   public enum TypeEnum {
@@ -86,9 +81,7 @@ public class MetadataListItemInput {
     
     USER_GROUP("USER_GROUP"),
     
-    LOGICAL_RELATIONSHIP("LOGICAL_RELATIONSHIP"),
-    
-    INSIGHT_SPEC("INSIGHT_SPEC");
+    LOGICAL_RELATIONSHIP("LOGICAL_RELATIONSHIP");
 
     private String value;
 
@@ -111,7 +104,7 @@ public class MetadataListItemInput {
           return b;
         }
       }
-      return null;
+      throw new IllegalArgumentException("Unexpected value '" + value + "'");
     }
 
     public static class Adapter extends TypeAdapter<TypeEnum> {
@@ -156,27 +149,6 @@ public class MetadataListItemInput {
   }
 
 
-  public MetadataListItemInput customIdentifier(String customIdentifier) {
-    
-    this.customIdentifier = customIdentifier;
-    return this;
-  }
-
-   /**
-   * CustomObjectId of the metadata.
-   * @return customIdentifier
-  **/
-  @javax.annotation.Nullable
-  public String getCustomIdentifier() {
-    return customIdentifier;
-  }
-
-
-  public void setCustomIdentifier(String customIdentifier) {
-    this.customIdentifier = customIdentifier;
-  }
-
-
   public MetadataListItemInput namePattern(String namePattern) {
     
     this.namePattern = namePattern;
@@ -205,7 +177,7 @@ public class MetadataListItemInput {
   }
 
    /**
-   * Type of metadata. Required if the name of the object is set as identifier. This attribute is optional when the object GUID is specified as identifier. 1. Liveboard 2. Answers 3. LOGICAL_TABLE for any data object such as table, worksheet or view. 4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view. 5. CONNECTION for creating or modify data connections. 6. TAG for tag objects. 7. USER for user objects. 8. USER_GROUP for group objects. 9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values 10. INSIGHT_SPEC for SpotIQ objects
+   * Type of metadata. Required if the name of the object is set as identifier. This attribute is optional when the object GUID is specified as identifier. 1. Liveboard 2. Answers 3. LOGICAL_TABLE for any data object such as table, worksheet or view. 4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view. 5. CONNECTION for creating or modify data connections. 6. TAG for tag objects. 7. USER for user objects. 8. USER_GROUP for group objects. 9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values
    * @return type
   **/
   @javax.annotation.Nullable
@@ -230,25 +202,13 @@ public class MetadataListItemInput {
     }
     MetadataListItemInput metadataListItemInput = (MetadataListItemInput) o;
     return Objects.equals(this.identifier, metadataListItemInput.identifier) &&
-        Objects.equals(this.customIdentifier, metadataListItemInput.customIdentifier) &&
         Objects.equals(this.namePattern, metadataListItemInput.namePattern) &&
         Objects.equals(this.type, metadataListItemInput.type);
   }
 
-  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
-    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
-  }
-
   @Override
   public int hashCode() {
-    return Objects.hash(identifier, customIdentifier, namePattern, type);
-  }
-
-  private static <T> int hashCodeNullable(JsonNullable<T> a) {
-    if (a == null) {
-      return 1;
-    }
-    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
+    return Objects.hash(identifier, namePattern, type);
   }
 
   @Override
@@ -256,7 +216,6 @@ public class MetadataListItemInput {
     StringBuilder sb = new StringBuilder();
     sb.append("class MetadataListItemInput {\n");
     sb.append("    identifier: ").append(toIndentedString(identifier)).append("\n");
-    sb.append("    customIdentifier: ").append(toIndentedString(customIdentifier)).append("\n");
     sb.append("    namePattern: ").append(toIndentedString(namePattern)).append("\n");
     sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("}");
@@ -282,7 +241,6 @@ public class MetadataListItemInput {
     // a set of all properties/fields (JSON key names)
     openapiFields = new HashSet<String>();
     openapiFields.add("identifier");
-    openapiFields.add("custom_identifier");
     openapiFields.add("name_pattern");
     openapiFields.add("type");
 
@@ -312,9 +270,6 @@ public class MetadataListItemInput {
       }
       if ((jsonObj.get("identifier") != null && !jsonObj.get("identifier").isJsonNull()) && !jsonObj.get("identifier").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `identifier` to be a primitive type in the JSON string but got `%s`", jsonObj.get("identifier").toString()));
-      }
-      if ((jsonObj.get("custom_identifier") != null && !jsonObj.get("custom_identifier").isJsonNull()) && !jsonObj.get("custom_identifier").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `custom_identifier` to be a primitive type in the JSON string but got `%s`", jsonObj.get("custom_identifier").toString()));
       }
       if ((jsonObj.get("name_pattern") != null && !jsonObj.get("name_pattern").isJsonNull()) && !jsonObj.get("name_pattern").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `name_pattern` to be a primitive type in the JSON string but got `%s`", jsonObj.get("name_pattern").toString()));

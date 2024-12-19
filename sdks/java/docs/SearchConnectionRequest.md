@@ -13,7 +13,7 @@
 |**recordSize** | **Integer** | The number of records that should be included. |  [optional] |
 |**tagIdentifiers** | **List&lt;String&gt;** | Unique ID or name of tags. |  [optional] |
 |**dataWarehouseObjectType** | [**DataWarehouseObjectTypeEnum**](#DataWarehouseObjectTypeEnum) | Data warehouse object type. |  [optional] |
-|**sortOptions** | [**SearchConnectionRequestSortOptions**](SearchConnectionRequestSortOptions.md) |  |  [optional] |
+|**sortOptions** | [**SortOptionInput**](SortOptionInput.md) |  |  [optional] |
 |**includeDetails** | **Boolean** | Indicates whether to include complete details of the connection objects. |  [optional] |
 |**_configuration** | **Object** | Configuration values. If empty we are fetching configuration from datasource based on given connection id. If required you can provide config details to fetch specific details. Example input: {}, {\&quot;warehouse\&quot;:\&quot;SMALL_WH\&quot;,\&quot;database\&quot;:\&quot;DEVELOPMENT\&quot;}. This is only applicable when data_warehouse_object_type is selected. |  [optional] |
 |**authenticationType** | [**AuthenticationTypeEnum**](#AuthenticationTypeEnum) | List of authentication types to fetch data_ware_house_objects from external Data warehouse. This is only applicable when data_warehouse_object_type is selected. |  [optional] |
@@ -54,8 +54,6 @@
 | GCP_MYSQL | &quot;GCP_MYSQL&quot; |
 | MODE | &quot;MODE&quot; |
 | GOOGLE_SHEETS | &quot;GOOGLE_SHEETS&quot; |
-| FALCON | &quot;FALCON&quot; |
-| FALCON_ONPREM | &quot;FALCON_ONPREM&quot; |
 
 
 
@@ -78,8 +76,6 @@
 | OAUTH | &quot;OAUTH&quot; |
 | IAM | &quot;IAM&quot; |
 | EXTOAUTH | &quot;EXTOAUTH&quot; |
-| OAUTH_WITH_SERVICE_PRINCIPAL | &quot;OAUTH_WITH_SERVICE_PRINCIPAL&quot; |
-| PERSONAL_ACCESS_TOKEN | &quot;PERSONAL_ACCESS_TOKEN&quot; |
 
 
 

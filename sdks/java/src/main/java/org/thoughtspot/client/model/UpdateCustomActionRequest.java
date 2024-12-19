@@ -23,9 +23,9 @@ import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import org.thoughtspot.client.model.ActionDetailsInput;
 import org.thoughtspot.client.model.AssociateMetadataInput;
-import org.thoughtspot.client.model.UpdateCustomActionRequestActionDetails;
-import org.thoughtspot.client.model.UpdateCustomActionRequestDefaultActionConfig;
+import org.thoughtspot.client.model.DefaultActionConfigInput;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -55,11 +55,11 @@ import org.thoughtspot.client.JSON;
 /**
  * UpdateCustomActionRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-12-19T23:43:05.069148+05:30[Asia/Kolkata]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-08T10:47:55.743445Z[Etc/UTC]")
 public class UpdateCustomActionRequest {
   public static final String SERIALIZED_NAME_ACTION_DETAILS = "action_details";
   @SerializedName(SERIALIZED_NAME_ACTION_DETAILS)
-  private UpdateCustomActionRequestActionDetails actionDetails;
+  private ActionDetailsInput actionDetails;
 
   public static final String SERIALIZED_NAME_ASSOCIATE_METADATA = "associate_metadata";
   @SerializedName(SERIALIZED_NAME_ASSOCIATE_METADATA)
@@ -67,7 +67,7 @@ public class UpdateCustomActionRequest {
 
   public static final String SERIALIZED_NAME_DEFAULT_ACTION_CONFIG = "default_action_config";
   @SerializedName(SERIALIZED_NAME_DEFAULT_ACTION_CONFIG)
-  private UpdateCustomActionRequestDefaultActionConfig defaultActionConfig;
+  private DefaultActionConfigInput defaultActionConfig;
 
   public static final String SERIALIZED_NAME_GROUP_IDENTIFIERS = "group_identifiers";
   @SerializedName(SERIALIZED_NAME_GROUP_IDENTIFIERS)
@@ -131,7 +131,7 @@ public class UpdateCustomActionRequest {
   public UpdateCustomActionRequest() {
   }
 
-  public UpdateCustomActionRequest actionDetails(UpdateCustomActionRequestActionDetails actionDetails) {
+  public UpdateCustomActionRequest actionDetails(ActionDetailsInput actionDetails) {
     
     this.actionDetails = actionDetails;
     return this;
@@ -142,12 +142,12 @@ public class UpdateCustomActionRequest {
    * @return actionDetails
   **/
   @javax.annotation.Nullable
-  public UpdateCustomActionRequestActionDetails getActionDetails() {
+  public ActionDetailsInput getActionDetails() {
     return actionDetails;
   }
 
 
-  public void setActionDetails(UpdateCustomActionRequestActionDetails actionDetails) {
+  public void setActionDetails(ActionDetailsInput actionDetails) {
     this.actionDetails = actionDetails;
   }
 
@@ -181,7 +181,7 @@ public class UpdateCustomActionRequest {
   }
 
 
-  public UpdateCustomActionRequest defaultActionConfig(UpdateCustomActionRequestDefaultActionConfig defaultActionConfig) {
+  public UpdateCustomActionRequest defaultActionConfig(DefaultActionConfigInput defaultActionConfig) {
     
     this.defaultActionConfig = defaultActionConfig;
     return this;
@@ -192,12 +192,12 @@ public class UpdateCustomActionRequest {
    * @return defaultActionConfig
   **/
   @javax.annotation.Nullable
-  public UpdateCustomActionRequestDefaultActionConfig getDefaultActionConfig() {
+  public DefaultActionConfigInput getDefaultActionConfig() {
     return defaultActionConfig;
   }
 
 
-  public void setDefaultActionConfig(UpdateCustomActionRequestDefaultActionConfig defaultActionConfig) {
+  public void setDefaultActionConfig(DefaultActionConfigInput defaultActionConfig) {
     this.defaultActionConfig = defaultActionConfig;
   }
 
@@ -361,7 +361,7 @@ public class UpdateCustomActionRequest {
       }
       // validate the optional field `action_details`
       if (jsonObj.get("action_details") != null && !jsonObj.get("action_details").isJsonNull()) {
-        UpdateCustomActionRequestActionDetails.validateJsonObject(jsonObj.getAsJsonObject("action_details"));
+        ActionDetailsInput.validateJsonObject(jsonObj.getAsJsonObject("action_details"));
       }
       if (jsonObj.get("associate_metadata") != null && !jsonObj.get("associate_metadata").isJsonNull()) {
         JsonArray jsonArrayassociateMetadata = jsonObj.getAsJsonArray("associate_metadata");
@@ -379,7 +379,7 @@ public class UpdateCustomActionRequest {
       }
       // validate the optional field `default_action_config`
       if (jsonObj.get("default_action_config") != null && !jsonObj.get("default_action_config").isJsonNull()) {
-        UpdateCustomActionRequestDefaultActionConfig.validateJsonObject(jsonObj.getAsJsonObject("default_action_config"));
+        DefaultActionConfigInput.validateJsonObject(jsonObj.getAsJsonObject("default_action_config"));
       }
       // ensure the optional json data is an array if present
       if (jsonObj.get("group_identifiers") != null && !jsonObj.get("group_identifiers").isJsonArray()) {

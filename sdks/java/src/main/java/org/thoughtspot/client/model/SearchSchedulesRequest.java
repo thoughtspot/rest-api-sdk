@@ -24,8 +24,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.thoughtspot.client.model.MetadataInput;
-import org.thoughtspot.client.model.SearchSchedulesRequestHistoryRunsOptions;
-import org.thoughtspot.client.model.SearchSchedulesRequestSortOptions;
+import org.thoughtspot.client.model.ScheduleHistoryRunsOptionsInput;
+import org.thoughtspot.client.model.SortingOptions;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -55,7 +55,7 @@ import org.thoughtspot.client.JSON;
 /**
  * SearchSchedulesRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-12-19T23:43:05.069148+05:30[Asia/Kolkata]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-08T10:47:55.743445Z[Etc/UTC]")
 public class SearchSchedulesRequest {
   public static final String SERIALIZED_NAME_METADATA = "metadata";
   @SerializedName(SERIALIZED_NAME_METADATA)
@@ -71,11 +71,11 @@ public class SearchSchedulesRequest {
 
   public static final String SERIALIZED_NAME_SORT_OPTIONS = "sort_options";
   @SerializedName(SERIALIZED_NAME_SORT_OPTIONS)
-  private SearchSchedulesRequestSortOptions sortOptions;
+  private SortingOptions sortOptions;
 
   public static final String SERIALIZED_NAME_HISTORY_RUNS_OPTIONS = "history_runs_options";
   @SerializedName(SERIALIZED_NAME_HISTORY_RUNS_OPTIONS)
-  private SearchSchedulesRequestHistoryRunsOptions historyRunsOptions;
+  private ScheduleHistoryRunsOptionsInput historyRunsOptions;
 
   public static final String SERIALIZED_NAME_SCHEDULE_IDENTIFIERS = "schedule_identifiers";
   @SerializedName(SERIALIZED_NAME_SCHEDULE_IDENTIFIERS)
@@ -155,7 +155,7 @@ public class SearchSchedulesRequest {
   }
 
 
-  public SearchSchedulesRequest sortOptions(SearchSchedulesRequestSortOptions sortOptions) {
+  public SearchSchedulesRequest sortOptions(SortingOptions sortOptions) {
     
     this.sortOptions = sortOptions;
     return this;
@@ -166,17 +166,17 @@ public class SearchSchedulesRequest {
    * @return sortOptions
   **/
   @javax.annotation.Nullable
-  public SearchSchedulesRequestSortOptions getSortOptions() {
+  public SortingOptions getSortOptions() {
     return sortOptions;
   }
 
 
-  public void setSortOptions(SearchSchedulesRequestSortOptions sortOptions) {
+  public void setSortOptions(SortingOptions sortOptions) {
     this.sortOptions = sortOptions;
   }
 
 
-  public SearchSchedulesRequest historyRunsOptions(SearchSchedulesRequestHistoryRunsOptions historyRunsOptions) {
+  public SearchSchedulesRequest historyRunsOptions(ScheduleHistoryRunsOptionsInput historyRunsOptions) {
     
     this.historyRunsOptions = historyRunsOptions;
     return this;
@@ -187,12 +187,12 @@ public class SearchSchedulesRequest {
    * @return historyRunsOptions
   **/
   @javax.annotation.Nullable
-  public SearchSchedulesRequestHistoryRunsOptions getHistoryRunsOptions() {
+  public ScheduleHistoryRunsOptionsInput getHistoryRunsOptions() {
     return historyRunsOptions;
   }
 
 
-  public void setHistoryRunsOptions(SearchSchedulesRequestHistoryRunsOptions historyRunsOptions) {
+  public void setHistoryRunsOptions(ScheduleHistoryRunsOptionsInput historyRunsOptions) {
     this.historyRunsOptions = historyRunsOptions;
   }
 
@@ -328,11 +328,11 @@ public class SearchSchedulesRequest {
       }
       // validate the optional field `sort_options`
       if (jsonObj.get("sort_options") != null && !jsonObj.get("sort_options").isJsonNull()) {
-        SearchSchedulesRequestSortOptions.validateJsonObject(jsonObj.getAsJsonObject("sort_options"));
+        SortingOptions.validateJsonObject(jsonObj.getAsJsonObject("sort_options"));
       }
       // validate the optional field `history_runs_options`
       if (jsonObj.get("history_runs_options") != null && !jsonObj.get("history_runs_options").isJsonNull()) {
-        SearchSchedulesRequestHistoryRunsOptions.validateJsonObject(jsonObj.getAsJsonObject("history_runs_options"));
+        ScheduleHistoryRunsOptionsInput.validateJsonObject(jsonObj.getAsJsonObject("history_runs_options"));
       }
       // ensure the optional json data is an array if present
       if (jsonObj.get("schedule_identifiers") != null && !jsonObj.get("schedule_identifiers").isJsonArray()) {

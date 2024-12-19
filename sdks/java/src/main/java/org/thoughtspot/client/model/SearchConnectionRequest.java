@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
 import org.thoughtspot.client.model.ConnectionInput;
-import org.thoughtspot.client.model.SearchConnectionRequestSortOptions;
+import org.thoughtspot.client.model.SortOptionInput;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -55,7 +55,7 @@ import org.thoughtspot.client.JSON;
 /**
  * SearchConnectionRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-12-19T23:43:05.069148+05:30[Asia/Kolkata]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-08T10:47:55.743445Z[Etc/UTC]")
 public class SearchConnectionRequest {
   public static final String SERIALIZED_NAME_CONNECTIONS = "connections";
   @SerializedName(SERIALIZED_NAME_CONNECTIONS)
@@ -124,11 +124,7 @@ public class SearchConnectionRequest {
     
     MODE("MODE"),
     
-    GOOGLE_SHEETS("GOOGLE_SHEETS"),
-    
-    FALCON("FALCON"),
-    
-    FALCON_ONPREM("FALCON_ONPREM");
+    GOOGLE_SHEETS("GOOGLE_SHEETS");
 
     private String value;
 
@@ -241,7 +237,7 @@ public class SearchConnectionRequest {
 
   public static final String SERIALIZED_NAME_SORT_OPTIONS = "sort_options";
   @SerializedName(SERIALIZED_NAME_SORT_OPTIONS)
-  private SearchConnectionRequestSortOptions sortOptions;
+  private SortOptionInput sortOptions;
 
   public static final String SERIALIZED_NAME_INCLUDE_DETAILS = "include_details";
   @SerializedName(SERIALIZED_NAME_INCLUDE_DETAILS)
@@ -262,11 +258,7 @@ public class SearchConnectionRequest {
     
     IAM("IAM"),
     
-    EXTOAUTH("EXTOAUTH"),
-    
-    OAUTH_WITH_SERVICE_PRINCIPAL("OAUTH_WITH_SERVICE_PRINCIPAL"),
-    
-    PERSONAL_ACCESS_TOKEN("PERSONAL_ACCESS_TOKEN");
+    EXTOAUTH("EXTOAUTH");
 
     private String value;
 
@@ -463,7 +455,7 @@ public class SearchConnectionRequest {
   }
 
 
-  public SearchConnectionRequest sortOptions(SearchConnectionRequestSortOptions sortOptions) {
+  public SearchConnectionRequest sortOptions(SortOptionInput sortOptions) {
     
     this.sortOptions = sortOptions;
     return this;
@@ -474,12 +466,12 @@ public class SearchConnectionRequest {
    * @return sortOptions
   **/
   @javax.annotation.Nullable
-  public SearchConnectionRequestSortOptions getSortOptions() {
+  public SortOptionInput getSortOptions() {
     return sortOptions;
   }
 
 
-  public void setSortOptions(SearchConnectionRequestSortOptions sortOptions) {
+  public void setSortOptions(SortOptionInput sortOptions) {
     this.sortOptions = sortOptions;
   }
 
@@ -683,7 +675,7 @@ public class SearchConnectionRequest {
       }
       // validate the optional field `sort_options`
       if (jsonObj.get("sort_options") != null && !jsonObj.get("sort_options").isJsonNull()) {
-        SearchConnectionRequestSortOptions.validateJsonObject(jsonObj.getAsJsonObject("sort_options"));
+        SortOptionInput.validateJsonObject(jsonObj.getAsJsonObject("sort_options"));
       }
       if ((jsonObj.get("authentication_type") != null && !jsonObj.get("authentication_type").isJsonNull()) && !jsonObj.get("authentication_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `authentication_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("authentication_type").toString()));

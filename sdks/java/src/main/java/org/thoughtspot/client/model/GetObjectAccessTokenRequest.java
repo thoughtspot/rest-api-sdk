@@ -24,7 +24,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
-import org.thoughtspot.client.model.GetObjectAccessTokenRequestUserParameters;
+import org.thoughtspot.client.model.JWTUserOptions;
+import org.thoughtspot.client.model.UserParameterOptions;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -54,7 +55,7 @@ import org.thoughtspot.client.JSON;
 /**
  * GetObjectAccessTokenRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-12-19T23:43:05.069148+05:30[Asia/Kolkata]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-08T10:47:55.743445Z[Etc/UTC]")
 public class GetObjectAccessTokenRequest {
   public static final String SERIALIZED_NAME_USERNAME = "username";
   @SerializedName(SERIALIZED_NAME_USERNAME)
@@ -78,7 +79,7 @@ public class GetObjectAccessTokenRequest {
 
   public static final String SERIALIZED_NAME_ORG_ID = "org_id";
   @SerializedName(SERIALIZED_NAME_ORG_ID)
-  private Integer orgId;
+  private Integer orgId = 0;
 
   public static final String SERIALIZED_NAME_EMAIL = "email";
   @SerializedName(SERIALIZED_NAME_EMAIL)
@@ -96,9 +97,13 @@ public class GetObjectAccessTokenRequest {
   @SerializedName(SERIALIZED_NAME_GROUP_IDENTIFIERS)
   private List<String> groupIdentifiers;
 
+  public static final String SERIALIZED_NAME_JWT_USER_OPTIONS = "jwt_user_options";
+  @SerializedName(SERIALIZED_NAME_JWT_USER_OPTIONS)
+  private JWTUserOptions jwtUserOptions;
+
   public static final String SERIALIZED_NAME_USER_PARAMETERS = "user_parameters";
   @SerializedName(SERIALIZED_NAME_USER_PARAMETERS)
-  private GetObjectAccessTokenRequestUserParameters userParameters;
+  private UserParameterOptions userParameters;
 
   public GetObjectAccessTokenRequest() {
   }
@@ -110,7 +115,7 @@ public class GetObjectAccessTokenRequest {
   }
 
    /**
-   * Username of the ThoughtSpot user. The username is stored in the &#x60;name&#x60; attribute of the user object.
+   * Username of the ThoughtSpot user
    * @return username
   **/
   @javax.annotation.Nonnull
@@ -215,7 +220,7 @@ public class GetObjectAccessTokenRequest {
   }
 
    /**
-   * ID of the Org context to log in to. If the Org ID is not specified and secret key is provided then user will be logged into the org corresponding to the secret key, and if secret key is not provided then user will be logged in to the Org context of their previous login session.
+   * ID of the Org context to log in to. If Org ID is not specified, the user will be logged in to the Org context of their previous login session.
    * @return orgId
   **/
   @javax.annotation.Nullable
@@ -321,7 +326,28 @@ public class GetObjectAccessTokenRequest {
   }
 
 
-  public GetObjectAccessTokenRequest userParameters(GetObjectAccessTokenRequestUserParameters userParameters) {
+  public GetObjectAccessTokenRequest jwtUserOptions(JWTUserOptions jwtUserOptions) {
+    
+    this.jwtUserOptions = jwtUserOptions;
+    return this;
+  }
+
+   /**
+   * Get jwtUserOptions
+   * @return jwtUserOptions
+  **/
+  @javax.annotation.Nullable
+  public JWTUserOptions getJwtUserOptions() {
+    return jwtUserOptions;
+  }
+
+
+  public void setJwtUserOptions(JWTUserOptions jwtUserOptions) {
+    this.jwtUserOptions = jwtUserOptions;
+  }
+
+
+  public GetObjectAccessTokenRequest userParameters(UserParameterOptions userParameters) {
     
     this.userParameters = userParameters;
     return this;
@@ -332,12 +358,12 @@ public class GetObjectAccessTokenRequest {
    * @return userParameters
   **/
   @javax.annotation.Nullable
-  public GetObjectAccessTokenRequestUserParameters getUserParameters() {
+  public UserParameterOptions getUserParameters() {
     return userParameters;
   }
 
 
-  public void setUserParameters(GetObjectAccessTokenRequestUserParameters userParameters) {
+  public void setUserParameters(UserParameterOptions userParameters) {
     this.userParameters = userParameters;
   }
 
@@ -362,6 +388,7 @@ public class GetObjectAccessTokenRequest {
         Objects.equals(this.displayName, getObjectAccessTokenRequest.displayName) &&
         Objects.equals(this.autoCreate, getObjectAccessTokenRequest.autoCreate) &&
         Objects.equals(this.groupIdentifiers, getObjectAccessTokenRequest.groupIdentifiers) &&
+        Objects.equals(this.jwtUserOptions, getObjectAccessTokenRequest.jwtUserOptions) &&
         Objects.equals(this.userParameters, getObjectAccessTokenRequest.userParameters);
   }
 
@@ -371,7 +398,7 @@ public class GetObjectAccessTokenRequest {
 
   @Override
   public int hashCode() {
-    return Objects.hash(username, objectId, password, secretKey, validityTimeInSec, orgId, email, displayName, autoCreate, groupIdentifiers, userParameters);
+    return Objects.hash(username, objectId, password, secretKey, validityTimeInSec, orgId, email, displayName, autoCreate, groupIdentifiers, jwtUserOptions, userParameters);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -395,6 +422,7 @@ public class GetObjectAccessTokenRequest {
     sb.append("    displayName: ").append(toIndentedString(displayName)).append("\n");
     sb.append("    autoCreate: ").append(toIndentedString(autoCreate)).append("\n");
     sb.append("    groupIdentifiers: ").append(toIndentedString(groupIdentifiers)).append("\n");
+    sb.append("    jwtUserOptions: ").append(toIndentedString(jwtUserOptions)).append("\n");
     sb.append("    userParameters: ").append(toIndentedString(userParameters)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -428,6 +456,7 @@ public class GetObjectAccessTokenRequest {
     openapiFields.add("display_name");
     openapiFields.add("auto_create");
     openapiFields.add("group_identifiers");
+    openapiFields.add("jwt_user_options");
     openapiFields.add("user_parameters");
 
     // a set of required properties/fields (JSON key names)
@@ -484,9 +513,13 @@ public class GetObjectAccessTokenRequest {
       if (jsonObj.get("group_identifiers") != null && !jsonObj.get("group_identifiers").isJsonArray()) {
         throw new IllegalArgumentException(String.format("Expected the field `group_identifiers` to be an array in the JSON string but got `%s`", jsonObj.get("group_identifiers").toString()));
       }
+      // validate the optional field `jwt_user_options`
+      if (jsonObj.get("jwt_user_options") != null && !jsonObj.get("jwt_user_options").isJsonNull()) {
+        JWTUserOptions.validateJsonObject(jsonObj.getAsJsonObject("jwt_user_options"));
+      }
       // validate the optional field `user_parameters`
       if (jsonObj.get("user_parameters") != null && !jsonObj.get("user_parameters").isJsonNull()) {
-        GetObjectAccessTokenRequestUserParameters.validateJsonObject(jsonObj.getAsJsonObject("user_parameters"));
+        UserParameterOptions.validateJsonObject(jsonObj.getAsJsonObject("user_parameters"));
       }
   }
 

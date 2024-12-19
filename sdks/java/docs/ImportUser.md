@@ -45,7 +45,6 @@
 | EXPIRED | &quot;EXPIRED&quot; |
 | LOCKED | &quot;LOCKED&quot; |
 | PENDING | &quot;PENDING&quot; |
-| SUSPENDED | &quot;SUSPENDED&quot; |
 
 
 

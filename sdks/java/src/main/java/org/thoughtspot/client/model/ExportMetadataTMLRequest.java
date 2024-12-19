@@ -24,7 +24,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
-import org.thoughtspot.client.model.ExportMetadataTMLRequestExportOptions;
 import org.thoughtspot.client.model.ExportMetadataTypeInput;
 
 import com.google.gson.Gson;
@@ -55,7 +54,7 @@ import org.thoughtspot.client.JSON;
 /**
  * ExportMetadataTMLRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-12-19T23:43:05.069148+05:30[Asia/Kolkata]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-08T10:47:55.743445Z[Etc/UTC]")
 public class ExportMetadataTMLRequest {
   public static final String SERIALIZED_NAME_METADATA = "metadata";
   @SerializedName(SERIALIZED_NAME_METADATA)
@@ -70,7 +69,7 @@ public class ExportMetadataTMLRequest {
   private Boolean exportFqn = false;
 
   /**
-   * TML EDOC content format.  **Note: exporting in YAML format currently requires manual formatting of the output. For more details on the workaround, please click [here](https://developers.thoughtspot.com/docs/known-issues#_version_9_12_0_cl)**
+   * TML EDOC content format.
    */
   @JsonAdapter(EdocFormatEnum.Adapter.class)
   public enum EdocFormatEnum {
@@ -185,10 +184,6 @@ public class ExportMetadataTMLRequest {
   @SerializedName(SERIALIZED_NAME_ALL_ORGS_OVERRIDE)
   private Boolean allOrgsOverride = false;
 
-  public static final String SERIALIZED_NAME_EXPORT_OPTIONS = "export_options";
-  @SerializedName(SERIALIZED_NAME_EXPORT_OPTIONS)
-  private ExportMetadataTMLRequestExportOptions exportOptions;
-
   public ExportMetadataTMLRequest() {
   }
 
@@ -270,7 +265,7 @@ public class ExportMetadataTMLRequest {
   }
 
    /**
-   * TML EDOC content format.  **Note: exporting in YAML format currently requires manual formatting of the output. For more details on the workaround, please click [here](https://developers.thoughtspot.com/docs/known-issues#_version_9_12_0_cl)**
+   * TML EDOC content format.
    * @return edocFormat
   **/
   @javax.annotation.Nullable
@@ -368,27 +363,6 @@ public class ExportMetadataTMLRequest {
   }
 
 
-  public ExportMetadataTMLRequest exportOptions(ExportMetadataTMLRequestExportOptions exportOptions) {
-    
-    this.exportOptions = exportOptions;
-    return this;
-  }
-
-   /**
-   * Get exportOptions
-   * @return exportOptions
-  **/
-  @javax.annotation.Nullable
-  public ExportMetadataTMLRequestExportOptions getExportOptions() {
-    return exportOptions;
-  }
-
-
-  public void setExportOptions(ExportMetadataTMLRequestExportOptions exportOptions) {
-    this.exportOptions = exportOptions;
-  }
-
-
 
   @Override
   public boolean equals(Object o) {
@@ -406,8 +380,7 @@ public class ExportMetadataTMLRequest {
         Objects.equals(this.exportSchemaVersion, exportMetadataTMLRequest.exportSchemaVersion) &&
         Objects.equals(this.exportDependent, exportMetadataTMLRequest.exportDependent) &&
         Objects.equals(this.exportConnectionAsDependent, exportMetadataTMLRequest.exportConnectionAsDependent) &&
-        Objects.equals(this.allOrgsOverride, exportMetadataTMLRequest.allOrgsOverride) &&
-        Objects.equals(this.exportOptions, exportMetadataTMLRequest.exportOptions);
+        Objects.equals(this.allOrgsOverride, exportMetadataTMLRequest.allOrgsOverride);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -416,7 +389,7 @@ public class ExportMetadataTMLRequest {
 
   @Override
   public int hashCode() {
-    return Objects.hash(metadata, exportAssociated, exportFqn, edocFormat, exportSchemaVersion, exportDependent, exportConnectionAsDependent, allOrgsOverride, exportOptions);
+    return Objects.hash(metadata, exportAssociated, exportFqn, edocFormat, exportSchemaVersion, exportDependent, exportConnectionAsDependent, allOrgsOverride);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -438,7 +411,6 @@ public class ExportMetadataTMLRequest {
     sb.append("    exportDependent: ").append(toIndentedString(exportDependent)).append("\n");
     sb.append("    exportConnectionAsDependent: ").append(toIndentedString(exportConnectionAsDependent)).append("\n");
     sb.append("    allOrgsOverride: ").append(toIndentedString(allOrgsOverride)).append("\n");
-    sb.append("    exportOptions: ").append(toIndentedString(exportOptions)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -469,7 +441,6 @@ public class ExportMetadataTMLRequest {
     openapiFields.add("export_dependent");
     openapiFields.add("export_connection_as_dependent");
     openapiFields.add("all_orgs_override");
-    openapiFields.add("export_options");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -518,10 +489,6 @@ public class ExportMetadataTMLRequest {
       }
       if ((jsonObj.get("export_schema_version") != null && !jsonObj.get("export_schema_version").isJsonNull()) && !jsonObj.get("export_schema_version").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `export_schema_version` to be a primitive type in the JSON string but got `%s`", jsonObj.get("export_schema_version").toString()));
-      }
-      // validate the optional field `export_options`
-      if (jsonObj.get("export_options") != null && !jsonObj.get("export_options").isJsonNull()) {
-        ExportMetadataTMLRequestExportOptions.validateJsonObject(jsonObj.getAsJsonObject("export_options"));
       }
   }
 

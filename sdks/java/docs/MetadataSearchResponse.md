@@ -33,7 +33,6 @@ Metadata Search Response Object.
 | USER | &quot;USER&quot; |
 | USER_GROUP | &quot;USER_GROUP&quot; |
 | LOGICAL_RELATIONSHIP | &quot;LOGICAL_RELATIONSHIP&quot; |
-| INSIGHT_SPEC | &quot;INSIGHT_SPEC&quot; |
 
 
 

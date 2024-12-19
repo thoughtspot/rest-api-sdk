@@ -23,7 +23,7 @@ import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import org.thoughtspot.client.model.SearchUserGroupsRequestSortOptions;
+import org.thoughtspot.client.model.SortOptions;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -53,7 +53,7 @@ import org.thoughtspot.client.JSON;
 /**
  * SearchUserGroupsRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-12-19T23:43:05.069148+05:30[Asia/Kolkata]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-08T10:47:55.743445Z[Etc/UTC]")
 public class SearchUserGroupsRequest {
   public static final String SERIALIZED_NAME_DEFAULT_LIVEBOARD_IDENTIFIERS = "default_liveboard_identifiers";
   @SerializedName(SERIALIZED_NAME_DEFAULT_LIVEBOARD_IDENTIFIERS)
@@ -144,17 +144,7 @@ public class SearchUserGroupsRequest {
     
     CAN_MANAGE_VERSION_CONTROL("CAN_MANAGE_VERSION_CONTROL"),
     
-    THIRDPARTY_ANALYSIS("THIRDPARTY_ANALYSIS"),
-    
-    ALLOW_NON_EMBED_FULL_APP_ACCESS("ALLOW_NON_EMBED_FULL_APP_ACCESS"),
-    
-    CAN_ACCESS_ANALYST_STUDIO("CAN_ACCESS_ANALYST_STUDIO"),
-    
-    CAN_MANAGE_ANALYST_STUDIO("CAN_MANAGE_ANALYST_STUDIO"),
-    
-    PREVIEW_DOCUMENT_SEARCH("PREVIEW_DOCUMENT_SEARCH"),
-    
-    CAN_SETUP_VERSION_CONTROL("CAN_SETUP_VERSION_CONTROL");
+    THIRDPARTY_ANALYSIS("THIRDPARTY_ANALYSIS");
 
     private String value;
 
@@ -322,7 +312,7 @@ public class SearchUserGroupsRequest {
 
   public static final String SERIALIZED_NAME_SORT_OPTIONS = "sort_options";
   @SerializedName(SERIALIZED_NAME_SORT_OPTIONS)
-  private SearchUserGroupsRequestSortOptions sortOptions;
+  private SortOptions sortOptions;
 
   public SearchUserGroupsRequest() {
   }
@@ -669,7 +659,7 @@ public class SearchUserGroupsRequest {
   }
 
 
-  public SearchUserGroupsRequest sortOptions(SearchUserGroupsRequestSortOptions sortOptions) {
+  public SearchUserGroupsRequest sortOptions(SortOptions sortOptions) {
     
     this.sortOptions = sortOptions;
     return this;
@@ -680,12 +670,12 @@ public class SearchUserGroupsRequest {
    * @return sortOptions
   **/
   @javax.annotation.Nullable
-  public SearchUserGroupsRequestSortOptions getSortOptions() {
+  public SortOptions getSortOptions() {
     return sortOptions;
   }
 
 
-  public void setSortOptions(SearchUserGroupsRequestSortOptions sortOptions) {
+  public void setSortOptions(SortOptions sortOptions) {
     this.sortOptions = sortOptions;
   }
 
@@ -847,7 +837,7 @@ public class SearchUserGroupsRequest {
       }
       // validate the optional field `sort_options`
       if (jsonObj.get("sort_options") != null && !jsonObj.get("sort_options").isJsonNull()) {
-        SearchUserGroupsRequestSortOptions.validateJsonObject(jsonObj.getAsJsonObject("sort_options"));
+        SortOptions.validateJsonObject(jsonObj.getAsJsonObject("sort_options"));
       }
   }
 

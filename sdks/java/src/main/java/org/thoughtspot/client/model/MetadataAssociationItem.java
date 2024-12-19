@@ -51,7 +51,7 @@ import org.thoughtspot.client.JSON;
 /**
  * MetadataAssociationItem
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-12-19T23:43:05.069148+05:30[Asia/Kolkata]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-08T10:47:55.743445Z[Etc/UTC]")
 public class MetadataAssociationItem {
   public static final String SERIALIZED_NAME_ACTION_CONFIG = "action_config";
   @SerializedName(SERIALIZED_NAME_ACTION_CONFIG)
@@ -117,7 +117,7 @@ public class MetadataAssociationItem {
   }
 
    /**
-   *   Type of metadata.     Required if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.
+   * Type of metadata.
    * @return type
   **/
   @javax.annotation.Nonnull

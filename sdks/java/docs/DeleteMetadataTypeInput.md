@@ -8,7 +8,7 @@ MetadataType InputType used in Delete MetadataType API
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**type** | [**TypeEnum**](#TypeEnum) |   Type of metadata.     Required if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier. |  [optional] |
+|**type** | [**TypeEnum**](#TypeEnum) | Type of metadata (Optional when given identifier is ID). |  [optional] |
 |**identifier** | **String** | Unique ID or name of the metadata object. |  |
 
 

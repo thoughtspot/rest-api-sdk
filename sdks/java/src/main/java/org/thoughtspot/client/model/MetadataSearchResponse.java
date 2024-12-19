@@ -23,7 +23,6 @@ import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -53,7 +52,7 @@ import org.thoughtspot.client.JSON;
 /**
  * Metadata Search Response Object.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-12-19T23:43:05.069148+05:30[Asia/Kolkata]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-08T10:47:55.743445Z[Etc/UTC]")
 public class MetadataSearchResponse {
   public static final String SERIALIZED_NAME_METADATA_ID = "metadata_id";
   @SerializedName(SERIALIZED_NAME_METADATA_ID)
@@ -84,9 +83,7 @@ public class MetadataSearchResponse {
     
     USER_GROUP("USER_GROUP"),
     
-    LOGICAL_RELATIONSHIP("LOGICAL_RELATIONSHIP"),
-    
-    INSIGHT_SPEC("INSIGHT_SPEC");
+    LOGICAL_RELATIONSHIP("LOGICAL_RELATIONSHIP");
 
     private String value;
 
@@ -383,20 +380,9 @@ public class MetadataSearchResponse {
         Objects.equals(this.stats, metadataSearchResponse.stats);
   }
 
-  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
-    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
-  }
-
   @Override
   public int hashCode() {
     return Objects.hash(metadataId, metadataName, metadataType, dependentObjects, incompleteObjects, metadataDetail, metadataHeader, visualizationHeaders, stats);
-  }
-
-  private static <T> int hashCodeNullable(JsonNullable<T> a) {
-    if (a == null) {
-      return 1;
-    }
-    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override

@@ -55,7 +55,7 @@ import org.thoughtspot.client.JSON;
 /**
  * FetchPermissionsOnMetadataRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-12-19T23:43:05.069148+05:30[Asia/Kolkata]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-08T10:47:55.743445Z[Etc/UTC]")
 public class FetchPermissionsOnMetadataRequest {
   public static final String SERIALIZED_NAME_METADATA = "metadata";
   @SerializedName(SERIALIZED_NAME_METADATA)
@@ -68,18 +68,6 @@ public class FetchPermissionsOnMetadataRequest {
   public static final String SERIALIZED_NAME_INCLUDE_DEPENDENT_OBJECTS = "include_dependent_objects";
   @SerializedName(SERIALIZED_NAME_INCLUDE_DEPENDENT_OBJECTS)
   private Boolean includeDependentObjects = false;
-
-  public static final String SERIALIZED_NAME_RECORD_OFFSET = "record_offset";
-  @SerializedName(SERIALIZED_NAME_RECORD_OFFSET)
-  private Integer recordOffset = 0;
-
-  public static final String SERIALIZED_NAME_RECORD_SIZE = "record_size";
-  @SerializedName(SERIALIZED_NAME_RECORD_SIZE)
-  private Integer recordSize = -1;
-
-  public static final String SERIALIZED_NAME_PERMISSION_TYPE = "permission_type";
-  @SerializedName(SERIALIZED_NAME_PERMISSION_TYPE)
-  private String permissionType;
 
   public FetchPermissionsOnMetadataRequest() {
   }
@@ -163,69 +151,6 @@ public class FetchPermissionsOnMetadataRequest {
   }
 
 
-  public FetchPermissionsOnMetadataRequest recordOffset(Integer recordOffset) {
-    
-    this.recordOffset = recordOffset;
-    return this;
-  }
-
-   /**
-   * The starting record number from where the records should be included for each metadata type.
-   * @return recordOffset
-  **/
-  @javax.annotation.Nullable
-  public Integer getRecordOffset() {
-    return recordOffset;
-  }
-
-
-  public void setRecordOffset(Integer recordOffset) {
-    this.recordOffset = recordOffset;
-  }
-
-
-  public FetchPermissionsOnMetadataRequest recordSize(Integer recordSize) {
-    
-    this.recordSize = recordSize;
-    return this;
-  }
-
-   /**
-   * The number of records that should be included for each metadata type.
-   * @return recordSize
-  **/
-  @javax.annotation.Nullable
-  public Integer getRecordSize() {
-    return recordSize;
-  }
-
-
-  public void setRecordSize(Integer recordSize) {
-    this.recordSize = recordSize;
-  }
-
-
-  public FetchPermissionsOnMetadataRequest permissionType(String permissionType) {
-    
-    this.permissionType = permissionType;
-    return this;
-  }
-
-   /**
-   * &lt;div&gt;Version: 10.3.0.cl or later &lt;/div&gt;  Specifies the type of permission. Valid values are:     EFFECTIVE - If the user permission to the metadata objects is granted by the privileges assigned to the groups to which they belong.     DEFINED - If a user or user group received access to metadata objects via object sharing by another user.
-   * @return permissionType
-  **/
-  @javax.annotation.Nullable
-  public String getPermissionType() {
-    return permissionType;
-  }
-
-
-  public void setPermissionType(String permissionType) {
-    this.permissionType = permissionType;
-  }
-
-
 
   @Override
   public boolean equals(Object o) {
@@ -238,10 +163,7 @@ public class FetchPermissionsOnMetadataRequest {
     FetchPermissionsOnMetadataRequest fetchPermissionsOnMetadataRequest = (FetchPermissionsOnMetadataRequest) o;
     return Objects.equals(this.metadata, fetchPermissionsOnMetadataRequest.metadata) &&
         Objects.equals(this.principals, fetchPermissionsOnMetadataRequest.principals) &&
-        Objects.equals(this.includeDependentObjects, fetchPermissionsOnMetadataRequest.includeDependentObjects) &&
-        Objects.equals(this.recordOffset, fetchPermissionsOnMetadataRequest.recordOffset) &&
-        Objects.equals(this.recordSize, fetchPermissionsOnMetadataRequest.recordSize) &&
-        Objects.equals(this.permissionType, fetchPermissionsOnMetadataRequest.permissionType);
+        Objects.equals(this.includeDependentObjects, fetchPermissionsOnMetadataRequest.includeDependentObjects);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -250,7 +172,7 @@ public class FetchPermissionsOnMetadataRequest {
 
   @Override
   public int hashCode() {
-    return Objects.hash(metadata, principals, includeDependentObjects, recordOffset, recordSize, permissionType);
+    return Objects.hash(metadata, principals, includeDependentObjects);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -267,9 +189,6 @@ public class FetchPermissionsOnMetadataRequest {
     sb.append("    metadata: ").append(toIndentedString(metadata)).append("\n");
     sb.append("    principals: ").append(toIndentedString(principals)).append("\n");
     sb.append("    includeDependentObjects: ").append(toIndentedString(includeDependentObjects)).append("\n");
-    sb.append("    recordOffset: ").append(toIndentedString(recordOffset)).append("\n");
-    sb.append("    recordSize: ").append(toIndentedString(recordSize)).append("\n");
-    sb.append("    permissionType: ").append(toIndentedString(permissionType)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -295,9 +214,6 @@ public class FetchPermissionsOnMetadataRequest {
     openapiFields.add("metadata");
     openapiFields.add("principals");
     openapiFields.add("include_dependent_objects");
-    openapiFields.add("record_offset");
-    openapiFields.add("record_size");
-    openapiFields.add("permission_type");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -354,9 +270,6 @@ public class FetchPermissionsOnMetadataRequest {
             PrincipalsInput.validateJsonObject(jsonArrayprincipals.get(i).getAsJsonObject());
           };
         }
-      }
-      if ((jsonObj.get("permission_type") != null && !jsonObj.get("permission_type").isJsonNull()) && !jsonObj.get("permission_type").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `permission_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("permission_type").toString()));
       }
   }
 

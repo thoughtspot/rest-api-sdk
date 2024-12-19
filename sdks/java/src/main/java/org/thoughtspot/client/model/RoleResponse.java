@@ -23,7 +23,6 @@ import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import org.openapitools.jackson.nullable.JsonNullable;
 import org.thoughtspot.client.model.GenericInfo;
 
 import com.google.gson.Gson;
@@ -54,7 +53,7 @@ import org.thoughtspot.client.JSON;
 /**
  * RoleResponse
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-12-19T23:43:05.069148+05:30[Asia/Kolkata]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-08T10:47:55.743445Z[Etc/UTC]")
 public class RoleResponse {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
@@ -139,17 +138,7 @@ public class RoleResponse {
     
     THIRDPARTY_ANALYSIS("THIRDPARTY_ANALYSIS"),
     
-    CAN_CREATE_CATALOG("CAN_CREATE_CATALOG"),
-    
-    ALLOW_NON_EMBED_FULL_APP_ACCESS("ALLOW_NON_EMBED_FULL_APP_ACCESS"),
-    
-    CAN_ACCESS_ANALYST_STUDIO("CAN_ACCESS_ANALYST_STUDIO"),
-    
-    CAN_MANAGE_ANALYST_STUDIO("CAN_MANAGE_ANALYST_STUDIO"),
-    
-    PREVIEW_DOCUMENT_SEARCH("PREVIEW_DOCUMENT_SEARCH"),
-    
-    CAN_SETUP_VERSION_CONTROL("CAN_SETUP_VERSION_CONTROL");
+    CAN_CREATE_CATALOG("CAN_CREATE_CATALOG");
 
     private String value;
 
@@ -225,7 +214,7 @@ public class RoleResponse {
           return b;
         }
       }
-      return null;
+      throw new IllegalArgumentException("Unexpected value '" + value + "'");
     }
 
     public static class Adapter extends TypeAdapter<PermissionEnum> {
@@ -695,20 +684,9 @@ public class RoleResponse {
         Objects.equals(this.sharedViaConnection, roleResponse.sharedViaConnection);
   }
 
-  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
-    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
-  }
-
   @Override
   public int hashCode() {
     return Objects.hash(id, name, description, groupsAssignedCount, orgs, groups, privileges, permission, authorId, modifierId, creationTimeInMillis, modificationTimeInMillis, deleted, deprecated, external, hidden, sharedViaConnection);
-  }
-
-  private static <T> int hashCodeNullable(JsonNullable<T> a) {
-    if (a == null) {
-      return 1;
-    }
-    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override

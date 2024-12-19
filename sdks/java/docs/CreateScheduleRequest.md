@@ -12,11 +12,11 @@
 |**metadataType** | [**MetadataTypeEnum**](#MetadataTypeEnum) | Type of the metadata object. |  |
 |**metadataIdentifier** | **String** | Unique ID or name of the metadata object. |  |
 |**fileFormat** | [**FileFormatEnum**](#FileFormatEnum) | Export file format. |  [optional] |
-|**liveboardOptions** | [**CreateScheduleRequestLiveboardOptions**](CreateScheduleRequestLiveboardOptions.md) |  |  [optional] |
-|**pdfOptions** | [**CreateScheduleRequestPdfOptions**](CreateScheduleRequestPdfOptions.md) |  |  [optional] |
+|**liveboardOptions** | [**LiveboardOptionsInput**](LiveboardOptionsInput.md) |  |  [optional] |
+|**pdfOptions** | [**SchedulesPdfOptionsInput**](SchedulesPdfOptionsInput.md) |  |  [optional] |
 |**timeZone** | [**TimeZoneEnum**](#TimeZoneEnum) | Time zone |  |
-|**frequency** | [**CreateScheduleRequestFrequency**](CreateScheduleRequestFrequency.md) |  |  [optional] |
-|**recipientDetails** | [**CreateScheduleRequestRecipientDetails**](CreateScheduleRequestRecipientDetails.md) |  |  |
+|**frequency** | [**FrequencyInput**](FrequencyInput.md) |  |  [optional] |
+|**recipientDetails** | [**RecipientDetailsInput**](RecipientDetailsInput.md) |  |  |
 
 
 

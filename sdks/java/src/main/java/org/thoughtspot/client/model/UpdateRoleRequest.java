@@ -52,7 +52,7 @@ import org.thoughtspot.client.JSON;
 /**
  * UpdateRoleRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-12-19T23:43:05.069148+05:30[Asia/Kolkata]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-08T10:47:55.743445Z[Etc/UTC]")
 public class UpdateRoleRequest {
   public static final String SERIALIZED_NAME_NAME = "name";
   @SerializedName(SERIALIZED_NAME_NAME)
@@ -121,13 +121,7 @@ public class UpdateRoleRequest {
     
     THIRDPARTY_ANALYSIS("THIRDPARTY_ANALYSIS"),
     
-    CAN_CREATE_CATALOG("CAN_CREATE_CATALOG"),
-    
-    CAN_ACCESS_ANALYST_STUDIO("CAN_ACCESS_ANALYST_STUDIO"),
-    
-    CAN_MANAGE_ANALYST_STUDIO("CAN_MANAGE_ANALYST_STUDIO"),
-    
-    PREVIEW_DOCUMENT_SEARCH("PREVIEW_DOCUMENT_SEARCH");
+    CAN_CREATE_CATALOG("CAN_CREATE_CATALOG");
 
     private String value;
 

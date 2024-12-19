@@ -51,7 +51,7 @@ import org.thoughtspot.client.JSON;
 /**
  * CreateConnectionRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-12-19T23:43:05.069148+05:30[Asia/Kolkata]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-08T10:47:55.743445Z[Etc/UTC]")
 public class CreateConnectionRequest {
   public static final String SERIALIZED_NAME_NAME = "name";
   @SerializedName(SERIALIZED_NAME_NAME)
@@ -124,11 +124,7 @@ public class CreateConnectionRequest {
     
     MODE("MODE"),
     
-    GOOGLE_SHEETS("GOOGLE_SHEETS"),
-    
-    FALCON("FALCON"),
-    
-    FALCON_ONPREM("FALCON_ONPREM");
+    GOOGLE_SHEETS("GOOGLE_SHEETS");
 
     private String value;
 

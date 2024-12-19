@@ -50,19 +50,11 @@ import org.thoughtspot.client.JSON;
 /**
  * ExportAnswerReportRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-12-19T23:43:05.069148+05:30[Asia/Kolkata]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-08T10:47:55.743445Z[Etc/UTC]")
 public class ExportAnswerReportRequest {
   public static final String SERIALIZED_NAME_METADATA_IDENTIFIER = "metadata_identifier";
   @SerializedName(SERIALIZED_NAME_METADATA_IDENTIFIER)
   private String metadataIdentifier;
-
-  public static final String SERIALIZED_NAME_SESSION_IDENTIFIER = "session_identifier";
-  @SerializedName(SERIALIZED_NAME_SESSION_IDENTIFIER)
-  private String sessionIdentifier;
-
-  public static final String SERIALIZED_NAME_GENERATION_NUMBER = "generation_number";
-  @SerializedName(SERIALIZED_NAME_GENERATION_NUMBER)
-  private Integer generationNumber;
 
   /**
    * Export file format.
@@ -144,7 +136,7 @@ public class ExportAnswerReportRequest {
    * Unique ID or name of the metadata object.
    * @return metadataIdentifier
   **/
-  @javax.annotation.Nullable
+  @javax.annotation.Nonnull
   public String getMetadataIdentifier() {
     return metadataIdentifier;
   }
@@ -152,48 +144,6 @@ public class ExportAnswerReportRequest {
 
   public void setMetadataIdentifier(String metadataIdentifier) {
     this.metadataIdentifier = metadataIdentifier;
-  }
-
-
-  public ExportAnswerReportRequest sessionIdentifier(String sessionIdentifier) {
-    
-    this.sessionIdentifier = sessionIdentifier;
-    return this;
-  }
-
-   /**
-   * Unique ID of the answer session.
-   * @return sessionIdentifier
-  **/
-  @javax.annotation.Nullable
-  public String getSessionIdentifier() {
-    return sessionIdentifier;
-  }
-
-
-  public void setSessionIdentifier(String sessionIdentifier) {
-    this.sessionIdentifier = sessionIdentifier;
-  }
-
-
-  public ExportAnswerReportRequest generationNumber(Integer generationNumber) {
-    
-    this.generationNumber = generationNumber;
-    return this;
-  }
-
-   /**
-   * Generation number of the answer session.
-   * @return generationNumber
-  **/
-  @javax.annotation.Nullable
-  public Integer getGenerationNumber() {
-    return generationNumber;
-  }
-
-
-  public void setGenerationNumber(Integer generationNumber) {
-    this.generationNumber = generationNumber;
   }
 
 
@@ -292,8 +242,6 @@ public class ExportAnswerReportRequest {
     }
     ExportAnswerReportRequest exportAnswerReportRequest = (ExportAnswerReportRequest) o;
     return Objects.equals(this.metadataIdentifier, exportAnswerReportRequest.metadataIdentifier) &&
-        Objects.equals(this.sessionIdentifier, exportAnswerReportRequest.sessionIdentifier) &&
-        Objects.equals(this.generationNumber, exportAnswerReportRequest.generationNumber) &&
         Objects.equals(this.fileFormat, exportAnswerReportRequest.fileFormat) &&
         Objects.equals(this.runtimeFilter, exportAnswerReportRequest.runtimeFilter) &&
         Objects.equals(this.runtimeSort, exportAnswerReportRequest.runtimeSort) &&
@@ -302,7 +250,7 @@ public class ExportAnswerReportRequest {
 
   @Override
   public int hashCode() {
-    return Objects.hash(metadataIdentifier, sessionIdentifier, generationNumber, fileFormat, runtimeFilter, runtimeSort, runtimeParamOverride);
+    return Objects.hash(metadataIdentifier, fileFormat, runtimeFilter, runtimeSort, runtimeParamOverride);
   }
 
   @Override
@@ -310,8 +258,6 @@ public class ExportAnswerReportRequest {
     StringBuilder sb = new StringBuilder();
     sb.append("class ExportAnswerReportRequest {\n");
     sb.append("    metadataIdentifier: ").append(toIndentedString(metadataIdentifier)).append("\n");
-    sb.append("    sessionIdentifier: ").append(toIndentedString(sessionIdentifier)).append("\n");
-    sb.append("    generationNumber: ").append(toIndentedString(generationNumber)).append("\n");
     sb.append("    fileFormat: ").append(toIndentedString(fileFormat)).append("\n");
     sb.append("    runtimeFilter: ").append(toIndentedString(runtimeFilter)).append("\n");
     sb.append("    runtimeSort: ").append(toIndentedString(runtimeSort)).append("\n");
@@ -339,8 +285,6 @@ public class ExportAnswerReportRequest {
     // a set of all properties/fields (JSON key names)
     openapiFields = new HashSet<String>();
     openapiFields.add("metadata_identifier");
-    openapiFields.add("session_identifier");
-    openapiFields.add("generation_number");
     openapiFields.add("file_format");
     openapiFields.add("runtime_filter");
     openapiFields.add("runtime_sort");
@@ -348,6 +292,7 @@ public class ExportAnswerReportRequest {
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
+    openapiRequiredFields.add("metadata_identifier");
   }
 
  /**
@@ -370,11 +315,15 @@ public class ExportAnswerReportRequest {
           throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `ExportAnswerReportRequest` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
         }
       }
-      if ((jsonObj.get("metadata_identifier") != null && !jsonObj.get("metadata_identifier").isJsonNull()) && !jsonObj.get("metadata_identifier").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `metadata_identifier` to be a primitive type in the JSON string but got `%s`", jsonObj.get("metadata_identifier").toString()));
+
+      // check to make sure all required properties/fields are present in the JSON string
+      for (String requiredField : ExportAnswerReportRequest.openapiRequiredFields) {
+        if (jsonObj.get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        }
       }
-      if ((jsonObj.get("session_identifier") != null && !jsonObj.get("session_identifier").isJsonNull()) && !jsonObj.get("session_identifier").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `session_identifier` to be a primitive type in the JSON string but got `%s`", jsonObj.get("session_identifier").toString()));
+      if (!jsonObj.get("metadata_identifier").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `metadata_identifier` to be a primitive type in the JSON string but got `%s`", jsonObj.get("metadata_identifier").toString()));
       }
       if ((jsonObj.get("file_format") != null && !jsonObj.get("file_format").isJsonNull()) && !jsonObj.get("file_format").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `file_format` to be a primitive type in the JSON string but got `%s`", jsonObj.get("file_format").toString()));

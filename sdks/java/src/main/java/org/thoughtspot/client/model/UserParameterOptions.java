@@ -23,11 +23,10 @@ import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import org.openapitools.jackson.nullable.JsonNullable;
-import org.thoughtspot.client.model.RuntimeFilters;
-import org.thoughtspot.client.model.RuntimeParameters;
-import org.thoughtspot.client.model.RuntimeSorts;
 import org.thoughtspot.client.model.UserObject;
+import org.thoughtspot.client.model.UserParameters;
+import org.thoughtspot.client.model.UserRuntimeFilters;
+import org.thoughtspot.client.model.UserRuntimeSorts;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -55,9 +54,9 @@ import java.util.Set;
 import org.thoughtspot.client.JSON;
 
 /**
- * Define attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters). 
+ * User properties runtime_filters,runtime_sorts,parameters applicable to LOGICAL_TABLE(Worksheet)
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-12-19T23:43:05.069148+05:30[Asia/Kolkata]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-08T10:47:55.743445Z[Etc/UTC]")
 public class UserParameterOptions {
   public static final String SERIALIZED_NAME_OBJECTS = "objects";
   @SerializedName(SERIALIZED_NAME_OBJECTS)
@@ -65,15 +64,19 @@ public class UserParameterOptions {
 
   public static final String SERIALIZED_NAME_RUNTIME_FILTERS = "runtime_filters";
   @SerializedName(SERIALIZED_NAME_RUNTIME_FILTERS)
-  private List<RuntimeFilters> runtimeFilters;
+  private List<UserRuntimeFilters> runtimeFilters;
 
   public static final String SERIALIZED_NAME_RUNTIME_SORTS = "runtime_sorts";
   @SerializedName(SERIALIZED_NAME_RUNTIME_SORTS)
-  private List<RuntimeSorts> runtimeSorts;
+  private List<UserRuntimeSorts> runtimeSorts;
 
   public static final String SERIALIZED_NAME_PARAMETERS = "parameters";
   @SerializedName(SERIALIZED_NAME_PARAMETERS)
-  private List<RuntimeParameters> parameters;
+  private List<UserParameters> parameters;
+
+  public static final String SERIALIZED_NAME_COMPRESS = "compress";
+  @SerializedName(SERIALIZED_NAME_COMPRESS)
+  private Boolean compress = false;
 
   public UserParameterOptions() {
   }
@@ -107,13 +110,13 @@ public class UserParameterOptions {
   }
 
 
-  public UserParameterOptions runtimeFilters(List<RuntimeFilters> runtimeFilters) {
+  public UserParameterOptions runtimeFilters(List<UserRuntimeFilters> runtimeFilters) {
     
     this.runtimeFilters = runtimeFilters;
     return this;
   }
 
-  public UserParameterOptions addRuntimeFiltersItem(RuntimeFilters runtimeFiltersItem) {
+  public UserParameterOptions addRuntimeFiltersItem(UserRuntimeFilters runtimeFiltersItem) {
     if (this.runtimeFilters == null) {
       this.runtimeFilters = new ArrayList<>();
     }
@@ -122,27 +125,27 @@ public class UserParameterOptions {
   }
 
    /**
-   * Objects to apply the User_Runtime_Filters.  Examples to set the &#x60;runtime_filters&#x60; : &#x60;&#x60;&#x60;json { \&quot;column_name\&quot;: \&quot;Color\&quot;, \&quot;operator\&quot;: \&quot;EQ\&quot;, \&quot;values\&quot;: [\&quot;red\&quot;], \&quot;persist\&quot;: false } &#x60;&#x60;&#x60;
+   * Get runtimeFilters
    * @return runtimeFilters
   **/
   @javax.annotation.Nullable
-  public List<RuntimeFilters> getRuntimeFilters() {
+  public List<UserRuntimeFilters> getRuntimeFilters() {
     return runtimeFilters;
   }
 
 
-  public void setRuntimeFilters(List<RuntimeFilters> runtimeFilters) {
+  public void setRuntimeFilters(List<UserRuntimeFilters> runtimeFilters) {
     this.runtimeFilters = runtimeFilters;
   }
 
 
-  public UserParameterOptions runtimeSorts(List<RuntimeSorts> runtimeSorts) {
+  public UserParameterOptions runtimeSorts(List<UserRuntimeSorts> runtimeSorts) {
     
     this.runtimeSorts = runtimeSorts;
     return this;
   }
 
-  public UserParameterOptions addRuntimeSortsItem(RuntimeSorts runtimeSortsItem) {
+  public UserParameterOptions addRuntimeSortsItem(UserRuntimeSorts runtimeSortsItem) {
     if (this.runtimeSorts == null) {
       this.runtimeSorts = new ArrayList<>();
     }
@@ -151,27 +154,27 @@ public class UserParameterOptions {
   }
 
    /**
-   * Objects to apply the User_Runtime_Sorts.  Examples to set the &#x60;runtime_sorts&#x60; : &#x60;&#x60;&#x60;json { \&quot;column_name\&quot;: \&quot;Color\&quot;, \&quot;order\&quot;: \&quot;ASC\&quot;, \&quot;persist\&quot;: false } &#x60;&#x60;&#x60;
+   * Get runtimeSorts
    * @return runtimeSorts
   **/
   @javax.annotation.Nullable
-  public List<RuntimeSorts> getRuntimeSorts() {
+  public List<UserRuntimeSorts> getRuntimeSorts() {
     return runtimeSorts;
   }
 
 
-  public void setRuntimeSorts(List<RuntimeSorts> runtimeSorts) {
+  public void setRuntimeSorts(List<UserRuntimeSorts> runtimeSorts) {
     this.runtimeSorts = runtimeSorts;
   }
 
 
-  public UserParameterOptions parameters(List<RuntimeParameters> parameters) {
+  public UserParameterOptions parameters(List<UserParameters> parameters) {
     
     this.parameters = parameters;
     return this;
   }
 
-  public UserParameterOptions addParametersItem(RuntimeParameters parametersItem) {
+  public UserParameterOptions addParametersItem(UserParameters parametersItem) {
     if (this.parameters == null) {
       this.parameters = new ArrayList<>();
     }
@@ -180,17 +183,38 @@ public class UserParameterOptions {
   }
 
    /**
-   * Objects to apply the Runtime_Parameters.  Examples to set the &#x60;parameters&#x60; : &#x60;&#x60;&#x60;json { \&quot;name\&quot;: \&quot;Color\&quot;, \&quot;values\&quot;: [\&quot;Blue\&quot;], \&quot;persist\&quot;: false } &#x60;&#x60;&#x60;
+   * Get parameters
    * @return parameters
   **/
   @javax.annotation.Nullable
-  public List<RuntimeParameters> getParameters() {
+  public List<UserParameters> getParameters() {
     return parameters;
   }
 
 
-  public void setParameters(List<RuntimeParameters> parameters) {
+  public void setParameters(List<UserParameters> parameters) {
     this.parameters = parameters;
+  }
+
+
+  public UserParameterOptions compress(Boolean compress) {
+    
+    this.compress = compress;
+    return this;
+  }
+
+   /**
+   * Get compress
+   * @return compress
+  **/
+  @javax.annotation.Nullable
+  public Boolean getCompress() {
+    return compress;
+  }
+
+
+  public void setCompress(Boolean compress) {
+    this.compress = compress;
   }
 
 
@@ -207,23 +231,13 @@ public class UserParameterOptions {
     return Objects.equals(this.objects, userParameterOptions.objects) &&
         Objects.equals(this.runtimeFilters, userParameterOptions.runtimeFilters) &&
         Objects.equals(this.runtimeSorts, userParameterOptions.runtimeSorts) &&
-        Objects.equals(this.parameters, userParameterOptions.parameters);
-  }
-
-  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
-    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
+        Objects.equals(this.parameters, userParameterOptions.parameters) &&
+        Objects.equals(this.compress, userParameterOptions.compress);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(objects, runtimeFilters, runtimeSorts, parameters);
-  }
-
-  private static <T> int hashCodeNullable(JsonNullable<T> a) {
-    if (a == null) {
-      return 1;
-    }
-    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
+    return Objects.hash(objects, runtimeFilters, runtimeSorts, parameters, compress);
   }
 
   @Override
@@ -234,6 +248,7 @@ public class UserParameterOptions {
     sb.append("    runtimeFilters: ").append(toIndentedString(runtimeFilters)).append("\n");
     sb.append("    runtimeSorts: ").append(toIndentedString(runtimeSorts)).append("\n");
     sb.append("    parameters: ").append(toIndentedString(parameters)).append("\n");
+    sb.append("    compress: ").append(toIndentedString(compress)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -260,6 +275,7 @@ public class UserParameterOptions {
     openapiFields.add("runtime_filters");
     openapiFields.add("runtime_sorts");
     openapiFields.add("parameters");
+    openapiFields.add("compress");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -309,7 +325,7 @@ public class UserParameterOptions {
 
           // validate the optional field `runtime_filters` (array)
           for (int i = 0; i < jsonArrayruntimeFilters.size(); i++) {
-            RuntimeFilters.validateJsonObject(jsonArrayruntimeFilters.get(i).getAsJsonObject());
+            UserRuntimeFilters.validateJsonObject(jsonArrayruntimeFilters.get(i).getAsJsonObject());
           };
         }
       }
@@ -323,7 +339,7 @@ public class UserParameterOptions {
 
           // validate the optional field `runtime_sorts` (array)
           for (int i = 0; i < jsonArrayruntimeSorts.size(); i++) {
-            RuntimeSorts.validateJsonObject(jsonArrayruntimeSorts.get(i).getAsJsonObject());
+            UserRuntimeSorts.validateJsonObject(jsonArrayruntimeSorts.get(i).getAsJsonObject());
           };
         }
       }
@@ -337,7 +353,7 @@ public class UserParameterOptions {
 
           // validate the optional field `parameters` (array)
           for (int i = 0; i < jsonArrayparameters.size(); i++) {
-            RuntimeParameters.validateJsonObject(jsonArrayparameters.get(i).getAsJsonObject());
+            UserParameters.validateJsonObject(jsonArrayparameters.get(i).getAsJsonObject());
           };
         }
       }

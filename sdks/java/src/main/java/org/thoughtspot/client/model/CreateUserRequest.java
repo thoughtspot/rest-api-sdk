@@ -54,7 +54,7 @@ import org.thoughtspot.client.JSON;
 /**
  * CreateUserRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-12-19T23:43:05.069148+05:30[Asia/Kolkata]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-08T10:47:55.743445Z[Etc/UTC]")
 public class CreateUserRequest {
   public static final String SERIALIZED_NAME_NAME = "name";
   @SerializedName(SERIALIZED_NAME_NAME)
@@ -130,7 +130,7 @@ public class CreateUserRequest {
   private AccountTypeEnum accountType = AccountTypeEnum.LOCAL_USER;
 
   /**
-   * Current status of the user account. The &#x60;SUSPENDED&#x60; user state indicates a transitional state applicable to IAMv2 users only.
+   * Current status of the user account.
    */
   @JsonAdapter(AccountStatusEnum.Adapter.class)
   public enum AccountStatusEnum {
@@ -142,9 +142,7 @@ public class CreateUserRequest {
     
     LOCKED("LOCKED"),
     
-    PENDING("PENDING"),
-    
-    SUSPENDED("SUSPENDED");
+    PENDING("PENDING");
 
     private String value;
 
@@ -422,7 +420,7 @@ public class CreateUserRequest {
   }
 
    /**
-   * Password for the user account. For IAMv2 users, you must set this password if you do not want to trigger an activation email.
+   * Password for the user account.
    * @return password
   **/
   @javax.annotation.Nullable
@@ -485,7 +483,7 @@ public class CreateUserRequest {
   }
 
    /**
-   * Current status of the user account. The &#x60;SUSPENDED&#x60; user state indicates a transitional state applicable to IAMv2 users only.
+   * Current status of the user account.
    * @return accountStatus
   **/
   @javax.annotation.Nullable
@@ -761,7 +759,7 @@ public class CreateUserRequest {
   }
 
    /**
-   * Flag to indicate whether welcome email should be sent to user. This parameter is applied only on clusters on which IAM is disabled.
+   * Flag to indicate whether welcome email should be sent to user
    * @return triggerWelcomeEmail
   **/
   @javax.annotation.Nullable
@@ -782,7 +780,7 @@ public class CreateUserRequest {
   }
 
    /**
-   * Flag to indicate whether activation email should be sent to the user. Default value for IAMv2 users is set to true. Users must either set this to false, or enter a valid  password if they do not want to trigger an activation email.
+   * Flag to indicate whether activation email should be sent to user
    * @return triggerActivationEmail
   **/
   @javax.annotation.Nullable
