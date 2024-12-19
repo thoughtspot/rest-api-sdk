@@ -2138,7 +2138,7 @@ declare class CreateConnectionRequest {
     }[];
     constructor();
 }
-type CreateConnectionRequestDataWarehouseTypeEnum = "SNOWFLAKE" | "AMAZON_REDSHIFT" | "GOOGLE_BIGQUERY" | "AZURE_SYNAPSE" | "TERADATA" | "SAP_HANA" | "STARBURST" | "ORACLE_ADW" | "DATABRICKS" | "DENODO" | "DREMIO" | "TRINO" | "PRESTO" | "POSTGRES" | "SQLSERVER" | "MYSQL" | "GENERIC_JDBC" | "AMAZON_RDS_POSTGRESQL" | "AMAZON_AURORA_POSTGRESQL" | "AMAZON_RDS_MYSQL" | "AMAZON_AURORA_MYSQL" | "LOOKER" | "AMAZON_ATHENA" | "SINGLESTORE" | "GCP_SQLSERVER" | "GCP_ALLOYDB_POSTGRESQL" | "GCP_POSTGRESQL" | "GCP_MYSQL" | "MODE" | "GOOGLE_SHEETS";
+type CreateConnectionRequestDataWarehouseTypeEnum = "SNOWFLAKE" | "AMAZON_REDSHIFT" | "GOOGLE_BIGQUERY" | "AZURE_SYNAPSE" | "TERADATA" | "SAP_HANA" | "STARBURST" | "ORACLE_ADW" | "DATABRICKS" | "DENODO" | "DREMIO" | "TRINO" | "PRESTO" | "POSTGRES" | "SQLSERVER" | "MYSQL" | "GENERIC_JDBC" | "AMAZON_RDS_POSTGRESQL" | "AMAZON_AURORA_POSTGRESQL" | "AMAZON_RDS_MYSQL" | "AMAZON_AURORA_MYSQL" | "LOOKER" | "AMAZON_ATHENA" | "SINGLESTORE" | "GCP_SQLSERVER" | "GCP_ALLOYDB_POSTGRESQL" | "GCP_POSTGRESQL" | "GCP_MYSQL" | "MODE" | "GOOGLE_SHEETS" | "FALCON" | "FALCON_ONPREM";
 
 /**
  * ThoughtSpot Public REST API
@@ -2183,7 +2183,7 @@ declare class CreateConnectionResponse {
     }[];
     constructor();
 }
-type CreateConnectionResponseDataWarehouseTypeEnum = "SNOWFLAKE" | "AMAZON_REDSHIFT" | "GOOGLE_BIGQUERY" | "AZURE_SYNAPSE" | "TERADATA" | "SAP_HANA" | "STARBURST" | "ORACLE_ADW" | "DATABRICKS" | "DENODO" | "DREMIO" | "TRINO" | "PRESTO" | "POSTGRES" | "SQLSERVER" | "MYSQL" | "GENERIC_JDBC" | "AMAZON_RDS_POSTGRESQL" | "AMAZON_AURORA_POSTGRESQL" | "AMAZON_RDS_MYSQL" | "AMAZON_AURORA_MYSQL" | "LOOKER" | "AMAZON_ATHENA" | "SINGLESTORE" | "GCP_SQLSERVER" | "GCP_ALLOYDB_POSTGRESQL" | "GCP_POSTGRESQL" | "GCP_MYSQL" | "MODE" | "GOOGLE_SHEETS";
+type CreateConnectionResponseDataWarehouseTypeEnum = "SNOWFLAKE" | "AMAZON_REDSHIFT" | "GOOGLE_BIGQUERY" | "AZURE_SYNAPSE" | "TERADATA" | "SAP_HANA" | "STARBURST" | "ORACLE_ADW" | "DATABRICKS" | "DENODO" | "DREMIO" | "TRINO" | "PRESTO" | "POSTGRES" | "SQLSERVER" | "MYSQL" | "GENERIC_JDBC" | "AMAZON_RDS_POSTGRESQL" | "AMAZON_AURORA_POSTGRESQL" | "AMAZON_RDS_MYSQL" | "AMAZON_AURORA_MYSQL" | "LOOKER" | "AMAZON_ATHENA" | "SINGLESTORE" | "GCP_SQLSERVER" | "GCP_ALLOYDB_POSTGRESQL" | "GCP_POSTGRESQL" | "GCP_MYSQL" | "MODE" | "GOOGLE_SHEETS" | "FALCON" | "FALCON_ONPREM";
 
 /**
  * ThoughtSpot Public REST API
@@ -2903,7 +2903,7 @@ declare class CreateUserRequest {
     */
     'display_name': string;
     /**
-    * Password for the user account.
+    * Password for the user account. For IAMv2 users, you must set this password if you do not want to trigger an activation email.
     */
     'password'?: string;
     /**
@@ -2915,7 +2915,7 @@ declare class CreateUserRequest {
     */
     'account_type'?: CreateUserRequestAccountTypeEnum;
     /**
-    * Current status of the user account.
+    * Current status of the user account. The `SUSPENDED` user state indicates a transitional state applicable to IAMv2 users only.
     */
     'account_status'?: CreateUserRequestAccountStatusEnum;
     /**
@@ -2967,7 +2967,7 @@ declare class CreateUserRequest {
     */
     'trigger_welcome_email'?: boolean | null;
     /**
-    * Flag to indicate whether activation email should be sent to user.
+    * Flag to indicate whether activation email should be sent to the user. Default value for IAMv2 users is set to true. Users must either set this to false, or enter a valid  password if they do not want to trigger an activation email.
     */
     'trigger_activation_email'?: boolean | null;
     static readonly discriminator: string | undefined;
@@ -4244,6 +4244,49 @@ type ExportMetadataTMLBatchedRequestEdocFormatEnum = "JSON" | "YAML";
  * Do not edit the class manually.
  */
 /**
+* Flags to specify additional options for export.    Version: 10.5.0.cl or later
+*/
+declare class ExportMetadataTMLRequestExportOptions {
+    /**
+    * Boolean Flag to whether to export user_defined_id of referenced object. This will only be respected when UserDefinedId in TML is enabled.
+    */
+    'export_with_reference_object_id'?: boolean | null;
+    /**
+    * Boolean flag to whether to export guid of the object. This will only be respected when UserDefinedId in TML is enabled.
+    */
+    'include_guid'?: boolean | null;
+    /**
+    * Boolean flag to whether to export user_defined_id of the object. This will only be respected when UserDefinedId in TML is enabled.
+    */
+    'include_object_id'?: boolean | null;
+    static readonly discriminator: string | undefined;
+    static readonly attributeTypeMap: Array<{
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }>;
+    static getAttributeTypeMap(): {
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }[];
+    constructor();
+}
+
+/**
+ * ThoughtSpot Public REST API
+ * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
+ *
+ * OpenAPI spec version: 2.0
+ *
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
 * MetadataType InputType used in Export MetadataType API
 */
 declare class ExportMetadataTypeInput {
@@ -4317,6 +4360,7 @@ declare class ExportMetadataTMLRequest {
     * Indicates whether to export is happening from all orgs context.
     */
     'all_orgs_override'?: boolean | null;
+    'export_options'?: ExportMetadataTMLRequestExportOptions;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -4334,6 +4378,49 @@ declare class ExportMetadataTMLRequest {
 }
 type ExportMetadataTMLRequestEdocFormatEnum = "JSON" | "YAML";
 type ExportMetadataTMLRequestExportSchemaVersionEnum = "DEFAULT" | "V1" | "V2";
+
+/**
+ * ThoughtSpot Public REST API
+ * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
+ *
+ * OpenAPI spec version: 2.0
+ *
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+* Flags to specify additional options for export. This will only be active when UserDefinedId in TML is enabled.
+*/
+declare class ExportOptions {
+    /**
+    * Boolean Flag to whether to export user_defined_id of referenced object. This will only be respected when UserDefinedId in TML is enabled.
+    */
+    'export_with_reference_object_id'?: boolean | null;
+    /**
+    * Boolean flag to whether to export guid of the object. This will only be respected when UserDefinedId in TML is enabled.
+    */
+    'include_guid'?: boolean | null;
+    /**
+    * Boolean flag to whether to export user_defined_id of the object. This will only be respected when UserDefinedId in TML is enabled.
+    */
+    'include_object_id'?: boolean | null;
+    static readonly discriminator: string | undefined;
+    static readonly attributeTypeMap: Array<{
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }>;
+    static getAttributeTypeMap(): {
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }[];
+    constructor();
+}
 
 /**
  * ThoughtSpot Public REST API
@@ -5335,7 +5422,7 @@ type TokenAccessScopeObjectTypeEnum = "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE";
 
 declare class GetCustomAccessTokenRequest {
     /**
-    * Username for which the token needs to be created.
+    * Username of the ThoughtSpot user. The username is stored in the `name` attribute of the user object.
     */
     'username': string;
     /**
@@ -5382,6 +5469,10 @@ declare class GetCustomAccessTokenRequest {
     * (just-in-time (JIT) provisioning) ID or name of the groups to which the newly created user belongs. Specify this attribute when creating a new user.
     */
     'groups'?: Array<GroupObject>;
+    /**
+    *    Creates a new user if the specified username does not exist in ThoughtSpot. To provision a user just-in-time (JIT), set this attribute to true.      Note: For JIT provisioning of a user, the secret_key is required.     Version: 10.5.0.cl or later
+    */
+    'auto_create'?: boolean | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -5397,7 +5488,7 @@ declare class GetCustomAccessTokenRequest {
     }[];
     constructor();
 }
-type GetCustomAccessTokenRequestPersistOptionEnum = "APPEND" | "NONE" | "RESET";
+type GetCustomAccessTokenRequestPersistOptionEnum = "APPEND" | "NONE" | "REPLACE" | "RESET";
 
 /**
  * ThoughtSpot Public REST API
@@ -5648,7 +5739,7 @@ declare class GetObjectAccessTokenRequestUserParameters {
 
 declare class GetFullAccessTokenRequest {
     /**
-    * Username of the ThoughtSpot user
+    * Username of the ThoughtSpot user. The username is stored in the `name` attribute of the user object.
     */
     'username': string;
     /**
@@ -5714,7 +5805,7 @@ declare class GetFullAccessTokenRequest {
 
 declare class GetObjectAccessTokenRequest {
     /**
-    * Username of the ThoughtSpot user
+    * Username of the ThoughtSpot user. The username is stored in the `name` attribute of the user object.
     */
     'username': string;
     /**
@@ -5913,6 +6004,14 @@ declare class ImportMetadataTMLAsyncRequest {
     * Boolean to indicate if the CDW validation for table imports should be skipped.
     */
     'skip_cdw_validation_for_tables'?: boolean | null;
+    /**
+    * <div>Version: 10.5.0.cl or later </div>  Policy to be followed while importing the TML. Valid values are [PARTIAL_OBJECT, PARTIAL, VALIDATE_ONLY, ALL_OR_NONE]
+    */
+    'import_policy'?: ImportMetadataTMLAsyncRequestImportPolicyEnum;
+    /**
+    * <div>Version: 10.5.0.cl or later </div>  Boolean to indicate if the large metadata validation should be enabled.
+    */
+    'enable_large_metadata_validation'?: boolean | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -5928,6 +6027,7 @@ declare class ImportMetadataTMLAsyncRequest {
     }[];
     constructor();
 }
+type ImportMetadataTMLAsyncRequestImportPolicyEnum = "PARTIAL" | "ALL_OR_NONE" | "VALIDATE_ONLY" | "PARTIAL_OBJECT";
 
 /**
  * ThoughtSpot Public REST API
@@ -5961,6 +6061,10 @@ declare class ImportMetadataTMLRequest {
     * Boolean to indicate if the CDW validation for table imports should be skipped.
     */
     'skip_cdw_validation_for_tables'?: boolean | null;
+    /**
+    * <div>Version: 10.5.0.cl or later </div>  Boolean to indicate if the large metadata validation should be enabled.
+    */
+    'enable_large_metadata_validation'?: boolean | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -6815,6 +6919,10 @@ declare class MetadataListItemInput {
     * Unique ID or name of the metadata.
     */
     'identifier'?: string | null;
+    /**
+    * CustomObjectId of the metadata.
+    */
+    'custom_identifier'?: string | null;
     /**
     * A pattern to match the case-insensitive name of the metadata object. User % for a wildcard match.
     */
@@ -8637,9 +8745,9 @@ declare class SearchConnectionRequest {
     }[];
     constructor();
 }
-type SearchConnectionRequestDataWarehouseTypesEnum = "SNOWFLAKE" | "AMAZON_REDSHIFT" | "GOOGLE_BIGQUERY" | "AZURE_SYNAPSE" | "TERADATA" | "SAP_HANA" | "STARBURST" | "ORACLE_ADW" | "DATABRICKS" | "DENODO" | "DREMIO" | "TRINO" | "PRESTO" | "POSTGRES" | "SQLSERVER" | "MYSQL" | "GENERIC_JDBC" | "AMAZON_RDS_POSTGRESQL" | "AMAZON_AURORA_POSTGRESQL" | "AMAZON_RDS_MYSQL" | "AMAZON_AURORA_MYSQL" | "LOOKER" | "AMAZON_ATHENA" | "SINGLESTORE" | "GCP_SQLSERVER" | "GCP_ALLOYDB_POSTGRESQL" | "GCP_POSTGRESQL" | "GCP_MYSQL" | "MODE" | "GOOGLE_SHEETS";
+type SearchConnectionRequestDataWarehouseTypesEnum = "SNOWFLAKE" | "AMAZON_REDSHIFT" | "GOOGLE_BIGQUERY" | "AZURE_SYNAPSE" | "TERADATA" | "SAP_HANA" | "STARBURST" | "ORACLE_ADW" | "DATABRICKS" | "DENODO" | "DREMIO" | "TRINO" | "PRESTO" | "POSTGRES" | "SQLSERVER" | "MYSQL" | "GENERIC_JDBC" | "AMAZON_RDS_POSTGRESQL" | "AMAZON_AURORA_POSTGRESQL" | "AMAZON_RDS_MYSQL" | "AMAZON_AURORA_MYSQL" | "LOOKER" | "AMAZON_ATHENA" | "SINGLESTORE" | "GCP_SQLSERVER" | "GCP_ALLOYDB_POSTGRESQL" | "GCP_POSTGRESQL" | "GCP_MYSQL" | "MODE" | "GOOGLE_SHEETS" | "FALCON" | "FALCON_ONPREM";
 type SearchConnectionRequestDataWarehouseObjectTypeEnum = "DATABASE" | "SCHEMA" | "TABLE" | "COLUMN";
-type SearchConnectionRequestAuthenticationTypeEnum = "SERVICE_ACCOUNT" | "OAUTH" | "IAM" | "EXTOAUTH";
+type SearchConnectionRequestAuthenticationTypeEnum = "SERVICE_ACCOUNT" | "OAUTH" | "IAM" | "EXTOAUTH" | "OAUTH_WITH_SERVICE_PRINCIPAL" | "PERSONAL_ACCESS_TOKEN";
 
 /**
  * ThoughtSpot Public REST API
@@ -8690,7 +8798,7 @@ declare class SearchConnectionResponse {
     }[];
     constructor();
 }
-type SearchConnectionResponseDataWarehouseTypeEnum = "SNOWFLAKE" | "AMAZON_REDSHIFT" | "GOOGLE_BIGQUERY" | "AZURE_SYNAPSE" | "TERADATA" | "SAP_HANA" | "STARBURST" | "ORACLE_ADW" | "DATABRICKS" | "DENODO" | "DREMIO" | "TRINO" | "PRESTO" | "POSTGRES" | "SQLSERVER" | "MYSQL" | "GENERIC_JDBC" | "AMAZON_RDS_POSTGRESQL" | "AMAZON_AURORA_POSTGRESQL" | "AMAZON_RDS_MYSQL" | "AMAZON_AURORA_MYSQL" | "LOOKER" | "AMAZON_ATHENA" | "SINGLESTORE" | "GCP_SQLSERVER" | "GCP_ALLOYDB_POSTGRESQL" | "GCP_POSTGRESQL" | "GCP_MYSQL" | "MODE" | "GOOGLE_SHEETS";
+type SearchConnectionResponseDataWarehouseTypeEnum = "SNOWFLAKE" | "AMAZON_REDSHIFT" | "GOOGLE_BIGQUERY" | "AZURE_SYNAPSE" | "TERADATA" | "SAP_HANA" | "STARBURST" | "ORACLE_ADW" | "DATABRICKS" | "DENODO" | "DREMIO" | "TRINO" | "PRESTO" | "POSTGRES" | "SQLSERVER" | "MYSQL" | "GENERIC_JDBC" | "AMAZON_RDS_POSTGRESQL" | "AMAZON_AURORA_POSTGRESQL" | "AMAZON_RDS_MYSQL" | "AMAZON_AURORA_MYSQL" | "LOOKER" | "AMAZON_ATHENA" | "SINGLESTORE" | "GCP_SQLSERVER" | "GCP_ALLOYDB_POSTGRESQL" | "GCP_POSTGRESQL" | "GCP_MYSQL" | "MODE" | "GOOGLE_SHEETS" | "FALCON" | "FALCON_ONPREM";
 
 /**
  * ThoughtSpot Public REST API
@@ -9802,7 +9910,7 @@ declare class ShareMetadataTypeInput {
     }[];
     constructor();
 }
-type ShareMetadataTypeInputTypeEnum = "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE";
+type ShareMetadataTypeInputTypeEnum = "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE" | "LOGICAL_COLUMN";
 
 /**
  * ThoughtSpot Public REST API
@@ -9853,7 +9961,7 @@ type SharePermissionsInputShareModeEnum = "READ_ONLY" | "MODIFY" | "NO_ACCESS";
 
 declare class ShareMetadataRequest {
     /**
-    * Type of metadata. Required if identifier in metadata_identifies is a name. 1. Liveboard 2. Answers 3. LOGICAL_TABLE for any data object such as table, worksheet or view.
+    * Type of metadata. Required if identifier in metadata_identifies is a name. 1. Liveboard 2. Answers 3. LOGICAL_TABLE for any data object such as table, worksheet or view. 4. LOGICAL_COLUMN
     */
     'metadata_type'?: ShareMetadataRequestMetadataTypeEnum;
     /**
@@ -9875,7 +9983,7 @@ declare class ShareMetadataRequest {
     /**
     * Email IDs to which notifications will be sent.
     */
-    'emails': Array<string>;
+    'emails'?: Array<string>;
     /**
     * Message to be included in notification.
     */
@@ -9907,7 +10015,7 @@ declare class ShareMetadataRequest {
     }[];
     constructor();
 }
-type ShareMetadataRequestMetadataTypeEnum = "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE";
+type ShareMetadataRequestMetadataTypeEnum = "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE" | "LOGICAL_COLUMN";
 
 /**
  * ThoughtSpot Public REST API
@@ -11281,7 +11389,7 @@ declare class UpdateUserRequest {
     */
     'email'?: string;
     /**
-    * Current status of the user account.
+    * Current status of the user account. The `SUSPENDED` user state indicates a transitional state applicable to IAMv2 users only.
     */
     'account_status'?: UpdateUserRequestAccountStatusEnum;
     /**
@@ -12019,18 +12127,18 @@ declare class RequiredError extends Error {
  */
 declare class AIApiRequestFactory extends BaseAPIRequestFactory {
     /**
-     *   Version: 10.4.0.cl or later   Creates a Conversation identifier to start an AI-driven conversation based on a specific data model.  This API requires the metadata_identifier parameter to define the context for the conversation.  Optionally, tokens can be provided to directly initiate the conversation.
+     *  Version: 10.4.0.cl or later   Creates a Conversation object to start an AI-driven conversation based on a specific data model.  Requires at least view access to the metadata object specified in the request.  #### Usage guidelines  This API requires the `metadata_identifier` parameter to define the context for the conversation.  You can also specify the tokens to initiate the conversation as shown in this example:  `\"tokens\": \"[tea],[sales],[type]\"`  If the API request is successful, ThoughtSpot returns the ID of the conversation.  > ###### Note: > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.
      * @param createConversationRequest
      */
     createConversation(createConversationRequest: CreateConversationRequest, _options?: Configuration): Promise<RequestContext>;
     /**
-     *   Version: 10.4.0.cl or later   Sends a follow-up message to an ongoing conversation within the context of a specific data model and the conversation identifier.
+     *  Version: 10.4.0.cl or later   Allows sending a follow-up message to an ongoing conversation within the context of the metadata model.  Requires at least view access to the metadata object specified in the request.  #### Usage guidelines  The API requires you to specify the `conversation_identifier` in the request path, and a `metadata_identifier` and `message` string in the request body.  If the API request is successful, ThoughtSpot returns the session ID, tokens used in the conversation, and visualization type.  > ###### Note: > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.
      * @param conversationIdentifier Unique identifier of the conversation.
      * @param sendMessageRequest
      */
     sendMessage(conversationIdentifier: string, sendMessageRequest: SendMessageRequest, _options?: Configuration): Promise<RequestContext>;
     /**
-     *   Version: 10.4.0.cl or later   Processes a natural language query and returns an AI-generated response based on a specified data model.
+     *  Version: 10.4.0.cl or later   Processes a natural language query and returns an AI-generated response based on a specified data model.  Requires at least view access to the metadata object specified in the request.  > ###### Note: > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.
      * @param singleAnswerRequest
      */
     singleAnswer(singleAnswerRequest: SingleAnswerRequest, _options?: Configuration): Promise<RequestContext>;
@@ -12075,7 +12183,7 @@ declare class AuthenticationApiRequestFactory extends BaseAPIRequestFactory {
      */
     getCurrentUserToken(_options?: Configuration): Promise<RequestContext>;
     /**
-     *  Version: 10.4.0.cl or later
+     *   Version: 10.4.0.cl or later   Gets an authentication token with custom rules and security attributes and creates a full session in ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot remains valid for 5 mins.  To add a new user and assign privileges during auto creation, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.  To assign security attributes with filter rules and Parameters to the JWT token, you\'ll need administrator privileges and edit access to the data source (Worksheet or Model). If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.  #### Usage guidelines  You can generate the token for a user by providing a `username` and `password`, or by using the cluster’s `secret_key`.  To generate a `secret_key` on your cluster, the administrator must enable [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable) in the **Develop** > **Customizations** > **Security Settings** page.  **Note**: When both `password` and `secret_key` are included in the API request, `password` takes precedence.  ##### Attribute-Based Access Control (ABAC) with tokens  To implement Attribute-Based Access Control (ABAC) and assign security entitlements to users during session creation, you can generate a token with custom filtering rules and Parameters in the `filter_rules` and `parameter_values` array respectively. These attributes can be configured to persist on a specific set of objects for user sessions initiated using the token. Once defined, the rules are added to the user\'s `access_control_properties` object, after which all sessions will use the persisted values.  For more information, see [ABAC via tokens Documentation](https://developers.thoughtspot.com/docs/api-authv2#_get_tokens_with_custom_rules_and_filter_conditions).  ##### Just-in-time provisioning  For just-in-time user creation and provisioning, define the following attributes:  * `auto_create` * `username` * `display_name` * `email` * `groups`  Set `auto_create` to `true` if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create` parameter is set to `true` in the API request, the user properties such as the display name, email, Org and group assignment will not be updated with new values.  For more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).  ##### Important point to note All options in the token creation APIs that define access to the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, `auto_create:true` will create the user when the authentication token is created. Persist options such as  `APPEND`, `REPLACE`, `RESET` will persist security parameters on the user profile when the token is created, while Persist option `NONE` will not persist anything but will be honoured in the session.
      * @param getCustomAccessTokenRequest
      */
     getCustomAccessToken(getCustomAccessTokenRequest: GetCustomAccessTokenRequest, _options?: Configuration): Promise<RequestContext>;
@@ -12262,7 +12370,7 @@ declare class ConnectionsApiResponseProcessor {
      * @params response Response returned by the server for a request to downloadConnectionMetadataChanges
      * @throws ApiException if the response code was not in [200, 299]
      */
-    downloadConnectionMetadataChanges(response: ResponseContext): Promise<HttpFile>;
+    downloadConnectionMetadataChanges(response: ResponseContext): Promise<void>;
     /**
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
@@ -12515,7 +12623,7 @@ declare class GroupsApiRequestFactory extends BaseAPIRequestFactory {
      */
     searchUserGroups(searchUserGroupsRequest: SearchUserGroupsRequest, _options?: Configuration): Promise<RequestContext>;
     /**
-     *   Version: 9.0.0.cl or later   Updates the properties of a group object in ThoughtSpot.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Supported operations  This API endpoint lets you perform the following operations in a single API request:  * Edit [privileges](https://developers.thoughtspot.com/docs/?pageid=api-user-management#group-privileges) * Add or remove users * Change sharing visibility settings * Add or remove sub-groups * Assign a default Liveboard  or update the existing settings
+     *   Version: 9.0.0.cl or later   Updates the properties of a group object in ThoughtSpot.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `GROUP_ADMINISTRATION` (**Can manage groups**) privilege is required.  #### Supported operations  This API endpoint lets you perform the following operations in a single API request:  * Edit [privileges](https://developers.thoughtspot.com/docs/?pageid=api-user-management#group-privileges) * Add or remove users * Change sharing visibility settings * Add or remove sub-groups * Assign a default Liveboard  or update the existing settings
      * @param groupIdentifier GUID or name of the group.
      * @param updateUserGroupRequest
      */
@@ -12615,7 +12723,7 @@ declare class MetadataApiRequestFactory extends BaseAPIRequestFactory {
      */
     fetchAnswerSqlQuery(fetchAnswerSqlQueryRequest: FetchAnswerSqlQueryRequest, _options?: Configuration): Promise<RequestContext>;
     /**
-     *  Version: 10.4.0.cl or later
+     *   Version: 10.4.0.cl or later   Gets information about the status of the TML async import task scheduled using the `/api/rest/2.0/metadata/tml/async/import` API call.  To fetch the task details, specify the ID of the TML async import task.    Requires access to the task ID. The API allows users who initiated the asynchronous TML import via `/api/rest/2.0/metadata/tml/async/import` to view the status of their tasks.  Users with administration privilege can view the status of all import tasks initiated by the users in their Org.  #### Usage guidelines  See [TML API Documentation](https://developers.thoughtspot.com/docs/tml#_fetch_status_of_the_tml_import_task) for usage guidelines.
      * @param fetchAsyncImportTaskStatusRequest
      */
     fetchAsyncImportTaskStatus(fetchAsyncImportTaskStatusRequest: FetchAsyncImportTaskStatusRequest, _options?: Configuration): Promise<RequestContext>;
@@ -12630,7 +12738,7 @@ declare class MetadataApiRequestFactory extends BaseAPIRequestFactory {
      */
     importMetadataTML(importMetadataTMLRequest: ImportMetadataTMLRequest, _options?: Configuration): Promise<RequestContext>;
     /**
-     *  Version: 10.4.0.cl or later
+     *   Version: 10.4.0.cl or later   Schedules a task to import [TML](https://docs.thoughtspot.com/cloud/latest/tml) files into ThoughtSpot. You can use this API endpoint to process TML objects asynchronously when importing TMLs of large and complex metadata objects into ThoughtSpot. Unlike the synchronous import TML operation, the API processes TML data in the background and returns a task ID, which can be used to check the status of the import task via `/api/rest/2.0/metadata/tml/async/status` API endpoint.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtsSpot**) privilege, and edit access to the TML objects.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required: - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)  #### Usage guidelines  See [Async TML API Documentation](https://developers.thoughtspot.com/docs/tml#_import_tml_objects_asynchronously) for usage guidelines.
      * @param importMetadataTMLAsyncRequest
      */
     importMetadataTMLAsync(importMetadataTMLAsyncRequest: ImportMetadataTMLAsyncRequest, _options?: Configuration): Promise<RequestContext>;
@@ -12794,7 +12902,7 @@ declare class ReportsApiRequestFactory extends BaseAPIRequestFactory {
      */
     exportAnswerReport(exportAnswerReportRequest: ExportAnswerReportRequest, _options?: Configuration): Promise<RequestContext>;
     /**
-     *   Version: 9.0.0.cl or later   Exports the data from a Liveboard and its visualization in a given file format. You can download the Liveboard data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege and view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default `file_format` is CSV. For PDF file format, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).
+     *   Version: 9.0.0.cl or later   Exports the data from a Liveboard and its visualization in a given file format. You can download the Liveboard data as a PDF, PNG. Liveboard download as XLSX and CSV is not supported.  Requires `DATADOWNLOADING` (**Can download data**) privilege and view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default `file_format` is PDF. For PDF file format, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).
      * @param exportLiveboardReportRequest
      */
     exportLiveboardReport(exportLiveboardReportRequest: ExportLiveboardReportRequest, _options?: Configuration): Promise<RequestContext>;
@@ -12807,7 +12915,7 @@ declare class ReportsApiResponseProcessor {
      * @params response Response returned by the server for a request to exportAnswerReport
      * @throws ApiException if the response code was not in [200, 299]
      */
-    exportAnswerReport(response: ResponseContext): Promise<HttpFile>;
+    exportAnswerReport(response: ResponseContext): Promise<void>;
     /**
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
@@ -12815,7 +12923,7 @@ declare class ReportsApiResponseProcessor {
      * @params response Response returned by the server for a request to exportLiveboardReport
      * @throws ApiException if the response code was not in [200, 299]
      */
-    exportLiveboardReport(response: ResponseContext): Promise<HttpFile>;
+    exportLiveboardReport(response: ResponseContext): Promise<void>;
 }
 
 /**
@@ -12945,7 +13053,7 @@ declare class SchedulesApiResponseProcessor {
  */
 declare class SecurityApiRequestFactory extends BaseAPIRequestFactory {
     /**
-     *   Version: 9.0.0.cl or later   Transfers the ownership of one or several objects from one user to another.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `USER_ADMINISTRATION` (**Can manage users**) privilege and edit access to the objects are required.
+     *   Version: 9.0.0.cl or later   Transfers the ownership of one or several objects from one user to another.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `USER_ADMINISTRATION` (**Can manage users**) privilege and edit access to the objects are required.
      * @param assignChangeAuthorRequest
      */
     assignChangeAuthor(assignChangeAuthorRequest: AssignChangeAuthorRequest, _options?: Configuration): Promise<RequestContext>;
@@ -13154,7 +13262,7 @@ declare class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
      */
     activateUser(activateUserRequest: ActivateUserRequest, _options?: Configuration): Promise<RequestContext>;
     /**
-     *   Version: 9.0.0.cl or later   Transfers the ownership of one or several objects from one user to another.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `USER_ADMINISTRATION` (**Can manage users**) privilege and edit access to the objects are required.
+     *   Version: 9.0.0.cl or later   Transfers the ownership of one or several objects from one user to another.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `USER_ADMINISTRATION` (**Can manage users**) privilege and edit access to the objects are required.
      * @param assignChangeAuthorRequest
      */
     assignChangeAuthor(assignChangeAuthorRequest: AssignChangeAuthorRequest, _options?: Configuration): Promise<RequestContext>;
@@ -13189,7 +13297,7 @@ declare class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
      */
     createConnection(createConnectionRequest: CreateConnectionRequest, _options?: Configuration): Promise<RequestContext>;
     /**
-     *   Version: 10.4.0.cl or later   Creates a Conversation identifier to start an AI-driven conversation based on a specific data model.  This API requires the metadata_identifier parameter to define the context for the conversation.  Optionally, tokens can be provided to directly initiate the conversation.
+     *  Version: 10.4.0.cl or later   Creates a Conversation object to start an AI-driven conversation based on a specific data model.  Requires at least view access to the metadata object specified in the request.  #### Usage guidelines  This API requires the `metadata_identifier` parameter to define the context for the conversation.  You can also specify the tokens to initiate the conversation as shown in this example:  `\"tokens\": \"[tea],[sales],[type]\"`  If the API request is successful, ThoughtSpot returns the ID of the conversation.  > ###### Note: > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.
      * @param createConversationRequest
      */
     createConversation(createConversationRequest: CreateConversationRequest, _options?: Configuration): Promise<RequestContext>;
@@ -13328,7 +13436,7 @@ declare class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
      */
     exportAnswerReport(exportAnswerReportRequest: ExportAnswerReportRequest, _options?: Configuration): Promise<RequestContext>;
     /**
-     *   Version: 9.0.0.cl or later   Exports the data from a Liveboard and its visualization in a given file format. You can download the Liveboard data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege and view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default `file_format` is CSV. For PDF file format, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).
+     *   Version: 9.0.0.cl or later   Exports the data from a Liveboard and its visualization in a given file format. You can download the Liveboard data as a PDF, PNG. Liveboard download as XLSX and CSV is not supported.  Requires `DATADOWNLOADING` (**Can download data**) privilege and view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default `file_format` is PDF. For PDF file format, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).
      * @param exportLiveboardReportRequest
      */
     exportLiveboardReport(exportLiveboardReportRequest: ExportLiveboardReportRequest, _options?: Configuration): Promise<RequestContext>;
@@ -13353,7 +13461,7 @@ declare class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
      */
     fetchAnswerSqlQuery(fetchAnswerSqlQueryRequest: FetchAnswerSqlQueryRequest, _options?: Configuration): Promise<RequestContext>;
     /**
-     *  Version: 10.4.0.cl or later
+     *   Version: 10.4.0.cl or later   Gets information about the status of the TML async import task scheduled using the `/api/rest/2.0/metadata/tml/async/import` API call.  To fetch the task details, specify the ID of the TML async import task.    Requires access to the task ID. The API allows users who initiated the asynchronous TML import via `/api/rest/2.0/metadata/tml/async/import` to view the status of their tasks.  Users with administration privilege can view the status of all import tasks initiated by the users in their Org.  #### Usage guidelines  See [TML API Documentation](https://developers.thoughtspot.com/docs/tml#_fetch_status_of_the_tml_import_task) for usage guidelines.
      * @param fetchAsyncImportTaskStatusRequest
      */
     fetchAsyncImportTaskStatus(fetchAsyncImportTaskStatusRequest: FetchAsyncImportTaskStatusRequest, _options?: Configuration): Promise<RequestContext>;
@@ -13401,7 +13509,7 @@ declare class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
      */
     getCurrentUserToken(_options?: Configuration): Promise<RequestContext>;
     /**
-     *  Version: 10.4.0.cl or later
+     *   Version: 10.4.0.cl or later   Gets an authentication token with custom rules and security attributes and creates a full session in ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot remains valid for 5 mins.  To add a new user and assign privileges during auto creation, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.  To assign security attributes with filter rules and Parameters to the JWT token, you\'ll need administrator privileges and edit access to the data source (Worksheet or Model). If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.  #### Usage guidelines  You can generate the token for a user by providing a `username` and `password`, or by using the cluster’s `secret_key`.  To generate a `secret_key` on your cluster, the administrator must enable [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable) in the **Develop** > **Customizations** > **Security Settings** page.  **Note**: When both `password` and `secret_key` are included in the API request, `password` takes precedence.  ##### Attribute-Based Access Control (ABAC) with tokens  To implement Attribute-Based Access Control (ABAC) and assign security entitlements to users during session creation, you can generate a token with custom filtering rules and Parameters in the `filter_rules` and `parameter_values` array respectively. These attributes can be configured to persist on a specific set of objects for user sessions initiated using the token. Once defined, the rules are added to the user\'s `access_control_properties` object, after which all sessions will use the persisted values.  For more information, see [ABAC via tokens Documentation](https://developers.thoughtspot.com/docs/api-authv2#_get_tokens_with_custom_rules_and_filter_conditions).  ##### Just-in-time provisioning  For just-in-time user creation and provisioning, define the following attributes:  * `auto_create` * `username` * `display_name` * `email` * `groups`  Set `auto_create` to `true` if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create` parameter is set to `true` in the API request, the user properties such as the display name, email, Org and group assignment will not be updated with new values.  For more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).  ##### Important point to note All options in the token creation APIs that define access to the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, `auto_create:true` will create the user when the authentication token is created. Persist options such as  `APPEND`, `REPLACE`, `RESET` will persist security parameters on the user profile when the token is created, while Persist option `NONE` will not persist anything but will be honoured in the session.
      * @param getCustomAccessTokenRequest
      */
     getCustomAccessToken(getCustomAccessTokenRequest: GetCustomAccessTokenRequest, _options?: Configuration): Promise<RequestContext>;
@@ -13433,7 +13541,7 @@ declare class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
      */
     importMetadataTML(importMetadataTMLRequest: ImportMetadataTMLRequest, _options?: Configuration): Promise<RequestContext>;
     /**
-     *  Version: 10.4.0.cl or later
+     *   Version: 10.4.0.cl or later   Schedules a task to import [TML](https://docs.thoughtspot.com/cloud/latest/tml) files into ThoughtSpot. You can use this API endpoint to process TML objects asynchronously when importing TMLs of large and complex metadata objects into ThoughtSpot. Unlike the synchronous import TML operation, the API processes TML data in the background and returns a task ID, which can be used to check the status of the import task via `/api/rest/2.0/metadata/tml/async/status` API endpoint.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtsSpot**) privilege, and edit access to the TML objects.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required: - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)  #### Usage guidelines  See [Async TML API Documentation](https://developers.thoughtspot.com/docs/tml#_import_tml_objects_asynchronously) for usage guidelines.
      * @param importMetadataTMLAsyncRequest
      */
     importMetadataTMLAsync(importMetadataTMLAsyncRequest: ImportMetadataTMLAsyncRequest, _options?: Configuration): Promise<RequestContext>;
@@ -13533,7 +13641,7 @@ declare class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
      */
     searchUsers(searchUsersRequest: SearchUsersRequest, _options?: Configuration): Promise<RequestContext>;
     /**
-     *   Version: 10.4.0.cl or later   Sends a follow-up message to an ongoing conversation within the context of a specific data model and the conversation identifier.
+     *  Version: 10.4.0.cl or later   Allows sending a follow-up message to an ongoing conversation within the context of the metadata model.  Requires at least view access to the metadata object specified in the request.  #### Usage guidelines  The API requires you to specify the `conversation_identifier` in the request path, and a `metadata_identifier` and `message` string in the request body.  If the API request is successful, ThoughtSpot returns the session ID, tokens used in the conversation, and visualization type.  > ###### Note: > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.
      * @param conversationIdentifier Unique identifier of the conversation.
      * @param sendMessageRequest
      */
@@ -13544,7 +13652,7 @@ declare class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
      */
     shareMetadata(shareMetadataRequest: ShareMetadataRequest, _options?: Configuration): Promise<RequestContext>;
     /**
-     *   Version: 10.4.0.cl or later   Processes a natural language query and returns an AI-generated response based on a specified data model.
+     *  Version: 10.4.0.cl or later   Processes a natural language query and returns an AI-generated response based on a specified data model.  Requires at least view access to the metadata object specified in the request.  > ###### Note: > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.
      * @param singleAnswerRequest
      */
     singleAnswer(singleAnswerRequest: SingleAnswerRequest, _options?: Configuration): Promise<RequestContext>;
@@ -13616,7 +13724,7 @@ declare class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
      */
     updateUser(userIdentifier: string, updateUserRequest: UpdateUserRequest, _options?: Configuration): Promise<RequestContext>;
     /**
-     *   Version: 9.0.0.cl or later   Updates the properties of a group object in ThoughtSpot.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Supported operations  This API endpoint lets you perform the following operations in a single API request:  * Edit [privileges](https://developers.thoughtspot.com/docs/?pageid=api-user-management#group-privileges) * Add or remove users * Change sharing visibility settings * Add or remove sub-groups * Assign a default Liveboard  or update the existing settings
+     *   Version: 9.0.0.cl or later   Updates the properties of a group object in ThoughtSpot.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `GROUP_ADMINISTRATION` (**Can manage groups**) privilege is required.  #### Supported operations  This API endpoint lets you perform the following operations in a single API request:  * Edit [privileges](https://developers.thoughtspot.com/docs/?pageid=api-user-management#group-privileges) * Add or remove users * Change sharing visibility settings * Add or remove sub-groups * Assign a default Liveboard  or update the existing settings
      * @param groupIdentifier GUID or name of the group.
      * @param updateUserGroupRequest
      */
@@ -13912,7 +14020,7 @@ declare class ThoughtSpotRestApiResponseProcessor {
      * @params response Response returned by the server for a request to downloadConnectionMetadataChanges
      * @throws ApiException if the response code was not in [200, 299]
      */
-    downloadConnectionMetadataChanges(response: ResponseContext): Promise<HttpFile>;
+    downloadConnectionMetadataChanges(response: ResponseContext): Promise<void>;
     /**
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
@@ -13920,7 +14028,7 @@ declare class ThoughtSpotRestApiResponseProcessor {
      * @params response Response returned by the server for a request to exportAnswerReport
      * @throws ApiException if the response code was not in [200, 299]
      */
-    exportAnswerReport(response: ResponseContext): Promise<HttpFile>;
+    exportAnswerReport(response: ResponseContext): Promise<void>;
     /**
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
@@ -13928,7 +14036,7 @@ declare class ThoughtSpotRestApiResponseProcessor {
      * @params response Response returned by the server for a request to exportLiveboardReport
      * @throws ApiException if the response code was not in [200, 299]
      */
-    exportLiveboardReport(response: ResponseContext): Promise<HttpFile>;
+    exportLiveboardReport(response: ResponseContext): Promise<void>;
     /**
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
@@ -14672,18 +14780,18 @@ declare class PromiseAIApi {
     private api;
     constructor(configuration: Configuration, requestFactory?: AIApiRequestFactory, responseProcessor?: AIApiResponseProcessor);
     /**
-     *   Version: 10.4.0.cl or later   Creates a Conversation identifier to start an AI-driven conversation based on a specific data model.  This API requires the metadata_identifier parameter to define the context for the conversation.  Optionally, tokens can be provided to directly initiate the conversation.
+     *  Version: 10.4.0.cl or later   Creates a Conversation object to start an AI-driven conversation based on a specific data model.  Requires at least view access to the metadata object specified in the request.  #### Usage guidelines  This API requires the `metadata_identifier` parameter to define the context for the conversation.  You can also specify the tokens to initiate the conversation as shown in this example:  `\"tokens\": \"[tea],[sales],[type]\"`  If the API request is successful, ThoughtSpot returns the ID of the conversation.  > ###### Note: > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.
      * @param createConversationRequest
      */
     createConversation(createConversationRequest: CreateConversationRequest, _options?: Configuration): Promise<Conversation>;
     /**
-     *   Version: 10.4.0.cl or later   Sends a follow-up message to an ongoing conversation within the context of a specific data model and the conversation identifier.
+     *  Version: 10.4.0.cl or later   Allows sending a follow-up message to an ongoing conversation within the context of the metadata model.  Requires at least view access to the metadata object specified in the request.  #### Usage guidelines  The API requires you to specify the `conversation_identifier` in the request path, and a `metadata_identifier` and `message` string in the request body.  If the API request is successful, ThoughtSpot returns the session ID, tokens used in the conversation, and visualization type.  > ###### Note: > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.
      * @param conversationIdentifier Unique identifier of the conversation.
      * @param sendMessageRequest
      */
     sendMessage(conversationIdentifier: string, sendMessageRequest: SendMessageRequest, _options?: Configuration): Promise<Array<ResponseMessage>>;
     /**
-     *   Version: 10.4.0.cl or later   Processes a natural language query and returns an AI-generated response based on a specified data model.
+     *  Version: 10.4.0.cl or later   Processes a natural language query and returns an AI-generated response based on a specified data model.  Requires at least view access to the metadata object specified in the request.  > ###### Note: > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.
      * @param singleAnswerRequest
      */
     singleAnswer(singleAnswerRequest: SingleAnswerRequest, _options?: Configuration): Promise<ResponseMessage>;
@@ -14701,7 +14809,7 @@ declare class PromiseAuthenticationApi {
      */
     getCurrentUserToken(_options?: Configuration): Promise<GetTokenResponse>;
     /**
-     *  Version: 10.4.0.cl or later
+     *   Version: 10.4.0.cl or later   Gets an authentication token with custom rules and security attributes and creates a full session in ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot remains valid for 5 mins.  To add a new user and assign privileges during auto creation, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.  To assign security attributes with filter rules and Parameters to the JWT token, you\'ll need administrator privileges and edit access to the data source (Worksheet or Model). If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.  #### Usage guidelines  You can generate the token for a user by providing a `username` and `password`, or by using the cluster’s `secret_key`.  To generate a `secret_key` on your cluster, the administrator must enable [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable) in the **Develop** > **Customizations** > **Security Settings** page.  **Note**: When both `password` and `secret_key` are included in the API request, `password` takes precedence.  ##### Attribute-Based Access Control (ABAC) with tokens  To implement Attribute-Based Access Control (ABAC) and assign security entitlements to users during session creation, you can generate a token with custom filtering rules and Parameters in the `filter_rules` and `parameter_values` array respectively. These attributes can be configured to persist on a specific set of objects for user sessions initiated using the token. Once defined, the rules are added to the user\'s `access_control_properties` object, after which all sessions will use the persisted values.  For more information, see [ABAC via tokens Documentation](https://developers.thoughtspot.com/docs/api-authv2#_get_tokens_with_custom_rules_and_filter_conditions).  ##### Just-in-time provisioning  For just-in-time user creation and provisioning, define the following attributes:  * `auto_create` * `username` * `display_name` * `email` * `groups`  Set `auto_create` to `true` if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create` parameter is set to `true` in the API request, the user properties such as the display name, email, Org and group assignment will not be updated with new values.  For more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).  ##### Important point to note All options in the token creation APIs that define access to the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, `auto_create:true` will create the user when the authentication token is created. Persist options such as  `APPEND`, `REPLACE`, `RESET` will persist security parameters on the user profile when the token is created, while Persist option `NONE` will not persist anything but will be honoured in the session.
      * @param getCustomAccessTokenRequest
      */
     getCustomAccessToken(getCustomAccessTokenRequest: GetCustomAccessTokenRequest, _options?: Configuration): Promise<AccessToken>;
@@ -14758,7 +14866,7 @@ declare class PromiseConnectionsApi {
      *   Version: 9.9.0.cl or later   Exports the difference in connection metadata between CDW and ThoughtSpot  Requires `DATAMANAGEMENT` (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:   - `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**) - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)  To download the connection metadata difference between ThoughtSpot and CDW, pass the connection GUID as `connection_identifier` in the API request.
      * @param connectionIdentifier GUID of the connection
      */
-    downloadConnectionMetadataChanges(connectionIdentifier: string, _options?: Configuration): Promise<HttpFile>;
+    downloadConnectionMetadataChanges(connectionIdentifier: string, _options?: Configuration): Promise<void>;
     /**
      *   Version: 9.9.0.cl or later   Validates the difference in connection metadata between CDW and ThoughtSpot.  Requires `DATAMANAGEMENT` (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**) - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)  Returns a boolean indicating whether there is any difference between the connection metadata at ThoughtSpot and CDW.  To get the connection metadata difference status, pass the connection GUID as `connection_identifier` in the API request.
      * @param connectionIdentifier GUID of the connection
@@ -14886,7 +14994,7 @@ declare class PromiseGroupsApi {
      */
     searchUserGroups(searchUserGroupsRequest: SearchUserGroupsRequest, _options?: Configuration): Promise<Array<UserGroupResponse>>;
     /**
-     *   Version: 9.0.0.cl or later   Updates the properties of a group object in ThoughtSpot.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Supported operations  This API endpoint lets you perform the following operations in a single API request:  * Edit [privileges](https://developers.thoughtspot.com/docs/?pageid=api-user-management#group-privileges) * Add or remove users * Change sharing visibility settings * Add or remove sub-groups * Assign a default Liveboard  or update the existing settings
+     *   Version: 9.0.0.cl or later   Updates the properties of a group object in ThoughtSpot.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `GROUP_ADMINISTRATION` (**Can manage groups**) privilege is required.  #### Supported operations  This API endpoint lets you perform the following operations in a single API request:  * Edit [privileges](https://developers.thoughtspot.com/docs/?pageid=api-user-management#group-privileges) * Add or remove users * Change sharing visibility settings * Add or remove sub-groups * Assign a default Liveboard  or update the existing settings
      * @param groupIdentifier GUID or name of the group.
      * @param updateUserGroupRequest
      */
@@ -14932,7 +15040,7 @@ declare class PromiseMetadataApi {
      */
     fetchAnswerSqlQuery(fetchAnswerSqlQueryRequest: FetchAnswerSqlQueryRequest, _options?: Configuration): Promise<SqlQueryResponse>;
     /**
-     *  Version: 10.4.0.cl or later
+     *   Version: 10.4.0.cl or later   Gets information about the status of the TML async import task scheduled using the `/api/rest/2.0/metadata/tml/async/import` API call.  To fetch the task details, specify the ID of the TML async import task.    Requires access to the task ID. The API allows users who initiated the asynchronous TML import via `/api/rest/2.0/metadata/tml/async/import` to view the status of their tasks.  Users with administration privilege can view the status of all import tasks initiated by the users in their Org.  #### Usage guidelines  See [TML API Documentation](https://developers.thoughtspot.com/docs/tml#_fetch_status_of_the_tml_import_task) for usage guidelines.
      * @param fetchAsyncImportTaskStatusRequest
      */
     fetchAsyncImportTaskStatus(fetchAsyncImportTaskStatusRequest: FetchAsyncImportTaskStatusRequest, _options?: Configuration): Promise<GetAsyncImportStatusResponse>;
@@ -14947,7 +15055,7 @@ declare class PromiseMetadataApi {
      */
     importMetadataTML(importMetadataTMLRequest: ImportMetadataTMLRequest, _options?: Configuration): Promise<Array<any>>;
     /**
-     *  Version: 10.4.0.cl or later
+     *   Version: 10.4.0.cl or later   Schedules a task to import [TML](https://docs.thoughtspot.com/cloud/latest/tml) files into ThoughtSpot. You can use this API endpoint to process TML objects asynchronously when importing TMLs of large and complex metadata objects into ThoughtSpot. Unlike the synchronous import TML operation, the API processes TML data in the background and returns a task ID, which can be used to check the status of the import task via `/api/rest/2.0/metadata/tml/async/status` API endpoint.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtsSpot**) privilege, and edit access to the TML objects.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required: - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)  #### Usage guidelines  See [Async TML API Documentation](https://developers.thoughtspot.com/docs/tml#_import_tml_objects_asynchronously) for usage guidelines.
      * @param importMetadataTMLAsyncRequest
      */
     importMetadataTMLAsync(importMetadataTMLAsyncRequest: ImportMetadataTMLAsyncRequest, _options?: Configuration): Promise<ImportEPackAsyncTaskStatus>;
@@ -14991,12 +15099,12 @@ declare class PromiseReportsApi {
      *   Version: 9.0.0.cl or later   Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege and view access to the Answer.  #### Usage guidelines   In the request body, either provide the GUID or name of the answer, or provide the answer session id. By default, answer is exported from latest generation number of answer session. Optionally, you can also provide the generation number of the session. Also provide the `file_format` for the report. The default file format is CSV. In case of session id, only PNG & CSV file format are allowed.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).
      * @param exportAnswerReportRequest
      */
-    exportAnswerReport(exportAnswerReportRequest: ExportAnswerReportRequest, _options?: Configuration): Promise<HttpFile>;
+    exportAnswerReport(exportAnswerReportRequest: ExportAnswerReportRequest, _options?: Configuration): Promise<void>;
     /**
-     *   Version: 9.0.0.cl or later   Exports the data from a Liveboard and its visualization in a given file format. You can download the Liveboard data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege and view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default `file_format` is CSV. For PDF file format, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).
+     *   Version: 9.0.0.cl or later   Exports the data from a Liveboard and its visualization in a given file format. You can download the Liveboard data as a PDF, PNG. Liveboard download as XLSX and CSV is not supported.  Requires `DATADOWNLOADING` (**Can download data**) privilege and view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default `file_format` is PDF. For PDF file format, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).
      * @param exportLiveboardReportRequest
      */
-    exportLiveboardReport(exportLiveboardReportRequest: ExportLiveboardReportRequest, _options?: Configuration): Promise<HttpFile>;
+    exportLiveboardReport(exportLiveboardReportRequest: ExportLiveboardReportRequest, _options?: Configuration): Promise<void>;
 }
 
 declare class PromiseRolesApi {
@@ -15055,7 +15163,7 @@ declare class PromiseSecurityApi {
     private api;
     constructor(configuration: Configuration, requestFactory?: SecurityApiRequestFactory, responseProcessor?: SecurityApiResponseProcessor);
     /**
-     *   Version: 9.0.0.cl or later   Transfers the ownership of one or several objects from one user to another.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `USER_ADMINISTRATION` (**Can manage users**) privilege and edit access to the objects are required.
+     *   Version: 9.0.0.cl or later   Transfers the ownership of one or several objects from one user to another.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `USER_ADMINISTRATION` (**Can manage users**) privilege and edit access to the objects are required.
      * @param assignChangeAuthorRequest
      */
     assignChangeAuthor(assignChangeAuthorRequest: AssignChangeAuthorRequest, _options?: Configuration): Promise<void>;
@@ -15143,7 +15251,7 @@ declare class PromiseThoughtSpotRestApi {
      */
     activateUser(activateUserRequest: ActivateUserRequest, _options?: Configuration): Promise<User>;
     /**
-     *   Version: 9.0.0.cl or later   Transfers the ownership of one or several objects from one user to another.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `USER_ADMINISTRATION` (**Can manage users**) privilege and edit access to the objects are required.
+     *   Version: 9.0.0.cl or later   Transfers the ownership of one or several objects from one user to another.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `USER_ADMINISTRATION` (**Can manage users**) privilege and edit access to the objects are required.
      * @param assignChangeAuthorRequest
      */
     assignChangeAuthor(assignChangeAuthorRequest: AssignChangeAuthorRequest, _options?: Configuration): Promise<void>;
@@ -15178,7 +15286,7 @@ declare class PromiseThoughtSpotRestApi {
      */
     createConnection(createConnectionRequest: CreateConnectionRequest, _options?: Configuration): Promise<CreateConnectionResponse>;
     /**
-     *   Version: 10.4.0.cl or later   Creates a Conversation identifier to start an AI-driven conversation based on a specific data model.  This API requires the metadata_identifier parameter to define the context for the conversation.  Optionally, tokens can be provided to directly initiate the conversation.
+     *  Version: 10.4.0.cl or later   Creates a Conversation object to start an AI-driven conversation based on a specific data model.  Requires at least view access to the metadata object specified in the request.  #### Usage guidelines  This API requires the `metadata_identifier` parameter to define the context for the conversation.  You can also specify the tokens to initiate the conversation as shown in this example:  `\"tokens\": \"[tea],[sales],[type]\"`  If the API request is successful, ThoughtSpot returns the ID of the conversation.  > ###### Note: > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.
      * @param createConversationRequest
      */
     createConversation(createConversationRequest: CreateConversationRequest, _options?: Configuration): Promise<Conversation>;
@@ -15310,17 +15418,17 @@ declare class PromiseThoughtSpotRestApi {
      *   Version: 9.9.0.cl or later   Exports the difference in connection metadata between CDW and ThoughtSpot  Requires `DATAMANAGEMENT` (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:   - `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**) - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)  To download the connection metadata difference between ThoughtSpot and CDW, pass the connection GUID as `connection_identifier` in the API request.
      * @param connectionIdentifier GUID of the connection
      */
-    downloadConnectionMetadataChanges(connectionIdentifier: string, _options?: Configuration): Promise<HttpFile>;
+    downloadConnectionMetadataChanges(connectionIdentifier: string, _options?: Configuration): Promise<void>;
     /**
      *   Version: 9.0.0.cl or later   Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege and view access to the Answer.  #### Usage guidelines   In the request body, either provide the GUID or name of the answer, or provide the answer session id. By default, answer is exported from latest generation number of answer session. Optionally, you can also provide the generation number of the session. Also provide the `file_format` for the report. The default file format is CSV. In case of session id, only PNG & CSV file format are allowed.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).
      * @param exportAnswerReportRequest
      */
-    exportAnswerReport(exportAnswerReportRequest: ExportAnswerReportRequest, _options?: Configuration): Promise<HttpFile>;
+    exportAnswerReport(exportAnswerReportRequest: ExportAnswerReportRequest, _options?: Configuration): Promise<void>;
     /**
-     *   Version: 9.0.0.cl or later   Exports the data from a Liveboard and its visualization in a given file format. You can download the Liveboard data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege and view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default `file_format` is CSV. For PDF file format, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).
+     *   Version: 9.0.0.cl or later   Exports the data from a Liveboard and its visualization in a given file format. You can download the Liveboard data as a PDF, PNG. Liveboard download as XLSX and CSV is not supported.  Requires `DATADOWNLOADING` (**Can download data**) privilege and view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default `file_format` is PDF. For PDF file format, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).
      * @param exportLiveboardReportRequest
      */
-    exportLiveboardReport(exportLiveboardReportRequest: ExportLiveboardReportRequest, _options?: Configuration): Promise<HttpFile>;
+    exportLiveboardReport(exportLiveboardReportRequest: ExportLiveboardReportRequest, _options?: Configuration): Promise<void>;
     /**
      *   Version: 9.0.0.cl or later   Exports the [TML](https://docs.thoughtspot.com/cloud/latest/tml) representation of metadata objects in JSON or YAML format.  Requires `DATADOWNLOADING` (**Can download Data**) and at least view access to the metadata object.  #### Usage guidelines  * You can export one or several objects by passing metadata object GUIDs in the `metadata` array. * When exporting TML content for a Liveboard or Answer object, you can set `export_associated` to `true` to retrieve TML content for underlying Worksheets, Tables, or Views, including the GUID of each object within the headers. When   `export_associated` is set to `true`, consider retrieving one metadata object at a time. * Set `export_fqns` to `true` to add FQNs of the referenced objects in the TML content. For example, if you send an API request to retrieve TML for a Liveboard and its associated objects, the API returns the TML content with FQNs of the referenced Worksheet. Exporting TML with FQNs is useful if ThoughtSpot has multiple objects with the same name and you want to eliminate ambiguity when importing TML files into ThoughtSpot. It eliminates the need for adding FQNs of the referenced objects manually during the import operation.  For more information, see [TML Documentation](https://developers.thoughtspot.com/docs/tml#_export_a_tml).
      * @param exportMetadataTMLRequest
@@ -15342,7 +15450,7 @@ declare class PromiseThoughtSpotRestApi {
      */
     fetchAnswerSqlQuery(fetchAnswerSqlQueryRequest: FetchAnswerSqlQueryRequest, _options?: Configuration): Promise<SqlQueryResponse>;
     /**
-     *  Version: 10.4.0.cl or later
+     *   Version: 10.4.0.cl or later   Gets information about the status of the TML async import task scheduled using the `/api/rest/2.0/metadata/tml/async/import` API call.  To fetch the task details, specify the ID of the TML async import task.    Requires access to the task ID. The API allows users who initiated the asynchronous TML import via `/api/rest/2.0/metadata/tml/async/import` to view the status of their tasks.  Users with administration privilege can view the status of all import tasks initiated by the users in their Org.  #### Usage guidelines  See [TML API Documentation](https://developers.thoughtspot.com/docs/tml#_fetch_status_of_the_tml_import_task) for usage guidelines.
      * @param fetchAsyncImportTaskStatusRequest
      */
     fetchAsyncImportTaskStatus(fetchAsyncImportTaskStatusRequest: FetchAsyncImportTaskStatusRequest, _options?: Configuration): Promise<GetAsyncImportStatusResponse>;
@@ -15390,7 +15498,7 @@ declare class PromiseThoughtSpotRestApi {
      */
     getCurrentUserToken(_options?: Configuration): Promise<GetTokenResponse>;
     /**
-     *  Version: 10.4.0.cl or later
+     *   Version: 10.4.0.cl or later   Gets an authentication token with custom rules and security attributes and creates a full session in ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot remains valid for 5 mins.  To add a new user and assign privileges during auto creation, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.  To assign security attributes with filter rules and Parameters to the JWT token, you\'ll need administrator privileges and edit access to the data source (Worksheet or Model). If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.  #### Usage guidelines  You can generate the token for a user by providing a `username` and `password`, or by using the cluster’s `secret_key`.  To generate a `secret_key` on your cluster, the administrator must enable [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable) in the **Develop** > **Customizations** > **Security Settings** page.  **Note**: When both `password` and `secret_key` are included in the API request, `password` takes precedence.  ##### Attribute-Based Access Control (ABAC) with tokens  To implement Attribute-Based Access Control (ABAC) and assign security entitlements to users during session creation, you can generate a token with custom filtering rules and Parameters in the `filter_rules` and `parameter_values` array respectively. These attributes can be configured to persist on a specific set of objects for user sessions initiated using the token. Once defined, the rules are added to the user\'s `access_control_properties` object, after which all sessions will use the persisted values.  For more information, see [ABAC via tokens Documentation](https://developers.thoughtspot.com/docs/api-authv2#_get_tokens_with_custom_rules_and_filter_conditions).  ##### Just-in-time provisioning  For just-in-time user creation and provisioning, define the following attributes:  * `auto_create` * `username` * `display_name` * `email` * `groups`  Set `auto_create` to `true` if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create` parameter is set to `true` in the API request, the user properties such as the display name, email, Org and group assignment will not be updated with new values.  For more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).  ##### Important point to note All options in the token creation APIs that define access to the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, `auto_create:true` will create the user when the authentication token is created. Persist options such as  `APPEND`, `REPLACE`, `RESET` will persist security parameters on the user profile when the token is created, while Persist option `NONE` will not persist anything but will be honoured in the session.
      * @param getCustomAccessTokenRequest
      */
     getCustomAccessToken(getCustomAccessTokenRequest: GetCustomAccessTokenRequest, _options?: Configuration): Promise<AccessToken>;
@@ -15422,7 +15530,7 @@ declare class PromiseThoughtSpotRestApi {
      */
     importMetadataTML(importMetadataTMLRequest: ImportMetadataTMLRequest, _options?: Configuration): Promise<Array<any>>;
     /**
-     *  Version: 10.4.0.cl or later
+     *   Version: 10.4.0.cl or later   Schedules a task to import [TML](https://docs.thoughtspot.com/cloud/latest/tml) files into ThoughtSpot. You can use this API endpoint to process TML objects asynchronously when importing TMLs of large and complex metadata objects into ThoughtSpot. Unlike the synchronous import TML operation, the API processes TML data in the background and returns a task ID, which can be used to check the status of the import task via `/api/rest/2.0/metadata/tml/async/status` API endpoint.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtsSpot**) privilege, and edit access to the TML objects.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required: - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)  #### Usage guidelines  See [Async TML API Documentation](https://developers.thoughtspot.com/docs/tml#_import_tml_objects_asynchronously) for usage guidelines.
      * @param importMetadataTMLAsyncRequest
      */
     importMetadataTMLAsync(importMetadataTMLAsyncRequest: ImportMetadataTMLAsyncRequest, _options?: Configuration): Promise<ImportEPackAsyncTaskStatus>;
@@ -15522,7 +15630,7 @@ declare class PromiseThoughtSpotRestApi {
      */
     searchUsers(searchUsersRequest: SearchUsersRequest, _options?: Configuration): Promise<Array<User>>;
     /**
-     *   Version: 10.4.0.cl or later   Sends a follow-up message to an ongoing conversation within the context of a specific data model and the conversation identifier.
+     *  Version: 10.4.0.cl or later   Allows sending a follow-up message to an ongoing conversation within the context of the metadata model.  Requires at least view access to the metadata object specified in the request.  #### Usage guidelines  The API requires you to specify the `conversation_identifier` in the request path, and a `metadata_identifier` and `message` string in the request body.  If the API request is successful, ThoughtSpot returns the session ID, tokens used in the conversation, and visualization type.  > ###### Note: > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.
      * @param conversationIdentifier Unique identifier of the conversation.
      * @param sendMessageRequest
      */
@@ -15533,7 +15641,7 @@ declare class PromiseThoughtSpotRestApi {
      */
     shareMetadata(shareMetadataRequest: ShareMetadataRequest, _options?: Configuration): Promise<void>;
     /**
-     *   Version: 10.4.0.cl or later   Processes a natural language query and returns an AI-generated response based on a specified data model.
+     *  Version: 10.4.0.cl or later   Processes a natural language query and returns an AI-generated response based on a specified data model.  Requires at least view access to the metadata object specified in the request.  > ###### Note: > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.
      * @param singleAnswerRequest
      */
     singleAnswer(singleAnswerRequest: SingleAnswerRequest, _options?: Configuration): Promise<ResponseMessage>;
@@ -15605,7 +15713,7 @@ declare class PromiseThoughtSpotRestApi {
      */
     updateUser(userIdentifier: string, updateUserRequest: UpdateUserRequest, _options?: Configuration): Promise<void>;
     /**
-     *   Version: 9.0.0.cl or later   Updates the properties of a group object in ThoughtSpot.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Supported operations  This API endpoint lets you perform the following operations in a single API request:  * Edit [privileges](https://developers.thoughtspot.com/docs/?pageid=api-user-management#group-privileges) * Add or remove users * Change sharing visibility settings * Add or remove sub-groups * Assign a default Liveboard  or update the existing settings
+     *   Version: 9.0.0.cl or later   Updates the properties of a group object in ThoughtSpot.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `GROUP_ADMINISTRATION` (**Can manage groups**) privilege is required.  #### Supported operations  This API endpoint lets you perform the following operations in a single API request:  * Edit [privileges](https://developers.thoughtspot.com/docs/?pageid=api-user-management#group-privileges) * Add or remove users * Change sharing visibility settings * Add or remove sub-groups * Assign a default Liveboard  or update the existing settings
      * @param groupIdentifier GUID or name of the group.
      * @param updateUserGroupRequest
      */
@@ -15739,4 +15847,4 @@ declare class PromiseVersionControlApi {
  */
 declare const createBearerAuthenticationConfig: (url: string, paramOrTokenProvider: GetFullAccessTokenRequest | (() => Promise<string>)) => Configuration;
 
-export { PromiseAIApi as AIApi, APIKey, APIKeyInput, AccessToken, ActionConfig, ActionConfigInput, ActionConfigInputCreate, ActionConfigInputCreatePositionEnum, ActionConfigInputPositionEnum, ActionDetails, ActionDetailsInput, ActionDetailsInputCreate, ActivateUserRequest, AnswerContent, AnswerDataResponse, ApiException, ApiKeyConfiguration, AssignChangeAuthorRequest, AssignTagRequest, AssociateMetadataInput, AssociateMetadataInputCreate, AssociateMetadataInputCreateTypeEnum, AssociateMetadataInputTypeEnum, AuthMethods, AuthMethodsConfiguration, Authentication, PromiseAuthenticationApi as AuthenticationApi, AuthenticationInput, Author, AuthorMetadataTypeInput, AuthorMetadataTypeInputTypeEnum, AuthorType, BaseServerConfiguration, BasicAuth, BasicAuthInput, BearerAuthAuthentication, CALLBACK, CALLBACKInput, CALLBACKInputMandatory, ChangeUserPasswordRequest, Column, CommitBranchRequest, CommitFileType, CommitHistoryResponse, CommitResponse, CommiterType, Configuration, ConnectionInput, PromiseConnectionsApi as ConnectionsApi, Conversation, CopyObjectRequest, CopyObjectRequestTypeEnum, CreateConfigRequest, CreateConnectionRequest, CreateConnectionRequestDataWarehouseTypeEnum, CreateConnectionResponse, CreateConnectionResponseDataWarehouseTypeEnum, CreateConversationRequest, CreateCustomActionRequest, CreateCustomActionRequestActionDetails, CreateCustomActionRequestDefaultActionConfig, CreateOrgRequest, CreateRoleRequest, CreateRoleRequestPrivilegesEnum, CreateScheduleRequest, CreateScheduleRequestFileFormatEnum, CreateScheduleRequestFrequency, CreateScheduleRequestLiveboardOptions, CreateScheduleRequestMetadataTypeEnum, CreateScheduleRequestPdfOptions, CreateScheduleRequestPdfOptionsPageSizeEnum, CreateScheduleRequestRecipientDetails, CreateScheduleRequestTimeZoneEnum, CreateTagRequest, CreateUserGroupRequest, CreateUserGroupRequestPrivilegesEnum, CreateUserGroupRequestTypeEnum, CreateUserGroupRequestVisibilityEnum, CreateUserRequest, CreateUserRequestAccountStatusEnum, CreateUserRequestAccountTypeEnum, CreateUserRequestPreferredLocaleEnum, CreateUserRequestVisibilityEnum, CronExpression, CronExpressionInput, PromiseCustomActionApi as CustomActionApi, CustomActionMetadataTypeInput, CustomActionMetadataTypeInputTypeEnum, PromiseDBTApi as DBTApi, PromiseDataApi as DataApi, DataWarehouseObjectInput, DataWarehouseObjects, Database, DbtConnectionRequest, DbtConnectionRequestImportTypeEnum, DbtGenerateSyncTmlRequest, DbtGenerateTmlRequest, DbtGenerateTmlRequestImportWorksheetsEnum, DbtSearchResponse, DeactivateUserRequest, DefaultActionConfig, DefaultActionConfigInput, DefaultActionConfigInputCreate, DefaultActionConfigSearchInput, DeleteConfigRequest, DeleteConnectionRequest, DeleteMetadataRequest, DeleteMetadataTypeInput, DeleteMetadataTypeInputTypeEnum, DeployCommitRequest, DeployCommitRequestDeployPolicyEnum, DeployCommitRequestDeployTypeEnum, DeployResponse, ErrorResponse, ExcludeMetadataListItemInput, ExcludeMetadataListItemInputTypeEnum, ExportAnswerReportRequest, ExportAnswerReportRequestFileFormatEnum, ExportLiveboardReportRequest, ExportLiveboardReportRequestFileFormatEnum, ExportLiveboardReportRequestPdfOptions, ExportLiveboardReportRequestPdfOptionsPageOrientationEnum, ExportLiveboardReportRequestPngOptions, ExportMetadataTMLBatchedRequest, ExportMetadataTMLBatchedRequestEdocFormatEnum, ExportMetadataTMLBatchedRequestMetadataTypeEnum, ExportMetadataTMLRequest, ExportMetadataTMLRequestEdocFormatEnum, ExportMetadataTMLRequestExportSchemaVersionEnum, ExportMetadataTypeInput, ExportMetadataTypeInputTypeEnum, FavoriteMetadataInput, FavoriteMetadataInputTypeEnum, FavoriteMetadataItem, FavoriteMetadataItemTypeEnum, FavoriteObjectOptionsInput, FetchAnswerDataRequest, FetchAnswerDataRequestDataFormatEnum, FetchAnswerSqlQueryRequest, FetchAsyncImportTaskStatusRequest, FetchAsyncImportTaskStatusRequestTaskStatusEnum, FetchConnectionDiffStatusResponse, FetchLiveboardDataRequest, FetchLiveboardDataRequestDataFormatEnum, FetchLiveboardSqlQueryRequest, FetchLogsRequest, FetchLogsRequestLogTypeEnum, FetchPermissionsOfPrincipalsRequest, FetchPermissionsOfPrincipalsRequestDefaultMetadataTypeEnum, FetchPermissionsOnMetadataRequest, FilterRules, FilterRulesOperatorEnum, ForceLogoutUsersRequest, Frequency, FrequencyInput, GenericInfo, GetAsyncImportStatusResponse, GetCustomAccessTokenRequest, GetCustomAccessTokenRequestPersistOptionEnum, GetFullAccessTokenRequest, GetObjectAccessTokenRequest, GetObjectAccessTokenRequestUserParameters, GetTokenResponse, GroupObject, PromiseGroupsApi as GroupsApi, GroupsImportListInput, GroupsImportListInputPrivilegesEnum, GroupsImportListInputTypeEnum, GroupsImportListInputVisibilityEnum, HttpBasicConfiguration, HttpBearerConfiguration, HttpException, HttpFile, HttpLibrary, HttpMethod, ImportEPackAsyncTaskStatus, ImportEPackAsyncTaskStatusImportPolicyEnum, ImportEPackAsyncTaskStatusTaskStatusEnum, ImportMetadataTMLAsyncRequest, ImportMetadataTMLRequest, ImportMetadataTMLRequestImportPolicyEnum, ImportUser, ImportUserAccountStatusEnum, ImportUserAccountTypeEnum, ImportUserGroupsRequest, ImportUserGroupsResponse, ImportUserType, ImportUserVisibilityEnum, ImportUsersRequest, ImportUsersResponse, IsomorphicFetchHttpLibrary, JWTMetadataObject, JWTMetadataObjectTypeEnum, JWTParameter, JWTUserOptions, JWTUserOptionsFull, JWTUserOptionsParametersInner, LiveboardContent, LiveboardDataResponse, LiveboardOptions, LiveboardOptionsInput, PromiseLogApi as LogApi, LogResponse, LoginRequest, PromiseMetadataApi as MetadataApi, MetadataAssociationItem, MetadataInput, MetadataInputTypeEnum, MetadataListItemInput, MetadataListItemInputTypeEnum, MetadataObject, MetadataObjectTypeEnum, MetadataResponse, MetadataResponseTypeEnum, MetadataSearchResponse, MetadataSearchResponseMetadataTypeEnum, MetadataSearchSortOptions, MetadataSearchSortOptionsFieldNameEnum, MetadataSearchSortOptionsOrderEnum, PromiseMiddleware as Middleware, ModelTableList, OAuth2Configuration, ObjectIDAndName, Org, OrgInfo, OrgResponse, OrgResponseStatusEnum, OrgResponseVisibilityEnum, PromiseOrgsApi as OrgsApi, ParameterValues, ParametersListItem, ParametersListItemInput, PdfOptions, PdfOptionsInput, PdfOptionsInputPageOrientationEnum, PdfOptionsPageSizeEnum, PermissionInput, PermissionInputShareModeEnum, PermissionOfMetadataResponse, PermissionOfPrincipalsResponse, PermissionsMetadataTypeInput, PermissionsMetadataTypeInputTypeEnum, PngOptionsInput, PrincipalsInput, PrincipalsInputTypeEnum, PrincipalsListItem, PrincipalsListItemInput, PromiseHttpLibrary, RecipientDetails, RecipientDetailsInput, RepoConfigObject, PromiseReportsApi as ReportsApi, RequestBody, RequestContext, RequiredError, ResetUserPasswordRequest, ResponseActivationURL, ResponseBody, ResponseContext, ResponseCopyObject, ResponseCustomAction, ResponseMessage, ResponseMessageMessageTypeEnum, ResponseMessageVisualizationTypeEnum, ResponseSchedule, ResponseScheduleRun, RevertCommitRequest, RevertCommitRequestRevertPolicyEnum, RevertResponse, RevertedMetadata, RevokeTokenRequest, RiseSetter, Role, RoleResponse, RoleResponsePermissionEnum, RoleResponsePrivilegesEnum, PromiseRolesApi as RolesApi, RuntimeFilter, RuntimeFilters, RuntimeFiltersOperatorEnum, RuntimeParamOverride, RuntimeParameters, RuntimeSort, RuntimeSorts, RuntimeSortsOrderEnum, ScheduleHistoryRunsOptionsInput, PromiseSchedulesApi as SchedulesApi, SchedulesPdfOptionsInput, SchedulesPdfOptionsInputPageSizeEnum, SchemaObject, Scope, SearchCommitsRequest, SearchCommitsRequestMetadataTypeEnum, SearchConfigRequest, SearchConnectionRequest, SearchConnectionRequestAuthenticationTypeEnum, SearchConnectionRequestDataWarehouseObjectTypeEnum, SearchConnectionRequestDataWarehouseTypesEnum, SearchConnectionRequestSortOptions, SearchConnectionRequestSortOptionsFieldNameEnum, SearchConnectionRequestSortOptionsOrderEnum, SearchConnectionResponse, SearchConnectionResponseDataWarehouseTypeEnum, SearchCustomActionsRequest, SearchCustomActionsRequestDefaultActionConfig, SearchCustomActionsRequestTypeEnum, SearchDataRequest, SearchDataRequestDataFormatEnum, SearchDataResponse, SearchMetadataRequest, SearchMetadataRequestDependentObjectVersionEnum, SearchMetadataRequestFavoriteObjectOptions, SearchMetadataRequestSortOptions, SearchMetadataRequestSortOptionsFieldNameEnum, SearchMetadataRequestSortOptionsOrderEnum, SearchOrgsRequest, SearchOrgsRequestStatusEnum, SearchOrgsRequestVisibilityEnum, SearchRoleResponse, SearchRoleResponsePermissionEnum, SearchRoleResponsePrivilegesEnum, SearchRolesRequest, SearchRolesRequestPermissionsEnum, SearchRolesRequestPrivilegesEnum, SearchSchedulesRequest, SearchSchedulesRequestHistoryRunsOptions, SearchSchedulesRequestSortOptions, SearchTagsRequest, SearchUserGroupsRequest, SearchUserGroupsRequestPrivilegesEnum, SearchUserGroupsRequestSortOptions, SearchUserGroupsRequestSortOptionsFieldNameEnum, SearchUserGroupsRequestSortOptionsOrderEnum, SearchUserGroupsRequestTypeEnum, SearchUserGroupsRequestVisibilityEnum, SearchUsersRequest, SearchUsersRequestAccountStatusEnum, SearchUsersRequestAccountTypeEnum, SearchUsersRequestPrivilegesEnum, SearchUsersRequestSortOptions, SearchUsersRequestSortOptionsFieldNameEnum, SearchUsersRequestSortOptionsOrderEnum, SearchUsersRequestVisibilityEnum, PromiseSecurityApi as SecurityApi, SecurityAuthentication, SelfDecodingBody, SendMessageRequest, ServerConfiguration, ShareMetadataRequest, ShareMetadataRequestMetadataTypeEnum, ShareMetadataTypeInput, ShareMetadataTypeInputTypeEnum, SharePermissionsInput, SharePermissionsInputShareModeEnum, SingleAnswerRequest, SortOptionInput, SortOptionInputFieldNameEnum, SortOptionInputOrderEnum, SortOptions, SortOptionsFieldNameEnum, SortOptionsOrderEnum, SortingOptions, SqlQuery, SqlQueryResponse, SqlQueryResponseMetadataTypeEnum, PromiseSystemApi as SystemApi, SystemConfig, SystemInfo, Table, Tag, TagMetadataTypeInput, TagMetadataTypeInputTypeEnum, PromiseTagsApi as TagsApi, PromiseThoughtSpotRestApi as ThoughtSpotRestApi, Token, TokenAccessScopeObject, TokenAccessScopeObjectTypeEnum, TokenProvider, TokenValidationResponse, URL, URLInput, URLInputMandatory, UpdateConfigRequest, UpdateConnectionRequest, UpdateConnectionV2Request, UpdateCustomActionRequest, UpdateCustomActionRequestActionDetails, UpdateCustomActionRequestDefaultActionConfig, UpdateCustomActionRequestOperationEnum, UpdateDbtConnectionRequest, UpdateDbtConnectionRequestImportTypeEnum, UpdateOrgRequest, UpdateOrgRequestOperationEnum, UpdateRoleRequest, UpdateRoleRequestPrivilegesEnum, UpdateScheduleRequest, UpdateScheduleRequestFileFormatEnum, UpdateScheduleRequestFrequency, UpdateScheduleRequestLiveboardOptions, UpdateScheduleRequestMetadataTypeEnum, UpdateScheduleRequestPdfOptions, UpdateScheduleRequestPdfOptionsPageSizeEnum, UpdateScheduleRequestRecipientDetails, UpdateScheduleRequestStatusEnum, UpdateScheduleRequestTimeZoneEnum, UpdateSystemConfigRequest, UpdateTagRequest, UpdateUserGroupRequest, UpdateUserGroupRequestOperationEnum, UpdateUserGroupRequestPrivilegesEnum, UpdateUserGroupRequestTypeEnum, UpdateUserGroupRequestVisibilityEnum, UpdateUserRequest, UpdateUserRequestAccountStatusEnum, UpdateUserRequestAccountTypeEnum, UpdateUserRequestOperationEnum, UpdateUserRequestPreferredLocaleEnum, UpdateUserRequestVisibilityEnum, User, UserAccountStatusEnum, UserAccountTypeEnum, UserGroup, UserGroupResponse, UserGroupResponseParentTypeEnum, UserGroupResponseTypeEnum, UserGroupResponseVisibilityEnum, UserInfo, UserObject, UserObjectTypeEnum, UserParameterOptions, UserParentTypeEnum, UserVisibilityEnum, PromiseUsersApi as UsersApi, ValidateMergeRequest, ValidateTokenRequest, PromiseVersionControlApi as VersionControlApi, configureAuthMethods, createBearerAuthenticationConfig, createConfiguration, server1, servers, wrapHttpLibrary };
+export { PromiseAIApi as AIApi, APIKey, APIKeyInput, AccessToken, ActionConfig, ActionConfigInput, ActionConfigInputCreate, ActionConfigInputCreatePositionEnum, ActionConfigInputPositionEnum, ActionDetails, ActionDetailsInput, ActionDetailsInputCreate, ActivateUserRequest, AnswerContent, AnswerDataResponse, ApiException, ApiKeyConfiguration, AssignChangeAuthorRequest, AssignTagRequest, AssociateMetadataInput, AssociateMetadataInputCreate, AssociateMetadataInputCreateTypeEnum, AssociateMetadataInputTypeEnum, AuthMethods, AuthMethodsConfiguration, Authentication, PromiseAuthenticationApi as AuthenticationApi, AuthenticationInput, Author, AuthorMetadataTypeInput, AuthorMetadataTypeInputTypeEnum, AuthorType, BaseServerConfiguration, BasicAuth, BasicAuthInput, BearerAuthAuthentication, CALLBACK, CALLBACKInput, CALLBACKInputMandatory, ChangeUserPasswordRequest, Column, CommitBranchRequest, CommitFileType, CommitHistoryResponse, CommitResponse, CommiterType, Configuration, ConnectionInput, PromiseConnectionsApi as ConnectionsApi, Conversation, CopyObjectRequest, CopyObjectRequestTypeEnum, CreateConfigRequest, CreateConnectionRequest, CreateConnectionRequestDataWarehouseTypeEnum, CreateConnectionResponse, CreateConnectionResponseDataWarehouseTypeEnum, CreateConversationRequest, CreateCustomActionRequest, CreateCustomActionRequestActionDetails, CreateCustomActionRequestDefaultActionConfig, CreateOrgRequest, CreateRoleRequest, CreateRoleRequestPrivilegesEnum, CreateScheduleRequest, CreateScheduleRequestFileFormatEnum, CreateScheduleRequestFrequency, CreateScheduleRequestLiveboardOptions, CreateScheduleRequestMetadataTypeEnum, CreateScheduleRequestPdfOptions, CreateScheduleRequestPdfOptionsPageSizeEnum, CreateScheduleRequestRecipientDetails, CreateScheduleRequestTimeZoneEnum, CreateTagRequest, CreateUserGroupRequest, CreateUserGroupRequestPrivilegesEnum, CreateUserGroupRequestTypeEnum, CreateUserGroupRequestVisibilityEnum, CreateUserRequest, CreateUserRequestAccountStatusEnum, CreateUserRequestAccountTypeEnum, CreateUserRequestPreferredLocaleEnum, CreateUserRequestVisibilityEnum, CronExpression, CronExpressionInput, PromiseCustomActionApi as CustomActionApi, CustomActionMetadataTypeInput, CustomActionMetadataTypeInputTypeEnum, PromiseDBTApi as DBTApi, PromiseDataApi as DataApi, DataWarehouseObjectInput, DataWarehouseObjects, Database, DbtConnectionRequest, DbtConnectionRequestImportTypeEnum, DbtGenerateSyncTmlRequest, DbtGenerateTmlRequest, DbtGenerateTmlRequestImportWorksheetsEnum, DbtSearchResponse, DeactivateUserRequest, DefaultActionConfig, DefaultActionConfigInput, DefaultActionConfigInputCreate, DefaultActionConfigSearchInput, DeleteConfigRequest, DeleteConnectionRequest, DeleteMetadataRequest, DeleteMetadataTypeInput, DeleteMetadataTypeInputTypeEnum, DeployCommitRequest, DeployCommitRequestDeployPolicyEnum, DeployCommitRequestDeployTypeEnum, DeployResponse, ErrorResponse, ExcludeMetadataListItemInput, ExcludeMetadataListItemInputTypeEnum, ExportAnswerReportRequest, ExportAnswerReportRequestFileFormatEnum, ExportLiveboardReportRequest, ExportLiveboardReportRequestFileFormatEnum, ExportLiveboardReportRequestPdfOptions, ExportLiveboardReportRequestPdfOptionsPageOrientationEnum, ExportLiveboardReportRequestPngOptions, ExportMetadataTMLBatchedRequest, ExportMetadataTMLBatchedRequestEdocFormatEnum, ExportMetadataTMLBatchedRequestMetadataTypeEnum, ExportMetadataTMLRequest, ExportMetadataTMLRequestEdocFormatEnum, ExportMetadataTMLRequestExportOptions, ExportMetadataTMLRequestExportSchemaVersionEnum, ExportMetadataTypeInput, ExportMetadataTypeInputTypeEnum, ExportOptions, FavoriteMetadataInput, FavoriteMetadataInputTypeEnum, FavoriteMetadataItem, FavoriteMetadataItemTypeEnum, FavoriteObjectOptionsInput, FetchAnswerDataRequest, FetchAnswerDataRequestDataFormatEnum, FetchAnswerSqlQueryRequest, FetchAsyncImportTaskStatusRequest, FetchAsyncImportTaskStatusRequestTaskStatusEnum, FetchConnectionDiffStatusResponse, FetchLiveboardDataRequest, FetchLiveboardDataRequestDataFormatEnum, FetchLiveboardSqlQueryRequest, FetchLogsRequest, FetchLogsRequestLogTypeEnum, FetchPermissionsOfPrincipalsRequest, FetchPermissionsOfPrincipalsRequestDefaultMetadataTypeEnum, FetchPermissionsOnMetadataRequest, FilterRules, FilterRulesOperatorEnum, ForceLogoutUsersRequest, Frequency, FrequencyInput, GenericInfo, GetAsyncImportStatusResponse, GetCustomAccessTokenRequest, GetCustomAccessTokenRequestPersistOptionEnum, GetFullAccessTokenRequest, GetObjectAccessTokenRequest, GetObjectAccessTokenRequestUserParameters, GetTokenResponse, GroupObject, PromiseGroupsApi as GroupsApi, GroupsImportListInput, GroupsImportListInputPrivilegesEnum, GroupsImportListInputTypeEnum, GroupsImportListInputVisibilityEnum, HttpBasicConfiguration, HttpBearerConfiguration, HttpException, HttpFile, HttpLibrary, HttpMethod, ImportEPackAsyncTaskStatus, ImportEPackAsyncTaskStatusImportPolicyEnum, ImportEPackAsyncTaskStatusTaskStatusEnum, ImportMetadataTMLAsyncRequest, ImportMetadataTMLAsyncRequestImportPolicyEnum, ImportMetadataTMLRequest, ImportMetadataTMLRequestImportPolicyEnum, ImportUser, ImportUserAccountStatusEnum, ImportUserAccountTypeEnum, ImportUserGroupsRequest, ImportUserGroupsResponse, ImportUserType, ImportUserVisibilityEnum, ImportUsersRequest, ImportUsersResponse, IsomorphicFetchHttpLibrary, JWTMetadataObject, JWTMetadataObjectTypeEnum, JWTParameter, JWTUserOptions, JWTUserOptionsFull, JWTUserOptionsParametersInner, LiveboardContent, LiveboardDataResponse, LiveboardOptions, LiveboardOptionsInput, PromiseLogApi as LogApi, LogResponse, LoginRequest, PromiseMetadataApi as MetadataApi, MetadataAssociationItem, MetadataInput, MetadataInputTypeEnum, MetadataListItemInput, MetadataListItemInputTypeEnum, MetadataObject, MetadataObjectTypeEnum, MetadataResponse, MetadataResponseTypeEnum, MetadataSearchResponse, MetadataSearchResponseMetadataTypeEnum, MetadataSearchSortOptions, MetadataSearchSortOptionsFieldNameEnum, MetadataSearchSortOptionsOrderEnum, PromiseMiddleware as Middleware, ModelTableList, OAuth2Configuration, ObjectIDAndName, Org, OrgInfo, OrgResponse, OrgResponseStatusEnum, OrgResponseVisibilityEnum, PromiseOrgsApi as OrgsApi, ParameterValues, ParametersListItem, ParametersListItemInput, PdfOptions, PdfOptionsInput, PdfOptionsInputPageOrientationEnum, PdfOptionsPageSizeEnum, PermissionInput, PermissionInputShareModeEnum, PermissionOfMetadataResponse, PermissionOfPrincipalsResponse, PermissionsMetadataTypeInput, PermissionsMetadataTypeInputTypeEnum, PngOptionsInput, PrincipalsInput, PrincipalsInputTypeEnum, PrincipalsListItem, PrincipalsListItemInput, PromiseHttpLibrary, RecipientDetails, RecipientDetailsInput, RepoConfigObject, PromiseReportsApi as ReportsApi, RequestBody, RequestContext, RequiredError, ResetUserPasswordRequest, ResponseActivationURL, ResponseBody, ResponseContext, ResponseCopyObject, ResponseCustomAction, ResponseMessage, ResponseMessageMessageTypeEnum, ResponseMessageVisualizationTypeEnum, ResponseSchedule, ResponseScheduleRun, RevertCommitRequest, RevertCommitRequestRevertPolicyEnum, RevertResponse, RevertedMetadata, RevokeTokenRequest, RiseSetter, Role, RoleResponse, RoleResponsePermissionEnum, RoleResponsePrivilegesEnum, PromiseRolesApi as RolesApi, RuntimeFilter, RuntimeFilters, RuntimeFiltersOperatorEnum, RuntimeParamOverride, RuntimeParameters, RuntimeSort, RuntimeSorts, RuntimeSortsOrderEnum, ScheduleHistoryRunsOptionsInput, PromiseSchedulesApi as SchedulesApi, SchedulesPdfOptionsInput, SchedulesPdfOptionsInputPageSizeEnum, SchemaObject, Scope, SearchCommitsRequest, SearchCommitsRequestMetadataTypeEnum, SearchConfigRequest, SearchConnectionRequest, SearchConnectionRequestAuthenticationTypeEnum, SearchConnectionRequestDataWarehouseObjectTypeEnum, SearchConnectionRequestDataWarehouseTypesEnum, SearchConnectionRequestSortOptions, SearchConnectionRequestSortOptionsFieldNameEnum, SearchConnectionRequestSortOptionsOrderEnum, SearchConnectionResponse, SearchConnectionResponseDataWarehouseTypeEnum, SearchCustomActionsRequest, SearchCustomActionsRequestDefaultActionConfig, SearchCustomActionsRequestTypeEnum, SearchDataRequest, SearchDataRequestDataFormatEnum, SearchDataResponse, SearchMetadataRequest, SearchMetadataRequestDependentObjectVersionEnum, SearchMetadataRequestFavoriteObjectOptions, SearchMetadataRequestSortOptions, SearchMetadataRequestSortOptionsFieldNameEnum, SearchMetadataRequestSortOptionsOrderEnum, SearchOrgsRequest, SearchOrgsRequestStatusEnum, SearchOrgsRequestVisibilityEnum, SearchRoleResponse, SearchRoleResponsePermissionEnum, SearchRoleResponsePrivilegesEnum, SearchRolesRequest, SearchRolesRequestPermissionsEnum, SearchRolesRequestPrivilegesEnum, SearchSchedulesRequest, SearchSchedulesRequestHistoryRunsOptions, SearchSchedulesRequestSortOptions, SearchTagsRequest, SearchUserGroupsRequest, SearchUserGroupsRequestPrivilegesEnum, SearchUserGroupsRequestSortOptions, SearchUserGroupsRequestSortOptionsFieldNameEnum, SearchUserGroupsRequestSortOptionsOrderEnum, SearchUserGroupsRequestTypeEnum, SearchUserGroupsRequestVisibilityEnum, SearchUsersRequest, SearchUsersRequestAccountStatusEnum, SearchUsersRequestAccountTypeEnum, SearchUsersRequestPrivilegesEnum, SearchUsersRequestSortOptions, SearchUsersRequestSortOptionsFieldNameEnum, SearchUsersRequestSortOptionsOrderEnum, SearchUsersRequestVisibilityEnum, PromiseSecurityApi as SecurityApi, SecurityAuthentication, SelfDecodingBody, SendMessageRequest, ServerConfiguration, ShareMetadataRequest, ShareMetadataRequestMetadataTypeEnum, ShareMetadataTypeInput, ShareMetadataTypeInputTypeEnum, SharePermissionsInput, SharePermissionsInputShareModeEnum, SingleAnswerRequest, SortOptionInput, SortOptionInputFieldNameEnum, SortOptionInputOrderEnum, SortOptions, SortOptionsFieldNameEnum, SortOptionsOrderEnum, SortingOptions, SqlQuery, SqlQueryResponse, SqlQueryResponseMetadataTypeEnum, PromiseSystemApi as SystemApi, SystemConfig, SystemInfo, Table, Tag, TagMetadataTypeInput, TagMetadataTypeInputTypeEnum, PromiseTagsApi as TagsApi, PromiseThoughtSpotRestApi as ThoughtSpotRestApi, Token, TokenAccessScopeObject, TokenAccessScopeObjectTypeEnum, TokenProvider, TokenValidationResponse, URL, URLInput, URLInputMandatory, UpdateConfigRequest, UpdateConnectionRequest, UpdateConnectionV2Request, UpdateCustomActionRequest, UpdateCustomActionRequestActionDetails, UpdateCustomActionRequestDefaultActionConfig, UpdateCustomActionRequestOperationEnum, UpdateDbtConnectionRequest, UpdateDbtConnectionRequestImportTypeEnum, UpdateOrgRequest, UpdateOrgRequestOperationEnum, UpdateRoleRequest, UpdateRoleRequestPrivilegesEnum, UpdateScheduleRequest, UpdateScheduleRequestFileFormatEnum, UpdateScheduleRequestFrequency, UpdateScheduleRequestLiveboardOptions, UpdateScheduleRequestMetadataTypeEnum, UpdateScheduleRequestPdfOptions, UpdateScheduleRequestPdfOptionsPageSizeEnum, UpdateScheduleRequestRecipientDetails, UpdateScheduleRequestStatusEnum, UpdateScheduleRequestTimeZoneEnum, UpdateSystemConfigRequest, UpdateTagRequest, UpdateUserGroupRequest, UpdateUserGroupRequestOperationEnum, UpdateUserGroupRequestPrivilegesEnum, UpdateUserGroupRequestTypeEnum, UpdateUserGroupRequestVisibilityEnum, UpdateUserRequest, UpdateUserRequestAccountStatusEnum, UpdateUserRequestAccountTypeEnum, UpdateUserRequestOperationEnum, UpdateUserRequestPreferredLocaleEnum, UpdateUserRequestVisibilityEnum, User, UserAccountStatusEnum, UserAccountTypeEnum, UserGroup, UserGroupResponse, UserGroupResponseParentTypeEnum, UserGroupResponseTypeEnum, UserGroupResponseVisibilityEnum, UserInfo, UserObject, UserObjectTypeEnum, UserParameterOptions, UserParentTypeEnum, UserVisibilityEnum, PromiseUsersApi as UsersApi, ValidateMergeRequest, ValidateTokenRequest, PromiseVersionControlApi as VersionControlApi, configureAuthMethods, createBearerAuthenticationConfig, createConfiguration, server1, servers, wrapHttpLibrary };

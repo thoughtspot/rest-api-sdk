@@ -26,13 +26,13 @@ export class UserParameters {
     */
     'values': Array<string>;
     /**
-    * Flag to persist the parameters.    Version: 9.12.0.cl or later 
+    * Flag to persist the parameters.
     */
-    'persist'?: boolean | null;
+    'persist'?: boolean;
     /**
     * Object to apply the runtime parameter.
     */
-    'objects'?: Array<UserObject> | null;
+    'objects'?: Array<UserObject>;
 
     static readonly discriminator: string | undefined = undefined;
 

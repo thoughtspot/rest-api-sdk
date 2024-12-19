@@ -80,7 +80,9 @@ export * from '../models/ExportLiveboardReportRequestPdfOptions';
 export * from '../models/ExportLiveboardReportRequestPngOptions';
 export * from '../models/ExportMetadataTMLBatchedRequest';
 export * from '../models/ExportMetadataTMLRequest';
+export * from '../models/ExportMetadataTMLRequestExportOptions';
 export * from '../models/ExportMetadataTypeInput';
+export * from '../models/ExportOptions';
 export * from '../models/FavoriteMetadataInput';
 export * from '../models/FavoriteMetadataItem';
 export * from '../models/FavoriteObjectOptionsInput';
@@ -330,8 +332,10 @@ import { ExportLiveboardReportRequest   , ExportLiveboardReportRequestFileFormat
 import { ExportLiveboardReportRequestPdfOptions    , ExportLiveboardReportRequestPdfOptionsPageOrientationEnum     } from '../models/ExportLiveboardReportRequestPdfOptions';
 import { ExportLiveboardReportRequestPngOptions } from '../models/ExportLiveboardReportRequestPngOptions';
 import { ExportMetadataTMLBatchedRequest, ExportMetadataTMLBatchedRequestMetadataTypeEnum    , ExportMetadataTMLBatchedRequestEdocFormatEnum     } from '../models/ExportMetadataTMLBatchedRequest';
-import { ExportMetadataTMLRequest   , ExportMetadataTMLRequestEdocFormatEnum  , ExportMetadataTMLRequestExportSchemaVersionEnum      } from '../models/ExportMetadataTMLRequest';
+import { ExportMetadataTMLRequest   , ExportMetadataTMLRequestEdocFormatEnum  , ExportMetadataTMLRequestExportSchemaVersionEnum       } from '../models/ExportMetadataTMLRequest';
+import { ExportMetadataTMLRequestExportOptions } from '../models/ExportMetadataTMLRequestExportOptions';
 import { ExportMetadataTypeInput, ExportMetadataTypeInputTypeEnum    } from '../models/ExportMetadataTypeInput';
+import { ExportOptions } from '../models/ExportOptions';
 import { FavoriteMetadataInput , FavoriteMetadataInputTypeEnum   } from '../models/FavoriteMetadataInput';
 import { FavoriteMetadataItem  , FavoriteMetadataItemTypeEnum   } from '../models/FavoriteMetadataItem';
 import { FavoriteObjectOptionsInput } from '../models/FavoriteObjectOptionsInput';
@@ -350,7 +354,7 @@ import { Frequency } from '../models/Frequency';
 import { FrequencyInput } from '../models/FrequencyInput';
 import { GenericInfo } from '../models/GenericInfo';
 import { GetAsyncImportStatusResponse } from '../models/GetAsyncImportStatusResponse';
-import { GetCustomAccessTokenRequest     , GetCustomAccessTokenRequestPersistOptionEnum         } from '../models/GetCustomAccessTokenRequest';
+import { GetCustomAccessTokenRequest     , GetCustomAccessTokenRequestPersistOptionEnum          } from '../models/GetCustomAccessTokenRequest';
 import { GetFullAccessTokenRequest } from '../models/GetFullAccessTokenRequest';
 import { GetObjectAccessTokenRequest } from '../models/GetObjectAccessTokenRequest';
 import { GetObjectAccessTokenRequestUserParameters } from '../models/GetObjectAccessTokenRequestUserParameters';
@@ -358,8 +362,8 @@ import { GetTokenResponse } from '../models/GetTokenResponse';
 import { GroupObject } from '../models/GroupObject';
 import { GroupsImportListInput    , GroupsImportListInputPrivilegesEnum   , GroupsImportListInputTypeEnum   , GroupsImportListInputVisibilityEnum   } from '../models/GroupsImportListInput';
 import { ImportEPackAsyncTaskStatus     , ImportEPackAsyncTaskStatusTaskStatusEnum   , ImportEPackAsyncTaskStatusImportPolicyEnum         } from '../models/ImportEPackAsyncTaskStatus';
-import { ImportMetadataTMLAsyncRequest } from '../models/ImportMetadataTMLAsyncRequest';
-import { ImportMetadataTMLRequest , ImportMetadataTMLRequestImportPolicyEnum      } from '../models/ImportMetadataTMLRequest';
+import { ImportMetadataTMLAsyncRequest    , ImportMetadataTMLAsyncRequestImportPolicyEnum    } from '../models/ImportMetadataTMLAsyncRequest';
+import { ImportMetadataTMLRequest , ImportMetadataTMLRequestImportPolicyEnum       } from '../models/ImportMetadataTMLRequest';
 import { ImportUser   , ImportUserAccountTypeEnum  , ImportUserAccountStatusEnum     , ImportUserVisibilityEnum        } from '../models/ImportUser';
 import { ImportUserGroupsRequest } from '../models/ImportUserGroupsRequest';
 import { ImportUserGroupsResponse } from '../models/ImportUserGroupsResponse';
@@ -379,7 +383,7 @@ import { LogResponse } from '../models/LogResponse';
 import { LoginRequest } from '../models/LoginRequest';
 import { MetadataAssociationItem } from '../models/MetadataAssociationItem';
 import { MetadataInput , MetadataInputTypeEnum   } from '../models/MetadataInput';
-import { MetadataListItemInput  , MetadataListItemInputTypeEnum   } from '../models/MetadataListItemInput';
+import { MetadataListItemInput   , MetadataListItemInputTypeEnum   } from '../models/MetadataListItemInput';
 import { MetadataObject , MetadataObjectTypeEnum   } from '../models/MetadataObject';
 import { MetadataResponse  , MetadataResponseTypeEnum   } from '../models/MetadataResponse';
 import { MetadataSearchResponse  , MetadataSearchResponseMetadataTypeEnum         } from '../models/MetadataSearchResponse';
@@ -569,6 +573,7 @@ let enumsMap: Set<string> = new Set<string>([
     "GroupsImportListInputVisibilityEnum",
     "ImportEPackAsyncTaskStatusTaskStatusEnum",
     "ImportEPackAsyncTaskStatusImportPolicyEnum",
+    "ImportMetadataTMLAsyncRequestImportPolicyEnum",
     "ImportMetadataTMLRequestImportPolicyEnum",
     "ImportUserAccountTypeEnum",
     "ImportUserAccountStatusEnum",
@@ -746,7 +751,9 @@ let typeMap: {[index: string]: any} = {
     "ExportLiveboardReportRequestPngOptions": ExportLiveboardReportRequestPngOptions,
     "ExportMetadataTMLBatchedRequest": ExportMetadataTMLBatchedRequest,
     "ExportMetadataTMLRequest": ExportMetadataTMLRequest,
+    "ExportMetadataTMLRequestExportOptions": ExportMetadataTMLRequestExportOptions,
     "ExportMetadataTypeInput": ExportMetadataTypeInput,
+    "ExportOptions": ExportOptions,
     "FavoriteMetadataInput": FavoriteMetadataInput,
     "FavoriteMetadataItem": FavoriteMetadataItem,
     "FavoriteObjectOptionsInput": FavoriteObjectOptionsInput,

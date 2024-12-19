@@ -18,7 +18,7 @@ import { HttpFile } from '../http/http';
 
 export class GetCustomAccessTokenRequest {
     /**
-    * Username for which the token needs to be created.
+    * Username of the ThoughtSpot user. The username is stored in the `name` attribute of the user object.
     */
     'username': string;
     /**
@@ -65,6 +65,10 @@ export class GetCustomAccessTokenRequest {
     * (just-in-time (JIT) provisioning) ID or name of the groups to which the newly created user belongs. Specify this attribute when creating a new user.
     */
     'groups'?: Array<GroupObject>;
+    /**
+    *    Creates a new user if the specified username does not exist in ThoughtSpot. To provision a user just-in-time (JIT), set this attribute to true.      Note: For JIT provisioning of a user, the secret_key is required.     Version: 10.5.0.cl or later 
+    */
+    'auto_create'?: boolean | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -140,6 +144,12 @@ export class GetCustomAccessTokenRequest {
             "baseName": "groups",
             "type": "Array<GroupObject>",
             "format": ""
+        },
+        {
+            "name": "auto_create",
+            "baseName": "auto_create",
+            "type": "boolean",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
@@ -151,5 +161,5 @@ export class GetCustomAccessTokenRequest {
 }
 
 
-export type GetCustomAccessTokenRequestPersistOptionEnum = "APPEND" | "NONE" | "RESET" ;
+export type GetCustomAccessTokenRequestPersistOptionEnum = "APPEND" | "NONE" | "REPLACE" | "RESET" ;
 

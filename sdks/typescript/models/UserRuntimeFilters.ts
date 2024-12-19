@@ -30,13 +30,13 @@ export class UserRuntimeFilters {
     */
     'operator': UserRuntimeFiltersOperatorEnum;
     /**
-    * Flag to persist the runtime filters.    Version: 9.12.0.cl or later 
+    * Flag to persist the runtime filters.
     */
-    'persist'?: boolean | null;
+    'persist'?: boolean;
     /**
     * Object to apply the runtime filter.
     */
-    'objects'?: Array<UserObject> | null;
+    'objects'?: Array<UserObject>;
 
     static readonly discriminator: string | undefined = undefined;
 

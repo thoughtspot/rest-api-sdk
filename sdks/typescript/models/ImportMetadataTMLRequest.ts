@@ -33,6 +33,10 @@ export class ImportMetadataTMLRequest {
     * Boolean to indicate if the CDW validation for table imports should be skipped.
     */
     'skip_cdw_validation_for_tables'?: boolean | null;
+    /**
+    * <div>Version: 10.5.0.cl or later </div>  Boolean to indicate if the large metadata validation should be enabled.
+    */
+    'enable_large_metadata_validation'?: boolean | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -64,6 +68,12 @@ export class ImportMetadataTMLRequest {
         {
             "name": "skip_cdw_validation_for_tables",
             "baseName": "skip_cdw_validation_for_tables",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "enable_large_metadata_validation",
+            "baseName": "enable_large_metadata_validation",
             "type": "boolean",
             "format": ""
         }    ];
