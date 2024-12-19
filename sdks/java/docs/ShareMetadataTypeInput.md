@@ -19,7 +19,6 @@
 | LIVEBOARD | &quot;LIVEBOARD&quot; |
 | ANSWER | &quot;ANSWER&quot; |
 | LOGICAL_TABLE | &quot;LOGICAL_TABLE&quot; |
-| LOGICAL_COLUMN | &quot;LOGICAL_COLUMN&quot; |
 
 
 

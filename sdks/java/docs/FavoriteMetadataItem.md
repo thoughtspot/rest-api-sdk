@@ -9,7 +9,7 @@
 |------------ | ------------- | ------------- | -------------|
 |**id** | **String** | Unique ID of the metadata object. |  |
 |**name** | **String** | name of the metadata object. |  |
-|**type** | [**TypeEnum**](#TypeEnum) | Type of metadata object. |  |
+|**type** | [**TypeEnum**](#TypeEnum) |   Type of metadata object.     Required if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier. |  |
 
 
 

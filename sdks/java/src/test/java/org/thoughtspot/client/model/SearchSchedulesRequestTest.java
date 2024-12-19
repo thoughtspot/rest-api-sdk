@@ -22,8 +22,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.thoughtspot.client.model.MetadataInput;
-import org.thoughtspot.client.model.ScheduleHistoryRunsOptionsInput;
-import org.thoughtspot.client.model.SortingOptions;
+import org.thoughtspot.client.model.SearchSchedulesRequestHistoryRunsOptions;
+import org.thoughtspot.client.model.SearchSchedulesRequestSortOptions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 

@@ -16,15 +16,7 @@ export class ExportAnswerReportRequest {
     /**
     * Unique ID or name of the metadata object.
     */
-    'metadata_identifier'?: string;
-    /**
-    * Unique ID of the answer session.
-    */
-    'session_identifier'?: string;
-    /**
-    * Generation number of the answer session.
-    */
-    'generation_number'?: number;
+    'metadata_identifier': string;
     /**
     * Export file format.
     */
@@ -50,18 +42,6 @@ export class ExportAnswerReportRequest {
             "baseName": "metadata_identifier",
             "type": "string",
             "format": ""
-        },
-        {
-            "name": "session_identifier",
-            "baseName": "session_identifier",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "generation_number",
-            "baseName": "generation_number",
-            "type": "number",
-            "format": "int32"
         },
         {
             "name": "file_format",

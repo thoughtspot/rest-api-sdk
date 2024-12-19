@@ -21,10 +21,10 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
-import org.thoughtspot.client.model.FrequencyInput;
-import org.thoughtspot.client.model.LiveboardOptionsInput;
-import org.thoughtspot.client.model.RecipientDetailsInput;
-import org.thoughtspot.client.model.SchedulesPdfOptionsInput;
+import org.thoughtspot.client.model.CreateScheduleRequestFrequency;
+import org.thoughtspot.client.model.CreateScheduleRequestLiveboardOptions;
+import org.thoughtspot.client.model.CreateScheduleRequestPdfOptions;
+import org.thoughtspot.client.model.CreateScheduleRequestRecipientDetails;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -54,7 +54,7 @@ import org.thoughtspot.client.JSON;
 /**
  * CreateScheduleRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-08T10:47:55.743445Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-11-06T10:15:19.022933Z[Etc/UTC]")
 public class CreateScheduleRequest {
   public static final String SERIALIZED_NAME_NAME = "name";
   @SerializedName(SERIALIZED_NAME_NAME)
@@ -172,11 +172,11 @@ public class CreateScheduleRequest {
 
   public static final String SERIALIZED_NAME_LIVEBOARD_OPTIONS = "liveboard_options";
   @SerializedName(SERIALIZED_NAME_LIVEBOARD_OPTIONS)
-  private LiveboardOptionsInput liveboardOptions;
+  private CreateScheduleRequestLiveboardOptions liveboardOptions;
 
   public static final String SERIALIZED_NAME_PDF_OPTIONS = "pdf_options";
   @SerializedName(SERIALIZED_NAME_PDF_OPTIONS)
-  private SchedulesPdfOptionsInput pdfOptions;
+  private CreateScheduleRequestPdfOptions pdfOptions;
 
   /**
    * Time zone
@@ -1487,11 +1487,11 @@ public class CreateScheduleRequest {
 
   public static final String SERIALIZED_NAME_FREQUENCY = "frequency";
   @SerializedName(SERIALIZED_NAME_FREQUENCY)
-  private FrequencyInput frequency;
+  private CreateScheduleRequestFrequency frequency;
 
   public static final String SERIALIZED_NAME_RECIPIENT_DETAILS = "recipient_details";
   @SerializedName(SERIALIZED_NAME_RECIPIENT_DETAILS)
-  private RecipientDetailsInput recipientDetails;
+  private CreateScheduleRequestRecipientDetails recipientDetails;
 
   public CreateScheduleRequest() {
   }
@@ -1601,7 +1601,7 @@ public class CreateScheduleRequest {
   }
 
 
-  public CreateScheduleRequest liveboardOptions(LiveboardOptionsInput liveboardOptions) {
+  public CreateScheduleRequest liveboardOptions(CreateScheduleRequestLiveboardOptions liveboardOptions) {
     
     this.liveboardOptions = liveboardOptions;
     return this;
@@ -1612,17 +1612,17 @@ public class CreateScheduleRequest {
    * @return liveboardOptions
   **/
   @javax.annotation.Nullable
-  public LiveboardOptionsInput getLiveboardOptions() {
+  public CreateScheduleRequestLiveboardOptions getLiveboardOptions() {
     return liveboardOptions;
   }
 
 
-  public void setLiveboardOptions(LiveboardOptionsInput liveboardOptions) {
+  public void setLiveboardOptions(CreateScheduleRequestLiveboardOptions liveboardOptions) {
     this.liveboardOptions = liveboardOptions;
   }
 
 
-  public CreateScheduleRequest pdfOptions(SchedulesPdfOptionsInput pdfOptions) {
+  public CreateScheduleRequest pdfOptions(CreateScheduleRequestPdfOptions pdfOptions) {
     
     this.pdfOptions = pdfOptions;
     return this;
@@ -1633,12 +1633,12 @@ public class CreateScheduleRequest {
    * @return pdfOptions
   **/
   @javax.annotation.Nullable
-  public SchedulesPdfOptionsInput getPdfOptions() {
+  public CreateScheduleRequestPdfOptions getPdfOptions() {
     return pdfOptions;
   }
 
 
-  public void setPdfOptions(SchedulesPdfOptionsInput pdfOptions) {
+  public void setPdfOptions(CreateScheduleRequestPdfOptions pdfOptions) {
     this.pdfOptions = pdfOptions;
   }
 
@@ -1664,7 +1664,7 @@ public class CreateScheduleRequest {
   }
 
 
-  public CreateScheduleRequest frequency(FrequencyInput frequency) {
+  public CreateScheduleRequest frequency(CreateScheduleRequestFrequency frequency) {
     
     this.frequency = frequency;
     return this;
@@ -1675,17 +1675,17 @@ public class CreateScheduleRequest {
    * @return frequency
   **/
   @javax.annotation.Nullable
-  public FrequencyInput getFrequency() {
+  public CreateScheduleRequestFrequency getFrequency() {
     return frequency;
   }
 
 
-  public void setFrequency(FrequencyInput frequency) {
+  public void setFrequency(CreateScheduleRequestFrequency frequency) {
     this.frequency = frequency;
   }
 
 
-  public CreateScheduleRequest recipientDetails(RecipientDetailsInput recipientDetails) {
+  public CreateScheduleRequest recipientDetails(CreateScheduleRequestRecipientDetails recipientDetails) {
     
     this.recipientDetails = recipientDetails;
     return this;
@@ -1696,12 +1696,12 @@ public class CreateScheduleRequest {
    * @return recipientDetails
   **/
   @javax.annotation.Nonnull
-  public RecipientDetailsInput getRecipientDetails() {
+  public CreateScheduleRequestRecipientDetails getRecipientDetails() {
     return recipientDetails;
   }
 
 
-  public void setRecipientDetails(RecipientDetailsInput recipientDetails) {
+  public void setRecipientDetails(CreateScheduleRequestRecipientDetails recipientDetails) {
     this.recipientDetails = recipientDetails;
   }
 
@@ -1834,21 +1834,21 @@ public class CreateScheduleRequest {
       }
       // validate the optional field `liveboard_options`
       if (jsonObj.get("liveboard_options") != null && !jsonObj.get("liveboard_options").isJsonNull()) {
-        LiveboardOptionsInput.validateJsonObject(jsonObj.getAsJsonObject("liveboard_options"));
+        CreateScheduleRequestLiveboardOptions.validateJsonObject(jsonObj.getAsJsonObject("liveboard_options"));
       }
       // validate the optional field `pdf_options`
       if (jsonObj.get("pdf_options") != null && !jsonObj.get("pdf_options").isJsonNull()) {
-        SchedulesPdfOptionsInput.validateJsonObject(jsonObj.getAsJsonObject("pdf_options"));
+        CreateScheduleRequestPdfOptions.validateJsonObject(jsonObj.getAsJsonObject("pdf_options"));
       }
       if (!jsonObj.get("time_zone").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `time_zone` to be a primitive type in the JSON string but got `%s`", jsonObj.get("time_zone").toString()));
       }
       // validate the optional field `frequency`
       if (jsonObj.get("frequency") != null && !jsonObj.get("frequency").isJsonNull()) {
-        FrequencyInput.validateJsonObject(jsonObj.getAsJsonObject("frequency"));
+        CreateScheduleRequestFrequency.validateJsonObject(jsonObj.getAsJsonObject("frequency"));
       }
       // validate the required field `recipient_details`
-      RecipientDetailsInput.validateJsonObject(jsonObj.getAsJsonObject("recipient_details"));
+      CreateScheduleRequestRecipientDetails.validateJsonObject(jsonObj.getAsJsonObject("recipient_details"));
   }
 
   public static class CustomTypeAdapterFactory implements TypeAdapterFactory {

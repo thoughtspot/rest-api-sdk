@@ -53,7 +53,7 @@ import org.thoughtspot.client.JSON;
 /**
  * ImportMetadataTMLRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-08T10:47:55.743445Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-11-06T10:15:19.022933Z[Etc/UTC]")
 public class ImportMetadataTMLRequest {
   public static final String SERIALIZED_NAME_METADATA_TMLS = "metadata_tmls";
   @SerializedName(SERIALIZED_NAME_METADATA_TMLS)
@@ -68,7 +68,9 @@ public class ImportMetadataTMLRequest {
     
     ALL_OR_NONE("ALL_OR_NONE"),
     
-    VALIDATE_ONLY("VALIDATE_ONLY");
+    VALIDATE_ONLY("VALIDATE_ONLY"),
+    
+    PARTIAL_OBJECT("PARTIAL_OBJECT");
 
     private String value;
 
@@ -138,7 +140,7 @@ public class ImportMetadataTMLRequest {
   }
 
    /**
-   * Details of TML objects.
+   * Details of TML objects. **Note: importing TML in YAML format, when coming directly from our Playground, is currently requires manual formatting. For more details on the workaround, please click [here](https://developers.thoughtspot.com/docs/known-issues#_version_9_12_0_cl)**
    * @return metadataTmls
   **/
   @javax.annotation.Nonnull

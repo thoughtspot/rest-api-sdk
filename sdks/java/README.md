@@ -4,7 +4,7 @@ ThoughtSpot Public REST API
 
 - API version: 2.0
 
-    - Build date: 2024-07-08T10:47:55.743445Z[Etc/UTC]
+    - Build date: 2024-11-06T10:15:19.022933Z[Etc/UTC]
 
 - Generator version: 6.6.0
 
@@ -130,10 +130,12 @@ Class | Method | HTTP request | Description
 *AuthenticationApi* | [**validateToken**](docs/AuthenticationApi.md#validateToken) | **POST** /api/rest/2.0/auth/token/validate | 
 *ConnectionsApi* | [**createConnection**](docs/ConnectionsApi.md#createConnection) | **POST** /api/rest/2.0/connection/create | 
 *ConnectionsApi* | [**deleteConnection**](docs/ConnectionsApi.md#deleteConnection) | **POST** /api/rest/2.0/connection/delete | 
+*ConnectionsApi* | [**deleteConnectionV2**](docs/ConnectionsApi.md#deleteConnectionV2) | **POST** /api/rest/2.0/connections/delete/{connection_identifier} | 
 *ConnectionsApi* | [**downloadConnectionMetadataChanges**](docs/ConnectionsApi.md#downloadConnectionMetadataChanges) | **POST** /api/rest/2.0/connections/download-connection-metadata-changes/{connection_identifier} | 
 *ConnectionsApi* | [**fetchConnectionDiffStatus**](docs/ConnectionsApi.md#fetchConnectionDiffStatus) | **POST** /api/rest/2.0/connections/fetch-connection-diff-status/{connection_identifier} | 
 *ConnectionsApi* | [**searchConnection**](docs/ConnectionsApi.md#searchConnection) | **POST** /api/rest/2.0/connection/search | 
 *ConnectionsApi* | [**updateConnection**](docs/ConnectionsApi.md#updateConnection) | **POST** /api/rest/2.0/connection/update | 
+*ConnectionsApi* | [**updateConnectionV2**](docs/ConnectionsApi.md#updateConnectionV2) | **POST** /api/rest/2.0/connections/update/{connection_identifier} | 
 *CustomActionApi* | [**createCustomAction**](docs/CustomActionApi.md#createCustomAction) | **POST** /api/rest/2.0/customization/custom-actions | 
 *CustomActionApi* | [**deleteCustomAction**](docs/CustomActionApi.md#deleteCustomAction) | **POST** /api/rest/2.0/customization/custom-actions/{custom_action_identifier}/delete | 
 *CustomActionApi* | [**searchCustomActions**](docs/CustomActionApi.md#searchCustomActions) | **POST** /api/rest/2.0/customization/custom-actions/search | 
@@ -153,8 +155,10 @@ Class | Method | HTTP request | Description
 *GroupsApi* | [**searchUserGroups**](docs/GroupsApi.md#searchUserGroups) | **POST** /api/rest/2.0/groups/search | 
 *GroupsApi* | [**updateUserGroup**](docs/GroupsApi.md#updateUserGroup) | **POST** /api/rest/2.0/groups/{group_identifier}/update | 
 *LogApi* | [**fetchLogs**](docs/LogApi.md#fetchLogs) | **POST** /api/rest/2.0/logs/fetch | 
+*MetadataApi* | [**copyObject**](docs/MetadataApi.md#copyObject) | **POST** /api/rest/2.0/metadata/copyobject | 
 *MetadataApi* | [**deleteMetadata**](docs/MetadataApi.md#deleteMetadata) | **POST** /api/rest/2.0/metadata/delete | 
 *MetadataApi* | [**exportMetadataTML**](docs/MetadataApi.md#exportMetadataTML) | **POST** /api/rest/2.0/metadata/tml/export | 
+*MetadataApi* | [**exportMetadataTMLBatched**](docs/MetadataApi.md#exportMetadataTMLBatched) | **POST** /api/rest/2.0/metadata/tml/export/batch | 
 *MetadataApi* | [**fetchAnswerSqlQuery**](docs/MetadataApi.md#fetchAnswerSqlQuery) | **POST** /api/rest/2.0/metadata/answer/sql | 
 *MetadataApi* | [**fetchLiveboardSqlQuery**](docs/MetadataApi.md#fetchLiveboardSqlQuery) | **POST** /api/rest/2.0/metadata/liveboard/sql | 
 *MetadataApi* | [**importMetadataTML**](docs/MetadataApi.md#importMetadataTML) | **POST** /api/rest/2.0/metadata/tml/import | 
@@ -192,6 +196,7 @@ Class | Method | HTTP request | Description
 *ThoughtSpotRestApi* | [**assignTag**](docs/ThoughtSpotRestApi.md#assignTag) | **POST** /api/rest/2.0/tags/assign | 
 *ThoughtSpotRestApi* | [**changeUserPassword**](docs/ThoughtSpotRestApi.md#changeUserPassword) | **POST** /api/rest/2.0/users/change-password | 
 *ThoughtSpotRestApi* | [**commitBranch**](docs/ThoughtSpotRestApi.md#commitBranch) | **POST** /api/rest/2.0/vcs/git/branches/commit | 
+*ThoughtSpotRestApi* | [**copyObject**](docs/ThoughtSpotRestApi.md#copyObject) | **POST** /api/rest/2.0/metadata/copyobject | 
 *ThoughtSpotRestApi* | [**createConfig**](docs/ThoughtSpotRestApi.md#createConfig) | **POST** /api/rest/2.0/vcs/git/config/create | 
 *ThoughtSpotRestApi* | [**createConnection**](docs/ThoughtSpotRestApi.md#createConnection) | **POST** /api/rest/2.0/connection/create | 
 *ThoughtSpotRestApi* | [**createCustomAction**](docs/ThoughtSpotRestApi.md#createCustomAction) | **POST** /api/rest/2.0/customization/custom-actions | 
@@ -208,6 +213,7 @@ Class | Method | HTTP request | Description
 *ThoughtSpotRestApi* | [**deactivateUser**](docs/ThoughtSpotRestApi.md#deactivateUser) | **POST** /api/rest/2.0/users/deactivate | 
 *ThoughtSpotRestApi* | [**deleteConfig**](docs/ThoughtSpotRestApi.md#deleteConfig) | **POST** /api/rest/2.0/vcs/git/config/delete | 
 *ThoughtSpotRestApi* | [**deleteConnection**](docs/ThoughtSpotRestApi.md#deleteConnection) | **POST** /api/rest/2.0/connection/delete | 
+*ThoughtSpotRestApi* | [**deleteConnectionV2**](docs/ThoughtSpotRestApi.md#deleteConnectionV2) | **POST** /api/rest/2.0/connections/delete/{connection_identifier} | 
 *ThoughtSpotRestApi* | [**deleteCustomAction**](docs/ThoughtSpotRestApi.md#deleteCustomAction) | **POST** /api/rest/2.0/customization/custom-actions/{custom_action_identifier}/delete | 
 *ThoughtSpotRestApi* | [**deleteDbtConnection**](docs/ThoughtSpotRestApi.md#deleteDbtConnection) | **POST** /api/rest/2.0/dbt/{dbt_connection_identifier}/delete | 
 *ThoughtSpotRestApi* | [**deleteMetadata**](docs/ThoughtSpotRestApi.md#deleteMetadata) | **POST** /api/rest/2.0/metadata/delete | 
@@ -222,6 +228,7 @@ Class | Method | HTTP request | Description
 *ThoughtSpotRestApi* | [**exportAnswerReport**](docs/ThoughtSpotRestApi.md#exportAnswerReport) | **POST** /api/rest/2.0/report/answer | 
 *ThoughtSpotRestApi* | [**exportLiveboardReport**](docs/ThoughtSpotRestApi.md#exportLiveboardReport) | **POST** /api/rest/2.0/report/liveboard | 
 *ThoughtSpotRestApi* | [**exportMetadataTML**](docs/ThoughtSpotRestApi.md#exportMetadataTML) | **POST** /api/rest/2.0/metadata/tml/export | 
+*ThoughtSpotRestApi* | [**exportMetadataTMLBatched**](docs/ThoughtSpotRestApi.md#exportMetadataTMLBatched) | **POST** /api/rest/2.0/metadata/tml/export/batch | 
 *ThoughtSpotRestApi* | [**fetchAnswerData**](docs/ThoughtSpotRestApi.md#fetchAnswerData) | **POST** /api/rest/2.0/metadata/answer/data | 
 *ThoughtSpotRestApi* | [**fetchAnswerSqlQuery**](docs/ThoughtSpotRestApi.md#fetchAnswerSqlQuery) | **POST** /api/rest/2.0/metadata/answer/sql | 
 *ThoughtSpotRestApi* | [**fetchConnectionDiffStatus**](docs/ThoughtSpotRestApi.md#fetchConnectionDiffStatus) | **POST** /api/rest/2.0/connections/fetch-connection-diff-status/{connection_identifier} | 
@@ -262,6 +269,7 @@ Class | Method | HTTP request | Description
 *ThoughtSpotRestApi* | [**unassignTag**](docs/ThoughtSpotRestApi.md#unassignTag) | **POST** /api/rest/2.0/tags/unassign | 
 *ThoughtSpotRestApi* | [**updateConfig**](docs/ThoughtSpotRestApi.md#updateConfig) | **POST** /api/rest/2.0/vcs/git/config/update | 
 *ThoughtSpotRestApi* | [**updateConnection**](docs/ThoughtSpotRestApi.md#updateConnection) | **POST** /api/rest/2.0/connection/update | 
+*ThoughtSpotRestApi* | [**updateConnectionV2**](docs/ThoughtSpotRestApi.md#updateConnectionV2) | **POST** /api/rest/2.0/connections/update/{connection_identifier} | 
 *ThoughtSpotRestApi* | [**updateCustomAction**](docs/ThoughtSpotRestApi.md#updateCustomAction) | **POST** /api/rest/2.0/customization/custom-actions/{custom_action_identifier}/update | 
 *ThoughtSpotRestApi* | [**updateDbtConnection**](docs/ThoughtSpotRestApi.md#updateDbtConnection) | **POST** /api/rest/2.0/dbt/update-dbt-connection | 
 *ThoughtSpotRestApi* | [**updateOrg**](docs/ThoughtSpotRestApi.md#updateOrg) | **POST** /api/rest/2.0/orgs/{org_identifier}/update | 
@@ -329,13 +337,20 @@ Class | Method | HTTP request | Description
  - [CommitResponse](docs/CommitResponse.md)
  - [CommiterType](docs/CommiterType.md)
  - [ConnectionInput](docs/ConnectionInput.md)
+ - [CopyObjectRequest](docs/CopyObjectRequest.md)
  - [CreateConfigRequest](docs/CreateConfigRequest.md)
  - [CreateConnectionRequest](docs/CreateConnectionRequest.md)
  - [CreateConnectionResponse](docs/CreateConnectionResponse.md)
  - [CreateCustomActionRequest](docs/CreateCustomActionRequest.md)
+ - [CreateCustomActionRequestActionDetails](docs/CreateCustomActionRequestActionDetails.md)
+ - [CreateCustomActionRequestDefaultActionConfig](docs/CreateCustomActionRequestDefaultActionConfig.md)
  - [CreateOrgRequest](docs/CreateOrgRequest.md)
  - [CreateRoleRequest](docs/CreateRoleRequest.md)
  - [CreateScheduleRequest](docs/CreateScheduleRequest.md)
+ - [CreateScheduleRequestFrequency](docs/CreateScheduleRequestFrequency.md)
+ - [CreateScheduleRequestLiveboardOptions](docs/CreateScheduleRequestLiveboardOptions.md)
+ - [CreateScheduleRequestPdfOptions](docs/CreateScheduleRequestPdfOptions.md)
+ - [CreateScheduleRequestRecipientDetails](docs/CreateScheduleRequestRecipientDetails.md)
  - [CreateTagRequest](docs/CreateTagRequest.md)
  - [CreateUserGroupRequest](docs/CreateUserGroupRequest.md)
  - [CreateUserRequest](docs/CreateUserRequest.md)
@@ -364,6 +379,9 @@ Class | Method | HTTP request | Description
  - [ExcludeMetadataListItemInput](docs/ExcludeMetadataListItemInput.md)
  - [ExportAnswerReportRequest](docs/ExportAnswerReportRequest.md)
  - [ExportLiveboardReportRequest](docs/ExportLiveboardReportRequest.md)
+ - [ExportLiveboardReportRequestPdfOptions](docs/ExportLiveboardReportRequestPdfOptions.md)
+ - [ExportLiveboardReportRequestPngOptions](docs/ExportLiveboardReportRequestPngOptions.md)
+ - [ExportMetadataTMLBatchedRequest](docs/ExportMetadataTMLBatchedRequest.md)
  - [ExportMetadataTMLRequest](docs/ExportMetadataTMLRequest.md)
  - [ExportMetadataTypeInput](docs/ExportMetadataTypeInput.md)
  - [FavoriteMetadataInput](docs/FavoriteMetadataInput.md)
@@ -381,10 +399,13 @@ Class | Method | HTTP request | Description
  - [Frequency](docs/Frequency.md)
  - [FrequencyInput](docs/FrequencyInput.md)
  - [GenericInfo](docs/GenericInfo.md)
+ - [GetAsyncImportStatusResponse](docs/GetAsyncImportStatusResponse.md)
  - [GetFullAccessTokenRequest](docs/GetFullAccessTokenRequest.md)
  - [GetObjectAccessTokenRequest](docs/GetObjectAccessTokenRequest.md)
+ - [GetObjectAccessTokenRequestUserParameters](docs/GetObjectAccessTokenRequestUserParameters.md)
  - [GetTokenResponse](docs/GetTokenResponse.md)
  - [GroupsImportListInput](docs/GroupsImportListInput.md)
+ - [ImportEPackAsyncTaskStatus](docs/ImportEPackAsyncTaskStatus.md)
  - [ImportMetadataTMLRequest](docs/ImportMetadataTMLRequest.md)
  - [ImportUser](docs/ImportUser.md)
  - [ImportUserGroupsRequest](docs/ImportUserGroupsRequest.md)
@@ -431,6 +452,7 @@ Class | Method | HTTP request | Description
  - [RepoConfigObject](docs/RepoConfigObject.md)
  - [ResetUserPasswordRequest](docs/ResetUserPasswordRequest.md)
  - [ResponseActivationURL](docs/ResponseActivationURL.md)
+ - [ResponseCopyObject](docs/ResponseCopyObject.md)
  - [ResponseCustomAction](docs/ResponseCustomAction.md)
  - [ResponseSchedule](docs/ResponseSchedule.md)
  - [ResponseScheduleRun](docs/ResponseScheduleRun.md)
@@ -451,19 +473,28 @@ Class | Method | HTTP request | Description
  - [SearchCommitsRequest](docs/SearchCommitsRequest.md)
  - [SearchConfigRequest](docs/SearchConfigRequest.md)
  - [SearchConnectionRequest](docs/SearchConnectionRequest.md)
+ - [SearchConnectionRequestSortOptions](docs/SearchConnectionRequestSortOptions.md)
  - [SearchConnectionResponse](docs/SearchConnectionResponse.md)
  - [SearchCustomActionsRequest](docs/SearchCustomActionsRequest.md)
+ - [SearchCustomActionsRequestDefaultActionConfig](docs/SearchCustomActionsRequestDefaultActionConfig.md)
  - [SearchDataRequest](docs/SearchDataRequest.md)
  - [SearchDataResponse](docs/SearchDataResponse.md)
  - [SearchMetadataRequest](docs/SearchMetadataRequest.md)
+ - [SearchMetadataRequestFavoriteObjectOptions](docs/SearchMetadataRequestFavoriteObjectOptions.md)
+ - [SearchMetadataRequestSortOptions](docs/SearchMetadataRequestSortOptions.md)
  - [SearchOrgsRequest](docs/SearchOrgsRequest.md)
  - [SearchRoleResponse](docs/SearchRoleResponse.md)
  - [SearchRolesRequest](docs/SearchRolesRequest.md)
  - [SearchSchedulesRequest](docs/SearchSchedulesRequest.md)
+ - [SearchSchedulesRequestHistoryRunsOptions](docs/SearchSchedulesRequestHistoryRunsOptions.md)
+ - [SearchSchedulesRequestSortOptions](docs/SearchSchedulesRequestSortOptions.md)
  - [SearchTagsRequest](docs/SearchTagsRequest.md)
  - [SearchUserGroupsRequest](docs/SearchUserGroupsRequest.md)
+ - [SearchUserGroupsRequestSortOptions](docs/SearchUserGroupsRequestSortOptions.md)
  - [SearchUsersRequest](docs/SearchUsersRequest.md)
+ - [SearchUsersRequestSortOptions](docs/SearchUsersRequestSortOptions.md)
  - [ShareMetadataRequest](docs/ShareMetadataRequest.md)
+ - [ShareMetadataTypeInput](docs/ShareMetadataTypeInput.md)
  - [SharePermissionsInput](docs/SharePermissionsInput.md)
  - [SortOptionInput](docs/SortOptionInput.md)
  - [SortOptions](docs/SortOptions.md)
@@ -482,11 +513,18 @@ Class | Method | HTTP request | Description
  - [URLInputMandatory](docs/URLInputMandatory.md)
  - [UpdateConfigRequest](docs/UpdateConfigRequest.md)
  - [UpdateConnectionRequest](docs/UpdateConnectionRequest.md)
+ - [UpdateConnectionV2Request](docs/UpdateConnectionV2Request.md)
  - [UpdateCustomActionRequest](docs/UpdateCustomActionRequest.md)
+ - [UpdateCustomActionRequestActionDetails](docs/UpdateCustomActionRequestActionDetails.md)
+ - [UpdateCustomActionRequestDefaultActionConfig](docs/UpdateCustomActionRequestDefaultActionConfig.md)
  - [UpdateDbtConnectionRequest](docs/UpdateDbtConnectionRequest.md)
  - [UpdateOrgRequest](docs/UpdateOrgRequest.md)
  - [UpdateRoleRequest](docs/UpdateRoleRequest.md)
  - [UpdateScheduleRequest](docs/UpdateScheduleRequest.md)
+ - [UpdateScheduleRequestFrequency](docs/UpdateScheduleRequestFrequency.md)
+ - [UpdateScheduleRequestLiveboardOptions](docs/UpdateScheduleRequestLiveboardOptions.md)
+ - [UpdateScheduleRequestPdfOptions](docs/UpdateScheduleRequestPdfOptions.md)
+ - [UpdateScheduleRequestRecipientDetails](docs/UpdateScheduleRequestRecipientDetails.md)
  - [UpdateSystemConfigRequest](docs/UpdateSystemConfigRequest.md)
  - [UpdateTagRequest](docs/UpdateTagRequest.md)
  - [UpdateUserGroupRequest](docs/UpdateUserGroupRequest.md)

@@ -4,13 +4,87 @@ All URIs are relative to *https://localhost:443*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
+| [**copyObject**](MetadataApi.md#copyObject) | **POST** /api/rest/2.0/metadata/copyobject |  |
 | [**deleteMetadata**](MetadataApi.md#deleteMetadata) | **POST** /api/rest/2.0/metadata/delete |  |
 | [**exportMetadataTML**](MetadataApi.md#exportMetadataTML) | **POST** /api/rest/2.0/metadata/tml/export |  |
+| [**exportMetadataTMLBatched**](MetadataApi.md#exportMetadataTMLBatched) | **POST** /api/rest/2.0/metadata/tml/export/batch |  |
 | [**fetchAnswerSqlQuery**](MetadataApi.md#fetchAnswerSqlQuery) | **POST** /api/rest/2.0/metadata/answer/sql |  |
 | [**fetchLiveboardSqlQuery**](MetadataApi.md#fetchLiveboardSqlQuery) | **POST** /api/rest/2.0/metadata/liveboard/sql |  |
 | [**importMetadataTML**](MetadataApi.md#importMetadataTML) | **POST** /api/rest/2.0/metadata/tml/import |  |
 | [**searchMetadata**](MetadataApi.md#searchMetadata) | **POST** /api/rest/2.0/metadata/search |  |
 
+
+<a id="copyObject"></a>
+# **copyObject**
+> ResponseCopyObject copyObject(copyObjectRequest)
+
+
+
+ Makes a copy of an Answer or Liveboard saved in Atlas    Version: 10.3.0.cl or later   Creates a copy of the metadata object specified in the API request.  Requires create access to metadata objects  Upon successful execution, the API returns the id of the new object which is copied from the given object.     
+
+### Example
+```java
+// Import classes:
+import org.thoughtspot.client.ApiClient;
+import org.thoughtspot.client.ApiException;
+import org.thoughtspot.client.Configuration;
+import org.thoughtspot.client.auth.*;
+import org.thoughtspot.client.models.*;
+import org.thoughtspot.client.api.MetadataApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://localhost:443");
+    
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
+
+    MetadataApi apiInstance = new MetadataApi(defaultClient);
+    CopyObjectRequest copyObjectRequest = new CopyObjectRequest(); // CopyObjectRequest | 
+    try {
+      ResponseCopyObject result = apiInstance.copyObject(copyObjectRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling MetadataApi#copyObject");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **copyObjectRequest** | [**CopyObjectRequest**](CopyObjectRequest.md)|  | |
+
+### Return type
+
+[**ResponseCopyObject**](ResponseCopyObject.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Successfully created a copy of the object |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **404** | Object not found |  -  |
+| **500** | Unexpected error |  -  |
 
 <a id="deleteMetadata"></a>
 # **deleteMetadata**
@@ -134,6 +208,77 @@ public class Example {
 ### Return type
 
 **List&lt;Object&gt;**
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Export TMLs of specified metadata objects is successful. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
+<a id="exportMetadataTMLBatched"></a>
+# **exportMetadataTMLBatched**
+> Object exportMetadataTMLBatched(exportMetadataTMLBatchedRequest)
+
+
+
+ Version: 10.1.0.cl or later 
+
+### Example
+```java
+// Import classes:
+import org.thoughtspot.client.ApiClient;
+import org.thoughtspot.client.ApiException;
+import org.thoughtspot.client.Configuration;
+import org.thoughtspot.client.auth.*;
+import org.thoughtspot.client.models.*;
+import org.thoughtspot.client.api.MetadataApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://localhost:443");
+    
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
+
+    MetadataApi apiInstance = new MetadataApi(defaultClient);
+    ExportMetadataTMLBatchedRequest exportMetadataTMLBatchedRequest = new ExportMetadataTMLBatchedRequest(); // ExportMetadataTMLBatchedRequest | 
+    try {
+      Object result = apiInstance.exportMetadataTMLBatched(exportMetadataTMLBatchedRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling MetadataApi#exportMetadataTMLBatched");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **exportMetadataTMLBatchedRequest** | [**ExportMetadataTMLBatchedRequest**](ExportMetadataTMLBatchedRequest.md)|  | |
+
+### Return type
+
+**Object**
 
 ### Authorization
 

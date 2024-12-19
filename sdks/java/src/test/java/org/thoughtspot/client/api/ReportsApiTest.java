@@ -17,6 +17,7 @@ import org.thoughtspot.client.ApiException;
 import org.thoughtspot.client.model.ErrorResponse;
 import org.thoughtspot.client.model.ExportAnswerReportRequest;
 import org.thoughtspot.client.model.ExportLiveboardReportRequest;
+import java.io.File;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -41,7 +42,7 @@ public class ReportsApiTest {
     @Test
     public void exportAnswerReportTest() throws ApiException {
         ExportAnswerReportRequest exportAnswerReportRequest = null;
-        api.exportAnswerReport(exportAnswerReportRequest);
+        File response = api.exportAnswerReport(exportAnswerReportRequest);
         // TODO: test validations
     }
 
@@ -53,7 +54,7 @@ public class ReportsApiTest {
     @Test
     public void exportLiveboardReportTest() throws ApiException {
         ExportLiveboardReportRequest exportLiveboardReportRequest = null;
-        api.exportLiveboardReport(exportLiveboardReportRequest);
+        File response = api.exportLiveboardReport(exportLiveboardReportRequest);
         // TODO: test validations
     }
 

@@ -10,7 +10,7 @@ All URIs are relative to *https://localhost:443*
 
 <a id="exportAnswerReport"></a>
 # **exportAnswerReport**
-> exportAnswerReport(exportAnswerReportRequest)
+> File exportAnswerReport(exportAnswerReportRequest)
 
 
 
@@ -38,7 +38,8 @@ public class Example {
     ReportsApi apiInstance = new ReportsApi(defaultClient);
     ExportAnswerReportRequest exportAnswerReportRequest = new ExportAnswerReportRequest(); // ExportAnswerReportRequest | 
     try {
-      apiInstance.exportAnswerReport(exportAnswerReportRequest);
+      File result = apiInstance.exportAnswerReport(exportAnswerReportRequest);
+      System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling ReportsApi#exportAnswerReport");
       System.err.println("Status code: " + e.getCode());
@@ -58,7 +59,7 @@ public class Example {
 
 ### Return type
 
-null (empty response body)
+[**File**](File.md)
 
 ### Authorization
 
@@ -80,7 +81,7 @@ null (empty response body)
 
 <a id="exportLiveboardReport"></a>
 # **exportLiveboardReport**
-> exportLiveboardReport(exportLiveboardReportRequest)
+> File exportLiveboardReport(exportLiveboardReportRequest)
 
 
 
@@ -108,7 +109,8 @@ public class Example {
     ReportsApi apiInstance = new ReportsApi(defaultClient);
     ExportLiveboardReportRequest exportLiveboardReportRequest = new ExportLiveboardReportRequest(); // ExportLiveboardReportRequest | 
     try {
-      apiInstance.exportLiveboardReport(exportLiveboardReportRequest);
+      File result = apiInstance.exportLiveboardReport(exportLiveboardReportRequest);
+      System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling ReportsApi#exportLiveboardReport");
       System.err.println("Status code: " + e.getCode());
@@ -128,7 +130,7 @@ public class Example {
 
 ### Return type
 
-null (empty response body)
+[**File**](File.md)
 
 ### Authorization
 

@@ -22,8 +22,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
-import org.thoughtspot.client.model.JWTUserOptionsFull;
-import org.thoughtspot.client.model.UserParameterOptions;
+import org.thoughtspot.client.model.GetObjectAccessTokenRequestUserParameters;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -112,14 +111,6 @@ public class GetFullAccessTokenRequestTest {
     @Test
     public void groupIdentifiersTest() {
         // TODO: test groupIdentifiers
-    }
-
-    /**
-     * Test the property 'jwtUserOptions'
-     */
-    @Test
-    public void jwtUserOptionsTest() {
-        // TODO: test jwtUserOptions
     }
 
     /**

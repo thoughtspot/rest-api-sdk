@@ -19,9 +19,11 @@ import org.thoughtspot.client.model.CreateConnectionResponse;
 import org.thoughtspot.client.model.DeleteConnectionRequest;
 import org.thoughtspot.client.model.ErrorResponse;
 import org.thoughtspot.client.model.FetchConnectionDiffStatusResponse;
+import java.io.File;
 import org.thoughtspot.client.model.SearchConnectionRequest;
 import org.thoughtspot.client.model.SearchConnectionResponse;
 import org.thoughtspot.client.model.UpdateConnectionRequest;
+import org.thoughtspot.client.model.UpdateConnectionV2Request;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -63,6 +65,18 @@ public class ConnectionsApiTest {
     }
 
     /**
+     *   Version: 10.0.0.cl or later   Deletes a connection object.  **Note**: If a connection has dependent objects, make sure you remove its associations before the delete operation.  Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) and edit permissions to the connection object, or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void deleteConnectionV2Test() throws ApiException {
+        String connectionIdentifier = null;
+        api.deleteConnectionV2(connectionIdentifier);
+        // TODO: test validations
+    }
+
+    /**
      *   Version: 9.9.0.cl or later   Exports the difference in connection metadata between CDW and ThoughtSpot  Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege  To download the connection metadata difference between ThoughtSpot and CDW, pass the connection GUID as &#x60;connection_identifier&#x60; in the API request.      
      *
      * @throws ApiException if the Api call fails
@@ -70,7 +84,7 @@ public class ConnectionsApiTest {
     @Test
     public void downloadConnectionMetadataChangesTest() throws ApiException {
         String connectionIdentifier = null;
-        api.downloadConnectionMetadataChanges(connectionIdentifier);
+        File response = api.downloadConnectionMetadataChanges(connectionIdentifier);
         // TODO: test validations
     }
 
@@ -107,6 +121,19 @@ public class ConnectionsApiTest {
     public void updateConnectionTest() throws ApiException {
         UpdateConnectionRequest updateConnectionRequest = null;
         api.updateConnection(updateConnectionRequest);
+        // TODO: test validations
+    }
+
+    /**
+     *   Version: 10.0.0.cl or later   Updates a connection object.  Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) and edit permissions to the connection object, or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  To update a connection object, pass these parameters in your API request:  1. GUID of the connection object. 2. If you are updating tables or database schema of a connection object:    a. Add the updated JSON map of metadata with database, schema, and tables in &#x60;data_warehouse_config&#x60;.    b. Set &#x60;validate&#x60; to &#x60;true&#x60;. 3. If you are updating a configuration attribute, connection name, or description, you can set &#x60;validate&#x60; to &#x60;false&#x60;.      
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void updateConnectionV2Test() throws ApiException {
+        String connectionIdentifier = null;
+        UpdateConnectionV2Request updateConnectionV2Request = null;
+        api.updateConnectionV2(connectionIdentifier, updateConnectionV2Request);
         // TODO: test validations
     }
 

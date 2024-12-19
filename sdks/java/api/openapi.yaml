@@ -825,7 +825,10 @@ paths:
       responses:
         "200":
           content:
-            application/octet-stream: {}
+            application/octet-stream:
+              schema:
+                format: binary
+                type: string
           description: Export report file of specified metadata object is successful.
         "400":
           content:
@@ -880,7 +883,10 @@ paths:
       responses:
         "200":
           content:
-            application/octet-stream: {}
+            application/octet-stream:
+              schema:
+                format: binary
+                type: string
           description: Export report file of specified metadata object is successful.
         "400":
           content:
@@ -1270,7 +1276,7 @@ paths:
         \ with the following information:\n* timestamp of the event\n* event ID\n\
         * event type\n* name and GUID of the user\n* IP address of ThoughtSpot instance\n\
         \nFor more information about security events returned in the API response,\
-        \ see [Security events](https://developers.thoughtspot.com/docs/logs-api#_security_events).\n\
+        \ see [Security events](https://developers.thoughtspot.com/docs/audit-logs#_security_events).\n\
         \n\n\n\n\n"
       operationId: fetchLogs
       parameters: []
@@ -2824,7 +2830,7 @@ paths:
 
         Tags are labels that identify a metadata object. For example, you can create a tag to designate subject areas, such as sales, HR, marketing, and finance.
 
-        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.
 
 
 
@@ -2893,7 +2899,10 @@ paths:
     post:
       description: "\n Version: 9.0.0.cl or later\n\n\nUpdates a tag object.\n\nYou\
         \ can modify the `name` and `color` properties of a tag object.  \n\nRequires\
-        \ `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n\n"
+        \ `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based\
+        \ Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is\
+        \ enabled, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required\
+        \ to create, edit, and delete tags.\n\n\n\n\n\n"
       operationId: updateTag
       parameters:
       - description: Name or Id of the tag.
@@ -2951,7 +2960,7 @@ paths:
 
         Deletes a tag object from the ThoughtSpot system
 
-        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.
 
 
 
@@ -3515,6 +3524,54 @@ paths:
       - ThoughtSpotRest
       x-content-type: application/json
       x-accepts: application/json
+  /api/rest/2.0/metadata/tml/export/batch:
+    post:
+      description: |2
+         Version: 10.1.0.cl or later
+      operationId: exportMetadataTMLBatched
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/exportMetadataTMLBatched_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Export TMLs of specified metadata objects is successful.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unexpected error
+      tags:
+      - Metadata
+      - ThoughtSpotRest
+      x-content-type: application/json
+      x-accepts: application/json
   /api/rest/2.0/metadata/delete:
     post:
       description: |2+
@@ -3559,6 +3616,63 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unexpected error
+      tags:
+      - Metadata
+      - ThoughtSpotRest
+      x-content-type: application/json
+      x-accepts: application/json
+  /api/rest/2.0/metadata/copyobject:
+    post:
+      description: "\nMakes a copy of an Answer or Liveboard saved in Atlas \n  Version:\
+        \ 10.3.0.cl or later\n\n\nCreates a copy of the metadata object specified\
+        \ in the API request.\n\nRequires create access to metadata objects\n\nUpon\
+        \ successful execution, the API returns the id of the new object which is\
+        \ copied from the given object.\n\n\n\n\n"
+      operationId: copyObject
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/copyObject_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseCopyObject'
+          description: Successfully created a copy of the object
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Object not found
         "500":
           content:
             application/json:
@@ -3886,14 +4000,14 @@ paths:
 
         Commits TML files of metadata objects to the Git branch configured on your instance.
 
-        Requires `DATAMANAGEMENT` privilege.
+        Requires at least edit access to objects used in the commit operation.
 
         Before using this endpoint to push your commits:
 
         * Enable Git integration on your instance.
         * Make sure the Git repository and branch details are configured on your instance.
 
-        For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).
+        For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).
 
 
 
@@ -3952,11 +4066,13 @@ paths:
 
         Reverts TML objects to a previous commit specified in the API request.
 
-        Requires `DATAMANAGEMENT` (**Can manage data**) privilege.
+        Requires at least edit access to objects.
 
         In the API request, specify the `commit_id`. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.
 
         By default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.
+
+        For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).
 
 
 
@@ -4086,9 +4202,11 @@ paths:
 
         Allows you to deploy a commit and publish TML content to your ThoughtSpot instance.
 
-        Requires `DATAMANAGEMENT` (**Can manage data**) privilege.
+        Requires at least edit access to the objects used in the deploy operation.
 
         The API deploys the head of the branch unless a `commit_id` is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.
+
+        For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).
 
 
 
@@ -4287,6 +4405,64 @@ paths:
       - ThoughtSpotRest
       x-content-type: application/json
       x-accepts: application/json
+  /api/rest/2.0/connections/delete/{connection_identifier}:
+    post:
+      description: |2+
+
+         Version: 10.0.0.cl or later
+
+
+        Deletes a connection object.
+
+        **Note**: If a connection has dependent objects, make sure you remove its associations before the delete operation.
+
+        Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+
+
+
+
+
+      operationId: deleteConnectionV2
+      parameters:
+      - description: Unique ID or name of the connection.
+        explode: false
+        in: path
+        name: connection_identifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: Connection successfully deleted.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unexpected error
+      tags:
+      - Connections
+      - ThoughtSpotRest
+      x-accepts: application/json
   /api/rest/2.0/connection/update:
     post:
       description: "\n Version: 9.2.0.cl or later\n\n\nUpdates a connection object.\
@@ -4306,6 +4482,77 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/updateConnection_request'
+        required: true
+      responses:
+        "204":
+          description: Connection successfully updated.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unexpected error
+      tags:
+      - Connections
+      - ThoughtSpotRest
+      x-content-type: application/json
+      x-accepts: application/json
+  /api/rest/2.0/connections/update/{connection_identifier}:
+    post:
+      description: |2+
+
+         Version: 10.0.0.cl or later
+
+
+        Updates a connection object.
+
+        Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+
+        To update a connection object, pass these parameters in your API request:
+
+        1. GUID of the connection object.
+        2. If you are updating tables or database schema of a connection object:
+           a. Add the updated JSON map of metadata with database, schema, and tables in `data_warehouse_config`.
+           b. Set `validate` to `true`.
+        3. If you are updating a configuration attribute, connection name, or description, you can set `validate` to `false`.
+
+
+
+
+
+      operationId: updateConnectionV2
+      parameters:
+      - description: Unique ID or name of the connection.
+        explode: false
+        in: path
+        name: connection_identifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/updateConnectionV2_request'
         required: true
       responses:
         "204":
@@ -4433,7 +4680,10 @@ paths:
       responses:
         "200":
           content:
-            application/octet-stream: {}
+            application/octet-stream:
+              schema:
+                format: binary
+                type: string
           description: Export metadata changes.
         "400":
           content:
@@ -5380,6 +5630,7 @@ components:
     ErrorResponse:
       properties:
         error:
+          nullable: true
           type: object
       type: object
     GetTokenResponse:
@@ -5517,24 +5768,30 @@ components:
           type: string
         author_id:
           description: Unique identifier of author of the user.
+          nullable: true
           type: string
         can_change_password:
           description: Defines whether the user can change their password.
+          nullable: true
           type: boolean
         complete_detail:
           description: Defines whether the response has complete detail of the user.
+          nullable: true
           type: boolean
         creation_time_in_millis:
           description: Creation time of the user in milliseconds.
           format: float
+          nullable: true
           type: number
         current_org:
           $ref: '#/components/schemas/Org'
         deleted:
           description: Indicates whether the user is deleted.
+          nullable: true
           type: boolean
         deprecated:
           description: Indicates whether the user is deprecated.
+          nullable: true
           type: boolean
         account_type:
           description: Type of the user account.
@@ -5544,6 +5801,7 @@ components:
           - SAML_USER
           - OIDC_USER
           - REMOTE_USER
+          nullable: true
           type: string
         account_status:
           description: Status of the user account.
@@ -5553,118 +5811,149 @@ components:
           - EXPIRED
           - LOCKED
           - PENDING
+          nullable: true
           type: string
         email:
           description: Email of the user.
+          nullable: true
           type: string
         expiration_time_in_millis:
           description: Expiration time of the user in milliseconds.
           format: float
+          nullable: true
           type: number
         external:
           description: Indicates whether the user is external.
+          nullable: true
           type: boolean
         favorite_metadata:
           description: Metadata objects to add to the users' favorites list.
           items:
             $ref: '#/components/schemas/FavoriteMetadataItem'
+          nullable: true
           type: array
         first_login_time_in_millis:
           description: Timestamp of the first login session of the user in milliseconds.
           format: float
+          nullable: true
           type: number
         group_mask:
           description: Group mask of the user.
           format: int32
+          nullable: true
           type: integer
         hidden:
           description: Indicates whether the user is hidden.
+          nullable: true
           type: boolean
         home_liveboard:
           $ref: '#/components/schemas/Object_ID_And_Name'
         incomplete_details:
           description: Incomplete details of user if any present.
+          nullable: true
           type: object
         is_first_login:
           description: Indicates whether it is first login of the user.
+          nullable: true
           type: boolean
         modification_time_in_millis:
           description: Last modified time of the user in milliseconds.
           format: float
+          nullable: true
           type: number
         modifier_id:
           description: Unique identifier of modifier of the user.
+          nullable: true
           type: string
         notify_on_share:
           description: User preference for receiving email notifications on shared
             Answers or Liveboard.
+          nullable: true
           type: boolean
         onboarding_experience_completed:
           description: The user preference for turning off the onboarding experience.
+          nullable: true
           type: boolean
         orgs:
           description: Orgs to which the user belongs.
           items:
             $ref: '#/components/schemas/Org'
+          nullable: true
           type: array
         owner_id:
           description: Unique identifier of owner of the user.
+          nullable: true
           type: string
         parent_type:
           description: Parent type of the user.
           enum:
           - USER
           - GROUP
+          nullable: true
           type: string
         privileges:
           description: Privileges which are assigned to the user.
           items:
             type: string
+          nullable: true
           type: array
         show_onboarding_experience:
           description: User's preference to revisit the new user onboarding experience.
+          nullable: true
           type: boolean
         super_user:
           description: Indicates whether the user is a super user.
+          nullable: true
           type: boolean
         system_user:
           description: Indicates whether the user is a system user.
+          nullable: true
           type: boolean
         tags:
           description: Tags associated with the user.
           items:
             $ref: '#/components/schemas/Object_ID_And_Name'
+          nullable: true
           type: array
         tenant_id:
           description: Unique identifier of tenant of the user.
+          nullable: true
           type: string
         user_groups:
           description: Groups to which the user is assigned.
           items:
             $ref: '#/components/schemas/Object_ID_And_Name'
+          nullable: true
           type: array
         user_inherited_groups:
           description: Inherited User Groups which the user is part of.
           items:
             $ref: '#/components/schemas/Object_ID_And_Name'
+          nullable: true
           type: array
         welcome_email_sent:
           description: Indicates whether welcome email is sent for the user.
+          nullable: true
           type: boolean
         org_privileges:
           description: Privileges which are assigned to the user with org.
+          nullable: true
           type: object
         preferred_locale:
           description: Locale for the user.
+          nullable: true
           type: string
         extended_properties:
           description: Properties for the user
+          nullable: true
           type: object
         extended_preferences:
           description: Preferences for the user
+          nullable: true
           type: object
         user_parameters:
           description: User Parameters which are specified for the user via JWToken
+          nullable: true
           type: object
       required:
       - display_name
@@ -5702,7 +5991,9 @@ components:
           description: name of the metadata object.
           type: string
         type:
-          description: Type of metadata object.
+          description: "  Type of metadata object.\n  \n\nRequired if the name of\
+            \ the object is set as the identifier. This attribute is optional when\
+            \ the object GUID is specified as the identifier."
           enum:
           - LIVEBOARD
           - ANSWER
@@ -5727,21 +6018,27 @@ components:
       properties:
         id:
           description: The unique identifier of the object.
+          nullable: true
           type: string
         name:
           description: Name of the object.
+          nullable: true
           type: string
       type: object
     FavoriteMetadataInput:
       properties:
         identifier:
           description: Unique ID or name of the metadata object.
+          nullable: true
           type: string
         type:
-          description: Type of metadata object.
+          description: "  Type of metadata object.\n  \n\nRequired if the name of\
+            \ the object is set as the identifier. This attribute is optional when\
+            \ the object GUID is specified as the identifier."
           enum:
           - LIVEBOARD
           - ANSWER
+          nullable: true
           type: string
       type: object
     SortOptions:
@@ -5755,12 +6052,14 @@ components:
           - AUTHOR
           - CREATED
           - MODIFIED
+          nullable: true
           type: string
         order:
           description: "Sort order : ASC(Ascending) or DESC(Descending)."
           enum:
           - ASC
           - DESC
+          nullable: true
           type: string
       type: object
     SystemInfo:
@@ -5791,74 +6090,97 @@ components:
       properties:
         id:
           description: The unique identifier of the object
+          nullable: true
           type: string
         name:
           description: Name of the cluster.
+          nullable: true
           type: string
         release_version:
           description: The release version of the cluster.
+          nullable: true
           type: string
         time_zone:
           description: The timezone of the cluster.
+          nullable: true
           type: string
         locale:
           description: The default locale of the cluster.
+          nullable: true
           type: string
         date_format:
           description: The default date format representation of the cluster.
+          nullable: true
           type: string
         api_version:
           description: The API version of the cluster.
+          nullable: true
           type: string
         type:
           description: The deployment type of the cluster.
+          nullable: true
           type: string
         environment:
           description: The deployed environment of the cluster.
+          nullable: true
           type: string
         license:
           description: The license applied to the cluster.
+          nullable: true
           type: string
         date_time_format:
           description: The default date time format representation of the cluster.
+          nullable: true
           type: string
         time_format:
           description: The default time format representation of the cluster.
+          nullable: true
           type: string
         system_user_id:
           description: The unique identifier of system user.
+          nullable: true
           type: string
         super_user_id:
           description: The unique identifier of super user.
+          nullable: true
           type: string
         hidden_object_id:
           description: The unique identifier of hidden object.
+          nullable: true
           type: string
         system_group_id:
           description: The unique identifier of system group.
+          nullable: true
           type: string
         tsadmin_user_id:
           description: The unique identifier of tsadmin user.
+          nullable: true
           type: string
         admin_group_id:
           description: The unique identifier of admin group.
+          nullable: true
           type: string
         all_tables_connection_id:
           description: The unique identifier of all tables connection.
+          nullable: true
           type: string
         all_user_group_id:
           description: The unique identifier of ALL group.
+          nullable: true
           type: string
         accept_language:
           description: The supported accept language by the cluster.
+          nullable: true
           type: string
         all_user_group_member_user_count:
           description: The count of users of ALL group.
           format: int32
+          nullable: true
           type: integer
         logical_model_version:
           description: The version number of logical model of the cluster.
           format: int32
+          nullable: true
           type: integer
       type: object
     SystemConfig:
@@ -5866,6 +6188,7 @@ components:
         onboarding_content_url: onboarding_content_url
       properties:
         onboarding_content_url:
+          nullable: true
           type: string
       type: object
     OrgResponse:
@@ -5879,24 +6202,29 @@ components:
         id:
           description: Unique identifier of the Org.
           format: int32
+          nullable: true
           type: integer
         name:
           description: Name of the Org.
+          nullable: true
           type: string
         status:
           description: Status of the Org.
           enum:
           - ACTIVE
           - IN_ACTIVE
+          nullable: true
           type: string
         description:
           description: Description of the Org.
+          nullable: true
           type: string
         visibility:
           description: Visibility of the Org.
           enum:
           - SHOW
           - HIDDEN
+          nullable: true
           type: string
       type: object
     Tag:
@@ -5919,26 +6247,36 @@ components:
         id:
           type: string
         color:
+          nullable: true
           type: string
         deleted:
+          nullable: true
           type: boolean
         hidden:
+          nullable: true
           type: boolean
         external:
+          nullable: true
           type: boolean
         deprecated:
+          nullable: true
           type: boolean
         creation_time_in_millis:
           format: float
+          nullable: true
           type: number
         modification_time_in_millis:
           format: float
+          nullable: true
           type: number
         author_id:
+          nullable: true
           type: string
         modifier_id:
+          nullable: true
           type: string
         owner_id:
+          nullable: true
           type: string
       required:
       - id
@@ -6005,43 +6343,54 @@ components:
       properties:
         author_id:
           description: The unique identifier of the object
+          nullable: true
           type: string
         complete_detail:
           description: Indicates whether the response has complete detail of the group.
+          nullable: true
           type: boolean
         content:
           description: Content details of the group
+          nullable: true
           type: object
         creation_time_in_millis:
           description: Creation time of the group in milliseconds
           format: float
+          nullable: true
           type: number
         default_liveboards:
           description: Liveboards that are assigned as default Liveboards to the group.
           items:
             $ref: '#/components/schemas/UserGroup'
+          nullable: true
           type: array
         deleted:
           description: Indicates whether the group is deleted
+          nullable: true
           type: boolean
         deprecated:
           description: Indicates whether the group is deprecated
+          nullable: true
           type: boolean
         description:
           description: Description of the group
+          nullable: true
           type: string
         display_name:
           description: Display name of the group.
           type: string
         external:
           description: Indicates whether the group is external
+          nullable: true
           type: boolean
         generation_number:
           description: Generation number of the group
           format: int32
+          nullable: true
           type: integer
         hidden:
           description: Indicates whether the group is hidden
+          nullable: true
           type: boolean
         id:
           description: The unique identifier of the object
@@ -6049,21 +6398,26 @@ components:
         index:
           description: Index number of the group
           format: int32
+          nullable: true
           type: integer
         index_version:
           description: Index version number of the group
           format: int32
+          nullable: true
           type: integer
         metadata_version:
           description: Metadata version number of the group
           format: int32
+          nullable: true
           type: integer
         modification_time_in_millis:
           description: Last modified time of the group in milliseconds.
           format: float
+          nullable: true
           type: number
         modifier_id:
           description: The unique identifier of the object
+          nullable: true
           type: string
         name:
           description: Name of the group.
@@ -6072,44 +6426,53 @@ components:
           description: Orgs in which group exists.
           items:
             $ref: '#/components/schemas/UserGroup'
+          nullable: true
           type: array
         owner_id:
           description: The unique identifier of the object
+          nullable: true
           type: string
         parent_type:
           description: Parent type of the group.
           enum:
           - USER
           - GROUP
+          nullable: true
           type: string
         privileges:
           description: Privileges which are assigned to the group
           items:
             type: string
+          nullable: true
           type: array
         sub_groups:
           description: Groups who are part of the group
           items:
             $ref: '#/components/schemas/UserGroup'
+          nullable: true
           type: array
         system_group:
           description: Indicates whether the group is a system group.
+          nullable: true
           type: boolean
         tags:
           description: Tags associated with the group.
           items:
             $ref: '#/components/schemas/UserGroup'
+          nullable: true
           type: array
         type:
           description: Type of the group.
           enum:
           - LOCAL_GROUP
           - LDAP_GROUP
+          nullable: true
           type: string
         users:
           description: Users who are part of the group.
           items:
             $ref: '#/components/schemas/UserGroup'
+          nullable: true
           type: array
         visibility:
           description: "Visibility of the group. The SHARABLE makes a group visible\
@@ -6122,6 +6485,7 @@ components:
           description: List of roles assgined to the user
           items:
             $ref: '#/components/schemas/Role'
+          nullable: true
           type: array
       required:
       - display_name
@@ -6136,19 +6500,23 @@ components:
       properties:
         id:
           description: id of the role
+          nullable: true
           type: string
         name:
           description: name of the role
+          nullable: true
           type: string
       type: object
     MetadataListItemInput:
       properties:
         identifier:
           description: Unique ID or name of the metadata.
+          nullable: true
           type: string
         name_pattern:
           description: A pattern to match the case-insensitive name of the metadata
             object. User % for a wildcard match.
+          nullable: true
           type: string
         type:
           description: |-
@@ -6162,6 +6530,7 @@ components:
             7. USER for user objects.
             8. USER_GROUP for group objects.
             9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values
+            10. INSIGHT_SPEC for SpotIQ objects
           enum:
           - LIVEBOARD
           - ANSWER
@@ -6172,6 +6541,8 @@ components:
           - USER
           - USER_GROUP
           - LOGICAL_RELATIONSHIP
+          - INSIGHT_SPEC
+          nullable: true
           type: string
       type: object
     PermissionInput:
@@ -6207,6 +6578,7 @@ components:
             7. USER for user objects
             8. USER_GROUP for group objects
             9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values.
+            10. INSIGHT_SPEC for SpotIQ objects
           enum:
           - LIVEBOARD
           - ANSWER
@@ -6217,6 +6589,7 @@ components:
           - USER
           - USER_GROUP
           - LOGICAL_RELATIONSHIP
+          - INSIGHT_SPEC
           type: string
       required:
       - identifier
@@ -6228,12 +6601,14 @@ components:
         include:
           default: false
           description: Includes objects marked as favorite for the specified users.
+          nullable: true
           type: boolean
         user_identifiers:
           description: "Unique ID or name of the users. If not specified, the favorite\
             \ objects of current logged in user are returned."
           items:
             type: string
+          nullable: true
           type: array
       type: object
     MetadataSearchSortOptions:
@@ -6250,12 +6625,14 @@ components:
           - VIEWS
           - FAVORITES
           - LAST_ACCESSED
+          nullable: true
           type: string
         order:
           description: "Sort order : ASC(Ascending) or DESC(Descending)."
           enum:
           - ASC
           - DESC
+          nullable: true
           type: string
       type: object
     MetadataSearchResponse:
@@ -6277,9 +6654,11 @@ components:
       properties:
         metadata_id:
           description: Unique identifier of the metadata.
+          nullable: true
           type: string
         metadata_name:
           description: Name of the metadata.
+          nullable: true
           type: string
         metadata_type:
           description: Type of the metadata.
@@ -6296,29 +6675,124 @@ components:
           type: string
         dependent_objects:
           description: Details of dependent objects of the metadata objects.
+          nullable: true
           type: object
         incomplete_objects:
           description: Details of incomplete information of the metadata objects if
             any.
           items:
             type: object
+          nullable: true
           type: array
         metadata_detail:
           description: Complete details of the metadata objects.
+          nullable: true
           type: object
         metadata_header:
           description: Header information of the metadata objects.
+          nullable: true
           type: object
         visualization_headers:
           description: Visualization header information of the metadata objects.
           items:
             type: object
+          nullable: true
           type: array
         stats:
           description: "Stats of the metadata object. Includes views, favorites, last_accessed."
+          nullable: true
           type: object
       required:
       - metadata_type
+      type: object
+    GetAsyncImportStatusResponse:
+      properties:
+        status_list:
+          description: List of task statuses.
+          items:
+            $ref: '#/components/schemas/ImportEPackAsyncTaskStatus'
+          nullable: true
+          type: array
+        last_batch:
+          description: Indicates whether there are more task statuses to fetch.
+          nullable: true
+          type: boolean
+      type: object
+    ImportEPackAsyncTaskStatus:
+      properties:
+        tenant_id:
+          description: GUID of tenant from which the task is initiated.
+          nullable: true
+          type: string
+        org_id:
+          description: Organisation ID of the user who initiated the task.
+          format: int32
+          nullable: true
+          type: integer
+        task_id:
+          description: Unique identifier for the task.
+          nullable: true
+          type: string
+        task_name:
+          description: Name of the task.
+          nullable: true
+          type: string
+        import_response:
+          description: Response of imported objects so far.
+          nullable: true
+          type: object
+        task_status:
+          description: Current status of the task.
+          enum:
+          - COMPLETED
+          - IN_QUEUE
+          - IN_PROGRESS
+          - FAILED
+          nullable: true
+          type: string
+        author_id:
+          description: ID of the user who initiated the task.
+          nullable: true
+          type: string
+        import_policy:
+          description: Policy used for the import task.
+          enum:
+          - PARTIAL
+          - ALL_OR_NONE
+          - VALIDATE_ONLY
+          - PARTIAL_OBJECT
+          nullable: true
+          type: string
+        created_at:
+          description: Time when the task was created (in ms since epoch).
+          format: float
+          nullable: true
+          type: number
+        in_progress_at:
+          description: Time when the task started (in ms since epoch).
+          format: float
+          nullable: true
+          type: number
+        completed_at:
+          description: Time when the task was completed (in ms since epoch).
+          format: float
+          nullable: true
+          type: number
+        total_object_count:
+          description: Total number of objects to process.
+          format: int32
+          nullable: true
+          type: integer
+        object_processed_count:
+          description: Number of objects processed so far.
+          format: int32
+          nullable: true
+          type: integer
+        modified_at:
+          description: Last time the task status was updated (in ms since epoch).
+          format: float
+          nullable: true
+          type: number
       type: object
     SqlQueryResponse:
       example:
@@ -6390,20 +6864,24 @@ components:
           default: true
           description: Indicates whether to include the cover page with the Liveboard
             title.
+          nullable: true
           type: boolean
         include_custom_logo:
           default: true
           description: Indicates whether to include customized wide logo in the footer
             if available.
+          nullable: true
           type: boolean
         include_filter_page:
           default: true
           description: Indicates whether to include a page with all applied filters.
+          nullable: true
           type: boolean
         include_page_number:
           default: true
           description: Indicates whether to include page number in the footer of each
             page.
+          nullable: true
           type: boolean
         page_orientation:
           default: PORTRAIT
@@ -6411,13 +6889,16 @@ components:
           enum:
           - PORTRAIT
           - LANDSCAPE
+          nullable: true
           type: string
         truncate_table:
           default: false
           description: Indicates whether to include only the first page of the tables.
+          nullable: true
           type: boolean
         page_footer_text:
           description: Text to include in the footer of each page.
+          nullable: true
           type: string
       type: object
     PngOptionsInput:
@@ -6426,10 +6907,12 @@ components:
           default: false
           description: Indicates whether to include the cover page with the Liveboard
             title.
+          nullable: true
           type: boolean
         include_filter_page:
           default: false
           description: Indicates whether to include a page with all applied filters.
+          nullable: true
           type: boolean
       type: object
     PermissionOfPrincipalsResponse:
@@ -6437,6 +6920,7 @@ components:
         principal_permission_details: "{}"
       properties:
         principal_permission_details:
+          nullable: true
           type: object
       type: object
     PermissionOfMetadataResponse:
@@ -6444,6 +6928,7 @@ components:
         metadata_permission_details: "{}"
       properties:
         metadata_permission_details:
+          nullable: true
           type: object
       type: object
     PrincipalsInput:
@@ -6457,6 +6942,7 @@ components:
           enum:
           - USER
           - USER_GROUP
+          nullable: true
           type: string
       required:
       - identifier
@@ -6465,13 +6951,16 @@ components:
       description: MetadataType InputType used in Permission API's
       properties:
         type:
-          description: Type of metadata object.
+          description: "  Type of metadata object.\n  \n\nRequired if the name of\
+            \ the object is set as the identifier. This attribute is optional when\
+            \ the object GUID is specified as the identifier."
           enum:
           - LIVEBOARD
           - ANSWER
           - LOGICAL_TABLE
           - LOGICAL_COLUMN
           - CONNECTION
+          nullable: true
           type: string
         identifier:
           description: Unique ID or name of the metadata object.
@@ -6671,9 +7160,11 @@ components:
           type: number
         visualization_id:
           description: Unique ID of the visualization.
+          nullable: true
           type: string
         visualization_name:
           description: Name of the visualization.
+          nullable: true
           type: string
       required:
       - available_data_row_count
@@ -6760,26 +7251,32 @@ components:
       properties:
         repository_url:
           description: Remote repository URL configured
+          nullable: true
           type: string
         username:
           description: Username to authenticate connection to the version control
             system
+          nullable: true
           type: string
         commit_branch_name:
           description: Name of the remote branch where objects from this Thoughtspot
             instance will be versioned.
+          nullable: true
           type: string
         branches:
           description: Branches that have been pulled in local repository
           items:
             type: string
+          nullable: true
           type: array
         enable_guid_mapping:
           description: Maintain mapping of guid for the deployment to an instance
+          nullable: true
           type: boolean
         configuration_branch_name:
           description: Name of the branch where the configuration files related to
             operations between Thoughtspot and version control repo should be maintained.
+          nullable: true
           type: string
         org:
           $ref: '#/components/schemas/Org'
@@ -6828,9 +7325,11 @@ components:
       properties:
         email:
           description: Email id of the committer
+          nullable: true
           type: string
         username:
           description: Username of the committer
+          nullable: true
           type: string
       type: object
     AuthorType:
@@ -6840,39 +7339,48 @@ components:
       properties:
         email:
           description: Email id of the committer
+          nullable: true
           type: string
         username:
           description: Username of the committer
+          nullable: true
           type: string
       type: object
     ConnectionInput:
       properties:
         identifier:
           description: Unique ID or name of the connection.
+          nullable: true
           type: string
         name_pattern:
           description: A pattern to match case-insensitive name of the connection
             object. User `%` for a wildcard match.
+          nullable: true
           type: string
         data_warehouse_objects:
           description: "Filter options for databases, schemas, tables and columns."
           items:
             $ref: '#/components/schemas/DataWarehouseObjectInput'
+          nullable: true
           type: array
       type: object
     DataWarehouseObjectInput:
       properties:
         database:
           description: Name of the database.
+          nullable: true
           type: string
         schema:
           description: Name of the schema within the database.
+          nullable: true
           type: string
         table:
           description: Name of the table within the schema.
+          nullable: true
           type: string
         column:
           description: Name of the column within the table.
+          nullable: true
           type: string
       type: object
     SortOptionInput:
@@ -6890,12 +7398,14 @@ components:
           - VIEWS
           - USER_STATE
           - ROW_COUNT
+          nullable: true
           type: string
         order:
           description: "Sort order : ASC(Ascending) or DESC(Descending)."
           enum:
           - ASC
           - DESC
+          nullable: true
           type: string
       type: object
     SearchConnectionResponse:
@@ -7098,6 +7608,7 @@ components:
           type: string
         description:
           description: Description of the connection.
+          nullable: true
           type: string
         data_warehouse_type:
           description: Type of data warehouse.
@@ -7137,6 +7648,7 @@ components:
           $ref: '#/components/schemas/DataWarehouseObjects'
         details:
           description: Details of the connection.
+          nullable: true
           type: object
       required:
       - data_warehouse_type
@@ -7438,9 +7950,11 @@ components:
           description: Schemas of the database.
           items:
             $ref: '#/components/schemas/SchemaObject'
+          nullable: true
           type: array
         auto_created:
           description: Determines if the object is auto created.
+          nullable: true
           type: boolean
       required:
       - name
@@ -7499,6 +8013,7 @@ components:
           description: Tables in the schema.
           items:
             $ref: '#/components/schemas/Table'
+          nullable: true
           type: array
       required:
       - name
@@ -7534,23 +8049,29 @@ components:
           description: Columns of the table.
           items:
             $ref: '#/components/schemas/Column'
+          nullable: true
           type: array
         type:
           description: Type of table. Either view or table
+          nullable: true
           type: string
         description:
           description: Description of the table
+          nullable: true
           type: string
         selected:
           description: Determines if the table is selected
+          nullable: true
           type: boolean
         linked:
           description: Determines if the table is linked
+          nullable: true
           type: boolean
         relationships:
           description: List of relationships for the table
           items:
             type: object
+          nullable: true
           type: array
       required:
       - name
@@ -7572,15 +8093,19 @@ components:
           type: string
         is_aggregate:
           description: Determines if the column schema is an aggregate
+          nullable: true
           type: string
         can_import:
           description: Determines if the column schema can be imported
+          nullable: true
           type: boolean
         selected:
           description: Determines if the table is selected
+          nullable: true
           type: boolean
         is_linked_active:
           description: Determines if the table is linked
+          nullable: true
           type: boolean
       required:
       - data_type
@@ -7630,16 +8155,19 @@ components:
         groups_assigned_count:
           description: number of groups assigned with this role
           format: int32
+          nullable: true
           type: integer
         orgs:
           description: Orgs in which role exists.
           items:
             $ref: '#/components/schemas/GenericInfo'
+          nullable: true
           type: array
         groups:
           description: Details of groups assigned with this role
           items:
             $ref: '#/components/schemas/GenericInfo'
+          nullable: true
           type: array
         privileges:
           description: Privileges granted to the role.
@@ -7685,6 +8213,10 @@ components:
             - THIRDPARTY_ANALYSIS
             - CONTROL_TRUSTED_AUTH
             - CAN_CREATE_CATALOG
+            - ALLOW_NON_EMBED_FULL_APP_ACCESS
+            - CAN_ACCESS_ANALYST_STUDIO
+            - CAN_MANAGE_ANALYST_STUDIO
+            - PREVIEW_DOCUMENT_SEARCH
             type: string
           type: array
         permission:
@@ -7693,33 +8225,43 @@ components:
           - READ_ONLY
           - MODIFY
           - NO_ACCESS
+          nullable: true
           type: string
         author_id:
           description: Unique identifier of author of the role.
+          nullable: true
           type: string
         modifier_id:
           description: Unique identifier of modifier of the role.
+          nullable: true
           type: string
         creation_time_in_millis:
           description: Creation time of the role in milliseconds.
+          nullable: true
           type: object
         modification_time_in_millis:
           description: Last modified time of the role in milliseconds.
+          nullable: true
           type: object
         deleted:
           description: Indicates whether the role is deleted.
+          nullable: true
           type: boolean
         deprecated:
           description: Indicates whether the role is deprecated.
+          nullable: true
           type: boolean
         external:
           description: Indicates whether the role is external.
+          nullable: true
           type: boolean
         hidden:
           description: Indicates whether the role is hidden.
+          nullable: true
           type: boolean
         shared_via_connection:
           description: Indicates whether the role is shared via connection
+          nullable: true
           type: boolean
       required:
       - description
@@ -7736,6 +8278,7 @@ components:
           description: "Custom action is available on all visualizations. Earlier\
             \ naming convention: LOCAL/GLOBAL. TRUE signifies GLOBAL for backward\
             \ compatibility."
+          nullable: true
           type: boolean
       type: object
     ResponseCustomAction:
@@ -7793,6 +8336,7 @@ components:
           description: Metadata objects to assign the the custom action to.
           items:
             $ref: '#/components/schemas/Metadata_Association_Item'
+          nullable: true
           type: array
         name:
           description: Unique name of the custom action.
@@ -7802,6 +8346,7 @@ components:
             the custom action.
           items:
             $ref: '#/components/schemas/Object_ID_And_Name'
+          nullable: true
           type: array
       required:
       - action_details
@@ -7845,6 +8390,7 @@ components:
         reference:
           description: "Reference name of the SDK. By default, the value will be set\
             \ to action name."
+          nullable: true
           type: string
       type: object
     URL:
@@ -7873,6 +8419,7 @@ components:
           description: Query parameters for url.
           items:
             $ref: '#/components/schemas/ParametersListItem'
+          nullable: true
           type: array
         url:
           description: Request Url for the Custom action.
@@ -7880,6 +8427,7 @@ components:
         reference:
           description: "Reference name of the SDK. By default, the value will be set\
             \ to action name."
+          nullable: true
           type: string
       required:
       - url
@@ -7903,9 +8451,11 @@ components:
         Bearer_Token:
           description: Bearer tokens enable requests to authenticate using an access
             key.
+          nullable: true
           type: string
         No_Auth:
           description: No authorization. If your request doesn't require authorization.
+          nullable: true
           type: string
       type: object
     API_Key:
@@ -7917,9 +8467,11 @@ components:
       properties:
         key:
           description: Enter your key name
+          nullable: true
           type: string
         value:
           description: Enter you key value
+          nullable: true
           type: string
       type: object
     Basic_Auth:
@@ -7931,9 +8483,11 @@ components:
       properties:
         password:
           description: Password for the basic authentication
+          nullable: true
           type: string
         username:
           description: Username for the basic authentication
+          nullable: true
           type: string
       type: object
     ParametersListItem:
@@ -7943,9 +8497,11 @@ components:
       properties:
         key:
           description: Key for the url query parameter
+          nullable: true
           type: string
         value:
           description: Value for the url query parameter
+          nullable: true
           type: string
       type: object
     Default_action_config:
@@ -7959,6 +8515,7 @@ components:
           description: "Custom action is available on all visualizations. Earlier\
             \ , the naming convention: LOCAL/GLOBAL. TRUE signifies GLOBAL for backward\
             \ compatibility."
+          nullable: true
           type: boolean
       type: object
     Metadata_Association_Item:
@@ -7975,7 +8532,9 @@ components:
           description: Unique ID or name of the metadata.
           type: string
         type:
-          description: Type of metadata.
+          description: "  Type of metadata.\n  \n\nRequired if the name of the object\
+            \ is set as the identifier. This attribute is optional when the object\
+            \ GUID is specified as the identifier."
           type: string
       required:
       - action_config
@@ -7991,21 +8550,26 @@ components:
         position:
           description: "Position of the Custom action on the Metadata object. Earlier\
             \ naming convention: context."
+          nullable: true
           type: string
         visibility:
           description: "Visibility of the metadata association with custom action.\
             \ Earlier naming convention: enabled"
+          nullable: true
           type: boolean
       type: object
     CustomActionMetadataTypeInput:
       description: MetadataType InputType used in Custom Action API's
       properties:
         type:
-          description: Type of metadata object.
+          description: "  Type of metadata object.\n  \n\nRequired if the name of\
+            \ the object is set as the identifier. This attribute is optional when\
+            \ the object GUID is specified as the identifier."
           enum:
           - VISUALIZATION
           - ANSWER
           - WORKSHEET
+          nullable: true
           type: string
         identifier:
           description: Unique ID or name of the metadata object.
@@ -8019,8 +8583,10 @@ components:
         id: id
       properties:
         id:
+          nullable: true
           type: string
         name:
+          nullable: true
           type: string
       type: object
     UserGroup:
@@ -8029,12 +8595,18 @@ components:
         id: id
       properties:
         id:
+          nullable: true
           type: string
         name:
+          nullable: true
           type: string
       type: object
     JWT_User_Options:
-      description: JWT user options to create a JWT token given the payload.
+      description: |-
+        JWT user options to create a JWT token given the payload.
+
+
+        *Deprecated in 9.12.0.cl. Use user_parameters instead.*
       properties:
         parameters:
           items:
@@ -8043,6 +8615,7 @@ components:
         metadata:
           items:
             $ref: '#/components/schemas/JWT_Metadata_Object'
+          nullable: true
           type: array
       type: object
     JWT_Parameter:
@@ -8050,58 +8623,88 @@ components:
       properties:
         runtime_filter:
           description: Runtime filter parameter type in JWT.
+          nullable: true
           type: object
         runtime_sort:
           description: Runtime sort parameter type in JWT.
+          nullable: true
           type: object
         runtime_param_override:
           description: Runtime param override type in JWT.
+          nullable: true
           type: object
       type: object
     JWT_Metadata_Object:
       description: Metadata objects.
       properties:
         identifier:
+          nullable: true
           type: string
         type:
           enum:
           - LIVEBOARD
           - ANSWER
+          nullable: true
           type: string
       type: object
     User_Parameter_Options:
-      description: "User properties runtime_filters,runtime_sorts,parameters applicable\
-        \ to LOGICAL_TABLE(Worksheet)"
+      description: |
+        Define attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters).
       properties:
         objects:
           items:
             $ref: '#/components/schemas/User_Object'
+          nullable: true
           type: array
         runtime_filters:
+          description: |-
+            Objects to apply the User_Runtime_Filters.
+
+            Examples to set the `runtime_filters` :
+            ```json
+            { "column_name": "Color", "operator": "EQ", "values": ["red"], "persist": false }
+            ```
           items:
             $ref: '#/components/schemas/User_Runtime_Filters'
+          nullable: true
           type: array
         runtime_sorts:
+          description: |-
+            Objects to apply the User_Runtime_Sorts.
+
+            Examples to set the `runtime_sorts` :
+            ```json
+            { "column_name": "Color", "order": "ASC", "persist": false }
+            ```
           items:
             $ref: '#/components/schemas/User_Runtime_Sorts'
+          nullable: true
           type: array
         parameters:
+          description: |-
+            Objects to apply the Runtime_Parameters.
+
+            Examples to set the `parameters` :
+            ```json
+            { "name": "Color", "values": ["Blue"], "persist": false }
+            ```
           items:
             $ref: '#/components/schemas/User_Parameters'
+          nullable: true
           type: array
-        compress:
-          default: false
-          type: boolean
       type: object
     User_Object:
       description: Objects to apply the User_Object.
       properties:
         type:
-          description: Type of object.
+          description: "  Type of object.\n  \n\nRequired if the name of the object\
+            \ is set as the identifier. This attribute is optional when the object\
+            \ GUID is specified as the identifier."
           enum:
           - LIVEBOARD
           - ANSWER
           - LOGICAL_TABLE
+          nullable: true
           type: string
         identifier:
           description: Unique name/id of the object.
@@ -8140,12 +8743,15 @@ components:
           type: string
         persist:
           default: false
-          description: Flag to persist the runtime filters.
+          description: "Flag to persist the runtime filters. \n  Version: 9.12.0.cl\
+            \ or later\n"
+          nullable: true
           type: boolean
         objects:
           description: Object to apply the runtime filter.
           items:
             $ref: '#/components/schemas/User_Object'
+          nullable: true
           type: array
       required:
       - column_name
@@ -8157,21 +8763,26 @@ components:
       properties:
         column_name:
           description: The column name to apply filter.
+          nullable: true
           type: string
         order:
           description: Order for the sort.
           enum:
           - ASC
           - DESC
+          nullable: true
           type: string
         persist:
           default: false
-          description: Flag to persist the runtime sorts.
+          description: "Flag to persist the runtime sorts. \n  Version: 9.12.0.cl\
+            \ or later\n"
+          nullable: true
           type: boolean
         objects:
           description: Object to apply the runtime sort.
           items:
             $ref: '#/components/schemas/User_Object'
+          nullable: true
           type: array
       type: object
     User_Parameters:
@@ -8187,12 +8798,15 @@ components:
           type: array
         persist:
           default: false
-          description: Flag to persist the parameters.
+          description: "Flag to persist the parameters. \n  Version: 9.12.0.cl or\
+            \ later\n"
+          nullable: true
           type: boolean
         objects:
           description: Object to apply the runtime parameter.
           items:
             $ref: '#/components/schemas/User_Object'
+          nullable: true
           type: array
       required:
       - name
@@ -8249,19 +8863,26 @@ components:
         org_id:
           description: Unique identifier of the metadata.
           format: int32
+          nullable: true
           type: integer
         metadata_id:
           description: Unique identifier of the Org.
+          nullable: true
           type: string
       required:
       - access_type
       type: object
     JWT_User_Options_Full:
-      description: JWT user options to create a JWT token given the payload.
+      description: |-
+        JWT user options to create a JWT token given the payload.
+
+
+        *Deprecated in 9.12.0.cl. Use user_parameters instead.*
       properties:
         parameters:
           items:
             $ref: '#/components/schemas/JWT_Parameter'
+          nullable: true
           type: array
       type: object
     TokenValidationResponse:
@@ -8305,6 +8926,7 @@ components:
       properties:
         activation_link:
           description: Activation link to activate the user.
+          nullable: true
           type: string
       type: object
     ImportUser:
@@ -8317,6 +8939,7 @@ components:
           type: string
         password:
           description: Password of the user.
+          nullable: true
           type: string
         account_type:
           default: LOCAL_USER
@@ -8327,6 +8950,7 @@ components:
           - SAML_USER
           - OIDC_USER
           - REMOTE_USER
+          nullable: true
           type: string
         account_status:
           default: ACTIVE
@@ -8337,19 +8961,23 @@ components:
           - EXPIRED
           - LOCKED
           - PENDING
+          nullable: true
           type: string
         email:
           description: Email address of the user.
+          nullable: true
           type: string
         org_identifiers:
           description: ID or name of the Orgs to which the user belongs.
           items:
             type: string
+          nullable: true
           type: array
         group_identifiers:
           description: ID or name of the groups to which the user belongs.
           items:
             type: string
+          nullable: true
           type: array
         visibility:
           description: "Visibility of the users. The SHARABLE property makes a user\
@@ -8357,25 +8985,31 @@ components:
           enum:
           - SHARABLE
           - NON_SHARABLE
+          nullable: true
           type: string
         notify_on_share:
           default: true
           description: Notify user when other users or groups share metadata objects
+          nullable: true
           type: boolean
         show_onboarding_experience:
           description: Show or hide the new user onboarding walkthroughs
+          nullable: true
           type: boolean
         onboarding_experience_completed:
           description: Revisit the new user onboarding walkthroughs
+          nullable: true
           type: boolean
         home_liveboard_identifier:
           description: Unique ID or name of the default Liveboard assigned to the
             user.
+          nullable: true
           type: string
         favorite_metadata:
           description: Metadata objects to add to the user's favorites list.
           items:
             $ref: '#/components/schemas/FavoriteMetadataInput'
+          nullable: true
           type: array
       required:
       - display_name
@@ -8402,14 +9036,17 @@ components:
         users_added:
           items:
             $ref: '#/components/schemas/ImportUserType'
+          nullable: true
           type: array
         users_updated:
           items:
             $ref: '#/components/schemas/ImportUserType'
+          nullable: true
           type: array
         users_deleted:
           items:
             $ref: '#/components/schemas/ImportUserType'
+          nullable: true
           type: array
       type: object
     ImportUserType:
@@ -8419,6 +9056,7 @@ components:
       properties:
         id:
           description: Unique identifier of the user.
+          nullable: true
           type: string
         name:
           description: Name of the user.
@@ -8429,18 +9067,19 @@ components:
     TagMetadataTypeInput:
       properties:
         type:
-          description: |-
-            Type of metadata (Optional when given identifier is ID).
-            1. LIVEBOARD
-            2. ANSWERS
-            3. LOGICAL_TABLE for any data object such as table, worksheet or view.
-            4. LOGICAL_COLUMN for a column of any data object such as tables, worksheets or views.
+          description: "  Type of metadata.\n  \n\nRequired if the name of the object\
+            \ is set as the identifier. This attribute is optional when the object\
+            \ GUID is specified as the identifier.\n  1. LIVEBOARD\n  2. ANSWERS\n\
+            \  3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n\
+            \  4. LOGICAL_COLUMN for a column of any data object such as tables, worksheets\
+            \ or views."
           enum:
           - LIVEBOARD
           - ANSWER
           - LOGICAL_TABLE
           - LOGICAL_COLUMN
           - CONNECTION
+          nullable: true
           type: string
         identifier:
           description: Unique ID or name of the metadata.
@@ -8461,9 +9100,11 @@ components:
             to the users in the group.
           items:
             type: string
+          nullable: true
           type: array
         description:
           description: Description of the group.
+          nullable: true
           type: string
         privileges:
           description: Privileges that will be assigned to the group.
@@ -8491,23 +9132,31 @@ components:
             - PREVIEW_THOUGHTSPOT_SAGE
             - CAN_MANAGE_VERSION_CONTROL
             - THIRDPARTY_ANALYSIS
+            - ALLOW_NON_EMBED_FULL_APP_ACCESS
+            - CAN_ACCESS_ANALYST_STUDIO
+            - CAN_MANAGE_ANALYST_STUDIO
+            - PREVIEW_DOCUMENT_SEARCH
             type: string
+          nullable: true
           type: array
         sub_group_identifiers:
           description: Unique ID or name of the sub-groups to add to the group.
           items:
             type: string
+          nullable: true
           type: array
         type:
           description: Type of the group.
           enum:
           - LOCAL_GROUP
           - LDAP_GROUP
+          nullable: true
           type: string
         user_identifiers:
           description: Unique ID or name of the users to assign to the group.
           items:
             type: string
+          nullable: true
           type: array
         visibility:
           description: "Visibility of the group. The SHARABLE makes a group visible\
@@ -8515,6 +9164,7 @@ components:
           enum:
           - SHARABLE
           - NON_SHARABLE
+          nullable: true
           type: string
       required:
       - display_name
@@ -8558,17 +9208,32 @@ components:
       - groups_deleted
       - groups_updated
       type: object
+    ResponseCopyObject:
+      example:
+        metadata_id: metadata_id
+      properties:
+        metadata_id:
+          description: The unique identifier of the object.
+          nullable: true
+          type: string
+      type: object
     ExportMetadataTypeInput:
       description: MetadataType InputType used in Export MetadataType API
       properties:
         type:
-          description: Type of metadata (Optional when given identifier is ID).
+          description: "  Type of metadata.\n  \n\nRequired if the name of the object\
+            \ is set as the identifier. This attribute is optional when the object\
+            \ GUID is specified as the identifier."
           enum:
           - LIVEBOARD
           - ANSWER
           - LOGICAL_TABLE
           - CONNECTION
           - CUSTOM_ACTION
+          - USER
+          - USER_GROUP
+          - ROLE
+          nullable: true
           type: string
         identifier:
           description: Unique ID or name of the metadata object.
@@ -8580,13 +9245,16 @@ components:
       description: MetadataType InputType used in Delete MetadataType API
       properties:
         type:
-          description: Type of metadata (Optional when given identifier is ID).
+          description: "  Type of metadata.\n  \n\nRequired if the name of the object\
+            \ is set as the identifier. This attribute is optional when the object\
+            \ GUID is specified as the identifier."
           enum:
           - LIVEBOARD
           - ANSWER
           - LOGICAL_TABLE
           - LOGICAL_COLUMN
           - LOGICAL_RELATIONSHIP
+          nullable: true
           type: string
         identifier:
           description: Unique ID or name of the metadata object.
@@ -8598,11 +9266,32 @@ components:
       description: MetadataType InputType used in Author API's
       properties:
         type:
-          description: Type of metadata.
+          description: "  Type of metadata.\n  \n\nRequired if the name of the object\
+            \ is set as the identifier. This attribute is optional when the object\
+            \ GUID is specified as the identifier."
           enum:
           - LIVEBOARD
           - ANSWER
           - LOGICAL_TABLE
+          nullable: true
+          type: string
+        identifier:
+          description: Unique ID or name of the metadata object.
+          type: string
+      required:
+      - identifier
+      type: object
+    ShareMetadataTypeInput:
+      properties:
+        type:
+          description: "  Type of metadata.\n  \n\nType of metadata. Required if the\
+            \ name of the object is set as the identifier. This attribute is optional\
+            \ when the object GUID is specified as the identifier."
+          enum:
+          - LIVEBOARD
+          - ANSWER
+          - LOGICAL_TABLE
+          nullable: true
           type: string
         identifier:
           description: Unique ID or name of the metadata object.
@@ -8631,12 +9320,15 @@ components:
           description: Unique ID or name of the metadata
           type: string
         type:
-          description: Type of metadata.
+          description: "  Type of metadata.\n  \n\nRequired if the name of the object\
+            \ is set as the identifier. This attribute is optional when the object\
+            \ GUID is specified as the identifier."
           enum:
           - LIVEBOARD
           - ANSWER
           - LOGICAL_TABLE
           - CUSTOM_ACTION
+          nullable: true
           type: string
       required:
       - identifier
@@ -8667,20 +9359,25 @@ components:
           $ref: '#/components/schemas/AuthorType'
         comment:
           description: Comments associated with the commit
+          nullable: true
           type: string
         commit_time:
           description: Time at which the changes were committed.
+          nullable: true
           type: string
         commit_id:
           description: SHA id associated with the commit
+          nullable: true
           type: string
         branch:
           description: Branch where changes were committed
+          nullable: true
           type: string
         committed_files:
           description: Files that were pushed as part of this commit
           items:
             $ref: '#/components/schemas/CommitFileType'
+          nullable: true
           type: array
       type: object
     CommitFileType:
@@ -8697,6 +9394,7 @@ components:
           type: string
         status_message:
           description: Any error or warning with the deployment
+          nullable: true
           type: string
       required:
       - file_name
@@ -8739,25 +9437,31 @@ components:
           $ref: '#/components/schemas/AuthorType'
         comment:
           description: Comments associated with the commit
+          nullable: true
           type: string
         commit_time:
           description: Time at which the changes were committed.
+          nullable: true
           type: string
         commit_id:
           description: SHA id associated with the commit
+          nullable: true
           type: string
         branch:
           description: Branch where changes were committed
+          nullable: true
           type: string
         committed_files:
           description: Files that were pushed as part of this commit
           items:
             $ref: '#/components/schemas/CommitFileType'
+          nullable: true
           type: array
         reverted_metadata:
           description: Metadata of reverted file of this commit
           items:
             $ref: '#/components/schemas/RevertedMetadata'
+          nullable: true
           type: array
       type: object
     RevertedMetadata:
@@ -8800,18 +9504,23 @@ components:
       properties:
         file_name:
           description: Name of the file deployed
+          nullable: true
           type: string
         metadata_name:
           description: Name of the metadata object
+          nullable: true
           type: string
         metadata_type:
           description: Type of the metadata object
+          nullable: true
           type: string
         status_code:
           description: Indicates the status of deployment for the file
+          nullable: true
           type: string
         status_message:
           description: Any error or warning with the deployment
+          nullable: true
           type: string
       type: object
     CreateConnectionResponse:
@@ -8863,6 +9572,7 @@ components:
           type: string
         details:
           description: Details of the connection.
+          nullable: true
           type: object
       required:
       - data_warehouse_type
@@ -8875,6 +9585,7 @@ components:
       properties:
         status:
           description: Status of the connection diff.
+          nullable: true
           type: boolean
       type: object
     RoleResponse:
@@ -8919,16 +9630,19 @@ components:
         groups_assigned_count:
           description: number of groups assigned with this role
           format: int32
+          nullable: true
           type: integer
         orgs:
           description: Orgs in which role exists.
           items:
             $ref: '#/components/schemas/GenericInfo'
+          nullable: true
           type: array
         groups:
           description: Details of groups assigned with this role
           items:
             $ref: '#/components/schemas/GenericInfo'
+          nullable: true
           type: array
         privileges:
           description: Privileges granted to the role.
@@ -8962,6 +9676,10 @@ components:
             - CAN_MANAGE_VERSION_CONTROL
             - THIRDPARTY_ANALYSIS
             - CAN_CREATE_CATALOG
+            - ALLOW_NON_EMBED_FULL_APP_ACCESS
+            - CAN_ACCESS_ANALYST_STUDIO
+            - CAN_MANAGE_ANALYST_STUDIO
+            - PREVIEW_DOCUMENT_SEARCH
             type: string
           type: array
         permission:
@@ -8970,33 +9688,43 @@ components:
           - READ_ONLY
           - MODIFY
           - NO_ACCESS
+          nullable: true
           type: string
         author_id:
           description: Unique identifier of author of the role.
+          nullable: true
           type: string
         modifier_id:
           description: Unique identifier of modifier of the role.
+          nullable: true
           type: string
         creation_time_in_millis:
           description: Creation time of the role in milliseconds.
+          nullable: true
           type: object
         modification_time_in_millis:
           description: Last modified time of the role in milliseconds.
+          nullable: true
           type: object
         deleted:
           description: Indicates whether the role is deleted.
+          nullable: true
           type: boolean
         deprecated:
           description: Indicates whether the role is deprecated.
+          nullable: true
           type: boolean
         external:
           description: Indicates whether the role is external.
+          nullable: true
           type: boolean
         hidden:
           description: Indicates whether the role is hidden.
+          nullable: true
           type: boolean
         shared_via_connection:
           description: Indicates whether the role is shared via connection
+          nullable: true
           type: boolean
       required:
       - description
@@ -9020,35 +9748,44 @@ components:
       properties:
         complete_liveboard:
           description: Indicates whether to include complete Liveboard.
+          nullable: true
           type: boolean
         include_cover_page:
           description: Indicates whether to include cover page with the Liveboard
             title.
+          nullable: true
           type: boolean
         include_custom_logo:
           description: Indicates whether to include customized wide logo in the footer
             if available.
+          nullable: true
           type: boolean
         include_filter_page:
           description: Indicates whether to include a page with all applied filters.
+          nullable: true
           type: boolean
         include_page_number:
           description: Indicates whether to include page number in the footer of each
             page
+          nullable: true
           type: boolean
         page_footer_text:
           description: Text to include in the footer of each page.
+          nullable: true
           type: string
         page_orientation:
           description: Page orientation of the PDF.
+          nullable: true
           type: string
         page_size:
           description: Page size.
           enum:
           - A4
+          nullable: true
           type: string
         truncate_table:
           description: Indicates whether to include only first page of the tables.
+          nullable: true
           type: boolean
       type: object
     FrequencyInput:
@@ -9095,11 +9832,13 @@ components:
           description: Emails of the recipients.
           items:
             type: string
+          nullable: true
           type: array
         principals:
           description: User or groups to be set as recipients of the schedule notifications.
           items:
             $ref: '#/components/schemas/PrincipalsListItemInput'
+          nullable: true
           type: array
       type: object
     PrincipalsListItemInput:
@@ -9180,6 +9919,7 @@ components:
           type: object
         description:
           description: Description of the job.
+          nullable: true
           type: string
         file_format:
           description: Export file format.
@@ -9202,6 +9942,7 @@ components:
           $ref: '#/components/schemas/RecipientDetails'
         status:
           description: Status of the job
+          nullable: true
           type: string
         time_zone:
           description: Time zone
@@ -9210,6 +9951,7 @@ components:
           description: Schedule runs history records.
           items:
             $ref: '#/components/schemas/ResponseScheduleRun'
+          nullable: true
           type: array
       required:
       - author
@@ -9312,6 +10054,7 @@ components:
         type: LIVEBOARD
       properties:
         name:
+          nullable: true
           type: string
         id:
           type: string
@@ -9338,35 +10081,44 @@ components:
       properties:
         complete_liveboard:
           description: Indicates whether to include complete Liveboard.
+          nullable: true
           type: boolean
         include_cover_page:
           description: Indicates whether to include cover page with the Liveboard
             title.
+          nullable: true
           type: boolean
         include_custom_logo:
           description: Indicates whether to include customized wide logo in the footer
             if available.
+          nullable: true
           type: boolean
         include_filter_page:
           description: Indicates whether to include a page with all applied filters.
+          nullable: true
           type: boolean
         include_page_number:
           description: Indicates whether to include page number in the footer of each
             page
+          nullable: true
           type: boolean
         page_footer_text:
           description: Text to include in the footer of each page.
+          nullable: true
           type: string
         page_orientation:
           description: Page orientation of the PDF.
+          nullable: true
           type: string
         page_size:
           description: Page size.
           enum:
           - A4
+          nullable: true
           type: string
         truncate_table:
           description: Indicates whether to include only first page of the tables.
+          nullable: true
           type: boolean
       type: object
     RecipientDetails:
@@ -9387,11 +10139,13 @@ components:
             is not a ThoughtSpot user.
           items:
             type: string
+          nullable: true
           type: array
         principals:
           description: List of user or groups to subscribe for the scheduled job notifications.
           items:
             $ref: '#/components/schemas/PrincipalsListItem'
+          nullable: true
           type: array
       type: object
     PrincipalsListItem:
@@ -9434,6 +10188,7 @@ components:
           type: string
         detail:
           description: Message details related to the schedule run.
+          nullable: true
           type: string
       required:
       - end_time_in_millis
@@ -9444,10 +10199,12 @@ components:
     MetadataInput:
       properties:
         identifier:
+          nullable: true
           type: string
         type:
           enum:
           - LIVEBOARD
+          nullable: true
           type: string
       type: object
     SortingOptions:
@@ -9455,9 +10212,11 @@ components:
       properties:
         field_name:
           description: Name of the field to apply the sort on.
+          nullable: true
           type: string
         order:
           description: "Sort order : ASC(Ascending) or DESC(Descending)."
+          nullable: true
           type: string
       type: object
     ScheduleHistoryRunsOptionsInput:
@@ -9465,18 +10224,21 @@ components:
         include_history_runs:
           default: false
           description: Indicates whether to fetch history runs for the scheduled notification.
+          nullable: true
           type: boolean
         record_size:
           default: 10
           description: Indicates the max number of records that can be fetched as
             past runs of any scheduled job.
           format: int32
+          nullable: true
           type: integer
         record_offset:
           default: 0
           description: Indicates the starting record number from where history runs
             records should be fetched.
           format: int32
+          nullable: true
           type: integer
       type: object
     Action_Details_Input_Create:
@@ -9495,6 +10257,7 @@ components:
         reference:
           description: "Reference name. By default, the value will be set to action\
             \ name."
+          nullable: true
           type: string
       type: object
     URLInputMandatory:
@@ -9506,6 +10269,7 @@ components:
           description: Query parameters for url.
           items:
             $ref: '#/components/schemas/ParametersListItemInput'
+          nullable: true
           type: array
         url:
           description: Request Url for the Custom action.
@@ -9513,6 +10277,7 @@ components:
         reference:
           description: Reference name. By default the value will be set to action
             name
+          nullable: true
           type: string
       required:
       - url
@@ -9527,9 +10292,11 @@ components:
         Bearer_Token:
           description: Bearer tokens enable requests to authenticate using an access
             key.
+          nullable: true
           type: string
         No_Auth:
           description: No authorization. If your request doesn't require authorization.
+          nullable: true
           type: string
       type: object
     API_KeyInput:
@@ -9538,9 +10305,11 @@ components:
       properties:
         key:
           description: Enter your key name
+          nullable: true
           type: string
         value:
           description: Enter you key value
+          nullable: true
           type: string
       type: object
     Basic_AuthInput:
@@ -9549,18 +10318,22 @@ components:
       properties:
         password:
           description: Password for the basic authentication
+          nullable: true
           type: string
         username:
           description: Username for the basic authentication
+          nullable: true
           type: string
       type: object
     ParametersListItemInput:
       properties:
         key:
           description: Key for the url query parameter
+          nullable: true
           type: string
         value:
           description: Value for the url query parameter
+          nullable: true
           type: string
       type: object
     Associate_Metadata_Input_Create:
@@ -9571,11 +10344,14 @@ components:
           description: Unique ID or name of the metadata.
           type: string
         type:
-          description: Type of metadata.
+          description: "  Type of metadata.\n  \n\nRequired if the name of the object\
+            \ is set as the identifier. This attribute is optional when the object\
+            \ GUID is specified as the identifier."
           enum:
           - VISUALIZATION
           - ANSWER
           - WORKSHEET
+          nullable: true
           type: string
       required:
       - identifier
@@ -9592,11 +10368,13 @@ components:
           - MENU
           - PRIMARY
           - CONTEXT_MENU
+          nullable: true
           type: string
         visibility:
           default: true
           description: "Visibility of the metadata association with custom action.\
             \ Earlier naming convention: enabled"
+          nullable: true
           type: boolean
       type: object
     Default_Action_Config_Input_Create:
@@ -9609,6 +10387,7 @@ components:
           description: |-
             Custom action is available on all visualizations. Earlier naming convention: LOCAL/GLOBAL. TRUE signifies GLOBAL for backward compatibility.
             Default: true
+          nullable: true
           type: boolean
       type: object
     Action_Details_Input:
@@ -9626,6 +10405,7 @@ components:
         reference:
           description: "Reference name. By default, the value will be set to action\
             \ name."
+          nullable: true
           type: string
       type: object
     URLInput:
@@ -9637,13 +10417,16 @@ components:
           description: Query parameters for url.
           items:
             $ref: '#/components/schemas/ParametersListItemInput'
+          nullable: true
           type: array
         url:
           description: Request Url for the Custom action.
+          nullable: true
           type: string
         reference:
           description: Reference name. By default the value will be set to action
             name
+          nullable: true
           type: string
       type: object
     Associate_Metadata_Input:
@@ -9652,13 +10435,17 @@ components:
           $ref: '#/components/schemas/ActionConfigInput'
         identifier:
           description: Unique ID or name of the metadata.
+          nullable: true
           type: string
         type:
-          description: Type of metadata.
+          description: "  Type of metadata.\n  \n\nRequired if the name of the object\
+            \ is set as the identifier. This attribute is optional when the object\
+            \ GUID is specified as the identifier."
           enum:
           - VISUALIZATION
           - ANSWER
           - WORKSHEET
+          nullable: true
           type: string
       type: object
     ActionConfigInput:
@@ -9672,10 +10459,12 @@ components:
           - MENU
           - PRIMARY
           - CONTEXT_MENU
+          nullable: true
           type: string
         visibility:
           description: "Visibility of the metadata association with custom action.\
             \ Earlier naming convention: enabled"
+          nullable: true
           type: boolean
       type: object
     Default_Action_Config_Input:
@@ -9687,6 +10476,7 @@ components:
           description: "Custom action is available on all visualizations. Earlier\
             \ naming convention: LOCAL/GLOBAL. TRUE signifies GLOBAL for backward\
             \ compatibility."
+          nullable: true
           type: boolean
       type: object
     ModelTableList:
@@ -9697,6 +10487,7 @@ components:
         model_path:
           description: "Model directory path, this is optional param and required\
             \ if there are duplicate models with the same name."
+          nullable: true
           type: string
         tables:
           description: List of Tables.
@@ -9718,18 +10509,25 @@ components:
         cdw_database: cdw_database
       properties:
         dbt_connection_identifier:
+          nullable: true
           type: string
         project_name:
+          nullable: true
           type: string
         connection_id:
+          nullable: true
           type: string
         connection_name:
+          nullable: true
           type: string
         cdw_database:
+          nullable: true
           type: string
         import_type:
+          nullable: true
           type: string
         author_name:
+          nullable: true
           type: string
       type: object
     Runtime_Filter:
@@ -9753,6 +10551,10 @@ components:
           description: Runtime param override type in JWT.
           type: object
       type: object
+    searchUsers_request_sort_options:
+      allOf:
+      - $ref: '#/components/schemas/SortOptions'
+      description: Sort options.
     searchUsers_request:
       properties:
         user_identifier:
@@ -9814,6 +10616,10 @@ components:
             - CAN_MANAGE_WORKSHEET_VIEWS_TABLES
             - CAN_MANAGE_VERSION_CONTROL
             - THIRDPARTY_ANALYSIS
+            - ALLOW_NON_EMBED_FULL_APP_ACCESS
+            - CAN_ACCESS_ANALYST_STUDIO
+            - CAN_MANAGE_ANALYST_STUDIO
+            - PREVIEW_DOCUMENT_SEARCH
             type: string
           type: array
         account_type:
@@ -9873,7 +10679,7 @@ components:
           format: int32
           type: integer
         sort_options:
-          $ref: '#/components/schemas/SortOptions'
+          $ref: '#/components/schemas/searchUsers_request_sort_options'
         role_identifiers:
           description: Filters by the role assigned to the user.
           items:
@@ -9924,6 +10730,10 @@ components:
           description: Color of the tag.
           type: string
       type: object
+    searchUserGroups_request_sort_options:
+      allOf:
+      - $ref: '#/components/schemas/SortOptions'
+      description: Sort options to filter group details.
     searchUserGroups_request:
       properties:
         default_liveboard_identifiers:
@@ -9984,6 +10794,10 @@ components:
             - CAN_MANAGE_WORKSHEET_VIEWS_TABLES
             - CAN_MANAGE_VERSION_CONTROL
             - THIRDPARTY_ANALYSIS
+            - ALLOW_NON_EMBED_FULL_APP_ACCESS
+            - CAN_ACCESS_ANALYST_STUDIO
+            - CAN_MANAGE_ANALYST_STUDIO
+            - PREVIEW_DOCUMENT_SEARCH
             type: string
           type: array
         sub_group_identifiers:
@@ -10028,8 +10842,18 @@ components:
           format: int32
           type: integer
         sort_options:
-          $ref: '#/components/schemas/SortOptions'
+          $ref: '#/components/schemas/searchUserGroups_request_sort_options'
       type: object
+    searchMetadata_request_favorite_object_options:
+      allOf:
+      - $ref: '#/components/schemas/FavoriteObjectOptionsInput'
+      description: |-
+        Options to sort the API response by objects set as favorites
+        for the logged-in user or the users specified in the API request.
+    searchMetadata_request_sort_options:
+      allOf:
+      - $ref: '#/components/schemas/MetadataSearchSortOptions'
+      description: Sort options to filter metadata details.
     searchMetadata_request:
       properties:
         metadata:
@@ -10061,7 +10885,7 @@ components:
             $ref: '#/components/schemas/ExcludeMetadataListItemInput'
           type: array
         favorite_object_options:
-          $ref: '#/components/schemas/FavoriteObjectOptionsInput'
+          $ref: '#/components/schemas/searchMetadata_request_favorite_object_options'
         include_auto_created_objects:
           default: false
           description: Includes system-generated metadata objects.
@@ -10129,7 +10953,7 @@ components:
           format: int32
           type: integer
         sort_options:
-          $ref: '#/components/schemas/MetadataSearchSortOptions'
+          $ref: '#/components/schemas/searchMetadata_request_sort_options'
         tag_identifiers:
           description: Tags to filter metadata objects by
           items:
@@ -10162,6 +10986,14 @@ components:
       required:
       - metadata_identifier
       type: object
+    exportLiveboardReport_request_pdf_options:
+      allOf:
+      - $ref: '#/components/schemas/PdfOptionsInput'
+      description: Options for PDF export.
+    exportLiveboardReport_request_png_options:
+      allOf:
+      - $ref: '#/components/schemas/PngOptionsInput'
+      description: Options for PNG export.
     exportLiveboardReport_request:
       properties:
         metadata_identifier:
@@ -10198,9 +11030,9 @@ components:
             : \"region\", \"asc1\" : true}. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort)."
           type: object
         pdf_options:
-          $ref: '#/components/schemas/PdfOptionsInput'
+          $ref: '#/components/schemas/exportLiveboardReport_request_pdf_options'
         png_options:
-          $ref: '#/components/schemas/PngOptionsInput'
+          $ref: '#/components/schemas/exportLiveboardReport_request_png_options'
         runtime_param_override:
           description: "JSON object for setting values of parameters at runtime. For\
             \ example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>.\
@@ -10302,6 +11134,27 @@ components:
             objects.
           nullable: true
           type: boolean
+        record_offset:
+          default: 0
+          description: The starting record number from where the records should be
+            included for each metadata type.
+          format: int32
+          type: integer
+        record_size:
+          default: -1
+          description: The number of records that should be included for each metadata
+            type.
+          format: int32
+          type: integer
+        permission_type:
+          description: |-
+            <div>Version: 10.3.0.cl or later
+            </div>
+
+            Specifies the type of permission. Valid values are:
+                EFFECTIVE - If the user permission to the metadata objects is granted by the privileges assigned to the groups to which they belong.
+                DEFINED - If a user or user group received access to metadata objects via object sharing by another user.
+          type: string
       required:
       - metadata
       type: object
@@ -10319,8 +11172,8 @@ components:
           type: string
         data_format:
           default: COMPACT
-          description: "JSON output format. By default, the API returns full data\
-            \ in the JSON."
+          description: JSON output in compact or full format. The FULL option is available
+            in 9.12.5.cl or later.
           enum:
           - FULL
           - COMPACT
@@ -10374,8 +11227,8 @@ components:
           type: string
         data_format:
           default: COMPACT
-          description: "JSON output format. By default, the API returns full data\
-            \ in the JSON."
+          description: JSON output in compact or full format. The FULL option is available
+            in 9.12.5.cl or later.
           enum:
           - FULL
           - COMPACT
@@ -10420,8 +11273,8 @@ components:
           type: string
         data_format:
           default: COMPACT
-          description: "JSON output format. By default, the API returns full data\
-            \ in the JSON."
+          description: JSON output in compact or full format. The FULL option is available
+            in 9.12.5.cl or later.
           enum:
           - FULL
           - COMPACT
@@ -10476,7 +11329,7 @@ components:
           type: number
         get_all_logs:
           default: true
-          description: Fetch all the logs. This is available from 9.11.0.cl
+          description: Fetch all the logs. This is available from 9.10.5.cl
           nullable: true
           type: boolean
       required:
@@ -10527,6 +11380,10 @@ components:
       required:
       - metadata_identifier
       type: object
+    searchConnection_request_sort_options:
+      allOf:
+      - $ref: '#/components/schemas/SortOptionInput'
+      description: Sort options.
     searchConnection_request:
       properties:
         connections:
@@ -10595,7 +11452,7 @@ components:
           - COLUMN
           type: string
         sort_options:
-          $ref: '#/components/schemas/SortOptionInput'
+          $ref: '#/components/schemas/searchConnection_request_sort_options'
         include_details:
           description: Indicates whether to include complete details of the connection
             objects.
@@ -10682,6 +11539,10 @@ components:
             - THIRDPARTY_ANALYSIS
             - CONTROL_TRUSTED_AUTH
             - CAN_CREATE_CATALOG
+            - ALLOW_NON_EMBED_FULL_APP_ACCESS
+            - CAN_ACCESS_ANALYST_STUDIO
+            - CAN_MANAGE_ANALYST_STUDIO
+            - PREVIEW_DOCUMENT_SEARCH
             type: string
           type: array
         deprecated:
@@ -10710,6 +11571,12 @@ components:
             type: string
           type: array
       type: object
+    searchCustomActions_request_default_action_config:
+      allOf:
+      - $ref: '#/components/schemas/Default_Action_Config_Search_Input'
+      description: "Default Custom action configuration. This includes if the custom\
+        \ action is available on all visualizations. By default, a custom action is\
+        \ added to all visualizations and Answers."
     searchCustomActions_request:
       properties:
         custom_action_identifier:
@@ -10720,7 +11587,7 @@ components:
             object.
           type: string
         default_action_config:
-          $ref: '#/components/schemas/Default_Action_Config_Search_Input'
+          $ref: '#/components/schemas/searchCustomActions_request_default_action_config'
         include_group_associations:
           default: false
           description: "When set to true, returns the associated groups for a custom\
@@ -10765,6 +11632,14 @@ components:
           nullable: true
           type: boolean
       type: object
+    getObjectAccessToken_request_user_parameters:
+      allOf:
+      - $ref: '#/components/schemas/User_Parameter_Options'
+      description: |-
+        <div>Deprecated: 10.4.0.cl and later
+        </div>
+
+        Define attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters).
     getObjectAccessToken_request:
       properties:
         username:
@@ -10790,10 +11665,10 @@ components:
           format: int32
           type: integer
         org_id:
-          default: 0
-          description: "ID of the Org context to log in to. If Org ID is not specified,\
-            \ the user will be logged in to the Org context of their previous login\
-            \ session."
+          description: "ID of the Org context to log in to. If the Org ID is not specified\
+            \ and secret key is provided then user will be logged into the org corresponding\
+            \ to the secret key, and if secret key is not provided then user will\
+            \ be logged in to the Org context of their previous login session."
           format: int32
           type: integer
         email:
@@ -10819,10 +11694,8 @@ components:
           items:
             type: string
           type: array
-        jwt_user_options:
-          $ref: '#/components/schemas/JWT_User_Options'
         user_parameters:
-          $ref: '#/components/schemas/User_Parameter_Options'
+          $ref: '#/components/schemas/getObjectAccessToken_request_user_parameters'
       required:
       - username
       type: object
@@ -10847,10 +11720,10 @@ components:
           format: int32
           type: integer
         org_id:
-          default: 0
-          description: "ID of the Org context to log in to. If the Org ID is not specified,\
-            \ the user will be logged in to the Org context of their previous login\
-            \ session."
+          description: "ID of the Org context to log in to. If the Org ID is not specified\
+            \ and secret key is provided then user will be logged into the org corresponding\
+            \ to the secret key, and if secret key is not provided then user will\
+            \ be logged in to the Org context of their previous login session."
           format: int32
           type: integer
         email:
@@ -10875,10 +11748,8 @@ components:
           items:
             type: string
           type: array
-        jwt_user_options:
-          $ref: '#/components/schemas/JWT_User_Options_Full'
         user_parameters:
-          $ref: '#/components/schemas/User_Parameter_Options'
+          $ref: '#/components/schemas/getObjectAccessToken_request_user_parameters'
       required:
       - username
       type: object
@@ -11008,12 +11879,13 @@ components:
           description: Preferences for the user
           type: object
         trigger_welcome_email:
-          description: Flag to indicate whether welcome email should be sent to user
+          description: Flag to indicate whether welcome email should be sent to user.
+            This parameter is applied only on clusters on which IAM is disabled.
           nullable: true
           type: boolean
         trigger_activation_email:
           description: Flag to indicate whether activation email should be sent to
-            user
+            user.
           nullable: true
           type: boolean
       required:
@@ -11348,6 +12220,10 @@ components:
             - PREVIEW_THOUGHTSPOT_SAGE
             - CAN_MANAGE_VERSION_CONTROL
             - THIRDPARTY_ANALYSIS
+            - ALLOW_NON_EMBED_FULL_APP_ACCESS
+            - CAN_ACCESS_ANALYST_STUDIO
+            - CAN_MANAGE_ANALYST_STUDIO
+            - PREVIEW_DOCUMENT_SEARCH
             type: string
           type: array
         sub_group_identifiers:
@@ -11430,6 +12306,10 @@ components:
             - PREVIEW_THOUGHTSPOT_SAGE
             - CAN_MANAGE_VERSION_CONTROL
             - THIRDPARTY_ANALYSIS
+            - ALLOW_NON_EMBED_FULL_APP_ACCESS
+            - CAN_ACCESS_ANALYST_STUDIO
+            - CAN_MANAGE_ANALYST_STUDIO
+            - PREVIEW_DOCUMENT_SEARCH
             type: string
           type: array
         sub_group_identifiers:
@@ -11496,7 +12376,9 @@ components:
     importMetadataTML_request:
       properties:
         metadata_tmls:
-          description: Details of TML objects.
+          description: |-
+            Details of TML objects.
+            **Note: importing TML in YAML format, when coming directly from our Playground, is currently requires manual formatting. For more details on the workaround, please click [here](https://developers.thoughtspot.com/docs/known-issues#_version_9_12_0_cl)**
           items:
             type: string
           type: array
@@ -11507,6 +12389,7 @@ components:
           - PARTIAL
           - ALL_OR_NONE
           - VALIDATE_ONLY
+          - PARTIAL_OBJECT
           type: string
         create_new:
           default: false
@@ -11544,7 +12427,9 @@ components:
           type: boolean
         edoc_format:
           default: JSON
-          description: TML EDOC content format.
+          description: |-
+            TML EDOC content format.
+            **Note: exporting in YAML format currently requires manual formatting of the output. For more details on the workaround, please click [here](https://developers.thoughtspot.com/docs/known-issues#_version_9_12_0_cl)**
           enum:
           - JSON
           - YAML
@@ -11578,6 +12463,49 @@ components:
       required:
       - metadata
       type: object
+    exportMetadataTMLBatched_request:
+      properties:
+        metadata_type:
+          description: "Type of metadata object to export, can be one of USER | ROLE\
+            \ | USER_GROUP"
+          enum:
+          - USER
+          - USER_GROUP
+          - ROLE
+          type: string
+        batch_offset:
+          default: 0
+          description: Indicates the position within the complete set from where the
+            API should begin returning objects.
+          format: int32
+          type: integer
+        batch_size:
+          default: 20
+          description: Determines the number of objects or items to be retrieved in
+            a single request.
+          format: int32
+          type: integer
+        edoc_format:
+          default: JSON
+          description: TML EDOC content format.
+          enum:
+          - JSON
+          - YAML
+          type: string
+        export_dependent:
+          default: false
+          description: Indicates whether to export dependent metadata objects of specified
+            metadata objects.
+          nullable: true
+          type: boolean
+        all_orgs_override:
+          default: false
+          description: Indicates whether to export is happening from all orgs context.
+          nullable: true
+          type: boolean
+      required:
+      - metadata_type
+      type: object
     deleteMetadata_request:
       properties:
         metadata:
@@ -11592,6 +12520,27 @@ components:
           type: boolean
       required:
       - metadata
+      type: object
+    copyObject_request:
+      properties:
+        description:
+          description: Description of the new object
+          type: string
+        identifier:
+          description: GUID of metadata object to be copied (answer id or liveboard
+            id)
+          type: string
+        type:
+          description: Type of metadata object
+          enum:
+          - LIVEBOARD
+          - ANSWER
+          type: string
+        title:
+          description: Title of the new object
+          type: string
+      required:
+      - identifier
       type: object
     assignChangeAuthor_request:
       properties:
@@ -11616,7 +12565,7 @@ components:
       properties:
         metadata_type:
           description: |-
-            Type of metadata.
+            Type of metadata. Required if identifier in metadata_identifies is a name".
             1. Liveboard
             2. Answers
             3. LOGICAL_TABLE for any data object such as table, worksheet or view.
@@ -11626,10 +12575,15 @@ components:
           - LOGICAL_TABLE
           type: string
         metadata_identifiers:
-          description: "Unique ID or name of metadata objects. Note: All the identifiers\
+          description: "Unique ID or name of metadata objects. Note: All the names\
             \ should belong to same metadata_type"
           items:
             type: string
+          type: array
+        metadata:
+          description: Metadata details for sharing objects.
+          items:
+            $ref: '#/components/schemas/ShareMetadataTypeInput'
           type: array
         permissions:
           description: Permission details for sharing the objects.
@@ -11637,7 +12591,8 @@ components:
             $ref: '#/components/schemas/SharePermissionsInput'
           type: array
         visualization_identifiers:
-          description: Options to specify details of Liveboard.
+          description: Options to specify details of Liveboard. First Liveboard encountered
+            in payload is considered to be the corresponding Liveboard.
           items:
             type: string
           type: array
@@ -11667,7 +12622,6 @@ components:
       required:
       - emails
       - message
-      - metadata_identifiers
       - permissions
       type: object
     createConfig_request:
@@ -11945,6 +12899,23 @@ components:
       required:
       - connection_identifier
       type: object
+    updateConnectionV2_request:
+      properties:
+        name:
+          description: Updated name of the connection.
+          type: string
+        description:
+          description: Updated description of the connection.
+          type: string
+        data_warehouse_config:
+          description: Configuration of the data warehouse in JSON.
+          type: object
+        validate:
+          default: true
+          description: Indicates whether to validate the connection details.
+          nullable: true
+          type: boolean
+      type: object
     createRole_request:
       properties:
         name:
@@ -11986,6 +12957,10 @@ components:
             - CAN_MANAGE_VERSION_CONTROL
             - THIRDPARTY_ANALYSIS
             - CAN_CREATE_CATALOG
+            - ALLOW_NON_EMBED_FULL_APP_ACCESS
+            - CAN_ACCESS_ANALYST_STUDIO
+            - CAN_MANAGE_ANALYST_STUDIO
+            - PREVIEW_DOCUMENT_SEARCH
             type: string
           type: array
       required:
@@ -12032,11 +13007,33 @@ components:
             - CAN_MANAGE_VERSION_CONTROL
             - THIRDPARTY_ANALYSIS
             - CAN_CREATE_CATALOG
+            - CAN_ACCESS_ANALYST_STUDIO
+            - CAN_MANAGE_ANALYST_STUDIO
+            - PREVIEW_DOCUMENT_SEARCH
             type: string
           type: array
       required:
       - name
       type: object
+    createSchedule_request_liveboard_options:
+      allOf:
+      - $ref: '#/components/schemas/LiveboardOptionsInput'
+      description: Options to specify details of Liveboard.
+    createSchedule_request_pdf_options:
+      allOf:
+      - $ref: '#/components/schemas/SchedulesPdfOptionsInput'
+      description: PDF layout and orientation settings. Applicable only if the `file_format`
+        is specified as `PDF`.
+    createSchedule_request_frequency:
+      allOf:
+      - $ref: '#/components/schemas/FrequencyInput'
+      description: Frequency settings for the scheduled job.
+    createSchedule_request_recipient_details:
+      allOf:
+      - $ref: '#/components/schemas/RecipientDetailsInput'
+      description: "Recipients of the scheduled job notifications. Add the GUID or\
+        \ name of the ThoughtSpot users or groups as recipients in the `principals`\
+        \ array. If a recipient is not a ThoughtSpot user, specify email address."
     createSchedule_request:
       properties:
         name:
@@ -12062,9 +13059,9 @@ components:
           - XLSX
           type: string
         liveboard_options:
-          $ref: '#/components/schemas/LiveboardOptionsInput'
+          $ref: '#/components/schemas/createSchedule_request_liveboard_options'
         pdf_options:
-          $ref: '#/components/schemas/SchedulesPdfOptionsInput'
+          $ref: '#/components/schemas/createSchedule_request_pdf_options'
         time_zone:
           default: America/Los_Angeles
           description: Time zone
@@ -12701,9 +13698,9 @@ components:
           - VST
           type: string
         frequency:
-          $ref: '#/components/schemas/FrequencyInput'
+          $ref: '#/components/schemas/createSchedule_request_frequency'
         recipient_details:
-          $ref: '#/components/schemas/RecipientDetailsInput'
+          $ref: '#/components/schemas/createSchedule_request_recipient_details'
       required:
       - description
       - metadata_identifier
@@ -12712,6 +13709,14 @@ components:
       - recipient_details
       - time_zone
       type: object
+    searchSchedules_request_sort_options:
+      allOf:
+      - $ref: '#/components/schemas/SortingOptions'
+      description: Sort options.
+    searchSchedules_request_history_runs_options:
+      allOf:
+      - $ref: '#/components/schemas/ScheduleHistoryRunsOptionsInput'
+      description: Options while fetching history runs for the schedule.
     searchSchedules_request:
       properties:
         metadata:
@@ -12729,15 +13734,33 @@ components:
           format: int32
           type: integer
         sort_options:
-          $ref: '#/components/schemas/SortingOptions'
+          $ref: '#/components/schemas/searchSchedules_request_sort_options'
         history_runs_options:
-          $ref: '#/components/schemas/ScheduleHistoryRunsOptionsInput'
+          $ref: '#/components/schemas/searchSchedules_request_history_runs_options'
         schedule_identifiers:
           description: unique ID or name of the Schedule
           items:
             type: string
           type: array
       type: object
+    updateSchedule_request_liveboard_options:
+      allOf:
+      - $ref: '#/components/schemas/LiveboardOptionsInput'
+      description: Options to specify the details of a Liveboard.
+    updateSchedule_request_pdf_options:
+      allOf:
+      - $ref: '#/components/schemas/SchedulesPdfOptionsInput'
+      description: Options for PDF export.
+    updateSchedule_request_frequency:
+      allOf:
+      - $ref: '#/components/schemas/FrequencyInput'
+      description: Frequency of the scheduled job run.
+    updateSchedule_request_recipient_details:
+      allOf:
+      - $ref: '#/components/schemas/RecipientDetailsInput'
+      description: "Recipients of the scheduled job notifications. You can add the\
+        \ ID or name of the ThoughtSpot users or groups as recipients in the `principals`\
+        \ array. If a recipient is not a ThoughtSpot user, specify email address."
     updateSchedule_request:
       properties:
         name:
@@ -12762,9 +13785,9 @@ components:
           - XLSX
           type: string
         liveboard_options:
-          $ref: '#/components/schemas/LiveboardOptionsInput'
+          $ref: '#/components/schemas/updateSchedule_request_liveboard_options'
         pdf_options:
-          $ref: '#/components/schemas/SchedulesPdfOptionsInput'
+          $ref: '#/components/schemas/updateSchedule_request_pdf_options'
         time_zone:
           description: Time zone
           enum:
@@ -13400,9 +14423,9 @@ components:
           - VST
           type: string
         frequency:
-          $ref: '#/components/schemas/FrequencyInput'
+          $ref: '#/components/schemas/updateSchedule_request_frequency'
         recipient_details:
-          $ref: '#/components/schemas/RecipientDetailsInput'
+          $ref: '#/components/schemas/updateSchedule_request_recipient_details'
         status:
           description: Status of the schedule
           enum:
@@ -13410,20 +14433,31 @@ components:
           - PAUSE
           type: string
       type: object
+    createCustomAction_request_action_details:
+      allOf:
+      - $ref: '#/components/schemas/Action_Details_Input_Create'
+      description: "Action details includes `Type` and Configuration data for Custom\
+        \ Actions, either Callback or URL is required."
+    createCustomAction_request_default_action_config:
+      allOf:
+      - $ref: '#/components/schemas/Default_Action_Config_Input_Create'
+      description: "Default Custom action configuration. This includes if the custom\
+        \ action is available on all visualizations. By default, a custom action is\
+        \ added to all visualizations and Answers."
     createCustomAction_request:
       properties:
         name:
           description: Name of the custom action. The custom action name must be unique.
           type: string
         action_details:
-          $ref: '#/components/schemas/Action_Details_Input_Create'
+          $ref: '#/components/schemas/createCustomAction_request_action_details'
         associate_metadata:
           description: Metadata objects to which the custom action needs to be associated.
           items:
             $ref: '#/components/schemas/Associate_Metadata_Input_Create'
           type: array
         default_action_config:
-          $ref: '#/components/schemas/Default_Action_Config_Input_Create'
+          $ref: '#/components/schemas/createCustomAction_request_default_action_config'
         group_identifiers:
           description: Unique ID or name of the groups that can view and access the
             custom action.
@@ -13434,17 +14468,28 @@ components:
       - action_details
       - name
       type: object
+    updateCustomAction_request_action_details:
+      allOf:
+      - $ref: '#/components/schemas/Action_Details_Input'
+      description: "Action details includes `Type` and Configuration for Custom Actions,\
+        \ either Callback or URL is required."
+    updateCustomAction_request_default_action_config:
+      allOf:
+      - $ref: '#/components/schemas/Default_Action_Config_Input'
+      description: "Default Custom action configuration. This includes if the custom\
+        \ action available on visualizations and Answers. By default, a custom action\
+        \ is added to all visualizations and Answers."
     updateCustomAction_request:
       properties:
         action_details:
-          $ref: '#/components/schemas/Action_Details_Input'
+          $ref: '#/components/schemas/updateCustomAction_request_action_details'
         associate_metadata:
           description: Metadata objects to which the custom action needs to be associated.
           items:
             $ref: '#/components/schemas/Associate_Metadata_Input'
           type: array
         default_action_config:
-          $ref: '#/components/schemas/Default_Action_Config_Input'
+          $ref: '#/components/schemas/updateCustomAction_request_default_action_config'
         group_identifiers:
           description: Unique ID or name of the groups that can view and access the
             custom action.
@@ -13625,6 +14670,21 @@ x-roles:
   tags:
   - 9.2.0.cl
   description: Roles for version 9.2.0.cl
+- name: 10.4.0.cl
+  id: 10.4.0.cl
+  tags:
+  - 10.4.0.cl
+  description: Roles for version 10.4.0.cl
+- name: 10.1.0.cl
+  id: 10.1.0.cl
+  tags:
+  - 10.1.0.cl
+  description: Roles for version 10.1.0.cl
+- name: 10.3.0.cl
+  id: 10.3.0.cl
+  tags:
+  - 10.3.0.cl
+  description: Roles for version 10.3.0.cl
 - name: 10.0.0.cl
   id: 10.0.0.cl
   tags:

@@ -9,6 +9,7 @@ All URIs are relative to *https://localhost:443*
 | [**assignTag**](ThoughtSpotRestApi.md#assignTag) | **POST** /api/rest/2.0/tags/assign |  |
 | [**changeUserPassword**](ThoughtSpotRestApi.md#changeUserPassword) | **POST** /api/rest/2.0/users/change-password |  |
 | [**commitBranch**](ThoughtSpotRestApi.md#commitBranch) | **POST** /api/rest/2.0/vcs/git/branches/commit |  |
+| [**copyObject**](ThoughtSpotRestApi.md#copyObject) | **POST** /api/rest/2.0/metadata/copyobject |  |
 | [**createConfig**](ThoughtSpotRestApi.md#createConfig) | **POST** /api/rest/2.0/vcs/git/config/create |  |
 | [**createConnection**](ThoughtSpotRestApi.md#createConnection) | **POST** /api/rest/2.0/connection/create |  |
 | [**createCustomAction**](ThoughtSpotRestApi.md#createCustomAction) | **POST** /api/rest/2.0/customization/custom-actions |  |
@@ -25,6 +26,7 @@ All URIs are relative to *https://localhost:443*
 | [**deactivateUser**](ThoughtSpotRestApi.md#deactivateUser) | **POST** /api/rest/2.0/users/deactivate |  |
 | [**deleteConfig**](ThoughtSpotRestApi.md#deleteConfig) | **POST** /api/rest/2.0/vcs/git/config/delete |  |
 | [**deleteConnection**](ThoughtSpotRestApi.md#deleteConnection) | **POST** /api/rest/2.0/connection/delete |  |
+| [**deleteConnectionV2**](ThoughtSpotRestApi.md#deleteConnectionV2) | **POST** /api/rest/2.0/connections/delete/{connection_identifier} |  |
 | [**deleteCustomAction**](ThoughtSpotRestApi.md#deleteCustomAction) | **POST** /api/rest/2.0/customization/custom-actions/{custom_action_identifier}/delete |  |
 | [**deleteDbtConnection**](ThoughtSpotRestApi.md#deleteDbtConnection) | **POST** /api/rest/2.0/dbt/{dbt_connection_identifier}/delete |  |
 | [**deleteMetadata**](ThoughtSpotRestApi.md#deleteMetadata) | **POST** /api/rest/2.0/metadata/delete |  |
@@ -39,6 +41,7 @@ All URIs are relative to *https://localhost:443*
 | [**exportAnswerReport**](ThoughtSpotRestApi.md#exportAnswerReport) | **POST** /api/rest/2.0/report/answer |  |
 | [**exportLiveboardReport**](ThoughtSpotRestApi.md#exportLiveboardReport) | **POST** /api/rest/2.0/report/liveboard |  |
 | [**exportMetadataTML**](ThoughtSpotRestApi.md#exportMetadataTML) | **POST** /api/rest/2.0/metadata/tml/export |  |
+| [**exportMetadataTMLBatched**](ThoughtSpotRestApi.md#exportMetadataTMLBatched) | **POST** /api/rest/2.0/metadata/tml/export/batch |  |
 | [**fetchAnswerData**](ThoughtSpotRestApi.md#fetchAnswerData) | **POST** /api/rest/2.0/metadata/answer/data |  |
 | [**fetchAnswerSqlQuery**](ThoughtSpotRestApi.md#fetchAnswerSqlQuery) | **POST** /api/rest/2.0/metadata/answer/sql |  |
 | [**fetchConnectionDiffStatus**](ThoughtSpotRestApi.md#fetchConnectionDiffStatus) | **POST** /api/rest/2.0/connections/fetch-connection-diff-status/{connection_identifier} |  |
@@ -79,6 +82,7 @@ All URIs are relative to *https://localhost:443*
 | [**unassignTag**](ThoughtSpotRestApi.md#unassignTag) | **POST** /api/rest/2.0/tags/unassign |  |
 | [**updateConfig**](ThoughtSpotRestApi.md#updateConfig) | **POST** /api/rest/2.0/vcs/git/config/update |  |
 | [**updateConnection**](ThoughtSpotRestApi.md#updateConnection) | **POST** /api/rest/2.0/connection/update |  |
+| [**updateConnectionV2**](ThoughtSpotRestApi.md#updateConnectionV2) | **POST** /api/rest/2.0/connections/update/{connection_identifier} |  |
 | [**updateCustomAction**](ThoughtSpotRestApi.md#updateCustomAction) | **POST** /api/rest/2.0/customization/custom-actions/{custom_action_identifier}/update |  |
 | [**updateDbtConnection**](ThoughtSpotRestApi.md#updateDbtConnection) | **POST** /api/rest/2.0/dbt/update-dbt-connection |  |
 | [**updateOrg**](ThoughtSpotRestApi.md#updateOrg) | **POST** /api/rest/2.0/orgs/{org_identifier}/update |  |
@@ -379,7 +383,7 @@ null (empty response body)
 
 
 
-  Version: 9.2.0.cl or later   Commits TML files of metadata objects to the Git branch configured on your instance.  Requires &#x60;DATAMANAGEMENT&#x60; privilege.  Before using this endpoint to push your commits:  * Enable Git integration on your instance. * Make sure the Git repository and branch details are configured on your instance.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid&#x3D;git-integration).      
+  Version: 9.2.0.cl or later   Commits TML files of metadata objects to the Git branch configured on your instance.  Requires at least edit access to objects used in the commit operation.  Before using this endpoint to push your commits:  * Enable Git integration on your instance. * Make sure the Git repository and branch details are configured on your instance.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).      
 
 ### Example
 ```java
@@ -442,6 +446,78 @@ public class Example {
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
+<a id="copyObject"></a>
+# **copyObject**
+> ResponseCopyObject copyObject(copyObjectRequest)
+
+
+
+ Makes a copy of an Answer or Liveboard saved in Atlas    Version: 10.3.0.cl or later   Creates a copy of the metadata object specified in the API request.  Requires create access to metadata objects  Upon successful execution, the API returns the id of the new object which is copied from the given object.     
+
+### Example
+```java
+// Import classes:
+import org.thoughtspot.client.ApiClient;
+import org.thoughtspot.client.ApiException;
+import org.thoughtspot.client.Configuration;
+import org.thoughtspot.client.auth.*;
+import org.thoughtspot.client.models.*;
+import org.thoughtspot.client.api.ThoughtSpotRestApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://localhost:443");
+    
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
+
+    ThoughtSpotRestApi apiInstance = new ThoughtSpotRestApi(defaultClient);
+    CopyObjectRequest copyObjectRequest = new CopyObjectRequest(); // CopyObjectRequest | 
+    try {
+      ResponseCopyObject result = apiInstance.copyObject(copyObjectRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ThoughtSpotRestApi#copyObject");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **copyObjectRequest** | [**CopyObjectRequest**](CopyObjectRequest.md)|  | |
+
+### Return type
+
+[**ResponseCopyObject**](ResponseCopyObject.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Successfully created a copy of the object |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **404** | Object not found |  -  |
 | **500** | Unexpected error |  -  |
 
 <a id="createConfig"></a>
@@ -876,7 +952,7 @@ public class Example {
 
 
 
-  Version: 9.0.0.cl or later   Creates a tag object.  Tags are labels that identify a metadata object. For example, you can create a tag to designate subject areas, such as sales, HR, marketing, and finance.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+  Version: 9.0.0.cl or later   Creates a tag object.  Tags are labels that identify a metadata object. For example, you can create a tag to designate subject areas, such as sales, HR, marketing, and finance.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the &#x60;TAGMANAGEMENT&#x60; (**Can manage tags**) privilege is required to create, edit, and delete tags.      
 
 ### Example
 ```java
@@ -1574,6 +1650,76 @@ null (empty response body)
 | **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |
 
+<a id="deleteConnectionV2"></a>
+# **deleteConnectionV2**
+> deleteConnectionV2(connectionIdentifier)
+
+
+
+  Version: 10.0.0.cl or later   Deletes a connection object.  **Note**: If a connection has dependent objects, make sure you remove its associations before the delete operation.  Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) and edit permissions to the connection object, or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+
+### Example
+```java
+// Import classes:
+import org.thoughtspot.client.ApiClient;
+import org.thoughtspot.client.ApiException;
+import org.thoughtspot.client.Configuration;
+import org.thoughtspot.client.auth.*;
+import org.thoughtspot.client.models.*;
+import org.thoughtspot.client.api.ThoughtSpotRestApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://localhost:443");
+    
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
+
+    ThoughtSpotRestApi apiInstance = new ThoughtSpotRestApi(defaultClient);
+    String connectionIdentifier = "connectionIdentifier_example"; // String | Unique ID or name of the connection.
+    try {
+      apiInstance.deleteConnectionV2(connectionIdentifier);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ThoughtSpotRestApi#deleteConnectionV2");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **connectionIdentifier** | **String**| Unique ID or name of the connection. | |
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | Connection successfully deleted. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
 <a id="deleteCustomAction"></a>
 # **deleteCustomAction**
 > deleteCustomAction(customActionIdentifier)
@@ -2000,7 +2146,7 @@ null (empty response body)
 
 
 
-  Version: 9.0.0.cl or later   Deletes a tag object from the ThoughtSpot system  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+  Version: 9.0.0.cl or later   Deletes a tag object from the ThoughtSpot system  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the &#x60;TAGMANAGEMENT&#x60; (**Can manage tags**) privilege is required to create, edit, and delete tags.      
 
 ### Example
 ```java
@@ -2210,7 +2356,7 @@ null (empty response body)
 
 
 
-  Version: 9.2.0.cl or later   Allows you to deploy a commit and publish TML content to your ThoughtSpot instance.  Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege.  The API deploys the head of the branch unless a &#x60;commit_id&#x60; is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.      
+  Version: 9.2.0.cl or later   Allows you to deploy a commit and publish TML content to your ThoughtSpot instance.  Requires at least edit access to the objects used in the deploy operation.  The API deploys the head of the branch unless a &#x60;commit_id&#x60; is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).      
 
 ### Example
 ```java
@@ -2277,7 +2423,7 @@ public class Example {
 
 <a id="downloadConnectionMetadataChanges"></a>
 # **downloadConnectionMetadataChanges**
-> downloadConnectionMetadataChanges(connectionIdentifier)
+> File downloadConnectionMetadataChanges(connectionIdentifier)
 
 
 
@@ -2305,7 +2451,8 @@ public class Example {
     ThoughtSpotRestApi apiInstance = new ThoughtSpotRestApi(defaultClient);
     String connectionIdentifier = "connectionIdentifier_example"; // String | GUID of the connection
     try {
-      apiInstance.downloadConnectionMetadataChanges(connectionIdentifier);
+      File result = apiInstance.downloadConnectionMetadataChanges(connectionIdentifier);
+      System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling ThoughtSpotRestApi#downloadConnectionMetadataChanges");
       System.err.println("Status code: " + e.getCode());
@@ -2325,7 +2472,7 @@ public class Example {
 
 ### Return type
 
-null (empty response body)
+[**File**](File.md)
 
 ### Authorization
 
@@ -2347,7 +2494,7 @@ null (empty response body)
 
 <a id="exportAnswerReport"></a>
 # **exportAnswerReport**
-> exportAnswerReport(exportAnswerReportRequest)
+> File exportAnswerReport(exportAnswerReportRequest)
 
 
 
@@ -2375,7 +2522,8 @@ public class Example {
     ThoughtSpotRestApi apiInstance = new ThoughtSpotRestApi(defaultClient);
     ExportAnswerReportRequest exportAnswerReportRequest = new ExportAnswerReportRequest(); // ExportAnswerReportRequest | 
     try {
-      apiInstance.exportAnswerReport(exportAnswerReportRequest);
+      File result = apiInstance.exportAnswerReport(exportAnswerReportRequest);
+      System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling ThoughtSpotRestApi#exportAnswerReport");
       System.err.println("Status code: " + e.getCode());
@@ -2395,7 +2543,7 @@ public class Example {
 
 ### Return type
 
-null (empty response body)
+[**File**](File.md)
 
 ### Authorization
 
@@ -2417,7 +2565,7 @@ null (empty response body)
 
 <a id="exportLiveboardReport"></a>
 # **exportLiveboardReport**
-> exportLiveboardReport(exportLiveboardReportRequest)
+> File exportLiveboardReport(exportLiveboardReportRequest)
 
 
 
@@ -2445,7 +2593,8 @@ public class Example {
     ThoughtSpotRestApi apiInstance = new ThoughtSpotRestApi(defaultClient);
     ExportLiveboardReportRequest exportLiveboardReportRequest = new ExportLiveboardReportRequest(); // ExportLiveboardReportRequest | 
     try {
-      apiInstance.exportLiveboardReport(exportLiveboardReportRequest);
+      File result = apiInstance.exportLiveboardReport(exportLiveboardReportRequest);
+      System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling ThoughtSpotRestApi#exportLiveboardReport");
       System.err.println("Status code: " + e.getCode());
@@ -2465,7 +2614,7 @@ public class Example {
 
 ### Return type
 
-null (empty response body)
+[**File**](File.md)
 
 ### Authorization
 
@@ -2537,6 +2686,77 @@ public class Example {
 ### Return type
 
 **List&lt;Object&gt;**
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Export TMLs of specified metadata objects is successful. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
+<a id="exportMetadataTMLBatched"></a>
+# **exportMetadataTMLBatched**
+> Object exportMetadataTMLBatched(exportMetadataTMLBatchedRequest)
+
+
+
+ Version: 10.1.0.cl or later 
+
+### Example
+```java
+// Import classes:
+import org.thoughtspot.client.ApiClient;
+import org.thoughtspot.client.ApiException;
+import org.thoughtspot.client.Configuration;
+import org.thoughtspot.client.auth.*;
+import org.thoughtspot.client.models.*;
+import org.thoughtspot.client.api.ThoughtSpotRestApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://localhost:443");
+    
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
+
+    ThoughtSpotRestApi apiInstance = new ThoughtSpotRestApi(defaultClient);
+    ExportMetadataTMLBatchedRequest exportMetadataTMLBatchedRequest = new ExportMetadataTMLBatchedRequest(); // ExportMetadataTMLBatchedRequest | 
+    try {
+      Object result = apiInstance.exportMetadataTMLBatched(exportMetadataTMLBatchedRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ThoughtSpotRestApi#exportMetadataTMLBatched");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **exportMetadataTMLBatchedRequest** | [**ExportMetadataTMLBatchedRequest**](ExportMetadataTMLBatchedRequest.md)|  | |
+
+### Return type
+
+**Object**
 
 ### Authorization
 
@@ -2917,7 +3137,7 @@ public class Example {
 
 
 
-  Version: 9.0.0.cl or later   Fetches security audit logs.    Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  By default, the API retrieves logs for the last 24 hours. You can set a custom duration in EPOCH time. Make sure the log duration specified in your API request doesn’t exceed 24 hours. If you must fetch logs for a longer time range, modify the duration and make multiple sequential API requests.  Upon successful execution, the API returns logs with the following information: * timestamp of the event * event ID * event type * name and GUID of the user * IP address of ThoughtSpot instance  For more information about security events returned in the API response, see [Security events](https://developers.thoughtspot.com/docs/logs-api#_security_events).      
+  Version: 9.0.0.cl or later   Fetches security audit logs.    Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  By default, the API retrieves logs for the last 24 hours. You can set a custom duration in EPOCH time. Make sure the log duration specified in your API request doesn’t exceed 24 hours. If you must fetch logs for a longer time range, modify the duration and make multiple sequential API requests.  Upon successful execution, the API returns logs with the following information: * timestamp of the event * event ID * event type * name and GUID of the user * IP address of ThoughtSpot instance  For more information about security events returned in the API response, see [Security events](https://developers.thoughtspot.com/docs/audit-logs#_security_events).      
 
 ### Example
 ```java
@@ -4086,7 +4306,7 @@ null (empty response body)
 
 
 
-  Version: 9.2.0.cl or later   Reverts TML objects to a previous commit specified in the API request.  Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege.  In the API request, specify the &#x60;commit_id&#x60;. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.  By default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.      
+  Version: 9.2.0.cl or later   Reverts TML objects to a previous commit specified in the API request.  Requires at least edit access to objects.  In the API request, specify the &#x60;commit_id&#x60;. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.  By default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).      
 
 ### Example
 ```java
@@ -5356,6 +5576,78 @@ null (empty response body)
 | **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |
 
+<a id="updateConnectionV2"></a>
+# **updateConnectionV2**
+> updateConnectionV2(connectionIdentifier, updateConnectionV2Request)
+
+
+
+  Version: 10.0.0.cl or later   Updates a connection object.  Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) and edit permissions to the connection object, or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  To update a connection object, pass these parameters in your API request:  1. GUID of the connection object. 2. If you are updating tables or database schema of a connection object:    a. Add the updated JSON map of metadata with database, schema, and tables in &#x60;data_warehouse_config&#x60;.    b. Set &#x60;validate&#x60; to &#x60;true&#x60;. 3. If you are updating a configuration attribute, connection name, or description, you can set &#x60;validate&#x60; to &#x60;false&#x60;.      
+
+### Example
+```java
+// Import classes:
+import org.thoughtspot.client.ApiClient;
+import org.thoughtspot.client.ApiException;
+import org.thoughtspot.client.Configuration;
+import org.thoughtspot.client.auth.*;
+import org.thoughtspot.client.models.*;
+import org.thoughtspot.client.api.ThoughtSpotRestApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://localhost:443");
+    
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
+
+    ThoughtSpotRestApi apiInstance = new ThoughtSpotRestApi(defaultClient);
+    String connectionIdentifier = "connectionIdentifier_example"; // String | Unique ID or name of the connection.
+    UpdateConnectionV2Request updateConnectionV2Request = new UpdateConnectionV2Request(); // UpdateConnectionV2Request | 
+    try {
+      apiInstance.updateConnectionV2(connectionIdentifier, updateConnectionV2Request);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ThoughtSpotRestApi#updateConnectionV2");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **connectionIdentifier** | **String**| Unique ID or name of the connection. | |
+| **updateConnectionV2Request** | [**UpdateConnectionV2Request**](UpdateConnectionV2Request.md)|  | |
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | Connection successfully updated. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
 <a id="updateCustomAction"></a>
 # **updateCustomAction**
 > updateCustomAction(customActionIdentifier, updateCustomActionRequest)
@@ -5792,7 +6084,7 @@ null (empty response body)
 
 
 
-  Version: 9.0.0.cl or later   Updates a tag object.  You can modify the &#x60;name&#x60; and &#x60;color&#x60; properties of a tag object.    Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+  Version: 9.0.0.cl or later   Updates a tag object.  You can modify the &#x60;name&#x60; and &#x60;color&#x60; properties of a tag object.    Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the &#x60;TAGMANAGEMENT&#x60; (**Can manage tags**) privilege is required to create, edit, and delete tags.      
 
 ### Example
 ```java

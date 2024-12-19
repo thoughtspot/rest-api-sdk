@@ -31,7 +31,7 @@ export class UpdateUserRequest {
     */
     'email'?: string;
     /**
-    * Current status of the user account. The `SUSPENDED` user state indicates a transitional state applicable to IAMv2 users only.
+    * Current status of the user account.
     */
     'account_status'?: UpdateUserRequestAccountStatusEnum;
     /**
@@ -199,7 +199,7 @@ export class UpdateUserRequest {
 
 
 export type UpdateUserRequestVisibilityEnum = "SHARABLE" | "NON_SHARABLE" ;
-export type UpdateUserRequestAccountStatusEnum = "ACTIVE" | "INACTIVE" | "EXPIRED" | "LOCKED" | "PENDING" | "SUSPENDED" ;
+export type UpdateUserRequestAccountStatusEnum = "ACTIVE" | "INACTIVE" | "EXPIRED" | "LOCKED" | "PENDING" ;
 export type UpdateUserRequestAccountTypeEnum = "LOCAL_USER" | "LDAP_USER" | "SAML_USER" | "OIDC_USER" | "REMOTE_USER" ;
 export type UpdateUserRequestOperationEnum = "ADD" | "REMOVE" | "REPLACE" ;
 export type UpdateUserRequestPreferredLocaleEnum = "en-CA" | "en-GB" | "en-US" | "de-DE" | "ja-JP" | "zh-CN" | "pt-BR" | "fr-FR" | "fr-CA" | "es-US" | "da-DK" | "es-ES" | "fi-FI" | "sv-SE" | "nb-NO" | "pt-PT" | "nl-NL" | "it-IT" | "ru-RU" | "en-IN" ;

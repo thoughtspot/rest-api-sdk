@@ -47,5 +47,5 @@ export class ShareMetadataTypeInput {
 }
 
 
-export type ShareMetadataTypeInputTypeEnum = "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE" | "LOGICAL_COLUMN" ;
+export type ShareMetadataTypeInputTypeEnum = "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE" ;
 

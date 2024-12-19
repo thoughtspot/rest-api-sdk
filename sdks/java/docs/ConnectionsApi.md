@@ -6,10 +6,12 @@ All URIs are relative to *https://localhost:443*
 |------------- | ------------- | -------------|
 | [**createConnection**](ConnectionsApi.md#createConnection) | **POST** /api/rest/2.0/connection/create |  |
 | [**deleteConnection**](ConnectionsApi.md#deleteConnection) | **POST** /api/rest/2.0/connection/delete |  |
+| [**deleteConnectionV2**](ConnectionsApi.md#deleteConnectionV2) | **POST** /api/rest/2.0/connections/delete/{connection_identifier} |  |
 | [**downloadConnectionMetadataChanges**](ConnectionsApi.md#downloadConnectionMetadataChanges) | **POST** /api/rest/2.0/connections/download-connection-metadata-changes/{connection_identifier} |  |
 | [**fetchConnectionDiffStatus**](ConnectionsApi.md#fetchConnectionDiffStatus) | **POST** /api/rest/2.0/connections/fetch-connection-diff-status/{connection_identifier} |  |
 | [**searchConnection**](ConnectionsApi.md#searchConnection) | **POST** /api/rest/2.0/connection/search |  |
 | [**updateConnection**](ConnectionsApi.md#updateConnection) | **POST** /api/rest/2.0/connection/update |  |
+| [**updateConnectionV2**](ConnectionsApi.md#updateConnectionV2) | **POST** /api/rest/2.0/connections/update/{connection_identifier} |  |
 
 
 <a id="createConnection"></a>
@@ -153,9 +155,79 @@ null (empty response body)
 | **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |
 
+<a id="deleteConnectionV2"></a>
+# **deleteConnectionV2**
+> deleteConnectionV2(connectionIdentifier)
+
+
+
+  Version: 10.0.0.cl or later   Deletes a connection object.  **Note**: If a connection has dependent objects, make sure you remove its associations before the delete operation.  Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) and edit permissions to the connection object, or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+
+### Example
+```java
+// Import classes:
+import org.thoughtspot.client.ApiClient;
+import org.thoughtspot.client.ApiException;
+import org.thoughtspot.client.Configuration;
+import org.thoughtspot.client.auth.*;
+import org.thoughtspot.client.models.*;
+import org.thoughtspot.client.api.ConnectionsApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://localhost:443");
+    
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
+
+    ConnectionsApi apiInstance = new ConnectionsApi(defaultClient);
+    String connectionIdentifier = "connectionIdentifier_example"; // String | Unique ID or name of the connection.
+    try {
+      apiInstance.deleteConnectionV2(connectionIdentifier);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ConnectionsApi#deleteConnectionV2");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **connectionIdentifier** | **String**| Unique ID or name of the connection. | |
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | Connection successfully deleted. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
 <a id="downloadConnectionMetadataChanges"></a>
 # **downloadConnectionMetadataChanges**
-> downloadConnectionMetadataChanges(connectionIdentifier)
+> File downloadConnectionMetadataChanges(connectionIdentifier)
 
 
 
@@ -183,7 +255,8 @@ public class Example {
     ConnectionsApi apiInstance = new ConnectionsApi(defaultClient);
     String connectionIdentifier = "connectionIdentifier_example"; // String | GUID of the connection
     try {
-      apiInstance.downloadConnectionMetadataChanges(connectionIdentifier);
+      File result = apiInstance.downloadConnectionMetadataChanges(connectionIdentifier);
+      System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling ConnectionsApi#downloadConnectionMetadataChanges");
       System.err.println("Status code: " + e.getCode());
@@ -203,7 +276,7 @@ public class Example {
 
 ### Return type
 
-null (empty response body)
+[**File**](File.md)
 
 ### Authorization
 
@@ -412,6 +485,78 @@ public class Example {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **updateConnectionRequest** | [**UpdateConnectionRequest**](UpdateConnectionRequest.md)|  | |
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | Connection successfully updated. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
+<a id="updateConnectionV2"></a>
+# **updateConnectionV2**
+> updateConnectionV2(connectionIdentifier, updateConnectionV2Request)
+
+
+
+  Version: 10.0.0.cl or later   Updates a connection object.  Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) and edit permissions to the connection object, or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  To update a connection object, pass these parameters in your API request:  1. GUID of the connection object. 2. If you are updating tables or database schema of a connection object:    a. Add the updated JSON map of metadata with database, schema, and tables in &#x60;data_warehouse_config&#x60;.    b. Set &#x60;validate&#x60; to &#x60;true&#x60;. 3. If you are updating a configuration attribute, connection name, or description, you can set &#x60;validate&#x60; to &#x60;false&#x60;.      
+
+### Example
+```java
+// Import classes:
+import org.thoughtspot.client.ApiClient;
+import org.thoughtspot.client.ApiException;
+import org.thoughtspot.client.Configuration;
+import org.thoughtspot.client.auth.*;
+import org.thoughtspot.client.models.*;
+import org.thoughtspot.client.api.ConnectionsApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://localhost:443");
+    
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
+
+    ConnectionsApi apiInstance = new ConnectionsApi(defaultClient);
+    String connectionIdentifier = "connectionIdentifier_example"; // String | Unique ID or name of the connection.
+    UpdateConnectionV2Request updateConnectionV2Request = new UpdateConnectionV2Request(); // UpdateConnectionV2Request | 
+    try {
+      apiInstance.updateConnectionV2(connectionIdentifier, updateConnectionV2Request);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ConnectionsApi#updateConnectionV2");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **connectionIdentifier** | **String**| Unique ID or name of the connection. | |
+| **updateConnectionV2Request** | [**UpdateConnectionV2Request**](UpdateConnectionV2Request.md)|  | |
 
 ### Return type
 

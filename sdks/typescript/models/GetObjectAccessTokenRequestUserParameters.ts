@@ -10,10 +10,10 @@
  * Do not edit the class manually.
  */
 
-import { RuntimeFilters } from '../models/RuntimeFilters';
-import { RuntimeParameters } from '../models/RuntimeParameters';
-import { RuntimeSorts } from '../models/RuntimeSorts';
 import { UserObject } from '../models/UserObject';
+import { UserParameters } from '../models/UserParameters';
+import { UserRuntimeFilters } from '../models/UserRuntimeFilters';
+import { UserRuntimeSorts } from '../models/UserRuntimeSorts';
 import { HttpFile } from '../http/http';
 
 /**
@@ -24,15 +24,15 @@ export class GetObjectAccessTokenRequestUserParameters {
     /**
     * Objects to apply the User_Runtime_Filters.  Examples to set the `runtime_filters` : ```json { \"column_name\": \"Color\", \"operator\": \"EQ\", \"values\": [\"red\"], \"persist\": false } ```
     */
-    'runtime_filters'?: Array<RuntimeFilters> | null;
+    'runtime_filters'?: Array<UserRuntimeFilters> | null;
     /**
     * Objects to apply the User_Runtime_Sorts.  Examples to set the `runtime_sorts` : ```json { \"column_name\": \"Color\", \"order\": \"ASC\", \"persist\": false } ```
     */
-    'runtime_sorts'?: Array<RuntimeSorts> | null;
+    'runtime_sorts'?: Array<UserRuntimeSorts> | null;
     /**
     * Objects to apply the Runtime_Parameters.  Examples to set the `parameters` : ```json { \"name\": \"Color\", \"values\": [\"Blue\"], \"persist\": false } ```
     */
-    'parameters'?: Array<RuntimeParameters> | null;
+    'parameters'?: Array<UserParameters> | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -46,19 +46,19 @@ export class GetObjectAccessTokenRequestUserParameters {
         {
             "name": "runtime_filters",
             "baseName": "runtime_filters",
-            "type": "Array<RuntimeFilters>",
+            "type": "Array<UserRuntimeFilters>",
             "format": ""
         },
         {
             "name": "runtime_sorts",
             "baseName": "runtime_sorts",
-            "type": "Array<RuntimeSorts>",
+            "type": "Array<UserRuntimeSorts>",
             "format": ""
         },
         {
             "name": "parameters",
             "baseName": "parameters",
-            "type": "Array<RuntimeParameters>",
+            "type": "Array<UserParameters>",
             "format": ""
         }    ];
 

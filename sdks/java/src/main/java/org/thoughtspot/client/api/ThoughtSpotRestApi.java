@@ -35,6 +35,7 @@ import org.thoughtspot.client.model.ChangeUserPasswordRequest;
 import org.thoughtspot.client.model.CommitBranchRequest;
 import org.thoughtspot.client.model.CommitHistoryResponse;
 import org.thoughtspot.client.model.CommitResponse;
+import org.thoughtspot.client.model.CopyObjectRequest;
 import org.thoughtspot.client.model.CreateConfigRequest;
 import org.thoughtspot.client.model.CreateConnectionRequest;
 import org.thoughtspot.client.model.CreateConnectionResponse;
@@ -58,6 +59,7 @@ import org.thoughtspot.client.model.DeployResponse;
 import org.thoughtspot.client.model.ErrorResponse;
 import org.thoughtspot.client.model.ExportAnswerReportRequest;
 import org.thoughtspot.client.model.ExportLiveboardReportRequest;
+import org.thoughtspot.client.model.ExportMetadataTMLBatchedRequest;
 import org.thoughtspot.client.model.ExportMetadataTMLRequest;
 import org.thoughtspot.client.model.FetchAnswerDataRequest;
 import org.thoughtspot.client.model.FetchAnswerSqlQueryRequest;
@@ -67,6 +69,7 @@ import org.thoughtspot.client.model.FetchLiveboardSqlQueryRequest;
 import org.thoughtspot.client.model.FetchLogsRequest;
 import org.thoughtspot.client.model.FetchPermissionsOfPrincipalsRequest;
 import org.thoughtspot.client.model.FetchPermissionsOnMetadataRequest;
+import java.io.File;
 import org.thoughtspot.client.model.ForceLogoutUsersRequest;
 import org.thoughtspot.client.model.GetFullAccessTokenRequest;
 import org.thoughtspot.client.model.GetObjectAccessTokenRequest;
@@ -86,6 +89,7 @@ import org.thoughtspot.client.model.PermissionOfPrincipalsResponse;
 import org.thoughtspot.client.model.RepoConfigObject;
 import org.thoughtspot.client.model.ResetUserPasswordRequest;
 import org.thoughtspot.client.model.ResponseActivationURL;
+import org.thoughtspot.client.model.ResponseCopyObject;
 import org.thoughtspot.client.model.ResponseCustomAction;
 import org.thoughtspot.client.model.ResponseSchedule;
 import org.thoughtspot.client.model.RevertCommitRequest;
@@ -116,6 +120,7 @@ import org.thoughtspot.client.model.Token;
 import org.thoughtspot.client.model.TokenValidationResponse;
 import org.thoughtspot.client.model.UpdateConfigRequest;
 import org.thoughtspot.client.model.UpdateConnectionRequest;
+import org.thoughtspot.client.model.UpdateConnectionV2Request;
 import org.thoughtspot.client.model.UpdateCustomActionRequest;
 import org.thoughtspot.client.model.UpdateDbtConnectionRequest;
 import org.thoughtspot.client.model.UpdateOrgRequest;
@@ -792,7 +797,7 @@ public class ThoughtSpotRestApi {
 
     /**
      * 
-     *   Version: 9.2.0.cl or later   Commits TML files of metadata objects to the Git branch configured on your instance.  Requires &#x60;DATAMANAGEMENT&#x60; privilege.  Before using this endpoint to push your commits:  * Enable Git integration on your instance. * Make sure the Git repository and branch details are configured on your instance.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid&#x3D;git-integration).      
+     *   Version: 9.2.0.cl or later   Commits TML files of metadata objects to the Git branch configured on your instance.  Requires at least edit access to objects used in the commit operation.  Before using this endpoint to push your commits:  * Enable Git integration on your instance. * Make sure the Git repository and branch details are configured on your instance.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).      
      * @param commitBranchRequest  (required)
      * @return CommitResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -813,7 +818,7 @@ public class ThoughtSpotRestApi {
 
     /**
      * 
-     *   Version: 9.2.0.cl or later   Commits TML files of metadata objects to the Git branch configured on your instance.  Requires &#x60;DATAMANAGEMENT&#x60; privilege.  Before using this endpoint to push your commits:  * Enable Git integration on your instance. * Make sure the Git repository and branch details are configured on your instance.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid&#x3D;git-integration).      
+     *   Version: 9.2.0.cl or later   Commits TML files of metadata objects to the Git branch configured on your instance.  Requires at least edit access to objects used in the commit operation.  Before using this endpoint to push your commits:  * Enable Git integration on your instance. * Make sure the Git repository and branch details are configured on your instance.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).      
      * @param commitBranchRequest  (required)
      * @return ApiResponse&lt;CommitResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -835,7 +840,7 @@ public class ThoughtSpotRestApi {
 
     /**
      *  (asynchronously)
-     *   Version: 9.2.0.cl or later   Commits TML files of metadata objects to the Git branch configured on your instance.  Requires &#x60;DATAMANAGEMENT&#x60; privilege.  Before using this endpoint to push your commits:  * Enable Git integration on your instance. * Make sure the Git repository and branch details are configured on your instance.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid&#x3D;git-integration).      
+     *   Version: 9.2.0.cl or later   Commits TML files of metadata objects to the Git branch configured on your instance.  Requires at least edit access to objects used in the commit operation.  Before using this endpoint to push your commits:  * Enable Git integration on your instance. * Make sure the Git repository and branch details are configured on your instance.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).      
      * @param commitBranchRequest  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -854,6 +859,149 @@ public class ThoughtSpotRestApi {
 
         okhttp3.Call localVarCall = commitBranchValidateBeforeCall(commitBranchRequest, _callback);
         Type localVarReturnType = new TypeToken<CommitResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for copyObject
+     * @param copyObjectRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Successfully created a copy of the object </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Object not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call copyObjectCall(CopyObjectRequest copyObjectRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = copyObjectRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/metadata/copyobject";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call copyObjectValidateBeforeCall(CopyObjectRequest copyObjectRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'copyObjectRequest' is set
+        if (copyObjectRequest == null) {
+            throw new ApiException("Missing the required parameter 'copyObjectRequest' when calling copyObject(Async)");
+        }
+
+        return copyObjectCall(copyObjectRequest, _callback);
+
+    }
+
+    /**
+     * 
+     *  Makes a copy of an Answer or Liveboard saved in Atlas    Version: 10.3.0.cl or later   Creates a copy of the metadata object specified in the API request.  Requires create access to metadata objects  Upon successful execution, the API returns the id of the new object which is copied from the given object.     
+     * @param copyObjectRequest  (required)
+     * @return ResponseCopyObject
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Successfully created a copy of the object </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Object not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ResponseCopyObject copyObject(CopyObjectRequest copyObjectRequest) throws ApiException {
+        ApiResponse<ResponseCopyObject> localVarResp = copyObjectWithHttpInfo(copyObjectRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * 
+     *  Makes a copy of an Answer or Liveboard saved in Atlas    Version: 10.3.0.cl or later   Creates a copy of the metadata object specified in the API request.  Requires create access to metadata objects  Upon successful execution, the API returns the id of the new object which is copied from the given object.     
+     * @param copyObjectRequest  (required)
+     * @return ApiResponse&lt;ResponseCopyObject&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Successfully created a copy of the object </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Object not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<ResponseCopyObject> copyObjectWithHttpInfo(CopyObjectRequest copyObjectRequest) throws ApiException {
+        okhttp3.Call localVarCall = copyObjectValidateBeforeCall(copyObjectRequest, null);
+        Type localVarReturnType = new TypeToken<ResponseCopyObject>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     *  (asynchronously)
+     *  Makes a copy of an Answer or Liveboard saved in Atlas    Version: 10.3.0.cl or later   Creates a copy of the metadata object specified in the API request.  Requires create access to metadata objects  Upon successful execution, the API returns the id of the new object which is copied from the given object.     
+     * @param copyObjectRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Successfully created a copy of the object </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Object not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call copyObjectAsync(CopyObjectRequest copyObjectRequest, final ApiCallback<ResponseCopyObject> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = copyObjectValidateBeforeCall(copyObjectRequest, _callback);
+        Type localVarReturnType = new TypeToken<ResponseCopyObject>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -1765,7 +1913,7 @@ public class ThoughtSpotRestApi {
 
     /**
      * 
-     *   Version: 9.0.0.cl or later   Creates a tag object.  Tags are labels that identify a metadata object. For example, you can create a tag to designate subject areas, such as sales, HR, marketing, and finance.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+     *   Version: 9.0.0.cl or later   Creates a tag object.  Tags are labels that identify a metadata object. For example, you can create a tag to designate subject areas, such as sales, HR, marketing, and finance.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the &#x60;TAGMANAGEMENT&#x60; (**Can manage tags**) privilege is required to create, edit, and delete tags.      
      * @param createTagRequest  (required)
      * @return Tag
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -1786,7 +1934,7 @@ public class ThoughtSpotRestApi {
 
     /**
      * 
-     *   Version: 9.0.0.cl or later   Creates a tag object.  Tags are labels that identify a metadata object. For example, you can create a tag to designate subject areas, such as sales, HR, marketing, and finance.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+     *   Version: 9.0.0.cl or later   Creates a tag object.  Tags are labels that identify a metadata object. For example, you can create a tag to designate subject areas, such as sales, HR, marketing, and finance.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the &#x60;TAGMANAGEMENT&#x60; (**Can manage tags**) privilege is required to create, edit, and delete tags.      
      * @param createTagRequest  (required)
      * @return ApiResponse&lt;Tag&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -1808,7 +1956,7 @@ public class ThoughtSpotRestApi {
 
     /**
      *  (asynchronously)
-     *   Version: 9.0.0.cl or later   Creates a tag object.  Tags are labels that identify a metadata object. For example, you can create a tag to designate subject areas, such as sales, HR, marketing, and finance.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+     *   Version: 9.0.0.cl or later   Creates a tag object.  Tags are labels that identify a metadata object. For example, you can create a tag to designate subject areas, such as sales, HR, marketing, and finance.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the &#x60;TAGMANAGEMENT&#x60; (**Can manage tags**) privilege is required to create, edit, and delete tags.      
      * @param createTagRequest  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -3064,6 +3212,141 @@ public class ThoughtSpotRestApi {
         return localVarCall;
     }
     /**
+     * Build call for deleteConnectionV2
+     * @param connectionIdentifier Unique ID or name of the connection. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 204 </td><td> Connection successfully deleted. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call deleteConnectionV2Call(String connectionIdentifier, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/connections/delete/{connection_identifier}"
+            .replace("{" + "connection_identifier" + "}", localVarApiClient.escapeString(connectionIdentifier.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call deleteConnectionV2ValidateBeforeCall(String connectionIdentifier, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'connectionIdentifier' is set
+        if (connectionIdentifier == null) {
+            throw new ApiException("Missing the required parameter 'connectionIdentifier' when calling deleteConnectionV2(Async)");
+        }
+
+        return deleteConnectionV2Call(connectionIdentifier, _callback);
+
+    }
+
+    /**
+     * 
+     *   Version: 10.0.0.cl or later   Deletes a connection object.  **Note**: If a connection has dependent objects, make sure you remove its associations before the delete operation.  Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) and edit permissions to the connection object, or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+     * @param connectionIdentifier Unique ID or name of the connection. (required)
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 204 </td><td> Connection successfully deleted. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public void deleteConnectionV2(String connectionIdentifier) throws ApiException {
+        deleteConnectionV2WithHttpInfo(connectionIdentifier);
+    }
+
+    /**
+     * 
+     *   Version: 10.0.0.cl or later   Deletes a connection object.  **Note**: If a connection has dependent objects, make sure you remove its associations before the delete operation.  Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) and edit permissions to the connection object, or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+     * @param connectionIdentifier Unique ID or name of the connection. (required)
+     * @return ApiResponse&lt;Void&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 204 </td><td> Connection successfully deleted. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<Void> deleteConnectionV2WithHttpInfo(String connectionIdentifier) throws ApiException {
+        okhttp3.Call localVarCall = deleteConnectionV2ValidateBeforeCall(connectionIdentifier, null);
+        return localVarApiClient.execute(localVarCall);
+    }
+
+    /**
+     *  (asynchronously)
+     *   Version: 10.0.0.cl or later   Deletes a connection object.  **Note**: If a connection has dependent objects, make sure you remove its associations before the delete operation.  Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) and edit permissions to the connection object, or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+     * @param connectionIdentifier Unique ID or name of the connection. (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 204 </td><td> Connection successfully deleted. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call deleteConnectionV2Async(String connectionIdentifier, final ApiCallback<Void> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = deleteConnectionV2ValidateBeforeCall(connectionIdentifier, _callback);
+        localVarApiClient.executeAsync(localVarCall, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for deleteCustomAction
      * @param customActionIdentifier Unique ID or name of the custom action. (required)
      * @param _callback Callback for upload/download progress
@@ -3947,7 +4230,7 @@ public class ThoughtSpotRestApi {
 
     /**
      * 
-     *   Version: 9.0.0.cl or later   Deletes a tag object from the ThoughtSpot system  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+     *   Version: 9.0.0.cl or later   Deletes a tag object from the ThoughtSpot system  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the &#x60;TAGMANAGEMENT&#x60; (**Can manage tags**) privilege is required to create, edit, and delete tags.      
      * @param tagIdentifier Tag identifier Tag name or Tag id. (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -3966,7 +4249,7 @@ public class ThoughtSpotRestApi {
 
     /**
      * 
-     *   Version: 9.0.0.cl or later   Deletes a tag object from the ThoughtSpot system  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+     *   Version: 9.0.0.cl or later   Deletes a tag object from the ThoughtSpot system  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the &#x60;TAGMANAGEMENT&#x60; (**Can manage tags**) privilege is required to create, edit, and delete tags.      
      * @param tagIdentifier Tag identifier Tag name or Tag id. (required)
      * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -3987,7 +4270,7 @@ public class ThoughtSpotRestApi {
 
     /**
      *  (asynchronously)
-     *   Version: 9.0.0.cl or later   Deletes a tag object from the ThoughtSpot system  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+     *   Version: 9.0.0.cl or later   Deletes a tag object from the ThoughtSpot system  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the &#x60;TAGMANAGEMENT&#x60; (**Can manage tags**) privilege is required to create, edit, and delete tags.      
      * @param tagIdentifier Tag identifier Tag name or Tag id. (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -4352,7 +4635,7 @@ public class ThoughtSpotRestApi {
 
     /**
      * 
-     *   Version: 9.2.0.cl or later   Allows you to deploy a commit and publish TML content to your ThoughtSpot instance.  Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege.  The API deploys the head of the branch unless a &#x60;commit_id&#x60; is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.      
+     *   Version: 9.2.0.cl or later   Allows you to deploy a commit and publish TML content to your ThoughtSpot instance.  Requires at least edit access to the objects used in the deploy operation.  The API deploys the head of the branch unless a &#x60;commit_id&#x60; is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).      
      * @param deployCommitRequest  (required)
      * @return List&lt;DeployResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -4373,7 +4656,7 @@ public class ThoughtSpotRestApi {
 
     /**
      * 
-     *   Version: 9.2.0.cl or later   Allows you to deploy a commit and publish TML content to your ThoughtSpot instance.  Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege.  The API deploys the head of the branch unless a &#x60;commit_id&#x60; is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.      
+     *   Version: 9.2.0.cl or later   Allows you to deploy a commit and publish TML content to your ThoughtSpot instance.  Requires at least edit access to the objects used in the deploy operation.  The API deploys the head of the branch unless a &#x60;commit_id&#x60; is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).      
      * @param deployCommitRequest  (required)
      * @return ApiResponse&lt;List&lt;DeployResponse&gt;&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -4395,7 +4678,7 @@ public class ThoughtSpotRestApi {
 
     /**
      *  (asynchronously)
-     *   Version: 9.2.0.cl or later   Allows you to deploy a commit and publish TML content to your ThoughtSpot instance.  Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege.  The API deploys the head of the branch unless a &#x60;commit_id&#x60; is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.      
+     *   Version: 9.2.0.cl or later   Allows you to deploy a commit and publish TML content to your ThoughtSpot instance.  Requires at least edit access to the objects used in the deploy operation.  The API deploys the head of the branch unless a &#x60;commit_id&#x60; is specified in the API request. If the branch name is not defined in the request, the default branch is considered for deploying commits.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).      
      * @param deployCommitRequest  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -4494,6 +4777,7 @@ public class ThoughtSpotRestApi {
      * 
      *   Version: 9.9.0.cl or later   Exports the difference in connection metadata between CDW and ThoughtSpot  Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege  To download the connection metadata difference between ThoughtSpot and CDW, pass the connection GUID as &#x60;connection_identifier&#x60; in the API request.      
      * @param connectionIdentifier GUID of the connection (required)
+     * @return File
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -4505,15 +4789,16 @@ public class ThoughtSpotRestApi {
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public void downloadConnectionMetadataChanges(String connectionIdentifier) throws ApiException {
-        downloadConnectionMetadataChangesWithHttpInfo(connectionIdentifier);
+    public File downloadConnectionMetadataChanges(String connectionIdentifier) throws ApiException {
+        ApiResponse<File> localVarResp = downloadConnectionMetadataChangesWithHttpInfo(connectionIdentifier);
+        return localVarResp.getData();
     }
 
     /**
      * 
      *   Version: 9.9.0.cl or later   Exports the difference in connection metadata between CDW and ThoughtSpot  Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege  To download the connection metadata difference between ThoughtSpot and CDW, pass the connection GUID as &#x60;connection_identifier&#x60; in the API request.      
      * @param connectionIdentifier GUID of the connection (required)
-     * @return ApiResponse&lt;Void&gt;
+     * @return ApiResponse&lt;File&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -4525,9 +4810,10 @@ public class ThoughtSpotRestApi {
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Void> downloadConnectionMetadataChangesWithHttpInfo(String connectionIdentifier) throws ApiException {
+    public ApiResponse<File> downloadConnectionMetadataChangesWithHttpInfo(String connectionIdentifier) throws ApiException {
         okhttp3.Call localVarCall = downloadConnectionMetadataChangesValidateBeforeCall(connectionIdentifier, null);
-        return localVarApiClient.execute(localVarCall);
+        Type localVarReturnType = new TypeToken<File>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
@@ -4547,10 +4833,11 @@ public class ThoughtSpotRestApi {
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call downloadConnectionMetadataChangesAsync(String connectionIdentifier, final ApiCallback<Void> _callback) throws ApiException {
+    public okhttp3.Call downloadConnectionMetadataChangesAsync(String connectionIdentifier, final ApiCallback<File> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = downloadConnectionMetadataChangesValidateBeforeCall(connectionIdentifier, _callback);
-        localVarApiClient.executeAsync(localVarCall, _callback);
+        Type localVarReturnType = new TypeToken<File>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
@@ -4630,6 +4917,7 @@ public class ThoughtSpotRestApi {
      * 
      *   Version: 9.0.0.cl or later   Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.  Requires &#x60;DATADOWNLOADING&#x60; (**Can download data**) privilege.  #### Usage guidelines  In the request body, the GUID or name of the Answer and set &#x60;file_format&#x60;. The default file format is CSV.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  The &#x60;record_size&#x60; attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).        
      * @param exportAnswerReportRequest  (required)
+     * @return File
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -4641,15 +4929,16 @@ public class ThoughtSpotRestApi {
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public void exportAnswerReport(ExportAnswerReportRequest exportAnswerReportRequest) throws ApiException {
-        exportAnswerReportWithHttpInfo(exportAnswerReportRequest);
+    public File exportAnswerReport(ExportAnswerReportRequest exportAnswerReportRequest) throws ApiException {
+        ApiResponse<File> localVarResp = exportAnswerReportWithHttpInfo(exportAnswerReportRequest);
+        return localVarResp.getData();
     }
 
     /**
      * 
      *   Version: 9.0.0.cl or later   Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.  Requires &#x60;DATADOWNLOADING&#x60; (**Can download data**) privilege.  #### Usage guidelines  In the request body, the GUID or name of the Answer and set &#x60;file_format&#x60;. The default file format is CSV.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  The &#x60;record_size&#x60; attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).        
      * @param exportAnswerReportRequest  (required)
-     * @return ApiResponse&lt;Void&gt;
+     * @return ApiResponse&lt;File&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -4661,9 +4950,10 @@ public class ThoughtSpotRestApi {
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Void> exportAnswerReportWithHttpInfo(ExportAnswerReportRequest exportAnswerReportRequest) throws ApiException {
+    public ApiResponse<File> exportAnswerReportWithHttpInfo(ExportAnswerReportRequest exportAnswerReportRequest) throws ApiException {
         okhttp3.Call localVarCall = exportAnswerReportValidateBeforeCall(exportAnswerReportRequest, null);
-        return localVarApiClient.execute(localVarCall);
+        Type localVarReturnType = new TypeToken<File>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
@@ -4683,10 +4973,11 @@ public class ThoughtSpotRestApi {
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call exportAnswerReportAsync(ExportAnswerReportRequest exportAnswerReportRequest, final ApiCallback<Void> _callback) throws ApiException {
+    public okhttp3.Call exportAnswerReportAsync(ExportAnswerReportRequest exportAnswerReportRequest, final ApiCallback<File> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = exportAnswerReportValidateBeforeCall(exportAnswerReportRequest, _callback);
-        localVarApiClient.executeAsync(localVarCall, _callback);
+        Type localVarReturnType = new TypeToken<File>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
@@ -4766,6 +5057,7 @@ public class ThoughtSpotRestApi {
      * 
      *   Version: 9.0.0.cl or later   Exports the data from a Liveboard and its visualization in a given file format. You can download the Liveboard data as a PDF, PNG, CSV, or XLSX file.  Requires &#x60;DATADOWNLOADING&#x60; (**Can download data**) privilege.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default &#x60;file_format&#x60; is CSV. For PDF file format, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  To include unsaved changes in the report, pass the &#x60;transient_pinboard_content&#x60; script generated from the &#x60;getExportRequestForCurrentPinboard&#x60; method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).        
      * @param exportLiveboardReportRequest  (required)
+     * @return File
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -4777,15 +5069,16 @@ public class ThoughtSpotRestApi {
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public void exportLiveboardReport(ExportLiveboardReportRequest exportLiveboardReportRequest) throws ApiException {
-        exportLiveboardReportWithHttpInfo(exportLiveboardReportRequest);
+    public File exportLiveboardReport(ExportLiveboardReportRequest exportLiveboardReportRequest) throws ApiException {
+        ApiResponse<File> localVarResp = exportLiveboardReportWithHttpInfo(exportLiveboardReportRequest);
+        return localVarResp.getData();
     }
 
     /**
      * 
      *   Version: 9.0.0.cl or later   Exports the data from a Liveboard and its visualization in a given file format. You can download the Liveboard data as a PDF, PNG, CSV, or XLSX file.  Requires &#x60;DATADOWNLOADING&#x60; (**Can download data**) privilege.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default &#x60;file_format&#x60; is CSV. For PDF file format, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  To include unsaved changes in the report, pass the &#x60;transient_pinboard_content&#x60; script generated from the &#x60;getExportRequestForCurrentPinboard&#x60; method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).        
      * @param exportLiveboardReportRequest  (required)
-     * @return ApiResponse&lt;Void&gt;
+     * @return ApiResponse&lt;File&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -4797,9 +5090,10 @@ public class ThoughtSpotRestApi {
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Void> exportLiveboardReportWithHttpInfo(ExportLiveboardReportRequest exportLiveboardReportRequest) throws ApiException {
+    public ApiResponse<File> exportLiveboardReportWithHttpInfo(ExportLiveboardReportRequest exportLiveboardReportRequest) throws ApiException {
         okhttp3.Call localVarCall = exportLiveboardReportValidateBeforeCall(exportLiveboardReportRequest, null);
-        return localVarApiClient.execute(localVarCall);
+        Type localVarReturnType = new TypeToken<File>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
@@ -4819,10 +5113,11 @@ public class ThoughtSpotRestApi {
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call exportLiveboardReportAsync(ExportLiveboardReportRequest exportLiveboardReportRequest, final ApiCallback<Void> _callback) throws ApiException {
+    public okhttp3.Call exportLiveboardReportAsync(ExportLiveboardReportRequest exportLiveboardReportRequest, final ApiCallback<File> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = exportLiveboardReportValidateBeforeCall(exportLiveboardReportRequest, _callback);
-        localVarApiClient.executeAsync(localVarCall, _callback);
+        Type localVarReturnType = new TypeToken<File>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
@@ -4961,6 +5256,145 @@ public class ThoughtSpotRestApi {
 
         okhttp3.Call localVarCall = exportMetadataTMLValidateBeforeCall(exportMetadataTMLRequest, _callback);
         Type localVarReturnType = new TypeToken<List<Object>>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for exportMetadataTMLBatched
+     * @param exportMetadataTMLBatchedRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Export TMLs of specified metadata objects is successful. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call exportMetadataTMLBatchedCall(ExportMetadataTMLBatchedRequest exportMetadataTMLBatchedRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = exportMetadataTMLBatchedRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/metadata/tml/export/batch";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call exportMetadataTMLBatchedValidateBeforeCall(ExportMetadataTMLBatchedRequest exportMetadataTMLBatchedRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'exportMetadataTMLBatchedRequest' is set
+        if (exportMetadataTMLBatchedRequest == null) {
+            throw new ApiException("Missing the required parameter 'exportMetadataTMLBatchedRequest' when calling exportMetadataTMLBatched(Async)");
+        }
+
+        return exportMetadataTMLBatchedCall(exportMetadataTMLBatchedRequest, _callback);
+
+    }
+
+    /**
+     * 
+     *  Version: 10.1.0.cl or later 
+     * @param exportMetadataTMLBatchedRequest  (required)
+     * @return Object
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Export TMLs of specified metadata objects is successful. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public Object exportMetadataTMLBatched(ExportMetadataTMLBatchedRequest exportMetadataTMLBatchedRequest) throws ApiException {
+        ApiResponse<Object> localVarResp = exportMetadataTMLBatchedWithHttpInfo(exportMetadataTMLBatchedRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * 
+     *  Version: 10.1.0.cl or later 
+     * @param exportMetadataTMLBatchedRequest  (required)
+     * @return ApiResponse&lt;Object&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Export TMLs of specified metadata objects is successful. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<Object> exportMetadataTMLBatchedWithHttpInfo(ExportMetadataTMLBatchedRequest exportMetadataTMLBatchedRequest) throws ApiException {
+        okhttp3.Call localVarCall = exportMetadataTMLBatchedValidateBeforeCall(exportMetadataTMLBatchedRequest, null);
+        Type localVarReturnType = new TypeToken<Object>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     *  (asynchronously)
+     *  Version: 10.1.0.cl or later 
+     * @param exportMetadataTMLBatchedRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Export TMLs of specified metadata objects is successful. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call exportMetadataTMLBatchedAsync(ExportMetadataTMLBatchedRequest exportMetadataTMLBatchedRequest, final ApiCallback<Object> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = exportMetadataTMLBatchedValidateBeforeCall(exportMetadataTMLBatchedRequest, _callback);
+        Type localVarReturnType = new TypeToken<Object>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -5733,7 +6167,7 @@ public class ThoughtSpotRestApi {
 
     /**
      * 
-     *   Version: 9.0.0.cl or later   Fetches security audit logs.    Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  By default, the API retrieves logs for the last 24 hours. You can set a custom duration in EPOCH time. Make sure the log duration specified in your API request doesn’t exceed 24 hours. If you must fetch logs for a longer time range, modify the duration and make multiple sequential API requests.  Upon successful execution, the API returns logs with the following information: * timestamp of the event * event ID * event type * name and GUID of the user * IP address of ThoughtSpot instance  For more information about security events returned in the API response, see [Security events](https://developers.thoughtspot.com/docs/logs-api#_security_events).      
+     *   Version: 9.0.0.cl or later   Fetches security audit logs.    Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  By default, the API retrieves logs for the last 24 hours. You can set a custom duration in EPOCH time. Make sure the log duration specified in your API request doesn’t exceed 24 hours. If you must fetch logs for a longer time range, modify the duration and make multiple sequential API requests.  Upon successful execution, the API returns logs with the following information: * timestamp of the event * event ID * event type * name and GUID of the user * IP address of ThoughtSpot instance  For more information about security events returned in the API response, see [Security events](https://developers.thoughtspot.com/docs/audit-logs#_security_events).      
      * @param fetchLogsRequest  (required)
      * @return List&lt;LogResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -5754,7 +6188,7 @@ public class ThoughtSpotRestApi {
 
     /**
      * 
-     *   Version: 9.0.0.cl or later   Fetches security audit logs.    Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  By default, the API retrieves logs for the last 24 hours. You can set a custom duration in EPOCH time. Make sure the log duration specified in your API request doesn’t exceed 24 hours. If you must fetch logs for a longer time range, modify the duration and make multiple sequential API requests.  Upon successful execution, the API returns logs with the following information: * timestamp of the event * event ID * event type * name and GUID of the user * IP address of ThoughtSpot instance  For more information about security events returned in the API response, see [Security events](https://developers.thoughtspot.com/docs/logs-api#_security_events).      
+     *   Version: 9.0.0.cl or later   Fetches security audit logs.    Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  By default, the API retrieves logs for the last 24 hours. You can set a custom duration in EPOCH time. Make sure the log duration specified in your API request doesn’t exceed 24 hours. If you must fetch logs for a longer time range, modify the duration and make multiple sequential API requests.  Upon successful execution, the API returns logs with the following information: * timestamp of the event * event ID * event type * name and GUID of the user * IP address of ThoughtSpot instance  For more information about security events returned in the API response, see [Security events](https://developers.thoughtspot.com/docs/audit-logs#_security_events).      
      * @param fetchLogsRequest  (required)
      * @return ApiResponse&lt;List&lt;LogResponse&gt;&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -5776,7 +6210,7 @@ public class ThoughtSpotRestApi {
 
     /**
      *  (asynchronously)
-     *   Version: 9.0.0.cl or later   Fetches security audit logs.    Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  By default, the API retrieves logs for the last 24 hours. You can set a custom duration in EPOCH time. Make sure the log duration specified in your API request doesn’t exceed 24 hours. If you must fetch logs for a longer time range, modify the duration and make multiple sequential API requests.  Upon successful execution, the API returns logs with the following information: * timestamp of the event * event ID * event type * name and GUID of the user * IP address of ThoughtSpot instance  For more information about security events returned in the API response, see [Security events](https://developers.thoughtspot.com/docs/logs-api#_security_events).      
+     *   Version: 9.0.0.cl or later   Fetches security audit logs.    Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  By default, the API retrieves logs for the last 24 hours. You can set a custom duration in EPOCH time. Make sure the log duration specified in your API request doesn’t exceed 24 hours. If you must fetch logs for a longer time range, modify the duration and make multiple sequential API requests.  Upon successful execution, the API returns logs with the following information: * timestamp of the event * event ID * event type * name and GUID of the user * IP address of ThoughtSpot instance  For more information about security events returned in the API response, see [Security events](https://developers.thoughtspot.com/docs/audit-logs#_security_events).      
      * @param fetchLogsRequest  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -8027,7 +8461,7 @@ public class ThoughtSpotRestApi {
 
     /**
      * 
-     *   Version: 9.2.0.cl or later   Reverts TML objects to a previous commit specified in the API request.  Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege.  In the API request, specify the &#x60;commit_id&#x60;. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.  By default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.      
+     *   Version: 9.2.0.cl or later   Reverts TML objects to a previous commit specified in the API request.  Requires at least edit access to objects.  In the API request, specify the &#x60;commit_id&#x60;. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.  By default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).      
      * @param commitId Commit id to which the object should be reverted (required)
      * @param revertCommitRequest  (required)
      * @return RevertResponse
@@ -8049,7 +8483,7 @@ public class ThoughtSpotRestApi {
 
     /**
      * 
-     *   Version: 9.2.0.cl or later   Reverts TML objects to a previous commit specified in the API request.  Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege.  In the API request, specify the &#x60;commit_id&#x60;. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.  By default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.      
+     *   Version: 9.2.0.cl or later   Reverts TML objects to a previous commit specified in the API request.  Requires at least edit access to objects.  In the API request, specify the &#x60;commit_id&#x60;. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.  By default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).      
      * @param commitId Commit id to which the object should be reverted (required)
      * @param revertCommitRequest  (required)
      * @return ApiResponse&lt;RevertResponse&gt;
@@ -8072,7 +8506,7 @@ public class ThoughtSpotRestApi {
 
     /**
      *  (asynchronously)
-     *   Version: 9.2.0.cl or later   Reverts TML objects to a previous commit specified in the API request.  Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege.  In the API request, specify the &#x60;commit_id&#x60;. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.  By default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.      
+     *   Version: 9.2.0.cl or later   Reverts TML objects to a previous commit specified in the API request.  Requires at least edit access to objects.  In the API request, specify the &#x60;commit_id&#x60;. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.  By default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).      
      * @param commitId Commit id to which the object should be reverted (required)
      * @param revertCommitRequest  (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -10443,6 +10877,151 @@ public class ThoughtSpotRestApi {
         return localVarCall;
     }
     /**
+     * Build call for updateConnectionV2
+     * @param connectionIdentifier Unique ID or name of the connection. (required)
+     * @param updateConnectionV2Request  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 204 </td><td> Connection successfully updated. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call updateConnectionV2Call(String connectionIdentifier, UpdateConnectionV2Request updateConnectionV2Request, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = updateConnectionV2Request;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/connections/update/{connection_identifier}"
+            .replace("{" + "connection_identifier" + "}", localVarApiClient.escapeString(connectionIdentifier.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call updateConnectionV2ValidateBeforeCall(String connectionIdentifier, UpdateConnectionV2Request updateConnectionV2Request, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'connectionIdentifier' is set
+        if (connectionIdentifier == null) {
+            throw new ApiException("Missing the required parameter 'connectionIdentifier' when calling updateConnectionV2(Async)");
+        }
+
+        // verify the required parameter 'updateConnectionV2Request' is set
+        if (updateConnectionV2Request == null) {
+            throw new ApiException("Missing the required parameter 'updateConnectionV2Request' when calling updateConnectionV2(Async)");
+        }
+
+        return updateConnectionV2Call(connectionIdentifier, updateConnectionV2Request, _callback);
+
+    }
+
+    /**
+     * 
+     *   Version: 10.0.0.cl or later   Updates a connection object.  Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) and edit permissions to the connection object, or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  To update a connection object, pass these parameters in your API request:  1. GUID of the connection object. 2. If you are updating tables or database schema of a connection object:    a. Add the updated JSON map of metadata with database, schema, and tables in &#x60;data_warehouse_config&#x60;.    b. Set &#x60;validate&#x60; to &#x60;true&#x60;. 3. If you are updating a configuration attribute, connection name, or description, you can set &#x60;validate&#x60; to &#x60;false&#x60;.      
+     * @param connectionIdentifier Unique ID or name of the connection. (required)
+     * @param updateConnectionV2Request  (required)
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 204 </td><td> Connection successfully updated. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public void updateConnectionV2(String connectionIdentifier, UpdateConnectionV2Request updateConnectionV2Request) throws ApiException {
+        updateConnectionV2WithHttpInfo(connectionIdentifier, updateConnectionV2Request);
+    }
+
+    /**
+     * 
+     *   Version: 10.0.0.cl or later   Updates a connection object.  Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) and edit permissions to the connection object, or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  To update a connection object, pass these parameters in your API request:  1. GUID of the connection object. 2. If you are updating tables or database schema of a connection object:    a. Add the updated JSON map of metadata with database, schema, and tables in &#x60;data_warehouse_config&#x60;.    b. Set &#x60;validate&#x60; to &#x60;true&#x60;. 3. If you are updating a configuration attribute, connection name, or description, you can set &#x60;validate&#x60; to &#x60;false&#x60;.      
+     * @param connectionIdentifier Unique ID or name of the connection. (required)
+     * @param updateConnectionV2Request  (required)
+     * @return ApiResponse&lt;Void&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 204 </td><td> Connection successfully updated. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<Void> updateConnectionV2WithHttpInfo(String connectionIdentifier, UpdateConnectionV2Request updateConnectionV2Request) throws ApiException {
+        okhttp3.Call localVarCall = updateConnectionV2ValidateBeforeCall(connectionIdentifier, updateConnectionV2Request, null);
+        return localVarApiClient.execute(localVarCall);
+    }
+
+    /**
+     *  (asynchronously)
+     *   Version: 10.0.0.cl or later   Updates a connection object.  Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) and edit permissions to the connection object, or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  To update a connection object, pass these parameters in your API request:  1. GUID of the connection object. 2. If you are updating tables or database schema of a connection object:    a. Add the updated JSON map of metadata with database, schema, and tables in &#x60;data_warehouse_config&#x60;.    b. Set &#x60;validate&#x60; to &#x60;true&#x60;. 3. If you are updating a configuration attribute, connection name, or description, you can set &#x60;validate&#x60; to &#x60;false&#x60;.      
+     * @param connectionIdentifier Unique ID or name of the connection. (required)
+     * @param updateConnectionV2Request  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 204 </td><td> Connection successfully updated. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call updateConnectionV2Async(String connectionIdentifier, UpdateConnectionV2Request updateConnectionV2Request, final ApiCallback<Void> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = updateConnectionV2ValidateBeforeCall(connectionIdentifier, updateConnectionV2Request, _callback);
+        localVarApiClient.executeAsync(localVarCall, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for updateCustomAction
      * @param customActionIdentifier Unique ID or name of the custom action. (required)
      * @param updateCustomActionRequest  (required)
@@ -11381,7 +11960,7 @@ public class ThoughtSpotRestApi {
 
     /**
      * 
-     *   Version: 9.0.0.cl or later   Updates a tag object.  You can modify the &#x60;name&#x60; and &#x60;color&#x60; properties of a tag object.    Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+     *   Version: 9.0.0.cl or later   Updates a tag object.  You can modify the &#x60;name&#x60; and &#x60;color&#x60; properties of a tag object.    Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the &#x60;TAGMANAGEMENT&#x60; (**Can manage tags**) privilege is required to create, edit, and delete tags.      
      * @param tagIdentifier Name or Id of the tag. (required)
      * @param updateTagRequest  (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -11401,7 +11980,7 @@ public class ThoughtSpotRestApi {
 
     /**
      * 
-     *   Version: 9.0.0.cl or later   Updates a tag object.  You can modify the &#x60;name&#x60; and &#x60;color&#x60; properties of a tag object.    Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+     *   Version: 9.0.0.cl or later   Updates a tag object.  You can modify the &#x60;name&#x60; and &#x60;color&#x60; properties of a tag object.    Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the &#x60;TAGMANAGEMENT&#x60; (**Can manage tags**) privilege is required to create, edit, and delete tags.      
      * @param tagIdentifier Name or Id of the tag. (required)
      * @param updateTagRequest  (required)
      * @return ApiResponse&lt;Void&gt;
@@ -11423,7 +12002,7 @@ public class ThoughtSpotRestApi {
 
     /**
      *  (asynchronously)
-     *   Version: 9.0.0.cl or later   Updates a tag object.  You can modify the &#x60;name&#x60; and &#x60;color&#x60; properties of a tag object.    Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+     *   Version: 9.0.0.cl or later   Updates a tag object.  You can modify the &#x60;name&#x60; and &#x60;color&#x60; properties of a tag object.    Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the &#x60;TAGMANAGEMENT&#x60; (**Can manage tags**) privilege is required to create, edit, and delete tags.      
      * @param tagIdentifier Name or Id of the tag. (required)
      * @param updateTagRequest  (required)
      * @param _callback The callback to be executed when the API call finishes

@@ -50,7 +50,7 @@ import org.thoughtspot.client.JSON;
 /**
  * SearchDataRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-08T10:47:55.743445Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-11-06T10:15:19.022933Z[Etc/UTC]")
 public class SearchDataRequest {
   public static final String SERIALIZED_NAME_QUERY_STRING = "query_string";
   @SerializedName(SERIALIZED_NAME_QUERY_STRING)
@@ -61,7 +61,7 @@ public class SearchDataRequest {
   private String logicalTableIdentifier;
 
   /**
-   * JSON output format. By default, the API returns full data in the JSON.
+   * JSON output in compact or full format. The FULL option is available in 9.12.5.cl or later.
    */
   @JsonAdapter(DataFormatEnum.Adapter.class)
   public enum DataFormatEnum {
@@ -183,7 +183,7 @@ public class SearchDataRequest {
   }
 
    /**
-   * JSON output format. By default, the API returns full data in the JSON.
+   * JSON output in compact or full format. The FULL option is available in 9.12.5.cl or later.
    * @return dataFormat
   **/
   @javax.annotation.Nullable

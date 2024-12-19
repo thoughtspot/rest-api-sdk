@@ -23,6 +23,7 @@ import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import org.openapitools.jackson.nullable.JsonNullable;
 import org.thoughtspot.client.model.UserObject;
 
 import com.google.gson.Gson;
@@ -53,7 +54,7 @@ import org.thoughtspot.client.JSON;
 /**
  * Objects to apply the User_Runtime_Sorts.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-08T10:47:55.743445Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-11-06T10:15:19.022933Z[Etc/UTC]")
 public class UserRuntimeSorts {
   public static final String SERIALIZED_NAME_COLUMN_NAME = "column_name";
   @SerializedName(SERIALIZED_NAME_COLUMN_NAME)
@@ -89,7 +90,7 @@ public class UserRuntimeSorts {
           return b;
         }
       }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+      return null;
     }
 
     public static class Adapter extends TypeAdapter<OrderEnum> {
@@ -170,7 +171,7 @@ public class UserRuntimeSorts {
   }
 
    /**
-   * Flag to persist the runtime sorts.
+   * Flag to persist the runtime sorts.    Version: 9.12.0.cl or later 
    * @return persist
   **/
   @javax.annotation.Nullable
@@ -229,9 +230,20 @@ public class UserRuntimeSorts {
         Objects.equals(this.objects, userRuntimeSorts.objects);
   }
 
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
+  }
+
   @Override
   public int hashCode() {
     return Objects.hash(columnName, order, persist, objects);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override

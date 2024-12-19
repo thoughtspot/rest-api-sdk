@@ -24,7 +24,7 @@
 |**favoriteMetadata** | [**List&lt;FavoriteMetadataInput&gt;**](FavoriteMetadataInput.md) | Metadata objects which are assigned as favorites of the user. |  [optional] |
 |**recordOffset** | **Integer** | The starting record number from where the records should be included. |  [optional] |
 |**recordSize** | **Integer** | The number of records that should be included. |  [optional] |
-|**sortOptions** | [**SortOptions**](SortOptions.md) |  |  [optional] |
+|**sortOptions** | [**SearchUsersRequestSortOptions**](SearchUsersRequestSortOptions.md) |  |  [optional] |
 |**roleIdentifiers** | **List&lt;String&gt;** | Filters by the role assigned to the user. |  [optional] |
 |**includeFavoriteMetadata** | **Boolean** | Indicates if the user&#39;s favorite objects should be displayed. |  [optional] |
 
@@ -74,6 +74,10 @@
 | CAN_MANAGE_WORKSHEET_VIEWS_TABLES | &quot;CAN_MANAGE_WORKSHEET_VIEWS_TABLES&quot; |
 | CAN_MANAGE_VERSION_CONTROL | &quot;CAN_MANAGE_VERSION_CONTROL&quot; |
 | THIRDPARTY_ANALYSIS | &quot;THIRDPARTY_ANALYSIS&quot; |
+| ALLOW_NON_EMBED_FULL_APP_ACCESS | &quot;ALLOW_NON_EMBED_FULL_APP_ACCESS&quot; |
+| CAN_ACCESS_ANALYST_STUDIO | &quot;CAN_ACCESS_ANALYST_STUDIO&quot; |
+| CAN_MANAGE_ANALYST_STUDIO | &quot;CAN_MANAGE_ANALYST_STUDIO&quot; |
+| PREVIEW_DOCUMENT_SEARCH | &quot;PREVIEW_DOCUMENT_SEARCH&quot; |
 
 
 

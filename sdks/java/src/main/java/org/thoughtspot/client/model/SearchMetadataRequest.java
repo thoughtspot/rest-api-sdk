@@ -25,10 +25,10 @@ import java.util.ArrayList;
 import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
 import org.thoughtspot.client.model.ExcludeMetadataListItemInput;
-import org.thoughtspot.client.model.FavoriteObjectOptionsInput;
 import org.thoughtspot.client.model.MetadataListItemInput;
-import org.thoughtspot.client.model.MetadataSearchSortOptions;
 import org.thoughtspot.client.model.PermissionInput;
+import org.thoughtspot.client.model.SearchMetadataRequestFavoriteObjectOptions;
+import org.thoughtspot.client.model.SearchMetadataRequestSortOptions;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -58,7 +58,7 @@ import org.thoughtspot.client.JSON;
 /**
  * SearchMetadataRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-08T10:47:55.743445Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-11-06T10:15:19.022933Z[Etc/UTC]")
 public class SearchMetadataRequest {
   public static final String SERIALIZED_NAME_METADATA = "metadata";
   @SerializedName(SERIALIZED_NAME_METADATA)
@@ -129,7 +129,7 @@ public class SearchMetadataRequest {
 
   public static final String SERIALIZED_NAME_FAVORITE_OBJECT_OPTIONS = "favorite_object_options";
   @SerializedName(SERIALIZED_NAME_FAVORITE_OBJECT_OPTIONS)
-  private FavoriteObjectOptionsInput favoriteObjectOptions;
+  private SearchMetadataRequestFavoriteObjectOptions favoriteObjectOptions;
 
   public static final String SERIALIZED_NAME_INCLUDE_AUTO_CREATED_OBJECTS = "include_auto_created_objects";
   @SerializedName(SERIALIZED_NAME_INCLUDE_AUTO_CREATED_OBJECTS)
@@ -181,7 +181,7 @@ public class SearchMetadataRequest {
 
   public static final String SERIALIZED_NAME_SORT_OPTIONS = "sort_options";
   @SerializedName(SERIALIZED_NAME_SORT_OPTIONS)
-  private MetadataSearchSortOptions sortOptions;
+  private SearchMetadataRequestSortOptions sortOptions;
 
   public static final String SERIALIZED_NAME_TAG_IDENTIFIERS = "tag_identifiers";
   @SerializedName(SERIALIZED_NAME_TAG_IDENTIFIERS)
@@ -331,7 +331,7 @@ public class SearchMetadataRequest {
   }
 
 
-  public SearchMetadataRequest favoriteObjectOptions(FavoriteObjectOptionsInput favoriteObjectOptions) {
+  public SearchMetadataRequest favoriteObjectOptions(SearchMetadataRequestFavoriteObjectOptions favoriteObjectOptions) {
     
     this.favoriteObjectOptions = favoriteObjectOptions;
     return this;
@@ -342,12 +342,12 @@ public class SearchMetadataRequest {
    * @return favoriteObjectOptions
   **/
   @javax.annotation.Nullable
-  public FavoriteObjectOptionsInput getFavoriteObjectOptions() {
+  public SearchMetadataRequestFavoriteObjectOptions getFavoriteObjectOptions() {
     return favoriteObjectOptions;
   }
 
 
-  public void setFavoriteObjectOptions(FavoriteObjectOptionsInput favoriteObjectOptions) {
+  public void setFavoriteObjectOptions(SearchMetadataRequestFavoriteObjectOptions favoriteObjectOptions) {
     this.favoriteObjectOptions = favoriteObjectOptions;
   }
 
@@ -612,7 +612,7 @@ public class SearchMetadataRequest {
   }
 
 
-  public SearchMetadataRequest sortOptions(MetadataSearchSortOptions sortOptions) {
+  public SearchMetadataRequest sortOptions(SearchMetadataRequestSortOptions sortOptions) {
     
     this.sortOptions = sortOptions;
     return this;
@@ -623,12 +623,12 @@ public class SearchMetadataRequest {
    * @return sortOptions
   **/
   @javax.annotation.Nullable
-  public MetadataSearchSortOptions getSortOptions() {
+  public SearchMetadataRequestSortOptions getSortOptions() {
     return sortOptions;
   }
 
 
-  public void setSortOptions(MetadataSearchSortOptions sortOptions) {
+  public void setSortOptions(SearchMetadataRequestSortOptions sortOptions) {
     this.sortOptions = sortOptions;
   }
 
@@ -876,7 +876,7 @@ public class SearchMetadataRequest {
       }
       // validate the optional field `favorite_object_options`
       if (jsonObj.get("favorite_object_options") != null && !jsonObj.get("favorite_object_options").isJsonNull()) {
-        FavoriteObjectOptionsInput.validateJsonObject(jsonObj.getAsJsonObject("favorite_object_options"));
+        SearchMetadataRequestFavoriteObjectOptions.validateJsonObject(jsonObj.getAsJsonObject("favorite_object_options"));
       }
       // ensure the optional json data is an array if present
       if (jsonObj.get("modified_by_user_identifiers") != null && !jsonObj.get("modified_by_user_identifiers").isJsonArray()) {
@@ -884,7 +884,7 @@ public class SearchMetadataRequest {
       }
       // validate the optional field `sort_options`
       if (jsonObj.get("sort_options") != null && !jsonObj.get("sort_options").isJsonNull()) {
-        MetadataSearchSortOptions.validateJsonObject(jsonObj.getAsJsonObject("sort_options"));
+        SearchMetadataRequestSortOptions.validateJsonObject(jsonObj.getAsJsonObject("sort_options"));
       }
       // ensure the optional json data is an array if present
       if (jsonObj.get("tag_identifiers") != null && !jsonObj.get("tag_identifiers").isJsonArray()) {

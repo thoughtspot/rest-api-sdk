@@ -24,8 +24,8 @@
 |**preferredLocale** | [**PreferredLocaleEnum**](#PreferredLocaleEnum) | Locale for the user. |  [optional] |
 |**extendedProperties** | **Object** | Properties for the user |  [optional] |
 |**extendedPreferences** | **Object** | Preferences for the user |  [optional] |
-|**triggerWelcomeEmail** | **Boolean** | Flag to indicate whether welcome email should be sent to user |  [optional] |
-|**triggerActivationEmail** | **Boolean** | Flag to indicate whether activation email should be sent to user |  [optional] |
+|**triggerWelcomeEmail** | **Boolean** | Flag to indicate whether welcome email should be sent to user. This parameter is applied only on clusters on which IAM is disabled. |  [optional] |
+|**triggerActivationEmail** | **Boolean** | Flag to indicate whether activation email should be sent to user. |  [optional] |
 
 
 

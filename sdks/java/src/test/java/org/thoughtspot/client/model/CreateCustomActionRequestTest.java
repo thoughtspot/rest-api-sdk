@@ -21,9 +21,9 @@ import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import org.thoughtspot.client.model.ActionDetailsInputCreate;
 import org.thoughtspot.client.model.AssociateMetadataInputCreate;
-import org.thoughtspot.client.model.DefaultActionConfigInputCreate;
+import org.thoughtspot.client.model.CreateCustomActionRequestActionDetails;
+import org.thoughtspot.client.model.CreateCustomActionRequestDefaultActionConfig;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 

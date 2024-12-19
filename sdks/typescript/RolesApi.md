@@ -13,7 +13,7 @@ Method | HTTP request | Description
 # **createRole**
 > RoleResponse createRole(createRoleRequest)
 
- Creates a Role. Requires cluster Administration or Role Administration privileges.    Version: 9.5.0.cl or later   Creates a Role object in ThoughtSpot.  Available only if [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance. To create a Role, the `ROLE_ADMINISTRATION` (**Can manage roles**) privilege is required.      
+Creates a Role. Requires cluster Administration or Role Administration privileges.    Version: 9.5.0.cl or later 
 
 ### Example
 
@@ -79,7 +79,7 @@ Name | Type | Description  | Notes
 # **deleteRole**
 > void deleteRole()
 
- Deletes a Role. Requires cluster Administration or Role Administration privileges.    Version: 9.5.0.cl or later   Deletes a Role object from the ThoughtSpot system.  Available only if [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance. To delete a Role, the `ROLE_ADMINISTRATION` (**Can manage roles**) privilege is required.      
+Deletes a Role. Requires cluster Administration or Role Administration privileges.    Version: 9.5.0.cl or later 
 
 ### Example
 
@@ -139,7 +139,7 @@ Name | Type | Description  | Notes
 # **searchRoles**
 > Array<SearchRoleResponse> searchRoles(searchRolesRequest)
 
- Gets Roles configured on a ThoughtSpot instance. Requires cluster Administration, Role Administration or Group Administration privileges.    Version: 9.5.0.cl or later   Gets a list of Role objects from the ThoughtSpot system.  Available if [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance. To search for Roles, the `ROLE_ADMINISTRATION` (**Can manage roles**) privilege is required.  To get details of a specific Role object, specify the GUID or name. You can also filter the API response based on user group and Org identifiers, privileges assigned to the Role, and deprecation status.      
+Gets Roles configured on a ThoughtSpot instance. Requires cluster Administration, Role Administration or Group Administration privileges.    Version: 9.5.0.cl or later 
 
 ### Example
 
@@ -218,7 +218,7 @@ Name | Type | Description  | Notes
 # **updateRole**
 > RoleResponse updateRole(updateRoleRequest)
 
- Updates a Role. Requires cluster Administration or Role Administration privileges.    Version: 9.5.0.cl or later   Updates the properties of a Role object.  Available only if [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance. To update a Role, the `ROLE_ADMINISTRATION` (**Can manage roles**) privilege is required.      
+Updates a Role. Requires cluster Administration or Role Administration privileges.    Version: 9.5.0.cl or later 
 
 ### Example
 

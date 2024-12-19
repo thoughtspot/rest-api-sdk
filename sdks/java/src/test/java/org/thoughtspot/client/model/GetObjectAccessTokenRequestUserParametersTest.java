@@ -22,10 +22,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
-import org.thoughtspot.client.model.RuntimeFilters;
-import org.thoughtspot.client.model.RuntimeParameters;
-import org.thoughtspot.client.model.RuntimeSorts;
 import org.thoughtspot.client.model.UserObject;
+import org.thoughtspot.client.model.UserParameters;
+import org.thoughtspot.client.model.UserRuntimeFilters;
+import org.thoughtspot.client.model.UserRuntimeSorts;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
