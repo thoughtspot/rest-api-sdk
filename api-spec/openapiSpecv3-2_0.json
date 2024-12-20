@@ -1372,7 +1372,7 @@
     "/api/rest/2.0/metadata/tml/async/status": {
       "post": {
         "operationId": "fetchAsyncImportTaskStatus",
-        "description": " <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>",
+        "description": "\n <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nGets information about the status of the TML async import task scheduled using the `/api/rest/2.0/metadata/tml/async/import` API call.\n\nTo fetch the task details, specify the ID of the TML async import task.  \n\nRequires access to the task ID. The API allows users who initiated the asynchronous TML import via `/api/rest/2.0/metadata/tml/async/import` to view the status of their tasks.  Users with administration privilege can view the status of all import tasks initiated by the users in their Org.\n\n#### Usage guidelines\n\nSee [TML API Documentation](https://developers.thoughtspot.com/docs/tml#_fetch_status_of_the_tml_import_task) for usage guidelines.\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Metadata",
           "10.4.0.cl"
@@ -1660,7 +1660,7 @@
     "/api/rest/2.0/report/liveboard": {
       "post": {
         "operationId": "exportLiveboardReport",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nExports the data from a Liveboard and its visualization in a given file format. You can download the Liveboard data as a PDF, PNG, CSV, or XLSX file.\n\nRequires `DATADOWNLOADING` (**Can download data**) privilege and view access to the Liveboard.\n\n#### Usage guidelines\n\nIn the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.\n\nThe default `file_format` is CSV. For PDF file format, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.\n\nOptionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.\n\nTo include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).  \n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nExports the data from a Liveboard and its visualization in a given file format. You can download the Liveboard data as a PDF, PNG. Liveboard download as XLSX and CSV is not supported.\n\nRequires `DATADOWNLOADING` (**Can download data**) privilege and view access to the Liveboard.\n\n#### Usage guidelines\n\nIn the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.\n\nThe default `file_format` is PDF. For PDF file format, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.\n\nOptionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.\n\nTo include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).  \n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Reports",
           "9.0.0.cl"
@@ -2929,7 +2929,9 @@
                         "GCP_POSTGRESQL",
                         "GCP_MYSQL",
                         "MODE",
-                        "GOOGLE_SHEETS"
+                        "GOOGLE_SHEETS",
+                        "FALCON",
+                        "FALCON_ONPREM"
                       ]
                     }
                   },
@@ -2987,7 +2989,9 @@
                       "SERVICE_ACCOUNT",
                       "OAUTH",
                       "IAM",
-                      "EXTOAUTH"
+                      "EXTOAUTH",
+                      "OAUTH_WITH_SERVICE_PRINCIPAL",
+                      "PERSONAL_ACCESS_TOKEN"
                     ]
                   }
                 }
@@ -3478,7 +3482,7 @@
                 "type": "object",
                 "properties": {
                   "username": {
-                    "description": "Username of the ThoughtSpot user",
+                    "description": "Username of the ThoughtSpot user. The username is stored in the `name` attribute of the user object.",
                     "type": "string"
                   },
                   "object_id": {
@@ -3615,7 +3619,7 @@
                 "type": "object",
                 "properties": {
                   "username": {
-                    "description": "Username of the ThoughtSpot user",
+                    "description": "Username of the ThoughtSpot user. The username is stored in the `name` attribute of the user object.",
                     "type": "string"
                   },
                   "password": {
@@ -3947,7 +3951,7 @@
     "/api/rest/2.0/auth/token/custom": {
       "post": {
         "operationId": "getCustomAccessToken",
-        "description": " <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>",
+        "description": "\n <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nGets an authentication token with custom rules and security attributes and creates a full session in ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot remains valid for 5 mins.\n\nTo add a new user and assign privileges during auto creation, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.\n\nTo assign security attributes with filter rules and Parameters to the JWT token, you'll need administrator privileges and edit access to the data source (Worksheet or Model). If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.\n\n#### Usage guidelines\n\nYou can generate the token for a user by providing a `username` and `password`, or by using the cluster’s `secret_key`.\n\nTo generate a `secret_key` on your cluster, the administrator must enable [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable) in the **Develop** > **Customizations** > **Security Settings** page.\n\n**Note**: When both `password` and `secret_key` are included in the API request, `password` takes precedence.\n\n##### Attribute-Based Access Control (ABAC) with tokens\n\nTo implement Attribute-Based Access Control (ABAC) and assign security entitlements to users during session creation, you can generate a token with custom filtering rules and Parameters in the `filter_rules` and `parameter_values` array respectively. These attributes can be configured to persist on a specific set of objects for user sessions initiated using the token. Once defined, the rules are added to the user's `access_control_properties` object, after which all sessions will use the persisted values.\n\nFor more information, see [ABAC via tokens Documentation](https://developers.thoughtspot.com/docs/api-authv2#_get_tokens_with_custom_rules_and_filter_conditions).\n\n##### Just-in-time provisioning\n\nFor just-in-time user creation and provisioning, define the following attributes:\n\n* `auto_create`\n* `username`\n* `display_name`\n* `email`\n* `groups`\n\nSet `auto_create` to `true` if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create` parameter is set to `true` in the API request, the user properties such as the display name, email, Org and group assignment will not be updated with new values.\n\nFor more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).\n\n##### Important point to note\nAll options in the token creation APIs that define access to the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, `auto_create:true` will create the user when the authentication token is created. Persist options such as  `APPEND`, `REPLACE`, `RESET` will persist security parameters on the user profile when the token is created, while Persist option `NONE` will not persist anything but will be honoured in the session.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Authentication",
           "10.4.0.cl"
@@ -3959,7 +3963,7 @@
                 "type": "object",
                 "properties": {
                   "username": {
-                    "description": "Username for which the token needs to be created.",
+                    "description": "Username of the ThoughtSpot user. The username is stored in the `name` attribute of the user object.",
                     "type": "string"
                   },
                   "password": {
@@ -3988,6 +3992,7 @@
                     "enum": [
                       "APPEND",
                       "NONE",
+                      "REPLACE",
                       "RESET"
                     ]
                   },
@@ -4026,6 +4031,12 @@
                     "items": {
                       "$ref": "#/components/schemas/Group_Object"
                     }
+                  },
+                  "auto_create": {
+                    "description": "   Creates a new user if the specified username does not exist in ThoughtSpot. To provision a user just-in-time (JIT), set this attribute to true.\n   \n\nNote: For JIT provisioning of a user, the secret_key is required.  <br/>  <span class=\"since-beta-tag\">Version: 10.5.0.cl or later</span>",
+                    "default": true,
+                    "type": "boolean",
+                    "nullable": true
                   }
                 },
                 "required": [
@@ -6053,7 +6064,7 @@
     "/api/rest/2.0/groups/{group_identifier}/update": {
       "post": {
         "operationId": "updateUserGroup",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nUpdates the properties of a group object in ThoughtSpot.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n#### Supported operations\n\nThis API endpoint lets you perform the following operations in a single API request:\n\n* Edit [privileges](https://developers.thoughtspot.com/docs/?pageid=api-user-management#group-privileges)\n* Add or remove users\n* Change sharing visibility settings\n* Add or remove sub-groups\n* Assign a default Liveboard  or update the existing settings\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nUpdates the properties of a group object in ThoughtSpot.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `GROUP_ADMINISTRATION` (**Can manage groups**) privilege is required.\n\n#### Supported operations\n\nThis API endpoint lets you perform the following operations in a single API request:\n\n* Edit [privileges](https://developers.thoughtspot.com/docs/?pageid=api-user-management#group-privileges)\n* Add or remove users\n* Change sharing visibility settings\n* Add or remove sub-groups\n* Assign a default Liveboard  or update the existing settings\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Groups",
           "9.0.0.cl"
@@ -6439,6 +6450,12 @@
                     "default": false,
                     "type": "boolean",
                     "nullable": true
+                  },
+                  "enable_large_metadata_validation": {
+                    "description": "<div><span class=\"since-beta-tag\">Version: 10.5.0.cl or later</span></div>\n\nBoolean to indicate if the large metadata validation should be enabled.",
+                    "default": false,
+                    "type": "boolean",
+                    "nullable": true
                   }
                 },
                 "required": [
@@ -6510,7 +6527,7 @@
     "/api/rest/2.0/metadata/tml/async/import": {
       "post": {
         "operationId": "importMetadataTMLAsync",
-        "description": " <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>",
+        "description": "\n <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nSchedules a task to import [TML](https://docs.thoughtspot.com/cloud/latest/tml) files into ThoughtSpot. You can use this API endpoint to process TML objects asynchronously when importing TMLs of large and complex metadata objects into ThoughtSpot. Unlike the synchronous import TML operation, the API processes TML data in the background and returns a task ID, which can be used to check the status of the import task via `/api/rest/2.0/metadata/tml/async/status` API endpoint.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtsSpot**) privilege, and edit access to the TML objects.\n\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:\n- `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**)\n- `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)\n\n#### Usage guidelines\n\nSee [Async TML API Documentation](https://developers.thoughtspot.com/docs/tml#_import_tml_objects_asynchronously) for usage guidelines.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Metadata",
           "10.4.0.cl"
@@ -6542,6 +6559,23 @@
                   },
                   "skip_cdw_validation_for_tables": {
                     "description": "Boolean to indicate if the CDW validation for table imports should be skipped.",
+                    "default": false,
+                    "type": "boolean",
+                    "nullable": true
+                  },
+                  "import_policy": {
+                    "description": "<div><span class=\"since-beta-tag\">Version: 10.5.0.cl or later</span></div>\n\nPolicy to be followed while importing the TML. Valid values are [PARTIAL_OBJECT, PARTIAL, VALIDATE_ONLY, ALL_OR_NONE]",
+                    "default": "PARTIAL_OBJECT",
+                    "type": "string",
+                    "enum": [
+                      "PARTIAL",
+                      "ALL_OR_NONE",
+                      "VALIDATE_ONLY",
+                      "PARTIAL_OBJECT"
+                    ]
+                  },
+                  "enable_large_metadata_validation": {
+                    "description": "<div><span class=\"since-beta-tag\">Version: 10.5.0.cl or later</span></div>\n\nBoolean to indicate if the large metadata validation should be enabled.",
                     "default": false,
                     "type": "boolean",
                     "nullable": true
@@ -6679,6 +6713,14 @@
                     "default": false,
                     "type": "boolean",
                     "nullable": true
+                  },
+                  "export_options": {
+                    "description": "Flags to specify additional options for export. <br/>  <span class=\"since-beta-tag\">Version: 10.5.0.cl or later</span>",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/Export_Options"
+                      }
+                    ]
                   }
                 },
                 "required": [
@@ -7062,7 +7104,7 @@
     "/api/rest/2.0/security/metadata/assign": {
       "post": {
         "operationId": "assignChangeAuthor",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nTransfers the ownership of one or several objects from one user to another.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `USER_ADMINISTRATION` (**Can manage users**) privilege and edit access to the objects are required.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nTransfers the ownership of one or several objects from one user to another.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `USER_ADMINISTRATION` (**Can manage users**) privilege and edit access to the objects are required.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Security",
           "9.0.0.cl"
@@ -7161,12 +7203,13 @@
                 "type": "object",
                 "properties": {
                   "metadata_type": {
-                    "description": "Type of metadata. Required if identifier in metadata_identifies is a name.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.",
+                    "description": "Type of metadata. Required if identifier in metadata_identifies is a name.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n4. LOGICAL_COLUMN",
                     "type": "string",
                     "enum": [
                       "LIVEBOARD",
                       "ANSWER",
-                      "LOGICAL_TABLE"
+                      "LOGICAL_TABLE",
+                      "LOGICAL_COLUMN"
                     ]
                   },
                   "metadata_identifiers": {
@@ -7199,6 +7242,7 @@
                   },
                   "emails": {
                     "description": "Email IDs to which notifications will be sent.",
+                    "default": [],
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -7229,7 +7273,6 @@
                 },
                 "required": [
                   "permissions",
-                  "emails",
                   "message"
                 ]
               }
@@ -8040,7 +8083,9 @@
                       "GCP_POSTGRESQL",
                       "GCP_MYSQL",
                       "MODE",
-                      "GOOGLE_SHEETS"
+                      "GOOGLE_SHEETS",
+                      "FALCON",
+                      "FALCON_ONPREM"
                     ]
                   },
                   "data_warehouse_config": {
@@ -11574,7 +11619,7 @@
     "/api/rest/2.0/ai/conversation/create": {
       "post": {
         "operationId": "createConversation",
-        "description": "\n <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nCreates a Conversation object to start an AI-driven conversation based on a specific data model.\n\nRequires at least view access to the metadata object specified in the request.\n\n#### Usage guidelines\n\nThis API requires the `metadata_identifier` parameter to define the context for the conversation.\n\nYou can also specify the tokens to initiate the conversation as shown in this example:\n\n`\"tokens\": \"[tea],[sales],[type]\"`\n\nIf the API request is successful, ThoughtSpot returns the ID of the conversation.\n\n> ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nCreates a Conversation object to start an AI-driven conversation based on a specific data model.\n\nRequires at least view access to the metadata object specified in the request.\n\n#### Usage guidelines\n\nThis API requires the `metadata_identifier` parameter to define the context for the conversation.\n\nYou can also specify the tokens to initiate the conversation as shown in this example:\n\n`\"tokens\": \"[tea],[sales],[type]\"`\n\nIf the API request is successful, ThoughtSpot returns the ID of the conversation.\n\n> ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "AI",
           "10.4.0.cl"
@@ -11650,7 +11695,7 @@
     "/api/rest/2.0/ai/conversation/{conversation_identifier}/converse": {
       "post": {
         "operationId": "sendMessage",
-        "description": "\n <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nAllows sending a follow-up message to an ongoing conversation within the context of the metadata model.\n\nRequires at least view access to the metadata object specified in the request.\n\n#### Usage guidelines\n\nThe API requires you to specify the `conversation_identifier` in the request path, and a `metadata_identifier` and `message` string in the request body.\n\nIf the API request is successful, ThoughtSpot returns the session ID, tokens used in the conversation, and visualization type.\n\n> ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nAllows sending a follow-up message to an ongoing conversation within the context of the metadata model.\n\nRequires at least view access to the metadata object specified in the request.\n\n#### Usage guidelines\n\nThe API requires you to specify the `conversation_identifier` in the request path, and a `metadata_identifier` and `message` string in the request body.\n\nIf the API request is successful, ThoughtSpot returns the session ID, tokens used in the conversation, and visualization type.\n\n> ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "AI",
           "10.4.0.cl"
@@ -11743,7 +11788,7 @@
     "/api/rest/2.0/ai/answer/create": {
       "post": {
         "operationId": "singleAnswer",
-        "description": "\n <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nProcesses a natural language query and returns an AI-generated response based on a specified data model.\n\nRequires at least view access to the metadata object specified in the request.\n\n> ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nProcesses a natural language query and returns an AI-generated response based on a specified data model.\n\nRequires at least view access to the metadata object specified in the request.\n\n> ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "AI",
           "10.4.0.cl"
@@ -12716,6 +12761,11 @@
             "description": "Unique ID or name of the metadata.",
             "nullable": true
           },
+          "custom_identifier": {
+            "type": "string",
+            "description": "CustomObjectId of the metadata.",
+            "nullable": true
+          },
           "name_pattern": {
             "type": "string",
             "description": "A pattern to match the case-insensitive name of the metadata object. User % for a wildcard match.",
@@ -13662,7 +13712,9 @@
               "GCP_POSTGRESQL",
               "GCP_MYSQL",
               "MODE",
-              "GOOGLE_SHEETS"
+              "GOOGLE_SHEETS",
+              "FALCON",
+              "FALCON_ONPREM"
             ],
             "description": "Type of data warehouse."
           },
@@ -15115,6 +15167,30 @@
           }
         }
       },
+      "Export_Options": {
+        "type": "object",
+        "properties": {
+          "export_with_reference_object_id": {
+            "type": "boolean",
+            "default": false,
+            "description": "Boolean Flag to whether to export user_defined_id of referenced object. This will only be respected when UserDefinedId in TML is enabled.",
+            "nullable": true
+          },
+          "include_guid": {
+            "type": "boolean",
+            "default": true,
+            "description": "Boolean flag to whether to export guid of the object. This will only be respected when UserDefinedId in TML is enabled.",
+            "nullable": true
+          },
+          "include_object_id": {
+            "type": "boolean",
+            "default": false,
+            "description": "Boolean flag to whether to export user_defined_id of the object. This will only be respected when UserDefinedId in TML is enabled.",
+            "nullable": true
+          }
+        },
+        "description": "Flags to specify additional options for export. This will only be active when UserDefinedId in TML is enabled."
+      },
       "ResponseCopyObject": {
         "type": "object",
         "properties": {
@@ -15212,7 +15288,8 @@
             "enum": [
               "LIVEBOARD",
               "ANSWER",
-              "LOGICAL_TABLE"
+              "LOGICAL_TABLE",
+              "LOGICAL_COLUMN"
             ],
             "description": "  Type of metadata.\n  \n\nType of metadata. Required if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.",
             "nullable": true
@@ -15494,7 +15571,9 @@
               "GCP_POSTGRESQL",
               "GCP_MYSQL",
               "MODE",
-              "GOOGLE_SHEETS"
+              "GOOGLE_SHEETS",
+              "FALCON",
+              "FALCON_ONPREM"
             ],
             "description": "Type of data warehouse."
           },
