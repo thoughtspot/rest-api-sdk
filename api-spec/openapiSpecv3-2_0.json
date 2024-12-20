@@ -181,82 +181,6 @@
         }
       }
     },
-    "/api/rest/2.0/ai/conversation/create": {
-      "post": {
-        "operationId": "createConversation",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nCreates a Conversation object to start an AI-driven conversation based on a specific data model.\n\nRequires at least view access to the metadata object specified in the request.\n\n#### Usage guidelines\n\nThis API requires the `metadata_identifier` parameter to define the context for the conversation.\n\nYou can also specify the tokens to initiate the conversation as shown in this example:\n\n`\"tokens\": \"[tea],[sales],[type]\"`\n\nIf the API request is successful, ThoughtSpot returns the ID of the conversation.\n\n> ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "AI",
-          "10.4.0.cl"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "metadata_identifier": {
-                    "description": "ID of the metadata object, such as a Worksheet or Model, to use as a data source for the conversation.",
-                    "type": "string"
-                  },
-                  "tokens": {
-                    "description": "Token string to set the context for the conversation. For example,`[sales],[item type],[state]`.",
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "metadata_identifier"
-                ]
-              }
-            }
-          },
-          "required": true
-        },
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Conversation"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Conversation"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/rest/2.0/ai/conversation/{conversation_identifier}/converse": {
       "post": {
         "operationId": "sendMessage",
@@ -323,6 +247,82 @@
                   "items": {
                     "$ref": "#/components/schemas/ResponseMessage"
                   }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/ai/conversation/create": {
+      "post": {
+        "operationId": "createConversation",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nCreates a Conversation object to start an AI-driven conversation based on a specific data model.\n\nRequires at least view access to the metadata object specified in the request.\n\n#### Usage guidelines\n\nThis API requires the `metadata_identifier` parameter to define the context for the conversation.\n\nYou can also specify the tokens to initiate the conversation as shown in this example:\n\n`\"tokens\": \"[tea],[sales],[type]\"`\n\nIf the API request is successful, ThoughtSpot returns the ID of the conversation.\n\n> ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "10.4.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "metadata_identifier": {
+                    "description": "ID of the metadata object, such as a Worksheet or Model, to use as a data source for the conversation.",
+                    "type": "string"
+                  },
+                  "tokens": {
+                    "description": "Token string to set the context for the conversation. For example,`[sales],[item type],[state]`.",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "metadata_identifier"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Conversation"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Conversation"
                 }
               }
             }
@@ -1692,148 +1692,6 @@
         }
       }
     },
-    "/api/rest/2.0/connections/download-connection-metadata-changes/{connection_identifier}": {
-      "post": {
-        "operationId": "downloadConnectionMetadataChanges",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.9.0.cl or later</span>\n\nExports the difference in connection metadata between CDW and ThoughtSpot\n\nRequires `DATAMANAGEMENT` (**Can manage data**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  \n- `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**)\n- `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**)\n- `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)\n\nTo download the connection metadata difference between ThoughtSpot and CDW, pass the connection GUID as `connection_identifier` in the API request.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "Connections",
-          "9.9.0.cl"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "connection_identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "GUID of the connection"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Export metadata changes.",
-            "content": {
-              "application/octet-stream": {}
-            }
-          },
-          "400": {
-            "description": "Invalid request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/rest/2.0/connections/fetch-connection-diff-status/{connection_identifier}": {
-      "post": {
-        "operationId": "fetchConnectionDiffStatus",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.9.0.cl or later</span>\n\nValidates the difference in connection metadata between CDW and ThoughtSpot.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:\n\n- `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**)\n- `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**)\n- `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)\n\nReturns a boolean indicating whether there is any difference between the connection metadata at ThoughtSpot and CDW.\n\nTo get the connection metadata difference status, pass the connection GUID as `connection_identifier` in the API request.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "Connections",
-          "9.9.0.cl"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "connection_identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "GUID of the connection"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "true/false",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/FetchConnectionDiffStatusResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/rest/2.0/connections/{connection_identifier}/delete": {
       "post": {
         "operationId": "deleteConnectionV2",
@@ -1996,6 +1854,148 @@
         }
       }
     },
+    "/api/rest/2.0/connections/download-connection-metadata-changes/{connection_identifier}": {
+      "post": {
+        "operationId": "downloadConnectionMetadataChanges",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.9.0.cl or later</span>\n\nExports the difference in connection metadata between CDW and ThoughtSpot\n\nRequires `DATAMANAGEMENT` (**Can manage data**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  \n- `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**)\n- `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**)\n- `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)\n\nTo download the connection metadata difference between ThoughtSpot and CDW, pass the connection GUID as `connection_identifier` in the API request.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Connections",
+          "9.9.0.cl"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "connection_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "GUID of the connection"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Export metadata changes.",
+            "content": {
+              "application/octet-stream": {}
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/connections/fetch-connection-diff-status/{connection_identifier}": {
+      "post": {
+        "operationId": "fetchConnectionDiffStatus",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.9.0.cl or later</span>\n\nValidates the difference in connection metadata between CDW and ThoughtSpot.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:\n\n- `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**)\n- `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**)\n- `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)\n\nReturns a boolean indicating whether there is any difference between the connection metadata at ThoughtSpot and CDW.\n\nTo get the connection metadata difference status, pass the connection GUID as `connection_identifier` in the API request.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Connections",
+          "9.9.0.cl"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "connection_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "GUID of the connection"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "true/false",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FetchConnectionDiffStatusResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/customization/custom-actions": {
       "post": {
         "operationId": "createCustomAction",
@@ -2079,145 +2079,6 @@
                       "name": "customactionsample",
                       "user_groups": []
                     }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/rest/2.0/customization/custom-actions/search": {
-      "post": {
-        "operationId": "searchCustomActions",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.6.0.cl or later</span>\n\nGets custom actions configured on the cluster.\n\nRequires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "Custom Action",
-          "9.6.0.cl"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "custom_action_identifier": {
-                    "description": "Name or ID of the custom action.",
-                    "type": "string"
-                  },
-                  "name_pattern": {
-                    "description": "A pattern to match case-insensitive name of the custom-action object.",
-                    "type": "string"
-                  },
-                  "default_action_config": {
-                    "description": "Default Custom action configuration. This includes if the custom action is available on all visualizations. By default, a custom action is added to all visualizations and Answers.",
-                    "allOf": [
-                      {
-                        "$ref": "#/components/schemas/Default_Action_Config_Search_Input"
-                      }
-                    ]
-                  },
-                  "include_group_associations": {
-                    "description": "When set to true, returns the associated groups for a custom action.",
-                    "default": false,
-                    "type": "boolean",
-                    "nullable": true
-                  },
-                  "include_metadata_associations": {
-                    "description": "When set to true, returns the associated metadata for a custom action.",
-                    "default": false,
-                    "type": "boolean",
-                    "nullable": true
-                  },
-                  "metadata": {
-                    "description": "Search with a given metadata identifier.",
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/CustomActionMetadataTypeInput"
-                    }
-                  },
-                  "type": {
-                    "description": "Filter the action objects based on type",
-                    "type": "string",
-                    "enum": [
-                      "CALLBACK",
-                      "URL"
-                    ]
-                  }
-                }
-              }
-            }
-          },
-          "required": true
-        },
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Custom action search is successful.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/ResponseCustomAction"
-                  }
-                },
-                "examples": {
-                  "example_1": {
-                    "value": [
-                      {
-                        "action_details": {
-                          "CALLBACK": {
-                            "reference": "LEDE"
-                          }
-                        },
-                        "default_action_config": {
-                          "visibility": true
-                        },
-                        "id": "c59262df-cf9e-4947-96fa-52d494688797",
-                        "name": "LEDE"
-                      }
-                    ]
                   }
                 }
               }
@@ -2409,6 +2270,211 @@
         "responses": {
           "204": {
             "description": "Custom action updated successfully."
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/customization/custom-actions/search": {
+      "post": {
+        "operationId": "searchCustomActions",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.6.0.cl or later</span>\n\nGets custom actions configured on the cluster.\n\nRequires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Custom Action",
+          "9.6.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "custom_action_identifier": {
+                    "description": "Name or ID of the custom action.",
+                    "type": "string"
+                  },
+                  "name_pattern": {
+                    "description": "A pattern to match case-insensitive name of the custom-action object.",
+                    "type": "string"
+                  },
+                  "default_action_config": {
+                    "description": "Default Custom action configuration. This includes if the custom action is available on all visualizations. By default, a custom action is added to all visualizations and Answers.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/Default_Action_Config_Search_Input"
+                      }
+                    ]
+                  },
+                  "include_group_associations": {
+                    "description": "When set to true, returns the associated groups for a custom action.",
+                    "default": false,
+                    "type": "boolean",
+                    "nullable": true
+                  },
+                  "include_metadata_associations": {
+                    "description": "When set to true, returns the associated metadata for a custom action.",
+                    "default": false,
+                    "type": "boolean",
+                    "nullable": true
+                  },
+                  "metadata": {
+                    "description": "Search with a given metadata identifier.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/CustomActionMetadataTypeInput"
+                    }
+                  },
+                  "type": {
+                    "description": "Filter the action objects based on type",
+                    "type": "string",
+                    "enum": [
+                      "CALLBACK",
+                      "URL"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Custom action search is successful.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ResponseCustomAction"
+                  }
+                },
+                "examples": {
+                  "example_1": {
+                    "value": [
+                      {
+                        "action_details": {
+                          "CALLBACK": {
+                            "reference": "LEDE"
+                          }
+                        },
+                        "default_action_config": {
+                          "visibility": true
+                        },
+                        "id": "c59262df-cf9e-4947-96fa-52d494688797",
+                        "name": "LEDE"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/dbt/{dbt_connection_identifier}/delete": {
+      "post": {
+        "operationId": "deleteDbtConnection",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.9.0.cl or later</span>\n\nRemoves the specified DBT connection object from the ThoughtSpot system.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:\n\n- `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**)\n- `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**)\n- `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "DBT",
+          "9.9.0.cl"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dbt_connection_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique ID of the DBT Connection."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "DBT Connection successfully deleted."
           },
           "400": {
             "description": "Invalid request.",
@@ -2970,28 +3036,208 @@
         }
       }
     },
-    "/api/rest/2.0/dbt/{dbt_connection_identifier}/delete": {
+    "/api/rest/2.0/groups/{group_identifier}/delete": {
       "post": {
-        "operationId": "deleteDbtConnection",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.9.0.cl or later</span>\n\nRemoves the specified DBT connection object from the ThoughtSpot system.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:\n\n- `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**)\n- `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**)\n- `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)\n\n\n\n\n#### Endpoint URL\n",
+        "operationId": "deleteUserGroup",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nRemoves the specified group object from the ThoughtSpot system.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `GROUP_ADMINISTRATION` (**Can manage groups**) privilege is required.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
-          "DBT",
-          "9.9.0.cl"
+          "Groups",
+          "9.0.0.cl"
         ],
         "parameters": [
           {
             "in": "path",
-            "name": "dbt_connection_identifier",
+            "name": "group_identifier",
             "required": true,
             "schema": {
               "type": "string"
             },
-            "description": "Unique ID of the DBT Connection."
+            "description": "GUID or name of the group."
           }
         ],
         "responses": {
           "204": {
-            "description": "DBT Connection successfully deleted."
+            "description": "User group successfully deleted."
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/groups/{group_identifier}/update": {
+      "post": {
+        "operationId": "updateUserGroup",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nUpdates the properties of a group object in ThoughtSpot.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `GROUP_ADMINISTRATION` (**Can manage groups**) privilege is required.\n\n#### Supported operations\n\nThis API endpoint lets you perform the following operations in a single API request:\n\n* Edit [privileges](https://developers.thoughtspot.com/docs/?pageid=api-user-management#group-privileges)\n* Add or remove users\n* Change sharing visibility settings\n* Add or remove sub-groups\n* Assign a default Liveboard  or update the existing settings\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Groups",
+          "9.0.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "description": "Name of the group to modify.",
+                    "type": "string"
+                  },
+                  "default_liveboard_identifiers": {
+                    "description": "ID of the Liveboards to be assigned as default Liveboards to the users in the group.",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "description": {
+                    "description": "Description for the group.",
+                    "type": "string"
+                  },
+                  "display_name": {
+                    "description": "Display name of the group.",
+                    "type": "string"
+                  },
+                  "privileges": {
+                    "description": "Privileges to assign to the group.",
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "ADMINISTRATION",
+                        "AUTHORING",
+                        "USERDATAUPLOADING",
+                        "DATADOWNLOADING",
+                        "USERMANAGEMENT",
+                        "DATAMANAGEMENT",
+                        "SHAREWITHALL",
+                        "JOBSCHEDULING",
+                        "A3ANALYSIS",
+                        "EXPERIMENTALFEATUREPRIVILEGE",
+                        "BYPASSRLS",
+                        "RANALYSIS",
+                        "DEVELOPER",
+                        "USER_ADMINISTRATION",
+                        "GROUP_ADMINISTRATION",
+                        "SYNCMANAGEMENT",
+                        "CAN_CREATE_CATALOG",
+                        "DISABLE_PINBOARD_CREATION",
+                        "LIVEBOARD_VERIFIER",
+                        "PREVIEW_THOUGHTSPOT_SAGE",
+                        "CAN_MANAGE_VERSION_CONTROL",
+                        "THIRDPARTY_ANALYSIS",
+                        "ALLOW_NON_EMBED_FULL_APP_ACCESS",
+                        "CAN_ACCESS_ANALYST_STUDIO",
+                        "CAN_MANAGE_ANALYST_STUDIO",
+                        "PREVIEW_DOCUMENT_SEARCH",
+                        "CAN_SETUP_VERSION_CONTROL"
+                      ]
+                    }
+                  },
+                  "sub_group_identifiers": {
+                    "description": "GUID or name of the sub groups. A subgroup is a group assigned to a parent group.",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "type": {
+                    "description": "Type of the group",
+                    "type": "string",
+                    "enum": [
+                      "LOCAL_GROUP",
+                      "LDAP_GROUP"
+                    ]
+                  },
+                  "user_identifiers": {
+                    "description": "GUID or name of the users to assign to the group.",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "visibility": {
+                    "description": "Visibility of the group. To make a group visible to other users and\ngroups, set the visibility to SHAREABLE.",
+                    "type": "string",
+                    "enum": [
+                      "SHARABLE",
+                      "NON_SHARABLE"
+                    ]
+                  },
+                  "role_identifiers": {
+                    "description": "Role identifiers of the Roles that should be assigned to the group.",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "operation": {
+                    "description": "Type of update operation. Default operation type is REPLACE",
+                    "default": "REPLACE",
+                    "type": "string",
+                    "enum": [
+                      "ADD",
+                      "REMOVE",
+                      "REPLACE"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "group_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "GUID or name of the group."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "User group successfully updated."
           },
           "400": {
             "description": "Invalid request.",
@@ -3469,252 +3715,6 @@
                 }
               }
             }
-          },
-          "400": {
-            "description": "Invalid request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/rest/2.0/groups/{group_identifier}/delete": {
-      "post": {
-        "operationId": "deleteUserGroup",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nRemoves the specified group object from the ThoughtSpot system.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `GROUP_ADMINISTRATION` (**Can manage groups**) privilege is required.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "Groups",
-          "9.0.0.cl"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "group_identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "GUID or name of the group."
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "User group successfully deleted."
-          },
-          "400": {
-            "description": "Invalid request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/rest/2.0/groups/{group_identifier}/update": {
-      "post": {
-        "operationId": "updateUserGroup",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nUpdates the properties of a group object in ThoughtSpot.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `GROUP_ADMINISTRATION` (**Can manage groups**) privilege is required.\n\n#### Supported operations\n\nThis API endpoint lets you perform the following operations in a single API request:\n\n* Edit [privileges](https://developers.thoughtspot.com/docs/?pageid=api-user-management#group-privileges)\n* Add or remove users\n* Change sharing visibility settings\n* Add or remove sub-groups\n* Assign a default Liveboard  or update the existing settings\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "Groups",
-          "9.0.0.cl"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "description": "Name of the group to modify.",
-                    "type": "string"
-                  },
-                  "default_liveboard_identifiers": {
-                    "description": "ID of the Liveboards to be assigned as default Liveboards to the users in the group.",
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    }
-                  },
-                  "description": {
-                    "description": "Description for the group.",
-                    "type": "string"
-                  },
-                  "display_name": {
-                    "description": "Display name of the group.",
-                    "type": "string"
-                  },
-                  "privileges": {
-                    "description": "Privileges to assign to the group.",
-                    "type": "array",
-                    "items": {
-                      "type": "string",
-                      "enum": [
-                        "ADMINISTRATION",
-                        "AUTHORING",
-                        "USERDATAUPLOADING",
-                        "DATADOWNLOADING",
-                        "USERMANAGEMENT",
-                        "DATAMANAGEMENT",
-                        "SHAREWITHALL",
-                        "JOBSCHEDULING",
-                        "A3ANALYSIS",
-                        "EXPERIMENTALFEATUREPRIVILEGE",
-                        "BYPASSRLS",
-                        "RANALYSIS",
-                        "DEVELOPER",
-                        "USER_ADMINISTRATION",
-                        "GROUP_ADMINISTRATION",
-                        "SYNCMANAGEMENT",
-                        "CAN_CREATE_CATALOG",
-                        "DISABLE_PINBOARD_CREATION",
-                        "LIVEBOARD_VERIFIER",
-                        "PREVIEW_THOUGHTSPOT_SAGE",
-                        "CAN_MANAGE_VERSION_CONTROL",
-                        "THIRDPARTY_ANALYSIS",
-                        "ALLOW_NON_EMBED_FULL_APP_ACCESS",
-                        "CAN_ACCESS_ANALYST_STUDIO",
-                        "CAN_MANAGE_ANALYST_STUDIO",
-                        "PREVIEW_DOCUMENT_SEARCH",
-                        "CAN_SETUP_VERSION_CONTROL"
-                      ]
-                    }
-                  },
-                  "sub_group_identifiers": {
-                    "description": "GUID or name of the sub groups. A subgroup is a group assigned to a parent group.",
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    }
-                  },
-                  "type": {
-                    "description": "Type of the group",
-                    "type": "string",
-                    "enum": [
-                      "LOCAL_GROUP",
-                      "LDAP_GROUP"
-                    ]
-                  },
-                  "user_identifiers": {
-                    "description": "GUID or name of the users to assign to the group.",
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    }
-                  },
-                  "visibility": {
-                    "description": "Visibility of the group. To make a group visible to other users and\ngroups, set the visibility to SHAREABLE.",
-                    "type": "string",
-                    "enum": [
-                      "SHARABLE",
-                      "NON_SHARABLE"
-                    ]
-                  },
-                  "role_identifiers": {
-                    "description": "Role identifiers of the Roles that should be assigned to the group.",
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    }
-                  },
-                  "operation": {
-                    "description": "Type of update operation. Default operation type is REPLACE",
-                    "default": "REPLACE",
-                    "type": "string",
-                    "enum": [
-                      "ADD",
-                      "REMOVE",
-                      "REPLACE"
-                    ]
-                  }
-                }
-              }
-            }
-          },
-          "required": true
-        },
-        "parameters": [
-          {
-            "in": "path",
-            "name": "group_identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "GUID or name of the group."
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "User group successfully updated."
           },
           "400": {
             "description": "Invalid request.",
@@ -5421,6 +5421,182 @@
         }
       }
     },
+    "/api/rest/2.0/orgs/{org_identifier}/delete": {
+      "post": {
+        "operationId": "deleteOrg",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nDeletes an Org object from the ThoughtSpot system.\n\nRequires cluster administration (**Can administer Org**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ORG_ADMINISTRATION` (**Can manage Orgs**) privilege is required.\n\nWhen you delete an Org, all its users and objects created in that Org context are removed. However, if the users in the deleted Org also exists in other Orgs, they are removed only from the deleted Org.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Orgs",
+          "9.0.0.cl"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "org_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID or name of the Org"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Organization successfully deleted."
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/orgs/{org_identifier}/update": {
+      "post": {
+        "operationId": "updateOrg",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nUpdates an Org object. You can modify Org properties such as name, description, and user associations.\n\nRequires cluster administration (**Can administer Org**) privileges.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ORG_ADMINISTRATION` (**Can manage Orgs**) privilege is required.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Orgs",
+          "9.0.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "description": "Name of the Org",
+                    "type": "string"
+                  },
+                  "description": {
+                    "description": "Description of the Org",
+                    "type": "string"
+                  },
+                  "user_identifiers": {
+                    "description": "Add Users to an Org",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "group_identifiers": {
+                    "description": "Add Default Groups to an Org",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "operation": {
+                    "description": "Type of update operation. Default operation type is ADD",
+                    "default": "ADD",
+                    "type": "string",
+                    "enum": [
+                      "ADD",
+                      "REMOVE",
+                      "REPLACE"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "org_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID or name of the Org"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Organization successfully updated."
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/orgs/create": {
       "post": {
         "operationId": "createOrg",
@@ -5603,182 +5779,6 @@
                 }
               }
             }
-          },
-          "400": {
-            "description": "Invalid request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/rest/2.0/orgs/{org_identifier}/delete": {
-      "post": {
-        "operationId": "deleteOrg",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nDeletes an Org object from the ThoughtSpot system.\n\nRequires cluster administration (**Can administer Org**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ORG_ADMINISTRATION` (**Can manage Orgs**) privilege is required.\n\nWhen you delete an Org, all its users and objects created in that Org context are removed. However, if the users in the deleted Org also exists in other Orgs, they are removed only from the deleted Org.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "Orgs",
-          "9.0.0.cl"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "org_identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "ID or name of the Org"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Organization successfully deleted."
-          },
-          "400": {
-            "description": "Invalid request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/rest/2.0/orgs/{org_identifier}/update": {
-      "post": {
-        "operationId": "updateOrg",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nUpdates an Org object. You can modify Org properties such as name, description, and user associations.\n\nRequires cluster administration (**Can administer Org**) privileges.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ORG_ADMINISTRATION` (**Can manage Orgs**) privilege is required.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "Orgs",
-          "9.0.0.cl"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "description": "Name of the Org",
-                    "type": "string"
-                  },
-                  "description": {
-                    "description": "Description of the Org",
-                    "type": "string"
-                  },
-                  "user_identifiers": {
-                    "description": "Add Users to an Org",
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    }
-                  },
-                  "group_identifiers": {
-                    "description": "Add Default Groups to an Org",
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    }
-                  },
-                  "operation": {
-                    "description": "Type of update operation. Default operation type is ADD",
-                    "default": "ADD",
-                    "type": "string",
-                    "enum": [
-                      "ADD",
-                      "REMOVE",
-                      "REPLACE"
-                    ]
-                  }
-                }
-              }
-            }
-          },
-          "required": true
-        },
-        "parameters": [
-          {
-            "in": "path",
-            "name": "org_identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "ID or name of the Org"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Organization successfully updated."
           },
           "400": {
             "description": "Invalid request.",
@@ -6027,6 +6027,208 @@
             "description": "Export report file of specified metadata object is successful.",
             "content": {
               "application/octet-stream": {}
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/roles/{role_identifier}/delete": {
+      "post": {
+        "operationId": "deleteRole",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>\n\nDeletes a Role object from the ThoughtSpot system.\n\nAvailable only if [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance. To delete a Role, the `ROLE_ADMINISTRATION` (**Can manage roles**) privilege is required.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Roles",
+          "9.5.0.cl"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "role_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique ID or name of the Role. ReadOnly roles cannot be deleted."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Role successfully deleted."
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/roles/{role_identifier}/update": {
+      "post": {
+        "operationId": "updateRole",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>\n\nUpdates the properties of a Role object.\n\nAvailable only if [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance. To update a Role, the `ROLE_ADMINISTRATION` (**Can manage roles**) privilege is required.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Roles",
+          "9.5.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "description": "Name of the Role.",
+                    "type": "string"
+                  },
+                  "description": {
+                    "description": "Description of the Role.",
+                    "type": "string"
+                  },
+                  "privileges": {
+                    "description": "Privileges granted to the role. See [Documentation](https://developers.thoughtspot.com/docs/rbac#_role_categories_and_privileges)for supported roles privileges.",
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "USERDATAUPLOADING",
+                        "DATADOWNLOADING",
+                        "DATAMANAGEMENT",
+                        "SHAREWITHALL",
+                        "JOBSCHEDULING",
+                        "A3ANALYSIS",
+                        "EXPERIMENTALFEATUREPRIVILEGE",
+                        "BYPASSRLS",
+                        "DISABLE_PINBOARD_CREATION",
+                        "DEVELOPER",
+                        "APPLICATION_ADMINISTRATION",
+                        "USER_ADMINISTRATION",
+                        "GROUP_ADMINISTRATION",
+                        "SYSTEM_INFO_ADMINISTRATION",
+                        "SYNCMANAGEMENT",
+                        "ORG_ADMINISTRATION",
+                        "ROLE_ADMINISTRATION",
+                        "AUTHENTICATION_ADMINISTRATION",
+                        "BILLING_INFO_ADMINISTRATION",
+                        "CONTROL_TRUSTED_AUTH",
+                        "TAGMANAGEMENT",
+                        "LIVEBOARD_VERIFIER",
+                        "CAN_MANAGE_CUSTOM_CALENDAR",
+                        "CAN_CREATE_OR_EDIT_CONNECTIONS",
+                        "CAN_MANAGE_WORKSHEET_VIEWS_TABLES",
+                        "CAN_MANAGE_VERSION_CONTROL",
+                        "THIRDPARTY_ANALYSIS",
+                        "CAN_CREATE_CATALOG",
+                        "CAN_ACCESS_ANALYST_STUDIO",
+                        "CAN_MANAGE_ANALYST_STUDIO",
+                        "PREVIEW_DOCUMENT_SEARCH"
+                      ]
+                    }
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "role_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique ID or name of the Role."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Role successfully updated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoleResponse"
+                }
+              }
             }
           },
           "400": {
@@ -6390,28 +6592,28 @@
         }
       }
     },
-    "/api/rest/2.0/roles/{role_identifier}/delete": {
+    "/api/rest/2.0/schedules/{schedule_identifier}/delete": {
       "post": {
-        "operationId": "deleteRole",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>\n\nDeletes a Role object from the ThoughtSpot system.\n\nAvailable only if [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance. To delete a Role, the `ROLE_ADMINISTRATION` (**Can manage roles**) privilege is required.\n\n\n\n\n#### Endpoint URL\n",
+        "operationId": "deleteSchedule",
+        "description": "\nDeletes a scheduled job. <br/>  <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>\n\nDeletes a scheduled Liveboard job.\n\nRequires at least edit access to Liveboard or `ADMINISTRATION` (**Can administer Org**) privilege.   \nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `JOBSCHEDULING` (**Can schedule for others**) privilege is required.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
-          "Roles",
-          "9.5.0.cl"
+          "Schedules",
+          "9.4.0.cl"
         ],
         "parameters": [
           {
             "in": "path",
-            "name": "role_identifier",
+            "name": "schedule_identifier",
             "required": true,
             "schema": {
               "type": "string"
             },
-            "description": "Unique ID or name of the Role. ReadOnly roles cannot be deleted."
+            "description": "Unique ID or name of the scheduled job."
           }
         ],
         "responses": {
           "204": {
-            "description": "Role successfully deleted."
+            "description": "Schedule successfully deleted."
           },
           "400": {
             "description": "Invalid request.",
@@ -6444,7 +6646,7 @@
             }
           },
           "500": {
-            "description": "Internal error",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -6456,13 +6658,13 @@
         }
       }
     },
-    "/api/rest/2.0/roles/{role_identifier}/update": {
+    "/api/rest/2.0/schedules/{schedule_identifier}/update": {
       "post": {
-        "operationId": "updateRole",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>\n\nUpdates the properties of a Role object.\n\nAvailable only if [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance. To update a Role, the `ROLE_ADMINISTRATION` (**Can manage roles**) privilege is required.\n\n\n\n\n#### Endpoint URL\n",
+        "operationId": "updateSchedule",
+        "description": "\nUpdate schedule. <br/>  <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>\n\nUpdates a scheduled Liveboard job.\n\nRequires at least edit access to Liveboards. To update a schedule on behalf of another user, you need `ADMINISTRATION` (**Can administer Org**) or `JOBSCHEDULING` (**Can schedule for others**) privilege and edit access to the Liveboard.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `JOBSCHEDULING` (**Can schedule for others**) privilege is required.\n\nThe API endpoint allows you to pause a scheduled job, change the status of a paused job. You can also edit the recipients list, frequency of the job, format of the file to send to the recipients in email notifications, PDF options, and time zone setting.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
-          "Roles",
-          "9.5.0.cl"
+          "Schedules",
+          "9.4.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -6471,57 +6673,710 @@
                 "type": "object",
                 "properties": {
                   "name": {
-                    "description": "Name of the Role.",
+                    "description": "Name of the scheduled job.",
                     "type": "string"
                   },
                   "description": {
-                    "description": "Description of the Role.",
+                    "description": "Description of the scheduled job.",
                     "type": "string"
                   },
-                  "privileges": {
-                    "description": "Privileges granted to the role. See [Documentation](https://developers.thoughtspot.com/docs/rbac#_role_categories_and_privileges)for supported roles privileges.",
-                    "type": "array",
-                    "items": {
-                      "type": "string",
-                      "enum": [
-                        "USERDATAUPLOADING",
-                        "DATADOWNLOADING",
-                        "DATAMANAGEMENT",
-                        "SHAREWITHALL",
-                        "JOBSCHEDULING",
-                        "A3ANALYSIS",
-                        "EXPERIMENTALFEATUREPRIVILEGE",
-                        "BYPASSRLS",
-                        "DISABLE_PINBOARD_CREATION",
-                        "DEVELOPER",
-                        "APPLICATION_ADMINISTRATION",
-                        "USER_ADMINISTRATION",
-                        "GROUP_ADMINISTRATION",
-                        "SYSTEM_INFO_ADMINISTRATION",
-                        "SYNCMANAGEMENT",
-                        "ORG_ADMINISTRATION",
-                        "ROLE_ADMINISTRATION",
-                        "AUTHENTICATION_ADMINISTRATION",
-                        "BILLING_INFO_ADMINISTRATION",
-                        "CONTROL_TRUSTED_AUTH",
-                        "TAGMANAGEMENT",
-                        "LIVEBOARD_VERIFIER",
-                        "CAN_MANAGE_CUSTOM_CALENDAR",
-                        "CAN_CREATE_OR_EDIT_CONNECTIONS",
-                        "CAN_MANAGE_WORKSHEET_VIEWS_TABLES",
-                        "CAN_MANAGE_VERSION_CONTROL",
-                        "THIRDPARTY_ANALYSIS",
-                        "CAN_CREATE_CATALOG",
-                        "CAN_ACCESS_ANALYST_STUDIO",
-                        "CAN_MANAGE_ANALYST_STUDIO",
-                        "PREVIEW_DOCUMENT_SEARCH"
-                      ]
-                    }
+                  "metadata_type": {
+                    "description": "Type of metadata object.",
+                    "type": "string",
+                    "enum": [
+                      "LIVEBOARD"
+                    ]
+                  },
+                  "metadata_identifier": {
+                    "description": "Unique ID or name of the metadata object.",
+                    "type": "string"
+                  },
+                  "file_format": {
+                    "description": "Export file format.",
+                    "type": "string",
+                    "enum": [
+                      "CSV",
+                      "PDF",
+                      "XLSX"
+                    ]
+                  },
+                  "liveboard_options": {
+                    "description": "Options to specify the details of a Liveboard.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/LiveboardOptionsInput"
+                      }
+                    ]
+                  },
+                  "pdf_options": {
+                    "description": "Options for PDF export.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/SchedulesPdfOptionsInput"
+                      }
+                    ]
+                  },
+                  "time_zone": {
+                    "description": "Time zone",
+                    "type": "string",
+                    "enum": [
+                      "Africa/Abidjan",
+                      "Africa/Accra",
+                      "Africa/Addis_Ababa",
+                      "Africa/Algiers",
+                      "Africa/Asmara",
+                      "Africa/Asmera",
+                      "Africa/Bamako",
+                      "Africa/Bangui",
+                      "Africa/Banjul",
+                      "Africa/Bissau",
+                      "Africa/Blantyre",
+                      "Africa/Brazzaville",
+                      "Africa/Bujumbura",
+                      "Africa/Cairo",
+                      "Africa/Casablanca",
+                      "Africa/Ceuta",
+                      "Africa/Conakry",
+                      "Africa/Dakar",
+                      "Africa/Dar_es_Salaam",
+                      "Africa/Djibouti",
+                      "Africa/Douala",
+                      "Africa/El_Aaiun",
+                      "Africa/Freetown",
+                      "Africa/Gaborone",
+                      "Africa/Harare",
+                      "Africa/Johannesburg",
+                      "Africa/Juba",
+                      "Africa/Kampala",
+                      "Africa/Khartoum",
+                      "Africa/Kigali",
+                      "Africa/Kinshasa",
+                      "Africa/Lagos",
+                      "Africa/Libreville",
+                      "Africa/Lome",
+                      "Africa/Luanda",
+                      "Africa/Lubumbashi",
+                      "Africa/Lusaka",
+                      "Africa/Malabo",
+                      "Africa/Maputo",
+                      "Africa/Maseru",
+                      "Africa/Mbabane",
+                      "Africa/Mogadishu",
+                      "Africa/Monrovia",
+                      "Africa/Nairobi",
+                      "Africa/Ndjamena",
+                      "Africa/Niamey",
+                      "Africa/Nouakchott",
+                      "Africa/Ouagadougou",
+                      "Africa/Porto-Novo",
+                      "Africa/Sao_Tome",
+                      "Africa/Timbuktu",
+                      "Africa/Tripoli",
+                      "Africa/Tunis",
+                      "Africa/Windhoek",
+                      "America/Adak",
+                      "America/Anchorage",
+                      "America/Anguilla",
+                      "America/Antigua",
+                      "America/Araguaina",
+                      "America/Argentina/Buenos_Aires",
+                      "America/Argentina/Catamarca",
+                      "America/Argentina/ComodRivadavia",
+                      "America/Argentina/Cordoba",
+                      "America/Argentina/Jujuy",
+                      "America/Argentina/La_Rioja",
+                      "America/Argentina/Mendoza",
+                      "America/Argentina/Rio_Gallegos",
+                      "America/Argentina/Salta",
+                      "America/Argentina/San_Juan",
+                      "America/Argentina/San_Luis",
+                      "America/Argentina/Tucuman",
+                      "America/Argentina/Ushuaia",
+                      "America/Aruba",
+                      "America/Asuncion",
+                      "America/Atikokan",
+                      "America/Atka",
+                      "America/Bahia",
+                      "America/Bahia_Banderas",
+                      "America/Barbados",
+                      "America/Belem",
+                      "America/Belize",
+                      "America/Blanc-Sablon",
+                      "America/Boa_Vista",
+                      "America/Bogota",
+                      "America/Boise",
+                      "America/Buenos_Aires",
+                      "America/Cambridge_Bay",
+                      "America/Campo_Grande",
+                      "America/Cancun",
+                      "America/Caracas",
+                      "America/Catamarca",
+                      "America/Cayenne",
+                      "America/Cayman",
+                      "America/Chicago",
+                      "America/Chihuahua",
+                      "America/Coral_Harbour",
+                      "America/Cordoba",
+                      "America/Costa_Rica",
+                      "America/Creston",
+                      "America/Cuiaba",
+                      "America/Curacao",
+                      "America/Danmarkshavn",
+                      "America/Dawson",
+                      "America/Dawson_Creek",
+                      "America/Denver",
+                      "America/Detroit",
+                      "America/Dominica",
+                      "America/Edmonton",
+                      "America/Eirunepe",
+                      "America/El_Salvador",
+                      "America/Ensenada",
+                      "America/Fort_Nelson",
+                      "America/Fort_Wayne",
+                      "America/Fortaleza",
+                      "America/Glace_Bay",
+                      "America/Godthab",
+                      "America/Goose_Bay",
+                      "America/Grand_Turk",
+                      "America/Grenada",
+                      "America/Guadeloupe",
+                      "America/Guatemala",
+                      "America/Guayaquil",
+                      "America/Guyana",
+                      "America/Halifax",
+                      "America/Havana",
+                      "America/Hermosillo",
+                      "America/Indiana/Indianapolis",
+                      "America/Indiana/Knox",
+                      "America/Indiana/Marengo",
+                      "America/Indiana/Petersburg",
+                      "America/Indiana/Tell_City",
+                      "America/Indiana/Vevay",
+                      "America/Indiana/Vincennes",
+                      "America/Indiana/Winamac",
+                      "America/Indianapolis",
+                      "America/Inuvik",
+                      "America/Iqaluit",
+                      "America/Jamaica",
+                      "America/Jujuy",
+                      "America/Juneau",
+                      "America/Kentucky/Louisville",
+                      "America/Kentucky/Monticello",
+                      "America/Knox_IN",
+                      "America/Kralendijk",
+                      "America/La_Paz",
+                      "America/Lima",
+                      "America/Los_Angeles",
+                      "America/Louisville",
+                      "America/Lower_Princes",
+                      "America/Maceio",
+                      "America/Managua",
+                      "America/Manaus",
+                      "America/Marigot",
+                      "America/Martinique",
+                      "America/Matamoros",
+                      "America/Mazatlan",
+                      "America/Mendoza",
+                      "America/Menominee",
+                      "America/Merida",
+                      "America/Metlakatla",
+                      "America/Mexico_City",
+                      "America/Miquelon",
+                      "America/Moncton",
+                      "America/Monterrey",
+                      "America/Montevideo",
+                      "America/Montreal",
+                      "America/Montserrat",
+                      "America/Nassau",
+                      "America/New_York",
+                      "America/Nipigon",
+                      "America/Nome",
+                      "America/Noronha",
+                      "America/North_Dakota/Beulah",
+                      "America/North_Dakota/Center",
+                      "America/North_Dakota/New_Salem",
+                      "America/Nuuk",
+                      "America/Ojinaga",
+                      "America/Panama",
+                      "America/Pangnirtung",
+                      "America/Paramaribo",
+                      "America/Phoenix",
+                      "America/Port-au-Prince",
+                      "America/Port_of_Spain",
+                      "America/Porto_Acre",
+                      "America/Porto_Velho",
+                      "America/Puerto_Rico",
+                      "America/Punta_Arenas",
+                      "America/Rainy_River",
+                      "America/Rankin_Inlet",
+                      "America/Recife",
+                      "America/Regina",
+                      "America/Resolute",
+                      "America/Rio_Branco",
+                      "America/Rosario",
+                      "America/Santa_Isabel",
+                      "America/Santarem",
+                      "America/Santiago",
+                      "America/Santo_Domingo",
+                      "America/Sao_Paulo",
+                      "America/Scoresbysund",
+                      "America/Shiprock",
+                      "America/Sitka",
+                      "America/St_Barthelemy",
+                      "America/St_Johns",
+                      "America/St_Kitts",
+                      "America/St_Lucia",
+                      "America/St_Thomas",
+                      "America/St_Vincent",
+                      "America/Swift_Current",
+                      "America/Tegucigalpa",
+                      "America/Thule",
+                      "America/Thunder_Bay",
+                      "America/Tijuana",
+                      "America/Toronto",
+                      "America/Tortola",
+                      "America/Vancouver",
+                      "America/Virgin",
+                      "America/Whitehorse",
+                      "America/Winnipeg",
+                      "America/Yakutat",
+                      "America/Yellowknife",
+                      "Antarctica/Casey",
+                      "Antarctica/Davis",
+                      "Antarctica/DumontDUrville",
+                      "Antarctica/Macquarie",
+                      "Antarctica/Mawson",
+                      "Antarctica/McMurdo",
+                      "Antarctica/Palmer",
+                      "Antarctica/Rothera",
+                      "Antarctica/South_Pole",
+                      "Antarctica/Syowa",
+                      "Antarctica/Troll",
+                      "Antarctica/Vostok",
+                      "Arctic/Longyearbyen",
+                      "Asia/Aden",
+                      "Asia/Almaty",
+                      "Asia/Amman",
+                      "Asia/Anadyr",
+                      "Asia/Aqtau",
+                      "Asia/Aqtobe",
+                      "Asia/Ashgabat",
+                      "Asia/Ashkhabad",
+                      "Asia/Atyrau",
+                      "Asia/Baghdad",
+                      "Asia/Bahrain",
+                      "Asia/Baku",
+                      "Asia/Bangkok",
+                      "Asia/Barnaul",
+                      "Asia/Beirut",
+                      "Asia/Bishkek",
+                      "Asia/Brunei",
+                      "Asia/Calcutta",
+                      "Asia/Chita",
+                      "Asia/Choibalsan",
+                      "Asia/Chongqing",
+                      "Asia/Chungking",
+                      "Asia/Colombo",
+                      "Asia/Dacca",
+                      "Asia/Damascus",
+                      "Asia/Dhaka",
+                      "Asia/Dili",
+                      "Asia/Dubai",
+                      "Asia/Dushanbe",
+                      "Asia/Famagusta",
+                      "Asia/Gaza",
+                      "Asia/Harbin",
+                      "Asia/Hebron",
+                      "Asia/Ho_Chi_Minh",
+                      "Asia/Hong_Kong",
+                      "Asia/Hovd",
+                      "Asia/Irkutsk",
+                      "Asia/Istanbul",
+                      "Asia/Jakarta",
+                      "Asia/Jayapura",
+                      "Asia/Jerusalem",
+                      "Asia/Kabul",
+                      "Asia/Kamchatka",
+                      "Asia/Karachi",
+                      "Asia/Kashgar",
+                      "Asia/Kathmandu",
+                      "Asia/Katmandu",
+                      "Asia/Khandyga",
+                      "Asia/Kolkata",
+                      "Asia/Krasnoyarsk",
+                      "Asia/Kuala_Lumpur",
+                      "Asia/Kuching",
+                      "Asia/Kuwait",
+                      "Asia/Macao",
+                      "Asia/Macau",
+                      "Asia/Magadan",
+                      "Asia/Makassar",
+                      "Asia/Manila",
+                      "Asia/Muscat",
+                      "Asia/Nicosia",
+                      "Asia/Novokuznetsk",
+                      "Asia/Novosibirsk",
+                      "Asia/Omsk",
+                      "Asia/Oral",
+                      "Asia/Phnom_Penh",
+                      "Asia/Pontianak",
+                      "Asia/Pyongyang",
+                      "Asia/Qatar",
+                      "Asia/Qostanay",
+                      "Asia/Qyzylorda",
+                      "Asia/Rangoon",
+                      "Asia/Riyadh",
+                      "Asia/Saigon",
+                      "Asia/Sakhalin",
+                      "Asia/Samarkand",
+                      "Asia/Seoul",
+                      "Asia/Shanghai",
+                      "Asia/Singapore",
+                      "Asia/Srednekolymsk",
+                      "Asia/Taipei",
+                      "Asia/Tashkent",
+                      "Asia/Tbilisi",
+                      "Asia/Tehran",
+                      "Asia/Tel_Aviv",
+                      "Asia/Thimbu",
+                      "Asia/Thimphu",
+                      "Asia/Tokyo",
+                      "Asia/Tomsk",
+                      "Asia/Ujung_Pandang",
+                      "Asia/Ulaanbaatar",
+                      "Asia/Ulan_Bator",
+                      "Asia/Urumqi",
+                      "Asia/Ust-Nera",
+                      "Asia/Vientiane",
+                      "Asia/Vladivostok",
+                      "Asia/Yakutsk",
+                      "Asia/Yangon",
+                      "Asia/Yekaterinburg",
+                      "Asia/Yerevan",
+                      "Atlantic/Azores",
+                      "Atlantic/Bermuda",
+                      "Atlantic/Canary",
+                      "Atlantic/Cape_Verde",
+                      "Atlantic/Faeroe",
+                      "Atlantic/Faroe",
+                      "Atlantic/Jan_Mayen",
+                      "Atlantic/Madeira",
+                      "Atlantic/Reykjavik",
+                      "Atlantic/South_Georgia",
+                      "Atlantic/St_Helena",
+                      "Atlantic/Stanley",
+                      "Australia/ACT",
+                      "Australia/Adelaide",
+                      "Australia/Brisbane",
+                      "Australia/Broken_Hill",
+                      "Australia/Canberra",
+                      "Australia/Currie",
+                      "Australia/Darwin",
+                      "Australia/Eucla",
+                      "Australia/Hobart",
+                      "Australia/LHI",
+                      "Australia/Lindeman",
+                      "Australia/Lord_Howe",
+                      "Australia/Melbourne",
+                      "Australia/NSW",
+                      "Australia/North",
+                      "Australia/Perth",
+                      "Australia/Queensland",
+                      "Australia/South",
+                      "Australia/Sydney",
+                      "Australia/Tasmania",
+                      "Australia/Victoria",
+                      "Australia/West",
+                      "Australia/Yancowinna",
+                      "Brazil/Acre",
+                      "Brazil/DeNoronha",
+                      "Brazil/East",
+                      "Brazil/West",
+                      "CET",
+                      "CST6CDT",
+                      "Canada/Atlantic",
+                      "Canada/Central",
+                      "Canada/Eastern",
+                      "Canada/Mountain",
+                      "Canada/Newfoundland",
+                      "Canada/Pacific",
+                      "Canada/Saskatchewan",
+                      "Canada/Yukon",
+                      "Chile/Continental",
+                      "Chile/EasterIsland",
+                      "Cuba",
+                      "EET",
+                      "EST5EDT",
+                      "Egypt",
+                      "Eire",
+                      "Etc/GMT",
+                      "Etc/GMT+0",
+                      "Etc/GMT+1",
+                      "Etc/GMT+10",
+                      "Etc/GMT+11",
+                      "Etc/GMT+12",
+                      "Etc/GMT+2",
+                      "Etc/GMT+3",
+                      "Etc/GMT+4",
+                      "Etc/GMT+5",
+                      "Etc/GMT+6",
+                      "Etc/GMT+7",
+                      "Etc/GMT+8",
+                      "Etc/GMT+9",
+                      "Etc/GMT-0",
+                      "Etc/GMT-1",
+                      "Etc/GMT-10",
+                      "Etc/GMT-11",
+                      "Etc/GMT-12",
+                      "Etc/GMT-13",
+                      "Etc/GMT-14",
+                      "Etc/GMT-2",
+                      "Etc/GMT-3",
+                      "Etc/GMT-4",
+                      "Etc/GMT-5",
+                      "Etc/GMT-6",
+                      "Etc/GMT-7",
+                      "Etc/GMT-8",
+                      "Etc/GMT-9",
+                      "Etc/GMT0",
+                      "Etc/Greenwich",
+                      "Etc/UCT",
+                      "Etc/UTC",
+                      "Etc/Universal",
+                      "Etc/Zulu",
+                      "Europe/Amsterdam",
+                      "Europe/Andorra",
+                      "Europe/Astrakhan",
+                      "Europe/Athens",
+                      "Europe/Belfast",
+                      "Europe/Belgrade",
+                      "Europe/Berlin",
+                      "Europe/Bratislava",
+                      "Europe/Brussels",
+                      "Europe/Bucharest",
+                      "Europe/Budapest",
+                      "Europe/Busingen",
+                      "Europe/Chisinau",
+                      "Europe/Copenhagen",
+                      "Europe/Dublin",
+                      "Europe/Gibraltar",
+                      "Europe/Guernsey",
+                      "Europe/Helsinki",
+                      "Europe/Isle_of_Man",
+                      "Europe/Istanbul",
+                      "Europe/Jersey",
+                      "Europe/Kaliningrad",
+                      "Europe/Kiev",
+                      "Europe/Kirov",
+                      "Europe/Kyiv",
+                      "Europe/Lisbon",
+                      "Europe/Ljubljana",
+                      "Europe/London",
+                      "Europe/Luxembourg",
+                      "Europe/Madrid",
+                      "Europe/Malta",
+                      "Europe/Mariehamn",
+                      "Europe/Minsk",
+                      "Europe/Monaco",
+                      "Europe/Moscow",
+                      "Europe/Nicosia",
+                      "Europe/Oslo",
+                      "Europe/Paris",
+                      "Europe/Podgorica",
+                      "Europe/Prague",
+                      "Europe/Riga",
+                      "Europe/Rome",
+                      "Europe/Samara",
+                      "Europe/San_Marino",
+                      "Europe/Sarajevo",
+                      "Europe/Saratov",
+                      "Europe/Simferopol",
+                      "Europe/Skopje",
+                      "Europe/Sofia",
+                      "Europe/Stockholm",
+                      "Europe/Tallinn",
+                      "Europe/Tirane",
+                      "Europe/Tiraspol",
+                      "Europe/Ulyanovsk",
+                      "Europe/Uzhgorod",
+                      "Europe/Vaduz",
+                      "Europe/Vatican",
+                      "Europe/Vienna",
+                      "Europe/Vilnius",
+                      "Europe/Volgograd",
+                      "Europe/Warsaw",
+                      "Europe/Zagreb",
+                      "Europe/Zaporozhye",
+                      "Europe/Zurich",
+                      "GB",
+                      "GB-Eire",
+                      "GMT",
+                      "GMT0",
+                      "Greenwich",
+                      "Hongkong",
+                      "Iceland",
+                      "Indian/Antananarivo",
+                      "Indian/Chagos",
+                      "Indian/Christmas",
+                      "Indian/Cocos",
+                      "Indian/Comoro",
+                      "Indian/Kerguelen",
+                      "Indian/Mahe",
+                      "Indian/Maldives",
+                      "Indian/Mauritius",
+                      "Indian/Mayotte",
+                      "Indian/Reunion",
+                      "Iran",
+                      "Israel",
+                      "Jamaica",
+                      "Japan",
+                      "Kwajalein",
+                      "Libya",
+                      "MET",
+                      "MST7MDT",
+                      "Mexico/BajaNorte",
+                      "Mexico/BajaSur",
+                      "Mexico/General",
+                      "NZ",
+                      "NZ-CHAT",
+                      "Navajo",
+                      "PRC",
+                      "PST8PDT",
+                      "Pacific/Apia",
+                      "Pacific/Auckland",
+                      "Pacific/Bougainville",
+                      "Pacific/Chatham",
+                      "Pacific/Chuuk",
+                      "Pacific/Easter",
+                      "Pacific/Efate",
+                      "Pacific/Enderbury",
+                      "Pacific/Fakaofo",
+                      "Pacific/Fiji",
+                      "Pacific/Funafuti",
+                      "Pacific/Galapagos",
+                      "Pacific/Gambier",
+                      "Pacific/Guadalcanal",
+                      "Pacific/Guam",
+                      "Pacific/Honolulu",
+                      "Pacific/Johnston",
+                      "Pacific/Kanton",
+                      "Pacific/Kiritimati",
+                      "Pacific/Kosrae",
+                      "Pacific/Kwajalein",
+                      "Pacific/Majuro",
+                      "Pacific/Marquesas",
+                      "Pacific/Midway",
+                      "Pacific/Nauru",
+                      "Pacific/Niue",
+                      "Pacific/Norfolk",
+                      "Pacific/Noumea",
+                      "Pacific/Pago_Pago",
+                      "Pacific/Palau",
+                      "Pacific/Pitcairn",
+                      "Pacific/Pohnpei",
+                      "Pacific/Ponape",
+                      "Pacific/Port_Moresby",
+                      "Pacific/Rarotonga",
+                      "Pacific/Saipan",
+                      "Pacific/Samoa",
+                      "Pacific/Tahiti",
+                      "Pacific/Tarawa",
+                      "Pacific/Tongatapu",
+                      "Pacific/Truk",
+                      "Pacific/Wake",
+                      "Pacific/Wallis",
+                      "Pacific/Yap",
+                      "Poland",
+                      "Portugal",
+                      "ROK",
+                      "Singapore",
+                      "SystemV/AST4",
+                      "SystemV/AST4ADT",
+                      "SystemV/CST6",
+                      "SystemV/CST6CDT",
+                      "SystemV/EST5",
+                      "SystemV/EST5EDT",
+                      "SystemV/HST10",
+                      "SystemV/MST7",
+                      "SystemV/MST7MDT",
+                      "SystemV/PST8",
+                      "SystemV/PST8PDT",
+                      "SystemV/YST9",
+                      "SystemV/YST9YDT",
+                      "Turkey",
+                      "UCT",
+                      "US/Alaska",
+                      "US/Aleutian",
+                      "US/Arizona",
+                      "US/Central",
+                      "US/East-Indiana",
+                      "US/Eastern",
+                      "US/Hawaii",
+                      "US/Indiana-Starke",
+                      "US/Michigan",
+                      "US/Mountain",
+                      "US/Pacific",
+                      "US/Samoa",
+                      "UTC",
+                      "Universal",
+                      "W-SU",
+                      "WET",
+                      "Zulu",
+                      "EST",
+                      "HST",
+                      "MST",
+                      "ACT",
+                      "AET",
+                      "AGT",
+                      "ART",
+                      "AST",
+                      "BET",
+                      "BST",
+                      "CAT",
+                      "CNT",
+                      "CST",
+                      "CTT",
+                      "EAT",
+                      "ECT",
+                      "IET",
+                      "IST",
+                      "JST",
+                      "MIT",
+                      "NET",
+                      "NST",
+                      "PLT",
+                      "PNT",
+                      "PRT",
+                      "PST",
+                      "SST",
+                      "VST"
+                    ]
+                  },
+                  "frequency": {
+                    "description": "Frequency of the scheduled job run.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/FrequencyInput"
+                      }
+                    ]
+                  },
+                  "recipient_details": {
+                    "description": "Recipients of the scheduled job notifications. You can add the ID or name of the ThoughtSpot users or groups as recipients in the `principals` array. If a recipient is not a ThoughtSpot user, specify email address.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/RecipientDetailsInput"
+                      }
+                    ]
+                  },
+                  "status": {
+                    "description": "Status of the schedule",
+                    "type": "string",
+                    "enum": [
+                      "ACTIVE",
+                      "PAUSE"
+                    ]
                   }
-                },
-                "required": [
-                  "name"
-                ]
+                }
               }
             }
           },
@@ -6530,24 +7385,17 @@
         "parameters": [
           {
             "in": "path",
-            "name": "role_identifier",
+            "name": "schedule_identifier",
             "required": true,
             "schema": {
               "type": "string"
             },
-            "description": "Unique ID or name of the Role."
+            "description": "Unique ID or name of the schedule."
           }
         ],
         "responses": {
-          "200": {
-            "description": "Role successfully updated.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RoleResponse"
-                }
-              }
-            }
+          "204": {
+            "description": "Schedule successfully updated."
           },
           "400": {
             "description": "Invalid request.",
@@ -7447,854 +8295,6 @@
                 }
               }
             }
-          },
-          "400": {
-            "description": "Invalid request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/rest/2.0/schedules/{schedule_identifier}/delete": {
-      "post": {
-        "operationId": "deleteSchedule",
-        "description": "\nDeletes a scheduled job. <br/>  <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>\n\nDeletes a scheduled Liveboard job.\n\nRequires at least edit access to Liveboard or `ADMINISTRATION` (**Can administer Org**) privilege.   \nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `JOBSCHEDULING` (**Can schedule for others**) privilege is required.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "Schedules",
-          "9.4.0.cl"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "schedule_identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Unique ID or name of the scheduled job."
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Schedule successfully deleted."
-          },
-          "400": {
-            "description": "Invalid request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/rest/2.0/schedules/{schedule_identifier}/update": {
-      "post": {
-        "operationId": "updateSchedule",
-        "description": "\nUpdate schedule. <br/>  <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>\n\nUpdates a scheduled Liveboard job.\n\nRequires at least edit access to Liveboards. To update a schedule on behalf of another user, you need `ADMINISTRATION` (**Can administer Org**) or `JOBSCHEDULING` (**Can schedule for others**) privilege and edit access to the Liveboard.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `JOBSCHEDULING` (**Can schedule for others**) privilege is required.\n\nThe API endpoint allows you to pause a scheduled job, change the status of a paused job. You can also edit the recipients list, frequency of the job, format of the file to send to the recipients in email notifications, PDF options, and time zone setting.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "Schedules",
-          "9.4.0.cl"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "description": "Name of the scheduled job.",
-                    "type": "string"
-                  },
-                  "description": {
-                    "description": "Description of the scheduled job.",
-                    "type": "string"
-                  },
-                  "metadata_type": {
-                    "description": "Type of metadata object.",
-                    "type": "string",
-                    "enum": [
-                      "LIVEBOARD"
-                    ]
-                  },
-                  "metadata_identifier": {
-                    "description": "Unique ID or name of the metadata object.",
-                    "type": "string"
-                  },
-                  "file_format": {
-                    "description": "Export file format.",
-                    "type": "string",
-                    "enum": [
-                      "CSV",
-                      "PDF",
-                      "XLSX"
-                    ]
-                  },
-                  "liveboard_options": {
-                    "description": "Options to specify the details of a Liveboard.",
-                    "allOf": [
-                      {
-                        "$ref": "#/components/schemas/LiveboardOptionsInput"
-                      }
-                    ]
-                  },
-                  "pdf_options": {
-                    "description": "Options for PDF export.",
-                    "allOf": [
-                      {
-                        "$ref": "#/components/schemas/SchedulesPdfOptionsInput"
-                      }
-                    ]
-                  },
-                  "time_zone": {
-                    "description": "Time zone",
-                    "type": "string",
-                    "enum": [
-                      "Africa/Abidjan",
-                      "Africa/Accra",
-                      "Africa/Addis_Ababa",
-                      "Africa/Algiers",
-                      "Africa/Asmara",
-                      "Africa/Asmera",
-                      "Africa/Bamako",
-                      "Africa/Bangui",
-                      "Africa/Banjul",
-                      "Africa/Bissau",
-                      "Africa/Blantyre",
-                      "Africa/Brazzaville",
-                      "Africa/Bujumbura",
-                      "Africa/Cairo",
-                      "Africa/Casablanca",
-                      "Africa/Ceuta",
-                      "Africa/Conakry",
-                      "Africa/Dakar",
-                      "Africa/Dar_es_Salaam",
-                      "Africa/Djibouti",
-                      "Africa/Douala",
-                      "Africa/El_Aaiun",
-                      "Africa/Freetown",
-                      "Africa/Gaborone",
-                      "Africa/Harare",
-                      "Africa/Johannesburg",
-                      "Africa/Juba",
-                      "Africa/Kampala",
-                      "Africa/Khartoum",
-                      "Africa/Kigali",
-                      "Africa/Kinshasa",
-                      "Africa/Lagos",
-                      "Africa/Libreville",
-                      "Africa/Lome",
-                      "Africa/Luanda",
-                      "Africa/Lubumbashi",
-                      "Africa/Lusaka",
-                      "Africa/Malabo",
-                      "Africa/Maputo",
-                      "Africa/Maseru",
-                      "Africa/Mbabane",
-                      "Africa/Mogadishu",
-                      "Africa/Monrovia",
-                      "Africa/Nairobi",
-                      "Africa/Ndjamena",
-                      "Africa/Niamey",
-                      "Africa/Nouakchott",
-                      "Africa/Ouagadougou",
-                      "Africa/Porto-Novo",
-                      "Africa/Sao_Tome",
-                      "Africa/Timbuktu",
-                      "Africa/Tripoli",
-                      "Africa/Tunis",
-                      "Africa/Windhoek",
-                      "America/Adak",
-                      "America/Anchorage",
-                      "America/Anguilla",
-                      "America/Antigua",
-                      "America/Araguaina",
-                      "America/Argentina/Buenos_Aires",
-                      "America/Argentina/Catamarca",
-                      "America/Argentina/ComodRivadavia",
-                      "America/Argentina/Cordoba",
-                      "America/Argentina/Jujuy",
-                      "America/Argentina/La_Rioja",
-                      "America/Argentina/Mendoza",
-                      "America/Argentina/Rio_Gallegos",
-                      "America/Argentina/Salta",
-                      "America/Argentina/San_Juan",
-                      "America/Argentina/San_Luis",
-                      "America/Argentina/Tucuman",
-                      "America/Argentina/Ushuaia",
-                      "America/Aruba",
-                      "America/Asuncion",
-                      "America/Atikokan",
-                      "America/Atka",
-                      "America/Bahia",
-                      "America/Bahia_Banderas",
-                      "America/Barbados",
-                      "America/Belem",
-                      "America/Belize",
-                      "America/Blanc-Sablon",
-                      "America/Boa_Vista",
-                      "America/Bogota",
-                      "America/Boise",
-                      "America/Buenos_Aires",
-                      "America/Cambridge_Bay",
-                      "America/Campo_Grande",
-                      "America/Cancun",
-                      "America/Caracas",
-                      "America/Catamarca",
-                      "America/Cayenne",
-                      "America/Cayman",
-                      "America/Chicago",
-                      "America/Chihuahua",
-                      "America/Coral_Harbour",
-                      "America/Cordoba",
-                      "America/Costa_Rica",
-                      "America/Creston",
-                      "America/Cuiaba",
-                      "America/Curacao",
-                      "America/Danmarkshavn",
-                      "America/Dawson",
-                      "America/Dawson_Creek",
-                      "America/Denver",
-                      "America/Detroit",
-                      "America/Dominica",
-                      "America/Edmonton",
-                      "America/Eirunepe",
-                      "America/El_Salvador",
-                      "America/Ensenada",
-                      "America/Fort_Nelson",
-                      "America/Fort_Wayne",
-                      "America/Fortaleza",
-                      "America/Glace_Bay",
-                      "America/Godthab",
-                      "America/Goose_Bay",
-                      "America/Grand_Turk",
-                      "America/Grenada",
-                      "America/Guadeloupe",
-                      "America/Guatemala",
-                      "America/Guayaquil",
-                      "America/Guyana",
-                      "America/Halifax",
-                      "America/Havana",
-                      "America/Hermosillo",
-                      "America/Indiana/Indianapolis",
-                      "America/Indiana/Knox",
-                      "America/Indiana/Marengo",
-                      "America/Indiana/Petersburg",
-                      "America/Indiana/Tell_City",
-                      "America/Indiana/Vevay",
-                      "America/Indiana/Vincennes",
-                      "America/Indiana/Winamac",
-                      "America/Indianapolis",
-                      "America/Inuvik",
-                      "America/Iqaluit",
-                      "America/Jamaica",
-                      "America/Jujuy",
-                      "America/Juneau",
-                      "America/Kentucky/Louisville",
-                      "America/Kentucky/Monticello",
-                      "America/Knox_IN",
-                      "America/Kralendijk",
-                      "America/La_Paz",
-                      "America/Lima",
-                      "America/Los_Angeles",
-                      "America/Louisville",
-                      "America/Lower_Princes",
-                      "America/Maceio",
-                      "America/Managua",
-                      "America/Manaus",
-                      "America/Marigot",
-                      "America/Martinique",
-                      "America/Matamoros",
-                      "America/Mazatlan",
-                      "America/Mendoza",
-                      "America/Menominee",
-                      "America/Merida",
-                      "America/Metlakatla",
-                      "America/Mexico_City",
-                      "America/Miquelon",
-                      "America/Moncton",
-                      "America/Monterrey",
-                      "America/Montevideo",
-                      "America/Montreal",
-                      "America/Montserrat",
-                      "America/Nassau",
-                      "America/New_York",
-                      "America/Nipigon",
-                      "America/Nome",
-                      "America/Noronha",
-                      "America/North_Dakota/Beulah",
-                      "America/North_Dakota/Center",
-                      "America/North_Dakota/New_Salem",
-                      "America/Nuuk",
-                      "America/Ojinaga",
-                      "America/Panama",
-                      "America/Pangnirtung",
-                      "America/Paramaribo",
-                      "America/Phoenix",
-                      "America/Port-au-Prince",
-                      "America/Port_of_Spain",
-                      "America/Porto_Acre",
-                      "America/Porto_Velho",
-                      "America/Puerto_Rico",
-                      "America/Punta_Arenas",
-                      "America/Rainy_River",
-                      "America/Rankin_Inlet",
-                      "America/Recife",
-                      "America/Regina",
-                      "America/Resolute",
-                      "America/Rio_Branco",
-                      "America/Rosario",
-                      "America/Santa_Isabel",
-                      "America/Santarem",
-                      "America/Santiago",
-                      "America/Santo_Domingo",
-                      "America/Sao_Paulo",
-                      "America/Scoresbysund",
-                      "America/Shiprock",
-                      "America/Sitka",
-                      "America/St_Barthelemy",
-                      "America/St_Johns",
-                      "America/St_Kitts",
-                      "America/St_Lucia",
-                      "America/St_Thomas",
-                      "America/St_Vincent",
-                      "America/Swift_Current",
-                      "America/Tegucigalpa",
-                      "America/Thule",
-                      "America/Thunder_Bay",
-                      "America/Tijuana",
-                      "America/Toronto",
-                      "America/Tortola",
-                      "America/Vancouver",
-                      "America/Virgin",
-                      "America/Whitehorse",
-                      "America/Winnipeg",
-                      "America/Yakutat",
-                      "America/Yellowknife",
-                      "Antarctica/Casey",
-                      "Antarctica/Davis",
-                      "Antarctica/DumontDUrville",
-                      "Antarctica/Macquarie",
-                      "Antarctica/Mawson",
-                      "Antarctica/McMurdo",
-                      "Antarctica/Palmer",
-                      "Antarctica/Rothera",
-                      "Antarctica/South_Pole",
-                      "Antarctica/Syowa",
-                      "Antarctica/Troll",
-                      "Antarctica/Vostok",
-                      "Arctic/Longyearbyen",
-                      "Asia/Aden",
-                      "Asia/Almaty",
-                      "Asia/Amman",
-                      "Asia/Anadyr",
-                      "Asia/Aqtau",
-                      "Asia/Aqtobe",
-                      "Asia/Ashgabat",
-                      "Asia/Ashkhabad",
-                      "Asia/Atyrau",
-                      "Asia/Baghdad",
-                      "Asia/Bahrain",
-                      "Asia/Baku",
-                      "Asia/Bangkok",
-                      "Asia/Barnaul",
-                      "Asia/Beirut",
-                      "Asia/Bishkek",
-                      "Asia/Brunei",
-                      "Asia/Calcutta",
-                      "Asia/Chita",
-                      "Asia/Choibalsan",
-                      "Asia/Chongqing",
-                      "Asia/Chungking",
-                      "Asia/Colombo",
-                      "Asia/Dacca",
-                      "Asia/Damascus",
-                      "Asia/Dhaka",
-                      "Asia/Dili",
-                      "Asia/Dubai",
-                      "Asia/Dushanbe",
-                      "Asia/Famagusta",
-                      "Asia/Gaza",
-                      "Asia/Harbin",
-                      "Asia/Hebron",
-                      "Asia/Ho_Chi_Minh",
-                      "Asia/Hong_Kong",
-                      "Asia/Hovd",
-                      "Asia/Irkutsk",
-                      "Asia/Istanbul",
-                      "Asia/Jakarta",
-                      "Asia/Jayapura",
-                      "Asia/Jerusalem",
-                      "Asia/Kabul",
-                      "Asia/Kamchatka",
-                      "Asia/Karachi",
-                      "Asia/Kashgar",
-                      "Asia/Kathmandu",
-                      "Asia/Katmandu",
-                      "Asia/Khandyga",
-                      "Asia/Kolkata",
-                      "Asia/Krasnoyarsk",
-                      "Asia/Kuala_Lumpur",
-                      "Asia/Kuching",
-                      "Asia/Kuwait",
-                      "Asia/Macao",
-                      "Asia/Macau",
-                      "Asia/Magadan",
-                      "Asia/Makassar",
-                      "Asia/Manila",
-                      "Asia/Muscat",
-                      "Asia/Nicosia",
-                      "Asia/Novokuznetsk",
-                      "Asia/Novosibirsk",
-                      "Asia/Omsk",
-                      "Asia/Oral",
-                      "Asia/Phnom_Penh",
-                      "Asia/Pontianak",
-                      "Asia/Pyongyang",
-                      "Asia/Qatar",
-                      "Asia/Qostanay",
-                      "Asia/Qyzylorda",
-                      "Asia/Rangoon",
-                      "Asia/Riyadh",
-                      "Asia/Saigon",
-                      "Asia/Sakhalin",
-                      "Asia/Samarkand",
-                      "Asia/Seoul",
-                      "Asia/Shanghai",
-                      "Asia/Singapore",
-                      "Asia/Srednekolymsk",
-                      "Asia/Taipei",
-                      "Asia/Tashkent",
-                      "Asia/Tbilisi",
-                      "Asia/Tehran",
-                      "Asia/Tel_Aviv",
-                      "Asia/Thimbu",
-                      "Asia/Thimphu",
-                      "Asia/Tokyo",
-                      "Asia/Tomsk",
-                      "Asia/Ujung_Pandang",
-                      "Asia/Ulaanbaatar",
-                      "Asia/Ulan_Bator",
-                      "Asia/Urumqi",
-                      "Asia/Ust-Nera",
-                      "Asia/Vientiane",
-                      "Asia/Vladivostok",
-                      "Asia/Yakutsk",
-                      "Asia/Yangon",
-                      "Asia/Yekaterinburg",
-                      "Asia/Yerevan",
-                      "Atlantic/Azores",
-                      "Atlantic/Bermuda",
-                      "Atlantic/Canary",
-                      "Atlantic/Cape_Verde",
-                      "Atlantic/Faeroe",
-                      "Atlantic/Faroe",
-                      "Atlantic/Jan_Mayen",
-                      "Atlantic/Madeira",
-                      "Atlantic/Reykjavik",
-                      "Atlantic/South_Georgia",
-                      "Atlantic/St_Helena",
-                      "Atlantic/Stanley",
-                      "Australia/ACT",
-                      "Australia/Adelaide",
-                      "Australia/Brisbane",
-                      "Australia/Broken_Hill",
-                      "Australia/Canberra",
-                      "Australia/Currie",
-                      "Australia/Darwin",
-                      "Australia/Eucla",
-                      "Australia/Hobart",
-                      "Australia/LHI",
-                      "Australia/Lindeman",
-                      "Australia/Lord_Howe",
-                      "Australia/Melbourne",
-                      "Australia/NSW",
-                      "Australia/North",
-                      "Australia/Perth",
-                      "Australia/Queensland",
-                      "Australia/South",
-                      "Australia/Sydney",
-                      "Australia/Tasmania",
-                      "Australia/Victoria",
-                      "Australia/West",
-                      "Australia/Yancowinna",
-                      "Brazil/Acre",
-                      "Brazil/DeNoronha",
-                      "Brazil/East",
-                      "Brazil/West",
-                      "CET",
-                      "CST6CDT",
-                      "Canada/Atlantic",
-                      "Canada/Central",
-                      "Canada/Eastern",
-                      "Canada/Mountain",
-                      "Canada/Newfoundland",
-                      "Canada/Pacific",
-                      "Canada/Saskatchewan",
-                      "Canada/Yukon",
-                      "Chile/Continental",
-                      "Chile/EasterIsland",
-                      "Cuba",
-                      "EET",
-                      "EST5EDT",
-                      "Egypt",
-                      "Eire",
-                      "Etc/GMT",
-                      "Etc/GMT+0",
-                      "Etc/GMT+1",
-                      "Etc/GMT+10",
-                      "Etc/GMT+11",
-                      "Etc/GMT+12",
-                      "Etc/GMT+2",
-                      "Etc/GMT+3",
-                      "Etc/GMT+4",
-                      "Etc/GMT+5",
-                      "Etc/GMT+6",
-                      "Etc/GMT+7",
-                      "Etc/GMT+8",
-                      "Etc/GMT+9",
-                      "Etc/GMT-0",
-                      "Etc/GMT-1",
-                      "Etc/GMT-10",
-                      "Etc/GMT-11",
-                      "Etc/GMT-12",
-                      "Etc/GMT-13",
-                      "Etc/GMT-14",
-                      "Etc/GMT-2",
-                      "Etc/GMT-3",
-                      "Etc/GMT-4",
-                      "Etc/GMT-5",
-                      "Etc/GMT-6",
-                      "Etc/GMT-7",
-                      "Etc/GMT-8",
-                      "Etc/GMT-9",
-                      "Etc/GMT0",
-                      "Etc/Greenwich",
-                      "Etc/UCT",
-                      "Etc/UTC",
-                      "Etc/Universal",
-                      "Etc/Zulu",
-                      "Europe/Amsterdam",
-                      "Europe/Andorra",
-                      "Europe/Astrakhan",
-                      "Europe/Athens",
-                      "Europe/Belfast",
-                      "Europe/Belgrade",
-                      "Europe/Berlin",
-                      "Europe/Bratislava",
-                      "Europe/Brussels",
-                      "Europe/Bucharest",
-                      "Europe/Budapest",
-                      "Europe/Busingen",
-                      "Europe/Chisinau",
-                      "Europe/Copenhagen",
-                      "Europe/Dublin",
-                      "Europe/Gibraltar",
-                      "Europe/Guernsey",
-                      "Europe/Helsinki",
-                      "Europe/Isle_of_Man",
-                      "Europe/Istanbul",
-                      "Europe/Jersey",
-                      "Europe/Kaliningrad",
-                      "Europe/Kiev",
-                      "Europe/Kirov",
-                      "Europe/Kyiv",
-                      "Europe/Lisbon",
-                      "Europe/Ljubljana",
-                      "Europe/London",
-                      "Europe/Luxembourg",
-                      "Europe/Madrid",
-                      "Europe/Malta",
-                      "Europe/Mariehamn",
-                      "Europe/Minsk",
-                      "Europe/Monaco",
-                      "Europe/Moscow",
-                      "Europe/Nicosia",
-                      "Europe/Oslo",
-                      "Europe/Paris",
-                      "Europe/Podgorica",
-                      "Europe/Prague",
-                      "Europe/Riga",
-                      "Europe/Rome",
-                      "Europe/Samara",
-                      "Europe/San_Marino",
-                      "Europe/Sarajevo",
-                      "Europe/Saratov",
-                      "Europe/Simferopol",
-                      "Europe/Skopje",
-                      "Europe/Sofia",
-                      "Europe/Stockholm",
-                      "Europe/Tallinn",
-                      "Europe/Tirane",
-                      "Europe/Tiraspol",
-                      "Europe/Ulyanovsk",
-                      "Europe/Uzhgorod",
-                      "Europe/Vaduz",
-                      "Europe/Vatican",
-                      "Europe/Vienna",
-                      "Europe/Vilnius",
-                      "Europe/Volgograd",
-                      "Europe/Warsaw",
-                      "Europe/Zagreb",
-                      "Europe/Zaporozhye",
-                      "Europe/Zurich",
-                      "GB",
-                      "GB-Eire",
-                      "GMT",
-                      "GMT0",
-                      "Greenwich",
-                      "Hongkong",
-                      "Iceland",
-                      "Indian/Antananarivo",
-                      "Indian/Chagos",
-                      "Indian/Christmas",
-                      "Indian/Cocos",
-                      "Indian/Comoro",
-                      "Indian/Kerguelen",
-                      "Indian/Mahe",
-                      "Indian/Maldives",
-                      "Indian/Mauritius",
-                      "Indian/Mayotte",
-                      "Indian/Reunion",
-                      "Iran",
-                      "Israel",
-                      "Jamaica",
-                      "Japan",
-                      "Kwajalein",
-                      "Libya",
-                      "MET",
-                      "MST7MDT",
-                      "Mexico/BajaNorte",
-                      "Mexico/BajaSur",
-                      "Mexico/General",
-                      "NZ",
-                      "NZ-CHAT",
-                      "Navajo",
-                      "PRC",
-                      "PST8PDT",
-                      "Pacific/Apia",
-                      "Pacific/Auckland",
-                      "Pacific/Bougainville",
-                      "Pacific/Chatham",
-                      "Pacific/Chuuk",
-                      "Pacific/Easter",
-                      "Pacific/Efate",
-                      "Pacific/Enderbury",
-                      "Pacific/Fakaofo",
-                      "Pacific/Fiji",
-                      "Pacific/Funafuti",
-                      "Pacific/Galapagos",
-                      "Pacific/Gambier",
-                      "Pacific/Guadalcanal",
-                      "Pacific/Guam",
-                      "Pacific/Honolulu",
-                      "Pacific/Johnston",
-                      "Pacific/Kanton",
-                      "Pacific/Kiritimati",
-                      "Pacific/Kosrae",
-                      "Pacific/Kwajalein",
-                      "Pacific/Majuro",
-                      "Pacific/Marquesas",
-                      "Pacific/Midway",
-                      "Pacific/Nauru",
-                      "Pacific/Niue",
-                      "Pacific/Norfolk",
-                      "Pacific/Noumea",
-                      "Pacific/Pago_Pago",
-                      "Pacific/Palau",
-                      "Pacific/Pitcairn",
-                      "Pacific/Pohnpei",
-                      "Pacific/Ponape",
-                      "Pacific/Port_Moresby",
-                      "Pacific/Rarotonga",
-                      "Pacific/Saipan",
-                      "Pacific/Samoa",
-                      "Pacific/Tahiti",
-                      "Pacific/Tarawa",
-                      "Pacific/Tongatapu",
-                      "Pacific/Truk",
-                      "Pacific/Wake",
-                      "Pacific/Wallis",
-                      "Pacific/Yap",
-                      "Poland",
-                      "Portugal",
-                      "ROK",
-                      "Singapore",
-                      "SystemV/AST4",
-                      "SystemV/AST4ADT",
-                      "SystemV/CST6",
-                      "SystemV/CST6CDT",
-                      "SystemV/EST5",
-                      "SystemV/EST5EDT",
-                      "SystemV/HST10",
-                      "SystemV/MST7",
-                      "SystemV/MST7MDT",
-                      "SystemV/PST8",
-                      "SystemV/PST8PDT",
-                      "SystemV/YST9",
-                      "SystemV/YST9YDT",
-                      "Turkey",
-                      "UCT",
-                      "US/Alaska",
-                      "US/Aleutian",
-                      "US/Arizona",
-                      "US/Central",
-                      "US/East-Indiana",
-                      "US/Eastern",
-                      "US/Hawaii",
-                      "US/Indiana-Starke",
-                      "US/Michigan",
-                      "US/Mountain",
-                      "US/Pacific",
-                      "US/Samoa",
-                      "UTC",
-                      "Universal",
-                      "W-SU",
-                      "WET",
-                      "Zulu",
-                      "EST",
-                      "HST",
-                      "MST",
-                      "ACT",
-                      "AET",
-                      "AGT",
-                      "ART",
-                      "AST",
-                      "BET",
-                      "BST",
-                      "CAT",
-                      "CNT",
-                      "CST",
-                      "CTT",
-                      "EAT",
-                      "ECT",
-                      "IET",
-                      "IST",
-                      "JST",
-                      "MIT",
-                      "NET",
-                      "NST",
-                      "PLT",
-                      "PNT",
-                      "PRT",
-                      "PST",
-                      "SST",
-                      "VST"
-                    ]
-                  },
-                  "frequency": {
-                    "description": "Frequency of the scheduled job run.",
-                    "allOf": [
-                      {
-                        "$ref": "#/components/schemas/FrequencyInput"
-                      }
-                    ]
-                  },
-                  "recipient_details": {
-                    "description": "Recipients of the scheduled job notifications. You can add the ID or name of the ThoughtSpot users or groups as recipients in the `principals` array. If a recipient is not a ThoughtSpot user, specify email address.",
-                    "allOf": [
-                      {
-                        "$ref": "#/components/schemas/RecipientDetailsInput"
-                      }
-                    ]
-                  },
-                  "status": {
-                    "description": "Status of the schedule",
-                    "type": "string",
-                    "enum": [
-                      "ACTIVE",
-                      "PAUSE"
-                    ]
-                  }
-                }
-              }
-            }
-          },
-          "required": true
-        },
-        "parameters": [
-          {
-            "in": "path",
-            "name": "schedule_identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Unique ID or name of the schedule."
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Schedule successfully updated."
           },
           "400": {
             "description": "Invalid request.",
@@ -9309,6 +9309,158 @@
         }
       }
     },
+    "/api/rest/2.0/tags/{tag_identifier}/delete": {
+      "post": {
+        "operationId": "deleteTag",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nDeletes a tag object from the ThoughtSpot system\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Tags",
+          "9.0.0.cl"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "tag_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Tag identifier Tag name or Tag id."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Tag successfully deleted."
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/tags/{tag_identifier}/update": {
+      "post": {
+        "operationId": "updateTag",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nUpdates a tag object.\n\nYou can modify the `name` and `color` properties of a tag object.  \n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Tags",
+          "9.0.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "description": "Name of the tag.",
+                    "type": "string"
+                  },
+                  "color": {
+                    "description": "Hex color code to be assigned to the tag. For example, #ff78a9.",
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "tag_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Name or Id of the tag."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Tag successfully updated."
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/tags/assign": {
       "post": {
         "operationId": "assignTag",
@@ -9709,28 +9861,28 @@
         }
       }
     },
-    "/api/rest/2.0/tags/{tag_identifier}/delete": {
+    "/api/rest/2.0/users/{user_identifier}/delete": {
       "post": {
-        "operationId": "deleteTag",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nDeletes a tag object from the ThoughtSpot system\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.\n\n\n\n\n#### Endpoint URL\n",
+        "operationId": "deleteUser",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nDeletes a user from the ThoughtSpot system.\n\nIf you want to remove a user from a specific Org but not from ThoughtSpot, update the group and Org mapping properties of the user object via a POST API call to the [/api/rest/2.0/users/{user_identifier}/update](#/http/api-endpoints/users/update-user) endpoint.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `USER_ADMINISTRATION` (**Can manage users**) privilege is required.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
-          "Tags",
+          "Users",
           "9.0.0.cl"
         ],
         "parameters": [
           {
             "in": "path",
-            "name": "tag_identifier",
+            "name": "user_identifier",
             "required": true,
             "schema": {
               "type": "string"
             },
-            "description": "Tag identifier Tag name or Tag id."
+            "description": "GUID / name of the user"
           }
         ],
         "responses": {
           "204": {
-            "description": "Tag successfully deleted."
+            "description": "User successfully deleted."
           },
           "400": {
             "description": "Invalid request.",
@@ -9775,12 +9927,12 @@
         }
       }
     },
-    "/api/rest/2.0/tags/{tag_identifier}/update": {
+    "/api/rest/2.0/users/{user_identifier}/update": {
       "post": {
-        "operationId": "updateTag",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nUpdates a tag object.\n\nYou can modify the `name` and `color` properties of a tag object.  \n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.\n\n\n\n\n#### Endpoint URL\n",
+        "operationId": "updateUser",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nUpdates the properties of a user object.\n\nYou can modify user properties such as username, email, and share notification settings. You can also assign new groups and Orgs, remove the user from a group or Org, reset password, and modify user preferences.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `USER_ADMINISTRATION` (**Can manage users**) privilege is required.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
-          "Tags",
+          "Users",
           "9.0.0.cl"
         ],
         "requestBody": {
@@ -9790,12 +9942,131 @@
                 "type": "object",
                 "properties": {
                   "name": {
-                    "description": "Name of the tag.",
+                    "description": "Name of the user. The username string must be unique.",
                     "type": "string"
                   },
-                  "color": {
-                    "description": "Hex color code to be assigned to the tag. For example, #ff78a9.",
+                  "display_name": {
+                    "description": "A unique display name string for the user account, usually their first and last name",
                     "type": "string"
+                  },
+                  "visibility": {
+                    "description": "Visibility of the users. When set to SHARABLE, the user is visible to other users and groups when they try to share an object.",
+                    "type": "string",
+                    "enum": [
+                      "SHARABLE",
+                      "NON_SHARABLE"
+                    ]
+                  },
+                  "email": {
+                    "description": "Email of the user account",
+                    "type": "string"
+                  },
+                  "account_status": {
+                    "description": "Current status of the user account. The `SUSPENDED` user state indicates a transitional state applicable to IAMv2 users only.",
+                    "type": "string",
+                    "enum": [
+                      "ACTIVE",
+                      "INACTIVE",
+                      "EXPIRED",
+                      "LOCKED",
+                      "PENDING",
+                      "SUSPENDED"
+                    ]
+                  },
+                  "notify_on_share": {
+                    "description": "User preference for receiving email notifications when another ThoughtSpot user\nshares a metadata object such as Answer, Liveboard, or Worksheet.",
+                    "type": "boolean",
+                    "nullable": true
+                  },
+                  "show_onboarding_experience": {
+                    "description": "The user preference for revisiting the onboarding experience.",
+                    "type": "boolean",
+                    "nullable": true
+                  },
+                  "onboarding_experience_completed": {
+                    "description": "Indicates if the user has completed the onboarding and allows turning off the onboarding walkthrough.",
+                    "type": "boolean",
+                    "nullable": true
+                  },
+                  "account_type": {
+                    "description": "Type of the account.",
+                    "type": "string",
+                    "enum": [
+                      "LOCAL_USER",
+                      "LDAP_USER",
+                      "SAML_USER",
+                      "OIDC_USER",
+                      "REMOTE_USER"
+                    ]
+                  },
+                  "group_identifiers": {
+                    "description": "GUIDs or names of the groups.",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "home_liveboard_identifier": {
+                    "description": "GUID of the Liveboard to set a default Liveboard for the user. ThoughtSpot displays\nthis Liveboard on the Home page when the user logs in.",
+                    "type": "string"
+                  },
+                  "favorite_metadata": {
+                    "description": "Metadata objects to add to the user's favorites list.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/FavoriteMetadataInput"
+                    }
+                  },
+                  "org_identifiers": {
+                    "description": "IDs of the Orgs.",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "operation": {
+                    "description": "Type of update operation. Default operation type is REPLACE",
+                    "default": "REPLACE",
+                    "type": "string",
+                    "enum": [
+                      "ADD",
+                      "REMOVE",
+                      "REPLACE"
+                    ]
+                  },
+                  "preferred_locale": {
+                    "description": "Locale for the user.",
+                    "type": "string",
+                    "enum": [
+                      "en-CA",
+                      "en-GB",
+                      "en-US",
+                      "de-DE",
+                      "ja-JP",
+                      "zh-CN",
+                      "pt-BR",
+                      "fr-FR",
+                      "fr-CA",
+                      "es-US",
+                      "da-DK",
+                      "es-ES",
+                      "fi-FI",
+                      "sv-SE",
+                      "nb-NO",
+                      "pt-PT",
+                      "nl-NL",
+                      "it-IT",
+                      "ru-RU",
+                      "en-IN"
+                    ]
+                  },
+                  "extended_properties": {
+                    "description": "Properties for the user",
+                    "type": "object"
+                  },
+                  "extended_preferences": {
+                    "description": "Preferences for the user",
+                    "type": "object"
                   }
                 }
               }
@@ -9806,17 +10077,17 @@
         "parameters": [
           {
             "in": "path",
-            "name": "tag_identifier",
+            "name": "user_identifier",
             "required": true,
             "schema": {
               "type": "string"
             },
-            "description": "Name or Id of the tag."
+            "description": "GUID / name of the user"
           }
         ],
         "responses": {
           "204": {
-            "description": "Tag successfully updated."
+            "description": "User successfully updated."
           },
           "400": {
             "description": "Invalid request.",
@@ -10845,277 +11116,6 @@
         }
       }
     },
-    "/api/rest/2.0/users/{user_identifier}/delete": {
-      "post": {
-        "operationId": "deleteUser",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nDeletes a user from the ThoughtSpot system.\n\nIf you want to remove a user from a specific Org but not from ThoughtSpot, update the group and Org mapping properties of the user object via a POST API call to the [/api/rest/2.0/users/{user_identifier}/update](#/http/api-endpoints/users/update-user) endpoint.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `USER_ADMINISTRATION` (**Can manage users**) privilege is required.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "Users",
-          "9.0.0.cl"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "user_identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "GUID / name of the user"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "User successfully deleted."
-          },
-          "400": {
-            "description": "Invalid request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/rest/2.0/users/{user_identifier}/update": {
-      "post": {
-        "operationId": "updateUser",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nUpdates the properties of a user object.\n\nYou can modify user properties such as username, email, and share notification settings. You can also assign new groups and Orgs, remove the user from a group or Org, reset password, and modify user preferences.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `USER_ADMINISTRATION` (**Can manage users**) privilege is required.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "Users",
-          "9.0.0.cl"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "description": "Name of the user. The username string must be unique.",
-                    "type": "string"
-                  },
-                  "display_name": {
-                    "description": "A unique display name string for the user account, usually their first and last name",
-                    "type": "string"
-                  },
-                  "visibility": {
-                    "description": "Visibility of the users. When set to SHARABLE, the user is visible to other users and groups when they try to share an object.",
-                    "type": "string",
-                    "enum": [
-                      "SHARABLE",
-                      "NON_SHARABLE"
-                    ]
-                  },
-                  "email": {
-                    "description": "Email of the user account",
-                    "type": "string"
-                  },
-                  "account_status": {
-                    "description": "Current status of the user account. The `SUSPENDED` user state indicates a transitional state applicable to IAMv2 users only.",
-                    "type": "string",
-                    "enum": [
-                      "ACTIVE",
-                      "INACTIVE",
-                      "EXPIRED",
-                      "LOCKED",
-                      "PENDING",
-                      "SUSPENDED"
-                    ]
-                  },
-                  "notify_on_share": {
-                    "description": "User preference for receiving email notifications when another ThoughtSpot user\nshares a metadata object such as Answer, Liveboard, or Worksheet.",
-                    "type": "boolean",
-                    "nullable": true
-                  },
-                  "show_onboarding_experience": {
-                    "description": "The user preference for revisiting the onboarding experience.",
-                    "type": "boolean",
-                    "nullable": true
-                  },
-                  "onboarding_experience_completed": {
-                    "description": "Indicates if the user has completed the onboarding and allows turning off the onboarding walkthrough.",
-                    "type": "boolean",
-                    "nullable": true
-                  },
-                  "account_type": {
-                    "description": "Type of the account.",
-                    "type": "string",
-                    "enum": [
-                      "LOCAL_USER",
-                      "LDAP_USER",
-                      "SAML_USER",
-                      "OIDC_USER",
-                      "REMOTE_USER"
-                    ]
-                  },
-                  "group_identifiers": {
-                    "description": "GUIDs or names of the groups.",
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    }
-                  },
-                  "home_liveboard_identifier": {
-                    "description": "GUID of the Liveboard to set a default Liveboard for the user. ThoughtSpot displays\nthis Liveboard on the Home page when the user logs in.",
-                    "type": "string"
-                  },
-                  "favorite_metadata": {
-                    "description": "Metadata objects to add to the user's favorites list.",
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/FavoriteMetadataInput"
-                    }
-                  },
-                  "org_identifiers": {
-                    "description": "IDs of the Orgs.",
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    }
-                  },
-                  "operation": {
-                    "description": "Type of update operation. Default operation type is REPLACE",
-                    "default": "REPLACE",
-                    "type": "string",
-                    "enum": [
-                      "ADD",
-                      "REMOVE",
-                      "REPLACE"
-                    ]
-                  },
-                  "preferred_locale": {
-                    "description": "Locale for the user.",
-                    "type": "string",
-                    "enum": [
-                      "en-CA",
-                      "en-GB",
-                      "en-US",
-                      "de-DE",
-                      "ja-JP",
-                      "zh-CN",
-                      "pt-BR",
-                      "fr-FR",
-                      "fr-CA",
-                      "es-US",
-                      "da-DK",
-                      "es-ES",
-                      "fi-FI",
-                      "sv-SE",
-                      "nb-NO",
-                      "pt-PT",
-                      "nl-NL",
-                      "it-IT",
-                      "ru-RU",
-                      "en-IN"
-                    ]
-                  },
-                  "extended_properties": {
-                    "description": "Properties for the user",
-                    "type": "object"
-                  },
-                  "extended_preferences": {
-                    "description": "Preferences for the user",
-                    "type": "object"
-                  }
-                }
-              }
-            }
-          },
-          "required": true
-        },
-        "parameters": [
-          {
-            "in": "path",
-            "name": "user_identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "GUID / name of the user"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "User successfully updated."
-          },
-          "400": {
-            "description": "Invalid request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/rest/2.0/vcs/git/branches/commit": {
       "post": {
         "operationId": "commitBranch",
@@ -11259,6 +11259,111 @@
                   "items": {
                     "$ref": "#/components/schemas/DeployResponse"
                   }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/vcs/git/commits/{commit_id}/revert": {
+      "post": {
+        "operationId": "revertCommit",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nReverts TML objects to a previous commit specified in the API request.\n\nRequires at least edit access to objects.\n\nIn the API request, specify the `commit_id`. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.\n\nBy default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.\n\nFor more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Version Control",
+          "9.2.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "metadata": {
+                    "description": "Metadata objects.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/MetadataObject"
+                    }
+                  },
+                  "branch_name": {
+                    "description": "   Name of the branch where the reverted version should be committed\n   \n\nNote: If no branch_name is specified, then the commit_branch_name will be considered.",
+                    "type": "string"
+                  },
+                  "revert_policy": {
+                    "description": "Policy to apply when reverting a commit. Valid values: [ALL_OR_NONE, PARTIAL]",
+                    "default": "ALL_OR_NONE",
+                    "type": "string",
+                    "enum": [
+                      "ALL_OR_NONE",
+                      "PARTIAL"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "commit_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Commit id to which the object should be reverted"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Reverted the object to the commit point specified",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RevertResponse"
                 }
               }
             }
@@ -11476,111 +11581,6 @@
                   "items": {
                     "$ref": "#/components/schemas/CommitHistoryResponse"
                   }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/rest/2.0/vcs/git/commits/{commit_id}/revert": {
-      "post": {
-        "operationId": "revertCommit",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nReverts TML objects to a previous commit specified in the API request.\n\nRequires at least edit access to objects.\n\nIn the API request, specify the `commit_id`. If the branch name is not specified in the request, the API will consider the default branch configured on your instance.\n\nBy default, the API reverts all objects. If the revert operation fails for one of the objects provided in the commit, the API returns an error and does not revert any object.\n\nFor more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/git-integration).\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "Version Control",
-          "9.2.0.cl"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "metadata": {
-                    "description": "Metadata objects.",
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/MetadataObject"
-                    }
-                  },
-                  "branch_name": {
-                    "description": "   Name of the branch where the reverted version should be committed\n   \n\nNote: If no branch_name is specified, then the commit_branch_name will be considered.",
-                    "type": "string"
-                  },
-                  "revert_policy": {
-                    "description": "Policy to apply when reverting a commit. Valid values: [ALL_OR_NONE, PARTIAL]",
-                    "default": "ALL_OR_NONE",
-                    "type": "string",
-                    "enum": [
-                      "ALL_OR_NONE",
-                      "PARTIAL"
-                    ]
-                  }
-                }
-              }
-            }
-          },
-          "required": true
-        },
-        "parameters": [
-          {
-            "in": "path",
-            "name": "commit_id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Commit id to which the object should be reverted"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Reverted the object to the commit point specified",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RevertResponse"
                 }
               }
             }
