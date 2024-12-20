@@ -7,7 +7,7 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**username** | **String** | Username of the ThoughtSpot user |  |
+|**username** | **String** | Username of the ThoughtSpot user. The username is stored in the &#x60;name&#x60; attribute of the user object. |  |
 |**objectId** | **String** | GUID of the ThoughtSpot metadata object that the user can access. The bearer will only have access to the object specified in the API request. |  [optional] |
 |**password** | **String** | Password of the user account |  [optional] |
 |**secretKey** | **String** | The secret key string provided by the ThoughtSpot application server. ThoughtSpot generates a secret key when Trusted authentication is enabled. |  [optional] |

@@ -395,4 +395,12 @@ public class UserTest {
         // TODO: test userParameters
     }
 
+    /**
+     * Test the property 'accessControlProperties'
+     */
+    @Test
+    public void accessControlPropertiesTest() {
+        // TODO: test accessControlProperties
+    }
+
 }

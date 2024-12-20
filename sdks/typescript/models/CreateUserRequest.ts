@@ -23,7 +23,7 @@ export class CreateUserRequest {
     */
     'display_name': string;
     /**
-    * Password for the user account.
+    * Password for the user account. For IAMv2 users, you must set this password if you do not want to trigger an activation email.
     */
     'password'?: string;
     /**
@@ -35,7 +35,7 @@ export class CreateUserRequest {
     */
     'account_type'?: CreateUserRequestAccountTypeEnum;
     /**
-    * Current status of the user account.
+    * Current status of the user account. The `SUSPENDED` user state indicates a transitional state applicable to IAMv2 users only.
     */
     'account_status'?: CreateUserRequestAccountStatusEnum;
     /**
@@ -87,7 +87,7 @@ export class CreateUserRequest {
     */
     'trigger_welcome_email'?: boolean | null;
     /**
-    * Flag to indicate whether activation email should be sent to user.
+    * Flag to indicate whether activation email should be sent to the user. Default value for IAMv2 users is set to true. Users must either set this to false, or enter a valid  password if they do not want to trigger an activation email.
     */
     'trigger_activation_email'?: boolean | null;
 
@@ -219,7 +219,7 @@ export class CreateUserRequest {
 
 
 export type CreateUserRequestAccountTypeEnum = "LOCAL_USER" | "LDAP_USER" | "SAML_USER" | "OIDC_USER" | "REMOTE_USER" ;
-export type CreateUserRequestAccountStatusEnum = "ACTIVE" | "INACTIVE" | "EXPIRED" | "LOCKED" | "PENDING" ;
+export type CreateUserRequestAccountStatusEnum = "ACTIVE" | "INACTIVE" | "EXPIRED" | "LOCKED" | "PENDING" | "SUSPENDED" ;
 export type CreateUserRequestVisibilityEnum = "SHARABLE" | "NON_SHARABLE" ;
 export type CreateUserRequestPreferredLocaleEnum = "en-CA" | "en-GB" | "en-US" | "de-DE" | "ja-JP" | "zh-CN" | "pt-BR" | "fr-FR" | "fr-CA" | "es-US" | "da-DK" | "es-ES" | "fi-FI" | "sv-SE" | "nb-NO" | "pt-PT" | "nl-NL" | "it-IT" | "ru-RU" | "en-IN" ;
 

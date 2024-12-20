@@ -51,15 +51,15 @@ import org.thoughtspot.client.JSON;
 /**
  * MetadataListItemInput
  */
-<<<<<<< HEAD
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-10-08T14:11:36.944876Z[Etc/UTC]")
-=======
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-11-06T15:38:04.754051+05:30[Asia/Kolkata]")
->>>>>>> 41fee514 (Fix for streaming apis)
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-12-20T04:47:40.356396673Z[Etc/UTC]")
 public class MetadataListItemInput {
   public static final String SERIALIZED_NAME_IDENTIFIER = "identifier";
   @SerializedName(SERIALIZED_NAME_IDENTIFIER)
   private String identifier;
+
+  public static final String SERIALIZED_NAME_CUSTOM_IDENTIFIER = "custom_identifier";
+  @SerializedName(SERIALIZED_NAME_CUSTOM_IDENTIFIER)
+  private String customIdentifier;
 
   public static final String SERIALIZED_NAME_NAME_PATTERN = "name_pattern";
   @SerializedName(SERIALIZED_NAME_NAME_PATTERN)
@@ -156,6 +156,27 @@ public class MetadataListItemInput {
   }
 
 
+  public MetadataListItemInput customIdentifier(String customIdentifier) {
+    
+    this.customIdentifier = customIdentifier;
+    return this;
+  }
+
+   /**
+   * CustomObjectId of the metadata.
+   * @return customIdentifier
+  **/
+  @javax.annotation.Nullable
+  public String getCustomIdentifier() {
+    return customIdentifier;
+  }
+
+
+  public void setCustomIdentifier(String customIdentifier) {
+    this.customIdentifier = customIdentifier;
+  }
+
+
   public MetadataListItemInput namePattern(String namePattern) {
     
     this.namePattern = namePattern;
@@ -209,6 +230,7 @@ public class MetadataListItemInput {
     }
     MetadataListItemInput metadataListItemInput = (MetadataListItemInput) o;
     return Objects.equals(this.identifier, metadataListItemInput.identifier) &&
+        Objects.equals(this.customIdentifier, metadataListItemInput.customIdentifier) &&
         Objects.equals(this.namePattern, metadataListItemInput.namePattern) &&
         Objects.equals(this.type, metadataListItemInput.type);
   }
@@ -219,7 +241,7 @@ public class MetadataListItemInput {
 
   @Override
   public int hashCode() {
-    return Objects.hash(identifier, namePattern, type);
+    return Objects.hash(identifier, customIdentifier, namePattern, type);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -234,6 +256,7 @@ public class MetadataListItemInput {
     StringBuilder sb = new StringBuilder();
     sb.append("class MetadataListItemInput {\n");
     sb.append("    identifier: ").append(toIndentedString(identifier)).append("\n");
+    sb.append("    customIdentifier: ").append(toIndentedString(customIdentifier)).append("\n");
     sb.append("    namePattern: ").append(toIndentedString(namePattern)).append("\n");
     sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("}");
@@ -259,6 +282,7 @@ public class MetadataListItemInput {
     // a set of all properties/fields (JSON key names)
     openapiFields = new HashSet<String>();
     openapiFields.add("identifier");
+    openapiFields.add("custom_identifier");
     openapiFields.add("name_pattern");
     openapiFields.add("type");
 
@@ -288,6 +312,9 @@ public class MetadataListItemInput {
       }
       if ((jsonObj.get("identifier") != null && !jsonObj.get("identifier").isJsonNull()) && !jsonObj.get("identifier").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `identifier` to be a primitive type in the JSON string but got `%s`", jsonObj.get("identifier").toString()));
+      }
+      if ((jsonObj.get("custom_identifier") != null && !jsonObj.get("custom_identifier").isJsonNull()) && !jsonObj.get("custom_identifier").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `custom_identifier` to be a primitive type in the JSON string but got `%s`", jsonObj.get("custom_identifier").toString()));
       }
       if ((jsonObj.get("name_pattern") != null && !jsonObj.get("name_pattern").isJsonNull()) && !jsonObj.get("name_pattern").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `name_pattern` to be a primitive type in the JSON string but got `%s`", jsonObj.get("name_pattern").toString()));

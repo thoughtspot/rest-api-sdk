@@ -24,10 +24,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
+import org.thoughtspot.client.model.RuntimeFilters;
+import org.thoughtspot.client.model.RuntimeParameters;
+import org.thoughtspot.client.model.RuntimeSorts;
 import org.thoughtspot.client.model.UserObject;
-import org.thoughtspot.client.model.UserParameters;
-import org.thoughtspot.client.model.UserRuntimeFilters;
-import org.thoughtspot.client.model.UserRuntimeSorts;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -57,7 +57,7 @@ import org.thoughtspot.client.JSON;
 /**
  * &lt;div&gt;Deprecated: 10.4.0.cl and later &lt;/div&gt;  Define attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters).
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-10-08T14:11:36.944876Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-12-20T04:47:40.356396673Z[Etc/UTC]")
 public class GetObjectAccessTokenRequestUserParameters {
   public static final String SERIALIZED_NAME_OBJECTS = "objects";
   @SerializedName(SERIALIZED_NAME_OBJECTS)
@@ -65,15 +65,15 @@ public class GetObjectAccessTokenRequestUserParameters {
 
   public static final String SERIALIZED_NAME_RUNTIME_FILTERS = "runtime_filters";
   @SerializedName(SERIALIZED_NAME_RUNTIME_FILTERS)
-  private List<UserRuntimeFilters> runtimeFilters;
+  private List<RuntimeFilters> runtimeFilters;
 
   public static final String SERIALIZED_NAME_RUNTIME_SORTS = "runtime_sorts";
   @SerializedName(SERIALIZED_NAME_RUNTIME_SORTS)
-  private List<UserRuntimeSorts> runtimeSorts;
+  private List<RuntimeSorts> runtimeSorts;
 
   public static final String SERIALIZED_NAME_PARAMETERS = "parameters";
   @SerializedName(SERIALIZED_NAME_PARAMETERS)
-  private List<UserParameters> parameters;
+  private List<RuntimeParameters> parameters;
 
   public GetObjectAccessTokenRequestUserParameters() {
   }
@@ -107,13 +107,13 @@ public class GetObjectAccessTokenRequestUserParameters {
   }
 
 
-  public GetObjectAccessTokenRequestUserParameters runtimeFilters(List<UserRuntimeFilters> runtimeFilters) {
+  public GetObjectAccessTokenRequestUserParameters runtimeFilters(List<RuntimeFilters> runtimeFilters) {
     
     this.runtimeFilters = runtimeFilters;
     return this;
   }
 
-  public GetObjectAccessTokenRequestUserParameters addRuntimeFiltersItem(UserRuntimeFilters runtimeFiltersItem) {
+  public GetObjectAccessTokenRequestUserParameters addRuntimeFiltersItem(RuntimeFilters runtimeFiltersItem) {
     if (this.runtimeFilters == null) {
       this.runtimeFilters = new ArrayList<>();
     }
@@ -126,23 +126,23 @@ public class GetObjectAccessTokenRequestUserParameters {
    * @return runtimeFilters
   **/
   @javax.annotation.Nullable
-  public List<UserRuntimeFilters> getRuntimeFilters() {
+  public List<RuntimeFilters> getRuntimeFilters() {
     return runtimeFilters;
   }
 
 
-  public void setRuntimeFilters(List<UserRuntimeFilters> runtimeFilters) {
+  public void setRuntimeFilters(List<RuntimeFilters> runtimeFilters) {
     this.runtimeFilters = runtimeFilters;
   }
 
 
-  public GetObjectAccessTokenRequestUserParameters runtimeSorts(List<UserRuntimeSorts> runtimeSorts) {
+  public GetObjectAccessTokenRequestUserParameters runtimeSorts(List<RuntimeSorts> runtimeSorts) {
     
     this.runtimeSorts = runtimeSorts;
     return this;
   }
 
-  public GetObjectAccessTokenRequestUserParameters addRuntimeSortsItem(UserRuntimeSorts runtimeSortsItem) {
+  public GetObjectAccessTokenRequestUserParameters addRuntimeSortsItem(RuntimeSorts runtimeSortsItem) {
     if (this.runtimeSorts == null) {
       this.runtimeSorts = new ArrayList<>();
     }
@@ -155,23 +155,23 @@ public class GetObjectAccessTokenRequestUserParameters {
    * @return runtimeSorts
   **/
   @javax.annotation.Nullable
-  public List<UserRuntimeSorts> getRuntimeSorts() {
+  public List<RuntimeSorts> getRuntimeSorts() {
     return runtimeSorts;
   }
 
 
-  public void setRuntimeSorts(List<UserRuntimeSorts> runtimeSorts) {
+  public void setRuntimeSorts(List<RuntimeSorts> runtimeSorts) {
     this.runtimeSorts = runtimeSorts;
   }
 
 
-  public GetObjectAccessTokenRequestUserParameters parameters(List<UserParameters> parameters) {
+  public GetObjectAccessTokenRequestUserParameters parameters(List<RuntimeParameters> parameters) {
     
     this.parameters = parameters;
     return this;
   }
 
-  public GetObjectAccessTokenRequestUserParameters addParametersItem(UserParameters parametersItem) {
+  public GetObjectAccessTokenRequestUserParameters addParametersItem(RuntimeParameters parametersItem) {
     if (this.parameters == null) {
       this.parameters = new ArrayList<>();
     }
@@ -184,12 +184,12 @@ public class GetObjectAccessTokenRequestUserParameters {
    * @return parameters
   **/
   @javax.annotation.Nullable
-  public List<UserParameters> getParameters() {
+  public List<RuntimeParameters> getParameters() {
     return parameters;
   }
 
 
-  public void setParameters(List<UserParameters> parameters) {
+  public void setParameters(List<RuntimeParameters> parameters) {
     this.parameters = parameters;
   }
 
@@ -309,7 +309,7 @@ public class GetObjectAccessTokenRequestUserParameters {
 
           // validate the optional field `runtime_filters` (array)
           for (int i = 0; i < jsonArrayruntimeFilters.size(); i++) {
-            UserRuntimeFilters.validateJsonObject(jsonArrayruntimeFilters.get(i).getAsJsonObject());
+            RuntimeFilters.validateJsonObject(jsonArrayruntimeFilters.get(i).getAsJsonObject());
           };
         }
       }
@@ -323,7 +323,7 @@ public class GetObjectAccessTokenRequestUserParameters {
 
           // validate the optional field `runtime_sorts` (array)
           for (int i = 0; i < jsonArrayruntimeSorts.size(); i++) {
-            UserRuntimeSorts.validateJsonObject(jsonArrayruntimeSorts.get(i).getAsJsonObject());
+            RuntimeSorts.validateJsonObject(jsonArrayruntimeSorts.get(i).getAsJsonObject());
           };
         }
       }
@@ -337,7 +337,7 @@ public class GetObjectAccessTokenRequestUserParameters {
 
           // validate the optional field `parameters` (array)
           for (int i = 0; i < jsonArrayparameters.size(); i++) {
-            UserParameters.validateJsonObject(jsonArrayparameters.get(i).getAsJsonObject());
+            RuntimeParameters.validateJsonObject(jsonArrayparameters.get(i).getAsJsonObject());
           };
         }
       }

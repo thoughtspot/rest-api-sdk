@@ -54,11 +54,7 @@ import org.thoughtspot.client.JSON;
 /**
  * UpdateUserRequest
  */
-<<<<<<< HEAD
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-10-08T14:11:36.944876Z[Etc/UTC]")
-=======
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-11-06T15:38:04.754051+05:30[Asia/Kolkata]")
->>>>>>> 41fee514 (Fix for streaming apis)
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-12-20T04:47:40.356396673Z[Etc/UTC]")
 public class UpdateUserRequest {
   public static final String SERIALIZED_NAME_NAME = "name";
   @SerializedName(SERIALIZED_NAME_NAME)
@@ -124,7 +120,7 @@ public class UpdateUserRequest {
   private String email;
 
   /**
-   * Current status of the user account.
+   * Current status of the user account. The &#x60;SUSPENDED&#x60; user state indicates a transitional state applicable to IAMv2 users only.
    */
   @JsonAdapter(AccountStatusEnum.Adapter.class)
   public enum AccountStatusEnum {
@@ -136,7 +132,9 @@ public class UpdateUserRequest {
     
     LOCKED("LOCKED"),
     
-    PENDING("PENDING");
+    PENDING("PENDING"),
+    
+    SUSPENDED("SUSPENDED");
 
     private String value;
 
@@ -507,7 +505,7 @@ public class UpdateUserRequest {
   }
 
    /**
-   * Current status of the user account.
+   * Current status of the user account. The &#x60;SUSPENDED&#x60; user state indicates a transitional state applicable to IAMv2 users only.
    * @return accountStatus
   **/
   @javax.annotation.Nullable

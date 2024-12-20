@@ -110,7 +110,7 @@ paths:
 
         To get details of a specific user, specify the user GUID or name. You can also filter the API response based on groups, Org ID, user visibility, account status, user type, and user preference settings and favorites.
 
-        Available to all users. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view all users properties.
+        Available to all users. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view all users properties. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `USER_ADMINISTRATION` (**Can manage users**) privilege is required.
 
         **NOTE**: If the API returns an empty list, consider increasing the value of the `record_size` parameter. To search across all available users, set `record_size` to `-1`.
 
@@ -169,8 +169,11 @@ paths:
       description: "\n Version: 9.0.0.cl or later\n\n\nGets system information such\
         \ as the release version, locale, time zone, deployment environment, date\
         \ format, and date time format of the cluster.\n\nRequires `ADMINISTRATION`\
-        \ (**Can administer ThoughtSpot**) privileges.\n\nThis API does not require\
-        \ any parameters to be passed in the request.  \n\n\n\n\n\n"
+        \ (**Can administer ThoughtSpot**) privileges.\nIf [Role-Based Access Control\
+        \ (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your\
+        \ instance, the `SYSTEM_INFO_ADMINISTRATION` (**Can view system activities**)\
+        \ privilege is required.\n\nThis API does not require any parameters to be\
+        \ passed in the request.  \n\n\n\n\n\n"
       operationId: getSystemInformation
       parameters: []
       responses:
@@ -244,6 +247,7 @@ paths:
         Retrieves the current configuration details of the cluster. If the request is successful, the API returns a list configuration settings applied on the cluster.
 
         Requires `ADMINISTRATION`(**Can administer ThoughtSpot**) privilege to view these complete configuration settings of the cluster.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `SYSTEM_INFO_ADMINISTRATION` (**Can view system activities**) privilege is required.
 
         This API does not require any parameters to be passed in the request.
 
@@ -296,8 +300,10 @@ paths:
     get:
       description: "\n Version: 9.2.0.cl or later\n\n\nGets a list of configuration\
         \ overrides applied on the cluster.  \n\nRequires `ADMINISTRATION` (**Can\
-        \ administer ThoughtSpot**) privilege.\n\nThis API does not require any parameters\
-        \ to be passed in the request.  \n\n\n\n\n\n"
+        \ administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac)\
+        \ is enabled on your instance, the `APPLICATION_ADMINISTRATION` (**Can manage\
+        \ application settings**) privilege is required.\n\nThis API does not require\
+        \ any parameters to be passed in the request.  \n\n\n\n\n\n"
       operationId: getSystemOverrideInfo
       parameters: []
       responses:
@@ -345,6 +351,7 @@ paths:
         Gets a list of Orgs configured on the ThoughtSpot system. To get details of a specific Org, specify the Org ID or name. You can also pass parameters such as status, visibility, and user identifiers to get a specific list of Orgs.
 
         Requires cluster administration (**Can administer Org**) privileges.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ORG_ADMINISTRATION` (**Can manage Orgs**) privilege is required.
 
 
 
@@ -504,11 +511,13 @@ paths:
          Version: 9.0.0.cl or later
 
 
-        Gets a list of users available on the ThoughtSpot system.
+        Gets a list of user group objects from the ThoughtSpot system.
 
-        To get details of a specific user, specify the user GUID or name. You can also filter the API response based on groups, Org ID, user visibility, account status, user type, and user preference settings and favorites.
+        To get details of a specific user group, specify the user group GUID or name. You can also filter the API response based on User ID, Org ID, Role ID, type of group, sharing visibility, privileges assigned to the group, and the Liveboard IDs assigned to the users in the group.
 
         Available to all users. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view all users properties.
+
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `GROUP_ADMINISTRATION` (**Can manage groups**) privilege is required.
 
         **NOTE**: If you do not get precise results, try setting `record_size` to `-1` and `record_offset` to `0`.
 
@@ -583,14 +592,15 @@ paths:
           You can also define sorting options to sort the data retrieved in the API response.
 
         **NOTE**: The following parameters support pagination of metadata records:
-        `tag_identifiers`
-        `type`
-        `created_by_user_identifiers`
-        `modified_by_user_identifiers`
-        `owned_by_user_identifiers`
-        `exclude_objects`
-        `include_auto_created_objects`
-        `favorite_object_options`
+
+        - `tag_identifiers`
+        - `type`
+        - `created_by_user_identifiers`
+        - `modified_by_user_identifiers`
+        - `owned_by_user_identifiers`
+        - `exclude_objects`
+        - `include_auto_created_objects`
+        - `favorite_object_options`
         If you are using other parameters to search metadata, set `record_size` to `-1` and `record_offset` to `0`.
 
 
@@ -614,6 +624,61 @@ paths:
                   $ref: '#/components/schemas/MetadataSearchResponse'
                 type: array
           description: Metadata objects search result.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unexpected error
+      tags:
+      - Metadata
+      - ThoughtSpotRest
+      x-content-type: application/json
+      x-accepts: application/json
+  /api/rest/2.0/metadata/tml/async/status:
+    post:
+      description: "\n Version: 10.4.0.cl or later\n\n\nGets information about the\
+        \ status of the TML async import task scheduled using the `/api/rest/2.0/metadata/tml/async/import`\
+        \ API call.\n\nTo fetch the task details, specify the ID of the TML async\
+        \ import task.  \n\nRequires access to the task ID. The API allows users who\
+        \ initiated the asynchronous TML import via `/api/rest/2.0/metadata/tml/async/import`\
+        \ to view the status of their tasks.  Users with administration privilege\
+        \ can view the status of all import tasks initiated by the users in their\
+        \ Org.\n\n#### Usage guidelines\n\nSee [TML API Documentation](https://developers.thoughtspot.com/docs/tml#_fetch_status_of_the_tml_import_task)\
+        \ for usage guidelines.\n\n\n\n\n"
+      operationId: fetchAsyncImportTaskStatus
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/fetchAsyncImportTaskStatus_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAsyncImportStatusResponse'
+          description: Async TML Import Task statuses fetched successfully.
         "400":
           content:
             application/json:
@@ -797,23 +862,30 @@ paths:
       x-accepts: application/json
   /api/rest/2.0/report/liveboard:
     post:
-      description: "\n Version: 9.0.0.cl or later\n\n\nExports the data from a Liveboard\
-        \ and its visualization in a given file format. You can download the Liveboard\
-        \ data as a PDF, PNG, CSV, or XLSX file.\n\nRequires `DATADOWNLOADING` (**Can\
-        \ download data**) privilege.\n\n#### Usage guidelines\n\nIn the request body,\
-        \ specify the GUID or name of the Liveboard. To generate a Liveboard report\
-        \ with specific visualizations, add GUIDs or names of the visualizations.\n\
-        \nThe default `file_format` is CSV. For PDF file format, you can specify additional\
-        \ parameters to customize the page orientation and include or exclude the\
-        \ cover page, logo, footer text, and page numbers. Similar customization options\
-        \ are also available for PNG output.\n\nOptionally, you can define [runtime\
-        \ overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides)\
-        \ to apply to the Answer data.\n\nTo include unsaved changes in the report,\
-        \ pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard`\
-        \ method in the Visual Embed SDK. Upon successful execution, the API returns\
-        \ the report with unsaved changes, including ad hoc changes to visualizations.\
-        \ For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).\
-        \  \n\n\n\n\n\n"
+      description: |2+
+
+         Version: 9.0.0.cl or later
+
+
+        Exports the data from a Liveboard and its visualization in a given file format. You can download the Liveboard data as a PDF, PNG, CSV, or XLSX file.
+
+        Requires `DATADOWNLOADING` (**Can download data**) privilege and view access to the Liveboard.
+
+        #### Usage guidelines
+
+        In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.
+
+        The default `file_format` is CSV. For PDF file format, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.
+
+        **NOTE**: The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension.
+
+        Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.
+
+        To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).
+
+
+
+
       operationId: exportLiveboardReport
       parameters: []
       requestBody:
@@ -861,17 +933,30 @@ paths:
       x-accepts: application/json
   /api/rest/2.0/report/answer:
     post:
-      description: "\n Version: 9.0.0.cl or later\n\n\nExports an Answer in the given\
-        \ file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX\
-        \ file.\n\nRequires `DATADOWNLOADING` (**Can download data**) privilege.\n\
-        \n#### Usage guidelines\n\nIn the request body, the GUID or name of the Answer\
-        \ and set `file_format`. The default file format is CSV.\n\nOptionally, you\
-        \ can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides)\
-        \ to apply to the Answer data.\n\nThe `record_size` attribute determines the\
-        \ number of records to retrieve in an API call. For more information about\
-        \ pagination, record size, and maximum row limit, see [Pagination and record\
-        \ size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).\
-        \  \n\n\n\n\n\n"
+      description: |2+
+
+         Version: 9.0.0.cl or later
+
+
+        Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.
+
+        Requires `DATADOWNLOADING` (**Can download data**) privilege and view access to the Answer.
+
+        #### Usage guidelines
+
+        In the request body, the GUID or name of the Answer and set `file_format`. The default file format is CSV.
+
+        **NOTE**:
+        * The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension.
+        * HTML rendering is not supported for PDF exports of Answers with tables.
+
+        Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.
+
+        The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).
+
+
+
+
       operationId: exportAnswerReport
       parameters: []
       requestBody:
@@ -921,7 +1006,7 @@ paths:
     post:
       description: "\n Version: 9.0.0.cl or later\n\n\nFetches object permission details\
         \ for a given principal object such as a user and group.\n\nRequires view\
-        \ access to the metadata object.\n\n#### Usage guidelines\n\n* To get a list\
+        \ access to the metadata object. \n\n#### Usage guidelines\n\n* To get a list\
         \ of all metadata objects that a user or group can access, specify the `type`\
         \ and GUID or name of the principal.\n* To get permission details for a specific\
         \ object, add the `type` and GUID or name of the metadata object to your API\
@@ -1097,18 +1182,19 @@ paths:
   /api/rest/2.0/searchdata:
     post:
       description: "\n Version: 9.0.0.cl or later\n\n\nGenerates an Answer from a\
-        \ given data source.\n\nRequires at least view access to the data source object.\n\
-        \n#### Usage guidelines\n\nTo search data, specify the data source GUID in\
-        \ `logical_table_identifier`. The data source can be a Worksheet, View, Table,\
-        \ or SQL view.\n\nPass search tokens in the `query_string` attribute in the\
-        \ API request as shown in the following example:\n\n```\n{\n  \"query_string\"\
-        : \"[sales] by [store]\",\n  \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\"\
+        \ given data source.\n\nRequires at least view access to the data source object\
+        \ (Worksheet or View) and the `DATADOWNLOADING` privilege.\n\n#### Usage guidelines\n\
+        \nTo search data, specify the data source GUID in `logical_table_identifier`.\
+        \ The data source can be a Worksheet, View, Table, or SQL view.\n\nPass search\
+        \ tokens in the `query_string` attribute in the API request as shown in the\
+        \ following example:\n\n```\n{\n  \"query_string\": \"[sales] by [store]\"\
+        ,\n  \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\"\
         ,\n}\n```\n\nFor more information about the `query_string` format and data\
         \ source attribute, see [Search data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_data_api).\
         \  \n\nThe `record_size` attribute determines the number of records to retrieve\
         \ in an API call. For more information about pagination, record size, and\
-        \ maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).\
-        \  \n\n\n\n\n\n"
+        \ maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).\n\
+        \n\n\n\n"
       operationId: searchData
       parameters: []
       requestBody:
@@ -1157,16 +1243,17 @@ paths:
     post:
       description: "\n Version: 9.0.0.cl or later\n\n\nGets data from a Liveboard\
         \ object and its visualization.  \n\nRequires at least view access to the\
-        \ Liveboard.\n\n#### Usage guidelines\n\nIn the request body, specify the\
-        \ GUID or name of the Liveboard. To get data for specific visualizations,\
-        \ add the GUIDs or names of the visualizations in the API request.\n\nTo include\
-        \ unsaved changes in the report, pass the `transient_pinboard_content` script\
-        \ generated from the `getExportRequestForCurrentPinboard` method in the Visual\
-        \ Embed SDK. Upon successful execution, the API returns the report with unsaved\
-        \ changes. If the new Liveboard experience mode, the transient content includes\
-        \ ad hoc changes to visualizations such as sorting, toggling of legends, and\
-        \ data drill down.\n\nFor more information, and see [Liveboard data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_fetch_liveboard_data_api).\
-        \  \n\n\n\n\n\n"
+        \ Liveboard and the `DATADOWNLOADING` privilege.\n\n#### Usage guidelines\n\
+        \nIn the request body, specify the GUID or name of the Liveboard. To get data\
+        \ for specific visualizations, add the GUIDs or names of the visualizations\
+        \ in the API request.\n\nTo include unsaved changes in the report, pass the\
+        \ `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard`\
+        \ method in the Visual Embed SDK. Upon successful execution, the API returns\
+        \ the report with unsaved changes. If the new Liveboard experience mode, the\
+        \ transient content includes ad hoc changes to visualizations such as sorting,\
+        \ toggling of legends, and data drill down.\n\nFor more information, and see\
+        \ [Liveboard data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_fetch_liveboard_data_api).\n\
+        \n\n\n\n"
       operationId: fetchLiveboardData
       parameters: []
       requestBody:
@@ -1213,13 +1300,20 @@ paths:
       x-accepts: application/json
   /api/rest/2.0/metadata/answer/data:
     post:
-      description: "\n Version: 9.0.0.cl or later\n\n\nFetches data from a saved Answer.\n\
-        \nRequires at least view access to the saved Answer.\n\nThe `record_size`\
-        \ attribute determines the number of records to retrieve in an API call. For\
-        \ more information about pagination, record size, and maximum row limit, see\
-        \ [Pagination and record size settings](For more information, and see [Liveboard\
-        \ data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_apis).\
-        \  \n).  \n\n\n\n\n\n"
+      description: |2+
+
+         Version: 9.0.0.cl or later
+
+
+        Fetches data from a saved Answer.
+
+        Requires at least view access to the saved Answer and the `DATADOWNLOADING` privilege.
+
+        The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_apis).
+
+
+
+
       operationId: fetchAnswerData
       parameters: []
       requestBody:
@@ -1268,15 +1362,16 @@ paths:
     post:
       description: "\n Version: 9.0.0.cl or later\n\n\nFetches security audit logs.\
         \  \n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\
-        \n#### Usage guidelines\n\nBy default, the API retrieves logs for the last\
-        \ 24 hours. You can set a custom duration in EPOCH time. Make sure the log\
-        \ duration specified in your API request doesn’t exceed 24 hours. If you must\
-        \ fetch logs for a longer time range, modify the duration and make multiple\
-        \ sequential API requests.\n\nUpon successful execution, the API returns logs\
-        \ with the following information:\n* timestamp of the event\n* event ID\n\
-        * event type\n* name and GUID of the user\n* IP address of ThoughtSpot instance\n\
-        \nFor more information about security events returned in the API response,\
-        \ see [Security events](https://developers.thoughtspot.com/docs/audit-logs#_security_events).\n\
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac)\
+        \ is enabled on your instance, the [Admin Control](https://developers.thoughtspot.com/docs/rbac#_admin_control)\
+        \ privileges are required.\n\n\n#### Usage guidelines\n\nBy default, the API\
+        \ retrieves logs for the last 24 hours. You can set a custom duration in EPOCH\
+        \ time. Make sure the log duration specified in your API request doesn’t exceed\
+        \ 24 hours. If you must fetch logs for a longer time range, modify the duration\
+        \ and make multiple sequential API requests.\n\nUpon successful execution,\
+        \ the API returns logs with the following information:\n* timestamp of the\
+        \ event\n* event ID\n* event type\n* name and GUID of the user\n* IP address\
+        \ of ThoughtSpot instance\n\nFor more information see [Audit logs Documentation](https://developers.thoughtspot.com/docs/audit-logs).\n\
         \n\n\n\n\n"
       operationId: fetchLogs
       parameters: []
@@ -1334,6 +1429,8 @@ paths:
         Gets Git repository connections configured on the ThoughtSpot instance.
 
         Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `CAN_MANAGE_VERSION_CONTROL` (**Can toggle version control for objects**) privilege.
 
 
 
@@ -1396,6 +1493,8 @@ paths:
 
         Requires `DATAMANAGEMENT` (**Can manage data**) privilege.
 
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**) privilege and edit access to the metadata objects.
+
 
 
 
@@ -1455,6 +1554,7 @@ paths:
 
         Gets connection objects.
         Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.
 
         - To get a list of all connections available in the ThoughtSpot system, send the API request without any attributes in the request body.
         - To get the connection objects for a specific type of data warehouse, specify the type in `data_warehouse_types`.
@@ -1545,9 +1645,15 @@ paths:
       x-accepts: application/json
   /api/rest/2.0/roles/search:
     post:
-      description: "Gets Roles configured on a ThoughtSpot instance.\nRequires cluster\
+      description: "\nGets Roles configured on a ThoughtSpot instance.\nRequires cluster\
         \ Administration, Role Administration or\nGroup Administration privileges.\
-        \ \n  Version: 9.5.0.cl or later\n"
+        \ \n  Version: 9.5.0.cl or later\n\n\nGets a list of Role objects from the\
+        \ ThoughtSpot system.\n\nAvailable if [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac)\
+        \ is enabled on your instance. To search for Roles, the `ROLE_ADMINISTRATION`\
+        \ (**Can manage roles**) privilege is required.\n\nTo get details of a specific\
+        \ Role object, specify the GUID or name. You can also filter the API response\
+        \ based on user group and Org identifiers, privileges assigned to the Role,\
+        \ and deprecation status.\n\n\n\n\n\n"
       operationId: searchRoles
       parameters: []
       requestBody:
@@ -1604,6 +1710,7 @@ paths:
         Gets custom actions configured on the cluster.
 
         Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.
 
 
 
@@ -1732,7 +1839,7 @@ paths:
 
         Gets an authentication token that provides access to a specific metadata object. By default, the token obtained from ThoughtSpot remains valid for 5 mins.
 
-        You can generate the token for a user by providing a `username` and `password` (for [Bearer token authentication](https://developers.thoughtspot.com/docs/?pageid=api-authv2#bearerToken)), or by using the cluster’s `secret key` (for [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable)).
+        You can generate the token for a user by providing a `username` and `password`, or by using the cluster’s `secret key` (for [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable)).
 
         To generate a `secret_key` on your cluster, the administrator must enable **Trusted authentication** in the **Develop** > **Customizations** > **Security Settings** page.
 
@@ -1740,18 +1847,26 @@ paths:
 
         #### Just-in-time provisioning
 
-        For just-in-time user creation and provisioning, use the following attributes.
+        For just-in-time user creation and provisioning, define the following attributes:
 
         * `auto_create`
         * `username`
+        * `display_name`
+        * `email`
+        * `group_identifiers`
 
-        To assign privileges to the new user, specify the group name or GUID in `group_identifiers`.
+        Set `auto_create` to `True` if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create` parameter is set to `true`, the API call will update user properties like display name, email and group assignment.
 
-        To add the user to an Org, send the `Org ID` in the API request.
+        For more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).
 
-        **Note**: This feature is available only if Trusted authentication is enabled on your cluster.
+        To add a new user and assign privileges, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege is required.
 
-        To provision a new user and assign privileges, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+        #### Attribute-Based Access Control (ABAC) with tokens
+
+        You can define Attribute-Based Access Control (ABAC) parameters to assign security entitlements to users during session creation. For more information, see [ABAC via token](https://developers.thoughtspot.com/docs/abac-user-parameters).
+
+        #### Important point to note
+        All options in the token creation APIs changing the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, `auto_create:true` will create the user when the authentication token is created. Similarly, using `user_parameters` with `persist: true` persists security parameters on the user profile when the token is created and not during authentication.
 
 
 
@@ -1811,7 +1926,7 @@ paths:
 
         Gets an authentication token and creates a full session in ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot remains valid for 5 mins.
 
-        You can generate the token for a user by providing a `username` and `password` (for [Bearer token authentication](https://developers.thoughtspot.com/docs/?pageid=api-authv2#bearerToken)), or by using the cluster’s `secret_key` (for [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable)).
+        You can generate the token for a user by providing a `username` and `password`, or by using the cluster’s `secret_key` (for [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable)).
 
         To generate a `secret_key` on your cluster, the administrator must enable **Trusted authentication** in the **Develop** > **Customizations** > **Security Settings** page. For more information, see [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable).
 
@@ -1819,18 +1934,26 @@ paths:
 
         #### Just-in-time provisioning
 
-        For just-in-time user creation and provisioning, use the following attributes.
+        For just-in-time user creation and provisioning, define the following attributes:
 
         * `auto_create`
         * `username`
+        * `display_name`
+        * `email`
+        * `group_identifiers`
 
-        To assign privileges to the new user, specify the group name or GUID in `group_identifiers`.
+        Set `auto_create` to `True` if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create` parameter is set to `true`, the API call will update user properties like display name, email and group assignment.
 
-        To add the user to an Org, specify the Org ID in the `org_id` attribute.
+        For more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).
 
-        **Note**: This feature is available only on clusters with trusted authentication enabled.
+        To add a new user and assign privileges, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege is required.
 
-        To provision a new user and assign privileges, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+        #### Attribute-Based Access Control (ABAC) with tokens
+
+        You can define Attribute-Based Access Control (ABAC) parameters to assign security entitlements to users during session creation. For more information, see [ABAC via token](https://developers.thoughtspot.com/docs/abac-user-parameters).
+
+        #### Important point to note
+        All options in the token creation APIs changing the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, `auto_create:true` will create the user when the authentication token is created. Similarly, using `user_parameters` with `persist: true` persists security parameters on the user profile when the token is created and not during authentication.
 
 
 
@@ -1941,8 +2064,7 @@ paths:
         The token of your current session expires when you make a call to the `/api/rest/2.0/auth/token/revoke` endpoint.
         the users will not be able to access ThoughtSpot objects until a new token is obtained.
 
-        To restart your session, request for a new token from ThoughtSpot. See [Get Object Access Token](#/http/api-endpoints/authentication/get-object-access-token)
-        and [Get Full Access Token](#/http/api-endpoints/authentication/get-full-access-token).
+        To restart your session, request for a new token from ThoughtSpot. See [Get Full Access Token](#/http/api-endpoints/authentication/get-full-access-token).
 
 
 
@@ -1990,8 +2112,20 @@ paths:
       x-accepts: application/json
   /api/rest/2.0/auth/token/validate:
     post:
-      description: |2
+      description: |2+
+
          Version: 9.12.0.cl or later
+
+
+
+        Validates the authentication token specified in the API request.
+
+        If your token is not valid, [Get a new token](#/http/api-endpoints/authentication/get-full-access-token).
+
+
+
+
+
       operationId: validateToken
       parameters: []
       requestBody:
@@ -2036,6 +2170,101 @@ paths:
       - ThoughtSpotRest
       x-content-type: application/json
       x-accepts: application/json
+  /api/rest/2.0/auth/token/custom:
+    post:
+      description: |2+
+
+         Version: 10.4.0.cl or later
+
+
+        Gets an authentication token with custom rules and security attributes and creates a full session in ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot remains valid for 5 mins.
+
+        To add a new user and assign privileges during auto creation, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.
+
+        To assign security attributes with filter rules and Parameters to the JWT token, you'll need administrator privileges and edit access to the data source (Worksheet or Model). If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.
+
+        #### Usage guidelines
+
+        You can generate the token for a user by providing a `username` and `password`, or by using the cluster’s `secret_key`.
+
+        To generate a `secret_key` on your cluster, the administrator must enable [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable) in the **Develop** > **Customizations** > **Security Settings** page.
+
+        **Note**: When both `password` and `secret_key` are included in the API request, `password` takes precedence.
+
+        ##### Attribute-Based Access Control (ABAC) with tokens
+
+        To implement Attribute-Based Access Control (ABAC) and assign security entitlements to users during session creation, you can generate a token with custom filtering rules and Parameters in the `filter_rules` and `parameter_values` array respectively. These attributes can be configured to persist on a specific set of objects for user sessions initiated using the token. Once defined, the rules are added to the user's `access_control_properties` object, after which all sessions will use the persisted values.
+
+        For more information, see [ABAC via tokens Documentation](https://developers.thoughtspot.com/docs/api-authv2#_get_tokens_with_custom_rules_and_filter_conditions).
+
+        ##### Just-in-time provisioning
+
+        For just-in-time user creation and provisioning, define the following attributes:
+
+        * `auto_create`
+        * `username`
+        * `display_name`
+        * `email`
+        * `groups`
+
+        Set `auto_create` to `true` if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create` parameter is set to `true` in the API request, the user properties such as the display name, email, Org and group assignment will not be updated with new values.
+
+        For more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).
+
+        ##### Important point to note
+        All options in the token creation APIs that define access to the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, `auto_create:true` will create the user when the authentication token is created. Persist options such as  `APPEND`, `REPLACE`, `RESET` will persist security parameters on the user profile when the token is created, while Persist option `NONE` will not persist anything but will be honoured in the session.
+
+
+
+
+
+      operationId: getCustomAccessToken
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/getCustomAccessToken_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessToken'
+          description: ABAC token creation was successful.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid request. This could be due to missing or incorrect
+            parameters.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access. The request could not be authenticated.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access. The user does not have permission to access
+            this resource.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: An unexpected error occurred on the server.
+      security: []
+      tags:
+      - Authentication
+      - ThoughtSpotRest
+      x-content-type: application/json
+      x-accepts: application/json
   /api/rest/2.0/users/create:
     post:
       description: |2+
@@ -2048,6 +2277,7 @@ paths:
         The API endpoint allows you to configure several user properties such as email address, account status, share notification preferences, and sharing visibility. You can provision the user to [groups](https://docs.thoughtspot.com/cloud/latest/groups-privileges) and [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview). You can also add Liveboard, Answer, and Worksheet objects to the user’s favorites list, assign a default Liveboard for the user, and set user preferences.
 
         Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `USER_ADMINISTRATION` (**Can manage users**) privilege is required.
 
 
 
@@ -2104,11 +2334,12 @@ paths:
          Version: 9.0.0.cl or later
 
 
-        Updates a user object.
+        Updates the properties of a user object.
 
         You can modify user properties such as username, email, and share notification settings. You can also assign new groups and Orgs, remove the user from a group or Org, reset password, and modify user preferences.
 
         Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `USER_ADMINISTRATION` (**Can manage users**) privilege is required.
 
 
 
@@ -2174,6 +2405,7 @@ paths:
         If you want to remove a user from a specific Org but not from ThoughtSpot, update the group and Org mapping properties of the user object via a POST API call to the [/api/rest/2.0/users/{user_identifier}/update](#/http/api-endpoints/users/update-user) endpoint.
 
         Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `USER_ADMINISTRATION` (**Can manage users**) privilege is required.
 
 
 
@@ -2236,6 +2468,7 @@ paths:
         A successful API call returns the object that represents the changes made in the ThoughtSpot system.
 
         Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `USER_ADMINISTRATION` (**Can manage users**) privilege is required.
 
 
 
@@ -2295,6 +2528,7 @@ paths:
         Updates the current password of the user.
 
         Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `USER_ADMINISTRATION` (**Can manage users**) privilege is required.
 
 
 
@@ -2350,6 +2584,7 @@ paths:
         Resets the password of a user account. Administrators can reset password on behalf of a user.
 
         Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `USER_ADMINISTRATION` (**Can manage users**) privilege is required.
 
 
 
@@ -2402,7 +2637,10 @@ paths:
         \ user sessions and force users to re-login. Make sure you specify the usernames\
         \ or GUIDs. If you pass null values in the API call, all user sessions on\
         \ your cluster become invalid, and the users are forced to re-login.\n\nRequires\
-        \ `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n\n"
+        \ `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based\
+        \ Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is\
+        \ enabled on your instance, the `USER_ADMINISTRATION` (**Can manage users**)\
+        \ privilege is required.\n\n\n\n\n\n"
       operationId: forceLogoutUsers
       parameters: []
       requestBody:
@@ -2453,6 +2691,7 @@ paths:
         Activates a deactivated user account.
 
         Requires `ADMINISTRATION` (**Can administer Thoughtspot**) privilege.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `USER_ADMINISTRATION` (**Can manage users**) privilege is required.
 
         To activate an inactive user account, the API request body must include the following information:
 
@@ -2517,7 +2756,7 @@ paths:
 
         Deactivates a user account.
 
-        Requires `ADMINISTRATION` (**Can administer Thoughtspot**) privilege.
+        Requires `ADMINISTRATION` (**Can administer Thoughtspot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `USER_ADMINISTRATION` (**Can manage users**) privilege is required.
 
         To deactivate a user account, the API request body must include the following information:
 
@@ -2581,9 +2820,10 @@ paths:
          Version: 9.2.0.cl or later
 
 
-        Updates the current configuration of the cluster. You must send the configuration settings in JSON format.
+        Updates the current configuration of the cluster. You must send the configuration data in JSON format.
 
         Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `APPLICATION_ADMINISTRATION` (**Can manage application settings**) privilege is required.
 
 
 
@@ -2641,6 +2881,7 @@ paths:
         To use this API, the [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview) feature must be enabled in your cluster.
 
         Requires cluster administration (**Can administer Org**) privileges.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ORG_ADMINISTRATION` (**Can manage Orgs**) privilege is required.
 
 
 
@@ -2708,6 +2949,7 @@ paths:
         Updates an Org object. You can modify Org properties such as name, description, and user associations.
 
         Requires cluster administration (**Can administer Org**) privileges.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ORG_ADMINISTRATION` (**Can manage Orgs**) privilege is required.
 
 
 
@@ -2771,6 +3013,7 @@ paths:
         Deletes an Org object from the ThoughtSpot system.
 
         Requires cluster administration (**Can administer Org**) privilege.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ORG_ADMINISTRATION` (**Can manage Orgs**) privilege is required.
 
         When you delete an Org, all its users and objects created in that Org context are removed. However, if the users in the deleted Org also exists in other Orgs, they are removed only from the deleted Org.
 
@@ -2830,7 +3073,8 @@ paths:
 
         Tags are labels that identify a metadata object. For example, you can create a tag to designate subject areas, such as sales, HR, marketing, and finance.
 
-        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.
+        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.
 
 
 
@@ -2899,10 +3143,10 @@ paths:
     post:
       description: "\n Version: 9.0.0.cl or later\n\n\nUpdates a tag object.\n\nYou\
         \ can modify the `name` and `color` properties of a tag object.  \n\nRequires\
-        \ `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based\
+        \ `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based\
         \ Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is\
-        \ enabled, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required\
-        \ to create, edit, and delete tags.\n\n\n\n\n\n"
+        \ enabled on your instance, the `TAGMANAGEMENT` (**Can manage tags**) privilege\
+        \ is required to create, edit, and delete tags.\n\n\n\n\n\n"
       operationId: updateTag
       parameters:
       - description: Name or Id of the tag.
@@ -2960,7 +3204,8 @@ paths:
 
         Deletes a tag object from the ThoughtSpot system
 
-        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.
+        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.
 
 
 
@@ -3127,6 +3372,7 @@ paths:
         Creates a group object in ThoughtSpot.
 
         Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `GROUP_ADMINISTRATION` (**Can manage groups**) privilege is required.
 
         #### About groups
         Groups in ThoughtSpot are used by the administrators to define privileges and organize users based on their roles and access requirements. To know more about groups and privileges, see [ThoughtSpot Product Documentation](https://docs.thoughtspot.com/cloud/latest/groups-privileges).
@@ -3135,7 +3381,7 @@ paths:
 
         The API endpoint lets you perform the following operations:
 
-        * Assign [privileges](https://developers.thoughtspot.com/docs/?pageid=api-user-management#group-privileges)
+        * Assign privileges
         * Add users
         * Define sharing visibility
         * Add sub-groups
@@ -3199,6 +3445,7 @@ paths:
         Updates the properties of a group object in ThoughtSpot.
 
         Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `GROUP_ADMINISTRATION` (**Can manage groups**) privilege is required.
 
         #### Supported operations
 
@@ -3272,6 +3519,7 @@ paths:
         Removes the specified group object from the ThoughtSpot system.
 
         Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `GROUP_ADMINISTRATION` (**Can manage groups**) privilege is required.
 
 
 
@@ -3328,6 +3576,7 @@ paths:
         Imports group objects from external databases into ThoughtSpot.
 
         Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `GROUP_ADMINISTRATION` (**Can manage groups**) privilege is required.
 
         During the import operation:
 
@@ -3396,6 +3645,10 @@ paths:
 
         Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtsSpot**) privilege.
 
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:
+        - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**)
+        - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)
+
         #### Usage guidelines
 
         *  Import all related objects in a single TML Import API call. For example, Tables that use the same Connection object and Worksheets connected to these Tables.
@@ -3406,6 +3659,8 @@ paths:
         * You can upload multiple TML files at a time.
           If you import a Worksheet along with Liveboards, Answers, and other dependent objects in a single API call, the imported objects will be immediately available for use.
           When you import only a Worksheet object, it may take some time for the Worksheet to become available in the ThoughtSpot system. Please wait for a few minutes, and then proceed to create an Answer and Liveboard from the newly imported Worksheet.
+
+        For more information, see [TML Documentation](https://developers.thoughtspot.com/docs/tml#_import_a_tml).
 
 
 
@@ -3457,6 +3712,73 @@ paths:
       - ThoughtSpotRest
       x-content-type: application/json
       x-accepts: application/json
+  /api/rest/2.0/metadata/tml/async/import:
+    post:
+      description: |2+
+
+         Version: 10.4.0.cl or later
+
+
+        Schedules a task to import [TML](https://docs.thoughtspot.com/cloud/latest/tml) files into ThoughtSpot. You can use this API endpoint to process TML objects asynchronously when importing TMLs of large and complex metadata objects into ThoughtSpot. Unlike the synchronous import TML operation, the API processes TML data in the background and returns a task ID, which can be used to check the status of the import task via `/api/rest/2.0/metadata/tml/async/status` API endpoint.
+
+        Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtsSpot**) privilege, and edit access to the TML objects.
+
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:
+        - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**)
+        - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)
+
+        #### Usage guidelines
+
+        See [Async TML API Documentation](https://developers.thoughtspot.com/docs/tml#_import_tml_objects_asynchronously) for usage guidelines.
+
+
+
+
+
+      operationId: importMetadataTMLAsync
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/importMetadataTMLAsync_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImportEPackAsyncTaskStatus'
+          description: Async TML Import Task submitted successfully.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unexpected error
+      tags:
+      - Metadata
+      - ThoughtSpotRest
+      x-content-type: application/json
+      x-accepts: application/json
   /api/rest/2.0/metadata/tml/export:
     post:
       description: |2+
@@ -3466,13 +3788,15 @@ paths:
 
         Exports the [TML](https://docs.thoughtspot.com/cloud/latest/tml) representation of metadata objects in JSON or YAML format.
 
-        Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtsSpot**) privilege.
+        Requires `DATADOWNLOADING` (**Can download Data**) and at least view access to the metadata object.
 
         #### Usage guidelines
 
         * You can export one or several objects by passing metadata object GUIDs in the `metadata` array.
         * When exporting TML content for a Liveboard or Answer object, you can set `export_associated` to `true` to retrieve TML content for underlying Worksheets, Tables, or Views, including the GUID of each object within the headers. When   `export_associated` is set to `true`, consider retrieving one metadata object at a time.
         * Set `export_fqns` to `true` to add FQNs of the referenced objects in the TML content. For example, if you send an API request to retrieve TML for a Liveboard and its associated objects, the API returns the TML content with FQNs of the referenced Worksheet. Exporting TML with FQNs is useful if ThoughtSpot has multiple objects with the same name and you want to eliminate ambiguity when importing TML files into ThoughtSpot. It eliminates the need for adding FQNs of the referenced objects manually during the import operation.
+
+        For more information, see [TML Documentation](https://developers.thoughtspot.com/docs/tml#_export_a_tml).
 
 
 
@@ -3526,8 +3850,25 @@ paths:
       x-accepts: application/json
   /api/rest/2.0/metadata/tml/export/batch:
     post:
-      description: |2
+      description: |2+
+
          Version: 10.1.0.cl or later
+
+
+        Exports the [TML](https://docs.thoughtspot.com/cloud/latest/tml) representation of metadata objects in JSON or YAML format.
+
+        Requires `DATAMANAGEMENT` (**Can manage data**) privilege.
+
+        #### Usage guidelines
+
+        * You can export one or several objects by passing metadata object GUIDs in the `metadata` array.
+        * When exporting TML content for a Liveboard or Answer object, you can set `export_associated` to `true` to retrieve TML content for underlying Worksheets, Tables, or Views, including the GUID of each object within the headers. When   `export_associated` is set to `true`, consider retrieving one metadata object at a time.
+        * Set `export_fqns` to `true` to add FQNs of the referenced objects in the TML content. For example, if you send an API request to retrieve TML for a Liveboard and its associated objects, the API returns the TML content with FQNs of the referenced Worksheet. Exporting TML with FQNs is useful if ThoughtSpot has multiple objects with the same name and you want to eliminate ambiguity when importing TML files into ThoughtSpot. It eliminates the need for adding FQNs of the referenced objects manually during the import operation.
+
+
+
+
+
       operationId: exportMetadataTMLBatched
       parameters: []
       requestBody:
@@ -3574,19 +3915,9 @@ paths:
       x-accepts: application/json
   /api/rest/2.0/metadata/delete:
     post:
-      description: |2+
-
-         Version: 9.0.0.cl or later
-
-
-        Removes the specified metadata object from the ThoughtSpot system.
-
-        Requires edit access to the metadata object or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
-
-
-
-
-
+      description: "\n Version: 9.0.0.cl or later\n\n\nRemoves the specified metadata\
+        \ object from the ThoughtSpot system.\n\nRequires edit access to the metadata\
+        \ object. \n\n\n\n\n\n"
       operationId: deleteMetadata
       parameters: []
       requestBody:
@@ -3630,10 +3961,10 @@ paths:
   /api/rest/2.0/metadata/copyobject:
     post:
       description: "\nMakes a copy of an Answer or Liveboard saved in Atlas \n  Version:\
-        \ 10.3.0.cl or later\n\n\nCreates a copy of the metadata object specified\
-        \ in the API request.\n\nRequires create access to metadata objects\n\nUpon\
-        \ successful execution, the API returns the id of the new object which is\
-        \ copied from the given object.\n\n\n\n\n"
+        \ 10.3.0.cl or later\n\n\nCreates a copy of a metadata object.\n\nRequires\
+        \ at least view access to the metadata object being copied.\n\nUpon successful\
+        \ execution, the API creates a copy of the metadata object specified in the\
+        \ API request and returns the ID of the new object.\n\n\n\n\n\n"
       operationId: copyObject
       parameters: []
       requestBody:
@@ -3694,6 +4025,8 @@ paths:
         Transfers the ownership of one or several objects from one user to another.
 
         Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `USER_ADMINISTRATION` (**Can manage users**) privilege and edit access to the objects are required.
 
 
 
@@ -3816,6 +4149,8 @@ paths:
 
         Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
 
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `CAN_MANAGE_VERSION_CONTROL` (**Can toggle version control for objects**) privilege.
+
         You can use this API endpoint to connect your ThoughtSpot development and production environments to the development and production branches of a Git repository.
 
         Before using this endpoint to connect your ThoughtSpot instance to a Git repository, check the following prerequisites:
@@ -3888,6 +4223,8 @@ paths:
 
         Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
 
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `CAN_MANAGE_VERSION_CONTROL` (**Can toggle version control for objects**) privilege.
+
 
 
 
@@ -3946,6 +4283,8 @@ paths:
         Deletes Git repository configuration from your ThoughtSpot instance.
 
         Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `CAN_MANAGE_VERSION_CONTROL` (**Can toggle version control for objects**) privilege.
 
 
 
@@ -4143,6 +4482,8 @@ paths:
 
         Requires `DATAMANAGEMENT` (**Can manage data**) privilege.
 
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**) privilege and edit access to the metadata objects.
+
 
 
 
@@ -4263,47 +4604,50 @@ paths:
       description: "\n Version: 9.2.0.cl or later\n\n\nCreates a connection to a data\
         \ warehouse for live query services.  \n\nRequires `DATAMANAGEMENT` (**Can\
         \ manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\
-        \n#### Create a connection without tables\n\nTo create a connection without\
-        \ tables:\n\n1. Pass these parameters in your API request.\n * Name of the\
-        \ connection.\n * Type of the data warehouse to connect to.\n * A JSON map\
-        \ of configuration attributes in `data_warehouse_config`. The following example\
-        \ shows the configuration attributes for a SnowFlake connection:\n  ```\n\
-        \  {\n     \"configuration\":{\n        \"accountName\":\"thoughtspot_partner\"\
-        ,\n        \"user\":\"tsadmin\",\n        \"password\":\"TestConn123\",\n\
-        \        \"role\":\"sysadmin\",\n        \"warehouse\":\"MEDIUM_WH\"\n   \
-        \  },\n     \"externalDatabases\":[\n\n     ]\n  }\n  ```\n2. Set `validate`\
-        \ to `false`.\n\n#### Create a connection with tables\n\nTo create a connection\
-        \ with tables:\n\n1. Pass these parameters in your API request.\n * Name of\
-        \ the connection.\n * Type of the data warehouse to connect to.\n * A JSON\
-        \ map of configuration attributes, database details, and table properties\
-        \ in `data_warehouse_config` as shown in the following example:\n  ```\n \
-        \ {\n     \"configuration\":{\n        \"accountName\":\"thoughtspot_partner\"\
-        ,\n        \"user\":\"tsadmin\",\n        \"password\":\"TestConn123\",\n\
-        \        \"role\":\"sysadmin\",\n        \"warehouse\":\"MEDIUM_WH\"\n   \
-        \  },\n     \"externalDatabases\":[\n        {\n           \"name\":\"AllDatatypes\"\
-        ,\n           \"isAutoCreated\":false,\n           \"schemas\":[\n       \
-        \       {\n                 \"name\":\"alldatatypes\",\n                 \"\
-        tables\":[\n                    {\n                       \"name\":\"allDatatypes\"\
-        ,\n                       \"type\":\"TABLE\",\n                       \"description\"\
-        :\"\",\n                       \"selected\":true,\n                      \
-        \ \"linked\":true,\n                       \"columns\":[\n               \
-        \           {\n                             \"name\":\"CNUMBER\",\n      \
-        \                       \"type\":\"INT64\",\n                            \
-        \ \"canImport\":true,\n                             \"selected\":true,\n \
-        \                            \"isLinkedActive\":true,\n                  \
-        \           \"isImported\":false,\n                             \"tableName\"\
-        :\"allDatatypes\",\n                             \"schemaName\":\"alldatatypes\"\
-        ,\n                             \"dbName\":\"AllDatatypes\"\n            \
-        \              },\n                          {\n                         \
-        \    \"name\":\"CDECIMAL\",\n                             \"type\":\"INT64\"\
-        ,\n                             \"canImport\":true,\n                    \
-        \         \"selected\":true,\n                             \"isLinkedActive\"\
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac)\
+        \ is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can\
+        \ create/edit Connections**) privilege is required.\n\n#### Create a connection\
+        \ without tables\n\nTo create a connection without tables:\n\n1. Pass these\
+        \ parameters in your API request.\n * Name of the connection.\n * Type of\
+        \ the data warehouse to connect to.\n * A JSON map of configuration attributes\
+        \ in `data_warehouse_config`. The following example shows the configuration\
+        \ attributes for a SnowFlake connection:\n  ```\n  {\n     \"configuration\"\
+        :{\n        \"accountName\":\"thoughtspot_partner\",\n        \"user\":\"\
+        tsadmin\",\n        \"password\":\"TestConn123\",\n        \"role\":\"sysadmin\"\
+        ,\n        \"warehouse\":\"MEDIUM_WH\"\n     },\n     \"externalDatabases\"\
+        :[\n\n     ]\n  }\n  ```\n2. Set `validate` to `false`.\n\n#### Create a connection\
+        \ with tables\n\nTo create a connection with tables:\n\n1. Pass these parameters\
+        \ in your API request.\n * Name of the connection.\n * Type of the data warehouse\
+        \ to connect to.\n * A JSON map of configuration attributes, database details,\
+        \ and table properties in `data_warehouse_config` as shown in the following\
+        \ example:\n  ```\n  {\n     \"configuration\":{\n        \"accountName\"\
+        :\"thoughtspot_partner\",\n        \"user\":\"tsadmin\",\n        \"password\"\
+        :\"TestConn123\",\n        \"role\":\"sysadmin\",\n        \"warehouse\":\"\
+        MEDIUM_WH\"\n     },\n     \"externalDatabases\":[\n        {\n          \
+        \ \"name\":\"AllDatatypes\",\n           \"isAutoCreated\":false,\n      \
+        \     \"schemas\":[\n              {\n                 \"name\":\"alldatatypes\"\
+        ,\n                 \"tables\":[\n                    {\n                \
+        \       \"name\":\"allDatatypes\",\n                       \"type\":\"TABLE\"\
+        ,\n                       \"description\":\"\",\n                       \"\
+        selected\":true,\n                       \"linked\":true,\n              \
+        \         \"columns\":[\n                          {\n                   \
+        \          \"name\":\"CNUMBER\",\n                             \"type\":\"\
+        INT64\",\n                             \"canImport\":true,\n             \
+        \                \"selected\":true,\n                             \"isLinkedActive\"\
         :true,\n                             \"isImported\":false,\n             \
         \                \"tableName\":\"allDatatypes\",\n                       \
         \      \"schemaName\":\"alldatatypes\",\n                             \"dbName\"\
-        :\"AllDatatypes\"\n                          }\n                       ]\n\
-        \                    }\n                 ]\n              }\n           ]\n\
-        \        }\n     ]\n  }\n  ```\n2. Set `validate` to `true`.\n\n\n\n\n\n"
+        :\"AllDatatypes\"\n                          },\n                        \
+        \  {\n                             \"name\":\"CDECIMAL\",\n              \
+        \               \"type\":\"INT64\",\n                             \"canImport\"\
+        :true,\n                             \"selected\":true,\n                \
+        \             \"isLinkedActive\":true,\n                             \"isImported\"\
+        :false,\n                             \"tableName\":\"allDatatypes\",\n  \
+        \                           \"schemaName\":\"alldatatypes\",\n           \
+        \                  \"dbName\":\"AllDatatypes\"\n                         \
+        \ }\n                       ]\n                    }\n                 ]\n\
+        \              }\n           ]\n        }\n     ]\n  }\n  ```\n2. Set `validate`\
+        \ to `true`.\n\n\n\n\n\n"
       operationId: createConnection
       parameters: []
       requestBody:
@@ -4350,6 +4694,7 @@ paths:
       x-accepts: application/json
   /api/rest/2.0/connection/delete:
     post:
+      deprecated: true
       description: |2+
 
          Version: 9.2.0.cl or later
@@ -4360,6 +4705,7 @@ paths:
         **Note**: If a connection has dependent objects, make sure you remove its associations before the delete operation.
 
         Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.
 
 
 
@@ -4405,11 +4751,11 @@ paths:
       - ThoughtSpotRest
       x-content-type: application/json
       x-accepts: application/json
-  /api/rest/2.0/connections/delete/{connection_identifier}:
+  /api/rest/2.0/connections/{connection_identifier}/delete:
     post:
       description: |2+
 
-         Version: 10.0.0.cl or later
+         Version: 10.4.0.cl or later
 
 
         Deletes a connection object.
@@ -4417,6 +4763,7 @@ paths:
         **Note**: If a connection has dependent objects, make sure you remove its associations before the delete operation.
 
         Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.
 
 
 
@@ -4465,16 +4812,19 @@ paths:
       x-accepts: application/json
   /api/rest/2.0/connection/update:
     post:
+      deprecated: true
       description: "\n Version: 9.2.0.cl or later\n\n\nUpdates a connection object.\
         \  \n\nRequires `DATAMANAGEMENT` (**Can manage data**) and edit permissions\
         \ to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**)\
-        \ privilege.\n\nTo update a connection object, pass these parameters in your\
-        \ API request:\n\n1. GUID of the connection object.\n2. If you are updating\
-        \ tables or database schema of a connection object:\n   a. Add the updated\
-        \ JSON map of metadata with database, schema, and tables in `data_warehouse_config`.\n\
-        \   b. Set `validate` to `true`.\n3. If you are updating a configuration attribute,\
-        \ connection name, or description, you can set `validate` to `false`.\n\n\n\
-        \n\n\n"
+        \ privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac)\
+        \ is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can\
+        \ create/edit Connections**) privilege is required.\n\nTo update a connection\
+        \ object, pass these parameters in your API request:\n\n1. GUID of the connection\
+        \ object.\n2. If you are updating tables or database schema of a connection\
+        \ object:\n   a. Add the updated JSON map of metadata with database, schema,\
+        \ and tables in `data_warehouse_config`.\n   b. Set `validate` to `true`.\n\
+        3. If you are updating a configuration attribute, connection name, or description,\
+        \ you can set `validate` to `false`.\n\n\n\n\n\n"
       operationId: updateConnection
       parameters: []
       requestBody:
@@ -4515,16 +4865,17 @@ paths:
       - ThoughtSpotRest
       x-content-type: application/json
       x-accepts: application/json
-  /api/rest/2.0/connections/update/{connection_identifier}:
+  /api/rest/2.0/connections/{connection_identifier}/update:
     post:
       description: |2+
 
-         Version: 10.0.0.cl or later
+         Version: 10.4.0.cl or later
 
 
         Updates a connection object.
 
         Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.
 
         To update a connection object, pass these parameters in your API request:
 
@@ -4593,9 +4944,14 @@ paths:
          Version: 9.9.0.cl or later
 
 
-        Validates the difference in connection metadata between CDW and ThoughtSpot
+        Validates the difference in connection metadata between CDW and ThoughtSpot.
 
-        Requires `DATAMANAGEMENT` (**Can manage data**) privilege
+        Requires `DATAMANAGEMENT` (**Can manage data**) privilege.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:
+
+        - `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**)
+        - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**)
+        - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)
 
         Returns a boolean indicating whether there is any difference between the connection metadata at ThoughtSpot and CDW.
 
@@ -4652,21 +5008,15 @@ paths:
       x-accepts: application/json
   /api/rest/2.0/connections/download-connection-metadata-changes/{connection_identifier}:
     post:
-      description: |2+
-
-         Version: 9.9.0.cl or later
-
-
-        Exports the difference in connection metadata between CDW and ThoughtSpot
-
-        Requires `DATAMANAGEMENT` (**Can manage data**) privilege
-
-        To download the connection metadata difference between ThoughtSpot and CDW, pass the connection GUID as `connection_identifier` in the API request.
-
-
-
-
-
+      description: "\n Version: 9.9.0.cl or later\n\n\nExports the difference in connection\
+        \ metadata between CDW and ThoughtSpot\n\nRequires `DATAMANAGEMENT` (**Can\
+        \ manage data**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac)\
+        \ is enabled on your instance, the following Data control privileges may be\
+        \ required:  \n- `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**)\n\
+        - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**)\n- `CAN_MANAGE_WORKSHEET_VIEWS_TABLES`\
+        \ (**Can manage data models**)\n\nTo download the connection metadata difference\
+        \ between ThoughtSpot and CDW, pass the connection GUID as `connection_identifier`\
+        \ in the API request.\n\n\n\n\n\n"
       operationId: downloadConnectionMetadataChanges
       parameters:
       - description: GUID of the connection
@@ -4715,8 +5065,11 @@ paths:
       x-accepts: application/json
   /api/rest/2.0/roles/create:
     post:
-      description: "Creates a Role.\nRequires cluster Administration or Role Administration\
-        \ privileges. \n  Version: 9.5.0.cl or later\n"
+      description: "\nCreates a Role.\nRequires cluster Administration or Role Administration\
+        \ privileges. \n  Version: 9.5.0.cl or later\n\n\nCreates a Role object in\
+        \ ThoughtSpot.\n\nAvailable only if [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac)\
+        \ is enabled on your instance. To create a Role, the `ROLE_ADMINISTRATION`\
+        \ (**Can manage roles**) privilege is required.\n\n\n\n\n\n"
       operationId: createRole
       parameters: []
       requestBody:
@@ -4763,8 +5116,11 @@ paths:
       x-accepts: application/json
   /api/rest/2.0/roles/{role_identifier}/update:
     post:
-      description: "Updates a Role.\nRequires cluster Administration or Role Administration\
-        \ privileges. \n  Version: 9.5.0.cl or later\n"
+      description: "\nUpdates a Role.\nRequires cluster Administration or Role Administration\
+        \ privileges. \n  Version: 9.5.0.cl or later\n\n\nUpdates the properties of\
+        \ a Role object.\n\nAvailable only if [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac)\
+        \ is enabled on your instance. To update a Role, the `ROLE_ADMINISTRATION`\
+        \ (**Can manage roles**) privilege is required.\n\n\n\n\n\n"
       operationId: updateRole
       parameters:
       - description: Unique ID or name of the Role.
@@ -4819,8 +5175,12 @@ paths:
       x-accepts: application/json
   /api/rest/2.0/roles/{role_identifier}/delete:
     post:
-      description: "Deletes a Role.\nRequires cluster Administration or Role Administration\
-        \ privileges. \n  Version: 9.5.0.cl or later\n"
+      description: "\nDeletes a Role.\nRequires cluster Administration or Role Administration\
+        \ privileges. \n  Version: 9.5.0.cl or later\n\n\nDeletes a Role object from\
+        \ the ThoughtSpot system.\n\nAvailable only if [Role-Based Access Control\
+        \ (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your\
+        \ instance. To delete a Role, the `ROLE_ADMINISTRATION` (**Can manage roles**)\
+        \ privilege is required.\n\n\n\n\n\n"
       operationId: deleteRole
       parameters:
       - description: Unique ID or name of the Role.
@@ -4868,23 +5228,28 @@ paths:
         \ a Liveboard schedule job.\n\nRequires at least edit access to Liveboards.\
         \ To create a schedule on behalf of another user, you need  `ADMINISTRATION`\
         \ (**Can administer Org**) or `JOBSCHEDULING` (**Can schedule for others**)\
-        \ privilege and edit access to the Liveboard.\n\n#### Usage guidelines\n\n\
-        * The description text is mandatory.  The description text appears as **Description:\
-        \ <your content>** in the Liveboard schedule email notifications.\n* The API\
-        \ endpoint supports exporting Liveboard data to the recipients in CSV or PDF\
-        \ format. If your Liveboard has tables, you can set `file_format` to CSV to\
-        \ send CSV files in the email notification to the recipients. For PDF generation,\
-        \ you can define PDF layout options.\n* To include only specific visualizations,\
-        \ specify the visualization GUIDs in the `visualization_identifiers` array.\n\
-        * You can schedule a Liveboard job to run periodically by setting frequency\
-        \ parameters. You can set the schedule to run daily, weekly, monthly or every\
-        \ n minutes or hours. The scheduled job can also be configured to run at a\
-        \ specific time of the day or on specific days of the week or month.\n* If\
-        \ the `frequency` parameters are defined, you can set the time zone to a value\
-        \ that matches your server's time zone. For example, `US/Central`, `Etc/UTC`,\
-        \ `CET`. The default time zone is `America/Los_Angeles`.\n\nFor more information\
-        \ about Liveboard jobs, see [ThoughtSpot Product Documentation](https://docs.thoughtspot.com/cloud/latest/liveboard-schedule).\n\
-        \n\n\n\n\n"
+        \ privilege and edit access to the Liveboard.\nIf [Role-Based Access Control\
+        \ (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your\
+        \ instance, the `JOBSCHEDULING` (**Can schedule for others**) privilege is\
+        \ required.\n\n#### Usage guidelines\n\n* The description text is mandatory.\
+        \  The description text appears as **Description: <your content>** in the\
+        \ Liveboard schedule email notifications.\n* For Liveboards with both charts\
+        \ and tables, schedule creation is only supported in PDF and XLS formats.\
+        \ Schedules created in CSV formats for such Liveboards will fail to run. If\
+        \ `PDF` is set as the `file_format`, enable `pdf_options` to get the correct\
+        \ attachment. Not doing so may cause the attachment to be rendered empty.\n\
+        * To include only specific visualizations, specify the visualization GUIDs\
+        \ in the `visualization_identifiers` array.\n* You can schedule a Liveboard\
+        \ job to run periodically by setting frequency parameters. You can set the\
+        \ schedule to run daily, weekly, monthly or every n minutes or hours. The\
+        \ scheduled job can also be configured to run at a specific time of the day\
+        \ or on specific days of the week or month. Please ensure that when setting\
+        \ the schedule frequency for _minute of the object_, only values that are\
+        \ multiples of 5 are included.\n* If the `frequency` parameters are defined,\
+        \ you can set the time zone to a value that matches your server's time zone.\
+        \ For example, `US/Central`, `Etc/UTC`, `CET`. The default time zone is `America/Los_Angeles`.\n\
+        \nFor more information about Liveboard jobs, see [ThoughtSpot Product Documentation](https://docs.thoughtspot.com/cloud/latest/liveboard-schedule).\n\
+        \n\n\n\n"
       operationId: createSchedule
       parameters: []
       requestBody:
@@ -4933,7 +5298,10 @@ paths:
     post:
       description: "\nDeletes a scheduled job. \n  Version: 9.4.0.cl or later\n\n\n\
         Deletes a scheduled Liveboard job.\n\nRequires at least edit access to Liveboard\
-        \ or `ADMINISTRATION` (**Can administer Org**) privilege.   \n\n\n\n\n\n"
+        \ or `ADMINISTRATION` (**Can administer Org**) privilege.   \nIf [Role-Based\
+        \ Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is\
+        \ enabled on your instance, the `JOBSCHEDULING` (**Can schedule for others**)\
+        \ privilege is required.\n\n\n\n\n\n"
       operationId: deleteSchedule
       parameters:
       - description: Unique ID or name of the scheduled job.
@@ -5035,11 +5403,13 @@ paths:
         \ a scheduled Liveboard job.\n\nRequires at least edit access to Liveboards.\
         \ To update a schedule on behalf of another user, you need `ADMINISTRATION`\
         \ (**Can administer Org**) or `JOBSCHEDULING` (**Can schedule for others**)\
-        \ privilege and edit access to the Liveboard.\n\nThe API endpoint allows you\
-        \ to pause a scheduled job, change the status of a paused job. You can also\
-        \ edit the recipients list, frequency of the job, format of the file to send\
-        \ to the recipients in email notifications, PDF options, and time zone setting.\n\
-        \n\n\n\n\n"
+        \ privilege and edit access to the Liveboard.\nIf [Role-Based Access Control\
+        \ (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your\
+        \ instance, the `JOBSCHEDULING` (**Can schedule for others**) privilege is\
+        \ required.\n\nThe API endpoint allows you to pause a scheduled job, change\
+        \ the status of a paused job. You can also edit the recipients list, frequency\
+        \ of the job, format of the file to send to the recipients in email notifications,\
+        \ PDF options, and time zone setting.\n\n\n\n\n\n"
       operationId: updateSchedule
       parameters:
       - description: Unique ID or name of the schedule.
@@ -5093,18 +5463,20 @@ paths:
       description: "\n Version: 9.6.0.cl or later\n\n\nCreates a custom action that\
         \ appears as a menu action on a saved Answer or Liveboard visualization.\n\
         \nRequires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can\
-        \ administer ThoughtSpot**) privilege.\n\n#### Usage Guidelines\n\nThe API\
-        \ lets you create the following types of custom actions:\n\n* URL-based action\
-        \     \n  Allows pushing data to an external URL.\n* Callback action     \
-        \   \n  Triggers a callback to the host application and initiates a response\
-        \ payload on an embedded ThoughtSpot instance.\n\nBy default, custom actions\
-        \ are visible to only administrator or developer users. To make a custom action\
-        \ available to other users, and specify the groups in `group_identifiers`.\n\
-        \nBy default, the custom action is set as a _global_ action on all visualizations\
-        \ and saved Answers. To assign a custom action to specific Liveboard visualization,\
+        \ administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac)\
+        \ is enabled on your instance, the `DEVELOPER` (**Has developer privilege**)\
+        \ privilege is required.\n\n#### Usage Guidelines\n\nThe API lets you create\
+        \ the following types of custom actions:\n\n* URL-based action     \n  Allows\
+        \ pushing data to an external URL.\n* Callback action        \n  Triggers\
+        \ a callback to the host application and initiates a response payload on an\
+        \ embedded ThoughtSpot instance.\n\nBy default, custom actions are visible\
+        \ to only administrator or developer users. To make a custom action available\
+        \ to other users, and specify the groups in `group_identifiers`.\n\nBy default,\
+        \ the custom action is set as a _global_ action on all visualizations and\
+        \ saved Answers. To assign a custom action to specific Liveboard visualization,\
         \ saved Answer, or Worksheet, set `visibility` to `false` in `default_action_config`\
         \ property and specify the GUID or name of the object in `associate_metadata`.\n\
-        \nFor more information, see [Custom actions](https://developers.thoughtspot.com/docs/?pageid=custom-action-intro).\n\
+        \nFor more information, see [Custom actions](https://developers.thoughtspot.com/docs/custom-action-intro).\n\
         \n\n\n\n\n"
       operationId: createCustomAction
       parameters: []
@@ -5172,6 +5544,7 @@ paths:
         Updates a custom action.
 
         Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.
 
         #### Usage Guidelines
 
@@ -5182,7 +5555,7 @@ paths:
         * Association to metadata objects
         * Authentication settings for a URL-based action
 
-        For more information, see [Custom actions](https://developers.thoughtspot.com/docs/?pageid=custom-action-intro).
+        For more information, see [Custom actions](https://developers.thoughtspot.com/docs/custom-action-intro).
 
 
 
@@ -5246,6 +5619,7 @@ paths:
         Removes the custom action specified in the API request.
 
         Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.
 
 
 
@@ -5301,7 +5675,12 @@ paths:
 
         Creates a DBT connection object in ThoughtSpot.
 
-        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege.
+        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:
+
+        - `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**)
+        - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**)
+        - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)
 
         #### About create DBT connection
         DBT connection in ThoughtSpot is used by the user to define DBT credentials for cloud . The API needs  embrace connection, embrace database name, DBT url, import type, DBT account identifier, DBT project identifier, DBT access token and environment details (or) embrace connection, embrace database name, import type, file_content to create a connection object. To know more about DBT, see ThoughtSpot Product Documentation.
@@ -5356,8 +5735,27 @@ paths:
       x-accepts: application/json
   /api/rest/2.0/dbt/generate-tml:
     post:
-      description: |2
+      description: |2+
+
          Version: 9.9.0.cl or later
+
+
+        Generate required table and worksheet and import them.
+
+        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege, along with an existing DBT connection.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following data control privileges may be required:
+
+        - `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**)
+        - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**)
+        - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)
+
+        #### About generate TML
+        Models and Worksheets to be imported can be selected by the user as part of the API.
+
+
+
+
+
       operationId: dbtGenerateTml
       parameters: []
       requestBody:
@@ -5404,8 +5802,24 @@ paths:
       x-accepts: application/json
   /api/rest/2.0/dbt/generate-sync-tml:
     post:
-      description: |2
+      description: |2+
+
          Version: 9.9.0.cl or later
+
+
+        Resynchronize the existing list of models, tables, worksheet tml’s and import them to Thoughtspot based on the DBT connection object.
+
+        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege, along with an existing DBT connection.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following data control privileges may be required:
+
+        - `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**)
+        - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**)
+        - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)
+
+
+
+
+
       operationId: dbtGenerateSyncTml
       parameters: []
       requestBody:
@@ -5459,7 +5873,12 @@ paths:
 
         Gets a list of DBT connection objects by user and organization, available on the ThoughtSpot system.
 
-        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege
+        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:
+
+        - `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**)
+        - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**)
+        - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)
 
         #### About search DBT connection
         To get details of a specific DBT connection identifier, database connection identifier, database connection name, database name, project name, project identifier, environment identifier , import type and author.
@@ -5517,6 +5936,11 @@ paths:
         Removes the specified DBT connection object from the ThoughtSpot system.
 
         Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:
+
+        - `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**)
+        - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**)
+        - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)
 
 
 
@@ -5573,6 +5997,11 @@ paths:
         Updates a DBT connection object.
 
         Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege, along with an existing DBT connection.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following data control privileges may be required:
+
+        - `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**)
+        - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**)
+        - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)
 
         #### About update DBT connection
         You can modify DBT connection object properties such as embrace connection name, embrace database name, import type, account identifier, access token, project identifier and environment (or) embrace connection, embrace database name, import type, file_content settings.
@@ -5622,6 +6051,205 @@ paths:
           description: Unexpected error
       tags:
       - DBT
+      - ThoughtSpotRest
+      x-content-type: application/json
+      x-accepts: application/json
+  /api/rest/2.0/ai/conversation/create:
+    post:
+      description: |2+
+
+        Version: 10.4.0.cl or later
+
+
+        Creates a Conversation object to start an AI-driven conversation based on a specific data model.
+
+        Requires at least view access to the metadata object specified in the request.
+
+        #### Usage guidelines
+
+        This API requires the `metadata_identifier` parameter to define the context for the conversation.
+
+        You can also specify the tokens to initiate the conversation as shown in this example:
+
+        `"tokens": "[tea],[sales],[type]"`
+
+        If the API request is successful, ThoughtSpot returns the ID of the conversation.
+
+        > ###### Note:
+        > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.
+        > * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.
+
+
+
+
+
+      operationId: createConversation
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/createConversation_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conversation'
+          description: Common successful response
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conversation'
+          description: Common error response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Operation failed
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Operation failed
+      tags:
+      - AI
+      - ThoughtSpotRest
+      x-content-type: application/json
+      x-accepts: application/json
+  /api/rest/2.0/ai/conversation/{conversation_identifier}/converse:
+    post:
+      description: |2+
+
+        Version: 10.4.0.cl or later
+
+
+        Allows sending a follow-up message to an ongoing conversation within the context of the metadata model.
+
+        Requires at least view access to the metadata object specified in the request.
+
+        #### Usage guidelines
+
+        The API requires you to specify the `conversation_identifier` in the request path, and a `metadata_identifier` and `message` string in the request body.
+
+        If the API request is successful, ThoughtSpot returns the session ID, tokens used in the conversation, and visualization type.
+
+        > ###### Note:
+        > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.
+        > * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.
+
+
+
+
+
+      operationId: sendMessage
+      parameters:
+      - description: Unique identifier of the conversation.
+        explode: false
+        in: path
+        name: conversation_identifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/sendMessage_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ResponseMessage'
+                type: array
+          description: Common successful response
+        "201":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ResponseMessage'
+                type: array
+          description: Common error response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Operation failed
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Operation failed
+      tags:
+      - AI
+      - ThoughtSpotRest
+      x-content-type: application/json
+      x-accepts: application/json
+  /api/rest/2.0/ai/answer/create:
+    post:
+      description: |2+
+
+        Version: 10.4.0.cl or later
+
+
+        Processes a natural language query and returns an AI-generated response based on a specified data model.
+
+        Requires at least view access to the metadata object specified in the request.
+
+        > ###### Note:
+        > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.
+        > * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.
+
+
+
+
+
+      operationId: singleAnswer
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/singleAnswer_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseMessage'
+          description: Common successful response
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseMessage'
+          description: Common error response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Operation failed
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Operation failed
+      tags:
+      - AI
       - ThoughtSpotRest
       x-content-type: application/json
       x-accepts: application/json
@@ -5698,6 +6326,7 @@ components:
           id: 6
         owner_id: owner_id
         deprecated: true
+        access_control_properties: "{}"
         modification_time_in_millis: 2.302136
         account_status: ACTIVE
         home_liveboard:
@@ -5811,6 +6440,7 @@ components:
           - EXPIRED
           - LOCKED
           - PENDING
+          - SUSPENDED
           nullable: true
           type: string
         email:
@@ -5953,6 +6583,11 @@ components:
           type: object
         user_parameters:
           description: User Parameters which are specified for the user via JWToken
+          nullable: true
+          type: object
+        access_control_properties:
+          description: Access Control Properties which are specified for the user
+            via JWToken
           nullable: true
           type: object
       required:
@@ -6513,6 +7148,10 @@ components:
           description: Unique ID or name of the metadata.
           nullable: true
           type: string
+        custom_identifier:
+          description: CustomObjectId of the metadata.
+          nullable: true
+          type: string
         name_pattern:
           description: A pattern to match the case-insensitive name of the metadata
             object. User % for a wildcard match.
@@ -6672,6 +7311,7 @@ components:
           - USER
           - USER_GROUP
           - LOGICAL_RELATIONSHIP
+          - INSIGHT_SPEC
           type: string
         dependent_objects:
           description: Details of dependent objects of the metadata objects.
@@ -6706,6 +7346,37 @@ components:
       - metadata_type
       type: object
     GetAsyncImportStatusResponse:
+      example:
+        last_batch: true
+        status_list:
+        - tenant_id: tenant_id
+          task_name: task_name
+          task_status: COMPLETED
+          created_at: 6.0274563
+          in_progress_at: 1.4658129
+          task_id: task_id
+          import_policy: PARTIAL
+          object_processed_count: 2
+          completed_at: 5.962134
+          org_id: 0
+          import_response: "{}"
+          author_id: author_id
+          modified_at: 7.0614014
+          total_object_count: 5
+        - tenant_id: tenant_id
+          task_name: task_name
+          task_status: COMPLETED
+          created_at: 6.0274563
+          in_progress_at: 1.4658129
+          task_id: task_id
+          import_policy: PARTIAL
+          object_processed_count: 2
+          completed_at: 5.962134
+          org_id: 0
+          import_response: "{}"
+          author_id: author_id
+          modified_at: 7.0614014
+          total_object_count: 5
       properties:
         status_list:
           description: List of task statuses.
@@ -6719,6 +7390,21 @@ components:
           type: boolean
       type: object
     ImportEPackAsyncTaskStatus:
+      example:
+        tenant_id: tenant_id
+        task_name: task_name
+        task_status: COMPLETED
+        created_at: 6.0274563
+        in_progress_at: 1.4658129
+        task_id: task_id
+        import_policy: PARTIAL
+        object_processed_count: 2
+        completed_at: 5.962134
+        org_id: 0
+        import_response: "{}"
+        author_id: author_id
+        modified_at: 7.0614014
+        total_object_count: 5
       properties:
         tenant_id:
           description: GUID of tenant from which the task is initiated.
@@ -7643,6 +8329,8 @@ components:
           - GCP_MYSQL
           - MODE
           - GOOGLE_SHEETS
+          - FALCON
+          - FALCON_ONPREM
           type: string
         data_warehouse_objects:
           $ref: '#/components/schemas/DataWarehouseObjects'
@@ -8217,6 +8905,7 @@ components:
             - CAN_ACCESS_ANALYST_STUDIO
             - CAN_MANAGE_ANALYST_STUDIO
             - PREVIEW_DOCUMENT_SEARCH
+            - CAN_SETUP_VERSION_CONTROL
             type: string
           type: array
         permission:
@@ -8665,7 +9354,7 @@ components:
             { "column_name": "Color", "operator": "EQ", "values": ["red"], "persist": false }
             ```
           items:
-            $ref: '#/components/schemas/User_Runtime_Filters'
+            $ref: '#/components/schemas/Runtime_Filters'
           nullable: true
           type: array
         runtime_sorts:
@@ -8677,7 +9366,7 @@ components:
             { "column_name": "Color", "order": "ASC", "persist": false }
             ```
           items:
-            $ref: '#/components/schemas/User_Runtime_Sorts'
+            $ref: '#/components/schemas/Runtime_Sorts'
           nullable: true
           type: array
         parameters:
@@ -8689,7 +9378,7 @@ components:
             { "name": "Color", "values": ["Blue"], "persist": false }
             ```
           items:
-            $ref: '#/components/schemas/User_Parameters'
+            $ref: '#/components/schemas/Runtime_Parameters'
           nullable: true
           type: array
       type: object
@@ -8712,8 +9401,8 @@ components:
       required:
       - identifier
       type: object
-    User_Runtime_Filters:
-      description: Objects to apply the User_Runtime_Filters.
+    Runtime_Filters:
+      description: Objects to apply the Runtime_Filters.
       properties:
         column_name:
           description: The column name to apply filter.
@@ -8727,19 +9416,21 @@ components:
           description: "Operator value. Example: EQ"
           enum:
           - EQ
-          - GE
-          - GT
-          - IN
-          - LE
-          - LT
           - NE
-          - BEGINS_WITH
+          - LT
+          - LE
+          - GT
+          - GE
+          - IN
           - BW
-          - BW_INC
-          - BW_INC_MAX
-          - BW_INC_MIN
           - CONTAINS
+          - BEGINS_WITH
           - ENDS_WITH
+          - BW_INC
+          - BW_INC_MIN
+          - BW_INC_MAX
+          - LIKE
+          - NOT_IN
           type: string
         persist:
           default: false
@@ -8758,8 +9449,8 @@ components:
       - operator
       - values
       type: object
-    User_Runtime_Sorts:
-      description: Objects to apply the User_Runtime_Sorts.
+    Runtime_Sorts:
+      description: Objects to apply the Runtime_Sorts.
       properties:
         column_name:
           description: The column name to apply filter.
@@ -8785,7 +9476,7 @@ components:
           nullable: true
           type: array
       type: object
-    User_Parameters:
+    Runtime_Parameters:
       description: Objects to apply the Runtime_Parameters.
       properties:
         name:
@@ -8919,6 +9610,156 @@ components:
       - token_type
       - valid_for_user_id
       type: object
+    FilterRules:
+      description: Filter Rules to be applied on Objects.
+      properties:
+        column_name:
+          description: The name of the column to apply the filter on.
+          type: string
+        operator:
+          description: "The operator to use for filtering. Example: EQ (equals), GT(greater\
+            \ than), etc."
+          enum:
+          - EQ
+          - NE
+          - LT
+          - LE
+          - GT
+          - GE
+          - IN
+          - BW
+          - CONTAINS
+          - BEGINS_WITH
+          - ENDS_WITH
+          - BW_INC
+          - BW_INC_MIN
+          - BW_INC_MAX
+          - LIKE
+          - NOT_IN
+          type: string
+        values:
+          description: "The values to filter on. To get all records, use TS_WILDCARD_ALL\
+            \ as values."
+          items:
+            type: string
+          type: array
+      required:
+      - column_name
+      - operator
+      - values
+      type: object
+    ParameterValues:
+      description: Filter Rules to be applied on Objects.
+      properties:
+        name:
+          description: The name of the column to apply the filter on.
+          type: string
+        values:
+          description: The values to filter on. Only single value is supported currently.
+          items:
+            type: string
+          type: array
+      required:
+      - name
+      - values
+      type: object
+    TokenAccessScopeObject:
+      description: Objects on which the filter rules and parameters values should
+        be applied to
+      properties:
+        type:
+          description: "  Type of object.\n  \n\nRequired if the name of the object\
+            \ is set as the identifier. This attribute is optional when the object\
+            \ GUID is specified as the identifier."
+          enum:
+          - LIVEBOARD
+          - ANSWER
+          - LOGICAL_TABLE
+          nullable: true
+          type: string
+        identifier:
+          description: Unique name/id of the object.
+          type: string
+      required:
+      - identifier
+      type: object
+    Group_Object:
+      description: Groups objects.
+      properties:
+        identifier:
+          nullable: true
+          type: string
+      type: object
+    AccessToken:
+      example:
+        creation_time_in_millis: 6.0274563
+        org:
+          name: name
+          id: 0
+        expiration_time_in_millis: 1.4658129
+        id: id
+        user:
+          name: name
+          id: id
+        token: token
+      properties:
+        id:
+          description: GUID of the auth token.
+          nullable: true
+          type: string
+        token:
+          description: Bearer auth token.
+          type: string
+        org:
+          $ref: '#/components/schemas/OrgInfo'
+        user:
+          $ref: '#/components/schemas/UserInfo'
+        creation_time_in_millis:
+          description: Token creation time in milliseconds.
+          format: float
+          type: number
+        expiration_time_in_millis:
+          description: Token expiration time in milliseconds.
+          format: float
+          type: number
+      required:
+      - creation_time_in_millis
+      - expiration_time_in_millis
+      - org
+      - token
+      - user
+      type: object
+    OrgInfo:
+      example:
+        name: name
+        id: 0
+      properties:
+        id:
+          description: Id.
+          format: int32
+          type: integer
+        name:
+          description: Name.
+          nullable: true
+          type: string
+      required:
+      - id
+      type: object
+    UserInfo:
+      example:
+        name: name
+        id: id
+      properties:
+        id:
+          description: Id.
+          type: string
+        name:
+          description: Name.
+          nullable: true
+          type: string
+      required:
+      - id
+      type: object
     ResponseActivationURL:
       description: The object representation with activation link.
       example:
@@ -8961,6 +9802,7 @@ components:
           - EXPIRED
           - LOCKED
           - PENDING
+          - SUSPENDED
           nullable: true
           type: string
         email:
@@ -9136,6 +9978,7 @@ components:
             - CAN_ACCESS_ANALYST_STUDIO
             - CAN_MANAGE_ANALYST_STUDIO
             - PREVIEW_DOCUMENT_SEARCH
+            - CAN_SETUP_VERSION_CONTROL
             type: string
           nullable: true
           type: array
@@ -9207,6 +10050,29 @@ components:
       - groups_added
       - groups_deleted
       - groups_updated
+      type: object
+    Export_Options:
+      description: Flags to specify additional options for export. This will only
+        be active when UserDefinedId in TML is enabled.
+      properties:
+        export_with_reference_object_id:
+          default: false
+          description: Boolean Flag to whether to export user_defined_id of referenced
+            object. This will only be respected when UserDefinedId in TML is enabled.
+          nullable: true
+          type: boolean
+        include_guid:
+          default: true
+          description: Boolean flag to whether to export guid of the object. This
+            will only be respected when UserDefinedId in TML is enabled.
+          nullable: true
+          type: boolean
+        include_object_id:
+          default: false
+          description: Boolean flag to whether to export user_defined_id of the object.
+            This will only be respected when UserDefinedId in TML is enabled.
+          nullable: true
+          type: boolean
       type: object
     ResponseCopyObject:
       example:
@@ -9291,6 +10157,7 @@ components:
           - LIVEBOARD
           - ANSWER
           - LOGICAL_TABLE
+          - LOGICAL_COLUMN
           nullable: true
           type: string
         identifier:
@@ -9569,6 +10436,8 @@ components:
           - GCP_MYSQL
           - MODE
           - GOOGLE_SHEETS
+          - FALCON
+          - FALCON_ONPREM
           type: string
         details:
           description: Details of the connection.
@@ -9680,6 +10549,7 @@ components:
             - CAN_ACCESS_ANALYST_STUDIO
             - CAN_MANAGE_ANALYST_STUDIO
             - PREVIEW_DOCUMENT_SEARCH
+            - CAN_SETUP_VERSION_CONTROL
             type: string
           type: array
         permission:
@@ -10530,6 +11400,53 @@ components:
           nullable: true
           type: string
       type: object
+    Conversation:
+      example:
+        conversation_identifier: conversation_identifier
+      properties:
+        conversation_identifier:
+          description: Unique identifier of the conversation.
+          type: string
+      required:
+      - conversation_identifier
+      type: object
+    ResponseMessage:
+      example:
+        session_identifier: session_identifier
+        message_type: TSAnswer
+        tokens: tokens
+        visualization_type: Chart
+        generation_number: 0
+      properties:
+        session_identifier:
+          description: Unique identifier of the generated response.
+          nullable: true
+          type: string
+        generation_number:
+          description: Generate number of the response.
+          format: int32
+          nullable: true
+          type: integer
+        message_type:
+          description: Type of the generated response.
+          enum:
+          - TSAnswer
+          type: string
+        visualization_type:
+          description: Generated visualization type.
+          enum:
+          - Chart
+          - Table
+          - Undefined
+          nullable: true
+          type: string
+        tokens:
+          description: Tokens for the response.
+          nullable: true
+          type: string
+      required:
+      - message_type
+      type: object
     Runtime_Filter:
       description: List of runtime parameters need to set during the session.
       properties:
@@ -10620,6 +11537,7 @@ components:
             - CAN_ACCESS_ANALYST_STUDIO
             - CAN_MANAGE_ANALYST_STUDIO
             - PREVIEW_DOCUMENT_SEARCH
+            - CAN_SETUP_VERSION_CONTROL
             type: string
           type: array
         account_type:
@@ -10639,6 +11557,7 @@ components:
           - EXPIRED
           - LOCKED
           - PENDING
+          - SUSPENDED
           type: string
         notify_on_share:
           description: |-
@@ -10798,6 +11717,7 @@ components:
             - CAN_ACCESS_ANALYST_STUDIO
             - CAN_MANAGE_ANALYST_STUDIO
             - PREVIEW_DOCUMENT_SEARCH
+            - CAN_SETUP_VERSION_CONTROL
             type: string
           type: array
         sub_group_identifiers:
@@ -10965,6 +11885,46 @@ components:
           nullable: true
           type: boolean
       type: object
+    fetchAsyncImportTaskStatus_request:
+      properties:
+        task_ids:
+          description: List of task IDs to fetch status for.
+          items:
+            type: string
+          type: array
+        task_status:
+          description: "List of task statuses to filter on. Valid values: [IN_QUEUE,\
+            \ IN_PROGRESS, COMPLETED, FAILED]"
+          items:
+            enum:
+            - COMPLETED
+            - IN_QUEUE
+            - IN_PROGRESS
+            - FAILED
+            type: string
+          type: array
+        author_identifier:
+          description: Author GUID or name of async import tasks to filter on.
+          type: string
+        record_offset:
+          default: 0
+          description: "The offset point, starting from where the task status should\
+            \ be included in the response."
+          format: int32
+          type: integer
+        record_size:
+          default: 5
+          description: The number of task statuses that should be included in the
+            response starting from offset position.
+          format: int32
+          type: integer
+        include_import_response:
+          default: false
+          description: Boolean flag to specify whether to include import response
+            in the task status objects.
+          nullable: true
+          type: boolean
+      type: object
     fetchLiveboardSqlQuery_request:
       properties:
         metadata_identifier:
@@ -11047,6 +12007,13 @@ components:
         metadata_identifier:
           description: Unique ID or name of the metadata object.
           type: string
+        session_identifier:
+          description: Unique ID of the answer session.
+          type: string
+        generation_number:
+          description: Generation number of the answer session.
+          format: int32
+          type: integer
         file_format:
           default: CSV
           description: Export file format.
@@ -11069,8 +12036,6 @@ components:
         runtime_param_override:
           description: JSON object for setting values of parameters in runtime.
           type: object
-      required:
-      - metadata_identifier
       type: object
     fetchPermissionsOfPrincipals_request:
       properties:
@@ -11425,6 +12390,8 @@ components:
             - GCP_MYSQL
             - MODE
             - GOOGLE_SHEETS
+            - FALCON
+            - FALCON_ONPREM
             type: string
           type: array
         record_offset:
@@ -11475,6 +12442,8 @@ components:
           - OAUTH
           - IAM
           - EXTOAUTH
+          - OAUTH_WITH_SERVICE_PRINCIPAL
+          - PERSONAL_ACCESS_TOKEN
           type: string
       type: object
     searchRoles_request:
@@ -11543,6 +12512,7 @@ components:
             - CAN_ACCESS_ANALYST_STUDIO
             - CAN_MANAGE_ANALYST_STUDIO
             - PREVIEW_DOCUMENT_SEARCH
+            - CAN_SETUP_VERSION_CONTROL
             type: string
           type: array
         deprecated:
@@ -11643,7 +12613,8 @@ components:
     getObjectAccessToken_request:
       properties:
         username:
-          description: Username of the ThoughtSpot user
+          description: Username of the ThoughtSpot user. The username is stored in
+            the `name` attribute of the user object.
           type: string
         object_id:
           description: GUID of the ThoughtSpot metadata object that the user can access.
@@ -11702,7 +12673,8 @@ components:
     getFullAccessToken_request:
       properties:
         username:
-          description: Username of the ThoughtSpot user
+          description: Username of the ThoughtSpot user. The username is stored in
+            the `name` attribute of the user object.
           type: string
         password:
           default: ""
@@ -11767,6 +12739,85 @@ components:
       required:
       - token
       type: object
+    getCustomAccessToken_request:
+      properties:
+        username:
+          description: Username of the ThoughtSpot user. The username is stored in
+            the `name` attribute of the user object.
+          type: string
+        password:
+          default: ""
+          description: Password of the user account
+          type: string
+        secret_key:
+          default: ""
+          description: The secret key string provided by the ThoughtSpot application
+            server. ThoughtSpot generates a secret key when Trusted authentication
+            is enabled.
+          type: string
+        validity_time_in_sec:
+          default: 300
+          description: Token validity duration in seconds
+          format: int32
+          type: integer
+        org_identifier:
+          description: "ID of the Org context to log in to. If the Org ID is not specified\
+            \ and secret key is provided then user will be logged into the org corresponding\
+            \ to the secret key, and if secret key is not provided then user will\
+            \ be logged in to the Org context of their previous login session."
+          type: string
+        persist_option:
+          description: Indicates whether the specified attributes should be persisted
+            or not.
+          enum:
+          - APPEND
+          - NONE
+          - REPLACE
+          - RESET
+          type: string
+        filter_rules:
+          description: Filter rules.
+          items:
+            $ref: '#/components/schemas/FilterRules'
+          type: array
+        parameter_values:
+          description: Parameter values.
+          items:
+            $ref: '#/components/schemas/ParameterValues'
+          type: array
+        objects:
+          description: Objects on which the filter rules and parameters values should
+            be applied to
+          items:
+            $ref: '#/components/schemas/TokenAccessScopeObject'
+          type: array
+        email:
+          description: (just-in-time (JIT) provisioning)Email address of the user.
+            Specify this attribute when creating a new user.
+          type: string
+        display_name:
+          description: (just-in-time (JIT) provisioning) Indicates display name of
+            the user. Specify this attribute when creating a new user.
+          type: string
+        groups:
+          description: (just-in-time (JIT) provisioning) ID or name of the groups
+            to which the newly created user belongs. Specify this attribute when creating
+            a new user.
+          items:
+            $ref: '#/components/schemas/Group_Object'
+          type: array
+        auto_create:
+          default: true
+          description: "   Creates a new user if the specified username does not exist\
+            \ in ThoughtSpot. To provision a user just-in-time (JIT), set this attribute\
+            \ to true.\n   \n\nNote: For JIT provisioning of a user, the secret_key\
+            \ is required.  \n  Version: 10.5.0.cl or later\n"
+          nullable: true
+          type: boolean
+      required:
+      - persist_option
+      - username
+      type: object
     createUser_request:
       properties:
         name:
@@ -11777,7 +12828,8 @@ components:
             \ their first and last name"
           type: string
         password:
-          description: Password for the user account.
+          description: "Password for the user account. For IAMv2 users, you must set\
+            \ this password if you do not want to trigger an activation email."
           type: string
         email:
           description: Email of the user account
@@ -11794,13 +12846,15 @@ components:
           type: string
         account_status:
           default: ACTIVE
-          description: Current status of the user account.
+          description: Current status of the user account. The `SUSPENDED` user state
+            indicates a transitional state applicable to IAMv2 users only.
           enum:
           - ACTIVE
           - INACTIVE
           - EXPIRED
           - LOCKED
           - PENDING
+          - SUSPENDED
           type: string
         org_identifiers:
           description: List of Org IDs to which the user belongs.
@@ -11884,8 +12938,10 @@ components:
           nullable: true
           type: boolean
         trigger_activation_email:
-          description: Flag to indicate whether activation email should be sent to
-            user.
+          description: "Flag to indicate whether activation email should be sent to\
+            \ the user. Default value for IAMv2 users is set to true. Users must either\
+            \ set this to false, or enter a valid \npassword if they do not want to\
+            \ trigger an activation email."
           nullable: true
           type: boolean
       required:
@@ -11913,13 +12969,15 @@ components:
           description: Email of the user account
           type: string
         account_status:
-          description: Current status of the user account.
+          description: Current status of the user account. The `SUSPENDED` user state
+            indicates a transitional state applicable to IAMv2 users only.
           enum:
           - ACTIVE
           - INACTIVE
           - EXPIRED
           - LOCKED
           - PENDING
+          - SUSPENDED
           type: string
         notify_on_share:
           description: |-
@@ -12224,6 +13282,7 @@ components:
             - CAN_ACCESS_ANALYST_STUDIO
             - CAN_MANAGE_ANALYST_STUDIO
             - PREVIEW_DOCUMENT_SEARCH
+            - CAN_SETUP_VERSION_CONTROL
             type: string
           type: array
         sub_group_identifiers:
@@ -12310,6 +13369,7 @@ components:
             - CAN_ACCESS_ANALYST_STUDIO
             - CAN_MANAGE_ANALYST_STUDIO
             - PREVIEW_DOCUMENT_SEARCH
+            - CAN_SETUP_VERSION_CONTROL
             type: string
           type: array
         sub_group_identifiers:
@@ -12378,6 +13438,7 @@ components:
         metadata_tmls:
           description: |-
             Details of TML objects.
+
             **Note: importing TML in YAML format, when coming directly from our Playground, is currently requires manual formatting. For more details on the workaround, please click [here](https://developers.thoughtspot.com/docs/known-issues#_version_9_12_0_cl)**
           items:
             type: string
@@ -12401,9 +13462,77 @@ components:
           description: If import is happening from all orgs context.
           nullable: true
           type: boolean
+        skip_cdw_validation_for_tables:
+          default: false
+          description: Boolean to indicate if the CDW validation for table imports
+            should be skipped.
+          nullable: true
+          type: boolean
+        enable_large_metadata_validation:
+          default: false
+          description: |-
+            <div>Version: 10.5.0.cl or later
+            </div>
+
+            Boolean to indicate if the large metadata validation should be enabled.
+          nullable: true
+          type: boolean
       required:
       - metadata_tmls
       type: object
+    importMetadataTMLAsync_request:
+      properties:
+        metadata_tmls:
+          description: Details of TML objects.
+          items:
+            type: string
+          type: array
+        create_new:
+          default: false
+          description: "If selected, creates TML objects with new GUIDs."
+          nullable: true
+          type: boolean
+        all_orgs_context:
+          default: false
+          description: If import is happening from all orgs context.
+          nullable: true
+          type: boolean
+        skip_cdw_validation_for_tables:
+          default: false
+          description: Boolean to indicate if the CDW validation for table imports
+            should be skipped.
+          nullable: true
+          type: boolean
+        import_policy:
+          default: PARTIAL_OBJECT
+          description: |-
+            <div>Version: 10.5.0.cl or later
+            </div>
+
+            Policy to be followed while importing the TML. Valid values are [PARTIAL_OBJECT, PARTIAL, VALIDATE_ONLY, ALL_OR_NONE]
+          enum:
+          - PARTIAL
+          - ALL_OR_NONE
+          - VALIDATE_ONLY
+          - PARTIAL_OBJECT
+          type: string
+        enable_large_metadata_validation:
+          default: false
+          description: |-
+            <div>Version: 10.5.0.cl or later
+            </div>
+
+            Boolean to indicate if the large metadata validation should be enabled.
+          nullable: true
+          type: boolean
+      required:
+      - metadata_tmls
+      type: object
+    exportMetadataTML_request_export_options:
+      allOf:
+      - $ref: '#/components/schemas/Export_Options'
+      description: "Flags to specify additional options for export. \n  Version: 10.5.0.cl\
+        \ or later\n"
     exportMetadataTML_request:
       properties:
         metadata:
@@ -12429,6 +13558,7 @@ components:
           default: JSON
           description: |-
             TML EDOC content format.
+
             **Note: exporting in YAML format currently requires manual formatting of the output. For more details on the workaround, please click [here](https://developers.thoughtspot.com/docs/known-issues#_version_9_12_0_cl)**
           enum:
           - JSON
@@ -12460,6 +13590,8 @@ components:
           description: Indicates whether to export is happening from all orgs context.
           nullable: true
           type: boolean
+        export_options:
+          $ref: '#/components/schemas/exportMetadataTML_request_export_options'
       required:
       - metadata
       type: object
@@ -12565,14 +13697,16 @@ components:
       properties:
         metadata_type:
           description: |-
-            Type of metadata. Required if identifier in metadata_identifies is a name".
+            Type of metadata. Required if identifier in metadata_identifies is a name.
             1. Liveboard
             2. Answers
             3. LOGICAL_TABLE for any data object such as table, worksheet or view.
+            4. LOGICAL_COLUMN
           enum:
           - LIVEBOARD
           - ANSWER
           - LOGICAL_TABLE
+          - LOGICAL_COLUMN
           type: string
         metadata_identifiers:
           description: "Unique ID or name of metadata objects. Note: All the names\
@@ -12597,6 +13731,7 @@ components:
             type: string
           type: array
         emails:
+          default: []
           description: Email IDs to which notifications will be sent.
           items:
             type: string
@@ -12620,7 +13755,6 @@ components:
           nullable: true
           type: boolean
       required:
-      - emails
       - message
       - permissions
       type: object
@@ -12852,6 +13986,8 @@ components:
           - GCP_MYSQL
           - MODE
           - GOOGLE_SHEETS
+          - FALCON
+          - FALCON_ONPREM
           type: string
         data_warehouse_config:
           description: "Connection configuration attributes in JSON format. To create\
@@ -12961,6 +14097,7 @@ components:
             - CAN_ACCESS_ANALYST_STUDIO
             - CAN_MANAGE_ANALYST_STUDIO
             - PREVIEW_DOCUMENT_SEARCH
+            - CAN_SETUP_VERSION_CONTROL
             type: string
           type: array
       required:
@@ -14640,6 +15777,41 @@ components:
       required:
       - dbt_connection_identifier
       type: object
+    createConversation_request:
+      properties:
+        metadata_identifier:
+          description: Data model id to start the conversation on.
+          type: string
+        tokens:
+          description: Tokens to start the conversation with.
+          type: string
+      required:
+      - metadata_identifier
+      type: object
+    sendMessage_request:
+      properties:
+        metadata_identifier:
+          description: Data model id to converse on.
+          type: string
+        message:
+          description: User follow up question.
+          type: string
+      required:
+      - message
+      - metadata_identifier
+      type: object
+    singleAnswer_request:
+      properties:
+        query:
+          description: User natural language query.
+          type: string
+        metadata_identifier:
+          description: Data model id to answer the query on.
+          type: string
+      required:
+      - metadata_identifier
+      - query
+      type: object
     JWT_User_Options_parameters_inner:
       anyOf:
       - $ref: '#/components/schemas/Runtime_Filter'
@@ -14660,6 +15832,11 @@ x-roles:
   tags:
   - 9.12.0.cl
   description: Roles for version 9.12.0.cl
+- name: 10.4.0.cl
+  id: 10.4.0.cl
+  tags:
+  - 10.4.0.cl
+  description: Roles for version 10.4.0.cl
 - name: 9.7.0.cl
   id: 9.7.0.cl
   tags:
@@ -14670,11 +15847,6 @@ x-roles:
   tags:
   - 9.2.0.cl
   description: Roles for version 9.2.0.cl
-- name: 10.4.0.cl
-  id: 10.4.0.cl
-  tags:
-  - 10.4.0.cl
-  description: Roles for version 10.4.0.cl
 - name: 10.1.0.cl
   id: 10.1.0.cl
   tags:
@@ -14685,11 +15857,6 @@ x-roles:
   tags:
   - 10.3.0.cl
   description: Roles for version 10.3.0.cl
-- name: 10.0.0.cl
-  id: 10.0.0.cl
-  tags:
-  - 10.0.0.cl
-  description: Roles for version 10.0.0.cl
 - name: 9.9.0.cl
   id: 9.9.0.cl
   tags:

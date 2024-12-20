@@ -55,14 +55,10 @@ import org.thoughtspot.client.JSON;
 /**
  * ShareMetadataRequest
  */
-<<<<<<< HEAD
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-10-08T14:11:36.944876Z[Etc/UTC]")
-=======
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-11-06T15:38:04.754051+05:30[Asia/Kolkata]")
->>>>>>> 41fee514 (Fix for streaming apis)
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-12-20T04:47:40.356396673Z[Etc/UTC]")
 public class ShareMetadataRequest {
   /**
-   * Type of metadata. Required if identifier in metadata_identifies is a name\&quot;. 1. Liveboard 2. Answers 3. LOGICAL_TABLE for any data object such as table, worksheet or view.
+   * Type of metadata. Required if identifier in metadata_identifies is a name. 1. Liveboard 2. Answers 3. LOGICAL_TABLE for any data object such as table, worksheet or view. 4. LOGICAL_COLUMN
    */
   @JsonAdapter(MetadataTypeEnum.Adapter.class)
   public enum MetadataTypeEnum {
@@ -70,7 +66,9 @@ public class ShareMetadataRequest {
     
     ANSWER("ANSWER"),
     
-    LOGICAL_TABLE("LOGICAL_TABLE");
+    LOGICAL_TABLE("LOGICAL_TABLE"),
+    
+    LOGICAL_COLUMN("LOGICAL_COLUMN");
 
     private String value;
 
@@ -132,7 +130,7 @@ public class ShareMetadataRequest {
 
   public static final String SERIALIZED_NAME_EMAILS = "emails";
   @SerializedName(SERIALIZED_NAME_EMAILS)
-  private List<String> emails = new ArrayList<>();
+  private List<String> emails = null;
 
   public static final String SERIALIZED_NAME_MESSAGE = "message";
   @SerializedName(SERIALIZED_NAME_MESSAGE)
@@ -160,7 +158,7 @@ public class ShareMetadataRequest {
   }
 
    /**
-   * Type of metadata. Required if identifier in metadata_identifies is a name\&quot;. 1. Liveboard 2. Answers 3. LOGICAL_TABLE for any data object such as table, worksheet or view.
+   * Type of metadata. Required if identifier in metadata_identifies is a name. 1. Liveboard 2. Answers 3. LOGICAL_TABLE for any data object such as table, worksheet or view. 4. LOGICAL_COLUMN
    * @return metadataType
   **/
   @javax.annotation.Nullable
@@ -298,7 +296,7 @@ public class ShareMetadataRequest {
 
   public ShareMetadataRequest addEmailsItem(String emailsItem) {
     if (this.emails == null) {
-      this.emails = new ArrayList<>();
+      this.emails = null;
     }
     this.emails.add(emailsItem);
     return this;
@@ -308,7 +306,7 @@ public class ShareMetadataRequest {
    * Email IDs to which notifications will be sent.
    * @return emails
   **/
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public List<String> getEmails() {
     return emails;
   }
@@ -491,7 +489,6 @@ public class ShareMetadataRequest {
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
     openapiRequiredFields.add("permissions");
-    openapiRequiredFields.add("emails");
     openapiRequiredFields.add("message");
   }
 
@@ -557,10 +554,8 @@ public class ShareMetadataRequest {
       if (jsonObj.get("visualization_identifiers") != null && !jsonObj.get("visualization_identifiers").isJsonArray()) {
         throw new IllegalArgumentException(String.format("Expected the field `visualization_identifiers` to be an array in the JSON string but got `%s`", jsonObj.get("visualization_identifiers").toString()));
       }
-      // ensure the required json array is present
-      if (jsonObj.get("emails") == null) {
-        throw new IllegalArgumentException("Expected the field `linkedContent` to be an array in the JSON string but got `null`");
-      } else if (!jsonObj.get("emails").isJsonArray()) {
+      // ensure the optional json data is an array if present
+      if (jsonObj.get("emails") != null && !jsonObj.get("emails").isJsonArray()) {
         throw new IllegalArgumentException(String.format("Expected the field `emails` to be an array in the JSON string but got `%s`", jsonObj.get("emails").toString()));
       }
       if (!jsonObj.get("message").isJsonPrimitive()) {

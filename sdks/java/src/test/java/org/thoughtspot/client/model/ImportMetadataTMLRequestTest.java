@@ -72,4 +72,20 @@ public class ImportMetadataTMLRequestTest {
         // TODO: test allOrgsContext
     }
 
+    /**
+     * Test the property 'skipCdwValidationForTables'
+     */
+    @Test
+    public void skipCdwValidationForTablesTest() {
+        // TODO: test skipCdwValidationForTables
+    }
+
+    /**
+     * Test the property 'enableLargeMetadataValidation'
+     */
+    @Test
+    public void enableLargeMetadataValidationTest() {
+        // TODO: test enableLargeMetadataValidation
+    }
+
 }

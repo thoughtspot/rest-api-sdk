@@ -51,11 +51,7 @@ import org.thoughtspot.client.JSON;
 /**
  * CreateConnectionResponse
  */
-<<<<<<< HEAD
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-10-08T14:11:36.944876Z[Etc/UTC]")
-=======
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-11-06T15:38:04.754051+05:30[Asia/Kolkata]")
->>>>>>> 41fee514 (Fix for streaming apis)
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-12-20T04:47:40.356396673Z[Etc/UTC]")
 public class CreateConnectionResponse {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
@@ -128,7 +124,11 @@ public class CreateConnectionResponse {
     
     MODE("MODE"),
     
-    GOOGLE_SHEETS("GOOGLE_SHEETS");
+    GOOGLE_SHEETS("GOOGLE_SHEETS"),
+    
+    FALCON("FALCON"),
+    
+    FALCON_ONPREM("FALCON_ONPREM");
 
     private String value;
 

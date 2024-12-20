@@ -18,6 +18,10 @@ export class MetadataListItemInput {
     */
     'identifier'?: string | null;
     /**
+    * CustomObjectId of the metadata.
+    */
+    'custom_identifier'?: string | null;
+    /**
     * A pattern to match the case-insensitive name of the metadata object. User % for a wildcard match.
     */
     'name_pattern'?: string | null;
@@ -32,6 +36,12 @@ export class MetadataListItemInput {
         {
             "name": "identifier",
             "baseName": "identifier",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "custom_identifier",
+            "baseName": "custom_identifier",
             "type": "string",
             "format": ""
         },

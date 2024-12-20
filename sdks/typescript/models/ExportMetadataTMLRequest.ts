@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 
+import { ExportMetadataTMLRequestExportOptions } from '../models/ExportMetadataTMLRequestExportOptions';
 import { ExportMetadataTypeInput } from '../models/ExportMetadataTypeInput';
 import { HttpFile } from '../http/http';
 
@@ -27,7 +28,7 @@ export class ExportMetadataTMLRequest {
     */
     'export_fqn'?: boolean | null;
     /**
-    * TML EDOC content format. **Note: exporting in YAML format currently requires manual formatting of the output. For more details on the workaround, please click [here](https://developers.thoughtspot.com/docs/known-issues#_version_9_12_0_cl)**
+    * TML EDOC content format.  **Note: exporting in YAML format currently requires manual formatting of the output. For more details on the workaround, please click [here](https://developers.thoughtspot.com/docs/known-issues#_version_9_12_0_cl)**
     */
     'edoc_format'?: ExportMetadataTMLRequestEdocFormatEnum;
     /**
@@ -46,6 +47,7 @@ export class ExportMetadataTMLRequest {
     * Indicates whether to export is happening from all orgs context.
     */
     'all_orgs_override'?: boolean | null;
+    'export_options'?: ExportMetadataTMLRequestExportOptions;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -96,6 +98,12 @@ export class ExportMetadataTMLRequest {
             "name": "all_orgs_override",
             "baseName": "all_orgs_override",
             "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "export_options",
+            "baseName": "export_options",
+            "type": "ExportMetadataTMLRequestExportOptions",
             "format": ""
         }    ];
 

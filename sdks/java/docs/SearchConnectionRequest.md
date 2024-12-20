@@ -54,6 +54,8 @@
 | GCP_MYSQL | &quot;GCP_MYSQL&quot; |
 | MODE | &quot;MODE&quot; |
 | GOOGLE_SHEETS | &quot;GOOGLE_SHEETS&quot; |
+| FALCON | &quot;FALCON&quot; |
+| FALCON_ONPREM | &quot;FALCON_ONPREM&quot; |
 
 
 
@@ -76,6 +78,8 @@
 | OAUTH | &quot;OAUTH&quot; |
 | IAM | &quot;IAM&quot; |
 | EXTOAUTH | &quot;EXTOAUTH&quot; |
+| OAUTH_WITH_SERVICE_PRINCIPAL | &quot;OAUTH_WITH_SERVICE_PRINCIPAL&quot; |
+| PERSONAL_ACCESS_TOKEN | &quot;PERSONAL_ACCESS_TOKEN&quot; |
 
 
 

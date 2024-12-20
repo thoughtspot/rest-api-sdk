@@ -21,7 +21,7 @@ import { UpdateRoleRequest } from '../models/UpdateRoleRequest';
 export class RolesApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * Creates a Role. Requires cluster Administration or Role Administration privileges.    Version: 9.5.0.cl or later 
+     *  Creates a Role. Requires cluster Administration or Role Administration privileges.    Version: 9.5.0.cl or later   Creates a Role object in ThoughtSpot.  Available only if [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance. To create a Role, the `ROLE_ADMINISTRATION` (**Can manage roles**) privilege is required.      
      * @param createRoleRequest 
      */
     public async createRole(createRoleRequest: CreateRoleRequest, _options?: Configuration): Promise<RequestContext> {
@@ -71,7 +71,7 @@ export class RolesApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Deletes a Role. Requires cluster Administration or Role Administration privileges.    Version: 9.5.0.cl or later 
+     *  Deletes a Role. Requires cluster Administration or Role Administration privileges.    Version: 9.5.0.cl or later   Deletes a Role object from the ThoughtSpot system.  Available only if [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance. To delete a Role, the `ROLE_ADMINISTRATION` (**Can manage roles**) privilege is required.      
      * @param roleIdentifier Unique ID or name of the Role.
      */
     public async deleteRole(roleIdentifier: string, _options?: Configuration): Promise<RequestContext> {
@@ -111,7 +111,7 @@ export class RolesApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Gets Roles configured on a ThoughtSpot instance. Requires cluster Administration, Role Administration or Group Administration privileges.    Version: 9.5.0.cl or later 
+     *  Gets Roles configured on a ThoughtSpot instance. Requires cluster Administration, Role Administration or Group Administration privileges.    Version: 9.5.0.cl or later   Gets a list of Role objects from the ThoughtSpot system.  Available if [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance. To search for Roles, the `ROLE_ADMINISTRATION` (**Can manage roles**) privilege is required.  To get details of a specific Role object, specify the GUID or name. You can also filter the API response based on user group and Org identifiers, privileges assigned to the Role, and deprecation status.      
      * @param searchRolesRequest 
      */
     public async searchRoles(searchRolesRequest: SearchRolesRequest, _options?: Configuration): Promise<RequestContext> {
@@ -161,7 +161,7 @@ export class RolesApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Updates a Role. Requires cluster Administration or Role Administration privileges.    Version: 9.5.0.cl or later 
+     *  Updates a Role. Requires cluster Administration or Role Administration privileges.    Version: 9.5.0.cl or later   Updates the properties of a Role object.  Available only if [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance. To update a Role, the `ROLE_ADMINISTRATION` (**Can manage roles**) privilege is required.      
      * @param roleIdentifier Unique ID or name of the Role.
      * @param updateRoleRequest 
      */

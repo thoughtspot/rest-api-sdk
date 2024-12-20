@@ -50,6 +50,8 @@
 | GCP_MYSQL | &quot;GCP_MYSQL&quot; |
 | MODE | &quot;MODE&quot; |
 | GOOGLE_SHEETS | &quot;GOOGLE_SHEETS&quot; |
+| FALCON | &quot;FALCON&quot; |
+| FALCON_ONPREM | &quot;FALCON_ONPREM&quot; |
 
 
 

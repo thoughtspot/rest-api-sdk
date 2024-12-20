@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
+import org.thoughtspot.client.model.ExportMetadataTMLRequestExportOptions;
 import org.thoughtspot.client.model.ExportMetadataTypeInput;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -103,6 +104,14 @@ public class ExportMetadataTMLRequestTest {
     @Test
     public void allOrgsOverrideTest() {
         // TODO: test allOrgsOverride
+    }
+
+    /**
+     * Test the property 'exportOptions'
+     */
+    @Test
+    public void exportOptionsTest() {
+        // TODO: test exportOptions
     }
 
 }

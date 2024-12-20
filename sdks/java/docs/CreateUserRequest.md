@@ -9,10 +9,10 @@
 |------------ | ------------- | ------------- | -------------|
 |**name** | **String** | Name of the user. The username string must be unique. |  |
 |**displayName** | **String** | A unique display name string for the user account, usually their first and last name |  |
-|**password** | **String** | Password for the user account. |  [optional] |
+|**password** | **String** | Password for the user account. For IAMv2 users, you must set this password if you do not want to trigger an activation email. |  [optional] |
 |**email** | **String** | Email of the user account |  |
 |**accountType** | [**AccountTypeEnum**](#AccountTypeEnum) | Type of the account. |  [optional] |
-|**accountStatus** | [**AccountStatusEnum**](#AccountStatusEnum) | Current status of the user account. |  [optional] |
+|**accountStatus** | [**AccountStatusEnum**](#AccountStatusEnum) | Current status of the user account. The &#x60;SUSPENDED&#x60; user state indicates a transitional state applicable to IAMv2 users only. |  [optional] |
 |**orgIdentifiers** | **List&lt;String&gt;** | List of Org IDs to which the user belongs. |  [optional] |
 |**groupIdentifiers** | **List&lt;String&gt;** | GUIDs or names of the groups to which the newly created user belongs. |  [optional] |
 |**visibility** | [**VisibilityEnum**](#VisibilityEnum) | Visibility of the users. When set to SHARABLE, the user is visible to other users and groups when they try to share an object. |  [optional] |
@@ -25,7 +25,7 @@
 |**extendedProperties** | **Object** | Properties for the user |  [optional] |
 |**extendedPreferences** | **Object** | Preferences for the user |  [optional] |
 |**triggerWelcomeEmail** | **Boolean** | Flag to indicate whether welcome email should be sent to user. This parameter is applied only on clusters on which IAM is disabled. |  [optional] |
-|**triggerActivationEmail** | **Boolean** | Flag to indicate whether activation email should be sent to user. |  [optional] |
+|**triggerActivationEmail** | **Boolean** | Flag to indicate whether activation email should be sent to the user. Default value for IAMv2 users is set to true. Users must either set this to false, or enter a valid  password if they do not want to trigger an activation email. |  [optional] |
 
 
 
@@ -50,6 +50,7 @@
 | EXPIRED | &quot;EXPIRED&quot; |
 | LOCKED | &quot;LOCKED&quot; |
 | PENDING | &quot;PENDING&quot; |
+| SUSPENDED | &quot;SUSPENDED&quot; |
 
 
 

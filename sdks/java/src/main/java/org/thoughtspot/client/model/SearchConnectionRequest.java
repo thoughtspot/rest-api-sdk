@@ -55,11 +55,7 @@ import org.thoughtspot.client.JSON;
 /**
  * SearchConnectionRequest
  */
-<<<<<<< HEAD
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-10-08T14:11:36.944876Z[Etc/UTC]")
-=======
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-11-06T15:38:04.754051+05:30[Asia/Kolkata]")
->>>>>>> 41fee514 (Fix for streaming apis)
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-12-20T04:47:40.356396673Z[Etc/UTC]")
 public class SearchConnectionRequest {
   public static final String SERIALIZED_NAME_CONNECTIONS = "connections";
   @SerializedName(SERIALIZED_NAME_CONNECTIONS)
@@ -128,7 +124,11 @@ public class SearchConnectionRequest {
     
     MODE("MODE"),
     
-    GOOGLE_SHEETS("GOOGLE_SHEETS");
+    GOOGLE_SHEETS("GOOGLE_SHEETS"),
+    
+    FALCON("FALCON"),
+    
+    FALCON_ONPREM("FALCON_ONPREM");
 
     private String value;
 
@@ -262,7 +262,11 @@ public class SearchConnectionRequest {
     
     IAM("IAM"),
     
-    EXTOAUTH("EXTOAUTH");
+    EXTOAUTH("EXTOAUTH"),
+    
+    OAUTH_WITH_SERVICE_PRINCIPAL("OAUTH_WITH_SERVICE_PRINCIPAL"),
+    
+    PERSONAL_ACCESS_TOKEN("PERSONAL_ACCESS_TOKEN");
 
     private String value;
 

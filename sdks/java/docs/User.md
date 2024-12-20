@@ -51,6 +51,7 @@
 |**extendedProperties** | **Object** | Properties for the user |  [optional] |
 |**extendedPreferences** | **Object** | Preferences for the user |  [optional] |
 |**userParameters** | **Object** | User Parameters which are specified for the user via JWToken |  [optional] |
+|**accessControlProperties** | **Object** | Access Control Properties which are specified for the user via JWToken |  [optional] |
 
 
 
@@ -84,6 +85,7 @@
 | EXPIRED | &quot;EXPIRED&quot; |
 | LOCKED | &quot;LOCKED&quot; |
 | PENDING | &quot;PENDING&quot; |
+| SUSPENDED | &quot;SUSPENDED&quot; |
 
 
 

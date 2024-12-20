@@ -56,11 +56,7 @@ import org.thoughtspot.client.JSON;
 /**
  * User
  */
-<<<<<<< HEAD
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-10-08T14:11:36.944876Z[Etc/UTC]")
-=======
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-11-06T15:38:04.754051+05:30[Asia/Kolkata]")
->>>>>>> 41fee514 (Fix for streaming apis)
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-12-20T04:47:40.356396673Z[Etc/UTC]")
 public class User {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
@@ -223,7 +219,9 @@ public class User {
     
     LOCKED("LOCKED"),
     
-    PENDING("PENDING");
+    PENDING("PENDING"),
+    
+    SUSPENDED("SUSPENDED");
 
     private String value;
 
@@ -437,6 +435,10 @@ public class User {
   public static final String SERIALIZED_NAME_USER_PARAMETERS = "user_parameters";
   @SerializedName(SERIALIZED_NAME_USER_PARAMETERS)
   private Object userParameters;
+
+  public static final String SERIALIZED_NAME_ACCESS_CONTROL_PROPERTIES = "access_control_properties";
+  @SerializedName(SERIALIZED_NAME_ACCESS_CONTROL_PROPERTIES)
+  private Object accessControlProperties;
 
   public User() {
   }
@@ -1413,6 +1415,27 @@ public class User {
   }
 
 
+  public User accessControlProperties(Object accessControlProperties) {
+    
+    this.accessControlProperties = accessControlProperties;
+    return this;
+  }
+
+   /**
+   * Access Control Properties which are specified for the user via JWToken
+   * @return accessControlProperties
+  **/
+  @javax.annotation.Nullable
+  public Object getAccessControlProperties() {
+    return accessControlProperties;
+  }
+
+
+  public void setAccessControlProperties(Object accessControlProperties) {
+    this.accessControlProperties = accessControlProperties;
+  }
+
+
 
   @Override
   public boolean equals(Object o) {
@@ -1466,7 +1489,8 @@ public class User {
         Objects.equals(this.preferredLocale, user.preferredLocale) &&
         Objects.equals(this.extendedProperties, user.extendedProperties) &&
         Objects.equals(this.extendedPreferences, user.extendedPreferences) &&
-        Objects.equals(this.userParameters, user.userParameters);
+        Objects.equals(this.userParameters, user.userParameters) &&
+        Objects.equals(this.accessControlProperties, user.accessControlProperties);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -1475,7 +1499,7 @@ public class User {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, displayName, visibility, authorId, canChangePassword, completeDetail, creationTimeInMillis, currentOrg, deleted, deprecated, accountType, accountStatus, email, expirationTimeInMillis, external, favoriteMetadata, firstLoginTimeInMillis, groupMask, hidden, homeLiveboard, incompleteDetails, isFirstLogin, modificationTimeInMillis, modifierId, notifyOnShare, onboardingExperienceCompleted, orgs, ownerId, parentType, privileges, showOnboardingExperience, superUser, systemUser, tags, tenantId, userGroups, userInheritedGroups, welcomeEmailSent, orgPrivileges, preferredLocale, extendedProperties, extendedPreferences, userParameters);
+    return Objects.hash(id, name, displayName, visibility, authorId, canChangePassword, completeDetail, creationTimeInMillis, currentOrg, deleted, deprecated, accountType, accountStatus, email, expirationTimeInMillis, external, favoriteMetadata, firstLoginTimeInMillis, groupMask, hidden, homeLiveboard, incompleteDetails, isFirstLogin, modificationTimeInMillis, modifierId, notifyOnShare, onboardingExperienceCompleted, orgs, ownerId, parentType, privileges, showOnboardingExperience, superUser, systemUser, tags, tenantId, userGroups, userInheritedGroups, welcomeEmailSent, orgPrivileges, preferredLocale, extendedProperties, extendedPreferences, userParameters, accessControlProperties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -1533,6 +1557,7 @@ public class User {
     sb.append("    extendedProperties: ").append(toIndentedString(extendedProperties)).append("\n");
     sb.append("    extendedPreferences: ").append(toIndentedString(extendedPreferences)).append("\n");
     sb.append("    userParameters: ").append(toIndentedString(userParameters)).append("\n");
+    sb.append("    accessControlProperties: ").append(toIndentedString(accessControlProperties)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -1599,6 +1624,7 @@ public class User {
     openapiFields.add("extended_properties");
     openapiFields.add("extended_preferences");
     openapiFields.add("user_parameters");
+    openapiFields.add("access_control_properties");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();

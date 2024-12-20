@@ -4,11 +4,7 @@ ThoughtSpot Public REST API
 
 - API version: 2.0
 
-<<<<<<< HEAD
-    - Build date: 2024-10-08T14:11:36.944876Z[Etc/UTC]
-=======
-    - Build date: 2024-11-06T15:38:04.754051+05:30[Asia/Kolkata]
->>>>>>> 41fee514 (Fix for streaming apis)
+    - Build date: 2024-12-20T04:47:40.356396673Z[Etc/UTC]
 
 - Generator version: 6.6.0
 
@@ -90,9 +86,9 @@ Please follow the [installation](#installation) instruction and execute the foll
     import org.thoughtspot.client.*;
     import org.thoughtspot.client.auth.*;
     import org.thoughtspot.client.model.*;
-    import org.thoughtspot.client.api.AuthenticationApi;
+    import org.thoughtspot.client.api.AiApi;
 
-    public class AuthenticationApiExample {
+    public class AiApiExample {
 
     public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
@@ -102,12 +98,13 @@ Please follow the [installation](#installation) instruction and execute the foll
         HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
         bearerAuth.setBearerToken("BEARER TOKEN");
 
-    AuthenticationApi apiInstance = new AuthenticationApi(defaultClient);
+    AiApi apiInstance = new AiApi(defaultClient);
+        CreateConversationRequest createConversationRequest = new CreateConversationRequest(); // CreateConversationRequest | 
     try {
-    User result = apiInstance.getCurrentUserInfo();
+    Conversation result = apiInstance.createConversation(createConversationRequest);
         System.out.println(result);
     } catch (ApiException e) {
-    System.err.println("Exception when calling AuthenticationApi#getCurrentUserInfo");
+    System.err.println("Exception when calling AiApi#createConversation");
     System.err.println("Status code: " + e.getCode());
     System.err.println("Reason: " + e.getResponseBody());
     System.err.println("Response headers: " + e.getResponseHeaders());
@@ -124,8 +121,12 @@ All URIs are relative to *https://localhost:443*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*AiApi* | [**createConversation**](docs/AiApi.md#createConversation) | **POST** /api/rest/2.0/ai/conversation/create | 
+*AiApi* | [**sendMessage**](docs/AiApi.md#sendMessage) | **POST** /api/rest/2.0/ai/conversation/{conversation_identifier}/converse | 
+*AiApi* | [**singleAnswer**](docs/AiApi.md#singleAnswer) | **POST** /api/rest/2.0/ai/answer/create | 
 *AuthenticationApi* | [**getCurrentUserInfo**](docs/AuthenticationApi.md#getCurrentUserInfo) | **GET** /api/rest/2.0/auth/session/user | 
 *AuthenticationApi* | [**getCurrentUserToken**](docs/AuthenticationApi.md#getCurrentUserToken) | **GET** /api/rest/2.0/auth/session/token | 
+*AuthenticationApi* | [**getCustomAccessToken**](docs/AuthenticationApi.md#getCustomAccessToken) | **POST** /api/rest/2.0/auth/token/custom | 
 *AuthenticationApi* | [**getFullAccessToken**](docs/AuthenticationApi.md#getFullAccessToken) | **POST** /api/rest/2.0/auth/token/full | 
 *AuthenticationApi* | [**getObjectAccessToken**](docs/AuthenticationApi.md#getObjectAccessToken) | **POST** /api/rest/2.0/auth/token/object | 
 *AuthenticationApi* | [**login**](docs/AuthenticationApi.md#login) | **POST** /api/rest/2.0/auth/session/login | 
@@ -134,12 +135,12 @@ Class | Method | HTTP request | Description
 *AuthenticationApi* | [**validateToken**](docs/AuthenticationApi.md#validateToken) | **POST** /api/rest/2.0/auth/token/validate | 
 *ConnectionsApi* | [**createConnection**](docs/ConnectionsApi.md#createConnection) | **POST** /api/rest/2.0/connection/create | 
 *ConnectionsApi* | [**deleteConnection**](docs/ConnectionsApi.md#deleteConnection) | **POST** /api/rest/2.0/connection/delete | 
-*ConnectionsApi* | [**deleteConnectionV2**](docs/ConnectionsApi.md#deleteConnectionV2) | **POST** /api/rest/2.0/connections/delete/{connection_identifier} | 
+*ConnectionsApi* | [**deleteConnectionV2**](docs/ConnectionsApi.md#deleteConnectionV2) | **POST** /api/rest/2.0/connections/{connection_identifier}/delete | 
 *ConnectionsApi* | [**downloadConnectionMetadataChanges**](docs/ConnectionsApi.md#downloadConnectionMetadataChanges) | **POST** /api/rest/2.0/connections/download-connection-metadata-changes/{connection_identifier} | 
 *ConnectionsApi* | [**fetchConnectionDiffStatus**](docs/ConnectionsApi.md#fetchConnectionDiffStatus) | **POST** /api/rest/2.0/connections/fetch-connection-diff-status/{connection_identifier} | 
 *ConnectionsApi* | [**searchConnection**](docs/ConnectionsApi.md#searchConnection) | **POST** /api/rest/2.0/connection/search | 
 *ConnectionsApi* | [**updateConnection**](docs/ConnectionsApi.md#updateConnection) | **POST** /api/rest/2.0/connection/update | 
-*ConnectionsApi* | [**updateConnectionV2**](docs/ConnectionsApi.md#updateConnectionV2) | **POST** /api/rest/2.0/connections/update/{connection_identifier} | 
+*ConnectionsApi* | [**updateConnectionV2**](docs/ConnectionsApi.md#updateConnectionV2) | **POST** /api/rest/2.0/connections/{connection_identifier}/update | 
 *CustomActionApi* | [**createCustomAction**](docs/CustomActionApi.md#createCustomAction) | **POST** /api/rest/2.0/customization/custom-actions | 
 *CustomActionApi* | [**deleteCustomAction**](docs/CustomActionApi.md#deleteCustomAction) | **POST** /api/rest/2.0/customization/custom-actions/{custom_action_identifier}/delete | 
 *CustomActionApi* | [**searchCustomActions**](docs/CustomActionApi.md#searchCustomActions) | **POST** /api/rest/2.0/customization/custom-actions/search | 
@@ -164,8 +165,10 @@ Class | Method | HTTP request | Description
 *MetadataApi* | [**exportMetadataTML**](docs/MetadataApi.md#exportMetadataTML) | **POST** /api/rest/2.0/metadata/tml/export | 
 *MetadataApi* | [**exportMetadataTMLBatched**](docs/MetadataApi.md#exportMetadataTMLBatched) | **POST** /api/rest/2.0/metadata/tml/export/batch | 
 *MetadataApi* | [**fetchAnswerSqlQuery**](docs/MetadataApi.md#fetchAnswerSqlQuery) | **POST** /api/rest/2.0/metadata/answer/sql | 
+*MetadataApi* | [**fetchAsyncImportTaskStatus**](docs/MetadataApi.md#fetchAsyncImportTaskStatus) | **POST** /api/rest/2.0/metadata/tml/async/status | 
 *MetadataApi* | [**fetchLiveboardSqlQuery**](docs/MetadataApi.md#fetchLiveboardSqlQuery) | **POST** /api/rest/2.0/metadata/liveboard/sql | 
 *MetadataApi* | [**importMetadataTML**](docs/MetadataApi.md#importMetadataTML) | **POST** /api/rest/2.0/metadata/tml/import | 
+*MetadataApi* | [**importMetadataTMLAsync**](docs/MetadataApi.md#importMetadataTMLAsync) | **POST** /api/rest/2.0/metadata/tml/async/import | 
 *MetadataApi* | [**searchMetadata**](docs/MetadataApi.md#searchMetadata) | **POST** /api/rest/2.0/metadata/search | 
 *OrgsApi* | [**createOrg**](docs/OrgsApi.md#createOrg) | **POST** /api/rest/2.0/orgs/create | 
 *OrgsApi* | [**deleteOrg**](docs/OrgsApi.md#deleteOrg) | **POST** /api/rest/2.0/orgs/{org_identifier}/delete | 
@@ -203,6 +206,7 @@ Class | Method | HTTP request | Description
 *ThoughtSpotRestApi* | [**copyObject**](docs/ThoughtSpotRestApi.md#copyObject) | **POST** /api/rest/2.0/metadata/copyobject | 
 *ThoughtSpotRestApi* | [**createConfig**](docs/ThoughtSpotRestApi.md#createConfig) | **POST** /api/rest/2.0/vcs/git/config/create | 
 *ThoughtSpotRestApi* | [**createConnection**](docs/ThoughtSpotRestApi.md#createConnection) | **POST** /api/rest/2.0/connection/create | 
+*ThoughtSpotRestApi* | [**createConversation**](docs/ThoughtSpotRestApi.md#createConversation) | **POST** /api/rest/2.0/ai/conversation/create | 
 *ThoughtSpotRestApi* | [**createCustomAction**](docs/ThoughtSpotRestApi.md#createCustomAction) | **POST** /api/rest/2.0/customization/custom-actions | 
 *ThoughtSpotRestApi* | [**createOrg**](docs/ThoughtSpotRestApi.md#createOrg) | **POST** /api/rest/2.0/orgs/create | 
 *ThoughtSpotRestApi* | [**createRole**](docs/ThoughtSpotRestApi.md#createRole) | **POST** /api/rest/2.0/roles/create | 
@@ -217,7 +221,7 @@ Class | Method | HTTP request | Description
 *ThoughtSpotRestApi* | [**deactivateUser**](docs/ThoughtSpotRestApi.md#deactivateUser) | **POST** /api/rest/2.0/users/deactivate | 
 *ThoughtSpotRestApi* | [**deleteConfig**](docs/ThoughtSpotRestApi.md#deleteConfig) | **POST** /api/rest/2.0/vcs/git/config/delete | 
 *ThoughtSpotRestApi* | [**deleteConnection**](docs/ThoughtSpotRestApi.md#deleteConnection) | **POST** /api/rest/2.0/connection/delete | 
-*ThoughtSpotRestApi* | [**deleteConnectionV2**](docs/ThoughtSpotRestApi.md#deleteConnectionV2) | **POST** /api/rest/2.0/connections/delete/{connection_identifier} | 
+*ThoughtSpotRestApi* | [**deleteConnectionV2**](docs/ThoughtSpotRestApi.md#deleteConnectionV2) | **POST** /api/rest/2.0/connections/{connection_identifier}/delete | 
 *ThoughtSpotRestApi* | [**deleteCustomAction**](docs/ThoughtSpotRestApi.md#deleteCustomAction) | **POST** /api/rest/2.0/customization/custom-actions/{custom_action_identifier}/delete | 
 *ThoughtSpotRestApi* | [**deleteDbtConnection**](docs/ThoughtSpotRestApi.md#deleteDbtConnection) | **POST** /api/rest/2.0/dbt/{dbt_connection_identifier}/delete | 
 *ThoughtSpotRestApi* | [**deleteMetadata**](docs/ThoughtSpotRestApi.md#deleteMetadata) | **POST** /api/rest/2.0/metadata/delete | 
@@ -235,6 +239,7 @@ Class | Method | HTTP request | Description
 *ThoughtSpotRestApi* | [**exportMetadataTMLBatched**](docs/ThoughtSpotRestApi.md#exportMetadataTMLBatched) | **POST** /api/rest/2.0/metadata/tml/export/batch | 
 *ThoughtSpotRestApi* | [**fetchAnswerData**](docs/ThoughtSpotRestApi.md#fetchAnswerData) | **POST** /api/rest/2.0/metadata/answer/data | 
 *ThoughtSpotRestApi* | [**fetchAnswerSqlQuery**](docs/ThoughtSpotRestApi.md#fetchAnswerSqlQuery) | **POST** /api/rest/2.0/metadata/answer/sql | 
+*ThoughtSpotRestApi* | [**fetchAsyncImportTaskStatus**](docs/ThoughtSpotRestApi.md#fetchAsyncImportTaskStatus) | **POST** /api/rest/2.0/metadata/tml/async/status | 
 *ThoughtSpotRestApi* | [**fetchConnectionDiffStatus**](docs/ThoughtSpotRestApi.md#fetchConnectionDiffStatus) | **POST** /api/rest/2.0/connections/fetch-connection-diff-status/{connection_identifier} | 
 *ThoughtSpotRestApi* | [**fetchLiveboardData**](docs/ThoughtSpotRestApi.md#fetchLiveboardData) | **POST** /api/rest/2.0/metadata/liveboard/data | 
 *ThoughtSpotRestApi* | [**fetchLiveboardSqlQuery**](docs/ThoughtSpotRestApi.md#fetchLiveboardSqlQuery) | **POST** /api/rest/2.0/metadata/liveboard/sql | 
@@ -244,12 +249,14 @@ Class | Method | HTTP request | Description
 *ThoughtSpotRestApi* | [**forceLogoutUsers**](docs/ThoughtSpotRestApi.md#forceLogoutUsers) | **POST** /api/rest/2.0/users/force-logout | 
 *ThoughtSpotRestApi* | [**getCurrentUserInfo**](docs/ThoughtSpotRestApi.md#getCurrentUserInfo) | **GET** /api/rest/2.0/auth/session/user | 
 *ThoughtSpotRestApi* | [**getCurrentUserToken**](docs/ThoughtSpotRestApi.md#getCurrentUserToken) | **GET** /api/rest/2.0/auth/session/token | 
+*ThoughtSpotRestApi* | [**getCustomAccessToken**](docs/ThoughtSpotRestApi.md#getCustomAccessToken) | **POST** /api/rest/2.0/auth/token/custom | 
 *ThoughtSpotRestApi* | [**getFullAccessToken**](docs/ThoughtSpotRestApi.md#getFullAccessToken) | **POST** /api/rest/2.0/auth/token/full | 
 *ThoughtSpotRestApi* | [**getObjectAccessToken**](docs/ThoughtSpotRestApi.md#getObjectAccessToken) | **POST** /api/rest/2.0/auth/token/object | 
 *ThoughtSpotRestApi* | [**getSystemConfig**](docs/ThoughtSpotRestApi.md#getSystemConfig) | **GET** /api/rest/2.0/system/config | 
 *ThoughtSpotRestApi* | [**getSystemInformation**](docs/ThoughtSpotRestApi.md#getSystemInformation) | **GET** /api/rest/2.0/system | 
 *ThoughtSpotRestApi* | [**getSystemOverrideInfo**](docs/ThoughtSpotRestApi.md#getSystemOverrideInfo) | **GET** /api/rest/2.0/system/config-overrides | 
 *ThoughtSpotRestApi* | [**importMetadataTML**](docs/ThoughtSpotRestApi.md#importMetadataTML) | **POST** /api/rest/2.0/metadata/tml/import | 
+*ThoughtSpotRestApi* | [**importMetadataTMLAsync**](docs/ThoughtSpotRestApi.md#importMetadataTMLAsync) | **POST** /api/rest/2.0/metadata/tml/async/import | 
 *ThoughtSpotRestApi* | [**importUserGroups**](docs/ThoughtSpotRestApi.md#importUserGroups) | **POST** /api/rest/2.0/groups/import | 
 *ThoughtSpotRestApi* | [**importUsers**](docs/ThoughtSpotRestApi.md#importUsers) | **POST** /api/rest/2.0/users/import | 
 *ThoughtSpotRestApi* | [**login**](docs/ThoughtSpotRestApi.md#login) | **POST** /api/rest/2.0/auth/session/login | 
@@ -269,11 +276,13 @@ Class | Method | HTTP request | Description
 *ThoughtSpotRestApi* | [**searchTags**](docs/ThoughtSpotRestApi.md#searchTags) | **POST** /api/rest/2.0/tags/search | 
 *ThoughtSpotRestApi* | [**searchUserGroups**](docs/ThoughtSpotRestApi.md#searchUserGroups) | **POST** /api/rest/2.0/groups/search | 
 *ThoughtSpotRestApi* | [**searchUsers**](docs/ThoughtSpotRestApi.md#searchUsers) | **POST** /api/rest/2.0/users/search | 
+*ThoughtSpotRestApi* | [**sendMessage**](docs/ThoughtSpotRestApi.md#sendMessage) | **POST** /api/rest/2.0/ai/conversation/{conversation_identifier}/converse | 
 *ThoughtSpotRestApi* | [**shareMetadata**](docs/ThoughtSpotRestApi.md#shareMetadata) | **POST** /api/rest/2.0/security/metadata/share | 
+*ThoughtSpotRestApi* | [**singleAnswer**](docs/ThoughtSpotRestApi.md#singleAnswer) | **POST** /api/rest/2.0/ai/answer/create | 
 *ThoughtSpotRestApi* | [**unassignTag**](docs/ThoughtSpotRestApi.md#unassignTag) | **POST** /api/rest/2.0/tags/unassign | 
 *ThoughtSpotRestApi* | [**updateConfig**](docs/ThoughtSpotRestApi.md#updateConfig) | **POST** /api/rest/2.0/vcs/git/config/update | 
 *ThoughtSpotRestApi* | [**updateConnection**](docs/ThoughtSpotRestApi.md#updateConnection) | **POST** /api/rest/2.0/connection/update | 
-*ThoughtSpotRestApi* | [**updateConnectionV2**](docs/ThoughtSpotRestApi.md#updateConnectionV2) | **POST** /api/rest/2.0/connections/update/{connection_identifier} | 
+*ThoughtSpotRestApi* | [**updateConnectionV2**](docs/ThoughtSpotRestApi.md#updateConnectionV2) | **POST** /api/rest/2.0/connections/{connection_identifier}/update | 
 *ThoughtSpotRestApi* | [**updateCustomAction**](docs/ThoughtSpotRestApi.md#updateCustomAction) | **POST** /api/rest/2.0/customization/custom-actions/{custom_action_identifier}/update | 
 *ThoughtSpotRestApi* | [**updateDbtConnection**](docs/ThoughtSpotRestApi.md#updateDbtConnection) | **POST** /api/rest/2.0/dbt/update-dbt-connection | 
 *ThoughtSpotRestApi* | [**updateOrg**](docs/ThoughtSpotRestApi.md#updateOrg) | **POST** /api/rest/2.0/orgs/{org_identifier}/update | 
@@ -310,6 +319,7 @@ Class | Method | HTTP request | Description
 
  - [APIKey](docs/APIKey.md)
  - [APIKeyInput](docs/APIKeyInput.md)
+ - [AccessToken](docs/AccessToken.md)
  - [ActionConfig](docs/ActionConfig.md)
  - [ActionConfigInput](docs/ActionConfigInput.md)
  - [ActionConfigInputCreate](docs/ActionConfigInputCreate.md)
@@ -341,10 +351,12 @@ Class | Method | HTTP request | Description
  - [CommitResponse](docs/CommitResponse.md)
  - [CommiterType](docs/CommiterType.md)
  - [ConnectionInput](docs/ConnectionInput.md)
+ - [Conversation](docs/Conversation.md)
  - [CopyObjectRequest](docs/CopyObjectRequest.md)
  - [CreateConfigRequest](docs/CreateConfigRequest.md)
  - [CreateConnectionRequest](docs/CreateConnectionRequest.md)
  - [CreateConnectionResponse](docs/CreateConnectionResponse.md)
+ - [CreateConversationRequest](docs/CreateConversationRequest.md)
  - [CreateCustomActionRequest](docs/CreateCustomActionRequest.md)
  - [CreateCustomActionRequestActionDetails](docs/CreateCustomActionRequestActionDetails.md)
  - [CreateCustomActionRequestDefaultActionConfig](docs/CreateCustomActionRequestDefaultActionConfig.md)
@@ -387,29 +399,36 @@ Class | Method | HTTP request | Description
  - [ExportLiveboardReportRequestPngOptions](docs/ExportLiveboardReportRequestPngOptions.md)
  - [ExportMetadataTMLBatchedRequest](docs/ExportMetadataTMLBatchedRequest.md)
  - [ExportMetadataTMLRequest](docs/ExportMetadataTMLRequest.md)
+ - [ExportMetadataTMLRequestExportOptions](docs/ExportMetadataTMLRequestExportOptions.md)
  - [ExportMetadataTypeInput](docs/ExportMetadataTypeInput.md)
+ - [ExportOptions](docs/ExportOptions.md)
  - [FavoriteMetadataInput](docs/FavoriteMetadataInput.md)
  - [FavoriteMetadataItem](docs/FavoriteMetadataItem.md)
  - [FavoriteObjectOptionsInput](docs/FavoriteObjectOptionsInput.md)
  - [FetchAnswerDataRequest](docs/FetchAnswerDataRequest.md)
  - [FetchAnswerSqlQueryRequest](docs/FetchAnswerSqlQueryRequest.md)
+ - [FetchAsyncImportTaskStatusRequest](docs/FetchAsyncImportTaskStatusRequest.md)
  - [FetchConnectionDiffStatusResponse](docs/FetchConnectionDiffStatusResponse.md)
  - [FetchLiveboardDataRequest](docs/FetchLiveboardDataRequest.md)
  - [FetchLiveboardSqlQueryRequest](docs/FetchLiveboardSqlQueryRequest.md)
  - [FetchLogsRequest](docs/FetchLogsRequest.md)
  - [FetchPermissionsOfPrincipalsRequest](docs/FetchPermissionsOfPrincipalsRequest.md)
  - [FetchPermissionsOnMetadataRequest](docs/FetchPermissionsOnMetadataRequest.md)
+ - [FilterRules](docs/FilterRules.md)
  - [ForceLogoutUsersRequest](docs/ForceLogoutUsersRequest.md)
  - [Frequency](docs/Frequency.md)
  - [FrequencyInput](docs/FrequencyInput.md)
  - [GenericInfo](docs/GenericInfo.md)
  - [GetAsyncImportStatusResponse](docs/GetAsyncImportStatusResponse.md)
+ - [GetCustomAccessTokenRequest](docs/GetCustomAccessTokenRequest.md)
  - [GetFullAccessTokenRequest](docs/GetFullAccessTokenRequest.md)
  - [GetObjectAccessTokenRequest](docs/GetObjectAccessTokenRequest.md)
  - [GetObjectAccessTokenRequestUserParameters](docs/GetObjectAccessTokenRequestUserParameters.md)
  - [GetTokenResponse](docs/GetTokenResponse.md)
+ - [GroupObject](docs/GroupObject.md)
  - [GroupsImportListInput](docs/GroupsImportListInput.md)
  - [ImportEPackAsyncTaskStatus](docs/ImportEPackAsyncTaskStatus.md)
+ - [ImportMetadataTMLAsyncRequest](docs/ImportMetadataTMLAsyncRequest.md)
  - [ImportMetadataTMLRequest](docs/ImportMetadataTMLRequest.md)
  - [ImportUser](docs/ImportUser.md)
  - [ImportUserGroupsRequest](docs/ImportUserGroupsRequest.md)
@@ -438,7 +457,9 @@ Class | Method | HTTP request | Description
  - [ModelTableList](docs/ModelTableList.md)
  - [ObjectIDAndName](docs/ObjectIDAndName.md)
  - [Org](docs/Org.md)
+ - [OrgInfo](docs/OrgInfo.md)
  - [OrgResponse](docs/OrgResponse.md)
+ - [ParameterValues](docs/ParameterValues.md)
  - [ParametersListItem](docs/ParametersListItem.md)
  - [ParametersListItemInput](docs/ParametersListItemInput.md)
  - [PdfOptions](docs/PdfOptions.md)
@@ -458,6 +479,7 @@ Class | Method | HTTP request | Description
  - [ResponseActivationURL](docs/ResponseActivationURL.md)
  - [ResponseCopyObject](docs/ResponseCopyObject.md)
  - [ResponseCustomAction](docs/ResponseCustomAction.md)
+ - [ResponseMessage](docs/ResponseMessage.md)
  - [ResponseSchedule](docs/ResponseSchedule.md)
  - [ResponseScheduleRun](docs/ResponseScheduleRun.md)
  - [RevertCommitRequest](docs/RevertCommitRequest.md)
@@ -468,8 +490,11 @@ Class | Method | HTTP request | Description
  - [Role](docs/Role.md)
  - [RoleResponse](docs/RoleResponse.md)
  - [RuntimeFilter](docs/RuntimeFilter.md)
+ - [RuntimeFilters](docs/RuntimeFilters.md)
  - [RuntimeParamOverride](docs/RuntimeParamOverride.md)
+ - [RuntimeParameters](docs/RuntimeParameters.md)
  - [RuntimeSort](docs/RuntimeSort.md)
+ - [RuntimeSorts](docs/RuntimeSorts.md)
  - [ScheduleHistoryRunsOptionsInput](docs/ScheduleHistoryRunsOptionsInput.md)
  - [SchedulesPdfOptionsInput](docs/SchedulesPdfOptionsInput.md)
  - [SchemaObject](docs/SchemaObject.md)
@@ -497,9 +522,11 @@ Class | Method | HTTP request | Description
  - [SearchUserGroupsRequestSortOptions](docs/SearchUserGroupsRequestSortOptions.md)
  - [SearchUsersRequest](docs/SearchUsersRequest.md)
  - [SearchUsersRequestSortOptions](docs/SearchUsersRequestSortOptions.md)
+ - [SendMessageRequest](docs/SendMessageRequest.md)
  - [ShareMetadataRequest](docs/ShareMetadataRequest.md)
  - [ShareMetadataTypeInput](docs/ShareMetadataTypeInput.md)
  - [SharePermissionsInput](docs/SharePermissionsInput.md)
+ - [SingleAnswerRequest](docs/SingleAnswerRequest.md)
  - [SortOptionInput](docs/SortOptionInput.md)
  - [SortOptions](docs/SortOptions.md)
  - [SortingOptions](docs/SortingOptions.md)
@@ -511,6 +538,7 @@ Class | Method | HTTP request | Description
  - [Tag](docs/Tag.md)
  - [TagMetadataTypeInput](docs/TagMetadataTypeInput.md)
  - [Token](docs/Token.md)
+ - [TokenAccessScopeObject](docs/TokenAccessScopeObject.md)
  - [TokenValidationResponse](docs/TokenValidationResponse.md)
  - [URL](docs/URL.md)
  - [URLInput](docs/URLInput.md)
@@ -536,11 +564,9 @@ Class | Method | HTTP request | Description
  - [User](docs/User.md)
  - [UserGroup](docs/UserGroup.md)
  - [UserGroupResponse](docs/UserGroupResponse.md)
+ - [UserInfo](docs/UserInfo.md)
  - [UserObject](docs/UserObject.md)
  - [UserParameterOptions](docs/UserParameterOptions.md)
- - [UserParameters](docs/UserParameters.md)
- - [UserRuntimeFilters](docs/UserRuntimeFilters.md)
- - [UserRuntimeSorts](docs/UserRuntimeSorts.md)
  - [ValidateMergeRequest](docs/ValidateMergeRequest.md)
  - [ValidateTokenRequest](docs/ValidateTokenRequest.md)
 
