@@ -1336,131 +1336,6 @@
         }
       }
     },
-    "/api/rest/2.0/dbt/dbt-connection": {
-      "post": {
-        "operationId": "dbtConnection",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.9.0.cl or later</span>\n\nCreates a DBT connection object in ThoughtSpot.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:\n\n- `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**)\n- `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**)\n- `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)\n\n#### About create DBT connection\nDBT connection in ThoughtSpot is used by the user to define DBT credentials for cloud . The API needs  embrace connection, embrace database name, DBT url, import type, DBT account identifier, DBT project identifier, DBT access token and environment details (or) embrace connection, embrace database name, import type, file_content to create a connection object. To know more about DBT, see ThoughtSpot Product Documentation.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "DBT",
-          "9.9.0.cl"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "connection_name": {
-                    "description": "Name of the connection.",
-                    "type": "string"
-                  },
-                  "database_name": {
-                    "description": "Name of the Database.",
-                    "type": "string"
-                  },
-                  "import_type": {
-                    "description": "Mention type of Import",
-                    "default": "DBT_CLOUD",
-                    "type": "string",
-                    "enum": [
-                      "DBT_CLOUD",
-                      "ZIP_FILE"
-                    ]
-                  },
-                  "access_token": {
-                    "description": "Access token is mandatory when Import_Type is DBT_CLOUD.",
-                    "type": "string"
-                  },
-                  "dbt_url": {
-                    "description": "DBT URL is mandatory when Import_Type is DBT_CLOUD.",
-                    "type": "string"
-                  },
-                  "account_id": {
-                    "description": "Account ID is mandatory when Import_Type is DBT_CLOUD",
-                    "type": "string"
-                  },
-                  "project_id": {
-                    "description": "Project ID is mandatory when Import_Type is DBT_CLOUD",
-                    "type": "string"
-                  },
-                  "dbt_env_id": {
-                    "description": "DBT Environment ID\"",
-                    "type": "string"
-                  },
-                  "project_name": {
-                    "description": "Name of the project",
-                    "type": "string"
-                  },
-                  "file_content": {
-                    "description": "Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is Mandatory when Import Type is 'ZIP_FILE'",
-                    "type": "string",
-                    "format": "binary"
-                  }
-                },
-                "required": [
-                  "connection_name",
-                  "database_name"
-                ]
-              }
-            }
-          },
-          "required": true
-        },
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Succesfully created DBT Connection.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/rest/2.0/connection/delete": {
       "post": {
         "operationId": "deleteConnection",
@@ -1493,280 +1368,6 @@
         "responses": {
           "204": {
             "description": "Connection successfully deleted."
-          },
-          "400": {
-            "description": "Invalid request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/rest/2.0/connections/{connection_identifier}/delete": {
-      "post": {
-        "operationId": "deleteConnectionV2",
-        "description": "\n <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nDeletes a connection object.\n\n**Note**: If a connection has dependent objects, make sure you remove its associations before the delete operation.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "Connections",
-          "10.4.0.cl"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "connection_identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Unique ID or name of the connection."
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Connection successfully deleted."
-          },
-          "400": {
-            "description": "Invalid request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/rest/2.0/dbt/{dbt_connection_identifier}/delete": {
-      "post": {
-        "operationId": "deleteDbtConnection",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.9.0.cl or later</span>\n\nRemoves the specified DBT connection object from the ThoughtSpot system.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:\n\n- `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**)\n- `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**)\n- `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "DBT",
-          "9.9.0.cl"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "dbt_connection_identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Unique ID of the DBT Connection."
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "DBT Connection successfully deleted."
-          },
-          "400": {
-            "description": "Invalid request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/rest/2.0/connections/download-connection-metadata-changes/{connection_identifier}": {
-      "post": {
-        "operationId": "downloadConnectionMetadataChanges",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.9.0.cl or later</span>\n\nExports the difference in connection metadata between CDW and ThoughtSpot\n\nRequires `DATAMANAGEMENT` (**Can manage data**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  \n- `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**)\n- `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**)\n- `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)\n\nTo download the connection metadata difference between ThoughtSpot and CDW, pass the connection GUID as `connection_identifier` in the API request.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "Connections",
-          "9.9.0.cl"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "connection_identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "GUID of the connection"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Export metadata changes.",
-            "content": {
-              "application/octet-stream": {}
-            }
-          },
-          "400": {
-            "description": "Invalid request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/rest/2.0/connections/fetch-connection-diff-status/{connection_identifier}": {
-      "post": {
-        "operationId": "fetchConnectionDiffStatus",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.9.0.cl or later</span>\n\nValidates the difference in connection metadata between CDW and ThoughtSpot.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:\n\n- `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**)\n- `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**)\n- `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)\n\nReturns a boolean indicating whether there is any difference between the connection metadata at ThoughtSpot and CDW.\n\nTo get the connection metadata difference status, pass the connection GUID as `connection_identifier` in the API request.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "Connections",
-          "9.9.0.cl"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "connection_identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "GUID of the connection"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "true/false",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/FetchConnectionDiffStatusResponse"
-                }
-              }
-            }
           },
           "400": {
             "description": "Invalid request.",
@@ -2091,6 +1692,214 @@
         }
       }
     },
+    "/api/rest/2.0/connections/{connection_identifier}/delete": {
+      "post": {
+        "operationId": "deleteConnectionV2",
+        "description": "\n <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nDeletes a connection object.\n\n**Note**: If a connection has dependent objects, make sure you remove its associations before the delete operation.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Connections",
+          "10.4.0.cl"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "connection_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique ID or name of the connection."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Connection successfully deleted."
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/connections/download-connection-metadata-changes/{connection_identifier}": {
+      "post": {
+        "operationId": "downloadConnectionMetadataChanges",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.9.0.cl or later</span>\n\nExports the difference in connection metadata between CDW and ThoughtSpot\n\nRequires `DATAMANAGEMENT` (**Can manage data**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  \n- `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**)\n- `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**)\n- `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)\n\nTo download the connection metadata difference between ThoughtSpot and CDW, pass the connection GUID as `connection_identifier` in the API request.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Connections",
+          "9.9.0.cl"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "connection_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "GUID of the connection"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Export metadata changes.",
+            "content": {
+              "application/octet-stream": {}
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/connections/fetch-connection-diff-status/{connection_identifier}": {
+      "post": {
+        "operationId": "fetchConnectionDiffStatus",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.9.0.cl or later</span>\n\nValidates the difference in connection metadata between CDW and ThoughtSpot.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:\n\n- `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**)\n- `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**)\n- `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)\n\nReturns a boolean indicating whether there is any difference between the connection metadata at ThoughtSpot and CDW.\n\nTo get the connection metadata difference status, pass the connection GUID as `connection_identifier` in the API request.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Connections",
+          "9.9.0.cl"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "connection_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "GUID of the connection"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "true/false",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FetchConnectionDiffStatusResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/connections/{connection_identifier}/update": {
       "post": {
         "operationId": "updateConnectionV2",
@@ -2143,134 +1952,6 @@
         "responses": {
           "204": {
             "description": "Connection successfully updated."
-          },
-          "400": {
-            "description": "Invalid request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/rest/2.0/dbt/update-dbt-connection": {
-      "post": {
-        "operationId": "updateDbtConnection",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.9.0.cl or later</span>\n\nUpdates a DBT connection object.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege, along with an existing DBT connection.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following data control privileges may be required:\n\n- `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**)\n- `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**)\n- `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)\n\n#### About update DBT connection\nYou can modify DBT connection object properties such as embrace connection name, embrace database name, import type, account identifier, access token, project identifier and environment (or) embrace connection, embrace database name, import type, file_content settings.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "DBT",
-          "9.9.0.cl"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "dbt_connection_identifier": {
-                    "description": "Unique ID of the DBT Connection.",
-                    "type": "string"
-                  },
-                  "connection_name": {
-                    "description": "Name of the connection.",
-                    "type": "string"
-                  },
-                  "database_name": {
-                    "description": "Name of the Database.",
-                    "type": "string"
-                  },
-                  "import_type": {
-                    "description": "Mention type of Import",
-                    "default": "DBT_CLOUD",
-                    "type": "string",
-                    "enum": [
-                      "DBT_CLOUD",
-                      "ZIP_FILE"
-                    ]
-                  },
-                  "access_token": {
-                    "description": "Access token is mandatory when Import_Type is DBT_CLOUD.",
-                    "type": "string"
-                  },
-                  "dbt_url": {
-                    "description": "DBT URL is mandatory when Import_Type is DBT_CLOUD.",
-                    "type": "string"
-                  },
-                  "account_id": {
-                    "description": "Account ID is mandatory when Import_Type is DBT_CLOUD",
-                    "type": "string"
-                  },
-                  "project_id": {
-                    "description": "Project ID is mandatory when Import_Type is DBT_CLOUD",
-                    "type": "string"
-                  },
-                  "dbt_env_id": {
-                    "description": "DBT Environment ID\"",
-                    "type": "string"
-                  },
-                  "project_name": {
-                    "description": "Name of the project",
-                    "type": "string"
-                  },
-                  "file_content": {
-                    "description": "Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is Mandatory when Import Type is 'ZIP_FILE'",
-                    "type": "string",
-                    "format": "binary"
-                  }
-                },
-                "required": [
-                  "dbt_connection_identifier"
-                ]
-              }
-            }
-          },
-          "required": true
-        },
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "DBT Connection successfully updated.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
           },
           "400": {
             "description": "Invalid request.",
@@ -2772,6 +2453,131 @@
         }
       }
     },
+    "/api/rest/2.0/dbt/dbt-connection": {
+      "post": {
+        "operationId": "dbtConnection",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.9.0.cl or later</span>\n\nCreates a DBT connection object in ThoughtSpot.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:\n\n- `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**)\n- `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**)\n- `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)\n\n#### About create DBT connection\nDBT connection in ThoughtSpot is used by the user to define DBT credentials for cloud . The API needs  embrace connection, embrace database name, DBT url, import type, DBT account identifier, DBT project identifier, DBT access token and environment details (or) embrace connection, embrace database name, import type, file_content to create a connection object. To know more about DBT, see ThoughtSpot Product Documentation.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "DBT",
+          "9.9.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "connection_name": {
+                    "description": "Name of the connection.",
+                    "type": "string"
+                  },
+                  "database_name": {
+                    "description": "Name of the Database.",
+                    "type": "string"
+                  },
+                  "import_type": {
+                    "description": "Mention type of Import",
+                    "default": "DBT_CLOUD",
+                    "type": "string",
+                    "enum": [
+                      "DBT_CLOUD",
+                      "ZIP_FILE"
+                    ]
+                  },
+                  "access_token": {
+                    "description": "Access token is mandatory when Import_Type is DBT_CLOUD.",
+                    "type": "string"
+                  },
+                  "dbt_url": {
+                    "description": "DBT URL is mandatory when Import_Type is DBT_CLOUD.",
+                    "type": "string"
+                  },
+                  "account_id": {
+                    "description": "Account ID is mandatory when Import_Type is DBT_CLOUD",
+                    "type": "string"
+                  },
+                  "project_id": {
+                    "description": "Project ID is mandatory when Import_Type is DBT_CLOUD",
+                    "type": "string"
+                  },
+                  "dbt_env_id": {
+                    "description": "DBT Environment ID\"",
+                    "type": "string"
+                  },
+                  "project_name": {
+                    "description": "Name of the project",
+                    "type": "string"
+                  },
+                  "file_content": {
+                    "description": "Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is Mandatory when Import Type is 'ZIP_FILE'",
+                    "type": "string",
+                    "format": "binary"
+                  }
+                },
+                "required": [
+                  "connection_name",
+                  "database_name"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Succesfully created DBT Connection.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/dbt/generate-sync-tml": {
       "post": {
         "operationId": "dbtGenerateSyncTml",
@@ -2989,6 +2795,200 @@
                   "items": {
                     "$ref": "#/components/schemas/DbtSearchResponse"
                   }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/dbt/{dbt_connection_identifier}/delete": {
+      "post": {
+        "operationId": "deleteDbtConnection",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.9.0.cl or later</span>\n\nRemoves the specified DBT connection object from the ThoughtSpot system.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:\n\n- `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**)\n- `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**)\n- `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "DBT",
+          "9.9.0.cl"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dbt_connection_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique ID of the DBT Connection."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "DBT Connection successfully deleted."
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/dbt/update-dbt-connection": {
+      "post": {
+        "operationId": "updateDbtConnection",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.9.0.cl or later</span>\n\nUpdates a DBT connection object.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege, along with an existing DBT connection.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following data control privileges may be required:\n\n- `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**)\n- `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**)\n- `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)\n\n#### About update DBT connection\nYou can modify DBT connection object properties such as embrace connection name, embrace database name, import type, account identifier, access token, project identifier and environment (or) embrace connection, embrace database name, import type, file_content settings.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "DBT",
+          "9.9.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "dbt_connection_identifier": {
+                    "description": "Unique ID of the DBT Connection.",
+                    "type": "string"
+                  },
+                  "connection_name": {
+                    "description": "Name of the connection.",
+                    "type": "string"
+                  },
+                  "database_name": {
+                    "description": "Name of the Database.",
+                    "type": "string"
+                  },
+                  "import_type": {
+                    "description": "Mention type of Import",
+                    "default": "DBT_CLOUD",
+                    "type": "string",
+                    "enum": [
+                      "DBT_CLOUD",
+                      "ZIP_FILE"
+                    ]
+                  },
+                  "access_token": {
+                    "description": "Access token is mandatory when Import_Type is DBT_CLOUD.",
+                    "type": "string"
+                  },
+                  "dbt_url": {
+                    "description": "DBT URL is mandatory when Import_Type is DBT_CLOUD.",
+                    "type": "string"
+                  },
+                  "account_id": {
+                    "description": "Account ID is mandatory when Import_Type is DBT_CLOUD",
+                    "type": "string"
+                  },
+                  "project_id": {
+                    "description": "Project ID is mandatory when Import_Type is DBT_CLOUD",
+                    "type": "string"
+                  },
+                  "dbt_env_id": {
+                    "description": "DBT Environment ID\"",
+                    "type": "string"
+                  },
+                  "project_name": {
+                    "description": "Name of the project",
+                    "type": "string"
+                  },
+                  "file_content": {
+                    "description": "Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is Mandatory when Import Type is 'ZIP_FILE'",
+                    "type": "string",
+                    "format": "binary"
+                  }
+                },
+                "required": [
+                  "dbt_connection_identifier"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "DBT Connection successfully updated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
                 }
               }
             }
@@ -3819,93 +3819,6 @@
                 }
               }
             }
-          },
-          "400": {
-            "description": "Invalid request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/rest/2.0/security/metadata/assign": {
-      "post": {
-        "operationId": "assignChangeAuthor",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nTransfers the ownership of one or several objects from one user to another.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `USER_ADMINISTRATION` (**Can manage users**) privilege and edit access to the objects are required.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "Security",
-          "9.0.0.cl"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "metadata": {
-                    "description": "GUID or name of the metadata object.",
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/AuthorMetadataTypeInput"
-                    }
-                  },
-                  "user_identifier": {
-                    "description": "GUID or name of the user who you want to assign as the author.",
-                    "type": "string"
-                  },
-                  "current_owner_identifier": {
-                    "description": "GUID or name of the current author.  When defined, the metadata objects\nauthored by the specified owner are filtered for the API operation.",
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "metadata",
-                  "user_identifier"
-                ]
-              }
-            }
-          },
-          "required": true
-        },
-        "parameters": [],
-        "responses": {
-          "204": {
-            "description": "Author assignment for given metadata objects is successful."
           },
           "400": {
             "description": "Invalid request.",
@@ -5037,176 +4950,6 @@
         }
       }
     },
-    "/api/rest/2.0/security/metadata/fetch-permissions": {
-      "post": {
-        "operationId": "fetchPermissionsOnMetadata",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nFetches permission details for a given metadata object.\n\nRequires view access to the metadata object.\n\n#### Usage guidelines\n\n* To fetch a list of users and groups for a metadata object, specify `type` and GUID or name of the metadata object.\n* To get permission details for a specific user or group, add `type` and GUID or name of the principal object to your API request.\n\nUpon successful execution, the API returns permission details and principal information for the object specified in the API request.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "Security",
-          "9.0.0.cl"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "metadata": {
-                    "description": "GUID or name of the metadata object.",
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/PermissionsMetadataTypeInput"
-                    }
-                  },
-                  "principals": {
-                    "description": "User or group objects for which you want to fetch permissions.\nIf not specified, the API returns all users and groups that\ncan access the specified metadata objects.",
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/PrincipalsInput"
-                    }
-                  },
-                  "include_dependent_objects": {
-                    "description": "Indicates whether to fetch permissions of dependent metadata objects.",
-                    "default": false,
-                    "type": "boolean",
-                    "nullable": true
-                  },
-                  "record_offset": {
-                    "description": "The starting record number from where the records should be included for each metadata type.",
-                    "default": 0,
-                    "type": "integer",
-                    "format": "int32"
-                  },
-                  "record_size": {
-                    "description": "The number of records that should be included for each metadata type.",
-                    "default": -1,
-                    "type": "integer",
-                    "format": "int32"
-                  },
-                  "permission_type": {
-                    "description": "<div><span class=\"since-beta-tag\">Version: 10.3.0.cl or later</span></div>\n\nSpecifies the type of permission. Valid values are:\n    EFFECTIVE - If the user permission to the metadata objects is granted by the privileges assigned to the groups to which they belong.\n    DEFINED - If a user or user group received access to metadata objects via object sharing by another user.",
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "metadata"
-                ]
-              }
-            }
-          },
-          "required": true
-        },
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Fetching permissions of metadata objects is successful.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PermissionOfMetadataResponse"
-                },
-                "examples": {
-                  "example_1": {
-                    "value": {
-                      "metadata_permission_details": [
-                        {
-                          "metadata_id": "a62a5bf3-9f16-45b2-a174-7d30b3b577a9",
-                          "metadata_name": "testing",
-                          "metadata_type": "LIVEBOARD",
-                          "metadata_owner": {
-                            "id": "a62a5bf3-9f16-45b2-a174-7d30b3b577a9",
-                            "name": "testing"
-                          },
-                          "metadata_author": {
-                            "id": "59481331-ee53-42be-a548-bd87be6ddd4a",
-                            "name": "tsadmin"
-                          },
-                          "principal_permission_info": [
-                            {
-                              "principal_type": "USER_GROUP",
-                              "principal_sub_type": "LOCAL_GROUP",
-                              "principal_permissions": [
-                                {
-                                  "principal_id": "d0326b56-ef23-4c8a-8327-a30e99bcc72b",
-                                  "principal_name": "Administrator",
-                                  "permission": "MODIFY",
-                                  "shared_permission": "NO_ACCESS",
-                                  "group_permission": []
-                                }
-                              ]
-                            },
-                            {
-                              "principal_type": "USER",
-                              "principal_sub_type": "LOCAL_USER",
-                              "principal_permissions": [
-                                {
-                                  "principal_id": "0f0dd0f7-7411-4195-a4aa-0dc6b58413c9",
-                                  "principal_name": "su",
-                                  "permission": "MODIFY",
-                                  "shared_permission": "NO_ACCESS",
-                                  "group_permission": []
-                                },
-                                {
-                                  "principal_id": "59481331-ee53-42be-a548-bd87be6ddd4a",
-                                  "principal_name": "tsadmin",
-                                  "permission": "MODIFY",
-                                  "shared_permission": "NO_ACCESS",
-                                  "group_permission": []
-                                }
-                              ]
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/rest/2.0/metadata/tml/import": {
       "post": {
         "operationId": "importMetadataTML",
@@ -5634,147 +5377,6 @@
                 }
               }
             }
-          },
-          "400": {
-            "description": "Invalid request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/rest/2.0/security/metadata/share": {
-      "post": {
-        "operationId": "shareMetadata",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nAllows sharing one or several metadata objects with users and groups in ThoughtSpot.\n\nRequires edit access to the metadata object.\n\nThe API endpoint allows sharing only the following types of metadata objects:\n* Liveboards\n* Visualizations\n* Answers\n* Worksheets\n* Views\n\nYou can provide `READ_ONLY` or `MODIFY` access when sharing an object with another user or group. With `READ_ONLY` access grants view access to the shared object, whereas `MODIFY` provides edit access.\n\nTo prevent a user or group from accessing the shared object, specify the GUID or name of the principal and set `shareMode` to `NO_ACCESS`.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "Security",
-          "9.0.0.cl"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "metadata_type": {
-                    "description": "Type of metadata. Required if identifier in metadata_identifies is a name.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n4. LOGICAL_COLUMN",
-                    "type": "string",
-                    "enum": [
-                      "LIVEBOARD",
-                      "ANSWER",
-                      "LOGICAL_TABLE",
-                      "LOGICAL_COLUMN",
-                      "CONNECTION"
-                    ]
-                  },
-                  "metadata_identifiers": {
-                    "description": "Unique ID or name of metadata objects. Note: All the names should belong to same metadata_type",
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    }
-                  },
-                  "metadata": {
-                    "description": "Metadata details for sharing objects.",
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/ShareMetadataTypeInput"
-                    }
-                  },
-                  "permissions": {
-                    "description": "Permission details for sharing the objects.",
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/SharePermissionsInput"
-                    }
-                  },
-                  "visualization_identifiers": {
-                    "description": "Options to specify details of Liveboard. First Liveboard encountered in payload is considered to be the corresponding Liveboard.",
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    }
-                  },
-                  "emails": {
-                    "description": "Email IDs to which notifications will be sent.",
-                    "default": [],
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    }
-                  },
-                  "message": {
-                    "description": "Message to be included in notification.",
-                    "type": "string"
-                  },
-                  "enable_custom_url": {
-                    "description": "Sends object URLs in the customized format in email notifications.",
-                    "default": false,
-                    "type": "boolean",
-                    "nullable": true
-                  },
-                  "notify_on_share": {
-                    "description": "Flag to notify user when any object is shared.",
-                    "default": true,
-                    "type": "boolean",
-                    "nullable": true
-                  },
-                  "has_lenient_discoverability": {
-                    "description": "Flag to make the object discoverable.",
-                    "default": false,
-                    "type": "boolean",
-                    "nullable": true
-                  }
-                },
-                "required": [
-                  "permissions",
-                  "message"
-                ]
-              }
-            }
-          },
-          "required": true
-        },
-        "parameters": [],
-        "responses": {
-          "204": {
-            "description": "Sharing metadata objects is successful."
           },
           "400": {
             "description": "Invalid request.",
@@ -8737,12 +8339,12 @@
         }
       }
     },
-    "/api/rest/2.0/searchdata": {
+    "/api/rest/2.0/security/metadata/assign": {
       "post": {
-        "operationId": "searchData",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGenerates an Answer from a given data source.\n\nRequires at least view access to the data source object (Worksheet or View).\n\n#### Usage guidelines\n\nTo search data, specify the data source GUID in `logical_table_identifier`. The data source can be a Worksheet, View, Table, or SQL view.\n\nPass search tokens in the `query_string` attribute in the API request as shown in the following example:\n\n```\n{\n  \"query_string\": \"[sales] by [store]\",\n  \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\",\n}\n```\n\nFor more information about the `query_string` format and data source attribute, see [Search data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_data_api).  \n\nThe `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).  \n\n\n\n\n#### Endpoint URL\n",
+        "operationId": "assignChangeAuthor",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nTransfers the ownership of one or several objects from one user to another.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `USER_ADMINISTRATION` (**Can manage users**) privilege and edit access to the objects are required.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
-          "Data",
+          "Security",
           "9.0.0.cl"
         ],
         "requestBody": {
@@ -8751,51 +8353,25 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "query_string": {
-                    "description": "Query string with search tokens. For example, <code>[Sales][Region]</code>. See [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_data_api)",
+                  "metadata": {
+                    "description": "GUID or name of the metadata object.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/AuthorMetadataTypeInput"
+                    }
+                  },
+                  "user_identifier": {
+                    "description": "GUID or name of the user who you want to assign as the author.",
                     "type": "string"
                   },
-                  "logical_table_identifier": {
-                    "description": "GUID of the data source object, such as a Worksheet, View, or Table. You can find the GUID of a data object from the UI or via API. See [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_query) for more details.",
+                  "current_owner_identifier": {
+                    "description": "GUID or name of the current author.  When defined, the metadata objects\nauthored by the specified owner are filtered for the API operation.",
                     "type": "string"
-                  },
-                  "data_format": {
-                    "description": "JSON output in compact or full format. The FULL option is available in 9.12.5.cl or later.",
-                    "default": "COMPACT",
-                    "type": "string",
-                    "enum": [
-                      "FULL",
-                      "COMPACT"
-                    ]
-                  },
-                  "record_offset": {
-                    "description": "The starting record number from where the records should be included.",
-                    "default": 0,
-                    "type": "integer",
-                    "format": "int32"
-                  },
-                  "record_size": {
-                    "description": "The number of records to include in a batch.",
-                    "default": 10,
-                    "type": "integer",
-                    "format": "int32"
-                  },
-                  "runtime_filter": {
-                    "description": "JSON object with representing filter condition to apply filters at runtime. For example, <code> {\"col1\": \"item type\", \"op1\": \"EQ\", \"val1\": \"Bags\"} </code>. You can add multiple keys by incrementing the number at the end, for example, col2, op2, val2, and col3, op3, val3. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_filters).",
-                    "type": "object"
-                  },
-                  "runtime_sort": {
-                    "description": "JSON object representing columns to sort data at runtime. For example, <code> {\"sortCol1\": \"sales\", \"asc1\": true} </code>. You can add multiple keys by incrementing the number at the end, for example, sortCol1, asc2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort).",
-                    "type": "object"
-                  },
-                  "runtime_param_override": {
-                    "description": "JSON object for setting values of parameters at runtime. For example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>. You can add multiple keys by incrementing the number at the end, for example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters).",
-                    "type": "object"
                   }
                 },
                 "required": [
-                  "query_string",
-                  "logical_table_identifier"
+                  "metadata",
+                  "user_identifier"
                 ]
               }
             }
@@ -8804,15 +8380,8 @@
         },
         "parameters": [],
         "responses": {
-          "200": {
-            "description": "Fetching data of specified metadata object is successful.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SearchDataResponse"
-                }
-              }
-            }
+          "204": {
+            "description": "Author assignment for given metadata objects is successful."
           },
           "400": {
             "description": "Invalid request.",
@@ -9009,27 +8578,127 @@
         }
       }
     },
-    "/api/rest/2.0/system/config": {
-      "get": {
-        "operationId": "getSystemConfig",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nRetrieves the current configuration details of the cluster. If the request is successful, the API returns a list configuration settings applied on the cluster.\n\nRequires `ADMINISTRATION`(**Can administer ThoughtSpot**) privilege to view these complete configuration settings of the cluster.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `SYSTEM_INFO_ADMINISTRATION` (**Can view system activities**) privilege is required.\n\nThis API does not require any parameters to be passed in the request.\n\n\n\n\n#### Endpoint URL\n",
+    "/api/rest/2.0/security/metadata/fetch-permissions": {
+      "post": {
+        "operationId": "fetchPermissionsOnMetadata",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nFetches permission details for a given metadata object.\n\nRequires view access to the metadata object.\n\n#### Usage guidelines\n\n* To fetch a list of users and groups for a metadata object, specify `type` and GUID or name of the metadata object.\n* To get permission details for a specific user or group, add `type` and GUID or name of the principal object to your API request.\n\nUpon successful execution, the API returns permission details and principal information for the object specified in the API request.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
-          "System",
+          "Security",
           "9.0.0.cl"
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "metadata": {
+                    "description": "GUID or name of the metadata object.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/PermissionsMetadataTypeInput"
+                    }
+                  },
+                  "principals": {
+                    "description": "User or group objects for which you want to fetch permissions.\nIf not specified, the API returns all users and groups that\ncan access the specified metadata objects.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/PrincipalsInput"
+                    }
+                  },
+                  "include_dependent_objects": {
+                    "description": "Indicates whether to fetch permissions of dependent metadata objects.",
+                    "default": false,
+                    "type": "boolean",
+                    "nullable": true
+                  },
+                  "record_offset": {
+                    "description": "The starting record number from where the records should be included for each metadata type.",
+                    "default": 0,
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "record_size": {
+                    "description": "The number of records that should be included for each metadata type.",
+                    "default": -1,
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "permission_type": {
+                    "description": "<div><span class=\"since-beta-tag\">Version: 10.3.0.cl or later</span></div>\n\nSpecifies the type of permission. Valid values are:\n    EFFECTIVE - If the user permission to the metadata objects is granted by the privileges assigned to the groups to which they belong.\n    DEFINED - If a user or user group received access to metadata objects via object sharing by another user.",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "metadata"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Cluster config information.",
+            "description": "Fetching permissions of metadata objects is successful.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SystemConfig"
+                  "$ref": "#/components/schemas/PermissionOfMetadataResponse"
                 },
                 "examples": {
                   "example_1": {
                     "value": {
-                      "onboarding_content_url": ""
+                      "metadata_permission_details": [
+                        {
+                          "metadata_id": "a62a5bf3-9f16-45b2-a174-7d30b3b577a9",
+                          "metadata_name": "testing",
+                          "metadata_type": "LIVEBOARD",
+                          "metadata_owner": {
+                            "id": "a62a5bf3-9f16-45b2-a174-7d30b3b577a9",
+                            "name": "testing"
+                          },
+                          "metadata_author": {
+                            "id": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                            "name": "tsadmin"
+                          },
+                          "principal_permission_info": [
+                            {
+                              "principal_type": "USER_GROUP",
+                              "principal_sub_type": "LOCAL_GROUP",
+                              "principal_permissions": [
+                                {
+                                  "principal_id": "d0326b56-ef23-4c8a-8327-a30e99bcc72b",
+                                  "principal_name": "Administrator",
+                                  "permission": "MODIFY",
+                                  "shared_permission": "NO_ACCESS",
+                                  "group_permission": []
+                                }
+                              ]
+                            },
+                            {
+                              "principal_type": "USER",
+                              "principal_sub_type": "LOCAL_USER",
+                              "principal_permissions": [
+                                {
+                                  "principal_id": "0f0dd0f7-7411-4195-a4aa-0dc6b58413c9",
+                                  "principal_name": "su",
+                                  "permission": "MODIFY",
+                                  "shared_permission": "NO_ACCESS",
+                                  "group_permission": []
+                                },
+                                {
+                                  "principal_id": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                                  "principal_name": "tsadmin",
+                                  "permission": "MODIFY",
+                                  "shared_permission": "NO_ACCESS",
+                                  "group_permission": []
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
                     }
                   }
                 }
@@ -9079,10 +8748,151 @@
         }
       }
     },
-    "/api/rest/2.0/system": {
+    "/api/rest/2.0/security/metadata/share": {
+      "post": {
+        "operationId": "shareMetadata",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nAllows sharing one or several metadata objects with users and groups in ThoughtSpot.\n\nRequires edit access to the metadata object.\n\nThe API endpoint allows sharing only the following types of metadata objects:\n* Liveboards\n* Visualizations\n* Answers\n* Worksheets\n* Views\n\nYou can provide `READ_ONLY` or `MODIFY` access when sharing an object with another user or group. With `READ_ONLY` access grants view access to the shared object, whereas `MODIFY` provides edit access.\n\nTo prevent a user or group from accessing the shared object, specify the GUID or name of the principal and set `shareMode` to `NO_ACCESS`.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Security",
+          "9.0.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "metadata_type": {
+                    "description": "Type of metadata. Required if identifier in metadata_identifies is a name.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n4. LOGICAL_COLUMN",
+                    "type": "string",
+                    "enum": [
+                      "LIVEBOARD",
+                      "ANSWER",
+                      "LOGICAL_TABLE",
+                      "LOGICAL_COLUMN",
+                      "CONNECTION"
+                    ]
+                  },
+                  "metadata_identifiers": {
+                    "description": "Unique ID or name of metadata objects. Note: All the names should belong to same metadata_type",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "metadata": {
+                    "description": "Metadata details for sharing objects.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/ShareMetadataTypeInput"
+                    }
+                  },
+                  "permissions": {
+                    "description": "Permission details for sharing the objects.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/SharePermissionsInput"
+                    }
+                  },
+                  "visualization_identifiers": {
+                    "description": "Options to specify details of Liveboard. First Liveboard encountered in payload is considered to be the corresponding Liveboard.",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "emails": {
+                    "description": "Email IDs to which notifications will be sent.",
+                    "default": [],
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "message": {
+                    "description": "Message to be included in notification.",
+                    "type": "string"
+                  },
+                  "enable_custom_url": {
+                    "description": "Sends object URLs in the customized format in email notifications.",
+                    "default": false,
+                    "type": "boolean",
+                    "nullable": true
+                  },
+                  "notify_on_share": {
+                    "description": "Flag to notify user when any object is shared.",
+                    "default": true,
+                    "type": "boolean",
+                    "nullable": true
+                  },
+                  "has_lenient_discoverability": {
+                    "description": "Flag to make the object discoverable.",
+                    "default": false,
+                    "type": "boolean",
+                    "nullable": true
+                  }
+                },
+                "required": [
+                  "permissions",
+                  "message"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "Sharing metadata objects is successful."
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/system/config": {
       "get": {
-        "operationId": "getSystemInformation",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGets system information such as the release version, locale, time zone, deployment environment, date format, and date time format of the cluster.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `SYSTEM_INFO_ADMINISTRATION` (**Can view system activities**) privilege is required.\n\nThis API does not require any parameters to be passed in the request.  \n\n\n\n\n#### Endpoint URL\n",
+        "operationId": "getSystemConfig",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nRetrieves the current configuration details of the cluster. If the request is successful, the API returns a list configuration settings applied on the cluster.\n\nRequires `ADMINISTRATION`(**Can administer ThoughtSpot**) privilege to view these complete configuration settings of the cluster.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `SYSTEM_INFO_ADMINISTRATION` (**Can view system activities**) privilege is required.\n\nThis API does not require any parameters to be passed in the request.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "System",
           "9.0.0.cl"
@@ -9090,38 +8900,16 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Cluster information.",
+            "description": "Cluster config information.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SystemInfo"
+                  "$ref": "#/components/schemas/SystemConfig"
                 },
                 "examples": {
                   "example_1": {
                     "value": {
-                      "id": "local",
-                      "name": "local",
-                      "release_version": "test",
-                      "time_zone": "America/Los_Angeles",
-                      "locale": "",
-                      "date_format": "MM/dd/yyyy",
-                      "api_version": "v1",
-                      "type": "SW",
-                      "environment": "DEV",
-                      "license": "EAE",
-                      "date_time_format": "MM/dd/yyyy h:mm a",
-                      "time_format": "HH:mm:ss",
-                      "system_user_id": "67e15c06-d153-4924-a4cd-ff615393b60f",
-                      "super_user_id": "0f0dd0f7-7411-4195-a4aa-0dc6b58413c9",
-                      "hidden_object_id": "31745bb4-defd-4e8b-8de9-8fd01db78827",
-                      "system_group_id": "179d8867-cf36-4a8d-a019-63a226fd3196",
-                      "tsadmin_user_id": "59481331-ee53-42be-a548-bd87be6ddd4a",
-                      "admin_group_id": "d0326b56-ef23-4c8a-8327-a30e99bcc72b",
-                      "all_tables_connection_id": "bfc6feb4-8dac-402c-8ae8-78b43d318777",
-                      "all_user_group_id": "b25ee394-9d13-49e3-9385-cd97f5b253b4",
-                      "accept_language": "undefined",
-                      "all_user_group_member_user_count": 13,
-                      "logical_model_version": 43
+                      "onboarding_content_url": ""
                     }
                   }
                 }
