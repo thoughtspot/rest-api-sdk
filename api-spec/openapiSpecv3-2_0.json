@@ -62,6 +62,14 @@
       "description": "Roles for version 10.3.0.cl"
     },
     {
+      "name": "10.6.0.cl",
+      "id": "10.6.0.cl",
+      "tags": [
+        "10.6.0.cl"
+      ],
+      "description": "Roles for version 10.6.0.cl"
+    },
+    {
       "name": "9.9.0.cl",
       "id": "9.9.0.cl",
       "tags": [
@@ -1688,12 +1696,10 @@
                   },
                   "file_format": {
                     "description": "Export file format.",
-                    "default": "CSV",
+                    "default": "PDF",
                     "type": "string",
                     "enum": [
-                      "CSV",
                       "PDF",
-                      "XLSX",
                       "PNG"
                     ]
                   },
@@ -1724,6 +1730,14 @@
                   "runtime_param_override": {
                     "description": "JSON object for setting values of parameters at runtime. For example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>. You can add multiple keys by incrementing the number at the end, for example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters).",
                     "type": "object"
+                  },
+                  "regional_settings": {
+                    "description": "Options for specific region speciic overrides to support date/number/string/currency formatting.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/RegionalSettingsInput"
+                      }
+                    ]
                   }
                 },
                 "required": [
@@ -1834,6 +1848,14 @@
                   "runtime_param_override": {
                     "description": "JSON object for setting values of parameters in runtime.",
                     "type": "object"
+                  },
+                  "regional_settings": {
+                    "description": "Options for specific region speciic overrides to support date/number/string/currency formatting.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/RegionalSettingsInput"
+                      }
+                    ]
                   }
                 }
               }
@@ -2931,7 +2953,8 @@
                         "MODE",
                         "GOOGLE_SHEETS",
                         "FALCON",
-                        "FALCON_ONPREM"
+                        "FALCON_ONPREM",
+                        "CLICKHOUSE"
                       ]
                     }
                   },
@@ -3061,7 +3084,7 @@
     "/api/rest/2.0/roles/search": {
       "post": {
         "operationId": "searchRoles",
-        "description": "\nGets Roles configured on a ThoughtSpot instance.\nRequires cluster Administration, Role Administration or\nGroup Administration privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>\n\nGets a list of Role objects from the ThoughtSpot system.\n\nAvailable if [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance. To search for Roles, the `ROLE_ADMINISTRATION` (**Can manage roles**) privilege is required.\n\nTo get details of a specific Role object, specify the GUID or name. You can also filter the API response based on user group and Org identifiers, privileges assigned to the Role, and deprecation status.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>\n\nGets a list of Role objects from the ThoughtSpot system.\n\nAvailable if [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance. To search for Roles, the `ROLE_ADMINISTRATION` (**Can manage roles**) privilege is required.\n\nTo get details of a specific Role object, specify the GUID or name. You can also filter the API response based on user group and Org identifiers, privileges assigned to the Role, and deprecation status.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Roles",
           "9.5.0.cl"
@@ -3370,6 +3393,81 @@
           },
           "500": {
             "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/ai/answer/getDecomposedQuery": {
+      "post": {
+        "operationId": "queryGetDecomposedQuery",
+        "description": "<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>",
+        "tags": [
+          "AI",
+          "10.4.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "request": {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/Input_eureka_DecomposeQueryRequest"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "request"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QueryGetDecomposedQueryResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QueryGetDecomposedQueryResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
             "content": {
               "application/json": {
                 "schema": {
@@ -4958,6 +5056,10 @@
                   "password": {
                     "description": "New password for the user to access the account.",
                     "type": "string"
+                  },
+                  "properties": {
+                    "description": "Properties of the user.",
+                    "type": "string"
                   }
                 },
                 "required": [
@@ -6451,6 +6553,12 @@
                     "type": "boolean",
                     "nullable": true
                   },
+                  "skip_diff_check": {
+                    "description": "<div><span class=\"since-beta-tag\">Version: 10.6.0.cl or later</span></div>\n\nBoolean Flag to skip TML diff check before processing object TMLs.",
+                    "default": false,
+                    "type": "boolean",
+                    "nullable": true
+                  },
                   "enable_large_metadata_validation": {
                     "description": "<div><span class=\"since-beta-tag\">Version: 10.5.0.cl or later</span></div>\n\nBoolean to indicate if the large metadata validation should be enabled.",
                     "default": false,
@@ -6573,6 +6681,12 @@
                       "VALIDATE_ONLY",
                       "PARTIAL_OBJECT"
                     ]
+                  },
+                  "skip_diff_check": {
+                    "description": "<div><span class=\"since-beta-tag\">Version: 10.6.0.cl or later</span></div>\n\nBoolean Flag to skip TML diff check before processing object TMLs.",
+                    "default": false,
+                    "type": "boolean",
+                    "nullable": true
                   },
                   "enable_large_metadata_validation": {
                     "description": "<div><span class=\"since-beta-tag\">Version: 10.5.0.cl or later</span></div>\n\nBoolean to indicate if the large metadata validation should be enabled.",
@@ -6715,7 +6829,7 @@
                     "nullable": true
                   },
                   "export_options": {
-                    "description": "Flags to specify additional options for export. <br/>  <span class=\"since-beta-tag\">Version: 10.5.0.cl or later</span>",
+                    "description": "Flags to specify additional options for export. <br/>  <span class=\"since-beta-tag\">Version: 10.6.0.cl or later</span>",
                     "allOf": [
                       {
                         "$ref": "#/components/schemas/Export_Options"
@@ -7101,6 +7215,186 @@
         }
       }
     },
+    "/api/rest/2.0/metadata/worksheets/convert": {
+      "post": {
+        "operationId": "convertWorksheetToModel",
+        "description": "\nConvert worksheets to models <br/>  <span class=\"since-beta-tag\">Version: 10.6.0.cl or later</span>\n\n## Prerequisites\n- **Privileges Required:**\n  - `DATAMANAGEMENT` (Can manage data) or `ADMINISTRATION` (Can administer ThoughtSpot).\n- **Additional Privileges (if RBAC is enabled):**\n  - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (Can manage data models).\n\n---\n\n## Usage Guidelines\n\n### Parameters\n\n1. **worksheet_ids**  \n   - **Description:** A comma-separated list of GUIDs (Globally Unique Identifiers) specifying the Worksheets to be converted.  \n   - **Usage:**  \n     - Used only when `convert_all` is set to `false`.  \n     - Leave empty or omit when `convert_all` is set to `true`.\n\n2. **exclude_worksheet_ids**  \n   - **Description:** A comma-separated list of GUIDs specifying Worksheets to be excluded from conversion.  \n   - **Usage:**  \n     - Useful when `convert_all` is set to `true` and specific Worksheets should not be converted.\n\n3. **convert_all**  \n   - **Description:** Sets the scope of conversion.\n   - **Options:**  \n     - `true`: Converts all Worksheets in the system, except those specified in `exclude_worksheet_ids`.  \n     - `false`: Converts only the Worksheets listed in `worksheet_ids`.\n\n4. **apply_changes**  \n   - **Description:** Specifies whether to apply changes directly to ThoughtSpot or to generate a preview before applying any changes.Used for validation of conversion.\n   - **Options:**  \n     - `true`: Applies conversion changes directly to ThoughtSpot.\n     - `false`: Generates only a preview of the changes and does not apply any changes to ThoughtSpot\n\n---\n\n## Best Practices\n\n1. **Backup Before Conversion:**  \n   Always export metadata as a backup before initiating the conversion process\n\n2. **Partial Conversion for Testing:**  \n   Test the conversion process by setting `convert_all` to `false` and specifying a small number of `worksheet_ids`.\n\n3. **Verify Dependencies:**  \n   Check for dependent objects, such as Tables and Connections, to avoid invalid references.\n\n4. **Review Changes:**  \n   Use `apply_changes: false` to preview the impact of the conversion before applying changes.\n\n---\n\n## Examples\n\n### Convert Specific Worksheets\n```json\n{\n  \"worksheet_ids\": [\"guid1\", \"guid2\", \"guid3\"],\n  \"exclude_worksheet_ids\": [],\n  \"convert_all\": false,\n  \"apply_changes\": true\n}\n```\n\n### Convert All Accessible Worksheets\n```json\n{\n  \"worksheet_ids\": [],\n  \"exclude_worksheet_ids\": [],\n  \"convert_all\": true,\n  \"apply_changes\": true\n}\n```\n\n### Exclude Specific Worksheets While Converting All Accessible Worksheets\n```json\n{\n  \"worksheet_ids\": [],\n  \"exclude_worksheet_ids\": [\"abc\"],\n  \"convert_all\": true,\n  \"apply_changes\": true\n}\n```\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Metadata",
+          "10.6.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "worksheet_ids": {
+                    "description": "List of Worksheet IDs.",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "exclude_worksheet_ids": {
+                    "description": "List of Worksheet IDs to be excluded.",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "convert_all": {
+                    "description": "Indicates whether all the worksheet needs to be converted to models.",
+                    "default": false,
+                    "type": "boolean",
+                    "nullable": true
+                  },
+                  "apply_changes": {
+                    "description": "Indicates whether the changes should be applied to database.",
+                    "default": false,
+                    "type": "boolean",
+                    "nullable": true
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Conversion of worksheets to model done successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseWorksheetToModelConversion"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/metadata/headers/update": {
+      "post": {
+        "operationId": "updateMetadataHeader",
+        "description": "\nUpdate header attributes for a given list of header objects. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.6.0.cl or later</span>\n\n## Prerequisites\n- **Privileges Required:**\n  - `DATAMANAGEMENT` (Can manage data) or `ADMINISTRATION` (Can administer ThoughtSpot).\n- **Additional Privileges (if RBAC is enabled):**\n  - `ORG_ADMINISTRATION` (Can manage orgs).\n\n---\n\n## Usage Guidelines\n\n### Parameters\n\n1. **headers_update**  \n   - **Description:** List of header objects with their attributes to be updated. Each object contains a list of attributes to be updated in the header.\n   - **Usage:**\n      - You must provide either `identifier` or `obj_identifier`, but not both. Both fields cannot be empty.\n      - When `org_identifier` is set to `-1`, only the `identifier` value is accepted; `obj_identifier` is not allowed.\n\n2. **org_identifier**  \n   - **Description:** GUID (Globally Unique Identifier) or name of the organization.  \n   - **Usage:**\n     - Leaving this field empty assumes that the changes should be applied to the current organization \n     - Provide `org_guid` or `org_name` to uniquely identify the organization where changes need to be applied. .\n     - Provide `-1` if changes have to be applied across all the org.\n\n---\n\n## Note\nCurrently, this API is enabled only for updating the `obj_identifier` attribute. Only `text` will be allowed in attribute's value.\n\n## Best Practices\n\n1. **Backup Before Conversion:**  \n   Always export metadata as a backup before initiating the update process\n\n---\n\n## Examples\n\n### Only `identifier` is given \n```json\n{\n  \"headers_update\":\n  [\n    {\n      \"identifier\": \"guid_1\",\n      \"obj_identifier\": \"\",\n      \"type\": \"LOGICAL_COLUMN\",\n      \"attributes\":\n      [\n        {\n          \"name\": \"obj_id\",\n          \"value\": \"custom_object_id\"\n        }\n      ]\n    }\n  ],\n  \"org_identifier\": \"orgGuid\"\n}\n```\n\n### Only `obj_identifier` is given\n```json\n{\n  \"headers_update\":\n  [\n    {\n      \"obj_identifier\": \"custom_object_id\",\n      \"type\": \"ANSWER\",\n      \"attributes\":\n      [\n        {\n          \"name\": \"obj_id\",\n          \"value\": \"custom_object_id\"\n        }\n      ]\n    }\n  ],\n  \"org_identifier\": \"orgName\"\n}\n```\n\n### Executing update for all org `-1`\n```json\n{\n  \"headers_update\":\n  [\n    {\n      \"identifier\": \"guid_1\",\n      \"type\": \"ANSWER\",\n      \"attributes\":\n      [\n        {\n          \"name\": \"obj_id\",\n          \"value\": \"custom_object_id\"\n        }\n      ]\n    }\n  ],\n  \"org_identifier\": -1\n}\n```\n\n### Optional `type` is not provided\n```json\n{\n  \"headers_update\":\n  [\n    {\n      \"identifier\": \"guid_1\",\n      \"attributes\":\n      [\n        {\n          \"name\": \"obj_id\",\n          \"value\": \"custom_object_id\"\n        }\n      ]\n    }\n  ],\n  \"org_identifier\": -1\n}\n```\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Metadata",
+          "10.6.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "headers_update": {
+                    "description": "List of header objects to update.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/HeaderUpdateInput"
+                    }
+                  },
+                  "org_identifier": {
+                    "description": "Unique ID or name of the organization.",
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "Headers update was successful."
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/security/metadata/assign": {
       "post": {
         "operationId": "assignChangeAuthor",
@@ -7209,7 +7503,8 @@
                       "LIVEBOARD",
                       "ANSWER",
                       "LOGICAL_TABLE",
-                      "LOGICAL_COLUMN"
+                      "LOGICAL_COLUMN",
+                      "CONNECTION"
                     ]
                   },
                   "metadata_identifiers": {
@@ -8085,7 +8380,8 @@
                       "MODE",
                       "GOOGLE_SHEETS",
                       "FALCON",
-                      "FALCON_ONPREM"
+                      "FALCON_ONPREM",
+                      "CLICKHOUSE"
                     ]
                   },
                   "data_warehouse_config": {
@@ -8641,7 +8937,7 @@
     "/api/rest/2.0/roles/create": {
       "post": {
         "operationId": "createRole",
-        "description": "\nCreates a Role.\nRequires cluster Administration or Role Administration privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>\n\nCreates a Role object in ThoughtSpot.\n\nAvailable only if [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance. To create a Role, the `ROLE_ADMINISTRATION` (**Can manage roles**) privilege is required.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>\n\nCreates a Role object in ThoughtSpot.\n\nAvailable only if [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance. To create a Role, the `ROLE_ADMINISTRATION` (**Can manage roles**) privilege is required.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Roles",
           "9.5.0.cl"
@@ -8701,6 +8997,12 @@
                         "CAN_SETUP_VERSION_CONTROL"
                       ]
                     }
+                  },
+                  "read_only": {
+                    "description": "<div><span class=\"since-beta-tag\">Version: 10.5.0.cl or later</span></div>\n\nIndicates whether the role is read only. A readonly role can neither be updated nor deleted.",
+                    "default": false,
+                    "type": "boolean",
+                    "nullable": true
                   }
                 },
                 "required": [
@@ -8769,7 +9071,7 @@
     "/api/rest/2.0/roles/{role_identifier}/update": {
       "post": {
         "operationId": "updateRole",
-        "description": "\nUpdates a Role.\nRequires cluster Administration or Role Administration privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>\n\nUpdates the properties of a Role object.\n\nAvailable only if [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance. To update a Role, the `ROLE_ADMINISTRATION` (**Can manage roles**) privilege is required.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>\n\nUpdates the properties of a Role object.\n\nAvailable only if [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance. To update a Role, the `ROLE_ADMINISTRATION` (**Can manage roles**) privilege is required.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Roles",
           "9.5.0.cl"
@@ -8905,7 +9207,7 @@
     "/api/rest/2.0/roles/{role_identifier}/delete": {
       "post": {
         "operationId": "deleteRole",
-        "description": "\nDeletes a Role.\nRequires cluster Administration or Role Administration privileges. <br/>  <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>\n\nDeletes a Role object from the ThoughtSpot system.\n\nAvailable only if [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance. To delete a Role, the `ROLE_ADMINISTRATION` (**Can manage roles**) privilege is required.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>\n\nDeletes a Role object from the ThoughtSpot system.\n\nAvailable only if [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance. To delete a Role, the `ROLE_ADMINISTRATION` (**Can manage roles**) privilege is required.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Roles",
           "9.5.0.cl"
@@ -8918,7 +9220,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique ID or name of the Role."
+            "description": "Unique ID or name of the Role. ReadOnly roles cannot be deleted."
           }
         ],
         "responses": {
@@ -11631,11 +11933,11 @@
                 "type": "object",
                 "properties": {
                   "metadata_identifier": {
-                    "description": "Data model id to start the conversation on.",
+                    "description": "ID of the metadata object, such as a Worksheet or Model, to use as a data source for the conversation.",
                     "type": "string"
                   },
                   "tokens": {
-                    "description": "Tokens to start the conversation with.",
+                    "description": "Token string to set the context for the conversation. For example,`[sales],[item type],[state]`.",
                     "type": "string"
                   }
                 },
@@ -11707,11 +12009,11 @@
                 "type": "object",
                 "properties": {
                   "metadata_identifier": {
-                    "description": "Data model id to converse on.",
+                    "description": "ID of the metadata object, such as a Worksheet or Model, to use as a data source for the conversation.",
                     "type": "string"
                   },
                   "message": {
-                    "description": "User follow up question.",
+                    "description": "A message string with the follow-up question to continue the conversation.",
                     "type": "string"
                   }
                 },
@@ -11800,11 +12102,11 @@
                 "type": "object",
                 "properties": {
                   "query": {
-                    "description": "User natural language query.",
+                    "description": "A natural language query string to generate the Answer.",
                     "type": "string"
                   },
                   "metadata_identifier": {
-                    "description": "Data model id to answer the query on.",
+                    "description": "ID of the metadata object, such as a Worksheet or Model, to use as a data source for the query.",
                     "type": "string"
                   }
                 },
@@ -12761,7 +13063,7 @@
             "description": "Unique ID or name of the metadata.",
             "nullable": true
           },
-          "custom_identifier": {
+          "obj_identifier": {
             "type": "string",
             "description": "CustomObjectId of the metadata.",
             "nullable": true
@@ -13203,6 +13505,338 @@
             "default": false,
             "description": "Indicates whether to include a page with all applied filters.",
             "nullable": true
+          },
+          "personalised_view_id": {
+            "type": "string",
+            "description": "Indicates personalised view of the Liveboard in case of png",
+            "nullable": true
+          }
+        }
+      },
+      "RegionalSettingsInput": {
+        "type": "object",
+        "properties": {
+          "currency_format": {
+            "type": "string",
+            "description": "ISO code to be appended with currency values.",
+            "nullable": true,
+            "enum": [
+              "ADP",
+              "AED",
+              "AFN",
+              "ALL",
+              "AMD",
+              "ANG",
+              "AOA",
+              "ARA",
+              "ARS",
+              "ATS",
+              "AUD",
+              "AWG",
+              "AZN",
+              "BAM",
+              "BBD",
+              "BDT",
+              "BEF",
+              "BGL",
+              "BGM",
+              "BGN",
+              "BHD",
+              "BIF",
+              "BMD",
+              "BND",
+              "BOB",
+              "BOP",
+              "BOV",
+              "BRL",
+              "BSD",
+              "BTN",
+              "BUK",
+              "BWP",
+              "BYN",
+              "BZD",
+              "CAD",
+              "CDF",
+              "CHE",
+              "CHF",
+              "CHW",
+              "CLE",
+              "CLP",
+              "CNX",
+              "CNY",
+              "COP",
+              "COU",
+              "CRC",
+              "CSK",
+              "CUC",
+              "CUP",
+              "CVE",
+              "CYP",
+              "CZK",
+              "DDM",
+              "DEM",
+              "DJF",
+              "DKK",
+              "DOP",
+              "DZD",
+              "ECS",
+              "ECV",
+              "EEK",
+              "EGP",
+              "ERN",
+              "ESP",
+              "ETB",
+              "EUR",
+              "FIM",
+              "FJD",
+              "FKP",
+              "FRF",
+              "GBP",
+              "GEK",
+              "GEL",
+              "GHS",
+              "GIP",
+              "GMD",
+              "GNF",
+              "GNS",
+              "GQE",
+              "GRD",
+              "GTQ",
+              "GWE",
+              "GWP",
+              "GYD",
+              "HKD",
+              "HNL",
+              "HRD",
+              "HRK",
+              "HTG",
+              "HUF",
+              "IDR",
+              "IEP",
+              "ILP",
+              "ILS",
+              "INR",
+              "IQD",
+              "IRR",
+              "ISK",
+              "ITL",
+              "JMD",
+              "JOD",
+              "JPY",
+              "KES",
+              "KGS",
+              "KHR",
+              "KMF",
+              "KPW",
+              "KRW",
+              "KWD",
+              "KYD",
+              "KZT",
+              "LAK",
+              "LBP",
+              "LKR",
+              "LRD",
+              "LSL",
+              "LTL",
+              "LTT",
+              "LUC",
+              "LUF",
+              "LUL",
+              "LVL",
+              "LVR",
+              "LYD",
+              "MAD",
+              "MAF",
+              "MCF",
+              "MDC",
+              "MDL",
+              "MGA",
+              "MGF",
+              "MKD",
+              "MLF",
+              "MMK",
+              "MNT",
+              "MOP",
+              "MRU",
+              "MTL",
+              "MTP",
+              "MUR",
+              "MVR",
+              "MWK",
+              "MXN",
+              "MXV",
+              "MYR",
+              "MZE",
+              "MZN",
+              "NAD",
+              "NGN",
+              "NIO",
+              "NLG",
+              "NOK",
+              "NPR",
+              "NZD",
+              "OMR",
+              "PAB",
+              "PEI",
+              "PEN",
+              "PGK",
+              "PHP",
+              "PKR",
+              "PLN",
+              "PTE",
+              "PYG",
+              "QAR",
+              "RHD",
+              "RON",
+              "RSD",
+              "RUB",
+              "RWF",
+              "SAR",
+              "SBD",
+              "SCR",
+              "SDG",
+              "SEK",
+              "SGD",
+              "SHP",
+              "SIT",
+              "SKK",
+              "SLL",
+              "SOS",
+              "SRD",
+              "SRG",
+              "SSP",
+              "STN",
+              "SUR",
+              "SVC",
+              "SYP",
+              "SZL",
+              "THB",
+              "TJR",
+              "TJS",
+              "TMT",
+              "TND",
+              "TOP",
+              "TPE",
+              "TRY",
+              "TTD",
+              "TWD",
+              "TZS",
+              "UAH",
+              "UAK",
+              "UGX",
+              "USD",
+              "UYU",
+              "UYW",
+              "UZS",
+              "VES",
+              "VND",
+              "VUV",
+              "WST",
+              "XAF",
+              "XAG",
+              "XAU",
+              "XBA",
+              "XBB",
+              "XCD",
+              "XDR",
+              "XEU",
+              "XFO",
+              "XFU",
+              "XOF",
+              "XPD",
+              "XPF",
+              "XPT",
+              "XRE",
+              "XSU",
+              "XTS",
+              "XUA",
+              "XXX",
+              "YDD",
+              "YER",
+              "ZAR",
+              "ZMW"
+            ]
+          },
+          "user_locale": {
+            "type": "string",
+            "description": "Indicates the locale to be used for all formattings.",
+            "nullable": true,
+            "enum": [
+              "en-CA",
+              "en-GB",
+              "en-US",
+              "de-DE",
+              "ja-JP",
+              "zh-CN",
+              "pt-BR",
+              "fr-FR",
+              "fr-CA",
+              "es-US",
+              "da-DK",
+              "es-ES",
+              "fi-FI",
+              "sv-SE",
+              "nb-NO",
+              "pt-PT",
+              "nl-NL",
+              "it-IT",
+              "ru-RU",
+              "en-IN"
+            ]
+          },
+          "number_format_locale": {
+            "type": "string",
+            "description": "Indicates the locale to be used for number formatting.",
+            "nullable": true,
+            "enum": [
+              "en-CA",
+              "en-GB",
+              "en-US",
+              "de-DE",
+              "ja-JP",
+              "zh-CN",
+              "pt-BR",
+              "fr-FR",
+              "fr-CA",
+              "es-US",
+              "da-DK",
+              "es-ES",
+              "fi-FI",
+              "sv-SE",
+              "nb-NO",
+              "pt-PT",
+              "nl-NL",
+              "it-IT",
+              "ru-RU",
+              "en-IN"
+            ]
+          },
+          "date_format_locale": {
+            "type": "string",
+            "description": "Indicates the locale to be used for date formatting.",
+            "nullable": true,
+            "enum": [
+              "en-CA",
+              "en-GB",
+              "en-US",
+              "de-DE",
+              "ja-JP",
+              "zh-CN",
+              "pt-BR",
+              "fr-FR",
+              "fr-CA",
+              "es-US",
+              "da-DK",
+              "es-ES",
+              "fi-FI",
+              "sv-SE",
+              "nb-NO",
+              "pt-PT",
+              "nl-NL",
+              "it-IT",
+              "ru-RU",
+              "en-IN"
+            ]
           }
         }
       },
@@ -13714,7 +14348,8 @@
               "MODE",
               "GOOGLE_SHEETS",
               "FALCON",
-              "FALCON_ONPREM"
+              "FALCON_ONPREM",
+              "CLICKHOUSE"
             ],
             "description": "Type of data warehouse."
           },
@@ -14288,6 +14923,90 @@
         },
         "description": "MetadataType InputType used in Custom Action API's"
       },
+      "Input_eureka_DecomposeQueryRequest": {
+        "type": "object",
+        "properties": {
+          "nlsRequest": {
+            "$ref": "#/components/schemas/NLSRequest",
+            "nullable": true
+          },
+          "worksheetIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "answerIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "content": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        }
+      },
+      "NLSRequest": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "nullable": true
+          },
+          "instructions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        }
+      },
+      "QueryGetDecomposedQueryResponse": {
+        "type": "object",
+        "properties": {
+          "decomposedQueryResponse": {
+            "$ref": "#/components/schemas/DecomposedQueryResponse",
+            "nullable": true
+          }
+        }
+      },
+      "DecomposedQueryResponse": {
+        "type": "object",
+        "properties": {
+          "decomposedQueries": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DecomposedQuery"
+            },
+            "nullable": true
+          }
+        }
+      },
+      "DecomposedQuery": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "nullable": true
+          },
+          "worksheetId": {
+            "type": "string",
+            "nullable": true
+          },
+          "worksheetName": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
       "GenericInfo": {
         "type": "object",
         "properties": {
@@ -14714,7 +15433,17 @@
           "values": {
             "type": "array",
             "items": {
-              "type": "string"
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "number"
+                }
+              ]
             },
             "description": "The values to filter on. To get all records, use TS_WILDCARD_ALL as values."
           }
@@ -14735,7 +15464,17 @@
           "values": {
             "type": "array",
             "items": {
-              "type": "string"
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "number"
+                }
+              ]
             },
             "description": "The values to filter on. Only single value is supported currently."
           }
@@ -15170,7 +15909,7 @@
       "Export_Options": {
         "type": "object",
         "properties": {
-          "export_with_reference_object_id": {
+          "include_obj_id_ref": {
             "type": "boolean",
             "default": false,
             "description": "Boolean Flag to whether to export user_defined_id of referenced object. This will only be respected when UserDefinedId in TML is enabled.",
@@ -15182,7 +15921,7 @@
             "description": "Boolean flag to whether to export guid of the object. This will only be respected when UserDefinedId in TML is enabled.",
             "nullable": true
           },
-          "include_object_id": {
+          "include_obj_id": {
             "type": "boolean",
             "default": false,
             "description": "Boolean flag to whether to export user_defined_id of the object. This will only be respected when UserDefinedId in TML is enabled.",
@@ -15200,6 +15939,270 @@
             "nullable": true
           }
         }
+      },
+      "ResponseWorksheetToModelConversion": {
+        "type": "object",
+        "required": [
+          "name",
+          "success_count",
+          "failure_count",
+          "incomplete_count",
+          "post_upgrade_failed_count",
+          "total_time_in_millis",
+          "successful_entities",
+          "failed_entities",
+          "incomplete_entities",
+          "post_upgrade_failed_entities"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "success_count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of worksheets successfully converted to models."
+          },
+          "failure_count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of worksheets that failed to convert."
+          },
+          "incomplete_count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of worksheets that were incomplete during the conversion process."
+          },
+          "post_upgrade_failed_count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of worksheets that failed after an upgrade during the conversion process."
+          },
+          "total_time_in_millis": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The total time taken to complete the conversion process in milliseconds."
+          },
+          "successful_entities": {
+            "$ref": "#/components/schemas/ResponseSuccessfulEntities",
+            "description": "List of worksheets successfully converted to models."
+          },
+          "failed_entities": {
+            "$ref": "#/components/schemas/ResponseFailedEntities",
+            "description": "List of worksheets that failed to convert."
+          },
+          "incomplete_entities": {
+            "$ref": "#/components/schemas/ResponseIncompleteEntities",
+            "description": "List of worksheets that were incomplete during the conversion."
+          },
+          "post_upgrade_failed_entities": {
+            "$ref": "#/components/schemas/ResponsePostUpgradeFailedEntities",
+            "description": "List of worksheets that failed after an upgrade during the conversion process."
+          }
+        },
+        "description": "Name of the conversion process, which involves converting worksheets to models."
+      },
+      "ResponseSuccessfulEntities": {
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ResponseSuccessfulEntity"
+            }
+          }
+        },
+        "description": "Wrapper for the successful entities, as they are inside a 'data' field in the response."
+      },
+      "ResponseSuccessfulEntity": {
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the worksheet."
+          }
+        },
+        "description": "Unique ID of the worksheet."
+      },
+      "ResponseFailedEntities": {
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ResponseFailedEntity"
+            }
+          }
+        },
+        "description": "Wrapper for the failed entities, as they are inside a 'data' field in the response."
+      },
+      "ResponseFailedEntity": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "error"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the worksheet that failed to convert."
+          },
+          "error": {
+            "type": "string",
+            "description": "Error details related to the failed conversion."
+          }
+        },
+        "description": "Unique ID of the failed worksheet."
+      },
+      "ResponseIncompleteEntities": {
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ResponseIncompleteEntity"
+            }
+          }
+        },
+        "description": "Wrapper for the incomplete entities, as they are inside a 'data' field in the response."
+      },
+      "ResponseIncompleteEntity": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "error"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the incomplete worksheet."
+          },
+          "error": {
+            "type": "string",
+            "description": "Error details related to the incomplete conversion."
+          }
+        },
+        "description": "Unique ID of the incomplete worksheet."
+      },
+      "ResponsePostUpgradeFailedEntities": {
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ResponsePostUpgradeFailedEntity"
+            }
+          }
+        },
+        "description": "Wrapper for the post-upgrade failed entities, as they are inside a 'data' field in the response."
+      },
+      "ResponsePostUpgradeFailedEntity": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "error"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the worksheet that failed post-upgrade."
+          },
+          "error": {
+            "type": "string",
+            "description": "Error details related to the post-upgrade failure."
+          }
+        },
+        "description": "Unique ID of the worksheet that failed post-upgrade."
+      },
+      "HeaderUpdateInput": {
+        "type": "object",
+        "required": [
+          "attributes"
+        ],
+        "properties": {
+          "identifier": {
+            "type": "string",
+            "description": "Unique ID of a specified type to identify the header.",
+            "nullable": true
+          },
+          "obj_identifier": {
+            "type": "string",
+            "description": "Custom object identifier to uniquely identify header.",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "ANSWER",
+              "LOGICAL_TABLE",
+              "LOGICAL_COLUMN",
+              "LIVEBOARD",
+              "ACTION_OBJECT",
+              "DATA_SOURCE",
+              "USER",
+              "USER_GROUP"
+            ],
+            "description": "Optional type of the header object.",
+            "nullable": true
+          },
+          "attributes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HeaderAttributeInput"
+            },
+            "description": "List of attributes to update"
+          }
+        },
+        "description": "Favorite object options."
+      },
+      "HeaderAttributeInput": {
+        "type": "object",
+        "required": [
+          "name",
+          "value"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Attribute name to be updated."
+          },
+          "value": {
+            "type": "string",
+            "description": "Attribute's new value."
+          }
+        },
+        "description": "Attribute to update in a header."
       },
       "ExportMetadataTypeInput": {
         "type": "object",
@@ -15265,7 +16268,8 @@
             "enum": [
               "LIVEBOARD",
               "ANSWER",
-              "LOGICAL_TABLE"
+              "LOGICAL_TABLE",
+              "CONNECTION"
             ],
             "description": "  Type of metadata.\n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.",
             "nullable": true
@@ -15289,7 +16293,8 @@
               "LIVEBOARD",
               "ANSWER",
               "LOGICAL_TABLE",
-              "LOGICAL_COLUMN"
+              "LOGICAL_COLUMN",
+              "CONNECTION"
             ],
             "description": "  Type of metadata.\n  \n\nType of metadata. Required if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.",
             "nullable": true
@@ -15573,7 +16578,8 @@
               "MODE",
               "GOOGLE_SHEETS",
               "FALCON",
-              "FALCON_ONPREM"
+              "FALCON_ONPREM",
+              "CLICKHOUSE"
             ],
             "description": "Type of data warehouse."
           },
@@ -16681,6 +17687,11 @@
           "tokens": {
             "type": "string",
             "description": "Tokens for the response.",
+            "nullable": true
+          },
+          "display_tokens": {
+            "type": "string",
+            "description": "User friendly tokens for the response.",
             "nullable": true
           }
         }
