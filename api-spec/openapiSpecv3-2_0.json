@@ -5446,7 +5446,10 @@
                     "description": "Unique ID or name of the organization.",
                     "type": "string"
                   }
-                }
+                },
+                "required": [
+                  "headers_update"
+                ]
               }
             }
           },
