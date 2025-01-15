@@ -104,7 +104,38 @@
           "Authentication",
           "9.0.0.cl"
         ],
-        "parameters": [],
+        "parameters": [
+                {
+                    "name": "Accept",
+                    "in": "header",
+                    "description": "'",
+                    "required": true,
+                    "style": "simple",
+                    "schema": {
+                        "type": "string",
+                        "enum": [
+                            "application/json",
+                            "image/png"
+                        ]
+                    },
+                    "example": "application/json"
+                },
+          {
+                    "name": "Content-Type",
+                    "in": "header",
+                    "description": "'",
+                    "required": true,
+                    "style": "simple",
+                    "schema": {
+                        "type": "string",
+                        "enum": [
+                            "application/json",
+                            "image/jpg"
+                        ]
+                    },
+                    "example": "application/json"
+                }
+        ],
         "responses": {
           "200": {
             "description": "Fetch current session user detail successful.",
@@ -3956,38 +3987,7 @@
           "Authentication",
           "10.4.0.cl"
         ],
-        "parameters": [
-                {
-                    "name": "Accept",
-                    "in": "header",
-                    "description": "'",
-                    "required": true,
-                    "style": "simple",
-                    "schema": {
-                        "type": "string",
-                        "enum": [
-                            "application/json",
-                            "image/png"
-                        ]
-                    },
-                    "example": "application/json"
-                },
-          {
-                    "name": "Content-Type",
-                    "in": "header",
-                    "description": "'",
-                    "required": true,
-                    "style": "simple",
-                    "schema": {
-                        "type": "string",
-                        "enum": [
-                            "application/json",
-                            "image/jpg"
-                        ]
-                    },
-                    "example": "application/json"
-                }
-        ],
+        "parameters": [],
         "requestBody": {
           "content": {
             "application/json": {
