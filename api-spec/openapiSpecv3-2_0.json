@@ -3971,6 +3971,21 @@
                         ]
                     },
                     "example": "application/json"
+                },
+          {
+                    "name": "Content-Type",
+                    "in": "header",
+                    "description": "'",
+                    "required": true,
+                    "style": "simple",
+                    "schema": {
+                        "type": "string",
+                        "enum": [
+                            "application/json",
+                            "image/jpg"
+                        ]
+                    },
+                    "example": "application/json"
                 }
         ],
         "requestBody": {
