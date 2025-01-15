@@ -237,7 +237,7 @@
                 "type": "object",
                 "properties": {
                   "user_identifier": {
-                    "description": "GUID / name of the user to search",
+                    "description": "GUID / name of the user for searching",
                     "type": "string"
                   },
                   "display_name": {
