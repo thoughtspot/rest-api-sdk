@@ -115,7 +115,8 @@
                         "type": "string",
                         "enum": [
                             "application/json",
-                            "image/png"
+                            "image/png",
+                            "application/octet-stream",
                         ]
                     },
                     "example": "application/json"
