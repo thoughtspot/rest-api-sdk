@@ -3956,6 +3956,23 @@
           "Authentication",
           "10.4.0.cl"
         ],
+        "parameters": [
+                {
+                    "name": "Accept",
+                    "in": "header",
+                    "description": "'",
+                    "required": true,
+                    "style": "simple",
+                    "schema": {
+                        "type": "string",
+                        "enum": [
+                            "application/json",
+                            "image/png"
+                        ]
+                    },
+                    "example": "application/json"
+                }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
