@@ -120,17 +120,6 @@
                         ]
                     },
                     "example": "application/json"
-                },
-          {
-                    "name": "X-ThoughSpot-Conversation-ID",
-                    "in": "header",
-                    "description": "'",
-                    "required": true,
-                    "style": "simple",
-                    "schema": {
-                        "type": "string"
-                    },
-                    "example": "application/json"
                 }
         ],
         "responses": {
