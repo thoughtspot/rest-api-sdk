@@ -180,6 +180,116 @@
         }
       }
     },
+    "/api/rest/2.0/ai/analytical-questions": {
+      "post": {
+        "operationId": "queryGetDecomposedQuery",
+        "description": "<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.7.0.cl or later</span>",
+        "tags": [
+          "AI",
+          "10.7.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "answerIds": {
+                    "description": "List of answer unique identifiers (GUIDs) whose data will be used to guide the response.",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "content": {
+                    "description": "User provided content like text data, csv data as a string message to provide context & potentially improve the quality of the response.",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "conversationId": {
+                    "description": "Unique identifier to denote current conversation.",
+                    "type": "string"
+                  },
+                  "liveboardIds": {
+                    "description": "List of liveboard unique identifiers (GUIDs) whose data will be used to guide the response.",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "maxDecomposedQueries": {
+                    "description": "Maximum number of decomposed queries that is allowed in the response, default = 5.",
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "nlsRequest": {
+                    "description": "NLSRequest object containing user query & instructions.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/Input_eureka_NLSRequest"
+                      }
+                    ]
+                  },
+                  "worksheetIds": {
+                    "description": "List of worksheetIds to provide context for decomposing user query into analytical queries that can be run on them.",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/eureka_DecomposeQueryResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/eureka_DecomposeQueryResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/ai/conversation/{conversation_identifier}/converse": {
       "post": {
         "operationId": "sendMessage",
@@ -14862,6 +14972,93 @@
           }
         },
         "description": "MetadataType InputType used in Custom Action API's"
+      },
+      "Input_eureka_NLSRequest": {
+        "type": "object",
+        "properties": {
+          "agentVersion": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Cluster version like 10.4.0.cl, 10.5.0.cl, so on.",
+            "nullable": true
+          },
+          "bypassCache": {
+            "type": "boolean",
+            "description": "If true, results are not returned from cache & calculated every time. Can incur high costs & latency.",
+            "nullable": true
+          },
+          "instructions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "User specific instructions for processing the @query.",
+            "nullable": true
+          },
+          "query": {
+            "type": "string",
+            "description": "User query which is a topical/goal oriented question that needs to be broken down into smaller simple analytical questions.",
+            "nullable": true
+          }
+        }
+      },
+      "eureka_DecomposeQueryResponse": {
+        "type": "object",
+        "properties": {
+          "decomposedQueryResponse": {
+            "$ref": "#/components/schemas/eureka_LLMDecomposeQueryResponse",
+            "description": "Decomposed query response for a topical/goal oriented question that contains broken down analytical questions.",
+            "nullable": true
+          }
+        }
+      },
+      "eureka_LLMDecomposeQueryResponse": {
+        "type": "object",
+        "properties": {
+          "decomposedQueries": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/eureka_LLMSuggestedQuery"
+            },
+            "description": "List of analytical questions that can be run on their respective worksheet/data sources.",
+            "nullable": true
+          }
+        }
+      },
+      "eureka_LLMSuggestedQuery": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "NL query that can be run using spotter aka natural language search to get an AI generated answer.",
+            "nullable": true
+          },
+          "worksheetId": {
+            "type": "string",
+            "description": "Unique identifier of the worksheet on which this query can be run on.",
+            "nullable": true
+          },
+          "worksheetName": {
+            "type": "string",
+            "description": "Display name of the worksheet on which this query can be run on.",
+            "nullable": true
+          }
+        }
+      },
+      "RiseGQLArgWrapper": {
+        "type": "object",
+        "required": [
+          "name",
+          "type"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          }
+        }
       },
       "GenericInfo": {
         "type": "object",
