@@ -3532,7 +3532,7 @@
                     }
                   },
                   "user_parameters": {
-                    "description": "<div><span class=\"since-beta-tag\">Version: 9.10.5.cl or later</span><span class=\"since-beta-tag\">Deprecated: 10.4.0.cl and later</span></div>\n\nDefine attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters).",
+                    "description": "<div><span class=\"since-beta-tag\">Version: 9.10.5.cl or later</span><span class=\"since-beta-tag\">The object types LIVEBOARD and ANSWER are no longer supported.</span><span class=\"since-beta-tag\">Deprecated: 10.4.0.cl and later</span></div>\n\nDefine attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters).",
                     "allOf": [
                       {
                         "$ref": "#/components/schemas/User_Parameter_Options"
@@ -3665,7 +3665,7 @@
                     }
                   },
                   "user_parameters": {
-                    "description": "<div><span class=\"since-beta-tag\">Version: 9.10.5.cl or later</span><span class=\"since-beta-tag\">Deprecated: 10.4.0.cl and later</span></div>\n\nDefine attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters).",
+                    "description": "<div><span class=\"since-beta-tag\">Version: 9.10.5.cl or later</span><span class=\"since-beta-tag\">The object types LIVEBOARD and ANSWER are no longer supported.</span><span class=\"since-beta-tag\">Deprecated: 10.4.0.cl and later</span></div>\n\nDefine attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters).",
                     "allOf": [
                       {
                         "$ref": "#/components/schemas/User_Parameter_Options"
@@ -4011,7 +4011,7 @@
                     }
                   },
                   "objects": {
-                    "description": "Objects on which the filter rules and parameters values should be applied to",
+                    "description": "Objects on which the filter rules and parameters values should be applied to.<div><span class=\"since-beta-tag\">The object types LIVEBOARD and ANSWER are no longer supported.</span></div>",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/TokenAccessScopeObject"
