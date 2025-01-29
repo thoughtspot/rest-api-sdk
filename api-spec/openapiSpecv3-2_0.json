@@ -104,17 +104,40 @@
           "Authentication",
           "9.0.0.cl"
         ],
-        "parameters": [],
+        "parameters": [
+                {
+                    "name": "Accept",
+                    "in": "header",
+                    "description": "'",
+                    "required": true,
+                    "style": "simple",
+                    "schema": {
+                        "type": "string",
+                        "enum": [
+                            "application/json",
+                            "image/png",
+                            "application/octet-stream",
+                        ]
+                    },
+                    "example": "application/json"
+                }
+        ],
         "responses": {
           "200": {
             "description": "Fetch current session user detail successful.",
             "content": {
               "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/User"
-                }
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            },
+            "image/png": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
               }
             }
+          }
           },
           "400": {
             "description": "Invalid request.",
@@ -237,7 +260,7 @@
                 "type": "object",
                 "properties": {
                   "user_identifier": {
-                    "description": "GUID / name of the user to search",
+                    "description": "GUID / name of the user for searching",
                     "type": "string"
                   },
                   "display_name": {
@@ -3956,6 +3979,7 @@
           "Authentication",
           "10.4.0.cl"
         ],
+        "parameters": [],
         "requestBody": {
           "content": {
             "application/json": {
@@ -3996,6 +4020,19 @@
                       "RESET"
                     ]
                   },
+                  "reset_option": {
+                  "description": "Granular control of Reset option in persist_option attribute configuration.",
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "enum": [
+                      "FILTER_RULES",
+                      "PARAMETERS",
+                      "GROUPS"
+                    ]
+                  },
+                  "uniqueItems": true
+                },
                   "filter_rules": {
                     "description": "Filter rules.",
                     "type": "array",
@@ -4048,7 +4085,6 @@
           },
           "required": true
         },
-        "parameters": [],
         "responses": {
           "200": {
             "description": "ABAC token creation was successful.",
