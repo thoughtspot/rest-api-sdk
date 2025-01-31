@@ -52,7 +52,7 @@ import org.thoughtspot.client.JSON;
 /**
  * Type and Configuration for Custom Actions
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-12-20T04:47:40.356396673Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-12-20T05:08:06.792465843Z[Etc/UTC]")
 public class ActionDetails {
   public static final String SERIALIZED_NAME_C_A_L_L_B_A_C_K = "CALLBACK";
   @SerializedName(SERIALIZED_NAME_C_A_L_L_B_A_C_K)

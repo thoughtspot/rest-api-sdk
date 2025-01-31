@@ -55,7 +55,7 @@ import org.thoughtspot.client.JSON;
 /**
  * ShareMetadataRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-12-20T04:47:40.356396673Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-12-20T05:08:06.792465843Z[Etc/UTC]")
 public class ShareMetadataRequest {
   /**
    * Type of metadata. Required if identifier in metadata_identifies is a name. 1. Liveboard 2. Answers 3. LOGICAL_TABLE for any data object such as table, worksheet or view. 4. LOGICAL_COLUMN

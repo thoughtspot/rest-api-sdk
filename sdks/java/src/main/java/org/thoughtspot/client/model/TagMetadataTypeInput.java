@@ -51,7 +51,7 @@ import org.thoughtspot.client.JSON;
 /**
  * TagMetadataTypeInput
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-12-20T04:47:40.356396673Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-12-20T05:08:06.792465843Z[Etc/UTC]")
 public class TagMetadataTypeInput {
   /**
    *   Type of metadata.     Required if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.   1. LIVEBOARD   2. ANSWERS   3. LOGICAL_TABLE for any data object such as table, worksheet or view.   4. LOGICAL_COLUMN for a column of any data object such as tables, worksheets or views.

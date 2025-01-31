@@ -54,7 +54,7 @@ import org.thoughtspot.client.JSON;
 /**
  * FetchPermissionsOfPrincipalsRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-12-20T04:47:40.356396673Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-12-20T05:08:06.792465843Z[Etc/UTC]")
 public class FetchPermissionsOfPrincipalsRequest {
   public static final String SERIALIZED_NAME_PRINCIPALS = "principals";
   @SerializedName(SERIALIZED_NAME_PRINCIPALS)

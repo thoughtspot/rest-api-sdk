@@ -54,7 +54,7 @@ import org.thoughtspot.client.JSON;
 /**
  * Recipient configuration which includes email address, ID or name of the users and groups.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-12-20T04:47:40.356396673Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-12-20T05:08:06.792465843Z[Etc/UTC]")
 public class RecipientDetails {
   public static final String SERIALIZED_NAME_EMAILS = "emails";
   @SerializedName(SERIALIZED_NAME_EMAILS)

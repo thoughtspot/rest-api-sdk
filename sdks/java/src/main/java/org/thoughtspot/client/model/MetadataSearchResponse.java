@@ -53,7 +53,7 @@ import org.thoughtspot.client.JSON;
 /**
  * Metadata Search Response Object.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-12-20T04:47:40.356396673Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-12-20T05:08:06.792465843Z[Etc/UTC]")
 public class MetadataSearchResponse {
   public static final String SERIALIZED_NAME_METADATA_ID = "metadata_id";
   @SerializedName(SERIALIZED_NAME_METADATA_ID)
