@@ -17,6 +17,13 @@
 .portal-header {
     background: #323946
 }
+
+
+.hosted-api-docs{
+    background-color: aqua;
+    height: 100vh;
+}
+
 .branding-container .logo p {
     color: #eaedf2
 }
