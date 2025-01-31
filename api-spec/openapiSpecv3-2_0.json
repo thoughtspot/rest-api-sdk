@@ -4642,7 +4642,7 @@
     "/api/rest/2.0/metadata/tml/export": {
       "post": {
         "operationId": "exportMetadataTML",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nExports the [TML](https://docs.thoughtspot.com/cloud/latest/tml) representation of metadata objects in JSON or YAML format.\n\nRequires `DATADOWNLOADING` (**Can download Data**) and at least view access to the metadata object.\n\n#### Usage guidelines\n\n* You can export one or several objects by passing metadata object GUIDs in the `metadata` array.\n* When exporting TML content for a Liveboard or Answer object, you can set `export_associated` to `true` to retrieve TML content for underlying Worksheets, Tables, or Views, including the GUID of each object within the headers. When   `export_associated` is set to `true`, consider retrieving one metadata object at a time.\n* Set `export_fqns` to `true` to add FQNs of the referenced objects in the TML content. For example, if you send an API request to retrieve TML for a Liveboard and its associated objects, the API returns the TML content with FQNs of the referenced Worksheet. Exporting TML with FQNs is useful if ThoughtSpot has multiple objects with the same name and you want to eliminate ambiguity when importing TML files into ThoughtSpot. It eliminates the need for adding FQNs of the referenced objects manually during the import operation.\n\nFor more information, see [TML Documentation](https://developers.thoughtspot.com/docs/tml#_export_a_tml).\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nExports the [TML](https://docs.thoughtspot.com/cloud/latest/tml) representation of metadata objects in JSON or YAML format.\n\nRequires `DATADOWNLOADING` (**Can download Data**) and at least view access to the metadata object.\n\n#### Usage guidelines\n\n* You can export one or several objects by passing metadata object GUIDs in the `metadata` array.\n* When exporting TML content for a Liveboard or Answer object, you can set `export_associated` to `true` to retrieve TML content for underlying Worksheets, Tables, or Views, including the GUID of each object within the headers. When   `export_associated` is set to `true`, consider retrieving one metadata object at a time.\n* Set `export_fqns` to `true` to add FQNs of the referenced objects in the TML content. For example, if you send an API request to retrieve TML for a Liveboard and its associated objects, the API returns the TML content with FQNs of the referenced Worksheet. Exporting TML with FQNs is useful if ThoughtSpot has multiple objects with the same name and you want to eliminate ambiguity when importing TML files into ThoughtSpot. It eliminates the need for adding FQNs of the referenced objects manually during the import operation.\n* To export only the TML of feedbacks associated with an object, set the GUID of the object as `identifier`, and set the `type` as `FEEDBACK` in the `metadata` array.\n* To export the TML of an object along with the feedbacks associated with it, set the GUID of the object as `identifier`, set the `type` as `LOGIAL_TABLE` in the `metadata` array, and set `export_with_associated_feedbacks` in `export_options` to true.\n\nFor more information, see [TML Documentation](https://developers.thoughtspot.com/docs/tml#_export_a_tml).\n\nFor more information on feedbacks, see [Feedback Documentation](https://docs.thoughtspot.com/cloud/latest/sage-feedback).\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Metadata",
           "9.0.0.cl"
@@ -15980,6 +15980,12 @@
             "default": false,
             "description": "Boolean flag to whether to export user_defined_id of the object. This will only be respected when UserDefinedId in TML is enabled.",
             "nullable": true
+          },
+          "export_with_associated_feedbacks": {
+            "type": "boolean",
+            "default": false,
+            "description": "Boolean flag indicating whether to export associated feedbacks of the object. This will only be respected when the object can have feedbacks. <br/>  <span class=\"since-beta-tag\">Version: 10.7.0.cl or later</span>",
+            "nullable": true
           }
         },
         "description": "Flags to specify additional options for export. This will only be active when UserDefinedId in TML is enabled."
@@ -16274,7 +16280,8 @@
               "CUSTOM_ACTION",
               "USER",
               "USER_GROUP",
-              "ROLE"
+              "ROLE",
+              "FEEDBACK"
             ],
             "description": "  Type of metadata.\n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.",
             "nullable": true
