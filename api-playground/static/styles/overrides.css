@@ -19,7 +19,7 @@
 }
 
 .hosted-api-docs{
-    height: 100vh;
+    height: calc(100vh - 24px);
 }
 
 .branding-container .logo p {
