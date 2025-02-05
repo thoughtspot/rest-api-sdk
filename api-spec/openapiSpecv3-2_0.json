@@ -6575,7 +6575,7 @@
                     ]
                   },
                   "enable_large_metadata_validation": {
-                    "description": "<div><span class=\"since-beta-tag\">Version: 10.5.0.cl or later</span></div>\n\nBoolean to indicate if the large metadata validation should be enabled.",
+                    "description": "<div><span class=\"since-beta-tag\">Version: 10.5.0.cl or later</span></div>\n\nBoolean to indicate if the large metadata validation should be enabled. Set to `true` if the database contains multiple thousands of tables.",
                     "default": false,
                     "type": "boolean",
                     "nullable": true
