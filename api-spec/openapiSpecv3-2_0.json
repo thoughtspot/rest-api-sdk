@@ -13279,6 +13279,11 @@
             ],
             "description": "Type of the metadata."
           },
+          "metadata_obj_id": {
+            "type": "string",
+            "description": "Custom identifier of the metadata",
+            "nullable": true
+          },
           "dependent_objects": {
             "type": "object",
             "description": "Details of dependent objects of the metadata objects.",
