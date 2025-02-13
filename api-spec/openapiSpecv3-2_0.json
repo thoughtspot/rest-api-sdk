@@ -5571,7 +5571,7 @@
                     "format": "int32"
                   },
                   "record_size": {
-                    "description": "The number of records that should be included.",
+                    "description": "The number of records that should be included. It is recommended to use a smaller `record_size` when fetching dependent objects or any of the additional metadata detail options.",
                     "default": 10,
                     "type": "integer",
                     "format": "int32"
