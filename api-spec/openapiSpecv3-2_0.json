@@ -6202,7 +6202,7 @@
                     "type": "object"
                   },
                   "regional_settings": {
-                    "description": "Options for specific region speciic overrides to support date/number/string/currency formatting.",
+                    "description": "Options for specific region specific overrides to support date/number/string/currency formatting.",
                     "allOf": [
                       {
                         "$ref": "#/components/schemas/RegionalSettingsInput"
@@ -6333,7 +6333,7 @@
                     "type": "object"
                   },
                   "regional_settings": {
-                    "description": "Options for specific region speciic overrides to support date/number/string/currency formatting.",
+                    "description": "Options for specific region specific overrides to support date/number/string/currency formatting.",
                     "allOf": [
                       {
                         "$ref": "#/components/schemas/RegionalSettingsInput"
