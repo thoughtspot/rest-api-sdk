@@ -5234,12 +5234,6 @@
                     "type": "boolean",
                     "nullable": true
                   },
-                  "skip_cdw_validation_for_tables": {
-                    "description": "Boolean to indicate if the CDW validation for table imports should be skipped.",
-                    "default": false,
-                    "type": "boolean",
-                    "nullable": true
-                  },
                   "skip_diff_check": {
                     "description": "<div><span class=\"since-beta-tag\">Version: 10.6.0.cl or later</span></div>\n\nBoolean Flag to skip TML diff check before processing object TMLs.",
                     "default": false,
@@ -5348,12 +5342,6 @@
                   },
                   "all_orgs_context": {
                     "description": "If import is happening from all orgs context.",
-                    "default": false,
-                    "type": "boolean",
-                    "nullable": true
-                  },
-                  "skip_cdw_validation_for_tables": {
-                    "description": "Boolean to indicate if the CDW validation for table imports should be skipped.",
                     "default": false,
                     "type": "boolean",
                     "nullable": true
@@ -13281,7 +13269,7 @@
           },
           "metadata_obj_id": {
             "type": "string",
-            "description": "Custom identifier of the metadata",
+            "description": "Custom identifier of the metadata <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.8.0.cl or later</span>",
             "nullable": true
           },
           "dependent_objects": {
