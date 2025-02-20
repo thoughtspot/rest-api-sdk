@@ -5763,7 +5763,7 @@
                     "description": "List of metadata objects to update their object IDs.",
                     "type": "array",
                     "items": {
-                      "$ref": "#/components/schemas/UpdateObjectIdInput"
+                      "$ref": "#/components/schemas/UpdateObjIdInput"
                     }
                   }
                 },
@@ -16344,7 +16344,7 @@
         },
         "description": "Attribute to update in a header."
       },
-      "UpdateObjectIdInput": {
+      "UpdateObjIdInput": {
         "type": "object",
         "required": [
           "new_obj_id"
