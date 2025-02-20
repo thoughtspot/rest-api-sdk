@@ -70,6 +70,14 @@
       "description": "Roles for version 10.6.0.cl"
     },
     {
+      "name": "10.8.0.cl",
+      "id": "10.8.0.cl",
+      "tags": [
+        "10.8.0.cl"
+      ],
+      "description": "Roles for version 10.8.0.cl"
+    },
+    {
       "name": "9.9.0.cl",
       "id": "9.9.0.cl",
       "tags": [
@@ -5234,12 +5242,6 @@
                     "type": "boolean",
                     "nullable": true
                   },
-                  "skip_cdw_validation_for_tables": {
-                    "description": "Boolean to indicate if the CDW validation for table imports should be skipped.",
-                    "default": false,
-                    "type": "boolean",
-                    "nullable": true
-                  },
                   "skip_diff_check": {
                     "description": "<div><span class=\"since-beta-tag\">Version: 10.6.0.cl or later</span></div>\n\nBoolean Flag to skip TML diff check before processing object TMLs.",
                     "default": false,
@@ -5348,12 +5350,6 @@
                   },
                   "all_orgs_context": {
                     "description": "If import is happening from all orgs context.",
-                    "default": false,
-                    "type": "boolean",
-                    "nullable": true
-                  },
-                  "skip_cdw_validation_for_tables": {
-                    "description": "Boolean to indicate if the CDW validation for table imports should be skipped.",
                     "default": false,
                     "type": "boolean",
                     "nullable": true
@@ -5695,6 +5691,84 @@
                 },
                 "required": [
                   "headers_update"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "Headers update was successful."
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/metadata/update-obj-id": {
+      "post": {
+        "operationId": "updateMetadataObjId",
+        "description": "\nUpdate object IDs for given metadata objects. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.8.0.cl or later</span>\n\n## Prerequisites\n- **Privileges Required:**\n  - `DATAMANAGEMENT` (Can manage data) or `ADMINISTRATION` (Can administer ThoughtSpot).\n- **Additional Privileges (if RBAC is enabled):**\n  - `ORG_ADMINISTRATION` (Can manage orgs).\n\n---\n\n## Usage Guidelines\n\n### Parameters\n\n1. **metadata**  \n   - **Description:** List of metadata objects to update their object IDs.\n   - **Usage:**\n      - Use either `current_obj_id` alone OR use `metadata_identifier` with `type` (when needed).\n      - When using `metadata_identifier`, the `type` field is required if using a name instead of a GUID.\n      - The `new_obj_id` field is always required.\n\n---\n\n## Note\nThis API is specifically designed for updating object IDs of metadata objects. It internally uses the header update mechanism to perform the changes.\n\n## Best Practices\n\n1. **Backup Before Update:**  \n   Always export metadata as a backup before initiating the update process.\n\n2. **Validation:**\n   - When using `current_obj_id`, ensure it matches the existing object ID exactly.\n   - When using `metadata_identifier` with a name, ensure the `type` is specified correctly.\n   - Verify that the `new_obj_id` follows your naming conventions and is unique within your system.\n\n---\n\n## Examples\n\n### Using current_obj_id\n```json\n{\n  \"metadata\": [\n    {\n      \"current_obj_id\": \"existing_object_id\",\n      \"new_obj_id\": \"new_object_id\"\n    }\n  ]\n}\n```\n\n### Using metadata_identifier with GUID\n```json\n{\n  \"metadata\": [\n    {\n      \"metadata_identifier\": \"01234567-89ab-cdef-0123-456789abcdef\",\n      \"new_obj_id\": \"new_object_id\"\n    }\n  ]\n}\n```\n\n### Using metadata_identifier with name and type\n```json\n{\n  \"metadata\": [\n    {\n      \"metadata_identifier\": \"My Answer\",\n      \"type\": \"ANSWER\",\n      \"new_obj_id\": \"new_object_id\"\n    }\n  ]\n}\n```\n\n### Multiple objects update\n```json\n{\n  \"metadata\": [\n    {\n      \"current_obj_id\": \"existing_object_id_1\",\n      \"new_obj_id\": \"new_object_id_1\"\n    },\n    {\n      \"metadata_identifier\": \"My Worksheet\",\n      \"type\": \"LOGICAL_TABLE\",\n      \"new_obj_id\": \"new_object_id_2\"\n    }\n  ]\n}\n```\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Metadata",
+          "10.8.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "metadata": {
+                    "description": "List of metadata objects to update their object IDs.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/UpdateObjIdInput"
+                    }
+                  }
+                },
+                "required": [
+                  "metadata"
                 ]
               }
             }
@@ -16269,6 +16343,44 @@
           }
         },
         "description": "Attribute to update in a header."
+      },
+      "UpdateObjIdInput": {
+        "type": "object",
+        "required": [
+          "new_obj_id"
+        ],
+        "properties": {
+          "metadata_identifier": {
+            "type": "string",
+            "description": "GUID or name of the metadata object.",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "ANSWER",
+              "LOGICAL_TABLE",
+              "LOGICAL_COLUMN",
+              "LIVEBOARD",
+              "ACTION_OBJECT",
+              "DATA_SOURCE",
+              "USER",
+              "USER_GROUP"
+            ],
+            "description": "Type of metadata. Required if metadata_identifier is name of the object.",
+            "nullable": true
+          },
+          "current_obj_id": {
+            "type": "string",
+            "description": "Current object ID value.",
+            "nullable": true
+          },
+          "new_obj_id": {
+            "type": "string",
+            "description": "New object ID value to set."
+          }
+        },
+        "description": "Input for updating object ID of a metadata object."
       },
       "ExportMetadataTypeInput": {
         "type": "object",
