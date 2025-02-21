@@ -24,6 +24,10 @@ export class ExportLiveboardReportRequestPngOptions {
     * Indicates whether to include a page with all applied filters.
     */
     'include_filter_page'?: boolean | null;
+    /**
+    * Indicates personalised view of the Liveboard in case of png
+    */
+    'personalised_view_id'?: string | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -38,6 +42,12 @@ export class ExportLiveboardReportRequestPngOptions {
             "name": "include_filter_page",
             "baseName": "include_filter_page",
             "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "personalised_view_id",
+            "baseName": "personalised_view_id",
+            "type": "string",
             "format": ""
         }    ];
 

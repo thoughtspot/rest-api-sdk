@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 
+import { ExportAnswerReportRequestRegionalSettings } from '../models/ExportAnswerReportRequestRegionalSettings';
 import { ExportLiveboardReportRequestPdfOptions } from '../models/ExportLiveboardReportRequestPdfOptions';
 import { ExportLiveboardReportRequestPngOptions } from '../models/ExportLiveboardReportRequestPngOptions';
 import { HttpFile } from '../http/http';
@@ -45,6 +46,7 @@ export class ExportLiveboardReportRequest {
     * JSON object for setting values of parameters at runtime. For example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>. You can add multiple keys by incrementing the number at the end, for example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters).
     */
     'runtime_param_override'?: any;
+    'regional_settings'?: ExportAnswerReportRequestRegionalSettings;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -102,6 +104,12 @@ export class ExportLiveboardReportRequest {
             "baseName": "runtime_param_override",
             "type": "any",
             "format": ""
+        },
+        {
+            "name": "regional_settings",
+            "baseName": "regional_settings",
+            "type": "ExportAnswerReportRequestRegionalSettings",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
@@ -113,5 +121,5 @@ export class ExportLiveboardReportRequest {
 }
 
 
-export type ExportLiveboardReportRequestFileFormatEnum = "CSV" | "PDF" | "XLSX" | "PNG" ;
+export type ExportLiveboardReportRequestFileFormatEnum = "PDF" | "PNG" ;
 

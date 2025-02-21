@@ -21,7 +21,7 @@ import { SingleAnswerRequest } from '../models/SingleAnswerRequest';
 export class AIApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     *   Version: 10.4.0.cl or later   Creates a Conversation identifier to start an AI-driven conversation based on a specific data model.  This API requires the metadata_identifier parameter to define the context for the conversation.  Optionally, tokens can be provided to directly initiate the conversation.      
+     *  Version: 10.4.0.cl or later   Creates a Conversation object to start an AI-driven conversation based on a specific data model.  Requires at least view access to the metadata object specified in the request.  #### Usage guidelines  This API requires the `metadata_identifier` parameter to define the context for the conversation.  You can also specify the tokens to initiate the conversation as shown in this example:  `\"tokens\": \"[tea],[sales],[type]\"`  If the API request is successful, ThoughtSpot returns the ID of the conversation.  > ###### Note: > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.      
      * @param createConversationRequest 
      */
     public async createConversation(createConversationRequest: CreateConversationRequest, _options?: Configuration): Promise<RequestContext> {
@@ -71,7 +71,7 @@ export class AIApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     *   Version: 10.4.0.cl or later   Sends a follow-up message to an ongoing conversation within the context of a specific data model and the conversation identifier.      
+     *  Version: 10.4.0.cl or later   Allows sending a follow-up message to an ongoing conversation within the context of the metadata model.  Requires at least view access to the metadata object specified in the request.  #### Usage guidelines  The API requires you to specify the `conversation_identifier` in the request path, and a `metadata_identifier` and `message` string in the request body.  If the API request is successful, ThoughtSpot returns the session ID, tokens used in the conversation, and visualization type.  > ###### Note: > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.      
      * @param conversationIdentifier Unique identifier of the conversation.
      * @param sendMessageRequest 
      */
@@ -129,7 +129,7 @@ export class AIApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     *   Version: 10.4.0.cl or later   Processes a natural language query and returns an AI-generated response based on a specified data model.      
+     *  Version: 10.4.0.cl or later   Processes a natural language query and returns an AI-generated response based on a specified data model.  Requires at least view access to the metadata object specified in the request.  > ###### Note: > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.      
      * @param singleAnswerRequest 
      */
     public async singleAnswer(singleAnswerRequest: SingleAnswerRequest, _options?: Configuration): Promise<RequestContext> {

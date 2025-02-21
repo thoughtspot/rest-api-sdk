@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 
+import { FilterRulesValuesInner } from '../models/FilterRulesValuesInner';
 import { HttpFile } from '../http/http';
 
 /**
@@ -23,7 +24,7 @@ export class ParameterValues {
     /**
     * The values to filter on. Only single value is supported currently.
     */
-    'values': Array<string>;
+    'values': Array<FilterRulesValuesInner>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -37,7 +38,7 @@ export class ParameterValues {
         {
             "name": "values",
             "baseName": "values",
-            "type": "Array<string>",
+            "type": "Array<FilterRulesValuesInner>",
             "format": ""
         }    ];
 

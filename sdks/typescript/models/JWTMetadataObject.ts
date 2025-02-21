@@ -44,5 +44,5 @@ export class JWTMetadataObject {
 }
 
 
-export type JWTMetadataObjectTypeEnum = "LIVEBOARD" | "ANSWER" ;
+export type JWTMetadataObjectTypeEnum = "LOGICAL_TABLE" ;
 
