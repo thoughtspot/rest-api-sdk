@@ -3,7 +3,7 @@
   "buildFileVersion": "1.0",
   "generatePortal": {
      "useHostedPortalScript": false,
-    "filterByRole": ["9.0.0.cl", "9.2.0.cl", "9.4.0.cl", "9.5.0.cl", "9.6.0.cl", "9.7.0.cl", "9.9.0.cl","9.12.0.cl","10.1.0.cl", "10.3.0.cl", "10.4.0.cl"],
+    "filterByRole": ["9.0.0.cl", "9.2.0.cl", "9.4.0.cl", "9.5.0.cl", "9.6.0.cl", "9.7.0.cl", "9.9.0.cl","9.12.0.cl","10.1.0.cl", "10.3.0.cl", "10.4.0.cl", "10.6.0.cl"],
     "pageTitle": "ThoughtSpot Public Rest APIs",
     "languageConfig": {
       "http": {}
@@ -27,7 +27,7 @@
             "C700": "#606E8A",
             "C800": "#1D232F",
             "C900": "#1C2029",
-            "C1000": "#1D2236",
+            "C1000": "#1D2236"
           }
         },
         "fontSource": [],
