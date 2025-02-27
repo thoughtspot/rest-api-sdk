@@ -642,18 +642,6 @@
                       "RESET"
                     ]
                   },
-                  "reset_option": {
-                    "description": "Indicates whether the specified attributes should reset which field.",
-                    "type": "array",
-                    "items": {
-                      "type": "string",
-                      "enum": [
-                        "FILTER_RULES",
-                        "PARAMETERS",
-                        "GROUPS"
-                      ]
-                    }
-                  },
                   "filter_rules": {
                     "description": "Filter rules.",
                     "type": "array",
