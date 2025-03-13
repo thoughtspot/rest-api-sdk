@@ -53,7 +53,7 @@ import org.thoughtspot.client.JSON;
 /**
  * SearchUserGroupsRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-02-21T11:03:56.651712770Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:56:34.609498487Z[Etc/UTC]")
 public class SearchUserGroupsRequest {
   public static final String SERIALIZED_NAME_DEFAULT_LIVEBOARD_IDENTIFIERS = "default_liveboard_identifiers";
   @SerializedName(SERIALIZED_NAME_DEFAULT_LIVEBOARD_IDENTIFIERS)

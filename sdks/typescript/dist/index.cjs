@@ -338,6 +338,7 @@ __export(typescript_exports, {
   ValidateTokenRequest: () => ValidateTokenRequest,
   VersionControlApi: () => PromiseVersionControlApi,
   configureAuthMethods: () => configureAuthMethods,
+  createBasicConfig: () => createBasicConfig,
   createBearerAuthenticationConfig: () => createBearerAuthenticationConfig,
   createConfiguration: () => createConfiguration,
   server1: () => server1,
@@ -35710,9 +35711,9 @@ var PromiseVersionControlApi = class {
 };
 
 // utils/config.ts
-var createBearerAuthenticationConfig = (url, paramOrTokenProvider) => {
+var createBearerAuthenticationConfig = (thoughtSpotHost, paramOrTokenProvider) => {
   const serverConfig = new ServerConfiguration(
-    url,
+    thoughtSpotHost,
     {}
   );
   const config = createConfiguration({
@@ -35744,6 +35745,13 @@ var createBearerAuthenticationConfig = (url, paramOrTokenProvider) => {
     baseServer: serverConfig
   });
   return globalConfig;
+};
+var createBasicConfig = (thoughtSpotHost) => {
+  const thoughtSpotServer = new ServerConfiguration(thoughtSpotHost, {});
+  const basicClientConfig = createConfiguration({
+    baseServer: thoughtSpotServer
+  });
+  return basicClientConfig;
 };
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
@@ -36045,6 +36053,7 @@ var createBearerAuthenticationConfig = (url, paramOrTokenProvider) => {
   ValidateTokenRequest,
   VersionControlApi,
   configureAuthMethods,
+  createBasicConfig,
   createBearerAuthenticationConfig,
   createConfiguration,
   server1,

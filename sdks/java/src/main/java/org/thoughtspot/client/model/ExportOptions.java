@@ -51,7 +51,7 @@ import org.thoughtspot.client.JSON;
 /**
  * Flags to specify additional options for export. This will only be active when UserDefinedId in TML is enabled.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-02-21T11:03:56.651712770Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:56:34.609498487Z[Etc/UTC]")
 public class ExportOptions {
   public static final String SERIALIZED_NAME_INCLUDE_OBJ_ID_REF = "include_obj_id_ref";
   @SerializedName(SERIALIZED_NAME_INCLUDE_OBJ_ID_REF)
