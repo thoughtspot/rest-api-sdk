@@ -5224,7 +5224,7 @@
                     "type": "boolean",
                     "nullable": true
                   },
-                  "all_orgs_context": {
+                  "all_orgs_override": {
                     "description": "If import is happening from all orgs context.",
                     "default": false,
                     "type": "boolean",
@@ -5336,7 +5336,7 @@
                     "type": "boolean",
                     "nullable": true
                   },
-                  "all_orgs_context": {
+                  "all_orgs_override": {
                     "description": "If import is happening from all orgs context.",
                     "default": false,
                     "type": "boolean",
