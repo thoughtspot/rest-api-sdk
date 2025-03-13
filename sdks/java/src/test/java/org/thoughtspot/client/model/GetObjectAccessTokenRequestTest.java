@@ -22,7 +22,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
-import org.thoughtspot.client.model.GetObjectAccessTokenRequestUserParameters;
+import org.thoughtspot.client.model.GetFullAccessTokenRequestUserParameters;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 

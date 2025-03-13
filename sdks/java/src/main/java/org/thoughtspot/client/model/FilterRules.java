@@ -23,6 +23,7 @@ import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import org.thoughtspot.client.model.FilterRulesValuesInner;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -52,7 +53,7 @@ import org.thoughtspot.client.JSON;
 /**
  * Filter Rules to be applied on Objects.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-01-31T09:43:29.263117728Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-02-21T11:03:56.651712770Z[Etc/UTC]")
 public class FilterRules {
   public static final String SERIALIZED_NAME_COLUMN_NAME = "column_name";
   @SerializedName(SERIALIZED_NAME_COLUMN_NAME)
@@ -139,7 +140,7 @@ public class FilterRules {
 
   public static final String SERIALIZED_NAME_VALUES = "values";
   @SerializedName(SERIALIZED_NAME_VALUES)
-  private List<String> values = new ArrayList<>();
+  private List<FilterRulesValuesInner> values = new ArrayList<>();
 
   public FilterRules() {
   }
@@ -186,13 +187,13 @@ public class FilterRules {
   }
 
 
-  public FilterRules values(List<String> values) {
+  public FilterRules values(List<FilterRulesValuesInner> values) {
     
     this.values = values;
     return this;
   }
 
-  public FilterRules addValuesItem(String valuesItem) {
+  public FilterRules addValuesItem(FilterRulesValuesInner valuesItem) {
     if (this.values == null) {
       this.values = new ArrayList<>();
     }
@@ -205,12 +206,12 @@ public class FilterRules {
    * @return values
   **/
   @javax.annotation.Nonnull
-  public List<String> getValues() {
+  public List<FilterRulesValuesInner> getValues() {
     return values;
   }
 
 
-  public void setValues(List<String> values) {
+  public void setValues(List<FilterRulesValuesInner> values) {
     this.values = values;
   }
 
@@ -308,12 +309,16 @@ public class FilterRules {
       if (!jsonObj.get("operator").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `operator` to be a primitive type in the JSON string but got `%s`", jsonObj.get("operator").toString()));
       }
-      // ensure the required json array is present
-      if (jsonObj.get("values") == null) {
-        throw new IllegalArgumentException("Expected the field `linkedContent` to be an array in the JSON string but got `null`");
-      } else if (!jsonObj.get("values").isJsonArray()) {
+      // ensure the json data is an array
+      if (!jsonObj.get("values").isJsonArray()) {
         throw new IllegalArgumentException(String.format("Expected the field `values` to be an array in the JSON string but got `%s`", jsonObj.get("values").toString()));
       }
+
+      JsonArray jsonArrayvalues = jsonObj.getAsJsonArray("values");
+      // validate the required field `values` (array)
+      for (int i = 0; i < jsonArrayvalues.size(); i++) {
+        FilterRulesValuesInner.validateJsonObject(jsonArrayvalues.get(i).getAsJsonObject());
+      };
   }
 
   public static class CustomTypeAdapterFactory implements TypeAdapterFactory {

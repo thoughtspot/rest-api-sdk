@@ -53,7 +53,7 @@ import org.thoughtspot.client.JSON;
 /**
  * ImportMetadataTMLRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-01-31T09:43:29.263117728Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-02-21T11:03:56.651712770Z[Etc/UTC]")
 public class ImportMetadataTMLRequest {
   public static final String SERIALIZED_NAME_METADATA_TMLS = "metadata_tmls";
   @SerializedName(SERIALIZED_NAME_METADATA_TMLS)
@@ -122,9 +122,9 @@ public class ImportMetadataTMLRequest {
   @SerializedName(SERIALIZED_NAME_ALL_ORGS_CONTEXT)
   private Boolean allOrgsContext = false;
 
-  public static final String SERIALIZED_NAME_SKIP_CDW_VALIDATION_FOR_TABLES = "skip_cdw_validation_for_tables";
-  @SerializedName(SERIALIZED_NAME_SKIP_CDW_VALIDATION_FOR_TABLES)
-  private Boolean skipCdwValidationForTables = false;
+  public static final String SERIALIZED_NAME_SKIP_DIFF_CHECK = "skip_diff_check";
+  @SerializedName(SERIALIZED_NAME_SKIP_DIFF_CHECK)
+  private Boolean skipDiffCheck = false;
 
   public static final String SERIALIZED_NAME_ENABLE_LARGE_METADATA_VALIDATION = "enable_large_metadata_validation";
   @SerializedName(SERIALIZED_NAME_ENABLE_LARGE_METADATA_VALIDATION)
@@ -225,24 +225,24 @@ public class ImportMetadataTMLRequest {
   }
 
 
-  public ImportMetadataTMLRequest skipCdwValidationForTables(Boolean skipCdwValidationForTables) {
+  public ImportMetadataTMLRequest skipDiffCheck(Boolean skipDiffCheck) {
     
-    this.skipCdwValidationForTables = skipCdwValidationForTables;
+    this.skipDiffCheck = skipDiffCheck;
     return this;
   }
 
    /**
-   * Boolean to indicate if the CDW validation for table imports should be skipped.
-   * @return skipCdwValidationForTables
+   * &lt;div&gt;Version: 10.6.0.cl or later &lt;/div&gt;  Boolean Flag to skip TML diff check before processing object TMLs.
+   * @return skipDiffCheck
   **/
   @javax.annotation.Nullable
-  public Boolean getSkipCdwValidationForTables() {
-    return skipCdwValidationForTables;
+  public Boolean getSkipDiffCheck() {
+    return skipDiffCheck;
   }
 
 
-  public void setSkipCdwValidationForTables(Boolean skipCdwValidationForTables) {
-    this.skipCdwValidationForTables = skipCdwValidationForTables;
+  public void setSkipDiffCheck(Boolean skipDiffCheck) {
+    this.skipDiffCheck = skipDiffCheck;
   }
 
 
@@ -253,7 +253,7 @@ public class ImportMetadataTMLRequest {
   }
 
    /**
-   * &lt;div&gt;Version: 10.5.0.cl or later &lt;/div&gt;  Boolean to indicate if the large metadata validation should be enabled.
+   * &lt;div&gt;Version: 10.5.0.cl or later &lt;/div&gt;  Boolean to indicate if the large metadata validation should be enabled. Set to &#x60;true&#x60; if the database contains multiple thousands of tables.
    * @return enableLargeMetadataValidation
   **/
   @javax.annotation.Nullable
@@ -281,7 +281,7 @@ public class ImportMetadataTMLRequest {
         Objects.equals(this.importPolicy, importMetadataTMLRequest.importPolicy) &&
         Objects.equals(this.createNew, importMetadataTMLRequest.createNew) &&
         Objects.equals(this.allOrgsContext, importMetadataTMLRequest.allOrgsContext) &&
-        Objects.equals(this.skipCdwValidationForTables, importMetadataTMLRequest.skipCdwValidationForTables) &&
+        Objects.equals(this.skipDiffCheck, importMetadataTMLRequest.skipDiffCheck) &&
         Objects.equals(this.enableLargeMetadataValidation, importMetadataTMLRequest.enableLargeMetadataValidation);
   }
 
@@ -291,7 +291,7 @@ public class ImportMetadataTMLRequest {
 
   @Override
   public int hashCode() {
-    return Objects.hash(metadataTmls, importPolicy, createNew, allOrgsContext, skipCdwValidationForTables, enableLargeMetadataValidation);
+    return Objects.hash(metadataTmls, importPolicy, createNew, allOrgsContext, skipDiffCheck, enableLargeMetadataValidation);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -309,7 +309,7 @@ public class ImportMetadataTMLRequest {
     sb.append("    importPolicy: ").append(toIndentedString(importPolicy)).append("\n");
     sb.append("    createNew: ").append(toIndentedString(createNew)).append("\n");
     sb.append("    allOrgsContext: ").append(toIndentedString(allOrgsContext)).append("\n");
-    sb.append("    skipCdwValidationForTables: ").append(toIndentedString(skipCdwValidationForTables)).append("\n");
+    sb.append("    skipDiffCheck: ").append(toIndentedString(skipDiffCheck)).append("\n");
     sb.append("    enableLargeMetadataValidation: ").append(toIndentedString(enableLargeMetadataValidation)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -337,7 +337,7 @@ public class ImportMetadataTMLRequest {
     openapiFields.add("import_policy");
     openapiFields.add("create_new");
     openapiFields.add("all_orgs_context");
-    openapiFields.add("skip_cdw_validation_for_tables");
+    openapiFields.add("skip_diff_check");
     openapiFields.add("enable_large_metadata_validation");
 
     // a set of required properties/fields (JSON key names)

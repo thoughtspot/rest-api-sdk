@@ -11,8 +11,8 @@
 |**importPolicy** | [**ImportPolicyEnum**](#ImportPolicyEnum) | Specifies the import policy for the TML import. |  [optional] |
 |**createNew** | **Boolean** | If selected, creates TML objects with new GUIDs. |  [optional] |
 |**allOrgsContext** | **Boolean** | If import is happening from all orgs context. |  [optional] |
-|**skipCdwValidationForTables** | **Boolean** | Boolean to indicate if the CDW validation for table imports should be skipped. |  [optional] |
-|**enableLargeMetadataValidation** | **Boolean** | &lt;div&gt;Version: 10.5.0.cl or later &lt;/div&gt;  Boolean to indicate if the large metadata validation should be enabled. |  [optional] |
+|**skipDiffCheck** | **Boolean** | &lt;div&gt;Version: 10.6.0.cl or later &lt;/div&gt;  Boolean Flag to skip TML diff check before processing object TMLs. |  [optional] |
+|**enableLargeMetadataValidation** | **Boolean** | &lt;div&gt;Version: 10.5.0.cl or later &lt;/div&gt;  Boolean to indicate if the large metadata validation should be enabled. Set to &#x60;true&#x60; if the database contains multiple thousands of tables. |  [optional] |
 
 
 

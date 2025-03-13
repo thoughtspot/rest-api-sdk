@@ -54,7 +54,7 @@ import org.thoughtspot.client.JSON;
 /**
  * Recipients of the scheduled job notifications. Add the GUID or name of the ThoughtSpot users or groups as recipients in the &#x60;principals&#x60; array. If a recipient is not a ThoughtSpot user, specify email address.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-01-31T09:43:29.263117728Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-02-21T11:03:56.651712770Z[Etc/UTC]")
 public class CreateScheduleRequestRecipientDetails {
   public static final String SERIALIZED_NAME_EMAILS = "emails";
   @SerializedName(SERIALIZED_NAME_EMAILS)

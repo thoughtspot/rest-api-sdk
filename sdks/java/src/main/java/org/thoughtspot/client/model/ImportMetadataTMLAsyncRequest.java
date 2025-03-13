@@ -53,7 +53,7 @@ import org.thoughtspot.client.JSON;
 /**
  * ImportMetadataTMLAsyncRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-01-31T09:43:29.263117728Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-02-21T11:03:56.651712770Z[Etc/UTC]")
 public class ImportMetadataTMLAsyncRequest {
   public static final String SERIALIZED_NAME_METADATA_TMLS = "metadata_tmls";
   @SerializedName(SERIALIZED_NAME_METADATA_TMLS)
@@ -66,10 +66,6 @@ public class ImportMetadataTMLAsyncRequest {
   public static final String SERIALIZED_NAME_ALL_ORGS_CONTEXT = "all_orgs_context";
   @SerializedName(SERIALIZED_NAME_ALL_ORGS_CONTEXT)
   private Boolean allOrgsContext = false;
-
-  public static final String SERIALIZED_NAME_SKIP_CDW_VALIDATION_FOR_TABLES = "skip_cdw_validation_for_tables";
-  @SerializedName(SERIALIZED_NAME_SKIP_CDW_VALIDATION_FOR_TABLES)
-  private Boolean skipCdwValidationForTables = false;
 
   /**
    * &lt;div&gt;Version: 10.5.0.cl or later &lt;/div&gt;  Policy to be followed while importing the TML. Valid values are [PARTIAL_OBJECT, PARTIAL, VALIDATE_ONLY, ALL_OR_NONE]
@@ -125,6 +121,10 @@ public class ImportMetadataTMLAsyncRequest {
   public static final String SERIALIZED_NAME_IMPORT_POLICY = "import_policy";
   @SerializedName(SERIALIZED_NAME_IMPORT_POLICY)
   private ImportPolicyEnum importPolicy = ImportPolicyEnum.PARTIAL_OBJECT;
+
+  public static final String SERIALIZED_NAME_SKIP_DIFF_CHECK = "skip_diff_check";
+  @SerializedName(SERIALIZED_NAME_SKIP_DIFF_CHECK)
+  private Boolean skipDiffCheck = false;
 
   public static final String SERIALIZED_NAME_ENABLE_LARGE_METADATA_VALIDATION = "enable_large_metadata_validation";
   @SerializedName(SERIALIZED_NAME_ENABLE_LARGE_METADATA_VALIDATION)
@@ -204,27 +204,6 @@ public class ImportMetadataTMLAsyncRequest {
   }
 
 
-  public ImportMetadataTMLAsyncRequest skipCdwValidationForTables(Boolean skipCdwValidationForTables) {
-    
-    this.skipCdwValidationForTables = skipCdwValidationForTables;
-    return this;
-  }
-
-   /**
-   * Boolean to indicate if the CDW validation for table imports should be skipped.
-   * @return skipCdwValidationForTables
-  **/
-  @javax.annotation.Nullable
-  public Boolean getSkipCdwValidationForTables() {
-    return skipCdwValidationForTables;
-  }
-
-
-  public void setSkipCdwValidationForTables(Boolean skipCdwValidationForTables) {
-    this.skipCdwValidationForTables = skipCdwValidationForTables;
-  }
-
-
   public ImportMetadataTMLAsyncRequest importPolicy(ImportPolicyEnum importPolicy) {
     
     this.importPolicy = importPolicy;
@@ -246,6 +225,27 @@ public class ImportMetadataTMLAsyncRequest {
   }
 
 
+  public ImportMetadataTMLAsyncRequest skipDiffCheck(Boolean skipDiffCheck) {
+    
+    this.skipDiffCheck = skipDiffCheck;
+    return this;
+  }
+
+   /**
+   * &lt;div&gt;Version: 10.6.0.cl or later &lt;/div&gt;  Boolean Flag to skip TML diff check before processing object TMLs.
+   * @return skipDiffCheck
+  **/
+  @javax.annotation.Nullable
+  public Boolean getSkipDiffCheck() {
+    return skipDiffCheck;
+  }
+
+
+  public void setSkipDiffCheck(Boolean skipDiffCheck) {
+    this.skipDiffCheck = skipDiffCheck;
+  }
+
+
   public ImportMetadataTMLAsyncRequest enableLargeMetadataValidation(Boolean enableLargeMetadataValidation) {
     
     this.enableLargeMetadataValidation = enableLargeMetadataValidation;
@@ -253,7 +253,7 @@ public class ImportMetadataTMLAsyncRequest {
   }
 
    /**
-   * &lt;div&gt;Version: 10.5.0.cl or later &lt;/div&gt;  Boolean to indicate if the large metadata validation should be enabled.
+   * &lt;div&gt;Version: 10.5.0.cl or later &lt;/div&gt;  Boolean to indicate if the large metadata validation should be enabled. Set to &#x60;true&#x60; if the database contains multiple thousands of tables.
    * @return enableLargeMetadataValidation
   **/
   @javax.annotation.Nullable
@@ -280,8 +280,8 @@ public class ImportMetadataTMLAsyncRequest {
     return Objects.equals(this.metadataTmls, importMetadataTMLAsyncRequest.metadataTmls) &&
         Objects.equals(this.createNew, importMetadataTMLAsyncRequest.createNew) &&
         Objects.equals(this.allOrgsContext, importMetadataTMLAsyncRequest.allOrgsContext) &&
-        Objects.equals(this.skipCdwValidationForTables, importMetadataTMLAsyncRequest.skipCdwValidationForTables) &&
         Objects.equals(this.importPolicy, importMetadataTMLAsyncRequest.importPolicy) &&
+        Objects.equals(this.skipDiffCheck, importMetadataTMLAsyncRequest.skipDiffCheck) &&
         Objects.equals(this.enableLargeMetadataValidation, importMetadataTMLAsyncRequest.enableLargeMetadataValidation);
   }
 
@@ -291,7 +291,7 @@ public class ImportMetadataTMLAsyncRequest {
 
   @Override
   public int hashCode() {
-    return Objects.hash(metadataTmls, createNew, allOrgsContext, skipCdwValidationForTables, importPolicy, enableLargeMetadataValidation);
+    return Objects.hash(metadataTmls, createNew, allOrgsContext, importPolicy, skipDiffCheck, enableLargeMetadataValidation);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -308,8 +308,8 @@ public class ImportMetadataTMLAsyncRequest {
     sb.append("    metadataTmls: ").append(toIndentedString(metadataTmls)).append("\n");
     sb.append("    createNew: ").append(toIndentedString(createNew)).append("\n");
     sb.append("    allOrgsContext: ").append(toIndentedString(allOrgsContext)).append("\n");
-    sb.append("    skipCdwValidationForTables: ").append(toIndentedString(skipCdwValidationForTables)).append("\n");
     sb.append("    importPolicy: ").append(toIndentedString(importPolicy)).append("\n");
+    sb.append("    skipDiffCheck: ").append(toIndentedString(skipDiffCheck)).append("\n");
     sb.append("    enableLargeMetadataValidation: ").append(toIndentedString(enableLargeMetadataValidation)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -336,8 +336,8 @@ public class ImportMetadataTMLAsyncRequest {
     openapiFields.add("metadata_tmls");
     openapiFields.add("create_new");
     openapiFields.add("all_orgs_context");
-    openapiFields.add("skip_cdw_validation_for_tables");
     openapiFields.add("import_policy");
+    openapiFields.add("skip_diff_check");
     openapiFields.add("enable_large_metadata_validation");
 
     // a set of required properties/fields (JSON key names)

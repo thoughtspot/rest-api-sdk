@@ -21,6 +21,7 @@ import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import org.thoughtspot.client.model.ExportAnswerReportRequestRegionalSettings;
 import org.thoughtspot.client.model.ExportLiveboardReportRequestPdfOptions;
 import org.thoughtspot.client.model.ExportLiveboardReportRequestPngOptions;
 import org.junit.jupiter.api.Disabled;
@@ -111,6 +112,14 @@ public class ExportLiveboardReportRequestTest {
     @Test
     public void runtimeParamOverrideTest() {
         // TODO: test runtimeParamOverride
+    }
+
+    /**
+     * Test the property 'regionalSettings'
+     */
+    @Test
+    public void regionalSettingsTest() {
+        // TODO: test regionalSettings
     }
 
 }

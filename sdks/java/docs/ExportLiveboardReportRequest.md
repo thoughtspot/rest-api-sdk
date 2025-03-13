@@ -16,6 +16,7 @@
 |**pdfOptions** | [**ExportLiveboardReportRequestPdfOptions**](ExportLiveboardReportRequestPdfOptions.md) |  |  [optional] |
 |**pngOptions** | [**ExportLiveboardReportRequestPngOptions**](ExportLiveboardReportRequestPngOptions.md) |  |  [optional] |
 |**runtimeParamOverride** | **Object** | JSON object for setting values of parameters at runtime. For example, &lt;code&gt; {\&quot;param1\&quot;: \&quot;Double List Param\&quot;, \&quot;paramVal1\&quot;: 0.5}&lt;/code&gt;. You can add multiple keys by incrementing the number at the end, for example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters). |  [optional] |
+|**regionalSettings** | [**ExportAnswerReportRequestRegionalSettings**](ExportAnswerReportRequestRegionalSettings.md) |  |  [optional] |
 
 
 
@@ -23,9 +24,7 @@
 
 | Name | Value |
 |---- | -----|
-| CSV | &quot;CSV&quot; |
 | PDF | &quot;PDF&quot; |
-| XLSX | &quot;XLSX&quot; |
 | PNG | &quot;PNG&quot; |
 
 

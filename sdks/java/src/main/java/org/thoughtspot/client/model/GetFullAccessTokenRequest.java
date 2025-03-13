@@ -24,7 +24,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
-import org.thoughtspot.client.model.GetObjectAccessTokenRequestUserParameters;
+import org.thoughtspot.client.model.GetFullAccessTokenRequestUserParameters;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -54,7 +54,7 @@ import org.thoughtspot.client.JSON;
 /**
  * GetFullAccessTokenRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-01-31T09:43:29.263117728Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-02-21T11:03:56.651712770Z[Etc/UTC]")
 public class GetFullAccessTokenRequest {
   public static final String SERIALIZED_NAME_USERNAME = "username";
   @SerializedName(SERIALIZED_NAME_USERNAME)
@@ -94,7 +94,7 @@ public class GetFullAccessTokenRequest {
 
   public static final String SERIALIZED_NAME_USER_PARAMETERS = "user_parameters";
   @SerializedName(SERIALIZED_NAME_USER_PARAMETERS)
-  private GetObjectAccessTokenRequestUserParameters userParameters;
+  private GetFullAccessTokenRequestUserParameters userParameters;
 
   public GetFullAccessTokenRequest() {
   }
@@ -296,7 +296,7 @@ public class GetFullAccessTokenRequest {
   }
 
 
-  public GetFullAccessTokenRequest userParameters(GetObjectAccessTokenRequestUserParameters userParameters) {
+  public GetFullAccessTokenRequest userParameters(GetFullAccessTokenRequestUserParameters userParameters) {
     
     this.userParameters = userParameters;
     return this;
@@ -307,12 +307,12 @@ public class GetFullAccessTokenRequest {
    * @return userParameters
   **/
   @javax.annotation.Nullable
-  public GetObjectAccessTokenRequestUserParameters getUserParameters() {
+  public GetFullAccessTokenRequestUserParameters getUserParameters() {
     return userParameters;
   }
 
 
-  public void setUserParameters(GetObjectAccessTokenRequestUserParameters userParameters) {
+  public void setUserParameters(GetFullAccessTokenRequestUserParameters userParameters) {
     this.userParameters = userParameters;
   }
 
@@ -455,7 +455,7 @@ public class GetFullAccessTokenRequest {
       }
       // validate the optional field `user_parameters`
       if (jsonObj.get("user_parameters") != null && !jsonObj.get("user_parameters").isJsonNull()) {
-        GetObjectAccessTokenRequestUserParameters.validateJsonObject(jsonObj.getAsJsonObject("user_parameters"));
+        GetFullAccessTokenRequestUserParameters.validateJsonObject(jsonObj.getAsJsonObject("user_parameters"));
       }
   }
 

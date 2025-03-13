@@ -65,19 +65,19 @@ public class ImportMetadataTMLAsyncRequestTest {
     }
 
     /**
-     * Test the property 'skipCdwValidationForTables'
-     */
-    @Test
-    public void skipCdwValidationForTablesTest() {
-        // TODO: test skipCdwValidationForTables
-    }
-
-    /**
      * Test the property 'importPolicy'
      */
     @Test
     public void importPolicyTest() {
         // TODO: test importPolicy
+    }
+
+    /**
+     * Test the property 'skipDiffCheck'
+     */
+    @Test
+    public void skipDiffCheckTest() {
+        // TODO: test skipDiffCheck
     }
 
     /**

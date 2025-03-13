@@ -51,7 +51,7 @@ import org.thoughtspot.client.JSON;
 /**
  * ShareMetadataTypeInput
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-01-31T09:43:29.263117728Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-02-21T11:03:56.651712770Z[Etc/UTC]")
 public class ShareMetadataTypeInput {
   /**
    *   Type of metadata.     Type of metadata. Required if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.
@@ -64,7 +64,9 @@ public class ShareMetadataTypeInput {
     
     LOGICAL_TABLE("LOGICAL_TABLE"),
     
-    LOGICAL_COLUMN("LOGICAL_COLUMN");
+    LOGICAL_COLUMN("LOGICAL_COLUMN"),
+    
+    CONNECTION("CONNECTION");
 
     private String value;
 

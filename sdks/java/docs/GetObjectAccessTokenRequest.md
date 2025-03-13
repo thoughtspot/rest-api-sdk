@@ -17,7 +17,7 @@
 |**displayName** | **String** | Display name of the user. Specify this attribute when creating a new user (just-in-time (JIT) provisioning). |  [optional] |
 |**autoCreate** | **Boolean** |    Creates a new user if the specified username does not exist in ThoughtSpot. To provision a user just-in-time (JIT), set this attribute to true.      Note: For JIT provisioning of a user, the secret_key is required.  |  [optional] |
 |**groupIdentifiers** | **List&lt;String&gt;** | Unique ID or name of the groups to which you want to assign the new user. You can specify this attribute to dynamically assign privileges during just-in-time (JIT) provisioning. |  [optional] |
-|**userParameters** | [**GetObjectAccessTokenRequestUserParameters**](GetObjectAccessTokenRequestUserParameters.md) |  |  [optional] |
+|**userParameters** | [**GetFullAccessTokenRequestUserParameters**](GetFullAccessTokenRequestUserParameters.md) |  |  [optional] |
 
 
 

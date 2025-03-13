@@ -21,6 +21,7 @@ import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import org.openapitools.jackson.nullable.JsonNullable;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -61,6 +62,14 @@ public class CreateRoleRequestTest {
     @Test
     public void privilegesTest() {
         // TODO: test privileges
+    }
+
+    /**
+     * Test the property 'readOnly'
+     */
+    @Test
+    public void readOnlyTest() {
+        // TODO: test readOnly
     }
 
 }

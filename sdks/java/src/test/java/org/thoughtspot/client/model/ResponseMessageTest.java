@@ -78,4 +78,12 @@ public class ResponseMessageTest {
         // TODO: test tokens
     }
 
+    /**
+     * Test the property 'displayTokens'
+     */
+    @Test
+    public void displayTokensTest() {
+        // TODO: test displayTokens
+    }
+
 }

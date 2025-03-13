@@ -50,7 +50,7 @@ import org.thoughtspot.client.JSON;
 /**
  * SingleAnswerRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-01-31T09:43:29.263117728Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-02-21T11:03:56.651712770Z[Etc/UTC]")
 public class SingleAnswerRequest {
   public static final String SERIALIZED_NAME_QUERY = "query";
   @SerializedName(SERIALIZED_NAME_QUERY)
@@ -70,7 +70,7 @@ public class SingleAnswerRequest {
   }
 
    /**
-   * User natural language query.
+   * A natural language query string to generate the Answer.
    * @return query
   **/
   @javax.annotation.Nonnull
@@ -91,7 +91,7 @@ public class SingleAnswerRequest {
   }
 
    /**
-   * Data model id to answer the query on.
+   * ID of the metadata object, such as a Worksheet or Model, to use as a data source for the query.
    * @return metadataIdentifier
   **/
   @javax.annotation.Nonnull

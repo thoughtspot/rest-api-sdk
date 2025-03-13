@@ -23,6 +23,7 @@ import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import org.thoughtspot.client.model.ExportAnswerReportRequestRegionalSettings;
 import org.thoughtspot.client.model.ExportLiveboardReportRequestPdfOptions;
 import org.thoughtspot.client.model.ExportLiveboardReportRequestPngOptions;
 
@@ -54,7 +55,7 @@ import org.thoughtspot.client.JSON;
 /**
  * ExportLiveboardReportRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-01-31T09:43:29.263117728Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-02-21T11:03:56.651712770Z[Etc/UTC]")
 public class ExportLiveboardReportRequest {
   public static final String SERIALIZED_NAME_METADATA_IDENTIFIER = "metadata_identifier";
   @SerializedName(SERIALIZED_NAME_METADATA_IDENTIFIER)
@@ -73,11 +74,7 @@ public class ExportLiveboardReportRequest {
    */
   @JsonAdapter(FileFormatEnum.Adapter.class)
   public enum FileFormatEnum {
-    CSV("CSV"),
-    
     PDF("PDF"),
-    
-    XLSX("XLSX"),
     
     PNG("PNG");
 
@@ -121,7 +118,7 @@ public class ExportLiveboardReportRequest {
 
   public static final String SERIALIZED_NAME_FILE_FORMAT = "file_format";
   @SerializedName(SERIALIZED_NAME_FILE_FORMAT)
-  private FileFormatEnum fileFormat = FileFormatEnum.CSV;
+  private FileFormatEnum fileFormat = FileFormatEnum.PDF;
 
   public static final String SERIALIZED_NAME_RUNTIME_FILTER = "runtime_filter";
   @SerializedName(SERIALIZED_NAME_RUNTIME_FILTER)
@@ -142,6 +139,10 @@ public class ExportLiveboardReportRequest {
   public static final String SERIALIZED_NAME_RUNTIME_PARAM_OVERRIDE = "runtime_param_override";
   @SerializedName(SERIALIZED_NAME_RUNTIME_PARAM_OVERRIDE)
   private Object runtimeParamOverride;
+
+  public static final String SERIALIZED_NAME_REGIONAL_SETTINGS = "regional_settings";
+  @SerializedName(SERIALIZED_NAME_REGIONAL_SETTINGS)
+  private ExportAnswerReportRequestRegionalSettings regionalSettings;
 
   public ExportLiveboardReportRequest() {
   }
@@ -343,6 +344,27 @@ public class ExportLiveboardReportRequest {
   }
 
 
+  public ExportLiveboardReportRequest regionalSettings(ExportAnswerReportRequestRegionalSettings regionalSettings) {
+    
+    this.regionalSettings = regionalSettings;
+    return this;
+  }
+
+   /**
+   * Get regionalSettings
+   * @return regionalSettings
+  **/
+  @javax.annotation.Nullable
+  public ExportAnswerReportRequestRegionalSettings getRegionalSettings() {
+    return regionalSettings;
+  }
+
+
+  public void setRegionalSettings(ExportAnswerReportRequestRegionalSettings regionalSettings) {
+    this.regionalSettings = regionalSettings;
+  }
+
+
 
   @Override
   public boolean equals(Object o) {
@@ -361,12 +383,13 @@ public class ExportLiveboardReportRequest {
         Objects.equals(this.runtimeSort, exportLiveboardReportRequest.runtimeSort) &&
         Objects.equals(this.pdfOptions, exportLiveboardReportRequest.pdfOptions) &&
         Objects.equals(this.pngOptions, exportLiveboardReportRequest.pngOptions) &&
-        Objects.equals(this.runtimeParamOverride, exportLiveboardReportRequest.runtimeParamOverride);
+        Objects.equals(this.runtimeParamOverride, exportLiveboardReportRequest.runtimeParamOverride) &&
+        Objects.equals(this.regionalSettings, exportLiveboardReportRequest.regionalSettings);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(metadataIdentifier, visualizationIdentifiers, transientContent, fileFormat, runtimeFilter, runtimeSort, pdfOptions, pngOptions, runtimeParamOverride);
+    return Objects.hash(metadataIdentifier, visualizationIdentifiers, transientContent, fileFormat, runtimeFilter, runtimeSort, pdfOptions, pngOptions, runtimeParamOverride, regionalSettings);
   }
 
   @Override
@@ -382,6 +405,7 @@ public class ExportLiveboardReportRequest {
     sb.append("    pdfOptions: ").append(toIndentedString(pdfOptions)).append("\n");
     sb.append("    pngOptions: ").append(toIndentedString(pngOptions)).append("\n");
     sb.append("    runtimeParamOverride: ").append(toIndentedString(runtimeParamOverride)).append("\n");
+    sb.append("    regionalSettings: ").append(toIndentedString(regionalSettings)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -413,6 +437,7 @@ public class ExportLiveboardReportRequest {
     openapiFields.add("pdf_options");
     openapiFields.add("png_options");
     openapiFields.add("runtime_param_override");
+    openapiFields.add("regional_settings");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -466,6 +491,10 @@ public class ExportLiveboardReportRequest {
       // validate the optional field `png_options`
       if (jsonObj.get("png_options") != null && !jsonObj.get("png_options").isJsonNull()) {
         ExportLiveboardReportRequestPngOptions.validateJsonObject(jsonObj.getAsJsonObject("png_options"));
+      }
+      // validate the optional field `regional_settings`
+      if (jsonObj.get("regional_settings") != null && !jsonObj.get("regional_settings").isJsonNull()) {
+        ExportAnswerReportRequestRegionalSettings.validateJsonObject(jsonObj.getAsJsonObject("regional_settings"));
       }
   }
 

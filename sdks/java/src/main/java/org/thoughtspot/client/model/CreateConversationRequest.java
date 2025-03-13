@@ -50,7 +50,7 @@ import org.thoughtspot.client.JSON;
 /**
  * CreateConversationRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-01-31T09:43:29.263117728Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-02-21T11:03:56.651712770Z[Etc/UTC]")
 public class CreateConversationRequest {
   public static final String SERIALIZED_NAME_METADATA_IDENTIFIER = "metadata_identifier";
   @SerializedName(SERIALIZED_NAME_METADATA_IDENTIFIER)
@@ -70,7 +70,7 @@ public class CreateConversationRequest {
   }
 
    /**
-   * Data model id to start the conversation on.
+   * ID of the metadata object, such as a Worksheet or Model, to use as a data source for the conversation.
    * @return metadataIdentifier
   **/
   @javax.annotation.Nonnull
@@ -91,7 +91,7 @@ public class CreateConversationRequest {
   }
 
    /**
-   * Tokens to start the conversation with.
+   * Token string to set the context for the conversation. For example,&#x60;[sales],[item type],[state]&#x60;.
    * @return tokens
   **/
   @javax.annotation.Nullable

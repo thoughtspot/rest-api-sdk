@@ -39,11 +39,11 @@ public class ExportMetadataTMLRequestExportOptionsTest {
     }
 
     /**
-     * Test the property 'exportWithReferenceObjectId'
+     * Test the property 'includeObjIdRef'
      */
     @Test
-    public void exportWithReferenceObjectIdTest() {
-        // TODO: test exportWithReferenceObjectId
+    public void includeObjIdRefTest() {
+        // TODO: test includeObjIdRef
     }
 
     /**
@@ -55,11 +55,11 @@ public class ExportMetadataTMLRequestExportOptionsTest {
     }
 
     /**
-     * Test the property 'includeObjectId'
+     * Test the property 'includeObjId'
      */
     @Test
-    public void includeObjectIdTest() {
-        // TODO: test includeObjectId
+    public void includeObjIdTest() {
+        // TODO: test includeObjId
     }
 
 }

@@ -47,11 +47,11 @@ public class MetadataListItemInputTest {
     }
 
     /**
-     * Test the property 'customIdentifier'
+     * Test the property 'objIdentifier'
      */
     @Test
-    public void customIdentifierTest() {
-        // TODO: test customIdentifier
+    public void objIdentifierTest() {
+        // TODO: test objIdentifier
     }
 
     /**

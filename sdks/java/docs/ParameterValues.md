@@ -9,7 +9,7 @@ Filter Rules to be applied on Objects.
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 |**name** | **String** | The name of the column to apply the filter on. |  |
-|**values** | **List&lt;String&gt;** | The values to filter on. Only single value is supported currently. |  |
+|**values** | [**List&lt;FilterRulesValuesInner&gt;**](FilterRulesValuesInner.md) | The values to filter on. Only single value is supported currently. |  |
 
 
 

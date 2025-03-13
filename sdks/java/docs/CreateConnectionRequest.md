@@ -51,6 +51,7 @@
 | GOOGLE_SHEETS | &quot;GOOGLE_SHEETS&quot; |
 | FALCON | &quot;FALCON&quot; |
 | FALCON_ONPREM | &quot;FALCON_ONPREM&quot; |
+| CLICKHOUSE | &quot;CLICKHOUSE&quot; |
 
 
 

@@ -55,7 +55,7 @@ import org.thoughtspot.client.JSON;
 /**
  * SearchCustomActionsRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-01-31T09:43:29.263117728Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-02-21T11:03:56.651712770Z[Etc/UTC]")
 public class SearchCustomActionsRequest {
   public static final String SERIALIZED_NAME_CUSTOM_ACTION_IDENTIFIER = "custom_action_identifier";
   @SerializedName(SERIALIZED_NAME_CUSTOM_ACTION_IDENTIFIER)

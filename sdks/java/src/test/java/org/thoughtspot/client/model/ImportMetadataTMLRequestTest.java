@@ -73,11 +73,11 @@ public class ImportMetadataTMLRequestTest {
     }
 
     /**
-     * Test the property 'skipCdwValidationForTables'
+     * Test the property 'skipDiffCheck'
      */
     @Test
-    public void skipCdwValidationForTablesTest() {
-        // TODO: test skipCdwValidationForTables
+    public void skipDiffCheckTest() {
+        // TODO: test skipDiffCheck
     }
 
     /**

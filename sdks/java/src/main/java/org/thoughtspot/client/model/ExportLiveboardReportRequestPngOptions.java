@@ -51,7 +51,7 @@ import org.thoughtspot.client.JSON;
 /**
  * Options for PNG export.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-01-31T09:43:29.263117728Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-02-21T11:03:56.651712770Z[Etc/UTC]")
 public class ExportLiveboardReportRequestPngOptions {
   public static final String SERIALIZED_NAME_INCLUDE_COVER_PAGE = "include_cover_page";
   @SerializedName(SERIALIZED_NAME_INCLUDE_COVER_PAGE)
@@ -60,6 +60,10 @@ public class ExportLiveboardReportRequestPngOptions {
   public static final String SERIALIZED_NAME_INCLUDE_FILTER_PAGE = "include_filter_page";
   @SerializedName(SERIALIZED_NAME_INCLUDE_FILTER_PAGE)
   private Boolean includeFilterPage = false;
+
+  public static final String SERIALIZED_NAME_PERSONALISED_VIEW_ID = "personalised_view_id";
+  @SerializedName(SERIALIZED_NAME_PERSONALISED_VIEW_ID)
+  private String personalisedViewId;
 
   public ExportLiveboardReportRequestPngOptions() {
   }
@@ -106,6 +110,27 @@ public class ExportLiveboardReportRequestPngOptions {
   }
 
 
+  public ExportLiveboardReportRequestPngOptions personalisedViewId(String personalisedViewId) {
+    
+    this.personalisedViewId = personalisedViewId;
+    return this;
+  }
+
+   /**
+   * Indicates personalised view of the Liveboard in case of png
+   * @return personalisedViewId
+  **/
+  @javax.annotation.Nullable
+  public String getPersonalisedViewId() {
+    return personalisedViewId;
+  }
+
+
+  public void setPersonalisedViewId(String personalisedViewId) {
+    this.personalisedViewId = personalisedViewId;
+  }
+
+
 
   @Override
   public boolean equals(Object o) {
@@ -117,7 +142,8 @@ public class ExportLiveboardReportRequestPngOptions {
     }
     ExportLiveboardReportRequestPngOptions exportLiveboardReportRequestPngOptions = (ExportLiveboardReportRequestPngOptions) o;
     return Objects.equals(this.includeCoverPage, exportLiveboardReportRequestPngOptions.includeCoverPage) &&
-        Objects.equals(this.includeFilterPage, exportLiveboardReportRequestPngOptions.includeFilterPage);
+        Objects.equals(this.includeFilterPage, exportLiveboardReportRequestPngOptions.includeFilterPage) &&
+        Objects.equals(this.personalisedViewId, exportLiveboardReportRequestPngOptions.personalisedViewId);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -126,7 +152,7 @@ public class ExportLiveboardReportRequestPngOptions {
 
   @Override
   public int hashCode() {
-    return Objects.hash(includeCoverPage, includeFilterPage);
+    return Objects.hash(includeCoverPage, includeFilterPage, personalisedViewId);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -142,6 +168,7 @@ public class ExportLiveboardReportRequestPngOptions {
     sb.append("class ExportLiveboardReportRequestPngOptions {\n");
     sb.append("    includeCoverPage: ").append(toIndentedString(includeCoverPage)).append("\n");
     sb.append("    includeFilterPage: ").append(toIndentedString(includeFilterPage)).append("\n");
+    sb.append("    personalisedViewId: ").append(toIndentedString(personalisedViewId)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -166,6 +193,7 @@ public class ExportLiveboardReportRequestPngOptions {
     openapiFields = new HashSet<String>();
     openapiFields.add("include_cover_page");
     openapiFields.add("include_filter_page");
+    openapiFields.add("personalised_view_id");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -190,6 +218,9 @@ public class ExportLiveboardReportRequestPngOptions {
         if (!ExportLiveboardReportRequestPngOptions.openapiFields.contains(entry.getKey())) {
           throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `ExportLiveboardReportRequestPngOptions` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
         }
+      }
+      if ((jsonObj.get("personalised_view_id") != null && !jsonObj.get("personalised_view_id").isJsonNull()) && !jsonObj.get("personalised_view_id").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `personalised_view_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("personalised_view_id").toString()));
       }
   }
 

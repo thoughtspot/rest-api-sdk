@@ -51,7 +51,7 @@ import org.thoughtspot.client.JSON;
 /**
  * ScheduleHistoryRunsOptionsInput
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-01-31T09:43:29.263117728Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-02-21T11:03:56.651712770Z[Etc/UTC]")
 public class ScheduleHistoryRunsOptionsInput {
   public static final String SERIALIZED_NAME_INCLUDE_HISTORY_RUNS = "include_history_runs";
   @SerializedName(SERIALIZED_NAME_INCLUDE_HISTORY_RUNS)

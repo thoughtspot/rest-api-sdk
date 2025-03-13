@@ -52,7 +52,7 @@ import org.thoughtspot.client.JSON;
 /**
  * Options to specify the details of a Liveboard.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-01-31T09:43:29.263117728Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-02-21T11:03:56.651712770Z[Etc/UTC]")
 public class UpdateScheduleRequestLiveboardOptions {
   public static final String SERIALIZED_NAME_VISUALIZATION_IDENTIFIERS = "visualization_identifiers";
   @SerializedName(SERIALIZED_NAME_VISUALIZATION_IDENTIFIERS)
