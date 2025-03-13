@@ -55,7 +55,7 @@ import org.thoughtspot.client.JSON;
 /**
  * UserGroupResponse
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-12-20T05:08:06.792465843Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T16:12:37.188804+05:30[Asia/Kolkata]")
 public class UserGroupResponse {
   public static final String SERIALIZED_NAME_AUTHOR_ID = "author_id";
   @SerializedName(SERIALIZED_NAME_AUTHOR_ID)

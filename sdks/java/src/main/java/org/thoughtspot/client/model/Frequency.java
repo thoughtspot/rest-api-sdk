@@ -51,7 +51,7 @@ import org.thoughtspot.client.JSON;
 /**
  * Configuration of schedule with cron expression
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-12-20T05:08:06.792465843Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T16:12:37.188804+05:30[Asia/Kolkata]")
 public class Frequency {
   public static final String SERIALIZED_NAME_CRON_EXPRESSION = "cron_expression";
   @SerializedName(SERIALIZED_NAME_CRON_EXPRESSION)

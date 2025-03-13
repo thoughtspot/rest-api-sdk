@@ -55,7 +55,7 @@ import org.thoughtspot.client.JSON;
 /**
  * JWT user options to create a JWT token given the payload.   *Deprecated in 9.12.0.cl. Use user_parameters instead.*
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-12-20T05:08:06.792465843Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T16:12:37.188804+05:30[Asia/Kolkata]")
 public class JWTUserOptions {
   public static final String SERIALIZED_NAME_PARAMETERS = "parameters";
   @SerializedName(SERIALIZED_NAME_PARAMETERS)

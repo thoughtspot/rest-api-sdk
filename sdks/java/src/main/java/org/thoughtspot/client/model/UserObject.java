@@ -51,17 +51,13 @@ import org.thoughtspot.client.JSON;
 /**
  * Objects to apply the User_Object.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-12-20T05:08:06.792465843Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T16:12:37.188804+05:30[Asia/Kolkata]")
 public class UserObject {
   /**
-   *   Type of object.     Required if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.
+   *   Type of object.     Required if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.   Specify the object type as &#x60;LOGICAL_TABLE&#x60;.  The &#x60;LIVEBOARD&#x60; and &#x60;ANSWER&#x60; object types are not supported.
    */
   @JsonAdapter(TypeEnum.Adapter.class)
   public enum TypeEnum {
-    LIVEBOARD("LIVEBOARD"),
-    
-    ANSWER("ANSWER"),
-    
     LOGICAL_TABLE("LOGICAL_TABLE");
 
     private String value;
@@ -120,7 +116,7 @@ public class UserObject {
   }
 
    /**
-   *   Type of object.     Required if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.
+   *   Type of object.     Required if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.   Specify the object type as &#x60;LOGICAL_TABLE&#x60;.  The &#x60;LIVEBOARD&#x60; and &#x60;ANSWER&#x60; object types are not supported.
    * @return type
   **/
   @javax.annotation.Nullable

@@ -51,7 +51,7 @@ import org.thoughtspot.client.JSON;
 /**
  * TokenValidationResponse
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-12-20T05:08:06.792465843Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T16:12:37.188804+05:30[Asia/Kolkata]")
 public class TokenValidationResponse {
   public static final String SERIALIZED_NAME_CREATION_TIME_IN_MILLIS = "creation_time_in_millis";
   @SerializedName(SERIALIZED_NAME_CREATION_TIME_IN_MILLIS)

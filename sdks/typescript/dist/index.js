@@ -34357,9 +34357,9 @@ var PromiseVersionControlApi = class {
 };
 
 // utils/config.ts
-var createBearerAuthenticationConfig = (url, paramOrTokenProvider) => {
+var createBearerAuthenticationConfig = (thoughtSpotHost, paramOrTokenProvider) => {
   const serverConfig = new ServerConfiguration(
-    url,
+    thoughtSpotHost,
     {}
   );
   const config = createConfiguration({
@@ -34391,6 +34391,13 @@ var createBearerAuthenticationConfig = (url, paramOrTokenProvider) => {
     baseServer: serverConfig
   });
   return globalConfig;
+};
+var createBasicConfig = (thoughtSpotHost) => {
+  const thoughtSpotServer = new ServerConfiguration(thoughtSpotHost, {});
+  const basicClientConfig = createConfiguration({
+    baseServer: thoughtSpotServer
+  });
+  return basicClientConfig;
 };
 export {
   PromiseAIApi as AIApi,
@@ -34675,6 +34682,7 @@ export {
   ValidateTokenRequest,
   PromiseVersionControlApi as VersionControlApi,
   configureAuthMethods,
+  createBasicConfig,
   createBearerAuthenticationConfig,
   createConfiguration,
   server1,

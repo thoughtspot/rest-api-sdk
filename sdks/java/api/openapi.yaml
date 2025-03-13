@@ -1865,6 +1865,8 @@ paths:
 
         You can define Attribute-Based Access Control (ABAC) parameters to assign security entitlements to users during session creation. For more information, see [ABAC via token](https://developers.thoughtspot.com/docs/abac-user-parameters).
 
+         Specify the object type as `LOGICAL_TABLE`.  The `LIVEBOARD` and `ANSWER` object types are not supported.
+
         #### Important point to note
         All options in the token creation APIs changing the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, `auto_create:true` will create the user when the authentication token is created. Similarly, using `user_parameters` with `persist: true` persists security parameters on the user profile when the token is created and not during authentication.
 
@@ -1954,6 +1956,8 @@ paths:
 
         #### Important point to note
         All options in the token creation APIs changing the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, `auto_create:true` will create the user when the authentication token is created. Similarly, using `user_parameters` with `persist: true` persists security parameters on the user profile when the token is created and not during authentication.
+
+         Specify the object type as `LOGICAL_TABLE`.  The `LIVEBOARD` and `ANSWER` object types are not supported.
 
 
 
@@ -2194,6 +2198,8 @@ paths:
         ##### Attribute-Based Access Control (ABAC) with tokens
 
         To implement Attribute-Based Access Control (ABAC) and assign security entitlements to users during session creation, you can generate a token with custom filtering rules and Parameters in the `filter_rules` and `parameter_values` array respectively. These attributes can be configured to persist on a specific set of objects for user sessions initiated using the token. Once defined, the rules are added to the user's `access_control_properties` object, after which all sessions will use the persisted values.
+
+         Specify the object type as `LOGICAL_TABLE`.  The `LIVEBOARD` and `ANSWER` object types are not supported.
 
         For more information, see [ABAC via tokens Documentation](https://developers.thoughtspot.com/docs/api-authv2#_get_tokens_with_custom_rules_and_filter_conditions).
 
@@ -9331,8 +9337,7 @@ components:
           type: string
         type:
           enum:
-          - LIVEBOARD
-          - ANSWER
+          - LOGICAL_TABLE
           nullable: true
           type: string
       type: object
@@ -9388,10 +9393,10 @@ components:
         type:
           description: "  Type of object.\n  \n\nRequired if the name of the object\
             \ is set as the identifier. This attribute is optional when the object\
-            \ GUID is specified as the identifier."
+            \ GUID is specified as the identifier.\n\n Specify the object type as\
+            \ `LOGICAL_TABLE`.  The `LIVEBOARD` and `ANSWER` object types are not\
+            \ supported."
           enum:
-          - LIVEBOARD
-          - ANSWER
           - LOGICAL_TABLE
           nullable: true
           type: string
@@ -9670,10 +9675,10 @@ components:
         type:
           description: "  Type of object.\n  \n\nRequired if the name of the object\
             \ is set as the identifier. This attribute is optional when the object\
-            \ GUID is specified as the identifier."
+            \ GUID is specified as the identifier.\n\n Specify the object type as\
+            \ `LOGICAL_TABLE`.  The `LIVEBOARD` and `ANSWER` object types are not\
+            \ supported."
           enum:
-          - LIVEBOARD
-          - ANSWER
           - LOGICAL_TABLE
           nullable: true
           type: string
@@ -12787,7 +12792,7 @@ components:
           type: array
         objects:
           description: Objects on which the filter rules and parameters values should
-            be applied to
+            be applied to.
           items:
             $ref: '#/components/schemas/TokenAccessScopeObject'
           type: array

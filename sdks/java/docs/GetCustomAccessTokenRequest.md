@@ -15,7 +15,7 @@
 |**persistOption** | [**PersistOptionEnum**](#PersistOptionEnum) | Indicates whether the specified attributes should be persisted or not. |  |
 |**filterRules** | [**List&lt;FilterRules&gt;**](FilterRules.md) | Filter rules. |  [optional] |
 |**parameterValues** | [**List&lt;ParameterValues&gt;**](ParameterValues.md) | Parameter values. |  [optional] |
-|**objects** | [**List&lt;TokenAccessScopeObject&gt;**](TokenAccessScopeObject.md) | Objects on which the filter rules and parameters values should be applied to |  [optional] |
+|**objects** | [**List&lt;TokenAccessScopeObject&gt;**](TokenAccessScopeObject.md) | Objects on which the filter rules and parameters values should be applied to. |  [optional] |
 |**email** | **String** | (just-in-time (JIT) provisioning)Email address of the user. Specify this attribute when creating a new user. |  [optional] |
 |**displayName** | **String** | (just-in-time (JIT) provisioning) Indicates display name of the user. Specify this attribute when creating a new user. |  [optional] |
 |**groups** | [**List&lt;GroupObject&gt;**](GroupObject.md) | (just-in-time (JIT) provisioning) ID or name of the groups to which the newly created user belongs. Specify this attribute when creating a new user. |  [optional] |
