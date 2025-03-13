@@ -10445,7 +10445,10 @@
                       "nl-NL",
                       "it-IT",
                       "ru-RU",
-                      "en-IN"
+                      "en-IN",
+                      "de-CH",
+                      "en_NZ",
+                      "es-MX"
                     ]
                   },
                   "extended_properties": {
@@ -11314,7 +11317,10 @@
                       "nl-NL",
                       "it-IT",
                       "ru-RU",
-                      "en-IN"
+                      "en-IN",
+                      "de-CH",
+                      "en_NZ",
+                      "es-MX"
                     ]
                   },
                   "extended_properties": {
@@ -13905,7 +13911,10 @@
               "nl-NL",
               "it-IT",
               "ru-RU",
-              "en-IN"
+              "en-IN",
+              "de-CH",
+              "en_NZ",
+              "es-MX"
             ]
           },
           "number_format_locale": {
@@ -13932,7 +13941,10 @@
               "nl-NL",
               "it-IT",
               "ru-RU",
-              "en-IN"
+              "en-IN",
+              "de-CH",
+              "en_NZ",
+              "es-MX"
             ]
           },
           "date_format_locale": {
@@ -13959,7 +13971,10 @@
               "nl-NL",
               "it-IT",
               "ru-RU",
-              "en-IN"
+              "en-IN",
+              "de-CH",
+              "en_NZ",
+              "es-MX"
             ]
           }
         }
