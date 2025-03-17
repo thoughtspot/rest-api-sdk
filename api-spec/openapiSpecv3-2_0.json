@@ -10447,8 +10447,12 @@
                       "ru-RU",
                       "en-IN",
                       "de-CH",
-                      "en_NZ",
-                      "es-MX"
+                      "en-NZ",
+                      "es-MX",
+                      "en-AU",
+                      "zh-Hant",
+                      "ko-KR",
+                      "en-DE"
                     ]
                   },
                   "extended_properties": {
@@ -11319,8 +11323,12 @@
                       "ru-RU",
                       "en-IN",
                       "de-CH",
-                      "en_NZ",
-                      "es-MX"
+                      "en-NZ",
+                      "es-MX",
+                      "en-AU",
+                      "zh-Hant",
+                      "ko-KR",
+                      "en-DE"
                     ]
                   },
                   "extended_properties": {
@@ -13913,8 +13921,12 @@
               "ru-RU",
               "en-IN",
               "de-CH",
-              "en_NZ",
-              "es-MX"
+              "en-NZ",
+              "es-MX",
+              "en-AU",
+              "zh-Hant",
+              "ko-KR",
+              "en-DE"
             ]
           },
           "number_format_locale": {
@@ -13943,8 +13955,12 @@
               "ru-RU",
               "en-IN",
               "de-CH",
-              "en_NZ",
-              "es-MX"
+              "en-NZ",
+              "es-MX",
+              "en-AU",
+              "zh-Hant",
+              "ko-KR",
+              "en-DE"
             ]
           },
           "date_format_locale": {
@@ -13973,8 +13989,12 @@
               "ru-RU",
               "en-IN",
               "de-CH",
-              "en_NZ",
-              "es-MX"
+              "en-NZ",
+              "es-MX",
+              "en-AU",
+              "zh-Hant",
+              "ko-KR",
+              "en-DE"
             ]
           }
         }
