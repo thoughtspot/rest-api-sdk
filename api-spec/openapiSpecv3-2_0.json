@@ -16073,19 +16073,19 @@
           "include_obj_id_ref": {
             "type": "boolean",
             "default": false,
-            "description": "Boolean Flag to whether to export user_defined_id of referenced object. This will only be respected when UserDefinedId in TML is enabled.",
+            "description": "Boolean Flag to export Object ID of referenced object. This flag will work only after the Object ID feature has been enabled. Please contact support to enable the feature.",
             "nullable": true
           },
           "include_guid": {
             "type": "boolean",
             "default": true,
-            "description": "Boolean flag to whether to export guid of the object. This will only be respected when UserDefinedId in TML is enabled.",
+            "description": "Boolean flag to export guid of the object. This flag will work only after the Object ID feature has been enabled. Please contact support to enable the feature.",
             "nullable": true
           },
           "include_obj_id": {
             "type": "boolean",
             "default": false,
-            "description": "Boolean flag to whether to export user_defined_id of the object. This will only be respected when UserDefinedId in TML is enabled.",
+            "description": "Boolean flag to export Object ID of the object. This flag will work only after the Object ID feature has been enabled. Please contact support to enable the feature.",
             "nullable": true
           },
           "export_with_associated_feedbacks": {
