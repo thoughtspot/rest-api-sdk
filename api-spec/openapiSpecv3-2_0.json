@@ -15254,8 +15254,7 @@
           "type": {
             "type": "string",
             "enum": [
-              "LIVEBOARD",
-              "ANSWER"
+              "LOGICAL_TABLE"
             ],
             "nullable": true
           }
@@ -15308,8 +15307,6 @@
           "type": {
             "type": "string",
             "enum": [
-              "LIVEBOARD",
-              "ANSWER",
               "LOGICAL_TABLE"
             ],
             "description": "  Type of object.\n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.\n  \n\n Specify the object type as `LOGICAL_TABLE`.  The `LIVEBOARD` and `ANSWER` object types are not supported.",
@@ -15652,8 +15649,6 @@
           "type": {
             "type": "string",
             "enum": [
-              "LIVEBOARD",
-              "ANSWER",
               "LOGICAL_TABLE"
             ],
             "description": "  Type of object.\n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.\n  \n\n Specify the object type as `LOGICAL_TABLE`.  The `LIVEBOARD` and `ANSWER` object types are not supported.",
