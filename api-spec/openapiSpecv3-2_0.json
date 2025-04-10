@@ -70,6 +70,14 @@
       "description": "Roles for version 10.6.0.cl"
     },
     {
+      "name": "10.8.0.cl",
+      "id": "10.8.0.cl",
+      "tags": [
+        "10.8.0.cl"
+      ],
+      "description": "Roles for version 10.8.0.cl"
+    },
+    {
       "name": "9.9.0.cl",
       "id": "9.9.0.cl",
       "tags": [
@@ -78,12 +86,20 @@
       "description": "Roles for version 9.9.0.cl"
     },
     {
-      "name": "9.5.0.cl",
-      "id": "9.5.0.cl",
+      "name": "10.9.0.cl",
+      "id": "10.9.0.cl",
       "tags": [
-        "9.5.0.cl"
+        "10.9.0.cl"
       ],
-      "description": "Roles for version 9.5.0.cl"
+      "description": "Roles for version 10.9.0.cl"
+    },
+    {
+      "name": "10.10.0.cl",
+      "id": "10.10.0.cl",
+      "tags": [
+        "10.10.0.cl"
+      ],
+      "description": "Roles for version 10.10.0.cl"
     },
     {
       "name": "9.4.0.cl",
@@ -634,18 +650,6 @@
                       "RESET"
                     ]
                   },
-                  "reset_option": {
-                    "description": "Indicates whether the specified attributes should reset which field.",
-                    "type": "array",
-                    "items": {
-                      "type": "string",
-                      "enum": [
-                        "FILTER_RULES",
-                        "PARAMETERS",
-                        "GROUPS"
-                      ]
-                    }
-                  },
                   "filter_rules": {
                     "description": "Filter rules.",
                     "type": "array",
@@ -813,14 +817,6 @@
                     "items": {
                       "type": "string"
                     }
-                  },
-                  "user_parameters": {
-                    "description": "<div><span class=\"since-beta-tag\">Version: 9.10.5.cl or later</span><span class=\"since-beta-tag\">Deprecated: 10.4.0.cl and later</span></div>\n\nDefine attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters).",
-                    "allOf": [
-                      {
-                        "$ref": "#/components/schemas/User_Parameter_Options"
-                      }
-                    ]
                   }
                 },
                 "required": [
@@ -950,14 +946,6 @@
                     "items": {
                       "type": "string"
                     }
-                  },
-                  "user_parameters": {
-                    "description": "<div><span class=\"since-beta-tag\">Version: 9.10.5.cl or later</span><span class=\"since-beta-tag\">Deprecated: 10.4.0.cl and later</span></div>\n\nDefine attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters).",
-                    "allOf": [
-                      {
-                        "$ref": "#/components/schemas/User_Parameter_Options"
-                      }
-                    ]
                   }
                 },
                 "required": [
@@ -1321,6 +1309,259 @@
         }
       }
     },
+    "/api/rest/2.0/connection-configurations": {
+      "post": {
+        "operationId": "createConnectionConfiguration",
+        "description": " <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>",
+        "tags": [
+          "Connection Configurations",
+          "10.9.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "description": "Name of configuration",
+                    "type": "string"
+                  },
+                  "description": {
+                    "description": "Description of configuration",
+                    "type": "string"
+                  },
+                  "configuration": {
+                    "description": "Credentials for configuration",
+                    "type": "object"
+                  },
+                  "policy_configuration": {
+                    "description": "Policy details for the configuration",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/PolicyConfiguration"
+                      }
+                    ]
+                  },
+                  "connection_identifier": {
+                    "description": "ID of the datasource",
+                    "type": "string"
+                  },
+                  "authentication_type": {
+                    "description": "Authentication type for the configuration",
+                    "type": "string",
+                    "enum": [
+                      "OAUTH",
+                      "SERVICE_ACCOUNT",
+                      "IAM",
+                      "EXTOAUTH",
+                      "KEY_PAIR",
+                      "OAUTH_WITH_PKCE",
+                      "OAUTH_WITH_SERVICE_PRINCIPAL",
+                      "PERSONAL_ACCESS_TOKEN"
+                    ]
+                  },
+                  "state": {
+                    "description": "Oauth request identifier",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name",
+                  "configuration",
+                  "policy_configuration",
+                  "authentication_type"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Connection configuration successfully created.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateConnectionConfigurationResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/connection-configurations/{configuration_identifier}/update": {
+      "put": {
+        "operationId": "editConnectionConfiguration",
+        "description": "Edit the configuration for the connection <br/>  <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>",
+        "tags": [
+          "Connection Configurations",
+          "10.9.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "description": "Name of configuration",
+                    "type": "string"
+                  },
+                  "description": {
+                    "description": "Description of configuration",
+                    "type": "string"
+                  },
+                  "configuration": {
+                    "description": "Credentials for configuration",
+                    "type": "object"
+                  },
+                  "policy_configuration": {
+                    "description": "Policy details for the configuration",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/PolicyConfiguration"
+                      }
+                    ]
+                  },
+                  "connection_identifier": {
+                    "description": "ID of the datasource",
+                    "type": "string"
+                  },
+                  "authentication_type": {
+                    "description": "Authentication type for the configuration",
+                    "type": "string",
+                    "enum": [
+                      "OAUTH",
+                      "SERVICE_ACCOUNT",
+                      "IAM",
+                      "EXTOAUTH",
+                      "KEY_PAIR",
+                      "OAUTH_WITH_PKCE",
+                      "OAUTH_WITH_SERVICE_PRINCIPAL",
+                      "PERSONAL_ACCESS_TOKEN"
+                    ]
+                  },
+                  "state": {
+                    "description": "Oauth request identifier",
+                    "type": "string"
+                  },
+                  "disable": {
+                    "description": "Indicates whether the configuration enable/disable",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name",
+                  "configuration",
+                  "policy_configuration",
+                  "authentication_type"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "configuration_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique ID or name of the config."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Connection configuration successfully updated."
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/connection/create": {
       "post": {
         "operationId": "createConnection",
@@ -1461,7 +1702,7 @@
     "/api/rest/2.0/connection/delete": {
       "post": {
         "operationId": "deleteConnection",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nDeletes a connection object.\n\n**Note**: If a connection has dependent objects, make sure you remove its associations before the delete operation.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\n\n**Important**: This endpoint is deprecated and will be removed from ThoughtSpot in September 2025. ThoughtSpot strongly recommends using the\n[Delete Connection V2](#/http/api-endpoints/connections/delete-connection-v2) endpoint to delete your connection objects.  \n\n#### Usage guidelines\n\nDeletes a connection object.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.\n\n**Note**: If a connection has dependent objects, make sure you remove its associations before the delete operation.\n\n\n\n#### Endpoint URL\n",
         "deprecated": true,
         "tags": [
           "Connections",
@@ -1931,7 +2172,7 @@
     "/api/rest/2.0/connection/update": {
       "post": {
         "operationId": "updateConnection",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nUpdates a connection object.  \n\nRequires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.\n\nTo update a connection object, pass these parameters in your API request:\n\n1. GUID of the connection object.\n2. If you are updating tables or database schema of a connection object:\n   a. Add the updated JSON map of metadata with database, schema, and tables in `data_warehouse_config`.\n   b. Set `validate` to `true`.\n3. If you are updating a configuration attribute, connection name, or description, you can set `validate` to `false`.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\n**Important**: This endpoint is deprecated and will be removed from ThoughtSpot in September 2025. ThoughtSpot strongly recommends using the\n[Update connection V2](#/http/api-endpoints/connections/update-connection-v2) endpoint to update your connection objects.\n\n#### Usage guidelines\n\nUpdates a connection object.  \n\nRequires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.\n\nTo update a connection object, pass these parameters in your API request:\n\n1. GUID of the connection object.\n2. If you are updating tables or database schema of a connection object:\n   a. Add the updated JSON map of metadata with database, schema, and tables in `data_warehouse_config`.\n   b. Set `validate` to `true`.\n3. If you are updating a configuration attribute, connection name, or description, you can set `validate` to `false`.\n\n\n\n\n#### Endpoint URL\n",
         "deprecated": true,
         "tags": [
           "Connections",
@@ -2531,6 +2772,145 @@
         "responses": {
           "204": {
             "description": "Custom action updated successfully."
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/calendars": {
+      "post": {
+        "operationId": "createCalendar",
+        "description": "\nCreate a new custom calendar\n@param input Calendar configuration details\n@return CalendarResponse with created calendar details <br/>  <span class=\"since-beta-tag\">Version: 10.10.0.cl or later</span>\n\n# Calendar API Documentation\n\n## Overview\nThe `Calendar_createCalendar` API allows users to create custom calendars with various configurations. This document outlines the API design, usage, and comparison with other similar APIs in the system.\n\n## API Structure\n\n### GraphQL Schema\n```graphql\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Custom Calendars",
+          "10.10.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "description": "Name of the custom calendar",
+                    "type": "string"
+                  },
+                  "connection_identifier": {
+                    "description": "GUID of the data source",
+                    "type": "string"
+                  },
+                  "external_table": {
+                    "description": "String representing the external table name in JSON format, \nfor example:{ \"databaseName\": \"db1\", \"schemaName\": \"sc1\", \"tableName\": \"tb1\" }. The given table will be created if create_type is CREATE.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/ExternalTableInput"
+                      }
+                    ]
+                  },
+                  "create_type": {
+                    "description": "Type of create operation to perform",
+                    "type": "string",
+                    "enum": [
+                      "CREATE",
+                      "IMPORT_EXISTING_TABLE"
+                    ]
+                  },
+                  "start_date": {
+                    "description": "Start date for the calendar in MM/dd/yyyy format",
+                    "type": "string"
+                  },
+                  "end_date": {
+                    "description": "End date for the calendar in MM/dd/yyyy format",
+                    "type": "string"
+                  },
+                  "calendar_type": {
+                    "description": "Type of calendar",
+                    "type": "string",
+                    "enum": [
+                      "MONTH_OFFSET",
+                      "FOUR_FOUR_FIVE",
+                      "FOUR_FIVE_FOUR",
+                      "FIVE_FOUR_FOUR"
+                    ]
+                  },
+                  "month_offset": {
+                    "description": "Month offset to start calendar from (e.g., 0 for January, 1 for February, and so on)",
+                    "default": 0,
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "start_day_of_week": {
+                    "description": "Start day of the week (1 for Sunday, 2 for Monday, and so on)",
+                    "default": 1,
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "quarter_name_prefix": {
+                    "description": "Prefix to add before the quarter",
+                    "default": "",
+                    "type": "string"
+                  },
+                  "year_name_prefix": {
+                    "description": "Prefix to add before the year",
+                    "default": "",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name",
+                  "connection_identifier",
+                  "external_table",
+                  "create_type",
+                  "calendar_type"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "Custom calendar created successfully."
           },
           "400": {
             "description": "Invalid request.",
@@ -3567,7 +3947,6 @@
                         "SHAREWITHALL",
                         "JOBSCHEDULING",
                         "A3ANALYSIS",
-                        "EXPERIMENTALFEATUREPRIVILEGE",
                         "BYPASSRLS",
                         "RANALYSIS",
                         "DEVELOPER",
@@ -4110,7 +4489,6 @@
                         "SHAREWITHALL",
                         "JOBSCHEDULING",
                         "A3ANALYSIS",
-                        "EXPERIMENTALFEATUREPRIVILEGE",
                         "BYPASSRLS",
                         "RANALYSIS",
                         "DEVELOPER",
@@ -4642,7 +5020,7 @@
     "/api/rest/2.0/metadata/tml/export": {
       "post": {
         "operationId": "exportMetadataTML",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nExports the [TML](https://docs.thoughtspot.com/cloud/latest/tml) representation of metadata objects in JSON or YAML format.\n\nRequires `DATADOWNLOADING` (**Can download Data**) and at least view access to the metadata object.\n\n#### Usage guidelines\n\n* You can export one or several objects by passing metadata object GUIDs in the `metadata` array.\n* When exporting TML content for a Liveboard or Answer object, you can set `export_associated` to `true` to retrieve TML content for underlying Worksheets, Tables, or Views, including the GUID of each object within the headers. When   `export_associated` is set to `true`, consider retrieving one metadata object at a time.\n* Set `export_fqns` to `true` to add FQNs of the referenced objects in the TML content. For example, if you send an API request to retrieve TML for a Liveboard and its associated objects, the API returns the TML content with FQNs of the referenced Worksheet. Exporting TML with FQNs is useful if ThoughtSpot has multiple objects with the same name and you want to eliminate ambiguity when importing TML files into ThoughtSpot. It eliminates the need for adding FQNs of the referenced objects manually during the import operation.\n\nFor more information, see [TML Documentation](https://developers.thoughtspot.com/docs/tml#_export_a_tml).\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nExports the [TML](https://docs.thoughtspot.com/cloud/latest/tml) representation of metadata objects in JSON or YAML format.\n\nRequires `DATADOWNLOADING` (**Can download Data**) and at least view access to the metadata object.\n\n#### Usage guidelines\n\n* You can export one or several objects by passing metadata object GUIDs in the `metadata` array.\n* When exporting TML content for a Liveboard or Answer object, you can set `export_associated` to `true` to retrieve TML content for underlying Worksheets, Tables, or Views, including the GUID of each object within the headers. When   `export_associated` is set to `true`, consider retrieving one metadata object at a time.\n* Set `export_fqns` to `true` to add FQNs of the referenced objects in the TML content. For example, if you send an API request to retrieve TML for a Liveboard and its associated objects, the API returns the TML content with FQNs of the referenced Worksheet. Exporting TML with FQNs is useful if ThoughtSpot has multiple objects with the same name and you want to eliminate ambiguity when importing TML files into ThoughtSpot. It eliminates the need for adding FQNs of the referenced objects manually during the import operation.\n* To export only the TML of feedbacks associated with an object, set the GUID of the object as `identifier`, and set the `type` as `FEEDBACK` in the `metadata` array.\n* To export the TML of an object along with the feedbacks associated with it, set the GUID of the object as `identifier`, set the `type` as `LOGIAL_TABLE` in the `metadata` array, and set `export_with_associated_feedbacks` in `export_options` to true.\n\nFor more information, see [TML Documentation](https://developers.thoughtspot.com/docs/tml#_export_a_tml).\n\nFor more information on feedbacks, see [Feedback Documentation](https://docs.thoughtspot.com/cloud/latest/sage-feedback).\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Metadata",
           "9.0.0.cl"
@@ -4787,7 +5165,7 @@
     "/api/rest/2.0/metadata/tml/export/batch": {
       "post": {
         "operationId": "exportMetadataTMLBatched",
-        "description": "\n <span class=\"since-beta-tag\">Version: 10.1.0.cl or later</span>\n\nExports the [TML](https://docs.thoughtspot.com/cloud/latest/tml) representation of metadata objects in JSON or YAML format.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) privilege.\n\n#### Usage guidelines\n\n* You can export one or several objects by passing metadata object GUIDs in the `metadata` array.\n* When exporting TML content for a Liveboard or Answer object, you can set `export_associated` to `true` to retrieve TML content for underlying Worksheets, Tables, or Views, including the GUID of each object within the headers. When   `export_associated` is set to `true`, consider retrieving one metadata object at a time.\n* Set `export_fqns` to `true` to add FQNs of the referenced objects in the TML content. For example, if you send an API request to retrieve TML for a Liveboard and its associated objects, the API returns the TML content with FQNs of the referenced Worksheet. Exporting TML with FQNs is useful if ThoughtSpot has multiple objects with the same name and you want to eliminate ambiguity when importing TML files into ThoughtSpot. It eliminates the need for adding FQNs of the referenced objects manually during the import operation.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 10.1.0.cl or later</span>\n\nExports the [TML](https://docs.thoughtspot.com/cloud/latest/tml) representation of metadata objects in JSON or YAML format.\n\n### **Permissions Required**\n\nRequires `DATAMANAGEMENT` (**Can manage data**) and `USERMANAGEMENT` (**Can manage users**) privileges.\n\n#### **Usage Guidelines**\n\nThis API is only applicable for `USER`, `GROUP`, and `ROLES` metadata types.\n\n- `batch_offset` Indicates the starting position within the complete dataset from which the API should begin returning objects. Useful for paginating results efficiently.\n- `batch_size` Specifies the number of objects or items to retrieve in a single request. Helps control response size for better performance.\n- `edoc_format` Defines the format of the TML content. The exported metadata can be in JSON or YAML format.\n- `export_dependent` Specifies whether to include dependent metadata objects in the export. Ensures related objects are also retrieved if needed.\n- `all_orgs_override` Indicates whether the export operation applies across all organizations. Useful for multi-tenant environments where cross-org exports are required.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Metadata",
           "10.1.0.cl"
@@ -5230,14 +5608,8 @@
                     "type": "boolean",
                     "nullable": true
                   },
-                  "all_orgs_context": {
+                  "all_orgs_override": {
                     "description": "If import is happening from all orgs context.",
-                    "default": false,
-                    "type": "boolean",
-                    "nullable": true
-                  },
-                  "skip_cdw_validation_for_tables": {
-                    "description": "Boolean to indicate if the CDW validation for table imports should be skipped.",
                     "default": false,
                     "type": "boolean",
                     "nullable": true
@@ -5348,14 +5720,8 @@
                     "type": "boolean",
                     "nullable": true
                   },
-                  "all_orgs_context": {
+                  "all_orgs_override": {
                     "description": "If import is happening from all orgs context.",
-                    "default": false,
-                    "type": "boolean",
-                    "nullable": true
-                  },
-                  "skip_cdw_validation_for_tables": {
-                    "description": "Boolean to indicate if the CDW validation for table imports should be skipped.",
                     "default": false,
                     "type": "boolean",
                     "nullable": true
@@ -5378,7 +5744,7 @@
                     "nullable": true
                   },
                   "enable_large_metadata_validation": {
-                    "description": "<div><span class=\"since-beta-tag\">Version: 10.5.0.cl or later</span></div>\n\nBoolean to indicate if the large metadata validation should be enabled. Set to `true` if the database contains multiple thousands of tables..",
+                    "description": "<div><span class=\"since-beta-tag\">Version: 10.5.0.cl or later</span></div>\n\nBoolean to indicate if the large metadata validation should be enabled.",
                     "default": false,
                     "type": "boolean",
                     "nullable": true
@@ -5450,7 +5816,7 @@
     "/api/rest/2.0/metadata/search": {
       "post": {
         "operationId": "searchMetadata",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGets a list of metadata objects available on the ThoughtSpot system.\n\nThis API endpoint is available to all users who have view access to the object. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view data for all metadata objects, including users and groups.\n\n#### Usage guidelines\n\n- To get all metadata objects, send the API request without any attributes.\n- To get metadata objects of a specific type, set the `type` attribute. For example, to fetch a Worksheet, set the type as `LOGICAL_TABLE`.\n- To get a specific metadata object, specify the GUID.\n- To customize your search and filter the API response, you can use several parameters.\n  You can search for objects created or modified by specific users, by tags applied to the objects, or by using the include parameters like `include_auto_created_objects`, `include_dependent_objects`, `include_headers`, `include_incomplete_objects`, and so on.\n  You can also define sorting options to sort the data retrieved in the API response.\n\n**NOTE**: The following parameters support pagination of metadata records:\n\n- `tag_identifiers`\n- `type`\n- `created_by_user_identifiers`\n- `modified_by_user_identifiers`\n- `owned_by_user_identifiers`\n- `exclude_objects`\n- `include_auto_created_objects`\n- `favorite_object_options`\nIf you are using other parameters to search metadata, set `record_size` to `-1` and `record_offset` to `0`.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGets a list of metadata objects available on the ThoughtSpot system.\n\nThis API endpoint is available to all users who have view access to the object. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view data for all metadata objects, including users and groups.\n\n#### Usage guidelines\n\n- To get all metadata objects, send the API request without any attributes.\n- To get metadata objects of a specific type, set the `type` attribute. For example, to fetch a Worksheet, set the type as `LOGICAL_TABLE`.\n- To get a specific metadata object, specify the GUID.\n- To customize your search and filter the API response, you can use several parameters.\n  You can search for objects created or modified by specific users, by tags applied to the objects, or by using the include parameters like `include_auto_created_objects`, `include_dependent_objects`, `include_headers`, `include_incomplete_objects`, and so on.\n  You can also define sorting options to sort the data retrieved in the API response.\n- To get discoverable objects when linientmodel is enabled you can use `include_discoverable_objects` as true else false. Default value is true.\n\n**NOTE**: The following parameters support pagination of metadata records:\n\n- `tag_identifiers`\n- `type`\n- `created_by_user_identifiers`\n- `modified_by_user_identifiers`\n- `owned_by_user_identifiers`\n- `exclude_objects`\n- `include_auto_created_objects`\n- `favorite_object_options`\nIf you are using other parameters to search metadata, set `record_size` to `-1` and `record_offset` to `0`.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Metadata",
           "9.0.0.cl"
@@ -5573,7 +5939,7 @@
                     "format": "int32"
                   },
                   "record_size": {
-                    "description": "The number of records that should be included.",
+                    "description": "The number of records that should be included. It is recommended to use a smaller `record_size` when fetching dependent objects or any of the additional metadata detail options.",
                     "default": 10,
                     "type": "integer",
                     "format": "int32"
@@ -5596,6 +5962,12 @@
                   "include_stats": {
                     "description": "Indicates whether to include stats of the metadata objects.",
                     "default": false,
+                    "type": "boolean",
+                    "nullable": true
+                  },
+                  "include_discoverable_objects": {
+                    "description": "Indicates whether to include discoverable metadata objects.\nIf lenient OSM is not enabled, then even though the includeDiscoverableObjects is set to True, we won't see discoverable objects.",
+                    "default": true,
                     "type": "boolean",
                     "nullable": true
                   }
@@ -5691,6 +6063,84 @@
                 },
                 "required": [
                   "headers_update"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "Headers update was successful."
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/metadata/update-obj-id": {
+      "post": {
+        "operationId": "updateMetadataObjId",
+        "description": "\nUpdate object IDs for given metadata objects. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.8.0.cl or later</span>\n\n## Prerequisites\n- **Privileges Required:**\n  - `DATAMANAGEMENT` (Can manage data) or `ADMINISTRATION` (Can administer ThoughtSpot).\n- **Additional Privileges (if RBAC is enabled):**\n  - `ORG_ADMINISTRATION` (Can manage orgs).\n\n---\n\n## Usage Guidelines\n\n### Parameters\n\n1. **metadata**  \n   - **Description:** List of metadata objects to update their object IDs.\n   - **Usage:**\n      - Use either `current_obj_id` alone OR use `metadata_identifier` with `type` (when needed).\n      - When using `metadata_identifier`, the `type` field is required if using a name instead of a GUID.\n      - The `new_obj_id` field is always required.\n\n---\n\n## Note\nThis API is specifically designed for updating object IDs of metadata objects. It internally uses the header update mechanism to perform the changes.\n\n## Best Practices\n\n1. **Backup Before Update:**  \n   Always export metadata as a backup before initiating the update process.\n\n2. **Validation:**\n   - When using `current_obj_id`, ensure it matches the existing object ID exactly.\n   - When using `metadata_identifier` with a name, ensure the `type` is specified correctly.\n   - Verify that the `new_obj_id` follows your naming conventions and is unique within your system.\n\n---\n\n## Examples\n\n### Using current_obj_id\n```json\n{\n  \"metadata\": [\n    {\n      \"current_obj_id\": \"existing_object_id\",\n      \"new_obj_id\": \"new_object_id\"\n    }\n  ]\n}\n```\n\n### Using metadata_identifier with GUID\n```json\n{\n  \"metadata\": [\n    {\n      \"metadata_identifier\": \"01234567-89ab-cdef-0123-456789abcdef\",\n      \"new_obj_id\": \"new_object_id\"\n    }\n  ]\n}\n```\n\n### Using metadata_identifier with name and type\n```json\n{\n  \"metadata\": [\n    {\n      \"metadata_identifier\": \"My Answer\",\n      \"type\": \"ANSWER\",\n      \"new_obj_id\": \"new_object_id\"\n    }\n  ]\n}\n```\n\n### Multiple objects update\n```json\n{\n  \"metadata\": [\n    {\n      \"current_obj_id\": \"existing_object_id_1\",\n      \"new_obj_id\": \"new_object_id_1\"\n    },\n    {\n      \"metadata_identifier\": \"My Worksheet\",\n      \"type\": \"LOGICAL_TABLE\",\n      \"new_obj_id\": \"new_object_id_2\"\n    }\n  ]\n}\n```\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Metadata",
+          "10.8.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "metadata": {
+                    "description": "List of metadata objects to update their object IDs.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/UpdateObjIdInput"
+                    }
+                  }
+                },
+                "required": [
+                  "metadata"
                 ]
               }
             }
@@ -6198,7 +6648,7 @@
                     "type": "object"
                   },
                   "regional_settings": {
-                    "description": "Options for specific region speciic overrides to support date/number/string/currency formatting.",
+                    "description": "Options for specific region specific overrides to support date/number/string/currency formatting.",
                     "allOf": [
                       {
                         "$ref": "#/components/schemas/RegionalSettingsInput"
@@ -6265,7 +6715,7 @@
     "/api/rest/2.0/report/liveboard": {
       "post": {
         "operationId": "exportLiveboardReport",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nExports the data from a Liveboard and its visualization in a given file format. You can download the Liveboard data as a PDF, PNG, CSV, or XLSX file.\n\nRequires `DATADOWNLOADING` (**Can download data**) privilege and view access to the Liveboard.\n\n#### Usage guidelines\n\nIn the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.\n\nThe default `file_format` is CSV. For PDF file format, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.\n\n**NOTE**: The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension.\n\nOptionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.\n\nTo include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nExports the data from a Liveboard and its visualization in a given file format. You can download the Liveboard data as a PDF, PNG, CSV, or XLSX file.\n\nRequires `DATADOWNLOADING` (**Can download data**) privilege and view access to the Liveboard.\n\n#### Usage guidelines\n\nIn the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.\n\nThe default `file_format` is CSV. For PDF file format, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.\n\n**NOTE**: The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension.\n\nOptionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.\n\nTo include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).\n\nYou can provide override filters in the data options to override the existing filters on the Liveboard. \n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Reports",
           "9.0.0.cl"
@@ -6304,6 +6754,10 @@
                     "description": "JSON object with representing filter condition to apply filters at runtime. For example, {\"col1\": \"region\", \"op1\": \"EQ\", \"val1\": \"northeast\" }. You can add multiple keys by incrementing the number at the end, for example, col2, op2, val2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_filters).",
                     "type": "object"
                   },
+                  "override_filters": {
+                    "description": "Applied to the liveboard and overrides any filters already applied on the same columns in liveboard.\nFollowing example illustrate different kinds of filters:\n{\n  \"override_filters\": [\n    {\n      \"column_name\": \"Color\",\n      \"generic_filter\": {\n        \"op\": \"IN\",\n        \"values\": [\n          \"almond\",\n          \"turquoise\"\n        ]\n      },\n      \"negate\": false\n    },\n    {\n      \"column_name\": \"Commit Date\",\n      \"date_filter\": {\n        \"datePeriod\": \"HOUR\",\n        \"number\": 3,\n        \"type\": \"LAST_N_PERIOD\",\n        \"op\": \"EQ\"\n      }\n    },\n    {\n      \"column_name\": \"Sales\",\n      \"generic_filter\": {\n        \"op\": \"BW_INC\",\n        \"values\": [\n          \"100000\",\n          \"70000\"\n        ]\n      },\n      \"negate\": true\n    }\n  ]\n}",
+                    "type": "object"
+                  },
                   "runtime_sort": {
                     "description": "JSON string representing runtime sort. For example, {\"sortCol1\": \"region\", \"asc1\" : true}. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort).",
                     "type": "object"
@@ -6329,7 +6783,7 @@
                     "type": "object"
                   },
                   "regional_settings": {
-                    "description": "Options for specific region speciic overrides to support date/number/string/currency formatting.",
+                    "description": "Options for specific region specific overrides to support date/number/string/currency formatting.",
                     "allOf": [
                       {
                         "$ref": "#/components/schemas/RegionalSettingsInput"
@@ -6351,526 +6805,6 @@
             "description": "Export report file of specified metadata object is successful.",
             "content": {
               "application/octet-stream": {}
-            }
-          },
-          "400": {
-            "description": "Invalid request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/rest/2.0/roles/create": {
-      "post": {
-        "operationId": "createRole",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>\n\nCreates a Role object in ThoughtSpot.\n\nAvailable only if [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance. To create a Role, the `ROLE_ADMINISTRATION` (**Can manage roles**) privilege is required.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "Roles",
-          "9.5.0.cl"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "description": "Unique name of the Role.",
-                    "type": "string"
-                  },
-                  "description": {
-                    "description": "Description of the Role.",
-                    "type": "string"
-                  },
-                  "privileges": {
-                    "description": "Privileges granted to the Role. See [Documentation](https://developers.thoughtspot.com/docs/rbac#_role_categories_and_privileges)for supported roles privileges.",
-                    "type": "array",
-                    "items": {
-                      "type": "string",
-                      "enum": [
-                        "USERDATAUPLOADING",
-                        "DATADOWNLOADING",
-                        "DATAMANAGEMENT",
-                        "SHAREWITHALL",
-                        "JOBSCHEDULING",
-                        "A3ANALYSIS",
-                        "EXPERIMENTALFEATUREPRIVILEGE",
-                        "BYPASSRLS",
-                        "DISABLE_PINBOARD_CREATION",
-                        "DEVELOPER",
-                        "APPLICATION_ADMINISTRATION",
-                        "USER_ADMINISTRATION",
-                        "GROUP_ADMINISTRATION",
-                        "SYSTEM_INFO_ADMINISTRATION",
-                        "SYNCMANAGEMENT",
-                        "ORG_ADMINISTRATION",
-                        "ROLE_ADMINISTRATION",
-                        "AUTHENTICATION_ADMINISTRATION",
-                        "BILLING_INFO_ADMINISTRATION",
-                        "CONTROL_TRUSTED_AUTH",
-                        "TAGMANAGEMENT",
-                        "LIVEBOARD_VERIFIER",
-                        "CAN_MANAGE_CUSTOM_CALENDAR",
-                        "CAN_CREATE_OR_EDIT_CONNECTIONS",
-                        "CAN_MANAGE_WORKSHEET_VIEWS_TABLES",
-                        "CAN_MANAGE_VERSION_CONTROL",
-                        "THIRDPARTY_ANALYSIS",
-                        "CAN_CREATE_CATALOG",
-                        "ALLOW_NON_EMBED_FULL_APP_ACCESS",
-                        "CAN_ACCESS_ANALYST_STUDIO",
-                        "CAN_MANAGE_ANALYST_STUDIO",
-                        "PREVIEW_DOCUMENT_SEARCH",
-                        "CAN_SETUP_VERSION_CONTROL"
-                      ]
-                    }
-                  },
-                  "read_only": {
-                    "description": "<div><span class=\"since-beta-tag\">Version: 10.5.0.cl or later</span></div>\n\nIndicates whether the role is read only. A readonly role can neither be updated nor deleted.",
-                    "default": false,
-                    "type": "boolean",
-                    "nullable": true
-                  }
-                },
-                "required": [
-                  "name"
-                ]
-              }
-            }
-          },
-          "required": true
-        },
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Role successfully created.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RoleResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid parameters.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/rest/2.0/roles/{role_identifier}/delete": {
-      "post": {
-        "operationId": "deleteRole",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>\n\nDeletes a Role object from the ThoughtSpot system.\n\nAvailable only if [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance. To delete a Role, the `ROLE_ADMINISTRATION` (**Can manage roles**) privilege is required.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "Roles",
-          "9.5.0.cl"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "role_identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Unique ID or name of the Role. ReadOnly roles cannot be deleted."
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Role successfully deleted."
-          },
-          "400": {
-            "description": "Invalid request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/rest/2.0/roles/search": {
-      "post": {
-        "operationId": "searchRoles",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>\n\nGets a list of Role objects from the ThoughtSpot system.\n\nAvailable if [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance. To search for Roles, the `ROLE_ADMINISTRATION` (**Can manage roles**) privilege is required.\n\nTo get details of a specific Role object, specify the GUID or name. You can also filter the API response based on user group and Org identifiers, privileges assigned to the Role, and deprecation status.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "Roles",
-          "9.5.0.cl"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "role_identifiers": {
-                    "description": "unique ID or name of the Roles",
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    }
-                  },
-                  "org_identifiers": {
-                    "description": "Unique Id or name of the Organisation",
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    }
-                  },
-                  "group_identifiers": {
-                    "description": "Unique Id or name of the User Group",
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    }
-                  },
-                  "privileges": {
-                    "description": "Privileges assigned to the Role. See [Documentation](https://developers.thoughtspot.com/docs/rbac#_role_categories_and_privileges)for supported roles privileges.",
-                    "type": "array",
-                    "items": {
-                      "type": "string",
-                      "enum": [
-                        "UNKNOWN",
-                        "ADMINISTRATION",
-                        "AUTHORING",
-                        "USERDATAUPLOADING",
-                        "DATADOWNLOADING",
-                        "USERMANAGEMENT",
-                        "SECURITYMANAGEMENT",
-                        "LOGICALMODELING",
-                        "DATAMANAGEMENT",
-                        "TAGMANAGEMENT",
-                        "SHAREWITHALL",
-                        "SYSTEMMANAGEMENT",
-                        "JOBSCHEDULING",
-                        "A3ANALYSIS",
-                        "EXPERIMENTALFEATUREPRIVILEGE",
-                        "BYPASSRLS",
-                        "RANALYSIS",
-                        "DISABLE_PINBOARD_CREATION",
-                        "DEVELOPER",
-                        "APPLICATION_ADMINISTRATION",
-                        "USER_ADMINISTRATION",
-                        "GROUP_ADMINISTRATION",
-                        "BACKUP_ADMINISTRATION",
-                        "SYSTEM_INFO_ADMINISTRATION",
-                        "ENABLESPOTAPPCREATION",
-                        "SYNCMANAGEMENT",
-                        "ORG_ADMINISTRATION",
-                        "ROLE_ADMINISTRATION",
-                        "AUTHENTICATION_ADMINISTRATION",
-                        "BILLING_INFO_ADMINISTRATION",
-                        "PREVIEW_THOUGHTSPOT_SAGE",
-                        "LIVEBOARD_VERIFIER",
-                        "CAN_MANAGE_CUSTOM_CALENDAR",
-                        "CAN_CREATE_OR_EDIT_CONNECTIONS",
-                        "CAN_CONFIGURE_CONNECTIONS",
-                        "CAN_MANAGE_WORKSHEET_VIEWS_TABLES",
-                        "CAN_MANAGE_VERSION_CONTROL",
-                        "THIRDPARTY_ANALYSIS",
-                        "CONTROL_TRUSTED_AUTH",
-                        "CAN_CREATE_CATALOG",
-                        "ALLOW_NON_EMBED_FULL_APP_ACCESS",
-                        "CAN_ACCESS_ANALYST_STUDIO",
-                        "CAN_MANAGE_ANALYST_STUDIO",
-                        "PREVIEW_DOCUMENT_SEARCH",
-                        "CAN_SETUP_VERSION_CONTROL"
-                      ]
-                    }
-                  },
-                  "deprecated": {
-                    "description": "Indicates whether the Role is deprecated.",
-                    "type": "boolean",
-                    "deprecated": true,
-                    "nullable": true
-                  },
-                  "external": {
-                    "description": "Indicates whether the Role is external",
-                    "type": "boolean",
-                    "deprecated": true,
-                    "nullable": true
-                  },
-                  "shared_via_connection": {
-                    "description": "Indicates whether the Role is shared via connection",
-                    "type": "boolean",
-                    "deprecated": true,
-                    "nullable": true
-                  },
-                  "permissions": {
-                    "description": "Permission details of the Role",
-                    "type": "array",
-                    "items": {
-                      "type": "string",
-                      "enum": [
-                        "READ_ONLY",
-                        "MODIFY",
-                        "NO_ACCESS"
-                      ]
-                    },
-                    "deprecated": true
-                  }
-                }
-              }
-            }
-          },
-          "required": true
-        },
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Roles search result.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/SearchRoleResponse"
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/rest/2.0/roles/{role_identifier}/update": {
-      "post": {
-        "operationId": "updateRole",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>\n\nUpdates the properties of a Role object.\n\nAvailable only if [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance. To update a Role, the `ROLE_ADMINISTRATION` (**Can manage roles**) privilege is required.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "Roles",
-          "9.5.0.cl"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "description": "Name of the Role.",
-                    "type": "string"
-                  },
-                  "description": {
-                    "description": "Description of the Role.",
-                    "type": "string"
-                  },
-                  "privileges": {
-                    "description": "Privileges granted to the role. See [Documentation](https://developers.thoughtspot.com/docs/rbac#_role_categories_and_privileges)for supported roles privileges.",
-                    "type": "array",
-                    "items": {
-                      "type": "string",
-                      "enum": [
-                        "USERDATAUPLOADING",
-                        "DATADOWNLOADING",
-                        "DATAMANAGEMENT",
-                        "SHAREWITHALL",
-                        "JOBSCHEDULING",
-                        "A3ANALYSIS",
-                        "EXPERIMENTALFEATUREPRIVILEGE",
-                        "BYPASSRLS",
-                        "DISABLE_PINBOARD_CREATION",
-                        "DEVELOPER",
-                        "APPLICATION_ADMINISTRATION",
-                        "USER_ADMINISTRATION",
-                        "GROUP_ADMINISTRATION",
-                        "SYSTEM_INFO_ADMINISTRATION",
-                        "SYNCMANAGEMENT",
-                        "ORG_ADMINISTRATION",
-                        "ROLE_ADMINISTRATION",
-                        "AUTHENTICATION_ADMINISTRATION",
-                        "BILLING_INFO_ADMINISTRATION",
-                        "CONTROL_TRUSTED_AUTH",
-                        "TAGMANAGEMENT",
-                        "LIVEBOARD_VERIFIER",
-                        "CAN_MANAGE_CUSTOM_CALENDAR",
-                        "CAN_CREATE_OR_EDIT_CONNECTIONS",
-                        "CAN_MANAGE_WORKSHEET_VIEWS_TABLES",
-                        "CAN_MANAGE_VERSION_CONTROL",
-                        "THIRDPARTY_ANALYSIS",
-                        "CAN_CREATE_CATALOG",
-                        "CAN_ACCESS_ANALYST_STUDIO",
-                        "CAN_MANAGE_ANALYST_STUDIO",
-                        "PREVIEW_DOCUMENT_SEARCH"
-                      ]
-                    }
-                  }
-                },
-                "required": [
-                  "name"
-                ]
-              }
-            }
-          },
-          "required": true
-        },
-        "parameters": [
-          {
-            "in": "path",
-            "name": "role_identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Unique ID or name of the Role."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Role successfully updated.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RoleResponse"
-                }
-              }
             }
           },
           "400": {
@@ -9075,7 +9009,7 @@
     "/api/rest/2.0/security/metadata/share": {
       "post": {
         "operationId": "shareMetadata",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nAllows sharing one or several metadata objects with users and groups in ThoughtSpot.\n\nRequires edit access to the metadata object.\n\nThe API endpoint allows sharing only the following types of metadata objects:\n* Liveboards\n* Visualizations\n* Answers\n* Worksheets\n* Views\n\nYou can provide `READ_ONLY` or `MODIFY` access when sharing an object with another user or group. With `READ_ONLY` access grants view access to the shared object, whereas `MODIFY` provides edit access.\n\nTo prevent a user or group from accessing the shared object, specify the GUID or name of the principal and set `shareMode` to `NO_ACCESS`.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nAllows sharing one or several metadata objects with users and groups in ThoughtSpot.\n\nRequires edit access to the metadata object.\n\nThe API endpoint allows sharing only the following types of metadata objects:\n* Liveboards\n* Visualizations\n* Answers\n* Worksheets\n* Views\n* Connections\n\nYou can provide `READ_ONLY` or `MODIFY` access when sharing an object with another user or group. With `READ_ONLY` access grants view access to the shared object, whereas `MODIFY` provides edit access.\n\nTo prevent a user or group from accessing the shared object, specify the GUID or name of the principal and set `shareMode` to `NO_ACCESS`.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Security",
           "9.0.0.cl"
@@ -9087,7 +9021,7 @@
                 "type": "object",
                 "properties": {
                   "metadata_type": {
-                    "description": "Type of metadata. Required if identifier in metadata_identifies is a name.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n4. LOGICAL_COLUMN",
+                    "description": "Type of metadata. Required if identifier in metadata_identifies is a name.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n4. LOGICAL_COLUMN\n5. Connection",
                     "type": "string",
                     "enum": [
                       "LIVEBOARD",
@@ -10376,7 +10310,14 @@
                       "nl-NL",
                       "it-IT",
                       "ru-RU",
-                      "en-IN"
+                      "en-IN",
+                      "de-CH",
+                      "en-NZ",
+                      "es-MX",
+                      "en-AU",
+                      "zh-Hant",
+                      "ko-KR",
+                      "en-DE"
                     ]
                   },
                   "extended_properties": {
@@ -11245,7 +11186,14 @@
                       "nl-NL",
                       "it-IT",
                       "ru-RU",
-                      "en-IN"
+                      "en-IN",
+                      "de-CH",
+                      "en-NZ",
+                      "es-MX",
+                      "en-AU",
+                      "zh-Hant",
+                      "ko-KR",
+                      "en-DE"
                     ]
                   },
                   "extended_properties": {
@@ -13276,6 +13224,11 @@
             ],
             "description": "Type of the metadata."
           },
+          "metadata_obj_id": {
+            "type": "string",
+            "description": "Custom identifier of the metadata.\n(Available from 10.8.0.cl onwards)",
+            "nullable": true
+          },
           "dependent_objects": {
             "type": "object",
             "description": "Details of dependent objects of the metadata objects.",
@@ -13831,7 +13784,14 @@
               "nl-NL",
               "it-IT",
               "ru-RU",
-              "en-IN"
+              "en-IN",
+              "de-CH",
+              "en-NZ",
+              "es-MX",
+              "en-AU",
+              "zh-Hant",
+              "ko-KR",
+              "en-DE"
             ]
           },
           "number_format_locale": {
@@ -13858,7 +13818,14 @@
               "nl-NL",
               "it-IT",
               "ru-RU",
-              "en-IN"
+              "en-IN",
+              "de-CH",
+              "en-NZ",
+              "es-MX",
+              "en-AU",
+              "zh-Hant",
+              "ko-KR",
+              "en-DE"
             ]
           },
           "date_format_locale": {
@@ -13885,7 +13852,14 @@
               "nl-NL",
               "it-IT",
               "ru-RU",
-              "en-IN"
+              "en-IN",
+              "de-CH",
+              "en-NZ",
+              "es-MX",
+              "en-AU",
+              "zh-Hant",
+              "ko-KR",
+              "en-DE"
             ]
           }
         }
@@ -14560,161 +14534,6 @@
           }
         }
       },
-      "SearchRoleResponse": {
-        "type": "object",
-        "required": [
-          "id",
-          "name",
-          "description",
-          "privileges"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "Unique Id of the role."
-          },
-          "name": {
-            "type": "string",
-            "description": "Name of the role"
-          },
-          "description": {
-            "type": "string",
-            "description": "Description of the role"
-          },
-          "groups_assigned_count": {
-            "type": "integer",
-            "format": "int32",
-            "description": "number of groups assigned with this role",
-            "nullable": true
-          },
-          "orgs": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/GenericInfo"
-            },
-            "description": "Orgs in which role exists.",
-            "nullable": true
-          },
-          "groups": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/GenericInfo"
-            },
-            "description": "Details of groups assigned with this role",
-            "nullable": true
-          },
-          "privileges": {
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "UNKNOWN",
-                "ADMINISTRATION",
-                "AUTHORING",
-                "USERDATAUPLOADING",
-                "DATADOWNLOADING",
-                "USERMANAGEMENT",
-                "SECURITYMANAGEMENT",
-                "LOGICALMODELING",
-                "DATAMANAGEMENT",
-                "TAGMANAGEMENT",
-                "SHAREWITHALL",
-                "SYSTEMMANAGEMENT",
-                "JOBSCHEDULING",
-                "A3ANALYSIS",
-                "EXPERIMENTALFEATUREPRIVILEGE",
-                "BYPASSRLS",
-                "RANALYSIS",
-                "DISABLE_PINBOARD_CREATION",
-                "DEVELOPER",
-                "APPLICATION_ADMINISTRATION",
-                "USER_ADMINISTRATION",
-                "GROUP_ADMINISTRATION",
-                "BACKUP_ADMINISTRATION",
-                "SYSTEM_INFO_ADMINISTRATION",
-                "ENABLESPOTAPPCREATION",
-                "SYNCMANAGEMENT",
-                "ORG_ADMINISTRATION",
-                "ROLE_ADMINISTRATION",
-                "AUTHENTICATION_ADMINISTRATION",
-                "BILLING_INFO_ADMINISTRATION",
-                "PREVIEW_THOUGHTSPOT_SAGE",
-                "LIVEBOARD_VERIFIER",
-                "CAN_MANAGE_CUSTOM_CALENDAR",
-                "CAN_CREATE_OR_EDIT_CONNECTIONS",
-                "CAN_CONFIGURE_CONNECTIONS",
-                "CAN_MANAGE_WORKSHEET_VIEWS_TABLES",
-                "CAN_MANAGE_VERSION_CONTROL",
-                "THIRDPARTY_ANALYSIS",
-                "CONTROL_TRUSTED_AUTH",
-                "CAN_CREATE_CATALOG",
-                "ALLOW_NON_EMBED_FULL_APP_ACCESS",
-                "CAN_ACCESS_ANALYST_STUDIO",
-                "CAN_MANAGE_ANALYST_STUDIO",
-                "PREVIEW_DOCUMENT_SEARCH",
-                "CAN_SETUP_VERSION_CONTROL"
-              ]
-            },
-            "description": "Privileges granted to the role."
-          },
-          "permission": {
-            "type": "string",
-            "enum": [
-              "READ_ONLY",
-              "MODIFY",
-              "NO_ACCESS"
-            ],
-            "description": "Permission details of the Role",
-            "nullable": true
-          },
-          "author_id": {
-            "type": "string",
-            "description": "Unique identifier of author of the role.",
-            "nullable": true
-          },
-          "modifier_id": {
-            "type": "string",
-            "description": "Unique identifier of modifier of the role.",
-            "nullable": true
-          },
-          "creation_time_in_millis": {
-            "type": "object",
-            "description": "Creation time of the role in milliseconds.",
-            "nullable": true
-          },
-          "modification_time_in_millis": {
-            "type": "object",
-            "description": "Last modified time of the role in milliseconds.",
-            "nullable": true
-          },
-          "deleted": {
-            "type": "boolean",
-            "description": "Indicates whether the role is deleted.",
-            "nullable": true
-          },
-          "deprecated": {
-            "type": "boolean",
-            "description": "Indicates whether the role is deprecated.",
-            "nullable": true
-          },
-          "external": {
-            "type": "boolean",
-            "description": "Indicates whether the role is external.",
-            "nullable": true
-          },
-          "hidden": {
-            "type": "boolean",
-            "description": "Indicates whether the role is hidden.",
-            "nullable": true
-          },
-          "shared_via_connection": {
-            "type": "boolean",
-            "description": "Indicates whether the role is shared via connection",
-            "nullable": true
-          }
-        },
-        "description": "Response for search role api should handle hidden privileges as well."
-      },
       "Default_Action_Config_Search_Input": {
         "type": "object",
         "properties": {
@@ -15060,19 +14879,6 @@
           }
         }
       },
-      "GenericInfo": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "nullable": true
-          },
-          "name": {
-            "type": "string",
-            "nullable": true
-          }
-        }
-      },
       "UserGroup": {
         "type": "object",
         "properties": {
@@ -15145,8 +14951,7 @@
           "type": {
             "type": "string",
             "enum": [
-              "LIVEBOARD",
-              "ANSWER"
+              "LOGICAL_TABLE"
             ],
             "nullable": true
           }
@@ -15199,8 +15004,6 @@
           "type": {
             "type": "string",
             "enum": [
-              "LIVEBOARD",
-              "ANSWER",
               "LOGICAL_TABLE"
             ],
             "description": "  Type of object.\n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.\n  \n\n Specify the object type as `LOGICAL_TABLE`.  The `LIVEBOARD` and `ANSWER` object types are not supported.",
@@ -15543,8 +15346,6 @@
           "type": {
             "type": "string",
             "enum": [
-              "LIVEBOARD",
-              "ANSWER",
               "LOGICAL_TABLE"
             ],
             "description": "  Type of object.\n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.\n  \n\n Specify the object type as `LOGICAL_TABLE`.  The `LIVEBOARD` and `ANSWER` object types are not supported.",
@@ -15869,7 +15670,6 @@
                 "SHAREWITHALL",
                 "JOBSCHEDULING",
                 "A3ANALYSIS",
-                "EXPERIMENTALFEATUREPRIVILEGE",
                 "BYPASSRLS",
                 "RANALYSIS",
                 "DEVELOPER",
@@ -15965,19 +15765,25 @@
           "include_obj_id_ref": {
             "type": "boolean",
             "default": false,
-            "description": "Boolean Flag to whether to export user_defined_id of referenced object. This will only be respected when UserDefinedId in TML is enabled.",
+            "description": "Boolean Flag to export Object ID of referenced object. This flag will work only after the Object ID feature has been enabled. Please contact support to enable the feature.",
             "nullable": true
           },
           "include_guid": {
             "type": "boolean",
             "default": true,
-            "description": "Boolean flag to whether to export guid of the object. This will only be respected when UserDefinedId in TML is enabled.",
+            "description": "Boolean flag to export guid of the object. This flag will work only after the Object ID feature has been enabled. Please contact support to enable the feature.",
             "nullable": true
           },
           "include_obj_id": {
             "type": "boolean",
             "default": false,
-            "description": "Boolean flag to whether to export user_defined_id of the object. This will only be respected when UserDefinedId in TML is enabled.",
+            "description": "Boolean flag to export Object ID of the object. This flag will work only after the Object ID feature has been enabled. Please contact support to enable the feature.",
+            "nullable": true
+          },
+          "export_with_associated_feedbacks": {
+            "type": "boolean",
+            "default": false,
+            "description": "Boolean flag indicating whether to export associated feedbacks of the object. This will only be respected when the object can have feedbacks. <br/>  <span class=\"since-beta-tag\">Version: 10.7.0.cl or later</span>",
             "nullable": true
           }
         },
@@ -16257,6 +16063,44 @@
         },
         "description": "Attribute to update in a header."
       },
+      "UpdateObjIdInput": {
+        "type": "object",
+        "required": [
+          "new_obj_id"
+        ],
+        "properties": {
+          "metadata_identifier": {
+            "type": "string",
+            "description": "GUID or name of the metadata object.",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "ANSWER",
+              "LOGICAL_TABLE",
+              "LOGICAL_COLUMN",
+              "LIVEBOARD",
+              "ACTION_OBJECT",
+              "DATA_SOURCE",
+              "USER",
+              "USER_GROUP"
+            ],
+            "description": "Type of metadata. Required if metadata_identifier is name of the object.",
+            "nullable": true
+          },
+          "current_obj_id": {
+            "type": "string",
+            "description": "Current object ID value.",
+            "nullable": true
+          },
+          "new_obj_id": {
+            "type": "string",
+            "description": "New object ID value to set."
+          }
+        },
+        "description": "Input for updating object ID of a metadata object."
+      },
       "ExportMetadataTypeInput": {
         "type": "object",
         "required": [
@@ -16273,7 +16117,8 @@
               "CUSTOM_ACTION",
               "USER",
               "USER_GROUP",
-              "ROLE"
+              "ROLE",
+              "FEEDBACK"
             ],
             "description": "  Type of metadata.\n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.",
             "nullable": true
@@ -16653,145 +16498,257 @@
           }
         }
       },
-      "RoleResponse": {
+      "PolicyConfiguration": {
         "type": "object",
-        "required": [
-          "id",
-          "name",
-          "description",
-          "privileges"
-        ],
         "properties": {
-          "id": {
-            "type": "string",
-            "description": "Unique Id of the role."
-          },
-          "name": {
-            "type": "string",
-            "description": "Name of the role"
-          },
-          "description": {
-            "type": "string",
-            "description": "Description of the role"
-          },
-          "groups_assigned_count": {
-            "type": "integer",
-            "format": "int32",
-            "description": "number of groups assigned with this role",
+          "policy_configuration": {
+            "$ref": "#/components/schemas/PolicyConfig",
             "nullable": true
-          },
-          "orgs": {
+          }
+        }
+      },
+      "PolicyConfig": {
+        "type": "object",
+        "properties": {
+          "principals": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/GenericInfo"
+              "$ref": "#/components/schemas/Principal"
             },
-            "description": "Orgs in which role exists.",
             "nullable": true
           },
-          "groups": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/GenericInfo"
-            },
-            "description": "Details of groups assigned with this role",
-            "nullable": true
-          },
-          "privileges": {
+          "process": {
             "type": "array",
             "items": {
               "type": "string",
               "enum": [
-                "USERDATAUPLOADING",
-                "DATADOWNLOADING",
-                "DATAMANAGEMENT",
-                "SHAREWITHALL",
-                "JOBSCHEDULING",
-                "A3ANALYSIS",
-                "EXPERIMENTALFEATUREPRIVILEGE",
-                "BYPASSRLS",
-                "DISABLE_PINBOARD_CREATION",
-                "DEVELOPER",
-                "APPLICATION_ADMINISTRATION",
-                "USER_ADMINISTRATION",
-                "GROUP_ADMINISTRATION",
-                "SYSTEM_INFO_ADMINISTRATION",
-                "SYNCMANAGEMENT",
-                "ORG_ADMINISTRATION",
-                "ROLE_ADMINISTRATION",
-                "AUTHENTICATION_ADMINISTRATION",
-                "BILLING_INFO_ADMINISTRATION",
-                "CONTROL_TRUSTED_AUTH",
-                "TAGMANAGEMENT",
-                "LIVEBOARD_VERIFIER",
-                "CAN_MANAGE_CUSTOM_CALENDAR",
-                "CAN_CREATE_OR_EDIT_CONNECTIONS",
-                "CAN_MANAGE_WORKSHEET_VIEWS_TABLES",
-                "CAN_MANAGE_VERSION_CONTROL",
-                "THIRDPARTY_ANALYSIS",
-                "CAN_CREATE_CATALOG",
-                "ALLOW_NON_EMBED_FULL_APP_ACCESS",
-                "CAN_ACCESS_ANALYST_STUDIO",
-                "CAN_MANAGE_ANALYST_STUDIO",
-                "PREVIEW_DOCUMENT_SEARCH",
-                "CAN_SETUP_VERSION_CONTROL"
+                "SAGE_INDEXING",
+                "SAGE_SAMPLING",
+                "ROW_COUNT_STATS"
               ]
             },
-            "description": "Privileges granted to the role."
+            "nullable": true
           },
-          "permission": {
+          "no_policy": {
+            "type": "boolean",
+            "nullable": true
+          }
+        }
+      },
+      "Principal": {
+        "type": "object",
+        "properties": {
+          "type": {
             "type": "string",
             "enum": [
-              "READ_ONLY",
-              "MODIFY",
-              "NO_ACCESS"
+              "USER",
+              "USER_GROUP"
             ],
-            "description": "Permission details of the Role",
             "nullable": true
           },
-          "author_id": {
+          "identifier": {
             "type": "string",
-            "description": "Unique identifier of author of the role.",
+            "nullable": true
+          }
+        }
+      },
+      "CreateConnectionConfigurationResponse": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "$ref": "#/components/schemas/CreateConnectionConfigurationContent",
             "nullable": true
           },
-          "modifier_id": {
+          "queryTriggers": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "SAGE_INDEXING",
+                "SAGE_SAMPLING",
+                "ROW_COUNT_STATS"
+              ]
+            },
+            "nullable": true
+          },
+          "userGroupIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "policyType": {
             "type": "string",
-            "description": "Unique identifier of modifier of the role.",
+            "enum": [
+              "USERGROUPS",
+              "PROCESS",
+              "NO_POLICY"
+            ],
             "nullable": true
           },
-          "creation_time_in_millis": {
+          "disabled": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "authenticationType": {
+            "type": "string",
+            "enum": [
+              "OAUTH",
+              "SERVICE_ACCOUNT",
+              "IAM",
+              "EXTOAUTH",
+              "KEY_PAIR",
+              "OAUTH_WITH_PKCE",
+              "OAUTH_WITH_SERVICE_PRINCIPAL",
+              "PERSONAL_ACCESS_TOKEN"
+            ],
+            "nullable": true
+          },
+          "header": {
+            "$ref": "#/components/schemas/CreateConnectionConfigurationHeader",
+            "nullable": true
+          },
+          "complete": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "incompleteDetail": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        }
+      },
+      "CreateConnectionConfigurationContent": {
+        "type": "object",
+        "required": [
+          "configuration"
+        ],
+        "properties": {
+          "configuration": {
+            "type": "object"
+          }
+        }
+      },
+      "CreateConnectionConfigurationHeader": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "indexVersion": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "generationNum": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "author": {
+            "type": "string",
+            "nullable": true
+          },
+          "created": {
             "type": "object",
-            "description": "Creation time of the role in milliseconds.",
             "nullable": true
           },
-          "modification_time_in_millis": {
+          "modified": {
             "type": "object",
-            "description": "Last modified time of the role in milliseconds.",
             "nullable": true
           },
-          "deleted": {
-            "type": "boolean",
-            "description": "Indicates whether the role is deleted.",
+          "modifiedBy": {
+            "type": "string",
             "nullable": true
           },
-          "deprecated": {
+          "isDeleted": {
             "type": "boolean",
-            "description": "Indicates whether the role is deprecated.",
             "nullable": true
           },
-          "external": {
+          "isHidden": {
             "type": "boolean",
-            "description": "Indicates whether the role is external.",
             "nullable": true
           },
-          "hidden": {
-            "type": "boolean",
-            "description": "Indicates whether the role is hidden.",
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
             "nullable": true
           },
-          "shared_via_connection": {
-            "type": "boolean",
-            "description": "Indicates whether the role is shared via connection",
+          "configs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
             "nullable": true
+          },
+          "isConnectionConfigurationDisabled": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "aiAnswerGenerationDisabled": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "aiAnswerState": {
+            "type": "string",
+            "nullable": true
+          },
+          "isExternal": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "isDeprecated": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "isSharedViaConnection": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "isVerified": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "isVersioningEnabled": {
+            "type": "boolean",
+            "nullable": true
+          }
+        }
+      },
+      "ExternalTableInput": {
+        "type": "object",
+        "required": [
+          "databaseName",
+          "tableName"
+        ],
+        "properties": {
+          "databaseName": {
+            "type": "string",
+            "description": "Name of the database"
+          },
+          "schemaName": {
+            "type": "string",
+            "description": "Name of the schema",
+            "nullable": true
+          },
+          "tableName": {
+            "type": "string",
+            "description": "Name of the table"
           }
         }
       },
