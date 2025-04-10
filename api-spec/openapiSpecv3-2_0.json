@@ -135,7 +135,7 @@
                 "type": "object",
                 "properties": {
                   "metadata_identifier": {
-                    "description": "ID of the metadata object, such as a Worksheet or Model, to use as a data source for the conversation.",
+                    "description": "MC STING",
                     "type": "string"
                   },
                   "tokens": {
