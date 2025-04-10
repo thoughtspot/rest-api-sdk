@@ -86,14 +86,6 @@
       "description": "Roles for version 9.9.0.cl"
     },
     {
-      "name": "10.9.0.cl",
-      "id": "10.9.0.cl",
-      "tags": [
-        "10.9.0.cl"
-      ],
-      "description": "Roles for version 10.9.0.cl"
-    },
-    {
       "name": "10.10.0.cl",
       "id": "10.10.0.cl",
       "tags": [
@@ -135,7 +127,7 @@
                 "type": "object",
                 "properties": {
                   "metadata_identifier": {
-                    "description": "MC STING",
+                    "description": "ID of the metadata object, such as a Worksheet or Model, to use as a data source for the conversation.",
                     "type": "string"
                   },
                   "tokens": {
@@ -1265,259 +1257,6 @@
                 }
               }
             }
-          },
-          "400": {
-            "description": "Invalid request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/rest/2.0/connection-configurations": {
-      "post": {
-        "operationId": "createConnectionConfiguration",
-        "description": " <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>",
-        "tags": [
-          "Connection Configurations",
-          "10.9.0.cl"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "description": "Name of configuration",
-                    "type": "string"
-                  },
-                  "description": {
-                    "description": "Description of configuration",
-                    "type": "string"
-                  },
-                  "configuration": {
-                    "description": "Credentials for configuration",
-                    "type": "object"
-                  },
-                  "policy_configuration": {
-                    "description": "Policy details for the configuration",
-                    "allOf": [
-                      {
-                        "$ref": "#/components/schemas/PolicyConfiguration"
-                      }
-                    ]
-                  },
-                  "connection_identifier": {
-                    "description": "ID of the datasource",
-                    "type": "string"
-                  },
-                  "authentication_type": {
-                    "description": "Authentication type for the configuration",
-                    "type": "string",
-                    "enum": [
-                      "OAUTH",
-                      "SERVICE_ACCOUNT",
-                      "IAM",
-                      "EXTOAUTH",
-                      "KEY_PAIR",
-                      "OAUTH_WITH_PKCE",
-                      "OAUTH_WITH_SERVICE_PRINCIPAL",
-                      "PERSONAL_ACCESS_TOKEN"
-                    ]
-                  },
-                  "state": {
-                    "description": "Oauth request identifier",
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "name",
-                  "configuration",
-                  "policy_configuration",
-                  "authentication_type"
-                ]
-              }
-            }
-          },
-          "required": true
-        },
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Connection configuration successfully created.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CreateConnectionConfigurationResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/rest/2.0/connection-configurations/{configuration_identifier}/update": {
-      "put": {
-        "operationId": "editConnectionConfiguration",
-        "description": "Edit the configuration for the connection <br/>  <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>",
-        "tags": [
-          "Connection Configurations",
-          "10.9.0.cl"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "description": "Name of configuration",
-                    "type": "string"
-                  },
-                  "description": {
-                    "description": "Description of configuration",
-                    "type": "string"
-                  },
-                  "configuration": {
-                    "description": "Credentials for configuration",
-                    "type": "object"
-                  },
-                  "policy_configuration": {
-                    "description": "Policy details for the configuration",
-                    "allOf": [
-                      {
-                        "$ref": "#/components/schemas/PolicyConfiguration"
-                      }
-                    ]
-                  },
-                  "connection_identifier": {
-                    "description": "ID of the datasource",
-                    "type": "string"
-                  },
-                  "authentication_type": {
-                    "description": "Authentication type for the configuration",
-                    "type": "string",
-                    "enum": [
-                      "OAUTH",
-                      "SERVICE_ACCOUNT",
-                      "IAM",
-                      "EXTOAUTH",
-                      "KEY_PAIR",
-                      "OAUTH_WITH_PKCE",
-                      "OAUTH_WITH_SERVICE_PRINCIPAL",
-                      "PERSONAL_ACCESS_TOKEN"
-                    ]
-                  },
-                  "state": {
-                    "description": "Oauth request identifier",
-                    "type": "string"
-                  },
-                  "disable": {
-                    "description": "Indicates whether the configuration enable/disable",
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "name",
-                  "configuration",
-                  "policy_configuration",
-                  "authentication_type"
-                ]
-              }
-            }
-          },
-          "required": true
-        },
-        "parameters": [
-          {
-            "in": "path",
-            "name": "configuration_identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Unique ID or name of the config."
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Connection configuration successfully updated."
           },
           "400": {
             "description": "Invalid request.",
@@ -2819,7 +2558,7 @@
     "/api/rest/2.0/calendars": {
       "post": {
         "operationId": "createCalendar",
-        "description": "\nCreate a new custom calendar\n@param input Calendar configuration details\n@return CalendarResponse with created calendar details <br/>  <span class=\"since-beta-tag\">Version: 10.10.0.cl or later</span>\n\n# Calendar API Documentation\n\n## Overview\nThe `Calendar_createCalendar` API allows users to create custom calendars with various configurations. This document outlines the API design, usage, and comparison with other similar APIs in the system.\n\n## API Structure\n\n### GraphQL Schema\n```graphql\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 10.10.0.cl or later</span>\n\n# Calendar API Documentation\n\n## Overview\nThe `Calendar_createCalendar` API allows users to create custom calendars with various configurations. This document outlines the API design, usage, and comparison with other similar APIs in the system.\n\n## API Structure\n\n### GraphQL Schema\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Custom Calendars",
           "10.10.0.cl"
@@ -2839,7 +2578,7 @@
                     "type": "string"
                   },
                   "external_table": {
-                    "description": "String representing the external table name in JSON format, \nfor example:{ \"databaseName\": \"db1\", \"schemaName\": \"sc1\", \"tableName\": \"tb1\" }. The given table will be created if create_type is CREATE.",
+                    "description": "Object representing the external table name. The given table will be created if create_type is CREATE.",
                     "allOf": [
                       {
                         "$ref": "#/components/schemas/ExternalTableInput"
@@ -2847,7 +2586,7 @@
                     ]
                   },
                   "create_type": {
-                    "description": "Type of create operation to perform",
+                    "description": "Mention type of create.",
                     "type": "string",
                     "enum": [
                       "CREATE",
@@ -2855,15 +2594,16 @@
                     ]
                   },
                   "start_date": {
-                    "description": "Start date for the calendar in MM/dd/yyyy format",
+                    "description": "Start date for the calendar in MM/dd/yyyy format. This field is mandatory when create_type is CREATE.",
                     "type": "string"
                   },
                   "end_date": {
-                    "description": "End date for the calendar in MM/dd/yyyy format",
+                    "description": "End date for the calendar in MM/dd/yyyy format. This field is mandatory when create_type is CREATE.",
                     "type": "string"
                   },
                   "calendar_type": {
-                    "description": "Type of calendar",
+                    "description": "Type of the calendar.",
+                    "default": "MONTH_OFFSET",
                     "type": "string",
                     "enum": [
                       "MONTH_OFFSET",
@@ -2873,24 +2613,45 @@
                     ]
                   },
                   "month_offset": {
-                    "description": "Month offset to start calendar from (e.g., 0 for January, 1 for February, and so on)",
-                    "default": 0,
-                    "type": "integer",
-                    "format": "int32"
+                    "description": "Month offset to start calendar from January.",
+                    "default": "January",
+                    "type": "string",
+                    "enum": [
+                      "January",
+                      "February",
+                      "March",
+                      "April",
+                      "May",
+                      "June",
+                      "July",
+                      "August",
+                      "September",
+                      "October",
+                      "November",
+                      "December"
+                    ]
                   },
                   "start_day_of_week": {
-                    "description": "Start day of the week (1 for Sunday, 2 for Monday, and so on)",
-                    "default": 1,
-                    "type": "integer",
-                    "format": "int32"
+                    "description": "Start day of the week.",
+                    "default": "Sunday",
+                    "type": "string",
+                    "enum": [
+                      "Sunday",
+                      "Monday",
+                      "Tuesday",
+                      "Wednesday",
+                      "Thursday",
+                      "Friday",
+                      "Saturday"
+                    ]
                   },
                   "quarter_name_prefix": {
-                    "description": "Prefix to add before the quarter",
+                    "description": "Prefix to add before the quarter.",
                     "default": "",
                     "type": "string"
                   },
                   "year_name_prefix": {
-                    "description": "Prefix to add before the year",
+                    "description": "Prefix to add before the year.",
                     "default": "",
                     "type": "string"
                   }
@@ -2899,8 +2660,7 @@
                   "name",
                   "connection_identifier",
                   "external_table",
-                  "create_type",
-                  "calendar_type"
+                  "create_type"
                 ]
               }
             }
@@ -16498,238 +16258,6 @@
           }
         }
       },
-      "PolicyConfiguration": {
-        "type": "object",
-        "properties": {
-          "policy_configuration": {
-            "$ref": "#/components/schemas/PolicyConfig",
-            "nullable": true
-          }
-        }
-      },
-      "PolicyConfig": {
-        "type": "object",
-        "properties": {
-          "principals": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Principal"
-            },
-            "nullable": true
-          },
-          "process": {
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "SAGE_INDEXING",
-                "SAGE_SAMPLING",
-                "ROW_COUNT_STATS"
-              ]
-            },
-            "nullable": true
-          },
-          "no_policy": {
-            "type": "boolean",
-            "nullable": true
-          }
-        }
-      },
-      "Principal": {
-        "type": "object",
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "USER",
-              "USER_GROUP"
-            ],
-            "nullable": true
-          },
-          "identifier": {
-            "type": "string",
-            "nullable": true
-          }
-        }
-      },
-      "CreateConnectionConfigurationResponse": {
-        "type": "object",
-        "properties": {
-          "content": {
-            "$ref": "#/components/schemas/CreateConnectionConfigurationContent",
-            "nullable": true
-          },
-          "queryTriggers": {
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "SAGE_INDEXING",
-                "SAGE_SAMPLING",
-                "ROW_COUNT_STATS"
-              ]
-            },
-            "nullable": true
-          },
-          "userGroupIds": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "nullable": true
-          },
-          "policyType": {
-            "type": "string",
-            "enum": [
-              "USERGROUPS",
-              "PROCESS",
-              "NO_POLICY"
-            ],
-            "nullable": true
-          },
-          "disabled": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "authenticationType": {
-            "type": "string",
-            "enum": [
-              "OAUTH",
-              "SERVICE_ACCOUNT",
-              "IAM",
-              "EXTOAUTH",
-              "KEY_PAIR",
-              "OAUTH_WITH_PKCE",
-              "OAUTH_WITH_SERVICE_PRINCIPAL",
-              "PERSONAL_ACCESS_TOKEN"
-            ],
-            "nullable": true
-          },
-          "header": {
-            "$ref": "#/components/schemas/CreateConnectionConfigurationHeader",
-            "nullable": true
-          },
-          "complete": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "incompleteDetail": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "nullable": true
-          }
-        }
-      },
-      "CreateConnectionConfigurationContent": {
-        "type": "object",
-        "required": [
-          "configuration"
-        ],
-        "properties": {
-          "configuration": {
-            "type": "object"
-          }
-        }
-      },
-      "CreateConnectionConfigurationHeader": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "nullable": true
-          },
-          "indexVersion": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "generationNum": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
-          },
-          "author": {
-            "type": "string",
-            "nullable": true
-          },
-          "created": {
-            "type": "object",
-            "nullable": true
-          },
-          "modified": {
-            "type": "object",
-            "nullable": true
-          },
-          "modifiedBy": {
-            "type": "string",
-            "nullable": true
-          },
-          "isDeleted": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "isHidden": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "tags": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "nullable": true
-          },
-          "configs": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "nullable": true
-          },
-          "isConnectionConfigurationDisabled": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "aiAnswerGenerationDisabled": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "aiAnswerState": {
-            "type": "string",
-            "nullable": true
-          },
-          "isExternal": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "isDeprecated": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "isSharedViaConnection": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "isVerified": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "isVersioningEnabled": {
-            "type": "boolean",
-            "nullable": true
-          }
-        }
-      },
       "ExternalTableInput": {
         "type": "object",
         "required": [
@@ -16743,6 +16271,7 @@
           },
           "schemaName": {
             "type": "string",
+            "default": "",
             "description": "Name of the schema",
             "nullable": true
           },
