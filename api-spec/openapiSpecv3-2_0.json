@@ -14940,7 +14940,9 @@
           },
           "type": {
             "type": "string",
-            "enum": [],
+            "enum": [
+              "LOGICAL_TABLE"
+            ],
             "nullable": true
           }
         },
