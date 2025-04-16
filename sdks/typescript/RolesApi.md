@@ -13,7 +13,7 @@ Method | HTTP request | Description
 # **createRole**
 > RoleResponse createRole(createRoleRequest)
 
- Creates a Role. Requires cluster Administration or Role Administration privileges.    Version: 9.5.0.cl or later   Creates a Role object in ThoughtSpot.  Available only if [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance. To create a Role, the `ROLE_ADMINISTRATION` (**Can manage roles**) privilege is required.      
+  Version: 9.5.0.cl or later   Creates a Role object in ThoughtSpot.  Available only if [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance. To create a Role, the `ROLE_ADMINISTRATION` (**Can manage roles**) privilege is required.      
 
 ### Example
 
@@ -35,6 +35,7 @@ apiInstance.createRole(
     privileges: [
       "USERDATAUPLOADING",
     ],
+    read_only: false,
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -79,7 +80,7 @@ Name | Type | Description  | Notes
 # **deleteRole**
 > void deleteRole()
 
- Deletes a Role. Requires cluster Administration or Role Administration privileges.    Version: 9.5.0.cl or later   Deletes a Role object from the ThoughtSpot system.  Available only if [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance. To delete a Role, the `ROLE_ADMINISTRATION` (**Can manage roles**) privilege is required.      
+  Version: 9.5.0.cl or later   Deletes a Role object from the ThoughtSpot system.  Available only if [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance. To delete a Role, the `ROLE_ADMINISTRATION` (**Can manage roles**) privilege is required.      
 
 ### Example
 
@@ -94,7 +95,7 @@ const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
 const apiInstance = new RolesApi(configuration);
 
 apiInstance.deleteRole(
-  // string | Unique ID or name of the Role.
+  // string | Unique ID or name of the Role. ReadOnly roles cannot be deleted.
   "role_identifier_example" 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -108,7 +109,7 @@ apiInstance.deleteRole(
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **roleIdentifier** | [**string**] | Unique ID or name of the Role. | defaults to undefined
+ **roleIdentifier** | [**string**] | Unique ID or name of the Role. ReadOnly roles cannot be deleted. | defaults to undefined
 
 
 ### Return type
@@ -139,7 +140,7 @@ Name | Type | Description  | Notes
 # **searchRoles**
 > Array<SearchRoleResponse> searchRoles(searchRolesRequest)
 
- Gets Roles configured on a ThoughtSpot instance. Requires cluster Administration, Role Administration or Group Administration privileges.    Version: 9.5.0.cl or later   Gets a list of Role objects from the ThoughtSpot system.  Available if [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance. To search for Roles, the `ROLE_ADMINISTRATION` (**Can manage roles**) privilege is required.  To get details of a specific Role object, specify the GUID or name. You can also filter the API response based on user group and Org identifiers, privileges assigned to the Role, and deprecation status.      
+  Version: 9.5.0.cl or later   Gets a list of Role objects from the ThoughtSpot system.  Available if [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance. To search for Roles, the `ROLE_ADMINISTRATION` (**Can manage roles**) privilege is required.  To get details of a specific Role object, specify the GUID or name. You can also filter the API response based on user group and Org identifiers, privileges assigned to the Role, and deprecation status.      
 
 ### Example
 
@@ -218,7 +219,7 @@ Name | Type | Description  | Notes
 # **updateRole**
 > RoleResponse updateRole(updateRoleRequest)
 
- Updates a Role. Requires cluster Administration or Role Administration privileges.    Version: 9.5.0.cl or later   Updates the properties of a Role object.  Available only if [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance. To update a Role, the `ROLE_ADMINISTRATION` (**Can manage roles**) privilege is required.      
+  Version: 9.5.0.cl or later   Updates the properties of a Role object.  Available only if [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance. To update a Role, the `ROLE_ADMINISTRATION` (**Can manage roles**) privilege is required.      
 
 ### Example
 

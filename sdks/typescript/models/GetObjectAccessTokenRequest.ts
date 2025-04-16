@@ -10,12 +10,12 @@
  * Do not edit the class manually.
  */
 
-import { GetObjectAccessTokenRequestUserParameters } from '../models/GetObjectAccessTokenRequestUserParameters';
+import { GetFullAccessTokenRequestUserParameters } from '../models/GetFullAccessTokenRequestUserParameters';
 import { HttpFile } from '../http/http';
 
 export class GetObjectAccessTokenRequest {
     /**
-    * Username of the ThoughtSpot user
+    * Username of the ThoughtSpot user. The username is stored in the `name` attribute of the user object.
     */
     'username': string;
     /**
@@ -54,7 +54,7 @@ export class GetObjectAccessTokenRequest {
     * Unique ID or name of the groups to which you want to assign the new user. You can specify this attribute to dynamically assign privileges during just-in-time (JIT) provisioning.
     */
     'group_identifiers'?: Array<string>;
-    'user_parameters'?: GetObjectAccessTokenRequestUserParameters;
+    'user_parameters'?: GetFullAccessTokenRequestUserParameters;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -122,7 +122,7 @@ export class GetObjectAccessTokenRequest {
         {
             "name": "user_parameters",
             "baseName": "user_parameters",
-            "type": "GetObjectAccessTokenRequestUserParameters",
+            "type": "GetFullAccessTokenRequestUserParameters",
             "format": ""
         }    ];
 
