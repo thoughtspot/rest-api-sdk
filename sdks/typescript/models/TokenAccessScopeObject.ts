@@ -50,5 +50,5 @@ export class TokenAccessScopeObject {
 }
 
 
-export type TokenAccessScopeObjectTypeEnum = "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE" ;
+export type TokenAccessScopeObjectTypeEnum = "LOGICAL_TABLE" ;
 

@@ -25,6 +25,10 @@ export class ActivateUserRequest {
     * New password for the user to access the account.
     */
     'password': string;
+    /**
+    * Properties of the user.
+    */
+    'properties'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -44,6 +48,12 @@ export class ActivateUserRequest {
         {
             "name": "password",
             "baseName": "password",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "properties",
+            "baseName": "properties",
             "type": "string",
             "format": ""
         }    ];

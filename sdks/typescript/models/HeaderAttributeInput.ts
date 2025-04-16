@@ -10,29 +10,20 @@
  * Do not edit the class manually.
  */
 
-import { UserObject } from '../models/UserObject';
 import { HttpFile } from '../http/http';
 
 /**
-* Objects to apply the Runtime_Parameters.
+* Attribute to update in a header.
 */
-export class UserParameters {
+export class HeaderAttributeInput {
     /**
-    * The name of the parameter.
+    * Attribute name to be updated.
     */
     'name': string;
     /**
-    * The array of values.
+    * Attribute\'s new value.
     */
-    'values': Array<string>;
-    /**
-    * Flag to persist the parameters.    Version: 9.12.0.cl or later 
-    */
-    'persist'?: boolean | null;
-    /**
-    * Object to apply the runtime parameter.
-    */
-    'objects'?: Array<UserObject> | null;
+    'value': string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -44,26 +35,14 @@ export class UserParameters {
             "format": ""
         },
         {
-            "name": "values",
-            "baseName": "values",
-            "type": "Array<string>",
-            "format": ""
-        },
-        {
-            "name": "persist",
-            "baseName": "persist",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "objects",
-            "baseName": "objects",
-            "type": "Array<UserObject>",
+            "name": "value",
+            "baseName": "value",
+            "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return UserParameters.attributeTypeMap;
+        return HeaderAttributeInput.attributeTypeMap;
     }
 
     public constructor() {

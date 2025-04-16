@@ -50,5 +50,5 @@ export class UserObject {
 }
 
 
-export type UserObjectTypeEnum = "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE" ;
+export type UserObjectTypeEnum = "LOGICAL_TABLE" ;
 

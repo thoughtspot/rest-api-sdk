@@ -14,11 +14,11 @@ import { HttpFile } from '../http/http';
 
 export class SingleAnswerRequest {
     /**
-    * User natural language query.
+    * A natural language query string to generate the Answer.
     */
     'query': string;
     /**
-    * Data model id to answer the query on.
+    * ID of the metadata object, such as a Worksheet or Model, to use as a data source for the query.
     */
     'metadata_identifier': string;
 

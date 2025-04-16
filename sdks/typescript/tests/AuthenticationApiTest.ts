@@ -78,6 +78,38 @@ describe('AuthenticationApi', function() {
         });     
       });
 
+      describe('getCustomAccessToken', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "getCustomAccessToken"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.getCustomAccessToken(
+                    // getCustomAccessTokenRequest GetCustomAccessTokenRequest
+                     test.Body   
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.getCustomAccessToken(
+                    // getCustomAccessTokenRequest GetCustomAccessTokenRequest
+                     test.Body   
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
       describe('getFullAccessToken', function() {
 
         const testReqBodies = requestBodies.filter(

@@ -14,11 +14,11 @@ import { HttpFile } from '../http/http';
 
 export class CreateConversationRequest {
     /**
-    * Data model id to start the conversation on.
+    * ID of the metadata object, such as a Worksheet or Model, to use as a data source for the conversation.
     */
     'metadata_identifier': string;
     /**
-    * Tokens to start the conversation with.
+    * Token string to set the context for the conversation. For example,`[sales],[item type],[state]`.
     */
     'tokens'?: string;
 

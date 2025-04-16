@@ -14,11 +14,11 @@ import { HttpFile } from '../http/http';
 
 export class SendMessageRequest {
     /**
-    * Data model id to converse on.
+    * ID of the metadata object, such as a Worksheet or Model, to use as a data source for the conversation.
     */
     'metadata_identifier': string;
     /**
-    * User follow up question.
+    * A message string with the follow-up question to continue the conversation.
     */
     'message': string;
 

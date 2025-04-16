@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 
+import { ExportAnswerReportRequestRegionalSettings } from '../models/ExportAnswerReportRequestRegionalSettings';
 import { HttpFile } from '../http/http';
 
 export class ExportAnswerReportRequest {
@@ -41,6 +42,7 @@ export class ExportAnswerReportRequest {
     * JSON object for setting values of parameters in runtime.
     */
     'runtime_param_override'?: any;
+    'regional_settings'?: ExportAnswerReportRequestRegionalSettings;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -85,6 +87,12 @@ export class ExportAnswerReportRequest {
             "name": "runtime_param_override",
             "baseName": "runtime_param_override",
             "type": "any",
+            "format": ""
+        },
+        {
+            "name": "regional_settings",
+            "baseName": "regional_settings",
+            "type": "ExportAnswerReportRequestRegionalSettings",
             "format": ""
         }    ];
 

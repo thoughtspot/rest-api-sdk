@@ -31,7 +31,7 @@ export class UpdateUserRequest {
     */
     'email'?: string;
     /**
-    * Current status of the user account.
+    * Current status of the user account. The `SUSPENDED` user state indicates a transitional state applicable to IAMv2 users only.
     */
     'account_status'?: UpdateUserRequestAccountStatusEnum;
     /**
