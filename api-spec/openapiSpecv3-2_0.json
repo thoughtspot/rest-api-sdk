@@ -13648,19 +13648,19 @@
           "image_resolution": {
             "type": "integer",
             "format": "int32",
-            "description": "Desired width of the Liveboard image in pixels. Ex. 1980 for Full HD image <br/>  <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>",
+            "description": "Desired width of the Liveboard image in pixels. Ex. 1920 for Full HD image <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>",
             "nullable": true
           },
           "image_scale": {
             "type": "integer",
             "format": "int32",
-            "description": "The scale of the image. Ex. 1 for 100% scale. <br/>  <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>",
+            "description": "The scale of the image in percentage. Ex. 100 for 100% scale. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>",
             "nullable": true
           },
           "include_header": {
             "type": "boolean",
             "default": false,
-            "description": "Indicates whether to include the header of the liveboard. <br/>  <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>",
+            "description": "Indicates whether to include the header of the liveboard. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>",
             "nullable": true
           }
         }
