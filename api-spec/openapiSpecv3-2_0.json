@@ -6403,8 +6403,7 @@
                   }
                 },
                 "required": [
-                  "metadata_identifier",
-                  "personalised_view_identifier"
+                  "metadata_identifier"
                 ]
               }
             }
