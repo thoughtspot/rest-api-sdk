@@ -1852,8 +1852,8 @@
                       "PERSONAL_ACCESS_TOKEN"
                     ]
                   },
-                  "resolve_parameter_values": {
-                    "description": "Indicates whether to show resolved parameterised values for the connection.",
+                  "show_resolved_parameters": {
+                    "description": "<div><span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span></div>\n\nIndicates whether to show resolved parameterised values.",
                     "default": false,
                     "type": "boolean",
                     "nullable": true
@@ -5687,7 +5687,7 @@
                     "type": "boolean",
                     "nullable": true
                   },
-                  "resolve_parameter_values": {
+                  "show_resolved_parameters": {
                     "description": "<div><span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span></div>\n\nIndicates whether to show resolved parameterised values.",
                     "default": false,
                     "type": "boolean",
