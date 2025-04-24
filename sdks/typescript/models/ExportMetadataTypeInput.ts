@@ -50,5 +50,5 @@ export class ExportMetadataTypeInput {
 }
 
 
-export type ExportMetadataTypeInputTypeEnum = "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE" | "CONNECTION" | "CUSTOM_ACTION" | "USER" | "USER_GROUP" | "ROLE" ;
+export type ExportMetadataTypeInputTypeEnum = "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE" | "CONNECTION" | "CUSTOM_ACTION" | "USER" | "USER_GROUP" | "ROLE" | "FEEDBACK" ;
 

@@ -37,6 +37,10 @@ export class ExportLiveboardReportRequest {
     */
     'runtime_filter'?: any;
     /**
+    * Applied to the liveboard and overrides any filters already applied on the same columns in liveboard. Following example illustrate different kinds of filters: {   \"override_filters\": [     {       \"column_name\": \"Color\",       \"generic_filter\": {         \"op\": \"IN\",         \"values\": [           \"almond\",           \"turquoise\"         ]       },       \"negate\": false     },     {       \"column_name\": \"Commit Date\",       \"date_filter\": {         \"datePeriod\": \"HOUR\",         \"number\": 3,         \"type\": \"LAST_N_PERIOD\",         \"op\": \"EQ\"       }     },     {       \"column_name\": \"Sales\",       \"generic_filter\": {         \"op\": \"BW_INC\",         \"values\": [           \"100000\",           \"70000\"         ]       },       \"negate\": true     }   ] }
+    */
+    'override_filters'?: any;
+    /**
     * JSON string representing runtime sort. For example, {\"sortCol1\": \"region\", \"asc1\" : true}. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort).
     */
     'runtime_sort'?: any;
@@ -78,6 +82,12 @@ export class ExportLiveboardReportRequest {
         {
             "name": "runtime_filter",
             "baseName": "runtime_filter",
+            "type": "any",
+            "format": ""
+        },
+        {
+            "name": "override_filters",
+            "baseName": "override_filters",
             "type": "any",
             "format": ""
         },

@@ -1,4 +1,4 @@
-## @thoughtspot/rest-api-sdk@2.12.1
+## @thoughtspot/rest-api-sdk@2.13.0
 
 TypeScript/JavaScript client for ThoughtSpot's v2 [Rest APIs](https://developers.thoughtspot.com/docs/rest-api-v2).
 

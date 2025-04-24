@@ -29,6 +29,10 @@ export class MetadataSearchResponse {
     */
     'metadata_type': MetadataSearchResponseMetadataTypeEnum;
     /**
+    * Custom identifier of the metadata. (Available from 10.8.0.cl onwards)
+    */
+    'metadata_obj_id'?: string | null;
+    /**
     * Details of dependent objects of the metadata objects.
     */
     'dependent_objects'?: any | null;
@@ -72,6 +76,12 @@ export class MetadataSearchResponse {
             "name": "metadata_type",
             "baseName": "metadata_type",
             "type": "MetadataSearchResponseMetadataTypeEnum",
+            "format": ""
+        },
+        {
+            "name": "metadata_obj_id",
+            "baseName": "metadata_obj_id",
+            "type": "string",
             "format": ""
         },
         {

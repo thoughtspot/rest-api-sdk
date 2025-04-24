@@ -2460,7 +2460,7 @@ declare class CreateRoleRequest {
     }[];
     constructor();
 }
-type CreateRoleRequestPrivilegesEnum = "USERDATAUPLOADING" | "DATADOWNLOADING" | "DATAMANAGEMENT" | "SHAREWITHALL" | "JOBSCHEDULING" | "A3ANALYSIS" | "EXPERIMENTALFEATUREPRIVILEGE" | "BYPASSRLS" | "DISABLE_PINBOARD_CREATION" | "DEVELOPER" | "APPLICATION_ADMINISTRATION" | "USER_ADMINISTRATION" | "GROUP_ADMINISTRATION" | "SYSTEM_INFO_ADMINISTRATION" | "SYNCMANAGEMENT" | "ORG_ADMINISTRATION" | "ROLE_ADMINISTRATION" | "AUTHENTICATION_ADMINISTRATION" | "BILLING_INFO_ADMINISTRATION" | "CONTROL_TRUSTED_AUTH" | "TAGMANAGEMENT" | "LIVEBOARD_VERIFIER" | "CAN_MANAGE_CUSTOM_CALENDAR" | "CAN_CREATE_OR_EDIT_CONNECTIONS" | "CAN_MANAGE_WORKSHEET_VIEWS_TABLES" | "CAN_MANAGE_VERSION_CONTROL" | "THIRDPARTY_ANALYSIS" | "CAN_CREATE_CATALOG" | "ALLOW_NON_EMBED_FULL_APP_ACCESS" | "CAN_ACCESS_ANALYST_STUDIO" | "CAN_MANAGE_ANALYST_STUDIO" | "PREVIEW_DOCUMENT_SEARCH" | "CAN_SETUP_VERSION_CONTROL" | "PREVIEW_THOUGHTSPOT_SAGE";
+type CreateRoleRequestPrivilegesEnum = "USERDATAUPLOADING" | "DATADOWNLOADING" | "DATAMANAGEMENT" | "SHAREWITHALL" | "JOBSCHEDULING" | "A3ANALYSIS" | "BYPASSRLS" | "DISABLE_PINBOARD_CREATION" | "DEVELOPER" | "APPLICATION_ADMINISTRATION" | "USER_ADMINISTRATION" | "GROUP_ADMINISTRATION" | "SYSTEM_INFO_ADMINISTRATION" | "SYNCMANAGEMENT" | "ORG_ADMINISTRATION" | "ROLE_ADMINISTRATION" | "AUTHENTICATION_ADMINISTRATION" | "BILLING_INFO_ADMINISTRATION" | "CONTROL_TRUSTED_AUTH" | "TAGMANAGEMENT" | "LIVEBOARD_VERIFIER" | "CAN_MANAGE_CUSTOM_CALENDAR" | "CAN_CREATE_OR_EDIT_CONNECTIONS" | "CAN_MANAGE_WORKSHEET_VIEWS_TABLES" | "CAN_MANAGE_VERSION_CONTROL" | "THIRDPARTY_ANALYSIS" | "CAN_CREATE_CATALOG" | "ALLOW_NON_EMBED_FULL_APP_ACCESS" | "CAN_ACCESS_ANALYST_STUDIO" | "CAN_MANAGE_ANALYST_STUDIO" | "PREVIEW_DOCUMENT_SEARCH" | "CAN_SETUP_VERSION_CONTROL" | "PREVIEW_THOUGHTSPOT_SAGE";
 
 /**
  * ThoughtSpot Public REST API
@@ -2892,7 +2892,7 @@ declare class CreateUserGroupRequest {
     }[];
     constructor();
 }
-type CreateUserGroupRequestPrivilegesEnum = "ADMINISTRATION" | "AUTHORING" | "USERDATAUPLOADING" | "DATADOWNLOADING" | "USERMANAGEMENT" | "DATAMANAGEMENT" | "SHAREWITHALL" | "JOBSCHEDULING" | "A3ANALYSIS" | "EXPERIMENTALFEATUREPRIVILEGE" | "BYPASSRLS" | "RANALYSIS" | "DEVELOPER" | "USER_ADMINISTRATION" | "GROUP_ADMINISTRATION" | "SYNCMANAGEMENT" | "CAN_CREATE_CATALOG" | "DISABLE_PINBOARD_CREATION" | "LIVEBOARD_VERIFIER" | "PREVIEW_THOUGHTSPOT_SAGE" | "CAN_MANAGE_VERSION_CONTROL" | "THIRDPARTY_ANALYSIS" | "ALLOW_NON_EMBED_FULL_APP_ACCESS" | "CAN_ACCESS_ANALYST_STUDIO" | "CAN_MANAGE_ANALYST_STUDIO" | "PREVIEW_DOCUMENT_SEARCH" | "CAN_SETUP_VERSION_CONTROL";
+type CreateUserGroupRequestPrivilegesEnum = "ADMINISTRATION" | "AUTHORING" | "USERDATAUPLOADING" | "DATADOWNLOADING" | "USERMANAGEMENT" | "DATAMANAGEMENT" | "SHAREWITHALL" | "JOBSCHEDULING" | "A3ANALYSIS" | "BYPASSRLS" | "RANALYSIS" | "DEVELOPER" | "USER_ADMINISTRATION" | "GROUP_ADMINISTRATION" | "SYNCMANAGEMENT" | "CAN_CREATE_CATALOG" | "DISABLE_PINBOARD_CREATION" | "LIVEBOARD_VERIFIER" | "PREVIEW_THOUGHTSPOT_SAGE" | "CAN_MANAGE_VERSION_CONTROL" | "THIRDPARTY_ANALYSIS" | "ALLOW_NON_EMBED_FULL_APP_ACCESS" | "CAN_ACCESS_ANALYST_STUDIO" | "CAN_MANAGE_ANALYST_STUDIO" | "PREVIEW_DOCUMENT_SEARCH" | "CAN_SETUP_VERSION_CONTROL";
 type CreateUserGroupRequestTypeEnum = "LOCAL_GROUP" | "LDAP_GROUP";
 type CreateUserGroupRequestVisibilityEnum = "SHARABLE" | "NON_SHARABLE";
 
@@ -3040,7 +3040,7 @@ declare class CreateUserRequest {
 type CreateUserRequestAccountTypeEnum = "LOCAL_USER" | "LDAP_USER" | "SAML_USER" | "OIDC_USER" | "REMOTE_USER";
 type CreateUserRequestAccountStatusEnum = "ACTIVE" | "INACTIVE" | "EXPIRED" | "LOCKED" | "PENDING" | "SUSPENDED";
 type CreateUserRequestVisibilityEnum = "SHARABLE" | "NON_SHARABLE";
-type CreateUserRequestPreferredLocaleEnum = "en-CA" | "en-GB" | "en-US" | "de-DE" | "ja-JP" | "zh-CN" | "pt-BR" | "fr-FR" | "fr-CA" | "es-US" | "da-DK" | "es-ES" | "fi-FI" | "sv-SE" | "nb-NO" | "pt-PT" | "nl-NL" | "it-IT" | "ru-RU" | "en-IN";
+type CreateUserRequestPreferredLocaleEnum = "en-CA" | "en-GB" | "en-US" | "de-DE" | "ja-JP" | "zh-CN" | "pt-BR" | "fr-FR" | "fr-CA" | "es-US" | "da-DK" | "es-ES" | "fi-FI" | "sv-SE" | "nb-NO" | "pt-PT" | "nl-NL" | "it-IT" | "ru-RU" | "en-IN" | "de-CH" | "en-NZ" | "es-MX" | "en-AU" | "zh-Hant" | "ko-KR" | "en-DE";
 
 /**
  * ThoughtSpot Public REST API
@@ -3988,6 +3988,109 @@ declare class ErrorResponse {
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+declare class EurekaLLMSuggestedQuery {
+    /**
+    * NL query that can be run using spotter aka natural language search to get an AI generated answer.
+    */
+    'query'?: string | null;
+    /**
+    * Unique identifier of the worksheet on which this query can be run on.
+    */
+    'worksheetId'?: string | null;
+    /**
+    * Display name of the worksheet on which this query can be run on.
+    */
+    'worksheetName'?: string | null;
+    static readonly discriminator: string | undefined;
+    static readonly attributeTypeMap: Array<{
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }>;
+    static getAttributeTypeMap(): {
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }[];
+    constructor();
+}
+
+/**
+ * ThoughtSpot Public REST API
+ * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
+ *
+ * OpenAPI spec version: 2.0
+ *
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+
+declare class EurekaLLMDecomposeQueryResponse {
+    /**
+    * List of analytical questions that can be run on their respective worksheet/data sources.
+    */
+    'decomposedQueries'?: Array<EurekaLLMSuggestedQuery> | null;
+    static readonly discriminator: string | undefined;
+    static readonly attributeTypeMap: Array<{
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }>;
+    static getAttributeTypeMap(): {
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }[];
+    constructor();
+}
+
+/**
+ * ThoughtSpot Public REST API
+ * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
+ *
+ * OpenAPI spec version: 2.0
+ *
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+
+declare class EurekaDecomposeQueryResponse {
+    'decomposedQueryResponse'?: EurekaLLMDecomposeQueryResponse;
+    static readonly discriminator: string | undefined;
+    static readonly attributeTypeMap: Array<{
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }>;
+    static getAttributeTypeMap(): {
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }[];
+    constructor();
+}
+
+/**
+ * ThoughtSpot Public REST API
+ * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
+ *
+ * OpenAPI spec version: 2.0
+ *
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
 declare class ExcludeMetadataListItemInput {
     /**
     * Unique ID or name of the metadata.
@@ -4026,7 +4129,7 @@ type ExcludeMetadataListItemInputTypeEnum = "LIVEBOARD" | "ANSWER" | "LOGICAL_TA
  * Do not edit the class manually.
  */
 /**
-* Options for specific region speciic overrides to support date/number/string/currency formatting.
+* Options for specific region specific overrides to support date/number/string/currency formatting.
 */
 declare class ExportAnswerReportRequestRegionalSettings {
     /**
@@ -4061,9 +4164,9 @@ declare class ExportAnswerReportRequestRegionalSettings {
     constructor();
 }
 type ExportAnswerReportRequestRegionalSettingsCurrencyFormatEnum = "ADP" | "AED" | "AFN" | "ALL" | "AMD" | "ANG" | "AOA" | "ARA" | "ARS" | "ATS" | "AUD" | "AWG" | "AZN" | "BAM" | "BBD" | "BDT" | "BEF" | "BGL" | "BGM" | "BGN" | "BHD" | "BIF" | "BMD" | "BND" | "BOB" | "BOP" | "BOV" | "BRL" | "BSD" | "BTN" | "BUK" | "BWP" | "BYN" | "BZD" | "CAD" | "CDF" | "CHE" | "CHF" | "CHW" | "CLE" | "CLP" | "CNX" | "CNY" | "COP" | "COU" | "CRC" | "CSK" | "CUC" | "CUP" | "CVE" | "CYP" | "CZK" | "DDM" | "DEM" | "DJF" | "DKK" | "DOP" | "DZD" | "ECS" | "ECV" | "EEK" | "EGP" | "ERN" | "ESP" | "ETB" | "EUR" | "FIM" | "FJD" | "FKP" | "FRF" | "GBP" | "GEK" | "GEL" | "GHS" | "GIP" | "GMD" | "GNF" | "GNS" | "GQE" | "GRD" | "GTQ" | "GWE" | "GWP" | "GYD" | "HKD" | "HNL" | "HRD" | "HRK" | "HTG" | "HUF" | "IDR" | "IEP" | "ILP" | "ILS" | "INR" | "IQD" | "IRR" | "ISK" | "ITL" | "JMD" | "JOD" | "JPY" | "KES" | "KGS" | "KHR" | "KMF" | "KPW" | "KRW" | "KWD" | "KYD" | "KZT" | "LAK" | "LBP" | "LKR" | "LRD" | "LSL" | "LTL" | "LTT" | "LUC" | "LUF" | "LUL" | "LVL" | "LVR" | "LYD" | "MAD" | "MAF" | "MCF" | "MDC" | "MDL" | "MGA" | "MGF" | "MKD" | "MLF" | "MMK" | "MNT" | "MOP" | "MRU" | "MTL" | "MTP" | "MUR" | "MVR" | "MWK" | "MXN" | "MXV" | "MYR" | "MZE" | "MZN" | "NAD" | "NGN" | "NIO" | "NLG" | "NOK" | "NPR" | "NZD" | "OMR" | "PAB" | "PEI" | "PEN" | "PGK" | "PHP" | "PKR" | "PLN" | "PTE" | "PYG" | "QAR" | "RHD" | "RON" | "RSD" | "RUB" | "RWF" | "SAR" | "SBD" | "SCR" | "SDG" | "SEK" | "SGD" | "SHP" | "SIT" | "SKK" | "SLL" | "SOS" | "SRD" | "SRG" | "SSP" | "STN" | "SUR" | "SVC" | "SYP" | "SZL" | "THB" | "TJR" | "TJS" | "TMT" | "TND" | "TOP" | "TPE" | "TRY" | "TTD" | "TWD" | "TZS" | "UAH" | "UAK" | "UGX" | "USD" | "UYU" | "UYW" | "UZS" | "VES" | "VND" | "VUV" | "WST" | "XAF" | "XAG" | "XAU" | "XBA" | "XBB" | "XCD" | "XDR" | "XEU" | "XFO" | "XFU" | "XOF" | "XPD" | "XPF" | "XPT" | "XRE" | "XSU" | "XTS" | "XUA" | "XXX" | "YDD" | "YER" | "ZAR" | "ZMW";
-type ExportAnswerReportRequestRegionalSettingsUserLocaleEnum = "en-CA" | "en-GB" | "en-US" | "de-DE" | "ja-JP" | "zh-CN" | "pt-BR" | "fr-FR" | "fr-CA" | "es-US" | "da-DK" | "es-ES" | "fi-FI" | "sv-SE" | "nb-NO" | "pt-PT" | "nl-NL" | "it-IT" | "ru-RU" | "en-IN";
-type ExportAnswerReportRequestRegionalSettingsNumberFormatLocaleEnum = "en-CA" | "en-GB" | "en-US" | "de-DE" | "ja-JP" | "zh-CN" | "pt-BR" | "fr-FR" | "fr-CA" | "es-US" | "da-DK" | "es-ES" | "fi-FI" | "sv-SE" | "nb-NO" | "pt-PT" | "nl-NL" | "it-IT" | "ru-RU" | "en-IN";
-type ExportAnswerReportRequestRegionalSettingsDateFormatLocaleEnum = "en-CA" | "en-GB" | "en-US" | "de-DE" | "ja-JP" | "zh-CN" | "pt-BR" | "fr-FR" | "fr-CA" | "es-US" | "da-DK" | "es-ES" | "fi-FI" | "sv-SE" | "nb-NO" | "pt-PT" | "nl-NL" | "it-IT" | "ru-RU" | "en-IN";
+type ExportAnswerReportRequestRegionalSettingsUserLocaleEnum = "en-CA" | "en-GB" | "en-US" | "de-DE" | "ja-JP" | "zh-CN" | "pt-BR" | "fr-FR" | "fr-CA" | "es-US" | "da-DK" | "es-ES" | "fi-FI" | "sv-SE" | "nb-NO" | "pt-PT" | "nl-NL" | "it-IT" | "ru-RU" | "en-IN" | "de-CH" | "en-NZ" | "es-MX" | "en-AU" | "zh-Hant" | "ko-KR" | "en-DE";
+type ExportAnswerReportRequestRegionalSettingsNumberFormatLocaleEnum = "en-CA" | "en-GB" | "en-US" | "de-DE" | "ja-JP" | "zh-CN" | "pt-BR" | "fr-FR" | "fr-CA" | "es-US" | "da-DK" | "es-ES" | "fi-FI" | "sv-SE" | "nb-NO" | "pt-PT" | "nl-NL" | "it-IT" | "ru-RU" | "en-IN" | "de-CH" | "en-NZ" | "es-MX" | "en-AU" | "zh-Hant" | "ko-KR" | "en-DE";
+type ExportAnswerReportRequestRegionalSettingsDateFormatLocaleEnum = "en-CA" | "en-GB" | "en-US" | "de-DE" | "ja-JP" | "zh-CN" | "pt-BR" | "fr-FR" | "fr-CA" | "es-US" | "da-DK" | "es-ES" | "fi-FI" | "sv-SE" | "nb-NO" | "pt-PT" | "nl-NL" | "it-IT" | "ru-RU" | "en-IN" | "de-CH" | "en-NZ" | "es-MX" | "en-AU" | "zh-Hant" | "ko-KR" | "en-DE";
 
 /**
  * ThoughtSpot Public REST API
@@ -4261,6 +4364,10 @@ declare class ExportLiveboardReportRequest {
     */
     'runtime_filter'?: any;
     /**
+    * Applied to the liveboard and overrides any filters already applied on the same columns in liveboard. Following example illustrate different kinds of filters: {   \"override_filters\": [     {       \"column_name\": \"Color\",       \"generic_filter\": {         \"op\": \"IN\",         \"values\": [           \"almond\",           \"turquoise\"         ]       },       \"negate\": false     },     {       \"column_name\": \"Commit Date\",       \"date_filter\": {         \"datePeriod\": \"HOUR\",         \"number\": 3,         \"type\": \"LAST_N_PERIOD\",         \"op\": \"EQ\"       }     },     {       \"column_name\": \"Sales\",       \"generic_filter\": {         \"op\": \"BW_INC\",         \"values\": [           \"100000\",           \"70000\"         ]       },       \"negate\": true     }   ] }
+    */
+    'override_filters'?: any;
+    /**
     * JSON string representing runtime sort. For example, {\"sortCol1\": \"region\", \"asc1\" : true}. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort).
     */
     'runtime_sort'?: any;
@@ -4358,17 +4465,21 @@ type ExportMetadataTMLBatchedRequestEdocFormatEnum = "JSON" | "YAML";
 */
 declare class ExportMetadataTMLRequestExportOptions {
     /**
-    * Boolean Flag to whether to export user_defined_id of referenced object. This will only be respected when UserDefinedId in TML is enabled.
+    * Boolean Flag to export Object ID of referenced object. This flag will work only after the Object ID feature has been enabled. Please contact support to enable the feature.
     */
     'include_obj_id_ref'?: boolean | null;
     /**
-    * Boolean flag to whether to export guid of the object. This will only be respected when UserDefinedId in TML is enabled.
+    * Boolean flag to export guid of the object. This flag will work only after the Object ID feature has been enabled. Please contact support to enable the feature.
     */
     'include_guid'?: boolean | null;
     /**
-    * Boolean flag to whether to export user_defined_id of the object. This will only be respected when UserDefinedId in TML is enabled.
+    * Boolean flag to export Object ID of the object. This flag will work only after the Object ID feature has been enabled. Please contact support to enable the feature.
     */
     'include_obj_id'?: boolean | null;
+    /**
+    * Boolean flag indicating whether to export associated feedbacks of the object. This will only be respected when the object can have feedbacks.    Version: 10.7.0.cl or later
+    */
+    'export_with_associated_feedbacks'?: boolean | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -4423,7 +4534,7 @@ declare class ExportMetadataTypeInput {
     }[];
     constructor();
 }
-type ExportMetadataTypeInputTypeEnum = "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE" | "CONNECTION" | "CUSTOM_ACTION" | "USER" | "USER_GROUP" | "ROLE";
+type ExportMetadataTypeInputTypeEnum = "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE" | "CONNECTION" | "CUSTOM_ACTION" | "USER" | "USER_GROUP" | "ROLE" | "FEEDBACK";
 
 /**
  * ThoughtSpot Public REST API
@@ -4505,17 +4616,21 @@ type ExportMetadataTMLRequestExportSchemaVersionEnum = "DEFAULT" | "V1" | "V2";
 */
 declare class ExportOptions {
     /**
-    * Boolean Flag to whether to export user_defined_id of referenced object. This will only be respected when UserDefinedId in TML is enabled.
+    * Boolean Flag to export Object ID of referenced object. This flag will work only after the Object ID feature has been enabled. Please contact support to enable the feature.
     */
     'include_obj_id_ref'?: boolean | null;
     /**
-    * Boolean flag to whether to export guid of the object. This will only be respected when UserDefinedId in TML is enabled.
+    * Boolean flag to export guid of the object. This flag will work only after the Object ID feature has been enabled. Please contact support to enable the feature.
     */
     'include_guid'?: boolean | null;
     /**
-    * Boolean flag to whether to export user_defined_id of the object. This will only be respected when UserDefinedId in TML is enabled.
+    * Boolean flag to export Object ID of the object. This flag will work only after the Object ID feature has been enabled. Please contact support to enable the feature.
     */
     'include_obj_id'?: boolean | null;
+    /**
+    * Boolean flag indicating whether to export associated feedbacks of the object. This will only be respected when the object can have feedbacks.    Version: 10.7.0.cl or later
+    */
+    'export_with_associated_feedbacks'?: boolean | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -5524,7 +5639,7 @@ declare class ParameterValues {
 */
 declare class TokenAccessScopeObject {
     /**
-    *   Type of object.     Required if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.
+    *   Type of object.     Required if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.      Specify the object type as `LOGICAL_TABLE`.  The `LIVEBOARD` and `ANSWER` object types are not supported.
     */
     'type'?: TokenAccessScopeObjectTypeEnum | null;
     /**
@@ -5641,242 +5756,6 @@ type GetCustomAccessTokenRequestPersistOptionEnum = "APPEND" | "NONE" | "REPLACE
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-/**
-* Objects to apply the User_Object.
-*/
-declare class UserObject {
-    /**
-    *   Type of object.     Required if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.
-    */
-    'type'?: UserObjectTypeEnum | null;
-    /**
-    * Unique name/id of the object.
-    */
-    'identifier': string;
-    static readonly discriminator: string | undefined;
-    static readonly attributeTypeMap: Array<{
-        name: string;
-        baseName: string;
-        type: string;
-        format: string;
-    }>;
-    static getAttributeTypeMap(): {
-        name: string;
-        baseName: string;
-        type: string;
-        format: string;
-    }[];
-    constructor();
-}
-type UserObjectTypeEnum = "LOGICAL_TABLE";
-
-/**
- * ThoughtSpot Public REST API
- * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
- *
- * OpenAPI spec version: 2.0
- *
- *
- * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
- * https://openapi-generator.tech
- * Do not edit the class manually.
- */
-
-/**
-* Objects to apply the Runtime_Filters.
-*/
-declare class RuntimeFilters {
-    /**
-    * The column name to apply filter.
-    */
-    'column_name': string;
-    /**
-    * Value of the filters.
-    */
-    'values': Array<string>;
-    /**
-    * Operator value. Example: EQ
-    */
-    'operator': RuntimeFiltersOperatorEnum;
-    /**
-    * Flag to persist the runtime filters.    Version: 9.12.0.cl or later
-    */
-    'persist'?: boolean | null;
-    /**
-    * Object to apply the runtime filter.
-    */
-    'objects'?: Array<UserObject> | null;
-    static readonly discriminator: string | undefined;
-    static readonly attributeTypeMap: Array<{
-        name: string;
-        baseName: string;
-        type: string;
-        format: string;
-    }>;
-    static getAttributeTypeMap(): {
-        name: string;
-        baseName: string;
-        type: string;
-        format: string;
-    }[];
-    constructor();
-}
-type RuntimeFiltersOperatorEnum = "EQ" | "NE" | "LT" | "LE" | "GT" | "GE" | "IN" | "BW" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH" | "BW_INC" | "BW_INC_MIN" | "BW_INC_MAX" | "LIKE" | "NOT_IN";
-
-/**
- * ThoughtSpot Public REST API
- * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
- *
- * OpenAPI spec version: 2.0
- *
- *
- * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
- * https://openapi-generator.tech
- * Do not edit the class manually.
- */
-
-/**
-* Objects to apply the Runtime_Parameters.
-*/
-declare class RuntimeParameters {
-    /**
-    * The name of the parameter.
-    */
-    'name': string;
-    /**
-    * The array of values.
-    */
-    'values': Array<string>;
-    /**
-    * Flag to persist the parameters.    Version: 9.12.0.cl or later
-    */
-    'persist'?: boolean | null;
-    /**
-    * Object to apply the runtime parameter.
-    */
-    'objects'?: Array<UserObject> | null;
-    static readonly discriminator: string | undefined;
-    static readonly attributeTypeMap: Array<{
-        name: string;
-        baseName: string;
-        type: string;
-        format: string;
-    }>;
-    static getAttributeTypeMap(): {
-        name: string;
-        baseName: string;
-        type: string;
-        format: string;
-    }[];
-    constructor();
-}
-
-/**
- * ThoughtSpot Public REST API
- * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
- *
- * OpenAPI spec version: 2.0
- *
- *
- * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
- * https://openapi-generator.tech
- * Do not edit the class manually.
- */
-
-/**
-* Objects to apply the Runtime_Sorts.
-*/
-declare class RuntimeSorts {
-    /**
-    * The column name to apply filter.
-    */
-    'column_name'?: string | null;
-    /**
-    * Order for the sort.
-    */
-    'order'?: RuntimeSortsOrderEnum | null;
-    /**
-    * Flag to persist the runtime sorts.    Version: 9.12.0.cl or later
-    */
-    'persist'?: boolean | null;
-    /**
-    * Object to apply the runtime sort.
-    */
-    'objects'?: Array<UserObject> | null;
-    static readonly discriminator: string | undefined;
-    static readonly attributeTypeMap: Array<{
-        name: string;
-        baseName: string;
-        type: string;
-        format: string;
-    }>;
-    static getAttributeTypeMap(): {
-        name: string;
-        baseName: string;
-        type: string;
-        format: string;
-    }[];
-    constructor();
-}
-type RuntimeSortsOrderEnum = "ASC" | "DESC";
-
-/**
- * ThoughtSpot Public REST API
- * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
- *
- * OpenAPI spec version: 2.0
- *
- *
- * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
- * https://openapi-generator.tech
- * Do not edit the class manually.
- */
-
-/**
-* <div>Deprecated: 10.4.0.cl and later </div>  Define attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters).
-*/
-declare class GetFullAccessTokenRequestUserParameters {
-    'objects'?: Array<UserObject> | null;
-    /**
-    * Objects to apply the User_Runtime_Filters.  Examples to set the `runtime_filters` : ```json { \"column_name\": \"Color\", \"operator\": \"EQ\", \"values\": [\"red\"], \"persist\": false } ```
-    */
-    'runtime_filters'?: Array<RuntimeFilters> | null;
-    /**
-    * Objects to apply the User_Runtime_Sorts.  Examples to set the `runtime_sorts` : ```json { \"column_name\": \"Color\", \"order\": \"ASC\", \"persist\": false } ```
-    */
-    'runtime_sorts'?: Array<RuntimeSorts> | null;
-    /**
-    * Objects to apply the Runtime_Parameters.  Examples to set the `parameters` : ```json { \"name\": \"Color\", \"values\": [\"Blue\"], \"persist\": false } ```
-    */
-    'parameters'?: Array<RuntimeParameters> | null;
-    static readonly discriminator: string | undefined;
-    static readonly attributeTypeMap: Array<{
-        name: string;
-        baseName: string;
-        type: string;
-        format: string;
-    }>;
-    static getAttributeTypeMap(): {
-        name: string;
-        baseName: string;
-        type: string;
-        format: string;
-    }[];
-    constructor();
-}
-
-/**
- * ThoughtSpot Public REST API
- * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
- *
- * OpenAPI spec version: 2.0
- *
- *
- * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
- * https://openapi-generator.tech
- * Do not edit the class manually.
- */
-
 declare class GetFullAccessTokenRequest {
     /**
     * Username of the ThoughtSpot user. The username is stored in the `name` attribute of the user object.
@@ -5914,7 +5793,6 @@ declare class GetFullAccessTokenRequest {
     * ID or name of the groups to which the newly created user belongs. Use this parameter to provision a user just-in-time (JIT).
     */
     'group_identifiers'?: Array<string>;
-    'user_parameters'?: GetFullAccessTokenRequestUserParameters;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -5942,7 +5820,6 @@ declare class GetFullAccessTokenRequest {
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-
 declare class GetObjectAccessTokenRequest {
     /**
     * Username of the ThoughtSpot user. The username is stored in the `name` attribute of the user object.
@@ -5984,7 +5861,6 @@ declare class GetObjectAccessTokenRequest {
     * Unique ID or name of the groups to which you want to assign the new user. You can specify this attribute to dynamically assign privileges during just-in-time (JIT) provisioning.
     */
     'group_identifiers'?: Array<string>;
-    'user_parameters'?: GetFullAccessTokenRequestUserParameters;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -6112,7 +5988,7 @@ declare class GroupsImportListInput {
     }[];
     constructor();
 }
-type GroupsImportListInputPrivilegesEnum = "ADMINISTRATION" | "AUTHORING" | "USERDATAUPLOADING" | "DATADOWNLOADING" | "USERMANAGEMENT" | "DATAMANAGEMENT" | "SHAREWITHALL" | "JOBSCHEDULING" | "A3ANALYSIS" | "EXPERIMENTALFEATUREPRIVILEGE" | "BYPASSRLS" | "RANALYSIS" | "DEVELOPER" | "USER_ADMINISTRATION" | "GROUP_ADMINISTRATION" | "SYNCMANAGEMENT" | "CAN_CREATE_CATALOG" | "DISABLE_PINBOARD_CREATION" | "LIVEBOARD_VERIFIER" | "PREVIEW_THOUGHTSPOT_SAGE" | "CAN_MANAGE_VERSION_CONTROL" | "THIRDPARTY_ANALYSIS" | "ALLOW_NON_EMBED_FULL_APP_ACCESS" | "CAN_ACCESS_ANALYST_STUDIO" | "CAN_MANAGE_ANALYST_STUDIO" | "PREVIEW_DOCUMENT_SEARCH" | "CAN_SETUP_VERSION_CONTROL";
+type GroupsImportListInputPrivilegesEnum = "ADMINISTRATION" | "AUTHORING" | "USERDATAUPLOADING" | "DATADOWNLOADING" | "USERMANAGEMENT" | "DATAMANAGEMENT" | "SHAREWITHALL" | "JOBSCHEDULING" | "A3ANALYSIS" | "BYPASSRLS" | "RANALYSIS" | "DEVELOPER" | "USER_ADMINISTRATION" | "GROUP_ADMINISTRATION" | "SYNCMANAGEMENT" | "CAN_CREATE_CATALOG" | "DISABLE_PINBOARD_CREATION" | "LIVEBOARD_VERIFIER" | "PREVIEW_THOUGHTSPOT_SAGE" | "CAN_MANAGE_VERSION_CONTROL" | "THIRDPARTY_ANALYSIS" | "ALLOW_NON_EMBED_FULL_APP_ACCESS" | "CAN_ACCESS_ANALYST_STUDIO" | "CAN_MANAGE_ANALYST_STUDIO" | "PREVIEW_DOCUMENT_SEARCH" | "CAN_SETUP_VERSION_CONTROL";
 type GroupsImportListInputTypeEnum = "LOCAL_GROUP" | "LDAP_GROUP";
 type GroupsImportListInputVisibilityEnum = "SHARABLE" | "NON_SHARABLE";
 
@@ -6227,7 +6103,7 @@ declare class ImportMetadataTMLAsyncRequest {
     /**
     * If import is happening from all orgs context.
     */
-    'all_orgs_context'?: boolean | null;
+    'all_orgs_override'?: boolean | null;
     /**
     * <div>Version: 10.5.0.cl or later </div>  Policy to be followed while importing the TML. Valid values are [PARTIAL_OBJECT, PARTIAL, VALIDATE_ONLY, ALL_OR_NONE]
     */
@@ -6237,7 +6113,7 @@ declare class ImportMetadataTMLAsyncRequest {
     */
     'skip_diff_check'?: boolean | null;
     /**
-    * <div>Version: 10.5.0.cl or later </div>  Boolean to indicate if the large metadata validation should be enabled. Set to `true` if the database contains multiple thousands of tables.
+    * <div>Version: 10.5.0.cl or later </div>  Boolean to indicate if the large metadata validation should be enabled.
     */
     'enable_large_metadata_validation'?: boolean | null;
     static readonly discriminator: string | undefined;
@@ -6284,13 +6160,13 @@ declare class ImportMetadataTMLRequest {
     /**
     * If import is happening from all orgs context.
     */
-    'all_orgs_context'?: boolean | null;
+    'all_orgs_override'?: boolean | null;
     /**
     * <div>Version: 10.6.0.cl or later </div>  Boolean Flag to skip TML diff check before processing object TMLs.
     */
     'skip_diff_check'?: boolean | null;
     /**
-    * <div>Version: 10.5.0.cl or later </div>  Boolean to indicate if the large metadata validation should be enabled. Set to `true` if the database contains multiple thousands of tables.
+    * <div>Version: 10.5.0.cl or later </div>  Boolean to indicate if the large metadata validation should be enabled.
     */
     'enable_large_metadata_validation'?: boolean | null;
     static readonly discriminator: string | undefined;
@@ -6634,12 +6510,23 @@ declare class ImportUsersResponse {
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-/**
-* Metadata objects.
-*/
-declare class JWTMetadataObject {
-    'identifier'?: string | null;
-    'type'?: JWTMetadataObjectTypeEnum | null;
+declare class InputEurekaNLSRequest {
+    /**
+    * Cluster version like 10.4.0.cl, 10.5.0.cl, so on.
+    */
+    'agentVersion'?: number | null;
+    /**
+    * If true, results are not returned from cache & calculated every time. Can incur high costs & latency.
+    */
+    'bypassCache'?: boolean | null;
+    /**
+    * User specific instructions for processing the @query.
+    */
+    'instructions'?: Array<string> | null;
+    /**
+    * User query which is a topical/goal oriented question that needs to be broken down into smaller simple analytical questions.
+    */
+    'query'?: string | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -6655,7 +6542,39 @@ declare class JWTMetadataObject {
     }[];
     constructor();
 }
-type JWTMetadataObjectTypeEnum = "LOGICAL_TABLE";
+
+/**
+ * ThoughtSpot Public REST API
+ * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
+ *
+ * OpenAPI spec version: 2.0
+ *
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+* Metadata objects.
+*/
+declare class JWTMetadataObject {
+    'identifier'?: string | null;
+    'type'?: string | null;
+    static readonly discriminator: string | undefined;
+    static readonly attributeTypeMap: Array<{
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }>;
+    static getAttributeTypeMap(): {
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }[];
+    constructor();
+}
 
 /**
  * ThoughtSpot Public REST API
@@ -7236,6 +7155,10 @@ declare class MetadataSearchResponse {
     */
     'metadata_type': MetadataSearchResponseMetadataTypeEnum;
     /**
+    * Custom identifier of the metadata. (Available from 10.8.0.cl onwards)
+    */
+    'metadata_obj_id'?: string | null;
+    /**
     * Details of dependent objects of the metadata objects.
     */
     'dependent_objects'?: any | null;
@@ -7753,6 +7676,107 @@ declare class PrincipalsListItem {
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+/**
+* NLSRequest object containing user query & instructions.
+*/
+declare class QueryGetDecomposedQueryRequestNlsRequest {
+    /**
+    * Cluster version like 10.4.0.cl, 10.5.0.cl, so on.
+    */
+    'agentVersion'?: number | null;
+    /**
+    * If true, results are not returned from cache & calculated every time. Can incur high costs & latency.
+    */
+    'bypassCache'?: boolean | null;
+    /**
+    * User specific instructions for processing the @query.
+    */
+    'instructions'?: Array<string> | null;
+    /**
+    * User query which is a topical/goal oriented question that needs to be broken down into smaller simple analytical questions.
+    */
+    'query'?: string | null;
+    static readonly discriminator: string | undefined;
+    static readonly attributeTypeMap: Array<{
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }>;
+    static getAttributeTypeMap(): {
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }[];
+    constructor();
+}
+
+/**
+ * ThoughtSpot Public REST API
+ * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
+ *
+ * OpenAPI spec version: 2.0
+ *
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+
+declare class QueryGetDecomposedQueryRequest {
+    /**
+    * List of answer unique identifiers (GUIDs) whose data will be used to guide the response.
+    */
+    'answerIds'?: Array<string>;
+    /**
+    * User provided content like text data, csv data as a string message to provide context & potentially improve the quality of the response.
+    */
+    'content'?: Array<string>;
+    /**
+    * Unique identifier to denote current conversation.
+    */
+    'conversationId'?: string;
+    /**
+    * List of liveboard unique identifiers (GUIDs) whose data will be used to guide the response.
+    */
+    'liveboardIds'?: Array<string>;
+    /**
+    * Maximum number of decomposed queries that is allowed in the response, default = 5.
+    */
+    'maxDecomposedQueries'?: number;
+    'nlsRequest'?: QueryGetDecomposedQueryRequestNlsRequest;
+    /**
+    * List of worksheetIds to provide context for decomposing user query into analytical queries that can be run on them.
+    */
+    'worksheetIds'?: Array<string>;
+    static readonly discriminator: string | undefined;
+    static readonly attributeTypeMap: Array<{
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }>;
+    static getAttributeTypeMap(): {
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }[];
+    constructor();
+}
+
+/**
+ * ThoughtSpot Public REST API
+ * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
+ *
+ * OpenAPI spec version: 2.0
+ *
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
 
 /**
 * Recipient configuration which includes email address, ID or name of the users and groups.
@@ -7866,9 +7890,9 @@ declare class RegionalSettingsInput {
     constructor();
 }
 type RegionalSettingsInputCurrencyFormatEnum = "ADP" | "AED" | "AFN" | "ALL" | "AMD" | "ANG" | "AOA" | "ARA" | "ARS" | "ATS" | "AUD" | "AWG" | "AZN" | "BAM" | "BBD" | "BDT" | "BEF" | "BGL" | "BGM" | "BGN" | "BHD" | "BIF" | "BMD" | "BND" | "BOB" | "BOP" | "BOV" | "BRL" | "BSD" | "BTN" | "BUK" | "BWP" | "BYN" | "BZD" | "CAD" | "CDF" | "CHE" | "CHF" | "CHW" | "CLE" | "CLP" | "CNX" | "CNY" | "COP" | "COU" | "CRC" | "CSK" | "CUC" | "CUP" | "CVE" | "CYP" | "CZK" | "DDM" | "DEM" | "DJF" | "DKK" | "DOP" | "DZD" | "ECS" | "ECV" | "EEK" | "EGP" | "ERN" | "ESP" | "ETB" | "EUR" | "FIM" | "FJD" | "FKP" | "FRF" | "GBP" | "GEK" | "GEL" | "GHS" | "GIP" | "GMD" | "GNF" | "GNS" | "GQE" | "GRD" | "GTQ" | "GWE" | "GWP" | "GYD" | "HKD" | "HNL" | "HRD" | "HRK" | "HTG" | "HUF" | "IDR" | "IEP" | "ILP" | "ILS" | "INR" | "IQD" | "IRR" | "ISK" | "ITL" | "JMD" | "JOD" | "JPY" | "KES" | "KGS" | "KHR" | "KMF" | "KPW" | "KRW" | "KWD" | "KYD" | "KZT" | "LAK" | "LBP" | "LKR" | "LRD" | "LSL" | "LTL" | "LTT" | "LUC" | "LUF" | "LUL" | "LVL" | "LVR" | "LYD" | "MAD" | "MAF" | "MCF" | "MDC" | "MDL" | "MGA" | "MGF" | "MKD" | "MLF" | "MMK" | "MNT" | "MOP" | "MRU" | "MTL" | "MTP" | "MUR" | "MVR" | "MWK" | "MXN" | "MXV" | "MYR" | "MZE" | "MZN" | "NAD" | "NGN" | "NIO" | "NLG" | "NOK" | "NPR" | "NZD" | "OMR" | "PAB" | "PEI" | "PEN" | "PGK" | "PHP" | "PKR" | "PLN" | "PTE" | "PYG" | "QAR" | "RHD" | "RON" | "RSD" | "RUB" | "RWF" | "SAR" | "SBD" | "SCR" | "SDG" | "SEK" | "SGD" | "SHP" | "SIT" | "SKK" | "SLL" | "SOS" | "SRD" | "SRG" | "SSP" | "STN" | "SUR" | "SVC" | "SYP" | "SZL" | "THB" | "TJR" | "TJS" | "TMT" | "TND" | "TOP" | "TPE" | "TRY" | "TTD" | "TWD" | "TZS" | "UAH" | "UAK" | "UGX" | "USD" | "UYU" | "UYW" | "UZS" | "VES" | "VND" | "VUV" | "WST" | "XAF" | "XAG" | "XAU" | "XBA" | "XBB" | "XCD" | "XDR" | "XEU" | "XFO" | "XFU" | "XOF" | "XPD" | "XPF" | "XPT" | "XRE" | "XSU" | "XTS" | "XUA" | "XXX" | "YDD" | "YER" | "ZAR" | "ZMW";
-type RegionalSettingsInputUserLocaleEnum = "en-CA" | "en-GB" | "en-US" | "de-DE" | "ja-JP" | "zh-CN" | "pt-BR" | "fr-FR" | "fr-CA" | "es-US" | "da-DK" | "es-ES" | "fi-FI" | "sv-SE" | "nb-NO" | "pt-PT" | "nl-NL" | "it-IT" | "ru-RU" | "en-IN";
-type RegionalSettingsInputNumberFormatLocaleEnum = "en-CA" | "en-GB" | "en-US" | "de-DE" | "ja-JP" | "zh-CN" | "pt-BR" | "fr-FR" | "fr-CA" | "es-US" | "da-DK" | "es-ES" | "fi-FI" | "sv-SE" | "nb-NO" | "pt-PT" | "nl-NL" | "it-IT" | "ru-RU" | "en-IN";
-type RegionalSettingsInputDateFormatLocaleEnum = "en-CA" | "en-GB" | "en-US" | "de-DE" | "ja-JP" | "zh-CN" | "pt-BR" | "fr-FR" | "fr-CA" | "es-US" | "da-DK" | "es-ES" | "fi-FI" | "sv-SE" | "nb-NO" | "pt-PT" | "nl-NL" | "it-IT" | "ru-RU" | "en-IN";
+type RegionalSettingsInputUserLocaleEnum = "en-CA" | "en-GB" | "en-US" | "de-DE" | "ja-JP" | "zh-CN" | "pt-BR" | "fr-FR" | "fr-CA" | "es-US" | "da-DK" | "es-ES" | "fi-FI" | "sv-SE" | "nb-NO" | "pt-PT" | "nl-NL" | "it-IT" | "ru-RU" | "en-IN" | "de-CH" | "en-NZ" | "es-MX" | "en-AU" | "zh-Hant" | "ko-KR" | "en-DE";
+type RegionalSettingsInputNumberFormatLocaleEnum = "en-CA" | "en-GB" | "en-US" | "de-DE" | "ja-JP" | "zh-CN" | "pt-BR" | "fr-FR" | "fr-CA" | "es-US" | "da-DK" | "es-ES" | "fi-FI" | "sv-SE" | "nb-NO" | "pt-PT" | "nl-NL" | "it-IT" | "ru-RU" | "en-IN" | "de-CH" | "en-NZ" | "es-MX" | "en-AU" | "zh-Hant" | "ko-KR" | "en-DE";
+type RegionalSettingsInputDateFormatLocaleEnum = "en-CA" | "en-GB" | "en-US" | "de-DE" | "ja-JP" | "zh-CN" | "pt-BR" | "fr-FR" | "fr-CA" | "es-US" | "da-DK" | "es-ES" | "fi-FI" | "sv-SE" | "nb-NO" | "pt-PT" | "nl-NL" | "it-IT" | "ru-RU" | "en-IN" | "de-CH" | "en-NZ" | "es-MX" | "en-AU" | "zh-Hant" | "ko-KR" | "en-DE";
 
 /**
  * ThoughtSpot Public REST API
@@ -8780,6 +8804,36 @@ declare class RevokeTokenRequest {
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+declare class RiseGQLArgWrapper {
+    'name': string;
+    'type': string;
+    static readonly discriminator: string | undefined;
+    static readonly attributeTypeMap: Array<{
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }>;
+    static getAttributeTypeMap(): {
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }[];
+    constructor();
+}
+
+/**
+ * ThoughtSpot Public REST API
+ * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
+ *
+ * OpenAPI spec version: 2.0
+ *
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
 declare class RiseSetter {
     'field': string;
     'path': string;
@@ -8931,7 +8985,7 @@ declare class RoleResponse {
     }[];
     constructor();
 }
-type RoleResponsePrivilegesEnum = "USERDATAUPLOADING" | "DATADOWNLOADING" | "DATAMANAGEMENT" | "SHAREWITHALL" | "JOBSCHEDULING" | "A3ANALYSIS" | "EXPERIMENTALFEATUREPRIVILEGE" | "BYPASSRLS" | "DISABLE_PINBOARD_CREATION" | "DEVELOPER" | "APPLICATION_ADMINISTRATION" | "USER_ADMINISTRATION" | "GROUP_ADMINISTRATION" | "SYSTEM_INFO_ADMINISTRATION" | "SYNCMANAGEMENT" | "ORG_ADMINISTRATION" | "ROLE_ADMINISTRATION" | "AUTHENTICATION_ADMINISTRATION" | "BILLING_INFO_ADMINISTRATION" | "CONTROL_TRUSTED_AUTH" | "TAGMANAGEMENT" | "LIVEBOARD_VERIFIER" | "CAN_MANAGE_CUSTOM_CALENDAR" | "CAN_CREATE_OR_EDIT_CONNECTIONS" | "CAN_MANAGE_WORKSHEET_VIEWS_TABLES" | "CAN_MANAGE_VERSION_CONTROL" | "THIRDPARTY_ANALYSIS" | "CAN_CREATE_CATALOG" | "ALLOW_NON_EMBED_FULL_APP_ACCESS" | "CAN_ACCESS_ANALYST_STUDIO" | "CAN_MANAGE_ANALYST_STUDIO" | "PREVIEW_DOCUMENT_SEARCH" | "CAN_SETUP_VERSION_CONTROL" | "PREVIEW_THOUGHTSPOT_SAGE";
+type RoleResponsePrivilegesEnum = "USERDATAUPLOADING" | "DATADOWNLOADING" | "DATAMANAGEMENT" | "SHAREWITHALL" | "JOBSCHEDULING" | "A3ANALYSIS" | "BYPASSRLS" | "DISABLE_PINBOARD_CREATION" | "DEVELOPER" | "APPLICATION_ADMINISTRATION" | "USER_ADMINISTRATION" | "GROUP_ADMINISTRATION" | "SYSTEM_INFO_ADMINISTRATION" | "SYNCMANAGEMENT" | "ORG_ADMINISTRATION" | "ROLE_ADMINISTRATION" | "AUTHENTICATION_ADMINISTRATION" | "BILLING_INFO_ADMINISTRATION" | "CONTROL_TRUSTED_AUTH" | "TAGMANAGEMENT" | "LIVEBOARD_VERIFIER" | "CAN_MANAGE_CUSTOM_CALENDAR" | "CAN_CREATE_OR_EDIT_CONNECTIONS" | "CAN_MANAGE_WORKSHEET_VIEWS_TABLES" | "CAN_MANAGE_VERSION_CONTROL" | "THIRDPARTY_ANALYSIS" | "CAN_CREATE_CATALOG" | "ALLOW_NON_EMBED_FULL_APP_ACCESS" | "CAN_ACCESS_ANALYST_STUDIO" | "CAN_MANAGE_ANALYST_STUDIO" | "PREVIEW_DOCUMENT_SEARCH" | "CAN_SETUP_VERSION_CONTROL" | "PREVIEW_THOUGHTSPOT_SAGE";
 type RoleResponsePermissionEnum = "READ_ONLY" | "MODIFY" | "NO_ACCESS";
 
 /**
@@ -8981,6 +9035,99 @@ declare class RuntimeFilter {
  * Do not edit the class manually.
  */
 /**
+* Objects to apply the User_Object.
+*/
+declare class UserObject {
+    /**
+    *   Type of object.     Required if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.      Specify the object type as `LOGICAL_TABLE`.  The `LIVEBOARD` and `ANSWER` object types are not supported.
+    */
+    'type'?: UserObjectTypeEnum | null;
+    /**
+    * Unique name/id of the object.
+    */
+    'identifier': string;
+    static readonly discriminator: string | undefined;
+    static readonly attributeTypeMap: Array<{
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }>;
+    static getAttributeTypeMap(): {
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }[];
+    constructor();
+}
+type UserObjectTypeEnum = "LOGICAL_TABLE";
+
+/**
+ * ThoughtSpot Public REST API
+ * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
+ *
+ * OpenAPI spec version: 2.0
+ *
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+
+/**
+* Objects to apply the Runtime_Filters.
+*/
+declare class RuntimeFilters {
+    /**
+    * The column name to apply filter.
+    */
+    'column_name': string;
+    /**
+    * Value of the filters.
+    */
+    'values': Array<string>;
+    /**
+    * Operator value. Example: EQ
+    */
+    'operator': RuntimeFiltersOperatorEnum;
+    /**
+    * Flag to persist the runtime filters.    Version: 9.12.0.cl or later
+    */
+    'persist'?: boolean | null;
+    /**
+    * Object to apply the runtime filter.
+    */
+    'objects'?: Array<UserObject> | null;
+    static readonly discriminator: string | undefined;
+    static readonly attributeTypeMap: Array<{
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }>;
+    static getAttributeTypeMap(): {
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }[];
+    constructor();
+}
+type RuntimeFiltersOperatorEnum = "EQ" | "NE" | "LT" | "LE" | "GT" | "GE" | "IN" | "BW" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH" | "BW_INC" | "BW_INC_MIN" | "BW_INC_MAX" | "LIKE" | "NOT_IN";
+
+/**
+ * ThoughtSpot Public REST API
+ * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
+ *
+ * OpenAPI spec version: 2.0
+ *
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
 * List of runtime parameters need to set during the session.
 */
 declare class RuntimeParamOverride {
@@ -8988,6 +9135,54 @@ declare class RuntimeParamOverride {
     * Runtime param override type in JWT.
     */
     'runtime_param_override'?: any;
+    static readonly discriminator: string | undefined;
+    static readonly attributeTypeMap: Array<{
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }>;
+    static getAttributeTypeMap(): {
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }[];
+    constructor();
+}
+
+/**
+ * ThoughtSpot Public REST API
+ * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
+ *
+ * OpenAPI spec version: 2.0
+ *
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+
+/**
+* Objects to apply the Runtime_Parameters.
+*/
+declare class RuntimeParameters {
+    /**
+    * The name of the parameter.
+    */
+    'name': string;
+    /**
+    * The array of values.
+    */
+    'values': Array<string>;
+    /**
+    * Flag to persist the parameters.    Version: 9.12.0.cl or later
+    */
+    'persist'?: boolean | null;
+    /**
+    * Object to apply the runtime parameter.
+    */
+    'objects'?: Array<UserObject> | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -9038,6 +9233,55 @@ declare class RuntimeSort {
     }[];
     constructor();
 }
+
+/**
+ * ThoughtSpot Public REST API
+ * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
+ *
+ * OpenAPI spec version: 2.0
+ *
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+
+/**
+* Objects to apply the Runtime_Sorts.
+*/
+declare class RuntimeSorts {
+    /**
+    * The column name to apply filter.
+    */
+    'column_name'?: string | null;
+    /**
+    * Order for the sort.
+    */
+    'order'?: RuntimeSortsOrderEnum | null;
+    /**
+    * Flag to persist the runtime sorts.    Version: 9.12.0.cl or later
+    */
+    'persist'?: boolean | null;
+    /**
+    * Object to apply the runtime sort.
+    */
+    'objects'?: Array<UserObject> | null;
+    static readonly discriminator: string | undefined;
+    static readonly attributeTypeMap: Array<{
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }>;
+    static getAttributeTypeMap(): {
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }[];
+    constructor();
+}
+type RuntimeSortsOrderEnum = "ASC" | "DESC";
 
 /**
  * ThoughtSpot Public REST API
@@ -9775,7 +10019,7 @@ declare class SearchMetadataRequest {
     */
     'record_offset'?: number;
     /**
-    * The number of records that should be included.
+    * The number of records that should be included. It is recommended to use a smaller `record_size` when fetching dependent objects or any of the additional metadata detail options.
     */
     'record_size'?: number;
     'sort_options'?: SearchMetadataRequestSortOptions;
@@ -9787,6 +10031,10 @@ declare class SearchMetadataRequest {
     * Indicates whether to include stats of the metadata objects.
     */
     'include_stats'?: boolean | null;
+    /**
+    * Indicates whether to include discoverable metadata objects. If lenient OSM is not enabled, then even though the includeDiscoverableObjects is set to True, we won\'t see discoverable objects.
+    */
+    'include_discoverable_objects'?: boolean | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -11529,11 +11777,92 @@ declare class UpdateMetadataHeaderRequest {
     /**
     * List of header objects to update.
     */
-    'headers_update'?: Array<HeaderUpdateInput>;
+    'headers_update': Array<HeaderUpdateInput>;
     /**
     * Unique ID or name of the organization.
     */
     'org_identifier'?: string;
+    static readonly discriminator: string | undefined;
+    static readonly attributeTypeMap: Array<{
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }>;
+    static getAttributeTypeMap(): {
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }[];
+    constructor();
+}
+
+/**
+ * ThoughtSpot Public REST API
+ * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
+ *
+ * OpenAPI spec version: 2.0
+ *
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+* Input for updating object ID of a metadata object.
+*/
+declare class UpdateObjIdInput {
+    /**
+    * GUID or name of the metadata object.
+    */
+    'metadata_identifier'?: string | null;
+    /**
+    * Type of metadata. Required if metadata_identifier is name of the object.
+    */
+    'type'?: UpdateObjIdInputTypeEnum | null;
+    /**
+    * Current object ID value.
+    */
+    'current_obj_id'?: string | null;
+    /**
+    * New object ID value to set.
+    */
+    'new_obj_id': string;
+    static readonly discriminator: string | undefined;
+    static readonly attributeTypeMap: Array<{
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }>;
+    static getAttributeTypeMap(): {
+        name: string;
+        baseName: string;
+        type: string;
+        format: string;
+    }[];
+    constructor();
+}
+type UpdateObjIdInputTypeEnum = "ANSWER" | "LOGICAL_TABLE" | "LOGICAL_COLUMN" | "LIVEBOARD" | "ACTION_OBJECT" | "DATA_SOURCE" | "USER" | "USER_GROUP";
+
+/**
+ * ThoughtSpot Public REST API
+ * No description provided (generated by Openapi Generator https://github.com/openapitools/openapi-generator)
+ *
+ * OpenAPI spec version: 2.0
+ *
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+
+declare class UpdateMetadataObjIdRequest {
+    /**
+    * List of metadata objects to update their object IDs.
+    */
+    'metadata': Array<UpdateObjIdInput>;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -11638,7 +11967,7 @@ declare class UpdateRoleRequest {
     }[];
     constructor();
 }
-type UpdateRoleRequestPrivilegesEnum = "USERDATAUPLOADING" | "DATADOWNLOADING" | "DATAMANAGEMENT" | "SHAREWITHALL" | "JOBSCHEDULING" | "A3ANALYSIS" | "EXPERIMENTALFEATUREPRIVILEGE" | "BYPASSRLS" | "DISABLE_PINBOARD_CREATION" | "DEVELOPER" | "APPLICATION_ADMINISTRATION" | "USER_ADMINISTRATION" | "GROUP_ADMINISTRATION" | "SYSTEM_INFO_ADMINISTRATION" | "SYNCMANAGEMENT" | "ORG_ADMINISTRATION" | "ROLE_ADMINISTRATION" | "AUTHENTICATION_ADMINISTRATION" | "BILLING_INFO_ADMINISTRATION" | "CONTROL_TRUSTED_AUTH" | "TAGMANAGEMENT" | "LIVEBOARD_VERIFIER" | "CAN_MANAGE_CUSTOM_CALENDAR" | "CAN_CREATE_OR_EDIT_CONNECTIONS" | "CAN_MANAGE_WORKSHEET_VIEWS_TABLES" | "CAN_MANAGE_VERSION_CONTROL" | "THIRDPARTY_ANALYSIS" | "CAN_CREATE_CATALOG" | "CAN_ACCESS_ANALYST_STUDIO" | "CAN_MANAGE_ANALYST_STUDIO" | "PREVIEW_DOCUMENT_SEARCH";
+type UpdateRoleRequestPrivilegesEnum = "USERDATAUPLOADING" | "DATADOWNLOADING" | "DATAMANAGEMENT" | "SHAREWITHALL" | "JOBSCHEDULING" | "A3ANALYSIS" | "BYPASSRLS" | "DISABLE_PINBOARD_CREATION" | "DEVELOPER" | "APPLICATION_ADMINISTRATION" | "USER_ADMINISTRATION" | "GROUP_ADMINISTRATION" | "SYSTEM_INFO_ADMINISTRATION" | "SYNCMANAGEMENT" | "ORG_ADMINISTRATION" | "ROLE_ADMINISTRATION" | "AUTHENTICATION_ADMINISTRATION" | "BILLING_INFO_ADMINISTRATION" | "CONTROL_TRUSTED_AUTH" | "TAGMANAGEMENT" | "LIVEBOARD_VERIFIER" | "CAN_MANAGE_CUSTOM_CALENDAR" | "CAN_CREATE_OR_EDIT_CONNECTIONS" | "CAN_MANAGE_WORKSHEET_VIEWS_TABLES" | "CAN_MANAGE_VERSION_CONTROL" | "THIRDPARTY_ANALYSIS" | "CAN_CREATE_CATALOG" | "CAN_ACCESS_ANALYST_STUDIO" | "CAN_MANAGE_ANALYST_STUDIO" | "PREVIEW_DOCUMENT_SEARCH";
 
 /**
  * ThoughtSpot Public REST API
@@ -12020,7 +12349,7 @@ declare class UpdateUserGroupRequest {
     }[];
     constructor();
 }
-type UpdateUserGroupRequestPrivilegesEnum = "ADMINISTRATION" | "AUTHORING" | "USERDATAUPLOADING" | "DATADOWNLOADING" | "USERMANAGEMENT" | "DATAMANAGEMENT" | "SHAREWITHALL" | "JOBSCHEDULING" | "A3ANALYSIS" | "EXPERIMENTALFEATUREPRIVILEGE" | "BYPASSRLS" | "RANALYSIS" | "DEVELOPER" | "USER_ADMINISTRATION" | "GROUP_ADMINISTRATION" | "SYNCMANAGEMENT" | "CAN_CREATE_CATALOG" | "DISABLE_PINBOARD_CREATION" | "LIVEBOARD_VERIFIER" | "PREVIEW_THOUGHTSPOT_SAGE" | "CAN_MANAGE_VERSION_CONTROL" | "THIRDPARTY_ANALYSIS" | "ALLOW_NON_EMBED_FULL_APP_ACCESS" | "CAN_ACCESS_ANALYST_STUDIO" | "CAN_MANAGE_ANALYST_STUDIO" | "PREVIEW_DOCUMENT_SEARCH" | "CAN_SETUP_VERSION_CONTROL";
+type UpdateUserGroupRequestPrivilegesEnum = "ADMINISTRATION" | "AUTHORING" | "USERDATAUPLOADING" | "DATADOWNLOADING" | "USERMANAGEMENT" | "DATAMANAGEMENT" | "SHAREWITHALL" | "JOBSCHEDULING" | "A3ANALYSIS" | "BYPASSRLS" | "RANALYSIS" | "DEVELOPER" | "USER_ADMINISTRATION" | "GROUP_ADMINISTRATION" | "SYNCMANAGEMENT" | "CAN_CREATE_CATALOG" | "DISABLE_PINBOARD_CREATION" | "LIVEBOARD_VERIFIER" | "PREVIEW_THOUGHTSPOT_SAGE" | "CAN_MANAGE_VERSION_CONTROL" | "THIRDPARTY_ANALYSIS" | "ALLOW_NON_EMBED_FULL_APP_ACCESS" | "CAN_ACCESS_ANALYST_STUDIO" | "CAN_MANAGE_ANALYST_STUDIO" | "PREVIEW_DOCUMENT_SEARCH" | "CAN_SETUP_VERSION_CONTROL";
 type UpdateUserGroupRequestTypeEnum = "LOCAL_GROUP" | "LDAP_GROUP";
 type UpdateUserGroupRequestVisibilityEnum = "SHARABLE" | "NON_SHARABLE";
 type UpdateUserGroupRequestOperationEnum = "ADD" | "REMOVE" | "REPLACE";
@@ -12125,7 +12454,7 @@ type UpdateUserRequestVisibilityEnum = "SHARABLE" | "NON_SHARABLE";
 type UpdateUserRequestAccountStatusEnum = "ACTIVE" | "INACTIVE" | "EXPIRED" | "LOCKED" | "PENDING" | "SUSPENDED";
 type UpdateUserRequestAccountTypeEnum = "LOCAL_USER" | "LDAP_USER" | "SAML_USER" | "OIDC_USER" | "REMOTE_USER";
 type UpdateUserRequestOperationEnum = "ADD" | "REMOVE" | "REPLACE";
-type UpdateUserRequestPreferredLocaleEnum = "en-CA" | "en-GB" | "en-US" | "de-DE" | "ja-JP" | "zh-CN" | "pt-BR" | "fr-FR" | "fr-CA" | "es-US" | "da-DK" | "es-ES" | "fi-FI" | "sv-SE" | "nb-NO" | "pt-PT" | "nl-NL" | "it-IT" | "ru-RU" | "en-IN";
+type UpdateUserRequestPreferredLocaleEnum = "en-CA" | "en-GB" | "en-US" | "de-DE" | "ja-JP" | "zh-CN" | "pt-BR" | "fr-FR" | "fr-CA" | "es-US" | "da-DK" | "es-ES" | "fi-FI" | "sv-SE" | "nb-NO" | "pt-PT" | "nl-NL" | "it-IT" | "ru-RU" | "en-IN" | "de-CH" | "en-NZ" | "es-MX" | "en-AU" | "zh-Hant" | "ko-KR" | "en-DE";
 
 /**
  * ThoughtSpot Public REST API
@@ -12798,6 +13127,11 @@ declare class AIApiRequestFactory extends BaseAPIRequestFactory {
      */
     createConversation(createConversationRequest: CreateConversationRequest, _options?: Configuration): Promise<RequestContext>;
     /**
+     * Version: 10.7.0.cl or later
+     * @param queryGetDecomposedQueryRequest
+     */
+    queryGetDecomposedQuery(queryGetDecomposedQueryRequest: QueryGetDecomposedQueryRequest, _options?: Configuration): Promise<RequestContext>;
+    /**
      *  Version: 10.4.0.cl or later   Allows sending a follow-up message to an ongoing conversation within the context of the metadata model.  Requires at least view access to the metadata object specified in the request.  #### Usage guidelines  The API requires you to specify the `conversation_identifier` in the request path, and a `metadata_identifier` and `message` string in the request body.  If the API request is successful, ThoughtSpot returns the session ID, tokens used in the conversation, and visualization type.  > ###### Note: > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.
      * @param conversationIdentifier Unique identifier of the conversation.
      * @param sendMessageRequest
@@ -12818,6 +13152,14 @@ declare class AIApiResponseProcessor {
      * @throws ApiException if the response code was not in [200, 299]
      */
     createConversation(response: ResponseContext): Promise<Conversation>;
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to queryGetDecomposedQuery
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+    queryGetDecomposedQuery(response: ResponseContext): Promise<EurekaDecomposeQueryResponse>;
     /**
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
@@ -12968,7 +13310,7 @@ declare class ConnectionsApiRequestFactory extends BaseAPIRequestFactory {
      */
     createConnection(createConnectionRequest: CreateConnectionRequest, _options?: Configuration): Promise<RequestContext>;
     /**
-     *   Version: 9.2.0.cl or later   Deletes a connection object.  **Note**: If a connection has dependent objects, make sure you remove its associations before the delete operation.  Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.
+     *   Version: 9.2.0.cl or later    **Important**: This endpoint is deprecated and will be removed from ThoughtSpot in September 2025. ThoughtSpot strongly recommends using the [Delete Connection V2](#/http/api-endpoints/connections/delete-connection-v2) endpoint to delete your connection objects.    #### Usage guidelines  Deletes a connection object.  Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  **Note**: If a connection has dependent objects, make sure you remove its associations before the delete operation.
      * @param deleteConnectionRequest
      */
     deleteConnection(deleteConnectionRequest: DeleteConnectionRequest, _options?: Configuration): Promise<RequestContext>;
@@ -12993,7 +13335,7 @@ declare class ConnectionsApiRequestFactory extends BaseAPIRequestFactory {
      */
     searchConnection(searchConnectionRequest: SearchConnectionRequest, _options?: Configuration): Promise<RequestContext>;
     /**
-     *   Version: 9.2.0.cl or later   Updates a connection object.    Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  To update a connection object, pass these parameters in your API request:  1. GUID of the connection object. 2. If you are updating tables or database schema of a connection object:    a. Add the updated JSON map of metadata with database, schema, and tables in `data_warehouse_config`.    b. Set `validate` to `true`. 3. If you are updating a configuration attribute, connection name, or description, you can set `validate` to `false`.
+     *   Version: 9.2.0.cl or later   **Important**: This endpoint is deprecated and will be removed from ThoughtSpot in September 2025. ThoughtSpot strongly recommends using the [Update connection V2](#/http/api-endpoints/connections/update-connection-v2) endpoint to update your connection objects.  #### Usage guidelines  Updates a connection object.    Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  To update a connection object, pass these parameters in your API request:  1. GUID of the connection object. 2. If you are updating tables or database schema of a connection object:    a. Add the updated JSON map of metadata with database, schema, and tables in `data_warehouse_config`.    b. Set `validate` to `true`. 3. If you are updating a configuration attribute, connection name, or description, you can set `validate` to `false`.
      * @param updateConnectionRequest
      */
     updateConnection(updateConnectionRequest: UpdateConnectionRequest, _options?: Configuration): Promise<RequestContext>;
@@ -13222,17 +13564,17 @@ declare class DBTApiResponseProcessor {
  */
 declare class DataApiRequestFactory extends BaseAPIRequestFactory {
     /**
-     *   Version: 9.0.0.cl or later   Fetches data from a saved Answer.  Requires at least view access to the saved Answer and the `DATADOWNLOADING` privilege.  The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_apis).
+     *   Version: 9.0.0.cl or later   Fetches data from a saved Answer.  Requires at least view access to the saved Answer.  The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_apis).
      * @param fetchAnswerDataRequest
      */
     fetchAnswerData(fetchAnswerDataRequest: FetchAnswerDataRequest, _options?: Configuration): Promise<RequestContext>;
     /**
-     *   Version: 9.0.0.cl or later   Gets data from a Liveboard object and its visualization.    Requires at least view access to the Liveboard and the `DATADOWNLOADING` privilege.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To get data for specific visualizations, add the GUIDs or names of the visualizations in the API request.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes. If the new Liveboard experience mode, the transient content includes ad hoc changes to visualizations such as sorting, toggling of legends, and data drill down.  For more information, and see [Liveboard data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_fetch_liveboard_data_api).
+     *   Version: 9.0.0.cl or later   Gets data from a Liveboard object and its visualization.    Requires at least view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To get data for specific visualizations, add the GUIDs or names of the visualizations in the API request.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes. If the new Liveboard experience mode, the transient content includes ad hoc changes to visualizations such as sorting, toggling of legends, and data drill down.  For more information, and see [Liveboard data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_fetch_liveboard_data_api).
      * @param fetchLiveboardDataRequest
      */
     fetchLiveboardData(fetchLiveboardDataRequest: FetchLiveboardDataRequest, _options?: Configuration): Promise<RequestContext>;
     /**
-     *   Version: 9.0.0.cl or later   Generates an Answer from a given data source.  Requires at least view access to the data source object (Worksheet or View) and the `DATADOWNLOADING` privilege.  #### Usage guidelines  To search data, specify the data source GUID in `logical_table_identifier`. The data source can be a Worksheet, View, Table, or SQL view.  Pass search tokens in the `query_string` attribute in the API request as shown in the following example:  ``` {   \"query_string\": \"[sales] by [store]\",   \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\", } ```  For more information about the `query_string` format and data source attribute, see [Search data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_data_api).    The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).
+     *   Version: 9.0.0.cl or later   Generates an Answer from a given data source.  Requires at least view access to the data source object (Worksheet or View).  #### Usage guidelines  To search data, specify the data source GUID in `logical_table_identifier`. The data source can be a Worksheet, View, Table, or SQL view.  Pass search tokens in the `query_string` attribute in the API request as shown in the following example:  ``` {   \"query_string\": \"[sales] by [store]\",   \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\", } ```  For more information about the `query_string` format and data source attribute, see [Search data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_data_api).    The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).
      * @param searchDataRequest
      */
     searchData(searchDataRequest: SearchDataRequest, _options?: Configuration): Promise<RequestContext>;
@@ -13384,7 +13726,7 @@ declare class MetadataApiRequestFactory extends BaseAPIRequestFactory {
      */
     exportMetadataTML(exportMetadataTMLRequest: ExportMetadataTMLRequest, _options?: Configuration): Promise<RequestContext>;
     /**
-     *   Version: 10.1.0.cl or later   Exports the [TML](https://docs.thoughtspot.com/cloud/latest/tml) representation of metadata objects in JSON or YAML format.  Requires `DATAMANAGEMENT` (**Can manage data**) privilege.  #### Usage guidelines  * You can export one or several objects by passing metadata object GUIDs in the `metadata` array. * When exporting TML content for a Liveboard or Answer object, you can set `export_associated` to `true` to retrieve TML content for underlying Worksheets, Tables, or Views, including the GUID of each object within the headers. When   `export_associated` is set to `true`, consider retrieving one metadata object at a time. * Set `export_fqns` to `true` to add FQNs of the referenced objects in the TML content. For example, if you send an API request to retrieve TML for a Liveboard and its associated objects, the API returns the TML content with FQNs of the referenced Worksheet. Exporting TML with FQNs is useful if ThoughtSpot has multiple objects with the same name and you want to eliminate ambiguity when importing TML files into ThoughtSpot. It eliminates the need for adding FQNs of the referenced objects manually during the import operation.
+     *   Version: 10.1.0.cl or later   Exports the [TML](https://docs.thoughtspot.com/cloud/latest/tml) representation of metadata objects in JSON or YAML format.  ### **Permissions Required**  Requires `DATAMANAGEMENT` (**Can manage data**) and `USERMANAGEMENT` (**Can manage users**) privileges.  #### **Usage Guidelines**  This API is only applicable for `USER`, `GROUP`, and `ROLES` metadata types.  - `batch_offset` Indicates the starting position within the complete dataset from which the API should begin returning objects. Useful for paginating results efficiently. - `batch_size` Specifies the number of objects or items to retrieve in a single request. Helps control response size for better performance. - `edoc_format` Defines the format of the TML content. The exported metadata can be in JSON or YAML format. - `export_dependent` Specifies whether to include dependent metadata objects in the export. Ensures related objects are also retrieved if needed. - `all_orgs_override` Indicates whether the export operation applies across all organizations. Useful for multi-tenant environments where cross-org exports are required.
      * @param exportMetadataTMLBatchedRequest
      */
     exportMetadataTMLBatched(exportMetadataTMLBatchedRequest: ExportMetadataTMLBatchedRequest, _options?: Configuration): Promise<RequestContext>;
@@ -13423,6 +13765,11 @@ declare class MetadataApiRequestFactory extends BaseAPIRequestFactory {
      * @param updateMetadataHeaderRequest
      */
     updateMetadataHeader(updateMetadataHeaderRequest: UpdateMetadataHeaderRequest, _options?: Configuration): Promise<RequestContext>;
+    /**
+     *  Update object IDs for given metadata objects.   Version: 10.8.0.cl or later   ## Prerequisites - **Privileges Required:**   - `DATAMANAGEMENT` (Can manage data) or `ADMINISTRATION` (Can administer ThoughtSpot). - **Additional Privileges (if RBAC is enabled):**   - `ORG_ADMINISTRATION` (Can manage orgs).  ---  ## Usage Guidelines  ### Parameters  1. **metadata**      - **Description:** List of metadata objects to update their object IDs.    - **Usage:**       - Use either `current_obj_id` alone OR use `metadata_identifier` with `type` (when needed).       - When using `metadata_identifier`, the `type` field is required if using a name instead of a GUID.       - The `new_obj_id` field is always required.  ---  ## Note This API is specifically designed for updating object IDs of metadata objects. It internally uses the header update mechanism to perform the changes.  ## Best Practices  1. **Backup Before Update:**      Always export metadata as a backup before initiating the update process.  2. **Validation:**    - When using `current_obj_id`, ensure it matches the existing object ID exactly.    - When using `metadata_identifier` with a name, ensure the `type` is specified correctly.    - Verify that the `new_obj_id` follows your naming conventions and is unique within your system.  ---  ## Examples  ### Using current_obj_id ```json {   \"metadata\": [     {       \"current_obj_id\": \"existing_object_id\",       \"new_obj_id\": \"new_object_id\"     }   ] } ```  ### Using metadata_identifier with GUID ```json {   \"metadata\": [     {       \"metadata_identifier\": \"01234567-89ab-cdef-0123-456789abcdef\",       \"new_obj_id\": \"new_object_id\"     }   ] } ```  ### Using metadata_identifier with name and type ```json {   \"metadata\": [     {       \"metadata_identifier\": \"My Answer\",       \"type\": \"ANSWER\",       \"new_obj_id\": \"new_object_id\"     }   ] } ```  ### Multiple objects update ```json {   \"metadata\": [     {       \"current_obj_id\": \"existing_object_id_1\",       \"new_obj_id\": \"new_object_id_1\"     },     {       \"metadata_identifier\": \"My Worksheet\",       \"type\": \"LOGICAL_TABLE\",       \"new_obj_id\": \"new_object_id_2\"     }   ] } ```
+     * @param updateMetadataObjIdRequest
+     */
+    updateMetadataObjId(updateMetadataObjIdRequest: UpdateMetadataObjIdRequest, _options?: Configuration): Promise<RequestContext>;
 }
 declare class MetadataApiResponseProcessor {
     /**
@@ -13521,6 +13868,14 @@ declare class MetadataApiResponseProcessor {
      * @throws ApiException if the response code was not in [200, 299]
      */
     updateMetadataHeader(response: ResponseContext): Promise<void>;
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to updateMetadataObjId
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+    updateMetadataObjId(response: ResponseContext): Promise<void>;
 }
 
 /**
@@ -13589,12 +13944,12 @@ declare class OrgsApiResponseProcessor {
  */
 declare class ReportsApiRequestFactory extends BaseAPIRequestFactory {
     /**
-     *   Version: 9.0.0.cl or later   Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege and view access to the Answer.  #### Usage guidelines  In the request body, the GUID or name of the Answer and set `file_format`. The default file format is CSV.  **NOTE**: * The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension. * HTML rendering is not supported for PDF exports of Answers with tables.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).
+     *   Version: 9.0.0.cl or later   Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.  Requires at least view access to the Answer.  #### Usage guidelines  In the request body, the GUID or name of the Answer and set `file_format`. The default file format is CSV.  **NOTE**: * The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension. * HTML rendering is not supported for PDF exports of Answers with tables.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).
      * @param exportAnswerReportRequest
      */
     exportAnswerReport(exportAnswerReportRequest: ExportAnswerReportRequest, _options?: Configuration): Promise<RequestContext>;
     /**
-     *   Version: 9.0.0.cl or later   Exports the data from a Liveboard and its visualization in a given file format. You can download the Liveboard data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege and view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default `file_format` is CSV. For PDF file format, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  **NOTE**: The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).
+     *   Version: 9.0.0.cl or later   Exports a Liveboard and its visualizations in PDF or PNG file format.  Requires at least view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default `file_format` is PDF. For PDF downloads, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  **NOTE**: The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).
      * @param exportLiveboardReportRequest
      */
     exportLiveboardReport(exportLiveboardReportRequest: ExportLiveboardReportRequest, _options?: Configuration): Promise<RequestContext>;
@@ -13760,7 +14115,7 @@ declare class SecurityApiRequestFactory extends BaseAPIRequestFactory {
      */
     fetchPermissionsOnMetadata(fetchPermissionsOnMetadataRequest: FetchPermissionsOnMetadataRequest, _options?: Configuration): Promise<RequestContext>;
     /**
-     *   Version: 9.0.0.cl or later   Allows sharing one or several metadata objects with users and groups in ThoughtSpot.  Requires edit access to the metadata object.  The API endpoint allows sharing only the following types of metadata objects: * Liveboards * Visualizations * Answers * Worksheets * Views  You can provide `READ_ONLY` or `MODIFY` access when sharing an object with another user or group. With `READ_ONLY` access grants view access to the shared object, whereas `MODIFY` provides edit access.  To prevent a user or group from accessing the shared object, specify the GUID or name of the principal and set `shareMode` to `NO_ACCESS`.
+     *   Version: 9.0.0.cl or later   Allows sharing one or several metadata objects with users and groups in ThoughtSpot.  Requires edit access to the metadata object.  The API endpoint allows sharing only the following types of metadata objects: * Liveboards * Visualizations * Answers * Worksheets * Views * Connections  You can provide `READ_ONLY` or `MODIFY` access when sharing an object with another user or group. With `READ_ONLY` access grants view access to the shared object, whereas `MODIFY` provides edit access.  To prevent a user or group from accessing the shared object, specify the GUID or name of the principal and set `shareMode` to `NO_ACCESS`.
      * @param shareMetadataRequest
      */
     shareMetadata(shareMetadataRequest: ShareMetadataRequest, _options?: Configuration): Promise<RequestContext>;
@@ -14063,7 +14418,7 @@ declare class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
      */
     deleteConfig(deleteConfigRequest: DeleteConfigRequest, _options?: Configuration): Promise<RequestContext>;
     /**
-     *   Version: 9.2.0.cl or later   Deletes a connection object.  **Note**: If a connection has dependent objects, make sure you remove its associations before the delete operation.  Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.
+     *   Version: 9.2.0.cl or later    **Important**: This endpoint is deprecated and will be removed from ThoughtSpot in September 2025. ThoughtSpot strongly recommends using the [Delete Connection V2](#/http/api-endpoints/connections/delete-connection-v2) endpoint to delete your connection objects.    #### Usage guidelines  Deletes a connection object.  Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  **Note**: If a connection has dependent objects, make sure you remove its associations before the delete operation.
      * @param deleteConnectionRequest
      */
     deleteConnection(deleteConnectionRequest: DeleteConnectionRequest, _options?: Configuration): Promise<RequestContext>;
@@ -14128,12 +14483,12 @@ declare class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
      */
     downloadConnectionMetadataChanges(connectionIdentifier: string, _options?: Configuration): Promise<RequestContext>;
     /**
-     *   Version: 9.0.0.cl or later   Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege and view access to the Answer.  #### Usage guidelines  In the request body, the GUID or name of the Answer and set `file_format`. The default file format is CSV.  **NOTE**: * The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension. * HTML rendering is not supported for PDF exports of Answers with tables.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).
+     *   Version: 9.0.0.cl or later   Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.  Requires at least view access to the Answer.  #### Usage guidelines  In the request body, the GUID or name of the Answer and set `file_format`. The default file format is CSV.  **NOTE**: * The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension. * HTML rendering is not supported for PDF exports of Answers with tables.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).
      * @param exportAnswerReportRequest
      */
     exportAnswerReport(exportAnswerReportRequest: ExportAnswerReportRequest, _options?: Configuration): Promise<RequestContext>;
     /**
-     *   Version: 9.0.0.cl or later   Exports the data from a Liveboard and its visualization in a given file format. You can download the Liveboard data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege and view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default `file_format` is CSV. For PDF file format, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  **NOTE**: The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).
+     *   Version: 9.0.0.cl or later   Exports a Liveboard and its visualizations in PDF or PNG file format.  Requires at least view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default `file_format` is PDF. For PDF downloads, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  **NOTE**: The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).
      * @param exportLiveboardReportRequest
      */
     exportLiveboardReport(exportLiveboardReportRequest: ExportLiveboardReportRequest, _options?: Configuration): Promise<RequestContext>;
@@ -14143,12 +14498,12 @@ declare class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
      */
     exportMetadataTML(exportMetadataTMLRequest: ExportMetadataTMLRequest, _options?: Configuration): Promise<RequestContext>;
     /**
-     *   Version: 10.1.0.cl or later   Exports the [TML](https://docs.thoughtspot.com/cloud/latest/tml) representation of metadata objects in JSON or YAML format.  Requires `DATAMANAGEMENT` (**Can manage data**) privilege.  #### Usage guidelines  * You can export one or several objects by passing metadata object GUIDs in the `metadata` array. * When exporting TML content for a Liveboard or Answer object, you can set `export_associated` to `true` to retrieve TML content for underlying Worksheets, Tables, or Views, including the GUID of each object within the headers. When   `export_associated` is set to `true`, consider retrieving one metadata object at a time. * Set `export_fqns` to `true` to add FQNs of the referenced objects in the TML content. For example, if you send an API request to retrieve TML for a Liveboard and its associated objects, the API returns the TML content with FQNs of the referenced Worksheet. Exporting TML with FQNs is useful if ThoughtSpot has multiple objects with the same name and you want to eliminate ambiguity when importing TML files into ThoughtSpot. It eliminates the need for adding FQNs of the referenced objects manually during the import operation.
+     *   Version: 10.1.0.cl or later   Exports the [TML](https://docs.thoughtspot.com/cloud/latest/tml) representation of metadata objects in JSON or YAML format.  ### **Permissions Required**  Requires `DATAMANAGEMENT` (**Can manage data**) and `USERMANAGEMENT` (**Can manage users**) privileges.  #### **Usage Guidelines**  This API is only applicable for `USER`, `GROUP`, and `ROLES` metadata types.  - `batch_offset` Indicates the starting position within the complete dataset from which the API should begin returning objects. Useful for paginating results efficiently. - `batch_size` Specifies the number of objects or items to retrieve in a single request. Helps control response size for better performance. - `edoc_format` Defines the format of the TML content. The exported metadata can be in JSON or YAML format. - `export_dependent` Specifies whether to include dependent metadata objects in the export. Ensures related objects are also retrieved if needed. - `all_orgs_override` Indicates whether the export operation applies across all organizations. Useful for multi-tenant environments where cross-org exports are required.
      * @param exportMetadataTMLBatchedRequest
      */
     exportMetadataTMLBatched(exportMetadataTMLBatchedRequest: ExportMetadataTMLBatchedRequest, _options?: Configuration): Promise<RequestContext>;
     /**
-     *   Version: 9.0.0.cl or later   Fetches data from a saved Answer.  Requires at least view access to the saved Answer and the `DATADOWNLOADING` privilege.  The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_apis).
+     *   Version: 9.0.0.cl or later   Fetches data from a saved Answer.  Requires at least view access to the saved Answer.  The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_apis).
      * @param fetchAnswerDataRequest
      */
     fetchAnswerData(fetchAnswerDataRequest: FetchAnswerDataRequest, _options?: Configuration): Promise<RequestContext>;
@@ -14168,7 +14523,7 @@ declare class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
      */
     fetchConnectionDiffStatus(connectionIdentifier: string, _options?: Configuration): Promise<RequestContext>;
     /**
-     *   Version: 9.0.0.cl or later   Gets data from a Liveboard object and its visualization.    Requires at least view access to the Liveboard and the `DATADOWNLOADING` privilege.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To get data for specific visualizations, add the GUIDs or names of the visualizations in the API request.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes. If the new Liveboard experience mode, the transient content includes ad hoc changes to visualizations such as sorting, toggling of legends, and data drill down.  For more information, and see [Liveboard data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_fetch_liveboard_data_api).
+     *   Version: 9.0.0.cl or later   Gets data from a Liveboard object and its visualization.    Requires at least view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To get data for specific visualizations, add the GUIDs or names of the visualizations in the API request.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes. If the new Liveboard experience mode, the transient content includes ad hoc changes to visualizations such as sorting, toggling of legends, and data drill down.  For more information, and see [Liveboard data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_fetch_liveboard_data_api).
      * @param fetchLiveboardDataRequest
      */
     fetchLiveboardData(fetchLiveboardDataRequest: FetchLiveboardDataRequest, _options?: Configuration): Promise<RequestContext>;
@@ -14262,6 +14617,11 @@ declare class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
      */
     logout(_options?: Configuration): Promise<RequestContext>;
     /**
+     * Version: 10.7.0.cl or later
+     * @param queryGetDecomposedQueryRequest
+     */
+    queryGetDecomposedQuery(queryGetDecomposedQueryRequest: QueryGetDecomposedQueryRequest, _options?: Configuration): Promise<RequestContext>;
+    /**
      *   Version: 9.0.0.cl or later   Resets the password of a user account. Administrators can reset password on behalf of a user.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `USER_ADMINISTRATION` (**Can manage users**) privilege is required.
      * @param resetUserPasswordRequest
      */
@@ -14298,7 +14658,7 @@ declare class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
      */
     searchCustomActions(searchCustomActionsRequest: SearchCustomActionsRequest, _options?: Configuration): Promise<RequestContext>;
     /**
-     *   Version: 9.0.0.cl or later   Generates an Answer from a given data source.  Requires at least view access to the data source object (Worksheet or View) and the `DATADOWNLOADING` privilege.  #### Usage guidelines  To search data, specify the data source GUID in `logical_table_identifier`. The data source can be a Worksheet, View, Table, or SQL view.  Pass search tokens in the `query_string` attribute in the API request as shown in the following example:  ``` {   \"query_string\": \"[sales] by [store]\",   \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\", } ```  For more information about the `query_string` format and data source attribute, see [Search data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_data_api).    The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).
+     *   Version: 9.0.0.cl or later   Generates an Answer from a given data source.  Requires at least view access to the data source object (Worksheet or View).  #### Usage guidelines  To search data, specify the data source GUID in `logical_table_identifier`. The data source can be a Worksheet, View, Table, or SQL view.  Pass search tokens in the `query_string` attribute in the API request as shown in the following example:  ``` {   \"query_string\": \"[sales] by [store]\",   \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\", } ```  For more information about the `query_string` format and data source attribute, see [Search data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_data_api).    The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).
      * @param searchDataRequest
      */
     searchData(searchDataRequest: SearchDataRequest, _options?: Configuration): Promise<RequestContext>;
@@ -14344,7 +14704,7 @@ declare class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
      */
     sendMessage(conversationIdentifier: string, sendMessageRequest: SendMessageRequest, _options?: Configuration): Promise<RequestContext>;
     /**
-     *   Version: 9.0.0.cl or later   Allows sharing one or several metadata objects with users and groups in ThoughtSpot.  Requires edit access to the metadata object.  The API endpoint allows sharing only the following types of metadata objects: * Liveboards * Visualizations * Answers * Worksheets * Views  You can provide `READ_ONLY` or `MODIFY` access when sharing an object with another user or group. With `READ_ONLY` access grants view access to the shared object, whereas `MODIFY` provides edit access.  To prevent a user or group from accessing the shared object, specify the GUID or name of the principal and set `shareMode` to `NO_ACCESS`.
+     *   Version: 9.0.0.cl or later   Allows sharing one or several metadata objects with users and groups in ThoughtSpot.  Requires edit access to the metadata object.  The API endpoint allows sharing only the following types of metadata objects: * Liveboards * Visualizations * Answers * Worksheets * Views * Connections  You can provide `READ_ONLY` or `MODIFY` access when sharing an object with another user or group. With `READ_ONLY` access grants view access to the shared object, whereas `MODIFY` provides edit access.  To prevent a user or group from accessing the shared object, specify the GUID or name of the principal and set `shareMode` to `NO_ACCESS`.
      * @param shareMetadataRequest
      */
     shareMetadata(shareMetadataRequest: ShareMetadataRequest, _options?: Configuration): Promise<RequestContext>;
@@ -14364,7 +14724,7 @@ declare class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
      */
     updateConfig(updateConfigRequest: UpdateConfigRequest, _options?: Configuration): Promise<RequestContext>;
     /**
-     *   Version: 9.2.0.cl or later   Updates a connection object.    Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  To update a connection object, pass these parameters in your API request:  1. GUID of the connection object. 2. If you are updating tables or database schema of a connection object:    a. Add the updated JSON map of metadata with database, schema, and tables in `data_warehouse_config`.    b. Set `validate` to `true`. 3. If you are updating a configuration attribute, connection name, or description, you can set `validate` to `false`.
+     *   Version: 9.2.0.cl or later   **Important**: This endpoint is deprecated and will be removed from ThoughtSpot in September 2025. ThoughtSpot strongly recommends using the [Update connection V2](#/http/api-endpoints/connections/update-connection-v2) endpoint to update your connection objects.  #### Usage guidelines  Updates a connection object.    Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  To update a connection object, pass these parameters in your API request:  1. GUID of the connection object. 2. If you are updating tables or database schema of a connection object:    a. Add the updated JSON map of metadata with database, schema, and tables in `data_warehouse_config`.    b. Set `validate` to `true`. 3. If you are updating a configuration attribute, connection name, or description, you can set `validate` to `false`.
      * @param updateConnectionRequest
      */
     updateConnection(updateConnectionRequest: UpdateConnectionRequest, _options?: Configuration): Promise<RequestContext>;
@@ -14390,6 +14750,11 @@ declare class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
      * @param updateMetadataHeaderRequest
      */
     updateMetadataHeader(updateMetadataHeaderRequest: UpdateMetadataHeaderRequest, _options?: Configuration): Promise<RequestContext>;
+    /**
+     *  Update object IDs for given metadata objects.   Version: 10.8.0.cl or later   ## Prerequisites - **Privileges Required:**   - `DATAMANAGEMENT` (Can manage data) or `ADMINISTRATION` (Can administer ThoughtSpot). - **Additional Privileges (if RBAC is enabled):**   - `ORG_ADMINISTRATION` (Can manage orgs).  ---  ## Usage Guidelines  ### Parameters  1. **metadata**      - **Description:** List of metadata objects to update their object IDs.    - **Usage:**       - Use either `current_obj_id` alone OR use `metadata_identifier` with `type` (when needed).       - When using `metadata_identifier`, the `type` field is required if using a name instead of a GUID.       - The `new_obj_id` field is always required.  ---  ## Note This API is specifically designed for updating object IDs of metadata objects. It internally uses the header update mechanism to perform the changes.  ## Best Practices  1. **Backup Before Update:**      Always export metadata as a backup before initiating the update process.  2. **Validation:**    - When using `current_obj_id`, ensure it matches the existing object ID exactly.    - When using `metadata_identifier` with a name, ensure the `type` is specified correctly.    - Verify that the `new_obj_id` follows your naming conventions and is unique within your system.  ---  ## Examples  ### Using current_obj_id ```json {   \"metadata\": [     {       \"current_obj_id\": \"existing_object_id\",       \"new_obj_id\": \"new_object_id\"     }   ] } ```  ### Using metadata_identifier with GUID ```json {   \"metadata\": [     {       \"metadata_identifier\": \"01234567-89ab-cdef-0123-456789abcdef\",       \"new_obj_id\": \"new_object_id\"     }   ] } ```  ### Using metadata_identifier with name and type ```json {   \"metadata\": [     {       \"metadata_identifier\": \"My Answer\",       \"type\": \"ANSWER\",       \"new_obj_id\": \"new_object_id\"     }   ] } ```  ### Multiple objects update ```json {   \"metadata\": [     {       \"current_obj_id\": \"existing_object_id_1\",       \"new_obj_id\": \"new_object_id_1\"     },     {       \"metadata_identifier\": \"My Worksheet\",       \"type\": \"LOGICAL_TABLE\",       \"new_obj_id\": \"new_object_id_2\"     }   ] } ```
+     * @param updateMetadataObjIdRequest
+     */
+    updateMetadataObjId(updateMetadataObjIdRequest: UpdateMetadataObjIdRequest, _options?: Configuration): Promise<RequestContext>;
     /**
      *   Version: 9.0.0.cl or later   Updates an Org object. You can modify Org properties such as name, description, and user associations.  Requires cluster administration (**Can administer Org**) privileges. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ORG_ADMINISTRATION` (**Can manage Orgs**) privilege is required.
      * @param orgIdentifier ID or name of the Org
@@ -14959,6 +15324,14 @@ declare class ThoughtSpotRestApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
+     * @params response Response returned by the server for a request to queryGetDecomposedQuery
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+    queryGetDecomposedQuery(response: ResponseContext): Promise<EurekaDecomposeQueryResponse>;
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
      * @params response Response returned by the server for a request to resetUserPassword
      * @throws ApiException if the response code was not in [200, 299]
      */
@@ -15155,6 +15528,14 @@ declare class ThoughtSpotRestApiResponseProcessor {
      * @throws ApiException if the response code was not in [200, 299]
      */
     updateMetadataHeader(response: ResponseContext): Promise<void>;
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to updateMetadataObjId
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+    updateMetadataObjId(response: ResponseContext): Promise<void>;
     /**
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
@@ -15503,6 +15884,11 @@ declare class PromiseAIApi {
      */
     createConversation(createConversationRequest: CreateConversationRequest, _options?: Configuration): Promise<Conversation>;
     /**
+     * Version: 10.7.0.cl or later
+     * @param queryGetDecomposedQueryRequest
+     */
+    queryGetDecomposedQuery(queryGetDecomposedQueryRequest: QueryGetDecomposedQueryRequest, _options?: Configuration): Promise<EurekaDecomposeQueryResponse>;
+    /**
      *  Version: 10.4.0.cl or later   Allows sending a follow-up message to an ongoing conversation within the context of the metadata model.  Requires at least view access to the metadata object specified in the request.  #### Usage guidelines  The API requires you to specify the `conversation_identifier` in the request path, and a `metadata_identifier` and `message` string in the request body.  If the API request is successful, ThoughtSpot returns the session ID, tokens used in the conversation, and visualization type.  > ###### Note: > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.
      * @param conversationIdentifier Unique identifier of the conversation.
      * @param sendMessageRequest
@@ -15571,7 +15957,7 @@ declare class PromiseConnectionsApi {
      */
     createConnection(createConnectionRequest: CreateConnectionRequest, _options?: Configuration): Promise<CreateConnectionResponse>;
     /**
-     *   Version: 9.2.0.cl or later   Deletes a connection object.  **Note**: If a connection has dependent objects, make sure you remove its associations before the delete operation.  Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.
+     *   Version: 9.2.0.cl or later    **Important**: This endpoint is deprecated and will be removed from ThoughtSpot in September 2025. ThoughtSpot strongly recommends using the [Delete Connection V2](#/http/api-endpoints/connections/delete-connection-v2) endpoint to delete your connection objects.    #### Usage guidelines  Deletes a connection object.  Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  **Note**: If a connection has dependent objects, make sure you remove its associations before the delete operation.
      * @param deleteConnectionRequest
      */
     deleteConnection(deleteConnectionRequest: DeleteConnectionRequest, _options?: Configuration): Promise<void>;
@@ -15596,7 +15982,7 @@ declare class PromiseConnectionsApi {
      */
     searchConnection(searchConnectionRequest: SearchConnectionRequest, _options?: Configuration): Promise<Array<SearchConnectionResponse>>;
     /**
-     *   Version: 9.2.0.cl or later   Updates a connection object.    Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  To update a connection object, pass these parameters in your API request:  1. GUID of the connection object. 2. If you are updating tables or database schema of a connection object:    a. Add the updated JSON map of metadata with database, schema, and tables in `data_warehouse_config`.    b. Set `validate` to `true`. 3. If you are updating a configuration attribute, connection name, or description, you can set `validate` to `false`.
+     *   Version: 9.2.0.cl or later   **Important**: This endpoint is deprecated and will be removed from ThoughtSpot in September 2025. ThoughtSpot strongly recommends using the [Update connection V2](#/http/api-endpoints/connections/update-connection-v2) endpoint to update your connection objects.  #### Usage guidelines  Updates a connection object.    Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  To update a connection object, pass these parameters in your API request:  1. GUID of the connection object. 2. If you are updating tables or database schema of a connection object:    a. Add the updated JSON map of metadata with database, schema, and tables in `data_warehouse_config`.    b. Set `validate` to `true`. 3. If you are updating a configuration attribute, connection name, or description, you can set `validate` to `false`.
      * @param updateConnectionRequest
      */
     updateConnection(updateConnectionRequest: UpdateConnectionRequest, _options?: Configuration): Promise<void>;
@@ -15672,17 +16058,17 @@ declare class PromiseDataApi {
     private api;
     constructor(configuration: Configuration, requestFactory?: DataApiRequestFactory, responseProcessor?: DataApiResponseProcessor);
     /**
-     *   Version: 9.0.0.cl or later   Fetches data from a saved Answer.  Requires at least view access to the saved Answer and the `DATADOWNLOADING` privilege.  The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_apis).
+     *   Version: 9.0.0.cl or later   Fetches data from a saved Answer.  Requires at least view access to the saved Answer.  The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_apis).
      * @param fetchAnswerDataRequest
      */
     fetchAnswerData(fetchAnswerDataRequest: FetchAnswerDataRequest, _options?: Configuration): Promise<AnswerDataResponse>;
     /**
-     *   Version: 9.0.0.cl or later   Gets data from a Liveboard object and its visualization.    Requires at least view access to the Liveboard and the `DATADOWNLOADING` privilege.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To get data for specific visualizations, add the GUIDs or names of the visualizations in the API request.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes. If the new Liveboard experience mode, the transient content includes ad hoc changes to visualizations such as sorting, toggling of legends, and data drill down.  For more information, and see [Liveboard data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_fetch_liveboard_data_api).
+     *   Version: 9.0.0.cl or later   Gets data from a Liveboard object and its visualization.    Requires at least view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To get data for specific visualizations, add the GUIDs or names of the visualizations in the API request.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes. If the new Liveboard experience mode, the transient content includes ad hoc changes to visualizations such as sorting, toggling of legends, and data drill down.  For more information, and see [Liveboard data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_fetch_liveboard_data_api).
      * @param fetchLiveboardDataRequest
      */
     fetchLiveboardData(fetchLiveboardDataRequest: FetchLiveboardDataRequest, _options?: Configuration): Promise<LiveboardDataResponse>;
     /**
-     *   Version: 9.0.0.cl or later   Generates an Answer from a given data source.  Requires at least view access to the data source object (Worksheet or View) and the `DATADOWNLOADING` privilege.  #### Usage guidelines  To search data, specify the data source GUID in `logical_table_identifier`. The data source can be a Worksheet, View, Table, or SQL view.  Pass search tokens in the `query_string` attribute in the API request as shown in the following example:  ``` {   \"query_string\": \"[sales] by [store]\",   \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\", } ```  For more information about the `query_string` format and data source attribute, see [Search data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_data_api).    The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).
+     *   Version: 9.0.0.cl or later   Generates an Answer from a given data source.  Requires at least view access to the data source object (Worksheet or View).  #### Usage guidelines  To search data, specify the data source GUID in `logical_table_identifier`. The data source can be a Worksheet, View, Table, or SQL view.  Pass search tokens in the `query_string` attribute in the API request as shown in the following example:  ``` {   \"query_string\": \"[sales] by [store]\",   \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\", } ```  For more information about the `query_string` format and data source attribute, see [Search data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_data_api).    The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).
      * @param searchDataRequest
      */
     searchData(searchDataRequest: SearchDataRequest, _options?: Configuration): Promise<SearchDataResponse>;
@@ -15753,7 +16139,7 @@ declare class PromiseMetadataApi {
      */
     exportMetadataTML(exportMetadataTMLRequest: ExportMetadataTMLRequest, _options?: Configuration): Promise<Array<any>>;
     /**
-     *   Version: 10.1.0.cl or later   Exports the [TML](https://docs.thoughtspot.com/cloud/latest/tml) representation of metadata objects in JSON or YAML format.  Requires `DATAMANAGEMENT` (**Can manage data**) privilege.  #### Usage guidelines  * You can export one or several objects by passing metadata object GUIDs in the `metadata` array. * When exporting TML content for a Liveboard or Answer object, you can set `export_associated` to `true` to retrieve TML content for underlying Worksheets, Tables, or Views, including the GUID of each object within the headers. When   `export_associated` is set to `true`, consider retrieving one metadata object at a time. * Set `export_fqns` to `true` to add FQNs of the referenced objects in the TML content. For example, if you send an API request to retrieve TML for a Liveboard and its associated objects, the API returns the TML content with FQNs of the referenced Worksheet. Exporting TML with FQNs is useful if ThoughtSpot has multiple objects with the same name and you want to eliminate ambiguity when importing TML files into ThoughtSpot. It eliminates the need for adding FQNs of the referenced objects manually during the import operation.
+     *   Version: 10.1.0.cl or later   Exports the [TML](https://docs.thoughtspot.com/cloud/latest/tml) representation of metadata objects in JSON or YAML format.  ### **Permissions Required**  Requires `DATAMANAGEMENT` (**Can manage data**) and `USERMANAGEMENT` (**Can manage users**) privileges.  #### **Usage Guidelines**  This API is only applicable for `USER`, `GROUP`, and `ROLES` metadata types.  - `batch_offset` Indicates the starting position within the complete dataset from which the API should begin returning objects. Useful for paginating results efficiently. - `batch_size` Specifies the number of objects or items to retrieve in a single request. Helps control response size for better performance. - `edoc_format` Defines the format of the TML content. The exported metadata can be in JSON or YAML format. - `export_dependent` Specifies whether to include dependent metadata objects in the export. Ensures related objects are also retrieved if needed. - `all_orgs_override` Indicates whether the export operation applies across all organizations. Useful for multi-tenant environments where cross-org exports are required.
      * @param exportMetadataTMLBatchedRequest
      */
     exportMetadataTMLBatched(exportMetadataTMLBatchedRequest: ExportMetadataTMLBatchedRequest, _options?: Configuration): Promise<any>;
@@ -15792,6 +16178,11 @@ declare class PromiseMetadataApi {
      * @param updateMetadataHeaderRequest
      */
     updateMetadataHeader(updateMetadataHeaderRequest: UpdateMetadataHeaderRequest, _options?: Configuration): Promise<void>;
+    /**
+     *  Update object IDs for given metadata objects.   Version: 10.8.0.cl or later   ## Prerequisites - **Privileges Required:**   - `DATAMANAGEMENT` (Can manage data) or `ADMINISTRATION` (Can administer ThoughtSpot). - **Additional Privileges (if RBAC is enabled):**   - `ORG_ADMINISTRATION` (Can manage orgs).  ---  ## Usage Guidelines  ### Parameters  1. **metadata**      - **Description:** List of metadata objects to update their object IDs.    - **Usage:**       - Use either `current_obj_id` alone OR use `metadata_identifier` with `type` (when needed).       - When using `metadata_identifier`, the `type` field is required if using a name instead of a GUID.       - The `new_obj_id` field is always required.  ---  ## Note This API is specifically designed for updating object IDs of metadata objects. It internally uses the header update mechanism to perform the changes.  ## Best Practices  1. **Backup Before Update:**      Always export metadata as a backup before initiating the update process.  2. **Validation:**    - When using `current_obj_id`, ensure it matches the existing object ID exactly.    - When using `metadata_identifier` with a name, ensure the `type` is specified correctly.    - Verify that the `new_obj_id` follows your naming conventions and is unique within your system.  ---  ## Examples  ### Using current_obj_id ```json {   \"metadata\": [     {       \"current_obj_id\": \"existing_object_id\",       \"new_obj_id\": \"new_object_id\"     }   ] } ```  ### Using metadata_identifier with GUID ```json {   \"metadata\": [     {       \"metadata_identifier\": \"01234567-89ab-cdef-0123-456789abcdef\",       \"new_obj_id\": \"new_object_id\"     }   ] } ```  ### Using metadata_identifier with name and type ```json {   \"metadata\": [     {       \"metadata_identifier\": \"My Answer\",       \"type\": \"ANSWER\",       \"new_obj_id\": \"new_object_id\"     }   ] } ```  ### Multiple objects update ```json {   \"metadata\": [     {       \"current_obj_id\": \"existing_object_id_1\",       \"new_obj_id\": \"new_object_id_1\"     },     {       \"metadata_identifier\": \"My Worksheet\",       \"type\": \"LOGICAL_TABLE\",       \"new_obj_id\": \"new_object_id_2\"     }   ] } ```
+     * @param updateMetadataObjIdRequest
+     */
+    updateMetadataObjId(updateMetadataObjIdRequest: UpdateMetadataObjIdRequest, _options?: Configuration): Promise<void>;
 }
 
 declare class PromiseOrgsApi {
@@ -15824,12 +16215,12 @@ declare class PromiseReportsApi {
     private api;
     constructor(configuration: Configuration, requestFactory?: ReportsApiRequestFactory, responseProcessor?: ReportsApiResponseProcessor);
     /**
-     *   Version: 9.0.0.cl or later   Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege and view access to the Answer.  #### Usage guidelines  In the request body, the GUID or name of the Answer and set `file_format`. The default file format is CSV.  **NOTE**: * The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension. * HTML rendering is not supported for PDF exports of Answers with tables.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).
+     *   Version: 9.0.0.cl or later   Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.  Requires at least view access to the Answer.  #### Usage guidelines  In the request body, the GUID or name of the Answer and set `file_format`. The default file format is CSV.  **NOTE**: * The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension. * HTML rendering is not supported for PDF exports of Answers with tables.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).
      * @param exportAnswerReportRequest
      */
     exportAnswerReport(exportAnswerReportRequest: ExportAnswerReportRequest, _options?: Configuration): Promise<HttpFile>;
     /**
-     *   Version: 9.0.0.cl or later   Exports the data from a Liveboard and its visualization in a given file format. You can download the Liveboard data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege and view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default `file_format` is CSV. For PDF file format, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  **NOTE**: The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).
+     *   Version: 9.0.0.cl or later   Exports a Liveboard and its visualizations in PDF or PNG file format.  Requires at least view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default `file_format` is PDF. For PDF downloads, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  **NOTE**: The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).
      * @param exportLiveboardReportRequest
      */
     exportLiveboardReport(exportLiveboardReportRequest: ExportLiveboardReportRequest, _options?: Configuration): Promise<HttpFile>;
@@ -15906,7 +16297,7 @@ declare class PromiseSecurityApi {
      */
     fetchPermissionsOnMetadata(fetchPermissionsOnMetadataRequest: FetchPermissionsOnMetadataRequest, _options?: Configuration): Promise<PermissionOfMetadataResponse>;
     /**
-     *   Version: 9.0.0.cl or later   Allows sharing one or several metadata objects with users and groups in ThoughtSpot.  Requires edit access to the metadata object.  The API endpoint allows sharing only the following types of metadata objects: * Liveboards * Visualizations * Answers * Worksheets * Views  You can provide `READ_ONLY` or `MODIFY` access when sharing an object with another user or group. With `READ_ONLY` access grants view access to the shared object, whereas `MODIFY` provides edit access.  To prevent a user or group from accessing the shared object, specify the GUID or name of the principal and set `shareMode` to `NO_ACCESS`.
+     *   Version: 9.0.0.cl or later   Allows sharing one or several metadata objects with users and groups in ThoughtSpot.  Requires edit access to the metadata object.  The API endpoint allows sharing only the following types of metadata objects: * Liveboards * Visualizations * Answers * Worksheets * Views * Connections  You can provide `READ_ONLY` or `MODIFY` access when sharing an object with another user or group. With `READ_ONLY` access grants view access to the shared object, whereas `MODIFY` provides edit access.  To prevent a user or group from accessing the shared object, specify the GUID or name of the principal and set `shareMode` to `NO_ACCESS`.
      * @param shareMetadataRequest
      */
     shareMetadata(shareMetadataRequest: ShareMetadataRequest, _options?: Configuration): Promise<void>;
@@ -16088,7 +16479,7 @@ declare class PromiseThoughtSpotRestApi {
      */
     deleteConfig(deleteConfigRequest: DeleteConfigRequest, _options?: Configuration): Promise<void>;
     /**
-     *   Version: 9.2.0.cl or later   Deletes a connection object.  **Note**: If a connection has dependent objects, make sure you remove its associations before the delete operation.  Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.
+     *   Version: 9.2.0.cl or later    **Important**: This endpoint is deprecated and will be removed from ThoughtSpot in September 2025. ThoughtSpot strongly recommends using the [Delete Connection V2](#/http/api-endpoints/connections/delete-connection-v2) endpoint to delete your connection objects.    #### Usage guidelines  Deletes a connection object.  Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  **Note**: If a connection has dependent objects, make sure you remove its associations before the delete operation.
      * @param deleteConnectionRequest
      */
     deleteConnection(deleteConnectionRequest: DeleteConnectionRequest, _options?: Configuration): Promise<void>;
@@ -16153,12 +16544,12 @@ declare class PromiseThoughtSpotRestApi {
      */
     downloadConnectionMetadataChanges(connectionIdentifier: string, _options?: Configuration): Promise<HttpFile>;
     /**
-     *   Version: 9.0.0.cl or later   Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege and view access to the Answer.  #### Usage guidelines  In the request body, the GUID or name of the Answer and set `file_format`. The default file format is CSV.  **NOTE**: * The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension. * HTML rendering is not supported for PDF exports of Answers with tables.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).
+     *   Version: 9.0.0.cl or later   Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.  Requires at least view access to the Answer.  #### Usage guidelines  In the request body, the GUID or name of the Answer and set `file_format`. The default file format is CSV.  **NOTE**: * The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension. * HTML rendering is not supported for PDF exports of Answers with tables.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).
      * @param exportAnswerReportRequest
      */
     exportAnswerReport(exportAnswerReportRequest: ExportAnswerReportRequest, _options?: Configuration): Promise<HttpFile>;
     /**
-     *   Version: 9.0.0.cl or later   Exports the data from a Liveboard and its visualization in a given file format. You can download the Liveboard data as a PDF, PNG, CSV, or XLSX file.  Requires `DATADOWNLOADING` (**Can download data**) privilege and view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default `file_format` is CSV. For PDF file format, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  **NOTE**: The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).
+     *   Version: 9.0.0.cl or later   Exports a Liveboard and its visualizations in PDF or PNG file format.  Requires at least view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default `file_format` is PDF. For PDF downloads, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  **NOTE**: The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).
      * @param exportLiveboardReportRequest
      */
     exportLiveboardReport(exportLiveboardReportRequest: ExportLiveboardReportRequest, _options?: Configuration): Promise<HttpFile>;
@@ -16168,12 +16559,12 @@ declare class PromiseThoughtSpotRestApi {
      */
     exportMetadataTML(exportMetadataTMLRequest: ExportMetadataTMLRequest, _options?: Configuration): Promise<Array<any>>;
     /**
-     *   Version: 10.1.0.cl or later   Exports the [TML](https://docs.thoughtspot.com/cloud/latest/tml) representation of metadata objects in JSON or YAML format.  Requires `DATAMANAGEMENT` (**Can manage data**) privilege.  #### Usage guidelines  * You can export one or several objects by passing metadata object GUIDs in the `metadata` array. * When exporting TML content for a Liveboard or Answer object, you can set `export_associated` to `true` to retrieve TML content for underlying Worksheets, Tables, or Views, including the GUID of each object within the headers. When   `export_associated` is set to `true`, consider retrieving one metadata object at a time. * Set `export_fqns` to `true` to add FQNs of the referenced objects in the TML content. For example, if you send an API request to retrieve TML for a Liveboard and its associated objects, the API returns the TML content with FQNs of the referenced Worksheet. Exporting TML with FQNs is useful if ThoughtSpot has multiple objects with the same name and you want to eliminate ambiguity when importing TML files into ThoughtSpot. It eliminates the need for adding FQNs of the referenced objects manually during the import operation.
+     *   Version: 10.1.0.cl or later   Exports the [TML](https://docs.thoughtspot.com/cloud/latest/tml) representation of metadata objects in JSON or YAML format.  ### **Permissions Required**  Requires `DATAMANAGEMENT` (**Can manage data**) and `USERMANAGEMENT` (**Can manage users**) privileges.  #### **Usage Guidelines**  This API is only applicable for `USER`, `GROUP`, and `ROLES` metadata types.  - `batch_offset` Indicates the starting position within the complete dataset from which the API should begin returning objects. Useful for paginating results efficiently. - `batch_size` Specifies the number of objects or items to retrieve in a single request. Helps control response size for better performance. - `edoc_format` Defines the format of the TML content. The exported metadata can be in JSON or YAML format. - `export_dependent` Specifies whether to include dependent metadata objects in the export. Ensures related objects are also retrieved if needed. - `all_orgs_override` Indicates whether the export operation applies across all organizations. Useful for multi-tenant environments where cross-org exports are required.
      * @param exportMetadataTMLBatchedRequest
      */
     exportMetadataTMLBatched(exportMetadataTMLBatchedRequest: ExportMetadataTMLBatchedRequest, _options?: Configuration): Promise<any>;
     /**
-     *   Version: 9.0.0.cl or later   Fetches data from a saved Answer.  Requires at least view access to the saved Answer and the `DATADOWNLOADING` privilege.  The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_apis).
+     *   Version: 9.0.0.cl or later   Fetches data from a saved Answer.  Requires at least view access to the saved Answer.  The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_apis).
      * @param fetchAnswerDataRequest
      */
     fetchAnswerData(fetchAnswerDataRequest: FetchAnswerDataRequest, _options?: Configuration): Promise<AnswerDataResponse>;
@@ -16193,7 +16584,7 @@ declare class PromiseThoughtSpotRestApi {
      */
     fetchConnectionDiffStatus(connectionIdentifier: string, _options?: Configuration): Promise<FetchConnectionDiffStatusResponse>;
     /**
-     *   Version: 9.0.0.cl or later   Gets data from a Liveboard object and its visualization.    Requires at least view access to the Liveboard and the `DATADOWNLOADING` privilege.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To get data for specific visualizations, add the GUIDs or names of the visualizations in the API request.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes. If the new Liveboard experience mode, the transient content includes ad hoc changes to visualizations such as sorting, toggling of legends, and data drill down.  For more information, and see [Liveboard data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_fetch_liveboard_data_api).
+     *   Version: 9.0.0.cl or later   Gets data from a Liveboard object and its visualization.    Requires at least view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To get data for specific visualizations, add the GUIDs or names of the visualizations in the API request.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes. If the new Liveboard experience mode, the transient content includes ad hoc changes to visualizations such as sorting, toggling of legends, and data drill down.  For more information, and see [Liveboard data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_fetch_liveboard_data_api).
      * @param fetchLiveboardDataRequest
      */
     fetchLiveboardData(fetchLiveboardDataRequest: FetchLiveboardDataRequest, _options?: Configuration): Promise<LiveboardDataResponse>;
@@ -16287,6 +16678,11 @@ declare class PromiseThoughtSpotRestApi {
      */
     logout(_options?: Configuration): Promise<void>;
     /**
+     * Version: 10.7.0.cl or later
+     * @param queryGetDecomposedQueryRequest
+     */
+    queryGetDecomposedQuery(queryGetDecomposedQueryRequest: QueryGetDecomposedQueryRequest, _options?: Configuration): Promise<EurekaDecomposeQueryResponse>;
+    /**
      *   Version: 9.0.0.cl or later   Resets the password of a user account. Administrators can reset password on behalf of a user.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `USER_ADMINISTRATION` (**Can manage users**) privilege is required.
      * @param resetUserPasswordRequest
      */
@@ -16323,7 +16719,7 @@ declare class PromiseThoughtSpotRestApi {
      */
     searchCustomActions(searchCustomActionsRequest: SearchCustomActionsRequest, _options?: Configuration): Promise<Array<ResponseCustomAction>>;
     /**
-     *   Version: 9.0.0.cl or later   Generates an Answer from a given data source.  Requires at least view access to the data source object (Worksheet or View) and the `DATADOWNLOADING` privilege.  #### Usage guidelines  To search data, specify the data source GUID in `logical_table_identifier`. The data source can be a Worksheet, View, Table, or SQL view.  Pass search tokens in the `query_string` attribute in the API request as shown in the following example:  ``` {   \"query_string\": \"[sales] by [store]\",   \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\", } ```  For more information about the `query_string` format and data source attribute, see [Search data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_data_api).    The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).
+     *   Version: 9.0.0.cl or later   Generates an Answer from a given data source.  Requires at least view access to the data source object (Worksheet or View).  #### Usage guidelines  To search data, specify the data source GUID in `logical_table_identifier`. The data source can be a Worksheet, View, Table, or SQL view.  Pass search tokens in the `query_string` attribute in the API request as shown in the following example:  ``` {   \"query_string\": \"[sales] by [store]\",   \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\", } ```  For more information about the `query_string` format and data source attribute, see [Search data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_data_api).    The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).
      * @param searchDataRequest
      */
     searchData(searchDataRequest: SearchDataRequest, _options?: Configuration): Promise<SearchDataResponse>;
@@ -16369,7 +16765,7 @@ declare class PromiseThoughtSpotRestApi {
      */
     sendMessage(conversationIdentifier: string, sendMessageRequest: SendMessageRequest, _options?: Configuration): Promise<Array<ResponseMessage>>;
     /**
-     *   Version: 9.0.0.cl or later   Allows sharing one or several metadata objects with users and groups in ThoughtSpot.  Requires edit access to the metadata object.  The API endpoint allows sharing only the following types of metadata objects: * Liveboards * Visualizations * Answers * Worksheets * Views  You can provide `READ_ONLY` or `MODIFY` access when sharing an object with another user or group. With `READ_ONLY` access grants view access to the shared object, whereas `MODIFY` provides edit access.  To prevent a user or group from accessing the shared object, specify the GUID or name of the principal and set `shareMode` to `NO_ACCESS`.
+     *   Version: 9.0.0.cl or later   Allows sharing one or several metadata objects with users and groups in ThoughtSpot.  Requires edit access to the metadata object.  The API endpoint allows sharing only the following types of metadata objects: * Liveboards * Visualizations * Answers * Worksheets * Views * Connections  You can provide `READ_ONLY` or `MODIFY` access when sharing an object with another user or group. With `READ_ONLY` access grants view access to the shared object, whereas `MODIFY` provides edit access.  To prevent a user or group from accessing the shared object, specify the GUID or name of the principal and set `shareMode` to `NO_ACCESS`.
      * @param shareMetadataRequest
      */
     shareMetadata(shareMetadataRequest: ShareMetadataRequest, _options?: Configuration): Promise<void>;
@@ -16389,7 +16785,7 @@ declare class PromiseThoughtSpotRestApi {
      */
     updateConfig(updateConfigRequest: UpdateConfigRequest, _options?: Configuration): Promise<RepoConfigObject>;
     /**
-     *   Version: 9.2.0.cl or later   Updates a connection object.    Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  To update a connection object, pass these parameters in your API request:  1. GUID of the connection object. 2. If you are updating tables or database schema of a connection object:    a. Add the updated JSON map of metadata with database, schema, and tables in `data_warehouse_config`.    b. Set `validate` to `true`. 3. If you are updating a configuration attribute, connection name, or description, you can set `validate` to `false`.
+     *   Version: 9.2.0.cl or later   **Important**: This endpoint is deprecated and will be removed from ThoughtSpot in September 2025. ThoughtSpot strongly recommends using the [Update connection V2](#/http/api-endpoints/connections/update-connection-v2) endpoint to update your connection objects.  #### Usage guidelines  Updates a connection object.    Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  To update a connection object, pass these parameters in your API request:  1. GUID of the connection object. 2. If you are updating tables or database schema of a connection object:    a. Add the updated JSON map of metadata with database, schema, and tables in `data_warehouse_config`.    b. Set `validate` to `true`. 3. If you are updating a configuration attribute, connection name, or description, you can set `validate` to `false`.
      * @param updateConnectionRequest
      */
     updateConnection(updateConnectionRequest: UpdateConnectionRequest, _options?: Configuration): Promise<void>;
@@ -16415,6 +16811,11 @@ declare class PromiseThoughtSpotRestApi {
      * @param updateMetadataHeaderRequest
      */
     updateMetadataHeader(updateMetadataHeaderRequest: UpdateMetadataHeaderRequest, _options?: Configuration): Promise<void>;
+    /**
+     *  Update object IDs for given metadata objects.   Version: 10.8.0.cl or later   ## Prerequisites - **Privileges Required:**   - `DATAMANAGEMENT` (Can manage data) or `ADMINISTRATION` (Can administer ThoughtSpot). - **Additional Privileges (if RBAC is enabled):**   - `ORG_ADMINISTRATION` (Can manage orgs).  ---  ## Usage Guidelines  ### Parameters  1. **metadata**      - **Description:** List of metadata objects to update their object IDs.    - **Usage:**       - Use either `current_obj_id` alone OR use `metadata_identifier` with `type` (when needed).       - When using `metadata_identifier`, the `type` field is required if using a name instead of a GUID.       - The `new_obj_id` field is always required.  ---  ## Note This API is specifically designed for updating object IDs of metadata objects. It internally uses the header update mechanism to perform the changes.  ## Best Practices  1. **Backup Before Update:**      Always export metadata as a backup before initiating the update process.  2. **Validation:**    - When using `current_obj_id`, ensure it matches the existing object ID exactly.    - When using `metadata_identifier` with a name, ensure the `type` is specified correctly.    - Verify that the `new_obj_id` follows your naming conventions and is unique within your system.  ---  ## Examples  ### Using current_obj_id ```json {   \"metadata\": [     {       \"current_obj_id\": \"existing_object_id\",       \"new_obj_id\": \"new_object_id\"     }   ] } ```  ### Using metadata_identifier with GUID ```json {   \"metadata\": [     {       \"metadata_identifier\": \"01234567-89ab-cdef-0123-456789abcdef\",       \"new_obj_id\": \"new_object_id\"     }   ] } ```  ### Using metadata_identifier with name and type ```json {   \"metadata\": [     {       \"metadata_identifier\": \"My Answer\",       \"type\": \"ANSWER\",       \"new_obj_id\": \"new_object_id\"     }   ] } ```  ### Multiple objects update ```json {   \"metadata\": [     {       \"current_obj_id\": \"existing_object_id_1\",       \"new_obj_id\": \"new_object_id_1\"     },     {       \"metadata_identifier\": \"My Worksheet\",       \"type\": \"LOGICAL_TABLE\",       \"new_obj_id\": \"new_object_id_2\"     }   ] } ```
+     * @param updateMetadataObjIdRequest
+     */
+    updateMetadataObjId(updateMetadataObjIdRequest: UpdateMetadataObjIdRequest, _options?: Configuration): Promise<void>;
     /**
      *   Version: 9.0.0.cl or later   Updates an Org object. You can modify Org properties such as name, description, and user associations.  Requires cluster administration (**Can administer Org**) privileges. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ORG_ADMINISTRATION` (**Can manage Orgs**) privilege is required.
      * @param orgIdentifier ID or name of the Org
@@ -16589,4 +16990,4 @@ declare const createBearerAuthenticationConfig: (thoughtSpotHost: string, paramO
  */
 declare const createBasicConfig: (thoughtSpotHost: string) => Configuration;
 
-export { PromiseAIApi as AIApi, APIKey, APIKeyInput, AccessToken, ActionConfig, ActionConfigInput, ActionConfigInputCreate, ActionConfigInputCreatePositionEnum, ActionConfigInputPositionEnum, ActionDetails, ActionDetailsInput, ActionDetailsInputCreate, ActivateUserRequest, AnswerContent, AnswerDataResponse, ApiException, ApiKeyConfiguration, AssignChangeAuthorRequest, AssignTagRequest, AssociateMetadataInput, AssociateMetadataInputCreate, AssociateMetadataInputCreateTypeEnum, AssociateMetadataInputTypeEnum, AuthMethods, AuthMethodsConfiguration, Authentication, PromiseAuthenticationApi as AuthenticationApi, AuthenticationInput, Author, AuthorMetadataTypeInput, AuthorMetadataTypeInputTypeEnum, AuthorType, BaseServerConfiguration, BasicAuth, BasicAuthInput, BearerAuthAuthentication, CALLBACK, CALLBACKInput, CALLBACKInputMandatory, ChangeUserPasswordRequest, Column, CommitBranchRequest, CommitFileType, CommitHistoryResponse, CommitResponse, CommiterType, Configuration, ConnectionInput, PromiseConnectionsApi as ConnectionsApi, Conversation, ConvertWorksheetToModelRequest, CopyObjectRequest, CopyObjectRequestTypeEnum, CreateConfigRequest, CreateConnectionRequest, CreateConnectionRequestDataWarehouseTypeEnum, CreateConnectionResponse, CreateConnectionResponseDataWarehouseTypeEnum, CreateConversationRequest, CreateCustomActionRequest, CreateCustomActionRequestActionDetails, CreateCustomActionRequestDefaultActionConfig, CreateOrgRequest, CreateRoleRequest, CreateRoleRequestPrivilegesEnum, CreateScheduleRequest, CreateScheduleRequestFileFormatEnum, CreateScheduleRequestFrequency, CreateScheduleRequestLiveboardOptions, CreateScheduleRequestMetadataTypeEnum, CreateScheduleRequestPdfOptions, CreateScheduleRequestPdfOptionsPageSizeEnum, CreateScheduleRequestRecipientDetails, CreateScheduleRequestTimeZoneEnum, CreateTagRequest, CreateUserGroupRequest, CreateUserGroupRequestPrivilegesEnum, CreateUserGroupRequestTypeEnum, CreateUserGroupRequestVisibilityEnum, CreateUserRequest, CreateUserRequestAccountStatusEnum, CreateUserRequestAccountTypeEnum, CreateUserRequestPreferredLocaleEnum, CreateUserRequestVisibilityEnum, CronExpression, CronExpressionInput, PromiseCustomActionApi as CustomActionApi, CustomActionMetadataTypeInput, CustomActionMetadataTypeInputTypeEnum, PromiseDBTApi as DBTApi, PromiseDataApi as DataApi, DataWarehouseObjectInput, DataWarehouseObjects, Database, DbtConnectionRequest, DbtConnectionRequestImportTypeEnum, DbtGenerateSyncTmlRequest, DbtGenerateTmlRequest, DbtGenerateTmlRequestImportWorksheetsEnum, DbtSearchResponse, DeactivateUserRequest, DefaultActionConfig, DefaultActionConfigInput, DefaultActionConfigInputCreate, DefaultActionConfigSearchInput, DeleteConfigRequest, DeleteConnectionRequest, DeleteMetadataRequest, DeleteMetadataTypeInput, DeleteMetadataTypeInputTypeEnum, DeployCommitRequest, DeployCommitRequestDeployPolicyEnum, DeployCommitRequestDeployTypeEnum, DeployResponse, ErrorResponse, ExcludeMetadataListItemInput, ExcludeMetadataListItemInputTypeEnum, ExportAnswerReportRequest, ExportAnswerReportRequestFileFormatEnum, ExportAnswerReportRequestRegionalSettings, ExportAnswerReportRequestRegionalSettingsCurrencyFormatEnum, ExportAnswerReportRequestRegionalSettingsDateFormatLocaleEnum, ExportAnswerReportRequestRegionalSettingsNumberFormatLocaleEnum, ExportAnswerReportRequestRegionalSettingsUserLocaleEnum, ExportLiveboardReportRequest, ExportLiveboardReportRequestFileFormatEnum, ExportLiveboardReportRequestPdfOptions, ExportLiveboardReportRequestPdfOptionsPageOrientationEnum, ExportLiveboardReportRequestPngOptions, ExportMetadataTMLBatchedRequest, ExportMetadataTMLBatchedRequestEdocFormatEnum, ExportMetadataTMLBatchedRequestMetadataTypeEnum, ExportMetadataTMLRequest, ExportMetadataTMLRequestEdocFormatEnum, ExportMetadataTMLRequestExportOptions, ExportMetadataTMLRequestExportSchemaVersionEnum, ExportMetadataTypeInput, ExportMetadataTypeInputTypeEnum, ExportOptions, FavoriteMetadataInput, FavoriteMetadataInputTypeEnum, FavoriteMetadataItem, FavoriteMetadataItemTypeEnum, FavoriteObjectOptionsInput, FetchAnswerDataRequest, FetchAnswerDataRequestDataFormatEnum, FetchAnswerSqlQueryRequest, FetchAsyncImportTaskStatusRequest, FetchAsyncImportTaskStatusRequestTaskStatusEnum, FetchConnectionDiffStatusResponse, FetchLiveboardDataRequest, FetchLiveboardDataRequestDataFormatEnum, FetchLiveboardSqlQueryRequest, FetchLogsRequest, FetchLogsRequestLogTypeEnum, FetchPermissionsOfPrincipalsRequest, FetchPermissionsOfPrincipalsRequestDefaultMetadataTypeEnum, FetchPermissionsOnMetadataRequest, FilterRules, FilterRulesOperatorEnum, FilterRulesValuesInner, ForceLogoutUsersRequest, Frequency, FrequencyInput, GenericInfo, GetAsyncImportStatusResponse, GetCustomAccessTokenRequest, GetCustomAccessTokenRequestPersistOptionEnum, GetFullAccessTokenRequest, GetFullAccessTokenRequestUserParameters, GetObjectAccessTokenRequest, GetTokenResponse, GroupObject, PromiseGroupsApi as GroupsApi, GroupsImportListInput, GroupsImportListInputPrivilegesEnum, GroupsImportListInputTypeEnum, GroupsImportListInputVisibilityEnum, HeaderAttributeInput, HeaderUpdateInput, HeaderUpdateInputTypeEnum, HttpBasicConfiguration, HttpBearerConfiguration, HttpException, HttpFile, HttpLibrary, HttpMethod, ImportEPackAsyncTaskStatus, ImportEPackAsyncTaskStatusImportPolicyEnum, ImportEPackAsyncTaskStatusTaskStatusEnum, ImportMetadataTMLAsyncRequest, ImportMetadataTMLAsyncRequestImportPolicyEnum, ImportMetadataTMLRequest, ImportMetadataTMLRequestImportPolicyEnum, ImportUser, ImportUserAccountStatusEnum, ImportUserAccountTypeEnum, ImportUserGroupsRequest, ImportUserGroupsResponse, ImportUserType, ImportUserVisibilityEnum, ImportUsersRequest, ImportUsersResponse, IsomorphicFetchHttpLibrary, JWTMetadataObject, JWTMetadataObjectTypeEnum, JWTParameter, JWTUserOptions, JWTUserOptionsFull, JWTUserOptionsParametersInner, LiveboardContent, LiveboardDataResponse, LiveboardOptions, LiveboardOptionsInput, PromiseLogApi as LogApi, LogResponse, LoginRequest, PromiseMetadataApi as MetadataApi, MetadataAssociationItem, MetadataInput, MetadataInputTypeEnum, MetadataListItemInput, MetadataListItemInputTypeEnum, MetadataObject, MetadataObjectTypeEnum, MetadataResponse, MetadataResponseTypeEnum, MetadataSearchResponse, MetadataSearchResponseMetadataTypeEnum, MetadataSearchSortOptions, MetadataSearchSortOptionsFieldNameEnum, MetadataSearchSortOptionsOrderEnum, PromiseMiddleware as Middleware, ModelTableList, OAuth2Configuration, ObjectIDAndName, Org, OrgInfo, OrgResponse, OrgResponseStatusEnum, OrgResponseVisibilityEnum, PromiseOrgsApi as OrgsApi, ParameterValues, ParametersListItem, ParametersListItemInput, PdfOptions, PdfOptionsInput, PdfOptionsInputPageOrientationEnum, PdfOptionsPageSizeEnum, PermissionInput, PermissionInputShareModeEnum, PermissionOfMetadataResponse, PermissionOfPrincipalsResponse, PermissionsMetadataTypeInput, PermissionsMetadataTypeInputTypeEnum, PngOptionsInput, PrincipalsInput, PrincipalsInputTypeEnum, PrincipalsListItem, PrincipalsListItemInput, PromiseHttpLibrary, RecipientDetails, RecipientDetailsInput, RegionalSettingsInput, RegionalSettingsInputCurrencyFormatEnum, RegionalSettingsInputDateFormatLocaleEnum, RegionalSettingsInputNumberFormatLocaleEnum, RegionalSettingsInputUserLocaleEnum, RepoConfigObject, PromiseReportsApi as ReportsApi, RequestBody, RequestContext, RequiredError, ResetUserPasswordRequest, ResponseActivationURL, ResponseBody, ResponseContext, ResponseCopyObject, ResponseCustomAction, ResponseFailedEntities, ResponseFailedEntity, ResponseIncompleteEntities, ResponseIncompleteEntity, ResponseMessage, ResponseMessageMessageTypeEnum, ResponseMessageVisualizationTypeEnum, ResponsePostUpgradeFailedEntities, ResponsePostUpgradeFailedEntity, ResponseSchedule, ResponseScheduleRun, ResponseSuccessfulEntities, ResponseSuccessfulEntity, ResponseWorksheetToModelConversion, RevertCommitRequest, RevertCommitRequestRevertPolicyEnum, RevertResponse, RevertedMetadata, RevokeTokenRequest, RiseSetter, Role, RoleResponse, RoleResponsePermissionEnum, RoleResponsePrivilegesEnum, PromiseRolesApi as RolesApi, RuntimeFilter, RuntimeFilters, RuntimeFiltersOperatorEnum, RuntimeParamOverride, RuntimeParameters, RuntimeSort, RuntimeSorts, RuntimeSortsOrderEnum, ScheduleHistoryRunsOptionsInput, PromiseSchedulesApi as SchedulesApi, SchedulesPdfOptionsInput, SchedulesPdfOptionsInputPageSizeEnum, SchemaObject, Scope, SearchCommitsRequest, SearchCommitsRequestMetadataTypeEnum, SearchConfigRequest, SearchConnectionRequest, SearchConnectionRequestAuthenticationTypeEnum, SearchConnectionRequestDataWarehouseObjectTypeEnum, SearchConnectionRequestDataWarehouseTypesEnum, SearchConnectionRequestSortOptions, SearchConnectionRequestSortOptionsFieldNameEnum, SearchConnectionRequestSortOptionsOrderEnum, SearchConnectionResponse, SearchConnectionResponseDataWarehouseTypeEnum, SearchCustomActionsRequest, SearchCustomActionsRequestDefaultActionConfig, SearchCustomActionsRequestTypeEnum, SearchDataRequest, SearchDataRequestDataFormatEnum, SearchDataResponse, SearchMetadataRequest, SearchMetadataRequestDependentObjectVersionEnum, SearchMetadataRequestFavoriteObjectOptions, SearchMetadataRequestSortOptions, SearchMetadataRequestSortOptionsFieldNameEnum, SearchMetadataRequestSortOptionsOrderEnum, SearchOrgsRequest, SearchOrgsRequestStatusEnum, SearchOrgsRequestVisibilityEnum, SearchRoleResponse, SearchRoleResponsePermissionEnum, SearchRoleResponsePrivilegesEnum, SearchRolesRequest, SearchRolesRequestPermissionsEnum, SearchRolesRequestPrivilegesEnum, SearchSchedulesRequest, SearchSchedulesRequestHistoryRunsOptions, SearchSchedulesRequestSortOptions, SearchTagsRequest, SearchUserGroupsRequest, SearchUserGroupsRequestPrivilegesEnum, SearchUserGroupsRequestSortOptions, SearchUserGroupsRequestSortOptionsFieldNameEnum, SearchUserGroupsRequestSortOptionsOrderEnum, SearchUserGroupsRequestTypeEnum, SearchUserGroupsRequestVisibilityEnum, SearchUsersRequest, SearchUsersRequestAccountStatusEnum, SearchUsersRequestAccountTypeEnum, SearchUsersRequestPrivilegesEnum, SearchUsersRequestSortOptions, SearchUsersRequestSortOptionsFieldNameEnum, SearchUsersRequestSortOptionsOrderEnum, SearchUsersRequestVisibilityEnum, PromiseSecurityApi as SecurityApi, SecurityAuthentication, SelfDecodingBody, SendMessageRequest, ServerConfiguration, ShareMetadataRequest, ShareMetadataRequestMetadataTypeEnum, ShareMetadataTypeInput, ShareMetadataTypeInputTypeEnum, SharePermissionsInput, SharePermissionsInputShareModeEnum, SingleAnswerRequest, SortOptionInput, SortOptionInputFieldNameEnum, SortOptionInputOrderEnum, SortOptions, SortOptionsFieldNameEnum, SortOptionsOrderEnum, SortingOptions, SqlQuery, SqlQueryResponse, SqlQueryResponseMetadataTypeEnum, PromiseSystemApi as SystemApi, SystemConfig, SystemInfo, Table, Tag, TagMetadataTypeInput, TagMetadataTypeInputTypeEnum, PromiseTagsApi as TagsApi, PromiseThoughtSpotRestApi as ThoughtSpotRestApi, Token, TokenAccessScopeObject, TokenAccessScopeObjectTypeEnum, TokenProvider, TokenValidationResponse, URL, URLInput, URLInputMandatory, UpdateConfigRequest, UpdateConnectionRequest, UpdateConnectionV2Request, UpdateCustomActionRequest, UpdateCustomActionRequestActionDetails, UpdateCustomActionRequestDefaultActionConfig, UpdateCustomActionRequestOperationEnum, UpdateDbtConnectionRequest, UpdateDbtConnectionRequestImportTypeEnum, UpdateMetadataHeaderRequest, UpdateOrgRequest, UpdateOrgRequestOperationEnum, UpdateRoleRequest, UpdateRoleRequestPrivilegesEnum, UpdateScheduleRequest, UpdateScheduleRequestFileFormatEnum, UpdateScheduleRequestFrequency, UpdateScheduleRequestLiveboardOptions, UpdateScheduleRequestMetadataTypeEnum, UpdateScheduleRequestPdfOptions, UpdateScheduleRequestPdfOptionsPageSizeEnum, UpdateScheduleRequestRecipientDetails, UpdateScheduleRequestStatusEnum, UpdateScheduleRequestTimeZoneEnum, UpdateSystemConfigRequest, UpdateTagRequest, UpdateUserGroupRequest, UpdateUserGroupRequestOperationEnum, UpdateUserGroupRequestPrivilegesEnum, UpdateUserGroupRequestTypeEnum, UpdateUserGroupRequestVisibilityEnum, UpdateUserRequest, UpdateUserRequestAccountStatusEnum, UpdateUserRequestAccountTypeEnum, UpdateUserRequestOperationEnum, UpdateUserRequestPreferredLocaleEnum, UpdateUserRequestVisibilityEnum, User, UserAccountStatusEnum, UserAccountTypeEnum, UserGroup, UserGroupResponse, UserGroupResponseParentTypeEnum, UserGroupResponseTypeEnum, UserGroupResponseVisibilityEnum, UserInfo, UserObject, UserObjectTypeEnum, UserParameterOptions, UserParentTypeEnum, UserVisibilityEnum, PromiseUsersApi as UsersApi, ValidateMergeRequest, ValidateTokenRequest, PromiseVersionControlApi as VersionControlApi, configureAuthMethods, createBasicConfig, createBearerAuthenticationConfig, createConfiguration, server1, servers, wrapHttpLibrary };
+export { PromiseAIApi as AIApi, APIKey, APIKeyInput, AccessToken, ActionConfig, ActionConfigInput, ActionConfigInputCreate, ActionConfigInputCreatePositionEnum, ActionConfigInputPositionEnum, ActionDetails, ActionDetailsInput, ActionDetailsInputCreate, ActivateUserRequest, AnswerContent, AnswerDataResponse, ApiException, ApiKeyConfiguration, AssignChangeAuthorRequest, AssignTagRequest, AssociateMetadataInput, AssociateMetadataInputCreate, AssociateMetadataInputCreateTypeEnum, AssociateMetadataInputTypeEnum, AuthMethods, AuthMethodsConfiguration, Authentication, PromiseAuthenticationApi as AuthenticationApi, AuthenticationInput, Author, AuthorMetadataTypeInput, AuthorMetadataTypeInputTypeEnum, AuthorType, BaseServerConfiguration, BasicAuth, BasicAuthInput, BearerAuthAuthentication, CALLBACK, CALLBACKInput, CALLBACKInputMandatory, ChangeUserPasswordRequest, Column, CommitBranchRequest, CommitFileType, CommitHistoryResponse, CommitResponse, CommiterType, Configuration, ConnectionInput, PromiseConnectionsApi as ConnectionsApi, Conversation, ConvertWorksheetToModelRequest, CopyObjectRequest, CopyObjectRequestTypeEnum, CreateConfigRequest, CreateConnectionRequest, CreateConnectionRequestDataWarehouseTypeEnum, CreateConnectionResponse, CreateConnectionResponseDataWarehouseTypeEnum, CreateConversationRequest, CreateCustomActionRequest, CreateCustomActionRequestActionDetails, CreateCustomActionRequestDefaultActionConfig, CreateOrgRequest, CreateRoleRequest, CreateRoleRequestPrivilegesEnum, CreateScheduleRequest, CreateScheduleRequestFileFormatEnum, CreateScheduleRequestFrequency, CreateScheduleRequestLiveboardOptions, CreateScheduleRequestMetadataTypeEnum, CreateScheduleRequestPdfOptions, CreateScheduleRequestPdfOptionsPageSizeEnum, CreateScheduleRequestRecipientDetails, CreateScheduleRequestTimeZoneEnum, CreateTagRequest, CreateUserGroupRequest, CreateUserGroupRequestPrivilegesEnum, CreateUserGroupRequestTypeEnum, CreateUserGroupRequestVisibilityEnum, CreateUserRequest, CreateUserRequestAccountStatusEnum, CreateUserRequestAccountTypeEnum, CreateUserRequestPreferredLocaleEnum, CreateUserRequestVisibilityEnum, CronExpression, CronExpressionInput, PromiseCustomActionApi as CustomActionApi, CustomActionMetadataTypeInput, CustomActionMetadataTypeInputTypeEnum, PromiseDBTApi as DBTApi, PromiseDataApi as DataApi, DataWarehouseObjectInput, DataWarehouseObjects, Database, DbtConnectionRequest, DbtConnectionRequestImportTypeEnum, DbtGenerateSyncTmlRequest, DbtGenerateTmlRequest, DbtGenerateTmlRequestImportWorksheetsEnum, DbtSearchResponse, DeactivateUserRequest, DefaultActionConfig, DefaultActionConfigInput, DefaultActionConfigInputCreate, DefaultActionConfigSearchInput, DeleteConfigRequest, DeleteConnectionRequest, DeleteMetadataRequest, DeleteMetadataTypeInput, DeleteMetadataTypeInputTypeEnum, DeployCommitRequest, DeployCommitRequestDeployPolicyEnum, DeployCommitRequestDeployTypeEnum, DeployResponse, ErrorResponse, EurekaDecomposeQueryResponse, EurekaLLMDecomposeQueryResponse, EurekaLLMSuggestedQuery, ExcludeMetadataListItemInput, ExcludeMetadataListItemInputTypeEnum, ExportAnswerReportRequest, ExportAnswerReportRequestFileFormatEnum, ExportAnswerReportRequestRegionalSettings, ExportAnswerReportRequestRegionalSettingsCurrencyFormatEnum, ExportAnswerReportRequestRegionalSettingsDateFormatLocaleEnum, ExportAnswerReportRequestRegionalSettingsNumberFormatLocaleEnum, ExportAnswerReportRequestRegionalSettingsUserLocaleEnum, ExportLiveboardReportRequest, ExportLiveboardReportRequestFileFormatEnum, ExportLiveboardReportRequestPdfOptions, ExportLiveboardReportRequestPdfOptionsPageOrientationEnum, ExportLiveboardReportRequestPngOptions, ExportMetadataTMLBatchedRequest, ExportMetadataTMLBatchedRequestEdocFormatEnum, ExportMetadataTMLBatchedRequestMetadataTypeEnum, ExportMetadataTMLRequest, ExportMetadataTMLRequestEdocFormatEnum, ExportMetadataTMLRequestExportOptions, ExportMetadataTMLRequestExportSchemaVersionEnum, ExportMetadataTypeInput, ExportMetadataTypeInputTypeEnum, ExportOptions, FavoriteMetadataInput, FavoriteMetadataInputTypeEnum, FavoriteMetadataItem, FavoriteMetadataItemTypeEnum, FavoriteObjectOptionsInput, FetchAnswerDataRequest, FetchAnswerDataRequestDataFormatEnum, FetchAnswerSqlQueryRequest, FetchAsyncImportTaskStatusRequest, FetchAsyncImportTaskStatusRequestTaskStatusEnum, FetchConnectionDiffStatusResponse, FetchLiveboardDataRequest, FetchLiveboardDataRequestDataFormatEnum, FetchLiveboardSqlQueryRequest, FetchLogsRequest, FetchLogsRequestLogTypeEnum, FetchPermissionsOfPrincipalsRequest, FetchPermissionsOfPrincipalsRequestDefaultMetadataTypeEnum, FetchPermissionsOnMetadataRequest, FilterRules, FilterRulesOperatorEnum, FilterRulesValuesInner, ForceLogoutUsersRequest, Frequency, FrequencyInput, GenericInfo, GetAsyncImportStatusResponse, GetCustomAccessTokenRequest, GetCustomAccessTokenRequestPersistOptionEnum, GetFullAccessTokenRequest, GetObjectAccessTokenRequest, GetTokenResponse, GroupObject, PromiseGroupsApi as GroupsApi, GroupsImportListInput, GroupsImportListInputPrivilegesEnum, GroupsImportListInputTypeEnum, GroupsImportListInputVisibilityEnum, HeaderAttributeInput, HeaderUpdateInput, HeaderUpdateInputTypeEnum, HttpBasicConfiguration, HttpBearerConfiguration, HttpException, HttpFile, HttpLibrary, HttpMethod, ImportEPackAsyncTaskStatus, ImportEPackAsyncTaskStatusImportPolicyEnum, ImportEPackAsyncTaskStatusTaskStatusEnum, ImportMetadataTMLAsyncRequest, ImportMetadataTMLAsyncRequestImportPolicyEnum, ImportMetadataTMLRequest, ImportMetadataTMLRequestImportPolicyEnum, ImportUser, ImportUserAccountStatusEnum, ImportUserAccountTypeEnum, ImportUserGroupsRequest, ImportUserGroupsResponse, ImportUserType, ImportUserVisibilityEnum, ImportUsersRequest, ImportUsersResponse, InputEurekaNLSRequest, IsomorphicFetchHttpLibrary, JWTMetadataObject, JWTParameter, JWTUserOptions, JWTUserOptionsFull, JWTUserOptionsParametersInner, LiveboardContent, LiveboardDataResponse, LiveboardOptions, LiveboardOptionsInput, PromiseLogApi as LogApi, LogResponse, LoginRequest, PromiseMetadataApi as MetadataApi, MetadataAssociationItem, MetadataInput, MetadataInputTypeEnum, MetadataListItemInput, MetadataListItemInputTypeEnum, MetadataObject, MetadataObjectTypeEnum, MetadataResponse, MetadataResponseTypeEnum, MetadataSearchResponse, MetadataSearchResponseMetadataTypeEnum, MetadataSearchSortOptions, MetadataSearchSortOptionsFieldNameEnum, MetadataSearchSortOptionsOrderEnum, PromiseMiddleware as Middleware, ModelTableList, OAuth2Configuration, ObjectIDAndName, Org, OrgInfo, OrgResponse, OrgResponseStatusEnum, OrgResponseVisibilityEnum, PromiseOrgsApi as OrgsApi, ParameterValues, ParametersListItem, ParametersListItemInput, PdfOptions, PdfOptionsInput, PdfOptionsInputPageOrientationEnum, PdfOptionsPageSizeEnum, PermissionInput, PermissionInputShareModeEnum, PermissionOfMetadataResponse, PermissionOfPrincipalsResponse, PermissionsMetadataTypeInput, PermissionsMetadataTypeInputTypeEnum, PngOptionsInput, PrincipalsInput, PrincipalsInputTypeEnum, PrincipalsListItem, PrincipalsListItemInput, PromiseHttpLibrary, QueryGetDecomposedQueryRequest, QueryGetDecomposedQueryRequestNlsRequest, RecipientDetails, RecipientDetailsInput, RegionalSettingsInput, RegionalSettingsInputCurrencyFormatEnum, RegionalSettingsInputDateFormatLocaleEnum, RegionalSettingsInputNumberFormatLocaleEnum, RegionalSettingsInputUserLocaleEnum, RepoConfigObject, PromiseReportsApi as ReportsApi, RequestBody, RequestContext, RequiredError, ResetUserPasswordRequest, ResponseActivationURL, ResponseBody, ResponseContext, ResponseCopyObject, ResponseCustomAction, ResponseFailedEntities, ResponseFailedEntity, ResponseIncompleteEntities, ResponseIncompleteEntity, ResponseMessage, ResponseMessageMessageTypeEnum, ResponseMessageVisualizationTypeEnum, ResponsePostUpgradeFailedEntities, ResponsePostUpgradeFailedEntity, ResponseSchedule, ResponseScheduleRun, ResponseSuccessfulEntities, ResponseSuccessfulEntity, ResponseWorksheetToModelConversion, RevertCommitRequest, RevertCommitRequestRevertPolicyEnum, RevertResponse, RevertedMetadata, RevokeTokenRequest, RiseGQLArgWrapper, RiseSetter, Role, RoleResponse, RoleResponsePermissionEnum, RoleResponsePrivilegesEnum, PromiseRolesApi as RolesApi, RuntimeFilter, RuntimeFilters, RuntimeFiltersOperatorEnum, RuntimeParamOverride, RuntimeParameters, RuntimeSort, RuntimeSorts, RuntimeSortsOrderEnum, ScheduleHistoryRunsOptionsInput, PromiseSchedulesApi as SchedulesApi, SchedulesPdfOptionsInput, SchedulesPdfOptionsInputPageSizeEnum, SchemaObject, Scope, SearchCommitsRequest, SearchCommitsRequestMetadataTypeEnum, SearchConfigRequest, SearchConnectionRequest, SearchConnectionRequestAuthenticationTypeEnum, SearchConnectionRequestDataWarehouseObjectTypeEnum, SearchConnectionRequestDataWarehouseTypesEnum, SearchConnectionRequestSortOptions, SearchConnectionRequestSortOptionsFieldNameEnum, SearchConnectionRequestSortOptionsOrderEnum, SearchConnectionResponse, SearchConnectionResponseDataWarehouseTypeEnum, SearchCustomActionsRequest, SearchCustomActionsRequestDefaultActionConfig, SearchCustomActionsRequestTypeEnum, SearchDataRequest, SearchDataRequestDataFormatEnum, SearchDataResponse, SearchMetadataRequest, SearchMetadataRequestDependentObjectVersionEnum, SearchMetadataRequestFavoriteObjectOptions, SearchMetadataRequestSortOptions, SearchMetadataRequestSortOptionsFieldNameEnum, SearchMetadataRequestSortOptionsOrderEnum, SearchOrgsRequest, SearchOrgsRequestStatusEnum, SearchOrgsRequestVisibilityEnum, SearchRoleResponse, SearchRoleResponsePermissionEnum, SearchRoleResponsePrivilegesEnum, SearchRolesRequest, SearchRolesRequestPermissionsEnum, SearchRolesRequestPrivilegesEnum, SearchSchedulesRequest, SearchSchedulesRequestHistoryRunsOptions, SearchSchedulesRequestSortOptions, SearchTagsRequest, SearchUserGroupsRequest, SearchUserGroupsRequestPrivilegesEnum, SearchUserGroupsRequestSortOptions, SearchUserGroupsRequestSortOptionsFieldNameEnum, SearchUserGroupsRequestSortOptionsOrderEnum, SearchUserGroupsRequestTypeEnum, SearchUserGroupsRequestVisibilityEnum, SearchUsersRequest, SearchUsersRequestAccountStatusEnum, SearchUsersRequestAccountTypeEnum, SearchUsersRequestPrivilegesEnum, SearchUsersRequestSortOptions, SearchUsersRequestSortOptionsFieldNameEnum, SearchUsersRequestSortOptionsOrderEnum, SearchUsersRequestVisibilityEnum, PromiseSecurityApi as SecurityApi, SecurityAuthentication, SelfDecodingBody, SendMessageRequest, ServerConfiguration, ShareMetadataRequest, ShareMetadataRequestMetadataTypeEnum, ShareMetadataTypeInput, ShareMetadataTypeInputTypeEnum, SharePermissionsInput, SharePermissionsInputShareModeEnum, SingleAnswerRequest, SortOptionInput, SortOptionInputFieldNameEnum, SortOptionInputOrderEnum, SortOptions, SortOptionsFieldNameEnum, SortOptionsOrderEnum, SortingOptions, SqlQuery, SqlQueryResponse, SqlQueryResponseMetadataTypeEnum, PromiseSystemApi as SystemApi, SystemConfig, SystemInfo, Table, Tag, TagMetadataTypeInput, TagMetadataTypeInputTypeEnum, PromiseTagsApi as TagsApi, PromiseThoughtSpotRestApi as ThoughtSpotRestApi, Token, TokenAccessScopeObject, TokenAccessScopeObjectTypeEnum, TokenProvider, TokenValidationResponse, URL, URLInput, URLInputMandatory, UpdateConfigRequest, UpdateConnectionRequest, UpdateConnectionV2Request, UpdateCustomActionRequest, UpdateCustomActionRequestActionDetails, UpdateCustomActionRequestDefaultActionConfig, UpdateCustomActionRequestOperationEnum, UpdateDbtConnectionRequest, UpdateDbtConnectionRequestImportTypeEnum, UpdateMetadataHeaderRequest, UpdateMetadataObjIdRequest, UpdateObjIdInput, UpdateObjIdInputTypeEnum, UpdateOrgRequest, UpdateOrgRequestOperationEnum, UpdateRoleRequest, UpdateRoleRequestPrivilegesEnum, UpdateScheduleRequest, UpdateScheduleRequestFileFormatEnum, UpdateScheduleRequestFrequency, UpdateScheduleRequestLiveboardOptions, UpdateScheduleRequestMetadataTypeEnum, UpdateScheduleRequestPdfOptions, UpdateScheduleRequestPdfOptionsPageSizeEnum, UpdateScheduleRequestRecipientDetails, UpdateScheduleRequestStatusEnum, UpdateScheduleRequestTimeZoneEnum, UpdateSystemConfigRequest, UpdateTagRequest, UpdateUserGroupRequest, UpdateUserGroupRequestOperationEnum, UpdateUserGroupRequestPrivilegesEnum, UpdateUserGroupRequestTypeEnum, UpdateUserGroupRequestVisibilityEnum, UpdateUserRequest, UpdateUserRequestAccountStatusEnum, UpdateUserRequestAccountTypeEnum, UpdateUserRequestOperationEnum, UpdateUserRequestPreferredLocaleEnum, UpdateUserRequestVisibilityEnum, User, UserAccountStatusEnum, UserAccountTypeEnum, UserGroup, UserGroupResponse, UserGroupResponseParentTypeEnum, UserGroupResponseTypeEnum, UserGroupResponseVisibilityEnum, UserInfo, UserObject, UserObjectTypeEnum, UserParameterOptions, UserParentTypeEnum, UserVisibilityEnum, PromiseUsersApi as UsersApi, ValidateMergeRequest, ValidateTokenRequest, PromiseVersionControlApi as VersionControlApi, configureAuthMethods, createBasicConfig, createBearerAuthenticationConfig, createConfiguration, server1, servers, wrapHttpLibrary };

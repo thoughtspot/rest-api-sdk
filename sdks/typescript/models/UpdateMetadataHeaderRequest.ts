@@ -17,7 +17,7 @@ export class UpdateMetadataHeaderRequest {
     /**
     * List of header objects to update.
     */
-    'headers_update'?: Array<HeaderUpdateInput>;
+    'headers_update': Array<HeaderUpdateInput>;
     /**
     * Unique ID or name of the organization.
     */

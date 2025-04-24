@@ -28,13 +28,13 @@ export class ImportMetadataTMLRequest {
     /**
     * If import is happening from all orgs context.
     */
-    'all_orgs_context'?: boolean | null;
+    'all_orgs_override'?: boolean | null;
     /**
     * <div>Version: 10.6.0.cl or later </div>  Boolean Flag to skip TML diff check before processing object TMLs.
     */
     'skip_diff_check'?: boolean | null;
     /**
-    * <div>Version: 10.5.0.cl or later </div>  Boolean to indicate if the large metadata validation should be enabled. Set to `true` if the database contains multiple thousands of tables.
+    * <div>Version: 10.5.0.cl or later </div>  Boolean to indicate if the large metadata validation should be enabled.
     */
     'enable_large_metadata_validation'?: boolean | null;
 
@@ -60,8 +60,8 @@ export class ImportMetadataTMLRequest {
             "format": ""
         },
         {
-            "name": "all_orgs_context",
-            "baseName": "all_orgs_context",
+            "name": "all_orgs_override",
+            "baseName": "all_orgs_override",
             "type": "boolean",
             "format": ""
         },
