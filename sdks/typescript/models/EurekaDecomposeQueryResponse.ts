@@ -10,33 +10,24 @@
  * Do not edit the class manually.
  */
 
+import { EurekaLLMDecomposeQueryResponse } from '../models/EurekaLLMDecomposeQueryResponse';
 import { HttpFile } from '../http/http';
 
-/**
-* Metadata objects.
-*/
-export class JWTMetadataObject {
-    'identifier'?: string | null;
-    'type'?: string | null;
+export class EurekaDecomposeQueryResponse {
+    'decomposedQueryResponse'?: EurekaLLMDecomposeQueryResponse;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "identifier",
-            "baseName": "identifier",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "type",
-            "baseName": "type",
-            "type": "string",
+            "name": "decomposedQueryResponse",
+            "baseName": "decomposedQueryResponse",
+            "type": "EurekaLLMDecomposeQueryResponse",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return JWTMetadataObject.attributeTypeMap;
+        return EurekaDecomposeQueryResponse.attributeTypeMap;
     }
 
     public constructor() {

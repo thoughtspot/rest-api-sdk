@@ -10,33 +10,27 @@
  * Do not edit the class manually.
  */
 
+import { EurekaLLMSuggestedQuery } from '../models/EurekaLLMSuggestedQuery';
 import { HttpFile } from '../http/http';
 
-/**
-* Metadata objects.
-*/
-export class JWTMetadataObject {
-    'identifier'?: string | null;
-    'type'?: string | null;
+export class EurekaLLMDecomposeQueryResponse {
+    /**
+    * List of analytical questions that can be run on their respective worksheet/data sources.
+    */
+    'decomposedQueries'?: Array<EurekaLLMSuggestedQuery> | null;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "identifier",
-            "baseName": "identifier",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "type",
-            "baseName": "type",
-            "type": "string",
+            "name": "decomposedQueries",
+            "baseName": "decomposedQueries",
+            "type": "Array<EurekaLLMSuggestedQuery>",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return JWTMetadataObject.attributeTypeMap;
+        return EurekaLLMDecomposeQueryResponse.attributeTypeMap;
     }
 
     public constructor() {

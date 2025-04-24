@@ -24,7 +24,7 @@ export class ImportMetadataTMLAsyncRequest {
     /**
     * If import is happening from all orgs context.
     */
-    'all_orgs_context'?: boolean | null;
+    'all_orgs_override'?: boolean | null;
     /**
     * <div>Version: 10.5.0.cl or later </div>  Policy to be followed while importing the TML. Valid values are [PARTIAL_OBJECT, PARTIAL, VALIDATE_ONLY, ALL_OR_NONE]
     */
@@ -34,7 +34,7 @@ export class ImportMetadataTMLAsyncRequest {
     */
     'skip_diff_check'?: boolean | null;
     /**
-    * <div>Version: 10.5.0.cl or later </div>  Boolean to indicate if the large metadata validation should be enabled. Set to `true` if the database contains multiple thousands of tables.
+    * <div>Version: 10.5.0.cl or later </div>  Boolean to indicate if the large metadata validation should be enabled.
     */
     'enable_large_metadata_validation'?: boolean | null;
 
@@ -54,8 +54,8 @@ export class ImportMetadataTMLAsyncRequest {
             "format": ""
         },
         {
-            "name": "all_orgs_context",
-            "baseName": "all_orgs_context",
+            "name": "all_orgs_override",
+            "baseName": "all_orgs_override",
             "type": "boolean",
             "format": ""
         },

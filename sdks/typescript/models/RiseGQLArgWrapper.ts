@@ -12,19 +12,16 @@
 
 import { HttpFile } from '../http/http';
 
-/**
-* Metadata objects.
-*/
-export class JWTMetadataObject {
-    'identifier'?: string | null;
-    'type'?: string | null;
+export class RiseGQLArgWrapper {
+    'name': string;
+    'type': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "identifier",
-            "baseName": "identifier",
+            "name": "name",
+            "baseName": "name",
             "type": "string",
             "format": ""
         },
@@ -36,7 +33,7 @@ export class JWTMetadataObject {
         }    ];
 
     static getAttributeTypeMap() {
-        return JWTMetadataObject.attributeTypeMap;
+        return RiseGQLArgWrapper.attributeTypeMap;
     }
 
     public constructor() {

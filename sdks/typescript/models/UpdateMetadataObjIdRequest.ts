@@ -10,33 +10,27 @@
  * Do not edit the class manually.
  */
 
+import { UpdateObjIdInput } from '../models/UpdateObjIdInput';
 import { HttpFile } from '../http/http';
 
-/**
-* Metadata objects.
-*/
-export class JWTMetadataObject {
-    'identifier'?: string | null;
-    'type'?: string | null;
+export class UpdateMetadataObjIdRequest {
+    /**
+    * List of metadata objects to update their object IDs.
+    */
+    'metadata': Array<UpdateObjIdInput>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "identifier",
-            "baseName": "identifier",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "type",
-            "baseName": "type",
-            "type": "string",
+            "name": "metadata",
+            "baseName": "metadata",
+            "type": "Array<UpdateObjIdInput>",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return JWTMetadataObject.attributeTypeMap;
+        return UpdateMetadataObjIdRequest.attributeTypeMap;
     }
 
     public constructor() {

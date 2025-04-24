@@ -123,6 +123,9 @@ models/DeleteMetadataTypeInput.ts
 models/DeployCommitRequest.ts
 models/DeployResponse.ts
 models/ErrorResponse.ts
+models/EurekaDecomposeQueryResponse.ts
+models/EurekaLLMDecomposeQueryResponse.ts
+models/EurekaLLMSuggestedQuery.ts
 models/ExcludeMetadataListItemInput.ts
 models/ExportAnswerReportRequest.ts
 models/ExportAnswerReportRequestRegionalSettings.ts
@@ -155,7 +158,6 @@ models/GenericInfo.ts
 models/GetAsyncImportStatusResponse.ts
 models/GetCustomAccessTokenRequest.ts
 models/GetFullAccessTokenRequest.ts
-models/GetFullAccessTokenRequestUserParameters.ts
 models/GetObjectAccessTokenRequest.ts
 models/GetTokenResponse.ts
 models/GroupObject.ts
@@ -171,6 +173,7 @@ models/ImportUserGroupsResponse.ts
 models/ImportUserType.ts
 models/ImportUsersRequest.ts
 models/ImportUsersResponse.ts
+models/InputEurekaNLSRequest.ts
 models/JWTMetadataObject.ts
 models/JWTParameter.ts
 models/JWTUserOptions.ts
@@ -208,6 +211,8 @@ models/PngOptionsInput.ts
 models/PrincipalsInput.ts
 models/PrincipalsListItem.ts
 models/PrincipalsListItemInput.ts
+models/QueryGetDecomposedQueryRequest.ts
+models/QueryGetDecomposedQueryRequestNlsRequest.ts
 models/RecipientDetails.ts
 models/RecipientDetailsInput.ts
 models/RegionalSettingsInput.ts
@@ -232,6 +237,7 @@ models/RevertCommitRequest.ts
 models/RevertResponse.ts
 models/RevertedMetadata.ts
 models/RevokeTokenRequest.ts
+models/RiseGQLArgWrapper.ts
 models/RiseSetter.ts
 models/Role.ts
 models/RoleResponse.ts
@@ -297,6 +303,8 @@ models/UpdateCustomActionRequestActionDetails.ts
 models/UpdateCustomActionRequestDefaultActionConfig.ts
 models/UpdateDbtConnectionRequest.ts
 models/UpdateMetadataHeaderRequest.ts
+models/UpdateMetadataObjIdRequest.ts
+models/UpdateObjIdInput.ts
 models/UpdateOrgRequest.ts
 models/UpdateRoleRequest.ts
 models/UpdateScheduleRequest.ts

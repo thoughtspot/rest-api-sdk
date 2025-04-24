@@ -12,31 +12,44 @@
 
 import { HttpFile } from '../http/http';
 
-/**
-* Metadata objects.
-*/
-export class JWTMetadataObject {
-    'identifier'?: string | null;
-    'type'?: string | null;
+export class EurekaLLMSuggestedQuery {
+    /**
+    * NL query that can be run using spotter aka natural language search to get an AI generated answer.
+    */
+    'query'?: string | null;
+    /**
+    * Unique identifier of the worksheet on which this query can be run on.
+    */
+    'worksheetId'?: string | null;
+    /**
+    * Display name of the worksheet on which this query can be run on.
+    */
+    'worksheetName'?: string | null;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "identifier",
-            "baseName": "identifier",
+            "name": "query",
+            "baseName": "query",
             "type": "string",
             "format": ""
         },
         {
-            "name": "type",
-            "baseName": "type",
+            "name": "worksheetId",
+            "baseName": "worksheetId",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "worksheetName",
+            "baseName": "worksheetName",
             "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return JWTMetadataObject.attributeTypeMap;
+        return EurekaLLMSuggestedQuery.attributeTypeMap;
     }
 
     public constructor() {

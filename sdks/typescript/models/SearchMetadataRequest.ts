@@ -84,7 +84,7 @@ export class SearchMetadataRequest {
     */
     'record_offset'?: number;
     /**
-    * The number of records that should be included.
+    * The number of records that should be included. It is recommended to use a smaller `record_size` when fetching dependent objects or any of the additional metadata detail options.
     */
     'record_size'?: number;
     'sort_options'?: SearchMetadataRequestSortOptions;
@@ -96,6 +96,10 @@ export class SearchMetadataRequest {
     * Indicates whether to include stats of the metadata objects.
     */
     'include_stats'?: boolean | null;
+    /**
+    * Indicates whether to include discoverable metadata objects. If lenient OSM is not enabled, then even though the includeDiscoverableObjects is set to True, we won\'t see discoverable objects.
+    */
+    'include_discoverable_objects'?: boolean | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -223,6 +227,12 @@ export class SearchMetadataRequest {
         {
             "name": "include_stats",
             "baseName": "include_stats",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "include_discoverable_objects",
+            "baseName": "include_discoverable_objects",
             "type": "boolean",
             "format": ""
         }    ];
