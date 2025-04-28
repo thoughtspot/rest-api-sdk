@@ -50,7 +50,7 @@ import org.thoughtspot.client.JSON;
 /**
  * Conversation
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T16:12:37.188804+05:30[Asia/Kolkata]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
 public class Conversation {
   public static final String SERIALIZED_NAME_CONVERSATION_IDENTIFIER = "conversation_identifier";
   @SerializedName(SERIALIZED_NAME_CONVERSATION_IDENTIFIER)

@@ -51,7 +51,7 @@ import org.thoughtspot.client.JSON;
 /**
  * PDF layout and orientation settings. Applicable only if the &#x60;file_format&#x60; is specified as &#x60;PDF&#x60;.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T16:12:37.188804+05:30[Asia/Kolkata]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
 public class CreateScheduleRequestPdfOptions {
   public static final String SERIALIZED_NAME_COMPLETE_LIVEBOARD = "complete_liveboard";
   @SerializedName(SERIALIZED_NAME_COMPLETE_LIVEBOARD)

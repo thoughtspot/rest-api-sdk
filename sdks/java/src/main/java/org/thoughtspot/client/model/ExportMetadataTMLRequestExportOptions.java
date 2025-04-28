@@ -51,7 +51,7 @@ import org.thoughtspot.client.JSON;
 /**
  * Flags to specify additional options for export.    Version: 10.5.0.cl or later 
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T16:12:37.188804+05:30[Asia/Kolkata]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
 public class ExportMetadataTMLRequestExportOptions {
   public static final String SERIALIZED_NAME_EXPORT_WITH_REFERENCE_OBJECT_ID = "export_with_reference_object_id";
   @SerializedName(SERIALIZED_NAME_EXPORT_WITH_REFERENCE_OBJECT_ID)

@@ -51,7 +51,7 @@ import org.thoughtspot.client.JSON;
 /**
  * Sort options.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T16:12:37.188804+05:30[Asia/Kolkata]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
 public class SearchUsersRequestSortOptions {
   /**
    * Name of the field to apply the sort on.

@@ -53,7 +53,7 @@ import org.thoughtspot.client.JSON;
 /**
  * Authorization type for the custom action.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T16:12:37.188804+05:30[Asia/Kolkata]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
 public class AuthenticationInput {
   public static final String SERIALIZED_NAME_AP_I_KEY = "API_Key";
   @SerializedName(SERIALIZED_NAME_AP_I_KEY)
