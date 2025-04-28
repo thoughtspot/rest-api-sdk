@@ -109,6 +109,7 @@ export * from '../models/GenericInfo';
 export * from '../models/GetAsyncImportStatusResponse';
 export * from '../models/GetCustomAccessTokenRequest';
 export * from '../models/GetFullAccessTokenRequest';
+export * from '../models/GetFullAccessTokenRequestUserParameters';
 export * from '../models/GetObjectAccessTokenRequest';
 export * from '../models/GetTokenResponse';
 export * from '../models/GroupObject';
@@ -386,6 +387,7 @@ import { GenericInfo } from '../models/GenericInfo';
 import { GetAsyncImportStatusResponse } from '../models/GetAsyncImportStatusResponse';
 import { GetCustomAccessTokenRequest     , GetCustomAccessTokenRequestPersistOptionEnum          } from '../models/GetCustomAccessTokenRequest';
 import { GetFullAccessTokenRequest } from '../models/GetFullAccessTokenRequest';
+import { GetFullAccessTokenRequestUserParameters } from '../models/GetFullAccessTokenRequestUserParameters';
 import { GetObjectAccessTokenRequest } from '../models/GetObjectAccessTokenRequest';
 import { GetTokenResponse } from '../models/GetTokenResponse';
 import { GroupObject } from '../models/GroupObject';
@@ -837,6 +839,7 @@ let typeMap: {[index: string]: any} = {
     "GetAsyncImportStatusResponse": GetAsyncImportStatusResponse,
     "GetCustomAccessTokenRequest": GetCustomAccessTokenRequest,
     "GetFullAccessTokenRequest": GetFullAccessTokenRequest,
+    "GetFullAccessTokenRequestUserParameters": GetFullAccessTokenRequestUserParameters,
     "GetObjectAccessTokenRequest": GetObjectAccessTokenRequest,
     "GetTokenResponse": GetTokenResponse,
     "GroupObject": GroupObject,
