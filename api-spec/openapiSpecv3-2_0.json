@@ -15208,7 +15208,17 @@
         "properties": {
           "parameters": {
             "items": {
-             
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/Runtime_Filter"
+                },
+                {
+                  "$ref": "#/components/schemas/Runtime_Sort"
+                },
+                {
+                  "$ref": "#/components/schemas/Runtime_Param_Override"
+                }
+              ]
             }
           },
           "metadata": {
@@ -15588,7 +15598,7 @@
           "values": {
             "type": "array",
             "items": {
-              
+             "type": "object" 
             },
             "description": "The values to filter on. To get all records, use TS_WILDCARD_ALL as values."
           }
@@ -15609,7 +15619,17 @@
           "values": {
             "type": "array",
             "items": {
-             
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "number"
+                }
+              ]
             },
             "description": "The values to filter on. Only single value is supported currently."
           }
