@@ -6,22 +6,6 @@
   },
   "x-roles": [
     {
-      "name": "9.0.0.cl",
-      "id": "9.0.0.cl",
-      "tags": [
-        "9.0.0.cl"
-      ],
-      "description": "Roles for version 9.0.0.cl"
-    },
-    {
-      "name": "9.12.0.cl",
-      "id": "9.12.0.cl",
-      "tags": [
-        "9.12.0.cl"
-      ],
-      "description": "Roles for version 9.12.0.cl"
-    },
-    {
       "name": "10.4.0.cl",
       "id": "10.4.0.cl",
       "tags": [
@@ -30,60 +14,20 @@
       "description": "Roles for version 10.4.0.cl"
     },
     {
-      "name": "9.7.0.cl",
-      "id": "9.7.0.cl",
+      "name": "10.7.0.cl",
+      "id": "10.7.0.cl",
       "tags": [
-        "9.7.0.cl"
+        "10.7.0.cl"
       ],
-      "description": "Roles for version 9.7.0.cl"
+      "description": "Roles for version 10.7.0.cl"
     },
     {
-      "name": "9.2.0.cl",
-      "id": "9.2.0.cl",
+      "name": "9.0.0.cl",
+      "id": "9.0.0.cl",
       "tags": [
-        "9.2.0.cl"
+        "9.0.0.cl"
       ],
-      "description": "Roles for version 9.2.0.cl"
-    },
-    {
-      "name": "10.1.0.cl",
-      "id": "10.1.0.cl",
-      "tags": [
-        "10.1.0.cl"
-      ],
-      "description": "Roles for version 10.1.0.cl"
-    },
-    {
-      "name": "10.3.0.cl",
-      "id": "10.3.0.cl",
-      "tags": [
-        "10.3.0.cl"
-      ],
-      "description": "Roles for version 10.3.0.cl"
-    },
-    {
-      "name": "10.6.0.cl",
-      "id": "10.6.0.cl",
-      "tags": [
-        "10.6.0.cl"
-      ],
-      "description": "Roles for version 10.6.0.cl"
-    },
-    {
-      "name": "9.9.0.cl",
-      "id": "9.9.0.cl",
-      "tags": [
-        "9.9.0.cl"
-      ],
-      "description": "Roles for version 9.9.0.cl"
-    },
-    {
-      "name": "9.5.0.cl",
-      "id": "9.5.0.cl",
-      "tags": [
-        "9.5.0.cl"
-      ],
-      "description": "Roles for version 9.5.0.cl"
+      "description": "Roles for version 9.0.0.cl"
     },
     {
       "name": "9.4.0.cl",
@@ -94,12 +38,84 @@
       "description": "Roles for version 9.4.0.cl"
     },
     {
+      "name": "9.12.0.cl",
+      "id": "9.12.0.cl",
+      "tags": [
+        "9.12.0.cl"
+      ],
+      "description": "Roles for version 9.12.0.cl"
+    },
+    {
+      "name": "9.2.0.cl",
+      "id": "9.2.0.cl",
+      "tags": [
+        "9.2.0.cl"
+      ],
+      "description": "Roles for version 9.2.0.cl"
+    },
+    {
+      "name": "9.9.0.cl",
+      "id": "9.9.0.cl",
+      "tags": [
+        "9.9.0.cl"
+      ],
+      "description": "Roles for version 9.9.0.cl"
+    },
+    {
       "name": "9.6.0.cl",
       "id": "9.6.0.cl",
       "tags": [
         "9.6.0.cl"
       ],
       "description": "Roles for version 9.6.0.cl"
+    },
+    {
+      "name": "10.6.0.cl",
+      "id": "10.6.0.cl",
+      "tags": [
+        "10.6.0.cl"
+      ],
+      "description": "Roles for version 10.6.0.cl"
+    },
+    {
+      "name": "10.3.0.cl",
+      "id": "10.3.0.cl",
+      "tags": [
+        "10.3.0.cl"
+      ],
+      "description": "Roles for version 10.3.0.cl"
+    },
+    {
+      "name": "10.1.0.cl",
+      "id": "10.1.0.cl",
+      "tags": [
+        "10.1.0.cl"
+      ],
+      "description": "Roles for version 10.1.0.cl"
+    },
+    {
+      "name": "10.8.0.cl",
+      "id": "10.8.0.cl",
+      "tags": [
+        "10.8.0.cl"
+      ],
+      "description": "Roles for version 10.8.0.cl"
+    },
+    {
+      "name": "9.5.0.cl",
+      "id": "9.5.0.cl",
+      "tags": [
+        "9.5.0.cl"
+      ],
+      "description": "Roles for version 9.5.0.cl"
+    },
+    {
+      "name": "9.7.0.cl",
+      "id": "9.7.0.cl",
+      "tags": [
+        "9.7.0.cl"
+      ],
+      "description": "Roles for version 9.7.0.cl"
     }
   ],
   "tags": [],
@@ -153,6 +169,116 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Conversation"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/ai/analytical-questions": {
+      "post": {
+        "operationId": "queryGetDecomposedQuery",
+        "description": "<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.7.0.cl or later</span>",
+        "tags": [
+          "AI",
+          "10.7.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "answerIds": {
+                    "description": "List of answer unique identifiers (GUIDs) whose data will be used to guide the response.",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "content": {
+                    "description": "User provided content like text data, csv data as a string message to provide context & potentially improve the quality of the response.",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "conversationId": {
+                    "description": "Unique identifier to denote current conversation.",
+                    "type": "string"
+                  },
+                  "liveboardIds": {
+                    "description": "List of liveboard unique identifiers (GUIDs) whose data will be used to guide the response.",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "maxDecomposedQueries": {
+                    "description": "Maximum number of decomposed queries that is allowed in the response, default = 5.",
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "nlsRequest": {
+                    "description": "NLSRequest object containing user query & instructions.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/Input_eureka_NLSRequest"
+                      }
+                    ]
+                  },
+                  "worksheetIds": {
+                    "description": "List of worksheetIds to provide context for decomposing user query into analytical queries that can be run on them.",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/eureka_DecomposeQueryResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/eureka_DecomposeQueryResponse"
                 }
               }
             }
@@ -691,6 +817,14 @@
                     "items": {
                       "type": "string"
                     }
+                  },
+                  "user_parameters": {
+                    "description": "<div><span class=\"since-beta-tag\">Version: 9.10.5.cl or later</span><span class=\"since-beta-tag\">Deprecated: 10.4.0.cl and later</span></div>\n\nDefine attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters).",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/User_Parameter_Options"
+                      }
+                    ]
                   }
                 },
                 "required": [
@@ -820,6 +954,14 @@
                     "items": {
                       "type": "string"
                     }
+                  },
+                  "user_parameters": {
+                    "description": "<div><span class=\"since-beta-tag\">Version: 9.10.5.cl or later</span><span class=\"since-beta-tag\">Deprecated: 10.4.0.cl and later</span></div>\n\nDefine attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters).",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/User_Parameter_Options"
+                      }
+                    ]
                   }
                 },
                 "required": [
@@ -2440,7 +2582,7 @@
     "/api/rest/2.0/metadata/answer/data": {
       "post": {
         "operationId": "fetchAnswerData",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nFetches data from a saved Answer.\n\nRequires at least view access to the saved Answer and the `DATADOWNLOADING` privilege.\n\nThe `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_apis).\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nFetches data from a saved Answer.\n\nRequires at least view access to the saved Answer.\n\nThe `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_apis).\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Data",
           "9.0.0.cl"
@@ -2555,7 +2697,7 @@
     "/api/rest/2.0/metadata/liveboard/data": {
       "post": {
         "operationId": "fetchLiveboardData",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGets data from a Liveboard object and its visualization.  \n\nRequires at least view access to the Liveboard and the `DATADOWNLOADING` privilege.\n\n#### Usage guidelines\n\nIn the request body, specify the GUID or name of the Liveboard. To get data for specific visualizations, add the GUIDs or names of the visualizations in the API request.\n\nTo include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes. If the new Liveboard experience mode, the transient content includes ad hoc changes to visualizations such as sorting, toggling of legends, and data drill down.\n\nFor more information, and see [Liveboard data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_fetch_liveboard_data_api).\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGets data from a Liveboard object and its visualization.  \n\nRequires at least view access to the Liveboard.\n\n#### Usage guidelines\n\nIn the request body, specify the GUID or name of the Liveboard. To get data for specific visualizations, add the GUIDs or names of the visualizations in the API request.\n\nTo include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes. If the new Liveboard experience mode, the transient content includes ad hoc changes to visualizations such as sorting, toggling of legends, and data drill down.\n\nFor more information, and see [Liveboard data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_fetch_liveboard_data_api).\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Data",
           "9.0.0.cl"
@@ -2681,7 +2823,7 @@
     "/api/rest/2.0/searchdata": {
       "post": {
         "operationId": "searchData",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGenerates an Answer from a given data source.\n\nRequires at least view access to the data source object (Worksheet or View) and the `DATADOWNLOADING` privilege.\n\n#### Usage guidelines\n\nTo search data, specify the data source GUID in `logical_table_identifier`. The data source can be a Worksheet, View, Table, or SQL view.\n\nPass search tokens in the `query_string` attribute in the API request as shown in the following example:\n\n```\n{\n  \"query_string\": \"[sales] by [store]\",\n  \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\",\n}\n```\n\nFor more information about the `query_string` format and data source attribute, see [Search data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_data_api).  \n\nThe `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGenerates an Answer from a given data source.\n\nRequires at least view access to the data source object (Worksheet or View).\n\n#### Usage guidelines\n\nTo search data, specify the data source GUID in `logical_table_identifier`. The data source can be a Worksheet, View, Table, or SQL view.\n\nPass search tokens in the `query_string` attribute in the API request as shown in the following example:\n\n```\n{\n  \"query_string\": \"[sales] by [store]\",\n  \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\",\n}\n```\n\nFor more information about the `query_string` format and data source attribute, see [Search data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_data_api).  \n\nThe `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).  \n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Data",
           "9.0.0.cl"
@@ -3429,7 +3571,6 @@
                         "SHAREWITHALL",
                         "JOBSCHEDULING",
                         "A3ANALYSIS",
-                        "EXPERIMENTALFEATUREPRIVILEGE",
                         "BYPASSRLS",
                         "RANALYSIS",
                         "DEVELOPER",
@@ -3972,7 +4113,6 @@
                         "SHAREWITHALL",
                         "JOBSCHEDULING",
                         "A3ANALYSIS",
-                        "EXPERIMENTALFEATUREPRIVILEGE",
                         "BYPASSRLS",
                         "RANALYSIS",
                         "DEVELOPER",
@@ -5092,7 +5232,7 @@
                     "type": "boolean",
                     "nullable": true
                   },
-                  "all_orgs_context": {
+                  "all_orgs_override": {
                     "description": "If import is happening from all orgs context.",
                     "default": false,
                     "type": "boolean",
@@ -5204,7 +5344,7 @@
                     "type": "boolean",
                     "nullable": true
                   },
-                  "all_orgs_context": {
+                  "all_orgs_override": {
                     "description": "If import is happening from all orgs context.",
                     "default": false,
                     "type": "boolean",
@@ -5423,7 +5563,7 @@
                     "format": "int32"
                   },
                   "record_size": {
-                    "description": "The number of records that should be included.",
+                    "description": "The number of records that should be included. It is recommended to use a smaller `record_size` when fetching dependent objects or any of the additional metadata detail options.",
                     "default": 10,
                     "type": "integer",
                     "format": "int32"
@@ -5446,6 +5586,12 @@
                   "include_stats": {
                     "description": "Indicates whether to include stats of the metadata objects.",
                     "default": false,
+                    "type": "boolean",
+                    "nullable": true
+                  },
+                  "include_discoverable_objects": {
+                    "description": "Indicates whether to include discoverable metadata objects.\nIf lenient OSM is not enabled, then even though the includeDiscoverableObjects is set to True, we won't see discoverable objects.",
+                    "default": true,
                     "type": "boolean",
                     "nullable": true
                   }
@@ -5538,7 +5684,88 @@
                     "description": "Unique ID or name of the organization.",
                     "type": "string"
                   }
+                },
+                "required": [
+                  "headers_update"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "Headers update was successful."
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/metadata/update-obj-id": {
+      "post": {
+        "operationId": "updateMetadataObjId",
+        "description": "\nUpdate object IDs for given metadata objects. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.8.0.cl or later</span>\n\n## Prerequisites\n- **Privileges Required:**\n  - `DATAMANAGEMENT` (Can manage data) or `ADMINISTRATION` (Can administer ThoughtSpot).\n- **Additional Privileges (if RBAC is enabled):**\n  - `ORG_ADMINISTRATION` (Can manage orgs).\n\n---\n\n## Usage Guidelines\n\n### Parameters\n\n1. **metadata**  \n   - **Description:** List of metadata objects to update their object IDs.\n   - **Usage:**\n      - Use either `current_obj_id` alone OR use `metadata_identifier` with `type` (when needed).\n      - When using `metadata_identifier`, the `type` field is required if using a name instead of a GUID.\n      - The `new_obj_id` field is always required.\n\n---\n\n## Note\nThis API is specifically designed for updating object IDs of metadata objects. It internally uses the header update mechanism to perform the changes.\n\n## Best Practices\n\n1. **Backup Before Update:**  \n   Always export metadata as a backup before initiating the update process.\n\n2. **Validation:**\n   - When using `current_obj_id`, ensure it matches the existing object ID exactly.\n   - When using `metadata_identifier` with a name, ensure the `type` is specified correctly.\n   - Verify that the `new_obj_id` follows your naming conventions and is unique within your system.\n\n---\n\n## Examples\n\n### Using current_obj_id\n```json\n{\n  \"metadata\": [\n    {\n      \"current_obj_id\": \"existing_object_id\",\n      \"new_obj_id\": \"new_object_id\"\n    }\n  ]\n}\n```\n\n### Using metadata_identifier with GUID\n```json\n{\n  \"metadata\": [\n    {\n      \"metadata_identifier\": \"01234567-89ab-cdef-0123-456789abcdef\",\n      \"new_obj_id\": \"new_object_id\"\n    }\n  ]\n}\n```\n\n### Using metadata_identifier with name and type\n```json\n{\n  \"metadata\": [\n    {\n      \"metadata_identifier\": \"My Answer\",\n      \"type\": \"ANSWER\",\n      \"new_obj_id\": \"new_object_id\"\n    }\n  ]\n}\n```\n\n### Multiple objects update\n```json\n{\n  \"metadata\": [\n    {\n      \"current_obj_id\": \"existing_object_id_1\",\n      \"new_obj_id\": \"new_object_id_1\"\n    },\n    {\n      \"metadata_identifier\": \"My Worksheet\",\n      \"type\": \"LOGICAL_TABLE\",\n      \"new_obj_id\": \"new_object_id_2\"\n    }\n  ]\n}\n```\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Metadata",
+          "10.8.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "metadata": {
+                    "description": "List of metadata objects to update their object IDs.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/UpdateObjIdInput"
+                    }
+                  }
+                },
+                "required": [
+                  "metadata"
+                ]
               }
             }
           },
@@ -5997,7 +6224,7 @@
     "/api/rest/2.0/report/answer": {
       "post": {
         "operationId": "exportAnswerReport",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nExports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.\n\nRequires `DATADOWNLOADING` (**Can download data**) privilege and view access to the Answer.\n\n#### Usage guidelines\n\nIn the request body, the GUID or name of the Answer and set `file_format`. The default file format is CSV.\n\n**NOTE**:\n* The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension.\n* HTML rendering is not supported for PDF exports of Answers with tables.\n\nOptionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.\n\nThe `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nExports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.\n\nRequires at least view access to the Answer.\n\n#### Usage guidelines\n\nIn the request body, the GUID or name of the Answer and set `file_format`. The default file format is CSV.\n\n**NOTE**:\n* The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension.\n* HTML rendering is not supported for PDF exports of Answers with tables.\n\nOptionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.\n\nThe `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).  \n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Reports",
           "9.0.0.cl"
@@ -6045,7 +6272,7 @@
                     "type": "object"
                   },
                   "regional_settings": {
-                    "description": "Options for specific region speciic overrides to support date/number/string/currency formatting.",
+                    "description": "Options for specific region specific overrides to support date/number/string/currency formatting.",
                     "allOf": [
                       {
                         "$ref": "#/components/schemas/RegionalSettingsInput"
@@ -6112,7 +6339,7 @@
     "/api/rest/2.0/report/liveboard": {
       "post": {
         "operationId": "exportLiveboardReport",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nExports a Liveboard and its visualizations in PDF or PNG file format.\n\nRequires at least view access to the Liveboard.\n\n#### Usage guidelines\n\nIn the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.\n\nThe default `file_format` is PDF. For PDF downloads, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.\n\n**NOTE**: The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension.\n\nOptionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.\n\nTo include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nExports a Liveboard and its visualizations in PDF or PNG file format.\n\nRequires at least view access to the Liveboard.\n\n#### Usage guidelines\n\nIn the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.\n\nThe default `file_format` is PDF. For PDF downloads, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.\n\n**NOTE**: The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension.\n\nOptionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.\n\nTo include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).  \n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Reports",
           "9.0.0.cl"
@@ -6151,6 +6378,10 @@
                     "description": "JSON object with representing filter condition to apply filters at runtime. For example, {\"col1\": \"region\", \"op1\": \"EQ\", \"val1\": \"northeast\" }. You can add multiple keys by incrementing the number at the end, for example, col2, op2, val2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_filters).",
                     "type": "object"
                   },
+                  "override_filters": {
+                    "description": "Applied to the liveboard and overrides any filters already applied on the same columns in liveboard.\nFollowing example illustrate different kinds of filters:\n{\n  \"override_filters\": [\n    {\n      \"column_name\": \"Color\",\n      \"generic_filter\": {\n        \"op\": \"IN\",\n        \"values\": [\n          \"almond\",\n          \"turquoise\"\n        ]\n      },\n      \"negate\": false\n    },\n    {\n      \"column_name\": \"Commit Date\",\n      \"date_filter\": {\n        \"datePeriod\": \"HOUR\",\n        \"number\": 3,\n        \"type\": \"LAST_N_PERIOD\",\n        \"op\": \"EQ\"\n      }\n    },\n    {\n      \"column_name\": \"Sales\",\n      \"generic_filter\": {\n        \"op\": \"BW_INC\",\n        \"values\": [\n          \"100000\",\n          \"70000\"\n        ]\n      },\n      \"negate\": true\n    }\n  ]\n}",
+                    "type": "object"
+                  },
                   "runtime_sort": {
                     "description": "JSON string representing runtime sort. For example, {\"sortCol1\": \"region\", \"asc1\" : true}. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort).",
                     "type": "object"
@@ -6176,7 +6407,7 @@
                     "type": "object"
                   },
                   "regional_settings": {
-                    "description": "Options for specific region speciic overrides to support date/number/string/currency formatting.",
+                    "description": "Options for specific region specific overrides to support date/number/string/currency formatting.",
                     "allOf": [
                       {
                         "$ref": "#/components/schemas/RegionalSettingsInput"
@@ -6277,7 +6508,6 @@
                         "SHAREWITHALL",
                         "JOBSCHEDULING",
                         "A3ANALYSIS",
-                        "EXPERIMENTALFEATUREPRIVILEGE",
                         "BYPASSRLS",
                         "DISABLE_PINBOARD_CREATION",
                         "DEVELOPER",
@@ -6662,7 +6892,6 @@
                         "SHAREWITHALL",
                         "JOBSCHEDULING",
                         "A3ANALYSIS",
-                        "EXPERIMENTALFEATUREPRIVILEGE",
                         "BYPASSRLS",
                         "DISABLE_PINBOARD_CREATION",
                         "DEVELOPER",
@@ -13138,6 +13367,11 @@
             ],
             "description": "Type of the metadata."
           },
+          "metadata_obj_id": {
+            "type": "string",
+            "description": "Custom identifier of the metadata.\n(Available from 10.8.0.cl onwards)",
+            "nullable": true
+          },
           "dependent_objects": {
             "type": "object",
             "description": "Details of dependent objects of the metadata objects.",
@@ -14856,6 +15090,93 @@
         },
         "description": "MetadataType InputType used in Custom Action API's"
       },
+      "Input_eureka_NLSRequest": {
+        "type": "object",
+        "properties": {
+          "agentVersion": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Cluster version like 10.4.0.cl, 10.5.0.cl, so on.",
+            "nullable": true
+          },
+          "bypassCache": {
+            "type": "boolean",
+            "description": "If true, results are not returned from cache & calculated every time. Can incur high costs & latency.",
+            "nullable": true
+          },
+          "instructions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "User specific instructions for processing the @query.",
+            "nullable": true
+          },
+          "query": {
+            "type": "string",
+            "description": "User query which is a topical/goal oriented question that needs to be broken down into smaller simple analytical questions.",
+            "nullable": true
+          }
+        }
+      },
+      "eureka_DecomposeQueryResponse": {
+        "type": "object",
+        "properties": {
+          "decomposedQueryResponse": {
+            "$ref": "#/components/schemas/eureka_LLMDecomposeQueryResponse",
+            "description": "Decomposed query response for a topical/goal oriented question that contains broken down analytical questions.",
+            "nullable": true
+          }
+        }
+      },
+      "eureka_LLMDecomposeQueryResponse": {
+        "type": "object",
+        "properties": {
+          "decomposedQueries": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/eureka_LLMSuggestedQuery"
+            },
+            "description": "List of analytical questions that can be run on their respective worksheet/data sources.",
+            "nullable": true
+          }
+        }
+      },
+      "eureka_LLMSuggestedQuery": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "NL query that can be run using spotter aka natural language search to get an AI generated answer.",
+            "nullable": true
+          },
+          "worksheetId": {
+            "type": "string",
+            "description": "Unique identifier of the worksheet on which this query can be run on.",
+            "nullable": true
+          },
+          "worksheetName": {
+            "type": "string",
+            "description": "Display name of the worksheet on which this query can be run on.",
+            "nullable": true
+          }
+        }
+      },
+      "RiseGQLArgWrapper": {
+        "type": "object",
+        "required": [
+          "name",
+          "type"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          }
+        }
+      },
       "GenericInfo": {
         "type": "object",
         "properties": {
@@ -14887,17 +15208,7 @@
         "properties": {
           "parameters": {
             "items": {
-              "anyOf": [
-                {
-                  "$ref": "#/components/schemas/Runtime_Filter"
-                },
-                {
-                  "$ref": "#/components/schemas/Runtime_Sort"
-                },
-                {
-                  "$ref": "#/components/schemas/Runtime_Param_Override"
-                }
-              ]
+             
             }
           },
           "metadata": {
@@ -14940,9 +15251,7 @@
           },
           "type": {
             "type": "string",
-            "enum": [
-              "LOGICAL_TABLE"
-            ],
+            "enum": [],
             "nullable": true
           }
         },
@@ -14996,7 +15305,7 @@
             "enum": [
               "LOGICAL_TABLE"
             ],
-            "description": "  Type of object.\n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.",
+            "description": "  Type of object.\n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.\n  \n\n Specify the object type as `LOGICAL_TABLE`.  The `LIVEBOARD` and `ANSWER` object types are not supported.",
             "nullable": true
           },
           "identifier": {
@@ -15279,17 +15588,7 @@
           "values": {
             "type": "array",
             "items": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "boolean"
-                },
-                {
-                  "type": "number"
-                }
-              ]
+              
             },
             "description": "The values to filter on. To get all records, use TS_WILDCARD_ALL as values."
           }
@@ -15310,17 +15609,7 @@
           "values": {
             "type": "array",
             "items": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "boolean"
-                },
-                {
-                  "type": "number"
-                }
-              ]
+             
             },
             "description": "The values to filter on. Only single value is supported currently."
           }
@@ -15338,7 +15627,7 @@
             "enum": [
               "LOGICAL_TABLE"
             ],
-            "description": "  Type of object.\n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.",
+            "description": "  Type of object.\n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.\n  \n\n Specify the object type as `LOGICAL_TABLE`.  The `LIVEBOARD` and `ANSWER` object types are not supported.",
             "nullable": true
           },
           "identifier": {
@@ -15660,7 +15949,6 @@
                 "SHAREWITHALL",
                 "JOBSCHEDULING",
                 "A3ANALYSIS",
-                "EXPERIMENTALFEATUREPRIVILEGE",
                 "BYPASSRLS",
                 "RANALYSIS",
                 "DEVELOPER",
@@ -15756,19 +16044,25 @@
           "include_obj_id_ref": {
             "type": "boolean",
             "default": false,
-            "description": "Boolean Flag to whether to export user_defined_id of referenced object. This will only be respected when UserDefinedId in TML is enabled.",
+            "description": "Boolean Flag to export Object ID of referenced object. This flag will work only after the Object ID feature has been enabled. Please contact support to enable the feature.",
             "nullable": true
           },
           "include_guid": {
             "type": "boolean",
             "default": true,
-            "description": "Boolean flag to whether to export guid of the object. This will only be respected when UserDefinedId in TML is enabled.",
+            "description": "Boolean flag to export guid of the object. This flag will work only after the Object ID feature has been enabled. Please contact support to enable the feature.",
             "nullable": true
           },
           "include_obj_id": {
             "type": "boolean",
             "default": false,
-            "description": "Boolean flag to whether to export user_defined_id of the object. This will only be respected when UserDefinedId in TML is enabled.",
+            "description": "Boolean flag to export Object ID of the object. This flag will work only after the Object ID feature has been enabled. Please contact support to enable the feature.",
+            "nullable": true
+          },
+          "export_with_associated_feedbacks": {
+            "type": "boolean",
+            "default": false,
+            "description": "Boolean flag indicating whether to export associated feedbacks of the object. This will only be respected when the object can have feedbacks. <br/>  <span class=\"since-beta-tag\">Version: 10.7.0.cl or later</span>",
             "nullable": true
           }
         },
@@ -16048,6 +16342,44 @@
         },
         "description": "Attribute to update in a header."
       },
+      "UpdateObjIdInput": {
+        "type": "object",
+        "required": [
+          "new_obj_id"
+        ],
+        "properties": {
+          "metadata_identifier": {
+            "type": "string",
+            "description": "GUID or name of the metadata object.",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "ANSWER",
+              "LOGICAL_TABLE",
+              "LOGICAL_COLUMN",
+              "LIVEBOARD",
+              "ACTION_OBJECT",
+              "DATA_SOURCE",
+              "USER",
+              "USER_GROUP"
+            ],
+            "description": "Type of metadata. Required if metadata_identifier is name of the object.",
+            "nullable": true
+          },
+          "current_obj_id": {
+            "type": "string",
+            "description": "Current object ID value.",
+            "nullable": true
+          },
+          "new_obj_id": {
+            "type": "string",
+            "description": "New object ID value to set."
+          }
+        },
+        "description": "Input for updating object ID of a metadata object."
+      },
       "ExportMetadataTypeInput": {
         "type": "object",
         "required": [
@@ -16064,7 +16396,8 @@
               "CUSTOM_ACTION",
               "USER",
               "USER_GROUP",
-              "ROLE"
+              "ROLE",
+              "FEEDBACK"
             ],
             "description": "  Type of metadata.\n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.",
             "nullable": true
@@ -16498,7 +16831,6 @@
                 "SHAREWITHALL",
                 "JOBSCHEDULING",
                 "A3ANALYSIS",
-                "EXPERIMENTALFEATUREPRIVILEGE",
                 "BYPASSRLS",
                 "DISABLE_PINBOARD_CREATION",
                 "DEVELOPER",
