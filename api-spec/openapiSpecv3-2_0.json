@@ -817,6 +817,14 @@
                     "items": {
                       "type": "string"
                     }
+                  },
+                  "user_parameters": {
+                    "description": "<div><span class=\"since-beta-tag\">Version: 9.10.5.cl or later</span><span class=\"since-beta-tag\">Deprecated: 10.4.0.cl and later</span></div>\n\nDefine attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters).",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/User_Parameter_Options"
+                      }
+                    ]
                   }
                 },
                 "required": [
@@ -946,6 +954,14 @@
                     "items": {
                       "type": "string"
                     }
+                  },
+                  "user_parameters": {
+                    "description": "<div><span class=\"since-beta-tag\">Version: 9.10.5.cl or later</span><span class=\"since-beta-tag\">Deprecated: 10.4.0.cl and later</span></div>\n\nDefine attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters).",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/User_Parameter_Options"
+                      }
+                    ]
                   }
                 },
                 "required": [
@@ -15582,17 +15598,7 @@
           "values": {
             "type": "array",
             "items": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "boolean"
-                },
-                {
-                  "type": "number"
-                }
-              ]
+             "type": "object" 
             },
             "description": "The values to filter on. To get all records, use TS_WILDCARD_ALL as values."
           }
