@@ -7128,7 +7128,8 @@
                         "CAN_CREATE_CATALOG",
                         "CAN_ACCESS_ANALYST_STUDIO",
                         "CAN_MANAGE_ANALYST_STUDIO",
-                        "PREVIEW_DOCUMENT_SEARCH"
+                        "PREVIEW_DOCUMENT_SEARCH",
+                        "PREVIEW_THOUGHTSPOT_SAGE"
                       ]
                     }
                   }
