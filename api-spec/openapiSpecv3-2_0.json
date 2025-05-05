@@ -6,22 +6,6 @@
   },
   "x-roles": [
     {
-      "name": "9.0.0.cl",
-      "id": "9.0.0.cl",
-      "tags": [
-        "9.0.0.cl"
-      ],
-      "description": "Roles for version 9.0.0.cl"
-    },
-    {
-      "name": "9.12.0.cl",
-      "id": "9.12.0.cl",
-      "tags": [
-        "9.12.0.cl"
-      ],
-      "description": "Roles for version 9.12.0.cl"
-    },
-    {
       "name": "10.4.0.cl",
       "id": "10.4.0.cl",
       "tags": [
@@ -30,76 +14,20 @@
       "description": "Roles for version 10.4.0.cl"
     },
     {
-      "name": "9.7.0.cl",
-      "id": "9.7.0.cl",
+      "name": "10.7.0.cl",
+      "id": "10.7.0.cl",
       "tags": [
-        "9.7.0.cl"
+        "10.7.0.cl"
       ],
-      "description": "Roles for version 9.7.0.cl"
+      "description": "Roles for version 10.7.0.cl"
     },
     {
-      "name": "9.2.0.cl",
-      "id": "9.2.0.cl",
+      "name": "9.0.0.cl",
+      "id": "9.0.0.cl",
       "tags": [
-        "9.2.0.cl"
+        "9.0.0.cl"
       ],
-      "description": "Roles for version 9.2.0.cl"
-    },
-    {
-      "name": "10.1.0.cl",
-      "id": "10.1.0.cl",
-      "tags": [
-        "10.1.0.cl"
-      ],
-      "description": "Roles for version 10.1.0.cl"
-    },
-    {
-      "name": "10.3.0.cl",
-      "id": "10.3.0.cl",
-      "tags": [
-        "10.3.0.cl"
-      ],
-      "description": "Roles for version 10.3.0.cl"
-    },
-    {
-      "name": "10.6.0.cl",
-      "id": "10.6.0.cl",
-      "tags": [
-        "10.6.0.cl"
-      ],
-      "description": "Roles for version 10.6.0.cl"
-    },
-    {
-      "name": "10.8.0.cl",
-      "id": "10.8.0.cl",
-      "tags": [
-        "10.8.0.cl"
-      ],
-      "description": "Roles for version 10.8.0.cl"
-    },
-    {
-      "name": "10.9.0.cl",
-      "id": "10.9.0.cl",
-      "tags": [
-        "10.9.0.cl"
-      ],
-      "description": "Roles for version 10.9.0.cl"
-    },
-    {
-      "name": "9.9.0.cl",
-      "id": "9.9.0.cl",
-      "tags": [
-        "9.9.0.cl"
-      ],
-      "description": "Roles for version 9.9.0.cl"
-    },
-    {
-      "name": "9.5.0.cl",
-      "id": "9.5.0.cl",
-      "tags": [
-        "9.5.0.cl"
-      ],
-      "description": "Roles for version 9.5.0.cl"
+      "description": "Roles for version 9.0.0.cl"
     },
     {
       "name": "9.4.0.cl",
@@ -110,12 +38,92 @@
       "description": "Roles for version 9.4.0.cl"
     },
     {
+      "name": "9.12.0.cl",
+      "id": "9.12.0.cl",
+      "tags": [
+        "9.12.0.cl"
+      ],
+      "description": "Roles for version 9.12.0.cl"
+    },
+    {
+      "name": "9.2.0.cl",
+      "id": "9.2.0.cl",
+      "tags": [
+        "9.2.0.cl"
+      ],
+      "description": "Roles for version 9.2.0.cl"
+    },
+    {
+      "name": "9.9.0.cl",
+      "id": "9.9.0.cl",
+      "tags": [
+        "9.9.0.cl"
+      ],
+      "description": "Roles for version 9.9.0.cl"
+    },
+    {
       "name": "9.6.0.cl",
       "id": "9.6.0.cl",
       "tags": [
         "9.6.0.cl"
       ],
       "description": "Roles for version 9.6.0.cl"
+    },
+    {
+      "name": "10.6.0.cl",
+      "id": "10.6.0.cl",
+      "tags": [
+        "10.6.0.cl"
+      ],
+      "description": "Roles for version 10.6.0.cl"
+    },
+    {
+      "name": "10.3.0.cl",
+      "id": "10.3.0.cl",
+      "tags": [
+        "10.3.0.cl"
+      ],
+      "description": "Roles for version 10.3.0.cl"
+    },
+    {
+      "name": "10.1.0.cl",
+      "id": "10.1.0.cl",
+      "tags": [
+        "10.1.0.cl"
+      ],
+      "description": "Roles for version 10.1.0.cl"
+    },
+    {
+      "name": "10.9.0.cl",
+      "id": "10.9.0.cl",
+      "tags": [
+        "10.9.0.cl"
+      ],
+      "description": "Roles for version 10.9.0.cl"
+    },
+    {
+      "name": "10.8.0.cl",
+      "id": "10.8.0.cl",
+      "tags": [
+        "10.8.0.cl"
+      ],
+      "description": "Roles for version 10.8.0.cl"
+    },
+    {
+      "name": "9.5.0.cl",
+      "id": "9.5.0.cl",
+      "tags": [
+        "9.5.0.cl"
+      ],
+      "description": "Roles for version 9.5.0.cl"
+    },
+    {
+      "name": "9.7.0.cl",
+      "id": "9.7.0.cl",
+      "tags": [
+        "9.7.0.cl"
+      ],
+      "description": "Roles for version 9.7.0.cl"
     }
   ],
   "tags": [],
