@@ -14,7 +14,6 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -22,6 +21,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
 import org.thoughtspot.client.model.Role;
@@ -42,12 +42,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -55,90 +53,111 @@ import org.thoughtspot.client.JSON;
 /**
  * UserGroupResponse
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class UserGroupResponse {
   public static final String SERIALIZED_NAME_AUTHOR_ID = "author_id";
   @SerializedName(SERIALIZED_NAME_AUTHOR_ID)
+  @javax.annotation.Nullable
   private String authorId;
 
   public static final String SERIALIZED_NAME_COMPLETE_DETAIL = "complete_detail";
   @SerializedName(SERIALIZED_NAME_COMPLETE_DETAIL)
+  @javax.annotation.Nullable
   private Boolean completeDetail;
 
   public static final String SERIALIZED_NAME_CONTENT = "content";
   @SerializedName(SERIALIZED_NAME_CONTENT)
+  @javax.annotation.Nullable
   private Object content;
 
   public static final String SERIALIZED_NAME_CREATION_TIME_IN_MILLIS = "creation_time_in_millis";
   @SerializedName(SERIALIZED_NAME_CREATION_TIME_IN_MILLIS)
+  @javax.annotation.Nullable
   private Float creationTimeInMillis;
 
   public static final String SERIALIZED_NAME_DEFAULT_LIVEBOARDS = "default_liveboards";
   @SerializedName(SERIALIZED_NAME_DEFAULT_LIVEBOARDS)
+  @javax.annotation.Nullable
   private List<UserGroup> defaultLiveboards;
 
   public static final String SERIALIZED_NAME_DELETED = "deleted";
   @SerializedName(SERIALIZED_NAME_DELETED)
+  @javax.annotation.Nullable
   private Boolean deleted;
 
   public static final String SERIALIZED_NAME_DEPRECATED = "deprecated";
   @SerializedName(SERIALIZED_NAME_DEPRECATED)
+  @javax.annotation.Nullable
   private Boolean deprecated;
 
   public static final String SERIALIZED_NAME_DESCRIPTION = "description";
   @SerializedName(SERIALIZED_NAME_DESCRIPTION)
+  @javax.annotation.Nullable
   private String description;
 
   public static final String SERIALIZED_NAME_DISPLAY_NAME = "display_name";
   @SerializedName(SERIALIZED_NAME_DISPLAY_NAME)
+  @javax.annotation.Nonnull
   private String displayName;
 
   public static final String SERIALIZED_NAME_EXTERNAL = "external";
   @SerializedName(SERIALIZED_NAME_EXTERNAL)
+  @javax.annotation.Nullable
   private Boolean external;
 
   public static final String SERIALIZED_NAME_GENERATION_NUMBER = "generation_number";
   @SerializedName(SERIALIZED_NAME_GENERATION_NUMBER)
+  @javax.annotation.Nullable
   private Integer generationNumber;
 
   public static final String SERIALIZED_NAME_HIDDEN = "hidden";
   @SerializedName(SERIALIZED_NAME_HIDDEN)
+  @javax.annotation.Nullable
   private Boolean hidden;
 
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
+  @javax.annotation.Nonnull
   private String id;
 
   public static final String SERIALIZED_NAME_INDEX = "index";
   @SerializedName(SERIALIZED_NAME_INDEX)
+  @javax.annotation.Nullable
   private Integer index;
 
   public static final String SERIALIZED_NAME_INDEX_VERSION = "index_version";
   @SerializedName(SERIALIZED_NAME_INDEX_VERSION)
+  @javax.annotation.Nullable
   private Integer indexVersion;
 
   public static final String SERIALIZED_NAME_METADATA_VERSION = "metadata_version";
   @SerializedName(SERIALIZED_NAME_METADATA_VERSION)
+  @javax.annotation.Nullable
   private Integer metadataVersion;
 
   public static final String SERIALIZED_NAME_MODIFICATION_TIME_IN_MILLIS = "modification_time_in_millis";
   @SerializedName(SERIALIZED_NAME_MODIFICATION_TIME_IN_MILLIS)
+  @javax.annotation.Nullable
   private Float modificationTimeInMillis;
 
   public static final String SERIALIZED_NAME_MODIFIER_ID = "modifier_id";
   @SerializedName(SERIALIZED_NAME_MODIFIER_ID)
+  @javax.annotation.Nullable
   private String modifierId;
 
   public static final String SERIALIZED_NAME_NAME = "name";
   @SerializedName(SERIALIZED_NAME_NAME)
+  @javax.annotation.Nonnull
   private String name;
 
   public static final String SERIALIZED_NAME_ORGS = "orgs";
   @SerializedName(SERIALIZED_NAME_ORGS)
+  @javax.annotation.Nullable
   private List<UserGroup> orgs;
 
   public static final String SERIALIZED_NAME_OWNER_ID = "owner_id";
   @SerializedName(SERIALIZED_NAME_OWNER_ID)
+  @javax.annotation.Nullable
   private String ownerId;
 
   /**
@@ -186,26 +205,36 @@ public class UserGroupResponse {
         return ParentTypeEnum.fromValue(value);
       }
     }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      ParentTypeEnum.fromValue(value);
+    }
   }
 
   public static final String SERIALIZED_NAME_PARENT_TYPE = "parent_type";
   @SerializedName(SERIALIZED_NAME_PARENT_TYPE)
+  @javax.annotation.Nullable
   private ParentTypeEnum parentType;
 
   public static final String SERIALIZED_NAME_PRIVILEGES = "privileges";
   @SerializedName(SERIALIZED_NAME_PRIVILEGES)
+  @javax.annotation.Nullable
   private List<String> privileges;
 
   public static final String SERIALIZED_NAME_SUB_GROUPS = "sub_groups";
   @SerializedName(SERIALIZED_NAME_SUB_GROUPS)
+  @javax.annotation.Nullable
   private List<UserGroup> subGroups;
 
   public static final String SERIALIZED_NAME_SYSTEM_GROUP = "system_group";
   @SerializedName(SERIALIZED_NAME_SYSTEM_GROUP)
+  @javax.annotation.Nullable
   private Boolean systemGroup;
 
   public static final String SERIALIZED_NAME_TAGS = "tags";
   @SerializedName(SERIALIZED_NAME_TAGS)
+  @javax.annotation.Nullable
   private List<UserGroup> tags;
 
   /**
@@ -253,14 +282,21 @@ public class UserGroupResponse {
         return TypeEnum.fromValue(value);
       }
     }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      TypeEnum.fromValue(value);
+    }
   }
 
   public static final String SERIALIZED_NAME_TYPE = "type";
   @SerializedName(SERIALIZED_NAME_TYPE)
+  @javax.annotation.Nullable
   private TypeEnum type;
 
   public static final String SERIALIZED_NAME_USERS = "users";
   @SerializedName(SERIALIZED_NAME_USERS)
+  @javax.annotation.Nullable
   private List<UserGroup> users;
 
   /**
@@ -308,105 +344,103 @@ public class UserGroupResponse {
         return VisibilityEnum.fromValue(value);
       }
     }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      VisibilityEnum.fromValue(value);
+    }
   }
 
   public static final String SERIALIZED_NAME_VISIBILITY = "visibility";
   @SerializedName(SERIALIZED_NAME_VISIBILITY)
+  @javax.annotation.Nonnull
   private VisibilityEnum visibility;
 
   public static final String SERIALIZED_NAME_ROLES = "roles";
   @SerializedName(SERIALIZED_NAME_ROLES)
+  @javax.annotation.Nullable
   private List<Role> roles;
 
   public UserGroupResponse() {
   }
 
-  public UserGroupResponse authorId(String authorId) {
-    
+  public UserGroupResponse authorId(@javax.annotation.Nullable String authorId) {
     this.authorId = authorId;
     return this;
   }
 
-   /**
+  /**
    * The unique identifier of the object
    * @return authorId
-  **/
+   */
   @javax.annotation.Nullable
   public String getAuthorId() {
     return authorId;
   }
 
-
-  public void setAuthorId(String authorId) {
+  public void setAuthorId(@javax.annotation.Nullable String authorId) {
     this.authorId = authorId;
   }
 
 
-  public UserGroupResponse completeDetail(Boolean completeDetail) {
-    
+  public UserGroupResponse completeDetail(@javax.annotation.Nullable Boolean completeDetail) {
     this.completeDetail = completeDetail;
     return this;
   }
 
-   /**
+  /**
    * Indicates whether the response has complete detail of the group.
    * @return completeDetail
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getCompleteDetail() {
     return completeDetail;
   }
 
-
-  public void setCompleteDetail(Boolean completeDetail) {
+  public void setCompleteDetail(@javax.annotation.Nullable Boolean completeDetail) {
     this.completeDetail = completeDetail;
   }
 
 
-  public UserGroupResponse content(Object content) {
-    
+  public UserGroupResponse content(@javax.annotation.Nullable Object content) {
     this.content = content;
     return this;
   }
 
-   /**
+  /**
    * Content details of the group
    * @return content
-  **/
+   */
   @javax.annotation.Nullable
   public Object getContent() {
     return content;
   }
 
-
-  public void setContent(Object content) {
+  public void setContent(@javax.annotation.Nullable Object content) {
     this.content = content;
   }
 
 
-  public UserGroupResponse creationTimeInMillis(Float creationTimeInMillis) {
-    
+  public UserGroupResponse creationTimeInMillis(@javax.annotation.Nullable Float creationTimeInMillis) {
     this.creationTimeInMillis = creationTimeInMillis;
     return this;
   }
 
-   /**
+  /**
    * Creation time of the group in milliseconds
    * @return creationTimeInMillis
-  **/
+   */
   @javax.annotation.Nullable
   public Float getCreationTimeInMillis() {
     return creationTimeInMillis;
   }
 
-
-  public void setCreationTimeInMillis(Float creationTimeInMillis) {
+  public void setCreationTimeInMillis(@javax.annotation.Nullable Float creationTimeInMillis) {
     this.creationTimeInMillis = creationTimeInMillis;
   }
 
 
-  public UserGroupResponse defaultLiveboards(List<UserGroup> defaultLiveboards) {
-    
+  public UserGroupResponse defaultLiveboards(@javax.annotation.Nullable List<UserGroup> defaultLiveboards) {
     this.defaultLiveboards = defaultLiveboards;
     return this;
   }
@@ -419,317 +453,287 @@ public class UserGroupResponse {
     return this;
   }
 
-   /**
+  /**
    * Liveboards that are assigned as default Liveboards to the group.
    * @return defaultLiveboards
-  **/
+   */
   @javax.annotation.Nullable
   public List<UserGroup> getDefaultLiveboards() {
     return defaultLiveboards;
   }
 
-
-  public void setDefaultLiveboards(List<UserGroup> defaultLiveboards) {
+  public void setDefaultLiveboards(@javax.annotation.Nullable List<UserGroup> defaultLiveboards) {
     this.defaultLiveboards = defaultLiveboards;
   }
 
 
-  public UserGroupResponse deleted(Boolean deleted) {
-    
+  public UserGroupResponse deleted(@javax.annotation.Nullable Boolean deleted) {
     this.deleted = deleted;
     return this;
   }
 
-   /**
+  /**
    * Indicates whether the group is deleted
    * @return deleted
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getDeleted() {
     return deleted;
   }
 
-
-  public void setDeleted(Boolean deleted) {
+  public void setDeleted(@javax.annotation.Nullable Boolean deleted) {
     this.deleted = deleted;
   }
 
 
-  public UserGroupResponse deprecated(Boolean deprecated) {
-    
+  public UserGroupResponse deprecated(@javax.annotation.Nullable Boolean deprecated) {
     this.deprecated = deprecated;
     return this;
   }
 
-   /**
+  /**
    * Indicates whether the group is deprecated
    * @return deprecated
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getDeprecated() {
     return deprecated;
   }
 
-
-  public void setDeprecated(Boolean deprecated) {
+  public void setDeprecated(@javax.annotation.Nullable Boolean deprecated) {
     this.deprecated = deprecated;
   }
 
 
-  public UserGroupResponse description(String description) {
-    
+  public UserGroupResponse description(@javax.annotation.Nullable String description) {
     this.description = description;
     return this;
   }
 
-   /**
+  /**
    * Description of the group
    * @return description
-  **/
+   */
   @javax.annotation.Nullable
   public String getDescription() {
     return description;
   }
 
-
-  public void setDescription(String description) {
+  public void setDescription(@javax.annotation.Nullable String description) {
     this.description = description;
   }
 
 
-  public UserGroupResponse displayName(String displayName) {
-    
+  public UserGroupResponse displayName(@javax.annotation.Nonnull String displayName) {
     this.displayName = displayName;
     return this;
   }
 
-   /**
+  /**
    * Display name of the group.
    * @return displayName
-  **/
+   */
   @javax.annotation.Nonnull
   public String getDisplayName() {
     return displayName;
   }
 
-
-  public void setDisplayName(String displayName) {
+  public void setDisplayName(@javax.annotation.Nonnull String displayName) {
     this.displayName = displayName;
   }
 
 
-  public UserGroupResponse external(Boolean external) {
-    
+  public UserGroupResponse external(@javax.annotation.Nullable Boolean external) {
     this.external = external;
     return this;
   }
 
-   /**
+  /**
    * Indicates whether the group is external
    * @return external
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getExternal() {
     return external;
   }
 
-
-  public void setExternal(Boolean external) {
+  public void setExternal(@javax.annotation.Nullable Boolean external) {
     this.external = external;
   }
 
 
-  public UserGroupResponse generationNumber(Integer generationNumber) {
-    
+  public UserGroupResponse generationNumber(@javax.annotation.Nullable Integer generationNumber) {
     this.generationNumber = generationNumber;
     return this;
   }
 
-   /**
+  /**
    * Generation number of the group
    * @return generationNumber
-  **/
+   */
   @javax.annotation.Nullable
   public Integer getGenerationNumber() {
     return generationNumber;
   }
 
-
-  public void setGenerationNumber(Integer generationNumber) {
+  public void setGenerationNumber(@javax.annotation.Nullable Integer generationNumber) {
     this.generationNumber = generationNumber;
   }
 
 
-  public UserGroupResponse hidden(Boolean hidden) {
-    
+  public UserGroupResponse hidden(@javax.annotation.Nullable Boolean hidden) {
     this.hidden = hidden;
     return this;
   }
 
-   /**
+  /**
    * Indicates whether the group is hidden
    * @return hidden
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getHidden() {
     return hidden;
   }
 
-
-  public void setHidden(Boolean hidden) {
+  public void setHidden(@javax.annotation.Nullable Boolean hidden) {
     this.hidden = hidden;
   }
 
 
-  public UserGroupResponse id(String id) {
-    
+  public UserGroupResponse id(@javax.annotation.Nonnull String id) {
     this.id = id;
     return this;
   }
 
-   /**
+  /**
    * The unique identifier of the object
    * @return id
-  **/
+   */
   @javax.annotation.Nonnull
   public String getId() {
     return id;
   }
 
-
-  public void setId(String id) {
+  public void setId(@javax.annotation.Nonnull String id) {
     this.id = id;
   }
 
 
-  public UserGroupResponse index(Integer index) {
-    
+  public UserGroupResponse index(@javax.annotation.Nullable Integer index) {
     this.index = index;
     return this;
   }
 
-   /**
+  /**
    * Index number of the group
    * @return index
-  **/
+   */
   @javax.annotation.Nullable
   public Integer getIndex() {
     return index;
   }
 
-
-  public void setIndex(Integer index) {
+  public void setIndex(@javax.annotation.Nullable Integer index) {
     this.index = index;
   }
 
 
-  public UserGroupResponse indexVersion(Integer indexVersion) {
-    
+  public UserGroupResponse indexVersion(@javax.annotation.Nullable Integer indexVersion) {
     this.indexVersion = indexVersion;
     return this;
   }
 
-   /**
+  /**
    * Index version number of the group
    * @return indexVersion
-  **/
+   */
   @javax.annotation.Nullable
   public Integer getIndexVersion() {
     return indexVersion;
   }
 
-
-  public void setIndexVersion(Integer indexVersion) {
+  public void setIndexVersion(@javax.annotation.Nullable Integer indexVersion) {
     this.indexVersion = indexVersion;
   }
 
 
-  public UserGroupResponse metadataVersion(Integer metadataVersion) {
-    
+  public UserGroupResponse metadataVersion(@javax.annotation.Nullable Integer metadataVersion) {
     this.metadataVersion = metadataVersion;
     return this;
   }
 
-   /**
+  /**
    * Metadata version number of the group
    * @return metadataVersion
-  **/
+   */
   @javax.annotation.Nullable
   public Integer getMetadataVersion() {
     return metadataVersion;
   }
 
-
-  public void setMetadataVersion(Integer metadataVersion) {
+  public void setMetadataVersion(@javax.annotation.Nullable Integer metadataVersion) {
     this.metadataVersion = metadataVersion;
   }
 
 
-  public UserGroupResponse modificationTimeInMillis(Float modificationTimeInMillis) {
-    
+  public UserGroupResponse modificationTimeInMillis(@javax.annotation.Nullable Float modificationTimeInMillis) {
     this.modificationTimeInMillis = modificationTimeInMillis;
     return this;
   }
 
-   /**
+  /**
    * Last modified time of the group in milliseconds.
    * @return modificationTimeInMillis
-  **/
+   */
   @javax.annotation.Nullable
   public Float getModificationTimeInMillis() {
     return modificationTimeInMillis;
   }
 
-
-  public void setModificationTimeInMillis(Float modificationTimeInMillis) {
+  public void setModificationTimeInMillis(@javax.annotation.Nullable Float modificationTimeInMillis) {
     this.modificationTimeInMillis = modificationTimeInMillis;
   }
 
 
-  public UserGroupResponse modifierId(String modifierId) {
-    
+  public UserGroupResponse modifierId(@javax.annotation.Nullable String modifierId) {
     this.modifierId = modifierId;
     return this;
   }
 
-   /**
+  /**
    * The unique identifier of the object
    * @return modifierId
-  **/
+   */
   @javax.annotation.Nullable
   public String getModifierId() {
     return modifierId;
   }
 
-
-  public void setModifierId(String modifierId) {
+  public void setModifierId(@javax.annotation.Nullable String modifierId) {
     this.modifierId = modifierId;
   }
 
 
-  public UserGroupResponse name(String name) {
-    
+  public UserGroupResponse name(@javax.annotation.Nonnull String name) {
     this.name = name;
     return this;
   }
 
-   /**
+  /**
    * Name of the group.
    * @return name
-  **/
+   */
   @javax.annotation.Nonnull
   public String getName() {
     return name;
   }
 
-
-  public void setName(String name) {
+  public void setName(@javax.annotation.Nonnull String name) {
     this.name = name;
   }
 
 
-  public UserGroupResponse orgs(List<UserGroup> orgs) {
-    
+  public UserGroupResponse orgs(@javax.annotation.Nullable List<UserGroup> orgs) {
     this.orgs = orgs;
     return this;
   }
@@ -742,65 +746,59 @@ public class UserGroupResponse {
     return this;
   }
 
-   /**
+  /**
    * Orgs in which group exists.
    * @return orgs
-  **/
+   */
   @javax.annotation.Nullable
   public List<UserGroup> getOrgs() {
     return orgs;
   }
 
-
-  public void setOrgs(List<UserGroup> orgs) {
+  public void setOrgs(@javax.annotation.Nullable List<UserGroup> orgs) {
     this.orgs = orgs;
   }
 
 
-  public UserGroupResponse ownerId(String ownerId) {
-    
+  public UserGroupResponse ownerId(@javax.annotation.Nullable String ownerId) {
     this.ownerId = ownerId;
     return this;
   }
 
-   /**
+  /**
    * The unique identifier of the object
    * @return ownerId
-  **/
+   */
   @javax.annotation.Nullable
   public String getOwnerId() {
     return ownerId;
   }
 
-
-  public void setOwnerId(String ownerId) {
+  public void setOwnerId(@javax.annotation.Nullable String ownerId) {
     this.ownerId = ownerId;
   }
 
 
-  public UserGroupResponse parentType(ParentTypeEnum parentType) {
-    
+  public UserGroupResponse parentType(@javax.annotation.Nullable ParentTypeEnum parentType) {
     this.parentType = parentType;
     return this;
   }
 
-   /**
+  /**
    * Parent type of the group.
    * @return parentType
-  **/
+   */
   @javax.annotation.Nullable
   public ParentTypeEnum getParentType() {
     return parentType;
   }
 
-
-  public void setParentType(ParentTypeEnum parentType) {
+  public void setParentType(@javax.annotation.Nullable ParentTypeEnum parentType) {
     this.parentType = parentType;
   }
 
 
-  public UserGroupResponse privileges(List<String> privileges) {
-    
+  public UserGroupResponse privileges(@javax.annotation.Nullable List<String> privileges) {
     this.privileges = privileges;
     return this;
   }
@@ -813,23 +811,21 @@ public class UserGroupResponse {
     return this;
   }
 
-   /**
+  /**
    * Privileges which are assigned to the group
    * @return privileges
-  **/
+   */
   @javax.annotation.Nullable
   public List<String> getPrivileges() {
     return privileges;
   }
 
-
-  public void setPrivileges(List<String> privileges) {
+  public void setPrivileges(@javax.annotation.Nullable List<String> privileges) {
     this.privileges = privileges;
   }
 
 
-  public UserGroupResponse subGroups(List<UserGroup> subGroups) {
-    
+  public UserGroupResponse subGroups(@javax.annotation.Nullable List<UserGroup> subGroups) {
     this.subGroups = subGroups;
     return this;
   }
@@ -842,44 +838,40 @@ public class UserGroupResponse {
     return this;
   }
 
-   /**
+  /**
    * Groups who are part of the group
    * @return subGroups
-  **/
+   */
   @javax.annotation.Nullable
   public List<UserGroup> getSubGroups() {
     return subGroups;
   }
 
-
-  public void setSubGroups(List<UserGroup> subGroups) {
+  public void setSubGroups(@javax.annotation.Nullable List<UserGroup> subGroups) {
     this.subGroups = subGroups;
   }
 
 
-  public UserGroupResponse systemGroup(Boolean systemGroup) {
-    
+  public UserGroupResponse systemGroup(@javax.annotation.Nullable Boolean systemGroup) {
     this.systemGroup = systemGroup;
     return this;
   }
 
-   /**
+  /**
    * Indicates whether the group is a system group.
    * @return systemGroup
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getSystemGroup() {
     return systemGroup;
   }
 
-
-  public void setSystemGroup(Boolean systemGroup) {
+  public void setSystemGroup(@javax.annotation.Nullable Boolean systemGroup) {
     this.systemGroup = systemGroup;
   }
 
 
-  public UserGroupResponse tags(List<UserGroup> tags) {
-    
+  public UserGroupResponse tags(@javax.annotation.Nullable List<UserGroup> tags) {
     this.tags = tags;
     return this;
   }
@@ -892,44 +884,40 @@ public class UserGroupResponse {
     return this;
   }
 
-   /**
+  /**
    * Tags associated with the group.
    * @return tags
-  **/
+   */
   @javax.annotation.Nullable
   public List<UserGroup> getTags() {
     return tags;
   }
 
-
-  public void setTags(List<UserGroup> tags) {
+  public void setTags(@javax.annotation.Nullable List<UserGroup> tags) {
     this.tags = tags;
   }
 
 
-  public UserGroupResponse type(TypeEnum type) {
-    
+  public UserGroupResponse type(@javax.annotation.Nullable TypeEnum type) {
     this.type = type;
     return this;
   }
 
-   /**
+  /**
    * Type of the group.
    * @return type
-  **/
+   */
   @javax.annotation.Nullable
   public TypeEnum getType() {
     return type;
   }
 
-
-  public void setType(TypeEnum type) {
+  public void setType(@javax.annotation.Nullable TypeEnum type) {
     this.type = type;
   }
 
 
-  public UserGroupResponse users(List<UserGroup> users) {
-    
+  public UserGroupResponse users(@javax.annotation.Nullable List<UserGroup> users) {
     this.users = users;
     return this;
   }
@@ -942,44 +930,40 @@ public class UserGroupResponse {
     return this;
   }
 
-   /**
+  /**
    * Users who are part of the group.
    * @return users
-  **/
+   */
   @javax.annotation.Nullable
   public List<UserGroup> getUsers() {
     return users;
   }
 
-
-  public void setUsers(List<UserGroup> users) {
+  public void setUsers(@javax.annotation.Nullable List<UserGroup> users) {
     this.users = users;
   }
 
 
-  public UserGroupResponse visibility(VisibilityEnum visibility) {
-    
+  public UserGroupResponse visibility(@javax.annotation.Nonnull VisibilityEnum visibility) {
     this.visibility = visibility;
     return this;
   }
 
-   /**
+  /**
    * Visibility of the group. The SHARABLE makes a group visible to other users and groups, and thus allows them to share objects.
    * @return visibility
-  **/
+   */
   @javax.annotation.Nonnull
   public VisibilityEnum getVisibility() {
     return visibility;
   }
 
-
-  public void setVisibility(VisibilityEnum visibility) {
+  public void setVisibility(@javax.annotation.Nonnull VisibilityEnum visibility) {
     this.visibility = visibility;
   }
 
 
-  public UserGroupResponse roles(List<Role> roles) {
-    
+  public UserGroupResponse roles(@javax.annotation.Nullable List<Role> roles) {
     this.roles = roles;
     return this;
   }
@@ -992,17 +976,16 @@ public class UserGroupResponse {
     return this;
   }
 
-   /**
+  /**
    * List of roles assgined to the user
    * @return roles
-  **/
+   */
   @javax.annotation.Nullable
   public List<Role> getRoles() {
     return roles;
   }
 
-
-  public void setRoles(List<Role> roles) {
+  public void setRoles(@javax.annotation.Nullable List<Role> roles) {
     this.roles = roles;
   }
 
@@ -1160,33 +1143,34 @@ public class UserGroupResponse {
     openapiRequiredFields.add("visibility");
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to UserGroupResponse
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!UserGroupResponse.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to UserGroupResponse
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!UserGroupResponse.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in UserGroupResponse is not found in the empty JSON string", UserGroupResponse.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!UserGroupResponse.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `UserGroupResponse` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `UserGroupResponse` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
       for (String requiredField : UserGroupResponse.openapiRequiredFields) {
-        if (jsonObj.get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("author_id") != null && !jsonObj.get("author_id").isJsonNull()) && !jsonObj.get("author_id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `author_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("author_id").toString()));
       }
@@ -1200,7 +1184,7 @@ public class UserGroupResponse {
 
           // validate the optional field `default_liveboards` (array)
           for (int i = 0; i < jsonArraydefaultLiveboards.size(); i++) {
-            UserGroup.validateJsonObject(jsonArraydefaultLiveboards.get(i).getAsJsonObject());
+            UserGroup.validateJsonElement(jsonArraydefaultLiveboards.get(i));
           };
         }
       }
@@ -1229,7 +1213,7 @@ public class UserGroupResponse {
 
           // validate the optional field `orgs` (array)
           for (int i = 0; i < jsonArrayorgs.size(); i++) {
-            UserGroup.validateJsonObject(jsonArrayorgs.get(i).getAsJsonObject());
+            UserGroup.validateJsonElement(jsonArrayorgs.get(i));
           };
         }
       }
@@ -1239,8 +1223,12 @@ public class UserGroupResponse {
       if ((jsonObj.get("parent_type") != null && !jsonObj.get("parent_type").isJsonNull()) && !jsonObj.get("parent_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `parent_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("parent_type").toString()));
       }
+      // validate the optional field `parent_type`
+      if (jsonObj.get("parent_type") != null && !jsonObj.get("parent_type").isJsonNull()) {
+        ParentTypeEnum.validateJsonElement(jsonObj.get("parent_type"));
+      }
       // ensure the optional json data is an array if present
-      if (jsonObj.get("privileges") != null && !jsonObj.get("privileges").isJsonArray()) {
+      if (jsonObj.get("privileges") != null && !jsonObj.get("privileges").isJsonNull() && !jsonObj.get("privileges").isJsonArray()) {
         throw new IllegalArgumentException(String.format("Expected the field `privileges` to be an array in the JSON string but got `%s`", jsonObj.get("privileges").toString()));
       }
       if (jsonObj.get("sub_groups") != null && !jsonObj.get("sub_groups").isJsonNull()) {
@@ -1253,7 +1241,7 @@ public class UserGroupResponse {
 
           // validate the optional field `sub_groups` (array)
           for (int i = 0; i < jsonArraysubGroups.size(); i++) {
-            UserGroup.validateJsonObject(jsonArraysubGroups.get(i).getAsJsonObject());
+            UserGroup.validateJsonElement(jsonArraysubGroups.get(i));
           };
         }
       }
@@ -1267,12 +1255,16 @@ public class UserGroupResponse {
 
           // validate the optional field `tags` (array)
           for (int i = 0; i < jsonArraytags.size(); i++) {
-            UserGroup.validateJsonObject(jsonArraytags.get(i).getAsJsonObject());
+            UserGroup.validateJsonElement(jsonArraytags.get(i));
           };
         }
       }
       if ((jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull()) && !jsonObj.get("type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("type").toString()));
+      }
+      // validate the optional field `type`
+      if (jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull()) {
+        TypeEnum.validateJsonElement(jsonObj.get("type"));
       }
       if (jsonObj.get("users") != null && !jsonObj.get("users").isJsonNull()) {
         JsonArray jsonArrayusers = jsonObj.getAsJsonArray("users");
@@ -1284,13 +1276,15 @@ public class UserGroupResponse {
 
           // validate the optional field `users` (array)
           for (int i = 0; i < jsonArrayusers.size(); i++) {
-            UserGroup.validateJsonObject(jsonArrayusers.get(i).getAsJsonObject());
+            UserGroup.validateJsonElement(jsonArrayusers.get(i));
           };
         }
       }
       if (!jsonObj.get("visibility").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `visibility` to be a primitive type in the JSON string but got `%s`", jsonObj.get("visibility").toString()));
       }
+      // validate the required field `visibility`
+      VisibilityEnum.validateJsonElement(jsonObj.get("visibility"));
       if (jsonObj.get("roles") != null && !jsonObj.get("roles").isJsonNull()) {
         JsonArray jsonArrayroles = jsonObj.getAsJsonArray("roles");
         if (jsonArrayroles != null) {
@@ -1301,7 +1295,7 @@ public class UserGroupResponse {
 
           // validate the optional field `roles` (array)
           for (int i = 0; i < jsonArrayroles.size(); i++) {
-            Role.validateJsonObject(jsonArrayroles.get(i).getAsJsonObject());
+            Role.validateJsonElement(jsonArrayroles.get(i));
           };
         }
       }
@@ -1327,31 +1321,31 @@ public class UserGroupResponse {
 
            @Override
            public UserGroupResponse read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of UserGroupResponse given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of UserGroupResponse
-  * @throws IOException if the JSON string is invalid with respect to UserGroupResponse
-  */
+  /**
+   * Create an instance of UserGroupResponse given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of UserGroupResponse
+   * @throws IOException if the JSON string is invalid with respect to UserGroupResponse
+   */
   public static UserGroupResponse fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, UserGroupResponse.class);
   }
 
- /**
-  * Convert an instance of UserGroupResponse to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of UserGroupResponse to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

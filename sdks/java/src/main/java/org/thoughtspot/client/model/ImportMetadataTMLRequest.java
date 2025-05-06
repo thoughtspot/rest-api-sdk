@@ -14,7 +14,6 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -22,6 +21,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
 
@@ -40,12 +40,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -53,10 +51,11 @@ import org.thoughtspot.client.JSON;
 /**
  * ImportMetadataTMLRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class ImportMetadataTMLRequest {
   public static final String SERIALIZED_NAME_METADATA_TMLS = "metadata_tmls";
   @SerializedName(SERIALIZED_NAME_METADATA_TMLS)
+  @javax.annotation.Nonnull
   private List<String> metadataTmls = new ArrayList<>();
 
   /**
@@ -108,33 +107,42 @@ public class ImportMetadataTMLRequest {
         return ImportPolicyEnum.fromValue(value);
       }
     }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      ImportPolicyEnum.fromValue(value);
+    }
   }
 
   public static final String SERIALIZED_NAME_IMPORT_POLICY = "import_policy";
   @SerializedName(SERIALIZED_NAME_IMPORT_POLICY)
+  @javax.annotation.Nullable
   private ImportPolicyEnum importPolicy = ImportPolicyEnum.PARTIAL;
 
   public static final String SERIALIZED_NAME_CREATE_NEW = "create_new";
   @SerializedName(SERIALIZED_NAME_CREATE_NEW)
+  @javax.annotation.Nullable
   private Boolean createNew = false;
 
   public static final String SERIALIZED_NAME_ALL_ORGS_CONTEXT = "all_orgs_context";
   @SerializedName(SERIALIZED_NAME_ALL_ORGS_CONTEXT)
+  @javax.annotation.Nullable
   private Boolean allOrgsContext = false;
 
   public static final String SERIALIZED_NAME_SKIP_CDW_VALIDATION_FOR_TABLES = "skip_cdw_validation_for_tables";
   @SerializedName(SERIALIZED_NAME_SKIP_CDW_VALIDATION_FOR_TABLES)
+  @javax.annotation.Nullable
   private Boolean skipCdwValidationForTables = false;
 
   public static final String SERIALIZED_NAME_ENABLE_LARGE_METADATA_VALIDATION = "enable_large_metadata_validation";
   @SerializedName(SERIALIZED_NAME_ENABLE_LARGE_METADATA_VALIDATION)
+  @javax.annotation.Nullable
   private Boolean enableLargeMetadataValidation = false;
 
   public ImportMetadataTMLRequest() {
   }
 
-  public ImportMetadataTMLRequest metadataTmls(List<String> metadataTmls) {
-    
+  public ImportMetadataTMLRequest metadataTmls(@javax.annotation.Nonnull List<String> metadataTmls) {
     this.metadataTmls = metadataTmls;
     return this;
   }
@@ -147,122 +155,111 @@ public class ImportMetadataTMLRequest {
     return this;
   }
 
-   /**
+  /**
    * Details of TML objects.  **Note: importing TML in YAML format, when coming directly from our Playground, is currently requires manual formatting. For more details on the workaround, please click [here](https://developers.thoughtspot.com/docs/known-issues#_version_9_12_0_cl)**
    * @return metadataTmls
-  **/
+   */
   @javax.annotation.Nonnull
   public List<String> getMetadataTmls() {
     return metadataTmls;
   }
 
-
-  public void setMetadataTmls(List<String> metadataTmls) {
+  public void setMetadataTmls(@javax.annotation.Nonnull List<String> metadataTmls) {
     this.metadataTmls = metadataTmls;
   }
 
 
-  public ImportMetadataTMLRequest importPolicy(ImportPolicyEnum importPolicy) {
-    
+  public ImportMetadataTMLRequest importPolicy(@javax.annotation.Nullable ImportPolicyEnum importPolicy) {
     this.importPolicy = importPolicy;
     return this;
   }
 
-   /**
+  /**
    * Specifies the import policy for the TML import.
    * @return importPolicy
-  **/
+   */
   @javax.annotation.Nullable
   public ImportPolicyEnum getImportPolicy() {
     return importPolicy;
   }
 
-
-  public void setImportPolicy(ImportPolicyEnum importPolicy) {
+  public void setImportPolicy(@javax.annotation.Nullable ImportPolicyEnum importPolicy) {
     this.importPolicy = importPolicy;
   }
 
 
-  public ImportMetadataTMLRequest createNew(Boolean createNew) {
-    
+  public ImportMetadataTMLRequest createNew(@javax.annotation.Nullable Boolean createNew) {
     this.createNew = createNew;
     return this;
   }
 
-   /**
+  /**
    * If selected, creates TML objects with new GUIDs.
    * @return createNew
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getCreateNew() {
     return createNew;
   }
 
-
-  public void setCreateNew(Boolean createNew) {
+  public void setCreateNew(@javax.annotation.Nullable Boolean createNew) {
     this.createNew = createNew;
   }
 
 
-  public ImportMetadataTMLRequest allOrgsContext(Boolean allOrgsContext) {
-    
+  public ImportMetadataTMLRequest allOrgsContext(@javax.annotation.Nullable Boolean allOrgsContext) {
     this.allOrgsContext = allOrgsContext;
     return this;
   }
 
-   /**
+  /**
    * If import is happening from all orgs context.
    * @return allOrgsContext
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getAllOrgsContext() {
     return allOrgsContext;
   }
 
-
-  public void setAllOrgsContext(Boolean allOrgsContext) {
+  public void setAllOrgsContext(@javax.annotation.Nullable Boolean allOrgsContext) {
     this.allOrgsContext = allOrgsContext;
   }
 
 
-  public ImportMetadataTMLRequest skipCdwValidationForTables(Boolean skipCdwValidationForTables) {
-    
+  public ImportMetadataTMLRequest skipCdwValidationForTables(@javax.annotation.Nullable Boolean skipCdwValidationForTables) {
     this.skipCdwValidationForTables = skipCdwValidationForTables;
     return this;
   }
 
-   /**
+  /**
    * Boolean to indicate if the CDW validation for table imports should be skipped.
    * @return skipCdwValidationForTables
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getSkipCdwValidationForTables() {
     return skipCdwValidationForTables;
   }
 
-
-  public void setSkipCdwValidationForTables(Boolean skipCdwValidationForTables) {
+  public void setSkipCdwValidationForTables(@javax.annotation.Nullable Boolean skipCdwValidationForTables) {
     this.skipCdwValidationForTables = skipCdwValidationForTables;
   }
 
 
-  public ImportMetadataTMLRequest enableLargeMetadataValidation(Boolean enableLargeMetadataValidation) {
-    
+  public ImportMetadataTMLRequest enableLargeMetadataValidation(@javax.annotation.Nullable Boolean enableLargeMetadataValidation) {
     this.enableLargeMetadataValidation = enableLargeMetadataValidation;
     return this;
   }
 
-   /**
+  /**
    * &lt;div&gt;Version: 10.5.0.cl or later &lt;/div&gt;  Boolean to indicate if the large metadata validation should be enabled.
    * @return enableLargeMetadataValidation
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getEnableLargeMetadataValidation() {
     return enableLargeMetadataValidation;
   }
 
-
-  public void setEnableLargeMetadataValidation(Boolean enableLargeMetadataValidation) {
+  public void setEnableLargeMetadataValidation(@javax.annotation.Nullable Boolean enableLargeMetadataValidation) {
     this.enableLargeMetadataValidation = enableLargeMetadataValidation;
   }
 
@@ -345,33 +342,34 @@ public class ImportMetadataTMLRequest {
     openapiRequiredFields.add("metadata_tmls");
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to ImportMetadataTMLRequest
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!ImportMetadataTMLRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to ImportMetadataTMLRequest
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!ImportMetadataTMLRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in ImportMetadataTMLRequest is not found in the empty JSON string", ImportMetadataTMLRequest.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!ImportMetadataTMLRequest.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `ImportMetadataTMLRequest` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `ImportMetadataTMLRequest` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
       for (String requiredField : ImportMetadataTMLRequest.openapiRequiredFields) {
-        if (jsonObj.get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       // ensure the required json array is present
       if (jsonObj.get("metadata_tmls") == null) {
         throw new IllegalArgumentException("Expected the field `linkedContent` to be an array in the JSON string but got `null`");
@@ -380,6 +378,10 @@ public class ImportMetadataTMLRequest {
       }
       if ((jsonObj.get("import_policy") != null && !jsonObj.get("import_policy").isJsonNull()) && !jsonObj.get("import_policy").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `import_policy` to be a primitive type in the JSON string but got `%s`", jsonObj.get("import_policy").toString()));
+      }
+      // validate the optional field `import_policy`
+      if (jsonObj.get("import_policy") != null && !jsonObj.get("import_policy").isJsonNull()) {
+        ImportPolicyEnum.validateJsonElement(jsonObj.get("import_policy"));
       }
   }
 
@@ -403,31 +405,31 @@ public class ImportMetadataTMLRequest {
 
            @Override
            public ImportMetadataTMLRequest read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of ImportMetadataTMLRequest given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of ImportMetadataTMLRequest
-  * @throws IOException if the JSON string is invalid with respect to ImportMetadataTMLRequest
-  */
+  /**
+   * Create an instance of ImportMetadataTMLRequest given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of ImportMetadataTMLRequest
+   * @throws IOException if the JSON string is invalid with respect to ImportMetadataTMLRequest
+   */
   public static ImportMetadataTMLRequest fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, ImportMetadataTMLRequest.class);
   }
 
- /**
-  * Convert an instance of ImportMetadataTMLRequest to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of ImportMetadataTMLRequest to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

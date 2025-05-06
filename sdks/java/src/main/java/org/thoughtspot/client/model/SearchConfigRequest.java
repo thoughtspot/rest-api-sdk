@@ -14,7 +14,6 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -22,6 +21,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.google.gson.Gson;
@@ -39,12 +39,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -52,17 +50,17 @@ import org.thoughtspot.client.JSON;
 /**
  * SearchConfigRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class SearchConfigRequest {
   public static final String SERIALIZED_NAME_ORG_IDENTIFIERS = "org_identifiers";
   @SerializedName(SERIALIZED_NAME_ORG_IDENTIFIERS)
-  private List<String> orgIdentifiers;
+  @javax.annotation.Nullable
+  private List<String> orgIdentifiers = new ArrayList<>();
 
   public SearchConfigRequest() {
   }
 
-  public SearchConfigRequest orgIdentifiers(List<String> orgIdentifiers) {
-    
+  public SearchConfigRequest orgIdentifiers(@javax.annotation.Nullable List<String> orgIdentifiers) {
     this.orgIdentifiers = orgIdentifiers;
     return this;
   }
@@ -75,17 +73,16 @@ public class SearchConfigRequest {
     return this;
   }
 
-   /**
+  /**
    *    Applicable when Orgs is enabled in the cluster      List of Org ids or name. Provide value -1 for cluster level. Example : [\&quot;OrgID1-or-Name1\&quot;, \&quot;OrgID2-or-Name2\&quot;]         Note: If no value is specified, then the configurations will be returned for all orgs the user has access to     Version: 9.5.0.cl or later 
    * @return orgIdentifiers
-  **/
+   */
   @javax.annotation.Nullable
   public List<String> getOrgIdentifiers() {
     return orgIdentifiers;
   }
 
-
-  public void setOrgIdentifiers(List<String> orgIdentifiers) {
+  public void setOrgIdentifiers(@javax.annotation.Nullable List<String> orgIdentifiers) {
     this.orgIdentifiers = orgIdentifiers;
   }
 
@@ -141,28 +138,29 @@ public class SearchConfigRequest {
     openapiRequiredFields = new HashSet<String>();
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to SearchConfigRequest
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!SearchConfigRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to SearchConfigRequest
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!SearchConfigRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in SearchConfigRequest is not found in the empty JSON string", SearchConfigRequest.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!SearchConfigRequest.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `SearchConfigRequest` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `SearchConfigRequest` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       // ensure the optional json data is an array if present
-      if (jsonObj.get("org_identifiers") != null && !jsonObj.get("org_identifiers").isJsonArray()) {
+      if (jsonObj.get("org_identifiers") != null && !jsonObj.get("org_identifiers").isJsonNull() && !jsonObj.get("org_identifiers").isJsonArray()) {
         throw new IllegalArgumentException(String.format("Expected the field `org_identifiers` to be an array in the JSON string but got `%s`", jsonObj.get("org_identifiers").toString()));
       }
   }
@@ -187,31 +185,31 @@ public class SearchConfigRequest {
 
            @Override
            public SearchConfigRequest read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of SearchConfigRequest given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of SearchConfigRequest
-  * @throws IOException if the JSON string is invalid with respect to SearchConfigRequest
-  */
+  /**
+   * Create an instance of SearchConfigRequest given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of SearchConfigRequest
+   * @throws IOException if the JSON string is invalid with respect to SearchConfigRequest
+   */
   public static SearchConfigRequest fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, SearchConfigRequest.class);
   }
 
- /**
-  * Convert an instance of SearchConfigRequest to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of SearchConfigRequest to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

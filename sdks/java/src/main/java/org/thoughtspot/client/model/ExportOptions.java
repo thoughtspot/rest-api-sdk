@@ -14,13 +14,13 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.util.Arrays;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
@@ -38,12 +38,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -51,82 +49,79 @@ import org.thoughtspot.client.JSON;
 /**
  * Flags to specify additional options for export. This will only be active when UserDefinedId in TML is enabled.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class ExportOptions {
   public static final String SERIALIZED_NAME_EXPORT_WITH_REFERENCE_OBJECT_ID = "export_with_reference_object_id";
   @SerializedName(SERIALIZED_NAME_EXPORT_WITH_REFERENCE_OBJECT_ID)
+  @javax.annotation.Nullable
   private Boolean exportWithReferenceObjectId = false;
 
   public static final String SERIALIZED_NAME_INCLUDE_GUID = "include_guid";
   @SerializedName(SERIALIZED_NAME_INCLUDE_GUID)
+  @javax.annotation.Nullable
   private Boolean includeGuid = true;
 
   public static final String SERIALIZED_NAME_INCLUDE_OBJECT_ID = "include_object_id";
   @SerializedName(SERIALIZED_NAME_INCLUDE_OBJECT_ID)
+  @javax.annotation.Nullable
   private Boolean includeObjectId = false;
 
   public ExportOptions() {
   }
 
-  public ExportOptions exportWithReferenceObjectId(Boolean exportWithReferenceObjectId) {
-    
+  public ExportOptions exportWithReferenceObjectId(@javax.annotation.Nullable Boolean exportWithReferenceObjectId) {
     this.exportWithReferenceObjectId = exportWithReferenceObjectId;
     return this;
   }
 
-   /**
+  /**
    * Boolean Flag to whether to export user_defined_id of referenced object. This will only be respected when UserDefinedId in TML is enabled.
    * @return exportWithReferenceObjectId
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getExportWithReferenceObjectId() {
     return exportWithReferenceObjectId;
   }
 
-
-  public void setExportWithReferenceObjectId(Boolean exportWithReferenceObjectId) {
+  public void setExportWithReferenceObjectId(@javax.annotation.Nullable Boolean exportWithReferenceObjectId) {
     this.exportWithReferenceObjectId = exportWithReferenceObjectId;
   }
 
 
-  public ExportOptions includeGuid(Boolean includeGuid) {
-    
+  public ExportOptions includeGuid(@javax.annotation.Nullable Boolean includeGuid) {
     this.includeGuid = includeGuid;
     return this;
   }
 
-   /**
+  /**
    * Boolean flag to whether to export guid of the object. This will only be respected when UserDefinedId in TML is enabled.
    * @return includeGuid
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getIncludeGuid() {
     return includeGuid;
   }
 
-
-  public void setIncludeGuid(Boolean includeGuid) {
+  public void setIncludeGuid(@javax.annotation.Nullable Boolean includeGuid) {
     this.includeGuid = includeGuid;
   }
 
 
-  public ExportOptions includeObjectId(Boolean includeObjectId) {
-    
+  public ExportOptions includeObjectId(@javax.annotation.Nullable Boolean includeObjectId) {
     this.includeObjectId = includeObjectId;
     return this;
   }
 
-   /**
+  /**
    * Boolean flag to whether to export user_defined_id of the object. This will only be respected when UserDefinedId in TML is enabled.
    * @return includeObjectId
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getIncludeObjectId() {
     return includeObjectId;
   }
 
-
-  public void setIncludeObjectId(Boolean includeObjectId) {
+  public void setIncludeObjectId(@javax.annotation.Nullable Boolean includeObjectId) {
     this.includeObjectId = includeObjectId;
   }
 
@@ -199,26 +194,27 @@ public class ExportOptions {
     openapiRequiredFields = new HashSet<String>();
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to ExportOptions
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!ExportOptions.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to ExportOptions
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!ExportOptions.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in ExportOptions is not found in the empty JSON string", ExportOptions.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!ExportOptions.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `ExportOptions` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `ExportOptions` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
   }
 
   public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
@@ -241,31 +237,31 @@ public class ExportOptions {
 
            @Override
            public ExportOptions read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of ExportOptions given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of ExportOptions
-  * @throws IOException if the JSON string is invalid with respect to ExportOptions
-  */
+  /**
+   * Create an instance of ExportOptions given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of ExportOptions
+   * @throws IOException if the JSON string is invalid with respect to ExportOptions
+   */
   public static ExportOptions fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, ExportOptions.class);
   }
 
- /**
-  * Convert an instance of ExportOptions to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of ExportOptions to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

@@ -50,7 +50,7 @@ export class GetCustomAccessTokenRequest {
     */
     'parameter_values'?: Array<ParameterValues>;
     /**
-    * Objects on which the filter rules and parameters values should be applied to.
+    * Objects on which the filter rules and parameters values should be applied to
     */
     'objects'?: Array<TokenAccessScopeObject>;
     /**

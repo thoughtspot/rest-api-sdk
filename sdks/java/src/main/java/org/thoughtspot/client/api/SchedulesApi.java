@@ -38,7 +38,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.ws.rs.core.GenericType;
 
 public class SchedulesApi {
     private ApiClient localVarApiClient;
@@ -84,7 +83,8 @@ public class SchedulesApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Schedule successfully created. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -156,7 +156,8 @@ public class SchedulesApi {
      * @return ResponseSchedule
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Schedule successfully created. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -177,7 +178,8 @@ public class SchedulesApi {
      * @return ApiResponse&lt;ResponseSchedule&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Schedule successfully created. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -200,7 +202,8 @@ public class SchedulesApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Schedule successfully created. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -223,7 +226,8 @@ public class SchedulesApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Schedule successfully deleted. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -294,7 +298,8 @@ public class SchedulesApi {
      * @param scheduleIdentifier Unique ID or name of the scheduled job. (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Schedule successfully deleted. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -314,7 +319,8 @@ public class SchedulesApi {
      * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Schedule successfully deleted. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -336,7 +342,8 @@ public class SchedulesApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Schedule successfully deleted. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -358,7 +365,8 @@ public class SchedulesApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Schedule search result. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -430,7 +438,8 @@ public class SchedulesApi {
      * @return List&lt;ResponseSchedule&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Schedule search result. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -451,7 +460,8 @@ public class SchedulesApi {
      * @return ApiResponse&lt;List&lt;ResponseSchedule&gt;&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Schedule search result. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -474,7 +484,8 @@ public class SchedulesApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Schedule search result. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -498,7 +509,8 @@ public class SchedulesApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Schedule successfully updated. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -576,7 +588,8 @@ public class SchedulesApi {
      * @param updateScheduleRequest  (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Schedule successfully updated. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -597,7 +610,8 @@ public class SchedulesApi {
      * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Schedule successfully updated. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -620,7 +634,8 @@ public class SchedulesApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Schedule successfully updated. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>

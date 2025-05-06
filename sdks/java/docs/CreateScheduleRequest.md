@@ -12,11 +12,11 @@
 |**metadataType** | [**MetadataTypeEnum**](#MetadataTypeEnum) | Type of the metadata object. |  |
 |**metadataIdentifier** | **String** | Unique ID or name of the metadata object. |  |
 |**fileFormat** | [**FileFormatEnum**](#FileFormatEnum) | Export file format. |  [optional] |
-|**liveboardOptions** | [**CreateScheduleRequestLiveboardOptions**](CreateScheduleRequestLiveboardOptions.md) |  |  [optional] |
-|**pdfOptions** | [**CreateScheduleRequestPdfOptions**](CreateScheduleRequestPdfOptions.md) |  |  [optional] |
+|**liveboardOptions** | [**LiveboardOptionsInput**](LiveboardOptionsInput.md) | Options to specify details of Liveboard. |  [optional] |
+|**pdfOptions** | [**SchedulesPdfOptionsInput**](SchedulesPdfOptionsInput.md) | PDF layout and orientation settings. Applicable only if the &#x60;file_format&#x60; is specified as &#x60;PDF&#x60;. |  [optional] |
 |**timeZone** | [**TimeZoneEnum**](#TimeZoneEnum) | Time zone |  |
-|**frequency** | [**CreateScheduleRequestFrequency**](CreateScheduleRequestFrequency.md) |  |  [optional] |
-|**recipientDetails** | [**CreateScheduleRequestRecipientDetails**](CreateScheduleRequestRecipientDetails.md) |  |  |
+|**frequency** | [**FrequencyInput**](FrequencyInput.md) | Frequency settings for the scheduled job. |  [optional] |
+|**recipientDetails** | [**RecipientDetailsInput**](RecipientDetailsInput.md) | Recipients of the scheduled job notifications. Add the GUID or name of the ThoughtSpot users or groups as recipients in the &#x60;principals&#x60; array. If a recipient is not a ThoughtSpot user, specify email address. |  |
 
 
 
@@ -103,7 +103,7 @@
 | AMERICA_ARAGUAINA | &quot;America/Araguaina&quot; |
 | AMERICA_ARGENTINA_BUENOS_AIRES | &quot;America/Argentina/Buenos_Aires&quot; |
 | AMERICA_ARGENTINA_CATAMARCA | &quot;America/Argentina/Catamarca&quot; |
-| AMERICA_ARGENTINA_COMODRIVADAVIA | &quot;America/Argentina/ComodRivadavia&quot; |
+| AMERICA_ARGENTINA_COMOD_RIVADAVIA | &quot;America/Argentina/ComodRivadavia&quot; |
 | AMERICA_ARGENTINA_CORDOBA | &quot;America/Argentina/Cordoba&quot; |
 | AMERICA_ARGENTINA_JUJUY | &quot;America/Argentina/Jujuy&quot; |
 | AMERICA_ARGENTINA_LA_RIOJA | &quot;America/Argentina/La_Rioja&quot; |
@@ -265,10 +265,10 @@
 | AMERICA_YELLOWKNIFE | &quot;America/Yellowknife&quot; |
 | ANTARCTICA_CASEY | &quot;Antarctica/Casey&quot; |
 | ANTARCTICA_DAVIS | &quot;Antarctica/Davis&quot; |
-| ANTARCTICA_DUMONTDURVILLE | &quot;Antarctica/DumontDUrville&quot; |
+| ANTARCTICA_DUMONT_D_URVILLE | &quot;Antarctica/DumontDUrville&quot; |
 | ANTARCTICA_MACQUARIE | &quot;Antarctica/Macquarie&quot; |
 | ANTARCTICA_MAWSON | &quot;Antarctica/Mawson&quot; |
-| ANTARCTICA_MCMURDO | &quot;Antarctica/McMurdo&quot; |
+| ANTARCTICA_MC_MURDO | &quot;Antarctica/McMurdo&quot; |
 | ANTARCTICA_PALMER | &quot;Antarctica/Palmer&quot; |
 | ANTARCTICA_ROTHERA | &quot;Antarctica/Rothera&quot; |
 | ANTARCTICA_SOUTH_POLE | &quot;Antarctica/South_Pole&quot; |
@@ -411,11 +411,11 @@
 | AUSTRALIA_WEST | &quot;Australia/West&quot; |
 | AUSTRALIA_YANCOWINNA | &quot;Australia/Yancowinna&quot; |
 | BRAZIL_ACRE | &quot;Brazil/Acre&quot; |
-| BRAZIL_DENORONHA | &quot;Brazil/DeNoronha&quot; |
+| BRAZIL_DE_NORONHA | &quot;Brazil/DeNoronha&quot; |
 | BRAZIL_EAST | &quot;Brazil/East&quot; |
 | BRAZIL_WEST | &quot;Brazil/West&quot; |
 | CET | &quot;CET&quot; |
-| CST6CDT | &quot;CST6CDT&quot; |
+| CST6_CDT | &quot;CST6CDT&quot; |
 | CANADA_ATLANTIC | &quot;Canada/Atlantic&quot; |
 | CANADA_CENTRAL | &quot;Canada/Central&quot; |
 | CANADA_EASTERN | &quot;Canada/Eastern&quot; |
@@ -425,10 +425,10 @@
 | CANADA_SASKATCHEWAN | &quot;Canada/Saskatchewan&quot; |
 | CANADA_YUKON | &quot;Canada/Yukon&quot; |
 | CHILE_CONTINENTAL | &quot;Chile/Continental&quot; |
-| CHILE_EASTERISLAND | &quot;Chile/EasterIsland&quot; |
+| CHILE_EASTER_ISLAND | &quot;Chile/EasterIsland&quot; |
 | CUBA | &quot;Cuba&quot; |
 | EET | &quot;EET&quot; |
-| EST5EDT | &quot;EST5EDT&quot; |
+| EST5_EDT | &quot;EST5EDT&quot; |
 | EGYPT | &quot;Egypt&quot; |
 | EIRE | &quot;Eire&quot; |
 | ETC_GMT | &quot;Etc/GMT&quot; |
@@ -436,7 +436,7 @@
 | ETC_GMT_1 | &quot;Etc/GMT+1&quot; |
 | ETC_GMT_10 | &quot;Etc/GMT+10&quot; |
 | ETC_GMT_11 | &quot;Etc/GMT+11&quot; |
-| ETC_GMT_12 | &quot;Etc/GMT+12&quot; |
+| ETC_GMT_122 | &quot;Etc/GMT+12&quot; |
 | ETC_GMT_2 | &quot;Etc/GMT+2&quot; |
 | ETC_GMT_3 | &quot;Etc/GMT+3&quot; |
 | ETC_GMT_4 | &quot;Etc/GMT+4&quot; |
@@ -445,21 +445,21 @@
 | ETC_GMT_7 | &quot;Etc/GMT+7&quot; |
 | ETC_GMT_8 | &quot;Etc/GMT+8&quot; |
 | ETC_GMT_9 | &quot;Etc/GMT+9&quot; |
-| ETC_GMT_0 | &quot;Etc/GMT-0&quot; |
-| ETC_GMT_1 | &quot;Etc/GMT-1&quot; |
-| ETC_GMT_10 | &quot;Etc/GMT-10&quot; |
-| ETC_GMT_11 | &quot;Etc/GMT-11&quot; |
-| ETC_GMT_12 | &quot;Etc/GMT-12&quot; |
+| ETC_GMT_02 | &quot;Etc/GMT-0&quot; |
+| ETC_GMT_12 | &quot;Etc/GMT-1&quot; |
+| ETC_GMT_102 | &quot;Etc/GMT-10&quot; |
+| ETC_GMT_112 | &quot;Etc/GMT-11&quot; |
+| ETC_GMT_122 | &quot;Etc/GMT-12&quot; |
 | ETC_GMT_13 | &quot;Etc/GMT-13&quot; |
 | ETC_GMT_14 | &quot;Etc/GMT-14&quot; |
-| ETC_GMT_2 | &quot;Etc/GMT-2&quot; |
-| ETC_GMT_3 | &quot;Etc/GMT-3&quot; |
-| ETC_GMT_4 | &quot;Etc/GMT-4&quot; |
-| ETC_GMT_5 | &quot;Etc/GMT-5&quot; |
-| ETC_GMT_6 | &quot;Etc/GMT-6&quot; |
-| ETC_GMT_7 | &quot;Etc/GMT-7&quot; |
-| ETC_GMT_8 | &quot;Etc/GMT-8&quot; |
-| ETC_GMT_9 | &quot;Etc/GMT-9&quot; |
+| ETC_GMT_22 | &quot;Etc/GMT-2&quot; |
+| ETC_GMT_32 | &quot;Etc/GMT-3&quot; |
+| ETC_GMT_42 | &quot;Etc/GMT-4&quot; |
+| ETC_GMT_52 | &quot;Etc/GMT-5&quot; |
+| ETC_GMT_62 | &quot;Etc/GMT-6&quot; |
+| ETC_GMT_72 | &quot;Etc/GMT-7&quot; |
+| ETC_GMT_82 | &quot;Etc/GMT-8&quot; |
+| ETC_GMT_92 | &quot;Etc/GMT-9&quot; |
 | ETC_GMT0 | &quot;Etc/GMT0&quot; |
 | ETC_GREENWICH | &quot;Etc/Greenwich&quot; |
 | ETC_UCT | &quot;Etc/UCT&quot; |
@@ -555,15 +555,15 @@
 | KWAJALEIN | &quot;Kwajalein&quot; |
 | LIBYA | &quot;Libya&quot; |
 | MET | &quot;MET&quot; |
-| MST7MDT | &quot;MST7MDT&quot; |
-| MEXICO_BAJANORTE | &quot;Mexico/BajaNorte&quot; |
-| MEXICO_BAJASUR | &quot;Mexico/BajaSur&quot; |
+| MST7_MDT | &quot;MST7MDT&quot; |
+| MEXICO_BAJA_NORTE | &quot;Mexico/BajaNorte&quot; |
+| MEXICO_BAJA_SUR | &quot;Mexico/BajaSur&quot; |
 | MEXICO_GENERAL | &quot;Mexico/General&quot; |
 | NZ | &quot;NZ&quot; |
 | NZ_CHAT | &quot;NZ-CHAT&quot; |
 | NAVAJO | &quot;Navajo&quot; |
 | PRC | &quot;PRC&quot; |
-| PST8PDT | &quot;PST8PDT&quot; |
+| PST8_PDT | &quot;PST8PDT&quot; |
 | PACIFIC_APIA | &quot;Pacific/Apia&quot; |
 | PACIFIC_AUCKLAND | &quot;Pacific/Auckland&quot; |
 | PACIFIC_BOUGAINVILLE | &quot;Pacific/Bougainville&quot; |
@@ -612,19 +612,19 @@
 | PORTUGAL | &quot;Portugal&quot; |
 | ROK | &quot;ROK&quot; |
 | SINGAPORE | &quot;Singapore&quot; |
-| SYSTEMV_AST4 | &quot;SystemV/AST4&quot; |
-| SYSTEMV_AST4ADT | &quot;SystemV/AST4ADT&quot; |
-| SYSTEMV_CST6 | &quot;SystemV/CST6&quot; |
-| SYSTEMV_CST6CDT | &quot;SystemV/CST6CDT&quot; |
-| SYSTEMV_EST5 | &quot;SystemV/EST5&quot; |
-| SYSTEMV_EST5EDT | &quot;SystemV/EST5EDT&quot; |
-| SYSTEMV_HST10 | &quot;SystemV/HST10&quot; |
-| SYSTEMV_MST7 | &quot;SystemV/MST7&quot; |
-| SYSTEMV_MST7MDT | &quot;SystemV/MST7MDT&quot; |
-| SYSTEMV_PST8 | &quot;SystemV/PST8&quot; |
-| SYSTEMV_PST8PDT | &quot;SystemV/PST8PDT&quot; |
-| SYSTEMV_YST9 | &quot;SystemV/YST9&quot; |
-| SYSTEMV_YST9YDT | &quot;SystemV/YST9YDT&quot; |
+| SYSTEM_V_AST4 | &quot;SystemV/AST4&quot; |
+| SYSTEM_V_AST4_ADT | &quot;SystemV/AST4ADT&quot; |
+| SYSTEM_V_CST6 | &quot;SystemV/CST6&quot; |
+| SYSTEM_V_CST6_CDT | &quot;SystemV/CST6CDT&quot; |
+| SYSTEM_V_EST5 | &quot;SystemV/EST5&quot; |
+| SYSTEM_V_EST5_EDT | &quot;SystemV/EST5EDT&quot; |
+| SYSTEM_V_HST10 | &quot;SystemV/HST10&quot; |
+| SYSTEM_V_MST7 | &quot;SystemV/MST7&quot; |
+| SYSTEM_V_MST7_MDT | &quot;SystemV/MST7MDT&quot; |
+| SYSTEM_V_PST8 | &quot;SystemV/PST8&quot; |
+| SYSTEM_V_PST8_PDT | &quot;SystemV/PST8PDT&quot; |
+| SYSTEM_V_YST9 | &quot;SystemV/YST9&quot; |
+| SYSTEM_V_YST9_YDT | &quot;SystemV/YST9YDT&quot; |
 | TURKEY | &quot;Turkey&quot; |
 | UCT | &quot;UCT&quot; |
 | US_ALASKA | &quot;US/Alaska&quot; |

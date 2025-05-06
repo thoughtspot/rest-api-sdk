@@ -14,13 +14,13 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.util.Arrays;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
@@ -38,12 +38,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -51,132 +49,127 @@ import org.thoughtspot.client.JSON;
 /**
  * UpdateConnectionRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class UpdateConnectionRequest {
   public static final String SERIALIZED_NAME_CONNECTION_IDENTIFIER = "connection_identifier";
   @SerializedName(SERIALIZED_NAME_CONNECTION_IDENTIFIER)
+  @javax.annotation.Nonnull
   private String connectionIdentifier;
 
   public static final String SERIALIZED_NAME_NAME = "name";
   @SerializedName(SERIALIZED_NAME_NAME)
+  @javax.annotation.Nullable
   private String name;
 
   public static final String SERIALIZED_NAME_DESCRIPTION = "description";
   @SerializedName(SERIALIZED_NAME_DESCRIPTION)
+  @javax.annotation.Nullable
   private String description;
 
   public static final String SERIALIZED_NAME_DATA_WAREHOUSE_CONFIG = "data_warehouse_config";
   @SerializedName(SERIALIZED_NAME_DATA_WAREHOUSE_CONFIG)
+  @javax.annotation.Nullable
   private Object dataWarehouseConfig;
 
   public static final String SERIALIZED_NAME_VALIDATE = "validate";
   @SerializedName(SERIALIZED_NAME_VALIDATE)
+  @javax.annotation.Nullable
   private Boolean validate = true;
 
   public UpdateConnectionRequest() {
   }
 
-  public UpdateConnectionRequest connectionIdentifier(String connectionIdentifier) {
-    
+  public UpdateConnectionRequest connectionIdentifier(@javax.annotation.Nonnull String connectionIdentifier) {
     this.connectionIdentifier = connectionIdentifier;
     return this;
   }
 
-   /**
+  /**
    * Unique ID or name of the connection.
    * @return connectionIdentifier
-  **/
+   */
   @javax.annotation.Nonnull
   public String getConnectionIdentifier() {
     return connectionIdentifier;
   }
 
-
-  public void setConnectionIdentifier(String connectionIdentifier) {
+  public void setConnectionIdentifier(@javax.annotation.Nonnull String connectionIdentifier) {
     this.connectionIdentifier = connectionIdentifier;
   }
 
 
-  public UpdateConnectionRequest name(String name) {
-    
+  public UpdateConnectionRequest name(@javax.annotation.Nullable String name) {
     this.name = name;
     return this;
   }
 
-   /**
+  /**
    * Updated name of the connection.
    * @return name
-  **/
+   */
   @javax.annotation.Nullable
   public String getName() {
     return name;
   }
 
-
-  public void setName(String name) {
+  public void setName(@javax.annotation.Nullable String name) {
     this.name = name;
   }
 
 
-  public UpdateConnectionRequest description(String description) {
-    
+  public UpdateConnectionRequest description(@javax.annotation.Nullable String description) {
     this.description = description;
     return this;
   }
 
-   /**
+  /**
    * Updated description of the connection.
    * @return description
-  **/
+   */
   @javax.annotation.Nullable
   public String getDescription() {
     return description;
   }
 
-
-  public void setDescription(String description) {
+  public void setDescription(@javax.annotation.Nullable String description) {
     this.description = description;
   }
 
 
-  public UpdateConnectionRequest dataWarehouseConfig(Object dataWarehouseConfig) {
-    
+  public UpdateConnectionRequest dataWarehouseConfig(@javax.annotation.Nullable Object dataWarehouseConfig) {
     this.dataWarehouseConfig = dataWarehouseConfig;
     return this;
   }
 
-   /**
+  /**
    * Configuration of the data warehouse in JSON.
    * @return dataWarehouseConfig
-  **/
+   */
   @javax.annotation.Nullable
   public Object getDataWarehouseConfig() {
     return dataWarehouseConfig;
   }
 
-
-  public void setDataWarehouseConfig(Object dataWarehouseConfig) {
+  public void setDataWarehouseConfig(@javax.annotation.Nullable Object dataWarehouseConfig) {
     this.dataWarehouseConfig = dataWarehouseConfig;
   }
 
 
-  public UpdateConnectionRequest validate(Boolean validate) {
-    
+  public UpdateConnectionRequest validate(@javax.annotation.Nullable Boolean validate) {
     this.validate = validate;
     return this;
   }
 
-   /**
+  /**
    * Indicates whether to validate the connection details.
    * @return validate
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getValidate() {
     return validate;
   }
 
-
-  public void setValidate(Boolean validate) {
+  public void setValidate(@javax.annotation.Nullable Boolean validate) {
     this.validate = validate;
   }
 
@@ -256,33 +249,34 @@ public class UpdateConnectionRequest {
     openapiRequiredFields.add("connection_identifier");
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to UpdateConnectionRequest
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!UpdateConnectionRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to UpdateConnectionRequest
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!UpdateConnectionRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in UpdateConnectionRequest is not found in the empty JSON string", UpdateConnectionRequest.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!UpdateConnectionRequest.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `UpdateConnectionRequest` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `UpdateConnectionRequest` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
       for (String requiredField : UpdateConnectionRequest.openapiRequiredFields) {
-        if (jsonObj.get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       if (!jsonObj.get("connection_identifier").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `connection_identifier` to be a primitive type in the JSON string but got `%s`", jsonObj.get("connection_identifier").toString()));
       }
@@ -314,31 +308,31 @@ public class UpdateConnectionRequest {
 
            @Override
            public UpdateConnectionRequest read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of UpdateConnectionRequest given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of UpdateConnectionRequest
-  * @throws IOException if the JSON string is invalid with respect to UpdateConnectionRequest
-  */
+  /**
+   * Create an instance of UpdateConnectionRequest given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of UpdateConnectionRequest
+   * @throws IOException if the JSON string is invalid with respect to UpdateConnectionRequest
+   */
   public static UpdateConnectionRequest fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, UpdateConnectionRequest.class);
   }
 
- /**
-  * Convert an instance of UpdateConnectionRequest to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of UpdateConnectionRequest to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

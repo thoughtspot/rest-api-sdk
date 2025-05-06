@@ -14,13 +14,13 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.util.Arrays;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -37,12 +37,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -50,57 +48,55 @@ import org.thoughtspot.client.JSON;
 /**
  * SingleAnswerRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class SingleAnswerRequest {
   public static final String SERIALIZED_NAME_QUERY = "query";
   @SerializedName(SERIALIZED_NAME_QUERY)
+  @javax.annotation.Nonnull
   private String query;
 
   public static final String SERIALIZED_NAME_METADATA_IDENTIFIER = "metadata_identifier";
   @SerializedName(SERIALIZED_NAME_METADATA_IDENTIFIER)
+  @javax.annotation.Nonnull
   private String metadataIdentifier;
 
   public SingleAnswerRequest() {
   }
 
-  public SingleAnswerRequest query(String query) {
-    
+  public SingleAnswerRequest query(@javax.annotation.Nonnull String query) {
     this.query = query;
     return this;
   }
 
-   /**
+  /**
    * User natural language query.
    * @return query
-  **/
+   */
   @javax.annotation.Nonnull
   public String getQuery() {
     return query;
   }
 
-
-  public void setQuery(String query) {
+  public void setQuery(@javax.annotation.Nonnull String query) {
     this.query = query;
   }
 
 
-  public SingleAnswerRequest metadataIdentifier(String metadataIdentifier) {
-    
+  public SingleAnswerRequest metadataIdentifier(@javax.annotation.Nonnull String metadataIdentifier) {
     this.metadataIdentifier = metadataIdentifier;
     return this;
   }
 
-   /**
+  /**
    * Data model id to answer the query on.
    * @return metadataIdentifier
-  **/
+   */
   @javax.annotation.Nonnull
   public String getMetadataIdentifier() {
     return metadataIdentifier;
   }
 
-
-  public void setMetadataIdentifier(String metadataIdentifier) {
+  public void setMetadataIdentifier(@javax.annotation.Nonnull String metadataIdentifier) {
     this.metadataIdentifier = metadataIdentifier;
   }
 
@@ -161,33 +157,34 @@ public class SingleAnswerRequest {
     openapiRequiredFields.add("metadata_identifier");
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to SingleAnswerRequest
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!SingleAnswerRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to SingleAnswerRequest
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!SingleAnswerRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in SingleAnswerRequest is not found in the empty JSON string", SingleAnswerRequest.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!SingleAnswerRequest.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `SingleAnswerRequest` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `SingleAnswerRequest` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
       for (String requiredField : SingleAnswerRequest.openapiRequiredFields) {
-        if (jsonObj.get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       if (!jsonObj.get("query").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `query` to be a primitive type in the JSON string but got `%s`", jsonObj.get("query").toString()));
       }
@@ -216,31 +213,31 @@ public class SingleAnswerRequest {
 
            @Override
            public SingleAnswerRequest read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of SingleAnswerRequest given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of SingleAnswerRequest
-  * @throws IOException if the JSON string is invalid with respect to SingleAnswerRequest
-  */
+  /**
+   * Create an instance of SingleAnswerRequest given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of SingleAnswerRequest
+   * @throws IOException if the JSON string is invalid with respect to SingleAnswerRequest
+   */
   public static SingleAnswerRequest fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, SingleAnswerRequest.class);
   }
 
- /**
-  * Convert an instance of SingleAnswerRequest to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of SingleAnswerRequest to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

@@ -14,13 +14,13 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.util.Arrays;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
@@ -38,12 +38,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -51,7 +49,7 @@ import org.thoughtspot.client.JSON;
 /**
  * Specify that the association is enabled for the metadata object Default
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class ActionConfigInputCreate {
   /**
    * Position of the Custom action on the Metadata object. Earlier naming convention: context.
@@ -100,57 +98,60 @@ public class ActionConfigInputCreate {
         return PositionEnum.fromValue(value);
       }
     }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      PositionEnum.fromValue(value);
+    }
   }
 
   public static final String SERIALIZED_NAME_POSITION = "position";
   @SerializedName(SERIALIZED_NAME_POSITION)
+  @javax.annotation.Nullable
   private PositionEnum position = PositionEnum.MENU;
 
   public static final String SERIALIZED_NAME_VISIBILITY = "visibility";
   @SerializedName(SERIALIZED_NAME_VISIBILITY)
+  @javax.annotation.Nullable
   private Boolean visibility = true;
 
   public ActionConfigInputCreate() {
   }
 
-  public ActionConfigInputCreate position(PositionEnum position) {
-    
+  public ActionConfigInputCreate position(@javax.annotation.Nullable PositionEnum position) {
     this.position = position;
     return this;
   }
 
-   /**
+  /**
    * Position of the Custom action on the Metadata object. Earlier naming convention: context.
    * @return position
-  **/
+   */
   @javax.annotation.Nullable
   public PositionEnum getPosition() {
     return position;
   }
 
-
-  public void setPosition(PositionEnum position) {
+  public void setPosition(@javax.annotation.Nullable PositionEnum position) {
     this.position = position;
   }
 
 
-  public ActionConfigInputCreate visibility(Boolean visibility) {
-    
+  public ActionConfigInputCreate visibility(@javax.annotation.Nullable Boolean visibility) {
     this.visibility = visibility;
     return this;
   }
 
-   /**
+  /**
    * Visibility of the metadata association with custom action. Earlier naming convention: enabled
    * @return visibility
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getVisibility() {
     return visibility;
   }
 
-
-  public void setVisibility(Boolean visibility) {
+  public void setVisibility(@javax.annotation.Nullable Boolean visibility) {
     this.visibility = visibility;
   }
 
@@ -220,28 +221,33 @@ public class ActionConfigInputCreate {
     openapiRequiredFields = new HashSet<String>();
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to ActionConfigInputCreate
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!ActionConfigInputCreate.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to ActionConfigInputCreate
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!ActionConfigInputCreate.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in ActionConfigInputCreate is not found in the empty JSON string", ActionConfigInputCreate.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!ActionConfigInputCreate.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `ActionConfigInputCreate` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `ActionConfigInputCreate` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("position") != null && !jsonObj.get("position").isJsonNull()) && !jsonObj.get("position").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `position` to be a primitive type in the JSON string but got `%s`", jsonObj.get("position").toString()));
+      }
+      // validate the optional field `position`
+      if (jsonObj.get("position") != null && !jsonObj.get("position").isJsonNull()) {
+        PositionEnum.validateJsonElement(jsonObj.get("position"));
       }
   }
 
@@ -265,31 +271,31 @@ public class ActionConfigInputCreate {
 
            @Override
            public ActionConfigInputCreate read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of ActionConfigInputCreate given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of ActionConfigInputCreate
-  * @throws IOException if the JSON string is invalid with respect to ActionConfigInputCreate
-  */
+  /**
+   * Create an instance of ActionConfigInputCreate given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of ActionConfigInputCreate
+   * @throws IOException if the JSON string is invalid with respect to ActionConfigInputCreate
+   */
   public static ActionConfigInputCreate fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, ActionConfigInputCreate.class);
   }
 
- /**
-  * Convert an instance of ActionConfigInputCreate to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of ActionConfigInputCreate to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

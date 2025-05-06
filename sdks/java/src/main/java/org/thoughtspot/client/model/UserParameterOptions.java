@@ -14,7 +14,6 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -22,6 +21,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
 import org.thoughtspot.client.model.RuntimeFilters;
@@ -44,12 +44,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -57,29 +55,32 @@ import org.thoughtspot.client.JSON;
 /**
  * Define attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters). 
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class UserParameterOptions {
   public static final String SERIALIZED_NAME_OBJECTS = "objects";
   @SerializedName(SERIALIZED_NAME_OBJECTS)
+  @javax.annotation.Nullable
   private List<UserObject> objects;
 
   public static final String SERIALIZED_NAME_RUNTIME_FILTERS = "runtime_filters";
   @SerializedName(SERIALIZED_NAME_RUNTIME_FILTERS)
+  @javax.annotation.Nullable
   private List<RuntimeFilters> runtimeFilters;
 
   public static final String SERIALIZED_NAME_RUNTIME_SORTS = "runtime_sorts";
   @SerializedName(SERIALIZED_NAME_RUNTIME_SORTS)
+  @javax.annotation.Nullable
   private List<RuntimeSorts> runtimeSorts;
 
   public static final String SERIALIZED_NAME_PARAMETERS = "parameters";
   @SerializedName(SERIALIZED_NAME_PARAMETERS)
+  @javax.annotation.Nullable
   private List<RuntimeParameters> parameters;
 
   public UserParameterOptions() {
   }
 
-  public UserParameterOptions objects(List<UserObject> objects) {
-    
+  public UserParameterOptions objects(@javax.annotation.Nullable List<UserObject> objects) {
     this.objects = objects;
     return this;
   }
@@ -92,23 +93,21 @@ public class UserParameterOptions {
     return this;
   }
 
-   /**
+  /**
    * Get objects
    * @return objects
-  **/
+   */
   @javax.annotation.Nullable
   public List<UserObject> getObjects() {
     return objects;
   }
 
-
-  public void setObjects(List<UserObject> objects) {
+  public void setObjects(@javax.annotation.Nullable List<UserObject> objects) {
     this.objects = objects;
   }
 
 
-  public UserParameterOptions runtimeFilters(List<RuntimeFilters> runtimeFilters) {
-    
+  public UserParameterOptions runtimeFilters(@javax.annotation.Nullable List<RuntimeFilters> runtimeFilters) {
     this.runtimeFilters = runtimeFilters;
     return this;
   }
@@ -121,23 +120,21 @@ public class UserParameterOptions {
     return this;
   }
 
-   /**
+  /**
    * Objects to apply the User_Runtime_Filters.  Examples to set the &#x60;runtime_filters&#x60; : &#x60;&#x60;&#x60;json { \&quot;column_name\&quot;: \&quot;Color\&quot;, \&quot;operator\&quot;: \&quot;EQ\&quot;, \&quot;values\&quot;: [\&quot;red\&quot;], \&quot;persist\&quot;: false } &#x60;&#x60;&#x60;
    * @return runtimeFilters
-  **/
+   */
   @javax.annotation.Nullable
   public List<RuntimeFilters> getRuntimeFilters() {
     return runtimeFilters;
   }
 
-
-  public void setRuntimeFilters(List<RuntimeFilters> runtimeFilters) {
+  public void setRuntimeFilters(@javax.annotation.Nullable List<RuntimeFilters> runtimeFilters) {
     this.runtimeFilters = runtimeFilters;
   }
 
 
-  public UserParameterOptions runtimeSorts(List<RuntimeSorts> runtimeSorts) {
-    
+  public UserParameterOptions runtimeSorts(@javax.annotation.Nullable List<RuntimeSorts> runtimeSorts) {
     this.runtimeSorts = runtimeSorts;
     return this;
   }
@@ -150,23 +147,21 @@ public class UserParameterOptions {
     return this;
   }
 
-   /**
+  /**
    * Objects to apply the User_Runtime_Sorts.  Examples to set the &#x60;runtime_sorts&#x60; : &#x60;&#x60;&#x60;json { \&quot;column_name\&quot;: \&quot;Color\&quot;, \&quot;order\&quot;: \&quot;ASC\&quot;, \&quot;persist\&quot;: false } &#x60;&#x60;&#x60;
    * @return runtimeSorts
-  **/
+   */
   @javax.annotation.Nullable
   public List<RuntimeSorts> getRuntimeSorts() {
     return runtimeSorts;
   }
 
-
-  public void setRuntimeSorts(List<RuntimeSorts> runtimeSorts) {
+  public void setRuntimeSorts(@javax.annotation.Nullable List<RuntimeSorts> runtimeSorts) {
     this.runtimeSorts = runtimeSorts;
   }
 
 
-  public UserParameterOptions parameters(List<RuntimeParameters> parameters) {
-    
+  public UserParameterOptions parameters(@javax.annotation.Nullable List<RuntimeParameters> parameters) {
     this.parameters = parameters;
     return this;
   }
@@ -179,17 +174,16 @@ public class UserParameterOptions {
     return this;
   }
 
-   /**
+  /**
    * Objects to apply the Runtime_Parameters.  Examples to set the &#x60;parameters&#x60; : &#x60;&#x60;&#x60;json { \&quot;name\&quot;: \&quot;Color\&quot;, \&quot;values\&quot;: [\&quot;Blue\&quot;], \&quot;persist\&quot;: false } &#x60;&#x60;&#x60;
    * @return parameters
-  **/
+   */
   @javax.annotation.Nullable
   public List<RuntimeParameters> getParameters() {
     return parameters;
   }
 
-
-  public void setParameters(List<RuntimeParameters> parameters) {
+  public void setParameters(@javax.annotation.Nullable List<RuntimeParameters> parameters) {
     this.parameters = parameters;
   }
 
@@ -265,26 +259,27 @@ public class UserParameterOptions {
     openapiRequiredFields = new HashSet<String>();
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to UserParameterOptions
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!UserParameterOptions.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to UserParameterOptions
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!UserParameterOptions.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in UserParameterOptions is not found in the empty JSON string", UserParameterOptions.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!UserParameterOptions.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `UserParameterOptions` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `UserParameterOptions` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       if (jsonObj.get("objects") != null && !jsonObj.get("objects").isJsonNull()) {
         JsonArray jsonArrayobjects = jsonObj.getAsJsonArray("objects");
         if (jsonArrayobjects != null) {
@@ -295,7 +290,7 @@ public class UserParameterOptions {
 
           // validate the optional field `objects` (array)
           for (int i = 0; i < jsonArrayobjects.size(); i++) {
-            UserObject.validateJsonObject(jsonArrayobjects.get(i).getAsJsonObject());
+            UserObject.validateJsonElement(jsonArrayobjects.get(i));
           };
         }
       }
@@ -309,7 +304,7 @@ public class UserParameterOptions {
 
           // validate the optional field `runtime_filters` (array)
           for (int i = 0; i < jsonArrayruntimeFilters.size(); i++) {
-            RuntimeFilters.validateJsonObject(jsonArrayruntimeFilters.get(i).getAsJsonObject());
+            RuntimeFilters.validateJsonElement(jsonArrayruntimeFilters.get(i));
           };
         }
       }
@@ -323,7 +318,7 @@ public class UserParameterOptions {
 
           // validate the optional field `runtime_sorts` (array)
           for (int i = 0; i < jsonArrayruntimeSorts.size(); i++) {
-            RuntimeSorts.validateJsonObject(jsonArrayruntimeSorts.get(i).getAsJsonObject());
+            RuntimeSorts.validateJsonElement(jsonArrayruntimeSorts.get(i));
           };
         }
       }
@@ -337,7 +332,7 @@ public class UserParameterOptions {
 
           // validate the optional field `parameters` (array)
           for (int i = 0; i < jsonArrayparameters.size(); i++) {
-            RuntimeParameters.validateJsonObject(jsonArrayparameters.get(i).getAsJsonObject());
+            RuntimeParameters.validateJsonElement(jsonArrayparameters.get(i));
           };
         }
       }
@@ -363,31 +358,31 @@ public class UserParameterOptions {
 
            @Override
            public UserParameterOptions read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of UserParameterOptions given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of UserParameterOptions
-  * @throws IOException if the JSON string is invalid with respect to UserParameterOptions
-  */
+  /**
+   * Create an instance of UserParameterOptions given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of UserParameterOptions
+   * @throws IOException if the JSON string is invalid with respect to UserParameterOptions
+   */
   public static UserParameterOptions fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, UserParameterOptions.class);
   }
 
- /**
-  * Convert an instance of UserParameterOptions to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of UserParameterOptions to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

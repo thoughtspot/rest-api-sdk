@@ -14,13 +14,13 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.util.Arrays;
 import org.thoughtspot.client.model.CALLBACK;
 import org.thoughtspot.client.model.URL;
 
@@ -39,12 +39,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -52,57 +50,55 @@ import org.thoughtspot.client.JSON;
 /**
  * Type and Configuration for Custom Actions
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class ActionDetails {
   public static final String SERIALIZED_NAME_C_A_L_L_B_A_C_K = "CALLBACK";
   @SerializedName(SERIALIZED_NAME_C_A_L_L_B_A_C_K)
+  @javax.annotation.Nullable
   private CALLBACK callback;
 
   public static final String SERIALIZED_NAME_U_R_L = "URL";
   @SerializedName(SERIALIZED_NAME_U_R_L)
+  @javax.annotation.Nullable
   private URL url;
 
   public ActionDetails() {
   }
 
-  public ActionDetails callback(CALLBACK callback) {
-    
+  public ActionDetails callback(@javax.annotation.Nullable CALLBACK callback) {
     this.callback = callback;
     return this;
   }
 
-   /**
+  /**
    * Get callback
    * @return callback
-  **/
+   */
   @javax.annotation.Nullable
   public CALLBACK getCALLBACK() {
     return callback;
   }
 
-
-  public void setCALLBACK(CALLBACK callback) {
+  public void setCALLBACK(@javax.annotation.Nullable CALLBACK callback) {
     this.callback = callback;
   }
 
 
-  public ActionDetails url(URL url) {
-    
+  public ActionDetails url(@javax.annotation.Nullable URL url) {
     this.url = url;
     return this;
   }
 
-   /**
+  /**
    * Get url
    * @return url
-  **/
+   */
   @javax.annotation.Nullable
   public URL getURL() {
     return url;
   }
 
-
-  public void setURL(URL url) {
+  public void setURL(@javax.annotation.Nullable URL url) {
     this.url = url;
   }
 
@@ -161,33 +157,34 @@ public class ActionDetails {
     openapiRequiredFields = new HashSet<String>();
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to ActionDetails
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!ActionDetails.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to ActionDetails
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!ActionDetails.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in ActionDetails is not found in the empty JSON string", ActionDetails.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!ActionDetails.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `ActionDetails` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `ActionDetails` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       // validate the optional field `CALLBACK`
       if (jsonObj.get("CALLBACK") != null && !jsonObj.get("CALLBACK").isJsonNull()) {
-        CALLBACK.validateJsonObject(jsonObj.getAsJsonObject("CALLBACK"));
+        CALLBACK.validateJsonElement(jsonObj.get("CALLBACK"));
       }
       // validate the optional field `URL`
       if (jsonObj.get("URL") != null && !jsonObj.get("URL").isJsonNull()) {
-        URL.validateJsonObject(jsonObj.getAsJsonObject("URL"));
+        URL.validateJsonElement(jsonObj.get("URL"));
       }
   }
 
@@ -211,31 +208,31 @@ public class ActionDetails {
 
            @Override
            public ActionDetails read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of ActionDetails given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of ActionDetails
-  * @throws IOException if the JSON string is invalid with respect to ActionDetails
-  */
+  /**
+   * Create an instance of ActionDetails given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of ActionDetails
+   * @throws IOException if the JSON string is invalid with respect to ActionDetails
+   */
   public static ActionDetails fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, ActionDetails.class);
   }
 
- /**
-  * Convert an instance of ActionDetails to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of ActionDetails to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

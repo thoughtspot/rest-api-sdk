@@ -39,7 +39,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.ws.rs.core.GenericType;
 
 public class AiApi {
     private ApiClient localVarApiClient;
@@ -85,7 +84,8 @@ public class AiApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
         <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
@@ -156,7 +156,8 @@ public class AiApi {
      * @return Conversation
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
         <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
@@ -176,7 +177,8 @@ public class AiApi {
      * @return ApiResponse&lt;Conversation&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
         <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
@@ -198,7 +200,8 @@ public class AiApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
         <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
@@ -221,7 +224,8 @@ public class AiApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
         <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
@@ -299,7 +303,8 @@ public class AiApi {
      * @return List&lt;ResponseMessage&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
         <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
@@ -320,7 +325,8 @@ public class AiApi {
      * @return ApiResponse&lt;List&lt;ResponseMessage&gt;&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
         <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
@@ -343,7 +349,8 @@ public class AiApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
         <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
@@ -365,7 +372,8 @@ public class AiApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
         <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
@@ -436,7 +444,8 @@ public class AiApi {
      * @return ResponseMessage
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
         <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
@@ -456,7 +465,8 @@ public class AiApi {
      * @return ApiResponse&lt;ResponseMessage&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
         <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
@@ -478,7 +488,8 @@ public class AiApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
         <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>

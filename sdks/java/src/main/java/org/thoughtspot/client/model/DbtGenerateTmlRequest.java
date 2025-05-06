@@ -14,7 +14,6 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -23,6 +22,7 @@ import com.google.gson.stream.JsonWriter;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.thoughtspot.client.model.ModelTableList;
 
@@ -41,12 +41,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -54,15 +52,17 @@ import org.thoughtspot.client.JSON;
 /**
  * DbtGenerateTmlRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class DbtGenerateTmlRequest {
   public static final String SERIALIZED_NAME_DBT_CONNECTION_IDENTIFIER = "dbt_connection_identifier";
   @SerializedName(SERIALIZED_NAME_DBT_CONNECTION_IDENTIFIER)
+  @javax.annotation.Nonnull
   private String dbtConnectionIdentifier;
 
   public static final String SERIALIZED_NAME_MODEL_TABLES = "model_tables";
   @SerializedName(SERIALIZED_NAME_MODEL_TABLES)
-  private List<ModelTableList> modelTables;
+  @javax.annotation.Nullable
+  private List<ModelTableList> modelTables = new ArrayList<>();
 
   /**
    * Mention the worksheet tmls to import
@@ -111,46 +111,51 @@ public class DbtGenerateTmlRequest {
         return ImportWorksheetsEnum.fromValue(value);
       }
     }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      ImportWorksheetsEnum.fromValue(value);
+    }
   }
 
   public static final String SERIALIZED_NAME_IMPORT_WORKSHEETS = "import_worksheets";
   @SerializedName(SERIALIZED_NAME_IMPORT_WORKSHEETS)
+  @javax.annotation.Nonnull
   private ImportWorksheetsEnum importWorksheets;
 
   public static final String SERIALIZED_NAME_WORKSHEETS = "worksheets";
   @SerializedName(SERIALIZED_NAME_WORKSHEETS)
-  private List<String> worksheets;
+  @javax.annotation.Nullable
+  private List<String> worksheets = new ArrayList<>();
 
   public static final String SERIALIZED_NAME_FILE_CONTENT = "file_content";
   @SerializedName(SERIALIZED_NAME_FILE_CONTENT)
+  @javax.annotation.Nullable
   private File fileContent;
 
   public DbtGenerateTmlRequest() {
   }
 
-  public DbtGenerateTmlRequest dbtConnectionIdentifier(String dbtConnectionIdentifier) {
-    
+  public DbtGenerateTmlRequest dbtConnectionIdentifier(@javax.annotation.Nonnull String dbtConnectionIdentifier) {
     this.dbtConnectionIdentifier = dbtConnectionIdentifier;
     return this;
   }
 
-   /**
+  /**
    * Unique ID of the DBT connection.
    * @return dbtConnectionIdentifier
-  **/
+   */
   @javax.annotation.Nonnull
   public String getDbtConnectionIdentifier() {
     return dbtConnectionIdentifier;
   }
 
-
-  public void setDbtConnectionIdentifier(String dbtConnectionIdentifier) {
+  public void setDbtConnectionIdentifier(@javax.annotation.Nonnull String dbtConnectionIdentifier) {
     this.dbtConnectionIdentifier = dbtConnectionIdentifier;
   }
 
 
-  public DbtGenerateTmlRequest modelTables(List<ModelTableList> modelTables) {
-    
+  public DbtGenerateTmlRequest modelTables(@javax.annotation.Nullable List<ModelTableList> modelTables) {
     this.modelTables = modelTables;
     return this;
   }
@@ -163,44 +168,40 @@ public class DbtGenerateTmlRequest {
     return this;
   }
 
-   /**
+  /**
    * List of Models and their respective Tables
    * @return modelTables
-  **/
+   */
   @javax.annotation.Nullable
   public List<ModelTableList> getModelTables() {
     return modelTables;
   }
 
-
-  public void setModelTables(List<ModelTableList> modelTables) {
+  public void setModelTables(@javax.annotation.Nullable List<ModelTableList> modelTables) {
     this.modelTables = modelTables;
   }
 
 
-  public DbtGenerateTmlRequest importWorksheets(ImportWorksheetsEnum importWorksheets) {
-    
+  public DbtGenerateTmlRequest importWorksheets(@javax.annotation.Nonnull ImportWorksheetsEnum importWorksheets) {
     this.importWorksheets = importWorksheets;
     return this;
   }
 
-   /**
+  /**
    * Mention the worksheet tmls to import
    * @return importWorksheets
-  **/
+   */
   @javax.annotation.Nonnull
   public ImportWorksheetsEnum getImportWorksheets() {
     return importWorksheets;
   }
 
-
-  public void setImportWorksheets(ImportWorksheetsEnum importWorksheets) {
+  public void setImportWorksheets(@javax.annotation.Nonnull ImportWorksheetsEnum importWorksheets) {
     this.importWorksheets = importWorksheets;
   }
 
 
-  public DbtGenerateTmlRequest worksheets(List<String> worksheets) {
-    
+  public DbtGenerateTmlRequest worksheets(@javax.annotation.Nullable List<String> worksheets) {
     this.worksheets = worksheets;
     return this;
   }
@@ -213,38 +214,35 @@ public class DbtGenerateTmlRequest {
     return this;
   }
 
-   /**
+  /**
    * List of worksheets is mandatory when import_Worksheets is type SELECTED
    * @return worksheets
-  **/
+   */
   @javax.annotation.Nullable
   public List<String> getWorksheets() {
     return worksheets;
   }
 
-
-  public void setWorksheets(List<String> worksheets) {
+  public void setWorksheets(@javax.annotation.Nullable List<String> worksheets) {
     this.worksheets = worksheets;
   }
 
 
-  public DbtGenerateTmlRequest fileContent(File fileContent) {
-    
+  public DbtGenerateTmlRequest fileContent(@javax.annotation.Nullable File fileContent) {
     this.fileContent = fileContent;
     return this;
   }
 
-   /**
+  /**
    * Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’
    * @return fileContent
-  **/
+   */
   @javax.annotation.Nullable
   public File getFileContent() {
     return fileContent;
   }
 
-
-  public void setFileContent(File fileContent) {
+  public void setFileContent(@javax.annotation.Nullable File fileContent) {
     this.fileContent = fileContent;
   }
 
@@ -314,33 +312,34 @@ public class DbtGenerateTmlRequest {
     openapiRequiredFields.add("import_worksheets");
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to DbtGenerateTmlRequest
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!DbtGenerateTmlRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to DbtGenerateTmlRequest
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!DbtGenerateTmlRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in DbtGenerateTmlRequest is not found in the empty JSON string", DbtGenerateTmlRequest.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!DbtGenerateTmlRequest.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `DbtGenerateTmlRequest` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `DbtGenerateTmlRequest` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
       for (String requiredField : DbtGenerateTmlRequest.openapiRequiredFields) {
-        if (jsonObj.get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       if (!jsonObj.get("dbt_connection_identifier").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `dbt_connection_identifier` to be a primitive type in the JSON string but got `%s`", jsonObj.get("dbt_connection_identifier").toString()));
       }
@@ -354,15 +353,17 @@ public class DbtGenerateTmlRequest {
 
           // validate the optional field `model_tables` (array)
           for (int i = 0; i < jsonArraymodelTables.size(); i++) {
-            ModelTableList.validateJsonObject(jsonArraymodelTables.get(i).getAsJsonObject());
+            ModelTableList.validateJsonElement(jsonArraymodelTables.get(i));
           };
         }
       }
       if (!jsonObj.get("import_worksheets").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `import_worksheets` to be a primitive type in the JSON string but got `%s`", jsonObj.get("import_worksheets").toString()));
       }
+      // validate the required field `import_worksheets`
+      ImportWorksheetsEnum.validateJsonElement(jsonObj.get("import_worksheets"));
       // ensure the optional json data is an array if present
-      if (jsonObj.get("worksheets") != null && !jsonObj.get("worksheets").isJsonArray()) {
+      if (jsonObj.get("worksheets") != null && !jsonObj.get("worksheets").isJsonNull() && !jsonObj.get("worksheets").isJsonArray()) {
         throw new IllegalArgumentException(String.format("Expected the field `worksheets` to be an array in the JSON string but got `%s`", jsonObj.get("worksheets").toString()));
       }
   }
@@ -387,31 +388,31 @@ public class DbtGenerateTmlRequest {
 
            @Override
            public DbtGenerateTmlRequest read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of DbtGenerateTmlRequest given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of DbtGenerateTmlRequest
-  * @throws IOException if the JSON string is invalid with respect to DbtGenerateTmlRequest
-  */
+  /**
+   * Create an instance of DbtGenerateTmlRequest given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of DbtGenerateTmlRequest
+   * @throws IOException if the JSON string is invalid with respect to DbtGenerateTmlRequest
+   */
   public static DbtGenerateTmlRequest fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, DbtGenerateTmlRequest.class);
   }
 
- /**
-  * Convert an instance of DbtGenerateTmlRequest to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of DbtGenerateTmlRequest to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

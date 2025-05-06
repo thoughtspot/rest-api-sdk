@@ -14,13 +14,13 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.util.Arrays;
 import org.openapitools.jackson.nullable.JsonNullable;
 import org.thoughtspot.client.model.DataWarehouseObjects;
 
@@ -39,12 +39,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -52,18 +50,21 @@ import org.thoughtspot.client.JSON;
 /**
  * SearchConnectionResponse
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class SearchConnectionResponse {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
+  @javax.annotation.Nonnull
   private String id;
 
   public static final String SERIALIZED_NAME_NAME = "name";
   @SerializedName(SERIALIZED_NAME_NAME)
+  @javax.annotation.Nonnull
   private String name;
 
   public static final String SERIALIZED_NAME_DESCRIPTION = "description";
   @SerializedName(SERIALIZED_NAME_DESCRIPTION)
+  @javax.annotation.Nullable
   private String description;
 
   /**
@@ -171,145 +172,141 @@ public class SearchConnectionResponse {
         return DataWarehouseTypeEnum.fromValue(value);
       }
     }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      DataWarehouseTypeEnum.fromValue(value);
+    }
   }
 
   public static final String SERIALIZED_NAME_DATA_WAREHOUSE_TYPE = "data_warehouse_type";
   @SerializedName(SERIALIZED_NAME_DATA_WAREHOUSE_TYPE)
+  @javax.annotation.Nonnull
   private DataWarehouseTypeEnum dataWarehouseType;
 
   public static final String SERIALIZED_NAME_DATA_WAREHOUSE_OBJECTS = "data_warehouse_objects";
   @SerializedName(SERIALIZED_NAME_DATA_WAREHOUSE_OBJECTS)
+  @javax.annotation.Nullable
   private DataWarehouseObjects dataWarehouseObjects;
 
   public static final String SERIALIZED_NAME_DETAILS = "details";
   @SerializedName(SERIALIZED_NAME_DETAILS)
+  @javax.annotation.Nullable
   private Object details;
 
   public SearchConnectionResponse() {
   }
 
-  public SearchConnectionResponse id(String id) {
-    
+  public SearchConnectionResponse id(@javax.annotation.Nonnull String id) {
     this.id = id;
     return this;
   }
 
-   /**
+  /**
    * Unique ID of the connection.
    * @return id
-  **/
+   */
   @javax.annotation.Nonnull
   public String getId() {
     return id;
   }
 
-
-  public void setId(String id) {
+  public void setId(@javax.annotation.Nonnull String id) {
     this.id = id;
   }
 
 
-  public SearchConnectionResponse name(String name) {
-    
+  public SearchConnectionResponse name(@javax.annotation.Nonnull String name) {
     this.name = name;
     return this;
   }
 
-   /**
+  /**
    * Name of the connection.
    * @return name
-  **/
+   */
   @javax.annotation.Nonnull
   public String getName() {
     return name;
   }
 
-
-  public void setName(String name) {
+  public void setName(@javax.annotation.Nonnull String name) {
     this.name = name;
   }
 
 
-  public SearchConnectionResponse description(String description) {
-    
+  public SearchConnectionResponse description(@javax.annotation.Nullable String description) {
     this.description = description;
     return this;
   }
 
-   /**
+  /**
    * Description of the connection.
    * @return description
-  **/
+   */
   @javax.annotation.Nullable
   public String getDescription() {
     return description;
   }
 
-
-  public void setDescription(String description) {
+  public void setDescription(@javax.annotation.Nullable String description) {
     this.description = description;
   }
 
 
-  public SearchConnectionResponse dataWarehouseType(DataWarehouseTypeEnum dataWarehouseType) {
-    
+  public SearchConnectionResponse dataWarehouseType(@javax.annotation.Nonnull DataWarehouseTypeEnum dataWarehouseType) {
     this.dataWarehouseType = dataWarehouseType;
     return this;
   }
 
-   /**
+  /**
    * Type of data warehouse.
    * @return dataWarehouseType
-  **/
+   */
   @javax.annotation.Nonnull
   public DataWarehouseTypeEnum getDataWarehouseType() {
     return dataWarehouseType;
   }
 
-
-  public void setDataWarehouseType(DataWarehouseTypeEnum dataWarehouseType) {
+  public void setDataWarehouseType(@javax.annotation.Nonnull DataWarehouseTypeEnum dataWarehouseType) {
     this.dataWarehouseType = dataWarehouseType;
   }
 
 
-  public SearchConnectionResponse dataWarehouseObjects(DataWarehouseObjects dataWarehouseObjects) {
-    
+  public SearchConnectionResponse dataWarehouseObjects(@javax.annotation.Nullable DataWarehouseObjects dataWarehouseObjects) {
     this.dataWarehouseObjects = dataWarehouseObjects;
     return this;
   }
 
-   /**
+  /**
    * Get dataWarehouseObjects
    * @return dataWarehouseObjects
-  **/
+   */
   @javax.annotation.Nullable
   public DataWarehouseObjects getDataWarehouseObjects() {
     return dataWarehouseObjects;
   }
 
-
-  public void setDataWarehouseObjects(DataWarehouseObjects dataWarehouseObjects) {
+  public void setDataWarehouseObjects(@javax.annotation.Nullable DataWarehouseObjects dataWarehouseObjects) {
     this.dataWarehouseObjects = dataWarehouseObjects;
   }
 
 
-  public SearchConnectionResponse details(Object details) {
-    
+  public SearchConnectionResponse details(@javax.annotation.Nullable Object details) {
     this.details = details;
     return this;
   }
 
-   /**
+  /**
    * Details of the connection.
    * @return details
-  **/
+   */
   @javax.annotation.Nullable
   public Object getDetails() {
     return details;
   }
 
-
-  public void setDetails(Object details) {
+  public void setDetails(@javax.annotation.Nullable Object details) {
     this.details = details;
   }
 
@@ -394,33 +391,34 @@ public class SearchConnectionResponse {
     openapiRequiredFields.add("data_warehouse_type");
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to SearchConnectionResponse
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!SearchConnectionResponse.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to SearchConnectionResponse
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!SearchConnectionResponse.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in SearchConnectionResponse is not found in the empty JSON string", SearchConnectionResponse.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!SearchConnectionResponse.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `SearchConnectionResponse` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `SearchConnectionResponse` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
       for (String requiredField : SearchConnectionResponse.openapiRequiredFields) {
-        if (jsonObj.get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       if (!jsonObj.get("id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("id").toString()));
       }
@@ -433,9 +431,11 @@ public class SearchConnectionResponse {
       if (!jsonObj.get("data_warehouse_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `data_warehouse_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("data_warehouse_type").toString()));
       }
+      // validate the required field `data_warehouse_type`
+      DataWarehouseTypeEnum.validateJsonElement(jsonObj.get("data_warehouse_type"));
       // validate the optional field `data_warehouse_objects`
       if (jsonObj.get("data_warehouse_objects") != null && !jsonObj.get("data_warehouse_objects").isJsonNull()) {
-        DataWarehouseObjects.validateJsonObject(jsonObj.getAsJsonObject("data_warehouse_objects"));
+        DataWarehouseObjects.validateJsonElement(jsonObj.get("data_warehouse_objects"));
       }
   }
 
@@ -459,31 +459,31 @@ public class SearchConnectionResponse {
 
            @Override
            public SearchConnectionResponse read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of SearchConnectionResponse given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of SearchConnectionResponse
-  * @throws IOException if the JSON string is invalid with respect to SearchConnectionResponse
-  */
+  /**
+   * Create an instance of SearchConnectionResponse given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of SearchConnectionResponse
+   * @throws IOException if the JSON string is invalid with respect to SearchConnectionResponse
+   */
   public static SearchConnectionResponse fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, SearchConnectionResponse.class);
   }
 
- /**
-  * Convert an instance of SearchConnectionResponse to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of SearchConnectionResponse to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

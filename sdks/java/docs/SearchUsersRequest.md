@@ -24,7 +24,7 @@
 |**favoriteMetadata** | [**List&lt;FavoriteMetadataInput&gt;**](FavoriteMetadataInput.md) | Metadata objects which are assigned as favorites of the user. |  [optional] |
 |**recordOffset** | **Integer** | The starting record number from where the records should be included. |  [optional] |
 |**recordSize** | **Integer** | The number of records that should be included. |  [optional] |
-|**sortOptions** | [**SearchUsersRequestSortOptions**](SearchUsersRequestSortOptions.md) |  |  [optional] |
+|**sortOptions** | [**SortOptions**](SortOptions.md) | Sort options. |  [optional] |
 |**roleIdentifiers** | **List&lt;String&gt;** | Filters by the role assigned to the user. |  [optional] |
 |**includeFavoriteMetadata** | **Boolean** | Indicates if the user&#39;s favorite objects should be displayed. |  [optional] |
 
@@ -51,7 +51,7 @@
 | DATAMANAGEMENT | &quot;DATAMANAGEMENT&quot; |
 | SHAREWITHALL | &quot;SHAREWITHALL&quot; |
 | JOBSCHEDULING | &quot;JOBSCHEDULING&quot; |
-| A3ANALYSIS | &quot;A3ANALYSIS&quot; |
+| A3_ANALYSIS | &quot;A3ANALYSIS&quot; |
 | EXPERIMENTALFEATUREPRIVILEGE | &quot;EXPERIMENTALFEATUREPRIVILEGE&quot; |
 | BYPASSRLS | &quot;BYPASSRLS&quot; |
 | RANALYSIS | &quot;RANALYSIS&quot; |

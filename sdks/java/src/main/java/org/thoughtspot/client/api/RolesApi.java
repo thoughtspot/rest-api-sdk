@@ -39,7 +39,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.ws.rs.core.GenericType;
 
 public class RolesApi {
     private ApiClient localVarApiClient;
@@ -85,7 +84,8 @@ public class RolesApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Role successfully created. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid parameters. </td><td>  -  </td></tr>
@@ -157,7 +157,8 @@ public class RolesApi {
      * @return RoleResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Role successfully created. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid parameters. </td><td>  -  </td></tr>
@@ -178,7 +179,8 @@ public class RolesApi {
      * @return ApiResponse&lt;RoleResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Role successfully created. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid parameters. </td><td>  -  </td></tr>
@@ -201,7 +203,8 @@ public class RolesApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Role successfully created. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid parameters. </td><td>  -  </td></tr>
@@ -224,7 +227,8 @@ public class RolesApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Role successfully deleted. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -295,7 +299,8 @@ public class RolesApi {
      * @param roleIdentifier Unique ID or name of the Role. (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Role successfully deleted. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -315,7 +320,8 @@ public class RolesApi {
      * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Role successfully deleted. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -337,7 +343,8 @@ public class RolesApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Role successfully deleted. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -359,7 +366,8 @@ public class RolesApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Roles search result. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -431,7 +439,8 @@ public class RolesApi {
      * @return List&lt;SearchRoleResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Roles search result. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -452,7 +461,8 @@ public class RolesApi {
      * @return ApiResponse&lt;List&lt;SearchRoleResponse&gt;&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Roles search result. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -475,7 +485,8 @@ public class RolesApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Roles search result. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -499,7 +510,8 @@ public class RolesApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Role successfully updated. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -578,7 +590,8 @@ public class RolesApi {
      * @return RoleResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Role successfully updated. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -600,7 +613,8 @@ public class RolesApi {
      * @return ApiResponse&lt;RoleResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Role successfully updated. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -624,7 +638,8 @@ public class RolesApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Role successfully updated. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>

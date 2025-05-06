@@ -14,7 +14,6 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -22,10 +21,11 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.thoughtspot.client.model.MetadataInput;
-import org.thoughtspot.client.model.SearchSchedulesRequestHistoryRunsOptions;
-import org.thoughtspot.client.model.SearchSchedulesRequestSortOptions;
+import org.thoughtspot.client.model.ScheduleHistoryRunsOptionsInput;
+import org.thoughtspot.client.model.SortingOptions;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -42,12 +42,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -55,37 +53,42 @@ import org.thoughtspot.client.JSON;
 /**
  * SearchSchedulesRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class SearchSchedulesRequest {
   public static final String SERIALIZED_NAME_METADATA = "metadata";
   @SerializedName(SERIALIZED_NAME_METADATA)
-  private List<MetadataInput> metadata;
+  @javax.annotation.Nullable
+  private List<MetadataInput> metadata = new ArrayList<>();
 
   public static final String SERIALIZED_NAME_RECORD_OFFSET = "record_offset";
   @SerializedName(SERIALIZED_NAME_RECORD_OFFSET)
+  @javax.annotation.Nullable
   private Integer recordOffset;
 
   public static final String SERIALIZED_NAME_RECORD_SIZE = "record_size";
   @SerializedName(SERIALIZED_NAME_RECORD_SIZE)
+  @javax.annotation.Nullable
   private Integer recordSize;
 
   public static final String SERIALIZED_NAME_SORT_OPTIONS = "sort_options";
   @SerializedName(SERIALIZED_NAME_SORT_OPTIONS)
-  private SearchSchedulesRequestSortOptions sortOptions;
+  @javax.annotation.Nullable
+  private SortingOptions sortOptions;
 
   public static final String SERIALIZED_NAME_HISTORY_RUNS_OPTIONS = "history_runs_options";
   @SerializedName(SERIALIZED_NAME_HISTORY_RUNS_OPTIONS)
-  private SearchSchedulesRequestHistoryRunsOptions historyRunsOptions;
+  @javax.annotation.Nullable
+  private ScheduleHistoryRunsOptionsInput historyRunsOptions;
 
   public static final String SERIALIZED_NAME_SCHEDULE_IDENTIFIERS = "schedule_identifiers";
   @SerializedName(SERIALIZED_NAME_SCHEDULE_IDENTIFIERS)
-  private List<String> scheduleIdentifiers;
+  @javax.annotation.Nullable
+  private List<String> scheduleIdentifiers = new ArrayList<>();
 
   public SearchSchedulesRequest() {
   }
 
-  public SearchSchedulesRequest metadata(List<MetadataInput> metadata) {
-    
+  public SearchSchedulesRequest metadata(@javax.annotation.Nullable List<MetadataInput> metadata) {
     this.metadata = metadata;
     return this;
   }
@@ -98,107 +101,97 @@ public class SearchSchedulesRequest {
     return this;
   }
 
-   /**
+  /**
    * Metadata objects associated with the scheduled jobs.
    * @return metadata
-  **/
+   */
   @javax.annotation.Nullable
   public List<MetadataInput> getMetadata() {
     return metadata;
   }
 
-
-  public void setMetadata(List<MetadataInput> metadata) {
+  public void setMetadata(@javax.annotation.Nullable List<MetadataInput> metadata) {
     this.metadata = metadata;
   }
 
 
-  public SearchSchedulesRequest recordOffset(Integer recordOffset) {
-    
+  public SearchSchedulesRequest recordOffset(@javax.annotation.Nullable Integer recordOffset) {
     this.recordOffset = recordOffset;
     return this;
   }
 
-   /**
+  /**
    * The starting record number from where the records should be included.
    * @return recordOffset
-  **/
+   */
   @javax.annotation.Nullable
   public Integer getRecordOffset() {
     return recordOffset;
   }
 
-
-  public void setRecordOffset(Integer recordOffset) {
+  public void setRecordOffset(@javax.annotation.Nullable Integer recordOffset) {
     this.recordOffset = recordOffset;
   }
 
 
-  public SearchSchedulesRequest recordSize(Integer recordSize) {
-    
+  public SearchSchedulesRequest recordSize(@javax.annotation.Nullable Integer recordSize) {
     this.recordSize = recordSize;
     return this;
   }
 
-   /**
+  /**
    * The number of records that should be included.
    * @return recordSize
-  **/
+   */
   @javax.annotation.Nullable
   public Integer getRecordSize() {
     return recordSize;
   }
 
-
-  public void setRecordSize(Integer recordSize) {
+  public void setRecordSize(@javax.annotation.Nullable Integer recordSize) {
     this.recordSize = recordSize;
   }
 
 
-  public SearchSchedulesRequest sortOptions(SearchSchedulesRequestSortOptions sortOptions) {
-    
+  public SearchSchedulesRequest sortOptions(@javax.annotation.Nullable SortingOptions sortOptions) {
     this.sortOptions = sortOptions;
     return this;
   }
 
-   /**
-   * Get sortOptions
+  /**
+   * Sort options.
    * @return sortOptions
-  **/
+   */
   @javax.annotation.Nullable
-  public SearchSchedulesRequestSortOptions getSortOptions() {
+  public SortingOptions getSortOptions() {
     return sortOptions;
   }
 
-
-  public void setSortOptions(SearchSchedulesRequestSortOptions sortOptions) {
+  public void setSortOptions(@javax.annotation.Nullable SortingOptions sortOptions) {
     this.sortOptions = sortOptions;
   }
 
 
-  public SearchSchedulesRequest historyRunsOptions(SearchSchedulesRequestHistoryRunsOptions historyRunsOptions) {
-    
+  public SearchSchedulesRequest historyRunsOptions(@javax.annotation.Nullable ScheduleHistoryRunsOptionsInput historyRunsOptions) {
     this.historyRunsOptions = historyRunsOptions;
     return this;
   }
 
-   /**
-   * Get historyRunsOptions
+  /**
+   * Options while fetching history runs for the schedule.
    * @return historyRunsOptions
-  **/
+   */
   @javax.annotation.Nullable
-  public SearchSchedulesRequestHistoryRunsOptions getHistoryRunsOptions() {
+  public ScheduleHistoryRunsOptionsInput getHistoryRunsOptions() {
     return historyRunsOptions;
   }
 
-
-  public void setHistoryRunsOptions(SearchSchedulesRequestHistoryRunsOptions historyRunsOptions) {
+  public void setHistoryRunsOptions(@javax.annotation.Nullable ScheduleHistoryRunsOptionsInput historyRunsOptions) {
     this.historyRunsOptions = historyRunsOptions;
   }
 
 
-  public SearchSchedulesRequest scheduleIdentifiers(List<String> scheduleIdentifiers) {
-    
+  public SearchSchedulesRequest scheduleIdentifiers(@javax.annotation.Nullable List<String> scheduleIdentifiers) {
     this.scheduleIdentifiers = scheduleIdentifiers;
     return this;
   }
@@ -211,17 +204,16 @@ public class SearchSchedulesRequest {
     return this;
   }
 
-   /**
+  /**
    * unique ID or name of the Schedule
    * @return scheduleIdentifiers
-  **/
+   */
   @javax.annotation.Nullable
   public List<String> getScheduleIdentifiers() {
     return scheduleIdentifiers;
   }
 
-
-  public void setScheduleIdentifiers(List<String> scheduleIdentifiers) {
+  public void setScheduleIdentifiers(@javax.annotation.Nullable List<String> scheduleIdentifiers) {
     this.scheduleIdentifiers = scheduleIdentifiers;
   }
 
@@ -292,26 +284,27 @@ public class SearchSchedulesRequest {
     openapiRequiredFields = new HashSet<String>();
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to SearchSchedulesRequest
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!SearchSchedulesRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to SearchSchedulesRequest
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!SearchSchedulesRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in SearchSchedulesRequest is not found in the empty JSON string", SearchSchedulesRequest.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!SearchSchedulesRequest.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `SearchSchedulesRequest` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `SearchSchedulesRequest` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       if (jsonObj.get("metadata") != null && !jsonObj.get("metadata").isJsonNull()) {
         JsonArray jsonArraymetadata = jsonObj.getAsJsonArray("metadata");
         if (jsonArraymetadata != null) {
@@ -322,20 +315,20 @@ public class SearchSchedulesRequest {
 
           // validate the optional field `metadata` (array)
           for (int i = 0; i < jsonArraymetadata.size(); i++) {
-            MetadataInput.validateJsonObject(jsonArraymetadata.get(i).getAsJsonObject());
+            MetadataInput.validateJsonElement(jsonArraymetadata.get(i));
           };
         }
       }
       // validate the optional field `sort_options`
       if (jsonObj.get("sort_options") != null && !jsonObj.get("sort_options").isJsonNull()) {
-        SearchSchedulesRequestSortOptions.validateJsonObject(jsonObj.getAsJsonObject("sort_options"));
+        SortingOptions.validateJsonElement(jsonObj.get("sort_options"));
       }
       // validate the optional field `history_runs_options`
       if (jsonObj.get("history_runs_options") != null && !jsonObj.get("history_runs_options").isJsonNull()) {
-        SearchSchedulesRequestHistoryRunsOptions.validateJsonObject(jsonObj.getAsJsonObject("history_runs_options"));
+        ScheduleHistoryRunsOptionsInput.validateJsonElement(jsonObj.get("history_runs_options"));
       }
       // ensure the optional json data is an array if present
-      if (jsonObj.get("schedule_identifiers") != null && !jsonObj.get("schedule_identifiers").isJsonArray()) {
+      if (jsonObj.get("schedule_identifiers") != null && !jsonObj.get("schedule_identifiers").isJsonNull() && !jsonObj.get("schedule_identifiers").isJsonArray()) {
         throw new IllegalArgumentException(String.format("Expected the field `schedule_identifiers` to be an array in the JSON string but got `%s`", jsonObj.get("schedule_identifiers").toString()));
       }
   }
@@ -360,31 +353,31 @@ public class SearchSchedulesRequest {
 
            @Override
            public SearchSchedulesRequest read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of SearchSchedulesRequest given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of SearchSchedulesRequest
-  * @throws IOException if the JSON string is invalid with respect to SearchSchedulesRequest
-  */
+  /**
+   * Create an instance of SearchSchedulesRequest given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of SearchSchedulesRequest
+   * @throws IOException if the JSON string is invalid with respect to SearchSchedulesRequest
+   */
   public static SearchSchedulesRequest fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, SearchSchedulesRequest.class);
   }
 
- /**
-  * Convert an instance of SearchSchedulesRequest to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of SearchSchedulesRequest to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

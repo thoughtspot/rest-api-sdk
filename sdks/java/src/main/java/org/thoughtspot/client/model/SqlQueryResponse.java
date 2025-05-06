@@ -14,7 +14,6 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -22,6 +21,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.thoughtspot.client.model.SqlQuery;
 
@@ -40,12 +40,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -53,14 +51,16 @@ import org.thoughtspot.client.JSON;
 /**
  * SqlQueryResponse
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class SqlQueryResponse {
   public static final String SERIALIZED_NAME_METADATA_ID = "metadata_id";
   @SerializedName(SERIALIZED_NAME_METADATA_ID)
+  @javax.annotation.Nonnull
   private String metadataId;
 
   public static final String SERIALIZED_NAME_METADATA_NAME = "metadata_name";
   @SerializedName(SERIALIZED_NAME_METADATA_NAME)
+  @javax.annotation.Nonnull
   private String metadataName;
 
   /**
@@ -122,84 +122,84 @@ public class SqlQueryResponse {
         return MetadataTypeEnum.fromValue(value);
       }
     }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      MetadataTypeEnum.fromValue(value);
+    }
   }
 
   public static final String SERIALIZED_NAME_METADATA_TYPE = "metadata_type";
   @SerializedName(SERIALIZED_NAME_METADATA_TYPE)
+  @javax.annotation.Nonnull
   private MetadataTypeEnum metadataType;
 
   public static final String SERIALIZED_NAME_SQL_QUERIES = "sql_queries";
   @SerializedName(SERIALIZED_NAME_SQL_QUERIES)
+  @javax.annotation.Nonnull
   private List<SqlQuery> sqlQueries = new ArrayList<>();
 
   public SqlQueryResponse() {
   }
 
-  public SqlQueryResponse metadataId(String metadataId) {
-    
+  public SqlQueryResponse metadataId(@javax.annotation.Nonnull String metadataId) {
     this.metadataId = metadataId;
     return this;
   }
 
-   /**
+  /**
    * Unique identifier of the metadata.
    * @return metadataId
-  **/
+   */
   @javax.annotation.Nonnull
   public String getMetadataId() {
     return metadataId;
   }
 
-
-  public void setMetadataId(String metadataId) {
+  public void setMetadataId(@javax.annotation.Nonnull String metadataId) {
     this.metadataId = metadataId;
   }
 
 
-  public SqlQueryResponse metadataName(String metadataName) {
-    
+  public SqlQueryResponse metadataName(@javax.annotation.Nonnull String metadataName) {
     this.metadataName = metadataName;
     return this;
   }
 
-   /**
+  /**
    * Name of the metadata.
    * @return metadataName
-  **/
+   */
   @javax.annotation.Nonnull
   public String getMetadataName() {
     return metadataName;
   }
 
-
-  public void setMetadataName(String metadataName) {
+  public void setMetadataName(@javax.annotation.Nonnull String metadataName) {
     this.metadataName = metadataName;
   }
 
 
-  public SqlQueryResponse metadataType(MetadataTypeEnum metadataType) {
-    
+  public SqlQueryResponse metadataType(@javax.annotation.Nonnull MetadataTypeEnum metadataType) {
     this.metadataType = metadataType;
     return this;
   }
 
-   /**
+  /**
    * Type of the metadata.
    * @return metadataType
-  **/
+   */
   @javax.annotation.Nonnull
   public MetadataTypeEnum getMetadataType() {
     return metadataType;
   }
 
-
-  public void setMetadataType(MetadataTypeEnum metadataType) {
+  public void setMetadataType(@javax.annotation.Nonnull MetadataTypeEnum metadataType) {
     this.metadataType = metadataType;
   }
 
 
-  public SqlQueryResponse sqlQueries(List<SqlQuery> sqlQueries) {
-    
+  public SqlQueryResponse sqlQueries(@javax.annotation.Nonnull List<SqlQuery> sqlQueries) {
     this.sqlQueries = sqlQueries;
     return this;
   }
@@ -212,17 +212,16 @@ public class SqlQueryResponse {
     return this;
   }
 
-   /**
+  /**
    * SQL query details of metadata objects.
    * @return sqlQueries
-  **/
+   */
   @javax.annotation.Nonnull
   public List<SqlQuery> getSqlQueries() {
     return sqlQueries;
   }
 
-
-  public void setSqlQueries(List<SqlQuery> sqlQueries) {
+  public void setSqlQueries(@javax.annotation.Nonnull List<SqlQuery> sqlQueries) {
     this.sqlQueries = sqlQueries;
   }
 
@@ -291,33 +290,34 @@ public class SqlQueryResponse {
     openapiRequiredFields.add("sql_queries");
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to SqlQueryResponse
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!SqlQueryResponse.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to SqlQueryResponse
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!SqlQueryResponse.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in SqlQueryResponse is not found in the empty JSON string", SqlQueryResponse.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!SqlQueryResponse.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `SqlQueryResponse` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `SqlQueryResponse` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
       for (String requiredField : SqlQueryResponse.openapiRequiredFields) {
-        if (jsonObj.get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       if (!jsonObj.get("metadata_id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `metadata_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("metadata_id").toString()));
       }
@@ -327,6 +327,8 @@ public class SqlQueryResponse {
       if (!jsonObj.get("metadata_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `metadata_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("metadata_type").toString()));
       }
+      // validate the required field `metadata_type`
+      MetadataTypeEnum.validateJsonElement(jsonObj.get("metadata_type"));
       // ensure the json data is an array
       if (!jsonObj.get("sql_queries").isJsonArray()) {
         throw new IllegalArgumentException(String.format("Expected the field `sql_queries` to be an array in the JSON string but got `%s`", jsonObj.get("sql_queries").toString()));
@@ -335,7 +337,7 @@ public class SqlQueryResponse {
       JsonArray jsonArraysqlQueries = jsonObj.getAsJsonArray("sql_queries");
       // validate the required field `sql_queries` (array)
       for (int i = 0; i < jsonArraysqlQueries.size(); i++) {
-        SqlQuery.validateJsonObject(jsonArraysqlQueries.get(i).getAsJsonObject());
+        SqlQuery.validateJsonElement(jsonArraysqlQueries.get(i));
       };
   }
 
@@ -359,31 +361,31 @@ public class SqlQueryResponse {
 
            @Override
            public SqlQueryResponse read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of SqlQueryResponse given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of SqlQueryResponse
-  * @throws IOException if the JSON string is invalid with respect to SqlQueryResponse
-  */
+  /**
+   * Create an instance of SqlQueryResponse given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of SqlQueryResponse
+   * @throws IOException if the JSON string is invalid with respect to SqlQueryResponse
+   */
   public static SqlQueryResponse fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, SqlQueryResponse.class);
   }
 
- /**
-  * Convert an instance of SqlQueryResponse to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of SqlQueryResponse to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

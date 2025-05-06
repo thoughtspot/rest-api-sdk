@@ -48,7 +48,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.ws.rs.core.GenericType;
 
 public class VersionControlApi {
     private ApiClient localVarApiClient;
@@ -94,7 +93,8 @@ public class VersionControlApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully committed the metadata objects </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -166,7 +166,8 @@ public class VersionControlApi {
      * @return CommitResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully committed the metadata objects </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -187,7 +188,8 @@ public class VersionControlApi {
      * @return ApiResponse&lt;CommitResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully committed the metadata objects </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -210,7 +212,8 @@ public class VersionControlApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully committed the metadata objects </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -233,7 +236,8 @@ public class VersionControlApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully configured local repository </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -305,7 +309,8 @@ public class VersionControlApi {
      * @return RepoConfigObject
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully configured local repository </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -326,7 +331,8 @@ public class VersionControlApi {
      * @return ApiResponse&lt;RepoConfigObject&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully configured local repository </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -349,7 +355,8 @@ public class VersionControlApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully configured local repository </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -372,7 +379,8 @@ public class VersionControlApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Successfully deleted local repository configuration </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -443,7 +451,8 @@ public class VersionControlApi {
      * @param deleteConfigRequest  (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Successfully deleted local repository configuration </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -463,7 +472,8 @@ public class VersionControlApi {
      * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Successfully deleted local repository configuration </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -485,7 +495,8 @@ public class VersionControlApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Successfully deleted local repository configuration </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -507,7 +518,8 @@ public class VersionControlApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully deployed the changes </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -579,7 +591,8 @@ public class VersionControlApi {
      * @return List&lt;DeployResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully deployed the changes </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -600,7 +613,8 @@ public class VersionControlApi {
      * @return ApiResponse&lt;List&lt;DeployResponse&gt;&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully deployed the changes </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -623,7 +637,8 @@ public class VersionControlApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully deployed the changes </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -647,7 +662,8 @@ public class VersionControlApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Reverted the object to the commit point specified </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -726,7 +742,8 @@ public class VersionControlApi {
      * @return RevertResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Reverted the object to the commit point specified </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -748,7 +765,8 @@ public class VersionControlApi {
      * @return ApiResponse&lt;RevertResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Reverted the object to the commit point specified </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -772,7 +790,8 @@ public class VersionControlApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Reverted the object to the commit point specified </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -795,7 +814,8 @@ public class VersionControlApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Commit history of the metadata object </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -867,7 +887,8 @@ public class VersionControlApi {
      * @return List&lt;CommitHistoryResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Commit history of the metadata object </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -888,7 +909,8 @@ public class VersionControlApi {
      * @return ApiResponse&lt;List&lt;CommitHistoryResponse&gt;&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Commit history of the metadata object </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -911,7 +933,8 @@ public class VersionControlApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Commit history of the metadata object </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -934,7 +957,8 @@ public class VersionControlApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Details of local repository configuration </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -1006,7 +1030,8 @@ public class VersionControlApi {
      * @return List&lt;RepoConfigObject&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Details of local repository configuration </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -1027,7 +1052,8 @@ public class VersionControlApi {
      * @return ApiResponse&lt;List&lt;RepoConfigObject&gt;&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Details of local repository configuration </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -1050,7 +1076,8 @@ public class VersionControlApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Details of local repository configuration </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -1073,7 +1100,8 @@ public class VersionControlApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully updated local repository configuration </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -1145,7 +1173,8 @@ public class VersionControlApi {
      * @return RepoConfigObject
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully updated local repository configuration </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -1166,7 +1195,8 @@ public class VersionControlApi {
      * @return ApiResponse&lt;RepoConfigObject&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully updated local repository configuration </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -1189,7 +1219,8 @@ public class VersionControlApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully updated local repository configuration </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -1212,7 +1243,8 @@ public class VersionControlApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> validation done successfully </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -1284,7 +1316,8 @@ public class VersionControlApi {
      * @return List&lt;DeployResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> validation done successfully </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -1305,7 +1338,8 @@ public class VersionControlApi {
      * @return ApiResponse&lt;List&lt;DeployResponse&gt;&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> validation done successfully </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -1328,7 +1362,8 @@ public class VersionControlApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> validation done successfully </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>

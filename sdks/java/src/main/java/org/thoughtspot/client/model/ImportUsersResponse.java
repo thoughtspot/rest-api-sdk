@@ -14,7 +14,6 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -22,6 +21,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
 import org.thoughtspot.client.model.ImportUserType;
@@ -41,12 +41,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -54,25 +52,27 @@ import org.thoughtspot.client.JSON;
 /**
  * ImportUsersResponse
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class ImportUsersResponse {
   public static final String SERIALIZED_NAME_USERS_ADDED = "users_added";
   @SerializedName(SERIALIZED_NAME_USERS_ADDED)
+  @javax.annotation.Nullable
   private List<ImportUserType> usersAdded;
 
   public static final String SERIALIZED_NAME_USERS_UPDATED = "users_updated";
   @SerializedName(SERIALIZED_NAME_USERS_UPDATED)
+  @javax.annotation.Nullable
   private List<ImportUserType> usersUpdated;
 
   public static final String SERIALIZED_NAME_USERS_DELETED = "users_deleted";
   @SerializedName(SERIALIZED_NAME_USERS_DELETED)
+  @javax.annotation.Nullable
   private List<ImportUserType> usersDeleted;
 
   public ImportUsersResponse() {
   }
 
-  public ImportUsersResponse usersAdded(List<ImportUserType> usersAdded) {
-    
+  public ImportUsersResponse usersAdded(@javax.annotation.Nullable List<ImportUserType> usersAdded) {
     this.usersAdded = usersAdded;
     return this;
   }
@@ -85,23 +85,21 @@ public class ImportUsersResponse {
     return this;
   }
 
-   /**
+  /**
    * Get usersAdded
    * @return usersAdded
-  **/
+   */
   @javax.annotation.Nullable
   public List<ImportUserType> getUsersAdded() {
     return usersAdded;
   }
 
-
-  public void setUsersAdded(List<ImportUserType> usersAdded) {
+  public void setUsersAdded(@javax.annotation.Nullable List<ImportUserType> usersAdded) {
     this.usersAdded = usersAdded;
   }
 
 
-  public ImportUsersResponse usersUpdated(List<ImportUserType> usersUpdated) {
-    
+  public ImportUsersResponse usersUpdated(@javax.annotation.Nullable List<ImportUserType> usersUpdated) {
     this.usersUpdated = usersUpdated;
     return this;
   }
@@ -114,23 +112,21 @@ public class ImportUsersResponse {
     return this;
   }
 
-   /**
+  /**
    * Get usersUpdated
    * @return usersUpdated
-  **/
+   */
   @javax.annotation.Nullable
   public List<ImportUserType> getUsersUpdated() {
     return usersUpdated;
   }
 
-
-  public void setUsersUpdated(List<ImportUserType> usersUpdated) {
+  public void setUsersUpdated(@javax.annotation.Nullable List<ImportUserType> usersUpdated) {
     this.usersUpdated = usersUpdated;
   }
 
 
-  public ImportUsersResponse usersDeleted(List<ImportUserType> usersDeleted) {
-    
+  public ImportUsersResponse usersDeleted(@javax.annotation.Nullable List<ImportUserType> usersDeleted) {
     this.usersDeleted = usersDeleted;
     return this;
   }
@@ -143,17 +139,16 @@ public class ImportUsersResponse {
     return this;
   }
 
-   /**
+  /**
    * Get usersDeleted
    * @return usersDeleted
-  **/
+   */
   @javax.annotation.Nullable
   public List<ImportUserType> getUsersDeleted() {
     return usersDeleted;
   }
 
-
-  public void setUsersDeleted(List<ImportUserType> usersDeleted) {
+  public void setUsersDeleted(@javax.annotation.Nullable List<ImportUserType> usersDeleted) {
     this.usersDeleted = usersDeleted;
   }
 
@@ -226,26 +221,27 @@ public class ImportUsersResponse {
     openapiRequiredFields = new HashSet<String>();
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to ImportUsersResponse
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!ImportUsersResponse.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to ImportUsersResponse
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!ImportUsersResponse.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in ImportUsersResponse is not found in the empty JSON string", ImportUsersResponse.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!ImportUsersResponse.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `ImportUsersResponse` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `ImportUsersResponse` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       if (jsonObj.get("users_added") != null && !jsonObj.get("users_added").isJsonNull()) {
         JsonArray jsonArrayusersAdded = jsonObj.getAsJsonArray("users_added");
         if (jsonArrayusersAdded != null) {
@@ -256,7 +252,7 @@ public class ImportUsersResponse {
 
           // validate the optional field `users_added` (array)
           for (int i = 0; i < jsonArrayusersAdded.size(); i++) {
-            ImportUserType.validateJsonObject(jsonArrayusersAdded.get(i).getAsJsonObject());
+            ImportUserType.validateJsonElement(jsonArrayusersAdded.get(i));
           };
         }
       }
@@ -270,7 +266,7 @@ public class ImportUsersResponse {
 
           // validate the optional field `users_updated` (array)
           for (int i = 0; i < jsonArrayusersUpdated.size(); i++) {
-            ImportUserType.validateJsonObject(jsonArrayusersUpdated.get(i).getAsJsonObject());
+            ImportUserType.validateJsonElement(jsonArrayusersUpdated.get(i));
           };
         }
       }
@@ -284,7 +280,7 @@ public class ImportUsersResponse {
 
           // validate the optional field `users_deleted` (array)
           for (int i = 0; i < jsonArrayusersDeleted.size(); i++) {
-            ImportUserType.validateJsonObject(jsonArrayusersDeleted.get(i).getAsJsonObject());
+            ImportUserType.validateJsonElement(jsonArrayusersDeleted.get(i));
           };
         }
       }
@@ -310,31 +306,31 @@ public class ImportUsersResponse {
 
            @Override
            public ImportUsersResponse read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of ImportUsersResponse given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of ImportUsersResponse
-  * @throws IOException if the JSON string is invalid with respect to ImportUsersResponse
-  */
+  /**
+   * Create an instance of ImportUsersResponse given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of ImportUsersResponse
+   * @throws IOException if the JSON string is invalid with respect to ImportUsersResponse
+   */
   public static ImportUsersResponse fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, ImportUsersResponse.class);
   }
 
- /**
-  * Convert an instance of ImportUsersResponse to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of ImportUsersResponse to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

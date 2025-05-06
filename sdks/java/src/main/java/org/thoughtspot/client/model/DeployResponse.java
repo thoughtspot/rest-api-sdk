@@ -14,13 +14,13 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.util.Arrays;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
@@ -38,12 +38,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -51,132 +49,127 @@ import org.thoughtspot.client.JSON;
 /**
  * DeployResponse
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class DeployResponse {
   public static final String SERIALIZED_NAME_FILE_NAME = "file_name";
   @SerializedName(SERIALIZED_NAME_FILE_NAME)
+  @javax.annotation.Nullable
   private String fileName;
 
   public static final String SERIALIZED_NAME_METADATA_NAME = "metadata_name";
   @SerializedName(SERIALIZED_NAME_METADATA_NAME)
+  @javax.annotation.Nullable
   private String metadataName;
 
   public static final String SERIALIZED_NAME_METADATA_TYPE = "metadata_type";
   @SerializedName(SERIALIZED_NAME_METADATA_TYPE)
+  @javax.annotation.Nullable
   private String metadataType;
 
   public static final String SERIALIZED_NAME_STATUS_CODE = "status_code";
   @SerializedName(SERIALIZED_NAME_STATUS_CODE)
+  @javax.annotation.Nullable
   private String statusCode;
 
   public static final String SERIALIZED_NAME_STATUS_MESSAGE = "status_message";
   @SerializedName(SERIALIZED_NAME_STATUS_MESSAGE)
+  @javax.annotation.Nullable
   private String statusMessage;
 
   public DeployResponse() {
   }
 
-  public DeployResponse fileName(String fileName) {
-    
+  public DeployResponse fileName(@javax.annotation.Nullable String fileName) {
     this.fileName = fileName;
     return this;
   }
 
-   /**
+  /**
    * Name of the file deployed
    * @return fileName
-  **/
+   */
   @javax.annotation.Nullable
   public String getFileName() {
     return fileName;
   }
 
-
-  public void setFileName(String fileName) {
+  public void setFileName(@javax.annotation.Nullable String fileName) {
     this.fileName = fileName;
   }
 
 
-  public DeployResponse metadataName(String metadataName) {
-    
+  public DeployResponse metadataName(@javax.annotation.Nullable String metadataName) {
     this.metadataName = metadataName;
     return this;
   }
 
-   /**
+  /**
    * Name of the metadata object
    * @return metadataName
-  **/
+   */
   @javax.annotation.Nullable
   public String getMetadataName() {
     return metadataName;
   }
 
-
-  public void setMetadataName(String metadataName) {
+  public void setMetadataName(@javax.annotation.Nullable String metadataName) {
     this.metadataName = metadataName;
   }
 
 
-  public DeployResponse metadataType(String metadataType) {
-    
+  public DeployResponse metadataType(@javax.annotation.Nullable String metadataType) {
     this.metadataType = metadataType;
     return this;
   }
 
-   /**
+  /**
    * Type of the metadata object
    * @return metadataType
-  **/
+   */
   @javax.annotation.Nullable
   public String getMetadataType() {
     return metadataType;
   }
 
-
-  public void setMetadataType(String metadataType) {
+  public void setMetadataType(@javax.annotation.Nullable String metadataType) {
     this.metadataType = metadataType;
   }
 
 
-  public DeployResponse statusCode(String statusCode) {
-    
+  public DeployResponse statusCode(@javax.annotation.Nullable String statusCode) {
     this.statusCode = statusCode;
     return this;
   }
 
-   /**
+  /**
    * Indicates the status of deployment for the file
    * @return statusCode
-  **/
+   */
   @javax.annotation.Nullable
   public String getStatusCode() {
     return statusCode;
   }
 
-
-  public void setStatusCode(String statusCode) {
+  public void setStatusCode(@javax.annotation.Nullable String statusCode) {
     this.statusCode = statusCode;
   }
 
 
-  public DeployResponse statusMessage(String statusMessage) {
-    
+  public DeployResponse statusMessage(@javax.annotation.Nullable String statusMessage) {
     this.statusMessage = statusMessage;
     return this;
   }
 
-   /**
+  /**
    * Any error or warning with the deployment
    * @return statusMessage
-  **/
+   */
   @javax.annotation.Nullable
   public String getStatusMessage() {
     return statusMessage;
   }
 
-
-  public void setStatusMessage(String statusMessage) {
+  public void setStatusMessage(@javax.annotation.Nullable String statusMessage) {
     this.statusMessage = statusMessage;
   }
 
@@ -255,26 +248,27 @@ public class DeployResponse {
     openapiRequiredFields = new HashSet<String>();
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to DeployResponse
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!DeployResponse.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to DeployResponse
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!DeployResponse.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in DeployResponse is not found in the empty JSON string", DeployResponse.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!DeployResponse.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `DeployResponse` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `DeployResponse` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("file_name") != null && !jsonObj.get("file_name").isJsonNull()) && !jsonObj.get("file_name").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `file_name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("file_name").toString()));
       }
@@ -312,31 +306,31 @@ public class DeployResponse {
 
            @Override
            public DeployResponse read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of DeployResponse given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of DeployResponse
-  * @throws IOException if the JSON string is invalid with respect to DeployResponse
-  */
+  /**
+   * Create an instance of DeployResponse given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of DeployResponse
+   * @throws IOException if the JSON string is invalid with respect to DeployResponse
+   */
   public static DeployResponse fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, DeployResponse.class);
   }
 
- /**
-  * Convert an instance of DeployResponse to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of DeployResponse to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

@@ -14,7 +14,6 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -22,6 +21,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
 
@@ -40,12 +40,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -53,67 +51,65 @@ import org.thoughtspot.client.JSON;
 /**
  * ModelTableList
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class ModelTableList {
   public static final String SERIALIZED_NAME_MODEL_NAME = "model_name";
   @SerializedName(SERIALIZED_NAME_MODEL_NAME)
+  @javax.annotation.Nonnull
   private String modelName;
 
   public static final String SERIALIZED_NAME_MODEL_PATH = "model_path";
   @SerializedName(SERIALIZED_NAME_MODEL_PATH)
+  @javax.annotation.Nullable
   private String modelPath;
 
   public static final String SERIALIZED_NAME_TABLES = "tables";
   @SerializedName(SERIALIZED_NAME_TABLES)
+  @javax.annotation.Nonnull
   private List<String> tables = new ArrayList<>();
 
   public ModelTableList() {
   }
 
-  public ModelTableList modelName(String modelName) {
-    
+  public ModelTableList modelName(@javax.annotation.Nonnull String modelName) {
     this.modelName = modelName;
     return this;
   }
 
-   /**
+  /**
    * Name of the Model.
    * @return modelName
-  **/
+   */
   @javax.annotation.Nonnull
   public String getModelName() {
     return modelName;
   }
 
-
-  public void setModelName(String modelName) {
+  public void setModelName(@javax.annotation.Nonnull String modelName) {
     this.modelName = modelName;
   }
 
 
-  public ModelTableList modelPath(String modelPath) {
-    
+  public ModelTableList modelPath(@javax.annotation.Nullable String modelPath) {
     this.modelPath = modelPath;
     return this;
   }
 
-   /**
+  /**
    * Model directory path, this is optional param and required if there are duplicate models with the same name.
    * @return modelPath
-  **/
+   */
   @javax.annotation.Nullable
   public String getModelPath() {
     return modelPath;
   }
 
-
-  public void setModelPath(String modelPath) {
+  public void setModelPath(@javax.annotation.Nullable String modelPath) {
     this.modelPath = modelPath;
   }
 
 
-  public ModelTableList tables(List<String> tables) {
-    
+  public ModelTableList tables(@javax.annotation.Nonnull List<String> tables) {
     this.tables = tables;
     return this;
   }
@@ -126,17 +122,16 @@ public class ModelTableList {
     return this;
   }
 
-   /**
+  /**
    * List of Tables.
    * @return tables
-  **/
+   */
   @javax.annotation.Nonnull
   public List<String> getTables() {
     return tables;
   }
 
-
-  public void setTables(List<String> tables) {
+  public void setTables(@javax.annotation.Nonnull List<String> tables) {
     this.tables = tables;
   }
 
@@ -211,33 +206,34 @@ public class ModelTableList {
     openapiRequiredFields.add("tables");
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to ModelTableList
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!ModelTableList.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to ModelTableList
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!ModelTableList.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in ModelTableList is not found in the empty JSON string", ModelTableList.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!ModelTableList.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `ModelTableList` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `ModelTableList` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
       for (String requiredField : ModelTableList.openapiRequiredFields) {
-        if (jsonObj.get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       if (!jsonObj.get("model_name").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `model_name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("model_name").toString()));
       }
@@ -272,31 +268,31 @@ public class ModelTableList {
 
            @Override
            public ModelTableList read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of ModelTableList given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of ModelTableList
-  * @throws IOException if the JSON string is invalid with respect to ModelTableList
-  */
+  /**
+   * Create an instance of ModelTableList given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of ModelTableList
+   * @throws IOException if the JSON string is invalid with respect to ModelTableList
+   */
   public static ModelTableList fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, ModelTableList.class);
   }
 
- /**
-  * Convert an instance of ModelTableList to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of ModelTableList to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

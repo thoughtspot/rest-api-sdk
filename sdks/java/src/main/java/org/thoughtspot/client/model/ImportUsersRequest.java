@@ -14,7 +14,6 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -22,6 +21,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
 import org.thoughtspot.client.model.ImportUser;
@@ -41,12 +41,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -54,29 +52,32 @@ import org.thoughtspot.client.JSON;
 /**
  * ImportUsersRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class ImportUsersRequest {
   public static final String SERIALIZED_NAME_USERS = "users";
   @SerializedName(SERIALIZED_NAME_USERS)
+  @javax.annotation.Nonnull
   private List<ImportUser> users = new ArrayList<>();
 
   public static final String SERIALIZED_NAME_DEFAULT_PASSWORD = "default_password";
   @SerializedName(SERIALIZED_NAME_DEFAULT_PASSWORD)
+  @javax.annotation.Nullable
   private String defaultPassword;
 
   public static final String SERIALIZED_NAME_DRY_RUN = "dry_run";
   @SerializedName(SERIALIZED_NAME_DRY_RUN)
+  @javax.annotation.Nullable
   private Boolean dryRun = true;
 
   public static final String SERIALIZED_NAME_DELETE_UNSPECIFIED_USERS = "delete_unspecified_users";
   @SerializedName(SERIALIZED_NAME_DELETE_UNSPECIFIED_USERS)
+  @javax.annotation.Nullable
   private Boolean deleteUnspecifiedUsers = false;
 
   public ImportUsersRequest() {
   }
 
-  public ImportUsersRequest users(List<ImportUser> users) {
-    
+  public ImportUsersRequest users(@javax.annotation.Nonnull List<ImportUser> users) {
     this.users = users;
     return this;
   }
@@ -89,80 +90,73 @@ public class ImportUsersRequest {
     return this;
   }
 
-   /**
+  /**
    * List of users needs to be imported.
    * @return users
-  **/
+   */
   @javax.annotation.Nonnull
   public List<ImportUser> getUsers() {
     return users;
   }
 
-
-  public void setUsers(List<ImportUser> users) {
+  public void setUsers(@javax.annotation.Nonnull List<ImportUser> users) {
     this.users = users;
   }
 
 
-  public ImportUsersRequest defaultPassword(String defaultPassword) {
-    
+  public ImportUsersRequest defaultPassword(@javax.annotation.Nullable String defaultPassword) {
     this.defaultPassword = defaultPassword;
     return this;
   }
 
-   /**
+  /**
    * The default password to assign to users if they do not have a password assigned in ThoughtSpot.
    * @return defaultPassword
-  **/
+   */
   @javax.annotation.Nullable
   public String getDefaultPassword() {
     return defaultPassword;
   }
 
-
-  public void setDefaultPassword(String defaultPassword) {
+  public void setDefaultPassword(@javax.annotation.Nullable String defaultPassword) {
     this.defaultPassword = defaultPassword;
   }
 
 
-  public ImportUsersRequest dryRun(Boolean dryRun) {
-    
+  public ImportUsersRequest dryRun(@javax.annotation.Nullable Boolean dryRun) {
     this.dryRun = dryRun;
     return this;
   }
 
-   /**
+  /**
    * If true, the API performs a test operation and returns user IDs whose data will be edited after the import.
    * @return dryRun
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getDryRun() {
     return dryRun;
   }
 
-
-  public void setDryRun(Boolean dryRun) {
+  public void setDryRun(@javax.annotation.Nullable Boolean dryRun) {
     this.dryRun = dryRun;
   }
 
 
-  public ImportUsersRequest deleteUnspecifiedUsers(Boolean deleteUnspecifiedUsers) {
-    
+  public ImportUsersRequest deleteUnspecifiedUsers(@javax.annotation.Nullable Boolean deleteUnspecifiedUsers) {
     this.deleteUnspecifiedUsers = deleteUnspecifiedUsers;
     return this;
   }
 
-   /**
+  /**
    * If set to true, removes the users that are not specified in the API request.
    * @return deleteUnspecifiedUsers
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getDeleteUnspecifiedUsers() {
     return deleteUnspecifiedUsers;
   }
 
-
-  public void setDeleteUnspecifiedUsers(Boolean deleteUnspecifiedUsers) {
+  public void setDeleteUnspecifiedUsers(@javax.annotation.Nullable Boolean deleteUnspecifiedUsers) {
     this.deleteUnspecifiedUsers = deleteUnspecifiedUsers;
   }
 
@@ -239,33 +233,34 @@ public class ImportUsersRequest {
     openapiRequiredFields.add("users");
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to ImportUsersRequest
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!ImportUsersRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to ImportUsersRequest
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!ImportUsersRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in ImportUsersRequest is not found in the empty JSON string", ImportUsersRequest.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!ImportUsersRequest.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `ImportUsersRequest` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `ImportUsersRequest` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
       for (String requiredField : ImportUsersRequest.openapiRequiredFields) {
-        if (jsonObj.get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       // ensure the json data is an array
       if (!jsonObj.get("users").isJsonArray()) {
         throw new IllegalArgumentException(String.format("Expected the field `users` to be an array in the JSON string but got `%s`", jsonObj.get("users").toString()));
@@ -274,7 +269,7 @@ public class ImportUsersRequest {
       JsonArray jsonArrayusers = jsonObj.getAsJsonArray("users");
       // validate the required field `users` (array)
       for (int i = 0; i < jsonArrayusers.size(); i++) {
-        ImportUser.validateJsonObject(jsonArrayusers.get(i).getAsJsonObject());
+        ImportUser.validateJsonElement(jsonArrayusers.get(i));
       };
       if ((jsonObj.get("default_password") != null && !jsonObj.get("default_password").isJsonNull()) && !jsonObj.get("default_password").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `default_password` to be a primitive type in the JSON string but got `%s`", jsonObj.get("default_password").toString()));
@@ -301,31 +296,31 @@ public class ImportUsersRequest {
 
            @Override
            public ImportUsersRequest read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of ImportUsersRequest given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of ImportUsersRequest
-  * @throws IOException if the JSON string is invalid with respect to ImportUsersRequest
-  */
+  /**
+   * Create an instance of ImportUsersRequest given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of ImportUsersRequest
+   * @throws IOException if the JSON string is invalid with respect to ImportUsersRequest
+   */
   public static ImportUsersRequest fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, ImportUsersRequest.class);
   }
 
- /**
-  * Convert an instance of ImportUsersRequest to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of ImportUsersRequest to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

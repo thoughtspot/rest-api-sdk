@@ -14,13 +14,13 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.util.Arrays;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
@@ -38,12 +38,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -51,132 +49,127 @@ import org.thoughtspot.client.JSON;
 /**
  * Schedule run response object
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class ResponseScheduleRun {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
+  @javax.annotation.Nonnull
   private String id;
 
   public static final String SERIALIZED_NAME_START_TIME_IN_MILLIS = "start_time_in_millis";
   @SerializedName(SERIALIZED_NAME_START_TIME_IN_MILLIS)
+  @javax.annotation.Nonnull
   private Integer startTimeInMillis;
 
   public static final String SERIALIZED_NAME_END_TIME_IN_MILLIS = "end_time_in_millis";
   @SerializedName(SERIALIZED_NAME_END_TIME_IN_MILLIS)
+  @javax.annotation.Nonnull
   private Integer endTimeInMillis;
 
   public static final String SERIALIZED_NAME_STATUS = "status";
   @SerializedName(SERIALIZED_NAME_STATUS)
+  @javax.annotation.Nonnull
   private String status;
 
   public static final String SERIALIZED_NAME_DETAIL = "detail";
   @SerializedName(SERIALIZED_NAME_DETAIL)
+  @javax.annotation.Nullable
   private String detail;
 
   public ResponseScheduleRun() {
   }
 
-  public ResponseScheduleRun id(String id) {
-    
+  public ResponseScheduleRun id(@javax.annotation.Nonnull String id) {
     this.id = id;
     return this;
   }
 
-   /**
+  /**
    * GUID of the scheduled job.
    * @return id
-  **/
+   */
   @javax.annotation.Nonnull
   public String getId() {
     return id;
   }
 
-
-  public void setId(String id) {
+  public void setId(@javax.annotation.Nonnull String id) {
     this.id = id;
   }
 
 
-  public ResponseScheduleRun startTimeInMillis(Integer startTimeInMillis) {
-    
+  public ResponseScheduleRun startTimeInMillis(@javax.annotation.Nonnull Integer startTimeInMillis) {
     this.startTimeInMillis = startTimeInMillis;
     return this;
   }
 
-   /**
+  /**
    * Schedule run start time in milliseconds.
    * @return startTimeInMillis
-  **/
+   */
   @javax.annotation.Nonnull
   public Integer getStartTimeInMillis() {
     return startTimeInMillis;
   }
 
-
-  public void setStartTimeInMillis(Integer startTimeInMillis) {
+  public void setStartTimeInMillis(@javax.annotation.Nonnull Integer startTimeInMillis) {
     this.startTimeInMillis = startTimeInMillis;
   }
 
 
-  public ResponseScheduleRun endTimeInMillis(Integer endTimeInMillis) {
-    
+  public ResponseScheduleRun endTimeInMillis(@javax.annotation.Nonnull Integer endTimeInMillis) {
     this.endTimeInMillis = endTimeInMillis;
     return this;
   }
 
-   /**
+  /**
    * Schedule run end time in milliseconds.
    * @return endTimeInMillis
-  **/
+   */
   @javax.annotation.Nonnull
   public Integer getEndTimeInMillis() {
     return endTimeInMillis;
   }
 
-
-  public void setEndTimeInMillis(Integer endTimeInMillis) {
+  public void setEndTimeInMillis(@javax.annotation.Nonnull Integer endTimeInMillis) {
     this.endTimeInMillis = endTimeInMillis;
   }
 
 
-  public ResponseScheduleRun status(String status) {
-    
+  public ResponseScheduleRun status(@javax.annotation.Nonnull String status) {
     this.status = status;
     return this;
   }
 
-   /**
+  /**
    * Status of the schedule run.
    * @return status
-  **/
+   */
   @javax.annotation.Nonnull
   public String getStatus() {
     return status;
   }
 
-
-  public void setStatus(String status) {
+  public void setStatus(@javax.annotation.Nonnull String status) {
     this.status = status;
   }
 
 
-  public ResponseScheduleRun detail(String detail) {
-    
+  public ResponseScheduleRun detail(@javax.annotation.Nullable String detail) {
     this.detail = detail;
     return this;
   }
 
-   /**
+  /**
    * Message details related to the schedule run.
    * @return detail
-  **/
+   */
   @javax.annotation.Nullable
   public String getDetail() {
     return detail;
   }
 
-
-  public void setDetail(String detail) {
+  public void setDetail(@javax.annotation.Nullable String detail) {
     this.detail = detail;
   }
 
@@ -259,33 +252,34 @@ public class ResponseScheduleRun {
     openapiRequiredFields.add("status");
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to ResponseScheduleRun
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!ResponseScheduleRun.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to ResponseScheduleRun
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!ResponseScheduleRun.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in ResponseScheduleRun is not found in the empty JSON string", ResponseScheduleRun.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!ResponseScheduleRun.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `ResponseScheduleRun` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `ResponseScheduleRun` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
       for (String requiredField : ResponseScheduleRun.openapiRequiredFields) {
-        if (jsonObj.get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       if (!jsonObj.get("id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("id").toString()));
       }
@@ -317,31 +311,31 @@ public class ResponseScheduleRun {
 
            @Override
            public ResponseScheduleRun read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of ResponseScheduleRun given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of ResponseScheduleRun
-  * @throws IOException if the JSON string is invalid with respect to ResponseScheduleRun
-  */
+  /**
+   * Create an instance of ResponseScheduleRun given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of ResponseScheduleRun
+   * @throws IOException if the JSON string is invalid with respect to ResponseScheduleRun
+   */
   public static ResponseScheduleRun fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, ResponseScheduleRun.class);
   }
 
- /**
-  * Convert an instance of ResponseScheduleRun to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of ResponseScheduleRun to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

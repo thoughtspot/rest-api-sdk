@@ -40,7 +40,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.ws.rs.core.GenericType;
 
 public class SecurityApi {
     private ApiClient localVarApiClient;
@@ -86,7 +85,8 @@ public class SecurityApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Author assignment for given metadata objects is successful. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -157,7 +157,8 @@ public class SecurityApi {
      * @param assignChangeAuthorRequest  (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Author assignment for given metadata objects is successful. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -177,7 +178,8 @@ public class SecurityApi {
      * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Author assignment for given metadata objects is successful. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -199,7 +201,8 @@ public class SecurityApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Author assignment for given metadata objects is successful. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -221,7 +224,8 @@ public class SecurityApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Fetching permissions of principals is successful. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -293,7 +297,8 @@ public class SecurityApi {
      * @return PermissionOfPrincipalsResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Fetching permissions of principals is successful. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -314,7 +319,8 @@ public class SecurityApi {
      * @return ApiResponse&lt;PermissionOfPrincipalsResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Fetching permissions of principals is successful. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -337,7 +343,8 @@ public class SecurityApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Fetching permissions of principals is successful. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -360,7 +367,8 @@ public class SecurityApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Fetching permissions of metadata objects is successful. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -432,7 +440,8 @@ public class SecurityApi {
      * @return PermissionOfMetadataResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Fetching permissions of metadata objects is successful. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -453,7 +462,8 @@ public class SecurityApi {
      * @return ApiResponse&lt;PermissionOfMetadataResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Fetching permissions of metadata objects is successful. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -476,7 +486,8 @@ public class SecurityApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Fetching permissions of metadata objects is successful. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -499,7 +510,8 @@ public class SecurityApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Sharing metadata objects is successful. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -570,7 +582,8 @@ public class SecurityApi {
      * @param shareMetadataRequest  (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Sharing metadata objects is successful. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -590,7 +603,8 @@ public class SecurityApi {
      * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Sharing metadata objects is successful. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -612,7 +626,8 @@ public class SecurityApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Sharing metadata objects is successful. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>

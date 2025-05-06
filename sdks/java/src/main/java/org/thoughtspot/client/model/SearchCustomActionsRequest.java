@@ -14,7 +14,6 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -22,10 +21,11 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
 import org.thoughtspot.client.model.CustomActionMetadataTypeInput;
-import org.thoughtspot.client.model.SearchCustomActionsRequestDefaultActionConfig;
+import org.thoughtspot.client.model.DefaultActionConfigSearchInput;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -42,12 +42,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -55,31 +53,37 @@ import org.thoughtspot.client.JSON;
 /**
  * SearchCustomActionsRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class SearchCustomActionsRequest {
   public static final String SERIALIZED_NAME_CUSTOM_ACTION_IDENTIFIER = "custom_action_identifier";
   @SerializedName(SERIALIZED_NAME_CUSTOM_ACTION_IDENTIFIER)
+  @javax.annotation.Nullable
   private String customActionIdentifier;
 
   public static final String SERIALIZED_NAME_NAME_PATTERN = "name_pattern";
   @SerializedName(SERIALIZED_NAME_NAME_PATTERN)
+  @javax.annotation.Nullable
   private String namePattern;
 
   public static final String SERIALIZED_NAME_DEFAULT_ACTION_CONFIG = "default_action_config";
   @SerializedName(SERIALIZED_NAME_DEFAULT_ACTION_CONFIG)
-  private SearchCustomActionsRequestDefaultActionConfig defaultActionConfig;
+  @javax.annotation.Nullable
+  private DefaultActionConfigSearchInput defaultActionConfig;
 
   public static final String SERIALIZED_NAME_INCLUDE_GROUP_ASSOCIATIONS = "include_group_associations";
   @SerializedName(SERIALIZED_NAME_INCLUDE_GROUP_ASSOCIATIONS)
+  @javax.annotation.Nullable
   private Boolean includeGroupAssociations = false;
 
   public static final String SERIALIZED_NAME_INCLUDE_METADATA_ASSOCIATIONS = "include_metadata_associations";
   @SerializedName(SERIALIZED_NAME_INCLUDE_METADATA_ASSOCIATIONS)
+  @javax.annotation.Nullable
   private Boolean includeMetadataAssociations = false;
 
   public static final String SERIALIZED_NAME_METADATA = "metadata";
   @SerializedName(SERIALIZED_NAME_METADATA)
-  private List<CustomActionMetadataTypeInput> metadata;
+  @javax.annotation.Nullable
+  private List<CustomActionMetadataTypeInput> metadata = new ArrayList<>();
 
   /**
    * Filter the action objects based on type
@@ -126,122 +130,117 @@ public class SearchCustomActionsRequest {
         return TypeEnum.fromValue(value);
       }
     }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      TypeEnum.fromValue(value);
+    }
   }
 
   public static final String SERIALIZED_NAME_TYPE = "type";
   @SerializedName(SERIALIZED_NAME_TYPE)
+  @javax.annotation.Nullable
   private TypeEnum type;
 
   public SearchCustomActionsRequest() {
   }
 
-  public SearchCustomActionsRequest customActionIdentifier(String customActionIdentifier) {
-    
+  public SearchCustomActionsRequest customActionIdentifier(@javax.annotation.Nullable String customActionIdentifier) {
     this.customActionIdentifier = customActionIdentifier;
     return this;
   }
 
-   /**
+  /**
    * Name or ID of the custom action.
    * @return customActionIdentifier
-  **/
+   */
   @javax.annotation.Nullable
   public String getCustomActionIdentifier() {
     return customActionIdentifier;
   }
 
-
-  public void setCustomActionIdentifier(String customActionIdentifier) {
+  public void setCustomActionIdentifier(@javax.annotation.Nullable String customActionIdentifier) {
     this.customActionIdentifier = customActionIdentifier;
   }
 
 
-  public SearchCustomActionsRequest namePattern(String namePattern) {
-    
+  public SearchCustomActionsRequest namePattern(@javax.annotation.Nullable String namePattern) {
     this.namePattern = namePattern;
     return this;
   }
 
-   /**
+  /**
    * A pattern to match case-insensitive name of the custom-action object.
    * @return namePattern
-  **/
+   */
   @javax.annotation.Nullable
   public String getNamePattern() {
     return namePattern;
   }
 
-
-  public void setNamePattern(String namePattern) {
+  public void setNamePattern(@javax.annotation.Nullable String namePattern) {
     this.namePattern = namePattern;
   }
 
 
-  public SearchCustomActionsRequest defaultActionConfig(SearchCustomActionsRequestDefaultActionConfig defaultActionConfig) {
-    
+  public SearchCustomActionsRequest defaultActionConfig(@javax.annotation.Nullable DefaultActionConfigSearchInput defaultActionConfig) {
     this.defaultActionConfig = defaultActionConfig;
     return this;
   }
 
-   /**
-   * Get defaultActionConfig
+  /**
+   * Default Custom action configuration. This includes if the custom action is available on all visualizations. By default, a custom action is added to all visualizations and Answers.
    * @return defaultActionConfig
-  **/
+   */
   @javax.annotation.Nullable
-  public SearchCustomActionsRequestDefaultActionConfig getDefaultActionConfig() {
+  public DefaultActionConfigSearchInput getDefaultActionConfig() {
     return defaultActionConfig;
   }
 
-
-  public void setDefaultActionConfig(SearchCustomActionsRequestDefaultActionConfig defaultActionConfig) {
+  public void setDefaultActionConfig(@javax.annotation.Nullable DefaultActionConfigSearchInput defaultActionConfig) {
     this.defaultActionConfig = defaultActionConfig;
   }
 
 
-  public SearchCustomActionsRequest includeGroupAssociations(Boolean includeGroupAssociations) {
-    
+  public SearchCustomActionsRequest includeGroupAssociations(@javax.annotation.Nullable Boolean includeGroupAssociations) {
     this.includeGroupAssociations = includeGroupAssociations;
     return this;
   }
 
-   /**
+  /**
    * When set to true, returns the associated groups for a custom action.
    * @return includeGroupAssociations
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getIncludeGroupAssociations() {
     return includeGroupAssociations;
   }
 
-
-  public void setIncludeGroupAssociations(Boolean includeGroupAssociations) {
+  public void setIncludeGroupAssociations(@javax.annotation.Nullable Boolean includeGroupAssociations) {
     this.includeGroupAssociations = includeGroupAssociations;
   }
 
 
-  public SearchCustomActionsRequest includeMetadataAssociations(Boolean includeMetadataAssociations) {
-    
+  public SearchCustomActionsRequest includeMetadataAssociations(@javax.annotation.Nullable Boolean includeMetadataAssociations) {
     this.includeMetadataAssociations = includeMetadataAssociations;
     return this;
   }
 
-   /**
+  /**
    * When set to true, returns the associated metadata for a custom action.
    * @return includeMetadataAssociations
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getIncludeMetadataAssociations() {
     return includeMetadataAssociations;
   }
 
-
-  public void setIncludeMetadataAssociations(Boolean includeMetadataAssociations) {
+  public void setIncludeMetadataAssociations(@javax.annotation.Nullable Boolean includeMetadataAssociations) {
     this.includeMetadataAssociations = includeMetadataAssociations;
   }
 
 
-  public SearchCustomActionsRequest metadata(List<CustomActionMetadataTypeInput> metadata) {
-    
+  public SearchCustomActionsRequest metadata(@javax.annotation.Nullable List<CustomActionMetadataTypeInput> metadata) {
     this.metadata = metadata;
     return this;
   }
@@ -254,38 +253,35 @@ public class SearchCustomActionsRequest {
     return this;
   }
 
-   /**
+  /**
    * Search with a given metadata identifier.
    * @return metadata
-  **/
+   */
   @javax.annotation.Nullable
   public List<CustomActionMetadataTypeInput> getMetadata() {
     return metadata;
   }
 
-
-  public void setMetadata(List<CustomActionMetadataTypeInput> metadata) {
+  public void setMetadata(@javax.annotation.Nullable List<CustomActionMetadataTypeInput> metadata) {
     this.metadata = metadata;
   }
 
 
-  public SearchCustomActionsRequest type(TypeEnum type) {
-    
+  public SearchCustomActionsRequest type(@javax.annotation.Nullable TypeEnum type) {
     this.type = type;
     return this;
   }
 
-   /**
+  /**
    * Filter the action objects based on type
    * @return type
-  **/
+   */
   @javax.annotation.Nullable
   public TypeEnum getType() {
     return type;
   }
 
-
-  public void setType(TypeEnum type) {
+  public void setType(@javax.annotation.Nullable TypeEnum type) {
     this.type = type;
   }
 
@@ -370,26 +366,27 @@ public class SearchCustomActionsRequest {
     openapiRequiredFields = new HashSet<String>();
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to SearchCustomActionsRequest
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!SearchCustomActionsRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to SearchCustomActionsRequest
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!SearchCustomActionsRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in SearchCustomActionsRequest is not found in the empty JSON string", SearchCustomActionsRequest.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!SearchCustomActionsRequest.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `SearchCustomActionsRequest` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `SearchCustomActionsRequest` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("custom_action_identifier") != null && !jsonObj.get("custom_action_identifier").isJsonNull()) && !jsonObj.get("custom_action_identifier").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `custom_action_identifier` to be a primitive type in the JSON string but got `%s`", jsonObj.get("custom_action_identifier").toString()));
       }
@@ -398,7 +395,7 @@ public class SearchCustomActionsRequest {
       }
       // validate the optional field `default_action_config`
       if (jsonObj.get("default_action_config") != null && !jsonObj.get("default_action_config").isJsonNull()) {
-        SearchCustomActionsRequestDefaultActionConfig.validateJsonObject(jsonObj.getAsJsonObject("default_action_config"));
+        DefaultActionConfigSearchInput.validateJsonElement(jsonObj.get("default_action_config"));
       }
       if (jsonObj.get("metadata") != null && !jsonObj.get("metadata").isJsonNull()) {
         JsonArray jsonArraymetadata = jsonObj.getAsJsonArray("metadata");
@@ -410,12 +407,16 @@ public class SearchCustomActionsRequest {
 
           // validate the optional field `metadata` (array)
           for (int i = 0; i < jsonArraymetadata.size(); i++) {
-            CustomActionMetadataTypeInput.validateJsonObject(jsonArraymetadata.get(i).getAsJsonObject());
+            CustomActionMetadataTypeInput.validateJsonElement(jsonArraymetadata.get(i));
           };
         }
       }
       if ((jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull()) && !jsonObj.get("type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("type").toString()));
+      }
+      // validate the optional field `type`
+      if (jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull()) {
+        TypeEnum.validateJsonElement(jsonObj.get("type"));
       }
   }
 
@@ -439,31 +440,31 @@ public class SearchCustomActionsRequest {
 
            @Override
            public SearchCustomActionsRequest read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of SearchCustomActionsRequest given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of SearchCustomActionsRequest
-  * @throws IOException if the JSON string is invalid with respect to SearchCustomActionsRequest
-  */
+  /**
+   * Create an instance of SearchCustomActionsRequest given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of SearchCustomActionsRequest
+   * @throws IOException if the JSON string is invalid with respect to SearchCustomActionsRequest
+   */
   public static SearchCustomActionsRequest fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, SearchCustomActionsRequest.class);
   }
 
- /**
-  * Convert an instance of SearchCustomActionsRequest to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of SearchCustomActionsRequest to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

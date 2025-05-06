@@ -14,7 +14,6 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -22,8 +21,9 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import org.thoughtspot.client.model.SearchUserGroupsRequestSortOptions;
+import org.thoughtspot.client.model.SortOptions;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -40,12 +40,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -53,31 +51,37 @@ import org.thoughtspot.client.JSON;
 /**
  * SearchUserGroupsRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class SearchUserGroupsRequest {
   public static final String SERIALIZED_NAME_DEFAULT_LIVEBOARD_IDENTIFIERS = "default_liveboard_identifiers";
   @SerializedName(SERIALIZED_NAME_DEFAULT_LIVEBOARD_IDENTIFIERS)
-  private List<String> defaultLiveboardIdentifiers;
+  @javax.annotation.Nullable
+  private List<String> defaultLiveboardIdentifiers = new ArrayList<>();
 
   public static final String SERIALIZED_NAME_DESCRIPTION = "description";
   @SerializedName(SERIALIZED_NAME_DESCRIPTION)
+  @javax.annotation.Nullable
   private String description;
 
   public static final String SERIALIZED_NAME_DISPLAY_NAME = "display_name";
   @SerializedName(SERIALIZED_NAME_DISPLAY_NAME)
+  @javax.annotation.Nullable
   private String displayName;
 
   public static final String SERIALIZED_NAME_NAME_PATTERN = "name_pattern";
   @SerializedName(SERIALIZED_NAME_NAME_PATTERN)
+  @javax.annotation.Nullable
   private String namePattern;
 
   public static final String SERIALIZED_NAME_GROUP_IDENTIFIER = "group_identifier";
   @SerializedName(SERIALIZED_NAME_GROUP_IDENTIFIER)
+  @javax.annotation.Nullable
   private String groupIdentifier;
 
   public static final String SERIALIZED_NAME_ORG_IDENTIFIERS = "org_identifiers";
   @SerializedName(SERIALIZED_NAME_ORG_IDENTIFIERS)
-  private List<String> orgIdentifiers;
+  @javax.annotation.Nullable
+  private List<String> orgIdentifiers = new ArrayList<>();
 
   /**
    * Gets or Sets privileges
@@ -100,7 +104,7 @@ public class SearchUserGroupsRequest {
     
     JOBSCHEDULING("JOBSCHEDULING"),
     
-    A3ANALYSIS("A3ANALYSIS"),
+    A3_ANALYSIS("A3ANALYSIS"),
     
     EXPERIMENTALFEATUREPRIVILEGE("EXPERIMENTALFEATUREPRIVILEGE"),
     
@@ -192,15 +196,22 @@ public class SearchUserGroupsRequest {
         return PrivilegesEnum.fromValue(value);
       }
     }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      PrivilegesEnum.fromValue(value);
+    }
   }
 
   public static final String SERIALIZED_NAME_PRIVILEGES = "privileges";
   @SerializedName(SERIALIZED_NAME_PRIVILEGES)
-  private List<PrivilegesEnum> privileges;
+  @javax.annotation.Nullable
+  private List<PrivilegesEnum> privileges = new ArrayList<>();
 
   public static final String SERIALIZED_NAME_SUB_GROUP_IDENTIFIERS = "sub_group_identifiers";
   @SerializedName(SERIALIZED_NAME_SUB_GROUP_IDENTIFIERS)
-  private List<String> subGroupIdentifiers;
+  @javax.annotation.Nullable
+  private List<String> subGroupIdentifiers = new ArrayList<>();
 
   /**
    * Group type.
@@ -247,15 +258,22 @@ public class SearchUserGroupsRequest {
         return TypeEnum.fromValue(value);
       }
     }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      TypeEnum.fromValue(value);
+    }
   }
 
   public static final String SERIALIZED_NAME_TYPE = "type";
   @SerializedName(SERIALIZED_NAME_TYPE)
+  @javax.annotation.Nullable
   private TypeEnum type;
 
   public static final String SERIALIZED_NAME_USER_IDENTIFIERS = "user_identifiers";
   @SerializedName(SERIALIZED_NAME_USER_IDENTIFIERS)
-  private List<String> userIdentifiers;
+  @javax.annotation.Nullable
+  private List<String> userIdentifiers = new ArrayList<>();
 
   /**
    * Visibility of the group. To make a group visible to other users and groups, set the visibility to SHAREABLE.
@@ -302,33 +320,42 @@ public class SearchUserGroupsRequest {
         return VisibilityEnum.fromValue(value);
       }
     }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      VisibilityEnum.fromValue(value);
+    }
   }
 
   public static final String SERIALIZED_NAME_VISIBILITY = "visibility";
   @SerializedName(SERIALIZED_NAME_VISIBILITY)
+  @javax.annotation.Nullable
   private VisibilityEnum visibility;
 
   public static final String SERIALIZED_NAME_ROLE_IDENTIFIERS = "role_identifiers";
   @SerializedName(SERIALIZED_NAME_ROLE_IDENTIFIERS)
-  private List<String> roleIdentifiers;
+  @javax.annotation.Nullable
+  private List<String> roleIdentifiers = new ArrayList<>();
 
   public static final String SERIALIZED_NAME_RECORD_OFFSET = "record_offset";
   @SerializedName(SERIALIZED_NAME_RECORD_OFFSET)
+  @javax.annotation.Nullable
   private Integer recordOffset = 0;
 
   public static final String SERIALIZED_NAME_RECORD_SIZE = "record_size";
   @SerializedName(SERIALIZED_NAME_RECORD_SIZE)
+  @javax.annotation.Nullable
   private Integer recordSize = 10;
 
   public static final String SERIALIZED_NAME_SORT_OPTIONS = "sort_options";
   @SerializedName(SERIALIZED_NAME_SORT_OPTIONS)
-  private SearchUserGroupsRequestSortOptions sortOptions;
+  @javax.annotation.Nullable
+  private SortOptions sortOptions;
 
   public SearchUserGroupsRequest() {
   }
 
-  public SearchUserGroupsRequest defaultLiveboardIdentifiers(List<String> defaultLiveboardIdentifiers) {
-    
+  public SearchUserGroupsRequest defaultLiveboardIdentifiers(@javax.annotation.Nullable List<String> defaultLiveboardIdentifiers) {
     this.defaultLiveboardIdentifiers = defaultLiveboardIdentifiers;
     return this;
   }
@@ -341,107 +368,97 @@ public class SearchUserGroupsRequest {
     return this;
   }
 
-   /**
+  /**
    * GUID of Liveboards that are assigned as default Liveboards to the users in the group.
    * @return defaultLiveboardIdentifiers
-  **/
+   */
   @javax.annotation.Nullable
   public List<String> getDefaultLiveboardIdentifiers() {
     return defaultLiveboardIdentifiers;
   }
 
-
-  public void setDefaultLiveboardIdentifiers(List<String> defaultLiveboardIdentifiers) {
+  public void setDefaultLiveboardIdentifiers(@javax.annotation.Nullable List<String> defaultLiveboardIdentifiers) {
     this.defaultLiveboardIdentifiers = defaultLiveboardIdentifiers;
   }
 
 
-  public SearchUserGroupsRequest description(String description) {
-    
+  public SearchUserGroupsRequest description(@javax.annotation.Nullable String description) {
     this.description = description;
     return this;
   }
 
-   /**
+  /**
    * Description of the group
    * @return description
-  **/
+   */
   @javax.annotation.Nullable
   public String getDescription() {
     return description;
   }
 
-
-  public void setDescription(String description) {
+  public void setDescription(@javax.annotation.Nullable String description) {
     this.description = description;
   }
 
 
-  public SearchUserGroupsRequest displayName(String displayName) {
-    
+  public SearchUserGroupsRequest displayName(@javax.annotation.Nullable String displayName) {
     this.displayName = displayName;
     return this;
   }
 
-   /**
+  /**
    * Display name of the group
    * @return displayName
-  **/
+   */
   @javax.annotation.Nullable
   public String getDisplayName() {
     return displayName;
   }
 
-
-  public void setDisplayName(String displayName) {
+  public void setDisplayName(@javax.annotation.Nullable String displayName) {
     this.displayName = displayName;
   }
 
 
-  public SearchUserGroupsRequest namePattern(String namePattern) {
-    
+  public SearchUserGroupsRequest namePattern(@javax.annotation.Nullable String namePattern) {
     this.namePattern = namePattern;
     return this;
   }
 
-   /**
+  /**
    * A pattern to match case-insensitive name of the Group object.
    * @return namePattern
-  **/
+   */
   @javax.annotation.Nullable
   public String getNamePattern() {
     return namePattern;
   }
 
-
-  public void setNamePattern(String namePattern) {
+  public void setNamePattern(@javax.annotation.Nullable String namePattern) {
     this.namePattern = namePattern;
   }
 
 
-  public SearchUserGroupsRequest groupIdentifier(String groupIdentifier) {
-    
+  public SearchUserGroupsRequest groupIdentifier(@javax.annotation.Nullable String groupIdentifier) {
     this.groupIdentifier = groupIdentifier;
     return this;
   }
 
-   /**
+  /**
    * GUID or name of the group
    * @return groupIdentifier
-  **/
+   */
   @javax.annotation.Nullable
   public String getGroupIdentifier() {
     return groupIdentifier;
   }
 
-
-  public void setGroupIdentifier(String groupIdentifier) {
+  public void setGroupIdentifier(@javax.annotation.Nullable String groupIdentifier) {
     this.groupIdentifier = groupIdentifier;
   }
 
 
-  public SearchUserGroupsRequest orgIdentifiers(List<String> orgIdentifiers) {
-    
+  public SearchUserGroupsRequest orgIdentifiers(@javax.annotation.Nullable List<String> orgIdentifiers) {
     this.orgIdentifiers = orgIdentifiers;
     return this;
   }
@@ -454,23 +471,21 @@ public class SearchUserGroupsRequest {
     return this;
   }
 
-   /**
+  /**
    * ID or name of the Org to which the group belongs
    * @return orgIdentifiers
-  **/
+   */
   @javax.annotation.Nullable
   public List<String> getOrgIdentifiers() {
     return orgIdentifiers;
   }
 
-
-  public void setOrgIdentifiers(List<String> orgIdentifiers) {
+  public void setOrgIdentifiers(@javax.annotation.Nullable List<String> orgIdentifiers) {
     this.orgIdentifiers = orgIdentifiers;
   }
 
 
-  public SearchUserGroupsRequest privileges(List<PrivilegesEnum> privileges) {
-    
+  public SearchUserGroupsRequest privileges(@javax.annotation.Nullable List<PrivilegesEnum> privileges) {
     this.privileges = privileges;
     return this;
   }
@@ -483,23 +498,21 @@ public class SearchUserGroupsRequest {
     return this;
   }
 
-   /**
+  /**
    * Privileges assigned to the group.
    * @return privileges
-  **/
+   */
   @javax.annotation.Nullable
   public List<PrivilegesEnum> getPrivileges() {
     return privileges;
   }
 
-
-  public void setPrivileges(List<PrivilegesEnum> privileges) {
+  public void setPrivileges(@javax.annotation.Nullable List<PrivilegesEnum> privileges) {
     this.privileges = privileges;
   }
 
 
-  public SearchUserGroupsRequest subGroupIdentifiers(List<String> subGroupIdentifiers) {
-    
+  public SearchUserGroupsRequest subGroupIdentifiers(@javax.annotation.Nullable List<String> subGroupIdentifiers) {
     this.subGroupIdentifiers = subGroupIdentifiers;
     return this;
   }
@@ -512,44 +525,40 @@ public class SearchUserGroupsRequest {
     return this;
   }
 
-   /**
+  /**
    * GUID or name of the sub groups. A subgroup is a group assigned to a parent group.
    * @return subGroupIdentifiers
-  **/
+   */
   @javax.annotation.Nullable
   public List<String> getSubGroupIdentifiers() {
     return subGroupIdentifiers;
   }
 
-
-  public void setSubGroupIdentifiers(List<String> subGroupIdentifiers) {
+  public void setSubGroupIdentifiers(@javax.annotation.Nullable List<String> subGroupIdentifiers) {
     this.subGroupIdentifiers = subGroupIdentifiers;
   }
 
 
-  public SearchUserGroupsRequest type(TypeEnum type) {
-    
+  public SearchUserGroupsRequest type(@javax.annotation.Nullable TypeEnum type) {
     this.type = type;
     return this;
   }
 
-   /**
+  /**
    * Group type.
    * @return type
-  **/
+   */
   @javax.annotation.Nullable
   public TypeEnum getType() {
     return type;
   }
 
-
-  public void setType(TypeEnum type) {
+  public void setType(@javax.annotation.Nullable TypeEnum type) {
     this.type = type;
   }
 
 
-  public SearchUserGroupsRequest userIdentifiers(List<String> userIdentifiers) {
-    
+  public SearchUserGroupsRequest userIdentifiers(@javax.annotation.Nullable List<String> userIdentifiers) {
     this.userIdentifiers = userIdentifiers;
     return this;
   }
@@ -562,44 +571,40 @@ public class SearchUserGroupsRequest {
     return this;
   }
 
-   /**
+  /**
    * GUID or name of the users assigned to the group.
    * @return userIdentifiers
-  **/
+   */
   @javax.annotation.Nullable
   public List<String> getUserIdentifiers() {
     return userIdentifiers;
   }
 
-
-  public void setUserIdentifiers(List<String> userIdentifiers) {
+  public void setUserIdentifiers(@javax.annotation.Nullable List<String> userIdentifiers) {
     this.userIdentifiers = userIdentifiers;
   }
 
 
-  public SearchUserGroupsRequest visibility(VisibilityEnum visibility) {
-    
+  public SearchUserGroupsRequest visibility(@javax.annotation.Nullable VisibilityEnum visibility) {
     this.visibility = visibility;
     return this;
   }
 
-   /**
+  /**
    * Visibility of the group. To make a group visible to other users and groups, set the visibility to SHAREABLE.
    * @return visibility
-  **/
+   */
   @javax.annotation.Nullable
   public VisibilityEnum getVisibility() {
     return visibility;
   }
 
-
-  public void setVisibility(VisibilityEnum visibility) {
+  public void setVisibility(@javax.annotation.Nullable VisibilityEnum visibility) {
     this.visibility = visibility;
   }
 
 
-  public SearchUserGroupsRequest roleIdentifiers(List<String> roleIdentifiers) {
-    
+  public SearchUserGroupsRequest roleIdentifiers(@javax.annotation.Nullable List<String> roleIdentifiers) {
     this.roleIdentifiers = roleIdentifiers;
     return this;
   }
@@ -612,80 +617,73 @@ public class SearchUserGroupsRequest {
     return this;
   }
 
-   /**
+  /**
    * Filter groups with a list of Roles assigned to a group
    * @return roleIdentifiers
-  **/
+   */
   @javax.annotation.Nullable
   public List<String> getRoleIdentifiers() {
     return roleIdentifiers;
   }
 
-
-  public void setRoleIdentifiers(List<String> roleIdentifiers) {
+  public void setRoleIdentifiers(@javax.annotation.Nullable List<String> roleIdentifiers) {
     this.roleIdentifiers = roleIdentifiers;
   }
 
 
-  public SearchUserGroupsRequest recordOffset(Integer recordOffset) {
-    
+  public SearchUserGroupsRequest recordOffset(@javax.annotation.Nullable Integer recordOffset) {
     this.recordOffset = recordOffset;
     return this;
   }
 
-   /**
+  /**
    * The starting record number from where the records should be included.
    * @return recordOffset
-  **/
+   */
   @javax.annotation.Nullable
   public Integer getRecordOffset() {
     return recordOffset;
   }
 
-
-  public void setRecordOffset(Integer recordOffset) {
+  public void setRecordOffset(@javax.annotation.Nullable Integer recordOffset) {
     this.recordOffset = recordOffset;
   }
 
 
-  public SearchUserGroupsRequest recordSize(Integer recordSize) {
-    
+  public SearchUserGroupsRequest recordSize(@javax.annotation.Nullable Integer recordSize) {
     this.recordSize = recordSize;
     return this;
   }
 
-   /**
+  /**
    * The number of records that should be included.
    * @return recordSize
-  **/
+   */
   @javax.annotation.Nullable
   public Integer getRecordSize() {
     return recordSize;
   }
 
-
-  public void setRecordSize(Integer recordSize) {
+  public void setRecordSize(@javax.annotation.Nullable Integer recordSize) {
     this.recordSize = recordSize;
   }
 
 
-  public SearchUserGroupsRequest sortOptions(SearchUserGroupsRequestSortOptions sortOptions) {
-    
+  public SearchUserGroupsRequest sortOptions(@javax.annotation.Nullable SortOptions sortOptions) {
     this.sortOptions = sortOptions;
     return this;
   }
 
-   /**
-   * Get sortOptions
+  /**
+   * Sort options to filter group details.
    * @return sortOptions
-  **/
+   */
   @javax.annotation.Nullable
-  public SearchUserGroupsRequestSortOptions getSortOptions() {
+  public SortOptions getSortOptions() {
     return sortOptions;
   }
 
-
-  public void setSortOptions(SearchUserGroupsRequestSortOptions sortOptions) {
+  public void setSortOptions(@javax.annotation.Nullable SortOptions sortOptions) {
     this.sortOptions = sortOptions;
   }
 
@@ -783,28 +781,29 @@ public class SearchUserGroupsRequest {
     openapiRequiredFields = new HashSet<String>();
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to SearchUserGroupsRequest
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!SearchUserGroupsRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to SearchUserGroupsRequest
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!SearchUserGroupsRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in SearchUserGroupsRequest is not found in the empty JSON string", SearchUserGroupsRequest.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!SearchUserGroupsRequest.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `SearchUserGroupsRequest` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `SearchUserGroupsRequest` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       // ensure the optional json data is an array if present
-      if (jsonObj.get("default_liveboard_identifiers") != null && !jsonObj.get("default_liveboard_identifiers").isJsonArray()) {
+      if (jsonObj.get("default_liveboard_identifiers") != null && !jsonObj.get("default_liveboard_identifiers").isJsonNull() && !jsonObj.get("default_liveboard_identifiers").isJsonArray()) {
         throw new IllegalArgumentException(String.format("Expected the field `default_liveboard_identifiers` to be an array in the JSON string but got `%s`", jsonObj.get("default_liveboard_identifiers").toString()));
       }
       if ((jsonObj.get("description") != null && !jsonObj.get("description").isJsonNull()) && !jsonObj.get("description").isJsonPrimitive()) {
@@ -820,34 +819,42 @@ public class SearchUserGroupsRequest {
         throw new IllegalArgumentException(String.format("Expected the field `group_identifier` to be a primitive type in the JSON string but got `%s`", jsonObj.get("group_identifier").toString()));
       }
       // ensure the optional json data is an array if present
-      if (jsonObj.get("org_identifiers") != null && !jsonObj.get("org_identifiers").isJsonArray()) {
+      if (jsonObj.get("org_identifiers") != null && !jsonObj.get("org_identifiers").isJsonNull() && !jsonObj.get("org_identifiers").isJsonArray()) {
         throw new IllegalArgumentException(String.format("Expected the field `org_identifiers` to be an array in the JSON string but got `%s`", jsonObj.get("org_identifiers").toString()));
       }
       // ensure the optional json data is an array if present
-      if (jsonObj.get("privileges") != null && !jsonObj.get("privileges").isJsonArray()) {
+      if (jsonObj.get("privileges") != null && !jsonObj.get("privileges").isJsonNull() && !jsonObj.get("privileges").isJsonArray()) {
         throw new IllegalArgumentException(String.format("Expected the field `privileges` to be an array in the JSON string but got `%s`", jsonObj.get("privileges").toString()));
       }
       // ensure the optional json data is an array if present
-      if (jsonObj.get("sub_group_identifiers") != null && !jsonObj.get("sub_group_identifiers").isJsonArray()) {
+      if (jsonObj.get("sub_group_identifiers") != null && !jsonObj.get("sub_group_identifiers").isJsonNull() && !jsonObj.get("sub_group_identifiers").isJsonArray()) {
         throw new IllegalArgumentException(String.format("Expected the field `sub_group_identifiers` to be an array in the JSON string but got `%s`", jsonObj.get("sub_group_identifiers").toString()));
       }
       if ((jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull()) && !jsonObj.get("type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("type").toString()));
       }
+      // validate the optional field `type`
+      if (jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull()) {
+        TypeEnum.validateJsonElement(jsonObj.get("type"));
+      }
       // ensure the optional json data is an array if present
-      if (jsonObj.get("user_identifiers") != null && !jsonObj.get("user_identifiers").isJsonArray()) {
+      if (jsonObj.get("user_identifiers") != null && !jsonObj.get("user_identifiers").isJsonNull() && !jsonObj.get("user_identifiers").isJsonArray()) {
         throw new IllegalArgumentException(String.format("Expected the field `user_identifiers` to be an array in the JSON string but got `%s`", jsonObj.get("user_identifiers").toString()));
       }
       if ((jsonObj.get("visibility") != null && !jsonObj.get("visibility").isJsonNull()) && !jsonObj.get("visibility").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `visibility` to be a primitive type in the JSON string but got `%s`", jsonObj.get("visibility").toString()));
       }
+      // validate the optional field `visibility`
+      if (jsonObj.get("visibility") != null && !jsonObj.get("visibility").isJsonNull()) {
+        VisibilityEnum.validateJsonElement(jsonObj.get("visibility"));
+      }
       // ensure the optional json data is an array if present
-      if (jsonObj.get("role_identifiers") != null && !jsonObj.get("role_identifiers").isJsonArray()) {
+      if (jsonObj.get("role_identifiers") != null && !jsonObj.get("role_identifiers").isJsonNull() && !jsonObj.get("role_identifiers").isJsonArray()) {
         throw new IllegalArgumentException(String.format("Expected the field `role_identifiers` to be an array in the JSON string but got `%s`", jsonObj.get("role_identifiers").toString()));
       }
       // validate the optional field `sort_options`
       if (jsonObj.get("sort_options") != null && !jsonObj.get("sort_options").isJsonNull()) {
-        SearchUserGroupsRequestSortOptions.validateJsonObject(jsonObj.getAsJsonObject("sort_options"));
+        SortOptions.validateJsonElement(jsonObj.get("sort_options"));
       }
   }
 
@@ -871,31 +878,31 @@ public class SearchUserGroupsRequest {
 
            @Override
            public SearchUserGroupsRequest read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of SearchUserGroupsRequest given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of SearchUserGroupsRequest
-  * @throws IOException if the JSON string is invalid with respect to SearchUserGroupsRequest
-  */
+  /**
+   * Create an instance of SearchUserGroupsRequest given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of SearchUserGroupsRequest
+   * @throws IOException if the JSON string is invalid with respect to SearchUserGroupsRequest
+   */
   public static SearchUserGroupsRequest fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, SearchUserGroupsRequest.class);
   }
 
- /**
-  * Convert an instance of SearchUserGroupsRequest to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of SearchUserGroupsRequest to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

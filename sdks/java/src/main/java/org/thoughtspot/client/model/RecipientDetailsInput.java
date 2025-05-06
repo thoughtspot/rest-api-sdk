@@ -14,7 +14,6 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -22,6 +21,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
 import org.thoughtspot.client.model.PrincipalsListItemInput;
@@ -41,12 +41,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -54,21 +52,22 @@ import org.thoughtspot.client.JSON;
 /**
  * Recipients of the scheduled job notification.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class RecipientDetailsInput {
   public static final String SERIALIZED_NAME_EMAILS = "emails";
   @SerializedName(SERIALIZED_NAME_EMAILS)
+  @javax.annotation.Nullable
   private List<String> emails;
 
   public static final String SERIALIZED_NAME_PRINCIPALS = "principals";
   @SerializedName(SERIALIZED_NAME_PRINCIPALS)
+  @javax.annotation.Nullable
   private List<PrincipalsListItemInput> principals;
 
   public RecipientDetailsInput() {
   }
 
-  public RecipientDetailsInput emails(List<String> emails) {
-    
+  public RecipientDetailsInput emails(@javax.annotation.Nullable List<String> emails) {
     this.emails = emails;
     return this;
   }
@@ -81,23 +80,21 @@ public class RecipientDetailsInput {
     return this;
   }
 
-   /**
+  /**
    * Emails of the recipients.
    * @return emails
-  **/
+   */
   @javax.annotation.Nullable
   public List<String> getEmails() {
     return emails;
   }
 
-
-  public void setEmails(List<String> emails) {
+  public void setEmails(@javax.annotation.Nullable List<String> emails) {
     this.emails = emails;
   }
 
 
-  public RecipientDetailsInput principals(List<PrincipalsListItemInput> principals) {
-    
+  public RecipientDetailsInput principals(@javax.annotation.Nullable List<PrincipalsListItemInput> principals) {
     this.principals = principals;
     return this;
   }
@@ -110,17 +107,16 @@ public class RecipientDetailsInput {
     return this;
   }
 
-   /**
+  /**
    * User or groups to be set as recipients of the schedule notifications.
    * @return principals
-  **/
+   */
   @javax.annotation.Nullable
   public List<PrincipalsListItemInput> getPrincipals() {
     return principals;
   }
 
-
-  public void setPrincipals(List<PrincipalsListItemInput> principals) {
+  public void setPrincipals(@javax.annotation.Nullable List<PrincipalsListItemInput> principals) {
     this.principals = principals;
   }
 
@@ -190,28 +186,29 @@ public class RecipientDetailsInput {
     openapiRequiredFields = new HashSet<String>();
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to RecipientDetailsInput
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!RecipientDetailsInput.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to RecipientDetailsInput
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!RecipientDetailsInput.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in RecipientDetailsInput is not found in the empty JSON string", RecipientDetailsInput.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!RecipientDetailsInput.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `RecipientDetailsInput` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `RecipientDetailsInput` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       // ensure the optional json data is an array if present
-      if (jsonObj.get("emails") != null && !jsonObj.get("emails").isJsonArray()) {
+      if (jsonObj.get("emails") != null && !jsonObj.get("emails").isJsonNull() && !jsonObj.get("emails").isJsonArray()) {
         throw new IllegalArgumentException(String.format("Expected the field `emails` to be an array in the JSON string but got `%s`", jsonObj.get("emails").toString()));
       }
       if (jsonObj.get("principals") != null && !jsonObj.get("principals").isJsonNull()) {
@@ -224,7 +221,7 @@ public class RecipientDetailsInput {
 
           // validate the optional field `principals` (array)
           for (int i = 0; i < jsonArrayprincipals.size(); i++) {
-            PrincipalsListItemInput.validateJsonObject(jsonArrayprincipals.get(i).getAsJsonObject());
+            PrincipalsListItemInput.validateJsonElement(jsonArrayprincipals.get(i));
           };
         }
       }
@@ -250,31 +247,31 @@ public class RecipientDetailsInput {
 
            @Override
            public RecipientDetailsInput read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of RecipientDetailsInput given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of RecipientDetailsInput
-  * @throws IOException if the JSON string is invalid with respect to RecipientDetailsInput
-  */
+  /**
+   * Create an instance of RecipientDetailsInput given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of RecipientDetailsInput
+   * @throws IOException if the JSON string is invalid with respect to RecipientDetailsInput
+   */
   public static RecipientDetailsInput fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, RecipientDetailsInput.class);
   }
 
- /**
-  * Convert an instance of RecipientDetailsInput to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of RecipientDetailsInput to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

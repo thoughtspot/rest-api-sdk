@@ -40,7 +40,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.ws.rs.core.GenericType;
 
 public class GroupsApi {
     private ApiClient localVarApiClient;
@@ -86,7 +85,8 @@ public class GroupsApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> User group successfully created. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -158,7 +158,8 @@ public class GroupsApi {
      * @return UserGroupResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> User group successfully created. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -179,7 +180,8 @@ public class GroupsApi {
      * @return ApiResponse&lt;UserGroupResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> User group successfully created. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -202,7 +204,8 @@ public class GroupsApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> User group successfully created. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -225,7 +228,8 @@ public class GroupsApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> User group successfully deleted. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -296,7 +300,8 @@ public class GroupsApi {
      * @param groupIdentifier GUID or name of the group. (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> User group successfully deleted. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -316,7 +321,8 @@ public class GroupsApi {
      * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> User group successfully deleted. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -338,7 +344,8 @@ public class GroupsApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> User group successfully deleted. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -360,7 +367,8 @@ public class GroupsApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Import user groups operation successful. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -432,7 +440,8 @@ public class GroupsApi {
      * @return ImportUserGroupsResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Import user groups operation successful. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -453,7 +462,8 @@ public class GroupsApi {
      * @return ApiResponse&lt;ImportUserGroupsResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Import user groups operation successful. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -476,7 +486,8 @@ public class GroupsApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Import user groups operation successful. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -499,7 +510,8 @@ public class GroupsApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> User group search result. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -571,7 +583,8 @@ public class GroupsApi {
      * @return List&lt;UserGroupResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> User group search result. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -592,7 +605,8 @@ public class GroupsApi {
      * @return ApiResponse&lt;List&lt;UserGroupResponse&gt;&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> User group search result. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -615,7 +629,8 @@ public class GroupsApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> User group search result. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -639,7 +654,8 @@ public class GroupsApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> User group successfully updated. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -717,7 +733,8 @@ public class GroupsApi {
      * @param updateUserGroupRequest  (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> User group successfully updated. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -738,7 +755,8 @@ public class GroupsApi {
      * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> User group successfully updated. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
@@ -761,7 +779,8 @@ public class GroupsApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
-     <table summary="Response Details" border="1">
+     <table border="1">
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> User group successfully updated. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>

@@ -24,15 +24,15 @@ export class ImportMetadataTMLAsyncRequest {
     /**
     * If import is happening from all orgs context.
     */
-    'all_orgs_context'?: boolean | null;
-    /**
-    * Boolean to indicate if the CDW validation for table imports should be skipped.
-    */
-    'skip_cdw_validation_for_tables'?: boolean | null;
+    'all_orgs_override'?: boolean | null;
     /**
     * <div>Version: 10.5.0.cl or later </div>  Policy to be followed while importing the TML. Valid values are [PARTIAL_OBJECT, PARTIAL, VALIDATE_ONLY, ALL_OR_NONE]
     */
     'import_policy'?: ImportMetadataTMLAsyncRequestImportPolicyEnum;
+    /**
+    * <div>Version: 10.6.0.cl or later </div>  Boolean Flag to skip TML diff check before processing object TMLs.
+    */
+    'skip_diff_check'?: boolean | null;
     /**
     * <div>Version: 10.5.0.cl or later </div>  Boolean to indicate if the large metadata validation should be enabled.
     */
@@ -54,14 +54,8 @@ export class ImportMetadataTMLAsyncRequest {
             "format": ""
         },
         {
-            "name": "all_orgs_context",
-            "baseName": "all_orgs_context",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "skip_cdw_validation_for_tables",
-            "baseName": "skip_cdw_validation_for_tables",
+            "name": "all_orgs_override",
+            "baseName": "all_orgs_override",
             "type": "boolean",
             "format": ""
         },
@@ -69,6 +63,12 @@ export class ImportMetadataTMLAsyncRequest {
             "name": "import_policy",
             "baseName": "import_policy",
             "type": "ImportMetadataTMLAsyncRequestImportPolicyEnum",
+            "format": ""
+        },
+        {
+            "name": "skip_diff_check",
+            "baseName": "skip_diff_check",
+            "type": "boolean",
             "format": ""
         },
         {

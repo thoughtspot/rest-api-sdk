@@ -14,7 +14,6 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -22,6 +21,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.thoughtspot.client.model.PermissionsMetadataTypeInput;
 import org.thoughtspot.client.model.PrincipalsInput;
@@ -41,12 +41,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -54,22 +52,26 @@ import org.thoughtspot.client.JSON;
 /**
  * FetchPermissionsOfPrincipalsRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class FetchPermissionsOfPrincipalsRequest {
   public static final String SERIALIZED_NAME_PRINCIPALS = "principals";
   @SerializedName(SERIALIZED_NAME_PRINCIPALS)
+  @javax.annotation.Nonnull
   private List<PrincipalsInput> principals = new ArrayList<>();
 
   public static final String SERIALIZED_NAME_METADATA = "metadata";
   @SerializedName(SERIALIZED_NAME_METADATA)
-  private List<PermissionsMetadataTypeInput> metadata;
+  @javax.annotation.Nullable
+  private List<PermissionsMetadataTypeInput> metadata = new ArrayList<>();
 
   public static final String SERIALIZED_NAME_RECORD_OFFSET = "record_offset";
   @SerializedName(SERIALIZED_NAME_RECORD_OFFSET)
+  @javax.annotation.Nullable
   private Integer recordOffset = 0;
 
   public static final String SERIALIZED_NAME_RECORD_SIZE = "record_size";
   @SerializedName(SERIALIZED_NAME_RECORD_SIZE)
+  @javax.annotation.Nullable
   private Integer recordSize = -1;
 
   /**
@@ -125,17 +127,22 @@ public class FetchPermissionsOfPrincipalsRequest {
         return DefaultMetadataTypeEnum.fromValue(value);
       }
     }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      DefaultMetadataTypeEnum.fromValue(value);
+    }
   }
 
   public static final String SERIALIZED_NAME_DEFAULT_METADATA_TYPE = "default_metadata_type";
   @SerializedName(SERIALIZED_NAME_DEFAULT_METADATA_TYPE)
+  @javax.annotation.Nullable
   private DefaultMetadataTypeEnum defaultMetadataType;
 
   public FetchPermissionsOfPrincipalsRequest() {
   }
 
-  public FetchPermissionsOfPrincipalsRequest principals(List<PrincipalsInput> principals) {
-    
+  public FetchPermissionsOfPrincipalsRequest principals(@javax.annotation.Nonnull List<PrincipalsInput> principals) {
     this.principals = principals;
     return this;
   }
@@ -148,23 +155,21 @@ public class FetchPermissionsOfPrincipalsRequest {
     return this;
   }
 
-   /**
+  /**
    * GUID or name of the user or group.
    * @return principals
-  **/
+   */
   @javax.annotation.Nonnull
   public List<PrincipalsInput> getPrincipals() {
     return principals;
   }
 
-
-  public void setPrincipals(List<PrincipalsInput> principals) {
+  public void setPrincipals(@javax.annotation.Nonnull List<PrincipalsInput> principals) {
     this.principals = principals;
   }
 
 
-  public FetchPermissionsOfPrincipalsRequest metadata(List<PermissionsMetadataTypeInput> metadata) {
-    
+  public FetchPermissionsOfPrincipalsRequest metadata(@javax.annotation.Nullable List<PermissionsMetadataTypeInput> metadata) {
     this.metadata = metadata;
     return this;
   }
@@ -177,80 +182,73 @@ public class FetchPermissionsOfPrincipalsRequest {
     return this;
   }
 
-   /**
+  /**
    * Metadata objects for which you want to fetch permission details. If not specified, the API returns permission details for all metadata objects that the specified users and groups can access.
    * @return metadata
-  **/
+   */
   @javax.annotation.Nullable
   public List<PermissionsMetadataTypeInput> getMetadata() {
     return metadata;
   }
 
-
-  public void setMetadata(List<PermissionsMetadataTypeInput> metadata) {
+  public void setMetadata(@javax.annotation.Nullable List<PermissionsMetadataTypeInput> metadata) {
     this.metadata = metadata;
   }
 
 
-  public FetchPermissionsOfPrincipalsRequest recordOffset(Integer recordOffset) {
-    
+  public FetchPermissionsOfPrincipalsRequest recordOffset(@javax.annotation.Nullable Integer recordOffset) {
     this.recordOffset = recordOffset;
     return this;
   }
 
-   /**
+  /**
    * The starting record number from where the records should be included for each metadata type.
    * @return recordOffset
-  **/
+   */
   @javax.annotation.Nullable
   public Integer getRecordOffset() {
     return recordOffset;
   }
 
-
-  public void setRecordOffset(Integer recordOffset) {
+  public void setRecordOffset(@javax.annotation.Nullable Integer recordOffset) {
     this.recordOffset = recordOffset;
   }
 
 
-  public FetchPermissionsOfPrincipalsRequest recordSize(Integer recordSize) {
-    
+  public FetchPermissionsOfPrincipalsRequest recordSize(@javax.annotation.Nullable Integer recordSize) {
     this.recordSize = recordSize;
     return this;
   }
 
-   /**
+  /**
    * The number of records that should be included for each metadata type.
    * @return recordSize
-  **/
+   */
   @javax.annotation.Nullable
   public Integer getRecordSize() {
     return recordSize;
   }
 
-
-  public void setRecordSize(Integer recordSize) {
+  public void setRecordSize(@javax.annotation.Nullable Integer recordSize) {
     this.recordSize = recordSize;
   }
 
 
-  public FetchPermissionsOfPrincipalsRequest defaultMetadataType(DefaultMetadataTypeEnum defaultMetadataType) {
-    
+  public FetchPermissionsOfPrincipalsRequest defaultMetadataType(@javax.annotation.Nullable DefaultMetadataTypeEnum defaultMetadataType) {
     this.defaultMetadataType = defaultMetadataType;
     return this;
   }
 
-   /**
+  /**
    * When no metadata objects input is passed, metadata objects of this type are fetched.
    * @return defaultMetadataType
-  **/
+   */
   @javax.annotation.Nullable
   public DefaultMetadataTypeEnum getDefaultMetadataType() {
     return defaultMetadataType;
   }
 
-
-  public void setDefaultMetadataType(DefaultMetadataTypeEnum defaultMetadataType) {
+  public void setDefaultMetadataType(@javax.annotation.Nullable DefaultMetadataTypeEnum defaultMetadataType) {
     this.defaultMetadataType = defaultMetadataType;
   }
 
@@ -319,33 +317,34 @@ public class FetchPermissionsOfPrincipalsRequest {
     openapiRequiredFields.add("principals");
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to FetchPermissionsOfPrincipalsRequest
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!FetchPermissionsOfPrincipalsRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to FetchPermissionsOfPrincipalsRequest
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!FetchPermissionsOfPrincipalsRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in FetchPermissionsOfPrincipalsRequest is not found in the empty JSON string", FetchPermissionsOfPrincipalsRequest.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!FetchPermissionsOfPrincipalsRequest.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `FetchPermissionsOfPrincipalsRequest` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `FetchPermissionsOfPrincipalsRequest` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
       for (String requiredField : FetchPermissionsOfPrincipalsRequest.openapiRequiredFields) {
-        if (jsonObj.get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       // ensure the json data is an array
       if (!jsonObj.get("principals").isJsonArray()) {
         throw new IllegalArgumentException(String.format("Expected the field `principals` to be an array in the JSON string but got `%s`", jsonObj.get("principals").toString()));
@@ -354,7 +353,7 @@ public class FetchPermissionsOfPrincipalsRequest {
       JsonArray jsonArrayprincipals = jsonObj.getAsJsonArray("principals");
       // validate the required field `principals` (array)
       for (int i = 0; i < jsonArrayprincipals.size(); i++) {
-        PrincipalsInput.validateJsonObject(jsonArrayprincipals.get(i).getAsJsonObject());
+        PrincipalsInput.validateJsonElement(jsonArrayprincipals.get(i));
       };
       if (jsonObj.get("metadata") != null && !jsonObj.get("metadata").isJsonNull()) {
         JsonArray jsonArraymetadata = jsonObj.getAsJsonArray("metadata");
@@ -366,12 +365,16 @@ public class FetchPermissionsOfPrincipalsRequest {
 
           // validate the optional field `metadata` (array)
           for (int i = 0; i < jsonArraymetadata.size(); i++) {
-            PermissionsMetadataTypeInput.validateJsonObject(jsonArraymetadata.get(i).getAsJsonObject());
+            PermissionsMetadataTypeInput.validateJsonElement(jsonArraymetadata.get(i));
           };
         }
       }
       if ((jsonObj.get("default_metadata_type") != null && !jsonObj.get("default_metadata_type").isJsonNull()) && !jsonObj.get("default_metadata_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `default_metadata_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("default_metadata_type").toString()));
+      }
+      // validate the optional field `default_metadata_type`
+      if (jsonObj.get("default_metadata_type") != null && !jsonObj.get("default_metadata_type").isJsonNull()) {
+        DefaultMetadataTypeEnum.validateJsonElement(jsonObj.get("default_metadata_type"));
       }
   }
 
@@ -395,31 +398,31 @@ public class FetchPermissionsOfPrincipalsRequest {
 
            @Override
            public FetchPermissionsOfPrincipalsRequest read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of FetchPermissionsOfPrincipalsRequest given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of FetchPermissionsOfPrincipalsRequest
-  * @throws IOException if the JSON string is invalid with respect to FetchPermissionsOfPrincipalsRequest
-  */
+  /**
+   * Create an instance of FetchPermissionsOfPrincipalsRequest given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of FetchPermissionsOfPrincipalsRequest
+   * @throws IOException if the JSON string is invalid with respect to FetchPermissionsOfPrincipalsRequest
+   */
   public static FetchPermissionsOfPrincipalsRequest fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, FetchPermissionsOfPrincipalsRequest.class);
   }
 
- /**
-  * Convert an instance of FetchPermissionsOfPrincipalsRequest to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of FetchPermissionsOfPrincipalsRequest to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

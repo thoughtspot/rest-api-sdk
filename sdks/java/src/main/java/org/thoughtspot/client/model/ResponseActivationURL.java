@@ -14,13 +14,13 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.util.Arrays;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
@@ -38,12 +38,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -51,32 +49,31 @@ import org.thoughtspot.client.JSON;
 /**
  * The object representation with activation link.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class ResponseActivationURL {
   public static final String SERIALIZED_NAME_ACTIVATION_LINK = "activation_link";
   @SerializedName(SERIALIZED_NAME_ACTIVATION_LINK)
+  @javax.annotation.Nullable
   private String activationLink;
 
   public ResponseActivationURL() {
   }
 
-  public ResponseActivationURL activationLink(String activationLink) {
-    
+  public ResponseActivationURL activationLink(@javax.annotation.Nullable String activationLink) {
     this.activationLink = activationLink;
     return this;
   }
 
-   /**
+  /**
    * Activation link to activate the user.
    * @return activationLink
-  **/
+   */
   @javax.annotation.Nullable
   public String getActivationLink() {
     return activationLink;
   }
 
-
-  public void setActivationLink(String activationLink) {
+  public void setActivationLink(@javax.annotation.Nullable String activationLink) {
     this.activationLink = activationLink;
   }
 
@@ -143,26 +140,27 @@ public class ResponseActivationURL {
     openapiRequiredFields = new HashSet<String>();
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to ResponseActivationURL
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!ResponseActivationURL.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to ResponseActivationURL
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!ResponseActivationURL.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in ResponseActivationURL is not found in the empty JSON string", ResponseActivationURL.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!ResponseActivationURL.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `ResponseActivationURL` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `ResponseActivationURL` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("activation_link") != null && !jsonObj.get("activation_link").isJsonNull()) && !jsonObj.get("activation_link").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `activation_link` to be a primitive type in the JSON string but got `%s`", jsonObj.get("activation_link").toString()));
       }
@@ -188,31 +186,31 @@ public class ResponseActivationURL {
 
            @Override
            public ResponseActivationURL read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of ResponseActivationURL given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of ResponseActivationURL
-  * @throws IOException if the JSON string is invalid with respect to ResponseActivationURL
-  */
+  /**
+   * Create an instance of ResponseActivationURL given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of ResponseActivationURL
+   * @throws IOException if the JSON string is invalid with respect to ResponseActivationURL
+   */
   public static ResponseActivationURL fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, ResponseActivationURL.class);
   }
 
- /**
-  * Convert an instance of ResponseActivationURL to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of ResponseActivationURL to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

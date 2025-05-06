@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { GetObjectAccessTokenRequestUserParameters } from '../models/GetObjectAccessTokenRequestUserParameters';
+import { GetFullAccessTokenRequestUserParameters } from '../models/GetFullAccessTokenRequestUserParameters';
 import { HttpFile } from '../http/http';
 
 export class GetFullAccessTokenRequest {
@@ -50,7 +50,7 @@ export class GetFullAccessTokenRequest {
     * ID or name of the groups to which the newly created user belongs. Use this parameter to provision a user just-in-time (JIT).
     */
     'group_identifiers'?: Array<string>;
-    'user_parameters'?: GetObjectAccessTokenRequestUserParameters;
+    'user_parameters'?: GetFullAccessTokenRequestUserParameters;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -112,7 +112,7 @@ export class GetFullAccessTokenRequest {
         {
             "name": "user_parameters",
             "baseName": "user_parameters",
-            "type": "GetObjectAccessTokenRequestUserParameters",
+            "type": "GetFullAccessTokenRequestUserParameters",
             "format": ""
         }    ];
 

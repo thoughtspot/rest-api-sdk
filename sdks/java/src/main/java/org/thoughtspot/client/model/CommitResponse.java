@@ -14,7 +14,6 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -22,6 +21,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
 import org.thoughtspot.client.model.AuthorType;
@@ -43,12 +43,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -56,167 +54,161 @@ import org.thoughtspot.client.JSON;
 /**
  * CommitResponse
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class CommitResponse {
   public static final String SERIALIZED_NAME_COMMITTER = "committer";
   @SerializedName(SERIALIZED_NAME_COMMITTER)
+  @javax.annotation.Nullable
   private CommiterType committer;
 
   public static final String SERIALIZED_NAME_AUTHOR = "author";
   @SerializedName(SERIALIZED_NAME_AUTHOR)
+  @javax.annotation.Nullable
   private AuthorType author;
 
   public static final String SERIALIZED_NAME_COMMENT = "comment";
   @SerializedName(SERIALIZED_NAME_COMMENT)
+  @javax.annotation.Nullable
   private String comment;
 
   public static final String SERIALIZED_NAME_COMMIT_TIME = "commit_time";
   @SerializedName(SERIALIZED_NAME_COMMIT_TIME)
+  @javax.annotation.Nullable
   private String commitTime;
 
   public static final String SERIALIZED_NAME_COMMIT_ID = "commit_id";
   @SerializedName(SERIALIZED_NAME_COMMIT_ID)
+  @javax.annotation.Nullable
   private String commitId;
 
   public static final String SERIALIZED_NAME_BRANCH = "branch";
   @SerializedName(SERIALIZED_NAME_BRANCH)
+  @javax.annotation.Nullable
   private String branch;
 
   public static final String SERIALIZED_NAME_COMMITTED_FILES = "committed_files";
   @SerializedName(SERIALIZED_NAME_COMMITTED_FILES)
+  @javax.annotation.Nullable
   private List<CommitFileType> committedFiles;
 
   public CommitResponse() {
   }
 
-  public CommitResponse committer(CommiterType committer) {
-    
+  public CommitResponse committer(@javax.annotation.Nullable CommiterType committer) {
     this.committer = committer;
     return this;
   }
 
-   /**
+  /**
    * Get committer
    * @return committer
-  **/
+   */
   @javax.annotation.Nullable
   public CommiterType getCommitter() {
     return committer;
   }
 
-
-  public void setCommitter(CommiterType committer) {
+  public void setCommitter(@javax.annotation.Nullable CommiterType committer) {
     this.committer = committer;
   }
 
 
-  public CommitResponse author(AuthorType author) {
-    
+  public CommitResponse author(@javax.annotation.Nullable AuthorType author) {
     this.author = author;
     return this;
   }
 
-   /**
+  /**
    * Get author
    * @return author
-  **/
+   */
   @javax.annotation.Nullable
   public AuthorType getAuthor() {
     return author;
   }
 
-
-  public void setAuthor(AuthorType author) {
+  public void setAuthor(@javax.annotation.Nullable AuthorType author) {
     this.author = author;
   }
 
 
-  public CommitResponse comment(String comment) {
-    
+  public CommitResponse comment(@javax.annotation.Nullable String comment) {
     this.comment = comment;
     return this;
   }
 
-   /**
+  /**
    * Comments associated with the commit
    * @return comment
-  **/
+   */
   @javax.annotation.Nullable
   public String getComment() {
     return comment;
   }
 
-
-  public void setComment(String comment) {
+  public void setComment(@javax.annotation.Nullable String comment) {
     this.comment = comment;
   }
 
 
-  public CommitResponse commitTime(String commitTime) {
-    
+  public CommitResponse commitTime(@javax.annotation.Nullable String commitTime) {
     this.commitTime = commitTime;
     return this;
   }
 
-   /**
+  /**
    * Time at which the changes were committed.
    * @return commitTime
-  **/
+   */
   @javax.annotation.Nullable
   public String getCommitTime() {
     return commitTime;
   }
 
-
-  public void setCommitTime(String commitTime) {
+  public void setCommitTime(@javax.annotation.Nullable String commitTime) {
     this.commitTime = commitTime;
   }
 
 
-  public CommitResponse commitId(String commitId) {
-    
+  public CommitResponse commitId(@javax.annotation.Nullable String commitId) {
     this.commitId = commitId;
     return this;
   }
 
-   /**
+  /**
    * SHA id associated with the commit
    * @return commitId
-  **/
+   */
   @javax.annotation.Nullable
   public String getCommitId() {
     return commitId;
   }
 
-
-  public void setCommitId(String commitId) {
+  public void setCommitId(@javax.annotation.Nullable String commitId) {
     this.commitId = commitId;
   }
 
 
-  public CommitResponse branch(String branch) {
-    
+  public CommitResponse branch(@javax.annotation.Nullable String branch) {
     this.branch = branch;
     return this;
   }
 
-   /**
+  /**
    * Branch where changes were committed
    * @return branch
-  **/
+   */
   @javax.annotation.Nullable
   public String getBranch() {
     return branch;
   }
 
-
-  public void setBranch(String branch) {
+  public void setBranch(@javax.annotation.Nullable String branch) {
     this.branch = branch;
   }
 
 
-  public CommitResponse committedFiles(List<CommitFileType> committedFiles) {
-    
+  public CommitResponse committedFiles(@javax.annotation.Nullable List<CommitFileType> committedFiles) {
     this.committedFiles = committedFiles;
     return this;
   }
@@ -229,17 +221,16 @@ public class CommitResponse {
     return this;
   }
 
-   /**
+  /**
    * Files that were pushed as part of this commit
    * @return committedFiles
-  **/
+   */
   @javax.annotation.Nullable
   public List<CommitFileType> getCommittedFiles() {
     return committedFiles;
   }
 
-
-  public void setCommittedFiles(List<CommitFileType> committedFiles) {
+  public void setCommittedFiles(@javax.annotation.Nullable List<CommitFileType> committedFiles) {
     this.committedFiles = committedFiles;
   }
 
@@ -324,33 +315,34 @@ public class CommitResponse {
     openapiRequiredFields = new HashSet<String>();
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to CommitResponse
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!CommitResponse.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to CommitResponse
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!CommitResponse.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in CommitResponse is not found in the empty JSON string", CommitResponse.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!CommitResponse.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `CommitResponse` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `CommitResponse` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       // validate the optional field `committer`
       if (jsonObj.get("committer") != null && !jsonObj.get("committer").isJsonNull()) {
-        CommiterType.validateJsonObject(jsonObj.getAsJsonObject("committer"));
+        CommiterType.validateJsonElement(jsonObj.get("committer"));
       }
       // validate the optional field `author`
       if (jsonObj.get("author") != null && !jsonObj.get("author").isJsonNull()) {
-        AuthorType.validateJsonObject(jsonObj.getAsJsonObject("author"));
+        AuthorType.validateJsonElement(jsonObj.get("author"));
       }
       if ((jsonObj.get("comment") != null && !jsonObj.get("comment").isJsonNull()) && !jsonObj.get("comment").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `comment` to be a primitive type in the JSON string but got `%s`", jsonObj.get("comment").toString()));
@@ -374,7 +366,7 @@ public class CommitResponse {
 
           // validate the optional field `committed_files` (array)
           for (int i = 0; i < jsonArraycommittedFiles.size(); i++) {
-            CommitFileType.validateJsonObject(jsonArraycommittedFiles.get(i).getAsJsonObject());
+            CommitFileType.validateJsonElement(jsonArraycommittedFiles.get(i));
           };
         }
       }
@@ -400,31 +392,31 @@ public class CommitResponse {
 
            @Override
            public CommitResponse read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of CommitResponse given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of CommitResponse
-  * @throws IOException if the JSON string is invalid with respect to CommitResponse
-  */
+  /**
+   * Create an instance of CommitResponse given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of CommitResponse
+   * @throws IOException if the JSON string is invalid with respect to CommitResponse
+   */
   public static CommitResponse fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, CommitResponse.class);
   }
 
- /**
-  * Convert an instance of CommitResponse to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of CommitResponse to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

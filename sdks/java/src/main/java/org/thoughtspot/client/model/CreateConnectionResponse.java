@@ -14,13 +14,13 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.util.Arrays;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
@@ -38,12 +38,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -51,14 +49,16 @@ import org.thoughtspot.client.JSON;
 /**
  * CreateConnectionResponse
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class CreateConnectionResponse {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
+  @javax.annotation.Nonnull
   private String id;
 
   public static final String SERIALIZED_NAME_NAME = "name";
   @SerializedName(SERIALIZED_NAME_NAME)
+  @javax.annotation.Nonnull
   private String name;
 
   /**
@@ -166,99 +166,98 @@ public class CreateConnectionResponse {
         return DataWarehouseTypeEnum.fromValue(value);
       }
     }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      DataWarehouseTypeEnum.fromValue(value);
+    }
   }
 
   public static final String SERIALIZED_NAME_DATA_WAREHOUSE_TYPE = "data_warehouse_type";
   @SerializedName(SERIALIZED_NAME_DATA_WAREHOUSE_TYPE)
+  @javax.annotation.Nonnull
   private DataWarehouseTypeEnum dataWarehouseType;
 
   public static final String SERIALIZED_NAME_DETAILS = "details";
   @SerializedName(SERIALIZED_NAME_DETAILS)
+  @javax.annotation.Nullable
   private Object details;
 
   public CreateConnectionResponse() {
   }
 
-  public CreateConnectionResponse id(String id) {
-    
+  public CreateConnectionResponse id(@javax.annotation.Nonnull String id) {
     this.id = id;
     return this;
   }
 
-   /**
+  /**
    * ID of the connection created.
    * @return id
-  **/
+   */
   @javax.annotation.Nonnull
   public String getId() {
     return id;
   }
 
-
-  public void setId(String id) {
+  public void setId(@javax.annotation.Nonnull String id) {
     this.id = id;
   }
 
 
-  public CreateConnectionResponse name(String name) {
-    
+  public CreateConnectionResponse name(@javax.annotation.Nonnull String name) {
     this.name = name;
     return this;
   }
 
-   /**
+  /**
    * Name of the connection.
    * @return name
-  **/
+   */
   @javax.annotation.Nonnull
   public String getName() {
     return name;
   }
 
-
-  public void setName(String name) {
+  public void setName(@javax.annotation.Nonnull String name) {
     this.name = name;
   }
 
 
-  public CreateConnectionResponse dataWarehouseType(DataWarehouseTypeEnum dataWarehouseType) {
-    
+  public CreateConnectionResponse dataWarehouseType(@javax.annotation.Nonnull DataWarehouseTypeEnum dataWarehouseType) {
     this.dataWarehouseType = dataWarehouseType;
     return this;
   }
 
-   /**
+  /**
    * Type of data warehouse.
    * @return dataWarehouseType
-  **/
+   */
   @javax.annotation.Nonnull
   public DataWarehouseTypeEnum getDataWarehouseType() {
     return dataWarehouseType;
   }
 
-
-  public void setDataWarehouseType(DataWarehouseTypeEnum dataWarehouseType) {
+  public void setDataWarehouseType(@javax.annotation.Nonnull DataWarehouseTypeEnum dataWarehouseType) {
     this.dataWarehouseType = dataWarehouseType;
   }
 
 
-  public CreateConnectionResponse details(Object details) {
-    
+  public CreateConnectionResponse details(@javax.annotation.Nullable Object details) {
     this.details = details;
     return this;
   }
 
-   /**
+  /**
    * Details of the connection.
    * @return details
-  **/
+   */
   @javax.annotation.Nullable
   public Object getDetails() {
     return details;
   }
 
-
-  public void setDetails(Object details) {
+  public void setDetails(@javax.annotation.Nullable Object details) {
     this.details = details;
   }
 
@@ -337,33 +336,34 @@ public class CreateConnectionResponse {
     openapiRequiredFields.add("data_warehouse_type");
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to CreateConnectionResponse
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!CreateConnectionResponse.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to CreateConnectionResponse
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!CreateConnectionResponse.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in CreateConnectionResponse is not found in the empty JSON string", CreateConnectionResponse.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!CreateConnectionResponse.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `CreateConnectionResponse` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `CreateConnectionResponse` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
       for (String requiredField : CreateConnectionResponse.openapiRequiredFields) {
-        if (jsonObj.get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       if (!jsonObj.get("id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("id").toString()));
       }
@@ -373,6 +373,8 @@ public class CreateConnectionResponse {
       if (!jsonObj.get("data_warehouse_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `data_warehouse_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("data_warehouse_type").toString()));
       }
+      // validate the required field `data_warehouse_type`
+      DataWarehouseTypeEnum.validateJsonElement(jsonObj.get("data_warehouse_type"));
   }
 
   public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
@@ -395,31 +397,31 @@ public class CreateConnectionResponse {
 
            @Override
            public CreateConnectionResponse read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of CreateConnectionResponse given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of CreateConnectionResponse
-  * @throws IOException if the JSON string is invalid with respect to CreateConnectionResponse
-  */
+  /**
+   * Create an instance of CreateConnectionResponse given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of CreateConnectionResponse
+   * @throws IOException if the JSON string is invalid with respect to CreateConnectionResponse
+   */
   public static CreateConnectionResponse fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, CreateConnectionResponse.class);
   }
 
- /**
-  * Convert an instance of CreateConnectionResponse to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of CreateConnectionResponse to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

@@ -23,7 +23,7 @@ export class ParameterValues {
     /**
     * The values to filter on. Only single value is supported currently.
     */
-    'values': Array<string>;
+    'values': Array<any>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -37,7 +37,7 @@ export class ParameterValues {
         {
             "name": "values",
             "baseName": "values",
-            "type": "Array<string>",
+            "type": "Array<any>",
             "format": ""
         }    ];
 

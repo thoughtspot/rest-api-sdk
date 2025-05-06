@@ -14,7 +14,6 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -22,6 +21,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.google.gson.Gson;
@@ -39,12 +39,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -52,14 +50,16 @@ import org.thoughtspot.client.JSON;
 /**
  * SearchOrgsRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class SearchOrgsRequest {
   public static final String SERIALIZED_NAME_ORG_IDENTIFIER = "org_identifier";
   @SerializedName(SERIALIZED_NAME_ORG_IDENTIFIER)
+  @javax.annotation.Nullable
   private String orgIdentifier;
 
   public static final String SERIALIZED_NAME_DESCRIPTION = "description";
   @SerializedName(SERIALIZED_NAME_DESCRIPTION)
+  @javax.annotation.Nullable
   private String description;
 
   /**
@@ -107,10 +107,16 @@ public class SearchOrgsRequest {
         return VisibilityEnum.fromValue(value);
       }
     }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      VisibilityEnum.fromValue(value);
+    }
   }
 
   public static final String SERIALIZED_NAME_VISIBILITY = "visibility";
   @SerializedName(SERIALIZED_NAME_VISIBILITY)
+  @javax.annotation.Nullable
   private VisibilityEnum visibility;
 
   /**
@@ -158,105 +164,103 @@ public class SearchOrgsRequest {
         return StatusEnum.fromValue(value);
       }
     }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      StatusEnum.fromValue(value);
+    }
   }
 
   public static final String SERIALIZED_NAME_STATUS = "status";
   @SerializedName(SERIALIZED_NAME_STATUS)
+  @javax.annotation.Nullable
   private StatusEnum status;
 
   public static final String SERIALIZED_NAME_USER_IDENTIFIERS = "user_identifiers";
   @SerializedName(SERIALIZED_NAME_USER_IDENTIFIERS)
-  private List<String> userIdentifiers;
+  @javax.annotation.Nullable
+  private List<String> userIdentifiers = new ArrayList<>();
 
   public SearchOrgsRequest() {
   }
 
-  public SearchOrgsRequest orgIdentifier(String orgIdentifier) {
-    
+  public SearchOrgsRequest orgIdentifier(@javax.annotation.Nullable String orgIdentifier) {
     this.orgIdentifier = orgIdentifier;
     return this;
   }
 
-   /**
+  /**
    * ID or name of the Org
    * @return orgIdentifier
-  **/
+   */
   @javax.annotation.Nullable
   public String getOrgIdentifier() {
     return orgIdentifier;
   }
 
-
-  public void setOrgIdentifier(String orgIdentifier) {
+  public void setOrgIdentifier(@javax.annotation.Nullable String orgIdentifier) {
     this.orgIdentifier = orgIdentifier;
   }
 
 
-  public SearchOrgsRequest description(String description) {
-    
+  public SearchOrgsRequest description(@javax.annotation.Nullable String description) {
     this.description = description;
     return this;
   }
 
-   /**
+  /**
    * Description of the Org
    * @return description
-  **/
+   */
   @javax.annotation.Nullable
   public String getDescription() {
     return description;
   }
 
-
-  public void setDescription(String description) {
+  public void setDescription(@javax.annotation.Nullable String description) {
     this.description = description;
   }
 
 
-  public SearchOrgsRequest visibility(VisibilityEnum visibility) {
-    
+  public SearchOrgsRequest visibility(@javax.annotation.Nullable VisibilityEnum visibility) {
     this.visibility = visibility;
     return this;
   }
 
-   /**
+  /**
    * Visibility of the Org
    * @return visibility
-  **/
+   */
   @javax.annotation.Nullable
   public VisibilityEnum getVisibility() {
     return visibility;
   }
 
-
-  public void setVisibility(VisibilityEnum visibility) {
+  public void setVisibility(@javax.annotation.Nullable VisibilityEnum visibility) {
     this.visibility = visibility;
   }
 
 
-  public SearchOrgsRequest status(StatusEnum status) {
-    
+  public SearchOrgsRequest status(@javax.annotation.Nullable StatusEnum status) {
     this.status = status;
     return this;
   }
 
-   /**
+  /**
    * Status of the Org
    * @return status
-  **/
+   */
   @javax.annotation.Nullable
   public StatusEnum getStatus() {
     return status;
   }
 
-
-  public void setStatus(StatusEnum status) {
+  public void setStatus(@javax.annotation.Nullable StatusEnum status) {
     this.status = status;
   }
 
 
-  public SearchOrgsRequest userIdentifiers(List<String> userIdentifiers) {
-    
+  public SearchOrgsRequest userIdentifiers(@javax.annotation.Nullable List<String> userIdentifiers) {
     this.userIdentifiers = userIdentifiers;
     return this;
   }
@@ -269,17 +273,16 @@ public class SearchOrgsRequest {
     return this;
   }
 
-   /**
+  /**
    * GUIDs or names of the users for which you want to retrieve the Orgs data
    * @return userIdentifiers
-  **/
+   */
   @javax.annotation.Nullable
   public List<String> getUserIdentifiers() {
     return userIdentifiers;
   }
 
-
-  public void setUserIdentifiers(List<String> userIdentifiers) {
+  public void setUserIdentifiers(@javax.annotation.Nullable List<String> userIdentifiers) {
     this.userIdentifiers = userIdentifiers;
   }
 
@@ -347,26 +350,27 @@ public class SearchOrgsRequest {
     openapiRequiredFields = new HashSet<String>();
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to SearchOrgsRequest
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!SearchOrgsRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to SearchOrgsRequest
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!SearchOrgsRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in SearchOrgsRequest is not found in the empty JSON string", SearchOrgsRequest.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!SearchOrgsRequest.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `SearchOrgsRequest` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `SearchOrgsRequest` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("org_identifier") != null && !jsonObj.get("org_identifier").isJsonNull()) && !jsonObj.get("org_identifier").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `org_identifier` to be a primitive type in the JSON string but got `%s`", jsonObj.get("org_identifier").toString()));
       }
@@ -376,11 +380,19 @@ public class SearchOrgsRequest {
       if ((jsonObj.get("visibility") != null && !jsonObj.get("visibility").isJsonNull()) && !jsonObj.get("visibility").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `visibility` to be a primitive type in the JSON string but got `%s`", jsonObj.get("visibility").toString()));
       }
+      // validate the optional field `visibility`
+      if (jsonObj.get("visibility") != null && !jsonObj.get("visibility").isJsonNull()) {
+        VisibilityEnum.validateJsonElement(jsonObj.get("visibility"));
+      }
       if ((jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull()) && !jsonObj.get("status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("status").toString()));
       }
+      // validate the optional field `status`
+      if (jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull()) {
+        StatusEnum.validateJsonElement(jsonObj.get("status"));
+      }
       // ensure the optional json data is an array if present
-      if (jsonObj.get("user_identifiers") != null && !jsonObj.get("user_identifiers").isJsonArray()) {
+      if (jsonObj.get("user_identifiers") != null && !jsonObj.get("user_identifiers").isJsonNull() && !jsonObj.get("user_identifiers").isJsonArray()) {
         throw new IllegalArgumentException(String.format("Expected the field `user_identifiers` to be an array in the JSON string but got `%s`", jsonObj.get("user_identifiers").toString()));
       }
   }
@@ -405,31 +417,31 @@ public class SearchOrgsRequest {
 
            @Override
            public SearchOrgsRequest read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of SearchOrgsRequest given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of SearchOrgsRequest
-  * @throws IOException if the JSON string is invalid with respect to SearchOrgsRequest
-  */
+  /**
+   * Create an instance of SearchOrgsRequest given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of SearchOrgsRequest
+   * @throws IOException if the JSON string is invalid with respect to SearchOrgsRequest
+   */
   public static SearchOrgsRequest fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, SearchOrgsRequest.class);
   }
 
- /**
-  * Convert an instance of SearchOrgsRequest to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of SearchOrgsRequest to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

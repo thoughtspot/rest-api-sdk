@@ -33,6 +33,10 @@ export class ResponseMessage {
     * Tokens for the response.
     */
     'tokens'?: string | null;
+    /**
+    * User friendly tokens for the response.
+    */
+    'display_tokens'?: string | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -64,6 +68,12 @@ export class ResponseMessage {
         {
             "name": "tokens",
             "baseName": "tokens",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "display_tokens",
+            "baseName": "display_tokens",
             "type": "string",
             "format": ""
         }    ];

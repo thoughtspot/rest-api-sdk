@@ -14,7 +14,6 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -22,6 +21,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
 import org.thoughtspot.client.model.FavoriteMetadataItem;
@@ -43,12 +43,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -56,18 +54,21 @@ import org.thoughtspot.client.JSON;
 /**
  * User
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class User {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
+  @javax.annotation.Nonnull
   private String id;
 
   public static final String SERIALIZED_NAME_NAME = "name";
   @SerializedName(SERIALIZED_NAME_NAME)
+  @javax.annotation.Nonnull
   private String name;
 
   public static final String SERIALIZED_NAME_DISPLAY_NAME = "display_name";
   @SerializedName(SERIALIZED_NAME_DISPLAY_NAME)
+  @javax.annotation.Nonnull
   private String displayName;
 
   /**
@@ -115,38 +116,51 @@ public class User {
         return VisibilityEnum.fromValue(value);
       }
     }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      VisibilityEnum.fromValue(value);
+    }
   }
 
   public static final String SERIALIZED_NAME_VISIBILITY = "visibility";
   @SerializedName(SERIALIZED_NAME_VISIBILITY)
+  @javax.annotation.Nonnull
   private VisibilityEnum visibility;
 
   public static final String SERIALIZED_NAME_AUTHOR_ID = "author_id";
   @SerializedName(SERIALIZED_NAME_AUTHOR_ID)
+  @javax.annotation.Nullable
   private String authorId;
 
   public static final String SERIALIZED_NAME_CAN_CHANGE_PASSWORD = "can_change_password";
   @SerializedName(SERIALIZED_NAME_CAN_CHANGE_PASSWORD)
+  @javax.annotation.Nullable
   private Boolean canChangePassword;
 
   public static final String SERIALIZED_NAME_COMPLETE_DETAIL = "complete_detail";
   @SerializedName(SERIALIZED_NAME_COMPLETE_DETAIL)
+  @javax.annotation.Nullable
   private Boolean completeDetail;
 
   public static final String SERIALIZED_NAME_CREATION_TIME_IN_MILLIS = "creation_time_in_millis";
   @SerializedName(SERIALIZED_NAME_CREATION_TIME_IN_MILLIS)
+  @javax.annotation.Nullable
   private Float creationTimeInMillis;
 
   public static final String SERIALIZED_NAME_CURRENT_ORG = "current_org";
   @SerializedName(SERIALIZED_NAME_CURRENT_ORG)
+  @javax.annotation.Nullable
   private Org currentOrg;
 
   public static final String SERIALIZED_NAME_DELETED = "deleted";
   @SerializedName(SERIALIZED_NAME_DELETED)
+  @javax.annotation.Nullable
   private Boolean deleted;
 
   public static final String SERIALIZED_NAME_DEPRECATED = "deprecated";
   @SerializedName(SERIALIZED_NAME_DEPRECATED)
+  @javax.annotation.Nullable
   private Boolean deprecated;
 
   /**
@@ -200,10 +214,16 @@ public class User {
         return AccountTypeEnum.fromValue(value);
       }
     }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      AccountTypeEnum.fromValue(value);
+    }
   }
 
   public static final String SERIALIZED_NAME_ACCOUNT_TYPE = "account_type";
   @SerializedName(SERIALIZED_NAME_ACCOUNT_TYPE)
+  @javax.annotation.Nullable
   private AccountTypeEnum accountType;
 
   /**
@@ -259,74 +279,96 @@ public class User {
         return AccountStatusEnum.fromValue(value);
       }
     }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      AccountStatusEnum.fromValue(value);
+    }
   }
 
   public static final String SERIALIZED_NAME_ACCOUNT_STATUS = "account_status";
   @SerializedName(SERIALIZED_NAME_ACCOUNT_STATUS)
+  @javax.annotation.Nullable
   private AccountStatusEnum accountStatus;
 
   public static final String SERIALIZED_NAME_EMAIL = "email";
   @SerializedName(SERIALIZED_NAME_EMAIL)
+  @javax.annotation.Nullable
   private String email;
 
   public static final String SERIALIZED_NAME_EXPIRATION_TIME_IN_MILLIS = "expiration_time_in_millis";
   @SerializedName(SERIALIZED_NAME_EXPIRATION_TIME_IN_MILLIS)
+  @javax.annotation.Nullable
   private Float expirationTimeInMillis;
 
   public static final String SERIALIZED_NAME_EXTERNAL = "external";
   @SerializedName(SERIALIZED_NAME_EXTERNAL)
+  @javax.annotation.Nullable
   private Boolean external;
 
   public static final String SERIALIZED_NAME_FAVORITE_METADATA = "favorite_metadata";
   @SerializedName(SERIALIZED_NAME_FAVORITE_METADATA)
+  @javax.annotation.Nullable
   private List<FavoriteMetadataItem> favoriteMetadata;
 
   public static final String SERIALIZED_NAME_FIRST_LOGIN_TIME_IN_MILLIS = "first_login_time_in_millis";
   @SerializedName(SERIALIZED_NAME_FIRST_LOGIN_TIME_IN_MILLIS)
+  @javax.annotation.Nullable
   private Float firstLoginTimeInMillis;
 
   public static final String SERIALIZED_NAME_GROUP_MASK = "group_mask";
   @SerializedName(SERIALIZED_NAME_GROUP_MASK)
+  @javax.annotation.Nullable
   private Integer groupMask;
 
   public static final String SERIALIZED_NAME_HIDDEN = "hidden";
   @SerializedName(SERIALIZED_NAME_HIDDEN)
+  @javax.annotation.Nullable
   private Boolean hidden;
 
   public static final String SERIALIZED_NAME_HOME_LIVEBOARD = "home_liveboard";
   @SerializedName(SERIALIZED_NAME_HOME_LIVEBOARD)
+  @javax.annotation.Nullable
   private ObjectIDAndName homeLiveboard;
 
   public static final String SERIALIZED_NAME_INCOMPLETE_DETAILS = "incomplete_details";
   @SerializedName(SERIALIZED_NAME_INCOMPLETE_DETAILS)
+  @javax.annotation.Nullable
   private Object incompleteDetails;
 
   public static final String SERIALIZED_NAME_IS_FIRST_LOGIN = "is_first_login";
   @SerializedName(SERIALIZED_NAME_IS_FIRST_LOGIN)
+  @javax.annotation.Nullable
   private Boolean isFirstLogin;
 
   public static final String SERIALIZED_NAME_MODIFICATION_TIME_IN_MILLIS = "modification_time_in_millis";
   @SerializedName(SERIALIZED_NAME_MODIFICATION_TIME_IN_MILLIS)
+  @javax.annotation.Nullable
   private Float modificationTimeInMillis;
 
   public static final String SERIALIZED_NAME_MODIFIER_ID = "modifier_id";
   @SerializedName(SERIALIZED_NAME_MODIFIER_ID)
+  @javax.annotation.Nullable
   private String modifierId;
 
   public static final String SERIALIZED_NAME_NOTIFY_ON_SHARE = "notify_on_share";
   @SerializedName(SERIALIZED_NAME_NOTIFY_ON_SHARE)
+  @javax.annotation.Nullable
   private Boolean notifyOnShare;
 
   public static final String SERIALIZED_NAME_ONBOARDING_EXPERIENCE_COMPLETED = "onboarding_experience_completed";
   @SerializedName(SERIALIZED_NAME_ONBOARDING_EXPERIENCE_COMPLETED)
+  @javax.annotation.Nullable
   private Boolean onboardingExperienceCompleted;
 
   public static final String SERIALIZED_NAME_ORGS = "orgs";
   @SerializedName(SERIALIZED_NAME_ORGS)
+  @javax.annotation.Nullable
   private List<Org> orgs;
 
   public static final String SERIALIZED_NAME_OWNER_ID = "owner_id";
   @SerializedName(SERIALIZED_NAME_OWNER_ID)
+  @javax.annotation.Nullable
   private String ownerId;
 
   /**
@@ -374,413 +416,401 @@ public class User {
         return ParentTypeEnum.fromValue(value);
       }
     }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      ParentTypeEnum.fromValue(value);
+    }
   }
 
   public static final String SERIALIZED_NAME_PARENT_TYPE = "parent_type";
   @SerializedName(SERIALIZED_NAME_PARENT_TYPE)
+  @javax.annotation.Nullable
   private ParentTypeEnum parentType;
 
   public static final String SERIALIZED_NAME_PRIVILEGES = "privileges";
   @SerializedName(SERIALIZED_NAME_PRIVILEGES)
+  @javax.annotation.Nullable
   private List<String> privileges;
 
   public static final String SERIALIZED_NAME_SHOW_ONBOARDING_EXPERIENCE = "show_onboarding_experience";
   @SerializedName(SERIALIZED_NAME_SHOW_ONBOARDING_EXPERIENCE)
+  @javax.annotation.Nullable
   private Boolean showOnboardingExperience;
 
   public static final String SERIALIZED_NAME_SUPER_USER = "super_user";
   @SerializedName(SERIALIZED_NAME_SUPER_USER)
+  @javax.annotation.Nullable
   private Boolean superUser;
 
   public static final String SERIALIZED_NAME_SYSTEM_USER = "system_user";
   @SerializedName(SERIALIZED_NAME_SYSTEM_USER)
+  @javax.annotation.Nullable
   private Boolean systemUser;
 
   public static final String SERIALIZED_NAME_TAGS = "tags";
   @SerializedName(SERIALIZED_NAME_TAGS)
+  @javax.annotation.Nullable
   private List<ObjectIDAndName> tags;
 
   public static final String SERIALIZED_NAME_TENANT_ID = "tenant_id";
   @SerializedName(SERIALIZED_NAME_TENANT_ID)
+  @javax.annotation.Nullable
   private String tenantId;
 
   public static final String SERIALIZED_NAME_USER_GROUPS = "user_groups";
   @SerializedName(SERIALIZED_NAME_USER_GROUPS)
+  @javax.annotation.Nullable
   private List<ObjectIDAndName> userGroups;
 
   public static final String SERIALIZED_NAME_USER_INHERITED_GROUPS = "user_inherited_groups";
   @SerializedName(SERIALIZED_NAME_USER_INHERITED_GROUPS)
+  @javax.annotation.Nullable
   private List<ObjectIDAndName> userInheritedGroups;
 
   public static final String SERIALIZED_NAME_WELCOME_EMAIL_SENT = "welcome_email_sent";
   @SerializedName(SERIALIZED_NAME_WELCOME_EMAIL_SENT)
+  @javax.annotation.Nullable
   private Boolean welcomeEmailSent;
 
   public static final String SERIALIZED_NAME_ORG_PRIVILEGES = "org_privileges";
   @SerializedName(SERIALIZED_NAME_ORG_PRIVILEGES)
+  @javax.annotation.Nullable
   private Object orgPrivileges;
 
   public static final String SERIALIZED_NAME_PREFERRED_LOCALE = "preferred_locale";
   @SerializedName(SERIALIZED_NAME_PREFERRED_LOCALE)
+  @javax.annotation.Nullable
   private String preferredLocale;
 
   public static final String SERIALIZED_NAME_EXTENDED_PROPERTIES = "extended_properties";
   @SerializedName(SERIALIZED_NAME_EXTENDED_PROPERTIES)
+  @javax.annotation.Nullable
   private Object extendedProperties;
 
   public static final String SERIALIZED_NAME_EXTENDED_PREFERENCES = "extended_preferences";
   @SerializedName(SERIALIZED_NAME_EXTENDED_PREFERENCES)
+  @javax.annotation.Nullable
   private Object extendedPreferences;
 
   public static final String SERIALIZED_NAME_USER_PARAMETERS = "user_parameters";
   @SerializedName(SERIALIZED_NAME_USER_PARAMETERS)
+  @javax.annotation.Nullable
   private Object userParameters;
 
   public static final String SERIALIZED_NAME_ACCESS_CONTROL_PROPERTIES = "access_control_properties";
   @SerializedName(SERIALIZED_NAME_ACCESS_CONTROL_PROPERTIES)
+  @javax.annotation.Nullable
   private Object accessControlProperties;
 
   public User() {
   }
 
-  public User id(String id) {
-    
+  public User id(@javax.annotation.Nonnull String id) {
     this.id = id;
     return this;
   }
 
-   /**
+  /**
    * Unique identifier of the user.
    * @return id
-  **/
+   */
   @javax.annotation.Nonnull
   public String getId() {
     return id;
   }
 
-
-  public void setId(String id) {
+  public void setId(@javax.annotation.Nonnull String id) {
     this.id = id;
   }
 
 
-  public User name(String name) {
-    
+  public User name(@javax.annotation.Nonnull String name) {
     this.name = name;
     return this;
   }
 
-   /**
+  /**
    * Name of the user.
    * @return name
-  **/
+   */
   @javax.annotation.Nonnull
   public String getName() {
     return name;
   }
 
-
-  public void setName(String name) {
+  public void setName(@javax.annotation.Nonnull String name) {
     this.name = name;
   }
 
 
-  public User displayName(String displayName) {
-    
+  public User displayName(@javax.annotation.Nonnull String displayName) {
     this.displayName = displayName;
     return this;
   }
 
-   /**
+  /**
    * Display name of the user.
    * @return displayName
-  **/
+   */
   @javax.annotation.Nonnull
   public String getDisplayName() {
     return displayName;
   }
 
-
-  public void setDisplayName(String displayName) {
+  public void setDisplayName(@javax.annotation.Nonnull String displayName) {
     this.displayName = displayName;
   }
 
 
-  public User visibility(VisibilityEnum visibility) {
-    
+  public User visibility(@javax.annotation.Nonnull VisibilityEnum visibility) {
     this.visibility = visibility;
     return this;
   }
 
-   /**
+  /**
    * Visibility of the users. The &#x60;SHARABLE&#x60; property makes a user visible to other users and group, who can share objects with the user.
    * @return visibility
-  **/
+   */
   @javax.annotation.Nonnull
   public VisibilityEnum getVisibility() {
     return visibility;
   }
 
-
-  public void setVisibility(VisibilityEnum visibility) {
+  public void setVisibility(@javax.annotation.Nonnull VisibilityEnum visibility) {
     this.visibility = visibility;
   }
 
 
-  public User authorId(String authorId) {
-    
+  public User authorId(@javax.annotation.Nullable String authorId) {
     this.authorId = authorId;
     return this;
   }
 
-   /**
+  /**
    * Unique identifier of author of the user.
    * @return authorId
-  **/
+   */
   @javax.annotation.Nullable
   public String getAuthorId() {
     return authorId;
   }
 
-
-  public void setAuthorId(String authorId) {
+  public void setAuthorId(@javax.annotation.Nullable String authorId) {
     this.authorId = authorId;
   }
 
 
-  public User canChangePassword(Boolean canChangePassword) {
-    
+  public User canChangePassword(@javax.annotation.Nullable Boolean canChangePassword) {
     this.canChangePassword = canChangePassword;
     return this;
   }
 
-   /**
+  /**
    * Defines whether the user can change their password.
    * @return canChangePassword
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getCanChangePassword() {
     return canChangePassword;
   }
 
-
-  public void setCanChangePassword(Boolean canChangePassword) {
+  public void setCanChangePassword(@javax.annotation.Nullable Boolean canChangePassword) {
     this.canChangePassword = canChangePassword;
   }
 
 
-  public User completeDetail(Boolean completeDetail) {
-    
+  public User completeDetail(@javax.annotation.Nullable Boolean completeDetail) {
     this.completeDetail = completeDetail;
     return this;
   }
 
-   /**
+  /**
    * Defines whether the response has complete detail of the user.
    * @return completeDetail
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getCompleteDetail() {
     return completeDetail;
   }
 
-
-  public void setCompleteDetail(Boolean completeDetail) {
+  public void setCompleteDetail(@javax.annotation.Nullable Boolean completeDetail) {
     this.completeDetail = completeDetail;
   }
 
 
-  public User creationTimeInMillis(Float creationTimeInMillis) {
-    
+  public User creationTimeInMillis(@javax.annotation.Nullable Float creationTimeInMillis) {
     this.creationTimeInMillis = creationTimeInMillis;
     return this;
   }
 
-   /**
+  /**
    * Creation time of the user in milliseconds.
    * @return creationTimeInMillis
-  **/
+   */
   @javax.annotation.Nullable
   public Float getCreationTimeInMillis() {
     return creationTimeInMillis;
   }
 
-
-  public void setCreationTimeInMillis(Float creationTimeInMillis) {
+  public void setCreationTimeInMillis(@javax.annotation.Nullable Float creationTimeInMillis) {
     this.creationTimeInMillis = creationTimeInMillis;
   }
 
 
-  public User currentOrg(Org currentOrg) {
-    
+  public User currentOrg(@javax.annotation.Nullable Org currentOrg) {
     this.currentOrg = currentOrg;
     return this;
   }
 
-   /**
+  /**
    * Get currentOrg
    * @return currentOrg
-  **/
+   */
   @javax.annotation.Nullable
   public Org getCurrentOrg() {
     return currentOrg;
   }
 
-
-  public void setCurrentOrg(Org currentOrg) {
+  public void setCurrentOrg(@javax.annotation.Nullable Org currentOrg) {
     this.currentOrg = currentOrg;
   }
 
 
-  public User deleted(Boolean deleted) {
-    
+  public User deleted(@javax.annotation.Nullable Boolean deleted) {
     this.deleted = deleted;
     return this;
   }
 
-   /**
+  /**
    * Indicates whether the user is deleted.
    * @return deleted
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getDeleted() {
     return deleted;
   }
 
-
-  public void setDeleted(Boolean deleted) {
+  public void setDeleted(@javax.annotation.Nullable Boolean deleted) {
     this.deleted = deleted;
   }
 
 
-  public User deprecated(Boolean deprecated) {
-    
+  public User deprecated(@javax.annotation.Nullable Boolean deprecated) {
     this.deprecated = deprecated;
     return this;
   }
 
-   /**
+  /**
    * Indicates whether the user is deprecated.
    * @return deprecated
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getDeprecated() {
     return deprecated;
   }
 
-
-  public void setDeprecated(Boolean deprecated) {
+  public void setDeprecated(@javax.annotation.Nullable Boolean deprecated) {
     this.deprecated = deprecated;
   }
 
 
-  public User accountType(AccountTypeEnum accountType) {
-    
+  public User accountType(@javax.annotation.Nullable AccountTypeEnum accountType) {
     this.accountType = accountType;
     return this;
   }
 
-   /**
+  /**
    * Type of the user account.
    * @return accountType
-  **/
+   */
   @javax.annotation.Nullable
   public AccountTypeEnum getAccountType() {
     return accountType;
   }
 
-
-  public void setAccountType(AccountTypeEnum accountType) {
+  public void setAccountType(@javax.annotation.Nullable AccountTypeEnum accountType) {
     this.accountType = accountType;
   }
 
 
-  public User accountStatus(AccountStatusEnum accountStatus) {
-    
+  public User accountStatus(@javax.annotation.Nullable AccountStatusEnum accountStatus) {
     this.accountStatus = accountStatus;
     return this;
   }
 
-   /**
+  /**
    * Status of the user account.
    * @return accountStatus
-  **/
+   */
   @javax.annotation.Nullable
   public AccountStatusEnum getAccountStatus() {
     return accountStatus;
   }
 
-
-  public void setAccountStatus(AccountStatusEnum accountStatus) {
+  public void setAccountStatus(@javax.annotation.Nullable AccountStatusEnum accountStatus) {
     this.accountStatus = accountStatus;
   }
 
 
-  public User email(String email) {
-    
+  public User email(@javax.annotation.Nullable String email) {
     this.email = email;
     return this;
   }
 
-   /**
+  /**
    * Email of the user.
    * @return email
-  **/
+   */
   @javax.annotation.Nullable
   public String getEmail() {
     return email;
   }
 
-
-  public void setEmail(String email) {
+  public void setEmail(@javax.annotation.Nullable String email) {
     this.email = email;
   }
 
 
-  public User expirationTimeInMillis(Float expirationTimeInMillis) {
-    
+  public User expirationTimeInMillis(@javax.annotation.Nullable Float expirationTimeInMillis) {
     this.expirationTimeInMillis = expirationTimeInMillis;
     return this;
   }
 
-   /**
+  /**
    * Expiration time of the user in milliseconds.
    * @return expirationTimeInMillis
-  **/
+   */
   @javax.annotation.Nullable
   public Float getExpirationTimeInMillis() {
     return expirationTimeInMillis;
   }
 
-
-  public void setExpirationTimeInMillis(Float expirationTimeInMillis) {
+  public void setExpirationTimeInMillis(@javax.annotation.Nullable Float expirationTimeInMillis) {
     this.expirationTimeInMillis = expirationTimeInMillis;
   }
 
 
-  public User external(Boolean external) {
-    
+  public User external(@javax.annotation.Nullable Boolean external) {
     this.external = external;
     return this;
   }
 
-   /**
+  /**
    * Indicates whether the user is external.
    * @return external
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getExternal() {
     return external;
   }
 
-
-  public void setExternal(Boolean external) {
+  public void setExternal(@javax.annotation.Nullable Boolean external) {
     this.external = external;
   }
 
 
-  public User favoriteMetadata(List<FavoriteMetadataItem> favoriteMetadata) {
-    
+  public User favoriteMetadata(@javax.annotation.Nullable List<FavoriteMetadataItem> favoriteMetadata) {
     this.favoriteMetadata = favoriteMetadata;
     return this;
   }
@@ -793,233 +823,211 @@ public class User {
     return this;
   }
 
-   /**
+  /**
    * Metadata objects to add to the users&#39; favorites list.
    * @return favoriteMetadata
-  **/
+   */
   @javax.annotation.Nullable
   public List<FavoriteMetadataItem> getFavoriteMetadata() {
     return favoriteMetadata;
   }
 
-
-  public void setFavoriteMetadata(List<FavoriteMetadataItem> favoriteMetadata) {
+  public void setFavoriteMetadata(@javax.annotation.Nullable List<FavoriteMetadataItem> favoriteMetadata) {
     this.favoriteMetadata = favoriteMetadata;
   }
 
 
-  public User firstLoginTimeInMillis(Float firstLoginTimeInMillis) {
-    
+  public User firstLoginTimeInMillis(@javax.annotation.Nullable Float firstLoginTimeInMillis) {
     this.firstLoginTimeInMillis = firstLoginTimeInMillis;
     return this;
   }
 
-   /**
+  /**
    * Timestamp of the first login session of the user in milliseconds.
    * @return firstLoginTimeInMillis
-  **/
+   */
   @javax.annotation.Nullable
   public Float getFirstLoginTimeInMillis() {
     return firstLoginTimeInMillis;
   }
 
-
-  public void setFirstLoginTimeInMillis(Float firstLoginTimeInMillis) {
+  public void setFirstLoginTimeInMillis(@javax.annotation.Nullable Float firstLoginTimeInMillis) {
     this.firstLoginTimeInMillis = firstLoginTimeInMillis;
   }
 
 
-  public User groupMask(Integer groupMask) {
-    
+  public User groupMask(@javax.annotation.Nullable Integer groupMask) {
     this.groupMask = groupMask;
     return this;
   }
 
-   /**
+  /**
    * Group mask of the user.
    * @return groupMask
-  **/
+   */
   @javax.annotation.Nullable
   public Integer getGroupMask() {
     return groupMask;
   }
 
-
-  public void setGroupMask(Integer groupMask) {
+  public void setGroupMask(@javax.annotation.Nullable Integer groupMask) {
     this.groupMask = groupMask;
   }
 
 
-  public User hidden(Boolean hidden) {
-    
+  public User hidden(@javax.annotation.Nullable Boolean hidden) {
     this.hidden = hidden;
     return this;
   }
 
-   /**
+  /**
    * Indicates whether the user is hidden.
    * @return hidden
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getHidden() {
     return hidden;
   }
 
-
-  public void setHidden(Boolean hidden) {
+  public void setHidden(@javax.annotation.Nullable Boolean hidden) {
     this.hidden = hidden;
   }
 
 
-  public User homeLiveboard(ObjectIDAndName homeLiveboard) {
-    
+  public User homeLiveboard(@javax.annotation.Nullable ObjectIDAndName homeLiveboard) {
     this.homeLiveboard = homeLiveboard;
     return this;
   }
 
-   /**
+  /**
    * Get homeLiveboard
    * @return homeLiveboard
-  **/
+   */
   @javax.annotation.Nullable
   public ObjectIDAndName getHomeLiveboard() {
     return homeLiveboard;
   }
 
-
-  public void setHomeLiveboard(ObjectIDAndName homeLiveboard) {
+  public void setHomeLiveboard(@javax.annotation.Nullable ObjectIDAndName homeLiveboard) {
     this.homeLiveboard = homeLiveboard;
   }
 
 
-  public User incompleteDetails(Object incompleteDetails) {
-    
+  public User incompleteDetails(@javax.annotation.Nullable Object incompleteDetails) {
     this.incompleteDetails = incompleteDetails;
     return this;
   }
 
-   /**
+  /**
    * Incomplete details of user if any present.
    * @return incompleteDetails
-  **/
+   */
   @javax.annotation.Nullable
   public Object getIncompleteDetails() {
     return incompleteDetails;
   }
 
-
-  public void setIncompleteDetails(Object incompleteDetails) {
+  public void setIncompleteDetails(@javax.annotation.Nullable Object incompleteDetails) {
     this.incompleteDetails = incompleteDetails;
   }
 
 
-  public User isFirstLogin(Boolean isFirstLogin) {
-    
+  public User isFirstLogin(@javax.annotation.Nullable Boolean isFirstLogin) {
     this.isFirstLogin = isFirstLogin;
     return this;
   }
 
-   /**
+  /**
    * Indicates whether it is first login of the user.
    * @return isFirstLogin
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getIsFirstLogin() {
     return isFirstLogin;
   }
 
-
-  public void setIsFirstLogin(Boolean isFirstLogin) {
+  public void setIsFirstLogin(@javax.annotation.Nullable Boolean isFirstLogin) {
     this.isFirstLogin = isFirstLogin;
   }
 
 
-  public User modificationTimeInMillis(Float modificationTimeInMillis) {
-    
+  public User modificationTimeInMillis(@javax.annotation.Nullable Float modificationTimeInMillis) {
     this.modificationTimeInMillis = modificationTimeInMillis;
     return this;
   }
 
-   /**
+  /**
    * Last modified time of the user in milliseconds.
    * @return modificationTimeInMillis
-  **/
+   */
   @javax.annotation.Nullable
   public Float getModificationTimeInMillis() {
     return modificationTimeInMillis;
   }
 
-
-  public void setModificationTimeInMillis(Float modificationTimeInMillis) {
+  public void setModificationTimeInMillis(@javax.annotation.Nullable Float modificationTimeInMillis) {
     this.modificationTimeInMillis = modificationTimeInMillis;
   }
 
 
-  public User modifierId(String modifierId) {
-    
+  public User modifierId(@javax.annotation.Nullable String modifierId) {
     this.modifierId = modifierId;
     return this;
   }
 
-   /**
+  /**
    * Unique identifier of modifier of the user.
    * @return modifierId
-  **/
+   */
   @javax.annotation.Nullable
   public String getModifierId() {
     return modifierId;
   }
 
-
-  public void setModifierId(String modifierId) {
+  public void setModifierId(@javax.annotation.Nullable String modifierId) {
     this.modifierId = modifierId;
   }
 
 
-  public User notifyOnShare(Boolean notifyOnShare) {
-    
+  public User notifyOnShare(@javax.annotation.Nullable Boolean notifyOnShare) {
     this.notifyOnShare = notifyOnShare;
     return this;
   }
 
-   /**
+  /**
    * User preference for receiving email notifications on shared Answers or Liveboard.
    * @return notifyOnShare
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getNotifyOnShare() {
     return notifyOnShare;
   }
 
-
-  public void setNotifyOnShare(Boolean notifyOnShare) {
+  public void setNotifyOnShare(@javax.annotation.Nullable Boolean notifyOnShare) {
     this.notifyOnShare = notifyOnShare;
   }
 
 
-  public User onboardingExperienceCompleted(Boolean onboardingExperienceCompleted) {
-    
+  public User onboardingExperienceCompleted(@javax.annotation.Nullable Boolean onboardingExperienceCompleted) {
     this.onboardingExperienceCompleted = onboardingExperienceCompleted;
     return this;
   }
 
-   /**
+  /**
    * The user preference for turning off the onboarding experience.
    * @return onboardingExperienceCompleted
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getOnboardingExperienceCompleted() {
     return onboardingExperienceCompleted;
   }
 
-
-  public void setOnboardingExperienceCompleted(Boolean onboardingExperienceCompleted) {
+  public void setOnboardingExperienceCompleted(@javax.annotation.Nullable Boolean onboardingExperienceCompleted) {
     this.onboardingExperienceCompleted = onboardingExperienceCompleted;
   }
 
 
-  public User orgs(List<Org> orgs) {
-    
+  public User orgs(@javax.annotation.Nullable List<Org> orgs) {
     this.orgs = orgs;
     return this;
   }
@@ -1032,65 +1040,59 @@ public class User {
     return this;
   }
 
-   /**
+  /**
    * Orgs to which the user belongs.
    * @return orgs
-  **/
+   */
   @javax.annotation.Nullable
   public List<Org> getOrgs() {
     return orgs;
   }
 
-
-  public void setOrgs(List<Org> orgs) {
+  public void setOrgs(@javax.annotation.Nullable List<Org> orgs) {
     this.orgs = orgs;
   }
 
 
-  public User ownerId(String ownerId) {
-    
+  public User ownerId(@javax.annotation.Nullable String ownerId) {
     this.ownerId = ownerId;
     return this;
   }
 
-   /**
+  /**
    * Unique identifier of owner of the user.
    * @return ownerId
-  **/
+   */
   @javax.annotation.Nullable
   public String getOwnerId() {
     return ownerId;
   }
 
-
-  public void setOwnerId(String ownerId) {
+  public void setOwnerId(@javax.annotation.Nullable String ownerId) {
     this.ownerId = ownerId;
   }
 
 
-  public User parentType(ParentTypeEnum parentType) {
-    
+  public User parentType(@javax.annotation.Nullable ParentTypeEnum parentType) {
     this.parentType = parentType;
     return this;
   }
 
-   /**
+  /**
    * Parent type of the user.
    * @return parentType
-  **/
+   */
   @javax.annotation.Nullable
   public ParentTypeEnum getParentType() {
     return parentType;
   }
 
-
-  public void setParentType(ParentTypeEnum parentType) {
+  public void setParentType(@javax.annotation.Nullable ParentTypeEnum parentType) {
     this.parentType = parentType;
   }
 
 
-  public User privileges(List<String> privileges) {
-    
+  public User privileges(@javax.annotation.Nullable List<String> privileges) {
     this.privileges = privileges;
     return this;
   }
@@ -1103,86 +1105,78 @@ public class User {
     return this;
   }
 
-   /**
+  /**
    * Privileges which are assigned to the user.
    * @return privileges
-  **/
+   */
   @javax.annotation.Nullable
   public List<String> getPrivileges() {
     return privileges;
   }
 
-
-  public void setPrivileges(List<String> privileges) {
+  public void setPrivileges(@javax.annotation.Nullable List<String> privileges) {
     this.privileges = privileges;
   }
 
 
-  public User showOnboardingExperience(Boolean showOnboardingExperience) {
-    
+  public User showOnboardingExperience(@javax.annotation.Nullable Boolean showOnboardingExperience) {
     this.showOnboardingExperience = showOnboardingExperience;
     return this;
   }
 
-   /**
+  /**
    * User&#39;s preference to revisit the new user onboarding experience.
    * @return showOnboardingExperience
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getShowOnboardingExperience() {
     return showOnboardingExperience;
   }
 
-
-  public void setShowOnboardingExperience(Boolean showOnboardingExperience) {
+  public void setShowOnboardingExperience(@javax.annotation.Nullable Boolean showOnboardingExperience) {
     this.showOnboardingExperience = showOnboardingExperience;
   }
 
 
-  public User superUser(Boolean superUser) {
-    
+  public User superUser(@javax.annotation.Nullable Boolean superUser) {
     this.superUser = superUser;
     return this;
   }
 
-   /**
+  /**
    * Indicates whether the user is a super user.
    * @return superUser
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getSuperUser() {
     return superUser;
   }
 
-
-  public void setSuperUser(Boolean superUser) {
+  public void setSuperUser(@javax.annotation.Nullable Boolean superUser) {
     this.superUser = superUser;
   }
 
 
-  public User systemUser(Boolean systemUser) {
-    
+  public User systemUser(@javax.annotation.Nullable Boolean systemUser) {
     this.systemUser = systemUser;
     return this;
   }
 
-   /**
+  /**
    * Indicates whether the user is a system user.
    * @return systemUser
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getSystemUser() {
     return systemUser;
   }
 
-
-  public void setSystemUser(Boolean systemUser) {
+  public void setSystemUser(@javax.annotation.Nullable Boolean systemUser) {
     this.systemUser = systemUser;
   }
 
 
-  public User tags(List<ObjectIDAndName> tags) {
-    
+  public User tags(@javax.annotation.Nullable List<ObjectIDAndName> tags) {
     this.tags = tags;
     return this;
   }
@@ -1195,44 +1189,40 @@ public class User {
     return this;
   }
 
-   /**
+  /**
    * Tags associated with the user.
    * @return tags
-  **/
+   */
   @javax.annotation.Nullable
   public List<ObjectIDAndName> getTags() {
     return tags;
   }
 
-
-  public void setTags(List<ObjectIDAndName> tags) {
+  public void setTags(@javax.annotation.Nullable List<ObjectIDAndName> tags) {
     this.tags = tags;
   }
 
 
-  public User tenantId(String tenantId) {
-    
+  public User tenantId(@javax.annotation.Nullable String tenantId) {
     this.tenantId = tenantId;
     return this;
   }
 
-   /**
+  /**
    * Unique identifier of tenant of the user.
    * @return tenantId
-  **/
+   */
   @javax.annotation.Nullable
   public String getTenantId() {
     return tenantId;
   }
 
-
-  public void setTenantId(String tenantId) {
+  public void setTenantId(@javax.annotation.Nullable String tenantId) {
     this.tenantId = tenantId;
   }
 
 
-  public User userGroups(List<ObjectIDAndName> userGroups) {
-    
+  public User userGroups(@javax.annotation.Nullable List<ObjectIDAndName> userGroups) {
     this.userGroups = userGroups;
     return this;
   }
@@ -1245,23 +1235,21 @@ public class User {
     return this;
   }
 
-   /**
+  /**
    * Groups to which the user is assigned.
    * @return userGroups
-  **/
+   */
   @javax.annotation.Nullable
   public List<ObjectIDAndName> getUserGroups() {
     return userGroups;
   }
 
-
-  public void setUserGroups(List<ObjectIDAndName> userGroups) {
+  public void setUserGroups(@javax.annotation.Nullable List<ObjectIDAndName> userGroups) {
     this.userGroups = userGroups;
   }
 
 
-  public User userInheritedGroups(List<ObjectIDAndName> userInheritedGroups) {
-    
+  public User userInheritedGroups(@javax.annotation.Nullable List<ObjectIDAndName> userInheritedGroups) {
     this.userInheritedGroups = userInheritedGroups;
     return this;
   }
@@ -1274,164 +1262,149 @@ public class User {
     return this;
   }
 
-   /**
+  /**
    * Inherited User Groups which the user is part of.
    * @return userInheritedGroups
-  **/
+   */
   @javax.annotation.Nullable
   public List<ObjectIDAndName> getUserInheritedGroups() {
     return userInheritedGroups;
   }
 
-
-  public void setUserInheritedGroups(List<ObjectIDAndName> userInheritedGroups) {
+  public void setUserInheritedGroups(@javax.annotation.Nullable List<ObjectIDAndName> userInheritedGroups) {
     this.userInheritedGroups = userInheritedGroups;
   }
 
 
-  public User welcomeEmailSent(Boolean welcomeEmailSent) {
-    
+  public User welcomeEmailSent(@javax.annotation.Nullable Boolean welcomeEmailSent) {
     this.welcomeEmailSent = welcomeEmailSent;
     return this;
   }
 
-   /**
+  /**
    * Indicates whether welcome email is sent for the user.
    * @return welcomeEmailSent
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getWelcomeEmailSent() {
     return welcomeEmailSent;
   }
 
-
-  public void setWelcomeEmailSent(Boolean welcomeEmailSent) {
+  public void setWelcomeEmailSent(@javax.annotation.Nullable Boolean welcomeEmailSent) {
     this.welcomeEmailSent = welcomeEmailSent;
   }
 
 
-  public User orgPrivileges(Object orgPrivileges) {
-    
+  public User orgPrivileges(@javax.annotation.Nullable Object orgPrivileges) {
     this.orgPrivileges = orgPrivileges;
     return this;
   }
 
-   /**
+  /**
    * Privileges which are assigned to the user with org.
    * @return orgPrivileges
-  **/
+   */
   @javax.annotation.Nullable
   public Object getOrgPrivileges() {
     return orgPrivileges;
   }
 
-
-  public void setOrgPrivileges(Object orgPrivileges) {
+  public void setOrgPrivileges(@javax.annotation.Nullable Object orgPrivileges) {
     this.orgPrivileges = orgPrivileges;
   }
 
 
-  public User preferredLocale(String preferredLocale) {
-    
+  public User preferredLocale(@javax.annotation.Nullable String preferredLocale) {
     this.preferredLocale = preferredLocale;
     return this;
   }
 
-   /**
+  /**
    * Locale for the user.
    * @return preferredLocale
-  **/
+   */
   @javax.annotation.Nullable
   public String getPreferredLocale() {
     return preferredLocale;
   }
 
-
-  public void setPreferredLocale(String preferredLocale) {
+  public void setPreferredLocale(@javax.annotation.Nullable String preferredLocale) {
     this.preferredLocale = preferredLocale;
   }
 
 
-  public User extendedProperties(Object extendedProperties) {
-    
+  public User extendedProperties(@javax.annotation.Nullable Object extendedProperties) {
     this.extendedProperties = extendedProperties;
     return this;
   }
 
-   /**
+  /**
    * Properties for the user
    * @return extendedProperties
-  **/
+   */
   @javax.annotation.Nullable
   public Object getExtendedProperties() {
     return extendedProperties;
   }
 
-
-  public void setExtendedProperties(Object extendedProperties) {
+  public void setExtendedProperties(@javax.annotation.Nullable Object extendedProperties) {
     this.extendedProperties = extendedProperties;
   }
 
 
-  public User extendedPreferences(Object extendedPreferences) {
-    
+  public User extendedPreferences(@javax.annotation.Nullable Object extendedPreferences) {
     this.extendedPreferences = extendedPreferences;
     return this;
   }
 
-   /**
+  /**
    * Preferences for the user
    * @return extendedPreferences
-  **/
+   */
   @javax.annotation.Nullable
   public Object getExtendedPreferences() {
     return extendedPreferences;
   }
 
-
-  public void setExtendedPreferences(Object extendedPreferences) {
+  public void setExtendedPreferences(@javax.annotation.Nullable Object extendedPreferences) {
     this.extendedPreferences = extendedPreferences;
   }
 
 
-  public User userParameters(Object userParameters) {
-    
+  public User userParameters(@javax.annotation.Nullable Object userParameters) {
     this.userParameters = userParameters;
     return this;
   }
 
-   /**
+  /**
    * User Parameters which are specified for the user via JWToken
    * @return userParameters
-  **/
+   */
   @javax.annotation.Nullable
   public Object getUserParameters() {
     return userParameters;
   }
 
-
-  public void setUserParameters(Object userParameters) {
+  public void setUserParameters(@javax.annotation.Nullable Object userParameters) {
     this.userParameters = userParameters;
   }
 
 
-  public User accessControlProperties(Object accessControlProperties) {
-    
+  public User accessControlProperties(@javax.annotation.Nullable Object accessControlProperties) {
     this.accessControlProperties = accessControlProperties;
     return this;
   }
 
-   /**
+  /**
    * Access Control Properties which are specified for the user via JWToken
    * @return accessControlProperties
-  **/
+   */
   @javax.annotation.Nullable
   public Object getAccessControlProperties() {
     return accessControlProperties;
   }
 
-
-  public void setAccessControlProperties(Object accessControlProperties) {
+  public void setAccessControlProperties(@javax.annotation.Nullable Object accessControlProperties) {
     this.accessControlProperties = accessControlProperties;
   }
 
@@ -1634,33 +1607,34 @@ public class User {
     openapiRequiredFields.add("visibility");
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to User
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!User.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to User
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!User.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in User is not found in the empty JSON string", User.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!User.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `User` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `User` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
       for (String requiredField : User.openapiRequiredFields) {
-        if (jsonObj.get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       if (!jsonObj.get("id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("id").toString()));
       }
@@ -1673,18 +1647,28 @@ public class User {
       if (!jsonObj.get("visibility").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `visibility` to be a primitive type in the JSON string but got `%s`", jsonObj.get("visibility").toString()));
       }
+      // validate the required field `visibility`
+      VisibilityEnum.validateJsonElement(jsonObj.get("visibility"));
       if ((jsonObj.get("author_id") != null && !jsonObj.get("author_id").isJsonNull()) && !jsonObj.get("author_id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `author_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("author_id").toString()));
       }
       // validate the optional field `current_org`
       if (jsonObj.get("current_org") != null && !jsonObj.get("current_org").isJsonNull()) {
-        Org.validateJsonObject(jsonObj.getAsJsonObject("current_org"));
+        Org.validateJsonElement(jsonObj.get("current_org"));
       }
       if ((jsonObj.get("account_type") != null && !jsonObj.get("account_type").isJsonNull()) && !jsonObj.get("account_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `account_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("account_type").toString()));
       }
+      // validate the optional field `account_type`
+      if (jsonObj.get("account_type") != null && !jsonObj.get("account_type").isJsonNull()) {
+        AccountTypeEnum.validateJsonElement(jsonObj.get("account_type"));
+      }
       if ((jsonObj.get("account_status") != null && !jsonObj.get("account_status").isJsonNull()) && !jsonObj.get("account_status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `account_status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("account_status").toString()));
+      }
+      // validate the optional field `account_status`
+      if (jsonObj.get("account_status") != null && !jsonObj.get("account_status").isJsonNull()) {
+        AccountStatusEnum.validateJsonElement(jsonObj.get("account_status"));
       }
       if ((jsonObj.get("email") != null && !jsonObj.get("email").isJsonNull()) && !jsonObj.get("email").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `email` to be a primitive type in the JSON string but got `%s`", jsonObj.get("email").toString()));
@@ -1699,13 +1683,13 @@ public class User {
 
           // validate the optional field `favorite_metadata` (array)
           for (int i = 0; i < jsonArrayfavoriteMetadata.size(); i++) {
-            FavoriteMetadataItem.validateJsonObject(jsonArrayfavoriteMetadata.get(i).getAsJsonObject());
+            FavoriteMetadataItem.validateJsonElement(jsonArrayfavoriteMetadata.get(i));
           };
         }
       }
       // validate the optional field `home_liveboard`
       if (jsonObj.get("home_liveboard") != null && !jsonObj.get("home_liveboard").isJsonNull()) {
-        ObjectIDAndName.validateJsonObject(jsonObj.getAsJsonObject("home_liveboard"));
+        ObjectIDAndName.validateJsonElement(jsonObj.get("home_liveboard"));
       }
       if ((jsonObj.get("modifier_id") != null && !jsonObj.get("modifier_id").isJsonNull()) && !jsonObj.get("modifier_id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `modifier_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("modifier_id").toString()));
@@ -1720,7 +1704,7 @@ public class User {
 
           // validate the optional field `orgs` (array)
           for (int i = 0; i < jsonArrayorgs.size(); i++) {
-            Org.validateJsonObject(jsonArrayorgs.get(i).getAsJsonObject());
+            Org.validateJsonElement(jsonArrayorgs.get(i));
           };
         }
       }
@@ -1730,8 +1714,12 @@ public class User {
       if ((jsonObj.get("parent_type") != null && !jsonObj.get("parent_type").isJsonNull()) && !jsonObj.get("parent_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `parent_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("parent_type").toString()));
       }
+      // validate the optional field `parent_type`
+      if (jsonObj.get("parent_type") != null && !jsonObj.get("parent_type").isJsonNull()) {
+        ParentTypeEnum.validateJsonElement(jsonObj.get("parent_type"));
+      }
       // ensure the optional json data is an array if present
-      if (jsonObj.get("privileges") != null && !jsonObj.get("privileges").isJsonArray()) {
+      if (jsonObj.get("privileges") != null && !jsonObj.get("privileges").isJsonNull() && !jsonObj.get("privileges").isJsonArray()) {
         throw new IllegalArgumentException(String.format("Expected the field `privileges` to be an array in the JSON string but got `%s`", jsonObj.get("privileges").toString()));
       }
       if (jsonObj.get("tags") != null && !jsonObj.get("tags").isJsonNull()) {
@@ -1744,7 +1732,7 @@ public class User {
 
           // validate the optional field `tags` (array)
           for (int i = 0; i < jsonArraytags.size(); i++) {
-            ObjectIDAndName.validateJsonObject(jsonArraytags.get(i).getAsJsonObject());
+            ObjectIDAndName.validateJsonElement(jsonArraytags.get(i));
           };
         }
       }
@@ -1761,7 +1749,7 @@ public class User {
 
           // validate the optional field `user_groups` (array)
           for (int i = 0; i < jsonArrayuserGroups.size(); i++) {
-            ObjectIDAndName.validateJsonObject(jsonArrayuserGroups.get(i).getAsJsonObject());
+            ObjectIDAndName.validateJsonElement(jsonArrayuserGroups.get(i));
           };
         }
       }
@@ -1775,7 +1763,7 @@ public class User {
 
           // validate the optional field `user_inherited_groups` (array)
           for (int i = 0; i < jsonArrayuserInheritedGroups.size(); i++) {
-            ObjectIDAndName.validateJsonObject(jsonArrayuserInheritedGroups.get(i).getAsJsonObject());
+            ObjectIDAndName.validateJsonElement(jsonArrayuserInheritedGroups.get(i));
           };
         }
       }
@@ -1804,31 +1792,31 @@ public class User {
 
            @Override
            public User read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of User given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of User
-  * @throws IOException if the JSON string is invalid with respect to User
-  */
+  /**
+   * Create an instance of User given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of User
+   * @throws IOException if the JSON string is invalid with respect to User
+   */
   public static User fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, User.class);
   }
 
- /**
-  * Convert an instance of User to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of User to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

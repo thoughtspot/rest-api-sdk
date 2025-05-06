@@ -14,13 +14,13 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.util.Arrays;
 import org.openapitools.jackson.nullable.JsonNullable;
 import org.thoughtspot.client.model.APIKeyInput;
 import org.thoughtspot.client.model.BasicAuthInput;
@@ -40,12 +40,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -53,107 +51,103 @@ import org.thoughtspot.client.JSON;
 /**
  * Authorization type for the custom action.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class AuthenticationInput {
   public static final String SERIALIZED_NAME_AP_I_KEY = "API_Key";
   @SerializedName(SERIALIZED_NAME_AP_I_KEY)
+  @javax.annotation.Nullable
   private APIKeyInput apIKey;
 
   public static final String SERIALIZED_NAME_BASIC_AUTH = "Basic_Auth";
   @SerializedName(SERIALIZED_NAME_BASIC_AUTH)
+  @javax.annotation.Nullable
   private BasicAuthInput basicAuth;
 
   public static final String SERIALIZED_NAME_BEARER_TOKEN = "Bearer_Token";
   @SerializedName(SERIALIZED_NAME_BEARER_TOKEN)
+  @javax.annotation.Nullable
   private String bearerToken;
 
   public static final String SERIALIZED_NAME_NO_AUTH = "No_Auth";
   @SerializedName(SERIALIZED_NAME_NO_AUTH)
+  @javax.annotation.Nullable
   private String noAuth;
 
   public AuthenticationInput() {
   }
 
-  public AuthenticationInput apIKey(APIKeyInput apIKey) {
-    
+  public AuthenticationInput apIKey(@javax.annotation.Nullable APIKeyInput apIKey) {
     this.apIKey = apIKey;
     return this;
   }
 
-   /**
+  /**
    * Get apIKey
    * @return apIKey
-  **/
+   */
   @javax.annotation.Nullable
   public APIKeyInput getApIKey() {
     return apIKey;
   }
 
-
-  public void setApIKey(APIKeyInput apIKey) {
+  public void setApIKey(@javax.annotation.Nullable APIKeyInput apIKey) {
     this.apIKey = apIKey;
   }
 
 
-  public AuthenticationInput basicAuth(BasicAuthInput basicAuth) {
-    
+  public AuthenticationInput basicAuth(@javax.annotation.Nullable BasicAuthInput basicAuth) {
     this.basicAuth = basicAuth;
     return this;
   }
 
-   /**
+  /**
    * Get basicAuth
    * @return basicAuth
-  **/
+   */
   @javax.annotation.Nullable
   public BasicAuthInput getBasicAuth() {
     return basicAuth;
   }
 
-
-  public void setBasicAuth(BasicAuthInput basicAuth) {
+  public void setBasicAuth(@javax.annotation.Nullable BasicAuthInput basicAuth) {
     this.basicAuth = basicAuth;
   }
 
 
-  public AuthenticationInput bearerToken(String bearerToken) {
-    
+  public AuthenticationInput bearerToken(@javax.annotation.Nullable String bearerToken) {
     this.bearerToken = bearerToken;
     return this;
   }
 
-   /**
+  /**
    * Bearer tokens enable requests to authenticate using an access key.
    * @return bearerToken
-  **/
+   */
   @javax.annotation.Nullable
   public String getBearerToken() {
     return bearerToken;
   }
 
-
-  public void setBearerToken(String bearerToken) {
+  public void setBearerToken(@javax.annotation.Nullable String bearerToken) {
     this.bearerToken = bearerToken;
   }
 
 
-  public AuthenticationInput noAuth(String noAuth) {
-    
+  public AuthenticationInput noAuth(@javax.annotation.Nullable String noAuth) {
     this.noAuth = noAuth;
     return this;
   }
 
-   /**
+  /**
    * No authorization. If your request doesn&#39;t require authorization.
    * @return noAuth
-  **/
+   */
   @javax.annotation.Nullable
   public String getNoAuth() {
     return noAuth;
   }
 
-
-  public void setNoAuth(String noAuth) {
+  public void setNoAuth(@javax.annotation.Nullable String noAuth) {
     this.noAuth = noAuth;
   }
 
@@ -229,33 +223,34 @@ public class AuthenticationInput {
     openapiRequiredFields = new HashSet<String>();
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to AuthenticationInput
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!AuthenticationInput.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to AuthenticationInput
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!AuthenticationInput.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in AuthenticationInput is not found in the empty JSON string", AuthenticationInput.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!AuthenticationInput.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `AuthenticationInput` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `AuthenticationInput` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       // validate the optional field `API_Key`
       if (jsonObj.get("API_Key") != null && !jsonObj.get("API_Key").isJsonNull()) {
-        APIKeyInput.validateJsonObject(jsonObj.getAsJsonObject("API_Key"));
+        APIKeyInput.validateJsonElement(jsonObj.get("API_Key"));
       }
       // validate the optional field `Basic_Auth`
       if (jsonObj.get("Basic_Auth") != null && !jsonObj.get("Basic_Auth").isJsonNull()) {
-        BasicAuthInput.validateJsonObject(jsonObj.getAsJsonObject("Basic_Auth"));
+        BasicAuthInput.validateJsonElement(jsonObj.get("Basic_Auth"));
       }
       if ((jsonObj.get("Bearer_Token") != null && !jsonObj.get("Bearer_Token").isJsonNull()) && !jsonObj.get("Bearer_Token").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `Bearer_Token` to be a primitive type in the JSON string but got `%s`", jsonObj.get("Bearer_Token").toString()));
@@ -285,31 +280,31 @@ public class AuthenticationInput {
 
            @Override
            public AuthenticationInput read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of AuthenticationInput given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of AuthenticationInput
-  * @throws IOException if the JSON string is invalid with respect to AuthenticationInput
-  */
+  /**
+   * Create an instance of AuthenticationInput given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of AuthenticationInput
+   * @throws IOException if the JSON string is invalid with respect to AuthenticationInput
+   */
   public static AuthenticationInput fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, AuthenticationInput.class);
   }
 
- /**
-  * Convert an instance of AuthenticationInput to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of AuthenticationInput to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

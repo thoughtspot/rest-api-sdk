@@ -14,17 +14,17 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
-import org.thoughtspot.client.model.CreateScheduleRequestFrequency;
-import org.thoughtspot.client.model.CreateScheduleRequestLiveboardOptions;
-import org.thoughtspot.client.model.CreateScheduleRequestPdfOptions;
-import org.thoughtspot.client.model.CreateScheduleRequestRecipientDetails;
+import java.util.Arrays;
+import org.thoughtspot.client.model.FrequencyInput;
+import org.thoughtspot.client.model.LiveboardOptionsInput;
+import org.thoughtspot.client.model.RecipientDetailsInput;
+import org.thoughtspot.client.model.SchedulesPdfOptionsInput;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -41,12 +41,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -54,14 +52,16 @@ import org.thoughtspot.client.JSON;
 /**
  * CreateScheduleRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class CreateScheduleRequest {
   public static final String SERIALIZED_NAME_NAME = "name";
   @SerializedName(SERIALIZED_NAME_NAME)
+  @javax.annotation.Nonnull
   private String name;
 
   public static final String SERIALIZED_NAME_DESCRIPTION = "description";
   @SerializedName(SERIALIZED_NAME_DESCRIPTION)
+  @javax.annotation.Nonnull
   private String description;
 
   /**
@@ -107,14 +107,21 @@ public class CreateScheduleRequest {
         return MetadataTypeEnum.fromValue(value);
       }
     }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      MetadataTypeEnum.fromValue(value);
+    }
   }
 
   public static final String SERIALIZED_NAME_METADATA_TYPE = "metadata_type";
   @SerializedName(SERIALIZED_NAME_METADATA_TYPE)
+  @javax.annotation.Nonnull
   private MetadataTypeEnum metadataType;
 
   public static final String SERIALIZED_NAME_METADATA_IDENTIFIER = "metadata_identifier";
   @SerializedName(SERIALIZED_NAME_METADATA_IDENTIFIER)
+  @javax.annotation.Nonnull
   private String metadataIdentifier;
 
   /**
@@ -164,19 +171,27 @@ public class CreateScheduleRequest {
         return FileFormatEnum.fromValue(value);
       }
     }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      FileFormatEnum.fromValue(value);
+    }
   }
 
   public static final String SERIALIZED_NAME_FILE_FORMAT = "file_format";
   @SerializedName(SERIALIZED_NAME_FILE_FORMAT)
+  @javax.annotation.Nullable
   private FileFormatEnum fileFormat = FileFormatEnum.PDF;
 
   public static final String SERIALIZED_NAME_LIVEBOARD_OPTIONS = "liveboard_options";
   @SerializedName(SERIALIZED_NAME_LIVEBOARD_OPTIONS)
-  private CreateScheduleRequestLiveboardOptions liveboardOptions;
+  @javax.annotation.Nullable
+  private LiveboardOptionsInput liveboardOptions;
 
   public static final String SERIALIZED_NAME_PDF_OPTIONS = "pdf_options";
   @SerializedName(SERIALIZED_NAME_PDF_OPTIONS)
-  private CreateScheduleRequestPdfOptions pdfOptions;
+  @javax.annotation.Nullable
+  private SchedulesPdfOptionsInput pdfOptions;
 
   /**
    * Time zone
@@ -305,7 +320,7 @@ public class CreateScheduleRequest {
     
     AMERICA_ARGENTINA_CATAMARCA("America/Argentina/Catamarca"),
     
-    AMERICA_ARGENTINA_COMODRIVADAVIA("America/Argentina/ComodRivadavia"),
+    AMERICA_ARGENTINA_COMOD_RIVADAVIA("America/Argentina/ComodRivadavia"),
     
     AMERICA_ARGENTINA_CORDOBA("America/Argentina/Cordoba"),
     
@@ -629,13 +644,13 @@ public class CreateScheduleRequest {
     
     ANTARCTICA_DAVIS("Antarctica/Davis"),
     
-    ANTARCTICA_DUMONTDURVILLE("Antarctica/DumontDUrville"),
+    ANTARCTICA_DUMONT_D_URVILLE("Antarctica/DumontDUrville"),
     
     ANTARCTICA_MACQUARIE("Antarctica/Macquarie"),
     
     ANTARCTICA_MAWSON("Antarctica/Mawson"),
     
-    ANTARCTICA_MCMURDO("Antarctica/McMurdo"),
+    ANTARCTICA_MC_MURDO("Antarctica/McMurdo"),
     
     ANTARCTICA_PALMER("Antarctica/Palmer"),
     
@@ -921,7 +936,7 @@ public class CreateScheduleRequest {
     
     BRAZIL_ACRE("Brazil/Acre"),
     
-    BRAZIL_DENORONHA("Brazil/DeNoronha"),
+    BRAZIL_DE_NORONHA("Brazil/DeNoronha"),
     
     BRAZIL_EAST("Brazil/East"),
     
@@ -929,7 +944,7 @@ public class CreateScheduleRequest {
     
     CET("CET"),
     
-    CST6CDT("CST6CDT"),
+    CST6_CDT("CST6CDT"),
     
     CANADA_ATLANTIC("Canada/Atlantic"),
     
@@ -949,13 +964,13 @@ public class CreateScheduleRequest {
     
     CHILE_CONTINENTAL("Chile/Continental"),
     
-    CHILE_EASTERISLAND("Chile/EasterIsland"),
+    CHILE_EASTER_ISLAND("Chile/EasterIsland"),
     
     CUBA("Cuba"),
     
     EET("EET"),
     
-    EST5EDT("EST5EDT"),
+    EST5_EDT("EST5EDT"),
     
     EGYPT("Egypt"),
     
@@ -971,7 +986,7 @@ public class CreateScheduleRequest {
     
     ETC_GMT_11("Etc/GMT+11"),
     
-    ETC_GMT_12("Etc/GMT+12"),
+    ETC_GMT_122("Etc/GMT+12"),
     
     ETC_GMT_2("Etc/GMT+2"),
     
@@ -989,35 +1004,35 @@ public class CreateScheduleRequest {
     
     ETC_GMT_9("Etc/GMT+9"),
     
-    ETC_GMT_0("Etc/GMT-0"),
+    ETC_GMT_02("Etc/GMT-0"),
     
-    ETC_GMT_1("Etc/GMT-1"),
+    ETC_GMT_12("Etc/GMT-1"),
     
-    ETC_GMT_10("Etc/GMT-10"),
+    ETC_GMT_102("Etc/GMT-10"),
     
-    ETC_GMT_11("Etc/GMT-11"),
+    ETC_GMT_112("Etc/GMT-11"),
     
-    ETC_GMT_12("Etc/GMT-12"),
+    ETC_GMT_122("Etc/GMT-12"),
     
     ETC_GMT_13("Etc/GMT-13"),
     
     ETC_GMT_14("Etc/GMT-14"),
     
-    ETC_GMT_2("Etc/GMT-2"),
+    ETC_GMT_22("Etc/GMT-2"),
     
-    ETC_GMT_3("Etc/GMT-3"),
+    ETC_GMT_32("Etc/GMT-3"),
     
-    ETC_GMT_4("Etc/GMT-4"),
+    ETC_GMT_42("Etc/GMT-4"),
     
-    ETC_GMT_5("Etc/GMT-5"),
+    ETC_GMT_52("Etc/GMT-5"),
     
-    ETC_GMT_6("Etc/GMT-6"),
+    ETC_GMT_62("Etc/GMT-6"),
     
-    ETC_GMT_7("Etc/GMT-7"),
+    ETC_GMT_72("Etc/GMT-7"),
     
-    ETC_GMT_8("Etc/GMT-8"),
+    ETC_GMT_82("Etc/GMT-8"),
     
-    ETC_GMT_9("Etc/GMT-9"),
+    ETC_GMT_92("Etc/GMT-9"),
     
     ETC_GMT0("Etc/GMT0"),
     
@@ -1209,11 +1224,11 @@ public class CreateScheduleRequest {
     
     MET("MET"),
     
-    MST7MDT("MST7MDT"),
+    MST7_MDT("MST7MDT"),
     
-    MEXICO_BAJANORTE("Mexico/BajaNorte"),
+    MEXICO_BAJA_NORTE("Mexico/BajaNorte"),
     
-    MEXICO_BAJASUR("Mexico/BajaSur"),
+    MEXICO_BAJA_SUR("Mexico/BajaSur"),
     
     MEXICO_GENERAL("Mexico/General"),
     
@@ -1225,7 +1240,7 @@ public class CreateScheduleRequest {
     
     PRC("PRC"),
     
-    PST8PDT("PST8PDT"),
+    PST8_PDT("PST8PDT"),
     
     PACIFIC_APIA("Pacific/Apia"),
     
@@ -1323,31 +1338,31 @@ public class CreateScheduleRequest {
     
     SINGAPORE("Singapore"),
     
-    SYSTEMV_AST4("SystemV/AST4"),
+    SYSTEM_V_AST4("SystemV/AST4"),
     
-    SYSTEMV_AST4ADT("SystemV/AST4ADT"),
+    SYSTEM_V_AST4_ADT("SystemV/AST4ADT"),
     
-    SYSTEMV_CST6("SystemV/CST6"),
+    SYSTEM_V_CST6("SystemV/CST6"),
     
-    SYSTEMV_CST6CDT("SystemV/CST6CDT"),
+    SYSTEM_V_CST6_CDT("SystemV/CST6CDT"),
     
-    SYSTEMV_EST5("SystemV/EST5"),
+    SYSTEM_V_EST5("SystemV/EST5"),
     
-    SYSTEMV_EST5EDT("SystemV/EST5EDT"),
+    SYSTEM_V_EST5_EDT("SystemV/EST5EDT"),
     
-    SYSTEMV_HST10("SystemV/HST10"),
+    SYSTEM_V_HST10("SystemV/HST10"),
     
-    SYSTEMV_MST7("SystemV/MST7"),
+    SYSTEM_V_MST7("SystemV/MST7"),
     
-    SYSTEMV_MST7MDT("SystemV/MST7MDT"),
+    SYSTEM_V_MST7_MDT("SystemV/MST7MDT"),
     
-    SYSTEMV_PST8("SystemV/PST8"),
+    SYSTEM_V_PST8("SystemV/PST8"),
     
-    SYSTEMV_PST8PDT("SystemV/PST8PDT"),
+    SYSTEM_V_PST8_PDT("SystemV/PST8PDT"),
     
-    SYSTEMV_YST9("SystemV/YST9"),
+    SYSTEM_V_YST9("SystemV/YST9"),
     
-    SYSTEMV_YST9YDT("SystemV/YST9YDT"),
+    SYSTEM_V_YST9_YDT("SystemV/YST9YDT"),
     
     TURKEY("Turkey"),
     
@@ -1479,229 +1494,217 @@ public class CreateScheduleRequest {
         return TimeZoneEnum.fromValue(value);
       }
     }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      TimeZoneEnum.fromValue(value);
+    }
   }
 
   public static final String SERIALIZED_NAME_TIME_ZONE = "time_zone";
   @SerializedName(SERIALIZED_NAME_TIME_ZONE)
+  @javax.annotation.Nonnull
   private TimeZoneEnum timeZone = TimeZoneEnum.AMERICA_LOS_ANGELES;
 
   public static final String SERIALIZED_NAME_FREQUENCY = "frequency";
   @SerializedName(SERIALIZED_NAME_FREQUENCY)
-  private CreateScheduleRequestFrequency frequency;
+  @javax.annotation.Nullable
+  private FrequencyInput frequency;
 
   public static final String SERIALIZED_NAME_RECIPIENT_DETAILS = "recipient_details";
   @SerializedName(SERIALIZED_NAME_RECIPIENT_DETAILS)
-  private CreateScheduleRequestRecipientDetails recipientDetails;
+  @javax.annotation.Nonnull
+  private RecipientDetailsInput recipientDetails;
 
   public CreateScheduleRequest() {
   }
 
-  public CreateScheduleRequest name(String name) {
-    
+  public CreateScheduleRequest name(@javax.annotation.Nonnull String name) {
     this.name = name;
     return this;
   }
 
-   /**
+  /**
    * Name of the scheduled job.
    * @return name
-  **/
+   */
   @javax.annotation.Nonnull
   public String getName() {
     return name;
   }
 
-
-  public void setName(String name) {
+  public void setName(@javax.annotation.Nonnull String name) {
     this.name = name;
   }
 
 
-  public CreateScheduleRequest description(String description) {
-    
+  public CreateScheduleRequest description(@javax.annotation.Nonnull String description) {
     this.description = description;
     return this;
   }
 
-   /**
+  /**
    * Description of the job.
    * @return description
-  **/
+   */
   @javax.annotation.Nonnull
   public String getDescription() {
     return description;
   }
 
-
-  public void setDescription(String description) {
+  public void setDescription(@javax.annotation.Nonnull String description) {
     this.description = description;
   }
 
 
-  public CreateScheduleRequest metadataType(MetadataTypeEnum metadataType) {
-    
+  public CreateScheduleRequest metadataType(@javax.annotation.Nonnull MetadataTypeEnum metadataType) {
     this.metadataType = metadataType;
     return this;
   }
 
-   /**
+  /**
    * Type of the metadata object.
    * @return metadataType
-  **/
+   */
   @javax.annotation.Nonnull
   public MetadataTypeEnum getMetadataType() {
     return metadataType;
   }
 
-
-  public void setMetadataType(MetadataTypeEnum metadataType) {
+  public void setMetadataType(@javax.annotation.Nonnull MetadataTypeEnum metadataType) {
     this.metadataType = metadataType;
   }
 
 
-  public CreateScheduleRequest metadataIdentifier(String metadataIdentifier) {
-    
+  public CreateScheduleRequest metadataIdentifier(@javax.annotation.Nonnull String metadataIdentifier) {
     this.metadataIdentifier = metadataIdentifier;
     return this;
   }
 
-   /**
+  /**
    * Unique ID or name of the metadata object.
    * @return metadataIdentifier
-  **/
+   */
   @javax.annotation.Nonnull
   public String getMetadataIdentifier() {
     return metadataIdentifier;
   }
 
-
-  public void setMetadataIdentifier(String metadataIdentifier) {
+  public void setMetadataIdentifier(@javax.annotation.Nonnull String metadataIdentifier) {
     this.metadataIdentifier = metadataIdentifier;
   }
 
 
-  public CreateScheduleRequest fileFormat(FileFormatEnum fileFormat) {
-    
+  public CreateScheduleRequest fileFormat(@javax.annotation.Nullable FileFormatEnum fileFormat) {
     this.fileFormat = fileFormat;
     return this;
   }
 
-   /**
+  /**
    * Export file format.
    * @return fileFormat
-  **/
+   */
   @javax.annotation.Nullable
   public FileFormatEnum getFileFormat() {
     return fileFormat;
   }
 
-
-  public void setFileFormat(FileFormatEnum fileFormat) {
+  public void setFileFormat(@javax.annotation.Nullable FileFormatEnum fileFormat) {
     this.fileFormat = fileFormat;
   }
 
 
-  public CreateScheduleRequest liveboardOptions(CreateScheduleRequestLiveboardOptions liveboardOptions) {
-    
+  public CreateScheduleRequest liveboardOptions(@javax.annotation.Nullable LiveboardOptionsInput liveboardOptions) {
     this.liveboardOptions = liveboardOptions;
     return this;
   }
 
-   /**
-   * Get liveboardOptions
+  /**
+   * Options to specify details of Liveboard.
    * @return liveboardOptions
-  **/
+   */
   @javax.annotation.Nullable
-  public CreateScheduleRequestLiveboardOptions getLiveboardOptions() {
+  public LiveboardOptionsInput getLiveboardOptions() {
     return liveboardOptions;
   }
 
-
-  public void setLiveboardOptions(CreateScheduleRequestLiveboardOptions liveboardOptions) {
+  public void setLiveboardOptions(@javax.annotation.Nullable LiveboardOptionsInput liveboardOptions) {
     this.liveboardOptions = liveboardOptions;
   }
 
 
-  public CreateScheduleRequest pdfOptions(CreateScheduleRequestPdfOptions pdfOptions) {
-    
+  public CreateScheduleRequest pdfOptions(@javax.annotation.Nullable SchedulesPdfOptionsInput pdfOptions) {
     this.pdfOptions = pdfOptions;
     return this;
   }
 
-   /**
-   * Get pdfOptions
+  /**
+   * PDF layout and orientation settings. Applicable only if the &#x60;file_format&#x60; is specified as &#x60;PDF&#x60;.
    * @return pdfOptions
-  **/
+   */
   @javax.annotation.Nullable
-  public CreateScheduleRequestPdfOptions getPdfOptions() {
+  public SchedulesPdfOptionsInput getPdfOptions() {
     return pdfOptions;
   }
 
-
-  public void setPdfOptions(CreateScheduleRequestPdfOptions pdfOptions) {
+  public void setPdfOptions(@javax.annotation.Nullable SchedulesPdfOptionsInput pdfOptions) {
     this.pdfOptions = pdfOptions;
   }
 
 
-  public CreateScheduleRequest timeZone(TimeZoneEnum timeZone) {
-    
+  public CreateScheduleRequest timeZone(@javax.annotation.Nonnull TimeZoneEnum timeZone) {
     this.timeZone = timeZone;
     return this;
   }
 
-   /**
+  /**
    * Time zone
    * @return timeZone
-  **/
+   */
   @javax.annotation.Nonnull
   public TimeZoneEnum getTimeZone() {
     return timeZone;
   }
 
-
-  public void setTimeZone(TimeZoneEnum timeZone) {
+  public void setTimeZone(@javax.annotation.Nonnull TimeZoneEnum timeZone) {
     this.timeZone = timeZone;
   }
 
 
-  public CreateScheduleRequest frequency(CreateScheduleRequestFrequency frequency) {
-    
+  public CreateScheduleRequest frequency(@javax.annotation.Nullable FrequencyInput frequency) {
     this.frequency = frequency;
     return this;
   }
 
-   /**
-   * Get frequency
+  /**
+   * Frequency settings for the scheduled job.
    * @return frequency
-  **/
+   */
   @javax.annotation.Nullable
-  public CreateScheduleRequestFrequency getFrequency() {
+  public FrequencyInput getFrequency() {
     return frequency;
   }
 
-
-  public void setFrequency(CreateScheduleRequestFrequency frequency) {
+  public void setFrequency(@javax.annotation.Nullable FrequencyInput frequency) {
     this.frequency = frequency;
   }
 
 
-  public CreateScheduleRequest recipientDetails(CreateScheduleRequestRecipientDetails recipientDetails) {
-    
+  public CreateScheduleRequest recipientDetails(@javax.annotation.Nonnull RecipientDetailsInput recipientDetails) {
     this.recipientDetails = recipientDetails;
     return this;
   }
 
-   /**
-   * Get recipientDetails
+  /**
+   * Recipients of the scheduled job notifications. Add the GUID or name of the ThoughtSpot users or groups as recipients in the &#x60;principals&#x60; array. If a recipient is not a ThoughtSpot user, specify email address.
    * @return recipientDetails
-  **/
+   */
   @javax.annotation.Nonnull
-  public CreateScheduleRequestRecipientDetails getRecipientDetails() {
+  public RecipientDetailsInput getRecipientDetails() {
     return recipientDetails;
   }
 
-
-  public void setRecipientDetails(CreateScheduleRequestRecipientDetails recipientDetails) {
+  public void setRecipientDetails(@javax.annotation.Nonnull RecipientDetailsInput recipientDetails) {
     this.recipientDetails = recipientDetails;
   }
 
@@ -1790,33 +1793,34 @@ public class CreateScheduleRequest {
     openapiRequiredFields.add("recipient_details");
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to CreateScheduleRequest
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!CreateScheduleRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to CreateScheduleRequest
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!CreateScheduleRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in CreateScheduleRequest is not found in the empty JSON string", CreateScheduleRequest.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!CreateScheduleRequest.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `CreateScheduleRequest` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `CreateScheduleRequest` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
       for (String requiredField : CreateScheduleRequest.openapiRequiredFields) {
-        if (jsonObj.get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       if (!jsonObj.get("name").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("name").toString()));
       }
@@ -1826,29 +1830,37 @@ public class CreateScheduleRequest {
       if (!jsonObj.get("metadata_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `metadata_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("metadata_type").toString()));
       }
+      // validate the required field `metadata_type`
+      MetadataTypeEnum.validateJsonElement(jsonObj.get("metadata_type"));
       if (!jsonObj.get("metadata_identifier").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `metadata_identifier` to be a primitive type in the JSON string but got `%s`", jsonObj.get("metadata_identifier").toString()));
       }
       if ((jsonObj.get("file_format") != null && !jsonObj.get("file_format").isJsonNull()) && !jsonObj.get("file_format").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `file_format` to be a primitive type in the JSON string but got `%s`", jsonObj.get("file_format").toString()));
       }
+      // validate the optional field `file_format`
+      if (jsonObj.get("file_format") != null && !jsonObj.get("file_format").isJsonNull()) {
+        FileFormatEnum.validateJsonElement(jsonObj.get("file_format"));
+      }
       // validate the optional field `liveboard_options`
       if (jsonObj.get("liveboard_options") != null && !jsonObj.get("liveboard_options").isJsonNull()) {
-        CreateScheduleRequestLiveboardOptions.validateJsonObject(jsonObj.getAsJsonObject("liveboard_options"));
+        LiveboardOptionsInput.validateJsonElement(jsonObj.get("liveboard_options"));
       }
       // validate the optional field `pdf_options`
       if (jsonObj.get("pdf_options") != null && !jsonObj.get("pdf_options").isJsonNull()) {
-        CreateScheduleRequestPdfOptions.validateJsonObject(jsonObj.getAsJsonObject("pdf_options"));
+        SchedulesPdfOptionsInput.validateJsonElement(jsonObj.get("pdf_options"));
       }
       if (!jsonObj.get("time_zone").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `time_zone` to be a primitive type in the JSON string but got `%s`", jsonObj.get("time_zone").toString()));
       }
+      // validate the required field `time_zone`
+      TimeZoneEnum.validateJsonElement(jsonObj.get("time_zone"));
       // validate the optional field `frequency`
       if (jsonObj.get("frequency") != null && !jsonObj.get("frequency").isJsonNull()) {
-        CreateScheduleRequestFrequency.validateJsonObject(jsonObj.getAsJsonObject("frequency"));
+        FrequencyInput.validateJsonElement(jsonObj.get("frequency"));
       }
       // validate the required field `recipient_details`
-      CreateScheduleRequestRecipientDetails.validateJsonObject(jsonObj.getAsJsonObject("recipient_details"));
+      RecipientDetailsInput.validateJsonElement(jsonObj.get("recipient_details"));
   }
 
   public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
@@ -1871,31 +1883,31 @@ public class CreateScheduleRequest {
 
            @Override
            public CreateScheduleRequest read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of CreateScheduleRequest given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of CreateScheduleRequest
-  * @throws IOException if the JSON string is invalid with respect to CreateScheduleRequest
-  */
+  /**
+   * Create an instance of CreateScheduleRequest given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of CreateScheduleRequest
+   * @throws IOException if the JSON string is invalid with respect to CreateScheduleRequest
+   */
   public static CreateScheduleRequest fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, CreateScheduleRequest.class);
   }
 
- /**
-  * Convert an instance of CreateScheduleRequest to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of CreateScheduleRequest to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

@@ -14,13 +14,13 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.util.Arrays;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
@@ -38,12 +38,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -51,34 +49,41 @@ import org.thoughtspot.client.JSON;
 /**
  * Options for PDF export.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class PdfOptions {
   public static final String SERIALIZED_NAME_COMPLETE_LIVEBOARD = "complete_liveboard";
   @SerializedName(SERIALIZED_NAME_COMPLETE_LIVEBOARD)
+  @javax.annotation.Nullable
   private Boolean completeLiveboard;
 
   public static final String SERIALIZED_NAME_INCLUDE_COVER_PAGE = "include_cover_page";
   @SerializedName(SERIALIZED_NAME_INCLUDE_COVER_PAGE)
+  @javax.annotation.Nullable
   private Boolean includeCoverPage;
 
   public static final String SERIALIZED_NAME_INCLUDE_CUSTOM_LOGO = "include_custom_logo";
   @SerializedName(SERIALIZED_NAME_INCLUDE_CUSTOM_LOGO)
+  @javax.annotation.Nullable
   private Boolean includeCustomLogo;
 
   public static final String SERIALIZED_NAME_INCLUDE_FILTER_PAGE = "include_filter_page";
   @SerializedName(SERIALIZED_NAME_INCLUDE_FILTER_PAGE)
+  @javax.annotation.Nullable
   private Boolean includeFilterPage;
 
   public static final String SERIALIZED_NAME_INCLUDE_PAGE_NUMBER = "include_page_number";
   @SerializedName(SERIALIZED_NAME_INCLUDE_PAGE_NUMBER)
+  @javax.annotation.Nullable
   private Boolean includePageNumber;
 
   public static final String SERIALIZED_NAME_PAGE_FOOTER_TEXT = "page_footer_text";
   @SerializedName(SERIALIZED_NAME_PAGE_FOOTER_TEXT)
+  @javax.annotation.Nullable
   private String pageFooterText;
 
   public static final String SERIALIZED_NAME_PAGE_ORIENTATION = "page_orientation";
   @SerializedName(SERIALIZED_NAME_PAGE_ORIENTATION)
+  @javax.annotation.Nullable
   private String pageOrientation;
 
   /**
@@ -124,204 +129,193 @@ public class PdfOptions {
         return PageSizeEnum.fromValue(value);
       }
     }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      PageSizeEnum.fromValue(value);
+    }
   }
 
   public static final String SERIALIZED_NAME_PAGE_SIZE = "page_size";
   @SerializedName(SERIALIZED_NAME_PAGE_SIZE)
+  @javax.annotation.Nullable
   private PageSizeEnum pageSize;
 
   public static final String SERIALIZED_NAME_TRUNCATE_TABLE = "truncate_table";
   @SerializedName(SERIALIZED_NAME_TRUNCATE_TABLE)
+  @javax.annotation.Nullable
   private Boolean truncateTable;
 
   public PdfOptions() {
   }
 
-  public PdfOptions completeLiveboard(Boolean completeLiveboard) {
-    
+  public PdfOptions completeLiveboard(@javax.annotation.Nullable Boolean completeLiveboard) {
     this.completeLiveboard = completeLiveboard;
     return this;
   }
 
-   /**
+  /**
    * Indicates whether to include complete Liveboard.
    * @return completeLiveboard
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getCompleteLiveboard() {
     return completeLiveboard;
   }
 
-
-  public void setCompleteLiveboard(Boolean completeLiveboard) {
+  public void setCompleteLiveboard(@javax.annotation.Nullable Boolean completeLiveboard) {
     this.completeLiveboard = completeLiveboard;
   }
 
 
-  public PdfOptions includeCoverPage(Boolean includeCoverPage) {
-    
+  public PdfOptions includeCoverPage(@javax.annotation.Nullable Boolean includeCoverPage) {
     this.includeCoverPage = includeCoverPage;
     return this;
   }
 
-   /**
+  /**
    * Indicates whether to include cover page with the Liveboard title.
    * @return includeCoverPage
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getIncludeCoverPage() {
     return includeCoverPage;
   }
 
-
-  public void setIncludeCoverPage(Boolean includeCoverPage) {
+  public void setIncludeCoverPage(@javax.annotation.Nullable Boolean includeCoverPage) {
     this.includeCoverPage = includeCoverPage;
   }
 
 
-  public PdfOptions includeCustomLogo(Boolean includeCustomLogo) {
-    
+  public PdfOptions includeCustomLogo(@javax.annotation.Nullable Boolean includeCustomLogo) {
     this.includeCustomLogo = includeCustomLogo;
     return this;
   }
 
-   /**
+  /**
    * Indicates whether to include customized wide logo in the footer if available.
    * @return includeCustomLogo
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getIncludeCustomLogo() {
     return includeCustomLogo;
   }
 
-
-  public void setIncludeCustomLogo(Boolean includeCustomLogo) {
+  public void setIncludeCustomLogo(@javax.annotation.Nullable Boolean includeCustomLogo) {
     this.includeCustomLogo = includeCustomLogo;
   }
 
 
-  public PdfOptions includeFilterPage(Boolean includeFilterPage) {
-    
+  public PdfOptions includeFilterPage(@javax.annotation.Nullable Boolean includeFilterPage) {
     this.includeFilterPage = includeFilterPage;
     return this;
   }
 
-   /**
+  /**
    * Indicates whether to include a page with all applied filters.
    * @return includeFilterPage
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getIncludeFilterPage() {
     return includeFilterPage;
   }
 
-
-  public void setIncludeFilterPage(Boolean includeFilterPage) {
+  public void setIncludeFilterPage(@javax.annotation.Nullable Boolean includeFilterPage) {
     this.includeFilterPage = includeFilterPage;
   }
 
 
-  public PdfOptions includePageNumber(Boolean includePageNumber) {
-    
+  public PdfOptions includePageNumber(@javax.annotation.Nullable Boolean includePageNumber) {
     this.includePageNumber = includePageNumber;
     return this;
   }
 
-   /**
+  /**
    * Indicates whether to include page number in the footer of each page
    * @return includePageNumber
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getIncludePageNumber() {
     return includePageNumber;
   }
 
-
-  public void setIncludePageNumber(Boolean includePageNumber) {
+  public void setIncludePageNumber(@javax.annotation.Nullable Boolean includePageNumber) {
     this.includePageNumber = includePageNumber;
   }
 
 
-  public PdfOptions pageFooterText(String pageFooterText) {
-    
+  public PdfOptions pageFooterText(@javax.annotation.Nullable String pageFooterText) {
     this.pageFooterText = pageFooterText;
     return this;
   }
 
-   /**
+  /**
    * Text to include in the footer of each page.
    * @return pageFooterText
-  **/
+   */
   @javax.annotation.Nullable
   public String getPageFooterText() {
     return pageFooterText;
   }
 
-
-  public void setPageFooterText(String pageFooterText) {
+  public void setPageFooterText(@javax.annotation.Nullable String pageFooterText) {
     this.pageFooterText = pageFooterText;
   }
 
 
-  public PdfOptions pageOrientation(String pageOrientation) {
-    
+  public PdfOptions pageOrientation(@javax.annotation.Nullable String pageOrientation) {
     this.pageOrientation = pageOrientation;
     return this;
   }
 
-   /**
+  /**
    * Page orientation of the PDF.
    * @return pageOrientation
-  **/
+   */
   @javax.annotation.Nullable
   public String getPageOrientation() {
     return pageOrientation;
   }
 
-
-  public void setPageOrientation(String pageOrientation) {
+  public void setPageOrientation(@javax.annotation.Nullable String pageOrientation) {
     this.pageOrientation = pageOrientation;
   }
 
 
-  public PdfOptions pageSize(PageSizeEnum pageSize) {
-    
+  public PdfOptions pageSize(@javax.annotation.Nullable PageSizeEnum pageSize) {
     this.pageSize = pageSize;
     return this;
   }
 
-   /**
+  /**
    * Page size.
    * @return pageSize
-  **/
+   */
   @javax.annotation.Nullable
   public PageSizeEnum getPageSize() {
     return pageSize;
   }
 
-
-  public void setPageSize(PageSizeEnum pageSize) {
+  public void setPageSize(@javax.annotation.Nullable PageSizeEnum pageSize) {
     this.pageSize = pageSize;
   }
 
 
-  public PdfOptions truncateTable(Boolean truncateTable) {
-    
+  public PdfOptions truncateTable(@javax.annotation.Nullable Boolean truncateTable) {
     this.truncateTable = truncateTable;
     return this;
   }
 
-   /**
+  /**
    * Indicates whether to include only first page of the tables.
    * @return truncateTable
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getTruncateTable() {
     return truncateTable;
   }
 
-
-  public void setTruncateTable(Boolean truncateTable) {
+  public void setTruncateTable(@javax.annotation.Nullable Boolean truncateTable) {
     this.truncateTable = truncateTable;
   }
 
@@ -412,26 +406,27 @@ public class PdfOptions {
     openapiRequiredFields = new HashSet<String>();
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to PdfOptions
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!PdfOptions.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to PdfOptions
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!PdfOptions.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in PdfOptions is not found in the empty JSON string", PdfOptions.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!PdfOptions.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `PdfOptions` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `PdfOptions` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("page_footer_text") != null && !jsonObj.get("page_footer_text").isJsonNull()) && !jsonObj.get("page_footer_text").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `page_footer_text` to be a primitive type in the JSON string but got `%s`", jsonObj.get("page_footer_text").toString()));
       }
@@ -440,6 +435,10 @@ public class PdfOptions {
       }
       if ((jsonObj.get("page_size") != null && !jsonObj.get("page_size").isJsonNull()) && !jsonObj.get("page_size").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `page_size` to be a primitive type in the JSON string but got `%s`", jsonObj.get("page_size").toString()));
+      }
+      // validate the optional field `page_size`
+      if (jsonObj.get("page_size") != null && !jsonObj.get("page_size").isJsonNull()) {
+        PageSizeEnum.validateJsonElement(jsonObj.get("page_size"));
       }
   }
 
@@ -463,31 +462,31 @@ public class PdfOptions {
 
            @Override
            public PdfOptions read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of PdfOptions given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of PdfOptions
-  * @throws IOException if the JSON string is invalid with respect to PdfOptions
-  */
+  /**
+   * Create an instance of PdfOptions given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of PdfOptions
+   * @throws IOException if the JSON string is invalid with respect to PdfOptions
+   */
   public static PdfOptions fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, PdfOptions.class);
   }
 
- /**
-  * Convert an instance of PdfOptions to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of PdfOptions to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

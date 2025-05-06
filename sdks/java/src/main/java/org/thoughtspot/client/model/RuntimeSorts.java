@@ -14,7 +14,6 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -22,6 +21,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
 import org.thoughtspot.client.model.UserObject;
@@ -41,12 +41,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -54,10 +52,11 @@ import org.thoughtspot.client.JSON;
 /**
  * Objects to apply the Runtime_Sorts.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class RuntimeSorts {
   public static final String SERIALIZED_NAME_COLUMN_NAME = "column_name";
   @SerializedName(SERIALIZED_NAME_COLUMN_NAME)
+  @javax.annotation.Nullable
   private String columnName;
 
   /**
@@ -105,88 +104,89 @@ public class RuntimeSorts {
         return OrderEnum.fromValue(value);
       }
     }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      OrderEnum.fromValue(value);
+    }
   }
 
   public static final String SERIALIZED_NAME_ORDER = "order";
   @SerializedName(SERIALIZED_NAME_ORDER)
+  @javax.annotation.Nullable
   private OrderEnum order;
 
   public static final String SERIALIZED_NAME_PERSIST = "persist";
   @SerializedName(SERIALIZED_NAME_PERSIST)
+  @javax.annotation.Nullable
   private Boolean persist = false;
 
   public static final String SERIALIZED_NAME_OBJECTS = "objects";
   @SerializedName(SERIALIZED_NAME_OBJECTS)
+  @javax.annotation.Nullable
   private List<UserObject> objects;
 
   public RuntimeSorts() {
   }
 
-  public RuntimeSorts columnName(String columnName) {
-    
+  public RuntimeSorts columnName(@javax.annotation.Nullable String columnName) {
     this.columnName = columnName;
     return this;
   }
 
-   /**
+  /**
    * The column name to apply filter.
    * @return columnName
-  **/
+   */
   @javax.annotation.Nullable
   public String getColumnName() {
     return columnName;
   }
 
-
-  public void setColumnName(String columnName) {
+  public void setColumnName(@javax.annotation.Nullable String columnName) {
     this.columnName = columnName;
   }
 
 
-  public RuntimeSorts order(OrderEnum order) {
-    
+  public RuntimeSorts order(@javax.annotation.Nullable OrderEnum order) {
     this.order = order;
     return this;
   }
 
-   /**
+  /**
    * Order for the sort.
    * @return order
-  **/
+   */
   @javax.annotation.Nullable
   public OrderEnum getOrder() {
     return order;
   }
 
-
-  public void setOrder(OrderEnum order) {
+  public void setOrder(@javax.annotation.Nullable OrderEnum order) {
     this.order = order;
   }
 
 
-  public RuntimeSorts persist(Boolean persist) {
-    
+  public RuntimeSorts persist(@javax.annotation.Nullable Boolean persist) {
     this.persist = persist;
     return this;
   }
 
-   /**
+  /**
    * Flag to persist the runtime sorts.    Version: 9.12.0.cl or later 
    * @return persist
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getPersist() {
     return persist;
   }
 
-
-  public void setPersist(Boolean persist) {
+  public void setPersist(@javax.annotation.Nullable Boolean persist) {
     this.persist = persist;
   }
 
 
-  public RuntimeSorts objects(List<UserObject> objects) {
-    
+  public RuntimeSorts objects(@javax.annotation.Nullable List<UserObject> objects) {
     this.objects = objects;
     return this;
   }
@@ -199,17 +199,16 @@ public class RuntimeSorts {
     return this;
   }
 
-   /**
+  /**
    * Object to apply the runtime sort.
    * @return objects
-  **/
+   */
   @javax.annotation.Nullable
   public List<UserObject> getObjects() {
     return objects;
   }
 
-
-  public void setObjects(List<UserObject> objects) {
+  public void setObjects(@javax.annotation.Nullable List<UserObject> objects) {
     this.objects = objects;
   }
 
@@ -285,31 +284,36 @@ public class RuntimeSorts {
     openapiRequiredFields = new HashSet<String>();
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to RuntimeSorts
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!RuntimeSorts.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to RuntimeSorts
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!RuntimeSorts.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in RuntimeSorts is not found in the empty JSON string", RuntimeSorts.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!RuntimeSorts.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `RuntimeSorts` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `RuntimeSorts` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("column_name") != null && !jsonObj.get("column_name").isJsonNull()) && !jsonObj.get("column_name").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `column_name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("column_name").toString()));
       }
       if ((jsonObj.get("order") != null && !jsonObj.get("order").isJsonNull()) && !jsonObj.get("order").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `order` to be a primitive type in the JSON string but got `%s`", jsonObj.get("order").toString()));
+      }
+      // validate the optional field `order`
+      if (jsonObj.get("order") != null && !jsonObj.get("order").isJsonNull()) {
+        OrderEnum.validateJsonElement(jsonObj.get("order"));
       }
       if (jsonObj.get("objects") != null && !jsonObj.get("objects").isJsonNull()) {
         JsonArray jsonArrayobjects = jsonObj.getAsJsonArray("objects");
@@ -321,7 +325,7 @@ public class RuntimeSorts {
 
           // validate the optional field `objects` (array)
           for (int i = 0; i < jsonArrayobjects.size(); i++) {
-            UserObject.validateJsonObject(jsonArrayobjects.get(i).getAsJsonObject());
+            UserObject.validateJsonElement(jsonArrayobjects.get(i));
           };
         }
       }
@@ -347,31 +351,31 @@ public class RuntimeSorts {
 
            @Override
            public RuntimeSorts read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of RuntimeSorts given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of RuntimeSorts
-  * @throws IOException if the JSON string is invalid with respect to RuntimeSorts
-  */
+  /**
+   * Create an instance of RuntimeSorts given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of RuntimeSorts
+   * @throws IOException if the JSON string is invalid with respect to RuntimeSorts
+   */
   public static RuntimeSorts fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, RuntimeSorts.class);
   }
 
- /**
-  * Convert an instance of RuntimeSorts to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of RuntimeSorts to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

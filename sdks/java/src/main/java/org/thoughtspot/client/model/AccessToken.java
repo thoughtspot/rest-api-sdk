@@ -14,13 +14,13 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.util.Arrays;
 import org.openapitools.jackson.nullable.JsonNullable;
 import org.thoughtspot.client.model.OrgInfo;
 import org.thoughtspot.client.model.UserInfo;
@@ -40,12 +40,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -53,157 +51,151 @@ import org.thoughtspot.client.JSON;
 /**
  * AccessToken
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class AccessToken {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
+  @javax.annotation.Nullable
   private String id;
 
   public static final String SERIALIZED_NAME_TOKEN = "token";
   @SerializedName(SERIALIZED_NAME_TOKEN)
+  @javax.annotation.Nonnull
   private String token;
 
   public static final String SERIALIZED_NAME_ORG = "org";
   @SerializedName(SERIALIZED_NAME_ORG)
+  @javax.annotation.Nonnull
   private OrgInfo org;
 
   public static final String SERIALIZED_NAME_USER = "user";
   @SerializedName(SERIALIZED_NAME_USER)
+  @javax.annotation.Nonnull
   private UserInfo user;
 
   public static final String SERIALIZED_NAME_CREATION_TIME_IN_MILLIS = "creation_time_in_millis";
   @SerializedName(SERIALIZED_NAME_CREATION_TIME_IN_MILLIS)
+  @javax.annotation.Nonnull
   private Float creationTimeInMillis;
 
   public static final String SERIALIZED_NAME_EXPIRATION_TIME_IN_MILLIS = "expiration_time_in_millis";
   @SerializedName(SERIALIZED_NAME_EXPIRATION_TIME_IN_MILLIS)
+  @javax.annotation.Nonnull
   private Float expirationTimeInMillis;
 
   public AccessToken() {
   }
 
-  public AccessToken id(String id) {
-    
+  public AccessToken id(@javax.annotation.Nullable String id) {
     this.id = id;
     return this;
   }
 
-   /**
+  /**
    * GUID of the auth token.
    * @return id
-  **/
+   */
   @javax.annotation.Nullable
   public String getId() {
     return id;
   }
 
-
-  public void setId(String id) {
+  public void setId(@javax.annotation.Nullable String id) {
     this.id = id;
   }
 
 
-  public AccessToken token(String token) {
-    
+  public AccessToken token(@javax.annotation.Nonnull String token) {
     this.token = token;
     return this;
   }
 
-   /**
+  /**
    * Bearer auth token.
    * @return token
-  **/
+   */
   @javax.annotation.Nonnull
   public String getToken() {
     return token;
   }
 
-
-  public void setToken(String token) {
+  public void setToken(@javax.annotation.Nonnull String token) {
     this.token = token;
   }
 
 
-  public AccessToken org(OrgInfo org) {
-    
+  public AccessToken org(@javax.annotation.Nonnull OrgInfo org) {
     this.org = org;
     return this;
   }
 
-   /**
+  /**
    * Get org
    * @return org
-  **/
+   */
   @javax.annotation.Nonnull
   public OrgInfo getOrg() {
     return org;
   }
 
-
-  public void setOrg(OrgInfo org) {
+  public void setOrg(@javax.annotation.Nonnull OrgInfo org) {
     this.org = org;
   }
 
 
-  public AccessToken user(UserInfo user) {
-    
+  public AccessToken user(@javax.annotation.Nonnull UserInfo user) {
     this.user = user;
     return this;
   }
 
-   /**
+  /**
    * Get user
    * @return user
-  **/
+   */
   @javax.annotation.Nonnull
   public UserInfo getUser() {
     return user;
   }
 
-
-  public void setUser(UserInfo user) {
+  public void setUser(@javax.annotation.Nonnull UserInfo user) {
     this.user = user;
   }
 
 
-  public AccessToken creationTimeInMillis(Float creationTimeInMillis) {
-    
+  public AccessToken creationTimeInMillis(@javax.annotation.Nonnull Float creationTimeInMillis) {
     this.creationTimeInMillis = creationTimeInMillis;
     return this;
   }
 
-   /**
+  /**
    * Token creation time in milliseconds.
    * @return creationTimeInMillis
-  **/
+   */
   @javax.annotation.Nonnull
   public Float getCreationTimeInMillis() {
     return creationTimeInMillis;
   }
 
-
-  public void setCreationTimeInMillis(Float creationTimeInMillis) {
+  public void setCreationTimeInMillis(@javax.annotation.Nonnull Float creationTimeInMillis) {
     this.creationTimeInMillis = creationTimeInMillis;
   }
 
 
-  public AccessToken expirationTimeInMillis(Float expirationTimeInMillis) {
-    
+  public AccessToken expirationTimeInMillis(@javax.annotation.Nonnull Float expirationTimeInMillis) {
     this.expirationTimeInMillis = expirationTimeInMillis;
     return this;
   }
 
-   /**
+  /**
    * Token expiration time in milliseconds.
    * @return expirationTimeInMillis
-  **/
+   */
   @javax.annotation.Nonnull
   public Float getExpirationTimeInMillis() {
     return expirationTimeInMillis;
   }
 
-
-  public void setExpirationTimeInMillis(Float expirationTimeInMillis) {
+  public void setExpirationTimeInMillis(@javax.annotation.Nonnull Float expirationTimeInMillis) {
     this.expirationTimeInMillis = expirationTimeInMillis;
   }
 
@@ -290,33 +282,34 @@ public class AccessToken {
     openapiRequiredFields.add("expiration_time_in_millis");
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to AccessToken
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!AccessToken.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to AccessToken
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!AccessToken.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in AccessToken is not found in the empty JSON string", AccessToken.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!AccessToken.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `AccessToken` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `AccessToken` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
       for (String requiredField : AccessToken.openapiRequiredFields) {
-        if (jsonObj.get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("id") != null && !jsonObj.get("id").isJsonNull()) && !jsonObj.get("id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("id").toString()));
       }
@@ -324,9 +317,9 @@ public class AccessToken {
         throw new IllegalArgumentException(String.format("Expected the field `token` to be a primitive type in the JSON string but got `%s`", jsonObj.get("token").toString()));
       }
       // validate the required field `org`
-      OrgInfo.validateJsonObject(jsonObj.getAsJsonObject("org"));
+      OrgInfo.validateJsonElement(jsonObj.get("org"));
       // validate the required field `user`
-      UserInfo.validateJsonObject(jsonObj.getAsJsonObject("user"));
+      UserInfo.validateJsonElement(jsonObj.get("user"));
   }
 
   public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
@@ -349,31 +342,31 @@ public class AccessToken {
 
            @Override
            public AccessToken read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of AccessToken given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of AccessToken
-  * @throws IOException if the JSON string is invalid with respect to AccessToken
-  */
+  /**
+   * Create an instance of AccessToken given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of AccessToken
+   * @throws IOException if the JSON string is invalid with respect to AccessToken
+   */
   public static AccessToken fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, AccessToken.class);
   }
 
- /**
-  * Convert an instance of AccessToken to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of AccessToken to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

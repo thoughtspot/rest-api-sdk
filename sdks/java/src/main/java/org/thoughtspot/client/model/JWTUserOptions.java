@@ -14,7 +14,6 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -22,6 +21,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
 import org.thoughtspot.client.model.JWTMetadataObject;
@@ -42,12 +42,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -55,21 +53,22 @@ import org.thoughtspot.client.JSON;
 /**
  * JWT user options to create a JWT token given the payload.   *Deprecated in 9.12.0.cl. Use user_parameters instead.*
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class JWTUserOptions {
   public static final String SERIALIZED_NAME_PARAMETERS = "parameters";
   @SerializedName(SERIALIZED_NAME_PARAMETERS)
-  private List<JWTUserOptionsParametersInner> parameters;
+  @javax.annotation.Nullable
+  private List<JWTUserOptionsParametersInner> parameters = new ArrayList<>();
 
   public static final String SERIALIZED_NAME_METADATA = "metadata";
   @SerializedName(SERIALIZED_NAME_METADATA)
+  @javax.annotation.Nullable
   private List<JWTMetadataObject> metadata;
 
   public JWTUserOptions() {
   }
 
-  public JWTUserOptions parameters(List<JWTUserOptionsParametersInner> parameters) {
-    
+  public JWTUserOptions parameters(@javax.annotation.Nullable List<JWTUserOptionsParametersInner> parameters) {
     this.parameters = parameters;
     return this;
   }
@@ -82,23 +81,21 @@ public class JWTUserOptions {
     return this;
   }
 
-   /**
+  /**
    * Get parameters
    * @return parameters
-  **/
+   */
   @javax.annotation.Nullable
   public List<JWTUserOptionsParametersInner> getParameters() {
     return parameters;
   }
 
-
-  public void setParameters(List<JWTUserOptionsParametersInner> parameters) {
+  public void setParameters(@javax.annotation.Nullable List<JWTUserOptionsParametersInner> parameters) {
     this.parameters = parameters;
   }
 
 
-  public JWTUserOptions metadata(List<JWTMetadataObject> metadata) {
-    
+  public JWTUserOptions metadata(@javax.annotation.Nullable List<JWTMetadataObject> metadata) {
     this.metadata = metadata;
     return this;
   }
@@ -111,17 +108,16 @@ public class JWTUserOptions {
     return this;
   }
 
-   /**
+  /**
    * Get metadata
    * @return metadata
-  **/
+   */
   @javax.annotation.Nullable
   public List<JWTMetadataObject> getMetadata() {
     return metadata;
   }
 
-
-  public void setMetadata(List<JWTMetadataObject> metadata) {
+  public void setMetadata(@javax.annotation.Nullable List<JWTMetadataObject> metadata) {
     this.metadata = metadata;
   }
 
@@ -191,26 +187,27 @@ public class JWTUserOptions {
     openapiRequiredFields = new HashSet<String>();
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to JWTUserOptions
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!JWTUserOptions.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to JWTUserOptions
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!JWTUserOptions.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in JWTUserOptions is not found in the empty JSON string", JWTUserOptions.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!JWTUserOptions.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `JWTUserOptions` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `JWTUserOptions` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       if (jsonObj.get("parameters") != null && !jsonObj.get("parameters").isJsonNull()) {
         JsonArray jsonArrayparameters = jsonObj.getAsJsonArray("parameters");
         if (jsonArrayparameters != null) {
@@ -221,7 +218,7 @@ public class JWTUserOptions {
 
           // validate the optional field `parameters` (array)
           for (int i = 0; i < jsonArrayparameters.size(); i++) {
-            JWTUserOptionsParametersInner.validateJsonObject(jsonArrayparameters.get(i).getAsJsonObject());
+            JWTUserOptionsParametersInner.validateJsonElement(jsonArrayparameters.get(i));
           };
         }
       }
@@ -235,7 +232,7 @@ public class JWTUserOptions {
 
           // validate the optional field `metadata` (array)
           for (int i = 0; i < jsonArraymetadata.size(); i++) {
-            JWTMetadataObject.validateJsonObject(jsonArraymetadata.get(i).getAsJsonObject());
+            JWTMetadataObject.validateJsonElement(jsonArraymetadata.get(i));
           };
         }
       }
@@ -261,31 +258,31 @@ public class JWTUserOptions {
 
            @Override
            public JWTUserOptions read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of JWTUserOptions given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of JWTUserOptions
-  * @throws IOException if the JSON string is invalid with respect to JWTUserOptions
-  */
+  /**
+   * Create an instance of JWTUserOptions given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of JWTUserOptions
+   * @throws IOException if the JSON string is invalid with respect to JWTUserOptions
+   */
   public static JWTUserOptions fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, JWTUserOptions.class);
   }
 
- /**
-  * Convert an instance of JWTUserOptions to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of JWTUserOptions to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

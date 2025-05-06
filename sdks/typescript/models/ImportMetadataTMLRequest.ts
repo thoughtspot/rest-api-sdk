@@ -28,11 +28,11 @@ export class ImportMetadataTMLRequest {
     /**
     * If import is happening from all orgs context.
     */
-    'all_orgs_context'?: boolean | null;
+    'all_orgs_override'?: boolean | null;
     /**
-    * Boolean to indicate if the CDW validation for table imports should be skipped.
+    * <div>Version: 10.6.0.cl or later </div>  Boolean Flag to skip TML diff check before processing object TMLs.
     */
-    'skip_cdw_validation_for_tables'?: boolean | null;
+    'skip_diff_check'?: boolean | null;
     /**
     * <div>Version: 10.5.0.cl or later </div>  Boolean to indicate if the large metadata validation should be enabled.
     */
@@ -60,14 +60,14 @@ export class ImportMetadataTMLRequest {
             "format": ""
         },
         {
-            "name": "all_orgs_context",
-            "baseName": "all_orgs_context",
+            "name": "all_orgs_override",
+            "baseName": "all_orgs_override",
             "type": "boolean",
             "format": ""
         },
         {
-            "name": "skip_cdw_validation_for_tables",
-            "baseName": "skip_cdw_validation_for_tables",
+            "name": "skip_diff_check",
+            "baseName": "skip_diff_check",
             "type": "boolean",
             "format": ""
         },

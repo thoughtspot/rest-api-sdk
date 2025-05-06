@@ -14,13 +14,13 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.util.Arrays;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -37,12 +37,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -50,10 +48,11 @@ import org.thoughtspot.client.JSON;
 /**
  * SearchCommitsRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class SearchCommitsRequest {
   public static final String SERIALIZED_NAME_METADATA_IDENTIFIER = "metadata_identifier";
   @SerializedName(SERIALIZED_NAME_METADATA_IDENTIFIER)
+  @javax.annotation.Nonnull
   private String metadataIdentifier;
 
   /**
@@ -105,128 +104,127 @@ public class SearchCommitsRequest {
         return MetadataTypeEnum.fromValue(value);
       }
     }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      MetadataTypeEnum.fromValue(value);
+    }
   }
 
   public static final String SERIALIZED_NAME_METADATA_TYPE = "metadata_type";
   @SerializedName(SERIALIZED_NAME_METADATA_TYPE)
+  @javax.annotation.Nullable
   private MetadataTypeEnum metadataType;
 
   public static final String SERIALIZED_NAME_BRANCH_NAME = "branch_name";
   @SerializedName(SERIALIZED_NAME_BRANCH_NAME)
+  @javax.annotation.Nullable
   private String branchName;
 
   public static final String SERIALIZED_NAME_RECORD_OFFSET = "record_offset";
   @SerializedName(SERIALIZED_NAME_RECORD_OFFSET)
+  @javax.annotation.Nullable
   private Integer recordOffset;
 
   public static final String SERIALIZED_NAME_RECORD_SIZE = "record_size";
   @SerializedName(SERIALIZED_NAME_RECORD_SIZE)
+  @javax.annotation.Nullable
   private Integer recordSize;
 
   public SearchCommitsRequest() {
   }
 
-  public SearchCommitsRequest metadataIdentifier(String metadataIdentifier) {
-    
+  public SearchCommitsRequest metadataIdentifier(@javax.annotation.Nonnull String metadataIdentifier) {
     this.metadataIdentifier = metadataIdentifier;
     return this;
   }
 
-   /**
+  /**
    * Unique ID or name of the metadata.
    * @return metadataIdentifier
-  **/
+   */
   @javax.annotation.Nonnull
   public String getMetadataIdentifier() {
     return metadataIdentifier;
   }
 
-
-  public void setMetadataIdentifier(String metadataIdentifier) {
+  public void setMetadataIdentifier(@javax.annotation.Nonnull String metadataIdentifier) {
     this.metadataIdentifier = metadataIdentifier;
   }
 
 
-  public SearchCommitsRequest metadataType(MetadataTypeEnum metadataType) {
-    
+  public SearchCommitsRequest metadataType(@javax.annotation.Nullable MetadataTypeEnum metadataType) {
     this.metadataType = metadataType;
     return this;
   }
 
-   /**
+  /**
    * Type of metadata.
    * @return metadataType
-  **/
+   */
   @javax.annotation.Nullable
   public MetadataTypeEnum getMetadataType() {
     return metadataType;
   }
 
-
-  public void setMetadataType(MetadataTypeEnum metadataType) {
+  public void setMetadataType(@javax.annotation.Nullable MetadataTypeEnum metadataType) {
     this.metadataType = metadataType;
   }
 
 
-  public SearchCommitsRequest branchName(String branchName) {
-    
+  public SearchCommitsRequest branchName(@javax.annotation.Nullable String branchName) {
     this.branchName = branchName;
     return this;
   }
 
-   /**
+  /**
    *    Name of the branch from which commit history needs to be displayed.      Note: If no branch_name is specified, then commits will be returned for the default branch for this configuration.
    * @return branchName
-  **/
+   */
   @javax.annotation.Nullable
   public String getBranchName() {
     return branchName;
   }
 
-
-  public void setBranchName(String branchName) {
+  public void setBranchName(@javax.annotation.Nullable String branchName) {
     this.branchName = branchName;
   }
 
 
-  public SearchCommitsRequest recordOffset(Integer recordOffset) {
-    
+  public SearchCommitsRequest recordOffset(@javax.annotation.Nullable Integer recordOffset) {
     this.recordOffset = recordOffset;
     return this;
   }
 
-   /**
+  /**
    *     Record offset point in the commit history to display the response.       Note: If no record offset is specified, the beginning of the record will be considered.
    * @return recordOffset
-  **/
+   */
   @javax.annotation.Nullable
   public Integer getRecordOffset() {
     return recordOffset;
   }
 
-
-  public void setRecordOffset(Integer recordOffset) {
+  public void setRecordOffset(@javax.annotation.Nullable Integer recordOffset) {
     this.recordOffset = recordOffset;
   }
 
 
-  public SearchCommitsRequest recordSize(Integer recordSize) {
-    
+  public SearchCommitsRequest recordSize(@javax.annotation.Nullable Integer recordSize) {
     this.recordSize = recordSize;
     return this;
   }
 
-   /**
+  /**
    *     Number of history records from record offset point to be displayed in the response.       Note: If no record size is specified, then all the records will be considered.
    * @return recordSize
-  **/
+   */
   @javax.annotation.Nullable
   public Integer getRecordSize() {
     return recordSize;
   }
 
-
-  public void setRecordSize(Integer recordSize) {
+  public void setRecordSize(@javax.annotation.Nullable Integer recordSize) {
     this.recordSize = recordSize;
   }
 
@@ -295,38 +293,43 @@ public class SearchCommitsRequest {
     openapiRequiredFields.add("metadata_identifier");
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to SearchCommitsRequest
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!SearchCommitsRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to SearchCommitsRequest
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!SearchCommitsRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in SearchCommitsRequest is not found in the empty JSON string", SearchCommitsRequest.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!SearchCommitsRequest.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `SearchCommitsRequest` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `SearchCommitsRequest` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
       for (String requiredField : SearchCommitsRequest.openapiRequiredFields) {
-        if (jsonObj.get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       if (!jsonObj.get("metadata_identifier").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `metadata_identifier` to be a primitive type in the JSON string but got `%s`", jsonObj.get("metadata_identifier").toString()));
       }
       if ((jsonObj.get("metadata_type") != null && !jsonObj.get("metadata_type").isJsonNull()) && !jsonObj.get("metadata_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `metadata_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("metadata_type").toString()));
+      }
+      // validate the optional field `metadata_type`
+      if (jsonObj.get("metadata_type") != null && !jsonObj.get("metadata_type").isJsonNull()) {
+        MetadataTypeEnum.validateJsonElement(jsonObj.get("metadata_type"));
       }
       if ((jsonObj.get("branch_name") != null && !jsonObj.get("branch_name").isJsonNull()) && !jsonObj.get("branch_name").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `branch_name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("branch_name").toString()));
@@ -353,31 +356,31 @@ public class SearchCommitsRequest {
 
            @Override
            public SearchCommitsRequest read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of SearchCommitsRequest given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of SearchCommitsRequest
-  * @throws IOException if the JSON string is invalid with respect to SearchCommitsRequest
-  */
+  /**
+   * Create an instance of SearchCommitsRequest given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of SearchCommitsRequest
+   * @throws IOException if the JSON string is invalid with respect to SearchCommitsRequest
+   */
   public static SearchCommitsRequest fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, SearchCommitsRequest.class);
   }
 
- /**
-  * Convert an instance of SearchCommitsRequest to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of SearchCommitsRequest to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

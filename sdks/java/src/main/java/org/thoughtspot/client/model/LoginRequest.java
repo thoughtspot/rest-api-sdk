@@ -14,13 +14,13 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.util.Arrays;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
@@ -38,12 +38,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -51,107 +49,103 @@ import org.thoughtspot.client.JSON;
 /**
  * LoginRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class LoginRequest {
   public static final String SERIALIZED_NAME_USERNAME = "username";
   @SerializedName(SERIALIZED_NAME_USERNAME)
+  @javax.annotation.Nullable
   private String username;
 
   public static final String SERIALIZED_NAME_PASSWORD = "password";
   @SerializedName(SERIALIZED_NAME_PASSWORD)
+  @javax.annotation.Nullable
   private String password;
 
   public static final String SERIALIZED_NAME_ORG_IDENTIFIER = "org_identifier";
   @SerializedName(SERIALIZED_NAME_ORG_IDENTIFIER)
+  @javax.annotation.Nullable
   private String orgIdentifier;
 
   public static final String SERIALIZED_NAME_REMEMBER_ME = "remember_me";
   @SerializedName(SERIALIZED_NAME_REMEMBER_ME)
+  @javax.annotation.Nullable
   private Boolean rememberMe = false;
 
   public LoginRequest() {
   }
 
-  public LoginRequest username(String username) {
-    
+  public LoginRequest username(@javax.annotation.Nullable String username) {
     this.username = username;
     return this;
   }
 
-   /**
+  /**
    * Username of the ThoughtSpot user
    * @return username
-  **/
+   */
   @javax.annotation.Nullable
   public String getUsername() {
     return username;
   }
 
-
-  public void setUsername(String username) {
+  public void setUsername(@javax.annotation.Nullable String username) {
     this.username = username;
   }
 
 
-  public LoginRequest password(String password) {
-    
+  public LoginRequest password(@javax.annotation.Nullable String password) {
     this.password = password;
     return this;
   }
 
-   /**
+  /**
    * Password of the user account
    * @return password
-  **/
+   */
   @javax.annotation.Nullable
   public String getPassword() {
     return password;
   }
 
-
-  public void setPassword(String password) {
+  public void setPassword(@javax.annotation.Nullable String password) {
     this.password = password;
   }
 
 
-  public LoginRequest orgIdentifier(String orgIdentifier) {
-    
+  public LoginRequest orgIdentifier(@javax.annotation.Nullable String orgIdentifier) {
     this.orgIdentifier = orgIdentifier;
     return this;
   }
 
-   /**
+  /**
    * ID of the Org context to log in to. If Org ID is not specified, the user will be logged in to the Org context of their previous login session.
    * @return orgIdentifier
-  **/
+   */
   @javax.annotation.Nullable
   public String getOrgIdentifier() {
     return orgIdentifier;
   }
 
-
-  public void setOrgIdentifier(String orgIdentifier) {
+  public void setOrgIdentifier(@javax.annotation.Nullable String orgIdentifier) {
     this.orgIdentifier = orgIdentifier;
   }
 
 
-  public LoginRequest rememberMe(Boolean rememberMe) {
-    
+  public LoginRequest rememberMe(@javax.annotation.Nullable Boolean rememberMe) {
     this.rememberMe = rememberMe;
     return this;
   }
 
-   /**
+  /**
    * A flag to remember the user session. When set to true, a session cookie is created and used in subsequent API requests.
    * @return rememberMe
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getRememberMe() {
     return rememberMe;
   }
 
-
-  public void setRememberMe(Boolean rememberMe) {
+  public void setRememberMe(@javax.annotation.Nullable Boolean rememberMe) {
     this.rememberMe = rememberMe;
   }
 
@@ -227,26 +221,27 @@ public class LoginRequest {
     openapiRequiredFields = new HashSet<String>();
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to LoginRequest
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!LoginRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to LoginRequest
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!LoginRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in LoginRequest is not found in the empty JSON string", LoginRequest.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!LoginRequest.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `LoginRequest` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `LoginRequest` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("username") != null && !jsonObj.get("username").isJsonNull()) && !jsonObj.get("username").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `username` to be a primitive type in the JSON string but got `%s`", jsonObj.get("username").toString()));
       }
@@ -278,31 +273,31 @@ public class LoginRequest {
 
            @Override
            public LoginRequest read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of LoginRequest given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of LoginRequest
-  * @throws IOException if the JSON string is invalid with respect to LoginRequest
-  */
+  /**
+   * Create an instance of LoginRequest given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of LoginRequest
+   * @throws IOException if the JSON string is invalid with respect to LoginRequest
+   */
   public static LoginRequest fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, LoginRequest.class);
   }
 
- /**
-  * Convert an instance of LoginRequest to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of LoginRequest to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

@@ -14,18 +14,18 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.util.Arrays;
 import org.thoughtspot.client.model.RuntimeFilter;
 import org.thoughtspot.client.model.RuntimeParamOverride;
 import org.thoughtspot.client.model.RuntimeSort;
 
-import javax.ws.rs.core.GenericType;
+
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -35,6 +35,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.google.gson.Gson;
@@ -54,11 +55,12 @@ import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonParseException;
 
 import org.thoughtspot.client.JSON;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class JWTUserOptionsParametersInner extends AbstractOpenApiSchema {
     private static final Logger log = Logger.getLogger(JWTUserOptionsParametersInner.class.getName());
 
@@ -71,8 +73,8 @@ public class JWTUserOptionsParametersInner extends AbstractOpenApiSchema {
             }
             final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
             final TypeAdapter<RuntimeFilter> adapterRuntimeFilter = gson.getDelegateAdapter(this, TypeToken.get(RuntimeFilter.class));
-            final TypeAdapter<RuntimeParamOverride> adapterRuntimeParamOverride = gson.getDelegateAdapter(this, TypeToken.get(RuntimeParamOverride.class));
             final TypeAdapter<RuntimeSort> adapterRuntimeSort = gson.getDelegateAdapter(this, TypeToken.get(RuntimeSort.class));
+            final TypeAdapter<RuntimeParamOverride> adapterRuntimeParamOverride = gson.getDelegateAdapter(this, TypeToken.get(RuntimeParamOverride.class));
 
             return (TypeAdapter<T>) new TypeAdapter<JWTUserOptionsParametersInner>() {
                 @Override
@@ -84,112 +86,99 @@ public class JWTUserOptionsParametersInner extends AbstractOpenApiSchema {
 
                     // check if the actual instance is of the type `RuntimeFilter`
                     if (value.getActualInstance() instanceof RuntimeFilter) {
-                        JsonObject obj = adapterRuntimeFilter.toJsonTree((RuntimeFilter)value.getActualInstance()).getAsJsonObject();
-                        elementAdapter.write(out, obj);
+                        JsonElement element = adapterRuntimeFilter.toJsonTree((RuntimeFilter)value.getActualInstance());
+                        elementAdapter.write(out, element);
                         return;
                     }
-
-                    // check if the actual instance is of the type `RuntimeParamOverride`
-                    if (value.getActualInstance() instanceof RuntimeParamOverride) {
-                        JsonObject obj = adapterRuntimeParamOverride.toJsonTree((RuntimeParamOverride)value.getActualInstance()).getAsJsonObject();
-                        elementAdapter.write(out, obj);
-                        return;
-                    }
-
                     // check if the actual instance is of the type `RuntimeSort`
                     if (value.getActualInstance() instanceof RuntimeSort) {
-                        JsonObject obj = adapterRuntimeSort.toJsonTree((RuntimeSort)value.getActualInstance()).getAsJsonObject();
-                        elementAdapter.write(out, obj);
+                        JsonElement element = adapterRuntimeSort.toJsonTree((RuntimeSort)value.getActualInstance());
+                        elementAdapter.write(out, element);
                         return;
                     }
-
+                    // check if the actual instance is of the type `RuntimeParamOverride`
+                    if (value.getActualInstance() instanceof RuntimeParamOverride) {
+                        JsonElement element = adapterRuntimeParamOverride.toJsonTree((RuntimeParamOverride)value.getActualInstance());
+                        elementAdapter.write(out, element);
+                        return;
+                    }
                     throw new IOException("Failed to serialize as the type doesn't match anyOf schemas: RuntimeFilter, RuntimeParamOverride, RuntimeSort");
                 }
 
                 @Override
                 public JWTUserOptionsParametersInner read(JsonReader in) throws IOException {
                     Object deserialized = null;
-                    JsonObject jsonObject = elementAdapter.read(in).getAsJsonObject();
+                    JsonElement jsonElement = elementAdapter.read(in);
+
+                    ArrayList<String> errorMessages = new ArrayList<>();
+                    TypeAdapter actualAdapter = elementAdapter;
 
                     // deserialize RuntimeFilter
                     try {
                         // validate the JSON object to see if any exception is thrown
-                        RuntimeFilter.validateJsonObject(jsonObject);
-                        log.log(Level.FINER, "Input data matches schema 'RuntimeFilter'");
+                        RuntimeFilter.validateJsonElement(jsonElement);
+                        actualAdapter = adapterRuntimeFilter;
                         JWTUserOptionsParametersInner ret = new JWTUserOptionsParametersInner();
-                        ret.setActualInstance(adapterRuntimeFilter.fromJsonTree(jsonObject));
+                        ret.setActualInstance(actualAdapter.fromJsonTree(jsonElement));
                         return ret;
                     } catch (Exception e) {
                         // deserialization failed, continue
+                        errorMessages.add(String.format("Deserialization for RuntimeFilter failed with `%s`.", e.getMessage()));
                         log.log(Level.FINER, "Input data does not match schema 'RuntimeFilter'", e);
                     }
-
-                    // deserialize RuntimeParamOverride
-                    try {
-                        // validate the JSON object to see if any exception is thrown
-                        RuntimeParamOverride.validateJsonObject(jsonObject);
-                        log.log(Level.FINER, "Input data matches schema 'RuntimeParamOverride'");
-                        JWTUserOptionsParametersInner ret = new JWTUserOptionsParametersInner();
-                        ret.setActualInstance(adapterRuntimeParamOverride.fromJsonTree(jsonObject));
-                        return ret;
-                    } catch (Exception e) {
-                        // deserialization failed, continue
-                        log.log(Level.FINER, "Input data does not match schema 'RuntimeParamOverride'", e);
-                    }
-
                     // deserialize RuntimeSort
                     try {
                         // validate the JSON object to see if any exception is thrown
-                        RuntimeSort.validateJsonObject(jsonObject);
-                        log.log(Level.FINER, "Input data matches schema 'RuntimeSort'");
+                        RuntimeSort.validateJsonElement(jsonElement);
+                        actualAdapter = adapterRuntimeSort;
                         JWTUserOptionsParametersInner ret = new JWTUserOptionsParametersInner();
-                        ret.setActualInstance(adapterRuntimeSort.fromJsonTree(jsonObject));
+                        ret.setActualInstance(actualAdapter.fromJsonTree(jsonElement));
                         return ret;
                     } catch (Exception e) {
                         // deserialization failed, continue
+                        errorMessages.add(String.format("Deserialization for RuntimeSort failed with `%s`.", e.getMessage()));
                         log.log(Level.FINER, "Input data does not match schema 'RuntimeSort'", e);
                     }
+                    // deserialize RuntimeParamOverride
+                    try {
+                        // validate the JSON object to see if any exception is thrown
+                        RuntimeParamOverride.validateJsonElement(jsonElement);
+                        actualAdapter = adapterRuntimeParamOverride;
+                        JWTUserOptionsParametersInner ret = new JWTUserOptionsParametersInner();
+                        ret.setActualInstance(actualAdapter.fromJsonTree(jsonElement));
+                        return ret;
+                    } catch (Exception e) {
+                        // deserialization failed, continue
+                        errorMessages.add(String.format("Deserialization for RuntimeParamOverride failed with `%s`.", e.getMessage()));
+                        log.log(Level.FINER, "Input data does not match schema 'RuntimeParamOverride'", e);
+                    }
 
-
-                    throw new IOException(String.format("Failed deserialization for JWTUserOptionsParametersInner: no class matched. JSON: %s", jsonObject.toString()));
+                    throw new IOException(String.format("Failed deserialization for JWTUserOptionsParametersInner: no class matches result, expected at least 1. Detailed failure message for anyOf schemas: %s. JSON: %s", errorMessages, jsonElement.toString()));
                 }
             }.nullSafe();
         }
     }
 
     // store a list of schema names defined in anyOf
-    public static final Map<String, GenericType> schemas = new HashMap<String, GenericType>();
+    public static final Map<String, Class<?>> schemas = new HashMap<String, Class<?>>();
 
     public JWTUserOptionsParametersInner() {
         super("anyOf", Boolean.FALSE);
     }
 
-    public JWTUserOptionsParametersInner(RuntimeFilter o) {
-        super("anyOf", Boolean.FALSE);
-        setActualInstance(o);
-    }
-
-    public JWTUserOptionsParametersInner(RuntimeParamOverride o) {
-        super("anyOf", Boolean.FALSE);
-        setActualInstance(o);
-    }
-
-    public JWTUserOptionsParametersInner(RuntimeSort o) {
+    public JWTUserOptionsParametersInner(Object o) {
         super("anyOf", Boolean.FALSE);
         setActualInstance(o);
     }
 
     static {
-        schemas.put("RuntimeFilter", new GenericType<RuntimeFilter>() {
-        });
-        schemas.put("RuntimeParamOverride", new GenericType<RuntimeParamOverride>() {
-        });
-        schemas.put("RuntimeSort", new GenericType<RuntimeSort>() {
-        });
+        schemas.put("RuntimeFilter", RuntimeFilter.class);
+        schemas.put("RuntimeSort", RuntimeSort.class);
+        schemas.put("RuntimeParamOverride", RuntimeParamOverride.class);
     }
 
     @Override
-    public Map<String, GenericType> getSchemas() {
+    public Map<String, Class<?>> getSchemas() {
         return JWTUserOptionsParametersInner.schemas;
     }
 
@@ -199,7 +188,6 @@ public class JWTUserOptionsParametersInner extends AbstractOpenApiSchema {
      * RuntimeFilter, RuntimeParamOverride, RuntimeSort
      *
      * It could be an instance of the 'anyOf' schemas.
-     * The anyOf child schemas may themselves be a composed schema (allOf, anyOf, anyOf).
      */
     @Override
     public void setActualInstance(Object instance) {
@@ -208,12 +196,12 @@ public class JWTUserOptionsParametersInner extends AbstractOpenApiSchema {
             return;
         }
 
-        if (instance instanceof RuntimeParamOverride) {
+        if (instance instanceof RuntimeSort) {
             super.setActualInstance(instance);
             return;
         }
 
-        if (instance instanceof RuntimeSort) {
+        if (instance instanceof RuntimeParamOverride) {
             super.setActualInstance(instance);
             return;
         }
@@ -227,6 +215,7 @@ public class JWTUserOptionsParametersInner extends AbstractOpenApiSchema {
      *
      * @return The actual instance (RuntimeFilter, RuntimeParamOverride, RuntimeSort)
      */
+    @SuppressWarnings("unchecked")
     @Override
     public Object getActualInstance() {
         return super.getActualInstance();
@@ -244,6 +233,17 @@ public class JWTUserOptionsParametersInner extends AbstractOpenApiSchema {
     }
 
     /**
+     * Get the actual instance of `RuntimeSort`. If the actual instance is not `RuntimeSort`,
+     * the ClassCastException will be thrown.
+     *
+     * @return The actual instance of `RuntimeSort`
+     * @throws ClassCastException if the instance is not `RuntimeSort`
+     */
+    public RuntimeSort getRuntimeSort() throws ClassCastException {
+        return (RuntimeSort)super.getActualInstance();
+    }
+
+    /**
      * Get the actual instance of `RuntimeParamOverride`. If the actual instance is not `RuntimeParamOverride`,
      * the ClassCastException will be thrown.
      *
@@ -255,73 +255,59 @@ public class JWTUserOptionsParametersInner extends AbstractOpenApiSchema {
     }
 
     /**
-     * Get the actual instance of `RuntimeSort`. If the actual instance is not `RuntimeSort`,
-     * the ClassCastException will be thrown.
+     * Validates the JSON Element and throws an exception if issues found
      *
-     * @return The actual instance of `RuntimeSort`
-     * @throws ClassCastException if the instance is not `RuntimeSort`
+     * @param jsonElement JSON Element
+     * @throws IOException if the JSON Element is invalid with respect to JWTUserOptionsParametersInner
      */
-    public RuntimeSort getRuntimeSort() throws ClassCastException {
-        return (RuntimeSort)super.getActualInstance();
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+        // validate anyOf schemas one by one
+        ArrayList<String> errorMessages = new ArrayList<>();
+        // validate the json string with RuntimeFilter
+        try {
+            RuntimeFilter.validateJsonElement(jsonElement);
+            return;
+        } catch (Exception e) {
+            errorMessages.add(String.format("Deserialization for RuntimeFilter failed with `%s`.", e.getMessage()));
+            // continue to the next one
+        }
+        // validate the json string with RuntimeSort
+        try {
+            RuntimeSort.validateJsonElement(jsonElement);
+            return;
+        } catch (Exception e) {
+            errorMessages.add(String.format("Deserialization for RuntimeSort failed with `%s`.", e.getMessage()));
+            // continue to the next one
+        }
+        // validate the json string with RuntimeParamOverride
+        try {
+            RuntimeParamOverride.validateJsonElement(jsonElement);
+            return;
+        } catch (Exception e) {
+            errorMessages.add(String.format("Deserialization for RuntimeParamOverride failed with `%s`.", e.getMessage()));
+            // continue to the next one
+        }
+        throw new IOException(String.format("The JSON string is invalid for JWTUserOptionsParametersInner with anyOf schemas: RuntimeFilter, RuntimeParamOverride, RuntimeSort. no class match the result, expected at least 1. Detailed failure message for anyOf schemas: %s. JSON: %s", errorMessages, jsonElement.toString()));
     }
 
+    /**
+     * Create an instance of JWTUserOptionsParametersInner given an JSON string
+     *
+     * @param jsonString JSON string
+     * @return An instance of JWTUserOptionsParametersInner
+     * @throws IOException if the JSON string is invalid with respect to JWTUserOptionsParametersInner
+     */
+    public static JWTUserOptionsParametersInner fromJson(String jsonString) throws IOException {
+        return JSON.getGson().fromJson(jsonString, JWTUserOptionsParametersInner.class);
+    }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to JWTUserOptionsParametersInner
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-    // validate anyOf schemas one by one
-    int validCount = 0;
-    // validate the json string with RuntimeFilter
-    try {
-      RuntimeFilter.validateJsonObject(jsonObj);
-      return; // return earlier as at least one schema is valid with respect to the Json object
-      //validCount++;
-    } catch (Exception e) {
-      // continue to the next one
+    /**
+     * Convert an instance of JWTUserOptionsParametersInner to an JSON string
+     *
+     * @return JSON string
+     */
+    public String toJson() {
+        return JSON.getGson().toJson(this);
     }
-    // validate the json string with RuntimeParamOverride
-    try {
-      RuntimeParamOverride.validateJsonObject(jsonObj);
-      return; // return earlier as at least one schema is valid with respect to the Json object
-      //validCount++;
-    } catch (Exception e) {
-      // continue to the next one
-    }
-    // validate the json string with RuntimeSort
-    try {
-      RuntimeSort.validateJsonObject(jsonObj);
-      return; // return earlier as at least one schema is valid with respect to the Json object
-      //validCount++;
-    } catch (Exception e) {
-      // continue to the next one
-    }
-    if (validCount == 0) {
-      throw new IOException(String.format("The JSON string is invalid for JWTUserOptionsParametersInner with anyOf schemas: RuntimeFilter, RuntimeParamOverride, RuntimeSort. JSON: %s", jsonObj.toString()));
-    }
-  }
-
- /**
-  * Create an instance of JWTUserOptionsParametersInner given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of JWTUserOptionsParametersInner
-  * @throws IOException if the JSON string is invalid with respect to JWTUserOptionsParametersInner
-  */
-  public static JWTUserOptionsParametersInner fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, JWTUserOptionsParametersInner.class);
-  }
-
- /**
-  * Convert an instance of JWTUserOptionsParametersInner to an JSON string
-  *
-  * @return JSON string
-  */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
 }
 

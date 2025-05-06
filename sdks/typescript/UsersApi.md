@@ -39,6 +39,7 @@ apiInstance.activateUser(
     user_identifier: "user_identifier_example",
     auth_token: "auth_token_example",
     password: "password_example",
+    properties: "properties_example",
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);

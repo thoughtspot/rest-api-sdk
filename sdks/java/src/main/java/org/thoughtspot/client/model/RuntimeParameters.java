@@ -14,7 +14,6 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -22,6 +21,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
 import org.thoughtspot.client.model.UserObject;
@@ -41,12 +41,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -54,50 +52,51 @@ import org.thoughtspot.client.JSON;
 /**
  * Objects to apply the Runtime_Parameters.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class RuntimeParameters {
   public static final String SERIALIZED_NAME_NAME = "name";
   @SerializedName(SERIALIZED_NAME_NAME)
+  @javax.annotation.Nonnull
   private String name;
 
   public static final String SERIALIZED_NAME_VALUES = "values";
   @SerializedName(SERIALIZED_NAME_VALUES)
+  @javax.annotation.Nonnull
   private List<String> values = new ArrayList<>();
 
   public static final String SERIALIZED_NAME_PERSIST = "persist";
   @SerializedName(SERIALIZED_NAME_PERSIST)
+  @javax.annotation.Nullable
   private Boolean persist = false;
 
   public static final String SERIALIZED_NAME_OBJECTS = "objects";
   @SerializedName(SERIALIZED_NAME_OBJECTS)
+  @javax.annotation.Nullable
   private List<UserObject> objects;
 
   public RuntimeParameters() {
   }
 
-  public RuntimeParameters name(String name) {
-    
+  public RuntimeParameters name(@javax.annotation.Nonnull String name) {
     this.name = name;
     return this;
   }
 
-   /**
+  /**
    * The name of the parameter.
    * @return name
-  **/
+   */
   @javax.annotation.Nonnull
   public String getName() {
     return name;
   }
 
-
-  public void setName(String name) {
+  public void setName(@javax.annotation.Nonnull String name) {
     this.name = name;
   }
 
 
-  public RuntimeParameters values(List<String> values) {
-    
+  public RuntimeParameters values(@javax.annotation.Nonnull List<String> values) {
     this.values = values;
     return this;
   }
@@ -110,44 +109,40 @@ public class RuntimeParameters {
     return this;
   }
 
-   /**
+  /**
    * The array of values.
    * @return values
-  **/
+   */
   @javax.annotation.Nonnull
   public List<String> getValues() {
     return values;
   }
 
-
-  public void setValues(List<String> values) {
+  public void setValues(@javax.annotation.Nonnull List<String> values) {
     this.values = values;
   }
 
 
-  public RuntimeParameters persist(Boolean persist) {
-    
+  public RuntimeParameters persist(@javax.annotation.Nullable Boolean persist) {
     this.persist = persist;
     return this;
   }
 
-   /**
+  /**
    * Flag to persist the parameters.    Version: 9.12.0.cl or later 
    * @return persist
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getPersist() {
     return persist;
   }
 
-
-  public void setPersist(Boolean persist) {
+  public void setPersist(@javax.annotation.Nullable Boolean persist) {
     this.persist = persist;
   }
 
 
-  public RuntimeParameters objects(List<UserObject> objects) {
-    
+  public RuntimeParameters objects(@javax.annotation.Nullable List<UserObject> objects) {
     this.objects = objects;
     return this;
   }
@@ -160,17 +155,16 @@ public class RuntimeParameters {
     return this;
   }
 
-   /**
+  /**
    * Object to apply the runtime parameter.
    * @return objects
-  **/
+   */
   @javax.annotation.Nullable
   public List<UserObject> getObjects() {
     return objects;
   }
 
-
-  public void setObjects(List<UserObject> objects) {
+  public void setObjects(@javax.annotation.Nullable List<UserObject> objects) {
     this.objects = objects;
   }
 
@@ -248,33 +242,34 @@ public class RuntimeParameters {
     openapiRequiredFields.add("values");
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to RuntimeParameters
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!RuntimeParameters.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to RuntimeParameters
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!RuntimeParameters.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in RuntimeParameters is not found in the empty JSON string", RuntimeParameters.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!RuntimeParameters.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `RuntimeParameters` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `RuntimeParameters` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
       for (String requiredField : RuntimeParameters.openapiRequiredFields) {
-        if (jsonObj.get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       if (!jsonObj.get("name").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("name").toString()));
       }
@@ -294,7 +289,7 @@ public class RuntimeParameters {
 
           // validate the optional field `objects` (array)
           for (int i = 0; i < jsonArrayobjects.size(); i++) {
-            UserObject.validateJsonObject(jsonArrayobjects.get(i).getAsJsonObject());
+            UserObject.validateJsonElement(jsonArrayobjects.get(i));
           };
         }
       }
@@ -320,31 +315,31 @@ public class RuntimeParameters {
 
            @Override
            public RuntimeParameters read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of RuntimeParameters given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of RuntimeParameters
-  * @throws IOException if the JSON string is invalid with respect to RuntimeParameters
-  */
+  /**
+   * Create an instance of RuntimeParameters given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of RuntimeParameters
+   * @throws IOException if the JSON string is invalid with respect to RuntimeParameters
+   */
   public static RuntimeParameters fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, RuntimeParameters.class);
   }
 
- /**
-  * Convert an instance of RuntimeParameters to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of RuntimeParameters to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

@@ -14,7 +14,6 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -22,6 +21,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
 
@@ -40,12 +40,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -53,14 +51,16 @@ import org.thoughtspot.client.JSON;
 /**
  * Metadata Search Response Object.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class MetadataSearchResponse {
   public static final String SERIALIZED_NAME_METADATA_ID = "metadata_id";
   @SerializedName(SERIALIZED_NAME_METADATA_ID)
+  @javax.annotation.Nullable
   private String metadataId;
 
   public static final String SERIALIZED_NAME_METADATA_NAME = "metadata_name";
   @SerializedName(SERIALIZED_NAME_METADATA_NAME)
+  @javax.annotation.Nullable
   private String metadataName;
 
   /**
@@ -124,125 +124,128 @@ public class MetadataSearchResponse {
         return MetadataTypeEnum.fromValue(value);
       }
     }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      MetadataTypeEnum.fromValue(value);
+    }
   }
 
   public static final String SERIALIZED_NAME_METADATA_TYPE = "metadata_type";
   @SerializedName(SERIALIZED_NAME_METADATA_TYPE)
+  @javax.annotation.Nonnull
   private MetadataTypeEnum metadataType;
 
   public static final String SERIALIZED_NAME_DEPENDENT_OBJECTS = "dependent_objects";
   @SerializedName(SERIALIZED_NAME_DEPENDENT_OBJECTS)
+  @javax.annotation.Nullable
   private Object dependentObjects;
 
   public static final String SERIALIZED_NAME_INCOMPLETE_OBJECTS = "incomplete_objects";
   @SerializedName(SERIALIZED_NAME_INCOMPLETE_OBJECTS)
+  @javax.annotation.Nullable
   private List<Object> incompleteObjects;
 
   public static final String SERIALIZED_NAME_METADATA_DETAIL = "metadata_detail";
   @SerializedName(SERIALIZED_NAME_METADATA_DETAIL)
+  @javax.annotation.Nullable
   private Object metadataDetail;
 
   public static final String SERIALIZED_NAME_METADATA_HEADER = "metadata_header";
   @SerializedName(SERIALIZED_NAME_METADATA_HEADER)
+  @javax.annotation.Nullable
   private Object metadataHeader;
 
   public static final String SERIALIZED_NAME_VISUALIZATION_HEADERS = "visualization_headers";
   @SerializedName(SERIALIZED_NAME_VISUALIZATION_HEADERS)
+  @javax.annotation.Nullable
   private List<Object> visualizationHeaders;
 
   public static final String SERIALIZED_NAME_STATS = "stats";
   @SerializedName(SERIALIZED_NAME_STATS)
+  @javax.annotation.Nullable
   private Object stats;
 
   public MetadataSearchResponse() {
   }
 
-  public MetadataSearchResponse metadataId(String metadataId) {
-    
+  public MetadataSearchResponse metadataId(@javax.annotation.Nullable String metadataId) {
     this.metadataId = metadataId;
     return this;
   }
 
-   /**
+  /**
    * Unique identifier of the metadata.
    * @return metadataId
-  **/
+   */
   @javax.annotation.Nullable
   public String getMetadataId() {
     return metadataId;
   }
 
-
-  public void setMetadataId(String metadataId) {
+  public void setMetadataId(@javax.annotation.Nullable String metadataId) {
     this.metadataId = metadataId;
   }
 
 
-  public MetadataSearchResponse metadataName(String metadataName) {
-    
+  public MetadataSearchResponse metadataName(@javax.annotation.Nullable String metadataName) {
     this.metadataName = metadataName;
     return this;
   }
 
-   /**
+  /**
    * Name of the metadata.
    * @return metadataName
-  **/
+   */
   @javax.annotation.Nullable
   public String getMetadataName() {
     return metadataName;
   }
 
-
-  public void setMetadataName(String metadataName) {
+  public void setMetadataName(@javax.annotation.Nullable String metadataName) {
     this.metadataName = metadataName;
   }
 
 
-  public MetadataSearchResponse metadataType(MetadataTypeEnum metadataType) {
-    
+  public MetadataSearchResponse metadataType(@javax.annotation.Nonnull MetadataTypeEnum metadataType) {
     this.metadataType = metadataType;
     return this;
   }
 
-   /**
+  /**
    * Type of the metadata.
    * @return metadataType
-  **/
+   */
   @javax.annotation.Nonnull
   public MetadataTypeEnum getMetadataType() {
     return metadataType;
   }
 
-
-  public void setMetadataType(MetadataTypeEnum metadataType) {
+  public void setMetadataType(@javax.annotation.Nonnull MetadataTypeEnum metadataType) {
     this.metadataType = metadataType;
   }
 
 
-  public MetadataSearchResponse dependentObjects(Object dependentObjects) {
-    
+  public MetadataSearchResponse dependentObjects(@javax.annotation.Nullable Object dependentObjects) {
     this.dependentObjects = dependentObjects;
     return this;
   }
 
-   /**
+  /**
    * Details of dependent objects of the metadata objects.
    * @return dependentObjects
-  **/
+   */
   @javax.annotation.Nullable
   public Object getDependentObjects() {
     return dependentObjects;
   }
 
-
-  public void setDependentObjects(Object dependentObjects) {
+  public void setDependentObjects(@javax.annotation.Nullable Object dependentObjects) {
     this.dependentObjects = dependentObjects;
   }
 
 
-  public MetadataSearchResponse incompleteObjects(List<Object> incompleteObjects) {
-    
+  public MetadataSearchResponse incompleteObjects(@javax.annotation.Nullable List<Object> incompleteObjects) {
     this.incompleteObjects = incompleteObjects;
     return this;
   }
@@ -255,65 +258,59 @@ public class MetadataSearchResponse {
     return this;
   }
 
-   /**
+  /**
    * Details of incomplete information of the metadata objects if any.
    * @return incompleteObjects
-  **/
+   */
   @javax.annotation.Nullable
   public List<Object> getIncompleteObjects() {
     return incompleteObjects;
   }
 
-
-  public void setIncompleteObjects(List<Object> incompleteObjects) {
+  public void setIncompleteObjects(@javax.annotation.Nullable List<Object> incompleteObjects) {
     this.incompleteObjects = incompleteObjects;
   }
 
 
-  public MetadataSearchResponse metadataDetail(Object metadataDetail) {
-    
+  public MetadataSearchResponse metadataDetail(@javax.annotation.Nullable Object metadataDetail) {
     this.metadataDetail = metadataDetail;
     return this;
   }
 
-   /**
+  /**
    * Complete details of the metadata objects.
    * @return metadataDetail
-  **/
+   */
   @javax.annotation.Nullable
   public Object getMetadataDetail() {
     return metadataDetail;
   }
 
-
-  public void setMetadataDetail(Object metadataDetail) {
+  public void setMetadataDetail(@javax.annotation.Nullable Object metadataDetail) {
     this.metadataDetail = metadataDetail;
   }
 
 
-  public MetadataSearchResponse metadataHeader(Object metadataHeader) {
-    
+  public MetadataSearchResponse metadataHeader(@javax.annotation.Nullable Object metadataHeader) {
     this.metadataHeader = metadataHeader;
     return this;
   }
 
-   /**
+  /**
    * Header information of the metadata objects.
    * @return metadataHeader
-  **/
+   */
   @javax.annotation.Nullable
   public Object getMetadataHeader() {
     return metadataHeader;
   }
 
-
-  public void setMetadataHeader(Object metadataHeader) {
+  public void setMetadataHeader(@javax.annotation.Nullable Object metadataHeader) {
     this.metadataHeader = metadataHeader;
   }
 
 
-  public MetadataSearchResponse visualizationHeaders(List<Object> visualizationHeaders) {
-    
+  public MetadataSearchResponse visualizationHeaders(@javax.annotation.Nullable List<Object> visualizationHeaders) {
     this.visualizationHeaders = visualizationHeaders;
     return this;
   }
@@ -326,38 +323,35 @@ public class MetadataSearchResponse {
     return this;
   }
 
-   /**
+  /**
    * Visualization header information of the metadata objects.
    * @return visualizationHeaders
-  **/
+   */
   @javax.annotation.Nullable
   public List<Object> getVisualizationHeaders() {
     return visualizationHeaders;
   }
 
-
-  public void setVisualizationHeaders(List<Object> visualizationHeaders) {
+  public void setVisualizationHeaders(@javax.annotation.Nullable List<Object> visualizationHeaders) {
     this.visualizationHeaders = visualizationHeaders;
   }
 
 
-  public MetadataSearchResponse stats(Object stats) {
-    
+  public MetadataSearchResponse stats(@javax.annotation.Nullable Object stats) {
     this.stats = stats;
     return this;
   }
 
-   /**
+  /**
    * Stats of the metadata object. Includes views, favorites, last_accessed.
    * @return stats
-  **/
+   */
   @javax.annotation.Nullable
   public Object getStats() {
     return stats;
   }
 
-
-  public void setStats(Object stats) {
+  public void setStats(@javax.annotation.Nullable Object stats) {
     this.stats = stats;
   }
 
@@ -449,33 +443,34 @@ public class MetadataSearchResponse {
     openapiRequiredFields.add("metadata_type");
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to MetadataSearchResponse
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!MetadataSearchResponse.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to MetadataSearchResponse
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!MetadataSearchResponse.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in MetadataSearchResponse is not found in the empty JSON string", MetadataSearchResponse.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!MetadataSearchResponse.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `MetadataSearchResponse` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `MetadataSearchResponse` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
       for (String requiredField : MetadataSearchResponse.openapiRequiredFields) {
-        if (jsonObj.get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("metadata_id") != null && !jsonObj.get("metadata_id").isJsonNull()) && !jsonObj.get("metadata_id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `metadata_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("metadata_id").toString()));
       }
@@ -485,12 +480,14 @@ public class MetadataSearchResponse {
       if (!jsonObj.get("metadata_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `metadata_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("metadata_type").toString()));
       }
+      // validate the required field `metadata_type`
+      MetadataTypeEnum.validateJsonElement(jsonObj.get("metadata_type"));
       // ensure the optional json data is an array if present
-      if (jsonObj.get("incomplete_objects") != null && !jsonObj.get("incomplete_objects").isJsonArray()) {
+      if (jsonObj.get("incomplete_objects") != null && !jsonObj.get("incomplete_objects").isJsonNull() && !jsonObj.get("incomplete_objects").isJsonArray()) {
         throw new IllegalArgumentException(String.format("Expected the field `incomplete_objects` to be an array in the JSON string but got `%s`", jsonObj.get("incomplete_objects").toString()));
       }
       // ensure the optional json data is an array if present
-      if (jsonObj.get("visualization_headers") != null && !jsonObj.get("visualization_headers").isJsonArray()) {
+      if (jsonObj.get("visualization_headers") != null && !jsonObj.get("visualization_headers").isJsonNull() && !jsonObj.get("visualization_headers").isJsonArray()) {
         throw new IllegalArgumentException(String.format("Expected the field `visualization_headers` to be an array in the JSON string but got `%s`", jsonObj.get("visualization_headers").toString()));
       }
   }
@@ -515,31 +512,31 @@ public class MetadataSearchResponse {
 
            @Override
            public MetadataSearchResponse read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of MetadataSearchResponse given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of MetadataSearchResponse
-  * @throws IOException if the JSON string is invalid with respect to MetadataSearchResponse
-  */
+  /**
+   * Create an instance of MetadataSearchResponse given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of MetadataSearchResponse
+   * @throws IOException if the JSON string is invalid with respect to MetadataSearchResponse
+   */
   public static MetadataSearchResponse fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, MetadataSearchResponse.class);
   }
 
- /**
-  * Convert an instance of MetadataSearchResponse to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of MetadataSearchResponse to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

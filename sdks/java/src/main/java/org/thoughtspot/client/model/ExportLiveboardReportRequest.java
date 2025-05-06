@@ -14,7 +14,6 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -22,9 +21,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import org.thoughtspot.client.model.ExportLiveboardReportRequestPdfOptions;
-import org.thoughtspot.client.model.ExportLiveboardReportRequestPngOptions;
+import org.thoughtspot.client.model.PdfOptionsInput;
+import org.thoughtspot.client.model.PngOptionsInput;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -41,12 +41,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -54,18 +52,21 @@ import org.thoughtspot.client.JSON;
 /**
  * ExportLiveboardReportRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class ExportLiveboardReportRequest {
   public static final String SERIALIZED_NAME_METADATA_IDENTIFIER = "metadata_identifier";
   @SerializedName(SERIALIZED_NAME_METADATA_IDENTIFIER)
+  @javax.annotation.Nonnull
   private String metadataIdentifier;
 
   public static final String SERIALIZED_NAME_VISUALIZATION_IDENTIFIERS = "visualization_identifiers";
   @SerializedName(SERIALIZED_NAME_VISUALIZATION_IDENTIFIERS)
-  private List<String> visualizationIdentifiers;
+  @javax.annotation.Nullable
+  private List<String> visualizationIdentifiers = new ArrayList<>();
 
   public static final String SERIALIZED_NAME_TRANSIENT_CONTENT = "transient_content";
   @SerializedName(SERIALIZED_NAME_TRANSIENT_CONTENT)
+  @javax.annotation.Nullable
   private String transientContent;
 
   /**
@@ -117,58 +118,66 @@ public class ExportLiveboardReportRequest {
         return FileFormatEnum.fromValue(value);
       }
     }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      FileFormatEnum.fromValue(value);
+    }
   }
 
   public static final String SERIALIZED_NAME_FILE_FORMAT = "file_format";
   @SerializedName(SERIALIZED_NAME_FILE_FORMAT)
+  @javax.annotation.Nullable
   private FileFormatEnum fileFormat = FileFormatEnum.CSV;
 
   public static final String SERIALIZED_NAME_RUNTIME_FILTER = "runtime_filter";
   @SerializedName(SERIALIZED_NAME_RUNTIME_FILTER)
+  @javax.annotation.Nullable
   private Object runtimeFilter;
 
   public static final String SERIALIZED_NAME_RUNTIME_SORT = "runtime_sort";
   @SerializedName(SERIALIZED_NAME_RUNTIME_SORT)
+  @javax.annotation.Nullable
   private Object runtimeSort;
 
   public static final String SERIALIZED_NAME_PDF_OPTIONS = "pdf_options";
   @SerializedName(SERIALIZED_NAME_PDF_OPTIONS)
-  private ExportLiveboardReportRequestPdfOptions pdfOptions;
+  @javax.annotation.Nullable
+  private PdfOptionsInput pdfOptions;
 
   public static final String SERIALIZED_NAME_PNG_OPTIONS = "png_options";
   @SerializedName(SERIALIZED_NAME_PNG_OPTIONS)
-  private ExportLiveboardReportRequestPngOptions pngOptions;
+  @javax.annotation.Nullable
+  private PngOptionsInput pngOptions;
 
   public static final String SERIALIZED_NAME_RUNTIME_PARAM_OVERRIDE = "runtime_param_override";
   @SerializedName(SERIALIZED_NAME_RUNTIME_PARAM_OVERRIDE)
+  @javax.annotation.Nullable
   private Object runtimeParamOverride;
 
   public ExportLiveboardReportRequest() {
   }
 
-  public ExportLiveboardReportRequest metadataIdentifier(String metadataIdentifier) {
-    
+  public ExportLiveboardReportRequest metadataIdentifier(@javax.annotation.Nonnull String metadataIdentifier) {
     this.metadataIdentifier = metadataIdentifier;
     return this;
   }
 
-   /**
+  /**
    * GUID or name of the Liveboard object.
    * @return metadataIdentifier
-  **/
+   */
   @javax.annotation.Nonnull
   public String getMetadataIdentifier() {
     return metadataIdentifier;
   }
 
-
-  public void setMetadataIdentifier(String metadataIdentifier) {
+  public void setMetadataIdentifier(@javax.annotation.Nonnull String metadataIdentifier) {
     this.metadataIdentifier = metadataIdentifier;
   }
 
 
-  public ExportLiveboardReportRequest visualizationIdentifiers(List<String> visualizationIdentifiers) {
-    
+  public ExportLiveboardReportRequest visualizationIdentifiers(@javax.annotation.Nullable List<String> visualizationIdentifiers) {
     this.visualizationIdentifiers = visualizationIdentifiers;
     return this;
   }
@@ -181,164 +190,149 @@ public class ExportLiveboardReportRequest {
     return this;
   }
 
-   /**
+  /**
    * GUID or name of visualizations on the Liveboard. If this parameter is not defined, the API returns a report with all visualizations saved on a Liveboard.
    * @return visualizationIdentifiers
-  **/
+   */
   @javax.annotation.Nullable
   public List<String> getVisualizationIdentifiers() {
     return visualizationIdentifiers;
   }
 
-
-  public void setVisualizationIdentifiers(List<String> visualizationIdentifiers) {
+  public void setVisualizationIdentifiers(@javax.annotation.Nullable List<String> visualizationIdentifiers) {
     this.visualizationIdentifiers = visualizationIdentifiers;
   }
 
 
-  public ExportLiveboardReportRequest transientContent(String transientContent) {
-    
+  public ExportLiveboardReportRequest transientContent(@javax.annotation.Nullable String transientContent) {
     this.transientContent = transientContent;
     return this;
   }
 
-   /**
+  /**
    * Transient content of the Liveboard.
    * @return transientContent
-  **/
+   */
   @javax.annotation.Nullable
   public String getTransientContent() {
     return transientContent;
   }
 
-
-  public void setTransientContent(String transientContent) {
+  public void setTransientContent(@javax.annotation.Nullable String transientContent) {
     this.transientContent = transientContent;
   }
 
 
-  public ExportLiveboardReportRequest fileFormat(FileFormatEnum fileFormat) {
-    
+  public ExportLiveboardReportRequest fileFormat(@javax.annotation.Nullable FileFormatEnum fileFormat) {
     this.fileFormat = fileFormat;
     return this;
   }
 
-   /**
+  /**
    * Export file format.
    * @return fileFormat
-  **/
+   */
   @javax.annotation.Nullable
   public FileFormatEnum getFileFormat() {
     return fileFormat;
   }
 
-
-  public void setFileFormat(FileFormatEnum fileFormat) {
+  public void setFileFormat(@javax.annotation.Nullable FileFormatEnum fileFormat) {
     this.fileFormat = fileFormat;
   }
 
 
-  public ExportLiveboardReportRequest runtimeFilter(Object runtimeFilter) {
-    
+  public ExportLiveboardReportRequest runtimeFilter(@javax.annotation.Nullable Object runtimeFilter) {
     this.runtimeFilter = runtimeFilter;
     return this;
   }
 
-   /**
+  /**
    * JSON object with representing filter condition to apply filters at runtime. For example, {\&quot;col1\&quot;: \&quot;region\&quot;, \&quot;op1\&quot;: \&quot;EQ\&quot;, \&quot;val1\&quot;: \&quot;northeast\&quot; }. You can add multiple keys by incrementing the number at the end, for example, col2, op2, val2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_filters).
    * @return runtimeFilter
-  **/
+   */
   @javax.annotation.Nullable
   public Object getRuntimeFilter() {
     return runtimeFilter;
   }
 
-
-  public void setRuntimeFilter(Object runtimeFilter) {
+  public void setRuntimeFilter(@javax.annotation.Nullable Object runtimeFilter) {
     this.runtimeFilter = runtimeFilter;
   }
 
 
-  public ExportLiveboardReportRequest runtimeSort(Object runtimeSort) {
-    
+  public ExportLiveboardReportRequest runtimeSort(@javax.annotation.Nullable Object runtimeSort) {
     this.runtimeSort = runtimeSort;
     return this;
   }
 
-   /**
+  /**
    * JSON string representing runtime sort. For example, {\&quot;sortCol1\&quot;: \&quot;region\&quot;, \&quot;asc1\&quot; : true}. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort).
    * @return runtimeSort
-  **/
+   */
   @javax.annotation.Nullable
   public Object getRuntimeSort() {
     return runtimeSort;
   }
 
-
-  public void setRuntimeSort(Object runtimeSort) {
+  public void setRuntimeSort(@javax.annotation.Nullable Object runtimeSort) {
     this.runtimeSort = runtimeSort;
   }
 
 
-  public ExportLiveboardReportRequest pdfOptions(ExportLiveboardReportRequestPdfOptions pdfOptions) {
-    
+  public ExportLiveboardReportRequest pdfOptions(@javax.annotation.Nullable PdfOptionsInput pdfOptions) {
     this.pdfOptions = pdfOptions;
     return this;
   }
 
-   /**
-   * Get pdfOptions
+  /**
+   * Options for PDF export.
    * @return pdfOptions
-  **/
+   */
   @javax.annotation.Nullable
-  public ExportLiveboardReportRequestPdfOptions getPdfOptions() {
+  public PdfOptionsInput getPdfOptions() {
     return pdfOptions;
   }
 
-
-  public void setPdfOptions(ExportLiveboardReportRequestPdfOptions pdfOptions) {
+  public void setPdfOptions(@javax.annotation.Nullable PdfOptionsInput pdfOptions) {
     this.pdfOptions = pdfOptions;
   }
 
 
-  public ExportLiveboardReportRequest pngOptions(ExportLiveboardReportRequestPngOptions pngOptions) {
-    
+  public ExportLiveboardReportRequest pngOptions(@javax.annotation.Nullable PngOptionsInput pngOptions) {
     this.pngOptions = pngOptions;
     return this;
   }
 
-   /**
-   * Get pngOptions
+  /**
+   * Options for PNG export.
    * @return pngOptions
-  **/
+   */
   @javax.annotation.Nullable
-  public ExportLiveboardReportRequestPngOptions getPngOptions() {
+  public PngOptionsInput getPngOptions() {
     return pngOptions;
   }
 
-
-  public void setPngOptions(ExportLiveboardReportRequestPngOptions pngOptions) {
+  public void setPngOptions(@javax.annotation.Nullable PngOptionsInput pngOptions) {
     this.pngOptions = pngOptions;
   }
 
 
-  public ExportLiveboardReportRequest runtimeParamOverride(Object runtimeParamOverride) {
-    
+  public ExportLiveboardReportRequest runtimeParamOverride(@javax.annotation.Nullable Object runtimeParamOverride) {
     this.runtimeParamOverride = runtimeParamOverride;
     return this;
   }
 
-   /**
+  /**
    * JSON object for setting values of parameters at runtime. For example, &lt;code&gt; {\&quot;param1\&quot;: \&quot;Double List Param\&quot;, \&quot;paramVal1\&quot;: 0.5}&lt;/code&gt;. You can add multiple keys by incrementing the number at the end, for example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters).
    * @return runtimeParamOverride
-  **/
+   */
   @javax.annotation.Nullable
   public Object getRuntimeParamOverride() {
     return runtimeParamOverride;
   }
 
-
-  public void setRuntimeParamOverride(Object runtimeParamOverride) {
+  public void setRuntimeParamOverride(@javax.annotation.Nullable Object runtimeParamOverride) {
     this.runtimeParamOverride = runtimeParamOverride;
   }
 
@@ -419,38 +413,39 @@ public class ExportLiveboardReportRequest {
     openapiRequiredFields.add("metadata_identifier");
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to ExportLiveboardReportRequest
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!ExportLiveboardReportRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to ExportLiveboardReportRequest
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!ExportLiveboardReportRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in ExportLiveboardReportRequest is not found in the empty JSON string", ExportLiveboardReportRequest.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!ExportLiveboardReportRequest.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `ExportLiveboardReportRequest` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `ExportLiveboardReportRequest` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
       for (String requiredField : ExportLiveboardReportRequest.openapiRequiredFields) {
-        if (jsonObj.get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       if (!jsonObj.get("metadata_identifier").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `metadata_identifier` to be a primitive type in the JSON string but got `%s`", jsonObj.get("metadata_identifier").toString()));
       }
       // ensure the optional json data is an array if present
-      if (jsonObj.get("visualization_identifiers") != null && !jsonObj.get("visualization_identifiers").isJsonArray()) {
+      if (jsonObj.get("visualization_identifiers") != null && !jsonObj.get("visualization_identifiers").isJsonNull() && !jsonObj.get("visualization_identifiers").isJsonArray()) {
         throw new IllegalArgumentException(String.format("Expected the field `visualization_identifiers` to be an array in the JSON string but got `%s`", jsonObj.get("visualization_identifiers").toString()));
       }
       if ((jsonObj.get("transient_content") != null && !jsonObj.get("transient_content").isJsonNull()) && !jsonObj.get("transient_content").isJsonPrimitive()) {
@@ -459,13 +454,17 @@ public class ExportLiveboardReportRequest {
       if ((jsonObj.get("file_format") != null && !jsonObj.get("file_format").isJsonNull()) && !jsonObj.get("file_format").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `file_format` to be a primitive type in the JSON string but got `%s`", jsonObj.get("file_format").toString()));
       }
+      // validate the optional field `file_format`
+      if (jsonObj.get("file_format") != null && !jsonObj.get("file_format").isJsonNull()) {
+        FileFormatEnum.validateJsonElement(jsonObj.get("file_format"));
+      }
       // validate the optional field `pdf_options`
       if (jsonObj.get("pdf_options") != null && !jsonObj.get("pdf_options").isJsonNull()) {
-        ExportLiveboardReportRequestPdfOptions.validateJsonObject(jsonObj.getAsJsonObject("pdf_options"));
+        PdfOptionsInput.validateJsonElement(jsonObj.get("pdf_options"));
       }
       // validate the optional field `png_options`
       if (jsonObj.get("png_options") != null && !jsonObj.get("png_options").isJsonNull()) {
-        ExportLiveboardReportRequestPngOptions.validateJsonObject(jsonObj.getAsJsonObject("png_options"));
+        PngOptionsInput.validateJsonElement(jsonObj.get("png_options"));
       }
   }
 
@@ -489,31 +488,31 @@ public class ExportLiveboardReportRequest {
 
            @Override
            public ExportLiveboardReportRequest read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of ExportLiveboardReportRequest given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of ExportLiveboardReportRequest
-  * @throws IOException if the JSON string is invalid with respect to ExportLiveboardReportRequest
-  */
+  /**
+   * Create an instance of ExportLiveboardReportRequest given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of ExportLiveboardReportRequest
+   * @throws IOException if the JSON string is invalid with respect to ExportLiveboardReportRequest
+   */
   public static ExportLiveboardReportRequest fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, ExportLiveboardReportRequest.class);
   }
 
- /**
-  * Convert an instance of ExportLiveboardReportRequest to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of ExportLiveboardReportRequest to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

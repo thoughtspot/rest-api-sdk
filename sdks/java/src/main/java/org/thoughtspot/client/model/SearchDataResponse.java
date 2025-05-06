@@ -14,7 +14,6 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -22,6 +21,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.thoughtspot.client.model.AnswerContent;
 
@@ -40,12 +40,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -53,17 +51,17 @@ import org.thoughtspot.client.JSON;
 /**
  * Response format associated with the search data API.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class SearchDataResponse {
   public static final String SERIALIZED_NAME_CONTENTS = "contents";
   @SerializedName(SERIALIZED_NAME_CONTENTS)
+  @javax.annotation.Nonnull
   private List<AnswerContent> contents = new ArrayList<>();
 
   public SearchDataResponse() {
   }
 
-  public SearchDataResponse contents(List<AnswerContent> contents) {
-    
+  public SearchDataResponse contents(@javax.annotation.Nonnull List<AnswerContent> contents) {
     this.contents = contents;
     return this;
   }
@@ -76,17 +74,16 @@ public class SearchDataResponse {
     return this;
   }
 
-   /**
+  /**
    * Data content of metadata objects
    * @return contents
-  **/
+   */
   @javax.annotation.Nonnull
   public List<AnswerContent> getContents() {
     return contents;
   }
 
-
-  public void setContents(List<AnswerContent> contents) {
+  public void setContents(@javax.annotation.Nonnull List<AnswerContent> contents) {
     this.contents = contents;
   }
 
@@ -143,33 +140,34 @@ public class SearchDataResponse {
     openapiRequiredFields.add("contents");
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to SearchDataResponse
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!SearchDataResponse.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to SearchDataResponse
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!SearchDataResponse.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in SearchDataResponse is not found in the empty JSON string", SearchDataResponse.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!SearchDataResponse.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `SearchDataResponse` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `SearchDataResponse` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
       for (String requiredField : SearchDataResponse.openapiRequiredFields) {
-        if (jsonObj.get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       // ensure the json data is an array
       if (!jsonObj.get("contents").isJsonArray()) {
         throw new IllegalArgumentException(String.format("Expected the field `contents` to be an array in the JSON string but got `%s`", jsonObj.get("contents").toString()));
@@ -178,7 +176,7 @@ public class SearchDataResponse {
       JsonArray jsonArraycontents = jsonObj.getAsJsonArray("contents");
       // validate the required field `contents` (array)
       for (int i = 0; i < jsonArraycontents.size(); i++) {
-        AnswerContent.validateJsonObject(jsonArraycontents.get(i).getAsJsonObject());
+        AnswerContent.validateJsonElement(jsonArraycontents.get(i));
       };
   }
 
@@ -202,31 +200,31 @@ public class SearchDataResponse {
 
            @Override
            public SearchDataResponse read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of SearchDataResponse given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of SearchDataResponse
-  * @throws IOException if the JSON string is invalid with respect to SearchDataResponse
-  */
+  /**
+   * Create an instance of SearchDataResponse given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of SearchDataResponse
+   * @throws IOException if the JSON string is invalid with respect to SearchDataResponse
+   */
   public static SearchDataResponse fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, SearchDataResponse.class);
   }
 
- /**
-  * Convert an instance of SearchDataResponse to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of SearchDataResponse to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

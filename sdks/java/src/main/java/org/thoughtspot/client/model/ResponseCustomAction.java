@@ -14,7 +14,6 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -22,6 +21,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
 import org.thoughtspot.client.model.ActionDetails;
@@ -44,12 +44,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -57,100 +55,99 @@ import org.thoughtspot.client.JSON;
 /**
  * Custom action details
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class ResponseCustomAction {
   public static final String SERIALIZED_NAME_ACTION_DETAILS = "action_details";
   @SerializedName(SERIALIZED_NAME_ACTION_DETAILS)
+  @javax.annotation.Nonnull
   private ActionDetails actionDetails;
 
   public static final String SERIALIZED_NAME_DEFAULT_ACTION_CONFIG = "default_action_config";
   @SerializedName(SERIALIZED_NAME_DEFAULT_ACTION_CONFIG)
+  @javax.annotation.Nonnull
   private DefaultActionConfig defaultActionConfig;
 
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
+  @javax.annotation.Nonnull
   private String id;
 
   public static final String SERIALIZED_NAME_METADATA_ASSOCIATION = "metadata_association";
   @SerializedName(SERIALIZED_NAME_METADATA_ASSOCIATION)
+  @javax.annotation.Nullable
   private List<MetadataAssociationItem> metadataAssociation;
 
   public static final String SERIALIZED_NAME_NAME = "name";
   @SerializedName(SERIALIZED_NAME_NAME)
+  @javax.annotation.Nonnull
   private String name;
 
   public static final String SERIALIZED_NAME_USER_GROUPS = "user_groups";
   @SerializedName(SERIALIZED_NAME_USER_GROUPS)
+  @javax.annotation.Nullable
   private List<ObjectIDAndName> userGroups;
 
   public ResponseCustomAction() {
   }
 
-  public ResponseCustomAction actionDetails(ActionDetails actionDetails) {
-    
+  public ResponseCustomAction actionDetails(@javax.annotation.Nonnull ActionDetails actionDetails) {
     this.actionDetails = actionDetails;
     return this;
   }
 
-   /**
+  /**
    * Get actionDetails
    * @return actionDetails
-  **/
+   */
   @javax.annotation.Nonnull
   public ActionDetails getActionDetails() {
     return actionDetails;
   }
 
-
-  public void setActionDetails(ActionDetails actionDetails) {
+  public void setActionDetails(@javax.annotation.Nonnull ActionDetails actionDetails) {
     this.actionDetails = actionDetails;
   }
 
 
-  public ResponseCustomAction defaultActionConfig(DefaultActionConfig defaultActionConfig) {
-    
+  public ResponseCustomAction defaultActionConfig(@javax.annotation.Nonnull DefaultActionConfig defaultActionConfig) {
     this.defaultActionConfig = defaultActionConfig;
     return this;
   }
 
-   /**
+  /**
    * Get defaultActionConfig
    * @return defaultActionConfig
-  **/
+   */
   @javax.annotation.Nonnull
   public DefaultActionConfig getDefaultActionConfig() {
     return defaultActionConfig;
   }
 
-
-  public void setDefaultActionConfig(DefaultActionConfig defaultActionConfig) {
+  public void setDefaultActionConfig(@javax.annotation.Nonnull DefaultActionConfig defaultActionConfig) {
     this.defaultActionConfig = defaultActionConfig;
   }
 
 
-  public ResponseCustomAction id(String id) {
-    
+  public ResponseCustomAction id(@javax.annotation.Nonnull String id) {
     this.id = id;
     return this;
   }
 
-   /**
+  /**
    * Unique Id of the custom action.
    * @return id
-  **/
+   */
   @javax.annotation.Nonnull
   public String getId() {
     return id;
   }
 
-
-  public void setId(String id) {
+  public void setId(@javax.annotation.Nonnull String id) {
     this.id = id;
   }
 
 
-  public ResponseCustomAction metadataAssociation(List<MetadataAssociationItem> metadataAssociation) {
-    
+  public ResponseCustomAction metadataAssociation(@javax.annotation.Nullable List<MetadataAssociationItem> metadataAssociation) {
     this.metadataAssociation = metadataAssociation;
     return this;
   }
@@ -163,44 +160,40 @@ public class ResponseCustomAction {
     return this;
   }
 
-   /**
+  /**
    * Metadata objects to assign the the custom action to.
    * @return metadataAssociation
-  **/
+   */
   @javax.annotation.Nullable
   public List<MetadataAssociationItem> getMetadataAssociation() {
     return metadataAssociation;
   }
 
-
-  public void setMetadataAssociation(List<MetadataAssociationItem> metadataAssociation) {
+  public void setMetadataAssociation(@javax.annotation.Nullable List<MetadataAssociationItem> metadataAssociation) {
     this.metadataAssociation = metadataAssociation;
   }
 
 
-  public ResponseCustomAction name(String name) {
-    
+  public ResponseCustomAction name(@javax.annotation.Nonnull String name) {
     this.name = name;
     return this;
   }
 
-   /**
+  /**
    * Unique name of the custom action.
    * @return name
-  **/
+   */
   @javax.annotation.Nonnull
   public String getName() {
     return name;
   }
 
-
-  public void setName(String name) {
+  public void setName(@javax.annotation.Nonnull String name) {
     this.name = name;
   }
 
 
-  public ResponseCustomAction userGroups(List<ObjectIDAndName> userGroups) {
-    
+  public ResponseCustomAction userGroups(@javax.annotation.Nullable List<ObjectIDAndName> userGroups) {
     this.userGroups = userGroups;
     return this;
   }
@@ -213,17 +206,16 @@ public class ResponseCustomAction {
     return this;
   }
 
-   /**
+  /**
    * Unique ID or name of the User groups which are associated with the custom action.
    * @return userGroups
-  **/
+   */
   @javax.annotation.Nullable
   public List<ObjectIDAndName> getUserGroups() {
     return userGroups;
   }
 
-
-  public void setUserGroups(List<ObjectIDAndName> userGroups) {
+  public void setUserGroups(@javax.annotation.Nullable List<ObjectIDAndName> userGroups) {
     this.userGroups = userGroups;
   }
 
@@ -309,37 +301,38 @@ public class ResponseCustomAction {
     openapiRequiredFields.add("name");
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to ResponseCustomAction
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!ResponseCustomAction.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to ResponseCustomAction
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!ResponseCustomAction.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in ResponseCustomAction is not found in the empty JSON string", ResponseCustomAction.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!ResponseCustomAction.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `ResponseCustomAction` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `ResponseCustomAction` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
       for (String requiredField : ResponseCustomAction.openapiRequiredFields) {
-        if (jsonObj.get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       // validate the required field `action_details`
-      ActionDetails.validateJsonObject(jsonObj.getAsJsonObject("action_details"));
+      ActionDetails.validateJsonElement(jsonObj.get("action_details"));
       // validate the required field `default_action_config`
-      DefaultActionConfig.validateJsonObject(jsonObj.getAsJsonObject("default_action_config"));
+      DefaultActionConfig.validateJsonElement(jsonObj.get("default_action_config"));
       if (!jsonObj.get("id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("id").toString()));
       }
@@ -353,7 +346,7 @@ public class ResponseCustomAction {
 
           // validate the optional field `metadata_association` (array)
           for (int i = 0; i < jsonArraymetadataAssociation.size(); i++) {
-            MetadataAssociationItem.validateJsonObject(jsonArraymetadataAssociation.get(i).getAsJsonObject());
+            MetadataAssociationItem.validateJsonElement(jsonArraymetadataAssociation.get(i));
           };
         }
       }
@@ -370,7 +363,7 @@ public class ResponseCustomAction {
 
           // validate the optional field `user_groups` (array)
           for (int i = 0; i < jsonArrayuserGroups.size(); i++) {
-            ObjectIDAndName.validateJsonObject(jsonArrayuserGroups.get(i).getAsJsonObject());
+            ObjectIDAndName.validateJsonElement(jsonArrayuserGroups.get(i));
           };
         }
       }
@@ -396,31 +389,31 @@ public class ResponseCustomAction {
 
            @Override
            public ResponseCustomAction read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of ResponseCustomAction given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of ResponseCustomAction
-  * @throws IOException if the JSON string is invalid with respect to ResponseCustomAction
-  */
+  /**
+   * Create an instance of ResponseCustomAction given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of ResponseCustomAction
+   * @throws IOException if the JSON string is invalid with respect to ResponseCustomAction
+   */
   public static ResponseCustomAction fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, ResponseCustomAction.class);
   }
 
- /**
-  * Convert an instance of ResponseCustomAction to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of ResponseCustomAction to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

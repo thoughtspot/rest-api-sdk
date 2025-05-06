@@ -14,7 +14,6 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -22,10 +21,11 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import org.thoughtspot.client.model.ActionDetailsInput;
 import org.thoughtspot.client.model.AssociateMetadataInput;
-import org.thoughtspot.client.model.UpdateCustomActionRequestActionDetails;
-import org.thoughtspot.client.model.UpdateCustomActionRequestDefaultActionConfig;
+import org.thoughtspot.client.model.DefaultActionConfigInput;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -42,12 +42,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -55,26 +53,31 @@ import org.thoughtspot.client.JSON;
 /**
  * UpdateCustomActionRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class UpdateCustomActionRequest {
   public static final String SERIALIZED_NAME_ACTION_DETAILS = "action_details";
   @SerializedName(SERIALIZED_NAME_ACTION_DETAILS)
-  private UpdateCustomActionRequestActionDetails actionDetails;
+  @javax.annotation.Nullable
+  private ActionDetailsInput actionDetails;
 
   public static final String SERIALIZED_NAME_ASSOCIATE_METADATA = "associate_metadata";
   @SerializedName(SERIALIZED_NAME_ASSOCIATE_METADATA)
-  private List<AssociateMetadataInput> associateMetadata;
+  @javax.annotation.Nullable
+  private List<AssociateMetadataInput> associateMetadata = new ArrayList<>();
 
   public static final String SERIALIZED_NAME_DEFAULT_ACTION_CONFIG = "default_action_config";
   @SerializedName(SERIALIZED_NAME_DEFAULT_ACTION_CONFIG)
-  private UpdateCustomActionRequestDefaultActionConfig defaultActionConfig;
+  @javax.annotation.Nullable
+  private DefaultActionConfigInput defaultActionConfig;
 
   public static final String SERIALIZED_NAME_GROUP_IDENTIFIERS = "group_identifiers";
   @SerializedName(SERIALIZED_NAME_GROUP_IDENTIFIERS)
-  private List<String> groupIdentifiers;
+  @javax.annotation.Nullable
+  private List<String> groupIdentifiers = new ArrayList<>();
 
   public static final String SERIALIZED_NAME_NAME = "name";
   @SerializedName(SERIALIZED_NAME_NAME)
+  @javax.annotation.Nullable
   private String name;
 
   /**
@@ -122,38 +125,41 @@ public class UpdateCustomActionRequest {
         return OperationEnum.fromValue(value);
       }
     }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      OperationEnum.fromValue(value);
+    }
   }
 
   public static final String SERIALIZED_NAME_OPERATION = "operation";
   @SerializedName(SERIALIZED_NAME_OPERATION)
+  @javax.annotation.Nullable
   private OperationEnum operation = OperationEnum.ADD;
 
   public UpdateCustomActionRequest() {
   }
 
-  public UpdateCustomActionRequest actionDetails(UpdateCustomActionRequestActionDetails actionDetails) {
-    
+  public UpdateCustomActionRequest actionDetails(@javax.annotation.Nullable ActionDetailsInput actionDetails) {
     this.actionDetails = actionDetails;
     return this;
   }
 
-   /**
-   * Get actionDetails
+  /**
+   * Action details includes &#x60;Type&#x60; and Configuration for Custom Actions, either Callback or URL is required.
    * @return actionDetails
-  **/
+   */
   @javax.annotation.Nullable
-  public UpdateCustomActionRequestActionDetails getActionDetails() {
+  public ActionDetailsInput getActionDetails() {
     return actionDetails;
   }
 
-
-  public void setActionDetails(UpdateCustomActionRequestActionDetails actionDetails) {
+  public void setActionDetails(@javax.annotation.Nullable ActionDetailsInput actionDetails) {
     this.actionDetails = actionDetails;
   }
 
 
-  public UpdateCustomActionRequest associateMetadata(List<AssociateMetadataInput> associateMetadata) {
-    
+  public UpdateCustomActionRequest associateMetadata(@javax.annotation.Nullable List<AssociateMetadataInput> associateMetadata) {
     this.associateMetadata = associateMetadata;
     return this;
   }
@@ -166,44 +172,40 @@ public class UpdateCustomActionRequest {
     return this;
   }
 
-   /**
+  /**
    * Metadata objects to which the custom action needs to be associated.
    * @return associateMetadata
-  **/
+   */
   @javax.annotation.Nullable
   public List<AssociateMetadataInput> getAssociateMetadata() {
     return associateMetadata;
   }
 
-
-  public void setAssociateMetadata(List<AssociateMetadataInput> associateMetadata) {
+  public void setAssociateMetadata(@javax.annotation.Nullable List<AssociateMetadataInput> associateMetadata) {
     this.associateMetadata = associateMetadata;
   }
 
 
-  public UpdateCustomActionRequest defaultActionConfig(UpdateCustomActionRequestDefaultActionConfig defaultActionConfig) {
-    
+  public UpdateCustomActionRequest defaultActionConfig(@javax.annotation.Nullable DefaultActionConfigInput defaultActionConfig) {
     this.defaultActionConfig = defaultActionConfig;
     return this;
   }
 
-   /**
-   * Get defaultActionConfig
+  /**
+   * Default Custom action configuration. This includes if the custom action available on visualizations and Answers. By default, a custom action is added to all visualizations and Answers.
    * @return defaultActionConfig
-  **/
+   */
   @javax.annotation.Nullable
-  public UpdateCustomActionRequestDefaultActionConfig getDefaultActionConfig() {
+  public DefaultActionConfigInput getDefaultActionConfig() {
     return defaultActionConfig;
   }
 
-
-  public void setDefaultActionConfig(UpdateCustomActionRequestDefaultActionConfig defaultActionConfig) {
+  public void setDefaultActionConfig(@javax.annotation.Nullable DefaultActionConfigInput defaultActionConfig) {
     this.defaultActionConfig = defaultActionConfig;
   }
 
 
-  public UpdateCustomActionRequest groupIdentifiers(List<String> groupIdentifiers) {
-    
+  public UpdateCustomActionRequest groupIdentifiers(@javax.annotation.Nullable List<String> groupIdentifiers) {
     this.groupIdentifiers = groupIdentifiers;
     return this;
   }
@@ -216,59 +218,54 @@ public class UpdateCustomActionRequest {
     return this;
   }
 
-   /**
+  /**
    * Unique ID or name of the groups that can view and access the custom action.
    * @return groupIdentifiers
-  **/
+   */
   @javax.annotation.Nullable
   public List<String> getGroupIdentifiers() {
     return groupIdentifiers;
   }
 
-
-  public void setGroupIdentifiers(List<String> groupIdentifiers) {
+  public void setGroupIdentifiers(@javax.annotation.Nullable List<String> groupIdentifiers) {
     this.groupIdentifiers = groupIdentifiers;
   }
 
 
-  public UpdateCustomActionRequest name(String name) {
-    
+  public UpdateCustomActionRequest name(@javax.annotation.Nullable String name) {
     this.name = name;
     return this;
   }
 
-   /**
+  /**
    * Name of the custom action. The custom action name must be unique.
    * @return name
-  **/
+   */
   @javax.annotation.Nullable
   public String getName() {
     return name;
   }
 
-
-  public void setName(String name) {
+  public void setName(@javax.annotation.Nullable String name) {
     this.name = name;
   }
 
 
-  public UpdateCustomActionRequest operation(OperationEnum operation) {
-    
+  public UpdateCustomActionRequest operation(@javax.annotation.Nullable OperationEnum operation) {
     this.operation = operation;
     return this;
   }
 
-   /**
+  /**
    * Type of update operation. Default operation type is ADD
    * @return operation
-  **/
+   */
   @javax.annotation.Nullable
   public OperationEnum getOperation() {
     return operation;
   }
 
-
-  public void setOperation(OperationEnum operation) {
+  public void setOperation(@javax.annotation.Nullable OperationEnum operation) {
     this.operation = operation;
   }
 
@@ -339,29 +336,30 @@ public class UpdateCustomActionRequest {
     openapiRequiredFields = new HashSet<String>();
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to UpdateCustomActionRequest
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!UpdateCustomActionRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to UpdateCustomActionRequest
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!UpdateCustomActionRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in UpdateCustomActionRequest is not found in the empty JSON string", UpdateCustomActionRequest.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!UpdateCustomActionRequest.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `UpdateCustomActionRequest` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `UpdateCustomActionRequest` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       // validate the optional field `action_details`
       if (jsonObj.get("action_details") != null && !jsonObj.get("action_details").isJsonNull()) {
-        UpdateCustomActionRequestActionDetails.validateJsonObject(jsonObj.getAsJsonObject("action_details"));
+        ActionDetailsInput.validateJsonElement(jsonObj.get("action_details"));
       }
       if (jsonObj.get("associate_metadata") != null && !jsonObj.get("associate_metadata").isJsonNull()) {
         JsonArray jsonArrayassociateMetadata = jsonObj.getAsJsonArray("associate_metadata");
@@ -373,16 +371,16 @@ public class UpdateCustomActionRequest {
 
           // validate the optional field `associate_metadata` (array)
           for (int i = 0; i < jsonArrayassociateMetadata.size(); i++) {
-            AssociateMetadataInput.validateJsonObject(jsonArrayassociateMetadata.get(i).getAsJsonObject());
+            AssociateMetadataInput.validateJsonElement(jsonArrayassociateMetadata.get(i));
           };
         }
       }
       // validate the optional field `default_action_config`
       if (jsonObj.get("default_action_config") != null && !jsonObj.get("default_action_config").isJsonNull()) {
-        UpdateCustomActionRequestDefaultActionConfig.validateJsonObject(jsonObj.getAsJsonObject("default_action_config"));
+        DefaultActionConfigInput.validateJsonElement(jsonObj.get("default_action_config"));
       }
       // ensure the optional json data is an array if present
-      if (jsonObj.get("group_identifiers") != null && !jsonObj.get("group_identifiers").isJsonArray()) {
+      if (jsonObj.get("group_identifiers") != null && !jsonObj.get("group_identifiers").isJsonNull() && !jsonObj.get("group_identifiers").isJsonArray()) {
         throw new IllegalArgumentException(String.format("Expected the field `group_identifiers` to be an array in the JSON string but got `%s`", jsonObj.get("group_identifiers").toString()));
       }
       if ((jsonObj.get("name") != null && !jsonObj.get("name").isJsonNull()) && !jsonObj.get("name").isJsonPrimitive()) {
@@ -390,6 +388,10 @@ public class UpdateCustomActionRequest {
       }
       if ((jsonObj.get("operation") != null && !jsonObj.get("operation").isJsonNull()) && !jsonObj.get("operation").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `operation` to be a primitive type in the JSON string but got `%s`", jsonObj.get("operation").toString()));
+      }
+      // validate the optional field `operation`
+      if (jsonObj.get("operation") != null && !jsonObj.get("operation").isJsonNull()) {
+        OperationEnum.validateJsonElement(jsonObj.get("operation"));
       }
   }
 
@@ -413,31 +415,31 @@ public class UpdateCustomActionRequest {
 
            @Override
            public UpdateCustomActionRequest read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of UpdateCustomActionRequest given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of UpdateCustomActionRequest
-  * @throws IOException if the JSON string is invalid with respect to UpdateCustomActionRequest
-  */
+  /**
+   * Create an instance of UpdateCustomActionRequest given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of UpdateCustomActionRequest
+   * @throws IOException if the JSON string is invalid with respect to UpdateCustomActionRequest
+   */
   public static UpdateCustomActionRequest fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, UpdateCustomActionRequest.class);
   }
 
- /**
-  * Convert an instance of UpdateCustomActionRequest to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of UpdateCustomActionRequest to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

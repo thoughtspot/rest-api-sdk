@@ -14,7 +14,6 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -22,6 +21,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.thoughtspot.client.model.MetadataObject;
 
@@ -40,12 +40,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -53,14 +51,16 @@ import org.thoughtspot.client.JSON;
 /**
  * RevertCommitRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class RevertCommitRequest {
   public static final String SERIALIZED_NAME_METADATA = "metadata";
   @SerializedName(SERIALIZED_NAME_METADATA)
-  private List<MetadataObject> metadata;
+  @javax.annotation.Nullable
+  private List<MetadataObject> metadata = new ArrayList<>();
 
   public static final String SERIALIZED_NAME_BRANCH_NAME = "branch_name";
   @SerializedName(SERIALIZED_NAME_BRANCH_NAME)
+  @javax.annotation.Nullable
   private String branchName;
 
   /**
@@ -108,17 +108,22 @@ public class RevertCommitRequest {
         return RevertPolicyEnum.fromValue(value);
       }
     }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      RevertPolicyEnum.fromValue(value);
+    }
   }
 
   public static final String SERIALIZED_NAME_REVERT_POLICY = "revert_policy";
   @SerializedName(SERIALIZED_NAME_REVERT_POLICY)
+  @javax.annotation.Nullable
   private RevertPolicyEnum revertPolicy = RevertPolicyEnum.ALL_OR_NONE;
 
   public RevertCommitRequest() {
   }
 
-  public RevertCommitRequest metadata(List<MetadataObject> metadata) {
-    
+  public RevertCommitRequest metadata(@javax.annotation.Nullable List<MetadataObject> metadata) {
     this.metadata = metadata;
     return this;
   }
@@ -131,59 +136,54 @@ public class RevertCommitRequest {
     return this;
   }
 
-   /**
+  /**
    * Metadata objects.
    * @return metadata
-  **/
+   */
   @javax.annotation.Nullable
   public List<MetadataObject> getMetadata() {
     return metadata;
   }
 
-
-  public void setMetadata(List<MetadataObject> metadata) {
+  public void setMetadata(@javax.annotation.Nullable List<MetadataObject> metadata) {
     this.metadata = metadata;
   }
 
 
-  public RevertCommitRequest branchName(String branchName) {
-    
+  public RevertCommitRequest branchName(@javax.annotation.Nullable String branchName) {
     this.branchName = branchName;
     return this;
   }
 
-   /**
+  /**
    *    Name of the branch where the reverted version should be committed      Note: If no branch_name is specified, then the commit_branch_name will be considered.
    * @return branchName
-  **/
+   */
   @javax.annotation.Nullable
   public String getBranchName() {
     return branchName;
   }
 
-
-  public void setBranchName(String branchName) {
+  public void setBranchName(@javax.annotation.Nullable String branchName) {
     this.branchName = branchName;
   }
 
 
-  public RevertCommitRequest revertPolicy(RevertPolicyEnum revertPolicy) {
-    
+  public RevertCommitRequest revertPolicy(@javax.annotation.Nullable RevertPolicyEnum revertPolicy) {
     this.revertPolicy = revertPolicy;
     return this;
   }
 
-   /**
+  /**
    * Policy to apply when reverting a commit. Valid values: [ALL_OR_NONE, PARTIAL]
    * @return revertPolicy
-  **/
+   */
   @javax.annotation.Nullable
   public RevertPolicyEnum getRevertPolicy() {
     return revertPolicy;
   }
 
-
-  public void setRevertPolicy(RevertPolicyEnum revertPolicy) {
+  public void setRevertPolicy(@javax.annotation.Nullable RevertPolicyEnum revertPolicy) {
     this.revertPolicy = revertPolicy;
   }
 
@@ -245,26 +245,27 @@ public class RevertCommitRequest {
     openapiRequiredFields = new HashSet<String>();
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to RevertCommitRequest
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!RevertCommitRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to RevertCommitRequest
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!RevertCommitRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in RevertCommitRequest is not found in the empty JSON string", RevertCommitRequest.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!RevertCommitRequest.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `RevertCommitRequest` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `RevertCommitRequest` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       if (jsonObj.get("metadata") != null && !jsonObj.get("metadata").isJsonNull()) {
         JsonArray jsonArraymetadata = jsonObj.getAsJsonArray("metadata");
         if (jsonArraymetadata != null) {
@@ -275,7 +276,7 @@ public class RevertCommitRequest {
 
           // validate the optional field `metadata` (array)
           for (int i = 0; i < jsonArraymetadata.size(); i++) {
-            MetadataObject.validateJsonObject(jsonArraymetadata.get(i).getAsJsonObject());
+            MetadataObject.validateJsonElement(jsonArraymetadata.get(i));
           };
         }
       }
@@ -284,6 +285,10 @@ public class RevertCommitRequest {
       }
       if ((jsonObj.get("revert_policy") != null && !jsonObj.get("revert_policy").isJsonNull()) && !jsonObj.get("revert_policy").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `revert_policy` to be a primitive type in the JSON string but got `%s`", jsonObj.get("revert_policy").toString()));
+      }
+      // validate the optional field `revert_policy`
+      if (jsonObj.get("revert_policy") != null && !jsonObj.get("revert_policy").isJsonNull()) {
+        RevertPolicyEnum.validateJsonElement(jsonObj.get("revert_policy"));
       }
   }
 
@@ -307,31 +312,31 @@ public class RevertCommitRequest {
 
            @Override
            public RevertCommitRequest read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of RevertCommitRequest given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of RevertCommitRequest
-  * @throws IOException if the JSON string is invalid with respect to RevertCommitRequest
-  */
+  /**
+   * Create an instance of RevertCommitRequest given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of RevertCommitRequest
+   * @throws IOException if the JSON string is invalid with respect to RevertCommitRequest
+   */
   public static RevertCommitRequest fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, RevertCommitRequest.class);
   }
 
- /**
-  * Convert an instance of RevertCommitRequest to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of RevertCommitRequest to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

@@ -5,6 +5,7 @@ All URIs are relative to *CLUSTER_URL*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**createConversation**](AIApi.md#createConversation) | **POST** /api/rest/2.0/ai/conversation/create | 
+[**queryGetDecomposedQuery**](AIApi.md#queryGetDecomposedQuery) | **POST** /api/rest/2.0/ai/analytical-questions | 
 [**sendMessage**](AIApi.md#sendMessage) | **POST** /api/rest/2.0/ai/conversation/{conversation_identifier}/converse | 
 [**singleAnswer**](AIApi.md#singleAnswer) | **POST** /api/rest/2.0/ai/answer/create | 
 
@@ -50,6 +51,81 @@ Name | Type | Description  | Notes
 ### Return type
 
 **Conversation**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Common successful response |  -  |
+**201** | Common error response |  -  |
+**400** | Operation failed |  -  |
+**500** | Operation failed |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **queryGetDecomposedQuery**
+> EurekaDecomposeQueryResponse queryGetDecomposedQuery(queryGetDecomposedQueryRequest)
+
+Version: 10.7.0.cl or later 
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, AIApi, QueryGetDecomposedQueryRequest } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new AIApi(configuration);
+
+apiInstance.queryGetDecomposedQuery(
+  // QueryGetDecomposedQueryRequest
+  {
+    answerIds: [
+      "answerIds_example",
+    ],
+    content: [
+      "content_example",
+    ],
+    conversationId: "conversationId_example",
+    liveboardIds: [
+      "liveboardIds_example",
+    ],
+    maxDecomposedQueries: 1,
+    nlsRequest: null,
+    worksheetIds: [
+      "worksheetIds_example",
+    ],
+  } 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **queryGetDecomposedQueryRequest** | **QueryGetDecomposedQueryRequest**|  |
+
+
+### Return type
+
+**EurekaDecomposeQueryResponse**
 
 ### Authorization
 

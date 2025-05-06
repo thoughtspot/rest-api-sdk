@@ -14,7 +14,6 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -22,6 +21,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
 import org.thoughtspot.client.model.FavoriteMetadataInput;
@@ -41,12 +41,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -54,18 +52,21 @@ import org.thoughtspot.client.JSON;
 /**
  * ImportUser
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class ImportUser {
   public static final String SERIALIZED_NAME_USER_IDENTIFIER = "user_identifier";
   @SerializedName(SERIALIZED_NAME_USER_IDENTIFIER)
+  @javax.annotation.Nonnull
   private String userIdentifier;
 
   public static final String SERIALIZED_NAME_DISPLAY_NAME = "display_name";
   @SerializedName(SERIALIZED_NAME_DISPLAY_NAME)
+  @javax.annotation.Nonnull
   private String displayName;
 
   public static final String SERIALIZED_NAME_PASSWORD = "password";
   @SerializedName(SERIALIZED_NAME_PASSWORD)
+  @javax.annotation.Nullable
   private String password;
 
   /**
@@ -119,10 +120,16 @@ public class ImportUser {
         return AccountTypeEnum.fromValue(value);
       }
     }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      AccountTypeEnum.fromValue(value);
+    }
   }
 
   public static final String SERIALIZED_NAME_ACCOUNT_TYPE = "account_type";
   @SerializedName(SERIALIZED_NAME_ACCOUNT_TYPE)
+  @javax.annotation.Nullable
   private AccountTypeEnum accountType = AccountTypeEnum.LOCAL_USER;
 
   /**
@@ -178,22 +185,31 @@ public class ImportUser {
         return AccountStatusEnum.fromValue(value);
       }
     }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      AccountStatusEnum.fromValue(value);
+    }
   }
 
   public static final String SERIALIZED_NAME_ACCOUNT_STATUS = "account_status";
   @SerializedName(SERIALIZED_NAME_ACCOUNT_STATUS)
+  @javax.annotation.Nullable
   private AccountStatusEnum accountStatus = AccountStatusEnum.ACTIVE;
 
   public static final String SERIALIZED_NAME_EMAIL = "email";
   @SerializedName(SERIALIZED_NAME_EMAIL)
+  @javax.annotation.Nullable
   private String email;
 
   public static final String SERIALIZED_NAME_ORG_IDENTIFIERS = "org_identifiers";
   @SerializedName(SERIALIZED_NAME_ORG_IDENTIFIERS)
+  @javax.annotation.Nullable
   private List<String> orgIdentifiers;
 
   public static final String SERIALIZED_NAME_GROUP_IDENTIFIERS = "group_identifiers";
   @SerializedName(SERIALIZED_NAME_GROUP_IDENTIFIERS)
+  @javax.annotation.Nullable
   private List<String> groupIdentifiers;
 
   /**
@@ -241,163 +257,161 @@ public class ImportUser {
         return VisibilityEnum.fromValue(value);
       }
     }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      VisibilityEnum.fromValue(value);
+    }
   }
 
   public static final String SERIALIZED_NAME_VISIBILITY = "visibility";
   @SerializedName(SERIALIZED_NAME_VISIBILITY)
+  @javax.annotation.Nullable
   private VisibilityEnum visibility;
 
   public static final String SERIALIZED_NAME_NOTIFY_ON_SHARE = "notify_on_share";
   @SerializedName(SERIALIZED_NAME_NOTIFY_ON_SHARE)
+  @javax.annotation.Nullable
   private Boolean notifyOnShare = true;
 
   public static final String SERIALIZED_NAME_SHOW_ONBOARDING_EXPERIENCE = "show_onboarding_experience";
   @SerializedName(SERIALIZED_NAME_SHOW_ONBOARDING_EXPERIENCE)
+  @javax.annotation.Nullable
   private Boolean showOnboardingExperience;
 
   public static final String SERIALIZED_NAME_ONBOARDING_EXPERIENCE_COMPLETED = "onboarding_experience_completed";
   @SerializedName(SERIALIZED_NAME_ONBOARDING_EXPERIENCE_COMPLETED)
+  @javax.annotation.Nullable
   private Boolean onboardingExperienceCompleted;
 
   public static final String SERIALIZED_NAME_HOME_LIVEBOARD_IDENTIFIER = "home_liveboard_identifier";
   @SerializedName(SERIALIZED_NAME_HOME_LIVEBOARD_IDENTIFIER)
+  @javax.annotation.Nullable
   private String homeLiveboardIdentifier;
 
   public static final String SERIALIZED_NAME_FAVORITE_METADATA = "favorite_metadata";
   @SerializedName(SERIALIZED_NAME_FAVORITE_METADATA)
+  @javax.annotation.Nullable
   private List<FavoriteMetadataInput> favoriteMetadata;
 
   public ImportUser() {
   }
 
-  public ImportUser userIdentifier(String userIdentifier) {
-    
+  public ImportUser userIdentifier(@javax.annotation.Nonnull String userIdentifier) {
     this.userIdentifier = userIdentifier;
     return this;
   }
 
-   /**
+  /**
    * Unique ID or name of the user.
    * @return userIdentifier
-  **/
+   */
   @javax.annotation.Nonnull
   public String getUserIdentifier() {
     return userIdentifier;
   }
 
-
-  public void setUserIdentifier(String userIdentifier) {
+  public void setUserIdentifier(@javax.annotation.Nonnull String userIdentifier) {
     this.userIdentifier = userIdentifier;
   }
 
 
-  public ImportUser displayName(String displayName) {
-    
+  public ImportUser displayName(@javax.annotation.Nonnull String displayName) {
     this.displayName = displayName;
     return this;
   }
 
-   /**
+  /**
    * Display name of the user.
    * @return displayName
-  **/
+   */
   @javax.annotation.Nonnull
   public String getDisplayName() {
     return displayName;
   }
 
-
-  public void setDisplayName(String displayName) {
+  public void setDisplayName(@javax.annotation.Nonnull String displayName) {
     this.displayName = displayName;
   }
 
 
-  public ImportUser password(String password) {
-    
+  public ImportUser password(@javax.annotation.Nullable String password) {
     this.password = password;
     return this;
   }
 
-   /**
+  /**
    * Password of the user.
    * @return password
-  **/
+   */
   @javax.annotation.Nullable
   public String getPassword() {
     return password;
   }
 
-
-  public void setPassword(String password) {
+  public void setPassword(@javax.annotation.Nullable String password) {
     this.password = password;
   }
 
 
-  public ImportUser accountType(AccountTypeEnum accountType) {
-    
+  public ImportUser accountType(@javax.annotation.Nullable AccountTypeEnum accountType) {
     this.accountType = accountType;
     return this;
   }
 
-   /**
+  /**
    * Type of the user account.
    * @return accountType
-  **/
+   */
   @javax.annotation.Nullable
   public AccountTypeEnum getAccountType() {
     return accountType;
   }
 
-
-  public void setAccountType(AccountTypeEnum accountType) {
+  public void setAccountType(@javax.annotation.Nullable AccountTypeEnum accountType) {
     this.accountType = accountType;
   }
 
 
-  public ImportUser accountStatus(AccountStatusEnum accountStatus) {
-    
+  public ImportUser accountStatus(@javax.annotation.Nullable AccountStatusEnum accountStatus) {
     this.accountStatus = accountStatus;
     return this;
   }
 
-   /**
+  /**
    * Status of the user account.
    * @return accountStatus
-  **/
+   */
   @javax.annotation.Nullable
   public AccountStatusEnum getAccountStatus() {
     return accountStatus;
   }
 
-
-  public void setAccountStatus(AccountStatusEnum accountStatus) {
+  public void setAccountStatus(@javax.annotation.Nullable AccountStatusEnum accountStatus) {
     this.accountStatus = accountStatus;
   }
 
 
-  public ImportUser email(String email) {
-    
+  public ImportUser email(@javax.annotation.Nullable String email) {
     this.email = email;
     return this;
   }
 
-   /**
+  /**
    * Email address of the user.
    * @return email
-  **/
+   */
   @javax.annotation.Nullable
   public String getEmail() {
     return email;
   }
 
-
-  public void setEmail(String email) {
+  public void setEmail(@javax.annotation.Nullable String email) {
     this.email = email;
   }
 
 
-  public ImportUser orgIdentifiers(List<String> orgIdentifiers) {
-    
+  public ImportUser orgIdentifiers(@javax.annotation.Nullable List<String> orgIdentifiers) {
     this.orgIdentifiers = orgIdentifiers;
     return this;
   }
@@ -410,23 +424,21 @@ public class ImportUser {
     return this;
   }
 
-   /**
+  /**
    * ID or name of the Orgs to which the user belongs.
    * @return orgIdentifiers
-  **/
+   */
   @javax.annotation.Nullable
   public List<String> getOrgIdentifiers() {
     return orgIdentifiers;
   }
 
-
-  public void setOrgIdentifiers(List<String> orgIdentifiers) {
+  public void setOrgIdentifiers(@javax.annotation.Nullable List<String> orgIdentifiers) {
     this.orgIdentifiers = orgIdentifiers;
   }
 
 
-  public ImportUser groupIdentifiers(List<String> groupIdentifiers) {
-    
+  public ImportUser groupIdentifiers(@javax.annotation.Nullable List<String> groupIdentifiers) {
     this.groupIdentifiers = groupIdentifiers;
     return this;
   }
@@ -439,128 +451,116 @@ public class ImportUser {
     return this;
   }
 
-   /**
+  /**
    * ID or name of the groups to which the user belongs.
    * @return groupIdentifiers
-  **/
+   */
   @javax.annotation.Nullable
   public List<String> getGroupIdentifiers() {
     return groupIdentifiers;
   }
 
-
-  public void setGroupIdentifiers(List<String> groupIdentifiers) {
+  public void setGroupIdentifiers(@javax.annotation.Nullable List<String> groupIdentifiers) {
     this.groupIdentifiers = groupIdentifiers;
   }
 
 
-  public ImportUser visibility(VisibilityEnum visibility) {
-    
+  public ImportUser visibility(@javax.annotation.Nullable VisibilityEnum visibility) {
     this.visibility = visibility;
     return this;
   }
 
-   /**
+  /**
    * Visibility of the users. The SHARABLE property makes a user visible to other users and group, who can share objects with the user.
    * @return visibility
-  **/
+   */
   @javax.annotation.Nullable
   public VisibilityEnum getVisibility() {
     return visibility;
   }
 
-
-  public void setVisibility(VisibilityEnum visibility) {
+  public void setVisibility(@javax.annotation.Nullable VisibilityEnum visibility) {
     this.visibility = visibility;
   }
 
 
-  public ImportUser notifyOnShare(Boolean notifyOnShare) {
-    
+  public ImportUser notifyOnShare(@javax.annotation.Nullable Boolean notifyOnShare) {
     this.notifyOnShare = notifyOnShare;
     return this;
   }
 
-   /**
+  /**
    * Notify user when other users or groups share metadata objects
    * @return notifyOnShare
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getNotifyOnShare() {
     return notifyOnShare;
   }
 
-
-  public void setNotifyOnShare(Boolean notifyOnShare) {
+  public void setNotifyOnShare(@javax.annotation.Nullable Boolean notifyOnShare) {
     this.notifyOnShare = notifyOnShare;
   }
 
 
-  public ImportUser showOnboardingExperience(Boolean showOnboardingExperience) {
-    
+  public ImportUser showOnboardingExperience(@javax.annotation.Nullable Boolean showOnboardingExperience) {
     this.showOnboardingExperience = showOnboardingExperience;
     return this;
   }
 
-   /**
+  /**
    * Show or hide the new user onboarding walkthroughs
    * @return showOnboardingExperience
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getShowOnboardingExperience() {
     return showOnboardingExperience;
   }
 
-
-  public void setShowOnboardingExperience(Boolean showOnboardingExperience) {
+  public void setShowOnboardingExperience(@javax.annotation.Nullable Boolean showOnboardingExperience) {
     this.showOnboardingExperience = showOnboardingExperience;
   }
 
 
-  public ImportUser onboardingExperienceCompleted(Boolean onboardingExperienceCompleted) {
-    
+  public ImportUser onboardingExperienceCompleted(@javax.annotation.Nullable Boolean onboardingExperienceCompleted) {
     this.onboardingExperienceCompleted = onboardingExperienceCompleted;
     return this;
   }
 
-   /**
+  /**
    * Revisit the new user onboarding walkthroughs
    * @return onboardingExperienceCompleted
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getOnboardingExperienceCompleted() {
     return onboardingExperienceCompleted;
   }
 
-
-  public void setOnboardingExperienceCompleted(Boolean onboardingExperienceCompleted) {
+  public void setOnboardingExperienceCompleted(@javax.annotation.Nullable Boolean onboardingExperienceCompleted) {
     this.onboardingExperienceCompleted = onboardingExperienceCompleted;
   }
 
 
-  public ImportUser homeLiveboardIdentifier(String homeLiveboardIdentifier) {
-    
+  public ImportUser homeLiveboardIdentifier(@javax.annotation.Nullable String homeLiveboardIdentifier) {
     this.homeLiveboardIdentifier = homeLiveboardIdentifier;
     return this;
   }
 
-   /**
+  /**
    * Unique ID or name of the default Liveboard assigned to the user.
    * @return homeLiveboardIdentifier
-  **/
+   */
   @javax.annotation.Nullable
   public String getHomeLiveboardIdentifier() {
     return homeLiveboardIdentifier;
   }
 
-
-  public void setHomeLiveboardIdentifier(String homeLiveboardIdentifier) {
+  public void setHomeLiveboardIdentifier(@javax.annotation.Nullable String homeLiveboardIdentifier) {
     this.homeLiveboardIdentifier = homeLiveboardIdentifier;
   }
 
 
-  public ImportUser favoriteMetadata(List<FavoriteMetadataInput> favoriteMetadata) {
-    
+  public ImportUser favoriteMetadata(@javax.annotation.Nullable List<FavoriteMetadataInput> favoriteMetadata) {
     this.favoriteMetadata = favoriteMetadata;
     return this;
   }
@@ -573,17 +573,16 @@ public class ImportUser {
     return this;
   }
 
-   /**
+  /**
    * Metadata objects to add to the user&#39;s favorites list.
    * @return favoriteMetadata
-  **/
+   */
   @javax.annotation.Nullable
   public List<FavoriteMetadataInput> getFavoriteMetadata() {
     return favoriteMetadata;
   }
 
-
-  public void setFavoriteMetadata(List<FavoriteMetadataInput> favoriteMetadata) {
+  public void setFavoriteMetadata(@javax.annotation.Nullable List<FavoriteMetadataInput> favoriteMetadata) {
     this.favoriteMetadata = favoriteMetadata;
   }
 
@@ -691,33 +690,34 @@ public class ImportUser {
     openapiRequiredFields.add("display_name");
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to ImportUser
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!ImportUser.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to ImportUser
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!ImportUser.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in ImportUser is not found in the empty JSON string", ImportUser.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!ImportUser.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `ImportUser` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `ImportUser` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
       for (String requiredField : ImportUser.openapiRequiredFields) {
-        if (jsonObj.get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       if (!jsonObj.get("user_identifier").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `user_identifier` to be a primitive type in the JSON string but got `%s`", jsonObj.get("user_identifier").toString()));
       }
@@ -730,22 +730,34 @@ public class ImportUser {
       if ((jsonObj.get("account_type") != null && !jsonObj.get("account_type").isJsonNull()) && !jsonObj.get("account_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `account_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("account_type").toString()));
       }
+      // validate the optional field `account_type`
+      if (jsonObj.get("account_type") != null && !jsonObj.get("account_type").isJsonNull()) {
+        AccountTypeEnum.validateJsonElement(jsonObj.get("account_type"));
+      }
       if ((jsonObj.get("account_status") != null && !jsonObj.get("account_status").isJsonNull()) && !jsonObj.get("account_status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `account_status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("account_status").toString()));
+      }
+      // validate the optional field `account_status`
+      if (jsonObj.get("account_status") != null && !jsonObj.get("account_status").isJsonNull()) {
+        AccountStatusEnum.validateJsonElement(jsonObj.get("account_status"));
       }
       if ((jsonObj.get("email") != null && !jsonObj.get("email").isJsonNull()) && !jsonObj.get("email").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `email` to be a primitive type in the JSON string but got `%s`", jsonObj.get("email").toString()));
       }
       // ensure the optional json data is an array if present
-      if (jsonObj.get("org_identifiers") != null && !jsonObj.get("org_identifiers").isJsonArray()) {
+      if (jsonObj.get("org_identifiers") != null && !jsonObj.get("org_identifiers").isJsonNull() && !jsonObj.get("org_identifiers").isJsonArray()) {
         throw new IllegalArgumentException(String.format("Expected the field `org_identifiers` to be an array in the JSON string but got `%s`", jsonObj.get("org_identifiers").toString()));
       }
       // ensure the optional json data is an array if present
-      if (jsonObj.get("group_identifiers") != null && !jsonObj.get("group_identifiers").isJsonArray()) {
+      if (jsonObj.get("group_identifiers") != null && !jsonObj.get("group_identifiers").isJsonNull() && !jsonObj.get("group_identifiers").isJsonArray()) {
         throw new IllegalArgumentException(String.format("Expected the field `group_identifiers` to be an array in the JSON string but got `%s`", jsonObj.get("group_identifiers").toString()));
       }
       if ((jsonObj.get("visibility") != null && !jsonObj.get("visibility").isJsonNull()) && !jsonObj.get("visibility").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `visibility` to be a primitive type in the JSON string but got `%s`", jsonObj.get("visibility").toString()));
+      }
+      // validate the optional field `visibility`
+      if (jsonObj.get("visibility") != null && !jsonObj.get("visibility").isJsonNull()) {
+        VisibilityEnum.validateJsonElement(jsonObj.get("visibility"));
       }
       if ((jsonObj.get("home_liveboard_identifier") != null && !jsonObj.get("home_liveboard_identifier").isJsonNull()) && !jsonObj.get("home_liveboard_identifier").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `home_liveboard_identifier` to be a primitive type in the JSON string but got `%s`", jsonObj.get("home_liveboard_identifier").toString()));
@@ -760,7 +772,7 @@ public class ImportUser {
 
           // validate the optional field `favorite_metadata` (array)
           for (int i = 0; i < jsonArrayfavoriteMetadata.size(); i++) {
-            FavoriteMetadataInput.validateJsonObject(jsonArrayfavoriteMetadata.get(i).getAsJsonObject());
+            FavoriteMetadataInput.validateJsonElement(jsonArrayfavoriteMetadata.get(i));
           };
         }
       }
@@ -786,31 +798,31 @@ public class ImportUser {
 
            @Override
            public ImportUser read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of ImportUser given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of ImportUser
-  * @throws IOException if the JSON string is invalid with respect to ImportUser
-  */
+  /**
+   * Create an instance of ImportUser given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of ImportUser
+   * @throws IOException if the JSON string is invalid with respect to ImportUser
+   */
   public static ImportUser fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, ImportUser.class);
   }
 
- /**
-  * Convert an instance of ImportUser to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of ImportUser to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

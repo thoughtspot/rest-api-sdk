@@ -19,13 +19,13 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
-import org.thoughtspot.client.model.CreateScheduleRequestFrequency;
-import org.thoughtspot.client.model.CreateScheduleRequestLiveboardOptions;
-import org.thoughtspot.client.model.CreateScheduleRequestPdfOptions;
-import org.thoughtspot.client.model.CreateScheduleRequestRecipientDetails;
+import java.util.Arrays;
+import org.thoughtspot.client.model.FrequencyInput;
+import org.thoughtspot.client.model.LiveboardOptionsInput;
+import org.thoughtspot.client.model.RecipientDetailsInput;
+import org.thoughtspot.client.model.SchedulesPdfOptionsInput;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-
 
 /**
  * Model tests for CreateScheduleRequest

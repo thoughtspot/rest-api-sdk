@@ -45,7 +45,7 @@ Response for search role api should handle hidden privileges as well.
 | SHAREWITHALL | &quot;SHAREWITHALL&quot; |
 | SYSTEMMANAGEMENT | &quot;SYSTEMMANAGEMENT&quot; |
 | JOBSCHEDULING | &quot;JOBSCHEDULING&quot; |
-| A3ANALYSIS | &quot;A3ANALYSIS&quot; |
+| A3_ANALYSIS | &quot;A3ANALYSIS&quot; |
 | EXPERIMENTALFEATUREPRIVILEGE | &quot;EXPERIMENTALFEATUREPRIVILEGE&quot; |
 | BYPASSRLS | &quot;BYPASSRLS&quot; |
 | RANALYSIS | &quot;RANALYSIS&quot; |

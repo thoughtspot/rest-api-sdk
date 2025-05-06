@@ -14,7 +14,6 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -22,6 +21,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.google.gson.Gson;
@@ -39,12 +39,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -52,23 +50,27 @@ import org.thoughtspot.client.JSON;
 /**
  * UpdateOrgRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class UpdateOrgRequest {
   public static final String SERIALIZED_NAME_NAME = "name";
   @SerializedName(SERIALIZED_NAME_NAME)
+  @javax.annotation.Nullable
   private String name;
 
   public static final String SERIALIZED_NAME_DESCRIPTION = "description";
   @SerializedName(SERIALIZED_NAME_DESCRIPTION)
+  @javax.annotation.Nullable
   private String description;
 
   public static final String SERIALIZED_NAME_USER_IDENTIFIERS = "user_identifiers";
   @SerializedName(SERIALIZED_NAME_USER_IDENTIFIERS)
-  private List<String> userIdentifiers;
+  @javax.annotation.Nullable
+  private List<String> userIdentifiers = new ArrayList<>();
 
   public static final String SERIALIZED_NAME_GROUP_IDENTIFIERS = "group_identifiers";
   @SerializedName(SERIALIZED_NAME_GROUP_IDENTIFIERS)
-  private List<String> groupIdentifiers;
+  @javax.annotation.Nullable
+  private List<String> groupIdentifiers = new ArrayList<>();
 
   /**
    * Type of update operation. Default operation type is ADD
@@ -117,59 +119,60 @@ public class UpdateOrgRequest {
         return OperationEnum.fromValue(value);
       }
     }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      OperationEnum.fromValue(value);
+    }
   }
 
   public static final String SERIALIZED_NAME_OPERATION = "operation";
   @SerializedName(SERIALIZED_NAME_OPERATION)
+  @javax.annotation.Nullable
   private OperationEnum operation = OperationEnum.ADD;
 
   public UpdateOrgRequest() {
   }
 
-  public UpdateOrgRequest name(String name) {
-    
+  public UpdateOrgRequest name(@javax.annotation.Nullable String name) {
     this.name = name;
     return this;
   }
 
-   /**
+  /**
    * Name of the Org
    * @return name
-  **/
+   */
   @javax.annotation.Nullable
   public String getName() {
     return name;
   }
 
-
-  public void setName(String name) {
+  public void setName(@javax.annotation.Nullable String name) {
     this.name = name;
   }
 
 
-  public UpdateOrgRequest description(String description) {
-    
+  public UpdateOrgRequest description(@javax.annotation.Nullable String description) {
     this.description = description;
     return this;
   }
 
-   /**
+  /**
    * Description of the Org
    * @return description
-  **/
+   */
   @javax.annotation.Nullable
   public String getDescription() {
     return description;
   }
 
-
-  public void setDescription(String description) {
+  public void setDescription(@javax.annotation.Nullable String description) {
     this.description = description;
   }
 
 
-  public UpdateOrgRequest userIdentifiers(List<String> userIdentifiers) {
-    
+  public UpdateOrgRequest userIdentifiers(@javax.annotation.Nullable List<String> userIdentifiers) {
     this.userIdentifiers = userIdentifiers;
     return this;
   }
@@ -182,23 +185,21 @@ public class UpdateOrgRequest {
     return this;
   }
 
-   /**
+  /**
    * Add Users to an Org
    * @return userIdentifiers
-  **/
+   */
   @javax.annotation.Nullable
   public List<String> getUserIdentifiers() {
     return userIdentifiers;
   }
 
-
-  public void setUserIdentifiers(List<String> userIdentifiers) {
+  public void setUserIdentifiers(@javax.annotation.Nullable List<String> userIdentifiers) {
     this.userIdentifiers = userIdentifiers;
   }
 
 
-  public UpdateOrgRequest groupIdentifiers(List<String> groupIdentifiers) {
-    
+  public UpdateOrgRequest groupIdentifiers(@javax.annotation.Nullable List<String> groupIdentifiers) {
     this.groupIdentifiers = groupIdentifiers;
     return this;
   }
@@ -211,38 +212,35 @@ public class UpdateOrgRequest {
     return this;
   }
 
-   /**
+  /**
    * Add Default Groups to an Org
    * @return groupIdentifiers
-  **/
+   */
   @javax.annotation.Nullable
   public List<String> getGroupIdentifiers() {
     return groupIdentifiers;
   }
 
-
-  public void setGroupIdentifiers(List<String> groupIdentifiers) {
+  public void setGroupIdentifiers(@javax.annotation.Nullable List<String> groupIdentifiers) {
     this.groupIdentifiers = groupIdentifiers;
   }
 
 
-  public UpdateOrgRequest operation(OperationEnum operation) {
-    
+  public UpdateOrgRequest operation(@javax.annotation.Nullable OperationEnum operation) {
     this.operation = operation;
     return this;
   }
 
-   /**
+  /**
    * Type of update operation. Default operation type is ADD
    * @return operation
-  **/
+   */
   @javax.annotation.Nullable
   public OperationEnum getOperation() {
     return operation;
   }
 
-
-  public void setOperation(OperationEnum operation) {
+  public void setOperation(@javax.annotation.Nullable OperationEnum operation) {
     this.operation = operation;
   }
 
@@ -310,26 +308,27 @@ public class UpdateOrgRequest {
     openapiRequiredFields = new HashSet<String>();
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to UpdateOrgRequest
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!UpdateOrgRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to UpdateOrgRequest
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!UpdateOrgRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in UpdateOrgRequest is not found in the empty JSON string", UpdateOrgRequest.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!UpdateOrgRequest.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `UpdateOrgRequest` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `UpdateOrgRequest` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("name") != null && !jsonObj.get("name").isJsonNull()) && !jsonObj.get("name").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("name").toString()));
       }
@@ -337,15 +336,19 @@ public class UpdateOrgRequest {
         throw new IllegalArgumentException(String.format("Expected the field `description` to be a primitive type in the JSON string but got `%s`", jsonObj.get("description").toString()));
       }
       // ensure the optional json data is an array if present
-      if (jsonObj.get("user_identifiers") != null && !jsonObj.get("user_identifiers").isJsonArray()) {
+      if (jsonObj.get("user_identifiers") != null && !jsonObj.get("user_identifiers").isJsonNull() && !jsonObj.get("user_identifiers").isJsonArray()) {
         throw new IllegalArgumentException(String.format("Expected the field `user_identifiers` to be an array in the JSON string but got `%s`", jsonObj.get("user_identifiers").toString()));
       }
       // ensure the optional json data is an array if present
-      if (jsonObj.get("group_identifiers") != null && !jsonObj.get("group_identifiers").isJsonArray()) {
+      if (jsonObj.get("group_identifiers") != null && !jsonObj.get("group_identifiers").isJsonNull() && !jsonObj.get("group_identifiers").isJsonArray()) {
         throw new IllegalArgumentException(String.format("Expected the field `group_identifiers` to be an array in the JSON string but got `%s`", jsonObj.get("group_identifiers").toString()));
       }
       if ((jsonObj.get("operation") != null && !jsonObj.get("operation").isJsonNull()) && !jsonObj.get("operation").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `operation` to be a primitive type in the JSON string but got `%s`", jsonObj.get("operation").toString()));
+      }
+      // validate the optional field `operation`
+      if (jsonObj.get("operation") != null && !jsonObj.get("operation").isJsonNull()) {
+        OperationEnum.validateJsonElement(jsonObj.get("operation"));
       }
   }
 
@@ -369,31 +372,31 @@ public class UpdateOrgRequest {
 
            @Override
            public UpdateOrgRequest read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of UpdateOrgRequest given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of UpdateOrgRequest
-  * @throws IOException if the JSON string is invalid with respect to UpdateOrgRequest
-  */
+  /**
+   * Create an instance of UpdateOrgRequest given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of UpdateOrgRequest
+   * @throws IOException if the JSON string is invalid with respect to UpdateOrgRequest
+   */
   public static UpdateOrgRequest fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, UpdateOrgRequest.class);
   }
 
- /**
-  * Convert an instance of UpdateOrgRequest to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of UpdateOrgRequest to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

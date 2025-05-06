@@ -14,7 +14,6 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -22,6 +21,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.thoughtspot.client.model.LiveboardContent;
 
@@ -40,12 +40,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -53,67 +51,65 @@ import org.thoughtspot.client.JSON;
 /**
  * LiveboardDataResponse
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class LiveboardDataResponse {
   public static final String SERIALIZED_NAME_METADATA_ID = "metadata_id";
   @SerializedName(SERIALIZED_NAME_METADATA_ID)
+  @javax.annotation.Nonnull
   private String metadataId;
 
   public static final String SERIALIZED_NAME_METADATA_NAME = "metadata_name";
   @SerializedName(SERIALIZED_NAME_METADATA_NAME)
+  @javax.annotation.Nonnull
   private String metadataName;
 
   public static final String SERIALIZED_NAME_CONTENTS = "contents";
   @SerializedName(SERIALIZED_NAME_CONTENTS)
+  @javax.annotation.Nonnull
   private List<LiveboardContent> contents = new ArrayList<>();
 
   public LiveboardDataResponse() {
   }
 
-  public LiveboardDataResponse metadataId(String metadataId) {
-    
+  public LiveboardDataResponse metadataId(@javax.annotation.Nonnull String metadataId) {
     this.metadataId = metadataId;
     return this;
   }
 
-   /**
+  /**
    * The unique identifier of the object
    * @return metadataId
-  **/
+   */
   @javax.annotation.Nonnull
   public String getMetadataId() {
     return metadataId;
   }
 
-
-  public void setMetadataId(String metadataId) {
+  public void setMetadataId(@javax.annotation.Nonnull String metadataId) {
     this.metadataId = metadataId;
   }
 
 
-  public LiveboardDataResponse metadataName(String metadataName) {
-    
+  public LiveboardDataResponse metadataName(@javax.annotation.Nonnull String metadataName) {
     this.metadataName = metadataName;
     return this;
   }
 
-   /**
+  /**
    * Name of the metadata object
    * @return metadataName
-  **/
+   */
   @javax.annotation.Nonnull
   public String getMetadataName() {
     return metadataName;
   }
 
-
-  public void setMetadataName(String metadataName) {
+  public void setMetadataName(@javax.annotation.Nonnull String metadataName) {
     this.metadataName = metadataName;
   }
 
 
-  public LiveboardDataResponse contents(List<LiveboardContent> contents) {
-    
+  public LiveboardDataResponse contents(@javax.annotation.Nonnull List<LiveboardContent> contents) {
     this.contents = contents;
     return this;
   }
@@ -126,17 +122,16 @@ public class LiveboardDataResponse {
     return this;
   }
 
-   /**
+  /**
    * Data content of metadata objects
    * @return contents
-  **/
+   */
   @javax.annotation.Nonnull
   public List<LiveboardContent> getContents() {
     return contents;
   }
 
-
-  public void setContents(List<LiveboardContent> contents) {
+  public void setContents(@javax.annotation.Nonnull List<LiveboardContent> contents) {
     this.contents = contents;
   }
 
@@ -201,33 +196,34 @@ public class LiveboardDataResponse {
     openapiRequiredFields.add("contents");
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to LiveboardDataResponse
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!LiveboardDataResponse.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to LiveboardDataResponse
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!LiveboardDataResponse.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in LiveboardDataResponse is not found in the empty JSON string", LiveboardDataResponse.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!LiveboardDataResponse.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `LiveboardDataResponse` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `LiveboardDataResponse` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
       for (String requiredField : LiveboardDataResponse.openapiRequiredFields) {
-        if (jsonObj.get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       if (!jsonObj.get("metadata_id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `metadata_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("metadata_id").toString()));
       }
@@ -242,7 +238,7 @@ public class LiveboardDataResponse {
       JsonArray jsonArraycontents = jsonObj.getAsJsonArray("contents");
       // validate the required field `contents` (array)
       for (int i = 0; i < jsonArraycontents.size(); i++) {
-        LiveboardContent.validateJsonObject(jsonArraycontents.get(i).getAsJsonObject());
+        LiveboardContent.validateJsonElement(jsonArraycontents.get(i));
       };
   }
 
@@ -266,31 +262,31 @@ public class LiveboardDataResponse {
 
            @Override
            public LiveboardDataResponse read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of LiveboardDataResponse given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of LiveboardDataResponse
-  * @throws IOException if the JSON string is invalid with respect to LiveboardDataResponse
-  */
+  /**
+   * Create an instance of LiveboardDataResponse given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of LiveboardDataResponse
+   * @throws IOException if the JSON string is invalid with respect to LiveboardDataResponse
+   */
   public static LiveboardDataResponse fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, LiveboardDataResponse.class);
   }
 
- /**
-  * Convert an instance of LiveboardDataResponse to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of LiveboardDataResponse to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

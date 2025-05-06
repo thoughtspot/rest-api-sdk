@@ -14,13 +14,13 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.util.Arrays;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -37,12 +37,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -50,157 +48,151 @@ import org.thoughtspot.client.JSON;
 /**
  * Schedule selected cron expression.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class CronExpressionInput {
   public static final String SERIALIZED_NAME_DAY_OF_MONTH = "day_of_month";
   @SerializedName(SERIALIZED_NAME_DAY_OF_MONTH)
+  @javax.annotation.Nonnull
   private String dayOfMonth;
 
   public static final String SERIALIZED_NAME_DAY_OF_WEEK = "day_of_week";
   @SerializedName(SERIALIZED_NAME_DAY_OF_WEEK)
+  @javax.annotation.Nonnull
   private String dayOfWeek;
 
   public static final String SERIALIZED_NAME_HOUR = "hour";
   @SerializedName(SERIALIZED_NAME_HOUR)
+  @javax.annotation.Nonnull
   private String hour;
 
   public static final String SERIALIZED_NAME_MINUTE = "minute";
   @SerializedName(SERIALIZED_NAME_MINUTE)
+  @javax.annotation.Nonnull
   private String minute;
 
   public static final String SERIALIZED_NAME_MONTH = "month";
   @SerializedName(SERIALIZED_NAME_MONTH)
+  @javax.annotation.Nonnull
   private String month;
 
   public static final String SERIALIZED_NAME_SECOND = "second";
   @SerializedName(SERIALIZED_NAME_SECOND)
+  @javax.annotation.Nonnull
   private String second;
 
   public CronExpressionInput() {
   }
 
-  public CronExpressionInput dayOfMonth(String dayOfMonth) {
-    
+  public CronExpressionInput dayOfMonth(@javax.annotation.Nonnull String dayOfMonth) {
     this.dayOfMonth = dayOfMonth;
     return this;
   }
 
-   /**
+  /**
    * Day of month of the object.
    * @return dayOfMonth
-  **/
+   */
   @javax.annotation.Nonnull
   public String getDayOfMonth() {
     return dayOfMonth;
   }
 
-
-  public void setDayOfMonth(String dayOfMonth) {
+  public void setDayOfMonth(@javax.annotation.Nonnull String dayOfMonth) {
     this.dayOfMonth = dayOfMonth;
   }
 
 
-  public CronExpressionInput dayOfWeek(String dayOfWeek) {
-    
+  public CronExpressionInput dayOfWeek(@javax.annotation.Nonnull String dayOfWeek) {
     this.dayOfWeek = dayOfWeek;
     return this;
   }
 
-   /**
+  /**
    * Day of Week of the object.
    * @return dayOfWeek
-  **/
+   */
   @javax.annotation.Nonnull
   public String getDayOfWeek() {
     return dayOfWeek;
   }
 
-
-  public void setDayOfWeek(String dayOfWeek) {
+  public void setDayOfWeek(@javax.annotation.Nonnull String dayOfWeek) {
     this.dayOfWeek = dayOfWeek;
   }
 
 
-  public CronExpressionInput hour(String hour) {
-    
+  public CronExpressionInput hour(@javax.annotation.Nonnull String hour) {
     this.hour = hour;
     return this;
   }
 
-   /**
+  /**
    * Hour of the object.
    * @return hour
-  **/
+   */
   @javax.annotation.Nonnull
   public String getHour() {
     return hour;
   }
 
-
-  public void setHour(String hour) {
+  public void setHour(@javax.annotation.Nonnull String hour) {
     this.hour = hour;
   }
 
 
-  public CronExpressionInput minute(String minute) {
-    
+  public CronExpressionInput minute(@javax.annotation.Nonnull String minute) {
     this.minute = minute;
     return this;
   }
 
-   /**
+  /**
    * Minute of the object.
    * @return minute
-  **/
+   */
   @javax.annotation.Nonnull
   public String getMinute() {
     return minute;
   }
 
-
-  public void setMinute(String minute) {
+  public void setMinute(@javax.annotation.Nonnull String minute) {
     this.minute = minute;
   }
 
 
-  public CronExpressionInput month(String month) {
-    
+  public CronExpressionInput month(@javax.annotation.Nonnull String month) {
     this.month = month;
     return this;
   }
 
-   /**
+  /**
    * Month of the object.
    * @return month
-  **/
+   */
   @javax.annotation.Nonnull
   public String getMonth() {
     return month;
   }
 
-
-  public void setMonth(String month) {
+  public void setMonth(@javax.annotation.Nonnull String month) {
     this.month = month;
   }
 
 
-  public CronExpressionInput second(String second) {
-    
+  public CronExpressionInput second(@javax.annotation.Nonnull String second) {
     this.second = second;
     return this;
   }
 
-   /**
+  /**
    * Second of the object.
    * @return second
-  **/
+   */
   @javax.annotation.Nonnull
   public String getSecond() {
     return second;
   }
 
-
-  public void setSecond(String second) {
+  public void setSecond(@javax.annotation.Nonnull String second) {
     this.second = second;
   }
 
@@ -277,33 +269,34 @@ public class CronExpressionInput {
     openapiRequiredFields.add("second");
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to CronExpressionInput
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!CronExpressionInput.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to CronExpressionInput
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!CronExpressionInput.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in CronExpressionInput is not found in the empty JSON string", CronExpressionInput.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!CronExpressionInput.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `CronExpressionInput` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `CronExpressionInput` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
       for (String requiredField : CronExpressionInput.openapiRequiredFields) {
-        if (jsonObj.get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       if (!jsonObj.get("day_of_month").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `day_of_month` to be a primitive type in the JSON string but got `%s`", jsonObj.get("day_of_month").toString()));
       }
@@ -344,31 +337,31 @@ public class CronExpressionInput {
 
            @Override
            public CronExpressionInput read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of CronExpressionInput given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of CronExpressionInput
-  * @throws IOException if the JSON string is invalid with respect to CronExpressionInput
-  */
+  /**
+   * Create an instance of CronExpressionInput given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of CronExpressionInput
+   * @throws IOException if the JSON string is invalid with respect to CronExpressionInput
+   */
   public static CronExpressionInput fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, CronExpressionInput.class);
   }
 
- /**
-  * Convert an instance of CronExpressionInput to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of CronExpressionInput to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

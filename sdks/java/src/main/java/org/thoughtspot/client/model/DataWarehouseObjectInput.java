@@ -14,13 +14,13 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.util.Arrays;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
@@ -38,12 +38,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -51,107 +49,103 @@ import org.thoughtspot.client.JSON;
 /**
  * DataWarehouseObjectInput
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class DataWarehouseObjectInput {
   public static final String SERIALIZED_NAME_DATABASE = "database";
   @SerializedName(SERIALIZED_NAME_DATABASE)
+  @javax.annotation.Nullable
   private String database;
 
   public static final String SERIALIZED_NAME_SCHEMA = "schema";
   @SerializedName(SERIALIZED_NAME_SCHEMA)
+  @javax.annotation.Nullable
   private String schema;
 
   public static final String SERIALIZED_NAME_TABLE = "table";
   @SerializedName(SERIALIZED_NAME_TABLE)
+  @javax.annotation.Nullable
   private String table;
 
   public static final String SERIALIZED_NAME_COLUMN = "column";
   @SerializedName(SERIALIZED_NAME_COLUMN)
+  @javax.annotation.Nullable
   private String column;
 
   public DataWarehouseObjectInput() {
   }
 
-  public DataWarehouseObjectInput database(String database) {
-    
+  public DataWarehouseObjectInput database(@javax.annotation.Nullable String database) {
     this.database = database;
     return this;
   }
 
-   /**
+  /**
    * Name of the database.
    * @return database
-  **/
+   */
   @javax.annotation.Nullable
   public String getDatabase() {
     return database;
   }
 
-
-  public void setDatabase(String database) {
+  public void setDatabase(@javax.annotation.Nullable String database) {
     this.database = database;
   }
 
 
-  public DataWarehouseObjectInput schema(String schema) {
-    
+  public DataWarehouseObjectInput schema(@javax.annotation.Nullable String schema) {
     this.schema = schema;
     return this;
   }
 
-   /**
+  /**
    * Name of the schema within the database.
    * @return schema
-  **/
+   */
   @javax.annotation.Nullable
   public String getSchema() {
     return schema;
   }
 
-
-  public void setSchema(String schema) {
+  public void setSchema(@javax.annotation.Nullable String schema) {
     this.schema = schema;
   }
 
 
-  public DataWarehouseObjectInput table(String table) {
-    
+  public DataWarehouseObjectInput table(@javax.annotation.Nullable String table) {
     this.table = table;
     return this;
   }
 
-   /**
+  /**
    * Name of the table within the schema.
    * @return table
-  **/
+   */
   @javax.annotation.Nullable
   public String getTable() {
     return table;
   }
 
-
-  public void setTable(String table) {
+  public void setTable(@javax.annotation.Nullable String table) {
     this.table = table;
   }
 
 
-  public DataWarehouseObjectInput column(String column) {
-    
+  public DataWarehouseObjectInput column(@javax.annotation.Nullable String column) {
     this.column = column;
     return this;
   }
 
-   /**
+  /**
    * Name of the column within the table.
    * @return column
-  **/
+   */
   @javax.annotation.Nullable
   public String getColumn() {
     return column;
   }
 
-
-  public void setColumn(String column) {
+  public void setColumn(@javax.annotation.Nullable String column) {
     this.column = column;
   }
 
@@ -227,26 +221,27 @@ public class DataWarehouseObjectInput {
     openapiRequiredFields = new HashSet<String>();
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to DataWarehouseObjectInput
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!DataWarehouseObjectInput.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to DataWarehouseObjectInput
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!DataWarehouseObjectInput.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in DataWarehouseObjectInput is not found in the empty JSON string", DataWarehouseObjectInput.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!DataWarehouseObjectInput.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `DataWarehouseObjectInput` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `DataWarehouseObjectInput` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("database") != null && !jsonObj.get("database").isJsonNull()) && !jsonObj.get("database").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `database` to be a primitive type in the JSON string but got `%s`", jsonObj.get("database").toString()));
       }
@@ -281,31 +276,31 @@ public class DataWarehouseObjectInput {
 
            @Override
            public DataWarehouseObjectInput read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of DataWarehouseObjectInput given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of DataWarehouseObjectInput
-  * @throws IOException if the JSON string is invalid with respect to DataWarehouseObjectInput
-  */
+  /**
+   * Create an instance of DataWarehouseObjectInput given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of DataWarehouseObjectInput
+   * @throws IOException if the JSON string is invalid with respect to DataWarehouseObjectInput
+   */
   public static DataWarehouseObjectInput fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, DataWarehouseObjectInput.class);
   }
 
- /**
-  * Convert an instance of DataWarehouseObjectInput to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of DataWarehouseObjectInput to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

@@ -14,7 +14,6 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -22,13 +21,14 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
 import org.thoughtspot.client.model.ExcludeMetadataListItemInput;
+import org.thoughtspot.client.model.FavoriteObjectOptionsInput;
 import org.thoughtspot.client.model.MetadataListItemInput;
+import org.thoughtspot.client.model.MetadataSearchSortOptions;
 import org.thoughtspot.client.model.PermissionInput;
-import org.thoughtspot.client.model.SearchMetadataRequestFavoriteObjectOptions;
-import org.thoughtspot.client.model.SearchMetadataRequestSortOptions;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -45,12 +45,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -58,19 +56,22 @@ import org.thoughtspot.client.JSON;
 /**
  * SearchMetadataRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class SearchMetadataRequest {
   public static final String SERIALIZED_NAME_METADATA = "metadata";
   @SerializedName(SERIALIZED_NAME_METADATA)
-  private List<MetadataListItemInput> metadata;
+  @javax.annotation.Nullable
+  private List<MetadataListItemInput> metadata = new ArrayList<>();
 
   public static final String SERIALIZED_NAME_PERMISSIONS = "permissions";
   @SerializedName(SERIALIZED_NAME_PERMISSIONS)
-  private List<PermissionInput> permissions;
+  @javax.annotation.Nullable
+  private List<PermissionInput> permissions = new ArrayList<>();
 
   public static final String SERIALIZED_NAME_CREATED_BY_USER_IDENTIFIERS = "created_by_user_identifiers";
   @SerializedName(SERIALIZED_NAME_CREATED_BY_USER_IDENTIFIERS)
-  private List<String> createdByUserIdentifiers;
+  @javax.annotation.Nullable
+  private List<String> createdByUserIdentifiers = new ArrayList<>();
 
   /**
    * Version of the dependent table of the metadata objects like Worksheets.
@@ -117,85 +118,107 @@ public class SearchMetadataRequest {
         return DependentObjectVersionEnum.fromValue(value);
       }
     }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      DependentObjectVersionEnum.fromValue(value);
+    }
   }
 
   public static final String SERIALIZED_NAME_DEPENDENT_OBJECT_VERSION = "dependent_object_version";
   @SerializedName(SERIALIZED_NAME_DEPENDENT_OBJECT_VERSION)
+  @javax.annotation.Nullable
   private DependentObjectVersionEnum dependentObjectVersion = DependentObjectVersionEnum.V1;
 
   public static final String SERIALIZED_NAME_EXCLUDE_OBJECTS = "exclude_objects";
   @SerializedName(SERIALIZED_NAME_EXCLUDE_OBJECTS)
-  private List<ExcludeMetadataListItemInput> excludeObjects;
+  @javax.annotation.Nullable
+  private List<ExcludeMetadataListItemInput> excludeObjects = new ArrayList<>();
 
   public static final String SERIALIZED_NAME_FAVORITE_OBJECT_OPTIONS = "favorite_object_options";
   @SerializedName(SERIALIZED_NAME_FAVORITE_OBJECT_OPTIONS)
-  private SearchMetadataRequestFavoriteObjectOptions favoriteObjectOptions;
+  @javax.annotation.Nullable
+  private FavoriteObjectOptionsInput favoriteObjectOptions;
 
   public static final String SERIALIZED_NAME_INCLUDE_AUTO_CREATED_OBJECTS = "include_auto_created_objects";
   @SerializedName(SERIALIZED_NAME_INCLUDE_AUTO_CREATED_OBJECTS)
+  @javax.annotation.Nullable
   private Boolean includeAutoCreatedObjects = false;
 
   public static final String SERIALIZED_NAME_INCLUDE_DEPENDENT_OBJECTS = "include_dependent_objects";
   @SerializedName(SERIALIZED_NAME_INCLUDE_DEPENDENT_OBJECTS)
+  @javax.annotation.Nullable
   private Boolean includeDependentObjects = false;
 
   public static final String SERIALIZED_NAME_DEPENDENT_OBJECTS_RECORD_SIZE = "dependent_objects_record_size";
   @SerializedName(SERIALIZED_NAME_DEPENDENT_OBJECTS_RECORD_SIZE)
+  @javax.annotation.Nullable
   private Integer dependentObjectsRecordSize = 50;
 
   public static final String SERIALIZED_NAME_INCLUDE_DETAILS = "include_details";
   @SerializedName(SERIALIZED_NAME_INCLUDE_DETAILS)
+  @javax.annotation.Nullable
   private Boolean includeDetails = false;
 
   public static final String SERIALIZED_NAME_INCLUDE_HEADERS = "include_headers";
   @SerializedName(SERIALIZED_NAME_INCLUDE_HEADERS)
+  @javax.annotation.Nullable
   private Boolean includeHeaders = true;
 
   public static final String SERIALIZED_NAME_INCLUDE_HIDDEN_OBJECTS = "include_hidden_objects";
   @SerializedName(SERIALIZED_NAME_INCLUDE_HIDDEN_OBJECTS)
+  @javax.annotation.Nullable
   private Boolean includeHiddenObjects = false;
 
   public static final String SERIALIZED_NAME_INCLUDE_INCOMPLETE_OBJECTS = "include_incomplete_objects";
   @SerializedName(SERIALIZED_NAME_INCLUDE_INCOMPLETE_OBJECTS)
+  @javax.annotation.Nullable
   private Boolean includeIncompleteObjects = false;
 
   public static final String SERIALIZED_NAME_INCLUDE_VISUALIZATION_HEADERS = "include_visualization_headers";
   @SerializedName(SERIALIZED_NAME_INCLUDE_VISUALIZATION_HEADERS)
+  @javax.annotation.Nullable
   private Boolean includeVisualizationHeaders = false;
 
   public static final String SERIALIZED_NAME_INCLUDE_WORKSHEET_SEARCH_ASSIST_DATA = "include_worksheet_search_assist_data";
   @SerializedName(SERIALIZED_NAME_INCLUDE_WORKSHEET_SEARCH_ASSIST_DATA)
+  @javax.annotation.Nullable
   private Boolean includeWorksheetSearchAssistData;
 
   public static final String SERIALIZED_NAME_MODIFIED_BY_USER_IDENTIFIERS = "modified_by_user_identifiers";
   @SerializedName(SERIALIZED_NAME_MODIFIED_BY_USER_IDENTIFIERS)
-  private List<String> modifiedByUserIdentifiers;
+  @javax.annotation.Nullable
+  private List<String> modifiedByUserIdentifiers = new ArrayList<>();
 
   public static final String SERIALIZED_NAME_RECORD_OFFSET = "record_offset";
   @SerializedName(SERIALIZED_NAME_RECORD_OFFSET)
+  @javax.annotation.Nullable
   private Integer recordOffset = 0;
 
   public static final String SERIALIZED_NAME_RECORD_SIZE = "record_size";
   @SerializedName(SERIALIZED_NAME_RECORD_SIZE)
+  @javax.annotation.Nullable
   private Integer recordSize = 10;
 
   public static final String SERIALIZED_NAME_SORT_OPTIONS = "sort_options";
   @SerializedName(SERIALIZED_NAME_SORT_OPTIONS)
-  private SearchMetadataRequestSortOptions sortOptions;
+  @javax.annotation.Nullable
+  private MetadataSearchSortOptions sortOptions;
 
   public static final String SERIALIZED_NAME_TAG_IDENTIFIERS = "tag_identifiers";
   @SerializedName(SERIALIZED_NAME_TAG_IDENTIFIERS)
-  private List<String> tagIdentifiers;
+  @javax.annotation.Nullable
+  private List<String> tagIdentifiers = new ArrayList<>();
 
   public static final String SERIALIZED_NAME_INCLUDE_STATS = "include_stats";
   @SerializedName(SERIALIZED_NAME_INCLUDE_STATS)
+  @javax.annotation.Nullable
   private Boolean includeStats = false;
 
   public SearchMetadataRequest() {
   }
 
-  public SearchMetadataRequest metadata(List<MetadataListItemInput> metadata) {
-    
+  public SearchMetadataRequest metadata(@javax.annotation.Nullable List<MetadataListItemInput> metadata) {
     this.metadata = metadata;
     return this;
   }
@@ -208,23 +231,21 @@ public class SearchMetadataRequest {
     return this;
   }
 
-   /**
+  /**
    * Metadata objects such as Liveboards, Answers, and Worksheets.
    * @return metadata
-  **/
+   */
   @javax.annotation.Nullable
   public List<MetadataListItemInput> getMetadata() {
     return metadata;
   }
 
-
-  public void setMetadata(List<MetadataListItemInput> metadata) {
+  public void setMetadata(@javax.annotation.Nullable List<MetadataListItemInput> metadata) {
     this.metadata = metadata;
   }
 
 
-  public SearchMetadataRequest permissions(List<PermissionInput> permissions) {
-    
+  public SearchMetadataRequest permissions(@javax.annotation.Nullable List<PermissionInput> permissions) {
     this.permissions = permissions;
     return this;
   }
@@ -237,23 +258,21 @@ public class SearchMetadataRequest {
     return this;
   }
 
-   /**
+  /**
    * Object permission details to search by.
    * @return permissions
-  **/
+   */
   @javax.annotation.Nullable
   public List<PermissionInput> getPermissions() {
     return permissions;
   }
 
-
-  public void setPermissions(List<PermissionInput> permissions) {
+  public void setPermissions(@javax.annotation.Nullable List<PermissionInput> permissions) {
     this.permissions = permissions;
   }
 
 
-  public SearchMetadataRequest createdByUserIdentifiers(List<String> createdByUserIdentifiers) {
-    
+  public SearchMetadataRequest createdByUserIdentifiers(@javax.annotation.Nullable List<String> createdByUserIdentifiers) {
     this.createdByUserIdentifiers = createdByUserIdentifiers;
     return this;
   }
@@ -266,44 +285,40 @@ public class SearchMetadataRequest {
     return this;
   }
 
-   /**
+  /**
    * GUID or name of user who created the metadata object.
    * @return createdByUserIdentifiers
-  **/
+   */
   @javax.annotation.Nullable
   public List<String> getCreatedByUserIdentifiers() {
     return createdByUserIdentifiers;
   }
 
-
-  public void setCreatedByUserIdentifiers(List<String> createdByUserIdentifiers) {
+  public void setCreatedByUserIdentifiers(@javax.annotation.Nullable List<String> createdByUserIdentifiers) {
     this.createdByUserIdentifiers = createdByUserIdentifiers;
   }
 
 
-  public SearchMetadataRequest dependentObjectVersion(DependentObjectVersionEnum dependentObjectVersion) {
-    
+  public SearchMetadataRequest dependentObjectVersion(@javax.annotation.Nullable DependentObjectVersionEnum dependentObjectVersion) {
     this.dependentObjectVersion = dependentObjectVersion;
     return this;
   }
 
-   /**
+  /**
    * Version of the dependent table of the metadata objects like Worksheets.
    * @return dependentObjectVersion
-  **/
+   */
   @javax.annotation.Nullable
   public DependentObjectVersionEnum getDependentObjectVersion() {
     return dependentObjectVersion;
   }
 
-
-  public void setDependentObjectVersion(DependentObjectVersionEnum dependentObjectVersion) {
+  public void setDependentObjectVersion(@javax.annotation.Nullable DependentObjectVersionEnum dependentObjectVersion) {
     this.dependentObjectVersion = dependentObjectVersion;
   }
 
 
-  public SearchMetadataRequest excludeObjects(List<ExcludeMetadataListItemInput> excludeObjects) {
-    
+  public SearchMetadataRequest excludeObjects(@javax.annotation.Nullable List<ExcludeMetadataListItemInput> excludeObjects) {
     this.excludeObjects = excludeObjects;
     return this;
   }
@@ -316,233 +331,211 @@ public class SearchMetadataRequest {
     return this;
   }
 
-   /**
+  /**
    * List of metadata objects to exclude from search.
    * @return excludeObjects
-  **/
+   */
   @javax.annotation.Nullable
   public List<ExcludeMetadataListItemInput> getExcludeObjects() {
     return excludeObjects;
   }
 
-
-  public void setExcludeObjects(List<ExcludeMetadataListItemInput> excludeObjects) {
+  public void setExcludeObjects(@javax.annotation.Nullable List<ExcludeMetadataListItemInput> excludeObjects) {
     this.excludeObjects = excludeObjects;
   }
 
 
-  public SearchMetadataRequest favoriteObjectOptions(SearchMetadataRequestFavoriteObjectOptions favoriteObjectOptions) {
-    
+  public SearchMetadataRequest favoriteObjectOptions(@javax.annotation.Nullable FavoriteObjectOptionsInput favoriteObjectOptions) {
     this.favoriteObjectOptions = favoriteObjectOptions;
     return this;
   }
 
-   /**
-   * Get favoriteObjectOptions
+  /**
+   * Options to sort the API response by objects set as favorites for the logged-in user or the users specified in the API request.
    * @return favoriteObjectOptions
-  **/
+   */
   @javax.annotation.Nullable
-  public SearchMetadataRequestFavoriteObjectOptions getFavoriteObjectOptions() {
+  public FavoriteObjectOptionsInput getFavoriteObjectOptions() {
     return favoriteObjectOptions;
   }
 
-
-  public void setFavoriteObjectOptions(SearchMetadataRequestFavoriteObjectOptions favoriteObjectOptions) {
+  public void setFavoriteObjectOptions(@javax.annotation.Nullable FavoriteObjectOptionsInput favoriteObjectOptions) {
     this.favoriteObjectOptions = favoriteObjectOptions;
   }
 
 
-  public SearchMetadataRequest includeAutoCreatedObjects(Boolean includeAutoCreatedObjects) {
-    
+  public SearchMetadataRequest includeAutoCreatedObjects(@javax.annotation.Nullable Boolean includeAutoCreatedObjects) {
     this.includeAutoCreatedObjects = includeAutoCreatedObjects;
     return this;
   }
 
-   /**
+  /**
    * Includes system-generated metadata objects.
    * @return includeAutoCreatedObjects
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getIncludeAutoCreatedObjects() {
     return includeAutoCreatedObjects;
   }
 
-
-  public void setIncludeAutoCreatedObjects(Boolean includeAutoCreatedObjects) {
+  public void setIncludeAutoCreatedObjects(@javax.annotation.Nullable Boolean includeAutoCreatedObjects) {
     this.includeAutoCreatedObjects = includeAutoCreatedObjects;
   }
 
 
-  public SearchMetadataRequest includeDependentObjects(Boolean includeDependentObjects) {
-    
+  public SearchMetadataRequest includeDependentObjects(@javax.annotation.Nullable Boolean includeDependentObjects) {
     this.includeDependentObjects = includeDependentObjects;
     return this;
   }
 
-   /**
+  /**
    * Includes dependents of the metadata object specified in the API request. For example, a worksheet can consist of dependent objects such as Liveboards or Answers.
    * @return includeDependentObjects
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getIncludeDependentObjects() {
     return includeDependentObjects;
   }
 
-
-  public void setIncludeDependentObjects(Boolean includeDependentObjects) {
+  public void setIncludeDependentObjects(@javax.annotation.Nullable Boolean includeDependentObjects) {
     this.includeDependentObjects = includeDependentObjects;
   }
 
 
-  public SearchMetadataRequest dependentObjectsRecordSize(Integer dependentObjectsRecordSize) {
-    
+  public SearchMetadataRequest dependentObjectsRecordSize(@javax.annotation.Nullable Integer dependentObjectsRecordSize) {
     this.dependentObjectsRecordSize = dependentObjectsRecordSize;
     return this;
   }
 
-   /**
+  /**
    * The maximum number of dependents to include per metadata object.
    * @return dependentObjectsRecordSize
-  **/
+   */
   @javax.annotation.Nullable
   public Integer getDependentObjectsRecordSize() {
     return dependentObjectsRecordSize;
   }
 
-
-  public void setDependentObjectsRecordSize(Integer dependentObjectsRecordSize) {
+  public void setDependentObjectsRecordSize(@javax.annotation.Nullable Integer dependentObjectsRecordSize) {
     this.dependentObjectsRecordSize = dependentObjectsRecordSize;
   }
 
 
-  public SearchMetadataRequest includeDetails(Boolean includeDetails) {
-    
+  public SearchMetadataRequest includeDetails(@javax.annotation.Nullable Boolean includeDetails) {
     this.includeDetails = includeDetails;
     return this;
   }
 
-   /**
+  /**
    * Includes complete details of the metadata objects.
    * @return includeDetails
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getIncludeDetails() {
     return includeDetails;
   }
 
-
-  public void setIncludeDetails(Boolean includeDetails) {
+  public void setIncludeDetails(@javax.annotation.Nullable Boolean includeDetails) {
     this.includeDetails = includeDetails;
   }
 
 
-  public SearchMetadataRequest includeHeaders(Boolean includeHeaders) {
-    
+  public SearchMetadataRequest includeHeaders(@javax.annotation.Nullable Boolean includeHeaders) {
     this.includeHeaders = includeHeaders;
     return this;
   }
 
-   /**
+  /**
    * Includes headers of the metadata objects.
    * @return includeHeaders
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getIncludeHeaders() {
     return includeHeaders;
   }
 
-
-  public void setIncludeHeaders(Boolean includeHeaders) {
+  public void setIncludeHeaders(@javax.annotation.Nullable Boolean includeHeaders) {
     this.includeHeaders = includeHeaders;
   }
 
 
-  public SearchMetadataRequest includeHiddenObjects(Boolean includeHiddenObjects) {
-    
+  public SearchMetadataRequest includeHiddenObjects(@javax.annotation.Nullable Boolean includeHiddenObjects) {
     this.includeHiddenObjects = includeHiddenObjects;
     return this;
   }
 
-   /**
+  /**
    * Includes details of the hidden objects, such as a column in a worksheet or a table.
    * @return includeHiddenObjects
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getIncludeHiddenObjects() {
     return includeHiddenObjects;
   }
 
-
-  public void setIncludeHiddenObjects(Boolean includeHiddenObjects) {
+  public void setIncludeHiddenObjects(@javax.annotation.Nullable Boolean includeHiddenObjects) {
     this.includeHiddenObjects = includeHiddenObjects;
   }
 
 
-  public SearchMetadataRequest includeIncompleteObjects(Boolean includeIncompleteObjects) {
-    
+  public SearchMetadataRequest includeIncompleteObjects(@javax.annotation.Nullable Boolean includeIncompleteObjects) {
     this.includeIncompleteObjects = includeIncompleteObjects;
     return this;
   }
 
-   /**
+  /**
    * Includes objects with incomplete metadata.
    * @return includeIncompleteObjects
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getIncludeIncompleteObjects() {
     return includeIncompleteObjects;
   }
 
-
-  public void setIncludeIncompleteObjects(Boolean includeIncompleteObjects) {
+  public void setIncludeIncompleteObjects(@javax.annotation.Nullable Boolean includeIncompleteObjects) {
     this.includeIncompleteObjects = includeIncompleteObjects;
   }
 
 
-  public SearchMetadataRequest includeVisualizationHeaders(Boolean includeVisualizationHeaders) {
-    
+  public SearchMetadataRequest includeVisualizationHeaders(@javax.annotation.Nullable Boolean includeVisualizationHeaders) {
     this.includeVisualizationHeaders = includeVisualizationHeaders;
     return this;
   }
 
-   /**
+  /**
    * Includes visualization headers of the specified Liveboard object.
    * @return includeVisualizationHeaders
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getIncludeVisualizationHeaders() {
     return includeVisualizationHeaders;
   }
 
-
-  public void setIncludeVisualizationHeaders(Boolean includeVisualizationHeaders) {
+  public void setIncludeVisualizationHeaders(@javax.annotation.Nullable Boolean includeVisualizationHeaders) {
     this.includeVisualizationHeaders = includeVisualizationHeaders;
   }
 
 
-  public SearchMetadataRequest includeWorksheetSearchAssistData(Boolean includeWorksheetSearchAssistData) {
-    
+  public SearchMetadataRequest includeWorksheetSearchAssistData(@javax.annotation.Nullable Boolean includeWorksheetSearchAssistData) {
     this.includeWorksheetSearchAssistData = includeWorksheetSearchAssistData;
     return this;
   }
 
-   /**
+  /**
    * If search assistance lessons are configured on a worksheet, the API returns the search assist data for Worksheet objects.
    * @return includeWorksheetSearchAssistData
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getIncludeWorksheetSearchAssistData() {
     return includeWorksheetSearchAssistData;
   }
 
-
-  public void setIncludeWorksheetSearchAssistData(Boolean includeWorksheetSearchAssistData) {
+  public void setIncludeWorksheetSearchAssistData(@javax.annotation.Nullable Boolean includeWorksheetSearchAssistData) {
     this.includeWorksheetSearchAssistData = includeWorksheetSearchAssistData;
   }
 
 
-  public SearchMetadataRequest modifiedByUserIdentifiers(List<String> modifiedByUserIdentifiers) {
-    
+  public SearchMetadataRequest modifiedByUserIdentifiers(@javax.annotation.Nullable List<String> modifiedByUserIdentifiers) {
     this.modifiedByUserIdentifiers = modifiedByUserIdentifiers;
     return this;
   }
@@ -555,86 +548,78 @@ public class SearchMetadataRequest {
     return this;
   }
 
-   /**
+  /**
    * Includes ID or names of the users who modified the metadata object.
    * @return modifiedByUserIdentifiers
-  **/
+   */
   @javax.annotation.Nullable
   public List<String> getModifiedByUserIdentifiers() {
     return modifiedByUserIdentifiers;
   }
 
-
-  public void setModifiedByUserIdentifiers(List<String> modifiedByUserIdentifiers) {
+  public void setModifiedByUserIdentifiers(@javax.annotation.Nullable List<String> modifiedByUserIdentifiers) {
     this.modifiedByUserIdentifiers = modifiedByUserIdentifiers;
   }
 
 
-  public SearchMetadataRequest recordOffset(Integer recordOffset) {
-    
+  public SearchMetadataRequest recordOffset(@javax.annotation.Nullable Integer recordOffset) {
     this.recordOffset = recordOffset;
     return this;
   }
 
-   /**
+  /**
    * The starting record number from where the records should be included.
    * @return recordOffset
-  **/
+   */
   @javax.annotation.Nullable
   public Integer getRecordOffset() {
     return recordOffset;
   }
 
-
-  public void setRecordOffset(Integer recordOffset) {
+  public void setRecordOffset(@javax.annotation.Nullable Integer recordOffset) {
     this.recordOffset = recordOffset;
   }
 
 
-  public SearchMetadataRequest recordSize(Integer recordSize) {
-    
+  public SearchMetadataRequest recordSize(@javax.annotation.Nullable Integer recordSize) {
     this.recordSize = recordSize;
     return this;
   }
 
-   /**
+  /**
    * The number of records that should be included.
    * @return recordSize
-  **/
+   */
   @javax.annotation.Nullable
   public Integer getRecordSize() {
     return recordSize;
   }
 
-
-  public void setRecordSize(Integer recordSize) {
+  public void setRecordSize(@javax.annotation.Nullable Integer recordSize) {
     this.recordSize = recordSize;
   }
 
 
-  public SearchMetadataRequest sortOptions(SearchMetadataRequestSortOptions sortOptions) {
-    
+  public SearchMetadataRequest sortOptions(@javax.annotation.Nullable MetadataSearchSortOptions sortOptions) {
     this.sortOptions = sortOptions;
     return this;
   }
 
-   /**
-   * Get sortOptions
+  /**
+   * Sort options to filter metadata details.
    * @return sortOptions
-  **/
+   */
   @javax.annotation.Nullable
-  public SearchMetadataRequestSortOptions getSortOptions() {
+  public MetadataSearchSortOptions getSortOptions() {
     return sortOptions;
   }
 
-
-  public void setSortOptions(SearchMetadataRequestSortOptions sortOptions) {
+  public void setSortOptions(@javax.annotation.Nullable MetadataSearchSortOptions sortOptions) {
     this.sortOptions = sortOptions;
   }
 
 
-  public SearchMetadataRequest tagIdentifiers(List<String> tagIdentifiers) {
-    
+  public SearchMetadataRequest tagIdentifiers(@javax.annotation.Nullable List<String> tagIdentifiers) {
     this.tagIdentifiers = tagIdentifiers;
     return this;
   }
@@ -647,38 +632,35 @@ public class SearchMetadataRequest {
     return this;
   }
 
-   /**
+  /**
    * Tags to filter metadata objects by
    * @return tagIdentifiers
-  **/
+   */
   @javax.annotation.Nullable
   public List<String> getTagIdentifiers() {
     return tagIdentifiers;
   }
 
-
-  public void setTagIdentifiers(List<String> tagIdentifiers) {
+  public void setTagIdentifiers(@javax.annotation.Nullable List<String> tagIdentifiers) {
     this.tagIdentifiers = tagIdentifiers;
   }
 
 
-  public SearchMetadataRequest includeStats(Boolean includeStats) {
-    
+  public SearchMetadataRequest includeStats(@javax.annotation.Nullable Boolean includeStats) {
     this.includeStats = includeStats;
     return this;
   }
 
-   /**
+  /**
    * Indicates whether to include stats of the metadata objects.
    * @return includeStats
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getIncludeStats() {
     return includeStats;
   }
 
-
-  public void setIncludeStats(Boolean includeStats) {
+  public void setIncludeStats(@javax.annotation.Nullable Boolean includeStats) {
     this.includeStats = includeStats;
   }
 
@@ -805,26 +787,27 @@ public class SearchMetadataRequest {
     openapiRequiredFields = new HashSet<String>();
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to SearchMetadataRequest
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!SearchMetadataRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to SearchMetadataRequest
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!SearchMetadataRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in SearchMetadataRequest is not found in the empty JSON string", SearchMetadataRequest.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!SearchMetadataRequest.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `SearchMetadataRequest` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `SearchMetadataRequest` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       if (jsonObj.get("metadata") != null && !jsonObj.get("metadata").isJsonNull()) {
         JsonArray jsonArraymetadata = jsonObj.getAsJsonArray("metadata");
         if (jsonArraymetadata != null) {
@@ -835,7 +818,7 @@ public class SearchMetadataRequest {
 
           // validate the optional field `metadata` (array)
           for (int i = 0; i < jsonArraymetadata.size(); i++) {
-            MetadataListItemInput.validateJsonObject(jsonArraymetadata.get(i).getAsJsonObject());
+            MetadataListItemInput.validateJsonElement(jsonArraymetadata.get(i));
           };
         }
       }
@@ -849,16 +832,20 @@ public class SearchMetadataRequest {
 
           // validate the optional field `permissions` (array)
           for (int i = 0; i < jsonArraypermissions.size(); i++) {
-            PermissionInput.validateJsonObject(jsonArraypermissions.get(i).getAsJsonObject());
+            PermissionInput.validateJsonElement(jsonArraypermissions.get(i));
           };
         }
       }
       // ensure the optional json data is an array if present
-      if (jsonObj.get("created_by_user_identifiers") != null && !jsonObj.get("created_by_user_identifiers").isJsonArray()) {
+      if (jsonObj.get("created_by_user_identifiers") != null && !jsonObj.get("created_by_user_identifiers").isJsonNull() && !jsonObj.get("created_by_user_identifiers").isJsonArray()) {
         throw new IllegalArgumentException(String.format("Expected the field `created_by_user_identifiers` to be an array in the JSON string but got `%s`", jsonObj.get("created_by_user_identifiers").toString()));
       }
       if ((jsonObj.get("dependent_object_version") != null && !jsonObj.get("dependent_object_version").isJsonNull()) && !jsonObj.get("dependent_object_version").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `dependent_object_version` to be a primitive type in the JSON string but got `%s`", jsonObj.get("dependent_object_version").toString()));
+      }
+      // validate the optional field `dependent_object_version`
+      if (jsonObj.get("dependent_object_version") != null && !jsonObj.get("dependent_object_version").isJsonNull()) {
+        DependentObjectVersionEnum.validateJsonElement(jsonObj.get("dependent_object_version"));
       }
       if (jsonObj.get("exclude_objects") != null && !jsonObj.get("exclude_objects").isJsonNull()) {
         JsonArray jsonArrayexcludeObjects = jsonObj.getAsJsonArray("exclude_objects");
@@ -870,24 +857,24 @@ public class SearchMetadataRequest {
 
           // validate the optional field `exclude_objects` (array)
           for (int i = 0; i < jsonArrayexcludeObjects.size(); i++) {
-            ExcludeMetadataListItemInput.validateJsonObject(jsonArrayexcludeObjects.get(i).getAsJsonObject());
+            ExcludeMetadataListItemInput.validateJsonElement(jsonArrayexcludeObjects.get(i));
           };
         }
       }
       // validate the optional field `favorite_object_options`
       if (jsonObj.get("favorite_object_options") != null && !jsonObj.get("favorite_object_options").isJsonNull()) {
-        SearchMetadataRequestFavoriteObjectOptions.validateJsonObject(jsonObj.getAsJsonObject("favorite_object_options"));
+        FavoriteObjectOptionsInput.validateJsonElement(jsonObj.get("favorite_object_options"));
       }
       // ensure the optional json data is an array if present
-      if (jsonObj.get("modified_by_user_identifiers") != null && !jsonObj.get("modified_by_user_identifiers").isJsonArray()) {
+      if (jsonObj.get("modified_by_user_identifiers") != null && !jsonObj.get("modified_by_user_identifiers").isJsonNull() && !jsonObj.get("modified_by_user_identifiers").isJsonArray()) {
         throw new IllegalArgumentException(String.format("Expected the field `modified_by_user_identifiers` to be an array in the JSON string but got `%s`", jsonObj.get("modified_by_user_identifiers").toString()));
       }
       // validate the optional field `sort_options`
       if (jsonObj.get("sort_options") != null && !jsonObj.get("sort_options").isJsonNull()) {
-        SearchMetadataRequestSortOptions.validateJsonObject(jsonObj.getAsJsonObject("sort_options"));
+        MetadataSearchSortOptions.validateJsonElement(jsonObj.get("sort_options"));
       }
       // ensure the optional json data is an array if present
-      if (jsonObj.get("tag_identifiers") != null && !jsonObj.get("tag_identifiers").isJsonArray()) {
+      if (jsonObj.get("tag_identifiers") != null && !jsonObj.get("tag_identifiers").isJsonNull() && !jsonObj.get("tag_identifiers").isJsonArray()) {
         throw new IllegalArgumentException(String.format("Expected the field `tag_identifiers` to be an array in the JSON string but got `%s`", jsonObj.get("tag_identifiers").toString()));
       }
   }
@@ -912,31 +899,31 @@ public class SearchMetadataRequest {
 
            @Override
            public SearchMetadataRequest read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of SearchMetadataRequest given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of SearchMetadataRequest
-  * @throws IOException if the JSON string is invalid with respect to SearchMetadataRequest
-  */
+  /**
+   * Create an instance of SearchMetadataRequest given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of SearchMetadataRequest
+   * @throws IOException if the JSON string is invalid with respect to SearchMetadataRequest
+   */
   public static SearchMetadataRequest fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, SearchMetadataRequest.class);
   }
 
- /**
-  * Convert an instance of SearchMetadataRequest to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of SearchMetadataRequest to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

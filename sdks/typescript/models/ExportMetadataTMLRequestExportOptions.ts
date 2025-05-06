@@ -13,28 +13,32 @@
 import { HttpFile } from '../http/http';
 
 /**
-* Flags to specify additional options for export.    Version: 10.5.0.cl or later 
+* Flags to specify additional options for export.    Version: 10.6.0.cl or later 
 */
 export class ExportMetadataTMLRequestExportOptions {
     /**
-    * Boolean Flag to whether to export user_defined_id of referenced object. This will only be respected when UserDefinedId in TML is enabled.
+    * Boolean Flag to export Object ID of referenced object. This flag will work only after the Object ID feature has been enabled. Please contact support to enable the feature.
     */
-    'export_with_reference_object_id'?: boolean | null;
+    'include_obj_id_ref'?: boolean | null;
     /**
-    * Boolean flag to whether to export guid of the object. This will only be respected when UserDefinedId in TML is enabled.
+    * Boolean flag to export guid of the object. This flag will work only after the Object ID feature has been enabled. Please contact support to enable the feature.
     */
     'include_guid'?: boolean | null;
     /**
-    * Boolean flag to whether to export user_defined_id of the object. This will only be respected when UserDefinedId in TML is enabled.
+    * Boolean flag to export Object ID of the object. This flag will work only after the Object ID feature has been enabled. Please contact support to enable the feature.
     */
-    'include_object_id'?: boolean | null;
+    'include_obj_id'?: boolean | null;
+    /**
+    * Boolean flag indicating whether to export associated feedbacks of the object. This will only be respected when the object can have feedbacks.    Version: 10.7.0.cl or later 
+    */
+    'export_with_associated_feedbacks'?: boolean | null;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "export_with_reference_object_id",
-            "baseName": "export_with_reference_object_id",
+            "name": "include_obj_id_ref",
+            "baseName": "include_obj_id_ref",
             "type": "boolean",
             "format": ""
         },
@@ -45,8 +49,14 @@ export class ExportMetadataTMLRequestExportOptions {
             "format": ""
         },
         {
-            "name": "include_object_id",
-            "baseName": "include_object_id",
+            "name": "include_obj_id",
+            "baseName": "include_obj_id",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "export_with_associated_feedbacks",
+            "baseName": "export_with_associated_feedbacks",
             "type": "boolean",
             "format": ""
         }    ];

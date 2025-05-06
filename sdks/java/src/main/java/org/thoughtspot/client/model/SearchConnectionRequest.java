@@ -14,7 +14,6 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -22,10 +21,11 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
 import org.thoughtspot.client.model.ConnectionInput;
-import org.thoughtspot.client.model.SearchConnectionRequestSortOptions;
+import org.thoughtspot.client.model.SortOptionInput;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -42,12 +42,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -55,11 +53,12 @@ import org.thoughtspot.client.JSON;
 /**
  * SearchConnectionRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class SearchConnectionRequest {
   public static final String SERIALIZED_NAME_CONNECTIONS = "connections";
   @SerializedName(SERIALIZED_NAME_CONNECTIONS)
-  private List<ConnectionInput> connections;
+  @javax.annotation.Nullable
+  private List<ConnectionInput> connections = new ArrayList<>();
 
   /**
    * Gets or Sets dataWarehouseTypes
@@ -166,23 +165,32 @@ public class SearchConnectionRequest {
         return DataWarehouseTypesEnum.fromValue(value);
       }
     }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      DataWarehouseTypesEnum.fromValue(value);
+    }
   }
 
   public static final String SERIALIZED_NAME_DATA_WAREHOUSE_TYPES = "data_warehouse_types";
   @SerializedName(SERIALIZED_NAME_DATA_WAREHOUSE_TYPES)
-  private List<DataWarehouseTypesEnum> dataWarehouseTypes;
+  @javax.annotation.Nullable
+  private List<DataWarehouseTypesEnum> dataWarehouseTypes = new ArrayList<>();
 
   public static final String SERIALIZED_NAME_RECORD_OFFSET = "record_offset";
   @SerializedName(SERIALIZED_NAME_RECORD_OFFSET)
+  @javax.annotation.Nullable
   private Integer recordOffset = 0;
 
   public static final String SERIALIZED_NAME_RECORD_SIZE = "record_size";
   @SerializedName(SERIALIZED_NAME_RECORD_SIZE)
+  @javax.annotation.Nullable
   private Integer recordSize = 10;
 
   public static final String SERIALIZED_NAME_TAG_IDENTIFIERS = "tag_identifiers";
   @SerializedName(SERIALIZED_NAME_TAG_IDENTIFIERS)
-  private List<String> tagIdentifiers;
+  @javax.annotation.Nullable
+  private List<String> tagIdentifiers = new ArrayList<>();
 
   /**
    * Data warehouse object type.
@@ -233,22 +241,31 @@ public class SearchConnectionRequest {
         return DataWarehouseObjectTypeEnum.fromValue(value);
       }
     }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      DataWarehouseObjectTypeEnum.fromValue(value);
+    }
   }
 
   public static final String SERIALIZED_NAME_DATA_WAREHOUSE_OBJECT_TYPE = "data_warehouse_object_type";
   @SerializedName(SERIALIZED_NAME_DATA_WAREHOUSE_OBJECT_TYPE)
+  @javax.annotation.Nullable
   private DataWarehouseObjectTypeEnum dataWarehouseObjectType;
 
   public static final String SERIALIZED_NAME_SORT_OPTIONS = "sort_options";
   @SerializedName(SERIALIZED_NAME_SORT_OPTIONS)
-  private SearchConnectionRequestSortOptions sortOptions;
+  @javax.annotation.Nullable
+  private SortOptionInput sortOptions;
 
   public static final String SERIALIZED_NAME_INCLUDE_DETAILS = "include_details";
   @SerializedName(SERIALIZED_NAME_INCLUDE_DETAILS)
+  @javax.annotation.Nullable
   private Boolean includeDetails;
 
   public static final String SERIALIZED_NAME_CONFIGURATION = "configuration";
   @SerializedName(SERIALIZED_NAME_CONFIGURATION)
+  @javax.annotation.Nullable
   private Object _configuration;
 
   /**
@@ -304,17 +321,22 @@ public class SearchConnectionRequest {
         return AuthenticationTypeEnum.fromValue(value);
       }
     }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      AuthenticationTypeEnum.fromValue(value);
+    }
   }
 
   public static final String SERIALIZED_NAME_AUTHENTICATION_TYPE = "authentication_type";
   @SerializedName(SERIALIZED_NAME_AUTHENTICATION_TYPE)
+  @javax.annotation.Nullable
   private AuthenticationTypeEnum authenticationType = AuthenticationTypeEnum.SERVICE_ACCOUNT;
 
   public SearchConnectionRequest() {
   }
 
-  public SearchConnectionRequest connections(List<ConnectionInput> connections) {
-    
+  public SearchConnectionRequest connections(@javax.annotation.Nullable List<ConnectionInput> connections) {
     this.connections = connections;
     return this;
   }
@@ -327,23 +349,21 @@ public class SearchConnectionRequest {
     return this;
   }
 
-   /**
+  /**
    * List of connections and name pattern
    * @return connections
-  **/
+   */
   @javax.annotation.Nullable
   public List<ConnectionInput> getConnections() {
     return connections;
   }
 
-
-  public void setConnections(List<ConnectionInput> connections) {
+  public void setConnections(@javax.annotation.Nullable List<ConnectionInput> connections) {
     this.connections = connections;
   }
 
 
-  public SearchConnectionRequest dataWarehouseTypes(List<DataWarehouseTypesEnum> dataWarehouseTypes) {
-    
+  public SearchConnectionRequest dataWarehouseTypes(@javax.annotation.Nullable List<DataWarehouseTypesEnum> dataWarehouseTypes) {
     this.dataWarehouseTypes = dataWarehouseTypes;
     return this;
   }
@@ -356,65 +376,59 @@ public class SearchConnectionRequest {
     return this;
   }
 
-   /**
+  /**
    * Array of types of data warehouse defined for the connection.
    * @return dataWarehouseTypes
-  **/
+   */
   @javax.annotation.Nullable
   public List<DataWarehouseTypesEnum> getDataWarehouseTypes() {
     return dataWarehouseTypes;
   }
 
-
-  public void setDataWarehouseTypes(List<DataWarehouseTypesEnum> dataWarehouseTypes) {
+  public void setDataWarehouseTypes(@javax.annotation.Nullable List<DataWarehouseTypesEnum> dataWarehouseTypes) {
     this.dataWarehouseTypes = dataWarehouseTypes;
   }
 
 
-  public SearchConnectionRequest recordOffset(Integer recordOffset) {
-    
+  public SearchConnectionRequest recordOffset(@javax.annotation.Nullable Integer recordOffset) {
     this.recordOffset = recordOffset;
     return this;
   }
 
-   /**
+  /**
    * The starting record number from where the records should be included.
    * @return recordOffset
-  **/
+   */
   @javax.annotation.Nullable
   public Integer getRecordOffset() {
     return recordOffset;
   }
 
-
-  public void setRecordOffset(Integer recordOffset) {
+  public void setRecordOffset(@javax.annotation.Nullable Integer recordOffset) {
     this.recordOffset = recordOffset;
   }
 
 
-  public SearchConnectionRequest recordSize(Integer recordSize) {
-    
+  public SearchConnectionRequest recordSize(@javax.annotation.Nullable Integer recordSize) {
     this.recordSize = recordSize;
     return this;
   }
 
-   /**
+  /**
    * The number of records that should be included.
    * @return recordSize
-  **/
+   */
   @javax.annotation.Nullable
   public Integer getRecordSize() {
     return recordSize;
   }
 
-
-  public void setRecordSize(Integer recordSize) {
+  public void setRecordSize(@javax.annotation.Nullable Integer recordSize) {
     this.recordSize = recordSize;
   }
 
 
-  public SearchConnectionRequest tagIdentifiers(List<String> tagIdentifiers) {
-    
+  public SearchConnectionRequest tagIdentifiers(@javax.annotation.Nullable List<String> tagIdentifiers) {
     this.tagIdentifiers = tagIdentifiers;
     return this;
   }
@@ -427,122 +441,111 @@ public class SearchConnectionRequest {
     return this;
   }
 
-   /**
+  /**
    * Unique ID or name of tags.
    * @return tagIdentifiers
-  **/
+   */
   @javax.annotation.Nullable
   public List<String> getTagIdentifiers() {
     return tagIdentifiers;
   }
 
-
-  public void setTagIdentifiers(List<String> tagIdentifiers) {
+  public void setTagIdentifiers(@javax.annotation.Nullable List<String> tagIdentifiers) {
     this.tagIdentifiers = tagIdentifiers;
   }
 
 
-  public SearchConnectionRequest dataWarehouseObjectType(DataWarehouseObjectTypeEnum dataWarehouseObjectType) {
-    
+  public SearchConnectionRequest dataWarehouseObjectType(@javax.annotation.Nullable DataWarehouseObjectTypeEnum dataWarehouseObjectType) {
     this.dataWarehouseObjectType = dataWarehouseObjectType;
     return this;
   }
 
-   /**
+  /**
    * Data warehouse object type.
    * @return dataWarehouseObjectType
-  **/
+   */
   @javax.annotation.Nullable
   public DataWarehouseObjectTypeEnum getDataWarehouseObjectType() {
     return dataWarehouseObjectType;
   }
 
-
-  public void setDataWarehouseObjectType(DataWarehouseObjectTypeEnum dataWarehouseObjectType) {
+  public void setDataWarehouseObjectType(@javax.annotation.Nullable DataWarehouseObjectTypeEnum dataWarehouseObjectType) {
     this.dataWarehouseObjectType = dataWarehouseObjectType;
   }
 
 
-  public SearchConnectionRequest sortOptions(SearchConnectionRequestSortOptions sortOptions) {
-    
+  public SearchConnectionRequest sortOptions(@javax.annotation.Nullable SortOptionInput sortOptions) {
     this.sortOptions = sortOptions;
     return this;
   }
 
-   /**
-   * Get sortOptions
+  /**
+   * Sort options.
    * @return sortOptions
-  **/
+   */
   @javax.annotation.Nullable
-  public SearchConnectionRequestSortOptions getSortOptions() {
+  public SortOptionInput getSortOptions() {
     return sortOptions;
   }
 
-
-  public void setSortOptions(SearchConnectionRequestSortOptions sortOptions) {
+  public void setSortOptions(@javax.annotation.Nullable SortOptionInput sortOptions) {
     this.sortOptions = sortOptions;
   }
 
 
-  public SearchConnectionRequest includeDetails(Boolean includeDetails) {
-    
+  public SearchConnectionRequest includeDetails(@javax.annotation.Nullable Boolean includeDetails) {
     this.includeDetails = includeDetails;
     return this;
   }
 
-   /**
+  /**
    * Indicates whether to include complete details of the connection objects.
    * @return includeDetails
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getIncludeDetails() {
     return includeDetails;
   }
 
-
-  public void setIncludeDetails(Boolean includeDetails) {
+  public void setIncludeDetails(@javax.annotation.Nullable Boolean includeDetails) {
     this.includeDetails = includeDetails;
   }
 
 
-  public SearchConnectionRequest _configuration(Object _configuration) {
-    
+  public SearchConnectionRequest _configuration(@javax.annotation.Nullable Object _configuration) {
     this._configuration = _configuration;
     return this;
   }
 
-   /**
+  /**
    * Configuration values. If empty we are fetching configuration from datasource based on given connection id. If required you can provide config details to fetch specific details. Example input: {}, {\&quot;warehouse\&quot;:\&quot;SMALL_WH\&quot;,\&quot;database\&quot;:\&quot;DEVELOPMENT\&quot;}. This is only applicable when data_warehouse_object_type is selected.
    * @return _configuration
-  **/
+   */
   @javax.annotation.Nullable
   public Object getConfiguration() {
     return _configuration;
   }
 
-
-  public void setConfiguration(Object _configuration) {
+  public void setConfiguration(@javax.annotation.Nullable Object _configuration) {
     this._configuration = _configuration;
   }
 
 
-  public SearchConnectionRequest authenticationType(AuthenticationTypeEnum authenticationType) {
-    
+  public SearchConnectionRequest authenticationType(@javax.annotation.Nullable AuthenticationTypeEnum authenticationType) {
     this.authenticationType = authenticationType;
     return this;
   }
 
-   /**
+  /**
    * List of authentication types to fetch data_ware_house_objects from external Data warehouse. This is only applicable when data_warehouse_object_type is selected.
    * @return authenticationType
-  **/
+   */
   @javax.annotation.Nullable
   public AuthenticationTypeEnum getAuthenticationType() {
     return authenticationType;
   }
 
-
-  public void setAuthenticationType(AuthenticationTypeEnum authenticationType) {
+  public void setAuthenticationType(@javax.annotation.Nullable AuthenticationTypeEnum authenticationType) {
     this.authenticationType = authenticationType;
   }
 
@@ -636,26 +639,27 @@ public class SearchConnectionRequest {
     openapiRequiredFields = new HashSet<String>();
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to SearchConnectionRequest
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!SearchConnectionRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to SearchConnectionRequest
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!SearchConnectionRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in SearchConnectionRequest is not found in the empty JSON string", SearchConnectionRequest.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!SearchConnectionRequest.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `SearchConnectionRequest` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `SearchConnectionRequest` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       if (jsonObj.get("connections") != null && !jsonObj.get("connections").isJsonNull()) {
         JsonArray jsonArrayconnections = jsonObj.getAsJsonArray("connections");
         if (jsonArrayconnections != null) {
@@ -666,27 +670,35 @@ public class SearchConnectionRequest {
 
           // validate the optional field `connections` (array)
           for (int i = 0; i < jsonArrayconnections.size(); i++) {
-            ConnectionInput.validateJsonObject(jsonArrayconnections.get(i).getAsJsonObject());
+            ConnectionInput.validateJsonElement(jsonArrayconnections.get(i));
           };
         }
       }
       // ensure the optional json data is an array if present
-      if (jsonObj.get("data_warehouse_types") != null && !jsonObj.get("data_warehouse_types").isJsonArray()) {
+      if (jsonObj.get("data_warehouse_types") != null && !jsonObj.get("data_warehouse_types").isJsonNull() && !jsonObj.get("data_warehouse_types").isJsonArray()) {
         throw new IllegalArgumentException(String.format("Expected the field `data_warehouse_types` to be an array in the JSON string but got `%s`", jsonObj.get("data_warehouse_types").toString()));
       }
       // ensure the optional json data is an array if present
-      if (jsonObj.get("tag_identifiers") != null && !jsonObj.get("tag_identifiers").isJsonArray()) {
+      if (jsonObj.get("tag_identifiers") != null && !jsonObj.get("tag_identifiers").isJsonNull() && !jsonObj.get("tag_identifiers").isJsonArray()) {
         throw new IllegalArgumentException(String.format("Expected the field `tag_identifiers` to be an array in the JSON string but got `%s`", jsonObj.get("tag_identifiers").toString()));
       }
       if ((jsonObj.get("data_warehouse_object_type") != null && !jsonObj.get("data_warehouse_object_type").isJsonNull()) && !jsonObj.get("data_warehouse_object_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `data_warehouse_object_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("data_warehouse_object_type").toString()));
       }
+      // validate the optional field `data_warehouse_object_type`
+      if (jsonObj.get("data_warehouse_object_type") != null && !jsonObj.get("data_warehouse_object_type").isJsonNull()) {
+        DataWarehouseObjectTypeEnum.validateJsonElement(jsonObj.get("data_warehouse_object_type"));
+      }
       // validate the optional field `sort_options`
       if (jsonObj.get("sort_options") != null && !jsonObj.get("sort_options").isJsonNull()) {
-        SearchConnectionRequestSortOptions.validateJsonObject(jsonObj.getAsJsonObject("sort_options"));
+        SortOptionInput.validateJsonElement(jsonObj.get("sort_options"));
       }
       if ((jsonObj.get("authentication_type") != null && !jsonObj.get("authentication_type").isJsonNull()) && !jsonObj.get("authentication_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `authentication_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("authentication_type").toString()));
+      }
+      // validate the optional field `authentication_type`
+      if (jsonObj.get("authentication_type") != null && !jsonObj.get("authentication_type").isJsonNull()) {
+        AuthenticationTypeEnum.validateJsonElement(jsonObj.get("authentication_type"));
       }
   }
 
@@ -710,31 +722,31 @@ public class SearchConnectionRequest {
 
            @Override
            public SearchConnectionRequest read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of SearchConnectionRequest given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of SearchConnectionRequest
-  * @throws IOException if the JSON string is invalid with respect to SearchConnectionRequest
-  */
+  /**
+   * Create an instance of SearchConnectionRequest given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of SearchConnectionRequest
+   * @throws IOException if the JSON string is invalid with respect to SearchConnectionRequest
+   */
   public static SearchConnectionRequest fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, SearchConnectionRequest.class);
   }
 
- /**
-  * Convert an instance of SearchConnectionRequest to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of SearchConnectionRequest to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

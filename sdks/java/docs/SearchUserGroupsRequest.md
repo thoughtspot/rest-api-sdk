@@ -21,7 +21,7 @@
 |**roleIdentifiers** | **List&lt;String&gt;** | Filter groups with a list of Roles assigned to a group |  [optional] |
 |**recordOffset** | **Integer** | The starting record number from where the records should be included. |  [optional] |
 |**recordSize** | **Integer** | The number of records that should be included. |  [optional] |
-|**sortOptions** | [**SearchUserGroupsRequestSortOptions**](SearchUserGroupsRequestSortOptions.md) |  |  [optional] |
+|**sortOptions** | [**SortOptions**](SortOptions.md) | Sort options to filter group details. |  [optional] |
 
 
 
@@ -37,7 +37,7 @@
 | DATAMANAGEMENT | &quot;DATAMANAGEMENT&quot; |
 | SHAREWITHALL | &quot;SHAREWITHALL&quot; |
 | JOBSCHEDULING | &quot;JOBSCHEDULING&quot; |
-| A3ANALYSIS | &quot;A3ANALYSIS&quot; |
+| A3_ANALYSIS | &quot;A3ANALYSIS&quot; |
 | EXPERIMENTALFEATUREPRIVILEGE | &quot;EXPERIMENTALFEATUREPRIVILEGE&quot; |
 | BYPASSRLS | &quot;BYPASSRLS&quot; |
 | RANALYSIS | &quot;RANALYSIS&quot; |

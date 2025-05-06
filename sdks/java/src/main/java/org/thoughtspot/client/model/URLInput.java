@@ -14,7 +14,6 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -22,6 +21,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
 import org.thoughtspot.client.model.AuthenticationInput;
@@ -42,12 +42,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -55,50 +53,51 @@ import org.thoughtspot.client.JSON;
 /**
  * URL Custom Action Type
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class URLInput {
   public static final String SERIALIZED_NAME_AUTHENTICATION = "authentication";
   @SerializedName(SERIALIZED_NAME_AUTHENTICATION)
+  @javax.annotation.Nullable
   private AuthenticationInput authentication;
 
   public static final String SERIALIZED_NAME_PARAMETERS = "parameters";
   @SerializedName(SERIALIZED_NAME_PARAMETERS)
+  @javax.annotation.Nullable
   private List<ParametersListItemInput> parameters;
 
   public static final String SERIALIZED_NAME_URL = "url";
   @SerializedName(SERIALIZED_NAME_URL)
+  @javax.annotation.Nullable
   private String url;
 
   public static final String SERIALIZED_NAME_REFERENCE = "reference";
   @SerializedName(SERIALIZED_NAME_REFERENCE)
+  @javax.annotation.Nullable
   private String reference;
 
   public URLInput() {
   }
 
-  public URLInput authentication(AuthenticationInput authentication) {
-    
+  public URLInput authentication(@javax.annotation.Nullable AuthenticationInput authentication) {
     this.authentication = authentication;
     return this;
   }
 
-   /**
+  /**
    * Get authentication
    * @return authentication
-  **/
+   */
   @javax.annotation.Nullable
   public AuthenticationInput getAuthentication() {
     return authentication;
   }
 
-
-  public void setAuthentication(AuthenticationInput authentication) {
+  public void setAuthentication(@javax.annotation.Nullable AuthenticationInput authentication) {
     this.authentication = authentication;
   }
 
 
-  public URLInput parameters(List<ParametersListItemInput> parameters) {
-    
+  public URLInput parameters(@javax.annotation.Nullable List<ParametersListItemInput> parameters) {
     this.parameters = parameters;
     return this;
   }
@@ -111,59 +110,54 @@ public class URLInput {
     return this;
   }
 
-   /**
+  /**
    * Query parameters for url.
    * @return parameters
-  **/
+   */
   @javax.annotation.Nullable
   public List<ParametersListItemInput> getParameters() {
     return parameters;
   }
 
-
-  public void setParameters(List<ParametersListItemInput> parameters) {
+  public void setParameters(@javax.annotation.Nullable List<ParametersListItemInput> parameters) {
     this.parameters = parameters;
   }
 
 
-  public URLInput url(String url) {
-    
+  public URLInput url(@javax.annotation.Nullable String url) {
     this.url = url;
     return this;
   }
 
-   /**
+  /**
    * Request Url for the Custom action.
    * @return url
-  **/
+   */
   @javax.annotation.Nullable
   public String getUrl() {
     return url;
   }
 
-
-  public void setUrl(String url) {
+  public void setUrl(@javax.annotation.Nullable String url) {
     this.url = url;
   }
 
 
-  public URLInput reference(String reference) {
-    
+  public URLInput reference(@javax.annotation.Nullable String reference) {
     this.reference = reference;
     return this;
   }
 
-   /**
+  /**
    * Reference name. By default the value will be set to action name
    * @return reference
-  **/
+   */
   @javax.annotation.Nullable
   public String getReference() {
     return reference;
   }
 
-
-  public void setReference(String reference) {
+  public void setReference(@javax.annotation.Nullable String reference) {
     this.reference = reference;
   }
 
@@ -239,29 +233,30 @@ public class URLInput {
     openapiRequiredFields = new HashSet<String>();
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to URLInput
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!URLInput.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to URLInput
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!URLInput.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in URLInput is not found in the empty JSON string", URLInput.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!URLInput.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `URLInput` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `URLInput` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       // validate the optional field `authentication`
       if (jsonObj.get("authentication") != null && !jsonObj.get("authentication").isJsonNull()) {
-        AuthenticationInput.validateJsonObject(jsonObj.getAsJsonObject("authentication"));
+        AuthenticationInput.validateJsonElement(jsonObj.get("authentication"));
       }
       if (jsonObj.get("parameters") != null && !jsonObj.get("parameters").isJsonNull()) {
         JsonArray jsonArrayparameters = jsonObj.getAsJsonArray("parameters");
@@ -273,7 +268,7 @@ public class URLInput {
 
           // validate the optional field `parameters` (array)
           for (int i = 0; i < jsonArrayparameters.size(); i++) {
-            ParametersListItemInput.validateJsonObject(jsonArrayparameters.get(i).getAsJsonObject());
+            ParametersListItemInput.validateJsonElement(jsonArrayparameters.get(i));
           };
         }
       }
@@ -305,31 +300,31 @@ public class URLInput {
 
            @Override
            public URLInput read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of URLInput given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of URLInput
-  * @throws IOException if the JSON string is invalid with respect to URLInput
-  */
+  /**
+   * Create an instance of URLInput given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of URLInput
+   * @throws IOException if the JSON string is invalid with respect to URLInput
+   */
   public static URLInput fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, URLInput.class);
   }
 
- /**
-  * Convert an instance of URLInput to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of URLInput to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

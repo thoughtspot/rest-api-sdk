@@ -14,13 +14,13 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.util.Arrays;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -37,12 +37,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -50,14 +48,16 @@ import org.thoughtspot.client.JSON;
 /**
  * DeployCommitRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class DeployCommitRequest {
   public static final String SERIALIZED_NAME_COMMIT_ID = "commit_id";
   @SerializedName(SERIALIZED_NAME_COMMIT_ID)
+  @javax.annotation.Nullable
   private String commitId;
 
   public static final String SERIALIZED_NAME_BRANCH_NAME = "branch_name";
   @SerializedName(SERIALIZED_NAME_BRANCH_NAME)
+  @javax.annotation.Nonnull
   private String branchName;
 
   /**
@@ -105,10 +105,16 @@ public class DeployCommitRequest {
         return DeployTypeEnum.fromValue(value);
       }
     }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      DeployTypeEnum.fromValue(value);
+    }
   }
 
   public static final String SERIALIZED_NAME_DEPLOY_TYPE = "deploy_type";
   @SerializedName(SERIALIZED_NAME_DEPLOY_TYPE)
+  @javax.annotation.Nullable
   private DeployTypeEnum deployType = DeployTypeEnum.DELTA;
 
   /**
@@ -158,95 +164,93 @@ public class DeployCommitRequest {
         return DeployPolicyEnum.fromValue(value);
       }
     }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      DeployPolicyEnum.fromValue(value);
+    }
   }
 
   public static final String SERIALIZED_NAME_DEPLOY_POLICY = "deploy_policy";
   @SerializedName(SERIALIZED_NAME_DEPLOY_POLICY)
+  @javax.annotation.Nullable
   private DeployPolicyEnum deployPolicy = DeployPolicyEnum.ALL_OR_NONE;
 
   public DeployCommitRequest() {
   }
 
-  public DeployCommitRequest commitId(String commitId) {
-    
+  public DeployCommitRequest commitId(@javax.annotation.Nullable String commitId) {
     this.commitId = commitId;
     return this;
   }
 
-   /**
+  /**
    *    Commit_id against which the files should be picked to deploy.      Note: If no commit_id is specified, then the head of the branch is considered.
    * @return commitId
-  **/
+   */
   @javax.annotation.Nullable
   public String getCommitId() {
     return commitId;
   }
 
-
-  public void setCommitId(String commitId) {
+  public void setCommitId(@javax.annotation.Nullable String commitId) {
     this.commitId = commitId;
   }
 
 
-  public DeployCommitRequest branchName(String branchName) {
-    
+  public DeployCommitRequest branchName(@javax.annotation.Nonnull String branchName) {
     this.branchName = branchName;
     return this;
   }
 
-   /**
+  /**
    * Name of the remote branch where changes should be picked
    * @return branchName
-  **/
+   */
   @javax.annotation.Nonnull
   public String getBranchName() {
     return branchName;
   }
 
-
-  public void setBranchName(String branchName) {
+  public void setBranchName(@javax.annotation.Nonnull String branchName) {
     this.branchName = branchName;
   }
 
 
-  public DeployCommitRequest deployType(DeployTypeEnum deployType) {
-    
+  public DeployCommitRequest deployType(@javax.annotation.Nullable DeployTypeEnum deployType) {
     this.deployType = deployType;
     return this;
   }
 
-   /**
+  /**
    * Indicates if all files or only modified file at specified commit point should be considered
    * @return deployType
-  **/
+   */
   @javax.annotation.Nullable
   public DeployTypeEnum getDeployType() {
     return deployType;
   }
 
-
-  public void setDeployType(DeployTypeEnum deployType) {
+  public void setDeployType(@javax.annotation.Nullable DeployTypeEnum deployType) {
     this.deployType = deployType;
   }
 
 
-  public DeployCommitRequest deployPolicy(DeployPolicyEnum deployPolicy) {
-    
+  public DeployCommitRequest deployPolicy(@javax.annotation.Nullable DeployPolicyEnum deployPolicy) {
     this.deployPolicy = deployPolicy;
     return this;
   }
 
-   /**
+  /**
    * Define the policy to follow while importing TML in the ThoughtSpot environment. Use “ALL_OR_NONE” to cancel the deployment of all ThoughtSpot objects if at least one of them fails to import. Use “Partial” to import ThoughtSpot objects that validate successfully even if other objects in the same deploy operations fail to import.
    * @return deployPolicy
-  **/
+   */
   @javax.annotation.Nullable
   public DeployPolicyEnum getDeployPolicy() {
     return deployPolicy;
   }
 
-
-  public void setDeployPolicy(DeployPolicyEnum deployPolicy) {
+  public void setDeployPolicy(@javax.annotation.Nullable DeployPolicyEnum deployPolicy) {
     this.deployPolicy = deployPolicy;
   }
 
@@ -312,33 +316,34 @@ public class DeployCommitRequest {
     openapiRequiredFields.add("branch_name");
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to DeployCommitRequest
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!DeployCommitRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to DeployCommitRequest
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!DeployCommitRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in DeployCommitRequest is not found in the empty JSON string", DeployCommitRequest.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!DeployCommitRequest.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `DeployCommitRequest` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `DeployCommitRequest` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
       for (String requiredField : DeployCommitRequest.openapiRequiredFields) {
-        if (jsonObj.get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("commit_id") != null && !jsonObj.get("commit_id").isJsonNull()) && !jsonObj.get("commit_id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `commit_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("commit_id").toString()));
       }
@@ -348,8 +353,16 @@ public class DeployCommitRequest {
       if ((jsonObj.get("deploy_type") != null && !jsonObj.get("deploy_type").isJsonNull()) && !jsonObj.get("deploy_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `deploy_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("deploy_type").toString()));
       }
+      // validate the optional field `deploy_type`
+      if (jsonObj.get("deploy_type") != null && !jsonObj.get("deploy_type").isJsonNull()) {
+        DeployTypeEnum.validateJsonElement(jsonObj.get("deploy_type"));
+      }
       if ((jsonObj.get("deploy_policy") != null && !jsonObj.get("deploy_policy").isJsonNull()) && !jsonObj.get("deploy_policy").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `deploy_policy` to be a primitive type in the JSON string but got `%s`", jsonObj.get("deploy_policy").toString()));
+      }
+      // validate the optional field `deploy_policy`
+      if (jsonObj.get("deploy_policy") != null && !jsonObj.get("deploy_policy").isJsonNull()) {
+        DeployPolicyEnum.validateJsonElement(jsonObj.get("deploy_policy"));
       }
   }
 
@@ -373,31 +386,31 @@ public class DeployCommitRequest {
 
            @Override
            public DeployCommitRequest read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of DeployCommitRequest given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of DeployCommitRequest
-  * @throws IOException if the JSON string is invalid with respect to DeployCommitRequest
-  */
+  /**
+   * Create an instance of DeployCommitRequest given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of DeployCommitRequest
+   * @throws IOException if the JSON string is invalid with respect to DeployCommitRequest
+   */
   public static DeployCommitRequest fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, DeployCommitRequest.class);
   }
 
- /**
-  * Convert an instance of DeployCommitRequest to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of DeployCommitRequest to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

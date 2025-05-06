@@ -14,13 +14,13 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.util.Arrays;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
@@ -38,12 +38,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -51,82 +49,79 @@ import org.thoughtspot.client.JSON;
 /**
  * ScheduleHistoryRunsOptionsInput
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class ScheduleHistoryRunsOptionsInput {
   public static final String SERIALIZED_NAME_INCLUDE_HISTORY_RUNS = "include_history_runs";
   @SerializedName(SERIALIZED_NAME_INCLUDE_HISTORY_RUNS)
+  @javax.annotation.Nullable
   private Boolean includeHistoryRuns = false;
 
   public static final String SERIALIZED_NAME_RECORD_SIZE = "record_size";
   @SerializedName(SERIALIZED_NAME_RECORD_SIZE)
+  @javax.annotation.Nullable
   private Integer recordSize = 10;
 
   public static final String SERIALIZED_NAME_RECORD_OFFSET = "record_offset";
   @SerializedName(SERIALIZED_NAME_RECORD_OFFSET)
+  @javax.annotation.Nullable
   private Integer recordOffset = 0;
 
   public ScheduleHistoryRunsOptionsInput() {
   }
 
-  public ScheduleHistoryRunsOptionsInput includeHistoryRuns(Boolean includeHistoryRuns) {
-    
+  public ScheduleHistoryRunsOptionsInput includeHistoryRuns(@javax.annotation.Nullable Boolean includeHistoryRuns) {
     this.includeHistoryRuns = includeHistoryRuns;
     return this;
   }
 
-   /**
+  /**
    * Indicates whether to fetch history runs for the scheduled notification.
    * @return includeHistoryRuns
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getIncludeHistoryRuns() {
     return includeHistoryRuns;
   }
 
-
-  public void setIncludeHistoryRuns(Boolean includeHistoryRuns) {
+  public void setIncludeHistoryRuns(@javax.annotation.Nullable Boolean includeHistoryRuns) {
     this.includeHistoryRuns = includeHistoryRuns;
   }
 
 
-  public ScheduleHistoryRunsOptionsInput recordSize(Integer recordSize) {
-    
+  public ScheduleHistoryRunsOptionsInput recordSize(@javax.annotation.Nullable Integer recordSize) {
     this.recordSize = recordSize;
     return this;
   }
 
-   /**
+  /**
    * Indicates the max number of records that can be fetched as past runs of any scheduled job.
    * @return recordSize
-  **/
+   */
   @javax.annotation.Nullable
   public Integer getRecordSize() {
     return recordSize;
   }
 
-
-  public void setRecordSize(Integer recordSize) {
+  public void setRecordSize(@javax.annotation.Nullable Integer recordSize) {
     this.recordSize = recordSize;
   }
 
 
-  public ScheduleHistoryRunsOptionsInput recordOffset(Integer recordOffset) {
-    
+  public ScheduleHistoryRunsOptionsInput recordOffset(@javax.annotation.Nullable Integer recordOffset) {
     this.recordOffset = recordOffset;
     return this;
   }
 
-   /**
+  /**
    * Indicates the starting record number from where history runs records should be fetched.
    * @return recordOffset
-  **/
+   */
   @javax.annotation.Nullable
   public Integer getRecordOffset() {
     return recordOffset;
   }
 
-
-  public void setRecordOffset(Integer recordOffset) {
+  public void setRecordOffset(@javax.annotation.Nullable Integer recordOffset) {
     this.recordOffset = recordOffset;
   }
 
@@ -199,26 +194,27 @@ public class ScheduleHistoryRunsOptionsInput {
     openapiRequiredFields = new HashSet<String>();
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to ScheduleHistoryRunsOptionsInput
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!ScheduleHistoryRunsOptionsInput.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to ScheduleHistoryRunsOptionsInput
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!ScheduleHistoryRunsOptionsInput.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in ScheduleHistoryRunsOptionsInput is not found in the empty JSON string", ScheduleHistoryRunsOptionsInput.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!ScheduleHistoryRunsOptionsInput.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `ScheduleHistoryRunsOptionsInput` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `ScheduleHistoryRunsOptionsInput` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
   }
 
   public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
@@ -241,31 +237,31 @@ public class ScheduleHistoryRunsOptionsInput {
 
            @Override
            public ScheduleHistoryRunsOptionsInput read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of ScheduleHistoryRunsOptionsInput given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of ScheduleHistoryRunsOptionsInput
-  * @throws IOException if the JSON string is invalid with respect to ScheduleHistoryRunsOptionsInput
-  */
+  /**
+   * Create an instance of ScheduleHistoryRunsOptionsInput given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of ScheduleHistoryRunsOptionsInput
+   * @throws IOException if the JSON string is invalid with respect to ScheduleHistoryRunsOptionsInput
+   */
   public static ScheduleHistoryRunsOptionsInput fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, ScheduleHistoryRunsOptionsInput.class);
   }
 
- /**
-  * Convert an instance of ScheduleHistoryRunsOptionsInput to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of ScheduleHistoryRunsOptionsInput to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

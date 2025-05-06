@@ -14,13 +14,13 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.util.Arrays;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
@@ -38,12 +38,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -51,7 +49,7 @@ import org.thoughtspot.client.JSON;
 /**
  * FetchLogsRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class FetchLogsRequest {
   /**
    * Name of the log type
@@ -96,107 +94,108 @@ public class FetchLogsRequest {
         return LogTypeEnum.fromValue(value);
       }
     }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      LogTypeEnum.fromValue(value);
+    }
   }
 
   public static final String SERIALIZED_NAME_LOG_TYPE = "log_type";
   @SerializedName(SERIALIZED_NAME_LOG_TYPE)
+  @javax.annotation.Nonnull
   private LogTypeEnum logType;
 
   public static final String SERIALIZED_NAME_START_EPOCH_TIME_IN_MILLIS = "start_epoch_time_in_millis";
   @SerializedName(SERIALIZED_NAME_START_EPOCH_TIME_IN_MILLIS)
+  @javax.annotation.Nullable
   private Float startEpochTimeInMillis;
 
   public static final String SERIALIZED_NAME_END_EPOCH_TIME_IN_MILLIS = "end_epoch_time_in_millis";
   @SerializedName(SERIALIZED_NAME_END_EPOCH_TIME_IN_MILLIS)
+  @javax.annotation.Nullable
   private Float endEpochTimeInMillis;
 
   public static final String SERIALIZED_NAME_GET_ALL_LOGS = "get_all_logs";
   @SerializedName(SERIALIZED_NAME_GET_ALL_LOGS)
+  @javax.annotation.Nullable
   private Boolean getAllLogs = true;
 
   public FetchLogsRequest() {
   }
 
-  public FetchLogsRequest logType(LogTypeEnum logType) {
-    
+  public FetchLogsRequest logType(@javax.annotation.Nonnull LogTypeEnum logType) {
     this.logType = logType;
     return this;
   }
 
-   /**
+  /**
    * Name of the log type
    * @return logType
-  **/
+   */
   @javax.annotation.Nonnull
   public LogTypeEnum getLogType() {
     return logType;
   }
 
-
-  public void setLogType(LogTypeEnum logType) {
+  public void setLogType(@javax.annotation.Nonnull LogTypeEnum logType) {
     this.logType = logType;
   }
 
 
-  public FetchLogsRequest startEpochTimeInMillis(Float startEpochTimeInMillis) {
-    
+  public FetchLogsRequest startEpochTimeInMillis(@javax.annotation.Nullable Float startEpochTimeInMillis) {
     this.startEpochTimeInMillis = startEpochTimeInMillis;
     return this;
   }
 
-   /**
+  /**
    * Start time in EPOCH format
    * @return startEpochTimeInMillis
-  **/
+   */
   @javax.annotation.Nullable
   public Float getStartEpochTimeInMillis() {
     return startEpochTimeInMillis;
   }
 
-
-  public void setStartEpochTimeInMillis(Float startEpochTimeInMillis) {
+  public void setStartEpochTimeInMillis(@javax.annotation.Nullable Float startEpochTimeInMillis) {
     this.startEpochTimeInMillis = startEpochTimeInMillis;
   }
 
 
-  public FetchLogsRequest endEpochTimeInMillis(Float endEpochTimeInMillis) {
-    
+  public FetchLogsRequest endEpochTimeInMillis(@javax.annotation.Nullable Float endEpochTimeInMillis) {
     this.endEpochTimeInMillis = endEpochTimeInMillis;
     return this;
   }
 
-   /**
+  /**
    * End time in EPOCH format
    * @return endEpochTimeInMillis
-  **/
+   */
   @javax.annotation.Nullable
   public Float getEndEpochTimeInMillis() {
     return endEpochTimeInMillis;
   }
 
-
-  public void setEndEpochTimeInMillis(Float endEpochTimeInMillis) {
+  public void setEndEpochTimeInMillis(@javax.annotation.Nullable Float endEpochTimeInMillis) {
     this.endEpochTimeInMillis = endEpochTimeInMillis;
   }
 
 
-  public FetchLogsRequest getAllLogs(Boolean getAllLogs) {
-    
+  public FetchLogsRequest getAllLogs(@javax.annotation.Nullable Boolean getAllLogs) {
     this.getAllLogs = getAllLogs;
     return this;
   }
 
-   /**
+  /**
    * Fetch all the logs. This is available from 9.10.5.cl
    * @return getAllLogs
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getGetAllLogs() {
     return getAllLogs;
   }
 
-
-  public void setGetAllLogs(Boolean getAllLogs) {
+  public void setGetAllLogs(@javax.annotation.Nullable Boolean getAllLogs) {
     this.getAllLogs = getAllLogs;
   }
 
@@ -273,36 +272,39 @@ public class FetchLogsRequest {
     openapiRequiredFields.add("log_type");
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to FetchLogsRequest
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!FetchLogsRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to FetchLogsRequest
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!FetchLogsRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in FetchLogsRequest is not found in the empty JSON string", FetchLogsRequest.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!FetchLogsRequest.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `FetchLogsRequest` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `FetchLogsRequest` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
       for (String requiredField : FetchLogsRequest.openapiRequiredFields) {
-        if (jsonObj.get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       if (!jsonObj.get("log_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `log_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("log_type").toString()));
       }
+      // validate the required field `log_type`
+      LogTypeEnum.validateJsonElement(jsonObj.get("log_type"));
   }
 
   public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
@@ -325,31 +327,31 @@ public class FetchLogsRequest {
 
            @Override
            public FetchLogsRequest read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of FetchLogsRequest given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of FetchLogsRequest
-  * @throws IOException if the JSON string is invalid with respect to FetchLogsRequest
-  */
+  /**
+   * Create an instance of FetchLogsRequest given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of FetchLogsRequest
+   * @throws IOException if the JSON string is invalid with respect to FetchLogsRequest
+   */
   public static FetchLogsRequest fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, FetchLogsRequest.class);
   }
 
- /**
-  * Convert an instance of FetchLogsRequest to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of FetchLogsRequest to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

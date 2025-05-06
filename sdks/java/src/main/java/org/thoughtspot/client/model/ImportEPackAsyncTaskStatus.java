@@ -14,13 +14,13 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.util.Arrays;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
@@ -38,12 +38,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -51,26 +49,31 @@ import org.thoughtspot.client.JSON;
 /**
  * ImportEPackAsyncTaskStatus
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class ImportEPackAsyncTaskStatus {
   public static final String SERIALIZED_NAME_TENANT_ID = "tenant_id";
   @SerializedName(SERIALIZED_NAME_TENANT_ID)
+  @javax.annotation.Nullable
   private String tenantId;
 
   public static final String SERIALIZED_NAME_ORG_ID = "org_id";
   @SerializedName(SERIALIZED_NAME_ORG_ID)
+  @javax.annotation.Nullable
   private Integer orgId;
 
   public static final String SERIALIZED_NAME_TASK_ID = "task_id";
   @SerializedName(SERIALIZED_NAME_TASK_ID)
+  @javax.annotation.Nullable
   private String taskId;
 
   public static final String SERIALIZED_NAME_TASK_NAME = "task_name";
   @SerializedName(SERIALIZED_NAME_TASK_NAME)
+  @javax.annotation.Nullable
   private String taskName;
 
   public static final String SERIALIZED_NAME_IMPORT_RESPONSE = "import_response";
   @SerializedName(SERIALIZED_NAME_IMPORT_RESPONSE)
+  @javax.annotation.Nullable
   private Object importResponse;
 
   /**
@@ -122,14 +125,21 @@ public class ImportEPackAsyncTaskStatus {
         return TaskStatusEnum.fromValue(value);
       }
     }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      TaskStatusEnum.fromValue(value);
+    }
   }
 
   public static final String SERIALIZED_NAME_TASK_STATUS = "task_status";
   @SerializedName(SERIALIZED_NAME_TASK_STATUS)
+  @javax.annotation.Nullable
   private TaskStatusEnum taskStatus;
 
   public static final String SERIALIZED_NAME_AUTHOR_ID = "author_id";
   @SerializedName(SERIALIZED_NAME_AUTHOR_ID)
+  @javax.annotation.Nullable
   private String authorId;
 
   /**
@@ -181,329 +191,313 @@ public class ImportEPackAsyncTaskStatus {
         return ImportPolicyEnum.fromValue(value);
       }
     }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      ImportPolicyEnum.fromValue(value);
+    }
   }
 
   public static final String SERIALIZED_NAME_IMPORT_POLICY = "import_policy";
   @SerializedName(SERIALIZED_NAME_IMPORT_POLICY)
+  @javax.annotation.Nullable
   private ImportPolicyEnum importPolicy;
 
   public static final String SERIALIZED_NAME_CREATED_AT = "created_at";
   @SerializedName(SERIALIZED_NAME_CREATED_AT)
+  @javax.annotation.Nullable
   private Float createdAt;
 
   public static final String SERIALIZED_NAME_IN_PROGRESS_AT = "in_progress_at";
   @SerializedName(SERIALIZED_NAME_IN_PROGRESS_AT)
+  @javax.annotation.Nullable
   private Float inProgressAt;
 
   public static final String SERIALIZED_NAME_COMPLETED_AT = "completed_at";
   @SerializedName(SERIALIZED_NAME_COMPLETED_AT)
+  @javax.annotation.Nullable
   private Float completedAt;
 
   public static final String SERIALIZED_NAME_TOTAL_OBJECT_COUNT = "total_object_count";
   @SerializedName(SERIALIZED_NAME_TOTAL_OBJECT_COUNT)
+  @javax.annotation.Nullable
   private Integer totalObjectCount;
 
   public static final String SERIALIZED_NAME_OBJECT_PROCESSED_COUNT = "object_processed_count";
   @SerializedName(SERIALIZED_NAME_OBJECT_PROCESSED_COUNT)
+  @javax.annotation.Nullable
   private Integer objectProcessedCount;
 
   public static final String SERIALIZED_NAME_MODIFIED_AT = "modified_at";
   @SerializedName(SERIALIZED_NAME_MODIFIED_AT)
+  @javax.annotation.Nullable
   private Float modifiedAt;
 
   public ImportEPackAsyncTaskStatus() {
   }
 
-  public ImportEPackAsyncTaskStatus tenantId(String tenantId) {
-    
+  public ImportEPackAsyncTaskStatus tenantId(@javax.annotation.Nullable String tenantId) {
     this.tenantId = tenantId;
     return this;
   }
 
-   /**
+  /**
    * GUID of tenant from which the task is initiated.
    * @return tenantId
-  **/
+   */
   @javax.annotation.Nullable
   public String getTenantId() {
     return tenantId;
   }
 
-
-  public void setTenantId(String tenantId) {
+  public void setTenantId(@javax.annotation.Nullable String tenantId) {
     this.tenantId = tenantId;
   }
 
 
-  public ImportEPackAsyncTaskStatus orgId(Integer orgId) {
-    
+  public ImportEPackAsyncTaskStatus orgId(@javax.annotation.Nullable Integer orgId) {
     this.orgId = orgId;
     return this;
   }
 
-   /**
+  /**
    * Organisation ID of the user who initiated the task.
    * @return orgId
-  **/
+   */
   @javax.annotation.Nullable
   public Integer getOrgId() {
     return orgId;
   }
 
-
-  public void setOrgId(Integer orgId) {
+  public void setOrgId(@javax.annotation.Nullable Integer orgId) {
     this.orgId = orgId;
   }
 
 
-  public ImportEPackAsyncTaskStatus taskId(String taskId) {
-    
+  public ImportEPackAsyncTaskStatus taskId(@javax.annotation.Nullable String taskId) {
     this.taskId = taskId;
     return this;
   }
 
-   /**
+  /**
    * Unique identifier for the task.
    * @return taskId
-  **/
+   */
   @javax.annotation.Nullable
   public String getTaskId() {
     return taskId;
   }
 
-
-  public void setTaskId(String taskId) {
+  public void setTaskId(@javax.annotation.Nullable String taskId) {
     this.taskId = taskId;
   }
 
 
-  public ImportEPackAsyncTaskStatus taskName(String taskName) {
-    
+  public ImportEPackAsyncTaskStatus taskName(@javax.annotation.Nullable String taskName) {
     this.taskName = taskName;
     return this;
   }
 
-   /**
+  /**
    * Name of the task.
    * @return taskName
-  **/
+   */
   @javax.annotation.Nullable
   public String getTaskName() {
     return taskName;
   }
 
-
-  public void setTaskName(String taskName) {
+  public void setTaskName(@javax.annotation.Nullable String taskName) {
     this.taskName = taskName;
   }
 
 
-  public ImportEPackAsyncTaskStatus importResponse(Object importResponse) {
-    
+  public ImportEPackAsyncTaskStatus importResponse(@javax.annotation.Nullable Object importResponse) {
     this.importResponse = importResponse;
     return this;
   }
 
-   /**
+  /**
    * Response of imported objects so far.
    * @return importResponse
-  **/
+   */
   @javax.annotation.Nullable
   public Object getImportResponse() {
     return importResponse;
   }
 
-
-  public void setImportResponse(Object importResponse) {
+  public void setImportResponse(@javax.annotation.Nullable Object importResponse) {
     this.importResponse = importResponse;
   }
 
 
-  public ImportEPackAsyncTaskStatus taskStatus(TaskStatusEnum taskStatus) {
-    
+  public ImportEPackAsyncTaskStatus taskStatus(@javax.annotation.Nullable TaskStatusEnum taskStatus) {
     this.taskStatus = taskStatus;
     return this;
   }
 
-   /**
+  /**
    * Current status of the task.
    * @return taskStatus
-  **/
+   */
   @javax.annotation.Nullable
   public TaskStatusEnum getTaskStatus() {
     return taskStatus;
   }
 
-
-  public void setTaskStatus(TaskStatusEnum taskStatus) {
+  public void setTaskStatus(@javax.annotation.Nullable TaskStatusEnum taskStatus) {
     this.taskStatus = taskStatus;
   }
 
 
-  public ImportEPackAsyncTaskStatus authorId(String authorId) {
-    
+  public ImportEPackAsyncTaskStatus authorId(@javax.annotation.Nullable String authorId) {
     this.authorId = authorId;
     return this;
   }
 
-   /**
+  /**
    * ID of the user who initiated the task.
    * @return authorId
-  **/
+   */
   @javax.annotation.Nullable
   public String getAuthorId() {
     return authorId;
   }
 
-
-  public void setAuthorId(String authorId) {
+  public void setAuthorId(@javax.annotation.Nullable String authorId) {
     this.authorId = authorId;
   }
 
 
-  public ImportEPackAsyncTaskStatus importPolicy(ImportPolicyEnum importPolicy) {
-    
+  public ImportEPackAsyncTaskStatus importPolicy(@javax.annotation.Nullable ImportPolicyEnum importPolicy) {
     this.importPolicy = importPolicy;
     return this;
   }
 
-   /**
+  /**
    * Policy used for the import task.
    * @return importPolicy
-  **/
+   */
   @javax.annotation.Nullable
   public ImportPolicyEnum getImportPolicy() {
     return importPolicy;
   }
 
-
-  public void setImportPolicy(ImportPolicyEnum importPolicy) {
+  public void setImportPolicy(@javax.annotation.Nullable ImportPolicyEnum importPolicy) {
     this.importPolicy = importPolicy;
   }
 
 
-  public ImportEPackAsyncTaskStatus createdAt(Float createdAt) {
-    
+  public ImportEPackAsyncTaskStatus createdAt(@javax.annotation.Nullable Float createdAt) {
     this.createdAt = createdAt;
     return this;
   }
 
-   /**
+  /**
    * Time when the task was created (in ms since epoch).
    * @return createdAt
-  **/
+   */
   @javax.annotation.Nullable
   public Float getCreatedAt() {
     return createdAt;
   }
 
-
-  public void setCreatedAt(Float createdAt) {
+  public void setCreatedAt(@javax.annotation.Nullable Float createdAt) {
     this.createdAt = createdAt;
   }
 
 
-  public ImportEPackAsyncTaskStatus inProgressAt(Float inProgressAt) {
-    
+  public ImportEPackAsyncTaskStatus inProgressAt(@javax.annotation.Nullable Float inProgressAt) {
     this.inProgressAt = inProgressAt;
     return this;
   }
 
-   /**
+  /**
    * Time when the task started (in ms since epoch).
    * @return inProgressAt
-  **/
+   */
   @javax.annotation.Nullable
   public Float getInProgressAt() {
     return inProgressAt;
   }
 
-
-  public void setInProgressAt(Float inProgressAt) {
+  public void setInProgressAt(@javax.annotation.Nullable Float inProgressAt) {
     this.inProgressAt = inProgressAt;
   }
 
 
-  public ImportEPackAsyncTaskStatus completedAt(Float completedAt) {
-    
+  public ImportEPackAsyncTaskStatus completedAt(@javax.annotation.Nullable Float completedAt) {
     this.completedAt = completedAt;
     return this;
   }
 
-   /**
+  /**
    * Time when the task was completed (in ms since epoch).
    * @return completedAt
-  **/
+   */
   @javax.annotation.Nullable
   public Float getCompletedAt() {
     return completedAt;
   }
 
-
-  public void setCompletedAt(Float completedAt) {
+  public void setCompletedAt(@javax.annotation.Nullable Float completedAt) {
     this.completedAt = completedAt;
   }
 
 
-  public ImportEPackAsyncTaskStatus totalObjectCount(Integer totalObjectCount) {
-    
+  public ImportEPackAsyncTaskStatus totalObjectCount(@javax.annotation.Nullable Integer totalObjectCount) {
     this.totalObjectCount = totalObjectCount;
     return this;
   }
 
-   /**
+  /**
    * Total number of objects to process.
    * @return totalObjectCount
-  **/
+   */
   @javax.annotation.Nullable
   public Integer getTotalObjectCount() {
     return totalObjectCount;
   }
 
-
-  public void setTotalObjectCount(Integer totalObjectCount) {
+  public void setTotalObjectCount(@javax.annotation.Nullable Integer totalObjectCount) {
     this.totalObjectCount = totalObjectCount;
   }
 
 
-  public ImportEPackAsyncTaskStatus objectProcessedCount(Integer objectProcessedCount) {
-    
+  public ImportEPackAsyncTaskStatus objectProcessedCount(@javax.annotation.Nullable Integer objectProcessedCount) {
     this.objectProcessedCount = objectProcessedCount;
     return this;
   }
 
-   /**
+  /**
    * Number of objects processed so far.
    * @return objectProcessedCount
-  **/
+   */
   @javax.annotation.Nullable
   public Integer getObjectProcessedCount() {
     return objectProcessedCount;
   }
 
-
-  public void setObjectProcessedCount(Integer objectProcessedCount) {
+  public void setObjectProcessedCount(@javax.annotation.Nullable Integer objectProcessedCount) {
     this.objectProcessedCount = objectProcessedCount;
   }
 
 
-  public ImportEPackAsyncTaskStatus modifiedAt(Float modifiedAt) {
-    
+  public ImportEPackAsyncTaskStatus modifiedAt(@javax.annotation.Nullable Float modifiedAt) {
     this.modifiedAt = modifiedAt;
     return this;
   }
 
-   /**
+  /**
    * Last time the task status was updated (in ms since epoch).
    * @return modifiedAt
-  **/
+   */
   @javax.annotation.Nullable
   public Float getModifiedAt() {
     return modifiedAt;
   }
 
-
-  public void setModifiedAt(Float modifiedAt) {
+  public void setModifiedAt(@javax.annotation.Nullable Float modifiedAt) {
     this.modifiedAt = modifiedAt;
   }
 
@@ -609,26 +603,27 @@ public class ImportEPackAsyncTaskStatus {
     openapiRequiredFields = new HashSet<String>();
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to ImportEPackAsyncTaskStatus
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!ImportEPackAsyncTaskStatus.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to ImportEPackAsyncTaskStatus
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!ImportEPackAsyncTaskStatus.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in ImportEPackAsyncTaskStatus is not found in the empty JSON string", ImportEPackAsyncTaskStatus.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!ImportEPackAsyncTaskStatus.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `ImportEPackAsyncTaskStatus` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `ImportEPackAsyncTaskStatus` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("tenant_id") != null && !jsonObj.get("tenant_id").isJsonNull()) && !jsonObj.get("tenant_id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `tenant_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("tenant_id").toString()));
       }
@@ -641,11 +636,19 @@ public class ImportEPackAsyncTaskStatus {
       if ((jsonObj.get("task_status") != null && !jsonObj.get("task_status").isJsonNull()) && !jsonObj.get("task_status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `task_status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("task_status").toString()));
       }
+      // validate the optional field `task_status`
+      if (jsonObj.get("task_status") != null && !jsonObj.get("task_status").isJsonNull()) {
+        TaskStatusEnum.validateJsonElement(jsonObj.get("task_status"));
+      }
       if ((jsonObj.get("author_id") != null && !jsonObj.get("author_id").isJsonNull()) && !jsonObj.get("author_id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `author_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("author_id").toString()));
       }
       if ((jsonObj.get("import_policy") != null && !jsonObj.get("import_policy").isJsonNull()) && !jsonObj.get("import_policy").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `import_policy` to be a primitive type in the JSON string but got `%s`", jsonObj.get("import_policy").toString()));
+      }
+      // validate the optional field `import_policy`
+      if (jsonObj.get("import_policy") != null && !jsonObj.get("import_policy").isJsonNull()) {
+        ImportPolicyEnum.validateJsonElement(jsonObj.get("import_policy"));
       }
   }
 
@@ -669,31 +672,31 @@ public class ImportEPackAsyncTaskStatus {
 
            @Override
            public ImportEPackAsyncTaskStatus read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of ImportEPackAsyncTaskStatus given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of ImportEPackAsyncTaskStatus
-  * @throws IOException if the JSON string is invalid with respect to ImportEPackAsyncTaskStatus
-  */
+  /**
+   * Create an instance of ImportEPackAsyncTaskStatus given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of ImportEPackAsyncTaskStatus
+   * @throws IOException if the JSON string is invalid with respect to ImportEPackAsyncTaskStatus
+   */
   public static ImportEPackAsyncTaskStatus fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, ImportEPackAsyncTaskStatus.class);
   }
 
- /**
-  * Convert an instance of ImportEPackAsyncTaskStatus to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of ImportEPackAsyncTaskStatus to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

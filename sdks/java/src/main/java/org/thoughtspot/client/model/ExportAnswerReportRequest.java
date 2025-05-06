@@ -14,13 +14,13 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.util.Arrays;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -37,12 +37,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -50,18 +48,21 @@ import org.thoughtspot.client.JSON;
 /**
  * ExportAnswerReportRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class ExportAnswerReportRequest {
   public static final String SERIALIZED_NAME_METADATA_IDENTIFIER = "metadata_identifier";
   @SerializedName(SERIALIZED_NAME_METADATA_IDENTIFIER)
+  @javax.annotation.Nullable
   private String metadataIdentifier;
 
   public static final String SERIALIZED_NAME_SESSION_IDENTIFIER = "session_identifier";
   @SerializedName(SERIALIZED_NAME_SESSION_IDENTIFIER)
+  @javax.annotation.Nullable
   private String sessionIdentifier;
 
   public static final String SERIALIZED_NAME_GENERATION_NUMBER = "generation_number";
   @SerializedName(SERIALIZED_NAME_GENERATION_NUMBER)
+  @javax.annotation.Nullable
   private Integer generationNumber;
 
   /**
@@ -113,170 +114,165 @@ public class ExportAnswerReportRequest {
         return FileFormatEnum.fromValue(value);
       }
     }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      FileFormatEnum.fromValue(value);
+    }
   }
 
   public static final String SERIALIZED_NAME_FILE_FORMAT = "file_format";
   @SerializedName(SERIALIZED_NAME_FILE_FORMAT)
+  @javax.annotation.Nullable
   private FileFormatEnum fileFormat = FileFormatEnum.CSV;
 
   public static final String SERIALIZED_NAME_RUNTIME_FILTER = "runtime_filter";
   @SerializedName(SERIALIZED_NAME_RUNTIME_FILTER)
+  @javax.annotation.Nullable
   private Object runtimeFilter;
 
   public static final String SERIALIZED_NAME_RUNTIME_SORT = "runtime_sort";
   @SerializedName(SERIALIZED_NAME_RUNTIME_SORT)
+  @javax.annotation.Nullable
   private Object runtimeSort;
 
   public static final String SERIALIZED_NAME_RUNTIME_PARAM_OVERRIDE = "runtime_param_override";
   @SerializedName(SERIALIZED_NAME_RUNTIME_PARAM_OVERRIDE)
+  @javax.annotation.Nullable
   private Object runtimeParamOverride;
 
   public ExportAnswerReportRequest() {
   }
 
-  public ExportAnswerReportRequest metadataIdentifier(String metadataIdentifier) {
-    
+  public ExportAnswerReportRequest metadataIdentifier(@javax.annotation.Nullable String metadataIdentifier) {
     this.metadataIdentifier = metadataIdentifier;
     return this;
   }
 
-   /**
+  /**
    * Unique ID or name of the metadata object.
    * @return metadataIdentifier
-  **/
+   */
   @javax.annotation.Nullable
   public String getMetadataIdentifier() {
     return metadataIdentifier;
   }
 
-
-  public void setMetadataIdentifier(String metadataIdentifier) {
+  public void setMetadataIdentifier(@javax.annotation.Nullable String metadataIdentifier) {
     this.metadataIdentifier = metadataIdentifier;
   }
 
 
-  public ExportAnswerReportRequest sessionIdentifier(String sessionIdentifier) {
-    
+  public ExportAnswerReportRequest sessionIdentifier(@javax.annotation.Nullable String sessionIdentifier) {
     this.sessionIdentifier = sessionIdentifier;
     return this;
   }
 
-   /**
+  /**
    * Unique ID of the answer session.
    * @return sessionIdentifier
-  **/
+   */
   @javax.annotation.Nullable
   public String getSessionIdentifier() {
     return sessionIdentifier;
   }
 
-
-  public void setSessionIdentifier(String sessionIdentifier) {
+  public void setSessionIdentifier(@javax.annotation.Nullable String sessionIdentifier) {
     this.sessionIdentifier = sessionIdentifier;
   }
 
 
-  public ExportAnswerReportRequest generationNumber(Integer generationNumber) {
-    
+  public ExportAnswerReportRequest generationNumber(@javax.annotation.Nullable Integer generationNumber) {
     this.generationNumber = generationNumber;
     return this;
   }
 
-   /**
+  /**
    * Generation number of the answer session.
    * @return generationNumber
-  **/
+   */
   @javax.annotation.Nullable
   public Integer getGenerationNumber() {
     return generationNumber;
   }
 
-
-  public void setGenerationNumber(Integer generationNumber) {
+  public void setGenerationNumber(@javax.annotation.Nullable Integer generationNumber) {
     this.generationNumber = generationNumber;
   }
 
 
-  public ExportAnswerReportRequest fileFormat(FileFormatEnum fileFormat) {
-    
+  public ExportAnswerReportRequest fileFormat(@javax.annotation.Nullable FileFormatEnum fileFormat) {
     this.fileFormat = fileFormat;
     return this;
   }
 
-   /**
+  /**
    * Export file format.
    * @return fileFormat
-  **/
+   */
   @javax.annotation.Nullable
   public FileFormatEnum getFileFormat() {
     return fileFormat;
   }
 
-
-  public void setFileFormat(FileFormatEnum fileFormat) {
+  public void setFileFormat(@javax.annotation.Nullable FileFormatEnum fileFormat) {
     this.fileFormat = fileFormat;
   }
 
 
-  public ExportAnswerReportRequest runtimeFilter(Object runtimeFilter) {
-    
+  public ExportAnswerReportRequest runtimeFilter(@javax.annotation.Nullable Object runtimeFilter) {
     this.runtimeFilter = runtimeFilter;
     return this;
   }
 
-   /**
+  /**
    * JSON string representing runtime filter. { col1:region, op1: EQ, val1: northeast }
    * @return runtimeFilter
-  **/
+   */
   @javax.annotation.Nullable
   public Object getRuntimeFilter() {
     return runtimeFilter;
   }
 
-
-  public void setRuntimeFilter(Object runtimeFilter) {
+  public void setRuntimeFilter(@javax.annotation.Nullable Object runtimeFilter) {
     this.runtimeFilter = runtimeFilter;
   }
 
 
-  public ExportAnswerReportRequest runtimeSort(Object runtimeSort) {
-    
+  public ExportAnswerReportRequest runtimeSort(@javax.annotation.Nullable Object runtimeSort) {
     this.runtimeSort = runtimeSort;
     return this;
   }
 
-   /**
+  /**
    * JSON string representing runtime sort. { sortCol1: region, asc1 :true, sortCol2 : date }
    * @return runtimeSort
-  **/
+   */
   @javax.annotation.Nullable
   public Object getRuntimeSort() {
     return runtimeSort;
   }
 
-
-  public void setRuntimeSort(Object runtimeSort) {
+  public void setRuntimeSort(@javax.annotation.Nullable Object runtimeSort) {
     this.runtimeSort = runtimeSort;
   }
 
 
-  public ExportAnswerReportRequest runtimeParamOverride(Object runtimeParamOverride) {
-    
+  public ExportAnswerReportRequest runtimeParamOverride(@javax.annotation.Nullable Object runtimeParamOverride) {
     this.runtimeParamOverride = runtimeParamOverride;
     return this;
   }
 
-   /**
+  /**
    * JSON object for setting values of parameters in runtime.
    * @return runtimeParamOverride
-  **/
+   */
   @javax.annotation.Nullable
   public Object getRuntimeParamOverride() {
     return runtimeParamOverride;
   }
 
-
-  public void setRuntimeParamOverride(Object runtimeParamOverride) {
+  public void setRuntimeParamOverride(@javax.annotation.Nullable Object runtimeParamOverride) {
     this.runtimeParamOverride = runtimeParamOverride;
   }
 
@@ -350,26 +346,27 @@ public class ExportAnswerReportRequest {
     openapiRequiredFields = new HashSet<String>();
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to ExportAnswerReportRequest
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!ExportAnswerReportRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to ExportAnswerReportRequest
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!ExportAnswerReportRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in ExportAnswerReportRequest is not found in the empty JSON string", ExportAnswerReportRequest.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!ExportAnswerReportRequest.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `ExportAnswerReportRequest` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `ExportAnswerReportRequest` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("metadata_identifier") != null && !jsonObj.get("metadata_identifier").isJsonNull()) && !jsonObj.get("metadata_identifier").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `metadata_identifier` to be a primitive type in the JSON string but got `%s`", jsonObj.get("metadata_identifier").toString()));
       }
@@ -378,6 +375,10 @@ public class ExportAnswerReportRequest {
       }
       if ((jsonObj.get("file_format") != null && !jsonObj.get("file_format").isJsonNull()) && !jsonObj.get("file_format").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `file_format` to be a primitive type in the JSON string but got `%s`", jsonObj.get("file_format").toString()));
+      }
+      // validate the optional field `file_format`
+      if (jsonObj.get("file_format") != null && !jsonObj.get("file_format").isJsonNull()) {
+        FileFormatEnum.validateJsonElement(jsonObj.get("file_format"));
       }
   }
 
@@ -401,31 +402,31 @@ public class ExportAnswerReportRequest {
 
            @Override
            public ExportAnswerReportRequest read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of ExportAnswerReportRequest given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of ExportAnswerReportRequest
-  * @throws IOException if the JSON string is invalid with respect to ExportAnswerReportRequest
-  */
+  /**
+   * Create an instance of ExportAnswerReportRequest given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of ExportAnswerReportRequest
+   * @throws IOException if the JSON string is invalid with respect to ExportAnswerReportRequest
+   */
   public static ExportAnswerReportRequest fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, ExportAnswerReportRequest.class);
   }
 
- /**
-  * Convert an instance of ExportAnswerReportRequest to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of ExportAnswerReportRequest to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

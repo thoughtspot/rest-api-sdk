@@ -53,7 +53,8 @@ paths:
       tags:
       - Authentication
       - ThoughtSpotRest
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/auth/session/token:
     get:
       description: "\nGet token for the currently logged-in user. \n  Version: 9.4.0.cl\
@@ -98,7 +99,8 @@ paths:
       tags:
       - Authentication
       - ThoughtSpotRest
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/users/search:
     post:
       description: |2+
@@ -163,7 +165,8 @@ paths:
       - Users
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/system:
     get:
       description: "\n Version: 9.0.0.cl or later\n\n\nGets system information such\
@@ -236,7 +239,8 @@ paths:
       tags:
       - System
       - ThoughtSpotRest
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/system/config:
     get:
       description: |2+
@@ -295,7 +299,8 @@ paths:
       tags:
       - System
       - ThoughtSpotRest
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/system/config-overrides:
     get:
       description: "\n Version: 9.2.0.cl or later\n\n\nGets a list of configuration\
@@ -340,7 +345,8 @@ paths:
       tags:
       - System
       - ThoughtSpotRest
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/orgs/search:
     post:
       description: |2+
@@ -415,7 +421,8 @@ paths:
       - Orgs
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/tags/search:
     post:
       description: |2+
@@ -503,7 +510,8 @@ paths:
       - Tags
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/groups/search:
     post:
       description: |2+
@@ -570,7 +578,8 @@ paths:
       - Groups
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/metadata/search:
     post:
       description: |2+
@@ -652,7 +661,8 @@ paths:
       - Metadata
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/metadata/tml/async/status:
     post:
       description: "\n Version: 10.4.0.cl or later\n\n\nGets information about the\
@@ -707,7 +717,8 @@ paths:
       - Metadata
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/metadata/liveboard/sql:
     post:
       description: |2+
@@ -784,7 +795,8 @@ paths:
       - Metadata
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/metadata/answer/sql:
     post:
       description: |2+
@@ -859,7 +871,8 @@ paths:
       - Metadata
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/report/liveboard:
     post:
       description: |2+
@@ -930,7 +943,9 @@ paths:
       - Reports
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
+      - application/octet-stream
   /api/rest/2.0/report/answer:
     post:
       description: |2+
@@ -1001,7 +1016,9 @@ paths:
       - Reports
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
+      - application/octet-stream
   /api/rest/2.0/security/principals/fetch-permissions:
     post:
       description: "\n Version: 9.0.0.cl or later\n\n\nFetches object permission details\
@@ -1077,7 +1094,8 @@ paths:
       - Security
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/security/metadata/fetch-permissions:
     post:
       description: |2+
@@ -1178,7 +1196,8 @@ paths:
       - Security
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/searchdata:
     post:
       description: "\n Version: 9.0.0.cl or later\n\n\nGenerates an Answer from a\
@@ -1238,7 +1257,8 @@ paths:
       - Data
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/metadata/liveboard/data:
     post:
       description: "\n Version: 9.0.0.cl or later\n\n\nGets data from a Liveboard\
@@ -1297,7 +1317,8 @@ paths:
       - Data
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/metadata/answer/data:
     post:
       description: |2+
@@ -1357,7 +1378,8 @@ paths:
       - Data
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/logs/fetch:
     post:
       description: "\n Version: 9.0.0.cl or later\n\n\nFetches security audit logs.\
@@ -1418,7 +1440,8 @@ paths:
       - Log
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/vcs/git/config/search:
     post:
       description: |2+
@@ -1481,7 +1504,8 @@ paths:
       - Version Control
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/vcs/git/commits/search:
     post:
       description: |2+
@@ -1544,7 +1568,8 @@ paths:
       - Version Control
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/connection/search:
     post:
       description: |2+
@@ -1642,7 +1667,8 @@ paths:
       - Connections
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/roles/search:
     post:
       description: "\nGets Roles configured on a ThoughtSpot instance.\nRequires cluster\
@@ -1699,7 +1725,8 @@ paths:
       - Roles
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/customization/custom-actions/search:
     post:
       description: |2+
@@ -1771,7 +1798,8 @@ paths:
       - Custom Action
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/auth/session/login:
     post:
       description: |2+
@@ -1829,7 +1857,8 @@ paths:
       - Authentication
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/auth/token/object:
     post:
       description: |2+
@@ -1918,7 +1947,8 @@ paths:
       - Authentication
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/auth/token/full:
     post:
       description: |2+
@@ -2007,7 +2037,8 @@ paths:
       - Authentication
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/auth/session/logout:
     post:
       description: |2+
@@ -2054,7 +2085,8 @@ paths:
       tags:
       - Authentication
       - ThoughtSpotRest
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/auth/token/revoke:
     post:
       description: |2+
@@ -2113,7 +2145,8 @@ paths:
       - Authentication
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/auth/token/validate:
     post:
       description: |2+
@@ -2173,7 +2206,8 @@ paths:
       - Authentication
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/auth/token/custom:
     post:
       description: |2+
@@ -2270,7 +2304,8 @@ paths:
       - Authentication
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/users/create:
     post:
       description: |2+
@@ -2332,7 +2367,8 @@ paths:
       - Users
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/users/{user_identifier}/update:
     post:
       description: |2+
@@ -2398,7 +2434,8 @@ paths:
       - Users
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/users/{user_identifier}/delete:
     post:
       description: |2+
@@ -2457,7 +2494,8 @@ paths:
       tags:
       - Users
       - ThoughtSpotRest
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/users/import:
     post:
       description: |2+
@@ -2523,7 +2561,8 @@ paths:
       - Users
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/users/change-password:
     post:
       description: |2+
@@ -2579,7 +2618,8 @@ paths:
       - Users
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/users/reset-password:
     post:
       description: |2+
@@ -2635,7 +2675,8 @@ paths:
       - Users
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/users/force-logout:
     post:
       description: "\n Version: 9.0.0.cl or later\n\n\nEnforces logout on current\
@@ -2686,7 +2727,8 @@ paths:
       - Users
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/users/activate:
     post:
       description: |2+
@@ -2752,7 +2794,8 @@ paths:
       - Users
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/users/deactivate:
     post:
       description: |2+
@@ -2818,7 +2861,8 @@ paths:
       - Users
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/system/config-update:
     post:
       description: |2+
@@ -2874,7 +2918,8 @@ paths:
       - System
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/orgs/create:
     post:
       description: |2+
@@ -2944,7 +2989,8 @@ paths:
       - Orgs
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/orgs/{org_identifier}/update:
     post:
       description: |2+
@@ -3008,7 +3054,8 @@ paths:
       - Orgs
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/orgs/{org_identifier}/delete:
     post:
       description: |2+
@@ -3067,7 +3114,8 @@ paths:
       tags:
       - Orgs
       - ThoughtSpotRest
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/tags/create:
     post:
       description: |2+
@@ -3144,7 +3192,8 @@ paths:
       - Tags
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/tags/{tag_identifier}/update:
     post:
       description: "\n Version: 9.0.0.cl or later\n\n\nUpdates a tag object.\n\nYou\
@@ -3200,7 +3249,8 @@ paths:
       - Tags
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/tags/{tag_identifier}/delete:
     post:
       description: |2+
@@ -3257,7 +3307,8 @@ paths:
       tags:
       - Tags
       - ThoughtSpotRest
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/tags/assign:
     post:
       description: |2+
@@ -3312,7 +3363,8 @@ paths:
       - Tags
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/tags/unassign:
     post:
       description: |2+
@@ -3367,7 +3419,8 @@ paths:
       - Tags
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/groups/create:
     post:
       description: |2+
@@ -3440,7 +3493,8 @@ paths:
       - Groups
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/groups/{group_identifier}/update:
     post:
       description: |2+
@@ -3514,7 +3568,8 @@ paths:
       - Groups
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/groups/{group_identifier}/delete:
     post:
       description: |2+
@@ -3571,7 +3626,8 @@ paths:
       tags:
       - Groups
       - ThoughtSpotRest
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/groups/import:
     post:
       description: |2+
@@ -3639,7 +3695,8 @@ paths:
       - Groups
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/metadata/tml/import:
     post:
       description: |2+
@@ -3717,7 +3774,8 @@ paths:
       - Metadata
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/metadata/tml/async/import:
     post:
       description: |2+
@@ -3784,7 +3842,8 @@ paths:
       - Metadata
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/metadata/tml/export:
     post:
       description: |2+
@@ -3853,7 +3912,8 @@ paths:
       - Metadata
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/metadata/tml/export/batch:
     post:
       description: |2+
@@ -3918,7 +3978,8 @@ paths:
       - Metadata
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/metadata/delete:
     post:
       description: "\n Version: 9.0.0.cl or later\n\n\nRemoves the specified metadata\
@@ -3963,7 +4024,8 @@ paths:
       - Metadata
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/metadata/copyobject:
     post:
       description: "\nMakes a copy of an Answer or Liveboard saved in Atlas \n  Version:\
@@ -4020,7 +4082,8 @@ paths:
       - Metadata
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/security/metadata/assign:
     post:
       description: |2+
@@ -4077,7 +4140,8 @@ paths:
       - Security
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/security/metadata/share:
     post:
       description: |2+
@@ -4143,7 +4207,8 @@ paths:
       - Security
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/vcs/git/config/create:
     post:
       description: |2+
@@ -4217,7 +4282,8 @@ paths:
       - Version Control
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/vcs/git/config/update:
     post:
       description: |2+
@@ -4278,7 +4344,8 @@ paths:
       - Version Control
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/vcs/git/config/delete:
     post:
       description: |2+
@@ -4335,7 +4402,8 @@ paths:
       - Version Control
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/vcs/git/branches/commit:
     post:
       description: |2+
@@ -4401,7 +4469,8 @@ paths:
       - Version Control
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/vcs/git/commits/{commit_id}/revert:
     post:
       description: |2+
@@ -4474,7 +4543,8 @@ paths:
       - Version Control
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/vcs/git/branches/validate:
     post:
       description: |2+
@@ -4539,7 +4609,8 @@ paths:
       - Version Control
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/vcs/git/commits/deploy:
     post:
       description: |2+
@@ -4604,7 +4675,8 @@ paths:
       - Version Control
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/connection/create:
     post:
       description: "\n Version: 9.2.0.cl or later\n\n\nCreates a connection to a data\
@@ -4697,7 +4769,8 @@ paths:
       - Connections
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/connection/delete:
     post:
       deprecated: true
@@ -4756,7 +4829,8 @@ paths:
       - Connections
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/connections/{connection_identifier}/delete:
     post:
       description: |2+
@@ -4815,7 +4889,8 @@ paths:
       tags:
       - Connections
       - ThoughtSpotRest
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/connection/update:
     post:
       deprecated: true
@@ -4870,7 +4945,8 @@ paths:
       - Connections
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/connections/{connection_identifier}/update:
     post:
       description: |2+
@@ -4942,7 +5018,8 @@ paths:
       - Connections
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/connections/fetch-connection-diff-status/{connection_identifier}:
     post:
       description: |2+
@@ -5011,7 +5088,8 @@ paths:
       tags:
       - Connections
       - ThoughtSpotRest
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/connections/download-connection-metadata-changes/{connection_identifier}:
     post:
       description: "\n Version: 9.9.0.cl or later\n\n\nExports the difference in connection\
@@ -5068,7 +5146,9 @@ paths:
       tags:
       - Connections
       - ThoughtSpotRest
-      x-accepts: application/json
+      x-accepts:
+      - application/json
+      - application/octet-stream
   /api/rest/2.0/roles/create:
     post:
       description: "\nCreates a Role.\nRequires cluster Administration or Role Administration\
@@ -5119,7 +5199,8 @@ paths:
       - Roles
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/roles/{role_identifier}/update:
     post:
       description: "\nUpdates a Role.\nRequires cluster Administration or Role Administration\
@@ -5178,7 +5259,8 @@ paths:
       - Roles
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/roles/{role_identifier}/delete:
     post:
       description: "\nDeletes a Role.\nRequires cluster Administration or Role Administration\
@@ -5227,7 +5309,8 @@ paths:
       tags:
       - Roles
       - ThoughtSpotRest
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/schedules/create:
     post:
       description: "\nCreate schedule. \n  Version: 9.4.0.cl or later\n\n\nCreates\
@@ -5299,7 +5382,8 @@ paths:
       - Schedules
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/schedules/{schedule_identifier}/delete:
     post:
       description: "\nDeletes a scheduled job. \n  Version: 9.4.0.cl or later\n\n\n\
@@ -5348,7 +5432,8 @@ paths:
       tags:
       - Schedules
       - ThoughtSpotRest
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/schedules/search:
     post:
       description: "\nSearch Schedules \n  Version: 9.4.0.cl or later\n\n\nGets a\
@@ -5402,7 +5487,8 @@ paths:
       - Schedules
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/schedules/{schedule_identifier}/update:
     post:
       description: "\nUpdate schedule. \n  Version: 9.4.0.cl or later\n\n\nUpdates\
@@ -5463,7 +5549,8 @@ paths:
       - Schedules
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/customization/custom-actions:
     post:
       description: "\n Version: 9.6.0.cl or later\n\n\nCreates a custom action that\
@@ -5539,7 +5626,8 @@ paths:
       - Custom Action
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/customization/custom-actions/{custom_action_identifier}/update:
     post:
       description: |2+
@@ -5614,7 +5702,8 @@ paths:
       - Custom Action
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/customization/custom-actions/{custom_action_identifier}/delete:
     post:
       description: |2+
@@ -5671,7 +5760,8 @@ paths:
       tags:
       - Custom Action
       - ThoughtSpotRest
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/dbt/dbt-connection:
     post:
       description: |2+
@@ -5738,7 +5828,8 @@ paths:
       - DBT
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/dbt/generate-tml:
     post:
       description: |2+
@@ -5805,7 +5896,8 @@ paths:
       - DBT
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/dbt/generate-sync-tml:
     post:
       description: |2+
@@ -5869,7 +5961,8 @@ paths:
       - DBT
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/dbt/search:
     post:
       description: |2+
@@ -5931,7 +6024,8 @@ paths:
       tags:
       - DBT
       - ThoughtSpotRest
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/dbt/{dbt_connection_identifier}/delete:
     post:
       description: |2+
@@ -5992,7 +6086,8 @@ paths:
       tags:
       - DBT
       - ThoughtSpotRest
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/dbt/update-dbt-connection:
     post:
       description: |2+
@@ -6059,7 +6154,8 @@ paths:
       - DBT
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/ai/conversation/create:
     post:
       description: |2+
@@ -6126,7 +6222,8 @@ paths:
       - AI
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/ai/conversation/{conversation_identifier}/converse:
     post:
       description: |2+
@@ -6201,7 +6298,8 @@ paths:
       - AI
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/ai/answer/create:
     post:
       description: |2+
@@ -6258,10 +6356,13 @@ paths:
       - AI
       - ThoughtSpotRest
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
 components:
   schemas:
     ErrorResponse:
+      example:
+        error: "{}"
       properties:
         error:
           nullable: true
@@ -11473,10 +11574,6 @@ components:
           description: Runtime param override type in JWT.
           type: object
       type: object
-    searchUsers_request_sort_options:
-      allOf:
-      - $ref: '#/components/schemas/SortOptions'
-      description: Sort options.
     searchUsers_request:
       properties:
         user_identifier:
@@ -11603,7 +11700,9 @@ components:
           format: int32
           type: integer
         sort_options:
-          $ref: '#/components/schemas/searchUsers_request_sort_options'
+          allOf:
+          - $ref: '#/components/schemas/SortOptions'
+          description: Sort options.
         role_identifiers:
           description: Filters by the role assigned to the user.
           items:
@@ -11654,10 +11753,6 @@ components:
           description: Color of the tag.
           type: string
       type: object
-    searchUserGroups_request_sort_options:
-      allOf:
-      - $ref: '#/components/schemas/SortOptions'
-      description: Sort options to filter group details.
     searchUserGroups_request:
       properties:
         default_liveboard_identifiers:
@@ -11767,18 +11862,10 @@ components:
           format: int32
           type: integer
         sort_options:
-          $ref: '#/components/schemas/searchUserGroups_request_sort_options'
+          allOf:
+          - $ref: '#/components/schemas/SortOptions'
+          description: Sort options to filter group details.
       type: object
-    searchMetadata_request_favorite_object_options:
-      allOf:
-      - $ref: '#/components/schemas/FavoriteObjectOptionsInput'
-      description: |-
-        Options to sort the API response by objects set as favorites
-        for the logged-in user or the users specified in the API request.
-    searchMetadata_request_sort_options:
-      allOf:
-      - $ref: '#/components/schemas/MetadataSearchSortOptions'
-      description: Sort options to filter metadata details.
     searchMetadata_request:
       properties:
         metadata:
@@ -11810,7 +11897,11 @@ components:
             $ref: '#/components/schemas/ExcludeMetadataListItemInput'
           type: array
         favorite_object_options:
-          $ref: '#/components/schemas/searchMetadata_request_favorite_object_options'
+          allOf:
+          - $ref: '#/components/schemas/FavoriteObjectOptionsInput'
+          description: |-
+            Options to sort the API response by objects set as favorites
+            for the logged-in user or the users specified in the API request.
         include_auto_created_objects:
           default: false
           description: Includes system-generated metadata objects.
@@ -11878,7 +11969,9 @@ components:
           format: int32
           type: integer
         sort_options:
-          $ref: '#/components/schemas/searchMetadata_request_sort_options'
+          allOf:
+          - $ref: '#/components/schemas/MetadataSearchSortOptions'
+          description: Sort options to filter metadata details.
         tag_identifiers:
           description: Tags to filter metadata objects by
           items:
@@ -11951,14 +12044,6 @@ components:
       required:
       - metadata_identifier
       type: object
-    exportLiveboardReport_request_pdf_options:
-      allOf:
-      - $ref: '#/components/schemas/PdfOptionsInput'
-      description: Options for PDF export.
-    exportLiveboardReport_request_png_options:
-      allOf:
-      - $ref: '#/components/schemas/PngOptionsInput'
-      description: Options for PNG export.
     exportLiveboardReport_request:
       properties:
         metadata_identifier:
@@ -11995,9 +12080,13 @@ components:
             : \"region\", \"asc1\" : true}. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort)."
           type: object
         pdf_options:
-          $ref: '#/components/schemas/exportLiveboardReport_request_pdf_options'
+          allOf:
+          - $ref: '#/components/schemas/PdfOptionsInput'
+          description: Options for PDF export.
         png_options:
-          $ref: '#/components/schemas/exportLiveboardReport_request_png_options'
+          allOf:
+          - $ref: '#/components/schemas/PngOptionsInput'
+          description: Options for PNG export.
         runtime_param_override:
           description: "JSON object for setting values of parameters at runtime. For\
             \ example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>.\
@@ -12350,10 +12439,6 @@ components:
       required:
       - metadata_identifier
       type: object
-    searchConnection_request_sort_options:
-      allOf:
-      - $ref: '#/components/schemas/SortOptionInput'
-      description: Sort options.
     searchConnection_request:
       properties:
         connections:
@@ -12424,7 +12509,9 @@ components:
           - COLUMN
           type: string
         sort_options:
-          $ref: '#/components/schemas/searchConnection_request_sort_options'
+          allOf:
+          - $ref: '#/components/schemas/SortOptionInput'
+          description: Sort options.
         include_details:
           description: Indicates whether to include complete details of the connection
             objects.
@@ -12546,12 +12633,6 @@ components:
             type: string
           type: array
       type: object
-    searchCustomActions_request_default_action_config:
-      allOf:
-      - $ref: '#/components/schemas/Default_Action_Config_Search_Input'
-      description: "Default Custom action configuration. This includes if the custom\
-        \ action is available on all visualizations. By default, a custom action is\
-        \ added to all visualizations and Answers."
     searchCustomActions_request:
       properties:
         custom_action_identifier:
@@ -12562,7 +12643,11 @@ components:
             object.
           type: string
         default_action_config:
-          $ref: '#/components/schemas/searchCustomActions_request_default_action_config'
+          allOf:
+          - $ref: '#/components/schemas/Default_Action_Config_Search_Input'
+          description: "Default Custom action configuration. This includes if the\
+            \ custom action is available on all visualizations. By default, a custom\
+            \ action is added to all visualizations and Answers."
         include_group_associations:
           default: false
           description: "When set to true, returns the associated groups for a custom\
@@ -12607,14 +12692,6 @@ components:
           nullable: true
           type: boolean
       type: object
-    getObjectAccessToken_request_user_parameters:
-      allOf:
-      - $ref: '#/components/schemas/User_Parameter_Options'
-      description: |-
-        <div>Deprecated: 10.4.0.cl and later
-        </div>
-
-        Define attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters).
     getObjectAccessToken_request:
       properties:
         username:
@@ -12671,7 +12748,13 @@ components:
             type: string
           type: array
         user_parameters:
-          $ref: '#/components/schemas/getObjectAccessToken_request_user_parameters'
+          allOf:
+          - $ref: '#/components/schemas/User_Parameter_Options'
+          description: |-
+            <div>Deprecated: 10.4.0.cl and later
+            </div>
+
+            Define attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters).
       required:
       - username
       type: object
@@ -12726,7 +12809,13 @@ components:
             type: string
           type: array
         user_parameters:
-          $ref: '#/components/schemas/getObjectAccessToken_request_user_parameters'
+          allOf:
+          - $ref: '#/components/schemas/User_Parameter_Options'
+          description: |-
+            <div>Deprecated: 10.4.0.cl and later
+            </div>
+
+            Define attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters).
       required:
       - username
       type: object
@@ -13533,11 +13622,6 @@ components:
       required:
       - metadata_tmls
       type: object
-    exportMetadataTML_request_export_options:
-      allOf:
-      - $ref: '#/components/schemas/Export_Options'
-      description: "Flags to specify additional options for export. \n  Version: 10.5.0.cl\
-        \ or later\n"
     exportMetadataTML_request:
       properties:
         metadata:
@@ -13596,7 +13680,10 @@ components:
           nullable: true
           type: boolean
         export_options:
-          $ref: '#/components/schemas/exportMetadataTML_request_export_options'
+          allOf:
+          - $ref: '#/components/schemas/Export_Options'
+          description: "Flags to specify additional options for export. \n  Version:\
+            \ 10.5.0.cl or later\n"
       required:
       - metadata
       type: object
@@ -14157,25 +14244,6 @@ components:
       required:
       - name
       type: object
-    createSchedule_request_liveboard_options:
-      allOf:
-      - $ref: '#/components/schemas/LiveboardOptionsInput'
-      description: Options to specify details of Liveboard.
-    createSchedule_request_pdf_options:
-      allOf:
-      - $ref: '#/components/schemas/SchedulesPdfOptionsInput'
-      description: PDF layout and orientation settings. Applicable only if the `file_format`
-        is specified as `PDF`.
-    createSchedule_request_frequency:
-      allOf:
-      - $ref: '#/components/schemas/FrequencyInput'
-      description: Frequency settings for the scheduled job.
-    createSchedule_request_recipient_details:
-      allOf:
-      - $ref: '#/components/schemas/RecipientDetailsInput'
-      description: "Recipients of the scheduled job notifications. Add the GUID or\
-        \ name of the ThoughtSpot users or groups as recipients in the `principals`\
-        \ array. If a recipient is not a ThoughtSpot user, specify email address."
     createSchedule_request:
       properties:
         name:
@@ -14201,9 +14269,14 @@ components:
           - XLSX
           type: string
         liveboard_options:
-          $ref: '#/components/schemas/createSchedule_request_liveboard_options'
+          allOf:
+          - $ref: '#/components/schemas/LiveboardOptionsInput'
+          description: Options to specify details of Liveboard.
         pdf_options:
-          $ref: '#/components/schemas/createSchedule_request_pdf_options'
+          allOf:
+          - $ref: '#/components/schemas/SchedulesPdfOptionsInput'
+          description: PDF layout and orientation settings. Applicable only if the
+            `file_format` is specified as `PDF`.
         time_zone:
           default: America/Los_Angeles
           description: Time zone
@@ -14840,9 +14913,15 @@ components:
           - VST
           type: string
         frequency:
-          $ref: '#/components/schemas/createSchedule_request_frequency'
+          allOf:
+          - $ref: '#/components/schemas/FrequencyInput'
+          description: Frequency settings for the scheduled job.
         recipient_details:
-          $ref: '#/components/schemas/createSchedule_request_recipient_details'
+          allOf:
+          - $ref: '#/components/schemas/RecipientDetailsInput'
+          description: "Recipients of the scheduled job notifications. Add the GUID\
+            \ or name of the ThoughtSpot users or groups as recipients in the `principals`\
+            \ array. If a recipient is not a ThoughtSpot user, specify email address."
       required:
       - description
       - metadata_identifier
@@ -14851,14 +14930,6 @@ components:
       - recipient_details
       - time_zone
       type: object
-    searchSchedules_request_sort_options:
-      allOf:
-      - $ref: '#/components/schemas/SortingOptions'
-      description: Sort options.
-    searchSchedules_request_history_runs_options:
-      allOf:
-      - $ref: '#/components/schemas/ScheduleHistoryRunsOptionsInput'
-      description: Options while fetching history runs for the schedule.
     searchSchedules_request:
       properties:
         metadata:
@@ -14876,33 +14947,19 @@ components:
           format: int32
           type: integer
         sort_options:
-          $ref: '#/components/schemas/searchSchedules_request_sort_options'
+          allOf:
+          - $ref: '#/components/schemas/SortingOptions'
+          description: Sort options.
         history_runs_options:
-          $ref: '#/components/schemas/searchSchedules_request_history_runs_options'
+          allOf:
+          - $ref: '#/components/schemas/ScheduleHistoryRunsOptionsInput'
+          description: Options while fetching history runs for the schedule.
         schedule_identifiers:
           description: unique ID or name of the Schedule
           items:
             type: string
           type: array
       type: object
-    updateSchedule_request_liveboard_options:
-      allOf:
-      - $ref: '#/components/schemas/LiveboardOptionsInput'
-      description: Options to specify the details of a Liveboard.
-    updateSchedule_request_pdf_options:
-      allOf:
-      - $ref: '#/components/schemas/SchedulesPdfOptionsInput'
-      description: Options for PDF export.
-    updateSchedule_request_frequency:
-      allOf:
-      - $ref: '#/components/schemas/FrequencyInput'
-      description: Frequency of the scheduled job run.
-    updateSchedule_request_recipient_details:
-      allOf:
-      - $ref: '#/components/schemas/RecipientDetailsInput'
-      description: "Recipients of the scheduled job notifications. You can add the\
-        \ ID or name of the ThoughtSpot users or groups as recipients in the `principals`\
-        \ array. If a recipient is not a ThoughtSpot user, specify email address."
     updateSchedule_request:
       properties:
         name:
@@ -14927,9 +14984,13 @@ components:
           - XLSX
           type: string
         liveboard_options:
-          $ref: '#/components/schemas/updateSchedule_request_liveboard_options'
+          allOf:
+          - $ref: '#/components/schemas/LiveboardOptionsInput'
+          description: Options to specify the details of a Liveboard.
         pdf_options:
-          $ref: '#/components/schemas/updateSchedule_request_pdf_options'
+          allOf:
+          - $ref: '#/components/schemas/SchedulesPdfOptionsInput'
+          description: Options for PDF export.
         time_zone:
           description: Time zone
           enum:
@@ -15565,9 +15626,16 @@ components:
           - VST
           type: string
         frequency:
-          $ref: '#/components/schemas/updateSchedule_request_frequency'
+          allOf:
+          - $ref: '#/components/schemas/FrequencyInput'
+          description: Frequency of the scheduled job run.
         recipient_details:
-          $ref: '#/components/schemas/updateSchedule_request_recipient_details'
+          allOf:
+          - $ref: '#/components/schemas/RecipientDetailsInput'
+          description: "Recipients of the scheduled job notifications. You can add\
+            \ the ID or name of the ThoughtSpot users or groups as recipients in the\
+            \ `principals` array. If a recipient is not a ThoughtSpot user, specify\
+            \ email address."
         status:
           description: Status of the schedule
           enum:
@@ -15575,31 +15643,27 @@ components:
           - PAUSE
           type: string
       type: object
-    createCustomAction_request_action_details:
-      allOf:
-      - $ref: '#/components/schemas/Action_Details_Input_Create'
-      description: "Action details includes `Type` and Configuration data for Custom\
-        \ Actions, either Callback or URL is required."
-    createCustomAction_request_default_action_config:
-      allOf:
-      - $ref: '#/components/schemas/Default_Action_Config_Input_Create'
-      description: "Default Custom action configuration. This includes if the custom\
-        \ action is available on all visualizations. By default, a custom action is\
-        \ added to all visualizations and Answers."
     createCustomAction_request:
       properties:
         name:
           description: Name of the custom action. The custom action name must be unique.
           type: string
         action_details:
-          $ref: '#/components/schemas/createCustomAction_request_action_details'
+          allOf:
+          - $ref: '#/components/schemas/Action_Details_Input_Create'
+          description: "Action details includes `Type` and Configuration data for\
+            \ Custom Actions, either Callback or URL is required."
         associate_metadata:
           description: Metadata objects to which the custom action needs to be associated.
           items:
             $ref: '#/components/schemas/Associate_Metadata_Input_Create'
           type: array
         default_action_config:
-          $ref: '#/components/schemas/createCustomAction_request_default_action_config'
+          allOf:
+          - $ref: '#/components/schemas/Default_Action_Config_Input_Create'
+          description: "Default Custom action configuration. This includes if the\
+            \ custom action is available on all visualizations. By default, a custom\
+            \ action is added to all visualizations and Answers."
         group_identifiers:
           description: Unique ID or name of the groups that can view and access the
             custom action.
@@ -15610,28 +15674,24 @@ components:
       - action_details
       - name
       type: object
-    updateCustomAction_request_action_details:
-      allOf:
-      - $ref: '#/components/schemas/Action_Details_Input'
-      description: "Action details includes `Type` and Configuration for Custom Actions,\
-        \ either Callback or URL is required."
-    updateCustomAction_request_default_action_config:
-      allOf:
-      - $ref: '#/components/schemas/Default_Action_Config_Input'
-      description: "Default Custom action configuration. This includes if the custom\
-        \ action available on visualizations and Answers. By default, a custom action\
-        \ is added to all visualizations and Answers."
     updateCustomAction_request:
       properties:
         action_details:
-          $ref: '#/components/schemas/updateCustomAction_request_action_details'
+          allOf:
+          - $ref: '#/components/schemas/Action_Details_Input'
+          description: "Action details includes `Type` and Configuration for Custom\
+            \ Actions, either Callback or URL is required."
         associate_metadata:
           description: Metadata objects to which the custom action needs to be associated.
           items:
             $ref: '#/components/schemas/Associate_Metadata_Input'
           type: array
         default_action_config:
-          $ref: '#/components/schemas/updateCustomAction_request_default_action_config'
+          allOf:
+          - $ref: '#/components/schemas/Default_Action_Config_Input'
+          description: "Default Custom action configuration. This includes if the\
+            \ custom action available on visualizations and Answers. By default, a\
+            \ custom action is added to all visualizations and Answers."
         group_identifiers:
           description: Unique ID or name of the groups that can view and access the
             custom action.

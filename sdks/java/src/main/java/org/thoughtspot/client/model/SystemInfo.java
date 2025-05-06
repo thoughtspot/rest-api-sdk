@@ -14,13 +14,13 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.util.Arrays;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
@@ -38,12 +38,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -51,582 +49,559 @@ import org.thoughtspot.client.JSON;
 /**
  * SystemInfo
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class SystemInfo {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
+  @javax.annotation.Nullable
   private String id;
 
   public static final String SERIALIZED_NAME_NAME = "name";
   @SerializedName(SERIALIZED_NAME_NAME)
+  @javax.annotation.Nullable
   private String name;
 
   public static final String SERIALIZED_NAME_RELEASE_VERSION = "release_version";
   @SerializedName(SERIALIZED_NAME_RELEASE_VERSION)
+  @javax.annotation.Nullable
   private String releaseVersion;
 
   public static final String SERIALIZED_NAME_TIME_ZONE = "time_zone";
   @SerializedName(SERIALIZED_NAME_TIME_ZONE)
+  @javax.annotation.Nullable
   private String timeZone;
 
   public static final String SERIALIZED_NAME_LOCALE = "locale";
   @SerializedName(SERIALIZED_NAME_LOCALE)
+  @javax.annotation.Nullable
   private String locale;
 
   public static final String SERIALIZED_NAME_DATE_FORMAT = "date_format";
   @SerializedName(SERIALIZED_NAME_DATE_FORMAT)
+  @javax.annotation.Nullable
   private String dateFormat;
 
   public static final String SERIALIZED_NAME_API_VERSION = "api_version";
   @SerializedName(SERIALIZED_NAME_API_VERSION)
+  @javax.annotation.Nullable
   private String apiVersion;
 
   public static final String SERIALIZED_NAME_TYPE = "type";
   @SerializedName(SERIALIZED_NAME_TYPE)
+  @javax.annotation.Nullable
   private String type;
 
   public static final String SERIALIZED_NAME_ENVIRONMENT = "environment";
   @SerializedName(SERIALIZED_NAME_ENVIRONMENT)
+  @javax.annotation.Nullable
   private String environment;
 
   public static final String SERIALIZED_NAME_LICENSE = "license";
   @SerializedName(SERIALIZED_NAME_LICENSE)
+  @javax.annotation.Nullable
   private String license;
 
   public static final String SERIALIZED_NAME_DATE_TIME_FORMAT = "date_time_format";
   @SerializedName(SERIALIZED_NAME_DATE_TIME_FORMAT)
+  @javax.annotation.Nullable
   private String dateTimeFormat;
 
   public static final String SERIALIZED_NAME_TIME_FORMAT = "time_format";
   @SerializedName(SERIALIZED_NAME_TIME_FORMAT)
+  @javax.annotation.Nullable
   private String timeFormat;
 
   public static final String SERIALIZED_NAME_SYSTEM_USER_ID = "system_user_id";
   @SerializedName(SERIALIZED_NAME_SYSTEM_USER_ID)
+  @javax.annotation.Nullable
   private String systemUserId;
 
   public static final String SERIALIZED_NAME_SUPER_USER_ID = "super_user_id";
   @SerializedName(SERIALIZED_NAME_SUPER_USER_ID)
+  @javax.annotation.Nullable
   private String superUserId;
 
   public static final String SERIALIZED_NAME_HIDDEN_OBJECT_ID = "hidden_object_id";
   @SerializedName(SERIALIZED_NAME_HIDDEN_OBJECT_ID)
+  @javax.annotation.Nullable
   private String hiddenObjectId;
 
   public static final String SERIALIZED_NAME_SYSTEM_GROUP_ID = "system_group_id";
   @SerializedName(SERIALIZED_NAME_SYSTEM_GROUP_ID)
+  @javax.annotation.Nullable
   private String systemGroupId;
 
   public static final String SERIALIZED_NAME_TSADMIN_USER_ID = "tsadmin_user_id";
   @SerializedName(SERIALIZED_NAME_TSADMIN_USER_ID)
+  @javax.annotation.Nullable
   private String tsadminUserId;
 
   public static final String SERIALIZED_NAME_ADMIN_GROUP_ID = "admin_group_id";
   @SerializedName(SERIALIZED_NAME_ADMIN_GROUP_ID)
+  @javax.annotation.Nullable
   private String adminGroupId;
 
   public static final String SERIALIZED_NAME_ALL_TABLES_CONNECTION_ID = "all_tables_connection_id";
   @SerializedName(SERIALIZED_NAME_ALL_TABLES_CONNECTION_ID)
+  @javax.annotation.Nullable
   private String allTablesConnectionId;
 
   public static final String SERIALIZED_NAME_ALL_USER_GROUP_ID = "all_user_group_id";
   @SerializedName(SERIALIZED_NAME_ALL_USER_GROUP_ID)
+  @javax.annotation.Nullable
   private String allUserGroupId;
 
   public static final String SERIALIZED_NAME_ACCEPT_LANGUAGE = "accept_language";
   @SerializedName(SERIALIZED_NAME_ACCEPT_LANGUAGE)
+  @javax.annotation.Nullable
   private String acceptLanguage;
 
   public static final String SERIALIZED_NAME_ALL_USER_GROUP_MEMBER_USER_COUNT = "all_user_group_member_user_count";
   @SerializedName(SERIALIZED_NAME_ALL_USER_GROUP_MEMBER_USER_COUNT)
+  @javax.annotation.Nullable
   private Integer allUserGroupMemberUserCount;
 
   public static final String SERIALIZED_NAME_LOGICAL_MODEL_VERSION = "logical_model_version";
   @SerializedName(SERIALIZED_NAME_LOGICAL_MODEL_VERSION)
+  @javax.annotation.Nullable
   private Integer logicalModelVersion;
 
   public SystemInfo() {
   }
 
-  public SystemInfo id(String id) {
-    
+  public SystemInfo id(@javax.annotation.Nullable String id) {
     this.id = id;
     return this;
   }
 
-   /**
+  /**
    * The unique identifier of the object
    * @return id
-  **/
+   */
   @javax.annotation.Nullable
   public String getId() {
     return id;
   }
 
-
-  public void setId(String id) {
+  public void setId(@javax.annotation.Nullable String id) {
     this.id = id;
   }
 
 
-  public SystemInfo name(String name) {
-    
+  public SystemInfo name(@javax.annotation.Nullable String name) {
     this.name = name;
     return this;
   }
 
-   /**
+  /**
    * Name of the cluster.
    * @return name
-  **/
+   */
   @javax.annotation.Nullable
   public String getName() {
     return name;
   }
 
-
-  public void setName(String name) {
+  public void setName(@javax.annotation.Nullable String name) {
     this.name = name;
   }
 
 
-  public SystemInfo releaseVersion(String releaseVersion) {
-    
+  public SystemInfo releaseVersion(@javax.annotation.Nullable String releaseVersion) {
     this.releaseVersion = releaseVersion;
     return this;
   }
 
-   /**
+  /**
    * The release version of the cluster.
    * @return releaseVersion
-  **/
+   */
   @javax.annotation.Nullable
   public String getReleaseVersion() {
     return releaseVersion;
   }
 
-
-  public void setReleaseVersion(String releaseVersion) {
+  public void setReleaseVersion(@javax.annotation.Nullable String releaseVersion) {
     this.releaseVersion = releaseVersion;
   }
 
 
-  public SystemInfo timeZone(String timeZone) {
-    
+  public SystemInfo timeZone(@javax.annotation.Nullable String timeZone) {
     this.timeZone = timeZone;
     return this;
   }
 
-   /**
+  /**
    * The timezone of the cluster.
    * @return timeZone
-  **/
+   */
   @javax.annotation.Nullable
   public String getTimeZone() {
     return timeZone;
   }
 
-
-  public void setTimeZone(String timeZone) {
+  public void setTimeZone(@javax.annotation.Nullable String timeZone) {
     this.timeZone = timeZone;
   }
 
 
-  public SystemInfo locale(String locale) {
-    
+  public SystemInfo locale(@javax.annotation.Nullable String locale) {
     this.locale = locale;
     return this;
   }
 
-   /**
+  /**
    * The default locale of the cluster.
    * @return locale
-  **/
+   */
   @javax.annotation.Nullable
   public String getLocale() {
     return locale;
   }
 
-
-  public void setLocale(String locale) {
+  public void setLocale(@javax.annotation.Nullable String locale) {
     this.locale = locale;
   }
 
 
-  public SystemInfo dateFormat(String dateFormat) {
-    
+  public SystemInfo dateFormat(@javax.annotation.Nullable String dateFormat) {
     this.dateFormat = dateFormat;
     return this;
   }
 
-   /**
+  /**
    * The default date format representation of the cluster.
    * @return dateFormat
-  **/
+   */
   @javax.annotation.Nullable
   public String getDateFormat() {
     return dateFormat;
   }
 
-
-  public void setDateFormat(String dateFormat) {
+  public void setDateFormat(@javax.annotation.Nullable String dateFormat) {
     this.dateFormat = dateFormat;
   }
 
 
-  public SystemInfo apiVersion(String apiVersion) {
-    
+  public SystemInfo apiVersion(@javax.annotation.Nullable String apiVersion) {
     this.apiVersion = apiVersion;
     return this;
   }
 
-   /**
+  /**
    * The API version of the cluster.
    * @return apiVersion
-  **/
+   */
   @javax.annotation.Nullable
   public String getApiVersion() {
     return apiVersion;
   }
 
-
-  public void setApiVersion(String apiVersion) {
+  public void setApiVersion(@javax.annotation.Nullable String apiVersion) {
     this.apiVersion = apiVersion;
   }
 
 
-  public SystemInfo type(String type) {
-    
+  public SystemInfo type(@javax.annotation.Nullable String type) {
     this.type = type;
     return this;
   }
 
-   /**
+  /**
    * The deployment type of the cluster.
    * @return type
-  **/
+   */
   @javax.annotation.Nullable
   public String getType() {
     return type;
   }
 
-
-  public void setType(String type) {
+  public void setType(@javax.annotation.Nullable String type) {
     this.type = type;
   }
 
 
-  public SystemInfo environment(String environment) {
-    
+  public SystemInfo environment(@javax.annotation.Nullable String environment) {
     this.environment = environment;
     return this;
   }
 
-   /**
+  /**
    * The deployed environment of the cluster.
    * @return environment
-  **/
+   */
   @javax.annotation.Nullable
   public String getEnvironment() {
     return environment;
   }
 
-
-  public void setEnvironment(String environment) {
+  public void setEnvironment(@javax.annotation.Nullable String environment) {
     this.environment = environment;
   }
 
 
-  public SystemInfo license(String license) {
-    
+  public SystemInfo license(@javax.annotation.Nullable String license) {
     this.license = license;
     return this;
   }
 
-   /**
+  /**
    * The license applied to the cluster.
    * @return license
-  **/
+   */
   @javax.annotation.Nullable
   public String getLicense() {
     return license;
   }
 
-
-  public void setLicense(String license) {
+  public void setLicense(@javax.annotation.Nullable String license) {
     this.license = license;
   }
 
 
-  public SystemInfo dateTimeFormat(String dateTimeFormat) {
-    
+  public SystemInfo dateTimeFormat(@javax.annotation.Nullable String dateTimeFormat) {
     this.dateTimeFormat = dateTimeFormat;
     return this;
   }
 
-   /**
+  /**
    * The default date time format representation of the cluster.
    * @return dateTimeFormat
-  **/
+   */
   @javax.annotation.Nullable
   public String getDateTimeFormat() {
     return dateTimeFormat;
   }
 
-
-  public void setDateTimeFormat(String dateTimeFormat) {
+  public void setDateTimeFormat(@javax.annotation.Nullable String dateTimeFormat) {
     this.dateTimeFormat = dateTimeFormat;
   }
 
 
-  public SystemInfo timeFormat(String timeFormat) {
-    
+  public SystemInfo timeFormat(@javax.annotation.Nullable String timeFormat) {
     this.timeFormat = timeFormat;
     return this;
   }
 
-   /**
+  /**
    * The default time format representation of the cluster.
    * @return timeFormat
-  **/
+   */
   @javax.annotation.Nullable
   public String getTimeFormat() {
     return timeFormat;
   }
 
-
-  public void setTimeFormat(String timeFormat) {
+  public void setTimeFormat(@javax.annotation.Nullable String timeFormat) {
     this.timeFormat = timeFormat;
   }
 
 
-  public SystemInfo systemUserId(String systemUserId) {
-    
+  public SystemInfo systemUserId(@javax.annotation.Nullable String systemUserId) {
     this.systemUserId = systemUserId;
     return this;
   }
 
-   /**
+  /**
    * The unique identifier of system user.
    * @return systemUserId
-  **/
+   */
   @javax.annotation.Nullable
   public String getSystemUserId() {
     return systemUserId;
   }
 
-
-  public void setSystemUserId(String systemUserId) {
+  public void setSystemUserId(@javax.annotation.Nullable String systemUserId) {
     this.systemUserId = systemUserId;
   }
 
 
-  public SystemInfo superUserId(String superUserId) {
-    
+  public SystemInfo superUserId(@javax.annotation.Nullable String superUserId) {
     this.superUserId = superUserId;
     return this;
   }
 
-   /**
+  /**
    * The unique identifier of super user.
    * @return superUserId
-  **/
+   */
   @javax.annotation.Nullable
   public String getSuperUserId() {
     return superUserId;
   }
 
-
-  public void setSuperUserId(String superUserId) {
+  public void setSuperUserId(@javax.annotation.Nullable String superUserId) {
     this.superUserId = superUserId;
   }
 
 
-  public SystemInfo hiddenObjectId(String hiddenObjectId) {
-    
+  public SystemInfo hiddenObjectId(@javax.annotation.Nullable String hiddenObjectId) {
     this.hiddenObjectId = hiddenObjectId;
     return this;
   }
 
-   /**
+  /**
    * The unique identifier of hidden object.
    * @return hiddenObjectId
-  **/
+   */
   @javax.annotation.Nullable
   public String getHiddenObjectId() {
     return hiddenObjectId;
   }
 
-
-  public void setHiddenObjectId(String hiddenObjectId) {
+  public void setHiddenObjectId(@javax.annotation.Nullable String hiddenObjectId) {
     this.hiddenObjectId = hiddenObjectId;
   }
 
 
-  public SystemInfo systemGroupId(String systemGroupId) {
-    
+  public SystemInfo systemGroupId(@javax.annotation.Nullable String systemGroupId) {
     this.systemGroupId = systemGroupId;
     return this;
   }
 
-   /**
+  /**
    * The unique identifier of system group.
    * @return systemGroupId
-  **/
+   */
   @javax.annotation.Nullable
   public String getSystemGroupId() {
     return systemGroupId;
   }
 
-
-  public void setSystemGroupId(String systemGroupId) {
+  public void setSystemGroupId(@javax.annotation.Nullable String systemGroupId) {
     this.systemGroupId = systemGroupId;
   }
 
 
-  public SystemInfo tsadminUserId(String tsadminUserId) {
-    
+  public SystemInfo tsadminUserId(@javax.annotation.Nullable String tsadminUserId) {
     this.tsadminUserId = tsadminUserId;
     return this;
   }
 
-   /**
+  /**
    * The unique identifier of tsadmin user.
    * @return tsadminUserId
-  **/
+   */
   @javax.annotation.Nullable
   public String getTsadminUserId() {
     return tsadminUserId;
   }
 
-
-  public void setTsadminUserId(String tsadminUserId) {
+  public void setTsadminUserId(@javax.annotation.Nullable String tsadminUserId) {
     this.tsadminUserId = tsadminUserId;
   }
 
 
-  public SystemInfo adminGroupId(String adminGroupId) {
-    
+  public SystemInfo adminGroupId(@javax.annotation.Nullable String adminGroupId) {
     this.adminGroupId = adminGroupId;
     return this;
   }
 
-   /**
+  /**
    * The unique identifier of admin group.
    * @return adminGroupId
-  **/
+   */
   @javax.annotation.Nullable
   public String getAdminGroupId() {
     return adminGroupId;
   }
 
-
-  public void setAdminGroupId(String adminGroupId) {
+  public void setAdminGroupId(@javax.annotation.Nullable String adminGroupId) {
     this.adminGroupId = adminGroupId;
   }
 
 
-  public SystemInfo allTablesConnectionId(String allTablesConnectionId) {
-    
+  public SystemInfo allTablesConnectionId(@javax.annotation.Nullable String allTablesConnectionId) {
     this.allTablesConnectionId = allTablesConnectionId;
     return this;
   }
 
-   /**
+  /**
    * The unique identifier of all tables connection.
    * @return allTablesConnectionId
-  **/
+   */
   @javax.annotation.Nullable
   public String getAllTablesConnectionId() {
     return allTablesConnectionId;
   }
 
-
-  public void setAllTablesConnectionId(String allTablesConnectionId) {
+  public void setAllTablesConnectionId(@javax.annotation.Nullable String allTablesConnectionId) {
     this.allTablesConnectionId = allTablesConnectionId;
   }
 
 
-  public SystemInfo allUserGroupId(String allUserGroupId) {
-    
+  public SystemInfo allUserGroupId(@javax.annotation.Nullable String allUserGroupId) {
     this.allUserGroupId = allUserGroupId;
     return this;
   }
 
-   /**
+  /**
    * The unique identifier of ALL group.
    * @return allUserGroupId
-  **/
+   */
   @javax.annotation.Nullable
   public String getAllUserGroupId() {
     return allUserGroupId;
   }
 
-
-  public void setAllUserGroupId(String allUserGroupId) {
+  public void setAllUserGroupId(@javax.annotation.Nullable String allUserGroupId) {
     this.allUserGroupId = allUserGroupId;
   }
 
 
-  public SystemInfo acceptLanguage(String acceptLanguage) {
-    
+  public SystemInfo acceptLanguage(@javax.annotation.Nullable String acceptLanguage) {
     this.acceptLanguage = acceptLanguage;
     return this;
   }
 
-   /**
+  /**
    * The supported accept language by the cluster.
    * @return acceptLanguage
-  **/
+   */
   @javax.annotation.Nullable
   public String getAcceptLanguage() {
     return acceptLanguage;
   }
 
-
-  public void setAcceptLanguage(String acceptLanguage) {
+  public void setAcceptLanguage(@javax.annotation.Nullable String acceptLanguage) {
     this.acceptLanguage = acceptLanguage;
   }
 
 
-  public SystemInfo allUserGroupMemberUserCount(Integer allUserGroupMemberUserCount) {
-    
+  public SystemInfo allUserGroupMemberUserCount(@javax.annotation.Nullable Integer allUserGroupMemberUserCount) {
     this.allUserGroupMemberUserCount = allUserGroupMemberUserCount;
     return this;
   }
 
-   /**
+  /**
    * The count of users of ALL group.
    * @return allUserGroupMemberUserCount
-  **/
+   */
   @javax.annotation.Nullable
   public Integer getAllUserGroupMemberUserCount() {
     return allUserGroupMemberUserCount;
   }
 
-
-  public void setAllUserGroupMemberUserCount(Integer allUserGroupMemberUserCount) {
+  public void setAllUserGroupMemberUserCount(@javax.annotation.Nullable Integer allUserGroupMemberUserCount) {
     this.allUserGroupMemberUserCount = allUserGroupMemberUserCount;
   }
 
 
-  public SystemInfo logicalModelVersion(Integer logicalModelVersion) {
-    
+  public SystemInfo logicalModelVersion(@javax.annotation.Nullable Integer logicalModelVersion) {
     this.logicalModelVersion = logicalModelVersion;
     return this;
   }
 
-   /**
+  /**
    * The version number of logical model of the cluster.
    * @return logicalModelVersion
-  **/
+   */
   @javax.annotation.Nullable
   public Integer getLogicalModelVersion() {
     return logicalModelVersion;
   }
 
-
-  public void setLogicalModelVersion(Integer logicalModelVersion) {
+  public void setLogicalModelVersion(@javax.annotation.Nullable Integer logicalModelVersion) {
     this.logicalModelVersion = logicalModelVersion;
   }
 
@@ -759,26 +734,27 @@ public class SystemInfo {
     openapiRequiredFields = new HashSet<String>();
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to SystemInfo
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!SystemInfo.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to SystemInfo
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!SystemInfo.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in SystemInfo is not found in the empty JSON string", SystemInfo.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!SystemInfo.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `SystemInfo` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `SystemInfo` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("id") != null && !jsonObj.get("id").isJsonNull()) && !jsonObj.get("id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("id").toString()));
       }
@@ -864,31 +840,31 @@ public class SystemInfo {
 
            @Override
            public SystemInfo read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of SystemInfo given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of SystemInfo
-  * @throws IOException if the JSON string is invalid with respect to SystemInfo
-  */
+  /**
+   * Create an instance of SystemInfo given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of SystemInfo
+   * @throws IOException if the JSON string is invalid with respect to SystemInfo
+   */
   public static SystemInfo fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, SystemInfo.class);
   }
 
- /**
-  * Convert an instance of SystemInfo to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of SystemInfo to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

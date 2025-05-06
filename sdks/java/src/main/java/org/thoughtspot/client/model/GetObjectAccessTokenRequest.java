@@ -14,7 +14,6 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -22,9 +21,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
-import org.thoughtspot.client.model.GetObjectAccessTokenRequestUserParameters;
+import org.thoughtspot.client.model.UserParameterOptions;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -41,12 +41,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -54,246 +52,238 @@ import org.thoughtspot.client.JSON;
 /**
  * GetObjectAccessTokenRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class GetObjectAccessTokenRequest {
   public static final String SERIALIZED_NAME_USERNAME = "username";
   @SerializedName(SERIALIZED_NAME_USERNAME)
+  @javax.annotation.Nonnull
   private String username;
 
   public static final String SERIALIZED_NAME_OBJECT_ID = "object_id";
   @SerializedName(SERIALIZED_NAME_OBJECT_ID)
+  @javax.annotation.Nullable
   private String objectId;
 
   public static final String SERIALIZED_NAME_PASSWORD = "password";
   @SerializedName(SERIALIZED_NAME_PASSWORD)
+  @javax.annotation.Nullable
   private String password = "";
 
   public static final String SERIALIZED_NAME_SECRET_KEY = "secret_key";
   @SerializedName(SERIALIZED_NAME_SECRET_KEY)
+  @javax.annotation.Nullable
   private String secretKey = "";
 
   public static final String SERIALIZED_NAME_VALIDITY_TIME_IN_SEC = "validity_time_in_sec";
   @SerializedName(SERIALIZED_NAME_VALIDITY_TIME_IN_SEC)
+  @javax.annotation.Nullable
   private Integer validityTimeInSec = 300;
 
   public static final String SERIALIZED_NAME_ORG_ID = "org_id";
   @SerializedName(SERIALIZED_NAME_ORG_ID)
+  @javax.annotation.Nullable
   private Integer orgId;
 
   public static final String SERIALIZED_NAME_EMAIL = "email";
   @SerializedName(SERIALIZED_NAME_EMAIL)
+  @javax.annotation.Nullable
   private String email;
 
   public static final String SERIALIZED_NAME_DISPLAY_NAME = "display_name";
   @SerializedName(SERIALIZED_NAME_DISPLAY_NAME)
+  @javax.annotation.Nullable
   private String displayName;
 
   public static final String SERIALIZED_NAME_AUTO_CREATE = "auto_create";
   @SerializedName(SERIALIZED_NAME_AUTO_CREATE)
+  @javax.annotation.Nullable
   private Boolean autoCreate = false;
 
   public static final String SERIALIZED_NAME_GROUP_IDENTIFIERS = "group_identifiers";
   @SerializedName(SERIALIZED_NAME_GROUP_IDENTIFIERS)
-  private List<String> groupIdentifiers;
+  @javax.annotation.Nullable
+  private List<String> groupIdentifiers = new ArrayList<>();
 
   public static final String SERIALIZED_NAME_USER_PARAMETERS = "user_parameters";
   @SerializedName(SERIALIZED_NAME_USER_PARAMETERS)
-  private GetObjectAccessTokenRequestUserParameters userParameters;
+  @javax.annotation.Nullable
+  private UserParameterOptions userParameters;
 
   public GetObjectAccessTokenRequest() {
   }
 
-  public GetObjectAccessTokenRequest username(String username) {
-    
+  public GetObjectAccessTokenRequest username(@javax.annotation.Nonnull String username) {
     this.username = username;
     return this;
   }
 
-   /**
+  /**
    * Username of the ThoughtSpot user. The username is stored in the &#x60;name&#x60; attribute of the user object.
    * @return username
-  **/
+   */
   @javax.annotation.Nonnull
   public String getUsername() {
     return username;
   }
 
-
-  public void setUsername(String username) {
+  public void setUsername(@javax.annotation.Nonnull String username) {
     this.username = username;
   }
 
 
-  public GetObjectAccessTokenRequest objectId(String objectId) {
-    
+  public GetObjectAccessTokenRequest objectId(@javax.annotation.Nullable String objectId) {
     this.objectId = objectId;
     return this;
   }
 
-   /**
+  /**
    * GUID of the ThoughtSpot metadata object that the user can access. The bearer will only have access to the object specified in the API request.
    * @return objectId
-  **/
+   */
   @javax.annotation.Nullable
   public String getObjectId() {
     return objectId;
   }
 
-
-  public void setObjectId(String objectId) {
+  public void setObjectId(@javax.annotation.Nullable String objectId) {
     this.objectId = objectId;
   }
 
 
-  public GetObjectAccessTokenRequest password(String password) {
-    
+  public GetObjectAccessTokenRequest password(@javax.annotation.Nullable String password) {
     this.password = password;
     return this;
   }
 
-   /**
+  /**
    * Password of the user account
    * @return password
-  **/
+   */
   @javax.annotation.Nullable
   public String getPassword() {
     return password;
   }
 
-
-  public void setPassword(String password) {
+  public void setPassword(@javax.annotation.Nullable String password) {
     this.password = password;
   }
 
 
-  public GetObjectAccessTokenRequest secretKey(String secretKey) {
-    
+  public GetObjectAccessTokenRequest secretKey(@javax.annotation.Nullable String secretKey) {
     this.secretKey = secretKey;
     return this;
   }
 
-   /**
+  /**
    * The secret key string provided by the ThoughtSpot application server. ThoughtSpot generates a secret key when Trusted authentication is enabled.
    * @return secretKey
-  **/
+   */
   @javax.annotation.Nullable
   public String getSecretKey() {
     return secretKey;
   }
 
-
-  public void setSecretKey(String secretKey) {
+  public void setSecretKey(@javax.annotation.Nullable String secretKey) {
     this.secretKey = secretKey;
   }
 
 
-  public GetObjectAccessTokenRequest validityTimeInSec(Integer validityTimeInSec) {
-    
+  public GetObjectAccessTokenRequest validityTimeInSec(@javax.annotation.Nullable Integer validityTimeInSec) {
     this.validityTimeInSec = validityTimeInSec;
     return this;
   }
 
-   /**
+  /**
    * Token validity duration in seconds
    * @return validityTimeInSec
-  **/
+   */
   @javax.annotation.Nullable
   public Integer getValidityTimeInSec() {
     return validityTimeInSec;
   }
 
-
-  public void setValidityTimeInSec(Integer validityTimeInSec) {
+  public void setValidityTimeInSec(@javax.annotation.Nullable Integer validityTimeInSec) {
     this.validityTimeInSec = validityTimeInSec;
   }
 
 
-  public GetObjectAccessTokenRequest orgId(Integer orgId) {
-    
+  public GetObjectAccessTokenRequest orgId(@javax.annotation.Nullable Integer orgId) {
     this.orgId = orgId;
     return this;
   }
 
-   /**
+  /**
    * ID of the Org context to log in to. If the Org ID is not specified and secret key is provided then user will be logged into the org corresponding to the secret key, and if secret key is not provided then user will be logged in to the Org context of their previous login session.
    * @return orgId
-  **/
+   */
   @javax.annotation.Nullable
   public Integer getOrgId() {
     return orgId;
   }
 
-
-  public void setOrgId(Integer orgId) {
+  public void setOrgId(@javax.annotation.Nullable Integer orgId) {
     this.orgId = orgId;
   }
 
 
-  public GetObjectAccessTokenRequest email(String email) {
-    
+  public GetObjectAccessTokenRequest email(@javax.annotation.Nullable String email) {
     this.email = email;
     return this;
   }
 
-   /**
+  /**
    * Email address of the user. Specify this attribute when creating a new user (just-in-time (JIT) provisioning).
    * @return email
-  **/
+   */
   @javax.annotation.Nullable
   public String getEmail() {
     return email;
   }
 
-
-  public void setEmail(String email) {
+  public void setEmail(@javax.annotation.Nullable String email) {
     this.email = email;
   }
 
 
-  public GetObjectAccessTokenRequest displayName(String displayName) {
-    
+  public GetObjectAccessTokenRequest displayName(@javax.annotation.Nullable String displayName) {
     this.displayName = displayName;
     return this;
   }
 
-   /**
+  /**
    * Display name of the user. Specify this attribute when creating a new user (just-in-time (JIT) provisioning).
    * @return displayName
-  **/
+   */
   @javax.annotation.Nullable
   public String getDisplayName() {
     return displayName;
   }
 
-
-  public void setDisplayName(String displayName) {
+  public void setDisplayName(@javax.annotation.Nullable String displayName) {
     this.displayName = displayName;
   }
 
 
-  public GetObjectAccessTokenRequest autoCreate(Boolean autoCreate) {
-    
+  public GetObjectAccessTokenRequest autoCreate(@javax.annotation.Nullable Boolean autoCreate) {
     this.autoCreate = autoCreate;
     return this;
   }
 
-   /**
+  /**
    *    Creates a new user if the specified username does not exist in ThoughtSpot. To provision a user just-in-time (JIT), set this attribute to true.      Note: For JIT provisioning of a user, the secret_key is required. 
    * @return autoCreate
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getAutoCreate() {
     return autoCreate;
   }
 
-
-  public void setAutoCreate(Boolean autoCreate) {
+  public void setAutoCreate(@javax.annotation.Nullable Boolean autoCreate) {
     this.autoCreate = autoCreate;
   }
 
 
-  public GetObjectAccessTokenRequest groupIdentifiers(List<String> groupIdentifiers) {
-    
+  public GetObjectAccessTokenRequest groupIdentifiers(@javax.annotation.Nullable List<String> groupIdentifiers) {
     this.groupIdentifiers = groupIdentifiers;
     return this;
   }
@@ -306,38 +296,35 @@ public class GetObjectAccessTokenRequest {
     return this;
   }
 
-   /**
+  /**
    * Unique ID or name of the groups to which you want to assign the new user. You can specify this attribute to dynamically assign privileges during just-in-time (JIT) provisioning.
    * @return groupIdentifiers
-  **/
+   */
   @javax.annotation.Nullable
   public List<String> getGroupIdentifiers() {
     return groupIdentifiers;
   }
 
-
-  public void setGroupIdentifiers(List<String> groupIdentifiers) {
+  public void setGroupIdentifiers(@javax.annotation.Nullable List<String> groupIdentifiers) {
     this.groupIdentifiers = groupIdentifiers;
   }
 
 
-  public GetObjectAccessTokenRequest userParameters(GetObjectAccessTokenRequestUserParameters userParameters) {
-    
+  public GetObjectAccessTokenRequest userParameters(@javax.annotation.Nullable UserParameterOptions userParameters) {
     this.userParameters = userParameters;
     return this;
   }
 
-   /**
-   * Get userParameters
+  /**
+   * &lt;div&gt;Deprecated: 10.4.0.cl and later &lt;/div&gt;  Define attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters).
    * @return userParameters
-  **/
+   */
   @javax.annotation.Nullable
-  public GetObjectAccessTokenRequestUserParameters getUserParameters() {
+  public UserParameterOptions getUserParameters() {
     return userParameters;
   }
 
-
-  public void setUserParameters(GetObjectAccessTokenRequestUserParameters userParameters) {
+  public void setUserParameters(@javax.annotation.Nullable UserParameterOptions userParameters) {
     this.userParameters = userParameters;
   }
 
@@ -435,33 +422,34 @@ public class GetObjectAccessTokenRequest {
     openapiRequiredFields.add("username");
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to GetObjectAccessTokenRequest
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!GetObjectAccessTokenRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to GetObjectAccessTokenRequest
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!GetObjectAccessTokenRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in GetObjectAccessTokenRequest is not found in the empty JSON string", GetObjectAccessTokenRequest.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!GetObjectAccessTokenRequest.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `GetObjectAccessTokenRequest` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `GetObjectAccessTokenRequest` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
       for (String requiredField : GetObjectAccessTokenRequest.openapiRequiredFields) {
-        if (jsonObj.get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       if (!jsonObj.get("username").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `username` to be a primitive type in the JSON string but got `%s`", jsonObj.get("username").toString()));
       }
@@ -481,12 +469,12 @@ public class GetObjectAccessTokenRequest {
         throw new IllegalArgumentException(String.format("Expected the field `display_name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("display_name").toString()));
       }
       // ensure the optional json data is an array if present
-      if (jsonObj.get("group_identifiers") != null && !jsonObj.get("group_identifiers").isJsonArray()) {
+      if (jsonObj.get("group_identifiers") != null && !jsonObj.get("group_identifiers").isJsonNull() && !jsonObj.get("group_identifiers").isJsonArray()) {
         throw new IllegalArgumentException(String.format("Expected the field `group_identifiers` to be an array in the JSON string but got `%s`", jsonObj.get("group_identifiers").toString()));
       }
       // validate the optional field `user_parameters`
       if (jsonObj.get("user_parameters") != null && !jsonObj.get("user_parameters").isJsonNull()) {
-        GetObjectAccessTokenRequestUserParameters.validateJsonObject(jsonObj.getAsJsonObject("user_parameters"));
+        UserParameterOptions.validateJsonElement(jsonObj.get("user_parameters"));
       }
   }
 
@@ -510,31 +498,31 @@ public class GetObjectAccessTokenRequest {
 
            @Override
            public GetObjectAccessTokenRequest read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of GetObjectAccessTokenRequest given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of GetObjectAccessTokenRequest
-  * @throws IOException if the JSON string is invalid with respect to GetObjectAccessTokenRequest
-  */
+  /**
+   * Create an instance of GetObjectAccessTokenRequest given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of GetObjectAccessTokenRequest
+   * @throws IOException if the JSON string is invalid with respect to GetObjectAccessTokenRequest
+   */
   public static GetObjectAccessTokenRequest fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, GetObjectAccessTokenRequest.class);
   }
 
- /**
-  * Convert an instance of GetObjectAccessTokenRequest to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of GetObjectAccessTokenRequest to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

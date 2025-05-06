@@ -14,7 +14,6 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -22,6 +21,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.google.gson.Gson;
@@ -39,12 +39,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -52,22 +50,26 @@ import org.thoughtspot.client.JSON;
 /**
  * UpdateUserGroupRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class UpdateUserGroupRequest {
   public static final String SERIALIZED_NAME_NAME = "name";
   @SerializedName(SERIALIZED_NAME_NAME)
+  @javax.annotation.Nullable
   private String name;
 
   public static final String SERIALIZED_NAME_DEFAULT_LIVEBOARD_IDENTIFIERS = "default_liveboard_identifiers";
   @SerializedName(SERIALIZED_NAME_DEFAULT_LIVEBOARD_IDENTIFIERS)
-  private List<String> defaultLiveboardIdentifiers;
+  @javax.annotation.Nullable
+  private List<String> defaultLiveboardIdentifiers = new ArrayList<>();
 
   public static final String SERIALIZED_NAME_DESCRIPTION = "description";
   @SerializedName(SERIALIZED_NAME_DESCRIPTION)
+  @javax.annotation.Nullable
   private String description;
 
   public static final String SERIALIZED_NAME_DISPLAY_NAME = "display_name";
   @SerializedName(SERIALIZED_NAME_DISPLAY_NAME)
+  @javax.annotation.Nullable
   private String displayName;
 
   /**
@@ -91,7 +93,7 @@ public class UpdateUserGroupRequest {
     
     JOBSCHEDULING("JOBSCHEDULING"),
     
-    A3ANALYSIS("A3ANALYSIS"),
+    A3_ANALYSIS("A3ANALYSIS"),
     
     EXPERIMENTALFEATUREPRIVILEGE("EXPERIMENTALFEATUREPRIVILEGE"),
     
@@ -165,15 +167,22 @@ public class UpdateUserGroupRequest {
         return PrivilegesEnum.fromValue(value);
       }
     }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      PrivilegesEnum.fromValue(value);
+    }
   }
 
   public static final String SERIALIZED_NAME_PRIVILEGES = "privileges";
   @SerializedName(SERIALIZED_NAME_PRIVILEGES)
-  private List<PrivilegesEnum> privileges;
+  @javax.annotation.Nullable
+  private List<PrivilegesEnum> privileges = new ArrayList<>();
 
   public static final String SERIALIZED_NAME_SUB_GROUP_IDENTIFIERS = "sub_group_identifiers";
   @SerializedName(SERIALIZED_NAME_SUB_GROUP_IDENTIFIERS)
-  private List<String> subGroupIdentifiers;
+  @javax.annotation.Nullable
+  private List<String> subGroupIdentifiers = new ArrayList<>();
 
   /**
    * Type of the group
@@ -220,15 +229,22 @@ public class UpdateUserGroupRequest {
         return TypeEnum.fromValue(value);
       }
     }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      TypeEnum.fromValue(value);
+    }
   }
 
   public static final String SERIALIZED_NAME_TYPE = "type";
   @SerializedName(SERIALIZED_NAME_TYPE)
+  @javax.annotation.Nullable
   private TypeEnum type;
 
   public static final String SERIALIZED_NAME_USER_IDENTIFIERS = "user_identifiers";
   @SerializedName(SERIALIZED_NAME_USER_IDENTIFIERS)
-  private List<String> userIdentifiers;
+  @javax.annotation.Nullable
+  private List<String> userIdentifiers = new ArrayList<>();
 
   /**
    * Visibility of the group. To make a group visible to other users and groups, set the visibility to SHAREABLE.
@@ -275,15 +291,22 @@ public class UpdateUserGroupRequest {
         return VisibilityEnum.fromValue(value);
       }
     }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      VisibilityEnum.fromValue(value);
+    }
   }
 
   public static final String SERIALIZED_NAME_VISIBILITY = "visibility";
   @SerializedName(SERIALIZED_NAME_VISIBILITY)
+  @javax.annotation.Nullable
   private VisibilityEnum visibility;
 
   public static final String SERIALIZED_NAME_ROLE_IDENTIFIERS = "role_identifiers";
   @SerializedName(SERIALIZED_NAME_ROLE_IDENTIFIERS)
-  private List<String> roleIdentifiers;
+  @javax.annotation.Nullable
+  private List<String> roleIdentifiers = new ArrayList<>();
 
   /**
    * Type of update operation. Default operation type is REPLACE
@@ -332,38 +355,41 @@ public class UpdateUserGroupRequest {
         return OperationEnum.fromValue(value);
       }
     }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      OperationEnum.fromValue(value);
+    }
   }
 
   public static final String SERIALIZED_NAME_OPERATION = "operation";
   @SerializedName(SERIALIZED_NAME_OPERATION)
+  @javax.annotation.Nullable
   private OperationEnum operation = OperationEnum.REPLACE;
 
   public UpdateUserGroupRequest() {
   }
 
-  public UpdateUserGroupRequest name(String name) {
-    
+  public UpdateUserGroupRequest name(@javax.annotation.Nullable String name) {
     this.name = name;
     return this;
   }
 
-   /**
+  /**
    * Name of the group to modify.
    * @return name
-  **/
+   */
   @javax.annotation.Nullable
   public String getName() {
     return name;
   }
 
-
-  public void setName(String name) {
+  public void setName(@javax.annotation.Nullable String name) {
     this.name = name;
   }
 
 
-  public UpdateUserGroupRequest defaultLiveboardIdentifiers(List<String> defaultLiveboardIdentifiers) {
-    
+  public UpdateUserGroupRequest defaultLiveboardIdentifiers(@javax.annotation.Nullable List<String> defaultLiveboardIdentifiers) {
     this.defaultLiveboardIdentifiers = defaultLiveboardIdentifiers;
     return this;
   }
@@ -376,65 +402,59 @@ public class UpdateUserGroupRequest {
     return this;
   }
 
-   /**
+  /**
    * ID of the Liveboards to be assigned as default Liveboards to the users in the group.
    * @return defaultLiveboardIdentifiers
-  **/
+   */
   @javax.annotation.Nullable
   public List<String> getDefaultLiveboardIdentifiers() {
     return defaultLiveboardIdentifiers;
   }
 
-
-  public void setDefaultLiveboardIdentifiers(List<String> defaultLiveboardIdentifiers) {
+  public void setDefaultLiveboardIdentifiers(@javax.annotation.Nullable List<String> defaultLiveboardIdentifiers) {
     this.defaultLiveboardIdentifiers = defaultLiveboardIdentifiers;
   }
 
 
-  public UpdateUserGroupRequest description(String description) {
-    
+  public UpdateUserGroupRequest description(@javax.annotation.Nullable String description) {
     this.description = description;
     return this;
   }
 
-   /**
+  /**
    * Description for the group.
    * @return description
-  **/
+   */
   @javax.annotation.Nullable
   public String getDescription() {
     return description;
   }
 
-
-  public void setDescription(String description) {
+  public void setDescription(@javax.annotation.Nullable String description) {
     this.description = description;
   }
 
 
-  public UpdateUserGroupRequest displayName(String displayName) {
-    
+  public UpdateUserGroupRequest displayName(@javax.annotation.Nullable String displayName) {
     this.displayName = displayName;
     return this;
   }
 
-   /**
+  /**
    * Display name of the group.
    * @return displayName
-  **/
+   */
   @javax.annotation.Nullable
   public String getDisplayName() {
     return displayName;
   }
 
-
-  public void setDisplayName(String displayName) {
+  public void setDisplayName(@javax.annotation.Nullable String displayName) {
     this.displayName = displayName;
   }
 
 
-  public UpdateUserGroupRequest privileges(List<PrivilegesEnum> privileges) {
-    
+  public UpdateUserGroupRequest privileges(@javax.annotation.Nullable List<PrivilegesEnum> privileges) {
     this.privileges = privileges;
     return this;
   }
@@ -447,23 +467,21 @@ public class UpdateUserGroupRequest {
     return this;
   }
 
-   /**
+  /**
    * Privileges to assign to the group.
    * @return privileges
-  **/
+   */
   @javax.annotation.Nullable
   public List<PrivilegesEnum> getPrivileges() {
     return privileges;
   }
 
-
-  public void setPrivileges(List<PrivilegesEnum> privileges) {
+  public void setPrivileges(@javax.annotation.Nullable List<PrivilegesEnum> privileges) {
     this.privileges = privileges;
   }
 
 
-  public UpdateUserGroupRequest subGroupIdentifiers(List<String> subGroupIdentifiers) {
-    
+  public UpdateUserGroupRequest subGroupIdentifiers(@javax.annotation.Nullable List<String> subGroupIdentifiers) {
     this.subGroupIdentifiers = subGroupIdentifiers;
     return this;
   }
@@ -476,44 +494,40 @@ public class UpdateUserGroupRequest {
     return this;
   }
 
-   /**
+  /**
    * GUID or name of the sub groups. A subgroup is a group assigned to a parent group.
    * @return subGroupIdentifiers
-  **/
+   */
   @javax.annotation.Nullable
   public List<String> getSubGroupIdentifiers() {
     return subGroupIdentifiers;
   }
 
-
-  public void setSubGroupIdentifiers(List<String> subGroupIdentifiers) {
+  public void setSubGroupIdentifiers(@javax.annotation.Nullable List<String> subGroupIdentifiers) {
     this.subGroupIdentifiers = subGroupIdentifiers;
   }
 
 
-  public UpdateUserGroupRequest type(TypeEnum type) {
-    
+  public UpdateUserGroupRequest type(@javax.annotation.Nullable TypeEnum type) {
     this.type = type;
     return this;
   }
 
-   /**
+  /**
    * Type of the group
    * @return type
-  **/
+   */
   @javax.annotation.Nullable
   public TypeEnum getType() {
     return type;
   }
 
-
-  public void setType(TypeEnum type) {
+  public void setType(@javax.annotation.Nullable TypeEnum type) {
     this.type = type;
   }
 
 
-  public UpdateUserGroupRequest userIdentifiers(List<String> userIdentifiers) {
-    
+  public UpdateUserGroupRequest userIdentifiers(@javax.annotation.Nullable List<String> userIdentifiers) {
     this.userIdentifiers = userIdentifiers;
     return this;
   }
@@ -526,44 +540,40 @@ public class UpdateUserGroupRequest {
     return this;
   }
 
-   /**
+  /**
    * GUID or name of the users to assign to the group.
    * @return userIdentifiers
-  **/
+   */
   @javax.annotation.Nullable
   public List<String> getUserIdentifiers() {
     return userIdentifiers;
   }
 
-
-  public void setUserIdentifiers(List<String> userIdentifiers) {
+  public void setUserIdentifiers(@javax.annotation.Nullable List<String> userIdentifiers) {
     this.userIdentifiers = userIdentifiers;
   }
 
 
-  public UpdateUserGroupRequest visibility(VisibilityEnum visibility) {
-    
+  public UpdateUserGroupRequest visibility(@javax.annotation.Nullable VisibilityEnum visibility) {
     this.visibility = visibility;
     return this;
   }
 
-   /**
+  /**
    * Visibility of the group. To make a group visible to other users and groups, set the visibility to SHAREABLE.
    * @return visibility
-  **/
+   */
   @javax.annotation.Nullable
   public VisibilityEnum getVisibility() {
     return visibility;
   }
 
-
-  public void setVisibility(VisibilityEnum visibility) {
+  public void setVisibility(@javax.annotation.Nullable VisibilityEnum visibility) {
     this.visibility = visibility;
   }
 
 
-  public UpdateUserGroupRequest roleIdentifiers(List<String> roleIdentifiers) {
-    
+  public UpdateUserGroupRequest roleIdentifiers(@javax.annotation.Nullable List<String> roleIdentifiers) {
     this.roleIdentifiers = roleIdentifiers;
     return this;
   }
@@ -576,38 +586,35 @@ public class UpdateUserGroupRequest {
     return this;
   }
 
-   /**
+  /**
    * Role identifiers of the Roles that should be assigned to the group.
    * @return roleIdentifiers
-  **/
+   */
   @javax.annotation.Nullable
   public List<String> getRoleIdentifiers() {
     return roleIdentifiers;
   }
 
-
-  public void setRoleIdentifiers(List<String> roleIdentifiers) {
+  public void setRoleIdentifiers(@javax.annotation.Nullable List<String> roleIdentifiers) {
     this.roleIdentifiers = roleIdentifiers;
   }
 
 
-  public UpdateUserGroupRequest operation(OperationEnum operation) {
-    
+  public UpdateUserGroupRequest operation(@javax.annotation.Nullable OperationEnum operation) {
     this.operation = operation;
     return this;
   }
 
-   /**
+  /**
    * Type of update operation. Default operation type is REPLACE
    * @return operation
-  **/
+   */
   @javax.annotation.Nullable
   public OperationEnum getOperation() {
     return operation;
   }
 
-
-  public void setOperation(OperationEnum operation) {
+  public void setOperation(@javax.annotation.Nullable OperationEnum operation) {
     this.operation = operation;
   }
 
@@ -693,31 +700,32 @@ public class UpdateUserGroupRequest {
     openapiRequiredFields = new HashSet<String>();
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to UpdateUserGroupRequest
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!UpdateUserGroupRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to UpdateUserGroupRequest
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!UpdateUserGroupRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in UpdateUserGroupRequest is not found in the empty JSON string", UpdateUserGroupRequest.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!UpdateUserGroupRequest.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `UpdateUserGroupRequest` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `UpdateUserGroupRequest` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("name") != null && !jsonObj.get("name").isJsonNull()) && !jsonObj.get("name").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("name").toString()));
       }
       // ensure the optional json data is an array if present
-      if (jsonObj.get("default_liveboard_identifiers") != null && !jsonObj.get("default_liveboard_identifiers").isJsonArray()) {
+      if (jsonObj.get("default_liveboard_identifiers") != null && !jsonObj.get("default_liveboard_identifiers").isJsonNull() && !jsonObj.get("default_liveboard_identifiers").isJsonArray()) {
         throw new IllegalArgumentException(String.format("Expected the field `default_liveboard_identifiers` to be an array in the JSON string but got `%s`", jsonObj.get("default_liveboard_identifiers").toString()));
       }
       if ((jsonObj.get("description") != null && !jsonObj.get("description").isJsonNull()) && !jsonObj.get("description").isJsonPrimitive()) {
@@ -727,29 +735,41 @@ public class UpdateUserGroupRequest {
         throw new IllegalArgumentException(String.format("Expected the field `display_name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("display_name").toString()));
       }
       // ensure the optional json data is an array if present
-      if (jsonObj.get("privileges") != null && !jsonObj.get("privileges").isJsonArray()) {
+      if (jsonObj.get("privileges") != null && !jsonObj.get("privileges").isJsonNull() && !jsonObj.get("privileges").isJsonArray()) {
         throw new IllegalArgumentException(String.format("Expected the field `privileges` to be an array in the JSON string but got `%s`", jsonObj.get("privileges").toString()));
       }
       // ensure the optional json data is an array if present
-      if (jsonObj.get("sub_group_identifiers") != null && !jsonObj.get("sub_group_identifiers").isJsonArray()) {
+      if (jsonObj.get("sub_group_identifiers") != null && !jsonObj.get("sub_group_identifiers").isJsonNull() && !jsonObj.get("sub_group_identifiers").isJsonArray()) {
         throw new IllegalArgumentException(String.format("Expected the field `sub_group_identifiers` to be an array in the JSON string but got `%s`", jsonObj.get("sub_group_identifiers").toString()));
       }
       if ((jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull()) && !jsonObj.get("type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("type").toString()));
       }
+      // validate the optional field `type`
+      if (jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull()) {
+        TypeEnum.validateJsonElement(jsonObj.get("type"));
+      }
       // ensure the optional json data is an array if present
-      if (jsonObj.get("user_identifiers") != null && !jsonObj.get("user_identifiers").isJsonArray()) {
+      if (jsonObj.get("user_identifiers") != null && !jsonObj.get("user_identifiers").isJsonNull() && !jsonObj.get("user_identifiers").isJsonArray()) {
         throw new IllegalArgumentException(String.format("Expected the field `user_identifiers` to be an array in the JSON string but got `%s`", jsonObj.get("user_identifiers").toString()));
       }
       if ((jsonObj.get("visibility") != null && !jsonObj.get("visibility").isJsonNull()) && !jsonObj.get("visibility").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `visibility` to be a primitive type in the JSON string but got `%s`", jsonObj.get("visibility").toString()));
       }
+      // validate the optional field `visibility`
+      if (jsonObj.get("visibility") != null && !jsonObj.get("visibility").isJsonNull()) {
+        VisibilityEnum.validateJsonElement(jsonObj.get("visibility"));
+      }
       // ensure the optional json data is an array if present
-      if (jsonObj.get("role_identifiers") != null && !jsonObj.get("role_identifiers").isJsonArray()) {
+      if (jsonObj.get("role_identifiers") != null && !jsonObj.get("role_identifiers").isJsonNull() && !jsonObj.get("role_identifiers").isJsonArray()) {
         throw new IllegalArgumentException(String.format("Expected the field `role_identifiers` to be an array in the JSON string but got `%s`", jsonObj.get("role_identifiers").toString()));
       }
       if ((jsonObj.get("operation") != null && !jsonObj.get("operation").isJsonNull()) && !jsonObj.get("operation").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `operation` to be a primitive type in the JSON string but got `%s`", jsonObj.get("operation").toString()));
+      }
+      // validate the optional field `operation`
+      if (jsonObj.get("operation") != null && !jsonObj.get("operation").isJsonNull()) {
+        OperationEnum.validateJsonElement(jsonObj.get("operation"));
       }
   }
 
@@ -773,31 +793,31 @@ public class UpdateUserGroupRequest {
 
            @Override
            public UpdateUserGroupRequest read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of UpdateUserGroupRequest given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of UpdateUserGroupRequest
-  * @throws IOException if the JSON string is invalid with respect to UpdateUserGroupRequest
-  */
+  /**
+   * Create an instance of UpdateUserGroupRequest given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of UpdateUserGroupRequest
+   * @throws IOException if the JSON string is invalid with respect to UpdateUserGroupRequest
+   */
   public static UpdateUserGroupRequest fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, UpdateUserGroupRequest.class);
   }
 
- /**
-  * Convert an instance of UpdateUserGroupRequest to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of UpdateUserGroupRequest to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

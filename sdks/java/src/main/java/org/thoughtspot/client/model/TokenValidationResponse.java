@@ -14,13 +14,13 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.util.Arrays;
 import org.thoughtspot.client.model.Scope;
 
 import com.google.gson.Gson;
@@ -38,12 +38,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -51,132 +49,127 @@ import org.thoughtspot.client.JSON;
 /**
  * TokenValidationResponse
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class TokenValidationResponse {
   public static final String SERIALIZED_NAME_CREATION_TIME_IN_MILLIS = "creation_time_in_millis";
   @SerializedName(SERIALIZED_NAME_CREATION_TIME_IN_MILLIS)
+  @javax.annotation.Nonnull
   private Float creationTimeInMillis;
 
   public static final String SERIALIZED_NAME_EXPIRATION_TIME_IN_MILLIS = "expiration_time_in_millis";
   @SerializedName(SERIALIZED_NAME_EXPIRATION_TIME_IN_MILLIS)
+  @javax.annotation.Nonnull
   private Float expirationTimeInMillis;
 
   public static final String SERIALIZED_NAME_SCOPE = "scope";
   @SerializedName(SERIALIZED_NAME_SCOPE)
+  @javax.annotation.Nonnull
   private Scope scope;
 
   public static final String SERIALIZED_NAME_VALID_FOR_USER_ID = "valid_for_user_id";
   @SerializedName(SERIALIZED_NAME_VALID_FOR_USER_ID)
+  @javax.annotation.Nonnull
   private String validForUserId;
 
   public static final String SERIALIZED_NAME_TOKEN_TYPE = "token_type";
   @SerializedName(SERIALIZED_NAME_TOKEN_TYPE)
+  @javax.annotation.Nonnull
   private String tokenType;
 
   public TokenValidationResponse() {
   }
 
-  public TokenValidationResponse creationTimeInMillis(Float creationTimeInMillis) {
-    
+  public TokenValidationResponse creationTimeInMillis(@javax.annotation.Nonnull Float creationTimeInMillis) {
     this.creationTimeInMillis = creationTimeInMillis;
     return this;
   }
 
-   /**
+  /**
    * Token creation time in milliseconds.
    * @return creationTimeInMillis
-  **/
+   */
   @javax.annotation.Nonnull
   public Float getCreationTimeInMillis() {
     return creationTimeInMillis;
   }
 
-
-  public void setCreationTimeInMillis(Float creationTimeInMillis) {
+  public void setCreationTimeInMillis(@javax.annotation.Nonnull Float creationTimeInMillis) {
     this.creationTimeInMillis = creationTimeInMillis;
   }
 
 
-  public TokenValidationResponse expirationTimeInMillis(Float expirationTimeInMillis) {
-    
+  public TokenValidationResponse expirationTimeInMillis(@javax.annotation.Nonnull Float expirationTimeInMillis) {
     this.expirationTimeInMillis = expirationTimeInMillis;
     return this;
   }
 
-   /**
+  /**
    * Token expiration time in milliseconds.
    * @return expirationTimeInMillis
-  **/
+   */
   @javax.annotation.Nonnull
   public Float getExpirationTimeInMillis() {
     return expirationTimeInMillis;
   }
 
-
-  public void setExpirationTimeInMillis(Float expirationTimeInMillis) {
+  public void setExpirationTimeInMillis(@javax.annotation.Nonnull Float expirationTimeInMillis) {
     this.expirationTimeInMillis = expirationTimeInMillis;
   }
 
 
-  public TokenValidationResponse scope(Scope scope) {
-    
+  public TokenValidationResponse scope(@javax.annotation.Nonnull Scope scope) {
     this.scope = scope;
     return this;
   }
 
-   /**
+  /**
    * Get scope
    * @return scope
-  **/
+   */
   @javax.annotation.Nonnull
   public Scope getScope() {
     return scope;
   }
 
-
-  public void setScope(Scope scope) {
+  public void setScope(@javax.annotation.Nonnull Scope scope) {
     this.scope = scope;
   }
 
 
-  public TokenValidationResponse validForUserId(String validForUserId) {
-    
+  public TokenValidationResponse validForUserId(@javax.annotation.Nonnull String validForUserId) {
     this.validForUserId = validForUserId;
     return this;
   }
 
-   /**
+  /**
    * Username to whom the token is issued.
    * @return validForUserId
-  **/
+   */
   @javax.annotation.Nonnull
   public String getValidForUserId() {
     return validForUserId;
   }
 
-
-  public void setValidForUserId(String validForUserId) {
+  public void setValidForUserId(@javax.annotation.Nonnull String validForUserId) {
     this.validForUserId = validForUserId;
   }
 
 
-  public TokenValidationResponse tokenType(String tokenType) {
-    
+  public TokenValidationResponse tokenType(@javax.annotation.Nonnull String tokenType) {
     this.tokenType = tokenType;
     return this;
   }
 
-   /**
+  /**
    * Type of token.
    * @return tokenType
-  **/
+   */
   @javax.annotation.Nonnull
   public String getTokenType() {
     return tokenType;
   }
 
-
-  public void setTokenType(String tokenType) {
+  public void setTokenType(@javax.annotation.Nonnull String tokenType) {
     this.tokenType = tokenType;
   }
 
@@ -249,35 +242,36 @@ public class TokenValidationResponse {
     openapiRequiredFields.add("token_type");
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to TokenValidationResponse
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!TokenValidationResponse.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to TokenValidationResponse
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!TokenValidationResponse.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in TokenValidationResponse is not found in the empty JSON string", TokenValidationResponse.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!TokenValidationResponse.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `TokenValidationResponse` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `TokenValidationResponse` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
       for (String requiredField : TokenValidationResponse.openapiRequiredFields) {
-        if (jsonObj.get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       // validate the required field `scope`
-      Scope.validateJsonObject(jsonObj.getAsJsonObject("scope"));
+      Scope.validateJsonElement(jsonObj.get("scope"));
       if (!jsonObj.get("valid_for_user_id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `valid_for_user_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("valid_for_user_id").toString()));
       }
@@ -306,31 +300,31 @@ public class TokenValidationResponse {
 
            @Override
            public TokenValidationResponse read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of TokenValidationResponse given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of TokenValidationResponse
-  * @throws IOException if the JSON string is invalid with respect to TokenValidationResponse
-  */
+  /**
+   * Create an instance of TokenValidationResponse given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of TokenValidationResponse
+   * @throws IOException if the JSON string is invalid with respect to TokenValidationResponse
+   */
   public static TokenValidationResponse fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, TokenValidationResponse.class);
   }
 
- /**
-  * Convert an instance of TokenValidationResponse to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of TokenValidationResponse to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

@@ -14,13 +14,13 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.util.Arrays;
 import org.thoughtspot.client.model.ActionConfig;
 
 import com.google.gson.Gson;
@@ -38,12 +38,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -51,82 +49,79 @@ import org.thoughtspot.client.JSON;
 /**
  * MetadataAssociationItem
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class MetadataAssociationItem {
   public static final String SERIALIZED_NAME_ACTION_CONFIG = "action_config";
   @SerializedName(SERIALIZED_NAME_ACTION_CONFIG)
+  @javax.annotation.Nonnull
   private ActionConfig actionConfig;
 
   public static final String SERIALIZED_NAME_IDENTIFIER = "identifier";
   @SerializedName(SERIALIZED_NAME_IDENTIFIER)
+  @javax.annotation.Nonnull
   private String identifier;
 
   public static final String SERIALIZED_NAME_TYPE = "type";
   @SerializedName(SERIALIZED_NAME_TYPE)
+  @javax.annotation.Nonnull
   private String type;
 
   public MetadataAssociationItem() {
   }
 
-  public MetadataAssociationItem actionConfig(ActionConfig actionConfig) {
-    
+  public MetadataAssociationItem actionConfig(@javax.annotation.Nonnull ActionConfig actionConfig) {
     this.actionConfig = actionConfig;
     return this;
   }
 
-   /**
+  /**
    * Get actionConfig
    * @return actionConfig
-  **/
+   */
   @javax.annotation.Nonnull
   public ActionConfig getActionConfig() {
     return actionConfig;
   }
 
-
-  public void setActionConfig(ActionConfig actionConfig) {
+  public void setActionConfig(@javax.annotation.Nonnull ActionConfig actionConfig) {
     this.actionConfig = actionConfig;
   }
 
 
-  public MetadataAssociationItem identifier(String identifier) {
-    
+  public MetadataAssociationItem identifier(@javax.annotation.Nonnull String identifier) {
     this.identifier = identifier;
     return this;
   }
 
-   /**
+  /**
    * Unique ID or name of the metadata.
    * @return identifier
-  **/
+   */
   @javax.annotation.Nonnull
   public String getIdentifier() {
     return identifier;
   }
 
-
-  public void setIdentifier(String identifier) {
+  public void setIdentifier(@javax.annotation.Nonnull String identifier) {
     this.identifier = identifier;
   }
 
 
-  public MetadataAssociationItem type(String type) {
-    
+  public MetadataAssociationItem type(@javax.annotation.Nonnull String type) {
     this.type = type;
     return this;
   }
 
-   /**
+  /**
    *   Type of metadata.     Required if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.
    * @return type
-  **/
+   */
   @javax.annotation.Nonnull
   public String getType() {
     return type;
   }
 
-
-  public void setType(String type) {
+  public void setType(@javax.annotation.Nonnull String type) {
     this.type = type;
   }
 
@@ -191,35 +186,36 @@ public class MetadataAssociationItem {
     openapiRequiredFields.add("type");
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to MetadataAssociationItem
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!MetadataAssociationItem.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to MetadataAssociationItem
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!MetadataAssociationItem.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in MetadataAssociationItem is not found in the empty JSON string", MetadataAssociationItem.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!MetadataAssociationItem.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `MetadataAssociationItem` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `MetadataAssociationItem` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
       for (String requiredField : MetadataAssociationItem.openapiRequiredFields) {
-        if (jsonObj.get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       // validate the required field `action_config`
-      ActionConfig.validateJsonObject(jsonObj.getAsJsonObject("action_config"));
+      ActionConfig.validateJsonElement(jsonObj.get("action_config"));
       if (!jsonObj.get("identifier").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `identifier` to be a primitive type in the JSON string but got `%s`", jsonObj.get("identifier").toString()));
       }
@@ -248,31 +244,31 @@ public class MetadataAssociationItem {
 
            @Override
            public MetadataAssociationItem read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of MetadataAssociationItem given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of MetadataAssociationItem
-  * @throws IOException if the JSON string is invalid with respect to MetadataAssociationItem
-  */
+  /**
+   * Create an instance of MetadataAssociationItem given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of MetadataAssociationItem
+   * @throws IOException if the JSON string is invalid with respect to MetadataAssociationItem
+   */
   public static MetadataAssociationItem fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, MetadataAssociationItem.class);
   }
 
- /**
-  * Convert an instance of MetadataAssociationItem to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of MetadataAssociationItem to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

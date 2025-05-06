@@ -14,13 +14,13 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.util.Arrays;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
@@ -38,12 +38,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -51,157 +49,151 @@ import org.thoughtspot.client.JSON;
 /**
  * Column
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class Column {
   public static final String SERIALIZED_NAME_NAME = "name";
   @SerializedName(SERIALIZED_NAME_NAME)
+  @javax.annotation.Nonnull
   private String name;
 
   public static final String SERIALIZED_NAME_DATA_TYPE = "data_type";
   @SerializedName(SERIALIZED_NAME_DATA_TYPE)
+  @javax.annotation.Nonnull
   private String dataType;
 
   public static final String SERIALIZED_NAME_IS_AGGREGATE = "is_aggregate";
   @SerializedName(SERIALIZED_NAME_IS_AGGREGATE)
+  @javax.annotation.Nullable
   private String isAggregate;
 
   public static final String SERIALIZED_NAME_CAN_IMPORT = "can_import";
   @SerializedName(SERIALIZED_NAME_CAN_IMPORT)
+  @javax.annotation.Nullable
   private Boolean canImport;
 
   public static final String SERIALIZED_NAME_SELECTED = "selected";
   @SerializedName(SERIALIZED_NAME_SELECTED)
+  @javax.annotation.Nullable
   private Boolean selected;
 
   public static final String SERIALIZED_NAME_IS_LINKED_ACTIVE = "is_linked_active";
   @SerializedName(SERIALIZED_NAME_IS_LINKED_ACTIVE)
+  @javax.annotation.Nullable
   private Boolean isLinkedActive;
 
   public Column() {
   }
 
-  public Column name(String name) {
-    
+  public Column name(@javax.annotation.Nonnull String name) {
     this.name = name;
     return this;
   }
 
-   /**
+  /**
    * Name of the column
    * @return name
-  **/
+   */
   @javax.annotation.Nonnull
   public String getName() {
     return name;
   }
 
-
-  public void setName(String name) {
+  public void setName(@javax.annotation.Nonnull String name) {
     this.name = name;
   }
 
 
-  public Column dataType(String dataType) {
-    
+  public Column dataType(@javax.annotation.Nonnull String dataType) {
     this.dataType = dataType;
     return this;
   }
 
-   /**
+  /**
    * Data type of the column
    * @return dataType
-  **/
+   */
   @javax.annotation.Nonnull
   public String getDataType() {
     return dataType;
   }
 
-
-  public void setDataType(String dataType) {
+  public void setDataType(@javax.annotation.Nonnull String dataType) {
     this.dataType = dataType;
   }
 
 
-  public Column isAggregate(String isAggregate) {
-    
+  public Column isAggregate(@javax.annotation.Nullable String isAggregate) {
     this.isAggregate = isAggregate;
     return this;
   }
 
-   /**
+  /**
    * Determines if the column schema is an aggregate
    * @return isAggregate
-  **/
+   */
   @javax.annotation.Nullable
   public String getIsAggregate() {
     return isAggregate;
   }
 
-
-  public void setIsAggregate(String isAggregate) {
+  public void setIsAggregate(@javax.annotation.Nullable String isAggregate) {
     this.isAggregate = isAggregate;
   }
 
 
-  public Column canImport(Boolean canImport) {
-    
+  public Column canImport(@javax.annotation.Nullable Boolean canImport) {
     this.canImport = canImport;
     return this;
   }
 
-   /**
+  /**
    * Determines if the column schema can be imported
    * @return canImport
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getCanImport() {
     return canImport;
   }
 
-
-  public void setCanImport(Boolean canImport) {
+  public void setCanImport(@javax.annotation.Nullable Boolean canImport) {
     this.canImport = canImport;
   }
 
 
-  public Column selected(Boolean selected) {
-    
+  public Column selected(@javax.annotation.Nullable Boolean selected) {
     this.selected = selected;
     return this;
   }
 
-   /**
+  /**
    * Determines if the table is selected
    * @return selected
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getSelected() {
     return selected;
   }
 
-
-  public void setSelected(Boolean selected) {
+  public void setSelected(@javax.annotation.Nullable Boolean selected) {
     this.selected = selected;
   }
 
 
-  public Column isLinkedActive(Boolean isLinkedActive) {
-    
+  public Column isLinkedActive(@javax.annotation.Nullable Boolean isLinkedActive) {
     this.isLinkedActive = isLinkedActive;
     return this;
   }
 
-   /**
+  /**
    * Determines if the table is linked
    * @return isLinkedActive
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getIsLinkedActive() {
     return isLinkedActive;
   }
 
-
-  public void setIsLinkedActive(Boolean isLinkedActive) {
+  public void setIsLinkedActive(@javax.annotation.Nullable Boolean isLinkedActive) {
     this.isLinkedActive = isLinkedActive;
   }
 
@@ -285,33 +277,34 @@ public class Column {
     openapiRequiredFields.add("data_type");
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to Column
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!Column.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to Column
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!Column.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in Column is not found in the empty JSON string", Column.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!Column.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `Column` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `Column` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
       for (String requiredField : Column.openapiRequiredFields) {
-        if (jsonObj.get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       if (!jsonObj.get("name").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("name").toString()));
       }
@@ -343,31 +336,31 @@ public class Column {
 
            @Override
            public Column read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of Column given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of Column
-  * @throws IOException if the JSON string is invalid with respect to Column
-  */
+  /**
+   * Create an instance of Column given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of Column
+   * @throws IOException if the JSON string is invalid with respect to Column
+   */
   public static Column fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, Column.class);
   }
 
- /**
-  * Convert an instance of Column to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of Column to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

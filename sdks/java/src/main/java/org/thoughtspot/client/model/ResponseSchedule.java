@@ -14,7 +14,6 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -22,6 +21,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
 import org.thoughtspot.client.model.Author;
@@ -47,12 +47,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -60,342 +58,329 @@ import org.thoughtspot.client.JSON;
 /**
  * ResponseSchedule
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class ResponseSchedule {
   public static final String SERIALIZED_NAME_AUTHOR = "author";
   @SerializedName(SERIALIZED_NAME_AUTHOR)
+  @javax.annotation.Nonnull
   private Author author;
 
   public static final String SERIALIZED_NAME_CREATION_TIME_IN_MILLIS = "creation_time_in_millis";
   @SerializedName(SERIALIZED_NAME_CREATION_TIME_IN_MILLIS)
+  @javax.annotation.Nonnull
   private Object creationTimeInMillis;
 
   public static final String SERIALIZED_NAME_DESCRIPTION = "description";
   @SerializedName(SERIALIZED_NAME_DESCRIPTION)
+  @javax.annotation.Nullable
   private String description;
 
   public static final String SERIALIZED_NAME_FILE_FORMAT = "file_format";
   @SerializedName(SERIALIZED_NAME_FILE_FORMAT)
+  @javax.annotation.Nonnull
   private String fileFormat;
 
   public static final String SERIALIZED_NAME_FREQUENCY = "frequency";
   @SerializedName(SERIALIZED_NAME_FREQUENCY)
+  @javax.annotation.Nonnull
   private Frequency frequency;
 
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
+  @javax.annotation.Nonnull
   private String id;
 
   public static final String SERIALIZED_NAME_LIVEBOARD_OPTIONS = "liveboard_options";
   @SerializedName(SERIALIZED_NAME_LIVEBOARD_OPTIONS)
+  @javax.annotation.Nullable
   private LiveboardOptions liveboardOptions;
 
   public static final String SERIALIZED_NAME_METADATA = "metadata";
   @SerializedName(SERIALIZED_NAME_METADATA)
+  @javax.annotation.Nonnull
   private MetadataResponse metadata;
 
   public static final String SERIALIZED_NAME_NAME = "name";
   @SerializedName(SERIALIZED_NAME_NAME)
+  @javax.annotation.Nonnull
   private String name;
 
   public static final String SERIALIZED_NAME_PDF_OPTIONS = "pdf_options";
   @SerializedName(SERIALIZED_NAME_PDF_OPTIONS)
+  @javax.annotation.Nullable
   private PdfOptions pdfOptions;
 
   public static final String SERIALIZED_NAME_RECIPIENT_DETAILS = "recipient_details";
   @SerializedName(SERIALIZED_NAME_RECIPIENT_DETAILS)
+  @javax.annotation.Nonnull
   private RecipientDetails recipientDetails;
 
   public static final String SERIALIZED_NAME_STATUS = "status";
   @SerializedName(SERIALIZED_NAME_STATUS)
+  @javax.annotation.Nullable
   private String status;
 
   public static final String SERIALIZED_NAME_TIME_ZONE = "time_zone";
   @SerializedName(SERIALIZED_NAME_TIME_ZONE)
+  @javax.annotation.Nonnull
   private String timeZone;
 
   public static final String SERIALIZED_NAME_HISTORY_RUNS = "history_runs";
   @SerializedName(SERIALIZED_NAME_HISTORY_RUNS)
+  @javax.annotation.Nullable
   private List<ResponseScheduleRun> historyRuns;
 
   public ResponseSchedule() {
   }
 
-  public ResponseSchedule author(Author author) {
-    
+  public ResponseSchedule author(@javax.annotation.Nonnull Author author) {
     this.author = author;
     return this;
   }
 
-   /**
+  /**
    * Get author
    * @return author
-  **/
+   */
   @javax.annotation.Nonnull
   public Author getAuthor() {
     return author;
   }
 
-
-  public void setAuthor(Author author) {
+  public void setAuthor(@javax.annotation.Nonnull Author author) {
     this.author = author;
   }
 
 
-  public ResponseSchedule creationTimeInMillis(Object creationTimeInMillis) {
-    
+  public ResponseSchedule creationTimeInMillis(@javax.annotation.Nonnull Object creationTimeInMillis) {
     this.creationTimeInMillis = creationTimeInMillis;
     return this;
   }
 
-   /**
+  /**
    * Schedule creation time in milliseconds.
    * @return creationTimeInMillis
-  **/
+   */
   @javax.annotation.Nonnull
   public Object getCreationTimeInMillis() {
     return creationTimeInMillis;
   }
 
-
-  public void setCreationTimeInMillis(Object creationTimeInMillis) {
+  public void setCreationTimeInMillis(@javax.annotation.Nonnull Object creationTimeInMillis) {
     this.creationTimeInMillis = creationTimeInMillis;
   }
 
 
-  public ResponseSchedule description(String description) {
-    
+  public ResponseSchedule description(@javax.annotation.Nullable String description) {
     this.description = description;
     return this;
   }
 
-   /**
+  /**
    * Description of the job.
    * @return description
-  **/
+   */
   @javax.annotation.Nullable
   public String getDescription() {
     return description;
   }
 
-
-  public void setDescription(String description) {
+  public void setDescription(@javax.annotation.Nullable String description) {
     this.description = description;
   }
 
 
-  public ResponseSchedule fileFormat(String fileFormat) {
-    
+  public ResponseSchedule fileFormat(@javax.annotation.Nonnull String fileFormat) {
     this.fileFormat = fileFormat;
     return this;
   }
 
-   /**
+  /**
    * Export file format.
    * @return fileFormat
-  **/
+   */
   @javax.annotation.Nonnull
   public String getFileFormat() {
     return fileFormat;
   }
 
-
-  public void setFileFormat(String fileFormat) {
+  public void setFileFormat(@javax.annotation.Nonnull String fileFormat) {
     this.fileFormat = fileFormat;
   }
 
 
-  public ResponseSchedule frequency(Frequency frequency) {
-    
+  public ResponseSchedule frequency(@javax.annotation.Nonnull Frequency frequency) {
     this.frequency = frequency;
     return this;
   }
 
-   /**
+  /**
    * Get frequency
    * @return frequency
-  **/
+   */
   @javax.annotation.Nonnull
   public Frequency getFrequency() {
     return frequency;
   }
 
-
-  public void setFrequency(Frequency frequency) {
+  public void setFrequency(@javax.annotation.Nonnull Frequency frequency) {
     this.frequency = frequency;
   }
 
 
-  public ResponseSchedule id(String id) {
-    
+  public ResponseSchedule id(@javax.annotation.Nonnull String id) {
     this.id = id;
     return this;
   }
 
-   /**
+  /**
    * GUID of the scheduled job.
    * @return id
-  **/
+   */
   @javax.annotation.Nonnull
   public String getId() {
     return id;
   }
 
-
-  public void setId(String id) {
+  public void setId(@javax.annotation.Nonnull String id) {
     this.id = id;
   }
 
 
-  public ResponseSchedule liveboardOptions(LiveboardOptions liveboardOptions) {
-    
+  public ResponseSchedule liveboardOptions(@javax.annotation.Nullable LiveboardOptions liveboardOptions) {
     this.liveboardOptions = liveboardOptions;
     return this;
   }
 
-   /**
+  /**
    * Get liveboardOptions
    * @return liveboardOptions
-  **/
+   */
   @javax.annotation.Nullable
   public LiveboardOptions getLiveboardOptions() {
     return liveboardOptions;
   }
 
-
-  public void setLiveboardOptions(LiveboardOptions liveboardOptions) {
+  public void setLiveboardOptions(@javax.annotation.Nullable LiveboardOptions liveboardOptions) {
     this.liveboardOptions = liveboardOptions;
   }
 
 
-  public ResponseSchedule metadata(MetadataResponse metadata) {
-    
+  public ResponseSchedule metadata(@javax.annotation.Nonnull MetadataResponse metadata) {
     this.metadata = metadata;
     return this;
   }
 
-   /**
+  /**
    * Get metadata
    * @return metadata
-  **/
+   */
   @javax.annotation.Nonnull
   public MetadataResponse getMetadata() {
     return metadata;
   }
 
-
-  public void setMetadata(MetadataResponse metadata) {
+  public void setMetadata(@javax.annotation.Nonnull MetadataResponse metadata) {
     this.metadata = metadata;
   }
 
 
-  public ResponseSchedule name(String name) {
-    
+  public ResponseSchedule name(@javax.annotation.Nonnull String name) {
     this.name = name;
     return this;
   }
 
-   /**
+  /**
    * Name of the scheduled job.
    * @return name
-  **/
+   */
   @javax.annotation.Nonnull
   public String getName() {
     return name;
   }
 
-
-  public void setName(String name) {
+  public void setName(@javax.annotation.Nonnull String name) {
     this.name = name;
   }
 
 
-  public ResponseSchedule pdfOptions(PdfOptions pdfOptions) {
-    
+  public ResponseSchedule pdfOptions(@javax.annotation.Nullable PdfOptions pdfOptions) {
     this.pdfOptions = pdfOptions;
     return this;
   }
 
-   /**
+  /**
    * Get pdfOptions
    * @return pdfOptions
-  **/
+   */
   @javax.annotation.Nullable
   public PdfOptions getPdfOptions() {
     return pdfOptions;
   }
 
-
-  public void setPdfOptions(PdfOptions pdfOptions) {
+  public void setPdfOptions(@javax.annotation.Nullable PdfOptions pdfOptions) {
     this.pdfOptions = pdfOptions;
   }
 
 
-  public ResponseSchedule recipientDetails(RecipientDetails recipientDetails) {
-    
+  public ResponseSchedule recipientDetails(@javax.annotation.Nonnull RecipientDetails recipientDetails) {
     this.recipientDetails = recipientDetails;
     return this;
   }
 
-   /**
+  /**
    * Get recipientDetails
    * @return recipientDetails
-  **/
+   */
   @javax.annotation.Nonnull
   public RecipientDetails getRecipientDetails() {
     return recipientDetails;
   }
 
-
-  public void setRecipientDetails(RecipientDetails recipientDetails) {
+  public void setRecipientDetails(@javax.annotation.Nonnull RecipientDetails recipientDetails) {
     this.recipientDetails = recipientDetails;
   }
 
 
-  public ResponseSchedule status(String status) {
-    
+  public ResponseSchedule status(@javax.annotation.Nullable String status) {
     this.status = status;
     return this;
   }
 
-   /**
+  /**
    * Status of the job
    * @return status
-  **/
+   */
   @javax.annotation.Nullable
   public String getStatus() {
     return status;
   }
 
-
-  public void setStatus(String status) {
+  public void setStatus(@javax.annotation.Nullable String status) {
     this.status = status;
   }
 
 
-  public ResponseSchedule timeZone(String timeZone) {
-    
+  public ResponseSchedule timeZone(@javax.annotation.Nonnull String timeZone) {
     this.timeZone = timeZone;
     return this;
   }
 
-   /**
+  /**
    * Time zone
    * @return timeZone
-  **/
+   */
   @javax.annotation.Nonnull
   public String getTimeZone() {
     return timeZone;
   }
 
-
-  public void setTimeZone(String timeZone) {
+  public void setTimeZone(@javax.annotation.Nonnull String timeZone) {
     this.timeZone = timeZone;
   }
 
 
-  public ResponseSchedule historyRuns(List<ResponseScheduleRun> historyRuns) {
-    
+  public ResponseSchedule historyRuns(@javax.annotation.Nullable List<ResponseScheduleRun> historyRuns) {
     this.historyRuns = historyRuns;
     return this;
   }
@@ -408,17 +393,16 @@ public class ResponseSchedule {
     return this;
   }
 
-   /**
+  /**
    * Schedule runs history records.
    * @return historyRuns
-  **/
+   */
   @javax.annotation.Nullable
   public List<ResponseScheduleRun> getHistoryRuns() {
     return historyRuns;
   }
 
-
-  public void setHistoryRuns(List<ResponseScheduleRun> historyRuns) {
+  public void setHistoryRuns(@javax.annotation.Nullable List<ResponseScheduleRun> historyRuns) {
     this.historyRuns = historyRuns;
   }
 
@@ -533,35 +517,36 @@ public class ResponseSchedule {
     openapiRequiredFields.add("time_zone");
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to ResponseSchedule
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!ResponseSchedule.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to ResponseSchedule
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!ResponseSchedule.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in ResponseSchedule is not found in the empty JSON string", ResponseSchedule.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!ResponseSchedule.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `ResponseSchedule` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `ResponseSchedule` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
       for (String requiredField : ResponseSchedule.openapiRequiredFields) {
-        if (jsonObj.get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       // validate the required field `author`
-      Author.validateJsonObject(jsonObj.getAsJsonObject("author"));
+      Author.validateJsonElement(jsonObj.get("author"));
       if ((jsonObj.get("description") != null && !jsonObj.get("description").isJsonNull()) && !jsonObj.get("description").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `description` to be a primitive type in the JSON string but got `%s`", jsonObj.get("description").toString()));
       }
@@ -569,25 +554,25 @@ public class ResponseSchedule {
         throw new IllegalArgumentException(String.format("Expected the field `file_format` to be a primitive type in the JSON string but got `%s`", jsonObj.get("file_format").toString()));
       }
       // validate the required field `frequency`
-      Frequency.validateJsonObject(jsonObj.getAsJsonObject("frequency"));
+      Frequency.validateJsonElement(jsonObj.get("frequency"));
       if (!jsonObj.get("id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("id").toString()));
       }
       // validate the optional field `liveboard_options`
       if (jsonObj.get("liveboard_options") != null && !jsonObj.get("liveboard_options").isJsonNull()) {
-        LiveboardOptions.validateJsonObject(jsonObj.getAsJsonObject("liveboard_options"));
+        LiveboardOptions.validateJsonElement(jsonObj.get("liveboard_options"));
       }
       // validate the required field `metadata`
-      MetadataResponse.validateJsonObject(jsonObj.getAsJsonObject("metadata"));
+      MetadataResponse.validateJsonElement(jsonObj.get("metadata"));
       if (!jsonObj.get("name").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("name").toString()));
       }
       // validate the optional field `pdf_options`
       if (jsonObj.get("pdf_options") != null && !jsonObj.get("pdf_options").isJsonNull()) {
-        PdfOptions.validateJsonObject(jsonObj.getAsJsonObject("pdf_options"));
+        PdfOptions.validateJsonElement(jsonObj.get("pdf_options"));
       }
       // validate the required field `recipient_details`
-      RecipientDetails.validateJsonObject(jsonObj.getAsJsonObject("recipient_details"));
+      RecipientDetails.validateJsonElement(jsonObj.get("recipient_details"));
       if ((jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull()) && !jsonObj.get("status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("status").toString()));
       }
@@ -604,7 +589,7 @@ public class ResponseSchedule {
 
           // validate the optional field `history_runs` (array)
           for (int i = 0; i < jsonArrayhistoryRuns.size(); i++) {
-            ResponseScheduleRun.validateJsonObject(jsonArrayhistoryRuns.get(i).getAsJsonObject());
+            ResponseScheduleRun.validateJsonElement(jsonArrayhistoryRuns.get(i));
           };
         }
       }
@@ -630,31 +615,31 @@ public class ResponseSchedule {
 
            @Override
            public ResponseSchedule read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of ResponseSchedule given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of ResponseSchedule
-  * @throws IOException if the JSON string is invalid with respect to ResponseSchedule
-  */
+  /**
+   * Create an instance of ResponseSchedule given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of ResponseSchedule
+   * @throws IOException if the JSON string is invalid with respect to ResponseSchedule
+   */
   public static ResponseSchedule fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, ResponseSchedule.class);
   }
 
- /**
-  * Convert an instance of ResponseSchedule to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of ResponseSchedule to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

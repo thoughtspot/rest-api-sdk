@@ -19,12 +19,12 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.util.Arrays;
 import org.thoughtspot.client.model.RuntimeFilter;
 import org.thoughtspot.client.model.RuntimeParamOverride;
 import org.thoughtspot.client.model.RuntimeSort;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-
 
 /**
  * Model tests for JWTUserOptionsParametersInner

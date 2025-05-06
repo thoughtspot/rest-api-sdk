@@ -14,7 +14,6 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -22,6 +21,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -38,12 +38,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -51,18 +49,21 @@ import org.thoughtspot.client.JSON;
 /**
  * UpdateDbtConnectionRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class UpdateDbtConnectionRequest {
   public static final String SERIALIZED_NAME_DBT_CONNECTION_IDENTIFIER = "dbt_connection_identifier";
   @SerializedName(SERIALIZED_NAME_DBT_CONNECTION_IDENTIFIER)
+  @javax.annotation.Nonnull
   private String dbtConnectionIdentifier;
 
   public static final String SERIALIZED_NAME_CONNECTION_NAME = "connection_name";
   @SerializedName(SERIALIZED_NAME_CONNECTION_NAME)
+  @javax.annotation.Nullable
   private String connectionName;
 
   public static final String SERIALIZED_NAME_DATABASE_NAME = "database_name";
   @SerializedName(SERIALIZED_NAME_DATABASE_NAME)
+  @javax.annotation.Nullable
   private String databaseName;
 
   /**
@@ -110,270 +111,261 @@ public class UpdateDbtConnectionRequest {
         return ImportTypeEnum.fromValue(value);
       }
     }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      ImportTypeEnum.fromValue(value);
+    }
   }
 
   public static final String SERIALIZED_NAME_IMPORT_TYPE = "import_type";
   @SerializedName(SERIALIZED_NAME_IMPORT_TYPE)
+  @javax.annotation.Nullable
   private ImportTypeEnum importType = ImportTypeEnum.DBT_CLOUD;
 
   public static final String SERIALIZED_NAME_ACCESS_TOKEN = "access_token";
   @SerializedName(SERIALIZED_NAME_ACCESS_TOKEN)
+  @javax.annotation.Nullable
   private String accessToken;
 
   public static final String SERIALIZED_NAME_DBT_URL = "dbt_url";
   @SerializedName(SERIALIZED_NAME_DBT_URL)
+  @javax.annotation.Nullable
   private String dbtUrl;
 
   public static final String SERIALIZED_NAME_ACCOUNT_ID = "account_id";
   @SerializedName(SERIALIZED_NAME_ACCOUNT_ID)
+  @javax.annotation.Nullable
   private String accountId;
 
   public static final String SERIALIZED_NAME_PROJECT_ID = "project_id";
   @SerializedName(SERIALIZED_NAME_PROJECT_ID)
+  @javax.annotation.Nullable
   private String projectId;
 
   public static final String SERIALIZED_NAME_DBT_ENV_ID = "dbt_env_id";
   @SerializedName(SERIALIZED_NAME_DBT_ENV_ID)
+  @javax.annotation.Nullable
   private String dbtEnvId;
 
   public static final String SERIALIZED_NAME_PROJECT_NAME = "project_name";
   @SerializedName(SERIALIZED_NAME_PROJECT_NAME)
+  @javax.annotation.Nullable
   private String projectName;
 
   public static final String SERIALIZED_NAME_FILE_CONTENT = "file_content";
   @SerializedName(SERIALIZED_NAME_FILE_CONTENT)
+  @javax.annotation.Nullable
   private File fileContent;
 
   public UpdateDbtConnectionRequest() {
   }
 
-  public UpdateDbtConnectionRequest dbtConnectionIdentifier(String dbtConnectionIdentifier) {
-    
+  public UpdateDbtConnectionRequest dbtConnectionIdentifier(@javax.annotation.Nonnull String dbtConnectionIdentifier) {
     this.dbtConnectionIdentifier = dbtConnectionIdentifier;
     return this;
   }
 
-   /**
+  /**
    * Unique ID of the DBT Connection.
    * @return dbtConnectionIdentifier
-  **/
+   */
   @javax.annotation.Nonnull
   public String getDbtConnectionIdentifier() {
     return dbtConnectionIdentifier;
   }
 
-
-  public void setDbtConnectionIdentifier(String dbtConnectionIdentifier) {
+  public void setDbtConnectionIdentifier(@javax.annotation.Nonnull String dbtConnectionIdentifier) {
     this.dbtConnectionIdentifier = dbtConnectionIdentifier;
   }
 
 
-  public UpdateDbtConnectionRequest connectionName(String connectionName) {
-    
+  public UpdateDbtConnectionRequest connectionName(@javax.annotation.Nullable String connectionName) {
     this.connectionName = connectionName;
     return this;
   }
 
-   /**
+  /**
    * Name of the connection.
    * @return connectionName
-  **/
+   */
   @javax.annotation.Nullable
   public String getConnectionName() {
     return connectionName;
   }
 
-
-  public void setConnectionName(String connectionName) {
+  public void setConnectionName(@javax.annotation.Nullable String connectionName) {
     this.connectionName = connectionName;
   }
 
 
-  public UpdateDbtConnectionRequest databaseName(String databaseName) {
-    
+  public UpdateDbtConnectionRequest databaseName(@javax.annotation.Nullable String databaseName) {
     this.databaseName = databaseName;
     return this;
   }
 
-   /**
+  /**
    * Name of the Database.
    * @return databaseName
-  **/
+   */
   @javax.annotation.Nullable
   public String getDatabaseName() {
     return databaseName;
   }
 
-
-  public void setDatabaseName(String databaseName) {
+  public void setDatabaseName(@javax.annotation.Nullable String databaseName) {
     this.databaseName = databaseName;
   }
 
 
-  public UpdateDbtConnectionRequest importType(ImportTypeEnum importType) {
-    
+  public UpdateDbtConnectionRequest importType(@javax.annotation.Nullable ImportTypeEnum importType) {
     this.importType = importType;
     return this;
   }
 
-   /**
+  /**
    * Mention type of Import
    * @return importType
-  **/
+   */
   @javax.annotation.Nullable
   public ImportTypeEnum getImportType() {
     return importType;
   }
 
-
-  public void setImportType(ImportTypeEnum importType) {
+  public void setImportType(@javax.annotation.Nullable ImportTypeEnum importType) {
     this.importType = importType;
   }
 
 
-  public UpdateDbtConnectionRequest accessToken(String accessToken) {
-    
+  public UpdateDbtConnectionRequest accessToken(@javax.annotation.Nullable String accessToken) {
     this.accessToken = accessToken;
     return this;
   }
 
-   /**
+  /**
    * Access token is mandatory when Import_Type is DBT_CLOUD.
    * @return accessToken
-  **/
+   */
   @javax.annotation.Nullable
   public String getAccessToken() {
     return accessToken;
   }
 
-
-  public void setAccessToken(String accessToken) {
+  public void setAccessToken(@javax.annotation.Nullable String accessToken) {
     this.accessToken = accessToken;
   }
 
 
-  public UpdateDbtConnectionRequest dbtUrl(String dbtUrl) {
-    
+  public UpdateDbtConnectionRequest dbtUrl(@javax.annotation.Nullable String dbtUrl) {
     this.dbtUrl = dbtUrl;
     return this;
   }
 
-   /**
+  /**
    * DBT URL is mandatory when Import_Type is DBT_CLOUD.
    * @return dbtUrl
-  **/
+   */
   @javax.annotation.Nullable
   public String getDbtUrl() {
     return dbtUrl;
   }
 
-
-  public void setDbtUrl(String dbtUrl) {
+  public void setDbtUrl(@javax.annotation.Nullable String dbtUrl) {
     this.dbtUrl = dbtUrl;
   }
 
 
-  public UpdateDbtConnectionRequest accountId(String accountId) {
-    
+  public UpdateDbtConnectionRequest accountId(@javax.annotation.Nullable String accountId) {
     this.accountId = accountId;
     return this;
   }
 
-   /**
+  /**
    * Account ID is mandatory when Import_Type is DBT_CLOUD
    * @return accountId
-  **/
+   */
   @javax.annotation.Nullable
   public String getAccountId() {
     return accountId;
   }
 
-
-  public void setAccountId(String accountId) {
+  public void setAccountId(@javax.annotation.Nullable String accountId) {
     this.accountId = accountId;
   }
 
 
-  public UpdateDbtConnectionRequest projectId(String projectId) {
-    
+  public UpdateDbtConnectionRequest projectId(@javax.annotation.Nullable String projectId) {
     this.projectId = projectId;
     return this;
   }
 
-   /**
+  /**
    * Project ID is mandatory when Import_Type is DBT_CLOUD
    * @return projectId
-  **/
+   */
   @javax.annotation.Nullable
   public String getProjectId() {
     return projectId;
   }
 
-
-  public void setProjectId(String projectId) {
+  public void setProjectId(@javax.annotation.Nullable String projectId) {
     this.projectId = projectId;
   }
 
 
-  public UpdateDbtConnectionRequest dbtEnvId(String dbtEnvId) {
-    
+  public UpdateDbtConnectionRequest dbtEnvId(@javax.annotation.Nullable String dbtEnvId) {
     this.dbtEnvId = dbtEnvId;
     return this;
   }
 
-   /**
+  /**
    * DBT Environment ID\&quot;
    * @return dbtEnvId
-  **/
+   */
   @javax.annotation.Nullable
   public String getDbtEnvId() {
     return dbtEnvId;
   }
 
-
-  public void setDbtEnvId(String dbtEnvId) {
+  public void setDbtEnvId(@javax.annotation.Nullable String dbtEnvId) {
     this.dbtEnvId = dbtEnvId;
   }
 
 
-  public UpdateDbtConnectionRequest projectName(String projectName) {
-    
+  public UpdateDbtConnectionRequest projectName(@javax.annotation.Nullable String projectName) {
     this.projectName = projectName;
     return this;
   }
 
-   /**
+  /**
    * Name of the project
    * @return projectName
-  **/
+   */
   @javax.annotation.Nullable
   public String getProjectName() {
     return projectName;
   }
 
-
-  public void setProjectName(String projectName) {
+  public void setProjectName(@javax.annotation.Nullable String projectName) {
     this.projectName = projectName;
   }
 
 
-  public UpdateDbtConnectionRequest fileContent(File fileContent) {
-    
+  public UpdateDbtConnectionRequest fileContent(@javax.annotation.Nullable File fileContent) {
     this.fileContent = fileContent;
     return this;
   }
 
-   /**
+  /**
    * Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is Mandatory when Import Type is &#39;ZIP_FILE&#39;
    * @return fileContent
-  **/
+   */
   @javax.annotation.Nullable
   public File getFileContent() {
     return fileContent;
   }
 
-
-  public void setFileContent(File fileContent) {
+  public void setFileContent(@javax.annotation.Nullable File fileContent) {
     this.fileContent = fileContent;
   }
 
@@ -460,33 +452,34 @@ public class UpdateDbtConnectionRequest {
     openapiRequiredFields.add("dbt_connection_identifier");
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to UpdateDbtConnectionRequest
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!UpdateDbtConnectionRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to UpdateDbtConnectionRequest
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!UpdateDbtConnectionRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in UpdateDbtConnectionRequest is not found in the empty JSON string", UpdateDbtConnectionRequest.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!UpdateDbtConnectionRequest.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `UpdateDbtConnectionRequest` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `UpdateDbtConnectionRequest` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
       for (String requiredField : UpdateDbtConnectionRequest.openapiRequiredFields) {
-        if (jsonObj.get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       if (!jsonObj.get("dbt_connection_identifier").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `dbt_connection_identifier` to be a primitive type in the JSON string but got `%s`", jsonObj.get("dbt_connection_identifier").toString()));
       }
@@ -498,6 +491,10 @@ public class UpdateDbtConnectionRequest {
       }
       if ((jsonObj.get("import_type") != null && !jsonObj.get("import_type").isJsonNull()) && !jsonObj.get("import_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `import_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("import_type").toString()));
+      }
+      // validate the optional field `import_type`
+      if (jsonObj.get("import_type") != null && !jsonObj.get("import_type").isJsonNull()) {
+        ImportTypeEnum.validateJsonElement(jsonObj.get("import_type"));
       }
       if ((jsonObj.get("access_token") != null && !jsonObj.get("access_token").isJsonNull()) && !jsonObj.get("access_token").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `access_token` to be a primitive type in the JSON string but got `%s`", jsonObj.get("access_token").toString()));
@@ -539,31 +536,31 @@ public class UpdateDbtConnectionRequest {
 
            @Override
            public UpdateDbtConnectionRequest read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of UpdateDbtConnectionRequest given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of UpdateDbtConnectionRequest
-  * @throws IOException if the JSON string is invalid with respect to UpdateDbtConnectionRequest
-  */
+  /**
+   * Create an instance of UpdateDbtConnectionRequest given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of UpdateDbtConnectionRequest
+   * @throws IOException if the JSON string is invalid with respect to UpdateDbtConnectionRequest
+   */
   public static UpdateDbtConnectionRequest fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, UpdateDbtConnectionRequest.class);
   }
 
- /**
-  * Convert an instance of UpdateDbtConnectionRequest to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of UpdateDbtConnectionRequest to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

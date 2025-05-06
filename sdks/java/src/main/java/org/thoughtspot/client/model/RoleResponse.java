@@ -14,7 +14,6 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -22,6 +21,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
 import org.thoughtspot.client.model.GenericInfo;
@@ -41,12 +41,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -54,30 +52,36 @@ import org.thoughtspot.client.JSON;
 /**
  * RoleResponse
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class RoleResponse {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
+  @javax.annotation.Nonnull
   private String id;
 
   public static final String SERIALIZED_NAME_NAME = "name";
   @SerializedName(SERIALIZED_NAME_NAME)
+  @javax.annotation.Nonnull
   private String name;
 
   public static final String SERIALIZED_NAME_DESCRIPTION = "description";
   @SerializedName(SERIALIZED_NAME_DESCRIPTION)
+  @javax.annotation.Nonnull
   private String description;
 
   public static final String SERIALIZED_NAME_GROUPS_ASSIGNED_COUNT = "groups_assigned_count";
   @SerializedName(SERIALIZED_NAME_GROUPS_ASSIGNED_COUNT)
+  @javax.annotation.Nullable
   private Integer groupsAssignedCount;
 
   public static final String SERIALIZED_NAME_ORGS = "orgs";
   @SerializedName(SERIALIZED_NAME_ORGS)
+  @javax.annotation.Nullable
   private List<GenericInfo> orgs;
 
   public static final String SERIALIZED_NAME_GROUPS = "groups";
   @SerializedName(SERIALIZED_NAME_GROUPS)
+  @javax.annotation.Nullable
   private List<GenericInfo> groups;
 
   /**
@@ -95,7 +99,7 @@ public class RoleResponse {
     
     JOBSCHEDULING("JOBSCHEDULING"),
     
-    A3ANALYSIS("A3ANALYSIS"),
+    A3_ANALYSIS("A3ANALYSIS"),
     
     EXPERIMENTALFEATUREPRIVILEGE("EXPERIMENTALFEATUREPRIVILEGE"),
     
@@ -187,10 +191,16 @@ public class RoleResponse {
         return PrivilegesEnum.fromValue(value);
       }
     }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      PrivilegesEnum.fromValue(value);
+    }
   }
 
   public static final String SERIALIZED_NAME_PRIVILEGES = "privileges";
   @SerializedName(SERIALIZED_NAME_PRIVILEGES)
+  @javax.annotation.Nonnull
   private List<PrivilegesEnum> privileges = new ArrayList<>();
 
   /**
@@ -240,137 +250,143 @@ public class RoleResponse {
         return PermissionEnum.fromValue(value);
       }
     }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      PermissionEnum.fromValue(value);
+    }
   }
 
   public static final String SERIALIZED_NAME_PERMISSION = "permission";
   @SerializedName(SERIALIZED_NAME_PERMISSION)
+  @javax.annotation.Nullable
   private PermissionEnum permission;
 
   public static final String SERIALIZED_NAME_AUTHOR_ID = "author_id";
   @SerializedName(SERIALIZED_NAME_AUTHOR_ID)
+  @javax.annotation.Nullable
   private String authorId;
 
   public static final String SERIALIZED_NAME_MODIFIER_ID = "modifier_id";
   @SerializedName(SERIALIZED_NAME_MODIFIER_ID)
+  @javax.annotation.Nullable
   private String modifierId;
 
   public static final String SERIALIZED_NAME_CREATION_TIME_IN_MILLIS = "creation_time_in_millis";
   @SerializedName(SERIALIZED_NAME_CREATION_TIME_IN_MILLIS)
+  @javax.annotation.Nullable
   private Object creationTimeInMillis;
 
   public static final String SERIALIZED_NAME_MODIFICATION_TIME_IN_MILLIS = "modification_time_in_millis";
   @SerializedName(SERIALIZED_NAME_MODIFICATION_TIME_IN_MILLIS)
+  @javax.annotation.Nullable
   private Object modificationTimeInMillis;
 
   public static final String SERIALIZED_NAME_DELETED = "deleted";
   @SerializedName(SERIALIZED_NAME_DELETED)
+  @javax.annotation.Nullable
   private Boolean deleted;
 
   public static final String SERIALIZED_NAME_DEPRECATED = "deprecated";
   @SerializedName(SERIALIZED_NAME_DEPRECATED)
+  @javax.annotation.Nullable
   private Boolean deprecated;
 
   public static final String SERIALIZED_NAME_EXTERNAL = "external";
   @SerializedName(SERIALIZED_NAME_EXTERNAL)
+  @javax.annotation.Nullable
   private Boolean external;
 
   public static final String SERIALIZED_NAME_HIDDEN = "hidden";
   @SerializedName(SERIALIZED_NAME_HIDDEN)
+  @javax.annotation.Nullable
   private Boolean hidden;
 
   public static final String SERIALIZED_NAME_SHARED_VIA_CONNECTION = "shared_via_connection";
   @SerializedName(SERIALIZED_NAME_SHARED_VIA_CONNECTION)
+  @javax.annotation.Nullable
   private Boolean sharedViaConnection;
 
   public RoleResponse() {
   }
 
-  public RoleResponse id(String id) {
-    
+  public RoleResponse id(@javax.annotation.Nonnull String id) {
     this.id = id;
     return this;
   }
 
-   /**
+  /**
    * Unique Id of the role.
    * @return id
-  **/
+   */
   @javax.annotation.Nonnull
   public String getId() {
     return id;
   }
 
-
-  public void setId(String id) {
+  public void setId(@javax.annotation.Nonnull String id) {
     this.id = id;
   }
 
 
-  public RoleResponse name(String name) {
-    
+  public RoleResponse name(@javax.annotation.Nonnull String name) {
     this.name = name;
     return this;
   }
 
-   /**
+  /**
    * Name of the role
    * @return name
-  **/
+   */
   @javax.annotation.Nonnull
   public String getName() {
     return name;
   }
 
-
-  public void setName(String name) {
+  public void setName(@javax.annotation.Nonnull String name) {
     this.name = name;
   }
 
 
-  public RoleResponse description(String description) {
-    
+  public RoleResponse description(@javax.annotation.Nonnull String description) {
     this.description = description;
     return this;
   }
 
-   /**
+  /**
    * Description of the role
    * @return description
-  **/
+   */
   @javax.annotation.Nonnull
   public String getDescription() {
     return description;
   }
 
-
-  public void setDescription(String description) {
+  public void setDescription(@javax.annotation.Nonnull String description) {
     this.description = description;
   }
 
 
-  public RoleResponse groupsAssignedCount(Integer groupsAssignedCount) {
-    
+  public RoleResponse groupsAssignedCount(@javax.annotation.Nullable Integer groupsAssignedCount) {
     this.groupsAssignedCount = groupsAssignedCount;
     return this;
   }
 
-   /**
+  /**
    * number of groups assigned with this role
    * @return groupsAssignedCount
-  **/
+   */
   @javax.annotation.Nullable
   public Integer getGroupsAssignedCount() {
     return groupsAssignedCount;
   }
 
-
-  public void setGroupsAssignedCount(Integer groupsAssignedCount) {
+  public void setGroupsAssignedCount(@javax.annotation.Nullable Integer groupsAssignedCount) {
     this.groupsAssignedCount = groupsAssignedCount;
   }
 
 
-  public RoleResponse orgs(List<GenericInfo> orgs) {
-    
+  public RoleResponse orgs(@javax.annotation.Nullable List<GenericInfo> orgs) {
     this.orgs = orgs;
     return this;
   }
@@ -383,23 +399,21 @@ public class RoleResponse {
     return this;
   }
 
-   /**
+  /**
    * Orgs in which role exists.
    * @return orgs
-  **/
+   */
   @javax.annotation.Nullable
   public List<GenericInfo> getOrgs() {
     return orgs;
   }
 
-
-  public void setOrgs(List<GenericInfo> orgs) {
+  public void setOrgs(@javax.annotation.Nullable List<GenericInfo> orgs) {
     this.orgs = orgs;
   }
 
 
-  public RoleResponse groups(List<GenericInfo> groups) {
-    
+  public RoleResponse groups(@javax.annotation.Nullable List<GenericInfo> groups) {
     this.groups = groups;
     return this;
   }
@@ -412,23 +426,21 @@ public class RoleResponse {
     return this;
   }
 
-   /**
+  /**
    * Details of groups assigned with this role
    * @return groups
-  **/
+   */
   @javax.annotation.Nullable
   public List<GenericInfo> getGroups() {
     return groups;
   }
 
-
-  public void setGroups(List<GenericInfo> groups) {
+  public void setGroups(@javax.annotation.Nullable List<GenericInfo> groups) {
     this.groups = groups;
   }
 
 
-  public RoleResponse privileges(List<PrivilegesEnum> privileges) {
-    
+  public RoleResponse privileges(@javax.annotation.Nonnull List<PrivilegesEnum> privileges) {
     this.privileges = privileges;
     return this;
   }
@@ -441,227 +453,206 @@ public class RoleResponse {
     return this;
   }
 
-   /**
+  /**
    * Privileges granted to the role.
    * @return privileges
-  **/
+   */
   @javax.annotation.Nonnull
   public List<PrivilegesEnum> getPrivileges() {
     return privileges;
   }
 
-
-  public void setPrivileges(List<PrivilegesEnum> privileges) {
+  public void setPrivileges(@javax.annotation.Nonnull List<PrivilegesEnum> privileges) {
     this.privileges = privileges;
   }
 
 
-  public RoleResponse permission(PermissionEnum permission) {
-    
+  public RoleResponse permission(@javax.annotation.Nullable PermissionEnum permission) {
     this.permission = permission;
     return this;
   }
 
-   /**
+  /**
    * Permission details of the Role
    * @return permission
-  **/
+   */
   @javax.annotation.Nullable
   public PermissionEnum getPermission() {
     return permission;
   }
 
-
-  public void setPermission(PermissionEnum permission) {
+  public void setPermission(@javax.annotation.Nullable PermissionEnum permission) {
     this.permission = permission;
   }
 
 
-  public RoleResponse authorId(String authorId) {
-    
+  public RoleResponse authorId(@javax.annotation.Nullable String authorId) {
     this.authorId = authorId;
     return this;
   }
 
-   /**
+  /**
    * Unique identifier of author of the role.
    * @return authorId
-  **/
+   */
   @javax.annotation.Nullable
   public String getAuthorId() {
     return authorId;
   }
 
-
-  public void setAuthorId(String authorId) {
+  public void setAuthorId(@javax.annotation.Nullable String authorId) {
     this.authorId = authorId;
   }
 
 
-  public RoleResponse modifierId(String modifierId) {
-    
+  public RoleResponse modifierId(@javax.annotation.Nullable String modifierId) {
     this.modifierId = modifierId;
     return this;
   }
 
-   /**
+  /**
    * Unique identifier of modifier of the role.
    * @return modifierId
-  **/
+   */
   @javax.annotation.Nullable
   public String getModifierId() {
     return modifierId;
   }
 
-
-  public void setModifierId(String modifierId) {
+  public void setModifierId(@javax.annotation.Nullable String modifierId) {
     this.modifierId = modifierId;
   }
 
 
-  public RoleResponse creationTimeInMillis(Object creationTimeInMillis) {
-    
+  public RoleResponse creationTimeInMillis(@javax.annotation.Nullable Object creationTimeInMillis) {
     this.creationTimeInMillis = creationTimeInMillis;
     return this;
   }
 
-   /**
+  /**
    * Creation time of the role in milliseconds.
    * @return creationTimeInMillis
-  **/
+   */
   @javax.annotation.Nullable
   public Object getCreationTimeInMillis() {
     return creationTimeInMillis;
   }
 
-
-  public void setCreationTimeInMillis(Object creationTimeInMillis) {
+  public void setCreationTimeInMillis(@javax.annotation.Nullable Object creationTimeInMillis) {
     this.creationTimeInMillis = creationTimeInMillis;
   }
 
 
-  public RoleResponse modificationTimeInMillis(Object modificationTimeInMillis) {
-    
+  public RoleResponse modificationTimeInMillis(@javax.annotation.Nullable Object modificationTimeInMillis) {
     this.modificationTimeInMillis = modificationTimeInMillis;
     return this;
   }
 
-   /**
+  /**
    * Last modified time of the role in milliseconds.
    * @return modificationTimeInMillis
-  **/
+   */
   @javax.annotation.Nullable
   public Object getModificationTimeInMillis() {
     return modificationTimeInMillis;
   }
 
-
-  public void setModificationTimeInMillis(Object modificationTimeInMillis) {
+  public void setModificationTimeInMillis(@javax.annotation.Nullable Object modificationTimeInMillis) {
     this.modificationTimeInMillis = modificationTimeInMillis;
   }
 
 
-  public RoleResponse deleted(Boolean deleted) {
-    
+  public RoleResponse deleted(@javax.annotation.Nullable Boolean deleted) {
     this.deleted = deleted;
     return this;
   }
 
-   /**
+  /**
    * Indicates whether the role is deleted.
    * @return deleted
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getDeleted() {
     return deleted;
   }
 
-
-  public void setDeleted(Boolean deleted) {
+  public void setDeleted(@javax.annotation.Nullable Boolean deleted) {
     this.deleted = deleted;
   }
 
 
-  public RoleResponse deprecated(Boolean deprecated) {
-    
+  public RoleResponse deprecated(@javax.annotation.Nullable Boolean deprecated) {
     this.deprecated = deprecated;
     return this;
   }
 
-   /**
+  /**
    * Indicates whether the role is deprecated.
    * @return deprecated
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getDeprecated() {
     return deprecated;
   }
 
-
-  public void setDeprecated(Boolean deprecated) {
+  public void setDeprecated(@javax.annotation.Nullable Boolean deprecated) {
     this.deprecated = deprecated;
   }
 
 
-  public RoleResponse external(Boolean external) {
-    
+  public RoleResponse external(@javax.annotation.Nullable Boolean external) {
     this.external = external;
     return this;
   }
 
-   /**
+  /**
    * Indicates whether the role is external.
    * @return external
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getExternal() {
     return external;
   }
 
-
-  public void setExternal(Boolean external) {
+  public void setExternal(@javax.annotation.Nullable Boolean external) {
     this.external = external;
   }
 
 
-  public RoleResponse hidden(Boolean hidden) {
-    
+  public RoleResponse hidden(@javax.annotation.Nullable Boolean hidden) {
     this.hidden = hidden;
     return this;
   }
 
-   /**
+  /**
    * Indicates whether the role is hidden.
    * @return hidden
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getHidden() {
     return hidden;
   }
 
-
-  public void setHidden(Boolean hidden) {
+  public void setHidden(@javax.annotation.Nullable Boolean hidden) {
     this.hidden = hidden;
   }
 
 
-  public RoleResponse sharedViaConnection(Boolean sharedViaConnection) {
-    
+  public RoleResponse sharedViaConnection(@javax.annotation.Nullable Boolean sharedViaConnection) {
     this.sharedViaConnection = sharedViaConnection;
     return this;
   }
 
-   /**
+  /**
    * Indicates whether the role is shared via connection
    * @return sharedViaConnection
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getSharedViaConnection() {
     return sharedViaConnection;
   }
 
-
-  public void setSharedViaConnection(Boolean sharedViaConnection) {
+  public void setSharedViaConnection(@javax.annotation.Nullable Boolean sharedViaConnection) {
     this.sharedViaConnection = sharedViaConnection;
   }
 
@@ -780,33 +771,34 @@ public class RoleResponse {
     openapiRequiredFields.add("privileges");
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to RoleResponse
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!RoleResponse.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to RoleResponse
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!RoleResponse.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in RoleResponse is not found in the empty JSON string", RoleResponse.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!RoleResponse.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `RoleResponse` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `RoleResponse` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
       for (String requiredField : RoleResponse.openapiRequiredFields) {
-        if (jsonObj.get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       if (!jsonObj.get("id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("id").toString()));
       }
@@ -826,7 +818,7 @@ public class RoleResponse {
 
           // validate the optional field `orgs` (array)
           for (int i = 0; i < jsonArrayorgs.size(); i++) {
-            GenericInfo.validateJsonObject(jsonArrayorgs.get(i).getAsJsonObject());
+            GenericInfo.validateJsonElement(jsonArrayorgs.get(i));
           };
         }
       }
@@ -840,7 +832,7 @@ public class RoleResponse {
 
           // validate the optional field `groups` (array)
           for (int i = 0; i < jsonArraygroups.size(); i++) {
-            GenericInfo.validateJsonObject(jsonArraygroups.get(i).getAsJsonObject());
+            GenericInfo.validateJsonElement(jsonArraygroups.get(i));
           };
         }
       }
@@ -852,6 +844,10 @@ public class RoleResponse {
       }
       if ((jsonObj.get("permission") != null && !jsonObj.get("permission").isJsonNull()) && !jsonObj.get("permission").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `permission` to be a primitive type in the JSON string but got `%s`", jsonObj.get("permission").toString()));
+      }
+      // validate the optional field `permission`
+      if (jsonObj.get("permission") != null && !jsonObj.get("permission").isJsonNull()) {
+        PermissionEnum.validateJsonElement(jsonObj.get("permission"));
       }
       if ((jsonObj.get("author_id") != null && !jsonObj.get("author_id").isJsonNull()) && !jsonObj.get("author_id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `author_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("author_id").toString()));
@@ -881,31 +877,31 @@ public class RoleResponse {
 
            @Override
            public RoleResponse read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of RoleResponse given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of RoleResponse
-  * @throws IOException if the JSON string is invalid with respect to RoleResponse
-  */
+  /**
+   * Create an instance of RoleResponse given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of RoleResponse
+   * @throws IOException if the JSON string is invalid with respect to RoleResponse
+   */
   public static RoleResponse fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, RoleResponse.class);
   }
 
- /**
-  * Convert an instance of RoleResponse to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of RoleResponse to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

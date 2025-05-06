@@ -27,7 +27,7 @@ export class FilterRules {
     /**
     * The values to filter on. To get all records, use TS_WILDCARD_ALL as values.
     */
-    'values': Array<string>;
+    'values': Array<any>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -47,7 +47,7 @@ export class FilterRules {
         {
             "name": "values",
             "baseName": "values",
-            "type": "Array<string>",
+            "type": "Array<any>",
             "format": ""
         }    ];
 

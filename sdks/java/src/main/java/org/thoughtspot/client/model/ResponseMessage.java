@@ -14,13 +14,13 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.util.Arrays;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
@@ -38,12 +38,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -51,14 +49,16 @@ import org.thoughtspot.client.JSON;
 /**
  * ResponseMessage
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class ResponseMessage {
   public static final String SERIALIZED_NAME_SESSION_IDENTIFIER = "session_identifier";
   @SerializedName(SERIALIZED_NAME_SESSION_IDENTIFIER)
+  @javax.annotation.Nullable
   private String sessionIdentifier;
 
   public static final String SERIALIZED_NAME_GENERATION_NUMBER = "generation_number";
   @SerializedName(SERIALIZED_NAME_GENERATION_NUMBER)
+  @javax.annotation.Nullable
   private Integer generationNumber;
 
   /**
@@ -66,7 +66,7 @@ public class ResponseMessage {
    */
   @JsonAdapter(MessageTypeEnum.Adapter.class)
   public enum MessageTypeEnum {
-    TSANSWER("TSAnswer");
+    TS_ANSWER("TSAnswer");
 
     private String value;
 
@@ -104,10 +104,16 @@ public class ResponseMessage {
         return MessageTypeEnum.fromValue(value);
       }
     }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      MessageTypeEnum.fromValue(value);
+    }
   }
 
   public static final String SERIALIZED_NAME_MESSAGE_TYPE = "message_type";
   @SerializedName(SERIALIZED_NAME_MESSAGE_TYPE)
+  @javax.annotation.Nonnull
   private MessageTypeEnum messageType;
 
   /**
@@ -157,120 +163,117 @@ public class ResponseMessage {
         return VisualizationTypeEnum.fromValue(value);
       }
     }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      VisualizationTypeEnum.fromValue(value);
+    }
   }
 
   public static final String SERIALIZED_NAME_VISUALIZATION_TYPE = "visualization_type";
   @SerializedName(SERIALIZED_NAME_VISUALIZATION_TYPE)
+  @javax.annotation.Nullable
   private VisualizationTypeEnum visualizationType;
 
   public static final String SERIALIZED_NAME_TOKENS = "tokens";
   @SerializedName(SERIALIZED_NAME_TOKENS)
+  @javax.annotation.Nullable
   private String tokens;
 
   public ResponseMessage() {
   }
 
-  public ResponseMessage sessionIdentifier(String sessionIdentifier) {
-    
+  public ResponseMessage sessionIdentifier(@javax.annotation.Nullable String sessionIdentifier) {
     this.sessionIdentifier = sessionIdentifier;
     return this;
   }
 
-   /**
+  /**
    * Unique identifier of the generated response.
    * @return sessionIdentifier
-  **/
+   */
   @javax.annotation.Nullable
   public String getSessionIdentifier() {
     return sessionIdentifier;
   }
 
-
-  public void setSessionIdentifier(String sessionIdentifier) {
+  public void setSessionIdentifier(@javax.annotation.Nullable String sessionIdentifier) {
     this.sessionIdentifier = sessionIdentifier;
   }
 
 
-  public ResponseMessage generationNumber(Integer generationNumber) {
-    
+  public ResponseMessage generationNumber(@javax.annotation.Nullable Integer generationNumber) {
     this.generationNumber = generationNumber;
     return this;
   }
 
-   /**
+  /**
    * Generate number of the response.
    * @return generationNumber
-  **/
+   */
   @javax.annotation.Nullable
   public Integer getGenerationNumber() {
     return generationNumber;
   }
 
-
-  public void setGenerationNumber(Integer generationNumber) {
+  public void setGenerationNumber(@javax.annotation.Nullable Integer generationNumber) {
     this.generationNumber = generationNumber;
   }
 
 
-  public ResponseMessage messageType(MessageTypeEnum messageType) {
-    
+  public ResponseMessage messageType(@javax.annotation.Nonnull MessageTypeEnum messageType) {
     this.messageType = messageType;
     return this;
   }
 
-   /**
+  /**
    * Type of the generated response.
    * @return messageType
-  **/
+   */
   @javax.annotation.Nonnull
   public MessageTypeEnum getMessageType() {
     return messageType;
   }
 
-
-  public void setMessageType(MessageTypeEnum messageType) {
+  public void setMessageType(@javax.annotation.Nonnull MessageTypeEnum messageType) {
     this.messageType = messageType;
   }
 
 
-  public ResponseMessage visualizationType(VisualizationTypeEnum visualizationType) {
-    
+  public ResponseMessage visualizationType(@javax.annotation.Nullable VisualizationTypeEnum visualizationType) {
     this.visualizationType = visualizationType;
     return this;
   }
 
-   /**
+  /**
    * Generated visualization type.
    * @return visualizationType
-  **/
+   */
   @javax.annotation.Nullable
   public VisualizationTypeEnum getVisualizationType() {
     return visualizationType;
   }
 
-
-  public void setVisualizationType(VisualizationTypeEnum visualizationType) {
+  public void setVisualizationType(@javax.annotation.Nullable VisualizationTypeEnum visualizationType) {
     this.visualizationType = visualizationType;
   }
 
 
-  public ResponseMessage tokens(String tokens) {
-    
+  public ResponseMessage tokens(@javax.annotation.Nullable String tokens) {
     this.tokens = tokens;
     return this;
   }
 
-   /**
+  /**
    * Tokens for the response.
    * @return tokens
-  **/
+   */
   @javax.annotation.Nullable
   public String getTokens() {
     return tokens;
   }
 
-
-  public void setTokens(String tokens) {
+  public void setTokens(@javax.annotation.Nullable String tokens) {
     this.tokens = tokens;
   }
 
@@ -350,41 +353,48 @@ public class ResponseMessage {
     openapiRequiredFields.add("message_type");
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to ResponseMessage
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!ResponseMessage.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to ResponseMessage
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!ResponseMessage.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in ResponseMessage is not found in the empty JSON string", ResponseMessage.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!ResponseMessage.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `ResponseMessage` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `ResponseMessage` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
       for (String requiredField : ResponseMessage.openapiRequiredFields) {
-        if (jsonObj.get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("session_identifier") != null && !jsonObj.get("session_identifier").isJsonNull()) && !jsonObj.get("session_identifier").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `session_identifier` to be a primitive type in the JSON string but got `%s`", jsonObj.get("session_identifier").toString()));
       }
       if (!jsonObj.get("message_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `message_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("message_type").toString()));
       }
+      // validate the required field `message_type`
+      MessageTypeEnum.validateJsonElement(jsonObj.get("message_type"));
       if ((jsonObj.get("visualization_type") != null && !jsonObj.get("visualization_type").isJsonNull()) && !jsonObj.get("visualization_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `visualization_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("visualization_type").toString()));
+      }
+      // validate the optional field `visualization_type`
+      if (jsonObj.get("visualization_type") != null && !jsonObj.get("visualization_type").isJsonNull()) {
+        VisualizationTypeEnum.validateJsonElement(jsonObj.get("visualization_type"));
       }
       if ((jsonObj.get("tokens") != null && !jsonObj.get("tokens").isJsonNull()) && !jsonObj.get("tokens").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `tokens` to be a primitive type in the JSON string but got `%s`", jsonObj.get("tokens").toString()));
@@ -411,31 +421,31 @@ public class ResponseMessage {
 
            @Override
            public ResponseMessage read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of ResponseMessage given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of ResponseMessage
-  * @throws IOException if the JSON string is invalid with respect to ResponseMessage
-  */
+  /**
+   * Create an instance of ResponseMessage given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of ResponseMessage
+   * @throws IOException if the JSON string is invalid with respect to ResponseMessage
+   */
   public static ResponseMessage fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, ResponseMessage.class);
   }
 
- /**
-  * Convert an instance of ResponseMessage to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of ResponseMessage to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

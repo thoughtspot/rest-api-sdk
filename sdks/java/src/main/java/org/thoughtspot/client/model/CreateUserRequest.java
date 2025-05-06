@@ -14,7 +14,6 @@
 package org.thoughtspot.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -22,6 +21,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
 import org.thoughtspot.client.model.FavoriteMetadataInput;
@@ -41,12 +41,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.thoughtspot.client.JSON;
@@ -54,22 +52,26 @@ import org.thoughtspot.client.JSON;
 /**
  * CreateUserRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-13T10:48:17.127921870Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class CreateUserRequest {
   public static final String SERIALIZED_NAME_NAME = "name";
   @SerializedName(SERIALIZED_NAME_NAME)
+  @javax.annotation.Nonnull
   private String name;
 
   public static final String SERIALIZED_NAME_DISPLAY_NAME = "display_name";
   @SerializedName(SERIALIZED_NAME_DISPLAY_NAME)
+  @javax.annotation.Nonnull
   private String displayName;
 
   public static final String SERIALIZED_NAME_PASSWORD = "password";
   @SerializedName(SERIALIZED_NAME_PASSWORD)
+  @javax.annotation.Nullable
   private String password;
 
   public static final String SERIALIZED_NAME_EMAIL = "email";
   @SerializedName(SERIALIZED_NAME_EMAIL)
+  @javax.annotation.Nonnull
   private String email;
 
   /**
@@ -123,10 +125,16 @@ public class CreateUserRequest {
         return AccountTypeEnum.fromValue(value);
       }
     }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      AccountTypeEnum.fromValue(value);
+    }
   }
 
   public static final String SERIALIZED_NAME_ACCOUNT_TYPE = "account_type";
   @SerializedName(SERIALIZED_NAME_ACCOUNT_TYPE)
+  @javax.annotation.Nullable
   private AccountTypeEnum accountType = AccountTypeEnum.LOCAL_USER;
 
   /**
@@ -182,19 +190,27 @@ public class CreateUserRequest {
         return AccountStatusEnum.fromValue(value);
       }
     }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      AccountStatusEnum.fromValue(value);
+    }
   }
 
   public static final String SERIALIZED_NAME_ACCOUNT_STATUS = "account_status";
   @SerializedName(SERIALIZED_NAME_ACCOUNT_STATUS)
+  @javax.annotation.Nullable
   private AccountStatusEnum accountStatus = AccountStatusEnum.ACTIVE;
 
   public static final String SERIALIZED_NAME_ORG_IDENTIFIERS = "org_identifiers";
   @SerializedName(SERIALIZED_NAME_ORG_IDENTIFIERS)
-  private List<String> orgIdentifiers;
+  @javax.annotation.Nullable
+  private List<String> orgIdentifiers = new ArrayList<>();
 
   public static final String SERIALIZED_NAME_GROUP_IDENTIFIERS = "group_identifiers";
   @SerializedName(SERIALIZED_NAME_GROUP_IDENTIFIERS)
-  private List<String> groupIdentifiers;
+  @javax.annotation.Nullable
+  private List<String> groupIdentifiers = new ArrayList<>();
 
   /**
    * Visibility of the users. When set to SHARABLE, the user is visible to other users and groups when they try to share an object.
@@ -241,31 +257,42 @@ public class CreateUserRequest {
         return VisibilityEnum.fromValue(value);
       }
     }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      VisibilityEnum.fromValue(value);
+    }
   }
 
   public static final String SERIALIZED_NAME_VISIBILITY = "visibility";
   @SerializedName(SERIALIZED_NAME_VISIBILITY)
+  @javax.annotation.Nullable
   private VisibilityEnum visibility = VisibilityEnum.SHARABLE;
 
   public static final String SERIALIZED_NAME_NOTIFY_ON_SHARE = "notify_on_share";
   @SerializedName(SERIALIZED_NAME_NOTIFY_ON_SHARE)
+  @javax.annotation.Nullable
   private Boolean notifyOnShare = true;
 
   public static final String SERIALIZED_NAME_SHOW_ONBOARDING_EXPERIENCE = "show_onboarding_experience";
   @SerializedName(SERIALIZED_NAME_SHOW_ONBOARDING_EXPERIENCE)
+  @javax.annotation.Nullable
   private Boolean showOnboardingExperience = true;
 
   public static final String SERIALIZED_NAME_ONBOARDING_EXPERIENCE_COMPLETED = "onboarding_experience_completed";
   @SerializedName(SERIALIZED_NAME_ONBOARDING_EXPERIENCE_COMPLETED)
+  @javax.annotation.Nullable
   private Boolean onboardingExperienceCompleted = false;
 
   public static final String SERIALIZED_NAME_HOME_LIVEBOARD_IDENTIFIER = "home_liveboard_identifier";
   @SerializedName(SERIALIZED_NAME_HOME_LIVEBOARD_IDENTIFIER)
+  @javax.annotation.Nullable
   private String homeLiveboardIdentifier;
 
   public static final String SERIALIZED_NAME_FAVORITE_METADATA = "favorite_metadata";
   @SerializedName(SERIALIZED_NAME_FAVORITE_METADATA)
-  private List<FavoriteMetadataInput> favoriteMetadata;
+  @javax.annotation.Nullable
+  private List<FavoriteMetadataInput> favoriteMetadata = new ArrayList<>();
 
   /**
    * Locale for the user.
@@ -348,159 +375,156 @@ public class CreateUserRequest {
         return PreferredLocaleEnum.fromValue(value);
       }
     }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      PreferredLocaleEnum.fromValue(value);
+    }
   }
 
   public static final String SERIALIZED_NAME_PREFERRED_LOCALE = "preferred_locale";
   @SerializedName(SERIALIZED_NAME_PREFERRED_LOCALE)
+  @javax.annotation.Nullable
   private PreferredLocaleEnum preferredLocale;
 
   public static final String SERIALIZED_NAME_EXTENDED_PROPERTIES = "extended_properties";
   @SerializedName(SERIALIZED_NAME_EXTENDED_PROPERTIES)
+  @javax.annotation.Nullable
   private Object extendedProperties;
 
   public static final String SERIALIZED_NAME_EXTENDED_PREFERENCES = "extended_preferences";
   @SerializedName(SERIALIZED_NAME_EXTENDED_PREFERENCES)
+  @javax.annotation.Nullable
   private Object extendedPreferences;
 
   public static final String SERIALIZED_NAME_TRIGGER_WELCOME_EMAIL = "trigger_welcome_email";
   @SerializedName(SERIALIZED_NAME_TRIGGER_WELCOME_EMAIL)
+  @javax.annotation.Nullable
   private Boolean triggerWelcomeEmail;
 
   public static final String SERIALIZED_NAME_TRIGGER_ACTIVATION_EMAIL = "trigger_activation_email";
   @SerializedName(SERIALIZED_NAME_TRIGGER_ACTIVATION_EMAIL)
+  @javax.annotation.Nullable
   private Boolean triggerActivationEmail;
 
   public CreateUserRequest() {
   }
 
-  public CreateUserRequest name(String name) {
-    
+  public CreateUserRequest name(@javax.annotation.Nonnull String name) {
     this.name = name;
     return this;
   }
 
-   /**
+  /**
    * Name of the user. The username string must be unique.
    * @return name
-  **/
+   */
   @javax.annotation.Nonnull
   public String getName() {
     return name;
   }
 
-
-  public void setName(String name) {
+  public void setName(@javax.annotation.Nonnull String name) {
     this.name = name;
   }
 
 
-  public CreateUserRequest displayName(String displayName) {
-    
+  public CreateUserRequest displayName(@javax.annotation.Nonnull String displayName) {
     this.displayName = displayName;
     return this;
   }
 
-   /**
+  /**
    * A unique display name string for the user account, usually their first and last name
    * @return displayName
-  **/
+   */
   @javax.annotation.Nonnull
   public String getDisplayName() {
     return displayName;
   }
 
-
-  public void setDisplayName(String displayName) {
+  public void setDisplayName(@javax.annotation.Nonnull String displayName) {
     this.displayName = displayName;
   }
 
 
-  public CreateUserRequest password(String password) {
-    
+  public CreateUserRequest password(@javax.annotation.Nullable String password) {
     this.password = password;
     return this;
   }
 
-   /**
+  /**
    * Password for the user account. For IAMv2 users, you must set this password if you do not want to trigger an activation email.
    * @return password
-  **/
+   */
   @javax.annotation.Nullable
   public String getPassword() {
     return password;
   }
 
-
-  public void setPassword(String password) {
+  public void setPassword(@javax.annotation.Nullable String password) {
     this.password = password;
   }
 
 
-  public CreateUserRequest email(String email) {
-    
+  public CreateUserRequest email(@javax.annotation.Nonnull String email) {
     this.email = email;
     return this;
   }
 
-   /**
+  /**
    * Email of the user account
    * @return email
-  **/
+   */
   @javax.annotation.Nonnull
   public String getEmail() {
     return email;
   }
 
-
-  public void setEmail(String email) {
+  public void setEmail(@javax.annotation.Nonnull String email) {
     this.email = email;
   }
 
 
-  public CreateUserRequest accountType(AccountTypeEnum accountType) {
-    
+  public CreateUserRequest accountType(@javax.annotation.Nullable AccountTypeEnum accountType) {
     this.accountType = accountType;
     return this;
   }
 
-   /**
+  /**
    * Type of the account.
    * @return accountType
-  **/
+   */
   @javax.annotation.Nullable
   public AccountTypeEnum getAccountType() {
     return accountType;
   }
 
-
-  public void setAccountType(AccountTypeEnum accountType) {
+  public void setAccountType(@javax.annotation.Nullable AccountTypeEnum accountType) {
     this.accountType = accountType;
   }
 
 
-  public CreateUserRequest accountStatus(AccountStatusEnum accountStatus) {
-    
+  public CreateUserRequest accountStatus(@javax.annotation.Nullable AccountStatusEnum accountStatus) {
     this.accountStatus = accountStatus;
     return this;
   }
 
-   /**
+  /**
    * Current status of the user account. The &#x60;SUSPENDED&#x60; user state indicates a transitional state applicable to IAMv2 users only.
    * @return accountStatus
-  **/
+   */
   @javax.annotation.Nullable
   public AccountStatusEnum getAccountStatus() {
     return accountStatus;
   }
 
-
-  public void setAccountStatus(AccountStatusEnum accountStatus) {
+  public void setAccountStatus(@javax.annotation.Nullable AccountStatusEnum accountStatus) {
     this.accountStatus = accountStatus;
   }
 
 
-  public CreateUserRequest orgIdentifiers(List<String> orgIdentifiers) {
-    
+  public CreateUserRequest orgIdentifiers(@javax.annotation.Nullable List<String> orgIdentifiers) {
     this.orgIdentifiers = orgIdentifiers;
     return this;
   }
@@ -513,23 +537,21 @@ public class CreateUserRequest {
     return this;
   }
 
-   /**
+  /**
    * List of Org IDs to which the user belongs.
    * @return orgIdentifiers
-  **/
+   */
   @javax.annotation.Nullable
   public List<String> getOrgIdentifiers() {
     return orgIdentifiers;
   }
 
-
-  public void setOrgIdentifiers(List<String> orgIdentifiers) {
+  public void setOrgIdentifiers(@javax.annotation.Nullable List<String> orgIdentifiers) {
     this.orgIdentifiers = orgIdentifiers;
   }
 
 
-  public CreateUserRequest groupIdentifiers(List<String> groupIdentifiers) {
-    
+  public CreateUserRequest groupIdentifiers(@javax.annotation.Nullable List<String> groupIdentifiers) {
     this.groupIdentifiers = groupIdentifiers;
     return this;
   }
@@ -542,128 +564,116 @@ public class CreateUserRequest {
     return this;
   }
 
-   /**
+  /**
    * GUIDs or names of the groups to which the newly created user belongs.
    * @return groupIdentifiers
-  **/
+   */
   @javax.annotation.Nullable
   public List<String> getGroupIdentifiers() {
     return groupIdentifiers;
   }
 
-
-  public void setGroupIdentifiers(List<String> groupIdentifiers) {
+  public void setGroupIdentifiers(@javax.annotation.Nullable List<String> groupIdentifiers) {
     this.groupIdentifiers = groupIdentifiers;
   }
 
 
-  public CreateUserRequest visibility(VisibilityEnum visibility) {
-    
+  public CreateUserRequest visibility(@javax.annotation.Nullable VisibilityEnum visibility) {
     this.visibility = visibility;
     return this;
   }
 
-   /**
+  /**
    * Visibility of the users. When set to SHARABLE, the user is visible to other users and groups when they try to share an object.
    * @return visibility
-  **/
+   */
   @javax.annotation.Nullable
   public VisibilityEnum getVisibility() {
     return visibility;
   }
 
-
-  public void setVisibility(VisibilityEnum visibility) {
+  public void setVisibility(@javax.annotation.Nullable VisibilityEnum visibility) {
     this.visibility = visibility;
   }
 
 
-  public CreateUserRequest notifyOnShare(Boolean notifyOnShare) {
-    
+  public CreateUserRequest notifyOnShare(@javax.annotation.Nullable Boolean notifyOnShare) {
     this.notifyOnShare = notifyOnShare;
     return this;
   }
 
-   /**
+  /**
    * User preference for receiving email notifications when another ThoughtSpot user shares a metadata object such as Answer, Liveboard, or Worksheet.
    * @return notifyOnShare
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getNotifyOnShare() {
     return notifyOnShare;
   }
 
-
-  public void setNotifyOnShare(Boolean notifyOnShare) {
+  public void setNotifyOnShare(@javax.annotation.Nullable Boolean notifyOnShare) {
     this.notifyOnShare = notifyOnShare;
   }
 
 
-  public CreateUserRequest showOnboardingExperience(Boolean showOnboardingExperience) {
-    
+  public CreateUserRequest showOnboardingExperience(@javax.annotation.Nullable Boolean showOnboardingExperience) {
     this.showOnboardingExperience = showOnboardingExperience;
     return this;
   }
 
-   /**
+  /**
    * The user preference for revisiting the onboarding experience.
    * @return showOnboardingExperience
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getShowOnboardingExperience() {
     return showOnboardingExperience;
   }
 
-
-  public void setShowOnboardingExperience(Boolean showOnboardingExperience) {
+  public void setShowOnboardingExperience(@javax.annotation.Nullable Boolean showOnboardingExperience) {
     this.showOnboardingExperience = showOnboardingExperience;
   }
 
 
-  public CreateUserRequest onboardingExperienceCompleted(Boolean onboardingExperienceCompleted) {
-    
+  public CreateUserRequest onboardingExperienceCompleted(@javax.annotation.Nullable Boolean onboardingExperienceCompleted) {
     this.onboardingExperienceCompleted = onboardingExperienceCompleted;
     return this;
   }
 
-   /**
+  /**
    * flag to get the on-boarding experience is completed or not.
    * @return onboardingExperienceCompleted
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getOnboardingExperienceCompleted() {
     return onboardingExperienceCompleted;
   }
 
-
-  public void setOnboardingExperienceCompleted(Boolean onboardingExperienceCompleted) {
+  public void setOnboardingExperienceCompleted(@javax.annotation.Nullable Boolean onboardingExperienceCompleted) {
     this.onboardingExperienceCompleted = onboardingExperienceCompleted;
   }
 
 
-  public CreateUserRequest homeLiveboardIdentifier(String homeLiveboardIdentifier) {
-    
+  public CreateUserRequest homeLiveboardIdentifier(@javax.annotation.Nullable String homeLiveboardIdentifier) {
     this.homeLiveboardIdentifier = homeLiveboardIdentifier;
     return this;
   }
 
-   /**
+  /**
    * GUID of the Liveboard to set a default Liveboard for the user. ThoughtSpot displays this Liveboard on the Home page when the user logs in.
    * @return homeLiveboardIdentifier
-  **/
+   */
   @javax.annotation.Nullable
   public String getHomeLiveboardIdentifier() {
     return homeLiveboardIdentifier;
   }
 
-
-  public void setHomeLiveboardIdentifier(String homeLiveboardIdentifier) {
+  public void setHomeLiveboardIdentifier(@javax.annotation.Nullable String homeLiveboardIdentifier) {
     this.homeLiveboardIdentifier = homeLiveboardIdentifier;
   }
 
 
-  public CreateUserRequest favoriteMetadata(List<FavoriteMetadataInput> favoriteMetadata) {
-    
+  public CreateUserRequest favoriteMetadata(@javax.annotation.Nullable List<FavoriteMetadataInput> favoriteMetadata) {
     this.favoriteMetadata = favoriteMetadata;
     return this;
   }
@@ -676,122 +686,111 @@ public class CreateUserRequest {
     return this;
   }
 
-   /**
+  /**
    * Metadata objects to add to the user&#39;s favorites list.
    * @return favoriteMetadata
-  **/
+   */
   @javax.annotation.Nullable
   public List<FavoriteMetadataInput> getFavoriteMetadata() {
     return favoriteMetadata;
   }
 
-
-  public void setFavoriteMetadata(List<FavoriteMetadataInput> favoriteMetadata) {
+  public void setFavoriteMetadata(@javax.annotation.Nullable List<FavoriteMetadataInput> favoriteMetadata) {
     this.favoriteMetadata = favoriteMetadata;
   }
 
 
-  public CreateUserRequest preferredLocale(PreferredLocaleEnum preferredLocale) {
-    
+  public CreateUserRequest preferredLocale(@javax.annotation.Nullable PreferredLocaleEnum preferredLocale) {
     this.preferredLocale = preferredLocale;
     return this;
   }
 
-   /**
+  /**
    * Locale for the user.
    * @return preferredLocale
-  **/
+   */
   @javax.annotation.Nullable
   public PreferredLocaleEnum getPreferredLocale() {
     return preferredLocale;
   }
 
-
-  public void setPreferredLocale(PreferredLocaleEnum preferredLocale) {
+  public void setPreferredLocale(@javax.annotation.Nullable PreferredLocaleEnum preferredLocale) {
     this.preferredLocale = preferredLocale;
   }
 
 
-  public CreateUserRequest extendedProperties(Object extendedProperties) {
-    
+  public CreateUserRequest extendedProperties(@javax.annotation.Nullable Object extendedProperties) {
     this.extendedProperties = extendedProperties;
     return this;
   }
 
-   /**
+  /**
    * Properties for the user
    * @return extendedProperties
-  **/
+   */
   @javax.annotation.Nullable
   public Object getExtendedProperties() {
     return extendedProperties;
   }
 
-
-  public void setExtendedProperties(Object extendedProperties) {
+  public void setExtendedProperties(@javax.annotation.Nullable Object extendedProperties) {
     this.extendedProperties = extendedProperties;
   }
 
 
-  public CreateUserRequest extendedPreferences(Object extendedPreferences) {
-    
+  public CreateUserRequest extendedPreferences(@javax.annotation.Nullable Object extendedPreferences) {
     this.extendedPreferences = extendedPreferences;
     return this;
   }
 
-   /**
+  /**
    * Preferences for the user
    * @return extendedPreferences
-  **/
+   */
   @javax.annotation.Nullable
   public Object getExtendedPreferences() {
     return extendedPreferences;
   }
 
-
-  public void setExtendedPreferences(Object extendedPreferences) {
+  public void setExtendedPreferences(@javax.annotation.Nullable Object extendedPreferences) {
     this.extendedPreferences = extendedPreferences;
   }
 
 
-  public CreateUserRequest triggerWelcomeEmail(Boolean triggerWelcomeEmail) {
-    
+  public CreateUserRequest triggerWelcomeEmail(@javax.annotation.Nullable Boolean triggerWelcomeEmail) {
     this.triggerWelcomeEmail = triggerWelcomeEmail;
     return this;
   }
 
-   /**
+  /**
    * Flag to indicate whether welcome email should be sent to user. This parameter is applied only on clusters on which IAM is disabled.
    * @return triggerWelcomeEmail
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getTriggerWelcomeEmail() {
     return triggerWelcomeEmail;
   }
 
-
-  public void setTriggerWelcomeEmail(Boolean triggerWelcomeEmail) {
+  public void setTriggerWelcomeEmail(@javax.annotation.Nullable Boolean triggerWelcomeEmail) {
     this.triggerWelcomeEmail = triggerWelcomeEmail;
   }
 
 
-  public CreateUserRequest triggerActivationEmail(Boolean triggerActivationEmail) {
-    
+  public CreateUserRequest triggerActivationEmail(@javax.annotation.Nullable Boolean triggerActivationEmail) {
     this.triggerActivationEmail = triggerActivationEmail;
     return this;
   }
 
-   /**
+  /**
    * Flag to indicate whether activation email should be sent to the user. Default value for IAMv2 users is set to true. Users must either set this to false, or enter a valid  password if they do not want to trigger an activation email.
    * @return triggerActivationEmail
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getTriggerActivationEmail() {
     return triggerActivationEmail;
   }
 
-
-  public void setTriggerActivationEmail(Boolean triggerActivationEmail) {
+  public void setTriggerActivationEmail(@javax.annotation.Nullable Boolean triggerActivationEmail) {
     this.triggerActivationEmail = triggerActivationEmail;
   }
 
@@ -915,33 +914,34 @@ public class CreateUserRequest {
     openapiRequiredFields.add("email");
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to CreateUserRequest
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!CreateUserRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to CreateUserRequest
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!CreateUserRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in CreateUserRequest is not found in the empty JSON string", CreateUserRequest.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!CreateUserRequest.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `CreateUserRequest` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `CreateUserRequest` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
       for (String requiredField : CreateUserRequest.openapiRequiredFields) {
-        if (jsonObj.get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       if (!jsonObj.get("name").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("name").toString()));
       }
@@ -957,19 +957,31 @@ public class CreateUserRequest {
       if ((jsonObj.get("account_type") != null && !jsonObj.get("account_type").isJsonNull()) && !jsonObj.get("account_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `account_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("account_type").toString()));
       }
+      // validate the optional field `account_type`
+      if (jsonObj.get("account_type") != null && !jsonObj.get("account_type").isJsonNull()) {
+        AccountTypeEnum.validateJsonElement(jsonObj.get("account_type"));
+      }
       if ((jsonObj.get("account_status") != null && !jsonObj.get("account_status").isJsonNull()) && !jsonObj.get("account_status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `account_status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("account_status").toString()));
       }
+      // validate the optional field `account_status`
+      if (jsonObj.get("account_status") != null && !jsonObj.get("account_status").isJsonNull()) {
+        AccountStatusEnum.validateJsonElement(jsonObj.get("account_status"));
+      }
       // ensure the optional json data is an array if present
-      if (jsonObj.get("org_identifiers") != null && !jsonObj.get("org_identifiers").isJsonArray()) {
+      if (jsonObj.get("org_identifiers") != null && !jsonObj.get("org_identifiers").isJsonNull() && !jsonObj.get("org_identifiers").isJsonArray()) {
         throw new IllegalArgumentException(String.format("Expected the field `org_identifiers` to be an array in the JSON string but got `%s`", jsonObj.get("org_identifiers").toString()));
       }
       // ensure the optional json data is an array if present
-      if (jsonObj.get("group_identifiers") != null && !jsonObj.get("group_identifiers").isJsonArray()) {
+      if (jsonObj.get("group_identifiers") != null && !jsonObj.get("group_identifiers").isJsonNull() && !jsonObj.get("group_identifiers").isJsonArray()) {
         throw new IllegalArgumentException(String.format("Expected the field `group_identifiers` to be an array in the JSON string but got `%s`", jsonObj.get("group_identifiers").toString()));
       }
       if ((jsonObj.get("visibility") != null && !jsonObj.get("visibility").isJsonNull()) && !jsonObj.get("visibility").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `visibility` to be a primitive type in the JSON string but got `%s`", jsonObj.get("visibility").toString()));
+      }
+      // validate the optional field `visibility`
+      if (jsonObj.get("visibility") != null && !jsonObj.get("visibility").isJsonNull()) {
+        VisibilityEnum.validateJsonElement(jsonObj.get("visibility"));
       }
       if ((jsonObj.get("home_liveboard_identifier") != null && !jsonObj.get("home_liveboard_identifier").isJsonNull()) && !jsonObj.get("home_liveboard_identifier").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `home_liveboard_identifier` to be a primitive type in the JSON string but got `%s`", jsonObj.get("home_liveboard_identifier").toString()));
@@ -984,12 +996,16 @@ public class CreateUserRequest {
 
           // validate the optional field `favorite_metadata` (array)
           for (int i = 0; i < jsonArrayfavoriteMetadata.size(); i++) {
-            FavoriteMetadataInput.validateJsonObject(jsonArrayfavoriteMetadata.get(i).getAsJsonObject());
+            FavoriteMetadataInput.validateJsonElement(jsonArrayfavoriteMetadata.get(i));
           };
         }
       }
       if ((jsonObj.get("preferred_locale") != null && !jsonObj.get("preferred_locale").isJsonNull()) && !jsonObj.get("preferred_locale").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `preferred_locale` to be a primitive type in the JSON string but got `%s`", jsonObj.get("preferred_locale").toString()));
+      }
+      // validate the optional field `preferred_locale`
+      if (jsonObj.get("preferred_locale") != null && !jsonObj.get("preferred_locale").isJsonNull()) {
+        PreferredLocaleEnum.validateJsonElement(jsonObj.get("preferred_locale"));
       }
   }
 
@@ -1013,31 +1029,31 @@ public class CreateUserRequest {
 
            @Override
            public CreateUserRequest read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of CreateUserRequest given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of CreateUserRequest
-  * @throws IOException if the JSON string is invalid with respect to CreateUserRequest
-  */
+  /**
+   * Create an instance of CreateUserRequest given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of CreateUserRequest
+   * @throws IOException if the JSON string is invalid with respect to CreateUserRequest
+   */
   public static CreateUserRequest fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, CreateUserRequest.class);
   }
 
- /**
-  * Convert an instance of CreateUserRequest to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of CreateUserRequest to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }
