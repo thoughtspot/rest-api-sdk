@@ -3999,6 +3999,18 @@
                         "$ref": "#/components/schemas/SortOptions"
                       }
                     ]
+                  },
+                  "include_users": {
+                    "description": "<div><span class=\"since-beta-tag\">Version: 10.10.0.cl or later</span></div>\n\nDefine Parameter to consider if the users should be included in group search response.",
+                    "default": true,
+                    "type": "boolean",
+                    "nullable": true
+                  },
+                  "include_sub_groups": {
+                    "description": "<div><span class=\"since-beta-tag\">Version: 10.10.0.cl or later</span></div>\n\nDefine Parameter to consider if the sub groups should be included in group search response.",
+                    "default": true,
+                    "type": "boolean",
+                    "nullable": true
                   }
                 }
               }
